@@ -565,7 +565,7 @@ namespace battleutils
 
         damage = (int32)(damage * resist);
         damage = (int32)(damage * dBonus);
-        damage = MagicDmgTaken(PDefender, damage, (ELEMENT)(element + 1));
+        damage = MagicDmgTaken(PDefender, damage, (ELEMENT)(element));
 
         if (damage > 0)
         {
@@ -934,7 +934,7 @@ namespace battleutils
                 if (previous_daze == EFFECT_DRAIN_DAZE && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
                 {
                     PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_DRAIN_DAZE, 0, previous_daze_power, 0, 10, PAttacker->id), true);
-                }   
+                }
                 else
                 {
                     PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(previous_daze, 0, previous_daze_power, 0, 10, PAttacker->id), true);
@@ -1069,7 +1069,7 @@ namespace battleutils
                 if (hasDrainDaze)
                 {
                     daze = EFFECT_DRAIN_DAZE;
-                }   
+                }
                 else if (hasAspirDaze)
                 {
                     daze = EFFECT_ASPIR_DAZE;
