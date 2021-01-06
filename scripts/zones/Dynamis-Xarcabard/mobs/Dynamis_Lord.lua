@@ -9,6 +9,7 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -23,7 +24,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local battleTime = mob:getBattleTime()
 
     for i = 0, 1 do
@@ -50,3 +51,5 @@ function onMobDeath(mob, player, isKiller)
         DespawnMob(ID.mob.YING + 1)
     end
 end
+
+return entity

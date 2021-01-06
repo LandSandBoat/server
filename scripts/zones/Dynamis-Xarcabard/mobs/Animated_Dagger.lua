@@ -5,6 +5,7 @@
 require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
 
@@ -25,7 +26,7 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- TODO: add battle dialog
 end
 
@@ -45,3 +46,5 @@ function onMobDeath(mob, player, isKiller)
     DespawnMob(17330318)
 
 end
+
+return entity
