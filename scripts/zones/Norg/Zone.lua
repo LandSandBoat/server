@@ -13,7 +13,11 @@ require("scripts/globals/chocobo")
 
 function onInitialize(zone)
     tpz.chocobo.initZone(zone)
+<<<<<<< Updated upstream
 	zone:registerRegion(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
+=======
+    zone:registerRegion(1, -24, 0, -59, -15, 1, -50)  -- Near the SSG exit
+>>>>>>> Stashed changes
 end
 
 function onConquestUpdate(zone, updatetype)
@@ -41,10 +45,16 @@ function onRegionEnter(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- An Undying Pledge cs trigger
+<<<<<<< Updated upstream
             if player:getCharVar("pledgeCS") == 1 then
 			player:startEvent(226)
 			player:setCharVar("pledgeCS", 2)
 			end
+=======
+            if player:getCharVar("anUndyingPledgeCS") == 1 then
+            player:startEvent(226)
+            end
+>>>>>>> Stashed changes
         end,
     }
 end
@@ -63,6 +73,8 @@ function onEventFinish(player, csid, option)
         player:addMission(ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
     elseif (csid == 176) then
         player:addCharVar("ZilartStatus", 1)
+    elseif (csid == 226) then
+        player:setCharVar("anUndyingPledgeCS", 2)
     end
 
 end
