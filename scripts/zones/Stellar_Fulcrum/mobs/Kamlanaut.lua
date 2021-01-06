@@ -39,7 +39,6 @@ function onMobWeaponSkill(target, mob, skill)
         -- ----------------------------------------------------------------------
         -- when using en-spell weapon skill, absorb damage of that element type
         -- ----------------------------------------------------------------------
-local entity = {}
 
         -- remove previous absorb mod, if set
         local previousAbsorb = mob:getLocalVar("currentAbsorb")

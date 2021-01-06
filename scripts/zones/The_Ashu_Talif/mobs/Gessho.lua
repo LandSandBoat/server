@@ -3,10 +3,7 @@
 --  Mob: Gessho
 -- TOAU-15 Mission Battle
 -----------------------------------
-local entity = {}
-
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
-
 require("scripts/globals/allyassist")
 require("scripts/globals/instance")
 require("scripts/globals/status")
