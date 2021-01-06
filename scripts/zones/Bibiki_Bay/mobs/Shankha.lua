@@ -7,8 +7,9 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGAIN, 200) -- "Seemed to have very high TP gain." (guessing 200 after watching video)
 end
 
@@ -20,3 +21,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(5400 + math.random(0, 3) * 600) -- "... every 90-120 minutes ... at exactly 100 minutes many times" (guessing 10 minute intervals)
 end
+
+return entity

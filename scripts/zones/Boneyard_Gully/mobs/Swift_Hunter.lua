@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = {require("scripts/mixins/families/antlion_ambush")}
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Aggros via ambush, not superlinking
@@ -17,3 +18,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

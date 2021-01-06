@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
         mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
     end
@@ -29,3 +30,5 @@ function onMobDespawn(mob)
         mob:setRespawnTime(3600)
     end
 end
+
+return entity

@@ -5,8 +5,9 @@
 require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1) -- "has an Additional Effect: Terror in melee attacks"
     mob:setMod(tpz.mod.REGEN, 20) -- "also has an Auto Regen of medium strength" (guessing 20)
 end
@@ -18,3 +19,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 179)
 end
+
+return entity
