@@ -12,14 +12,14 @@ require("scripts/globals/status")
 -----------------------------------
 
 function onTrade(player, npc, trade)
-    starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+    local starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     if (starstatus == 1 and trade:hasItemQty(546, 1) == true and trade:getItemCount() == 1 and trade:getGil() == 0) then
         player:startEvent(199) -- Quest Finish
     end
 end
 
 function onTrigger(player, npc)
-    starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+    local starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     if (starstatus == QUEST_AVAILABLE) then
         player:startEvent(196, 0, 546) -- Quest Start
     elseif (starstatus == QUEST_ACCEPTED) then
@@ -37,10 +37,10 @@ end
 
 function onEventFinish(player, csid, option)
     if (csid == 196) then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     elseif (csid == 199) then
         player:tradeComplete(trade)
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLIHG_STAR)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
         player:addFame(WINDURST, 75)
         player:addItem(12316)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12316)
