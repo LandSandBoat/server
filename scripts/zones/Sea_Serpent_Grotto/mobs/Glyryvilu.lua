@@ -8,11 +8,7 @@
 
 
 function onMobDeath(mob, player, isKiller)
-<<<<<<< Updated upstream
-    player:setCharVar("pledgeNM_killed", 1)
-=======
     if player:getCharVar("anUndyingPledgeCS") == 2 then
         player:setCharVar("anUndyingPledgeNM_killed", 1)
     end
->>>>>>> Stashed changes
 end

@@ -38,10 +38,4 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-	if (csid == 18) then
-		player:addKeyItem(tpz.ki.CALIGINOUS_BLADE)
-		player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CALIGINOUS_BLADE)
-		player:setCharVar("pledgeCS", 3)
-		player:setCharVar("pledgeNM_killed", 0)
-	end
 end

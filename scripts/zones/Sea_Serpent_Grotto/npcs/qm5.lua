@@ -12,17 +12,6 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrigger(player, npc)
-<<<<<<< Updated upstream
-	if player:getCharVar("pledgeCS") == 2 and player:getCharVar("pledgeNM_killed") == 1 then
-		player:startEvent(18)
-	elseif player:getCharVar("pledgeCS") == 2 and player:getCharVar("pledgeNM_killed") == 0 then
-		npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, {claim=true, hide=0})
-		player:messageSpecial(ID.text.BODY_NUMB_DREAD)
-	else
-		player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-	end
-end
-=======
     if player:getCharVar("anUndyingPledgeCS") == 2 and player:getCharVar("anUndyingPledgeNM_killed") == 1 then
         player:startEvent(18)
     elseif 
@@ -45,4 +34,3 @@ function onEventFinish(player, csid, option)
         player:setCharVar("anUndyingPledgeNM_killed", 0)
     end
 end
->>>>>>> Stashed changes
