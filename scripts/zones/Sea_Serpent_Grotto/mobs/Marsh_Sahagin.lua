@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 806, 1, tpz.regime.type.GROUNDS)
@@ -18,3 +19,5 @@ function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.WORR_THE_CLAWFISTED_PH, 10, 7200) -- 2 hours
     tpz.mob.phOnDespawn(mob, ID.mob.VOLL_THE_SHARKFINNED_PH, 10, 7200) -- 2 hours
 end
+
+return entity

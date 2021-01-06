@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Set core Skin and mob elemental resist/weakness; other elements set to 0.
@@ -41,7 +42,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("roamTime")
     if (mob:getAnimationSub() == 0 and os.time() - roamTime > 60) then
         mob:setAnimationSub(mob:getLocalVar("form2"))
@@ -54,7 +55,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local changeTime = mob:getLocalVar("changeTime")
 
@@ -71,3 +72,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

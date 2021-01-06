@@ -2,6 +2,7 @@
 -- Area: Garlaige Citadel (200)
 --   NM: Old Two-Wings
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -13,3 +14,5 @@ function onMobDespawn(mob)
     mob:setRespawnTime(math.random(75600, 86400))
 
 end
+
+return entity

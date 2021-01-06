@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 -----------------------------------
+local entity = {}
 
 function allMoonMobsDead(player)
     local inst = player:getBattlefield():getArea()
@@ -23,3 +24,5 @@ function onMobDeath(mob, player, isKiller)
         player:startEvent(32004, 1, 0, 1, 0, 1)
     end
 end
+
+return entity

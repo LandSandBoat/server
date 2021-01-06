@@ -1,14 +1,16 @@
------------------------------------
+----------------------------------------
 -- Area: Quicksand Caves
 --  Mob: Valor
 -- Coming of Age (San dOria Mission 8-1)
------------------------------------
+----------------------------------------
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -25,3 +27,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("MissionStatus", 3)
     end
 end
+
+return entity

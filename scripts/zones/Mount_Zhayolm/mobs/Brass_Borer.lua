@@ -6,8 +6,9 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -19,7 +20,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("formTime")
 
     if mob:getAnimationSub() == 0 and os.time() > roamTime then
@@ -33,7 +34,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local fightTime = mob:getLocalVar("formTime")
 
     if mob:getAnimationSub() == 0 and os.time() > fightTime then
@@ -61,3 +62,5 @@ end
 
 function onMobDeath(mob)
 end
+
+return entity

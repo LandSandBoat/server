@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobDisengage(mob)
     DespawnMob(mob:getID(), 120)
@@ -16,3 +17,5 @@ function onMobDeath(mob, player, isKiller)
         GetNPCByID(ID.npc.CHAINS_THAT_BIND_US_QM):setLocalVar("cooldown", os.time() + 300)
     end
 end
+
+return entity

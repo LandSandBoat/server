@@ -6,6 +6,9 @@ require("scripts/globals/status")
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 local path =
 {
@@ -14,49 +17,49 @@ local path =
         {-87.000, -80.000, -150.500},
         {-153.000, -80.000, -150.500}
     },
-    [1] = 
+    [1] =
     {
         {-150.000, -80.000, -147.000},
         {-130.000, -80.000, -147.000}
     },
-    [2] = 
+    [2] =
     {
         {-90.000, -80.000, -147.000},
         {-110.000, -80.000, -147.000}
     },
-    [3] = 
+    [3] =
     {
         {-153.000, -80.000, -142.000},
         {-87.000, -80.000, -142.000}
     },
-    [4] = 
+    [4] =
     {
         {-87.000, -80.000, -138.000},
         {-153.000, -80.000, -138.000}
     },
-    [5] = 
+    [5] =
     {
         {-111.960, -80.000, -140.000},
         {-127.960, -80.000, -140.000}
     },
-    [6] = 
+    [6] =
     {
         {-150.000, -80.000, -133.000},
         {-130.000, -80.000, -133.000}
     },
-    [7] = 
+    [7] =
     {
         {-90.000, -80.000, -133.000},
         {-110.000, -80.000, -133.000}
     },
-    [8] = 
+    [8] =
     {
         {-153.000, -80.000, -129.500},
         {-87.000, -80.000, -129.500}
     },
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_W_MOB[4]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
@@ -96,3 +99,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

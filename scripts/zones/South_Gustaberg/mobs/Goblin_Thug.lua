@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
 local entity = {}
 

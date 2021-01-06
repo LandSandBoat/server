@@ -5,8 +5,9 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local OP_Mariselle = mob:getID()
 
@@ -69,3 +70,5 @@ function onMobDespawn( mob )
     SetServerVariable("Old_Prof_Spawn_Location", rand)
 
 end
+
+return entity

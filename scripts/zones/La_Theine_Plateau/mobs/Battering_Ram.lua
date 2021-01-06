@@ -7,6 +7,7 @@ local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 require("scripts/globals/mobs")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.tutorial.onMobDeath(player)
@@ -17,3 +18,5 @@ function onMobDespawn(mob)
         tpz.mob.phOnDespawn(mob, ID.mob.LUMBERING_LAMBERT_PH, 10, 1200) -- 20 min
     end
 end
+
+return entity

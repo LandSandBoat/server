@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 -- TODO: Implement shared spawning and victory system with Ark Angel's Mandragora.
 
@@ -18,9 +19,11 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
 end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

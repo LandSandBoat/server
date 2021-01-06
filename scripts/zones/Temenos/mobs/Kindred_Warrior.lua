@@ -4,6 +4,8 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob,target)
     GetMobByID(ID.mob.TEMENOS_N_MOB[4]+1):updateEnmity(target)
@@ -19,3 +21,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

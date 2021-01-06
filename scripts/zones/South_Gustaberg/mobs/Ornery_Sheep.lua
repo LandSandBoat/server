@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/South_Gustaberg/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 local entity = {}
 

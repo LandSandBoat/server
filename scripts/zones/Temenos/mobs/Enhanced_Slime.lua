@@ -6,15 +6,18 @@ require("scripts/globals/status")
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.WALLHACK
 local path =
 {
-    [2] = 
+    [2] =
     {
         {-300.000, 79.500, -130.000},
         {-300.000, 79.500, -150.000}
     },
-    [5] = 
+    [5] =
     {
         {-260.000, 79.500, -130.000},
         {-260.000, 79.500, -150.000}
@@ -22,7 +25,7 @@ local path =
 
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_W_MOB[5]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() and (offset == 2 or offset == 5) then
@@ -56,3 +59,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

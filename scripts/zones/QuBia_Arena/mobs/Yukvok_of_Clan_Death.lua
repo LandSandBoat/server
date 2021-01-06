@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function phaseChangeReady(battlefield)
     local inst = battlefield:getArea()
@@ -25,3 +26,5 @@ function onMobDeath(mob, player, isKiller)
         player:startEvent(32004, 0, 0, 4)
     end
 end
+
+return entity

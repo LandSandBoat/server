@@ -8,8 +8,9 @@ mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.AFFABLE_ADAMANTKING_OFFSET then
         mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
@@ -48,3 +49,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

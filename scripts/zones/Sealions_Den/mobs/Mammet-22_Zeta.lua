@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/Sealions_Den/IDs")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.EXP_BONUS, -100)
     mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
 end
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

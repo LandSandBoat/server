@@ -9,8 +9,9 @@ mixins =
 }
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -60,3 +61,5 @@ function onMobDespawn(mob)
         GetMobByID(KingArthroID - offset):setRespawnTime(respawnTime)
     end
 end
+
+return entity

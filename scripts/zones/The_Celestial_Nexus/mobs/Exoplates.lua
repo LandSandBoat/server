@@ -7,8 +7,9 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
 end
 
@@ -18,7 +19,7 @@ function onMobSpawn(mob)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local shifts = mob:getLocalVar("shifts")
     local shiftTime = mob:getLocalVar("shiftTime")
 
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option, target)
     end
 
 end
+
+return entity

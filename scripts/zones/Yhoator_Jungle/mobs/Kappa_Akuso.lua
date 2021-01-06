@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Yhoator_Jungle/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -20,3 +21,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

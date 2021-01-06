@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     local IxAernDRG_PH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH
@@ -70,3 +71,5 @@ function onMobDespawn(mob)
     end
 
 end
+
+return entity

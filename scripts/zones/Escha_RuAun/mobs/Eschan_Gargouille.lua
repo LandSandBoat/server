@@ -2,6 +2,7 @@
 -- Area: Escha Ru'Aun
 --  Mob: Eschan Gargouille
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:hideName(true)
@@ -17,3 +18,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

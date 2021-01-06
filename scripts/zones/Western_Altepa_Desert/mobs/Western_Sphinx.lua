@@ -6,8 +6,9 @@ local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -25,3 +26,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Mission6-1MobKilled", 1)
     end
 end
+
+return entity

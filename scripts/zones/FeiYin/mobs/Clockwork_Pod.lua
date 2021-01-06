@@ -7,6 +7,7 @@ local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     -- Curses, Foiled A-Golem!?
@@ -19,3 +20,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.MIND_HOARDER_PH, 10, math.random(5400, 32400)) -- 1.5 to 9 hours
 end
+
+return entity

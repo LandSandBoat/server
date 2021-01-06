@@ -5,12 +5,13 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("popTime", os.time())
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if os.time() - mob:getLocalVar("popTime") > 180 then
         DespawnMob(mob:getID())
     end
@@ -21,3 +22,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("MissionStatus", 2)
     end
 end
+
+return entity

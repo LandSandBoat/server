@@ -5,8 +5,9 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.EXP_BONUS, -100)
 end
 
@@ -15,3 +16,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("QuestStatus_DNC_AF1", 4)
     end
 end
+
+return entity

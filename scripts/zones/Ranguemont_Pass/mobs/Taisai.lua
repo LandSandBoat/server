@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 -- Area: Ranguemont Pass
 --  Mob: Taisai
------------------------------------
+----------------------------------------
 local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+-----------------------------------
+local entity = {}
 
 function disturbMob(mob)
     local phIndex = mob:getLocalVar("phIndex")
@@ -19,11 +21,11 @@ function onMobEngaged(mob, target)
     disturbMob(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- if PH hasn't been disturbed, spawn NM
     local phIndex = mob:getLocalVar("phIndex")
     if (phIndex > 0 and os.time() > mob:getLocalVar("timeToGrow")) then
@@ -39,3 +41,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

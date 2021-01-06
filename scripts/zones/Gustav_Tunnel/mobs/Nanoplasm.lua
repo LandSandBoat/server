@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Gustav_Tunnel/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -26,3 +27,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

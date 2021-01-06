@@ -3,6 +3,9 @@
 --  Mob: Imdugud
 -- !pos 655.263 20.664 651.320 29
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

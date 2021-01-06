@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 51, 1, tpz.regime.type.FIELDS)
@@ -18,3 +19,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.TIMEWORN_WARRIOR_PH, 5, 5400) -- 90 minutes
 end
+
+return entity

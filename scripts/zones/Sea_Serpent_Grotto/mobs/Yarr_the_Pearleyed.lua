@@ -5,6 +5,7 @@
 require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -18,3 +19,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 377)
 end
+
+return entity

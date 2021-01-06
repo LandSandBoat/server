@@ -12,8 +12,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addListener("DEATH", "AERN_DEATH", function(mob)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
         if(math.random (1, 10) < 10) then
@@ -78,3 +79,5 @@ end
 function onMobDespawn(mob)
     mob:setLocalVar("AERN_RERAISES", 0)
 end
+
+return entity

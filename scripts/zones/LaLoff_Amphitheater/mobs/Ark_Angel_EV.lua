@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
 end
 
@@ -33,3 +34,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

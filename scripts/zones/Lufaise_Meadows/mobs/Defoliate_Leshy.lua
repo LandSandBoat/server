@@ -2,6 +2,7 @@
 -- Area: Lufaise Meadows
 --  Mob: Defoliate Leshy
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     if (isKiller) then
@@ -16,3 +17,5 @@ function onMobDespawn(mob)
     DisallowRespawn(phIndex, false)
     GetMobByID(phIndex):setRespawnTime(GetMobRespawnTime(phIndex))
 end
+
+return entity

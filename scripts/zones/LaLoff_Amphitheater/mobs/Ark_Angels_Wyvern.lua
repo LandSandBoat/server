@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local mobid = mob:getID()
@@ -16,9 +17,11 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
 end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

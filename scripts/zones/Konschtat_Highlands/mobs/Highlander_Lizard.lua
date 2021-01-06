@@ -7,8 +7,9 @@ require("scripts/globals/regimes")
 require("scripts/globals/status")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     -- Higher TP Gain per melee hit than normal lizards.
     -- It is definitly NOT regain.
     mob:addMod(tpz.mod.STORETP, 25) -- May need adjustment.
@@ -29,3 +30,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(1200, 1800)) -- 20~30 min repop
 end
+
+return entity

@@ -3,6 +3,7 @@
 --  Mob: Gessho
 -- TOAU-15 Mission Battle
 -----------------------------------
+local entity = {}
 
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 
@@ -11,6 +12,7 @@ require("scripts/globals/instance")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Gessho will engage by himself ~1min in if you stall too long.
@@ -47,7 +49,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local ready = mob:getLocalVar("ready")
 
     -- When Gessho becomes ready via you pulling, he will assist you
@@ -56,7 +58,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local dialog = mob:getLocalVar("dialog")
 
     if(mob:getHPP() <= 20 and dialog == 1) then
@@ -68,3 +70,5 @@ end
 function onMobDeath(mob, player, isKiller)
     mob:showText(mob, ID.text.SO_I_FALL)
 end
+
+return entity

@@ -5,6 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local offsets = {1, 3, 5, 2, 4, 6}
 
@@ -12,7 +13,7 @@ function onMobEngaged(mob, target)
     mob:resetLocalVars()
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local spawnTime = mob:getLocalVar("spawnTime")
     local twohourTime = mob:getLocalVar("twohourTime")
     local fifteenBlock = mob:getBattleTime() / 15
@@ -63,3 +64,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(259200, 432000))
 end
+
+return entity

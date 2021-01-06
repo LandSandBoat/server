@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 30)
 end
 
@@ -30,7 +31,7 @@ function onMobDisengage(mob)
     mob:setLocalVar("wait", 0)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local wait = mob:getLocalVar("wait")
     if wait > 40 then
         -- pick a random living target from the three enemies
@@ -49,3 +50,5 @@ end
 function onMobDeath(mob, player, isKiller)
     mob:getBattlefield():lose()
 end
+
+return entity

@@ -6,12 +6,13 @@
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 30)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local promathia = ID.mob.PROMATHIA_OFFSET + (mob:getBattlefield():getArea() - 1) * 2
     local wait = mob:getLocalVar("wait")
     local ready = mob:getLocalVar("ready")
@@ -39,7 +40,7 @@ function onMobEngaged(mob, target)
     mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 0, 0, 5)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getLocalVar("Raise") == 1 then
         mob:messageText(mob, ID.text.PRISHE_TEXT + 3)
         mob:setLocalVar("Raise", 0)
@@ -59,3 +60,5 @@ end
 function onMobDeath(mob, player, isKiller)
     mob:messageText(mob, ID.text.PRISHE_TEXT + 2)
 end
+
+return entity

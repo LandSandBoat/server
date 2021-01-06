@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Ranguemont_Pass/IDs")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.BYEBYE_TAISAI)
@@ -25,3 +26,5 @@ function onMobDespawn(mob)
     ph:setLocalVar("timeToGrow", os.time() + math.random(86400, 259200)) -- 1 to 3 days
     ph:setLocalVar("phIndex", phIndex)
 end
+
+return entity

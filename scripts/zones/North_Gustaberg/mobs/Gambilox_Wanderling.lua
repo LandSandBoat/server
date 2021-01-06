@@ -5,8 +5,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -15,3 +16,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("thickAsThievesGamblingCS", 6)
     end
 end
+
+return entity

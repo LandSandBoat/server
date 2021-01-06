@@ -2,6 +2,7 @@
 -- Area: Navukgo Execution Chamber
 --  Mob: Khimaira 13
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
@@ -12,7 +13,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
@@ -25,3 +26,5 @@ end
 function onEventFinish(player, csid, option, target)
     -- printf("finishCSID: %u", csid)
 end
+
+return entity

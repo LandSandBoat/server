@@ -7,6 +7,7 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Set AnimationSub to 0, put it in pot form
@@ -28,7 +29,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobFight(mob)
+entity.onMobFight = function(mob)
     -- Forms: 0 = Pot  1 = Pot  2 = Poles  3 = Rings
     local randomTime = math.random(30, 180)
     local changeTime = mob:getLocalVar("changeTime")
@@ -105,3 +106,5 @@ function onMobDespawn(mob)
     mob:setLocalVar("pop", os.time() + 900) -- 15 mins
     GRAND_PALACE_OF_HUXZOI.pickTemperancePH()
 end
+
+return entity

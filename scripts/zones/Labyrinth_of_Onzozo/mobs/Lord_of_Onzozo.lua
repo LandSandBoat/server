@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
 end
 
@@ -27,3 +28,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 774, 1, tpz.regime.type.GROUNDS)
 end
+
+return entity

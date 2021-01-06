@@ -1,9 +1,11 @@
------------------------------------
+----------------------------------------
 -- Area: Mamook
 -- Mob: Poroggo Casanova
 -- ToAU Quest: Prince and the Hopper
------------------------------------
+----------------------------------------
 local ID = require("scripts/zones/Mamook/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
 end
@@ -22,3 +24,5 @@ function onMobDespawn(mob)
         DespawnMob(i)
     end
 end
+
+return entity

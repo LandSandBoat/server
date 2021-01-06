@@ -6,13 +6,14 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addMod(tpz.mod.SLEEPRES, 150)
     mob:addMod(tpz.mod.SILENCERES, 150)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:hasStatusEffect(tpz.effect.AZURE_LORE))then
         mob:setMobMod(tpz.mobMod.MAGIC_COOL, 0)
     else
@@ -28,3 +29,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

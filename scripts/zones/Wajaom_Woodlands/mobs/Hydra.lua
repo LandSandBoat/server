@@ -5,8 +5,9 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local battletime = mob:getBattleTime()
     local headgrow = mob:getLocalVar("headgrow")
@@ -44,3 +45,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(48, 72) * 3600) -- 48 to 72 hours, in 1 hour windows
 end
+
+return entity

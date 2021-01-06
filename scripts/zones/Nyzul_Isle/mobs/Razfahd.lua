@@ -5,8 +5,9 @@
 require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
 end
 
@@ -16,7 +17,7 @@ function onMobSpawn(mob)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local warp = mob:getLocalVar("warp")
 
     if (mob:getHPP() <= 50 and mob:getLocalVar("perfectdef") == 0) then
@@ -31,3 +32,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

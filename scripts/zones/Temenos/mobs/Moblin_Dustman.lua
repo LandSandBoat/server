@@ -6,33 +6,36 @@ require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 
 local path =
 {
-    [2] = 
+    [2] =
     {
         {340.000, 67.500, 456.000},
         {340.000, 67.500, 436.000}
     },
-    [3] = 
+    [3] =
     {
         {344.000, 68.000, 460.000},
         {364.000, 68.000, 460.000}
     },
-    [4] = 
+    [4] =
     {
         {370.210, 74.000, 432.008},
         {370.210, 74.000, 408.226}
     },
-    [5] = 
+    [5] =
     {
         {375.210, 74.000, 408.226},
         {375.210, 74.000, 432.008}
     },
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.TEMENOS_N_MOB[1]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() then
@@ -52,3 +55,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

@@ -7,8 +7,9 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     --50% fast cast, no standback
     mob:addMod(tpz.mod.UFASTCAST, 50)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
@@ -27,7 +28,7 @@ function onMobEngaged(mob, target)
     GetMobByID(mob:getID() + 1):updateEnmity(target)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getBattleTime() % 9 <= 2) then
         local orbitalOne = GetMobByID(mob:getID()+3)
         local orbitalTwo = GetMobByID(mob:getID()+4)
@@ -67,3 +68,5 @@ function onEventFinish(player, csid, option, target)
         mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
     end
 end
+
+return entity

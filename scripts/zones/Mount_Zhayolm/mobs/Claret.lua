@@ -9,8 +9,9 @@ mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -22,7 +23,7 @@ function onMobSpawn(mob)
     mob:SetAutoAttackEnabled(false)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:checkDistance(target) < 3 then
         if not target:hasStatusEffect(tpz.effect.POISON) then
             target:addStatusEffect(tpz.effect.POISON, 100, 3, math.random(3, 6) * 3) -- Poison for 3-6 ticks.
@@ -37,3 +38,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

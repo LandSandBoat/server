@@ -2,6 +2,7 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Suzaku (Pet version)
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -23,3 +24,5 @@ function onMonsterMagicPrepare(mob, target)
     end
 
 end
+
+return entity
