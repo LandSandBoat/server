@@ -7101,9 +7101,7 @@ INSERT INTO `mob_groups` VALUES (69,1666,103,'Goblin_Gambler',0,128,0,0,0,29,30,
 INSERT INTO `mob_groups` VALUES (70,1683,103,'Goblin_Leecher',0,128,0,0,0,29,30,0);
 INSERT INTO `mob_groups` VALUES (71,5733,103,'Snipper',330,0,2281,0,0,18,22,0);
 INSERT INTO `mob_groups` VALUES (72,380,103,'Beach_Pugil',330,0,248,0,0,23,26,0);
-
-INSERT INTO `mob_groups` VALUES (5684,1027,103,'Diabolos',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5722,2403,103,'Lewenhart',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (73,0,103,'Valkurm_Imperator',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Jugner_Forest (Zone 104)
