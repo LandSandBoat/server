@@ -26,7 +26,6 @@ zones[tpz.zone.QUFIM_ISLAND] =
         THESE_WITHERED_FLOWERS         = 7328,  -- These withered flowers seem unable to bloom.
         NOW_THAT_NIGHT_HAS_FALLEN      = 7329,  -- Now that night has fallen, the flowers bloom with a strange glow.
         CONQUEST                       = 7377,  -- You've earned conquest points!
-        HOMEPOINT_SET                  = 7471,  -- Your home point has been set.
         AN_EMPTY_LIGHT_SWIRLS          = 7754,  -- An empty light swirls about the cave, eating away at the surroundings...
         GIGANTIC_FOOTPRINT             = 7838,  -- There is a gigantic footprint here.
         DYNA_NPC_DEFAULT_MESSAGE       = 7852,  -- You hear a mysterious, floating voice: Bring forth the <item>...
@@ -39,6 +38,7 @@ zones[tpz.zone.QUFIM_ISLAND] =
         NO_COMBINATION                 = 8070,  -- You were unable to enter a combination.
         REGIME_REGISTERED              = 10346, -- New training regime registered!
         COMMON_SENSE_SURVIVAL          = 12671, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        HOMEPOINT_SET                  = 12713, -- Home point set!
     },
     mob =
     {
