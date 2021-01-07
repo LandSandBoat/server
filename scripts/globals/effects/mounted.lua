@@ -3,7 +3,7 @@
 ----------------------------------------
 require("scripts/globals/status")
 ----------------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --[[
@@ -26,4 +26,4 @@ function onEffectLose(target, effect)
     target:setAnimation(tpz.anim.NONE)
 end
 
-return effecttbl
+return effect_object

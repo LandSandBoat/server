@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 local stats_bits =
 {
@@ -49,4 +49,4 @@ function onEffectLose(target, effect)
     target:setStatDebilitation(0)
 end
 
-return effecttbl
+return effect_object

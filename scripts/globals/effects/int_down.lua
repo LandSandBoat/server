@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.INT) - effect:getPower()) < 0) then
@@ -28,4 +28,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

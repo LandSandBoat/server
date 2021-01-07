@@ -1,7 +1,7 @@
 ----------------------------------------
 -- tpz.effect.SENGIKORI
 ----------------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.SKILLCHAINDMG, 100)
@@ -16,4 +16,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.UDMGMAGIC, 25)
 end
 
-return effecttbl
+return effect_object

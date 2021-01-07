@@ -3,7 +3,7 @@
 ----------------------------------------
 require("scripts/globals/status")
 ----------------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.OVERLOAD_THRESH, 5000)
@@ -46,4 +46,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

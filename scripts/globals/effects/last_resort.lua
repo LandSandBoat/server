@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ATTP, 25 + target:getMerit(tpz.merit.LAST_RESORT_EFFECT))
@@ -23,4 +23,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.DEFP, -25 - target:getMerit(tpz.merit.LAST_RESORT_EFFECT))
 end
 
-return effecttbl
+return effect_object

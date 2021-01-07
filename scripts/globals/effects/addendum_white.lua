@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:recalculateAbilitiesTable()
@@ -52,4 +52,4 @@ function onEffectLose(target, effect)
     target:recalculateSkillsTable()
 end
 
-return effecttbl
+return effect_object

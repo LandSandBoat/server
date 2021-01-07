@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if effect:getPower() == 3 then -- arcane stomp
@@ -46,4 +46,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

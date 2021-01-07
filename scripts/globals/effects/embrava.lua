@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local skill = effect:getPower()
@@ -30,4 +30,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.HASTE_MAGIC, haste)
 end
 
-return effecttbl
+return effect_object

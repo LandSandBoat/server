@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
@@ -21,4 +21,4 @@ function onEffectLose(target, effect)
     target:disableLevelSync()
 end
 
-return effecttbl
+return effect_object

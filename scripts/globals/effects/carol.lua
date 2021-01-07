@@ -4,7 +4,7 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.magic.resistMod[effect:getSubPower()], effect:getPower())
@@ -17,4 +17,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.magic.resistMod[effect:getSubPower()], effect:getPower())
 end
 
-return effecttbl
+return effect_object

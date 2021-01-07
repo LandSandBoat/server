@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if (effect:getSubType() == tpz.mod.DMG) then
@@ -40,4 +40,4 @@ function onEffectLose(target, effect)
     --print("removed "..effect:getPower().." of mod "..effect:getSubType())
 end
 
-return effecttbl
+return effect_object

@@ -3,7 +3,7 @@
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.NO_SPELL_MP_DEPLETION, 100)
@@ -16,4 +16,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.NO_SPELL_MP_DEPLETION, 100)
 end
 
-return effecttbl
+return effect_object

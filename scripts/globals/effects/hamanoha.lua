@@ -1,7 +1,7 @@
 ----------------------------------------
 -- tpz.effect.HAMANOHA
 ----------------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ACC, 20)
@@ -22,4 +22,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REGAIN_DOWN, 20)
 end
 
-return effecttbl
+return effect_object

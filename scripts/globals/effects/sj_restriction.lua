@@ -1,7 +1,7 @@
 -----------------------------------
 -- tpz.effect.SJ_RESTRICTION
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:recalculateStats()
@@ -15,4 +15,4 @@ function onEffectLose(target, effect)
     target:recalculateStats()
 end
 
-return effecttbl
+return effect_object

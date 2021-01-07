@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     effect:setSubPower(effect:getPower()*(256/100))
@@ -63,4 +63,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.CHARMRES, effect:getPower())
 end
 
-return effecttbl
+return effect_object

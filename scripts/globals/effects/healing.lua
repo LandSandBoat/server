@@ -9,7 +9,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/roe")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setAnimation(33)
@@ -76,4 +76,4 @@ function onEffectLose(target, effect)
     target:setLocalVar("GEO_DWL_Resting", 0)
 end
 
-return effecttbl
+return effect_object

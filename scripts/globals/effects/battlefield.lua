@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if target:getPet() then
@@ -33,4 +33,4 @@ end
 function onEventFinish(player, csid, option)
 end
 
-return effecttbl
+return effect_object

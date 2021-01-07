@@ -1,7 +1,7 @@
 -----------------------------------
 -- tpz.effect.COSTUME
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:costume(effect:getPower())
@@ -14,4 +14,4 @@ function onEffectLose(target, effect)
     target:costume(0)
 end
 
-return effecttbl
+return effect_object

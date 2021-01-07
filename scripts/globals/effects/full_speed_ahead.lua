@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target,effect)
     tpz.fsa.onEffectGain(target, effect)
@@ -18,4 +18,4 @@ function onEffectLose(target,effect)
     tpz.fsa.onEffectLose(target, effect)
 end
 
-return effecttbl
+return effect_object

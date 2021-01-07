@@ -6,7 +6,7 @@
 --------------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --Auspice Reduces TP via adding to your Subtle Blow Mod
@@ -44,4 +44,4 @@ function onEffectLose(target, effect)
 
 end
 
-return effecttbl
+return effect_object

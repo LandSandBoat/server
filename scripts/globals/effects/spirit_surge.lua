@@ -3,7 +3,7 @@
 ----------------------------------------
 require("scripts/globals/status")
 ----------------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     -- The dragoon's MAX HP increases by % of wyvern MaxHP
@@ -38,4 +38,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.HASTE_ABILITY, 2500)
 end
 
-return effecttbl
+return effect_object

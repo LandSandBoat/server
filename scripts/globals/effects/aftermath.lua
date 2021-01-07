@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/aftermath")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     tpz.aftermath.onEffectGain(target, effect)
@@ -13,4 +13,4 @@ function onEffectLose(target, effect)
     tpz.aftermath.onEffectLose(target, effect)
 end
 
-return effecttbl
+return effect_object

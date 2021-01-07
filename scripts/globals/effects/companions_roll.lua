@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}
@@ -58,4 +58,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

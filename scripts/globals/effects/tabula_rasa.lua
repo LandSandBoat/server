@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local regen = effect:getSubPower()
@@ -76,4 +76,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

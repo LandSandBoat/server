@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect) --power=30 initially, subpower=20 for enmity
     target:addMod(tpz.mod.EVA, -effect:getPower())
@@ -26,4 +26,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ENMITY, -effect:getSubPower())
 end
 
-return effecttbl
+return effect_object

@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower() -- Tracks which bonus effects are in use.
@@ -60,4 +60,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

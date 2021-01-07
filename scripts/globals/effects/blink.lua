@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setMod(tpz.mod.BLINK, effect:getPower())
@@ -17,4 +17,4 @@ function onEffectLose(target, effect)
     target:setMod(tpz.mod.BLINK, 0)
 end
 
-return effecttbl
+return effect_object

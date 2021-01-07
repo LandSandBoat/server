@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.STR, math.floor(effect:getPower()/2))
@@ -28,4 +28,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.CHR, math.floor(effect:getPower()/2))
 end
 
-return effecttbl
+return effect_object

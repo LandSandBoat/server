@@ -2,7 +2,7 @@
 -- tpz.effect.PROWESS
 -- Increased combat and magic skill gain
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -13,4 +13,4 @@ end
 function onEffectLose(target, effect)
 end
 
-return effecttbl
+return effect_object

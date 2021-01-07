@@ -5,7 +5,7 @@
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setCharVar("SEED_AFTERGLOW_TIMER", 1)
@@ -36,4 +36,4 @@ function onEffectLose(target, effect)
     target:setCharVar("SEED_AFTERGLOW_INTENSITY", 0)
 end
 
-return effecttbl
+return effect_object

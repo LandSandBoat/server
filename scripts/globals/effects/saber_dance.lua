@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local saberDanceMerits = target:getMerit(tpz.merit.SABER_DANCE)
@@ -42,4 +42,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.DOUBLE_ATTACK, effect:getPower())
 end
 
-return effecttbl
+return effect_object

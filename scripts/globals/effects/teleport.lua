@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/teleports")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -34,4 +34,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

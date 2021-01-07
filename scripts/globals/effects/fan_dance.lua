@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     -- Waltz recast effect is handled in the waltz scripts
@@ -21,4 +21,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ENMITY, 15)
 end
 
-return effecttbl
+return effect_object

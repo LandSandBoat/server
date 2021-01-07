@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
 -- This might not be % in retail...If not a % just change ATTP to just ATT
@@ -20,4 +20,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.RATTP, effect:getPower())
 end
 
-return effecttbl
+return effect_object

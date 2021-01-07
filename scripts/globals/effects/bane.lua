@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --NOTE: The power amount dictates the amount to REDUCE MAX VALUES BY. E.g. Power=75 means 'reduce max hp/mp by 75%'
@@ -22,4 +22,4 @@ function onEffectLose(target, effect)
     target:addMod(tpz.mod.MOVE, -effect:getPower())
 end
 
-return effecttbl
+return effect_object

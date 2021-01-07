@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/atma")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     tpz.atma.onEffectGain(target, effect)
@@ -16,4 +16,4 @@ function onEffectLose(target, effect)
     tpz.atma.onEffectLose(target, effect)
 end
 
-return effecttbl
+return effect_object

@@ -1,7 +1,7 @@
 -----------------------------------
 -- tpz.effect.CHARM
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -14,4 +14,4 @@ function onEffectLose(target, effect)
     target:uncharm()
 end
 
-return effecttbl
+return effect_object

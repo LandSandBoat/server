@@ -5,7 +5,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
@@ -69,4 +69,4 @@ end
 function onEventFinish(target, csid, option)
 end
 
-return effecttbl
+return effect_object

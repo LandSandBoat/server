@@ -4,7 +4,7 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.REGEN_DOWN, effect:getPower())
@@ -19,4 +19,4 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.INT, -getElementalDebuffStatDownFromDOT(effect:getPower()))
 end
 
-return effecttbl
+return effect_object

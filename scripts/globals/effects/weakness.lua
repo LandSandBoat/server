@@ -3,7 +3,7 @@
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --reduce HP and MP by the power amount. Add 100% slow
@@ -37,4 +37,4 @@ function onEffectLose(target, effect)
     end
 end
 
-return effecttbl
+return effect_object

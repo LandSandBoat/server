@@ -1,7 +1,7 @@
 -----------------------------------
 -- tpz.effect.ENCUMBERANCE
 -----------------------------------
-local effecttbl = {}
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setEquipBlock(effect:getPower())
@@ -14,4 +14,4 @@ function onEffectLose(target, effect)
     target:setEquipBlock(0)
 end
 
-return effecttbl
+return effect_object
