@@ -41,7 +41,7 @@ function onRegionEnter(player, region)
     {
         [1] = function (x)  -- An Undying Pledge cs trigger
             if player:getCharVar("anUndyingPledgeCS") == 1 then
-            player:startEvent(226)
+                player:startEvent(226)
             end
         end,
     }
