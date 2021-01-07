@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.IMPETUS_EFFECT
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.IMPETUS_EFFECT
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ATT, 100)
     target:addMod(tpz.mod.CRITHITRATE, 50)
@@ -15,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ATT, 100)
     target:delMod(tpz.mod.CRITHITRATE, 50)
 end
+
+return effect_object

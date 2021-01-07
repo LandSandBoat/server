@@ -1,8 +1,7 @@
 -----------------------------------
---
 -- tpz.effect.RERAISE
---
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --power level is the raise number (1, 2, 3)
@@ -16,3 +15,5 @@ function onEffectLose(target, effect)
         target:sendReraise(effect:getPower())
     end
 end
+
+return effect_object

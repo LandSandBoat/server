@@ -1,8 +1,8 @@
------------------------------------
---
---     tpz.effect.FLY_HIGH
---     
------------------------------------
+----------------------------------------
+-- tpz.effect.FLY_HIGH
+----------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
 end
 
@@ -11,3 +11,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

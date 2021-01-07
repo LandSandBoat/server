@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.HAGAKURE
---
+-- tpz.effect.HAGAKURE
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.SAVETP, 400)
@@ -18,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.SAVETP, 400)
     target:delMod(tpz.mod.TP_BONUS, 1000)
 end
+
+return effect_object

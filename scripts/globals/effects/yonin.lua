@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.YONIN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect) --power=30 initially, subpower=20 for enmity
     target:addMod(tpz.mod.ACC, -effect:getPower())
@@ -39,3 +38,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.HP, yoninMerits)
     end
 end
+
+return effect_object

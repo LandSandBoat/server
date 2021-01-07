@@ -1,8 +1,7 @@
 -----------------------------------
---
---     tpz.effect.LEAVEGAME
---
+-- tpz.effect.LEAVEGAME
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setAnimation(33)
@@ -20,3 +19,5 @@ end
 function onEffectLose(target, effect)
     target:setAnimation(0)
 end
+
+return effect_object

@@ -1,10 +1,9 @@
 -----------------------------------
---
--- BONECRAFT_IMAGERY
---
+-- tpz.effect.BONECRAFT_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.BONE, effect:getPower())
@@ -16,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.BONE, effect:getPower())
 end
+
+return effect_object

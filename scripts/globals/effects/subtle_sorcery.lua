@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.SUBTLE_SORCERY
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.SUBTLE_SORCERY
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.MACC, 100)
 end
@@ -15,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.MACC, 100)
     target:delMod(tpz.mod.ENMITY)
 end
+
+return effect_object

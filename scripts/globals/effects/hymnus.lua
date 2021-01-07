@@ -1,8 +1,7 @@
 -----------------------------------
--- Hymnus (reraise)
---
---
+-- tpz.effect.HYMNUS
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -15,3 +14,5 @@ function onEffectLose(target, effect)
         target:sendReraise(effect:getPower())
     end
 end
+
+return effect_object

@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.BARVIRUS
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.VIRUSRES, effect:getPower())
@@ -16,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.VIRUSRES, effect:getPower())
 end
+
+return effect_object

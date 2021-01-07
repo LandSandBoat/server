@@ -1,10 +1,9 @@
 -----------------------------------
---
---    Companions Roll
---
+-- tpz.effect.COMPANIONS_ROLL
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}
@@ -58,3 +57,5 @@ function onEffectLose(target, effect)
         target:delPetMod(tpz.mod.REGEN, effectregen[rollnum])
     end
 end
+
+return effect_object

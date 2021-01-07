@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.SIGIL
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower() -- Tracks which bonus effects are in use.
@@ -60,3 +59,5 @@ function onEffectLose(target, effect)
         -- exp loss reduction not implemented.
     end
 end
+
+return effect_object

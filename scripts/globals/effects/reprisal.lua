@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.REPRISAL
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.SPIKES, 6)
@@ -21,3 +20,5 @@ function onEffectLose(target, effect)
     target:setMod(tpz.mod.SPIKES_DMG, 0)
     target:delMod(tpz.mod.SHIELDBLOCKRATE, 50)
 end
+
+return effect_object

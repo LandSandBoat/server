@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.PERFECT_COUNTER
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.PERFECT_COUNTER
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.PERFECT_COUNTER_ATT, 100)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.PERFECT_COUNTER_ATT, 100)
 end
+
+return effect_object

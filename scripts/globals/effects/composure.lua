@@ -1,10 +1,11 @@
 -----------------------------------
--- Composure
+-- tpz.effect.COMPOSURE
 -- Increases accuracy and lengthens recast time. Enhancement effects gained through white
 -- and black magic you cast on yourself last longer.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ACC, 15)
@@ -16,3 +17,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.ACC, 15)
 end
+
+return effect_object

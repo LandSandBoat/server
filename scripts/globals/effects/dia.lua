@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- tpz.effect.DIA
---
 ----------------------------------
 -- Quick Explanation of Algorithm:
 -- Dia 1: Power of 1. Results in reduced defense of ~5.27%  (27/512) and 1 hp/tick damage.
@@ -10,6 +8,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower()
@@ -27,3 +26,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REGEN_DOWN, power)
     target:delMod(tpz.mod.DEFP, -subpower)
 end
+
+return effect_object

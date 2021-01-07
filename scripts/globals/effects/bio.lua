@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.BIO
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower()
@@ -22,3 +21,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ATTP, -subpower)
     target:delMod(tpz.mod.REGEN_DOWN, power)
 end
+
+return effect_object

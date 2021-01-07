@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.CURSE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --NOTE: The power amount dictates the amount to REDUCE MAX VALUES BY. E.g. Power=75 means 'reduce max hp/mp by 75%'
@@ -22,3 +21,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.MPP, -effect:getPower())
     target:delMod(tpz.mod.MOVE, -effect:getPower())
 end
+
+return effect_object

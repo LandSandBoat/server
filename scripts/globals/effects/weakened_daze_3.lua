@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.WEAKENED_DAZE_3
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.MEVA, -20)
@@ -14,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.MEVA, -20)
 end
+
+return effect_object

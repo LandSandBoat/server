@@ -1,8 +1,8 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Increased treasure casket discovery
---
+-- tpz.effect.PROWESS
+-- Increased treasure casket discovery
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -12,3 +12,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

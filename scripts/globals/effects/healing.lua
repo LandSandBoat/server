@@ -1,8 +1,6 @@
 -----------------------------------
---
 -- tpz.effect.HEALING
 -- Activated through the /heal command
---
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -11,6 +9,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/roe")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setAnimation(33)
@@ -76,3 +75,5 @@ function onEffectLose(target, effect)
     -- Dances with Luopans
     target:setLocalVar("GEO_DWL_Resting", 0)
 end
+
+return effect_object

@@ -1,9 +1,10 @@
------------------------------------
---
--- Weakness
---
------------------------------------
+----------------------------------------
+-- tpz.effect.WEAKNESS
+----------------------------------------
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     --reduce HP and MP by the power amount. Add 100% slow
     --NOTE: The power amount dictates the amount to REDUCE MAX VALUES BY. E.g. Power=75 means 'reduce max hp/mp by 75%'
@@ -35,3 +36,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.MATT, -999)
     end
 end
+
+return effect_object

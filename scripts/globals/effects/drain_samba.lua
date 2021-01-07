@@ -1,10 +1,7 @@
 -----------------------------------
---
+-- tpz.effect.DRAIN_SAMBA
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/magic")
------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -14,3 +11,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

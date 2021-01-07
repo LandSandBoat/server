@@ -1,8 +1,7 @@
 -----------------------------------
---
---
---
+-- tpz.effect.ASTRAL_FLOW
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:recalculateAbilitiesTable()
@@ -14,3 +13,5 @@ end
 function onEffectLose(target, effect)
     target:recalculateAbilitiesTable()
 end
+
+return effect_object

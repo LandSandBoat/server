@@ -1,9 +1,9 @@
------------------------------------
---
---     tpz.effect.COPY_IMAGE
---
------------------------------------
+----------------------------------------
+-- tpz.effect.COPY_IMAGE
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setMod(tpz.mod.UTSUSEMI, effect:getSubPower())
@@ -15,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:setMod(tpz.mod.UTSUSEMI, 0)
 end
+
+return effect_object

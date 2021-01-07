@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.FAN_DANCE
---
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     -- Waltz recast effect is handled in the waltz scripts
@@ -22,3 +20,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.ENMITY, 15)
 end
+
+return effect_object

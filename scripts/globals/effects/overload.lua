@@ -1,9 +1,9 @@
------------------------------------
---
---     tpz.effect.OVERLOAD
---
------------------------------------
+----------------------------------------
+-- tpz.effect.OVERLOAD
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local pet = target:getPet()
@@ -27,3 +27,5 @@ function onEffectLose(target, effect)
         pet:delMod(tpz.mod.EVA, -10)
     end
 end
+
+return effect_object
