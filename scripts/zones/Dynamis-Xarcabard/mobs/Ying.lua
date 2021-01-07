@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob, target)
+entity.onMobInitialize = function(mob, target)
 end
 
 function onMobSpawn(mob)
@@ -21,7 +22,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
     local yang = GetMobByID(ID.mob.YANG)
     local YangToD = mob:getLocalVar("YangToD")
@@ -51,3 +52,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

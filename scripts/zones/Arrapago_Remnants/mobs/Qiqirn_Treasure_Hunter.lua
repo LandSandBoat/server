@@ -7,6 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobRoamAction(mob)
 
@@ -30,7 +31,7 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local act = mob:getCurrentAction()
     local isBusy = false
@@ -68,3 +69,5 @@ end
 function onMobDespawn(mob)
     mob:setLocalVar("runTime", 0)
 end
+
+return entity

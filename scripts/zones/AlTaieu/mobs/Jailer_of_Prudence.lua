@@ -7,8 +7,9 @@ local ID = require("scripts/zones/AlTaieu/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
 end
 
@@ -79,3 +80,5 @@ function onMobDespawn(mob)
         firstPrudence:delMod(tpz.mod.DEFP, -50)
     end
 end
+
+return entity

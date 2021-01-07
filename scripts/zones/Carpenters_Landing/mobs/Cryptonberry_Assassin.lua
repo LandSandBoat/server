@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Carpenters_Landing/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
 
@@ -32,7 +33,7 @@ function onMobEngaged(mob, target)
     mob:setLocalVar("despawnTime", 0)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- if not claimed within 3 minutes of spawning, despawn
     local despawnTime = mob:getLocalVar("despawnTime")
     if despawnTime > 0 and os.time() > despawnTime then
@@ -46,3 +47,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar(string.format("Cryptonberry_Assassins-%i_KILL", offset), 1)
     end
 end
+
+return entity

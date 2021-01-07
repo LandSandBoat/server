@@ -7,6 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 74, 2, tpz.regime.type.FIELDS)
@@ -19,3 +20,5 @@ function onMobDeath(mob, player, isKiller)
     end
 
 end
+
+return entity

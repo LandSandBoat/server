@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local mobId = mob:getID()
@@ -27,3 +28,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

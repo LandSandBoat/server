@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Carpenters_Landing/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
 
@@ -28,7 +29,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- spawn Assassins when enmity is gained against Executor
     if mob:getLocalVar("spawnedAssassins") == 0 and mob:getCE(target) > 0 then
         mob:setLocalVar("spawnedAssassins", 1)
@@ -44,3 +45,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Cryptonberry_Executor_KILL", 1)
     end
 end
+
+return entity

@@ -5,13 +5,14 @@
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     -- Gains a large attack boost when health is under 25% which cannot be Dispelled.
     if (mob:getHP() < ((mob:getMaxHP() / 10) * 2.5)) then
@@ -66,3 +67,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
 end
+
+return entity

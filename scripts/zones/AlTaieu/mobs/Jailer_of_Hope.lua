@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -22,7 +23,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getLocalVar("SpellTime") < os.time() and mob:getLocalVar("SpellTime") ~= 0) then -- Checks for it being 0 because it gets set to 0 to avoid setting the spell list repeatedly
         mob:setSpellList(0)
         mob:setLocalVar("SpellTime", 0)
@@ -42,3 +43,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

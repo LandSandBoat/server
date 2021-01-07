@@ -4,6 +4,8 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMod(tpz.mod.HTHRES, 1500)
@@ -16,3 +18,5 @@ function onMobDeath(mob, player, isKiller, noKiller, noKiller)
         tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[3])
     end
 end
+
+return entity

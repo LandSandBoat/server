@@ -6,8 +6,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Uses different upgraded breath attack starting at 50% hp.
     if mob:getHPP() <= 50 then
         mob:setMobMod(tpz.mobMod.SKILL_LIST, 790)
@@ -20,3 +21,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

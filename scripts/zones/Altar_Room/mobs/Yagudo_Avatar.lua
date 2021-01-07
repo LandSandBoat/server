@@ -5,6 +5,7 @@ local ID = require("scripts/zones/Altar_Room/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
 end
@@ -25,3 +26,5 @@ function onMobDespawn(mob)
         DespawnMob(i)
     end
 end
+
+return entity

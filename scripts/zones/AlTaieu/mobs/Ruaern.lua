@@ -7,6 +7,7 @@ mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 
@@ -52,3 +53,5 @@ function clearTowerVars (player, towerNum)
     player:setCharVar("Ru_aern_"..towerNum.."-2KILL", 0)
     player:setCharVar("Ru_aern_"..towerNum.."-3KILL", 0)
 end
+
+return entity

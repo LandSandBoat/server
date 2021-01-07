@@ -4,8 +4,9 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local hpp = mob:getHPP()
 
     -- As it gets low, its attack speed increases to near perma-hundred fists.
@@ -27,3 +28,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
 end
+
+return entity

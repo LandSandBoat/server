@@ -7,6 +7,7 @@ mixins = {
     require("scripts/mixins/families/uragnite")
 }
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("dynamis_currency", 1455)
@@ -14,3 +15,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

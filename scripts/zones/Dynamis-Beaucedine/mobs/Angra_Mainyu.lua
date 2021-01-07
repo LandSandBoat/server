@@ -7,6 +7,7 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/dynamis")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local mobId = mob:getID()
@@ -17,7 +18,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 4 do
         local pet = GetMobByID(i)
@@ -52,3 +53,5 @@ end
 function onMobDeath(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
 end
+
+return entity

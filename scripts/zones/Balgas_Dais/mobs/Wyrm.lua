@@ -5,8 +5,10 @@
 -- For future reference: Trusts are not allowed in this fight
 -----------------------------------
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
 end
 
 function onMobSpawn(mob)
@@ -32,7 +34,7 @@ local function notBusy(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     -- Return to ground at 33% HP
     if
@@ -69,3 +71,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

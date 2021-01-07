@@ -3,6 +3,8 @@
 --  Mob: Archaic Gears
 -----------------------------------
 mixins = {require("scripts/mixins/families/gears")}
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     local instance = mob:getInstance()
@@ -15,3 +17,5 @@ end
 
 function onMobDespawn(mob)
 end
+
+return entity

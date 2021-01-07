@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -21,3 +22,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(216000, 259200)) -- 60 to 72 hours
 end
+
+return entity

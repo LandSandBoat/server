@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -15,8 +16,10 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

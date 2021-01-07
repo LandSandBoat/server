@@ -4,6 +4,8 @@
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/keyitems")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     if (not player:hasKeyItem(tpz.ki.SEEDSPALL_ROSEUM) and not player:hasKeyItem(tpz.ki.VIRIDIAN_KEY)) then
@@ -11,3 +13,5 @@ function onMobDeath(mob, player, isKiller)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEEDSPALL_ROSEUM)
     end
 end
+
+return entity

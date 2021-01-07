@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local minionGroup =
 {
@@ -25,7 +26,7 @@ function onMobEngaged(mob, target)
     mob:setAnimationSub(2)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- reduce regen after nine Xzomits and Hpemdes are killed
     if mob:getLocalVar("JoL_Regen_Reduction") == 0 and mob:getLocalVar("JoL_Qn_xzomit_Killed") >= 9 and mob:getLocalVar("JoL_Qn_hpemde_Killed") >= 9 then
         mob:setLocalVar("JoL_Regen_Reduction", 1)
@@ -83,3 +84,5 @@ function onMobDespawn(mob)
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
     end
 end
+
+return entity

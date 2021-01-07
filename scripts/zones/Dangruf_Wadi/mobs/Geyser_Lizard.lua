@@ -3,8 +3,10 @@
 --  Mob: Geyser Lizard
 -----------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize( mob )
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -19,3 +21,5 @@ end
 function onMobDespawn(mob)
     mob:setLocalVar("pop", os.time() + (math.random(45, 75) * 60))
 end
+
+return entity

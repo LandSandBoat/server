@@ -6,6 +6,8 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+-----------------------------------
+local entity = {}
 
 -- Pet Arrays, we'll alternate between phases
 local petIDs = {}
@@ -74,7 +76,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     -- Init Vars
     local mobHPP = mob:getHPP()
@@ -193,3 +195,5 @@ function handlePet(mob, newPet, oldPet, target, modelId)
     newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
     newPet:updateEnmity(target)
 end
+
+return entity

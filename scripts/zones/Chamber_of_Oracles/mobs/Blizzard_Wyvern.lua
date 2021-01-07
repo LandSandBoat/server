@@ -5,6 +5,8 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
+
 function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.SIGHT_RANGE, 17)
 end
@@ -14,9 +16,10 @@ function onMobEngaged(mob, target)
     mob:setMod(tpz.mod.REGAIN, 100)
 end
 
-function onMobFight(mob, target)
-
+entity.onMobFight = function(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

@@ -10,8 +10,9 @@ require("scripts/globals/titles")
 require("scripts/globals/magic")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 60)
 end
@@ -60,3 +61,5 @@ function onMobDespawn(mob)
         GetMobByID(ID.mob.BEHEMOTH):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
     end
 end
+
+return entity

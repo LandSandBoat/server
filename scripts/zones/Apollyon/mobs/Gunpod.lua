@@ -2,6 +2,8 @@
 -- Area: Apollyon Central
 --  Mob: Gunpod
 -----------------------------------
+local entity = {}
+
 local loot = 
 {
     [1] = -- AF
@@ -100,3 +102,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

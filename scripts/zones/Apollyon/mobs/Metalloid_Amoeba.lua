@@ -3,6 +3,8 @@
 --  Mob: Metalloid Amoeba
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMod(tpz.mod.SLASHRES, 1500)
@@ -30,3 +32,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity
