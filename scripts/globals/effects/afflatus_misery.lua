@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.AFFLATUS_MISERY
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setMod(tpz.mod.AFFLATUS_MISERY, 0)
@@ -32,3 +31,5 @@ function onEffectLose(target, effect)
         target:setMod(tpz.mod.ENSPELL_DMG, 0)
     end
 end
+
+return effect_object

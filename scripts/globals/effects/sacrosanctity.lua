@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.SACROSANCTITY
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.SACROSANCTITY
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.MDEF, 75)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.MDEF, 75)
 end
+
+return effect_object

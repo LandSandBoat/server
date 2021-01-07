@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.CHR_BOOST
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.CHR, effect:getPower())
@@ -25,3 +24,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.CHR, boostCHR_effect_size)
     end
 end
+
+return effect_object

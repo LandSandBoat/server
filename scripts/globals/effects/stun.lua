@@ -1,8 +1,7 @@
 -----------------------------------
---
---     tpz.effect.NONE
---
+-- tpz.effect.STUN
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -12,3 +11,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

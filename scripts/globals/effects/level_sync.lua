@@ -1,8 +1,9 @@
 -----------------------------------
---
---     tpz.effect.LEVEL_SYNC
---
+-- tpz.effect.LEVEL_SYNC
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
@@ -19,3 +20,5 @@ function onEffectLose(target, effect)
     target:levelRestriction(0)
     target:disableLevelSync()
 end
+
+return effect_object

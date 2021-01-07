@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.WIND_MANEUVER
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local pet = target:getPet()
@@ -20,3 +21,5 @@ function onEffectLose(target, effect)
         pet:delMod(tpz.mod.AGI, effect:getPower())
     end
 end
+
+return effect_object

@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.TABULA_RASA
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local regen = effect:getSubPower()
@@ -74,3 +75,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.HELIX_DURATION, 108)
     end
 end
+
+return effect_object

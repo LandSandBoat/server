@@ -1,5 +1,4 @@
 -----------------------------------
---
 -- tpz.effect.BALLAD
 -- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -- DO NOT ALTER ANY OF THE EFFECT VALUES! DO NOT ALTER EFFECT POWER!
@@ -7,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.REFRESH, effect:getPower())
@@ -18,3 +18,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.REFRESH, effect:getPower())
 end
+
+return effect_object

@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.EVASION_DOWN
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = math.min(effect:getPower(), target:getStat(tpz.mod.EVA))
@@ -24,3 +23,5 @@ function onEffectLose(target, effect)
     local power = effect:getPower()
     target:addMod(tpz.mod.EVA, power)
 end
+
+return effect_object

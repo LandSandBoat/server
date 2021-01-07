@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.MONKS_ROLL
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.SUBTLE_BLOW, effect:getPower())
@@ -16,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.SUBTLE_BLOW, effect:getPower())
 end
+
+return effect_object

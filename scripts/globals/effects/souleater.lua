@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.SOULEATER
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ACC, 25)
@@ -16,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.ACC, 25)
 end
+
+return effect_object

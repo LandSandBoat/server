@@ -1,10 +1,10 @@
 -----------------------------------
--- Physical Shield
+-- tpz.effect.PHYSICAL_SHIELD
 -- Blocks all physical attacks
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if (effect:getPower() < 2) then
@@ -24,3 +24,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.PHYS_ABSORB, 100)
     end
 end
+
+return effect_object

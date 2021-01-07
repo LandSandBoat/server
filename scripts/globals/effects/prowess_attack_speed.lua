@@ -1,11 +1,13 @@
------------------------------------
---
--- tpz.effect.PROWESS : Increased attack speed
---
+----------------------------------------
+-- tpz.effect.PROWESS
+-- Increased attack speed
 -- Note: Doesn't alter TP gain like -delay would, and
 -- doesn't alter JA timers like other sources of haste.
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.HASTE_ABILITY, effect:getPower())
 end
@@ -16,3 +18,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.HASTE_ABILITY, effect:getPower())
 end
+
+return effect_object

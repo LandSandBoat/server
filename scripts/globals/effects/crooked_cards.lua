@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.CROOKED_CARDS
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.CROOKED_CARDS
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.PHANTOM_ROLL, 100)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.PHANTOM_ROLL, 100)
 end
+
+return effect_object

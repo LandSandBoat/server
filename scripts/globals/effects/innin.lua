@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.INNIN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect) --power=30 initially, subpower=20 for enmity
     target:addMod(tpz.mod.EVA, -effect:getPower())
@@ -26,3 +25,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.EVA, -effect:getPower())
     target:delMod(tpz.mod.ENMITY, -effect:getSubPower())
 end
+
+return effect_object

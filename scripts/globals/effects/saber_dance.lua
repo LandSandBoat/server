@@ -1,12 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.SABER_DANCE
---
 -----------------------------------
-
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local saberDanceMerits = target:getMerit(tpz.merit.SABER_DANCE)
@@ -44,3 +41,5 @@ function onEffectLose(target, effect)
     end
     target:delMod(tpz.mod.DOUBLE_ATTACK, effect:getPower())
 end
+
+return effect_object

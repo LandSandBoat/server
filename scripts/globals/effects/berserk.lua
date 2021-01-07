@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.BERSERK
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower()
@@ -22,3 +21,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.RATTP, power)
     target:delMod(tpz.mod.DEFP, -power)
 end
+
+return effect_object

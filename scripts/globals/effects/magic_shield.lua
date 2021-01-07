@@ -1,10 +1,10 @@
 -----------------------------------
---
--- Magic Shield BLOCKS all magic attacks
---
+-- tpz.effect.MAGIC_SHIELD
+-- BLOCKS all magic attacks
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if effect:getPower() == 3 then -- arcane stomp
@@ -45,3 +45,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.MAGIC_ABSORB, 100)
     end
 end
+
+return effect_object

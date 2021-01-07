@@ -1,8 +1,8 @@
------------------------------------
---
---     tpz.effect.UNBRIDLED_WISDOM
---     
------------------------------------
+----------------------------------------
+-- tpz.effect.UNBRIDLED_WISDOM
+----------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
 end
 
@@ -11,3 +11,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

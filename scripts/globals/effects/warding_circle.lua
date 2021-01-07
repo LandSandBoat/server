@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.WARDING_CIRCLE
---
+-- tpz.effect.WARDING_CIRCLE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
    target:addMod(tpz.mod.DEMON_KILLER, effect:getPower())
@@ -16,3 +15,5 @@ end
 function onEffectLose(target, effect)
    target:delMod(tpz.mod.DEMON_KILLER, effect:getPower())
 end
+
+return effect_object

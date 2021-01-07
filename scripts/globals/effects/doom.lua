@@ -1,8 +1,7 @@
 -----------------------------------
---
---
---
+-- tpz.effect.DOOM
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     -- minimum time is 10 seconds!
@@ -23,3 +22,5 @@ function onEffectLose(target, effect)
         target:setHP(0)
     end
 end
+
+return effect_object

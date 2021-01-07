@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.ACCURACY_BOOST
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ACC, effect:getPower())
@@ -25,3 +24,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.ACC, effect:getPower())
     end
 end
+
+return effect_object

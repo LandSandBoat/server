@@ -1,12 +1,12 @@
 --------------------------------------
---
 -- tpz.effect.AUSPICE
---
 -- Power: Used for Enspell Effect
 -- SubPower: Tracks Subtle Blow Bonus
 -- Tier: Used for Enspell Calculation
---
 --------------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --Auspice Reduces TP via adding to your Subtle Blow Mod
@@ -43,3 +43,5 @@ function onEffectLose(target, effect)
     end
 
 end
+
+return effect_object

@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.DEX_DOWN
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.DEX) - effect:getPower()) < 0) then
@@ -23,8 +22,10 @@ function onEffectTick(target, effect)
 end
 
 function onEffectLose(target, effect)
-    downDEX_effect_size = effect:getPower()
+    local downDEX_effect_size = effect:getPower()
     if (downDEX_effect_size > 0) then
         target:delMod(tpz.mod.DEX, -downDEX_effect_size)
     end
 end
+
+return effect_object

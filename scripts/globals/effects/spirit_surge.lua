@@ -1,9 +1,9 @@
------------------------------------
---
+----------------------------------------
 -- tpz.effect.SPIRIT_SURGE
---
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     -- The dragoon's MAX HP increases by % of wyvern MaxHP
@@ -37,3 +37,5 @@ function onEffectLose(target, effect)
     -- The dragoon loses 25% Haste
     target:delMod(tpz.mod.HASTE_ABILITY, 2500)
 end
+
+return effect_object

@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.CLARION_CALL
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.CLARION_CALL
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.MAXIMUM_SONGS_BONUS, 1)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.MAXIMUM_SONGS_BONUS, 1)
 end
+
+return effect_object

@@ -1,8 +1,7 @@
 -----------------------------------
---
 -- tpz.effect.BIND
---
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     effect:setPower(target:getSpeed())
@@ -15,3 +14,5 @@ end
 function onEffectLose(target, effect)
     target:setSpeed(effect:getPower())
 end
+
+return effect_object

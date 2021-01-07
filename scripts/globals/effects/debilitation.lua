@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.DEBILITATION
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 local stats_bits =
 {
@@ -47,3 +48,5 @@ function onEffectLose(target, effect)
     end
     target:setStatDebilitation(0)
 end
+
+return effect_object

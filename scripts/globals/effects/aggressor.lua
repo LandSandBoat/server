@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.AGGRESSOR
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.RACC, effect:getPower())
@@ -20,3 +19,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ACC, 25)
     target:delMod(tpz.mod.EVA, -25)
 end
+
+return effect_object

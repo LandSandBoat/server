@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.PENNANT
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if (target:getPet()) then
@@ -18,3 +19,5 @@ function onEffectLose(target, effect)
         target:getPet():delStatusEffect(tpz.effect.PENNANT)
     end
 end
+
+return effect_object
