@@ -22,12 +22,21 @@ function onTrigger(player, actionId, animationId, speceffect, reaction, message)
     end
 
     -- validate animationId
-    if (animationId == nil) then
+    if animationId == nil then
         error(player, "You must provide an animation ID.")
         return
     end
 
-    if (message == nil) then
+    -- Set default values for optional !injectaction parameters
+    if speceffect == nil then
+        speceffect = 0
+    end
+
+    if reaction == nil then
+        reaction = 0
+    end
+
+    if message == nil then
         message = 185 -- Default message
     end
 
