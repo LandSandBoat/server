@@ -24,6 +24,8 @@
 #include "../../common/utils.h"
 
 #include <array>
+#include <filesystem>
+#include <optional>
 #include <string>
 #include <unordered_map>
 
@@ -81,7 +83,10 @@
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
 #include "../weapon_skill.h"
-#include <optional>
+
+// TODO: Fix path
+#include "../../ext/filewatch/filewatch/FileWatch.hpp"
+std::unique_ptr<filewatch::FileWatch<std::wstring>> watch = nullptr;
 
 namespace luautils
 {
@@ -275,6 +280,49 @@ namespace luautils
         TracyReportLuaMemory(LuaHandle);
 
         return 0;
+    }
+
+    void EnableFilewatcher()
+    {
+        // Prepare script file watcher
+        auto watchReaction = [](const std::filesystem::path& path, const filewatch::Event change_type) {
+            // If a Lua file is modified
+            if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
+            {
+                // React
+                auto real_path = "./scripts/" + path.generic_string();
+                std::cout << "[FileWatch]: " << real_path << "\n";
+
+                // Split into parts
+                std::vector<std::string> parts;
+                for (auto part : path)
+                {
+                    part.replace_extension("");
+                    parts.emplace_back(part.string());
+                }
+
+                // Loads the script, get the entity
+                auto result = lua.safe_script_file(real_path);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    std::cout << "  - Error: " << err.what() << "\n";
+                    return;
+                }
+
+                // Update the cache
+                if (result.return_count())
+                {
+                    // TODO: This is nasty, gotta be a cleaner way of handling this
+                    if (parts[2] == "mobs")
+                    {
+                        lua[sol::update_if_empty]["tpz"][parts[0]][parts[1]][parts[2]][parts[3]] = result;
+                        std::cout << "  - Cached to: " << fmt::format("tpz.{}.{}.{}.{}", parts[0], parts[1], parts[2], parts[3]) << "\n";
+                    }
+                }
+            }
+        };
+        watch = std::make_unique<filewatch::FileWatch<std::wstring>>(L"./scripts/", watchReaction);
     }
 
     /************************************************************************

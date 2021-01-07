@@ -67,10 +67,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
-#ifdef DEBUG
-#include "filewatch/FileWatch.hpp"
-#endif
-
 #ifdef TRACY_ENABLE
 void* operator new(std::size_t count)
 {
@@ -277,6 +273,10 @@ int32 do_init(int32 argc, char** argv)
     PTempBuff = new int8[map_config.buffer_size + 20];
 
     PacketGuard::Init();
+
+#ifdef DEBUG
+    luautils::EnableFilewatcher();
+#endif // DEBUG
 
     ShowStatus("The map-server is " CL_GREEN "ready" CL_RESET " to work...\n");
     ShowMessage("=======================================================================\n");
