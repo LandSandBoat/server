@@ -3,6 +3,7 @@
 -- Magic Shield BLOCKS all magic attacks
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 
@@ -45,3 +46,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.MAGIC_ABSORB, 100)
     end
 end
+
+return effecttbl

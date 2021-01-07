@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:recalculateAbilitiesTable()
@@ -50,3 +51,5 @@ function onEffectLose(target, effect)
     end
     target:recalculateSkillsTable()
 end
+
+return effecttbl

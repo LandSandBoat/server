@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower()
@@ -27,3 +28,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.MEVA, power)
     target:setAnimationSub(0)
 end
+
+return effecttbl

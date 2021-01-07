@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:setMod(tpz.mod.STONESKIN, effect:getPower())
@@ -16,3 +17,5 @@ end
 function onEffectLose(target, effect)
     target:setMod(tpz.mod.STONESKIN, 0)
 end
+
+return effecttbl

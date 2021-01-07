@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.SPIKES, 6)
@@ -21,3 +22,5 @@ function onEffectLose(target, effect)
     target:setMod(tpz.mod.SPIKES_DMG, 0)
     target:delMod(tpz.mod.SHIELDBLOCKRATE, 50)
 end
+
+return effecttbl

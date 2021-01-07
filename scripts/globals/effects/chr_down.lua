@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.CHR) - effect:getPower()) < 0) then
@@ -28,3 +29,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.CHR, -downCHR_effect_size)
     end
 end
+
+return effecttbl

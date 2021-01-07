@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target,effect)
     target:addMod(tpz.mod.FIRERES, -effect:getPower())
@@ -32,3 +33,4 @@ function onEffectLose(target,effect)
     target:delMod(tpz.mod.LIGHTRES, -effect:getPower())
     target:delMod(tpz.mod.DARKRES, -effect:getPower())
 end
+return effecttbl

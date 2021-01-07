@@ -3,6 +3,7 @@
 --      tpz.effect.CAROL
 --  TODO: MOD_CRITICAL_DAMAGE_REDUCTION
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 end
@@ -12,3 +13,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effecttbl

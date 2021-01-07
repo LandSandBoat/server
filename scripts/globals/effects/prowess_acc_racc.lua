@@ -3,6 +3,7 @@
 -- tpz.effect.PROWESS : Enhanced accuracy and ranged accuracy
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 -- This might not be % in retail...If not a % just change ACCP to just ACC
@@ -17,3 +18,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ACC, effect:getPower())
     target:delMod(tpz.mod.RACC, effect:getPower())
 end
+
+return effecttbl

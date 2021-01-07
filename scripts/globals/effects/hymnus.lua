@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 end
@@ -15,3 +16,5 @@ function onEffectLose(target, effect)
         target:sendReraise(effect:getPower())
     end
 end
+
+return effecttbl

@@ -1,9 +1,11 @@
------------------------------------
+----------------------------------------
 --
 -- tpz.effect.ELEMENTAL_SFORZO
 --
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.UDMGMAGIC, -100)
@@ -17,3 +19,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.UDMGMAGIC, -100)
     -- Todo: status resists
 end
+
+return effecttbl

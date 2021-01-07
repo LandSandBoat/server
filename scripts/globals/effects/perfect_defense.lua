@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     effect:setSubPower(effect:getPower()*(256/100))
@@ -61,3 +62,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.STUNRES, effect:getPower())
     target:delMod(tpz.mod.CHARMRES, effect:getPower())
 end
+
+return effecttbl

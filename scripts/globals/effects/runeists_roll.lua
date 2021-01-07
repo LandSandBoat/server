@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 
@@ -17,3 +18,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.MEVA, effect:getPower())
 end
 
+
+return effecttbl

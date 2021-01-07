@@ -1,9 +1,11 @@
------------------------------------
+----------------------------------------
 --
 --     tpz.effect.OVERDRIVE
 --
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.OVERLOAD_THRESH, 5000)
@@ -45,3 +47,5 @@ function onEffectLose(target, effect)
         pet:delMod(tpz.mod.DMG, -50)
     end
 end
+
+return effecttbl

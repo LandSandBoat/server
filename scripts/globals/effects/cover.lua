@@ -3,6 +3,7 @@
 --  tpz.mod.COVER_EFFECT
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 end
@@ -13,3 +14,5 @@ end
 function onEffectLose(target, effect)
     target:setLocalVar("COVER_ABILITY_TARGET", 0)
 end
+
+return effecttbl

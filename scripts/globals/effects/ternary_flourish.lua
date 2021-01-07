@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 --
 --   tpz.effect.TERNARY_FLOURISH
 --
------------------------------------
+----------------------------------------
+local effecttbl = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.TRIPLE_ATTACK, 100)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.TRIPLE_ATTACK, 100)
 end
+
+return effecttbl

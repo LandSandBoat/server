@@ -3,6 +3,7 @@
 --    Companions Roll
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 
@@ -58,3 +59,5 @@ function onEffectLose(target, effect)
         target:delPetMod(tpz.mod.REGEN, effectregen[rollnum])
     end
 end
+
+return effecttbl

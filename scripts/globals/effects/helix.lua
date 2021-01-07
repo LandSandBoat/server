@@ -3,6 +3,7 @@
 --     tpz.effect.HELIX
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -27,3 +28,5 @@ end
 function onEffectLose(target, effect)
 
 end
+
+return effecttbl

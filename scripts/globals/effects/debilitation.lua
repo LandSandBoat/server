@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 local stats_bits =
 {
@@ -47,3 +48,5 @@ function onEffectLose(target, effect)
     end
     target:setStatDebilitation(0)
 end
+
+return effecttbl

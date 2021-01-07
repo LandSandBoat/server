@@ -3,6 +3,7 @@
 --     tpz.effect.HAGAKURE
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 
@@ -18,3 +19,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.SAVETP, 400)
     target:delMod(tpz.mod.TP_BONUS, 1000)
 end
+
+return effecttbl

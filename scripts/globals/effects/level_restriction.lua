@@ -3,6 +3,7 @@
 --     tpz.effect.LEVEL_RESTRICTION
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
@@ -20,3 +21,5 @@ end
 function onEffectLose(target, effect)
     target:levelRestriction(0)
 end
+
+return effecttbl

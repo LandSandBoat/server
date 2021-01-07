@@ -3,6 +3,7 @@
 -- tpz.effect.BATTLEFIELD
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     if target:getPet() then
@@ -35,3 +36,5 @@ function onEventFinish(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 end
+
+return effecttbl

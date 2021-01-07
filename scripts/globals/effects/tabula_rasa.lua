@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     local regen = effect:getSubPower()
@@ -74,3 +75,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.HELIX_DURATION, 108)
     end
 end
+
+return effecttbl

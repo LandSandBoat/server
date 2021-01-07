@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ATTP, 25 + target:getMerit(tpz.merit.LAST_RESORT_EFFECT))
@@ -23,3 +24,5 @@ function onEffectLose(target, effect)
      -- Gear that affects this mod is handled by a Latent Effect because the gear must remain equipped
     target:delMod(tpz.mod.DEFP, -25 - target:getMerit(tpz.merit.LAST_RESORT_EFFECT))
 end
+
+return effecttbl

@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 --
 --     tpz.effect.BOUNTY_SHOT
---     
------------------------------------
+--
+----------------------------------------
+local effecttbl = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.TREASURE_HUNTER, 40)
 end
@@ -12,3 +14,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effecttbl

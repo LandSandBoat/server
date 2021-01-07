@@ -1,6 +1,7 @@
 -----------------------------------
 --     tpz.effect.RAMPART
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     local power = -1 * effect:getPower()
@@ -20,3 +21,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.UDMGMAGIC, power)
     target:delMod(tpz.mod.UDMGRANGE, power)
 end
+
+return effecttbl

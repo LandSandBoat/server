@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     if (effect:getPower() < 2) then
@@ -24,3 +25,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.PHYS_ABSORB, 100)
     end
 end
+
+return effecttbl

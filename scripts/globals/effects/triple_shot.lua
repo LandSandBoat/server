@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 --
 --     tpz.effect.TRIPLE_SHOT
 --
------------------------------------
+----------------------------------------
+local effecttbl = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.EXTRA_DMG_CHANCE, 19)
     target:addMod(tpz.mod.OCC_DO_EXTRA_DMG, 300)
@@ -15,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.EXTRA_DMG_CHANCE, 19)
     target:delMod(tpz.mod.OCC_DO_EXTRA_DMG, 300)
 end
+
+return effecttbl

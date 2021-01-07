@@ -12,6 +12,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.DEF, 15)
@@ -25,3 +26,5 @@ function onEffectLose(target, effect)
     target:delLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.DEF, 15)
     target:delLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.EVA, 15)
 end
+
+return effecttbl

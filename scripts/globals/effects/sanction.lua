@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     -- target:addLatent(tpz.latent.SANCTION_EXP, ?, tpz.mod.EXP_BONUS, ?)
@@ -35,3 +36,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.FOOD_DURATION, 100)
     end
 end
+
+return effecttbl

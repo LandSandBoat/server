@@ -3,6 +3,7 @@
 -- tpz.effect.FIELD_SUPPORT_FOOD
 -- From FoV and GoV
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
@@ -72,3 +73,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.CHR, -10)
     end
 end
+
+return effecttbl

@@ -6,6 +6,7 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 
@@ -19,3 +20,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REGEN_DOWN, effect:getPower())
 
 end
+
+return effecttbl

@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 --
 --   tpz.effect.BEWILDERED_DAZE_5
 --
------------------------------------
+----------------------------------------
+local effecttbl = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.CEVA, -13)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.CEVA, -13)
 end
+
+return effecttbl

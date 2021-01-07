@@ -3,6 +3,7 @@
 -- tpz.effect.PROWESS : Increased treasure casket discovery.
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 -- This might not be % in retail...If not a % just change ATTP to just ATT
@@ -17,3 +18,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ATTP, effect:getPower())
     target:delMod(tpz.mod.RATTP, effect:getPower())
 end
+
+return effecttbl

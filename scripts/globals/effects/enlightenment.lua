@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.INT, effect:getPower())
@@ -16,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.INT, effect:getPower())
     target:delMod(tpz.mod.MND, effect:getPower())
 end
+
+return effecttbl

@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 
@@ -18,3 +19,5 @@ function onEffectLose(target, effect)
     target:delPetMod(tpz.mod.MATT, effect:getPower())
     target:delPetMod(tpz.mod.MACC, effect:getPower())
 end
+
+return effecttbl

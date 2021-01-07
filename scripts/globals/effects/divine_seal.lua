@@ -3,6 +3,7 @@
 --     tpz.effect.DIVINE_SEAL
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -18,3 +19,5 @@ function onEffectLose(target, effect)
 end
 
 
+
+return effecttbl

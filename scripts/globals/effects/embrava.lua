@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     local skill = effect:getPower()
@@ -28,3 +29,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REFRESH, refresh)
     target:delMod(tpz.mod.HASTE_MAGIC, haste)
 end
+
+return effecttbl

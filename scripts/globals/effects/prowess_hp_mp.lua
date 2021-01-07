@@ -3,6 +3,7 @@
 -- tpz.effect.PROWESS : Increased HP and MP
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.HPP, effect:getPower())
@@ -16,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.HPP, effect:getPower())
     target:delMod(tpz.mod.MPP, effect:getPower())
 end
+
+return effecttbl

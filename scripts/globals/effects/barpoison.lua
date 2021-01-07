@@ -3,6 +3,7 @@
 -- tpz.effect.BARPOISON
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.POISONRES, effect:getPower())
@@ -14,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.POISONRES, effect:getPower())
 end
+
+return effecttbl

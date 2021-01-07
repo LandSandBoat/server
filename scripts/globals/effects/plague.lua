@@ -5,6 +5,7 @@
 -- Also, causes Steps to only grant One Finishing Move when Main Job is Dancer.
 -- Normal power is 5.
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.REFRESH_DOWN, math.ceil(effect:getPower() / 2))
@@ -18,3 +19,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REFRESH_DOWN, math.ceil(effect:getPower() / 2))
     target:delMod(tpz.mod.REGAIN_DOWN, effect:getPower()*10)
 end
+
+return effecttbl

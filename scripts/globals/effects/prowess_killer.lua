@@ -3,6 +3,7 @@
 -- tpz.effect.PROWESS : "Killer" effects bonus
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.VERMIN_KILLER, effect:getPower())
@@ -42,3 +43,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.LUMORIAN_KILLER, effect:getPower())
     target:delMod(tpz.mod.LUMINION_KILLER, effect:getPower())
 end
+
+return effecttbl

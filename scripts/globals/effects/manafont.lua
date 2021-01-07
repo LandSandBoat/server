@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 end
@@ -14,3 +15,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effecttbl

@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.COUNTER, (target:getMod(tpz.mod.ZANSHIN)/4))
@@ -16,3 +17,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.COUNTER, (target:getMod(tpz.mod.ZANSHIN)/4))
 end
+
+return effecttbl

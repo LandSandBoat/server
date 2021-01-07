@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.QUAD_ATTACK, effect:getPower())
@@ -24,3 +25,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.CRITHITRATE, effect:getSubPower())
     end
 end
+
+return effecttbl

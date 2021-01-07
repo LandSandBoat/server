@@ -1,9 +1,12 @@
------------------------------------
+----------------------------------------
 -- Hasso
 -- Straight +10% haste +10 Acc and scaling (lv) STR
 -- also -50% FC
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effecttbl = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.STR, effect:getPower())
     target:addMod(tpz.mod.HASTE_ABILITY, 1000)
@@ -18,3 +21,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.HASTE_ABILITY, 1000)
     target:delMod(tpz.mod.ACC, 10)
 end
+
+return effecttbl

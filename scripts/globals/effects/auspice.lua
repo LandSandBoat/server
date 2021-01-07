@@ -7,6 +7,7 @@
 -- Tier: Used for Enspell Calculation
 --
 --------------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     --Auspice Reduces TP via adding to your Subtle Blow Mod
@@ -43,3 +44,5 @@ function onEffectLose(target, effect)
     end
 
 end
+
+return effecttbl

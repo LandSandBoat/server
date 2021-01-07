@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/teleports")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 end
@@ -34,3 +35,5 @@ function onEffectLose(target, effect)
         tpz.teleport.to(target, destination)
     end
 end
+
+return effecttbl

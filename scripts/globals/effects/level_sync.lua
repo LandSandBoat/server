@@ -3,6 +3,7 @@
 --     tpz.effect.LEVEL_SYNC
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
@@ -19,3 +20,5 @@ function onEffectLose(target, effect)
     target:levelRestriction(0)
     target:disableLevelSync()
 end
+
+return effecttbl

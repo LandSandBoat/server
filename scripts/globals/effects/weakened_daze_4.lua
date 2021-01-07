@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.MEVA, -25)
@@ -14,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.MEVA, -25)
 end
+
+return effecttbl

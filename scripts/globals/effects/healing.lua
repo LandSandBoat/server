@@ -11,6 +11,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/roe")
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:setAnimation(33)
@@ -76,3 +77,5 @@ function onEffectLose(target, effect)
     -- Dances with Luopans
     target:setLocalVar("GEO_DWL_Resting", 0)
 end
+
+return effecttbl

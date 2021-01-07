@@ -1,6 +1,13 @@
+----------------------------------------
+--
+--     tpz.effect.ASPIR_SAMBA
+--
+----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
+----------------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
 end
@@ -10,3 +17,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effecttbl

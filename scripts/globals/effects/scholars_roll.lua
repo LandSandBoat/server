@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 require("scripts/globals/status")
 
@@ -16,3 +17,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.CONSERVE_MP, effect:getPower())
 end
+
+return effecttbl

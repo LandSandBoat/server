@@ -3,6 +3,7 @@
 --
 --
 -----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     local pet = target:getPet()
@@ -20,3 +21,5 @@ function onEffectLose(target, effect)
         pet:delMod(tpz.mod.DEX, effect:getPower())
     end
 end
+
+return effecttbl

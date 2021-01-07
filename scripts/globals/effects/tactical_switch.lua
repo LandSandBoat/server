@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 --
 --     tpz.effect.TACTICAL_SWITCH
---     
------------------------------------
+--
+----------------------------------------
+local effecttbl = {}
+
 function onEffectGain(target, effect)
 end
 
@@ -11,3 +13,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effecttbl
