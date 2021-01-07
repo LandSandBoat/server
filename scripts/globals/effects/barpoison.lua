@@ -3,6 +3,8 @@
 -- tpz.effect.BARPOISON
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

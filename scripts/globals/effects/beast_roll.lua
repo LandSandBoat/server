@@ -3,9 +3,9 @@
 --
 --
 -----------------------------------
-local effecttbl = {}
-
 require("scripts/globals/status")
+-----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addPetMod(tpz.mod.ATTP, effect:getPower())

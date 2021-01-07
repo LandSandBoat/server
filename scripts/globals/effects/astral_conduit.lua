@@ -3,6 +3,8 @@
 --     tpz.effect.ASTRAL_CONDUIT
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

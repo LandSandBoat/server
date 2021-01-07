@@ -3,6 +3,8 @@
 --
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 local stats_bits =

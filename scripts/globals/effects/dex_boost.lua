@@ -21,7 +21,7 @@ function onEffectTick(target, effect)
 end
 
 function onEffectLose(target, effect)
-    boostDEX_effect_size = effect:getPower()
+    local boostDEX_effect_size = effect:getPower()
     if (boostDEX_effect_size > 0) then
         target:delMod(tpz.mod.DEX, boostDEX_effect_size)
     end

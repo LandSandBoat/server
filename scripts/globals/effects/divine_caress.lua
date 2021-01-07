@@ -3,6 +3,8 @@
 --     tpz.effect.DIVINE_CARESS
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

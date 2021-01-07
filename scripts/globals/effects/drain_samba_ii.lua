@@ -1,10 +1,6 @@
 -----------------------------------
 --
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/magic")
------------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

@@ -3,9 +3,9 @@
 --    Companions Roll
 --
 -----------------------------------
-local effecttbl = {}
-
 require("scripts/globals/status")
+-----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}

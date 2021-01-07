@@ -22,7 +22,6 @@ end
 function onEffectTick(target,effect)
 end
 
-
 function onEffectLose(target,effect)
     target:delMod(tpz.mod.FIRERES, -effect:getPower())
     target:delMod(tpz.mod.ICERES, -effect:getPower())
@@ -33,4 +32,5 @@ function onEffectLose(target,effect)
     target:delMod(tpz.mod.LIGHTRES, -effect:getPower())
     target:delMod(tpz.mod.DARKRES, -effect:getPower())
 end
+
 return effecttbl

@@ -3,6 +3,8 @@
 --   tpz.effect.BEWILDERED_DAZE_2
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

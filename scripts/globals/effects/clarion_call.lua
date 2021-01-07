@@ -3,6 +3,8 @@
 --     tpz.effect.CLARION_CALL
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

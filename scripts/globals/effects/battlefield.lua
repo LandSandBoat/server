@@ -3,6 +3,8 @@
 -- tpz.effect.BATTLEFIELD
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)
@@ -28,13 +30,9 @@ function onEffectLose(target, effect)
 end
 
 function onEventUpdate(player, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
 end
 
 function onEventFinish(player, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
 end
 
 return effecttbl

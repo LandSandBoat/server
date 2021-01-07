@@ -3,6 +3,8 @@
 --      tpz.effect.BLOOD_RAGE
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

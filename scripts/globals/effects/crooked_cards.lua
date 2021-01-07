@@ -3,6 +3,8 @@
 --     tpz.effect.CROOKED_CARDS
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)
