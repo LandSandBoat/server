@@ -3,6 +3,8 @@
 -- tpz.effect.PROWESS : "Killer" effects bonus
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

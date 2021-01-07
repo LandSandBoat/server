@@ -3,6 +3,8 @@
 -- tpz.effect.PROWESS : Enhanced magic acc. and magic atk
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

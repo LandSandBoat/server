@@ -3,6 +3,8 @@
 -- tpz.effect.PROWESS : Enhanced accuracy and ranged accuracy
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

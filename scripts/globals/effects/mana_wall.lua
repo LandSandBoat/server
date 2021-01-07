@@ -3,6 +3,8 @@
 --     tpz.effect.MANA_WALL
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

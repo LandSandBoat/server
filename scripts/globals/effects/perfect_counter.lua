@@ -3,6 +3,8 @@
 --     tpz.effect.PERFECT_COUNTER
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

@@ -3,6 +3,8 @@
 --     tpz.effect.OVERKILL
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

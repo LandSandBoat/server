@@ -3,6 +3,8 @@
 -- tpz.effect.PROWESS : Increased HP and MP
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

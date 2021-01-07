@@ -3,9 +3,9 @@
 -- Magic Shield BLOCKS all magic attacks
 --
 -----------------------------------
-local effecttbl = {}
-
 require("scripts/globals/status")
+-----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     if effect:getPower() == 3 then -- arcane stomp

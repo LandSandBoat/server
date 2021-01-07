@@ -3,6 +3,8 @@
 -- tpz.effect.PROWESS : Treasure Hunter bonus
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)
