@@ -289,10 +289,6 @@ namespace luautils
             // If a Lua file is modified
             if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
             {
-                // React
-                auto real_path = "./scripts/" + path.generic_string();
-                std::cout << "[FileWatch]: " << real_path << "\n";
-
                 // Split into parts
                 std::vector<std::string> parts;
                 for (auto part : path)
@@ -302,7 +298,7 @@ namespace luautils
                 }
 
                 // Loads the script, get the entity
-                auto result = lua.safe_script_file(real_path);
+                auto result = lua.safe_script_file("./scripts/" + path.generic_string());
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -316,7 +312,7 @@ namespace luautils
                     // TODO: This is nasty, gotta be a cleaner way of handling this
                     if (parts[2] == "mobs")
                     {
-                        lua[sol::update_if_empty]["tpz"][parts[0]][parts[1]][parts[2]][parts[3]] = result;
+                        lua[sol::create_if_nil]["tpz"][parts[0]][parts[1]][parts[2]][parts[3]] = result;
                         std::cout << "  - Cached to: " << fmt::format("tpz.{}.{}.{}.{}", parts[0], parts[1], parts[2], parts[3]) << "\n";
                     }
                 }
@@ -2060,8 +2056,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string filename;
-        sol::reference destination;
+        // TODO: How to capture destination ref, rather than all this repetition
 
         if (PMob->objtype == TYPE_MOB)
         {
@@ -2069,35 +2064,58 @@ namespace luautils
             std::string zone_name = (const char*)PMob->loc.zone->GetName();
             std::string mob_name  = (const char*)PMob->GetName();
 
-            filename = fmt::format("scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
-            destination = lua[sol::create_if_nil]["tpz"]["zones"][zone_name]["mobs"][mob_name];
+            auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
+
+            // Try and load file
+            auto file_result = lua.safe_script_file(filename);
+
+            // If the entity object has been returned, cache it!
+            if (file_result.valid() && file_result.return_count())
+            {
+                lua[sol::create_if_nil]["tpz"]["zones"][zone_name]["mobs"][mob_name] = file_result;
+            }
+            else // If not, create an empty entry so we can safely fail to find it later
+            {
+                lua[sol::create_if_nil]["tpz"]["zones"][zone_name]["mobs"][mob_name] = lua.create_table();
+            }
         }
         else if (PMob->objtype == TYPE_PET)
         {
             std::string mob_name = static_cast<CPetEntity*>(PMob)->GetScriptName();
 
-            filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
-            destination = lua[sol::create_if_nil]["tpz"]["globals"]["pets"][mob_name];
+            auto filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
+
+            // Try and load file
+            auto file_result = lua.safe_script_file(filename);
+
+            // If the entity object has been returned, cache it!
+            if (file_result.valid() && file_result.return_count())
+            {
+                lua[sol::create_if_nil]["tpz"]["globals"]["pets"][mob_name] = file_result;
+            }
+            else // If not, create an empty entry so we can safely fail to find it later
+            {
+                lua[sol::create_if_nil]["tpz"]["globals"]["pets"][mob_name] = lua.create_table();
+            }
         }
         else if (PMob->objtype == TYPE_TRUST)
         {
             std::string mob_name = (const char*)PMob->GetName();
 
-            filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
-            destination = lua[sol::create_if_nil]["tpz"]["globals"]["spells"]["trust"][mob_name];
-        }
+            auto filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
 
-        // Try and load file
-        auto file_result = lua.safe_script_file(filename);
+            // Try and load file
+            auto file_result = lua.safe_script_file(filename);
 
-        // If the entity object has been returned, cache it!
-        if (file_result.valid() && file_result.return_count())
-        {
-            destination = file_result;
-        }
-        else // If not, create an empty entry so we can safely fail to find it later
-        {
-            destination = lua.create_table();
+            // If the entity object has been returned, cache it!
+            if (file_result.valid() && file_result.return_count())
+            {
+                lua[sol::create_if_nil]["tpz"]["globals"]["spells"]["trust"][mob_name] = file_result;
+            }
+            else // If not, create an empty entry so we can safely fail to find it later
+            {
+                lua[sol::create_if_nil]["tpz"]["globals"]["spells"]["trust"][mob_name] = lua.create_table();
+            }
         }
     }
 
