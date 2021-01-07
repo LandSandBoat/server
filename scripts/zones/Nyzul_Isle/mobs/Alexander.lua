@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
@@ -42,7 +43,7 @@ function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.SHALL_BE_JUDGED)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- BG Wiki: "He will use this ability at 50% of his HP and several times again as his health decreases."
     -- ffxiclopedia: "Alexander will use this ability as his next TP move once its HP falls below 50%."
     if (mob:getHPP() <= 50 and mob:getTP() >= 1000 and mob:getLocalVar("DivineJudgement") == 0) then
@@ -68,3 +69,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

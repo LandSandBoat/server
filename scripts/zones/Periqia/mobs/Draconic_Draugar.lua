@@ -2,6 +2,7 @@
 -- Area: Periqia (Requiem)
 --  Mob: Draconic Draugar
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local instance = mob:getInstance()
@@ -17,3 +18,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

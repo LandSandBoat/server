@@ -4,15 +4,18 @@
 -----------------------------------
 require("scripts/globals/promyvion")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:SetAutoAttackEnabled(false) -- Receptacles only use TP moves.
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     tpz.promyvion.receptacleOnFight(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
     tpz.promyvion.receptacleOnDeath(mob, isKiller)
 end
+
+return entity

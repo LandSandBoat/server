@@ -6,6 +6,7 @@ require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Fort_Ghelsba/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 174)
@@ -16,3 +17,5 @@ function onMobDespawn(mob)
     GetMobByID(ID.mob.ORCISH_PANZER):setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
     mob:setLocalVar("pop", os.time() + math.random(75600, 86400)) -- 21 to 24 hours
 end
+
+return entity

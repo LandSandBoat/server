@@ -5,6 +5,8 @@
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
 require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -12,3 +14,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.ZORAAL_JA_S_PKUUCHA_PH, 5, math.random(1800, 43200)) -- 30 minutes to 12 hours
 end
+
+return entity

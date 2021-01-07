@@ -1,9 +1,11 @@
------------------------------------
+----------------------------------------
 -- Area: QuBia_Arena
 --  Mob: Worgbut of Clan Death
 -- Mission 9-2 SANDO
------------------------------------
+----------------------------------------
 local ID = require("scripts/zones/QuBia_Arena/IDs")
+-----------------------------------
+local entity = {}
 
 function phaseChangeReady(battlefield)
     local inst = battlefield:getArea()
@@ -23,3 +25,5 @@ function onMobDeath(mob, player, isKiller)
         player:startEvent(32004, 0, 0, 4)
     end
 end
+
+return entity

@@ -4,12 +4,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("hpTrigger", math.random(10, 75))
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local hpTrigger = mob:getLocalVar("hpTrigger")
     if (mob:getLocalVar("SoulVoice") == 0 and mob:getHPP() <= hpTrigger) then
         mob:setLocalVar("SoulVoice", 1)
@@ -43,3 +44,5 @@ end
 function onMobDespawn(mob)
     mob:setLocalVar("repop", mob:getBattleTime()) -- This get erased on respawn automatic.
 end
+
+return entity

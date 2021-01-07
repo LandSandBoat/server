@@ -5,13 +5,14 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Set a random animation when it spawns
     mob:setAnimationSub(math.random(1, 4))
 end
 
-function onMobFight(mob)
+entity.onMobFight = function(mob)
     -- Forms: 0 = Closed  1 = Closed  2 = Open 3 = Closed
     -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
     -- ..when attacked will change states every minute or so..
@@ -66,3 +67,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

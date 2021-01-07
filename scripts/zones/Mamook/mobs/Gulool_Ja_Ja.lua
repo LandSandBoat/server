@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Mamook/IDs")
 mixins = {require("scripts/mixins/job_special")}
 
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMod(tpz.mod.DOUBLE_ATTACK, 20)
@@ -20,7 +21,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     if (mob:getBattleTime() % 60 < 2 and mob:getBattleTime() > 10) then
         if (not GetMobByID(ID.mob.GULOOL_JA_JA + 1):isSpawned()) then
@@ -57,3 +58,5 @@ end
 function onMobDespawn(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
+
+return entity

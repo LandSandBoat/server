@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Jugner_Forest/IDs")
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- If respawn and variable is not 0, then it respawned before someone killed all 10 crabs
@@ -32,3 +33,5 @@ function onMobDespawn(mob)
         SpawnMob(ID.mob.KING_ARTHRO) -- Pop King Arthro !
     end
 end
+
+return entity

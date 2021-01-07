@@ -9,6 +9,7 @@ mixins =
 }
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 133, 1, tpz.regime.type.FIELDS)
@@ -18,3 +19,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(75600, 77400)) -- 21 to 21.5 hours
 end
+
+return entity

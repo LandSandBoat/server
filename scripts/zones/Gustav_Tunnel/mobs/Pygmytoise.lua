@@ -5,8 +5,9 @@
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     --[[
     Attempt to Aproximate retail damage ratios,
     the current resist rates can't do the job..
@@ -27,3 +28,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 770, 2, tpz.regime.type.GROUNDS)
 end
+
+return entity

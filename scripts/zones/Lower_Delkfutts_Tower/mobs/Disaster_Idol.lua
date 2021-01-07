@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local DayOfTheWeek = VanadielDayOfTheWeek()
@@ -12,7 +13,7 @@ function onMobEngaged(mob, target)
     mob:setLocalVar("DayOfTheWeek", DayOfTheWeek + 1)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- TODO: Has level mimic of person who spawned it. Minimum level 65. HP should scale accordingly.
 
     local DayOfTheWeek = VanadielDayOfTheWeek()
@@ -29,3 +30,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("COP_Tenzen_s_Path", 7)
     end
 end
+
+return entity

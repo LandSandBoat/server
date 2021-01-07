@@ -8,6 +8,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Set AnimationSub to 0, put it in pot form
@@ -24,7 +25,7 @@ function onPath(mob)
     end
 end
 
-function onMobFight(mob)
+entity.onMobFight = function(mob)
 
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar("changeTime")
@@ -53,3 +54,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

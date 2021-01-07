@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 -- Area: East Ronfaure [S]
 --   NM: Melusine
------------------------------------
+----------------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 482)
@@ -12,3 +14,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(7200 + math.random(0, 10) * 60)
 end
+
+return entity

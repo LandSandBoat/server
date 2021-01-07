@@ -2,8 +2,9 @@
 -- Area: Spire of Dem
 --  Mob: Progenerator
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
 end
 
 function onMobSpawn(mob)
@@ -16,7 +17,7 @@ end
 function onMobWeaponSkill(target, mob, skill)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
@@ -28,3 +29,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

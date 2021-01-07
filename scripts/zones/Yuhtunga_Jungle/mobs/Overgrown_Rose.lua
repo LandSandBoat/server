@@ -3,6 +3,8 @@
 --  Mob: Overgrown Rose
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     if mob:getID() == ID.mob.ROSE_GARDEN_PH then
@@ -16,7 +18,7 @@ function onMobDisengage(mob)
     end
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- Rose Garden PH has been left alone for 10.25 hours
     if mob:getID() == ID.mob.ROSE_GARDEN_PH and os.time() > mob:getLocalVar("timeToGrow") then
         DisallowRespawn(ID.mob.ROSE_GARDEN_PH, true)
@@ -29,3 +31,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

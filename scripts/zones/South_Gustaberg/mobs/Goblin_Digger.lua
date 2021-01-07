@@ -4,7 +4,6 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
-
 local entity = {}
 
 function onMobDeath(mob, player, isKiller)

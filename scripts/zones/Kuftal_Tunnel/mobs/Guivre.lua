@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 -- Area: Kuftal Tunnel
 --   NM: Guivre
------------------------------------
+----------------------------------------
 require("scripts/globals/pathfind")
+-----------------------------------
+local entity = {}
 
 local pathNodes =
 {
@@ -299,7 +301,7 @@ function onMobSpawn(mob)
     onPath(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
         mob:pathThrough(tpz.path.first(pathNodes))
@@ -313,3 +315,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(64800, 86400)) -- 18 to 24 hours
 end
+
+return entity

@@ -4,6 +4,7 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -21,3 +22,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
+
+return entity

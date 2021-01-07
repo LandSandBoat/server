@@ -7,8 +7,9 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
 end
 
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option, target)
     end
 
 end
+
+return entity

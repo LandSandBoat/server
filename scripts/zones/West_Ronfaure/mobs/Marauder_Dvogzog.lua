@@ -7,8 +7,9 @@ require("scripts/globals/missions")
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
@@ -19,3 +20,5 @@ function onMobDeath(mob, player, isKiller)
     end
     tpz.regime.checkRegime(player, mob, 4, 1, tpz.regime.type.FIELDS)
 end
+
+return entity

@@ -1,11 +1,12 @@
------------------------------------
+----------------------------------------
 -- Area: Riverne - Site B01 (BCNM)
 --   NM: Bahamut
------------------------------------
+----------------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/status")
-
+-----------------------------------
+local entity = {}
 
 function onMobInitialise(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
@@ -18,7 +19,7 @@ function onMobSpawn(mob)
     mob:addStatusEffect(tpz.effect.SHELL, 24, 0, 1800)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local MegaFlareQueue = mob:getLocalVar("MegaFlareQueue")
     local MegaFlareTrigger = mob:getLocalVar("MegaFlareTrigger")
     local MegaFlareUses = mob:getLocalVar("MegaFlareUses")
@@ -95,3 +96,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

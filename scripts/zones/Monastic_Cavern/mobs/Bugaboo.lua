@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1) -- "Has additional effect: Drain ..."
     mob:setMod(tpz.mod.UFASTCAST, 50) -- "His spells have very fast cast, my guess would be close to 50% less casting time."
 end
@@ -17,3 +18,5 @@ end
 function onMobDeath(mob, player, isKiller)
     player:setCharVar("circleTime", 8) -- Set flag so that final CS will show when you interact with alter again
 end
+
+return entity

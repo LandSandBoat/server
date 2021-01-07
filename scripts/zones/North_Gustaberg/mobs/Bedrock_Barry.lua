@@ -6,6 +6,7 @@ require("scripts/globals/hunts")
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addStatusEffect(tpz.effect.STONESKIN, math.random(30, 40), 0, 300)
@@ -20,3 +21,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(3600, 4200))
 end
+
+return entity

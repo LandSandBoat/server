@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 -----------------------------------
+local entity = {}
 
 function disturbMob(mob)
     local offset = mob:getID() - ID.mob.HELIODROMOS_PH_OFFSET
@@ -21,11 +22,11 @@ function onMobEngaged(mob, target)
     disturbMob(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- no PH has been disturbed for 12-15 hours
     if (os.time() > GetServerVariable("Heliodromos_ToD")) then
         local noHeliodromosSpawned = true
@@ -50,3 +51,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

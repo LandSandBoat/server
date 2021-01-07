@@ -3,6 +3,8 @@
 --  Mob: Light Elemental
 -----------------------------------
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local mobID = mob:getID()
@@ -32,3 +34,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         }
     end
 end
+
+return entity

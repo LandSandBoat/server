@@ -4,12 +4,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local form = mob:getAnimationSub()
 
     -- Mammets seem to be able to change to any given form, per YouTube videos
@@ -54,3 +55,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

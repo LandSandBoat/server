@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.MULTI_HIT, 6)
     mob:setMod(tpz.mod.BINDRES, 20)
     mob:setMod(tpz.mod.BLINDRES, 20)
@@ -43,7 +44,7 @@ function removeTentacle(mob, tentacles)
     mob:addMod(tpz.mod.GRAVITYRES, 10)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local tentacles = mob:getLocalVar("tentacles")
 
     if tentacles > 0 then
@@ -60,3 +61,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

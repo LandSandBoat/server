@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("maxBabies", 2)
@@ -21,3 +22,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("PromathiaStatus", 2)
     end
 end
+
+return entity

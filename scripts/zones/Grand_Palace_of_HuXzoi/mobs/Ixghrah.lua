@@ -5,6 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     if (mob:getMod(tpz.mod.SLASHRES)) then mob:setMod(tpz.mod.SLASHRES, 1000); end
@@ -13,7 +14,7 @@ function onMobSpawn(mob)
     if (mob:getMod(tpz.mod.HTHRES)) then mob:setMod(tpz.mod.HTHRES, 1000); end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
 
     if (mob:getBattleTime() - changeTime > 60) then
@@ -27,3 +28,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("PromathiaStatus", 2)
     end
 end
+
+return entity

@@ -5,6 +5,7 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     -- check for Cleuvarion death
@@ -12,3 +13,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("KnightStalker_Kill", 1)
     end
 end
+
+return entity

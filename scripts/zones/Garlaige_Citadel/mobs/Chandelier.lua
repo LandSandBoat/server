@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     GetMobByID(ID.mob.CHANDELIER):setRespawnTime(0)
@@ -23,3 +24,5 @@ end
 function onMobDeath(mob, player, isKiller)
     GetNPCByID(ID.npc.CHANDELIER_QM):setLocalVar("chandelierCooldown", os.time() + 600) -- 10 minute timeout
 end
+
+return entity

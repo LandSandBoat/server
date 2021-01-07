@@ -1,11 +1,13 @@
------------------------------------
+----------------------------------------
 -- Area: QuBia_Arena
 --  Mob: Rojgnoj's Right Hand
 -- Mission 9-2 SANDO
------------------------------------
+----------------------------------------
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
+-----------------------------------
+local entity = {}
 
 function phaseChangeReady(battlefield)
     local inst = battlefield:getArea()
@@ -18,7 +20,7 @@ function phaseChangeReady(battlefield)
     return true
 end
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.SLEEPRES, 50)
 end
 
@@ -31,3 +33,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

@@ -7,8 +7,9 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     -- 60% fast cast, -75% physical damage taken, 10tp/tick regain, no standback
     mob:addMod(tpz.mod.UFASTCAST, 60)
     mob:addMod(tpz.mod.UDMGPHYS, -75)
@@ -25,3 +26,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

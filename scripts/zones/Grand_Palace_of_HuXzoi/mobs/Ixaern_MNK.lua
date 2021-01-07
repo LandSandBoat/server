@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- adjust drops based on number of HQ Aern Organs traded to QM
@@ -23,7 +24,7 @@ function onMobSpawn(mob)
     mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- The mob gains a huge boost when it 2hours to attack speed and attack.
     -- It forces the minions to 2hour as well. Wiki says 50% but all videos show 60%.
     if (mob:getLocalVar("BracerMode") == 0) then
@@ -63,3 +64,5 @@ function onMobDespawn(mob)
     end
     qm:updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME)
 end
+
+return entity

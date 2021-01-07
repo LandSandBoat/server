@@ -4,6 +4,8 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     local mobID = mob:getID()
@@ -49,3 +51,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
 
     end
 end
+
+return entity

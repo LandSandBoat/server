@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -24,3 +25,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

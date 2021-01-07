@@ -4,12 +4,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     SetServerVariable("Heliodromos_Despawn", 0)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local Heliodromos_Despawn = GetServerVariable("Heliodromos_Despawn")
 
     -- 10 minutes have passed since first heliodromos dies. despawn any remaining heliodromos.
@@ -58,3 +59,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

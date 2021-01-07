@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
 end
@@ -21,3 +22,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

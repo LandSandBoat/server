@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -13,3 +14,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.DRUMSKULL_ZOGDREGG_PH, 10, 3600) -- 1 hour
 end
+
+return entity

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -12,3 +13,5 @@ end
 function onMobDespawn(mob)
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar("activeTime", os.time()+math.random(60*9, 60*15))
 end
+
+return entity

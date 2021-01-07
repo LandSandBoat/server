@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addStatusEffectEx(tpz.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
@@ -13,7 +14,7 @@ function onMobSpawn(mob)
     -- If effect is stolen, he will recast it instantly.
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local motherGlobe = mob:getID()
 
     -- Keep pets linked
@@ -60,3 +61,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(10800, 21600)) -- 3 to 6 hours
 end
+
+return entity

@@ -5,7 +5,9 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
-function onMobInitialize(mob)
+local entity = {}
+
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -16,7 +18,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("HPP", 90)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local defUpHPP = mob:getLocalVar("HPP")
     if mob:getHPP() <= defUpHPP then
         if mob:getHPP() > 10 then
@@ -29,3 +31,5 @@ end
 
 function onMobDeath(mob, killer)
 end
+
+return entity

@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Monastic_Cavern/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.ORC_KING_ENGAGE)
@@ -29,3 +30,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(nqId)
     GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
 end
+
+return entity

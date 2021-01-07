@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -17,3 +18,5 @@ end
 function onMobDeath(mob, player, isKiller)
     GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
 end
+
+return entity

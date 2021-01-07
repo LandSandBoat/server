@@ -5,6 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/magic") -- no spells are currently set due to lack of info
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Set core Skin and mob elemental bonus
@@ -13,7 +14,7 @@ function onMobSpawn(mob)
     mob:setModelId(1167) -- light
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("roamTime")
     local roamForm
     if (os.time() - roamTime > 60) then
@@ -26,7 +27,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
     local battleForm
 
@@ -42,3 +43,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

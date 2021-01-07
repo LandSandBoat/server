@@ -2,8 +2,9 @@
 -- Area: Lufaise Meadows
 --  Mob: Colorful Leshy
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setLocalVar("timeToGrow", os.time() + math.random(43200, 86400)) -- Colorful in 12 to 24 hours
 end
 
@@ -19,11 +20,11 @@ function onMobEngaged(mob, target)
     disturbMob(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     disturbMob(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local ph = mob:getID()
     local nm = GetMobByID(ph + 1)
     if (not nm:isSpawned() and os.time() > nm:getLocalVar("timeToGrow")) then
@@ -53,3 +54,5 @@ function onMobDespawn(mob)
         mob:setLocalVar("timeToGrow", os.time() + math.random(3200, 86400)) -- Colorful in 12 to 24 hours
     end
 end
+
+return entity

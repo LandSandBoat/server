@@ -5,8 +5,9 @@
 require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
     mob:setMod(tpz.mod.DOUBLE_ATTACK, 75) -- "Has a high but not 100% Double Attack rate."
 end
@@ -22,3 +23,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 292)
 end
+
+return entity

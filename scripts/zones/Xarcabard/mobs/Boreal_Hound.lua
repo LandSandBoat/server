@@ -9,6 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Failsafe to make sure NPC is down when NM is up
@@ -30,3 +31,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

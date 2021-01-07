@@ -8,6 +8,8 @@ require("scripts/globals/settings")
 require("scripts/globals/limbus")
 require("scripts/globals/status")
 require("scripts/globals/magic")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     tpz.mix.jobSpecial.config(mob, {
@@ -22,7 +24,7 @@ function onMobSpawn(mob)
     mob:setModelId(1169)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local delay = mob:getLocalVar("delay")
     local LastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
@@ -68,3 +70,5 @@ function onMobDespawn(mob)
     local pos = math.random(1, 5)
     GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM):setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][3])
 end
+
+return entity

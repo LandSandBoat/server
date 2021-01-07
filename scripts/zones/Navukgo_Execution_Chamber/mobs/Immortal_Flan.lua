@@ -5,6 +5,7 @@
 require("scripts/globals/battlefield")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
 ----------------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local bf = mob:getBattlefield()
@@ -30,8 +31,10 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

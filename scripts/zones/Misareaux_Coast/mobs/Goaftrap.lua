@@ -1,10 +1,12 @@
------------------------------------
+----------------------------------------
 -- Area: Misareaux Coast
 --   NM: Goaftrap
------------------------------------
+----------------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.DOUBLE_ATTACK, 20)
 end
 
@@ -15,3 +17,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(5400, 7200)) -- 90 to 120 min
 end
+
+return entity

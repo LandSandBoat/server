@@ -3,6 +3,8 @@
 --  Mob: Percipient Zoraal Ja
 -----------------------------------
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     -- make pkuucha killable
@@ -14,3 +16,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

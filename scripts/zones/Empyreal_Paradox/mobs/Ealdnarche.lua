@@ -3,8 +3,9 @@
 --  Mob: Eald'narche
 -- Apocalypse Nigh Final Fight
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.TELEPORT_CD, 30)
     mob:setMobMod(tpz.mobMod.TELEPORT_START, 988)
     mob:setMobMod(tpz.mobMod.TELEPORT_END, 989)
@@ -18,3 +19,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

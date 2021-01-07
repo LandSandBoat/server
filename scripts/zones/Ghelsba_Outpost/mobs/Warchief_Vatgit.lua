@@ -7,6 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 
@@ -19,3 +20,5 @@ function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.WARCHIEF_WRECKER)
 
 end
+
+return entity

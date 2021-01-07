@@ -1,10 +1,9 @@
-------------------------------
+-----------------------------------
 -- Area: South Gustaberg
 --   NM: Leaping Lizzy
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
-
+-----------------------------------
 local entity = {}
 
 function onMobDeath(mob, player, isKiller)

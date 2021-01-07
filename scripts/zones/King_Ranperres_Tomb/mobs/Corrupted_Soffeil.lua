@@ -6,8 +6,9 @@ local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMod(tpz.mod.SLEEPRES, 50)
     mob:setMod(tpz.mod.LULLABYRES, 50)
@@ -27,3 +28,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("MissionStatus", 2)
     end
 end
+
+return entity

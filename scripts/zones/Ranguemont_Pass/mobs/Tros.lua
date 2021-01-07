@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     if (player:hasKeyItem(tpz.ki.MERTAIRES_BRACELET)) then
@@ -13,3 +14,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Tros_Timer", os.time())
     end
 end
+
+return entity

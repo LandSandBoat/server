@@ -1,10 +1,12 @@
------------------------------------
+----------------------------------------
 -- Area: Full Moon Fountain
 --  Mob: Tatzlwurm
 -- Windurst Mission 9-2
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     local battlefield = mob:getBattlefield()
@@ -22,3 +24,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity
