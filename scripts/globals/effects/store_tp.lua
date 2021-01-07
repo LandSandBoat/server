@@ -3,6 +3,8 @@
 -- Store TP Plus
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

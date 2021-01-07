@@ -3,6 +3,8 @@
 -- Subtle Blow Plus Effect
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

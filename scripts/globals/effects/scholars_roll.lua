@@ -3,9 +3,9 @@
 --
 --
 -----------------------------------
-local effecttbl = {}
-
 require("scripts/globals/status")
+-----------------------------------
+local effecttbl = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.CONSERVE_MP, effect:getPower())

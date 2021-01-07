@@ -3,6 +3,8 @@
 --     tpz.effect.SUBTLE_SORCERY
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

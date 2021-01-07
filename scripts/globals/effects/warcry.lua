@@ -7,7 +7,6 @@
 -- ffxiclopedia is wrong, bg wiki right. See link where testing was done.
 -- http://www.bluegartr.com/threads/108199-Random-Facts-Thread-Other?p=5367464&viewfull=1#post5367464
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local effecttbl = {}
