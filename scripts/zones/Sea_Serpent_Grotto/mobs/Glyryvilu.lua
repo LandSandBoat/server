@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
---  Mob: Glyryvilu
--- Note: Popped by qm1
--- !pos 135x -9y 220z
+-- Mob: Glyryvilu
+-- Note: Popped by qm5
+-- !pos 135 -9 220
 -- Involved in Quest: An Undying Pledge
 -----------------------------------
 

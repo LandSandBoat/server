@@ -1,23 +1,21 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
---  NPC: qm1 (???)
+--  NPC: qm5 (???)
 -- Quests: An Undying Pledge
--- !pos 135x -9y 220z
+-- !pos 135 -9 220
 -----------------------------------
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------
 
 function onTrigger(player, npc)
     if player:getCharVar("anUndyingPledgeCS") == 2 and player:getCharVar("anUndyingPledgeNM_killed") == 1 then
         player:startEvent(18)
-    elseif 
-        player:getCharVar("anUndyingPledgeCS") == 2 and 
+    elseif
+        player:getCharVar("anUndyingPledgeCS") == 2 and
         player:getCharVar("anUndyingPledgeNM_killed") == 0 and
-        npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, {hide=0}) 
+        npcUtil.popFromQM(player, npc, ID.mob.GLYRYVILU, {hide=0})
     then
         player:messageSpecial(ID.text.BODY_NUMB_DREAD)
     else
@@ -27,7 +25,7 @@ end
 
 
 function onEventFinish(player, csid, option)
-    if (csid == 18) then
+    if  csid == 18 then
         player:addKeyItem(tpz.ki.CALIGINOUS_BLADE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CALIGINOUS_BLADE)
         player:setCharVar("anUndyingPledgeCS", 3)

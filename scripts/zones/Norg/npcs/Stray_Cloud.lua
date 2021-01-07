@@ -4,12 +4,9 @@
 -- Starts and Ends Quest: An Undying Pledge
 -- !pos-20.617, 1.097, -29.165, 133
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
-local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 
 
@@ -17,14 +14,14 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local anUndyingPledge = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE) 	
+    local anUndyingPledge = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
 
     if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 then
         player:startEvent(225) -- Start quest
     elseif anUndyingPledge == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CALIGINOUS_BLADE) then
         player:startEvent(227) -- Quest Finish
-    elseif anUndyingPledge == QUEST_ACCEPTED and player:getCharVar("anUndyingPledgeCS") == 1 then	
-	    player:startEvent(228) -- Extra Dialogue
+    elseif anUndyingPledge == QUEST_ACCEPTED and player:getCharVar("anUndyingPledgeCS") == 1 then
+        player:startEvent(228) -- Extra Dialogue
     elseif anUndyingPledge == QUEST_ACCEPTED and player:getCharVar("anUndyingPledgeCS") == 2 then
         player:startEvent(229) -- Extra Dialogue
     elseif anUndyingPledge == QUEST_COMPLETED then
@@ -33,7 +30,7 @@ function onTrigger(player, npc)
         player:startEvent(231) -- Standard Conversation
     end
 
-end 
+end
 
 
 function onEventUpdate(player, csid, option)

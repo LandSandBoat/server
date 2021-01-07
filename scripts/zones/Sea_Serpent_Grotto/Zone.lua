@@ -6,8 +6,6 @@
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/treasure")
-require("scripts/globals/zone")
-require("scripts/globals/keyitems")
 -----------------------------------
 
 function onInitialize(zone)
