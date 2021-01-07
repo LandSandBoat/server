@@ -5,7 +5,6 @@
 --
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
-require("scripts/globals/status")
 -----------------------------------
 local effecttbl = {}
 

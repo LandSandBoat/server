@@ -4,6 +4,8 @@
 -- Reduces TP Gain By a % Factor
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

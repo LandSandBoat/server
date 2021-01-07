@@ -3,6 +3,8 @@
 --     tpz.effect.LEVEL_SYNC
 --
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

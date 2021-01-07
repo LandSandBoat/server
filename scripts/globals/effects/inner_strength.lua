@@ -3,6 +3,8 @@
 --     tpz.effect.INNER_STRENGTH
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

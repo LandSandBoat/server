@@ -3,6 +3,8 @@
 --     tpz.effect.IMPETUS_EFFECT
 --
 ----------------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

@@ -3,8 +3,6 @@
 -- tpz.effect.HASTE_SAMBA
 --
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

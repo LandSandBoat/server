@@ -3,6 +3,8 @@
 -- tpz.effect.FIELD_SUPPORT_FOOD
 -- From FoV and GoV
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local effecttbl = {}
 
 function onEffectGain(target, effect)

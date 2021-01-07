@@ -3,14 +3,11 @@
 --     tpz.effect.HELIX
 --
 -----------------------------------
+require("scripts/globals/utils")
+-----------------------------------
 local effecttbl = {}
 
-require("scripts/globals/status")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
-
 function onEffectGain(target, effect)
-
 end
 
 function onEffectTick(target, effect)
@@ -26,7 +23,6 @@ function onEffectTick(target, effect)
 end
 
 function onEffectLose(target, effect)
-
 end
 
 return effecttbl

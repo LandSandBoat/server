@@ -3,7 +3,6 @@
 -- tpz.effect.FAN_DANCE
 --
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local effecttbl = {}
