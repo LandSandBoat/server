@@ -518,6 +518,7 @@ namespace zoneutils
         // handle mob initialise functions after they're all loaded
         ForEachZone([](CZone* PZone) {
             PZone->ForEachMob([](CMobEntity* PMob) {
+                luautils::OnMobLoad(PMob);
                 luautils::OnMobInitialize(PMob);
                 luautils::ApplyMixins(PMob);
                 luautils::ApplyZoneMixins(PMob);

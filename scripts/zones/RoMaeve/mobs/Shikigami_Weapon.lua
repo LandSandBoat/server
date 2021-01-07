@@ -49,7 +49,7 @@ end
 
 function onMobSpawn(mob)
     mob:setStatus(tpz.status.INVISIBLE)
-    onMobRoam(mob)
+    entity.onMobRoam(mob)
 end
 
 function onPath(mob)

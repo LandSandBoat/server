@@ -286,6 +286,7 @@ namespace luautils
     template <typename T>
     void print(T const& item)
     {
+        TracyZoneScoped;
         ShowScript(fmt::format("{}\n", item));
     }
 
@@ -305,9 +306,45 @@ namespace luautils
         return lua.get<sol::function>(funcName);
     }
 
+    sol::function getCachedFunction(CBaseEntity* PEntity, std::string funcName)
+    {
+        if (PEntity->objtype == TYPE_MOB)
+        {
+            std::string zone_name = (const char*)PEntity->loc.zone->GetName();
+            std::string mob_name  = (const char*)PEntity->GetName();
+
+            if (auto cached_entity = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; cached_entity.valid())
+            {
+                return cached_entity[funcName];
+            }
+        }
+        else if (PEntity->objtype == TYPE_PET)
+        {
+            std::string mob_name  = static_cast<CPetEntity*>(PEntity)->GetScriptName();
+
+            if (auto cached_entity = lua["tpz"]["globals"]["pets"][mob_name]; cached_entity.valid())
+            {
+                return cached_entity[funcName];
+            }
+        }
+        else if (PEntity->objtype == TYPE_TRUST)
+        {
+            std::string mob_name = (const char*)PEntity->GetName();
+
+            if (auto cached_entity = lua["tpz"]["globals"]["spells"]["trust"][mob_name]; cached_entity.valid())
+            {
+                return cached_entity[funcName];
+            }
+        }
+
+        // Didn't find it
+        return sol::nil;
+    }
+
     // temporary solution for geysers in Dangruf_Wadi
     void SendEntityVisualPacket(uint32 npcid, const char* command)
     {
+        TracyZoneScoped;
         if (CBaseEntity* PNpc = zoneutils::GetEntity(npcid, TYPE_NPC))
         {
             PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE, new CEntityVisualPacket(PNpc, command));
@@ -1971,6 +2008,51 @@ namespace luautils
         return result.return_count() ? result.get<int32>() : 0;
     }
 
+    void OnMobLoad(CBaseEntity* PMob)
+    {
+        TracyZoneScoped;
+
+        std::string filename;
+        sol::reference destination;
+
+        if (PMob->objtype == TYPE_MOB)
+        {
+            // TODO: These int8 string need to die.
+            std::string zone_name = (const char*)PMob->loc.zone->GetName();
+            std::string mob_name  = (const char*)PMob->GetName();
+
+            filename = fmt::format("scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
+            destination = lua[sol::create_if_nil]["tpz"]["zones"][zone_name]["mobs"][mob_name];
+        }
+        else if (PMob->objtype == TYPE_PET)
+        {
+            std::string mob_name = static_cast<CPetEntity*>(PMob)->GetScriptName();
+
+            filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
+            destination = lua[sol::create_if_nil]["tpz"]["globals"]["pets"][mob_name];
+        }
+        else if (PMob->objtype == TYPE_TRUST)
+        {
+            std::string mob_name = (const char*)PMob->GetName();
+
+            filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
+            destination = lua[sol::create_if_nil]["tpz"]["globals"]["spells"]["trust"][mob_name];
+        }
+
+        // Try and load file
+        auto file_result = lua.safe_script_file(filename);
+
+        // If the entity object has been returned, cache it!
+        if (file_result.valid() && file_result.return_count())
+        {
+            destination = file_result;
+        }
+        else // If not, create an empty entry so we can safely fail to find it later
+        {
+            destination = lua.create_table();
+        }
+    }
+
     /************************************************************************
      *  onMobInitialize                                                      *
      *                                                                       *
@@ -1979,42 +2061,8 @@ namespace luautils
     int32 OnMobInitialize(CBaseEntity* PMob)
     {
         TracyZoneScoped;
-
-        // TODO: These int8 string need to die.
-        std::string zone_name = (const char*)PMob->loc.zone->GetName();
-        std::string mob_name  = (const char*)PMob->GetName();
-
-        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", zone_name, mob_name);
-
-        // Erase previous copies of the function, if they're left over from previous calls
-        lua.set("onMobInitialize", sol::nil);
-
-        auto file_result = lua.safe_script_file(filename);
-        if (!file_result.valid())
-        {
-            return -1;
-        }
-
-        // If the entity object has been returned, cache it!
-        if (file_result.return_count())
-        {
-            lua[sol::create_if_nil]["tpz"]["zones"][zone_name]["mobs"][mob_name] = file_result;
-        }
         
-        sol::function onMobInitialize;
-
-        // Has this mob been cached?
-        if (auto mob_lookup = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; mob_lookup.valid())
-        {
-            // Use that (this might bail in the next section)!
-            onMobInitialize = mob_lookup["onMobInitialize"];
-        }
-        else
-        {
-            // Fallback to old style of grabbing globally defined things
-            onMobInitialize = lua.get<sol::function>("onMobInitialize");
-        }
-
+        sol::function onMobInitialize = getCachedFunction(PMob, "onMobInitialize");
         if (!onMobInitialize.valid())
         {
             return -1;
@@ -2414,30 +2462,7 @@ namespace luautils
             return -1;
         }
 
-        // TODO: These int8 string need to die.
-        std::string zone_name = (const char*)PMob->loc.zone->GetName();
-        std::string mob_name  = (const char*)PMob->GetName();
-
-        std::string filename;
-        if (PMob->objtype == TYPE_PET)
-        {
-            filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName());
-        }
-        else
-        {
-            filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
-        }
-
-        sol::function onMobFight;
-        if (auto mob_lookup = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; mob_lookup.valid())
-        {
-            onMobFight = mob_lookup["onMobFight"];
-        }
-        else
-        {
-            onMobFight = loadFunctionFromFile("onMobFight", filename);
-        }
-
+        sol::function onMobFight = getCachedFunction(PMob, "onMobFight");
         if (!onMobFight.valid())
         {
             return -1;
@@ -2503,6 +2528,10 @@ namespace luautils
             return -1;
         }
 
+        // TODO: These int8 string need to die.
+        std::string zone_name = (const char*)PMob->loc.zone->GetName();
+        std::string mob_name  = (const char*)PMob->GetName();
+
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
         if (PChar && PMob->objtype == TYPE_MOB)
         {
@@ -2531,7 +2560,7 @@ namespace luautils
 
             auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-            auto onMobDeath = loadFunctionFromFile("onMobDeath", filename);
+            sol::function onMobDeath = getCachedFunction(PMob, "onMobDeath");
             if (!onMobDeath.valid())
             {
                 ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
@@ -2567,6 +2596,7 @@ namespace luautils
         }
         else
         {
+            // TODO: Clean this up, only used for error reporting
             std::string filename;
             switch (PMob->objtype)
             {
@@ -2584,7 +2614,7 @@ namespace luautils
                     break;
             }
 
-            auto onMobDeath = loadFunctionFromFile("onMobDeath", filename);
+            sol::function onMobDeath = getCachedFunction(PMob, "onMobDeath");
             if (!onMobDeath.valid())
             {
                 ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
@@ -2656,8 +2686,6 @@ namespace luautils
             return -1;
         }
 
-        CLuaBaseEntity LuaMobEntity(PMob);
-
         auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
         auto onMobRoamAction = loadFunctionFromFile("onMobRoamAction", filename);
@@ -2681,24 +2709,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // TODO: These int8 string need to die.
-        std::string zone_name = (const char*)PMob->loc.zone->GetName();
-        std::string mob_name  = (const char*)PMob->GetName();
-
-        auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
-
-        sol::function onMobRoam;
-        if (auto mob_lookup = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; mob_lookup.valid())
-        {
-            TracyZoneScopedN("Cached Function");
-            onMobRoam = mob_lookup["onMobRoam"];
-        }
-        else
-        {
-            TracyZoneScopedN("File Read");
-            onMobRoam = loadFunctionFromFile("onMobRoam", filename);
-        }
-
+        sol::function onMobRoam = getCachedFunction(PMob, "onMobRoam");
         if (!onMobRoam.valid())
         {
             return -1;

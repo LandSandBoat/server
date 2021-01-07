@@ -1324,6 +1324,9 @@ Usage:
 
                 zoneutils::GetZone(zoneID)->InsertPET(PMob);
 
+                // TODO: This might be redundant
+                luautils::OnMobLoad(PMob);
+
                 luautils::OnMobInitialize(PMob);
                 luautils::ApplyMixins(PMob);
                 luautils::ApplyZoneMixins(PMob);

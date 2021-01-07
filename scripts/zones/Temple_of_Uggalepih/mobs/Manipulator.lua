@@ -65,7 +65,7 @@ local path =
 }
 
 function onMobSpawn(mob)
-    onMobRoam(mob) -- what?
+    entity.onMobRoam(mob) -- what?
 end
 
 function onPath(mob)
