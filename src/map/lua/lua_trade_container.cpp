@@ -127,7 +127,7 @@ uint32 CLuaTradeContainer::getSlotQty(uint8 slotID)
 
 //======================================================//
 
-bool CLuaTradeContainer::hasItemQty(uint32 quantity, uint16 itemID)
+bool CLuaTradeContainer::hasItemQty(uint16 itemID, uint32 quantity)
 {
     uint32 tradeQuantity = m_pMyTradeContainer->getItemQuantity(itemID);
     return quantity == tradeQuantity;

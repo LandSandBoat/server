@@ -326,9 +326,10 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeQuest(player, SANDORIA, ROSEL_THE_ARMORER, {
+        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
             ki = tpz.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
+            fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
@@ -362,7 +363,7 @@ function npcUtil.completeQuest(player, area, quest, params)
     end
     if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
         player:addFame(params["fameArea"], params["fame"])
-    elseif type(params["fame"]) == "number" then
+    elseif (type(area) == "number" or area["fame_area"] ~= nil) and type(params["fame"]) == "number" then
         player:addFame(area, params["fame"])
     end
 

@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 function onMobDeath(mob, player, isKiller, noKiller)
-    if mob:getID() == ID.mob.APOLLYON_NE_MOB[1]+2 then
+    if mob:getID() == ID.mob.APOLLYON_NE_MOB[1] + 12 then
         if isKiller or noKiller then
             local battlefield = mob:getBattlefield()
             local randomF1 = battlefield:getLocalVar("randomF1")
