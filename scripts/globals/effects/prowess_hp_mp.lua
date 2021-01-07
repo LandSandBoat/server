@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Increased HP and MP
---
+-- tpz.effect.PROWESS
+-- Increased HP and MP
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

@@ -1,5 +1,5 @@
 -----------------------------------
--- Effect: Geo-Regen
+-- tpz.effect.GEO_REGEN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

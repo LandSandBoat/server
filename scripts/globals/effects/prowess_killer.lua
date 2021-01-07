@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : "Killer" effects bonus
---
+-- tpz.effect.PROWESS
+-- "Killer" effects bonus
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

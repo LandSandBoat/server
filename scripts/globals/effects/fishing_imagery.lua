@@ -1,7 +1,5 @@
 -----------------------------------
---
--- FISHING_IMAGERY
---
+-- tpz.effect.FISHING_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

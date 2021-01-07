@@ -1,8 +1,5 @@
-
 -----------------------------------
---
---     tpz.effect.ELEMENTALRES_DOWN
---
+-- tpz.effect.ELEMENTAL_RESISTANCE_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.INTERVENE
---
+-- tpz.effect.INTERVENE
 ----------------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Enhanced accuracy and ranged accuracy
---
+-- tpz.effect.PROWESS
+-- Enhanced accuracy and ranged accuracy
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

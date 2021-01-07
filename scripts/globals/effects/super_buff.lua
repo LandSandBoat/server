@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.SUPER_BUFF
---
+-- tpz.effect.SUPER_BUFF
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

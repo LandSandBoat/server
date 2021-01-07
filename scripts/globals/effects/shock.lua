@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.SHOCK
---
+-- tpz.effect.SHOCK
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")

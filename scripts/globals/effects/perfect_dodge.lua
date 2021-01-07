@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.PERFECT_DODGE
---
+-- tpz.effect.PERFECT_DODGE
 -----------------------------------
 local effecttbl = {}
 

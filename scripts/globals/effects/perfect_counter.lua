@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.PERFECT_COUNTER
---
+-- tpz.effect.PERFECT_COUNTER
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

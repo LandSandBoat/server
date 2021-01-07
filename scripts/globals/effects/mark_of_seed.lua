@@ -1,8 +1,6 @@
 -----------------------------------
---
 -- tpz.effect.MARK_OF_SEED
---
---  DO NOT try to use this anywhere else but Fei'Yin!
+-- DO NOT try to use this anywhere else but Fei'Yin!
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")

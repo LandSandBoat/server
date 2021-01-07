@@ -1,5 +1,4 @@
 -----------------------------------
---
 -- tpz.effect.BALLAD
 -- getPower returns the TIER (e.g. 1, 2, 3, 4)
 -- DO NOT ALTER ANY OF THE EFFECT VALUES! DO NOT ALTER EFFECT POWER!

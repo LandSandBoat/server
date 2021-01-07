@@ -1,7 +1,5 @@
 -----------------------------------
---
--- ALCHEMY_IMAGERY
---
+-- tpz.effect.ALCHEMY_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

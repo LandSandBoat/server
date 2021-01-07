@@ -1,4 +1,6 @@
 -----------------------------------
+-- tpz.effect.TRANSCENDENCY
+-----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effecttbl = {}

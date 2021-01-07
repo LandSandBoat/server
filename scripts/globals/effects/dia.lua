@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- tpz.effect.DIA
---
 ----------------------------------
 -- Quick Explanation of Algorithm:
 -- Dia 1: Power of 1. Results in reduced defense of ~5.27%  (27/512) and 1 hp/tick damage.

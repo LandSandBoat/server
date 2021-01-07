@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.HEADY_ARTIFICE
---
+-- tpz.effect.HEADY_ARTIFICE
 ----------------------------------------
 local effecttbl = {}
 

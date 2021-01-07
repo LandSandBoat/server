@@ -1,7 +1,6 @@
 ----------------------------------------
---
--- tpz.effect.PROWESS : Increased attack speed
---
+-- tpz.effect.PROWESS
+-- Increased attack speed
 -- Note: Doesn't alter TP gain like -delay would, and
 -- doesn't alter JA timers like other sources of haste.
 ----------------------------------------

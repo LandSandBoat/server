@@ -1,7 +1,6 @@
 -----------------------------------
---
---      tpz.effect.CAROL
---  TODO: MOD_CRITICAL_DAMAGE_REDUCTION
+-- tpz.effect.SCHERZO
+-- TODO: MOD_CRITICAL_DAMAGE_REDUCTION
 -----------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.INVINCIBLE
---
+-- tpz.effect.INVINCIBLE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

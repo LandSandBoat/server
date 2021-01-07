@@ -1,7 +1,5 @@
 ----------------------------------------
---
---   tpz.effect.STRIKING_FLOURISH
---
+-- tpz.effect.STRIKING_FLOURISH
 ----------------------------------------
 local effecttbl = {}
 

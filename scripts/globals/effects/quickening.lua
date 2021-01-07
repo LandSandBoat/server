@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.QUICKENING
---
+-- tpz.effect.QUICKENING
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

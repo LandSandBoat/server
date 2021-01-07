@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.UNBRIDLED_LEARNING
---
+-- tpz.effect.UNBRIDLED_LEARNING
 ----------------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,5 @@
 -----------------------------------
---
--- SMITHING_IMAGERY
---
+-- tpz.effect.SMITHING_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

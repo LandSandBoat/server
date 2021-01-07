@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.DECOY_SHOT
---
+-- tpz.effect.DECOY_SHOT
 ----------------------------------------
 local effecttbl = {}
 

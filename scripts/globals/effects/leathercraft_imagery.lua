@@ -1,7 +1,5 @@
 -----------------------------------
---
--- LEATHERCRAFT_IMAGERY
---
+-- tpz.effect.LEATHERCRAFT_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

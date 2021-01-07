@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.NETHER_VOID
---
+-- tpz.effect.NETHER_VOID
 ----------------------------------------
 local effecttbl = {}
 

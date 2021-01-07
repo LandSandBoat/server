@@ -1,7 +1,5 @@
 -----------------------------------
---
---    tpz.effect.SHARPSHOT
---
+-- tpz.effect.SHARPSHOT
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

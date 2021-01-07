@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SACROSANCTITY
---
+-- tpz.effect.SACROSANCTITY
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

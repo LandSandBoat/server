@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.ASTRAL_CONDUIT
---
+-- tpz.effect.ASTRAL_CONDUIT
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

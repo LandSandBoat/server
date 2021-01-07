@@ -1,7 +1,5 @@
 -----------------------------------
---
--- Subtle Blow Plus Effect
---
+-- tpz.effect.SUBTLE_BLOW_PLUS
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

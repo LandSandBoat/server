@@ -1,7 +1,6 @@
 -----------------------------------
--- Physical Shield
+-- tpz.effect.PHYSICAL_SHIELD
 -- Blocks all physical attacks
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

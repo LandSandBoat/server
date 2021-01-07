@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SUBTLE_SORCERY
---
+-- tpz.effect.SUBTLE_SORCERY
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

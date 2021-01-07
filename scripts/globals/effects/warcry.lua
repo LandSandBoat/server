@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.WARCRY
---
+-- tpz.effect.WARCRY
 -- Notes:
 -- Savagery TP bonus not cut in half like ffxclopedia says.
 -- ffxiclopedia is wrong, bg wiki right. See link where testing was done.

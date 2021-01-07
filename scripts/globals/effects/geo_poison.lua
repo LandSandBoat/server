@@ -1,5 +1,5 @@
 -----------------------------------
--- Effect: Geo-Poison
+-- tpz.effect.GEO_POISON
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

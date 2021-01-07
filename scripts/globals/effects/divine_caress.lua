@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.DIVINE_CARESS
---
+-- tpz.effect.DIVINE_CARESS
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

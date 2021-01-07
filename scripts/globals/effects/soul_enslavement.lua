@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SOUL_ENSLAVEMENT
---
+-- tpz.effect.SOUL_ENSLAVEMENT
 ----------------------------------------
 local effecttbl = {}
 

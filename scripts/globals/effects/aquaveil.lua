@@ -1,7 +1,5 @@
 -----------------------------------
---
--- tpz.mod.SPELLINTERRUPT
---
+-- tpz.effect.AQUAVEIL
 -----------------------------------
 local effecttbl = {}
 

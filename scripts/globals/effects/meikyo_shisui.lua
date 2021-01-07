@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.MEIKYO_SHISUI
---
+-- tpz.effect.MEIKYO_SHISUI
 -----------------------------------
 local effecttbl = {}
 

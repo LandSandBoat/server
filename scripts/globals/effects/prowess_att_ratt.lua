@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Increased treasure casket discovery.
---
+-- tpz.effect.PROWESS
+-- Increased treasure casket discovery.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

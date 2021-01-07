@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.DIVINE_EMBLEM
---
+-- tpz.effect.DIVINE_EMBLEM
 ----------------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.DRAGON_BREAKER
---
+-- tpz.effect.DRAGON_BREAKER
 ----------------------------------------
 local effecttbl = {}
 

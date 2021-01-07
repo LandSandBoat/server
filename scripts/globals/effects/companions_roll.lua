@@ -1,7 +1,5 @@
 -----------------------------------
---
---    Companions Roll
---
+-- tpz.effect.COMPANIONS_ROLL
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

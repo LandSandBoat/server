@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.DIVINE_SEAL
---
+-- tpz.effect.DIVINE_SEAL
 -----------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.MANAFONT
---
+-- tpz.effect.MANAFONT
 -----------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.TACTICAL_SWITCH
---
+-- tpz.effect.TACTICAL_SWITCH
 ----------------------------------------
 local effecttbl = {}
 

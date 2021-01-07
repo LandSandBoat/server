@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SENGIKORI
---
+-- tpz.effect.SENGIKORI
 ----------------------------------------
 local effecttbl = {}
 

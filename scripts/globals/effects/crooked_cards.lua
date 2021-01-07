@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.CROOKED_CARDS
---
+-- tpz.effect.CROOKED_CARDS
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

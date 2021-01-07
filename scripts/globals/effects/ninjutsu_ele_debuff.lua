@@ -1,7 +1,6 @@
 -----------------------------------
 -- Ninjutsu Elemental Debuff
 -- Reduces a targets given elemental resistance
---
 -----------------------------------
 local effecttbl = {}
 

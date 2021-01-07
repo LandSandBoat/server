@@ -1,5 +1,5 @@
 ----------------------------------------
--- Hasso
+-- tpz.effect.HASSO
 -- Straight +10% haste +10 Acc and scaling (lv) STR
 -- also -50% FC
 ----------------------------------------

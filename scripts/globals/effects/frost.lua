@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.FROST
---
+-- tpz.effect.FROST
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")

@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.LEVEL_SYNC
---
+-- tpz.effect.LEVEL_SYNC
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.YAEGASUMI
---
+-- tpz.effect.YAEGASUMI
 ----------------------------------------
 local effecttbl = {}
 

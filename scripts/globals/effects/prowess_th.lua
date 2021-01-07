@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Treasure Hunter bonus
---
+-- tpz.effect.PROWESS
+-- Treasure Hunter bonus
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

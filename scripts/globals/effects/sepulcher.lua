@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SEPULCHER
---
+-- tpz.effect.SEPULCHER
 ----------------------------------------
 local effecttbl = {}
 

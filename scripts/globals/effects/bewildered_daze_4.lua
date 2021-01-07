@@ -1,7 +1,5 @@
 ----------------------------------------
---
---   tpz.effect.BEWILDERED_DAZE_4
---
+-- tpz.effect.BEWILDERED_DAZE_4
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

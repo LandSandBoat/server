@@ -1,8 +1,6 @@
 -----------------------------------
---
 -- tpz.effect.HEALING
 -- Activated through the /heal command
---
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

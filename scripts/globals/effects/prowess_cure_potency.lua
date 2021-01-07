@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Enhanced "Cure" potency
---
+-- tpz.effect.PROWESS
+-- Enhanced "Cure" potency
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

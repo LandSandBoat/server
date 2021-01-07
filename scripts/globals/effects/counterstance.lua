@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effects.COUNTERSTANCE
+-- tpz.effect..COUNTERSTANCE
 -- DEF is removed in core as equip swaps can mess this up otherwise!
 -----------------------------------
 require("scripts/globals/status")

@@ -1,7 +1,5 @@
 -----------------------------------
---
---      tpz.effect.CAROL
---
+-- tpz.effect.CAROL
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")

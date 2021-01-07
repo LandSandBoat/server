@@ -1,7 +1,5 @@
 -----------------------------------
---
--- COOKING_IMAGERY
---
+-- tpz.effect.COOKING_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

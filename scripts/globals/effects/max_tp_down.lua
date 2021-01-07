@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.NONE
---
+-- tpz.effect.MAX_TP_DOWN
 -----------------------------------
 local effecttbl = {}
 

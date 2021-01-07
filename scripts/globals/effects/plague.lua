@@ -1,7 +1,6 @@
 -----------------------------------
---
---     Plague
---Plague is a harmful status effect that reduces a character's TP and MP over time.
+-- tpz.effect.PLAGUE
+-- Plague is a harmful status effect that reduces a character's TP and MP over time.
 -- Also, causes Steps to only grant One Finishing Move when Main Job is Dancer.
 -- Normal power is 5.
 -----------------------------------

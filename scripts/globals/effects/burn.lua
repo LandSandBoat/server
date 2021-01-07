@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- tpz.effect.BURN
---
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")

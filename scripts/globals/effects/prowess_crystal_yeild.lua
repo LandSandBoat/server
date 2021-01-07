@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Increased crystal yield
---
+-- tpz.effect.PROWESS
+-- Increased crystal yield
 -----------------------------------
 local effecttbl = {}
 

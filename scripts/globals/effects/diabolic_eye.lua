@@ -1,7 +1,5 @@
 -----------------------------------
---
--- tpz.effect.BERSERK
---
+-- tpz.effect.DIABOLIC_EYE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

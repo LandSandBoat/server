@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Enhanced magic acc. and magic atk
---
+-- tpz.effect.PROWESS
+-- Enhanced magic acc. and magic atk
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

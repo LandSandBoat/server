@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.IMPETUS_EFFECT
---
+-- tpz.effect.IMPETUS_EFFECT
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

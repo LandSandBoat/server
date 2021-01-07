@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.HUNDRED_FISTS
---
+-- tpz.effect.HUNDRED_FISTS
 -----------------------------------
 local effecttbl = {}
 

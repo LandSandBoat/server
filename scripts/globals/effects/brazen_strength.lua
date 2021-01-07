@@ -1,7 +1,5 @@
 ----------------------------------------
---
---    tpz.effect.BRAZEN_STRENGTH
---
+-- tpz.effect.BRAZEN_STRENGTH
 ----------------------------------------
 local effecttbl = {}
 

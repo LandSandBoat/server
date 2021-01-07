@@ -1,7 +1,5 @@
 -----------------------------------
---
--- BONECRAFT_IMAGERY
---
+-- tpz.effect.BONECRAFT_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

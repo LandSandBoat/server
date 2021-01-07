@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.SPONTANEITY
---
+-- tpz.effect.SPONTANEITY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

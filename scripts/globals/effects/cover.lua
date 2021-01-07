@@ -1,7 +1,5 @@
 -----------------------------------
---
---  tpz.mod.COVER_EFFECT
---
+-- tpz.mod.COVER_EFFECT
 -----------------------------------
 local effecttbl = {}
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- Haste Samba Haste Effect
+-- tpz.effect.HASTE_SAMBA_HASTE_EFFECT
 -- JA Haste 5-10%
 -----------------------------------
 require("scripts/globals/status")

@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.MIGHTY_STRIKES
---
+-- tpz.effect.MIGHTY_STRIKES
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

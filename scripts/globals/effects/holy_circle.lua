@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.HOLY_CIRCLE
---
+-- tpz.effect.HOLY_CIRCLE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

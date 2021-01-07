@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SCARLET_DELIRIUM
---
+-- tpz.effect.SCARLET_DELIRIUM
 ----------------------------------------
 local effecttbl = {}
 

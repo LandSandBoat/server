@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.CLARION_CALL
---
+-- tpz.effect.CLARION_CALL
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

@@ -1,7 +1,5 @@
 ----------------------------------------
---
---  tpz.effect.CLIMACTIC_FLOURISH
---
+-- tpz.effect.CLIMACTIC_FLOURISH
 ----------------------------------------
 local effecttbl = {}
 

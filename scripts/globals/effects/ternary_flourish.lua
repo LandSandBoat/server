@@ -1,7 +1,5 @@
 ----------------------------------------
---
---   tpz.effect.TERNARY_FLOURISH
---
+-- tpz.effect.TERNARY_FLOURISH
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

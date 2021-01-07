@@ -1,7 +1,6 @@
 -----------------------------------
--- Arrow Shield
+-- tpz.effect.ARROW_SHIELD
 -- Blocks all ranged attacks
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

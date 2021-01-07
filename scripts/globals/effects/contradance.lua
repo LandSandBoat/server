@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.CONTRADANCE
---
+-- tpz.effect.CONTRADANCE
 ----------------------------------------
 local effecttbl = {}
 

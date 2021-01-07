@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.LEAVEGAME
---
+-- tpz.effect.LEAVEGAME
 -----------------------------------
 local effecttbl = {}
 

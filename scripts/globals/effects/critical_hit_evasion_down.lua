@@ -1,7 +1,5 @@
 -----------------------------------
---
---
---
+-- tpz.effect.CRITICAL_HIT_EVASION_DOWN
 -----------------------------------
 local effecttbl = {}
 

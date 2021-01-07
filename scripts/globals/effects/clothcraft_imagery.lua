@@ -1,7 +1,5 @@
 -----------------------------------
---
--- CLOTHCRAFT_IMAGERY
---
+-- tpz.effect.CLOTHCRAFT_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

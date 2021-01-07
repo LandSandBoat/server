@@ -1,7 +1,5 @@
 -----------------------------------
---
--- GOLDSMITHING_IMAGERY
---
+-- tpz.effect.GOLDSMITHING_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

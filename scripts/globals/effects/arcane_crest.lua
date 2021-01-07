@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.ARCANE_CREST
---
+-- tpz.effect.ARCANE_CREST
 ----------------------------------------
 local effecttbl = {}
 

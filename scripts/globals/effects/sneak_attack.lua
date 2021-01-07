@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.SNEAK_ATTACK
---
+-- tpz.effect.SNEAK_ATTACK
 -----------------------------------
 local effecttbl = {}
 

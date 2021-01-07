@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.ASPIR_SAMBA_II
---
+-- tpz.effect.ASPIR_SAMBA_II
 ----------------------------------------
 local effecttbl = {}
 

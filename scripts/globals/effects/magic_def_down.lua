@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.NONE
---
+-- tpz.effect.MAGIC_DEF_DOWN
 -----------------------------------
 local effecttbl = {}
 

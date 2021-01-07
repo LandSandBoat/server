@@ -1,7 +1,5 @@
 -----------------------------------
---
--- WOODWORKING_IMAGERY
---
+-- tpz.effect.WOODWORKING_IMAGERY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

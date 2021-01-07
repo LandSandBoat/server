@@ -1,7 +1,6 @@
 -----------------------------------
---
--- Magic Shield BLOCKS all magic attacks
---
+-- tpz.effect.MAGIC_SHIELD
+-- BLOCKS all magic attacks
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

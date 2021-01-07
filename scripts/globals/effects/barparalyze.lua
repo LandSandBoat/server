@@ -1,7 +1,5 @@
 -----------------------------------
---
--- tpz.effect.BARAMNESIA
---
+-- tpz.effect.BARPARALYZE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

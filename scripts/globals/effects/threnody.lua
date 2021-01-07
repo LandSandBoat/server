@@ -1,7 +1,6 @@
 -----------------------------------
--- Threnody
+-- tpz.effect.THRENODY
 -- Reduces a targets given elemental resistance
---
 -----------------------------------
 local effecttbl = {}
 

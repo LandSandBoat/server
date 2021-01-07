@@ -1,7 +1,5 @@
 -----------------------------------
---
---  Chain Affinity
---
+-- tpz.effect.CHAIN_AFFINITY
 -----------------------------------
 local effecttbl = {}
 

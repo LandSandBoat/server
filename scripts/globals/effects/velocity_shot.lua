@@ -1,7 +1,5 @@
 ----------------------------------------
---
---    tpz.effect.VELOCITY_SHOT
---
+-- tpz.effect.VELOCITY_SHOT
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------

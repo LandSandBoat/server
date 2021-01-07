@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.LAST_RESORT
---
+-- tpz.effect.LAST_RESORT
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

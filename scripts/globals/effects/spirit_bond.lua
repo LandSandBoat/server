@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.SPIRIT_BOND
---
+-- tpz.effect.SPIRIT_BOND
 ----------------------------------------
 local effecttbl = {}
 

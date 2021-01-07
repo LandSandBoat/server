@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.ELEMENTAL_SEAL
---
+-- tpz.effect.ELEMENTAL_SEAL
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

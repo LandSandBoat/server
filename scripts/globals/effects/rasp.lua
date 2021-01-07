@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.RASP
---
+-- tpz.effect.RASP
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")

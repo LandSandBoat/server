@@ -1,7 +1,6 @@
 -----------------------------------
---  Stoneskin
---
---  Absorbs a certain amount of damage from physical and magical attacks.
+-- tpz.effect.STONESKIN
+-- Absorbs a certain amount of damage from physical and magical attacks.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

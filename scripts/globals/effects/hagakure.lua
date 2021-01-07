@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.HAGAKURE
---
+-- tpz.effect.HAGAKURE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

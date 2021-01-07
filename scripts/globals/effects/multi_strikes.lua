@@ -1,7 +1,5 @@
 -----------------------------------
---
--- Effect: Multi Strikes
---
+-- tpz.effect.MULTI_STRIKES
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

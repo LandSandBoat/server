@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.WARDING_CIRCLE
---
+-- tpz.effect.WARDING_CIRCLE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

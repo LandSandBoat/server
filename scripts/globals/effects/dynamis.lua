@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.DYNAMIS
---
+-- tpz.effect.DYNAMIS
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/status")

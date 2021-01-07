@@ -1,7 +1,6 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Increased weapon skill damage
---
+-- tpz.effect.PROWESS
+-- Increased weapon skill damage
 -----------------------------------
 local effecttbl = {}
 

@@ -1,7 +1,5 @@
 ----------------------------------------
---
---     tpz.effect.INNER_STRENGTH
---
+-- tpz.effect.INNER_STRENGTH
 ----------------------------------------
 require("scripts/globals/status")
 -----------------------------------
