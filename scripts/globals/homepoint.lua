@@ -261,7 +261,11 @@ tpz.homepoint.onEventFinish = function(player, csid, option, event)
         choice = bit.band(option, 0xFF)
         if choice == selection.SET_HOMEPOINT then
             player:setHomePoint()
-            player:messageSpecial(zones[player:getZoneID()].text.HOMEPOINT_SET)
+            if zones[player:getZoneID()].text.HOMEPOINT_SET then
+                player:messageSpecial(zones[player:getZoneID()].text.HOMEPOINT_SET)
+            else
+                print(string.format("ERROR: missing ID.text.HOMEPOINT_SET in zone %s.", player:getZoneName()))
+            end
         elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and HOMEPOINT_TELEPORT == 1 then
             goToHP(player, choice, bit.rshift(option, 16))
         end
