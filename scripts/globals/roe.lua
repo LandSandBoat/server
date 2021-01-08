@@ -160,7 +160,7 @@ local function completeRecord(player, record)
         else
             player:messageBasic(tpz.msg.basic.ROE_REPEAT_OR_CANCEL)
         end
-        player:setEminenceCompleted(record, 1)
+        player:setEminenceCompleted(record, true)
     else
         player:setEminenceCompleted(record)
     end
