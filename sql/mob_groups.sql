@@ -7776,11 +7776,9 @@ INSERT INTO `mob_groups` VALUES (39,1649,113,'Goblin_Doctor',0,128,0,0,0,75,80,0
 INSERT INTO `mob_groups` VALUES (40,1704,113,'Goblin_Professor',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (41,1640,113,'Goblin_Boss',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (42,2185,113,'Kaneakeluh',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (43,0,113,'Zmey_Gorynych',0,128,0,0,0,78,78,0);
-
-INSERT INTO `mob_groups` VALUES (6232,2226,113,'Kilhwch',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6234,2405,113,'Lhu_Mhakaracca',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6235,2904,113,'Noillurie',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,6835,113,'Zmey_Gorynych',0,128,0,0,0,78,78,0);
+INSERT INTO `mob_groups` VALUES (44,6836,113,'Vedrfolnir',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (45,6837,113,'Glazemane',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Eastern_Altepa_Desert (Zone 114)
