@@ -7664,17 +7664,15 @@ INSERT INTO `mob_groups` VALUES (45,1566,111,'Gigas_Hillrazer',0,128,0,0,0,40,45
 INSERT INTO `mob_groups` VALUES (46,1556,111,'Gigas_Clearcutter',0,128,0,0,0,40,45,0);
 INSERT INTO `mob_groups` VALUES (47,1576,111,'Gigas_Overseer',0,128,0,0,0,45,45,0);
 INSERT INTO `mob_groups` VALUES (48,3159,111,'Plumbago',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (49,4708,111,'Kalasutrax',0,128,0,0,9999,96,98,0);
-INSERT INTO `mob_groups` VALUES (50,6549,111,'Ghast_war',330,0,953,0,0,40,40,0);
-
-INSERT INTO `mob_groups` VALUES (6108,710,111,'Cherukiki',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6111,1027,111,'Diabolos',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6142,2226,111,'Kilhwch',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6145,2293,111,'Kukki-Chebukki',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6146,2405,111,'Lhu_Mhakaracca',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6149,2492,111,'Makki-Chebukki',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6151,2904,111,'Noillurie',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6155,3600,111,'Shikaree_Y',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,4736,111,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,111,'Lord_Ruthven',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,111,'Feuerunke',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,111,'Erebus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,111,'Gjenganger',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,111,'Gorehound',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,4708,111,'Kalasutrax',0,128,0,0,9999,96,98,0);
+INSERT INTO `mob_groups` VALUES (56,6834,111,'Largantua',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,6549,111,'Ghast_war',330,0,953,0,0,40,40,0);
 
 -- ------------------------------------------------------------
 -- Xarcabard (Zone 112)
