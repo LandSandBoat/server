@@ -7844,8 +7844,8 @@ INSERT INTO `mob_groups` VALUES (57,949,114,'Decurio_XIII-LV',0,128,0,0,0,50,55,
 INSERT INTO `mob_groups` VALUES (58,677,114,'Centurio_XIII-V',0,128,0,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (59,3484,114,'Satyral',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (60,6558,114,'Lost_Soul_war',330,1,1540,0,0,44,48,0);
-
-INSERT INTO `mob_groups` VALUES (6273,1682,114,'Goblin_Leadman',0,128,0,0,0,50,55,0);
+INSERT INTO `mob_groups` VALUES (61,0,114,'Hastatus_XIII-XXV',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,6838,114,'Cactrot_Veloz',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- West_Sarutabaruta (Zone 115)
