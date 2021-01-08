@@ -7444,9 +7444,21 @@ INSERT INTO `mob_groups` VALUES (34,1899,108,'Haty',0,128,253,850,0,14,14,0);
 INSERT INTO `mob_groups` VALUES (35,390,108,'Bendigeit_Vran',0,128,253,880,0,14,14,0);
 INSERT INTO `mob_groups` VALUES (36,3148,108,'Pixie',0,128,2001,0,0,51,54,0);
 INSERT INTO `mob_groups` VALUES (37,3911,108,'Thunderhead',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (38,5163,108,'Gwynn_ap_Nudd',0,128,0,0,9999,94,95,0);
-
-INSERT INTO `mob_groups` VALUES (5967,305,108,'Ayame',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,4736,108,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,0,108,'Dawon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,0,108,'Tammuz',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,0,108,'Chesma',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,0,108,'Void_Hare',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,0,108,'Prickly_Sheep',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (44,5163,108,'Gwynn_ap_Nudd',0,128,0,0,9999,94,95,0);
+INSERT INTO `mob_groups` VALUES (45,0,108,'Wayward_Worm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,0,108,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,108,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,108,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,0,108,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,108,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,108,'Sleepy_Mabel',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,6827,108,'Otherworldly_Rimester',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Pashhow_Marshlands (Zone 109)
