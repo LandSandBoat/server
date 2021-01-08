@@ -9189,9 +9189,11 @@ int16 CLuaBaseEntity::getStatusEffectElement(uint16 statusId)
  *  Notes   :
  ************************************************************************/
 
-bool CLuaBaseEntity::canGainStatusEffect(uint16 effect, uint16 power)
+bool CLuaBaseEntity::canGainStatusEffect(uint16 effect, sol::object const& powerObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    uint16 power = powerObj.is<uint16>() ? powerObj.as<uint16>() : 0;
 
     auto* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
     if (!PBattleEntity)
