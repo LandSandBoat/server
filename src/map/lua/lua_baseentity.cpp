@@ -2781,8 +2781,6 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
 
 uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC && m_PBaseEntity->objtype != TYPE_PET && m_PBaseEntity->objtype != TYPE_MOB);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         TPZ_DEBUG_BREAK_IF(slot > 15);
@@ -2808,8 +2806,6 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
 
 std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         TPZ_DEBUG_BREAK_IF(slot > 15);
@@ -2835,7 +2831,10 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 
 bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return false;
+    }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
