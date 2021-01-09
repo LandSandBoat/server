@@ -4261,7 +4261,7 @@ bool CLuaBaseEntity::getMentor()
 /************************************************************************
  *  Function: setMentor()
  *  Purpose : Sets the mentor flag for a character
- *  Example : player:setMentor(1)
+ *  Example : player:setMentor(true)
  ************************************************************************/
 
 void CLuaBaseEntity::setMentor(bool mentor)

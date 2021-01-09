@@ -65,7 +65,7 @@ public:
     void  setStatus(uint8 status);
     void  setLocalVar(std::string name, uint64_t value);
     bool  loadMobs();
-    bool  spawnLoot(CLuaBaseEntity* PEntity);
+    bool  spawnLoot(sol::object const& PEntityObj);
     auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
     bool  cleanup(bool cleanup);
     void  win();
