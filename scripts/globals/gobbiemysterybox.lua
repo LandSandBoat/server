@@ -150,7 +150,7 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
             player:setLocalVar("gobbieBoxKey", 0)
             switch (keyToDial[keyID]): caseof
             {
-                [6] = function() itemID = tpz.core.selectDailyItem(player, 6) end,  -- special dial
+                [6] = function() itemID = SelectDailyItem(player, 6) end,  -- special dial
                 [9] = function() -- abjuration
                     itemID = abjurationItems[math.random(1, #abjurationItems)]
                     if player:hasItem(itemID) then
@@ -163,7 +163,7 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
                     if math.random(1,100) == 1 then -- 1% chance for ANV exclusive item?
                         itemID = anniversaryItems[math.random(1, #anniversaryItems)] 
                     else
-                        itemID = tpz.core.selectDailyItem(player, 6)
+                        itemID = SelectDailyItem(player, 6)
                     end
                 end
             }
@@ -178,7 +178,7 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
         end
     elseif csid == event.DEFAULT then
         if option == 4 then
-            player:updateEvent(tpz.core.selectDailyItem(player, 6), tpz.core.selectDailyItem(player, 6), tpz.core.selectDailyItem(player, 6), 0, 0, 0, 0, dailyTallyPoints) -- peek
+            player:updateEvent(SelectDailyItem(player, 6), SelectDailyItem(player, 6), SelectDailyItem(player, 6), 0, 0, 0, 0, dailyTallyPoints) -- peek
         else
             local dial = math.floor(option / 8)
             local option_type = option % 8
@@ -195,7 +195,7 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
                     if dial_used then
                         player:updateEvent(1, dial, 2) -- already used this dial
                     elseif dailyTallyPoints >= dial_cost then
-                        itemID = tpz.core.selectDailyItem(player, dial)
+                        itemID = SelectDailyItem(player, dial)
                         player:setCharVar("gobbieBoxHoldingItem", itemID)
                         player:setCurrency("daily_tally", dailyTallyPoints - dial_cost)
                         if dial_mask then

@@ -268,8 +268,8 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
     elseif csid == 10124 and optionMod == 13 then
         local trialId = bit.rshift(option, 8)
         local t = GetMagianTrial(trialId)
-        local reqItem = tpz.core.getReadOnlyItem(t.reqItem)
-        local rewardItem = tpz.core.getReadOnlyItem(t.rewardItem)
+        local reqItem = GetReadOnlyItem(t.reqItem)
+        local rewardItem = GetReadOnlyItem(t.rewardItem)
         if reqItem:getReqLvl() < rewardItem:getReqLvl() then
             player:updateEvent(1)
         else

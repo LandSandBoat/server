@@ -20,7 +20,7 @@ function onTrigger(player, mp, target)
     local cursor_target = player:getCursorTarget()
 
     if target then
-        targ = tpz.core.getPlayerByName(target)
+        targ = GetPlayerByName(target)
         if not targ then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return

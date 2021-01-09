@@ -27,7 +27,7 @@ function onTrigger(player, arg1, arg2)
         targ = player
         id = arg1
     else
-        targ = tpz.core.getPlayerByName(arg1)
+        targ = GetPlayerByName(arg1)
         id = arg2
     end
 

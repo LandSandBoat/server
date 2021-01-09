@@ -65,7 +65,7 @@ function onMobDespawn(mob)
             GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):setSpawn(mobX, mobY, mobZ)
             GetMobByID(ID.mob.TEMENOS_C_MOB[5]+35):setPos(mobX, mobY, mobZ)
             if killer ~= 0 then
-                SpawnMob(ID.mob.TEMENOS_C_MOB[5]+35):updateEnmity(tpz.core.getPlayerByID(killer))
+                SpawnMob(ID.mob.TEMENOS_C_MOB[5]+35):updateEnmity(GetPlayerByID(killer))
             end
         end
     end

@@ -24,9 +24,9 @@ function onTrigger(player, npc)
         npcUtil.popFromQM(player, npc, ID.mob.AROMA_CRAWLER, {claim=true, hide=math.random(600, 1800), look=true, radius=1})  -- ??? despawns and respawns 10-30 minutes after NM dies
 
         for i = 1, 7 do
-            tpz.core.setDropRate(172, 18246 + i, 0) -- zeros all satchet drop rates
+            SetDropRate(172, 18246 + i, 0) -- zeros all satchet drop rates
         end
-        tpz.core.setDropRate(172, 18246 + playerRace - raceOffset, 130) -- adds 13% drop rate to specific week's race
+        SetDropRate(172, 18246 + playerRace - raceOffset, 130) -- adds 13% drop rate to specific week's race
 
         local newSpawn = math.random(1, 3) -- determine new spawn point for ???
         if newSpawn == 1 then

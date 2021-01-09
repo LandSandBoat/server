@@ -11,5 +11,5 @@ cmdprops =
 }
 
 function onTrigger(player)
-    tpz.core.garbageCollectFull()
+    GarbageCollectFull()
 end

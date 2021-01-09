@@ -36,7 +36,7 @@ function onTrigger(player, logId, target)
             targ = player
         end
     else
-        targ = tpz.core.getPlayerByName(target)
+        targ = GetPlayerByName(target)
         if (targ == nil) then
             error(player, string.format("Player named '%s' not found!", target))
             return

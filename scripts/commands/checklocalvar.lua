@@ -39,7 +39,7 @@ function onTrigger(player, arg1, arg2, arg3)
                 targ = GetMobByID(arg3)
             end
         elseif entity_type == 'PLAYER' then
-            targ = tpz.core.getPlayerByName(arg3)
+            targ = GetPlayerByName(arg3)
         else
             error(player, "Invalid entity type.")
             return

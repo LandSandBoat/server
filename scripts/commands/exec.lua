@@ -26,7 +26,7 @@ function onTrigger(player, str)
     os = nil
 
     -- Define "player" and "target" inside the string for use by the caller
-    local define_player = "local player = tpz.core.getPlayerByName(\"" .. player:getName() .. "\"); "
+    local define_player = "local player = GetPlayerByName(\"" .. player:getName() .. "\"); "
     local define_target = "local target = player:getCursorTarget(); "
 
     -- Ensure the command compiles / is valid..

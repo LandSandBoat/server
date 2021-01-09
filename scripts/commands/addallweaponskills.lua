@@ -19,7 +19,7 @@ function onTrigger(player, target)
     -- validate target
     local targ
     if target then
-        targ = tpz.core.getPlayerByName(target)
+        targ = GetPlayerByName(target)
         if not targ then
             error(player, string.format("Player named '%s' not found!", target))
             return

@@ -32,7 +32,7 @@ function onTrigger(player, target, nation)
         error(player, "You must specify an online player by name.")
         return
     end
-    local targ = tpz.core.getPlayerByName( target )
+    local targ = GetPlayerByName( target )
     if (targ == nil) then
         error(player, string.format( "Player named '%s' not found!", target ) )
         return

@@ -31,7 +31,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4, arg5, arg6)
         error(player, "Invalid effect.")
         return
     else
-        targ = tpz.core.getPlayerByName(arg1)
+        targ = GetPlayerByName(arg1)
         if (targ == nil) then
             -- no valid target given. shift arguments by one.
             targ = player

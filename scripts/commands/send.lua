@@ -321,7 +321,7 @@ function onTrigger(player, bytes)
         return
     else
         target = string.sub(bytes, 1, sppos-1)
-        targ = tpz.core.getPlayerByName(target)
+        targ = GetPlayerByName(target)
         if (targ == nil) then
             error(player, string.format( "Player named '%s' not found!", target ))
             return
@@ -369,7 +369,7 @@ function onTrigger(player, bytes)
         else
             -- destination is a player name.
             local target = dest
-            dest = tpz.core.getPlayerByName(dest)
+            dest = GetPlayerByName(dest)
             if (dest == nil) then
                 error(player, string.format( "Player named '%s' not found!", target ))
                 return

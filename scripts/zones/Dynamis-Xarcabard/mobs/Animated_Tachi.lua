@@ -9,9 +9,9 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 function onMobEngaged(mob, target)
 
     if (mob:getAnimationSub() == 3) then
-        tpz.core.setDropRate(117, 1580, 1000)
+        SetDropRate(117, 1580, 1000)
     else
-        tpz.core.setDropRate(117, 1580, 0)
+        SetDropRate(117, 1580, 0)
     end
 
     target:showText(mob, ID.text.ANIMATED_TACHI_DIALOG)

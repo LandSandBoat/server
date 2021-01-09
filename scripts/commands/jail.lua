@@ -26,7 +26,7 @@ function onTrigger(player, target, cellId, reason)
     }
 
     -- Validate the target..
-    local targ = tpz.core.getPlayerByName( target )
+    local targ = GetPlayerByName( target )
     if (targ == nil) then
         player:PrintToPlayer( string.format( "Invalid player '%s' given.", target ) )
         return

@@ -32,7 +32,7 @@ function onTrigger(player, target, forceZone)
         forceZone = 1
     end
 
-    local targ = tpz.core.getPlayerByName(target)
+    local targ = GetPlayerByName(target)
     -- if we found this player, they're on the same zone server
     -- if they're in mog house, goto them instead of setPos
     if targ and not targ:isInMogHouse() then

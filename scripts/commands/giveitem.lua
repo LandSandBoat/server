@@ -15,7 +15,7 @@ function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val,
         return
     end
 
-    local targ = tpz.core.getPlayerByName( target )
+    local targ = GetPlayerByName( target )
     if (targ == nil) then
         player:PrintToPlayer( string.format( "Player named '%s' not found!", target ) )
         return

@@ -27,7 +27,7 @@ function onTrigger(player, target, level)
         error(player, "You must provide a player name.")
         return
     else
-        targ = tpz.core.getPlayerByName(target)
+        targ = GetPlayerByName(target)
         if (targ == nil) then
             error(player, string.format( "Player named '%s' not found!", target ) )
             return

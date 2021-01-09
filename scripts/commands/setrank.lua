@@ -20,7 +20,7 @@ function onTrigger(player, target, rank)
         return
     end
 
-    local targ = tpz.core.getPlayerByName(target)
+    local targ = GetPlayerByName(target)
 
     if targ == nil then
         error(player, string.format("Cannot find player: %s.", target))

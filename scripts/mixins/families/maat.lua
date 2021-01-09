@@ -40,7 +40,7 @@ g_mixins.maat = function(mob)
     mob:addListener("DISENGAGE", "MAAT_DISENGAGE", function(mob)
         engagedID = mob:getLocalVar("engaged")
         if engagedID ~= 0 then
-            player = tpz.core.getPlayerByID(engagedID)
+            player = GetPlayerByID(engagedID)
             if player:getHP() == 0 then
                 local ID = zones[mob:getZoneID()]
                 mob:showText(mob, ID.text.LOOKS_LIKE_YOU_WERENT_READY)

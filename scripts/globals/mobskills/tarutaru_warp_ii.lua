@@ -15,7 +15,7 @@ end
 function onMobWeaponSkill(target, mob, skill)
     local t = mob:getSpawnPos()
     local angle = math.random() * 2 * math.pi
-    local pos = tpz.core.nearLocation(t, 18.0, angle)
+    local pos = NearLocation(t, 18.0, angle)
     mob:teleport(pos, battletarget)
     skill:setMsg(tpz.msg.basic.NONE)
     return 0

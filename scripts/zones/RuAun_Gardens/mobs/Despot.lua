@@ -9,7 +9,7 @@ function onMobSpawn(mob)
         mob:setPos(pos.x, pos.y, pos.z, pos.r)
         local killerId = ph:getLocalVar("killer")
         if killerId ~= 0 then
-            local killer = tpz.core.getPlayerByID(killerId)
+            local killer = GetPlayerByID(killerId)
             if not killer:isEngaged() and killer:checkDistance(mob) <= 50 then
                 mob:updateClaim(killer)
             end
