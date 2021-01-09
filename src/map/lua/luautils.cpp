@@ -824,7 +824,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        CMobEntity* PMob  = nullptr;
+        CMobEntity* PMob = nullptr;
 
         if (arg2.is<CLuaInstance>())
         {
@@ -948,7 +948,7 @@ namespace luautils
                     int32 ret = Sql_Query(SqlHandle, Query, trial);
                     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                     {
-                        auto inner_table = table.create_named(trial);
+                        auto  inner_table = table.create_named(trial);
                         int32 field{ 0 };
                         for (auto column : magianColumns)
                         {
@@ -979,15 +979,15 @@ namespace luautils
         TracyZoneScoped;
 
         const char* Query = "SELECT `trialId` from `magian` WHERE `previousTrial` = %u;";
-        int32 ret = Sql_Query(SqlHandle, Query, parentTrial);
+        int32       ret   = Sql_Query(SqlHandle, Query, parentTrial);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) > 0)
         {
-            auto table = lua.create_table();
+            auto  table = lua.create_table();
             int32 field{ 0 };
             while (Sql_NextRow(SqlHandle) == 0)
             {
                 int32 childTrial = Sql_GetIntData(SqlHandle, 0);
-                table[++field] = childTrial;
+                table[++field]   = childTrial;
             }
 
             return table;
@@ -1481,7 +1481,7 @@ namespace luautils
         TracyZoneScoped;
 
         auto filename = fmt::format(PAttacker->objtype == TYPE_PC ? "scripts/globals/items/{}.lua" : "scripts/zones/{}/mobs/{}.lua",
-                       PAttacker->objtype == TYPE_PC ? PItem->getName() : PAttacker->loc.zone->GetName(), PAttacker->GetName());
+                                    PAttacker->objtype == TYPE_PC ? PItem->getName() : PAttacker->loc.zone->GetName(), PAttacker->GetName());
 
         auto onAdditionalEffect = loadFunctionFromFile("onAdditionalEffect", filename);
         if (!onAdditionalEffect.valid())
@@ -1497,9 +1497,9 @@ namespace luautils
             return -1;
         }
 
-        Action->additionalEffect = (SUBEFFECT)(result.return_count() > 0 ? result.get<int32>() : 0);
-        Action->addEffectMessage = result.return_count() > 1 ? result.get<int32>() : 0;
-        Action->addEffectParam   = result.return_count() > 2 ? result.get<int32>() : 0;
+        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
         return 0;
     }
@@ -1522,12 +1522,11 @@ namespace luautils
             sol::error err = result;
             ShowError("luautils::onSpikesDamage: %s\n", err.what());
             return -1;
-
         }
 
-        Action->additionalEffect = (SUBEFFECT)(result.return_count() > 0 ? result.get<int32>() : 0);
-        Action->addEffectMessage = result.return_count() > 1 ? result.get<int32>() : 0;
-        Action->addEffectParam   = result.return_count() > 2 ? result.get<int32>() : 0;
+        Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+        Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
+        Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 
         return 0;
     }
@@ -1823,7 +1822,7 @@ namespace luautils
         auto filename = fmt::format(PSpell->getSpellGroup() == SPELLGROUP_BLUE    ? "scripts/globals/spells/bluemagic/{}.lua"
                                     : PSpell->getSpellGroup() == SPELLGROUP_TRUST ? "scripts/globals/spells/trust/{}.lua"
                                                                                   : "scripts/globals/spells/{}.lua",
-                                                                                    PSpell->getName());
+                                    PSpell->getName());
 
         auto onSpellCast = loadFunctionFromFile("onSpellCast", filename);
         if (!onSpellCast.valid())
@@ -2133,7 +2132,7 @@ namespace luautils
         }
 
         std::string filename = "scripts/globals/battlefield.lua";
-        int32 MaxAreas = 3;
+        int32       MaxAreas = 3;
 
         auto onBattlefieldHandlerInitialise = loadFunctionFromFile("onBattlefieldHandlerInitialise", filename);
         if (!onBattlefieldHandlerInitialise.valid())
@@ -2200,7 +2199,7 @@ namespace luautils
             return -1;
         }
 
-        auto seconds  = std::chrono::duration_cast<std::chrono::seconds>(PBattlefield->GetTimeInside()).count();
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(PBattlefield->GetTimeInside()).count();
         auto result  = onBattlefieldTick(CLuaBattlefield(PBattlefield), seconds);
         if (!result.valid())
         {
@@ -2498,7 +2497,7 @@ namespace luautils
                 CCharEntity* PMember = (CCharEntity*)PPartyMember;
                 if (PMember && PMember->getZone() == PChar->getZone())
                 {
-                    CLuaBaseEntity LuaMobEntity(PMob);
+                    CLuaBaseEntity                LuaMobEntity(PMob);
                     std::optional<CLuaBaseEntity> optLuaAllyEntity = std::nullopt;
                     if (PMember)
                     {
@@ -2829,7 +2828,7 @@ namespace luautils
             ShowError("luautils::onUseWeaponSkill: %s\n", err.what());
             return std::tuple<int32, uint8, uint8>();
         }
-        
+
         uint8 tpHitsLanded    = result.get_type(0) == sol::type::number ? result.get<uint8>(0) : 0;
         uint8 extraHitsLanded = result.get_type(1) == sol::type::number ? result.get<uint8>(1) : 0;
         bool  criticalHit     = result.get_type(2) == sol::type::boolean ? result.get<bool>(2) : false;
@@ -2943,7 +2942,7 @@ namespace luautils
         auto filename = fmt::format(PSpell->getSpellGroup() == SPELLGROUP_BLUE    ? "scripts/globals/spells/bluemagic/{}.lua"
                                     : PSpell->getSpellGroup() == SPELLGROUP_TRUST ? "scripts/globals/spells/trust/{}.lua"
                                                                                   : "scripts/globals/spells/{}.lua",
-                                                                                     PSpell->getName());
+                                    PSpell->getName());
 
         auto onMagicCastingCheck = loadFunctionFromFile("onMagicCastingCheck", filename);
         if (!onMagicCastingCheck.valid())
