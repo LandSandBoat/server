@@ -8455,11 +8455,11 @@ INSERT INTO `mob_groups` VALUES (19,2117,122,'Jackpot',0,128,0,0,0,1,1,0); -- TO
 INSERT INTO `mob_groups` VALUES (20,4727,122,'Mimic_King',0,128,0,0,9999,93,95,0);
 INSERT INTO `mob_groups` VALUES (21,4726,122,'Mimic_Jester',0,128,0,0,9999,90,91,0);
 INSERT INTO `mob_groups` VALUES (22,4725,122,'Mimic_Mage',0,128,0,0,9999,90,91,0);
-INSERT INTO `mob_groups` VALUES (23,0,122,'Steely_Weapon',0,128,0,0,0,68,68,0);
-INSERT INTO `mob_groups` VALUES (24,0,122,'Lode_Golem',0,128,0,0,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (25,0,122,'Fired_Urn',0,128,0,0,0,69,69,0);
-
-INSERT INTO `mob_groups` VALUES (6650,3584,122,'Shantotto',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (23,4724,122,'Steely_Weapon',0,128,0,0,0,68,68,0);
+INSERT INTO `mob_groups` VALUES (24,4722,122,'Lode_Golem',0,128,0,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (25,4723,122,'Fired_Urn',0,128,0,0,0,69,69,0);
+INSERT INTO `mob_groups` VALUES (26,6843,122,'Douma_Weapon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,6844,122,'Katashiro_Weapon',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Yuhtunga_Jungle (Zone 123)
