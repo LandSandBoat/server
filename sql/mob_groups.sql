@@ -8516,7 +8516,12 @@ INSERT INTO `mob_groups` VALUES (48,3441,123,'Sahagin_Patriarch',0,128,0,0,0,45,
 INSERT INTO `mob_groups` VALUES (49,2811,123,'Nasus',0,128,0,0,0,34,40,0);
 INSERT INTO `mob_groups` VALUES (50,2924,123,'Nutcracker',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (51,6170,123,'Siren',0,128,0,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (52,0,123,'Pyuu_the_Spatemaker',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (52,6845,123,'Pyuu_the_Spatemaker',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (53,6846,123,'Bayawak',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,6847,123,'Holy_Moly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,6848,123,'Moly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,123,'Steamy_Samantha',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,123,'Sybaritic_Samantha',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Yhoator_Jungle (Zone 124)
