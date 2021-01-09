@@ -8279,8 +8279,21 @@ INSERT INTO `mob_groups` VALUES (55,4419,119,'Yagudo_Follower',0,128,0,0,0,30,35
 INSERT INTO `mob_groups` VALUES (56,4433,119,'Yagudo_Missionary',0,128,0,0,0,35,35,0);
 INSERT INTO `mob_groups` VALUES (57,3745,119,'Sprite',0,128,0,0,0,61,63,0);
 INSERT INTO `mob_groups` VALUES (58,4044,119,'Tsaagan',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (59,5189,119,'Lord_Asag',0,128,0,0,25000,94,95,0);
-INSERT INTO `mob_groups` VALUES (60,6574,119,'Zombie_blm',330,1,2809,0,0,16,26,0);
+INSERT INTO `mob_groups` VALUES (59,4736,119,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,0,119,'Orcus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,0,119,'Farruca_Fly',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,0,119,'Jyeshtha',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (63,0,119,'Rummager_Beetle',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,0,119,'Raker_Bee',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,5189,119,'Lord_Asag',0,128,0,0,25000,94,95,0);
+INSERT INTO `mob_groups` VALUES (66,6839,119,'Warblade_Beak',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (67,0,119,'Wayward_Worm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (68,0,119,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (69,0,119,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (70,0,119,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (71,0,119,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (72,0,119,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (73,6574,119,'Zombie_blm',330,1,2809,0,0,16,26,0);
 
 -- ------------------------------------------------------------
 -- Sauromugue_Champaign (Zone 120)
