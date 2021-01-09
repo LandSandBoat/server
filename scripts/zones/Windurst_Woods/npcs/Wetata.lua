@@ -46,7 +46,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 862 or csid == 902 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)
-        player:addSpell(spellID, false, true)
+        player:addSpell(spellID, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, spellID)
         player:tradeComplete()
     end
