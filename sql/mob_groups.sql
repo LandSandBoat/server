@@ -8688,12 +8688,9 @@ INSERT INTO `mob_groups` VALUES (46,4694,126,'Kaggen',0,128,0,0,9999,95,96,0);
 INSERT INTO `mob_groups` VALUES (47,1642,126,'Goblin_Bounty_Hunter',0,128,1031,0,0,32,36,0);
 INSERT INTO `mob_groups` VALUES (48,6169,126,'Ophiotaurus',0,128,0,0,0,43,43,0);
 INSERT INTO `mob_groups` VALUES (49,6570,126,'Wight_blm',330,1,2652,0,0,28,30,0);
-INSERT INTO `mob_groups` VALUES (50,0,126,'Atkorkamuy',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (50,6854,126,'Atkorkamuy',0,128,0,0,0,73,73,0);
 INSERT INTO `mob_groups` VALUES (51,1642,126,'Goblin_Bounty_Hunter',0,128,1031,0,0,11,11,0);
-
-INSERT INTO `mob_groups` VALUES (6802,1027,126,'Diabolos',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6835,3584,126,'Shantotto',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6839,4249,126,'Volker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,4855,126,'Jester_Malatrix',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Behemoths_Dominion (Zone 127)
