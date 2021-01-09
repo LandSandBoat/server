@@ -8587,6 +8587,7 @@ INSERT INTO `mob_groups` VALUES (57,3954,124,'Tonberry_Decimator',0,128,0,0,0,55
 INSERT INTO `mob_groups` VALUES (58,1174,124,'Edacious_Opo-opo',0,128,744,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (59,2201,124,'Kedgebelly_Kate',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (60,6303,124,'Goblins_Bee',0,128,1697,0,0,38,40,0);
+INSERT INTO `mob_groups` VALUES (61,0,124,'Woodland_Mender',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Western_Altepa_Desert (Zone 125)
