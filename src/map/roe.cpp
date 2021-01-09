@@ -66,15 +66,15 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     {
         if (auto value = std::get_if<uint32>(&datagram.data))
         {
-            params.add(datagram.luaKey, *value);
+            params[datagram.luaKey] = *value;
         }
         else if (auto PMob = std::get_if<CMobEntity*>(&datagram.data))
         {
-            params.add(datagram.luaKey, CLuaBaseEntity(*PMob));
+            params[datagram.luaKey] = CLuaBaseEntity(*PMob);
         }
         else if (auto text = std::get_if<std::string>(&datagram.data))
         {
-            params.add(datagram.luaKey, text);
+            params[datagram.luaKey] = text;
         }
         else
         {
