@@ -8344,12 +8344,29 @@ INSERT INTO `mob_groups` VALUES (42,741,120,'Climbpix_Highrise',0,128,478,0,0,55
 INSERT INTO `mob_groups` VALUES (43,3745,120,'Sprite',0,128,0,0,0,61,63,0);
 INSERT INTO `mob_groups` VALUES (44,328,120,'Balam-Agab',0,128,0,0,0,30,36,0);
 INSERT INTO `mob_groups` VALUES (45,1119,120,'Dribblix_Greasemaw',0,128,0,0,0,30,36,0);
-INSERT INTO `mob_groups` VALUES (46,5149,120,'Goji',0,128,0,0,0,92,94,0);
-INSERT INTO `mob_groups` VALUES (47,1642,120,'Goblin_Bounty_Hunter',300,0,1030,0,0,30,34,0);
-INSERT INTO `mob_groups` VALUES (48,6570,120,'Wight_blm',330,1,2651,0,0,26,36,0);
-INSERT INTO `mob_groups` VALUES (49,6583,120,'Bashe',0,32,3142,3300,0,54,55,0);
-
-INSERT INTO `mob_groups` VALUES (6565,2378,120,'Larzos',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,4736,120,'Yilbegan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,120,'Verthandi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,120,'Urd',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,0,120,'Skuld',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,120,'Aither',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,120,'Deorc',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,120,'Eorthe',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,120,'Puretos',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,120,'Pruina',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,120,'Beorht',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,120,'Thunor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,120,'Lacus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,5149,120,'Goji',0,128,0,0,0,92,94,0);
+INSERT INTO `mob_groups` VALUES (59,6840,120,'Arke',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,0,120,'Wayward_Worm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,0,120,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,0,120,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (63,0,120,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,0,120,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,0,120,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (66,1642,120,'Goblin_Bounty_Hunter',300,0,1030,0,0,30,34,0);
+INSERT INTO `mob_groups` VALUES (67,6570,120,'Wight_blm',330,1,2651,0,0,26,36,0);
+INSERT INTO `mob_groups` VALUES (68,6583,120,'Bashe',0,32,3142,3300,0,54,55,0);
 
 -- ------------------------------------------------------------
 -- The_Sanctuary_of_ZiTah (Zone 121)
