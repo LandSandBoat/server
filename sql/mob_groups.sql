@@ -8070,21 +8070,34 @@ INSERT INTO `mob_groups` VALUES (26,1648,116,'Goblin_Digger',330,0,1039,0,0,5,8,
 INSERT INTO `mob_groups` VALUES (27,3148,116,'Pixie',0,128,2001,0,0,51,54,0);
 INSERT INTO `mob_groups` VALUES (28,489,116,'Bolster',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (29,4709,116,'Rw_Nw_Prt_M_Hrw',0,128,0,0,5000,95,97,0);
-INSERT INTO `mob_groups` VALUES (30,579,116,'Bull_[Herd1]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (31,821,116,'Cow_[Herd1]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (32,611,116,'Calf_[Herd1]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (33,580,116,'Bull_[Herd2]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (34,822,116,'Cow_[Herd2]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (35,612,116,'Calf_[Herd2]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (36,581,116,'Bull_[Herd3]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (37,823,116,'Cow_[Herd3]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (38,613,116,'Calf_[Herd3]',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (39,3222,116,'Pug_Pugil',330,0,463,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (40,3241,116,'Pyracmon',0,128,2047,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (41,4381,116,'Wraith_Bat',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (42,6562,116,'Magicked_Bones_blm',330,1,769,0,0,3,8,0);
-
-INSERT INTO `mob_groups` VALUES (6386,3584,116,'Shantotto',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,0,116,'Wayward_Worm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (31,0,116,'Tatenashi_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (32,0,116,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (33,0,116,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,0,116,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,0,116,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,579,116,'Bull_[Herd1]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (37,821,116,'Cow_[Herd1]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (38,611,116,'Calf_[Herd1]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (39,580,116,'Bull_[Herd2]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (40,822,116,'Cow_[Herd2]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (41,612,116,'Calf_[Herd2]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (42,581,116,'Bull_[Herd3]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (43,823,116,'Cow_[Herd3]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (44,613,116,'Calf_[Herd3]',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (45,3241,116,'Pyracmon',0,128,2047,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (46,4381,116,'Wraith_Bat',0,128,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (47,0,116,'Astral_Box',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,116,'Slime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,0,116,'She-Slime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,116,'Metal_Slime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,4851,116,'Prickly_Pitriv',0,128,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (52,0,116,'Yagudo_Vicar',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,116,'Yagudo_Centurion',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,116,'Yagudo_Underling',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,116,'King_of_Spades',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,3222,116,'Pug_Pugil',330,0,463,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (57,6562,116,'Magicked_Bones_blm',330,1,769,0,0,3,8,0);
 
 -- ------------------------------------------------------------
 -- Tahrongi_Canyon (Zone 117)
