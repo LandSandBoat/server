@@ -165,7 +165,7 @@ function onEventFinish(player, csid, option)
     -- RoV: Set Free
     elseif csid == 178 then
         player:confirmTrade()
-        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
+        if player:hasJob(0) == false then -- Is Subjob Unlocked
             npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
             if not npcUtil.giveItem(player, 8711) then return end
