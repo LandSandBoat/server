@@ -302,10 +302,10 @@ public:
     void   setTitle(uint16 titleID);
     void   delTitle(uint16 titleID);
 
-    uint16 getFame(sol::object const& areaObj);               // Gets Fame
-    void   addFame(sol::object const& areaObj, uint16 fame);  // Adds Fame
-    void   setFame(sol::object const& areaObj, uint16 fame);  // Sets Fame
-    uint8  getFameLevel(sol::object const& areaObj);          // Gets Fame Level for specified nation
+    uint16 getFame(sol::object const& areaObj);              // Gets Fame
+    void   addFame(sol::object const& areaObj, uint16 fame); // Adds Fame
+    void   setFame(sol::object const& areaObj, uint16 fame); // Sets Fame
+    uint8  getFameLevel(sol::object const& areaObj);         // Gets Fame Level for specified nation
 
     uint8  getRank();                        // Get Rank for current active nation
     uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
@@ -540,10 +540,10 @@ public:
     auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
-    bool   canGainStatusEffect(uint16 effect, uint16 power);           // Returns true if the effect can be added
-    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID); // Checks to see if character has specified effect
-    uint16 hasStatusEffectByFlag(uint16 StatusID);                     // Checks to see if a character has an effect with the specified flag
-    uint8  countEffect(uint16 StatusID);                               // Gets the number of effects of a specific type on the player
+    bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj); // Returns true if the effect can be added
+    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID);      // Checks to see if character has specified effect
+    uint16 hasStatusEffectByFlag(uint16 StatusID);                          // Checks to see if a character has an effect with the specified flag
+    uint8  countEffect(uint16 StatusID);                                    // Gets the number of effects of a specific type on the player
 
     bool   delStatusEffect(uint16 StatusID, sol::object const& SubID);                   // Removes Status Effect
     void   delStatusEffectsByFlag(uint16 flag, sol::object const& silent);               // Removes Status Effects by Flag
