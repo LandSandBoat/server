@@ -6899,6 +6899,7 @@ INSERT INTO `mob_pools` VALUES (6851,'Sabotender_Campeador','Sabotender_Campeado
 INSERT INTO `mob_pools` VALUES (6852,'Sabotender_Mercenario','Sabotender_Mercenario',212,0x0000740100000000000000000000000000000000,2,2,7,360,100,0,1,0,1,2,0,0,0,129,0,0,0,1,0,212); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6853,'King_Uropygid','King_Uropygid',217,0x00001C0100000000000000000000000000000000,1,1,7,280,100,0,1,0,0,2,0,32,0,135,0,0,0,1,0,217); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6854,'Atkorkamuy','Atkorkamuy',218,0x0000600100000000000000000000000000000000,2,2,7,360,100,0,1,0,0,2,7,32,0,1179,0,0,0,1,0,218); -- TODO: skill list
+INSERT INTO `mob_pools` VALUES (6855,'Sovereign_Behemoth','Sovereign_Behemoth',51,0x0000940100000000000000000000000000000000,4,1,6,380,125,1024,1,1,0,2,0,0,0,131,0,0,126,1,0,51); -- TODO: spell, skill list
 
 /*
   `poolid` int(10) unsigned NOT NULL,
