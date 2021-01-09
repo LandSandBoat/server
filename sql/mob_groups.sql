@@ -8728,10 +8728,7 @@ INSERT INTO `mob_groups` VALUES (5,4125,128,'Valley_Manticore',330,0,2537,0,0,71
 INSERT INTO `mob_groups` VALUES (6,44,128,'Adamantoise',0,128,21,7000,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (7,268,128,'Aspidochelone',0,128,183,15000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (8,3643,128,'Skahnowa',0,128,0,0,0,1,1,0);
-
-INSERT INTO `mob_groups` VALUES (6861,2226,128,'Kilhwch',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6862,2405,128,'Lhu_Mhakaracca',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6863,2904,128,'Noillurie',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,6856,128,'Tolba',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Ghoyus_Reverie (Zone 129)
