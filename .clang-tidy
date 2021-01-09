@@ -3,6 +3,7 @@
 Checks: >
   -*,
   bugprone-*,
+  -bugprone-parent-virtual-call,
   -bugprone-reserved-identifier,
   cert-flp30-c,
   cert-mem57-cpp,
