@@ -8215,9 +8215,7 @@ INSERT INTO `mob_groups` VALUES (54,1642,118,'Goblin_Bounty_Hunter',300,0,1030,0
 INSERT INTO `mob_groups` VALUES (55,5344,118,'Backoo',0,128,3140,2500,0,37,37,0);
 INSERT INTO `mob_groups` VALUES (56,3608,118,'Shoal_Pugil',330,0,2240,0,0,24,28,0);
 INSERT INTO `mob_groups` VALUES (57,5733,118,'Snipper',330,0,957,0,0,18,23,0);
-
-INSERT INTO `mob_groups` VALUES (6435,1027,118,'Diabolos',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6462,2403,118,'Lewenhart',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,4853,118,'Abyssdiver',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Meriphataud_Mountains (Zone 119)
