@@ -11777,21 +11777,20 @@ sol::table CLuaBaseEntity::getEnmityList()
 
     if (enmityList)
     {
-        sol::table table = luautils::lua.create_table();
-        int        i     = 1;
+        auto table = luautils::lua.create_table();
         for (auto member : *enmityList)
         {
             if (member.second.PEnmityOwner)
             {
-                sol::table subTable;
+                auto subTable = luautils::lua.create_table();
 
-                subTable.add("entity", CLuaBaseEntity(member.second.PEnmityOwner));
-                subTable.add("ce", member.second.CE);
-                subTable.add("ve", member.second.VE);
-                subTable.add("active", member.second.active);
-                subTable.add("tameable", ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->IsTameable());
+                subTable["entity"] = CLuaBaseEntity(member.second.PEnmityOwner);
+                subTable["ce"] = member.second.CE;
+                subTable["ve"] = member.second.VE;
+                subTable["active"] = member.second.active;
+                subTable["tameable"] = ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->IsTameable();
 
-                table.add(i++, subTable);
+                table.add(subTable);
             }
         }
 
