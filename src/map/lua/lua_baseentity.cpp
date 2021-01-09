@@ -5458,7 +5458,10 @@ void CLuaBaseEntity::completeQuest(uint8 questLogID, uint16 questID)
 
 void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
 
     if (missionLogID < MAX_MISSIONAREA && missionID < MAX_MISSIONID)
     {
