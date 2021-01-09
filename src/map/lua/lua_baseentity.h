@@ -412,7 +412,7 @@ public:
 
     uint16 getSkillLevel(uint16 skillId);                             // Get Current Skill Level
     void   setSkillLevel(uint8 SkillID, uint16 SkillAmount);          // Set Current Skill Level
-    uint16 getMaxSkillLevel(uint8 skillId, uint8 jobId, uint8 level); // Get Skill Cap for skill and rank
+    uint16 getMaxSkillLevel(uint8 level, uint8 jobId, uint8 skillId); // Get Skill Cap for skill and rank
     uint8  getSkillRank(uint8 rankID);                                // Get your current skill craft Rank
     void   setSkillRank(uint8 skillID, uint8 newrank);                // Set new skill craft rank
     uint16 getCharSkillLevel(uint8 skillID);                          // Get char skill level

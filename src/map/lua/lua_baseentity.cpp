@@ -7090,11 +7090,11 @@ void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 /************************************************************************
  *  Function: getMaxSkillLevel()
  *  Purpose : Returns the Max Skill Level for a PC's current main job
- *  Example : master:getMaxSkillLevel(avatar:getMainLvl(), JOBS.SMN, SUMMONING_SKILL), 0, 200)
+ *  Example : master:getMaxSkillLevel(avatar:getMainLvl(), JOBS.SMN, SUMMONING_SKILL)
  *  Notes   : Used in Meteor, summons, and some Mob TP moves
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 skillId, uint8 jobId, uint8 level)
+uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 level, uint8 jobId, uint8 skillId)
 {
     auto skill = static_cast<SKILLTYPE>(skillId);
     auto job   = static_cast<JOBTYPE>(jobId);
