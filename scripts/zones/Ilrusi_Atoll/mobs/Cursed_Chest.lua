@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local PX = target:getXPos()
     local PY = target:getYPos()
     local PZ = target:getZPos()
@@ -34,3 +35,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

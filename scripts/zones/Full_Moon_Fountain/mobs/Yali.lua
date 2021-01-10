@@ -1,12 +1,14 @@
------------------------------------
+----------------------------------------
 -- Area: Full Moon Fountain
 --  Mob: Yali
 -- Windurst Mission 9-2
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setSpellList(135)
 end
 
@@ -26,3 +28,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

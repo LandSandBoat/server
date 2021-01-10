@@ -7,6 +7,7 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- setMod
@@ -49,3 +50,5 @@ end
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.VIRTUOUS_SAINT)
 end
+
+return entity

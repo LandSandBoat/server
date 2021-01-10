@@ -3,6 +3,8 @@
 --  Mob: Lamia No.19
 -----------------------------------
 mixins = {require("scripts/mixins/weapon_break")}
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     local mobId = mob:getID()
@@ -12,3 +14,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

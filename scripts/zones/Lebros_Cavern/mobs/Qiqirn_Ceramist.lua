@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
 end
@@ -17,3 +18,5 @@ end
 
 function onMobDespawn(mob)
 end
+
+return entity

@@ -6,6 +6,7 @@ require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 427)
@@ -18,3 +19,5 @@ function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 818, 2, tpz.regime.type.GROUNDS)
     tpz.regime.checkRegime(player, mob, 819, 2, tpz.regime.type.GROUNDS)
 end
+
+return entity

@@ -6,12 +6,13 @@ mixins = {require("scripts/mixins/families/tonberry")}
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 6)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
     if target:isPet() then
@@ -23,3 +24,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

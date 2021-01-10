@@ -5,8 +5,9 @@
 require("scripts/globals/hunts")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -21,3 +22,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(7200 + math.random(0, 600)) -- 2 hours, then 10 minute window
 end
+
+return entity

@@ -4,6 +4,8 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller, noKiller)
     if mob:getID() == ID.mob.APOLLYON_NE_MOB[1] + 11 then
@@ -23,3 +25,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

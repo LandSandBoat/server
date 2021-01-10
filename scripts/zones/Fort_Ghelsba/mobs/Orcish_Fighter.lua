@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Fort_Ghelsba/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -14,3 +15,5 @@ function onMobDespawn(mob)
         GetMobByID(ID.mob.ORCISH_PANZER):setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
     end
 end
+
+return entity

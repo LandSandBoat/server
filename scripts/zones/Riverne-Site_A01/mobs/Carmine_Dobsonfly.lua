@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.SUPERLINK, ID.mob.CARMINE_DOBSONFLY_OFFSET)
@@ -42,3 +43,5 @@ function onMobDespawn(mob)
         DisallowRespawn(mobID, true)
     end
 end
+
+return entity

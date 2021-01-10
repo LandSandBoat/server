@@ -5,6 +5,7 @@
 require("scripts/globals/pathfind")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local pathNodes =
 {
@@ -125,7 +126,7 @@ function onMobSpawn(mob)
     onPath(mob)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
         mob:pathThrough(tpz.path.first(pathNodes), tpz.path.flag.RUN)
@@ -140,3 +141,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(172800, 259200)) -- 2 to 3 days
 end
+
+return entity

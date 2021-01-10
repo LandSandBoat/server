@@ -7,8 +7,9 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/quests")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -21,3 +22,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("bladeOfEvilCS", 1)
     end
 end
+
+return entity

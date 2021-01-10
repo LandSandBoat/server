@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.CHR_DOWN
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.CHR) - effect:getPower()) < 0) then
@@ -28,3 +27,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.CHR, -downCHR_effect_size)
     end
 end
+
+return effect_object

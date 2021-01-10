@@ -4,12 +4,13 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("petCount", 1)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local auraGear = GetMobByID(mob:getID() + 1)
     local petCount = mob:getLocalVar("petCount")
 
@@ -53,3 +54,5 @@ function onMobDespawn( mob )
         DespawnMob(auraGearId)
     end
 end
+
+return entity

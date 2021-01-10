@@ -1,12 +1,11 @@
 -----------------------------------
---
 -- tpz.effect.MARK_OF_SEED
---
---  DO NOT try to use this anywhere else but Fei'Yin!
+-- DO NOT try to use this anywhere else but Fei'Yin!
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:setCharVar("SEED_AFTERGLOW_TIMER", 1)
@@ -36,3 +35,5 @@ function onEffectLose(target, effect)
     target:setCharVar("SEED_AFTERGLOW_MASK", 0)
     target:setCharVar("SEED_AFTERGLOW_INTENSITY", 0)
 end
+
+return effect_object

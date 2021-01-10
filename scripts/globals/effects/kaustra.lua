@@ -1,14 +1,11 @@
 -----------------------------------
---
---     tpz.effect.KAUSTRA
---
+-- tpz.effect.KAUSTRA
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/globals/magic")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
-
     target:addMod(tpz.mod.REGEN_DOWN, effect:getPower())
 end
 
@@ -17,5 +14,6 @@ end
 
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.REGEN_DOWN, effect:getPower())
-
 end
+
+return effect_object

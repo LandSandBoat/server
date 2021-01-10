@@ -3,6 +3,8 @@
 --  Mob: Enhanced Vulture
 -----------------------------------
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     GetMobByID(ID.mob.TEMENOS_W_MOB[7]):updateEnmity(target)
@@ -23,3 +25,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.ADDENDUM_BLACK
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:recalculateAbilitiesTable()
@@ -50,3 +51,5 @@ function onEffectLose(target, effect)
     end
     target:recalculateSkillsTable()
 end
+
+return effect_object

@@ -6,8 +6,9 @@ local ID = require("scripts/zones/Qufim_Island/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 5)
 end
 
@@ -20,3 +21,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

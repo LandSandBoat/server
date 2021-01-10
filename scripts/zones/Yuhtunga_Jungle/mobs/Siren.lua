@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local ClarsachCall = mob:getLocalVar("ClarsachCall")
     if mob:getHPP() <= 25 and ClarsachCall == 0 then
         mob:useMobAbility(3515)
@@ -23,3 +24,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

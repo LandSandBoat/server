@@ -6,8 +6,9 @@ require("scripts/globals/hunts")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
@@ -23,3 +24,5 @@ end
 function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
 end
+
+return entity

@@ -4,6 +4,8 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     if GetMobByID(ID.mob.TEMENOS_C_MOB[3]+5):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+6):isDead() and
@@ -33,3 +35,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

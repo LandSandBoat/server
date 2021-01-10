@@ -7,6 +7,7 @@ mixins = {require("scripts/mixins/families/antlion_ambush")}
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Aggros via ambush, not superlinking
@@ -24,7 +25,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Every 25% of its HP Tuchulcha will bury itself under the sand
     -- accompanied by use of the ability Sandpit
     if (mob:getHPP() < 75 and mob:getLocalVar('Sandpits') == 0)
@@ -61,3 +62,5 @@ function onMobDeath(mob, player, isKiller)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].ARMORED_HUNTER_ID)
     end
 end
+
+return entity

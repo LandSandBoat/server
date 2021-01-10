@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     -- three tarus fight with tenzen
@@ -18,3 +19,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

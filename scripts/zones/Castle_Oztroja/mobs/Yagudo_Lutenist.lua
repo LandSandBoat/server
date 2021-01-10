@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -13,3 +14,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.YAA_HAQA_THE_PROFANE_PH, 5, 3600) -- 1 hour
 end
+
+return entity

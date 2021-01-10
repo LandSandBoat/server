@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.CHAOS_ROLL
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ATTP, effect:getPower())
@@ -18,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ATTP, effect:getPower())
     target:delMod(tpz.mod.RATTP, effect:getPower())
 end
+
+return effect_object

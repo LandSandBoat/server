@@ -4,13 +4,14 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local bf = mob:getBattlefield()
     if bf:getID() == 961 and mob:getHPP() < 30 then
@@ -57,3 +58,5 @@ function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.MIST_MELTER)
 
 end
+
+return entity

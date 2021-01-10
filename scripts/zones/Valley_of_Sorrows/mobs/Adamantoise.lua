@@ -8,6 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
@@ -46,3 +47,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

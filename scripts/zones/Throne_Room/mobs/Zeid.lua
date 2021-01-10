@@ -4,6 +4,8 @@
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
@@ -37,3 +39,5 @@ function onEventFinish(player, csid, option)
         volker:spawn()
     end
 end
+
+return entity

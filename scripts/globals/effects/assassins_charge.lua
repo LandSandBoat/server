@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.ASSASSINS_CHARGE
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.QUAD_ATTACK, effect:getPower())
@@ -24,3 +23,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.CRITHITRATE, effect:getSubPower())
     end
 end
+
+return effect_object

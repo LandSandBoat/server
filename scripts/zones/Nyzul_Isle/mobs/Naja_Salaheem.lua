@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/allyassist")
 require("scripts/globals/instance")
 -----------------------------------
+local entity = {}
 
 -- Path to Stage 2 Position
 local stage2Position =
@@ -44,7 +45,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getHPP() <= 50 and mob:getLocalVar("lowHPmsg") == 0) then
         mob:showText(mob, ID.text.OW)
         mob:setLocalVar("lowHPmsg", 1)
@@ -61,7 +62,7 @@ function onMobDisengaged(mob, target)
     end
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- Advance to Stage 2 area
     if (mob:getLocalVar("Stage") == 2) then
         mob:showText(mob, ID.text.OH_ARE_WE_DONE)
@@ -97,3 +98,5 @@ function onMobDeath(mob, player, isKiller)
     local instance = mob:getInstance()
     instance:fail()
 end
+
+return entity

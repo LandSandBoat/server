@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 -----------------------------------
+local entity = {}
 
 --https://ffxiclopedia.fandom.com/wiki/Talk:White_Coney#Testimonials
 --just a note on wild carrot beeing TP move, once when I popped I immediatly chi-blasted (w/ penance) it to lower tp gain
@@ -26,3 +27,5 @@ end
 function onMobDespawn(mob)
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar("activeTime", os.time()+math.random(60*9, 60*15))
 end
+
+return entity

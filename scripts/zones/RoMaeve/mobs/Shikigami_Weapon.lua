@@ -6,6 +6,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/regimes")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -42,20 +43,20 @@ local path =
     -35, -4, -36,
 }
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
 end
 
 function onMobSpawn(mob)
     mob:setStatus(tpz.status.INVISIBLE)
-    onMobRoam(mob)
+    entity.onMobRoam(mob)
 end
 
 function onPath(mob)
     tpz.path.patrol(mob, path, tpz.path.flag.RUN)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
         mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
@@ -73,3 +74,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 119, 2, tpz.regime.type.FIELDS)
 end
+
+return entity

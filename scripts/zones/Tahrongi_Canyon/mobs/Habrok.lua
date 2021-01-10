@@ -4,8 +4,10 @@
 -----------------------------------
 require("scripts/globals/hunts")
 require("scripts/quests/tutorial")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setLocalVar("pop", os.time() + math.random(1200, 7200))
 end
 
@@ -18,3 +20,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setLocalVar("pop", os.time() + math.random(1200, 7200))
 end
+
+return entity

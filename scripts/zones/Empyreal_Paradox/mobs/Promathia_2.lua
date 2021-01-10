@@ -8,8 +8,9 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
     mob:addMod(tpz.mod.UFASTCAST, 50)
 end
@@ -36,7 +37,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
         mob:setAnimationSub(0)
         mob:stun(1500)
@@ -76,3 +77,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

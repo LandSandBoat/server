@@ -6,10 +6,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.EVA, 50)
 end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

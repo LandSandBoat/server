@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
@@ -18,7 +19,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("petCooldown", os.time() + 5) -- five seconds for first pet
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- every ~20 seconds after first pet, a new pet will spawn around queen's position.
     -- 49.5% (198/400) chance for Prince/Princess. 1% (4/400) chance for Bomb Bastard.
     if os.time() > mob:getLocalVar("petCooldown") then
@@ -48,3 +49,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

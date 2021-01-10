@@ -1,11 +1,13 @@
------------------------------------
+----------------------------------------
 -- Area: QuBia_Arena
 --  Mob: Death Clan Destroyer
------------------------------------
+----------------------------------------
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, 60)
 end
 
@@ -20,7 +22,7 @@ function phaseChangeReady(battlefield)
     return true
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local inst = mob:getBattlefield():getArea()
     local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
     mob:setMP(9999)
@@ -50,3 +52,5 @@ function onMobDeath(mob, player, isKiller)
         player:startEvent(32004, 0, 0, 4)
     end
 end
+
+return entity

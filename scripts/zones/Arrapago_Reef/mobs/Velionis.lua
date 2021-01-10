@@ -5,8 +5,10 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 -- Todo: blaze spikes effect only activates while not in casting animation
-function onMobInitialize(mob)
+
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(tpz.effect.BLAZE_SPIKES, 250, 0, 0)
     mob:getStatusEffect(tpz.effect.BLAZE_SPIKES):setFlag(tpz.effectFlag.DEATH)
@@ -21,7 +23,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 10)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local FastCast = mob:getLocalVar("HPP")
     if mob:getHPP() <= FastCast then
         if mob:getHPP() > 10 then
@@ -56,3 +58,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.SLUGGISH_DAZE_1
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.DEFP, -5)
@@ -14,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.DEFP, -5)
 end
+
+return effect_object

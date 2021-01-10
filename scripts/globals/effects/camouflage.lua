@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.CAMOUFLAGE
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ENMITY, -25)
@@ -16,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.ENMITY, -25)
 end
+
+return effect_object

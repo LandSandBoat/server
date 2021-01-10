@@ -6,6 +6,8 @@
 local ID = require("scripts/zones/Throne_Room/IDs")
 require("scripts/globals/status")
 require("scripts/globals/titles")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     if mob:getID() >= ID.mob.SHADOW_LORD_STAGE_2_OFFSET then
@@ -16,7 +18,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- 1st form
     -- after change magic or physical immunity every 5min or 1k dmg
     -- 2nd form
@@ -120,3 +122,5 @@ function onEventFinish(player, csid, option)
         mob:SetMobAbilityEnabled(false)
     end
 end
+
+return entity

@@ -9,6 +9,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
@@ -37,3 +38,5 @@ function onMobDespawn(mob)
         SetServerVariable("realPadfoot", math.random(1, 5))
     end
 end
+
+return entity

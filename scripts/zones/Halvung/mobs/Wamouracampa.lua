@@ -5,12 +5,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("formTime", os.time() + math.random(43, 47))
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("formTime")
     if mob:getAnimationSub() == 0 and os.time() > roamTime then
         mob:setAnimationSub(1)
@@ -21,7 +22,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local fightTime = mob:getLocalVar("formTime")
 
     if mob:getAnimationSub() == 0 and os.time() > fightTime then
@@ -35,3 +36,5 @@ end
 
 function onMobDeath(mob)
 end
+
+return entity

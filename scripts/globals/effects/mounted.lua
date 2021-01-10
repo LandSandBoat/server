@@ -1,9 +1,9 @@
------------------------------------
---
+----------------------------------------
 -- tpz.effect.MOUNTED
---
------------------------------------
+----------------------------------------
 require("scripts/globals/status")
+----------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     --[[
@@ -25,3 +25,5 @@ end
 function onEffectLose(target, effect)
     target:setAnimation(tpz.anim.NONE)
 end
+
+return effect_object

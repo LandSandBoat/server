@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -20,3 +21,5 @@ function onMobDespawn(mob)
         instance:setProgress(instance:getProgress() + 1)
     end
 end
+
+return entity

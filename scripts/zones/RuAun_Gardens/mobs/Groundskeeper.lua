@@ -6,6 +6,8 @@
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 143, 2, tpz.regime.type.FIELDS)
@@ -24,3 +26,5 @@ function onMobDespawn(mob)
         end)
     end
 end
+
+return entity

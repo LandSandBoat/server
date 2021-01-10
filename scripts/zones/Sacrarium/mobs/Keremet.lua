@@ -5,8 +5,9 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local Keremet = mob:getID()
 
@@ -30,3 +31,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(1200, 1800)) -- 20 to 30 minutes
 end
+
+return entity

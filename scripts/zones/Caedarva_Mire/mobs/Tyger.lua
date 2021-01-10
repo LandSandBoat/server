@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addMod(tpz.mod.SLEEPRES, 30)
@@ -16,3 +17,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

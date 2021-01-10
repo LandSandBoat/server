@@ -6,8 +6,9 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     -- mob:setMobMod(tpz.mobMod.AUTO_SPIKES, 1)
 end
 
@@ -57,3 +58,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 2)
 end
+
+return entity

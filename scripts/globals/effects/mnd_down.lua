@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.MND_DOWN
---
+-- tpz.effect.MND_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.MND) - effect:getPower()) < 0) then
@@ -28,3 +27,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.MND, -downMND_effect_size)
     end
 end
+
+return effect_object

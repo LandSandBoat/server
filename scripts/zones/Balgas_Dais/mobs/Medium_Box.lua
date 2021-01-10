@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function replaceWithCrate(mob)
     local crate = GetNPCByID(mob:getID() + 2)
@@ -12,7 +13,7 @@ function replaceWithCrate(mob)
     crate:setStatus(tpz.status.NORMAL)
 end
 
-function onMobEngaged (mob, target)
+function onMobEngaged(mob, target)
     local mobId = mob:getID()
     local small = GetMobByID(mobId - 1)
 
@@ -37,3 +38,5 @@ function onMobDeath(mob, player, isKiller)
         replaceWithCrate(mob)
     end
 end
+
+return entity

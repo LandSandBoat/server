@@ -6,8 +6,9 @@ require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
     mob:setMod(tpz.mod.DOUBLE_ATTACK, 25)
     mob:setMod(tpz.mod.MOVE, 25)
@@ -29,3 +30,5 @@ end
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 411)
 end
+
+return entity

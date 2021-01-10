@@ -1,10 +1,9 @@
 -----------------------------------
---
---    tpz.effect.MINUET
---
+-- tpz.effect.MINUET
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.ATT, effect:getPower())
@@ -18,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ATT, effect:getPower())
     target:delMod(tpz.mod.RATT, effect:getPower())
 end
+
+return effect_object

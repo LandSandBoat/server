@@ -3,6 +3,8 @@
 --  Mob: Temenos Ghrah
 -----------------------------------
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
@@ -11,3 +13,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         GetNPCByID(ID.npc.TEMENOS_C_CRATE[5]):setStatus(tpz.status.NORMAL)
     end
 end
+
+return entity

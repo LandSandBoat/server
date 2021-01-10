@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     local mobID = mob:getID()
@@ -29,3 +30,5 @@ function onMobDeath(mob, player, isKiller)
 
     end
 end
+
+return entity

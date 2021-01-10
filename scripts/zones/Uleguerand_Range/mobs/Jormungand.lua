@@ -2,6 +2,7 @@
 -- Area: Uleguerand Range
 --  HNM: Jormungand
 -----------------------------------
+local entity = {}
 
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -11,7 +12,7 @@ function onMobSpawn(mob)
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) == false and mob:actionQueueEmpty() == true) then
         local changeTime = mob:getLocalVar("changeTime")
         local twohourTime = mob:getLocalVar("twohourTime")
@@ -67,3 +68,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
 end
+
+return entity

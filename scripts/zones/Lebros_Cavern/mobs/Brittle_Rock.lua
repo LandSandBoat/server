@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addMod(tpz.mod.DMG, -98)
@@ -33,3 +34,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

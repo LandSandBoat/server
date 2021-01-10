@@ -4,6 +4,8 @@
 -- Note: Paths around the 2 staircases
 -----------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
 local path =
 {
@@ -63,14 +65,14 @@ local path =
 }
 
 function onMobSpawn(mob)
-    onMobRoam(mob) -- what?
+    entity.onMobRoam(mob) -- what?
 end
 
 function onPath(mob)
     tpz.path.patrol(mob, path)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
         mob:pathThrough(tpz.path.first(path))
@@ -84,3 +86,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(7200) -- 2 hours
 end
+
+return entity

@@ -9,6 +9,7 @@ mixins =
     require("scripts/mixins/job_special")
 }
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     local elementalId = mob:getID() + 1
@@ -16,3 +17,5 @@ function onMobDeath(mob, player, isKiller)
         DespawnMob(elementalId)
     end
 end
+
+return entity

@@ -4,6 +4,8 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
@@ -20,7 +22,7 @@ function onMobEngaged(mob, target)
     mob:setLocalVar("wave", 1)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local battlefield = mob:getBattlefield()
     if battlefield then
         local mobX = mob:getXPos()
@@ -81,3 +83,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

@@ -1,10 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.DEFENSE_DOWN
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if (effect:getPower()>100) then
@@ -19,3 +18,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.DEFP, -effect:getPower())
 end
+
+return effect_object

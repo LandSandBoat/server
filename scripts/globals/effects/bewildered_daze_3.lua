@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.BEWILDERED_DAZE_3
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---   tpz.effect.BEWILDERED_DAZE_3
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.CEVA, -9)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.CEVA, -9)
 end
+
+return effect_object

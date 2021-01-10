@@ -2,8 +2,9 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getBattleTime() % 45 == 0) then
         local mobId = mob:getID()
         for i = 1, 2 do
@@ -32,3 +33,5 @@ function onMonsterMagicPrepare(mob, target)
     end
 
 end
+
+return entity

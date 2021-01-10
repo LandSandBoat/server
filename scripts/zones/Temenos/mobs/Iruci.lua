@@ -3,6 +3,8 @@
 --  Mob: Iruci
 -----------------------------------
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     if GetMobByID(ID.mob.TEMENOS_C_MOB[1]+3):isDead() then
@@ -25,3 +27,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

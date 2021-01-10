@@ -5,9 +5,10 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 -- Todo: Apkallu hate, Hundred Fists, Movement and TP pattern
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -17,3 +18,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

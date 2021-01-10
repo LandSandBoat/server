@@ -2,9 +2,10 @@
 -- Area: Castle Zvahl Baileys (161)
 --   NM: Grand Duke Batym
 -----------------------------------
-
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -14,3 +15,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(75600, 86400))
 end
+
+return entity

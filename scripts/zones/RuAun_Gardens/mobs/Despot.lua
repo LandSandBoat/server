@@ -2,6 +2,8 @@
 -- Area: RuAun Gardens
 --   NM: Despot
 -----------------------------------
+local entity = {}
+
 function onMobSpawn(mob)
     local ph = GetMobByID(mob:getLocalVar("ph"))
     if ph then
@@ -45,3 +47,5 @@ end
 function onMobDespawn(mob)
     mob:removeListener("PH_VAR")
 end
+
+return entity

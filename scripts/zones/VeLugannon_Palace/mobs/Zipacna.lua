@@ -3,6 +3,8 @@
 --  Mob: Zipacna
 -----------------------------------
 require("scripts/globals/pathfind")
+-----------------------------------
+local entity = {}
 
 local path =
 {
@@ -86,14 +88,14 @@ local path =
 }
 
 function onMobSpawn(mob)
-    onMobRoam(mob)
+    entity.onMobRoam(mob)
 end
 
 function onPath(mob)
     tpz.path.patrol(mob, path, tpz.path.flag.RUN)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if (mob:isFollowingPath() == false) then
         mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
@@ -106,3 +108,5 @@ end
 function onMobDespawn(mob)
     mob:setRespawnTime(math.random(10800, 14400)) -- respawn 3-4 hrs
 end
+
+return entity

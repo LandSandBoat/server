@@ -3,6 +3,8 @@
 --  Mob: Diabolos
 -----------------------------------
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
+-----------------------------------
+local entity = {}
 
 -- TODO: CoP Diabolos
 -- 1) Make the diremites in the pit all aggro said player that falls into region. Should have a respawn time of 10 seconds.
@@ -14,7 +16,7 @@ local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
 -- TODO: Diabolos Prime
 -- Note: Diabolos Prime fight drops all tiles at once.
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local mobOffset = mob:getID() - ID.mob.DIABOLOS_OFFSET
     if (mobOffset >= 0 and mobOffset <= 14) then
         local inst = math.floor(mobOffset/7)
@@ -51,3 +53,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

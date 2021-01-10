@@ -5,8 +5,10 @@
 require("scripts/globals/status")
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     --mob:setMobMod(tpz.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
 end
 
@@ -31,3 +33,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

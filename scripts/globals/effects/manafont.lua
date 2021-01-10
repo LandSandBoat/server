@@ -1,10 +1,7 @@
 -----------------------------------
---
---     tpz.effect.MANAFONT
---
+-- tpz.effect.MANAFONT
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -14,3 +11,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

@@ -7,6 +7,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -27,7 +28,7 @@ function onMobRoamAction(mob)
     tpz.path.patrol(mob, path, tpz.path.flag.REVERSE)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
         mob:pathThrough(tpz.path.first(path))
     end
@@ -35,3 +36,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

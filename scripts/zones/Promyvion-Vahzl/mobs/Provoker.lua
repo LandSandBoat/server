@@ -5,14 +5,15 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.ACC, 50)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local changeTime = mob:getLocalVar("changeTime")
     local element = mob:getLocalVar("element")
@@ -48,3 +49,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

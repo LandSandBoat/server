@@ -6,6 +6,7 @@ require("scripts/globals/hunts")
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 158)
@@ -17,3 +18,5 @@ function onMobDespawn(mob)
         mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
     end
 end
+
+return entity

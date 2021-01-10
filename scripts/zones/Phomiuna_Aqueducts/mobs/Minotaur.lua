@@ -5,6 +5,7 @@
 mixins = {require("scripts/mixins/fomor_hate")}
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:setLocalVar("fomorHateAdj", -2)
@@ -15,3 +16,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("PromathiaStatus", 1)
     end
 end
+
+return entity

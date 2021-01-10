@@ -3,6 +3,7 @@
 --  Mob: Platoon Scorpion
 -- BCNM: Operation Desert Swarm
 -----------------------------------
+local entity = {}
 
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 require("scripts/globals/status")
@@ -14,7 +15,7 @@ local SELF_STUN_CHANCE = 0.25  -- 25%
 
 -- Mobs sync/mimic TP moves.
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "SCORP_MIMIC_START", function(mob, skillID)
         local hpp = mob:getHPP()
 
@@ -71,3 +72,5 @@ function onMobDeath(mob, player, isKiller)
         bf:setLocalVar("[ODS]NumScorpsDead", num_scorps_dead + 1 )
     end
 end
+
+return entity

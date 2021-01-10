@@ -1,11 +1,9 @@
-
 -----------------------------------
---
---     tpz.effect.ELEMENTALRES_DOWN
---
+-- tpz.effect.ELEMENTAL_RESISTANCE_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target,effect)
     target:addMod(tpz.mod.FIRERES, -effect:getPower())
@@ -21,7 +19,6 @@ end
 function onEffectTick(target,effect)
 end
 
-
 function onEffectLose(target,effect)
     target:delMod(tpz.mod.FIRERES, -effect:getPower())
     target:delMod(tpz.mod.ICERES, -effect:getPower())
@@ -32,3 +29,5 @@ function onEffectLose(target,effect)
     target:delMod(tpz.mod.LIGHTRES, -effect:getPower())
     target:delMod(tpz.mod.DARKRES, -effect:getPower())
 end
+
+return effect_object

@@ -1,8 +1,10 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Increased HP and MP
---
+-- tpz.effect.PROWESS
+-- Increased HP and MP
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.HPP, effect:getPower())
@@ -16,3 +18,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.HPP, effect:getPower())
     target:delMod(tpz.mod.MPP, effect:getPower())
 end
+
+return effect_object

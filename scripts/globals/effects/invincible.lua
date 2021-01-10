@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.INVINCIBLE
---
+-- tpz.effect.INVINCIBLE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.UDMGPHYS, -100)
@@ -18,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.UDMGPHYS, -100)
     target:delMod(tpz.mod.UDMGRANGE, -100)
 end
+
+return effect_object

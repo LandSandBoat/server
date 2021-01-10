@@ -5,8 +5,9 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 50) -- just one spell to spam
 end
 
@@ -26,3 +27,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(3600, 4200)) -- repop 60-70min
 end
+
+return entity

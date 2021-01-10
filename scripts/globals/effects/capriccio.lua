@@ -1,8 +1,7 @@
 -----------------------------------
---
---
---
+-- tpz.effect.CAPRICCIO
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -12,3 +11,5 @@ end
 
 function onEffectLose(target, effect)
 end
+
+return effect_object

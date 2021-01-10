@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 812, 2, tpz.regime.type.GROUNDS)
@@ -23,3 +24,5 @@ function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.TRIARIUS_X_XV_PH, 10, 7200) -- 2 hours
     tpz.mob.phOnDespawn(mob, ID.mob.HASTATUS_XI_XII_PH, 10, 3600) -- 1 hour
 end
+
+return entity

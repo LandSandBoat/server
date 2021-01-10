@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Palborough_Mines/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -13,3 +14,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.ZI_GHI_BONEEATER_PH, 20, 3600) -- 1 hour
 end
+
+return entity

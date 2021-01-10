@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.UFASTCAST, 30)
 end
 
@@ -38,7 +39,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     if (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON) and bit.band(mob:getBehaviour(), tpz.behavior.STANDBACK) > 0) then
         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.STANDBACK)))
@@ -56,3 +57,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

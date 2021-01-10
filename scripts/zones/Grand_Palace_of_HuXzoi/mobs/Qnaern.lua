@@ -7,6 +7,7 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     local mJob = mob:getMainJob()
@@ -22,3 +23,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

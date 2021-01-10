@@ -13,8 +13,9 @@ mixins =
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.GIL_MIN, 12000)
     mob:setMobMod(tpz.mobMod.GIL_MAX, 30000)
     mob:setMobMod(tpz.mobMod.MUG_GIL, 8000)
@@ -37,7 +38,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("crits", 0)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- Regen head
     local headTimer = mob:getLocalVar("headTimer")
     if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
@@ -68,7 +69,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local headTimer = mob:getLocalVar("headTimer")
     if (mob:getAnimationSub() == 2 and os.time() > headTimer) then
         mob:setAnimationSub(1)
@@ -141,3 +142,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

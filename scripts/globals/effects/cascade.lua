@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.CASCADE
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.CASCADE
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.MATT, 100)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.MATT, 100)
 end
+
+return effect_object

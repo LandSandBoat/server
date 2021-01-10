@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMonsterMagicPrepare(mob, target)
     if (mob:hasStatusEffect(tpz.effect.HUNDRED_FISTS, 0) == false) then
@@ -23,3 +24,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

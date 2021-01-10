@@ -1,10 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.WARRIORS_CHARGE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.TRIPLE_ATTACK, effect:getPower())
@@ -18,3 +17,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.TRIPLE_ATTACK, effect:getPower())
     target:delMod(tpz.mod.DOUBLE_ATTACK, 100)
 end
+
+return effect_object

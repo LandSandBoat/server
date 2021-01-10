@@ -2,12 +2,13 @@
 -- Area: Bibiki Bay
 --   NM: Dalham
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.WATER_ABSORB, 100)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- "Increases swings per attack round as its HP lowers. At 15-20% swings like Charybdis giving the illusion of Hundred Fists."
     local swings = 1 + math.floor((100 - mob:getHPP()) / 18)
     mob:setMobMod(tpz.mobMod.MULTI_HIT, swings)
@@ -18,3 +19,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("COP_Dalham_KILL", 1)
     end
 end
+
+return entity

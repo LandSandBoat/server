@@ -5,8 +5,10 @@
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
     mob:setMod(tpz.mod.COUNTER, 10) -- "Possesses a Counter trait"
     mob:setMod(tpz.mod.REGEN, 25) -- "Posseses an Auto-Regen (low to moderate)"
@@ -21,7 +23,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local mobID = mob:getID()
     local formTime = mob:getLocalVar("formWait")
     local lifePercent = mob:getHPP()
@@ -80,3 +82,4 @@ function onMobDeath(mob, player, isKiller, noKiller)
     end
 end
 
+return entity

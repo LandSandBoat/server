@@ -6,6 +6,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     local theFirstMeeting = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
@@ -15,3 +16,5 @@ function onMobDeath(mob, player, isKiller)
         player:addCharVar("theFirstMeetingKilledNM", 1)
     end
 end
+
+return entity

@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.INT_DOWN
---
+-- tpz.effect.INT_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.INT) - effect:getPower()) < 0) then
@@ -28,3 +27,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.INT, -downINT_effect_size)
     end
 end
+
+return effect_object

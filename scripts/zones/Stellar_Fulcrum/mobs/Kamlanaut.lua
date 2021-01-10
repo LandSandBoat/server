@@ -6,6 +6,7 @@
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local skillToAbsorb =
 {
@@ -21,7 +22,7 @@ function onMobEngaged(mob, target)
     mob:setLocalVar("nextEnSkill", os.time() + 10)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if os.time() > mob:getLocalVar("nextEnSkill") then
         local skill = math.random(823, 828)
         mob:setLocalVar("currentTP", mob:getTP())
@@ -58,3 +59,5 @@ end
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.DESTROYER_OF_ANTIQUITY)
 end
+
+return entity

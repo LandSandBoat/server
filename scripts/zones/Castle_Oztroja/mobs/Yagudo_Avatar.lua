@@ -8,6 +8,7 @@ mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
@@ -40,3 +41,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

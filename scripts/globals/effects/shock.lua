@@ -1,11 +1,10 @@
 -----------------------------------
---
---     tpz.effect.SHOCK
---
+-- tpz.effect.SHOCK
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.REGEN_DOWN, effect:getPower())
@@ -19,3 +18,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REGEN_DOWN, effect:getPower())
     target:delMod(tpz.mod.MND, -getElementalDebuffStatDownFromDOT(effect:getPower()))
 end
+
+return effect_object

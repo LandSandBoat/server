@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.MANA_WALL
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.MANA_WALL
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.DMG, 50)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.DMG, 50)
 end
+
+return effect_object

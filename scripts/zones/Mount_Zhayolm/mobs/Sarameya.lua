@@ -11,8 +11,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.GA_CHANCE, 50)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
@@ -26,10 +27,10 @@ function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local hpp = mob:getHPP()
     local useChainspell = false
 
@@ -80,3 +81,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

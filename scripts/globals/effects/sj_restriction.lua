@@ -1,10 +1,7 @@
 -----------------------------------
---
---
---
+-- tpz.effect.SJ_RESTRICTION
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:recalculateStats()
@@ -17,3 +14,5 @@ end
 function onEffectLose(target, effect)
     target:recalculateStats()
 end
+
+return effect_object

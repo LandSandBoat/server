@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     local instance = mob:getInstance()
@@ -72,7 +73,7 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local segment = mob:getLocalVar("SegmentChanged")
     if (mob:getHPP() <= 30 and mob:getLocalVar("RenameThisVar") == 0) then
         mob:showText(mob, ID.text.CURSED_ESSENCES)
@@ -111,3 +112,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 10)
 end
+
+return entity

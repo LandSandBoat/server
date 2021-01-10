@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.UNLEASH
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---     tpz.effect.UNLEASH
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.TAME, 98)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.TAME, 98)
 end
+
+return effect_object

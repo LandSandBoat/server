@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 
@@ -13,3 +14,5 @@ function onMobDeath(mob, player, isKiller)
     end
 
 end
+
+return entity

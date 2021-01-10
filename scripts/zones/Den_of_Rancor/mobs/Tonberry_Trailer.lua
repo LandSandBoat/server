@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Den_of_Rancor/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 798, 1, tpz.regime.type.GROUNDS)
@@ -18,3 +19,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.CELESTE_EYED_TOZBERRY_PH, 10, 7200) -- 2 hours
 end
+
+return entity

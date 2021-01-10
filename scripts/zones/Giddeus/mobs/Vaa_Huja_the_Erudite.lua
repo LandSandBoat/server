@@ -3,6 +3,7 @@
 --   NM: Vaa Huja the Erudite
 -- Involved in Quests: Dark Legacy
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     local darkLegacyCS = player:getCharVar("darkLegacyCS")
@@ -11,3 +12,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("darkLegacyCS", 5)
     end
 end
+
+return entity

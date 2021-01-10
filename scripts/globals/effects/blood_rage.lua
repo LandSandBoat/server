@@ -1,8 +1,10 @@
+----------------------------------------
+-- tpz.effect.BLOOD_RAGE
+----------------------------------------
+require("scripts/globals/status")
 -----------------------------------
---
---      tpz.effect.BLOOD_RAGE
---
------------------------------------
+local effect_object = {}
+
 function onEffectGain(target, effect)
     target:addMod(tpz.mod.CRITHITRATE, 20)
 end
@@ -13,3 +15,5 @@ end
 function onEffectLose(target, effect)
     target:delMod(tpz.mod.CRITHITRATE, 20)
 end
+
+return effect_object

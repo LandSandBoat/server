@@ -7,6 +7,7 @@ local ID = require("scripts/zones/East_Sarutabaruta/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 92, 2, tpz.regime.type.FIELDS)
@@ -16,3 +17,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.SPINY_SPIPI_PH, 10, math.random(2700, 7200)) -- 45 to 120 minutes
 end
+
+return entity

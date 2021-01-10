@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
@@ -97,7 +98,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[ Mob version of Azure Lore needs scripted, then we can remove this block commenting.
     -- On his 2nd and 3rd "lives" Raubahn will use Azure Lore at low health.
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
@@ -125,3 +126,5 @@ function onMobDeath(mob, player, isKiller)
         mob:showText(mob, ID.text.MIRACLE)
     end
 end
+
+return entity

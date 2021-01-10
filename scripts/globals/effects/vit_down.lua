@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.VIT_DOWN
---
+-- tpz.effect.VIT_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if ((target:getStat(tpz.mod.VIT) - effect:getPower()) < 0) then
@@ -28,3 +27,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.VIT, -downVIT_effect_size)
     end
 end
+
+return effect_object

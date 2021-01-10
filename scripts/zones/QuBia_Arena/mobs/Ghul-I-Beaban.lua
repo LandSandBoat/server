@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function reraiseGhul(mob, reraises, target)
     mob:setLocalVar("RERAISES", reraises)
@@ -17,7 +18,7 @@ function reraiseGhul(mob, reraises, target)
     end
 end
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addListener("DEATH", "GHUL_DEATH", function(mob)
         local mobId = mob:getID()
         local reraises = mob:getLocalVar("RERAISES") + 1
@@ -47,3 +48,5 @@ function onMobDeath(mob, player, isKiller)
         mob:getBattlefield():setLocalVar("lootSpawned", 0)
     end
 end
+
+return entity

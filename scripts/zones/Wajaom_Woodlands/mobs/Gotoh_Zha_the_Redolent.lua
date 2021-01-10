@@ -28,7 +28,9 @@ require("scripts/globals/status")
 --    Do crit ws hits count differently than regular ws hits on retail?
 --    Should onCriticalHit count WS crit hits if regular WS hits do not count?
 -----------------------------------
-function onMobInitialize(mob)
+local entity = {}
+
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
@@ -45,7 +47,7 @@ function onMobSpawn(mob)
     mob:setSpellList(296) -- Set BLM spell list
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getAnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
         mob:setLocalVar("jobChanged", 1)
         mob:setSpellList(297) -- Set WHM spell list.
@@ -78,3 +80,5 @@ end
 
 function onMobDeath(mob, killer)
 end
+
+return entity

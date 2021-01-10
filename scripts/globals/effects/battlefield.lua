@@ -1,8 +1,9 @@
 -----------------------------------
---
 -- tpz.effect.BATTLEFIELD
---
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     if target:getPet() then
@@ -27,11 +28,9 @@ function onEffectLose(target, effect)
 end
 
 function onEventUpdate(player, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
 end
 
 function onEventFinish(player, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
 end
+
+return effect_object

@@ -1,8 +1,10 @@
------------------------------------
+----------------------------------------
 -- Area: Pso'Xja
 --  Mob: Gargoyle
------------------------------------
+----------------------------------------
 local ID = require("scripts/zones/PsoXja/IDs")
+-----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     if (isKiller) then
@@ -16,3 +18,5 @@ end
 
 function onMobDespawn(mob)
 end
+
+return entity

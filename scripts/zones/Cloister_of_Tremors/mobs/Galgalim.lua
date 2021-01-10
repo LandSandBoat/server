@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 
@@ -26,3 +27,5 @@ function onEventFinish(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 end
+
+return entity

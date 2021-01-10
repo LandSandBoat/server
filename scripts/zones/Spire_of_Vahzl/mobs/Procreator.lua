@@ -2,8 +2,9 @@
 -- Area: Spire of Vahzl
 --  Mob: Procreator
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.LINK_RADIUS, 50)
 end
 
@@ -17,7 +18,7 @@ end
 function onMobWeaponSkill(target, mob, skill)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getHPP() < 20 then
         local nextMob = GetMobByID(mob:getID() - 1) --Agonizer aggros at <20%
         if not nextMob:isEngaged() then
@@ -35,3 +36,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

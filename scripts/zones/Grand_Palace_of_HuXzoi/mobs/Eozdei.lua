@@ -9,6 +9,7 @@
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     -- Set AnimationSub to 0, put it in pot form
@@ -25,7 +26,7 @@ function onPath(mob)
     end
 end
 
-function onMobFight(mob)
+entity.onMobFight = function(mob)
 
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar("changeTime")
@@ -67,3 +68,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

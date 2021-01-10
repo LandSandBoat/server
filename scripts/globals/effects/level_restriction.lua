@@ -1,8 +1,9 @@
 -----------------------------------
---
---     tpz.effect.LEVEL_RESTRICTION
---
+-- tpz.effect.LEVEL_RESTRICTION
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     target:levelRestriction(effect:getPower())
@@ -20,3 +21,5 @@ end
 function onEffectLose(target, effect)
     target:levelRestriction(0)
 end
+
+return effect_object

@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Gustav_Tunnel/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 765, 2, tpz.regime.type.GROUNDS)
@@ -17,3 +18,5 @@ end
 function onMobDespawn(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.TAXIM_PH, 5, 7200) -- 2 hours
 end
+
+return entity

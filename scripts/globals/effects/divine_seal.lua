@@ -1,12 +1,7 @@
 -----------------------------------
---
---     tpz.effect.DIVINE_SEAL
---
+-- tpz.effect.DIVINE_SEAL
 -----------------------------------
-
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/common")
+local effect_object = {}
 
 function onEffectGain(target, effect)
 end
@@ -17,4 +12,4 @@ end
 function onEffectLose(target, effect)
 end
 
-
+return effect_object

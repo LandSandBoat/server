@@ -2,6 +2,7 @@
 -- Area: Xarcabard
 --  Mob: Shadow Dragon
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
 end
@@ -22,3 +23,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

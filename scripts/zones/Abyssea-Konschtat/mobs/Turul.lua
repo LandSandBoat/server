@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/families/amphiptere")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Uncertain of threshold. Going with 50% for now.
     -- (possibly varies, perhaps is simply lower HP = greater cast chance?)
     if mob:getHPP() <= 50 then
@@ -29,3 +30,5 @@ end
 
 function onMobDeath(mob, player, isKiller)
 end
+
+return entity

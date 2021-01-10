@@ -6,6 +6,7 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
 function onMobSpawn(mob)
     mob:addMod(tpz.mod.SLEEPRES, 150)
@@ -32,3 +33,5 @@ function onMobDespawn(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

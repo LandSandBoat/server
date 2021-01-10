@@ -7,13 +7,14 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
     mob:SetAutoAttackEnabled(false)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if target:getTarget():getID() ~= mob:getID() then
         local targetPos = target:getPos()
         local radians = (256 - targetPos.rot) * (math.pi / 128)
@@ -36,3 +37,5 @@ function onMobDeath(mob, player, isKiller)
     mob:messageText(mob, ID.text.SELHTEUS_TEXT)
     mob:getBattlefield():lose()
 end
+
+return entity

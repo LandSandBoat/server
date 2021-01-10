@@ -1,10 +1,9 @@
 -----------------------------------
---
---     tpz.effect.SUPER_BUFF
---
+-- tpz.effect.SUPER_BUFF
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
 function onEffectGain(target, effect)
     local power = effect:getPower()
@@ -27,3 +26,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.MEVA, power)
     target:setAnimationSub(0)
 end
+
+return effect_object

@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(tpz.title.LICH_BANISHER)
@@ -11,3 +12,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Lich_C_Magnus_Died", 1)
     end
 end
+
+return entity
