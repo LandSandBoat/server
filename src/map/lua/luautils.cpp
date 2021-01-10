@@ -3940,7 +3940,6 @@ namespace luautils
         auto onFurniturePlaced = loadFunctionFromFile("onFurniturePlaced", filename);
         if (!onFurniturePlaced.valid())
         {
-            ShowWarning("luautils::onFurniturePlaced\n");
             return;
         }
 
@@ -3962,7 +3961,6 @@ namespace luautils
         auto onFurnitureRemoved = loadFunctionFromFile("onFurnitureRemoved", filename);
         if (!onFurnitureRemoved.valid())
         {
-            ShowWarning("luautils::onFurnitureRemoved\n");
             return;
         }
 
