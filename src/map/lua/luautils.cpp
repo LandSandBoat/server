@@ -86,7 +86,7 @@
 
 // TODO: Fix path
 #include "../../ext/filewatch/filewatch/FileWatch.hpp"
-std::unique_ptr<filewatch::FileWatch<std::wstring>> watch = nullptr;
+std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
 
 namespace luautils
 {
@@ -318,7 +318,7 @@ namespace luautils
                 }
             }
         };
-        watch = std::make_unique<filewatch::FileWatch<std::wstring>>(L"./scripts/", watchReaction);
+        watch = std::make_unique<filewatch::FileWatch<std::string>>("./scripts/", watchReaction);
     }
 
     /************************************************************************
