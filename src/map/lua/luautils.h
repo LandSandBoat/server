@@ -123,6 +123,8 @@ namespace luautils
     auto loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
     auto getCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
 
+    void CacheStatusEffect(std::string name);
+
     void  SendEntityVisualPacket(uint32 npcid, const char* command);
     auto  GetNPCByID(uint32 npcid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;
     auto  GetMobByID(uint32 mobid, sol::object const& instanceObj) -> std::optional<CLuaBaseEntity>;

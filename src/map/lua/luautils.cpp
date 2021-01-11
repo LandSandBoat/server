@@ -352,6 +352,9 @@ namespace luautils
 
     sol::function getCachedFunction(CBaseEntity* PEntity, std::string funcName)
     {
+        TracyZoneScoped;
+        TracyZoneString(funcName);
+
         if (PEntity->objtype == TYPE_MOB)
         {
             std::string zone_name = (const char*)PEntity->loc.zone->GetName();
@@ -383,6 +386,27 @@ namespace luautils
 
         // Didn't find it
         return sol::nil;
+    }
+
+    void CacheStatusEffect(std::string name)
+    {
+        TracyZoneScoped;
+        TracyZoneString(name);
+
+        auto filename = fmt::format("scripts/globals/effects/{}.lua", name);
+
+        // Try and load file
+        auto file_result = lua.safe_script_file(filename);
+
+        // If the entity object has been returned, cache it!
+        if (file_result.valid() && file_result.return_count())
+        {
+            lua[sol::create_if_nil]["tpz"]["globals"]["effects"][name] = file_result;
+        }
+        else // If not, create an empty entry so we can safely fail to find it later
+        {
+            lua[sol::create_if_nil]["tpz"]["globals"]["effects"][name] = lua.create_table();
+        }
     }
 
     // temporary solution for geysers in Dangruf_Wadi
@@ -1616,9 +1640,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
+        std::string name = effects::GetEffectName(PStatusEffect->GetStatusID());
 
-        auto onEffectGain = loadFunctionFromFile("onEffectGain", filename);
+        sol::function onEffectGain;
+        if (auto cached_effect = lua["tpz"]["globals"]["effects"][name]; cached_effect.valid())
+        {
+            onEffectGain = cached_effect["onEffectGain"];
+        }
+
         if (!onEffectGain.valid())
         {
             return -1;
@@ -1639,9 +1668,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
+        std::string name = effects::GetEffectName(PStatusEffect->GetStatusID());
 
-        auto onEffectTick = loadFunctionFromFile("onEffectTick", filename);
+        sol::function onEffectTick;
+        if (auto cached_effect = lua["tpz"]["globals"]["effects"][name]; cached_effect.valid())
+        {
+            onEffectTick = cached_effect["onEffectTick"];
+        }
+
         if (!onEffectTick.valid())
         {
             return -1;
@@ -1662,9 +1696,14 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("scripts/{}.lua", PStatusEffect->GetName());
+        std::string name = effects::GetEffectName(PStatusEffect->GetStatusID());
 
-        auto onEffectLose = loadFunctionFromFile("onEffectLose", filename);
+        sol::function onEffectLose;
+        if (auto cached_effect = lua["tpz"]["globals"]["effects"][name]; cached_effect.valid())
+        {
+            onEffectLose = cached_effect["onEffectLose"];
+        }
+
         if (!onEffectLose.valid())
         {
             return -1;

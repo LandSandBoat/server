@@ -146,6 +146,8 @@ namespace effects
 
                 uint16 sortKey                  = Sql_GetIntData(SqlHandle, 10);
                 EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
+
+                luautils::CacheStatusEffect(EffectsParams[EffectID].Name);
             }
         }
     }
@@ -154,6 +156,11 @@ namespace effects
     uint16 GetEffectElement(uint16 effect)
     {
         return EffectsParams[effect].Element;
+    }
+
+    std::string GetEffectName(uint16 effect)
+    {
+        return EffectsParams[effect].Name;
     }
 } // namespace effects
 
