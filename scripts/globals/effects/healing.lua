@@ -11,7 +11,7 @@ require("scripts/globals/roe")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setAnimation(33)
 
     -- Dances with Luopans
@@ -36,7 +36,7 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 
     local healtime = effect:getTickCount()
 
@@ -68,7 +68,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:setAnimation(0)
     target:delStatusEffect(tpz.effect.LEAVEGAME)
 

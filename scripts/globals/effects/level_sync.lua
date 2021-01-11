@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:levelRestriction(effect:getPower())
 
     if target:getObjType() == tpz.objType.PC then
@@ -13,10 +13,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:levelRestriction(0)
     target:disableLevelSync()
 end

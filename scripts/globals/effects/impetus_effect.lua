@@ -5,15 +5,15 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.ATT, 100)
     target:addMod(tpz.mod.CRITHITRATE, 50)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.ATT, 100)
     target:delMod(tpz.mod.CRITHITRATE, 50)
 end

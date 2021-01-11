@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     local power = -1 * effect:getPower()
     target:addMod(tpz.mod.UDMGPHYS, power)
     target:addMod(tpz.mod.UDMGBREATH, power)
@@ -13,10 +13,10 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.UDMGRANGE, power)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local power = -1 * effect:getPower()
     target:delMod(tpz.mod.UDMGPHYS, power)
     target:delMod(tpz.mod.UDMGBREATH, power)

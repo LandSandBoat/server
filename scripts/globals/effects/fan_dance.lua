@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     -- Waltz recast effect is handled in the waltz scripts
     target:delStatusEffect(tpz.effect.HASTE_SAMBA)
     target:delStatusEffect(tpz.effect.ASPIR_SAMBA)
@@ -14,10 +14,10 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.ENMITY, 15)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.ENMITY, 15)
 end
 

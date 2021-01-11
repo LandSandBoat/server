@@ -5,11 +5,11 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.ACC, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses accuracy of 1 every 3 ticks depending on the source of the acc boost
     local boostACC_effect_size = effect:getPower()
     if (boostACC_effect_size > 0) then
@@ -18,7 +18,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local boostACC_effect_size = effect:getPower()
     if (boostACC_effect_size > 0) then
         target:delMod(tpz.mod.ACC, effect:getPower())

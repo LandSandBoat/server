@@ -10,17 +10,17 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
     local subpower = effect:getSubPower()
     target:addMod(tpz.mod.REGEN_DOWN, power)
     target:addMod(tpz.mod.DEFP, -subpower)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower()
     local subpower = effect:getSubPower()
     target:delMod(tpz.mod.REGEN_DOWN, power)

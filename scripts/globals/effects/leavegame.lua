@@ -3,12 +3,12 @@
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setAnimation(33)
     target:messageSystem(effect:getPower(), 30)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     if (effect:getTickCount() > 5) then
         target:leaveGame()
     else
@@ -16,7 +16,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:setAnimation(0)
 end
 

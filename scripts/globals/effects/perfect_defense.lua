@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     effect:setSubPower(effect:getPower()*(256/100))
     target:addMod(tpz.mod.UDMGPHYS, -effect:getPower())
     target:addMod(tpz.mod.UDMGBREATH, -effect:getPower())
@@ -23,7 +23,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.CHARMRES, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     if (effect:getTickCount() > ((effect:getDuration() / effect:getTick())/2)) then
         if (effect:getPower() > 2) then
             effect:setPower(effect:getPower() - 2)
@@ -46,7 +46,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.UDMGPHYS, -effect:getPower())
     target:delMod(tpz.mod.UDMGBREATH, -effect:getPower())
     target:delMod(tpz.mod.UDMGMAGIC, -effect:getSubPower())

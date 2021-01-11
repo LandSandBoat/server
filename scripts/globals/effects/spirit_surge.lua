@@ -5,7 +5,7 @@ require("scripts/globals/status")
 ----------------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     -- The dragoon's MAX HP increases by % of wyvern MaxHP
     target:addMod(tpz.mod.HP, effect:getPower())
     target:updateHealth()
@@ -21,10 +21,10 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.HASTE_ABILITY, 2500)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     -- The dragoon's MAX HP returns to normal (when the MAXHP boost in onEffectGain() gets implemented)
     target:delMod(tpz.mod.HP, effect:getPower())
 

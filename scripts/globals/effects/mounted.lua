@@ -5,7 +5,7 @@ require("scripts/globals/status")
 ----------------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     --[[
         Retail sends a music change packet (packet ID 0x5F) in both cases.
     ]]
@@ -19,10 +19,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:setAnimation(tpz.anim.NONE)
 end
 

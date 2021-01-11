@@ -6,7 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
         target:addMod(tpz.mod.STR, 4)
         target:addMod(tpz.mod.FOOD_ATTP, 22)
@@ -39,10 +39,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     if (effect:getPower() == 1) then -- Dried Meat
         target:delMod(tpz.mod.STR, 4)
         target:delMod(tpz.mod.FOOD_ATTP, 22)

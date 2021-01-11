@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(effect:getSubPower(), effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses modifier of 1 every 10 ticks.
     local song_effect_size = effect:getPower()
     if (effect:getTier() == 2 and effect:getPower() > 0) then
@@ -19,7 +19,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(effect:getSubPower(), effect:getPower())
 end
 

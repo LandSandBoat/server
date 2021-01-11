@@ -5,11 +5,11 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.MND, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses mind of 1 every 3 ticks depending on the source of the boost
     local boostMND_effect_size = effect:getPower()
     if (boostMND_effect_size > 0) then
@@ -18,7 +18,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local boostMND_effect_size = effect:getPower()
     if (boostMND_effect_size > 0) then
         target:delMod(tpz.mod.MND, boostMND_effect_size)

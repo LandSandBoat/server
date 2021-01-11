@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     local saberDanceMerits = target:getMerit(tpz.merit.SABER_DANCE)
     if (saberDanceMerits>5) then
         target:addMod(tpz.mod.SAMBA_PDURATION, (saberDanceMerits -5))
@@ -19,7 +19,7 @@ function onEffectGain(target, effect)
     target:delStatusEffect(tpz.effect.FAN_DANCE)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
    local power = effect:getPower()
    local decayby = 0
    -- Double attack rate decays until 20% then stays there
@@ -30,7 +30,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local saberDanceMerits = target:getMerit(tpz.merit.SABER_DANCE)
     if (saberDanceMerits>1) then
         target:delMod(tpz.mod.SAMBA_PDURATION, (saberDanceMerits -5))

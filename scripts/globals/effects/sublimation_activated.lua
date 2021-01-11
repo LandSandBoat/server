@@ -5,10 +5,10 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     local complete = false
     local level = 0
     if (target:getMainJob() == tpz.job.SCH) then
@@ -62,7 +62,7 @@ function onEffectTick(target, effect)
 
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
 end
 
 return effect_object

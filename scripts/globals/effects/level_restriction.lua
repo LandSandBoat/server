@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:levelRestriction(effect:getPower())
     target:messageBasic(314, effect:getPower()) -- <target>'s level is restricted to <param>
 
@@ -15,10 +15,10 @@ function onEffectGain(target, effect)
 end
 
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:levelRestriction(0)
 end
 

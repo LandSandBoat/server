@@ -5,13 +5,13 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.UDMGPHYS, -effect:getPower())
     target:addMod(tpz.mod.ENMITY, 100)
     target:addMod(tpz.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
    local power = effect:getPower()
    local decayby = 0
    -- Damage reduction decays until 50% then stops
@@ -28,7 +28,7 @@ function onEffectTick(target, effect)
    end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.UDMGPHYS, -effect:getPower())
     target:delMod(tpz.mod.ENMITY, 100)
     target:delMod(tpz.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())

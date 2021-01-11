@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect) --power=30 initially, subpower=20 for enmity
+effect_object.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity
     target:addMod(tpz.mod.ACC, -effect:getPower())
     target:addMod(tpz.mod.NINJA_TOOL, effect:getPower())
     target:addMod(tpz.mod.ENMITY, effect:getSubPower())
@@ -16,7 +16,7 @@ function onEffectGain(target, effect) --power=30 initially, subpower=20 for enmi
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     --tick down the effect and reduce the overall power
     effect:setPower(effect:getPower()-1)
     target:delMod(tpz.mod.ACC, -1)
@@ -27,7 +27,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     --remove the remaining power
     target:delMod(tpz.mod.ACC, -effect:getPower())
     target:delMod(tpz.mod.NINJA_TOOL, effect:getPower())

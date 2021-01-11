@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     --reduce HP and MP by the power amount. Add 100% slow
     --NOTE: The power amount dictates the amount to REDUCE MAX VALUES BY. E.g. Power=75 means 'reduce max hp/mp by 75%'
     target:addMod(tpz.mod.HPP, -75)
@@ -21,10 +21,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     --restore HP and MP to its former state. Remove 100% slow
     target:delMod(tpz.mod.HPP, -75)
     target:delMod(tpz.mod.MPP, -75)

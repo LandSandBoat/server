@@ -5,11 +5,11 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.AGI, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses agility of 1 every 3 ticks depending on the source of the agi boost
     local boostAGI_effect_size = effect:getPower()
     if (boostAGI_effect_size > 0) then
@@ -18,7 +18,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local boostAGI_effect_size = effect:getPower()
     if (boostAGI_effect_size > 0) then
         target:delMod(tpz.mod.AGI, boostAGI_effect_size)

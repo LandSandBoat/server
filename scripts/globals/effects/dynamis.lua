@@ -7,11 +7,11 @@ require("scripts/globals/zone")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     if target:getCurrentRegion() == tpz.region.DYNAMIS then
         local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
         local remainingTimeLimit = effect:getTimeRemaining() / 1000
@@ -48,7 +48,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delKeyItem(tpz.ki.CRIMSON_GRANULES_OF_TIME)
     target:delKeyItem(tpz.ki.AZURE_GRANULES_OF_TIME)
     target:delKeyItem(tpz.ki.AMBER_GRANULES_OF_TIME)

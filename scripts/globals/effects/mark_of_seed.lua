@@ -7,11 +7,11 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setCharVar("SEED_AFTERGLOW_TIMER", 1)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     local Half_Minutes = target:getCharVar("SEED_AFTERGLOW_TIMER")
     if (Half_Minutes == 1) then
         target:setCharVar("SEED_AFTERGLOW_TIMER", (Half_Minutes+1))
@@ -27,7 +27,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     if (target:hasKeyItem(tpz.ki.MARK_OF_SEED) == false and player:hasKeyItem(tpz.ki.AZURE_KEY) == false) then
         target:messageSpecial(ID.text.MARK_OF_SEED_HAS_VANISHED)
     end
