@@ -3,10 +3,12 @@
 --  NPC: Eternal Flame
 -- Records of Eminence NPC
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/keyitems")
-require("scripts/globals/sparkshop")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
+require("scripts/globals/sparkshop")
+require("scripts/globals/keyitems")
+require("scripts/globals/msg")
+require("scripts/globals/roe")
+-----------------------------------
 
 function onTrade(player,npc,trade)
 end
