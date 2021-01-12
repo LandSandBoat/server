@@ -15,7 +15,7 @@ tpz.roe = tpz.roe or {}
 -- triggers
 -------------------------------------------------
 
-tpz.roe.triggers =
+local triggers =
 {
     mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
     wSkillUse = 2,          -- Player Weapon skill used
@@ -30,13 +30,12 @@ tpz.roe.triggers =
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
 }
-local triggers = tpz.roe.triggers
 
 -------------------------------------------------
 -- checks
 -------------------------------------------------
 
-tpz.roe.checks =
+local checks =
 {
     mobID = function(self, player, params)    -- Mob ID check
         return (params.mob and self.reqs.mobID[params.mob:getID()]) and true or false
@@ -84,11 +83,10 @@ tpz.roe.checks =
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
     end,
 }
-local checks = tpz.roe.checks
 
 -- Main general check function for all-purpose use.
 -- Some functions may specify custom handlers (ie. gain exp or deal dmg.)
-checks.masterCheck = function(self, player, params)
+local masterCheck = function(self, player, params)
     for func in pairs(self.reqs) do
         if not checks[func] or not checks[func](self, player, params) then
             return false
@@ -119,7 +117,7 @@ if ENABLE_ROE_TIMED and ENABLE_ROE_TIMED > 0 then
 end
 
 local defaults = {
-    check = checks.masterCheck, -- Check function should return true/false
+    check = masterCheck,        -- Check function should return true/false
     increment = 1,              -- Amount to increment per successful check
     notify = 1,                 -- Progress notifications shown every X increases
     goal = 1,                   -- Progress goal
@@ -134,7 +132,7 @@ local defaults = {
 
 -- All implemented records must have their entries in this table.
 -- Records not in this table can't be taken.
-tpz.roe.records =
+local records =
 {
 
   ----------------------------------------
@@ -3396,13 +3394,13 @@ tpz.roe.records =
 }
 
  -- Apply defaults for records
-for i,v in pairs(tpz.roe.records) do
+for i,v in pairs(records) do
     setmetatable(v, { __index = defaults })
 end
 
 -- Build global map of implemented records.
 -- This is used to deny taking records which aren't implemented in the above table.
-RoeParseRecords(tpz.roe.records)
+RoeParseRecords(records)
 
 
 --[[ **************************************************************************
@@ -3410,7 +3408,7 @@ RoeParseRecords(tpz.roe.records)
     For external calls use onRecordTrigger below. (see healing.lua for example)
     If record rewards items, and the player cannot carry them, return false.
     Otherwise, return true.
-    Example of usage + reward table from roe_records.lua (all params are optional):
+    Example of usage + reward table (all params are optional):
 
     completeRecord(player, record#)
     reward = {
@@ -3421,7 +3419,7 @@ RoeParseRecords(tpz.roe.records)
     })
 *************************************************************************** --]]
 local function completeRecord(player, record)
-    local recordEntry = tpz.roe.records[record]
+    local recordEntry = records[record]
     local recordFlags = recordEntry.flags
     local rewards = recordEntry.reward
 
@@ -3469,13 +3467,13 @@ end
 
 -- *** onRecordTrigger is the primary entry point for all record calls. ***
 -- Even records which are completed through Lua scripts should point here and
--- have record information entered in tpz.roe.records. This keeps everything neat.
+-- have record information entered in records. This keeps everything neat.
 
 function tpz.roe.onRecordTrigger(player, recordID, params)
     params = params or {}
     params.progress = params.progress or player:getEminenceProgress(recordID)
 
-    local entry = tpz.roe.records[recordID]
+    local entry = records[recordID]
     local isClaiming = params.claim
 
     if entry and params.progress then
