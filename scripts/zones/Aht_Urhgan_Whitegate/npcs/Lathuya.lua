@@ -5,8 +5,9 @@
 -- Involved in quests: Omens
 -- !pos -95.081 -6.000 31.638 50
 -----------------------------------
-require("scripts/globals/quests")
 require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 
 local craftingItems = {
@@ -37,7 +38,7 @@ function onTrade(player, npc, trade)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     if remainingBLUAF >= 1 then
         local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
-        local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+        local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
         local AFoffset = 8 * totalCraftedPieces
 
         local item = craftingItems[player:getCharVar("[BLUAF]Current")]
@@ -69,7 +70,7 @@ function onTrigger(player, npc)
     -- CRAFTING OTHER 3 BLUE MAGE ARMOR PIECES
     elseif transformations >= QUEST_ACCEPTED then
         local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
-        local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+        local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
         local currentTask = player:getCharVar("[BLUAF]Current")
         local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
         local AFoffset = 8 * totalCraftedPieces
@@ -81,7 +82,7 @@ function onTrigger(player, npc)
                     player:startEvent(746, 0, 0, 0, 0, 0, 0, 0, currentTask)
                 else
                     -- Will prompt for choosing which armor to work on
-                    player:startEvent(730 + AFoffset, 7 - player:getCharVar("[BLUAF]Remaining"))
+                    player:startEvent(730 + AFoffset, 7 - remainingBLUAF)
                 end
             else
                 player:startEvent(737 + (AFoffset - 8)) -- Asleep message, wait until 1 day passes
@@ -111,7 +112,7 @@ end
 
 function onEventUpdate(player, csid, option)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
-    local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+    local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local AFoffset = 8 * totalCraftedPieces
 
     if csid == 730 + AFoffset then
@@ -121,9 +122,8 @@ function onEventUpdate(player, csid, option)
             if updateType == 2 then
                 -- Choosing a piece
                 local piece = math.floor(option / 4) + 1
-                local pieceMask = math.pow(2, (piece - 1))
                 -- Make sure the player isn't trying to cheat somehow
-                if bit.band(pieceMask, player:getCharVar("[BLUAF]Remaining")) > 0 then
+                if utils.mask.getBit(remainingBLUAF, piece - 1) then
                     player:setCharVar("[BLUAF]Current", piece)
                     local item = craftingItems[piece]
                     player:updateEvent(0, unpack(item.materials))
@@ -141,7 +141,7 @@ function onEventFinish(player, csid, option)
     local omensProgress = player:getCharVar("OmensProgress")
 
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
-    local totalCraftedPieces = 3 - player:countMaskBits(remainingBLUAF)
+    local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local currentTask = player:getCharVar("[BLUAF]Current")
     local AFoffset = 8 * totalCraftedPieces
 
@@ -165,10 +165,9 @@ function onEventFinish(player, csid, option)
         player:setCharVar("[BLUAF]CraftingStage", 2)
         player:setCharVar("[BLUAF]PaymentDay", vanaDay())
         npcUtil.giveKeyItem(player, tpz.ki.MAGUS_ORDER_SLIP)
-    elseif csid == 736 + AFoffset then
+    elseif csid == 736 + AFoffset and currentTask > 0 then
         if npcUtil.giveItem(player, craftingItems[currentTask].result) then
-            remainingBLUAF = remainingBLUAF - math.pow(2, (currentTask - 1))
-            player:setCharVar("[BLUAF]Remaining", remainingBLUAF)
+            player:setCharVar("[BLUAF]Remaining", utils.mask.setBit(remainingBLUAF, currentTask - 1, false))
             player:setCharVar("[BLUAF]PaymentDay", 0)
             player:setCharVar("[BLUAF]CraftingStage", 0)
             player:setCharVar("[BLUAF]Current", 0)
