@@ -1,9 +1,10 @@
 # Table of Contents
 1. [General Guidelines](#general-guidelines)
-2. [Workflow Guide](#workflow-guide)
-3. [Issue Report Contributions](#issue-report-contributions)
-4. [Pull Request Contributions](#pull-request-contributions)
-5. [Style Guide](#style-guide)
+2. [License](#license)
+3. [Workflow Guide](#workflow-guide)
+4. [Issue Report Contributions](#issue-report-contributions)
+5. [Pull Request Contributions](#pull-request-contributions)
+6. [Style Guide](#style-guide)
     - [Code Editor Configuration](#code-editor-configuration)
     - [C++](#c)
     - [Lua](#lua)
@@ -20,6 +21,10 @@
 * We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game we all love.
 * It is not acceptable to 'patch' a missing fight or mechanic to allow other content to be completed. For example: If a quest relies on fishing but fishing doesn't work; that quest should remain blocked until fishing is implemented.
 * Users are encouraged to modify their servers in any whatever way they see fit to achieve their desired experience, especially if that experience doesn't align with our goals.
+
+# License
+
+* We operate under [GNU General Public License v3.0](https://github.com/topaz-next/topaz/blob/release/LICENSE). This was the license we inherited from our ancestor projects, and we continue using it to maintain maximum compatibility with our shared community. While other licenses are compatible with the GPL3, some impose additional restrictions and responsibilities on end-users. This would result in further splitting of our already small community. As such, we cannot accept contributions that use other more restrictive licenses (such as AGPL3).
 
 # Workflow Guide
 
