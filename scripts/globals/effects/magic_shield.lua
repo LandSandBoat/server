@@ -26,6 +26,9 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
+effect_object.onEffectTick = function(target, effect)
+end
+
 effect_object.onEffectLose = function(target, effect)
     if effect:getPower() == 3 then -- arcane stomp
         target:delMod(tpz.mod.FIRE_ABSORB, 100)
