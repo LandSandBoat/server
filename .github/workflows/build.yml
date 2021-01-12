@@ -25,8 +25,8 @@ jobs:
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang
-        export CXX=/usr/bin/clang++
+        export CC=/usr/bin/clang-9
+        export CXX=/usr/bin/clang++-9
         cmake .
     - name: Build
       run: |
@@ -44,8 +44,8 @@ jobs:
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc
-        export CXX=/usr/bin/g++
+        export CC=/usr/bin/gcc-9
+        export CXX=/usr/bin/g++-9
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake .
     - name: Build
       run: |
