@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if player:getCharVar("thickAsThievesGamblingCS") == 5 then
         player:setCharVar("thickAsThievesGamblingCS", 6)
     end

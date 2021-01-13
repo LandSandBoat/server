@@ -10,7 +10,7 @@ local entity = {}
 function onMobSpawn(mob)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_PRINCE_AND_THE_HOPPER) == QUEST_ACCEPTED and player:getCharVar("princeandhopper") == 4 then
         player:setCharVar("princeandhopper", 5)
     end

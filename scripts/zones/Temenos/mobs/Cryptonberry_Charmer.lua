@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         if GetMobByID(ID.mob.TEMENOS_N_MOB[6]+1):isDead() then
             GetNPCByID(ID.npc.TEMENOS_N_CRATE[6]):setStatus(tpz.status.NORMAL)

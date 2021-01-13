@@ -50,7 +50,7 @@ function onMonsterMagicPrepare(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
 end
 

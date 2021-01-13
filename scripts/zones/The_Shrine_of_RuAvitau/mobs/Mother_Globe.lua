@@ -45,7 +45,7 @@ function onAdditionalEffect(mob, target, damage)
     -- Unknown if this can be stolen/dispelled like spikes.  Isn't mentioned, probably not.
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local motherGlobe = mob:getID()
 
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs

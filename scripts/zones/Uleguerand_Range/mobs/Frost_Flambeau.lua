@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.UFASTCAST, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 320)
 end
 

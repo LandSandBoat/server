@@ -8,7 +8,7 @@ require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 427)
     tpz.regime.checkRegime(player, mob, 812, 2, tpz.regime.type.GROUNDS)
     tpz.regime.checkRegime(player, mob, 813, 2, tpz.regime.type.GROUNDS)

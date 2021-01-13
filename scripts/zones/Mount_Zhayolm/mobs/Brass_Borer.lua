@@ -60,7 +60,7 @@ function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENFIRE)
 end
 
-function onMobDeath(mob)
+entity.onMobDeath = function(mob)
 end
 
 return entity

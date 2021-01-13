@@ -8,7 +8,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob)
+entity.onMobDeath = function(mob)
 end
 
 function onMobDespawn(mob)

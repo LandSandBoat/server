@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setLocalVar("pop", os.time() + math.random(1200, 7200))
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 258)
     tpz.tutorial.onMobDeath(player)
 end

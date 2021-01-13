@@ -16,7 +16,7 @@ function onMobSpawn(mob)
     DespawnMob(mob:getID(), 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if
         GetMobByID(ID.mob.EASTERN_SPHINX):isDead() and
         GetMobByID(ID.mob.WESTERN_SPHINX):isDead() and

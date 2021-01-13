@@ -13,7 +13,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.GRAVITYRES, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

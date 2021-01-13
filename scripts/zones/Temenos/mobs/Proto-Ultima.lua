@@ -39,7 +39,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if player then
         player:addTitle(tpz.title.TEMENOS_LIBERATOR)
     end

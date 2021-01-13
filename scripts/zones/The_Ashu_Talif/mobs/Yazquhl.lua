@@ -25,7 +25,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:showText(mob, ID.text.YAZQUHL_DEATH)
 end
 

@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local darkLegacyCS = player:getCharVar("darkLegacyCS")
 
     if (darkLegacyCS == 3 or darkLegacyCS == 4) then

@@ -27,7 +27,7 @@ function onMobDisengage(mob, weather)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.VINEGAR_EVAPORATOR)
 end
 

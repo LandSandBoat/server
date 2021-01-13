@@ -16,7 +16,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onEventUpdate(player, csid, option)

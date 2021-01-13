@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.DOUBLE_ATTACK, 100)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 160)
 end
 

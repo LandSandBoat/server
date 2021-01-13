@@ -6,7 +6,7 @@ mixins = {require("scripts/mixins/families/gears")}
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local instance = mob:getInstance()
     if (instance:getStage() == 6 and instance:getProgress() >= 1) then
         if (isKiller) then

@@ -9,4 +9,7 @@ function onMobSpawn(mob)
     mob:setUnkillable(true)
 end
 
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
 return entity

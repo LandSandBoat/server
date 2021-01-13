@@ -92,7 +92,7 @@ function onCriticalHit(mob)
     mob:showText(mob, ID.text.OW)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Loss if Naja dies. Since player will be nil here, it'll only show once.
     mob:showText(mob, ID.text.ABQUHBAH)
     local instance = mob:getInstance()

@@ -22,7 +22,7 @@ function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.SLOW, {power = 3000})
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.ADAMANTKING_USURPER)
     if isKiller then
         mob:showText(mob, ID.text.QUADAV_KING_DEATH)

@@ -77,7 +77,7 @@ local loot =
     },
 }
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local players = mob:getBattlefield():getPlayers()
         local random = math.random(1, 4)

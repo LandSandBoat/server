@@ -20,7 +20,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 393)
 end
 

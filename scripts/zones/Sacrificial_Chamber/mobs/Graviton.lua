@@ -29,7 +29,7 @@ function onMobDisengage(mob, weather)
     mob:setLocalVar("everyonesRancorUsed", 0)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

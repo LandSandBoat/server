@@ -67,7 +67,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.UDMGMAGIC, -100)
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF4", battlefield:getLocalVar("killCountF4")+1)

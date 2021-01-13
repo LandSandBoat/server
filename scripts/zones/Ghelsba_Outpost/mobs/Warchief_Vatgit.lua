@@ -9,7 +9,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     if (player:getCurrentMission(player:getNation()) == 6) then
         if (player:getCharVar("MissionStatus") == 4) then

@@ -19,7 +19,7 @@ function phaseChangeReady(battlefield)
     return true
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local battlefield = player:getBattlefield()
     if battlefield and phaseChangeReady(battlefield) then
         player:release() -- prevents event collision if player kills multiple remaining mobs with an AOE move/spell

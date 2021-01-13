@@ -7,7 +7,7 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     if (player:hasKeyItem(tpz.ki.YOMOTSU_HIRASAKA)) then
         player:addCharVar("OkuriNMKilled", 1)

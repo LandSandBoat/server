@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGAIN, 100)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

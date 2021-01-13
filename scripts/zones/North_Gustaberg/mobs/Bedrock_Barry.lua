@@ -12,7 +12,7 @@ function onMobSpawn(mob)
     mob:addStatusEffect(tpz.effect.STONESKIN, math.random(30, 40), 0, 300)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 199)
     tpz.regime.checkRegime(player, mob, 16, 1, tpz.regime.type.FIELDS)
 end

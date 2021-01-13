@@ -21,7 +21,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.TORTOISE_TORTURER)
 end
 

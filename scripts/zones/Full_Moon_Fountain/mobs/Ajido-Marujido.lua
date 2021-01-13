@@ -60,7 +60,7 @@ function onMobDisengage(mob)
     mob:setLocalVar("wait", 0)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
     local players = mob:getBattlefield():getPlayers()
     for _, player in pairs(players) do

@@ -7,7 +7,7 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local mobID = mob:getID()
 
     if (mobID == ID.mob.EUVHIS_WHITE+0 or mobID == ID.mob.EUVHIS_WHITE+2 or mobID == ID.mob.EUVHIS_WHITE+4) then

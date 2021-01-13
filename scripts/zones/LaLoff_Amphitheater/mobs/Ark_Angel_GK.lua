@@ -34,7 +34,7 @@ entity.onMobFight = function(mob, target)
     -- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

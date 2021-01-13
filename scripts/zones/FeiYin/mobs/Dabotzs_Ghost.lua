@@ -6,7 +6,7 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if player:hasKeyItem(tpz.ki.AQUAFLORA3) then
         player:setCharVar("DabotzKilled", 1)
     end

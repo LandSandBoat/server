@@ -13,7 +13,7 @@ function onMobEngaged(mob, target)
     mob:setHP(MaxHP / (8/(bonus)))
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

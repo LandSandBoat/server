@@ -13,7 +13,7 @@ function onMobSpawn(mob)
         slot:setStatus(tpz.status.DISAPPEAR)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

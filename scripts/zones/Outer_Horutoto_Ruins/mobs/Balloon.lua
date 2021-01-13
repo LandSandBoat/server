@@ -7,7 +7,7 @@ local func = require("scripts/zones/Outer_Horutoto_Ruins/globals")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

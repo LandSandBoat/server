@@ -21,7 +21,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.DMGMAGIC, 80)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and
         player:getCharVar("MissionStatus") == 5 and

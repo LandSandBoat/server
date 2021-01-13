@@ -72,7 +72,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         if GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):isDead() and GetMobByID(ID.mob.APOLLYON_CS_MOB[2]):isDead() then
             GetNPCByID(ID.npc.APOLLYON_CS_CRATE):setStatus(tpz.status.NORMAL)

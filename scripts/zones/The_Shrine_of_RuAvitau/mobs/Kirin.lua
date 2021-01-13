@@ -57,7 +57,7 @@ function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENSTONE)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle( tpz.title.KIRIN_CAPTIVATOR )
     player:showText( mob, ID.text.KIRIN_OFFSET + 1 )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do

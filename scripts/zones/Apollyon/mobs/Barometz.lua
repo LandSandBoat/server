@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if mob:getID() == ID.mob.APOLLYON_NE_MOB[1] + 11 then
         if isKiller or noKiller then
             local battlefield = mob:getBattlefield()

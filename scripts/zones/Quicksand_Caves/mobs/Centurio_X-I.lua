@@ -19,7 +19,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.SPELLINTERRUPT, 25)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 426)
 end
 

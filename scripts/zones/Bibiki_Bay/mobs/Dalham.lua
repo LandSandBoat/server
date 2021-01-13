@@ -14,7 +14,7 @@ entity.onMobFight = function(mob, target)
     mob:setMobMod(tpz.mobMod.MULTI_HIT, swings)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("COP_Dalham_KILL") == 0) then
         player:setCharVar("COP_Dalham_KILL", 1)
     end
