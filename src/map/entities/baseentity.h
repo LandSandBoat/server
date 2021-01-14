@@ -156,6 +156,7 @@ enum UPDATETYPE
 enum ENTITYFLAGS
 {
     FLAG_NONE          = 0x000,
+    FLAG_INFO_ICON     = 0x001, // (I) Icon next to name
     FLAG_HIDE_NAME     = 0x008,
     FLAG_CALL_FOR_HELP = 0x020,
     FLAG_HIDE_HP       = 0x100,
