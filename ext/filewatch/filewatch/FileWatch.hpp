@@ -526,8 +526,9 @@ namespace filewatch {
 						{
 							_callback(file.first, file.second);
 						}
-						catch (const std::exception&)
+						catch (const std::exception& e)
 						{
+                            printf(e.what());
 						}
 					}
 				}

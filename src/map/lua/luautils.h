@@ -110,12 +110,15 @@ namespace luautils
     extern sol::state        lua;
     extern struct lua_State* LuaHandle;
 
+    void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func);
+
     int32 init();
     int32 free();
     int32 garbageCollectStep();
     int32 garbageCollectFull();
 
     void EnableFilewatcher();
+    void ReloadFilewatchList();
 
     template <typename T>
     void  print(T const& item);
