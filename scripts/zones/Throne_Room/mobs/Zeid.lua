@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Throne_Room/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
 end
 

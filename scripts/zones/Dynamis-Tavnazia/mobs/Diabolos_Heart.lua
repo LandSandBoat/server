@@ -7,7 +7,7 @@ require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
     player:addTitle(tpz.title.NIGHTMARE_AWAKENER)
 end

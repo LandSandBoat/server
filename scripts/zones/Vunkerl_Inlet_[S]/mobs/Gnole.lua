@@ -6,7 +6,7 @@ local entity = {}
 
 mixins = { require("scripts/mixins/families/gnole") }
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

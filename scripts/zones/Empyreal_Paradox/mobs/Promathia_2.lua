@@ -75,7 +75,7 @@ function onMagicCastingCheck(mob, target, spell)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

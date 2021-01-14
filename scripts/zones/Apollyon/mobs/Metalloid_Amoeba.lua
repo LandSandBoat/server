@@ -12,7 +12,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.IMPACTRES, 0)
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()

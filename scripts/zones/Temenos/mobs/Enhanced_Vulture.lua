@@ -15,7 +15,7 @@ function onMobEngaged(mob, target)
     GetMobByID(ID.mob.TEMENOS_W_MOB[7]+5):updateEnmity(target)
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         if GetMobByID(ID.mob.TEMENOS_W_MOB[7]):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7]+1):isDead() and
             GetMobByID(ID.mob.TEMENOS_W_MOB[7]+2):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7]+3):isDead() and

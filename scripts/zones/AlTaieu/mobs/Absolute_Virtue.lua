@@ -47,7 +47,7 @@ function onMagicHit(caster, target, spell)
     return 1
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.VIRTUOUS_SAINT)
 end
 

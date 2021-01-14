@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ALWAYS_AGGRO, 1) -- "Aggros regardless of level"
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.MORBOLBANE)
 end
 

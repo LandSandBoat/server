@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.LULLABYRES, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.COMING_OF_AGE and player:getCharVar("MissionStatus") == 2) then
         player:setCharVar("MissionStatus", 3)
     end

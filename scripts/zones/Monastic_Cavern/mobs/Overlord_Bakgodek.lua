@@ -13,7 +13,7 @@ function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.ORC_KING_ENGAGE)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.OVERLORD_OVERTHROWER)
     if isKiller then
         mob:showText(mob, ID.text.ORC_KING_DEATH)

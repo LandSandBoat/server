@@ -10,7 +10,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_FOUR_MUSKETEERS) then
         local missionStatus = player:getCharVar("MissionStatus")
 

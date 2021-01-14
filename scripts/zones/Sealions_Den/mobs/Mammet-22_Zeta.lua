@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- find mob offset for given battlefield instance
     local inst = mob:getBattlefield():getArea()
     local instOffset = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1))

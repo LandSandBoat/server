@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     DespawnMob(mob:getID(), 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and
         player:getCharVar("MissionStatus") == 1 and

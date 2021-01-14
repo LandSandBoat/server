@@ -10,7 +10,7 @@ function onMobSpawn(mob)
     mob:setRespawnTime(0, true)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.XOLOTL_XTRAPOLATOR)
 end
 

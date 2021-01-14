@@ -45,7 +45,7 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(tpz.status.NORMAL)
     end

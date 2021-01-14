@@ -6,7 +6,7 @@ local ID = require("scripts/zones/PsoXja/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (isKiller) then
         local mobId = mob:getID()
         local offset = mobId - ID.mob.GARGOYLE_OFFSET

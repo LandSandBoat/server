@@ -54,7 +54,7 @@ function onMonsterMagicPrepare(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
 end
 

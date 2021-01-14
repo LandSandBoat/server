@@ -8,7 +8,7 @@ function onMobEngaged(mob, target)
     SpawnMob(mob:getID() + 3)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

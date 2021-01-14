@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGEN, 35) -- "Strong Auto Regen effect (around 30-40 HP)"
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 370)
 end
 

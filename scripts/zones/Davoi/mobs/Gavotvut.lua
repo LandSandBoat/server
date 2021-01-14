@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCharVar("theDoormanMyMob") == 1) then
         player:addCharVar("theDoormanKilledNM", 1)
     end

@@ -18,7 +18,7 @@ function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PARALYZE)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if player:getCharVar("EcoStatus") == 1 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
         player:setCharVar("EcoStatus", 2)
     end

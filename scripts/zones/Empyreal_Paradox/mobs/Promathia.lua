@@ -49,7 +49,7 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local battlefield = mob:getBattlefield()
     if player then
         player:startEvent(32004, battlefield:getArea())

@@ -3,12 +3,13 @@
 --  NPC: Isakoth
 -- Records of Eminence NPC
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/keyitems")
-require("scripts/globals/sparkshop")
-require("scripts/globals/npc_util")
-require("scripts/globals/roe")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
+require("scripts/globals/sparkshop")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/msg")
+require("scripts/globals/roe")
+-----------------------------------
 
 function onTrade(player,npc,trade)
 end

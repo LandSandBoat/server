@@ -33,7 +33,7 @@ entity.onMobFight = function(mob, target)
 
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     local OP_Mariselle = mob:getID()
 

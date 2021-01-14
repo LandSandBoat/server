@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
     mob:setMod(tpz.mod.STORETP, power)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

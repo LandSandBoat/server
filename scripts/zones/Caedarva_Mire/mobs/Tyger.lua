@@ -15,7 +15,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.ATT, 200)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

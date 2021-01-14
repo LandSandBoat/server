@@ -17,7 +17,7 @@ function onAdditionalEffect(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PARALYZE, {duration = 60})
 end
 
-function onMobDeath(mob)
+entity.onMobDeath = function(mob)
     tpz.hunts.checkHunt(mob, player, 457)
 end
 

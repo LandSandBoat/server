@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.ICERES, 75)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

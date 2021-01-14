@@ -10,7 +10,7 @@ function onMobSpawn(mob)
     tpz.promyvion.strayOnSpawn(mob)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

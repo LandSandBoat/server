@@ -8,7 +8,7 @@ require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 203)
     player:addTitle(tpz.title.MARYS_GUIDE)
     tpz.tutorial.onMobDeath(player)

@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if player:getCharVar("EquippedforAllOccasions") == 1 then
         player:setCharVar("EquippedforAllOccasions", 2)
     end

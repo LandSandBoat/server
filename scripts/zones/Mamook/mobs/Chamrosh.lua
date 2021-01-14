@@ -62,7 +62,7 @@ function onMagicHit(caster, target, spell)
     return 1
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

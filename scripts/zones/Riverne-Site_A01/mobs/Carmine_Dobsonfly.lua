@@ -20,7 +20,7 @@ function onMobDisengage(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

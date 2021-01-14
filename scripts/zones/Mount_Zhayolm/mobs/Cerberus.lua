@@ -15,7 +15,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.CERBERUS_MUZZLER)
 end
 

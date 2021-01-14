@@ -78,7 +78,7 @@ function onWeaponskillHit(mob, attacker, weaponskill)
     return 0
 end
 
-function onMobDeath(mob, killer)
+entity.onMobDeath = function(mob, killer)
 end
 
 return entity

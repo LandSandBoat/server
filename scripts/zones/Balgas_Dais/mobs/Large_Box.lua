@@ -39,7 +39,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
         replaceWithCrate(mob)
     end

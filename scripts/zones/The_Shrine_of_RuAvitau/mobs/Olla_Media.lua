@@ -7,7 +7,7 @@ require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (isKiller) then
         SpawnMob(mob:getID() + 1):updateClaim(player)
     end

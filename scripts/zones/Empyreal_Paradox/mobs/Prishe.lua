@@ -57,7 +57,7 @@ entity.onMobFight = function(mob, target)
     -- mob:setStatus(0)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:messageText(mob, ID.text.PRISHE_TEXT + 2)
 end
 

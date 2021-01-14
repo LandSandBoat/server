@@ -34,7 +34,7 @@ function onMobDisengage(mob)
     mob:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG+2)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     player:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG+1)
 

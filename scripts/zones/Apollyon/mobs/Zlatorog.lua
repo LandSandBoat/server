@@ -34,7 +34,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()

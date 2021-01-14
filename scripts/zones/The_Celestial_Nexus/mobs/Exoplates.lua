@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local eald_narche = GetMobByID(mob:getID() - 1)
     eald_narche:delStatusEffect(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     eald_narche:delStatusEffect(tpz.effect.ARROW_SHIELD, 0, 1, 0, 0)

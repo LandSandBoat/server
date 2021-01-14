@@ -63,7 +63,7 @@ entity.onMobInitialize = function(mob)
     end)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
         -- This is used to increase the strength of Wild Rage as scorps die
         local bf = mob:getBattlefield()

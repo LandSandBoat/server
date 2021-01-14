@@ -36,7 +36,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local allDead = true
         for i = 2, 9 do

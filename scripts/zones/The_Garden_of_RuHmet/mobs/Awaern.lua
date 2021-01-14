@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Ix'Aern DRK animosity mechanic
     if (isKiller) then
         local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM)

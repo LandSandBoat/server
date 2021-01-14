@@ -23,7 +23,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.THE_HORNSPLITTER)
     tpz.tutorial.onMobDeath(player)
 end

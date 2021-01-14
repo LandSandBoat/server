@@ -42,7 +42,7 @@ function onMobDisengage(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 743, 1, tpz.regime.type.GROUNDS)
 end
 

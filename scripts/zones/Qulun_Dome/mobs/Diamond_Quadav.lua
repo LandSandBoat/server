@@ -21,7 +21,7 @@ function onMobEngaged(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
         mob:showText(mob, ID.text.DIAMOND_QUADAV_DEATH)
     end

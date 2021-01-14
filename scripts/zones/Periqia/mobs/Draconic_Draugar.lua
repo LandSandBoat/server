@@ -11,7 +11,7 @@ function onMobEngaged(mob, target)
     SpawnMob(mobID +1, instance):updateEnmity(target)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 function onMobDespawn(mob)

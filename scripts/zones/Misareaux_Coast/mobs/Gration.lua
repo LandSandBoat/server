@@ -12,7 +12,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("fomorHateAdj", -2)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

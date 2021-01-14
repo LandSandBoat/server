@@ -9,7 +9,7 @@ require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 86, 2, tpz.regime.type.FIELDS)
 
     if ENABLE_ACP == 1 and player:getCurrentMission(ACP) >= tpz.mission.id.acp.THE_ECHO_AWAKENS and not player:hasKeyItem(tpz.ki.JUG_OF_GREASY_GOBLIN_JUICE) then

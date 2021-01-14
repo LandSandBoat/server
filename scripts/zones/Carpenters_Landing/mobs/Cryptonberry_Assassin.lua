@@ -41,7 +41,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if player:getCurrentMission(COP) == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("Cryptonberry_Executor_KILL") < 2 then
         local offset = mob:getID() - ID.mob.CRYPTONBERRY_EXECUTOR
         player:setCharVar(string.format("Cryptonberry_Assassins-%i_KILL", offset), 1)

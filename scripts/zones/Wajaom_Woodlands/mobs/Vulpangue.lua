@@ -29,7 +29,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDeath(mob, killer)
+entity.onMobDeath = function(mob, killer)
 end
 
 return entity

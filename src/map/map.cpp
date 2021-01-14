@@ -247,7 +247,6 @@ int32 do_init(int32 argc, char** argv)
     trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
     daily::LoadDailyItems();
-    roeutils::init();
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();

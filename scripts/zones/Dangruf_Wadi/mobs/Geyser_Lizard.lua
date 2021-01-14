@@ -14,7 +14,7 @@ function onMobSpawn(mob)
     DespawnMob(mob:getID(), 600)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 225)
 end
 

@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     player:setCharVar("BCNM_Killed", 1)
     record = 300

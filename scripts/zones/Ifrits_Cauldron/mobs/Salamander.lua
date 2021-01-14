@@ -14,4 +14,7 @@ function onMobSpawn(mob)
     DespawnMob(mob:getID(), 180)
 end
 
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
 return entity

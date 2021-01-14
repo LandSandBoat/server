@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:setCharVar("TEA_WITH_A_TONBERRY_PROG", 4)
 end
 
