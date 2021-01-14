@@ -501,7 +501,7 @@ namespace battleutils
         Mod     resistarray[8] = { Mod::FIRERES, Mod::ICERES, Mod::WINDRES, Mod::EARTHRES, Mod::THUNDERRES, Mod::WATERRES, Mod::LIGHTRES, Mod::DARKRES };
         bool    obiBonus       = false;
 
-        double half      = (double)(PDefender->getMod(resistarray[element])) / 100;
+        double half      = (double)(PDefender->getMod(resistarray[element - 1])) / 100;
         double quart     = pow(half, 2);
         double eighth    = pow(half, 3);
         double sixteenth = pow(half, 4);
@@ -528,7 +528,7 @@ namespace battleutils
         if (PAttacker->objtype == TYPE_PC)
         {
             CItemEquipment* waist = ((CCharEntity*)PAttacker)->getEquip(SLOT_WAIST);
-            if (waist && waist->getID() == obi[element])
+            if (waist && waist->getID() == obi[element - 1])
             {
                 obiBonus = true;
             }
@@ -538,27 +538,27 @@ namespace battleutils
             // mobs random multiplier
             dBonus += tpzrand::GetRandomNumber(100) / 1000.0f;
         }
-        if (WeekDay == strongDay[element] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
+        if (WeekDay == strongDay[element - 1] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
         {
             dBonus += 0.1f;
         }
-        else if (WeekDay == weakDay[element] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
+        else if (WeekDay == weakDay[element - 1] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
         {
             dBonus -= 0.1f;
         }
-        if (weather == strongWeatherSingle[element] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
+        if (weather == strongWeatherSingle[element - 1] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
         {
             dBonus += 0.1f;
         }
-        else if (weather == strongWeatherDouble[element] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
+        else if (weather == strongWeatherDouble[element - 1] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
         {
             dBonus += 0.25f;
         }
-        else if (weather == weakWeatherSingle[element] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
+        else if (weather == weakWeatherSingle[element - 1] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
         {
             dBonus -= 0.1f;
         }
-        else if (weather == weakWeatherDouble[element] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
+        else if (weather == weakWeatherDouble[element - 1] && (obiBonus || tpzrand::GetRandomNumber(100) < 33))
         {
             dBonus -= 0.25f;
         }
