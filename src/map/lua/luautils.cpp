@@ -99,6 +99,7 @@ namespace luautils
 
     std::mutex reloadListBottleneck;
     std::map<std::string, uint64> toReloadList;
+    std::vector<std::string>      filteredList;
     void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func)
     {
         std::lock_guard bottleneck(reloadListBottleneck);
@@ -309,11 +310,14 @@ namespace luautils
                         // No entry, make one
                         list[real_path] = modified_timestamp;
                     }
-
-                    auto last_modified = list.at(real_path);
-                    if (last_modified <= modified_timestamp)
+                    else
                     {
-                        list[real_path] = modified_timestamp;
+                        auto last_modified = list.at(real_path);
+                        if (last_modified < modified_timestamp)
+                        {
+                            list[real_path] = modified_timestamp;
+                            filteredList.emplace_back(real_path);
+                        }
                     }
                 });
             }
@@ -324,7 +328,7 @@ namespace luautils
     void ReloadFilewatchList()
     {
         SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
-            for (auto& [path_string, timestamp] : list)
+            for (auto& path_string : filteredList)
             {
                 std::filesystem::path path(path_string);
 
@@ -358,7 +362,7 @@ namespace luautils
             }
 
             // Erase list
-            list.clear();
+            filteredList.clear();
         });
     }
 
