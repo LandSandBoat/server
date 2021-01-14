@@ -3,6 +3,7 @@
 --  NPC: Ghatsad
 -- Standard Info NPC
 -- Involved in quest: No String Attached
+-- !pos 34.325 -7.804 57.511 50
 -----------------------------------
 require("scripts/globals/common")
 require("scripts/globals/settings")

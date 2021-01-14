@@ -41,7 +41,7 @@ CBaseEntity::CBaseEntity()
     animationsub = 0;
     speed        = 50 + map_config.speed_mod;
     speedsub     = 50 + map_config.speed_mod;
-    namevis      = 1;
+    namevis      = 0;
     allegiance   = ALLEGIANCE_TYPE::MOB;
     updatemask   = 0;
     PAI          = nullptr;
