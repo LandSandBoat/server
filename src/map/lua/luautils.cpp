@@ -333,19 +333,26 @@ namespace luautils
                 if (!result.valid())
                 {
                     sol::error err = result;
-                    std::cout << "  - Error: " << err.what() << "\n";
+                    std::cout << "[FW] - Error: " << err.what() << "\n";
                     return;
                 }
 
                 // Update the cache
                 if (result.return_count())
                 {
-                    // TODO: This is nasty, gotta be a cleaner way of handling this
-                    if (parts[4] == "mobs")
+                    sol::table table = lua["tpz"].get_or_create<sol::table>();
+
+                    std::string out_str = "tpz";
+                    auto parts_itr = parts.begin() + 2;
+                    while (parts_itr != parts.end())
                     {
-                        lua[sol::create_if_nil]["tpz"][parts[2]][parts[3]][parts[4]][parts[5]] = result;
-                        std::cout << "  - Cached to: " << fmt::format("tpz.{}.{}.{}.{}", parts[2], parts[3], parts[4], parts[5]) << "\n";
+                        table = table[*parts_itr].get_or_create<sol::table>();
+                        out_str += "." + *parts_itr;
+                        parts_itr++;
                     }
+
+                    table.set(result);
+                    std::cout << "[FW] - Cache: " << out_str << "\n";
                 }
             }
 
