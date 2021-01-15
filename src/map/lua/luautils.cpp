@@ -2080,7 +2080,7 @@ namespace luautils
             return -1;
         }
 
-        PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, PCaster, PSpell);
+        PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(PCaster), CLuaSpell(PSpell));
 
         auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PTarget->loc.zone->GetName(), PTarget->GetName());
 

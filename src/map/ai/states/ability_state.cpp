@@ -65,7 +65,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.param     = PAbility->getID();
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
-    m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
+    m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", CLuaBaseEntity(m_PEntity), CLuaAbility(PAbility));
 }
 
 CAbility* CAbilityState::GetAbility()
@@ -104,11 +104,11 @@ bool CAbilityState::Update(time_point tick)
         {
             action_t action;
             m_PEntity->OnAbility(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
+            m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(GetTarget()), CLuaAbility(m_PAbility.get()), &action);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
             if (auto* target = GetTarget())
             {
-                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
+                target->PAI->EventHandler.triggerListener("ABILITY_TAKE", CLuaBaseEntity(target), CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()), &action);
             }
         }
         Complete();
@@ -116,7 +116,7 @@ bool CAbilityState::Update(time_point tick)
 
     if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_PAbility->getAnimationTime())
     {
-        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", m_PEntity, m_PAbility.get());
+        m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()));
         return true;
     }
 
