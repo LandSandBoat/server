@@ -10,8 +10,6 @@
     - [Lua](#lua)
     - [SQL](#sql)
 
-
-
 # General Guidelines
 
 * By contributing to Topaz Next, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide, and in our [Code of Conduct](https://github.com/topaz-next/topaz/blob/release/CODE_OF_CONDUCT.md).
@@ -37,6 +35,7 @@
 
 * If an issue involves incorrect NPCs or text, please include your client version (type `/ver` in game)
 * Unimplemented feature requests must be _retail behavior_, and adequetly cover everything about that feature which is missing.
+* Fill out the templated checkboxes that are preloaded in the issue body. These allow us to diagnose your issue as efficiently as possible, and confirm that you've searched for duplicate issues or recent fixes. 
 
 # Pull Request Contributions:
 

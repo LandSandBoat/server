@@ -113,7 +113,6 @@ namespace luautils
     void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func);
 
     int32 init();
-    int32 free();
     int32 garbageCollectStep();
     int32 garbageCollectFull();
 
