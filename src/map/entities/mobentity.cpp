@@ -695,8 +695,8 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             target.param = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
-            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", this, PTarget, PSkill->getID(), state.GetSpentTP(), &action);
-            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", PTarget, this, PSkill->getID(), state.GetSpentTP(), &action);
+            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), PSkill->getID(), state.GetSpentTP(), &action);
+            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
         }
         if (msg == 0)
         {
@@ -1124,7 +1124,7 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
     PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime));
     luautils::OnMobDespawn(this);
     //#event despawn
-    PAI->EventHandler.triggerListener("DESPAWN", this);
+    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
 }
 
 void CMobEntity::Die()

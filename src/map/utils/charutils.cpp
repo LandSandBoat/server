@@ -4071,7 +4071,7 @@ namespace charutils
             }
         }
 
-        PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, exp);
+        PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", CLuaBaseEntity(PChar), exp);
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)
@@ -5007,6 +5007,12 @@ namespace charutils
     {
         if (PAbility->getAddType() & ADDTYPE_MERIT)
         {
+            if (!PChar->PMeritPoints->GetMerit((MERIT_TYPE)PAbility->getMeritModID()))
+            {
+                ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).\n", PAbility->getMeritModID());
+                return false;
+            }
+
             if (!(PChar->PMeritPoints->GetMerit((MERIT_TYPE)PAbility->getMeritModID())->count > 0))
             {
                 return false;

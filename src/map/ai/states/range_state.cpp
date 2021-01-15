@@ -76,7 +76,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.animation       = ANIMATION_RANGED;
 
-    m_PEntity->PAI->EventHandler.triggerListener("RANGE_START", m_PEntity, &action);
+    m_PEntity->PAI->EventHandler.triggerListener("RANGE_START", CLuaBaseEntity(m_PEntity), &action);
 
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 }
