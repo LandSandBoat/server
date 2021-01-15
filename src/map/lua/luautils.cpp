@@ -245,7 +245,7 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 garbageCollect()
+    int32 garbageCollectStep()
     {
         TracyZoneScoped;
         TracyReportLuaMemory(LuaHandle);
