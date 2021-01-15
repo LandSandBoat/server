@@ -199,18 +199,6 @@ namespace luautils
      *                                                                       *
      ************************************************************************/
 
-    int32 free()
-    {
-        if (LuaHandle)
-        {
-            ShowStatus(CL_WHITE "luautils::free" CL_RESET ":lua free...");
-            lua_close(LuaHandle);
-            LuaHandle = nullptr;
-            ShowMessage("\t - " CL_GREEN "[OK]" CL_RESET "\n");
-        }
-        return 0;
-    }
-
     int32 garbageCollect()
     {
         TracyZoneScoped;
