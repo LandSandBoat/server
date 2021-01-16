@@ -9701,13 +9701,13 @@ INSERT INTO `mob_groups` VALUES (32,1100,139,'Dragonian_Berzerker',0,128,0,8250,
 INSERT INTO `mob_groups` VALUES (33,1101,139,'Dragonian_Minstrel',0,128,0,8250,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (34,230,139,'Aries',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (35,1265,139,'Evil_Oscar',0,128,0,12500,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (36,0,139,'Malodorous_Mort',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (37,0,139,'Mortobello',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (38,0,139,'Bruteborn_Krushkosh',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (39,0,139,'Wyvernkin_Dragzagg',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (40,0,139,'Dragzaggs_Wyvern',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (41,0,139,'Bonesetter_Medokvok',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (42,0,139,'Crackshot_Zwogchog',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,6861,139,'Malodorous_Mort',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,6862,139,'Mortobello',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,6863,139,'Bruteborn_Krushkosh',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,6864,139,'Wyvernkin_Dragzagg',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,6865,139,'Dragzaggs_Wyvern',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,6866,139,'Bonesetter_Medokvok',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,6867,139,'Crackshot_Zwogchog',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (43,6642,139,'Atori-Tutori_qm',0,128,0,27000,0,102,102,0);
 INSERT INTO `mob_groups` VALUES (44,1923,139,'Helltail_Harry',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (45,804,139,'Cottontail',0,128,0,0,0,0,0,0);
@@ -9718,13 +9718,12 @@ INSERT INTO `mob_groups` VALUES (49,2086,139,'Invulnerable_Mazzgozz',0,128,0,0,0
 INSERT INTO `mob_groups` VALUES (50,4097,139,'Undefeatable_Sappdapp',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (51,2670,139,'Minds-eyed_Klugwug',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (52,0,139,'Bahamute',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (53,0,139,'Chest_OPlenty',0,128,0,0,0,99,99,0);
-INSERT INTO `mob_groups` VALUES (54,0,139,'Terminal_Coffer',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (55,0,139,'Coffer_OPlenty',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,6868,139,'Chest_OPlenty',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (54,6869,139,'Coffer_OPlenty',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,139,'Excenmille',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (56,0,139,'Excenmille',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (57,0,139,'Excenmille',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (58,0,139,'Kupipi',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (59,0,139,'Naji',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,139,'Kupipi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,0,139,'Naji',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Ghelsba_Outpost (Zone 140)
