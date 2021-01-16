@@ -7143,6 +7143,10 @@ INSERT INTO `mob_groups` VALUES (52,0,101,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (53,0,101,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (54,0,101,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (55,0,101,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,101,'Astral_Box',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,101,'Slime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,0,101,'She-Slime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,0,101,'Metal_Slime',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- La_Theine_Plateau (Zone 102)
