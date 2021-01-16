@@ -120,11 +120,11 @@ namespace luautils
     void ReloadFilewatchList();
 
     template <typename T>
-    void  print(T const& item);
+    void print(T const& item);
 
     // Cache helpers
     auto loadFunctionFromFile(std::string funcName, std::string fileName) -> sol::function;
-    auto getCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
+    auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
     void CacheLuaObject(std::string filename);
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command);

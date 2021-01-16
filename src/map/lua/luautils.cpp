@@ -394,37 +394,48 @@ namespace luautils
         return lua.get<sol::function>(funcName);
     }
 
-    sol::function getCachedFunction(CBaseEntity* PEntity, std::string funcName)
+    sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)
     {
         TracyZoneScoped;
         TracyZoneString(funcName);
+        TracyZoneIString(PEntity->GetName());
 
-        if (PEntity->objtype == TYPE_MOB)
+		if (PEntity->objtype == TYPE_NPC)
+        {
+            std::string zone_name = (const char*)PEntity->loc.zone->GetName();
+            std::string npc_name  = (const char*)PEntity->GetName();
+
+            if (auto cached_func = lua["tpz"]["zones"][zone_name]["npcs"][npc_name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PEntity->objtype == TYPE_MOB)
         {
             std::string zone_name = (const char*)PEntity->loc.zone->GetName();
             std::string mob_name  = (const char*)PEntity->GetName();
 
-            if (auto cached_entity = lua["tpz"]["zones"][zone_name]["mobs"][mob_name]; cached_entity.valid())
+            if (auto cached_func = lua["tpz"]["zones"][zone_name]["mobs"][mob_name][funcName]; cached_func.valid())
             {
-                return cached_entity[funcName];
+                return cached_func;
             }
         }
         else if (PEntity->objtype == TYPE_PET)
         {
             std::string mob_name  = static_cast<CPetEntity*>(PEntity)->GetScriptName();
 
-            if (auto cached_entity = lua["tpz"]["globals"]["pets"][mob_name]; cached_entity.valid())
+            if (auto cached_func = lua["tpz"]["globals"]["pets"][mob_name][funcName]; cached_func.valid())
             {
-                return cached_entity[funcName];
+                return cached_func;
             }
         }
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = (const char*)PEntity->GetName();
 
-            if (auto cached_entity = lua["tpz"]["globals"]["spells"]["trust"][mob_name]; cached_entity.valid())
+            if (auto cached_func = lua["tpz"]["globals"]["spells"]["trust"][mob_name][funcName]; cached_func.valid())
             {
-                return cached_entity[funcName];
+                return cached_func;
             }
         }
 
@@ -2201,7 +2212,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        sol::function onMobInitialize = getCachedFunction(PMob, "onMobInitialize");
+        sol::function onMobInitialize = getEntityCachedFunction(PMob, "onMobInitialize");
         if (!onMobInitialize.valid())
         {
             return -1;
@@ -2322,9 +2333,7 @@ namespace luautils
             return -1;
         }
 
-        auto filename = fmt::format("scripts/zones/{}/{}/{}.lua", PEntity->loc.zone->GetName(), (PEntity->objtype == TYPE_MOB ? "mobs" : "npcs"), PEntity->GetName());
-
-        auto onPath = loadFunctionFromFile("onPath", filename);
+        sol::function onPath = getEntityCachedFunction(PEntity, "onPath");
         if (!onPath.valid())
         {
             return -1;
@@ -2601,7 +2610,7 @@ namespace luautils
             return -1;
         }
 
-        sol::function onMobFight = getCachedFunction(PMob, "onMobFight");
+        sol::function onMobFight = getEntityCachedFunction(PMob, "onMobFight");
         if (!onMobFight.valid())
         {
             return -1;
@@ -2699,7 +2708,7 @@ namespace luautils
 
             auto filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
 
-            sol::function onMobDeath = getCachedFunction(PMob, "onMobDeath");
+            sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
             if (!onMobDeath.valid())
             {
                 ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
@@ -2735,28 +2744,10 @@ namespace luautils
         }
         else
         {
-            // TODO: Clean this up, only used for error reporting
-            std::string filename;
-            switch (PMob->objtype)
-            {
-                case TYPE_MOB:
-                    filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
-                    break;
-                case TYPE_PET:
-                    filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
-                    break;
-                case TYPE_TRUST:
-                    filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
-                    break;
-                default:
-                    ShowWarning("luautils::onMobDeath (%d): unknown objtype\n", PMob->objtype);
-                    break;
-            }
-
-            sol::function onMobDeath = getCachedFunction(PMob, "onMobDeath");
+            sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
             if (!onMobDeath.valid())
             {
-                ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
+                ShowError("luautils::onMobDeath (%s - %s): undefined procedure onMobDeath\n", PMob->GetName(), PMob->loc.zone->GetName());
                 return -1;
             }
 
@@ -2848,7 +2839,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        sol::function onMobRoam = getCachedFunction(PMob, "onMobRoam");
+        sol::function onMobRoam = getEntityCachedFunction(PMob, "onMobRoam");
         if (!onMobRoam.valid())
         {
             return -1;
@@ -2874,24 +2865,7 @@ namespace luautils
             return -1;
         }
 
-        std::string filename;
-        switch (PMob->objtype)
-        {
-            case TYPE_MOB:
-                filename = fmt::format("scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
-                break;
-            case TYPE_PET:
-                filename = fmt::format("scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PMob)->GetScriptName().c_str());
-                break;
-            case TYPE_TRUST:
-                filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
-                break;
-            default:
-                ShowWarning("luautils::onMobSpawn (%d): unknown objtype\n", PMob->objtype);
-                break;
-        }
-
-        auto onMobDespawn = loadFunctionFromFile("onMobDespawn", filename);
+        auto onMobDespawn = getEntityCachedFunction(PMob , "onMobDespawn");
         if (!onMobDespawn.valid())
         {
             return -1;
