@@ -2839,6 +2839,8 @@ INSERT INTO `mob_groups` VALUES (9,4123,57,'Valkeng',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (10,3292,57,'Qultada',0,128,0,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (11,1506,57,'Gessho',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (12,1506,57,'Gessho',0,128,0,2000,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (13,1506,57,'Gessho',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (14,1506,57,'Gessho',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Silver_Sea_route_to_Nashmau (Zone 58)
