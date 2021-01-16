@@ -30,8 +30,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "luautils.h"
 
 CLuaInstance::CLuaInstance(CInstance* PInstance)
+: m_PLuaInstance(PInstance)
 {
-    m_PLuaInstance = PInstance;
+    if (PInstance == nullptr)
+    {
+        ShowError("CLuaInstance created with nullptr instead of valid CInstance*!\n");
+    }
 }
 
 uint8 CLuaInstance::getID()

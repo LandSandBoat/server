@@ -29,8 +29,12 @@
  ************************************************************************/
 
 CLuaRegion::CLuaRegion(CRegion* PRegion)
+: m_PLuaRegion(PRegion)
 {
-    m_PLuaRegion = PRegion;
+    if (PRegion == nullptr)
+    {
+        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!\n");
+    }
 }
 
 /************************************************************************

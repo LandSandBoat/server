@@ -33,8 +33,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua_battlefield.h"
 
 CLuaBattlefield::CLuaBattlefield(CBattlefield* PBattlefield)
+: m_PLuaBattlefield(PBattlefield)
 {
-    m_PLuaBattlefield = PBattlefield;
+    if (PBattlefield == nullptr)
+    {
+        ShowError("CLuaBattlefield created with nullptr instead of valid CBattlefield*!\n");
+    }
 }
 
 uint16 CLuaBattlefield::getID()

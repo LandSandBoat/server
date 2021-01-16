@@ -29,8 +29,12 @@
 //======================================================//
 
 CLuaTradeContainer::CLuaTradeContainer(CTradeContainer* pTrade)
+: m_pMyTradeContainer(pTrade)
 {
-    m_pMyTradeContainer = pTrade;
+    if (pTrade == nullptr)
+    {
+        ShowError("CLuaTradeContainer created with nullptr instead of valid CTradeContainer*!\n");
+    }
 }
 
 //======================================================//

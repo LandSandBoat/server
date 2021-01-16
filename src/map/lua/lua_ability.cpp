@@ -29,8 +29,12 @@
  ************************************************************************/
 
 CLuaAbility::CLuaAbility(CAbility* PAbility)
+: m_PLuaAbility(PAbility)
 {
-    m_PLuaAbility = PAbility;
+    if (PAbility == nullptr)
+    {
+        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!\n");
+    }
 }
 
 uint16 CLuaAbility::getID()

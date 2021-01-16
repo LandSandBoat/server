@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -289,6 +289,9 @@ namespace luautils
             // If a Lua file is modified
             if (path.extension() == ".lua" && change_type == filewatch::Event::modified)
             {
+                TracyZoneScoped;
+                TracyZoneString(path.generic_string());
+
                 auto real_path          = "./scripts/" + path.generic_string();
                 auto modified           = std::filesystem::last_write_time(real_path).time_since_epoch().count();
                 auto modified_timestamp = static_cast<uint64>(modified);
@@ -316,6 +319,7 @@ namespace luautils
     void ReloadFilewatchList()
     {
         SafeApplyFunc_ReloadList([&](std::map<std::string, uint64>& list) {
+            TracyZoneScoped;
             for (auto& path_string : filteredList)
             {
                 std::filesystem::path path(path_string);
@@ -2754,7 +2758,7 @@ namespace luautils
                     filename = fmt::format("scripts/globals/spells/trust/{}.lua", PMob->GetName());
                     break;
                 default:
-                    ShowWarning("luautils::onMobSpawn (%d): unknown objtype\n", PMob->objtype);
+                    ShowWarning("luautils::onMobDeath (%d): unknown objtype\n", PMob->objtype);
                     break;
             }
 

@@ -28,8 +28,12 @@
 //======================================================//
 
 CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
+: m_PLuaStatusEffect(StatusEffect)
 {
-    m_PLuaStatusEffect = StatusEffect;
+    if (StatusEffect == nullptr)
+    {
+        ShowError("CLuaStatusEffect created with nullptr instead of valid CStatusEffect*!\n");
+    }
 }
 
 //======================================================//

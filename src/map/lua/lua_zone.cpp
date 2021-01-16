@@ -31,6 +31,10 @@
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
 {
+    if (PZone == nullptr)
+    {
+        ShowError("CLuaZone created with nullptr instead of valid CZone*!\n");
+    }
 }
 
 /************************************************************************

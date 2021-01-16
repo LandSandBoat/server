@@ -23,8 +23,12 @@
 #include "../packets/action.h"
 
 CLuaAction::CLuaAction(action_t* Action)
+:m_PLuaAction(Action)
 {
-    m_PLuaAction = Action;
+    if (Action == nullptr)
+    {
+        ShowError("CLuaAction created with nullptr instead of valid action_t*!\n");
+    }
 }
 
 void CLuaAction::ID(uint32 actionTargetID, uint16 newActionTargetID)

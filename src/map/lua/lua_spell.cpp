@@ -32,8 +32,12 @@
  ************************************************************************/
 
 CLuaSpell::CLuaSpell(CSpell* PSpell)
+: m_PLuaSpell(PSpell)
 {
-    m_PLuaSpell = PSpell;
+    if (PSpell == nullptr)
+    {
+        ShowError("CLuaSpell created with nullptr instead of valid CSpell*!\n");
+    }
 }
 
 /************************************************************************

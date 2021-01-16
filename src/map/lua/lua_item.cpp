@@ -30,8 +30,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
+: m_PLuaItem(PItem)
 {
-    m_PLuaItem = PItem;
+    if (PItem == nullptr)
+    {
+        ShowError("CLuaItem created with nullptr instead of valid CItem*!\n");
+    }
 }
 
 uint16 CLuaItem::getID()

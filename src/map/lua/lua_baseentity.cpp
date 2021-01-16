@@ -160,8 +160,12 @@
 //======================================================//
 
 CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
+: m_PBaseEntity(PEntity)
 {
-    m_PBaseEntity = PEntity;
+    if (PEntity == nullptr)
+    {
+        ShowError("CLuaBaseEntity created with nullptr instead of valid CBaseEntity*!\n");
+    }
 }
 
 /************************************************************************
