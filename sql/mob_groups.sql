@@ -2670,7 +2670,7 @@ INSERT INTO `mob_groups` VALUES (86,39,52,'Acrolith',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (1,6370,54,'Wootzshell_fished',0,128,1248,0,0,72,73,0);
 INSERT INTO `mob_groups` VALUES (2,255,54,'Arrapago_Leech',0,128,174,0,0,73,74,0);
 INSERT INTO `mob_groups` VALUES (3,721,54,'Chimera_Clot',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (4,2318,54,'Lahama',960,0,1464,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (4,4813,54,'Lahama_fished',0,128,1464,0,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (5,2426,54,'Llamhigyn_Y_Dwr',0,128,687,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (6,1534,54,'Giant_Orobon',0,128,0,0,0,78,83,0);
 
@@ -2764,6 +2764,7 @@ INSERT INTO `mob_groups` VALUES (93,5199,54,'Assassins_Apprentice',0,128,0,0,500
 INSERT INTO `mob_groups` VALUES (94,6673,54,'Lamia_Palace_Guard_cor',960,0,0,0,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (95,6747,54,'Qutrub_blm',960,0,2885,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (96,6748,54,'Lamia_Idolater_blm',960,0,1492,0,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (97,2318,54,'Lahama',960,0,1464,0,0,78,80,0);
 
 -- ------------------------------------------------------------
 -- Ilrusi_Atoll (Zone 55)
