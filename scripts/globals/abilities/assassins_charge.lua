@@ -8,11 +8,13 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-function onAbilityCheck(player, target, ability)
+local ability_object = {}
+
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local merits = player:getMerit(tpz.merit.ASSASSINS_CHARGE)
     local crit = 0
     if player:getMod(tpz.mod.AUGMENTS_ASSASSINS_CHARGE) > 0 then
@@ -21,3 +23,5 @@ function onUseAbility(player, target, ability)
 
     player:addStatusEffect(tpz.effect.ASSASSINS_CHARGE, merits - 5, 0, 60, 0, crit)
 end
+
+return ability_object

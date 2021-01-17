@@ -8,13 +8,16 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local duration = math.random(30, 300)
     duration = duration * (1 + player:getMod(tpz.mod.HIDE_DURATION)/100)
     player:addStatusEffect(tpz.effect.HIDE, 1, 0, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
 end
+
+return ability_object

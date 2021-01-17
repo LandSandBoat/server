@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if not player:isWeaponTwoHanded() then
         return tpz.msg.basic.NEEDS_2H_WEAPON, 0
     else
@@ -18,7 +19,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Applying Weapon Bash stun. Rate is said to be near 100%, so let's say 99%.
     if (math.random()*100 < 99) then
         target:addStatusEffect(tpz.effect.STUN, 1, 0, 6)
@@ -39,3 +40,5 @@ function onUseAbility(player, target, ability)
 
     return damage
 end
+
+return ability_object

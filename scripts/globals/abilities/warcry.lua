@@ -7,12 +7,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local merit = player:getMerit(tpz.merit.SAVAGERY)
     local power = 0
     local duration = 30
@@ -29,3 +30,5 @@ function onUseAbility(player, target, ability)
 
     target:addStatusEffect(tpz.effect.WARCRY, power, 0, duration, 0, merit)
 end
+
+return ability_object

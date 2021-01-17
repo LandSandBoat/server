@@ -7,12 +7,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local amount = 12
     if (player:getMainJob() == tpz.job.SAM) then
         amount = 20
@@ -20,3 +21,5 @@ function onUseAbility(player, target, ability)
     local duration = 15 + player:getMod(tpz.mod.MEDITATE_DURATION)
     player:addStatusEffectEx(tpz.effect.MEDITATE, 0, amount, 3, duration)
 end
+
+return ability_object

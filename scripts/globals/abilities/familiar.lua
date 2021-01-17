@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     local pet = player:getPet()
     if not pet then
         return tpz.msg.basic.REQUIRES_A_PET, 0
@@ -24,7 +25,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     player:familiar()
 
     -- pets powers increase!
@@ -32,3 +33,5 @@ function onUseAbility(player, target, ability)
 
     return 0
 end
+
+return ability_object

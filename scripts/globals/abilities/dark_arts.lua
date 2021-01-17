@@ -9,15 +9,16 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(tpz.effect.DARK_ARTS) or player:hasStatusEffect(tpz.effect.ADDENDUM_BLACK) then
         return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     player:delStatusEffectSilent(tpz.effect.LIGHT_ARTS)
     player:delStatusEffect(tpz.effect.ADDENDUM_WHITE)
     player:delStatusEffect(tpz.effect.PENURY)
@@ -37,3 +38,5 @@ function onUseAbility(player, target, ability)
 
     return tpz.effect.DARK_ARTS
 end
+
+return ability_object

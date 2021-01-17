@@ -7,12 +7,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local MP = player:getMP()
     local HP = player:getHP()
     if MP > 0 then
@@ -24,3 +25,5 @@ function onUseAbility(player, target, ability)
         player:setMP(HP)
     end
 end
+
+return ability_object

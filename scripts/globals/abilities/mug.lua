@@ -8,12 +8,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local thfLevel
     local gil = 0
 
@@ -54,3 +55,5 @@ function onUseAbility(player, target, ability, action)
 
     return gil
 end
+
+return ability_object

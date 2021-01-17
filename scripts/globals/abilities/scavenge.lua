@@ -8,12 +8,13 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
 
     -- RNG AF2 quest check
     local FireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
@@ -62,3 +63,5 @@ function onUseAbility(player, target, ability, action)
         end
     end
 end
+
+return ability_object
