@@ -12,8 +12,9 @@ require("scripts/globals/aftermath")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     -- Apply aftermath
     tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
 
@@ -22,3 +23,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     player:addHP(ftphp * player:getMaxHP())
     return 0, 0, false, ftpmp * player:getMaxMP()
 end
+
+return weaponskill_object
