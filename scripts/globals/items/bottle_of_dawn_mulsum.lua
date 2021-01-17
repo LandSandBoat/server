@@ -5,18 +5,22 @@
 -----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if (not target:hasPet()) then
         return tpz.msg.basic.REQUIRES_A_PET
     end
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local percent = math.random(20, 35) * ITEM_POWER
     local pet = target:getPet()
     local totalHP = (pet:getMaxHP()/100)*percent
     pet:addHP(totalHP)
     pet:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, totalHP)
 end
+
+return item_object

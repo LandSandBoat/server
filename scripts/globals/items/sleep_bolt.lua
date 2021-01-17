@@ -7,8 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 95
     if (target:getMainLvl() > player:getMainLvl()) then
         chance = chance - 5 * (target:getMainLvl() - player:getMainLvl())
@@ -29,3 +30,5 @@ function onAdditionalEffect(player, target, damage)
         return tpz.subEffect.SLEEP, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.SLEEP_I
     end
 end
+
+return item_object

@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (not target:isWeaponTwoHanded()) then
         return tpz.msg.basic.NEEDS_2H_WEAPON, 0
     else
@@ -18,7 +19,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local strboost = target:getMainLvl()/7
     if (target:getMainJob()~=12) then --sjob sam, use sub level
         strboost = target:getSubLvl()/7
@@ -29,3 +30,5 @@ function onUseAbility(player, target, ability)
         target:addStatusEffect(tpz.effect.HASSO, strboost, 0, 300)
     end
 end
+
+return ability_object

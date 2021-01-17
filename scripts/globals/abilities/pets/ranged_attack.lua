@@ -6,12 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 ---------------------------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 1,
         atkmulti = 1.5,
@@ -34,3 +35,5 @@ function onPetAbility(target, automaton, skill, master, action)
 
     return damage
 end
+
+return ability_object

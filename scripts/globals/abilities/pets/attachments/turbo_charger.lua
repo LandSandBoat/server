@@ -4,6 +4,7 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     onUpdate(pet, 0)
@@ -32,3 +33,5 @@ function onUpdate(pet, maneuvers)
         updateModPerformance(pet, tpz.mod.HASTE_MAGIC, 'turbo_charger_haste', 2500)
     end
 end
+
+return attachment_object

@@ -3,14 +3,18 @@
 -- Item: Blaze Hose
 -- Item Effect: Blaze Spikes
 -----------------------------------------
+local item_object = {}
 
 require("scripts/globals/settings")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.BLAZE_SPIKES, 15, 0, 180)
 end
+
+return item_object

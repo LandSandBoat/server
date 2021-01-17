@@ -8,12 +8,13 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local merits = player:getMerit(tpz.merit.CHIVALRY)
     local tp = target:getTP()
     -- (TP * .5) + (0.015 * TP * MND) = MP gained
@@ -21,3 +22,5 @@ function onUseAbility(player, target, ability)
     target:setTP(0)
     return target:addMP(amount)
 end
+
+return ability_object

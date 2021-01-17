@@ -4,6 +4,7 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:setLocalVar("damagegauge", 1)
@@ -75,3 +76,5 @@ function onUpdate(pet, maneuvers)
         updateModPerformance(pet, tpz.mod.AUTO_HEALING_DELAY, 'damage_gauge_delay', 10)
     end
 end
+
+return attachment_object

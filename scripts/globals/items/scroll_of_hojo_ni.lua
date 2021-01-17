@@ -3,11 +3,14 @@
 -- Scroll of Hojo: Ni
 -- Teaches the ninjutsu Hojo: Ni
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(345)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(345)
 end
+
+return item_object

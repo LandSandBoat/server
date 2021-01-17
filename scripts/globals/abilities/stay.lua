@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
         return tpz.msg.basic.REQUIRES_A_PET, 0
     end
@@ -18,7 +19,7 @@ function onAbilityCheck(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local pet = player:getPet()
 
     if (not pet:hasPreventActionEffect()) then
@@ -38,3 +39,5 @@ function onUseAbility(player, target, ability, action)
         pet:setAnimation(0)
     end
 end
+
+return ability_object

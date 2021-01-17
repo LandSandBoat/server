@@ -6,11 +6,13 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/msg")
 ---------------------------------------------
-function onAbilityCheck(player, target, ability)
+local ability_object = {}
+
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
 
     -- TODO:
     -- Healing Breath I and II should have lower multipliers.  They'll need to be corrected if the multipliers are ever found.  Don't want to over-correct right now.
@@ -40,3 +42,5 @@ function onUseAbility(pet, target, skill, action)
     target:addHP(base)
     return base
 end
+
+return ability_object

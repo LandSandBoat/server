@@ -3,11 +3,14 @@
 -- Scroll of Dispel
 -- Teaches the black magic Dispel
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(260)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(260)
 end
+
+return item_object

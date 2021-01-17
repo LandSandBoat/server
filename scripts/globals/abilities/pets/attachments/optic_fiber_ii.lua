@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:addMod(tpz.mod.AUTO_PERFORMANCE_BOOST, 15)
@@ -40,3 +41,5 @@ function onManeuverLose(pet, maneuvers)
         master:updateAttachments()
     end
 end
+
+return attachment_object

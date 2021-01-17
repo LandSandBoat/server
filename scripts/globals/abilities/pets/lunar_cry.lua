@@ -6,12 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local moon = VanadielMoonPhase()
     local buffvalue = 0
     if moon > 90 then
@@ -36,3 +37,5 @@ function onPetAbility(target, pet, skill)
     skill:setMsg(tpz.msg.basic.NONE)
     return 0
 end
+
+return ability_object

@@ -12,8 +12,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
         return tpz.msg.basic.REQUIRES_COMBAT, 0
     else
@@ -42,7 +43,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
 
     local isSneakValid = player:hasStatusEffect(tpz.effect.SNEAK_ATTACK)
     if (isSneakValid and not player:isBehind(target)) then
@@ -75,3 +76,5 @@ function onUseAbility(player, target, ability, action)
         return 0
     end
 end
+
+return ability_object

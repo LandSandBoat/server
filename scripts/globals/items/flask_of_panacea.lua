@@ -5,12 +5,13 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:delStatusEffect(tpz.effect.PARALYSIS)
     target:delStatusEffect(tpz.effect.BIND)
     target:delStatusEffect(tpz.effect.WEIGHT)
@@ -41,3 +42,5 @@ function onItemUse(target)
     target:delStatusEffect(tpz.effect.MAGIC_ATK_DOWN)
 end
 
+
+return item_object

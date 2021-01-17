@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 50) -- -0.5s
@@ -33,3 +34,5 @@ function onManeuverLose(pet, maneuvers)
         pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 30)
     end
 end
+
+return attachment_object

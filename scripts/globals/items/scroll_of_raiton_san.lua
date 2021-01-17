@@ -3,11 +3,14 @@
 -- Scroll of Raiton: San
 -- Teaches the ninjutsu Raiton: San
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(334)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(334)
 end
+
+return item_object

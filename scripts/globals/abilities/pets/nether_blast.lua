@@ -7,12 +7,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
 
 ---------------------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local level = pet:getMainLvl()
     local damage = (5 * level +  10)
     damage = MobMagicalMove(pet, target, skill, damage, tpz.magic.ele.DARK, 1, TP_NO_EFFECT, 0)
@@ -24,3 +25,5 @@ function onPetAbility(target, pet, skill)
 
     return damage
 end
+
+return ability_object

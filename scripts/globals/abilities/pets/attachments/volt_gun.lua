@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     local skill = math.max(pet:getSkillLevel(tpz.skill.AUTOMATON_MELEE), pet:getSkillLevel(tpz.skill.AUTOMATON_RANGED), pet:getSkillLevel(tpz.skill.AUTOMATON_MAGIC))
@@ -36,3 +37,5 @@ function onManeuverLose(pet, maneuvers)
         onEquip(pet)
     end
 end
+
+return attachment_object

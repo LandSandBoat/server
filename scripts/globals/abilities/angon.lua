@@ -12,8 +12,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     local id = player:getEquipID(tpz.slot.AMMO)
     if (id == 18259) then
         return 0, 0
@@ -22,7 +23,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local typeEffect = tpz.effect.DEFENSE_DOWN
     local duration = 15 + player:getMerit(tpz.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
 
@@ -34,3 +35,5 @@ function onUseAbility(player, target, ability)
     player:removeAmmo()
     return typeEffect
 end
+
+return ability_object

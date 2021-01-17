@@ -8,8 +8,9 @@ require("scripts/globals/conquest")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target, param, caster)
+item_object.onItemCheck = function(target, param, caster)
     if (target:getNation() ~= tpz.nation.SANDORIA) then
         return tpz.msg.basic.ITEM_CANNOT_USE_ON
     end
@@ -30,7 +31,9 @@ function onItemCheck(target, param, caster)
 end
 
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
     target:addStatusEffect(tpz.effect.SIGNET, 0, 0, 18000)
 end
+
+return item_object

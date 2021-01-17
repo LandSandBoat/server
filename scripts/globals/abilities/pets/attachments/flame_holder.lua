@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 local validskills = {
     [1940] = true,
@@ -63,3 +64,5 @@ end
 
 function onManeuverLose(pet, maneuvers)
 end
+
+return attachment_object

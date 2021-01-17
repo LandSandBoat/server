@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:addListener("MAGIC_START", "AUTO_ICE_MAKER_START", function(pet, spell, action)
@@ -49,3 +50,5 @@ end
 
 function onManeuverLose(pet, maneuvers)
 end
+
+return attachment_object

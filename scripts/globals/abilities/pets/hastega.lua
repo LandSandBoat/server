@@ -7,12 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 ---------------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill, summoner)
+ability_object.onPetAbility = function(target, pet, skill, summoner)
     local bonusTime = utils.clamp(summoner:getSkillLevel(tpz.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration = 180 + bonusTime
     -- Garuda's Hastega is a weird exception and uses 153/1024 instead of 150/1024 like Haste spell
@@ -21,3 +22,5 @@ function onPetAbility(target, pet, skill, summoner)
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     return tpz.effect.HASTE
 end
+
+return ability_object

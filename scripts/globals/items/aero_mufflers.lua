@@ -3,12 +3,15 @@
 -- Aero Mufflers
 --  Enchantment: "Enaero"
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local effect = tpz.effect.ENAERO
     doEnspell(target, target, nil, effect)
 end
+
+return item_object

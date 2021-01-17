@@ -6,12 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     return 0
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(tpz.recast.ABILITY, skill:getID(), 180)
     local maneuvers = master:countEffect(tpz.effect.EARTH_MANEUVER)
     local pMod = math.max(automaton:getSkillLevel(tpz.skill.AUTOMATON_MELEE), automaton:getSkillLevel(tpz.skill.AUTOMATON_RANGED), automaton:getSkillLevel(tpz.skill.AUTOMATON_MAGIC))
@@ -54,3 +55,5 @@ function onPetAbility(target, automaton, skill, master, action)
 
     return tpz.effect.STONESKIN
 end
+
+return ability_object

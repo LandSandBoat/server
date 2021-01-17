@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:addMod(tpz.mod.SNAP_SHOT, 3)
@@ -31,3 +32,5 @@ function onManeuverLose(pet, maneuvers)
         pet:delMod(tpz.mod.SNAP_SHOT, 6)
     end
 end
+
+return attachment_object

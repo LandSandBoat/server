@@ -7,8 +7,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local effect = target:getStatusEffect(tpz.effect.ENCHANTMENT)
     local pet = target:getPet()
     if not pet then
@@ -19,18 +20,20 @@ function onItemCheck(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 300, 18243)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     local pet = target:getPet()
     pet:addMod(tpz.mod.MATT, 22)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     local pet = target:getPet()
     if pet ~= nil then
         pet:delMod(tpz.mod.MATT, 22)
     end
 end
+
+return item_object

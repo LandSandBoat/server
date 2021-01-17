@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (target:getHP() == 0) then
         return tpz.msg.basic.CANNOT_ON_THAT_TARG, 0
     elseif (player:hasStatusEffect(tpz.effect.SABER_DANCE)) then
@@ -39,7 +40,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(tpz.effect.TRANCE) then
         player:delTP(350)
@@ -84,3 +85,5 @@ function onUseAbility(player, target, ability)
     return cure
 
 end
+
+return ability_object

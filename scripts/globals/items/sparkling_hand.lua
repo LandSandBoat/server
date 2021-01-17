@@ -3,10 +3,13 @@
 -- Sparkling Hand
 -- The user's right hand glows in a white light
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
 end
+
+return item_object

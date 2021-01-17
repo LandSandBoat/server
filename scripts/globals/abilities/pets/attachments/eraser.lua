@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 local removable = {
     tpz.effect.PETRIFICATION,
@@ -53,3 +54,5 @@ end
 
 function onManeuverLose(pet, maneuvers)
 end
+
+return attachment_object

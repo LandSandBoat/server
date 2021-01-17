@@ -6,8 +6,10 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 15
 
     if (chance > math.random(0, 99)) then
@@ -31,11 +33,11 @@ function onAdditionalEffect(player, target, damage)
     end
 end
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local hpHeal = math.random(160, 220)
     local dif = target:getMaxHP() - target:getHP()
     if (hpHeal > dif) then
@@ -44,3 +46,5 @@ function onItemUse(target)
     target:addHP(hpHeal)
     target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, hpHeal)
 end
+
+return item_object

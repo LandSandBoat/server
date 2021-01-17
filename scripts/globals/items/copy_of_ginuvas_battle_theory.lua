@@ -7,8 +7,9 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local check = 56
     if (target:getMainLvl() >= 65) then
         check = 0
@@ -16,6 +17,8 @@ function onItemCheck(target)
     return check
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addExp(EXP_RATE * math.random(50, 200))
 end
+
+return item_object

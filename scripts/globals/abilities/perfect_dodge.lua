@@ -8,12 +8,15 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local duration = 30 + player:getMod(tpz.mod.PERFECT_DODGE)
     player:addStatusEffect(tpz.effect.PERFECT_DODGE, 1, 0, duration)
 end
+
+return ability_object

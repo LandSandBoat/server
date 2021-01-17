@@ -25,8 +25,9 @@
 
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if (target:hasStatusEffect(tpz.effect.TRANSCENDENCY)) then
         return 523
     else
@@ -34,6 +35,8 @@ function onItemCheck(target)
     end
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.TRANSCENDENCY, 1, 0, 180)
 end
+
+return item_object

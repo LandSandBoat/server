@@ -9,8 +9,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if (target:getRace() ~= tpz.race.MITHRA) then
         result = tpz.msg.basic.CANNOT_EAT
@@ -24,16 +25,18 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 300, 4384)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.DEX, 4)
     target:addMod(tpz.mod.MND, -6)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.DEX, 4)
     target:delMod(tpz.mod.MND, -6)
 end
+
+return item_object

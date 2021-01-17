@@ -3,8 +3,9 @@
 -- Item: tidal talisman
 --
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 56
     local zone = target:getZoneID()
     if (zone == 238 or zone == 239 or zone == 240 or zone == 241 or zone == 242 or -- Windurst
@@ -21,7 +22,7 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local zone = target:getZoneID()
 
     if (zone == 241 or zone == 242 or zone == 240 or zone == 239 or zone == 238) then -- Item is used in Windurst
@@ -44,3 +45,5 @@ function onItemUse(target)
         target:setPos(-73, 0, 0, 252, 50) -- player/s ends up at Aht Urahgan Whitegate
     end
 end
+
+return item_object

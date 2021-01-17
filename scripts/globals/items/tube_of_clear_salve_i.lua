@@ -5,15 +5,17 @@
 -----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if not target:hasPet() then
         return tpz.msg.basic.REQUIRES_A_PET
     end
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local pet = target:getPet()
     local effects =
     {
@@ -50,3 +52,5 @@ function onItemUse(target)
 
     return removed
 end
+
+return item_object
