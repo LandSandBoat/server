@@ -8,6 +8,10 @@ require("scripts/globals/monstertpmoves")
 ---------------------------------------------------
 local mobskill_object = {}
 
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    return 0
+end
+
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = 2

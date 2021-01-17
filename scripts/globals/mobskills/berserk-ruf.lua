@@ -1,5 +1,5 @@
 -----------------------------------
--- Ability: Warcry
+-- Ability: Berserk-ruf
 -----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
@@ -7,11 +7,11 @@ require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
 
-function OnMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function OnMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 25
     local duration = 180
 
@@ -20,7 +20,5 @@ function OnMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
-
-
 
 return mobskill_object
