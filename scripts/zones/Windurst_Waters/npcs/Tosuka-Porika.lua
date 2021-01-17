@@ -14,11 +14,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local bookwormStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
     local chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     local currentMission = player:getCurrentMission(WINDURST)
@@ -108,10 +109,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- The Road Forks (CoP 3-3)
     if csid == 875 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
@@ -148,3 +149,5 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     end
 end
+
+return entity

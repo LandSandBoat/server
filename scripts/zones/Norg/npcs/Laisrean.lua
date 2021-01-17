@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     Stash = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
     mLvl = player:getMainLvl()
     SeaStatue = player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE)
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 33 and option == 1) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
     elseif (csid == 35) then
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

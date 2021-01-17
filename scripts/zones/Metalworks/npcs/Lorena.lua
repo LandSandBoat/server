@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 -----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
@@ -81,24 +82,26 @@ local items = {
     }
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     unionRepresentativeTrade(player, npc, trade, 801, 2)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     unionRepresentativeTrigger(player, 2, 800, "guild_smithing", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 800) then
         unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 800) then
         unionRepresentativeTriggerFinish(player, option, target, 2, "guild_smithing", keyitems, items)
     elseif (csid == 801) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

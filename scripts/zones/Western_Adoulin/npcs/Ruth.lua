@@ -9,11 +9,12 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local APBIF = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     local SOA_Mission = player:getCurrentMission(SOA)
 
@@ -31,13 +32,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2523) then
         -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
         player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
         player:addStatusEffect(tpz.effect.IONIS, 0, 0, 9000)
     end
 end
+
+return entity

@@ -8,8 +8,9 @@ require("scripts/globals/titles")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local hittingTheMarquisateNanaaCS = player:getCharVar("hittingTheMarquisateNanaaCS")
 
@@ -20,13 +21,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 119) then
         if (player:getFreeSlotsCount() == 0) then
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

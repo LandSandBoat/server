@@ -9,6 +9,7 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/pathfind")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -20,21 +21,21 @@ local path =
     90, -0.5, -19
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
     onPath(npc)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
 
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 3) then
         player:startEvent(117)
@@ -46,10 +47,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
 
     if (csid == 117) then
         player:setCharVar("MissionStatus", 4)
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option, npc)
 
     npc:wait(0)
 end
+
+return entity

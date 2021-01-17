@@ -11,8 +11,9 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(1018, 2) and trade:getItemCount() == 2) then -- Trade Shaman Garlic
             player:startEvent(23)
@@ -29,7 +30,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local warding = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
     local WildcatSandy = player:getCharVar("WildcatSandy")
@@ -48,10 +49,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 24 and option == 1) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WARDING_VAMPIRES)
@@ -70,3 +71,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 7, true))
     end
 end
+
+return entity

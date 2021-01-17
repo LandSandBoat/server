@@ -5,11 +5,12 @@
 local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 3 and not GetMobByID(ID.mob.SOLICITOR):isSpawned() then
         SpawnMob(ID.mob.SOLICITOR):updateClaim(player)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 4 then
@@ -19,11 +20,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 52 then
         player:setCharVar("PromathiaStatus", 5)
     end
 end
+
+return entity

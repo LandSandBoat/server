@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getCharVar("UnderOathCS") == 5 and npcUtil.tradeHas(trade, 1095) then
         player:startEvent(113)
     else
@@ -16,7 +17,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         player:getCharVar("UnderOathCS") == 5 and
         player:hasKeyItem(tpz.ki.STRANGE_SHEET_OF_PAPER) and
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 113 then
         player:confirmTrade()
         npcUtil.giveKeyItem(player, tpz.ki.KNIGHTS_CONFESSION)
@@ -44,3 +45,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.STRANGE_SHEET_OF_PAPER)
     end
 end
+
+return entity

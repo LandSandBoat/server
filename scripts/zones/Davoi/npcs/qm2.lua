@@ -7,8 +7,9 @@
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 3 then
         if npcUtil.tradeHas(trade, 1682) and not GetMobByID(ID.mob.HEMATIC_CYST):isSpawned() then
             -- Treasury Gold spawns Hematic Cyst
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local teaProg = player:getCharVar('TEA_WITH_A_TONBERRY_PROG')
 
     if teaProg == 3 then
@@ -33,11 +34,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 126 then
         player:setCharVar('TEA_WITH_A_TONBERRY_PROG', 5)
     end
 end
+
+return entity

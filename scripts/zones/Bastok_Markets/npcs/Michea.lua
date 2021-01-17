@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
     local distantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
     local fatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
@@ -30,7 +31,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
     local distantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
     local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
@@ -62,10 +63,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- THE ELVAAN GOLDSMITH
     if (csid == 215) then
@@ -97,3 +98,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

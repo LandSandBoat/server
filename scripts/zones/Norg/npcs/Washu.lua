@@ -10,8 +10,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- YOMI OKURI (SAM AF2)
     if (
         player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED and
@@ -24,7 +25,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stopYourWhining = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
 
     -- YOMI OKURI (SAM AF2)
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- YOMI OKURI (SAM AF2)
     if (csid == 148) then
         player:setCharVar("yomiOkuriCS", 2)
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW)
     end
 end
+
+return entity

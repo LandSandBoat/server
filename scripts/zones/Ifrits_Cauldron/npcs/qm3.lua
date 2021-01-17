@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.retribution, player, ID.mob.CAILLEACH_BHEUR)
 end
+
+return entity

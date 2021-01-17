@@ -9,11 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 Fame = player:getFameLevel(BASTOK)
 Hearts = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
@@ -36,12 +37,12 @@ HasToolbox = player:hasKeyItem(tpz.ki.OLD_TOOLBOX)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 41 and option == 0) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
@@ -66,3 +67,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

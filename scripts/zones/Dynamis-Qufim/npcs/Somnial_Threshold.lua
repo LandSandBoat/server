@@ -4,14 +4,17 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     dynamis.somnialThresholdOnTrigger(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     dynamis.somnialThresholdOnEventFinish(player, csid, option)
 end
+
+return entity

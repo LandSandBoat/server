@@ -12,6 +12,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 --[[
 Bitmask Designations:
@@ -44,14 +45,14 @@ Chateau d'Oraguille (East to West)
 80000    (F-7) Chalvatot (Her Majesty's garden)
 --]]
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(881)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local LureSandy = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local WildcatSandy = player:getCharVar("WildcatSandy")
@@ -75,10 +76,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 812) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatSandy", 0)
@@ -97,3 +98,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
     end
 end
+
+return entity

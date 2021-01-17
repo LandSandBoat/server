@@ -11,8 +11,9 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (trade:getGil() == 0 and trade:getItemCount() == 1) then
         if (trade:hasItemQty(4530, 1) and player:getCharVar("CidsSecret_Event") == 1 and player:hasKeyItem(tpz.ki.UNFINISHED_LETTER) == false) then -- Trade Rollanberry
@@ -33,7 +34,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
@@ -66,10 +67,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 133) then
         player:tradeComplete()
@@ -102,3 +103,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

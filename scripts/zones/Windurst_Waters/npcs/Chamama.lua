@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local FakeMoustache = player:hasKeyItem(tpz.ki.FAKE_MOUSTACHE)
     local InvisibleManSticker = player:hasKeyItem(tpz.ki.INVISIBLE_MAN_STICKER)
     local InAPickle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
@@ -57,7 +58,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local InspectorsGadget = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.INSPECTOR_S_GADGET)
     local ThePromise = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PROMISE)
     local InAPickle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE)
@@ -109,12 +110,12 @@ function onTrigger(player, npc)
 -- player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_PICKLE); [[[[[[[[[[[[[ FOR TESTING ONLY ]]]]]]]]]]]]]
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 552) then
         player:tradeComplete()
@@ -147,3 +148,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestInAPickle_var", 0)
     end
 end
+
+return entity

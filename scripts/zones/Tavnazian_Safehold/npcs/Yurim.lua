@@ -7,6 +7,7 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 -- base items
 local earring = 13327
@@ -56,7 +57,7 @@ local nosTrades =
     [15502] = {hint = 16, base = {gorget, black},  organs = { {hpemde, 7},  {phuabo, 3}, {aern, 3},   {yovra, 2} }}, -- Shadow Gorget
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 
@@ -75,7 +76,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- IN THE NAME OF SCIENCE
     if player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
         local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
@@ -103,10 +104,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 524 then
         player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     elseif csid == 531 then
@@ -120,3 +121,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

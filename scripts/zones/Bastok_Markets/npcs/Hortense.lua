@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         4976,    64, 3,    -- Scroll of Foe Requiem
@@ -30,3 +31,5 @@ function onTrigger(player, npc)
     player:showText(npc, ID.text.HORTENSE_SHOP_DIALOG)
     tpz.shop.nation(player, stock, tpz.nation.BASTOK)
 end
+
+return entity

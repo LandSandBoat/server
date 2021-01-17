@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/abyssea")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
         local HasStone = tpz.abyssea.getTravStonesTotal(player)
         if (HasStone >= 1 and player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 56) then
         player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_DELECTABLE_DEMON)
     elseif (csid == 57) then
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:setPos(670, -15, 318, 119, 216)
     end
 end
+
+return entity

@@ -9,8 +9,9 @@ require("scripts/globals/crafting")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local guildMember = isGuildMember(player, 5)
 
     if guildMember == 1 then
@@ -25,7 +26,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 5)
     local SkillLevel = player:getSkillLevel(tpz.skill.FISHING)
 
@@ -40,10 +41,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 642 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 0, 1)
         player:addStatusEffect(tpz.effect.FISHING_IMAGERY, 1, 0, 3600)
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         player:addStatusEffect(tpz.effect.FISHING_IMAGERY, 2, 0, 7200)
     end
 end
+
+return entity

@@ -10,8 +10,9 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4526, 1) and trade:getItemCount() == 1) then
             player:startEvent(171) -- Quest Completion Dialogue
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local FearofFlying = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
     -- csid 173 ?
     if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(BASTOK) >=3) then
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 170) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

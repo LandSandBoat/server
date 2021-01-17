@@ -11,8 +11,9 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1096, 1) and trade:getItemCount() == 1) then -- Trade Tavnazia Pass
             player:startEvent(690) -- Finish quest "Messenger from Beyond"
@@ -28,7 +29,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     messengerFromBeyond = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
 
@@ -44,10 +45,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 689) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND)
@@ -86,3 +87,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

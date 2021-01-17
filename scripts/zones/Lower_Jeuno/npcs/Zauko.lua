@@ -12,8 +12,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     ----- Save The Clock Tower Quest -----
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
@@ -45,7 +46,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local hour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
@@ -90,7 +91,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 116 and option == 0) then
         -- player accepts quest
         -- if nobody else has already been assigned to the quest, including Vhana, give it to this player
@@ -112,7 +113,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- SAVE THE CLOCKTOWER
     if (csid == 50) then
         player:addCharVar("saveTheClockTowerVar", 1)
@@ -143,3 +144,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

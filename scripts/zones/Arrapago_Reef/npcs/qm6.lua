@@ -11,11 +11,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
     local lotdCS = player:getCharVar("LuckOfTheDraw")
@@ -45,10 +46,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- LUCK OF THE DRAW
     if csid == 211 then
         player:setCharVar("LuckOfTheDraw", 3)
@@ -69,3 +70,5 @@ function onEventFinish(player, csid, option)
         npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS, {item=15601, var={"NavigatingtheUnfriendlySeas", "HydrogauageTimer"}})
     end
 end
+
+return entity

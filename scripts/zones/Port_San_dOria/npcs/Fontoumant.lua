@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
         if (count == 1 and trade:getGil() == 100) then  -- pay to replace package
@@ -41,7 +42,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local TheBrugaireConsortium = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
@@ -67,10 +68,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local freeSlots = player:getFreeSlotsCount()
     if (csid == 509 and option == 0) then
         if (freeSlots ~= 0) then
@@ -113,3 +114,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

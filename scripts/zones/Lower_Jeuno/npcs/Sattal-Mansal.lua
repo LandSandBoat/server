@@ -10,8 +10,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I) == QUEST_ACCEPTED and trade:hasItemQty(495, 1) and trade:getItemCount() == 1) then
         player:startEvent(91) -- Ending quest Mysteries I
     elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II) == QUEST_ACCEPTED and trade:hasItemQty(494, 1) and trade:getItemCount() == 1) then
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I) == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.SILVER_BELL)) then --Magicite Mission active (receive this KI after the first CS with aldo)
         player:startEvent(89) -- Start quests
     else
@@ -27,10 +28,10 @@ function onTrigger(player, npc)
     end
 end
 -----------------------------------
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 89) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_I)
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
@@ -48,3 +49,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.MYSTERIES_OF_BEADEAUX_II)
     end
 end
+
+return entity

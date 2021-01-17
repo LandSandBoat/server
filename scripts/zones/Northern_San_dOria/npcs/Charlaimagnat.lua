@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local realday = tonumber(tostring(os.date("%Y")) .. os.date("%m") .. os.date("%d"))
     local TheMissingPiece = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 703) then
         player:setCharVar("TheMissingPiece_date", tostring(os.date("%Y")) .. os.date("%m") .. os.date("%d") + 1)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Yhoator_Jungle/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local StopWhining = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.STOP_YOUR_WHINING)
 
     if StopWhining == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.BARREL_OF_OPOOPO_BREW) and player:hasKeyItem(tpz.ki.EMPTY_BARREL) then
@@ -26,12 +27,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:addKeyItem(tpz.ki.SEA_SERPENT_STATUE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEA_SERPENT_STATUE)
     end
 end
+
+return entity

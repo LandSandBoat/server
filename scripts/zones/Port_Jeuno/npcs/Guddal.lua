@@ -9,8 +9,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
         if
             trade:hasItemQty(1024, 1) == true and
@@ -26,13 +27,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
         player:startEvent(300)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 300) then
         if (player:delGil(148000)) then
             player:addKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
@@ -41,7 +42,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 300) then
         if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == true) then
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

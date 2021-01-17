@@ -12,6 +12,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
@@ -27,7 +28,7 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_4") == 8 and
@@ -53,7 +54,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
     local missionStatus = player:getCharVar("MissionStatus")
@@ -152,10 +153,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 238 then
         if player:getNation() == tpz.nation.BASTOK then
             player:setCharVar("MissionStatus", 4)
@@ -222,3 +223,5 @@ function onEventFinish(player, csid, option)
             ki = tpz.ki.WINDURST_TRUST_PERMIT })
     end
 end
+
+return entity

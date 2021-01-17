@@ -9,8 +9,9 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/magiantrials")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
@@ -28,7 +29,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
@@ -48,10 +49,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10160 and option == 1) then
         if (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIAN_LEARNERS_LOG)
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         --
     end
 end
+
+return entity

@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Arrapago_Reef/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN) then
         player:setLocalVar("theblackcoffinfight", 1)
         player:startEvent(221, 53, -6, 0, 99, 6, 0)
@@ -24,7 +25,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 
     local party = player:getParty()
     if player:getLocalVar("theblackcoffinfight") == 1 then
@@ -61,14 +62,14 @@ function onEventUpdate(player, csid, option, target)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 221 and option == 4) or csid == 90 then
         player:setPos(0, 0, 0, 0, 60)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     if (instance) then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
@@ -87,3 +88,5 @@ function onInstanceCreated(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+
+return entity

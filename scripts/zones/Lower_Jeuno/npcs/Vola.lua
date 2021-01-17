@@ -12,8 +12,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     FistfulOfFury = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
 
     if (FistfulOfFury == QUEST_ACCEPTED and trade:hasItemQty(1012, 1) == true and trade:hasItemQty(1013, 1) == true and trade:hasItemQty(1014, 1) == true and trade:getItemCount() == 3) then
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     FistfulOfFury = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
     BeatAroundTheBushin = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
 
@@ -39,10 +40,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 216 and option == 1) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FISTFUL_OF_FURY)
     elseif (csid == 213) then
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BeatAroundTheBushin", 1) -- For the next quest "Beat around the Bushin"
     end
 end
+
+return entity

@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wotg = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
     local wotgStat = player:getCharVar("WrathOfTheGriffon")
 
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 204 then
         player:setCharVar("WrathOfTheGriffon", 1)
     elseif csid == 205 then
@@ -39,3 +40,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WrathOfTheGriffon", 2)
     end
 end
+
+return entity

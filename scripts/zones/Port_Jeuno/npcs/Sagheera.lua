@@ -10,6 +10,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 
 -----------------------------------
@@ -268,7 +269,7 @@ local function getCosmoCleanseTime(player)
     return (lastCosmoTime - 1009843200) - 39600 -- (os.time number - BITMASK for the event) - 11 hours in seconds. Only works in this format (strangely).
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local afUpgrade = player:getCharVar("AFupgrade")
 
@@ -324,7 +325,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
@@ -362,7 +363,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- info about af armor upgrades
     if csid == 310 and afArmorPlusOne[option] then
         local info = afArmorPlusOne[option]
@@ -377,7 +378,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- LURE OF THE WILDCAT
     if csid == 313 then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
@@ -412,3 +413,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

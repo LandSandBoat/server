@@ -11,8 +11,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- SIGNED IN BLOOD
     if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
         player:startEvent(734, 0, 1662)
@@ -25,7 +26,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local signedInBlood = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
     local bloodProg = player:getCharVar("SIGNED_IN_BLOOD_Prog")
     local teaWithATonberry = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY)
@@ -58,10 +59,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- SHARPENING THE SWORD
     if csid == 52 then
         player:setCharVar("sharpeningTheSwordCS", 3)
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TEA_WITH_A_TONBERRY_PROG", 0)
     end
 end
+
+return entity

@@ -8,8 +8,9 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (trade:hasItemQty(12497, 1) and trade:getItemCount() == 1) then -- Trade Brass Hairpin
         if (player:getCharVar("ForevertoHold_Event") == 2) then
@@ -27,7 +28,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local pFame = player:getFameLevel(BASTOK)
     local ForevertoHold = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FOREVER_TO_HOLD)
@@ -41,10 +42,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 128) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TILL_DEATH_DO_US_PART)
@@ -57,3 +58,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

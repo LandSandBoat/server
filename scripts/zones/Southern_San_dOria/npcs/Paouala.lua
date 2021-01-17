@@ -10,8 +10,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4527, 1) and trade:getItemCount() == 1) then
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     sleeplessNights = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 85 and option == 1) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
@@ -53,3 +54,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

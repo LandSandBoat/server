@@ -7,21 +7,22 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR and player:getCharVar("AhtUrganStatus") == 1) then
         player:startEvent(7)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 7) then
         player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR)
@@ -33,3 +34,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

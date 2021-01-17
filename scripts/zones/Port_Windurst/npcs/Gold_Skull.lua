@@ -7,11 +7,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(BASTOK) ~= tpz.mission.id.bastok.NONE) then
         currentMission = player:getCurrentMission(BASTOK)
@@ -46,10 +47,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 53) then
         player:addKeyItem(tpz.ki.DULL_SWORD)
@@ -58,3 +59,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

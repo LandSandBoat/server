@@ -8,8 +8,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK and player:getCharVar("MissionStatus") == 5) then
         if (trade:hasItemQty(599, 1) and trade:getItemCount() == 1) then -- Trade Mythril Sand
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- San d'Oria Mission 2-3 Part I - Bastok > Windurst
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_ABROAD and player:getCharVar("MissionStatus") == 2) then
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 204) then
         player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK)
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

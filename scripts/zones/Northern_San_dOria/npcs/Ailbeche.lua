@@ -11,8 +11,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and player:getCharVar("returnedAilbecheRod") ~= 1) then
         if (trade:hasItemQty(17391, 1) == true and trade:getItemCount() == 1) then
             player:startEvent(61) -- Finish Quest "Father and Son" (part2) (trading fishing rod)
@@ -28,7 +29,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local fatherAndSon = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
     local sharpeningTheSword = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD)
     local aBoysDream = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
@@ -85,10 +86,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- "Father and Son"
     if (csid == 508) then
@@ -142,3 +143,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("UnderOathCS", 7)
     end
 end
+
+return entity

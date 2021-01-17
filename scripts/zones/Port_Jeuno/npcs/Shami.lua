@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local NumberItem = trade:getItemCount()
     local BeastmensSeal = player:getSeals(0)
     local KindredsSeal = player:getSeals(1)
@@ -149,7 +150,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local oldBeastmensSeal = player:getCharVar("ShamiBeastmensSeal")
     local oldKindredsSeal = player:getCharVar("ShamiKindredsSeal")
     local oldKindredsCrest = player:getCharVar("ShamiKindredsCrest")
@@ -206,10 +207,10 @@ end
 -- 25 : Un seul échange autorisé par semaine
 -- 321 : trade sceau + nombre player:startEvent(321, 0, 15)
 --          0 shbete, 1 s-confrerie, 2 s-demons, 3 s-seigneurdes hombre
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local BeastmensSeal = player:getSeals(0)
     local KindredsSeal = player:getSeals(1)
     local KindredsCrest = player:getSeals(2)
@@ -458,3 +459,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 17, true))
     end
 end
+
+return entity

@@ -11,14 +11,15 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) == QUEST_ACCEPTED and trade:hasItemQty(531, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(37)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     --Prerequisites for this quest : A_CANDLELIGHT_VIGIL ACCEPTED
 
     if
@@ -31,10 +32,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 36 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING) == QUEST_AVAILABLE) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING)
     elseif (csid == 37) then
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CANDLE_MAKING)
     end
 end
+
+return entity

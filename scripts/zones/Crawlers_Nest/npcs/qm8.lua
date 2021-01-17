@@ -10,11 +10,12 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Crawlers_Nest/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Enveloped in Darkness
     if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS) == QUEST_ACCEPTED then
         local timeout = player:getCharVar("envelopedInDarkness_timer")
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 4 and option == 1 then
         player:delKeyItem(tpz.ki.CRAWLER_BLOOD)
         player:delKeyItem(tpz.ki.OLD_BOOTS)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         })
     end
 end
+
+return entity

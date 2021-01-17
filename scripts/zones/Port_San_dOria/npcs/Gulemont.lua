@@ -12,11 +12,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local theDismayedCustomer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
     if (theDismayedCustomer == QUEST_ACCEPTED) then
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- "The Dismayed Customer"
     if (csid == 605 and option == 0) then
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- NOTE: uncertain of retailness of messages. Had expected but did not find any csid.
     if (
         player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED and
@@ -26,3 +27,5 @@ function onTrigger(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
+
+return entity

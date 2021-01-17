@@ -4,11 +4,12 @@
 -- Type: Standard Info NPC
 -- !pos -137.504 11.999 171.090 231
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local rand = math.random(1, 2)
     if (rand == 1) then
         player:startEvent(652)
@@ -17,8 +18,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

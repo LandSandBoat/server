@@ -9,11 +9,12 @@
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local lakesideMin = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
@@ -44,11 +45,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid==10131) then
         player:setCharVar("QuestStatus_DNC_AF1", 2)
     end
 end
+
+return entity

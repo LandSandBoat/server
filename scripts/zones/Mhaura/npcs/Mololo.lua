@@ -9,19 +9,22 @@ require("scripts/globals/shop")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local guildSkillId = tpz.skill.SMITHING
     local stock = tpz.shop.generalGuildStock[guildSkillId]
     tpz.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc, ID.text.SMITHING_GUILD)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

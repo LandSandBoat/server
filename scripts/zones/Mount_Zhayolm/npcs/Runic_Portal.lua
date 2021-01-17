@@ -9,11 +9,12 @@ require("scripts/globals/teleports")
 require("scripts/globals/besieged")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
         player:startEvent(111)
     elseif player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES then
@@ -27,10 +28,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         if csid == 111 then
             tpz.besieged.addRunicPortal(player, tpz.teleport.runic_portal.HALVUNG)
@@ -38,3 +39,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.toChamberOfPassage(player)
     end
 end
+
+return entity

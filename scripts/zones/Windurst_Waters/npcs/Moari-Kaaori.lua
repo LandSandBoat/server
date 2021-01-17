@@ -7,8 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local SayFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local offer = trade:getItemId()
@@ -26,7 +27,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local SayFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
     local NeedToZone = player:needToZone()
@@ -44,10 +45,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 514 and option == 1 then
         player:setCharVar("FLOWER_PROGRESS", 1)
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
@@ -83,3 +84,5 @@ function onEventFinish(player, csid, option)
         player:setTitle(tpz.title.CUPIDS_FLORIST)
     end
 end
+
+return entity

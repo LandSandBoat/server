@@ -10,10 +10,11 @@ require("scripts/globals/missions")
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.evisceration
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
@@ -45,7 +46,7 @@ function onTrigger(player, npc)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 114) then
         player:addKeyItem(tpz.ki.SACRIFICIAL_CHAMBER_KEY)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SACRIFICIAL_CHAMBER_KEY)
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

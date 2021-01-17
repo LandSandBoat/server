@@ -10,11 +10,12 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(BASTOK)
     local momTheAdventurer = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
     local questStatus = player:getCharVar("MomTheAdventurer_Event")
@@ -39,10 +40,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 230 and option == 0) then
         if (player:getFreeSlotsCount(0) > 0) then
@@ -80,3 +81,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

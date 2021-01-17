@@ -8,11 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     saveMySister = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
 
     if (saveMySister == QUEST_AVAILABLE and player:getCharVar("saveMySisterVar") == 3) then
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 98) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
         player:setCharVar("saveMySisterVar", 0)
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("saveMySisterFireLantern", 0)
     end
 end
+
+return entity

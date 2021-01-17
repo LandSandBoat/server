@@ -11,8 +11,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local returnOfAdven = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
     if (returnOfAdven == QUEST_ACCEPTED and trade:hasItemQty(628, 1) and trade:getItemCount() == 1) then
         player:startEvent(243)
@@ -29,7 +30,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local pFame = player:getFameLevel(BASTOK)
     local FatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
@@ -45,10 +46,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 242) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
@@ -66,3 +67,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

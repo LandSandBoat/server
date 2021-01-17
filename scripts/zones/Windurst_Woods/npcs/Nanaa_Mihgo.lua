@@ -17,6 +17,7 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
@@ -47,7 +48,7 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, {{498, 4}}) then -- Yagudo Necklace x4
         local mihgosAmigo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
 
@@ -59,7 +60,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
     local mihgosAmigo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
@@ -185,10 +186,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- WINDURST 2-1: LOST FOR WORDS
     if csid == 165 and option == 1 then
         npcUtil.giveKeyItem(player, tpz.ki.LAPIS_MONOCLE)
@@ -269,3 +270,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)
     end
 end
+
+return entity

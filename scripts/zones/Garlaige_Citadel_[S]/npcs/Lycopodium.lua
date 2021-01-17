@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Garlaige_Citadel_[S]/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.LYCOPODIUM_ENTRANCED)
 
     if not utils.mask.getBit(player:getCharVar("LycopodiumTeleport_Mask"), 0) then
@@ -19,11 +20,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 30 then
         player:setCharVar("LycopodiumTeleport_Mask", utils.mask.setBit(player:getCharVar("LycopodiumTeleport_Mask"), 0, true))
     end
 end
+
+return entity

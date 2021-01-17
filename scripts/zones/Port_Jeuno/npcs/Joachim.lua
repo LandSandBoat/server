@@ -29,11 +29,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/abyssea")
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 -- TODO: logic to increase traverser stone count...Based on time between 2 vars?
     local StonesStock = player:getCurrency("traverser_stones")
     local StonesKI = tpz.abyssea.getTravStonesTotal(player)
@@ -56,10 +57,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 325) then
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TRAVERSER_STONE1)
         player:addKeyItem(tpz.ki.TRAVERSER_STONE1)
@@ -92,3 +93,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

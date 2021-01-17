@@ -8,8 +8,9 @@ local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, 1021) and not player:hasItem(1153) and npcUtil.popFromQM(player, npc, ID.mob.GUARDIAN_TREANT, {hide = 0}) then
             player:confirmTrade()
@@ -20,12 +21,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.STURDY_BRANCH, 1021)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

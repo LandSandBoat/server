@@ -7,6 +7,7 @@ require("scripts/globals/limbus")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
+local entity = {}
 
 local loot =
 {
@@ -1253,10 +1254,10 @@ local loot =
     },
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
     if not battlefield then
         return
@@ -1451,8 +1452,9 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+return entity

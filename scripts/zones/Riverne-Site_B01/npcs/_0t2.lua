@@ -4,17 +4,20 @@
 -----------------------------------
 local RIVERNE_SITE_B01 = require("scripts/zones/Riverne-Site_B01/globals")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     RIVERNE_SITE_B01.unstableDisplacementTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     RIVERNE_SITE_B01.unstableDisplacementTrigger(player, npc, 22)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

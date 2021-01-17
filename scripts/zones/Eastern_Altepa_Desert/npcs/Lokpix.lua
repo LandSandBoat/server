@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME) == QUEST_ACCEPTED) then
         if
             (trade:hasItemQty(2796, 1) and trade:hasItemQty(582, 1) and trade:getItemCount() == 2) or
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME) == QUEST_AVAILABLE) then
         player:startEvent(20)
     elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.OPEN_SESAME) == QUEST_ACCEPTED) then
@@ -30,11 +31,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("OPTION: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("OPTION: %u", option)
 
     if (csid == 20 and option == 1) then
@@ -48,3 +49,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

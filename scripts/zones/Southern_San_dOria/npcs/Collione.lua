@@ -4,11 +4,12 @@
 --  General Info NPC
 -- !pos 10 2 -66 230
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(859)
 -- player:startEvent(854)  --chocobo dig game
 -- player:startEvent(856)  -- play the chocobo game
@@ -16,8 +17,10 @@ function onTrigger(player, npc)
 -- player:startEvent(858)  -- cant give more greens
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

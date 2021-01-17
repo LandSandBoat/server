@@ -11,8 +11,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Zone1
         if
@@ -45,7 +46,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local northward = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
 
     if (player:getFameLevel(JEUNO) >= 4 and northward == QUEST_AVAILABLE) then
@@ -60,10 +61,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 160) then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 1)
@@ -80,3 +81,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

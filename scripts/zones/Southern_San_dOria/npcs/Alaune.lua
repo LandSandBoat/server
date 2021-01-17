@@ -6,17 +6,20 @@
 -----------------------------------
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.tutorial.onTrigger(player, npc, 916, 0)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.tutorial.onEventFinish(player, csid, option, 916, 0)
 end
+
+return entity

@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:hasKeyItem(tpz.ki.BOOK_OF_TASKS) and player:hasKeyItem(tpz.ki.BOOK_OF_THE_EAST) == false) then
         player:startEvent(633)
@@ -22,10 +23,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 633) then
         player:addKeyItem(tpz.ki.BOOK_OF_THE_EAST)
@@ -35,3 +36,5 @@ function onEventFinish(player, csid, option)
 end
 --- for future use
     -- player:startEvent(847) --are you the chicks owner
+
+return entity

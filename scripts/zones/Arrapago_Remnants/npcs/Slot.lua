@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2377) then
         local instance = npc:getInstance()
         SpawnMob(ID.mob[2][2].princess, instance):updateClaim(player)
@@ -15,11 +16,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(entity, npc)
+entity.onTrigger = function(entity, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(entity, eventid, result)
+entity.onEventFinish = function(entity, eventid, result)
 end
+
+return entity

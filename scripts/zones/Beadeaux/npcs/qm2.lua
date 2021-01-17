@@ -10,19 +10,22 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/world")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CORRUPTED_DIRT) == false and player:getWeather() == tpz.weather.RAIN) then
         player:addKeyItem(tpz.ki.CORRUPTED_DIRT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CORRUPTED_DIRT)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

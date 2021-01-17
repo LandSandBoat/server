@@ -11,8 +11,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
         trade:hasItemQty(1104, 1) and
@@ -36,7 +37,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local theThreeMagi = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
     local recollections = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)
     local rootProblem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
@@ -86,10 +87,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 260 then
         -- option 3: Koru-Moru -- option 2: Shantotto -- option 1: Yoran-Oran
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI)
@@ -150,3 +151,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

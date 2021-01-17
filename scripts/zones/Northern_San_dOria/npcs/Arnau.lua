@@ -6,11 +6,12 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 2) then
         player:startEvent(51) --COP event
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.SAVE_THE_CHILDREN and player:getCharVar("MissionStatus") < 2) then
@@ -23,10 +24,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 51) then
         player:setCharVar("EMERALD_WATERS_Status", 3)
     elseif (csid == 693) then
@@ -35,3 +36,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("OptionalCSforSTC", 0)
     end
 end
+
+return entity

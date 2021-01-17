@@ -8,12 +8,13 @@ require("scripts/quests/flyers_for_regine")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 12) -- FLYERS FOR REGINE
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local grimySignpost = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     if (grimySignpost == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then
         player:startEvent(45)
@@ -30,10 +31,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 45 and option == 0) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     elseif (csid == 44) then
@@ -44,3 +45,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
 end
+
+return entity

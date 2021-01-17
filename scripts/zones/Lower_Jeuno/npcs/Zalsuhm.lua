@@ -10,12 +10,13 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 -----------------------------------
+local entity = {}
 
-function getQuestId(mainJobId)
+local function getQuestId(mainJobId)
     return tpz.quest.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     for i, wepId in pairs(BaseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(tpz.quest.log_id.JEUNO, getQuestId(i))
@@ -37,7 +38,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local mainJobId = player:getMainJob()
     local unlockingAMyth = player:getQuestStatus(tpz.quest.log_id.JEUNO, getQuestId(mainJobId))
     local nyzulWeaponMain = isBaseNyzulWeapon(player:getEquipID(tpz.slot.MAIN))
@@ -64,10 +65,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local questId = getQuestId(option)
     if csid == 10086 then
         if option == 53 then
@@ -107,3 +108,5 @@ function onEventFinish(player, csid, option)
         player:addLearnedWeaponskill(skill)
     end
 end
+
+return entity

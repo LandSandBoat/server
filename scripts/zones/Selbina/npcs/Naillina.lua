@@ -5,11 +5,12 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local rovOptionEnable = 0
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS and player:getCharVar("RhapsodiesStatus") == 1 then
         rovOptionEnable = 1
@@ -17,12 +18,14 @@ function onTrigger(player, npc)
     player:startEvent(14, 0, 0, 0, 0, 0, 0, 0, rovOptionEnable)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 14 and option == 1 then
         player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE)
     end
 end
+
+return entity

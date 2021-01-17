@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and
         player:getCharVar("MissionStatus") == 1
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 42 then
         player:setCharVar("MissionStatus", 2)
 
@@ -44,3 +45,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus_op6", 1)
     end
 end
+
+return entity

@@ -12,8 +12,9 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
         if
@@ -44,7 +45,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local CrestOfDavoi = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
     local SaveMySister = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
 
@@ -68,10 +69,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 177) then --1
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 32)
@@ -102,3 +103,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -13,6 +13,7 @@ require("scripts/globals/missions");
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Metalworks/IDs");
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
@@ -30,7 +31,7 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_2") == 6) then
@@ -44,7 +45,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
     local TrustBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
@@ -110,10 +111,10 @@ end
 
 -- 710  711  700  713  714  715  717  720  721  750  1008  1009  761
 -- 762  782  805  845  877  938  939  940  941  942  971  969  970
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 750) then
         if (player:getFreeSlotsCount(0) >= 1) then
@@ -170,3 +171,5 @@ function onEventFinish(player, csid, option)
         })
     end
 end
+
+return entity

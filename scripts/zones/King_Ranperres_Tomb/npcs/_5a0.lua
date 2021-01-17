@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -40,10 +41,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 5 then
         player:setCharVar("MissionStatus", 7)
     elseif csid == 14 then
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         -- at this point 3 optional cs are available and open until watched (add 3 var to char?)
     end
 end
+
+return entity

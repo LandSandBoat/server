@@ -9,6 +9,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local rse_map =
 {
@@ -36,10 +37,10 @@ local function hasRSE(player)
     return mask
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(JEUNO)
     local pLevel = player:getMainLvl()
     local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
@@ -64,10 +65,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
 
     if csid == 10016 then
@@ -89,3 +90,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

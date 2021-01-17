@@ -10,8 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
 
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     GlyphHanger = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
     chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
@@ -51,10 +52,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 381 and option == 0) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
@@ -84,3 +85,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -11,14 +11,15 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) >= 1 and trade:hasItemQty(847, 1) == true and trade:hasItemQty(4368, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2) then
         player:startEvent(440, 250, 847, 4368) -- -- Quest Finish
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local teacherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
 
@@ -112,10 +113,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 438 and option == 0) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
@@ -171,3 +172,5 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 3, csid, option)
     end
 end
+
+return entity

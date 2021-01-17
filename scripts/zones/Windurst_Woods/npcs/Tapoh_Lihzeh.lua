@@ -10,8 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- CHOCOBILIOUS
     if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS) == QUEST_ACCEPTED and player:getCharVar("ChocobiliousQuest") == 1 and npcUtil.tradeHas(trade, 938) then
         player:startEvent(229, 0, 938)
@@ -26,7 +27,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local chocobilious = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
     local chocobiliousCS = player:getCharVar("ChocobiliousQuest")
     local payingLipService = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.PAYING_LIP_SERVICE)
@@ -51,10 +52,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- CHOCOBILIOUS
     if csid == 227 then
         player:setCharVar("ChocobiliousQuest", 1)
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
     end
 end
+
+return entity

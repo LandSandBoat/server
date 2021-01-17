@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getCharVar("OfferingWaterOK") == 1) then
             player:startEvent(624)
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local Tomb = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
     local WellWater = player:hasItem(567) -- Well Water
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 541 and option == 0) then
         if (player:getFreeSlotsCount() == 0) then
@@ -63,3 +64,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

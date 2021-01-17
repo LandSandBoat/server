@@ -9,11 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
@@ -70,11 +71,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- Making Headlines
     if (csid == 281 or csid == 283 or csid == 284) then
@@ -93,3 +94,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

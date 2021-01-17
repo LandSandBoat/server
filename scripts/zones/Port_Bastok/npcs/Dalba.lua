@@ -7,11 +7,12 @@
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
@@ -143,7 +144,7 @@ function onTrigger(player, npc)
     player:startEvent(260, BastokMissions, BastokQuests, OtherQuests, PromathiaMissions, AddonScenarios, 0xFFFFFFFE, 10, gil)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (player:delGil(10) == false) then
         player:setLocalVar("Dalba_PlayCutscene", 2)  -- Cancel the cutscene.
@@ -153,7 +154,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (player:getLocalVar("Dalba_PlayCutscene") < 2) then
         if (   option ==   1) then        -- Fetichism.
@@ -243,3 +244,5 @@ function onEventFinish(player, csid, option)
 
     player:setLocalVar("Dalba_PlayCutscene", 0)
 end
+
+return entity

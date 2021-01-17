@@ -7,8 +7,9 @@
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
         if
@@ -37,7 +38,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local TheKindCardian = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_AVAILABLE) then
@@ -64,10 +65,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 74) then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 128)
@@ -75,3 +76,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("theLostCardianVar", 1)
     end
 end
+
+return entity

@@ -9,8 +9,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(768, 4) and trade:getItemCount() == 4) then
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_AVAILABLE) then
         player:startEvent(37)
@@ -30,10 +31,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 37 and option == 1) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

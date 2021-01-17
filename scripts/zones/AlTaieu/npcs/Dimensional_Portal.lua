@@ -4,21 +4,22 @@
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.DIMENSIONAL_PORTAL_OFFSET
     if (offset >= 0 and offset <=2) then
         player:startEvent(151 + offset)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if ( csid == 151 and option == 1) then
         player:setPos(420, 19, -140, 63, 102)     -- To La Theine Plateau {R}
     elseif ( csid == 152 and option == 1) then
@@ -27,3 +28,5 @@ function onEventFinish(player, csid, option)
         player:setPos(260, 35, 340, 255, 117)     -- To Tahrongi Canyon {R}
     end
 end
+
+return entity

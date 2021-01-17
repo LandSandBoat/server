@@ -6,8 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:getItemCount() == 2) then
         local item = 0
         local reward = 0
@@ -97,14 +98,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(719)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 720) then
         local reward = player:getCharVar("reward")
         if (reward ~= 0) then
@@ -115,3 +116,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -12,14 +12,15 @@ require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY) == QUEST_ACCEPTED and trade:hasItemQty(776, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(1) -- Finish quest
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ChildsPlay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 0) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHILD_S_PLAY)
     elseif (csid == 1) then
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 16, true))
     end
 end
+
+return entity

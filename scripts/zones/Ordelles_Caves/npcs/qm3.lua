@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Ordelles_Caves/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if os.time() - player:getCharVar("SquiresTestII") <= 60 and not player:hasKeyItem(tpz.ki.STALACTITE_DEW) then
         player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_II)
         player:addKeyItem(tpz.ki.STALACTITE_DEW)
@@ -25,8 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

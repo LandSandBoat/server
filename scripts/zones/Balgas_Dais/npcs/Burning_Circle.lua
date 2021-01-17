@@ -7,26 +7,29 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if TradeBCNM(player, npc, trade) then
         return
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if EventTriggerBCNM(player, npc) then
         return
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     local res = EventUpdateBCNM(player, csid, option)
     return res
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if EventFinishBCNM(player, csid, option) then
         return
     end
 end
+
+return entity

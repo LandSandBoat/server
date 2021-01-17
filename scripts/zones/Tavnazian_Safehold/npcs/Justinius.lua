@@ -7,14 +7,15 @@
 require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 -- Cache COP missions for later reference
 local copMissions = tpz.mission.id.cop
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
@@ -40,10 +41,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 113 then
         player:setCharVar("PromathiaStatus", 0)
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

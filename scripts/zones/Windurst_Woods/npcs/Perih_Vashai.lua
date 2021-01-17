@@ -14,10 +14,11 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.empyreal_arrow
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     -- FROM SAPLINGS GROW
@@ -30,7 +31,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local theFangedOne = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
     local theFangedOneCS = player:getCharVar("TheFangedOne_Event")
@@ -97,7 +98,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- THREE PATHS
     if csid == 686 then
         player:setCharVar("COP_Louverance_s_Path", 2)
@@ -141,3 +142,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.EMPYREAL_ARROW_LEARNED)
     end
 end
+
+return entity

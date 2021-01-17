@@ -6,11 +6,12 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
@@ -132,7 +133,7 @@ function onTrigger(player, npc)
     player:startEvent(326, BastokMissions, BastokQuests, OtherQuests, SeekersOfAdoulin, 0xFFFFFFFE, 0xFFFFFFFE, 10, gil)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf ("CSID: %u", csid)
     -- printf ("RESULT: %u", option)
 
@@ -144,7 +145,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf ("CSID: %u", csid)
     -- printf ("RESULT: %u", option)
 
@@ -228,3 +229,5 @@ function onEventFinish(player, csid, option)
 
     player:setLocalVar("Lamepaue_PlayCutscene", 0)
 end
+
+return entity

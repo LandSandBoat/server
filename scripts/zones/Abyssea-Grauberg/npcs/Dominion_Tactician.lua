@@ -5,20 +5,21 @@
 local ID = require("scripts/zones/Abyssea-Grauberg/IDs")
 require("scripts/globals/abyssea")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local DM = player:getDominionNotes()
     local Trophies = 0 -- Max all Trophy = 4294967295 sort out its bit mask later.
     player:startEvent(120, DM, 0, 0, 0, 0, Trophies)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local Price = 0
     local TempItem = false
     local ItemID = 0
@@ -131,3 +132,5 @@ function onEventFinish(player, csid, option)
     --     .
     -- end
 end
+
+return entity

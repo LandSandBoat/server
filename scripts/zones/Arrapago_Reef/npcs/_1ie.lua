@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Arrapago_Reef/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
         if npcUtil.tradeHas(trade, 2219) then
             npc:openDoor()
@@ -42,7 +43,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getZPos() < 120 and npc:getAnimation() == tpz.anim.CLOSE_DOOR then
         if player:getMainJob() == tpz.job.THF then
             player:messageSpecial(ID.text.DOOR_IS_LOCKED2, 2219, 1022) -- message only THF's get
@@ -55,8 +56,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
 end
+
+return entity

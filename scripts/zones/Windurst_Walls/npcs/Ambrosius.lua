@@ -7,8 +7,9 @@
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local postman = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman == QUEST_AVAILABLE then
@@ -20,7 +21,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local postman = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman ~= QUEST_AVAILABLE then
@@ -61,10 +62,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 48 and option == 0 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then
@@ -105,3 +106,5 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 50)
     end
 end
+
+return entity

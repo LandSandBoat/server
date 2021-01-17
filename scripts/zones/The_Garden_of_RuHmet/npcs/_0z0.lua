@@ -2,13 +2,14 @@
 -- Area: The_Garden_of_RuHmet
 -- NPC:  _0z0
 -----------------------------------
+local entity = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (TradeBCNM(player, npc, trade)) then
         return
@@ -16,7 +17,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     --player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
     --player:setCharVar("PromathiaStatus", 3)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus")==3) then
@@ -28,11 +29,11 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
     if ( csid == 203) then
@@ -41,3 +42,5 @@ function onEventFinish(player, csid, option)
         return
     end
 end
+
+return entity

@@ -11,8 +11,9 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
     if (trade:hasItemQty(4358, 5) and count == 5) then
@@ -31,7 +32,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     aTasteForMeat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
     if (aTasteForMeat == QUEST_AVAILABLE and player:getCharVar("aTasteForMeat") == 1 or aTasteForMeat == QUEST_ACCEPTED) then
@@ -42,10 +43,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 526) then
         if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_AVAILABLE) then
@@ -63,3 +64,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

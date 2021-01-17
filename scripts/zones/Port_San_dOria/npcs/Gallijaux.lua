@@ -11,12 +11,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npcUtil.fishingAnimation(npc, 2)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local MoatCarp = trade:getItemQty(4401)
     local ForestCarp = trade:getItemQty(4289)
@@ -43,7 +44,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION) == QUEST_AVAILABLE and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY) == QUEST_AVAILABLE) then -- If you haven't started either quest yet
         player:startEvent(300, 4401, 4289) -- 4401 = Moat Carp, 4289 = Forest Carp
@@ -54,10 +55,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 303) then
         if (player:getFreeSlotsCount() == 0) then
@@ -76,3 +77,5 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY)
     end
 end
+
+return entity

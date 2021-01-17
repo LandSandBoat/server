@@ -9,8 +9,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and trade:getItemCount() == 1) then
         if (trade:hasItemQty(557, 1) == true) then
             player:startEvent(192) -- CS for ahriman lens trade; Trading the lens to Kurou-Morou is optional
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- printf("Ontrigger completed")
     local YourCrystalBall = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL)
     local SearchingForTheRightWords = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
@@ -71,10 +72,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 194 and option == 0) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL)
     elseif (csid == 196) then
@@ -107,3 +108,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("SearchingForRightWords_postcs", -1)
     end
 end
+
+return entity

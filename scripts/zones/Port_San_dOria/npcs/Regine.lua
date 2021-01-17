@@ -10,8 +10,9 @@ require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local flyersForRegine = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
     local theBrugaireConsortium = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
@@ -27,7 +28,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ffr = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     -- FLYERS FOR REGINE
@@ -44,10 +45,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
         if npcUtil.giveItem(player, {{532, 12}, {532, 3}}) then
@@ -118,3 +119,5 @@ function onEventFinish(player, csid, option)
         tpz.shop.nation(player, stockB, tpz.nation.SANDORIA)
     end
 end
+
+return entity

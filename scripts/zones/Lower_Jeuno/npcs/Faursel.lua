@@ -10,8 +10,9 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
@@ -37,7 +38,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local passDay = player:getCharVar("THE_ROAD_TO_AHT_URHGAN_Day")
     local passYear = player:getCharVar("THE_ROAD_TO_AHT_URHGAN_Year")
@@ -70,7 +71,7 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (csid == 10063 or csid == 10064) then
         if (option == 10) then     -- Beginner List
@@ -88,7 +89,7 @@ function onEventUpdate(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10062 and option == 1) then -- Offer Quest, First Dialog.
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
@@ -125,3 +126,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

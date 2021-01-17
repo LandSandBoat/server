@@ -32,8 +32,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA) == QUEST_ACCEPTED then
         -- check whether trade is an item with id 1202 to 1208
         local tradedItem
@@ -67,7 +68,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local mamaMia = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
     local moonlitPath = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
     local evokersRing = player:hasItem(14625)
@@ -102,10 +103,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 191) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
@@ -135,3 +136,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

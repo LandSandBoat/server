@@ -5,6 +5,7 @@
 require("scripts/zones/Periqia/IDs")
 require("scripts/globals/pathfind")
 -----------------------------------
+local entity = {}
 
 local start = {-322, -16.5, 380}
 
@@ -77,12 +78,12 @@ local startToChoice1 = {
     -340.379303, -15.661182, 302.420258
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:pathThrough(start, PATHFLAG_REPEAT)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
 
     local instance = npc:getInstance()
     local progress = instance:getProgress()
@@ -115,16 +116,18 @@ function onPath(npc)
 
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
 end
+
+return entity

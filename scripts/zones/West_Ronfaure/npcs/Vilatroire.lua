@@ -11,11 +11,12 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local sandyFame = player:getFameLevel(SANDORIA)
 
     local questIntroToTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
@@ -47,7 +48,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- csid 129 happens for both quests
     if csid == 129 then
         local questIntroToTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
@@ -125,7 +126,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- csid 129 is the event for when they have selected ready/not ready option is always 0
     if csid == 129 and option == 0 then
         local questIntroToTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
@@ -162,3 +163,4 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     end
 end
+return entity

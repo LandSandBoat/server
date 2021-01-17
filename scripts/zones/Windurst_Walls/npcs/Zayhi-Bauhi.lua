@@ -8,8 +8,9 @@
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4370, 1) and trade:getItemCount() == 1) then
             local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
@@ -28,7 +29,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ToBee = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local PostmanKOsTwice = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
@@ -62,10 +63,10 @@ end
 --      player:startEvent(74) -- After Honey#4: Feels like its getting a lot better but there is still iritaion
 --      player:startEvent(75) -- After Honey#5: ToBee quest Finish (tooth hurts from all the Honey)
 --      player:startEvent(78) -- ToBee After Quest Finish but before zone (tooth still hurts)
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 64) then
         player:setCharVar("ToBeeOrNot_var", 10)
@@ -89,3 +90,5 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
     end
 end
+
+return entity

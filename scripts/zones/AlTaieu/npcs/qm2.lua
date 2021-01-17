@@ -6,8 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     --[[
     -- JAILER OF JUSTICE
     if (
@@ -23,15 +24,17 @@ function onTrade(player, npc, trade)
     --]]
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate CSID: %u", csid)
     -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 end
+
+return entity

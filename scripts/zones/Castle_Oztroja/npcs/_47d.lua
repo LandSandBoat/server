@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(tpz.ki.OLD_RING) then
         player:addKeyItem(tpz.ki.OLD_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_RING)
@@ -18,8 +19,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -10,11 +10,12 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pudding = ID.mob.PUDDING_OFFSET
     
     if player:getCharVar("EcoStatus") == 101 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
@@ -26,8 +27,9 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+return entity

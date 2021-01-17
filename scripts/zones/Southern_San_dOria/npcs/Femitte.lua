@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local DistantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
     local DistantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 807) then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
@@ -71,3 +72,5 @@ end
 --748
 --807  Lure of the Wildcat
 --945  CS with small mythra dancer
+
+return entity

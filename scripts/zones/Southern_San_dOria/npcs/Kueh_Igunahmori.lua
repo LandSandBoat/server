@@ -9,18 +9,21 @@ require("scripts/globals/shop")
 require("scripts/globals/conquest")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:sendGuild(529, 3, 18, 4)) then
         player:showText(npc, ID.text.KUEH_IGUNAHMORI_DIALOG)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

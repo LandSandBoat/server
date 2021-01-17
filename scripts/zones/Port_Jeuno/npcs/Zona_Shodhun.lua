@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local gil = trade:getGil()
     local itemQuality = 0
@@ -72,14 +73,14 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(10023, 0, 246, 10)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10023 and option == 4002) then
         player:setMoghouseFlag(8)
@@ -92,3 +93,5 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     end
 end
+
+return entity

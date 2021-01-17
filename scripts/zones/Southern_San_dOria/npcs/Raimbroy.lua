@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- "The Sweetest Things" quest status var
     local theSweetestThings = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
 
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local theSweetestThings = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SWEETEST_THINGS)
 
@@ -44,10 +45,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- "The Sweetest Things" ACCEPTED
     if (csid == 532) then
@@ -75,3 +76,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

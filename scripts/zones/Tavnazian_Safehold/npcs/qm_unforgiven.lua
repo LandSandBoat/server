@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Unforgiven = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
 
     if (Unforgiven == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ALABASTER_HAIRPIN) == false) then
@@ -21,9 +22,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
 end
+
+return entity

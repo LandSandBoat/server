@@ -10,11 +10,12 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- PATH OF THE BARD (Bard Flag)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD) == QUEST_AVAILABLE and player:getCharVar("PathOfTheBard_Event") == 1) then
         player:startEvent(2)
@@ -25,10 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2) then
         player:addGil(GIL_RATE*3000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BARD)
     end
 end
+
+return entity

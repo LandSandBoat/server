@@ -11,8 +11,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCharVar("theTalekeeperTruthCS") == 3) then
         if (trade:hasItemQty(1101, 1) and trade:getItemCount() == 1) then -- Trade Mottled Quadav Egg
@@ -30,7 +31,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local theDoorman = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
     local theTalekeeperTruth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
@@ -66,10 +67,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 161) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
@@ -103,3 +104,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -8,11 +8,12 @@ local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Notes: does ??? depop when Agas is spawned?
     -- current implementation: when Agas is active, triggering ??? will result in detarget
 
@@ -43,13 +44,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 14 then
         player:addKeyItem(tpz.ki.MOONDROP)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MOONDROP)
         player:setCharVar("Searching_AgasKilled", 0)
     end
 end
+
+return entity

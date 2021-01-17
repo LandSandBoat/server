@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     quest_fas = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)      -- 1st Quest in Series
     quest_poa = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)  -- 2nd Quest in Series
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 594 and option == 0) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

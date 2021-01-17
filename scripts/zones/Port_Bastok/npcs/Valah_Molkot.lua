@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 count = trade:getItemCount()
 gil = trade:getGil()
@@ -64,14 +65,14 @@ itemQuality = 0
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(160, 0, 236, 10)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 160 and option == 2002) then
         player:tradeComplete()
@@ -84,3 +85,5 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
     end
 end
+
+return entity

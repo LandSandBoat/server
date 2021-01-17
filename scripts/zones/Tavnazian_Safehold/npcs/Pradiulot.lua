@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local unforgiven = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
 
     if unforgiven == QUEST_ACCEPTED and player:getCharVar("UnforgivenVar") == 1 then
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 204 then
         player:setCharVar("UnforgivenVar", 2)
         player:addKeyItem(tpz.ki.MAP_OF_TAVNAZIA)
@@ -39,3 +40,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("UnforgivenVar", 0)
     end
 end
+
+return entity

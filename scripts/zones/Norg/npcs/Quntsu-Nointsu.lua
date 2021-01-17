@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local eventId = 1011
 local titleInfo =
@@ -51,16 +52,18 @@ local titleInfo =
     },
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end
+
+return entity

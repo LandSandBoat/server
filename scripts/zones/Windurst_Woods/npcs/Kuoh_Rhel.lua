@@ -11,11 +11,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local inAStew = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     local inAStewCS = player:getCharVar("IASvar")
     local chocobilious = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- CHOCOBILIOUS
     if csid == 224 and option == 1 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("IASvar", 3)
     end
 end
+
+return entity

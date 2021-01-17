@@ -8,8 +8,9 @@ local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED and
         player:getCharVar("BlueRibbonBluesProg") >= 3 and
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("Lich_C_Magnus_Died") == 1 and not player:hasItem(12521) then
         if npcUtil.giveItem(player, 12521) then
             player:setCharVar("Lich_C_Magnus_Died", 0)
@@ -32,8 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

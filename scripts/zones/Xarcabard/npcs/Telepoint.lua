@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- trade any normal crystal for a faded crystal
     local item = trade:getItemId()
     if trade:getItemCount() == 1 and item >= 4096 and item <= 4103 and npcUtil.giveItem(player, 613) then
@@ -16,7 +17,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(tpz.ki.VAHZL_GATE_CRYSTAL) then
         npcUtil.giveKeyItem(player, tpz.ki.VAHZL_GATE_CRYSTAL)
     else
@@ -24,8 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

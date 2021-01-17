@@ -7,12 +7,13 @@ require("scripts/globals/bcnm")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     TradeBCNM(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- if (player:hasKeyItem(tpz.ki.MARK_OF_SEED) and player:getCurrentMission(ACP) == tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
     --     player:startEvent(5)
@@ -22,11 +23,11 @@ function onTrigger(player, npc)
     EventTriggerBCNM(player, npc)
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 5) then
         player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
         player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
@@ -34,3 +35,5 @@ function onEventFinish(player, csid, option)
         EventFinishBCNM(player, csid, option)
     end
 end
+
+return entity

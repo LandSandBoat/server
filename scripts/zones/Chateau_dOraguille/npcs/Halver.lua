@@ -13,11 +13,12 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     --print(player:getCharVar("MissionStatus"))
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
@@ -146,10 +147,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 501) then
         player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA)
@@ -207,3 +208,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AhtUrganStatus", 1)
     end
 end
+
+return entity

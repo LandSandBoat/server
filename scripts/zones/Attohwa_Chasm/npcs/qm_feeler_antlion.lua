@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.FEELER_ANTLION)
     if (not nm:isSpawned() and trade:hasItemQty(1825, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
@@ -15,6 +16,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.OCCASIONAL_LUMPS)
 end
+
+return entity

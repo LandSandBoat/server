@@ -9,8 +9,9 @@ require("scripts/globals/crafting")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.ALCHEMY)
 
@@ -34,7 +35,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.ALCHEMY)
     local testItem = getTestItem(player, npc, tpz.skill.ALCHEMY)
     local guildMember = isGuildMember(player, 1)
@@ -80,10 +81,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local guildMember = isGuildMember(player, 1)
 
     if (csid == 120 and option == 2) then
@@ -107,3 +108,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

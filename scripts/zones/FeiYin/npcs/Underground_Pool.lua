@@ -10,11 +10,12 @@ local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.UNDERGROUND_POOL_OFFSET
 
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED then
@@ -34,10 +35,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 18 then
         player:delKeyItem(tpz.ki.AQUAFLORA3)
         player:setCharVar("DabotzKilled", 0)
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.AQUAFLORA2)
     end
 end
+
+return entity

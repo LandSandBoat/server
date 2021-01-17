@@ -9,14 +9,15 @@ require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.ROYAL_PUPPETEER and player:getCharVar("AhtUrganStatus") == 1 and trade:hasItemQty(2307, 1)) then
         player:startEvent(279)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.ROYAL_PUPPETEER and player:getCharVar("AhtUrganStatus") == 0) then
         player:startEvent(277)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.ROYAL_PUPPETEER and player:getCharVar("AhtUrganStatus") == 1) then
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 277) then
         player:setCharVar("AhtUrganStatus", 1)
     elseif (csid == 279 and player:getCharVar("AhtUrganStatus") == 1) then
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LOST_KINGDOM)
     end
 end
+
+return entity

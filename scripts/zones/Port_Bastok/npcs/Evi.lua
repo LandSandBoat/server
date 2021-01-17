@@ -8,11 +8,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     PastPerfect = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT)
 
@@ -28,12 +29,12 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 104 and player:getCharVar("PastPerfectVar") == 0) then
         player:setCharVar("PastPerfectVar", 1)
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

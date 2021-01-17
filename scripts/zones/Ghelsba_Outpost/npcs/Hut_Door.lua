@@ -9,12 +9,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     TradeBCNM(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:hasKeyItem(tpz.ki.ORCISH_HUT_KEY)) then
         if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN)) then
@@ -29,11 +30,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 3 or csid == 55) then
         player:delKeyItem(tpz.ki.ORCISH_HUT_KEY)
         player:setCharVar("MissionStatus", 4)
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

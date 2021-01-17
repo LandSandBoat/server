@@ -1,8 +1,9 @@
 
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(entity, npc)
+entity.onTrigger = function(entity, npc)
     if (npc:getInstance():getStage() == 6) and (npc:getInstance():getProgress() >= 11) then
         entity:startEvent(300)
     else
@@ -10,10 +11,10 @@ function onTrigger(entity, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(entity, eventid, result, door)
+entity.onEventFinish = function(entity, eventid, result, door)
     if (eventid == 300 and result == 1) then
         local instance = door:getInstance()
         instance:setStage(7)
@@ -24,3 +25,5 @@ function onEventFinish(entity, eventid, result, door)
         door:untargetable(true)
     end
 end
+
+return entity

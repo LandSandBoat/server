@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Ordelles_Caves/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.STALACTITE_DEW) and player:getCharVar("SquiresTestII") == 0 then
         player:setCharVar("SquiresTestII", os.time())
         player:messageSpecial(ID.text.A_SQUIRE_S_TEST_II_DIALOG_I)
@@ -21,8 +22,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

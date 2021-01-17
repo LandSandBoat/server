@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
     local count = trade:getItemCount()
 
@@ -50,7 +51,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Check for Missions first (priority?)
     -- If the player has started the mission or not
     local pfame = player:getFameLevel(WINDURST)
@@ -123,10 +124,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local tabre =
     {
@@ -210,3 +211,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

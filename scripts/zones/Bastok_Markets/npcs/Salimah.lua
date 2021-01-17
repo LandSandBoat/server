@@ -9,8 +9,9 @@ require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
 
@@ -49,7 +50,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
@@ -58,10 +59,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
 
@@ -91,3 +92,5 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
     end
 end
+
+return entity

@@ -9,8 +9,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
         npcUtil.tradeHasExactly(trade, {3541, 3542, 3543}) then
         player:startEvent(15)
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
         player:startEvent(14)
     elseif player:getCharVar("BeatAroundTheBushin") == 3 then
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 15 then
         npcUtil.giveItem(player, 5911)
         player:confirmTrade()
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

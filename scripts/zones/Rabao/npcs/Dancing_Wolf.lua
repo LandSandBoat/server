@@ -6,11 +6,12 @@
 -----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 1) then
 player:startEvent(102)
 elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 2) then
@@ -24,13 +25,15 @@ player:startEvent(106)
 end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 if (csid == 102) then
 player:setCharVar("BASTOK91", 2)
 elseif (csid == 104) then
 player:setCharVar("BASTOK91", 4)
 end
 end
+
+return entity

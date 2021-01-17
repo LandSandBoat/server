@@ -10,8 +10,9 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local Z = player:getZPos()
 
     if
@@ -26,15 +27,17 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
         player:messageSpecial(ID.text.ITS_LOCKED)
         return 1
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

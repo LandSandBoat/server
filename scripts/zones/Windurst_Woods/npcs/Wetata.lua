@@ -11,12 +11,13 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 require("scripts/globals/trust")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     tpz.trust.onTradeCipher(player, trade, 862, 901, 902)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
     local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 863 or csid == 867) and option == 2 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
         npcUtil.giveKeyItem(player, tpz.ki.GREEN_INSTITUTE_CARD)
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

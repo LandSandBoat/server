@@ -8,15 +8,16 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
     if (offset == 5 and TradeBCNM(player, npc, trade)) then -- The Wyrmking Descends
         return
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
 
     -- STORMS OF FATE
@@ -29,12 +30,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:setCharVar('StormsOfFate', 2)
     end
 end
+
+return entity

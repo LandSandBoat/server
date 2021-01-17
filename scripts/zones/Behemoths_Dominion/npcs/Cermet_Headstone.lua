@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- HEADSTONE PILGRIMAGE
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- HEADSTONE PILGRIMAGE
     if (csid == 200 and option == 1) then
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
         SpawnMob(ID.mob.LEGENDARY_WEAPON):updateClaim(player)
     end
 end
+
+return entity

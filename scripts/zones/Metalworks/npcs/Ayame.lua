@@ -15,6 +15,7 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
@@ -46,7 +47,7 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1100, 1) and trade:getItemCount() == 1) then -- Trade Xalmo Feather
@@ -56,7 +57,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local trueStrength = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
     local WildcatBastok = player:getCharVar("WildcatBastok")
@@ -87,10 +88,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 712) then
         finishMissionTimeline(player, 1, csid, option)
@@ -119,3 +120,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

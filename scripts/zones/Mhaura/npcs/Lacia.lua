@@ -10,14 +10,15 @@ require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(1548, 1) == true and player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
         player:startEvent(10026, 0, 1548, 5, 20)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local TrialSizeLightning = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10025 and option == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1548) --Mini tuning fork
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_STORMS)
     end
 end
+
+return entity

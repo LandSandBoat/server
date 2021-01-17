@@ -9,8 +9,9 @@ require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (trade:hasItemQty(1547, 1) and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
         player:startEvent(298, 0, 1547, 1, 20)
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local TrialSizeEarth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 
@@ -42,10 +43,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 297 and option == 1) then
         if (player:getFreeSlotsCount() == 0) then
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

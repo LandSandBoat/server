@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local KenapaFood = player:getCharVar("Kenapa_Food_var") -- Variable to track progress of Kenapa-Keppa in Food for Thought
 
@@ -34,7 +35,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local OvernightDelivery = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
     local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
@@ -135,10 +136,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 327 or csid == 330 or csid == 331) then
         player:tradeComplete()
         player:addGil(GIL_RATE*120)
@@ -199,3 +200,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("FLOWER_PROGRESS", 3)
     end
 end
+
+return entity

@@ -14,6 +14,7 @@ require("scripts/globals/titles")
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.detonator
 
@@ -25,7 +26,7 @@ local function checkThreePaths(player)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
@@ -38,7 +39,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local currentday = tonumber(os.date("%j"))
     local CidsSecret = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
@@ -144,7 +145,7 @@ end
 -- 849  850  852  853  854  855  856  857  868  869  883  884  890  891  892  893
 -- 894  895  897  898
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 897) then
         player:setCharVar("COP_tenzen_story", 1)
     elseif (csid == 892) then
@@ -238,3 +239,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.DETONATOR_LEARNED)
     end
 end
+
+return entity

@@ -8,11 +8,12 @@ require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if player:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS and player:hasKeyItem(tpz.ki.NYZUL_ISLE_ROUTE) and player:getCharVar("AhtUrganStatus") == 1 then
         player:setLocalVar("PathOfDarkness", 1)
@@ -33,7 +34,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 
     if csid ~= 405 then
         return
@@ -140,7 +141,7 @@ function onEventUpdate(player, csid, option, target)
 
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
 
     if csid == 405 and option == 1073741824 and player:getLocalVar("NyzulReady") == 1 then
         player:startEvent(116, 2) -- This means the event was force terminated. Loop into the entrance animation.
@@ -149,7 +150,7 @@ function onEventFinish(player, csid, option, target)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     local pathOfDarkness = player:getLocalVar("PathOfDarkness")
     local nashmeirasPlea = player:getLocalVar("NashmeirasPlea")
 
@@ -196,3 +197,5 @@ function onInstanceCreated(player, target, instance)
     -- EventUpdate Hack: 2nd latch
     player:setLocalVar("NyzulReady", 1)
 end
+
+return entity

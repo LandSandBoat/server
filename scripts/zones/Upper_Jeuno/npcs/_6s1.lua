@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
 local ring =
 {
@@ -15,10 +16,10 @@ local ring =
     15545  -- Tamas Ring
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local status = player:getCharVar("PromathiaStatus")
     local mission = player:getCurrentMission(COP)
 
@@ -53,13 +54,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if ((csid == 84 or csid == 204) and option == 4) then
         player:updateEvent(ring[1], ring[2], ring[3])
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10011) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 10012) then
@@ -81,3 +82,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

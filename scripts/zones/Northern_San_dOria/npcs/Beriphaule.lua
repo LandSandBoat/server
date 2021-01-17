@@ -6,11 +6,12 @@
 -----------------------------------
 require("scripts/globals/conquest")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local new_nation = tpz.nation.SANDORIA
     local old_nation = player:getNation()
@@ -40,10 +41,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 606 and option == 1) then
         local new_nation = tpz.nation.SANDORIA
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

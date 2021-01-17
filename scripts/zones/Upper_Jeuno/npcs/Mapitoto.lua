@@ -11,8 +11,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
     if
         player:hasKeyItem(tpz.ki.TRAINERS_WHISTLE) and
         trade:getSlotCount() == 1 and
@@ -31,7 +32,7 @@ function onTrade(player,npc,trade)
     end
 end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player,npc)
     local fsaQuest = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
 
@@ -52,10 +53,10 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+entity.onEventFinish = function(player,csid,option)
     if (csid == 10223 or csid == 10224) and option == 1 then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
         player:setCharVar("[QUEST]FullSpeedAhead", 1) -- Flag to start minigame
@@ -77,3 +78,5 @@ function onEventFinish(player,csid,option)
         npcUtil.giveKeyItem(player, rewardKI)
     end
 end
+
+return entity

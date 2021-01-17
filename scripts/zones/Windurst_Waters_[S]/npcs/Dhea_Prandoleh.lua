@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCampaignAllegiance() > 0 and player:getQuestStatus(tpz.quest.log_id.sCRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_AVAILABLE then
         player:startEvent(128)
     elseif player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) == QUEST_ACCEPTED then
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 128 then
         player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS)
     elseif csid == 133 then
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.AJIDOMARUJIDOS_MINDER)
     end
 end
+
+return entity

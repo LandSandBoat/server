@@ -9,6 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
 local optionToKI =
 {
@@ -476,10 +477,10 @@ local function givePrize(player, ki)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local receivedNexusCape = player:getCharVar("receivedNexusCape")
 
     local arg1 =
@@ -519,10 +520,10 @@ function onTrigger(player, npc)
     player:startEvent(10099, arg1, arg2, arg3, arg4, 0, 0, 0, 0)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 10099 then
         if option == 16777216 and player:getCharVar("receivedNexusCape") == 0 and npcUtil.giveItem(player, 11538) then
             player:setCharVar("receivedNexusCape", 1)
@@ -536,3 +537,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

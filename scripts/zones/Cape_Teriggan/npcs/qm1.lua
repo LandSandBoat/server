@@ -7,7 +7,10 @@
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Cape_Teriggan/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.empyreal_arrow, player, ID.mob.STOLAS)
 end
+
+return entity

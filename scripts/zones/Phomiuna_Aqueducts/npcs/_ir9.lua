@@ -7,8 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getXPos() < 70 and npc:getAnimation() == 9) then
         if (trade:hasItemQty(1660, 1) and trade:getItemCount() == 1) then -- Bronze Key
@@ -23,7 +24,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getXPos() >= 70) then
         npc:openDoor(15) -- Retail timed
@@ -33,8 +34,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

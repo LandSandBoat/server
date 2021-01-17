@@ -7,11 +7,12 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ToBee = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
@@ -34,8 +35,10 @@ end
 -- CS 72 - player:startEvent(72) -- During Too Bee quest after some honey was given to Zayhi: "hey did that honey help you just now?"
 -- *CS 75 - player:startEvent(75) -- Combo CS: During Too Bee quest, kicked off from Zayhi
 -- CS 77 - player:startEvent(77) -- After Too Bee quest but before zone: "well I guess a tooth ache is to be expected"
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

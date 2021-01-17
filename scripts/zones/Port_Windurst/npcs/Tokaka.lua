@@ -6,8 +6,9 @@
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 TokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
 NeedToZone     = player:needToZone()
@@ -23,7 +24,7 @@ NeedToZone     = player:needToZone()
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
     if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
@@ -46,13 +47,13 @@ SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.w
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 208) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
@@ -75,3 +76,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TokakaSpokenTo", 1)
     end
 end
+
+return entity

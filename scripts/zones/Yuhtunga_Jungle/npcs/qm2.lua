@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local tuningOutProgress= player:getCharVar("TuningOut_Progress")
 
     if tuningOutProgress == 4
@@ -32,7 +33,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid)
+entity.onEventFinish = function(player, csid)
     if csid == 28 then -- initiate fight
         player:setCharVar("TuningOut_Progress", 4)
         spawnNMs(player)
@@ -42,7 +43,7 @@ function onEventFinish(player, csid)
     end
 end
 
-function spawnNMs(player)
+local function spawnNMs(player)
     local qm = GetNPCByID(ID.npc.TUNING_OUT_QM)
     if not isFightInProgress() then
         qm:setLocalVar("cooldown", os.time() + 900) -- 15 minutes between repops
@@ -61,10 +62,12 @@ function spawnNMs(player)
     end
 end
 
-function isFightInProgress()
+local function isFightInProgress()
     return GetMobByID(ID.mob.NASUS_OFFSET):isAlive()
         or GetMobByID(ID.mob.NASUS_OFFSET + 1):isAlive()
         or GetMobByID(ID.mob.NASUS_OFFSET + 2):isAlive()
         or GetMobByID(ID.mob.NASUS_OFFSET + 3):isAlive()
         or GetMobByID(ID.mob.NASUS_OFFSET + 4):isAlive()
 end
+
+return entity

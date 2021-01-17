@@ -7,11 +7,12 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:hasKeyItem(tpz.ki.KNIGHTS_SOUL) == false and player:hasKeyItem(tpz.ki.BOOK_OF_TASKS) and player:hasKeyItem(tpz.ki.BOOK_OF_THE_WEST) and player:hasKeyItem(tpz.ki.BOOK_OF_THE_EAST)) then
         player:addKeyItem(tpz.ki.KNIGHTS_SOUL)
@@ -22,8 +23,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

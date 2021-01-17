@@ -3,20 +3,21 @@
 --  NPC: Radiant Aureole
 -- !pos 0.044 -119.249 -360.028 19
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(14)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate CSID: %u", csid)
     -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 printf("onFinish CSID: %u", csid)
 printf("onFinish RESULT: %u", option)
 
@@ -25,3 +26,5 @@ printf("onFinish RESULT: %u", option)
     end
 
 end
+
+return entity

@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT) == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
         LufetSalt = trade:hasItemQty(1019, 3)
@@ -24,7 +25,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local LufetsLakeSalt = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
 
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 12 and option == 1) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LUFET_S_LAKE_SALT)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*600)
     end
 end
+
+return entity

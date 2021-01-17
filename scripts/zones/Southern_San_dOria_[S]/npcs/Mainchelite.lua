@@ -23,11 +23,12 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
@@ -56,10 +57,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 7 and option == 0) then
         player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
         player:setCharVar("RED_R_LETTER_USED", 1)
@@ -104,3 +105,5 @@ function onEventFinish(player, csid, option)
         player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
     end
 end
+
+return entity

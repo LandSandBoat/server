@@ -10,8 +10,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade "Star Spinel" for "Crying over Onions" after having talked to this NPC once
     -- and optionally talked to Nanaa Mihgo (CryingOverOnions == 2)
     if
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
@@ -71,10 +72,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     
     -- "Crying over Onions"
     if csid == 774 then
@@ -115,3 +116,5 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.CRACKED_MIMEO_MIRROR)
     end
 end
+
+return entity

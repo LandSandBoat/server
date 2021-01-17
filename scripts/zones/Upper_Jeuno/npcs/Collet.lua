@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC zone1
         if
@@ -38,7 +39,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getFameLevel(JEUNO) >= 5 and aClockMostdelicate == QUEST_AVAILABLE and player:getCharVar("aClockMostdelicateVar") == 0) then
         player:startEvent(112)
     elseif (player:getCharVar("saveTheClockTowerVar") >= 1) then
@@ -50,10 +51,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 112) then
         player:setCharVar("aClockMostdelicateVar", 1)
     elseif (csid == 115) then
@@ -61,3 +62,5 @@ function onEventFinish(player, csid, option)
         player:addCharVar("saveTheClockTowerNPCz1", 2)
     end
 end
+
+return entity

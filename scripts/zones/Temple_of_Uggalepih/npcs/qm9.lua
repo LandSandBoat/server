@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.decimation, player, ID.mob.YALLERY_BROWN)
 end
+
+return entity

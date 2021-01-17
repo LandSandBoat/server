@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Altar_Room/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local moralmanifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     if moralmanifest == QUEST_ACCEPTED and player:getCharVar("moral") == 7 then
         if (trade:hasItemQty(15202, 1)) then -- Trade Yagudo Headgear
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local moralmanifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     local moral = player:getCharVar("moral")
     local head = player:getEquipID(tpz.slot.HEAD)
@@ -30,10 +31,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 48 then
         local mobs =
         {
@@ -58,3 +59,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

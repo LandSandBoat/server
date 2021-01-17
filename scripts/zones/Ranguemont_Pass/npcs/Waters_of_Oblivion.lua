@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     TrosKilled = player:getCharVar("TrosKilled")
 
     if (player:hasKeyItem(tpz.ki.MERTAIRES_BRACELET) and
@@ -29,10 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 8) then
         if (npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY, {item=16766})) then
             player:delKeyItem(tpz.ki.MERTAIRES_BRACELET)
@@ -41,3 +42,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -3,11 +3,12 @@
 --  NPC: Felisa
 -- Admits players to the dock in Mhaura.
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getZPos() > 38.5) then
         player:startEvent(221, player:getGil(), 100)
@@ -17,13 +18,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 221 and option == 333) then
         player:delGil(100)
     end
 
 end
+
+return entity

@@ -12,6 +12,7 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
 -- Items in trades
 BRASS_SHEET            = 661
@@ -39,14 +40,14 @@ BRASS_RING             = 13465
 PATAS                  = 16419
 HEAVY_CROSSBOW         = 17220
 
-function satisfy_attachment(player, new_attachmentStatus, new_attachmentReady)
+local function satisfy_attachment(player, new_attachmentStatus, new_attachmentReady)
     player:tradeComplete()
     player:startEvent(625)
     player:setCharVar("PUP_AttachmentStatus", new_attachmentStatus)
     player:setCharVar("PUP_AttachmentReady", new_attachmentReady)
 end
 
-function play_event624(player, attachments, new_attachmentStatus)
+local function play_event624(player, attachments, new_attachmentStatus)
     player:tradeComplete()
     if attachments == 0 then
         player:startEvent(624, 0, 0, 0, 0, 0, IMPERIAL_SILVER_PIECE, 3)
@@ -58,7 +59,7 @@ function play_event624(player, attachments, new_attachmentStatus)
     player:setCharVar("PUP_AttachmentStatus", new_attachmentStatus)
 end
 
-function play_event902(player, new_attachmentStatus, new_attachmentWait)
+local function play_event902(player, new_attachmentStatus, new_attachmentWait)
     player:tradeComplete()
     player:setCharVar("PUP_AttachmentStatus", new_attachmentStatus)
     player:setCharVar("PUP_AttachmentReady", getVanaMidnight())
@@ -68,7 +69,7 @@ end
 
 
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local attachmentStatus = player:getCharVar("PUP_AttachmentStatus")
     local attachments = player:getCharVar("PUP_Attachments")
     local unlockedAttachments = player:getCharVar("PUP_AttachmentUnlock")
@@ -175,7 +176,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     --cs 620 - new frame - param 6: itemid payment param 7: number of payment param 8: bitpack choices (bit 0 no thanks, bit 1 VE, bit 2 SS, bit 3 SW)
     --cs 621 - new frame (if canceled previous)
@@ -311,10 +312,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 262 then
         player:setCharVar("NoStringsAttachedProgress", 3)
@@ -383,3 +384,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

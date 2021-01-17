@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
 require("scripts/globals/campaign")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
     local unknown = 12 -- Faking it for now
@@ -35,7 +36,7 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     local itemid = 0
     local canEquip = 2 -- Faking it for now.
     -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
@@ -45,7 +46,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local medalRank = getMedalRank(player)
     if csid == 13 then
         -- Note: the event itself already verifies the player has enough AN, so no check needed here.
@@ -96,3 +97,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

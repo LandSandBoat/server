@@ -8,11 +8,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -62,10 +63,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 153 then
         player:setCharVar("MissionStatus", 1)
         player:delKeyItem(tpz.ki.STAR_CRESTED_SUMMONS)
@@ -104,3 +105,5 @@ function onEventFinish(player, csid, option)
         player:setPos(0, -16.750, 130, 64, 239)
     end
 end
+
+return entity

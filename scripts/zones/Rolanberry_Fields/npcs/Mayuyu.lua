@@ -8,11 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local legendary = player:hasTitle(tpz.title.LEGENDARY_LEGIONNAIRE) and 1 or 0
     local capacity =
         (player:hasKeyItem(tpz.ki.LEGION_TOME_PAGE_MINIMUS) and 1 or 0) +
@@ -21,9 +22,11 @@ function onTrigger(player, npc)
     player:startEvent(8008, 0, legendary, capacity)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- Event needs work, also the Legion Pass item is "tagged" via fields not yet implemented in core.
 end
+
+return entity

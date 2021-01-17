@@ -6,8 +6,9 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, { 1695, 4297, 4506 }) -- Habaneros, Black Curry, Mutton Tortilla
         and player:getCharVar("TuningOut_Progress") == 6
     then
@@ -15,7 +16,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
     if tuningOutProgress == 6 then
@@ -28,12 +29,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 207 then
         player:tradeComplete()
         player:setCharVar("TuningOut_Progress", 7)
     end
 end
+
+return entity

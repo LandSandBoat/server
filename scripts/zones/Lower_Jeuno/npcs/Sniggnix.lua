@@ -9,8 +9,9 @@
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10024 and option == 1) then                -- player won first dice game
         player:setCharVar("thickAsThievesGamblingCS", 2)
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
 
 
 end
+
+return entity

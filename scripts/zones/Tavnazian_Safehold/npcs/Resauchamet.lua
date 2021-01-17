@@ -3,11 +3,12 @@
 --  NPC: Resauchamet
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local kill=player:getCharVar("FOMOR_HATE")
     local n=0
     if (kill< 8) then n=0
@@ -18,8 +19,10 @@ function onTrigger(player, npc)
     player:startEvent(355, n)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

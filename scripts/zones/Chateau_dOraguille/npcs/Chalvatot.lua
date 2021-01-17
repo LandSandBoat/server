@@ -13,8 +13,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local herMajestysGarden = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
@@ -24,7 +25,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local MissionStatus = player:getCharVar("MissionStatus")
     local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
@@ -69,10 +70,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- SAN D'ORIA MISSIONS
     if (csid == 556 or csid == 111) then
         finishMissionTimeline(player, 3, csid, option)
@@ -111,3 +112,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

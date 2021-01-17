@@ -10,8 +10,9 @@ require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then
         if (trade:getGil() >= player:getCharVar("MAGRIFFON_GIL_REQUEST")) then
             player:startEvent(146)
@@ -23,7 +24,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local gulliblesTravelsStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
     local evenmoreTravelsStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
 
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 144 and option == 1)  then                     -- Gullible's Travels: First CS
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS)
     elseif (csid == 146) then                                  -- Gullible's Travels: Final CS
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVEN_MORE_GULLIBLES_TRAVELS)
     end
 end
+
+return entity

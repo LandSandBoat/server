@@ -6,22 +6,24 @@
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_TIES_THAT_BIND then
         player:startEvent(34)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 34 then
         player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_TIES_THAT_BIND)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.IMPURITY)
     end
 end
+return entity

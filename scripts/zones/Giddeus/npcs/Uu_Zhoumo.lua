@@ -7,8 +7,9 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_EMISSARY_WINDURST and trade:hasItemQty(16509, 1) and trade:getItemCount() == 1) then -- Trade Aspir Knife
         player:startEvent(41)
@@ -16,7 +17,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:hasKeyItem(tpz.ki.SHIELD_OFFERING)) then
         player:startEvent(42)
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 40) then
         player:setCharVar("MissionStatus", 5)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.SHIELD_OFFERING)
     end
 end
+
+return entity

@@ -12,8 +12,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 7) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
@@ -26,7 +27,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local darkLegacy = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
     local mLvl = player:getMainLvl()
@@ -48,10 +49,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 510 and option == 0) then
         player:setCharVar("TheUsual_Event", 1)
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

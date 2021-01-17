@@ -6,18 +6,21 @@
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:sendGuild(516, 6, 21, 0) then
         player:showText(npc, ID.text.CLOTHCRAFT_SHOP_DIALOG)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

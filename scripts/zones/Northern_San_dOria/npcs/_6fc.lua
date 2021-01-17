@@ -7,11 +7,12 @@
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions and has no default
     if player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
@@ -47,13 +48,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 695 or csid == 7 or csid == 8 then
         finishMissionTimeline(player, 3, csid, option)
     end
 
 end
+
+return entity

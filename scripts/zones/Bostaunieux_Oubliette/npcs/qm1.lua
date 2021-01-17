@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.asuran_fists, player, ID.mob.BODACH)
 end
+
+return entity

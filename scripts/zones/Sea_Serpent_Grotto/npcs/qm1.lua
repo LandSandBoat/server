@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.impulse_drive, player, ID.mob.WATER_LEAPER)
 end
+
+return entity

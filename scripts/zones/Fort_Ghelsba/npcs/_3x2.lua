@@ -5,11 +5,12 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- local vars to reduce repeat calls..
     local lever = npc:getID()
     local gear = GetNPCByID(lever +2)
@@ -36,8 +37,10 @@ function onTrigger(player, npc)
     RunElevator(tpz.elevator.FORT_GHELSBA_LIFT)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

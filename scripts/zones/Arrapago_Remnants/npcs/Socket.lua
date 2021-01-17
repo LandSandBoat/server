@@ -6,8 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local instance = npc:getInstance()
     local mob = GetMobByID(ID.mob[2][3].wahzil, instance)
     local COUNT = trade:getItemCount()
@@ -24,11 +25,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(entity, npc)
+entity.onTrigger = function(entity, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(entity, eventid, result)
+entity.onEventFinish = function(entity, eventid, result)
 end
+
+return entity

@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
     local prof = GetMobByID(ID.mob.OLD_PROFESSOR_MARISELLE)
@@ -33,8 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

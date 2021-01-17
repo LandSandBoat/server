@@ -7,23 +7,26 @@
 -----------------------------------
 require("scripts/globals/ephemeral")
 -----------------------------------
+local entity = {}
 
 local triggerEvent = 914
 local tradeEvent = 916
 local failEvent = 917
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     tpz.ephemeral.onTrade(player, trade, tradeEvent, failEvent)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.ephemeral.onTrigger(player, triggerEvent)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     tpz.ephemeral.onEventUpdate(player)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.ephemeral.onEventFinish(player, option, csid == tradeEvent)
 end
+
+return entity

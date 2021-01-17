@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     ForgetTheAntidote = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if ((ForgetTheAntidote == QUEST_ACCEPTED or ForgetTheAntidote == QUEST_COMPLETED) and trade:hasItemQty(1209, 1) and trade:getItemCount() == 1) then
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     ForgetTheAntidote = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if (ForgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 4) then
@@ -31,10 +32,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2 and option == 1) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:setCharVar("DontForgetAntidoteVar", 1)
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -7,8 +7,9 @@
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 5) then
         if (trade:hasItemQty(5595, 1) and trade:getItemCount() == 1) then
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ratRaceProg = player:getCharVar("ratraceCS")
 
     if (ratRaceProg == 5) then
@@ -32,12 +33,14 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 311) then
         player:tradeComplete()
         player:setCharVar("ratraceCS", 6)
     end
 end
+
+return entity

@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ttsStat = player:getCharVar("TigressStrikesProg")
 
     if (ttsStat == 1) then
@@ -25,13 +26,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 102) then
         player:setCharVar("TigressStrikesProg", 2)
     elseif (csid == 103) then
         player:setCharVar("TigressStrikesProg", 3)
     end
 end
+
+return entity

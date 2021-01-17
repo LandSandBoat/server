@@ -13,8 +13,9 @@ require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local exoticDelacacies = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- ALL THE WAY TO THE BANK
@@ -34,7 +35,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local theWeatherspoonWar = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_WEATHERSPOON_WAR)
     local exoticDelacacies = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
 
@@ -74,10 +75,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5071) then
         player:confirmTrade()
@@ -96,3 +97,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

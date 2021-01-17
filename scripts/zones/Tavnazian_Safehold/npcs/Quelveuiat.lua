@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local SealionCrestKey = trade:hasItemQty(1658, 1)
     local CoralCrestKey = trade:hasItemQty(1659, 1)
     local Count = trade:getItemCount()
@@ -26,7 +27,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_AVAILABLE) then
         player:startEvent(119)
@@ -40,10 +41,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 119 and option == 3) then
         player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT)
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

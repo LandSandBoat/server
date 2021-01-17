@@ -7,11 +7,12 @@ require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == true) then
         player:startEvent(10115, player:getGil())
     else
@@ -19,10 +20,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10115) then
         if (option == 1 and player:getGil() >= 750) then
             player:delGil(750)
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

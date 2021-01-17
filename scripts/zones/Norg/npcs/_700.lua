@@ -9,11 +9,12 @@ require("scripts/globals/npc_util")
 require("scripts/globals/rhapsodies")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART)
     local currentMission = player:getCurrentMission(BASTOK)
     local ZilartStatus = player:getCharVar("ZilartStatus")
@@ -79,10 +80,10 @@ end
 -- 175  5  2  3  169  172  206  235
 -- 175  0  2  3  4  7  8  9  10  98  99  29  12  13
 -- 146  158  164  169  170  171  172  173  176  177  232  233  234
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2 and option == 0) then
         player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
@@ -122,3 +123,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SPIRITS_AWOKEN)
     end
 end
+
+return entity

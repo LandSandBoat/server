@@ -6,19 +6,22 @@
 -----------------------------------
 -- Auto-Script: Requires Verification
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 --    player:startEvent(514) -- event that follows egg trading
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     player:startEvent(508)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

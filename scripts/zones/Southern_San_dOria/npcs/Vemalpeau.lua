@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) == QUEST_ACCEPTED and player:getCharVar("UnderOathCS") == 0) then   -- Quest: Under Oath - PLD AF3
         player:startEvent(7) --Under Oath - mentions the boy missing
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 7) then
         player:setCharVar("UnderOathCS", 1)
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

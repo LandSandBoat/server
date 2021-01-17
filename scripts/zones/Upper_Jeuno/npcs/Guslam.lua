@@ -9,12 +9,13 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
 -- If it's the first Hands quest
-function nbHandsQuestsCompleted(player)
+local function nbHandsQuestsCompleted(player)
 
     local questNotAvailable = 0
 
@@ -28,7 +29,7 @@ function nbHandsQuestsCompleted(player)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- TODO: table this stuff, rather than tall if-elseif
     if (player:getMainLvl() >= 50 and player:getCharVar("BorghertzAlreadyActiveWithJob") == 0) then
         if
@@ -160,10 +161,10 @@ end
 -- 43 During Quest before KI obtained
 -- 26 Dialog avec Old Gauntlets KI
 -- 156 During Quest after Old Gauntlets KI ?
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 155) then
         local NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getMainJob() - 1
@@ -172,3 +173,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

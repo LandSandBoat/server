@@ -9,11 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local lostInTranslocation = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
     local leftMapPiece = player:hasKeyItem(tpz.ki.LEFT_MAP_PIECE)
     local middleMapPiece = player:hasKeyItem(tpz.ki.MIDDLE_MAP_PIECE)
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 107 then
         if player:hasKeyItem(tpz.ki.MAP_OF_GRAUBERG) then
             npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
@@ -61,3 +62,5 @@ function onEventFinish(player, csid, option)
         player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
     end
 end
+
+return entity

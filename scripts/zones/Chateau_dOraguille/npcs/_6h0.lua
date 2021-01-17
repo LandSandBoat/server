@@ -13,6 +13,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 -----------------------------------
+local entity = {}
 
 local function TrustMemory(player)
     local memories = 0
@@ -39,11 +40,11 @@ local function TrustMemory(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local aBoysDream = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
     local underOath = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
@@ -127,10 +128,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 553) then
         player:setCharVar("MissionStatus", 2)
@@ -178,3 +179,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

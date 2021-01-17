@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     OldGauntlets = player:hasKeyItem(tpz.ki.OLD_GAUNTLETS)
     ShadowFlames = player:hasKeyItem(tpz.ki.SHADOW_FLAMES)
     BorghertzCS = player:getCharVar("BorghertzCS")
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 20 and option == 1) then
         player:setCharVar("BorghertzCS", 2)
     elseif (csid == 48) then
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

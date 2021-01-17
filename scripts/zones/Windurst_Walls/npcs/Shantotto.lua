@@ -12,6 +12,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.retribution
 
@@ -59,7 +60,7 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
     local count = trade:getItemCount()
 
@@ -88,7 +89,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local foiledAgain = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
     local CFA2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
@@ -177,7 +178,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 173) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17081)
@@ -261,3 +262,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.RETRIBUTION_LEARNED)
     end
 end
+
+return entity

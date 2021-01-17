@@ -7,11 +7,12 @@
 require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(BASTOK) ~= tpz.mission.id.bastok.NONE) then
         local missionStatus = player:getCharVar("MissionStatus")
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 581) then
         -- This cs should only play if you visit San d'Oria first
         -- If you visit Windurst first you will encounter Lion in Heaven's Tower instead
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

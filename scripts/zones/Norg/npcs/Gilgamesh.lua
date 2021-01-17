@@ -8,8 +8,9 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_PIRATE_S_COVE and
         player:getCharVar("MissionStatus") == 2) then
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART);
     if (ZilartMission == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(7)
@@ -50,13 +51,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 232 or csid == 234) and option == 99 then
         player:updateEvent(252, 15962, 15963, 15964, 15965)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 99) then
         player:tradeComplete()
         player:setCharVar("MissionStatus", 3)
@@ -91,3 +92,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

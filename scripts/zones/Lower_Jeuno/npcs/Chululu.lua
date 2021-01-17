@@ -12,8 +12,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
@@ -25,7 +26,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local CollectTarutCards = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
     local RubbishDay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
     local SearchingForTheRightWords = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
@@ -73,10 +74,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 28 and option == 0 then
         local rand = math.random(1, 4)
         local card = 0
@@ -149,3 +150,5 @@ function onEventFinish(player, csid, option)
         })
     end
 end
+
+return entity

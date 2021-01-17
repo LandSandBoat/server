@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getMainJob() == tpz.job.PUP then
         player:startEvent(648, 0, 9800, player:getGil())
     else
@@ -19,10 +20,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 648 and bit.band(option, 0x80000000) ~= 0 then
         player:delGil(9800)
         local page = bit.band(option, 0xF)
@@ -31,3 +32,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.AUTOMATON_RENAME)
     end
 end
+
+return entity

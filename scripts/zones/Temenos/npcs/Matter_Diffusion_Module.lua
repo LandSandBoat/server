@@ -6,8 +6,9 @@
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD) then
         TradeBCNM(player, npc, trade)
     else
@@ -15,7 +16,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD) then
         EventTriggerBCNM(player, npc)
     else
@@ -23,7 +24,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     if EventUpdateBCNM(player, csid, option, extras) then
         local alliance = player:getAlliance()
         for _, member in pairs(alliance) do
@@ -34,6 +35,8 @@ function onEventUpdate(player, csid, option, extras)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     EventFinishBCNM(player, csid, option)
 end
+
+return entity

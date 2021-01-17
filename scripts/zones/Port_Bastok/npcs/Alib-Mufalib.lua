@@ -12,6 +12,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 --[[
 Bitmask Designations:
@@ -44,14 +45,14 @@ Bastok Mines (Clockwise, starting at Ore Street, upper floor to lower floor)
 80000    (H-9) Vaghron (southwest of South Auction House)
 ]]--
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(379)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local LureBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
     local WildcatBastok = player:getCharVar("WildcatBastok")
     if (LureBastok ~= 2 and ENABLE_TOAU == 1) then
@@ -73,10 +74,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 357) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatBastok", 0)
@@ -95,3 +96,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
     end
 end
+
+return entity

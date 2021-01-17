@@ -8,11 +8,12 @@ require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.REMNANTS_PERMIT) then
         local mask = -2
         -- salvage2 NYI
@@ -28,7 +29,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     -- 9 = arrapago, 54 = base salvage number
     local instanceid = bit.rshift(option, 19) + 64
 
@@ -56,13 +57,13 @@ function onEventUpdate(player, csid, option, target)
 
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 408 and option == 4) or csid == 116 then
         player:setPos(0, 0, 0, 0, 74)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     if (instance) then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
@@ -84,3 +85,5 @@ function onInstanceCreated(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+
+return entity
