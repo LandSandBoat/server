@@ -5,22 +5,23 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 -----------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
+instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
-function onInstanceCreated(instance)
+instance_object.onInstanceCreated = function(instance)
     SpawnMob(ID.mob[59].RAUBAHN, instance)
     SpawnMob(ID.mob[59].RAZFAHD, instance)
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     updateInstanceTime(instance, elapsed, ID.text)
 end
 
-function onInstanceFailure(instance)
+instance_object.onInstanceFailure = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
@@ -29,7 +30,7 @@ function onInstanceFailure(instance)
     end
 end
 
-function onInstanceProgressUpdate(instance, progress)
+instance_object.onInstanceProgressUpdate = function(instance, progress)
     if progress == 4 then
         local chars = instance:getChars()
         local entryPos = instance:getEntryPos()
@@ -46,7 +47,7 @@ function onInstanceProgressUpdate(instance, progress)
     end
 end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
 
     local chars = instance:getChars()
 
@@ -59,8 +60,10 @@ function onInstanceComplete(instance)
     end
 end
 
-function onEventUpdate(player, csid, option)
+instance_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+instance_object.onEventFinish = function(player, csid, option)
 end
+
+return instance_object
