@@ -3,9 +3,10 @@
 --  NPC: Arva
 -- Adventurer's Assistant
 -- Working 100%
--------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true) then

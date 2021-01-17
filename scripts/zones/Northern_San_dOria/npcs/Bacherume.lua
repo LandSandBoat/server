@@ -3,7 +3,7 @@
 --  NPC: Bacherume
 -- Type: Standard Info NPC
 -- !pos 4.500 0.000 99.000 231
---
+-----------------------------------
 -----------------------------------
 
 function onTrade(player, npc, trade)

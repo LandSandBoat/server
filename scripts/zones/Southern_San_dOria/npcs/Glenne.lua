@@ -1,14 +1,14 @@
--------------------------------------
+-----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Glenne
 -- Starts and Finishes Quest: A Sentry's Peril
 -- !pos -122 -2 15 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/npc_util")
--------------------------------------
+-----------------------------------
 
 require("scripts/globals/pathfind")
 

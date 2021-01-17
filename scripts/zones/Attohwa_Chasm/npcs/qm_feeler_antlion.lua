@@ -4,6 +4,7 @@
 -- !pos -402.574 3.999 -202.750 7
 -----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local nm = GetMobByID(ID.mob.FEELER_ANTLION)

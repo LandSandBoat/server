@@ -3,7 +3,7 @@
 --  NPC: Pontaudarme
 -- Type: Standard Info NPC
 -- !pos -51.628 -0.199 16.593 231
---
+-----------------------------------
 -----------------------------------
 
 function onTrade(player, npc, trade)

@@ -2,7 +2,7 @@
 -- Area: Southern San d'Oria
 --  NPC: Ullasa
 --  General Info NPC
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

@@ -3,7 +3,7 @@
 --   NPC: Swift
 -- Type: Standard NPC
 -- !pos 2.017 -5 -1.880 250
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

@@ -3,7 +3,7 @@
 --   NPC: Tohopka
 -- Type: Standard NPC
 -- !pos -105.723 -10 83.813 240
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

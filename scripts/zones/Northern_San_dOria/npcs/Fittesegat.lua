@@ -3,7 +3,7 @@
 --  NPC: Fittesegat
 -- Type: Standard Dialogue NPC
 -- !pos 144.250 0.000 138.203 231
---
+-----------------------------------
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

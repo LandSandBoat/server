@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

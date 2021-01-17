@@ -3,6 +3,7 @@
 --  NPC: _0ra (Iron Gate)
 -- !pos 180.000 -25.500 71.400 27
 -----------------------------------
+
 function onTrade(player, npc, trade)
 end
 

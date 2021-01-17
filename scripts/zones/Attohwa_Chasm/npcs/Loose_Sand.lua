@@ -5,6 +5,7 @@
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

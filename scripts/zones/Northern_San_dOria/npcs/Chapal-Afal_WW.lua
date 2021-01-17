@@ -2,9 +2,9 @@
 -- Area: Northern Sand Oria
 --  NPC: Chapal-Afal, W.W.
 -- !pos -55 -2 31 231
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.WINDURST
 local guardType   = tpz.conq.guard.FOREIGN

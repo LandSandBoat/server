@@ -3,7 +3,7 @@
 --   NPC: Chimh Dlesbah
 -- Type: Event Scene Replayer
 -- !pos -71.995 -1 -115.882 245
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

@@ -3,7 +3,7 @@
 --  NPC: Olbergieut
 -- Type: Quest NPC
 -- !pos 91 0 121 231
---
+-----------------------------------
 -- Starts and Finishes Quest: Gates of Paradise
 -----------------------------------
 require("scripts/globals/settings")

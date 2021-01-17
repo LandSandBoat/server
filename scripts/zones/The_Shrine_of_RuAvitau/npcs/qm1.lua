@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/status")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (trade:hasItemQty(1195, 1) and trade:getItemCount() == 1) then -- Trade Ro'Maeve Water

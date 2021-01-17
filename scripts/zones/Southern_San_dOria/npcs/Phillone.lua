@@ -2,7 +2,7 @@
 -- Area: Southern San d'Oria
 --  NPC: Phillone
 --  General Info NPC
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

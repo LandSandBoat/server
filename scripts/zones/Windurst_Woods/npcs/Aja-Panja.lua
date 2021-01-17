@@ -3,7 +3,7 @@
 --   NPC: Aja-Panja
 -- Type: Standard NPC
 -- !pos -7.251 -6.55 -134.127 241
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

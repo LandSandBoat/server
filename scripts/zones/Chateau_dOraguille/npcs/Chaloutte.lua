@@ -3,7 +3,7 @@
 --   NPC: Chaloutte
 -- Type: Event Scene Replayer
 -- !pos 10.450 -1 -11.985 233
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

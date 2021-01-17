@@ -5,6 +5,7 @@
 -- !pos -117.250 -2.000 60.890 238
 -----------------------------------
 require("scripts/globals/ephemeral")
+-----------------------------------
 
 local triggerEvent = 1098
 local tradeEvent = 1099

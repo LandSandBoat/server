@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/shop")
-
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

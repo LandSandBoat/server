@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Bastok Markets [S]
 --  NPC: GentleTiger
 -- Type: Quest

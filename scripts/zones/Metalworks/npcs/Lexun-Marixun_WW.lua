@@ -2,9 +2,9 @@
 -- Area: Metalworks
 --  NPC: Lexun-Maxirun, W.W.
 -- !pos 28 -16 28 237
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.WINDURST
 local guardType   = tpz.conq.guard.FOREIGN

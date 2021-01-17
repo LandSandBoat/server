@@ -6,6 +6,7 @@
 -- !pos -186.440 12.000 140.310 231 - Blacksmith's Guild
 -----------------------------------
 require("scripts/globals/ephemeral")
+-----------------------------------
 
 local triggerEvent = 914
 local tradeEvent = 916

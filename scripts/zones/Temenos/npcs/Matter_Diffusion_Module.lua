@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.WHITE_CARD) then

@@ -3,7 +3,7 @@
 --  NPC: Arvilauge
 -- Optional Involvement in Quest: A Squire's Test II
 -- !pos -11 1 -94 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

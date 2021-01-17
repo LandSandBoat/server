@@ -3,7 +3,7 @@
 --  NPC: Aubejart
 --  General Info NPC
 -- !pos 3 -2 46 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

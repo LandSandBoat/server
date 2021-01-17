@@ -3,7 +3,7 @@
 --  NPC: Ronpaurege
 -- Type: Standard Info NPC
 -- !pos 65.739 -0.199 74.275 231
---
+-----------------------------------
 -----------------------------------
 
 function onTrade(player, npc, trade)

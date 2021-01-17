@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local groceries = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)

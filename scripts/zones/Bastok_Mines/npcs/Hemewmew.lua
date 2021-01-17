@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
+-----------------------------------
 
 local keyitems = {
     [0] = {

@@ -3,7 +3,7 @@
 --   NPC: Vaultimand
 -- Type: Fame Checker
 -- !pos -10.839 -1 18.730 252
---
+-----------------------------------
 -----------------------------------
 
 function onTrade(player, npc, trade)

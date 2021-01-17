@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/npc_util")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, 2377) then

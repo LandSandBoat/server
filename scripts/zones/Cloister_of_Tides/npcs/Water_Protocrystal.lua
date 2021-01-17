@@ -7,6 +7,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Tides/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     TradeBCNM(player, npc, trade)

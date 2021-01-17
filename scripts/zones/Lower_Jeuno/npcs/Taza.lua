@@ -4,6 +4,7 @@
 -- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

@@ -36,9 +36,9 @@ function onTrade(player, npc, trade)
     end
 end
 
----------------------------------------------
+-----------------------------------
 -- Current Quest, Required Fame and Items
----------------------------------------------
+-----------------------------------
 function gobQuest(player, bagSize)
     currentQuest = {}
     switch (bagSize) : caseof {

@@ -5,6 +5,7 @@
 -- !pos 146.962 7.499 -63.316 236
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local toolList =

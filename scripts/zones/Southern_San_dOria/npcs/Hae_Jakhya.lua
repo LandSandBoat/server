@@ -2,7 +2,7 @@
 -- Area: Southern San d'Oria
 --  NPC: Hae Jakhya
 --  General Info NPC
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

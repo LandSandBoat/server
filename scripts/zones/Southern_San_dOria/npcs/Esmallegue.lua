@@ -3,7 +3,7 @@
 --  NPC: Esmallegue
 --  General Info NPC
 -- !pos 0 2 -83 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

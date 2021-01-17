@@ -7,8 +7,6 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
--- Local Variables
------------------------------------
 
 local clammingItems = {
     1311,  -- Oxblood
@@ -42,10 +40,6 @@ local clammingItems = {
     5123,  -- Jacknife
     5122   -- Bibiki Slug
 }
-
------------------------------------
--- Local Functions
------------------------------------
 
 local function giveClammedItems(player)
 

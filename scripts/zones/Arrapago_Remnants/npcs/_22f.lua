@@ -1,5 +1,6 @@
 
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
+-----------------------------------
 
 function onTrigger(entity, npc)
     if (npc:getInstance():getStage() == 6) and (npc:getInstance():getProgress() >= 11) then

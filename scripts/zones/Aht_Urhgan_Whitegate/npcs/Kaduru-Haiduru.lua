@@ -4,6 +4,7 @@
 -- Teleport NPC
 -----------------------------------
 require("scripts/globals/zone")
+-----------------------------------
 
 local function canUse_KaduruHaiduru_Service(player)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")

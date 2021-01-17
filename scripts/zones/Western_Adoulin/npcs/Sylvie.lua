@@ -10,6 +10,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     -- DANCES WITH LUOPANS

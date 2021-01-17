@@ -3,7 +3,7 @@
 --   NPC: Mih Ketto
 -- Type: Standard NPC
 -- !pos 24.046 -17 32.751 237
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

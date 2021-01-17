@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+-----------------------------------
 
 local path =
 {

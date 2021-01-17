@@ -7,6 +7,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
+-----------------------------------
 
 local keyitems = {
     [0] = {

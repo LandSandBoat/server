@@ -4,10 +4,10 @@
 -- Adventurer's Assistant
 -- Only recieving Adv.Coupon and simple talk event are scrited
 -- This NPC participates in Quests and Missions
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/settings")
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true) then

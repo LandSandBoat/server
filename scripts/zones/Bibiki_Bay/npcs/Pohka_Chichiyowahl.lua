@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

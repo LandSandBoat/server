@@ -3,7 +3,7 @@
 --   NPC: Dienger
 -- Type: Melody Minstrel
 -- !pos -46.448 -6.312 212.384 238
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
 

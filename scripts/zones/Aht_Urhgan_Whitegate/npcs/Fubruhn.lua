@@ -2,7 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Fubruhn
 -- Mog Locker NPC
---
+-----------------------------------
 -- Event IDs:
 -- 600 = Not a mercenary + mog locker options
 -- 1st arg = Amount of time left on lease, as seconds past 2001/12/31 15:00:00.
@@ -15,10 +15,10 @@
 -- 6th arg =
 -- 7th arg =
 -- 8th arg = The number of days your lease is currently valid for
---
+-----------------------------------
 -- 601 = Lease increased
 -- 1st arg = number of seconds from 2001/12/31 15:00:00 it is valid till.
---
+-----------------------------------
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
@@ -27,6 +27,7 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/moghouse")
+-----------------------------------
 
 function getNumberOfCoinsToUpgradeSize(size)
     if size == 30 then

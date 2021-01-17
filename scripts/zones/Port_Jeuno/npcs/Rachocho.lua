@@ -3,7 +3,7 @@
 --   NPC: Rachocho
 -- Type: Standard NPC
 -- !pos 3.789 7 -59.411 246
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

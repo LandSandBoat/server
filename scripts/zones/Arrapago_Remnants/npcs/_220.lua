@@ -1,5 +1,6 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
+-----------------------------------
 
 function onTrigger(entity, npc)
     entity:startEvent(300)

@@ -3,7 +3,7 @@
 --  NPC: Authere
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos 33 1 -31 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

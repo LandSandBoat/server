@@ -8,6 +8,7 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) ~= QUEST_AVAILABLE and npcUtil.tradeHas(trade, {{768, 4}}) then

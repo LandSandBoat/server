@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 require("scripts/globals/keyitems")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

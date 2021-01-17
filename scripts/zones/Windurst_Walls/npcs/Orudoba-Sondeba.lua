@@ -3,7 +3,7 @@
 --   NPC: Orudoba-Sondeba
 -- Type: Standard NPC
 -- !pos 70.086 -3.503 -69.939 239
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

@@ -3,7 +3,7 @@
 --  NPC: Emilia
 -- Type: Standard Dialogue NPC
 -- !pos -39.840 -2.000 -5.403 231
---
+-----------------------------------
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

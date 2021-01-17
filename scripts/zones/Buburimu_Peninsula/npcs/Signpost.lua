@@ -3,6 +3,7 @@
 -- NPC:  Signpost
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

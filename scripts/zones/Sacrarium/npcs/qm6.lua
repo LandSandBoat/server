@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

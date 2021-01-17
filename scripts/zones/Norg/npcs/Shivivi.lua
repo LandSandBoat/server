@@ -8,6 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 require("scripts/globals/pathfind")
+-----------------------------------
 
 local path =
 {

@@ -26,7 +26,7 @@ function onTrigger(player, npc)
         player:startEvent(96) -- Standard dialog
     end
 end
---
+-----------------------------------
 function onEventUpdate(player, csid, option)
 end
 

@@ -3,7 +3,7 @@
 --   NPC: Synergy Engineer
 -- Type: Standard NPC
 -- !pos 37.700 -0.3 -50.500 236
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

@@ -5,7 +5,7 @@
 --  Involved in Mission: The Road Forks
 --  Involved in Mission: Promathia Mission 5 - Three Paths
 -- !pos 96.432 -0.520 134.046 231
---
+-----------------------------------
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------

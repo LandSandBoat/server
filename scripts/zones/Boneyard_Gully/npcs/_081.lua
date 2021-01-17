@@ -3,6 +3,7 @@
 -- NPC:  _081 (Dark Miasma)
 -----------------------------------
 require("scripts/globals/bcnm")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     TradeBCNM(player, npc, trade)

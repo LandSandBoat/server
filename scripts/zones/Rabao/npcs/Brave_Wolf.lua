@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Rabao/IDs")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

@@ -7,7 +7,7 @@
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
-
+-----------------------------------
 
 function onTrade(player, npc, trade)
 

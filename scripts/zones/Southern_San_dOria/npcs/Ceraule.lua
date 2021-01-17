@@ -3,7 +3,7 @@
 --  NPC: Ceraule
 --  General Info NPC
 -- !pos -86 2 -35 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

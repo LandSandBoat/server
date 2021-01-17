@@ -7,6 +7,7 @@ require("scripts/globals/quests")
 require("scripts/globals/limbus")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
 
 local loot =
 {

@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
+-----------------------------------
 
 function onTrigger(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.spiral_hell, player, ID.mob.MOKUMOKUREN)

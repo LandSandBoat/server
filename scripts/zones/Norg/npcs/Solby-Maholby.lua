@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

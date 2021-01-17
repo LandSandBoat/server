@@ -22,10 +22,6 @@ function onTrade(player, npc, trade)
 
 end
 
------------------------------------
--- Event Check
------------------------------------
-
 function testflag(set, flag)
     return (set % (2*flag) >= flag)
 end

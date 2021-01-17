@@ -5,6 +5,7 @@
 -- !pos -182 -15 -19 151
 -----------------------------------
 local CASTLE_OZTROJA = require("scripts/zones/Castle_Oztroja/globals")
+-----------------------------------
 
 function onTrigger(player, npc)
     CASTLE_OZTROJA.handleOnTrigger(npc)

@@ -3,7 +3,7 @@
 --  NPC: Chanpau
 -- Optional Involvement in Quest: A Squire's Test II
 -- !pos -152 -2 55 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
 

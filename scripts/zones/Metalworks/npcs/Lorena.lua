@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
+-----------------------------------
 
 local keyitems = {
     [0] = {

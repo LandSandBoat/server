@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Batallia Downs
 --  NPC: qm4 (???)
---
+-----------------------------------
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/missions")

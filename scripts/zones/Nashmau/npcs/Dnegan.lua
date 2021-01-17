@@ -6,7 +6,7 @@
 -- !pos 29.89 -6 55.83 53
 -----------------------------------
 require("scripts/globals/quests")
-
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

@@ -2,12 +2,12 @@
 -- Area: Southern San d'Oria
 --  NPC: Maugie
 -- Type: General Info NPC
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 12) -- FLYERS FOR REGINE

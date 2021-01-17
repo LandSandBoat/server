@@ -2,9 +2,9 @@
 -- Area: Windurst Woods
 --  NPC: Panoquieur, T.K.
 -- !pos -60 0 -31 241
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.SANDORIA
 local guardType   = tpz.conq.guard.FOREIGN

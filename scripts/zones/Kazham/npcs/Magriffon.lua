@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Kazham/IDs")
-
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then

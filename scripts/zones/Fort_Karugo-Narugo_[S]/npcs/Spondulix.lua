@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

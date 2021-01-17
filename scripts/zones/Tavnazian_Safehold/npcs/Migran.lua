@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

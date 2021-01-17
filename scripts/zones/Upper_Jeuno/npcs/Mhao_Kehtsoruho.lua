@@ -3,7 +3,7 @@
 --   NPC: Mhao Kehtsoruho
 -- Type: Past Event Watcher
 -- !pos -73.032 -1 146.919 244
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

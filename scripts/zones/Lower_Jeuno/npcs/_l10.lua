@@ -5,6 +5,7 @@
 -- !pos -18 0 -4 245
 -----------------------------------
 require("scripts/zones/Lower_Jeuno/globals")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

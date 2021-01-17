@@ -7,6 +7,7 @@ require("scripts/globals/battlefield")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+
 local loot =
 {
     -- BCNM Steamed Sprouts

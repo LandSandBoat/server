@@ -3,7 +3,7 @@
 --  NPC: Raimbroy
 -- Starts and Finishes Quest: The Sweetest Things
 -- !zone 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

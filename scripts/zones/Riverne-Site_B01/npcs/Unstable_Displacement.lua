@@ -7,6 +7,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/bcnm")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET

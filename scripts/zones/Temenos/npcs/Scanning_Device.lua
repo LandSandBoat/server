@@ -4,6 +4,7 @@
 -- !pos 586 0 66 37
 -----------------------------------
 require("scripts/globals/npc_util")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if npcUtil.tradeHas(trade, 2127) then

@@ -2,7 +2,7 @@
 -- Area: Southern San d'Oria
 --  NPC: Lotte
 -- General Info NPC
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

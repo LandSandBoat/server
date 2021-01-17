@@ -3,7 +3,7 @@
 --   NPC: Eddy
 -- Type: NPC Quest Giver
 -- !pos -5.209 -8.999 39.833 232
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

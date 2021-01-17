@@ -13,10 +13,7 @@ require("scripts/globals/quests")
 function onTrade(player, npc, trade)
 end
 
------------------------------------
 -- If it's the first Hands quest
------------------------------------
-
 function nbHandsQuestsCompleted(player)
 
     local questNotAvailable = 0

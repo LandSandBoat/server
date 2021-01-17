@@ -9,6 +9,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)

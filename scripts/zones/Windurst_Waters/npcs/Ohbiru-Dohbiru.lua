@@ -10,6 +10,7 @@ require("scripts/globals/common")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)

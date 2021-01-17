@@ -3,7 +3,7 @@
 --  NPC: Pellimie
 -- Type: Standard Dialogue NPC
 -- !pos 145.459 0.000 131.540 231
---
+-----------------------------------
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

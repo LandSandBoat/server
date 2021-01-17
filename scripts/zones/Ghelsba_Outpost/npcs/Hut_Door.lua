@@ -2,12 +2,13 @@
 -- Area: Ghelsba_Outpost
 -- NPC:  Hut Door
 -- !pos -165.357 -11.672 77.771 140
--------------------------------------
+-----------------------------------
 require("scripts/globals/bcnm")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     TradeBCNM(player, npc, trade)

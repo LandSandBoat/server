@@ -2,9 +2,9 @@
 -- Area: Northern Sandoria
 --  NPC: Yevgeny, I.M.
 -- !pos 45 -1 0 231
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.BASTOK
 local guardType   = tpz.conq.guard.FOREIGN

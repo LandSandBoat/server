@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Ifrit's Cauldron
 --  NPC: Altar of Ashes
 -- Involved in Quest: Greetings to the Guardian

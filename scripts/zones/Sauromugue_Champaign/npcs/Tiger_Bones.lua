@@ -3,11 +3,11 @@
 --  NPC: Tiger Bones
 -- Involed in Quest: The Fanged One
 -- !pos 666 -8 -379 120
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

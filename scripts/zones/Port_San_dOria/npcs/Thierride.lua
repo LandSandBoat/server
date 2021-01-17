@@ -3,7 +3,7 @@
 --   NPC: Thierride
 -- Type: Quest Giver
 -- !pos -67 -5 -28 232
---
+-----------------------------------
 -- Starts and Finishes Quest: A Taste For Meat
 -----------------------------------
 require("scripts/globals/settings")

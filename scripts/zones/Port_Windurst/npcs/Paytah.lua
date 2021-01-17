@@ -3,7 +3,7 @@
 --   NPC: Paytah
 -- Type: Standard NPC
 -- !pos 77.550 -6 117.769 240
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

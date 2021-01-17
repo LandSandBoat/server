@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+-----------------------------------
 
 function onTrigger(player, npc)
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.BREAKING_BARRIERS and player:getCharVar("MissionStatus") == 3

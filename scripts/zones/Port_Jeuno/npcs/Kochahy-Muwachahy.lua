@@ -2,9 +2,9 @@
 -- Area: Port Jeuno
 --  NPC: Kochahy-Muwachahy
 -- !pos 40 0 6 246
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.OTHER
 local guardType   = tpz.conq.guard.CITY

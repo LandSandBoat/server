@@ -1,9 +1,10 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
 --  NPC: Moogle
---
+-----------------------------------
 -----------------------------------
 require("scripts/globals/moghouse")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     moogleTrade(player, npc, trade)

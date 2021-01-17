@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Behemoths_Dominion/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

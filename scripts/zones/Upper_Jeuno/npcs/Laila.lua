@@ -3,7 +3,7 @@
 --   NPC: Laila
 -- Type: Job Quest Giver
 -- !pos -54.045 -1 100.996 244
---
+-----------------------------------
 --TODO--
 -- make sure the surrounding npcs react to the player accordingly after each quest. There are a few event IDs that I don't recall using
 -- make global variables for all these event hexvalues and put them in textids

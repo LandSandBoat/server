@@ -3,7 +3,7 @@
 --   NPC: Serukoko
 -- Type: Standard NPC
 -- !pos -54.916 -7.499 114.855 238
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
 

@@ -3,7 +3,7 @@
 --  NPC: Moozo-Koozo
 --  Title Change NPC
 -- !pos 83 0 120 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")

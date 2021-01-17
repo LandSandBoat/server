@@ -3,7 +3,7 @@
 --  NPC: Rumoie
 -- Type: Map Marker NPC
 -- !pos 149.696 -2.000 151.631 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

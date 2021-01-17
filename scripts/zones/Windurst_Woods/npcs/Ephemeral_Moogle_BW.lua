@@ -6,6 +6,7 @@
 -- !pos -34.840 -1.250 -114.490 241 - Weaver's Guild
 -----------------------------------
 require("scripts/globals/ephemeral")
+-----------------------------------
 
 local triggerEvent = 895
 local tradeEvent = 897

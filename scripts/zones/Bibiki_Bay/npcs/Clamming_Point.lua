@@ -5,8 +5,6 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
--- Local Variables
------------------------------------
 
 -- clammingItems = item id, weight, drop rate, improved drop rate
 local clammingItems = {
@@ -41,10 +39,6 @@ local clammingItems = {
     5123, 11, 0.628, 0.892, -- Jacknife
     5122,  3, 1.000, 1.000  -- Bibiki Slug
 }
-
------------------------------------
--- Local Functions
------------------------------------
 
 local function giveImprovedResults(player)
 

@@ -2,9 +2,9 @@
 -- Area: Port Windurst
 --  NPC: Sachetan, I.M.
 -- !pos -82 -5 165 z 240
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.BASTOK
 local guardType   = tpz.conq.guard.FOREIGN

@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     TradeBCNM(player, npc, trade)

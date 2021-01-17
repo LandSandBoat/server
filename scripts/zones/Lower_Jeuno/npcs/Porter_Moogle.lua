@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/porter_moogle_util")
+-----------------------------------
 
 local e =
 {

@@ -3,7 +3,7 @@
 --  NPC: Ephauge
 --  General Info NPC
 -- !pos -2 -2 45 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

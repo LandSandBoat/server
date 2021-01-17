@@ -3,7 +3,7 @@
 --   NPC: Gatih Mijurabi
 -- Type: Standard NPC
 -- !pos 58.249 -13.086 -49.084 250
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local ID = require("scripts/zones/Kazham/IDs")

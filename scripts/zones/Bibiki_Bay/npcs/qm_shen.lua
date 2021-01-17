@@ -5,6 +5,7 @@
 -- !pos -115.108 0.300 -724.664 4
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (not GetMobByID(ID.mob.SHEN):isSpawned() and trade:hasItemQty(1823, 1) and trade:getItemCount() == 1) then

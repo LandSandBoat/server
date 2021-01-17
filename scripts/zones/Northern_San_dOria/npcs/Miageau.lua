@@ -3,7 +3,7 @@
 --   NPC: Miageau
 -- Type: Quest Giver NPC
 -- !pos 115 0 108 231
---
+-----------------------------------
 -- Starts and Finishes: Waters of Cheval
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")

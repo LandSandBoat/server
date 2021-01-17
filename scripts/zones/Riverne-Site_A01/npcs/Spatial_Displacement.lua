@@ -3,6 +3,7 @@
 --  NPC: Spacial Displacement
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_A01/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

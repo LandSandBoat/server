@@ -3,7 +3,7 @@
 --   NPC: Loulia
 -- Type: Room Renters
 -- !pos -176.212 -9 -25.049 235
---
+-----------------------------------
 -- Auto-Script: Requires Verification. Validated standard dialog - thrydwolf 12/8/2011
 -----------------------------------
 

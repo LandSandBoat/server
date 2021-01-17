@@ -5,7 +5,7 @@
 -- Involved in quest: Sharpening the Sword, Riding on the Clouds
 -- !pos -190 -3 97 230
 -- csid: 52  732  733  734  735  736  737  738  739  740  741
-------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")

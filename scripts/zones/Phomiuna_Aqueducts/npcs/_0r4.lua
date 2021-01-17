@@ -3,6 +3,7 @@
 --  NPC: _0r4 (Ornate Gate)
 -- !pos -89.500 -25.500 60.000 27
 -----------------------------------
+
 function onTrade(player, npc, trade)
 end
 

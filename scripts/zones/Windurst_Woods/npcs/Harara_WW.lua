@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Harara, W.W.
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.WINDURST
 local guardType   = tpz.conq.guard.CITY

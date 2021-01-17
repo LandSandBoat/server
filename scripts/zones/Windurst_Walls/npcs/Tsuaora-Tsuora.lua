@@ -3,7 +3,7 @@
 --   NPC: Tsuaora-Tsuora
 -- Type: Standard NPC
 -- !pos 71.489 -3.418 -67.809 239
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 

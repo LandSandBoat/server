@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     onHalloweenTrade(player, trade, npc)

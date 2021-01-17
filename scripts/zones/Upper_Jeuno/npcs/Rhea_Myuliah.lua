@@ -3,7 +3,7 @@
 --   NPC: Rhea Myuliah
 -- Type: Standard NPC
 -- !pos -56.220 -1 101.805 244
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")

@@ -2,9 +2,9 @@
 -- Area: Lower Jeuno
 --  NPC:Alrauverat
 -- !pos -101 0 -182 245
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.OTHER
 local guardType   = tpz.conq.guard.CITY

@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/keyitems")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

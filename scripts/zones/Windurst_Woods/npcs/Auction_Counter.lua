@@ -3,6 +3,7 @@
 --  NPC: Auction Counter
 -----------------------------------
 require("scripts/quests/tutorial")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

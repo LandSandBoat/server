@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/quests")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

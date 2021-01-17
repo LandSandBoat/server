@@ -3,7 +3,7 @@
 --  NPC: Reet
 -- Adventurer's Assistant
 -- !pos -237 -12 -41 235
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/settings")
 -----------------------------------

@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Windurst Walls
 --  NPC: Selulu
 -- Type: Item Deliverer

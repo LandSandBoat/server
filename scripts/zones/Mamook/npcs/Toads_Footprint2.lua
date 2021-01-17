@@ -4,6 +4,7 @@
 -- !pos -42.9248 5.9847 -100.2972
 -----------------------------------
 local ID = require("scripts/zones/Mamook/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

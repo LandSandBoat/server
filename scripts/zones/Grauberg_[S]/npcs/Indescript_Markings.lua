@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Grauberg [S]
 --  NPC: Indescript Markings
 -- Type: Quest

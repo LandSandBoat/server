@@ -3,6 +3,7 @@
 --  NPC: Artisan Moogle
 -----------------------------------
 require("scripts/globals/artisan")
+-----------------------------------
 
 function onTrigger(player, npc)
     tpz.artisan.moogleOnTrigger(player, npc)

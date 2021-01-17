@@ -3,7 +3,7 @@
 --   NPC: Zelala
 -- Type: Map Marker
 -- !pos 169.855 -1.295 -3.238 238
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
 

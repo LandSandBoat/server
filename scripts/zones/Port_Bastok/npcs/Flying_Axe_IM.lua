@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Flying Axe, I.M.
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.BASTOK
 local guardType   = tpz.conq.guard.CITY

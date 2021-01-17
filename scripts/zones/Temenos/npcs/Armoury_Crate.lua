@@ -6,6 +6,7 @@ require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
 
 local loot =
 {

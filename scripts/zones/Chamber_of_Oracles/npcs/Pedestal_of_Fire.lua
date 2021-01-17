@@ -3,12 +3,12 @@
 --  NPC: Pedestal of Fire
 -- Involved in Zilart Mission 7
 -- !pos 199 -2 36 168
--------------------------------------
+-----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Chamber_of_Oracles/IDs")
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

@@ -3,7 +3,7 @@
 --  NPC: Rouva
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -17 2 10 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

@@ -3,7 +3,7 @@
 --   NPC: Vamorcote
 -- Starts and Finishes Quest: The Setting Sun
 -- !pos -137.070 10.999 161.855 231
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")

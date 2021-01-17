@@ -3,6 +3,7 @@
 --  NPC: Chocobo
 -- Chocobo
 -----------------------------------
+
 function onTrade(player, npc, trade)
 end
 

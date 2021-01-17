@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/limbus")
+-----------------------------------
 
 function onTrade(player,npc,trade)
 end

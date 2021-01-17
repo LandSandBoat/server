@@ -2,9 +2,9 @@
 -- Area: Upper Jeuno
 --  NPC: Emitt
 -- !pos -95 0 160 244
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.OTHER
 local guardType   = tpz.conq.guard.CITY

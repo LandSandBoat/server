@@ -3,7 +3,7 @@
 --  NPC: Deraquien
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -98 -2 31 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------

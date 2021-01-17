@@ -10,12 +10,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 
------------------------------------
--- [race] = {body, hands, legs, feet}
------------------------------------
-
 local rse_map =
 {
+    -- [race] = {body, hands, legs, feet}
     [tpz.race.HUME_M]   = {12654, 12761, 12871, 13015},
     [tpz.race.HUME_F]   = {12655, 12762, 12872, 13016},
     [tpz.race.ELVAAN_M] = {12656, 12763, 12873, 13017},

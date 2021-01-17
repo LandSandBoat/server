@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Mamook/IDs")
 require("scripts/globals/npc_util")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

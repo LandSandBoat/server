@@ -3,6 +3,7 @@
 --  NPC: Rothais
 -- Involved in Quest: Gourmet
 -----------------------------------
+
 function onTrade(player, npc, trade)
 end
 

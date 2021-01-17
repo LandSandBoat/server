@@ -1,10 +1,10 @@
 -----------------------------------
 -- Area: Sacrificial Chamber
 --  NPC: Armoury Crate
--------------------------------------
+-----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/bcnm")
--------------------------------------
+-----------------------------------
 
 local loot =
 {

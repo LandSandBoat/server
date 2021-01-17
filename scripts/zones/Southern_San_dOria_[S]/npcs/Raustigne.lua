@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/settings")
-
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

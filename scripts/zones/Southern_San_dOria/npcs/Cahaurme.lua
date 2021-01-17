@@ -3,7 +3,7 @@
 --  NPC: Cahaurme
 -- Involved in Quest: A Knight's Test, Lost Chick
 -- !pos 55.749 -8.601 -29.354 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------

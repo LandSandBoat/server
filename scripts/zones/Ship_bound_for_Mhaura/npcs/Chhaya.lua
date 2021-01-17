@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Ship_bound_for_Mhaura/IDs")
 require("scripts/globals/shop")
-
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

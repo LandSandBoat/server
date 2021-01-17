@@ -5,7 +5,7 @@
 -- Only recieving Adv.Coupon and simple talk event are scripted
 -- This NPC participates in Quests and Missions
 -- !pos -8 1 1 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/settings")
 -----------------------------------

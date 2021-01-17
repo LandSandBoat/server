@@ -2,9 +2,9 @@
 -- Area: Bastok Mines
 --  NPC: Crying Wind, I.M.
 -- !pos -2 -1 -119 234
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.BASTOK
 local guardType   = tpz.conq.guard.CITY

@@ -3,7 +3,7 @@
 --  NPC: Baunise
 -- Involved in Quest: A Knight's Test
 -- !pos -55 -8 -32 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")

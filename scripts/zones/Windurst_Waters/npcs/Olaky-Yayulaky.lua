@@ -3,7 +3,7 @@
 --   NPC: Olaky-Yayulaky
 -- Type: Item Depository
 -- !pos -61.247 -4.5 72.551 238
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
 

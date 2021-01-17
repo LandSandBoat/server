@@ -11,7 +11,6 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 
 function onTrade(player, npc, trade)
---
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(922, 2) and trade:getItemCount() == 2) then
             player:startEvent(18)
@@ -35,7 +34,6 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
---
     if (csid == 19 and option == 1) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FEAR_OF_THE_DARK)
     elseif (csid == 18) then

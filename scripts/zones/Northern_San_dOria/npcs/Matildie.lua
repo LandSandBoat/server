@@ -2,10 +2,10 @@
 -- Area: Northern San d'Oria
 --  NPC: Matildie
 -- Adventurer's Assistant
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/settings")
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (trade:getItemCount() == 1 and trade:hasItemQty(536, 1) == true) then

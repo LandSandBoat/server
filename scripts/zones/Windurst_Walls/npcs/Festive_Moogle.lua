@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 -----------------------------------
+
 local stock = {
     16119,  -- Nomad Cap
     16118,  -- Moogle Cap

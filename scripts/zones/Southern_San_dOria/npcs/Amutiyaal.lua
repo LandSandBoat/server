@@ -3,7 +3,7 @@
 --  NPC: Amutiyaal
 --  Warp NPC (Aht Urhgan)
 -- !pos 116 0.1 84 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
@@ -11,7 +11,7 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
--------------------------------------
+-----------------------------------
 
 --[[
 Bitmask Designations:

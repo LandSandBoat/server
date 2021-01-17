@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+
 function onSpawn(npc)
 
     local elevator =

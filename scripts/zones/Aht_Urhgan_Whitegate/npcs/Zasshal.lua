@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

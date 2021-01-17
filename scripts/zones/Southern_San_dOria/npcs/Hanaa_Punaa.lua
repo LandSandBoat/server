@@ -3,7 +3,7 @@
 --  NPC: Hanaa Punaa
 -- Starts and Finishes: A Squire's Test, A Squire's Test II, A Knight's Test
 -- !zone 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

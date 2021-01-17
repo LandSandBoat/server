@@ -3,7 +3,7 @@
 --   NPC: Hayris
 -- Type: Standard NPC
 -- !pos 45.296 -7.282 12.267 252
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

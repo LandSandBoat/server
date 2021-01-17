@@ -6,6 +6,7 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Yahse_Hunting_Grounds/IDs")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

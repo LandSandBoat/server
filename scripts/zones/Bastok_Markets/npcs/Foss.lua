@@ -7,6 +7,7 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BUCKETS_OF_GOLD) >= QUEST_ACCEPTED and npcUtil.tradeHas(trade, {{90, 5}})) then

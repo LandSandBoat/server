@@ -4,6 +4,7 @@
 -- Standard Info NPC
 -----------------------------------
 require("scripts/globals/pathfind")
+-----------------------------------
 
 local path =
 {

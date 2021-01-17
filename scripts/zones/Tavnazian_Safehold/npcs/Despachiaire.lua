@@ -2,9 +2,6 @@
 -- Area: Tavnazian Safehold
 --  NPC: Despachiaire
 -- !pos 108 -40 -83 26
------------------------------------
-require("scripts/globals/missions")
------------------------------------
 -- TODO:
 -- Starts quests: "X Marks the Spot"
 --                "Elderly Pursuits"
@@ -12,6 +9,9 @@ require("scripts/globals/missions")
 --                "Requiem of Sin"
 -- Involved in:   "Secrets of Ovens Lost"
 -- https://github.com/project-topaz/topaz/issues/1481
+-----------------------------------
+require("scripts/globals/missions")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

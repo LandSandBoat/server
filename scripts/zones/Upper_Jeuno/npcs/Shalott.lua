@@ -2,8 +2,7 @@
 -- Area: Upper Jeuno
 --  NPC: Shalott
 -- Optional Involvement in Quest: Save My Son
---------------------------------
-
+-----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
 
@@ -11,7 +10,6 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
         player:startEvent(101)
     else

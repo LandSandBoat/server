@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Batallia_Downs/IDs")
 require("scripts/globals/keyitems")
+-----------------------------------
 
 function onTrigger(player, npc)
     local sturmtigerKilled = player:getCharVar("SturmtigerKilled")

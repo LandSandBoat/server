@@ -2,9 +2,9 @@
 -- Area: Rulude Gardens
 --  NPC: Morlepiche
 -- !pos -95 0 160 243
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.OTHER
 local guardType   = tpz.conq.guard.CITY

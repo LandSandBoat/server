@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

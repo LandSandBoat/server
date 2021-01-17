@@ -237,7 +237,6 @@ local relicArmorPlusOne =
 -- ancient beastcoin purchases
 -- [menu option] = {item = itemId, abc = costInABCs}
 -----------------------------------
-
 local abcShop =
 {
     [11] = {item = 15244, abc = 150}, -- flawless_ribbon
@@ -251,8 +250,6 @@ local abcShop =
     [19] = {item = 15961, abc =  75}, -- musical_earring
     [20] = {item =  2127, abc =  75}, -- metal_chip
 }
-
------------------------------------
 
 local COSMO_READY = 2147483649 -- BITMASK for the purchase
 

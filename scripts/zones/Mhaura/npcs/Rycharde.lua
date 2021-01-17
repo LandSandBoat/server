@@ -13,7 +13,7 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/keyitems")
-
+-----------------------------------
 
 --   player:startEvent(74) -- first quest completed ok
 --   player:startEvent(75) -- nothing to do

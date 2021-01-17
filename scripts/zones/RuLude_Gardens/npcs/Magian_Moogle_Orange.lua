@@ -9,8 +9,6 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/magiantrials")
 -----------------------------------
-tpz = tpz or {}
-tpz.magian = tpz.magian or {}
 
 function onTrade(player,npc,trade)
     if ENABLE_MAGIAN_TRIALS ~= 1 then

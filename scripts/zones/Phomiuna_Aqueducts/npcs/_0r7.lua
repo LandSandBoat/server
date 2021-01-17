@@ -3,6 +3,7 @@
 --  NPC: _0r7 (Wooden Gate)
 -- !pos 118.625 -25.500 20.000 27
 -----------------------------------
+
 function onTrade(player, npc, trade)
 end
 

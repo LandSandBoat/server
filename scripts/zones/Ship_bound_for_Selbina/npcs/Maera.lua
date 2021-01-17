@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Ship_bound_for_Selbina/IDs")
 require("scripts/globals/shop")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

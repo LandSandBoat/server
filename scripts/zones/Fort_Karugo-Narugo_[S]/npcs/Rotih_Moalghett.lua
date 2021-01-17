@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Fort Karugo Narugo [S]
 --  NPC: Rotih_Moalghett
 -- Type: Quest

@@ -2,7 +2,7 @@
 -- Area: Stellar Fulcrum
 -- Door: Qe'Lov Gate
 -- !pos -520 -4 17 179
--------------------------------------
+-----------------------------------
 
 require("scripts/globals/bcnm")
 

@@ -3,7 +3,7 @@
 --   NPC: Nivorajean
 -- Type: Standard NPC
 -- !pos 15.890 -22.999 13.322 26
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

@@ -3,7 +3,7 @@
 --  NPC: Collione
 --  General Info NPC
 -- !pos 10 2 -66 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

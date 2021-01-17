@@ -3,7 +3,7 @@
 --   NPC: Disserond, R.K.
 -- Type: Campaign Arbiter
 -- !pos 76.178 -60.763 -48.775 136
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

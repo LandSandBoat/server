@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Achatere, T.K.
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.SANDORIA
 local guardType   = tpz.conq.guard.CITY

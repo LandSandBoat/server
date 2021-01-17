@@ -3,7 +3,7 @@
 --   NPC: Dabbio
 -- Type: Standard NPC
 -- !pos -7.819 -15 -106.990 232
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

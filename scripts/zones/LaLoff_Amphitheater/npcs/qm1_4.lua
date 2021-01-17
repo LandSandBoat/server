@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: LaLoff_Amphitheater
 -- NPC:  Shimmering Circle (BCNM Entrances)
--------------------------------------
+-----------------------------------
 
 require("scripts/globals/bcnm")
 

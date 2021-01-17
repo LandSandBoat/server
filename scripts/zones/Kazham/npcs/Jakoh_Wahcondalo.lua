@@ -9,6 +9,7 @@
 require("scripts/globals/missions")
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Kazham/IDs")
+-----------------------------------
 
 local wsQuest = tpz.wsquest.evisceration
 

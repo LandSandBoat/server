@@ -3,7 +3,7 @@
 --   NPC: Icoua
 -- Type: Standard NPC
 -- !pos 87.719 -1 9.256 231
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 

@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Milma-Hapilma, W.W.
--------------------------------------
+-----------------------------------
 require("scripts/globals/conquest")
--------------------------------------
+-----------------------------------
 
 local guardNation = tpz.nation.WINDURST
 local guardType   = tpz.conq.guard.CITY

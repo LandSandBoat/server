@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/missions")
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

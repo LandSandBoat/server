@@ -10,6 +10,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     local DNGITL = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DO_NOT_GO_INTO_THE_LIGHT)

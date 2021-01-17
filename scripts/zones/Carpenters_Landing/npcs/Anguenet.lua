@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/npc_util")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if 

@@ -3,7 +3,7 @@
 --  NPC: Coderiant
 --  General Info NPC
 -- !pos -111 -2 33 230
--------------------------------------
+-----------------------------------
 
 function onTrade(player, npc, trade)
 end

@@ -5,6 +5,7 @@
 -- !pos 100 -7 -13 252
 -----------------------------------
 require("scripts/globals/npc_util")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, { 1695, 4297, 4506 }) -- Habaneros, Black Curry, Mutton Tortilla

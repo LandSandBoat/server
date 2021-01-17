@@ -5,6 +5,7 @@
 -- Moogle scripts are in each zone, calling a function from moghouse.lua
 -----------------------------------
 require("scripts/globals/moghouse")
+-----------------------------------
 
 function onTrade(player, npc, trade)
     moogleTrade(player, npc, trade)
