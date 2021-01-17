@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:addMod(tpz.mod.AUTO_SCHURZEN, 1)
@@ -18,3 +19,5 @@ end
 
 function onManeuverLose(pet, maneuvers)
 end
+
+return attachment_object

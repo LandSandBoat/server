@@ -4,6 +4,7 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     -- We do not have support to do a fraction of a percent so we rounded
@@ -39,3 +40,5 @@ function onUpdate(pet, maneuvers)
     end
     updateModPerformance(pet, tpz.mod.REFRESH, 'mana_tank_mod', power)
 end
+
+return attachment_object

@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:addListener("ENGAGE", "AUTO_TARGETMARKER_ENGAGE", function(pet, target)
@@ -80,3 +81,5 @@ function onManeuverLose(pet, maneuvers)
         pet:setLocalVar("targetmarker", accbonus)
     end
 end
+
+return attachment_object

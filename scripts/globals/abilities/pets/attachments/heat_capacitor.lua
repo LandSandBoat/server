@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     pet:setLocalVar("heat_capacitor", pet:getLocalVar("heat_capacitor") + 1)
@@ -24,3 +25,5 @@ end
 
 function onManeuverLose(pet, maneuvers)
 end
+
+return attachment_object

@@ -4,6 +4,7 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
 function onEquip(pet)
     updateModPerformance(pet, tpz.mod.STORETP, 'inhibitor_ii_mod', 10)
@@ -34,3 +35,5 @@ function onUpdate(pet, maneuvers)
         updateModPerformance(pet, tpz.mod.STORETP, 'inhibitor_ii_mod', 65)
     end
 end
+
+return attachment_object
