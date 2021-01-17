@@ -1,9 +1,10 @@
-------------------------
+-----------------------------------
 --    Myrkr     --
-------------------------
+-----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
+-----------------------------------
 
 function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     -- Apply aftermath

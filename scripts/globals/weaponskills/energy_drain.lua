@@ -1,6 +1,6 @@
-------------------------
+-----------------------------------
 --    Energy Drain    --
-------------------------
+-----------------------------------
 
 function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
    -- TODO: Should steal MP based on TP and not wake the mob involved.

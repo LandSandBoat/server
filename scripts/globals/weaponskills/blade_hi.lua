@@ -11,11 +11,11 @@
 -- Skillchain Properties: Darkness/Gravitation
 -- 100%TP    200%TP    300%TP
 -- 4.00      4.00      4.00
---
+-----------------------------------
 -- params.critical Hit Rate by TP:
 -- 100%TP    200%TP    300%TP
 -- 15%         20%       25%
---
+-----------------------------------
 -----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/settings")

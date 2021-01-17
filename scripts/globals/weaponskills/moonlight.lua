@@ -1,9 +1,10 @@
-------------------------
+-----------------------------------
 --    Moonlight     --
-------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
+-----------------------------------
 
 function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     local lvl = player:getSkillLevel(11) -- get club skill
