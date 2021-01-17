@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Assault: Seagull Grounded
---
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
 -----------------------------------

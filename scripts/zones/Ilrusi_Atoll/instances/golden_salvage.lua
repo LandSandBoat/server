@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Assault: Golden Salvage
---
+-- TODO: random the chest locations
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 require("scripts/globals/instance")
 -----------------------------------
--- Todo random the chest locations
 
 function afterInstanceRegister(player)
     local instance = player:getInstance()

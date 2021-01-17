@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Assault: Leujaoam Cleansing
---
 -----------------------------------
 require("scripts/globals/instance")
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")

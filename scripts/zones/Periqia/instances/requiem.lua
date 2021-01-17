@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Assault: Requiem
---
+-- TODO: random the chest locations
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
 require("scripts/globals/instance")
 -----------------------------------
--- Todo random the chest locations
 
 function afterInstanceRegister(player)
     local instance = player:getInstance()

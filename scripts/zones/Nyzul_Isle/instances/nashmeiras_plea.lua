@@ -1,7 +1,5 @@
 -----------------------------------
---
--- TOAU-42: Path of Darkness
---
+-- TOAU-44: Nashmeira's Plea
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")

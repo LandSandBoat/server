@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Assault: Wamoura Farm Raid
---
 -----------------------------------
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 -----------------------------------

@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- TOAU-31: Shades of Vengeance
---
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
 require("scripts/globals/instance")

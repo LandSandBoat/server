@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Assault: Extermination
---
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 require("scripts/globals/instance")

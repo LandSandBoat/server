@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Salvage: Arrapago Remnants
---
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/instance")

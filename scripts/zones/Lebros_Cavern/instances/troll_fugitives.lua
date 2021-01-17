@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Assault: Troll Fugitives
---
 -----------------------------------
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/instance")
