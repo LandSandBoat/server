@@ -324,6 +324,9 @@ namespace zoneutils
                     memcpy(&PNpc->look, Sql_GetData(SqlHandle, 14), 20);
 
                     GetZone(ZoneID)->InsertNPC(PNpc);
+
+                    // Cache NPC Lua
+                    luautils::OnEntityLoad(PNpc);
                 }
             }
         }
@@ -511,6 +514,9 @@ namespace zoneutils
                     mobutils::InitializeMob(PMob, GetZone(ZoneID));
 
                     GetZone(ZoneID)->InsertMOB(PMob);
+
+                    // Cache Mob Lua
+                    luautils::OnEntityLoad(PMob);
                 }
             }
         }
@@ -518,7 +524,6 @@ namespace zoneutils
         // handle mob initialise functions after they're all loaded
         ForEachZone([](CZone* PZone) {
             PZone->ForEachMob([](CMobEntity* PMob) {
-                luautils::OnMobLoad(PMob);
                 luautils::OnMobInitialize(PMob);
                 luautils::ApplyMixins(PMob);
                 luautils::ApplyZoneMixins(PMob);

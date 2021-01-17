@@ -56,7 +56,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     // Nil out any existing global instances of onTrigger before anything else!
     lua.set("onTrigger", sol::nil);
 
-    auto filename = fmt::format("scripts/commands/{}.lua", cmdname.c_str());
+    auto filename = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
     auto result   = lua.script_file(filename);
     if (!result.valid())
     {

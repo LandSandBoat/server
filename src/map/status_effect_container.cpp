@@ -147,8 +147,8 @@ namespace effects
                 uint16 sortKey                  = Sql_GetIntData(SqlHandle, 10);
                 EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
 
-                auto filename = fmt::format("scripts/globals/effects/{}.lua", EffectsParams[EffectID].Name);
-                luautils::CacheLuaObject(filename);
+                auto filename = fmt::format("./scripts/globals/effects/{}.lua", EffectsParams[EffectID].Name);
+                luautils::CacheLuaObjectFromFile(filename);
             }
         }
     }

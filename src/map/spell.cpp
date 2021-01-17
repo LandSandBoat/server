@@ -481,6 +481,17 @@ namespace spell
                 }
 
                 PSpellList[static_cast<uint16>(PSpell->getID())] = PSpell;
+
+                auto filename = fmt::format("./scripts/globals/spells/{}.lua", PSpell->getName());
+                if (PSpell->getSpellGroup() == SPELLGROUP_BLUE)
+                {
+                    filename = fmt::format("./scripts/globals/spells/bluemagic/{}.lua", PSpell->getName());
+                }
+                else if (PSpell->getSpellGroup() == SPELLGROUP_TRUST)
+                {
+                    filename = fmt::format("./scripts/globals/spells/trust/{}.lua", PSpell->getName());
+                }
+                luautils::CacheLuaObjectFromFile(filename);
             }
         }
 
