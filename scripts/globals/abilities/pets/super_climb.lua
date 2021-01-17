@@ -8,13 +8,16 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, ability)
+ability_object.onUseAbility = function(pet, target, ability)
     pet:queue(0, function(pet)
         pet:stun(5000)
     end)
 end
+
+return ability_object

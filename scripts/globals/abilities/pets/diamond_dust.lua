@@ -7,8 +7,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
 
 ---------------------------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     local level = player:getMainLvl() * 2
 
     if(player:getMP()<level) then
@@ -18,7 +19,7 @@ function onAbilityCheck(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill, master)
+ability_object.onPetAbility = function(target, pet, skill, master)
     local dINT = math.floor(pet:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
 
     local level = pet:getMainLvl()
@@ -34,3 +35,5 @@ function onPetAbility(target, pet, skill, master)
 
     return damage
 end
+
+return ability_object

@@ -8,7 +8,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local ability_table = {}
+local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0

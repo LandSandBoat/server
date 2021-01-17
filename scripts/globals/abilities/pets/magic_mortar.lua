@@ -6,13 +6,14 @@ require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 ---------------------------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(tpz.effect.LIGHT_MANEUVER)
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local ftp
     local tp = skill:getTP()
 
@@ -41,3 +42,5 @@ function onPetAbility(target, automaton, skill, master, action)
     target:takeDamage(damage, pet, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
     return damage
 end
+
+return ability_object

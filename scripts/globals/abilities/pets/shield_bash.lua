@@ -6,12 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 ---------------------------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     return 0
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local chance = 90
     local damage = (automaton:getSkillLevel(tpz.skill.AUTOMATON_MELEE)/2) + automaton:getMod(tpz.mod.SHIELD_BASH)
 
@@ -56,3 +57,5 @@ function onPetAbility(target, automaton, skill, master, action)
 
     return damage
 end
+
+return ability_object

@@ -10,7 +10,7 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_table = {}
+local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
