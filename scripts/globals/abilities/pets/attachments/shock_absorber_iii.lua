@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:setLocalVar("stoneskin", VanadielTime() + 180)
     pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") + 4)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_SHOCK_ABSORBER_III", function(automaton, target)
@@ -16,15 +16,15 @@ function onEquip(pet)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") - 4)
     pet:removeListener("ATTACHMENT_SHOCK_ABSORBER_III")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
 
 return attachment_object

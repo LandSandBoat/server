@@ -5,17 +5,17 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addMod(tpz.mod.EVA, 20)
     pet:addMod(tpz.mod.ACC, -20)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:delMod(tpz.mod.EVA, 20)
     pet:delMod(tpz.mod.ACC, -20)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:addMod(tpz.mod.EVA, 20)
         pet:addMod(tpz.mod.ACC, -20)
@@ -28,7 +28,7 @@ function onManeuverGain(pet, maneuvers)
     end
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:delMod(tpz.mod.EVA, 20)
         pet:delMod(tpz.mod.ACC, -20)

@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("MAGIC_START", "AUTO_ICE_MAKER_START", function(pet, spell, action)
         if spell:getSkillType() ~= tpz.skill.ELEMENTAL_MAGIC then return end
         local master = pet:getMaster()
@@ -40,15 +40,15 @@ function onEquip(pet)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("AUTO_ICE_MAKER_START")
     pet:removeListener("AUTO_ICE_MAKER_END")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
 
 return attachment_object

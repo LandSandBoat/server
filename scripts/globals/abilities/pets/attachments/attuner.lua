@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("ENGAGE", "AUTO_ATTUNER_ENGAGE", function(pet, target)
         local master = pet:getMaster()
         if pet:getLocalVar("attuner") > 0 then
@@ -66,12 +66,12 @@ function onEquip(pet)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("AUTO_ATTUNER_ENGAGE")
     pet:removeListener("AUTO_ATTUNER_DISENGAGE")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     if pet:getLocalVar("attuner") > 0 then
         if maneuvers == 1 then
             pet:addMod(tpz.mod.ATTP, 13) -- Ignore 15% def
@@ -86,7 +86,7 @@ function onManeuverGain(pet, maneuvers)
     end
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     if pet:getLocalVar("attuner") > 0 then
         if maneuvers == 1 then
             pet:delMod(tpz.mod.ATTP, 13) -- Ignore 15% def

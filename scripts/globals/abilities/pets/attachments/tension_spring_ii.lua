@@ -6,24 +6,24 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     onUpdate(pet, 0)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     updateModPerformance(pet, tpz.mod.ATTP, 'tension_ii_attp', 0)
     updateModPerformance(pet, tpz.mod.RATTP, 'tension_ii_rattp', 0)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     onUpdate(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     onUpdate(pet, maneuvers - 1)
 end
 
-function onUpdate(pet, maneuvers)
+attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
         updateModPerformance(pet, tpz.mod.ATTP, 'tension_ii_attp', 6)
         updateModPerformance(pet, tpz.mod.RATTP, 'tension_ii_rattp', 6)
