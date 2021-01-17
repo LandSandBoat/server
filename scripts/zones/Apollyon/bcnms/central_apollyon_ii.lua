@@ -4,11 +4,12 @@
 -----------------------------------
 require("scripts/globals/limbus")
 require("scripts/globals/battlefield")
-
+-----------------------------------
 
 -- After registering the BCNM via bcnmRegister(bcnmid)
 function onBattlefieldRegister(player, battlefield)
 end
+
 function onBattlefieldTick(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end

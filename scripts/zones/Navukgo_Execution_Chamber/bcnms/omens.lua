@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
-----------------------------------------
+-----------------------------------
 
 function onBattlefieldInitialise(battlefield)
 end

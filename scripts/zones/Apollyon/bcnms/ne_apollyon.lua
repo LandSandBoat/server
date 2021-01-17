@@ -6,6 +6,7 @@ require("scripts/globals/limbus")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
 
 function onBattlefieldInitialise(battlefield)
     battlefield:setLocalVar("randomF1", math.random(1,6))

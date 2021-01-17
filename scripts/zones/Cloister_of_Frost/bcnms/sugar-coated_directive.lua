@@ -1,10 +1,10 @@
-----------------------------------------
+-----------------------------------
 -- Area: Cloister of Frost
 -- BCNM: Sugar Coated Directive (ASA-4)
-----------------------------------------
+-----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
-----------------------------------------
+-----------------------------------
 
 function onBattlefieldTick(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)

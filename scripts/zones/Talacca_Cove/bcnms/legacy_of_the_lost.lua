@@ -5,7 +5,7 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
-----------------------------------------
+-----------------------------------
 
 function onBattlefieldTick(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)

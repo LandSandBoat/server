@@ -5,7 +5,7 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
-----------------------------------------
+-----------------------------------
 
 function onBattlefieldTick(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
