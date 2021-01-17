@@ -15,19 +15,20 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 1)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS)) and 1 or 0
@@ -37,10 +38,10 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED then
             player:setCharVar("DivineMight", 2) -- Used to use 2 to track completion, so that's preserved to maintain compatibility
@@ -58,3 +59,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return battlefield_object

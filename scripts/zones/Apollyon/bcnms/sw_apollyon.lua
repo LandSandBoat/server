@@ -7,8 +7,9 @@ require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldInitialise(battlefield)
+battlefield_object.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
     battlefield:setLocalVar("lootSpawned", 1)
     SetServerVariable("[SW_Apollyon]Time", battlefield:getTimeLimit()/60)
@@ -20,17 +21,17 @@ function onBattlefieldInitialise(battlefield)
     tpz.limbus.setupArmouryCrates(battlefield:getID())
 end
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
         SetServerVariable("[SW_Apollyon]Time", battlefield:getRemainingTime()/60)
     end
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
     player:delKeyItem(tpz.ki.COSMOCLEANSE)
     player:delKeyItem(tpz.ki.RED_CARD)
     player:setCharVar("Cosmo_Cleanse_TIME", os.time())
@@ -39,12 +40,12 @@ function onBattlefieldEnter(player, battlefield)
     end
 end
 
-function onBattlefieldDestroy(battlefield)
+battlefield_object.onBattlefieldDestroy = function(battlefield)
     tpz.limbus.handleDoors(battlefield, true)
     SetServerVariable("[SW_Apollyon]Time", 0)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     player:messageSpecial(ID.text.HUM+1)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
@@ -53,3 +54,4 @@ function onBattlefieldLeave(player, battlefield, leavecode)
         player:startEvent(32002)
     end
 end
+return battlefield_object

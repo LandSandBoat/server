@@ -5,18 +5,19 @@
 require("scripts/globals/battlefield")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldInitialise(battlefield)
+battlefield_object.onBattlefieldInitialise = function(battlefield)
 end
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
     local mobOffset = (battlefield:getArea() - 1) * 7  -- Offset to spawn correct mob depending on battlefieldNumber
     local track_var = 'entered_'.. player:getName()
     if not (battlefield:getLocalVar(track_var) == 1) then
@@ -25,7 +26,7 @@ function onBattlefieldEnter(player, battlefield)
     end
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
@@ -34,11 +35,12 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 and player:getCharVar("OmensProgress") == 1 then
         player:setCharVar("OmensProgress", 2)
     end
 end
+return battlefield_object

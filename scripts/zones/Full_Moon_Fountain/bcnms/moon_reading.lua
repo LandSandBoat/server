@@ -5,16 +5,23 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldInitialise(battlefield)
+battlefield_object.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
+end
+
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
+end
+
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getCurrentMission(WINDURST) ~= tpz.mission.id.windurst.MOON_READING) and 1 or 0
@@ -24,10 +31,10 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if
         csid == 32001 and
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and
@@ -36,3 +43,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 3)
     end
 end
+
+return battlefield_object
