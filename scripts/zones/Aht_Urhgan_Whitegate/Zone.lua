@@ -12,8 +12,9 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 57, -1, -70, 62, 1, -65) -- Sets Mark for "Got It All" Quest cutscene.
     zone:registerRegion(2, -96, -7, 121, -64, -5, 137) -- Sets Mark for "Vanishing Act" Quest cutscene.
     zone:registerRegion(3, 14, -7, -65, 37, -2, -41) -- TOAU Mission 1 CS area
@@ -21,7 +22,7 @@ function onInitialize(zone)
     zone:registerRegion(5, 73, -7, -137, 95, -3, -115) -- entering Shaharat Teahouse
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -46,11 +47,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Cutscene for Got It All quest.
@@ -105,10 +106,10 @@ function onRegionEnter(player, region)
     }
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     if (transport == 46 or transport == 47) then
         player:startEvent(200)
     elseif (transport == 58 or transport == 59) then
@@ -116,7 +117,7 @@ function onTransportEvent(player, transport)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if (csid == 3050 and option == 1) then
         if (player:getLocalVar("A_MERCENARY_LIFE") == 0) then
             player:setLocalVar("A_MERCENARY_LIFE", 1)
@@ -134,7 +135,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 44) then
         player:setCharVar("vanishingactCS", 4)
         player:setPos(-80, -6, 122, 5)
@@ -225,3 +226,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIFE_FLOAT)
     end
 end
+
+return zone_object

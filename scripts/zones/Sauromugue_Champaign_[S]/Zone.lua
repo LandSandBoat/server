@@ -7,13 +7,14 @@ local ID = require("scripts/zones/Sauromugue_Champaign_[S]/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.COQUECIGRUE)
     GetMobByID(ID.mob.COQUECIGRUE):setRespawnTime(math.random(7200, 7800))
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-104, -25.36, -410, 195)
@@ -24,14 +25,16 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 3) then
         player:setCharVar("DownwardHelix", 3)
     end
 end
+
+return zone_object

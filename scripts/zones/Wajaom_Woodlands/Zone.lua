@@ -13,17 +13,18 @@ require("scripts/globals/titles")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if player:getCurrentMission(TOAU) == tpz.mission.id.toau.UNRAVELING_REASON then
@@ -40,15 +41,15 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     -- printf("Update CSID: %u", csid)
     -- printf("Update RESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     -- printf("Finish CSID: %u", csid)
     -- printf("Finish RESULT: %u", option)
     if csid == 510 then
@@ -66,3 +67,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("princeandhopper", 2)
     end
 end
+
+return zone_object

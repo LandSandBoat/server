@@ -10,8 +10,9 @@ require("scripts/globals/treasure")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     for k, v in pairs(ID.npc.PORTALS) do
         zone:registerRegion(k, unpack(v["coords"]))
     end
@@ -21,11 +22,11 @@ function onInitialize(zone)
     tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -38,7 +39,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local p = ID.npc.PORTALS[region:GetRegionID()]
 
     if (p["green"] ~= nil) then -- green portal
@@ -67,13 +68,13 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 41 and option ~= 0) then
         player:setCharVar("skyShortcut", 1)
     elseif (csid == 51) then
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS)
     end
 end
+
+return zone_object

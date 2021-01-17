@@ -10,16 +10,17 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -33,14 +34,16 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
         npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = tpz.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
     end
 end
+
+return zone_object

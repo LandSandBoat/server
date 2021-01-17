@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onInstanceZoneIn(player, instance)
+zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     local pos = player:getPos()
@@ -27,19 +28,21 @@ function onInstanceZoneIn(player, instance)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if csid == 1 then
         player:setPos(0, 0, 0, 0, 72)
     end
 end
 
-function onInstanceLoadFailed()
+zone_object.onInstanceLoadFailed = function()
     return 72
 end
+
+return zone_object

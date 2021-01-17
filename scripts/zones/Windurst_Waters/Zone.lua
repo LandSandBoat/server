@@ -10,15 +10,16 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     -- Check if we are on Windurst Mission 1-3
     zone:registerRegion(1, 23, -12, -208, 31, -8, -197)
 
     applyHalloweenNpcCostumes(zone:getID())
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
@@ -50,11 +51,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -68,10 +69,10 @@ function onRegionEnter(player, region)
 
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 531 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 146 then -- Returned from Giddeus, Windurst 1-3
@@ -86,3 +87,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
+
+return zone_object

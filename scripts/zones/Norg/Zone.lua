@@ -9,16 +9,17 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.chocobo.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
 
     local cs = -1
 
@@ -35,13 +36,13 @@ function onZoneIn(player, prevZone)
 
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 1) then
         if (player:hasKeyItem(tpz.ki.MAP_OF_NORG) == false) then
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return zone_object

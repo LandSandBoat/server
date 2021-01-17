@@ -9,8 +9,9 @@ require("scripts/globals/titles")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.AYNU_KAYSEY)
     GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(900, 10800))
     GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.random(12, 36)*3600) -- 12 to 36 hours after maintenance, in 1-hour increments
@@ -18,7 +19,7 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(339.996, 2.5, -721.286, 200)
@@ -37,20 +38,20 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
     player:entityVisualPacket("1pd1")
     player:entityVisualPacket("2pc1")
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if csid == 21 then
         player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SHADES_OF_VENGEANCE)
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
         player:setPos(0, 0, 0, 0, 69)
     end
 end
+
+return zone_object

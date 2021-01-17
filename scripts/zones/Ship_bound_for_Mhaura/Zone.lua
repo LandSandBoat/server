@@ -5,11 +5,12 @@
 -----------------------------------
 local ID = require("scripts/zones/Ship_bound_for_Mhaura/IDs")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         local position = math.random(-2, 2) + 0.150
@@ -18,15 +19,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(512)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 512) then
         player:setPos(0, 0, 0, 0, 249)
     end
 end
+
+return zone_object

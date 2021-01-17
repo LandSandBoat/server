@@ -10,8 +10,9 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     -- Script for Laughing Bison sign flip animations
     local timer = 1152 - ((os.time() - 1009810802)%1152)
 
@@ -24,11 +25,11 @@ function onGameHour(zone)
     SetServerVariable("Mhaura_Deastination", math.random(1, 100))
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local currentday = tonumber(os.date("%j"))
 
@@ -52,11 +53,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     if transport == 47 or transport == 46 then
         if not player:hasKeyItem(tpz.ki.BOARDING_PERMIT) or ENABLE_TOAU == 0 then
             player:setPos(8.200, -1.363, 3.445, 192)
@@ -69,10 +70,10 @@ function onTransportEvent(player, transport)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
         if DepartureTime % 8 == 0 then
@@ -95,3 +96,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end
+
+return zone_object

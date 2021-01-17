@@ -11,12 +11,13 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -462, -4, -420, -455, -1, -392) -- approach the Cutter
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-456, -3, -405, 64)
@@ -39,12 +40,12 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN) and player:getCharVar("AhtUrganStatus") == 0) then
         player:startEvent(8)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PREVALENCE_OF_PIRATES and player:getCharVar("AhtUrganStatus") == 1) then
@@ -56,10 +57,10 @@ function onRegionEnter(player, region)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 8) then
         player:setCharVar("AhtUrganStatus", 1)
         player:startEvent(34, 1, 1, 1, 1, 1, 1, 1, 1)
@@ -91,3 +92,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("AgainstAllOdds", 2)
     end
 end
+
+return zone_object

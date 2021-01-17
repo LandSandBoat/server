@@ -10,12 +10,13 @@ require("scripts/globals/conquest")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     local hour = VanadielHour()
 
     if hour >= 6 and hour < 16 then
@@ -27,7 +28,7 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -43,14 +44,14 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local hour = VanadielHour()
     local nmBackoo = GetMobByID(ID.mob.BACKOO)
 
@@ -68,7 +69,7 @@ function onGameHour(zone)
 end
 
 
-function onEventUpdate( player, csid, option)
+zone_object.onEventUpdate = function( player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 5 then
@@ -80,5 +81,7 @@ function onEventUpdate( player, csid, option)
     end
 end
 
-function onEventFinish( player, csid, option)
+zone_object.onEventFinish = function( player, csid, option)
 end
+
+return zone_object

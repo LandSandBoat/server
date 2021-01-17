@@ -8,19 +8,20 @@ require("scripts/globals/conquest")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.GUIVRE)
     GetMobByID(ID.mob.GUIVRE):setRespawnTime(math.random(900, 10800))
 
     tpz.treasure.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(20.37, -21.104, 275.782, 46)
@@ -28,16 +29,16 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local phase = VanadielMoonPhase() -- 0% to 100%
     local dir = VanadielMoonDirection() -- 0 (neither) 1 (waning) or 2 (waxing)
     local boulderOpen =
@@ -80,3 +81,5 @@ function onGameHour(zone)
         end
     end
 end
+
+return zone_object

@@ -8,17 +8,18 @@ require("scripts/globals/chocobo_digging")
 require("scripts/globals/manaclipper")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1,  474, -10,  667,  511, 10,  708) -- Manaclipper while docked at Sunset Docks
     zone:registerRegion(2, -410, -10, -385, -371, 10, -343) -- Manaclipper while docked at Purgonorgo Isle
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -32,26 +33,26 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     tpz.manaclipper.aboard(player, region:GetRegionID(), true)
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
     tpz.manaclipper.aboard(player, region:GetRegionID(), false)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     tpz.manaclipper.onTransportEvent(player, transport)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 12 then
         player:startEvent(10) -- arrive at Sunset Docks CS
     elseif csid == 13 then
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
         player:setPos(0, 0, 0, 0, tpz.zone.MANACLIPPER)
     end
 end
+
+return zone_object

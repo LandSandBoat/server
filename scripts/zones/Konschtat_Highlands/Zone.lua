@@ -10,16 +10,17 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn( player, prevZone)
+zone_object.onZoneIn = function( player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -35,14 +36,14 @@ function onZoneIn( player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter( player, region)
+zone_object.onRegionEnter = function( player, region)
 end
 
-function onEventUpdate( player, csid, option)
+zone_object.onEventUpdate = function( player, csid, option)
     if csid == 104 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 106 then
@@ -54,10 +55,10 @@ function onEventUpdate( player, csid, option)
     end
 end
 
-function onEventFinish( player, csid, option)
+zone_object.onEventFinish = function( player, csid, option)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local hour = VanadielHour()
 
     if hour < 5 or hour >= 17 then
@@ -73,3 +74,5 @@ function onGameHour(zone)
         end
     end
 end
+
+return zone_object

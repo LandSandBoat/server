@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local heartwingsAndTheKindhearted = player:getCurrentMission(SOA) == tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
 
@@ -31,13 +32,13 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 5056 then
         -- Successfully finished introduction CS event chain for Quest: 'Raptor Rapture'.
         player:setCharVar("Raptor_Rapture_Status", 3)
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
     end
 end
+
+return zone_object

@@ -16,17 +16,18 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     LA_THEINE_PLATEAU.moveFallenEgg()
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -44,14 +45,14 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if (csid == 123) then
         quests.rainbow.onEventUpdate(player)
     elseif (csid == 125) then
@@ -59,13 +60,13 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 122) then
         npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.DARK_PUPPET, {item=14096, fame=40, var="darkPuppetCS"}) -- Chaos Sollerets
     end
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local TOTD = VanadielTOTD()
     local setRainbow = rainbow:getLocalVar("setRainbow")
@@ -78,7 +79,7 @@ function onZoneWeatherChange(weather)
     end
 end
 
-function onTOTDChange(TOTD)
+zone_object.onTOTDChange = function(TOTD)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local setRainbow = rainbow:getLocalVar("setRainbow")
 
@@ -89,3 +90,5 @@ function onTOTDChange(TOTD)
         rainbow:setLocalVar('setRainbow', 0)
     end
 end
+
+return zone_object

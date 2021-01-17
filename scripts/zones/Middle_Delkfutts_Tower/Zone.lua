@@ -11,8 +11,9 @@ require("scripts/globals/treasure")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -36, -50, 83,  -30, -49,  89 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
     zone:registerRegion(2, -49, -50, -50, -43, -49, -43 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
     zone:registerRegion(3, 103, -50, 10,  109, -49,  16 ) -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
@@ -28,11 +29,11 @@ function onInitialize(zone)
     tpz.treasure.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-43.0914, -47.4255, 77.5126, 120)
@@ -40,7 +41,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
     if regionId == 8 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
         player:startEvent(14)
@@ -49,13 +50,13 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     -- teleporters
     if csid <= 11 and option == 1 then
         if csid == 0 then
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("bladeOfEvilCS", 0)
     end
 end
+
+return zone_object

@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/quests")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-361.434, 101.798, -259.996, 0)
@@ -24,20 +25,22 @@ function onZoneIn(player, prevZone)
 
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 2) then
         player:setCharVar("aThiefinNorgCS", 5)
     end
 
 end
+
+return zone_object

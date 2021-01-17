@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
 
     local currentMission = player:getCurrentMission(SANDORIA)
     local MissionStatus = player:getCharVar("MissionStatus")
@@ -42,17 +43,17 @@ function onZoneIn(player, prevZone)
 
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 555) then
         player:setCharVar("MissionStatus", 3)
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return zone_object

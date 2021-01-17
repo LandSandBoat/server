@@ -7,19 +7,20 @@ local ID = require("scripts/zones/Stellar_Fulcrum/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 
     zone:registerRegion(1, -522, -2, -49,  -517, -1, -43) -- To Upper Delkfutt's Tower
     zone:registerRegion(2, 318, -3, 2,  322, 1, 6) -- Exit BCNM to ?
 
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
 
     local cs = -1
 
@@ -31,7 +32,7 @@ function onZoneIn(player, prevZone)
 
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -45,13 +46,13 @@ function onRegionEnter(player, region)
 
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 8 and option == 1) then
         player:setPos(-370, -178, -40, 243, 158)
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return zone_object

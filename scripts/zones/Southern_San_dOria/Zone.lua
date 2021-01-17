@@ -11,15 +11,16 @@ require("scripts/globals/settings")
 require("scripts/globals/chocobo")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -292, -10, 90 , -258, 10, 105)
     quests.ffr.initZone(zone) -- register regions 2 through 6
     applyHalloweenNpcCostumes(zone:getID())
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
@@ -52,11 +53,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
     if regionID==1 and player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2 then
         player:startEvent(758)
@@ -64,13 +65,13 @@ function onRegionEnter(player, region)
     quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 0 then
         player:setCharVar("SandoEpilogue", 0)
     elseif csid == 503 then
@@ -85,3 +86,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
+
+return zone_object

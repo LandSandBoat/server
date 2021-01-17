@@ -9,11 +9,12 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local head = player:getEquipID(tpz.slot.HEAD)
 
@@ -33,17 +34,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 10000 then
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         })
     end
 end
+
+return zone_object

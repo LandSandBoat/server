@@ -9,8 +9,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -281, -5, 277, -276, 0, 284)      -- Holla
     zone:registerRegion(2, 276, -84, -82, 283, -80, -75)     -- Mea
     zone:registerRegion(3, -283, -45, -283, -276, -40, -276) -- Dem
@@ -21,7 +22,7 @@ function onInitialize(zone)
     zone:registerRegion(7, -240.797, -43.960, -291.552, -237.944, -39.960, -288.954) -- Dem Sky Teleporter
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -49,7 +50,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x) -- Holla
@@ -104,13 +105,13 @@ function onRegionEnter(player, region)
     }
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 103 and option == 1 then
         player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau {R}
     elseif csid == 104 and option == 1 then
@@ -151,3 +152,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.SKY)
     end
 end
+
+return zone_object
