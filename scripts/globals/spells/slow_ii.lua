@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Slow II
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local dMND = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
 
     -- Lowest ~12.5%
@@ -42,3 +43,5 @@ function onSpellCast(caster, target, spell)
 
     return params.effect
 end
+
+return spell_object

@@ -1,19 +1,20 @@
------------------------------------------
+-----------------------------------
 -- Spell: Bio III
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local skillLvl = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
     local basedmg = skillLvl / 4
     local params = {}
@@ -81,3 +82,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

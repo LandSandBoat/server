@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sickle Slash
 -- Deals critical damage. Chance of critical hit varies with TP
 -- Spell cost: 41 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 20.5 seconds
 -- Skillchain Element: Dark (can open Transfixion or Detonation can close Compression or Gravitation)
 -- Combos: Store TP
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_CRITICAL
@@ -46,3 +47,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Mage's Ballad II
 -- Gradually restores target's MP.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local power = 2
 
     local iBoost = caster:getMod(tpz.mod.BALLAD_EFFECT) + caster:getMod(tpz.mod.ALL_SONGS_EFFECT)
@@ -36,3 +37,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.BALLAD
 end
+
+return spell_object

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Mind Blast
 -- Deals lightning damage to an enemy. Additional effect: Paralysis
 -- Spell cost: 82 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 30 seconds
 -- Magic Bursts on: Impaction, Fragmentation, and Light
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.LIGHTNING
@@ -56,3 +57,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

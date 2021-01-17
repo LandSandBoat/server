@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Shock Spikes
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local typeEffect = tpz.effect.SHOCK_SPIKES
     local int = caster:getStat(tpz.mod.INT)
@@ -25,3 +26,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

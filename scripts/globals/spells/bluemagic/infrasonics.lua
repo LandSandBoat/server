@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Infrasonics
 -- Lowers the evasion of enemies within a fan-shaped area originating from the caster
 -- Spell cost: 42 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 120 seconds
 -- Magic Bursts on: Induration, Distortion, Darkness
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attribute = tpz.mod.INT
     params.skillType = tpz.skill.BLUE_MAGIC
@@ -43,3 +44,5 @@ function onSpellCast(caster, target, spell)
 
     return params.effect
 end
+
+return spell_object

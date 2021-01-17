@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Claw Cyclone
 -- Damages enemies within area of effect with a twofold attack. Damage varies with TP
 -- Spell cost: 24 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 19.75 seconds
 -- Skillchain Element(s): Earth (can open Liquefaction, Detonation, or Reverberation can close Scission or Distortion)
 -- Combos: Lizard Killer
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ATTACK
@@ -46,3 +47,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

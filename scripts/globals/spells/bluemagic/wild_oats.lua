@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Wild Oats
 -- Additional effect: Vitality Down. Duration of effect varies on TP
 -- Spell cost: 9 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 7.25 seconds
 -- Skillchain Element(s): Light (can open Compression, Reverberation, or Distortion can close Transfixion)
 -- Combos: Beast Killer
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
@@ -53,3 +54,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

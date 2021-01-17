@@ -1,19 +1,20 @@
------------------------------------------
+-----------------------------------
 -- Spell: Diaga III
 -- Lowers an enemy's defense and gradually deals light elemental damage.
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local basedmg = caster:getSkillLevel(tpz.skill.ENFEEBLING_MAGIC) / 3
     local params = {}
     params.dmg = basedmg
@@ -61,3 +62,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

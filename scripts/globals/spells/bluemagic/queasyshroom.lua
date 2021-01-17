@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Queasyshroom
 -- Additional effect: Poison. Duration of effect varies with TP
 -- Spell cost: 20 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 15 seconds
 -- Skillchain Element(s): Dark (can open Transfixion or Detonation can close Compression or Gravitation)
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_CRITICAL
@@ -54,3 +55,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Poison Breath
 -- Deals water damage to enemies within a fan-shaped area originating from the caster. Additional effect: Poison
 -- Spell cost: 22 MP
@@ -14,17 +14,18 @@
 -- Damage formula is (Current HP)/10 + (Blue Mage level)/1.25
 -- Gains a 25% damage boost when used against Arcana monsters.
 -- Poison effect is 4/tick
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.BREATH
     params.damageType = tpz.damageType.WATER
@@ -62,3 +63,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

@@ -1,23 +1,24 @@
------------------------------------------
+-----------------------------------
 -- Trust: Maat
------------------------------------------
+-----------------------------------
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
 require("scripts/globals/status")
 require("scripts/globals/trust")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 local message_page_offset = 37
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return tpz.trust.canCast(caster, spell, 1006)
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     return tpz.trust.spawn(caster, spell)
 end
 
-function onMobSpawn(mob)
+spell_object.onMobSpawn = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.SPAWN)
 
     -- On cooldown
@@ -25,10 +26,12 @@ function onMobSpawn(mob)
                         ai.r.JA, ai.s.SPECIFIC, tpz.ja.MANTRA)
 end
 
-function onMobDespawn(mob)
+spell_object.onMobDespawn = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
-function onMobDeath(mob)
+spell_object.onMobDeath = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end
+
+return spell_object

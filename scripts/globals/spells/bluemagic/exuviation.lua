@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Exuviation
 -- Restores HP and removes one detrimental magic effect
 -- Spell cost: 40 MP
@@ -9,20 +9,21 @@
 -- Level: 75
 -- Casting Time: 3 seconds
 -- Recast Time: 60 seconds
---
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 60
     local effect = target:eraseStatusEffect()
     local divisor = 0.6666
@@ -59,3 +60,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

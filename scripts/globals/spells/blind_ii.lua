@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blind II
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
     local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.MND) -- blind uses caster INT vs target MND
 
@@ -44,3 +45,5 @@ function onSpellCast(caster, target, spell)
 
     return params.effect
 end
+
+return spell_object
