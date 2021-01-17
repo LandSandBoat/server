@@ -7,14 +7,15 @@ local ID = require("scripts/zones/Mount_Zhayolm/IDs")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.random(12, 36) * 3600)
 
     tpz.helm.initZone(zone, tpz.helm.type.MINING)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if prevZone == tpz.zone.LEBROS_CAVERN then
         player:setPos(681.950, -24.00, 369.936, 40)
@@ -24,19 +25,21 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 208 then
         player:setPos(0, 0, 0, 0, 63)
     end
 end
+
+return zone_object

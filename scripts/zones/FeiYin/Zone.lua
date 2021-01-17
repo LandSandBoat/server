@@ -11,15 +11,16 @@ require("scripts/globals/treasure")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.CAPRICIOUS_CASSIE)
     GetMobByID(ID.mob.CAPRICIOUS_CASSIE):setRespawnTime(math.random(900, 10800))
 
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local currentMission = player:getCurrentMission(player:getNation())
     local MissionStatus = player:getCharVar("MissionStatus")
     local cs = -1
@@ -47,17 +48,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 1) then
         player:setCharVar("MissionStatus", 11)
     elseif (csid == 16) then
@@ -72,3 +73,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
     end
 end
+
+return zone_object

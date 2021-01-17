@@ -10,8 +10,9 @@ require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -421, -2, 377,  -417, 0, 381) -- RDC
     zone:registerRegion(2, -422, -2, -422,  -418, 0, -418) -- +1
     zone:registerRegion(3, 418, -2, 378,  422, 0, 382) -- +2
@@ -73,7 +74,7 @@ function onInitialize(zone)
     SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("door")
     player:entityVisualPacket("lst1")
     player:entityVisualPacket("lst2")
@@ -88,7 +89,7 @@ function afterZoneIn(player)
     player:entityVisualPacket("slp3")
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
     local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM) -- Ix'aern drk
     local qm3 = GetNPCByID(ID.npc.JAILER_OF_FAITH_QM) -- Jailer of Faith
@@ -114,11 +115,11 @@ function onGameHour(zone)
     end
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-351.136, -2.25, -380, 253)
@@ -130,7 +131,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if (player:getCharVar("Ru-Hmet-TP") == 0 and player:getAnimation() == 0) then
         switch (region:GetRegionID()): caseof
         {
@@ -192,17 +193,17 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 
     if ((csid >149 and csid < 184) or csid == 102 or csid == 103 or csid == 101) then
         player:setCharVar("Ru-Hmet-TP", 1)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 101 and option == 1) then
         player:setPos(540, -1, -499.900, 62, 36)
@@ -217,3 +218,5 @@ function onEventFinish(player, csid, option)
         player:setPos(420, 0, 398, 68)
     end
 end
+
+return zone_object

@@ -9,15 +9,16 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local CurrentMission = player:getCurrentMission(WINDURST)
     local MissionStatus = player:getCharVar("MissionStatus")
     local cs = -1
@@ -33,15 +34,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 3) then
         player:addKeyItem(tpz.ki.ANCIENT_VERSE_OF_ALTEPA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_VERSE_OF_ALTEPA)
     end
 end
+
+return zone_object

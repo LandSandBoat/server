@@ -13,17 +13,18 @@ require("scripts/globals/world")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -39,14 +40,14 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 35 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 37 then
@@ -58,14 +59,14 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
 
 local function isHabrokWeather(weather)
     return (weather == tpz.weather.DUST_STORM or weather == tpz.weather.SAND_STORM or weather == tpz.weather.WIND or weather == tpz.weather.GALES)
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local habrok = GetMobByID(ID.mob.HABROK)
 
     if habrok:isSpawned() and not isHabrokWeather(weather) then
@@ -74,3 +75,5 @@ function onZoneWeatherChange(weather)
         SpawnMob(ID.mob.HABROK)
     end
 end
+
+return zone_object

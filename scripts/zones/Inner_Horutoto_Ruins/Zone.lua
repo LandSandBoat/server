@@ -8,8 +8,9 @@ require("scripts/globals/conquest")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -260.7, 0, -30.2, -259.4, 1, -29.1) -- Red
     zone:registerRegion(2, -264.0, 0, -24.7, -262.4, 1, -23.5) -- White
     zone:registerRegion(3, -257.8, 0, -24.9, -256.1, 1, -23.5) -- Black
@@ -18,7 +19,7 @@ function onInitialize(zone)
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -28,11 +29,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
     local white  = GetNPCByID(circle+1)
@@ -82,7 +83,7 @@ function onRegionEnter(player, region)
 
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
     local circle = ID.npc.PORTAL_CIRCLE_BASE
     local red    = GetNPCByID(circle)
     local white  = GetNPCByID(circle+1)
@@ -116,8 +117,10 @@ function onRegionLeave(player, region)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

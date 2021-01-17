@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Fort_Karugo-Narugo_[S]/IDs")
 require("scripts/globals/status")
 require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(820, 25.782, 117.991, 66)
@@ -20,10 +21,10 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
     if (npc ~= nil) then
         if (weather == tpz.weather.DUST_STORM or weather == tpz.weather.SAND_STORM) then
@@ -34,8 +35,10 @@ function onZoneWeatherChange(weather)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

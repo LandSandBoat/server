@@ -8,8 +8,9 @@ require("scripts/globals/conquest")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetServerVariable("[Temenos_Northern_Tower]Time", 0)
     SetServerVariable("[Temenos_Eastern_Tower]Time", 0)
     SetServerVariable("[Temenos_Western_Tower]Time", 0)
@@ -51,17 +52,17 @@ function onInitialize(zone)
 
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     player:setPos(580, -1.5, 4.452, 192)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
     local cs
     if GetNPCByID(ID.npc.TEMENOS_N_GATE[1] + (regionID - 1)):getAnimation() == tpz.animation.OPEN_DOOR then
@@ -74,14 +75,15 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 32001 or csid == 32002 then
         player:messageSpecial(ID.text.HUM+1)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+return zone_object

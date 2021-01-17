@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     -- Poison Flowers!
     zone:registerRegion(1, -475.809, 5, 316.499, 0, 0, 0)
     zone:registerRegion(2, -440.938, 7, 281.749, 0, 0, 0)
@@ -48,7 +49,7 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-194.487, -13.766, 338.704, 141)
@@ -56,11 +57,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     -- TODO: Gasponia's shouldn't "always" poison you. However, in retail regions constantly reapply themselves without having to re-enter the region. In Topaz that doesn't happen so I'm leaving it as-is for now.
     local regionId = region:GetRegionID()
     if (regionId <= 30) then
@@ -75,10 +76,10 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     --[[
         the hard-coded id that was here was wrong. there are 22 miasmas in attohwa chasm
         starting at ID.npc.MIASMA_OFFSET. some are supposed to toggle open, but need retail test
@@ -86,8 +87,10 @@ function onGameHour(zone)
     --]]
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

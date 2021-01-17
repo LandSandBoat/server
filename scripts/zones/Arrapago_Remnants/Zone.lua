@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 420, 5, -339, 0, 0, 0)
     zone:registerRegion(2, 420, 5, -499, 0, 0, 0)
     zone:registerRegion(3, 259, 5, -499, 0, 0, 0)
@@ -20,7 +21,7 @@ function onInitialize(zone)
     zone:registerRegion(11, -339, 5, 300, 0, 0, 0)
 end
 
-function onInstanceZoneIn(player, instance)
+zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     local pos = player:getPos()
@@ -32,13 +33,13 @@ function onInstanceZoneIn(player, instance)
     player:addTempItem(5399)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
     local chars = instance:getChars()
 
@@ -65,6 +66,8 @@ function onEventFinish(player, csid, option)
     end
 end
 
-function onInstanceLoadFailed()
+zone_object.onInstanceLoadFailed = function()
     return 72
 end
+
+return zone_object

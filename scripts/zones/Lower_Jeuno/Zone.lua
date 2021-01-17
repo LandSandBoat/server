@@ -13,13 +13,14 @@ require("scripts/globals/settings")
 require("scripts/globals/chocobo")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     local month = tonumber(os.date("%m"))
@@ -46,11 +47,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if region:GetRegionID() == 1 then
         if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.AWAKENING and player:getCharVar("ZilartStatus") < 2 then
             player:startEvent(20)
@@ -58,7 +59,7 @@ function onRegionEnter(player, region)
     end
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
     local playerOnQuest = GetPlayerByID(playerOnQuestId)
@@ -105,10 +106,10 @@ function onGameHour(zone)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 20 then
         player:addCharVar("ZilartStatus", 2)
     elseif csid == 10094 then
@@ -116,3 +117,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
     end
 end
+
+return zone_object

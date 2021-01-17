@@ -11,12 +11,13 @@ require("scripts/globals/npc_util")
 require("scripts/globals/common")
 require("scripts/globals/quests")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -4, -2, 40, 4, 3, 50)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getCurrentMission(COP) == tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG  and  player:getCharVar("PromathiaStatus") == 2 then
@@ -32,11 +33,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 
     local regionID = region:GetRegionID()
     -- printf("regionID: %u", regionID)
@@ -93,13 +94,13 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 65 then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
@@ -168,3 +169,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ApocNighWait", 0)
     end
 end
+
+return zone_object

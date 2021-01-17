@@ -14,8 +14,9 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 
     zone:registerRegion(1, -7, -3, 110, 7, -1, 155)
@@ -24,7 +25,7 @@ function onInitialize(zone)
     applyHalloweenNpcCostumes(zone:getID())
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
 
     local currentMission = player:getCurrentMission(SANDORIA)
     local MissionStatus = player:getCharVar("MissionStatus")
@@ -70,11 +71,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Chateau d'Oraguille access
@@ -90,13 +91,13 @@ function onRegionEnter(player, region)
     quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 535 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
     elseif csid == 1 then
@@ -120,3 +121,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
+
+return zone_object

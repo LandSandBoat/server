@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Ship_bound_for_Selbina_Pirates/IDs")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -22,15 +23,17 @@ function onZoneIn(player, prevZone)
 
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(255)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 255 then
         player:setPos(0, 0, 0, 0, tpz.zone.SELBINA)
     end
 end
+
+return zone_object

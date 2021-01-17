@@ -11,16 +11,17 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     SetServerVariable("Selbina_Deastination", math.random(1, 100))
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -43,18 +44,18 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(200)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         if GetServerVariable("Selbina_Deastination") > 89 then
             player:setPos(0, 0, 0, 0, tpz.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
@@ -70,3 +71,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end
+
+return zone_object
