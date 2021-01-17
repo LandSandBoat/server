@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- Spell: Maiden's Virelai
 -- Charms pet
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     if (caster:getPet() ~= nil) then
         return tpz.msg.basic.ALREADY_HAS_A_PET
     elseif (target:getMaster() ~= nil and target:getMaster():isPC()) then
@@ -22,7 +23,7 @@ function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local dCHR = (caster:getStat(tpz.mod.CHR) - target:getStat(tpz.mod.CHR))
     local bonus = 0 -- No idea what value, but seems likely to need this edited later to get retail resist rates.
     local params = {}
@@ -48,3 +49,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.CHARM_I
 end
+
+return spell_object

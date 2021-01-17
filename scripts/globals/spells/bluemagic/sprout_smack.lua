@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sprout Smack
 -- Additional effect: Slow. Duration of effect varies with TP
 -- Spell cost: 6 MP
@@ -11,19 +11,20 @@
 -- Recast Time: 7.25 seconds
 -- Skillchain property: Reverberation (can open Induration or Impaction)
 -- Combos: Beast Killer
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
@@ -54,3 +55,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

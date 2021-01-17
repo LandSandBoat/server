@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Healing Breeze
 -- Restores HP for party members within area of effect
 -- Spell cost: 55 MP
@@ -9,20 +9,21 @@
 -- Level: 16
 -- Casting Time: 4.5 seconds
 -- Recast Time: 15 seconds
---
+-----------------------------------
 -- Combos: Auto Regen
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 60
     local divisor = 0.6666
     local constant = -45
@@ -57,3 +58,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

@@ -1,18 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Frost
 -- Deals ice damage that lowers an enemy's agility and gradually reduces its HP.
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     if (target:getStatusEffect(tpz.effect.BURN) ~= nil) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
@@ -60,3 +61,5 @@ function onSpellCast(caster, target, spell)
     return tpz.effect.FROST
 
 end
+
+return spell_object

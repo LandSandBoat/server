@@ -1,6 +1,6 @@
------------------------------------------
+-----------------------------------
 -- Spell: Stoneskin
------------------------------------------
+-----------------------------------
 -- http://wiki.ffxiclopedia.org/wiki/Stoneskin
 -- Max 350 damage absorbed
 -- (before cap bonus gear, with no settings.lua adjustment)
@@ -8,13 +8,14 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local pMod = caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC) / 3 + caster:getStat(tpz.mod.MND)
     local pAbs = 0
     local pEquipMods = caster:getMod(tpz.mod.STONESKIN_BONUS_HP)
@@ -43,3 +44,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.STONESKIN
 end
+
+return spell_object

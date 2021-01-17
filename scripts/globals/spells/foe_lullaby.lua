@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Foe Lullaby
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = 30
     local pCHR = caster:getStat(tpz.mod.CHR)
     local mCHR = target:getStat(tpz.mod.CHR)
@@ -43,3 +44,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.LULLABY
 end
+
+return spell_object

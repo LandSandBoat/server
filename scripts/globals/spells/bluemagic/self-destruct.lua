@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Self-Destruct
 -- Sacrifices HP to damage enemies within range. Affects caster with Weakness
 -- Spell cost: 100 MP
@@ -11,19 +11,20 @@
 -- Recast Time: 21 seconds
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Auto Refresh
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/bluemagic")
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     caster:setLocalVar("self-destruct_hp", caster:getHP())
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = 300
     local playerHP = caster:getLocalVar("self-destruct_hp")
     local damage = playerHP - 1
@@ -37,3 +38,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

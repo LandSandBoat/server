@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Battle Dance
 -- Delivers an area attack. Additional effect: DEX Down. Duration of effect varies with TP
 -- Spell cost: 12 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 10 seconds
 -- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
 -- Combos: Attack Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
@@ -53,3 +54,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Tonko: san
 -- Lessens chance of being detected by sound
 -- Duration is 7 minutes (non-random duration)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     if (target:hasStatusEffect(tpz.effect.INVISIBLE) == false) then
         target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, 420)
         spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
@@ -20,3 +21,5 @@ function onSpellCast(caster, target, spell)
     end
     return tpz.effect.INVISIBLE
 end
+
+return spell_object

@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Curse
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     -- Pull base stats.
     dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
@@ -39,3 +40,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.CURSE_I
 end
+
+return spell_object

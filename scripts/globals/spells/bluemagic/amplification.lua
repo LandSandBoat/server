@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Amplification
 -- Enhances magic attack and magic defense
 -- Spell cost: 48 MP
@@ -10,20 +10,21 @@
 -- Casting Time: 7 seconds
 -- Recast Time: 120 seconds
 -- Duration: 90 seconds
---
+-----------------------------------
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffectOne = tpz.effect.MAGIC_ATK_BOOST
     local typeEffectTwo = tpz.effect.MAGIC_DEF_BOOST
     local power = 10
@@ -54,3 +55,5 @@ function onSpellCast(caster, target, spell)
 
     return returnEffect
 end
+
+return spell_object

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Mandibular Bite
 -- Damage varies with TP
 -- Spell cost: 38 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 19.25 seconds
 -- Skillchain property(ies): Induration (can open Impaction, Compression, or Fragmentation)
 -- Combos: Plantoid Killer
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ATTACK
@@ -47,3 +48,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

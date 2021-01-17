@@ -1,25 +1,26 @@
------------------------------------------
+-----------------------------------
 -- Trust: Ayame
------------------------------------------
+-----------------------------------
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 local message_page_offset = 4
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return tpz.trust.canCast(caster, spell, tpz.magic.spell.AYAME_UC)
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     return tpz.trust.spawn(caster, spell)
 end
 
-function onMobSpawn(mob)
+spell_object.onMobSpawn = function(mob)
     tpz.trust.teamworkMessage(mob, message_page_offset, {
         [tpz.magic.spell.NAJI] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.GILGAMESH] = tpz.trust.message_offset.TEAMWORK_2,
@@ -37,10 +38,12 @@ function onMobSpawn(mob)
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AYAME)
 end
 
-function onMobDespawn(mob)
+spell_object.onMobDespawn = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
-function onMobDeath(mob)
+spell_object.onMobDeath = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end
+
+return spell_object

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Firespit
 -- Deals fire damage to an enemy
 -- Spell cost: 121 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 42.75 seconds
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Conserve MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.attackType = tpz.attackType.MAGICAL
@@ -41,3 +42,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

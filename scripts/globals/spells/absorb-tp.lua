@@ -1,18 +1,19 @@
---------------------------------------
+-----------------------------------
 -- Spell: Absorb-TP
 -- Steals an enemy's TP.
---------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local cap = 1200
     local dmg = math.random(100, 1200)
 
@@ -55,3 +56,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

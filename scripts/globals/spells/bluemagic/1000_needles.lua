@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: 1000 Needles
 -- Shoots multiple needles at enemies within range
 -- Spell cost: 350 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 120 seconds
 -- Bursts on Light affects accuracy only
 -- Combos: Beast Killer
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
         params.tpmod = TPMOD_CRITICAL
@@ -46,3 +47,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

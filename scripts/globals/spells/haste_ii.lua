@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Haste II
 -- Composure increases duration 3x
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 96, target:getMainLvl())
 
@@ -23,3 +24,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.HASTE
 end
+
+return spell_object

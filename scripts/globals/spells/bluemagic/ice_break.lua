@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Ice Break
 -- Deals ice damage to enemies within range. Additional Effect: "Bind"
 -- Spell cost: 142 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 33.75 seconds
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Magic Defense Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     local params = {}
 
@@ -59,3 +60,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

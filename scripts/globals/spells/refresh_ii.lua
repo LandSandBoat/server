@@ -1,18 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Refresh II
 -- Gradually restores target party member's MP
 -- Composure increases duration 3x
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(150, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 82, target:getMainLvl())
 
@@ -28,3 +29,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.REFRESH
 end
+
+return spell_object

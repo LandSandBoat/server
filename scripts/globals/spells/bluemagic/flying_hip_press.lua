@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Flying Hip Press
 -- Deals wind damage to enemies within range
 -- Spell cost: 125 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 34.5 seconds
 -- Magic Bursts On: Detonation, Fragmentation, and Light
 -- Combos: Max HP Boost
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.BREATH
     params.damageType = tpz.damageType.WIND
@@ -40,3 +41,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

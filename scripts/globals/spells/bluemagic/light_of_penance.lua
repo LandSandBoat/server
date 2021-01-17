@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Light of Penance
 -- Reduces an enemy's TP. Additional effect: Blindness and "Bind"
 -- Spell cost: 53 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Transfixion, Fusion, and Light
 -- Combos: Auto Refresh
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffectOne = tpz.effect.BLINDNESS
     local typeEffectTwo = tpz.effect.BIND
     local params = {}
@@ -60,3 +61,5 @@ function onSpellCast(caster, target, spell)
 
     return returnEffect
 end
+
+return spell_object

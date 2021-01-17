@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blood Saber
 -- Steals HP from enemies within range. Ineffective against undead
 -- Spell cost: 25 MP
@@ -11,19 +11,20 @@
 -- Recast Time: 90 seconds
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local dmg = 1 + (0.709 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC))
     local params = {}
     params.diff = caster:getStat(tpz.mod.MND)-target:getStat(tpz.mod.MND)
@@ -58,3 +59,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

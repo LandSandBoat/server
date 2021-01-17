@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blank Gaze
 -- Removes one beneficial magic effect from an enemy
 -- Spell cost: 25 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 10 seconds
 -- Magic Bursts on: Transfixion, Fusion, Light
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
     local params = {}
     params.attribute = tpz.mod.INT
@@ -47,3 +48,5 @@ function onSpellCast(caster, target, spell)
 
     return effect
 end
+
+return spell_object

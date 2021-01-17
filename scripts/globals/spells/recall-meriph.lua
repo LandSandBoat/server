@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Recall-Meriph
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster,target,spell)
     if target:getObjType() == tpz.objType.PC then
         if target:hasKeyItem(tpz.ki.MERIPHATAUD_GATE_CRYSTAL) then
             target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.MERIPH, 0, 4.7)
@@ -22,3 +23,5 @@ function onSpellCast(caster,target,spell)
     end
     return 0
 end
+
+return spell_object

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Spell: Rending Deluge
 -- Spell cost: 118 MP
 -- Monster Type: Craklaw
@@ -10,17 +10,18 @@
 -- Recast Time: 35 seconds
 -- Magic Bursts on:
 -- Combos: Magic Defense Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/magic")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local multi = 1.0
     if (caster:hasStatusEffect(tpz.effect.AZURE_LORE)) then
         multi = multi + 1.50
@@ -52,3 +53,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

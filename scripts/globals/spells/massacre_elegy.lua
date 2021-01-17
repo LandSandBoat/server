@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Massacre Elegy
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = 240
     local power = 10000
 
@@ -55,3 +56,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.ELEGY
 end
+
+return spell_object
