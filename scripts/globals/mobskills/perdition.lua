@@ -6,12 +6,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if target:hasStatusEffect(tpz.effect.MAGIC_SHIELD) or math.random(0, 99) < target:getMod(tpz.mod.DEATHRES) then
         skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
         return 0
@@ -22,3 +23,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return 0
 end
+
+return mobskill_object

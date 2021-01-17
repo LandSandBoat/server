@@ -11,8 +11,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
   if (mob:getFamily() == 91) then
     local mobSkin = mob:getModelId()
 
@@ -25,7 +26,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 1
     local duration = 60
 
@@ -34,3 +35,5 @@ function onMobWeaponSkill(target, mob, skill)
     skill:setMsg(MobBuffMove(mob, typeEffect, power, 0, duration))
     return typeEffect
 end
+
+return mobskill_object

@@ -3,3 +3,7 @@
 --
 -- This needs deleted.
 ---------------------------------------------
+local mobskill_object = {}
+
+
+return mobskill_object

@@ -11,12 +11,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect1 = tpz.effect.PROTECT
     local typeEffect2 = tpz.effect.SHELL
     local power1 = 50
@@ -28,3 +29,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect1
 end
+
+return mobskill_object

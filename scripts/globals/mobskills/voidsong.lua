@@ -12,8 +12,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- can only used if not silenced
     if (mob:getMainJob() == tpz.job.BRD and mob:hasStatusEffect(tpz.effect.SILENCE) == false) then
         return 0
@@ -21,7 +22,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     mob:eraseAllStatusEffect()
     local count = target:dispelAllStatusEffect()
@@ -35,3 +36,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return count
 end
+
+return mobskill_object

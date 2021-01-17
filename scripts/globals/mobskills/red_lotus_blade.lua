@@ -10,15 +10,17 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getPool() ~= 4006 and mob:getPool() ~= 4249) then
         mob:messageBasic(tpz.msg.basic.READIES_WS, 0, 34)
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getPool() == 4006) then -- Trion@QuBia_Arena only
         target:showText(mob, zones[tpz.zone.QUBIA_ARENA].text.RLB_LAND)
     elseif (mob:getPool() == 4249) then -- Volker@Throne_Room only
@@ -32,3 +34,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
     return dmg
 end
+
+return mobskill_object

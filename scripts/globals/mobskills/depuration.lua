@@ -12,8 +12,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local dispel = target:eraseStatusEffect()
 
     if (dispel ~= tpz.effect.NONE) then
@@ -23,9 +24,11 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     mob:eraseAllStatusEffect()
 
     return 0
 end
+
+return mobskill_object

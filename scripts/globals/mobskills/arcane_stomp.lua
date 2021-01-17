@@ -10,12 +10,15 @@
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(MobBuffMove(mob, tpz.effect.MAGIC_SHIELD, 3, 0, 300))
     return tpz.effect.MAGIC_SHIELD
 end
+
+return mobskill_object

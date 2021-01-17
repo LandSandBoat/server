@@ -5,6 +5,7 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local mobskill_object = {}
 
 function OnMobSkillCheck(target, mob, skill)
     return 0
@@ -21,3 +22,5 @@ function OnMobWeaponSkill(target, mob, skill)
 end
 
 
+
+return mobskill_object

@@ -9,8 +9,9 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -26,7 +27,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PETRIFICATION
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 3, 15)
 
@@ -41,3 +42,4 @@ function onMobWeaponSkill(target, mob, skill)
     mob:setLocalVar("nuclearWaste", 0)
     return dmg
 end
+return mobskill_object

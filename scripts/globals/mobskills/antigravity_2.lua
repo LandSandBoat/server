@@ -8,12 +8,14 @@ require("scripts/globals/monstertpmoves")
 -- todo The potency of the knockback effect varies with
 --  the number of gears in the enemy formation. A single gear produces only a
 --  slight knockback, whereas triple gears produce a very strong knockback.
+---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2
@@ -22,3 +24,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:delHP(dmg)
     return dmg
 end
+
+return mobskill_object

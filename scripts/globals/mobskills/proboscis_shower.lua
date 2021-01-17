@@ -7,12 +7,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local potency = skill:getParam()
 
     if potency == 0 then
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return MobHealMove(mob, mob:getMaxHP() * potency / 100)
 end
+
+return mobskill_object

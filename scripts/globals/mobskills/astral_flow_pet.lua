@@ -5,6 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
 local function petInactive(pet)
     return
@@ -16,7 +17,7 @@ local function petInactive(pet)
         pet:hasStatusEffect(tpz.effect.TERROR)
 end
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- must have pet
     if not mob:hasPet() then
         return 1
@@ -32,7 +33,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.ASTRAL_FLOW
     local pet = mob:getPet()
 
@@ -64,3 +65,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

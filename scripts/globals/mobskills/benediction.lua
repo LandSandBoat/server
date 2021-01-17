@@ -3,12 +3,13 @@
 ---------------------------------------------
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:eraseAllStatusEffect()
 
     local maxHeal = target:getMaxHP() - target:getHP()
@@ -20,3 +21,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return maxHeal
 end
+
+return mobskill_object

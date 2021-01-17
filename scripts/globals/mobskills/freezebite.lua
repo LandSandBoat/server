@@ -10,17 +10,18 @@
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.50      3.00
 -----------------------------------
+local mobskill_object = {}
 
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/monstertpmoves")
 -----------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local params = {}
     params.numHits = 1
     params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 3
@@ -34,3 +35,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(damage, mob, tpz.attackType.MAGICAL, tpz.damageType.ICE)
     return damage
 end
+
+return mobskill_object

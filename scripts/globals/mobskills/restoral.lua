@@ -6,12 +6,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     --[[
     The only calculations available on the net are for the players blue magic version,
     which does not seem to fit with retail in game observations on the mobskill version..
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return MobHealMove(mob, heal)
 end
+
+return mobskill_object

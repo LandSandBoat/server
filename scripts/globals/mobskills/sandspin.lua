@@ -5,18 +5,17 @@
 -- The Additional Effect: Accuracy Down may not always process.
 -- Duration: Three minutes ?
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.ACCURACY_DOWN
 
     MobStatusEffectMove(mob, target, typeEffect, 50, 0, 120)
@@ -28,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
     return dmg
 
 end
+
+return mobskill_object

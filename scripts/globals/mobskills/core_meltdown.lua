@@ -3,14 +3,13 @@
 -- Reactor core fails and self-destructs, damaging any nearby targets.
 -- Note: Very rare, estimated 5% chance
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
         return 1
     elseif (mob:getAnimationSub() ~=0) then -- form check
@@ -22,7 +21,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
 
     -- TODO: The damage type should be based off of the Ghrah's element
@@ -32,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.ELEMENTAL)
     return dmg
 end
+
+return mobskill_object

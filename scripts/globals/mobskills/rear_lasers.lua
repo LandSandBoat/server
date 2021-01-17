@@ -2,14 +2,13 @@
 -- Rear Lasers
 -- Fires aft lasers at players behind user. Additional effects: Petrification
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -22,10 +21,11 @@ function onMobSkillCheck(target,mob,skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PETRIFICATION
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
 
     return typeEffect
 end
+return mobskill_object

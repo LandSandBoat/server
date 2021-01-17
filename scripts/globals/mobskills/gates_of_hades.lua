@@ -12,9 +12,10 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
   if(mob:getFamily() == 316) then
     local mobSkin = mob:getModelId()
 
@@ -34,7 +35,7 @@ function onMobSkillCheck(target, mob, skill)
     return result
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.BURN
     local power = 21
 
@@ -46,3 +47,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
     return dmg
 end
+
+return mobskill_object

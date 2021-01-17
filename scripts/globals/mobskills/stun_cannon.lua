@@ -6,14 +6,13 @@
 --
 --  Range: 20 yalms
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local currentForm = mob:getLocalVar("form")
 
     if (mob:getAnimationSub() == 2 and currentForm == 1) then -- proto-omega bipedform
@@ -22,7 +21,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
    local dmgmod = 1.5
    local typeEffect = tpz.effect.PARALYSIS
 
@@ -33,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.DARK)
     return dmg
 end
+
+return mobskill_object

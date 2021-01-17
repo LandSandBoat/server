@@ -9,18 +9,21 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getAnimationSub() == 3) then
         return 0
     end
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     MobBuffMove(mob, tpz.effect.PHYSICAL_SHIELD, 2, 0, 30)
     skill:setMsg(tpz.msg.basic.NONE)
 
     return 0
 end
+
+return mobskill_object
