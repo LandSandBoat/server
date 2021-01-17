@@ -3,8 +3,6 @@
 -- Teleport ring: Mea
 -- Enchantment: "Teleport-Mea"
 -----------------------------------------
-local item_object = {}
-
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")

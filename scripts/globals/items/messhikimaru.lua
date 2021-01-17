@@ -4,8 +4,6 @@
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
 -----------------------------------------
-local item_object = {}
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------------
@@ -28,6 +26,5 @@ end
 item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.ARCANA_KILLER, 20)
 end
-
 
 return item_object

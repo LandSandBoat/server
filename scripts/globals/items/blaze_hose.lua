@@ -3,9 +3,8 @@
 -- Item: Blaze Hose
 -- Item Effect: Blaze Spikes
 -----------------------------------------
-local item_object = {}
-
 require("scripts/globals/settings")
+require("scripts/globals/status")
 -----------------------------------------
 local item_object = {}
 

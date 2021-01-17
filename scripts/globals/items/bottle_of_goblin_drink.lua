@@ -23,7 +23,7 @@ end
 item_object.onEffectGain = function(target, effect)
 end
 
-function onEffectTick(target, effect)
+item_object.onEffectTick = function(target, effect)
     if (target:hasStatusEffect(tpz.effect.HEALING)) then
         target:addMP(effect:getPower())
     end

@@ -5,8 +5,6 @@
 -- Recast Time: 0:15
 -- Duration: 1:00, or until next song is cast.
 -----------------------------------
-local ability_object = {}
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
