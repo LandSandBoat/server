@@ -4,12 +4,16 @@
 -- Item Effect: Removes 60 HP over 180 seconds
 -----------------------------------------
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:resetRecasts()
     target:messageBasic(tpz.msg.basic.ALL_ABILITIES_RECHARGED, 0)
 end
+
+return item_object

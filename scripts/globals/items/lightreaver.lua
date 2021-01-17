@@ -7,8 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     -- AddEffect Death does not Proc on Notorious Monsters
     if (target:isMob()) then
         if (target:isMobType(MOBTYPE_NOTORIOUS)) then
@@ -27,3 +28,5 @@ function onAdditionalEffect(player, target, damage)
         return tpz.subEffect.DEATH, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.KO
     end
 end
+
+return item_object

@@ -5,12 +5,14 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local curse = target:getStatusEffect(tpz.effect.CURSE_I)
     local curse2 = target:getStatusEffect(tpz.effect.CURSE_II)
     local bane = target:getStatusEffect(tpz.effect.BANE)
@@ -39,3 +41,5 @@ function onItemUse(target)
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

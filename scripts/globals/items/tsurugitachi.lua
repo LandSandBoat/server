@@ -4,15 +4,19 @@
 -- Item Effect: TP +10
 -- Durration: Instant
 -----------------------------------------
+local item_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addTP(100)
 end
+
+return item_object

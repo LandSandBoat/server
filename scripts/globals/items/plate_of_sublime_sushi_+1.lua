@@ -16,8 +16,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -25,11 +26,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 3600, 6469)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.HP, 45)
     target:addMod(tpz.mod.MP, 25)
     target:addMod(tpz.mod.STR, 7)
@@ -43,7 +44,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.SLEEPRES, 2)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.HP, 45)
     target:delMod(tpz.mod.MP, 25)
     target:delMod(tpz.mod.STR, 7)
@@ -56,3 +57,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.FOOD_RACC_CAP, 105)
     target:delMod(tpz.mod.SLEEPRES, 2)
 end
+
+return item_object

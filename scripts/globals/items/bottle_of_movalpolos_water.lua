@@ -6,12 +6,14 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local mMP = target:getMaxMP()
     local cMP = target:getMP()
     if (VanadielDayOfTheWeek() == tpz.day.LIGHTSDAY) then
@@ -28,3 +30,5 @@ function onItemUse(target)
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

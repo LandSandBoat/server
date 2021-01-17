@@ -5,14 +5,17 @@
 -----------------------------------------
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
         return tpz.msg.basic.ITEM_NO_USE_INVENTORY
     end
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addItem(6010, 1)
 end
+
+return item_object

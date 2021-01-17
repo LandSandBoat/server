@@ -4,11 +4,14 @@
 --  Use to determine your precise location in Vana'diel.
 --  Provides exact X, Y and Z location, where Y is the altitude.
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:showPosition()
 end
+
+return item_object

@@ -6,8 +6,9 @@
 require("scripts/globals/zone")
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getZoneID() ~= tpz.zone.LEBROS_CAVERN then
         result = 55
@@ -15,7 +16,7 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local instance = target:getInstance()
     local bomb = instance:insertAlly(10633)
     local X = target:getXPos()
@@ -40,3 +41,5 @@ function onItemUse(target)
 
     bomb:updateEnmity(target)
 end
+
+return item_object

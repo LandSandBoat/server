@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if not target:canUseMisc(tpz.zoneMisc.MOUNT) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA
     elseif not target:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) then
@@ -20,9 +21,11 @@ function onItemCheck(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     -- Base duration 30 min, in seconds.
     local duration = 1800 + (target:getMod(tpz.mod.CHOCOBO_RIDING_TIME) * 60)
 
     target:addStatusEffectEx(tpz.effect.MOUNTED, tpz.effect.MOUNTED, 0, 0, duration, true)
 end
+
+return item_object

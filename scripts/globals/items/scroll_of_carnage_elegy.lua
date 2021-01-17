@@ -3,11 +3,14 @@
 -- Scroll of Carnage Elegy
 -- Teaches the song Carnage Elegy
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(422)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(422)
 end
+
+return item_object

@@ -6,8 +6,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if (chance > math.random(0, 99)) then
@@ -31,6 +32,8 @@ function onAdditionalEffect(player, target, damage)
     end
 end
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
+
+return item_object

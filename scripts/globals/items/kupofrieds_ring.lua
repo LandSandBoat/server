@@ -9,8 +9,9 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if (target:hasStatusEffect(tpz.effect.DEDICATION) == true) then
         result = 56
@@ -18,6 +19,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.DEDICATION, 100, 0, 86400, 0, 6000)
 end
+
+return item_object

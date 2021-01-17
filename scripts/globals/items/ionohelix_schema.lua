@@ -3,11 +3,14 @@
 -- Ionohelix Schema
 -- Teaches the black magic Ionohelix
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(283)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(283)
 end
+
+return item_object

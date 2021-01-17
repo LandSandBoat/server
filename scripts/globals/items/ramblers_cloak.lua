@@ -7,7 +7,10 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
 
 end
+
+return item_object

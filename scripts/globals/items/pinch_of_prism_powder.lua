@@ -5,15 +5,19 @@
 -----------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local duration = math.random(60, 180)
     if (target:hasStatusEffect(tpz.effect.INVISIBLE)) then
         target:delStatusEffect(tpz.effect.INVISIBLE)
     end
     target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
 end
+
+return item_object

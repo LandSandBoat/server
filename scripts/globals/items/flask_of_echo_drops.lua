@@ -5,15 +5,18 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
 
     if (target:hasStatusEffect(tpz.effect.SILENCE) == true) then
         target:delStatusEffect(tpz.effect.SILENCE)
     end
 end
 
+
+return item_object

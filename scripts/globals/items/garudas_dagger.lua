@@ -6,8 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if (VanadielDayOfTheWeek() == tpz.day.WINDSDAY) then
@@ -27,3 +28,5 @@ function onAdditionalEffect(player, target, damage)
         return tpz.subEffect.SILENCE, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.SILENCE
     end
 end
+
+return item_object

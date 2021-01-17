@@ -3,11 +3,14 @@
 -- Scroll of Aero III
 -- Teaches the black magic Aero III
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(156)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(156)
 end
+
+return item_object

@@ -5,15 +5,19 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     if (target:addStatusEffect(tpz.effect.SHELL, 9, 0, 1800)) then
         target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.SHELL)
     else
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

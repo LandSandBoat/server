@@ -5,13 +5,16 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local duration = 5400
     target:delStatusEffect(tpz.effect.RERAISE)
     target:addStatusEffect(tpz.effect.RERAISE, 2, 0, duration)
 end
+
+return item_object

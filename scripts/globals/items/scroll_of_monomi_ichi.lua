@@ -3,11 +3,14 @@
 -- Scroll of Monomi: Ichi
 -- Teaches the ninjutsu Monomi: Ichi
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(318)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(318)
 end
+
+return item_object

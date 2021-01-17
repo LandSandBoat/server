@@ -4,26 +4,30 @@
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
 -----------------------------------------
+local item_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     result = 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     if (target:hasStatusEffect(tpz.effect.ENCHANTMENT) == false) then
         target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 600, 17826)
     end
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.ARCANA_KILLER, 20)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.ARCANA_KILLER, 20)
 end
 
+
+return item_object

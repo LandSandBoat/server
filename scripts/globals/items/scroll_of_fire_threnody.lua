@@ -3,11 +3,14 @@
 -- Scroll of Fire Threnody
 -- Teaches the song Fire Threnody
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(454)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(454)
 end
+
+return item_object

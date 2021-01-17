@@ -5,12 +5,14 @@
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     if (target:hasStatusEffect(tpz.effect.COPY_IMAGE) or target:hasStatusEffect(tpz.effect.THIRD_EYE)) then
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     else
@@ -18,3 +20,5 @@ function onItemUse(target)
         target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.BLINK)
     end
 end
+
+return item_object

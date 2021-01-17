@@ -3,11 +3,14 @@
 -- Scroll of Flood II
 -- Teaches the black magic Flood II
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(215)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(215)
 end
+
+return item_object

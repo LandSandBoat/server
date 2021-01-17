@@ -3,11 +3,14 @@
 -- Scroll of Valor Minuet
 -- Teaches the song Valor Minuet
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(394)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(394)
 end
+
+return item_object

@@ -3,12 +3,13 @@
 -- Item: Joyous Serinette
 -- Item Effect: Change Music
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local alliance = target:getAlliance()
     for i, member in pairs(alliance) do
         if member:getZoneID() == target:getZoneID() then
@@ -17,3 +18,5 @@ function onItemUse(target)
         end
     end
 end
+
+return item_object

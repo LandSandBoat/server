@@ -3,12 +3,13 @@
 --  Moogle Cap
 --  Transports the user to their Home Nation
 -----------------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local nation = target:getNation(target)
     if (nation == 0) then -- San d'Oria
         target:setPos(126, 0, -1, 122, 231)
@@ -24,3 +25,5 @@ function onItemUse(target)
     end
     print( "Unable to fetch target's nation." )
 end
+
+return item_object
