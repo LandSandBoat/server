@@ -4,8 +4,6 @@
 -- Enchantment: Subtle Blow
 -- Duration: 60 Mins
 -----------------------------------------
-local item_object = {}
-
 require("scripts/globals/status")
 require("scripts/globals/settings")
 -----------------------------------------
