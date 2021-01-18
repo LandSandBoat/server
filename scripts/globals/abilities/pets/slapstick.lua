@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Slapstick
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
----------------------------------------------------
+-----------------------------------
 local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)

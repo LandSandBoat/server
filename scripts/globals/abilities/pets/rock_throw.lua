@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Rock Throw M=3.5
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/summon")
 
----------------------------------------------------
+-----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)

@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 -- Healing Breath II
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
