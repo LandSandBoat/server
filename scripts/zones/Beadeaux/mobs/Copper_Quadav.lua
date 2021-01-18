@@ -20,7 +20,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.DA_DHA_HUNDREDMASK_PH, 10, 5400) -- 90 minutes
 end
 

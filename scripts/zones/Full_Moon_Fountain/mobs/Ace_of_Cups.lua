@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 -----------------------------------
 local entity = {}
 
-function allMoonMobsDead(player)
+local function allMoonMobsDead(player)
     local inst = player:getBattlefield():getArea()
     local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
     for i = instOffset, instOffset + 3 do

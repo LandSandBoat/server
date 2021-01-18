@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i, v in pairs(bcnmAllies) do
         if v:getName() == "Karababa" then

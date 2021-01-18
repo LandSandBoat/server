@@ -20,7 +20,7 @@ local path =
     {525.971,-0.499,289.436}
 }
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local start = (mob:getID() - ID.mob.APOLLYON_NE_MOB[5]) - 1
     mob:setLocalVar("point", start)
 end

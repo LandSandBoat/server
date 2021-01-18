@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
 
     if (mob:getAnimationSub() == 3) then
         SetDropRate(104, 1576, 1000)
@@ -30,7 +30,7 @@ entity.onMobFight = function(mob, target)
     -- TODO: add battle dialog
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:showText(mob, ID.text.ANIMATED_GREATAXE_DIALOG+2)
 end
 

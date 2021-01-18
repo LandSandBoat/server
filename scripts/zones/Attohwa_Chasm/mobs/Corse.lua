@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.CITIPATI_PH, 20, math.random(10800, 21600)) -- 3 to 6 hours
 end
 

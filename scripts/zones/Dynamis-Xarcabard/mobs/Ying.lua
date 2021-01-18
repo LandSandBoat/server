@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobInitialize = function(mob, target)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
     if (dynaLord:getLocalVar("magImmune") < 2) then -- both dragons have not been killed initially
         dynaLord:setMod(tpz.mod.UDMGMAGIC, -100)
@@ -36,7 +36,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local Yang = GetMobByID(ID.mob.YANG)
     local dynaLord = GetMobByID(ID.mob.DYNAMIS_LORD)
     -- localVars clear on death, so setting it on its partner

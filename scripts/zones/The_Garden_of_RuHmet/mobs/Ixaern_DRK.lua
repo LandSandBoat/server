@@ -52,7 +52,7 @@ entity.onMobInitialize = function(mob)
     end)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setAnimationSub(1)
 
     tpz.mix.jobSpecial.config(mob, {
@@ -76,7 +76,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("AERN_RERAISES", 0)
 end
 

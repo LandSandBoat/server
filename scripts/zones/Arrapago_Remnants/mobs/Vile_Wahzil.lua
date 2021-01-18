@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(tpz.status.DISAPPEAR)
 end
@@ -22,7 +22,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 end
 
 return entity

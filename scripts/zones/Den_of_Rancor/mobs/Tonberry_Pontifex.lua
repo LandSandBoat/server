@@ -17,7 +17,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 800, 2, tpz.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 

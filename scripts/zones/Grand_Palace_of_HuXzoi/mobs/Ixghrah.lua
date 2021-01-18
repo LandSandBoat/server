@@ -7,7 +7,7 @@ require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     if (mob:getMod(tpz.mod.SLASHRES)) then mob:setMod(tpz.mod.SLASHRES, 1000); end
     if (mob:getMod(tpz.mod.PIERCERES)) then mob:setMod(tpz.mod.PIERCERES, 1000); end
     if (mob:getMod(tpz.mod.IMPACTRES)) then mob:setMod(tpz.mod.IMPACTRES, 1000); end

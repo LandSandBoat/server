@@ -34,7 +34,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -62,14 +62,14 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onCriticalHit(mob)
+entity.onCriticalHit = function(mob)
     local RND = math.random(1, 100)
     if mob:getAnimationSub() == 0 and RND <= 10 then
         mob:setAnimationSub(1)
     end
 end
 
-function onWeaponskillHit(mob, attacker, weaponskill)
+entity.onWeaponskillHit = function(mob, attacker, weaponskill)
     local RND = math.random(1, 100)
     if mob:getAnimationSub() == 0 and RND <= 10 then
         mob:setAnimationSub(1)

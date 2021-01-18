@@ -9,7 +9,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob,target)

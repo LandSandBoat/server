@@ -35,7 +35,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.TP_DRAIN, {power = math.random(10, 30)})
 end
 
@@ -46,7 +46,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.tutorial.onMobDeath(player)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(3600, 4200)) -- 60~70 min repop.
 end

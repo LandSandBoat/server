@@ -15,7 +15,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:SetAutoAttackEnabled(false)
     mob:setMobMod(tpz.mobMod.GA_CHANCE, 25)
     mob:addStatusEffectEx(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
@@ -23,7 +23,7 @@ function onMobSpawn(mob)
     mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 5)
     GetMobByID(mob:getID() + 1):updateEnmity(target)
 end

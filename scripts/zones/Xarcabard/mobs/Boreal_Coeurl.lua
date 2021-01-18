@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Failsafe to make sure NPC is down when NM is up
     if OLDSCHOOL_G2 then
         GetNPCByID(ID.npc.BOREAL_COEURL_QM):showNPC(0)

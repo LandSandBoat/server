@@ -8,7 +8,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- adjust drops based on number of HQ Aern Organs traded to QM
     local qm = GetNPCByID(ID.npc.IXAERN_MNK_QM)
     local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
@@ -52,7 +52,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     DespawnMob(mob:getID()+2)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     DespawnMob(mob:getID()+1)
     DespawnMob(mob:getID()+2)
 

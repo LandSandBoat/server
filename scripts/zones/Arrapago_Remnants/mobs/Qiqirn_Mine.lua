@@ -8,7 +8,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:hideName(true)
     mob:untargetable(true)

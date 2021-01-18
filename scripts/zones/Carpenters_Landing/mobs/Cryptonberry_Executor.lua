@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         delay = 180,
         specials =

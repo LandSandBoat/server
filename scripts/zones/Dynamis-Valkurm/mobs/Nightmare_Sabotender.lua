@@ -6,7 +6,7 @@ mixins = {require("scripts/mixins/dynamis_dreamland")}
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("dynamis_currency", 1452)
 end
 

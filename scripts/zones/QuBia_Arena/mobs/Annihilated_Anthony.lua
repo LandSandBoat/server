@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged (mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     DespawnMob(mobId + 1)
     DespawnMob(mobId + 2)

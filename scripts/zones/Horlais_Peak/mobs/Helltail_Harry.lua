@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.SLEEPRES, 1000)
     mob:setMod(tpz.mod.SILENCERES, 900)
     mob:setMod(tpz.mod.LULLABYRES, 700)

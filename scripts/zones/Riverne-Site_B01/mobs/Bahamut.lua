@@ -8,11 +8,11 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobInitialise(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addStatusEffect(tpz.effect.PHALANX, 35, 0, 180)
     mob:addStatusEffect(tpz.effect.STONESKIN, 350, 0, 300)
     mob:addStatusEffect(tpz.effect.PROTECT, 175, 0, 1800)

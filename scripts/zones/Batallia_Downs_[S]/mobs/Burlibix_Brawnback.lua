@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addMod(tpz.mod.STUNRES, 50)
 end
 

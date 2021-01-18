@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setLocalVar("changeTime", 150)
     mob:setLocalVar("useWise", math.random(25, 50))
@@ -53,7 +53,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMagicHit(caster, target, spell)
+entity.onMagicHit = function(caster, target, spell)
     if spell:tookEffect() and target:getAnimationSub() == 1 and (caster:isPC() or caster:isPet()) then
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())

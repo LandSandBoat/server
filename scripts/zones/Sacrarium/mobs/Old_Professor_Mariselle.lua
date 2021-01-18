@@ -54,7 +54,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
 
     local OP_Mariselle = mob:getID()
 

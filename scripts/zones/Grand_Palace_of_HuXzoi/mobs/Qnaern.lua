@@ -9,7 +9,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local mJob = mob:getMainJob()
 
     if mJob == tpz.job.RDM then

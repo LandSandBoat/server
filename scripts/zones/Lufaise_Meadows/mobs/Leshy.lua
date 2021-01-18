@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 -----------------------------------
 local entity = {}
 
-function disturbMob(mob)
+local function disturbMob(mob)
     local offset = mob:getID() - ID.mob.LESHY_OFFSET
     if (offset >= 0 and offset <= 7) then
         local nm = GetMobByID(ID.mob.COLORFUL_LESHY)
@@ -16,7 +16,7 @@ function disturbMob(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     disturbMob(mob)
 end
 

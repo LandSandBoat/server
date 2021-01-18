@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.TELEPORT_CD, 30)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("MAGIC_START", "MAGIC_MSG", function(mob, spell, action)
         -- Burst
         if spell:getID() == 212 then
@@ -42,7 +42,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 0)
 end
 
@@ -56,7 +56,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:setLocalVar("wait", 0)
 end
 

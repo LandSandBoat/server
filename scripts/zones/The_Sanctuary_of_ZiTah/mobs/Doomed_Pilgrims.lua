@@ -6,7 +6,7 @@ local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
 

@@ -9,7 +9,7 @@ local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -18,7 +18,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     --[[ TODO:
         Summons pet when party is engaged.  Randomly chosen between Tiger and Mandragora.
         Current victory system doesn't readily support a random choice of pet while having

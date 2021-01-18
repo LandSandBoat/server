@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
 

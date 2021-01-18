@@ -16,7 +16,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 800, 2, tpz.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.CELESTE_EYED_TOZBERRY_PH, 10, 7200) -- 2 hours
 end
 

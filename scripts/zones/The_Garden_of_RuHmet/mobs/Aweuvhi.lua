@@ -7,7 +7,7 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Set a random animation when it spawns
     mob:setAnimationSub(math.random(1, 4))
 end
@@ -56,7 +56,7 @@ entity.onMobFight = function(mob)
     end
 end
 
-function onCriticalHit(target)
+entity.onCriticalHit = function(target)
     -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
     -- When in an open state, damage taken by the Euvhi is doubled. Inflicting a large amount of damage to an Euvhi in an open state will cause it to close.
     -- Crit is really the only thing we can do.

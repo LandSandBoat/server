@@ -14,7 +14,7 @@ entity.onMobInitialize = function( mob )
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.WINDRES, -64)
     mob:setMod(tpz.mod.SILENCERES, 35)
     mob:setMod(tpz.mod.STUNRES, 35)
@@ -53,7 +53,7 @@ entity.onMobFight = function( mob, target )
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENSTONE)
 end
 
@@ -65,7 +65,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end

@@ -35,7 +35,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:useMobAbility(1487)
     mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 0, 0, 5)
 end

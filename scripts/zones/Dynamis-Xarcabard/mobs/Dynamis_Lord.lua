@@ -11,7 +11,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         between = 60,
         specials =

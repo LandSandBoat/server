@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.DISAPPEAR)
     end
@@ -25,7 +25,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.TORTOISE_TORTURER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local ToD = GetServerVariable("[POP]Aspidochelone")
     local kills = GetServerVariable("[PH]Aspidochelone")
     local popNow = (math.random(1, 5) == 3 or kills > 6)

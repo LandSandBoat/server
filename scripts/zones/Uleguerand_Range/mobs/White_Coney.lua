@@ -16,7 +16,7 @@ local entity = {}
 --it has some kind of meditate -.-
 --(based on above, going to assume it has regain...)
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.REGAIN, 30) -- unassisted by combat TP, will give a base of 1 wild carrot move approx every 100 sec while above 25% hp
     mob:setMod(tpz.mod.ICERES, 150)
 end
@@ -24,7 +24,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):setLocalVar("activeTime", os.time()+math.random(60*9, 60*15))
 end
 

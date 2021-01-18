@@ -12,7 +12,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 926 then
         local stormwindCounter = mob:getLocalVar("stormwindCounter")
 
@@ -28,7 +28,7 @@ function onMobWeaponSkill(target, mob, skill)
     end
 end
 
-function onMobDisengage(mob, weather)
+entity.onMobDisengage = function(mob, weather)
     if not (mob:getWeather() == tpz.weather.WIND or mob:getWeather() == tpz.weather.GALES) then
         DespawnMob(mob:getID())
     end
@@ -37,7 +37,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Set Kruetzet's spawnpoint and respawn time (9-12 hours)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(32400, 43200))

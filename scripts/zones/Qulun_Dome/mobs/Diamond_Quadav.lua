@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 
@@ -27,7 +27,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local nqId = mob:getID()
 
     -- the quest version of this NM doesn't respawn or count toward hq nm

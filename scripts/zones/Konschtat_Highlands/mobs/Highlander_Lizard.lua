@@ -26,7 +26,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.tutorial.onMobDeath(player)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(1200, 1800)) -- 20~30 min repop
 end

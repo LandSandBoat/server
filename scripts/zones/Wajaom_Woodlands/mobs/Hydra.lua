@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
 
 end
 
-function onCriticalHit(mob)
+entity.onCriticalHit = function(mob)
 
     local rand = math.random()
     local battletime = mob:getBattleTime()
@@ -42,7 +42,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(48, 72) * 3600) -- 48 to 72 hours, in 1 hour windows
 end
 
