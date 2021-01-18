@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5000
 -- Scroll of Knights Minne IV
 -- Teaches the song Mages Ballad IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

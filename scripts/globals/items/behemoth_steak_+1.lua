@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6465
 -- Item: behemoth_steak_+1
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +45
 -- STR +8
 -- DEX +8
@@ -12,10 +12,10 @@
 -- Triple Attack +2%
 -- Lizard Killer +5
 -- hHP +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

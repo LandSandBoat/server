@@ -1,6 +1,6 @@
-----------------------------------------
+-----------------------------------
 -- tpz.effect.DRAGON_BREAKER
-----------------------------------------
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5164
 -- Item: jar_of_ground_wasabi
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -1
 -- Dexterity -1
 -- Agility -1
@@ -10,10 +10,10 @@
 -- Intelligence -1
 -- Mind -1
 -- Charisma -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

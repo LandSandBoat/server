@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5639
 -- Item: Skewer of M&P Chicken
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Intelligence -5
 -- Attack % 25
 -- Attack Cap 154
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

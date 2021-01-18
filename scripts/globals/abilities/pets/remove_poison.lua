@@ -1,10 +1,10 @@
----------------------------------------------
+-----------------------------------
 -- Remove Poison
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 
----------------------------------------------
+-----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)

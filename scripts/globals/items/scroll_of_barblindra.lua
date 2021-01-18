@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4697
 -- Scroll of Barblindra
 -- Teaches the white magic Barblindra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

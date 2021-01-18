@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4281
 -- Item: red_hot_cracker
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- HP Recovered While Healing 9
 -- Beast Killer 12
 -- Resist Sleep 12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

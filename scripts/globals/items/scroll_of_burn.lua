@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4843
 -- Scroll of Burn
 -- Teaches the black magic Burn
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

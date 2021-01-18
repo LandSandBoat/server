@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4228
 -- Mythril Bolt Quiver
 -- When used, you will obtain one stack of Mythril Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

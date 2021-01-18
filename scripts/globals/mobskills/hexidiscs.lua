@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Hexidiscs
 --
 --  Description: A sixfold attack damages targets in a fan-shaped area of effect.
@@ -6,17 +6,17 @@
 --  Utsusemi/Blink absorb: 6 shadows
 --  Range: Unknown cone
 --  Notes: Only used in "ball" form.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
----------------------------------------------------
+-----------------------------------
 -- onMobSkillCheck
 -- if not in Ball form, then ignore.
----------------------------------------------------
+-----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getAnimationSub() ~=0) then
         return 1

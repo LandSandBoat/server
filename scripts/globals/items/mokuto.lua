@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16906
 -- Item: Mokuto
 -- Additional Effect: Silence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

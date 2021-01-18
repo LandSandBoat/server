@@ -1,17 +1,17 @@
----------------------------------------------
+-----------------------------------
 --  Arrow Deluge
 --  Description: Delivers a threefold ranged attack to targets in an area of effect.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Unknown
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:getMainJob() == tpz.job.RNG then
         return 0

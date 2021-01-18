@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18148
 -- Item: Acid Bolt
 -- Additional Effect: Weakens Defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

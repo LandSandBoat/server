@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4953
 -- Scroll of Hojo: Ni
 -- Teaches the ninjutsu Hojo: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

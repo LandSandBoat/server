@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5312
 -- Toolbag Hira
 -- When used, you will obtain one stack of hiraishin
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

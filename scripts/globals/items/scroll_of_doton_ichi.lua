@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4937
 -- Scroll of Doton: Ichi
 -- Teaches the ninjutsu Doton: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

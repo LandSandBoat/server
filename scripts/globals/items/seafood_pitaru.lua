@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5891
 -- Item: seafood_pitaru
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +8% (cap 120)
 -- Increases rate of magic skill gains by 60%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

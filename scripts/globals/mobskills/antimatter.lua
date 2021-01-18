@@ -1,15 +1,15 @@
----------------------------------------------------
+-----------------------------------
 --  Antimatter
 --
 --  Description:  Single-target ranged Light damage (~700-1500), ignores Utsusemi.
 --  Type: Magical
 --
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

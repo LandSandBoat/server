@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4396
 -- Item: sausage_roll
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 6 (cap 160)
 -- Vitality 3
 -- Intelligence -1
@@ -10,10 +10,10 @@
 -- Attack Cap 30
 -- Ranged ATT % 27
 -- Ranged ATT Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

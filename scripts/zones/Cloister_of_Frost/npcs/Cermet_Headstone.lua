@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
             player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
             player:hasKeyItem(tpz.ki.LIGHTNING_FRAGMENT) and
-            player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and 
+            player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and
             player:hasKeyItem(tpz.ki.LIGHT_FRAGMENT) and
             player:hasKeyItem(tpz.ki.DARK_FRAGMENT)
         then
@@ -54,7 +54,7 @@ entity.onEventFinish = function(player, csid, option)
             player:hasKeyItem(tpz.ki.WIND_FRAGMENT) and
             player:hasKeyItem(tpz.ki.EARTH_FRAGMENT) and
             player:hasKeyItem(tpz.ki.LIGHTNING_FRAGMENT) and
-            player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and 
+            player:hasKeyItem(tpz.ki.WATER_FRAGMENT) and
             player:hasKeyItem(tpz.ki.LIGHT_FRAGMENT)
         then
             player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.ICE_FRAGMENT)

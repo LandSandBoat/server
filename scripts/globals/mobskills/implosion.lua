@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Implosion
 --
 -- Description: Channels a wave of negative energy, damaging all targets in very wide area of effect.
@@ -6,11 +6,11 @@
 -- Wipes Shadows
 -- Range: 10' radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

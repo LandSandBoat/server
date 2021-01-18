@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4798
 -- Scroll of Stonega II
 -- Teaches the black magic Stonega II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

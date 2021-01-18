@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 4125
 -- Item: Max-Potion +1
 -- Item Effect: Restores 550 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

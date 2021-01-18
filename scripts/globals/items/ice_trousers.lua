@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15651
 -- Item: Ice Trousers
 -- Item Effect: Ice Spikes
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

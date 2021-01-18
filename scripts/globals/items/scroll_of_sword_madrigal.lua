@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5007
 -- Scroll of Sword Madrigal
 -- Teaches the song Sword Madrigal
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

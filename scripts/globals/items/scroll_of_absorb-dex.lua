@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4875
 -- Scroll of Absorb-DEX
 -- Teaches the black magic Absorb-DEX
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

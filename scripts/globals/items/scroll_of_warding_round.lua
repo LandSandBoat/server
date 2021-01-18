@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5022
 -- Scroll of Warding Round
 -- Teaches the song Warding Round
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

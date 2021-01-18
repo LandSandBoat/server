@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4144
 -- Item: Hi-Elixir
 -- Item Effect: Instantly restores 50% of HP and MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

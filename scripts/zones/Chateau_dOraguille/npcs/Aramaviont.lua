@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 1)
         elseif currentMission == sandyMissions.LIGHTBRINGER and missionStatus == 6 then
             player:startEvent(15)
-        
+
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
         elseif
             -- Directly after winning BCNM and up until next mission

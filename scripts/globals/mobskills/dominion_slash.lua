@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Dominion Slash
 --
 -- Description: Performs an area of effect slashing weaponskill. Additional effect: Silence
@@ -7,11 +7,11 @@
 -- Range: Unknown radial
 
 -- One source also mentions that it "can dispel important buffs."
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

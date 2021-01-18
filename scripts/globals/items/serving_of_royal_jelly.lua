@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 4508
 -- Item: Serving of Royal Jelly
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP Recovery while healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

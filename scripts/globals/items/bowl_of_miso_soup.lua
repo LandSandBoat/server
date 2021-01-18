@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6466
 -- Item: bowl_of_miso_soup
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +7% (cap 50)
 -- DEX +4
 -- AGI +4
@@ -10,10 +10,10 @@
 -- Attack +10% (cap 40)
 -- Ranged Accuracy +10% (cap 40)
 -- Ranged Attack +10% (cap 40)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

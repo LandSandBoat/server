@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6218
 -- Item: slice of anchovy pizza +1
 -- Food Effect: 60 minutes, all Races
------------------------------------------
+-----------------------------------
 -- HP +35
 -- DEX +2
 -- Accuracy +9% (Cap 16)
 -- Attack +10% (Cap 21)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

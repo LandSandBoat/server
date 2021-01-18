@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Megaflare
 --  Family: Bahamut
 --  Description: Deals heavy Fire damage to enemies within a fan-shaped area.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range:
 --  Notes: Used by Bahamut every 10% of its HP (except at 10%), but can use at will when under 10%.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

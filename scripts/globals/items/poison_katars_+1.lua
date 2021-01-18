@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16693
 -- Item: Poison Katars +1
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

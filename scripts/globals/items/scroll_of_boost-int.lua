@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5098
 -- Scroll of Boost-INT
 -- Teaches the white magic Boost-INT
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

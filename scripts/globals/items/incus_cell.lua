@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Incus Cell
 -- ID 5365
 -- Unlocks weapons and shields
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

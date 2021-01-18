@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5561
 -- Item: Moogle Pie
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 20
 -- MP 20
 -- Strength 1
@@ -12,10 +12,10 @@
 -- Intelligence 1
 -- Mind 1
 -- Charisma 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

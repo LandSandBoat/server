@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4771
 -- Scroll of Stone V
 -- Teaches the black magic Stone V
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

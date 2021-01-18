@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4779
 -- Scroll of Water III
 -- Teaches the black magic Water III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

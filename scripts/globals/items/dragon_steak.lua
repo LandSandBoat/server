@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4350
 -- Item: dragon_steak
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 25
 -- Strength 7
 -- Intelligence -3
@@ -13,10 +13,10 @@
 -- Ranged ATT % 20
 -- Ranged ATT Cap 150
 -- Demon Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

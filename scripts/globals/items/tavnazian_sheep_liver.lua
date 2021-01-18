@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5154
 -- Item: Tavnazian Sheep Liver
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 2
 -- Intelligence -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

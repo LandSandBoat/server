@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5864
 -- Toolbag Jinko
 -- When used, you will obtain one stack of jinko
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4542
 -- Item: Bowl of Brain Stew
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 5
 -- Intelligence 5
 -- Mind 5
 -- Health Regen While Healing 3
 -- Magic Regen While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4857
 -- Scroll of Blaze Spikes
 -- Teaches the black magic Blaze Spikes
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

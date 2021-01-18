@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4761
 -- Scroll of Blizzard V
 -- Teaches the black magic Blizzard V
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

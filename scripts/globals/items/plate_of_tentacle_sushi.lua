@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5215
 -- Item: plate_of_tentacle_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP 20
 -- Dexterity 3
 -- Agility 3
@@ -10,10 +10,10 @@
 -- Accuracy % 20 (cap 18)
 -- Ranged Accuracy % 20 (cap 18)
 -- Double Attack 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

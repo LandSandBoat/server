@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4749
 -- Scroll of Reraise II
 -- Teaches the white magic Reraise II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

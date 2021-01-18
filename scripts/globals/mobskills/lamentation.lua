@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Lamentation
 --
 -- Description: Deals Light damage to all targets in range. Additional effect: Dia
 -- Range: 10' cone
 -- Wipes Shadows
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

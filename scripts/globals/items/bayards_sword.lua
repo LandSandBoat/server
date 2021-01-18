@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17695
 -- Item: Bayard's sword
 -- Additional Effect: Impairs evasion
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

@@ -1,16 +1,16 @@
----------------------------------------------
+-----------------------------------
 --  Impalement
 --
 --  Description: Deals damage to a single target reducing their HP to 5%. Resets enmity.
 --  Type: Physical
 --  Utsusemi/Blink absorb: No
 --  Range: Single Target
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

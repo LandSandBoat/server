@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4543
 -- Item: goblin_mushpot
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Mind 10
 -- Charisma -5
 -- Poison Resist 4
 -- Blind Resist 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

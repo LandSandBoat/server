@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4257
 -- Papillion
 -- Adds butterfly wings to the user
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

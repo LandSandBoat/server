@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4997
 -- Scroll of Knights Minne
 -- Teaches the song Mages Ballad
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

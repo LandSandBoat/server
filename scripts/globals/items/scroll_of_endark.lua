@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4707
 -- Scroll of Endark
 -- Teaches the white magic Endark
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

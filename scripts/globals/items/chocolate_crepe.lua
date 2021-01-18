@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5775
 -- Item: Chocolate Crepe
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +5% (cap 15)
 -- MP Healing 2
 -- Magic Accuracy +20% (cap 35)
 -- Magic Defense +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

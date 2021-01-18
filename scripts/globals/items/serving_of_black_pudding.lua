@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5552
 -- Item: Serving of Black Pudding
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +8
 -- MP +5% Cap 25
 -- Intelligence +4
 -- HP Recovered while healing +1
 -- MP Recovered while healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

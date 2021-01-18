@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Crystal Weapon
 --
 --  Description: Invokes the power of a crystal to deal magical damage of a random element to a single target.
@@ -6,12 +6,12 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown
 --  Notes: Can be Fire, Earth, Wind, or Water element.  Functions even at a distance (outside of melee range).
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

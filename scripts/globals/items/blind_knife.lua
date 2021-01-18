@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16471
 -- Item: Blind knife
 -- Additional Effect: Blindness
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

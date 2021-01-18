@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4507
 -- Item: rarab_meatball
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Strength 2
 -- Vitality 2
@@ -11,10 +11,10 @@
 -- Attack Cap 20
 -- Ranged ATT % 30
 -- Ranged ATT Cap 20
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5622
 -- Item: Candy Cane
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 4
 -- Mind 4
 -- MP Recovery while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Black Cloud
 --
 --  Description: A cloud deals Dark damage to enemies in an area of effect. Additional effect: Blind
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 15' radial
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4465
 -- Item: bowl_of_goblin_stew
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity -4
 -- Attack +16% (cap 80)
 -- Ranged Attack +16% (cap 80)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

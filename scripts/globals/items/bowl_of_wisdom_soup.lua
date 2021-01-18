@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4592
 -- Item: bowl_of_wisdom_soup
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 3
 -- MP 3
 -- Strength 1
@@ -13,10 +13,10 @@
 -- Mind 1
 -- Charisma 1
 -- HP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

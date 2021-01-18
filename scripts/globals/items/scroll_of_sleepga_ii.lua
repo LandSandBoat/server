@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4882
 -- Scroll of Sleepga II
 -- Teaches the black magic Sleepga II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

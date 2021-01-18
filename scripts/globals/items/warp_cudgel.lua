@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 17040
 -- Warp Cudgel
 -- Transports the user to their Home Point
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

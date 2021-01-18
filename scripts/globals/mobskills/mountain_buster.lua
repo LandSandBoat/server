@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Mountain Buster
 -- Titan delivers an earth-shattering attack that roots its target in place.
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

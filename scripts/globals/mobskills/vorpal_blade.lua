@@ -1,16 +1,16 @@
----------------------------------------------
+-----------------------------------
 -- Vorpal Blade
 --
 -- Description: Delivers a four-hit attack. Chance of critical varies with TP.
 -- Type: Physical
 -- Utsusemi/Blink absorb: Shadow per hit
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

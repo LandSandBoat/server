@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5595
 -- Item: Bowl of Nashmau Stew
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- MP -100
 -- Vitality -10
@@ -14,10 +14,10 @@
 -- Attack +18% Cap 60
 -- Defense -100
 -- Evasion -100
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

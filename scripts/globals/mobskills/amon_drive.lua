@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Amon Drive
 --
 --  Description: Performs an area of effect weaponskill. Additional effect: Paralysis + Petrification + Poison
@@ -7,11 +7,11 @@
 --  Range: Melee range radial
 
 -- Special weaponskill unique to Ark Angel TT. Deals ~100-400 damage.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

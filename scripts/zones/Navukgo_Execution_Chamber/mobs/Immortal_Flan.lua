@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
-----------------------------------------
+-----------------------------------
 local entity = {}
 
 function onMobEngaged(mob, target)

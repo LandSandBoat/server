@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6411
 -- Item: Chocobo Chair
 -- Item Effect: Grant Chocobo chair key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.CHOCOBO_CHAIR

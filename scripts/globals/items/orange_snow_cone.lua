@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5713
 -- Item: orange_snow_cone
 -- Food Effect: 5 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +20% (cap 20)
 -- AGI -1
 -- INT +1
 -- Wind resistance +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

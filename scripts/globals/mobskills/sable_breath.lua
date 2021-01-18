@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Sable Breath
 --
 --  Description: Deals darkness damage to enemies within a fan-shaped area.
@@ -6,12 +6,12 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
 --  Notes: Used only by Vrtra and Azdaja
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/utils")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

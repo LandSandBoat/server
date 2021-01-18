@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: completemission <logID> <missionID> <player>
 -- desc: Completes the given mission for the target player, if that mission is currently active.
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/missions")
 

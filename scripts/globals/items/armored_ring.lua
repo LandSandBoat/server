@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15783
 -- Item: Armored Ring
 -- Item Effect: Defence +8
 -- Duration 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

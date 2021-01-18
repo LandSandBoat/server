@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 -- Amplification
 -- Enhances Magic Attack and Magic Defense. Bonus stacks when used by mobs.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

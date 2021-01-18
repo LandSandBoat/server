@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Rage
 --
 -- Description: The Ram goes berserk
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes: 25% Attack UP, -25% defense DOWN
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

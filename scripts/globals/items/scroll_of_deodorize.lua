@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4746
 -- Scroll of Deodorize
 -- Teaches the white magic Deodorize
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

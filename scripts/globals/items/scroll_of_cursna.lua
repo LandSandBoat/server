@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4628
 -- Scroll of Cursna
 -- Teaches the white magic Cursna
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

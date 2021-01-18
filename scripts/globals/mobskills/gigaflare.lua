@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Gigaflare
 --  Family: Bahamut
 --  Description: Deals massive Fire damage to enemies within a fan-shaped area.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range:
 --  Notes: Used by Bahamut when at 10% of its HP, and can use anytime afterwards at will.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

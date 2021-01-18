@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18122
 -- Item: Broach Lance
 -- Item Effect: TP +10
 -- Duration: Instant
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5744
 -- Item: marinara_pizza +1
 -- Food Effect: 4 hours, all Races
------------------------------------------
+-----------------------------------
 -- HP +25
 -- Attack +21% (cap 55)
 -- Accuracy +11% (cap 58)
 -- Undead Killer
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

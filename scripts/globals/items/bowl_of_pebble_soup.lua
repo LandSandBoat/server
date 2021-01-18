@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 4455
 -- Item: Bowl of Pebble Soup
 -- Food Effect: 3 Hr, All Races
------------------------------------------
+-----------------------------------
 -- HP Recovered while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

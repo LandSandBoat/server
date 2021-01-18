@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5315
 -- Toolbag Jusa
 -- When used, you will obtain one stack of jusatsu
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

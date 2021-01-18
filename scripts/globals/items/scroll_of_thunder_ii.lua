@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4773
 -- Scroll of Thunder II
 -- Teaches the black magic Thunder II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

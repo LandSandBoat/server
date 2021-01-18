@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4452
 -- Item: bowl_of_shark_fin_soup
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP % 5 (cap 150)
 -- MP 5
 -- Dexterity 4
 -- HP Recovered While Healing 9
 -- Attack % 14 (cap 85)
 -- Ranged Attack % 14 (cap 85)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

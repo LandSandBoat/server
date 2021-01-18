@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18033
 -- Item: Adder Jambiya +1
 -- Additional Effect: Impairs evasion
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

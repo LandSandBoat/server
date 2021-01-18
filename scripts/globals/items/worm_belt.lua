@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15298
 -- Worm Belt
 -- Enchantment: 60Min, Costume - Worm (orange/brown)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

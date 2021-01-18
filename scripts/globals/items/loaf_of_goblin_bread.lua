@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4458
 -- Item: loaf_of_goblin_bread
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 7
 -- Vitality 1
 -- Charisma -5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

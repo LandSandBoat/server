@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4855
 -- Scroll of Aspir
 -- Teaches the black magic Aspir
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

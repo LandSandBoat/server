@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4867
 -- Scroll of Sleep II
 -- Teaches the black magic Sleep II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

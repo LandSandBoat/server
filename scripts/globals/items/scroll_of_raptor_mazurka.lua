@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5075
 -- Scroll of Raptor Mazurka
 -- Teaches the song Raptor Mazurka
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

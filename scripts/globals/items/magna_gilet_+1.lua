@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 11275
 -- Item: magna gilet +1
 -- Teleport's user to Purgonorgo Isle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 require("scripts/globals/teleports")

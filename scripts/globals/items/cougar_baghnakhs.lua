@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16702
 -- Item: Cougar Baghnakhs
 -- Additional Effect: Ice Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

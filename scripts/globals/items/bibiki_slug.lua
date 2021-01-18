@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5122
 -- Item: Bibiki Slug
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality 4
 -- defense % 16
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

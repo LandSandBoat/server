@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5050
 -- Scroll of Lightning Carol
 -- Teaches the song Lightning Carol
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

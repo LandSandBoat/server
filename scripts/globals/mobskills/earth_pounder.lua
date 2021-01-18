@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Earth Pounder
 --
 --  Description: Deals Earth damage to enemies within area of effect. Additional effect: Dexterity Down
@@ -6,12 +6,12 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 15' radial
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

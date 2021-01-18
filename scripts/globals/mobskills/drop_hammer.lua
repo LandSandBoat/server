@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Drop Hammer
 --
 --  Description: Drops the hammer. Additional effect: Bind
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-3 shadows?
 --  Range: Melee
 --  Notes: Only used by "destroyers" (carrying massive warhammers).
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

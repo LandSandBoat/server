@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4701
 -- Scroll of Cura
 -- Teaches the white magic Cura
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

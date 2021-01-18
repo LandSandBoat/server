@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Glacier Splitter
 --
 --  Description: Cleaves into targets in a fan-shaped area. Additional effect: Paralyze
@@ -6,14 +6,14 @@
 --  Utsusemi/Blink absorb: 1-3 shadows
 --  Range: Unknown cone
 --  Notes: Only used the Aern wielding a sword (RDM, DRK, and PLD).
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

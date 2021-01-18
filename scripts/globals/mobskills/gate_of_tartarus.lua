@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Gate of Tartarus
 --
 --  Description: Lowers target's attack. Claustrum/Thyrus: Refresh
 --  Type: Physical
 --  Shadow per hit
 --  Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

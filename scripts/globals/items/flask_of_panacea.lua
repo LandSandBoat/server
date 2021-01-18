@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4163
 -- Item: Panacea
 -- Item Effect: Removes any number of status effects
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

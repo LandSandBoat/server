@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Mantle Pierce
 --
 --  Description: Stabs a single target. Additional effect: Weight
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1-3 shadow(s)
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

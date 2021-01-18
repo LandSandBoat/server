@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 15533
 -- Item: Chocobo Whistle
 --
 -- Notes: Can't use item below lv 20, no need to adjust duration for that.
 --    Can't normally use enchantments when level sync'd below items level so no need to check.
 --    Per wiki, can actually obtain without license, but cannot use, so we DO check that.
------------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

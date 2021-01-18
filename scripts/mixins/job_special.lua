@@ -86,7 +86,7 @@ tpz.mix.jobSpecial.config(mob, {
 require("scripts/globals/mixins")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-----------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.mix = tpz.mix or {}

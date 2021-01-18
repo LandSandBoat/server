@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4525
 -- Item: pumpkin_pie_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 45
 -- Intelligence 4
 -- Charisma -1
 -- MP Recovered While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

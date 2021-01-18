@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5753
 -- Item: Pot-au-feu
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Agility 4
 -- Intelligence -3
 -- Ranged Attk % 16 Cap 65
 -- Ranged ACC % 11 Cap 55
 -- Enmity -3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

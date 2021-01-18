@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5784
 -- Item: coconut_rusk
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- High-quality success rate +3
 -- Synthesis failure rate -6%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Chaos Blade
 --
 --  Description: Deals Dark damage to enemies within a fan-shaped area. Additional effect: Curse
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores Shadows
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

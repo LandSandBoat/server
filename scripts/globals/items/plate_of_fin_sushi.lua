@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5665
 -- Item: plate_of_fin_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 5
 -- Accuracy % 16 (cap 76)
 -- Ranged Accuracy % 16 (cap 76)
 -- Resist Sleep +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5675
 -- Item: Withered Rolanberry
 -- Food Effect: 30 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 1
 -- Agility -3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

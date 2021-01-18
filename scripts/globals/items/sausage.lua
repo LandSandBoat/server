@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4578
 -- Item: sausage
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 3 (cap 130)
 -- Strength 3
 -- Intelligence -1
@@ -10,10 +10,10 @@
 -- Attack Cap 30
 -- Ranged ATT % 27
 -- Ranged ATT Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

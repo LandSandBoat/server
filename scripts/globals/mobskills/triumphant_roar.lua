@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Triumphant Roar
 --  Family: Gargouille
 --  Description: Enhances Attack.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: N/A
 --  Range: Self
 --  Notes: Only used when standing
------------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

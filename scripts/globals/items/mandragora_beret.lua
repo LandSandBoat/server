@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15204
 -- Mandragora Beret
 -- Enchantment: 60Min, Costume - Mandragora (white)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

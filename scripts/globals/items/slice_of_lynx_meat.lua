@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5667
 -- Item: Slice of Lynx Meat
 -- Food Effect: 5 Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Intelligence -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

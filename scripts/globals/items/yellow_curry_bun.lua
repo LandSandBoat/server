@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5757
 -- Item: yellow_curry_bun
 -- Food Effect: 30minutes, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group effects
 -- Health Points 20
 -- Strength 5
@@ -14,10 +14,10 @@
 -- Resist Stun +4
 -- hHP +2
 -- hMP +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

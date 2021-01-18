@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5925
 -- Item: Charred Salisbury Steak
 -- Food Effect: 240 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +32
 -- Strength +8
 -- Intelligence -6
 -- Attack % 22 Cap 165
 -- Ranged Attack %22 Cap 165
 -- Dragon Killer +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

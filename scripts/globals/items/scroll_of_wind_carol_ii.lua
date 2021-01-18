@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5056
 -- Scroll of Wind Carol II
 -- Teaches the song Wind Carol II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

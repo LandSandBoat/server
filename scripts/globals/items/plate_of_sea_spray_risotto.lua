@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4268
 -- Item: plate_of_sea_spray_risotto
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 45
 -- Dexterity 6
 -- Agility 3
 -- Mind -4
 -- HP Recovered While Healing 1
 -- Accuracy % 6 (cap 20)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

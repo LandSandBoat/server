@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15170
 -- Item: regen cuirass
 -- Item Effect: gives regen
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

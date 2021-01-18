@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5071
 -- Scroll of Foe Lullaby
 -- Teaches the song Foe Lullaby
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

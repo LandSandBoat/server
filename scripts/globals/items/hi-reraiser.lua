@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4173
 -- Item: Hi-Reraiser
 -- Item Effect: This potion functions inthe same way as the spell Reraise II.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

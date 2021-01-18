@@ -10,9 +10,9 @@ require("scripts/globals/zone")
 quests = quests or {}
 quests.flyers_for_regine = quests.flyers_for_regine or {}
 
--------------------------------------------------
+-----------------------------------
 -- local data
--------------------------------------------------
+-----------------------------------
 
 -- [ffr]deliveryMask stores delivered fliers as bits (0 = not delivered, 1 = delivered)
 -- the key in this table relates to the bit in the mask
@@ -47,9 +47,9 @@ local npcData =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 quests.flyers_for_regine.initZone = function(zone)
     local data = npcData[zone:getID()]

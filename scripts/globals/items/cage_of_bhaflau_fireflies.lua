@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5344
 -- Bhaflau Fireflies
 -- Transports the user to Mamool Ja Staging Point
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

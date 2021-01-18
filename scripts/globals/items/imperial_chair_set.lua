@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6377
 -- Item: Imperial Chair
 -- Item Effect: Grant Imperial chair key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.IMPERIAL_CHAIR

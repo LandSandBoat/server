@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5399
 -- A. Rem. Fireflies
 -- Transports the user out of Arrapago Remnants
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

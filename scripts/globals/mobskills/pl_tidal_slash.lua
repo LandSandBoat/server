@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Tidal Slash
 --
 -- Description: Deals Water damage in a threefold
@@ -8,11 +8,11 @@
 -- Range: Melee?
 -- Notes: Used only by Merrows equipped with a spear.
 -- If they lost their spear, they'll use Hysteric Barrage instead.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

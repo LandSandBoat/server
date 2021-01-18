@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5063
 -- Scroll of Ice Threnody
 -- Teaches the song Ice Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

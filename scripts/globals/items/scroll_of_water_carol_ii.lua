@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5059
 -- Scroll of Water Carol II
 -- Teaches the song Water Carol II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

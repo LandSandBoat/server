@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14789
 -- Item: Naruko Earring
 -- Item Effect: Enmity +10
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

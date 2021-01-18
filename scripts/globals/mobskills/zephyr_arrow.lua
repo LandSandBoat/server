@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Zephyr Arrow
 --
 --  Description: Deals a ranged attack to target. Additional effect: Knockback &amp Bind
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores Utsusemi
 --  Range: Unknown
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5653
 -- Item: Cherry Muffin
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 1
 -- Magic % 10
 -- Magic Cap 80
 -- Agility -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

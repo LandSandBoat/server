@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5308
 -- Toolbag Uchi
 -- When used, you will obtain one stack of uchitake
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

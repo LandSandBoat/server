@@ -1,9 +1,9 @@
---------------------------------------
+-----------------------------------
 -- tpz.effect.AUSPICE
 -- Power: Used for Enspell Effect
 -- SubPower: Tracks Subtle Blow Bonus
 -- Tier: Used for Enspell Calculation
---------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}

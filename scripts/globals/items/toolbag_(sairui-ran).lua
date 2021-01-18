@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5317
 -- Toolbag Sai
 -- When used, you will obtain one stack of sairui-ran
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

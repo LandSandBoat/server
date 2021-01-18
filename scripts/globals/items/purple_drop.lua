@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 --  ID: 4262
 --  Item: Purple Drop
 --  Dexterity 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4729
 -- Scroll of Teleport-Altep
 -- Teaches the white magic Teleport-Altep
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

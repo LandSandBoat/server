@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5028
 -- Scroll of Victory March
 -- Teaches the song Victory March
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

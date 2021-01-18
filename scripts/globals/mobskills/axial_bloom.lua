@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Axial Bloom
 --
 -- Description: Attempts to bind nearby targets with petals.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

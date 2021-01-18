@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18613
 -- Fourth Staff
 -- Enchantment: "Retrace" (Bastok Markets[S])
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/teleports")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 --  ID: 4211
 --  Item: Charisma Potion
 --  Charisma 7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

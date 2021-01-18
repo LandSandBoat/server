@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6041
 -- Pyrohelix Schema
 -- Teaches the black magic Pyrohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

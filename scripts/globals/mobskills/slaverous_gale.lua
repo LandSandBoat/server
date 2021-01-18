@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 -- Slaverous Gale
 --
 -- Description: Deals earth damage that inflicts Plague and Slow effects on targets in front of the caster
 -- Type: Magical (Earth)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

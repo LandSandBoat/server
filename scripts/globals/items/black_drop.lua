@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 --  ID: 4265
 --  Item: Black Drop
 --  Transports the user to their Home Point
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

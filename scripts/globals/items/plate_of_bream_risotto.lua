@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4550
 -- Item: plate_of_bream_risotto
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 40
 -- Dexterity 6
 -- Agility 3
@@ -10,10 +10,10 @@
 -- Health Regen While Healing 1
 -- Ranged Accuracy % 6
 -- Ranged Accuracy Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

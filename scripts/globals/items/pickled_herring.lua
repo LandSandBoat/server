@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4490
 -- Item: Pickled Herring
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Mind -3
 -- Attack % 12 (cap 70)
 -- Ranged ATT % 12 (cap 70)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

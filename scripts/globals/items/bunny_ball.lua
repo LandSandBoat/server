@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4349
 -- Item: Bunny Ball
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Strength 2
 -- Vitality 2
 -- Intelligence -1
 -- Attack % 30 (cap 30)
 -- Ranged ATT % 30 (cap 30)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5640
 -- Item: M&P Cracker
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Vitality 5
 -- Mind -5
 -- Defense % 25
 -- Attack Cap 154
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

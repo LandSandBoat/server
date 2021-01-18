@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5184
 -- Item: plate_of_vegan_sautee
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 1
 -- Vitality -1
 -- Ranged ACC % 7
 -- Ranged ACC Cap 20
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

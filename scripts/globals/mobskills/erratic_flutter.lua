@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Erratic Flutter
 --
 -- Description: Deals Fire damage around the caster. Grants the effect of Haste.
@@ -15,11 +15,11 @@
 -- While it does not overwrite most forms of Slowga, Slow II, Slow II TP moves,
 -- Erratic Flutter does overwrite Hojo: Ni, Hojo: Ichi, and Slow.
 -- Player Blue magic version is wind element instead of fire.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

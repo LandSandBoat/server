@@ -3,14 +3,14 @@ require("scripts/zones/Promyvion-Holla/IDs")
 require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/zones/Promyvion-Vahzl/IDs")
 require("scripts/globals/status")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.promyvion = tpz.promyvion or {}
 
-------------------------------------
+-----------------------------------
 -- LOCAL FUNCTIONS
-------------------------------------
+-----------------------------------
 
 local function maxFloor(ID)
     local m = 0
@@ -48,9 +48,9 @@ local function findMother(mob)
     return mother
 end
 
-------------------------------------
+-----------------------------------
 -- PUBLIC FUNCTIONS
-------------------------------------
+-----------------------------------
 
 tpz.promyvion.initZone = function(zone)
     local ID = zones[zone:getID()]

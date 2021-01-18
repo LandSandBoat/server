@@ -1,17 +1,17 @@
----------------------------------------------
+-----------------------------------
 -- Spirits Within
 --
 -- Description: Delivers an unavoidable attack. Damage varies with HP and TP.
 -- Type: Magical/Breath
 -- Utsusemi/Blink absorb: Ignores shadows and most damage reduction.
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

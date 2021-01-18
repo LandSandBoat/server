@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4941
 -- Scroll of Raiton: Ni
 -- Teaches the ninjutsu Raiton: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

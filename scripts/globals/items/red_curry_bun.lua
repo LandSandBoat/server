@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5759
 -- Item: red_curry_bun
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group effects
 -- Health 25
 -- Strength 7
@@ -14,10 +14,10 @@
 -- Resist Sleep +3
 -- HP recovered when healing +2
 -- MP recovered when healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

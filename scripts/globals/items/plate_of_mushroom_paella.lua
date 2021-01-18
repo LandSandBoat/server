@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5970
 -- Item: Plate of Mushroom Paella
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 40
 -- Strength -1
 -- Mind 5
 -- Magic Accuracy 5
 -- Undead Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

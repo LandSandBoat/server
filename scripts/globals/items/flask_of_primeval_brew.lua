@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5853
 -- Item: Flask of Primeval Brew
 -- Status Effect: 3 minutes, All Races
------------------------------------------
+-----------------------------------
 -- HP +9000
 -- MP +9000
 -- Strength +900
@@ -24,7 +24,7 @@
 -- Ranged Attack +9000
 
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

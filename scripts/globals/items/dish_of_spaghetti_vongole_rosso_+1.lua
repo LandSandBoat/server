@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5198
 -- Item: Dish of Spaghetti Vongole Rosso +1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 20
 -- Health Cap 95
 -- Vitality 2
@@ -10,10 +10,10 @@
 -- Defense % 25
 -- Defense Cap 35
 -- Store TP 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

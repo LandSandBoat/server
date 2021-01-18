@@ -1,9 +1,9 @@
-------------------------------
+-----------------------------------
 -- Area: Beaucedine Glacier [S]
 --   NM: Becut
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)

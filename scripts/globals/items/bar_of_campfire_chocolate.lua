@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5941
 -- Item: Bar of Campfire Chocolate
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Mind +1
 -- MP recovered while healing +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

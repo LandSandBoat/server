@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5888
 -- Item: maringna
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +9% (cap 160)
 -- Increases rate of combat skill gains by 80%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

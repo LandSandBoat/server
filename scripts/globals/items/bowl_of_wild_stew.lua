@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4589
 -- Item: Bowl of Wild Stew
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Agility 1
 -- Vitality 2
@@ -11,10 +11,10 @@
 -- Attack Cap 50
 -- Ranged ATT % 25
 -- Ranged ATT Cap 50
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

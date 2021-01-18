@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4285
 -- Item: bowl_of_ocean_soup
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP +5% (cap 150)
 -- MP +5
 -- DEX +4
 -- Attack +14% (cap 90)
 -- Ranged Attack +14% (cap 90)
 -- HP recovered while healing +9
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

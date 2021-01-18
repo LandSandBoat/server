@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5505
 -- Avenger's Die
 -- Teaches the job ability Avengers Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

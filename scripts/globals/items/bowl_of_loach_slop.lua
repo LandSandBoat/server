@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5669
 -- Item: Bowl of Loach Slop
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Make Group Effect
 -- Accuracy 7% Cap 15
 -- Ranged Accuracy 7% Cap 15
 -- HP 7% Cap 15
 -- Evasion 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

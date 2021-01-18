@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5762
 -- Item: green_curry_bun_+1
 -- Food Effect: 60 min, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group effects
 -- VIT +3
 -- AGI +4
@@ -11,10 +11,10 @@
 -- Resist Sleep +5
 -- hHP +6
 -- hMP +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

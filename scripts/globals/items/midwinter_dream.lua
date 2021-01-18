@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5543
 -- Item: midwinter_dream
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP 10
 -- MP 8% Cap 60
 -- Intelligence 2
 -- HP Recovered while healing 2
 -- MP Recovered while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

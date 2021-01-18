@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4108
 -- Lighting Cluster
 -- Turn into a stack of lighting crystals
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

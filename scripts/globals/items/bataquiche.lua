@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5168
 -- Item: Bataquiche
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 8
 -- Agility 1
 -- Vitality -2
 -- Ranged Acc % 7
 -- Ranged Acc Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

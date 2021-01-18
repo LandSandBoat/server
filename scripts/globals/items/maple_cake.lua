@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5625
 -- Item: Maple Cake
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP Recoverd while healing 1
 -- MP Recovered while healing 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

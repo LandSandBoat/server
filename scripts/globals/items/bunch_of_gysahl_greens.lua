@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4545
 -- Item: Bunch of Gysahl Greens
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility +3
 -- Vitality -5
 -- Additional Effect with Chocobo Shirt
 -- Agility +10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
@@ -37,9 +37,9 @@ item_object.onEffectGain = function(target, effect)
     end
 end
 
------------------------------------------
+-----------------------------------
 -- onEffectLose Action
------------------------------------------
+-----------------------------------
 item_object.onEffectLose = function(target, effect)
     local power = effect:getPower()
     if (power == 1) then

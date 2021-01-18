@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Pileus Cell
 -- ID 5381
 -- Removes MND Down effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

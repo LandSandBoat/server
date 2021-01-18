@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Scorching Lash
 --
 --  Description: Deals heavy damage to targets behind user.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Back
 --  Notes: Used only if a target with hate is behind them. Conal behind Cerberus.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

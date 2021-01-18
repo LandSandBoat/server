@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4956
 -- Scroll of Kurayami: Ni
 -- Teaches the ninjutsu Kurayami: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

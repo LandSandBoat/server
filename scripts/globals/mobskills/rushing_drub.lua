@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Rushing Drub
 --
 --  Description: Delivers a fourfold attack on a single target.
@@ -6,10 +6,10 @@
 --  Utsusemi/Blink absorb: 4 shadows
 --  Range: Melee
 --  Notes: Only used by Mamool Ja with staves.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

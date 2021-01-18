@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4863
 -- Scroll of Break
 -- Teaches the black magic Break
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

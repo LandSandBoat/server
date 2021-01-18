@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Altar Room 
+-- Area: Altar Room
 -- NM: Laa Yaku The Austere
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4757
 -- Scroll of Blizzard
 -- Teaches the black magic Blizzard
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

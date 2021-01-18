@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5610
 -- Item: hellsteak_+1
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 22
 -- Strength 7
 -- Intelligence -3
@@ -11,10 +11,10 @@
 -- Attack % 20 (cap 150)
 -- Ranged ATT % 20 (cap 150)
 -- Dragon Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

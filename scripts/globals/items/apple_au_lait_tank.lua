@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 --  ID: 16224
 --  Apple au lait Tank
 --  When used, you will obtain one Apple au lait
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

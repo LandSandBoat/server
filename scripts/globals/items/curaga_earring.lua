@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14759
 -- Item: Curaga Earring
 -- Item Effect: Casts Curaga
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/settings")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

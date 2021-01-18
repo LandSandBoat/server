@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Drain Whip
 --
 -- Description: Drains HP, MP, or TP from the target.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: ignores shadows
 -- Range: Melee
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

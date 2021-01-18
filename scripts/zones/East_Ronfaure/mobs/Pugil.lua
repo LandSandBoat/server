@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: East Ronfaure
 --  Mob: Pugil
 -- Note: PH for Swamfisk
-----------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/East_Ronfaure/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")

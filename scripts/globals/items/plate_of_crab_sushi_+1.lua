@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5722
 -- Item: plate_of_crab_sushi_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Vitality 2
 -- Defense 15
 -- Accuracy % 14 (cap 68)
 -- Resist Sleep +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

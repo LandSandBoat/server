@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17607
 -- Item: Corrosive Baselard
 -- Additional Effect: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

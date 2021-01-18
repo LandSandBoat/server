@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Whip Tongue
 --
 --  Description: Whiplashes a single target with its tongue. Additional effect: Stun
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Unknown
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

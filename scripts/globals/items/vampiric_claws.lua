@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17510
 -- Item: Vampiric Claws
 -- Additional effect: HP Drain
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

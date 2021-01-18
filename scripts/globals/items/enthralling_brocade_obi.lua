@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15862
 -- Item: enthralling_brocade_obi
 -- Item Effect: CHR+10
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

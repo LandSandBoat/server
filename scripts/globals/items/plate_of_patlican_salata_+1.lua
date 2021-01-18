@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5583
 -- Item: plate_of_patlican_salata_+1
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Agility 5
 -- Vitality -2
 -- Evasion +7
 -- hHP +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

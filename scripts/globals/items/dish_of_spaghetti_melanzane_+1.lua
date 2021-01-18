@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5214
 -- Item: dish_of_spaghetti_melanzane_+1
 -- Food Effect: 1Hr, All Races
------------------------------------------
+-----------------------------------
 -- HP % 25 (cap 105)
 -- Vitality 2
 -- Store TP 6
 -- Resist sleep 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

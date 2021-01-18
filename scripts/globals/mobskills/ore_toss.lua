@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Ore Toss
 --
 --  Description: Deals high damage in a ranged attack.
 --  Type: Ranged
 --  Utsusemi/Blink absorb: Yes
 --  Range: Unknown range
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

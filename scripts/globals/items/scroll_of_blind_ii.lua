@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4884
 -- Scroll of Blind II
 -- Teaches the black magic Blind II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

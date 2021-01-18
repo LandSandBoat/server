@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6378
 -- Item: Decorative Chair
 -- Item Effect: Grant Decorative chair key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.DECORATIVE_CHAIR

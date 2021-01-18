@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6410
 -- Item: Shadow Throne
 -- Item Effect: Grant Leaf bench key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.SHADOW_THRONE

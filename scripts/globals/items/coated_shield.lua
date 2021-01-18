@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15838
 -- Item: Coated Shield
 -- Item Effect: Shell
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

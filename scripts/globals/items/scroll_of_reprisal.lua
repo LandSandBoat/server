@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4715
 -- Scroll of Reprisal
 -- Teaches the white magic Reprisal
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

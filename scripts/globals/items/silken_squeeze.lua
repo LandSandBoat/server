@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5630
 -- Item: Silken Squeeze
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP Recovered while healing +4
 -- MP Recovered while healing +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

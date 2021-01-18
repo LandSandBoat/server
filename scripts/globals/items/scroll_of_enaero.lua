@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4710
 -- Scroll of Enaero
 -- Teaches the white magic Enaero
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

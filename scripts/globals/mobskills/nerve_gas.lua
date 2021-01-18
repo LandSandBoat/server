@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Nerve Gas
 --
 -- Description: Inflicts curse and powerful poison tpz.effect.
 -- Type: Magical
 -- Wipes Shadows
 -- Range: 10' Radial
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

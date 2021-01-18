@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5404
 -- Wind Card Case
 -- When used, you will obtain one stack of Wind Cards
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

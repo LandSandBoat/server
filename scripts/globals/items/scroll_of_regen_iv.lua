@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5085
 -- Scroll of Regen IV
 -- Teaches the white magic Regen IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5456
 -- Item: Istiridye
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality 4
 -- Defense +17.07%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

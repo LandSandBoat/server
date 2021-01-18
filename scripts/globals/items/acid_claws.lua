@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16430
 -- Item: Acid Claws
 -- Additional Effect: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

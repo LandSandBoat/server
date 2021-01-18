@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4466
 -- Item: spicy_cracker
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- HP Recovered While Healing 7
 -- Beast Killer +10
 -- Resist Sleep +10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

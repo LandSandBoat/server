@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5837
 -- Item: tube_of_clear_salve_i
 -- Item Effect: Instantly removes 1-2 negative status effects at random from pet
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

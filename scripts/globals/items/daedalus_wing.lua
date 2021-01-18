@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4202
 -- Daedalus Wing
 -- Increases TP of the user by 100
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

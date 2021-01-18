@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 --  ID: 26720
 --  Sheep Cap +1
 --  When used, you will obtain one of eleven random items. They are:
 --  Faerie Apple, Sunflower Seeds, Red Moko Grass, La Theine Cabbage, Boyahda Moss,
 --  Pine Nuts, Beaugreens, Acorn, Dung, Batagreens, and Moko Grass
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

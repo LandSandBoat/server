@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4186
 -- Item: Airborne
 -- A goblin with a rainbow colored parasail rides in a downward spiral
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

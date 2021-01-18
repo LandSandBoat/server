@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5231
 -- Item: truelove_chocolate
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP 10
 -- MP Recovered While Healing 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

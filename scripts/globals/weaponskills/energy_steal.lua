@@ -1,5 +1,5 @@
 -----------------------------------
---    Energy Steal    --
+-- Energy Steal
 -----------------------------------
 local weaponskill_object = {}
 

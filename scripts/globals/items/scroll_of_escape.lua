@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4871
 -- Scroll of Escape
 -- Teaches the black magic Escape
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

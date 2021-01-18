@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5867
 -- Toolbag Ino
 -- When used, you will obtain one stack of inoshishinofuda
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

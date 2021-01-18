@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5693
 -- Item: plate_of_octopus_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 1
 -- Accuracy % 14 (cap 68)
 -- Ranged Accuracy % 14 (cap 68)
 -- Resist Sleep +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6339
 -- Item: rolanberry_daifuku
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +20
 -- DEX +2
 -- VIT +3
@@ -17,10 +17,10 @@
 -- Ranged Accuracy +10% (cap 105)
 -- Magic Accuracy +75
 -- https://www.bg-wiki.com/bg/Rolan._Daifuku
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

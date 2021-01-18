@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Concussive Oscillation
 -- Smacks around all nearby targets. Additional effect: Knockback + Weight
 -- Utsusemi/Blink absorb: 2-3 shadows
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

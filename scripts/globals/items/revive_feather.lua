@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5258
 -- Item: Revive Feather
 -- Status Effect: Reraise
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

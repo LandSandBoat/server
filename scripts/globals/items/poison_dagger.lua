@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16496
 -- Item: Poison Dagger
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

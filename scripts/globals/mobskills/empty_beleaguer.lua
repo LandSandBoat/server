@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Empty Beleaguer
 -- Deals damage in an area of effect.
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -12,9 +12,9 @@ require("scripts/globals/zone")
 tpz = tpz or {}
 tpz.abyssea = tpz.abyssea or {}
 
--------------------------------------------------
+-----------------------------------
 -- local data
--------------------------------------------------
+-----------------------------------
 
 -- weaponskills for red weakness
 local redWeakness =
@@ -80,9 +80,9 @@ local popEvents =
     [tpz.zone.ABYSSEA_EMPYREAL_PARADOX] = {1010, 1020, 1021},
 }
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 -- returns Traverser Stone KI cap
 tpz.abyssea.getMaxTravStones = function(player)

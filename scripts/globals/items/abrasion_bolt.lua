@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 21314
 -- Item: Abrasion Bolt
 -- Additional Effect: Weakens Defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Overthrow
 --
 --  Description: Throws a target backward.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Melee
 --  Notes: Moving to the side will avoid attack.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

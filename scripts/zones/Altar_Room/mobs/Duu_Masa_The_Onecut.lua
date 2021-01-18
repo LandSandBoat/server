@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Altar Room 
+-- Area: Altar Room
 -- NM: Duu Masa The Onecut
-----------------------------------
+-----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}

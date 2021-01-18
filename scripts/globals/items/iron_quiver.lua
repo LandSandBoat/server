@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4225
 -- Iron Quiver
 -- When used, you will obtain one stack of Iron Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

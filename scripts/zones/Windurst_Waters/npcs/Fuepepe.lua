@@ -40,11 +40,11 @@ entity.onTrigger = function(player, npc)
         end
     elseif (gradestatus == QUEST_COMPLETED and player:needToZone() == true) then
         player:startEvent(459) -- After Quest
-    -------------------------------------------------------
+    -----------------------------------
     -- Class Reunion
     elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and player:getCharVar("ClassReunionProgress") >= 3 and player:getCharVar("ClassReunion_TalkedToFupepe") ~= 1) then
         player:startEvent(817) -- he tells you about Uran-Mafran
-    -------------------------------------------------------
+    -----------------------------------
     else
         player:startEvent(423) -- Standard Conversation
     end

@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5668
 -- Item: Smilodon Liver
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Intelligence -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

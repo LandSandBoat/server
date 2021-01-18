@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4355
 -- Item: salmon_sub_sandwich
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Agility 1
 -- Vitality 1
 -- Intelligence 2
 -- Mind -2
 -- Ranged ACC 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

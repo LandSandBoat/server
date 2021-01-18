@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4321
 -- Item: timbre_timbers_salad
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 20
 -- Agility 5
 -- Vitality -1
 -- Ranged ACC % 8
 -- Ranged ACC Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

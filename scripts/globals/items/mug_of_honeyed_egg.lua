@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5739
 -- Item: mug_of_honeyed_egg
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- MP 8
 -- Intelligence 1
 -- MP recovered while healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

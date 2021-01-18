@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 -- Purulent Ooze
 -- Family: Slugs
 -- Description: Deals Water damage in a fan-shaped area of effect. Additional effect: Bio and Max HP Down
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: Cone
 -- Notes:
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

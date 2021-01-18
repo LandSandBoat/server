@@ -113,7 +113,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getCurrentMission(AMK) == tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX then
         player:startEvent(506)
 
-        -------------------------------------------------------
+        -----------------------------------
         -- Curses Foiled Again!
     elseif (foiledAgain == QUEST_AVAILABLE) then
         player:startEvent(171, 0, 0, 0, 0, 0, 0, 928, 880)

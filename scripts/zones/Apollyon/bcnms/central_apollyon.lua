@@ -13,7 +13,7 @@ battlefield_object.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
     battlefield:setLocalVar("podReady", 1)
     SetServerVariable("[Central_Apollyon]Time", battlefield:getTimeLimit()/60)
-    tpz.limbus.setupArmouryCrates(battlefield:getID())       
+    tpz.limbus.setupArmouryCrates(battlefield:getID())
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)

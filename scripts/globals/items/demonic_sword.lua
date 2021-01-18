@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16936
 -- Item: Demonic Sword
 -- Additional Effect: Darkness Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

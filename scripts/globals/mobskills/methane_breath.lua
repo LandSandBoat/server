@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Methane Breath
 --
 --  Description: Deals fire damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Fire)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

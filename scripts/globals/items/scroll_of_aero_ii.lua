@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4763
 -- Scroll of Aero II
 -- Teaches the black magic Aero II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

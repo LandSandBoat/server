@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5187
 -- Item: elshimo_coconut
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility -1
 -- Intelligence -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

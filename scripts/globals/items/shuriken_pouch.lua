@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6299
 -- Item: Sh. Pouch
 -- When used, you will obtain one stack of Shurikens
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

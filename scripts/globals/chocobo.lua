@@ -51,9 +51,9 @@ local chocoboInfo =
     [tpz.zone.NORG]                    = {levelReq = 20, basePrice =  90, addedPrice = 10, decayPrice = 5, decayTime = 60, questChance = 0.00, past = false, pos = {-456, 17, -348, 0, 123}},
 }
 
----------------------------------------
+-----------------------------------
 -- Local functions
----------------------------------------
+-----------------------------------
 
 local function getPrice(zoneId, info)
     local lastPrice = GetServerVariable("[CHOCOBO][" .. zoneId .. "]price")
@@ -69,9 +69,9 @@ function updatePrice(zoneId, info, price)
     SetServerVariable("[CHOCOBO][" .. zoneId .. "]time", os.time())
 end
 
----------------------------------------
+-----------------------------------
 -- Public functions
----------------------------------------
+-----------------------------------
 
 tpz.chocobo.initZone = function(zone)
     local zoneId = zone:getID()

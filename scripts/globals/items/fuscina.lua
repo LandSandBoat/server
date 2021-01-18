@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18104
 -- Item: Fuscina
 -- Additional Effect: Lightning Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

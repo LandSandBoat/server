@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4502
 -- Item: Marron Glace
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic % 13
 -- Magic Cap 85
 -- Magic Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

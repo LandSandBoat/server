@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4929
 -- Scroll of Katon: Ni
 -- Teaches the ninjutsu Katon: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

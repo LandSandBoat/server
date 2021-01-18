@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15838
 -- Item: Protect Earring
 -- Item Effect: Protect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

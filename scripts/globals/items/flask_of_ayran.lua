@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5576
 -- Item: Ayran
 -- Item Effect: Restores 120 HP over 180 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

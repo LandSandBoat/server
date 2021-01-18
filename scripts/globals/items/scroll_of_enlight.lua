@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4706
 -- Scroll of Enlight
 -- Teaches the white magic Enlight
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5402
 -- Fire Card Case
 -- When used, you will obtain one stack of Fire Cards
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

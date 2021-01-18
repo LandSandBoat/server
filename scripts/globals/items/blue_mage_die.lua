@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5492
 -- Blue Mage Die
 -- Teaches the job ability Magus's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

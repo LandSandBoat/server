@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
     local formTime = mob:getLocalVar("formWait")
     local lifePercent = mob:getHPP()
     local currentForm = mob:getLocalVar("form")
-    
+
     if lifePercent < 70 and currentForm < 1 then
         currentForm = 1
         mob:setLocalVar("form", currentForm)
@@ -46,7 +46,7 @@ entity.onMobFight = function(mob, target)
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
                 if not GetMobByID(mobID + 1):isSpawned() and math.random(0,1) == 1 then
                     mob:useMobAbility(1532)
-                end 
+                end
             else
                 mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
                 mob:setAnimationSub(1)

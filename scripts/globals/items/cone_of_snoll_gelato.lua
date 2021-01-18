@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5147
 -- Item: cone_of_snoll_gelato
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- MP % 16 (cap 75)
 -- MP Recovered While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

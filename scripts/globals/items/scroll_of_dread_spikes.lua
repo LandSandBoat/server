@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4885
 -- Scroll of Dread Spikes
 -- Teaches the black magic Dread Spikes
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

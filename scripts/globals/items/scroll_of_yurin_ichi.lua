@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4967
 -- Scroll of Yurin: Ichi
 -- Teaches the ninjutsu Yurin: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

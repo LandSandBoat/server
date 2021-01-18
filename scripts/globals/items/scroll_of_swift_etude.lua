@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5042
 -- Scroll of Swift Etude
 -- Teaches the song Swift Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

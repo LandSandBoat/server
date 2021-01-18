@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4330
 -- Item: witch_risotto
 -- Food Effect: 4hours, All Races
------------------------------------------
+-----------------------------------
 -- Magic Points 35
 -- Strength -1
 -- Vitality 3
 -- Mind 3
 -- MP Recovered While Healing 2
 -- Enmity -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Heat Barrier
 -- Family: Wamouracampa
 -- Description: Applies a thermal barrier, granting fiery spikes and fire damage on melee hits.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

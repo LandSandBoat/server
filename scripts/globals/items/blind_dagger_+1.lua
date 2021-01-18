@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16493
 -- Item: Blind Dagger +1
 -- Additional Effect: Blindness
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

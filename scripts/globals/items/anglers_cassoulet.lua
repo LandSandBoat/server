@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5704
 -- Item: anglers_cassoulet
 -- Food Effect: 30, All Races
------------------------------------------
+-----------------------------------
 -- VIT -1
 -- AGI +5
 -- Ranged Accuracy +1
 -- Regen +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4553
 -- Item: serving_of_batagreen_sautee
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 1
 -- Vitality -2
 -- Ranged ACC % 7
 -- Ranged ACC Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

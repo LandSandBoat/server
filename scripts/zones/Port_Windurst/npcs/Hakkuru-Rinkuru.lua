@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
     needToZone = player:needToZone()
     pFame = player:getFameLevel(WINDURST)
 
-        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~ --
+        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(456, 0, 248)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3) then
@@ -173,7 +173,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(tpz.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
             player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
         end
-        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~ --
+        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
     elseif (csid == 456) then
             player:setCharVar("MissionStatus", 1)
             player:addKeyItem(tpz.ki.SOUTHWESTERN_STAR_CHARM)

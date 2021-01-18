@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4297
 -- Item: serving_of_black_curry
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Vitality 4
 -- Intelligence 1
@@ -13,10 +13,10 @@
 -- Evasion 5
 -- Ranged ACC 5
 -- Sleep Resist 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

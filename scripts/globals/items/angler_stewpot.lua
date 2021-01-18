@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5611
 -- Item: Angler's Stewpot
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% (cap 200)
 -- MP +10
@@ -10,10 +10,10 @@
 -- MP Recovered while healing 1
 -- Accuracy +15% Cap 15
 -- Ranged Accuracy 15% Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4486
 -- Item: Dragon Heart
 -- Food Effect: 3 Hr, Galka Only
------------------------------------------
+-----------------------------------
 -- Strength 7
 -- Intelligence -9
 -- MP -40
 -- HP 40
 -- Dragon Killer 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

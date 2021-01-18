@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5681
 -- Item: cupid_chocolate
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Accuracy +10
 -- Ranged Accuracy +10
 -- Attack 10
 -- Ranged Attack 10
 -- Store TP +25
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

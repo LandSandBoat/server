@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5738
 -- Item: chunk_of_sweet_lizard
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP 5
 -- MP 5
 -- Dexterity 1
 -- hHP +2
 -- hMP +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

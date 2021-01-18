@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5039
 -- Scroll of Herculean Etude
 -- Teaches the song Herculean Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Tarutaru Warp II
 -- End Ark Angel TT teleport
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

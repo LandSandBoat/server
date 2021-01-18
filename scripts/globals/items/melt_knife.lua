@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18011
 -- Item: Melt Knife
 -- Additional Effect: Weakens defense
 -- TODO: Enchantment: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

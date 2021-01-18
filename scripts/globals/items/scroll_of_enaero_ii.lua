@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4724
 -- Scroll of Enaero II
 -- Teaches the white magic Enaero II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

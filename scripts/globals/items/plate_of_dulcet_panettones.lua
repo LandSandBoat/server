@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5979
 -- Item: Plate of Dulcet Panettones
 -- Food Effect: 240 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP % 6 Cap 105
 -- Intelligence +8
 -- MP Healing +4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

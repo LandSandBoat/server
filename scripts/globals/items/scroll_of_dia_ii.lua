@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4632
 -- Scroll of Dia II
 -- Teaches the white magic Dia II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

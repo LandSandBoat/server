@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4623
 -- Scroll of Paralyna
 -- Teaches the white magic Paralyna
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

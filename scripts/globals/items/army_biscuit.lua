@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5657
 -- Item: army_biscuit
 -- Food Effect: 5Min?, All Races
------------------------------------------
+-----------------------------------
 -- HP Recovered While Healing 3
 -- MP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 25585
 -- Black Chocobo Cap
 -- Enchantment: "Teleport" (Upper Jeuno Chocobo Stables)
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

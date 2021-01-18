@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 11273
 -- Item: custom gilet +1
 -- Teleport's user to Purgonorgo Isle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 require("scripts/globals/teleports")

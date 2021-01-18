@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16594
 -- Item: Inferno Sword
 -- Additional Effect: Fire Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

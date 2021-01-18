@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4440
 -- Item: Bowl of Whitefish Stew
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Dexterity 3
 -- Mind -3
 -- Accuracy 3
 -- Ranged ACC % 7
 -- Ranged ACC Cap 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

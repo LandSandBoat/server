@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: npchere <npcId>
 -- desc: Spawns an NPC and then moves it to the current position, if in same zone.
 --       Errors will despawn the NPC unless "noDepop" was specified (any value works).
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {

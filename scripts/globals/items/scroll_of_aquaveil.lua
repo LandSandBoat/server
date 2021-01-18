@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4663
 -- Scroll of Aquaveil
 -- Teaches the white magic Aquaveil
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

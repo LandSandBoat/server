@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5734
 -- Toolbag Soshi
 -- When used, you will obtain one stack of soshi
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

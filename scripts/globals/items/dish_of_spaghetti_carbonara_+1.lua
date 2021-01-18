@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5199
 -- Item: dish_of_spaghetti_carbonara_+1
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 14
 -- Health Cap 180
 -- Magic 15
@@ -12,10 +12,10 @@
 -- Attack % 17
 -- Attack Cap 70
 -- Store TP 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Spirit Absorption
 -- Attempts to absorb one buff from a single target, or otherwise steals HP.
 -- Type: Magical
 -- Utsusemi/Blink absorb: 1 Shadows
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

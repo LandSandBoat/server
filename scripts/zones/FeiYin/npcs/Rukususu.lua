@@ -19,7 +19,7 @@ end
 entity.onTrigger = function(player, npc)
     -- The Jester Who'd Be King (Windurst 8-2)
     if
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and 
+        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 1 and not
         player:hasKeyItem(tpz.ki.RHINOSTERY_RING)
     then

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4712
 -- Scroll of Enthunder
 -- Teaches the white magic Enthunder
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

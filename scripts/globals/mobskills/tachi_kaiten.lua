@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Tachi:Kaiten
 --
 --  Description: Amanomurakumo/Totsukanotsurugi: Temporarily increases amount of TP stored with each hit.
 --  Type: Physical
 --  Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

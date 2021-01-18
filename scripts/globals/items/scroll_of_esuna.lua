@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4703
 -- Scroll of Esuna
 -- Teaches the white magic Esuna
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

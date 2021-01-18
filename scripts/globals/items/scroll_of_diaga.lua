@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4641
 -- Scroll of Diaga
 -- Teaches the white magic Diaga
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

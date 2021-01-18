@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6050
 -- Rainstorm Schema
 -- Teaches the white magic Rainstorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

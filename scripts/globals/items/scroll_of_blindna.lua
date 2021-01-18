@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4624
 -- Scroll of Blindna
 -- Teaches the white magic Blindna
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15290
 -- Item: Haste Belt
 -- Item Effect: 10% haste
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

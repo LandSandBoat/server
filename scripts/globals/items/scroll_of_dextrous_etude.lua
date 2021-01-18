@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5033
 -- Scroll of Dextrous Etude
 -- Teaches the song Dextrous Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

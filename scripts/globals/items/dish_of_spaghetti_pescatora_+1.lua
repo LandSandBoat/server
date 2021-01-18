@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5200
 -- Item: dish_of_spaghetti_pescatora_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 15
 -- Health Cap 160
 -- Vitality 3
@@ -10,10 +10,10 @@
 -- Defense % 22
 -- Defense Cap 70
 -- Store TP 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

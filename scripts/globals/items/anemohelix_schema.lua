@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6046
 -- Item: Anemohelix Schema
 -- Teaches the black magic Anemohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

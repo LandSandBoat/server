@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5180
 -- Item: bowl_of_sophic_stew
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 6
 -- Intelligence 6
 -- Mind 6
 -- HP Recovered While Healing 3
 -- MP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

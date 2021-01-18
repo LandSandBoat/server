@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4271
 -- Item: rice_dumpling
 -- Food Effect: 30minutes, All Races
------------------------------------------
+-----------------------------------
 -- HP 17
 -- Strength 3
 -- Vitality 2
@@ -13,10 +13,10 @@
 -- MP Regeneration While Healing 2
 -- Accuracy 5
 -- Resist Paralyze +4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

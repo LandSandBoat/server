@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Temporal Shift
 -- Family: Hpemde
 -- Description: Enemies within range are temporarily prevented from acting.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 15 yalms
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

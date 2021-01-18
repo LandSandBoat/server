@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 13688
 -- Hi-Potion Tank
 -- When used, you will obtain one Hi-Potion
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

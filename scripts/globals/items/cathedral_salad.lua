@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5679
 -- Item: cathedral_salad
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP 15% Cap 90
 -- Agility 7
 -- Mind 7
 -- Strength -5
 -- Vitality -5
 -- Ranged Accuracy +17
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

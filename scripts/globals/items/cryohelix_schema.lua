@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6044
 -- Cryohelix Schema
 -- Teaches the black magic Cryohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

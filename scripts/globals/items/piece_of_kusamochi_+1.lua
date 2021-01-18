@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6263
 -- Item: kusamochi+1
 -- Food Effect: 60 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP + 30 (Pet & Master)
 -- Vitality + 4 (Pet & Master)
 -- Attack + 21% Cap: 77 (Pet & Master) Pet Cap: 120
 -- Ranged Attack + 21% Cap: 77 (Pet & Master) Pet Cap: 120
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

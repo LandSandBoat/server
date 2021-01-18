@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Wing Slap
 --
 --  Description: Slaps around a single target four times with its wings. Additional effect: Stun
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 4 shadows
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Stormwind
 --
 --  Description: Creates a whirlwind that deals Wind damage to targets in an area of effect.
@@ -6,7 +6,7 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Unknown radial
 --  Notes:
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 require("scripts/globals/settings")

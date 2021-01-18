@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5144
 -- Item: serving_of_crimson_jelly
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic % 12
 -- Magic Cap 85
 -- Intelligence 6
 -- Magic Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

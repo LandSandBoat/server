@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 16550
 -- Hallowed Sword
 -- Additional Effect: Light Damage
 -- Enchantment: "Enlight"
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

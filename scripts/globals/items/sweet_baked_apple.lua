@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4336
 -- Item: sweet_baked_apple
 -- Food Effect: 1hour, All Races
------------------------------------------
+-----------------------------------
 -- Magic Points 25
 -- Intelligence 4
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

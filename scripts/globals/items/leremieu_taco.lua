@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5175
 -- Item: leremieu_taco
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Magic 20
 -- Dexterity 4
@@ -13,10 +13,10 @@
 -- Magic Regen While Healing 1
 -- Defense % 25
 -- Defense Cap 160
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -61,9 +61,9 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- TODO: Merits.
     -- TODO: Under Azure Lore.
 
-    ---------------------------------
+    -----------------------------------
     -- Calculate the final D value  -
-    ---------------------------------
+    -----------------------------------
     -- worked out from http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     -- Final D value ??= floor(D+fSTR+WSC) * Multiplier
 
@@ -105,9 +105,9 @@ function BluePhysicalSpell(caster, target, spell, params)
 
     -- print("Final D is ".. finalD)
 
-    ----------------------------------------------
-    -- Get the possible pDIF range and hit rate --
-    ----------------------------------------------
+    -----------------------------------
+    -- Get the possible pDIF range and hit rate
+    -----------------------------------
     if (params.offcratiomod == nil) then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
         params.offcratiomod = caster:getStat(tpz.mod.ATT)
     end
@@ -118,9 +118,9 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- print("Hit rate "..hitrate)
     -- print("pdifmin "..cratio[1].." pdifmax "..cratio[2])
 
-    -------------------------
-    -- Perform the attacks --
-    -------------------------
+    -----------------------------------
+    -- Perform the attacks
+    -----------------------------------
     local hitsdone = 0
     local hitslanded = 0
     local finaldmg = 0
@@ -240,9 +240,9 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     return dmg
 end
 
-------------------------------
+-----------------------------------
 -- Utility functions below ---
-------------------------------
+-----------------------------------
 
 function BlueGetWsc(attacker, params)
     wsc = (attacker:getStat(tpz.mod.STR) * params.str_wsc + attacker:getStat(tpz.mod.DEX) * params.dex_wsc +

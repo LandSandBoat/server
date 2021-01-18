@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Ion_Efflux
 --
 -- Description: 10'(?) cone  Paralysis, ignores Utsusemi
 -- Type: Magical
 --
 -- Range: 10 yalms
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Mediocris Cell
 -- ID 5382
 -- Removes CHR Down effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

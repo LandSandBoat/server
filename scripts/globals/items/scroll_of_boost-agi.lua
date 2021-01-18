@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5097
 -- Scroll of Boost-AGI
 -- Teaches the white magic Boost-AGI
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

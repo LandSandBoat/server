@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Ascetics Fury
 -- Description: Hand To Hand Weapon Skill
 -- Type: Physical
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target,mob,skill)

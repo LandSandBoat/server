@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Condemnation
 -- Deals damage in a threefold attack to enemies within a fan-shaped area of effect.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

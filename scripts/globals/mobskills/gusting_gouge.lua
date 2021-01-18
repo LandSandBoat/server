@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Gusting Gouge
 --  Description: Deals Wind damage in a threefold attack to targets in a fan-shaped area of effect.
 --  Type: Physical?
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Notes: Used only by Lamia equipped with a one-handed weapon. If they lost their weapon, they'll use Hysteric Barrage instead.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

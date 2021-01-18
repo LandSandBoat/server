@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5453
 -- Item: Istakoz
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality 3
 -- Defense +16% (cap 50)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

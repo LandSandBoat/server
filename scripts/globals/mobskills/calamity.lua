@@ -1,16 +1,16 @@
----------------------------------------------
+-----------------------------------
 --  Calamity
 --
 --  Description: Delivers a single-hit attack. Damage varies with TP.
 --  Type: Physical
 --  Number of hits
 --  Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

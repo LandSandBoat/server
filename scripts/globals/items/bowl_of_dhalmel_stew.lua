@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4433
 -- Item: Bowl of Dhalmel Stew
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Agility 1
 -- Vitality 2
@@ -11,10 +11,10 @@
 -- Attack Cap 45
 -- Ranged ATT % 25
 -- Ranged ATT Cap 45
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

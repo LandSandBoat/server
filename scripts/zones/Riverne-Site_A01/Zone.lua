@@ -23,7 +23,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getCurrentMission(COP) == tpz.mission.id.cop.ANCIENT_VOWS and player:getCharVar("PromathiaStatus") == 1 then
         cs = 100
     end
-    
+
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(732.55, -32.5, -506.544, 90) -- {R}
     end

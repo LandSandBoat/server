@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Hypothermal Combustion
 -- Self-destructs, releasing ice at nearby targets.
 -- Type: Magical
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Notes: Damage is based on remaining HP
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

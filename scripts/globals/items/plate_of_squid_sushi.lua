@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5148
 -- Item: plate_of_squid_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 30
 -- Dexterity 6
 -- Agility 5
@@ -10,10 +10,10 @@
 -- Accuracy % 15
 -- Ranged ACC % 15
 -- Sleep Resist 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

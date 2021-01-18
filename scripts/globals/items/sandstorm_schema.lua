@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6053
 -- Sandstorm Schema
 -- Teaches the white magic Sandstorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

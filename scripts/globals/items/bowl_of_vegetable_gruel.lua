@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4489
 -- Item: bowl_of_vegetable_gruel
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Vitality -1
 -- Agility 2
 -- Ranged Accuracy % 15 (cap 10)
 -- HP Recovered While Healing 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

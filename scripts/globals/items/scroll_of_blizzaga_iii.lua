@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4789
 -- Scroll of Blizzaga III
 -- Teaches the black magic Blizzaga III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

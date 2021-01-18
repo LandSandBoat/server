@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18599
 -- Item: Pestle
 -- Additional effect: MP Drain
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

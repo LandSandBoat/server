@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4340
 -- Item: bowl_of_optical_soup
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP % 6 (cap 75)
 -- Charisma -15
 -- HP Recovered While Healing 5
 -- Accuracy 15
 -- Ranged Accuracy 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

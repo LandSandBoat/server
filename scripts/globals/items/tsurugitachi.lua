@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 18444
 -- Item: Tsurugitachi
 -- Item Effect: TP +10
 -- Durration: Instant
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

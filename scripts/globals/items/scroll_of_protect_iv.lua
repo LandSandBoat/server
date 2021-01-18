@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4654
 -- Scroll of Protect IV
 -- Teaches the white magic Protect IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18403
 -- Item: high_mana_wand
 -- Item Effect: MPHEAL +4
 -- Duration: 30 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

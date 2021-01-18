@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4840
 -- Scroll of Bio III
 -- Teaches the black magic Bio III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

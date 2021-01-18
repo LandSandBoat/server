@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5766
 -- Item: Butter Crepe
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +10% (cap 10)
 -- Magic Accuracy +20% (cap 25)
 -- Magic Defense +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

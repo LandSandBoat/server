@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4512
 -- Item: Vampire Juice
 -- Item Effect: Restores 60 HP and MP over 90 seconds.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

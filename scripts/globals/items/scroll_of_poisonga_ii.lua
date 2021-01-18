@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4834
 -- Scroll of Poisonga II
 -- Teaches the black magic Poisonga II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Cannonball
 --  Family: Wamouracampa
 --  Description: Damage varies with TP.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: One shadow
 --  Range: 20
 --  Notes: Uses defense instead of attack. Curled form only.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

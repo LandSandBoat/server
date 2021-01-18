@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Full-Force Blow
 -- Deals damage to a single target. Additional effect: Knockback.
 -- 0% TP: ??? / 150% TP: ??? / 300% TP: ???
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

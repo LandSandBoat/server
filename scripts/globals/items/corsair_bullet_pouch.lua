@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5342
 -- Corsair Bullet Pouch
 -- When used, you will obtain one stack of Corsair Bullets
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -5,10 +5,10 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 
------------------------------------------------
+-----------------------------------
 -- battlefields by zone
 -- captured from client 2020-10-24
------------------------------------------------
+-----------------------------------
 
 --[[
     [zoneId] = {
@@ -527,9 +527,9 @@ local battlefields = {
 
 }
 
------------------------------------------------
+-----------------------------------
 -- check requirements for registrant and allies
------------------------------------------------
+-----------------------------------
 
 function checkReqs(player, npc, bfid, registrant)
     local mi      = tpz.mission.id
@@ -748,9 +748,9 @@ function checkReqs(player, npc, bfid, registrant)
     end
 end
 
------------------------------------------------
+-----------------------------------
 -- check ability to skip a cutscene
------------------------------------------------
+-----------------------------------
 
 function checkSkip(player, bfid)
     local mi        = tpz.mission.id
@@ -852,9 +852,9 @@ function checkSkip(player, bfid)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- which battlefields are valid for registrant?
------------------------------------------------
+-----------------------------------
 
 function findBattlefields(player, npc, itemId)
     local mask = 0
@@ -870,9 +870,9 @@ function findBattlefields(player, npc, itemId)
     return mask
 end
 
------------------------------------------------
+-----------------------------------
 -- get battlefield id for a given zone and bit
------------------------------------------------
+-----------------------------------
 
 function getBattlefieldIdByBit(player, bit)
     local zbfs = battlefields[player:getZoneID()]
@@ -887,9 +887,9 @@ function getBattlefieldIdByBit(player, bit)
     return 0
 end
 
------------------------------------------------
+-----------------------------------
 -- get battlefield bit for a given zone and id
------------------------------------------------
+-----------------------------------
 
 function getBattlefieldMaskById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
@@ -903,9 +903,9 @@ function getBattlefieldMaskById(player, bfid)
     return 0
 end
 
------------------------------------------------
+-----------------------------------
 -- get battlefield bit for a given zone and id
------------------------------------------------
+-----------------------------------
 
 function getItemById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
@@ -919,9 +919,9 @@ function getItemById(player, bfid)
     return 0
 end
 
------------------------------------------------
+-----------------------------------
 -- onTrade Action
------------------------------------------------
+-----------------------------------
 
 function TradeBCNM(player, npc, trade, onUpdate)
     -- validate trade
@@ -960,9 +960,9 @@ function TradeBCNM(player, npc, trade, onUpdate)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- onTrigger Action
------------------------------------------------
+-----------------------------------
 
 function EventTriggerBCNM(player, npc)
     -- player is in battlefield and clicks to leave
@@ -995,9 +995,9 @@ function EventTriggerBCNM(player, npc)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- onEventUpdate
------------------------------------------------
+-----------------------------------
 
 function EventUpdateBCNM(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
@@ -1108,9 +1108,9 @@ function EventUpdateBCNM(player, csid, option, extras)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- onEventFinish Action
------------------------------------------------
+-----------------------------------
 
 function EventFinishBCNM(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))

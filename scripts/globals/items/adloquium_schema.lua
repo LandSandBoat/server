@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6061
 -- Item: Adloquium Schema
 -- Teaches the white magic Adloquium
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

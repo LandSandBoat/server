@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5733
 -- Jug of Miracle Milk
 -- Enchantment: 60Min, Costume - Chigoe (red)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

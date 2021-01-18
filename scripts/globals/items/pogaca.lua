@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5637
 -- Item: pogaca
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Lizard Killer +10
 -- Resist Paralyze +10
 -- HP Recovered While Healing 4
 -- MP Recovered While Healing 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5096
 -- Scroll of Boost-VIT
 -- Teaches the white magic Boost-VIT
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

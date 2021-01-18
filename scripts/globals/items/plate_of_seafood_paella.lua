@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5968
 -- Item: Plate of Seafood Paella
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 40
 -- Dexterity 5
 -- Mind -1
 -- Accuracy % 15 (cap 80)
 -- Undead Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

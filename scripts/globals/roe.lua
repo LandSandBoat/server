@@ -1,16 +1,16 @@
-------------------------------------
+-----------------------------------
 -- Records of Eminence
-------------------------------------
+-----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.roe = tpz.roe or {}
 
--------------------------------------------------
+-----------------------------------
 -- triggers
--------------------------------------------------
+-----------------------------------
 
 local triggers =
 {
@@ -28,9 +28,9 @@ local triggers =
     missionComplete = 12,   -- Player completes mission
 }
 
--------------------------------------------------
+-----------------------------------
 -- checks
--------------------------------------------------
+-----------------------------------
 
 local checks =
 {
@@ -92,9 +92,9 @@ local masterCheck = function(self, player, params)
     return true
 end
 
--------------------------------------------------
+-----------------------------------
 -- records
--------------------------------------------------
+-----------------------------------
 
 -- Schedule for Timed Records.
 local timedSchedule = {
@@ -180,14 +180,6 @@ local function completeRecord(player, record)
         end
     end
 
-    if rewards["xp"] ~= nil and type(rewards["xp"]) == "number" then
-        player:addExp(rewards["xp"] * ROE_EXP_RATE)
-    end
-
-    if rewards["keyItem"] ~= nil then
-        npcUtil.giveKeyItem(player, rewards["keyItem"])
-    end
-
     if recordFlags["repeat"] then
         if recordFlags["timed"] then
             player:messageBasic(tpz.msg.basic.ROE_TIMED_CLEAR)
@@ -198,6 +190,15 @@ local function completeRecord(player, record)
     else
         player:setEminenceCompleted(record)
     end
+
+    if rewards["xp"] ~= nil and type(rewards["xp"]) == "number" then
+        player:addExp(rewards["xp"] * ROE_EXP_RATE)
+    end
+
+    if rewards["keyItem"] ~= nil then
+        npcUtil.giveKeyItem(player, rewards["keyItem"])
+    end
+
     return true
 end
 

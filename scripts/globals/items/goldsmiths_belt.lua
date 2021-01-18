@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 15446
 -- Item: Goldsmith's Belt
 -- Enchantment: Synthesis image support
 -- 2Min, All Races
------------------------------------------
+-----------------------------------
 -- Enchantment: Synthesis image support
 -- Duration: 2Min
 -- Goldsmithing Skill +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

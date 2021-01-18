@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4803
 -- Scroll of Thundaga II
 -- Teaches the black magic Thundaga II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

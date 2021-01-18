@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5781
 -- Item: kitron_macaron
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Increases rate of synthesis success +7%
 -- Increases synthesis skill gain rate +7%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

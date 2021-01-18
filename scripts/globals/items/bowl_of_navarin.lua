@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4439
 -- Item: Bowl of Navarin
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 3 (cap 130)
 -- Strength 3
 -- Agility 1
@@ -13,10 +13,10 @@
 -- Evasion 5
 -- Ranged ATT % 27
 -- Ranged ATT Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

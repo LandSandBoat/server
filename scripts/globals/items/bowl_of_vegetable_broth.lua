@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4323
 -- Item: bowl_of_vegetable_broth
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Vitality -1
 -- Agility 5
 -- Ranged Accuracy 6
 -- HP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

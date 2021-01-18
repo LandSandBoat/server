@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 17682
 -- Sacred Sword
 -- Additional effect: Light damage
 -- Enchantment: "Enlight"
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

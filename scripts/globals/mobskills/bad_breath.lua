@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Bad Breath
 --
 --  Description: Deals earth damage that inflicts multiple status ailments on enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Earth)
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Pelagic Tempest
 --
 --  Description: Delivers an area attack that inflicts Shock and Terror.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 10' cone
 --  Notes: Used by Murex affiliated with lightning element. Shock effect is fairly strong (28/tick).
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

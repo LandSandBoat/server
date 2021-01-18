@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Lightning Roar
 -- Emits the roar of an impact event, dealing damage in a fan-shaped area of effect. Lightning damage
 -- Ignores Shadows
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

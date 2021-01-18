@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4665
 -- Scroll of Haste
 -- Teaches the white magic Haste
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

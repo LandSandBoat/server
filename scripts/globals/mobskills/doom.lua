@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 -- Doom
 --
 -- Description: Inflicts Doom upon an enemy.
 -- Type: Magical (Dark)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4815
 -- Scroll of Freeze II
 -- Teaches the black magic Freeze II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

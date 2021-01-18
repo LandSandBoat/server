@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Victory Smite
 -- Description: Delivers a fourfold attack. Chance of params.critical hit varies with TP.
 -- Type: Physical
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target,mob,skill)

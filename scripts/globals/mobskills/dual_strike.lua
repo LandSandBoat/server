@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Dual Strike
 --
 -- Family: Xzomit
@@ -7,11 +7,11 @@
 -- Utsusemi/Blink absorb: 2 shadows
 -- Range: Melee
 -- Notes: Double attacks a single target. Additional effect: Stun
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

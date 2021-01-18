@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 15541
 -- Teleport Homing Ring
 -- Enchantment: "Outpost Warp"
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/conquest")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

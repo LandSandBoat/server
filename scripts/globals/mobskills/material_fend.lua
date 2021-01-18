@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Material Fend
 --
 -- Description: Enhances evasion.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes: evasion increase.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

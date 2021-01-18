@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4571
 -- Item: clump_of_beaugreens
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 2
 -- Vitality -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

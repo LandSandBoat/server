@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5314
 -- Toolbag Sanjaku-tenugui
 -- When used, you will obtain one stack of Sanjaku-tenugui
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

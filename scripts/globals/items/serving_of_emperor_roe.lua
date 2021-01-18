@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4275
 -- Item: serving_of_emperor_roe
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 8
 -- Magic 8
 -- Dexterity 4
 -- Mind -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

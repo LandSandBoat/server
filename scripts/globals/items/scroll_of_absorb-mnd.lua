@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4879
 -- Scroll of Absorb-MND
 -- Teaches the black magic Absorb-MND
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

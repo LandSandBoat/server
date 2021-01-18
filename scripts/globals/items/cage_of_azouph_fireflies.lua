@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5343
 -- Azouph Fireflies
 -- Transports the user to Azouph Isle
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

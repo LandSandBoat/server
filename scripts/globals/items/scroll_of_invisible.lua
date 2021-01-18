@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4744
 -- Scroll of Invisible
 -- Teaches the white magic Invisible
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

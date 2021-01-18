@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4538
 -- Item: roast_pipira
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Mind -3
 -- Attack % 14
 -- Attack Cap 75
 -- Ranged ATT % 14
 -- Ranged ATT Cap 75
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

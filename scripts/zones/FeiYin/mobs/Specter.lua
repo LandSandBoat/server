@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: Fei'Yin
 --  Mob: Specter
 -- Note: PH for N/E/S/W Shadow NMs
-----------------------------------------
+-----------------------------------
 require("scripts/globals/regimes")
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/mobs")

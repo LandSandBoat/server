@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4860
 -- Scroll of Stun
 -- Teaches the black magic Stun
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

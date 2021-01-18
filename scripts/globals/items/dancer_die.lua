@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5495
 -- Dancer Die
 -- Teaches the job ability Dancer's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

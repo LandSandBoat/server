@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6412
 -- Item: Leaf Bench
 -- Item Effect: Grant Leaf bench key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.LEAF_BENCH

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14785
 -- Item: Janizary Earring
 -- Item Effect: Defence +32
 -- Duration 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5819
 -- Item: Antlion Quiver
 -- When used, you will obtain one stack of Antlion Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

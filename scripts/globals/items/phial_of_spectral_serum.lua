@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5352
 -- Phial of spectral Serum
 -- Enchantment: 60Min, Costume - ghost
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

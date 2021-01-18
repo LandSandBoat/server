@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4361
 -- Item: nebimonite
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -3
 -- Vitality 2
 -- Defense % 13 (cap 50)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5564
 -- Item: Chunk of Hydra Meat
 -- Effect: 5 Minutes, food effect, Galka Only
------------------------------------------
+-----------------------------------
 -- HP 10
 -- MP -10
 -- Strength +6
 -- Intelligence -8
 -- Demon Killer 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4148
 -- Item: Antidote
 -- Item Effect: This potion remedies poison.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

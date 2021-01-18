@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4928
 -- Scroll of Katon: Ichi
 -- Teaches the ninjutsu Katon: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

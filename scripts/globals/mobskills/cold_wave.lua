@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Cold Wave
 --
 --  Description: Deals ice damage that lowers Agility and gradually reduces HP of enemies within range.
 --  Type: Magical (Ice)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

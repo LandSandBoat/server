@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Final Retribution
 --  Family: Corse
 --  Description: Damages enemies in an area of effect. Additional effect: Stun
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1-3 shadows
 --  Range: Radial
 --  Notes: Only used by some notorious monsters like Xolotl.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5046
 -- Scroll of Fire Carol
 -- Teaches the song Fire Carol
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

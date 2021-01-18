@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5105
 -- Scroll of Flurry II
 -- Teaches the white magic Flurry II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

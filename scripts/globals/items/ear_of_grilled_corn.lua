@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4334
 -- Item: ear_of_grilled_corn
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Vitality 4
 -- Health Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

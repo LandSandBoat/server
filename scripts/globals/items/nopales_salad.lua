@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5701
 -- Item: nopales_salad
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Strength 1
 -- Agility 6
 -- Ranged Accuracy +20
 -- Ranged Attack +10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

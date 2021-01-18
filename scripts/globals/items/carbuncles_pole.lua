@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 18581
 -- Item: Carbuncle's Pole
 -- Item Effect: Restores 160-220 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onAdditionalEffect = function(player, target, damage)

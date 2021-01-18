@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
     local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Carbuncle Debacle
     if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(tpz.ki.DAZEBREAKER_CHARM) == true) then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(88) -- reminder to go to Cloister of Gales
         end
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Trial by Wind
     elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByWind_date"))) then
         player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"

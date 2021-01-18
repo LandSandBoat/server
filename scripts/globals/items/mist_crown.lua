@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15162
 -- Item: Mist Crown
 -- Item Effect: Evasion Boost
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

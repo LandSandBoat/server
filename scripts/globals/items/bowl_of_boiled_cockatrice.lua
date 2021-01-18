@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4547
 -- Item: Bowl of Boiled Cockatrice
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Agility 2
 -- Intelligence -2
@@ -12,10 +12,10 @@
 -- Ranged ATT % 22
 -- Ranged ATT Cap 60
 -- Resist petrify +4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

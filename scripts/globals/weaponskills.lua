@@ -528,7 +528,7 @@ function fencerBonus(attacker)
         return 0
     end
 
-    
+
     local mainEquip = attacker:getStorageItem(0, 0, tpz.slot.MAIN)
     if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
         local subEquip = attacker:getStorageItem(0, 0, tpz.slot.SUB)

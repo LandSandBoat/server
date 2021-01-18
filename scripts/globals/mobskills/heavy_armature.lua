@@ -1,10 +1,10 @@
----------------------------------------------------
+-----------------------------------
 -- Heavy Armature
 -- Adds buffs Haste, Shell, Protect, Blink
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

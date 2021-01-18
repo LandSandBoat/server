@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6459
 -- Item: bowl_of_soy_ramen_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +55
 -- STR +6
 -- VIT +6
@@ -10,10 +10,10 @@
 -- Attack +11% (cap 175)
 -- Ranged Attack +11% (cap 175)
 -- Resist Slow +15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

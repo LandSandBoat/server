@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5977
 -- Item: Bowl of Ulbuconut Milk +1
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Charisma +4
 -- Vitality -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

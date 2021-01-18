@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17071
 -- Item: Heat Rod
 -- Additional Effect: Lightning Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

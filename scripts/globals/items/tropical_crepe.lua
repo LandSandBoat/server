@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6567
 -- Item: Tropical Crepe
 -- Food Effect: 30 minutes, all Races
------------------------------------------
+-----------------------------------
 -- INT +2
 -- MND +2
 -- Magic Accuracy +20% (Max. 90)
 -- "Magic Def. Bonus" +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

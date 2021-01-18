@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Depuration
 -- Family: Aern
 -- Type: Healing
@@ -7,11 +7,11 @@
 -- Range: Self
 -- Notes: Erases all negative effects on the mob.
 -- Aerns will generally not attempt to use this ability if no erasable effects exist on them.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

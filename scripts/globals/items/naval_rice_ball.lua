@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4605
 -- Item: Naval Rice Ball
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +12
 -- Dex +3
 -- Vit +3
@@ -11,10 +11,10 @@
 -- Atk +40
 -- Def +40
 -- Arcana Killer (guesstimated 5%)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5943
 -- Item: Strip of Smoked Mackerel
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 4
 -- Vitality -3
 -- Evasion +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

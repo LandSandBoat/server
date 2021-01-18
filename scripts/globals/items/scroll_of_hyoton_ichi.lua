@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4931
 -- Scroll of Hyoton: Ichi
 -- Teaches the ninjutsu Hyoton: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

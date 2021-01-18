@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6409
 -- Item: Ephramadian Throne
 -- Item Effect: Grant Ephramadian throne key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.EPHRAMADIAN_THRONE

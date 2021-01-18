@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4738
 -- Scroll of Shellra
 -- Teaches the white magic Shellra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

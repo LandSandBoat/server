@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Scratch
 --
 -- Description: Strikes a single target in the face. Additional effect: Blind
@@ -6,10 +6,10 @@
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
 -- Notes: Used by some notorious monsters in place of Scratch.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

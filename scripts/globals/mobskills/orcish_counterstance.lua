@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Orcish Counterstance
 -- Used only by Orcs in Wings of the Goddess Areas.
 -- Certain NMs may have a higher power version of the tpz.effect.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/zone")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

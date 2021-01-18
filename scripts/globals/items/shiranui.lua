@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 17774
 -- Item: Shiranui
 -- Additional Effect: Light Damage (night time only)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onAdditionalEffect = function(player, target, damage)

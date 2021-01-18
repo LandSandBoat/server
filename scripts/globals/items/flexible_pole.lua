@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18586
 -- Item: flexible_pole
 -- Item Effect: Attack +3
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

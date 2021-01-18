@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Goblin Rush
 -- Delivers a threefold attack. Accuracy varies with TP.
 -- 100% TP: ??? / 250% TP: ??? / 300% TP: ???
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 --  Medusa Javelin
 --  Aern (DRG & SAM)
 --  Blinkable 1 hit, Knockback, Hate Reset
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 5230
 -- Item: love_chocolate
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

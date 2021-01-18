@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5074
 -- Scroll of Maiden's Virelai
 -- Teaches the song Maiden's Virelai
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

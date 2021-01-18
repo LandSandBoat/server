@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5309
 -- Toolbag Tsura
 -- When used, you will obtain one stack of tsurara
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4154
 -- Item: Flask of Holy Water
 -- Item Effect: Removes curse
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

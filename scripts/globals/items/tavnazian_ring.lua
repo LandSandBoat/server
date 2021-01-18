@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 14672
 -- Tavnazian Ring
 -- Enchantment: "Teleport-Tavnazia"
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

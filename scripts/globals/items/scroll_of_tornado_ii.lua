@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4817
 -- Scroll of Tornado II
 -- Teaches the black magic Tornado II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

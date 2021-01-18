@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4947
 -- Scroll of Utsusemi: Ni
 -- Teaches the ninjutsu Utsusemi: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

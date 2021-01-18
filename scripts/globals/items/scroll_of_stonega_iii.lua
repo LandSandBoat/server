@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4799
 -- Scroll of Stonega III
 -- Teaches the black magic Stonega III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

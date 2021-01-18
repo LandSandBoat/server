@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5013
 -- Scroll of Fowl Aubade
 -- Teaches the song Fowl Aubade
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

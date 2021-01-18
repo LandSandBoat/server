@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Altar Room 
+-- Area: Altar Room
 -----------------------------------
 local ID = require("scripts/zones/Altar_Room/IDs")
 mixins = {require("scripts/mixins/job_special")}

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4221
 -- Item: Beetle Quiver
 -- When used, you will obtain one stack of Beetle Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

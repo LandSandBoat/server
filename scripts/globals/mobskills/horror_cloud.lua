@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Horror Cloud
 --
 -- Description: A debilitating cloud slows the attack speed of a single target.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Melee
 -- Notes: Can be overwritten and blocked by Haste.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4298
 -- Item: serving_of_red_curry
 -- Food Effect: 3 hours, All Races
------------------------------------------
+-----------------------------------
 -- HP +25
 -- Strength +7
 -- Agility +1
@@ -13,10 +13,10 @@
 -- Ranged Attack +23% (Cap: 150@652 Base Ranged Attack)
 -- Demon Killer +4
 -- Resist Sleep +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

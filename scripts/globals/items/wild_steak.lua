@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4519
 -- Item: wild_steak
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Intelligence -2
 -- Attack % 25
 -- Attack Cap 50
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

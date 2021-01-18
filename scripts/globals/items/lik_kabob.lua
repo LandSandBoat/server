@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5647
 -- Item: Lik Kabob
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Mind -2
 -- Accuracy +1
 -- Attack 7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

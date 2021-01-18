@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15269
 -- Item: eldritch_horn_hairpin
 -- Item Effect: INT+3 MND+3
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

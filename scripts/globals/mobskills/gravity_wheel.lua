@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Gravity Wheel
 --
 --  Description: Deals heavy damage to players in an area of effect. Additional effect: Weight
 --  Type: Physical
 --  2-3 Shadows
 --  Range: Unknown
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

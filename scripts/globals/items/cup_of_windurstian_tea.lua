@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4493
 -- Item: cup_of_windurstian_tea
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Vitality -2
 -- Charisma 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

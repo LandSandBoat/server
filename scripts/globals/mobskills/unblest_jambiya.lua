@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Unblest Jambiya
 --  Family: Qutrub
 --  Description: Steals HP from targets in an area of effect.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: AoE 15'
 --  Notes: Used only by certain NM's when their primary sword isn't broken.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

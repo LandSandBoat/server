@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15929
 -- Goblin Belt
 -- Enchantment: 60Min, Costume - Goblin (dagger)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5178
 -- Item: plate_of_dorado_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 5
 -- Accuracy % 15
 -- Accuracy Cap 72
@@ -10,10 +10,10 @@
 -- Ranged ACC Cap 72
 -- Sleep Resist 1
 -- Enmity 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

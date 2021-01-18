@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5027
 -- Scroll of Advancing March
 -- Teaches the song Advancing March
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

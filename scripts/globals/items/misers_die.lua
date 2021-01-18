@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5503
 -- Miser's Die
 -- Teaches the job ability Miser's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

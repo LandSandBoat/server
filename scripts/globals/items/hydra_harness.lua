@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14516
 -- Item: hydra_harness
 -- Item Effect: Attack +25, Ranged Attack +25
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

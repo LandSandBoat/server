@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
 
     -- The Jester Who'd Be King (Windurst 8-2)
-    if 
+    if
         currentMission == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 1 and not
         player:hasKeyItem(tpz.ki.AURASTERY_RING)

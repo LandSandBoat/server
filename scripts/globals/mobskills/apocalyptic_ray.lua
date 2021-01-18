@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Apocalyptic Ray
 -- Only used by Eldertaur
 -- Description: Inflicts Doom upon an enemy. This is not a gaze attack. Turing away will not prevent doom.
 -- Type: Magical (Dark)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

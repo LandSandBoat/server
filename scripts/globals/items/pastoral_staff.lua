@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18591
 -- Item: Pastoral Staff
 -- Item Effect: TP +100
 -- Duration: Instant
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4546
 -- Item: piece_of_raisin_bread
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Dexterity -1
 -- Vitality 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

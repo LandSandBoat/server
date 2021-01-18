@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4774
 -- Scroll of Thunder III
 -- Teaches the black magic Thunder III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

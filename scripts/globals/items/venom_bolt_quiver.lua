@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5338
 -- Venom Bolt Quiver
 -- When used, you will obtain one stack of Venom Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

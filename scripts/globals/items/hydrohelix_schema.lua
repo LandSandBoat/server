@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6042
 -- Hydrohelix Schema
 -- Teaches the black magic Hydrohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

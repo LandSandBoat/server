@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Vorpal Wheel
 --
 --  Description: Throws a slicing wheel at a single target.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: No
 --  Range: Unknown
 --  Notes: Only used by Gulool Ja Ja, and will use it as a counterattack to any spells cast on him. Damage increases as his health drops. Can be Shield Blocked.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

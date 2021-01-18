@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5777
 -- Item: Pear Crepe
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence +2
 -- MP Healing +2
 -- Magic Accuracy +20% (cap 45)
 -- Magic Defense +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

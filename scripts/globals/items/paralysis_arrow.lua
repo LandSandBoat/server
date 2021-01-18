@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18696
 -- Item: Paralysis Arrow
 -- Additional Effect: Paralysis (20 power)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

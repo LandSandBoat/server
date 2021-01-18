@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4229
 -- Darksteel Bolt Quiver
 -- When used, you will obtain one stack of Darksteel Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

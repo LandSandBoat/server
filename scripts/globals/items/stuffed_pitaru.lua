@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5889
 -- Item: stuffed_pitaru
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +6% (cap 100)
 -- Increases rate of magic skill gains by 20%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

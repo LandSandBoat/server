@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4376
 -- Item: strip_of_meat_jerky
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 3
 -- Intelligence -1
 -- Attack % 23
 -- Attack Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

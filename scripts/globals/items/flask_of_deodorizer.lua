@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4166
 -- Deodorizer
 -- When applied, this powerful deodorant neutralizes even the strongest of odors!!.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4411
 -- Item: dhalmel_pie
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 25
 -- Strength 4
 -- Agility 2
@@ -13,10 +13,10 @@
 -- Attack Cap 45
 -- Ranged ATT % 25
 -- Ranged ATT Cap 45
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

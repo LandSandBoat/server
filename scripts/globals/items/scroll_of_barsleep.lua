@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4680
 -- Scroll of Barsleep
 -- Teaches the white magic Barsleep
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

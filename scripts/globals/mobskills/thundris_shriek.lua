@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Thundris Shriek
 --
 -- Description: Deals heavy lightning damage to targets in area of effect. Additional effect: Terror
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: Unknown
 -- Notes: Players will begin to be intimidated by the dvergr after this attack.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

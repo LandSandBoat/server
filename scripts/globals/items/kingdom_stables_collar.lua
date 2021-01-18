@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 13179
 -- Item: Kingdom Stables Collar
 -- Teleports to Chocobo Stables (San d'Oria)
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

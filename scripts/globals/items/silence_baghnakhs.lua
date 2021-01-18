@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16429
 -- Item: Silence baghnakhs
 -- Additional Effect: Silence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4657
 -- Scroll of Shell II
 -- Teaches the white magic Shell II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

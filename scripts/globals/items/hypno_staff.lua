@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17117
 -- Item: Hypno Staff
 -- Additional Effect: Sleep
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

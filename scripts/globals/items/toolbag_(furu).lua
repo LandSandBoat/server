@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6266
 -- Toolbag Furu
 -- When used, you will obtain one stack of Furusumi
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

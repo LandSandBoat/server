@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Catastrophe
 --
 -- Description: Drain target's HP. Bec de Faucon/Apocalypse: Additional effect: Haste
 -- Type: Physical
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

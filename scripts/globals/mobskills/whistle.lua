@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Whistle
 --
 --  Description: Increases agility.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: N/A
 --  Range: Self
 --  Notes: When used by the Nightmare Dhalmel in Dynamis - Buburimu, it grants an Evasion Boost instead.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

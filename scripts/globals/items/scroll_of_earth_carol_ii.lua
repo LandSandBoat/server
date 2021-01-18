@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5057
 -- Scroll of Earth Carol II
 -- Teaches the song Earth Carol II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

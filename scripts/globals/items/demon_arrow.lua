@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18159
 -- Item: Demon Arrow
 -- Additional Effect: 12% Attack Down
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

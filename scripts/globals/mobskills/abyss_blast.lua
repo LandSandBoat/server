@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Abyss Blast
 --
 --  Description: Blasts a single target with dark energy. Additional effect: Blind
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown
 --  Notes: Blinds target
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

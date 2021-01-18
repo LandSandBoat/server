@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5157
 -- Item: serving_of_marbled_steak
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 6
 -- Agility 1
 -- Intelligence -3
@@ -11,10 +11,10 @@
 -- Ranged ATT % 18
 -- Ranged ATT Cap 95
 -- Lizard Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

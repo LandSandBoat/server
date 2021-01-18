@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6460
 -- Item: bowl_of_miso_ramen
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +100
 -- STR +5
 -- VIT +5
@@ -10,10 +10,10 @@
 -- Magic Evasion +10% (cap 50)
 -- Magic Def. Bonus +5
 -- Resist Slow +10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

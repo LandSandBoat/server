@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4415
 -- Item: ear_of_roasted_corn
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 6
 -- Dexterity -1
 -- Vitality 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

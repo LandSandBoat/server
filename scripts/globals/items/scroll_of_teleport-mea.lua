@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4732
 -- Scroll of Teleport-Mea
 -- Teaches the white magic Teleport-Mea
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
