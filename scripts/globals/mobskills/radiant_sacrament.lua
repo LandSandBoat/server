@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Radiant Sacrament
 -- Description: Used at regular intervals as a ranged attack when target is out of melee range.
 -- Type: Physical
@@ -8,11 +8,11 @@
 -- Notes: Alexander generally uses this on targets out of his melee range. Accompanied by text
 -- "Offer thy worship...
 -- I shall burn away...thy transgressions..."
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

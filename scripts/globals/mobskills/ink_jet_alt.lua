@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Ink Jet alt
 --
 --  Description: Unleashes a torrent of black spores in a fan-shaped area of effect, dealing dark damage to targets. Additional effect: Blind
 --  Type: Magical Dark (Element)
 --
 --  Notes: Used by Fe'e in Up in Arms BCNM
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

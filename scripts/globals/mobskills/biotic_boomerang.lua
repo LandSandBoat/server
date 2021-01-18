@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 --  Biotic Boomerang
 --  Aern (BST & WAR)
 --  Blinkable 2-3 hit, addtional effect plague on hit.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

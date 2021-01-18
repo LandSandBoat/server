@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Earthshock
 --  Creates a seismic wave to damage targets in an area of effect. Additional effect: Stun
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

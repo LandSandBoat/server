@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Foxfire
 --
 --  Description: Damage varies with TP. Additional effect: "Stun."
 --  Type: Physical (Blunt)
 -- RDM, THF, PLD, BST, BRD, RNG, NIN, and COR fomors).
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

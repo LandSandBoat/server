@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Groundburst
 --
 -- Description: Expels a fireball on targets in an area of effect.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: Unknown radial
 -- Notes: Only used by notorious monsters, and from any Mamool Ja in besieged.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

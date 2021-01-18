@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Double Kick
 --
 --  Description: Deals damage to a single target. Additional effect: Stun
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes: Stun may or may not take tpz.effect.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

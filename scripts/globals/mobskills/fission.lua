@@ -1,8 +1,8 @@
----------------------------------------------------
+-----------------------------------
 -- Gorger NM Fission Skill
 -- Checks eligibility to use
 -- maxBabies set by NM lua
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

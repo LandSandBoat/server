@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Vampiric Root
 -- Deals dark damage to a single target. Additional effect: Drain
 -- Type: Magical
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
 -- Notes: If used against undead, it will simply do damage and not drain HP.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

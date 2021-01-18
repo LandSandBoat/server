@@ -1,14 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Floodlight
 --
 -- Description:  ~300 magic damage, Flash, Blind and Silence, ignores Utsusemi
 -- Type: Magical
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

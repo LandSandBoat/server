@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 --  Reactor Overheat
 --  Zedi, while in Animation form 3 (Rings)
 --  Blinkable 1-3 hit, addtional effect Plague on hit.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

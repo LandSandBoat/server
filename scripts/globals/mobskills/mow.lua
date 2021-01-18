@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Mow
 --
 --  Description: Deals damage in an area of effect. Additional effect: Poison
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Unknown radial
 --  Notes: Poison can take around 10HP/tick
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

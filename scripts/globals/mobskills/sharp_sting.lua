@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Sharp Sting
 --
 --  Description: Deals high damage to target in a ranged attack.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: 10' single
 --  Notes: Appears to be very inaccurate.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

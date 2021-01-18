@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Spoil
 --
 -- Description: Lowers the strength of target.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignore
 -- Range: Self
 -- Notes: Very sharp evasion increase.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

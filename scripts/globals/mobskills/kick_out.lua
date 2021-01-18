@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Kick Out
 --
 -- Description: Deals heavy damage and inflicts blind to any target behind user.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: 2-3 shadows
 -- Range: Unknown cone, backwards
 -- Notes:  Only used when the Behemoth is attacking with its tail.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

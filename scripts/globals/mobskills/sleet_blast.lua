@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Sleet Blast
 --
 --  Description: Deals ice damage to enemies in area of effect.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 18' radial.
 --  Notes: Used only by Ouryu and Cuelebre while flying.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

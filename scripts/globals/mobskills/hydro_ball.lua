@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Hydroball
 --  Deals Water damage to targets in a fan-shaped area of effect. Additional effect: STR Down
 --  Type: Breath
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Notes: STR reduced by 15%.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

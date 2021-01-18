@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 --
 -- Stave Toss (staff wielding Mamool Ja only!)
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

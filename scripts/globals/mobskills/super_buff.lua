@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Super Buff
 -- Raises physical attack, defense, magic attack and magic evasion
 -- Used by Nidhogg at will
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Bubble Shower
 -- Deals Water damage in an area of effect. Additional effect: STR Down
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

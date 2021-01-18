@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 --  Flailing Trunk
 --  Description: Smacks around frontward targets with its trunk.
 --  Utsusemi/Blink absorb: 2-3 shadows
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Vitrolic Barrage
 --
 --  Description: Bombards nearby targets with acid, dealing fixed Water damage. Additional effect: Poison
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: AoE 10'
 --  Notes: Poison is 20/tic
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

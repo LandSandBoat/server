@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Sandspray
 -- Family: Qiqurn
 -- Description: Blinds enemies within a fan-shaped area originating from the user.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

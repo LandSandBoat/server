@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Calcifying Claw
 -- Deals damage to a single target. Additional effect: Petrification, Knockback
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target,mob,skill)

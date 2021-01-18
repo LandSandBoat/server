@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Sledgehammer
 --  Description: Delivers a sledgehammer blow to all targets in front. Additional effect: Petrification
 --  Type: Physical
 --  Utsusemi/Blink absorb: 3 shadows
 --  Range: Front cone
 --  Notes: Only used by Gurfurlur the Menacing.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

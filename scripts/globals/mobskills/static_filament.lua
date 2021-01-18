@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 --  Static Filament
 --  Zedi, while in Animation form 2 (Bars)
 --  Blinkable 1-2 hit, addtional effect stun on hit.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

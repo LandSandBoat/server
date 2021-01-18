@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Eald2 Warp In
 -- Begin Eald'Narche ZM16 (phase 2) teleport
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,16 +1,16 @@
----------------------------------------------
+-----------------------------------
 -- Circle Blade
 --
 -- Description: Delivers an area of effect attack. Attack radius varies with TP.
 -- Type: Physical
 -- Utsusemi/Blink absorb: ???
 -- Range: Melee range radial
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

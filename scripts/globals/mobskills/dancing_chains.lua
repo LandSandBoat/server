@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 --  Dancing Chains
 --  Description:  Applies AoE drown 15hp/sec
 --  Notes: Ignores shadows, 10' AoE radius
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Death Trap
 --
 -- Description: Attempts to stun or poison any players in a large trap. Resets hate.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 30' radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

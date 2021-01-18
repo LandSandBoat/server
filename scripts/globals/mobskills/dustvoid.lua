@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Dustvoid
 --
 -- Description: (**not in yet** Removes all equipment from player.) Additional effect: Knockback
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: AoE 10'
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 -- Psychomancy
 -- Steals MP from players in range.
 -- Type: Magical
 -- Utsusemi/Blink absorb: ignore shadow
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

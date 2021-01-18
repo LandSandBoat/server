@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Zephyr Mantle
 --
 --  Description: Creates shadow images that each absorb a single attack directed at you.
 --  Type: Magical (Wind)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

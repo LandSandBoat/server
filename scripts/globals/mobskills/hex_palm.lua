@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Hex Palm
 -- Family: Qutrub
 -- Description: Steals HP from targets in front.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: Front cone
 -- Notes: Used only when wielding no weapon.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

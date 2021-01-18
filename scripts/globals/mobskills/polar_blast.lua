@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Polar Blast
 --
 --  Description: Deals Ice damage to enemies within a fan-shaped area. Additional effect: Paralyze
 --  Type: Breath
 --  Ignores Shadows
 --  Range: Unknown Cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

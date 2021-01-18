@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Spike Flail
 -- Deals extreme damage in a threefold attack to targets behind the user.
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,10 +1,10 @@
----------------------------------------------
+-----------------------------------
 -- Malediction
 -- Steals an enemy's HP. Ineffective against undead.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

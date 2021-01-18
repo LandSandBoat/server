@@ -1,16 +1,16 @@
----------------------------------------------
+-----------------------------------
 --  Tachi: Gekko
 --
 --  Description:  Silences target. Damage varies with TP.
 --  Type: Physical
 --  Shadow per hit
 --  Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

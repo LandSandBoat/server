@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- Lamb Chop
 -- Deals critical damage.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Dragon Breath
 --
 --  Description: Deals Fire damage to enemies within a fan-shaped area.
@@ -7,12 +7,12 @@
 --  Range: Unknown cone
 --  Notes: Used only by Fafnir, Nidhogg, Cynoprosopi, and Wyrm. Because of the high damage output from Fafnir/Nidhogg/Wyrm, it is usually avoided by
 --        standing on (or near) the wyrm's two front feet. Cynoprosopi's breath attack is much less painful.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/utils")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

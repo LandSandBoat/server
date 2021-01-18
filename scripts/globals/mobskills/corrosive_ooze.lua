@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 --  Corrosive Ooze
 --  Family: Slugs
 --  Description: Deals water damage to an enemy. Additional Effect: Attack Down and Defense Down.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Radial
 --  Notes:
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

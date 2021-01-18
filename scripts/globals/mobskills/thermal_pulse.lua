@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Thermal Pulse
 --  Family: Wamouracampa
 --  Description: Deals Fire damage to enemies within area of effect. Additional effect: Blindness
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadow
 --  Range: 12.5
 --  Notes: Open form only.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

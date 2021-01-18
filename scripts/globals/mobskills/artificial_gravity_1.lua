@@ -1,10 +1,10 @@
----------------------------------------------------
+-----------------------------------
 -- Artifical Gravity w/ Single gear
 -- Damage plus Weight effect
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

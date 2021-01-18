@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Void of Repentance
 --
 -- Description: Fills a single target with regret, inflicting Terror.
@@ -10,11 +10,11 @@
 -- "Repent thy irreverence...
 -- The gate to salvation...lies before thee...
 -- Revelation...is within thy reach..."
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Petrifaction
 -- Description: Petrifies opponent with a gaze attack
 -- Type: Gaze
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Single gaze
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

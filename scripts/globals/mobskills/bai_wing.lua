@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Bai Wing
 --
 -- Description: A dust storm deals Earth damage to enemies within a very wide area of effect. Additional effect: Slow
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: 30' radial.
 -- Notes: Used only by Ouryu and Cuelebre while flying.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

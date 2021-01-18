@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Empty Seed
 --
 --  Description: Deals physical damage to enemies within area of effect.
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1-3 shadows
 --  Range: 20' radial
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

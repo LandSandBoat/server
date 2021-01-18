@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Molting Burst
 --
 --  Description: Deals Light damage and drains HP. Transfers any negative status effects to the target.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Unknown
 --  Range: Unknown
 --  Notes: Used by Limules affiliated with light element.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

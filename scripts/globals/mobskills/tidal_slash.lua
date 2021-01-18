@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 -- Tidal Slash
 -- Deals water damage conal
 -- Type: Magical
 -- Only used when wielding a spear
 -- Utsusemi/Blink absorb: 2-3 shadow
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

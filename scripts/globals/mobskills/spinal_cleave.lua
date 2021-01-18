@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Spinal Cleave
 --  Family: Qutrub
 --  Description: Performs a jumping slash on a single target.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes: Used only when wielding no weapon, and only when the second weapon is not broken.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

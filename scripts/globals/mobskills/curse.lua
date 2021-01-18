@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Curse
 --
 -- Description: Inflicts a curse on all targets in an area of effect.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: 15' radial
 -- Notes: Curse has a very long duration.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

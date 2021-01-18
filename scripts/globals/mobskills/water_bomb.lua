@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Water Bomb
 --
 --  Description: Deals water damage to enemies within area of effect. Additional effect: Silence.
 --  Type: Magical (Water)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

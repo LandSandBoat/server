@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Bloodrake
 --
 -- Description: Slashes up a single target. Additional effect: Drain
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: 1 shadow?
 -- Range: Melee
 -- Notes: A spell equivalent to Sanguine Blade in terms of functionality where damage dealt is absorbed as health recovered.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

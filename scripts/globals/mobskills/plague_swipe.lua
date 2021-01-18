@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Plague Swipe
 --
 --  Description: Delivers a threefold attack in an cone effect behind user. Additional effect: Bio + Plague
 --  Type: Physical
 --  2-3 Shadows
 --  Range: Backward Arc
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

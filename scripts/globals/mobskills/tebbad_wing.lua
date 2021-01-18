@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Tebbad Wing
 --
 --  Description: A hot wind deals Fire damage to enemies within a very wide area of effect. Additional effect: Plague
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 30' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Wind Blade
 --  Description: Applies Enaero and absorbs Wind damage.
 --  Type: Enhancing
 --  Used only by Kam'lanaut. Enaero aspect adds 70+ to his melee attacks.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

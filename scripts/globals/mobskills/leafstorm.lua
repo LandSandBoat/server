@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Leafstorm
 --
 --  Description: Deals wind damage within area of effect.
 --  Type: Magical Wind
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

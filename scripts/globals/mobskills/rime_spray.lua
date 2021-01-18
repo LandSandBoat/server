@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Rime Spray
 --
 --  Description: Deals Ice damage to enemies within a fan-shaped area, inflicting them with Frost and All statuses down.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

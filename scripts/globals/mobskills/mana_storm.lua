@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Mana Storm
 --
 -- Description: Steals MP from players within range.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Unknown
 -- Range: Unknown radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

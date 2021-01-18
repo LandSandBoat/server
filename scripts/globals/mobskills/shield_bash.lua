@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Shield Bash
 --
 --  Description:  Delivers an attack that can stun the target. Shield required.
 --  Type: Physical
 --  Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

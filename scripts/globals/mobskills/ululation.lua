@@ -1,8 +1,8 @@
----------------------------------------------
+-----------------------------------
 -- Ululation
 -- Paralyzes all enemies in an area of effect.
 --
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

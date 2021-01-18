@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Flame Breath
 --
 --  Description: Deals Flame breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Flame)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

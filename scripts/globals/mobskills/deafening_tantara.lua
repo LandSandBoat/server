@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Deafening Tantara
 --
 -- Description: Inflicts silence in an area of effect.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 10'
 -- Notes: Doesn't use this if its horn is broken.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

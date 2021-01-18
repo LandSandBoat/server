@@ -1,14 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Gastric Bomb
 -- Deals Water damage with a long-range acid bomb. Additional effect: Attack Down
 -- Range: Long range
 -- Notes: Attack Down effect is 50%.
 -- Duration: Three minutes
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

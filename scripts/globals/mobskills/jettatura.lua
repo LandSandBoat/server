@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Jettatura
 -- Family: Hippogryph
 -- Description: Enemies within a fan-shaped area originating from the caster are frozen with fear.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Cone gaze
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

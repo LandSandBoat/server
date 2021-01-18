@@ -1,9 +1,9 @@
----------------------------------------------
+-----------------------------------
 --  Everyones Grudge
 --
 --  Notes: Invokes collective hatred to spite a single target.
 --   Damage done is 5x the amount of tonberries you have killed! For NM's using this it is 50 x damage.
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

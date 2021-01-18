@@ -1,13 +1,13 @@
----------------------------------------------------
+-----------------------------------
 -- High-Tension_Discharger
 -- Description: Discharges a powerful current that deals Lightning damage to players in a fan-shaped area.
 -- Additional effect: Stun
 -- Type: Magical
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

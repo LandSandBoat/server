@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Gospel_of_the_Lost
 --
 -- Description: Self-heal (~1000 HP) and erase.
@@ -9,12 +9,12 @@
 -- Notes: Accompanied by text
 -- "Bask in my glory..."
 -- "Mine existence...stretches into infinity..."
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

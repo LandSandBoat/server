@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Fiery Blast
 --
 --  Description: Deals fire damage to enemies in area of effect.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 18' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann while flying.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

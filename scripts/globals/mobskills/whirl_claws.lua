@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Whirl Claws
 -- Deals damage in an area of effect.
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

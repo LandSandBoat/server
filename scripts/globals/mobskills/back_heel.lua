@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Back Heel
 --  Family: Hippogryph
 --  Description: Deals damage to a single target.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: One shadow
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

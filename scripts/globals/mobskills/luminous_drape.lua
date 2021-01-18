@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Luminous Drape
 -- Family: Yovra
 -- Description: A glowing curtain charms all nearby targets.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: AoE 10'
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

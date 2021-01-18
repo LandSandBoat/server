@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Lateral Slash
 --
 --  Description: Laterally slashes a single target. Additional effect: Defense Down
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes: Reduces defense by 75%.  Can be removed with Monk Job Ability Counterstance.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

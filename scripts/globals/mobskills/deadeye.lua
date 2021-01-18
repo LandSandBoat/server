@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Deadeye
 -- Family: Qiqurn
 -- Description: Lowers the defense and magical defense of enemies within range.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
 -- Notes: Used only by certain Notorious Monsters. Strong tpz.effect.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
