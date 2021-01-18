@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18300, 18301, 18643, 18657, 18671, 19752, 19845, 20925, 20926, 21857
 -- Item: Gungnir
 -- Additional Effect: Weakens Defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")

@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4405
 -- Item: Rice Ball
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP 10,
 -- Vit +2
 -- Dex -1
 -- hHP +1
 -- Effect with enhancing equipment (Note: these are latents on gear with the effect)
 -- Def +50
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

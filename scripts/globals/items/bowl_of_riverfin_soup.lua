@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6069
 -- Item: Bowl of Riverfin Soup
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Accuracy % 14 Cap 90
 -- Ranged Accuracy % 14 Cap 90
 -- Attack % 18 Cap 80
 -- Ranged Attack % 18 Cap 80
 -- Amorph Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

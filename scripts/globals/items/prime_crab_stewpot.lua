@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5545
 -- Item: Prime Crab Stewpot
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 75
 -- MP +15
@@ -13,10 +13,10 @@
 -- MP Recovered while healing +2
 -- Defense 20% Cap 75
 -- Evasion +6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

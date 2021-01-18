@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15866
 -- Item: acrobats_belt
 -- Item Effect: AGI +3
 -- Duration: 60 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

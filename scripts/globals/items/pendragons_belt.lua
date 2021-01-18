@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15869
 -- Item: pendragons_belt
 -- Item Effect: DEX +10
 -- Duration: 60 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

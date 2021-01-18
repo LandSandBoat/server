@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4989
 -- Scroll of Armys Paeton IV
 -- Teaches the song Armys Paeton IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

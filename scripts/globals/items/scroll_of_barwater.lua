@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4673
 -- Scroll of Barwater
 -- Teaches the white magic Barwater
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

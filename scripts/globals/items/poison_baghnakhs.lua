@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16410
 -- Item: Poison Baghnakhs
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

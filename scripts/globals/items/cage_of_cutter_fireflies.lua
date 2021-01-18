@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5349
 -- Cutter Fireflies
 -- Transports the user to Arrapago Reef
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18853
 -- Spirit Maul
 -- Additional effect: Light damage
 -- Enchantment: TP+100
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

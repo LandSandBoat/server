@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5337
 -- Sleep Bolt Quiver
 -- When used, you will obtain one stack of Sleep Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

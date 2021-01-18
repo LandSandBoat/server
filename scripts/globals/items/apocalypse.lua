@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18306, 18307, 18644, 18658, 18672, 19753, 19846, 20880, 20881, 21808
 -- Item: Apocalypse
 -- Additional Effect: Blindness
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")

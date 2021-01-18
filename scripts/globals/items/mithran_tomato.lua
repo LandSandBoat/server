@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4390
 -- Item: mithran_tomato
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility -3
 -- Intelligence 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

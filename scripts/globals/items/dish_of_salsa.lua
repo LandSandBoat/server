@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5299
 -- Item: dish_of_salsa
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -1
 -- Dexterity -1
 -- Agility -1
@@ -10,10 +10,10 @@
 -- Intelligence -1
 -- Mind -1
 -- Sleep Resist 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

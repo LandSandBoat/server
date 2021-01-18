@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4669
 -- Scroll of Barblizzard
 -- Teaches the white magic Barblizzard
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

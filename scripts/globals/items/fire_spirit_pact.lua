@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4896
 -- Fire Spirit Pact
 -- Teaches the summoning magicFire Spirit
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

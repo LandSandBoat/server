@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4522
 -- Item: Bowl of Jack-o'-Soup
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 2 (cap 120)
 -- Agility 3
 -- Vitality -1
 -- Health Regen While Healing 5
 -- Ranged ACC % 8
 -- Ranged ACC Cap 25
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

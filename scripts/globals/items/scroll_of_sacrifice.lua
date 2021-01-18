@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4702
 -- Scroll of Sacrifice
 -- Teaches the white magic Sacrifice
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5078
 -- Scroll of Sentinel's Scherzo
 -- Teaches the song Sentinel's Scherzo
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

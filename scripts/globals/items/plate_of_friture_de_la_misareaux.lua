@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5159
 -- Item: plate_of_friture_de_la_misareaux
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Vitality 3
 -- Mind -3
 -- Defense 5
 -- Ranged ATT % 7
 -- Ranged ATT Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

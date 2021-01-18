@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14531
 -- Item: bannaret_mail
 -- Item Effect: HP +15, Enmity +2
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

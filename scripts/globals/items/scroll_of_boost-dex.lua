@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5095
 -- Scroll of Boost-DEX
 -- Teaches the white magic Boost-DEX
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

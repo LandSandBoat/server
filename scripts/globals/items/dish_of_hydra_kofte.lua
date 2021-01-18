@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5602
 -- Item: dish_of_hydra_kofte
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 7
 -- Intelligence -3
 -- Attack % 20
@@ -12,10 +12,10 @@
 -- Ranged ATT % 20
 -- Ranged ATT Cap 150
 -- Poison Resist 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

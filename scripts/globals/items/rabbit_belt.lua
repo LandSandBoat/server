@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15297
 -- Rabbit Belt
 -- Enchantment: 60Min, Costume - Rarab (brown)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

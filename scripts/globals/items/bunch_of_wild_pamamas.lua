@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4596
 -- Item: Bunch of Wild Pamamas
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -3
 -- Intelligence 1
 -- Additional Effect with Opo-Opo Crown
@@ -16,10 +16,10 @@
 -- Additional Effect with Primate Staff +1
 -- DELAY -80
 -- ACC 12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

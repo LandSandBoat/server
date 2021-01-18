@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5556
 -- Item: cone_of_seraphs_kiss
 -- Food Effect: 1Hr, All Races
------------------------------------------
+-----------------------------------
 -- HP 15
 -- MP % 16 (cap 85)
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

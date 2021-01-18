@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5708
 -- Item: Mihgo Mithkabob
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 5
 -- Vitality 2
 -- Mind -2
@@ -10,10 +10,10 @@
 -- Ranged Accuracy +50
 -- Evasion +5
 -- Defense % 25 (cap 95)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

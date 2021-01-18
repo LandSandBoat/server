@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 4283
 -- Item: cup_of_choco-delight
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

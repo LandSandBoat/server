@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5601
 -- Item: Balik Sis +1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 5
 -- Mind -2
 -- Attack % 15
@@ -10,10 +10,10 @@
 -- Ranged ACC 2
 -- Ranged ATT % 15
 -- Ranged ATT Cap 70
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

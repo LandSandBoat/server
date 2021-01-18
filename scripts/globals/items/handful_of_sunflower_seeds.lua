@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4505
 -- Item: handful_of_sunflower_seeds
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity -3
 -- Intelligence 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

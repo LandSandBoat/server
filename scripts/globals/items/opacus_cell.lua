@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- Opacus Cell
 -- 5374
 -- Unlocks job abilities, weapon skills
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

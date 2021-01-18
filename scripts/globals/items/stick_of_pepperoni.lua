@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5660
 -- Item: stick_of_pepperoni
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP % 3 (assuming 3% from testing, no known cap)
 -- Strength 3
 -- Intelligence -1
 -- Attack % 60 (assuming 60%, cap 30)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

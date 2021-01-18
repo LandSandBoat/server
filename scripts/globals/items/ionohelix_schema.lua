@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6043
 -- Ionohelix Schema
 -- Teaches the black magic Ionohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

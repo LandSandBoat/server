@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4151
 -- Item: Echo Drops
 -- Item Effect: This potion remedies silence.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

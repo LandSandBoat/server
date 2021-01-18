@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4220
 -- Item: Bone Quiver
 -- When used, you will obtain one stack of Bone Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

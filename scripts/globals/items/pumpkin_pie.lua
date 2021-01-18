@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4446
 -- Item: pumpkin_pie
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 40
 -- Agility -1
 -- Intelligence 3
 -- Charisma -2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

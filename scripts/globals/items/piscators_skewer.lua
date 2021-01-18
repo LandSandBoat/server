@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5983
 -- Item: Piscator's Skewer
 -- Food Effect: 60 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Vitality 4
 -- Defense % 26 Cap 155
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

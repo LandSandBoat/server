@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4760
 -- Scroll of Blizzard IV
 -- Teaches the black magic Blizzard IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5497
 -- Bolter's Die
 -- Teaches the job ability Bolters Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

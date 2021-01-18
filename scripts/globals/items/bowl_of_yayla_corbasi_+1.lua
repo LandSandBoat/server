@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5580
 -- Item: bowl_of_yayla_corbasi_+1
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 25
 -- Dexterity -1
 -- Vitality 3
 -- HP Recovered While Healing 5
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

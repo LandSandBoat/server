@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 13181
 -- Item: Federation Stables Scarf
 -- Teleports to Chocobo Stables (Windurst)
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

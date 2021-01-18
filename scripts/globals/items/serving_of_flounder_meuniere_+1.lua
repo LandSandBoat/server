@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4345
 -- Item: serving_of_flounder_meuniere_+1
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 6
 -- Vitality 1
 -- Mind -1
@@ -10,10 +10,10 @@
 -- Ranged ATT % 14
 -- Ranged ATT Cap 30
 -- Enmity -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

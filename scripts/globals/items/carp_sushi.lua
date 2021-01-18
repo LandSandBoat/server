@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4407
 -- Item: carp_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 1
 -- Accuracy % 10 (cap 52)
 -- HP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

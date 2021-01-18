@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4394
 -- Item: ginger_cookie
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 5
 -- Plantoid Killer 10
 -- Slow Resist 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

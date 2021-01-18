@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15559
 -- Item: vision_ring
 -- Item Effect: ACC+2 RACC+2
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

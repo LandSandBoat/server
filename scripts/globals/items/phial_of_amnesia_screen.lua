@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5878
 -- Item: Amnesia Screen
 -- Effect: 2 Mins of immunity to "Amnesia" effects.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

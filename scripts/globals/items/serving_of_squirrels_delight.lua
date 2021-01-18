@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5554
 -- Item: serving_of_squirrels_delight
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP % 13 (cap 95)
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

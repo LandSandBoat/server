@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4931
 -- Scroll of Hyoton: Ni
 -- Teaches the ninjutsu Hyoton: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

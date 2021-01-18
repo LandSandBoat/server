@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4622
 -- Scroll of Poisona
 -- Teaches the white magic Poisona
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

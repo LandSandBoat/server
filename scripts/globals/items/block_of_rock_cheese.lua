@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4593
 -- Item: Block of Rock Cheese
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 6
 -- Health Cap 45
 -- HP Recovered while healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

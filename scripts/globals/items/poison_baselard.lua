@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16458
 -- Item: Poison Baselard
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

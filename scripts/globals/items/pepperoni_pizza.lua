@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5697
 -- Item: pepperoni_pizza
 -- Food Effect: 3 hours, all Races
------------------------------------------
+-----------------------------------
 -- HP +30
 -- Strength 1
 -- Accuracy 9% (caps @ 10)
 -- Attack 10% (caps @ 15)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

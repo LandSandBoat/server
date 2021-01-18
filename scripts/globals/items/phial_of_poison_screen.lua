@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5880
 -- Item: Poison Screen
 -- Effect: 2 Mins of immunity to "Poison" effects.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

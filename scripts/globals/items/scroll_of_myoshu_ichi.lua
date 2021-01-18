@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4966
 -- Scroll of Myoshu: Ichi
 -- Teaches the ninjutsu Myoshu: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

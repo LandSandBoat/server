@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18150
 -- Item: Blind Bolt
 -- Additional Effect: Blindness
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

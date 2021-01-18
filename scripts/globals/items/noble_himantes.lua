@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18755
 -- Item: Noble Himantes
 -- Item Effect: TP +10
 -- Durration: Instant
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17768
 -- Item: Yoto +1
 -- Additional Effect: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

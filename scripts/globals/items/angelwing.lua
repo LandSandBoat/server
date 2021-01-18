@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5441
 -- Item: Angelwing
 -- Adds angel wings to the user
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

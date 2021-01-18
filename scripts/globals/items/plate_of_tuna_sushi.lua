@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5150
 -- Item: plate_of_tuna_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Dexterity 3
 -- Charisma 5
 -- Accuracy % 15 (cap 72)
 -- Ranged ACC % 15 (cap 72)
 -- Sleep Resist 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

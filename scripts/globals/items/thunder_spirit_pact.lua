@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4900
 -- Thunder Spirit Pact
 -- Teaches the summoning magic Thunder Spirit
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

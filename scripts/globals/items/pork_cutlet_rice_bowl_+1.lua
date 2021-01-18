@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6407
 -- Item: pork_cutlet_rice_bowl_+1
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +65
 -- MP +65
 -- STR +8
@@ -13,10 +13,10 @@
 -- Attack +24% (cap 130)
 -- Ranged Attack +24% (cap 130)
 -- Store TP +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

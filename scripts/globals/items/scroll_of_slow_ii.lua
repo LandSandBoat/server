@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6569
 -- Scroll of Slow II
 -- Teaches the white magic Slow II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

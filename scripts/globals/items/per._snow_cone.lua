@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 6565
 -- Item: Persikos Snow Cone
 -- Food Effect: 5 minutes, all Races
------------------------------------------
+-----------------------------------
 -- MP +35% (Max. 50 @ 143 Base MP)
 -- INT +3
 -- [Element: Air]+5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

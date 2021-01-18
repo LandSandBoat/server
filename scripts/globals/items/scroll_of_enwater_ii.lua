@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4727
 -- Scroll of Enwater II
 -- Teaches the white magic Enwater II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

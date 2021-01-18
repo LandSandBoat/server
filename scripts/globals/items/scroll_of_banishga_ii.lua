@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4647
 -- Scroll of Banishga II
 -- Teaches the white magic Banishga II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

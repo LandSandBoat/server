@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4213
 -- Icarus Wing
 -- Increases TP of the user by 100
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

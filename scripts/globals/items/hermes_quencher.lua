@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5255
 -- Item: Hermes Quencher
 -- Item Effect: Flee for 30 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

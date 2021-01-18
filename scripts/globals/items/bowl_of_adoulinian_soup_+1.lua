@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5999
 -- Item: Bowl of Adoulin Soup +1
 -- Food Effect: 240 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP % 4 Cap 45
 -- Vitality 4
 -- Defense % 16 Cap 75
 -- HP Healing 7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

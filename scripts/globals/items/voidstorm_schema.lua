@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6056
 -- Voidstorm Schema
 -- Teaches the white magic Voidstorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

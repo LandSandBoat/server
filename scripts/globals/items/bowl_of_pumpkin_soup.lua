@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4430
 -- Item: bowl_of_pumpkin_soup
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP % 1 (cap 110)
 -- Vitality -1
 -- Agility 3
 -- HP Recovered While Healing 5
 -- Ranged Accuracy % 8 (cap 20)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

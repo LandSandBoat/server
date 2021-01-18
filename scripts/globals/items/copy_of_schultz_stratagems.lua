@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 4249
 -- Item: Copy of Schultz Stratage
 -- Grants 150 - 500 EXP
 -- Does not grant Limit Points.
 --
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

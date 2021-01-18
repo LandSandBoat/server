@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4337
 -- Item: bowl_of_stamina_soup
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP +12% (cap 200)
 -- Dexterity 4
 -- Vitality 6
 -- Mind -3
 -- HP Recovered While Healing 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

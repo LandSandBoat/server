@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4506
 -- Item: mutton_tortilla
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 10
 -- Strength 3
 -- Vitality 1
@@ -11,10 +11,10 @@
 -- Attack Cap 30
 -- Ranged ATT % 27
 -- Ranged ATT Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

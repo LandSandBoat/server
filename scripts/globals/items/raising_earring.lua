@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 --  ID: 16003
 --  Reraise Earring
 --  This earring functions in the same way as the spell Reraise.
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

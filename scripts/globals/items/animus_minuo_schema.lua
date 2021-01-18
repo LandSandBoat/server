@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6060
 -- Item: Animus Minuo Schema
 -- Teaches the white magic Animus Minuo
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

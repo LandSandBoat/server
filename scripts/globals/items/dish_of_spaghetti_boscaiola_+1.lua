@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5201
 -- Item: dish_of_spaghetti_boscaiola_+1
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 18
 -- Health Cap 130
 -- Magic 40
@@ -12,10 +12,10 @@
 -- Mind 4
 -- Store TP +6
 -- Magic Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

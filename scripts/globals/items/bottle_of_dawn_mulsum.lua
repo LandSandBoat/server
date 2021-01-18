@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5411
 -- Item: bottle_of_dawn_mulsum
 -- Item Effect: Instantly restores 20%-35% of pet HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

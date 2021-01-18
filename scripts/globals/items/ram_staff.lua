@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18612
 -- Ram Staff
 -- Enchantment: "Retrace" (Southern San d'Oria[S])
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/teleports")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

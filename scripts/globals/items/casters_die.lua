@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5498
 -- Casters Die
 -- Teaches the job ability Casters Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

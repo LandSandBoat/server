@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6298
 -- Item: Manji Shr. Pouch
 -- When used, you will obtain one stack of Manji Shurikens
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

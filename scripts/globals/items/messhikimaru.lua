@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 17826
 -- Item: Messhikimaru
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

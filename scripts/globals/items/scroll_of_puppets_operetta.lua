@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5018
 -- Scroll of Puppets Operetta
 -- Teaches the song Puppets Operetta
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

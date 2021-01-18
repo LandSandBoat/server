@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4958
 -- Scroll of Dokumori: Ichi
 -- Teaches the ninjutsu Dokumori: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

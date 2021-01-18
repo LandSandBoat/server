@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4541
 -- Item: Goblin Drink
 -- Item Effect: Restores 1 MP while healing / 3 tick 180 mins.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

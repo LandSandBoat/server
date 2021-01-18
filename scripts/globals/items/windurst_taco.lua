@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5172
 -- Item: windurst_taco
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- MP 20
 -- Vitality -1
 -- Agility 5
 -- MP Recovered While Healing 1
 -- Ranged Accuracy % 8 (cap 10)
 -- Ranged Attack +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

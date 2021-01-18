@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16773
 -- Item: Cruel Scythe
 -- Additional Effect: Impairs evasion
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

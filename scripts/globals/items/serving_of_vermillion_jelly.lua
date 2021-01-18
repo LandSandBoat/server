@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5158
 -- Item: Vermillion Jelly
 -- Food Effect: 4 hours, All Races
------------------------------------------
+-----------------------------------
 -- MP +12%(Cap: 90@750 Base MP)
 -- Intelligence +6
 -- MP Recovered While Healing +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4668
 -- Scroll of Barfire
 -- Teaches the white magic Barfire
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

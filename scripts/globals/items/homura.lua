@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16973
 -- Item: Homura
 -- Additional Effect: Fire Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

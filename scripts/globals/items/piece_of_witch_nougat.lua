@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5645
 -- Item: piece_of_witch_nougat
 -- Food Effect: 1hour, All Races
------------------------------------------
+-----------------------------------
 -- HP 50
 -- Intelligence 3
 -- Agility -3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5174
 -- Item: tavnazian_taco
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Magic 20
 -- Dexterity 4
@@ -13,10 +13,10 @@
 -- HP Recovered While Healing 1
 -- MP Recovered While Healing 1
 -- Defense Cap 150
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

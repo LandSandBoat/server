@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17329
 -- Item: Patriarch Protectors Arrow
 -- Additional Effect: Paralysis (30 power)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

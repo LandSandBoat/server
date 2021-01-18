@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18503
 -- Item: Mammut
 -- Additional Effect: Ice Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

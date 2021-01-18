@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4487
 -- Item: colored_egg
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Magic 20
 -- Attack 3
 -- Ranged Attack 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

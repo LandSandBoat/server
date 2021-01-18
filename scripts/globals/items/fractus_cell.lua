@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Fractus Cell
 -- 5377
 -- Removes DEX Down effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

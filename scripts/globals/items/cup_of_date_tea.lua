@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5926
 -- Item: Cup of Date Tea
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 20
 -- MP 30
 -- Vitality -1
 -- Charisma 5
 -- Intelligence 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

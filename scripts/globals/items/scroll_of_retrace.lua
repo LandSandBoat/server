@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4873
 -- Scroll of Retrace
 -- Teaches the black magic Retrace
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

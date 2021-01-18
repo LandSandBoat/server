@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4559
 -- Item: serving_of_herb_quus
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 1
 -- Mind -1
 -- Ranged ACC % 7
 -- Ranged ACC Cap 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

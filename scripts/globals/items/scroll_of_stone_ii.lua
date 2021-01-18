@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4768
 -- Scroll of Stone II
 -- Teaches the black magic Stone II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

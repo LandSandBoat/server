@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Cumulus Cell
 -- ID 5367
 -- Unlocks body equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

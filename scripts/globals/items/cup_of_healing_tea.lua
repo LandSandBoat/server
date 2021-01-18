@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4286
 -- Item: cup_of_healing_tea
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 10
 -- Vitality -1
 -- Charisma 3
 -- Magic Regen While Healing 2
 -- Sleep resistance -40
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

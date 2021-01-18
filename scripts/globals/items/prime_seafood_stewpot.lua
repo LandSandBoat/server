@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5239
 -- Item: Prime Seafood Stewpot
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 75
 -- MP +15
@@ -15,10 +15,10 @@
 -- Accuracy 6
 -- Ranged Accuracy 6
 -- Evasion 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

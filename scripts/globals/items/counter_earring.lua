@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14786
 -- Item: Counter Earring
 -- Item Effect: Counter 5%
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

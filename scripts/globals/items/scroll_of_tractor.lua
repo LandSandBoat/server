@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4872
 -- Scroll of Tractor
 -- Teaches the black magic Tractor
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5973
 -- Item: Plate of Beef Paella +1
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 45
 -- Strength 6
 -- Attack % 19 Cap 95
 -- Undead Killer 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

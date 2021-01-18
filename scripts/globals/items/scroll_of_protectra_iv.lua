@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4736
 -- Scroll of Protectra IV
 -- Teaches the white magic Protectra IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

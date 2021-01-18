@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 4496
 -- Item: piece_of_bubble_chocolate
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 17624
 -- Item: anubiss_knife
 -- Item Effect: Poison 1HP / Removes 60 HP over 180 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

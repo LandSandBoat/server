@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4824
 -- Scroll of Gravity
 -- Teaches the black magic Gravity
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5872
 -- Dark Adaman Bolt Quiver
 -- When used, you will obtain one stack of Dark Adaman Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

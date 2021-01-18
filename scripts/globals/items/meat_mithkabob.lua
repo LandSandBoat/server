@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4381
 -- Item: meat_mithkabob
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Agility 1
 -- Intelligence -2
 -- Attack % 22
 -- Attack Cap 60
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

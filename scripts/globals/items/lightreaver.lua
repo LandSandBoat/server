@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 20858
 -- Item: Lightreaver
 -- Additional Effect: DEATH
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

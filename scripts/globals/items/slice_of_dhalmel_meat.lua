@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4359
 -- Item: slice_of_dhalmel_meat
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 3
 -- Intelligence -5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

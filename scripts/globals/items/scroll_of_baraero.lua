@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4670
 -- Scroll of Baraero
 -- Teaches the white magic Baraero
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

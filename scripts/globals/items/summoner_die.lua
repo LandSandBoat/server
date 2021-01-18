@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5191
 -- Summoner Die
 -- Teaches the job ability Evoker's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

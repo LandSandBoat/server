@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4848
 -- Scroll of Drown
 -- Teaches the black magic Drown
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4684
 -- Scroll of Barsilence
 -- Teaches the white magic Barsilence
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

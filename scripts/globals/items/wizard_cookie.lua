@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4576
 -- Item: wizard_cookie
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- MP Recovered While Healing 7
 -- Plantoid Killer 12
 -- Slow Resist 12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

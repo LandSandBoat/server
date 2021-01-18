@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6463
 -- Item: bowl_of_salt_ramen_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- DEX +6
 -- VIT +6
 -- AGI +6
@@ -10,10 +10,10 @@
 -- Ranged Accuracy +6% (cap 95)
 -- Evasion +6% (cap 95)
 -- Resist Slow +15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

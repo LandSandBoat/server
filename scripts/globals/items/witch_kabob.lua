@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4343
 -- Item: witch_kabob
 -- Food Effect: 1hour, All Races
------------------------------------------
+-----------------------------------
 -- Magic Points 15
 -- Mind 4
 -- Enmity -1
 -- MP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

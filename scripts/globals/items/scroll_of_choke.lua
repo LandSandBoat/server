@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4845
 -- Scroll of Choke
 -- Teaches the black magic Choke
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4216
 -- Item: Briliant Snow
 -- Creates a spiral of "snow" effects
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

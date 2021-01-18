@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5560
 -- Item: Serving of Elysian Eclair
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10
 -- MP +15
 -- Intelligence +2
 -- HP Recoverd while healing 2
 -- MP Recovered while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

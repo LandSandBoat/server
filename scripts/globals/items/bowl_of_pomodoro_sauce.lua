@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5194
 -- Item: Bowl of Pomodoro Sauce
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 2
 -- Mind 2
 -- HP Recovered while healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

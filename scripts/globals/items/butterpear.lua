@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5908
 -- Item: Butterpear
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility +4
 -- Vitality +1
 -- Resist Amnesia +20
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

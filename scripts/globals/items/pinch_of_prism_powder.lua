@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4164
 -- Prism Powder
 -- When applied, it makes things invisible.
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5865
 -- Toolbag Ryuno
 -- When used, you will obtain one stack of ryuno
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

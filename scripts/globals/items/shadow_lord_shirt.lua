@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 26517
 -- Item: Shadow Lord Shirt
 -- Teleports user to Castle Zvahl Keep
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

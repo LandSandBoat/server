@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5045
 -- Scroll of Bewitching Etude
 -- Teaches the song Bewitching Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

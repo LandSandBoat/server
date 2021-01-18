@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4333
 -- Item: witch_soup
 -- Food Effect: 4hours, All Races
------------------------------------------
+-----------------------------------
 -- Magic Points 25
 -- Strength -1
 -- Mind 2
 -- MP Recovered While Healing 1
 -- Enmity -2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

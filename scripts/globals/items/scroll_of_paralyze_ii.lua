@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6570
 -- Scroll of Paralyze II
 -- Teaches the white magic Paralyze II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

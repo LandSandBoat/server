@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5316
 -- Toolbag Kagi
 -- When used, you will obtain one stack of kaginawa
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

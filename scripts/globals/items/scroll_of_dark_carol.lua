@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5053
 -- Scroll of Dark Carol
 -- Teaches the song Dark Carol
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

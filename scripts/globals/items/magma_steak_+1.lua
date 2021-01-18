@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6072
 -- Item: Magma Steak +1
 -- Food Effect: 240 Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength +9
 -- Attack +24% Cap 185
 -- Ranged Attack +24% Cap 185
 -- Vermin Killer +6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

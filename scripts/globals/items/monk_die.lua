@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5478
 -- Monk Die
 -- Teaches the job ability Monk's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

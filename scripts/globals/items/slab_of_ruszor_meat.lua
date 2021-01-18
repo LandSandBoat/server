@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5755
 -- Item: Slab of Ruszor Meat
 -- Food Effect: 30Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Intelligence -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

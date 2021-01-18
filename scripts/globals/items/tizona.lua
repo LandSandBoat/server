@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 19006
 -- Item: Tizona
 -- Additional effect: MP Gain from damage dealt
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------

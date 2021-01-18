@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5171
 -- Item: emerald_quiche
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 15
 -- Agility 1
 -- Ranged ACC % 7
 -- Ranged ACC Cap 20
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

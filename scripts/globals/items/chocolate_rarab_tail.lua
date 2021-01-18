@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5921
 -- Item: Chocolate Rarab Tail
 -- Food Effect: 3 Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 1
 -- Speed 12.5%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

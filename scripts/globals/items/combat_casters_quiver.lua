@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 15958
 -- Combat Caster's Quiver
 -- When used, you will obtain one Combat Caster's Arrow
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5732
 -- Item: plate_of_ratatouille_+1
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Agility 6
 -- Evasion 10
 -- HP recovered while healing 3
 -- MP recovered while healing 3
 -- Undead Killer 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

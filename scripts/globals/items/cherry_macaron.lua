@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5779
 -- Item: cherry_macaron
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Increases rate of synthesis success +3%
 -- Increases synthesis skill gain rate +3%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

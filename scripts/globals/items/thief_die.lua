@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5482
 -- Thief Die
 -- Teaches the job ability Rogue's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

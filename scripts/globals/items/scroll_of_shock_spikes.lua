@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4859
 -- Scroll of Shock Spikes
 -- Teaches the black magic Shock Spikes
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

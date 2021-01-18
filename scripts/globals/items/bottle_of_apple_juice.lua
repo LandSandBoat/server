@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4423
 -- Item: Apple Juice
 -- Item Effect: Restores 45 MP over 135 seconds.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

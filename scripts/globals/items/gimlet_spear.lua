@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18117
 -- Item: gimlet_spear
 -- Item Effect: Attack +3
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

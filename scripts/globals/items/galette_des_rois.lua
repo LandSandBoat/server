@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5875
 -- Item: Galette Des Rois
 -- Food Effect: 180 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +8
 -- MP +3% (cap13)
 -- Intelligence +2
 -- Random Jewel
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5565
 -- Item: slice_of_cerberus_meat
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Magic -10
 -- Strength 6
 -- Intelligence -6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

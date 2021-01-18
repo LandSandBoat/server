@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4753
 -- Scroll of Fire II
 -- Teaches the black magic Fire II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

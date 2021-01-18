@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5551
 -- Item: Roll of Sylvan Excursion
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10
 -- MP +3% Cap 15
 -- Intelligence +3
 -- HP Recovered while healing +2
 -- MP Recovered while healing +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

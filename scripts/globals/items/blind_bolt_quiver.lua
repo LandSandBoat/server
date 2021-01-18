@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5334
 -- Item: Blind Bolt Quiver
 -- When used, you will obtain one stack of Blind Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

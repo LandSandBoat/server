@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5982
 -- Item: Senroh Skewer
 -- Food Effect: 30 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Vitality 3
 -- Mind -1
 -- Defense % 25 Cap 150
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

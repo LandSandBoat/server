@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16709
 -- Item: Inferno Axe
 -- Additional Effect: Fire Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

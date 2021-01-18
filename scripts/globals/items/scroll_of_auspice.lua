@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4704
 -- Scroll of Auspice
 -- Teaches the white magic Auspice
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4520
 -- Item: coin_cookie
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 6
 -- Vermin Killer 12
 -- Poison Resist 12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

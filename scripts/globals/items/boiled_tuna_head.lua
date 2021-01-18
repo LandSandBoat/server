@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4540
 -- Item: Boiled Tuna Head
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 20
 -- Dexterity 3
 -- Intelligence 4
 -- Mind -3
 -- Magic Regen While Healing 2
 -- Evasion 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 4565
 -- Item: Sobbing Fungus
 -- Food Effect: 3 Mins, All Races
 -- Silence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

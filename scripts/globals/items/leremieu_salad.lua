@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5185
 -- Item: leremieu_salad
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Magic 20
 -- Dexterity 4
@@ -11,10 +11,10 @@
 -- Charisma 4
 -- Defense % 25
 -- Defense Cap 160
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

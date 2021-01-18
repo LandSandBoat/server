@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4890
 -- Scroll of Firaja
 -- Teaches the black magic Firaja
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

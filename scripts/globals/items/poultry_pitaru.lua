@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5890
 -- Item: poultry_pitaru
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +7% (cap 110)
 -- Increases rate of magic skill gains by 40%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4235
 -- Item: Bowl of Cursed Soup
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -7
 -- Dexterity -7
 -- Agility -7
@@ -10,10 +10,10 @@
 -- Intelligence -7
 -- Mind -7
 -- Charisma -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

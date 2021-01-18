@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4549
 -- Item: Bowl of Dragon Soup
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 20
 -- Strength 7
 -- Agility 2
@@ -14,10 +14,10 @@
 -- Ranged ATT % 22
 -- Ranged ATT Cap 150
 -- Demon Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

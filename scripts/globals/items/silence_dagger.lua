@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16495
 -- Item: Silence Dagger
 -- Additional Effect: Silence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5278
 -- Old Bolt Box
 -- When used, you will obtain one partial stack of Dogbolt
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

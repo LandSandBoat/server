@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4223
 -- Scorpion Quiver
 -- When used, you will obtain one stack of Scorpion Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

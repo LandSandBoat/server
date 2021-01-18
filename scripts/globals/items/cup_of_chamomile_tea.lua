@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4603
 -- Item: cup_of_chamomile_tea
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 8
 -- Vitality -2
 -- Charisma 2
 -- Magic Regen While Healing 1
 -- Sleep resistance -30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

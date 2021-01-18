@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4119
 -- Item: Hi-Potion +3
 -- Item Effect: Restores 130 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

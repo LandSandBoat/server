@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5038
 -- Scroll of Enchanting Etude
 -- Teaches the song Enchanting Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

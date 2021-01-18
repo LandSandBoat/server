@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4161
 -- Item: Sleeping Potion
 -- Item Effect: This potion induces sleep.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

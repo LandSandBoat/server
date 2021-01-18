@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5043
 -- Scroll of Sage Etude
 -- Teaches the song Sage Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

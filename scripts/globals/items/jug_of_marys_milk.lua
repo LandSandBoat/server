@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4527
 -- Item: Jug of marys milk
 -- Item Effect: This potion induces sleep.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

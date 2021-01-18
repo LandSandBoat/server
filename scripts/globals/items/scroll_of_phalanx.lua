@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4714
 -- Scroll of Phalanx
 -- Teaches the white magic Phalanx
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

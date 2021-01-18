@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6070
 -- Item: Bowl of Oceanfin Soup
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Accuracy % 15 Cap 95
 -- Ranged Accuracy % 15 Cap 95
 -- Attack % 19 Cap 85
 -- Ranged Attack % 19 Cap 85
 -- Amorph Killer 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

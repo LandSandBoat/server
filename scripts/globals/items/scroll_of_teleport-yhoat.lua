@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4728
 -- Scroll of Teleport-Yhoat
 -- Teaches the white magic Teleport-Yhoat
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

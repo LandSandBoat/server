@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4638
 -- Scroll of Banish III
 -- Teaches the white magic Banish III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

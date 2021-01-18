@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 11277
 -- Item: wonder mailot +1
 -- Teleport's user to Purgonorgo Isle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 require("scripts/globals/teleports")

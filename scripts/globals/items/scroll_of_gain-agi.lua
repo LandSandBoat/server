@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5090
 -- Scroll of Gain-AGI
 -- Teaches the white magic Gain-AGI
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

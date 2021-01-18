@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5320
 -- Item: Chunk of Smelling Salts
 -- Item Effect: Recover Pets from Sleep
 -- Duration: 180 Secs Medicated
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

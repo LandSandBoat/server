@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5035
 -- Scroll of Quick Etude
 -- Teaches the song Quick Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

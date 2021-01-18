@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5772
 -- Item: crepe_paysanne
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +10% (cap 30)
 -- STR +2
 -- VIT +1
 -- Magic Accuracy +15
 -- Magic Defense +4
 -- hHP +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4618
 -- Scroll of Curaga IV
 -- Teaches the white magic Curaga IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4406
 -- Item: Baked Apple
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 20
 -- Agility -1
 -- Intelligence 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

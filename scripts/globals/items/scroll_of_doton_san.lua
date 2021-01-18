@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4939
 -- Scroll of Doton: San
 -- Teaches the ninjutsu Doton: San
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

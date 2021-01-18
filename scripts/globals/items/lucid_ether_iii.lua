@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5829
 -- Item: Lucid Ether III
 -- Item Effect: Restores 1000 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

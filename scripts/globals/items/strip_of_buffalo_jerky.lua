@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5196
 -- Item: strip_of_buffalo_jerky
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Mind -2
 -- Attack % 18
 -- Attack Cap 65
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

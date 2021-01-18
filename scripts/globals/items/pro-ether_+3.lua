@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 4143
 -- Item: Pro-Ether +3
 -- Item Effect: Restores 350 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

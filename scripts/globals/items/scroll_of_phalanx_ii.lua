@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6571
 -- Scroll of Phalanx II
 -- Teaches the white magic Phalanx II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

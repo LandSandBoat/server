@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 18242
 -- Item: Wyvern Feed
 -- Item Effect: Pet Regen
 -- Duration 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

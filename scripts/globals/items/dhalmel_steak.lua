@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4438
 -- Item: dhalmel_steak
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Intelligence -2
 -- Attack % 25
 -- Attack Cap 45
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

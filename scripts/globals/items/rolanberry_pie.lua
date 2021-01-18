@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4414
 -- Item: rolanberry_pie
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 50
 -- Agility -1
 -- Intelligence 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

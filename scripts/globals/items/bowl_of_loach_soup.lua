@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5671
 -- Item: Bowl of Loach Soup
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 4
 -- Agility 4
 -- Accuracy 7% Cap 50
 -- Ranged Accuracy 7% Cap 50
 -- HP 7% Cap 50
 -- Evasion 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18294, 18295, 18642, 18656, 18670, 19751, 19844, 20835, 20836, 21756
 -- Item: Bravura
 -- Additional Effect: Impairs evasion
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")

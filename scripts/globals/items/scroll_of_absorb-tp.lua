@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4883
 -- Scroll of Absorb-TP
 -- Teaches the black magic Absorb-TP
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5156
 -- Item: porcupine_pie
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP 55
 -- Strength 6
 -- Vitality 2
@@ -13,10 +13,10 @@
 -- Accuracy 5
 -- Attack % 18 (cap 95)
 -- Ranged Attack % 18 (cap 95)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

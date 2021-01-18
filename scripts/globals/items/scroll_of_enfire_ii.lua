@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4722
 -- Scroll of Enfire II
 -- Teaches the white magic Enfire II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

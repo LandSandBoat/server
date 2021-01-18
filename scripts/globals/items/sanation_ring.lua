@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14677
 -- Item: Sanation Ring
 -- Item Effect: MP recovered while healing +3
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

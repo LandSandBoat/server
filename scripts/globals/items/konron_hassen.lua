@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4183
 -- Konron Hassen
 -- A fountain-type firework appears on the ground
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

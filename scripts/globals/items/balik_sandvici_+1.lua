@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5591
 -- Item: Balik Sandvic +1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Agility 1
 -- Intelligence 3
 -- Mind -2
 -- Ranged ACC 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

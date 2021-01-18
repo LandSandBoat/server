@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4627
 -- Scroll of Viruna
 -- Teaches the white magic Viruna
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

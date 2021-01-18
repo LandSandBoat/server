@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5092
 -- Scroll of Gain-MND
 -- Teaches the white magic Gain-MND
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

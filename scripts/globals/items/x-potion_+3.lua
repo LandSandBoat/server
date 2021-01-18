@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 4123
 -- Item: X-Potion +3
 -- Item Effect: Restores 180 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

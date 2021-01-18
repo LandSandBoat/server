@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4653
 -- Scroll of Protect III
 -- Teaches the white magic Protect III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18762
 -- Item: Custodes
 -- Additional Effect: Paralysis
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

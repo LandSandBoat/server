@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4284
 -- Item: Bowl of Tender Navarin
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 3 (cap 130)
 -- Strength 3
 -- Agility 1
@@ -11,10 +11,10 @@
 -- Attack % 27 (cap 35)
 -- Ranged ATT % 27 (cap 35)
 -- Evasion 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

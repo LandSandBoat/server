@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6368
 -- Geomancer Die
 -- Teaches the job ability Naturalists Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

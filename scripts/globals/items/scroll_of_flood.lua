@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4822
 -- Scroll of Flood
 -- Teaches the black magic Flood
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

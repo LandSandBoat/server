@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6
 -- Item: Noble's Bed
------------------------------------------
+-----------------------------------
 require("scripts/globals/common")
 require("scripts/globals/quests")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onFurniturePlaced = function(player)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5487
 -- Ranger Die
 -- Teaches the job ability Hunter's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

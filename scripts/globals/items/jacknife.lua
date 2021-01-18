@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5123
 -- Item: Jacknife
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality 4
 -- Defence 16% Cap 50
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

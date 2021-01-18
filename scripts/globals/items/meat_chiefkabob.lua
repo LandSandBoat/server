@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4574
 -- Item: meat_chiefkabob
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Agility 1
 -- Intelligence -2
 -- Attack % 22
 -- Attack Cap 65
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

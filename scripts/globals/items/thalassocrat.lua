@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18123
 -- Item: Thalassocrat
 -- Additional Effect: Impairs evasion
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

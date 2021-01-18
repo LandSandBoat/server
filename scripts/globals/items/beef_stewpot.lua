@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5547
 -- Item: Beef Stewpot
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 50
 -- MP +10
@@ -10,10 +10,10 @@
 -- MP Recovered while healing 1
 -- Attack +18% Cap 40
 -- Evasion +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

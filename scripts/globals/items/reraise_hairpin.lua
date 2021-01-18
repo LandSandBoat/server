@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15211
 -- Reraise Hairpin
 --  This Hairpin functions in the same way as the spell Reraise II.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

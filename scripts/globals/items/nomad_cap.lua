@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 --  ID: 16119
 --  Nomad Cap
 --  Transports the user to their Home Nation
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

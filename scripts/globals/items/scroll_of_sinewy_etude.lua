@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5032
 -- Scroll of Sinewy Etude
 -- Teaches the song Sinewy Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

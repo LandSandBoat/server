@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4667
 -- Scroll of Silence
 -- Teaches the white magic Silence
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

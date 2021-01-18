@@ -1,9 +1,9 @@
 
------------------------------------------
+-----------------------------------
 -- ID: 4331
 -- Item: imperial_omelette
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Non Elvaan Stats
 -- Strength 5
 -- Dexterity 2
@@ -13,7 +13,7 @@
 -- Attack Cap 70
 -- Ranged ATT % 22
 -- Ranged ATT Cap 70
------------------------------------------
+-----------------------------------
 -- Elvaan Stats
 -- Strength 7
 -- Health 30
@@ -23,10 +23,10 @@
 -- Charisma 5
 -- Attack % 20 (cap 80)
 -- Ranged ATT % 20 (cap 80)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

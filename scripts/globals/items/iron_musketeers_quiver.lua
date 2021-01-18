@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 15957
 -- Iron Musketeer's Quiver
 -- When used, you will obtain one Iron Musketeer's Bolt
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

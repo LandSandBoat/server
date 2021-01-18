@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16012
 -- Mamool Ja Earring
 --  This earring functions in the same way as the spell Reraise III.
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 4498
 -- Item: cup_of_chocomilk
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

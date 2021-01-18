@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5990
 -- Scroll of Instant Stoneskin
 -- Grants the user a 200 HP Stoneskin effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4698
 -- Scroll of Barsilencera
 -- Teaches the white magic Barsilencera
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

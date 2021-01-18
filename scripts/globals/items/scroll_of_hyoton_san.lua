@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4932
 -- Scroll of Hyoton: San
 -- Teaches the ninjutsu Hyoton: San
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5143
 -- Item: serving_of_goblin_stir-fry
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 5
 -- Vitality 2
 -- Charisma -5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

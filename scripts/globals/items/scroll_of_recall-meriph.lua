@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4689
 -- Scroll of Recall-Meriph
 -- Teaches the white magic Recall-Meriph
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

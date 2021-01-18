@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5745
 -- Item: serving_of_cherry_bavarois
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 25
 -- Intelligence 3
 -- MP 10
 -- HP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

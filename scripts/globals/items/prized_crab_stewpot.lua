@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5546
 -- Item: Prized Crab Stewpot
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 100
 -- MP +20
@@ -13,10 +13,10 @@
 -- MP Recovered while healing +3
 -- Defense 20% Cap 100
 -- Evasion +7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

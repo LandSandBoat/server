@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5604
 -- Item: Elshimo Pachira Fruit
 -- Item Effect:  Poison 1HP / Removes 40 HP over 120 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

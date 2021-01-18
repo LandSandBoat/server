@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5670
 -- Item: Bowl of Loach Gruel
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Make Group Effect
 -- Dexterity 2
 -- Agility 2
@@ -10,10 +10,10 @@
 -- Ranged Accuracy 7% Cap 30
 -- HP 7% Cap 30
 -- Evasion 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

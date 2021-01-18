@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14680
 -- Item: Pacifist Ring
 -- Item Effect: Enmity -12
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

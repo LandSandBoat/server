@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4688
 -- Scroll of Recall-Pashh
 -- Teaches the white magic Recall-Pashh
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

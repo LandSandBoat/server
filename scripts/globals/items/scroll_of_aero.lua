@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4762
 -- Scroll of Aero
 -- Teaches the black magic Aero
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

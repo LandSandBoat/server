@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5907
 -- Item: Winterflower
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility +3
 -- Intelligence +5
 -- Charisma -5
 -- Resist Virus +20
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

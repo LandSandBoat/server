@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18288, 18289, 18641, 18655, 18669, 19750, 19843, 20790, 20791, 21750
 -- Item: Guttler
 -- Additional Effect: Choke
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")

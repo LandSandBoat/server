@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6380
 -- Item: Refined Chair
 -- Item Effect: Grant Refined chair key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.REFINED_CHAIR

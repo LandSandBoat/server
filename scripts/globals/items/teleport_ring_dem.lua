@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 14662
 -- Teleport ring: Dem
 -- Enchantment: "Teleport-Dem"
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

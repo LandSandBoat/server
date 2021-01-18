@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5155
 -- Item: cone_of_sub-zero_gelato
 -- Food Effect: 1Hr, All Races
------------------------------------------
+-----------------------------------
 -- HP 10
 -- MP % 16 (cap 80)
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

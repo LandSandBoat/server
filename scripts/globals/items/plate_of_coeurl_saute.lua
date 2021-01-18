@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4548
 -- Item: plate_of_coeurl_sautee
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Agility 1
 -- Intelligence -2
@@ -12,10 +12,10 @@
 -- Ranged ATT Cap 75
 -- Stun Resist 4
 -- HP recovered while healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

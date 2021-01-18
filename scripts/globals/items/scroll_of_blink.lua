@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4661
 -- Scroll of Blink
 -- Teaches the white magic Blink
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

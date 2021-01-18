@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5072
 -- Scroll of Goddess's Hymnus
 -- Teaches the song Goddess's Hymnus
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

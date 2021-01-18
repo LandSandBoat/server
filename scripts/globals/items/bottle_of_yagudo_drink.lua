@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4558
 -- Item: Yagudo Drink
 -- Item Effect: Restores 120 MP over 3 minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

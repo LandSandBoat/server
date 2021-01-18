@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18164
 -- Item: Antarctic Wind
 -- Additional Effect: Removes Genbu's Water Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5003
 -- Scroll of Valor Minuet II
 -- Teaches the song Valor Minuet II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4587
 -- Item: Broiled Trout
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 4
 -- Mind -1
 -- Ranged ATT % 14 (cap 55)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

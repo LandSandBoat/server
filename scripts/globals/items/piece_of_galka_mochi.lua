@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5206
 -- Piece of Galka Mochi
 -- Enchantment: 60Min, Costume - Galka Child
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

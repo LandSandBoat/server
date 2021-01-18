@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5212
 -- Item: dish_of_spaghetti_arrabbiata_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +17% (cap 150)
 -- Strength 5
 -- Vitality 2
@@ -11,10 +11,10 @@
 -- Ranged Attack +23% (cap 100)
 -- Store TP +6
 -- Sleep resistance +8
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

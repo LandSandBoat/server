@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5229
 -- Item: plate_of_homemade_risotto
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Mind 1
 -- Accuracy +12% (cap 80)
 -- Attack +10% (cap 40)
 -- Ranged Accuracy +12% (cap 80)
 -- Ranged Attack +10% (cap 40)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

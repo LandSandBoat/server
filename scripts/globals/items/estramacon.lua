@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 19160
 -- Item: Estramacon
 -- Additional Effect: TP Drain
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

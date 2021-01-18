@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5496
 -- Scholar Die
 -- Teaches the job ability Scholars Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5614
 -- Item: konigskuchen
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 8
 -- Magic % 3
 -- Magic Cap 13
 -- Intelligence 2
 -- hMP +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

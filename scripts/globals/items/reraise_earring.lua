@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14790
 -- Reraise Earring
 --  This earring functions in the same way as the spell Reraise.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

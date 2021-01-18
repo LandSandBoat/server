@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4730
 -- Scroll of Teleport-Holla
 -- Teaches the white magic Teleport-Holla
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

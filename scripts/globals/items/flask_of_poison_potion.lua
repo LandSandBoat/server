@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4157
 -- Item: Poison Potion
 -- Item Effect: Poison 1HP / Removes 60 HP over 180 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

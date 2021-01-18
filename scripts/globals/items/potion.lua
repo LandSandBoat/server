@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4112
 -- Item: Potion
 -- Item Effect: Restores 50 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

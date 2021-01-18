@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5065
 -- Scroll of Earth Threnody
 -- Teaches the song Earth Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

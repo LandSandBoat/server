@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6430
 -- Item: Koen
 -- Additional Effect: Fire Damage
 -- Enchantment: "Enfire"
 -- Charges: 30 Reuse: 300 Secs
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

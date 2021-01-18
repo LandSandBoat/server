@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4276
 -- Item: serving_of_flint_caviar
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Magic 10
 -- Dexterity 4
 -- Mind -1
 -- Charisma 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

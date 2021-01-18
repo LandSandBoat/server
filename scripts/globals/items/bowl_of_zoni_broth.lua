@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5618
 -- Item: bowl_of_zoni_broth
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 10
 -- MP 10
 -- Strength 1
@@ -16,10 +16,10 @@
 -- Evasion +1
 -- HP Recovered While Healing 1
 -- MP Recovered While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

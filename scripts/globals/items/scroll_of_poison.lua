@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4828
 -- Scroll of Poison
 -- Teaches the black magic Poison
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6058
 -- Klimaform Schema
 -- Teaches the black magic Klimaform
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

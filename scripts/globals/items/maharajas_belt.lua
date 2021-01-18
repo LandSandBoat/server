@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15870
 -- Item: maharajas_belt
 -- Item Effect: AGI +10
 -- Duration: 60 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

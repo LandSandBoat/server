@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5099
 -- Scroll of Boost-MND
 -- Teaches the white magic Boost-MND
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

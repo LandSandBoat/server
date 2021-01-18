@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15505
 -- Item: dhalmel_whistle
 -- Item Effect: AGI +6
 -- Duration: 3 minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15933
 -- Stirge Belt
 -- Enchantment: 60Min, Costume - Bat
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4325
 -- Item: hobgoblin_pie
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 15
 -- Magic 15
 -- Agility 4
 -- Charisma -7
 -- Health Regen While Healing 2
 -- Defense % 12 (cap 60)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

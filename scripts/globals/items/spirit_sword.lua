@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 16613
 -- Spirit Sword
 -- Additional effect: Light damage
 -- Enchantment: TP+100
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

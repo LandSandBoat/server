@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4332
 -- Item: orange_kuchen_+1
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP % 13 (cap 80)
 -- MP Recovered While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

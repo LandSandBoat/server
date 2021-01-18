@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4563
 -- Item: pamama_tart
 -- Food Effect: 1hour, All Races
------------------------------------------
+-----------------------------------
 -- HP 10
 -- MP 10
 -- Dexterity -1
 -- Intelligence 3
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

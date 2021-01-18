@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4224
 -- Demon Quiver
 -- When used, you will obtain one stack of Demon Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

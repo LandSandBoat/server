@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5691
 -- Item: plate_of_shrimp_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Vitality 1
 -- Defense 5
 -- Accuracy % 14 (cap 68)
 -- Ranged Accuracy % 14 (cap 68)
 -- Resist sleep +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

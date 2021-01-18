@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4564
 -- Item: royal_omelette
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Dexterity 2
 -- Intelligence -3
 -- Mind 4
 -- Attack % 20 (cap 65)
 -- Ranged Attack % 20 (cap 65)
------------------------------------------
+-----------------------------------
 -- IF ELVAAN ONLY
 -- HP 20
 -- MP 20
@@ -22,10 +22,10 @@
 -- Attack Cap 80
 -- Ranged ATT % 22
 -- Ranged ATT Cap 80
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

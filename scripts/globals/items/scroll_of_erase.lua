@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4751
 -- Scroll of Erase
 -- Teaches the white magic Erase
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

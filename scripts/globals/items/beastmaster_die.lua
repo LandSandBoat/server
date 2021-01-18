@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5485
 -- Beastmaster Die
 -- Teaches the job ability Beast Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

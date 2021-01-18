@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4560
 -- Item: bowl_of_vegetable_soup
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Vitality -1
 -- Agility 4
 -- Ranged Accuracy 5
 -- HP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

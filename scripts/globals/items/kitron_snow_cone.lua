@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5711
 -- Item: kitron_snow_cone
 -- Food Effect: 5 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +15% (cap 15)
 -- Intelligence 2
 -- Wind resistance +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4792
 -- Scroll of Aeroga
 -- Teaches the black magic Aeroga
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

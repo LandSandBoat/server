@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4604
 -- Item: Rogue Rice Ball
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +12
 -- Vit +3
 -- hHP +2
 -- Effect with enhancing equipment (Note: these are latents on gear with the effect)
 -- Def +50
 -- Beast Killer (guesstimated 5%)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

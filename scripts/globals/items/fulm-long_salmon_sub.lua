@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4266
 -- Item: fulm-long_salmon_sub
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- DEX +2
 -- VIT +1
 -- AGI +1
 -- INT +2
 -- MND -2
 -- Ranged Accuracy +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

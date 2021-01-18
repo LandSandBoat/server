@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4591
 -- Item: loaf_of_pumpernickel
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Vitality 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

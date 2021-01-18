@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4784
 -- Scroll of Firaga III
 -- Teaches the black magic Firaga III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4721
 -- Scroll of Repose
 -- Teaches the white magic Repose
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

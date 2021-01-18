@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4629
 -- Scroll of Holy II
 -- Teaches the white magic Holy II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

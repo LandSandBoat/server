@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5410
 -- virtue_stone_pouch.lua
 -- When used, you will obtain one stack of virtue stone
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5350
 -- Phial of Volant Serum
 -- Enchantment: 60Min, Costume - bat
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5550
 -- Item: Roll of Buche Au Chocolat
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +8
 -- MP +3% Cap 13
 -- Intelligence +2
 -- HP Recovered while healing +1
 -- MP Recovered while healing +4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

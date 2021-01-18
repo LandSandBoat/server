@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5658
 -- Item: Dish of Spafhetti Ortolana
 -- Food Effect: 30 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Agility 2
 -- Vitality 2
 -- HP +30% Cap 70
 -- StoreTP +6
 -- Resist Blind +10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

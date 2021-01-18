@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4157
 -- Item: Viper Potion
 -- Item Effect: Removes 300 HP over 3 mins
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

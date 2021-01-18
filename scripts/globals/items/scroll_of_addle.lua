@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: Unknown
 -- Scroll of Addle
 -- Teaches the magic Addle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

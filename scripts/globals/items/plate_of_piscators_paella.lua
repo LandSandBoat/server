@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5969
 -- Item: Plate of Piscator's Paella
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 45
 -- Dexterity 6
 -- Accuracy % 16 (cap 85)
 -- Undead Killer 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

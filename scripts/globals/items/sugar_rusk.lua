@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5782
 -- Item: sugar_rusk
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- High-quality success rate +1
 -- Synthesis failure rate -2%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

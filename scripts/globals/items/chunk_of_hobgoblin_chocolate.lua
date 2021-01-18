@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4324
 -- Item: chunk_of_hobgoblin_chocolate
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Health Regen While Healing 7
 -- Lizard Killer 12
 -- Petrify Resist 12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

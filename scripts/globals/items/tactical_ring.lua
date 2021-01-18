@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14679
 -- Item: Tactical Ring
 -- Item Effect: Regain 20
 -- Duration: 2 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

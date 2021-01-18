@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5170
 -- Item: green_quiche
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 10
 -- Agility 1
 -- Vitality -1
 -- Ranged ACC % 7
 -- Ranged ACC Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

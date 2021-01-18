@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6215
 -- Item: slice of pepperoni_pizza
 -- Food Effect: 30 minutes, all Races
------------------------------------------
+-----------------------------------
 -- HP +30
 -- STR+1
 -- Accuracy+9% (Max. 10)
 -- Attack+10% (Max. 15)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

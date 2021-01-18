@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5770
 -- Item: Super Reraiser
 -- Item Effect: This potion functions the same way as the spell Reraise.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

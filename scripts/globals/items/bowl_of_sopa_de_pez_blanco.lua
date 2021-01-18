@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4601
 -- Item: Bowl of Sopa de Pez Blanco
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 12
 -- Dexterity 6
 -- Mind -4
 -- Accuracy 3
 -- Ranged ACC % 7
 -- Ranged ACC Cap 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5662
 -- Item: Dragon Fruit
 -- Food Effect: 5 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence 4
 -- Agility -6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

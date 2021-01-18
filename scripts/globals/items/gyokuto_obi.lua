@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15860
 -- Gyokuto Obi
 -- Enchantment: 60Min, Costume - Large Rarab
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

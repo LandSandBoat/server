@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5160
 -- Item: plate_of_urchin_sushi_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 40
 -- Strength 1
 -- Vitality 6
 -- Accuracy % 16 (cap 76)
 -- Ranged ACC % 16 (cap 76)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

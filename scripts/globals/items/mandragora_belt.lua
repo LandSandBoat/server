@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15299
 -- Mandragora Belt
 -- Enchantment: 60Min, Costume - Mandragora
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

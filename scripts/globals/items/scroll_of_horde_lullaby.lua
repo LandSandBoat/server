@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4984
 -- Scroll of Horde Lullaby
 -- Teaches the song Horde Lullaby
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

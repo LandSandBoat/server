@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4854
 -- Scroll of Drain II
 -- Teaches the black magic Drain II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

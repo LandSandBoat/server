@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5073
 -- Scroll of Chocobo Mazurka
 -- Teaches the song Chocobo Mazurka
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5066
 -- Scroll of Lightning Threnody
 -- Teaches the song Lightning Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

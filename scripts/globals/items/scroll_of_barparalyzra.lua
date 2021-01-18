@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4696
 -- Scroll of Barparalyzra
 -- Teaches the white magic Barparalyzra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

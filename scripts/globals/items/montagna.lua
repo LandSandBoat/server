@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5887
 -- Item: montagna
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +8% (cap 140)
 -- Increases rate of combat skill gains by 60%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

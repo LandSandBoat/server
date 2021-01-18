@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5927
 -- Item: Cup of Caravan Tea
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 22
 -- MP 32
 -- Charisma 6
 -- Intelligence 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

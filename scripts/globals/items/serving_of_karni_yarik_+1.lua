@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5589
 -- Item: serving_of_karni_yarik_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 4
 -- Vitality -2
 -- Attack % 22 (cap 70)
 -- Ranged Attack % 22 (cap 70)
 -- Evasion +7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

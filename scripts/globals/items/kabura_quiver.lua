@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5332
 -- Kabura Quiver
 -- When used, you will obtain one stack of Kabura Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

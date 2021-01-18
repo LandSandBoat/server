@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5764
 -- Item: black_curry_bun+1
 -- Food Effect: 60 min, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group effects
 -- Dexterity +4
 -- Vitality +6
@@ -15,10 +15,10 @@
 -- Resist Sleep +5
 -- hHP +6
 -- hMP +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

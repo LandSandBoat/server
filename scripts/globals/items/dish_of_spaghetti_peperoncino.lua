@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5188
 -- Item: dish_of_spaghetti_peperoncino
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 30
 -- Health Cap 70
 -- Vitality 2
 -- Store TP +6
 -- Resist virus +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

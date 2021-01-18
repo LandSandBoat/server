@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5776
 -- Item: Crepe Caprice
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +5% (cap20)
 -- MP Healing 3
 -- Magic Accuracy +21% (cap 40)
 -- Magic Defense +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

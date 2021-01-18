@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5285
 -- Old Bullet Box +1
 -- When used, you will obtain one partial stack of Antique Bullets +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

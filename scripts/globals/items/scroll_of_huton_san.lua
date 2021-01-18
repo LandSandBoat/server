@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4936
 -- Scroll of Huton: San
 -- Teaches the ninjutsu Huton: San
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

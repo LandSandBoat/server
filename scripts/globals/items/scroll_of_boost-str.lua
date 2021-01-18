@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5094
 -- Scroll of Boost-STR
 -- Teaches the white magic Boost-STR
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

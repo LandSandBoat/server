@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4700
 -- Scroll of Barvira
 -- Teaches the white magic Barvira
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

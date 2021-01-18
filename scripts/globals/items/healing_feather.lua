@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18239
 -- Item: Healing Feather
 -- Item Effect: Cure Potency +15%
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

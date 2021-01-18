@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: Beluga
 -- Beluga
 -- Additional Effect: Ice Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

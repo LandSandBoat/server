@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5935
 -- Item: Bowl of Moogurt
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP % 20 Cap 20
 -- Vitality 3
 -- HP Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

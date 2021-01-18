@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6212
 -- Item: slice of marinara pizza +1
 -- Food Effect: 60 minutes, all Races
------------------------------------------
+-----------------------------------
 -- HP +25
 -- Accuracy+11% (Max. 58)
 -- Attack+21% (Max. 55)
 -- "Undead Killer"+5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

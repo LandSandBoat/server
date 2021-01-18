@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6275
 -- Item: pukatrice_egg_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +20
 -- MP +20
 -- STR +3
@@ -10,10 +10,10 @@
 -- Attack +21% (cap 90)
 -- Ranged Attack +21% (cap 90)
 -- Subtle Blow +9
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

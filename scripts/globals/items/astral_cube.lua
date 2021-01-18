@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 6413
 -- Item: Astral Cube
 -- Item Effect: Grant Astral cube key item
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 local keyItemId = tpz.ki.ASTRAL_CUBE

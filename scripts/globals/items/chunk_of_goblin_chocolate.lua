@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4495
 -- Item: chunk_of_goblin_chocolate
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Health Regen While Healing 5
 -- Lizard Killer 10
 -- Petrify resistance +10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

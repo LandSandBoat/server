@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5835
 -- Item: tube_of_healing_salve_i
 -- Item Effect: Instantly restores 50% of pet HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

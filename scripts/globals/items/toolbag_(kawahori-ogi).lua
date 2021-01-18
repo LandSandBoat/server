@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5310
 -- Toolbag Kawa
 -- When used, you will obtain one stack of kawahori-ogi
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

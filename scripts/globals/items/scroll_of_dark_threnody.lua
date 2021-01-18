@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5069
 -- Scroll of Dark Threnody
 -- Teaches the song Dark Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

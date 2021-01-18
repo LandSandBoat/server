@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5277
 -- Old Quiver +7
 -- When used, you will obtain one partial stack of Crude Arrows +7
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

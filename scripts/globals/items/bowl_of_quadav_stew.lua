@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4569
 -- Item: Bowl of Quadav Stew
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility -4
 -- Vitality 2
 -- Defense % 17
 -- Defense Cap 60
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

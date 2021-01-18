@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5501
 -- Tactician's Die
 -- Teaches the job ability Tactician's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

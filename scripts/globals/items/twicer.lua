@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18216
 -- Item: twicer
 -- Item Effect: DOUBLE_ATTACK 100%
 -- Duration: 30 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

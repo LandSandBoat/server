@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4682
 -- Scroll of Barparalyze
 -- Teaches the white magic Barparalyze
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

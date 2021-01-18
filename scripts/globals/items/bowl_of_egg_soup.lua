@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4417
 -- Item: Bowl of Egg Soup
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 6
 -- Health Cap 30
 -- Magic 5
 -- Health Regen While Healing 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

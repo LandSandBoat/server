@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4677
 -- Scroll of Barstonra
 -- Teaches the white magic Barstonra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

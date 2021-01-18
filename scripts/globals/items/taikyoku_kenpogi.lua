@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14541
 -- Item: taikyoku_kenpogi
 -- Item Effect: Eva +3
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

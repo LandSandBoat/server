@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4823
 -- Scroll of Flood II
 -- Teaches the black magic Flood II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

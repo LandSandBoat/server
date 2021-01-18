@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4615
 -- Scroll of Curaga
 -- Teaches the white magic Curaga
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

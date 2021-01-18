@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4335
 -- Item: slice_of_juicy_mutton
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 3
 -- Intelligence -1
 -- Attack % 27
 -- Attack Cap 35
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5619
 -- Item: Bowl of Zesti Zoni
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 12
 -- MP 12
 -- Strength 2
@@ -16,10 +16,10 @@
 -- Evasion +2
 -- MP Recovered while healing 1
 -- HP Recovered while healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

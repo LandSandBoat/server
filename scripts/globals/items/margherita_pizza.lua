@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5695
 -- Item: margherita_pizza
 -- Food Effect: 3 hours, all Races
------------------------------------------
+-----------------------------------
 -- HP +30
 -- Accuracy +10% (cap 8)
 -- Attack +10% (cap 10)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

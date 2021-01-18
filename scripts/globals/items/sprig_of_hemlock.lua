@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5985
 -- Item: Sprig of Hemlock
 -- Food Effect: 5 Min, All Races
 -- Paralysis
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

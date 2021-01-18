@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5149
 -- Item: plate_of_sole_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP 20
 -- Strength 5
 -- Dexterity 6
 -- Accuracy % 15
 -- Ranged ACC % 15
 -- Sleep Resist 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

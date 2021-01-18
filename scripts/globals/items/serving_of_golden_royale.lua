@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5558
 -- Item: Serving of Golden Royale
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10
 -- MP +10
 -- Intelligence +2
 -- HP Recoverd while healing 2
 -- MP Recovered while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

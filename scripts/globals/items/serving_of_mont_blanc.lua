@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5557
 -- Item: Serving of Mont Blanc
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +8
 -- MP +10
 -- Intelligence +1
 -- HP Recoverd while healing 1
 -- MP Recovered while healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

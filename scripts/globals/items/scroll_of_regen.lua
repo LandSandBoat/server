@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4716
 -- Scroll of Regen
 -- Teaches the white magic Regen
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

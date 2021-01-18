@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4610
 -- Scroll of Cure II
 -- Teaches the white magic Cure II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

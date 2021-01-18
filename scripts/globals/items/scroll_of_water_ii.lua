@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4778
 -- Scroll of Water II
 -- Teaches the black magic Water II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

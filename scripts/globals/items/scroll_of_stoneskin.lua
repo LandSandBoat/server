@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4662
 -- Scroll of Stoneskin
 -- Teaches the white magic Stoneskin
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

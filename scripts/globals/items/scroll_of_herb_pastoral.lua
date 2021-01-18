@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5014
 -- Scroll of Herb Pastoral
 -- Teaches the song Herb Pastoral
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

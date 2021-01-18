@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4150
 -- Item: Eye Drops
 -- Item Effect: This potion remedies blindness.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

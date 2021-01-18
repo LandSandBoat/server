@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4226
 -- Silver Quiver
 -- When used, you will obtain one stack of Silver Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

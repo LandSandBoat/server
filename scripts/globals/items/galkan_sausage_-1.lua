@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5862
 -- Item: galkan_sausage_-1
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength -3
 -- Dexterity -3
 -- Vitality -3
@@ -10,10 +10,10 @@
 -- Mind -3
 -- Intelligence -3
 -- Charisma -3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

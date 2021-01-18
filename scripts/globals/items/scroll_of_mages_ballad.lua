@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4994
 -- Scroll of Mages Ballad
 -- Teaches the song Mages Ballad
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
