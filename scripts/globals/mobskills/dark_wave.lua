@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Dark Wave
 --
 --  Description: A wave of dark energy washes over targets in an area of effect. Additional effect: Bio
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 10' radial
 --  Notes: Severity of Bio effect varies by time of day, from 8/tic at midday to 20/tic at midnight.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

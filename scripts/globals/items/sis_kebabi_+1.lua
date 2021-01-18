@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5599
 -- Item: sis_kebabi_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 6
 -- Vitality -1
 -- Intelligence -1
@@ -10,10 +10,10 @@
 -- Attack Cap 75
 -- Ranged ATT % 22
 -- Ranged ATT Cap 75
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

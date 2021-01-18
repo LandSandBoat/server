@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Sand Trap
 --
 -- Description: AOE Petrify and resets hate.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignore
 -- Range: 15' radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

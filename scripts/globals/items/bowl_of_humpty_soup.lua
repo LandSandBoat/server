@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4521
 -- Item: Bowl of Humpty Soup
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 6
 -- Health Cap 35
 -- Magic 5
 -- Health Regen While Healing 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

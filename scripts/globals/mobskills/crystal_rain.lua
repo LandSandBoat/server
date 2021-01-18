@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Crystal Rain
 -- Invokes the power of a crystal to deal Light damage to targets in an area of effect.
 -- Range: 15' radial
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

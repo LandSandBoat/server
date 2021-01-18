@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5483
 -- Paladin Die
 -- Teaches the job ability Gallant's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

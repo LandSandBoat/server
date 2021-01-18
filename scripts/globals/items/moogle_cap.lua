@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 --  ID: 16118
 --  Moogle Cap
 --  Transports the user to their Home Nation
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

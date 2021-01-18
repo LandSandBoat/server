@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 16227
 -- Persikos Tank
 -- When used, you will obtain one Persikos au lait
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

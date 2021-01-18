@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17606
 -- Item: Corrosive Dagger
 -- Additional Effect: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

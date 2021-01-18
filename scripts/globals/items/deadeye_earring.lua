@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14787
 -- Item: Deadeye Earring
 -- Item Effect: Ranged Attack 20
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

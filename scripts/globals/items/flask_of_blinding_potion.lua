@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4163
 -- Item: Blinding Potion
 -- Item Effect: This potion induces blindness.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

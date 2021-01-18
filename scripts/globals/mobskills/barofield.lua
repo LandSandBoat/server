@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Barofield
 --
 --  Description: Deals Wind damage to enemies within a fan-shaped area. Additional effect: Weight
 --  Type: Magical
 --  Ignores Shadows
 --  Range: 15' Cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

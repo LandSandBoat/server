@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5052
 -- Scroll of Light Carol
 -- Teaches the song Light Carol
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

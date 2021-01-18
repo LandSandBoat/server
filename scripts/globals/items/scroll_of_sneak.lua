@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4745
 -- Scroll of Sneak
 -- Teaches the white magic Sneak
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

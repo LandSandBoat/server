@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4523
 -- Item: melon_pie_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 30
 -- Intelligence 5
 -- Magic Regen While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Reprobation
 --
 -- Description: Dispels all buffs from targets in area of effect, including food.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: Dispels shadows
 -- Range: Area of Effect
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target,mob,skill)

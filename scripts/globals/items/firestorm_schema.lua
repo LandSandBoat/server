@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6049
 -- Firestorm Schema
 -- Teaches the white magic Firestorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

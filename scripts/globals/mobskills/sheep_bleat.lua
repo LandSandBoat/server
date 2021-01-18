@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 -- Sheep Bleat
 -- Emits a unnerving bleat that slows down players in range.
 --
 -- Only used by Nightmare Sheep from Dynamis-Valkurm
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

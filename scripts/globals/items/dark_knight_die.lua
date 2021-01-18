@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5484
 -- Dark Knight Die
 -- Teaches the job ability Chaos Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

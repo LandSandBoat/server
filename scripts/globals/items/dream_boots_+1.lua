@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 15753
 -- Item: Dream Boots +1
 -- Enchantment: Sneak
 -- Duration: 3 Mins 20 Secs
 -- TODO: Enhances duration of Sneak Effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

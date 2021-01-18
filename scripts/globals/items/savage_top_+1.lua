@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 11279
 -- Item: savage top +1
 -- Teleport's user to Purgonorgo Isle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 require("scripts/globals/teleports")

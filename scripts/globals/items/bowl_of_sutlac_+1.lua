@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5578
 -- Item: Bowl of Sutlac
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10
 -- MP +10
 -- INT +2
 -- HP Recovered while healing +1
 -- MP Recovered while healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

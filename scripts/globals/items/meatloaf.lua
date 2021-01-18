@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5689
 -- Item: Meatloaf
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Strength 6
 -- Agility 2
 -- Intelligence -3
 -- Attack 18% Cap 90
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

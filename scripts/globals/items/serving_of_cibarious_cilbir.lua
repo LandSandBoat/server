@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5643
 -- Item: serving_of_cibarious_cilbir
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP % 6 (cap 150)
 -- MP % 6 (cap 100)
 -- HP recovered while healing 3
 -- MP recovered while healing 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

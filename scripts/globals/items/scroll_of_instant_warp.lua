@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4181
 -- Scroll of Instant Warp
 -- Transports the user to their Home Point
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

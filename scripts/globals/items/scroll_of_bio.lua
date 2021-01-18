@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4838
 -- Scroll of Bio
 -- Teaches the black magic Bio
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

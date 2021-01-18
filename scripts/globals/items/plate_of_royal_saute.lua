@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4295
 -- Item: plate_of_royal_sautee
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Agility 1
 -- Intelligence -2
@@ -10,10 +10,10 @@
 -- Ranged Attack +22% (cap 80)
 -- Stun Resist +4
 -- HP recovered while healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

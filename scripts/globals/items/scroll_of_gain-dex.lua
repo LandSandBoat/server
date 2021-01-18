@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5088
 -- Scroll of Gain-DEX
 -- Teaches the white magic Gain-DEX
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

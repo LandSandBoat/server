@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5438
 -- Item: Bottle of Strange Juice
 -- Item Effect: Restores 200 MP over 300 seconds.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

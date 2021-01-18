@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5593
 -- Item: cup_of_imperial_coffee_+1
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health Regen While Healing 5
 -- Magic Regen While Healing 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5567
 -- Item: dried_date
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 10
 -- Magic 20
 -- Agility -1
 -- Intelligence 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

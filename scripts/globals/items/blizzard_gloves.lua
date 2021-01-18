@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 14990
 -- Blizzard Gloves
 --  Enchantment: "Enblizzard"
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5473
 -- Item: Bastore Sweeper
 -- Food Effect: 5 Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality +3
 -- Defense +15% Cap 50
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

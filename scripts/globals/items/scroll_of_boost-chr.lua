@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5100
 -- Scroll of Boost-CHR
 -- Teaches the white magic Boost-CHR
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

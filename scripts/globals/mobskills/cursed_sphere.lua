@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Cursed Sphere
 --
 --  Description: Deals water damage to enemies within area of effect.
 --  Type: Magical Water (Element)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

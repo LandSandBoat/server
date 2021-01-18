@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Pleiades Ray
 --  Description: Fires a magical ray at nearby targets. Additional effects: Paralysis + Blind + Poison + Plague + Bind + Silence + Slow
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Unknown
 --  Notes: Only used by Gurfurlur the Menacing with health below 20%.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

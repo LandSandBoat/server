@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4690
 -- Scroll of Baramnesia
 -- Teaches the white magic Baramnesia
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

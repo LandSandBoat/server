@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16509
 -- Item: Aspir Knife
 -- Additional effect: MP Drain
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

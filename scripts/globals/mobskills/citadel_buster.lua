@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Citadel Buster
 -- Deals extreme Light damage to players in an area of effect.
 -- Additional effect: Enmity reset
@@ -6,13 +6,13 @@
 -- 2088/(1+MDB%) * (256-MDT)/256 (no day/weather bonus)
 -- 2608/MDB * (256-MDT)/256 (weather bonus)
 -- 2816/MDB * (256-MDT)/256 (day+weather bonus)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Temenos/IDs")
 
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target,mob,skill)

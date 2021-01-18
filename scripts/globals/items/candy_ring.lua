@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5621
 -- Item: Candy Ring
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 4
 -- Agility 4
 -- Charisma 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

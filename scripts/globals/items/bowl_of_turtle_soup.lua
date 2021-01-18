@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4418
 -- Item: Turtle Soup
 -- Food Effect: 3hours, All Races
------------------------------------------
+-----------------------------------
 -- HP + 10% (200 Cap)
 -- Dexterity +4
 -- Vitality +6
 -- Mind -3
 -- HP Recovered While Healing +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

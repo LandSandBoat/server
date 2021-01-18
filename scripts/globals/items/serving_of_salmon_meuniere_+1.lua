@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4347
 -- Item: serving_of_salmon_meuniere_+1
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Mind -2
 -- Ranged ACC % 7
 -- Ranged ACC Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

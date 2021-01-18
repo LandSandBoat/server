@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18551
 -- Item: Twilight Scythe
 -- Additional Effect: DEATH
 -- TODO: Enchantment: Non-elemental
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5219
 -- Item: plate_of_ikra_gunkan
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 30
 -- Magic 10
 -- Dexterity 3
@@ -11,10 +11,10 @@
 -- Accuracy Cap 28
 -- Ranged ACC % 18
 -- Ranged ACC Cap 28
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4711
 -- Scroll of Enstone
 -- Teaches the white magic Enstone
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

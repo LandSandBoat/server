@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4825
 -- Scroll of Gravity II
 -- Teaches the black magic Gravity II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

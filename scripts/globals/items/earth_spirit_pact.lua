@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4899
 -- Earth Spirit Pact
 -- Teaches the summoning magic Earth Spirit
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Wild Rage
 --
 --  Description: Deals physical damage to enemies within area of effect.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: 15' radial
 --  Notes: Has additional effect of Poison when used by King Vinegarroon.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 local PLATOON_SCORP_POOL_ID = 3157

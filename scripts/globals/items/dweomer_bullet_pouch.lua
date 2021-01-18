@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5822
 -- Dweomer Bullet Pouch
 -- When used, you will obtain one stack of Dweomer Bullets
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

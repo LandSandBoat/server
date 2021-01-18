@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Memory Of Dark
 --
 --  Description: Deals dark damage.
 --  Type: Magical (Dark)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

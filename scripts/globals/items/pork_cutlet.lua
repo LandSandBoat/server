@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 6394
 -- Item: pork_cutlet
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +40
 -- STR +7
 -- INT -7
 -- Fire resistance +20
 -- Attack +20% (cap 120)
 -- Ranged Attack +20% (cap 120)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

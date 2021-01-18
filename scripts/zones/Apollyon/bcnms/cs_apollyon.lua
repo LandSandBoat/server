@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Appolyon
--- Name: 
+-- Name:
 -----------------------------------
 require("scripts/globals/limbus")
 require("scripts/globals/battlefield")

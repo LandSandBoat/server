@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4517
 -- Item: serving_of_yellow_curry
 -- Food Effect: 3hours, All Races
------------------------------------------
+-----------------------------------
 -- Health Points 20
 -- Strength 5
 -- Agility 2
@@ -14,10 +14,10 @@
 -- Resist Sleep +3
 -- Resist Stun +4
 
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

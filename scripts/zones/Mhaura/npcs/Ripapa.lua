@@ -24,13 +24,13 @@ entity.onTrigger = function(player, npc)
     local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Carbunlce Debacle
     if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 2) then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 3 and player:hasItem(1172) == false) then
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Trial by Lightning
     elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByLightning_date"))) then
         player:startEvent(10016, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"

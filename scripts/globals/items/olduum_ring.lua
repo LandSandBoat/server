@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 --   ID: 15769
 --   Olduum Ring
 --   Teleports to Wajoam Woodlands Leypoint
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

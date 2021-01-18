@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4472
 -- Item: crayfish
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -3
 -- Vitality 1
 -- defense +10% (unknown cap)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5727
 -- Item: serving_of_zaru_soba
 -- Food Effect: 30Min?, All Races
------------------------------------------
+-----------------------------------
 -- Agility 3
 -- HP % 12 (cap 180)
 -- Resist Sleep +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

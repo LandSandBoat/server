@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5774
 -- Item: crepe_forestiere
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Mind 2
 -- MP % 10 (cap 35)
 -- Magic Accuracy +15
 -- Magic Def. Bonus +6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

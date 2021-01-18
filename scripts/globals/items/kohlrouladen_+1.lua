@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5761
 -- Item: kohlrouladen
 -- Food Effect: 4hr, All Races
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Agility 4
 -- Intelligence -4
@@ -10,10 +10,10 @@
 -- RATT +16% (cap 70)
 -- Enmity -5
 -- Subtle Blow +6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

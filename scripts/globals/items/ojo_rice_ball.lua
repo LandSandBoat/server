@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5929
 -- Item: Ojo Rice Ball
 -- Food Effect: 60 Mins, All Races
------------------------------------------
+-----------------------------------
 -- HP +50
 -- Dexterity +5
 -- Vitality +5
@@ -11,10 +11,10 @@
 -- Attack +60
 -- Defense +40
 -- Triple Attack +2%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

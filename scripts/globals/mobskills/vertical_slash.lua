@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Vertical Slash
 --
 --  Description: Vertically slashes a single target. Additional effect: Accuracy Down
@@ -6,14 +6,14 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
-------------------------------------
+-----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

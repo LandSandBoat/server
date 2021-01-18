@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4557
 -- Item: steamed_catfish
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 30
 -- Magic % 1 (cap 110)
 -- Dex 3
@@ -10,10 +10,10 @@
 -- Mind -3
 -- Earth Res 10
 -- Ranged Accuracy +6% (cap 15)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

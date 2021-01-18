@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5488
 -- Samurai Die
 -- Teaches the job ability Samurai Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

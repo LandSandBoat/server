@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5208
 -- Item: slice_of_tavnazian_ram_meat
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 2
 -- Mind -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

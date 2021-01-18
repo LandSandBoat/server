@@ -1,8 +1,8 @@
---------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/zone")
---------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.limbus = tpz.limbus or {}

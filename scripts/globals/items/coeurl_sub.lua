@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5166
 -- Item: coeurl_sub
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 10
 -- Strength 5
 -- Agility 1
@@ -13,10 +13,10 @@
 -- Ranged ATT % 20
 -- Ranged ATT Cap 75
 -- Resist Stun +4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

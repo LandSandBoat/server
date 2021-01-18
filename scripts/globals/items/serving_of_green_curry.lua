@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4296
 -- Item: serving_of_green_curry
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 2
 -- Vitality 1
 -- Health Regen While Healing 2
@@ -10,10 +10,10 @@
 -- Defense +9% (cap 160)
 -- Ranged ACC +5% (cap 25)
 -- Sleep Resist +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

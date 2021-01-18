@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4807
 -- Scroll of Waterga
 -- Teaches the black magic Waterga
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

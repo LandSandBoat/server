@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17750
 -- Item: Anthos Xiphos
 -- Additional Effect: Water Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

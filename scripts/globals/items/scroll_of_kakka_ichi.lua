@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4968
 -- Scroll of Kakka: Ichi
 -- Teaches the ninjutsu Kakka: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

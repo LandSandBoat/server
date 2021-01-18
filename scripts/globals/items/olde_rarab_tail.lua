@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5911
 -- Item: Olde Rarab Tail
 -- Effect: 90 Seconds of "Terror" effect.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

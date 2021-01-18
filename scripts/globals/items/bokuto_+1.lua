@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 16926
 -- Item: Bokuto +1
 -- Additional Effect: Blindness
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onAdditionalEffect = function(player, target, damage)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4903
 -- Dark Spirit Pact
 -- Teaches the summoning magic Dark Spirit
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

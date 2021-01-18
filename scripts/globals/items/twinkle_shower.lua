@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4168
 -- Twinkle Shower
 -- Sparkle effects surround the user
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

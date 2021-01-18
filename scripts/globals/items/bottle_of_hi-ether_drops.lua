@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5358
 -- Item: Hi-Ether Drop
 -- Item Effect: Restores 45 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

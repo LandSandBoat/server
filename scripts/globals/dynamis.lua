@@ -1,6 +1,6 @@
-------------------------------------
+-----------------------------------
 -- Dynamis
-------------------------------------
+-----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-------------------------------------
+-----------------------------------
 
 dynamis = {}
 
@@ -258,9 +258,9 @@ local dynaInfo =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function arg3(player, bit)
     local csVar = player:getCharVar("Dynamis_Status")
@@ -275,9 +275,9 @@ local function arg3(player, bit)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- global functions
--------------------------------------------------
+-----------------------------------
 
 dynamis.eye =
 {
@@ -684,10 +684,10 @@ dynamis.qmOnTrigger = function(player, npc)
     end
 end
 
---------------------------------------------------
+-----------------------------------
 -- getDynamisMapList
 -- Produces a bitmask for the goblin ancient currency NPCs
---------------------------------------------------
+-----------------------------------
 
 function getDynamisMapList(player)
     local bitmask = 0

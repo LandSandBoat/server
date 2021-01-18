@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 6214
 -- Item: slice of margherita pizza +1
 -- Food Effect: 60 minutes, all Races
------------------------------------------
+-----------------------------------
 -- HP +35
 -- Accuracy+10% (Max. 9)
 -- Attack+10% (Max. 11)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4625
 -- Scroll of Silena
 -- Teaches the white magic Silena
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

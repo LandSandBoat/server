@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4539
 -- Item: goblin_pie
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 12
 -- Magic 12
 -- Dexterity -1
@@ -10,10 +10,10 @@
 -- Vitality -1
 -- Charisma -5
 -- Defense % 9 (cap 100)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

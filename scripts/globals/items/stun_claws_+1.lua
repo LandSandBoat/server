@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17486
 -- Item: Stun Claws +1
 -- Additional Effect: Stun
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

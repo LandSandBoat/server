@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4339
 -- Item: rolanberry_pie_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 60
 -- Intelligence 3
 -- MP Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

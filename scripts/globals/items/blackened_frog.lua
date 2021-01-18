@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4536
 -- Item: Blackened Frog
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Agility 2
 -- Mind -2
@@ -11,10 +11,10 @@
 -- Ranged ATT % 14
 -- Ranged ATT Cap 75
 -- Evasion +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

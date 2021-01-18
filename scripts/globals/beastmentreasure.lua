@@ -1,12 +1,12 @@
-------------------------------------
+-----------------------------------
 -- Beastmen Treasure side quests
 -- https://ffxiclopedia.fandom.com/wiki/Beastmen_Treasure
-------------------------------------
+-----------------------------------
 require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/status')
 require('scripts/globals/zone')
-------------------------------------
+-----------------------------------
 tpz = tpz or {}
 tpz.beastmentreasure = tpz.beastmentreasure or {}
 

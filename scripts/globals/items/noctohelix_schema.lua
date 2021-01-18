@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6048
 -- Noctohelix Schema
 -- Teaches the black magic Noctohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

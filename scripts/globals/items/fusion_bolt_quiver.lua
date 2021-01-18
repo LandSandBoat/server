@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5821
 -- Fusion Bolt Quiver
 -- When used, you will obtain one stack of Fusion Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Hammer-Go-Round
 --
 -- Description: Damages nearby targets with a hammer carousel. Additional effect: Knockback
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: 2-3 shadow
 -- Range: Melee
 -- Notes: Only used by "destroyers" (carrying massive warhammers).
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

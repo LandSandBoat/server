@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Reactive Shield
 --
 -- Description: Covers the user in shock spikes. Enemies that hit it take lightning damage.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

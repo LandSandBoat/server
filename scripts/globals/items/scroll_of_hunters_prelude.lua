@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5009
 -- Scroll of Hunters Prelude
 -- Teaches the song Hunters Prelude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

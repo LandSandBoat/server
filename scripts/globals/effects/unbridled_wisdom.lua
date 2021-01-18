@@ -1,6 +1,6 @@
-----------------------------------------
+-----------------------------------
 -- tpz.effect.UNBRIDLED_WISDOM
-----------------------------------------
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4969
 -- Scroll of Migawari: Ichi
 -- Teaches the ninjutsu Migawari: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

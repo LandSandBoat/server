@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Critical Bite
 --
 -- Description: Deals damage to a single target.
 -- Type: Physical
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee, used by Nightmare Scorpions, KV, Serket
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

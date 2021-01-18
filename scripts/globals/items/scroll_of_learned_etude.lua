@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5036
 -- Scroll of Learned Etude
 -- Teaches the song Learned Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

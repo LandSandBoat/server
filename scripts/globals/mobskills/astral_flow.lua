@@ -1,10 +1,10 @@
----------------------------------------------
+-----------------------------------
 -- Astral Flow
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 local avatarOffsets =

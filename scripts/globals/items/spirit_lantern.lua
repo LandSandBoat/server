@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18240
 -- Item: Spirit Lantern
 -- Item Effect: Magic Damage +10%
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

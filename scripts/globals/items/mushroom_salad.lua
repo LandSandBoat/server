@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5678
 -- Item: Mushroom Salad
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP 14% Cap 85
 -- Agility 6
 -- Mind 6
 -- Strength -5
 -- Vitality -5
 -- Ranged Accuracy +15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

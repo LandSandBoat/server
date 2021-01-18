@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16501
 -- Item: Acid Knife
 -- Additional Effect: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

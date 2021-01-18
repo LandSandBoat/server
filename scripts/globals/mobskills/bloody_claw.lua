@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Bloody Claw
 -- Family: Gargouille
 -- Description: Steals an enemy's HP. Additional effect: Reduces a random stat.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Melee
 -- Notes: Despite the attack ignoring Utsusemi, it is physical, and therefore capable of missing entirely.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

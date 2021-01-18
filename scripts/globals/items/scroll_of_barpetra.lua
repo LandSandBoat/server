@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4699
 -- Scroll of Barpetra
 -- Teaches the white magic Barpetra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

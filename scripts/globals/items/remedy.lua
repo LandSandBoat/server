@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4155
 -- Item: Remedy
 -- Item Effect: This potion remedies status ailments.
 -- Works on paralysis, silence, blindness, poison, and disease.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

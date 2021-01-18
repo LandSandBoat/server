@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Everyone's Rancor
 --
 -- Notes: Invokes rancor to spite a single target.
@@ -7,10 +7,10 @@
 -- Only used by certain NMs, generally only once
 -- and when they have reached a certain percentage
 -- of HP (usually 25%).
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5928
 -- Item: Himesama Rice Ball
 -- Food Effect: 30 Mins, All Races
------------------------------------------
+-----------------------------------
 -- HP +25
 -- Dexterity +4
 -- Vitality +4
@@ -11,10 +11,10 @@
 -- Attack +60
 -- Defense +40
 -- Triple Attack +1%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

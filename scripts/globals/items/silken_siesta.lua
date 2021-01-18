@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5626
 -- Item: Silken Siesta
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP Recoverd while healing 2
 -- MP Recovered while healing 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

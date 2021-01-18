@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4844
 -- Scroll of Frost
 -- Teaches the black magic Frost
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

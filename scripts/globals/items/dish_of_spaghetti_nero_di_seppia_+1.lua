@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5202
 -- Item: Dish of Spaghetti Nero Di Seppia +1
 -- Food Effect: 60 Mins, All Races
------------------------------------------
+-----------------------------------
 -- HP % 17 (cap 140)
 -- Dexterity 3
 -- Vitality 2
@@ -11,10 +11,10 @@
 -- Charisma -1
 -- Double Attack 1
 -- Store TP 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

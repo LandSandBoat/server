@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16494
 -- Item: Corrosive Kukri
 -- Additional Effect: Weakens defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

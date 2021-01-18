@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5207
 -- Item: strip_of_bison_jerky
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Mind -2
 -- Attack % 18
 -- Attack Cap 70
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

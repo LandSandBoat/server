@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5306
 -- Item: Bottle of Hallowed Water
 -- Item Effect: Removes curse. Better chance to remove doom.
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

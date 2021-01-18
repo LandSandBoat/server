@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4158
 -- Item: Venom Potion
 -- Item Effect: Removes 300 HP over 180 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

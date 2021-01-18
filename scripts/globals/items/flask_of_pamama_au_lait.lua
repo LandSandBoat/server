@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4302
 -- Item: Pamama au Lait
 -- Item Effect: Restores 400 HP over 600 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

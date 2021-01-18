@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Mind Purge
 --
 -- Description: Dispels all buffs from a single target, including food.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: Dispels shadows
 -- Range: Single target
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

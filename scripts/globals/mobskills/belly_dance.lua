@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Belly Dance
 --
 -- Description: Charms all targets in an area of effect, that are facing the Lamia.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 15' radial
 -- Notes: Used only by Lamia NM's, particularly in Besieged.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

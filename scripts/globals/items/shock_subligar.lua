@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15650
 -- Item: shock subligar
 -- Item Effect: Shock Spikes
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

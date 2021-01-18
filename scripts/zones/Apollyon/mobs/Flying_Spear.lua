@@ -10,42 +10,42 @@ local entity = {}
 local flags = tpz.path.flag.NONE
 local path =
 {
-    [1] = 
+    [1] =
     {
         {509.874, 0.000, -310.010},
         {490.000, 0.000, -287.000}
     },
-    [2] = 
+    [2] =
     {
         {559.858, 0.000, -347.135},
         {540.000, 0.000, -347.000}
     },
-    [3] = 
+    [3] =
     {
         {597.587, 0.000, -348.038},
         {619.000, 0.000, -337.000}
     },
-    [4] = 
+    [4] =
     {
         {600.347, 0.000, -358.427},
         {599.808, 0.000, -377.934}
     },
-    [5] = 
+    [5] =
     {
         {525.602, 0.000, -353.234},
         {541.000, 0.000, -368.000}
     },
-    [6] = 
+    [6] =
     {
         {539.524, 0.000, -352.514},
         {559.506, 0.000, -349.762}
     },
-    [7] = 
+    [7] =
     {
         {613.174, 0.000, -357.948},
         {615.098, 0.000, -377.595}
     },
-    [8] = 
+    [8] =
     {
         {570.718, 0.000, -343.563},
         {564.009, 0.000, -314.711}
@@ -74,7 +74,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local killCount = battlefield:getLocalVar("killCountF4")
         GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(tpz.mod.UDMGPHYS, -(8-killCount)*10)
         if killCount == 1 then
-            GetNPCByID(ID.mob.APOLLYON_SE_MOB[4]):setStatus(tpz.status.DISAPPEAR)      
+            GetNPCByID(ID.mob.APOLLYON_SE_MOB[4]):setStatus(tpz.status.DISAPPEAR)
             GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):spawn()
         elseif killCount == 8 then
             GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(tpz.mod.UDMGMAGIC, 0)

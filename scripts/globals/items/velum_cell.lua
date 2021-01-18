@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Velum Cell
 -- ID 5380
 -- Removes INT Down effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

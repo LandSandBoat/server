@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Flying Hip Press
 --
 --  Description: Deals Wind damage to enemies within area of effect.
@@ -6,12 +6,12 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 15' radial
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 

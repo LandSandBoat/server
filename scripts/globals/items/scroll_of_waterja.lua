@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4895
 -- Scroll of Waterja
 -- Teaches the Black magic Waterja
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

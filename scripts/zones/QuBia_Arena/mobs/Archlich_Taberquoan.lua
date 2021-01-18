@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: Qu'Bia Arena
 --   NM: Archlich Taber'quoan
 -- Mission 5-1 BCNM Fight
-----------------------------------------
+-----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------

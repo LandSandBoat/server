@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4551
 -- Item: salmon_croute
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +3% (cap 130)
 -- Dexterity 2
 -- MND -2
 -- Ranged Accuracy +6% (cap 15)
 -- HP recovered while healing 2
 -- MP recovered while healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

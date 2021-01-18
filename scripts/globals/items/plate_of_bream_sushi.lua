@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5176
 -- Item: plate_of_bream_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 6
 -- Vitality 5
 -- Accuracy % 16 (cap 76)
 -- Ranged ACC % 16 (cap 76)
 -- Sleep Resist 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

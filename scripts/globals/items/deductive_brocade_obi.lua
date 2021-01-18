@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15861
 -- Item: deductive_brocade_obi
 -- Item Effect: MND+10
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

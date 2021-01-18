@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 -- Vulcan Shot
 --
 -- Description: Fires an explosive bullet at targets in an area of effect.
@@ -6,12 +6,12 @@
 -- Can be dispelled: N/A
 -- Utsusemi/Blink absorb: Wipes shadows?
 -- Range: 14' radial
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

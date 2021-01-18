@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5145
 -- Item: plate_of_fish_and_chips
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Vitality 3
 -- Mind -3
 -- defense 5
 -- Ranged ATT % 7
 -- Ranged ATT Cap 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

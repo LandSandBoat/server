@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Petribreath
 --
 -- Description: Petrifies targets within a fan-shaped area.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown  cone, Seen up to 15' distance.
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

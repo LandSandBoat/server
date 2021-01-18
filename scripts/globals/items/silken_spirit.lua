@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5634
 -- Item: Silken Spirit
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- MP +4% (cap 90)
 -- HP Recovered while healing +2
 -- MP Recovered while healing +7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Tail Slap
 --
 --  Description: Delivers an area attack. Additional effect: "Stun." Damage varies with TP.
 --  Type: Physical (Blunt)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

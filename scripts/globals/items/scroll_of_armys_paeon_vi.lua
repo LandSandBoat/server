@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4991
 -- Scroll of Armys Paeton VI
 -- Teaches the song Armys Paeton VI
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

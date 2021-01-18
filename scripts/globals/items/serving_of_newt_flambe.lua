@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4329
 -- Item: serving_of_newt_flambe
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 4
 -- Mind -3
 -- Attack % 18
 -- Attack Cap 65
 -- Virus Resist 4
 -- Curse Resist 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

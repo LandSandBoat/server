@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4862
 -- Scroll of Blind
 -- Teaches the black magic Blind
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

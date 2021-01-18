@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5183
 -- Item: viking_herring
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 4
 -- Mind -3
 -- Attack % 12 (cap 75)
 -- Ranged ATT % 12 (cap 75)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

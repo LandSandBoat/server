@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Blaster
 --
 -- Description: Paralyzes enemy.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows.
 -- Range: Melee?
 -- Notes: Very potent paralysis tpz.effect. Is NOT a Gaze Attack, unlike Chaotic Eye.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

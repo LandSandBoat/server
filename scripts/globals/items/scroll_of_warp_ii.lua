@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4870
 -- Scroll of Warp II
 -- Teaches the black magic Warp II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

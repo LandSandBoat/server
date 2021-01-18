@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4691
 -- Scroll of Baramnesra
 -- Teaches the white magic Baramnesra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

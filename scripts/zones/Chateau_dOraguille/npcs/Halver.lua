@@ -65,7 +65,7 @@ entity.onTrigger = function(player, npc)
         -- Mission San d'Oria 8-2 Lightbringer (optional)
         elseif (currentMission == tpz.mission.id.sandoria.LIGHTBRINGER and MissionStatus == 6) then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA)
-        -- Mission San d'Oria 8-1 Coming of Age --
+        -- Mission San d'Oria 8-1 Coming of Age
         elseif (currentMission == tpz.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 3 and player:hasKeyItem(tpz.ki.DROPS_OF_AMNIO)) then
             player:startEvent(102)
         elseif (currentMission == tpz.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 1) then

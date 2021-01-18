@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5676
 -- Item: serving_of_mushroom_sautee
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP 60
 -- Mind 6
 -- MP Recovered While Healing 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4655
 -- Scroll of Protect V
 -- Teaches the white magic Protect V
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4945
 -- Scroll of Suiton: San
 -- Teaches the ninjutsu Suiton: San
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

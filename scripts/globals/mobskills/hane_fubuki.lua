@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Hane Fubuki
 -- Description: Additional effect: Poison. Chance of effect varies with TP.
 -- Type: Physical (Piercing)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

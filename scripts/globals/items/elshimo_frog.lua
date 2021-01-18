@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4290
 -- Item: elshimo_frog
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Agility 2
 -- Mind -4
 -- Evasion 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5408
 -- Light Card Case
 -- When used, you will obtain one stack of Light Cards
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

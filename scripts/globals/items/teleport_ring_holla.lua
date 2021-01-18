@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 14661
 -- Teleport ring: Holla
 -- Enchantment: "Teleport-Holla"
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4781
 -- Scroll of Water V
 -- Teaches the black magic Water V
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

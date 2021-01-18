@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6261
 -- Item: akamochi+1
 -- Food Effect: 60 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP + 30 (Pet & Master)
 -- Vitality + 4 (Pet & Master)
 -- Attack + 17% Cap: 54 (Pet & Master) Pet Cap: 81
 -- Accuracy + 11% Cap: 54 (Pet & Master) Pet Cap: 81
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

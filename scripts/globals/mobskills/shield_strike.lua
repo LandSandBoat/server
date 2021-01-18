@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Shield Strike
 --
 --  Description: Attempts to Shield Bash players.  Additional effect: Stun
 --  Type: Physical
 --  1 shadow?
 --  Range: Melee front arc
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4492
 -- Item: bowl_of_puls
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Vitality 2
 -- Dexterity -1
 -- HP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5313
 -- Toolbag Mizu
 -- When used, you will obtain one stack of mizu-deppo
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

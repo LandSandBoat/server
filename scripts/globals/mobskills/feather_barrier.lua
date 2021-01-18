@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Feather Barrier
 --
 -- Description: Enhances evasion.
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

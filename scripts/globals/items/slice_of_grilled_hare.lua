@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4371
 -- Item: slice_of_grilled_hare
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 2
 -- Intelligence -1
 -- Attack % 30
 -- Attack Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

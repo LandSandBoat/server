@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Head Snatch
 --  Description: Grabs a single target's head.
 --  Type: Physical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Melee
 --  Notes: Only used by Gurfurlur the Menacing. Reduces HP to 10%.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4717
 -- Scroll of Refresh
 -- Teaches the white magic Refresh
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

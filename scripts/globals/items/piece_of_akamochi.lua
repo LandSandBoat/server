@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 6260
 -- Item: akamochi
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP + 20 (Pet & Master)
 -- Vitality + 3 (Pet & Master)
 -- Acc + 10% Cap: 50 (Pet & Master) Pet Cap: 75
 -- R. Acc + 10% Cap: 50 (Pet & Master) Pet Cap: 75
 -- Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
 -- R. Attack + 16% Cap: 50 (Pet & Master) Pet Cap: 75
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

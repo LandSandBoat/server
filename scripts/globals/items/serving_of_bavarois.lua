@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5729
 -- Item: serving_of_bavarois
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 20
 -- Intelligence 3
 -- hHP +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

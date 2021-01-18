@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18379
 -- Item: Vulcan Claymore
 -- Additional Effect: Fire Damage
 -- Enchantment: Enfire
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

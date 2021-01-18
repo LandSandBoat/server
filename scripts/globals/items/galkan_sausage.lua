@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4395
 -- Item: galkan_sausage
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Multi-Race Effects
 -- Galka
 -- Strength 3
@@ -17,10 +17,10 @@
 -- Intelligence -4
 -- Attack 9
 -- Ranged ATT  9
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

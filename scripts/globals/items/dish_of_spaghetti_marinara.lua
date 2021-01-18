@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5719
 -- Item: dish_of_spaghetti_marinara
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP % 15 (cap 120)
 -- Vitality 2
 -- Defense 5
 -- Store TP 6
 -- hHP +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

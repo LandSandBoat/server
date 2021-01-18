@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Spring Water
 --
 -- Description: restores hit points and cures some status ailments.
 -- Type: Magical (Water)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

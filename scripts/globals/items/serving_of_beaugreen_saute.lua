@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4572
 -- Item: serving_of_beaugreen_sautee
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 1
 -- Vitality -1
 -- Ranged Acc % 7
 -- Ranged Acc Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

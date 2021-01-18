@@ -1,6 +1,6 @@
-----------------------------------------
+-----------------------------------
 -- tpz.effect.INTERVENE
-----------------------------------------
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

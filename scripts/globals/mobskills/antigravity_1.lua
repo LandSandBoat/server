@@ -1,14 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Antigravity w/ 1 Gear
 -- Knockback and damage, knockback varies with gear count
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 -- todo The potency of the knockback effect varies with
 --  the number of gears in the enemy formation. A single gear produces only a
 --  slight knockback, whereas triple gears produce a very strong knockback.
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

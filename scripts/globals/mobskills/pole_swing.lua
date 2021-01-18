@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Pole Swing
 --
 --  Description: Deals damage to a single target.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes: Used only by Lamia equipped with a staff. If they lost their staff, they'll use Hysteric Barrage instead.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

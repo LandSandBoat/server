@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18241
 -- Item: Vial of Refresh Musk
 -- Item Effect: 60 seconds
 -- Duration: 30 Seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

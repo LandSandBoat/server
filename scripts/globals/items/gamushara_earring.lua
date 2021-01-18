@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14788
 -- Item: Gamushara Earring
 -- Item Effect: Attack +22
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

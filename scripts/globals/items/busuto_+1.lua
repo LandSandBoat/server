@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16927
 -- Item: Busuto
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

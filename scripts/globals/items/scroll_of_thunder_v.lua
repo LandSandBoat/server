@@ -1,9 +1,9 @@
 
------------------------------------------
+-----------------------------------
 -- ID: 4776
 -- Scroll of thunder v
 -- Teaches the black magic thunder v
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

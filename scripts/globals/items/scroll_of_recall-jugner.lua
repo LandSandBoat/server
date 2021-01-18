@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4687
 -- Scroll of Recall-Jugner
 -- Teaches the white magic Recall-Jugner
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

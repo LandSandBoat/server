@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: Lebros Cavern (Troll Fugitives)
 --  Mob: Broken Troll Soldier
 -- Todo: make them spawn at 25-75% hp and stay
-----------------------------------------
+-----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5831
 -- Item: Lucid Elixir II
 -- Item Effect: Restores 75% of HP and MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

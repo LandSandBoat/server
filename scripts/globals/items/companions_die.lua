@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5504
 -- Companions Die
 -- Teaches the job ability Companions Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

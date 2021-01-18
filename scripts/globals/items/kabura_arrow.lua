@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17325
 -- Item: Kabura Arrow
 -- Additional Effect: Silence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

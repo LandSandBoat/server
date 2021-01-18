@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5931
 -- Item: Bowl of Shimmy Soup
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP 32
 -- Mind 5
 -- HP Recovered While Healing 5
 -- Enmity -5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

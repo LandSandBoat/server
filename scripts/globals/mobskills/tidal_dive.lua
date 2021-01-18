@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Tidal Dive
 --
 --  Description: Dives at nearby targets. Additional effect: Weight and/or Bind (Status Effect)
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Unknown radial
 --  Notes: Only used over deep water.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

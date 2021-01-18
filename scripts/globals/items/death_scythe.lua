@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16777
 -- Item: Death Scythe
 -- Additional Effect: Drains HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

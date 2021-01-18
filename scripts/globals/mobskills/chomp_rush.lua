@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Chomp Rush
 --
 --  Description: Deals damage in a threefold attack to a single target. Additional effect: slow (25%)
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 3 shadows
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

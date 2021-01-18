@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4282
 -- Item: pipin_hot_popoto
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP 25
 -- Vitality 3
 -- HP recovered while healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

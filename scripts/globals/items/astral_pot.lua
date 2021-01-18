@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 18243
 -- Item: Astral Pot
 -- Item Effect: Pet Magical Attack +22
 -- Duration 5 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

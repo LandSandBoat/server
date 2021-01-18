@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5635
 -- Item: shrimp_cracker
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Vitality 1
 -- DEF +10
 -- Amorph Killer 10
 -- Resist Virus +10
 -- HP Recovered While Healing 8
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5355
 -- Item: Elixir Vitae
 -- Item Effect: Instantly restores 3% of HP and MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

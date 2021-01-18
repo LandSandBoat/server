@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4961
 -- Scroll of Tonko: Ichi
 -- Teaches the ninjutsu Tonko: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 4370
 -- Item: pot_of_honey
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

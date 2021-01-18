@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4666
 -- Scroll of Paralyze
 -- Teaches the white magic Paralyze
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

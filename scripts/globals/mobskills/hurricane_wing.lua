@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Hurricane Wing
 --
 --  Description: Deals hurricane-force wind damage to enemies within a very wide area of effect. Additional effect: Blind
@@ -7,11 +7,11 @@
 --  Range: 30' radial.
 --  Notes: Used only by Dragua, Fafnir, Nidhogg, Cynoprosopi, Wyrm, and Odzmanouk. The blinding effect does not last long
 --                but is very harsh. The attack is wide enough to generally hit an entire alliance.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

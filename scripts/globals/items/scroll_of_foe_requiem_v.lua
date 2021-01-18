@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4980
 -- Scroll of Foe Requiem V
 -- Teaches the song Foe Requiem V
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

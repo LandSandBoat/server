@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Tyrranic Blare
 --
 -- Description: Emits an overwhelming scream that damages nearby targets.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Less than or equal to 10.0
 -- Notes: Only used by Gulool Ja Ja.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

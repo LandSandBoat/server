@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5783
 -- Item: chocolate_rusk
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- High-quality success rate +2
 -- Synthesis failure rate -4%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

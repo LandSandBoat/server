@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6223
 -- Item: Cehuetzi snow cone
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +20% (cap 100)
 -- INT +5
 -- MND +5
 -- Magic Atk. Bonus +13
 -- Lizard Killer +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

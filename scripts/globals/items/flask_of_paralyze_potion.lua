@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4159
 -- Item: Paralyze Potion
 -- Item Effect: This potion induces paralyze.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

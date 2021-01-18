@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6273
 -- Item: fried_popoto_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +35
 -- VIT +3
 -- Fire resistance +21
 -- DEF +21% (cap 150)
 -- Subtle Blow +9
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

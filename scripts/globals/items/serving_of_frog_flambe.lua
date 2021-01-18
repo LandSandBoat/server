@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4326
 -- Item: serving_of_frog_flambe
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 3
 -- Agility 2
 -- Mind -2
 -- Attack +14% (cap 80)
 -- Ranged Attack +14% (cap 80)
 -- Evasion 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

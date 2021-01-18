@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4294
 -- Item: serving_of_medicinal_quus
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 1
 -- Mind -1
 -- Ranged ACC % 7
 -- Ranged ACC Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

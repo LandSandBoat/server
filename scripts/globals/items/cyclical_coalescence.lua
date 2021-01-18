@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6225
 -- Item: Cyclical coalescence
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +30% (cap 110)
 -- INT +7
 -- MND +7
 -- Magic Atk. Bonus +15
 -- Lizard Killer +7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

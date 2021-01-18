@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18488
 -- Item: assailants_axe
 -- Item Effect: Acc +3
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

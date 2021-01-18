@@ -1,11 +1,11 @@
----------------------------------------------------
+-----------------------------------
 -- self_destruct_321
 -- Weapon skill for Time Bomb (BCNM 50 3, 2, 1...)
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

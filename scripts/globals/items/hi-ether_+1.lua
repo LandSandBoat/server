@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4133
 -- Item: Hi-Ether +1
 -- Item Effect: Restores 55 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

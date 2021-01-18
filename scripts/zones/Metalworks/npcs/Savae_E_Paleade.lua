@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(206)
     elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2 and player:getCharVar("MissionStatus") == 11) then
         player:startEvent(207)
-    -----------------
+    -----------------------------------
     elseif (player:getCurrentMission(SANDORIA) ~= tpz.mission.id.sandoria.NONE) then
         player:startEvent(208)
     else

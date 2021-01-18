@@ -38,15 +38,15 @@ end
 zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
-        ---------------------------------
+        -----------------------------------
         [1] = function (x)  -- Heaven's Tower exit portal
             player:startEvent(41)
         end,
-        ---------------------------------
+        -----------------------------------
         [2] = function (x)  -- Warp directly back to the first floor.
             player:startEvent(83)
         end,
-        ---------------------------------
+        -----------------------------------
     }
 end
 

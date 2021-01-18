@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5347
 -- Reef Fireflies
 -- Transports the user to Ilrusi Atoll Staging Point
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

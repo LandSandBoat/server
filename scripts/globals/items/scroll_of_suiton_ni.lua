@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4944
 -- Scroll of Suiton: Ni
 -- Teaches the ninjutsu Suiton: Ni
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

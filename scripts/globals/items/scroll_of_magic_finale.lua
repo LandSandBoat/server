@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5070
 -- Scroll of Magic Finale
 -- Teaches the song Magic Finale
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Vampiric Lash
 --
 -- Description: Deals dark damage to a single target. Additional effect: Drain
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
 -- Notes: In ToAU zones, this has an additional effect of absorbing all status effects, including food.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

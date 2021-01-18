@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5642
 -- Item: serving_of_cilbir
 -- Food Effect: 3Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP % 5 (cap 150)
 -- MP % 5 (cap 100)
 -- HP recovered while healing 3
 -- MP recovered while healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

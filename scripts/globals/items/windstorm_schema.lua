@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6054
 -- Windstorm Schema
 -- Teaches the white magic Windstorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

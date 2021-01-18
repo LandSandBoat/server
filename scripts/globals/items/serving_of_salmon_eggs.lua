@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5217
 -- Item: serving_of_salmon_eggs
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 6
 -- Magic 6
 -- Dexterity 2
 -- Mind -3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

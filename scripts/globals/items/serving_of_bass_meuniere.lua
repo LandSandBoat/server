@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4582
 -- Item: serving_of_bass_meuniere
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 3 (cap 130)
 -- Dexterity 3
 -- Agility 3
 -- Mind -3
 -- Ranged ACC % 6
 -- Ranged ACC Cap 15
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

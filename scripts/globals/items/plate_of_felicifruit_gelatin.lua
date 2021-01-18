@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5978
 -- Item: Plate of Felicifruit Gelatin
 -- Food Effect: 180 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP % 5 Cap 100
 -- Intelligence +7
 -- MP Healing +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

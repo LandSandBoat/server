@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6224
 -- Item: Apingaut snow cone
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +25% (cap 105)
 -- INT +6
 -- MND +6
 -- Magic Atk. Bonus +14
 -- Lizard Killer +6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

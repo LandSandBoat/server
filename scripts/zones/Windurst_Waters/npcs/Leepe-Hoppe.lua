@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(739)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 5 and player:hasKeyItem(tpz.ki.BOOK_OF_THE_GODS)) then
         player:startEvent(742)
-    ---------------------------
+    -----------------------------------
     elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
         player:startEvent(311)
 

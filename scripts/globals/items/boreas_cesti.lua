@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18359
 -- Item: Boreas Cesti
 -- Additional Effect: Wind Damage
 -- 100% proc rate
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

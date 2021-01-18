@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4369
 -- Item: four-leaf_mandragora_bud
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 3
 -- Vitality -5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

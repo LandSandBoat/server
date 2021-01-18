@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6052
 -- Hailstorm Schema
 -- Teaches the white magic Hailstorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

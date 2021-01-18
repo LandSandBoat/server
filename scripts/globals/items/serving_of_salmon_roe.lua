@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5218
 -- Item: serving_of_salmon_roe
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 8
 -- Magic 8
 -- Dexterity 2
 -- Mind -1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

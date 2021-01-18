@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Discharge
 --  Description: Deals lightning damage. Additional effect: "Paralysis"
 --  Type: Magical (lightning)
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Aoe
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

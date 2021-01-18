@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5012
 -- Scroll of Dragonfoe Mambo
 -- Teaches the song Dragonfoe Mambo
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

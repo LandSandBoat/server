@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4410
 -- Item: roast_mushroom
 -- Food Effect: 30minutes, All Races
------------------------------------------
+-----------------------------------
 -- Magic Points 10
 -- Strength -1
 -- Mind 3
 -- Enmity -1
 -- MP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

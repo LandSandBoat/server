@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18152
 -- Item: Venom Bolt
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

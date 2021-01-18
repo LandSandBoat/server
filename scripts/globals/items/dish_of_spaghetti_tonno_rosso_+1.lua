@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5624
 -- Item: Dish of Spaghetti Tonno Rosso +1
 -- Food Effect: 60 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Health % 13
 -- Health Cap 185
 -- Dexterity 2
 -- Vitality 3
 -- Store TP +6
 -- hMP +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

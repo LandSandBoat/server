@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5615
 -- Item: uberkuchen
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 10
 -- MP % 3 (cap 15)
 -- Intelligence 3
 -- HP Recovered While Healing 2
 -- MP Recovered While Healing 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

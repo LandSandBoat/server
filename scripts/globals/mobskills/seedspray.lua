@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Seedspray
 -- Family: Rafflesia
 -- Description: Single-target damage and Defense Down.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Absorbed by 3 shadows.
 -- Range: 11.5 yalms
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

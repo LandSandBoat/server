@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5089
 -- Scroll of Gain-VIT
 -- Teaches the white magic Gain-VIT
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

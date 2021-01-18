@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15611
 -- Item: sturdy_slacks
 -- Item Effect: HP +7, MP +7
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

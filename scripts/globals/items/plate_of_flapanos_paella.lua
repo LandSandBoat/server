@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5975
 -- Item: Plate of Flapano's Paella
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 45
 -- Vitality 6
 -- Defense % 26 Cap 155
 -- Undead Killer 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

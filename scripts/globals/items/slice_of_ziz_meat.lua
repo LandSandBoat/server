@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5581
 -- Item: Slice of Ziz Meat
 -- Effect: 5 Minutes, food effect, Galka Only
------------------------------------------
+-----------------------------------
 -- Strength +4
 -- Intelligence -6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

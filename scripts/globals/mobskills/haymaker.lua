@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Haymaker
 --  Description: Punches the daylights out of all targets in front. Additional effect: Amnesia
 --  Type: Physical
 --  Utsusemi/Blink absorb: Unknown
 --  Range: Front cone
 --  Notes: Only used by Gurfurlur the Menacing.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

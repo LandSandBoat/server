@@ -12,7 +12,7 @@ local entity = {}
 local loot =
 {
     -- northern tower floor 1
-    [1299] = 
+    [1299] =
     {
         [1] =
         {
@@ -710,7 +710,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000},
-            },  
+            },
             {
                 {itemid =    0, droprate = 1000},
                 {itemid = 1875, droprate = 1000},
@@ -958,7 +958,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000},
-            },  
+            },
             {
                 {itemid = 1875, droprate = 1000},
             },
@@ -1270,7 +1270,7 @@ entity.onTrigger = function(player, npc)
     local bfid = battlefield:getID()
     local hold = false
     if npc:getLocalVar("open") == 0 then
-        switch (bfid): caseof 
+        switch (bfid): caseof
         {
             [1298] = function() -- Temenos West Crate Handling
                 if crateID ~= ID.npc.TEMENOS_W_CRATE[7] then

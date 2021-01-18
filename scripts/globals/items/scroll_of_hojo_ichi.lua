@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4952
 -- Scroll of Hojo: Ichi
 -- Teaches the ninjutsu Hojo: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

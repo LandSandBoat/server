@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5333
 -- Sleep Quiver
 -- When used, you will obtain one stack of Sleep Arrows
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

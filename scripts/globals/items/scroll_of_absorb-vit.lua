@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4876
 -- Scroll of Absorb-VIT
 -- Teaches the black magic Absorb-VIT
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

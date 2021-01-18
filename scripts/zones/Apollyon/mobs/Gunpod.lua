@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-local loot = 
+local loot =
 {
     [1] = -- AF
     {

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 11278
 -- Item: wonder top +1
 -- Teleport's user to Purgonorgo Isle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 require("scripts/globals/teleports")

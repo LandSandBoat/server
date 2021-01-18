@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4694
 -- Scroll of Barsleepra
 -- Teaches the white magic Barsleepra
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

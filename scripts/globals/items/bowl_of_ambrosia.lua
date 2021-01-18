@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4511
 -- Item: Bowl of Ambrosia
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +7
 -- MP +7
 -- STR +7
@@ -20,10 +20,10 @@
 -- Defense +7
 -- HP recovered while healing +7
 -- MP recovered while healing +7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

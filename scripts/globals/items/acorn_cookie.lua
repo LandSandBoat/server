@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4510
 -- Item: Acorn Cookie
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Aquan killer +10
 -- Silence resistance +10
 -- MP recovered while healing +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

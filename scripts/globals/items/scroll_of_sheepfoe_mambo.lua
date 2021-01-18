@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5011
 -- Scroll of Sheepfoe Mambo
 -- Teaches the song Sheepfoe Mambo
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

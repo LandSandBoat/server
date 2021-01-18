@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4250
 -- Crackler
 -- Bursts of light appear in front of the user with a crackling sound, with the word "Congratulations!"
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

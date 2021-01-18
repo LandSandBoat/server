@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Decussate
 --
 --  Description: Performs a cross attack on nearby targets.
@@ -6,12 +6,12 @@
 --  Utsusemi/Blink absorb: 2-3 shadows?
 --  Range: Less than or equal to 10.0
 --  Notes: Only used by Gulool Ja Ja when below 35% health.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4946
 -- Scroll of Utsusemi: Ichi
 -- Teaches the ninjutsu Utsusemi: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

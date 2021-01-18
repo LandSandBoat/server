@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5400
 -- B. Rem. Fireflies
 -- Transports the user out of Bhaflau Remnants
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

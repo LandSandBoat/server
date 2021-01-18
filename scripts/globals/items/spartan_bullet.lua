@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 18160
 -- Item: Spartan Bullet
 -- Additional Effect: Stun
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onAdditionalEffect = function(player, target, damage)

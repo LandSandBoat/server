@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Fluid Toss (Claret)
 --  Description: Lobs a ball of liquid at a single target.
 --  Type: Ranged
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: 15
 --  Applies 100hp/tick poison if it hits.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

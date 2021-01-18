@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Actinic Burst
 -- Family: Ghrah
 -- Description: Greatly lowers the accuracy of enemies within range for a brief period of time.
@@ -6,11 +6,11 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

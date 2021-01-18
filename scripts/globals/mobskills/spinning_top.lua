@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Spinning Top
 --
 --  Description: Deals damage in an area of effect.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-4 shadows
 --  Range: 10' radial
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16743
 -- Item: Python Baselard
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

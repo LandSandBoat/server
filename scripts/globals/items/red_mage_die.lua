@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5481
 -- Red Mage Die
 -- Teaches the job ability Warlock's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5203
 -- Piece of Hume Mochi
 -- Enchantment: 60Min, Costume - Hume child (male)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

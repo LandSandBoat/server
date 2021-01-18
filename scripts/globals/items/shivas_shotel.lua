@@ -1,7 +1,7 @@
------------------------------------------
+-----------------------------------
 -- ID: 17711
 -- Item: Shiva's Shotel
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

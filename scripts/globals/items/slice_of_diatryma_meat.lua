@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5290
 -- Item: Slice of Diatryma Meat
 -- Effect: 5 Minutes, food effect, Galka Only
------------------------------------------
+-----------------------------------
 -- Strength +3
 -- Intelligence -5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

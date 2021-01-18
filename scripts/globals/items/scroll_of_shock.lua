@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4847
 -- Scroll of Shock
 -- Teaches the black magic Shock
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

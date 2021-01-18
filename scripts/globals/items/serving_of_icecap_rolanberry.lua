@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4556
 -- Item: serving_of_icecap_rolanberry
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic % 19
 -- Magic Cap 55
 -- Intelligence 2
 -- Wind Res 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

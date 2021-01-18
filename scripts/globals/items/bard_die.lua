@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5486
 -- Bard Die
 -- Teaches the job ability Choral Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

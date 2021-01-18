@@ -1,16 +1,16 @@
----------------------------------------------
+-----------------------------------
 --  Ill Wind
 --  Description: Deals Wind damage to enemies within an area of effect. Additional effect: Dispel
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes Shadows
 --  Range: Unknown radial
 --  Notes: Only used by Puks in Mamook, Besieged, and the following Notorious Monsters: Vulpangue, Nis Puk, Nguruvilu, Seps , Phantom Puk and Waugyl. Dispels one tpz.effect.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

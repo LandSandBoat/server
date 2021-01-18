@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5146
 -- Item: hedgehog_pie
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 55
 -- Strength 6
 -- Vitality 2
@@ -15,10 +15,10 @@
 -- Accuracy 5
 -- Ranged ATT % 18
 -- Ranged ATT Cap 90
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

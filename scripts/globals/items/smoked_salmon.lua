@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4380
 -- Item: smoked_salmon
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Mind -3
 -- Ranged Accuracy +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

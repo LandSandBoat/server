@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: QuBia_Arena
 --  Mob: Worgbut of Clan Death
 -- Mission 9-2 SANDO
-----------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 -----------------------------------
 local entity = {}

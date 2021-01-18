@@ -1,9 +1,9 @@
----------------------------------------------------
+-----------------------------------
 -- Rending Deluge
 -- Deals water damage to enemies within range. Additional effect: Dispel.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

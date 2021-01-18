@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6468
 -- Item: plate_of_sublime_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +40
 -- MP +20
 -- STR +6
@@ -12,10 +12,10 @@
 -- Accuracy +10% (cap 100)
 -- Ranged Accuracy +10% (cap 100)
 -- Resist Sleep +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17414
 -- Item: Pixie Mace
 -- Additional Effect: Light Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

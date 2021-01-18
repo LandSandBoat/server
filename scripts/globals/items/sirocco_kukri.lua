@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18018
 -- Item: Sirocco Kukri
 -- Additional Effect: Wind Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

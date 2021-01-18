@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Spissatus Cell
 -- ID 5384
 -- Removes MP Down effect
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

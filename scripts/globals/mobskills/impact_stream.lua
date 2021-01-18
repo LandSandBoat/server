@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Impact Stream
 --
 --  Description: 50% Defense Down, Stun
@@ -6,14 +6,14 @@
 --  Wipe Shadows
 --  Range: 10.0' AoE
 --  Notes:
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

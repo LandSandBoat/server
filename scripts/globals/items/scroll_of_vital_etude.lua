@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5041
 -- Scroll of Vital Etude
 -- Teaches the song Vital Etude
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

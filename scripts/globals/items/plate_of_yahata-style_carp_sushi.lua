@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5186
 -- Item: plate_of_yahata-style_carp_sushi
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 2
 -- Accuracy % 11 (cap 56)
 -- HP Recovered While Healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

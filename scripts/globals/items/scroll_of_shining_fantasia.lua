@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5016
 -- Scroll of Shining Fantasia
 -- Teaches the song Shining Fantasia
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

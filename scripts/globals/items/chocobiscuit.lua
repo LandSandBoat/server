@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5934
 -- Item: Chocobiscuit
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 3
 -- Charisma 3
 -- Evasion 2
 -- Aquan Killer 10
 -- Silence Resist 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

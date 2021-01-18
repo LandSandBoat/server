@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 -- (Vulture 1)
 -- Dummy ability used for 2hr animation.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

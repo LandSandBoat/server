@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18270, 18271, 18638, 18652, 18666, 19747, 19840, 20555, 20556, 20583
 -- Item: Mandau
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

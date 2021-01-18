@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5825
 -- Item: Lucid Potion II
 -- Item Effect: Restores 1000 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

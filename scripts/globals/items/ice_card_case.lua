@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5403
 -- Ice Card Case
 -- When used, you will obtain one stack of Ice Cards
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

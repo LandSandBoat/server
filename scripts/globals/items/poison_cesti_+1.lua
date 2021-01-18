@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16700
 -- Item: Poison Cesti +1
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

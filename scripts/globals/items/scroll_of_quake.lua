@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4818
 -- Scroll of Quake
 -- Teaches the black magic Quake
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

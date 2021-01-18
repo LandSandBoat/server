@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 4153
 -- Item: Antacid
 -- Item Effect: This medicine helps remove meal effects.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

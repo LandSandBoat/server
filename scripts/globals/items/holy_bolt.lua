@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18153
 -- Item: Holy Bolt
 -- Additional Effect: Light Damage
 -- Bolt dmg is affected by light/dark staves and Chatoyant
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

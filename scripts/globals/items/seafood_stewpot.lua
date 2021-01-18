@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5238
 -- Item: Seafood Stewpot
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 50
 -- MP +10
@@ -11,10 +11,10 @@
 -- Evasion 5
 -- hHP 5
 -- hMP 1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

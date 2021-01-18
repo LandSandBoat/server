@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4930
 -- Scroll of Katon: San
 -- Teaches the ninjutsu Katon: San
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

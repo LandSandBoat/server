@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4125
 -- Item: Soothing Potion
 -- Item Effect: Restores 250 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

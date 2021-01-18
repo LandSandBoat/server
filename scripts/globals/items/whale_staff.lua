@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17533
 -- Item: Whale Staff
 -- Additional Effect: Water Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

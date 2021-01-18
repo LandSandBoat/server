@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5062
 -- Scroll of Fire Threnody
 -- Teaches the song Fire Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

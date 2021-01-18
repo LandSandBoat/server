@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17080
 -- Item: Holy Maul
 -- Additional Effect: Light Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

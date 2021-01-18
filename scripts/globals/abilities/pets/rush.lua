@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Rush M=5, 2
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/summon")
 
----------------------------------------------------
+-----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)

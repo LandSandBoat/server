@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5345
 -- Item: Zhayolm Fireflies
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

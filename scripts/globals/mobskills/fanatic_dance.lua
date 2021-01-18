@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Fanatic Dance
 -- Family: Orc
 -- Description: Charms all targets in an area of effect.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: AoE around user
 -- Notes: Dynamis NM Orcs only
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4770
 -- Scroll of Stone IV
 -- Teaches the black magic Stone IV
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

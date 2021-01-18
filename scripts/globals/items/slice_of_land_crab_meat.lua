@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4400
 -- Item: slice_of_land_crab_meat
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -4
 -- Vitality 3
 -- Defense % 14
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

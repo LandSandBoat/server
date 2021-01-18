@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5553
 -- Item: Serving of Dusky Indulgence
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10
 -- MP +5% Cap 30
 -- Intelligence +5
 -- HP Recovered while healing +2
 -- MP Recovered while healing +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

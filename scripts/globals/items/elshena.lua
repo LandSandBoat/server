@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5886
 -- Item: elshena
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +7% (cap 120)
 -- Increases rate of combat skill gains by 40%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

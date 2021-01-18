@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5020
 -- Scroll of Gold Capriccio
 -- Teaches the song Gold Capriccio
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

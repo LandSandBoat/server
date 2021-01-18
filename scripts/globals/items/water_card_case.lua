@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5407
 -- Water Card Case
 -- When used, you will obtain one stack of Water Cards
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

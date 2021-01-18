@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5425
 -- Item: Joyous Serinette
 -- Item Effect: Change Music
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

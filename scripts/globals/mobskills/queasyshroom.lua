@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 -- Queasyshroom
 -- Additional effect: Poison. Duration of effect varies with TP.
 -- Range is 13.5 yalms.
@@ -7,11 +7,11 @@
 -- Additional Effect: Poison is 3 HP/tick.
 -- Poison effect may not always process.
 -- Removes all Shadow Images on the target.
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

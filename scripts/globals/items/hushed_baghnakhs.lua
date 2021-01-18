@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 18355
 -- Item: Hushed Baghnakhs
 -- Additional Effect: Silence
 -- TODO: Enchantment: Ensilence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

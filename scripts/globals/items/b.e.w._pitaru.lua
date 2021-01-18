@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5892
 -- Item: b.e.w._pitaru
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +9% (cap 130)
 -- Increases rate of magic skill gains by 80%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

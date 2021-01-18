@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5674
 -- Item: Aileen's Delight
 -- Food Effect: 60 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +50
 -- MP +50
 -- STR +4
@@ -13,10 +13,10 @@
 -- MND +4
 -- CHR +4
 -- MP recovered while healing +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,6 +1,6 @@
--------------------------------------------
+-----------------------------------
 -- Magian trials
--------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/zone")
 require("scripts/globals/magianobjectives")
@@ -129,9 +129,9 @@ local function rewardAugmentParams(t)
     return augBits1, augBits2
 end
 
--------------------
--- Magian Orange --
--------------------
+-----------------------------------
+-- Magian Orange
+-----------------------------------
 
 function tpz.magian.magianOrangeOnTrigger(player, npc)
     local activeTrials = readTrials(player)
@@ -363,16 +363,16 @@ function tpz.magian.magianOrangeOnEventFinish(player,itemId,csid,option)
     end
 end
 
--------------------
--- Magian Green  --
--------------------
+-----------------------------------
+-- Magian Green
+-----------------------------------
 
 function magianGreenEventUpdate(player, ItemID, csid, option)
 end
 
--------------------
--- Magian Blue   --
--------------------
+-----------------------------------
+-- Magian Blue
+-----------------------------------
 
 function magianBlueEventUpdate(player, ItemID, csid, option)
 end

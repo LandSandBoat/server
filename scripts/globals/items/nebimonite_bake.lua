@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4459
 -- Item: nebimonite_bake
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 1
 -- Vitality 2
 -- Defense % 25
 -- Defense Cap 70
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

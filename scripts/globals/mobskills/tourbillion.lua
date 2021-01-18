@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Tourbillion
 --
 --  Description: Delivers an area attack. Additional effect duration varies with TP. Additional effect: Weakens defense.
 --  Type: Physical
 --  Shadow per hit
 --  Range: Unknown range
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

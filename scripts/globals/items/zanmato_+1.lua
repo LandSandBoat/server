@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 21966
 -- Item: Zanmato +1
 -- Additional Effect: Dispel (Current dispel rate is guesstimate)
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------

@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 6397
 -- Item: cutlet_sandwich_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +45
 -- STR +8
 -- INT -8
 -- Fire resistance +21
 -- Attack +21% (cap 125)
 -- Ranged Attack +21% (cap 125)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 --  Negative Whirl
 --
 --  Description: Slow Wipes shadows
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: 10' cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

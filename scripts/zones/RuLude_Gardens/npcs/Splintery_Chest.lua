@@ -41,9 +41,9 @@ entity.onEventFinish = function(player,csid,option)
         [44] = 19382, -- Crook
         [48] = 19387, -- Sparrow
         [52] = 19392, -- Thunderstick
-    --------------------
+    -----------------------------------
         -- Page 2
-    --------------------
+    -----------------------------------
         [64] = 19415, -- Barracudas
         [68] = 19419, -- Fusetto
         [72] = 19423, -- Machaera
@@ -58,9 +58,9 @@ entity.onEventFinish = function(player,csid,option)
         [108] = 18932, -- Sedikutchi
         [112] = 18936, -- Sparrowhawk
         [116] = 18940, -- Anachry
-    --------------------
+    -----------------------------------
         -- Page 3
-    --------------------
+    -----------------------------------
         [128] = 20544, -- Dumuzis -1
         [132] = 20631, -- Khandroma -1
         [140] = 20732, -- Brunello -1

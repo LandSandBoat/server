@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5585
 -- Item: plate_of_ic_pilav_+1
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 14
 -- Health Cap 70
 -- Strength 5
@@ -13,10 +13,10 @@
 -- Attack Cap 70
 -- Ranged ATT % 22
 -- Ranged ATT Cap 70
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

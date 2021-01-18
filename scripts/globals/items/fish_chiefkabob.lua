@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 4575
 -- Item: fish_chiefkabob
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 1
 -- Vitality 2
 -- Mind -1
 -- defense % 25
 -- defense Cap 95
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

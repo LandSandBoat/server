@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16543
 -- Item: Fire Sword
 -- Additional Effect: Fire Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

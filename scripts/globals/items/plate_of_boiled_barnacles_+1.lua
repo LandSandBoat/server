@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 5981
 -- Item: Plate of Boiled Barnacles +1
 -- Food Effect: 60 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Charisma -2
 -- Defense % 26 Cap 135
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

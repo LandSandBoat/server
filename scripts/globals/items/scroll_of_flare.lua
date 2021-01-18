@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4812
 -- Scroll of Flare
 -- Teaches the black magic Flare
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

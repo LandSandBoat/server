@@ -1,9 +1,9 @@
 
------------------------------------------
+-----------------------------------
 -- ID: 4891
 -- Scroll of blizzaja
 -- Teaches the black magic blizzaja
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

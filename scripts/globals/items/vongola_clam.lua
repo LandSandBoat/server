@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5131
 -- Item: Vongola Clam
 -- Food Effect: 5Min, Mithra only
------------------------------------------
+-----------------------------------
 -- Dexterity -5
 -- Vitality 4
 -- Defense +17% - 50 Cap
 -- HP 5% - 50 Cap
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

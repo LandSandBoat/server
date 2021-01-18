@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4723
 -- Scroll of Enblizzard II
 -- Teaches the white magic Enblizzard II
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

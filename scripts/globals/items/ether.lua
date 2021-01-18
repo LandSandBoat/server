@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4128
 -- Item: Ether
 -- Item Effect: Restores 20 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

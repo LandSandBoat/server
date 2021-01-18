@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 6498
 -- Item: Bunch of Fortune Fruits
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Charisma +7
 -- may have unknown hidden effects
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

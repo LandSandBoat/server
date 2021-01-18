@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4633
 -- Scroll of Dia III
 -- Teaches the white magic Dia III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

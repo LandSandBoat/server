@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5314
 -- Toolbag Shihei
 -- When used, you will obtain one stack of Shihei
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

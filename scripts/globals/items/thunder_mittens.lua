@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 14987
 -- Thunder Mittens
 --  Enchantment: "Enthunder"
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

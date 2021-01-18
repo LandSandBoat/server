@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16549
 -- Item: Divine Sword
 -- Additional Effect: Light Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Chains of Apathy
 --
----------------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

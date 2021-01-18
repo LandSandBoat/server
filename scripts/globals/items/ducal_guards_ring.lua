@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14657
 -- Ducal Guard Ring
 -- Enchantment: "Teleport-RuLude Gardens"
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5067
 -- Scroll of Water Threnody
 -- Teaches the song Water Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

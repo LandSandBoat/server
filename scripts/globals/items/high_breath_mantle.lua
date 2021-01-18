@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15487
 -- Item: High Breath Mantle
 -- Item Effect: HP+38 / Enmity+5
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

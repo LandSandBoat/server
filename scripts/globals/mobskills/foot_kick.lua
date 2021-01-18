@@ -1,12 +1,12 @@
----------------------------------------------------
+-----------------------------------
 -- Foot Kick
 -- Deals critical damage. Chance of critical hit varies with TP.
 -- 100% TP: ??? / 200% TP: ??? / 300% TP: ???
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

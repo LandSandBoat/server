@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4372
 -- Item: slice_of_giant_sheep_meat
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 2
 -- Intelligence -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

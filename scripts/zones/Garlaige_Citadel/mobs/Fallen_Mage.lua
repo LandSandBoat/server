@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: Garlaige Citadel
 --  Mob: Fallen Mage
 -- Note: Place holder Hovering Hotpot
-----------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")

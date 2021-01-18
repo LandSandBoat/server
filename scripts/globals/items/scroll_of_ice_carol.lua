@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5047
 -- Scroll of Ice Carol
 -- Teaches the song Ice Carol
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

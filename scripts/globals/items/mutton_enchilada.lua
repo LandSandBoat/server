@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4348
 -- Item: mutton_enchilada
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic 10
 -- Strength 3
 -- Vitality 1
@@ -11,10 +11,10 @@
 -- Attack Cap 35
 -- Ranged ATT % 27
 -- Ranged ATT Cap 35
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6047
 -- Luminohelix Schema
 -- Teaches the black magic Luminohelix
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

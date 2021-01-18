@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4672
 -- Scroll of Barthunder
 -- Teaches the white magic Barthunder
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

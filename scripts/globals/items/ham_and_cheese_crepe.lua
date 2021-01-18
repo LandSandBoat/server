@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5771
 -- Item: ham_and_cheese_crepe
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +10% (cap 25)
 -- STR +2
 -- VIT +1
 -- Magic Accuracy +10
 -- Magic Defense +3
 -- hHP +2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

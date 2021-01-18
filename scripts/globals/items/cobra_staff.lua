@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 18614
 -- Cobra Staff
 -- Enchantment: "Retrace" (Windurst Waters[S])
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/teleports")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

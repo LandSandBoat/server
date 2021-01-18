@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15170
 -- Item: Blink Band
 -- Item Effect: 3 shadows
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

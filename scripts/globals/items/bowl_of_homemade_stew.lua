@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5222
 -- Item: Bowl of Homemade Stew
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Vitality 1
 -- Accuracy +12% (cap 80)
 -- Attack +10% (cap 40)
 -- Ranged Accuracy +12% (cap 80)
 -- Ranged Attack +10% (cap 40)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Syphon Discharge
 --
 --  Family: Xzomit
@@ -7,14 +7,14 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
 --  Notes: Water Damage Knockback.
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
+-----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

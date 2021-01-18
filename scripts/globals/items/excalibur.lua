@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18276, 18277, 18639, 18653, 18667, 18748, 19841, 20645, 20646, 20685
 -- Item: Excalibur
 -- Additional Effect: Damage proportionate to current HP (25% Current HP)
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4437
 -- Item: slice_of_roast_mutton
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Strength 3
 -- Intelligence -1
 -- Attack % 27
 -- Attack Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

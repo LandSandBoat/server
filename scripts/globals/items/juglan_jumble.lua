@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5923
 -- Item: Juglan Jumble
 -- Food Effect: 5 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP Healing 5
 -- MP Healing 8
 -- Bird Killer 12
 -- Resist Paralyze 12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

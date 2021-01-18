@@ -1,17 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6277
 -- Item: deep-fried_shrimp
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- VIT +4
 -- Fire resistance +21
 -- Accuracy +21% (cap 75)
 -- Ranged Accuracy +21% (cap 75)
 -- Subtle Blow +9
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

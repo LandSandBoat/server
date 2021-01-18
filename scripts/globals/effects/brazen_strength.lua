@@ -1,6 +1,6 @@
-----------------------------------------
+-----------------------------------
 -- tpz.effect.BRAZEN_STRENGTH
-----------------------------------------
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

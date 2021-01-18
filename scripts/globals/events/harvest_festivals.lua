@@ -1,10 +1,10 @@
-------------------------------------
+-----------------------------------
 -- Harvest Festivals
-------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
-------------------------------------
+-----------------------------------
 
 function isHalloweenEnabled()
     local option = 0
@@ -76,9 +76,9 @@ function onHalloweenTrade(player, trade, npc)
 
     local contentEnabled = isHalloweenEnabled()
     local item = trade:getItemId()
-    -------------------
-    -- 2005 edition ---
-    -------------------
+    -----------------------------------
+    -- 2005 edition
+    -----------------------------------
     if (contentEnabled == 1) then
         -----------------------------------
         -- Treats allowed

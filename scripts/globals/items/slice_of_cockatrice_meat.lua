@@ -1,14 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 4435
 -- Item: slice_of_cockatrice_meat
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Intelligence -6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

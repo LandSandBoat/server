@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4759
 -- Scroll of Blizzard III
 -- Teaches the black magic Blizzard III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

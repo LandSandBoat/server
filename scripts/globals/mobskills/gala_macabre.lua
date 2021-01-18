@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Gala Macabre
 -- Family: Corse
 -- Description: Charms all targets in an area of effect.
@@ -6,12 +6,12 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Radial
 -- Notes: Only used by some notorious monsters like Xolotl and Giltine.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

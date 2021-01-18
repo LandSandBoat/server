@@ -1,15 +1,15 @@
-------------------------------------
+-----------------------------------
 -- Treasure Chests and Coffers
 -- http://ffxiclopedia.wikia.com/wiki/Picking_your_Coffers_and_Chests
 -- http://ffxiclopedia.wikia.com/wiki/Treasure_Chest_and_Coffer_Guide
-------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.treasure = tpz.treasure or {}
@@ -726,7 +726,7 @@ local treasureInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.treasure.type.COFFER] =
     {
@@ -1254,9 +1254,9 @@ local treasureInfo =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function doMove(npc, x, y, z)
     return function(entity)
@@ -1287,9 +1287,9 @@ local function spawnMimic(player, npc)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 tpz.treasure.initZone = function(zone)
     local zoneId = zone:getID()
@@ -1333,8 +1333,8 @@ tpz.treasure.onTrade = function(player, npc, trade, chestType)
     local mLvl = player:getMainLvl()
     local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
     local illusionCooldown  = npc:getLocalVar("illusionCooldown")
-    
-    -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get 
+
+    -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get
     -- around this restriction. Strip invisible to make sure that case is covered.
     player:delStatusEffect(tpz.effect.INVISIBLE)
     -- Interacting with Treasures and Coffers drops Sneak

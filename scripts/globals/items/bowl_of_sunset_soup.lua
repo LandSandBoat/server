@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4341
 -- Item: bowl_of_sunset_soup
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- Agility 3
 -- Vitality -1
 -- HP Recovered While Healing 5
 -- Ranged Accuracy % 9 (cap 20)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 -- Difusion Ray
 -- Description: Deals damage to enemies within a fan-shaped area originating from the caster.
 -- Type: Magical Light (Element)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

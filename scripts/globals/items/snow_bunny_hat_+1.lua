@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 11491
 -- Snow bunny Hat +1
 -- Enchantment: 60Min, Costume - White Rarab
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

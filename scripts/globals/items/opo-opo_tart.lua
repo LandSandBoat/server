@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4287
 -- Item: opo-opo_tart
 -- Food Effect: 1hour, All Races
------------------------------------------
+-----------------------------------
 -- HP 12
 -- MP 12
 -- Intelligence 4
 -- MP Recovered While Healing 3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Fossilizing Breath
 --
 -- Description: Petrifies targets within a fan-shaped area.
 -- Type: Breath
 -- Ignores Shadows
 -- Range: Unknown cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

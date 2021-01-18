@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5974
 -- Item: Plate of Barnacle Paella
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 40
 -- Vitality 5
 -- Mind -1
 -- Charisma -1
 -- Defense % 25 Cap 150
 -- Undead Killer 5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

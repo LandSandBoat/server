@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5869
 -- Toolbag Cho
 -- When used, you will obtain one stack of chonofuda
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

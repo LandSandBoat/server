@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4280
 -- Item: garlic_cracker_+1
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- HP recovered while healing +8
 -- Undead Killer +12
 -- Blind Resist +12
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

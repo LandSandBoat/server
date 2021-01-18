@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5778
 -- Item: Crepe Belle Helene
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- Intelligence +2
 -- MP Healing +3
 -- Magic Accuracy +21% (cap 50)
 -- Magic Defense +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

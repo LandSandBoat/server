@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5029
 -- Scroll of Battlefield Elegy
 -- Teaches the song Battlefield Elegy
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

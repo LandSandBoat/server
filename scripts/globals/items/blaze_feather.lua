@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 5257
 -- Item: Fire Feather
 -- Status Effect: Blaze Spikes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

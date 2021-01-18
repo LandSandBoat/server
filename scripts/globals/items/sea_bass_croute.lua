@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4353
 -- Item: sea_bass_croute
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +5% (cap 150)
 -- Dexterity 4
 -- Mind 5
@@ -10,10 +10,10 @@
 -- Ranged Accuracy % 6 (cap 20)
 -- HP recovered while healing 9
 -- MP recovered while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

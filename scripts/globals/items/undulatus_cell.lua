@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Undulatus Cell
 -- ID 5371
 -- Unlocks ranged and ammo equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

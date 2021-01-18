@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4720
 -- Scroll of Flash
 -- Teaches the white magic Flash
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

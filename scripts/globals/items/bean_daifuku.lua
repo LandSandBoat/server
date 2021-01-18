@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6341
 -- Item: bean_daifuku
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +20
 -- VIT +3
 -- Accuracy +10% (cap 50)
@@ -13,10 +13,10 @@
 -- Accuracy +10% (cap 75)
 -- Ranged Accuracy +10% (cap 75)
 -- Haste +3%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

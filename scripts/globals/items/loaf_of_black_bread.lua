@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4364
 -- Item: loaf_of_black_bread
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 8
 -- Dexterity -1
 -- Vitality 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4442
 -- Item: Pineapple Juice
 -- Item Effect: Restores 80 MP over 240 seconds.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

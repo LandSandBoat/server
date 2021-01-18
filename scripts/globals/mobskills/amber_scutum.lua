@@ -1,14 +1,14 @@
----------------------------------------------
+-----------------------------------
 -- Amber Scutum
 -- Family: Wamouracampa
 -- Description: Increases defense.
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

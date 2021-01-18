@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: haskeyitem <ID> <player>
 -- desc: Checks if player has specified KeyItem.
 --       Can use either of number or the variable string from keyitems.lua
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/keyitems")
 

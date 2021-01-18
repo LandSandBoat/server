@@ -1,13 +1,13 @@
----------------------------------------------
+-----------------------------------
 --  Vitriolic Shower
 --  Description: Expels a caustic stream at targets in a fan-shaped area of effect. Additional effect: Burn
 --  Type: Magical
 --  Utsusemi/Blink absorb: Wipes shadow
 --  Range: Cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

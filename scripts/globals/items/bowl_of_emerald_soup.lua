@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4327
 -- Item: Bowl of Emerald Soup
 -- Food Effect: 240Min, All Races
------------------------------------------
+-----------------------------------
 -- Agility 2
 -- Vitality -1
 -- Health Regen While Healing 3
 -- Ranged ACC 6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

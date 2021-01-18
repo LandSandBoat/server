@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 6297
 -- Item: Juji Shr. Pouch
 -- When used, you will obtain one stack of Juji Shurikens
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

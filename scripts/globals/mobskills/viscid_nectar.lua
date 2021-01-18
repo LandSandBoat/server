@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Viscid Nectar
 --
 --  Description: Sprays a sticky nectar in a fan-shaped area, inflicting slow.
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
 --  Notes: Slow is equivalent to Slow II.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4868
 -- Scroll of Dispel
 -- Teaches the black magic Dispel
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

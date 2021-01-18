@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5494
 -- Puppetmaster Die
 -- Teaches the job ability Puppet Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

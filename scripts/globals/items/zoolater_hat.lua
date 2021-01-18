@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15182
 -- Item: Zoolater Hat
 -- Item Effect: Pet gets meditate
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

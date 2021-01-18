@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4747
 -- Scroll of Teleport-Vahzl
 -- Teaches the white magic Teleport-Vahzl
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

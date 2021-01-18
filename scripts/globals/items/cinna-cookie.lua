@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 4397
 -- Item: cinna-cookie
 -- Food Effect: 3Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic Regen While Healing 4
 -- Vermin Killer 10
 -- Poison Resist 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

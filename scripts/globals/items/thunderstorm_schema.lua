@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6051
 -- Thunderstorm Schema
 -- Teaches the white magic Thunderstorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

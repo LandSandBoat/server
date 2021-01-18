@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Drill Branch
 --
 --  Description: Drills a single target with a branch. Additional effect: Blind
@@ -6,11 +6,11 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

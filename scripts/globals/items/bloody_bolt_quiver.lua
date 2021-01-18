@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5339
 -- Item: Bloody Bolt Quiver
 -- When used, you will obtain one stack of Bloody Bolts
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

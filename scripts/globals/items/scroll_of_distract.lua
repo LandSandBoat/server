@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4912
 -- Scroll of Distract
 -- Teaches the black magic Distract
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

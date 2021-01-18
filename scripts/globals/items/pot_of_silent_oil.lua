@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4165
 -- Silent oil
 -- This lubricant cuts down 99.99% of all friction
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

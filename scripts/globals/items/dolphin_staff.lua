@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 17134
 -- Item: Dolphin Staff
 -- Additional Effect: Water Damage
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

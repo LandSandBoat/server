@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4613
 -- Scroll of Cure V
 -- Teaches the white magic Cure V
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

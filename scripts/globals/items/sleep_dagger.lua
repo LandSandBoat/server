@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 16497
 -- Item: Sleep Dagger
 -- Additional Effect: Sleep
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

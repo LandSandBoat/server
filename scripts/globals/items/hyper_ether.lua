@@ -1,12 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5255
 -- Item: Hyper-Ether
 -- Item Effect: Restores 125 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

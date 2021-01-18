@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4614
 -- Scroll of Cure VI
 -- Teaches the white magic Cure VI
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

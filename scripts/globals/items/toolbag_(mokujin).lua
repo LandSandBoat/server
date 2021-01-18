@@ -1,10 +1,10 @@
------------------------------------------
+-----------------------------------
 -- ID: 5866
 -- Toolbag Moku
 -- When used, you will obtain one stack of mokujin
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

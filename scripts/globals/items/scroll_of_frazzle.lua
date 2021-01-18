@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4914
 -- Scroll of Frazzle
 -- Teaches the black magic Frazzle
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

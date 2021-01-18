@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 -- Gravitic Horn
 -- Family: Antlion (Only used by Formiceros subspecies)
 -- Description: Heavy wind, Throat Stab-like damage in a fan-shaped area of effect. Resets enmity.
@@ -8,12 +8,12 @@
 -- Range: Conal AoE
 -- Notes: If Orcus uses this, it gains an aura which inflicts Weight & Defense Down to targets in range.
 -- Shell lowers the damage of this, and items like Jelly Ring can get you killed.
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

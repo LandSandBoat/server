@@ -1,11 +1,11 @@
----------------------------------------------
+-----------------------------------
 -- Awful Eye
 -- 15' Reduces STR of players in area of effect.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

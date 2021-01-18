@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15889
 -- Item: augmenting_belt
 -- Item Effect: HPHEAL +2
 -- Duration: 30 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

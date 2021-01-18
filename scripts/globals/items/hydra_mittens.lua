@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 14925
 -- Item: hydra_mittens
 -- Item Effect: ACC +15 RACC +15
 -- Duration: 3 Minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

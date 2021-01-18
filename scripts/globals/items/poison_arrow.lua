@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 18157
 -- Item: Poison Arrow
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

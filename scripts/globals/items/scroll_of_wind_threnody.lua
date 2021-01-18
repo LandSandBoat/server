@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5064
 -- Scroll of Wind Threnody
 -- Teaches the song Wind Threnody
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

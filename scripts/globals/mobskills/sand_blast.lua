@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Sand Blast
 -- Deals Earth damage to targets in a fan-shaped area of effect. Additional effect: Blind
 -- Range: 8' cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

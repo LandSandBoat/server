@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4964
 -- Scroll of Monomi: Ichi
 -- Teaches the ninjutsu Monomi: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

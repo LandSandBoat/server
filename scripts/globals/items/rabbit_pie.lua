@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5685
 -- Item: rabbit_pie
 -- Food Effect: 30minutes, All Races
------------------------------------------
+-----------------------------------
 -- Strength 5
 -- Vitality 5
 -- Attack 25% (caps @ 100)
 -- Ranged Attack 25% (caps @ 100)
 -- Defense 25% (caps @ 100)
 -- Intelligence -2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

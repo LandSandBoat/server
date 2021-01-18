@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5152
 -- Item: slice_of_buffalo_meat
 -- Food Effect: 5Min, Galka only
------------------------------------------
+-----------------------------------
 -- Strength 4
 -- Agility -5
 -- Intelligence -7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

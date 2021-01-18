@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4940
 -- Scroll of Raiton: Ichi
 -- Teaches the ninjutsu Raiton: Ichi
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

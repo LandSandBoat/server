@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Poison Breath
 --
 --  Description: Deals water damage to enemies within a fan-shaped area originating from the caster. Additional effect: Poison.
 --  Type: Magical Water (Element)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

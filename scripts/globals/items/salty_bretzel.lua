@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5182
 -- Item: salty_bretzel
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Magic % 8
 -- Magic Cap 60
 -- Vitality 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5930
 -- Item: Bowl of Sprightly Soup
 -- Food Effect: 3 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- MP 30
 -- Mind 4
 -- HP Recovered While Healing 4
 -- Enmity -4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

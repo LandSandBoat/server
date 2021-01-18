@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4488
 -- Item: jack-o-lantern
 -- Food Effect: 180Min, All Races
------------------------------------------
+-----------------------------------
 -- Charisma -10
 -- Accuracy 10
 -- Ranged Acc 10
 -- Evasion 10
 -- Arcana Killer 4
 -- Dark Res 25
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

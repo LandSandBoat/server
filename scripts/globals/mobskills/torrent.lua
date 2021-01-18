@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 --  Torrent
 --  Description: Removes all Equipment
 --  Type: Magical Enfeebling
 --  Ignore Shadows, Single target
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

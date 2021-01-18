@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5240
 -- Item: Prized Seafood Stewpot
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 100
 -- MP +20
@@ -15,10 +15,10 @@
 -- Accuracy 7
 -- Ranged Accuracy 7
 -- Evasion 7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

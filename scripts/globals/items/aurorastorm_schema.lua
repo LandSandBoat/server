@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6055
 -- Item: Aurorastorm Schema
 -- Teaches the white magic Aurorastorm
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

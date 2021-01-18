@@ -1,14 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Tremors
 -- Deals Earth damage with a seismic disturbance. Additional effect: DEX Down
 -- Area of Effect is centered around caster.
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Duration: Three minutes ?
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

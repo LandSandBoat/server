@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5587
 -- Item: serving_of_menemen_+1
 -- Food Effect: 4Hrs, All Races
------------------------------------------
+-----------------------------------
 -- HP 35
 -- MP 35
 -- Agility 2
 -- Intelligence -2
 -- HP recovered while healing 2
 -- MP recovered while healing 2
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

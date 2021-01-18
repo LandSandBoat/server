@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4218
 -- Item: Air Rider
 -- A goblin in a Santa outfit rides a sleigh in a downward spiral
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

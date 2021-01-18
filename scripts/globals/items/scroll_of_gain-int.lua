@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5091
 -- Scroll of Gain-INT
 -- Teaches the white magic Gain-INT
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,15 +1,15 @@
----------------------------------------------
+-----------------------------------
 --  Serpentine Tail
 --
 --  Description: Deals heavy damage to a target behind the user.
 --  Type: Physical
 --  2-3 Shadows
 --  Range: Back
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

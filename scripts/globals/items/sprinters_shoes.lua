@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15754
 -- Item: Sprinter's Shoes
 -- Item Effect: Quickening for 60 minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

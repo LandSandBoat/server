@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5648
 -- Item: Grilled Lik
 -- Food Effect: 60 Mins, All Races
------------------------------------------
+-----------------------------------
 -- Dexterity 4
 -- Mind -3
 -- Accuracy +2
 -- Attack +8
-----------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

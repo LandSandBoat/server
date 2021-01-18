@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4595
 -- Item: party_egg
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 25
 -- Magic 25
 -- Attack 5
 -- Ranged Attack 4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

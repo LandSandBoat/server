@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4880
 -- Scroll of Absorb-CHR
 -- Teaches the black magic Absorb-CHR
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

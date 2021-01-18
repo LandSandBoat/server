@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5628
 -- Item: Silken Smile
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- Intelligence 2
 -- HP Recovered while healing 4
 -- MP Recovered while healing 7
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

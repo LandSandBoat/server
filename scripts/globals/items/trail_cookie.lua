@@ -1,15 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 5940
 -- Item: Trail Cookie
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- MP Healing 5
 -- Aquan Killer 12
 -- Sleep Resist 10
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

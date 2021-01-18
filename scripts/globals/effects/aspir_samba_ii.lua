@@ -1,6 +1,6 @@
-----------------------------------------
+-----------------------------------
 -- tpz.effect.ASPIR_SAMBA_II
-----------------------------------------
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

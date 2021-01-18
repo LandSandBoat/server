@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5233
 -- Item: cube_of_cotton_tofu
 -- Food Effect: 5Min, All Races
------------------------------------------
+-----------------------------------
 -- Health % 10
 -- Health Cap 30
 -- Magic % 10
 -- Magic Cap 30
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

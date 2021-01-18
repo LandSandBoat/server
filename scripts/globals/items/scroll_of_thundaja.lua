@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4894
 -- Scroll of Thundaj
 -- Teaches the black magic Thundaj
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

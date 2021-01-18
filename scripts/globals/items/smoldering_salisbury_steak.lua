@@ -1,18 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5924
 -- Item: Smoldering Salisbury Steak
 -- Food Effect: 180 Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +30
 -- Strength +7
 -- Intelligence -5
 -- Attack % 20 Cap 160
 -- Ranged Attack %20 Cap 160
 -- Dragon Killer +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

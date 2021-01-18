@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5493
 -- Corsair Die
 -- Teaches the job ability Corsair's Roll
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

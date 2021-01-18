@@ -1,12 +1,12 @@
----------------------------------------------
+-----------------------------------
 -- Abominable Belch
 -- Description: inflicts all targets in an area of effect with silence, paralysis and plague.
 -- Radial
 -- Ignores Shadows
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

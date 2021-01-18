@@ -1,9 +1,9 @@
-------------------------------
+-----------------------------------
 -- Area: Crawlers Nest [S]
 --   NM: Abatwa
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)

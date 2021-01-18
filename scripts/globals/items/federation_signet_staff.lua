@@ -1,13 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 17585
 -- Item: Federation Signet Staff
 -- Effect: Signet
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/conquest")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target, param, caster)

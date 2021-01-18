@@ -1,10 +1,10 @@
-------------------------------------
+-----------------------------------
 -- Manaclipper
 -- https://ffxiclopedia.fandom.com/wiki/Manaclipper
-------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.manaclipper = tpz.manaclipper or {}

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4620
 -- Scroll of Raise
 -- Teaches the white magic Raise
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

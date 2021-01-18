@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 15526
 -- Item: Regen Collar
 -- Item Effect: Restores 40 HP over 120 seconds
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

@@ -1,14 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Sandspin
 -- Deals earth damage to enemies within range. Additional Effect: Accuracy Down.
 -- Area of Effect is centered around caster.
 -- The Additional Effect: Accuracy Down may not always process.
 -- Duration: Three minutes ?
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)

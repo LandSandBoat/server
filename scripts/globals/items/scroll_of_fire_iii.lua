@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4754
 -- Scroll of Fire III
 -- Teaches the black magic Fire III
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

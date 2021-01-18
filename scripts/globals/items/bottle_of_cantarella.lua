@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4246
 -- Item: Cantarella
 -- Item Effect: Poison 10HP / Removes 2000 HP over 10 minutes
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

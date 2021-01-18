@@ -1,16 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5773
 -- Item: mushroom_crepe
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Mind 2
 -- MP % 10 (cap 30)
 -- Magic Accuracy +10
 -- Magic Def. Bonus +5
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

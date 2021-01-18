@@ -1,11 +1,11 @@
-------------------------------------
+-----------------------------------
 --
 -- Contains global functions and variables
 -- related to area specific things
 --
-------------------------------------
+-----------------------------------
 require('scripts/globals/settings')
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 
@@ -425,7 +425,7 @@ tpz.expansionRegion.ORIGINAL_ROTZ =
 
 -----------------------------------
 -- SetExplorerMoogles
-----------------------------------
+-----------------------------------
 
 function SetExplorerMoogles(moogle)
     if EXPLORER_MOOGLE_LV ~= 0 then

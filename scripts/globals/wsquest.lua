@@ -6,11 +6,11 @@ require('scripts/globals/weaponskillids')
 tpz = tpz or {}
 tpz.wsquest =
 {
-    --------------------------------------
+    -----------------------------------
     -- Quest: The Walls of Your Mind
     --   NPC: Oggbi (Port Bastok)
     --    WS: Asuran Fists (Hand-to-Hand)
-    --------------------------------------
+    -----------------------------------
     ['asuran_fists'] =
     {
         ['wsId'] = tpz.weaponskill.ASURAN_FISTS,
@@ -37,11 +37,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ------------------------------------
+    -----------------------------------
     -- Quest: Cloak and Dagger
     --   NPC: Jakoh Wahcondalo (Kazham)
     --    WS: Evisceration (Dagger)
-    ------------------------------------
+    -----------------------------------
     ['evisceration'] =
     {
         ['wsId'] = tpz.weaponskill.EVISCERATION,
@@ -68,11 +68,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    ----------------------------------------
+    -----------------------------------
     -- Quest: Old Wounds
     --   NPC: Curilla (Chateau d'Oraguille)
     --    WS: Savage Blade (Sword)
-    ----------------------------------------
+    -----------------------------------
     ['savage_blade'] =
     {
         ['wsId'] = tpz.weaponskill.SAVAGE_BLADE,
@@ -99,11 +99,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    --------------------------------------
+    -----------------------------------
     -- Quest: Inheritance
     --   NPC: Gumbah (Bastok Mines)
     --    WS: Ground Strike (Great Sword)
-    --------------------------------------
+    -----------------------------------
     ['ground_strike'] =
     {
         ['wsId'] = tpz.weaponskill.GROUND_STRIKE,
@@ -130,11 +130,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    -------------------------------
+    -----------------------------------
     -- Quest: Axe The Competition
     --   NPC: Brutus (Upper Jeuno)
     --    WS: Decimation (Axe)
-    -------------------------------
+    -----------------------------------
     ['decimation'] =
     {
         ['wsId'] = tpz.weaponskill.DECIMATION,
@@ -161,11 +161,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ------------------------------------
+    -----------------------------------
     -- Quest: The Weight Of Your Limits
     --   NPC: Iron Eater (Metalworks)
     --    WS: Steel Cyclone (Great Axe)
-    ------------------------------------
+    -----------------------------------
     ['steel_cyclone'] =
     {
         ['wsId'] = tpz.weaponskill.STEEL_CYCLONE,
@@ -192,11 +192,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ---------------------------------------------
+    -----------------------------------
     -- Quest: Souls In Shadow
     --   NPC: Novalmauge (Bostaunieux Oubliette)
     --    WS: Spiral Hell (Scythe)
-    ---------------------------------------------
+    -----------------------------------
     ['spiral_hell'] =
     {
         ['wsId'] = tpz.weaponskill.SPIRAL_HELL,
@@ -223,11 +223,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    -----------------------------------------
+    -----------------------------------
     -- Quest: Methods Create Madness
     --   NPC: Balasiel (Southern San d'Oria)
     --    WS: Impulse Drive (Polearm)
-    -----------------------------------------
+    -----------------------------------
     ['impulse_drive'] =
     {
         ['wsId'] = tpz.weaponskill.IMPULSE_DRIVE,
@@ -254,11 +254,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    -----------------------------
+    -----------------------------------
     -- Quest: Bugi Soden
     --   NPC: Ryoma (Norg)
     --    WS: Blade: Ku (Katana)
-    -----------------------------
+    -----------------------------------
     ['blade_ku'] =
     {
         ['wsId'] = tpz.weaponskill.BLADE_KU,
@@ -285,11 +285,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    --------------------------------------
+    -----------------------------------
     -- Quest: The Potential Within
     --   NPC: Jaucribaix (Norg)
     --    WS: Tachi: Kasha (Great Katana)
-    --------------------------------------
+    -----------------------------------
     ['tachi_kasha'] =
     {
         ['wsId'] = tpz.weaponskill.TACHI_KASHA,
@@ -316,11 +316,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ----------------------------------------
+    -----------------------------------
     -- Quest: Orastery Woes
     --   NPC: Kuroido-Moido (Port Windurst)
     --    WS: Black Halo (Club)
-    ----------------------------------------
+    -----------------------------------
     ['black_halo'] =
     {
         ['wsId'] = tpz.weaponskill.BLACK_HALO,
@@ -347,11 +347,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    -------------------------------------
+    -----------------------------------
     -- Quest: Blood And Glory
     --   NPC: Shantotto (Windurst Walls)
     --    WS: Retribution (Staff)
-    -------------------------------------
+    -----------------------------------
     ['retribution'] =
     {
         ['wsId'] = tpz.weaponskill.RETRIBUTION,
@@ -378,11 +378,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    ----------------------------------------
+    -----------------------------------
     -- Quest: From Saplings Grow
     --   NPC: Perih Vashai (Windurst Woods)
     --    WS: Empyreal Arrow (Archery)
-    ----------------------------------------
+    -----------------------------------
     ['empyreal_arrow'] =
     {
         ['wsId'] = tpz.weaponskill.EMPYREAL_ARROW,
@@ -409,11 +409,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    -------------------------------------------
+    -----------------------------------
     -- Quest: Shoot First, Ask Questions Later
     --   NPC: Cid (Metalworks)
     --    WS: Detonator (Marksmanship)
-    -------------------------------------------
+    -----------------------------------
     ['detonator'] =
     {
         ['wsId'] = tpz.weaponskill.DETONATOR,

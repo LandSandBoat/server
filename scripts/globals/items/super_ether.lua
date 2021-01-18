@@ -1,11 +1,11 @@
------------------------------------------
+-----------------------------------
 -- ID: 4136
 -- Item: Super Ether
 -- Item Effect: Restores 100 MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)

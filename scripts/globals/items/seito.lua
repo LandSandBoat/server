@@ -1,9 +1,9 @@
------------------------------------------
+-----------------------------------
 -- ID: 17797
 -- Item: Seito
 -- Additional Effect: Silence
 -- TODO: Enchantment: Ensilence
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")

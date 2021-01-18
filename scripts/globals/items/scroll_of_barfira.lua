@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4674
 -- Scroll of Barfira
 -- Teaches the white magic Barfira
------------------------------------------
+-----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
