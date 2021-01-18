@@ -7,44 +7,6 @@ require("scripts/globals/status")
 local attachment_object = {}
 
 attachment_object.onEquip = function(pet)
-    pet:setLocalVar("damagegauge", 1)
-    pet:addMod(tpz.mod.AUTO_HEALING_THRESHOLD, 20)
-    pet:addMod(tpz.mod.AUTO_HEALING_DELAY, 3)
-end
-
-attachment_object.onUnequip = function(pet)
-    pet:setLocalVar("damagegauge", 0)
-    pet:delMod(tpz.mod.AUTO_HEALING_THRESHOLD, 20)
-    pet:delMod(tpz.mod.AUTO_HEALING_DELAY, 3)
-end
-
-attachment_object.onManeuverGain = function(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:addMod(tpz.mod.AUTO_HEALING_THRESHOLD, 20)
-        pet:addMod(tpz.mod.AUTO_HEALING_DELAY, 3)
-    elseif maneuvers == 2 then
-        pet:addMod(tpz.mod.AUTO_HEALING_THRESHOLD, 10)
-        pet:addMod(tpz.mod.AUTO_HEALING_DELAY, 2)
-    elseif maneuvers == 3 then
-        pet:addMod(tpz.mod.AUTO_HEALING_THRESHOLD, 10)
-        pet:addMod(tpz.mod.AUTO_HEALING_DELAY, 2)
-    end
-end
-
-attachment_object.onManeuverLose = function(pet, maneuvers)
-    if maneuvers == 1 then
-        pet:delMod(tpz.mod.AUTO_HEALING_THRESHOLD, 20)
-        pet:delMod(tpz.mod.AUTO_HEALING_DELAY, 3)
-    elseif maneuvers == 2 then
-        pet:delMod(tpz.mod.AUTO_HEALING_THRESHOLD, 10)
-        pet:delMod(tpz.mod.AUTO_HEALING_DELAY, 2)
-    elseif maneuvers == 3 then
-        pet:delMod(tpz.mod.AUTO_HEALING_THRESHOLD, 10)
-        pet:delMod(tpz.mod.AUTO_HEALING_DELAY, 2)
-    end
-end
-
-attachment_object.onEquip = function(pet)
     onUpdate(pet, 0)
 end
 
