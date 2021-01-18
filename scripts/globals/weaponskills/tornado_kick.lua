@@ -1,4 +1,4 @@
--------------------------------
+-----------------------------------
 -- Skill: Tornado Kick
 -- Class: H2H Weapon Skill
 -- Level: 225
@@ -11,8 +11,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     -- number of normal hits for ws
@@ -47,3 +48,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

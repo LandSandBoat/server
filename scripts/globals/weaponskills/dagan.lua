@@ -1,4 +1,4 @@
-------------------------
+-----------------------------------
 --    Dagan     --
 -- Description: Restores HP and MP. Amount restored varies with TP. Gambanteinn: Aftermath.
 -- Acquired permanently by completing the appropriate Walk of Echoes Weapon Skill Trials.
@@ -7,13 +7,14 @@
 -- Modifiers: Max HP / Max MP
 -- Amount restored in HP/MP by TP
 -- Does not deal damage.
---------------------------------------
+-----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
----------------------------------------
+-----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     -- Apply aftermath
     tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
 
@@ -22,3 +23,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     player:addHP(ftphp * player:getMaxHP())
     return 0, 0, false, ftpmp * player:getMaxMP()
 end
+
+return weaponskill_object

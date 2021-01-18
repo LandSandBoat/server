@@ -16,8 +16,9 @@ require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/utils")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local attack =
     {
@@ -77,3 +78,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
 
 end
+
+return weaponskill_object
