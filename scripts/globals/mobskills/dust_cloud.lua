@@ -3,18 +3,17 @@
 -- Deals Earth damage to targets in a fan-shaped area of effect. Additional effect: Blind
 -- Range: 10' cone
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.BLINDNESS
 
     MobStatusEffectMove(mob, target, typeEffect, 15, 0, 120)
@@ -25,3 +24,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.EARTH)
     return dmg
 end
+
+return mobskill_object

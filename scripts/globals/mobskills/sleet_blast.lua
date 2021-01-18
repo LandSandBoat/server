@@ -10,16 +10,17 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getAnimationSub() ~= 1) then
         return 1
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*8, tpz.magic.ele.ICE, dmgmod, TP_NO_EFFECT)
@@ -27,3 +28,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.ICE)
     return dmg
 end
+
+return mobskill_object

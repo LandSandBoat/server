@@ -11,15 +11,16 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:isMobType(MOBTYPE_NOTORIOUS)) then
         return 0
     end
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- try to drain buff
     local effect1 = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE)
@@ -49,3 +50,5 @@ function onMobWeaponSkill(target, mob, skill)
     end
 
 end
+
+return mobskill_object

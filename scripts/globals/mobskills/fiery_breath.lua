@@ -12,8 +12,9 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/utils")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES) then
         return 1
     elseif not target:isInfront(mob, 128) then
@@ -25,7 +26,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = MobBreathMove(mob, target, 0.2, 1.25, tpz.magic.ele.FIRE, 1400)
     dmgmod = utils.conalDamageAdjustment(mob, target, skill, dmgmod, 0.9)
 
@@ -34,3 +35,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.FIRE)
     return dmg
 end
+
+return mobskill_object

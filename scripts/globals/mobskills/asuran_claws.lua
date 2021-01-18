@@ -6,8 +6,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- animsub 1= standing, animsub 0 = all fours
     if (mob:getAnimationSub() == 0) then
         return 1
@@ -16,7 +17,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 6
     local accmod = 1
     local dmgmod = 1
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

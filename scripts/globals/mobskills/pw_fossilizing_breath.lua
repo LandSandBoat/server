@@ -10,8 +10,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 1805) then
@@ -21,7 +22,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PETRIFICATION
     local power = 1
     local duration = 30
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

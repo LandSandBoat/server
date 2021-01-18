@@ -6,10 +6,10 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -27,7 +27,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 2
     local accmod = 1
     local dmgmod = 3
@@ -37,3 +37,4 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+return mobskill_object

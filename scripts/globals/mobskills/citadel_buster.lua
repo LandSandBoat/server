@@ -13,8 +13,9 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/Temenos/IDs")
 
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     local phase = mob:getLocalVar("battlePhase")
     if (phase == 4) then
         mob:setLocalVar("citadelBuster", 1)
@@ -76,7 +77,7 @@ function onMobSkillCheck(target,mob,skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local basedmg = 2088
     if mob:getWeather() == tpz.weather.AURORAS or mob:getWeather() == tpz.weather.STELLAR_GLARE then basedmg = basedmg + 520 end
     if VanadielDayElement() == tpz.day.LIGHTSDAY then basedmg = basedmg + 208 end
@@ -86,3 +87,4 @@ function onMobWeaponSkill(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
+return mobskill_object

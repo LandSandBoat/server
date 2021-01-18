@@ -2,18 +2,17 @@
 -- Magnetite Cloud
 -- Deals earth damage to enemies within a fan-shaped area originating from the caster. Additional effect: Weight.
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.WEIGHT
     MobStatusEffectMove(mob, target, typeEffect, 50, 0, 120)
 
@@ -24,3 +23,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.EARTH)
     return dmg
 end
+
+return mobskill_object

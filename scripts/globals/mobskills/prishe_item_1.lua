@@ -7,12 +7,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(tpz.msg.basic.NONE)
     if (mob:getTarget() and mob:getTarget():getFamily() == 478) then
         -- using Ambrosia!
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
     end
     return 0
 end
+
+return mobskill_object

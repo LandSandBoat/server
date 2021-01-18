@@ -6,12 +6,13 @@
 ---------------------------------------------
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local mp = target:getMaxMP() - target:getMP()
 
     skill:setMsg(tpz.msg.basic.AOE_REGAIN_MP)
@@ -20,3 +21,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return mp
 end
+
+return mobskill_object

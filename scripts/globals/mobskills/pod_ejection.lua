@@ -1,8 +1,9 @@
 ---------------------------------------------
 -- Pod Ejection
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     local pod = GetMobByID(mob:getID() + 1)
     local currentForm = mob:getLocalVar("form")
 
@@ -12,7 +13,7 @@ function onMobSkillCheck(target,mob,skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local battlefield = mob:getBattlefield()
     local pod = GetMobByID(mob:getID() + 1)
     if battlefield and not pod:isSpawned() then
@@ -27,3 +28,4 @@ function onMobWeaponSkill(target, mob, skill)
     end
     return 0
 end
+return mobskill_object

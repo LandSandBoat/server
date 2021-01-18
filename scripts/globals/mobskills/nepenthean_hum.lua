@@ -8,8 +8,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if VanadielHour() >= 6 and VanadielHour() <= 18 then
         return 0
     else
@@ -17,9 +18,11 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.AMNESIA
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60))
     return typeEffect
 end
+
+return mobskill_object

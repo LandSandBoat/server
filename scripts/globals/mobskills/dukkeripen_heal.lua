@@ -7,8 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:getMainJob() == tpz.job.COR then
         return 0
     else
@@ -16,9 +17,11 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(tpz.msg.basic.SELF_HEAL)
 
     return MobHealMove(mob, math.random(350, 500))
 end
+
+return mobskill_object

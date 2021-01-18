@@ -7,12 +7,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.SLOW
     local power = 1950
     local duration = math.random(60, 180)
@@ -31,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
     return typeEffect
     ]]--
 end
+
+return mobskill_object

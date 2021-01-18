@@ -4,12 +4,15 @@
 require("scripts/globals/msg")
 require("scripts/globals/status")
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:addEnmity(mob, 1, 1800)
     skill:setMsg(tpz.msg.basic.NONE)
 end
+
+return mobskill_object

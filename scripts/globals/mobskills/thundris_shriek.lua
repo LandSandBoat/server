@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
   if(mob:getFamily() == 316) then
     local mobSkin = mob:getModelId()
 
@@ -37,7 +38,7 @@ function onMobSkillCheck(target, mob, skill)
   return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.TERROR
 
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 15)
@@ -48,3 +49,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.LIGHTNING)
     return dmg
 end
+
+return mobskill_object

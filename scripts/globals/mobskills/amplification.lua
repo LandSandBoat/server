@@ -6,12 +6,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect1 = tpz.effect.MAGIC_ATK_BOOST
     local typeEffect2 = tpz.effect.MAGIC_DEF_BOOST
     local mabTotal = mob:getStatusEffect(tpz.effect.MAGIC_ATK_BOOST)
@@ -35,3 +36,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect1
 end
+
+return mobskill_object

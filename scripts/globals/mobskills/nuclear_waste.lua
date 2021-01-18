@@ -7,8 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -26,7 +27,7 @@ function onMobSkillCheck(target,mob,skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("nuclearWaste", 1)
     local typeEffect = tpz.effect.ELEMENTALRES_DOWN
     local resist = applyPlayerResistance(mob,typeEffect,target,mob:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT),0,0);
@@ -38,3 +39,4 @@ function onMobWeaponSkill(target, mob, skill)
     end
     return typeEffect
 end
+return mobskill_object

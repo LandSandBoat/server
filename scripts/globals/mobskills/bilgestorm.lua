@@ -10,9 +10,10 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
   if(mob:getFamily() == 316) then
     local mobSkin = mob:getModelId()
 
@@ -25,7 +26,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = math.random(20, 25)
 
     MobPhysicalStatusEffectMove(mob, target, skill, tpz.effect.ACCURACY_DOWN, power, 0, 60)
@@ -40,3 +41,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

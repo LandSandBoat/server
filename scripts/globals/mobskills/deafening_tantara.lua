@@ -11,8 +11,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getAnimationSub() == 1 and mob:getFamily() == 165) then -- Imps without horn
         return 1
     else
@@ -20,9 +21,11 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.SILENCE
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
     return typeEffect
 end
+
+return mobskill_object

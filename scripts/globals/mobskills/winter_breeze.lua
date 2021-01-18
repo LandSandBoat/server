@@ -8,12 +8,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local DISPEL = target:dispelStatusEffect()
 
     MobStatusEffectMove(mob, target, tpz.effect.STUN, 1, 0, 2)
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return DISPEL
 end
+
+return mobskill_object

@@ -10,16 +10,17 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getAnimationSub() == 2 or mob:getAnimationSub() == 3) then
         return 1
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PETRIFICATION
 
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
@@ -35,3 +36,5 @@ function onMobWeaponSkill(target, mob, skill)
     return dmg
 
 end
+
+return mobskill_object

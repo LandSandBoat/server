@@ -8,12 +8,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.WEAKNESS
     local dmg1 = mob:getHP()*0.24
     local dmg2 = dmg1*0.5
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg2
 end
+
+return mobskill_object

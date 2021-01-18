@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getFamily() == 316) then
         local mobSkin = mob:getModelId()
 
@@ -30,7 +31,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- addEx to pervent dispel
     mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 45)
@@ -41,3 +42,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return tpz.effect.MAGIC_SHIELD
 end
+
+return mobskill_object

@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getAnimationSub() ~=0) then
         return 1
     else
@@ -20,7 +21,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.TERROR
     local duration = 30
 
@@ -28,3 +29,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

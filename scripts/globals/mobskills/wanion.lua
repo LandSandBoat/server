@@ -6,12 +6,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- list of effects to give in AoE
     local effects = {tpz.effect.POISON, tpz.effect.PARALYSIS, tpz.effect.BLINDNESS, tpz.effect.SILENCE,
         tpz.effect.WEIGHT, tpz.effect.SLOW, tpz.effect.ADDLE, tpz.effect.DIA, tpz.effect.BIO, tpz.effect.BURN,
@@ -29,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
     end
     skill:setMsg(tpz.msg.basic.NONE)
 end
+
+return mobskill_object

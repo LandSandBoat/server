@@ -7,14 +7,13 @@
 --  Range: Melee
 --  Notes: Used only by Lamia equipped with a staff. If they lost their staff, they'll use Hysteric Barrage instead.
 ---------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:getAnimationSub() == 0 and (mob:getMainJob() == tpz.job.SMN or mob:getMainJob() == tpz.job.BLM) then
         return 0
     else
@@ -22,7 +21,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.6
@@ -31,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

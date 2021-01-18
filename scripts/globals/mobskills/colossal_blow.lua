@@ -3,14 +3,13 @@
 -- Deals damage to a single target.
 --
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local currentForm = mob:getLocalVar("form") -- this var is only set for proto-omega
 
     if (currentForm == 2) then
@@ -19,7 +18,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local currentHP = target:getHP()
     -- remove all by 5%
@@ -38,3 +37,5 @@ function onMobWeaponSkill(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
+
+return mobskill_object

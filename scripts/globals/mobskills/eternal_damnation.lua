@@ -5,13 +5,16 @@
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(MobGazeMove(mob, target, tpz.effect.DOOM, 10, 3, 30))
 
     return tpz.effect.DOOM
 end
+
+return mobskill_object

@@ -16,14 +16,17 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     MobBuffMove(mob, tpz.effect.PERFECT_DEFENSE, 1, 0, skill:getParam())
 
     skill:setMsg(tpz.msg.basic.USES)
     return tpz.effect.PERFECT_DEFENSE
 end
+
+return mobskill_object

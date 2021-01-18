@@ -10,13 +10,14 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
-
 ---------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     MobStatusEffectMove(mob, target, tpz.effect.SLOW, 1250, 0, 120)
 
     MobStatusEffectMove(mob, target, tpz.effect.SLOW, 128, 0, 120)
@@ -31,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
+
+return mobskill_object

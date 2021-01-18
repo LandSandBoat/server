@@ -2,18 +2,17 @@
 -- Flaming Crush
 --     Ifrit delivers a three-hit attack that deals fire elemental damage to target.
 ---------------------------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
-
 ---------------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 3
     local accmod = 1
@@ -24,3 +23,5 @@ function onMobWeaponSkill(target, mob, skill)
     return dmg
 
 end
+
+return mobskill_object

@@ -6,8 +6,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 ---------------------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES) then
         return 1
     elseif mob:hasStatusEffect(tpz.effect.SUPER_BUFF) then
@@ -24,7 +25,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.TERROR
     local power = 30
     -- Three minutes is WAY too long, especially on Wyrms. Reduced to Wiki's definition of 'long time'. Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
@@ -37,3 +38,5 @@ function onMobWeaponSkill(target, mob, skill)
     return typeEffect
 
 end
+
+return mobskill_object
