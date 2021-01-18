@@ -5,15 +5,15 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addMod(tpz.mod.MACC, 30) -- Values are best guess
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:delMod(tpz.mod.MACC, 30) -- Since none of the wikis seem to have data
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:addMod(tpz.mod.MACC, 20) -- And normally next level attachments
     elseif maneuvers == 2 then
@@ -23,7 +23,7 @@ function onManeuverGain(pet, maneuvers)
     end
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:delMod(tpz.mod.MACC, 20) -- And incramenting by +10
     elseif maneuvers == 2 then

@@ -5,18 +5,18 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addMod(tpz.mod.PREVENT_OVERLOAD, 1)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:delMod(tpz.mod.PREVENT_OVERLOAD, 1)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
 
 return attachment_object

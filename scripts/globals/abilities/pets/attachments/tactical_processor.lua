@@ -7,15 +7,15 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 50) -- -0.5s
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 50)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:addMod(tpz.mod.AUTO_DECISION_DELAY, 20) -- -0.70s ?
     elseif maneuvers == 2 then
@@ -25,7 +25,7 @@ function onManeuverGain(pet, maneuvers)
     end
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:delMod(tpz.mod.AUTO_DECISION_DELAY, 20)
     elseif maneuvers == 2 then

@@ -5,7 +5,7 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_ECONOMIZER", function(automaton, target)
         local master = automaton:getMaster()
         local maneuvers = (master and master:countEffect(tpz.effect.DARK_MANEUVER) > 0) and master:countEffect(tpz.effect.DARK_MANEUVER) or 7
@@ -19,14 +19,14 @@ function onEquip(pet)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("ATTACHMENT_ECONOMIZER")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
 
 return attachment_object

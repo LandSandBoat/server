@@ -5,26 +5,26 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     local skill = math.max(pet:getSkillLevel(tpz.skill.AUTOMATON_MELEE), pet:getSkillLevel(tpz.skill.AUTOMATON_RANGED), pet:getSkillLevel(tpz.skill.AUTOMATON_MAGIC))
     pet:addMod(tpz.mod.ENSPELL, tpz.magic.element.THUNDER)
     pet:addMod(tpz.mod.ENSPELL_DMG, skill * 0.1)
     pet:addMod(tpz.mod.ENSPELL_CHANCE, 20)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:delMod(tpz.mod.ENSPELL, tpz.magic.element.THUNDER)
     pet:delMod(tpz.mod.ENSPELL_DMG, pet:getMod(tpz.mod.ENSPELL_DMG))
     pet:delMod(tpz.mod.ENSPELL_CHANCE, 20)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     local skill = math.max(pet:getSkillLevel(tpz.skill.AUTOMATON_MELEE), pet:getSkillLevel(tpz.skill.AUTOMATON_RANGED), pet:getSkillLevel(tpz.skill.AUTOMATON_MAGIC))
     pet:addMod(tpz.mod.ENSPELL_DMG, skill * 0.05)
     pet:addMod(tpz.mod.ENSPELL_CHANCE, 15)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     local skill = math.max(pet:getSkillLevel(tpz.skill.AUTOMATON_MELEE), pet:getSkillLevel(tpz.skill.AUTOMATON_RANGED), pet:getSkillLevel(tpz.skill.AUTOMATON_MAGIC))
     pet:delMod(tpz.mod.ENSPELL_DMG, skill * 0.05)
     pet:delMod(tpz.mod.ENSPELL_CHANCE, 15)
