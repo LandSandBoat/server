@@ -11,15 +11,16 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     TotalNPC = player:getCharVar("saveTheClockTowerNPCz1") + player:getCharVar("saveTheClockTowerNPCz2")
     if (TotalNPC == 1023 and trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(231) -- Ending quest "save the clock tower"
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     AirshipKI = player:hasKeyItem(tpz.ki.AIRSHIP_PASS)
     saveTheClockTower = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     NPCNumber = player:getCharVar("saveTheClockTowerVar") -- Quest step & number of npc
@@ -40,7 +41,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (csid == 230 and option == 10) then
         if (player:delGil(500000)) then
@@ -53,7 +54,7 @@ function onEventUpdate(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 230 and option == 10) then
         if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true) then
@@ -96,3 +97,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     end
 end
+
+return entity

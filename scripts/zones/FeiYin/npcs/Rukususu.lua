@@ -11,11 +11,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- The Jester Who'd Be King (Windurst 8-2)
     if
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and 
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- Curses, Foiled A_Golem!?
     if csid == 14 then
         player:setCharVar("foiledagolemdeliverycomplete", 1)
@@ -52,3 +53,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

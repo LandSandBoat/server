@@ -12,11 +12,12 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     AyameAndKaede = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
 
@@ -52,10 +53,10 @@ function onTrigger(player, npc)
 end
 
 -- 27  240  242  243  245  246  247  262  263  264  265  261
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 242) then
         player:setCharVar("AyameAndKaede_Event", 2)
@@ -76,3 +77,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

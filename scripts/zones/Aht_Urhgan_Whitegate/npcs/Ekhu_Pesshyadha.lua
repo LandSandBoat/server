@@ -9,11 +9,12 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local gotItAllProg = player:getCharVar("gotitallCS")
     if gotItAllProg == 1 then
         player:startEvent(537)
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 537 then
         player:setCharVar("gotitallCS", 2)
     elseif csid == 524 then
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("gotitallCS", 4)
     end
 end
+
+return entity

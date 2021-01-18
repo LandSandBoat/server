@@ -5,11 +5,12 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
 end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player,npc)
     if
         (player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_BEGINNING and player:getCharVar("RhapsodiesStatus") == 2) or
         player:getCurrentMission(ROV) >= tpz.mission.id.rov.FLAMES_OF_PRAYER
@@ -20,11 +21,13 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option)
+entity.onEventUpdate = function(player,csid,option)
 end
 
-function onEventFinish(player,csid,option)
+entity.onEventFinish = function(player,csid,option)
     if csid == 371 and option == 1 then
         player:setPos(0, 0, 0, 0, 252)
     end
 end
+
+return entity

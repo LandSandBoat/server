@@ -8,6 +8,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
+
+
 --    player:startEvent(110) -- standar dialog
 --    player:startEvent(115) -- i have enough for now, come later
 --    player:startEvent(114) -- get me x as soon as you can
@@ -15,7 +18,7 @@ require("scripts/globals/quests")
 --    player:startEvent(113) -- quest done!
 --    player:startEvent(112) -- repeat quest
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED or player:getCharVar("QuestAPotterPrefeRepeat_var") == 1 then
         if npcUtil.tradeHas(trade, 569) then
             player:startEvent(113) -- quest done!
@@ -23,7 +26,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 5 then
         player:startEvent(111, 569) -- start quest A Potter's Preference
     elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE) == QUEST_ACCEPTED then
@@ -40,10 +43,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 111 and option == 1 then  --accept quest
         player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_POTTER_S_PREFERENCE)
     elseif csid == 113 then --quest completed
@@ -59,3 +62,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestAPotterPrefeRepeat_var", 1)
     end
 end
+
+return entity

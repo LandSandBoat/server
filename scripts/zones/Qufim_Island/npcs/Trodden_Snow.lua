@@ -11,8 +11,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Enfeebling Kit
     if player:getCurrentMission(ASA) == tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD then
         local item = 0
@@ -31,7 +32,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     --ASA 4 CS: Triggers With At Least 3 Counterseals.
     if player:getCurrentMission(ASA) == tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE then
         local completedSeals =
@@ -49,10 +50,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 44 then
         npcUtil.giveKeyItem(player, {
             tpz.ki.DOMINAS_SCARLET_SEAL,
@@ -110,3 +111,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ASA_Status", 0)
     end
 end
+
+return entity

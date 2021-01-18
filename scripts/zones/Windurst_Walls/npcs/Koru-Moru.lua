@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local qStarStruck = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
     local count = trade:getItemCount()
 
@@ -54,7 +55,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local qStarStruck = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.STAR_STRUCK)
     local blastFromPast = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
     local blastProg = player:getCharVar("BlastFromThePast_Prog")
@@ -131,10 +132,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 285) then  -- Giving him KI from Principle
         player:tradeComplete()
@@ -215,3 +216,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

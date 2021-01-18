@@ -9,11 +9,12 @@ local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ToBee = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
@@ -37,10 +38,10 @@ end
 --  player:startEvent(80) -- Quest Finish - Gives Mulsum
 --  player:startEvent(79) -- After Quest but before zoning: "it's certainly gotten quiet around here..."
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 67) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4370) -- Cannot give Honey because player Inventory is full
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

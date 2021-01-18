@@ -10,8 +10,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     ShiningSubligar = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     Subligar = trade:getItemQty(14242)
@@ -36,7 +37,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     ShiningSubligar = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
@@ -50,10 +51,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 123) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

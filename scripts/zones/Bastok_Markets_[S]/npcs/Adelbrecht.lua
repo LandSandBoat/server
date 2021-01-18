@@ -21,11 +21,12 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
@@ -52,10 +53,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 139 and option == 1) then
         player:addKeyItem(tpz.ki.BATTLE_RATIONS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BATTLE_RATIONS)
@@ -90,3 +91,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

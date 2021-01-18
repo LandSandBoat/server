@@ -8,11 +8,12 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     Guardian = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
     Pamamas = player:getCharVar("PamamaVar")
     pfame = player:getFameLevel(KAZHAM)
@@ -39,10 +40,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 68 and option == 1) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
         player:setCharVar("PamamaVar", 0)
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

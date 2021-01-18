@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL and player:getCharVar("ZilartStatus") == 1 and not player:hasKeyItem(tpz.ki.SCRAP_OF_PAPYRUS)) then
         if (player:needToZone() and player:getCharVar("AncientVesselKilled") == 1) then
@@ -30,11 +31,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 12 and option == 1) then
         SpawnMob(ID.mob.ANCIENT_VESSEL):updateClaim(player)
     end
 end
+
+return entity

@@ -10,15 +10,16 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     if (starstatus == 1 and trade:hasItemQty(546, 1) == true and trade:getItemCount() == 1 and trade:getGil() == 0) then
         player:startEvent(199) -- Quest Finish
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local starstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     if (starstatus == QUEST_AVAILABLE) then
         player:startEvent(196, 0, 546) -- Quest Start
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 196) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_CATCH_A_FALLING_STAR)
     elseif (csid == 199) then
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestCatchAFallingStar_prog", 2)
     end
 end
+
+return entity

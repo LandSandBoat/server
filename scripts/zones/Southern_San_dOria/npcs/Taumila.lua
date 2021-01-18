@@ -10,8 +10,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(884, 3) and trade:getItemCount() == 3) then
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local tigersTeeth = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
 
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 574 and option == 0) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
@@ -58,3 +59,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

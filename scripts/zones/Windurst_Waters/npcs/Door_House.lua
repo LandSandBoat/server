@@ -7,8 +7,9 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local npcID = npc:getID()
     if (npcID == ID.npc.LELEROON_GREEN_DOOR) then
         local letterGreen = player:getCharVar("LeleroonsLetterGreen")
@@ -25,7 +26,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local npcID = npc:getID()
     if (npcID == ID.npc.LELEROON_GREEN_DOOR) then
         local letterGreen = player:getCharVar("LeleroonsLetterGreen")
@@ -45,10 +46,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 941) then
         player:setCharVar("LeleroonsLetterGreen", 2)
         player:delKeyItem(tpz.ki.LELEROONS_LETTER_GREEN)
@@ -65,3 +66,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14929)
     end
 end
+
+return entity

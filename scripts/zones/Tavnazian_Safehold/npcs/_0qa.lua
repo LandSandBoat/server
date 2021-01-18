@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(104)
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 104 then
         player:setCharVar("PromathiaStatus", 1)
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

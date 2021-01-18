@@ -1,14 +1,15 @@
--------------------------------------
+-----------------------------------
 -- Area: Southern San d'Oria
 --  NPC: Glenne
 -- Starts and Finishes Quest: A Sentry's Peril
 -- !pos -122 -2 15 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/npc_util")
--------------------------------------
+-----------------------------------
+local entity = {}
 
 require("scripts/globals/pathfind")
 
@@ -28,24 +29,24 @@ local path =
     -124.871826, -2.000000, 14.723736
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
     onPath(npc)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 601) then -- Ointment Case
         player:startEvent(513) -- Complete "A Sentry's Peril"
         npc:wait()
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local sentrysPerilStatus = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
 
     npc:wait()
@@ -60,10 +61,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     npc:wait(5000)
     if csid == 510 and option == 0 and npcUtil.giveItem(player, 600) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option, npc)
         player:confirmTrade()
     end
 end
+
+return entity

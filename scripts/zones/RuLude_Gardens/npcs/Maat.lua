@@ -13,8 +13,9 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local tradeCount = trade:getItemCount()
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED) then
         -- Trade Bomb Coal / Exoray Mold / Ancient Papyrus
@@ -32,7 +33,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local LvL = player:getMainLvl()
     local mJob = player:getMainJob()
@@ -101,12 +102,12 @@ function onTrigger(player, npc)
 end
 
 -- Maat cap: 74
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("upCSID: %u", csid)
     -- printf("upRESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 117) then
         player:setCharVar("BeatAroundTheBushin", 6)
@@ -190,3 +191,5 @@ function onEventFinish(player, csid, option)
 
 
 end
+
+return entity

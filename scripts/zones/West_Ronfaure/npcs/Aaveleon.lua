@@ -8,8 +8,9 @@ local ID = require("scripts/zones/West_Ronfaure/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 600) then -- Ointment
         player:startEvent(100) -- He accepts the ointment and gives the player the empty case to return to his wife.
     elseif player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL) < QUEST_COMPLETED then
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local sentrysPerilStatus = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
     local tradeFinished = player:getCharVar("SentrysPerilTraded")
 
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 100 and npcUtil.giveItem(player, 601) then
         player:confirmTrade()
         player:setCharVar("SentrysPerilTraded", 1)
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         npcUtil.giveItem(player, 601)
     end
 end
+
+return entity

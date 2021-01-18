@@ -11,10 +11,11 @@ require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.asuran_fists
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
@@ -26,7 +27,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local ghostsOfThePast = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
     local theFirstMeeting = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
@@ -46,7 +47,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 231) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
     elseif (csid == 232) then
@@ -78,3 +79,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

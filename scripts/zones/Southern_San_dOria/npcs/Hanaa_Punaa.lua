@@ -3,13 +3,14 @@
 --  NPC: Hanaa Punaa
 -- Starts and Finishes: A Squire's Test, A Squire's Test II, A Knight's Test
 -- !zone 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     -- "The Seamstress" , x3 sheepskin trade
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SEAMSTRESS) ~= QUEST_AVAILABLE) then
@@ -33,7 +34,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Checking Fame Level & Quest
     local sanFame = player:getFameLevel(SANDORIA)
@@ -77,10 +78,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- "The Seamstress" Quest
     if ((csid == 528 or csid == 531) and option == 0) then
@@ -140,3 +141,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

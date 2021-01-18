@@ -10,11 +10,12 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local gotitall = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
     local gotItAllProg = player:getCharVar("gotitallCS")
     local threeMenProg = player:getCharVar("threemenandaclosetCS")
@@ -39,10 +40,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 520 then
         player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
         player:setCharVar("gotitallCS", 1)
@@ -61,3 +62,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("threemenandaclosetCS", 6)
     end
 end
+
+return entity

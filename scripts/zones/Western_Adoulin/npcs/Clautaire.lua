@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local FINAO = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
     if (FINAO == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.HUNK_OF_BEDROCK)) then
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 78) then
         -- Starting Quest: 'F.A.I.L.ure Is Not an Option'
         player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FAILURE_IS_NOT_AN_OPTION)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         player:addFame(ADOULIN)
     end
 end
+
+return entity

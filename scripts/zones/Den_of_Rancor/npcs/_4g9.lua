@@ -5,11 +5,14 @@
 -----------------------------------
 require("scripts/zones/Den_of_Rancor/globals")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     DEN_OF_RANCOR.onTradeLanternHaku(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     DEN_OF_RANCOR.onTriggerLantern(player, npc)
 end
+
+return entity

@@ -12,11 +12,12 @@ require("scripts/globals/missions")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Race = player:getRace()
     local xPos = npc:getXPos()
 
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 202) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (124 and option ~=0) then -- Mithra
@@ -81,3 +82,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_ALTAIEU)
     end
 end
+
+return entity

@@ -10,8 +10,9 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local now = tonumber(os.date("%j"))
     local count = trade:getItemCount()
@@ -50,7 +51,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA ==0) then
         player:showText(npc, ID.text.GET_LOST)
     else
@@ -58,10 +59,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- uncommented printf till we have all optionIDs mapped out.
     local now = tonumber(os.date("%j"))
     local ACPm = player:getCurrentMission(ACP)
@@ -98,3 +99,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

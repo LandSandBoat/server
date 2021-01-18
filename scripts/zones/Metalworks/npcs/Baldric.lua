@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(503, 1) and trade:getItemCount() == 1) then
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
         player:startEvent(554)
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 554) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST)
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST)
     end
 end
+
+return entity

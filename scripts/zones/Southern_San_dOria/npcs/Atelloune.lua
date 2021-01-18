@@ -3,12 +3,13 @@
 --  NPC: Atelloune
 -- Starts and Finishes Quest: Atelloune's Lament
 -- !pos 122 0 82 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -----lady bug
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(2506, 1) and trade:getItemCount() == 1) then
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local atellounesLament = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
     local sanFame = player:getFameLevel(SANDORIA)
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 890) then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

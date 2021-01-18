@@ -12,11 +12,12 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     TheWonderMagicSet = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     WonderMagicSetKI = player:hasKeyItem(tpz.ki.WONDER_MAGIC_SET)
     TheLostCardianCS = player:getCharVar("theLostCardianVar")
@@ -48,10 +49,10 @@ end
 -- 78 oh zut j'ai besoin de cette marmite
 -- 30 j'ai été trop dur avec two... et percé la marmite
 -- 40 du moment que j'ai cette boite et la marmite je vais enfin battre ce gars
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 77 and option == 1) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     elseif (csid == 33) then
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

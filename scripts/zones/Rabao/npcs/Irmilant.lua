@@ -10,8 +10,9 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local Indomitable = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
     local ImmortalLuShang = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
 
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Indomitable = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT)
     local ImmortalLuShang = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
     local indomitableTimer = player:getCharVar("IndomitableSpiritTimer")
@@ -42,10 +43,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 77 then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
     elseif csid == 78 and npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.THE_IMMORTAL_LU_SHANG, {item=17386, fameArea=RABAO, fame=60, title=tpz.title.THE_IMMORTAL_FISHER_LU_SHANG}) then
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option)
         npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.INDOMITABLE_SPIRIT, {item=17011, fameArea=RABAO, fame=100, title=tpz.title.INDOMITABLE_FISHER, var="IndomitableSpiritTimer"})
     end
 end
+
+return entity

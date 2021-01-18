@@ -3,15 +3,16 @@
 --   NPC: Vamorcote
 -- Starts and Finishes Quest: The Setting Sun
 -- !pos -137.070 10.999 161.855 231
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- "The Setting Sun" conditional script
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(535, 1) and trade:getItemCount() == 1) then
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Look at the "The Setting Sun" quest status and San d'Oria player's fame
     theSettingSun = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
 
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 654 and option == 1) then --Player accepts the quest
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
@@ -53,3 +54,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_SETTING_SUN)
     end
 end
+
+return entity

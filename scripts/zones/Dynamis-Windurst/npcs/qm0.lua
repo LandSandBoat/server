@@ -5,11 +5,14 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     dynamis.qmOnTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     dynamis.qmOnTrigger(player, npc)
 end
+
+return entity

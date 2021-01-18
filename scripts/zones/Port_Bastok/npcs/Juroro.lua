@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local TrialByEarth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
     local WhisperOfTremors = player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)
@@ -49,10 +50,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 256) then
         if (player:getFreeSlotsCount() ~= 0) then
@@ -112,3 +113,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

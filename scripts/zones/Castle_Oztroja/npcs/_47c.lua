@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local X = player:getXPos()
     local Z = player:getZPos()
     local trapDoor  = GetNPCByID(npc:getID() - 2)
@@ -38,11 +39,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 43 then
         player:setCharVar("MissionStatus", 4)
     end
 end
+
+return entity

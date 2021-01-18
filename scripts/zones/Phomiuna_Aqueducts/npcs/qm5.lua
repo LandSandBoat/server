@@ -4,11 +4,12 @@
 -- Notes: Opens door @ F-8 from behind
 -- !pos -65.512 -25.262 62.918 27
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local xPos = player:getXPos()
     local DoorOffset = npc:getID() - 1
@@ -21,8 +22,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

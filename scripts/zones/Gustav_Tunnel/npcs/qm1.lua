@@ -6,7 +6,11 @@
 -----------------------------------
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Gustav_Tunnel/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.evisceration, player, ID.mob.BARONIAL_BAT)
 end
+
+return entity

@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, {{4366, 12}}) and not GetMobByID(ID.mob.HABETROT):isSpawned() and not GetMobByID(ID.mob.HABETROT + 1):isSpawned() then -- 12 La Theine Cabbages
         local mobToSpawn = (math.random(100) <= 20) and ID.mob.HABETROT or ID.mob.HABETROT + 1 -- 20% Chance to spawn Habetrot, else it's a Rumble Crawler
         npcUtil.popFromQM(player, npc, mobToSpawn)
@@ -16,12 +17,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.BITS_OF_VEGETABLE)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

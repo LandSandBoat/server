@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Monastic_Cavern/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
     if circleOfTime == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.STAR_RING1) and player:hasKeyItem(tpz.ki.MOON_RING) then
@@ -28,13 +29,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
         player:setCharVar("circleTime", 9)
         player:delKeyItem(tpz.ki.MOON_RING)
         player:delKeyItem(tpz.ki.STAR_RING1)
     end
 end
+
+return entity

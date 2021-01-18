@@ -6,8 +6,9 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     count = trade:getItemCount()
 
@@ -24,7 +25,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getZPos() < 597) then
         player:startEvent(120)
     else
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 121) then
         player:setPos(325.137, -3.999, -619.968, 0, 72) -- To Alzadaal Undersea Ruins G-8 {R}
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

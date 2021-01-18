@@ -10,8 +10,9 @@ require("scripts/globals/quests")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local meritCount = player:getMeritCount()
     if (trade:hasItemQty(1127, 5) == true and trade:getGil() == 0 and trade:getItemCount() == 5 and meritCount > 2) then
         if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
@@ -37,7 +38,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(tpz.ki.LIMIT_BREAKER) == false and player:getMainLvl() >= 75) then
         player:startEvent(10045, 75, 2, 10, 7, 30, 302895, 4095)
     elseif (player:getMainLvl() == 75 and player:getLevelCap() == 75 and MAX_LEVEL >= 80 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_AVAILABLE) then
@@ -81,10 +82,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local meritCount = player:getMeritCount()
 
     if (csid == 10045 and option == 4) then
@@ -218,3 +219,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -8,8 +8,9 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 605) then -- pickaxe
         if player:getFreeSlotsCount() > 0 then
             if math.random() < 0.47 then
@@ -29,14 +30,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(30, 12, 0, 597)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 51 and npcUtil.giveItem(player, 598) then
         player:confirmTrade()
     elseif csid == 43 and npcUtil.giveItem(player, 597) then
@@ -45,3 +46,5 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
     end
 end
+
+return entity

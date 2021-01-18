@@ -9,8 +9,9 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4508, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
             player:startEvent(10001) -- Finish quest "Hoist the Jelly, Roger"
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
     HoistTheJelly = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
@@ -29,10 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10000) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HOIST_THE_JELLY_ROGER)
     elseif (csid == 10001) then
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

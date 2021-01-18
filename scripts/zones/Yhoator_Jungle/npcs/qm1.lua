@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local spawnChance = 0
     if npcUtil.tradeHas(trade, 4468) then -- pamamas
         spawnChance = 5
@@ -24,12 +25,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.WATER_HOLE)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

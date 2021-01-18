@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
 
@@ -24,7 +25,7 @@ Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
 Fame = player:getFameLevel(BASTOK)
@@ -44,12 +45,12 @@ Fame = player:getFameLevel(BASTOK)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 101) then
         Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, { 1696, 1697, 1698 }) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
         and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_IN) == QUEST_ACCEPTED
     then
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
 end
 
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local MissionStatus = player:getCharVar("MissionStatus")
@@ -124,10 +125,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local reward = 0
 
     if (csid == 140) then
@@ -259,3 +260,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TuningOut_Progress", 0) -- zero when quest is done
     end
 end
+
+return entity

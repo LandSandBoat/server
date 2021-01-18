@@ -7,8 +7,9 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 count = trade:getItemCount()
 SilverTag = trade:hasItemQty(13116, 1)
@@ -24,7 +25,7 @@ Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALL
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
 pLevel = player:getMainLvl(player)
@@ -38,12 +39,12 @@ pFame = player:getFameLevel(BASTOK)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 90) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

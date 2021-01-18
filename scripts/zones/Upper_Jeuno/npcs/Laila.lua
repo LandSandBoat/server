@@ -3,7 +3,7 @@
 --   NPC: Laila
 -- Type: Job Quest Giver
 -- !pos -54.045 -1 100.996 244
---
+-----------------------------------
 --TODO--
 -- make sure the surrounding npcs react to the player accordingly after each quest. There are a few event IDs that I don't recall using
 -- make global variables for all these event hexvalues and put them in textids
@@ -16,11 +16,12 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local lakesideMin = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     local lakeProg = player:getCharVar("Lakeside_Minuet_Progress")
     if (lakesideMin == QUEST_AVAILABLE and player:getMainLvl() >= ADVANCED_JOB_LEVEL and ENABLE_WOTG == 1) then
@@ -81,10 +82,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10111 and option == 1) then
         player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET)
     elseif (csid == 10118) then
@@ -201,3 +202,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -13,10 +13,11 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.tachi_kasha
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
@@ -30,7 +31,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local forgeYourDestiny  = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
     local theSacredKatana   = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
     local yomiOkuri         = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI)
@@ -105,10 +106,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- FORGE YOUR DESTINY
     if (csid == 25 and option == 1) then
@@ -163,3 +164,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.TACHI_KASHA_LEARNED)
     end
 end
+
+return entity

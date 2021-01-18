@@ -7,14 +7,15 @@ local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:getItemCount() == 4 and trade:hasItemQty(2506, 4)) then
         player:startEvent(4)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local seeingSpots = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
     if (seeingSpots == QUEST_AVAILABLE) then
         player:startEvent(2)
@@ -25,10 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2) then
         player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
     elseif (csid == 4) then
@@ -45,3 +46,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -9,11 +9,12 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local CurrentZM = player:getCurrentMission(ZILART)
     local ZMProgress = player:getCharVar("ZilartStatus")
     local DMStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
@@ -61,13 +62,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if ((csid == 55 or csid == 59) and option == 2) then
         player:updateEvent(14739, 14740, 14741, 14742, 14743)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 53) then -- Got the required cutscene for AA
         player:setCharVar("ZilartStatus", 1)
@@ -110,3 +111,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -4,11 +4,12 @@
 -- Involved in Quest: Borghertz's Hands (1st quest only)
 -- !pos 35 4 -43 245
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCharVar("BorghertzHandsFirstTime") == 2) then
         player:startEvent(220)
@@ -18,10 +19,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 220 and option == 0 and player:delGil(1000)) then
         player:startEvent(221)
@@ -30,3 +31,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

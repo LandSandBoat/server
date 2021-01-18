@@ -7,8 +7,9 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/helm")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getCharVar("TheHolyCrest_Event") == 3 and not player:hasItem(1159) and npcUtil.tradeHas(trade, 605) then
         if npcUtil.giveItem(player, 1159) then -- Wyvern Egg
             player:confirmTrade()
@@ -19,12 +20,14 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.helm.onTrigger(player, tpz.helm.type.EXCAVATION)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

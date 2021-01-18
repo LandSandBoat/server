@@ -4,19 +4,22 @@
 -- Notes: Leads to Upper Delkfutt's Tower.
 -- !pos 524 16 20 184
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(20) -- missing walk-through animation, but it's the best I could find.
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 20 and option == 1 then
         player:setPos(313, 16, 20, 128, 158) -- to Upper Delkfutt's Tower
     end
 end
+
+return entity

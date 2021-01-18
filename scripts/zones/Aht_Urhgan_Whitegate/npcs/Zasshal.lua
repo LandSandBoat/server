@@ -6,11 +6,13 @@
 -----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentday = tonumber(os.date("%j"))
     local lastPermit = player:getCharVar("LAST_PERMIT")
     local diffday = currentday - lastPermit
@@ -33,7 +35,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 818 or csid == 820) and option == 10 and player:getAssaultPoint(LEUJAOAM_ASSAULT_POINT) >= 500 then
         player:setLocalVar("SalvageValid", 1)
     elseif (csid == 818 or csid == 820) and option == 11 and player:getAssaultPoint(MAMOOL_ASSAULT_POINT) >= 500 then
@@ -47,7 +49,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local currentday = tonumber(os.date("%j"))
 
     if (csid == 818 or csid == 820) and option == 100 then
@@ -71,3 +73,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("LAST_PERMIT", currentday)
     end
 end
+
+return entity

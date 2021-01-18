@@ -9,11 +9,12 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:hasKeyItem(tpz.ki.MYSTIC_ICE) == false) then
         player:addKeyItem(tpz.ki.MYSTIC_ICE)
@@ -22,3 +23,5 @@ function onTrigger(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
+
+return entity

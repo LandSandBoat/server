@@ -4,11 +4,12 @@
 -- Type: Quest and SoA Missions NPC
 -- !pos -87.204 3.350 12.655
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local arceliaAppears = player:getCurrentMission(SOA) == tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN
 
     if arceliaAppears and player:getFameLevel(ADOULIN) >= 4 then
@@ -22,10 +23,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 6 or csid == 7) and option == 1 then
         player:setCharVar("SOA", 0)
         player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN)
@@ -34,3 +35,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("SOA", 1)
     end
 end
+
+return entity

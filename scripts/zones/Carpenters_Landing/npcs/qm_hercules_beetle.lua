@@ -5,11 +5,14 @@
 -----------------------------------
 local func = require("scripts/zones/Carpenters_Landing/globals")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     func.herculesTreeOnTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     func.herculesTreeOnTrigger(player, npc)
 end
+
+return entity

@@ -7,8 +7,9 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
 
@@ -23,7 +24,7 @@ TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.T
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
 OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
@@ -40,10 +41,10 @@ OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bast
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 80) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
@@ -56,3 +57,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

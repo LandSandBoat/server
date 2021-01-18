@@ -3,17 +3,21 @@
 --  NPC: _0r4 (Ornate Gate)
 -- !pos -89.500 -25.500 60.000 27
 -----------------------------------
-function onTrade(player, npc, trade)
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (npc:getAnimation() == 9) then
         npc:openDoor()
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

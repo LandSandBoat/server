@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 7) -- FLYERS FOR REGINE
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         4441, 837, 1,    --Grape Juice
@@ -29,8 +30,10 @@ function onTrigger(player, npc)
     tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

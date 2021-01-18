@@ -13,10 +13,11 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.blade_ku
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
@@ -24,7 +25,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local twentyInPirateYears = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
     local illTakeTheBigBox = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
@@ -58,7 +59,7 @@ function onTrigger(player, npc)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 95) then
         player:addKeyItem(tpz.ki.SEALED_DAGGER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEALED_DAGGER)
@@ -91,3 +92,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.BLADE_KU_LEARNED)
     end
 end
+
+return entity

@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Xarcabard/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
 
     -- CIRCLE OF TIME (Bard AF3)
@@ -30,10 +31,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
         player:setCharVar("star_ringburied", os.time() + 60) -- wait 1 minute
     elseif csid == 2 then
@@ -41,3 +42,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("circleTime", 4)
     end
 end
+
+return entity

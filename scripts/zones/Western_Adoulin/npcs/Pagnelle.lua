@@ -9,11 +9,12 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Raptor_Rapture = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
     local Raptor_Rapture_Status = player:getCharVar("Raptor_Rapture_Status")
 
@@ -62,10 +63,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 5032) then
         -- Warps player to Rala Waterways to continue intrductory CS for Quest: 'Raptor Rapture'
         player:setPos(0, 0, 0, 0, 258)
@@ -92,3 +93,5 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
     end
 end
+
+return entity

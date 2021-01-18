@@ -3,7 +3,7 @@
 --  NPC: Rosel
 -- Starts and Finishes Quest: Rosel the Armorer
 -- !zone 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
 require("scripts/globals/keyitems")
@@ -11,12 +11,13 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 11) -- FLYERS FOR REGINE
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local RoselTheArmorer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
     local receiprForThePrince = player:hasKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)
@@ -34,10 +35,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- Rosel the Armorer, get quest and receipt for prince
     if ((csid == 523 or csid == 524) and option == 0) then
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

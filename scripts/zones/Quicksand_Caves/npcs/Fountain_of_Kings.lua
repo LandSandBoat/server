@@ -7,11 +7,13 @@
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Player is on San d'Oria mission 8-1 "Coming of Age":
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.COMING_OF_AGE then
         local missionStatus = player:getCharVar("MissionStatus")
@@ -31,8 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

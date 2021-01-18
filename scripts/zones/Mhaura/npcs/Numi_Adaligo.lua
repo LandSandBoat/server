@@ -5,11 +5,12 @@
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local rovOptionEnable = 0
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS and player:getCharVar("RhapsodiesStatus") == 2 then
         rovOptionEnable = 1
@@ -17,10 +18,10 @@ function onTrigger(player, npc)
     player:startEvent(50, 0, 0, 0, 0, 0, 0, 0, rovOptionEnable)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local RychardetheChef = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)
     local QuestStatus=player:getCharVar("QuestRychardetheChef_var")
@@ -33,3 +34,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

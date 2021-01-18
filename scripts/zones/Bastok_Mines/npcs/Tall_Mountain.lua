@@ -10,11 +10,12 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local StampHunt = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 3) then
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
 end
 
 -- 32693  55  85  176  180  182  591  593
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 182) then
         finishMissionTimeline(player, 1, csid, option)
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

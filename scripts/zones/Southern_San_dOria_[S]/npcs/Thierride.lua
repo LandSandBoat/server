@@ -6,12 +6,13 @@
 local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 -- Item 1019 = Lufet Salt
 -- Had to use setCharVar because you have to trade Salts one at a time according to the wiki.
 -- Lufet Salt can be obtained by killing Crabs in normal West Ronfaure.
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local lufetSalt = trade:hasItemQty(1019, 1)
     local cnt = trade:getItemCount()
     local beansAhoy = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
@@ -32,7 +33,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local beansAhoy = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
     if (beansAhoy == QUEST_AVAILABLE) then
         player:startEvent(334) -- Quest Start
@@ -50,10 +51,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 334) then
         player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
 
 
 end
+
+return entity

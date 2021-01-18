@@ -11,8 +11,9 @@ require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getNation() ~= tpz.nation.WINDURST) then
         player:startEvent(87) -- for other nation
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     finishMissionTimeline(player, 4, csid, option)
 
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

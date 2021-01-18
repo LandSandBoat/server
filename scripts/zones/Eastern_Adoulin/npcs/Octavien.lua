@@ -9,6 +9,8 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Eastern_Adoulin/IDs")
+-----------------------------------
+local entity = {}
 
 -- Various quest states for Children Of The Rune (COTR).
 -- Corresponds to possible values for the char var "RUN_COTR".
@@ -25,10 +27,10 @@ local RUN_COTR =
     REWARD_PENDING = 3
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
     local cotrQuestStatus = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
     -- NOTE: The if-statements are ordered in reverse order from when they occur
@@ -52,7 +54,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if csid == 26 then
         if option == 1 then
             -- Half the players MP and HP unless the HP is really low, to avoid
@@ -69,7 +71,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- CHILDREN OF THE RUNE
     if csid == 23 or csid == 24 then
         if option == 0 then
@@ -96,3 +98,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

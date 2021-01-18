@@ -8,11 +8,12 @@ require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
         player:setCharVar("ShadesOfVengeance", 1)
         player:startEvent(143, 79, -6, 0, 99, 3, 0)
@@ -29,7 +30,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 
     local assaultid = player:getCurrentAssault()
 
@@ -83,14 +84,14 @@ function onEventUpdate(player, csid, option, target)
 
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
 
     if csid == 133 or (csid == 143 and option == 4) then
         player:setPos(0, 0, 0, 0, 56)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     if instance and player:getCharVar("ShadesOfVengeance") == 1 then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
@@ -131,3 +132,5 @@ function onInstanceCreated(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+
+return entity

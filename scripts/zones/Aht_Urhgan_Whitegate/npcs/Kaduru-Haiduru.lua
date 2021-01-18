@@ -4,6 +4,8 @@
 -- Teleport NPC
 -----------------------------------
 require("scripts/globals/zone")
+-----------------------------------
+local entity = {}
 
 local function canUse_KaduruHaiduru_Service(player)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
@@ -19,7 +21,7 @@ local function canUse_KaduruHaiduru_Service(player)
     return true
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
     local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
@@ -36,7 +38,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
     local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
@@ -66,10 +68,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
     if csid == 154 then        -- At this point we should already have used Kaduru-Haiduru 3 times.
         if option == 1 then       -- Duchy of Jeuno
@@ -93,3 +95,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

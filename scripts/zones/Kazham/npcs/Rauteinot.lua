@@ -10,14 +10,15 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getCharVar("MissionaryManVar") == 1 and trade:hasItemQty(1146, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(139) -- Trading elshimo marble
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     MissionaryMan = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
     MissionaryManVar = player:getCharVar("MissionaryManVar")
 
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 137 and option == 1) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
         player:setCharVar("MissionaryManVar", 1)
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

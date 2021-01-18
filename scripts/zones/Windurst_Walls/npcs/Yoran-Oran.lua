@@ -3,7 +3,7 @@
 --   NPC: Yoran-Oran
 -- Type: Standard NPC
 -- !pos -109.987 -14 203.338 239
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")
@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD) ~= QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, 17344, true) then
             player:startEvent(251, GIL_RATE*200)
@@ -30,7 +31,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local MandragoraMad = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
     local blastFromPast = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
@@ -71,10 +72,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 249 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
     elseif csid == 469 then
@@ -117,3 +118,5 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
     end
 end
+
+return entity

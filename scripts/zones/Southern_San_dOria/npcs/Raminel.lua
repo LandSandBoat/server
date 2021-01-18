@@ -9,6 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -55,7 +56,7 @@ local path =
     -139.296539, -2.000000, 16.786556
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
     onPath(npc)
@@ -77,7 +78,7 @@ function onSpawn(npc)
     -- end
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     if (npc:atPoint(tpz.path.get(path, 23))) then
         npc:lookAt(GetNPCByID(ID.npc.ARPETION):getPos())
         npc:wait()
@@ -96,7 +97,7 @@ function onPath(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 1) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_1", 0)
@@ -107,14 +108,16 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(614)
     npc:wait()
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     npc:wait(0)
 end
+
+return entity

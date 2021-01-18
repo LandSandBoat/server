@@ -13,8 +13,9 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)
@@ -32,7 +33,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local GetGems = player:getCharVar("PXPassGetGems")
 
     if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
@@ -51,10 +52,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 106 and option == 0 then
         local stock =
         {
@@ -87,3 +88,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PXPassGetGems", 1)
     end
 end
+
+return entity

@@ -6,11 +6,12 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Add-on Scenarios
     local AddonScenarios = 0xFFFFFFFE
@@ -40,7 +41,7 @@ function onTrigger(player, npc)
     player:startEvent(865, AddonScenarios, SeekersOfAdoulin, 0xFFFFFFFE, 0xFFFFFFFE, 0xFFFFFFFE, 0xFFFFFFFE, 10, gil) -- CSID, Missions, Fame, ?, ?, ?, ?, Cost, TotalGilPlayerHas
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (player:delGil(10) == false) then
         player:setLocalVar("Durogg_PlayCutscene", 2)  -- Cancel the cutscene.
@@ -50,7 +51,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (player:getLocalVar("Durogg_PlayCutscene") < 2) then
         if (   option ==   1) then        -- Drenched! It Began with a Raindrop
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
 
     player:setLocalVar("Durogg_PlayCutscene", 0)
 end
+
+return entity

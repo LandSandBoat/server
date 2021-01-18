@@ -7,11 +7,12 @@
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Misareaux_Coast/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissions = tpz.mission.id.cop
     local copMissionStatus = player:getCharVar("PromathiaStatus")
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 6 or csid == 12 then
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 559 then
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:setPos(729, -20, 410, 88, 29) -- Go to Riverne #B01
     end
 end
+
+return entity

@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS) > QUEST_AVAILABLE and player:getCharVar("FLOWER_PROGRESS") == 3 then
         if player:getFreeSlotsCount() > 0 and not player:hasItem(950) then
             player:addItem(950) -- Tahrongi Cactus
@@ -21,8 +22,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

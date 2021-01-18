@@ -11,8 +11,9 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(645, 2) and trade:getItemCount() == 2) then
@@ -22,7 +23,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCharVar("darkLegacyCS") == 1) then
         player:startEvent(752)
@@ -42,12 +43,12 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 565) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DARKSMITH)
@@ -71,3 +72,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

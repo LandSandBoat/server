@@ -9,11 +9,12 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local ZilartMission = player:getCurrentMission(ZILART)
     local ZilartStatus = player:getCharVar("ZilartStatus")
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 152) then
         player:delKeyItem(tpz.ki.LETTERS_TO_ALDO)
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ApocalypseNigh", 6)
     end
 end
+
+return entity

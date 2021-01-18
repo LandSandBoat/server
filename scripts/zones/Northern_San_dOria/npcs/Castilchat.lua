@@ -9,15 +9,16 @@ require("scripts/globals/teleports")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     if (trade:hasItemQty(1545, 1) and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN and count == 1) then -- Trade mini fork of ice
         player:startEvent(734, 0, 1545, 4, 20)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local TrialSizeByIce = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
 
@@ -41,10 +42,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 733 and option == 1) then
         if (player:getFreeSlotsCount() == 0) then
@@ -67,3 +68,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

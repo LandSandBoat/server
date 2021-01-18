@@ -10,15 +10,16 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     if (featherstatus >= 1 and trade:hasItemQty(842, 3) == true and trade:getGil() == 0 and trade:getItemCount() == 3) then
         player:startEvent(79, 1500) -- Quest Turn In
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 --    player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)  -- ================== FOR TESTING ONLY =====================
 --    player:addFame(WINDURST, 200)   -- ================== FOR TESTING ONLY =====================
@@ -92,10 +93,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 printf("RESULT: %u", option)
     if (csid == 48 and option == 1) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
@@ -162,3 +163,5 @@ printf("RESULT: %u", option)
         player:needToZone(true)
     end
 end
+
+return entity

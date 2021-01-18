@@ -7,8 +7,9 @@
 require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.WADING_BEASTS and trade:hasItemQty(4362, 1) and trade:getItemCount() == 1) then -- Trade Lizard Egg
         if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WADING_BEASTS) == false) then
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local FadedPromises = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 0) then
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 372 or csid == 373) then
         finishMissionTimeline(player, 1, csid, option)
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

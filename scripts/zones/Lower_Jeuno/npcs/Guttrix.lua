@@ -9,13 +9,11 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
-
------------------------------------
--- [race] = {body, hands, legs, feet}
------------------------------------
+local entity = {}
 
 local rse_map =
 {
+    -- [race] = {body, hands, legs, feet}
     [tpz.race.HUME_M]   = {12654, 12761, 12871, 13015},
     [tpz.race.HUME_F]   = {12655, 12762, 12872, 13016},
     [tpz.race.ELVAAN_M] = {12656, 12763, 12873, 13017},
@@ -39,10 +37,10 @@ local function hasRSE(player)
     return mask
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(JEUNO)
     local pLevel = player:getMainLvl()
     local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
@@ -67,10 +65,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR)
 
     if csid == 10016 then
@@ -92,3 +90,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

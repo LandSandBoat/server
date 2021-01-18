@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local GuestofHauteur = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)
     local itemEquipped = player:getEquipID(tpz.slot.MAIN)
@@ -25,10 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 57 then
         player:setCharVar("GuestofHauteur_Event", 1)
@@ -37,3 +38,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

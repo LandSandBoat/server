@@ -8,15 +8,16 @@ local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 557) then
         player:setCharVar("QuestYourCrystalBall_prog", 1)
         player:confirmTrade(trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.YOUR_CRYSTAL_BALL) == QUEST_ACCEPTED and player:getCharVar("QuestYourCrystalBall_prog") == 1 then
         player:startEvent(52)
     else
@@ -24,11 +25,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 52 and npcUtil.giveItem(player, 556) then
         player:setCharVar("QuestYourCrystalBall_prog", 0)
     end
 end
+
+return entity

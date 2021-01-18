@@ -9,8 +9,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/bcnm")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if TradeBCNM(player, npc, trade) then
         return
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN);
     -- player:setCharVar("PromathiaStatus",3)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 1) then
@@ -30,11 +31,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 2 then
         player:setCharVar("PromathiaStatus", 2)
     elseif csid == 4 then
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         return
     end
 end
+
+return entity

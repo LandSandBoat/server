@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 3)
 
     if npc:getAnimation() == tpz.anim.CLOSE_DOOR and brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
@@ -16,10 +17,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local brassDoor = GetNPCByID(ID.npc.SECOND_PASSWORD_STATUE - 2)
     local torch1 = GetNPCByID(ID.npc.SECOND_PASSWORD_STATUE + 1)
     local torch2 = GetNPCByID(ID.npc.SECOND_PASSWORD_STATUE + 2)
@@ -30,3 +31,5 @@ function onEventFinish(player, csid, option)
         brassDoor:openDoor(6)
     end
 end
+
+return entity

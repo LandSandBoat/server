@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 3)
     local SkillCap = getCraftSkillCap(player, tpz.skill.CLOTHCRAFT)
     local SkillLevel = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
@@ -28,12 +29,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 10014 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 4, 1)
         player:addStatusEffect(tpz.effect.CLOTHCRAFT_IMAGERY, 1, 0, 120)
     end
 end
+
+return entity

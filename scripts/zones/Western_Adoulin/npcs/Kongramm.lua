@@ -10,11 +10,12 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local SOA_Mission = player:getCurrentMission(SOA)
     local ACSP = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
     local Transporting = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.TRANSPORTING)
@@ -39,10 +40,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 148) then
         -- Gave hint for SOA Mission: 'A Curse From the Past'
         player:setCharVar("SOA_ACFTP_Kongramm", 1)
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ACSP_NPCs_Visited", 4)
     end
 end
+
+return entity

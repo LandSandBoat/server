@@ -7,11 +7,12 @@
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK) then
         if (player:getCharVar("notReceivePickaxe") == 1) then
@@ -51,10 +52,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 423 or csid == 425) then
         if (player:getFreeSlotsCount() == 0) then
@@ -71,3 +72,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

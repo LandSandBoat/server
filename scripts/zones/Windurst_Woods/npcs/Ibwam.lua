@@ -13,6 +13,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 --[[
 Bitmask Designations:
@@ -45,14 +46,14 @@ Port Windurst (West to East)
 80000    (M-6) Yujuju (outside the Air Travel Agency)
 ]]--
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, {{"gil", 300}}) and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(794)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local lureWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
@@ -75,10 +76,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 736 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatWindurst", 0)
@@ -91,3 +92,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
     end
 end
+
+return entity

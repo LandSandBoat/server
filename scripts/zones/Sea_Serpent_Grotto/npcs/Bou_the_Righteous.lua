@@ -4,17 +4,20 @@
 -- Type: Involved in the "Sahagin Key Quest"
 -- !pos -125.029 46.568 -334.778 176
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(108)
     player:setCharVar("SahaginKeyProgress", 2)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

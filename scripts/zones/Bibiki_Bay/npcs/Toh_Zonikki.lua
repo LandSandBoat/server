@@ -7,8 +7,7 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
--- Local Variables
------------------------------------
+local entity = {}
 
 local clammingItems = {
     1311,  -- Oxblood
@@ -43,10 +42,6 @@ local clammingItems = {
     5122   -- Bibiki Slug
 }
 
------------------------------------
--- Local Functions
------------------------------------
-
 local function giveClammedItems(player)
 
     for item = 1, #clammingItems do
@@ -76,10 +71,10 @@ local function owePlayerClammedItems(player)
     return false
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if ( player:hasKeyItem(tpz.ki.CLAMMING_KIT)) then -- Player has clamming kit
 
@@ -98,7 +93,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (csid == 28) then
         local enoughMoney = 2 -- Not enough money
@@ -114,7 +109,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 28) then
         if (option == 1) then -- Give 50pz clamming kit
@@ -147,3 +142,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
     end
 end
+
+return entity

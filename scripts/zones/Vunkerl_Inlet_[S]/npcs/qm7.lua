@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_AVAILABLE and player:getCharVar("BoyAndTheBeast") == 2) then
         player:startEvent(105)
@@ -22,10 +23,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 105) then
         player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST)
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("BoyAndTheBeast", 2)
     end
 end
+
+return entity

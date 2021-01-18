@@ -6,7 +6,11 @@
 -----------------------------------
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.savage_blade, player, ID.mob.GIRTABLULU)
 end
+
+return entity

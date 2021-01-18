@@ -13,7 +13,8 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/keyitems")
-
+-----------------------------------
+local entity = {}
 
 --   player:startEvent(74) -- first quest completed ok
 --   player:startEvent(75) -- nothing to do
@@ -40,7 +41,7 @@ require("scripts/globals/keyitems")
 --   player:startEvent(97)-- sixth quest completed commentary
 --   player:startEvent(98)-- sixth quest completed commentary 2
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)== QUEST_ACCEPTED) then
         local count = trade:getItemCount()
@@ -95,7 +96,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 ------------------------------------ QUEST RYCHARDE_THE_CHEF-----------------------------------------
 if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.RYCHARDE_THE_CHEF)==QUEST_AVAILABLE) then
@@ -186,10 +187,10 @@ end
 end
 
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
 
     if (csid == 70 or csid == 71) then  --accept quest 1
@@ -318,3 +319,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestTheBasicsComentary_var", 0)
     end
 end
+
+return entity

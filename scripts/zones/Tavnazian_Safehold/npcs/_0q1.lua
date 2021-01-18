@@ -6,11 +6,12 @@
 require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_LOST_CITY and player:getCharVar("PromathiaStatus") > 0) then
         player:startEvent(103)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 3) then
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 103) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LOST_CITY)
@@ -38,3 +39,5 @@ function onEventFinish(player, csid, option)
         player:setPos(260.068, 0, -283.568, 190, 27) -- To Phomiuna Aqueducts {R}
     end
 end
+
+return entity

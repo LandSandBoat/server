@@ -4,11 +4,12 @@
 -- Involved in Quests: Under the sea
 -- !pos -15 -2 -16 248
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("underTheSeaVar") == 2 then
         player:startEvent(33) -- During quest "Under the sea" - 2nd dialog
     else
@@ -16,11 +17,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 33 then
         player:setCharVar("underTheSeaVar", 3)
     end
 end
+
+return entity

@@ -8,11 +8,12 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
 --    player:startEvent(79)  -- how the paper works -- under oath
 --    player:startEvent(51)  -- it says what i dont beleive you -- under oath
@@ -39,10 +40,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 542) then
         player:setCharVar("QuestfatherAndSonVar", 1)
     elseif (csid == 50) then
@@ -56,3 +57,5 @@ end
 ------- used in expansions
 --    player:startEvent(946)  -- you want to hear of my father go talk to albieche
 --    player:startEvent(947) -- trainees spectacles
+
+return entity

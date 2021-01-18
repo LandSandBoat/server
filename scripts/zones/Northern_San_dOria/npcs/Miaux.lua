@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local aCraftsmansWork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
@@ -41,10 +42,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 73 and option == 0) then -- first part of long CS -- declines questgiver
         player:setCharVar("has_seen_drgaf1_quest_already", 1)
@@ -110,3 +111,5 @@ end
 -- The king wishes to bolster his ranks, and <Character>... Should fortune favor her, bards across the land...
 -- Of course, she has only begun her rise to glory... Never before has she set foot within the Elvaan Capital...
 -- Rochefogne : "Say, are you an adventurer?"
+
+return entity

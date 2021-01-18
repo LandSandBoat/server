@@ -11,11 +11,13 @@
 -----------------------------------
 local MISAREAUX_COAST = require("scripts/zones/Misareaux_Coast/globals")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     MISAREAUX_COAST.ziphiusOnTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     MISAREAUX_COAST.ziphiusOnTrigger(player, npc)
 end
+return entity

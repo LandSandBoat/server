@@ -3,17 +3,18 @@
 --   NPC: Gatih Mijurabi
 -- Type: Standard NPC
 -- !pos 58.249 -13.086 -49.084 250
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local ID = require("scripts/zones/Kazham/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("BathedInScent") == 1 then
         if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE) == QUEST_AVAILABLE) then
             player:startEvent(191)
@@ -29,10 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 191) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.PERSONAL_HYGIENE)
     elseif (csid == 193) then
@@ -45,3 +46,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

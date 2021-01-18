@@ -14,8 +14,9 @@ local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local TheMissingPiece = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
     local HasAncientFragment = player:hasKeyItem(tpz.ki.ANCIENT_TABLET_FRAGMENT)
     local HasAncientTablet = player:hasKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC)
@@ -46,12 +47,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- print("CSID:", csid)
     -- print("RESULT:", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- print("CSID:", csid)
     -- print("RESULT:", option)
 end
+
+return entity

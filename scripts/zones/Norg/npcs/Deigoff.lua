@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/pathfind")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -68,27 +69,29 @@ local path =
     -17.403625, -0.115268, 24.211039
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
     -- onPath(npc)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(86)
     npc:wait()
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     npc:wait(0)
 end
+
+return entity

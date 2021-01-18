@@ -10,8 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) == QUEST_ACCEPTED and player:getCharVar("ChasingQuotas_Progress") == 0 and
         trade:getItemCount() == 1 and trade:hasItemQty(12494, 1) and trade:getGil() == 0) then -- Trading gold hairpin only
             player:tradeComplete()
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Quotas_Status = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS)
     local Quotas_Progress = player:getCharVar("ChasingQuotas_Progress")
     local Quotas_No = player:getCharVar("ChasingQuotas_No")
@@ -74,10 +75,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 24) then
         player:setCharVar("TheHolyCrest_Event", 1)
@@ -117,3 +118,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("KnightStalker_Option1", 0)
     end
 end
+
+return entity

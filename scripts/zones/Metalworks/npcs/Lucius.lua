@@ -11,6 +11,7 @@ require("scripts/globals/quests");
 require("scripts/globals/missions");
 local ID = require("scripts/zones/Metalworks/IDs");
 -----------------------------------
+local entity = {}
 
 local function TrustMemory(player)
     local memories = 0
@@ -33,7 +34,7 @@ local function TrustMemory(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_2") == 8) then
@@ -47,7 +48,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Rank6 = player:getRank() >= 6 and 1 or 0
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.JEUNO and player:getCharVar("MissionStatus") == 0) then
@@ -60,10 +61,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 322) then
         player:setCharVar("MissionStatus", 1);
         player:addKeyItem(tpz.ki.LETTER_TO_THE_AMBASSADOR);
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

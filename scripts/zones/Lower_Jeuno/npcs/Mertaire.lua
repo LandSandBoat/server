@@ -10,10 +10,11 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
 local POETIC_PARCHMENT = 634
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local theOldMonument = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
     local aMinstrelInDespair = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
 
@@ -23,7 +24,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local theOldMonument = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT)
     local painfulMemory = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY)
     local theRequiem = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM)
@@ -60,10 +61,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- THE OLD MONUMENT
     if csid == 102 then
         player:setCharVar("TheOldMonument_Event", 1)
@@ -95,3 +96,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("circleTime", 1)
     end
 end
+
+return entity

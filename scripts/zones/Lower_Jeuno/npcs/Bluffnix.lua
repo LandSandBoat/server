@@ -11,8 +11,9 @@ require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local count = trade:getItemCount()
     local gil = trade:getGil()
@@ -36,11 +37,11 @@ function onTrade(player, npc, trade)
     end
 end
 
----------------------------------------------
+-----------------------------------
 -- Current Quest, Required Fame and Items
----------------------------------------------
-function gobQuest(player, bagSize)
-    currentQuest = {}
+-----------------------------------
+local function gobQuest(player, bagSize)
+    local currentQuest = {}
     switch (bagSize) : caseof {
         [30] = function (x) currentQuest = {27, 3, 0848, 0652, 0826, 0788}; end, --Gobbiebag I, Dhalmel Leather, Steel Ingot, Linen Cloth, Peridot
         [35] = function (x) currentQuest = {28, 4, 0851, 0653, 0827, 0798}; end, --Gobbiebag II, Ram Leather, Mythril Ingot, Wool Cloth, Turquoise
@@ -56,7 +57,7 @@ function gobQuest(player, bagSize)
     return currentQuest
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
@@ -78,10 +79,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local TheGobbieBag = gobQuest(player, player:getContainerSize(0))
 
@@ -106,3 +107,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 12, true))
     end
 end
+
+return entity

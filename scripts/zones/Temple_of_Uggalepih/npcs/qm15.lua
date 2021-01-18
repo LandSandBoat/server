@@ -13,11 +13,12 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/pets")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         player:getCharVar("KnightStalker_Progress") == 4 and
         player:getCharVar("KnightStalker_Kill") == 0 and
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if
         csid == 67 and
         npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER, {item = 12519, fame = 60, title = tpz.title.PARAGON_OF_DRAGOON_EXCELLENCE, var = {"KnightStalker_Kill", "KnightStalker_Progress"}})
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("KnightStalker_Option2", 1)
     end
 end
+
+return entity

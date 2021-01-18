@@ -9,18 +9,19 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 -----------------------------------
+local entity = {}
 
 local PARCHMENT = 917
 local POETIC_PARCHMENT = 634
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- THE OLD MONUMENT (parchment)
     if player:getCharVar("TheOldMonument_Event") == 3 and trade:hasItemQty(PARCHMENT, 1) and trade:getItemCount() == 1 then
         player:startEvent(2)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- THE OLD MONUMENT
     if player:getCharVar("TheOldMonument_Event") == 2 then
         player:startEvent(0)
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 0 then
         player:setCharVar("TheOldMonument_Event", 3)
     elseif csid == 2 then
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 10)
     end
 end
+
+return entity

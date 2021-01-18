@@ -7,6 +7,7 @@ local ID = require("scripts/zones/North_Gustaberg/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local positions =
 {
@@ -45,17 +46,17 @@ local function moveSirenTear(npc)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(10)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 10 and option == 0 then
         local npc = player:getEventTarget()
 
@@ -71,3 +72,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

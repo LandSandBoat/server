@@ -8,8 +8,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (trade:hasItemQty(13096, 1) and trade:getItemCount() == 1) then
         if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_ACCEPTED) then
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getMainLvl() >= 7 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND) == QUEST_AVAILABLE) then
         player:startEvent(110)
@@ -30,12 +31,12 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 110) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -3,7 +3,7 @@
 -- NPC: Balasiel
 -- Starts and Finishes: A Squire's Test, A Squire's Test II, A Knight's Test, Methods Create Madness
 -- !pos -136 -11 64 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
@@ -12,10 +12,11 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.impulse_drive
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
@@ -28,7 +29,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local lvl = player:getMainLvl()
     local aSquiresTest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
@@ -84,7 +85,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 616) then
         if (option == 0) then
             player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST)
@@ -152,3 +153,5 @@ function onEventFinish(player, csid, option)
 
 end
 --    player:startEvent(32690)     -- starlight celebration
+
+return entity

@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local FOOL = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
     if (FOOL == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.BLIGHTBERRY)) then
@@ -38,10 +39,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 80) then
         if (option == 1) then
             -- Starts Quest: 'Flavors of Our Lives'
@@ -69,3 +70,5 @@ function onEventFinish(player, csid, option)
         player:addFame(ADOULIN)
     end
 end
+
+return entity

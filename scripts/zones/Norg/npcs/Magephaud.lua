@@ -8,8 +8,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     EveryonesGrudge = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
     if (EveryonesGrudge == QUEST_ACCEPTED) then
         if (trade:hasItemQty(748, 3) and trade:getItemCount() == 3) then
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     nFame = player:getFameLevel(NORG)
     if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE) == QUEST_AVAILABLE and player:getCharVar("EVERYONES_GRUDGE_KILLS") >= 1 and nFame >= 2) then
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 116) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.EVERYONES_GRUDGE)
         player:setCharVar("EveryonesGrudgeStarted", 1)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES)
     end
 end
+
+return entity

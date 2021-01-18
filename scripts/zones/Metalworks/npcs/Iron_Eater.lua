@@ -11,6 +11,7 @@ require("scripts/globals/titles")
 require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.steel_cyclone
 
@@ -56,7 +57,7 @@ local TrustMemory = function(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
@@ -64,7 +65,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getCharVar("MissionStatus")
@@ -106,7 +107,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 715 and option == 0) then
         player:setCharVar("MissionStatus", 1)
     elseif (csid == 780) then
@@ -138,3 +139,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.STEEL_CYCLONE_LEARNED)
     end
 end
+
+return entity

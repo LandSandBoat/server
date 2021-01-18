@@ -9,11 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 536) then
         player:setCharVar("MissionStatus", 3)
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
 end
+
+return entity

@@ -7,21 +7,24 @@
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
 local vendorRegion  = tpz.region.ELSHIMOUPLANDS
 local vendorEvent   = 32756
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.conquest.vendorOnTrigger(player, vendorRegion, vendorEvent)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     tpz.conquest.vendorOnEventUpdate(player, vendorRegion)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.conquest.vendorOnEventFinish(player, option, vendorRegion)
 end
+
+return entity

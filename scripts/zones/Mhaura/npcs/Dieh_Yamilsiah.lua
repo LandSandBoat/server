@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/transport")
 -----------------------------------
+local entity = {}
 
 local messages =
 {
@@ -16,7 +17,7 @@ local messages =
     [tpz.transport.trigger.mhaura.FERRY_DEPARTING_TO_SELBINA]  = ID.text.FERRY_DEPARTING
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     -- TODO: NPC needs to rotate after finishing walking.
     npc:addPeriodicTrigger(tpz.transport.trigger.mhaura.FERRY_ARRIVING_FROM_ALZAHBI,
@@ -33,14 +34,14 @@ function onSpawn(npc)
         tpz.transport.offset.mhaura.FERRY_DEPARTING_TO_SELBINA)
 end
 
-function onTimeTrigger(npc, triggerID)
+entity.onTimeTrigger = function(npc, triggerID)
     tpz.transport.dockMessage(npc, triggerID, messages, 'mhaura')
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Each boat comes every 1152 seconds/8 game hours, 4 hour offset between Selbina and Aht Urghan
     -- Original timer: local timer = 1152 - ((os.time() - 1009810584)%1152)
@@ -74,8 +75,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getXPos() > 45) then
         if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and player:getCharVar("PromathiaStatus") == 2) then
@@ -25,13 +26,13 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 6) then
         player:setCharVar("PromathiaStatus", 3)
     elseif (csid == 5) then
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
     end
 end
+
+return entity

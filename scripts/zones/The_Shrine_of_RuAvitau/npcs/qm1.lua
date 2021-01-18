@@ -5,8 +5,10 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(1195, 1) and trade:getItemCount() == 1) then -- Trade Ro'Maeve Water
         for i = ID.mob.OLLAS_OFFSET, ID.mob.OLLAS_OFFSET + 2 do
             if (GetMobByID(i):isSpawned()) then
@@ -19,12 +21,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.SMALL_HOLE_HERE)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

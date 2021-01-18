@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Cotton Pouch
     if (trade:hasItemQty(1779, 1) and trade:getItemCount() == 1) then
         if (player:getFreeSlotsCount() == 0) then
@@ -21,5 +22,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

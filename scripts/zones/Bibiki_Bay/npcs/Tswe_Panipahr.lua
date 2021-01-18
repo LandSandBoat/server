@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local curentticket=0
     if  (player:hasKeyItem(tpz.ki.MANACLIPPER_TICKET)) then
         curentticket=tpz.ki.MANACLIPPER_TICKET
@@ -27,10 +28,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 35) then
         if (option==1) then
             player:delGil(80)
@@ -44,3 +45,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

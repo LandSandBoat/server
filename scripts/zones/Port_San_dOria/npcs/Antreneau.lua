@@ -9,12 +9,13 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     player:startEvent(532) -- What's this?  I don't need this.
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local aTasteForMeat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
     local medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
@@ -56,10 +57,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 725 then
         player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

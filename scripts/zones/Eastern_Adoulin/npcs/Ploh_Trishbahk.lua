@@ -7,11 +7,12 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local meetingOfTheMinds = player:getCurrentMission(SOA) == tpz.mission.id.soa.MEETING_OF_THE_MINDS
     local dinnerTime = VanadielHour() >= 15 and VanadielHour() <= 22
 
@@ -22,10 +23,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1500 then
         player:delKeyItem(tpz.ki.DINNER_INVITATION)
 
@@ -33,3 +34,5 @@ function onEventFinish(player, csid, option)
         player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN)
     end
 end
+
+return entity

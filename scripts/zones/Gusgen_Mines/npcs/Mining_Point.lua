@@ -4,17 +4,20 @@
 -----------------------------------
 require("scripts/globals/helm")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     tpz.helm.onTrade(player, npc, trade, tpz.helm.type.MINING, 11)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.helm.onTrigger(player, tpz.helm.type.MINING)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

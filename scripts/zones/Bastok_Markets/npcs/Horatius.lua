@@ -9,14 +9,15 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BREAKING_STONES) >= QUEST_AVAILABLE and npcUtil.tradeHas(trade, 553)) then
         player:startEvent(101)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
     if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 12)) then
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 100 and option == 0) then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BREAKING_STONES)
     elseif (csid == 101) then
@@ -42,3 +43,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 12, true))
     end
 end
+
+return entity

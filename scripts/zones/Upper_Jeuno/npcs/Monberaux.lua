@@ -13,8 +13,9 @@ require("scripts/globals/shop")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Part1
         if
@@ -43,7 +44,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local TheLostCardien = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
     local CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
     -- COP mission 1-1
@@ -92,10 +93,10 @@ end
 
 --Tenzen     10011
 --Tenzen     10012
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 6) then
         player:setCharVar("COP_Tenzen_s_Path", 5)
     elseif (csid == 74) then
@@ -137,3 +138,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 748) then
         if player:getCharVar("SSG_GoldDoor") == 7 then
             npc:openDoor(5) -- Open the door if a gold beastcoin has been traded after checking the door the required number of times
@@ -15,7 +16,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local X = player:getXPos()
     local Z = player:getZPos()
     local GoldDoorCheck = player:getCharVar("SSG_GoldDoor")
@@ -50,8 +51,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

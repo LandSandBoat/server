@@ -5,8 +5,10 @@
 -----------------------------------
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD) then
         player:setCharVar("ApollyonEntrance", 1)
         TradeBCNM(player, npc, trade)
@@ -15,7 +17,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.BLACK_CARD) then
         player:setCharVar("ApollyonEntrance", 1)
         EventTriggerBCNM(player, npc)
@@ -24,7 +26,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     if EventUpdateBCNM(player, csid, option, extras) then
         local alliance = player:getAlliance()
         for _, member in pairs(alliance) do
@@ -35,8 +37,9 @@ function onEventUpdate(player, csid, option, extras)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if not EventFinishBCNM(player, csid, option) then
         player:setCharVar("ApollyonEntrance", 0)
     end
 end
+return entity

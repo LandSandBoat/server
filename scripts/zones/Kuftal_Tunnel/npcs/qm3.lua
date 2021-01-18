@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.tachi_kasha, player, ID.mob.KETTENKAEFER)
 end
+
+return entity

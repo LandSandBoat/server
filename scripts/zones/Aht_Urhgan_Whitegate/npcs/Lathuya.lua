@@ -9,6 +9,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 local craftingItems = {
     [1] = -- magus bazubands
@@ -34,7 +35,7 @@ local craftingItems = {
     }
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     if remainingBLUAF >= 1 then
         local craftingStage = player:getCharVar("[BLUAF]CraftingStage")
@@ -52,7 +53,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local omensProgress = player:getCharVar("OmensProgress")
     local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
     local transformations = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
@@ -110,7 +111,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
     local totalCraftedPieces = 3 - utils.mask.countBits(remainingBLUAF, 3)
     local AFoffset = 8 * totalCraftedPieces
@@ -137,7 +138,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local omensProgress = player:getCharVar("OmensProgress")
 
     local remainingBLUAF = player:getCharVar("[BLUAF]Remaining") -- Bitmask of AF the player has NOT crafted
@@ -183,3 +184,4 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+return entity

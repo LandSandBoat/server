@@ -11,11 +11,12 @@ require("scripts/globals/npc_util")
 require("scripts/zones/Aht_Urhgan_Whitegate/Shared")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player,npc)
     local noWeapons = player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0
     if player:getCurrentMission(TOAU) == tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
         doRoyalPalaceArmorCheck(player) and noWeapons then
@@ -54,7 +55,7 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if csid == 3140 or csid == 3155 then
         if option == 1 and npcUtil.giveItem(player, 15807) then
             player:setCharVar("TOAU_RINGTIME", os.time())
@@ -73,7 +74,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3078 and npcUtil.giveItem(player, 2186) then
         player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE)
         player:setCharVar("AhtUrganStatus", 0)
@@ -96,3 +97,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end
 end
+
+return entity

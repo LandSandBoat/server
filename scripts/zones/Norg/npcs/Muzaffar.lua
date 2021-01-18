@@ -9,8 +9,9 @@ local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local NorthernFurs = trade:hasItemQty(1199, 4)
     local EasternPottery = trade:hasItemQty(1200, 4)
@@ -29,7 +30,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET) == QUEST_ACCEPTED or player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET) == QUEST_COMPLETED) then
         player:startEvent(16)
     else
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 15 and option == 1) then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BLACK_MARKET)
     elseif (csid == 17) then
@@ -72,3 +73,5 @@ function onEventFinish(player, csid, option)
         player:startEvent(20)
     end
 end
+
+return entity

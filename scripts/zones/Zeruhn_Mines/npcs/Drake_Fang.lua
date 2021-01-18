@@ -7,11 +7,12 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
     local MissionStatus = player:getCharVar("MissionStatus")
 
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 200 then
         player:setCharVar("MissionStatus", 2)
     elseif csid == 202 then
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         player:setPos(23, 0, 4)
     end
 end
+
+return entity

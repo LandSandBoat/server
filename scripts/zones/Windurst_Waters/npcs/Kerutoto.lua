@@ -12,8 +12,9 @@ require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(12521, 1) and count == 1) then
@@ -42,7 +43,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local KerutotoFood = player:getCharVar("Kerutoto_Food_var") -- Variable to track progress of Kerutoto in Food for Thought
     local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
@@ -128,10 +129,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 876) then
         player:setCharVar("COP_Ulmia_s_Path", 4)
     elseif ((csid == 313 and option == 0) or (csid == 314 and option == 0)) then
@@ -222,3 +223,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

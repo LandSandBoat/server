@@ -5,13 +5,17 @@
 -- !pos -182 -15 -19 151
 -----------------------------------
 local CASTLE_OZTROJA = require("scripts/zones/Castle_Oztroja/globals")
+-----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     CASTLE_OZTROJA.handleOnTrigger(npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

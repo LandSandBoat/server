@@ -13,11 +13,12 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 local body_list = {12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595}
 local legs_list = {12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local BrygidReturns = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     local wantsSubligar = player:getCharVar("BrygidWantsSubligar")
 
@@ -43,7 +44,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local BrygidTheStylist = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST)
     local BrygidReturns = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     local head = player:getEquipID(tpz.slot.HEAD)
@@ -104,7 +105,7 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 382) then
         local canEquip = 0
         local hasBody = 0
@@ -118,7 +119,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local wantsSubligar = player:getCharVar("BrygidWantsSubligar")
 
     if (csid == 310 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST) == QUEST_AVAILABLE) then
@@ -149,3 +150,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     end
 end
+
+return entity

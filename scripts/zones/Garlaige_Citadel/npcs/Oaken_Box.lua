@@ -7,14 +7,15 @@
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1094)) then -- Nail Puller
         player:startEvent(14)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCharVar("peaceForTheSpiritCS") == 4 and not player:hasItem(1094) and not GetMobByID(ID.mob.GUARDIAN_STATUE):isSpawned()) then -- Nail Puller
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         SpawnMob(ID.mob.GUARDIAN_STATUE):updateClaim(player)
@@ -23,12 +24,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 14) then
         player:confirmTrade()
         player:setCharVar("peaceForTheSpiritCS", 5)
     end
 end
+
+return entity

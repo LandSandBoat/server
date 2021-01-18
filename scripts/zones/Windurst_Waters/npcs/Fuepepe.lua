@@ -9,8 +9,9 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and player:getCharVar("QuestMakingTheGrade_prog") == 0) then
         if (trade:hasItemQty(544, 1) and trade:getItemCount() == 1 and trade:getGil() == 0) then
             player:startEvent(455) -- Quest Progress: Test Papers Shown and told to deliver them to principal
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local gradestatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
     local prog = player:getCharVar("QuestMakingTheGrade_prog")
@@ -49,10 +50,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 442 and option == 1) then -- Quest Start
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
     elseif (csid == 455) then -- Quest Progress: Test Papers Shown and told to deliver them to principal
@@ -73,3 +74,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ClassReunion_TalkedToFupepe", 1)
     end
 end
+
+return entity

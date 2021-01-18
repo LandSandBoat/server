@@ -12,6 +12,7 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 -- data from http://wiki.ffxiclopedia.org/wiki/Inside_the_Belly
 local fishRewards =
@@ -512,7 +513,7 @@ local function giveReward(player, csid)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local underTheSea    = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNDER_THE_SEA)
     local insideTheBelly = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.INSIDE_THE_BELLY)
 
@@ -539,7 +540,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- TODO: once fishing skill is implemented, replace all these mLvl checks with player:getSkillLevel(tpz.skill.FISHING)
 
     local theRealGift    = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_REAL_GIFT)
@@ -568,10 +569,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- UNDER THE SEA
     if csid == 34 then
         player:setCharVar("underTheSeaVar", 4)
@@ -594,3 +595,5 @@ function onEventFinish(player, csid, option)
         giveReward(player, csid)
     end
 end
+
+return entity

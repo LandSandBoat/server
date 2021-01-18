@@ -7,8 +7,9 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local flyHigh = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
 
     if flyHigh == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {{1690, 2}}) then -- 2x Hippogryph Tailfeather
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SAVAGE or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_SAVAGE) then
         local flyHigh = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
 
@@ -34,10 +35,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 241 then
         player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.FLY_HIGH)
     elseif csid == 243 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.FLY_HIGH, {item = 5265, fame_area = TAVNAZIA}) then -- Mistmelt
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
     end
 end
+
+return entity

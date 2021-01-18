@@ -11,8 +11,9 @@ require("scripts/globals/missions")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getNation() ~= tpz.nation.WINDURST then
         player:startEvent(105) -- for other nation
     else
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     finishMissionTimeline(player, 1, csid, option)
 
     if csid == 121 and option == 1 then
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WWoodsRTenText", 1)
     end
 end
+
+return entity

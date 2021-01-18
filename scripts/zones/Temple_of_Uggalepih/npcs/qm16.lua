@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and player:getCharVar("MissionStatus") >= 1 then
         player:startEvent(68)
     else
@@ -20,11 +21,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 68 then
         npcUtil.giveKeyItem(player, tpz.ki.ANCIENT_VERSE_OF_UGGALEPIH)
     end
 end
+
+return entity

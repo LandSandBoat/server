@@ -8,8 +8,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local CurrentMission = player:getCurrentMission(SANDORIA)
     local OrcishScoutCompleted = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS)
@@ -40,7 +41,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local PresOfPapsqueCompleted = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE)
 
@@ -84,12 +85,12 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdateCSID: %u", csid)
     -- printf("onUpdateOPTION: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinishCSID: %u", csid)
     -- printf("onFinishOPTION: %u", option)
 
@@ -109,3 +110,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

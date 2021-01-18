@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:hasKeyItem(tpz.ki.LETTER_FROM_THE_TENSHODO)) then
         player:startEvent(10021, 0, tpz.ki.LETTER_FROM_THE_TENSHODO) -- During Quest "The Tenshodo Showdown"
@@ -27,10 +28,10 @@ function onTrigger(player, npc)
 end
 
 -- 12  13  9  10  20  217  159  10021  10022
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10021) then
         player:setCharVar("theTenshodoShowdownCS", 2)
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity
