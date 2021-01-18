@@ -1,5 +1,5 @@
 -----------------------------------
--- Energy Drain   
+-- Energy Drain
 -----------------------------------
 local weaponskill_object = {}
 

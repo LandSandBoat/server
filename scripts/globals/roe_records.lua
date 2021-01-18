@@ -13,7 +13,7 @@ function getRoeRecords(triggers)
     return {
 
       -----------------------------------
-      -- Tutorial -> Basics                
+      -- Tutorial -> Basics
       -----------------------------------
 
         [   1] = { -- First Step Forward +
@@ -62,7 +62,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Tutorial -> Intermediate          
+      -- Tutorial -> Intermediate
       -----------------------------------
         --[[ TODO
         [1045] = { -- Achieve Level 99 (gives Kupon A-PK109 x5)
@@ -87,7 +87,7 @@ function getRoeRecords(triggers)
         ]]
 
       -----------------------------------
-      -- Tutorial -> Quests 1              
+      -- Tutorial -> Quests 1
       -----------------------------------
 
         [ 500] = { -- Mog House Exit: San d'Oria
@@ -105,7 +105,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Tutorial -> Level Cap Increase    
+      -- Tutorial -> Level Cap Increase
       -----------------------------------
 
         [ 705] = { -- Level Cap Increase: 55 +
@@ -179,7 +179,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Tutorial -> Storage Expansion     
+      -- Tutorial -> Storage Expansion
       -----------------------------------
 
         [ 715] = { -- Inventory Expansion 35
@@ -1126,7 +1126,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Crafting: General                     
+      -- Crafting: General
       -----------------------------------
 
         [  57] = { -- Total Successful Synthesis Attempts
@@ -1137,7 +1137,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Wide Area) -> Spoils 1        
+      -- Combat (Wide Area) -> Spoils 1
       -----------------------------------
 
         [  71] = { -- Spoils - Fire Crystals
@@ -1333,7 +1333,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Wide Area) -> Spoils 2        
+      -- Combat (Wide Area) -> Spoils 2
       -----------------------------------
 
         [ 120] = { -- Spoils - Bat Wing
@@ -2244,15 +2244,15 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Adoulin 1       
+      -- Combat (Region) - Adoulin 1
       -----------------------------------
 
       -----------------------------------
-      -- Combat (Region) - Adoulin 2       
+      -- Combat (Region) - Adoulin 2
       -----------------------------------
 
       -----------------------------------
-      -- Combat (Region) - Zilart 1        
+      -- Combat (Region) - Zilart 1
       -----------------------------------
 
         [ 390] = { -- Conflict: Sanctuary of Zi'Tah
@@ -2352,7 +2352,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Zilart 2        
+      -- Combat (Region) - Zilart 2
       -----------------------------------
 
         [ 414] = { -- Conflict: Sea Serpent Grotto
@@ -2436,7 +2436,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Promathia 1     
+      -- Combat (Region) - Promathia 1
       -----------------------------------
 
         [ 434] = { -- Conflict: Oldton Movalpolos
@@ -2536,7 +2536,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Promathia 2     
+      -- Combat (Region) - Promathia 2
       -----------------------------------
 
         [ 458] = { -- Conflict: Al'Taieu
@@ -2604,7 +2604,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Aht Urhgan      
+      -- Combat (Region) - Aht Urhgan
       -----------------------------------
 
         [ 533] = { -- Conflict: Bhaflau Thickets
@@ -2680,7 +2680,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Goddess 1       
+      -- Combat (Region) - Goddess 1
       -----------------------------------
 
         [ 553] = { -- Conflict: East Ronfaure [S]
@@ -2781,7 +2781,7 @@ function getRoeRecords(triggers)
 
 
       -----------------------------------
-      -- Combat (Region) - Goddess 2       
+      -- Combat (Region) - Goddess 2
       -----------------------------------
 
         [ 577] = { -- Conflict: West Sarutabaruta [S]
@@ -2865,7 +2865,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Abyssea 1       
+      -- Combat (Region) - Abyssea 1
       -----------------------------------
 
         [ 613] = { -- Conflict: Abyssea - La Theine
@@ -2941,15 +2941,15 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Combat (Region) - Escha 1         
+      -- Combat (Region) - Escha 1
       -----------------------------------
 
       -----------------------------------
-      -- Combat (Region) - Escha 2         
+      -- Combat (Region) - Escha 2
       -----------------------------------
 
       -----------------------------------
-      -- Achievements - Job Levels I       
+      -- Achievements - Job Levels I
       -----------------------------------
 
         [1200] = { -- Level 30 Warrior +
@@ -3121,7 +3121,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Other - Daily Objectives          
+      -- Other - Daily Objectives
       -----------------------------------
 
         [4082] = { -- Vanquish Multiple Enemies (D)
@@ -3149,7 +3149,7 @@ function getRoeRecords(triggers)
 
 
       -----------------------------------
-      -- Timed Records - No Category       
+      -- Timed Records - No Category
       -----------------------------------
 
         [4008] = {   -- Vanquish Aquans

@@ -364,14 +364,14 @@ function tpz.magian.magianOrangeOnEventFinish(player,itemId,csid,option)
 end
 
 -----------------------------------
--- Magian Green 
+-- Magian Green
 -----------------------------------
 
 function magianGreenEventUpdate(player, ItemID, csid, option)
 end
 
 -----------------------------------
--- Magian Blue  
+-- Magian Blue
 -----------------------------------
 
 function magianBlueEventUpdate(player, ItemID, csid, option)

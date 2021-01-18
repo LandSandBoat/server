@@ -7,7 +7,7 @@
 
 tpz = tpz or {}
 tpz.magian = tpz.magian or {}
-local checks = {} 
+local checks = {}
 
 checks.checkMobKill = function(reqs, params)
     return reqs.mobid and params.mob and reqs.mobid[params.mob:getID()] and 1 or 0

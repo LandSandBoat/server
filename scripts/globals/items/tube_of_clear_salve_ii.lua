@@ -17,7 +17,7 @@ end
 
 item_object.onItemUse = function(target)
     local pet = target:getPet()
-    
+
     local effects =
     {
         tpz.effect.PETRIFICATION,

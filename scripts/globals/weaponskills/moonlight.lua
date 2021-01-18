@@ -1,5 +1,5 @@
 -----------------------------------
--- Moonlight    
+-- Moonlight
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")

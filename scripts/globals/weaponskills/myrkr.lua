@@ -1,5 +1,5 @@
 -----------------------------------
--- Myrkr    
+-- Myrkr
 -----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/status")

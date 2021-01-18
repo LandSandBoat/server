@@ -1,5 +1,5 @@
 -----------------------------------
--- Starlight    
+-- Starlight
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
