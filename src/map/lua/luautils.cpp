@@ -230,6 +230,9 @@ namespace luautils
         lua.script_file("./scripts/globals/player.lua");
         roeutils::init();
         lua.script_file("./scripts/globals/roe.lua");
+        lua.script_file("./scripts/globals/gear_sets.lua");
+        lua.script_file("./scripts/globals/battlefield.lua");
+        lua.script_file("./scripts/globals/mobs.lua");
 
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
@@ -379,22 +382,6 @@ namespace luautils
         ShowScript(fmt::format("{}\n", item));
     }
 
-    sol::function loadFunctionFromFile(std::string funcName, std::string fileName)
-    {
-        TracyZoneScoped;
-        TracyZoneString(funcName);
-        TracyZoneString(fileName);
-        TracyReportLuaMemory(lua.lua_state());
-
-        // Erase previous copies of the function, if they're left over from previous calls
-        lua.set(funcName, sol::nil);
-
-        // Run script
-        lua.script_file(fileName);
-
-        return lua.get<sol::function>(funcName);
-    }
-
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)
     {
         TracyZoneScoped;
@@ -531,6 +518,40 @@ namespace luautils
 			// If last entry, insert the result. Otherwise, insert a new empty table.
 			table = table[part].get_or_create<sol::table>(part == parts.back() ? file_result : lua.create_table());
 		}
+    }
+
+    sol::table GetCacheEntryFromFilename(std::string filename)
+    {
+        TracyZoneScoped;
+        TracyZoneString(filename);
+
+        // Handle filename -> path conversion
+        std::filesystem::path    path(filename);
+        std::vector<std::string> parts;
+        for (auto part : path)
+        {
+            part.replace_extension("");
+            parts.emplace_back(part.string());
+        }
+
+        auto it = std::find(parts.begin(), parts.end(), "scripts");
+        if (it == parts.end())
+        {
+            ShowError("luautils::GetCacheEntryFromFilename: Invalid filename: %s\n", filename);
+            return sol::nil;
+        }
+
+        // Now that the list is verified, overwrite it with the same list; without "scripts"
+        parts = std::vector<std::string>(it + 1, parts.end());
+
+        // TODO: This is bad, this could create bad tables that persist...
+        auto table = lua["tpz"].get_or_create<sol::table>();
+        for (auto& part : parts)
+        {
+            table = table[part].get_or_create<sol::table>(part);
+        }
+
+        return table;
     }
     
     void OnEntityLoad(CBaseEntity* PEntity)
@@ -1515,7 +1536,19 @@ namespace luautils
             PChar->m_event.Script = filename;
         }
 
-        auto onRegionLeave = loadFunctionFromFile("onRegionLeave", filename);
+        auto name = (const char*)PChar->loc.zone->GetName();
+
+        sol::function onRegionLeave;
+        if (PChar->PInstance)
+        {
+            auto instance_name = (const char*)PChar->PInstance->GetName();
+            onRegionLeave      = lua["tpz"]["zones"][name]["instance"][instance_name]["onRegionLeave"];
+        }
+        else
+        {
+            onRegionLeave = lua["tpz"]["zones"][name]["Zone"]["onRegionLeave"];
+        }
+
         if (!onRegionLeave.valid())
         {
             return -1;
@@ -1542,7 +1575,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", PChar->loc.zone->GetName(), PNpc->GetName());
+        auto zone     = (const char*)PChar->loc.zone->GetName();
+        auto name     = (const char*)PNpc->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
 
         PChar->m_event.reset();
         PChar->m_event.Target = PNpc;
@@ -1550,7 +1585,7 @@ namespace luautils
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
-        auto onTrigger = loadFunctionFromFile("onTrigger", filename);
+        auto onTrigger = lua["tpz"]["zones"][zone]["npcs"][name]["onTrigger"];
         if (!onTrigger.valid())
         {
             ShowWarning("luautils::onTrigger - No Valid Function for %s in %s\n", PNpc->GetName(), PChar->loc.zone->GetName());
@@ -1689,13 +1724,15 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", PChar->loc.zone->GetName(), PNpc->GetName());
+        auto zone     = (const char*)PChar->loc.zone->GetName();
+        auto name     = (const char*)PNpc->GetName();
+        auto filename = fmt::format("./scripts/zones/{}/npcs/{}.lua", zone, name);
 
         PChar->m_event.reset();
         PChar->m_event.Target = PNpc;
         PChar->m_event.Script = filename;
 
-        auto onTrade = loadFunctionFromFile("onTrade", filename);
+        auto onTrade = lua["tpz"]["zones"][zone]["npcs"][name]["onTrade"];
         if (!onTrade.valid())
         {
             return -1;
@@ -1780,9 +1817,10 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PDefender->loc.zone->GetName(), PDefender->GetName());
+        auto zone = (const char*)PDefender->loc.zone->GetName();
+        auto name = (const char*)PDefender->GetName();
 
-        auto onSpikesDamage = loadFunctionFromFile("onSpikesDamage", filename);
+        auto onSpikesDamage = lua["tpz"]["zones"][zone]["mobs"][name]["onSpikesDamage"];
         if (!onSpikesDamage.valid())
         {
             return -1;
@@ -1886,9 +1924,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+        auto name = (const char*)attachment->getName();
 
-        auto onEquip = loadFunctionFromFile("onEquip", filename);
+        auto onEquip = lua["tpz"]["globals"]["abilities"]["pets"]["attachments"][name]["onEquip"];
         if (!onEquip.valid())
         {
             return -1;
@@ -1909,9 +1947,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+        auto name = (const char*)attachment->getName();
 
-        auto onUnequip = loadFunctionFromFile("onUnequip", filename);
+        auto onUnequip = lua["tpz"]["globals"]["abilities"]["pets"]["attachments"][name]["onUnequip"];
         if (!onUnequip.valid())
         {
             return -1;
@@ -1932,9 +1970,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+        auto name = (const char*)attachment->getName();
 
-        auto onManeuverGain = loadFunctionFromFile("onManeuverGain", filename);
+        auto onManeuverGain = lua["tpz"]["globals"]["abilities"]["pets"]["attachments"][name]["onManeuverGain"];
         if (!onManeuverGain.valid())
         {
             return -1;
@@ -1955,9 +1993,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+        auto name = (const char*)attachment->getName();
 
-        auto onManeuverLose = loadFunctionFromFile("onManeuverLose", filename);
+        auto onManeuverLose = lua["tpz"]["globals"]["abilities"]["pets"]["attachments"][name]["onManeuverLose"];
         if (!onManeuverLose.valid())
         {
             return -1;
@@ -1978,9 +2016,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/attachments/{}.lua", attachment->getName());
+        auto name = (const char*)attachment->getName();
 
-        auto onUpdate = loadFunctionFromFile("onUpdate", filename);
+        auto onUpdate = lua["tpz"]["globals"]["abilities"]["pets"]["attachments"][name]["onUpdate"];
         if (!onUpdate.valid())
         {
             return -1;
@@ -2058,9 +2096,8 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = "./scripts/globals/gear_sets.lua";
-
-        auto checkForGearSet = loadFunctionFromFile("checkForGearSet", filename);
+        // TODO: This shouldn't be global, attach to tpz.gear_sets or similar
+        auto checkForGearSet = lua["checkForGearSet"];
         if (!checkForGearSet.valid())
         {
             return 56;
@@ -2140,7 +2177,7 @@ namespace luautils
             return {};
         }
 
-        sol::function onMonsterMagicPrepare = getEntityCachedFunction(PCaster, "onMagionMonsterMagicPreparecHit");
+        sol::function onMonsterMagicPrepare = getEntityCachedFunction(PCaster, "onMonsterMagicPrepare");
         if (!onMonsterMagicPrepare.valid())
         {
             return {};
@@ -2304,7 +2341,9 @@ namespace luautils
 
         // get the function "applyMixins"
         // Will be found through requires in globals/mixins
-        auto applyMixins = loadFunctionFromFile("applyMixins", filename);
+        lua.set("applyMixins", sol::nil);
+        lua.script_file(filename);
+        auto applyMixins = lua.get<sol::function>("applyMixins");
         if (!applyMixins.valid())
         {
             return -1;
@@ -2367,10 +2406,10 @@ namespace luautils
             return -1;
         }
 
-        std::string filename = "./scripts/globals/battlefield.lua";
-        int32       MaxAreas = 3;
+        int32 MaxAreas = 3;
 
-        auto onBattlefieldHandlerInitialise = loadFunctionFromFile("onBattlefieldHandlerInitialise", filename);
+        // TODO: This is loaded globally, fix this
+        auto onBattlefieldHandlerInitialise = lua["onBattlefieldHandlerInitialise"];
         if (!onBattlefieldHandlerInitialise.valid())
         {
             return MaxAreas;
@@ -2386,7 +2425,7 @@ namespace luautils
             return MaxAreas;
         }
 
-        return result.return_count() ? result.get<int32>() : 0;
+        return result.return_count() ? result.get<int32>() : MaxAreas;
     }
 
     int32 OnBattlefieldInitialise(CBattlefield* PBattlefield)
@@ -2398,9 +2437,14 @@ namespace luautils
             return -1;
         }
 
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PBattlefield->GetZone()->GetName(), PBattlefield->GetName());
+        auto zone = (const char*)PBattlefield->GetZone()->GetName();
+        auto name = PBattlefield->GetName();
 
-        auto onBattlefieldInitialise = loadFunctionFromFile("onBattlefieldInitialise", filename);
+        // TODO: This will happen more often than needed, but not so often that it's a performance concern
+        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", zone, name);
+        CacheLuaObjectFromFile(filename);
+
+        auto onBattlefieldInitialise = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldInitialise"];
         if (!onBattlefieldInitialise.valid())
         {
             return -1;
@@ -2426,12 +2470,13 @@ namespace luautils
             return -1;
         }
 
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PBattlefield->GetZone()->GetName(), PBattlefield->GetName());
+        auto zone = (const char*)PBattlefield->GetZone()->GetName();
+        auto name = PBattlefield->GetName();
 
-        auto onBattlefieldTick = loadFunctionFromFile("onBattlefieldTick", filename);
+        auto onBattlefieldTick = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldTick"];
         if (!onBattlefieldTick.valid())
         {
-            ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s\n", filename);
+            ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s\n", name);
             return -1;
         }
 
@@ -2456,9 +2501,10 @@ namespace luautils
             return -1;
         }
 
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PBattlefield->GetZone()->GetName(), PBattlefield->GetName());
+        auto zone = (const char*)PBattlefield->GetZone()->GetName();
+        auto name = PBattlefield->GetName();
 
-        auto onBattlefieldStatusChange = loadFunctionFromFile("onBattlefieldStatusChange", filename);
+        auto onBattlefieldStatusChange = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldStatusChange"];
         if (!onBattlefieldStatusChange.valid())
         {
             return -1;
@@ -2679,7 +2725,8 @@ namespace luautils
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
         if (PChar && PMob->objtype == TYPE_MOB)
         {
-            auto onMobDeathEx = loadFunctionFromFile("onMobDeathEx", "./scripts/globals/mobs.lua");
+            // TODO: Don't save this globally
+            auto onMobDeathEx = lua["onMobDeathEx"];
             if (!onMobDeathEx.valid())
             {
                 return -1;
@@ -3049,9 +3096,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/mobskills/{}.lua", PMobSkill->getName());
+        auto name = (const char*)PMobSkill->getName();
 
-        auto onMobSkillCheck = loadFunctionFromFile("onMobSkillCheck", filename);
+        auto onMobSkillCheck = lua["tpz"]["globals"]["mobskills"][name]["onMobSkillCheck"];
         if (!onMobSkillCheck.valid())
         {
             return 1;
@@ -3072,9 +3119,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PMobSkill->getName());
+        auto name = (const char*)PMobSkill->getName();
 
-        auto onMobSkillCheck = loadFunctionFromFile("onMobSkillCheck", filename);
+        auto onMobSkillCheck = lua["tpz"]["globals"]["abilities"]["pets"][name]["onMobSkillCheck"];
         if (!onMobSkillCheck.valid())
         {
             return 1;
@@ -3402,12 +3449,12 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto onInstanceCreated = loadFunctionFromFile("onInstanceCreated", PChar->m_event.Script);
+        auto onInstanceCreated = GetCacheEntryFromFilename(PChar->m_event.Script)["onInstanceCreated"];
         if (!onInstanceCreated.valid())
         {
             // If you can't load from PChar->m_event.Script, try from the zone
             auto filename     = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-            onInstanceCreated = loadFunctionFromFile("onInstanceCreated", filename);
+            onInstanceCreated = GetCacheEntryFromFilename(filename)["onInstanceCreated"];
             if (!onInstanceCreated.valid())
             {
                 ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
@@ -3663,9 +3710,10 @@ namespace luautils
 
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
+        auto zone = (const char*)PZone->GetName();
+        auto name = PBattlefield->GetName();
 
-        auto onBattlefieldEnter = loadFunctionFromFile("onBattlefieldEnter", filename);
+        auto onBattlefieldEnter = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldEnter"];
         if (!onBattlefieldEnter.valid())
         {
             return;
@@ -3697,7 +3745,10 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
 
-        auto onBattlefieldLeave = loadFunctionFromFile("onBattlefieldLeave", filename);
+        auto zone = (const char*)PZone->GetName();
+        auto name = PBattlefield->GetName();
+
+        auto onBattlefieldLeave = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldLeave"];
         if (!onBattlefieldLeave.valid())
         {
             return;
@@ -3728,9 +3779,10 @@ namespace luautils
 
         CZone* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PZone->GetName(), PBattlefield->GetName());
+        auto zone = (const char*)PZone->GetName();
+        auto name = PBattlefield->GetName();
 
-        auto onBattlefieldRegister = loadFunctionFromFile("onBattlefieldRegister", filename);
+        auto onBattlefieldRegister = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldRegister"];
         if (!onBattlefieldRegister.valid())
         {
             return;
@@ -3751,9 +3803,10 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto filename = fmt::format("./scripts/zones/{}/bcnms/{}.lua", PBattlefield->GetZone()->GetName(), PBattlefield->GetName());
+        auto zone = (const char*)PBattlefield->GetZone()->GetName();
+        auto name = PBattlefield->GetName();
 
-        auto onBattlefieldDestroy = loadFunctionFromFile("onBattlefieldDestroy", filename);
+        auto onBattlefieldDestroy = lua["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldDestroy"];
         if (!onBattlefieldDestroy.valid())
         {
             return;
@@ -4053,7 +4106,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto funcFromChar = loadFunctionFromFile(functionName, PChar->m_event.Script);
+        auto funcFromChar = GetCacheEntryFromFilename(PChar->m_event.Script)[functionName];
         if (funcFromChar.valid())
         {
             return funcFromChar;
@@ -4063,7 +4116,7 @@ namespace luautils
         {
             auto instance_filename = fmt::format("./scripts/zones/{}/instances/{}", PChar->loc.zone->GetName(), PChar->PInstance->GetName());
 
-            auto funcFromInstance = loadFunctionFromFile(functionName, instance_filename);
+            auto funcFromInstance = GetCacheEntryFromFilename(instance_filename)[functionName];
             if (funcFromInstance.valid())
             {
                 return funcFromInstance;
@@ -4072,7 +4125,7 @@ namespace luautils
 
         auto zone_filename = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
 
-        auto funcFromZone = loadFunctionFromFile(functionName, zone_filename);
+        auto funcFromZone = GetCacheEntryFromFilename(zone_filename)[functionName];
         if (funcFromZone.valid())
         {
             return funcFromZone;

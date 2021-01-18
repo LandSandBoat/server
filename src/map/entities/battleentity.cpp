@@ -553,7 +553,8 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
 {
     PLastAttacker = attacker;
     this->BattleHistory.lastHitTaken_atkType = attackType;
-    PAI->EventHandler.triggerListener("TAKE_DAMAGE", CLuaBaseEntity(this), amount, CLuaBaseEntity(attacker), (uint16)attackType, (uint16)damageType);
+    std::optional<CLuaBaseEntity> optAttacker = attacker ? std::optional<CLuaBaseEntity>(CLuaBaseEntity(attacker)) : std::nullopt;
+    PAI->EventHandler.triggerListener("TAKE_DAMAGE", CLuaBaseEntity(this), amount, optAttacker, (uint16)attackType, (uint16)damageType);
 
     // RoE Damage Taken Trigger
     if (this->objtype == TYPE_PC)

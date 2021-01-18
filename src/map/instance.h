@@ -80,6 +80,7 @@ private:
     uint8               m_instanceid{ 0 };
     uint16              m_entrance{ 0 };
     string_t            m_instanceName;
+    CZone*              m_zone;
     uint32              m_commander{ 0 };
     uint8               m_levelcap{ 0 };
     duration            m_timeLimit{ duration::zero() };

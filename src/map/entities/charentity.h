@@ -55,10 +55,10 @@ struct event_t
     int32 EventID;
     int32 Option;  // dummy return result
 
-    CBaseEntity* Target; // инициатор события
+    CBaseEntity* Target; // event initiator
 
-    string_t Script;   // путь к файлу, отвечающему за обработку события
-    string_t Function; // не используется
+    // TODO: Change this to something more descriptive
+    string_t Script; // path to the file responsible for handling the event
 
     void reset()
     {
@@ -66,7 +66,6 @@ struct event_t
         Option  = 0;
         Target  = 0;
         Script.clear();
-        Function.clear();
     }
 };
 
