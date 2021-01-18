@@ -10,7 +10,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if 
+    if
         player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
         player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 1 and
         npcUtil.tradeHas(trade, 1683)

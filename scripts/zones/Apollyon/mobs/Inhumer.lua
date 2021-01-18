@@ -10,42 +10,42 @@ local entity = {}
 local flags = tpz.path.flag.WALLHACK
 local path =
 {
-    [1] = 
+    [1] =
     {
         {391.345, 0.000, -362.357},
         {409.661, -0.500, -372.819}
     },
-    [2] = 
+    [2] =
     {
         {334.872, 0.000, -336.313},
         {341.842, -0.764, -319.744}
     },
-    [3] = 
+    [3] =
     {
         {362.613, 0.000, -276.235},
         {344.407, -1.398, -280.625}
     },
-    [4] = 
+    [4] =
     {
         {327.796, 0.000, -320.106},
         {336.038, -1.286, -310.834}
     },
-    [5] = 
+    [5] =
     {
         {326.597, 0.000, -313.956},
         {322.230, -0.493, -328.462}
     },
-    [6] = 
+    [6] =
     {
         {363.584, 0.000, -300.336},
         {348.563, -1.110, -312.928}
     },
-    [7] = 
+    [7] =
     {
         {331.868, 0.000, -337.062},
         {330.350, -0.481, -323.224}
     },
-    [8] = 
+    [8] =
     {
         {340.493, -0.879, -309.115},
         {339.728, -0.582, -320.195}
@@ -103,7 +103,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+1):setStatus(tpz.status.NORMAL)
         elseif killCount == 8 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setStatus(tpz.status.NORMAL)        
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setStatus(tpz.status.NORMAL)
         end
     end
 end

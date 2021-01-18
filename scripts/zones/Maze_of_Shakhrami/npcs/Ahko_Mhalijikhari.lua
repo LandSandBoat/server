@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(64) -- Remove ointment option
         end
     elseif player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) then
-            player:startEvent(65) -- After receiving KI, Ahko sends the player to Lumomo     
+            player:startEvent(65) -- After receiving KI, Ahko sends the player to Lumomo
     else
         player:startEvent(61) -- Default dialogue
     end

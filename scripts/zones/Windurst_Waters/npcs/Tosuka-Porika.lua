@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(tpz.ki.OPTISTERY_RING)
     then
         player:startEvent(801, 0, tpz.ki.OPTISTERY_RING)
-        
+
     -- The Road Forks (CoP 3-3)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
         player:startEvent(875)

@@ -1,4 +1,4 @@
-----------------------------------------
+-----------------------------------
 -- Area: Misareaux Coast
 --   NM: Upyri
 -- NOTES/TO DO: Tends to use weapon skills twice in a row during night time, based on retail testing.

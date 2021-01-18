@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(11) -- a harsh road lies before you
         end
 
-    -- ASSAULT --
+    -- ASSAULT
     elseif (toauMission >= tpz.mission.id.toau.PRESIDENT_SALAHEEM) then
         local IPpoint = player:getCurrency("imperial_standing")
         if (player:hasKeyItem(tpz.ki.ILRUSI_ASSAULT_ORDERS) and player:hasKeyItem(tpz.ki.ASSAULT_ARMBAND) == false) then
@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(tpz.ki.BRAND_OF_THE_SPRINGSERPENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRAND_OF_THE_SPRINGSERPENT)
 
-    -- ASSAULT --
+    -- ASSAULT
     elseif (csid == 223 and option == 1) then
         player:delCurrency("imperial_standing", 50)
         player:addKeyItem(tpz.ki.ASSAULT_ARMBAND)

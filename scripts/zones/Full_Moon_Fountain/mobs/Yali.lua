@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: Full Moon Fountain
 --  Mob: Yali
 -- Windurst Mission 9-2
-----------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 -----------------------------------

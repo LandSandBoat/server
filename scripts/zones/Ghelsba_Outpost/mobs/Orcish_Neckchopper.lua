@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: Ghelsba Outpost (140)
 --  Mob: Orcish Neckchopper
 -- Note: PH for Thousandarm Deshglesh
-----------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
 require("scripts/globals/mobs")
 -----------------------------------

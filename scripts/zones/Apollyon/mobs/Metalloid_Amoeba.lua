@@ -28,7 +28,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setStatus(tpz.status.NORMAL)
         elseif killCount == 8 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setStatus(tpz.status.NORMAL)        
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setStatus(tpz.status.NORMAL)
         end
     end
 end

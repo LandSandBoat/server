@@ -44,11 +44,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(410)
     elseif (chasingStatus == QUEST_COMPLETED and player:needToZone() == true) then
         player:startEvent(411)
-    -----------------------------------------------------------------
+    -----------------------------------
     -- Class Reunion
     elseif (ClassReunion == 1 and ClassReunionProgress >= 3 and talk2 ~= 1) then
         player:startEvent(816) -- he tells you about Uran-Mafran
-    -----------------------------------------------------------------
+    -----------------------------------
     else
         player:startEvent(371)
     end

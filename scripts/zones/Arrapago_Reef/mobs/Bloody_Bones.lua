@@ -1,9 +1,9 @@
-------------------------------
+-----------------------------------
 -- Area: Arrapago Reef
 --   NM: Bloody Bones
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)

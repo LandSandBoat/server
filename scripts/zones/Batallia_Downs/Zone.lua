@@ -22,7 +22,7 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local y = npc:getYPos()
     local z = npc:getZPos()
     local distance = 7
-    zone:registerRegion(zoneID, 
+    zone:registerRegion(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end

@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(53) -- Remove ointment option
         end
     elseif player:hasKeyItem(tpz.ki.INDIGESTED_STALAGMITE) then
-        player:startEvent(54) -- After receiving KI, Rojaireaut sends the player to Norejaie     
+        player:startEvent(54) -- After receiving KI, Rojaireaut sends the player to Norejaie
     else
         player:startEvent(50) -- Default dialogue
     end

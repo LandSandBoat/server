@@ -76,7 +76,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    
+
     -- "Crying over Onions"
     if csid == 774 then
         player:setCharVar("CryingOverOnions", 1)

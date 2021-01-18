@@ -1,8 +1,8 @@
-----------------------------------------
+-----------------------------------
 -- Area: East Sarutabaruta
 --  Mob: Savanna Rarab
 -- Note: PH for Sharp Eared Ropipi
-----------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/East_Sarutabaruta/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")

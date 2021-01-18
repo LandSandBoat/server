@@ -36,7 +36,7 @@ end
 
 zone_object.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
-    
+
     -- Make Ro'Maeve come to life between 6pm and 6am during a full moon
     if IsMoonFull() and (vanadielHour >= 18 or vanadielHour < 6) then
         local moongate1 = GetNPCByID(ID.npc.MOONGATE_OFFSET)
