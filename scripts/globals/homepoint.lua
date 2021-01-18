@@ -1,6 +1,6 @@
 require("scripts/globals/settings")
 require("scripts/globals/teleports")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.homepoint = tpz.homepoint or {}

@@ -515,7 +515,7 @@ end
 
 -----------------------------------
 -- UpdateNPCSpawnPoint
-----------------------------------
+-----------------------------------
 
 function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     local npc = GetNPCByID(id)

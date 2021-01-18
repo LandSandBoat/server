@@ -41,9 +41,9 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     tpz.magian.checkMagianTrial(player, {['mob'] = mob, ['triggerWs'] = false})
 end
 
--------------------------------------------------
+-----------------------------------
 -- placeholder / lottery NMs
--------------------------------------------------
+-----------------------------------
 
 -- is a lottery NM already spawned or primed to pop?
 local function lotteryPrimed(phList)
@@ -103,9 +103,9 @@ tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     return false
 end
 
--------------------------------------------------
+-----------------------------------
 -- mob additional melee effects
--------------------------------------------------
+-----------------------------------
 
 tpz.mob.additionalEffect =
 {

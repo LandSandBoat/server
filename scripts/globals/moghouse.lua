@@ -8,9 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
-------------------------------------
+-----------------------------------
 -- Mog Locker constants
-------------------------------------
+-----------------------------------
 MOGLOCKER_START_TS = 1009810800 -- unix timestamp for 2001/12/31 15:00
 MOGLOCKER_ALZAHBI_VALID_DAYS = 7
 MOGLOCKER_ALLAREAS_VALID_DAYS = 5

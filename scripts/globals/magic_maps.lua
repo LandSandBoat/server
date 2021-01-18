@@ -1,8 +1,8 @@
----------------------------------------------
+-----------------------------------
 --
 --    Function that all map NPCS use.
 --    SE updated the map NPCs to sell maps from the normal areas, RoZ, and CoP areas (Update was in Nov 5, 2013)
----------------------------------------------
+-----------------------------------
 
 require("scripts/globals/keyitems")
 

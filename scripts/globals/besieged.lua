@@ -59,9 +59,9 @@ tpz.besieged.onEventFinish = function(player, csid, option)
     end
 end
 
------------------------------------------------------------------
+-----------------------------------
 -- Variable for addTeleport and getRegionPoint
------------------------------------------------------------------
+-----------------------------------
 LEUJAOAM_ASSAULT_POINT = 0
 MAMOOL_ASSAULT_POINT = 1
 LEBROS_ASSAULT_POINT = 2
@@ -135,7 +135,7 @@ function getMapBitmask(player)
     return bit.bor(mamook, halvung, arrapago, astral)
 end
 
------------------------------------------------------------------------------------
+-----------------------------------
 -- function getSanctionDuration(player) returns the duration of the sanction effect
 -- in seconds. Duration is known to go up with mercenary rank but data published on
 -- ffxi wiki (http://wiki.ffxiclopedia.org/wiki/Sanction) is unclear and even
@@ -144,7 +144,7 @@ end
 -- page says it's 3-6 hours with th AC.)
 --
 -- I decided to use the formula duration (with AC) = 3 hours + (mercenary rank - 1) * 20 minutes.
------------------------------------------------------------------------------------
+-----------------------------------
 function getSanctionDuration(player)
     local duration = 10800 + 1200 * (tpz.besieged.getMercenaryRank(player) - 1)
 
@@ -155,14 +155,14 @@ function getSanctionDuration(player)
     return duration
 end
 
------------------------------------------------------------------------------------
+-----------------------------------
 -- function getImperialDefenseStats() returns:
 -- *how many successive times Al Zahbi has been defended
 -- *Imperial Defense Value
 -- *Total number of imperial victories
 -- *Total number of beastmen victories.
 -- hardcoded constants for now until we have a Besieged system.
------------------------------------------------------------------------------------
+-----------------------------------
 function getImperialDefenseStats()
     local successiveWins = 0
     local defenseBonus = 0
@@ -171,10 +171,10 @@ function getImperialDefenseStats()
     return { successiveWins, defenseBonus, imperialWins, beastmanWins }
 end
 
-------------------------------------------------------------------------------
+-----------------------------------
 -- function getISPItem(i) returns the item ID and cost of the imperial standing
 -- points item indexed by i (the same value  as that used by the vendor event.)
--------------------------------------------------------------------------------
+-----------------------------------
 function getISPItem(i)
     local IS_item =
     {

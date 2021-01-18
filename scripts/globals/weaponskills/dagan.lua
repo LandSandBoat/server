@@ -1,5 +1,5 @@
 -----------------------------------
---    Dagan     --
+-- Dagan    
 -- Description: Restores HP and MP. Amount restored varies with TP. Gambanteinn: Aftermath.
 -- Acquired permanently by completing the appropriate Walk of Echoes Weapon Skill Trials.
 -- Can also be used by equipping Gambanteinn (85), Gambanteinn (90), Canne de Combat +1 or Canne de Combat +2.

@@ -1,20 +1,20 @@
-------------------------------------
+-----------------------------------
 -- Records of Eminence
-------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/common")
 require("scripts/globals/quests")
 require("scripts/globals/status")
-------------------------------------
+-----------------------------------
 
 
 function getRoeRecords(triggers)
     return {
 
-      ----------------------------------------
-      -- Tutorial -> Basics                 --
-      ----------------------------------------
+      -----------------------------------
+      -- Tutorial -> Basics                
+      -----------------------------------
 
         [   1] = { -- First Step Forward +
             reward =  { item = { {4376,6} }, keyItem = tpz.ki.MEMORANDOLL, sparks = 100, xp = 300 }
@@ -61,9 +61,9 @@ function getRoeRecords(triggers)
             reward =  { sparks = 100, xp = 500 }
         },
 
-      ----------------------------------------
-      -- Tutorial -> Intermediate           --
-      ----------------------------------------
+      -----------------------------------
+      -- Tutorial -> Intermediate          
+      -----------------------------------
         --[[ TODO
         [1045] = { -- Achieve Level 99 (gives Kupon A-PK109 x5)
             reward =  { sparks = 200, xp = 300, item = { 8733, 5 } }
@@ -86,9 +86,9 @@ function getRoeRecords(triggers)
         },
         ]]
 
-      ----------------------------------------
-      -- Tutorial -> Quests 1               --
-      ----------------------------------------
+      -----------------------------------
+      -- Tutorial -> Quests 1              
+      -----------------------------------
 
         [ 500] = { -- Mog House Exit: San d'Oria
             trigger = triggers.questComplete,
@@ -104,9 +104,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
-      ----------------------------------------
-      -- Tutorial -> Level Cap Increase     --
-      ----------------------------------------
+      -----------------------------------
+      -- Tutorial -> Level Cap Increase    
+      -----------------------------------
 
         [ 705] = { -- Level Cap Increase: 55 +
             trigger = triggers.questComplete,
@@ -178,9 +178,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
-      ----------------------------------------
-      -- Tutorial -> Storage Expansion      --
-      ----------------------------------------
+      -----------------------------------
+      -- Tutorial -> Storage Expansion     
+      -----------------------------------
 
         [ 715] = { -- Inventory Expansion 35
             trigger = triggers.questComplete,
@@ -252,9 +252,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
-      ---------------------------------------
-      -- Tutorial -> Missions (San d'Oria) --
-      ---------------------------------------
+      -----------------------------------
+      -- Tutorial -> Missions (San d'Oria)
+      -----------------------------------
 
         [1313] = { -- San d'Oria Rank 1-1
             trigger = triggers.missionComplete,
@@ -397,7 +397,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Tutorial -> Missions (Bastok) --
+      -- Tutorial -> Missions (Bastok)
       -----------------------------------
 
         [1333] = { -- Bastok Rank 1-1
@@ -540,9 +540,9 @@ function getRoeRecords(triggers)
             reward = { item = { {4101,12} }, sparks = 300, xp = 500 },
         },
 
-      -------------------------------------
-      -- Tutorial -> Missions (Windurst) --
-      -------------------------------------
+      -----------------------------------
+      -- Tutorial -> Missions (Windurst)
+      -----------------------------------
 
       [1353] = { -- Windurst Rank 1-1 +
           trigger = triggers.missionComplete,
@@ -686,9 +686,9 @@ function getRoeRecords(triggers)
           reward = { item = { {4099,12} }, sparks = 300, xp = 500 },
       },
 
-      ----------------------------------------------------
-      -- Tutorial -> Missions (Rhapsodies of Vana'diel) --
-      ----------------------------------------------------
+      -----------------------------------
+      -- Tutorial -> Missions (Rhapsodies of Vana'diel)
+      -----------------------------------
 
       [1373] = { -- Rhapsodies of Vana'diel 1-1 +
           trigger = triggers.missionComplete,
@@ -719,7 +719,7 @@ function getRoeRecords(triggers)
       },
 
       -----------------------------------
-      -- Tutorial -> Missions (Zilart) --
+      -- Tutorial -> Missions (Zilart)
       -----------------------------------
 
       [1377] = { -- Zilart Mission 1 +
@@ -834,9 +834,9 @@ function getRoeRecords(triggers)
           reward = { sparks = 300, xp = 500 },
       },
 
-      ------------------------------------------------
-      -- Tutorial -> Missions (Chains of Promathia) --
-      ------------------------------------------------
+      -----------------------------------
+      -- Tutorial -> Missions (Chains of Promathia)
+      -----------------------------------
 
       [1393] = { -- Chains of Promathia Chapter 1 +
           trigger = triggers.missionComplete,
@@ -859,15 +859,15 @@ function getRoeRecords(triggers)
           reward = { sparks = 300, xp = 500 },
       },
 
-      ----------------------------------------------------
-      -- Tutorial -> Missions (Treasures of Aht Urhgan) --
-      ----------------------------------------------------
+      -----------------------------------
+      -- Tutorial -> Missions (Treasures of Aht Urhgan)
+      -----------------------------------
 
     -- start 1410
 
-      --------------------------------------------
-      -- Combat (Wide Area) -> Combat (General) --
-      --------------------------------------------
+      -----------------------------------
+      -- Combat (Wide Area) -> Combat (General)
+      -----------------------------------
 
         [  12] = { -- Vanquish Multiple Enemies I - 200
             trigger = triggers.mobKill,
@@ -1125,9 +1125,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 3000, xp = 7000, item = { 6183 } },
         },
 
-      --------------------------------------------
-      -- Crafting: General                      --
-      --------------------------------------------
+      -----------------------------------
+      -- Crafting: General                     
+      -----------------------------------
 
         [  57] = { -- Total Successful Synthesis Attempts
             trigger = triggers.synthSuccess,
@@ -1136,9 +1136,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, unity = 10 },
         },
 
-      --------------------------------------------
-      -- Combat (Wide Area) -> Spoils 1         --
-      --------------------------------------------
+      -----------------------------------
+      -- Combat (Wide Area) -> Spoils 1        
+      -----------------------------------
 
         [  71] = { -- Spoils - Fire Crystals
             trigger = triggers.itemLooted,
@@ -1332,9 +1332,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 200, xp = 1000, unity = 20 },
         },
 
-      --------------------------------------------
-      -- Combat (Wide Area) -> Spoils 2         --
-      --------------------------------------------
+      -----------------------------------
+      -- Combat (Wide Area) -> Spoils 2        
+      -----------------------------------
 
         [ 120] = { -- Spoils - Bat Wing
             trigger = triggers.itemLooted,
@@ -1552,9 +1552,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300, unity = 10 },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Original Areas 1 --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Original Areas 1
+      -----------------------------------
 
         [ 215] = { -- Conflict: West Ronfaure
             trigger = triggers.mobKill,
@@ -1725,9 +1725,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 500, xp = 1000 },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Original Areas 2 --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Original Areas 2
+      -----------------------------------
 
         [ 239] = { -- Conflict: Jugner Forest
             trigger = triggers.mobKill,
@@ -1905,9 +1905,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 250, xp = 700 },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Original Areas 3 --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Original Areas 3
+      -----------------------------------
 
         [ 264] = { -- Conflict: West Sarutabaruta
             trigger = triggers.mobKill,
@@ -2091,9 +2091,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 250, xp = 800 },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Original Areas 4 --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Original Areas 4
+      -----------------------------------
 
         [ 290] = { -- Conflict: Beaucedine Glacier
             trigger = triggers.mobKill,
@@ -2243,17 +2243,17 @@ function getRoeRecords(triggers)
             reward = { sparks = 14, xp = 100, unity = 5, item = { {4398, 12} } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Adoulin 1        --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Adoulin 1       
+      -----------------------------------
 
-      ----------------------------------------
-      -- Combat (Region) - Adoulin 2        --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Adoulin 2       
+      -----------------------------------
 
-      ----------------------------------------
-      -- Combat (Region) - Zilart 1         --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Zilart 1        
+      -----------------------------------
 
         [ 390] = { -- Conflict: Sanctuary of Zi'Tah
             trigger = triggers.mobKill,
@@ -2351,9 +2351,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 13, xp = 650, unity = 5, item = { 13125 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Zilart 2         --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Zilart 2        
+      -----------------------------------
 
         [ 414] = { -- Conflict: Sea Serpent Grotto
             trigger = triggers.mobKill,
@@ -2435,9 +2435,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 12, xp = 600, unity = 5, item = { 13347 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Promathia 1      --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Promathia 1     
+      -----------------------------------
 
         [ 434] = { -- Conflict: Oldton Movalpolos
             trigger = triggers.mobKill,
@@ -2535,9 +2535,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 14, xp = 700, unity = 5, item = { 13486 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Promathia 2      --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Promathia 2     
+      -----------------------------------
 
         [ 458] = { -- Conflict: Al'Taieu
             trigger = triggers.mobKill,
@@ -2603,9 +2603,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 16, xp = 800, unity = 5, item = { 13591 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Aht Urhgan       --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Aht Urhgan      
+      -----------------------------------
 
         [ 533] = { -- Conflict: Bhaflau Thickets
             trigger = triggers.mobKill,
@@ -2679,9 +2679,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 70, xp = 850, unity = 7, item = { 13587 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Goddess 1        --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Goddess 1       
+      -----------------------------------
 
         [ 553] = { -- Conflict: East Ronfaure [S]
             trigger = triggers.mobKill,
@@ -2780,9 +2780,9 @@ function getRoeRecords(triggers)
         },
 
 
-      ----------------------------------------
-      -- Combat (Region) - Goddess 2        --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Goddess 2       
+      -----------------------------------
 
         [ 577] = { -- Conflict: West Sarutabaruta [S]
             trigger = triggers.mobKill,
@@ -2864,9 +2864,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 80, xp = 900, unity = 8, item = { 15780 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Abyssea 1        --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Abyssea 1       
+      -----------------------------------
 
         [ 613] = { -- Conflict: Abyssea - La Theine
             trigger = triggers.mobKill,
@@ -2940,17 +2940,17 @@ function getRoeRecords(triggers)
             reward = { sparks = 80, xp = 900, unity = 8, item = { 11644 } },
         },
 
-      ----------------------------------------
-      -- Combat (Region) - Escha 1          --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Escha 1         
+      -----------------------------------
 
-      ----------------------------------------
-      -- Combat (Region) - Escha 2          --
-      ----------------------------------------
+      -----------------------------------
+      -- Combat (Region) - Escha 2         
+      -----------------------------------
 
-      ----------------------------------------
-      -- Achievements - Job Levels I        --
-      ----------------------------------------
+      -----------------------------------
+      -- Achievements - Job Levels I       
+      -----------------------------------
 
         [1200] = { -- Level 30 Warrior +
             trigger = triggers.levelUp,
@@ -3120,9 +3120,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 400, xp = 500, item = { {4069, 2} } },
         },
 
-      ----------------------------------------
-      -- Other - Daily Objectives           --
-      ----------------------------------------
+      -----------------------------------
+      -- Other - Daily Objectives          
+      -----------------------------------
 
         [4082] = { -- Vanquish Multiple Enemies (D)
             trigger = triggers.mobKill,
@@ -3148,9 +3148,9 @@ function getRoeRecords(triggers)
         },
 
 
-      ----------------------------------------
-      -- Timed Records - No Category        --
-      ----------------------------------------
+      -----------------------------------
+      -- Timed Records - No Category       
+      -----------------------------------
 
         [4008] = {   -- Vanquish Aquans
             trigger = triggers.mobKill,

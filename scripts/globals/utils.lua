@@ -415,7 +415,7 @@ function utils.getSystemStrengthBonus(attacker, defender)
     return 0
 end
 
--------------------------------------------------------
+-----------------------------------
 -- Returns true if player has any tier of given relic,
 --  if tier is specified, returns true only if player
 --  has that tier
@@ -431,7 +431,7 @@ end
 -- 9  = 119 II
 -- 10 = 119 III
 -- 11 = 119 III (ammo dispensing)
--------------------------------------------------------
+-----------------------------------
 function utils.hasRelic(player, relic, tier)
     if tier ~= nil then
         return player:hasItem(tpz.relicTiers[relic][tier])

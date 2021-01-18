@@ -76,9 +76,9 @@ function onHalloweenTrade(player, trade, npc)
 
     local contentEnabled = isHalloweenEnabled()
     local item = trade:getItemId()
-    -------------------
-    -- 2005 edition ---
-    -------------------
+    -----------------------------------
+    -- 2005 edition
+    -----------------------------------
     if (contentEnabled == 1) then
         -----------------------------------
         -- Treats allowed

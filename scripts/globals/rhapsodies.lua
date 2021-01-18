@@ -1,7 +1,7 @@
-------------------------------------
+-----------------------------------
 require("scripts/globals/missions")
 require("scripts/globals/status")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.rhapsodies = tpz.rhapsodies or {}
@@ -299,9 +299,9 @@ tpz.rhapsodies.requiredCharacters =
     },
 }
 
-------------------------------------
+-----------------------------------
 -- PUBLIC FUNCTIONS
-------------------------------------
+-----------------------------------
 -- Lockout Table:
 -- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 

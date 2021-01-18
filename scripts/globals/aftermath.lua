@@ -16,9 +16,9 @@ tpz.aftermath.type =
     EMPYREAN = 3,
 } -- TODO: Add Aeonic
 
--------------------------------------
+-----------------------------------
 -- HELPERS : For aftermath eyes onry
--------------------------------------
+-----------------------------------
 local getTier1RelicDuration = function(tp)
     return math.floor(tp * 0.02)
 end

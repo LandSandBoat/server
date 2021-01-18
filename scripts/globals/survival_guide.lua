@@ -25,9 +25,9 @@ local optionMap =
     TELEPORT_MENU = 7
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function checkForRegisteredSurvivalGuide(player, guide)
     local group = guide.group
@@ -90,9 +90,9 @@ local function teleportMenuUpdate(player, option)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 tpz.survivalGuide.onTrigger = function(player)
     local currentZoneId = player:getZoneID()
