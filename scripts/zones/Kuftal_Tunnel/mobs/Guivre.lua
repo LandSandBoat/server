@@ -298,7 +298,7 @@ function onPath(mob)
 end
 
 function onMobSpawn(mob)
-    onPath(mob)
+    entity.onPath(mob)
 end
 
 entity.onMobRoam = function(mob)

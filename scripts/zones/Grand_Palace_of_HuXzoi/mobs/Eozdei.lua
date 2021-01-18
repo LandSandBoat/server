@@ -14,7 +14,7 @@ local entity = {}
 function onMobSpawn(mob)
     -- Set AnimationSub to 0, put it in pot form
     mob:setAnimationSub(0)
-    onPath(mob)
+    entity.onPath(mob)
 end
 
 function onPath(mob)

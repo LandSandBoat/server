@@ -123,7 +123,7 @@ end
 
 function onMobSpawn(mob)
     mob:setSpeed(250)
-    onPath(mob)
+    entity.onPath(mob)
 end
 
 entity.onMobRoam = function(mob)

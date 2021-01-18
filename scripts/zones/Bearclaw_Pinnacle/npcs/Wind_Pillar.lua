@@ -3,6 +3,8 @@
 -- NPC:  Wind Pillar
 -----------------------------------
 require("scripts/globals/bcnm")
+-----------------------------------
+local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     TradeBCNM(player, npc, trade)
@@ -15,11 +17,6 @@ end
 entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
-
------------------------------------
--- onEventFinish Action
------------------------------------
-local entity = {}
 
 entity.onEventFinish = function(player, csid, option)
     EventFinishBCNM(player, csid, option)

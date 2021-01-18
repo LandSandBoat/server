@@ -30,7 +30,7 @@ local wsQuest = tpz.wsquest.spiral_hell
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    onPath(npc)
+    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)

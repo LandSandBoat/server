@@ -59,7 +59,7 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    onPath(npc)
+    entity.onPath(npc)
 
     -- test fromStart
     local start = tpz.path.fromStart(path, 2)
