@@ -6,18 +6,19 @@ local ID = require("scripts/zones/Cloister_of_Tides/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/quests")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER) == QUEST_COMPLETED) and 1 or 0
@@ -28,10 +29,10 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if not player:hasSpell(300) then
             player:addSpell(300)
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER)
     end
 end
+
+return battlefield_object

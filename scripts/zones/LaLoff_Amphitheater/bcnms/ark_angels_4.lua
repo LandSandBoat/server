@@ -7,18 +7,19 @@ require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS)) and 1 or 0
@@ -28,10 +29,10 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.ARK_ANGELS and player:getCharVar("ZilartStatus") == 1 then
             player:addKeyItem(tpz.ki.SHARD_OF_ARROGANCE)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return battlefield_object
