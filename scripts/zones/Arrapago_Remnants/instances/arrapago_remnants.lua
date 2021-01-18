@@ -1,13 +1,12 @@
 -----------------------------------
---
 -- Salvage: Arrapago Remnants
---
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/instance")
 -----------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
+instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
     player:messageSpecial(ID.text.SALVAGE_START, 1)
@@ -21,7 +20,7 @@ function afterInstanceRegister(player)
     end
 end
 
-function onInstanceCreated(instance)
+instance_object.onInstanceCreated = function(instance)
 
     for i, v in pairs(ID.npc[1][1]) do
         local npc = GetNPCByID(v, instance)
@@ -31,11 +30,11 @@ function onInstanceCreated(instance)
     instance:setProgress(0)
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     updateInstanceTime(instance, elapsed, ID.text)
 end
 
-function onInstanceFailure(instance)
+instance_object.onInstanceFailure = function(instance)
 
     local chars = instance:getChars()
 
@@ -45,16 +44,16 @@ function onInstanceFailure(instance)
     end
 end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
 end
 
-function onRegionEnter(player, region, instance)
+instance_object.onRegionEnter = function(player, region, instance)
     if region:GetRegionID() <= 11 then
         player:startEvent(199 + region:GetRegionID())
     end
 end
 
-function onInstanceProgressUpdate(instance, progress, elapsed)
+instance_object.onInstanceProgressUpdate = function(instance, progress, elapsed)
     if instance:getStage() == 1 and progress == 10 then
         SpawnMob(ID.mob[1][2].rampart, instance)
     elseif instance:getStage() == 2 and progress == 2 then -- attempt to spawn slot
@@ -78,7 +77,10 @@ function onInstanceProgressUpdate(instance, progress, elapsed)
 
 end
 
-function onEventFinish(player, csid, option)
+instance_object.onEventUpdate = function(player, csid, option)
+end
+
+instance_object.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
 
     if csid >= 200 and csid <= 203 and option == 1 then
@@ -141,3 +143,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return instance_object
