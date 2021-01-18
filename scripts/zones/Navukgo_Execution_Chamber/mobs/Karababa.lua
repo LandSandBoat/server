@@ -23,7 +23,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     local powerup = mob:getLocalVar("powerup")
     local rnd = math.random(1, 6)
     local warp = mob:getLocalVar("warp")

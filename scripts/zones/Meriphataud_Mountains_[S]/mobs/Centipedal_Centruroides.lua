@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.MOVE, 13)
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.POISON, {power = 30})
 end
 

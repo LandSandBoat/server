@@ -7,7 +7,7 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 
     -- Set Ahtu's spawnpoint and respawn time (2-4 hours)
     UpdateNMSpawnPoint(mob:getID())

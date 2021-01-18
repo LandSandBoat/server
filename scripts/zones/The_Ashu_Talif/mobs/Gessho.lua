@@ -11,7 +11,7 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Gessho will engage by himself ~1min in if you stall too long.
     -- Give a little buffer for while the instance loads
     mob:timer(80000, function(mob)
@@ -37,7 +37,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local dialog = mob:getLocalVar("dialog")
 
     if(dialog == 0) then

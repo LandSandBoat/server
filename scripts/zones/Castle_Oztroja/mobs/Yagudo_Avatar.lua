@@ -10,7 +10,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
 end
 
@@ -20,7 +20,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local nqId = mob:getID()
 
     if nqId == ID.mob.YAGUDO_AVATAR then

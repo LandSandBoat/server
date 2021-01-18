@@ -6,7 +6,7 @@ require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local DayOfTheWeek = VanadielDayOfTheWeek()
 
     mob:setSpellList(118 + DayOfTheWeek)

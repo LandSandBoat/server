@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local progress = instance:getProgress()
 
@@ -32,7 +32,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local naja = GetMobByID(ID.mob[58].NAJA, mob:getInstance())
     naja:setLocalVar("ready", 1)
 end
@@ -40,7 +40,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end

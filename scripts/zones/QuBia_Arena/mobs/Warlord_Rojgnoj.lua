@@ -9,7 +9,7 @@ local ID = require("scripts/zones/QuBia_Arena/IDs")
 -----------------------------------
 local entity = {}
 
-function phaseChangeReady(battlefield)
+local function phaseChangeReady(battlefield)
     local inst = battlefield:getArea()
     local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
     for i = instOffset + 3, instOffset + 13 do
@@ -24,7 +24,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.SLEEPRES, 50)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
     if battlefield and phaseChangeReady(battlefield) then
         battlefield:setLocalVar("phaseChange", 0)

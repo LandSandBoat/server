@@ -18,7 +18,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     -- casts Water IV, Waterga III, Flood, Drown
     local rnd = math.random()
 

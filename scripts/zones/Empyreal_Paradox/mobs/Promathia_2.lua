@@ -15,14 +15,14 @@ entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.UFASTCAST, 50)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
     if GetMobByID(ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2):isDead() then
         battlefield:setLocalVar("phaseChange", 0)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i, v in pairs(bcnmAllies) do
         if v:getName() == "Prishe" then
@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 218 then
         spell:setAoE(tpz.magic.aoe.RADIAL)
         spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
@@ -67,7 +67,7 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMagicCastingCheck(mob, target, spell)
+entity.onMagicCastingCheck = function(mob, target, spell)
     if math.random() > 0.75 then
         return 219
     else

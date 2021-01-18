@@ -7,11 +7,11 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(tpz.mobMod.SIGHT_RANGE, 17)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:useMobAbility(815)
     mob:setMod(tpz.mod.REGAIN, 100)
 end

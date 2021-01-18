@@ -87,11 +87,11 @@ local path =
     -202, 0, 391,
 }
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     entity.onMobRoam(mob)
 end
 
-function onPath(mob)
+entity.onPath = function(mob)
     tpz.path.patrol(mob, path, tpz.path.flag.RUN)
 end
 
@@ -105,7 +105,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(10800, 14400)) -- respawn 3-4 hrs
 end
 

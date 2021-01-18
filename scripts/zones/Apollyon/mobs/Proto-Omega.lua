@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGEN, 25) -- "Posseses an Auto-Regen (low to moderate)"
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
     mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
     mob:setMod(tpz.mod.UDMGPHYS, -75)
@@ -69,7 +69,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN)
 end
 

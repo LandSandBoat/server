@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mod:addMod((tpz.mod.FIRE_ABSORB + VanadielDayElement() - 1), 100)
     mob:addMod(tpz.mod.WIND_ABSORB, 100)

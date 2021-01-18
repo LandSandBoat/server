@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     if GetMobByID(ID.mob.TEMENOS_C_MOB[3]+18):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+19):isDead() and
         GetMobByID(ID.mob.TEMENOS_C_MOB[3]+20):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+21):isDead() and
         GetMobByID(ID.mob.TEMENOS_C_MOB[3]+22):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+23):isDead()

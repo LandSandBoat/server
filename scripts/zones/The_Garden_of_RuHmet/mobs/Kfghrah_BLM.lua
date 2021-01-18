@@ -7,7 +7,7 @@ require("scripts/globals/magic") -- no spells are currently set due to lack of i
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Set core Skin and mob elemental bonus
     mob:setAnimationSub(0)
     mob:setLocalVar("roamTime", os.time())

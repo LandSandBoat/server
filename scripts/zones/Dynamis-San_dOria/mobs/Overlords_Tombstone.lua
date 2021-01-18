@@ -7,7 +7,7 @@ require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 2 do
         if not GetMobByID(i):isSpawned() then

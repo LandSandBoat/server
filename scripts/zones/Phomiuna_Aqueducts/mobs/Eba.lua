@@ -6,14 +6,14 @@ mixins = {require("scripts/mixins/fomor_hate")}
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("fomorHateAdj", 4)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
 end
 

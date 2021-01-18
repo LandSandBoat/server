@@ -14,11 +14,11 @@ entity.onMobInitialize = function(mob)
     mob:getStatusEffect(tpz.effect.SHOCK_SPIKES):setFlag(tpz.effectFlag.DEATH)
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN, {chance = 65, duration = math.random(5, 15)})
 end
 
-function onSpikesDamage(mob, target, damage)
+entity.onSpikesDamage = function(mob, target, damage)
     local INT_diff = mob:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
 
     if INT_diff > 20 then
@@ -45,7 +45,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 279)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(7200, 10800)) -- 2 to 3 hrs
 end

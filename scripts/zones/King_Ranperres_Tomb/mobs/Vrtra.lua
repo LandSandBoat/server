@@ -9,7 +9,7 @@ local entity = {}
 
 local offsets = {1, 3, 5, 2, 4, 6}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:resetLocalVars()
 end
 
@@ -49,7 +49,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDisengage(mob, weather)
+entity.onMobDisengage = function(mob, weather)
     for i, offset in ipairs(offsets) do
         DespawnMob(mob:getID()+offset)
     end
@@ -59,7 +59,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.VRTRA_VANQUISHER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Set Vrtra's spawnpoint and respawn time (3-5 days)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(259200, 432000))

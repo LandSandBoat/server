@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:setLocalVar("selfDestruct", os.time() + 60)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
@@ -17,7 +17,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 256 then
         mob:timer(1000, function(mob)
             mob:getBattlefield():lose()

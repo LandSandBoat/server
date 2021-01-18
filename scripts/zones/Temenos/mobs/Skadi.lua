@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     GetMobByID(ID.mob.TEMENOS_N_MOB[2]+2):updateEnmity(target)
     GetMobByID(ID.mob.TEMENOS_N_MOB[2]+1):updateEnmity(target)
 end

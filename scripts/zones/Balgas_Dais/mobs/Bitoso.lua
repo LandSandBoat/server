@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGEN, 0)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 20)
     mob:setMobMod(tpz.mobMod.SOUND_RANGE, 13)
 end
@@ -22,7 +22,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-function onMagicHit(caster, target, spell)
+entity.onMagicHit = function(caster, target, spell)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -8,14 +8,14 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
     mob:SetAutoAttackEnabled(true)
     mob:SetMobAbilityEnabled(true)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 0)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     tpz.limbus.setupArmouryCrates(mob:getBattlefieldID(), true)
 end
 

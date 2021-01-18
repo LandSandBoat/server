@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     if GetMobByID(ID.mob.TEMENOS_C_MOB[1]+5):isDead() then
         mob:addStatusEffect(tpz.effect.REGAIN, 7, 3, 0)
         mob:addStatusEffect(tpz.effect.REGEN, 50, 3, 0)

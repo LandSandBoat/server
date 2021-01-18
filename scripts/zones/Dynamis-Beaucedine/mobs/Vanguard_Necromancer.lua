@@ -15,7 +15,7 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.MORBLOX_CHUBBYCHIN_PH, 10, 1200) -- 20 minutes
 end
 

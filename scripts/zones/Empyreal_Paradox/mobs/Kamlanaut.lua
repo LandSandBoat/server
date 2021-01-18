@@ -17,7 +17,7 @@ local skillToAbsorb =
     [828] = tpz.mod.WATER_ABSORB, -- water_blade
 }
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:setLocalVar("nextEnSkill", os.time() + 10)
 end
 
@@ -30,7 +30,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     local skillId = skill:getID()
     local absorbId = skillToAbsorb[skillId]
 

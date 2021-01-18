@@ -14,11 +14,11 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.QUADAV_KING_ENGAGE)
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.SLOW, {power = 3000})
 end
 
@@ -29,7 +29,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- reset hqnm system back to the nm placeholder
     local nqId = mob:getID() - 1
     SetServerVariable("[POP]Za_Dha_Adamantking", os.time() + 259200) -- 3 days

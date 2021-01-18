@@ -7,7 +7,7 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 
     -- Set Marquis_Allocen's spawnpoint and respawn time (21-24 hours)
     UpdateNMSpawnPoint(mob:getID())

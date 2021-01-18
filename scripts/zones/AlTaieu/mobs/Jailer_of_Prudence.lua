@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -41,7 +41,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.LULLABYRES, 30)
 end
 
-function onMobDisEngage(mob, target)
+entity.onMobDisengage = function(mob, target)
 end
 
 --[[ onMobskill -- When this functionlity is added, this should work.
@@ -65,7 +65,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
     if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then

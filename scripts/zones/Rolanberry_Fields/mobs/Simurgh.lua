@@ -11,7 +11,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.SIMURGH_POACHER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(3600, 7200)) -- 1 to 2 hours
 end

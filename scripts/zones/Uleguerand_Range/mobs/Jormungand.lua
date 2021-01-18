@@ -7,7 +7,7 @@ local entity = {}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
 end
@@ -46,7 +46,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     if (skill:getID() == 1296 and mob:getHPP() <= 30) then
         local roarCounter = mob:getLocalVar("roarCounter")
 
@@ -65,7 +65,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.WORLD_SERPENT_SLAYER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(259200, 432000)) -- 3 to 5 days
 end
 

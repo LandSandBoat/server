@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {

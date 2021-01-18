@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setSpellList(135)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
     local inst = battlefield:getArea()
     local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))

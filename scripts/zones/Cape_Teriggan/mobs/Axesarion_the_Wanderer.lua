@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Cape_Teriggan/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
 

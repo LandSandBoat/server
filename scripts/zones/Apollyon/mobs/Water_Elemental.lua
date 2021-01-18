@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+6):updateEnmity(target)
     GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+14):updateEnmity(target)
     GetMobByID(ID.mob.APOLLYON_SW_MOB[4]+22):updateEnmity(target)

@@ -20,7 +20,7 @@ local minionGroup =
     [7] = 25, -- Qnhpemde
 }
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:untargetable(false)
     mob:setAnimationSub(2)
@@ -79,7 +79,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     if math.random(100) <= 25 then -- 25% chance to spawn Absolute Virtue
         SpawnMob(ID.mob.ABSOLUTE_VIRTUE)
     end

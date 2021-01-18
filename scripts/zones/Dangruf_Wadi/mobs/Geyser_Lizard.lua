@@ -10,7 +10,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 600)
 end
 
@@ -18,7 +18,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 225)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("pop", os.time() + (math.random(45, 75) * 60))
 end
 

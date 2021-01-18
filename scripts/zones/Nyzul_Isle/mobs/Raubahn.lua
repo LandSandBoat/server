@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
         mob:showText(mob, ID.text.CARVE)
     end)
@@ -90,7 +90,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.BEHAVIOR, 5)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat every reraise.
     if (mob:getLocalVar("started") == 0) then
         mob:showText(mob, ID.text.PRAY)
@@ -113,7 +113,7 @@ entity.onMobFight = function(mob, target)
     ]]
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     -- Eyes on Me
     if (spell == 641) then
         mob:showText(mob, ID.text.BEHOLD)

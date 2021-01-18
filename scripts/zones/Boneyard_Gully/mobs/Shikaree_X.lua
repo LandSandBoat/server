@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     SpawnMob(mob:getID() + 2)
 end
 

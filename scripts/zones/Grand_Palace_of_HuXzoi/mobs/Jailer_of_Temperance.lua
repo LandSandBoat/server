@@ -9,7 +9,7 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Set AnimationSub to 0, put it in pot form
     -- Change it's damage resists. Pot for take
 
@@ -98,7 +98,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local ph = mob:getLocalVar("ph")
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(ph, false)

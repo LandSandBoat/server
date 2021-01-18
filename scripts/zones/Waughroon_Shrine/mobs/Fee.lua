@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.GRAVITYRES, 20)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("tentacles", 6)
     mob:SetMobSkillAttack(0)
 end
@@ -27,7 +27,7 @@ end
 -- When all tentacles are removed, its normal melee attack is replaced by a special Ink Jet attack that
 -- ignores shadows and has knockback.
 
-function removeTentacle(mob, tentacles)
+local function removeTentacle(mob, tentacles)
     if tentacles > 0 then
         mob:setMobMod(tpz.mobMod.MULTI_HIT, tentacles)
         mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)

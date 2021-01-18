@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.LULLABYRES, 50)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
 end
 
