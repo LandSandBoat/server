@@ -10591,19 +10591,20 @@ INSERT INTO `mob_groups` VALUES (162,6881,155,'Gargouille_Warden',0,128,0,0,0,0,
 -- Throne_Room_[S] (Zone 156)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5828,156,'Klara',0,128,0,10000,9999,76,78,0);
-INSERT INTO `mob_groups` VALUES (2,5829,156,'Marquis_Amon',0,128,0,18000,9999,77,79,0);
-INSERT INTO `mob_groups` VALUES (3,4498,156,'Zeid',0,128,0,0,0,75,75,1);
-
-INSERT INTO `mob_groups` VALUES (8331,1349,156,'Five_Moons',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8332,2316,156,'Lady_Lilith',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8333,2378,156,'Larzos',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8334,2415,156,'Lilisette',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8336,2839,156,'Nicolaus',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8337,3189,156,'Portia',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8338,3305,156,'Ragelise',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8339,3579,156,'Shadow_Lord',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8340,4249,156,'Volker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (1,0,156,'Shadow_Lord_FL_main',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,156,'Shadow_Lord_FL_clone',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,0,156,'Aquila',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,0,156,'Haudrale',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,0,156,'Lilisette',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,5828,156,'Klara',0,128,0,10000,9999,76,78,0);
+INSERT INTO `mob_groups` VALUES (7,5829,156,'Marquis_Amon',0,128,0,18000,9999,77,79,0);
+INSERT INTO `mob_groups` VALUES (8,4498,156,'Zeid',0,128,0,0,0,75,75,1);
+INSERT INTO `mob_groups` VALUES (9,0,156,'Shadow_Lord_UotD',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,0,156,'Bloodcrown_Brradhod',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,0,156,'ZaDha_Adamantking',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,0,156,'Tzee_Xicu_the_Manifest',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (13,0,156,'Manifests_Diabolos',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (14,0,156,'Shadow_Lord_UotD_clone',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Middle_Delkfutts_Tower (Zone 157)
