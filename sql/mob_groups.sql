@@ -10647,8 +10647,6 @@ INSERT INTO `mob_groups` VALUES (34,1502,157,'Gerwitzs_Scythe',0,128,0,0,0,60,60
 INSERT INTO `mob_groups` VALUES (35,3514,157,'Scythe_Victim_war',0,128,0,0,0,58,58,0);
 INSERT INTO `mob_groups` VALUES (36,6564,157,'Scythe_Victim_blm',0,128,0,0,0,58,58,0);
 
-INSERT INTO `mob_groups` VALUES (8378,4498,157,'Zeid',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Upper_Delkfutts_Tower (Zone 158)
 -- ------------------------------------------------------------
@@ -10684,9 +10682,11 @@ INSERT INTO `mob_groups` VALUES (26,1589,158,'Gigass_Bat',0,128,0,0,0,65,65,0);
 -- Temple_of_Uggalepih (Zone 159)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,4076,159,'Uggalepih_Leech',0,128,1404,0,0,50,52,0);
 INSERT INTO `mob_groups` VALUES (2,6770,159,'Bloodsucker_fished',0,128,174,0,0,55,62,0);
 INSERT INTO `mob_groups` VALUES (3,6782,159,'Bouncing_Ball_fished',0,128,343,0,0,65,67,0);
+
 INSERT INTO `mob_groups` VALUES (4,501,159,'Bonze_Marberry',900,0,338,7000,0,66,66,0);
 INSERT INTO `mob_groups` VALUES (5,4039,159,'Trompe_LOeil',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (6,787,159,'Cook_Solberry',0,128,0,0,0,75,75,0);
@@ -10737,16 +10737,16 @@ INSERT INTO `mob_groups` VALUES (50,6728,159,'Azure-toothed_Clawberry',0,128,0,0
 INSERT INTO `mob_groups` VALUES (51,6729,159,'Clawberrys_Elemental',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (52,6730,159,'Clawberrys_Avatar',0,128,0,0,0,0,0,0);
 
-INSERT INTO `mob_groups` VALUES (8418,1798,159,'Grav_iton',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Den_of_Rancor (Zone 160)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6777,160,'Rock_Crab_fished',0,128,273,0,0,53,55,0);
 INSERT INTO `mob_groups` VALUES (2,6776,160,'Razorjaw_Pugil_fished',0,128,147,0,0,53,55,0);
 INSERT INTO `mob_groups` VALUES (3,6770,160,'Bloodsucker_fished',0,128,174,0,0,58,60,0);
 INSERT INTO `mob_groups` VALUES (4,6784,160,'Mousse_fished',0,128,1749,0,0,64,70,0);
+
 INSERT INTO `mob_groups` VALUES (5,3321,160,'Rancor_Torch',0,128,0,0,0,69,73,0);
 INSERT INTO `mob_groups` VALUES (6,2664,160,'Mimic',0,128,1682,0,0,68,70,0);
 INSERT INTO `mob_groups` VALUES (7,3973,160,'Tonberry_Trailer',960,0,2450,0,0,62,65,0);
