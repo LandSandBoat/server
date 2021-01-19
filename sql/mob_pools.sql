@@ -6927,6 +6927,7 @@ INSERT INTO `mob_pools` VALUES (6879,'Shadowbreath_Defiler','Shadowbreath_Defile
 INSERT INTO `mob_pools` VALUES (6880,'Fortification_NV80','Fortification',237,0x00002C0600000000000000000000000000000000,1,1,0,32767,100,0,0,0,0,32,0,2,32768,2689,8,0,0,80,0,0);
 INSERT INTO `mob_pools` VALUES (6881,'Gargouille_Warden','Gargouille_Warden',118,0x0000B10800000000000000000000000000000000,6,6,3,240,100,0,1,0,1,2,7,0,0,643,4,0,0,0,0,118); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6882,'Azrael','Azrael',139,0x0000800100000000000000000000000000000000,4,4,12,280,100,0,1,0,0,2,7,32,0,135,0,0,10,0,0,139); -- TODO: skill list, spell list
+INSERT INTO `mob_pools` VALUES (6883,'Hyakume','Hyakume',139,0x0000800100000000000000000000000000000000,4,4,12,280,100,0,1,0,0,2,7,0,0,129,0,0,10,0,0,139); -- TODO: skill list, spell list
 
 /*
   `poolid` int(10) unsigned NOT NULL,
