@@ -10188,10 +10188,6 @@ INSERT INTO `mob_groups` VALUES (37,2664,147,'Mimic',0,128,1677,0,0,65,69,0);
 INSERT INTO `mob_groups` VALUES (38,2486,147,'Magnes_Quadav',0,128,0,0,0,43,45,0);
 INSERT INTO `mob_groups` VALUES (39,2837,147,'Nickel_Quadav',0,128,1781,0,0,43,45,0);
 
-INSERT INTO `mob_groups` VALUES (7945,305,147,'Ayame',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7954,896,147,'Dalzakk',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7984,4498,147,'Zeid',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Qulun_Dome (Zone 148)
 -- ------------------------------------------------------------
@@ -10348,12 +10344,6 @@ INSERT INTO `mob_groups` VALUES (43,2664,151,'Mimic',0,128,1679,0,0,65,69,0);
 INSERT INTO `mob_groups` VALUES (44,4418,151,'Yagudo_Flagellant',960,0,2833,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (45,5494,151,'Yagudo_Prelate',960,0,2748,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (46,4412,151,'Yagudo_Conductor',960,0,2834,0,0,70,71,0);
-
-INSERT INTO `mob_groups` VALUES (8077,75,151,'Ajido-Marujido',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8084,2226,151,'Kilhwch',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8085,2405,151,'Lhu_Mhakaracca',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8090,2904,151,'Noillurie',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8094,3858,151,'Tebhi',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Altar_Room (Zone 152)
