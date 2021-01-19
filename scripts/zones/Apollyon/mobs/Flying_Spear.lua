@@ -63,7 +63,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.UDMGMAGIC, -100)
 end
 

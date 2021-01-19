@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, Rayon, maxRayon)
+local function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, Rayon, maxRayon)
     local difX = playerX-centerX
     local difY = playerY-centerY
     local difZ = playerZ-centerZ

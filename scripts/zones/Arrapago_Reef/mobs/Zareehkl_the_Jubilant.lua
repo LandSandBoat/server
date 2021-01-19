@@ -6,7 +6,7 @@ mixins = {require("scripts/mixins/families/qutrub")}
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("qutrubBreakChance", 5) -- Wiki implies its weapon is harder to break
 end
 

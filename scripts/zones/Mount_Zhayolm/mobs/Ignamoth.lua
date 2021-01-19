@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGAIN, 200)
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PARALYZE, {duration = 60})
 end
 

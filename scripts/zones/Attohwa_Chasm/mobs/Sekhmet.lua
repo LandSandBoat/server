@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.FASTCAST, 15)
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.MP_DRAIN, {power = math.random(1, 10)})
 end
 
@@ -21,7 +21,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 276)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(5400, 7200)) -- 1.5 to 2 hours.
     UpdateNMSpawnPoint(mob:getID())
 end

@@ -9,7 +9,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
     mob:setMobMod(tpz.mobMod.SUPERLINK, 0)
 
@@ -18,7 +18,7 @@ function onMobSpawn(mob)
 end
 
 -- Reset restHP when re-engaging after a sandpit
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     if mob:getMobMod(tpz.mobMod.NO_REST) == 1 then
         mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
         mob:setMobMod(tpz.mobMod.NO_REST, 0)

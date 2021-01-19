@@ -72,7 +72,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local mobId = mob:getID()
 
     for i = mobId + 5, mobId + 8 do

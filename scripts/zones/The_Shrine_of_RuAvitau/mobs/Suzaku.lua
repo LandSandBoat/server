@@ -8,7 +8,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 -- Return the selected spell ID.
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     -- Suzaku uses     Burn, Fire IV, Firaga III, Flare
     -- Let's give -ga3 a higher distribution than the others.
     rnd = math.random()

@@ -43,7 +43,7 @@ local path =
     }
 }
 
-function onPath(mob)
+entity.onPath = function(mob)
     if mob:getID() ~= ID.mob.APOLLYON_NW_MOB[3]+4 then
         mob:setLocalVar("pause", os.time()+1)
     end

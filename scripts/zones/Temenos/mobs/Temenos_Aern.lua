@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local battlefield = mob:getBattlefield()
     if battlefield then
         local killer = mob:getLocalVar("killer")

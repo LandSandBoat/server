@@ -64,13 +64,13 @@ entity.onMobRoam = function(mob)
     end
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.HTHRES, 1500)
     mob:setMod(tpz.mod.IMPACTRES, 1500)
     mob:setMod(tpz.mod.PIERCERES, 0)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local start = mob:getLocalVar("start") == 1
     if not start then
         for i = 1, 8 do

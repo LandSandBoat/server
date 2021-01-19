@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobDeath = function(mob)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.IGNAMOTH_PH, 10, 7200) -- 2 hours
 end
 

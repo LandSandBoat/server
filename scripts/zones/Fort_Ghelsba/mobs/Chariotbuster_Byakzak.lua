@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 174)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     DisallowRespawn(ID.mob.ORCISH_PANZER, false)
     GetMobByID(ID.mob.ORCISH_PANZER):setRespawnTime(math.random(3600, 4200)) -- 60 to 70 min
     mob:setLocalVar("pop", os.time() + math.random(75600, 86400)) -- 21 to 24 hours

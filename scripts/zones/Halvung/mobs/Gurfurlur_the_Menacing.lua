@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do
         SpawnMob(i):updateEnmity(target)
     end
@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 
@@ -51,7 +51,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 

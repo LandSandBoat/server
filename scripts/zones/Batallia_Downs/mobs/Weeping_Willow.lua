@@ -18,7 +18,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local LUMBER_JACK = mob:getID() + 6
     -- Retail behavior is for it to walk back to where willow died if unclaimed *unless* willow was pulled down the cliff
     -- In that case, it will walk back near where Willow was spawned at.

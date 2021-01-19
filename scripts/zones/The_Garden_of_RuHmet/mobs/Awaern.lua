@@ -7,7 +7,7 @@ local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local IxAernDRG_PH = GetServerVariable("[SEA]IxAernDRG_PH") -- Should be be the ID of the mob that spawns the actual PH
 
     -- Pick the Ix'Aern (DRG) PH if the server doesn't have one, and the if the actual PH/NM isn't up. Then, set it.
@@ -47,7 +47,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local currentMobID = mob:getID()
 
     -- Ix'Aern (DRG) Placeholder mobs

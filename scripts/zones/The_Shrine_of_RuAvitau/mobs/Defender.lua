@@ -6,7 +6,7 @@ require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("petCount", 1)
 end
 
@@ -31,7 +31,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     local auraGearId = mob:getID() + 1
 
     mob:resetLocalVars()
@@ -45,7 +45,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 749, 1, tpz.regime.type.GROUNDS)
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
     local auraGearId = mob:getID() + 1
 
     mob:resetLocalVars()

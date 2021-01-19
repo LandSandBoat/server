@@ -6,7 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Set core Skin and mob elemental resist/weakness; other elements set to 0.
     -- Set to non aggro.
     mob:setAnimationSub(0)

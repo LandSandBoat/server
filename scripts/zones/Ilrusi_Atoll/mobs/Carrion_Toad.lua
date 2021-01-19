@@ -9,7 +9,7 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     local TOAD = GetMobByID(ID.mob.UNDEAD_TOAD, instance)
     local RAND = math.random(1, 5)

@@ -117,11 +117,11 @@ local pathNodes =
     -40, 0, -203,
 }
 
-function onPath(mob)
+entity.onPath = function(mob)
     tpz.path.patrol(mob, pathNodes, tpz.path.flag.RUN)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setSpeed(250)
     entity.onPath(mob)
 end
@@ -137,7 +137,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.CACTROT_DESACELERADOR)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(172800, 259200)) -- 2 to 3 days
 end

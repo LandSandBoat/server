@@ -10,7 +10,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local phIndex = mob:getLocalVar("phIndex")
     mob:setLocalVar("phIndex", 0)
     DisallowRespawn(mob:getID(), true)

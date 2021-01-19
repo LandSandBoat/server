@@ -11,11 +11,11 @@ require("scripts/globals/msg")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     local run = mob:getLocalVar("run")
     local instance = mob:getInstance()
     local stage = instance:getStage()
@@ -42,7 +42,7 @@ function onMobDisengage(mob)
     end
 end
 
-function onMobEngaged(mob)
+entity.onMobEngaged = function(mob)
     mob:setLocalVar("runTime", os.time())
 end
 
@@ -79,7 +79,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("run", 0)
 end
 

@@ -7,23 +7,23 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(tpz.mobMod.SUPERLINK, ID.mob.CARMINE_DOBSONFLY_OFFSET)
     mob:SetMagicCastingEnabled(false) -- does not cast spells while idle
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:SetMagicCastingEnabled(true)
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- each dead dobsonfly should stay despawned until all 10 are killed. then they respawn as a group.
 
     local allFliesDead = true

@@ -7,18 +7,18 @@ local ID = require("scripts/zones/Riverne-Site_A01/IDs")
 -----------------------------------
 local entity = {}
 
-function disturbMob(mob)
+local function disturbMob(mob)
     local offset = mob:getID() - ID.mob.HELIODROMOS_PH_OFFSET
     if (offset >= 0 and offset <= 2) then
         SetServerVariable("Heliodromos_ToD", os.time() + math.random(43200, 54000)) -- 12 to 15 hours
     end
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     disturbMob(mob)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     disturbMob(mob)
 end
 

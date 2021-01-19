@@ -19,7 +19,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.CERBERUS_MUZZLER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(48, 72) * 3600) -- 48 - 72 hours with 1 hour windows
 end
 

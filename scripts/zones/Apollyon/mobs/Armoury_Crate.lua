@@ -20,7 +20,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     if mob:getBattlefield() then
         local mobID = mob:getID()
         local mimicSpawned = mob:getBattlefield():getLocalVar("mimicSpawned")

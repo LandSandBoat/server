@@ -7,12 +7,12 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("whenToPopZoraal", math.random(20, 50))
     mob:setLocalVar("hasPoppedZoraal", 0)
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:setLocalVar("hasPoppedZoraal", 0)
     if(GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned()) then
         DespawnMob(ID.mob.PERCIPIENT_ZORAAL_JA)

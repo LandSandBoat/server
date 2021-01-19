@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
 local entity = {}
 
-function onMobRoamAction(mob)
+entity.onMobRoamAction = function(mob)
 
     local instance = mob:getInstance()
     local stage = instance:getStage()
@@ -21,7 +21,7 @@ function onMobRoamAction(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
 
     local target = mob:getTarget()
 
@@ -66,7 +66,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     DespawnMob(mob:getID() +1, instance) -- despawn bomb
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("runTime", 0)
 end
 

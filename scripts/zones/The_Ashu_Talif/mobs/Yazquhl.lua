@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addMod(tpz.mod.SLEEPRES, 150)
     mob:addMod(tpz.mod.SILENCERES, 150)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
@@ -29,7 +29,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     mob:showText(mob, ID.text.YAZQUHL_DEATH)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end

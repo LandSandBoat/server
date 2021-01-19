@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 600)
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     if mob:hasStatusEffect(tpz.effect.ENSTONE) then
         return 0, 0, 0
     else
@@ -23,7 +23,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Set Weeping Willow's respawn time (21-24 hours)
     GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
 end

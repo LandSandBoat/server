@@ -14,7 +14,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 47, 1, tpz.regime.type.FIELDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.KIRATA_PH, 7, math.random(3600, 28800)) -- 1 to 8 hours
     tpz.mob.phOnDespawn(mob, ID.mob.NUE_PH, 7, math.random(3600, 7200)) -- 1 to 2 hours
 end
