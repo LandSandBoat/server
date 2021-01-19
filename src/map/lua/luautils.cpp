@@ -556,7 +556,7 @@ namespace luautils
         auto table = lua["tpz"].get_or_create<sol::table>();
         for (auto& part : parts)
         {
-            table = table[part].get_or_create<sol::table>(part);
+            table = table[part].get_or_create<sol::table>();
         }
 
         return table;

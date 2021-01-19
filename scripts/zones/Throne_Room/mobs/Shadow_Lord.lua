@@ -104,10 +104,10 @@ entity.onMobDespawn = function(mob)
     mob:delStatusEffect(tpz.effect.PHYSICAL_SHIELD)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 32004) then
         local mobid = player:getCharVar("mobid")
         DespawnMob(mobid)
