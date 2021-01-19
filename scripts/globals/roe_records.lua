@@ -461,6 +461,199 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
+      -- Tutorial -> Quests (Artifact 2)
+      -----------------------------------
+
+        [ 656] = { -- BRD Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 657] = { -- BRD Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 658] = { -- BRD Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 659] = { -- RNG Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SIN_HUNTING} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 660] = { -- RNG Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 661] = { -- RNG Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 662] = { -- SAM Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 663] = { -- SAM Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 664] = { -- SAM Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 665] = { -- NIN Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 666] = { -- NIN Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 667] = { -- NIN Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 668] = { -- DRG Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 669] = { -- DRG Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 670] = { -- DRG Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 671] = { -- SMN Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 672] = { -- SMN Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 673] = { -- SMN Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 674] = { -- BLU Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 675] = { -- BLU Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 676] = { -- BLU Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 677] = { -- COR Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 678] = { -- COR Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 679] = { -- COR Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 680] = { -- PUP Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 681] = { -- PUP Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 682] = { -- PUP Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.PUPPETMASTER_BLUES} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+      -----------------------------------
       -- Tutorial -> Level Cap Increase
       -----------------------------------
 
