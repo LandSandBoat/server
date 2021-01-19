@@ -9889,10 +9889,12 @@ INSERT INTO `mob_groups` VALUES (35,651,140,'Carrion_Dragon',0,128,0,0,0,40,40,0
 -- Fort_Ghelsba (Zone 141)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6769,141,'Pug_Pugil_fished',0,128,463,0,0,6,8,0);
 INSERT INTO `mob_groups` VALUES (2,6766,141,'Giant_Pugil_fished',0,128,147,0,0,10,12,0);
 INSERT INTO `mob_groups` VALUES (3,3220,141,'Puffer_Pugil',0,128,975,0,0,14,16,0);
 INSERT INTO `mob_groups` VALUES (4,6764,141,'Land_Pugil_fished',0,128,975,0,0,18,20,0);
+
 INSERT INTO `mob_groups` VALUES (5,3013,141,'Orcish_Fodder',330,0,1905,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (6,3022,141,'Orcish_Mesmerizer',330,0,1926,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (7,3016,141,'Orcish_Grappler',330,0,1915,0,0,8,10,0);
