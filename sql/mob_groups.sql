@@ -10038,10 +10038,12 @@ INSERT INTO `mob_groups` VALUES (67,0,144,'Excenmille',0,128,0,0,0,0,0,0);
 -- Giddeus (Zone 145)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6773,145,'Pugil_fished',0,128,2034,0,0,3,5,0);
 INSERT INTO `mob_groups` VALUES (2,6769,145,'Pug_Pugil_fished',0,128,463,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (3,3220,145,'Puffer_Pugil',0,128,975,0,0,13,15,0);
 INSERT INTO `mob_groups` VALUES (4,6764,145,'Land_Pugil_fished',0,128,975,0,0,18,20,0);
+
 INSERT INTO `mob_groups` VALUES (5,1277,145,'Eyy_Mon_the_Ironbreaker',900,0,803,0,0,16,16,0);
 INSERT INTO `mob_groups` VALUES (6,4502,145,'Zhuu_Buxu_the_Silent',300,0,2855,0,0,16,16,0);
 INSERT INTO `mob_groups` VALUES (7,4426,145,'Yagudo_Initiate',330,0,2718,0,0,3,10,0);
@@ -10065,6 +10067,7 @@ INSERT INTO `mob_groups` VALUES (24,4456,145,'Yagudo_Theologist',660,0,2772,0,0,
 INSERT INTO `mob_groups` VALUES (25,4444,145,'Yagudo_Priest',660,0,2751,0,0,21,23,0);
 INSERT INTO `mob_groups` VALUES (26,4267,145,'Vuu_Puqu_the_Beguiler',0,32,2596,0,0,21,22,0);
 INSERT INTO `mob_groups` VALUES (27,4113,145,'Vaa_Huja_the_Erudite',0,128,0,0,0,45,45,0);
+INSERT INTO `mob_groups` VALUES (28,0,145,'Yagudo_Lookout',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Balgas_Dais (Zone 146)
