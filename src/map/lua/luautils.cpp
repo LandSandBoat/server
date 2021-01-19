@@ -525,6 +525,11 @@ namespace luautils
         TracyZoneScoped;
         TracyZoneString(filename);
 
+        if (filename.empty())
+        {
+            return lua.create_table();
+        }
+
         // Handle filename -> path conversion
         std::filesystem::path    path(filename);
         std::vector<std::string> parts;
@@ -538,7 +543,7 @@ namespace luautils
         if (it == parts.end())
         {
             ShowError("luautils::GetCacheEntryFromFilename: Invalid filename: %s\n", filename);
-            return sol::nil;
+            return lua.create_table();
         }
 
         // Now that the list is verified, overwrite it with the same list; without "scripts"
@@ -1696,7 +1701,13 @@ namespace luautils
             return -1;
         }
 
-        auto func_result = onEventFinish(CLuaBaseEntity(PChar), eventID, result, CLuaBaseEntity(PChar->m_event.Target));
+        std::optional<CLuaBaseEntity> optTarget = std::nullopt;
+        if (PChar->m_event.Target)
+        {
+            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+        }
+
+        auto func_result = onEventFinish(CLuaBaseEntity(PChar), eventID, result, optTarget);
         if (!func_result.valid())
         {
             sol::error err = func_result;
