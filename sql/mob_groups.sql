@@ -9929,8 +9929,6 @@ INSERT INTO `mob_groups` VALUES (8,3009,142,'Orcish_Fighter',330,0,1899,0,0,21,2
 INSERT INTO `mob_groups` VALUES (9,3004,142,'Orcish_Cursemaker',330,0,1888,0,0,21,23,0);
 INSERT INTO `mob_groups` VALUES (10,3032,142,'Orcish_Serjeant',330,0,1937,0,0,21,23,0);
 
-INSERT INTO `mob_groups` VALUES (7790,2306,142,'Kyo',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Palborough_Mines (Zone 143)
 -- ------------------------------------------------------------
