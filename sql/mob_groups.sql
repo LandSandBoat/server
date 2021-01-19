@@ -9847,10 +9847,12 @@ INSERT INTO `mob_groups` VALUES (58,0,139,'Naji',0,128,0,0,0,0,0,0);
 -- Ghelsba_Outpost (Zone 140)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6773,140,'Pugil_fished',0,128,2034,0,0,3,5,0);
 INSERT INTO `mob_groups` VALUES (2,6769,140,'Pug_Pugil_fished',0,128,463,0,0,7,9,0);
 INSERT INTO `mob_groups` VALUES (3,6766,140,'Giant_Pugil_fished',0,128,147,0,0,11,13,0);
 INSERT INTO `mob_groups` VALUES (4,3220,140,'Puffer_Pugil',0,128,975,0,0,15,17,0);
+
 INSERT INTO `mob_groups` VALUES (5,1377,140,'Fodderchief_Vokdek',0,128,307,0,0,8,8,0);
 INSERT INTO `mob_groups` VALUES (6,3811,140,'Sureshot_Snatgat',0,128,0,0,0,6,6,0);
 INSERT INTO `mob_groups` VALUES (7,3793,140,'Strongarm_Zodvad',0,128,0,0,0,6,6,0);
@@ -9875,17 +9877,13 @@ INSERT INTO `mob_groups` VALUES (25,1513,140,'Ghelsba_Pugil',330,0,975,0,0,3,6,0
 INSERT INTO `mob_groups` VALUES (26,884,140,'Cyranuce_M_Cutauleon',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (27,766,140,'Colo-colo',0,128,0,0,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (28,1441,140,'Furies',0,128,0,0,0,20,20,0);
--- zone 140 group 29: free
-INSERT INTO `mob_groups` VALUES (30,2181,140,'Kalamainu',0,128,0,0,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (31,2227,140,'Kilioa',0,128,0,0,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (32,3937,140,'Toadpillow',0,128,0,0,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (33,3938,140,'Toadsquab',0,128,0,0,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (34,3935,140,'Toadbolster',0,128,0,0,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (35,3936,140,'Toadcushion',0,128,0,0,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (36,651,140,'Carrion_Dragon',0,128,0,0,0,40,40,0);
-
-INSERT INTO `mob_groups` VALUES (7742,2306,140,'Kyo',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7764,4006,140,'Trion',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,2181,140,'Kalamainu',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (30,2227,140,'Kilioa',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (31,3937,140,'Toadpillow',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (32,3938,140,'Toadsquab',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (33,3935,140,'Toadbolster',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (34,3936,140,'Toadcushion',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (35,651,140,'Carrion_Dragon',0,128,0,0,0,40,40,0);
 
 -- ------------------------------------------------------------
 -- Fort_Ghelsba (Zone 141)
