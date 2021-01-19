@@ -104,6 +104,362 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
+        [ 502] = { -- Mog House Exit: Windurst
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FLOWER_CHILD} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 503] = { -- Mog House Exit: Jeuno
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 504] = { -- Mog House Exit: Aht Urhgan
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        -- TODO: [505] Obtain a Support Job (Has two potential quest completes for objective)
+
+        [ 506] = { -- Obtain an Alter Ego: San d'Oria
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 507] = { -- Obtain an Alter Ego: Bastok
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 508] = { -- Obtain an Alter Ego: Windurst
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 509] = { -- Obtain a Chocobo License
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 600 },
+        },
+
+        [ 510] = { -- Obtain Job: Paladin
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 511] = { -- Obtain Job: Dark Knight
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 512] = { -- Obtain Job: Beastmaster
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 513] = { -- Obtain Job: Bard
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 514] = { -- Obtain Job: Ranger
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 515] = { -- Obtain Job: Samurai
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 516] = { -- Obtain Job: Ninja
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 517] = { -- Obtain Job: Dragoon
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 518] = { -- Obtain Job: Summoner
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 519] = { -- Obtain Job: Blue Mage
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 520] = { -- Obtain Job: Corsair
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 521] = { -- Obtain Job: Puppetmaster
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 522] = { -- Obtain Job: Dancer
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 523] = { -- Obtain Job: Scholar
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 524] = { -- Obtain Job: Geomancer
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 525] = { -- Obtain Job: Runefencer
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+      -----------------------------------
+      -- Tutorial -> Quests (Artifact 1)
+      -----------------------------------
+
+        [ 629] = { -- WAR Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 630] = { -- WAR Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 631] = { -- WAR Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 632] = { -- MNK Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 633] = { -- MNK Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 634] = { -- MNK Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 635] = { -- WHM Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 636] = { -- WHM Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 637] = { -- WHM Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 638] = { -- BLM Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 639] = { -- BLM Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 640] = { -- BLM Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 641] = { -- RDM Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 642] = { -- RDM Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 643] = { -- RDM Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 644] = { -- THF Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_TENSHODO_SHOWDOWN} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 645] = { -- THF Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 646] = { -- THF Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 647] = { -- PLD Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 648] = { -- PLD Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 649] = { -- PLD Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 650] = { -- DRK Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 651] = { -- DRK Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 652] = { -- DRK Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 653] = { -- BST Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 654] = { -- BST Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 655] = { -- BST Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
       -----------------------------------
       -- Tutorial -> Level Cap Increase
       -----------------------------------
@@ -2949,7 +3305,46 @@ function getRoeRecords(triggers)
       -----------------------------------
 
       -----------------------------------
-      -- Achievements - Job Levels I
+      -- Content (Other)                 
+      -----------------------------------
+
+        [ 727] = { -- Subjugation: Kirin
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17506670} },
+            flags = set{"repeat"},
+            reward = { sparks = 1000, xp = 5000 },
+        },
+
+        [ 728] = { -- Subjugation: Genbu
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17309980} },
+            flags = set{"repeat"},
+            reward = { sparks = 300, xp = 1500 },
+        },
+
+        [ 729] = { -- Subjugation: Suzaku
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17309983} },
+            flags = set{"repeat"},
+            reward = { sparks = 300, xp = 1500 },
+        },
+
+        [ 730] = { -- Subjugation: Seiryu
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17309981} },
+            flags = set{"repeat"},
+            reward = { sparks = 300, xp = 1500 },
+        },
+
+        [ 731] = { -- Subjugation: Byakko
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17309982} },
+            flags = set{"repeat"},
+            reward = { sparks = 300, xp = 1500 },
+        },
+
+      -----------------------------------
+      -- Achievements - Job Levels 1             
       -----------------------------------
 
         [1200] = { -- Level 30 Warrior +
@@ -3121,8 +3516,468 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Other - Daily Objectives
+      -- Achievements - Job Levels 2             
       -----------------------------------
+
+        [1224] = { -- Level 30 Paladin
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PLD, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6149, 12} } },
+        },
+
+        [1225] = { -- Level 50 Paladin
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PLD, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6164, 12} } },
+        },
+
+        [1226] = { -- Level 75 Paladin
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PLD, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3196, 4} } },
+        },
+
+        [1227] = { -- Level 99 Paladin
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PLD, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4065, 2} } },
+        },
+
+        [1228] = { -- Level 30 Dark Knight
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRK, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6153, 12} } },
+        },
+
+        [1229] = { -- Level 50 Dark Knight
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRK, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6150, 12} } },
+        },
+
+        [1230] = { -- Level 75 Dark Knight
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRK, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3197, 4} } },
+        },
+
+        [1231] = { -- Level 99 Dark Knight
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRK, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
+        },
+
+        [1232] = { -- Level 30 Beastmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BST, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6151, 12} } },
+        },
+
+        [1233] = { -- Level 50 Beastmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BST, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6153, 12} } },
+        },
+
+        [1234] = { -- Level 75 Beastmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BST, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3198, 4} } },
+        },
+
+        [1235] = { -- Level 99 Beastmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BST, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
+        },
+
+        [1236] = { -- Level 30 Bard
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BRD, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6172, 12} } },
+        },
+
+        [1237] = { -- Level 50 Bard
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BRD, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6173, 12} } },
+        },
+
+        [1238] = { -- Level 75 Bard
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BRD, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3199, 4} } },
+        },
+
+        [1239] = { -- Level 99 Bard
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BRD, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
+        },
+
+        [1240] = { -- Level 30 Ranger
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RNG, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6159, 12} } },
+        },
+
+        [1241] = { -- Level 50 Ranger
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RNG, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6160, 12} } },
+        },
+
+        [1242] = { -- Level 75 Ranger
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RNG, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3200, 4} } },
+        },
+
+        [1243] = { -- Level 99 Ranger
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RNG, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4064, 2} } },
+        },
+
+        [1244] = { -- Level 30 Samurai
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SAM, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6156, 12} } },
+        },
+
+        [1245] = { -- Level 50 Samurai
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SAM, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6154, 12} } },
+        },
+
+        [1246] = { -- Level 75 Samurai
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SAM, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3201, 4} } },
+        },
+
+        [1247] = { -- Level 99 Samurai
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SAM, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {4065, 2} } },
+        },
+
+      -----------------------------------
+      -- Achievements - Job Levels 3             
+      -----------------------------------
+
+        [1248] = { -- Level 30 Ninja
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.NIN, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6155, 12} } },
+        },
+
+        [1249] = { -- Level 50 Ninja
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.NIN, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6175, 12} } },
+        },
+
+        [1250] = { -- Level 75 Ninja
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.NIN, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3202, 4} } },
+        },
+
+        [1251] = { -- Level 99 Ninja
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.NIN, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
+        },
+
+        [1252] = { -- Level 30 Dragoon
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRG, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6154, 12} } },
+        },
+
+        [1253] = { -- Level 50 Dragoon
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRG, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6158, 12} } },
+        },
+
+        [1254] = { -- Level 75 Dragoon
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRG, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3203, 4} } },
+        },
+
+        [1255] = { -- Level 99 Dragoon
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DRG, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
+        },
+
+        [1256] = { -- Level 30 Summoner
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SMN, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6176, 12} } },
+        },
+
+        [1257] = { -- Level 50 Summoner
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SMN, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6158, 12} } },
+        },
+
+        [1258] = { -- Level 75 Summoner
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SMN, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3204, 4} } },
+        },
+
+        [1259] = { -- Level 99 Summoner
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SMN, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
+        },
+
+        [1260] = { -- Level 30 Blue Mage
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BLU, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6149, 12} } },
+        },
+
+        [1261] = { -- Level 50 Blue Mage
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BLU, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6177, 12} } },
+        },
+
+        [1262] = { -- Level 75 Blue Mage
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BLU, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3205, 4} } },
+        },
+
+        [1263] = { -- Level 99 Blue Mage
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.BLU, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4064, 2} } },
+        },
+
+        [1264] = { -- Level 30 Corsair
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.COR, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6148, 12} } },
+        },
+
+        [1265] = { -- Level 50 Corsair
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.COR, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6160, 12} } },
+        },
+
+        [1266] = { -- Level 75 Corsair
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.COR, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3206, 4} } },
+        },
+
+        [1267] = { -- Level 99 Corsair
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.COR, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4065, 2} } },
+        },
+
+        [1268] = { -- Level 30 Puppetmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PUP, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6147, 12} } },
+        },
+
+        [1269] = { -- Level 50 Puppetmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PUP, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6148, 12} } },
+        },
+
+        [1270] = { -- Level 75 Puppetmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PUP, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3207, 4} } },
+        },
+
+        [1271] = { -- Level 99 Puppetmaster
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.PUP, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
+        },
+
+      -----------------------------------
+      -- Achievements - Job Levels 4             
+      -----------------------------------
+
+        [1272] = { -- Level 30 Dancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DNC, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6148, 12} } },
+        },
+
+        [1273] = { -- Level 50 Dancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DNC, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6147, 12} } },
+        },
+
+        [1274] = { -- Level 75 Dancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DNC, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3208, 4} } },
+        },
+
+        [1275] = { -- Level 99 Dancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.DNC, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
+        },
+
+        [1276] = { -- Level 30 Scholar
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SCH, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6158, 12} } },
+        },
+
+        [1277] = { -- Level 50 Scholar
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SCH, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6157, 12} } },
+        },
+
+        [1278] = { -- Level 75 Scholar
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SCH, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {3209, 4} } },
+        },
+
+        [1279] = { -- Level 99 Scholar
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.SCH, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
+        },
+
+        [1280] = { -- Level 30 Geomancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.GEO, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6178, 12} } },
+        },
+
+        [1281] = { -- Level 50 Geomancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.GEO, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6179, 12} } },
+        },
+
+        [1282] = { -- Level 75 Geomancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.GEO, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {6092, 1} } },
+        },
+
+        [1283] = { -- Level 99 Geomancer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.GEO, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4069, 1} } },
+        },
+
+        [1284] = { -- Level 30 Runefencer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RUN, 30 } },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 500, item = { {6150, 12} } },
+        },
+
+        [1285] = { -- Level 50 Runefencer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RUN, 50 } },
+            flags = set{"retro"},
+            reward = { sparks = 200, xp = 500, item = { {6149, 12} } },
+        },
+
+        [1286] = { -- Level 75 Runefencer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RUN, 75 } },
+            flags = set{"retro"},
+            reward = { sparks = 300, xp = 500, item = { {5103, 1} } },
+        },
+
+        [1287] = { -- Level 99 Runefencer
+            trigger = triggers.levelUp,
+            reqs = { jobLvl = { tpz.job.RUN, 99 } },
+            flags = set{"retro"},
+            reward = { sparks = 400, xp = 500, item = { {4070, 1} } },
+        },
+
+      ----------------------------------------
+      -- Other - Daily Objectives           --
+      ----------------------------------------
 
         [4082] = { -- Vanquish Multiple Enemies (D)
             trigger = triggers.mobKill,
