@@ -10011,9 +10011,28 @@ INSERT INTO `mob_groups` VALUES (42,3929,144,'Titanis_Max',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (43,3928,144,'Titanis_Jax',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (44,3930,144,'Titanis_Xax',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (45,3927,144,'Titanis_Dax',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (46,6642,144,'Atori-Tutori_qm',0,128,0,27000,0,102,102,0);
-
-INSERT INTO `mob_groups` VALUES (7826,305,144,'Ayame',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,0,144,'Mahuika',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,144,'Nga_Manawa',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,144,'VuDhe_Impervious',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,0,144,'GaKhu_Bloodglee',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,144,'ZiPha_Foecrippler',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,144,'RoMho_Unrelenting',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,6642,144,'Atori-Tutori_qm',0,128,0,27000,0,102,102,0);
+INSERT INTO `mob_groups` VALUES (53,1363,144,'Flayer_Franz',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,2975,144,'Flesh_Eater',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,4479,144,'YoBhu_Hideousmask',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,4521,144,'ZoDhu_Legslicer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,2200,144,'KaNha_Jabbertongue',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,426,144,'BiFho_Jestergrin',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,2305,144,'KuTya_Hotblood',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,1167,144,'EaTho_Cruelheart',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,0,144,'Bahamute',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,6868,144,'Chest_OPlenty',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (63,6869,144,'Coffer_OPlenty',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,0,144,'Naji',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,0,144,'Naji',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (66,0,144,'Kupipi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (67,0,144,'Excenmille',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Giddeus (Zone 145)
