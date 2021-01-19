@@ -10121,7 +10121,28 @@ INSERT INTO `mob_groups` VALUES (45,2259,146,'King_of_Coins',0,128,0,0,0,75,75,0
 INSERT INTO `mob_groups` VALUES (46,3285,146,'Queen_of_Cups',0,128,2064,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (47,3283,146,'Queen_of_Batons',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (48,1532,146,'Giant_Moa',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (49,6642,146,'Atori-Tutori_qm',0,128,0,27000,0,102,102,0);
+INSERT INTO `mob_groups` VALUES (49,6870,146,'Kutkha',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,6871,146,'Kutkhas_Get',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,6872,146,'Pha_Groxo_the_Aloof',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,6873,146,'Zuu_Feya_the_Impassive',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,6874,146,'Xee_Khoyi_the_Shrouded',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,6875,146,'Kaa_Xehi_the_Doomsayer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,6642,146,'Atori-Tutori_qm',0,128,0,27000,0,102,102,0);
+INSERT INTO `mob_groups` VALUES (56,1149,146,'Dvorovoi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,1078,146,'Domovoi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,4254,146,'Voo_Tolu_the_Ghostfist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,874,146,'Cuu_Doko_the_Blizzard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,4526,146,'Zuu_Xowu_the_Darksmoke',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,1601,146,'Gii_Jaha_the_Raucous',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,15,146,'Aa_Nawu_the_Thunderblade',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (63,4474,146,'Yoo_Mihi_the_Haze',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,0,146,'Bahamute',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,6868,146,'Chest_OPlenty',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (66,6869,146,'Coffer_OPlenty',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (67,0,146,'Kupipi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (68,0,146,'Kupipi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (69,0,146,'Excenmille',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (70,0,146,'Naji',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Beadeaux (Zone 147)
