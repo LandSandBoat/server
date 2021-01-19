@@ -654,6 +654,94 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
+      -- Tutorial -> Quests (Artifact 3)
+      -----------------------------------
+
+        [ 683] = { -- DNC Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 684] = { -- DNC Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 685] = { -- DNC Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 686] = { -- SCH Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 687] = { -- SCH Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 688] = { -- SCH Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_BLOOD_RED} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 689] = { -- GEO Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 690] = { -- GEO Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 691] = { -- GEO Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_COMMUNION} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 692] = { -- RUN Artifact Quest I
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FORGING_NEW_BONDS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 693] = { -- RUN Artifact Quest II
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.LEGACIES_LOST_AND_FOUND} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 694] = { -- RUN Artifact Quest III
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DESTINYS_DEVICE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+      -----------------------------------
       -- Tutorial -> Level Cap Increase
       -----------------------------------
 
@@ -4168,9 +4256,9 @@ function getRoeRecords(triggers)
             reward = { sparks = 400, xp = 500, item = { {4070, 1} } },
         },
 
-      ----------------------------------------
-      -- Other - Daily Objectives           --
-      ----------------------------------------
+      -----------------------------------
+      -- Other - Daily Objectives
+      -----------------------------------
 
         [4082] = { -- Vanquish Multiple Enemies (D)
             trigger = triggers.mobKill,
