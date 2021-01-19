@@ -6920,6 +6920,8 @@ INSERT INTO `mob_pools` VALUES (6872,'Pha_Groxo_the_Aloof','Pha_Groxo_the_Aloof'
 INSERT INTO `mob_pools` VALUES (6873,'Zuu_Feya_the_Impassive','Zuu_Feya_the_Impassive',360,0x00003A0400000000000000000000000000000000,12,12,10,240,100,0,1,0,1,18,0,32,0,669,8,0,0,0,0,360); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6874,'Xee_Khoyi_the_Shrouded','Xee_Khoyi_the_Shrouded',360,0x00003B0400000000000000000000000000000000,13,13,9,240,100,0,1,0,1,18,0,32,0,157,0,0,7,0,0,360); -- TODO: spell, skill list
 INSERT INTO `mob_pools` VALUES (6875,'Kaa_Xehi_the_Doomsayer','Kaa_Xehi_the_Doomsayer',360,0x00003D0400000000000000000000000000000000,10,10,5,240,100,0,1,0,1,18,0,32,0,669,8,0,6,0,0,360); -- TODO: spell, skill list
+INSERT INTO `mob_pools` VALUES (6876,'Ayapec','Ayapec',77,0x0000640100000000000000000000000000000000,7,7,4,240,100,0,1,0,0,2,0,32,0,133,0,0,0,0,0,77); -- TODO: skill list
+INSERT INTO `mob_pools` VALUES (6877,'Hidhaegg','Hidhaegg',263,0x00000F0300000000000000000000000000000000,1,1,7,240,125,1040,1,1,0,2,0,32,0,131,4,0,0,0,0,263); -- TODO: skill list
 
 /*
   `poolid` int(10) unsigned NOT NULL,

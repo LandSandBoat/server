@@ -10363,10 +10363,12 @@ INSERT INTO `mob_groups` VALUES (9,1762,152,'Goo_Pake_the_Bloodhound',0,128,0,50
 -- The_Boyahda_Tree (Zone 153)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6781,153,'Scavenger_Crab_fished',0,128,2176,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (2,6768,153,'Stygian_Pugil_fished',0,128,2355,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (3,6782,153,'Bouncing_Ball_fished',0,128,342,0,0,65,67,0);
 INSERT INTO `mob_groups` VALUES (4,6783,153,'Demonic_Pugil_fished',0,128,147,0,0,65,72,0);
+
 INSERT INTO `mob_groups` VALUES (5,343,153,'Bark_Spider',960,0,227,0,0,60,63,0);
 INSERT INTO `mob_groups` VALUES (6,937,153,'Death_Cap',960,0,582,0,0,60,63,0);
 INSERT INTO `mob_groups` VALUES (7,1201,153,'Ellyllon',0,32,2890,0,0,65,66,0);
@@ -10401,11 +10403,9 @@ INSERT INTO `mob_groups` VALUES (35,60,153,'Agas',0,128,0,10000,10000,65,66,0);
 INSERT INTO `mob_groups` VALUES (36,386,153,'Beet_Leafhopper',0,128,0,11000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (37,5159,153,'Modron',0,128,0,0,9999,94,95,0);
 INSERT INTO `mob_groups` VALUES (38,5160,153,'Modrons_Druid',0,128,0,0,0,92,93,0);
-INSERT INTO `mob_groups` VALUES (39,0,153,'Ayapec',0,128,0,0,0,125,125,0);
-INSERT INTO `mob_groups` VALUES (40,0,153,'Hidhaegg',0,128,0,0,0,135,135,0);
+INSERT INTO `mob_groups` VALUES (39,6876,153,'Ayapec',0,128,0,0,0,125,125,0);
+INSERT INTO `mob_groups` VALUES (40,6877,153,'Hidhaegg',0,128,0,0,0,135,135,0);
 INSERT INTO `mob_groups` VALUES (41,0,153,'Templar_Crawler',0,128,0,0,0,0,0,0);
-
-INSERT INTO `mob_groups` VALUES (8170,4517,153,'Zonpa-Zippa',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Dragons_Aery (Zone 154)
