@@ -19,11 +19,11 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("updateCSID: %u", csid)
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     -- printf("finishCSID: %u", csid)
 end
 

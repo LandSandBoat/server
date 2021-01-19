@@ -31,7 +31,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:startEvent(11)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 11 then
         local inst = player:getBattlefield():getArea()
 

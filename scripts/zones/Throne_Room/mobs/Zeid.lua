@@ -11,10 +11,10 @@ entity.onMobDeath = function(mob, player, isKiller)
     player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 32004 then
 
         local bfid = player:getBattlefield():getArea()
