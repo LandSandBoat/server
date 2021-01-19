@@ -889,6 +889,129 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
+        [ 939] = { -- Mog Safe Expansion: 60
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 940] = { -- Mog Safe Expansion: 70
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 941] = { -- Mog Safe Expansion: 80
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+      -----------------------------------
+      -- Tutorial -> Quests (Weapon Skills)
+      -----------------------------------
+
+        [ 839] = { -- Asuran Fists
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WALLS_OF_YOUR_MIND} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 840] = { -- Evisceration
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.CLOAK_AND_DAGGER} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 841] = { -- Savage Blade
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OLD_WOUNDS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 842] = { -- Ground Strike
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.INHERITANCE} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 843] = { -- Decimation
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.AXE_THE_COMPETITION} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 844] = { -- Steel Cyclone
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 845] = { -- Spiral Hell
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 846] = { -- Impulse Drive
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.METHODS_CREATE_MADNESS} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 847] = { -- Blade: Ku
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BUGI_SODEN} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 848] = { -- Tachi: Kasha
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_POTENTIAL_WITHIN} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 849] = { -- Black Halo
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ORASTERY_WOES} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 850] = { -- Retribution
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLOOD_AND_GLORY} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 851] = { -- Empyreal Arrow
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FROM_SAPLINGS_GROW} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
+        [ 852] = { -- Detonator
+            trigger = triggers.questComplete,
+            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER} },
+            flags = set{"retro"},
+            reward = { sparks = 100, xp = 300 },
+        },
+
       -----------------------------------
       -- Tutorial -> Missions (San d'Oria)
       -----------------------------------
