@@ -11263,16 +11263,24 @@ INSERT INTO `mob_groups` VALUES (11,1473,170,'Garuda_Prime',0,128,0,0,0,80,85,0)
 INSERT INTO `mob_groups` VALUES (12,3931,170,'Titan_Prime',0,128,0,0,0,80,85,0);
 INSERT INTO `mob_groups` VALUES (13,3317,170,'Ramuh_Prime',0,128,0,0,0,80,85,0);
 INSERT INTO `mob_groups` VALUES (14,2402,170,'Leviathan_Prime',0,128,0,0,0,80,85,0);
-
-INSERT INTO `mob_groups` VALUES (8847,75,170,'Ajido-Marujido',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8852,2258,170,'King_of_Batons',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8853,2260,170,'King_of_Cups',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8854,2261,170,'King_of_Swords',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8856,3283,170,'Queen_of_Batons',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8857,3285,170,'Queen_of_Cups',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8858,3286,170,'Queen_of_Swords',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (8860,3584,170,'Shantotto',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (14184,75,170,'Ajido-Marujido',0,128,0,0,0,75,75,1);
+INSERT INTO `mob_groups` VALUES (15,0,170,'Clone_of_Flames',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (16,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (17,0,170,'Clone_of_Torrents',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (18,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (19,0,170,'Clone_of_Boulders',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (20,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,0,170,'Clone_of_Gusts',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (22,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (23,0,170,'Clone_of_Sparks',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (24,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (25,0,170,'Clone_of_Glaciers',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,0,170,'Clone_of_Lights',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (28,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,0,170,'Clone_of_Shadows',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,0,170,'Pet_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (31,0,170,'Fenrir_Prime_HTBF',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (32,0,170,'Carbuncle_Prime_HTBF',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Crawlers_Nest_[S] (Zone 171)
