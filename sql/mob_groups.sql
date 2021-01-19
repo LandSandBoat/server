@@ -9933,10 +9933,12 @@ INSERT INTO `mob_groups` VALUES (10,3032,142,'Orcish_Serjeant',330,0,1937,0,0,21
 -- Palborough_Mines (Zone 143)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,2673,143,'Mine_Crab',0,128,484,0,0,3,5,0);
 INSERT INTO `mob_groups` VALUES (2,794,143,'Coral_Crab',0,128,93,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (3,3753,143,'Stag_Crab',0,128,93,0,0,13,15,0);
 INSERT INTO `mob_groups` VALUES (4,3682,143,'Snipper_fished',0,128,0,0,0,18,20,0);
+
 INSERT INTO `mob_groups` VALUES (5,4477,143,'Young_Quadav',330,0,2790,0,0,3,10,0);
 INSERT INTO `mob_groups` VALUES (6,107,143,'Amethyst_Quadav',330,0,69,0,0,3,10,0);
 INSERT INTO `mob_groups` VALUES (7,103,143,'Amber_Quadav',330,0,59,0,0,3,10,0);
