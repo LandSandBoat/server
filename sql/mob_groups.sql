@@ -11176,20 +11176,25 @@ INSERT INTO `mob_groups` VALUES (8,3527,168,'Secutor_XI-XXXII',0,128,0,0,0,60,60
 INSERT INTO `mob_groups` VALUES (9,3357,168,'Retiarius_XI-XIX',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (10,1989,168,'Hoplomachus_XI-XXVI',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (11,675,168,'Centurio_XI-I',0,128,0,0,0,60,60,0);
--- 12: free
-INSERT INTO `mob_groups` VALUES (13,3429,168,'Sabotender_Campeon',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (14,3427,168,'Sabotender_Amante',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (15,3303,168,'Radiant_Wyvern',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (16,454,168,'Blizzard_Wyvern',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (17,2411,168,'Lightning_Wyvern',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (18,695,168,'Chaos_Wyvern',0,128,0,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (19,3234,168,'Purson',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (20,2804,168,'Nanaa_Mihgo',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (21,704,168,'Cha_Lebagta',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (22,506,168,'Bopa_Greso',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (23,1708,168,'Goblin_Repossessor',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (24,1678,168,'Goblin_Intimidator',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (25,1655,168,'Goblin_Enforcer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,3429,168,'Sabotender_Campeon',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (13,3427,168,'Sabotender_Amante',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (14,3303,168,'Radiant_Wyvern',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (15,454,168,'Blizzard_Wyvern',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (16,2411,168,'Lightning_Wyvern',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (17,695,168,'Chaos_Wyvern',0,128,0,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (18,3234,168,'Purson',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (19,2804,168,'Nanaa_Mihgo',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (20,704,168,'Cha_Lebagta',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,506,168,'Bopa_Greso',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (22,1708,168,'Goblin_Repossessor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (23,1678,168,'Goblin_Intimidator',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (24,1655,168,'Goblin_Enforcer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (25,0,168,'Ekhis',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,0,168,'Sybaris',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,3527,168,'Secutor_XI-XXXII',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (28,3357,168,'Retiarius_XI-XIX',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,1989,168,'Hoplomachus_XI-XXVI',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,675,168,'Centurio_XI-I',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Toraimarai_Canal (Zone 169)
