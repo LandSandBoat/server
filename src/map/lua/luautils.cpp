@@ -1593,7 +1593,7 @@ namespace luautils
 
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
-        auto onTrigger = lua["tpz"]["zones"][zone]["npcs"][name]["onTrigger"];
+        auto onTrigger = GetCacheEntryFromFilename(filename)["onTrigger"];
         if (!onTrigger.valid())
         {
             ShowWarning("luautils::onTrigger - No Valid Function for %s in %s\n", PNpc->GetName(), PChar->loc.zone->GetName());
@@ -4108,14 +4108,12 @@ namespace luautils
         return result.return_count() ? result.get<bool>() : false;
     }
 
-    /************************************************************************
-     *   Loads a Lua function with a fallback hierarchy                      *
-     *                                                                       *
-     *   1) 1st try: PChar->m_event.Script                                   *
-     *   2) 2nd try: The instance script if the player is in one             *
-     *   3) 3rd try: The zone script for the zone the player is in           *
-     *                                                                       *
-     ************************************************************************/
+    // Loads a Lua function with a fallback hierarchy
+    //
+    // 1) 1st try: PChar->m_event.Script
+    // 2) 2nd try: The instance script if the player is in one
+    // 3) 3rd try: The battlefield script if the player is in one
+    // 4) 4th try: The zone script for the zone the player is in
     sol::function LoadEventScript(CCharEntity* PChar, const char* functionName)
     {
         TracyZoneScoped;
@@ -4137,8 +4135,18 @@ namespace luautils
             }
         }
 
-        auto zone_filename = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
+        if (PChar->PBattlefield)
+        {
+            auto battlefield_filename = fmt::format("./scripts/zones/{}/bcnms/{}", PChar->loc.zone->GetName(), PChar->PBattlefield->GetName());
 
+            auto funcFromBattlefield = GetCacheEntryFromFilename(battlefield_filename)[functionName];
+            if (funcFromBattlefield.valid())
+            {
+                return funcFromBattlefield;
+            }
+        }
+
+        auto zone_filename = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
         auto funcFromZone = GetCacheEntryFromFilename(zone_filename)[functionName];
         if (funcFromZone.valid())
         {

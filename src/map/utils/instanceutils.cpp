@@ -54,4 +54,29 @@ namespace instanceutils
             luautils::OnInstanceCreated(PRequester, nullptr);
         }
     }
+
+    void CacheInstanceScripts()
+    {
+        /*
+        // TODO: instance_zone needs to be added to the db
+        const char query[] = "SELECT instance_name, instance_zone FROM instance_list;";
+
+        int32 ret = Sql_Query(SqlHandle, query);
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                std::string instance_name = (const char*)Sql_GetData(SqlHandle, 0);
+                uint16      zone_id       = Sql_GetIntData(SqlHandle, 1);
+
+                std::string zone_name = (const char*)(zoneutils::GetZone(zone_id)->GetName());
+
+                auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone_name, instance_name);
+
+                luautils::CacheLuaObjectFromFile(filename);
+            }
+        }
+        */
+    }
 }; // namespace instanceutils

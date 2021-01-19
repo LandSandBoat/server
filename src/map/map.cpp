@@ -253,6 +253,7 @@ int32 do_init(int32 argc, char** argv)
     ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
 
     fishingutils::LoadFishingMessages();
+    instanceutils::CacheInstanceScripts();
 
     ShowStatus("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
