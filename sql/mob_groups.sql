@@ -10781,6 +10781,7 @@ INSERT INTO `mob_groups` VALUES (35,3964,160,'Tonberry_Pontifex',86400,0,2443,0,
 INSERT INTO `mob_groups` VALUES (36,1877,160,'Hakutaku',0,128,1270,0,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (37,2718,160,'Mokumokuren',0,128,0,9000,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (38,6409,160,'Mousse',960,0,1749,0,0,64,70,0);
+INSERT INTO `mob_groups` VALUES (39,6882,160,'Azrael',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Castle_Zvahl_Baileys (Zone 161)
