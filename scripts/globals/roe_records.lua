@@ -1169,7 +1169,7 @@ function getRoeRecords(triggers)
 
         [1334] = { -- Bastok Rank 1-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.A_GEOLOGICAL_SURVEY} },
+            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY} },
             flags = set{"retro"},
             reward = { item = { {4101,6} }, sparks = 300, xp = 500 },
         },
