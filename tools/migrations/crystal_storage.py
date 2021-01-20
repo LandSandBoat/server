@@ -5,7 +5,7 @@ def migration_name():
 	return "Adding crystal storage columns to char_points table"
 
 def check_preconditions(cur):
-	return;
+	return
 
 def needs_to_run(cur):
 	# Ensure crystal columns exist in char_points
