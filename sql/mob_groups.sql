@@ -12311,10 +12311,12 @@ INSERT INTO `mob_groups` VALUES (47,6889,190,'Arcus_Blades',0,128,0,0,0,0,0,0);
 -- Dangruf_Wadi (Zone 191)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6771,191,'Land_Crab_fished',0,128,93,0,0,5,7,0);
 INSERT INTO `mob_groups` VALUES (2,794,191,'Coral_Crab',0,128,93,0,0,10,12,0);
 INSERT INTO `mob_groups` VALUES (3,6786,191,'Wadi_Leech_fished',0,128,2599,0,0,11,14,0);
 INSERT INTO `mob_groups` VALUES (4,5133,191,'Thread_Leech_fished',0,128,79,0,0,21,23,0);
+
 INSERT INTO `mob_groups` VALUES (5,1508,191,'Geyser_Lizard',0,128,952,0,0,28,30,0);
 INSERT INTO `mob_groups` VALUES (6,3381,191,'Rock_Lizard',330,0,2121,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (7,1737,191,'Goblin_Thug',330,0,1173,0,0,5,8,0);
@@ -12344,6 +12346,7 @@ INSERT INTO `mob_groups` VALUES (30,6665,191,'Goblin_Bushwhacker',330,0,0,0,0,90
 INSERT INTO `mob_groups` VALUES (31,724,191,'Chocoboleech',0,128,470,0,0,24,25,0);
 INSERT INTO `mob_groups` VALUES (32,5528,191,'Fire_Elemental',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (33,4273,191,'Wadi_Leech',0,128,2599,0,0,11,14,0);
+INSERT INTO `mob_groups` VALUES (34,6890,191,'Celaeno',0,128,0,0,0,100,100,0);
 
 -- ------------------------------------------------------------
 -- Inner_Horutoto_Ruins (Zone 192)
