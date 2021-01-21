@@ -11465,9 +11465,11 @@ INSERT INTO `mob_groups` VALUES (34,0,173,'Dazbog',0,128,0,0,0,0,0,0);
 -- Kuftal_Tunnel (Zone 174)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6781,174,'Scavenger_Crab_fished',0,128,2178,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (2,6768,174,'Stygian_Pugil_fished',0,128,2356,0,0,64,66,0);
 INSERT INTO `mob_groups` VALUES (3,6778,174,'Devil_Manta_fished',0,128,644,0,0,66,68,0);
+
 INSERT INTO `mob_groups` VALUES (4,1763,174,'Gordovs_Ghost',0,128,0,0,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (5,1003,174,'Dervos_Ghost',0,128,0,0,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (6,1609,174,'Gizerls_Ghost',0,128,0,0,0,68,68,0);
@@ -11508,6 +11510,7 @@ INSERT INTO `mob_groups` VALUES (40,5180,174,'Tangaroa',0,128,0,0,50000,96,97,0)
 INSERT INTO `mob_groups` VALUES (41,5181,174,'Koura',0,128,0,0,9999,92,93,0);
 INSERT INTO `mob_groups` VALUES (42,5182,174,'Pekapeka',0,128,0,0,0,92,93,0);
 INSERT INTO `mob_groups` VALUES (43,5183,174,'Moki',0,128,0,0,0,92,93,0);
+INSERT INTO `mob_groups` VALUES (44,6884,174,'Specter_Worm',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- The_Eldieme_Necropolis_[S] (Zone 175)
