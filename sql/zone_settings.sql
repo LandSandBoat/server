@@ -82,8 +82,8 @@ INSERT INTO `zone_settings` VALUES (33,2,'127.0.0.1',54230,'AlTaieu',233,233,101
 INSERT INTO `zone_settings` VALUES (34,3,'127.0.0.1',54230,'Grand_Palace_of_HuXzoi',0,0,115,218,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (35,3,'127.0.0.1',54230,'The_Garden_of_RuHmet',228,228,115,218,0,0.00,2201);
 INSERT INTO `zone_settings` VALUES (36,4,'127.0.0.1',54230,'Empyreal_Paradox',0,0,224,224,0,0.00,2201);
-INSERT INTO `zone_settings` VALUES (37,5,'127.0.0.1',54230,'Temenos',0,0,218,219,0,0.00,152);
-INSERT INTO `zone_settings` VALUES (38,5,'127.0.0.1',54230,'Apollyon',0,0,218,219,0,0.00,152);
+INSERT INTO `zone_settings` VALUES (37,7,'127.0.0.1',54230,'Temenos',0,0,218,219,0,0.00,152);
+INSERT INTO `zone_settings` VALUES (38,7,'127.0.0.1',54230,'Apollyon',0,0,218,219,0,0.00,152);
 INSERT INTO `zone_settings` VALUES (39,5,'127.0.0.1',54230,'Dynamis-Valkurm',121,121,121,121,0,0.00,2200);
 INSERT INTO `zone_settings` VALUES (40,5,'127.0.0.1',54230,'Dynamis-Buburimu',121,121,121,121,0,0.00,2200);
 INSERT INTO `zone_settings` VALUES (41,5,'127.0.0.1',54230,'Dynamis-Qufim',121,121,121,121,0,0.00,2200);

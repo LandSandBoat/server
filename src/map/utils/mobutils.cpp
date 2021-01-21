@@ -548,6 +548,10 @@ namespace mobutils
         {
             SetupDynamisMob(PMob);
         }
+        else if (zoneType == ZONE_TYPE::LIMBUS)
+        {
+            SetupLimbusMob(PMob);
+        }
 
         if (PMob->m_Type & MOBTYPE_NOTORIOUS)
         {
@@ -802,6 +806,20 @@ namespace mobutils
         }
     }
 
+    void SetupLimbusMob(CMobEntity* PMob)
+    {
+        PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
+
+        // Battlefield mobs don't drop gil
+        PMob->setMobMod(MOBMOD_GIL_MAX, -1);
+        PMob->setMobMod(MOBMOD_MUG_GIL, -1);
+        PMob->setMobMod(MOBMOD_EXP_BONUS, -100);
+
+        // never despawn
+        PMob->SetDespawnTime(0s);
+        PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
+    }
+
     void SetupBattlefieldMob(CMobEntity* PMob)
     {
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
@@ -813,23 +831,15 @@ namespace mobutils
 
         // never despawn
         PMob->SetDespawnTime(0s);
-        // Limbus mobs
-        uint16 zoneID = PMob->getZone();
-        if (zoneID == 37 || zoneID == 38)
+        // do not roam around
+        PMob->m_roamFlags |= ROAMFLAG_EVENT;
+        PMob->m_maxRoamDistance = 0.5f;
+        if ((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
         {
-            PMob->setMobMod(MOBMOD_ALLI_HATE, 200);
-        }
-        else
-        { // do not roam around
-            PMob->m_roamFlags |= ROAMFLAG_EVENT;
-            PMob->m_maxRoamDistance = 0.5f;
-            if ((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
-            {
-                // bcnmID 864 (desires of emptiness), 704 (darkness named), and 706 (waking dreams) don't superlink
-                // force all mobs in same instance to superlink
-                // plus one in case id is zero
-                PMob->setMobMod(MOBMOD_SUPERLINK, PMob->m_battlefieldID);
-            }
+            // bcnmID 864 (desires of emptiness), 704 (darkness named), and 706 (waking dreams) don't superlink
+            // force all mobs in same instance to superlink
+            // plus one in case id is zero
+            PMob->setMobMod(MOBMOD_SUPERLINK, PMob->m_battlefieldID);
         }
     }
 
