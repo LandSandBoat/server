@@ -12778,10 +12778,7 @@ INSERT INTO `mob_groups` VALUES (44,5147,200,'Roly-Poly',0,128,0,0,9999,91,93,0)
 INSERT INTO `mob_groups` VALUES (45,6544,200,'Fallen_Evacuee_war',300,0,809,0,0,42,43,0);
 INSERT INTO `mob_groups` VALUES (46,6547,200,'Fallen_Officer_war',300,0,814,0,0,52,55,0);
 INSERT INTO `mob_groups` VALUES (47,6548,200,'Fallen_Soldier_war',300,0,815,0,0,47,49,0);
-
-INSERT INTO `mob_groups` VALUES (9900,2413,200,'Light_Elemental',0,128,0,0,0,52,57,0);
-INSERT INTO `mob_groups` VALUES (9901,2456,200,'Lycopodium',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9908,3312,200,'Rainemard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,6891,200,'Mephitas',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- Cloister_of_Gales (Zone 201)
