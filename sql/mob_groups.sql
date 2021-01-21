@@ -11802,10 +11802,12 @@ INSERT INTO `mob_groups` VALUES (12,810,179,'Counselor_Zazarg',0,128,0,0,0,60,60
 INSERT INTO `mob_groups` VALUES (13,807,179,'Counselor_Mihli',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (14,3529,179,'Seed_Crystal',0,128,0,0,0,0,77,80);
 INSERT INTO `mob_groups` VALUES (15,3534,179,'Seed_Thrall',0,128,0,0,0,0,0,0);
-
-INSERT INTO `mob_groups` VALUES (9298,1158,179,'Ealdnarche',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9306,4493,179,'Zazarg',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9307,4498,179,'Zeid',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (16,0,179,'Kamlanaut_HTBF',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (17,0,179,'Esoteric_Scrivening',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (18,0,179,'Lion_TL',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (19,0,179,'Lion_AFF',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (20,0,179,'Zeid',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,0,179,'Aldo',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- LaLoff_Amphitheater (Zone 180)
