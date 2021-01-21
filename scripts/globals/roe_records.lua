@@ -1466,7 +1466,7 @@ function getRoeRecords(triggers)
 
       [1375] = { -- Rhapsodies of Vana'diel 1-3 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ROV, tpz.mission.id.rov.VOLTO_OSCURO} },
+          reqs = { missionComplete = {tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE} },
           flags = set{"retro"},
           reward = { item = { {8711,2} }, sparks = 300, xp = 500 },
       },
