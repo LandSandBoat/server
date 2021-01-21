@@ -12727,9 +12727,6 @@ INSERT INTO `mob_groups` VALUES (43,5161,198,'Ogbunabali',0,128,0,0,0,94,95,0);
 INSERT INTO `mob_groups` VALUES (44,250,198,'Aroma_Crawler',0,128,172,0,0,44,48,0);
 INSERT INTO `mob_groups` VALUES (45,6570,198,'Wight_blm',300,0,2654,0,0,32,35,0);
 
-INSERT INTO `mob_groups` VALUES (9847,913,198,'Dark_Elemental',0,128,0,0,0,33,36,0);
-INSERT INTO `mob_groups` VALUES (9879,4468,198,'Yazquhl',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Garlaige_Citadel (Zone 200)
 -- ------------------------------------------------------------
