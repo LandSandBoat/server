@@ -3695,7 +3695,7 @@ namespace luautils
 
         auto name = (const char*)PZone->GetName();
 
-        auto onConquestUpdate = lua[sol::create_if_nil]["tpz"]["zones"][name]["Zone"]["onConquestUpdate"];
+        sol::function onConquestUpdate = lua[sol::create_if_nil]["tpz"]["zones"][name]["Zone"]["onConquestUpdate"];
         if (!onConquestUpdate.valid())
         {
             return -1;
