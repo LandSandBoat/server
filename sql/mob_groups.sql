@@ -11906,13 +11906,9 @@ INSERT INTO `mob_groups` VALUES (56,2316,182,'Lady_Lilith',0,128,0,0,0,81,82,0);
 INSERT INTO `mob_groups` VALUES (57,2416,182,'Lilith_Ascendant',0,128,0,0,0,83,84,0);
 INSERT INTO `mob_groups` VALUES (58,1197,182,'Elemental_Gyves',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (59,609,182,'Cait_Sith_Ceithir',0,128,0,0,9999,75,75,0);
-INSERT INTO `mob_groups` VALUES (60,5463,182,'GloomTalon',0,128,0,0,0,125,125,0);
-INSERT INTO `mob_groups` VALUES (61,5464,182,'GloomScale',0,128,0,0,0,125,125,0);
-
-INSERT INTO `mob_groups` VALUES (9335,2415,182,'Lilisette',0,128,0,0,0,90,92,0);
-INSERT INTO `mob_groups` VALUES (14232,2415,182,'Lilisette',0,128,0,2000,0,125,125,1);
-INSERT INTO `mob_groups` VALUES (14233,2316,182,'Lady_Lilith',0,128,0,2000,2000,125,125,1);
-INSERT INTO `mob_groups` VALUES (14234,2416,182,'Lilith_Ascendant',0,128,0,2000,2000,125,125,1);
+INSERT INTO `mob_groups` VALUES (60,2415,182,'Lilisette',0,128,0,0,0,90,92,0);
+INSERT INTO `mob_groups` VALUES (61,5463,182,'GloomTalon',0,128,0,0,0,125,125,0);
+INSERT INTO `mob_groups` VALUES (62,5464,182,'GloomScale',0,128,0,0,0,125,125,0);
 
 -- ------------------------------------------------------------
 -- Maquette_Abdhaljs-Legion_A (Zone 183)
