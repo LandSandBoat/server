@@ -11649,10 +11649,12 @@ INSERT INTO `mob_groups` VALUES (128,5178,175,'Giltine',0,128,0,0,20000,94,95,0)
 -- Sea_Serpent_Grotto (Zone 176)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,417,176,'Big_Jaw_fished',0,128,147,0,0,35,37,0);
 INSERT INTO `mob_groups` VALUES (2,1268,176,'Bigclaw_fished',0,128,275,0,0,43,48,0);
 INSERT INTO `mob_groups` VALUES (3,6777,176,'Rock_Crab_fished',0,128,2113,0,0,53,58,0);
 INSERT INTO `mob_groups` VALUES (4,6768,176,'Stygian_Pugil_fished',0,128,147,0,0,65,67,0);
+
 INSERT INTO `mob_groups` VALUES (5,3406,176,'Royal_Leech',960,0,2127,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (6,4092,176,'Undead_Bats',960,0,2519,0,0,36,39,0);
 INSERT INTO `mob_groups` VALUES (7,3743,176,'Spring_Sahagin',792,0,2312,0,0,36,39,0);
@@ -11712,12 +11714,8 @@ INSERT INTO `mob_groups` VALUES (60,1626,176,'Glyryvilu',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (61,6549,176,'Ghast_war',960,0,954,0,0,38,41,0);
 INSERT INTO `mob_groups` VALUES (62,413,176,'Bigclaw',960,0,275,0,0,43,48,0);
 INSERT INTO `mob_groups` VALUES (63,3377,176,'Rock_Crab',960,0,2113,0,0,53,58,0);
-
-INSERT INTO `mob_groups` VALUES (9199,1931,176,'Henchman_Moogle',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9201,2226,176,'Kilhwch',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9204,2405,176,'Lhu_Mhakaracca',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9213,2904,176,'Noillurie',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9221,3367,176,'Riko_Kupenreich',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,6887,176,'Bakunawa',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,6888,176,'Kanavid',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- VeLugannon_Palace (Zone 177)
