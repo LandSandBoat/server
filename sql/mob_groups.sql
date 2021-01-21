@@ -11992,10 +11992,6 @@ INSERT INTO `mob_groups` VALUES (28,1379,184,'Fomorian_Spear',0,128,0,0,0,32,32,
 INSERT INTO `mob_groups` VALUES (29,2058,184,'Illusory_Pot',0,128,0,0,0,45,50,0);
 INSERT INTO `mob_groups` VALUES (30,5162,184,'Akvan',0,128,0,0,9999,94,95,0);
 
-INSERT INTO `mob_groups` VALUES (9346,325,184,'Bahamut',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9373,3875,184,'Tenzen',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9375,4498,184,'Zeid',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Dynamis-San_dOria (Zone 185)
 -- ------------------------------------------------------------
@@ -12309,9 +12305,7 @@ INSERT INTO `mob_groups` VALUES (43,798,190,'Corrupted_Ulbrig',0,128,0,0,0,63,63
 INSERT INTO `mob_groups` VALUES (44,5164,190,'Hahava',0,128,0,0,9999,94,95,0);
 INSERT INTO `mob_groups` VALUES (45,6543,190,'Enchanted_Bones_war',660,1,769,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (46,6563,190,'Nachzehrer_blm',660,0,1771,0,0,15,18,0);
-
-INSERT INTO `mob_groups` VALUES (9519,862,190,'Curilla',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9550,4006,190,'Trion',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,6889,190,'Arcus_Blades',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Dangruf_Wadi (Zone 191)
