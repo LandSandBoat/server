@@ -11420,15 +11420,15 @@ INSERT INTO `mob_groups` VALUES (5,3371,172,'River_Crab',330,0,2103,0,0,2,4,0);
 INSERT INTO `mob_groups` VALUES (6,6399,172,'Veindigger_Leech',330,0,963,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (7,0,172,'Gloom_Phantom',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
 
-INSERT INTO `mob_groups` VALUES (8988,4498,172,'Zeid',0,128,0,0,0,0,0,0);
-
 -- ------------------------------------------------------------
 -- Korroloka_Tunnel (Zone 173)
 -- ------------------------------------------------------------
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,3682,173,'Snipper_fished',0,128,93,0,0,22,24,0);
 INSERT INTO `mob_groups` VALUES (2,5868,173,'Greater_Pugil_fished',0,128,0,0,0,30,32,0);
 INSERT INTO `mob_groups` VALUES (3,6029,173,'Kraken_fished',0,128,1464,0,0,35,37,0);
+
 INSERT INTO `mob_groups` VALUES (4,2374,173,'Land_Worm',792,0,1500,0,0,20,25,0);
 INSERT INTO `mob_groups` VALUES (5,3537,173,'Seeker_Bats',792,0,401,0,0,22,26,0);
 INSERT INTO `mob_groups` VALUES (6,3901,173,'Thread_Leech',792,0,343,0,0,28,31,0);
@@ -11457,8 +11457,9 @@ INSERT INTO `mob_groups` VALUES (28,2283,173,'Korroloka_Leech',0,128,343,250,0,3
 INSERT INTO `mob_groups` VALUES (29,2748,173,'Morion_Worm',0,128,1739,2000,2000,30,30,0);
 INSERT INTO `mob_groups` VALUES (30,2633,173,'Metallic_Slime',0,128,1664,0,0,24,30,0);
 INSERT INTO `mob_groups` VALUES (31,1642,173,'Goblin_Bounty_Hunter',300,0,1031,0,0,10,10,0);
-
-INSERT INTO `mob_groups` VALUES (9010,3500,173,'Scimitar_Scorpion',792,0,113,0,0,34,37,0);
+INSERT INTO `mob_groups` VALUES (32,0,173,'Gloom_Phantom',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (33,0,173,'Magh_Bihu',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,0,173,'Dazbog',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Kuftal_Tunnel (Zone 174)
