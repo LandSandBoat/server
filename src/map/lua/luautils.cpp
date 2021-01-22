@@ -326,42 +326,7 @@ namespace luautils
             TracyZoneScoped;
             for (auto& path_string : filteredList)
             {
-                std::filesystem::path path(path_string);
-
-                // Split into parts
-                std::vector<std::string> parts;
-                for (auto part : path)
-                {
-                    part.replace_extension("");
-                    parts.emplace_back(part.string());
-                }
-
-                // Loads the script, get the entity
-                auto result = lua.safe_script_file(path.generic_string());
-                if (!result.valid())
-                {
-                    sol::error err = result;
-                    std::cout << "[FW] - Error: " << err.what() << "\n";
-                    return;
-                }
-
-                // Update the cache
-                if (result.return_count())
-                {
-                    sol::table table = lua["tpz"].get_or_create<sol::table>();
-
-                    std::string out_str = "tpz";
-                    auto parts_itr = parts.begin() + 2;
-                    while (parts_itr != parts.end())
-                    {
-                        table = table[*parts_itr].get_or_create<sol::table>();
-                        out_str += "." + *parts_itr;
-                        parts_itr++;
-                    }
-
-                    table.set(result);
-                    std::cout << "[FW] - Cache: " << out_str << "\n";
-                }
+                CacheLuaObjectFromFile(path_string, true);
             }
 
             // Erase list
@@ -468,7 +433,7 @@ namespace luautils
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
     // tpz.folder0.folder1.folder2.mob_name
-    void CacheLuaObjectFromFile(std::string filename)
+    void CacheLuaObjectFromFile(std::string filename, bool printOutput /*= false*/)
     {
         TracyZoneScoped;
         TracyZoneString(filename);
@@ -515,12 +480,26 @@ namespace luautils
 
         // file_result should be good, cache it!
 
-        auto table = lua["tpz"].get_or_create<sol::table>();
+        auto& table = lua["tpz"].get_or_create<sol::table>();
+        std::string out_str = "tpz";
 		for (auto& part : parts)
 		{
-			// If last entry, insert the result. Otherwise, insert a new empty table.
-			table = table[part].get_or_create<sol::table>(part == parts.back() ? file_result : lua.create_table());
+            if (part == parts.back())
+            {
+                table[sol::override_value][part] = file_result;
+            }
+            else
+            {
+                table = table[part].get_or_create<sol::table>(lua.create_table());
+            }
+            out_str += "." + part;
 		}
+
+        if (printOutput)
+        {
+            ShowInfo("[FileWatcher] %s\n", filename);
+            ShowInfo("[FileWatcher] %s\n", out_str);
+        }
     }
 
     sol::table GetCacheEntryFromFilename(std::string filename)
@@ -1627,7 +1606,13 @@ namespace luautils
             return -1;
         }
 
-        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, CLuaBaseEntity(PChar->m_event.Target));
+        std::optional<CLuaBaseEntity> optTarget = std::nullopt;
+        if (PChar->m_event.Target)
+        {
+            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+        }
+
+        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, extras, optTarget);
         if (!func_result.valid())
         {
             sol::error err = func_result;
@@ -1654,7 +1639,13 @@ namespace luautils
             return -1;
         }
 
-        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, CLuaBaseEntity(PChar->m_event.Target));
+        std::optional<CLuaBaseEntity> optTarget = std::nullopt;
+        if (PChar->m_event.Target)
+        {
+            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+        }
+
+        auto func_result = onEventUpdate(CLuaBaseEntity(PChar), eventID, result, optTarget);
         if (!func_result.valid())
         {
             sol::error err = func_result;
@@ -1676,7 +1667,13 @@ namespace luautils
             return -1;
         }
 
-        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, string, CLuaBaseEntity(PChar->m_event.Target));
+        std::optional<CLuaBaseEntity> optTarget = std::nullopt;
+        if (PChar->m_event.Target)
+        {
+            optTarget = CLuaBaseEntity(PChar->m_event.Target);
+        }
+
+        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, string, optTarget);
         if (!result.valid())
         {
             sol::error err = result;
