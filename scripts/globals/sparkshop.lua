@@ -550,11 +550,21 @@ local optionToItem = {
 -- TO DO: add event trusts
 
 function tpz.sparkshop.onTrade(player,npc,trade)
+    local copperVouchersStored = player:getCurrency("aman_vouchers")
+    local count = trade:getItemQty(8711)
+
+    if count > 0 then
+        trade:confirmItem(8711)
+        player:addCurrency("aman_vouchers", count)
+        player:confirmTrade()
+        player:startEvent(4601, 8711, count + copperVouchersStored, 230)
+    end
 end
 
 function tpz.sparkshop.onTrigger(player,npc,event)
     local sparks = player:getCurrency("Spark_of_Eminence")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
+
     -- opens shop and lists available sparks
     player:startEvent(event, 0, sparks, 0, 0, 0, remainingLimit)
 end
@@ -565,6 +575,7 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
     local category = bit.band(option, 0xFF)
     local selection = bit.rshift(option, 16)
+    printf("Category: %d, Selection: %d, Quantity: ", category, selection)
     local item = optionToItem[category][selection]
     local qty = bit.band(bit.rshift(option, 10), 0x3F)
     local qty = qty > 0 and qty or 1
@@ -589,11 +600,11 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
 
     -- verifies and finishes transaction
     if sparks >= cost and (cost <= remainingLimit or ENABLE_EXCHANGE_LIMIT == 0) then
-        if npcUtil.giveItem(player, { {item.id,qty} }) then
+        if npcUtil.giveItem(player, { {item.id, qty} }) then
             sparks = sparks - cost
-            player:updateEvent(sparks)
             player:delCurrency("spark_of_eminence", cost)
             if ENABLE_EXCHANGE_LIMIT == 1 then
+                remainingLimit = remainingLimit - cost
                 player:setCharVar("weekly_sparks_spent", weeklySparksSpent + cost)
             end
         end
