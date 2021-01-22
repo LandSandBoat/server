@@ -40,16 +40,16 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1;
 
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(-693.609, -14.583, 173.59, 30);
+    end
+
     if player:getCharVar("[QUEST]FullSpeedAhead") == 1 then -- Normal Mode
         player:addStatusEffect(tpz.effect.FULL_SPEED_AHEAD, 0, 3, tpz.fsa.duration)
         return -1
     elseif player:getCharVar("[QUEST]FullSpeedAhead") == 2 then -- Easy Mode
         player:addStatusEffect(tpz.effect.FULL_SPEED_AHEAD, 1, 3, tpz.fsa.duration)
         return -1
-    end
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-693.609, -14.583, 173.59, 30);
     end
 
     if quests.rainbow.onZoneIn(player) then
