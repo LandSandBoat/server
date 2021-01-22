@@ -51,6 +51,8 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
             conquest::UpdateWeekConquest();
             lastConquestTally = tick;
         }
+
+        roeutils::CycleWeeklyRecords();
     }
     // Hourly conquest update
     else if (CVanaTime::getInstance()->getJstMinute() == 0)

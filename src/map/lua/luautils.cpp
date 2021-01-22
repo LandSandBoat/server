@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -3761,7 +3761,7 @@ namespace luautils
         auto zone = (const char*)PZone->GetName();
         auto name = PBattlefield->GetName();
 
-        sol::function onBattlefieldLeave = lua[sol::create_if_nil]["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldLeave"];
+        auto onBattlefieldLeave = lua[sol::create_if_nil]["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldLeave"];
         if (!onBattlefieldLeave.valid())
         {
             return;
@@ -3795,7 +3795,7 @@ namespace luautils
         auto zone = (const char*)PZone->GetName();
         auto name = PBattlefield->GetName();
 
-        sol::function onBattlefieldRegister = lua[sol::create_if_nil]["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldRegister"];
+        auto onBattlefieldRegister = lua[sol::create_if_nil]["tpz"]["zones"][zone]["bcnms"][name]["onBattlefieldRegister"];
         if (!onBattlefieldRegister.valid())
         {
             return;
@@ -4116,6 +4116,8 @@ namespace luautils
     sol::function LoadEventScript(CCharEntity* PChar, const char* functionName)
     {
         TracyZoneScoped;
+
+        ShowDebug("LoadEventScript: Checking Function %s", functionName);
 
         auto funcFromChar = GetCacheEntryFromFilename(PChar->m_event.Script)[functionName];
         if (funcFromChar.valid())

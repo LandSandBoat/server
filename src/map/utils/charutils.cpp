@@ -5436,6 +5436,19 @@ namespace charutils
         return 0;
     }
 
+    void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
+    {
+        if (value == 0)
+        {
+            Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", PChar->id, var);
+        }
+        else
+        {
+            const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
+            Sql_Query(SqlHandle, fmtQuery, PChar->id, var, value, value);
+        }
+    }
+
     uint16 getWideScanRange(JOBTYPE job, uint8 level)
     {
         // Set Widescan range

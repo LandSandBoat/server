@@ -59,7 +59,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     }
 
     // Create param table
-    auto params = luautils::lua.create_table();
+    auto params        = luautils::lua.create_table();
     params["progress"] = roeutils::GetEminenceRecordProgress(PChar, recordID);
 
     for (auto& datagram : payload) // Append datagrams to param table
@@ -95,9 +95,9 @@ namespace roeutils
 {
     void init()
     {
-        roeutils::RoeSystem.RoeEnabled = luautils::lua["ENABLE_ROE"].get_or(0);
+        roeutils::RoeSystem.RoeEnabled   = luautils::lua["ENABLE_ROE"].get_or(0);
         luautils::lua["RoeParseRecords"] = &roeutils::ParseRecords;
-        luautils::lua["RoeParseTimed"] = &roeutils::ParseTimedSchedule;
+        luautils::lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
         RoeHandlers.fill(RoeCheckHandler());
     }
 
@@ -151,6 +151,11 @@ namespace roeutils
                     {
                         roeutils::RoeSystem.DailyRecords.set(recordID);
                         roeutils::RoeSystem.DailyRecordIDs.push_back(recordID);
+                    }
+                    else if (flag == "weekly")
+                    {
+                        roeutils::RoeSystem.WeeklyRecords.set(recordID);
+                        roeutils::RoeSystem.WeeklyRecordIDs.push_back(recordID);
                     }
                     else if (flag == "timed")
                     {
@@ -375,16 +380,15 @@ namespace roeutils
         // Only chars with First Step Forward complete can get timed/daily records
         if (GetEminenceRecordCompletion(PChar, 1))
         {
-            // Time gets messy, avert your eyes.
-            auto jstnow     = time(nullptr) + JST_OFFSET;
-            auto lastOnline = PChar->lastOnline;
+            time_t jstnow     = time(nullptr) + JST_OFFSET;
+            time_t lastOnline = PChar->lastOnline;
 
             { // Daily Reset
-                auto* jst            = gmtime(&jstnow);
-                jst->tm_hour         = 0;
-                jst->tm_min          = 0;
-                jst->tm_sec          = 0;
-                auto lastJstMidnight = timegm(jst) - JST_OFFSET; // Unix timestamp of the last JST midnight
+                tm* jst                = gmtime(&jstnow);
+                jst->tm_hour           = 0;
+                jst->tm_min            = 0;
+                jst->tm_sec            = 0;
+                time_t lastJstMidnight = timegm(jst) - JST_OFFSET; // Unix timestamp of the last JST midnight
 
                 if (lastOnline < lastJstMidnight)
                 {
@@ -392,12 +396,29 @@ namespace roeutils
                 }
             }
 
+            { // Weekly Reset
+                tm* jst                   = gmtime(&jstnow);
+                jst->tm_hour              = 0;
+                jst->tm_min               = 0;
+                jst->tm_sec               = 0;
+
+                // This is a bit wonky.  Grab the current Unix timestamp, subtract the JST_OFFSET, and then find number of days in the week to subtract.
+                // This will get us to an off by one state, so add an additional day to the timestamp.
+                time_t lastJstWeeklyReset = timegm(jst) - JST_OFFSET - (jst->tm_wday * 86400) + 86400; // Unix timestamp of last JST Midnight (Sunday->Monday)
+
+                if (lastOnline < lastJstWeeklyReset)
+                {
+                    ClearWeeklyRecords(PChar);
+                    charutils::SetCharVar(PChar, "weekly_sparks_spent", 0);
+                }
+            }
+
             { // 4hr Reset
-                auto* jst              = gmtime(&jstnow);
-                jst->tm_hour           = jst->tm_hour & 0xFC;
-                jst->tm_min            = 0;
-                jst->tm_sec            = 0;
-                auto lastJstTimedBlock = timegm(jst) - JST_OFFSET; // Unix timestamp of the start of the current 4-hr block
+                tm* jst                  = gmtime(&jstnow);
+                jst->tm_hour             = jst->tm_hour & 0xFC;
+                jst->tm_min              = 0;
+                jst->tm_sec              = 0;
+                time_t lastJstTimedBlock = timegm(jst) - JST_OFFSET; // Unix timestamp of the start of the current 4-hr block
 
                 if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
                 {
@@ -508,6 +529,46 @@ namespace roeutils
         }
 
         zoneutils::ForEachZone([](CZone* PZone) { PZone->ForEachChar([](CCharEntity* PChar) { ClearDailyRecords(PChar); }); });
+    }
+
+    void ClearWeeklyRecords(CCharEntity* PChar)
+    {
+        // Set daily record progress to 0
+        for (int i = 0; i < 30; i++)
+        {
+            if (auto recordID = PChar->m_eminenceLog.active[i]; RoeSystem.WeeklyRecords.test(recordID))
+            {
+                PChar->m_eminenceLog.progress[i] = 0;
+            }
+        }
+        PChar->pushPacket(new CRoeUpdatePacket(PChar));
+
+        // Set completion for daily records to 0
+        for (auto record : RoeSystem.WeeklyRecordIDs)
+        {
+            uint16 page = record / 8;
+            uint8  bit  = record % 8;
+            PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
+        }
+
+        charutils::SaveEminenceData(PChar);
+        charutils::SetCharVar(PChar, "weekly_sparks_spent", 0);
+
+        for (int i = 0; i < 4; i++)
+        {
+            PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
+        }
+    }
+
+    void CycleWeeklyRecords()
+    {
+        TracyZoneScoped;
+        if (!RoeSystem.RoeEnabled)
+        {
+            return;
+        }
+
+        zoneutils::ForEachZone([](CZone* PZone) { PZone->ForEachChar([](CCharEntity* PChar) { ClearWeeklyRecords(PChar); }); });
     }
 
 } // namespace roeutils

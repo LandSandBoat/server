@@ -554,12 +554,15 @@ end
 
 function tpz.sparkshop.onTrigger(player,npc,event)
     local sparks = player:getCurrency("Spark_of_Eminence")
+    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
     -- opens shop and lists available sparks
-    player:startEvent(event,0,sparks)
+    player:startEvent(event, 0, sparks, 0, 0, 0, remainingLimit)
 end
 
 function tpz.sparkshop.onEventUpdate(player,csid,option)
     local sparks = player:getCurrency("Spark_of_Eminence")
+    local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
+    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
     local category = bit.band(option, 0xFF)
     local selection = bit.rshift(option, 16)
     local item = optionToItem[category][selection]
@@ -570,7 +573,7 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
     -- makes sure player has room for three stacks of tomes
     if (qty > 12 and qty < 99) and player:getFreeSlotsCount() < 3 then
         player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED,item.id)
-        player:updateEvent(sparks)
+        player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
         return
     end
 
@@ -585,15 +588,18 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
     end
 
     -- verifies and finishes transaction
-    if sparks >= cost then
+    if sparks >= cost and (cost <= remainingLimit or ENABLE_EXCHANGE_LIMIT == 0) then
         if npcUtil.giveItem(player, { {item.id,qty} }) then
             sparks = sparks - cost
             player:updateEvent(sparks)
             player:delCurrency("spark_of_eminence", cost)
+            if ENABLE_EXCHANGE_LIMIT == 1 then
+                player:setCharVar("weekly_sparks_spent", weeklySparksSpent + cost)
+            end
         end
-        player:updateEvent(sparks)
+        player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
     else
-        player:updateEvent(sparks)
+        player:updateEvent(sparks, 0, 0, 0, 0, remainingLimit)
         player:messageSpecial(zones[player:getZoneID()].text.NOT_ENOUGH_SPARKS)
     end
 end
