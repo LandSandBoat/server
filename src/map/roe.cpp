@@ -50,7 +50,7 @@ void SaveEminenceDataNice(CCharEntity* PChar)
 void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagramList& payload)
 {
     // TODO: Move this Lua interaction into luautils
-    auto onRecordTrigger = luautils::lua[sol::create_if_nil]["tpz"]["roe"]["onRecordTrigger"];
+    auto onRecordTrigger = luautils::lua["tpz"]["roe"]["onRecordTrigger"];
     if (!onRecordTrigger.valid())
     {
         sol::error err = onRecordTrigger;

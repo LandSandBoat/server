@@ -2102,9 +2102,9 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
  *  Notes   : Access values with key identifiers (pos.x or pos.y)
  ************************************************************************/
 
-auto CLuaBaseEntity::getPos() -> std::map<std::string, float>
+auto CLuaBaseEntity::getPos() -> sol::table
 {
-    std::map<std::string, float> pos;
+    auto pos = luautils::lua.create_table();
 
     pos["x"]   = m_PBaseEntity->loc.p.x;
     pos["y"]   = m_PBaseEntity->loc.p.y;
@@ -2184,54 +2184,67 @@ uint8 CLuaBaseEntity::getRotPos()
  *  Purpose : Sends a PC to a new position
  *  Example : player:setPos(x,y,z,rot,zone) -- zone value is optional
  *  Notes   : Using without zone will send player to coordinates on same map
+ *          : Can handle:
+ *          : setPos(1, 2, 3, 4, 5),
+ *          : setPos({ 1, 2, 3, 4, 5 }),
+ *          : setPos(({ x = 1, y = 2, z = 3, rotation = 4, zone = 5 }))
  ************************************************************************/
 
-// TODO: Make sure we cover all types of argument cases, or standardize!
 void CLuaBaseEntity::setPos(sol::variadic_args va)
 {
-    sol::object arg0 = va.get<sol::object>(0);
-    sol::object arg1 = va.get<sol::object>(1);
-    sol::object arg2 = va.get<sol::object>(2);
-    sol::object arg3 = va.get<sol::object>(3);
-    sol::object arg4 = va.get<sol::object>(4);
+    float x;
+    float y;
+    float z;
+    uint8 rotation;
 
+    if (va[0].is<sol::table>())
+    {
+        auto table = va[0].as<sol::table>();
+        if (table["x"].get_type() == sol::type::number) // Named table
+        {
+            x        = table["x"].get_or<float>(m_PBaseEntity->loc.p.x);
+            y        = table["y"].get_or<float>(m_PBaseEntity->loc.p.y);
+            z        = table["z"].get_or<float>(m_PBaseEntity->loc.p.z);
+            rotation = table["rotation"].get_or<uint8>(m_PBaseEntity->loc.p.rotation);
+        }
+        else // Raw table
+        {
+            x        = table[0].get_or<float>(m_PBaseEntity->loc.p.x);
+            y        = table[1].get_or<float>(m_PBaseEntity->loc.p.y);
+            z        = table[2].get_or<float>(m_PBaseEntity->loc.p.z);
+            rotation = table[3].get_or<uint8>(m_PBaseEntity->loc.p.rotation);
+        }
+    }
+    else if (va[0].is<float>()) // Pure args
+    {
+        x        = va[0].get_type() == sol::type::number ? va[0].as<float>() : m_PBaseEntity->loc.p.x;
+        y        = va[1].get_type() == sol::type::number ? va[1].as<float>() : m_PBaseEntity->loc.p.y;
+        z        = va[2].get_type() == sol::type::number ? va[2].as<float>() : m_PBaseEntity->loc.p.z;
+        rotation = va[3].get_type() == sol::type::number ? va[3].as<uint8>() : m_PBaseEntity->loc.p.rotation;
+    }
+
+    // Set
+    m_PBaseEntity->loc.p.x        = x;
+    m_PBaseEntity->loc.p.y        = y;
+    m_PBaseEntity->loc.p.z        = z;
+    m_PBaseEntity->loc.p.rotation = rotation;
+
+    // Zoning
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar = ((CCharEntity*)m_PBaseEntity);
-        if (arg4.is<uint8>() && PChar->status == STATUS_TYPE::DISAPPEAR)
+        if (va[4].is<uint8>() && PChar->status == STATUS_TYPE::DISAPPEAR)
         {
             // do not modify zone/position if the character is already zoning
             return;
         }
     }
 
-    if (arg0.is<double>())
-    {
-        m_PBaseEntity->loc.p.x        = arg0.is<float>() ? arg0.as<float>() : m_PBaseEntity->loc.p.x;
-        m_PBaseEntity->loc.p.y        = arg1.is<float>() ? arg1.as<float>() : m_PBaseEntity->loc.p.y;
-        m_PBaseEntity->loc.p.z        = arg2.is<float>() ? arg2.as<float>() : m_PBaseEntity->loc.p.z;
-        m_PBaseEntity->loc.p.rotation = arg3.is<uint8>() ? arg3.as<uint8>() : m_PBaseEntity->loc.p.rotation;
-    }
-    else if (arg0.is<sol::table>())
-    {
-        sol::table table = arg0.as<sol::table>();
-        auto       vec   = table.as<std::vector<double>>();
-
-        m_PBaseEntity->loc.p.x = vec[0];
-        m_PBaseEntity->loc.p.y = vec[1];
-        m_PBaseEntity->loc.p.z = vec[2];
-
-        if (vec.size() == 4)
-        {
-            m_PBaseEntity->loc.p.rotation = vec[3];
-        }
-    }
-
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        if (arg4.is<double>())
+        if (va[4].is<double>())
         {
-            auto zoneid = arg4.as<uint16>();
+            auto zoneid = va[4].as<uint16>();
             if (zoneid >= MAX_ZONEID)
             {
                 return;
