@@ -33,8 +33,9 @@ local maps = {
     [tpz.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
 }
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local gil = trade:getGil()
     local count = trade:getItemCount()
 
@@ -74,7 +75,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND)) then
         player:startEvent(133, currency[1], CURRENCY_EXCHANGE_RATE, currency[2], CURRENCY_EXCHANGE_RATE, currency[3], PRISMATIC_HOURGLASS_COST, TIMELESS_HOURGLASS, TIMELESS_HOURGLASS_COST)
     else
@@ -82,7 +83,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 133) then
 
         -- asking about hourglasses
@@ -122,7 +123,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- bought prismatic hourglass
     if (csid == 134) then
@@ -187,3 +188,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

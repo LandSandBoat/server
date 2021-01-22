@@ -4,14 +4,15 @@
 -----------------------------------
 require("scripts/globals/world")
 -----------------------------------
+local entity = {}
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if not (mob:getWeather() == tpz.weather.WIND or mob:getWeather() == tpz.weather.GALES) then
         DespawnMob(mob:getID())
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 926 then
         local stormwindCounter = mob:getLocalVar("stormwindCounter")
 
@@ -27,19 +28,21 @@ function onMobWeaponSkill(target, mob, skill)
     end
 end
 
-function onMobDisengage(mob, weather)
+entity.onMobDisengage = function(mob, weather)
     if not (mob:getWeather() == tpz.weather.WIND or mob:getWeather() == tpz.weather.GALES) then
         DespawnMob(mob:getID())
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Set Kruetzet's spawnpoint and respawn time (9-12 hours)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(32400, 43200))
     mob:setLocalVar("cooldown", os.time() + mob:getRespawnTime()/1000)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 end
+
+return entity

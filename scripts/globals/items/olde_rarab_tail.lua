@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5911
 -- Item: Olde Rarab Tail
 -- Effect: 90 Seconds of "Terror" effect.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local typeEffect = tpz.effect.TERROR
     local duration = 90
     local ID = zones[target:getZoneID()]
@@ -22,3 +23,5 @@ function onItemUse(target)
         target:messageBasic(tpz.msg.basic.NO_EFFECT)
     end
 end
+
+return item_object

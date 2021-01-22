@@ -1,18 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Geocrush
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
 
----------------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
 
     local dINT = math.floor(pet:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
     local tp = skill:getTP() / 10
@@ -43,3 +44,5 @@ function onPetAbility(target, pet, skill)
 
     return damage
 end
+
+return ability_object

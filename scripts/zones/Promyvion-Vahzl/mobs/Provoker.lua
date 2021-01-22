@@ -5,14 +5,15 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.ACC, 50)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local changeTime = mob:getLocalVar("changeTime")
     local element = mob:getLocalVar("element")
@@ -37,7 +38,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     local element = mob:getLocalVar("element")
     if element > 0 then
         return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENFIRE + element - 1, {chance = 1000})
@@ -46,5 +47,7 @@ function onAdditionalEffect(mob, target, damage)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

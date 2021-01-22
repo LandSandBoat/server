@@ -1,10 +1,11 @@
 -----------------------------------
---
---
---
+-- tpz.effect.LIGHT_ARTS
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:recalculateAbilitiesTable()
     local bonus = effect:getPower()
     local regen = effect:getSubPower()
@@ -26,10 +27,10 @@ function onEffectGain(target, effect)
     target:recalculateSkillsTable()
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:recalculateAbilitiesTable()
     local bonus = effect:getPower()
     local regen = effect:getSubPower()
@@ -50,3 +51,5 @@ function onEffectLose(target, effect)
     end
     target:recalculateSkillsTable()
 end
+
+return effect_object

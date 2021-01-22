@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Battery Charge
 -- Gradually restores MP
 -- Spell cost: 50 MP
@@ -10,20 +10,21 @@
 -- Casting Time: 5 seconds
 -- Recast Time: 75 seconds
 -- Spell Duration: 100 ticks, 300 Seconds (5 Minutes)
---
+-----------------------------------
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.REFRESH
     local power = 3
     local duration = 300
@@ -48,3 +49,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

@@ -11,12 +11,13 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 378, -3, 338, 382, 3, 342)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -30,22 +31,22 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if region:GetRegionID() == 1 then
         local StoneID = player:getCharVar("EmptyVesselStone")
-        if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) == QUEST_ACCEPTED and player:getCharVar("AnEmptyVesselProgress") == 4 and player:hasItem(StoneID) then
+        if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) == QUEST_ACCEPTED and player:getCharVar("AnEmptyVesselProgress") == 4 and player:hasItem(StoneID) then
             player:startEvent(3, StoneID)
         end
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if
         csid == 3 and
         option == 13 and
@@ -56,9 +57,11 @@ function onEventFinish(player, csid, option)
     elseif csid == 3 and option ~= 13 then -- Make a mistake and get reset
         player:setCharVar("AnEmptyVesselProgress", 0)
         player:setCharVar("EmptyVesselStone", 0)
-        player:delQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+        player:delQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
         player:setPos(148, -2, 0, 130, 50)
     elseif csid == 10 then
         player:setCharVar("AhtUrganStatus", 1)
     end
 end
+
+return zone_object

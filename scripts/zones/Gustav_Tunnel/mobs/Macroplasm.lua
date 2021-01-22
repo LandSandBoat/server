@@ -6,12 +6,13 @@
 local ID = require("scripts/zones/Gustav_Tunnel/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (isKiller) then
         local mobId = mob:getID()
         local offset = mobId - ID.mob.GIGAPLASM
@@ -25,3 +26,5 @@ function onMobDeath(mob, player, isKiller)
         GetMobByID(mobId + offset + 2):updateEnmity(player)
     end
 end
+
+return entity

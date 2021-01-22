@@ -12,10 +12,11 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 7) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 7) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_2", 0)
             player:tradeComplete()
@@ -26,15 +27,15 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local darkLegacy = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
+    local darkLegacy = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 5)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 5)) then
         player:startEvent(933)
     elseif (darkLegacy == QUEST_AVAILABLE and mJob == tpz.job.DRK and mLvl >= AF1_QUEST_LEVEL) then
         player:startEvent(751) -- Start Quest "Dark Legacy"
@@ -48,15 +49,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 510 and option == 0) then
         player:setCharVar("TheUsual_Event", 1)
     elseif (csid == 751) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
         player:setCharVar("darkLegacyCS", 1)
     elseif (csid == 755) then
         if (player:getFreeSlotsCount() == 0) then
@@ -67,10 +68,12 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16798) -- Raven Scythe
             player:setCharVar("darkLegacyCS", 0)
             player:addFame(BASTOK, 20)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY)
         end
     elseif (csid == 933) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 5, true))
     end
 
 end
+
+return entity

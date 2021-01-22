@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 18270, 18271, 18638, 18652, 18666, 19747, 19840, 20555, 20556, 20583
 -- Item: Mandau
 -- Additional Effect: Poison
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if math.random(100) <= chance and applyResistanceAddEffect(player, target, tpz.magic.ele.WATER, 0) > 0.5 then
@@ -18,3 +19,5 @@ function onAdditionalEffect(player, target, damage)
 
     return 0, 0, 0
 end
+
+return item_object

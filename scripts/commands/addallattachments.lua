@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: addallattachments
 -- desc: Unlocks all attachments
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {
@@ -25,6 +25,7 @@ local function AddAllAttachments(player)
     for i = 1, #ValidAttachments do
         player:unlockAttachment(ValidAttachments[i])
     end
+    player:PrintToPlayer(string.format("%s now has all attachments.", player:getName()))
 end
 
 function onTrigger(player, target)

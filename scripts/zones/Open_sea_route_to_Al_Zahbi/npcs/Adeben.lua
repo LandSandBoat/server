@@ -6,16 +6,19 @@
 -----------------------------------
 local ID = require("scripts/zones/Open_sea_route_to_Al_Zahbi/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.ON_WAY_TO_AL_ZAHBI, 0, 0) -- Earth Time, Vana Hours. Needs a get-time function for boat?
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

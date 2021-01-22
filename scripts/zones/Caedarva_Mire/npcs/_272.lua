@@ -8,11 +8,12 @@ require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(tpz.ki.LEUJAOAM_ASSAULT_ORDERS)) then
         local assaultid = player:getCurrentAssault()
         local recommendedLevel = getRecommendedAssaultLevel(assaultid)
@@ -30,7 +31,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 
     local assaultid = player:getCurrentAssault()
 
@@ -50,7 +51,7 @@ function onEventUpdate(player, csid, option, target)
     local party = player:getParty()
 
     if (party ~= nil) then
-        for i, v in ipairs(party) do
+        for i, v in pairs(party) do
             if (not (v:hasKeyItem(tpz.ki.LEUJAOAM_ASSAULT_ORDERS) and v:getCurrentAssault() == assaultid)) then
                 player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                 player:instanceEntry(target, 1)
@@ -67,14 +68,14 @@ function onEventUpdate(player, csid, option, target)
 
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
 
     if csid == 140 and option == 4 then
         player:setPos(0, 0, 0, 0, 69)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     if (instance) then
         instance:setLevelCap(player:getCharVar("AssaultCap"))
         player:setCharVar("AssaultCap", 0)
@@ -85,7 +86,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if (party ~= nil) then
-            for i, v in ipairs(party) do
+            for i, v in pairs(party) do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(130, 0)
@@ -98,3 +99,5 @@ function onInstanceCreated(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+
+return entity

@@ -3,18 +3,21 @@
 --  NPC: Esmallegue
 --  General Info NPC
 -- !pos 0 2 -83 230
--------------------------------------
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 -- player:startEvent(894)-- cavernous maw
     player:startEvent(885)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

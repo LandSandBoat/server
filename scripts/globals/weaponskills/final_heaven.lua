@@ -1,4 +1,4 @@
--------------------------------
+-----------------------------------
 -- Skill: Final Heaven
 -- H2H weapon skill
 -- Skill Level N/A
@@ -7,13 +7,15 @@
 -- 100%TP     200%TP     300%TP
 -- 3.0x        3.0x    3.0x
 -- +10 Subtle Blow for a short duration after using the weapon skill. (Not implemented)
--------------------------------
+-----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
--------------------------------
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+-----------------------------------
+local weaponskill_object = {}
+
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     -- number of normal hits for ws
     params.numHits = 1
@@ -44,3 +46,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

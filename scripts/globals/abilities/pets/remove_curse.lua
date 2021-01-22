@@ -1,16 +1,17 @@
----------------------------------------------
+-----------------------------------
 -- Remove Curse
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
     local effect
     if (target:delStatusEffect(tpz.effect.CURSE_I)) then
         skill:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT)
@@ -24,3 +25,5 @@ function onUseAbility(pet, target, skill, action)
 
     return effect
 end
+
+return ability_object

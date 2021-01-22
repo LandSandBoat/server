@@ -4,11 +4,14 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     dynamis.refillStatueOnSpawn(mob)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.refillStatueOnDeath(mob, player, isKiller)
 end
+
+return entity

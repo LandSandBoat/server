@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Nashmau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade:                              Receive:
     -- 1 x Imperial Gold Piece (2187)       5 x Imperial Mythril Piece(2186)
     -- 1 x Imperial Mythril Piece(2186)        2 x Imperial Silver Piece(2185)
@@ -33,12 +34,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(240)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

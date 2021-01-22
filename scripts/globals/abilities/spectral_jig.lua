@@ -11,12 +11,13 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
    return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local baseDuration = 180
     local durationMultiplier = 1.0 + utils.clamp(player:getMod(tpz.mod.JIG_DURATION), 0, 50) / 100
     local finalDuration = math.floor(baseDuration * durationMultiplier * SNEAK_INVIS_DURATION_MULTIPLIER)
@@ -31,3 +32,5 @@ function onUseAbility(player, target, ability)
 
     return 1
 end
+
+return ability_object

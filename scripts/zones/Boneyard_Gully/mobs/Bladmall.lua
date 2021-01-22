@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Boneyard_Gully/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
 end
 
-function onMobFight(mob,target)
+entity.onMobFight = function(mob,target)
     local hpp   = mob:getHPP()
     local bfID  = mob:getBattlefield():getArea()
     local adds  = mob:getLocalVar("adds")
@@ -45,7 +46,7 @@ function onMobFight(mob,target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Adds die with parent
     if isKiller then
         local bfID = mob:getBattlefield():getArea()
@@ -57,3 +58,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

@@ -10,19 +10,20 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
 
-    local MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 19)) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 19)) then
         player:startEvent(621)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==9) then
         player:startEvent(592)--COP event
@@ -44,10 +45,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 314) then
         prog = player:getCharVar("QuestMakingHeadlines_var")
         player:addKeyItem(tpz.ki.PORT_WINDURST_SCOOP)
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 19, true))
     end
 end
+
+return entity

@@ -3,16 +3,17 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addMod(tpz.mod.SHIELD_BASH, 30)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:delMod(tpz.mod.SHIELD_BASH, 30)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:addMod(tpz.mod.SHIELD_BASH, 20)
         pet:addMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 12)
@@ -25,7 +26,7 @@ function onManeuverGain(pet, maneuvers)
     end
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     if maneuvers == 1 then
         pet:delMod(tpz.mod.SHIELD_BASH, 20)
         pet:delMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 12)
@@ -37,3 +38,5 @@ function onManeuverLose(pet, maneuvers)
         pet:delMod(tpz.mod.AUTO_SHIELD_BASH_SLOW, 6)
     end
 end
+
+return attachment_object

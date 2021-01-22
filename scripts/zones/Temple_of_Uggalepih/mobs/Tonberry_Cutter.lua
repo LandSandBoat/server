@@ -8,8 +8,9 @@ mixins = {require("scripts/mixins/families/tonberry")}
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 790, 1, tpz.regime.type.GROUNDS)
     tpz.regime.checkRegime(player, mob, 791, 1, tpz.regime.type.GROUNDS)
     tpz.regime.checkRegime(player, mob, 792, 1, tpz.regime.type.GROUNDS)
@@ -18,6 +19,8 @@ function onMobDeath(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 795, 1, tpz.regime.type.GROUNDS)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.SOZU_SARBERRY_PH, 10, 3600) -- 1 hour
 end
+
+return entity

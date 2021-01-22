@@ -7,13 +7,14 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
     mob:addMod(tpz.mod.UFASTCAST, 50)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i, v in pairs(bcnmAllies) do
         if v:getName() == "Prishe" then
@@ -28,9 +29,9 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
-    if mob:AnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
-        mob:AnimationSub(0)
+entity.onMobFight = function(mob, target)
+    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
+        mob:setAnimationSub(0)
         mob:stun(1500)
     end
 
@@ -42,28 +43,29 @@ function onMobFight(mob, target)
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 219 then
         spell:setMPCost(1)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local battlefield = mob:getBattlefield()
     if player then
         player:startEvent(32004, battlefield:getArea())
     else
-        for _, member in pairs(battlefield:getPlayers()) do
+        local players = battlefield:getPlayers()
+        for _, member in pairs(players) do
             member:startEvent(32004, battlefield:getArea())
         end
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("updateCSID: %u", csid)
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     -- printf("finishCSID: %u", csid)
 
     if csid == 32004 then
@@ -78,3 +80,5 @@ function onEventFinish(player, csid, option, target)
     end
 
 end
+
+return entity

@@ -6,23 +6,27 @@
 -- !pos -34.840 -1.250 -114.490 241 - Weaver's Guild
 -----------------------------------
 require("scripts/globals/ephemeral")
+-----------------------------------
+local entity = {}
 
 local triggerEvent = 895
 local tradeEvent = 897
 local failEvent = 899
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     tpz.ephemeral.onTrade(player, trade, tradeEvent, failEvent)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.ephemeral.onTrigger(player, triggerEvent)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     tpz.ephemeral.onEventUpdate(player)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.ephemeral.onEventFinish(player, option, csid == tradeEvent)
 end
+
+return entity

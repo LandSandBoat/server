@@ -7,10 +7,11 @@ local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local hittingTheMarquisate = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
+    local hittingTheMarquisate = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
 
     if (hittingTheMarquisate == QUEST_ACCEPTED and trade:hasItemQty(1091, 1) and trade:getItemCount() == 1) then -- Trade Chandelier coal
         player:startEvent(10005)
@@ -18,7 +19,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local hittingTheMarquisateHagainCS = player:getCharVar("hittingTheMarquisateHagainCS")
 
@@ -34,10 +35,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10003) then
         player:setCharVar("hittingTheMarquisateHagainCS", 2)
         player:addKeyItem(tpz.ki.BOMB_INCENSE)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

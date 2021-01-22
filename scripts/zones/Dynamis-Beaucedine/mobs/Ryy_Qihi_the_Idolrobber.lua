@@ -9,6 +9,9 @@ mixins =
     require("scripts/mixins/remove_doom")
 }
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

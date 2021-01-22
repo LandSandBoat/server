@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5486
 -- Bard Die
 -- Teaches the job ability Choral Roll
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnAbility(tpz.jobAbility.CHORAL_ROLL)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addLearnedAbility(tpz.jobAbility.CHORAL_ROLL)
 end
+
+return item_object

@@ -6,6 +6,7 @@
 local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
 local scrawledWritingPositions =
 {
@@ -14,7 +15,7 @@ local scrawledWritingPositions =
     [3] = {-150.0, 8.0, -252.0},
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 4541) and npcUtil.popFromQM(player, npc, ID.mob.GOBLIN_WOLFMAN, {radius = 2, hide = 900}) then
         player:confirmTrade()
         local newPosition = npcUtil.pickNewPosition(npc:getID(), scrawledWritingPositions, true)
@@ -22,11 +23,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

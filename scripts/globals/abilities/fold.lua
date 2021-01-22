@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (target:hasCorsairEffect()) then
         return 0, 0
     else
@@ -18,7 +19,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     target:fold()
 
     local merit = target:getMerit(tpz.merit.FOLD)
@@ -30,3 +31,5 @@ function onUseAbility(player, target, ability)
 
     return tpz.effect.FOLD
 end
+
+return ability_object

@@ -4,11 +4,13 @@
 -- Type: Quest Giver
 -- !pos -41.465 -2.125 -163.018 94
 -----------------------------------
-function onTrade(player, npc, trade)
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local RedeemingRocks = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
+entity.onTrigger = function(player, npc)
+    local RedeemingRocks = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
     local RocksProg = player:getCharVar("RedeemingRocksProg")
 
     if RedeemingRocks == QUEST_AVAILABLE then
@@ -24,13 +26,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 108 then -- Finish "Redeeming Rocks" opening CS
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.REDEEMING_ROCKS)
         player:setCharVar("RedeemingRocksProg", 1)
     elseif csid == 109 then -- Finish "Redeeming Rocks" third CS
         player:setCharVar("RedeemingRocksProg", 3)
@@ -44,3 +46,5 @@ function onEventFinish(player, csid, option)
         })
     end
 end
+
+return entity

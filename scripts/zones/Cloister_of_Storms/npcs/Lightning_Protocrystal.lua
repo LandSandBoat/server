@@ -9,12 +9,14 @@ local ID = require("scripts/zones/Cloister_of_Storms/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/bcnm")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     TradeBCNM(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(ASA) == tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Violet") == 1) then
         player:startEvent(2)
@@ -25,15 +27,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
------------------------------------
--- onEventFinish Action
------------------------------------
-
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 
@@ -46,3 +44,5 @@ function onEventFinish(player, csid, option)
         return
     end
 end
+
+return entity

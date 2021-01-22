@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Dread Dive
 --
 -- Description: Dives into a single target. Additional effect: Knockback + Stun
@@ -6,16 +6,17 @@
 -- Utsusemi/Blink absorb: 1 shadow
 -- Range: Melee
 -- Notes: Used instead of Gliding Spike by certain notorious monsters.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.4
@@ -27,3 +28,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

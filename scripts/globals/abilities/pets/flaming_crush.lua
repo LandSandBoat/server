@@ -1,19 +1,20 @@
----------------------------------------------------
+-----------------------------------
 -- Flaming Crush M=10, 2, 2? (STILL don't know)
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/summon")
 require("scripts/globals/magic")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = 10
@@ -33,3 +34,5 @@ function onPetAbility(target, pet, skill)
 
     return totaldamage
 end
+
+return ability_object

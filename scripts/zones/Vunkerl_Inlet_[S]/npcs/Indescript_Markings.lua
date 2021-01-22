@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Vunkerl Inlet [S]
 --  NPC: Indescript Markings
 -- Type: Quest
@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local pantsQuestProgress = player:getCharVar("AF_SCH_PANTS")
 
@@ -29,8 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

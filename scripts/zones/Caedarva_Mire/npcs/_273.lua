@@ -8,11 +8,12 @@ require("scripts/globals/missions")
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT) then
         player:setCharVar("ShadesOfVengeance", 1)
         player:startEvent(143, 79, -6, 0, 99, 3, 0)
@@ -29,7 +30,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 
     local assaultid = player:getCurrentAssault()
 
@@ -50,7 +51,7 @@ function onEventUpdate(player, csid, option, target)
 
     if player:getCharVar("ShadesOfVengeance") == 1 then
         if (party ~= nil) then
-            for i, v in ipairs(party) do
+            for i, v in pairs(party) do
                 if v:getCurrentMission(TOAU) < tpz.mission.id.toau.SHADES_OF_VENGEANCE then
                     player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(target, 1)
@@ -65,7 +66,7 @@ function onEventUpdate(player, csid, option, target)
         player:createInstance(79, 56)
     else
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in pairs(party) do
                 if (not (v:hasKeyItem(tpz.ki.PERIQIA_ASSAULT_ORDERS) and v:getCurrentAssault() == assaultid)) then
                     player:messageText(target, ID.text.MEMBER_NO_REQS, false)
                     player:instanceEntry(target, 1)
@@ -83,14 +84,14 @@ function onEventUpdate(player, csid, option, target)
 
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
 
     if csid == 133 or (csid == 143 and option == 4) then
         player:setPos(0, 0, 0, 0, 56)
     end
 end
 
-function onInstanceCreated(player, target, instance)
+entity.onInstanceCreated = function(player, target, instance)
     if instance and player:getCharVar("ShadesOfVengeance") == 1 then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
@@ -100,7 +101,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in pairs(party) do
                 if (v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID()) then
                     v:setInstance(instance)
                     v:startEvent(133)
@@ -118,7 +119,7 @@ function onInstanceCreated(player, target, instance)
 
         local party = player:getParty()
         if party ~= nil then
-            for i, v in ipairs(party) do
+            for i, v in pairs(party) do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
                     v:startEvent(133, 3)
@@ -131,3 +132,5 @@ function onInstanceCreated(player, target, instance)
         player:instanceEntry(target, 3)
     end
 end
+
+return entity

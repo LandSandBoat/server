@@ -1,18 +1,19 @@
----------------------------------------------
+-----------------------------------
 -- Magma_Hoplon
 -- Covers the user in fiery spikes and absorbs damage. Enemies that hit it take fire damage.
 -- Stoneskin portion cannot be removed with dispel.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = tpz.effect.STONESKIN
     local typeEffectTwo = tpz.effect.BLAZE_SPIKES
     local randy = math.random(20, 30)
@@ -23,3 +24,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffectOne
 end
+
+return mobskill_object

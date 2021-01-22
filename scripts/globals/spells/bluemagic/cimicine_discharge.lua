@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cimicine Discharge
 -- Reduces the attack speed of enemies within range
 -- Spell cost: 32 MP
@@ -9,21 +9,22 @@
 -- Level: 78
 -- Casting Time: 3 seconds
 -- Recast Time: 20 seconds
---
+-----------------------------------
 -- Combos: Magic Burst Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local pINT = caster:getStat(tpz.mod.INT)
     local mINT = target:getStat(tpz.mod.INT)
     local dINT = pINT - mINT
@@ -47,3 +48,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.SLOW
 end
+
+return spell_object

@@ -7,12 +7,14 @@
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:hasCompletedMission(TOAU, tpz.mission.id.toau.LOST_KINGDOM)) then
+entity.onTrigger = function(player, npc)
+    if (player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LOST_KINGDOM)) then
         if (not player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)) then
             player:addKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EPHRAMADIAN_GOLD_COIN)
@@ -29,8 +31,8 @@ function onTrigger(player, npc)
         elseif (player:getCharVar("AhtUrganStatus") == 3) then
             player:setCharVar("AhtUrganStatus", 0)
             player:addKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
-            player:completeMission(TOAU, tpz.mission.id.toau.LOST_KINGDOM)
-            player:addMission(TOAU, tpz.mission.id.toau.THE_DOLPHIN_CREST)
+            player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LOST_KINGDOM)
+            player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.THE_DOLPHIN_CREST)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EPHRAMADIAN_GOLD_COIN)
         else
             player:messageSpecial(ID.text.JAZARAATS_HEADSTONE)
@@ -38,13 +40,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 8) then
         player:setCharVar("AhtUrganStatus", 1)
     elseif (csid == 9) then
         player:setCharVar("AhtUrganStatus", 3)
     end
 end
+
+return entity

@@ -1,19 +1,20 @@
----------------------------------------------
+-----------------------------------
 --  Light Blade
 --  Description: Deals very high physical damage to a single player.
 --  Type: Ranged
 --  Damage decreases the farther away the target is from him.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 8
@@ -32,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.RANGED, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

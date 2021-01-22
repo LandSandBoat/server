@@ -7,13 +7,14 @@ local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REFRESH, 1)
     mob:setMobMod(tpz.mobMod.TELEPORT_CD, 30)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("MAGIC_START", "MAGIC_MSG", function(mob, spell, action)
         -- Burst
         if spell:getID() == 212 then
@@ -25,7 +26,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local wait = mob:getLocalVar("wait")
     if wait > 40 then
         -- pick a random living target from the two enemies
@@ -41,11 +42,11 @@ function onMobRoam(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 0)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getHPP() < 50 and mob:getLocalVar("saidMessage") == 0 then
         mob:showText(mob, ID.text.DONT_GIVE_UP)
         mob:setLocalVar("saidMessage", 1)
@@ -55,13 +56,16 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:setLocalVar("wait", 0)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
-        for _, player in ipairs(mob:getBattlefield():getPlayers()) do
-            player:messageSpecial(ID.text.UNABLE_TO_PROTECT)
-        end
+    local players = mob:getBattlefield():getPlayers()
+    for _, player in pairs(players) do
+        player:messageSpecial(ID.text.UNABLE_TO_PROTECT)
+    end
 end
+
+return entity

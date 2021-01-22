@@ -3,11 +3,12 @@
 --  NPC: Lucia
 -- !pos 30.552 -2.558 -30.023 248
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getZPos() > -28.750 then
         player:startEvent(221, player:getGil(), 100)
     else
@@ -15,11 +16,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 221 and player:getZPos() < -28.750 then
         player:delGil(100)
     end
 end
+
+return entity

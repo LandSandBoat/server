@@ -10,19 +10,20 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local TrialByWind = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+    local TrialByWind = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
     local WhisperOfGales = player:hasKeyItem(tpz.ki.WHISPER_OF_GALES)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local CarbuncleDebacle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Carbuncle Debacle
     if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(tpz.ki.DAZEBREAKER_CHARM) == true) then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
@@ -32,7 +33,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(88) -- reminder to go to Cloister of Gales
         end
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Trial by Wind
     elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByWind_date"))) then
         player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"
@@ -55,15 +56,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 66 and option == 1) then
-        if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         end
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar("TrialByWind_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_WIND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_WIND)
@@ -95,7 +96,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar("TrialByWind_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(RABAO, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         end
     elseif (csid == 86 or csid == 87) then
         if (player:getFreeSlotsCount() ~= 0) then
@@ -107,3 +108,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

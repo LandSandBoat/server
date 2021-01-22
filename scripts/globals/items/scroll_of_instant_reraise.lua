@@ -1,16 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 4182
 --  Scroll of Instant ReRaise
 --  Brings you back from the dead~!
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local power = 1
     local duration = 1800
     if (target:hasStatusEffect(tpz.effect.RERAISE)) then
@@ -26,3 +28,5 @@ function onItemUse(target)
         target:addStatusEffect(tpz.effect.RERAISE, power, 0, duration)
     end
 end
+
+return item_object

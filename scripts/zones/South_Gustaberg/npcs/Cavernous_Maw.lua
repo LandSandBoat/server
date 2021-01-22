@@ -9,15 +9,16 @@ require("scripts/globals/settings")
 require("scripts/globals/abyssea")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
             tpz.abyssea.getTravStonesTotal(player) >= 1
         then
             player:startEvent(0)
@@ -29,15 +30,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 0 then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)
     elseif csid == 1 then
         -- Killed Bennu
     elseif csid == 914 and option == 1 then
         player:setPos(432, 0, 321, 125, 218)
     end
 end
+
+return entity

@@ -1,10 +1,9 @@
 -----------------------------------
 -- PET: Automaton
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/pets")
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("MANEUVER_DURATION", 60)
     mob:addListener("EFFECTS_TICK", "MANEUVER_DURATION", function(automaton)
         if (automaton:getTarget()) then
@@ -14,6 +13,8 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobDeath(mob)
+entity.onMobDeath = function(mob)
     mob:removeListener("MANEUVER_DURATION")
 end
+
+return entity

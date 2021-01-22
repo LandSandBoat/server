@@ -10,14 +10,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    quest_fas = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)      -- 1st Quest in Series
-    quest_poa = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)  -- 2nd Quest in Series
+    quest_fas = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)      -- 1st Quest in Series
+    quest_poa = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)  -- 2nd Quest in Series
 
     if (player:getFameLevel(SANDORIA) >= 2 and quest_fas == QUEST_COMPLETED and quest_poa == QUEST_AVAILABLE) then
         player:startEvent(594)  -- Start quest A Purchase of Arms
@@ -28,13 +29,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 594 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
         player:addKeyItem(tpz.ki.WEAPONS_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WEAPONS_ORDER)
     elseif (csid == 607) then
@@ -46,8 +47,10 @@ function onEventFinish(player, csid, option)
             player:addItem(17090)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17090) -- Elm Staff
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_PURCHASE_OF_ARMS)
         end
     end
 
 end
+
+return entity

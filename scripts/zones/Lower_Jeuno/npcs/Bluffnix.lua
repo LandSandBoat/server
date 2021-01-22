@@ -11,8 +11,9 @@ require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local count = trade:getItemCount()
     local gil = trade:getGil()
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
     local TheGobbieBag = gobQuest(player, inventorySize)
     local pFame = player:getFameLevel(JEUNO)
 
-    if (count == 4 and gil == 0 and player:getQuestStatus(JEUNO, TheGobbieBag[1]) == 1) then
+    if (count == 4 and gil == 0 and player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1]) == 1) then
         if (player:getContainerSize(0) < 80) then
             if (trade:hasItemQty(TheGobbieBag[3], 1) and trade:hasItemQty(TheGobbieBag[4], 1) and trade:hasItemQty(TheGobbieBag[5], 1) and trade:hasItemQty(TheGobbieBag[6], 1)) then
                 if (pFame >= TheGobbieBag[2]) then
@@ -36,11 +37,11 @@ function onTrade(player, npc, trade)
     end
 end
 
----------------------------------------------
+-----------------------------------
 -- Current Quest, Required Fame and Items
----------------------------------------------
-function gobQuest(player, bagSize)
-    currentQuest = {}
+-----------------------------------
+local function gobQuest(player, bagSize)
+    local currentQuest = {}
     switch (bagSize) : caseof {
         [30] = function (x) currentQuest = {27, 3, 0848, 0652, 0826, 0788}; end, --Gobbiebag I, Dhalmel Leather, Steel Ingot, Linen Cloth, Peridot
         [35] = function (x) currentQuest = {28, 4, 0851, 0653, 0827, 0798}; end, --Gobbiebag II, Ram Leather, Mythril Ingot, Wool Cloth, Turquoise
@@ -56,17 +57,17 @@ function gobQuest(player, bagSize)
     return currentQuest
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 12)) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 12)) then
         player:startEvent(10056)
     elseif (player:getContainerSize(0) < 80) then
         local pFame = player:getFameLevel(JEUNO)
         local inventorySize = player:getContainerSize(0)
         local TheGobbieBag = gobQuest(player, inventorySize)
-        local questStatus = player:getQuestStatus(JEUNO, TheGobbieBag[1])
+        local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1])
 
         offer = 0
         if (pFame >= TheGobbieBag[2]) then
@@ -78,16 +79,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local TheGobbieBag = gobQuest(player, player:getContainerSize(0))
 
     if (csid == 43 and option == 0) then
-        if (player:getQuestStatus(JEUNO, TheGobbieBag[1]) == 0) then
-            player:addQuest(JEUNO, TheGobbieBag[1])
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, TheGobbieBag[1]) == 0) then
+            player:addQuest(tpz.quest.log_id.JEUNO, TheGobbieBag[1])
         end
     elseif (csid == 73) then
         if (gobbieBag == 5) then
@@ -100,9 +101,11 @@ function onEventFinish(player, csid, option)
         player:changeContainerSize(tpz.inv.MOGSATCHEL, 5)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, TheGobbieBag[1])
+        player:completeQuest(tpz.quest.log_id.JEUNO, TheGobbieBag[1])
         player:messageSpecial(ID.text.INVENTORY_INCREASED)
     elseif (csid == 10056) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 12, true))
     end
 end
+
+return entity

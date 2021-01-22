@@ -2,22 +2,23 @@
 -- Area: Spire of Vahzl
 --  Mob: Procreator
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.LINK_RADIUS, 50)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("maxBabies", 4)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getHPP() < 20 then
         local nextMob = GetMobByID(mob:getID() - 1) --Agonizer aggros at <20%
         if not nextMob:isEngaged() then
@@ -26,7 +27,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local momma = mob:getID()
     for i = momma + 1, momma + mob:getLocalVar("maxBabies") do
         local baby = GetMobByID(i)
@@ -35,3 +36,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

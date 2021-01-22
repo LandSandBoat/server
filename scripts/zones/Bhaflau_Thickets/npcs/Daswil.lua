@@ -11,13 +11,14 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local toauMission = player:getCurrentMission(TOAU)
-    local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
 
     -- IMMORTAL SENTRIES
     if (toauMission == tpz.mission.id.toau.IMMORTAL_SENTRIES) then
@@ -51,10 +52,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- IMMORTAL SENTRIES
     if (csid == 5 and option == 1) then
         player:delKeyItem(tpz.ki.SUPPLIES_PACKAGE)
@@ -72,3 +73,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ASSAULT_ARMBAND)
     end
 end
+
+return entity

@@ -1,8 +1,9 @@
 -----------------------------------
---
---
---
+-- tpz.effect.DEBILITATION
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
 local stats_bits =
 {
@@ -17,7 +18,7 @@ local stats_bits =
     tpz.mod.MPP
 }
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
     for statbit, mod in ipairs(stats_bits) do
         if bit.band(bit.lshift(1, statbit - 1), power) > 0 then
@@ -31,10 +32,10 @@ function onEffectGain(target, effect)
     target:setStatDebilitation(power)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower()
     for statbit, mod in ipairs(stats_bits) do
         if bit.band(bit.lshift(1, statbit - 1), power) > 0 then
@@ -47,3 +48,5 @@ function onEffectLose(target, effect)
     end
     target:setStatDebilitation(0)
 end
+
+return effect_object

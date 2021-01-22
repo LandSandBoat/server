@@ -5,11 +5,12 @@
 -----------------------------------
 local ID = require("scripts/zones/PsoXja/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (npc:getAnimation() == 9) then
         player:startEvent(58)
     else
@@ -17,13 +18,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 58) then
         local CrystalOperator = npc:getID()
         npc:openDoor(118) -- this sets the trigger animation to glowing. The time is retail confirmed.
         GetNPCByID(CrystalOperator+1):closeDoor(118) -- tiles will reset at the same time.
     end
 end
+
+return entity

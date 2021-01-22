@@ -7,11 +7,12 @@ local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 3 then
         player:setCharVar("MissionStatus", 4)
         player:addKeyItem(tpz.ki.PIECE_OF_A_BROKEN_KEY2)
@@ -20,3 +21,5 @@ function onTrigger(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
+
+return entity

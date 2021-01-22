@@ -1,16 +1,17 @@
 -----------------------------------
 -- Area: Talacca_Cove
 --  NPC: ??? (corsair job flag quest)
---
+-----------------------------------
 -----------------------------------
 local ID = require("scripts/zones/Talacca_Cove/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     LuckOfTheDraw = player:getCharVar("LuckOfTheDraw")
 
@@ -20,10 +21,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 2) then
         player:setCharVar("LuckOfTheDraw", 4)
@@ -32,3 +33,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

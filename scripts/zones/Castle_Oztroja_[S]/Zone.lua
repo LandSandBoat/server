@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja_[S]/IDs")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.DUU_MASA_THE_ONECUT)
     GetMobByID(ID.mob.DUU_MASA_THE_ONECUT):setRespawnTime(math.random(900, 10800))
 
@@ -35,7 +36,7 @@ function onInitialize(zone)
     GetMobByID(ID.mob.SUU_XICU_THE_CANTABILE):setRespawnTime(math.random(900, 10800))
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-239.447, -1.813, -19.98, 250)
@@ -43,11 +44,13 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

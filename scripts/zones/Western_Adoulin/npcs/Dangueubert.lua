@@ -8,11 +8,12 @@
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local SOA_Mission = player:getCurrentMission(SOA)
 
     if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
@@ -29,10 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2558) then
         -- Progresses Quest: 'A Certain Substitute Patrolman'
         player:setCharVar("ACSP_NPCs_Visited", 7)
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

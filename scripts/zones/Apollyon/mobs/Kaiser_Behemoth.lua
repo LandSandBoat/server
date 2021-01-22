@@ -6,6 +6,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 local path =
 {
@@ -17,7 +20,7 @@ local path =
     {-569.656, -0.254, 239.459}
 }
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
         local point = math.random(#path)
         while point == mob:getLocalVar("point") do
@@ -28,11 +31,11 @@ function onMobRoam(mob)
     end
 end
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 60)
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 218 then
         spell:setAoE(tpz.magic.aoe.RADIAL)
         spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
@@ -42,9 +45,10 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(tpz.status.NORMAL)
     end
 end
 
+return entity

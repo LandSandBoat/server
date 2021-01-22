@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(tpz.status.DISAPPEAR)
     end
@@ -20,11 +21,11 @@ function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.FAFNIR_SLAYER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local ToD = GetServerVariable("[POP]Nidhogg")
     local kills = GetServerVariable("[PH]Nidhogg")
     local popNow = (math.random(1, 5) == 3 or kills > 6)
@@ -46,3 +47,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

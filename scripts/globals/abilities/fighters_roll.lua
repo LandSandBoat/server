@@ -27,8 +27,9 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     local effectID = tpz.effect.FIGHTERS_ROLL
     ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
     if (player:hasStatusEffect(effectID)) then
@@ -41,7 +42,7 @@ function onAbilityCheck(player, target, ability)
 end
 
 
-function onUseAbility(caster, target, ability, action)
+ability_object.onUseAbility = function(caster, target, ability, action)
     if (caster:getID() == target:getID()) then
         corsairSetup(caster, ability, action, tpz.effect.FIGHTERS_ROLL, tpz.job.WAR)
     end
@@ -72,3 +73,5 @@ function applyRoll(caster, target, ability, action, total)
     end
     return total
 end
+
+return ability_object

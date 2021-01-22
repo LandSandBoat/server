@@ -1,18 +1,22 @@
------------------------------------------
+-----------------------------------
 -- ID: 4114
 -- Item: Potion +2
 -- Item Effect: Restores 75 HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if (target:getHP() == target:getMaxHP()) then
         return tpz.msg.basic.ITEM_UNABLE_TO_USE
     end
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, target:addHP(75*ITEM_POWER))
 end
+
+return item_object

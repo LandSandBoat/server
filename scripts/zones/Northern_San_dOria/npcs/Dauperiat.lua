@@ -11,10 +11,11 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local Black = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+    local Black = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     local questState = player:getCharVar("BlackMailQuest")
 
     if (Black == QUEST_ACCEPTED and questState == 2 or Black == QUEST_COMPLETED) then
@@ -27,10 +28,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- "Blackmail" quest status
-    local blackMail = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+    local blackMail = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     local envelope = player:hasKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)
     local sanFame = player:getFameLevel(SANDORIA)
     local homeRank = player:getRank(player:getNation())
@@ -60,14 +61,14 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 643) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
         player:addKeyItem(tpz.ki.SUSPICIOUS_ENVELOPE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUSPICIOUS_ENVELOPE)
     elseif (csid == 646 and option == 1) then
@@ -76,14 +77,16 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*900)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
         else
             player:addFame(SANDORIA, 5)
         end
     elseif (csid == 40 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.BLACKMAIL)
     end
 
 end
+
+return entity

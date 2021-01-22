@@ -9,11 +9,12 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.TESTING_THE_WATERS and player:getCharVar("AhtUrganStatus") == 1) then
@@ -25,21 +26,23 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 106) then
-        player:completeMission(TOAU, tpz.mission.id.toau.TESTING_THE_WATERS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.TESTING_THE_WATERS)
         player:delKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
         player:addKeyItem(tpz.ki.PERCIPIENT_EYE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERCIPIENT_EYE)
         player:setTitle(tpz.title.TREASURE_TROVE_TENDER)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LEGACY_OF_THE_LOST)
     end
 end
+
+return zone_object

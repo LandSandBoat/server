@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4897
 -- Ice Spirit Pact
 -- Teaches the summoning magic ice Spirit
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(289)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(289)
 end
+
+return item_object

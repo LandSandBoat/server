@@ -7,15 +7,16 @@ local ID = require("scripts/zones/Monastic_Cavern/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/treasure")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.ORCISH_OVERLORD)
     GetMobByID(ID.mob.ORCISH_OVERLORD):setRespawnTime(math.random(900, 10800))
 
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(261.354, -8.792, 23.124, 175)
@@ -23,15 +24,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

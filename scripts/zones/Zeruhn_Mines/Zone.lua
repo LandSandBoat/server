@@ -9,23 +9,24 @@ require("scripts/globals/quests")
 require("scripts/globals/helm")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.helm.initZone(zone, tpz.helm.type.MINING)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if prevZone == tpz.zone.PALBOROUGH_MINES then
         cs = 150
-        if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED then
+        if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED then
             if player:getCharVar("ZeruhnMines_Zeid_CS") == 0 then
                 cs = 130
             elseif not player:hasItem(16607) then
                 cs = 131
             end
-        elseif player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED then
+        elseif player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED then
             if not player:hasItem(16607) then
                 cs = 131
             end
@@ -37,17 +38,17 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 130 or csid == 131 then
         if player:getFreeSlotsCount() > 0 then
             player:addItem(16607)
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ZeruhnMines_Zeid_CS", 1)
     end
 end
+
+return zone_object

@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 --  Fuscous Ooze
 --  Family: Slugs
 --  Description: A dusky slime inflicts encumberance and weight.
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Cone
 --  Notes:
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- TODO: Encumberance seems to do nothing?
     local typeEffect = tpz.effect.WEIGHT
     local duration = 45
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.WATER)
     return dmg
 end
+
+return mobskill_object

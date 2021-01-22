@@ -10,13 +10,14 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wyrmfly = ID.mob.WYRMFLY_OFFSET
-    
+
     if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
         npcUtil.popFromQM(player, npc, {wyrmfly, wyrmfly + 1, wyrmfly + 2}, {claim=true, look=true, hide = 0})
     elseif player:getCharVar("EcoStatus") == 202 and not player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) then
@@ -26,8 +27,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

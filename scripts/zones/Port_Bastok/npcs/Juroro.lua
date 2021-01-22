@@ -9,16 +9,17 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local TrialByEarth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+    local TrialByEarth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
     local WhisperOfTremors = player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local ThePuppetMaster = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+    local ThePuppetMaster = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
     local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
 
     if (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 1) then
@@ -49,10 +50,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 256) then
         if (player:getFreeSlotsCount() ~= 0) then
@@ -72,10 +73,10 @@ function onEventFinish(player, csid, option)
     elseif (csid == 258) then
         player:setCharVar("ThePuppetMasterProgress", 4)
     elseif (csid == 249 and option == 1) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
-            player:delQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
+            player:delQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
-        player:addQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         player:setCharVar("TrialByEarth_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_EARTH)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_EARTH)
@@ -107,8 +108,10 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
             player:setCharVar("TrialByEarth_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
         end
     end
 
 end
+
+return entity

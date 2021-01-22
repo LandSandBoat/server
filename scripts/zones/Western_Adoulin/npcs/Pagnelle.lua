@@ -9,12 +9,13 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local Raptor_Rapture = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+entity.onTrigger = function(player, npc)
+    local Raptor_Rapture = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
     local Raptor_Rapture_Status = player:getCharVar("Raptor_Rapture_Status")
 
     if (Raptor_Rapture == QUEST_AVAILABLE) then
@@ -62,16 +63,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 5032) then
         -- Warps player to Rala Waterways to continue intrductory CS for Quest: 'Raptor Rapture'
         player:setPos(0, 0, 0, 0, 258)
     elseif ((csid == 5061) and (option == 1)) then
         -- Starts Quest: 'Raptor Rapture'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
         player:setCharVar("Raptor_Rapture_Status", 4)
     elseif (csid == 5035) then
         -- Progresses Quest: 'Raptor Rapture', spoke to Ilney, now need rockberries.
@@ -85,10 +86,12 @@ function onEventFinish(player, csid, option)
     elseif (csid == 5039) then
         -- Finishing Quest: 'Raptor Rapture'
         player:setCharVar("Raptor_Rapture_Status", 0)
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
         player:addCurrency('bayld', 1000 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * BAYLD_RATE)
         player:addFame(ADOULIN)
         player:needToZone(true)
     end
 end
+
+return entity

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Healing Stomp
 --
 -- Description: Stomps the ground to apply regeneration.
@@ -6,17 +6,18 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes: Only used by notorious monsters.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 25
     local duration = 180
 
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
     skill:setMsg(MobBuffMove(mob, typeEffect, power, 3, duration))
     return typeEffect
 end
+
+return mobskill_object

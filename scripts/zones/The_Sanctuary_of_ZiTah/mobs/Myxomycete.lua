@@ -8,8 +8,9 @@ require("scripts/globals/regimes")
 require("scripts/globals/world")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local weather = mob:getWeather()
 
     if weather == tpz.weather.RAIN or weather == tpz.weather.SQUALL then
@@ -21,7 +22,9 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 115, 1, tpz.regime.type.FIELDS)
     tpz.regime.checkRegime(player, mob, 116, 2, tpz.regime.type.FIELDS)
 end
+
+return entity

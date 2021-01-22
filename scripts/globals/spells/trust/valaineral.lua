@@ -1,6 +1,6 @@
------------------------------------------
+-----------------------------------
 -- Trust: Valaineral
------------------------------------------
+-----------------------------------
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
@@ -8,15 +8,16 @@ require("scripts/globals/status")
 require("scripts/globals/roe")
 require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 local message_page_offset = 14
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return tpz.trust.canCast(caster, spell)
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     -- Records of Eminence: Alter Ego: Valaineral
     if caster:getEminenceProgress(933) then
@@ -26,7 +27,7 @@ function onSpellCast(caster, target, spell)
     return tpz.trust.spawn(caster, spell)
 end
 
-function onMobSpawn(mob)
+spell_object.onMobSpawn = function(mob)
     --[[
         Summon: With your courage and valor, Altana's children will live to see a brighter day.
         Summon (Formerly): Let the Royal Family’s blade be seared forever into their memories!
@@ -46,10 +47,12 @@ function onMobSpawn(mob)
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
 end
 
-function onMobDespawn(mob)
+spell_object.onMobDespawn = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
-function onMobDeath(mob)
+spell_object.onMobDeath = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end
+
+return spell_object

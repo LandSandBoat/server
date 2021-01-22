@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 18306, 18307, 18644, 18658, 18672, 19753, 19846, 20880, 20881, 21808
 -- Item: Apocalypse
 -- Additional Effect: Blindness
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     -- if (target:hasImmunity(64)) then
@@ -23,3 +24,5 @@ function onAdditionalEffect(player, target, damage)
 
     return 0, 0, 0
 end
+
+return item_object

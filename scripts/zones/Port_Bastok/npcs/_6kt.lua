@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     --Triggers to open the drawbridge
     npc:addPeriodicTrigger(0, 360, 4)
     npc:addPeriodicTrigger(2, 360, 80)
@@ -19,7 +20,7 @@ function onSpawn(npc)
     npc:addPeriodicTrigger(5, 360, 89)
 end
 
-function onTimeTrigger(npc, triggerID)
+entity.onTimeTrigger = function(npc, triggerID)
 --npc is the moghouse-side door to the bridge
     local upperDoor = GetNPCByID(npc:getID() - 1)
     local bridge = GetNPCByID(npc:getID() - 2)
@@ -55,3 +56,5 @@ function onTimeTrigger(npc, triggerID)
     end
 
 end
+
+return entity

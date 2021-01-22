@@ -9,9 +9,10 @@ require("scripts/globals/titles")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local SirensTear = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+entity.onTrade = function(player, npc, trade)
+    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(576, 1) and trade:getItemCount() == 1) then
@@ -20,8 +21,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local SirensTear = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+entity.onTrigger = function(player, npc)
+    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear == QUEST_AVAILABLE) then
         player:startEvent(81)
@@ -30,18 +31,18 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 81) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
     elseif (csid == 82) then
         player:tradeComplete()
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
         player:addFame(BASTOK, 120)
         player:addGil(150*GIL_RATE)
         player:messageSpecial(ID.text.GIL_OBTAINED, 150*GIL_RATE)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("SirensTear", 0)
     end
 end
+
+return entity

@@ -11,9 +11,10 @@ require("scripts/globals/titles")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+entity.onTrade = function(player, npc, trade)
+    local ALittleKnowledge = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
 
     if (ALittleKnowledge == QUEST_ACCEPTED and ALittleKnowledgeProgress == 1) then
@@ -30,15 +31,15 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local ALittleKnowledge = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local ALittleKnowledge = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
-    local onSabbatical = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+    local onSabbatical = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress = player:getCharVar("OnSabbatical")
-    local downwardHelix = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
+    local downwardHelix = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
 
     if (ALittleKnowledge == QUEST_AVAILABLE) then
         if (mLvl >= ADVANCED_JOB_LEVEL) then
@@ -85,13 +86,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10 and option == 0) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
         player:setCharVar("ALittleKnowledge", 1)
     elseif (csid == 12) then
         player:tradeComplete()
@@ -103,7 +104,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ALittleKnowledge", 0)
         player:setCharVar("SheetsofVellum", 0)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_SCHOLAR)
-        player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+        player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
     elseif (csid == 47) then
         if (player:canLearnSpell(478) and player:canLearnSpell(502)) then
             player:addSpell(478, true)
@@ -111,7 +112,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
         end
     elseif (csid == 18) then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
         player:addKeyItem(tpz.ki.ULBRECHTS_SEALED_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ULBRECHTS_SEALED_LETTER)
         player:setCharVar("OnSabbatical", 1)
@@ -121,7 +122,7 @@ function onEventFinish(player, csid, option)
         else
             player:delKeyItem(tpz.ki.ULBRECHTS_SEALED_LETTER)
             player:delKeyItem(tpz.ki.SCHULTS_SEALED_LETTER)
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL)
             player:addItem(6058) --klimaform
             player:messageSpecial(ID.text.ITEM_OBTAINED, 6058)
             player:setCharVar("onSabbatical", 0)
@@ -129,17 +130,19 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 23) then
         player:setCharVar("Erlene_Sabbatical_Timer", 0)
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
     elseif (csid == 25) then
         player:setCharVar("DownwardHelix", 2)
     elseif (csid == 27) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
-            player:completeQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
+            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
             player:addItem(15004) -- Schlar's Bracers
             player:messageSpecial(ID.text.ITEM_OBTAINED, 15004)
             player:setCharVar("DownwardHelix", 0)
         end
     end
 end
+
+return entity

@@ -7,10 +7,11 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local DMfirst = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
-    local DMRepeat = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+entity.onTrade = function(player, npc, trade)
+    local DMfirst = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
+    local DMRepeat = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
     local Hour = VanadielHour()
 
     if ((Hour >= 18 or Hour < 6) and IsMoonFull() == true) then
@@ -24,7 +25,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local CurrentMission = player:getCurrentMission(WINDURST)
     local MissionStatus = player:getCharVar("MissionStatus")
 
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 7) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1550)
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_VERSE_OF_ROMAEVE)
     end
 end
+
+return entity

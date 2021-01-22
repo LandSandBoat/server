@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Panzerfaust
 --
 --  Description: Strikes a target twice with an armored fist. Additional effect: Knockback
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: 2 shadows
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 2
     local accmod = 1
     local dmgmod = 1.5
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

@@ -1,12 +1,11 @@
 -----------------------------------
---
 -- tpz.effect.SIGIL
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower() -- Tracks which bonus effects are in use.
 
     if (power == 1 or power == 3 or power == 5 or power == 7 or power == 9 or power == 11 or power == 13 or power == 15) then
@@ -32,10 +31,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower() -- Tracks which bonus effects are in use.
     local subPower = effect:getSubPower() -- subPower sets % required to trigger regen/refresh.
 
@@ -60,3 +59,5 @@ function onEffectLose(target, effect)
         -- exp loss reduction not implemented.
     end
 end
+
+return effect_object

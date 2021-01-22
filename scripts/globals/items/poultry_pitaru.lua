@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 5890
 -- Item: poultry_pitaru
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- MP +7% (cap 110)
 -- Increases rate of magic skill gains by 40%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -18,18 +19,20 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 5890)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.FOOD_MPP, 7)
     target:addMod(tpz.mod.FOOD_MP_CAP, 110)
     target:addMod(tpz.mod.MAGIC_SKILLUP_RATE, 40)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.FOOD_MPP, 7)
     target:delMod(tpz.mod.FOOD_MP_CAP, 110)
     target:delMod(tpz.mod.MAGIC_SKILLUP_RATE, 40)
 end
+
+return item_object

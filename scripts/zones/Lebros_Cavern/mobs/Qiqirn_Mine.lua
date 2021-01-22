@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local players = instance:getChars()
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
@@ -22,7 +23,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getLocalVar("Time") == 1 then
         mob:useMobAbility(1838)
         mob:setLocalVar("Time", 2)
@@ -31,7 +32,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     local pos = mob:getPos()
     local instance = mob:getInstance()
 
@@ -48,5 +49,7 @@ function onMobWeaponSkill(target, mob, skill)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

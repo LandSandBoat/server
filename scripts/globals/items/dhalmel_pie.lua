@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4411
 -- Item: dhalmel_pie
 -- Food Effect: 30Min, All Races
------------------------------------------
+-----------------------------------
 -- Health 25
 -- Strength 4
 -- Agility 2
@@ -13,12 +13,13 @@
 -- Attack Cap 45
 -- Ranged ATT % 25
 -- Ranged ATT Cap 45
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -26,11 +27,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 4411)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.HP, 25)
     target:addMod(tpz.mod.STR, 4)
     target:addMod(tpz.mod.AGI, 2)
@@ -43,7 +44,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.FOOD_RATT_CAP, 45)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.HP, 25)
     target:delMod(tpz.mod.STR, 4)
     target:delMod(tpz.mod.AGI, 2)
@@ -55,3 +56,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.FOOD_RATTP, 25)
     target:delMod(tpz.mod.FOOD_RATT_CAP, 45)
 end
+
+return item_object

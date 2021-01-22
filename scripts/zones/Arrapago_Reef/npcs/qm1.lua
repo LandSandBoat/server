@@ -6,14 +6,17 @@
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2601) and npcUtil.popFromQM(player, npc, ID.mob.LIL_APKALLU) then
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.SLIMY_TOUCH)
 end
+
+return entity

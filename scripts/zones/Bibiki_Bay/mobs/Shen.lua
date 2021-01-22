@@ -2,8 +2,9 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getBattleTime() % 45 == 0) then
         local mobId = mob:getID()
         for i = 1, 2 do
@@ -14,10 +15,10 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     -- casts Water IV, Waterga III, Flood, Drown
     local rnd = math.random()
 
@@ -32,3 +33,5 @@ function onMonsterMagicPrepare(mob, target)
     end
 
 end
+
+return entity

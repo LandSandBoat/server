@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Refueling
 -- Increases attack speed
 -- Spell cost: 29 MP
@@ -10,18 +10,19 @@
 -- Casting Time: 1.5 seconds
 -- Recast Time: 30 seconds
 -- Duration: 5 minutes
---
+-----------------------------------
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.HASTE
     local power = 1000 -- 10%
     local duration = 300
@@ -42,3 +43,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

@@ -4,8 +4,10 @@
 -----------------------------------
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local mobID = mob:getID()
     if mobID == ID.mob.TEMENOS_C_MOB[2] then --Carbuncle (Central Temenos 2nd Floor)
         mob:setMod(tpz.mod.FIREDEF, 256)
@@ -19,7 +21,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobID = mob:getID()
     if mobID == ID.mob.TEMENOS_C_MOB[2] then --Carbuncle (Central Temenos 2nd Floor)
         GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):updateEnmity(target)
@@ -27,7 +29,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID = mob:getID()
         local battlefield = mob:getBattlefield()
@@ -49,3 +51,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
 
     end
 end
+
+return entity

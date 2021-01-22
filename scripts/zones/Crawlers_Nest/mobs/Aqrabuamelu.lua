@@ -7,14 +7,15 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(tpz.effect.ICE_SPIKES, 45, 0, 0)
     mob:getStatusEffect(tpz.effect.ICE_SPIKES):setFlag(tpz.effectFlag.DEATH)
 end
 
-function onSpikesDamage(mob, target, damage)
+entity.onSpikesDamage = function(mob, target, damage)
     local INT_diff = mob:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
 
     if INT_diff > 20 then
@@ -38,11 +39,13 @@ function onSpikesDamage(mob, target, damage)
 
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 238)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(7200, 7800)) -- 120 to 130 min
 end
+
+return entity

@@ -13,10 +13,11 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.blade_ku
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
@@ -24,17 +25,17 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local twentyInPirateYears = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
-    local illTakeTheBigBox = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
-    local trueWill = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
+    local twentyInPirateYears = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+    local illTakeTheBigBox = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
+    local trueWill = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
         if (player:getCharVar("AyameAndKaede_Event") == 3) then
             player:startEvent(95) -- During Quest "Ayame and Kaede"
         else
@@ -58,14 +59,14 @@ function onTrigger(player, npc)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 95) then
         player:addKeyItem(tpz.ki.SEALED_DAGGER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEALED_DAGGER)
         player:delKeyItem(tpz.ki.STRANGELY_SHAPED_CORAL)
         player:setCharVar("AyameAndKaede_Event", 4)
     elseif (csid == 133) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         player:setCharVar("twentyInPirateYearsCS", 1)
     elseif (csid == 134) then
         if (player:getFreeSlotsCount() <= 1) then
@@ -79,15 +80,17 @@ function onEventFinish(player, csid, option)
             player:needToZone()
             player:setCharVar("twentyInPirateYearsCS", 0)
             player:addFame(NORG, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)
         end
     elseif (csid == 135) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)
     elseif (csid == 136) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL)
     elseif (csid == 137) then
         player:setCharVar("trueWillCS", 1)
     else
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.BLADE_KU_LEARNED)
     end
 end
+
+return entity

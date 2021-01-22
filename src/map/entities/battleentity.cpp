@@ -553,7 +553,8 @@ int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullp
 {
     PLastAttacker = attacker;
     this->BattleHistory.lastHitTaken_atkType = attackType;
-    PAI->EventHandler.triggerListener("TAKE_DAMAGE", this, amount, attacker, (uint16)attackType, (uint16)damageType);
+    std::optional<CLuaBaseEntity> optAttacker = attacker ? std::optional<CLuaBaseEntity>(CLuaBaseEntity(attacker)) : std::nullopt;
+    PAI->EventHandler.triggerListener("TAKE_DAMAGE", CLuaBaseEntity(this), amount, optAttacker, (uint16)attackType, (uint16)damageType);
 
     // RoE Damage Taken Trigger
     if (this->objtype == TYPE_PC)
@@ -1294,11 +1295,11 @@ void CBattleEntity::Die()
                 member->PClaimedMob = nullptr;
             }
         });
-        PAI->EventHandler.triggerListener("DEATH", this, PKiller);
+        PAI->EventHandler.triggerListener("DEATH", CLuaBaseEntity(this), CLuaBaseEntity(PKiller));
     }
     else
     {
-        PAI->EventHandler.triggerListener("DEATH", this);
+        PAI->EventHandler.triggerListener("DEATH", CLuaBaseEntity(this));
     }
     SetBattleTargetID(0);
 }
@@ -1550,7 +1551,7 @@ void CBattleEntity::OnDisengage(CAttackState& s)
         animation = ANIMATION_NONE;
     }
     updatemask |= UPDATE_HP;
-    PAI->EventHandler.triggerListener("DISENGAGE", this);
+    PAI->EventHandler.triggerListener("DISENGAGE", CLuaBaseEntity(this));
 }
 
 void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
@@ -1701,7 +1702,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     if (PTarget->objtype == TYPE_MOB)
                     {
                         // Listener (hook)
-                        PTarget->PAI->EventHandler.triggerListener("CRITICAL_TAKE", PTarget, this);
+                        PTarget->PAI->EventHandler.triggerListener("CRITICAL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this));
 
                         // Binding
                         luautils::OnCriticalHit(PTarget, this);
@@ -1838,8 +1839,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
     }
     battleutils::ClaimMob(PTarget, this);
-    PAI->EventHandler.triggerListener("ATTACK", this, PTarget, &action);
-    PTarget->PAI->EventHandler.triggerListener("ATTACKED", PTarget, this, &action);
+    PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), &action);
+    PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), &action);
     PTarget->LastAttacked = server_clock::now();
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
@@ -1861,7 +1862,7 @@ void CBattleEntity::OnEngage(CAttackState& state)
 {
     animation = ANIMATION_ATTACK;
     updatemask |= UPDATE_HP;
-    PAI->EventHandler.triggerListener("ENGAGE", this, state.GetTarget());
+    PAI->EventHandler.triggerListener("ENGAGE", CLuaBaseEntity(this), CLuaBaseEntity(state.GetTarget()));
 }
 
 void CBattleEntity::TryHitInterrupt(CBattleEntity* PAttacker)
@@ -1876,7 +1877,7 @@ void CBattleEntity::OnDespawn(CDespawnState& /*unused*/)
 {
     FadeOut();
     //#event despawn
-    PAI->EventHandler.triggerListener("DESPAWN", this);
+    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
     PAI->Internal_Respawn(0s);
 }
 

@@ -1,20 +1,21 @@
----------------------------------------------
+-----------------------------------
 -- Blank Gaze
 -- Gaze dispel
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Melee?
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local effect = 0
     if (target:isFacing(mob)) then
 
@@ -31,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return effect
 end
+
+return mobskill_object

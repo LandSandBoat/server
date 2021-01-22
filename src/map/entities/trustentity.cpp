@@ -54,6 +54,8 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
 
 void CTrustEntity::PostTick()
 {
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::PostTick();
     if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
     {
@@ -79,11 +81,16 @@ void CTrustEntity::Die()
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     ((CCharEntity*)PMaster)->RemoveTrust(this);
+
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::Die();
 }
 
 void CTrustEntity::Spawn()
 {
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
     CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
@@ -405,11 +412,13 @@ void CTrustEntity::OnDespawn(CDespawnState& /*unused*/)
         luautils::OnMobDespawn(this);
     }
     FadeOut();
-    PAI->EventHandler.triggerListener("DESPAWN", this);
+    PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
 }
 
 void CTrustEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell = state.GetSpell();
@@ -424,6 +433,8 @@ void CTrustEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
 void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
 {
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
     CBattleEntity::OnWeaponSkillFinished(state, action);
 
     auto* PWeaponSkill  = state.GetSkill();

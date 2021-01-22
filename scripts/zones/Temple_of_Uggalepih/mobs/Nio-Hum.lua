@@ -7,12 +7,13 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
     mob:addMod(tpz.mod.SLEEPRES, 50)
     mob:addMod(tpz.mod.LULLABYRES, 50)
@@ -20,7 +21,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.DMGMAGIC, 80)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and
         player:getCharVar("MissionStatus") == 5 and
@@ -29,3 +30,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Mission8-2Kills", 1)
     end
 end
+
+return entity

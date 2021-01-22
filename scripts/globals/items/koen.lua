@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 6430
 -- Item: Koen
 -- Additional Effect: Fire Damage
 -- Enchantment: "Enfire"
 -- Charges: 30 Reuse: 300 Secs
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 5
 
     if (math.random(0, 99) >= chance) then
@@ -34,11 +35,13 @@ function onAdditionalEffect(player, target, damage)
     end
 end
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local effect = tpz.effect.ENFIRE
     doEnspell(target, target, nil, effect)
 end
+
+return item_object

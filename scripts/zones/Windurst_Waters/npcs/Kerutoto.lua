@@ -12,10 +12,11 @@ require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(12521, 1) and count == 1) then
             player:startEvent(362)
         elseif (trade:hasItemQty(13569, 1) and count == 1) then
@@ -26,12 +27,12 @@ function onTrade(player, npc, trade)
             end
         end
 
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
         local KerutotoFood = player:getCharVar("Kerutoto_Food_var")
         if (trade:hasItemQty(4371, 1) and count == 1 and KerutotoFood == 1) then
             player:startEvent(332, 440)
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED) then
         if (player:getCharVar("ridingOnTheClouds_4") == 3 and trade:hasItemQty(1127, 1) and count == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_4", 0)
             player:tradeComplete()
@@ -42,16 +43,16 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local KerutotoFood = player:getCharVar("Kerutoto_Food_var") -- Variable to track progress of Kerutoto in Food for Thought
-    local FoodForThought = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
-    local BlueRibbonBlues = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+    local BlueRibbonBlues = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
     local needZone = player:needToZone()
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local waking_dreams = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+    local waking_dreams = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
 
-    -- Awakening of the Gods --
+    -- Awakening of the Gods
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(737)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 1) then
@@ -59,13 +60,13 @@ function onTrigger(player, npc)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(738)
 
-    -- Three Paths --
+    -- Three Paths
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3) then
         player:startEvent(876)
 
-    -- Waking Dreams --
-    elseif (player:hasKeyItem(tpz.ki.VIAL_OF_DREAM_INCENSE)==false and ((player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) and  waking_dreams == QUEST_AVAILABLE ) or(waking_dreams  == QUEST_COMPLETED and realday ~= player:getCharVar("Darkness_Named_date")))) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+    -- Waking Dreams
+    elseif (player:hasKeyItem(tpz.ki.VIAL_OF_DREAM_INCENSE)==false and ((player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) and  waking_dreams == QUEST_AVAILABLE ) or(waking_dreams  == QUEST_COMPLETED and realday ~= player:getCharVar("Darkness_Named_date")))) then
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
         player:startEvent(918)--918
 
     elseif (player:hasKeyItem(tpz.ki.WHISPER_OF_DREAMS) == true) then
@@ -79,7 +80,7 @@ function onTrigger(player, npc)
         end
         player:startEvent(920, 17599, 14814, 15557, 15516, 0, 0, 0, availRewards)
 
-    -- Blue Ribbon Blues --
+    -- Blue Ribbon Blues
     elseif (BlueRibbonBlues == QUEST_COMPLETED and needZone) then
         player:startEvent(363)--363
     elseif (BlueRibbonBlues == QUEST_ACCEPTED) then
@@ -101,10 +102,10 @@ function onTrigger(player, npc)
         else
             player:startEvent(306) -- Standard Conversation
         end
-    elseif (BlueRibbonBlues == QUEST_AVAILABLE and player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 5) then
+    elseif (BlueRibbonBlues == QUEST_AVAILABLE and player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and player:getFameLevel(WINDURST) >= 5) then
         player:startEvent(357)
 
-    -- Food for Thought --
+    -- Food for Thought
     elseif (FoodForThought == QUEST_AVAILABLE) then
         if (OhbiruFood == 1 and KerutotoFood ~= 256) then -- Player knows the researchers are hungry and quest not refused
             player:startEvent(313, 0, 4371) -- Offered Quest 1 (Including Order ifYES)
@@ -128,14 +129,14 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 876) then
         player:setCharVar("COP_Ulmia_s_Path", 4)
     elseif ((csid == 313 and option == 0) or (csid == 314 and option == 0)) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
         player:setCharVar("Kerutoto_Food_var", 1)
     elseif (csid == 313 and option == 1) then
         player:setCharVar("Kerutoto_Food_var", 256)
@@ -143,7 +144,7 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*440)
         if (player:getCharVar("Kenapa_Food_var") == 4 and player:getCharVar("Ohbiru_Food_var") == 3) then -- If this is the last NPC to be fed
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
             player:addFame(WINDURST, 100)
             player:addTitle(tpz.title.FAST_FOOD_DELIVERER)
             player:needToZone(true)
@@ -154,7 +155,7 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Kerutoto_Food_var", 2)
         end
     elseif (csid == 357) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
     elseif (csid == 358 or csid == 365) then
         player:tradeComplete()
         player:setCharVar("BlueRibbonBluesProg", 2)
@@ -171,7 +172,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13569)
         end
     elseif (csid == 362) then
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
         player:setCharVar("BlueRibbonBluesProg", 0)
         player:addFame(WINDURST, 140)
         player:addTitle(tpz.title.GHOSTIE_BUSTER)
@@ -196,7 +197,7 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*15000) -- Gil
             player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", os.date("%j")) -- %M for next minute, %j for next day
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
 
         elseif (option == 6 and player:hasSpell(304)==false) then
             player:addSpell(304) -- diabolos Spell
@@ -206,11 +207,11 @@ function onEventFinish(player, csid, option)
         if (addspell==1) then
             player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", os.date("%j")) -- %M for next minute, %j for next day
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
         elseif (item > 0 and player:getFreeSlotsCount()~=0) then
             player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", os.date("%j")) -- %M for next minute, %j for next day
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
             player:addItem(item)
             player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
         elseif ( option ~= 5 and  (( item == 0 and  addspell==0 ) or (item > 0 and player:getFreeSlotsCount() == 0) ) ) then
@@ -222,3 +223,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

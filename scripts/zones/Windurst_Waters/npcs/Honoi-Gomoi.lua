@@ -10,8 +10,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade "Star Spinel" for "Crying over Onions" after having talked to this NPC once
     -- and optionally talked to Nanaa Mihgo (CryingOverOnions == 2)
     if
@@ -22,14 +23,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
 
-    local cryingOverOnions  = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
-    local wildCard          = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WILD_CARD)
-    local hatInHand         = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    local cryingOverOnions  = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
+    local wildCard          = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WILD_CARD)
+    local hatInHand         = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
 
     if
         player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and
@@ -71,11 +72,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    
+entity.onEventFinish = function(player, csid, option)
+
     -- "Crying over Onions"
     if csid == 774 then
         player:setCharVar("CryingOverOnions", 1)
@@ -93,7 +94,7 @@ function onEventFinish(player, csid, option)
 
     -- "Wild Card"
     elseif csid == 780 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.WILD_CARD)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WILD_CARD)
     elseif
         csid == 782 and
         npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {
@@ -115,3 +116,5 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.CRACKED_MIMEO_MIRROR)
     end
 end
+
+return entity

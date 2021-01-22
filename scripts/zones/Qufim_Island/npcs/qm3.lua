@@ -9,15 +9,16 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Seedspall's Lux, Luna, Astrum
     if player:getCurrentMission(ACP) == tpz.mission.id.acp.THE_ECHO_AWAKENS and npcUtil.tradeHas(trade, {2740, 2741, 2742}) then
         player:startEvent(31)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local missionACP = player:getCurrentMission(ACP)
     local now = tonumber(os.date("%j"))
     local SR = player:hasKeyItem(tpz.ki.SEEDSPALL_ROSEUM)
@@ -56,22 +57,24 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 31 then
-        player:completeMission(ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
-        player:addMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THE_ECHO_AWAKENS)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
         player:confirmTrade()
     elseif csid == 32 then
-        player:completeMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
-        player:addMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_I)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
         player:delKeyItem(tpz.ki.SEEDSPALL_ROSEUM)
         player:delKeyItem(tpz.ki.SEEDSPALL_CAERULUM)
         player:delKeyItem(tpz.ki.SEEDSPALL_VIRIDIS)
     elseif csid == 34 then
-        player:completeMission(ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
-        player:addMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.GATHERER_OF_LIGHT_II)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
     end
 end
+
+return entity

@@ -7,8 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- setMod
     mob:setMod(tpz.mod.REGEN, 500)
 
@@ -22,7 +23,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     if (spell:getID() == 218) then -- Meteor
         spell:setAoE(tpz.magic.aoe.RADIAL)
         spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
@@ -32,7 +33,7 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMagicHit(caster, target, spell)
+entity.onMagicHit = function(caster, target, spell)
     local REGEN = target:getMod(tpz.mod.REGEN)
     local DAY = VanadielDayOfTheWeek()
     local ELEM = spell:getElement()
@@ -46,6 +47,8 @@ function onMagicHit(caster, target, spell)
     return 1
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.VIRTUOUS_SAINT)
 end
+
+return entity

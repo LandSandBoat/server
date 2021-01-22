@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Crawlers_Nest/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 4365) then -- Rolanberry
         player:confirmTrade()
         if math.random(1, 100) > 38 or not npcUtil.popFromQM(player, npc, ID.mob.AWD_GOGGIE - 6, {claim=true, hide=0}) then
@@ -16,5 +17,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
+
+return entity

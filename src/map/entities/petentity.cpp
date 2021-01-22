@@ -130,7 +130,9 @@ WYVERN_TYPE CPetEntity::getWyvernType()
 
 void CPetEntity::PostTick()
 {
-    CMobEntity::PostTick();
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
+    CBattleEntity::PostTick();
     if (loc.zone && updatemask && status != STATUS_TYPE::DISAPPEAR)
     {
         loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
@@ -155,7 +157,10 @@ void CPetEntity::Die()
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     luautils::OnMobDeath(this, nullptr);
-    CMobEntity::Die();
+
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
+    CBattleEntity::Die();
     if (PMaster && PMaster->PPet == this && PMaster->objtype == TYPE_PC)
     {
         petutils::DetachPet(PMaster);
@@ -165,7 +170,6 @@ void CPetEntity::Die()
 void CPetEntity::Spawn()
 {
     // we need to skip CMobEntity's spawn because it calculates stats (and our stats are already calculated)
-
     if (PMaster && PMaster->objtype == TYPE_PC && m_EcoSystem == ECOSYSTEM::ELEMENTAL)
     {
         this->defaultMobMod(MOBMOD_MAGIC_DELAY, 12);
@@ -173,7 +177,9 @@ void CPetEntity::Spawn()
         mobutils::GetAvailableSpells(this);
     }
 
-    CMobEntity::Spawn();
+    // NOTE: This is purposefully calling CBattleEntity's impl.
+    // TODO: Calling a grand-parent's impl. of an overrideden function is bad
+    CBattleEntity::Spawn();
     luautils::OnMobSpawn(this);
 }
 

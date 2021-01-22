@@ -1,18 +1,19 @@
---------------------------------------
+-----------------------------------
 -- Spell: Embrava
 --     Consumes 20% of your maximum MP. Gradually restores
 --  target party member's HP and MP and increases attack speed.
---------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     -- If Tabula Rasa wears before spell goes off, no Embrava for you!
     if not caster:hasStatusEffect(tpz.effect.TABULA_RASA) then
         spell:setMsg(tpz.msg.basic.MAGIC_CANNOT_CAST)
@@ -28,3 +29,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.EMBRAVA
 end
+
+return spell_object

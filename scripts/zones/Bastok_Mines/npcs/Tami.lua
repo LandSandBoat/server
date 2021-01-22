@@ -8,9 +8,11 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local groceries = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GROCERIES)
+entity.onTrade = function(player, npc, trade)
+    local groceries = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
     local groceriesProgress = player:getCharVar("Groceries")
 
     -- GROCERIES (trade meat jerky)
@@ -19,8 +21,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local groceries = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GROCERIES)
+entity.onTrigger = function(player, npc)
+    local groceries = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
     local groceriesProgress = player:getCharVar("Groceries")
 
     -- GROCERIES
@@ -39,13 +41,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- GROCERIES
     if (csid == 110) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.GROCERIES)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
         player:addKeyItem(tpz.ki.TAMIS_NOTE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TAMIS_NOTE)
         player:setCharVar("Groceries", 1)
@@ -58,7 +60,7 @@ function onEventFinish(player, csid, option)
         if (player:getFreeSlotsCount() >= 1) then
             player:tradeComplete()
             player:setCharVar("Groceries", 0)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GROCERIES)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GROCERIES)
             player:addFame(BASTOK, 75)
             player:addItem(13594) -- Rabbit Mantle
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13594)
@@ -67,3 +69,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

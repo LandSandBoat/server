@@ -12,8 +12,9 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz2") -- NPC Zone2
         if
@@ -39,14 +40,14 @@ function onTrade(player, npc, trade)
         then
             player:startEvent(177, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then
         player:startEvent(171) -- Finish Quest "Crest of Davoi" Start Quest "Save my Sister" with var, not addquest()
     end
 end
 
-function onTrigger(player, npc)
-    local CrestOfDavoi = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
-    local SaveMySister = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+entity.onTrigger = function(player, npc)
+    local CrestOfDavoi = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+    local SaveMySister = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
 
     -- You need to talk to Aldo before you can obtain the Crest of Davoi or Yagudo Torch
     if (player:hasKeyItem(tpz.ki.SILVER_BELL) and CrestOfDavoi == QUEST_AVAILABLE) then
@@ -68,22 +69,22 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 177) then --1
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 32)
     elseif (csid == 174 and option == 1) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
     elseif (csid == 171) then
         player:tradeComplete()
         player:setCharVar("saveMySisterVar", 1)
         player:addKeyItem(tpz.ki.CREST_OF_DAVOI_KI)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CREST_OF_DAVOI_KI)
         player:addFame(JEUNO, 30)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
 
     elseif (csid == 105) then
         player:setCharVar("saveMySisterVar", 3)
@@ -98,7 +99,9 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17041)
             player:tradeComplete()
             player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
         end
     end
 end
+
+return entity

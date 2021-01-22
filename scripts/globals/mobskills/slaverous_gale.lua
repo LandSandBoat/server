@@ -1,19 +1,20 @@
----------------------------------------------
+-----------------------------------
 -- Slaverous Gale
 --
 -- Description: Deals earth damage that inflicts Plague and Slow effects on targets in front of the caster
 -- Type: Magical (Earth)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffectOne = tpz.effect.PLAGUE
     local typeEffectTwo = tpz.effect.SLOW
     MobStatusEffectMove(mob, target, typeEffectOne, 1, 3, 60)
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.EARTH)
     return dmg
 end
+
+return mobskill_object

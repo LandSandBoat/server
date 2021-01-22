@@ -23,9 +23,9 @@ function attemptTransform(mob, timeThreshold)
     local transformTime = mob:getLocalVar("transformTime")
     local currentTime = os.time()
     if currentTime - transformTime >= timeThreshold then
-        local animSub = mob:AnimationSub()
+        local animSub = mob:getAnimationSub()
         animSub = (animSub + 1) % 2
-        mob:AnimationSub(animSub)
+        mob:setAnimationSub(animSub)
         mob:setLocalVar("transformTime", currentTime)
     end
 end

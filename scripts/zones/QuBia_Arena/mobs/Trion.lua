@@ -6,12 +6,13 @@
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 30)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
         -- Red Lotus Blade
         if skillID == 968 then
@@ -26,11 +27,11 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:setLocalVar("wait", 0)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local wait = mob:getLocalVar("wait")
     if wait > 40 then
         -- pick a random living target from the three enemies
@@ -46,6 +47,8 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:getBattlefield():lose()
 end
+
+return entity

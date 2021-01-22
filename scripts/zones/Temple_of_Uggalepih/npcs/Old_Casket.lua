@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.OLD_RUSTY_KEY) then
         player:startEvent(64, tpz.ki.OLD_RUSTY_KEY)
     elseif player:hasKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS) then
@@ -21,13 +22,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 64 and option == 1 then
         player:delKeyItem(tpz.ki.OLD_RUSTY_KEY)
         player:addKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PAINTBRUSH_OF_SOULS)
     end
 end
+
+return entity

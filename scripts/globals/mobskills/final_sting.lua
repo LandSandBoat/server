@@ -1,16 +1,18 @@
----------------------------------------------
+-----------------------------------
 --  Final Sting
 --
 --  Description: Deals damage proportional to HP. Reduces HP to 1 after use. Damage varies with TP.
 --  Type: Physical (Slashing)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+-----------------------------------
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local param = skill:getParam()
     if (param == 0) then
         param = 50
@@ -23,7 +25,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 1
@@ -43,3 +45,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

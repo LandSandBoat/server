@@ -7,16 +7,19 @@
 require("scripts/globals/hunts")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(tpz.mod.REGAIN, 200) -- "Seemed to have very high TP gain." (guessing 200 after watching video)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 266)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(5400 + math.random(0, 3) * 600) -- "... every 90-120 minutes ... at exactly 100 minutes many times" (guessing 10 minute intervals)
 end
+
+return entity

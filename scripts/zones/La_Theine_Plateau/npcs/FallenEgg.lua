@@ -6,8 +6,9 @@
 require("scripts/zones/La_Theine_Plateau/globals")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local random = math.random(1, 100)
     local nm = GetMobByID(ID.mob.NIHNIKNOOVI)
     if (random <= 20 and not nm:isSpawned()) then
@@ -25,3 +26,5 @@ function onTrigger(player, npc)
         LA_THEINE_PLATEAU.moveFallenEgg(300)   -- moved whether the item is obtained or not, to counter abuse with a full inv
     end
 end
+
+return entity

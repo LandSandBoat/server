@@ -11,8 +11,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 require("scripts/globals/helm")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, 179, -26, 327, 219, -18, 347)
 
     SetServerVariable("realPadfoot", math.random(1, 5))
@@ -25,11 +26,11 @@ function onInitialize(zone)
     tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -45,20 +46,20 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
     if (regionID == 1 and player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 6) then
         player:startEvent(116)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 110) then
         player:messageSpecial(ID.text.KI_STOLEN, 0, tpz.ki.MYSTERIOUS_AMULET)
         player:delKeyItem(tpz.ki.MYSTERIOUS_AMULET)
@@ -70,3 +71,5 @@ function onEventFinish(player, csid, option)
         player:addTitle(tpz.title.BANISHER_OF_EMPTINESS)
     end
 end
+
+return zone_object

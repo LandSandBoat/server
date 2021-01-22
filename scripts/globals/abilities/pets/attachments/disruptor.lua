@@ -3,8 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_DISRUPTOR", function(automaton, target)
         local master = automaton:getMaster()
         if master and master:countEffect(tpz.effect.DARK_MANEUVER) > 0 and automaton:getLocalVar("dispel") < VanadielTime() and target:hasStatusEffectByFlag(tpz.effectFlag.DISPELABLE) and (automaton:checkDistance(target) - target:getModelSize()) < 7 then
@@ -15,11 +16,13 @@ function onEquip(pet)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
 end
+
+return attachment_object

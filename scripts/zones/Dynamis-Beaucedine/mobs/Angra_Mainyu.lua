@@ -7,8 +7,9 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/dynamis")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 4 do
         if not GetMobByID(i):isSpawned() then
@@ -17,7 +18,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 4 do
         local pet = GetMobByID(i)
@@ -27,7 +28,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     if mob:getHPP() <= 25 then
         return 244 -- Death
     else
@@ -49,6 +50,8 @@ function onMonsterMagicPrepare(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
 end
+
+return entity

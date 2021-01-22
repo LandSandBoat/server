@@ -10,10 +10,11 @@ require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 2) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_4", 0)
             player:tradeComplete()
@@ -24,13 +25,13 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
 
-    MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
 
     if (MakingHeadlines == 0) then
         player:startEvent(665) -- Quest Start
@@ -65,13 +66,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 665) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     elseif (csid == 670 or csid == 674) then
         player:addTitle(tpz.title.EDITORS_HATCHET_MAN)
         player:addGil(GIL_RATE*560)
@@ -82,7 +83,9 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.PORT_WINDURST_SCOOP)
         player:setCharVar("QuestMakingHeadlines_var", 0)
         player:addFame(WINDURST, 30)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     end
 
 end
+
+return entity

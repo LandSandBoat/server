@@ -8,12 +8,13 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local CurrentMission = player:getCurrentMission(SANDORIA)
-    local OrcishScoutCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS)
-    local BatHuntCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BAT_HUNT)
-    local TheCSpringCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_CRYSTAL_SPRING)
+    local OrcishScoutCompleted = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS)
+    local BatHuntCompleted = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.BAT_HUNT)
+    local TheCSpringCompleted = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_CRYSTAL_SPRING)
     local MissionStatus = player:getCharVar("MissionStatus")
     local Count = trade:getItemCount()
 
@@ -39,9 +40,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-local PresOfPapsqueCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE)
+local PresOfPapsqueCompleted = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE)
 
     if (player:getNation() ~= tpz.nation.SANDORIA) then
         player:startEvent(1011) -- for Non-San d'Orians
@@ -57,7 +58,7 @@ local PresOfPapsqueCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
-        elseif (pRank == 1 and player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then
+        elseif (pRank == 1 and player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then
             player:startEvent(1000) -- Start First Mission "Smash the Orcish scouts"
         elseif CurrentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1035)
@@ -83,12 +84,12 @@ local PresOfPapsqueCompleted = player:hasCompletedMission(SANDORIA, tpz.mission.
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdateCSID: %u", csid)
     -- printf("onUpdateOPTION: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinishCSID: %u", csid)
     -- printf("onFinishOPTION: %u", option)
 
@@ -108,3 +109,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

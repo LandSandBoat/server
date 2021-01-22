@@ -7,11 +7,12 @@ local ID = require("scripts/zones/RuLude_Gardens/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
 
     if pNation == tpz.nation.SANDORIA then
@@ -41,10 +42,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 39 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 130 and option == 1 then
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

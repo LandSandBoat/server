@@ -10,11 +10,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local rank = tpz.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local assaultPoints = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     --end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 275) then
         local selectiontype = bit.band(option, 0xF)
         if (selectiontype == 1) then
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

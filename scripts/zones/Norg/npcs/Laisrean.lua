@@ -10,12 +10,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    Stash = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
+entity.onTrigger = function(player, npc)
+    Stash = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
     mLvl = player:getMainLvl()
     SeaStatue = player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE)
 
@@ -32,12 +33,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 33 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
     elseif (csid == 35) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4946)
@@ -47,8 +48,10 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4946)
             player:addTitle(tpz.title.TREASUREHOUSE_RANSACKER)
             player:addFame(NORG, 75)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH)
         end
     end
 
 end
+
+return entity

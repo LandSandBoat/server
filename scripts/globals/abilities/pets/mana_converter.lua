@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Mana Converter
----------------------------------------------
+-----------------------------------
 require("scripts/globals/automatonweaponskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     return 0
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(tpz.recast.ABILITY, skill:getID(), 180)
     local hp = target:getHP()
     local duration = 30
@@ -26,3 +27,5 @@ function onPetAbility(target, automaton, skill, master, action)
 
     return tpz.effect.REFRESH
 end
+
+return ability_object

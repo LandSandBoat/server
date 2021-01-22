@@ -1,8 +1,8 @@
---------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/zone")
---------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.limbus = tpz.limbus or {}
@@ -28,7 +28,7 @@ function tpz.limbus.setupArmouryCrates(bfid, hide)
     else
         ID = zones[tpz.zone.TEMENOS]
     end
-    
+
     switch (bfid): caseof
     {
         [1290] = function() -- NW_Apollyon

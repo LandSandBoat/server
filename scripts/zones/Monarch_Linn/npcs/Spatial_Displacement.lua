@@ -9,15 +9,16 @@ require("scripts/globals/quests")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (TradeBCNM(player, npc, trade)) then
         return
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local npcID = npc:getID()
     local X = player:getXPos()
     local Z = player:getZPos()
@@ -39,11 +40,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 11 and option == 1) then
         player:setPos(-508.582, -8.471, -387.670, 92, 30) -- To Riv Site A (Retail confirmed)
     elseif (csid == 10 and option == 1) then
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
         return
     end
 end
+
+return entity

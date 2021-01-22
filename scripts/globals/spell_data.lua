@@ -3,9 +3,9 @@ require('scripts/globals/status')
 tpz = tpz or {}
 tpz.magic = tpz.magic or {}
 
-------------------------------------
+-----------------------------------
 -- Spell flag bits
-------------------------------------
+-----------------------------------
 
 tpz.magic.spellFlag =
 {
@@ -15,9 +15,9 @@ tpz.magic.spellFlag =
     IGNORE_SHADOWS = 0x04  -- Ignore shadows and hit player anyways (example: Mobs "Death" spell)
 }
 
-------------------------------------
+-----------------------------------
 -- Spell AOE IDs
-------------------------------------
+-----------------------------------
 
 tpz.magic.aoe =
 {
@@ -30,9 +30,9 @@ tpz.magic.aoe =
     DIFFUSION   = 6, -- AOE when under Diffusion
 }
 
-------------------------------------
+-----------------------------------
 -- Spell Groups
-------------------------------------
+-----------------------------------
 
 tpz.magic.spellGroup =
 {
@@ -45,9 +45,9 @@ tpz.magic.spellGroup =
     WHITE     = 6,
 }
 
-------------------------------------
+-----------------------------------
 -- Elements
-------------------------------------
+-----------------------------------
 
 tpz.magic.element =
 {
@@ -64,9 +64,9 @@ tpz.magic.element =
 }
 tpz.magic.ele = tpz.magic.element
 
-------------------------------------
+-----------------------------------
 -- Day to Element Mapping
-------------------------------------
+-----------------------------------
 
 tpz.magic.dayElement =
 {
@@ -80,9 +80,9 @@ tpz.magic.dayElement =
     [tpz.day.DARKSDAY]     = tpz.magic.element.DARK,
 }
 
-------------------------------------
+-----------------------------------
 -- Elemental Strength Ordering
-------------------------------------
+-----------------------------------
 tpz.magic.elementAscendant =
 {
     [tpz.magic.element.FIRE]    = tpz.magic.element.ICE,
@@ -106,9 +106,9 @@ tpz.magic.elementDescendant =
     [tpz.magic.element.LIGHT]    = tpz.magic.element.DARK,
     [tpz.magic.element.DARK]     = tpz.magic.element.LIGHT,
 }
-------------------------------------
+-----------------------------------
 -- Spell Families
-------------------------------------
+-----------------------------------
 
 tpz.magic.spellFamily =
 {
@@ -271,9 +271,9 @@ tpz.magic.spellFamily =
     FLURRY             = 156,
 }
 
-------------------------------------
+-----------------------------------
 -- Spell IDs
-------------------------------------
+-----------------------------------
 
 tpz.magic.spell =
 {

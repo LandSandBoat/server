@@ -126,7 +126,7 @@ CItemState::CItemState(CCharEntity* PEntity, uint16 targid, uint8 loc, uint8 slo
     actionTarget.messageID  = 28;
     actionTarget.knockback  = 0;
 
-    m_PEntity->PAI->EventHandler.triggerListener("ITEM_START", PTarget, m_PItem, &action);
+    m_PEntity->PAI->EventHandler.triggerListener("ITEM_START", CLuaBaseEntity(PTarget), CLuaItem(m_PItem), &action);
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
     m_PItem->setSubType(ITEM_LOCKED);
@@ -152,13 +152,13 @@ bool CItemState::Update(time_point tick)
         {
             FinishItem(action);
         }
-        m_PEntity->PAI->EventHandler.triggerListener("ITEM_USE", m_PEntity, m_PItem, &action);
+        m_PEntity->PAI->EventHandler.triggerListener("ITEM_USE", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem), &action);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         Complete();
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_animationTime)
     {
-        m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", m_PEntity, m_PItem);
+        m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem));
         return true;
     }
     return false;

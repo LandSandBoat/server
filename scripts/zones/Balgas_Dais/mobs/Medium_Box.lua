@@ -5,14 +5,15 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function replaceWithCrate(mob)
+local function replaceWithCrate(mob)
     local crate = GetNPCByID(mob:getID() + 2)
     crate:teleport(mob:getPos(), mob:getRotPos())
     crate:setStatus(tpz.status.NORMAL)
 end
 
-function onMobEngaged (mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     local small = GetMobByID(mobId - 1)
 
@@ -27,13 +28,15 @@ function onMobEngaged (mob, target)
             DespawnMob(mobId)
             replaceWithCrate(mob)
         else
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         end
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
         replaceWithCrate(mob)
     end
 end
+
+return entity

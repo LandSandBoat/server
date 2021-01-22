@@ -5,8 +5,10 @@
 -----------------------------------
 require("scripts/globals/status")
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
     local inst = battlefield:getArea()
     local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
@@ -20,5 +22,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

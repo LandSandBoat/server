@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Reraise
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 require("scripts/globals/status")
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     --duration = 1800
     target:addStatusEffect(tpz.effect.RERAISE, 1, 0, 3600) --reraise 1, 30min duration
 
     return tpz.effect.RERAISE
 end
+
+return spell_object

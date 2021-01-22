@@ -13,8 +13,9 @@ require("scripts/globals/shop")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Part1
         if
@@ -43,9 +44,9 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local TheLostCardien = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
-    local CooksPride = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+entity.onTrigger = function(player, npc)
+    local TheLostCardien = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
+    local CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
     -- COP mission 1-1
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_RITES_OF_LIFE and  player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(10)--10
@@ -65,7 +66,7 @@ function onTrigger(player, npc)
         player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian" 33
     elseif (CooksPride == QUEST_COMPLETED and TheLostCardien == QUEST_AVAILABLE and player:getCharVar("theLostCardianVar") == 3) then
         player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian" 34
-    elseif (TheLostCardien == QUEST_COMPLETED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED) then
+    elseif (TheLostCardien == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED) then
         player:startEvent(32) -- 32
     else
         player:startEvent(28) -- Standard dialog 28
@@ -92,10 +93,10 @@ end
 
 --Tenzen     10011
 --Tenzen     10012
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 6) then
         player:setCharVar("COP_Tenzen_s_Path", 5)
     elseif (csid == 74) then
@@ -106,8 +107,8 @@ function onEventFinish(player, csid, option)
         player:setCharVar("PromathiaStatus", 0)
         player:addKeyItem(tpz.ki.MYSTERIOUS_AMULET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MYSTERIOUS_AMULET)
-        player:completeMission(COP, tpz.mission.id.cop.THE_RITES_OF_LIFE)
-        player:addMission(COP, tpz.mission.id.cop.BELOW_THE_ARKS) -- start the mission 1-2
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_RITES_OF_LIFE)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.BELOW_THE_ARKS) -- start the mission 1-2
         player:startEvent(206) -- 206
     elseif (csid == 206) then
         player:startEvent(207)  --207
@@ -117,8 +118,8 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.LEND_PRISHE_AMULET, tpz.ki.MYSTERIOUS_AMULET_PRISHE)
     elseif (csid == 75) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.DARKNESS_NAMED)
-        player:addMission(COP, tpz.mission.id.cop.SHELTERING_DOUBT)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SHELTERING_DOUBT)
     elseif (csid == 91) then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 4)
@@ -130,10 +131,12 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
         player:addFame(JEUNO, 30)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_LOST_CARDIAN)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
     elseif (csid == 33 and option == 1) then
         player:setCharVar("theLostCardianVar", 3)
     end
 
 end
+
+return entity

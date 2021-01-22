@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Death Ray
 -- Deals dark damage to an enemy
 -- Spell cost: 49 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 29.25 seconds
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     local multi = 1.625
@@ -45,3 +46,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

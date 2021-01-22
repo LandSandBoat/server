@@ -1,10 +1,12 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : "Killer" effects bonus
---
+-- tpz.effect.PROWESS
+-- "Killer" effects bonus
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.VERMIN_KILLER, effect:getPower())
     target:addMod(tpz.mod.BIRD_KILLER, effect:getPower())
     target:addMod(tpz.mod.AMORPH_KILLER, effect:getPower())
@@ -22,10 +24,10 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.LUMINION_KILLER, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.VERMIN_KILLER, effect:getPower())
     target:delMod(tpz.mod.BIRD_KILLER, effect:getPower())
     target:delMod(tpz.mod.AMORPH_KILLER, effect:getPower())
@@ -42,3 +44,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.LUMORIAN_KILLER, effect:getPower())
     target:delMod(tpz.mod.LUMINION_KILLER, effect:getPower())
 end
+
+return effect_object

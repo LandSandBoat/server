@@ -6,9 +6,9 @@ require("scripts/globals/mixins")
 
 g_mixins = g_mixins or {}
 
----------------------------------------------------------
+-----------------------------------
 -- Casket zone check
----------------------------------------------------------
+-----------------------------------
 g_mixins.spawn_casket = function(mob)
     mob:addListener("DEATH", "DEATH_SPAWN_CASKET", function(mob, player, isKiller)
         local mobPos = mob:getPos()

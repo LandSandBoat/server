@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Venom Shell
 -- Poisons enemies within range and gradually reduces their HP
 -- Spell cost: 86 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 45 seconds
 -- Magic Bursts on: Reverberation, Distortion, and Darkness
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.POISON
     local dINT = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
     local params = {}
@@ -47,3 +48,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

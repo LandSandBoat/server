@@ -7,21 +7,19 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onEventUpdate(player, csid, option)
-    -- printf("updateCSID: %u", csid)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, target)
-    -- printf("finishCSID: %u", csid)
-
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 32004) then
         if (GetMobByID(target:getID()-1):getName() == "Orbital") then
             DespawnMob(target:getID())
@@ -47,3 +45,5 @@ function onEventFinish(player, csid, option, target)
     end
 
 end
+
+return entity

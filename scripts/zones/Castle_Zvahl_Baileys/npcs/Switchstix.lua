@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Castle_Zvahl_Baileys/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local requiredItems = 1
 local currencyType = 2
@@ -124,7 +125,7 @@ local relics =
     [15069] = { { 1822, 1589 }, currency.SILVER_10000, 1, 4, 6 }, -- Ancile
 }
 
-function hasRelic(entity, isTrade)
+local function hasRelic(entity, isTrade)
     if isTrade then
         for key, value in pairs(relics) do
             if (entity:hasItemQty(key, 1)) then
@@ -142,7 +143,7 @@ function hasRelic(entity, isTrade)
     end
 end
 
-function tradeHasRequiredCurrency(trade, currentRelic)
+local function tradeHasRequiredCurrency(trade, currentRelic)
     local relic = relics[currentRelic]
 
     if currentRelic == 15066 or currentRelic == 15067 or currentRelic == 15068 then
@@ -164,7 +165,7 @@ function tradeHasRequiredCurrency(trade, currentRelic)
     end
 end
 
-function tradeHasRequiredMaterials(trade, relicId, requiredItems)
+local function tradeHasRequiredMaterials(trade, relicId, requiredItems)
     if trade:getItemCount() ~= (#requiredItems + 1) then
         return false
     else
@@ -181,7 +182,7 @@ function tradeHasRequiredMaterials(trade, relicId, requiredItems)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local relicId = hasRelic(trade, true)
     local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
     local gil = trade:getGil()
@@ -225,7 +226,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local relicId = hasRelic(player, false)
     local currentRelic = player:getCharVar("RELIC_IN_PROGRESS")
     local relicWait = player:getCharVar("RELIC_DUE_AT")
@@ -301,7 +302,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- Handles the displayed currency types and amounts for Aegis Stage 1->2, 2->3, and 3->4 based on option.
     if ((csid == 11 or csid == 12 or csid == 13) and option ~= 0) then
         if (option == 1) then
@@ -314,7 +315,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local reward = player:getCharVar("RELIC_IN_PROGRESS")
 
     -- User is cancelling a relic.  Null everything out, it never happened.
@@ -377,3 +378,5 @@ function onEventFinish(player, csid, option)
             }
     end
 end
+
+return entity

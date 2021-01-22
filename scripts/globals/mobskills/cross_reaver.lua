@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Cross Reaver
 --
 --  Description: Deals high damage to players in a fan-shaped area. Additional effect: Stun
@@ -7,17 +7,18 @@
 --  Range: Melee
 
 -- Special weaponskill unique to Ark Angel HM. Deals ~500-900 damage.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
    -- TODO: Can skillchain?  Unknown property.
 
@@ -32,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

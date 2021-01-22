@@ -5,11 +5,14 @@
 mixins = {require("scripts/mixins/fomor_hate")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addStatusEffect(tpz.effect.KILLER_INSTINCT, 40, 0, 0)
     mob:setLocalVar("fomorHateAdj", -2)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

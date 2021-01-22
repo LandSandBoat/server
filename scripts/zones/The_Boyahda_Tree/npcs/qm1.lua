@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.detonator, player, ID.mob.BEET_LEAFHOPPER)
 end
+
+return entity

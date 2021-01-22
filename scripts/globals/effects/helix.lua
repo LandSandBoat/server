@@ -1,18 +1,14 @@
 -----------------------------------
---
---     tpz.effect.HELIX
---
+-- tpz.effect.HELIX
 -----------------------------------
-
-require("scripts/globals/status")
-require("scripts/globals/magic")
 require("scripts/globals/utils")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
-
+effect_object.onEffectGain = function(target, effect)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     local dmg = utils.stoneskin(target, effect:getPower())
 
     if (dmg > 0) then
@@ -24,6 +20,7 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
-
+effect_object.onEffectLose = function(target, effect)
 end
+
+return effect_object

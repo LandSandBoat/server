@@ -1,4 +1,4 @@
-----------------------------------
+-----------------------------------
 -- Area: Fort Karugo Narugo [S]
 --  NPC: Rotih_Moalghett
 -- Type: Quest
@@ -6,12 +6,13 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_ACCEPTED) then
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STRIKES) == QUEST_ACCEPTED) then
         if (player:getCharVar("TigressStrikesProg") == 1) then
             player:startEvent(101)
         else
@@ -20,11 +21,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 104) then
         player:setCharVar("TigressStrikesProg", 1)
     end
 end
+
+return entity

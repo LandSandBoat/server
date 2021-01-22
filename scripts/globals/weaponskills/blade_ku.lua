@@ -11,7 +11,7 @@
 -- Modifiers: STR:10%  DEX:10%
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.00      1.00
---
+-----------------------------------
 --         params.acc
 -- 100%TP    200%TP    300%TP
 -- ??        ??        ??
@@ -20,8 +20,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 5
@@ -41,3 +42,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

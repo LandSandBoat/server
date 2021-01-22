@@ -1,18 +1,22 @@
 -----------------------------------
---
--- tpz.effect.PROWESS : Enhanced magic acc. and magic atk
---
+-- tpz.effect.PROWESS
+-- Enhanced magic acc. and magic atk
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.MATT, effect:getPower())
     target:addMod(tpz.mod.MACC, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.MATT, effect:getPower())
     target:delMod(tpz.mod.MACC, effect:getPower())
 end
+
+return effect_object

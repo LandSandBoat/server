@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Spring Water
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local base = 47 + pet:getMainLvl()*3
     local tp = skill:getTP()
     if tp < 1000 then
@@ -36,3 +37,5 @@ function onPetAbility(target, pet, skill)
     target:addHP(base)
     return base
 end
+
+return ability_object

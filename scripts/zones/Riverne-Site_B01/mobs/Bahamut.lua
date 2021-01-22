@@ -5,20 +5,21 @@
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-
-function onMobInitialise(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addStatusEffect(tpz.effect.PHALANX, 35, 0, 180)
     mob:addStatusEffect(tpz.effect.STONESKIN, 350, 0, 300)
     mob:addStatusEffect(tpz.effect.PROTECT, 175, 0, 1800)
     mob:addStatusEffect(tpz.effect.SHELL, 24, 0, 1800)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local MegaFlareQueue = mob:getLocalVar("MegaFlareQueue")
     local MegaFlareTrigger = mob:getLocalVar("MegaFlareTrigger")
     local MegaFlareUses = mob:getLocalVar("MegaFlareUses")
@@ -93,5 +94,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

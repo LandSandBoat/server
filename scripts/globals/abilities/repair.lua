@@ -10,8 +10,9 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
         return tpz.msg.basic.REQUIRES_A_PET, 0
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
@@ -26,7 +27,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- 1st need to get the pet food is equipped in the range slot.
     local rangeObj = player:getEquipID(tpz.slot.AMMO)
     local totalHealing = 0
@@ -115,3 +116,5 @@ function onUseAbility(player, target, ability)
 
     return totalHealing
 end
+
+return ability_object

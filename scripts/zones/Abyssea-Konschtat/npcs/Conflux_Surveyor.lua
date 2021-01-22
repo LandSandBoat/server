@@ -7,11 +7,12 @@ require("scripts/globals/settings")
 require("scripts/globals/abyssea")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local visitant = 0
     local prevtime = player:getCharVar("Abyssea_Time")
     local STONES = tpz.abyssea.getTravStonesTotal(player)
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
     player:startEvent(2001, 0, visitant, prevtime, STONES, SOJOURN, 0, 0, 0)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local SOJOURN = tpz.abyssea.getAbyssiteTotal(player, "SOJOURN")
     local duration = 0
     local prevtime = player:getCharVar("Abyssea_Time") -- Gets reduced by Visitants "on tic".
@@ -77,3 +78,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

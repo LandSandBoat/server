@@ -6,11 +6,11 @@ require('scripts/globals/weaponskillids')
 tpz = tpz or {}
 tpz.wsquest =
 {
-    --------------------------------------
+    -----------------------------------
     -- Quest: The Walls of Your Mind
     --   NPC: Oggbi (Port Bastok)
     --    WS: Asuran Fists (Hand-to-Hand)
-    --------------------------------------
+    -----------------------------------
     ['asuran_fists'] =
     {
         ['wsId'] = tpz.weaponskill.ASURAN_FISTS,
@@ -18,7 +18,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.HAND_TO_HAND,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 17507,
-        ['logId'] = BASTOK,
+        ['logId'] = tpz.quest.log_id.BASTOK,
         ['questId'] = tpz.quest.id.bastok.THE_WALLS_OF_YOUR_MIND,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
@@ -37,11 +37,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ------------------------------------
+    -----------------------------------
     -- Quest: Cloak and Dagger
     --   NPC: Jakoh Wahcondalo (Kazham)
     --    WS: Evisceration (Dagger)
-    ------------------------------------
+    -----------------------------------
     ['evisceration'] =
     {
         ['wsId'] = tpz.weaponskill.EVISCERATION,
@@ -49,7 +49,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.DAGGER,
         ['minSkill'] = 230,
         ['trialWeaponId'] = 17616,
-        ['logId'] = OUTLANDS,
+        ['logId'] = tpz.quest.log_id.OUTLANDS,
         ['questId'] = tpz.quest.id.outlands.CLOAK_AND_DAGGER,
         ['fameRegion'] = KAZHAM,
         ['eventIds'] =
@@ -68,11 +68,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    ----------------------------------------
+    -----------------------------------
     -- Quest: Old Wounds
     --   NPC: Curilla (Chateau d'Oraguille)
     --    WS: Savage Blade (Sword)
-    ----------------------------------------
+    -----------------------------------
     ['savage_blade'] =
     {
         ['wsId'] = tpz.weaponskill.SAVAGE_BLADE,
@@ -80,7 +80,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.SWORD,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 17654,
-        ['logId'] = SANDORIA,
+        ['logId'] = tpz.quest.log_id.SANDORIA,
         ['questId'] = tpz.quest.id.sandoria.OLD_WOUNDS,
         ['fameRegion'] = SANDORIA,
         ['eventIds'] =
@@ -99,11 +99,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    --------------------------------------
+    -----------------------------------
     -- Quest: Inheritance
     --   NPC: Gumbah (Bastok Mines)
     --    WS: Ground Strike (Great Sword)
-    --------------------------------------
+    -----------------------------------
     ['ground_strike'] =
     {
         ['wsId'] = tpz.weaponskill.GROUND_STRIKE,
@@ -111,7 +111,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.GREAT_SWORD,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 16952,
-        ['logId'] = BASTOK,
+        ['logId'] = tpz.quest.log_id.BASTOK,
         ['questId'] = tpz.quest.id.bastok.INHERITANCE,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
@@ -130,11 +130,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    -------------------------------
+    -----------------------------------
     -- Quest: Axe The Competition
     --   NPC: Brutus (Upper Jeuno)
     --    WS: Decimation (Axe)
-    -------------------------------
+    -----------------------------------
     ['decimation'] =
     {
         ['wsId'] = tpz.weaponskill.DECIMATION,
@@ -142,7 +142,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.AXE,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 17933,
-        ['logId'] = JEUNO,
+        ['logId'] = tpz.quest.log_id.JEUNO,
         ['questId'] = tpz.quest.id.jeuno.AXE_THE_COMPETITION,
         ['fameRegion'] = JEUNO,
         ['eventIds'] =
@@ -161,11 +161,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ------------------------------------
+    -----------------------------------
     -- Quest: The Weight Of Your Limits
     --   NPC: Iron Eater (Metalworks)
     --    WS: Steel Cyclone (Great Axe)
-    ------------------------------------
+    -----------------------------------
     ['steel_cyclone'] =
     {
         ['wsId'] = tpz.weaponskill.STEEL_CYCLONE,
@@ -173,7 +173,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.GREAT_AXE,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 16735,
-        ['logId'] = BASTOK,
+        ['logId'] = tpz.quest.log_id.BASTOK,
         ['questId'] = tpz.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
@@ -192,11 +192,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ---------------------------------------------
+    -----------------------------------
     -- Quest: Souls In Shadow
     --   NPC: Novalmauge (Bostaunieux Oubliette)
     --    WS: Spiral Hell (Scythe)
-    ---------------------------------------------
+    -----------------------------------
     ['spiral_hell'] =
     {
         ['wsId'] = tpz.weaponskill.SPIRAL_HELL,
@@ -204,7 +204,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.SCYTHE,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 16793,
-        ['logId'] = SANDORIA,
+        ['logId'] = tpz.quest.log_id.SANDORIA,
         ['questId'] = tpz.quest.id.sandoria.SOULS_IN_SHADOW,
         ['fameRegion'] = SANDORIA,
         ['eventIds'] =
@@ -223,11 +223,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    -----------------------------------------
+    -----------------------------------
     -- Quest: Methods Create Madness
     --   NPC: Balasiel (Southern San d'Oria)
     --    WS: Impulse Drive (Polearm)
-    -----------------------------------------
+    -----------------------------------
     ['impulse_drive'] =
     {
         ['wsId'] = tpz.weaponskill.IMPULSE_DRIVE,
@@ -235,7 +235,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.POLEARM,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 16892,
-        ['logId'] = SANDORIA,
+        ['logId'] = tpz.quest.log_id.SANDORIA,
         ['questId'] = tpz.quest.id.sandoria.METHODS_CREATE_MADNESS,
         ['fameRegion'] = SANDORIA,
         ['eventIds'] =
@@ -254,11 +254,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    -----------------------------
+    -----------------------------------
     -- Quest: Bugi Soden
     --   NPC: Ryoma (Norg)
     --    WS: Blade: Ku (Katana)
-    -----------------------------
+    -----------------------------------
     ['blade_ku'] =
     {
         ['wsId'] = tpz.weaponskill.BLADE_KU,
@@ -266,7 +266,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.KATANA,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 17773,
-        ['logId'] = OUTLANDS,
+        ['logId'] = tpz.quest.log_id.OUTLANDS,
         ['questId'] = tpz.quest.id.outlands.BUGI_SODEN,
         ['fameRegion'] = NORG,
         ['eventIds'] =
@@ -285,11 +285,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    --------------------------------------
+    -----------------------------------
     -- Quest: The Potential Within
     --   NPC: Jaucribaix (Norg)
     --    WS: Tachi: Kasha (Great Katana)
-    --------------------------------------
+    -----------------------------------
     ['tachi_kasha'] =
     {
         ['wsId'] = tpz.weaponskill.TACHI_KASHA,
@@ -297,7 +297,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.GREAT_KATANA,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 17815,
-        ['logId'] = OUTLANDS,
+        ['logId'] = tpz.quest.log_id.OUTLANDS,
         ['questId'] = tpz.quest.id.outlands.THE_POTENTIAL_WITHIN,
         ['fameRegion'] = NORG,
         ['eventIds'] =
@@ -316,11 +316,11 @@ tpz.wsquest =
             ['abandon'] = 2
         }
     },
-    ----------------------------------------
+    -----------------------------------
     -- Quest: Orastery Woes
     --   NPC: Kuroido-Moido (Port Windurst)
     --    WS: Black Halo (Club)
-    ----------------------------------------
+    -----------------------------------
     ['black_halo'] =
     {
         ['wsId'] = tpz.weaponskill.BLACK_HALO,
@@ -328,7 +328,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.CLUB,
         ['minSkill'] = 230,
         ['trialWeaponId'] = 17456,
-        ['logId'] = WINDURST,
+        ['logId'] = tpz.quest.log_id.WINDURST,
         ['questId'] = tpz.quest.id.windurst.ORASTERY_WOES,
         ['fameRegion'] = WINDURST,
         ['eventIds'] =
@@ -347,11 +347,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    -------------------------------------
+    -----------------------------------
     -- Quest: Blood And Glory
     --   NPC: Shantotto (Windurst Walls)
     --    WS: Retribution (Staff)
-    -------------------------------------
+    -----------------------------------
     ['retribution'] =
     {
         ['wsId'] = tpz.weaponskill.RETRIBUTION,
@@ -359,7 +359,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.STAFF,
         ['minSkill'] = 230,
         ['trialWeaponId'] = 17527,
-        ['logId'] = WINDURST,
+        ['logId'] = tpz.quest.log_id.WINDURST,
         ['questId'] = tpz.quest.id.windurst.BLOOD_AND_GLORY,
         ['fameRegion'] = WINDURST,
         ['eventIds'] =
@@ -378,11 +378,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    ----------------------------------------
+    -----------------------------------
     -- Quest: From Saplings Grow
     --   NPC: Perih Vashai (Windurst Woods)
     --    WS: Empyreal Arrow (Archery)
-    ----------------------------------------
+    -----------------------------------
     ['empyreal_arrow'] =
     {
         ['wsId'] = tpz.weaponskill.EMPYREAL_ARROW,
@@ -390,7 +390,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.ARCHERY,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 18144,
-        ['logId'] = WINDURST,
+        ['logId'] = tpz.quest.log_id.WINDURST,
         ['questId'] = tpz.quest.id.windurst.FROM_SAPLINGS_GROW,
         ['fameRegion'] = WINDURST,
         ['eventIds'] =
@@ -409,11 +409,11 @@ tpz.wsquest =
             ['abandon'] = 3
         }
     },
-    -------------------------------------------
+    -----------------------------------
     -- Quest: Shoot First, Ask Questions Later
     --   NPC: Cid (Metalworks)
     --    WS: Detonator (Marksmanship)
-    -------------------------------------------
+    -----------------------------------
     ['detonator'] =
     {
         ['wsId'] = tpz.weaponskill.DETONATOR,
@@ -421,7 +421,7 @@ tpz.wsquest =
         ['skillId'] = tpz.skill.MARKSMANSHIP,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 18146,
-        ['logId'] = BASTOK,
+        ['logId'] = tpz.quest.log_id.BASTOK,
         ['questId'] = tpz.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =

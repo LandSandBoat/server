@@ -76,4 +76,11 @@ int8*       EncodeStringSignature(int8* signature, int8* target);
 void        DecodeStringSignature(int8* signature, int8* target);
 std::string escape(std::string const& s);
 
+// Float tools
+// https://stackoverflow.com/a/253874
+bool approximatelyEqual(float a, float b);
+bool essentiallyEqual(float a, float b);
+bool definitelyGreaterThan(float a, float b);
+bool definitelyLessThan(float a, float b);
+
 #endif

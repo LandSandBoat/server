@@ -9,11 +9,12 @@ require("scripts/globals/besieged")
 require("scripts/globals/keyitems")
 require("scripts/globals/teleports")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local hasAssault, keyitem = tpz.besieged.hasAssaultOrders(player)
 
     if hasAssault > 0 then
@@ -29,10 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local offset = nil
     if csid == 101 then
         if option >= 101 and option <= 106 then
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.AZOUPH_SP + offset)
     end
 end
+
+return entity

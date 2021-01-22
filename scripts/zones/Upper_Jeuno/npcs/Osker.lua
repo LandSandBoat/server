@@ -8,8 +8,9 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
@@ -20,12 +21,12 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local ANewDawn = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawn = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
-    local ChocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     local feed = player:getCharVar("ChocobosWounds_Event")
 
     -- A New Dawn
@@ -64,10 +65,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
 
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

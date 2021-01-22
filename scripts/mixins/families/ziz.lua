@@ -13,19 +13,19 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function sleepDuringNight(mob)
-    local aSub = mob:AnimationSub()
+    local aSub = mob:getAnimationSub()
     local totd = VanadielTOTD()
 
     if totd == tpz.time.NIGHT or totd == tpz.time.MIDNIGHT then -- 20:00 to 4:00
         if aSub ~= 3 then
-            mob:AnimationSub(3)
-            mob:setAggressive(0)
+            mob:setAnimationSub(3)
+            mob:setAggressive(false)
             mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
         end
     else
         if aSub ~= 1 then
-            mob:AnimationSub(1)
-            mob:setAggressive(1)
+            mob:setAnimationSub(1)
+            mob:setAggressive(true)
             mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
         end
     end
@@ -41,8 +41,8 @@ g_mixins.families.ziz = function(mob)
     end)
 
     mob:addListener("ENGAGE", "ZIZ_ENGAGE", function(mob, target)
-        mob:AnimationSub(1)
-        mob:setAggressive(1)
+        mob:setAnimationSub(1)
+        mob:setAggressive(true)
         mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
     end)
 end

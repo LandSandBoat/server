@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 19160
 -- Item: Estramacon
 -- Additional Effect: TP Drain
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 5
 
     if (math.random(0, 99) >= chance) then
@@ -26,3 +27,5 @@ function onAdditionalEffect(player, target, damage)
         return tpz.subEffect.TP_DRAIN, tpz.msg.basic.ADD_EFFECT_TP_DRAIN, TpDrain
     end
 end
+
+return item_object

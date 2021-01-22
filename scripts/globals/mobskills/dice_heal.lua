@@ -1,22 +1,23 @@
----------------------------------------------
+-----------------------------------
 -- Goblin Dice
 --
 -- Description: Benediction for party members within area of effect.
 -- Type: Magical (Wind)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local heal = target:getMaxHP() - target:getHP()
 
     skill:setMsg(tpz.msg.basic.SELF_HEAL)
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return heal
 end
+
+return mobskill_object

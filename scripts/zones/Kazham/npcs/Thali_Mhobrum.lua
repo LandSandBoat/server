@@ -3,6 +3,7 @@
 --  NPC: Thali Mhobrum
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -18,20 +19,20 @@ local path =
 47.469643, -11.000000, -44.383091
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    onPath(npc)
+    entity.onPath(npc)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCharVar("BathedInScent") == 1) then
         player:startEvent(163) -- scent from Blue Rafflesias
         npc:wait()
@@ -41,9 +42,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     npc:wait(0)
 end
+
+return entity

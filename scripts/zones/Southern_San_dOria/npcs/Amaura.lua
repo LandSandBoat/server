@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:hasKeyItem(tpz.ki.AMAURAS_FORMULA) == true) then
         if (trade:hasItemQty(920, 1) == true and trade:hasItemQty(642, 1) == true and trade:hasItemQty(846, 1) == true and trade:getItemCount() == 3) then
@@ -21,10 +22,10 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    toCureaCough = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+    medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    toCureaCough = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if (medicineWoman == QUEST_ACCEPTED) then
         amaurasFormulaKI = player:hasKeyItem(tpz.ki.AMAURAS_FORMULA)
@@ -47,10 +48,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 636 and option == 0) then
         player:addKeyItem(tpz.ki.AMAURAS_FORMULA)
@@ -61,7 +62,7 @@ function onEventFinish(player, csid, option)
         player:addKeyItem(tpz.ki.COLD_MEDICINE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.COLD_MEDICINE)
     elseif (csid == 645) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
     elseif (csid == 646) then
         player:delKeyItem(tpz.ki.THYME_MOSS)
         player:addKeyItem(tpz.ki.COUGH_MEDICINE)
@@ -69,3 +70,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

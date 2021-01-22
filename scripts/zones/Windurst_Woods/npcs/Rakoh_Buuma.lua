@@ -11,8 +11,9 @@ require("scripts/globals/missions")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getNation() ~= tpz.nation.WINDURST then
         player:startEvent(105) -- for other nation
     else
@@ -29,21 +30,21 @@ function onTrigger(player, npc)
             end
         elseif (CurrentMission ~= tpz.mission.id.windurst.NONE) then
             player:startEvent(112)
-        elseif not player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
+        elseif not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
             player:startEvent(121)
-        elseif not player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) then
+        elseif not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) then
             player:startEvent(132)
-        elseif not player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) then
+        elseif not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) then
             player:startEvent(149)
         elseif player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(197)
-        elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+        elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) then
             player:startEvent(632)
         else
             local param3
             local flagMission, repeatMission = getMissionMask(player)
             -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
                 param3 = 1
             else
                 param3 = 0
@@ -53,10 +54,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     finishMissionTimeline(player, 1, csid, option)
 
     if csid == 121 and option == 1 then
@@ -68,3 +69,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WWoodsRTenText", 1)
     end
 end
+
+return entity

@@ -7,8 +7,9 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobRoam(mob, target)
+entity.onMobRoam = function(mob, target)
     local mobId = mob:getID()
     local hpp = mob:getHPP()
 
@@ -35,7 +36,7 @@ function onMobRoam(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local mobId = mob:getID()
     local hpp = mob:getHPP()
     local x = mob:getXPos()
@@ -68,10 +69,10 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local mobId = mob:getID()
 
     for i = mobId + 5, mobId + 8 do
@@ -84,3 +85,5 @@ function onMobDespawn(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(14400, 18000)) -- 4 to 5 hours
 end
+
+return entity

@@ -10,8 +10,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
     -- THE REQUIEM (holy water)
@@ -30,11 +31,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.SARCOPHAGUS_OFFSET
 
     -- A NEW DAWN (Beastmaster AF3)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN) == QUEST_ACCEPTED and npc:getID() == ID.npc.SARCOPHAGUS_OFFSET then
         local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
 
         if aNewDawnEvent == 4 then
@@ -59,10 +60,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- THE REQUIEM
     if csid == 46 then
         player:setCharVar("TheRequiemCS", 0)
@@ -77,3 +78,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.TAMERS_WHISTLE)
     end
 end
+
+return entity

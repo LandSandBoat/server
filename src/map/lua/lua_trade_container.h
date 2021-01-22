@@ -31,10 +31,6 @@ class CLuaTradeContainer
     CTradeContainer* m_pMyTradeContainer;
 
 public:
-    static const char                            className[];
-    static Lunar<CLuaTradeContainer>::Register_t methods[];
-
-    CLuaTradeContainer(lua_State*);
     CLuaTradeContainer(CTradeContainer*);
 
     CTradeContainer* GetTradeContainer() const
@@ -42,17 +38,19 @@ public:
         return m_pMyTradeContainer;
     }
 
-    int32 getGil(lua_State*);
-    int32 getItem(lua_State*);
-    int32 getItemId(lua_State*);
-    int32 getItemSubId(lua_State*);
-    int32 getItemQty(lua_State*);
-    int32 hasItemQty(lua_State*);
-    int32 getSlotQty(lua_State*);   // количество предметов в указанной ячейке
-    int32 getItemCount(lua_State*); // общее количество предметов
-    int32 getSlotCount(lua_State*);
-    int32 confirmItem(lua_State*);
-    int32 confirmSlot(lua_State*);
+    uint32 getGil();
+    auto   getItem(sol::object const& SlotIDObj) -> std::optional<CLuaItem>;
+    uint16 getItemId(sol::object const& SlotIDObj);
+    uint16 getItemSubId(sol::object const& SlotIDObj);
+    uint32 getItemQty(uint16 itemID);
+    bool   hasItemQty(uint16 itemID, uint32 quantity);
+    uint32 getSlotQty(uint8 slotID); // number of items in the specified slot
+    uint32 getItemCount();           // total number of items
+    uint8  getSlotCount();
+    bool   confirmItem(uint16 itemID, sol::object const& amountObj);
+    bool   confirmSlot(uint8 slotID, sol::object const& amountObj);
+
+    static void Register();
 };
 
-#endif
+#endif // _LUATRADECONTAINER_H

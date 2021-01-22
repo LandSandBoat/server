@@ -1,9 +1,9 @@
------------------------------------------------------
+-----------------------------------
 -- Hunt Registry
 -- https://www.bg-wiki.com/bg/Hunts
 -- https://ffxiclopedia.fandom.com/wiki/Hunt_Registry
 -- https://www.bg-wiki.com/bg/Hunt_Registry
------------------------------------------------------
+-----------------------------------
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/regimes")

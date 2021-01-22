@@ -4,12 +4,14 @@
 -- ToAU Quest: Prince and the Hopper
 -----------------------------------
 local ID = require("scripts/zones/Mamook/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
 end
 
-function onMobDeath(mob, player, isKiller)
-    if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_PRINCE_AND_THE_HOPPER) == QUEST_ACCEPTED and player:getCharVar("princeandhopper") == 4 then
+entity.onMobDeath = function(mob, player, isKiller)
+    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_PRINCE_AND_THE_HOPPER) == QUEST_ACCEPTED and player:getCharVar("princeandhopper") == 4 then
         player:setCharVar("princeandhopper", 5)
     end
     for i = ID.mob.POROGGO_CASANOVA + 1, ID.mob.POROGGO_CASANOVA + 5 do
@@ -17,8 +19,10 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     for i = ID.mob.POROGGO_CASANOVA + 1, ID.mob.POROGGO_CASANOVA + 5 do
         DespawnMob(i)
     end
 end
+
+return entity

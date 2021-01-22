@@ -8,12 +8,13 @@ require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local olduumQuest = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+entity.onTrigger = function(player, npc)
+    local olduumQuest = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
     local ringCheck = player:hasItem(2217)
     if olduumQuest == QUEST_AVAILABLE then
         player:startEvent(4)
@@ -31,15 +32,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 4 then
         player:addKeyItem(tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
     elseif csid == 6 or csid == 8 then
         if player:getFreeSlotsCount() >= 1 then
             player:addItem(2217)
@@ -49,7 +50,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.ELECTROPOT)
             player:delKeyItem(tpz.ki.ELECTROCELL)
             if csid == 6 then
-                player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+                player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
             end
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2217)
@@ -57,3 +58,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

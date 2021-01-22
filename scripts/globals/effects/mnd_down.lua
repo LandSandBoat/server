@@ -1,19 +1,18 @@
 -----------------------------------
---
---     tpz.effect.MND_DOWN
---
+-- tpz.effect.MND_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     if ((target:getStat(tpz.mod.MND) - effect:getPower()) < 0) then
         effect:setPower(target:getStat(tpz.mod.MND))
     end
     target:addMod(tpz.mod.MND, -effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect restore mind of 1 every 3 ticks.
     local downMND_effect_size = effect:getPower()
     if (downMND_effect_size > 0) then
@@ -22,9 +21,11 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local downMND_effect_size = effect:getPower()
     if (downMND_effect_size > 0) then
         target:delMod(tpz.mod.MND, -downMND_effect_size)
     end
 end
+
+return effect_object

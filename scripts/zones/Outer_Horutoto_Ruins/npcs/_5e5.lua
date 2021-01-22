@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 4 and
@@ -27,13 +28,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 71 then
         player:addKeyItem(tpz.ki.ORASTERY_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ORASTERY_RING)
         player:setCharVar("MissionStatus", 6)
     end
 end
+
+return entity

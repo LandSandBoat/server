@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 15445
 -- Item: Blacksmith's Belt
 -- Enchantment: Synthesis image support
 -- 2Min, All Races
------------------------------------------
+-----------------------------------
 -- Enchantment: Synthesis image support
 -- Duration: 2Min
 -- Smithing Skill +3
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if (target:hasStatusEffect(tpz.effect.SMITHING_IMAGERY) == true) then
         result = 237
@@ -19,14 +20,16 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.SMITHING_IMAGERY, 3, 0, 120)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.SMITH, 1)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.SMITH, 1)
 end
+
+return item_object

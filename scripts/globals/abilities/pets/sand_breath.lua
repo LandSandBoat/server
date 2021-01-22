@@ -1,17 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Sand Breath
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/ability")
 
----------------------------------------------------
-function onAbilityCheck(player, target, ability)
+-----------------------------------
+local ability_object = {}
+
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
     local master = pet:getMaster()
     ---------- Deep Breathing ----------
     -- 0 for none
@@ -34,3 +36,5 @@ function onUseAbility(pet, target, skill, action)
     target:takeDamage(dmg, pet, tpz.attackType.BREATH, tpz.damageType.EARTH)
     return dmg
 end
+
+return ability_object

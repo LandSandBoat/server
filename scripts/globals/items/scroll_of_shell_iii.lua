@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4658
 -- Scroll of Shell III
 -- Teaches the white magic Shell III
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(50)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(50)
 end
+
+return item_object

@@ -6,13 +6,16 @@
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2598) and npcUtil.popFromQM(player, npc, ID.mob.ZAREEHKL_THE_JUBILANT) then -- Trade Merow No 11 Molting
         player:confirmTrade()
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
+
+return entity

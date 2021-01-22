@@ -1,23 +1,22 @@
----------------------------------------------
+-----------------------------------
 --  Fluid Toss
 --
 --  Description: Lobs a ball of liquid at a single target.
 --  Type: Ranged
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Unknown range
----------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 1
     local accmod = 1
@@ -27,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

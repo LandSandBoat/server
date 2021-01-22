@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Hoof Volley
 --  Family: Hippogryph
 --  Description: Deals critical damage to a single target. Resets hate and causes knockback.
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: One shadow
 --  Range: Melee
 --  Notes: Easily stunnable
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.5
@@ -28,3 +29,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

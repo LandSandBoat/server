@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Acheron Flame
 --
 -- Description: Deals severe Fire damage to enemies within an area of effect. Additional effect: Burn
@@ -8,13 +8,14 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: 20' radial
 -- Notes: Only used when a cerberus's health is 25% or lower (may not be the case for Orthrus). The burn effect takes off upwards of 20 HP per tick.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 1793) then
@@ -24,7 +25,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.BURN
     local statmod = tpz.mod.INT
     local element = mob:getStatusEffectElement(typeEffect)
@@ -40,3 +41,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

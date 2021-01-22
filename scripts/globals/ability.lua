@@ -729,7 +729,7 @@ end
 
 function checkForElevenRoll(caster)
     local effects = caster:getStatusEffects()
-    for _,effect in ipairs(effects) do
+    for _, effect in pairs(effects) do
         if (effect:getType() >= tpz.effect.FIGHTERS_ROLL and
             effect:getType() <= tpz.effect.NATURALISTS_ROLL and
             effect:getSubPower() == 11) then

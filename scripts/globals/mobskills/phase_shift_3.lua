@@ -1,19 +1,18 @@
----------------------------------------------------
+-----------------------------------
 -- Phase Shift
 -- A shockwave deals damage to targets in an area of effect. Additional effect: Stun + Bind
----------------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 7
@@ -25,3 +24,5 @@ function onMobWeaponSkill(target, mob, skill)
     mob:setUnkillable(false)
     return dmg
 end
+
+return mobskill_object

@@ -9,11 +9,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     starttime = player:getCharVar("MissionaryMan_date")
     MissionaryManVar = player:getCharVar("MissionaryManVar")
@@ -31,10 +32,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 698) then
         player:setCharVar("MissionaryManVar", 3)
         player:setCharVar("MissionaryMan_date", os.date("%j")) -- %M for next minute, %j for next day
@@ -48,3 +49,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SUBLIME_STATUE_OF_THE_GODDESS)
     end
 end
+
+return entity

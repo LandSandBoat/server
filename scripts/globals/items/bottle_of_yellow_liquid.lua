@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 --  ID: 5264
 --  Item: Yellow Liquid
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
 
     if (target:hasStatusEffect(tpz.effect.FOOD)) then
@@ -16,6 +17,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 30, 5264)
 end
+
+return item_object

@@ -5,10 +5,11 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -18,7 +19,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobid = mob:getID()
 
     for member = mobid-6, mobid+1 do
@@ -29,9 +30,11 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- TODO: AA GK actively seeks to skillchain to Light off of his own WSs under MS, or other AA's WSs.
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

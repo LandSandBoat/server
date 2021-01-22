@@ -10,10 +10,11 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 6
     then
         if trade:hasItemQty(1127, 1) and trade:getItemCount() == 1 then -- Trade Kindred seal
@@ -31,7 +32,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if math.random() > 0.5 then
         player:startEvent(51)
     else
@@ -39,19 +40,21 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- RoV: Set Free
     if csid == 370 then
         player:confirmTrade()
-        if player:hasJob(0) == 0 then -- Is Subjob Unlocked
+        if player:hasJob(0) == false then -- Is Subjob Unlocked
             npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
             if not npcUtil.giveItem(player, 8711) then return end
         end
-        player:completeMission(ROV, tpz.mission.id.rov.SET_FREE)
-        player:addMission(ROV, tpz.mission.id.rov.THE_BEGINNING)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_BEGINNING)
     end
 end
+
+return entity

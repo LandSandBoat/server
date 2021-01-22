@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local allSaplingsDead = true
     for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 12 do
         local mob = GetMobByID(i)
@@ -20,3 +21,5 @@ function onMobDeath(mob, player, isKiller)
         SpawnMob(ID.mob.CHERRY_SAPLING_OFFSET + 10) -- Cemetery Cherry
     end
 end
+
+return entity

@@ -17,7 +17,7 @@ tpz.ally =
         local allies = {}
 
         if entity:getBattlefield() ~= nil then
-            mobs = entity:getBattlefield():getEnemies()
+            mobs = entity:getBattlefield():getMobs()
             players = entity:getBattlefield():getPlayers()
         elseif entity:getInstance() ~= nil then
             mobs = entity:getInstance():getMobs()

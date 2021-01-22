@@ -7,8 +7,9 @@ mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") < 3) then
         local aernKills =
@@ -47,8 +48,10 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function clearTowerVars (player, towerNum)
+local function clearTowerVars(player, towerNum)
     player:setCharVar("Ru_aern_"..towerNum.."-1KILL", 0)
     player:setCharVar("Ru_aern_"..towerNum.."-2KILL", 0)
     player:setCharVar("Ru_aern_"..towerNum.."-3KILL", 0)
 end
+
+return entity

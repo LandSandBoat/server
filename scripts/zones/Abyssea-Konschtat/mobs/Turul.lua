@@ -5,8 +5,9 @@
 mixins = {require("scripts/mixins/families/amphiptere")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Uncertain of threshold. Going with 50% for now.
     -- (possibly varies, perhaps is simply lower HP = greater cast chance?)
     if mob:getHPP() <= 50 then
@@ -18,7 +19,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     --[[
     Todo:
     "Turul will often cast Thunder based spells on itself to recover HP."
@@ -27,5 +28,7 @@ function onSpellPrecast(mob, spell)
     ]]
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

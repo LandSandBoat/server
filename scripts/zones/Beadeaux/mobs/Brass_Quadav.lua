@@ -5,10 +5,14 @@
 -----------------------------------
 local ID = require("scripts/zones/Beadeaux/IDs")
 require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.BI_GHO_HEADTAKER_PH, 10, math.random(3600, 10800)) -- 1 to 3 hours
 end
+
+return entity

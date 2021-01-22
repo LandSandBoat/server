@@ -10,12 +10,13 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     -- Reduce 99% of total accumulated enmity
     if (target:isMob()) then
@@ -36,3 +37,5 @@ function onUseAbility(player, target, ability)
     end
 
 end
+
+return ability_object

@@ -1,18 +1,19 @@
---------------------------------------
+-----------------------------------
 -- Spell: Kaustra
 -- Consumes 20% of your maximum MP. Relentless
 -- dark damage slowly devours an enemy.
---------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local skill = caster:getSkillLevel(tpz.skill.DARK_MAGIC)
     local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
 
@@ -42,3 +43,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

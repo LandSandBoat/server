@@ -10,8 +10,9 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
     if (not player:hasStatusEffect(tpz.effect.DOUBLE_UP_CHANCE)) then
         return tpz.msg.basic.NO_ELIGIBLE_ROLL, 0
@@ -20,7 +21,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(caster, target, ability, action)
+ability_object.onUseAbility = function(caster, target, ability, action)
     if (caster:getID() == target:getID()) then
         local du_effect = caster:getStatusEffect(tpz.effect.DOUBLE_UP_CHANCE)
         local prev_roll = caster:getStatusEffect(du_effect:getSubPower())
@@ -65,3 +66,5 @@ function onUseAbility(caster, target, ability, action)
         return total
     end
 end
+
+return ability_object

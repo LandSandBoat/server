@@ -5,8 +5,9 @@
 require("scripts/globals/regimes")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     tpz.regime.checkRegime(player, mob, 714, 2, tpz.regime.type.GROUNDS)
     -- Curses, Foiled A-Golem!?
@@ -16,3 +17,5 @@ function onMobDeath(mob, player, isKiller)
     end
 
 end
+
+return entity

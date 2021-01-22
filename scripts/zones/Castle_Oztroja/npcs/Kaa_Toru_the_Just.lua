@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.SAINTLY_INVITATION and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(45, 0, 200)
     else
@@ -19,10 +20,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 45) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13134)
@@ -36,3 +37,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

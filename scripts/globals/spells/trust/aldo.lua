@@ -1,14 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Trust: Aldo
------------------------------------------
+-----------------------------------
 require("scripts/globals/trust")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return tpz.trust.canCast(caster, spell, 1007)
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     return tpz.trust.spawn(caster, spell)
 end
 
+
+return spell_object

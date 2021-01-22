@@ -11,19 +11,20 @@ require("scripts/globals/quests");
 require("scripts/globals/missions");
 local ID = require("scripts/zones/Metalworks/IDs");
 -----------------------------------
+local entity = {}
 
 local function TrustMemory(player)
     local memories = 0
     -- 2 - Darkness Rising (Bastok Mission)
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge (Bastok Mission)
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
         memories = memories + 4
     end
     -- 8 - Light of Judgment (Aht Urhgan Mission)
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 8
     end
     -- 16 - Hero's Combat (BCNM)
@@ -33,9 +34,9 @@ local function TrustMemory(player)
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_2") == 8) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_2", 0)
@@ -47,7 +48,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local Rank6 = player:getRank() >= 6 and 1 or 0
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.JEUNO and player:getCharVar("MissionStatus") == 0) then
@@ -60,10 +61,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 322) then
         player:setCharVar("MissionStatus", 1);
         player:addKeyItem(tpz.ki.LETTER_TO_THE_AMBASSADOR);
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

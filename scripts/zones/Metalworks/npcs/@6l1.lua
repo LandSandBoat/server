@@ -8,8 +8,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     local elevator =
     {
         id = tpz.elevator.TIMED_AUTOMATIC,
@@ -21,3 +22,5 @@ function onSpawn(npc)
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
 end
+
+return entity

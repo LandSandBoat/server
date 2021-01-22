@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 4271
 -- Item: rice_dumpling
 -- Food Effect: 30minutes, All Races
------------------------------------------
+-----------------------------------
 -- HP 17
 -- Strength 3
 -- Vitality 2
@@ -13,12 +13,13 @@
 -- MP Regeneration While Healing 2
 -- Accuracy 5
 -- Resist Paralyze +4
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -26,11 +27,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 4271)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.HP, 17)
     target:addMod(tpz.mod.STR, 3)
     target:addMod(tpz.mod.VIT, 2)
@@ -45,7 +46,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.PARALYZERES, 4)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.HP, 17)
     target:delMod(tpz.mod.STR, 3)
     target:delMod(tpz.mod.VIT, 2)
@@ -59,3 +60,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.ACC, 5)
     target:delMod(tpz.mod.PARALYZERES, 4)
 end
+
+return item_object

@@ -11,11 +11,12 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.CLOTHCRAFT)
-    local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralManifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     if
         newRank > 9 and
@@ -44,8 +45,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local moralManifest = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+entity.onTrigger = function(player, npc)
+    local moralManifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     local craftSkill = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.CLOTHCRAFT)
@@ -88,10 +89,10 @@ function onTrigger(player, npc)
 end
 
 -- 10011  10012  700  701  702  703  704  705  832  765
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local guildMember = isGuildMember(player, 3)
 
     if csid == 700 then
@@ -119,3 +120,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

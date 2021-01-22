@@ -5,8 +5,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Hall_of_Transference/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("DemChipRegistration") == 0 and
         player:getCharVar("skyShortcut") == 1 and
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("DemChipRegistration") == 1 then
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 6) -- Device seems to be functioning correctly.
     else
@@ -25,10 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 168 then
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 4, 478) -- You fit..
         player:messageSpecial(ID.text.NO_RESPONSE_OFFSET + 5) -- Device has been repaired
@@ -36,3 +37,5 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     end
 end
+
+return entity

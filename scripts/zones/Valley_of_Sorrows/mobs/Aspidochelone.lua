@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.DISAPPEAR)
     end
@@ -17,11 +18,11 @@ function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.ASPIDOCHELONE_SINKER)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Set Aspidochelone's Window Open Time
     if LandKingSystem_HQ ~= 1 then
         local wait = 72 * 3600
@@ -39,3 +40,5 @@ function onMobDespawn(mob)
         GetMobByID(ID.mob.ADAMANTOISE):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
     end
 end
+
+return entity

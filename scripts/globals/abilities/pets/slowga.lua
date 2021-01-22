@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Slowga
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill, summoner)
+ability_object.onPetAbility = function(target, pet, skill, summoner)
     local duration = 180 + summoner:getMod(tpz.mod.SUMMONING)
     if duration > 350 then
         duration = 350
@@ -24,3 +25,5 @@ function onPetAbility(target, pet, skill, summoner)
     end
     return tpz.effect.SLOW
 end
+
+return ability_object

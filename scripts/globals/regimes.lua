@@ -1,4 +1,4 @@
-------------------------------------
+-----------------------------------
 -- Fields and Grounds of Valor
 --
 -- https://www.bg-wiki.com/bg/Fields_of_Valor
@@ -7,15 +7,16 @@
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_of_Valor
 -- http://ffxiclopedia.wikia.com/wiki/Field_Manual
 -- http://ffxiclopedia.wikia.com/wiki/Grounds_Tome
-------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
+require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-require("scripts/globals/keyitems")
-------------------------------------
+require("scripts/globals/roe")
+-----------------------------------
 
 tpz = tpz or {}
 tpz.regime = tpz.regime or {}
@@ -26,19 +27,19 @@ tpz.regime.type =
     GROUNDS = 2,
 }
 
--------------------------------------------------
+-----------------------------------
 -- FoV/GoV training regime information
 -- {n1, n2, n3, n4, low, high, reward, regimeId},
 -- n1, n2, n3, n4 = number of monsters needed
 -- low, high are the level range
 -- reward is the gil/tabs you get for completing
--------------------------------------------------
+-----------------------------------
 
 local regimeInfo = {
 
-    -------------------------------------------------
+    -----------------------------------
     -- Fields of Valor information
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.regime.type.FIELDS] =
     {
@@ -442,9 +443,9 @@ local regimeInfo = {
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
     -- Grounds of Valor information
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.regime.type.GROUNDS] =
     {

@@ -4,15 +4,19 @@
 -- Type: Standard NPC
 -- !pos 58.161 -3.101 -6.695 236
 -----------------------------------
-function onTrade(player, npc, trade)
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(346, 0, 1)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

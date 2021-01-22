@@ -10,10 +10,11 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    ShiningSubligar = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+    ShiningSubligar = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     Subligar = trade:getItemQty(14242)
 
     if (Subligar > 0 and Subligar == trade:getItemCount()) then
@@ -36,9 +37,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    ShiningSubligar = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+    ShiningSubligar = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
     if (ShiningSubligar == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3) then
         player:startEvent(123) -- Start Like a Shining Subligar
@@ -50,13 +51,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 123) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     elseif (csid == 125) then
         player:tradeComplete()
         player:addTitle(tpz.title.LOOKS_SUBLIME_IN_A_SUBLIGAR)
@@ -64,7 +65,9 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4955) -- Scroll of Kurayami: Ichi
         player:setCharVar("shiningSubligar_nb", 0)
         player:addFame(NORG, 100)
-        player:completeQuest(OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
     end
 
 end
+
+return entity

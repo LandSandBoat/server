@@ -12,8 +12,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     IASvar = player:getCharVar("IASvar")
 
@@ -30,9 +31,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
-    crisisstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    IAS = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_STEW)
+entity.onTrigger = function(player, npc)
+    crisisstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+    IAS = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     IASvar = player:getCharVar("IASvar")
 
     -- In a Stew
@@ -72,14 +73,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- A Crisis in the Making
     if (csid == 258 and option == 1) then  -- A Crisis in the Making + ITEM: Quest Offer - ACCEPTED
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:setCharVar("QuestCrisisMaking_var", 1)
         player:needToZone(true)
     elseif (csid == 258 and option == 2) then  -- A Crisis in the Making + ITEM: Quest Offer - REFUSED
@@ -95,7 +96,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestCrisisMaking_var", 0)
         player:delKeyItem(tpz.ki.OFF_OFFERING)
         player:addFame(WINDURST, 75)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif (csid == 268) then -- A Crisis in the Making: Repeatable Quest Finish
         player:addGil(GIL_RATE*400)
@@ -116,3 +117,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

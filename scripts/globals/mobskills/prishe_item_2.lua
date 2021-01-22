@@ -1,14 +1,15 @@
----------------------------------------------
+-----------------------------------
 -- Prishe Item 2
----------------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (target:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(tpz.effect.MAGIC_SHIELD)) then
         return 1
     elseif (mob:hasStatusEffect(tpz.effect.PLAGUE) or mob:hasStatusEffect(tpz.effect.CURSE_I) or mob:hasStatusEffect(tpz.effect.MUTE)) then
@@ -19,7 +20,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(tpz.msg.basic.NONE)
     if (mob:hasStatusEffect(tpz.effect.PLAGUE) or mob:hasStatusEffect(tpz.effect.CURSE_I) or mob:hasStatusEffect(tpz.effect.MUTE)) then
         -- use Remedy!
@@ -38,3 +39,5 @@ function onMobWeaponSkill(target, mob, skill)
     end
     return 0
 end
+
+return mobskill_object

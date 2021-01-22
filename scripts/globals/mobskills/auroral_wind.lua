@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Auroral Wind
 --
 -- Family: Aern
@@ -7,17 +7,18 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Unknown cone
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.SILENCE
 
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
@@ -32,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
     return dmg
 
 end
+
+return mobskill_object

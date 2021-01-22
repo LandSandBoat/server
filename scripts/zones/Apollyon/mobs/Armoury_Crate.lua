@@ -5,12 +5,14 @@
 require("scripts/globals/status")
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     --mob:setMobMod(tpz.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() ~= tpz.animation.OPEN_DOOR then
             tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])
@@ -18,7 +20,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     if mob:getBattlefield() then
         local mobID = mob:getID()
         local mimicSpawned = mob:getBattlefield():getLocalVar("mimicSpawned")
@@ -31,3 +33,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

@@ -6,8 +6,9 @@
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
     if player:getWeaponSkillType(tpz.slot.RANGED) ~= tpz.skill.MARKSMANSHIP or player:getWeaponSkillType(tpz.slot.AMMO) ~= tpz.skill.MARKSMANSHIP then
@@ -20,7 +21,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local duration = 60
     local bonusAcc = player:getStat(tpz.mod.AGI) / 2 + player:getMerit(tpz.merit.QUICK_DRAW_ACCURACY) + player:getMod(tpz.mod.QUICK_DRAW_MACC)
     local resist = applyResistanceAbility(player, target, tpz.magic.ele.DARK, tpz.skill.NONE, bonusAcc)
@@ -75,3 +76,5 @@ function onUseAbility(player, target, ability)
     target:updateClaim(player)
     return dispelledEffect
 end
+
+return ability_object

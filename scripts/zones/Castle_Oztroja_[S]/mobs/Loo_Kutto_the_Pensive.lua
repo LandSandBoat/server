@@ -4,8 +4,9 @@
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[
     "Possess high Regain and/or Store TP, which seems to increase further as its HP declines."
 
@@ -19,10 +20,12 @@ function onMobFight(mob, target)
     mob:setMod(tpz.mod.STORETP, power)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
 end
+
+return entity

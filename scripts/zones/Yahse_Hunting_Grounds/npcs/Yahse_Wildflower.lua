@@ -6,19 +6,23 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Yahse_Hunting_Grounds/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
-    if player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE) == QUEST_ACCEPTED then
         npcUtil.giveKeyItem(player, tpz.ki.YAHSE_WILDFLOWER_PETAL)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -8,12 +8,13 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local BeautyAndTheGalka = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+entity.onTrigger = function(player, npc)
+    local BeautyAndTheGalka = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
 
     if player:hasKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS) then
         player:startEvent(10)
@@ -32,15 +33,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 7 and option == 0 then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
     elseif csid == 10 then
         if player:getFreeSlotsCount() >= 1 then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
             player:setCharVar("BeautyAndTheGalkaDenied", 0)
             player:delKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS)
             player:addFame(BASTOK, 75)
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

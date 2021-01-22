@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local ClarsachCall = mob:getLocalVar("ClarsachCall")
     if mob:getHPP() <= 25 and ClarsachCall == 0 then
         mob:useMobAbility(3515)
@@ -15,11 +16,13 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local party = player:getParty()
-    for _, member in ipairs(party) do
+    for _, member in pairs(party) do
         if member:getCurrentMission(ROV) == tpz.mission.id.rov.THE_LOST_AVATAR then
             player:setCharVar("RhapsodiesStatus", 1)
         end
     end
 end
+
+return entity

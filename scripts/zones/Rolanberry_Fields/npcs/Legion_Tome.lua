@@ -4,16 +4,19 @@
 -- Legion NPC
 -- !pos 238 24 469 110
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- player:startEvent(8009)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
 end
+
+return entity

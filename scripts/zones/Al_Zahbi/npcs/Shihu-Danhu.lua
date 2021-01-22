@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/besieged")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if tpz.besieged.getAstralCandescence() == 1 then
         player:startEvent(103)
     else
@@ -19,10 +20,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 103 and option == 1 then
         local shihuDanhuEncounters = player:getCharVar("ShihuDanhu_Encounters")
         -- If you use TP, you need to wait 1 real day for using Kaduru TP
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         -- tele to bat downs, rolanberry, qufim, sauro. POSITIONS ARE DIFFERENT. need packet captures.
     end
 end
+
+return entity

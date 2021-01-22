@@ -9,11 +9,12 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/besieged")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local rank = tpz.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local tokens = 3--player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
@@ -31,7 +32,7 @@ function onTrigger(player, npc)
     --end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if csid == 278 then
         local categorytype = bit.band(option, 0x0F)
@@ -48,7 +49,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 278 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then
@@ -60,3 +61,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

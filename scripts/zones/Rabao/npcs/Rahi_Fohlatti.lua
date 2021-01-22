@@ -9,16 +9,17 @@ require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (trade:hasItemQty(1546, 1) and player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
+    if (trade:hasItemQty(1546, 1) and player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
         player:startEvent(109, 0, 1546, 3, 20)
     end
 end
 
-function onTrigger(player, npc)
-    local TrialSizeWind = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
+entity.onTrigger = function(player, npc)
+    local TrialSizeWind = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
 
     if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(108, 0, 1546, 3, 20)     --mini tuning fork, zone, level
@@ -39,16 +40,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 108 and option == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1546) --Mini tuning fork
         else
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
             player:addItem(1546)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1546)
         end
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

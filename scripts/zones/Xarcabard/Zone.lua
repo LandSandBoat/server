@@ -10,12 +10,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local dynamisMask = player:getCharVar("Dynamis_Status")
 
@@ -47,14 +48,14 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 9 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 11 then
@@ -66,10 +67,12 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 4 then
         player:setCharVar("unbridledPassion", 4)
     elseif csid == 13 then
         player:setCharVar("Dynamis_Status", utils.mask.setBit(player:getCharVar("Dynamis_Status"), 0, true))
     end
 end
+
+return zone_object

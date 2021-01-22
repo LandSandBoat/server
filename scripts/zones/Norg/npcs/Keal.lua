@@ -7,6 +7,8 @@ local ID = require("scripts/zones/Norg/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
 local path =
 {
@@ -62,22 +64,22 @@ local path =
     -9.856394, 0.036026, -9.068656
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    -- onPath(npc)
+    -- entity.onPath(npc)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local Vault = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+    local Vault = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     local mLvl = player:getMainLvl()
     local IronBox = player:hasKeyItem(tpz.ki.SEALED_IRON_BOX)
 
@@ -98,12 +100,12 @@ function onTrigger(player, npc)
     npc:wait()
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
     if (csid == 36 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
     elseif (csid == 38) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4961)
@@ -112,9 +114,11 @@ function onEventFinish(player, csid, option, npc)
             player:addItem(4961) -- Scroll of Tonko: Ichi
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4961)
             player:addFame(NORG, 50)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT)
         end
     end
 
     npc:wait(0)
 end
+
+return entity

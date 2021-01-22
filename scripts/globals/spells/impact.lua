@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Impact
 -- Deals dark damage to an enemy and
 -- decreases all 7 base stats by 20%
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attribute = tpz.mod.INT
     params.bonus = 1.0
@@ -73,3 +74,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

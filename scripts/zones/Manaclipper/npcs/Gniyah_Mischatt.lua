@@ -6,19 +6,22 @@
 -----------------------------------
 require("scripts/globals/manaclipper")
 -----------------------------------
+local entity = {}
 
 local timekeeperLocation = tpz.manaclipper.location.MANACLIPPER
 local timekeeperEventId = 2
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.manaclipper.timekeeperOnTrigger(player, timekeeperLocation, timekeeperEventId)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

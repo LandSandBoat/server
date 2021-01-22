@@ -7,10 +7,11 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local MeanMachine = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+    local MeanMachine = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
 
     if (MeanMachine == QUEST_ACCEPTED) then
         local FreeSlots = player:getFreeSlotsCount()
@@ -29,9 +30,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local MeanMachine = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+    local MeanMachine = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
     local Fame = player:getFameLevel(BASTOK)
 
     if (MeanMachine == QUEST_AVAILABLE and Fame >= 2) then
@@ -44,18 +45,18 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 556) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
     elseif (csid == 557) then
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
         player:addFame(BASTOK, 120)
         player:tradeComplete()
         player:addItem(4869)
@@ -63,3 +64,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

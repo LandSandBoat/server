@@ -1,13 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Hellclap
 --
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 1839) then
@@ -17,7 +18,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 10
     local dmgmod = 4.0
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

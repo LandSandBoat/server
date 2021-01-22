@@ -8,13 +8,14 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- needs check for tpz.ki.TATTERED_TEST_SHEET then sets to var 3
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         local prog = player:getCharVar("QuestMakingTheGrade_prog")
         if (prog == 0) then
             player:startEvent(454)
@@ -30,12 +31,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 460) then
         player:setCharVar("QuestMakingTheGrade_prog", 3)
         player:delKeyItem(tpz.ki.TATTERED_TEST_SHEET)
     end
 end
+
+return entity

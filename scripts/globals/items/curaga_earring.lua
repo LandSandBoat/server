@@ -1,16 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 14759
 -- Item: Curaga Earring
 -- Item Effect: Casts Curaga
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/settings")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:forMembersInRange(30, function(member)
         local healAmount = math.random(60, 90)
 
@@ -25,3 +27,5 @@ function onItemUse(target)
         member:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, healAmount)
     end)
 end
+
+return item_object

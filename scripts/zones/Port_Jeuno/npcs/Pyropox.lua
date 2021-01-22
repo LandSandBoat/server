@@ -7,6 +7,7 @@
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
 local stock =
 {
@@ -26,10 +27,10 @@ local stock =
     5725,  300,    -- Goshikitenge
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if  player:getCharVar("spokePyropox") == 1 then
         player:startEvent(349)
     else
@@ -38,12 +39,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 349 and option == 0 then
         tpz.shop.general(player, stock)
         player:setCharVar("spokePyropox", 0)
     end
 end
+
+return entity

@@ -7,11 +7,12 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Altar_Room/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.MAGICITE and
         not player:hasKeyItem(tpz.ki.MAGICITE_ORASTONE) then
         if player:getCharVar("Magicite") == 2 then
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 44 then
         if player:getCharVar("Magicite") == 2 then
             player:setCharVar("Magicite", 0)
@@ -39,3 +40,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGICITE_ORASTONE)
     end
 end
+
+return entity

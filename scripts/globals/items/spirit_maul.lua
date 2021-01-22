@@ -1,15 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 18853
 -- Spirit Maul
 -- Additional effect: Light damage
 -- Enchantment: TP+100
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 5
 
     if (math.random(0, 99) >= chance) then
@@ -33,7 +34,7 @@ function onAdditionalEffect(player, target, damage)
     end
 end
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = tpz.msg.basic.ITEM_NO_USE_INVENTORY
@@ -41,6 +42,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addTP(100)
 end
+
+return item_object

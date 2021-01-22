@@ -1,22 +1,23 @@
----------------------------------------------
+-----------------------------------
 -- Goblin Dice
 --
 -- Description: Stun
 -- Type: Physical (Blunt)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local effect = target:dispelStatusEffect()
     local effect2 = target:dispelStatusEffect()
     local effect3 = target:dispelStatusEffect()
@@ -42,3 +43,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return num
 end
+
+return mobskill_object

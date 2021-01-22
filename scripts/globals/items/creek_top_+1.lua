@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 10269
 -- Creek Top +1
 -- Dispense: Berry Snowcone
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = tpz.msg.basic.ITEM_NO_USE_INVENTORY
@@ -14,6 +15,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addItem(5710, 1)
 end
+
+return item_object

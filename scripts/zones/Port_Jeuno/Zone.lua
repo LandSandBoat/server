@@ -10,12 +10,13 @@ require("scripts/globals/chocobo")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.chocobo.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
@@ -28,7 +29,7 @@ function onZoneIn(player, prevZone)
 
     if
         ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
-        and player:getQuestStatus(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+        and player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         cs = 324
     end
@@ -55,11 +56,11 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     if (transport == 223) then
         player:startEvent(10010)
     elseif (transport == 224) then
@@ -71,10 +72,10 @@ function onTransportEvent(player, transport)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 10010) then
         player:setPos(0, 0, 0, 0, 223)
     elseif (csid == 10011) then
@@ -84,6 +85,8 @@ function onEventFinish(player, csid, option)
     elseif (csid == 10013) then
         player:setPos(0, 0, 0, 0, 226)
     elseif (csid == 324) then
-        player:addQuest(ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
+        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 end
+
+return zone_object

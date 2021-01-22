@@ -1,18 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Double Slap M=6, 2 (still guessing here)
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/summon")
 
----------------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local numhits = 2
     local accmod = 1
     local dmgmod = 6
@@ -26,3 +27,5 @@ function onPetAbility(target, pet, skill)
 
     return totaldamage
 end
+
+return ability_object

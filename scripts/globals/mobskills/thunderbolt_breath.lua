@@ -1,16 +1,18 @@
----------------------------------------------
+-----------------------------------
 --  Thunderbolt
 --
 --  Description: Deals thunder damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Thunder)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+-----------------------------------
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- not used in Uleguerand_Range
     if (mob:getZoneID() == 5) then
         return 1
@@ -18,7 +20,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = tpz.effect.STUN
 
@@ -31,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.LIGHTNING)
     return dmg
 end
+
+return mobskill_object

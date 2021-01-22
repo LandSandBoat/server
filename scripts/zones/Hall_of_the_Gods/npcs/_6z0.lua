@@ -8,11 +8,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(tpz.ki.CERULEAN_CRYSTAL) then
         player:startEvent(1)
     else
@@ -24,17 +25,19 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1 and player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION then
         player:addTitle(tpz.title.SEALER_OF_THE_PORTAL_OF_THE_GODS)
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
-        player:addMission(ZILART, tpz.mission.id.zilart.THE_HALL_OF_THE_GODS)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_HALL_OF_THE_GODS)
     elseif csid == 4 then
         player:setCharVar("ZilartStatus", 0)
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
-        player:addMission(ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
     end
 end
+
+return entity

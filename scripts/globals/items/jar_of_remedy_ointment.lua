@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- ID: 5356
 -- Item: Remedy Ointment
 -- Item Effect: This potion remedies status ailments.
 -- Works on paralysis, silence, blindness, poison, and plague.
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     if (target:hasStatusEffect(tpz.effect.SILENCE) or target:hasStatusEffect(tpz.effect.BLINDNESS) or target:hasStatusEffect(tpz.effect.POISON) or target:hasStatusEffect(tpz.effect.PARALYSIS) or target:hasStatusEffect(tpz.effect.PLAGUE)) then
         local effectRemoved = 0
         while effectRemoved == 0 do
@@ -40,3 +41,5 @@ function onItemUse(target)
     end
 end
 
+
+return item_object

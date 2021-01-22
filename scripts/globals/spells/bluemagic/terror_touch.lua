@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Terror Touch
 -- Additional effect: Weakens attacks. Accuracy varies with TP
 -- Spell cost: 62 MP
@@ -12,18 +12,19 @@
 -- Duration: 60~ seconds
 -- Skillchain Element(s): Dark (Primary) and Water (Secondary) - (can open Transfixion, Detonation, Impaction, or Induration can close Compression, Reverberation, or Gravitation)
 -- Combos: Defense Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ACC
@@ -54,3 +55,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

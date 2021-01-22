@@ -1,18 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cura III
 -- Restores hp in area of effect. Self target only
 -- From what I understand, Cura III's base potency is the same as Cure III's.
 -- With Afflatus Misery Bonus, it can be as potent as a Curaga IV
 -- Modeled after our cure_iii.lua, which was modeled after the below reference
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     if (caster:getID() ~= target:getID()) then
         return tpz.msg.basic.CANNOT_PERFORM_TARG
     else
@@ -20,7 +21,7 @@ function onMagicCastingCheck(caster, target, spell)
     end
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local divisor = 0
     local constant = 0
     local basepower = 0
@@ -127,3 +128,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

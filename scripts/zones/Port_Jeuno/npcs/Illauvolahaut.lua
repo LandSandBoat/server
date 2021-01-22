@@ -6,11 +6,12 @@
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     KazhPass = player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
     Gil = player:getGil()
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
 end
 
 -- 41  without addons (ZM) ?
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 37) then
         Z = player:getZPos()
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

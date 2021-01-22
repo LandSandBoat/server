@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Giga Scream
 --
 -- Description: Delivers a threefold attack on a single target.
@@ -7,16 +7,17 @@
 -- Utsusemi/Blink absorb: 3 shadows
 -- Range: Melee
 -- Notes: Used by some notorious monsters in place of Triple Attack.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1.5
     local dmgmod = 2
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

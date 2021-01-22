@@ -2,12 +2,15 @@
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Undead Toad
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
 
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

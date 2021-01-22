@@ -5,8 +5,9 @@
 require("scripts/globals/hunts")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 347)
 
     -- Curses, Foiled A-Golem!?
@@ -16,3 +17,5 @@ function onMobDeath(mob, player, isKiller)
     end
 
 end
+
+return entity

@@ -7,14 +7,15 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     --50% fast cast, no standback
     mob:addMod(tpz.mod.UFASTCAST, 50)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:SetAutoAttackEnabled(false)
     mob:setMobMod(tpz.mobMod.GA_CHANCE, 25)
     mob:addStatusEffectEx(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
@@ -22,12 +23,12 @@ function onMobSpawn(mob)
     mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 5)
     GetMobByID(mob:getID() + 1):updateEnmity(target)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getBattleTime() % 9 <= 2) then
         local orbitalOne = GetMobByID(mob:getID()+3)
         local orbitalTwo = GetMobByID(mob:getID()+4)
@@ -44,7 +45,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     DespawnMob(mob:getID()+1)
     DespawnMob(mob:getID()+3)
     DespawnMob(mob:getID()+4)
@@ -52,11 +53,11 @@ function onMobDeath(mob, player, isKiller)
     player:startEvent(32004, battlefield:getArea())
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("updateCSID: %u", csid)
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     -- printf("finishCSID: %u", csid)
     if (csid == 32004) then
         DespawnMob(target:getID())
@@ -67,3 +68,5 @@ function onEventFinish(player, csid, option, target)
         mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
     end
 end
+
+return entity

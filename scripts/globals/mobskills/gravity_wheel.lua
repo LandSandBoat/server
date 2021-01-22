@@ -1,24 +1,25 @@
----------------------------------------------
+-----------------------------------
 --  Gravity Wheel
 --
 --  Description: Deals heavy damage to players in an area of effect. Additional effect: Weight
 --  Type: Physical
 --  2-3 Shadows
 --  Range: Unknown
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() == 2) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if (mob:getAnimationSub() == 2) then
         return 0
     end
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 1
     local accmod = 1
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
     MobStatusEffectMove(mob, target, tpz.effect.WEIGHT, 1, 0, 30)
     return dmg
 end
+
+return mobskill_object

@@ -31,6 +31,7 @@ namespace instanceutils
 {
     void CheckInstance();
     void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester);
+    void CacheInstanceScripts();
 }; // namespace instanceutils
 
 #endif

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5212
 -- Item: dish_of_spaghetti_arrabbiata_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +17% (cap 150)
 -- Strength 5
 -- Vitality 2
@@ -11,12 +11,13 @@
 -- Ranged Attack +23% (cap 100)
 -- Store TP +6
 -- Sleep resistance +8
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -24,11 +25,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 3600, 5212)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.FOOD_HPP, 17)
     target:addMod(tpz.mod.FOOD_HP_CAP, 150)
     target:addMod(tpz.mod.STR, 5)
@@ -42,7 +43,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.SLEEPRES, 8)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.FOOD_HPP, 17)
     target:delMod(tpz.mod.FOOD_HP_CAP, 150)
     target:delMod(tpz.mod.STR, 5)
@@ -55,3 +56,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.STORETP, 6)
     target:delMod(tpz.mod.SLEEPRES, 8)
 end
+
+return item_object

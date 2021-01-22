@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- Spell: Protect III
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local power = 75
     local duration = calculateDuration(1800, spell:getSkillType(), spell:getSpellGroup(), caster, target, false)
     duration = calculateDurationForLvl(duration, 47, target:getMainLvl())
@@ -24,3 +25,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

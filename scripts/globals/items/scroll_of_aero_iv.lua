@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4765
 -- Scroll of Aero IV
 -- Teaches the black magic Aero IV
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(157)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(157)
 end
+
+return item_object

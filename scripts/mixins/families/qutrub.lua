@@ -24,14 +24,14 @@ g_mixins.families.qutrub = function(mob)
         local swapTime = mob:getLocalVar("swapTime")
 
         if swapTime > 0 and os.time() > swapTime then
-            local animationSub = mob:AnimationSub()
+            local animationSub = mob:getAnimationSub()
 
             if animationSub == 1 then
-                mob:AnimationSub(2)
+                mob:setAnimationSub(2)
                 mob:setLocalVar("swapTime", os.time() + 60)
 
             elseif animationSub == 2 then
-                mob:AnimationSub(1)
+                mob:setAnimationSub(1)
                 mob:setLocalVar("swapTime", os.time() + 60)
             end
         end
@@ -41,16 +41,16 @@ g_mixins.families.qutrub = function(mob)
 
     mob:addListener("CRITICAL_TAKE", "QUTRUB_CRITICAL_TAKE", function(mob)
         if math.random(100) <= mob:getLocalVar("qutrubBreakChance") then
-            local animationSub = mob:AnimationSub()
+            local animationSub = mob:getAnimationSub()
 
             -- break first weapon
             if animationSub == 0 then
-                mob:AnimationSub(1)
+                mob:setAnimationSub(1)
                 mob:setLocalVar("swapTime", os.time() + 60)
 
             -- break second weapon
             elseif animationSub == 2 then
-                mob:AnimationSub(3)
+                mob:setAnimationSub(3)
                 mob:setLocalVar("swapTime", 0)
             end
         end

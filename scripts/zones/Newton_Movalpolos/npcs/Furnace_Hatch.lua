@@ -6,8 +6,9 @@ local ID = require("scripts/zones/Newton_Movalpolos/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 947) then
         local offset = npc:getID() - ID.npc.FURNACE_HATCH_OFFSET
         player:confirmTrade()
@@ -24,12 +25,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(20) -- no firesand message
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

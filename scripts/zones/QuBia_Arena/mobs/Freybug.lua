@@ -3,6 +3,9 @@
 --  Mob: Freybug
 -- BCNM: Let Sleeping Dogs Die
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

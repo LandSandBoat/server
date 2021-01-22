@@ -2,10 +2,13 @@
 -- Area: Crawlers' Nest
 --  Mob: Puroboros
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(3600, 10800)) -- 1 to 3 hours
 end
+
+return entity

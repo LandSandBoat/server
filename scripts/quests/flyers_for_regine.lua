@@ -10,9 +10,9 @@ require("scripts/globals/zone")
 quests = quests or {}
 quests.flyers_for_regine = quests.flyers_for_regine or {}
 
--------------------------------------------------
+-----------------------------------
 -- local data
--------------------------------------------------
+-----------------------------------
 
 -- [ffr]deliveryMask stores delivered fliers as bits (0 = not delivered, 1 = delivered)
 -- the key in this table relates to the bit in the mask
@@ -47,9 +47,9 @@ local npcData =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 quests.flyers_for_regine.initZone = function(zone)
     local data = npcData[zone:getID()]
@@ -62,7 +62,7 @@ quests.flyers_for_regine.initZone = function(zone)
 end
 
 quests.flyers_for_regine.onRegionEnter = function(player, region)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED then
         local zoneId = player:getZoneID()
         local regionId = region:GetRegionID()
         local data = npcData[zoneId]
@@ -86,7 +86,7 @@ quests.flyers_for_regine.onRegionEnter = function(player, region)
 end
 
 quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 532) then
         local zoneId = player:getZoneID()
         local ID = zones[zoneId]
         local mask = player:getCharVar('[ffr]deliveryMask')

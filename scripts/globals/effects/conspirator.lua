@@ -1,19 +1,21 @@
 -----------------------------------
---
 -- tpz.effect.CONSPIRATOR
---
 -----------------------------------
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.SUBTLE_BLOW, effect:getPower())
     target:addMod(tpz.mod.ACC, effect:getSubPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.SUBTLE_BLOW, effect:getPower())
     target:delMod(tpz.mod.ACC, effect:getSubPower())
 end
+
+return effect_object

@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local questItem = player:getCharVar("ForgeYourDestiny_Event")
     local checkItem = testflag(tonumber(questItem), 0x02)
@@ -20,7 +21,7 @@ function onTrade(player, npc, trade)
         end
     end
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasItem(17809) == false) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasItem(17809) == false) then
         if (trade:getGil() == 30000 and trade:getItemCount() == 1 and player:getFreeSlotsCount() >= 1) then
             player:startEvent(145)
         end
@@ -28,19 +29,15 @@ function onTrade(player, npc, trade)
 
 end
 
------------------------------------
--- Event Check
------------------------------------
-
 function testflag(set, flag)
     return (set % (2*flag) >= flag)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local swordTimer = player:getCharVar("ForgeYourDestiny_timer")
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
         if (player:hasItem(1153)) then
             player:startEvent(48, 1153) -- Sacred Branch
         elseif (player:hasItem(1198) == false) then
@@ -55,17 +52,17 @@ function onTrigger(player, npc)
         elseif (player:hasItem(1198)) then -- Sacred Sprig
             player:startEvent(41)
         end
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasItem(17809) == false) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasItem(17809) == false) then
         player:startEvent(144)
     else
         player:startEvent(68)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local questItem = player:getCharVar("ForgeYourDestiny_Event")
 
@@ -92,3 +89,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

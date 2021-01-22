@@ -14,13 +14,14 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local bookwormStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
-    local chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+entity.onTrigger = function(player, npc)
+    local bookwormStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+    local chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
     local windurstFame = player:getFameLevel(WINDURST)
@@ -32,7 +33,7 @@ function onTrigger(player, npc)
         player:hasKeyItem(tpz.ki.OPTISTERY_RING)
     then
         player:startEvent(801, 0, tpz.ki.OPTISTERY_RING)
-        
+
     -- The Road Forks (CoP 3-3)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 10 then
         player:startEvent(875)
@@ -59,7 +60,7 @@ function onTrigger(player, npc)
 
     -- Hat in Hand
     elseif
-        (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or
+        (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or
         player:getCharVar("QuestHatInHand_var2") == 1) and
         bit.band(player:getCharVar("QuestHatInHand_var"), bit.lshift(1, 5)) == 0
     then
@@ -68,7 +69,7 @@ function onTrigger(player, npc)
     -- Early Bird Catches the Bookworm
     elseif
         bookwormStatus == QUEST_AVAILABLE and
-        player:getQuestStatus(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER) == QUEST_COMPLETED and
+        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER) == QUEST_COMPLETED and
         windurstFame >= 2 and
         player:needToZone() == false
     then
@@ -93,11 +94,11 @@ function onTrigger(player, npc)
         player:startEvent(412) -- CS after talking to Furakku-Norakku
 
     -- Standard dialogues
-    elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) then
         player:startEvent(380) -- "Thanks to some adventurer somewhere, I was able to awaken from an inescapable nightmare."
-    elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) then
         player:startEvent(379) -- "Hey, you're the adventurer from the other day!"
-    elseif player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) then
         player:startEvent(169) -- "You must not frighten the others with rumors that the Book of the Gods has gone blank..."
     elseif player:getLocalVar("TosukaDialogueToggle") == 1 then
         player:startEvent(881) -- He toggles this event with 370 when player has no other mission/quest dialogue.
@@ -108,10 +109,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- The Road Forks (CoP 3-3)
     if csid == 875 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 11)
@@ -141,10 +142,12 @@ function onEventFinish(player, csid, option)
 
     -- Early Bird Catches the Bookworm
     elseif csid == 387 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
 
     -- Chasing Tales
     elseif csid == 403 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
     end
 end
+
+return entity

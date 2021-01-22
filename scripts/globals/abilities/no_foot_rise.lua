@@ -5,12 +5,12 @@
 -- Recast Time: 3 minutes
 -- Duration: Instant
 -----------------------------------
-
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
         return 561, 0
     else
@@ -18,7 +18,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     local moves = player:getMerit(tpz.merit.NO_FOOT_RISE)
     if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
@@ -54,3 +54,5 @@ function onUseAbility(player, target, ability)
         return moves
     end
 end
+
+return ability_object

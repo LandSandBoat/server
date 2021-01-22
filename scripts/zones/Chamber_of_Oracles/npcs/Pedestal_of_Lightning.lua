@@ -3,17 +3,18 @@
 --  NPC: Pedestal of Lightning
 -- Involved in Zilart Mission 7
 -- !pos 199 -2 36 168
--------------------------------------
+-----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Chamber_of_Oracles/IDs")
--------------------------------------
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ZilartStatus = player:getCharVar("ZilartStatus")
 
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES) then
@@ -30,7 +31,7 @@ function onTrigger(player, npc)
         else
             player:messageSpecial(ID.text.IS_SET_IN_THE_PEDESTAL, tpz.ki.LIGHTNING_FRAGMENT)
         end
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)) then
         player:messageSpecial(ID.text.HAS_LOST_ITS_POWER, tpz.ki.LIGHTNING_FRAGMENT)
     else
         player:messageSpecial(ID.text.PLACED_INTO_THE_PEDESTAL)
@@ -38,12 +39,12 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate CSID: %u", csid)
     -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 
@@ -52,8 +53,10 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ZilartStatus", 0)
         player:addKeyItem(tpz.ki.PRISMATIC_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PRISMATIC_FRAGMENT)
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
-        player:addMission(ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
     end
 
 end
+
+return entity

@@ -11,12 +11,13 @@ require("scripts/globals/helm")
 require("scripts/globals/zone")
 require("scripts/globals/beastmentreasure")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
@@ -25,15 +26,15 @@ function onInitialize(zone)
     tpz.bmt.updatePeddlestox(tpz.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
-function onGameDay()
+zone_object.onGameDay = function()
     tpz.bmt.updatePeddlestox(tpz.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn( player, prevZone)
+zone_object.onZoneIn = function( player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -47,14 +48,16 @@ function onZoneIn( player, prevZone)
     return cs
 end
 
-function onRegionEnter( player, region)
+zone_object.onRegionEnter = function( player, region)
 end
 
-function onEventUpdate( player, csid, option)
+zone_object.onEventUpdate = function( player, csid, option)
     if csid == 11 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-function onEventFinish( player, csid, option)
+zone_object.onEventFinish = function( player, csid, option)
 end
+
+return zone_object

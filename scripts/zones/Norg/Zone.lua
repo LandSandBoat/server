@@ -9,16 +9,17 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.chocobo.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
 
     local cs = -1
 
@@ -35,23 +36,25 @@ function onZoneIn(player, prevZone)
 
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 1) then
         if (player:hasKeyItem(tpz.ki.MAP_OF_NORG) == false) then
             player:addKeyItem(tpz.ki.MAP_OF_NORG)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_NORG)
         end
-        player:completeMission(ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)
-        player:addMission(ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
+        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.WELCOME_TNORG)
     elseif (csid == 176) then
         player:addCharVar("ZilartStatus", 1)
     end
 
 end
+
+return zone_object

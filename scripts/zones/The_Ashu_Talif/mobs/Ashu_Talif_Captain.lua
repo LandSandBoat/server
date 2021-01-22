@@ -5,12 +5,13 @@
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 require("scripts/globals/instance")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- The captain gives up at <= 20% HP. Everyone disengages
     local instance = mob:getInstance()
     if (mob:getHPP() <= 20 and instance:completed() == false) then
@@ -35,7 +36,7 @@ function onMobFight(mob, target)
     end)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local jumped = mob:getLocalVar("jump")
     local ready = mob:getLocalVar("ready")
 
@@ -63,8 +64,10 @@ function onMobRoam(mob)
 
 end
 
-function onMobDisengage(mob, target)
+entity.onMobDisengage = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

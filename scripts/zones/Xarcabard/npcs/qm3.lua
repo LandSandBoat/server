@@ -9,15 +9,16 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_COEURL):isDead() then
         if
             not player:hasKeyItem(tpz.ki.SQUARE_FRIGICITE) and
-            player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
         then
             player:addKeyItem(tpz.ki.SQUARE_FRIGICITE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SQUARE_FRIGICITE)
@@ -29,8 +30,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

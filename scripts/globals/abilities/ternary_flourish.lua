@@ -10,7 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-function onAbilityCheck(player, target, ability)
+local ability_object = {}
+
+ability_object.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1) then
         return tpz.msg.basic.NO_FINISHINGMOVES, 0
     elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2) then
@@ -26,7 +28,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     if player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3) then
         player:delStatusEffect(tpz.effect.FINISHING_MOVE_3)
@@ -41,3 +43,5 @@ function onUseAbility(player, target, ability)
         player:addStatusEffect(tpz.effect.TERNARY_FLOURISH, 3, 0, 60, 0, player:getMerit(tpz.merit.TERNARY_FLOURISH_EFFECT))
     end
 end
+
+return ability_object

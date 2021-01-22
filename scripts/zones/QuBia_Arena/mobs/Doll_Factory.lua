@@ -3,8 +3,9 @@
 --  Mob: Doll Factory
 -- BCNM: Factory Rejects
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local lastDoll = mob:getLocalVar("lastDoll")
 
     if lastDoll == 0 or (lastDoll < 5 and GetMobByID(mob:getID() + lastDoll):isDead()) then
@@ -17,10 +18,12 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
         if mob:getLocalVar("lastDoll") < 5 then
             mob:getBattlefield():lose()
         end
     end
 end
+
+return entity

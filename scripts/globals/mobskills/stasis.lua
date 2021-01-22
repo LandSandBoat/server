@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Stasis
 --
 -- Description: Paralyzes targets in an area of effect.
@@ -6,17 +6,18 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 10' radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local shadows = MOBPARAM_1_SHADOW
     local dmg = MobFinalAdjustments(10, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, shadows)
 
@@ -31,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return shadows
 end
+
+return mobskill_object

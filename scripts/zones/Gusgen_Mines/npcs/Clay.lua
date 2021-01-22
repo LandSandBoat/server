@@ -9,12 +9,13 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Gusgen_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local GUSGENCLAY = 569
 
     if (player:hasItem(GUSGENCLAY) == false) then
@@ -29,10 +30,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -5,7 +5,10 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.SANDWORM_WRANGLER)
 end
+
+return entity

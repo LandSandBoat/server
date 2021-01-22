@@ -8,12 +8,14 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     if player:getPet() ~= nil then
         ability:setMsg(tpz.msg.basic.JA_NO_EFFECT)
         target:addEnmity(player, 1, 0)
@@ -53,3 +55,5 @@ function onUseAbility(player, target, ability)
         end
     end
 end
+
+return ability_object

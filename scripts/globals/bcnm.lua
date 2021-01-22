@@ -5,10 +5,10 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 
------------------------------------------------
+-----------------------------------
 -- battlefields by zone
 -- captured from client 2020-10-24
------------------------------------------------
+-----------------------------------
 
 --[[
     [zoneId] = {
@@ -527,9 +527,9 @@ local battlefields = {
 
 }
 
------------------------------------------------
+-----------------------------------
 -- check requirements for registrant and allies
------------------------------------------------
+-----------------------------------
 
 function checkReqs(player, npc, bfid, registrant)
     local mi      = tpz.mission.id
@@ -548,9 +548,9 @@ function checkReqs(player, npc, bfid, registrant)
     local rozStat  = player:getCharVar("ZilartStatus")
     local copStat  = player:getCharVar("PromathiaStatus")
     local toauStat = player:getCharVar("AhtUrganStatus")
-    local stc = player:hasCompletedMission(SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
-    local dm1 = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
-    local dm2 = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local stc = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
+    local dm1 = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT)
+    local dm2 = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DIVINE_MIGHT_REPEAT)
 
     local function getEntranceOffset(offset)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
@@ -654,7 +654,7 @@ function checkReqs(player, npc, bfid, registrant)
         [ 833] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ANIMUS)                                                                                             ) end, -- ENM: Playing Host
         [ 864] = function() return ( cop == mi.cop.DESIRES_OF_EMPTINESS and copStat == 8                                                                                    ) end, -- PM5-2: Desires of Emptiness
         [ 865] = function() return ( player:hasKeyItem(tpz.ki.CENSER_OF_ACRIMONY)                                                                                           ) end, -- ENM: Pulling the Plug
-        [ 896] = function() return ( player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 2           ) end, -- Quest: Storms of Fate
+        [ 896] = function() return ( player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 2           ) end, -- Quest: Storms of Fate
         [ 960] = function() return ( cop == mi.cop.ANCIENT_VOWS and copStat == 2                                                                                            ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( cop == mi.cop.THE_SAVAGE and copStat == 1                                                                                              ) end, -- PM4-2: The Savage
         [ 962] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Fire in the Sky
@@ -665,11 +665,11 @@ function checkReqs(player, npc, bfid, registrant)
         [ 993] = function() return ( cop == mi.cop.THE_WARRIOR_S_PATH                                                                                                       ) end, -- PM7-5: The Warrior's Path
         [1024] = function() return ( cop == mi.cop.WHEN_ANGELS_FALL and copStat == 4                                                                                        ) end, -- PM8-3: When Angels Fall
         [1056] = function() return ( cop == mi.cop.DAWN and copStat == 2                                                                                                    ) end, -- PM8-4: Dawn
-        [1057] = function() return ( player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and player:getCharVar('ApocalypseNigh') == 4        ) end, -- Apocalypse Nigh
+        [1057] = function() return ( player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and player:getCharVar('ApocalypseNigh') == 4        ) end, -- Apocalypse Nigh
         [1090] = function() return ( player:hasKeyItem(tpz.ki.TOGGLE_SWITCH)                                                                                                ) end, -- Quest: Puppetmaster Blues
         [1091] = function() return ( mjob == tpz.job.COR and mlvl >= 66                                                                                                     ) end, -- Quest: Breaking the Bonds of Fate (COR LB5)
         [1092] = function() return ( toau == mi.toau.LEGACY_OF_THE_LOST                                                                                                     ) end, -- TOAU35: Legacy of the Lost
-        [1122] = function() return ( player:getQuestStatus(AHT_URHGAN,tpz.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and player:getCharVar('OmensProgress') == 1           ) end, -- Quest: Omens (BLU AF Quest 2)
+        [1122] = function() return ( player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN,tpz.quest.id.ahtUrhgan.OMENS) == QUEST_ACCEPTED and player:getCharVar('OmensProgress') == 1           ) end, -- Quest: Omens (BLU AF Quest 2)
         [1123] = function() return ( mjob == tpz.job.PUP and mlvl >= 66                                                                                                     ) end, -- Quest: Achieving True Power (PUP LB5)
         [1124] = function() return ( toau == mi.toau.SHIELD_OF_DIPLOMACY and toauStat == 2                                                                                  ) end, -- TOAU22: Shield of Diplomacy
         [1154] = function() return ( mjob == tpz.job.BLU and mlvl >= 66                                                                                                     ) end, -- Quest: The Beast Within (BLU LB5)
@@ -716,9 +716,9 @@ function checkReqs(player, npc, bfid, registrant)
         [ 963] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bad Seed
         [ 964] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bugard in the Clouds
         [ 965] = function() return ( player:hasKeyItem(tpz.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Beloved of Atlantes
-        [ 928] = function() return ( player:hasCompletedMission(COP, mi.cop.ANCIENT_VOWS) or (cop == mi.cop.ANCIENT_VOWS and copStat >= 2)                  ) end, -- Quest: Ouryu Cometh
-        [1057] = function() return ( player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) or
-                                   ( player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+        [ 928] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.ANCIENT_VOWS) or (cop == mi.cop.ANCIENT_VOWS and copStat >= 2)                  ) end, -- Quest: Ouryu Cometh
+        [1057] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) or
+                                   ( player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
                                      player:getCharVar('ApocalypseNigh') == 4)                                                                              ) end, -- Quest: Apocalypse Nigh
         [1290] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- NW Apollyon
         [1291] = function() return ( player:hasKeyItem(tpz.ki.COSMOCLEANSE) and player:hasKeyItem(tpz.ki.RED_CARD) and npcid == getEntranceOffset(0)        ) end, -- SW Apollyon
@@ -748,9 +748,9 @@ function checkReqs(player, npc, bfid, registrant)
     end
 end
 
------------------------------------------------
+-----------------------------------
 -- check ability to skip a cutscene
------------------------------------------------
+-----------------------------------
 
 function checkSkip(player, bfid)
     local mi        = tpz.mission.id
@@ -766,26 +766,26 @@ function checkSkip(player, bfid)
     local rozStat   = player:getCharVar("ZilartStatus")
     local copStat   = player:getCharVar("PromathiaStatus")
     local toauStat  = player:getCharVar("AhtUrganStatus")
-    local sofStat   = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
+    local sofStat   = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.STORMS_OF_FATE)
     local mission2_3a =
-        player:hasCompletedMission(BASTOK, mi.bastok.THE_EMISSARY_SANDORIA2) or
-        player:hasCompletedMission(WINDURST, mi.windurst.THE_THREE_KINGDOMS_SANDORIA2) or
+        player:hasCompletedMission(tpz.mission.log_id.BASTOK, mi.bastok.THE_EMISSARY_SANDORIA2) or
+        player:hasCompletedMission(tpz.mission.log_id.WINDURST, mi.windurst.THE_THREE_KINGDOMS_SANDORIA2) or
         natStat > 9 and
         (
             basty == mi.bastok.THE_EMISSARY_SANDORIA2 or
             windy == mi.windurst.THE_THREE_KINGDOMS_SANDORIA2
         )
     local mission2_3b =
-        player:hasCompletedMission(SANDORIA, mi.sandoria.JOURNEY_TO_BASTOK2) or
-        player:hasCompletedMission(WINDURST, mi.windurst.THE_THREE_KINGDOMS_BASTOK2) or
+        player:hasCompletedMission(tpz.mission.log_id.SANDORIA, mi.sandoria.JOURNEY_TO_BASTOK2) or
+        player:hasCompletedMission(tpz.mission.log_id.WINDURST, mi.windurst.THE_THREE_KINGDOMS_BASTOK2) or
         natStat > 10 and
         (
             sandy == mi.sandoria.JOURNEY_TO_BASTOK2 or
             windy == mi.windurst.THE_THREE_KINGDOMS_BASTOK2
         )
     local mission2_3c =
-        player:hasCompletedMission(SANDORIA, mi.sandoria.JOURNEY_TO_WINDURST2) or
-        player:hasCompletedMission(BASTOK, mi.bastok.THE_EMISSARY_WINDURST2) or
+        player:hasCompletedMission(tpz.mission.log_id.SANDORIA, mi.sandoria.JOURNEY_TO_WINDURST2) or
+        player:hasCompletedMission(tpz.mission.log_id.BASTOK, mi.bastok.THE_EMISSARY_WINDURST2) or
         natStat > 8 and
         (
             sandy == mi.sandoria.JOURNEY_TO_WINDURST2 or
@@ -796,50 +796,50 @@ function checkSkip(player, bfid)
     local skipReqs =
     {
         [   0] = function() return ( mission2_3a                                                                                                                                                     ) end, -- Mission 2-3
-        [   3] = function() return ( player:hasCompletedMission(SANDORIA, mi.sandoria.THE_SECRET_WEAPON) or (sandy == mi.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") > 2) ) end, -- Sandy 7-2: The Secret Weapon
-        [  32] = function() return ( player:hasCompletedMission(SANDORIA, mi.sandoria.SAVE_THE_CHILDREN) or (sandy == mi.sandoria.SAVE_THE_CHILDREN and natStat > 2)                                 ) end, -- Sandy 1-3: Save the Children
-        [  33] = function() return ( player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)                                                                                        ) end, -- Quest: The Holy Crest
+        [   3] = function() return ( player:hasCompletedMission(tpz.mission.log_id.SANDORIA, mi.sandoria.THE_SECRET_WEAPON) or (sandy == mi.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") > 2) ) end, -- Sandy 7-2: The Secret Weapon
+        [  32] = function() return ( player:hasCompletedMission(tpz.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN) or (sandy == mi.sandoria.SAVE_THE_CHILDREN and natStat > 2)                                 ) end, -- Sandy 1-3: Save the Children
+        [  33] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)                                                                       ) end, -- Quest: The Holy Crest
         [  64] = function() return ( mission2_3b                                                                                                                                                     ) end, -- Mission 2-3
-        [  67] = function() return ( player:hasCompletedMission(BASTOK, mi.bastok.ON_MY_WAY) or (basty == mi.bastok.ON_MY_WAY and natStat > 2)                                                       ) end, -- Basty 7-2: On My Way
+        [  67] = function() return ( player:hasCompletedMission(tpz.mission.log_id.BASTOK, mi.bastok.ON_MY_WAY) or (basty == mi.bastok.ON_MY_WAY and natStat > 2)                                                       ) end, -- Basty 7-2: On My Way
         [  96] = function() return ( mission2_3c                                                                                                                                                     ) end, -- Mission 2-3
-        [  99] = function() return ( player:hasCompletedMission(WINDURST, mi.windurst.SAINTLY_INVITATION) or (windy == mi.windurst.SAINTLY_INVITATION and natStat > 1)                               ) end, -- Windy 6-2: A Saintly Invitation
+        [  99] = function() return ( player:hasCompletedMission(tpz.mission.log_id.WINDURST, mi.windurst.SAINTLY_INVITATION) or (windy == mi.windurst.SAINTLY_INVITATION and natStat > 1)                               ) end, -- Windy 6-2: A Saintly Invitation
         [ 160] = function() return ( player:hasCompletedMission(player:getNation(), mi.nation.SHADOW_LORD) or (nat == mi.nation.SHADOW_LORD and natStat > 3)                                         ) end, -- Mission 5-2
-        [ 161] = function() return ( player:hasCompletedMission(BASTOK, mi.bastok.WHERE_TWO_PATHS_CONVERGE) or (basty == mi.bastok.WHERE_TWO_PATHS_CONVERGE and natStat > 4)                         ) end, -- Basty 9-2: Where Two Paths Converge
-        [ 192] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.THROUGH_THE_QUICKSAND_CAVES)                                                                                       ) end, -- ZM6: Through the Quicksand Caves
-        [ 224] = function() return ( player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH) or player:hasKeyItem(tpz.ki.WHISPER_OF_THE_MOON)                                     ) end, -- Quest: The Moonlit Path
-        [ 225] = function() return ( player:hasCompletedMission(WINDURST, mi.windurst.MOON_READING) or (windy == mi.windurst.MOON_READING and natStat > 4)                                           ) end, -- Windy 9-2: Moon Reading
-        [ 256] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.RETURN_TO_DELKFUTTS_TOWER)                                                                                         ) end, -- ZM8: Return to Delkfutt's Tower
-        [ 288] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Hume)
-        [ 289] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Tarutaru)
-        [ 290] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Mithra)
-        [ 291] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Elvaan)
-        [ 292] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Galka)
-        [ 320] = function() return ( player:hasCompletedMission(ZILART, mi.zilart.THE_CELESTIAL_NEXUS)                                                                                               ) end, -- ZM16: The Celestial Nexus
-        [ 416] = function() return ( player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) or player:hasKeyItem(tpz.ki.WHISPER_OF_GALES)                                           ) end, -- Quest: Trial by Wind
-        [ 448] = function() return ( player:hasCompletedQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or player:hasKeyItem(tpz.ki.WHISPER_OF_STORMS)                            ) end, -- Quest: Trial by Lightning
-        [ 480] = function() return ( player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) or player:hasKeyItem(tpz.ki.WHISPER_OF_FROST)                                            ) end, -- Quest: Trial by Ice
+        [ 161] = function() return ( player:hasCompletedMission(tpz.mission.log_id.BASTOK, mi.bastok.WHERE_TWO_PATHS_CONVERGE) or (basty == mi.bastok.WHERE_TWO_PATHS_CONVERGE and natStat > 4)                         ) end, -- Basty 9-2: Where Two Paths Converge
+        [ 192] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.THROUGH_THE_QUICKSAND_CAVES)                                                                                       ) end, -- ZM6: Through the Quicksand Caves
+        [ 224] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH) or player:hasKeyItem(tpz.ki.WHISPER_OF_THE_MOON)                    ) end, -- Quest: The Moonlit Path
+        [ 225] = function() return ( player:hasCompletedMission(tpz.mission.log_id.WINDURST, mi.windurst.MOON_READING) or (windy == mi.windurst.MOON_READING and natStat > 4)                                           ) end, -- Windy 9-2: Moon Reading
+        [ 256] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.RETURN_TO_DELKFUTTS_TOWER)                                                                                         ) end, -- ZM8: Return to Delkfutt's Tower
+        [ 288] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Hume)
+        [ 289] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Tarutaru)
+        [ 290] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Mithra)
+        [ 291] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Elvaan)
+        [ 292] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.ARK_ANGELS)                                                                                                        ) end, -- ZM14: Ark Angels (Galka)
+        [ 320] = function() return ( player:hasCompletedMission(tpz.mission.log_id.ZILART, mi.zilart.THE_CELESTIAL_NEXUS)                                                                                               ) end, -- ZM16: The Celestial Nexus
+        [ 416] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) or player:hasKeyItem(tpz.ki.WHISPER_OF_GALES)                          ) end, -- Quest: Trial by Wind
+        [ 448] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) or player:hasKeyItem(tpz.ki.WHISPER_OF_STORMS)               ) end, -- Quest: Trial by Lightning
+        [ 480] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) or player:hasKeyItem(tpz.ki.WHISPER_OF_FROST)                           ) end, -- Quest: Trial by Ice
         [ 512] = function() return ( player:hasCompletedMission(player:getNation(), mi.nation.ARCHLICH) or (nat == mi.nation.ARCHLICH and natStat > 11)                                              ) end, -- Mission 5-1
-        [ 516] = function() return ( player:hasCompletedMission(SANDORIA, mi.sandoria.THE_HEIR_TO_THE_LIGHT) or (sandy == mi.sandoria.THE_HEIR_TO_THE_LIGHT and natStat > 4)                         ) end, -- Sandy 9-2: The Heir to the Light
-        [ 544] = function() return ( player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) or player:hasKeyItem(tpz.ki.WHISPER_OF_FLAMES)                                          ) end, -- Quest: Trial by Fire
-        [ 576] = function() return ( player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) or player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)                                            ) end, -- Quest: Trial by Earth
-        [ 608] = function() return ( player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) or player:hasKeyItem(tpz.ki.WHISPER_OF_TIDES)                                          ) end, -- Quest: Trial by Water
-        [ 640] = function() return ( player:hasCompletedMission(COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") > 6)                                ) end, -- PM5-3 U3: Flames for the Dead
-        [ 672] = function() return ( player:hasCompletedMission(COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") > 5)                                ) end, -- PM5-3 U2: Head Wind
-        [ 704] = function() return ( player:hasCompletedMission(COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                                        ) end, -- PM3-5: Darkness Named
-        [ 706] = function() return ( player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(tpz.ki.WHISPER_OF_DREAMS)                                          ) end, -- Quest: Waking Dreams
-        [ 736] = function() return ( player:hasCompletedMission(COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") > 5)                           ) end, -- PM5-3 L3: A Century of Hardship
-        [ 768] = function() return ( player:hasCompletedMission(COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA)                                                          ) end, -- PM1-3: The Mothercrystals
-        [ 800] = function() return ( player:hasCompletedMission(COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(tpz.ki.LIGHT_OF_DEM)                                                            ) end, -- PM1-3: The Mothercrystals
-        [ 832] = function() return ( player:hasCompletedMission(COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(tpz.ki.LIGHT_OF_MEA)                                                            ) end, -- PM1-3: The Mothercrystals
-        [ 864] = function() return ( player:hasCompletedMission(COP, mi.cop.DESIRES_OF_EMPTINESS) or (cop == mi.cop.DESIRES_OF_EMPTINESS and copStat > 8)                                            ) end, -- PM5-2: Desires of Emptiness
+        [ 516] = function() return ( player:hasCompletedMission(tpz.mission.log_id.SANDORIA, mi.sandoria.THE_HEIR_TO_THE_LIGHT) or (sandy == mi.sandoria.THE_HEIR_TO_THE_LIGHT and natStat > 4)                         ) end, -- Sandy 9-2: The Heir to the Light
+        [ 544] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) or player:hasKeyItem(tpz.ki.WHISPER_OF_FLAMES)                         ) end, -- Quest: Trial by Fire
+        [ 576] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) or player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)                           ) end, -- Quest: Trial by Earth
+        [ 608] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) or player:hasKeyItem(tpz.ki.WHISPER_OF_TIDES)                         ) end, -- Quest: Trial by Water
+        [ 640] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") > 6)                                ) end, -- PM5-3 U3: Flames for the Dead
+        [ 672] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") > 5)                                ) end, -- PM5-3 U2: Head Wind
+        [ 704] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                                        ) end, -- PM3-5: Darkness Named
+        [ 706] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(tpz.ki.WHISPER_OF_DREAMS)                         ) end, -- Quest: Waking Dreams
+        [ 736] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") > 5)                           ) end, -- PM5-3 L3: A Century of Hardship
+        [ 768] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA)                                                          ) end, -- PM1-3: The Mothercrystals
+        [ 800] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(tpz.ki.LIGHT_OF_DEM)                                                            ) end, -- PM1-3: The Mothercrystals
+        [ 832] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(tpz.ki.LIGHT_OF_MEA)                                                            ) end, -- PM1-3: The Mothercrystals
+        [ 864] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.DESIRES_OF_EMPTINESS) or (cop == mi.cop.DESIRES_OF_EMPTINESS and copStat > 8)                                            ) end, -- PM5-2: Desires of Emptiness
         [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("StormsOfFate") > 2)                                                             ) end, -- Quest: Storms of Fate
-        [ 960] = function() return ( player:hasCompletedMission(COP, mi.cop.ANCIENT_VOWS)                                                                                                            ) end, -- PM2-5: Ancient Vows
-        [ 961] = function() return ( player:hasCompletedMission(COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and copStat > 1)                                                                ) end, -- PM4-2: The Savage
-        [ 992] = function() return ( player:hasCompletedMission(COP, mi.cop.ONE_TO_BE_FEARED)                                                                                                        ) end, -- PM6-4: One to be Feared
-        [ 993] = function() return ( player:hasCompletedMission(COP, mi.cop.THE_WARRIOR_S_PATH)                                                                                                      ) end, -- PM7-5: The Warrior's Path
-        [1024] = function() return ( player:hasCompletedMission(COP, mi.cop.WHEN_ANGELS_FALL) or (cop == mi.cop.WHEN_ANGELS_FALL and copStat > 4)                                                    ) end, -- PM8-3: When Angels Fall
-        [1056] = function() return ( player:hasCompletedMission(COP, mi.cop.DAWN) or (cop == mi.cop.DAWN and copStat > 2)                                                                            ) end, -- PM8-4: Dawn
-        [1057] = function() return ( player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)                                                                                             ) end, -- Apocalypse Nigh
+        [ 960] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.ANCIENT_VOWS)                                                                                                            ) end, -- PM2-5: Ancient Vows
+        [ 961] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and copStat > 1)                                                                ) end, -- PM4-2: The Savage
+        [ 992] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.ONE_TO_BE_FEARED)                                                                                                        ) end, -- PM6-4: One to be Feared
+        [ 993] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.THE_WARRIOR_S_PATH)                                                                                                      ) end, -- PM7-5: The Warrior's Path
+        [1024] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or (cop == mi.cop.WHEN_ANGELS_FALL and copStat > 4)                                                    ) end, -- PM8-3: When Angels Fall
+        [1056] = function() return ( player:hasCompletedMission(tpz.mission.log_id.COP, mi.cop.DAWN) or (cop == mi.cop.DAWN and copStat > 2)                                                                            ) end, -- PM8-4: Dawn
+        [1057] = function() return ( player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)                                                                            ) end, -- Apocalypse Nigh
     }
 
     -- determine whether player meets cutscene skip requirements
@@ -852,9 +852,9 @@ function checkSkip(player, bfid)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- which battlefields are valid for registrant?
------------------------------------------------
+-----------------------------------
 
 function findBattlefields(player, npc, itemId)
     local mask = 0
@@ -870,9 +870,9 @@ function findBattlefields(player, npc, itemId)
     return mask
 end
 
------------------------------------------------
+-----------------------------------
 -- get battlefield id for a given zone and bit
------------------------------------------------
+-----------------------------------
 
 function getBattlefieldIdByBit(player, bit)
     local zbfs = battlefields[player:getZoneID()]
@@ -887,9 +887,9 @@ function getBattlefieldIdByBit(player, bit)
     return 0
 end
 
------------------------------------------------
+-----------------------------------
 -- get battlefield bit for a given zone and id
------------------------------------------------
+-----------------------------------
 
 function getBattlefieldMaskById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
@@ -903,9 +903,9 @@ function getBattlefieldMaskById(player, bfid)
     return 0
 end
 
------------------------------------------------
+-----------------------------------
 -- get battlefield bit for a given zone and id
------------------------------------------------
+-----------------------------------
 
 function getItemById(player, bfid)
     local zbfs = battlefields[player:getZoneID()]
@@ -919,9 +919,9 @@ function getItemById(player, bfid)
     return 0
 end
 
------------------------------------------------
+-----------------------------------
 -- onTrade Action
------------------------------------------------
+-----------------------------------
 
 function TradeBCNM(player, npc, trade, onUpdate)
     -- validate trade
@@ -960,9 +960,9 @@ function TradeBCNM(player, npc, trade, onUpdate)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- onTrigger Action
------------------------------------------------
+-----------------------------------
 
 function EventTriggerBCNM(player, npc)
     -- player is in battlefield and clicks to leave
@@ -973,6 +973,11 @@ function EventTriggerBCNM(player, npc)
     -- player wants to register a new battlefield
     elseif not player:hasStatusEffect(tpz.effect.BATTLEFIELD) then
         local mask = findBattlefields(player, npc, 0)
+
+        -- GMs get access to all BCNMs
+        if player:getGMLevel() > 0 then
+            mask = 268435455
+        end
 
         -- mask = 268435455 -- uncomment to open menu with all possible battlefields
         if mask ~= 0 then
@@ -995,9 +1000,9 @@ function EventTriggerBCNM(player, npc)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- onEventUpdate
------------------------------------------------
+-----------------------------------
 
 function EventUpdateBCNM(player, csid, option, extras)
     -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
@@ -1083,7 +1088,8 @@ function EventUpdateBCNM(player, csid, option, extras)
                     end
                 end
 
-                for _, member in pairs(player:getAlliance()) do
+                local alliance = player:getAlliance()
+                for _, member in pairs(alliance) do
                     if member:getZoneID() == zone and not member:hasStatusEffect(tpz.effect.BATTLEFIELD) and not member:getBattlefield() then
                         member:addStatusEffect(effect)
                         member:registerBattlefield(id, area, player:getID())
@@ -1107,9 +1113,9 @@ function EventUpdateBCNM(player, csid, option, extras)
     return false
 end
 
------------------------------------------------
+-----------------------------------
 -- onEventFinish Action
------------------------------------------------
+-----------------------------------
 
 function EventFinishBCNM(player, csid, option)
     -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))

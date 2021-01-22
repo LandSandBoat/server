@@ -9,12 +9,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.OLD_TRICK_BOX) then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.OLD_TRICK_BOX) then
         if player:getCharVar("trueWillKilledNM") > 0 then
             npcUtil.giveKeyItem(player, tpz.ki.OLD_TRICK_BOX)
             player:setCharVar("trueWillKilledNM", 0)
@@ -26,8 +27,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

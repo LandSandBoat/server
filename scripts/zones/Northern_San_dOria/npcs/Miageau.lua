@@ -3,25 +3,26 @@
 --   NPC: Miageau
 -- Type: Quest Giver NPC
 -- !pos 115 0 108 231
---
+-----------------------------------
 -- Starts and Finishes: Waters of Cheval
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL) == QUEST_ACCEPTED) then
         if (trade:getItemCount() == 1 and trade:hasItemQty(603, 1)) then
             player:startEvent(515)
         end
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local watersOfTheCheval = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
+    local watersOfTheCheval = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
     if (watersOfTheCheval == QUEST_ACCEPTED) then
         if (player:hasItem(602) == true) then
             player:startEvent(512)
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 515) then
         if (player:getFreeSlotsCount() == 0) then
@@ -50,10 +51,12 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13183)
             player:addFame(SANDORIA, 30)
             player:addTitle(tpz.title.THE_PURE_ONE)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
         end
     elseif (csid == 504) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.WATER_OF_THE_CHEVAL)
     end
 
 end
+
+return entity

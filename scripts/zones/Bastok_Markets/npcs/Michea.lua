@@ -9,11 +9,13 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local theElvaanGoldsmith = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
-    local distantLoyalties = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
-    local fatherFigure = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+entity.onTrade = function(player, npc, trade)
+    local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+    local distantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+    local fatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
 
     -- THE ELVAAN GOLDSMITH
     if (theElvaanGoldsmith >= QUEST_ACCEPTED and npcUtil.tradeHas(trade, 648)) then
@@ -29,11 +31,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local theElvaanGoldsmith = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
-    local distantLoyalties = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+entity.onTrigger = function(player, npc)
+    local theElvaanGoldsmith = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+    local distantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
     local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
-    local fatherFigure = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+    local fatherFigure = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
 
     -- THE ELVAAN GOLDSMITH
     if (theElvaanGoldsmith == QUEST_AVAILABLE) then
@@ -61,16 +63,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- THE ELVAAN GOLDSMITH
     if (csid == 215) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
     elseif (csid == 216) then
-        local fame = player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and 8 or 100
+        local fame = player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and 8 or 100
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_ELVAAN_GOLDSMITH, {gil=180, fame=fame})) then
             player:confirmTrade()
         end
@@ -89,10 +91,12 @@ function onEventFinish(player, csid, option)
 
     -- FATHER FIGURE
     elseif (csid == 240) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FATHER_FIGURE)
     elseif (csid == 241) then
         if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.FATHER_FIGURE, {gil=2200, fame=120})) then
             player:confirmTrade()
         end
     end
 end
+
+return entity

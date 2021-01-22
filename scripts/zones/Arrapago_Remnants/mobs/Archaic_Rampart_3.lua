@@ -7,10 +7,12 @@ local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/status")
 -----------------------------------
-function onMobSpawn(mob)
+local entity = {}
+
+entity.onMobSpawn = function(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()
@@ -54,8 +56,10 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 end
+
+return entity

@@ -5,15 +5,17 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 -- Todo: blaze spikes effect only activates while not in casting animation
-function onMobInitialize(mob)
+
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.AUTO_SPIKES, 1)
     mob:addStatusEffect(tpz.effect.BLAZE_SPIKES, 250, 0, 0)
     mob:getStatusEffect(tpz.effect.BLAZE_SPIKES):setFlag(tpz.effectFlag.DEATH)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:SetAutoAttackEnabled(false)
     mob:setMod(tpz.mod.FASTCAST, 15)
@@ -21,7 +23,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.MAGIC_COOL, 10)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local FastCast = mob:getLocalVar("HPP")
     if mob:getHPP() <= FastCast then
         if mob:getHPP() > 10 then
@@ -31,7 +33,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onSpikesDamage(mob, target, damage)
+entity.onSpikesDamage = function(mob, target, damage)
     local INT_diff = mob:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
 
     if INT_diff > 20 then
@@ -54,5 +56,7 @@ function onSpikesDamage(mob, target, damage)
     return tpz.subEffect.BLAZE_SPIKES, tpz.msg.basic.SPIKES_EFFECT_DMG, dmg
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

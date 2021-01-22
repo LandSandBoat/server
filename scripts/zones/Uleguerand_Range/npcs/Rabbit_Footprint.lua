@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
 local points =
 {
@@ -28,7 +29,7 @@ local points =
     [17] = { 439.1841, -0.1640, -447.2572 }
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local coney
     local currentPoint = npc:getLocalVar("currentPoint")
 
@@ -49,13 +50,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
 
 
@@ -81,7 +82,7 @@ local function moveFootprint(npc)
     npcUtil.queueMove(npc, nextPointLoc, 1000)
 end
 
-function onTimeTrigger(npc, triggerID)
+entity.onTimeTrigger = function(npc, triggerID)
     local isSpawned = GetMobByID(ID.mob.WHITE_CONEY):isSpawned() or GetMobByID(ID.mob.BLACK_CONEY):isSpawned()
     local activeTime = npc:getLocalVar("activeTime")
 
@@ -100,3 +101,5 @@ function onTimeTrigger(npc, triggerID)
         end
     end
 end
+
+return entity

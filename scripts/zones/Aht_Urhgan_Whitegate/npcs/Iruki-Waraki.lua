@@ -13,10 +13,11 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 -----------------------------------
+local entity = {}
 
 
-function onTrade(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{"gil", 10000}}) and player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) == QUEST_COMPLETED and not player:hasItem(17859) then
+entity.onTrade = function(player, npc, trade)
+    if npcUtil.tradeHas(trade, {{"gil", 10000}}) and player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) == QUEST_COMPLETED and not player:hasItem(17859) then
         player:confirmTrade()
         npcUtil.giveItem(player, 17859)
     elseif npcUtil.tradeHas(trade, {4161, 5570}) and player:getCharVar("OperationTeatimeProgress") == 1 then -- Chai, Sleeping Potion
@@ -24,13 +25,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local NoStringsAttached = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+    local NoStringsAttached = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
-    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+    local TheWaywardAutomation = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
-    local OperationTeatime = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+    local OperationTeatime = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
     local LvL = player:getMainLvl()
     local Job = player:getMainJob()
@@ -77,10 +78,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 260 then
         player:setCharVar("NoStringsAttachedProgress", 2)
@@ -92,14 +93,16 @@ function onEventFinish(player, csid, option)
         player:unlockAttachment(8193) --Harlequin Head
     elseif csid == 774 then
         player:setCharVar("TheWaywardAutomationProgress", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     elseif csid == 776 then
         npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=17858, var="TheWaywardAutomationProgress"})
     elseif csid == 778 then
         player:setCharVar("OperationTeatimeProgress", 1)
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     elseif csid == 780 then
         player:setCharVar("OperationTeatimeProgress", 2)
         player:confirmTrade()
     end
 end
+
+return entity

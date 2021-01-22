@@ -10,12 +10,13 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     tpz.promyvion.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -23,8 +24,8 @@ function onZoneIn(player, prevZone)
     end
 
     if player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 2 then
-        player:completeMission(COP, tpz.mission.id.cop.BELOW_THE_ARKS)
-        player:addMission(COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.BELOW_THE_ARKS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)
         player:setCharVar("PromathiaStatus", 0)
     elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_MOTHERCRYSTALS then
         if player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) then
@@ -47,26 +48,28 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     if ENABLE_COP_ZONE_CAP == 1 then
         player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, 30, 0, 0)
     end
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     tpz.promyvion.onRegionEnter(player, region)
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 46 and option == 1 then
         player:setPos(-226.193, -46.459, -280.046, 127, 14) -- To Hall of Transference {R}
     elseif csid == 50 then
         player:setCharVar("FirstPromyvionDem", 0)
     end
 end
+
+return zone_object

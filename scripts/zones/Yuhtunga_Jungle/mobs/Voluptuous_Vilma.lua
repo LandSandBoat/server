@@ -4,12 +4,15 @@
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     DisallowRespawn(ID.mob.VOLUPTUOUS_VILMA, true)
     DisallowRespawn(ID.mob.ROSE_GARDEN_PH, false)
     GetMobByID(ID.mob.ROSE_GARDEN_PH):setRespawnTime(GetMobRespawnTime(ID.mob.ROSE_GARDEN_PH))
 end
+
+return entity

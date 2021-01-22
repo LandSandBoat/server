@@ -3,8 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
+attachment_object.onEquip = function(pet)
     pet:addListener("ENGAGE", "AUTO_TARGETMARKER_ENGAGE", function(pet, target)
         local ignored = pet:getLocalVar("targetmarker")
         if ignored > 0 then
@@ -38,12 +39,12 @@ function onEquip(pet)
     end)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     pet:removeListener("AUTO_TARGETMARKER_ENGAGE")
     pet:removeListener("AUTO_TARGETMARKER_DISENGAGE")
 end
 
-function onManeuverGain(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
     local ignored = pet:getLocalVar("targetmarker")
     local target = pet:getTarget()
     if ignored > 0 and target then
@@ -62,7 +63,7 @@ function onManeuverGain(pet, maneuvers)
     end
 end
 
-function onManeuverLose(pet, maneuvers)
+attachment_object.onManeuverLose = function(pet, maneuvers)
     local ignored = pet:getLocalVar("targetmarker")
     local target = pet:getTarget()
     if ignored > 0 and target then
@@ -80,3 +81,5 @@ function onManeuverLose(pet, maneuvers)
         pet:setLocalVar("targetmarker", accbonus)
     end
 end
+
+return attachment_object

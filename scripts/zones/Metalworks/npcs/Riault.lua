@@ -3,19 +3,22 @@
 --   NPC: Riault
 -- Type: Standard NPC
 -- !pos 26.988 -17.39 -41.931 237
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(201)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

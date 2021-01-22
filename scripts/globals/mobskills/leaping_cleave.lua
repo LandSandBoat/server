@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Leaping Cleave
 --  Family: Qutrub
 --  Description: Performs a jumping slash on a single target.
@@ -6,23 +6,22 @@
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
 --  Notes: Used only when wielding their initial sword.
----------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() == 0) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if (mob:getAnimationSub() == 0) then
         return 0
     else
         return 1
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 3
     local dmgmod = 4
@@ -31,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

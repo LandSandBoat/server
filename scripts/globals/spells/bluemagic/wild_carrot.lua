@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Wild Carrot
 -- Restores HP for the target party member
 -- Spell cost: 37 MP
@@ -9,20 +9,21 @@
 -- Level: 30
 -- Casting Time: 2.5 seconds
 -- Recast Time: 6 seconds
---
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 120
     local divisor = 1
     local constant = 60
@@ -57,3 +58,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

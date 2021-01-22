@@ -5,8 +5,9 @@
 require("scripts/globals/status")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local allies = mob:getInstance():getAllies()
     for i, v in pairs(allies) do
         if (v:isAlive()) then
@@ -22,10 +23,12 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

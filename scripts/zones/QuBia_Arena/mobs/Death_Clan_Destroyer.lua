@@ -4,12 +4,14 @@
 -----------------------------------
 local ID = require("scripts/zones/QuBia_Arena/IDs")
 require("scripts/globals/status")
+-----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.HP_STANDBACK, 60)
 end
 
-function phaseChangeReady(battlefield)
+local function phaseChangeReady(battlefield)
     local inst = battlefield:getArea()
     local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
     for i = instOffset + 3, instOffset + 13 do
@@ -20,7 +22,7 @@ function phaseChangeReady(battlefield)
     return true
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local inst = mob:getBattlefield():getArea()
     local instOffset = ID.mob.HEIR_TO_THE_LIGHT_OFFSET + (14 * (inst-1))
     mob:setMP(9999)
@@ -43,10 +45,12 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local battlefield = player:getBattlefield()
     if battlefield and phaseChangeReady(battlefield) then
         player:release() -- prevents event collision if player kills multiple remaining mobs with an AOE move/spell
         player:startEvent(32004, 0, 0, 4)
     end
 end
+
+return entity

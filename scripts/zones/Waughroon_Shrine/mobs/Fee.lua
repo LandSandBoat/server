@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.MULTI_HIT, 6)
     mob:setMod(tpz.mod.BINDRES, 20)
     mob:setMod(tpz.mod.BLINDRES, 20)
@@ -16,7 +17,7 @@ function onMobInitialize(mob)
     mob:setMod(tpz.mod.GRAVITYRES, 20)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("tentacles", 6)
     mob:SetMobSkillAttack(0)
 end
@@ -26,7 +27,7 @@ end
 -- When all tentacles are removed, its normal melee attack is replaced by a special Ink Jet attack that
 -- ignores shadows and has knockback.
 
-function removeTentacle(mob, tentacles)
+local function removeTentacle(mob, tentacles)
     if tentacles > 0 then
         mob:setMobMod(tpz.mobMod.MULTI_HIT, tentacles)
         mob:messageText(mob, ID.text.ONE_TENTACLE_WOUNDED, false)
@@ -43,7 +44,7 @@ function removeTentacle(mob, tentacles)
     mob:addMod(tpz.mod.GRAVITYRES, 10)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local tentacles = mob:getLocalVar("tentacles")
 
     if tentacles > 0 then
@@ -58,5 +59,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

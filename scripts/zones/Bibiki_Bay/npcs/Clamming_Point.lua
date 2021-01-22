@@ -5,8 +5,7 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
--- Local Variables
------------------------------------
+local entity = {}
 
 -- clammingItems = item id, weight, drop rate, improved drop rate
 local clammingItems = {
@@ -42,10 +41,6 @@ local clammingItems = {
     5122,  3, 1.000, 1.000  -- Bibiki Slug
 }
 
------------------------------------
--- Local Functions
------------------------------------
-
 local function giveImprovedResults(player)
 
     if (player:getMod(tpz.mod.CLAMMING_IMPROVED_RESULTS) > 0) then
@@ -64,10 +59,10 @@ local function giveReducedIncidents(player)
     return 0.1
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(tpz.ki.CLAMMING_KIT)) then
         player:setLocalVar("ClammingPointID", npc:getID())
 
@@ -94,7 +89,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (csid == 20) then
         if (player:getCharVar("ClammingKitSize") == 200 and math.random() <= giveReducedIncidents(player)) then
@@ -121,7 +116,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 20) then
         if (player:getLocalVar("SomethingJumpedInBucket") > 0) then
@@ -157,3 +152,5 @@ function onEventFinish(player, csid, option)
         player:setLocalVar("ClammingPointID", 0)
     end
 end
+
+return entity

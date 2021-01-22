@@ -3,8 +3,10 @@
 --  Mob: Jidra
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID = mob:getID()
         if mobID == ID.mob.APOLLYON_SW_MOB[2] then
@@ -29,3 +31,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4697
 -- Scroll of Barblindra
 -- Teaches the white magic Barblindra
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(89)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(89)
 end
+
+return item_object

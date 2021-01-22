@@ -1,19 +1,20 @@
------------------------------------------
+-----------------------------------
 -- Spell: Invisible
 -- Lessens chance of being detected by sight.
 -- Duration is random number between 30 seconds and 5 minutes.
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/settings")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     if not target:hasStatusEffect(tpz.effect.INVISIBLE) then
 
         local duration = calculateDuration(math.random(420, 540), spell:getSkillType(), spell:getSpellGroup(), caster, target)
@@ -30,3 +31,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.INVISIBLE
 end
+
+return spell_object

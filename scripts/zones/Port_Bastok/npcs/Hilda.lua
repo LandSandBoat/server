@@ -11,18 +11,19 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (trade:getGil() == 0 and trade:getItemCount() == 1) then
         if (trade:hasItemQty(4530, 1) and player:getCharVar("CidsSecret_Event") == 1 and player:hasKeyItem(tpz.ki.UNFINISHED_LETTER) == false) then -- Trade Rollanberry
             player:startEvent(133)
-        elseif (trade:hasItemQty(4386, 1) and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_ACCEPTED) then -- Trade King Truffle
+        elseif (trade:hasItemQty(4386, 1) and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_ACCEPTED) then -- Trade King Truffle
             player:startEvent(135)
         end
     end
 
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 5) then
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 5) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_2", 0)
             player:tradeComplete()
@@ -33,24 +34,24 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 1) then
         player:startEvent(255)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 3)) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 3)) then
         player:startEvent(356)
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_USUAL) ~= QUEST_COMPLETED) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL) ~= QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_ACCEPTED) then
             player:startEvent(132)
             if (player:getCharVar("CidsSecret_Event") ~= 1) then
                 player:setCharVar("CidsSecret_Event", 1)
             end
-        elseif (player:getFameLevel(BASTOK) >= 5 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_COMPLETED) then
+        elseif (player:getFameLevel(BASTOK) >= 5 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_COMPLETED) then
             if (player:getCharVar("TheUsual_Event") == 1) then
                 player:startEvent(136)
-            elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_ACCEPTED) then
+            elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_ACCEPTED) then
                 player:startEvent(49) --Hilda thanks the player for all the help; there is no reminder dialogue for this quest
             else
                 player:startEvent(134)
@@ -58,7 +59,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(48) --Standard dialogue if fame isn't high enough to start The Usual and Cid's Secret is not active
         end
-    elseif (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_COMPLETED and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET) == QUEST_COMPLETED) then
         player:startEvent(49) --Hilda thanks the player for all the help
     else
         player:startEvent(48) --Standard dialogue if no quests are active or available
@@ -66,18 +67,18 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 133) then
         player:tradeComplete()
         player:addKeyItem(tpz.ki.UNFINISHED_LETTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.UNFINISHED_LETTER)
     elseif (csid == 134 and option == 0) then
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.THE_USUAL)
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL) == QUEST_AVAILABLE) then
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL)
         end
     elseif (csid == 135) then
         player:tradeComplete()
@@ -93,7 +94,7 @@ function onEventFinish(player, csid, option)
             player:addItem(17170)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17170) -- Speed Bow
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_USUAL)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL)
         end
     elseif (csid == 255) then
         player:setCharVar("MissionStatus", 2)
@@ -102,3 +103,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

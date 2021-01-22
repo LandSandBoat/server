@@ -9,8 +9,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if target == nil or target:getID() == player:getID() or not target:isPC() then
         return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
     else
@@ -18,7 +19,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local baseDuration = 15
     local bonusTime    = utils.clamp(math.floor((player:getStat(tpz.mod.VIT) + player:getStat(tpz.mod.MND) - target:getStat(tpz.mod.VIT) * 2) / 4), 0, 15)
     local duration     = baseDuration + bonusTime + player:getMerit(tpz.merit.COVER_EFFECT_LENGTH) + player:getMod(tpz.mod.COVER_DURATION)
@@ -28,3 +29,5 @@ function onUseAbility(player, target, ability)
     ability:setMsg(tpz.msg.basic.COVER_SUCCESS)
 end
 
+
+return ability_object

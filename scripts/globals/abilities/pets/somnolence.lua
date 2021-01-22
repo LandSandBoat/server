@@ -1,18 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Somnolence
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
 
----------------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local dmg = 10 + pet:getMainLvl() * 2
     local resist = applyPlayerResistance(pet, -1, target, 0, tpz.skill.ELEMENTAL_MAGIC, tpz.magic.ele.DARK)
     local duration = 120
@@ -33,3 +34,5 @@ function onPetAbility(target, pet, skill)
 
     return dmg
 end
+
+return ability_object

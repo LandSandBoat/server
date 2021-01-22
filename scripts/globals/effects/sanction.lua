@@ -1,12 +1,11 @@
 -----------------------------------
---
 -- tpz.effect.SANCTION
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     -- target:addLatent(tpz.latent.SANCTION_EXP, ?, tpz.mod.EXP_BONUS, ?)
     -- Possibly handle exp bonus in core instead
 
@@ -20,10 +19,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     -- target:delLatent(tpz.latent.SANCTION_EXP, ?, tpz.mod.EXP_BONUS, ?)
 
     local power = effect:getPower()
@@ -35,3 +34,5 @@ function onEffectLose(target, effect)
         target:delMod(tpz.mod.FOOD_DURATION, 100)
     end
 end
+
+return effect_object

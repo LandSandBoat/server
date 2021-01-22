@@ -10,10 +10,11 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 3 and
         npcUtil.tradeHas(trade, 1127)
     then
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
         npcUtil.giveKeyItem(player, tpz.ki.SOMBER_STONE)
         player:confirmTrade()
 
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST) ~= QUEST_AVAILABLE then
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST) ~= QUEST_AVAILABLE then
         if npcUtil.tradeHas(trade, {{4366, 5}}) then -- La Theine Cabbage x5
             player:startEvent(62)
         elseif npcUtil.tradeHas(trade, {{629, 3}}) then -- Millioncorn x3
@@ -32,27 +33,27 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
         player:startEvent(60, 4366, 629, 919) -- Start quest "Only the Best"
     else
         player:startEvent(61, 4366, 629, 919) -- During & after completed quest "Only the Best"
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 60 and option == 10 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST)
     elseif csid == 62 then
         player:addGil(100)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100)
         player:addFame(BASTOK, 10)
         player:addFame(SANDORIA, 10)
         player:addFame(JEUNO, 10)
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST)
+        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST)
         player:confirmTrade()
     elseif (csid == 63) then
         player:addGil(120)
@@ -60,7 +61,7 @@ function onEventFinish(player, csid, option)
         player:addFame(BASTOK, 20)
         player:addFame(SANDORIA, 20)
         player:addFame(JEUNO, 20)
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST)
+        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST)
         player:confirmTrade()
     elseif (csid == 64) then
         player:addGil(600)
@@ -68,7 +69,9 @@ function onEventFinish(player, csid, option)
         player:addFame(BASTOK, 30)
         player:addFame(SANDORIA, 30)
         player:addFame(JEUNO, 30)
-        player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.ONLY_THE_BEST)
+        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST)
         player:confirmTrade()
     end
 end
+
+return entity

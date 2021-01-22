@@ -1,14 +1,15 @@
----------------------------------------------------
+-----------------------------------
 -- Grim Halo
 -- Deals damage to a all targets. Additional effect: Knockback
 -- Only used by Fomors that wield a two-handed weapon (principally WAR, BLM, DRK, SAM, DRG, and SMN fomors).
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local job = mob:getMainJob()
     if (job == tpz.job.WAR or job == tpz.job.BLM or job == tpz.job.DRK or job == tpz.job.SAM or job == tpz.job.DRG or job == tpz.job.SMN) then
         return 0
@@ -16,7 +17,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.5
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

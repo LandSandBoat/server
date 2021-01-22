@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 6467
 -- Item: bowl_of_miso_soup_+1
 -- Food Effect: 60Min, All Races
------------------------------------------
+-----------------------------------
 -- HP +8% (cap 55)
 -- DEX +5
 -- AGI +5
@@ -10,12 +10,13 @@
 -- Attack +11% (cap 45)
 -- Ranged Accuracy +11% (cap 45)
 -- Ranged Attack +11% (cap 45)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -23,11 +24,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 3600, 6467)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.FOOD_HPP, 8)
     target:addMod(tpz.mod.FOOD_HP_CAP, 55)
     target:addMod(tpz.mod.DEX, 5)
@@ -42,7 +43,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.FOOD_RATT_CAP, 45)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.FOOD_HPP, 8)
     target:delMod(tpz.mod.FOOD_HP_CAP, 55)
     target:delMod(tpz.mod.DEX, 5)
@@ -56,3 +57,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.FOOD_RATTP, 11)
     target:delMod(tpz.mod.FOOD_RATT_CAP, 45)
 end
+
+return item_object

@@ -11,8 +11,9 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getID() == target:getID()) then
         return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
     elseif (player:getTP() < 1000) then
@@ -22,7 +23,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local pTP = (player:getTP() - 1000) * (1 + ((player:getMerit(tpz.merit.SHIKIKOYO) - 12) / 100))
     pTP = utils.clamp(pTP, 0, 3000 - target:getTP())
 
@@ -31,3 +32,5 @@ function onUseAbility(player, target, ability)
 
     return pTP
 end
+
+return ability_object

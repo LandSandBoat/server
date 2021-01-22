@@ -10,11 +10,12 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ecoStatus = player:getCharVar("EcoStatus")
 
     if ecoStatus == 0 and player:getFameLevel(BASTOK) >= 1 and player:getCharVar("EcoReset") ~= getConquestTally() then
@@ -30,13 +31,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 278 and option == 1 then
-        if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.ECO_WARRIOR) == QUEST_AVAILABLE then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.ECO_WARRIOR)
+        if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ECO_WARRIOR) == QUEST_AVAILABLE then
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ECO_WARRIOR)
         end
         player:setCharVar("EcoStatus", 101) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
     elseif csid == 282 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.ECO_WARRIOR, {
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("EcoReset", getConquestTally())
     end
 end
+
+return entity

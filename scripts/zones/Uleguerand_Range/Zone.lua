@@ -9,8 +9,9 @@ require("scripts/globals/missions")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.JORMUNGAND)
     GetMobByID(ID.mob.JORMUNGAND):setRespawnTime(math.random(86400, 259200))
 
@@ -21,11 +22,11 @@ function onInitialize(zone)
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):addPeriodicTrigger(0, 3, 0)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(363.025, 16, -60, 12)
@@ -36,19 +37,19 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 17) then
         player:setCharVar("COP_louverance_story", 2)
     end
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local waterfall = GetNPCByID(ID.npc.WATERFALL)
     if (weather == tpz.weather.SNOW or weather == tpz.weather.BLIZZARDS) then
         if (waterfall:getAnimation() ~= tpz.anim.CLOSE_DOOR) then
@@ -60,3 +61,5 @@ function onZoneWeatherChange(weather)
         end
     end
 end
+
+return zone_object

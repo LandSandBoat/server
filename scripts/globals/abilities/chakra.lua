@@ -7,6 +7,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
 local ChakraStatusEffects =
 {
@@ -17,11 +18,11 @@ local ChakraStatusEffects =
     PLAGUE       = 4
 }
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local chakraRemoval = player:getMod(tpz.mod.CHAKRA_REMOVAL)
     for k, v in pairs(ChakraStatusEffects) do
         if bit.band(chakraRemoval, v) == v then
@@ -42,3 +43,5 @@ function onUseAbility(player, target, ability)
 
     return recover
 end
+
+return ability_object

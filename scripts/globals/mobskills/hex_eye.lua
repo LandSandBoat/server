@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Hex Eye
 --
 -- Description: Paralyzes with a gaze.
@@ -6,18 +6,19 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: Line of sight
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local message = tpz.msg.basic.SKILL_MISS
     local typeEffect = tpz.effect.PARALYSIS
 
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
     return typeEffect
 
 end
+
+return mobskill_object

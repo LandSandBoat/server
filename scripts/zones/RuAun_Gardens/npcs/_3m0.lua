@@ -3,11 +3,12 @@
 --  NPC: _3m0
 -- !pos 0.1 -45 -113 130
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local DoorID = npc:getID()
 
@@ -16,8 +17,10 @@ function onTrigger(player, npc)
     GetNPCByID(DoorID+2):openDoor(7)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

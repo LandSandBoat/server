@@ -1,16 +1,17 @@
------------------------------------------
+-----------------------------------
 -- ID: 27556
 -- Item: echad ring
 -- Experience point bonus
------------------------------------------
+-----------------------------------
 -- Bonus: +150%
 -- Duration: 720 min
 -- Max bonus: 30000 exp
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if (target:hasStatusEffect(tpz.effect.DEDICATION) == true) then
         result = 56
@@ -18,6 +19,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
    target:addStatusEffect(tpz.effect.DEDICATION, 150, 0, 43200, 0, 30000)
 end
+
+return item_object

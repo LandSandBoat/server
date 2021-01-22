@@ -11,25 +11,26 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local TrialByLightning = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+    local TrialByLightning = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     local WhisperOfStorms = player:hasKeyItem(tpz.ki.WHISPER_OF_STORMS)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local CarbuncleDebacle = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Carbunlce Debacle
     if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 2) then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 3 and player:hasItem(1172) == false) then
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
-    ---------------------------------------------------------------------
+    -----------------------------------
     -- Trial by Lightning
     elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByLightning_date"))) then
         player:startEvent(10016, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
@@ -53,16 +54,16 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10016 and option == 1) then
-        if (player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
-            player:delQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
+            player:delQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         player:setCharVar("TrialByLightning_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_LIGHTNING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_LIGHTNING)
@@ -94,7 +95,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar("TrialByLightning_date", os.date("%j")) -- %M for next minute, %j for next day
             player:addFame(MHAURA, 30)
-            player:completeQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif (csid == 10022 or csid == 10023) then
         if (player:getFreeSlotsCount() ~= 0) then
@@ -107,3 +108,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -31,10 +31,6 @@ class CLuaItem
     CItem* m_PLuaItem;
 
 public:
-    static const char                  className[];
-    static Lunar<CLuaItem>::Register_t methods[];
-
-    CLuaItem(lua_State*);
     CLuaItem(CItem*);
 
     CItem* GetItem() const
@@ -42,43 +38,45 @@ public:
         return m_PLuaItem;
     }
 
-    int32 getID(lua_State*);    // get the item's id
-    int32 getSubID(lua_State*); // get the item's subid
+    uint16 getID();    // get the item's id
+    uint16 getSubID(); // get the item's subid
 
-    int32 getFlag(lua_State*);  // get the item flag
-    int32 getAHCat(lua_State*); // get the ah category
+    uint16 getFlag();  // get the item flag
+    uint8  getAHCat(); // get the ah category
 
-    int32 getQuantity(lua_State*); // get the quantity of item
+    uint32 getQuantity(); // get the quantity of item
 
-    int32 getLocationID(lua_State*); // get the location id (container id)
-    int32 getSlotID(lua_State*);     // get the slot id
-    int32 getTrialNumber(lua_State*);
-    int32 getMatchingTrials(lua_State* L);  // returns a table of trial #'s which match this item precisely
-    int32 getWornItem(lua_State*);          // check if the item has been used
-    int32 getBasePrice(lua_State*);         // get the base sell price
+    uint8  getLocationID(); // get the location id (container id)
+    uint8  getSlotID();     // get the slot id
+    uint16 getTrialNumber();
+    auto   getMatchingTrials() -> sol::table; // returns a table of trial #'s which match this item precisely
+    uint8  getWornItem();  // check if the item has been used
+    uint32 getBasePrice(); // get the base sell price
 
-    int32 isType(lua_State*);    // check the item type
-    int32 isSubType(lua_State*); // check the item's sub type
+    bool isType(uint8 type);       // check the item type
+    bool isSubType(uint8 subtype); // check the item's sub type
 
-    int32 getName(lua_State*);   // get the item's name
-    int32 getILvl(lua_State*);   // get the item's ilvl
-    int32 getReqLvl(lua_State*); // get the item's level
+    auto   getName() -> const char*; // get the item's name
+    uint16 getILvl();                // get the item's ilvl
+    uint16 getReqLvl();              // get the item's level
 
-    int32 getMod(lua_State*); // get the power of a mod
-    int32 addMod(lua_State*); // add mod to item (or add to a mod already applied on item)
-    int32 delMod(lua_State*); // remove power from mod
+    int16 getMod(uint16 modID);              // get the power of a mod
+    void  addMod(uint16 modID, int16 power); // add mod to item (or add to a mod already applied on item)
+    void  delMod(uint16 modID, int16 power); // remove power from mod
 
-    int32 getAugment(lua_State*); // get the augment id and power in slot
+    auto getAugment(uint8 slot) -> std::tuple<uint16, uint8>; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    int32 getSkillType(lua_State*);         // get skill type
-    int32 getWeaponskillPoints(lua_State*); // get current ws points
+    uint8  getSkillType(); // get skill type
+    uint16 getWeaponskillPoints();   // get current ws points
 
-    int32 isTwoHanded(lua_State*);  // is a two handed weapon
-    int32 isHandToHand(lua_State*); // is a hand to hand weapon (or unarmed H2H)
-    int32 isShield(lua_State*);     // is a Shield
+    bool isTwoHanded();  // is a two handed weapon
+    bool isHandToHand(); // is a hand to hand weapon (or unarmed H2H)
+    bool isShield();     // is a Shield
 
-    int32 getSignature(lua_State*);
+    auto getSignature() -> std::string;
+
+    static void Register();
 };
 
 #endif

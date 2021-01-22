@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Magic Fruit
 -- Restores HP for the target party member
 -- Spell cost: 72 MP
@@ -9,20 +9,21 @@
 -- Level: 58
 -- Casting Time: 3.5 seconds
 -- Recast Time: 6 seconds
---
+-----------------------------------
 -- Combos: Resist Sleep
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local minCure = 250
     local divisor = 0.6666
     local constant = 130
@@ -56,3 +57,5 @@ function onSpellCast(caster, target, spell)
 
     return final
 end
+
+return spell_object

@@ -7,18 +7,21 @@
 local func = require("scripts/zones/Crawlers_Nest/globals")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     func.moldQmOnTrigger(player, tpz.ki.EXORAY_MOLD_CRUMB2)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

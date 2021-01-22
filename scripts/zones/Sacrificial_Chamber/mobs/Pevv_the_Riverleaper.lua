@@ -6,8 +6,9 @@
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- spawn pet wyvern and assign it a target
     local mobId = mob:getID()
     local pet = GetMobByID(mobId + 2)
@@ -18,6 +19,8 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     DespawnMob(mob:getID() + 2)
 end
+
+return entity

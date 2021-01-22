@@ -4,9 +4,10 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
-----------------------------------------
+-----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local bf = mob:getBattlefield()
     local mobOffset = (bf:getArea() - 1) * 7
     if not (bf:getLocalVar('flans_spawned') == 1) then
@@ -30,8 +31,10 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

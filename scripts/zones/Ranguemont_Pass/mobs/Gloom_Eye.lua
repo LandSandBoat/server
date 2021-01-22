@@ -6,8 +6,9 @@ require("scripts/globals/hunts")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[
     https://ffxiclopedia.fandom.com/wiki/Gloom_Eye
 
@@ -24,6 +25,8 @@ function onMobFight(mob, target)
     mob:setMod(tpz.mod.STORETP, power)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 346)
 end
+
+return entity

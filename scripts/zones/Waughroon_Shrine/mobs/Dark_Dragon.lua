@@ -3,14 +3,17 @@
 --  Mob: Dark Dragon
 -- Mission 2-3 BCNM Fight
 -----------------------------------
+local entity = {}
 
 require("scripts/globals/titles")
 require("scripts/globals/status")
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.DARK_DRAGON_SLAYER)
 end
+
+return entity

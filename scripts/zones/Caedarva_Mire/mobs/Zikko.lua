@@ -6,7 +6,10 @@
 require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/families/imp")}
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 469)
 end
+
+return entity

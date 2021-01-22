@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local questItem = player:getCharVar("ForgeYourDestiny_Event")
     local checkItem = testflag(tonumber(questItem), 0x01)
@@ -22,19 +23,15 @@ function onTrade(player, npc, trade)
 
 end
 
------------------------------------
--- Event Check
------------------------------------
-
 function testflag(set, flag)
     return (set % (2*flag) >= flag)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local swordTimer = player:getCharVar("ForgeYourDestiny_timer")
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and swordTimer == 0) then
         if (player:hasItem(1152)) then
             player:startEvent(48, 1152) -- Bomb Steel
         elseif (player:hasItem(1151) == false) then
@@ -57,10 +54,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local questItem = player:getCharVar("ForgeYourDestiny_Event")
 
@@ -83,3 +80,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

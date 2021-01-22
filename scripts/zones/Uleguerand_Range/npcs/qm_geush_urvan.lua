@@ -5,18 +5,21 @@
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1824) and npcUtil.popFromQM(player, npc, ID.mob.GEUSH_URVAN) then -- Haunted Muleta
         player:confirmTrade()
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

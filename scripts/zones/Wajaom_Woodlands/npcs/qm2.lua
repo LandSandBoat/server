@@ -6,20 +6,23 @@
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2577) and npcUtil.popFromQM(player, npc, ID.mob.IRIZ_IMA) then
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.PAMAMA_PEELS)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

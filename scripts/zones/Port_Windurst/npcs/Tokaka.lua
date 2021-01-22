@@ -6,8 +6,9 @@
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 TokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
 NeedToZone     = player:needToZone()
@@ -23,10 +24,10 @@ NeedToZone     = player:needToZone()
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-SomethingFishy = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
+SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
         player:setCharVar("BlastFromThePast_Prog", 1)
     elseif (SomethingFishy >= QUEST_ACCEPTED) then
@@ -37,7 +38,7 @@ SomethingFishy = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SOMETHING
         end
     elseif (SomethingFishy == QUEST_AVAILABLE) then
         player:startEvent(208, 0, 4360)
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
         player:setCharVar("BlastFromThePast_Prog", 1)
     else
@@ -46,22 +47,22 @@ SomethingFishy = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SOMETHING
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 208) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
         player:setCharVar("TokakaSpokenTo", 1)
     elseif (csid == 210) then
-        SomethingFishy = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+        SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
 
         if (SomethingFishy == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
             player:addFame(WINDURST, 60)
         else
             player:addFame(WINDURST, 10)
@@ -75,3 +76,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("TokakaSpokenTo", 1)
     end
 end
+
+return entity

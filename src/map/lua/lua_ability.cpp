@@ -28,154 +28,92 @@
  *																		*
  ************************************************************************/
 
-CLuaAbility::CLuaAbility(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaAbility = (CAbility*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaAbility = nullptr;
-    }
-}
-
-/************************************************************************
- *																		*
- *  Конструктор															*
- *																		*
- ************************************************************************/
-
 CLuaAbility::CLuaAbility(CAbility* PAbility)
+: m_PLuaAbility(PAbility)
 {
-    m_PLuaAbility = PAbility;
+    if (PAbility == nullptr)
+    {
+        ShowError("CLuaAbility created with nullptr instead of valid CAbility*!\n");
+    }
 }
 
-inline int32 CLuaAbility::getID(lua_State* L)
+uint16 CLuaAbility::getID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getID());
-    return 1;
+    return m_PLuaAbility->getID();
 }
 
-int32 CLuaAbility::getMsg(lua_State* L)
+int16 CLuaAbility::getMsg()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getMessage());
-    return 1;
+    return m_PLuaAbility->getMessage();
 }
 
-inline int32 CLuaAbility::getRecast(lua_State* L)
+uint16 CLuaAbility::getRecast()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getRecastTime());
-    return 1;
+    return m_PLuaAbility->getRecastTime();
 }
 
-inline int32 CLuaAbility::getRange(lua_State* L)
+uint16 CLuaAbility::getRange()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, (lua_Integer)m_PLuaAbility->getRange());
-    return 1;
+    return static_cast<uint16>(m_PLuaAbility->getRange());
 }
 
-inline int32 CLuaAbility::getName(lua_State* L)
+const char* CLuaAbility::getName()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushstring(L, (const char*)m_PLuaAbility->getName());
-    return 1;
+    // TODO: C-Style cast is bad
+    return (const char*)m_PLuaAbility->getName();
 }
 
-int32 CLuaAbility::getAnimation(lua_State* L)
+uint16 CLuaAbility::getAnimation()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-
-    lua_pushinteger(L, m_PLuaAbility->getAnimationID());
-    return 1;
+    return m_PLuaAbility->getAnimationID();
 }
 
-inline int32 CLuaAbility::setMsg(lua_State* L)
+void CLuaAbility::setMsg(uint16 messageID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setMessage((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setMessage(messageID);
 }
 
-inline int32 CLuaAbility::setAnimation(lua_State* L)
+void CLuaAbility::setAnimation(uint16 animationID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setAnimationID((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setAnimationID(animationID);
 }
 
-inline int32 CLuaAbility::setRecast(lua_State* L)
+void CLuaAbility::setRecast(uint16 recastTime)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setRecastTime((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setRecastTime(recastTime);
 }
 
-inline int32 CLuaAbility::setCE(lua_State* L)
+void CLuaAbility::setCE(uint16 ce)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setCE((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setCE(ce);
 }
 
-inline int32 CLuaAbility::setVE(lua_State* L)
+void CLuaAbility::setVE(uint16 ve)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setVE((uint16)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setVE(ve);
 }
 
-inline int32 CLuaAbility::setRange(lua_State* L)
+void CLuaAbility::setRange(float range)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaAbility == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    m_PLuaAbility->setRange((float)lua_tointeger(L, -1));
-    return 0;
+    m_PLuaAbility->setRange(range);
 }
 
-/************************************************************************
- *																		*
- *  Инициализация методов в lua											*
- *																		*
- ************************************************************************/
-// clang-format off
-const char CLuaAbility::className[] = "CAbility";
+//==========================================================//
 
-Lunar<CLuaAbility>::Register_t CLuaAbility::methods[] =
+void CLuaAbility::Register()
 {
-    LUNAR_DECLARE_METHOD(CLuaAbility,getID),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getRecast),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getRange),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getName),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getAnimation),
-    LUNAR_DECLARE_METHOD(CLuaAbility,getMsg),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setMsg),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setAnimation),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setRecast),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setCE),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setVE),
-    LUNAR_DECLARE_METHOD(CLuaAbility,setRange),
-    {nullptr,nullptr}
-};
-// clang-format on
+    SOL_USERTYPE("CAbility", CLuaAbility);
+    SOL_REGISTER("getID", CLuaAbility::getID);
+    SOL_REGISTER("getMsg", CLuaAbility::getMsg);
+    SOL_REGISTER("getRecast", CLuaAbility::getRecast);
+    SOL_REGISTER("getRange", CLuaAbility::getRange);
+    SOL_REGISTER("getAnimation", CLuaAbility::getAnimation);
+    SOL_REGISTER("setMsg", CLuaAbility::setMsg);
+    SOL_REGISTER("setAnimation", CLuaAbility::setAnimation);
+    SOL_REGISTER("setRecast", CLuaAbility::setRecast);
+    SOL_REGISTER("setCE", CLuaAbility::setCE);
+    SOL_REGISTER("setVE", CLuaAbility::setVE);
+    SOL_REGISTER("setRange", CLuaAbility::setRange);
+}
+
+//==========================================================//

@@ -5,11 +5,13 @@
 require("scripts/globals/status")
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local spawn = math.random(3) == 1
         local battlefield = mob:getBattlefield()
@@ -32,3 +34,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

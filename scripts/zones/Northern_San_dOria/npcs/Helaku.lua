@@ -9,11 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -53,24 +54,26 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 536) then
         player:setCharVar("MissionStatus", 3)
     elseif (csid == 543) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
         player:setCharVar("MissionStatus", 6)
     elseif (csid == 537 and option == 0) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA2)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_SANDORIA2)
         player:setCharVar("MissionStatus", 8)
     elseif (csid == 545) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
         player:setCharVar("MissionStatus", 11)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
     end
 end
+
+return entity

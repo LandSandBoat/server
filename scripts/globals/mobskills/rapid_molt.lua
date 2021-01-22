@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Rapid Molt
 -- Family: Hpemde
 -- Description: Erases all negative effects on the mob, and adds a Regen tpz.effect.
@@ -6,13 +6,14 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes: Hpemde will generally not attempt to use this ability if no erasable effects exist on them.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
 
     local dispel = target:eraseStatusEffect()
 
@@ -23,7 +24,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     mob:eraseAllStatusEffect()
     local typeEffect = tpz.effect.REGEN
@@ -31,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
     skill:setMsg(MobBuffMove(mob, typeEffect, 10, 3, 180))
     return typeEffect
 end
+
+return mobskill_object

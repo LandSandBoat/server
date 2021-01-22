@@ -1,18 +1,19 @@
 -----------------------------------
---
 -- tpz.effect.RERAISE
---
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     --power level is the raise number (1, 2, 3)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     if (target:getHP() <= 0) then
         target:sendReraise(effect:getPower())
     end
 end
+
+return effect_object

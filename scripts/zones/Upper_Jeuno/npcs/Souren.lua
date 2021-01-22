@@ -7,8 +7,9 @@
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC Part1
         if
@@ -37,22 +38,24 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_ACCEPTED) then
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_ACCEPTED) then
         player:startEvent(120)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER) == QUEST_COMPLETED) then
         player:startEvent(181)
     else
         player:startEvent(88)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 182) then
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 16)
     end
 end
+
+return entity

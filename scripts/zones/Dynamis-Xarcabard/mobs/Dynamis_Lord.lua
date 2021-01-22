@@ -9,8 +9,9 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         between = 60,
         specials =
@@ -23,7 +24,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local battleTime = mob:getBattleTime()
 
     for i = 0, 1 do
@@ -42,7 +43,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
     player:addTitle(tpz.title.LIFTER_OF_SHADOWS)
     if isKiller then
@@ -50,3 +51,5 @@ function onMobDeath(mob, player, isKiller)
         DespawnMob(ID.mob.YING + 1)
     end
 end
+
+return entity

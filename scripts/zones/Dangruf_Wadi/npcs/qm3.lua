@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Dangruf_Wadi/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
@@ -43,14 +44,14 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.CRYSTALLINE_DUST)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 139 or csid == 136 or csid == 142 or csid == 145) and option == 2 then -- player gives up
         player:confirmTrade()
@@ -67,3 +68,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

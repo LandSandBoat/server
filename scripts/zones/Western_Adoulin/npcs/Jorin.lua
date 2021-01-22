@@ -8,12 +8,13 @@
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local TOMATH = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+entity.onTrigger = function(player, npc)
+    local TOMATH = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
     if (TOMATH == QUEST_ACCEPTED) then
         if (player:hasKeyItem(tpz.ki.EXTRAVAGANT_HARPOON)) then
             -- Finishing Quest: 'The Old Man and the Harpoon'
@@ -31,18 +32,18 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2540) then
         -- Starting Quest: 'The Old Man and the Harpoon'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
         player:addKeyItem(tpz.ki.BROKEN_HARPOON)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BROKEN_HARPOON)
     elseif (csid == 2542) then
         -- Finishing Quest: 'The Old Man and the Harpoon'
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
         player:addExp(500 * EXP_RATE)
         player:addCurrency('bayld', 300 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * BAYLD_RATE)
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         player:addFame(ADOULIN)
     end
 end
+
+return entity

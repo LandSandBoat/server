@@ -82,8 +82,8 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     actionTarget.speceffect = SPECEFFECT::NONE;
     actionTarget.animation  = 0;
     actionTarget.param      = static_cast<uint16>(m_PSpell->getID());
-    actionTarget.messageID  = 327;                                                                   // starts casting
-    m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", m_PEntity, m_PSpell.get(), &action); // TODO: weaponskill lua object
+    actionTarget.messageID  = 327;                                                                                              // starts casting
+    m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()), &action); // TODO: weaponskill lua object
 
     m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 }
@@ -121,8 +121,8 @@ bool CMagicState::Update(time_point tick)
         else
         {
             m_PEntity->OnCastFinished(*this, action);
-            m_PEntity->PAI->EventHandler.triggerListener("MAGIC_USE", m_PEntity, PTarget, m_PSpell.get(), &action);
-            PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, m_PEntity, m_PSpell.get(), &action);
+            m_PEntity->PAI->EventHandler.triggerListener("MAGIC_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), CLuaSpell(m_PSpell.get()), &action);
+            PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()), &action);
         }
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
@@ -131,7 +131,7 @@ bool CMagicState::Update(time_point tick)
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + std::chrono::milliseconds(m_PSpell->getAnimationTime()))
     {
-        m_PEntity->PAI->EventHandler.triggerListener("MAGIC_STATE_EXIT", m_PEntity, m_PSpell.get());
+        m_PEntity->PAI->EventHandler.triggerListener("MAGIC_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()));
         return true;
     }
     return false;

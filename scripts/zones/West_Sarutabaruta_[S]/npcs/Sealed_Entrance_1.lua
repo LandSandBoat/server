@@ -8,9 +8,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    local snakeOnThePlains = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+entity.onTrigger = function(player, npc)
+    local snakeOnThePlains = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
     local maskBit1 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 0)
     local maskBit2 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 1)
     local maskBit3 = utils.mask.getBit(player:getCharVar("SEALED_DOORS"), 2)
@@ -35,8 +36,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

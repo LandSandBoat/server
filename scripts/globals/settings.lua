@@ -1,6 +1,6 @@
------------------------------------------------
+-----------------------------------
 -------------   GLOBAL SETTINGS   -------------
------------------------------------------------
+-----------------------------------
 
 -- This is to allow server operators to further customize their servers.  As more features are added to pXI, the list will surely expand.
 -- Anything scripted can be customized with proper script editing.
@@ -86,8 +86,8 @@ WEAPON_SKILL_POINTS = 1.000 -- Multiplies points earned during weapon unlocking.
 USE_ADOULIN_WEAPON_SKILL_CHANGES = true -- true/false. Change to toggle new Adoulin weapon skill damage calculations
 
 -- TRUSTS
-ENABLE_TRUST_CASTING = 0
-ENABLE_TRUST_QUESTS  = 0
+ENABLE_TRUST_CASTING = 1
+ENABLE_TRUST_QUESTS  = 1
 
 HARVESTING_BREAK_CHANCE = 33 -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
 EXCAVATION_BREAK_CHANCE = 33 -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.

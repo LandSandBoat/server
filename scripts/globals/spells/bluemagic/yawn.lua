@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Yawn
 -- Puts all enemies within range to sleep
 -- Spell cost: 55 MP
@@ -12,18 +12,19 @@
 -- Duration: 90 seconds
 -- Magic Bursts on: Transfixion, Fusion, Light
 -- Combos: Resist Sleep
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.SLEEP_II
     local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
     local params = {}
@@ -51,3 +52,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

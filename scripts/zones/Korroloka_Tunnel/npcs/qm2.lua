@@ -9,12 +9,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
         if player:getCharVar("AyameAndKaede_Event") == 2 and not player:hasKeyItem(tpz.ki.STRANGELY_SHAPED_CORAL) then
             if
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_I):isSpawned() and
@@ -49,8 +50,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

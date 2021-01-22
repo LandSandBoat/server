@@ -3,17 +3,21 @@
 --  NPC: _0r2 (Wooden Gate)
 -- !pos -140.000 -25.500 49.000 27
 -----------------------------------
-function onTrade(player, npc, trade)
+local entity = {}
+
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (npc:getAnimation() == 9) then
         npc:openDoor()
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

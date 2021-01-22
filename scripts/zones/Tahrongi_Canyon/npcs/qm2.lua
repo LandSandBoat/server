@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Distilled water to Spawn Yara Ma Yha Who
     if npcUtil.tradeHas(trade, 4509) and not GetMobByID(ID.mob.YARA_MA_YHA_WHO):isSpawned() then
         if os.time() > npc:getLocalVar("tradeCooldown") then
@@ -33,7 +34,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if os.time() > npc:getLocalVar("tradeCooldown") then
         player:messageSpecial(ID.text.SPROUT_LOOKS_WITHERED)
     else
@@ -41,8 +42,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

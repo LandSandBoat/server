@@ -158,7 +158,7 @@ local function suppliesAvailableBitmask(player, nation)
 
     if mask ~= -1 and mask ~= 4294967295 then
         for i = 0, 18 do
-            if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED)) then
+            if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED)) then
                 mask = mask + 2^(i + 5)
             end
         end
@@ -564,7 +564,7 @@ local expRings =
 
 local function conquestRanking()
     -- computes part of argument 3 for gate guard events. represents the conquest standing of the 3 nations. Verified.
-    return getNationRank(tpz.nation.SANDORIA) + 4 * getNationRank(tpz.nation.BASTOK) + 16 * getNationRank(tpz.nation.WINDURST)
+    return GetNationRank(tpz.nation.SANDORIA) + 4 * GetNationRank(tpz.nation.BASTOK) + 16 * GetNationRank(tpz.nation.WINDURST)
 end
 
 local function getArg1(player, guardNation, guardType)
@@ -863,7 +863,7 @@ tpz.conquest.guard =
 }
 
 tpz.conquest.areAllies = function(nationA, nationB)
-    return isConquestAlliance() and getNationRank(nationA) > 1 and getNationRank(nationB) > 1
+    return IsConquestAlliance() and GetNationRank(nationA) > 1 and GetNationRank(nationB) > 1
 end
 
 tpz.conquest.outpostFee = function(player, region)
@@ -1042,7 +1042,7 @@ tpz.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
 
     if stock ~= nil then
         local pNation = player:getNation()
-        local pRank   = getNationRank(pNation)
+        local pRank   = GetNationRank(pNation)
         local u1 = 2 -- default: player is correct job and level to equip item
         local u2 = 0 -- default: player has enough CP for item
         local u3 = stock.item -- default: the item ID we're purchasing
@@ -1058,7 +1058,7 @@ tpz.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
         end
 
         local rankCheck = true
-        if guardNation ~= tpz.nation.OTHER and guardNation ~= pNation and getNationRank(guardNation) <= pRank then -- buy from other nation, must be higher ranked
+        if guardNation ~= tpz.nation.OTHER and guardNation ~= pNation and GetNationRank(guardNation) <= pRank then -- buy from other nation, must be higher ranked
             rankCheck = false
         elseif guardNation ~= tpz.nation.OTHER and stock.place ~= nil and guardNation ~= pNation then -- buy from other nation, cannot buy items with nation rank requirement
             rankCheck = false
@@ -1083,7 +1083,7 @@ tpz.conquest.overseerOnEventFinish = function(player, csid, option, guardNation,
 
     -- SIGNET
     if option == 1 then
-        local duration = (pRank + getNationRank(pNation) + 3) * 3600
+        local duration = (pRank + GetNationRank(pNation) + 3) * 3600
         player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
         player:addStatusEffect(tpz.effect.SIGNET, 0, 0, duration)
         player:messageSpecial(mOffset + 1) -- "You've received your nation's Signet!"
@@ -1275,7 +1275,7 @@ tpz.conquest.onConquestUpdate = function(zone, updatetype)
     local owner = GetRegionOwner(region)
     local players = zone:getPlayers()
     local messageBase = zones[zone:getID()].text.CONQUEST_BASE
-    local ranking = getConquestBalance()
+    local ranking = GetConquestBalance()
 
     for _, player in pairs(players) do
 
@@ -1331,7 +1331,7 @@ tpz.conquest.onConquestUpdate = function(zone, updatetype)
 
             player:messageText(player, messageBase + offset, 5) -- Global balance of power:
 
-            if isConquestAlliance() then
+            if IsConquestAlliance() then
                 if bit.band(ranking, 0x03) == 0x01 then
                     player:messageText(player, messageBase + 50, 5) -- Bastok and Windurst have formed an alliance.
                 elseif bit.band(ranking, 0x0C) == 0x04 then
@@ -1365,7 +1365,7 @@ tpz.conquest.onConquestUpdate = function(zone, updatetype)
                 player:messageText(player, messageBase + 49 - windurst, 5) -- Regional influence: Windurst
             end
 
-            if isConquestAlliance() then
+            if IsConquestAlliance() then
                 if bit.band(ranking, 0x03) == 0x01 then
                     player:messageText(player, messageBase + 53, 5) -- Bastok and Windurst are currently allies.
                 elseif bit.band(ranking, 0x0C) == 0x04 then

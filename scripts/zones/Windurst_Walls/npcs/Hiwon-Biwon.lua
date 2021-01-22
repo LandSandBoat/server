@@ -9,17 +9,18 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
 
-    local MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
-    local CFA2 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local CFA2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
     -- Curses, Foiled ... Again!?
     if (CFA2 == QUEST_ACCEPTED and player:hasItem(552) == false) then
@@ -37,7 +38,7 @@ function onTrigger(player, npc)
         -- 8 = Umumu
         -- 16 = Mahogany Door
         if (testflag(tonumber(prog), 4) == false) then
-            if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
+            if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
                 if (math.random(1, 2) == 1) then
                     player:startEvent(283) -- Give scoop while sick
                 else
@@ -70,11 +71,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- Making Headlines
     if (csid == 281 or csid == 283 or csid == 284) then
@@ -93,3 +94,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

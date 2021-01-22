@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/allyassist")
 require("scripts/globals/instance")
 -----------------------------------
+local entity = {}
 
 -- Path to Stage 2 Position
 local stage2Position =
@@ -24,7 +25,7 @@ local stage3Position =
     460, 0, -446,
 }
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
         if (skillID == 165) then
             mob:showText(mob, ID.text.CHA_CHING)
@@ -36,7 +37,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat she engages a new target.
     if (mob:getLocalVar("started") == 0) then
         mob:showText(mob, ID.text.ALRRRIGHTY)
@@ -44,7 +45,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (mob:getHPP() <= 50 and mob:getLocalVar("lowHPmsg") == 0) then
         mob:showText(mob, ID.text.OW)
         mob:setLocalVar("lowHPmsg", 1)
@@ -53,7 +54,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDisengaged(mob, target)
+entity.onMobDisengage = function(mob, target)
     local ready = mob:getLocalVar("ready")
 
     if (ready == 1) then
@@ -61,7 +62,7 @@ function onMobDisengaged(mob, target)
     end
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     -- Advance to Stage 2 area
     if (mob:getLocalVar("Stage") == 2) then
         mob:showText(mob, ID.text.OH_ARE_WE_DONE)
@@ -87,13 +88,15 @@ function onMobRoam(mob)
     end
 end
 
-function onCriticalHit(mob)
+entity.onCriticalHit = function(mob)
     mob:showText(mob, ID.text.OW)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Loss if Naja dies. Since player will be nil here, it'll only show once.
     mob:showText(mob, ID.text.ABQUHBAH)
     local instance = mob:getInstance()
     instance:fail()
 end
+
+return entity

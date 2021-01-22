@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Havoc Spiral
 --
 --  Description: Deals damage to players in an area of effect. Additional effect: Sleep
@@ -7,17 +7,18 @@
 --  Range: Unknown
 
 -- Special weaponskill unique to Ark Angel MR. Deals ~100-300 damage.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
    -- TODO: Can skillchain?  Unknown property.
 
@@ -32,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
    MobStatusEffectMove(mob, target, tpz.effect.SLEEP_I, 1, 0, math.random(30, 60))
    return dmg
 end
+
+return mobskill_object

@@ -28,30 +28,13 @@
  *																		*
  ************************************************************************/
 
-CLuaRegion::CLuaRegion(lua_State* L)
-{
-    if (!lua_isnil(L, -1))
-    {
-        m_PLuaRegion = (CRegion*)(lua_touserdata(L, -1));
-        lua_pop(L, 1);
-    }
-    else
-    {
-        m_PLuaRegion = nullptr;
-    }
-}
-
-/************************************************************************
- *																		*
- *  Конструктор															*
- *																		*
- ************************************************************************/
-
 CLuaRegion::CLuaRegion(CRegion* PRegion)
+: m_PLuaRegion(PRegion)
 {
-    TPZ_DEBUG_BREAK_IF(PRegion == nullptr);
-
-    m_PLuaRegion = PRegion;
+    if (PRegion == nullptr)
+    {
+        ShowError("CLuaRegion created with nullptr instead of valid CRegion*!\n");
+    }
 }
 
 /************************************************************************
@@ -60,12 +43,9 @@ CLuaRegion::CLuaRegion(CRegion* PRegion)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::GetRegionID(lua_State* L)
+uint32 CLuaRegion::GetRegionID()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-
-    lua_pushinteger(L, m_PLuaRegion->GetRegionID());
-    return 1;
+    return m_PLuaRegion->GetRegionID();
 }
 
 /************************************************************************
@@ -74,12 +54,9 @@ inline int32 CLuaRegion::GetRegionID(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::GetCount(lua_State* L)
+int16 CLuaRegion::GetCount()
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-
-    lua_pushinteger(L, m_PLuaRegion->GetCount());
-    return 1;
+    return m_PLuaRegion->GetCount();
 }
 
 /************************************************************************
@@ -88,13 +65,9 @@ inline int32 CLuaRegion::GetCount(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::AddCount(lua_State* L)
+int16 CLuaRegion::AddCount(int16 count)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    lua_pushinteger(L, m_PLuaRegion->AddCount((int16)lua_tointeger(L, -1)));
-    return 1;
+    return m_PLuaRegion->AddCount(count);
 }
 
 /************************************************************************
@@ -103,29 +76,19 @@ inline int32 CLuaRegion::AddCount(lua_State* L)
  *                                                                       *
  ************************************************************************/
 
-inline int32 CLuaRegion::DelCount(lua_State* L)
+int16 CLuaRegion::DelCount(int16 count)
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaRegion == nullptr);
-    TPZ_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-
-    lua_pushinteger(L, m_PLuaRegion->DelCount((int16)lua_tointeger(L, -1)));
-    return 1;
+    return m_PLuaRegion->DelCount(count);
 }
 
-/************************************************************************
- *																		*
- *  Инициализация методов в lua											*
- *																		*
- ************************************************************************/
-// clang-format off
-const char CLuaRegion::className[] = "CRegion";
+//======================================================//
 
-Lunar<CLuaRegion>::Register_t CLuaRegion::methods[] =
+void CLuaRegion::Register()
 {
-    LUNAR_DECLARE_METHOD(CLuaRegion,GetRegionID),
-    LUNAR_DECLARE_METHOD(CLuaRegion,GetCount),
-    LUNAR_DECLARE_METHOD(CLuaRegion,AddCount),
-    LUNAR_DECLARE_METHOD(CLuaRegion,DelCount),
-    {nullptr,nullptr}
-};
-// clang-format on
+    SOL_USERTYPE("CRegion", CLuaRegion);
+    SOL_REGISTER("GetRegionID", CLuaRegion::GetRegionID);
+    SOL_REGISTER("AddCount", CLuaRegion::AddCount);
+    SOL_REGISTER("DelCount", CLuaRegion::DelCount);
+}
+
+//======================================================//

@@ -2,11 +2,12 @@
 -- Area: Mine_Shaft_2716
 -- NPC:  Shaft entrance
 -----------------------------------
+local entity = {}
 
 require("scripts/globals/bcnm")
 require("scripts/globals/missions")
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and ( player:getCharVar("COP_Louverance_s_Path") == 7 or player:getCharVar("COP_Louverance_s_Path") == 8 )) then
         if (trade:getItemCount() == 1 and trade:hasItemQty(1684, 1)) then
             player:startEvent(3)
@@ -16,7 +17,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and player:getCharVar("PromathiaStatus")==0) then
         player:startEvent(4)
     else
@@ -24,11 +25,11 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
         player:setCharVar("COP_Louverance_s_Path", 9)
         player:tradeComplete()
@@ -38,3 +39,5 @@ function onEventFinish(player, csid, option)
         EventFinishBCNM(player, csid, option)
     end
 end
+
+return entity

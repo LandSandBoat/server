@@ -10,10 +10,11 @@ require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local flyersForRegine = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-    local theBrugaireConsortium = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+entity.onTrade = function(player, npc, trade)
+    local flyersForRegine = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local theBrugaireConsortium = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
     if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, {{"gil", 10}} )) then
@@ -27,8 +28,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local ffr = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+entity.onTrigger = function(player, npc)
+    local ffr = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     -- FLYERS FOR REGINE
     if ffr == QUEST_AVAILABLE then -- ready to accept quest
@@ -44,14 +45,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
         if npcUtil.giveItem(player, {{532, 12}, {532, 3}}) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then
         npcUtil.completeQuest(
@@ -118,3 +119,5 @@ function onEventFinish(player, csid, option)
         tpz.shop.nation(player, stockB, tpz.nation.SANDORIA)
     end
 end
+
+return entity

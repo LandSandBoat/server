@@ -7,14 +7,15 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local mihgosAmigo = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
+entity.onTrigger = function(player, npc)
+    local mihgosAmigo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
 
-    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_ACCEPTED then
         player:startEvent(507, 0, 17474) -- Grappling hint
     elseif mihgosAmigo == QUEST_ACCEPTED then
         player:startEvent(85, 0, 498) -- Migho's Amigo hint dialog
@@ -25,8 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

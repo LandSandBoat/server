@@ -9,11 +9,12 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-260.136, 2.09, -325.702, 188)
@@ -26,23 +27,23 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("kilk")
     player:entityVisualPacket("izum")
     player:entityVisualPacket("hast")
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if csid == 50 then
         finishMissionTimeline(player, 3, csid, option)
@@ -70,10 +71,12 @@ function onEventFinish(player, csid, option)
             local allies = battlefield:getAllies()
             if #allies == 0 then
                 local ajido = battlefield:insertEntity(14184, true, true)
-                ajido:setSpawn(allyPos[inst].ajidoPos)
+                ajido:setSpawn(unpack(allyPos[inst].ajidoPos))
                 ajido:spawn()
             end
-            player:setPos(allyPos[inst].playerPos)
+            player:setPos(unpack(allyPos[inst].playerPos))
         end
     end
 end
+
+return zone_object

@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Parradamo Stones
     if (trade:hasItemQty(1778, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local MiasmaFilterCD = player:getCharVar("[ENM]MiasmaFilter")
 
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 12) then
         player:addKeyItem(tpz.ki.MIASMA_FILTER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MIASMA_FILTER)
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

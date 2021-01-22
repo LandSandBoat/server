@@ -9,10 +9,11 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    Rivals = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.RIVALS)
+    Rivals = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
 
     if (Rivals == QUEST_ACCEPTED) then
         FreeSlots = player:getFreeSlotsCount()
@@ -32,9 +33,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    Rivals = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.RIVALS)
+    Rivals = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
 
     if (player:getCharVar("theTalekeeperGiftCS") == 1) then
         player:startEvent(171)
@@ -49,15 +50,15 @@ function onTrigger(player, npc)
 
 end
 -- 1  30  93  94  171  1010  176  180  184
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 93) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.RIVALS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
     elseif (csid == 94) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13571)
@@ -66,8 +67,10 @@ function onEventFinish(player, csid, option)
             player:addItem(13571)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13571)
             player:addFame(BASTOK, 30)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.RIVALS)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
         end
     end
 
 end
+
+return entity

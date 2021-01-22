@@ -11,8 +11,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCharVar("theTalekeeperTruthCS") == 3) then
         if (trade:hasItemQty(1101, 1) and trade:getItemCount() == 1) then -- Trade Mottled Quadav Egg
@@ -30,16 +31,16 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local theDoorman = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
-    local theTalekeeperTruth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+    local theDoorman = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+    local theTalekeeperTruth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
     local theTalekeeperTruthCS = player:getCharVar("theTalekeeperTruthCS")
     local Wait1DayForAF3 = player:getCharVar("DeidoggWait1DayForAF3")
     local theTalekeeperGiftCS = player:getCharVar("theTalekeeperGiftCS")
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
         player:startEvent(504)
     elseif (theDoorman == QUEST_COMPLETED and theTalekeeperTruth == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 50) then
         if (theTalekeeperTruthCS == 1) then
@@ -66,13 +67,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 161) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         player:setCharVar("theTalekeeperTruthCS", 3)
     elseif (csid == 162) then
         player:tradeComplete()
@@ -92,14 +93,16 @@ function onEventFinish(player, csid, option)
             player:setCharVar("DeidoggWait1DayForAF3", VanadielDayOfTheYear())
             player:needToZone(true)
             player:addFame(BASTOK, 40)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         end
     elseif (csid == 172) then
         player:tradeComplete()
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
         player:setCharVar("theTalekeeperGiftCS", 3)
     elseif (csid == 504) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 18, true))
     end
 
 end
+
+return entity

@@ -1,21 +1,22 @@
----------------------------------------------
+-----------------------------------
 --  Shield Strike
 --
 --  Description: Attempts to Shield Bash players.  Additional effect: Stun
 --  Type: Physical
 --  1 shadow?
 --  Range: Melee front arc
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
    -- TODO: Knockback
 
@@ -31,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

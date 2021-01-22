@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMonsterMagicPrepare(mob, target)
+entity.onMonsterMagicPrepare = function(mob, target)
     if (mob:hasStatusEffect(tpz.effect.HUNDRED_FISTS, 0) == false) then
         local rnd = math.random()
         if (rnd < 0.5) then
@@ -21,5 +22,7 @@ function onMonsterMagicPrepare(mob, target)
     return 0 -- Still need a return, so use 0 when not casting
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

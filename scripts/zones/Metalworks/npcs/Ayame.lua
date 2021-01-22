@@ -15,40 +15,41 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
     -- 2 - The Three Kingdoms
-    if player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
-        player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
+        player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
         memories = memories + 4
     end
     -- 8 - The Pirate's Cove
-    if player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
+    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
-    if player:hasCompletedMission(TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1100, 1) and trade:getItemCount() == 1) then -- Trade Xalmo Feather
             player:startEvent(749) -- Finish Quest "True Strength"
         end
@@ -56,14 +57,14 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local trueStrength = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
+    local trueStrength = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
     local WildcatBastok = player:getCharVar("WildcatBastok")
-    local FadedPromises = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
+    local FadedPromises = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES)
     local Rank3 = player:getRank() >= 3 and 1 or 0
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
         player:startEvent(935)
     elseif (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CRYSTAL_LINE and
         player:hasKeyItem(tpz.ki.C_L_REPORTS)) then
@@ -87,15 +88,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 712) then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 748) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
     elseif (csid == 749) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14215) -- Temple Hose
@@ -105,7 +106,7 @@ function onEventFinish(player, csid, option)
             player:addItem(14215)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14215) -- Temple Hose
             player:addFame(BASTOK, 60)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH)
         end
     elseif (csid == 935) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 9, true))
@@ -119,3 +120,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -9,14 +9,15 @@
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Set AnimationSub to 0, put it in pot form
-    mob:AnimationSub(0)
-    onPath(mob)
+    mob:setAnimationSub(0)
+    entity.onPath(mob)
 end
 
-function onPath(mob)
+entity.onPath = function(mob)
     local spawnPos = mob:getSpawnPos()
     mob:pathThrough({spawnPos.x, spawnPos.y, spawnPos.z})
     local pos = mob:getPos()
@@ -25,34 +26,34 @@ function onPath(mob)
     end
 end
 
-function onMobFight(mob)
+entity.onMobFight = function(mob)
 
     local randomTime = math.random(15, 45)
     local changeTime = mob:getLocalVar("changeTime")
 
-    if (mob:AnimationSub() == 0 and mob:getBattleTime() - changeTime > randomTime) then
-        mob:AnimationSub(math.random(2, 3))
+    if (mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > randomTime) then
+        mob:setAnimationSub(math.random(2, 3))
         mob:setLocalVar("changeTime", mob:getBattleTime())
-    elseif (mob:AnimationSub() == 1 and mob:getBattleTime() - changeTime > randomTime) then
-        mob:AnimationSub(math.random(2, 3))
+    elseif (mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > randomTime) then
+        mob:setAnimationSub(math.random(2, 3))
         mob:setLocalVar("changeTime", mob:getBattleTime())
-    elseif (mob:AnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime) then
+    elseif (mob:getAnimationSub() == 2 and mob:getBattleTime() - changeTime > randomTime) then
         local aniChance = math.random(0, 1)
         if (aniChance == 0) then
-            mob:AnimationSub(0)
+            mob:setAnimationSub(0)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         else
-            mob:AnimationSub(3)
+            mob:setAnimationSub(3)
             mob:setLocalVar("changeTime", mob:getBattleTime())
         end
-    elseif (mob:AnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime) then
-        mob:AnimationSub(math.random(0, 2))
+    elseif (mob:getAnimationSub() == 3 and mob:getBattleTime() - changeTime > randomTime) then
+        mob:setAnimationSub(math.random(0, 2))
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (isKiller) then
         local mobId = mob:getID()
         local nm    = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
@@ -67,3 +68,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

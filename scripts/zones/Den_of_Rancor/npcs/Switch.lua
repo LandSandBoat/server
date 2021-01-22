@@ -5,12 +5,15 @@
 -----------------------------------
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getZPos() > 35 then
         GetNPCByID(ID.npc.DROP_GATE):openDoor() -- drop gate to Sacrificial Chamber
     end
 end
+
+return entity

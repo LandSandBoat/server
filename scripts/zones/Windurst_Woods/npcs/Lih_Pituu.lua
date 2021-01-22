@@ -8,11 +8,12 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 2)
     local SkillLevel = player:getSkillLevel(tpz.skill.BONECRAFT)
     local Cost = getAdvImageSupportCost(player, tpz.skill.BONECRAFT)
@@ -28,10 +29,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local Cost = getAdvImageSupportCost(player, 4)
 
     if csid == 10018 and option == 1 then
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:addStatusEffect(tpz.effect.BONECRAFT_IMAGERY, 3, 0, 480)
     end
 end
+
+return entity

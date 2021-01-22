@@ -1,18 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Bone Crusher
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
----------------------------------------------------
+-----------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(tpz.effect.LIGHT_MANEUVER)
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 3,
         atkmulti = 1,
@@ -62,3 +63,5 @@ function onPetAbility(target, automaton, skill, master, action)
 
     return damage
 end
+
+return ability_object

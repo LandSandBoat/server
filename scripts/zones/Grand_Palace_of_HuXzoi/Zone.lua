@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion( 1, -507, -4, 697, -501, 4, 702)
     zone:registerRegion( 2, -102, -4, 541,  -97, 4, 546)
     zone:registerRegion( 3, -178, -4,  97, -173, 4, 103)
@@ -24,11 +25,11 @@ function onInitialize(zone)
     GRAND_PALACE_OF_HUXZOI.pickTemperancePH()
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -40,33 +41,35 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("door")
     player:entityVisualPacket("dtuk")
     player:entityVisualPacket("2dor")
     player:entityVisualPacket("cryq")
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if (player:getCharVar("Hu-Xzoi-TP") == 0 and player:getAnimation() == tpz.anim.NONE) then -- prevent 2cs at same time
         player:startEvent(149 + region:GetRegionID())
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if (csid >= 150 and csid <= 159) then
         player:setCharVar("Hu-Xzoi-TP", 1)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid >= 150 and csid <= 159) then
         player:setCharVar("Hu-Xzoi-TP", 0)
     end
 end
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
 end
+
+return zone_object

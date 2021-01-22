@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 18300, 18301, 18643, 18657, 18671, 19752, 19845, 20925, 20926, 21857
 -- Item: Gungnir
 -- Additional Effect: Weakens Defense
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if math.random(100) <= chance and applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0) > 0.5 then
@@ -19,3 +20,5 @@ function onAdditionalEffect(player, target, damage)
 
     return 0, 0, 0
 end
+
+return item_object

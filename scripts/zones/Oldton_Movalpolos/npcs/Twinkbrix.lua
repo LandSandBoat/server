@@ -9,8 +9,9 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local mineShaftWarpCost = 2000
     local tradeGil = trade:getGil()
 
@@ -23,7 +24,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL) then
         player:startEvent(50)
     else
@@ -31,10 +32,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 55 and option == 1 then
         npcUtil.giveKeyItem(player, tpz.ki.SHAFT_GATE_OPERATING_DIAL)
         player:confirmTrade()
@@ -45,3 +46,5 @@ function onEventFinish(player, csid, option)
         tpz.teleport.to(player, tpz.teleport.id.MINESHAFT)
     end
 end
+
+return entity

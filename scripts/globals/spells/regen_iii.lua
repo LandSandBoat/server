@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Regen III
 -- Gradually restores target's HP.
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local hp = math.ceil(20 * (1 + 0.01 * caster:getMod(tpz.mod.REGEN_MULTIPLIER))) -- spell base times gear multipliers
     hp = hp + caster:getMerit(tpz.merit.REGEN_EFFECT) -- bonus hp from merits
     hp = hp + caster:getMod(tpz.mod.LIGHT_ARTS_REGEN) -- bonus hp from light arts
@@ -27,3 +28,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.REGEN
 end
+
+return spell_object

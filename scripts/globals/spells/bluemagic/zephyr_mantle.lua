@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Zephyr Mantle
 -- Creates shadow images that each absorb a single attack directed at you
 -- Spell cost: 31 MP
@@ -10,18 +10,19 @@
 -- Casting Time: 7 seconds
 -- Recast Time: 60 seconds
 -- Duration: 5 minutes
---
+-----------------------------------
 -- Combos: Conserve MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.BLINK
     local power = 4
     local duration = 300
@@ -42,3 +43,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- the door breaks during the CS in Al'Taieu after receiving the Dawn mission, which sets the var to 1. Also checking for The Last Verse mission for whenever that gets implemented.
     if ((player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") > 0) or player:getCurrentMission(COP) > tpz.mission.id.cop.DAWN) then
         if (player:getZPos() <= 360) then
@@ -28,8 +29,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

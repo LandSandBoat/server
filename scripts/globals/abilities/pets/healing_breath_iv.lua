@@ -1,16 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Healing Breath IV
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/msg")
----------------------------------------------
-function onAbilityCheck(player, target, ability)
+-----------------------------------
+local ability_object = {}
+
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
 
     -- Info:
     -- Breath Formula: http://www.bluegartr.com/threads/108543-Wyvern-Breath-Testing?p=5357018&viewfull=1#post5357018
@@ -45,3 +47,5 @@ function onUseAbility(pet, target, skill, action)
     target:addHP(base)
     return base
 end
+
+return ability_object

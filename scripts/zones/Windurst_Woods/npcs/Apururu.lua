@@ -11,6 +11,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
@@ -19,15 +20,15 @@ local TrustMemory = function(player)
         memories = memories + 2
     end
     -- 4 - WONDER_WANDS
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) then
         memories = memories + 4
     end
     -- 8 - THE_TIGRESS_STIRS
-    if player:hasCompletedQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) then
+    if player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_TIGRESS_STIRS) then
         memories = memories + 8
     end
     -- 16 - I_CAN_HEAR_A_RAINBOW
-    if player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
+    if player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) then
         memories = memories + 16
     end
     -- 32 - Hero's Combat (BCNM)
@@ -35,31 +36,31 @@ local TrustMemory = function(player)
     --  memories = memories + 32
     -- end
     -- 64 - MOON_READING
-    if player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) then
+    if player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) then
         memories = memories + 64
     end
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- THE KIND CARDIAN
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 969) then
         player:startEvent(397)
 
         -- CAN CARDIANS CRY?
-    elseif player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 551) then
         player:startEvent(325, 0, 20000, 5000)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
-    local kindCardian = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+    local kindCardian = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
-    local allNewC3000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
-    local canCardiansCry = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
+    local allNewC3000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_3000)
+    local canCardiansCry = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
     local Rank6 = player:getRank() >= 6 and 1 or 0
 
     -- WINDURST 1-2: THE HEART OF THE MATTER
@@ -128,10 +129,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- WINDURST 1-2: THE HEART OF THE MATTER
     if csid == 137 then
@@ -204,7 +205,7 @@ function onEventFinish(player, csid, option)
 
         -- CAN CARDIANS CRY?
     elseif csid == 319 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY)
     elseif csid == 325 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CAN_CARDIANS_CRY, {
         gil = 5000
     }) then
@@ -216,3 +217,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 904)
     end
 end
+
+return entity

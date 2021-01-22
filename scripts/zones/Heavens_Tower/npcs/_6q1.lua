@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getNation() == 2 then
         if player:hasKeyItem(tpz.ki.STARWAY_STAIRWAY_BAUBLE) then
             if player:getXPos() < -14 then
@@ -28,8 +29,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

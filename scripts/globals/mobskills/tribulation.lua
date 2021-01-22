@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Tribulation
 --
 --  Description: Inflicts Bio and blinds all targets in an area of effect.
@@ -6,18 +6,19 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: AoE
 --  Notes: Bio effect can take away up to 39/tick.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local blinded = false
     local bio = false
 
@@ -37,3 +38,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

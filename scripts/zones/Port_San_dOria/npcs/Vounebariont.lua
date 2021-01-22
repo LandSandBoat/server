@@ -8,10 +8,11 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(889, 5) and trade:getItemCount() == 5) then -- Trade Beetle Shell
             player:startEvent(514)
         end
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getFameLevel(SANDORIA) >= 2) then
         player:startEvent(516)
@@ -29,18 +30,18 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 516) then
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
         end
     elseif (csid == 514) then
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
             player:addFame(SANDORIA, 30)
         else
             player:addFame(SANDORIA, 5)
@@ -53,3 +54,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -1,10 +1,11 @@
 -----------------------------------
---
 -- tpz.effect.BATTLEFIELD
---
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     if target:getPet() then
         target:getPet():addStatusEffect(effect)
     end
@@ -14,10 +15,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local pet = target:getPet()
     if pet then
         pet:delStatusEffect(tpz.effect.BATTLEFIELD)
@@ -27,11 +28,9 @@ function onEffectLose(target, effect)
 end
 
 function onEventUpdate(player, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
 end
 
 function onEventFinish(player, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
 end
+
+return effect_object

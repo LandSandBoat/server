@@ -12,10 +12,11 @@ require("scripts/globals/titles")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 2) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 2) then
         if (trade:hasItemQty(17098, 1) and trade:getItemCount() == 1) then -- Trade Oak Pole
             player:startEvent(92)
         end
@@ -23,9 +24,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED) then
         illTakeTheBigBoxCS = player:getCharVar("illTakeTheBigBoxCS")
 
         if (illTakeTheBigBoxCS == 1) then
@@ -39,7 +40,7 @@ function onTrigger(player, npc)
         elseif (illTakeTheBigBoxCS == 4) then
             player:startEvent(95)
         end
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED) then
         trueWillCS = player:getCharVar("trueWillCS")
 
         if (trueWillCS == 1) then
@@ -55,10 +56,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 90) then
         player:setCharVar("illTakeTheBigBoxCS", 2)
@@ -87,3 +88,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

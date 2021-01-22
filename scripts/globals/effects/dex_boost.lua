@@ -1,16 +1,15 @@
 -----------------------------------
---
 -- tpz.effect.DEX_BOOST
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.DEX, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     -- the effect loses dexterity of 1 every 3 ticks depending on the source of the boost
     local boostDEX_effect_size = effect:getPower()
     if (boostDEX_effect_size > 0) then
@@ -19,9 +18,11 @@ function onEffectTick(target, effect)
     end
 end
 
-function onEffectLose(target, effect)
-    boostDEX_effect_size = effect:getPower()
+effect_object.onEffectLose = function(target, effect)
+    local boostDEX_effect_size = effect:getPower()
     if (boostDEX_effect_size > 0) then
         target:delMod(tpz.mod.DEX, boostDEX_effect_size)
     end
 end
+
+return effect_object

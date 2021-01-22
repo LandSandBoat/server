@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Hurricane Wing (Airborne Version)
 --
 --  Description: Deals hurricane-force wind damage to enemies within a very wide area of effect. Additional effect: Blind
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 30' radial.
 --  Notes: Used only by Wyrm when in the air. Only use in a dedicated flying skill set.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     MobStatusEffectMove(mob, target, tpz.effect.BLINDNESS, 60, 0, 30)
 
     local dmgmod = 1
@@ -25,3 +26,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.WIND)
     return dmg
 end
+
+return mobskill_object

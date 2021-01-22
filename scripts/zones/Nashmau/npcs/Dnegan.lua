@@ -6,16 +6,17 @@
 -- !pos 29.89 -6 55.83 53
 -----------------------------------
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local TheWaywardAutomation = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
+    local TheWaywardAutomation = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
-    local OperationTeatime = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
+    local OperationTeatime = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local OperationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
     local OTT_DayWait = player:getCharVar("OTT_DayWait")
     local Gameday = VanadielDayOfTheYear()
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
 end
 
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 289) then
         player:setCharVar("TheWaywardAutomationProgress", 2)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("OTT_DayWait", 0)
     end
 end
+
+return entity

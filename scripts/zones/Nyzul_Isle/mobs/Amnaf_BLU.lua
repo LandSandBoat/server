@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
 
     -- Stage 2 Adjustments
@@ -36,7 +37,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     -- Relax movement lock
     mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
 
@@ -72,7 +73,7 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local segment = mob:getLocalVar("SegmentChanged")
     if (mob:getHPP() <= 30 and mob:getLocalVar("RenameThisVar") == 0) then
         mob:showText(mob, ID.text.CURSED_ESSENCES)
@@ -94,7 +95,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     -- Hysteric Barrage
     if (spell == 641) then
         mob:showText(mob, ID.text.AWAKEN)
@@ -104,10 +105,12 @@ function onSpellPrecast(mob, spell)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 10)
 end
+
+return entity

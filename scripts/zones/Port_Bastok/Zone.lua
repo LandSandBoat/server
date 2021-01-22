@@ -9,17 +9,18 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -112, -3, -17, -96, 3, -3)--event COP
     zone:registerRegion(2, 53.5, 5, -165.3, 66.5, 6, -72)--drawbridge area
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
@@ -54,7 +55,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
     -- printf("regionID: %u", regionID)
     if (regionID == 1 and player:getCurrentMission(COP) == tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("PromathiaStatus") == 0) then
@@ -62,17 +63,17 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(71)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 1) then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 71) then
@@ -85,10 +86,12 @@ function onEventFinish(player, csid, option)
         player:setCharVar("COP_optional_CS_Despachaire", 0)
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 30035 then
-        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
+
+return zone_object

@@ -8,12 +8,13 @@
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local MakingHeadlines = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+entity.onTrigger = function(player, npc)
+    local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
     local CurrentMission = player:getCurrentMission(WINDURST)
     local MissionStatus = player:getCharVar("MissionStatus")
 
@@ -41,11 +42,13 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 46 then
         player:setCharVar("MissionStatus", 5) -- Mark the progress
     end
 end
+
+return entity

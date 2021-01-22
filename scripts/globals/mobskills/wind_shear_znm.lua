@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Wind Shear
 --
 --  Description: Deals damage to enemies within an area of effect. Additional effect: Knockback
@@ -6,16 +6,17 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: 10' radial
 --  Notes: The knockback is rather severe. Vulpangue uses an enhanced version that inflicts Weight.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = math.random(2, 3)
     local accmod = 1
@@ -28,3 +29,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

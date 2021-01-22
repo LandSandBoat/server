@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Rime Spray
 --
 --  Description: Deals Ice damage to enemies within a fan-shaped area, inflicting them with Frost and All statuses down.
@@ -6,19 +6,18 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Unknown cone
 --  Notes:
----------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.FROST
 
     MobStatusEffectMove(mob, target, tpz.effect.FROST, 15, 3, 120)
@@ -36,3 +35,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.ICE)
     return dmg
 end
+
+return mobskill_object

@@ -9,10 +9,11 @@ require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
 
     if (Gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
         local count = trade:getItemCount()
@@ -49,30 +50,30 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
     else
         player:startEvent(200)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
-    local Gourmet = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
 
     if (csid == 200) then
         if (Gourmet == QUEST_AVAILABLE) then
-            player:addQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
         end
     elseif (csid ~= 121) then
         player:tradeComplete()
         if (Gourmet == QUEST_ACCEPTED) then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
         end
 
         local gil=350
@@ -91,3 +92,5 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
     end
 end
+
+return entity

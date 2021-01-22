@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not player:hasItem(1183) then
         if npcUtil.giveItem(player, 1183) then -- Uggalepih Offering
             npc:setStatus(tpz.status.DISAPPEAR)
@@ -21,3 +22,5 @@ function onTrigger(player, npc)
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
+
+return entity

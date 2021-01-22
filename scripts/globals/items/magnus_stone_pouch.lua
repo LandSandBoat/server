@@ -1,11 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 5443
 -- magnus_stone_pouch
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = tpz.msg.basic.ITEM_NO_USE_INVENTORY
@@ -13,6 +14,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addItem(19262, 99) -- 99x magnus_stone
 end
+
+return item_object

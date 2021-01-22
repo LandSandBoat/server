@@ -1,17 +1,18 @@
---------------------------------------
+-----------------------------------
 -- Spell: Rainstorm
 --     Changes the weather around target party member to "rainy."
---------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/settings")
 require("scripts/globals/status")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     target:delStatusEffectSilent(tpz.effect.FIRESTORM)
     target:delStatusEffectSilent(tpz.effect.SANDSTORM)
@@ -35,3 +36,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.RAINSTORM
 end
+
+return spell_object

@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/world")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(1192, 1) and trade:getItemCount() == 1) then -- Quest: Wish Upon a Star - Trade Fallen Star
         if (player:getCharVar("WishUponAStar_Status") == 3) then
             if (player:getWeather() == tpz.weather.NONE and  (VanadielTOTD() == tpz.time.NIGHT or VanadielTOTD() == tpz.time.MIDNIGHT)) then
@@ -21,8 +22,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_COMPLETED) then -- Quest: Wish Upon a Star - Quest has been completed.
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR) == QUEST_COMPLETED) then -- Quest: Wish Upon a Star - Quest has been completed.
         player:startEvent(335)
     elseif (player:getCharVar("WishUponAStar_Status") == 2) then -- Quest: Wish Upon a Star - Player has spoken with Malene
         player:startEvent(332)
@@ -33,20 +34,22 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf ("CSID: %u", csid)
     -- printf ("RESULT: %u", option)
     if (csid == 332) then -- Quest: Wish Upon a Star
         player:setCharVar("WishUponAStar_Status", 3)
     elseif (csid == 334) then -- Quest: Wish Upon a Star - Traded Fallen Star
         player:tradeComplete( )
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)
         player:setCharVar("WishUponAStar_Status", 0)
         player:addFame(BASTOK, 50)
         player:addItem(1236, 4) -- Reward for quest completion: Cactus Stems x 4
         player:messageSpecial(ID.text.ITEM_OBTAINED, 1236)
     end
 end
+
+return entity

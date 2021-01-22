@@ -25,10 +25,10 @@ tpz.helm.type =
     MINING     = 4,
 }
 
--------------------------------------------------
+-----------------------------------
 -- drops are {weight, itemId}
 -- {R} for retail-verified coordinates
--------------------------------------------------
+-----------------------------------
 
 local helmInfo =
 {
@@ -311,7 +311,7 @@ local helmInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.helm.type.EXCAVATION] =
     {
@@ -445,7 +445,7 @@ local helmInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.helm.type.LOGGING] =
     {
@@ -872,7 +872,7 @@ local helmInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.helm.type.MINING] =
     {
@@ -1303,15 +1303,15 @@ local helmInfo =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- colored rocks. do not change this order!
--------------------------------------------------
+-----------------------------------
 
 local rocks = {769, 771, 770, 772, 773, 774, 776, 775}
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function doesToolBreak(player, info)
     local roll  = math.random(100)
@@ -1379,9 +1379,9 @@ local function movePoint(npc, zoneId, info)
     npc:queue(3000, doMove(npc, unpack(point)))
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 tpz.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
@@ -1427,7 +1427,7 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
         -- quest stuff
         if
             helmType == tpz.helm.type.HARVESTING and
-            player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+            player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
             not player:hasKeyItem(tpz.ki.RAINBOW_BERRY) and
             broke ~= 1 and
             zoneId == tpz.zone.WAJAOM_WOODLANDS

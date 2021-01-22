@@ -1,15 +1,14 @@
- -----------------------------------
+-----------------------------------
 -- PET: Luopan
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/pets")
-require("scripts/globals/msg")
------------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- BGWIKI: "Regardless of perpetuation cost reduction, Luopans have a maximum duration of 10 minutes."
     mob:timer(600000, function(mob) mob:setHP(0) end)
 end
 
-function onMobDeath(mob)
+entity.onMobDeath = function(mob)
 end
+
+return entity

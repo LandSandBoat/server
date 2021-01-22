@@ -7,15 +7,16 @@ local ID = require("scripts/zones/Sealions_Den/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(600.101, 130.355, 797.612, 50)
@@ -25,20 +26,20 @@ function onZoneIn(player, prevZone)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.CHAINS_AND_BONDS and
         player:getCharVar("PromathiaStatus") == 2) then
         cs = 14
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 1 then
         cs = 29
     end
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 15) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 14) then
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar('ApocalypseNigh', 2)
     end
 end
+
+return zone_object

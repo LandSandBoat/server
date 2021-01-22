@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 6050
 -- Rainstorm Schema
 -- Teaches the white magic Rainstorm
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(113)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(113)
 end
+
+return item_object

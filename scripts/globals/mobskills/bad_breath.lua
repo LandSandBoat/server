@@ -1,20 +1,21 @@
----------------------------------------------
+-----------------------------------
 --  Bad Breath
 --
 --  Description: Deals earth damage that inflicts multiple status ailments on enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Earth)
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     MobStatusEffectMove(mob, target, tpz.effect.SLOW, 1250, 0, 60)
     MobStatusEffectMove(mob, target, tpz.effect.POISON, mob:getMainLvl() / 10, 3, 60)
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

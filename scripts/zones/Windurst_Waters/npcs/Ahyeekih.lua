@@ -9,12 +9,13 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     onHalloweenTrade(player, trade, npc)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local RegionOwner = GetRegionOwner(tpz.region.KOLSHUSHU)
     if (RegionOwner ~= tpz.nation.WINDURST) then
         player:showText(npc, ID.text.AHYEEKIH_CLOSED_DIALOG)
@@ -35,8 +36,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

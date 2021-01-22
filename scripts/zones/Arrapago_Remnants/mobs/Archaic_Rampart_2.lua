@@ -7,10 +7,12 @@ local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/status")
 -----------------------------------
-function onMobSpawn(mob)
+local entity = {}
+
+entity.onMobSpawn = function(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()
@@ -42,7 +44,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local instance = mob:getInstance()
     if (ID.mob[6].rampart1 == mob:getID() or ID.mob[6].rampart2 == mob:getID()) then
         if instance:getStage() == 6 and instance:getProgress() >= 1 then
@@ -53,5 +55,7 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
 end
+
+return entity

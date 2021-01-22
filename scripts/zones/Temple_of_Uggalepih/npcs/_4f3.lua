@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local killCount = player:getCharVar("EVERYONES_GRUDGE_KILLS")
 
     if player:hasKeyItem(tpz.ki.TONBERRY_PRIEST_KEY) then
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 66 and option == 1 then
         if player:delGil(250 * (player:getCharVar("EVERYONES_GRUDGE_KILLS") / 20 + 1)) then
             player:setCharVar("EVERYONES_GRUDGE_KILLS", 0)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 --  Plague Swipe
 --
 --  Description: Delivers a threefold attack in an cone effect behind user. Additional effect: Bio + Plague
 --  Type: Physical
 --  2-3 Shadows
 --  Range: Backward Arc
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- TODO: Replace this when there's a better method than isFacingTheSameDirection() aka isBehind
     if (target:isBehind(mob) == false) then
         return 1
@@ -19,7 +20,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 3
     local accmod = 1
@@ -33,3 +34,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

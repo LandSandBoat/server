@@ -9,10 +9,11 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- THE PICKPOCKET
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 579) then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 579) then
         player:startEvent(550)
 
     -- DEFAULT DIALOG
@@ -21,11 +22,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- THE PICKPOCKET
     if player:getCharVar("thePickpocket") > 0 then
         player:startEvent(547)
-    elseif player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_COMPLETED then
         player:startEvent(580)
 
     -- STANDARD DIALOG
@@ -34,14 +35,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- THE PICKPOCKET
-    if csid == 547 and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_AVAILABLE then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET)
+    if csid == 547 and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_AVAILABLE then
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET)
     elseif csid == 550 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET, {item = 16667, title = tpz.title.PICKPOCKET_PINCHER, var = {"thePickpocket", "thePickpocketSkipNPC", "thePickpocketEagleButton"}}) then
         player:confirmTrade()
     end
 end
+
+return entity
