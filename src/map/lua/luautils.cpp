@@ -234,6 +234,11 @@ namespace luautils
         lua.script_file("./scripts/globals/battlefield.lua");
         lua.script_file("./scripts/globals/mobs.lua");
 
+        // Pet Scripts
+        CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
+        CacheLuaObjectFromFile("./scripts/globals/pets/luopan.lua");
+        CacheLuaObjectFromFile("./scripts/globals/pets/wyvern.lua");
+
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
 
