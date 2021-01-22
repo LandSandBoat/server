@@ -1798,13 +1798,13 @@ namespace luautils
         if (PAttacker->objtype == TYPE_PC)
         {
             auto name          = (const char*)PItem->getName();
-            onAdditionalEffect = lua["tpz"]["globals"]["items"][name]["onAdditionalEffect"];
+            onAdditionalEffect = lua[sol::create_if_nil]["tpz"]["globals"]["items"][name]["onAdditionalEffect"].get<sol::function>();
         }
         else
         {
             auto zone = (const char*)PAttacker->loc.zone->GetName();
             auto name = (const char*)PAttacker->GetName();
-            onAdditionalEffect = lua["tpz"]["zones"][zone]["mobs"][name]["onAdditionalEffect"];
+            onAdditionalEffect = lua[sol::create_if_nil]["tpz"]["zones"][zone]["mobs"][name]["onAdditionalEffect"].get<sol::function>();
         }
 
         if (!onAdditionalEffect.valid())
