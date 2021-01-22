@@ -161,12 +161,12 @@ public:
     uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
-    auto  getPos() -> std::map<std::string, float>; // Get Entity position (x,y,z)
-    void  showPosition();                           // Display current position of character
-    float getXPos();                                // Get Entity X position
-    float getYPos();                                // Get Entity Y position
-    float getZPos();                                // Get Entity Z position
-    uint8 getRotPos();                              // Get Entity Rot position
+    auto  getPos() -> sol::table; // Get Entity position (x,y,z)
+    void  showPosition();         // Display current position of character
+    float getXPos();              // Get Entity X position
+    float getYPos();              // Get Entity Y position
+    float getZPos();              // Get Entity Z position
+    uint8 getRotPos();            // Get Entity Rot position
 
     void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
     void warp();                                                              // Returns Character to home point

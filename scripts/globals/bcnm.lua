@@ -974,7 +974,7 @@ function EventTriggerBCNM(player, npc)
     elseif not player:hasStatusEffect(tpz.effect.BATTLEFIELD) then
         local mask = findBattlefields(player, npc, 0)
 
-        -- mask = 268435455 -- uncomment to open menu with all possible battlefields
+        mask = 268435455 -- uncomment to open menu with all possible battlefields
         if mask ~= 0 then
             player:startEvent(32000, 0, 0, 0, mask, 0, 0, 0, 0)
             return true
