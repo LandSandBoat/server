@@ -2063,7 +2063,13 @@ namespace luautils
             return { 56, 0, 0 };
         }
 
-        auto result = onItemCheck(CLuaBaseEntity(PTarget), static_cast<uint32>(param), CLuaBaseEntity(PCaster));
+        std::optional<CLuaBaseEntity> caster = std::nullopt;
+        if (PCaster)
+        {
+            caster = CLuaBaseEntity(PCaster);
+        }
+
+        auto result = onItemCheck(CLuaBaseEntity(PTarget), static_cast<uint32>(param), caster);
         if (!result.valid())
         {
             sol::error err = result;
