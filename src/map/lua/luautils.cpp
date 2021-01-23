@@ -20,7 +20,6 @@
 */
 
 #include "../../common/showmsg.h"
-#include "../../common/timer.h"
 #include "../../common/utils.h"
 
 #include <array>
@@ -358,7 +357,7 @@ namespace luautils
         TracyZoneString(funcName);
         TracyZoneIString(PEntity->GetName());
 
-		if (PEntity->objtype == TYPE_NPC)
+	if (PEntity->objtype == TYPE_NPC)
         {
             std::string zone_name = (const char*)PEntity->loc.zone->GetName();
             std::string npc_name  = (const char*)PEntity->GetName();
@@ -459,8 +458,8 @@ namespace luautils
             return;
         }
 
-		// Now that the list is verified, overwrite it with the same list; without "scripts"
-		parts = std::vector<std::string>(it + 1, parts.end());
+        // Now that the list is verified, overwrite it with the same list; without "scripts"
+        parts = std::vector<std::string>(it + 1, parts.end());
 
         if (!std::filesystem::exists(filename))
         {
@@ -485,10 +484,10 @@ namespace luautils
 
         // file_result should be good, cache it!
 
-        auto& table = lua["tpz"].get_or_create<sol::table>();
+        auto table = lua["tpz"].get_or_create<sol::table>();
         std::string out_str = "tpz";
-		for (auto& part : parts)
-		{
+        for (auto& part : parts)
+        {
             if (part == parts.back())
             {
                 table[sol::override_value][part] = file_result;
@@ -498,7 +497,7 @@ namespace luautils
                 table = table[part].get_or_create<sol::table>(lua.create_table());
             }
             out_str += "." + part;
-		}
+        }
 
         if (printOutput)
         {
@@ -1800,13 +1799,13 @@ namespace luautils
         if (PAttacker->objtype == TYPE_PC)
         {
             auto name          = (const char*)PItem->getName();
-            onAdditionalEffect = lua[sol::create_if_nil]["tpz"]["globals"]["items"][name]["onAdditionalEffect"].get<sol::function>();
+            onAdditionalEffect = lua[sol::create_if_nil]["tpz"]["globals"]["items"][name]["onAdditionalEffect"];
         }
         else
         {
             auto zone = (const char*)PAttacker->loc.zone->GetName();
             auto name = (const char*)PAttacker->GetName();
-            onAdditionalEffect = lua[sol::create_if_nil]["tpz"]["zones"][zone]["mobs"][name]["onAdditionalEffect"].get<sol::function>();
+            onAdditionalEffect = lua[sol::create_if_nil]["tpz"]["zones"][zone]["mobs"][name]["onAdditionalEffect"];
         }
 
         if (!onAdditionalEffect.valid())
@@ -2308,7 +2307,10 @@ namespace luautils
         lua["mixins"]       = sol::nil;
         lua["mixinOptions"] = sol::nil;
 
-        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", PMob->loc.zone->GetName(), PMob->GetName());
+        auto zone_name = (const char*)PMob->loc.zone->GetName();
+        auto name      = (const char*)PMob->GetName();
+
+        auto filename = fmt::format("./scripts/zones/{}/mobs/{}.lua", zone_name, name);
 
         auto script_result = lua.script_file(filename);
         if (!script_result.valid())
