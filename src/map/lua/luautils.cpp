@@ -3396,7 +3396,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name     = (const char*)PZone->GetName();
+        auto name = (const char*)PZone->GetName();
 
         auto onInstanceLoadFailed = lua["tpz"]["zones"][name]["Zone"]["onInstanceLoadFailed"];
         if (!onInstanceLoadFailed.valid())
