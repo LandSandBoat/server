@@ -179,6 +179,12 @@ duration CInstance::GetElapsedTime(time_point tick)
     return tick - m_startTime;
 }
 
+uint64_t CInstance::GetLocalVar(const std::string& name) const
+{
+    auto var = m_LocalVars.find(name);
+    return var != m_LocalVars.end() ? var->second : 0;
+}
+
 void CInstance::SetLevelCap(uint8 cap)
 {
     m_levelcap = cap;
@@ -211,6 +217,11 @@ void CInstance::SetStage(uint32 stage)
 void CInstance::SetWipeTime(duration time)
 {
     m_wipeTimer = time + m_startTime;
+}
+
+void CInstance::SetLocalVar(const std::string& name, uint64_t value)
+{
+    m_LocalVars[name] = value;
 }
 
 /************************************************************************

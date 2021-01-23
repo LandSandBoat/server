@@ -26,7 +26,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "luautils.h"
 
 class CLuaBaseEntity;
+class CLuaZone;
 class CInstance;
+
 class CLuaInstance
 {
     CInstance* m_PLuaInstance;
@@ -40,6 +42,8 @@ public:
     }
 
     uint8  getID();
+    auto   getName() -> std::string;
+    auto   getZone() -> CLuaZone;
     auto   getAllies() -> sol::table;
     auto   getChars() -> sol::table;
     auto   getMobs() -> sol::table;
@@ -52,12 +56,14 @@ public:
     uint32 getWipeTime();
     auto   getEntity(uint16 targid, sol::object const& filterObj) -> std::optional<CLuaBaseEntity>;
     uint32 getStage();
+    auto   getLocalVar(std::string name) -> uint64_t;
 
     void setLevelCap(uint8 cap);
     void setLastTimeUpdate(uint32 ms);
     void setProgress(uint32 progress);
     void setWipeTime(uint32 ms);
     void setStage(uint32 stage);
+    void setLocalVar(std::string name, uint64_t value);
 
     void fail();
     bool failed();

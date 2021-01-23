@@ -43,6 +43,16 @@ uint8 CLuaInstance::getID()
     return m_PLuaInstance->GetID();
 }
 
+std::string CLuaInstance::getName()
+{
+    return (const char*)m_PLuaInstance->GetName();
+}
+
+CLuaZone CLuaInstance::getZone()
+{
+    return CLuaZone(m_PLuaInstance->GetZone());
+}
+
 sol::table CLuaInstance::getAllies()
 {
     auto table = luautils::lua.create_table();
@@ -157,6 +167,11 @@ uint32 CLuaInstance::getStage()
     return m_PLuaInstance->GetStage();
 }
 
+uint64_t CLuaInstance::getLocalVar(std::string name)
+{
+    return m_PLuaInstance->GetLocalVar(name);
+}
+
 void CLuaInstance::setLevelCap(uint8 cap)
 {
     m_PLuaInstance->SetLevelCap(cap);
@@ -180,6 +195,11 @@ void CLuaInstance::setWipeTime(uint32 ms)
 void CLuaInstance::setStage(uint32 stage)
 {
     m_PLuaInstance->SetStage(stage);
+}
+
+void CLuaInstance::setLocalVar(std::string name, uint64_t value)
+{
+    m_PLuaInstance->SetLocalVar(name, value);
 }
 
 void CLuaInstance::fail()
@@ -221,6 +241,8 @@ void CLuaInstance::Register()
 {
     SOL_USERTYPE("CInstance", CLuaInstance);
     SOL_REGISTER("getID", CLuaInstance::getID);
+    SOL_REGISTER("getName", CLuaInstance::getName);
+    SOL_REGISTER("getZone", CLuaInstance::getZone);
     SOL_REGISTER("setLevelCap", CLuaInstance::setLevelCap);
     SOL_REGISTER("getAllies", CLuaInstance::getAllies);
     SOL_REGISTER("getChars", CLuaInstance::getChars);
@@ -243,6 +265,8 @@ void CLuaInstance::Register()
     SOL_REGISTER("complete", CLuaInstance::complete);
     SOL_REGISTER("completed", CLuaInstance::completed);
     SOL_REGISTER("insertAlly", CLuaInstance::insertAlly);
+    SOL_REGISTER("getLocalVar", CLuaInstance::getLocalVar);
+    SOL_REGISTER("setLocalVar", CLuaInstance::setLocalVar);
 }
 
 //======================================================//
