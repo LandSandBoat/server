@@ -73,18 +73,34 @@ bool CInstanceLoader::Check()
             }
             else
             {
-                // finish loading by launching remaining setup scripts
+                // Finish setting up Mobs
                 for (auto PMob : instance->m_mobList)
                 {
                     luautils::OnMobInitialize(PMob.second);
                     luautils::ApplyMixins(PMob.second);
                     ((CMobEntity*)PMob.second)->saveModifiers();
                     ((CMobEntity*)PMob.second)->saveMobModifiers();
+
+                    // Add to cache
+                    luautils::CacheLuaObjectFromFile(
+                        fmt::format("./scripts/zones/{}/mobs/{}.lua",
+                                    PMob.second->loc.zone->GetName(),
+                                    PMob.second->GetName()));
                 }
+
+                // Finish setting up NPCs
                 for (auto PNpc : instance->m_npcList)
                 {
                     luautils::OnNpcSpawn(PNpc.second);
+
+                    // Add to cache
+                    luautils::CacheLuaObjectFromFile(
+                        fmt::format("./scripts/zones/{}/npcs/{}.lua",
+                                    PNpc.second->loc.zone->GetName(),
+                                    PNpc.second->GetName()));
                 }
+
+                // Finish setup
                 luautils::OnInstanceCreated(requester, instance);
                 luautils::OnInstanceCreated(instance);
             }

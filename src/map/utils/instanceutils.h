@@ -27,11 +27,32 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CInstanceLoader;
 class CCharEntity;
 
+struct InstanceData_t
+{
+    uint16      id;
+    std::string instance_name;
+    uint16      instance_zone;
+    std::string instance_zone_name;
+    uint16      entrance_zone;
+    std::string entrance_zone_name;
+    uint16      time_limit;
+    float       start_x;
+    float       start_y;
+    float       start_z;
+    uint16      start_rot;
+    uint16      music_day;
+    uint16      music_night;
+    uint16      battlesolo;
+    uint16      battlemulti;
+    std::string filename;
+};
+
 namespace instanceutils
 {
+    void LoadInstanceList();
     void CheckInstance();
     void LoadInstance(uint8 instanceid, uint16 zoneid, CCharEntity* PRequester);
-    void CacheInstanceScripts();
+    auto GetInstanceData(uint8 instanceid) -> InstanceData_t;
 }; // namespace instanceutils
 
 #endif
