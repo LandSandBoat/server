@@ -122,7 +122,7 @@ jobs:
             exit -1
         fi
 
-  Full_Startup_Checks_1804:
+  Full_Startup_Checks_2004:
     runs-on: ubuntu-20.04
     services:
       mysql:
