@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -4126,7 +4126,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        ShowDebug("LoadEventScript: Checking Function %s", functionName);
+        ShowDebug("LoadEventScript: Checking Function %s\n", functionName);
 
         auto funcFromChar = GetCacheEntryFromFilename(PChar->m_event.Script)[functionName];
         if (funcFromChar.valid())

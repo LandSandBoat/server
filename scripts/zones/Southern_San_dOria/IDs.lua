@@ -91,9 +91,13 @@ zones[tpz.zone.SOUTHERN_SAN_DORIA] =
         CLOUD_GOOD_TRADE               = 10115, -- Here, take 'em and scram. And don't say I ain't never did nothin' for you!
         CLOUD_BAD_ITEM                 = 10116, -- What the hell is this junk!? Why don't you try bringin' what I asked for before I shove one of my sandals up your...nose!
         CAPUCINE_SHOP_DIALOG           = 10317, -- Hello! You seem to be working very hard. I'm really thankful! But you needn't rush around so fast. Take your time! I can wait if it makes the job easier for you!
+        YOU_OBTAIN_ITEM_SINGULAR       = 12742, -- You obtain <item>! Note: Singluar case
         TUTORIAL_NPC                   = 13523, -- Greetings and well met! Guardian of the Kingdom, Alaune, at your most humble service.
         YOU_WISH_TO_EXCHANGE_SPARKS    = 15373, -- You wish to exchange your sparks?
+        DO_NOT_POSSESS_ENOUGH          = 15402, -- You do not possess enough <item name> to complete the transaction.
         NOT_ENOUGH_SPARKS              = 15403, -- You do not possess enough sparks of eminence to complete the transaction.
+        MAX_SPARKS_LIMIT_REACHED       = 15404, -- You have reached the maximum number of sparks that you can exchange this week (<amount>)
+        YOU_NOW_HAVE_AMT_CURRENCY      = 15414, -- You now have <amount> <currency>.
         TEAR_IN_FABRIC_OF_SPACE        = 16558, -- There appears to be a tear in the fabric of space...
     },
     mob =
