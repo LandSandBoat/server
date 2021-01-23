@@ -9,7 +9,10 @@ require("scripts/globals/zone")
 
 --[[
 Debugging:
-Reset: !delquest 3 179
+Start: !setplayervar <name> [QUEST]FullSpeedAhead 1
+       !zone {Batallia Downs}
+
+Reset Quest: !delquest 3 179
 
 CharVar: [QUEST]FullSpeedAhead == ...
 1 : Starting minigame on Normal Mode

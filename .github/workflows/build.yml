@@ -13,7 +13,7 @@ on:
       - 'feature/**'
 
 jobs:
-  Linux_Build_Clang_64bit:
+  Linux_1804_Clang_9_64bit:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
@@ -32,7 +32,7 @@ jobs:
       run: |
         make -j $(nproc)
 
-  Linux_Build_GCC_64bit:
+  Linux_1804_GCC9_64bit:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
@@ -51,7 +51,7 @@ jobs:
       run: |
         make -j $(nproc)
 
-  Windows_Build_2019_32bit:
+  Windows_2019_32bit:
     runs-on: windows-2019
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -69,7 +69,7 @@ jobs:
         run: |
           cmake --build .
 
-  Windows_Build_2019_64bit:
+  Windows_2019_64bit:
     runs-on: windows-2019
     env:
       MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
@@ -122,7 +122,7 @@ jobs:
             exit -1
         fi
 
-  Full_Startup_Checks:
+  Full_Startup_Checks_2004:
     runs-on: ubuntu-20.04
     services:
       mysql:
@@ -143,6 +143,8 @@ jobs:
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
     - name: Configure CMake
       run: |
+        export CC=/usr/bin/gcc-9
+        export CXX=/usr/bin/g++-9
         cmake .
     - name: Build Binaies
       run: |

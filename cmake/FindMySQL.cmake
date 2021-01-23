@@ -20,14 +20,7 @@ find_path(MYSQL_INCLUDE_DIR
     NAMES 
         mysql.h
     PATHS
-        ${PROJECT_SOURCE_DIR}/ext/mysql/include/mysql/
-        /usr/
-        /usr/bin/
-        /usr/include/
-        /usr/lib/
-        /usr/local/
-        /usr/local/bin/
-        /opt/)
+        ${PROJECT_SOURCE_DIR}/ext/mysql/include/mysql/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(MySQL DEFAULT_MSG MYSQL_LIBRARY MYSQL_INCLUDE_DIR)
