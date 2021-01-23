@@ -646,7 +646,6 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
         if cost > remainingLimit and ENABLE_EXCHANGE_LIMIT == 1 then
             player:messageSpecial(zones[player:getZoneID()].text.MAX_SPARKS_LIMIT_REACHED, WEEKLY_EXCHANGE_LIMIT)
         elseif sparks >= cost then
-            printf("Cost = %d, Quantity = %d", cost, qty)
             if npcUtil.giveItem(player, { {item.id, qty} }) then
                 sparks = sparks - cost
                 player:delCurrency("spark_of_eminence", cost)
@@ -691,7 +690,7 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
         if copperVouchersStored >= qty then
             if player:addItem({ id = selection, quantity = 2 * qty, silent = true }) then
                 player:delCurrency("aman_vouchers", qty)
-                player:messageSpecial(zones[player:getZoneID()].text.YOU_OBTAIN_ITEM_SINGULAR, selection)
+                player:messageSpecial(zones[player:getZoneID()].text.YOU_OBTAIN_ITEM, selection, 1) -- Retail: Provisions are always singular
             else
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, selection)
             end

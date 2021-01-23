@@ -12,6 +12,7 @@ require("scripts/globals/roe")
 local entity = {}
 
 entity.onTrade = function(player,npc,trade)
+    tpz.sparkshop.onTrade(player,npc,trade)
 end
 
 entity.onTrigger = function(player,npc)
