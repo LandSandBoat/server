@@ -193,8 +193,9 @@ private:
     size_t                 m_MaxParticipants;
     uint8                  m_LevelCap;
 
-    bool                                      m_Cleanup{ false };
-    bool                                      m_Attacked{ false };
+    bool m_Cleanup{ false };
+    bool m_Attacked{ false };
+
     std::unordered_map<std::string, uint64_t> m_LocalVars;
 };
 
