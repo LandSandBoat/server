@@ -232,6 +232,7 @@ namespace luautils
         lua.script_file("./scripts/globals/gear_sets.lua");
         lua.script_file("./scripts/globals/battlefield.lua");
         lua.script_file("./scripts/globals/mobs.lua");
+        lua.script_file("./scripts/globals/mixins.lua");
 
         // Pet Scripts
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
@@ -2294,18 +2295,19 @@ namespace luautils
         return 0;
     }
 
+    // Called during server startup, file reads are OK!
     int32 ApplyMixins(CBaseEntity* PMob)
     {
         TracyZoneScoped;
 
-        if (PMob == nullptr || PMob->objtype == TYPE_MOB)
+        if (PMob == nullptr || PMob->objtype != TYPE_MOB)
         {
             return -1;
         }
 
         // Clear out globals
-        lua["mixins"]       = sol::nil;
-        lua["mixinOptions"] = sol::nil;
+        lua.set("mixins", sol::nil);
+        lua.set("mixinOptions", sol::nil);
 
         auto zone_name = (const char*)PMob->loc.zone->GetName();
         auto name      = (const char*)PMob->GetName();
@@ -2315,13 +2317,11 @@ namespace luautils
         auto script_result = lua.script_file(filename);
         if (!script_result.valid())
         {
-            sol::error err = script_result;
-            ShowError("luautils::%s: %s\n", "applyMixins", err.what());
             return -1;
         }
 
-        // get the function "applyMixins"
-        auto applyMixins = lua.get<sol::function>("applyMixins");
+        // get the global function "applyMixins"
+        sol::function applyMixins = lua["applyMixins"];
         if (!applyMixins.valid())
         {
             return -1;
@@ -2352,7 +2352,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        if (PMob == nullptr || PMob->objtype == TYPE_MOB)
+        if (PMob == nullptr || PMob->objtype != TYPE_MOB)
         {
             return -1;
         }
@@ -2363,11 +2363,14 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/mixins/zones/%s.lua", PMob->loc.zone->GetName());
 
-        // get the function "applyMixins"
-        // Will be found through requires in globals/mixins
-        lua.set("applyMixins", sol::nil);
-        lua.script_file(filename);
-        auto applyMixins = lua.get<sol::function>("applyMixins");
+        auto script_result = lua.script_file(filename);
+        if (!script_result.valid())
+        {
+            return -1;
+        }
+
+        // get the global function "applyMixins"
+        sol::function applyMixins = lua["applyMixins"];
         if (!applyMixins.valid())
         {
             return -1;
@@ -2383,7 +2386,6 @@ namespace luautils
         // get the parameter "mixinOptions" (optional)
         auto mixinOptions = lua["mixinOptions"];
 
-        // call
         auto result = applyMixins(CLuaBaseEntity(PMob), mixins, mixinOptions);
         if (!result.valid())
         {
