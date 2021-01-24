@@ -23,6 +23,15 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 void CAIEventHandler::addListener(const std::string& eventname, sol::function lua_func, const std::string& identifier)
 {
+    // Remove entries with same identifier (if they exist)
+    eventListeners[eventname]
+        .erase(std::remove_if(eventListeners[eventname].begin(), eventListeners[eventname].end(),
+                              [&identifier](const ai_event_t& event)
+                              {
+                                  return identifier == event.identifier;
+                              }),
+               eventListeners[eventname].end());
+
     eventListeners[eventname].emplace_back(identifier, lua_func);
 }
 
