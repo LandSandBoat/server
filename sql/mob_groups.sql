@@ -12809,10 +12809,13 @@ INSERT INTO `mob_groups` VALUES (8,4643,202,'Ramuh_Prime_HTBF',0,128,0,0,0,99,99
 -- Cloister_of_Frost (Zone 203)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4642,203,'Shiva_Prime',0,128,0,9500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,4642,203,'Shiva_Prime_TBI',0,128,0,9500,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,1126,203,'Dryad',0,128,0,1960,0,50,50,0);
-INSERT INTO `mob_groups` VALUES (3,3607,203,'Shiva_Prime',0,128,0,700,0,20,20,0);
-INSERT INTO `mob_groups` VALUES (4,2043,203,'Ice_Elemental',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (3,3607,203,'Shiva_Prime_TSTBI',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (4,4642,203,'Shiva_Prime_WTB',0,128,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (5,2043,203,'Ice_Elemental',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (6,4642,203,'Shiva_Prime_ASA',0,128,0,0,0,45,45,0);
+INSERT INTO `mob_groups` VALUES (7,4642,203,'Shiva_Prime_HTBF',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- FeiYin (Zone 204)
