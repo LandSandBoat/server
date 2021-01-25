@@ -38,10 +38,10 @@ zones[tpz.zone.WESTERN_ADOULIN] =
         TEVIGOGO_SHOP_TEXT        = 9860, -- Hidey ho! Make sure not to forgetaru anything before heading out into the great unknown!
         MINNIFI_DIALOGUE          = 10243, -- Come, ladies and gentlemen, and enjoy our delightful array of frrresh vegetables!
         SPARK_EXCHANGE            = 11358, -- Hm? Oh, spark exchange... Of course.
-        DO_NOT_POSSESS_ENOUGH     = 11371, -- You do not possess enough <item name> to complete the transaction.
+        DO_NOT_POSSESS_ENOUGH     = 11371, -- You do not possess enough <item> to complete the transaction.
         NOT_ENOUGH_SPARKS         = 11372, -- You do not possess enough sparks of eminence to complete the transaction.
-        MAX_SPARKS_LIMIT_REACHED  = 11373, -- You have reached the maximum number of sparks that you can exchange this week (<amount>)
-        YOU_NOW_HAVE_AMT_CURRENCY = 11383, -- You now have <amount> <currency>.
+        MAX_SPARKS_LIMIT_REACHED  = 11373, -- You have reached the maximum number of sparks that you can exchange this week (<number>)
+        YOU_NOW_HAVE_AMT_CURRENCY = 11383, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
     },
     mob =
     {

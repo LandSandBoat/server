@@ -4128,8 +4128,6 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        ShowDebug("LoadEventScript: Checking Function %s\n", functionName);
-
         auto funcFromChar = GetCacheEntryFromFilename(PChar->m_event.Script)[functionName];
         if (funcFromChar.valid())
         {

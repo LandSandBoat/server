@@ -75,10 +75,10 @@ zones[tpz.zone.WINDURST_WOODS] =
         CLOUD_BAD_ITEM               = 10123, -- What the hell is this junk!? Why don't you try bringin' what I asked for before I shove one of my sandals up your...nose!
         CHOCOBO_DIALOG               = 10417, -- Kweh!
         TRRRADE_IN_SPARKS            = 13834, -- You want to trrrade in sparks, do you?
-        DO_NOT_POSSESS_ENOUGH        = 13853, -- You do not possess enough <item name> to complete the transaction.
+        DO_NOT_POSSESS_ENOUGH        = 13853, -- You do not possess enough <item> to complete the transaction.
         NOT_ENOUGH_SPARKS            = 13854, -- You do not possess enough sparks of eminence to complete the transaction.
-        MAX_SPARKS_LIMIT_REACHED     = 13855, -- You have reached the maximum number of sparks that you can exchange this week (<amount>)
-        YOU_NOW_HAVE_AMT_CURRENCY    = 13865, -- You now have <amount> <currency>.
+        MAX_SPARKS_LIMIT_REACHED     = 13855, -- You have reached the maximum number of sparks that you can exchange this week (<number>)
+        YOU_NOW_HAVE_AMT_CURRENCY    = 13865, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
     },
     mob =
     {

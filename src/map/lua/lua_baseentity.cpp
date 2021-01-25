@@ -6250,7 +6250,7 @@ void CLuaBaseEntity::addCurrency(std::string const& currencyType, int32 amount, 
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    int32 maxPoints = maxObj.get_type() == sol::type::number ? maxObj.as<uint32>() : std::numeric_limits<int32>::max();
+    int32 maxPoints = maxObj.get_type() == sol::type::number ? maxObj.as<int32>() : std::numeric_limits<int32>::max();
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     charutils::AddPoints(PChar, currencyType.c_str(), amount, maxPoints);
