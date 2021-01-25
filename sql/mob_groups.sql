@@ -12784,10 +12784,13 @@ INSERT INTO `mob_groups` VALUES (48,6891,200,'Mephitas',0,128,0,0,0,99,99,0);
 -- Cloister_of_Gales (Zone 201)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4647,201,'Garuda_Prime',0,128,0,9500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,4647,201,'Garuda_Prime_TBW',0,128,0,9500,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,2951,201,'Ogmios',0,128,0,10000,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (3,1473,201,'Garuda_Prime',0,128,0,700,0,20,20,0);
-INSERT INTO `mob_groups` VALUES (4,71,201,'Air_Elemental',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (3,1473,201,'Garuda_Prime_TSTBW',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (4,4647,201,'Garuda_Prime_WTB',0,128,0,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (5,71,201,'Air_Elemental',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (6,4647,201,'Garuda_Prime_ASA',0,128,0,0,0,45,45,0);
+INSERT INTO `mob_groups` VALUES (7,4647,201,'Garuda_Prime_HTBF',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Cloister_of_Storms (Zone 202)
