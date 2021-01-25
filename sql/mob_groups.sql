@@ -12847,25 +12847,25 @@ INSERT INTO `mob_groups` VALUES (23,6512,204,'Utukku',960,0,2880,0,0,55,57,0);
 INSERT INTO `mob_groups` VALUES (24,3723,204,'Specter_war',300,0,2302,0,0,55,58,0);
 INSERT INTO `mob_groups` VALUES (25,5320,204,'Specter_blm',300,0,2302,0,0,55,58,0);
 INSERT INTO `mob_groups` VALUES (26,5321,204,'Specter_thf',300,0,2302,0,0,55,58,0);
-INSERT INTO `mob_groups` VALUES (27,770,204,'Colossus',960,0,505,0,0,56,58,0);
-INSERT INTO `mob_groups` VALUES (28,5322,204,'Specter_rng',300,0,2302,0,0,55,58,0);
-INSERT INTO `mob_groups` VALUES (29,2231,204,'Killing_Weapon',960,0,0,0,0,59,61,0);
-INSERT INTO `mob_groups` VALUES (30,1921,204,'Hellish_Weapon',960,0,1294,0,0,61,63,0);
-INSERT INTO `mob_groups` VALUES (31,1754,204,'Goliath',0,32,1195,0,0,62,62,0);
-INSERT INTO `mob_groups` VALUES (32,4323,204,'Western_Shadow',0,32,2645,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (33,2907,204,'Northern_Shadow',0,32,1823,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (34,1164,204,'Eastern_Shadow',0,32,738,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (35,3709,204,'Southern_Shadow',0,32,2296,0,0,63,63,0);
-INSERT INTO `mob_groups` VALUES (36,888,204,'Dabotzs_Ghost',0,128,0,0,0,53,53,0);
-INSERT INTO `mob_groups` VALUES (37,630,204,'Capricious_Cassie',0,128,411,25000,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (38,2043,204,'Ice_Elemental',960,4,1347,0,0,56,58,0);
-INSERT INTO `mob_groups` VALUES (39,913,204,'Dark_Elemental',960,4,568,0,0,56,58,0);
-
-INSERT INTO `mob_groups` VALUES (9934,862,204,'Curilla',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9936,896,204,'Dalzakk',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9948,3312,204,'Rainemard',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9955,4006,204,'Trion',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (9961,4498,204,'Zeid',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,5322,204,'Specter_rng',300,0,2302,0,0,55,58,0);
+INSERT INTO `mob_groups` VALUES (28,770,204,'Colossus',960,0,505,0,0,56,58,0);
+INSERT INTO `mob_groups` VALUES (29,2043,204,'Ice_Elemental',960,4,1347,0,0,56,58,0);
+INSERT INTO `mob_groups` VALUES (30,913,204,'Dark_Elemental',960,4,568,0,0,56,58,0);
+INSERT INTO `mob_groups` VALUES (31,2231,204,'Killing_Weapon',960,0,0,0,0,59,61,0);
+INSERT INTO `mob_groups` VALUES (32,1921,204,'Hellish_Weapon',960,0,1294,0,0,61,63,0);
+INSERT INTO `mob_groups` VALUES (33,1754,204,'Goliath',0,32,1195,0,0,62,62,0);
+INSERT INTO `mob_groups` VALUES (34,4323,204,'Western_Shadow',0,32,2645,0,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (35,2907,204,'Northern_Shadow',0,32,1823,0,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (36,1164,204,'Eastern_Shadow',0,32,738,0,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (37,3709,204,'Southern_Shadow',0,32,2296,0,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (38,888,204,'Dabotzs_Ghost',0,128,0,0,0,53,53,0);
+INSERT INTO `mob_groups` VALUES (39,630,204,'Capricious_Cassie',0,128,411,25000,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (40,6892,204,'Orientalis_Shadow',0,128,0,0,0,128,128,0);
+INSERT INTO `mob_groups` VALUES (41,6893,204,'Borealis_Shadow',0,128,0,0,0,128,128,0);
+INSERT INTO `mob_groups` VALUES (42,6894,204,'Australis_Shadow',0,128,0,0,0,128,128,0);
+INSERT INTO `mob_groups` VALUES (43,6895,204,'Occidentalis_Shadow',0,128,0,0,0,128,128,0);
+INSERT INTO `mob_groups` VALUES (44,6896,204,'Carousing_Celine',0,128,0,0,0,128,128,0);
+INSERT INTO `mob_groups` VALUES (45,6889,204,'Arcus_Blades',0,128,0,0,0,125,125,0);
 
 -- ------------------------------------------------------------
 -- Ifrits_Cauldron (Zone 205)
