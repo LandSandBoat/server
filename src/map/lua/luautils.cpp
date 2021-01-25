@@ -2361,7 +2361,7 @@ namespace luautils
         lua.set("mixins", sol::nil);
         lua.set("mixinOptions", sol::nil);
 
-        auto filename = fmt::format("./scripts/mixins/zones/%s.lua", PMob->loc.zone->GetName());
+        auto filename = fmt::format("./scripts/mixins/zones/{}.lua", PMob->loc.zone->GetName());
 
         auto script_result = lua.script_file(filename);
         if (!script_result.valid())
@@ -2757,6 +2757,7 @@ namespace luautils
             {
                 return -1;
             }
+
 
             PChar->ForAlliance([PMob, PChar, &onMobDeathEx](CBattleEntity* PMember) {
                 if (PMember->getZone() == PChar->getZone())
