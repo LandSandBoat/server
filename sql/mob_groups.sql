@@ -13763,39 +13763,44 @@ INSERT INTO `mob_groups` VALUES (65,0,259,'August',0,128,0,0,0,0,0,0);
 -- Yahse_Hunting_Grounds (Zone 260)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5021,260,'Calfcleaving_Chapuli',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (2,5022,260,'Canopycrusher_Beetle',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (3,5032,260,'Umbril',180,1,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (4,5023,260,'Burning_Mantis',330,0,0,0,0,100,102,0);
-INSERT INTO `mob_groups` VALUES (5,5020,260,'Twitherym_Infestation',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (6,4738,260,'Wooded_Ungeweder',0,4,0,0,5000,100,101,0);
-INSERT INTO `mob_groups` VALUES (7,5026,260,'Nettled_Wasp',330,0,0,0,9999,100,101,0);
-INSERT INTO `mob_groups` VALUES (8,4861,260,'Jungle_Baelfyr',0,4,0,0,5000,100,101,0);
-INSERT INTO `mob_groups` VALUES (9,5031,260,'Ulbukan_Sheep',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (10,5025,260,'Pinetorum',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (11,5024,260,'Edacious_Orobon',330,0,0,0,0,100,102,0);
-INSERT INTO `mob_groups` VALUES (12,5002,260,'Bight_Uragnite',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (13,5029,260,'Luckybug_Hoarder',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (14,5027,260,'Beady_panopt',330,0,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (15,5013,260,'Numbing_Blossom',330,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (16,5030,260,'Monstrosiraptor',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (17,5033,260,'Hinterland_Peiste',330,0,0,0,0,100,102,0);
-INSERT INTO `mob_groups` VALUES (18,5034,260,'Verdant_Treant',330,0,0,0,0,100,102,0);
-INSERT INTO `mob_groups` VALUES (19,5028,260,'Broad_Scarlet',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (20,5036,260,'Fiery_Wasp',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (21,4748,260,'Shy_Heartwing',330,0,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (22,4747,260,'Frondescent_Leafkin',330,0,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (23,5035,260,'Velkk_Marauder',330,0,0,0,0,100,103,0);
-INSERT INTO `mob_groups` VALUES (24,4746,260,'Startled_Uragnite',0,128,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (25,4798,260,'Wasp_Nest',0,128,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (26,4745,260,'Cerise_Wasp',0,128,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (27,4741,260,'Temblor_Beetle',0,128,0,20000,999,100,103,0);
-INSERT INTO `mob_groups` VALUES (28,4740,260,'Thrashing_Mantis',0,128,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (29,4742,260,'Shrubshredder_Chapuli',0,128,0,20000,999,100,103,0);
-INSERT INTO `mob_groups` VALUES (30,4744,260,'Quivering_Twitherym',0,128,0,20000,999,100,103,0);
-INSERT INTO `mob_groups` VALUES (31,4743,260,'Red_Dropwing',0,128,0,0,999,100,101,0);
-INSERT INTO `mob_groups` VALUES (32,5064,260,'Knotted_Root',3600,0,0,20000,0,100,103,0);
-INSERT INTO `mob_groups` VALUES (33,4739,260,'Lancing_Wasp',0,128,0,20000,999,100,103,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,0,260,'Crusty_Crab',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,260,'Barnacled_Orobon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,5021,260,'Calfcleaving_Chapuli',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (4,5022,260,'Canopycrusher_Beetle',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (5,5032,260,'Umbril',180,1,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (6,5023,260,'Burning_Mantis',330,0,0,0,0,100,102,0);
+INSERT INTO `mob_groups` VALUES (7,5020,260,'Twitherym_Infestation',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (8,4738,260,'Wooded_Ungeweder',0,4,0,0,5000,100,101,0);
+INSERT INTO `mob_groups` VALUES (9,5026,260,'Nettled_Wasp',330,0,0,0,9999,100,101,0);
+INSERT INTO `mob_groups` VALUES (10,4861,260,'Jungle_Baelfyr',0,4,0,0,5000,100,101,0);
+INSERT INTO `mob_groups` VALUES (11,5031,260,'Ulbukan_Sheep',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (12,5025,260,'Pinetorum',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (13,5024,260,'Edacious_Orobon',330,0,0,0,0,100,102,0);
+INSERT INTO `mob_groups` VALUES (14,5002,260,'Bight_Uragnite',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (15,5029,260,'Luckybug_Hoarder',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (16,5013,260,'Numbing_Blossom',330,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (17,5027,260,'Beady_Panopt',330,0,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (18,5030,260,'Monstrosiraptor',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (19,5033,260,'Hinterland_Peiste',330,0,0,0,0,101,103,0);
+INSERT INTO `mob_groups` VALUES (20,5034,260,'Verdant_Treant',330,0,0,0,0,100,102,0);
+INSERT INTO `mob_groups` VALUES (21,5028,260,'Broad_Scarlet',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (22,5036,260,'Fiery_Wasp',330,0,0,0,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (23,4748,260,'Shy_Heartwing',330,0,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (24,4747,260,'Frondescent_Leafkin',330,0,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (25,5035,260,'Velkk_Marauder',330,0,0,0,0,100,103,0);
+INSERT INTO `mob_groups` VALUES (26,0,260,'Alluring_Orobon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,4746,260,'Startled_Uragnite',0,128,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (28,6908,260,'Bothersome_Chapuli',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,4798,260,'Wasp_Nest',0,128,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (30,4745,260,'Cerise_Wasp',0,128,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (31,4741,260,'Temblor_Beetle',0,128,0,20000,999,100,103,0);
+INSERT INTO `mob_groups` VALUES (32,4740,260,'Thrashing_Mantis',0,128,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (33,4742,260,'Shrubshredder_Chapuli',0,128,0,20000,999,100,103,0);
+INSERT INTO `mob_groups` VALUES (34,4744,260,'Quivering_Twitherym',0,128,0,20000,999,100,103,0);
+INSERT INTO `mob_groups` VALUES (35,4743,260,'Red_Dropwing',0,128,0,0,999,100,101,0);
+INSERT INTO `mob_groups` VALUES (36,5064,260,'Knotted_Root',3600,0,0,20000,0,100,103,0);
+INSERT INTO `mob_groups` VALUES (37,4739,260,'Lancing_Wasp',0,128,0,20000,999,100,103,0);
 
 -- ------------------------------------------------------------
 -- Ceizak_Battlegrounds (Zone 261)
