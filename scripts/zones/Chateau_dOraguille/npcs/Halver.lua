@@ -60,6 +60,8 @@ entity.onTrigger = function(player, npc)
         elseif (currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 1) then
             player:startEvent(29)
         -- Mission San d'Oria 9-1 Lightbringer (optional)
+        elseif (currentMission == tpz.mission.id.sandoria.BREAKING_BARRIERS and MissionStatus == 0) then
+            player:startEvent(26)
         elseif (currentMission == tpz.mission.id.sandoria.BREAKING_BARRIERS and MissionStatus == 1) then
             player:startEvent(1)
         -- Mission San d'Oria 8-2 Lightbringer (optional)
