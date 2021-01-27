@@ -13526,20 +13526,23 @@ INSERT INTO `mob_groups` VALUES (14,1213,227,'Enagakure',0,128,0,0,0,55,55,0);
 -- ------------------------------------------------------------
 -- Ship_bound_for_Mhaura_Pirates (Zone 228)
 -- ------------------------------------------------------------
+-- TODO: check retail respawn timers
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6790,228,'Sea_Pugil_fished',0,128,463,0,0,10,20,0);
 INSERT INTO `mob_groups` VALUES (2,2934,228,'Ocean_Crab',0,128,1835,0,0,10,14,0);
 INSERT INTO `mob_groups` VALUES (3,2937,228,'Ocean_Pugil',0,128,147,0,0,15,19,0);
 INSERT INTO `mob_groups` VALUES (4,3138,228,'Pirate_Pugil',0,128,147,0,0,20,22,0);
 INSERT INTO `mob_groups` VALUES (5,6791,228,'Sea_Monk_fished',0,128,2188,0,0,21,29,0);
-INSERT INTO `mob_groups` VALUES (6,3520,228,'Sea_Crab',0,128,2184,0,0,10,20,0);
-INSERT INTO `mob_groups` VALUES (7,3127,228,'Phantom',0,128,1993,0,0,22,25,0);
-INSERT INTO `mob_groups` VALUES (8,5878,228,'Crossbones',300,0,537,0,0,28,31,0);
-INSERT INTO `mob_groups` VALUES (9,844,228,'Crossbones',300,0,537,0,0,28,31,0);
-INSERT INTO `mob_groups` VALUES (10,3605,228,'Ship_Wight',300,0,2239,0,0,36,39,0);
-INSERT INTO `mob_groups` VALUES (11,3626,228,'Silverhook',0,128,2249,0,0,68,70,0);
-INSERT INTO `mob_groups` VALUES (12,3524,228,'Sea_Pugil',0,128,463,0,0,10,20,0);
-INSERT INTO `mob_groups` VALUES (13,3523,228,'Sea_Monk',0,128,2188,0,0,21,29,0);
+
+INSERT INTO `mob_groups` VALUES (6,3520,228,'Sea_Crab',300,0,2184,0,0,10,20,0);
+INSERT INTO `mob_groups` VALUES (7,3524,228,'Sea_Pugil',300,0,463,0,0,10,20,0);
+INSERT INTO `mob_groups` VALUES (8,3523,228,'Sea_Monk',300,0,2188,0,0,21,29,0);
+INSERT INTO `mob_groups` VALUES (9,3127,228,'Phantom',300,1,1993,0,0,22,25,0);
+INSERT INTO `mob_groups` VALUES (10,5878,228,'Crossbones_blm',0,128,537,0,0,28,31,0);
+INSERT INTO `mob_groups` VALUES (11,844,228,'Crossbones_war',0,128,537,0,0,28,31,0);
+INSERT INTO `mob_groups` VALUES (12,3605,228,'Ship_Wight',0,128,2239,0,0,36,39,0);
+INSERT INTO `mob_groups` VALUES (13,3626,228,'Silverhook',0,128,2249,0,0,68,70,0);
 
 -- ------------------------------------------------------------
 -- Abyssea-Uleguerand (Zone 253)
