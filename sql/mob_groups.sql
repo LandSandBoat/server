@@ -13471,19 +13471,22 @@ INSERT INTO `mob_groups` VALUES (13,1213,220,'Enagakure',0,128,1993,0,0,55,55,0)
 -- ------------------------------------------------------------
 -- Ship_bound_for_Mhaura (Zone 221)
 -- ------------------------------------------------------------
+-- TODO: check retail respawn timers
 
+-- fished
 INSERT INTO `mob_groups` VALUES (1,6790,221,'Sea_Pugil_fished',0,128,463,0,0,10,20,0);
 INSERT INTO `mob_groups` VALUES (2,2934,221,'Ocean_Crab',0,128,1835,0,0,10,14,0);
 INSERT INTO `mob_groups` VALUES (3,2937,221,'Ocean_Pugil',0,128,147,0,0,15,19,0);
 INSERT INTO `mob_groups` VALUES (4,3138,221,'Pirate_Pugil',0,128,147,0,0,20,22,0);
 INSERT INTO `mob_groups` VALUES (5,6791,221,'Sea_Monk_fished',0,128,2188,0,0,21,29,0);
-INSERT INTO `mob_groups` VALUES (6,3520,221,'Sea_Crab',0,128,2184,0,0,10,20,0);
-INSERT INTO `mob_groups` VALUES (7,3127,221,'Phantom',0,128,1993,0,0,22,25,0);
-INSERT INTO `mob_groups` VALUES (8,3912,221,'Thunder_Elemental',300,4,2415,0,0,27,29,0);
-INSERT INTO `mob_groups` VALUES (9,4309,221,'Water_Elemental',300,4,2629,0,0,27,29,0);
-INSERT INTO `mob_groups` VALUES (10,3522,221,'Sea_Horror',0,128,2187,0,0,60,62,0);
-INSERT INTO `mob_groups` VALUES (11,3524,221,'Sea_Pugil',0,128,463,0,0,10,20,0);
-INSERT INTO `mob_groups` VALUES (12,3523,221,'Sea_Monk',0,128,2188,0,0,21,29,0);
+
+INSERT INTO `mob_groups` VALUES (6,3520,221,'Sea_Crab',300,0,2184,0,0,10,20,0);
+INSERT INTO `mob_groups` VALUES (7,3524,221,'Sea_Pugil',300,0,463,0,0,10,20,0);
+INSERT INTO `mob_groups` VALUES (8,3523,221,'Sea_Monk',300,0,2188,0,0,21,29,0);
+INSERT INTO `mob_groups` VALUES (9,3127,221,'Phantom',300,1,1993,0,0,22,25,0);
+INSERT INTO `mob_groups` VALUES (10,3912,221,'Thunder_Elemental',300,4,2415,0,0,27,29,0);
+INSERT INTO `mob_groups` VALUES (11,4309,221,'Water_Elemental',300,4,2629,0,0,27,29,0);
+INSERT INTO `mob_groups` VALUES (12,3522,221,'Sea_Horror',900,0,2187,0,0,60,62,0);
 
 -- ------------------------------------------------------------
 -- Provenance (Zone 222)
