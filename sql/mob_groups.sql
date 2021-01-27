@@ -13492,10 +13492,10 @@ INSERT INTO `mob_groups` VALUES (12,3522,221,'Sea_Horror',900,0,2187,0,0,60,62,0
 -- Provenance (Zone 222)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4654,222,'Provenance_Watcher',240,0,0,100000,9999,99,99,0);
+INSERT INTO `mob_groups` VALUES (1,4654,222,'Provenance_Watcher',0,128,0,100000,9999,99,99,0);
 INSERT INTO `mob_groups` VALUES (2,5314,222,'Crystal_Fetter',0,128,0,0,9999,99,99,0);
 INSERT INTO `mob_groups` VALUES (3,4665,222,'Sarbaz',0,128,0,180000,9999,99,99,0);
-INSERT INTO `mob_groups` VALUES (4,5315,222,'Pil-Provenance',0,128,0,180000,9999,99,99,0);
+INSERT INTO `mob_groups` VALUES (4,5315,222,'Pil',0,128,0,180000,9999,99,99,0);
 INSERT INTO `mob_groups` VALUES (5,4664,222,'Asb',0,128,0,180000,9999,99,99,0);
 INSERT INTO `mob_groups` VALUES (6,4663,222,'Rukh',0,128,0,180000,9999,99,99,0);
 INSERT INTO `mob_groups` VALUES (7,4667,222,'Shah',0,128,0,180000,9999,99,99,0);
