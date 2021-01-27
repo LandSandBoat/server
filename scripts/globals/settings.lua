@@ -36,8 +36,17 @@ FOV_REWARD_ALLIANCE = 0 -- Allow Fields of Valor rewards while being a member of
 GOV_REWARD_ALLIANCE = 1 -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
 -- Records of Eminence
-ENABLE_ROE = 1
-ENABLE_ROE_TIMED = 1 -- Enable 4-hour timed records
+ENABLE_ROE            = 1
+ENABLE_ROE_TIMED      = 1 -- Enable 4-hour timed records
+ENABLE_EXCHANGE_LIMIT = 1 -- Enable Maximum limit of sparks spent per Week (default retail behavior: 1)
+
+WEEKLY_EXCHANGE_LIMIT = 100000 -- Maximum amount of sparks that can be spent per week (default retail value: 100000)
+
+-- Currency Caps (Change at your own risk!)
+CAP_CURRENCY_ACCOLADES = 99999
+CAP_CURRENCY_BALLISTA  = 2000
+CAP_CURRENCY_SPARKS    = 99999
+CAP_CURRENCY_VALOR     = 50000
 
 -- Magian Trials
 ENABLE_MAGIAN_TRIALS = 1
