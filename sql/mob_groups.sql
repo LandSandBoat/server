@@ -13667,23 +13667,27 @@ INSERT INTO `mob_groups` VALUES (1,3604,255,'Shinryu',0,128,2238,0,0,90,92,0);
 -- Rala_Waterways (Zone 258)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5037,258,'Spoutdrenched_Toad',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (2,5038,258,'Rustwater_Toad',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (3,5039,258,'Waterway_Pugil',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (4,5040,258,'Stillwater_Funguar',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (5,5043,258,'Chalybeous_Slime',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (6,5044,258,'Flavescent_Slime',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (7,5041,258,'Baleful_Tarichuk',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (8,5042,258,'Unrelenting_Eft',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (9,5045,258,'Pewter_Diremite',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (10,5046,258,'Depthswalker_Crab',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (11,5047,258,'Barnacle_Crab',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (12,5048,258,'Weatherworn_Leech',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (13,5049,258,'Duskjaw_Obdella',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (14,5050,258,'Skittering_Spider',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (15,5051,258,'New_Moon_Bats',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (16,5052,258,'Duskbringer_Bat',330,0,0,0,0,99,107,0);
-INSERT INTO `mob_groups` VALUES (17,5053,258,'Plantpassage_Slug',330,0,0,0,0,99,107,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,0,258,'Sawtooth_Pugil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,258,'Waterlogged_Toad',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (3,5037,258,'Spoutdrenched_Toad',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (4,5038,258,'Rustwater_Toad',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (5,5039,258,'Waterway_Pugil',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (6,5040,258,'Stillwater_Funguar',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (7,5043,258,'Chalybeous_Slime',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (8,5044,258,'Flavescent_Slime',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (9,5041,258,'Baleful_Tarichuk',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (10,5042,258,'Unrelenting_Eft',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (11,5045,258,'Pewter_Diremite',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (12,5046,258,'Depthswalker_Crab',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (13,5047,258,'Barnacle_Crab',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (14,5048,258,'Weatherworn_Leech',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (15,5049,258,'Duskjaw_Obdella',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (16,5050,258,'Skittering_Spider',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (17,5051,258,'New_Moon_Bats',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (18,5052,258,'Duskbringer_Bat',330,0,0,0,0,99,107,0);
+INSERT INTO `mob_groups` VALUES (19,5053,258,'Plantpassage_Slug',330,0,0,0,0,99,107,0);
 
 -- ------------------------------------------------------------
 -- Yahse_Hunting_Grounds (Zone 260)
