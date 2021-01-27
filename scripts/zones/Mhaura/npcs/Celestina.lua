@@ -19,7 +19,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
         if npcUtil.tradeHasExactly(trade, 13095) then
-            player:startEvent(127) -- Finish quest "The Sand Charm"
+            player:startEvent(127, 0, 13095) -- Finish quest "The Sand Charm"
         end
     end
 
