@@ -49,6 +49,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         if (tick > (lastConquestTally + 1h))
         {
             conquest::UpdateWeekConquest();
+            roeutils::CycleWeeklyRecords();
             lastConquestTally = tick;
         }
     }

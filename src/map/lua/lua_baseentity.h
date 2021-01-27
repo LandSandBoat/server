@@ -359,7 +359,7 @@ public:
     bool   delGil(int32 gil);
 
     int32 getCurrency(std::string const& currencyType);
-    void  addCurrency(std::string const& currencyType, int32 amount);
+    void  addCurrency(std::string const& currencyType, int32 amount, sol::object const& maxObj);
     void  setCurrency(std::string const& currencyType, int32 amount);
     void  delCurrency(std::string const& currencyType, int32 amount);
 

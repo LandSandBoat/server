@@ -22,11 +22,11 @@ entity.onTrigger = function(player, npc)
     local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
     local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
 
-    if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 then
-        if TrustWindurst == QUEST_AVAILABLE and (TrustBastok == QUEST_COMPLETED or TrustSandoria == QUEST_COMPLETED) then
-            player:startEvent(867)
-        elseif TrustWindurst == QUEST_AVAILABLE and TrustBastok == QUEST_AVAILABLE and TrustSandoria == QUEST_AVAILABLE then
+    if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 and TrustWindurst == QUEST_AVAILABLE then
+        if TrustBastok == QUEST_AVAILABLE and TrustSandoria == QUEST_AVAILABLE then
             player:startEvent(863)
+        elseif TrustBastok == QUEST_COMPLETED or TrustSandoria == QUEST_COMPLETED then
+            player:startEvent(867)
         end
     elseif player:hasKeyItem(tpz.ki.GREEN_INSTITUTE_CARD) then
         player:startEvent(864)

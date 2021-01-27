@@ -6,13 +6,13 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/sparkshop")
 require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player,npc,trade)
+    tpz.sparkshop.onTrade(player,npc,trade)
 end
 
 entity.onTrigger = function(player,npc)

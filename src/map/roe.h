@@ -66,6 +66,8 @@ struct RoeSystemData
     std::bitset<4096>        RetroactiveRecords;
     std::bitset<4096>        DailyRecords;
     std::vector<uint16>      DailyRecordIDs;
+    std::bitset<4096>        WeeklyRecords;
+    std::vector<uint16>      WeeklyRecordIDs;
     std::bitset<4096>        TimedRecords;
     std::array<uint32, 4096> NotifyThresholds;
 
@@ -133,6 +135,8 @@ namespace roeutils
 
     void ClearDailyRecords(CCharEntity* PChar);
     void CycleDailyRecords();
+    void ClearWeeklyRecords(CCharEntity* PChar);
+    void CycleWeeklyRecords();
 
     uint16 GetActiveTimedRecord();
     void   AddActiveTimedRecord(CCharEntity* PChar);

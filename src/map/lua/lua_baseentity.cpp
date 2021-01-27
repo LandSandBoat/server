@@ -464,19 +464,11 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
  *  Notes   : Passing a '0' value will delete the variable
  ************************************************************************/
 
-void CLuaBaseEntity::setCharVar(std::string const& varname, int32 value)
+void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    if (value == 0)
-    {
-        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", m_PBaseEntity->id, varname.c_str());
-    }
-    else
-    {
-        const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
-        Sql_Query(SqlHandle, fmtQuery, m_PBaseEntity->id, varname.c_str(), value, value);
-    }
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    return charutils::SetCharVar(PChar, varName.c_str(), value);
 }
 
 /************************************************************************
@@ -486,13 +478,13 @@ void CLuaBaseEntity::setCharVar(std::string const& varname, int32 value)
  *  Notes   : Can use values greater than 1 to increment more
  ************************************************************************/
 
-void CLuaBaseEntity::addCharVar(std::string const& varname, int32 value)
+void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
 
-    Sql_Query(SqlHandle, Query, m_PBaseEntity->id, varname, value, value);
+    Sql_Query(SqlHandle, Query, m_PBaseEntity->id, varName, value, value);
 }
 
 /************************************************************************
@@ -6254,12 +6246,14 @@ int32 CLuaBaseEntity::getCurrency(std::string const& currencyType)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::addCurrency(std::string const& currencyType, int32 amount)
+void CLuaBaseEntity::addCurrency(std::string const& currencyType, int32 amount, sol::object const& maxObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
+    int32 maxPoints = maxObj.get_type() == sol::type::number ? maxObj.as<int32>() : std::numeric_limits<int32>::max();
+
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::AddPoints(PChar, currencyType.c_str(), amount);
+    charutils::AddPoints(PChar, currencyType.c_str(), amount, maxPoints);
 }
 
 /************************************************************************
