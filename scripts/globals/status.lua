@@ -1711,7 +1711,7 @@ local MCATEGORY_COR_2 = 0x0C00
 local MCATEGORY_PUP_2 = 0x0C40
 local MCATEGORY_DNC_2 = 0x0C80
 local MCATEGORY_SCH_2 = 0x0CC0
-local MCATEGORY_UNK_2 = 0x0D00
+local MCATEGORY_UNK_4 = 0x0D00
 local MCATEGORY_GEO_2 = 0x0D40
 local MCATEGORY_RUN_2 = 0x0D80
 
@@ -1926,6 +1926,13 @@ tpz.merit =
     BLAZE_OF_GLORY_RECAST       = MCATEGORY_GEO_1 + 0x06,
     DEMATERIALIZE_RECAST        = MCATEGORY_GEO_1 + 0x08,
 
+    -- RUN 1
+    MERIT_RUNE_ENHANCE          = MCATEGORY_RUN_1 + 0x00,
+    MERIT_VALLATION_EFFECT      = MCATEGORY_RUN_1 + 0x02,
+    MERIT_LUNGE_EFFECT          = MCATEGORY_RUN_1 + 0x04,
+    MERIT_PFLUG_EFFECT          = MCATEGORY_RUN_1 + 0x06,
+    MERIT_GAMBIT_EFFECT         = MCATEGORY_RUN_1 + 0x08,
+
     -- WEAPON SKILLS
     SHIJIN_SPIRAL               = MCATEGORY_WS + 0x00,
     EXENTERATOR                 = MCATEGORY_WS + 0x02,
@@ -2094,11 +2101,17 @@ tpz.merit =
     ENLIGHTENMENT               = MCATEGORY_SCH_2 + 0x08,
     STORMSURGE                  = MCATEGORY_SCH_2 + 0x0A,
 
-        -- GEO 2
+    -- GEO 2
     MENDING_HALATION            = MCATEGORY_GEO_2 + 0x00,
     RADIAL_ARCANA               = MCATEGORY_GEO_2 + 0x02,
     CURATIVE_RECANTATION        = MCATEGORY_GEO_2 + 0x04,
     PRIMEVAL_ZEAL               = MCATEGORY_GEO_2 + 0x06,
+
+    -- RUN 2
+    MERIT_BATTUTA               = MCATEGORY_RUN_2 + 0x00,
+    MERIT_RAYKE                 = MCATEGORY_RUN_2 + 0x02,
+    MERIT_INSPIRATION           = MCATEGORY_RUN_2 + 0x04,
+    MERIT_SLEIGHT_OF_SWORD      = MCATEGORY_RUN_2 + 0x06,
 }
 
 -----------------------------------
