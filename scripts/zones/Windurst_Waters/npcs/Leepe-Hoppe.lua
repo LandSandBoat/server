@@ -8,6 +8,8 @@ require("scripts/globals/settings")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 local entity = {}
@@ -27,6 +29,7 @@ entity.onTrigger = function(player, npc)
     local MissionStatus = player:getCharVar("MissionStatus")
     local tuningIn = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_OUT)
+    local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     -- Check if we are on Windurst Mission 1-3 and haven't already delivered both offerings.
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_PRICE_OF_PEACE and MissionStatus < 3) then
@@ -110,16 +113,14 @@ entity.onTrigger = function(player, npc)
         elseif (realday ~= player:getCharVar("MoonlitPath_date")) then --24 hours have passed, flag a new fight
             player:startEvent(848, 0, 1125, 334)
         end
-
     elseif tuningIn == QUEST_ACCEPTED then
         player:startEvent(885, 0, 1696, 1697, 1698) -- Reminder to bring Magicked Steel Ingot, Spruce Lumber, Extra-fine File
-
     elseif tuningOut == QUEST_ACCEPTED then
         player:startEvent(889) -- Reminder to go help Ildy in Kazham
-
     elseif moonlitPath == QUEST_COMPLETED then
         player:startEvent(847, 0, 1125) -- Having completed Moonlit Path, this will indefinitely replace his standard dialogue!
-
+    elseif turmoil == QUEST_ACCEPTED then
+        player:startEvent(790, 0, tpz.ki.RHINOSTERY_CERTIFICATE)
     else
         player:startEvent(345) -- Standard Dialogue?
     end

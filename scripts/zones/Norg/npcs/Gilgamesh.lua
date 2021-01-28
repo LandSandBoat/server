@@ -22,7 +22,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ZilartMission = player:getCurrentMission(ZILART);
+    local ZilartMission = player:getCurrentMission(ZILART)
+    local rovMission = player:getCurrentMission(ROV)
+
     if (ZilartMission == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(7)
     elseif (ZilartMission == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
@@ -48,6 +50,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(233);
     elseif (ZilartMission == tpz.mission.id.zilart.AWAKENING) then
         player:startEvent(177)
+    elseif rovMission == tpz.mission.id.rov.THE_PATH_UNTRAVELED then
+        player:startEvent(263)
     end
 end
 
