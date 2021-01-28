@@ -7,6 +7,7 @@
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")
+require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
@@ -34,6 +35,7 @@ end
 entity.onTrigger = function(player, npc)
     local MandragoraMad = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MANDRAGORA_MAD)
     local blastFromPast = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST)
+    local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
     local LouverancePath = player:getCharVar("COP_Louverance_s_Path")
     local MissionStatus = player:getCharVar("MissionStatus")
@@ -67,6 +69,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(249)
     elseif MandragoraMad == QUEST_ACCEPTED then
         player:startEvent(256)
+    elseif turmoil == QUEST_ACCEPTED then
+        player:startEvent(392)
     else
         player:startEvent(245)
     end
