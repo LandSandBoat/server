@@ -16,7 +16,7 @@ zones[tpz.zone.WESTERN_ADOULIN] =
         KEYITEM_OBTAINED          = 6392, -- Obtained key item: <keyitem>.
         KEYITEM_LOST              = 6393, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL       = 6394, -- You do not have enough gil.
-        YOU_OBTAIN_ITEM           = 6395, -- You obtain <amount or 'a'> <item>(s)!
+        YOU_OBTAIN_ITEM           = 6395, -- You obtain  <item>!
         CARRIED_OVER_POINTS       = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY   = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER              = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -40,7 +40,7 @@ zones[tpz.zone.WESTERN_ADOULIN] =
         SPARK_EXCHANGE            = 11358, -- Hm? Oh, spark exchange... Of course.
         DO_NOT_POSSESS_ENOUGH     = 11371, -- You do not possess enough <item> to complete the transaction.
         NOT_ENOUGH_SPARKS         = 11372, -- You do not possess enough sparks of eminence to complete the transaction.
-        MAX_SPARKS_LIMIT_REACHED  = 11373, -- You have reached the maximum number of sparks that you can exchange this week (<number>)
+        MAX_SPARKS_LIMIT_REACHED  = 11373, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
         YOU_NOW_HAVE_AMT_CURRENCY = 11383, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
     },
     mob =
