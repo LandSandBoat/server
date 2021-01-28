@@ -68,7 +68,7 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.tradeHas(trade,{{9082, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 1
     then
-        player:startEvent(178)
+        player:startEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
     end
 end
 
@@ -113,6 +113,8 @@ entity.onTrigger = function(player, npc)
                 end
             end
         end
+    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE then
+        player:startEvent(181)
     end
 end
 
