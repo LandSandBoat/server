@@ -20,6 +20,8 @@ entity.onTrigger = function(player, npc)
     hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
     if ((hatstatus == 1  or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 64) == false) then
         player:startEvent(54) -- Show Off Hat
+    elseif player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
+        player:startEvent(445)
     else
         player:startEvent(421) -- Standard Conversation
     end
