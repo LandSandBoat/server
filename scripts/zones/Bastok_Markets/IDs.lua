@@ -17,7 +17,7 @@ zones[tpz.zone.BASTOK_MARKETS] =
         KEYITEM_OBTAINED             = 6392, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                 = 6393, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL          = 6394, -- You do not have enough gil.
-        YOU_OBTAIN_ITEM              = 6395, -- You obtain <amount or 'a'> <item>(s)!
+        YOU_OBTAIN_ITEM              = 6395, -- You obtain  <item>!
         YOU_MUST_WAIT_ANOTHER_N_DAYS = 6425, -- You must wait another <number> [day/days] to perform that action.
         ITEMS_OBTAINED               = 6398, -- You obtain <number> <item>!
         CARRIED_OVER_POINTS          = 6428, -- You have carried over <number> login point[/s].
@@ -69,7 +69,7 @@ zones[tpz.zone.BASTOK_MARKETS] =
         TURNING_IN_SPARKS            = 14206, -- Ohohoho... Turning in sparks, I see.
         DO_NOT_POSSESS_ENOUGH        = 14230, -- You do not possess enough <item> to complete the transaction.
         NOT_ENOUGH_SPARKS            = 14231, -- You do not possess enough sparks of eminence to complete the transaction.
-        MAX_SPARKS_LIMIT_REACHED     = 14232, -- You have reached the maximum number of sparks that you can exchange this week (<number>)
+        MAX_SPARKS_LIMIT_REACHED     = 14232, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
         YOU_NOW_HAVE_AMT_CURRENCY    = 14242, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
     },
     mob =
