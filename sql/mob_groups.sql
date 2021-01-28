@@ -13862,36 +13862,52 @@ INSERT INTO `mob_groups` VALUES (42,4864,261,'Taxet',0,128,0,0,0,107,109,0);
 -- Foret_de_Hennetiel (Zone 262)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5093,262,'Riverwashed_Toad',330,0,2971,0,0,102,110,0);
-INSERT INTO `mob_groups` VALUES (2,5094,262,'Zoldeff_Jagil',330,0,2972,0,0,102,110,0);
-INSERT INTO `mob_groups` VALUES (3,5095,262,'Hoary_Craklaw',330,0,2973,0,0,101,104,0);
-INSERT INTO `mob_groups` VALUES (4,4972,262,'Treefrost_Gefyrst',300,0,2983,0,500,104,104,0);
-INSERT INTO `mob_groups` VALUES (5,5096,262,'Perfidious_Crab',330,0,2974,0,0,102,110,0);
-INSERT INTO `mob_groups` VALUES (6,5097,262,'Bellicose_Tarichuk',330,0,2975,0,0,102,110,0);
-INSERT INTO `mob_groups` VALUES (7,4970,262,'Phantasmagoric_Umbril',180,1,2981,0,500,102,104,0);
-INSERT INTO `mob_groups` VALUES (8,4971,262,'Skinsipper_Chigoe',300,0,2982,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (9,4969,262,'Scummy_Slug',300,0,2980,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (10,5007,262,'Careening_Twitherym',300,0,0,0,0,101,103,0);
-INSERT INTO `mob_groups` VALUES (11,4973,262,'Primordial_Orobon',300,0,2984,0,0,103,104,0);
-INSERT INTO `mob_groups` VALUES (12,4974,262,'Vorst_Gnat',300,0,2985,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (13,4968,262,'Velkk_Destructeur',300,0,2979,0,0,103,105,0);
-INSERT INTO `mob_groups` VALUES (14,4967,262,'Velkk_Sage',300,0,2978,0,0,103,105,0);
-INSERT INTO `mob_groups` VALUES (15,4966,262,'Vampire_Leech',300,0,2977,0,0,102,103,0);
-INSERT INTO `mob_groups` VALUES (16,5013,262,'Numbing_Blossom',300,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (17,4964,262,'Glutinous_Clot',300,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (18,4916,262,'Shrouded_Obdella',300,0,0,0,0,102,103,0);
-INSERT INTO `mob_groups` VALUES (19,5098,262,'Bashful_Heartwing',330,0,2976,0,0,101,104,0);
-INSERT INTO `mob_groups` VALUES (20,4965,262,'Epigean_Leafkin',300,0,0,0,0,101,104,0);
-INSERT INTO `mob_groups` VALUES (21,4886,262,'Craklaw',3600,0,0,20000,5000,103,103,0);
-INSERT INTO `mob_groups` VALUES (22,4893,262,'Sere_Stump',3600,0,0,20000,5000,103,103,0);
--- zone 262 group 23: free
-INSERT INTO `mob_groups` VALUES (24,4895,262,'Cinder_Crab',3600,0,0,20000,5000,103,103,0);
-INSERT INTO `mob_groups` VALUES (25,4898,262,'Blood_Toad',3600,0,0,20000,5000,103,103,0);
-INSERT INTO `mob_groups` VALUES (26,4894,262,'Wetlands_Orobon',3600,0,0,20000,5000,103,103,0);
-INSERT INTO `mob_groups` VALUES (27,4768,262,'Primrose_Jagil',3600,0,0,20000,5000,103,103,0);
-INSERT INTO `mob_groups` VALUES (28,4897,262,'Broadleaf_Palm',3600,0,0,20000,5000,103,103,0);
-INSERT INTO `mob_groups` VALUES (29,4925,262,'Tchakka',10800,0,0,0,9999,117,119,0);
-INSERT INTO `mob_groups` VALUES (30,6372,262,'Cunning_Craklaw',0,128,0,0,0,103,103,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,6913,262,'Gurgling_Crab',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,6914,262,'Famished_Jagil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,6915,262,'Delectable_Orobon',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (4,5093,262,'Riverwashed_Toad',330,0,2971,0,0,102,110,0);
+INSERT INTO `mob_groups` VALUES (5,5094,262,'Zoldeff_Jagil',330,0,2972,0,0,102,110,0);
+INSERT INTO `mob_groups` VALUES (6,5095,262,'Hoary_Craklaw',330,0,2973,0,0,101,104,0);
+INSERT INTO `mob_groups` VALUES (7,4972,262,'Treefrost_Gefyrst',300,0,2983,0,500,104,104,0);
+INSERT INTO `mob_groups` VALUES (8,5096,262,'Perfidious_Crab',330,0,2974,0,0,102,110,0);
+INSERT INTO `mob_groups` VALUES (9,5097,262,'Bellicose_Tarichuk',330,0,2975,0,0,102,110,0);
+INSERT INTO `mob_groups` VALUES (10,4970,262,'Phantasmagoric_Umbril',180,1,2981,0,500,102,104,0);
+INSERT INTO `mob_groups` VALUES (11,4971,262,'Skinsipper_Chigoe',300,0,2982,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (12,4969,262,'Scummy_Slug',300,0,2980,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (13,5007,262,'Careening_Twitherym',300,0,0,0,0,101,103,0);
+INSERT INTO `mob_groups` VALUES (14,4973,262,'Primordial_Orobon',300,0,2984,0,0,103,104,0);
+INSERT INTO `mob_groups` VALUES (15,4974,262,'Vorst_Gnat',300,0,2985,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (16,4968,262,'Velkk_Destructeur',300,0,2979,0,0,103,105,0);
+INSERT INTO `mob_groups` VALUES (17,4967,262,'Velkk_Sage',300,0,2978,0,0,103,105,0);
+INSERT INTO `mob_groups` VALUES (18,4966,262,'Vampire_Leech',300,0,2977,0,0,102,103,0);
+INSERT INTO `mob_groups` VALUES (19,5013,262,'Numbing_Blossom',300,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (20,4964,262,'Glutinous_Clot',300,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (21,4916,262,'Shrouded_Obdella',300,0,0,0,0,102,103,0);
+INSERT INTO `mob_groups` VALUES (22,5098,262,'Bashful_Heartwing',330,0,2976,0,0,101,104,0);
+INSERT INTO `mob_groups` VALUES (23,4965,262,'Epigean_Leafkin',300,0,0,0,0,101,104,0);
+INSERT INTO `mob_groups` VALUES (24,6372,262,'Cunning_Craklaw',0,128,0,0,0,103,103,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (25,4893,262,'Sere_Stump',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (26,4886,262,'Craklaw',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (27,4895,262,'Cinder_Crab',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (28,4898,262,'Blood_Toad',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (29,4894,262,'Wetlands_Orobon',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (30,4768,262,'Primrose_Jagil',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (31,4897,262,'Broadleaf_Palm',0,128,0,20000,5000,103,103,0);
+INSERT INTO `mob_groups` VALUES (32,4925,262,'Tchakka',0,128,0,0,9999,117,119,0);
+
+-- delve
+INSERT INTO `mob_groups` VALUES (33,6916,262,'Faded_Craklaw',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,0,262,'Aberrant_Uragnite',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,6917,262,'Divagating_Jagil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,6918,262,'Nerrivik',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,6919,262,'Krabakarpo',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (38,6920,262,'Insidio',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,6921,262,'Pungent_Patricia',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Yorcia_Weald (Zone 263)
