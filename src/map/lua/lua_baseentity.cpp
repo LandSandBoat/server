@@ -171,7 +171,7 @@ CLuaBaseEntity::CLuaBaseEntity(CBaseEntity* PEntity)
 /************************************************************************
  *  Function: showText()
  *  Purpose : Displays dialogue for NPC
- *  Example : target:showText(mob,YOU_DECIDED_TO_SHOW_UP) -- Fighting Maat
+ *  Example : target:showText(mob, ID.text.YOU_DECIDED_TO_SHOW_UP) -- Fighting Maat
  *  Notes   : Mainly used for showing retail text specific to an NPC
  ************************************************************************/
 
@@ -205,7 +205,7 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object
 /************************************************************************
  *  Function: messageText()
  *  Purpose : Displays text to a target PC (private)
- *  Example : player:messageText(target, NOT_HAVE_ENOUGH_GP, false, 6);
+ *  Example : player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6);
  *  Notes   : Mainly used for sending retail text messages
  ************************************************************************/
 
@@ -246,9 +246,9 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
 /************************************************************************
  *  Function: PrintToPlayer()
  *  Purpose : Displays either standad messages to a PC or custom text
- *  Example : player:PrintToPlayer("Hello!", 0x1F)
- *          : p:P2P(string.format("Hello, %s!", player:getName()), 0x1F)
- *  Notes   : Available hex codes: 0x1C, 0xD, 0xF, 0x1F, ___, ___
+ *  Example : player:PrintToPlayer("Hello!", tpz.msg.channel.NS_SAY)
+ *          : player:PrintToPlayer(string.format("Hello, %s!", player:getName()), tpz.msg.channel.SYSTEM_1)
+ *  Notes   : see scripts/globals/msg.lua for message channels
  *          : Can modify the name shown through explicit declaration
  ************************************************************************/
 
@@ -309,7 +309,7 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 /************************************************************************
  *  Function: messageBasic()
  *  Purpose : Send a basic message packet to the PC
- *  Example : target:messageBasic(msgBasic.RECOVERS_HP_AND_MP);
+ *  Example : target:messageBasic(tpz.msg.basic.RECOVERS_HP_AND_MP);
  *  Notes   : Mainly used when effects are applied
  ************************************************************************/
 
@@ -383,7 +383,7 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, CLuaBaseEntity const* PEnti
 /************************************************************************
  *  Function: messageSpecial()
  *  Purpose : Displays special messages
- *  Example : player:messageSpecial(NOTHING_OUT_OF_ORDINARY);
+ *  Example : player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY);
  *  Notes   :
  ************************************************************************/
 
@@ -490,7 +490,7 @@ void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
 /************************************************************************
  *  Function: getLocalVar()
  *  Purpose : Returns a variable assigned locally to an entity
- *  Example : if (KingArthro:getLocalVar("[POP]King_Arthro") > 0) then
+ *  Example : if KingArthro:getLocalVar("[POP]King_Arthro") > 0 then
  *  Notes   :
  ************************************************************************/
 
@@ -1042,7 +1042,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getCursorTarget()
 /************************************************************************
  *  Function: getObjType()
  *  Purpose : Returns the int value of an entity's object type (Mob,PC...)
- *  Example : if (caster:getObjType() == TYPE_PC) then
+ *  Example : if caster:getObjType() == tpz.objType.PC then
  *  Notes   :
  ************************************************************************/
 
@@ -1054,7 +1054,7 @@ uint8 CLuaBaseEntity::getObjType()
 /************************************************************************
  *  Function: isPC()
  *  Purpose : Returns true if entity is of the PC object type
- *  Example : if (target:isPC()) then
+ *  Example : if target:isPC() then
  *  Notes   :
  ************************************************************************/
 
@@ -1066,7 +1066,7 @@ bool CLuaBaseEntity::isPC()
 /************************************************************************
  *  Function: isNPC()
  *  Purpose : Returns true if entity is of the NPC object type
- *  Example : if (target:isNPC()) then
+ *  Example : if target:isNPC() then
  *  Notes   :
  ************************************************************************/
 
@@ -1078,7 +1078,7 @@ bool CLuaBaseEntity::isNPC()
 /************************************************************************
  *  Function: isMob()
  *  Purpose : Returns true if entity is of the Mob object type
- *  Example : if (target:isMob()) then
+ *  Example : if target:isMob() then
  *  Notes   :
  ************************************************************************/
 
@@ -1090,7 +1090,7 @@ bool CLuaBaseEntity::isMob()
 /************************************************************************
  *  Function: isPet()
  *  Purpose : Returns true if entity is of the Pet object type
- *  Example : if (caster:isPet()) then
+ *  Example : if caster:isPet() then
  *  Notes   :
  ************************************************************************/
 
@@ -1102,7 +1102,7 @@ bool CLuaBaseEntity::isPet()
 /************************************************************************
  *  Function: isAlly()
  *  Purpose : Returns true if entity is an ally
- *  Example : if (mob:isAlly()) then table.insert(allies, mob) end
+ *  Example : if mob:isAlly() then table.insert(allies, mob) end
  *  Notes   :
  ************************************************************************/
 
@@ -1140,7 +1140,7 @@ void CLuaBaseEntity::resetAI()
 /************************************************************************
  *  Function: getStatus()
  *  Purpose : Returns the status (or 'state') of an entity
- *  Example : if (qm2:getStatus() ~= STATUS_DISAPPEAR) then
+ *  Example : if qm2:getStatus() ~= tpz.status.DISAPPEAR then
  *  Notes   :
  ************************************************************************/
 
@@ -1165,7 +1165,7 @@ void CLuaBaseEntity::setStatus(uint8 status)
 /************************************************************************
  *  Function: getCurrentAction()
  *  Purpose : Returns the current state of a non-NPC entity
- *  Example : if (target:getCurrentAction() ~= ACTION_MOBABILITY_USING)
+ *  Example : if target:getCurrentAction() ~= tpz.act.MOBABILITY_USING then
  *  Notes   : Function name ambiguous, but getCurrentState() in use already
  *          : See globals/status.lua for action definitions
  ************************************************************************/
@@ -1279,7 +1279,7 @@ void CLuaBaseEntity::clearTargID()
 /************************************************************************
  *  Function: atPoint()
  *  Purpose : Used to check whether an entity is at a specified point in the specified path
- *  Example : if (npc:atPoint(pathfind.get(path, 45))) then
+ *  Example : if npc:atPoint(pathfind.get(path, 45)) then
  *  Notes   : Used to trigger delays, messages, etc (Ex: Patroller in West Ronfaure)
  ************************************************************************/
 
@@ -1337,7 +1337,7 @@ void CLuaBaseEntity::pathTo(float x, float y, float z, sol::object const& flags)
 /************************************************************************
  *  Function: pathThrough()
  *  Purpose : Makes an Entity follow a given set of points
- *  Example : mob:pathThrough(pathfind.first(path), PATHFLAG_RUN)
+ *  Example : mob:pathThrough(pathfind.first(path), tpz.path.flag.RUN)
  *  Notes   : Ex: Gets Zipacna back on his specified path
  ************************************************************************/
 
@@ -1368,7 +1368,7 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
 /************************************************************************
  *  Function: isFollowingPath()
  *  Purpose : Returns true if entity is following its specified path
- *  Example : if (npc:isFollowingPath()) then
+ *  Example : if npc:isFollowingPath() then
  *  Notes   : Often used in conjunction with pathThrough()
  ************************************************************************/
 
@@ -1496,7 +1496,7 @@ void CLuaBaseEntity::openDoor(sol::object const& seconds)
 /************************************************************************
  *  Function: closeDoor()
  *  Purpose : Closes a door for 7 seconds; different delay can be specified
- *  Example : npc:closeDoor(); GetNPCByID(Lantern_ID):closeDoor(1)
+ *  Example : npc:closeDoor(); GetNPCByID(ID.npc.LANTERN):closeDoor(1)
  ************************************************************************/
 
 void CLuaBaseEntity::closeDoor(sol::object const& seconds)
@@ -1661,7 +1661,7 @@ void CLuaBaseEntity::updateNPCHideTime(sol::object const& seconds)
 /************************************************************************
  *  Function: getWeather()
  *  Purpose : Returns the current weather status
- *  Example : if (player:getWeather() == WEATHER_WIND) then
+ *  Example : if player:getWeather() == tpz.weather.WIND then
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getWeather()
@@ -1744,7 +1744,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
 /************************************************************************
  *  Function: sendGuild()
  *  Purpose : Sends a guild menu to the PC (Ex: Cooking, Smithing, etc)
- *  Example : if (player:sendGuild(60426,1,18,6)) then
+ *  Example : if player:sendGuild(60426,1,18,6) then
  *  Notes   : L2 and L3 only need simplified 24-hour time format (1,2,etc)
  ************************************************************************/
 
@@ -1887,7 +1887,7 @@ int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)
 /************************************************************************
  *  Function: isFacing()
  *  Purpose : Returns true if an entity is facing another entity
- *  Example : if (attacker:isFacing(target)) then
+ *  Example : if attacker:isFacing(target) then
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
@@ -1901,7 +1901,7 @@ bool CLuaBaseEntity::isFacing(CLuaBaseEntity const* target, sol::object const& a
 /************************************************************************
  *  Function: isInfront()
  *  Purpose : Returns true if an entity is in front of another entity
- *  Example : if (attacker:isInfront(target)) then
+ *  Example : if attacker:isInfront(target) then
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
@@ -1915,7 +1915,7 @@ bool CLuaBaseEntity::isInfront(CLuaBaseEntity const* target, sol::object const& 
 /************************************************************************
  *  Function: isBehind()
  *  Purpose : Returns true if an entity is behind another entity
- *  Example : if (attacker:isBehind(target)) then
+ *  Example : if attacker:isBehind(target) then
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
@@ -1929,7 +1929,7 @@ bool CLuaBaseEntity::isBehind(CLuaBaseEntity const* target, sol::object const& a
 /************************************************************************
  *  Function: isBeside()
  *  Purpose : Returns true if an entity is to the side of another entity
- *  Example : if (attacker:isBeside(target)) then
+ *  Example : if attacker:isBeside(target) then
  *  Notes   : Can specify angle for wider/narrower ranges
  ************************************************************************/
 
@@ -1943,7 +1943,7 @@ bool CLuaBaseEntity::isBeside(CLuaBaseEntity const* target, sol::object const& a
 /************************************************************************
  *  Function: getZone(isZoning)
  *  Purpose : Returns a pointer to a zone object?
- *  Example : if (player:getZone() == mob:getZone()) then
+ *  Example : if player:getZone() == mob:getZone() then
  *  Notes   : To Do: I don't think some scripts are using this correctly...
  *  Optional isZoning parameter will return player's destination zone if
  *  they are in the process of zoning (for use in onZoneIn)
@@ -1966,7 +1966,7 @@ std::optional<CLuaZone> CLuaBaseEntity::getZone(sol::object const& arg0)
 /************************************************************************
  *  Function: getZoneID()
  *  Purpose : Returns the integer value associated with the current zone
- *  Example : if (player:getZoneID() == 50) then
+ *  Example : if player:getZoneID() == tpz.zone.AHT_URHGAN_WHITEGATE then
  *  Notes   :
  ************************************************************************/
 
@@ -1978,7 +1978,7 @@ uint16 CLuaBaseEntity::getZoneID()
 /************************************************************************
  *  Function: getZoneName()
  *  Purpose : Returns the string text assigned to the zone
- *  Example : require("scripts/zones/"..player:getZoneName().."/TextIDs")
+ *  Example : local zoneName = player:getZoneName()
  *  Notes   : Highly useful for the above example
  ************************************************************************/
 
@@ -1993,7 +1993,7 @@ auto CLuaBaseEntity::getZoneName() -> const char*
 /************************************************************************
  *  Function: isZoneVisited()
  *  Purpose : Returns true if a player has ever visited the zone
- *  Example : if (target:isZoneVisited(4) == false) then
+ *  Example : if not target:isZoneVisited(tpz.zone.BIBIKI_BAY) then
  *  Notes   : Mainly used for teleport items (like to Bibiki Bay)
  ************************************************************************/
 
@@ -2032,7 +2032,7 @@ uint8 CLuaBaseEntity::getCurrentRegion()
 /************************************************************************
  *  Function: getContinentID()
  *  Purpose : Returns the integer value of a continent
- *  Example : local ID = (player:getContinentID())
+ *  Example : local continentId = player:getContinentID()
  *  Notes   : Used in Signet/Sanction applications
  ************************************************************************/
 
@@ -2044,7 +2044,7 @@ uint8 CLuaBaseEntity::getContinentID()
 /************************************************************************
  *  Function: isInMogHouse()
  *  Purpose : Returns true if a PC is in their Mog House
- *  Example : if (player:isInMogHouse()) then -- watch Netflix and chill
+ *  Example : if player:isInMogHouse() then -- watch Netflix and chill
  *  Notes   :
  ************************************************************************/
 
@@ -2293,7 +2293,7 @@ void CLuaBaseEntity::warp()
 /************************************************************************
  *  Function:teleport()
  *  Purpose : Teleports an entity to a position
- *  Example : mob:teleport(pos, battletarget);
+ *  Example : mob:teleport(pos, battletarget)
  *  Notes   : scripts/globals/mobskills/tarutaru_warp_ii.lua
  ************************************************************************/
 
@@ -2320,7 +2320,7 @@ void CLuaBaseEntity::teleport(std::map<std::string, float> pos, sol::object cons
 /************************************************************************
  *  Function: addTeleport(uint8 type, uint32 destination)
  *  Purpose : Grants acces to a new teleport for a PC
- *  Example : player:addTeleport(tpz.teleport.type.HOMEPOINT,16);
+ *  Example : player:addTeleport(tpz.teleport.type.HOMEPOINT,16)
  *  Notes   : Param 2 is bits to shift, not exponentiated value
  ************************************************************************/
 
@@ -2784,7 +2784,7 @@ bool CLuaBaseEntity::bringPlayer(std::string const& playerName)
 /************************************************************************
  *  Function: getEquipID()
  *  Purpose : Returns the Item ID for an item
- *  Example : player:getEquipID(SLOT_MAIN)
+ *  Example : player:getEquipID(tpz.slot.MAIN)
  *  Notes   :
  ************************************************************************/
 
@@ -2809,7 +2809,7 @@ uint16 CLuaBaseEntity::getEquipID(SLOTTYPE slot)
 /************************************************************************
  *  Function: getEquippedItem()
  *  Purpose : Returns the Item for a given slot
- *  Example : player:getEquippedItem(SLOT_MAIN)
+ *  Example : player:getEquippedItem(tpz.slot.MAIN)
  *  Notes   :
  ************************************************************************/
 
@@ -2834,7 +2834,7 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 /************************************************************************
  *  Function: hasItem()
  *  Purpose : Returns true if a player possesses an item
- *  Example : if (player:hasItem(500) --Second var optional
+ *  Example : if player:hasItem(500) then -- Second var optional
  *  Notes   : Send with an L2 value to specify container
  ************************************************************************/
 
@@ -2863,7 +2863,7 @@ bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
 /************************************************************************
  *  Function: addItem()
  *  Purpose : Adds an item to a player's inventory
- *  Example : player:addItem(4102,12) -- a stack of Light Crystals
+ *  Example : player:addItem(4102, 12) -- a stack of Light Crystals
  *  Notes   : See format and variable options below
  ************************************************************************/
 
@@ -3047,7 +3047,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
 /************************************************************************
  *  Function: delItem()
  *  Purpose : Deletes an item from a player's inventory
- *  Example : player:delItem(4102,12)
+ *  Example : player:delItem(4102, 12)
  *  Notes   : Can specify contianer using third variable
  ************************************************************************/
 
@@ -3120,7 +3120,7 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
 /************************************************************************
  *  Function: hasWornItem()
  *  Purpose : Returns true if a player has a worn (unusable) item
- *  Example : if (player:hasWornItem(trade:getItemId())) then
+ *  Example : if player:hasWornItem(trade:getItemId()) then
  *  Notes   : Used mainly for Testimonies and BCNM orbs
  ************************************************************************/
 
@@ -3318,7 +3318,7 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
 /************************************************************************
  *  Function: getContainerSize()
  *  Purpose : Returns the size of an item container
- *  Example : player:getContainerSize(LOC_INVENTORY)
+ *  Example : player:getContainerSize(tpz.inv.INVENTORY)
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getContainerSize(uint8 locationID)
@@ -3332,7 +3332,7 @@ uint8 CLuaBaseEntity::getContainerSize(uint8 locationID)
 /************************************************************************
  *  Function: changeContainerSize()
  *  Purpose : Upgrades the capacity of a container
- *  Example : player:changeContainerSize(container,newSize)
+ *  Example : player:changeContainerSize(container, newSize)
  *  Notes   : Used primarily for Gobbie Bag quests
  ************************************************************************/
 
@@ -3357,7 +3357,7 @@ void CLuaBaseEntity::changeContainerSize(uint8 locationID, int8 newSize)
 /************************************************************************
  *  Function: getFreeSlotsCount()
  *  Purpose : Returns the amount of free slots in a container
- *  Example : if (player:getFreeSlotsCount() == 0) then
+ *  Example : if player:getFreeSlotsCount() == 0 then
  *  Notes   : Default slot is inventory; add value to specify containers
  ************************************************************************/
 
@@ -3438,7 +3438,7 @@ void CLuaBaseEntity::tradeComplete()
 /************************************************************************
  *  Function: canEquipItem()
  *  Purpose : Returns true if a player can equip the item
- *  Example : if (player:canEquipItem(JOY_TOY)) then
+ *  Example : if player:canEquipItem(17652) then
  *  Notes   : CItemEquipment* is a pointer to weapons or armor
  ************************************************************************/
 
@@ -3527,7 +3527,7 @@ void CLuaBaseEntity::setEquipBlock(uint16 equipBlock)
 /************************************************************************
  *  Function: lockEquipSlot()
  *  Purpose : Used to keep players from equipment certain equipment?
- *  Example : player:lockEquipSlot(SLOT)
+ *  Example : player:lockEquipSlot(tpz.slot.MAIN)
  *  Notes   : Currently not implemented in any file, imagine this is for Salvage
  ************************************************************************/
 
@@ -3550,7 +3550,7 @@ void CLuaBaseEntity::lockEquipSlot(uint8 slot)
 /************************************************************************
  *  Function: unlockEquipSlot()
  *  Purpose : Allows player to equip items in that slot again
- *  Example : player:unlockEquipSlot(SLOT)
+ *  Example : player:unlockEquipSlot(tpz.slot.MAIN)
  *  Notes   :
  ************************************************************************/
 
@@ -3587,7 +3587,7 @@ int8 CLuaBaseEntity::getShieldSize()
 /************************************************************************
  *  Function: hasGearSetMod()
  *  Purpose : Need to research functionality more to provide description
- *  Example :  if (player:hasGearSetMod(gearset.id) == false) then
+ *  Example :  if not player:hasGearSetMod(gearset.id) then
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
@@ -3612,7 +3612,7 @@ bool CLuaBaseEntity::hasGearSetMod(uint8 modNameId)
 /************************************************************************
  *  Function: addGearSetMod()
  *  Purpose : Need to research functionality more to provide description
- *  Example :  player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
+ *  Example : player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
@@ -3662,7 +3662,7 @@ void CLuaBaseEntity::clearGearSetMods()
 /************************************************************************
  *  Function: getStorageItem()
  *  Purpose : Returns object data for an item in a container
- *  Example : player:getStorageItem(0, 0, SLOT_RANGED)
+ *  Example : player:getStorageItem(0, 0, tpz.slot.RANGED)
  *  Notes   :
  ************************************************************************/
 
@@ -4055,8 +4055,7 @@ void CLuaBaseEntity::setCostume2(uint16 costume)
 /************************************************************************
  *  Function: getAnimation()
  *  Purpose : Returns the assigned default animation of an entity
- *  Example : GetNPCByID(TrapDoor):getAnimation()
- *  Notes   : ANIMATION_ATTACK
+ *  Example : GetNPCByID(ID.npc.TRAP_DOOR):getAnimation()
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getAnimation()
@@ -4067,7 +4066,7 @@ uint8 CLuaBaseEntity::getAnimation()
 /************************************************************************
  *  Function: setAnimation()
  *  Purpose : Updates an animation for the entity
- *  Example : GetNPCByID(Door_Offset+12):setAnimation(8)
+ *  Example : GetNPCByID(ID.npc.DOOR_OFFSET + 12):setAnimation(tpz.anim.OPEN_DOOR)
  *  Notes   : Look at scripts/zones/VeLugannon_Palace/npcs/Monolith.lua
  ************************************************************************/
 
@@ -4134,7 +4133,7 @@ uint8 CLuaBaseEntity::getNation()
 /************************************************************************
  *  Function: setNation()
  *  Purpose : Changes a player's nation allegiance
- *  Example : player:setNation(2)
+ *  Example : player:setNation(tpz.nation.WINDURST)
  *  Notes   :
  ************************************************************************/
 
@@ -4151,7 +4150,7 @@ void CLuaBaseEntity::setNation(uint8 nation)
 /************************************************************************
  *  Function: getAllegiance()
  *  Purpose : Gets allegiance of entity (mob/player/ballista team)
- *  Example : if (target:getAllegiance() == caster:getAllegiance()) then
+ *  Example : if target:getAllegiance() == caster:getAllegiance() then
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getAllegiance()
@@ -4174,7 +4173,7 @@ void CLuaBaseEntity::setAllegiance(uint8 allegiance)
 /************************************************************************
  *  Function: getCampaignAllegiance()
  *  Purpose : Returns the integer value of a player's Campaign allegiance
- *  Example : if (player:getCampaignAllegiance() > 0) then
+ *  Example : if player:getCampaignAllegiance() > 0 then
  *  Notes   : A return of 0 means the player doesn't have any allegiances
  ************************************************************************/
 
@@ -4217,7 +4216,7 @@ bool CLuaBaseEntity::isSeekingParty()
 /************************************************************************
  *  Function: getNewPlayer()
  *  Purpose : Returns true if a player is new
- *  Example : if not (player:getNewPlayer()) then
+ *  Example : if not player:getNewPlayer() then
  ************************************************************************/
 
 bool CLuaBaseEntity::getNewPlayer()
@@ -4287,7 +4286,7 @@ void CLuaBaseEntity::setMentor(bool mentor)
 /************************************************************************
  *  Function: getGMLevel()
  *  Purpose : Returns the GM level (0-5)
- *  Example : if (player:getGMLevel() == 5) then -- kill pixies
+ *  Example : if player:getGMLevel() == 5 then
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getGMLevel()
@@ -4317,7 +4316,7 @@ void CLuaBaseEntity::setGMLevel(uint8 level)
 /************************************************************************
  *  Function: getGMHidden()
  *  Purpose : Returns true if a GM is currently hidden
- *  Example : if (player:getGMHidden()) then
+ *  Example : if player:getGMHidden() then
  ************************************************************************/
 
 bool CLuaBaseEntity::getGMHidden()
@@ -4357,7 +4356,7 @@ void CLuaBaseEntity::setGMHidden(bool isHidden)
 /************************************************************************
  *  Function: isJailed()
  *  Purpose : Returns true if a player is a violent felon
- *  Example : if (player:isJailed()) then
+ *  Example : if player:isJailed() then
  ************************************************************************/
 
 bool CLuaBaseEntity::isJailed()
@@ -4383,7 +4382,7 @@ void CLuaBaseEntity::jail()
 /************************************************************************
  *  Function: canUseMisc()
  *  Purpose : Returns true if ZONEMISC contains flag being checked.
- *  Example : if (player:canUseMisc(tpz.zoneMisc.MISC_MOUNT)) then -- kew
+ *  Example : if player:canUseMisc(tpz.zoneMisc.MOUNT) then
  *  Notes   : Checks if specified MISC flag is set in current zone
  ************************************************************************/
 
@@ -4397,7 +4396,7 @@ bool CLuaBaseEntity::canUseMisc(uint16 misc)
 /************************************************************************
  *  Function: getSpeed()
  *  Purpose : Sets a player's speed or returns their current speed
- *  Example : player:speed(40) -- Sets; player:speed() -- returns value
+ *  Example : player:getSpeed()
  *  Notes   :
  ************************************************************************/
 
@@ -4409,7 +4408,7 @@ uint8 CLuaBaseEntity::getSpeed()
 /************************************************************************
  *  Function: setSpeed()
  *  Purpose : Sets a player's speed or returns their current speed
- *  Example : player:speed(40) -- Sets; player:speed() -- returns value
+ *  Example : player:setSpeed(40)
  *  Notes   :
  ************************************************************************/
 
@@ -4496,7 +4495,7 @@ uint8 CLuaBaseEntity::getSubJob()
 /************************************************************************
  *  Function: changeJob()
  *  Purpose : Changes an entities main job
- *  Example : mob:changeJob(RDM); player:changeJob(2)
+ *  Example : mob:changeJob(tpz.job.RDM); player:changeJob(tpz.job.MNK)
  *  Notes   :
  ************************************************************************/
 
@@ -4557,7 +4556,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
 /************************************************************************
  *  Function: changesJob()
  *  Purpose : Changes an entities sub job
- *  Example : mob:changesJob(RDM); player:changesJob(2)
+ *  Example : mob:changesJob(tpz.job.RDM); player:changesJob(tpz.job.MNK)
  *  Notes   : To Do: Change name to changeSubJob for visual clarity?
  ************************************************************************/
 
@@ -4586,7 +4585,7 @@ void CLuaBaseEntity::changesJob(uint8 subJob)
 /************************************************************************
  *  Function: unlockJob()
  *  Purpose : Unlocks a new job for a player (updates char_jobs.sql)
- *  Example : player:unlockJob(SAM)
+ *  Example : player:unlockJob(tpz.job.SAM)
  *  Notes   : Changes value of job from 0 (locked) to 1(unlocked)
  ************************************************************************/
 
@@ -4617,7 +4616,7 @@ void CLuaBaseEntity::unlockJob(uint8 JobID)
 /************************************************************************
  *  Function: hasJob()
  *  Purpose : Check to see if JOBTYPE is unlocked
- *  Example : player:hasJob(BRD)
+ *  Example : player:hasJob(tpz.job.BRD)
  ************************************************************************/
 
 bool CLuaBaseEntity::hasJob(uint8 job)
@@ -4662,7 +4661,7 @@ uint8 CLuaBaseEntity::getSubLvl()
 /************************************************************************
  *  Function: getJobLevel()
  *  Purpose : Return the levle of job specified by JOBTYPE
- *  Example : player:getJobLevel(BRD)
+ *  Example : player:getJobLevel(tpz.job.BRD)
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
@@ -4892,7 +4891,7 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
 /************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
- *  Example : if (player:getTitle()) == 123) then
+ *  Example : if player:getTitle()) == tpz.title.FAKEMOUSTACHED_INVESTIGATOR then
  ************************************************************************/
 
 uint16 CLuaBaseEntity::getTitle()
@@ -4905,7 +4904,7 @@ uint16 CLuaBaseEntity::getTitle()
 /************************************************************************
  *  Function: hasTitle()
  *  Purpose : Returns true if a player's current title matches a value
- *  Example : if (player:hasTitle(AWESOME_SAUCE)) then
+ *  Example : if player:hasTitle(tpz.title.AWESOME_SAUCE) then
  ************************************************************************/
 
 bool CLuaBaseEntity::hasTitle(uint16 titleID)
@@ -4918,7 +4917,7 @@ bool CLuaBaseEntity::hasTitle(uint16 titleID)
 /************************************************************************
  *  Function: addTitle()
  *  Purpose : Adds a title to the character's profile only (doesn't change current)
- *  Example : player:addTitle(BLACK_DRAGON_SLAYER)
+ *  Example : player:addTitle(tpz.title.BLACK_DRAGON_SLAYER)
  *  Notes   : Use setTitle to both change and add
  ************************************************************************/
 
@@ -4938,7 +4937,7 @@ void CLuaBaseEntity::addTitle(uint16 titleID)
 /************************************************************************
  *  Function: setTitle()
  *  Purpose : Updates the player's current title and adds to their profile
- *  Example : player:setTitle(SOB_SUPERHERO)
+ *  Example : player:setTitle(tpz.title.SOB_SUPERHERO)
  ************************************************************************/
 
 void CLuaBaseEntity::setTitle(uint16 titleID)
@@ -4952,7 +4951,7 @@ void CLuaBaseEntity::setTitle(uint16 titleID)
 /************************************************************************
  *  Function: delTitle()
  *  Purpose : Deletes a title from a character's profile
- *  Example : player:delTitle(IXION_HORNBREAKER)
+ *  Example : player:delTitle(tpz.title.IXION_HORNBREAKER)
  ************************************************************************/
 
 void CLuaBaseEntity::delTitle(uint16 titleID)
@@ -5094,7 +5093,7 @@ void CLuaBaseEntity::addFame(sol::object const& areaObj, uint16 fame)
 /************************************************************************
  *  Function: setFame()
  *  Purpose : Sets the fame level for a player to a specified amount
- *  Example : player:setFame(BASTOK,1500)
+ *  Example : player:setFame(BASTOK, 1500)
  *  Notes   :
  ************************************************************************/
 
@@ -5232,7 +5231,7 @@ uint8 CLuaBaseEntity::getRank()
 /************************************************************************
  *  Function: getOtherRank()
  *  Purpose : Returns the rank of <nation> for the player
- *  Example : player:getOtherRank(WINDURST)
+ *  Example : player:getOtherRank(tpz.nation.WINDURST)
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getOtherRank(uint8 nation)
@@ -5312,7 +5311,7 @@ void CLuaBaseEntity::setRankPoints(uint32 rankpoints)
 /************************************************************************
  *  Function: addQuest()
  *  Purpose : Adds a new quest to the character's in-progress quest log
- *  Example : player:addQuest(BASTOK,LURE_OF_THE_WILDCAT)
+ *  Example : player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT)
  *  Notes   :
  ************************************************************************/
 
@@ -5344,7 +5343,7 @@ void CLuaBaseEntity::addQuest(uint8 questLogID, uint16 questID)
 /************************************************************************
  *  Function: delQuest()
  *  Purpose : Deletes a quest from a character's quest log
- *  Example : player:delQuest(WINDURST,LURE_OF_THE_WILDCAT)
+ *  Example : player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT)
  *  Notes   : Doesn't delete any player variables associated with quest
  ************************************************************************/
 
@@ -5379,7 +5378,7 @@ void CLuaBaseEntity::delQuest(uint8 questLogID, uint16 questID)
 /************************************************************************
  *  Function: getQuestStatus()
  *  Purpose : Gets the current quest status of the player
- *  Example : player:getQuestStatus(WINDURST,MAKING_THE_GRADE)
+ *  Example : player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
@@ -5406,7 +5405,7 @@ uint8 CLuaBaseEntity::getQuestStatus(uint8 questLogID, uint16 questID)
 /************************************************************************
  *  Function: hasCompletedQuest()
  *  Purpose : Returns true if a player has completed a quest
- *  Example : if (player:hasCompletedQuest(JEUNO,BEYOND_INFINITY)) then
+ *  Example : if (player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY)) then
  ************************************************************************/
 
 bool CLuaBaseEntity::hasCompletedQuest(uint8 questLogID, uint16 questID)
@@ -5427,7 +5426,7 @@ bool CLuaBaseEntity::hasCompletedQuest(uint8 questLogID, uint16 questID)
 /************************************************************************
  *  Function: completeQuest()
  *  Purpose : Completes a current quest for the player
- *  Example : player:completeQuest(OTHER_AREAS,ONLY_THE_BEST)
+ *  Example : player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST)
  *  Notes   :
  ************************************************************************/
 
@@ -5461,7 +5460,7 @@ void CLuaBaseEntity::completeQuest(uint8 questLogID, uint16 questID)
 /************************************************************************
  *  Function: addMission()
  *  Purpose : Adds a mission to the player's mission log
- *  Example : player:addMission(SANDORIA,JOURNEY_TO_BASTOK)
+ *  Example : player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK)
  *  Notes   : This function no longer accepts tables!
  ************************************************************************/
 
@@ -5495,7 +5494,7 @@ void CLuaBaseEntity::addMission(uint8 missionLogID, uint16 missionID)
 /************************************************************************
  *  Function: delMission()
  *  Purpose : Delets a mission from a player's mission log
- *  Example : player:delMission(TOAU,KNIGHT_OF_GOLD)
+ *  Example : player:delMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.KNIGHT_OF_GOLD)
  *  Notes   : Doesn't delete any player variables associated with mission
  *          : This function no longer accepts tables!
  ************************************************************************/
@@ -5573,7 +5572,7 @@ uint16 CLuaBaseEntity::getCurrentMission(sol::object const& missionLogObj)
 /************************************************************************
  *  Function: hasCompletedMission()
  *  Purpose : Returns true if a player has completed a specified mission
- *  Example : if (player:hasCompletedMission(TOAU,PRESIDENT_SALAHEEM)
+ *  Example : if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PRESIDENT_SALAHEEM) then
  *  Notes   :
  ************************************************************************/
 
@@ -5600,7 +5599,7 @@ bool CLuaBaseEntity::hasCompletedMission(uint8 missionLogID, uint16 missionID)
 /************************************************************************
  *  Function: completeMission()
  *  Purpose : Completes a specified mission for the player
- *  Example : player:completeMission(COP,THREE_PATHS)
+ *  Example : player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THREE_PATHS)
  *  Notes   :
  ************************************************************************/
 
@@ -5893,7 +5892,7 @@ uint8 CLuaBaseEntity::getCurrentAssault()
 /************************************************************************
  *  Function: hasCompletedAssault()
  *  Purpose : Returns true if a player has completed a specified assault
- *  Example : if (v:hasCompletedAssault(v:getCurrentAssault())) then
+ *  Example : if v:hasCompletedAssault(v:getCurrentAssault()) then
  *  Notes   : See scripts/zones/Leujaoam_Sanctum/npcs/rune_of_release.lua
  ************************************************************************/
 
@@ -5933,7 +5932,7 @@ void CLuaBaseEntity::completeAssault(uint8 missionID)
 /************************************************************************
  *  Function: addKeyItem()
  *  Purpose : Adds a key item to the player
- *  Example : player:addKeyItem(512)
+ *  Example : player:addKeyItem(tpz.ki.MOGHANCEMENT_FIRE)
  *  Notes   :
  ************************************************************************/
 
@@ -5958,7 +5957,7 @@ void CLuaBaseEntity::addKeyItem(uint16 keyItemID)
 /************************************************************************
  *  Function: hasKeyItem()
  *  Purpose : Returns true if a player has a specified key item
- *  Example : if (player:hasItem(TORN_PAPER)) then
+ *  Example : if (player:hasKeyItem(tpz.ki.TORN_PAPER)) then
  *  Notes   :
  ************************************************************************/
 
@@ -5972,7 +5971,7 @@ bool CLuaBaseEntity::hasKeyItem(uint16 keyItemID)
 /************************************************************************
  *  Function: delKeyItem()
  *  Purpose : Deletes a key item from the player
- *  Example : player:delKeyItem(SUNBEAM_FRAGMENT)
+ *  Example : player:delKeyItem(tpz.ki.SUNBEAM_FRAGMENT)
  *  Notes   :
  ************************************************************************/
 
@@ -5991,7 +5990,7 @@ void CLuaBaseEntity::delKeyItem(uint16 keyItemID)
 /************************************************************************
  *  Function: seenKeyItem()
  *  Purpose : Returns true if a player has peeked at the key item
- *  Example : if (player:seenKeyItem(LETTER_FROM_ROH_LATTEH)) then
+ *  Example : if player:seenKeyItem(tpz.ki.LETTER_FROM_ROH_LATTEH) then
  *  Notes   :
  ************************************************************************/
 
@@ -6005,7 +6004,7 @@ bool CLuaBaseEntity::seenKeyItem(uint16 keyItemID)
 /************************************************************************
  *  Function: unseenKeyItem()
  *  Purpose : Restores a key item to unseen status
- *  Example : player:unseenKeyItem(512)
+ *  Example : player:unseenKeyItem(tpz.ki.MOGHANCEMENT_FIRE)
  *  Notes   : Some things just can't be unseen... (not implemented though)
  ************************************************************************/
 
@@ -6056,7 +6055,7 @@ void CLuaBaseEntity::delExp(uint32 exp)
 /************************************************************************
  *  Function: getMerit()
  *  Purpose : Checks for the existence of a merit and returns the value
- *  Example : caster:getMerit(MERIT_DOTON_EFFECT)
+ *  Example : caster:getMerit(tpz.merit.DOTON_EFFECT)
  *  Notes   :
  ************************************************************************/
 
@@ -6917,7 +6916,7 @@ void CLuaBaseEntity::delMP(int32 amount)
 /************************************************************************
  *  Function: getTP()
  *  Purpose : Returns the current Tactical Points of an Entity
- *  Example : if (player:getTP() > 1000) then
+ *  Example : if player:getTP() > 1000 then
  ************************************************************************/
 
 float CLuaBaseEntity::getTP()
@@ -6987,7 +6986,7 @@ void CLuaBaseEntity::updateHealth()
 /************************************************************************
  *  Function: capSkill()
  *  Purpose : Caps a particular skill for a PC
- *  Example : player:capSkill(DAGGER_SKILL)
+ *  Example : player:capSkill(tpz.skill.DAGGER)
  *  Notes   :
  ************************************************************************/
 
@@ -7060,7 +7059,7 @@ void CLuaBaseEntity::capAllSkills()
 /************************************************************************
  *  Function: getSkillLevel()
  *  Purpose : Returns the level for a specified skill of a PC
- *  Example : player:getSkillLevel(ENHANCING_MAGIC)
+ *  Example : player:getSkillLevel(tpz.skill.ENHANCING_MAGIC)
  *  Notes   :
  ************************************************************************/
 
@@ -7076,7 +7075,7 @@ uint16 CLuaBaseEntity::getSkillLevel(uint16 skillId)
 /************************************************************************
  *  Function: setSkillLevel()
  *  Purpose : Sets a particular skill for a PC
- *  Example : player:setSkillLevel(ENHANCING_MAGIC, 200)
+ *  Example : player:setSkillLevel(tpz.skill.ENHANCING_MAGIC, 200)
  *  Notes   :
  ************************************************************************/
 
@@ -7101,7 +7100,7 @@ void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
 /************************************************************************
  *  Function: getMaxSkillLevel()
  *  Purpose : Returns the Max Skill Level for a PC's current main job
- *  Example : master:getMaxSkillLevel(avatar:getMainLvl(), JOBS.SMN, SUMMONING_SKILL)
+ *  Example : master:getMaxSkillLevel(avatar:getMainLvl(), tpz.job.SMN, tpz.skill.SUMMONING_MAGIC)
  *  Notes   : Used in Meteor, summons, and some Mob TP moves
  ************************************************************************/
 
@@ -7130,7 +7129,7 @@ uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 /************************************************************************
  *  Function: setSkillRank()
  *  Purpose : Sets a Skill Rank for a particular skill
- *  Example : player:setSkillRank(SKILL_DIG, 20)
+ *  Example : player:setSkillRank(tpz.skill.DIG, 20)
  *  Notes   :
  ************************************************************************/
 
@@ -7153,7 +7152,7 @@ void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
 /************************************************************************
  *  Function: getCharSkillLevel()
  *  Purpose : Returns the level for a particular skill
- *  Example : player:getCharSkillLevel(SKILL_DIG)
+ *  Example : player:getCharSkillLevel(tpz.skill.DIG)
  *  Notes   : Only used for Chocobo Digging currently
  ************************************************************************/
 
@@ -7172,7 +7171,7 @@ uint16 CLuaBaseEntity::getCharSkillLevel(uint8 skillID)
 /************************************************************************
  *  Function: addLearnedWeaponskill()
  *  Purpose : Manually add a new weaponskill for the player using WSID
- *  Example : player:addLearnedWeaponskill(DECIMATION)
+ *  Example : player:addLearnedWeaponskill(tpz.weaponskill.DECIMATION)
  *  Notes   : Do not see implemented in any script
  ************************************************************************/
 
@@ -7191,7 +7190,7 @@ void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsID)
 /************************************************************************
  *  Function: hasLearnedWeaponskill()
  *  Purpose : Returns true if a player has learned a particular weaponskill
- *  Example : if (player:hasLearnedWeaponskill(DECIMATION)) then
+ *  Example : if player:hasLearnedWeaponskill(tpz.weaponskill.DECIMATION) then
  *  Notes   :
  ************************************************************************/
 
@@ -7205,7 +7204,7 @@ bool CLuaBaseEntity::hasLearnedWeaponskill(uint8 wsID)
 /************************************************************************
  *  Function: delLearnedWeaponskill()
  *  Purpose : Removes a learned weaponskill from the player
- *  Example : player:delLearnedWeaponskill(ASURAN_FISTS)
+ *  Example : player:delLearnedWeaponskill(tpz.weaponskill.ASURAN_FISTS)
  *  Notes   :
  ************************************************************************/
 
@@ -7224,7 +7223,7 @@ void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsID)
 /************************************************************************
  *  Function: addWeaponSkillPoints()
  *  Purpose : Removes a learned weaponskill from the player
- *  Example : player:addWeaponSkillPoints(tpz.slot.MAIN,300)
+ *  Example : player:addWeaponSkillPoints(tpz.slot.MAIN, 300)
  *  Notes   : Returns true if points were successfully added.
  ************************************************************************/
 
@@ -7277,7 +7276,7 @@ bool CLuaBaseEntity::hasLearnedAbility(uint16 abilityID)
 /************************************************************************
  *  Function: canLearnAbility()
  *  Purpose : Returns true if player can learn the ability
- *  Example : if (player:canLearnAbility(89)) -- Chaos Roll
+ *  Example : if player:canLearnAbility(89) then -- Chaos Roll
  *  Notes   : Purpose doesn't match function, returns uint32 Message,
  *          : not bool type, according to header, 0 is can learn
  ************************************************************************/
@@ -7354,7 +7353,7 @@ void CLuaBaseEntity::addSpell(uint16 spellID, sol::object const& arg_silent, sol
 /************************************************************************
  *  Function: hasSpell()
  *  Purpose : Returns true if a player has learned a particular spell
- *  Example : if (player:hasSpell(125)) then
+ *  Example : if player:hasSpell(125) then
  *  Notes   :
  ************************************************************************/
 
@@ -7368,7 +7367,7 @@ bool CLuaBaseEntity::hasSpell(uint16 spellID)
 /************************************************************************
  *  Function: canLearnSpell()
  *  Purpose : Returns true if a player can learn a particular spell
- *  Example : if (player:canLearnSpell(528)) then
+ *  Example : if player:canLearnSpell(528) then
  *  Notes   : Just like learned ability, message or 0 (for can learn), not bool
  ************************************************************************/
 
@@ -7534,7 +7533,7 @@ uint8 CLuaBaseEntity::getPartySize(sol::object const& arg0)
 /************************************************************************
  *  Function: hasPartyJob()
  *  Purpose : Loops over party members and returns true if job is found
- *  Example : if (caster:hasPartyJob(JOBS.DRK)) then
+ *  Example : if caster:hasPartyJob(tpz.job.DRK) then
  *  Notes   : Highly useful for future addition of features
  ************************************************************************/
 
@@ -7650,7 +7649,7 @@ void CLuaBaseEntity::forMembersInRange(float range, sol::function function)
 /************************************************************************
  *  Function: addPartyEffect()
  *  Purpose : Adds effect to members of the entire party
- *  Example : player:addPartyEffect(EFFECT, 1, 2, 3, ...)?
+ *  Example : player:addPartyEffect(effect, 1, 2, 3, ...)?
  *  Notes   : Must have at least three members, scales to six max
  ************************************************************************/
 
@@ -7677,7 +7676,7 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
 /************************************************************************
  *  Function: hasPartyEffect()
  *  Purpose : Returns true if all members of party have a specified effect
- *  Example : if (player:hasPartyEffect(EFFECT)) then
+ *  Example : if player:hasPartyEffect(effect) then
  *  Notes   : Currently not used in any script
  ************************************************************************/
 
@@ -7707,7 +7706,7 @@ bool CLuaBaseEntity::hasPartyEffect(uint16 effectid)
 /************************************************************************
  *  Function: removePartyEffect()
  *  Purpose : Deletes specified effect from all party members
- *  Example : player:removePartyEffect(EFFECT)
+ *  Example : player:removePartyEffect(effect)
  *  Notes   :
  ************************************************************************/
 
@@ -7916,7 +7915,7 @@ uint8 CLuaBaseEntity::checkSoloPartyAlliance()
 /************************************************************************
  *  Function: checkKillCredit()
  *  Purpose : Used to determine if kill counts towards regimes/etc.
- *  Example : if (player:checkKillCredit(mob)) then
+ *  Example : if player:checkKillCredit(mob) then
  *          : optionally specify lv diff and distance e.g.
  *          : player:checkKillCredit(mob, 15, 100)
  *  Notes   : Returns true if player is in range of sync target upon kill
@@ -8063,7 +8062,7 @@ uint16 CLuaBaseEntity::copyConfrontationEffect(uint16 targetID)
 /************************************************************************
  *  Function: getBattlefield()
  *  Purpose : Returns a Battlefield Instance Object to the entity
- *  Example : local battlefield = player:getBattlefield();
+ *  Example : local battlefield = player:getBattlefield()
  *  Notes   : Used to check if entity is inside a battlefield
  ************************************************************************/
 
@@ -8179,7 +8178,7 @@ bool CLuaBaseEntity::leaveBattlefield(uint8 leavecode)
 /************************************************************************
  *  Function: isInDynamis()
  *  Purpose : Returns true if an entity is in Dynamis
- *  Example : if (player:isInDynamis()) then
+ *  Example : if player:isInDynamis() then
  *  Notes   :
  ************************************************************************/
 
@@ -8193,7 +8192,7 @@ bool CLuaBaseEntity::isInDynamis()
 /************************************************************************
  *  Function: isAlive()
  *  Purpose : Returns true if an Entity is alive
- *  Example : if (mob:isAlive())
+ *  Example : if mob:isAlive() then
  *  Notes   :
  ************************************************************************/
 
@@ -8205,7 +8204,7 @@ bool CLuaBaseEntity::isAlive()
 /************************************************************************
  *  Function: isDead()
  *  Purpose : Returns true if an Entity is dead
- *  Example : if (pet:isDead())
+ *  Example : if pet:isDead() then
  *  Notes   :
  ************************************************************************/
 
@@ -8370,7 +8369,7 @@ void CLuaBaseEntity::engage(uint16 requestedTarget)
 /************************************************************************
  *  Function: isEngaged()
  *  Purpose : Returns true if an Entity is engaged in battle
- *  Example : if (mob:isEngaged()) then
+ *  Example : if mob:isEngaged() then
  *  Notes   :
  ************************************************************************/
 
@@ -8423,7 +8422,7 @@ void CLuaBaseEntity::queue(int ms, sol::function func)
 /************************************************************************
  *  Function: addRecast()
  *  Purpose : Manually adds a cooldown for a particular Ability
- *  Example : automaton:addRecast(RECAST_ABILITY, skill:getID(), 180)
+ *  Example : automaton:addRecast(tpz.recast.ABILITY, skill:getID(), 180)
  *  Notes   :
  ************************************************************************/
 
@@ -8447,7 +8446,7 @@ void CLuaBaseEntity::addRecast(uint8 recastCont, uint16 recastID, uint32 duratio
 /************************************************************************
  *  Function: hasRecast()
  *  Purpose : Checks to see if a particular Ability is on cooldown
- *  Example : automaton:hasRecast(RECAST_ABILITY, skill:getID(), recast)
+ *  Example : automaton:hasRecast(tpz.recast.ABILITY, skill:getID(), recast)
  *  Notes   : Recast parameter is optional to check charges
  ************************************************************************/
 
@@ -8470,7 +8469,7 @@ bool CLuaBaseEntity::hasRecast(uint8 rType, uint16 recastID, sol::object const& 
 /************************************************************************
  *  Function: resetRecast()
  *  Purpose : Resets the cooldown for a specified Ability to 0
- *  Example : player:resetRecast(RECAST_ABILITY, 231)
+ *  Example : player:resetRecast(tpz.recast.ABILITY, 231)
  *  Notes   : Must call the particular container (Ability Container in above example)
  *          : I imagine the Magic container can be specified?
  ************************************************************************/
@@ -8640,7 +8639,7 @@ void CLuaBaseEntity::recalculateStats()
 /************************************************************************
  *  Function: checkImbuedItems()
  *  Purpose : Returns true if an Imbued Item is found in a PC's inventory
- *  Example : if (v:checkImbuedItems()) then
+ *  Example : if v:checkImbuedItems() then
  *  Notes   : See scripts/zones/Alzadaal_Undersea_Ruins/npcs/_20t.lua
  ************************************************************************/
 
@@ -8794,7 +8793,7 @@ void CLuaBaseEntity::lowerEnmity(CLuaBaseEntity* PEntity, uint8 percent)
 /************************************************************************
  *  Function: updateEnmity()
  *  Purpose : Unlike updateClaim(), this function only generates Enmity toward an Entity
- *  Example : SpawnMob(17330334):updateEnmity(target)
+ *  Example : mob:updateEnmity(target)
  *  Notes   : Mob will aggro an Entity, but be unclaimed until engaged
  ************************************************************************/
 
@@ -8863,7 +8862,7 @@ void CLuaBaseEntity::transferEnmity(CLuaBaseEntity* entity, uint8 percent, float
 /************************************************************************
  *  Function: updateEnmityFromDamage()
  *  Purpose : Generates Enmity from moves that damage the Mob
- *  Example : target:updateEnmityFromDamage(player,damage)
+ *  Example : target:updateEnmityFromDamage(player, damage)
  *  Notes   : Used in most Weaponskills and damaging abilities scripts
  ************************************************************************/
 
@@ -8892,7 +8891,7 @@ void CLuaBaseEntity::updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damag
 /************************************************************************
  *  Function: updateEnmityFromCure()
  *  Purpose : Generates Enmity from use of Cure spells/abilities
- *  Example : caster:updateEnmityFromCure(target,final)
+ *  Example : caster:updateEnmityFromCure(target, final)
  *  Notes   : Used in nearly all Cure scripts and abilities which heal
  ************************************************************************/
 
@@ -8942,7 +8941,7 @@ void CLuaBaseEntity::resetEnmity(CLuaBaseEntity* PEntity)
 /************************************************************************
  *  Function: updateClaim()
  *  Purpose : Marks a Mob as claimed once popped by a Player
- *  Example : SpawnMob(17428813):updateClaim(player)
+ *  Example : mob:updateClaim(player)
  *  Notes   : Used mostly in QM (???) scripts
  ************************************************************************/
 
@@ -8971,7 +8970,7 @@ void CLuaBaseEntity::updateClaim(sol::object const& entity)
 /************************************************************************
  *  Function: hasEnmity()
  *  Purpose : Check if a an entity is on any mob's enmity list
- *  Example : if player:hasEnmity() then ...
+ *  Example : if player:hasEnmity() then
  *  Notes   :
  ************************************************************************/
 
@@ -9007,7 +9006,7 @@ sol::table CLuaBaseEntity::getNotorietyList()
 /************************************************************************
  *  Function: addStatusEffect(effect, power, tick, duration)
  *  Purpose : Adds a specified Status Effect to the Entity
- *  Example : target:addStatusEffect(EFFECT_ACCURACY_DOWN,20,3,60)
+ *  Example : target:addStatusEffect(tpz.effect.ACCURACY_DOWN, 20, 3, 60)
  *  Notes   :
  ************************************************************************/
 
@@ -9068,7 +9067,7 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
 /************************************************************************
  *  Function: addStatusEffectEx()
  *  Purpose : Adds an instance (or 'battle') Status Effect to the Entity
- *  Example : target:addStatusEffectEx(EFFECT_MOUNTED,EFFECT_MOUNTED,0,0,900,true)
+ *  Example : target:addStatusEffectEx(tpz.effect.MOUNTED, tpz.effect.MOUNTED, 0, 0, 900, true)
  *  Notes   : For instance, Chocobo status, Fireflights, Teleport
  ************************************************************************/
 
@@ -9121,7 +9120,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
 /************************************************************************
  *  Function: getStatusEffect()
  *  Purpose : Returns the Object of a specified Status ID
- *  Example : local debilitation = target:getStatusEffect(EFFECT_DEBILITATION)
+ *  Example : local debilitation = target:getStatusEffect(tpz.effect.DEBILITATION)
  *  Notes   :
  ************************************************************************/
 
@@ -9198,7 +9197,7 @@ int16 CLuaBaseEntity::getStatusEffectElement(uint16 statusId)
 /************************************************************************
  *  Function: canGainStatusEffect()
  *  Purpose : Returns true if an Entity can gain a Status Effect
- *  Example : if (target:canGainStatusEffect(EFFECT_STR_DOWN)) then
+ *  Example : if target:canGainStatusEffect(tpz.effect.STR_DOWN) then
  *  Notes   :
  ************************************************************************/
 
@@ -9222,7 +9221,7 @@ bool CLuaBaseEntity::canGainStatusEffect(uint16 effect, sol::object const& power
 /************************************************************************
  *  Function: hasStatusEffect()
  *  Purpose : Returns true if an Entity has a specific Status Effect active
- *  Example : if (player:hasStatusEffect(EFFECT_REFRESH)
+ *  Example : if player:hasStatusEffect(tpz.effect.REFRESH) then
  *  Notes   : More specific in scope than hasStatusEffectByFlag()
  ************************************************************************/
 
@@ -9255,7 +9254,7 @@ bool CLuaBaseEntity::hasStatusEffect(uint16 StatusID, sol::object const& SubID)
 /************************************************************************
  *  Function: hasStatusEffectByFlag()
  *  Purpose : Returns true if an Entity has a Status Effect of a specified Flag
- *  Example : if (target:hasStatusEffectByFlag(EFFECTFLAG_INVISIBLE)) then
+ *  Example : if target:hasStatusEffectByFlag(tpz.effectFlag.INVISIBLE) then
  *  Notes   : More broad in scope than hasStatusEffect()
  ************************************************************************/
 
@@ -9276,7 +9275,7 @@ uint16 CLuaBaseEntity::hasStatusEffectByFlag(uint16 StatusID)
 /************************************************************************
  *  Function: countEffect()
  *  Purpose : Returns the number of Effects an Entity has in their container
- *  Example : if (target:countEffect() > 3) then
+ *  Example : if target:countEffect() > 3 then
  *  Notes   :
  ************************************************************************/
 
@@ -9297,7 +9296,7 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
 /************************************************************************
  *  Function: delStatusEffect()
  *  Purpose : Deletes a specified Effect from the Entity's Status Effect Container
- *  Example : target:delStatusEffect(EFFECT_RERAISE)
+ *  Example : target:delStatusEffect(tpz.effect.RERAISE)
  *  Notes   : Can specify Power of the Effect as an option
  ************************************************************************/
 
@@ -9332,7 +9331,7 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 /************************************************************************
  *  Function: delStatusEffectsByFlag()
  *  Purpose : Removes all Status Effects of a specified flag
- *  Example : target:delEffectsByFlag(FLAG)
+ *  Example : target:delEffectsByFlag(tpz.effectFlag.DEATH)
  *  Notes   : Used for removal of multiple effects with matching flag
  ************************************************************************/
 
@@ -9354,7 +9353,7 @@ void CLuaBaseEntity::delStatusEffectsByFlag(uint16 flag, sol::object const& sile
 /************************************************************************
  *  Function: delStatusEffectSilent()
  *  Purpose : Removes a Status Effect from the Entity without showing a message
- *  Example : target:delStatusEffectSilent(EFFECT_SANDSTORM)
+ *  Example : target:delStatusEffectSilent(tpz.effect.SANDSTORM)
  *  Notes   : Used specifically for Status Effects that are not supposed to show a message once worn
  ************************************************************************/
 
@@ -9496,7 +9495,7 @@ uint16 CLuaBaseEntity::stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::obj
 /************************************************************************
  *  Function: addMod()
  *  Purpose : Adds a Mod to the Entity
- *  Example : target:addMod(MOD_INT, 10)
+ *  Example : target:addMod(tpz.mod.INT, 10)
  *  Notes   : If Mod ID already exists, adds the amount to existing amount
  ************************************************************************/
 
@@ -9516,7 +9515,7 @@ void CLuaBaseEntity::addMod(uint16 type, int16 amount)
 /************************************************************************
  *  Function: getMod()
  *  Purpose : Returns the integer value of a specified Mod on the Entity
- *  Example : if (target:getMod(MOD_MND) > 10) then
+ *  Example : if target:getMod(tpz.mod.MND) > 10 then
  *  Notes   :
  ************************************************************************/
 
@@ -9530,7 +9529,7 @@ int16 CLuaBaseEntity::getMod(uint16 modID)
 /************************************************************************
  *  Function: setMod()
  *  Purpose : Sets a specified Mod and Amount for the Entity
- *  Example : target:setMod(MOD_STR, 20)
+ *  Example : target:setMod(tpz.mod.STR, 20)
  *  Notes   :
  ************************************************************************/
 
@@ -9544,7 +9543,7 @@ void CLuaBaseEntity::setMod(uint16 modID, int16 value)
 /************************************************************************
  *  Function: delMod()
  *  Purpose : Removes a specified Mod and amount from the Entity
- *  Example : target:delMod(MOD_STR,4)
+ *  Example : target:delMod(tpz.mod.STR,4)
  *  Notes   :
  ************************************************************************/
 
@@ -9618,7 +9617,7 @@ void CLuaBaseEntity::doWildCard(CLuaBaseEntity* PEntity, uint8 total)
 /************************************************************************
  *  Function: addCorsairRoll()
  *  Purpose : Adds the Corsair Roll to the Target's Status Effect Container
- *  Example : target:addCorsairRoll(caster:getMainJob(), caster:getMerit(MERIT_BUST_DURATION), EFFECT_CHAOS_ROLL, effectpower, 0, duration, caster:getID(),
+ *  Example : target:addCorsairRoll(caster:getMainJob(), caster:getMerit(tpz.merit.BUST_DURATION), tpz.effect.CHAOS_ROLL, effectpower, 0, duration, caster:getID(),
  *total, MOD_ATTP) Notes   : Returns true if success (Is range a factor?)
  ************************************************************************/
 
@@ -9649,7 +9648,7 @@ bool CLuaBaseEntity::addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 
 /************************************************************************
  *  Function: hasCorsairEffect()
  *  Purpose : Returns true if the Entity has Corsair Effect
- *  Example : if (target:hasCorsairEffect())
+ *  Example : if target:hasCorsairEffect() then
  *  Notes   :
  ************************************************************************/
 
@@ -9663,7 +9662,7 @@ bool CLuaBaseEntity::hasCorsairEffect()
 /************************************************************************
  *  Function: hasBustEffect()
  *  Purpose : Returns true if an Entity has a Bust Effect of a specified type
- *  Example : if (target:hasBustEffect(EFFECT)) then
+ *  Example : if target:hasBustEffect(effect) then
  *  Notes   :
  ************************************************************************/
 
@@ -9678,7 +9677,7 @@ bool CLuaBaseEntity::hasBustEffect(uint16 id)
 /************************************************************************
  *  Function: numBustEffects()
  *  Purpose : Returns the count of how many Bust Effects are in the Entity's container
- *  Example : if (player:numBustEffects() == 2) then
+ *  Example : if player:numBustEffects() == 2 then
  *  Notes   :
  ************************************************************************/
 
@@ -9708,7 +9707,7 @@ uint16 CLuaBaseEntity::healingWaltz()
 /************************************************************************
  *  Function: addBardSong()
  *  Purpose : Adds a song effect to Player(s') Status Effect Container(s); returns true if sucess
- *  Example : target:addBardSong(caster,EFFECT_BALLAD,power,0,duration,caster:getID(), 0, 1)
+ *  Example : target:addBardSong(caster, tpz.effect.BALLAD, power, 0, duration, caster:getID(), 0, 1)
  *  Notes   :
  ************************************************************************/
 
@@ -9769,7 +9768,7 @@ void CLuaBaseEntity::uncharm()
 /************************************************************************
  *  Function: addBurden()
  *  Purpose : Adds a Burden to a Target
- *  Example : local overload = target:addBurden(ELE_EARTH-1, burden)
+ *  Example : local overload = target:addBurden(tpz.magic.ele.EARTH - 1, burden)
  *  Notes   : Used for Automation abilities
  *  TODO    : Make these multiple casts easier to read
  ************************************************************************/
@@ -9808,7 +9807,7 @@ void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
 /************************************************************************
  *  Function: getStat()
  *  Purpose : Returns a particular stat for an Entity
- *  Example : caster:getStat(MOD_INT)
+ *  Example : caster:getStat(tpz.mod.INT)
  *  Notes   :
  ************************************************************************/
 
@@ -9968,7 +9967,7 @@ uint16 CLuaBaseEntity::getILvlMacc()
 /************************************************************************
  *  Function: isSpellAoE()
  *  Purpose : Returns true if a specified spell is AoE
- *  Example : if (caster:isSpellAoE(spell:getID())) then
+ *  Example : if caster:isSpellAoE(spell:getID()) then
  *  Notes   : Only found in scripts/globals/magic.lua
  ************************************************************************/
 
@@ -10065,7 +10064,7 @@ void CLuaBaseEntity::handleAfflatusMiseryDamage(double damage)
 /************************************************************************
  *  Function: isWeaponTwoHanded()
  *  Purpose : Returns true if the Weapon in the Main Slot is two-handed
- *  Example : if (player:isWeaponTwoHanded()) then
+ *  Example : if player:isWeaponTwoHanded() then
  *  Notes   :
  ************************************************************************/
 
@@ -10144,7 +10143,7 @@ uint16 CLuaBaseEntity::getWeaponDmgRank()
 /************************************************************************
  *  Function: getOffhandDmg()
  *  Purpose : Returns the damage rating for the Weapon in the Offhand slot
- *  Example : if (player:getOffhandDmg() > 0)
+ *  Example : if player:getOffhandDmg() > 0 then
  *  Notes   : Mainly used to add an extra TP Hit in Weaponskills
  ************************************************************************/
 
@@ -10237,7 +10236,7 @@ void CLuaBaseEntity::removeAmmo()
 /************************************************************************
  *  Function: getWeaponSkillLevel()
  *  Purpose : Returns the player's skill level for the weapon in a slot
- *  Example : caster:getWeaponSkillLevel(SLOT_RANGED)
+ *  Example : caster:getWeaponSkillLevel(tpz.slot.RANGED)
  *  Notes   : Mainly used to determine String/Wind level, but can be used for others
  ************************************************************************/
 
@@ -10264,7 +10263,7 @@ uint8 CLuaBaseEntity::getWeaponSkillLevel(uint8 slotID)
 /************************************************************************
  *  Function: getWeaponDamageType()
  *  Purpose : Returns the primary type of a weapon in a slot
- *  Example : if (attacker:getWeaponDamageType(SLOT_MAIN) == tpz.damageType.PIERCING)
+ *  Example : if attacker:getWeaponDamageType(tpz.slot.MAIN) == tpz.damageType.PIERCING then
  *  Notes   : Used to identify which damage type is the weapon
  ************************************************************************/
 
@@ -10290,7 +10289,7 @@ uint16 CLuaBaseEntity::getWeaponDamageType(uint8 slotID)
 /************************************************************************
  *  Function: getWeaponSkillType()
  *  Purpose : Returns the primary type of a weapon in a slot
- *  Example : if (attacker:getWeaponSkillType(SLOT_MAIN) == SKILL_HAND_TO_HAND)
+ *  Example : if attacker:getWeaponSkillType(tpz.slot.MAIN) == tpz.skill.HAND_TO_HAND then
  *  Notes   : Used to identify which type of weapon it is (Katana, Sword, etc)
  ************************************************************************/
 
@@ -10316,7 +10315,7 @@ uint8 CLuaBaseEntity::getWeaponSkillType(uint8 slotID)
 /************************************************************************
  *  Function: getWeaponSubSkillType()
  *  Purpose : Returns the integer value of the Weapon's Sub Type
- *  Example : if (player:getWeaponSubSkillType(SLOT_RANGED) == 10)
+ *  Example : if player:getWeaponSubSkillType(tpz.slot.RANGED) == 10 then
  *  Notes   : Mainly used to differentiate between ammo and ranged equipment
  ************************************************************************/
 
@@ -10404,7 +10403,7 @@ int32 CLuaBaseEntity::takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, 
 /************************************************************************
  *  Function: spawnPet()
  *  Purpose : Spawns a pet if a few correct conditions are met
- *  Example : caster:spawnPet(PET_CARBUNCLE)
+ *  Example : caster:spawnPet(tpz.pet.id.CARBUNCLE)
  *  Notes   :
  ************************************************************************/
 
@@ -10467,7 +10466,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
 /************************************************************************
  *  Function: spawnTrust()
  *  Purpose : Spawns a Trust if a few correct conditions are met
- *  Example : caster:spawnTrust(TRUST_SHANTOTTO)
+ *  Example : caster:spawnTrust(spell:getID())
  ************************************************************************/
 
 void CLuaBaseEntity::spawnTrust(uint16 trustId)
@@ -10599,7 +10598,7 @@ void CLuaBaseEntity::despawnPet()
 /************************************************************************
  *  Function: isJugPet()
  *  Purpose : Returns true if the entity crawled out of a jug after birth
- *  Example : if (pet:isJugPet()) then
+ *  Example : if pet:isJugPet() then
  *  Notes   :
  ************************************************************************/
 
@@ -10618,7 +10617,7 @@ bool CLuaBaseEntity::isJugPet()
 /************************************************************************
  *  Function: hasValidJugPetItem()
  *  Purpose : Returns true if subSkill Type is of sufficient value
- *  Example : if (player:hasValidJugPetItem()) then
+ *  Example : if player:hasValidJugPetItem() then
  *  Notes   : Solely used for determining Call Beast activation
  ************************************************************************/
 
@@ -10639,7 +10638,7 @@ bool CLuaBaseEntity::hasValidJugPetItem()
 /************************************************************************
  *  Function: hasPet()
  *  Purpose : Returns true if an entity has a pet spawned
- *  Example : if (target:hasPet()) then
+ *  Example : if target:hasPet() then
  *  Notes   :
  ************************************************************************/
 
@@ -10757,7 +10756,7 @@ auto CLuaBaseEntity::getPetName() -> const char*
 /************************************************************************
  *  Function: setPetName()
  *  Purpose : Passes a string to name a new pet
- *  Example : player:setPetName(PET_TYPE_WYVERN,FLUFFI_LUFFIGUS)
+ *  Example : player:setPetName(tpz.pet.type.WYVERN, tpz.pet.name.ROVER)
  *  Notes   : Updates char_pet.sql
  ************************************************************************/
 
@@ -10908,7 +10907,7 @@ void CLuaBaseEntity::familiar()
 /************************************************************************
  *  Function: addPetMod()
  *  Purpose : Adds a specified mod and power to a pet
- *  Example : target:addPetMod(MOD_HP, 20)
+ *  Example : target:addPetMod(tpz.mod.HP, 20)
  *  Notes   : Adds on top of existing values?
  ************************************************************************/
 
@@ -10922,7 +10921,7 @@ void CLuaBaseEntity::addPetMod(uint16 modID, int16 amount)
 /************************************************************************
  *  Function: setPetMod()
  *  Purpose : Sets a specified mod and power for a pet
- *  Example : target:setPetMod(MOD_HP, 20)
+ *  Example : target:setPetMod(tpz.mod.HP, 20)
  *  Notes   :
  ************************************************************************/
 
@@ -10936,7 +10935,7 @@ void CLuaBaseEntity::setPetMod(uint16 modID, int16 amount)
 /************************************************************************
  *  Function: delPetMod()
  *  Purpose : Removes a specified mod and power from a pet
- *  Example : target:delPetMod(MOD_HP, 20)
+ *  Example : target:delPetMod(tpz.mod.HP, 20)
  *  Notes   :
  ************************************************************************/
 
@@ -10950,7 +10949,7 @@ void CLuaBaseEntity::delPetMod(uint16 modID, int16 amount)
 /************************************************************************
  *  Function: hasAttachment()
  *  Purpose : Returns true if PC has attachment
- *  Example : if (player: hasAttachment()) then
+ *  Example : if player:hasAttachment() then
  *  Notes   :
  ************************************************************************/
 
@@ -11034,7 +11033,7 @@ bool CLuaBaseEntity::unlockAttachment(uint16 itemID)
 /************************************************************************
  *  Function: getActiveManeuvers()
  *  Purpose : Get the amount of active maneuvers for an automation
- *  Example : if (target:getActiveManeuvers() == 3) then
+ *  Example : if target:getActiveManeuvers() == 3 then
  *  Notes   :
  ************************************************************************/
 
@@ -11110,7 +11109,7 @@ void CLuaBaseEntity::setMobLevel(uint8 level)
 /************************************************************************
  *  Function: getSystem()
  *  Purpose : Returns integer value of system associated with an Entity
- *  Example : if (pet:getSystem() ~= 5) then -- Not an avatar
+ *  Example : if pet:getSystem() ~= tpz.ecosystem.AVATAR then -- Not an avatar
  *  Notes   :
  ************************************************************************/
 
@@ -11125,7 +11124,7 @@ uint8 CLuaBaseEntity::getSystem()
 /************************************************************************
  *  Function: getFamily()
  *  Purpose : Returns the integer value of the associated Mob Family
- *  Example : if (mob:getFamily() == 123) then
+ *  Example : if mob:getFamily() == 123 then
  *  Notes   : To Do: Enumerate Mob Families in global script
  ************************************************************************/
 
@@ -11140,7 +11139,7 @@ uint16 CLuaBaseEntity::getFamily()
 /************************************************************************
  *  Function: isMobType()
  *  Purpose : Returns true if a Mob is of a specified type (if !Mob->false)
- *  Example : if (mob:isMobType(MOBTYPE_NOTORIOUS)
+ *  Example : if mob:isMobType(MOBTYPE_NOTORIOUS) then
  *  Notes   : Oddly, this is only being used to check if Mob is NM...?
  *  Notes   : To Do: This isn't the intended function for NM checks...
  ************************************************************************/
@@ -11160,7 +11159,7 @@ bool CLuaBaseEntity::isMobType(uint8 mobType)
 /************************************************************************
  *  Function: isUndead()
  *  Purpose : Returns true if Entity is Undead
- *  Example : if (target:isUndead()) then
+ *  Example : if target:isUndead() then
  ************************************************************************/
 
 bool CLuaBaseEntity::isUndead()
@@ -11173,7 +11172,7 @@ bool CLuaBaseEntity::isUndead()
 /************************************************************************
  *  Function: isNM()
  *  Purpose : Returns true if Mob is a Notorious Monster
- *  Example : if (mob:isNM())
+ *  Example : if mob:isNM() then
  ************************************************************************/
 
 bool CLuaBaseEntity::isNM()
@@ -11296,7 +11295,7 @@ void CLuaBaseEntity::spawn(sol::object const& despawnSec, sol::object const& res
 /************************************************************************
  *  Function: isSpawned()
  *  Purpose : Returns true if a Mob is already spawned
- *  Example : if (mob:isSpawned())
+ *  Example : if mob:isSpawned() then
  *  Notes   :
  ************************************************************************/
 
@@ -11351,7 +11350,7 @@ void CLuaBaseEntity::setSpawn(float x, float y, float z, sol::object const& rot)
 /************************************************************************
  *  Function: getRespawnTime()
  *  Purpose : Returns the remaining respawn time for a Mob
- *  Example : if (nm:getRespawnTime() == 0)
+ *  Example : if nm:getRespawnTime() == 0 then
  *  Notes   : Used in mobs.lua...and directly in Charybdis
  ************************************************************************/
 
@@ -11418,7 +11417,7 @@ void CLuaBaseEntity::instantiateMob(uint32 groupID)
 /************************************************************************
  *  Function: hasTrait()
  *  Purpose : Returns true if a Mob has an active trait
- *  Example : if (target:hasTrait(15)) -- Double Attack
+ *  Example : if target:hasTrait(15) then -- Double Attack
  *  Notes   :
  ************************************************************************/
 
@@ -11435,7 +11434,7 @@ bool CLuaBaseEntity::hasTrait(uint8 traitID)
 /************************************************************************
  *  Function: hasImmunity()
  *  Purpose : Returns true if a Mob is immune to a specified type of spell
- *  Example : if (target:hasImmunity(64)) then
+ *  Example : if target:hasImmunity(64) then
  *  Notes   : Arguments are dec to bin, so powers of 2 (max 256) -- Listed in mobentity.h
  ************************************************************************/
 
@@ -11489,7 +11488,7 @@ void CLuaBaseEntity::setUnkillable(bool unkillable)
 /************************************************************************
  *  Function: untargetable()
  *  Purpose : Returns true if a Mob or NPC is untargetable (Not True)
- *  Example : if (target:untargetable()) then
+ *  Example : if target:untargetable() then
  *  Notes   : This does not return a value, but instead sets state!
  ************************************************************************/
 
@@ -11540,7 +11539,7 @@ void CLuaBaseEntity::setDamage(uint16 damage)
 /************************************************************************
  *  Function: hasSpellList()
  *  Purpose : Returns true if a Mob has spells to cast
- *  Example : if (mob:hasSpellList()) then
+ *  Example : if mob:hasSpellList() then
  ************************************************************************/
 
 bool CLuaBaseEntity::hasSpellList()
@@ -11693,7 +11692,7 @@ void CLuaBaseEntity::delMobMod(uint16 mobModID, int16 value)
 /************************************************************************
  *  Function: getBattleTime()
  *  Purpose : Returns the time the Mob has been engaged in seconds
- *  Example : if (mob:getBattleTime() == 3600) then -- 1 Hour
+ *  Example : if mob:getBattleTime() == 3600 then -- 1 Hour
  *  Notes   :
  ************************************************************************/
 
@@ -11721,7 +11720,7 @@ uint16 CLuaBaseEntity::getBehaviour()
 /************************************************************************
  *  Function: setBehaviour()
  *  Purpose : Sets a particular behavior for a Mob
- *  Example : mob:setBehaviour(bit.bor(mob:getBehaviour(), BEHAVIOUR_NO_TURN))
+ *  Example : mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
  *  Notes   : Currently used in bitwise calculations for high-tier NM's
  ************************************************************************/
 
@@ -11839,7 +11838,7 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity*
 /************************************************************************
  *  Function: actionQueueEmpty()
  *  Purpose : Returns true if a Mob's action queue is empty
- *  Example : if (mob:actionQueueEmpty() == true) then
+ *  Example : if mob:actionQueueEmpty() then
  *  Notes   : See: scripts/zones/Temenos/mobs/Proto-Ultima.lua
  ************************************************************************/
 
@@ -11983,7 +11982,7 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 /************************************************************************
  *  Function: hasTPMoves()
  *  Purpose : Returns true if a Mob has TP moves in its skill list
- *  Example : if (mob:hasTPMoves()) then
+ *  Example : if mob:hasTPMoves() then
  ************************************************************************/
 
 bool CLuaBaseEntity::hasTPMoves()
@@ -12022,7 +12021,7 @@ void CLuaBaseEntity::weaknessTrigger(uint8 level)
 /************************************************************************
  *  Function: hasPreventActionEffect()
  *  Purpose : Returns true if a non-NPC entity has a preventative status effect
- *  Example : if (not pet:hasPreventActionEffect()) then
+ *  Example : if not pet:hasPreventActionEffect() then
  *  Notes   : Used in scripts/globals/abilities/stay.lua
  ************************************************************************/
 
@@ -12048,7 +12047,7 @@ void CLuaBaseEntity::stun(uint32 milliseconds)
 /************************************************************************
  *  Function: getPool()
  *  Purpose : Returns a Mob's Pool ID integer
- *  Example : if (mob:getPool() = 4006) then
+ *  Example : if mob:getPool() = 4006 then
  *  Notes   :
  ************************************************************************/
 
@@ -12127,7 +12126,7 @@ void CLuaBaseEntity::addTreasure(uint16 itemID, sol::object const& arg1, sol::ob
 /************************************************************************
  *  Function: getStealItem()
  *  Purpose : Used to return the Item ID of a mob's item which can be stolen
- *  Example : steamItem = target:getStealItem()
+ *  Example : local steamItem = target:getStealItem()
  *  Notes   : Used only in Thief quest and Maat
  ************************************************************************/
 
@@ -12159,7 +12158,7 @@ uint16 CLuaBaseEntity::getStealItem()
 /************************************************************************
  *  Function: getDespoilItem()
  *  Purpose : Used to return the Item ID of a mob's item which can be despoiled
- *  Example : despoilItem = target:getDespoilItem()
+ *  Example : local despoilItem = target:getDespoilItem()
  *  Notes   : Defaults to getStealItem() if no despoil item exists
  ************************************************************************/
 
@@ -12191,7 +12190,7 @@ uint16 CLuaBaseEntity::getDespoilItem()
 /************************************************************************
  *  Function: getDespoilDebuff()
  *  Purpose : Used to get a status effect id to apply to a mob on successful despoil
- *  Example : effect = player:getDespoilDebuff()
+ *  Example : local effect = player:getDespoilDebuff()
  *  Notes   : Check what happens if 0 is returned instead of nil
  ************************************************************************/
 
