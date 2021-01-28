@@ -3,13 +3,19 @@
 --  NPC: Heillal
 -- Standard Info NPC
 -----------------------------------
+require("scripts/globals/missions")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(64)
+    if player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_BEGINNING then
+        player:startEvent(281)
+    else
+        player:startEvent(64)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
