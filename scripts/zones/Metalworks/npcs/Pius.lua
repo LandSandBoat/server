@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local Mission = player:getCurrentMission(player:getNation())
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     if
         Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK and MissionStatus == 3 or
@@ -41,10 +41,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 355) then
-        if (player:getCharVar("MissionStatus") == 3) then
-            player:setCharVar("MissionStatus", 4)
+        if (player:getMissionStatus(player:getNation()) == 3) then
+            player:setMissionStatus(player:getNation(), 4)
         else
-            player:setCharVar("MissionStatus", 9)
+            player:setMissionStatus(player:getNation(), 9)
         end
     end
 end

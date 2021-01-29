@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
     local OrcishScoutCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS)
     local BatHuntCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT)
     local TheCSpringCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
     local Count = trade:getItemCount()
 
     if CurrentMission ~= xi.mission.id.sandoria.NONE then
@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(2011) -- for Non-San d'Orians
     else
         local CurrentMission = player:getCurrentMission(SANDORIA)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
         local pRank = player:getRank()
         local cs, p, offset = getMissionOffset(player, 2, CurrentMission, MissionStatus)
 
@@ -63,13 +63,13 @@ entity.onTrigger = function(player, npc)
             player:startEvent(2000) -- Start First Mission "Smash the Orcish scouts"
         elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1036)
-        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 4 then
+        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 4 then
             if player:getLocalVar("RanperresRest") == 1 then -- Requires player to zone.
                 player:startEvent(1038)
             else
                 player:startEvent(1040)
             end
-        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getCharVar("MissionStatus") == 7 then
+        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 7 then
             player:startEvent(1034)
         elseif CurrentMission ~= xi.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player, 19) == 1 and player:getCharVar("SecretWeaponStatus") < 2 then
             player:startEvent(1042)
@@ -98,9 +98,9 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 1036 then
         player:delKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK)
         player:setLocalVar("RanperresRest", 1) -- set to require a zone
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif csid == 1040 then
-        player:setCharVar("MissionStatus", 5)
+        player:setMissionStatus(player:getNation(), 5)
     elseif csid == 1034 then
         finishMissionTimeline(player, 1, csid, option)
     elseif csid == 1042 and player:getCharVar("SecretWeaponStatus") == 0 then

@@ -17,11 +17,11 @@ entity.onTrigger = function(player, npc)
 
     local CurrentMission = player:getCurrentMission(SANDORIA)
 
-    if (CurrentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:getCharVar("MissionStatus") == 1) then
-        player:setCharVar("MissionStatus", 2)
+    if (CurrentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:getMissionStatus(player:getNation()) == 1) then
+        player:setMissionStatus(player:getNation(), 2)
         player:addKeyItem(xi.ki.LOST_DOCUMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LOST_DOCUMENT)
-    elseif (CurrentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") >= 6 and player:getCharVar("MissionStatus") <= 9) then
+    elseif (CurrentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getMissionStatus(player:getNation()) >= 6 and player:getMissionStatus(player:getNation()) <= 9) then
         local X = npc:getXPos()
         local Z = npc:getZPos()
 

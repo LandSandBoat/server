@@ -13,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL and
-        player:getCharVar("MissionStatus") == 9 and
+        player:getMissionStatus(player:getNation()) == 9 and
         npcUtil.tradeHas(trade, 16535) -- bronze sword
     then
         player:startEvent(2)
@@ -22,7 +22,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL then
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         if missionStatus >= 2 and missionStatus <= 7 then
             player:startEvent(1)
@@ -44,9 +44,9 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:setCharVar("theRescueDrillRandomNPC", math.random(1, 3))
-        player:setCharVar("MissionStatus", 8)
+        player:setMissionStatus(player:getNation(), 8)
     elseif csid == 2 then
-        player:setCharVar("MissionStatus", 10)
+        player:setMissionStatus(player:getNation(), 10)
         player:confirmTrade()
     end
 end

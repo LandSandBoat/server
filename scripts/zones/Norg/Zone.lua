@@ -29,7 +29,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
     if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_NEW_FRONTIER and player:getRank(player:getNation()) >= 6) then
         cs = 1
-    elseif (player:getCurrentMission(ZILART) == xi.mission.id.zilart.AWAKENING and player:getCharVar("ZilartStatus") == 0 or player:getCharVar("ZilartStatus") == 2) then
+    elseif (player:getCurrentMission(ZILART) == xi.mission.id.zilart.AWAKENING and player:getMissionStatus(xi.mission.log_id.ZILART) == 0 or player:getMissionStatus(xi.mission.log_id.ZILART) == 2) then
         cs = 176
     end
 

@@ -17,9 +17,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
-    local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local MakingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    local CurrentMission = player:getCurrentMission(WINDURST)
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
     local prog = player:getCharVar("QuestMakingHeadlines_var")
@@ -45,7 +45,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 46 then
-        player:setCharVar("MissionStatus", 5) -- Mark the progress
+        player:setMissionStatus(player:getNation(), 5) -- Mark the progress
     end
 end
 

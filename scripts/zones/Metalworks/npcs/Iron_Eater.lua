@@ -68,7 +68,7 @@ end
 entity.onTrigger = function(player, npc)
     local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local currentMission = player:getCurrentMission(BASTOK)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if player:hasSpell(897) and player:hasSpell(900) and player:hasSpell(903) and not player:hasSpell(917) then
         player:startEvent(988, 0, 0, 0, TrustMemory(player))
@@ -76,9 +76,9 @@ entity.onTrigger = function(player, npc)
         player:startEvent(wsQuestEvent)
     elseif (currentMission == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 0) then -- Four Musketeers
         player:startEvent(715)
-    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getCharVar("MissionStatus") == 0) then
+    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(780)
-    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getCharVar("MissionStatus") == 2) then
+    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(782)
     elseif (player:getCharVar("Flagbastok") == 1) then
         if (player:getFreeSlotsCount() == 0) then
@@ -109,11 +109,11 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 715 and option == 0) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 780) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 767 and option == 0) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 768) then
         finishMissionTimeline(player, 1, csid, option)
     elseif (csid == 782) then
@@ -124,7 +124,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(182)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 182)
         end
-        player:setCharVar("MissionStatus", 0)
+        player:setMissionStatus(player:getNation(), 0)
         player:completeMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
         player:setRank(10)
         player:addGil(GIL_RATE * 100000)

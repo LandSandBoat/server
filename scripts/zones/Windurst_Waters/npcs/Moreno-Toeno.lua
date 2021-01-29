@@ -23,16 +23,16 @@ entity.onTrigger = function(player, npc)
 
     local teacherstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET)
 
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 0) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(752, 0, xi.ki.STAR_SEEKER)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") >= 1) then
-        if (player:getCharVar("MissionStatus") < 4) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) >= 1) then
+        if (player:getMissionStatus(player:getNation()) < 4) then
             player:startEvent(753)
-        elseif (player:getCharVar("MissionStatus") == 4) then
+        elseif (player:getMissionStatus(player:getNation()) == 4) then
             player:startEvent(758)
         end
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.A_TESTING_TIME) then
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
         local alreadyCompleted = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)
         if (MissionStatus == 0) then
             if (alreadyCompleted == false) then
@@ -135,14 +135,14 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 182 or csid == 687) and option ~= 1 then -- start
         player:addKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:setCharVar("testingTime_start_day", VanadielDayOfTheYear())
         player:setCharVar("testingTime_start_hour", VanadielHour())
         player:setCharVar("testingTime_start_time", os.time())
     elseif (csid == 198 or csid == 199 or csid == 202 or csid == 208) then -- failed testing time
         player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED + 1, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
-        player:setCharVar("MissionStatus", 0)
+        player:setMissionStatus(player:getNation(), 0)
         player:setCharVar("testingTime_crea_count", 0)
         player:setCharVar("testingTime_start_day", 0)
         player:setCharVar("testingTime_start_hour", 0)
@@ -163,7 +163,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("testingTime_start_hour", 0)
         player:setCharVar("testingTime_start_time", 0)
     elseif (csid == 752) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:addKeyItem(xi.ki.STAR_SEEKER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_SEEKER)
         player:addTitle(xi.title.FUGITIVE_MINISTER_BOUNTY_HUNTER)

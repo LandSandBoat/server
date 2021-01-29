@@ -31,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if prevZone == xi.zone.BEADEAUX and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FOUR_MUSKETEERS then
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         if missionStatus > 0 and missionStatus < 22 then
             cs = 10
@@ -40,7 +40,7 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     elseif quests.rainbow.onZoneIn(player) then
         cs = 13
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 15
     end
 

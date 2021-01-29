@@ -11,7 +11,7 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.BREAKING_BARRIERS and player:getCharVar("MissionStatus") == 3
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.BREAKING_BARRIERS and player:getMissionStatus(player:getNation()) == 3
         and not GetMobByID(ID.mob.SUPARNA):isSpawned() and not GetMobByID(ID.mob.SUPARNA_FLEDGLING):isSpawned()) then
         if (player:getCharVar("Mission9-1Kills") > 0) then
             player:startEvent(904)
@@ -34,7 +34,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 904) then
         player:addKeyItem(xi.ki.FIGURE_OF_LEVIATHAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FIGURE_OF_LEVIATHAN)
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:setCharVar("Mission9-1Kills", 0)
     end
 end

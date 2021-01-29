@@ -74,7 +74,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional)
         if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 5 then
@@ -134,9 +134,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 553) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 547) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 554) then
         finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 88) then
@@ -168,9 +168,9 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
     elseif (csid == 81) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 21) then
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     elseif (csid == 63) then
         player:setCharVar("Cutscenes_8-2", 1)
     elseif csid == 574 and option == 2 then

@@ -22,7 +22,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local currentMission = player:getCurrentMission(player:getNation())
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -60,14 +60,14 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 1) then
-        player:setCharVar("MissionStatus", 11)
+        player:setMissionStatus(player:getNation(), 11)
     elseif (csid == 16) then
         player:addKeyItem(xi.ki.LETTER_FROM_DALZAKK)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_DALZAKK)
     elseif (csid == 19) then
         player:setCharVar("pieujesDecisionCS", 1)
     elseif (csid == 23) then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif (csid == 29) then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)

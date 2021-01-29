@@ -34,7 +34,7 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.ARK_ANGELS and player:getCharVar("ZilartStatus") == 1 then
+        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.ARK_ANGELS and player:getMissionStatus(xi.mission.log_id.ZILART) == 1 then
             player:addKeyItem(xi.ki.SHARD_OF_ENVY)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHARD_OF_ENVY)
             if
@@ -46,7 +46,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
             then
                 player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
                 player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
-                player:setCharVar("ZilartStatus", 0)
+                player:setMissionStatus(xi.mission.log_id.ZILART, 0)
             end
         end
     end

@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and
-        player:getCharVar("MissionStatus") == 1
+        player:getMissionStatus(player:getNation()) == 1
     then
         player:startEvent(42)
     else
@@ -30,7 +30,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 42 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
 
         -- Generate a random value to use for the next part of the mission
         -- where you have to examine 6 Magical Gizmo's, each of them having

@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 4 then
-        player:setCharVar("MissionStatus", 5)
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and player:getMissionStatus(player:getNation()) == 4 then
+        player:setMissionStatus(player:getNation(), 5)
         player:addKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PIECE_OF_A_BROKEN_KEY3)
     else

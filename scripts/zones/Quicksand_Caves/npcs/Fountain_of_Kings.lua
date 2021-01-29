@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     -- Player is on San d'Oria mission 8-1 "Coming of Age":
     if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.COMING_OF_AGE then
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
         local mob1 = GetMobByID(ID.mob.VALOR):isSpawned()
         local mob2 = GetMobByID(ID.mob.HONOR):isSpawned()
 

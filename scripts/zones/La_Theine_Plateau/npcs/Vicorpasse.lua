@@ -14,8 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL then
-        local MissionStatus = player:getCharVar("MissionStatus")
+
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL) then
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if MissionStatus == 4 then
             player:startEvent(108)
@@ -41,13 +42,14 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 108 then
-        player:setCharVar("MissionStatus", 5)
-    elseif csid == 115 then
+
+    if (csid == 108) then
+        player:setMissionStatus(player:getNation(), 5)
+    elseif (csid == 115) then
         player:addKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RESCUE_TRAINING_CERTIFICATE)
         player:setCharVar("theRescueDrillRandomNPC", 0)
-        player:setCharVar("MissionStatus", 11)
+        player:setMissionStatus(player:getNation(), 11)
     end
 end
 

@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL and player:getCharVar("ZilartStatus") == 1 and not player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)) then
+    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL and player:getMissionStatus(xi.mission.log_id.ZILART) == 1 and not player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)) then
         if (player:needToZone() and player:getCharVar("AncientVesselKilled") == 1) then
             player:setCharVar("AncientVesselKilled", 0)
             player:addKeyItem(xi.ki.SCRAP_OF_PAPYRUS)

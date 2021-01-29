@@ -15,9 +15,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 3) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(264)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") > 3) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) > 3) then
         player:startEvent(268)
     else
         player:startEvent(262)
@@ -31,7 +31,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 264) then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     end
 
 end

@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if
         currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         SpawnMob(ID.mob.CORRUPTED_ULBRIG)
     end
     if currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 2 then -- NMs killed
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and player:getXPos() > -39.019 then -- standing outside
         player:startEvent(6) -- enter cutscene
     elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 then -- inside
@@ -46,9 +46,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 5 then
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
     elseif csid == 14 then
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
         -- at this point 3 optional cs are available and open until watched (add 3 var to char?)
     end
 end

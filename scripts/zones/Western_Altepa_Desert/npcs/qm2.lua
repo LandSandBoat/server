@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(BASTOK) == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and
-        player:getCharVar("MissionStatus") == 2 and
+        player:getMissionStatus(player:getNation()) == 2 and
         not player:hasKeyItem(xi.ki.ALTEPA_MOONPEBBLE)
     then
         if not GetMobByID(ID.mob.EASTERN_SPHINX):isSpawned() and not GetMobByID(ID.mob.WESTERN_SPHINX):isSpawned() then
@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
                 player:addKeyItem(xi.ki.ALTEPA_MOONPEBBLE)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ALTEPA_MOONPEBBLE)
                 player:setCharVar("Mission6-1MobKilled", 0)
-                player:setCharVar("MissionStatus", 3)
+                player:setMissionStatus(player:getNation(), 3)
             else
                 SpawnMob(ID.mob.EASTERN_SPHINX)
                 SpawnMob(ID.mob.WESTERN_SPHINX)

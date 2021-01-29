@@ -13,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_PIRATE_S_COVE and
-        player:getCharVar("MissionStatus") == 2) then
+        player:getMissionStatus(player:getNation()) == 2) then
         if (trade:hasItemQty(1160, 1) and trade:getItemCount() == 1) then -- Frag Rock
             player:startEvent(99) -- Bastok Mission 6-2
         end
@@ -64,7 +64,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 99) then
         player:tradeComplete()
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif csid == 232 or csid == 234 then
         if csid == 232 then
             player:setCharVar("Apoc_Nigh_RewardCS1", 1)
@@ -91,7 +91,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("PromathiaStatus", 0)
                 player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.cop.AWAKENING)
                 player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
-                player:setCharVar("ZilartStatus", 0)
+                player:setMissionStatus(xi.mission.log_id.ZILART, 0)
             end
         end
     end

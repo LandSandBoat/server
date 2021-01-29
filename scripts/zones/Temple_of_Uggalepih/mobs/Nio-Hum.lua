@@ -24,7 +24,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     if
         player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and
-        player:getCharVar("MissionStatus") == 5 and
+        player:getMissionStatus(player:getNation()) == 5 and
         GetMobByID(ID.mob.NIO_A):isDead()
     then
         player:setCharVar("Mission8-2Kills", 1)

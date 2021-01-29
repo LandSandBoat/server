@@ -16,9 +16,9 @@ end
 entity.onTrigger = function(player, npc)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(266)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 3) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(267)
 
     elseif tuningOutProgress == 2 then
@@ -42,7 +42,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 266) then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
 
     elseif csid == 295 then
         player:setCharVar("TuningOut_Progress", 3)

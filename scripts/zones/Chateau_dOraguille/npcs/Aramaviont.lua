@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     else
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria Rank 10 (optional dialogue)
         if player:getCharVar("SandoEpilogue") == 1 then

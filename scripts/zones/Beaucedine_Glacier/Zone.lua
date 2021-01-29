@@ -34,7 +34,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 206
     elseif quests.rainbow.onZoneIn(player) then
         cs = 114
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
         1 then
         cs = 116
     end

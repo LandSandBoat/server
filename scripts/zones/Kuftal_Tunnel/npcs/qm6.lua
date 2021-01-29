@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     -- ENTER THE TALEKEEPER
     if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ENTER_THE_TALEKEEPER then
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
         local anyGhostsAlive = false
         for i = 0, 2 do
             if GetMobByID(ID.mob.TALEKEEPER_OFFSET + i):isAlive() then
@@ -25,12 +25,12 @@ entity.onTrigger = function(player, npc)
             end
         end
 
-        if player:getCharVar("MissionStatus") == 2 and not anyGhostsAlive then
+        if player:getMissionStatus(player:getNation()) == 2 and not anyGhostsAlive then
             player:messageSpecial(ID.text.EVIL)
             for i = 0, 2 do
                 SpawnMob(ID.mob.TALEKEEPER_OFFSET + i)
             end
-        elseif player:getCharVar("MissionStatus") == 3 and not anyGhostsAlive then
+        elseif player:getMissionStatus(player:getNation()) == 3 and not anyGhostsAlive then
             player:startEvent(13)
         else
             player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -47,7 +47,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         npcUtil.giveKeyItem(player, xi.ki.OLD_PIECE_OF_WOOD)
     end
 end

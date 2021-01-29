@@ -61,7 +61,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
     local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
     local tenshodoShowdown = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
@@ -193,9 +193,9 @@ entity.onEventFinish = function(player, csid, option)
     -- WINDURST 2-1: LOST FOR WORDS
     if csid == 165 and option == 1 then
         npcUtil.giveKeyItem(player, xi.ki.LAPIS_MONOCLE)
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 169 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:setCharVar("MissionStatus_randfoss", 0)
         player:delKeyItem(xi.ki.LAPIS_MONOCLE)
         player:delKeyItem(xi.ki.LAPIS_CORAL)

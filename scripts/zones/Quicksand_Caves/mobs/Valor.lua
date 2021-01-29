@@ -21,10 +21,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.COMING_OF_AGE and player:getCharVar("MissionStatus") == 2
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.COMING_OF_AGE and player:getMissionStatus(player:getNation()) == 2
         and GetMobByID(ID.mob.VALOR):isDead() and GetMobByID(ID.mob.HONOR):isDead()
     ) then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     end
 end
 

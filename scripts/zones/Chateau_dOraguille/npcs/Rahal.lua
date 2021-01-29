@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional)
         if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus > 1 then
@@ -153,7 +153,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:hasKeyItem(xi.ki.CRYSTAL_DOWSER)) then
             player:delKeyItem(xi.ki.CRYSTAL_DOWSER) -- To prevent them getting a message about already having the keyitem
         else
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
             player:addKeyItem(xi.ki.CRYSTAL_DOWSER)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CRYSTAL_DOWSER)
         end

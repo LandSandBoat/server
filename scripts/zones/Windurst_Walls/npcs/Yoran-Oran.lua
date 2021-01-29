@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
     local MEMORIES_OF_A_MAIDEN = player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")
     local LouverancePath = player:getCharVar("COP_Louverance_s_Path")
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     --optional windy 9-1
     if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and MissionStatus == 4 then
@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 473 then
         player:setCharVar("COP_Ulmia_s_Path", 5)
     elseif csid == 439 then
-        player:setCharVar("MissionStatus", 5)
+        player:setMissionStatus(player:getNation(), 5)
     elseif csid == 251 then
         npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD, { fame = 10 })
         player:addGil(GIL_RATE*200)

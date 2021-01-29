@@ -37,7 +37,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 3 or csid == 55) then
         player:delKeyItem(xi.ki.ORCISH_HUT_KEY)
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     else
         if (EventFinishBCNM(player, csid, option)) then
             return

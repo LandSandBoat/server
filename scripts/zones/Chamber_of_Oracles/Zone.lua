@@ -20,7 +20,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local CurrentMission = player:getCurrentMission(WINDURST)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then

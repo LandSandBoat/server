@@ -101,7 +101,7 @@ entity.onTrigger = function(player, npc)
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getCharVar("MissionStatus") == 7) then
+        player:getMissionStatus(player:getNation()) == 7) then
         player:startEvent(397, 0, 0, 0, 282)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
         player:startEvent(498)
@@ -245,7 +245,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 397) then
         player:addKeyItem(xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GLOVE_OF_PERPETUAL_TWILIGHT)
-        player:setCharVar("MissionStatus", 8)
+        player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 399) then
         player:setCharVar("ShantottoCS", 0)
 

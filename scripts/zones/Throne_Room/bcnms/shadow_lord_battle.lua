@@ -38,7 +38,7 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getCharVar("MissionStatus") == 3 then
+    if csid == 32001 and player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) == 3 then
         if player:getCurrentMission(ZILART) ~= xi.mission.id.zilart.THE_NEW_FRONTIER and not player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER) then
             -- Don't add missions we already completed. Players who change nation will hit this.
             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
@@ -47,7 +47,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
     elseif csid == 7 then
         player:addKeyItem(xi.ki.SHADOW_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHADOW_FRAGMENT)
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:setPos(378, -12, -20, 125, 161)
     end
 end

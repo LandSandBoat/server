@@ -15,7 +15,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if
         player:getCurrentMission(BASTOK) == xi.mission.id.bastok.JEUNO and
-        player:getCharVar("MissionStatus") == 2 and
+        player:getMissionStatus(player:getNation()) == 2 and
         npcUtil.tradeHas(trade, 549) -- Delkfutt Key
     then
         player:startEvent(1)
@@ -25,9 +25,9 @@ end
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
 
-    if currentMission == xi.mission.id.bastok.JEUNO and player:getCharVar("MissionStatus") == 2 and not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
+    if currentMission == xi.mission.id.bastok.JEUNO and player:getMissionStatus(player:getNation()) == 2 and not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
         player:messageSpecial(ID.text.THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY)
-    elseif currentMission == xi.mission.id.bastok.JEUNO and player:getCharVar("MissionStatus") == 2 and player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
+    elseif currentMission == xi.mission.id.bastok.JEUNO and player:getMissionStatus(player:getNation()) == 2 and player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
         player:startEvent(1)
     else
         player:messageSpecial(ID.text.DOOR_FIRMLY_SHUT)
@@ -39,7 +39,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
 
         if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
             npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)
