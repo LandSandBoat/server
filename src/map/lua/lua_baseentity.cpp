@@ -11446,8 +11446,7 @@ bool CLuaBaseEntity::hasImmunity(uint32 immunityID)
 /************************************************************************
  *  Function: setAggressive()
  *  Purpose : Toggle a Mob to an aggressive or passive state
- *  Example : mob:setAggressive(1)
- *  Notes   : Different integer values to specify method of aggro?
+ *  Example : mob:setAggressive(true)
  ************************************************************************/
 
 void CLuaBaseEntity::setAggressive(bool aggressive)
@@ -11460,8 +11459,7 @@ void CLuaBaseEntity::setAggressive(bool aggressive)
 /************************************************************************
  *  Function: setTrueDetection()
  *  Purpose : Toggle True Detection on or off for a Mob
- *  Example : mob:setTrueDetection(1)
- *  Notes   : Different integer values for True Hearing/Sight?
+ *  Example : mob:setTrueDetection(true)
  ************************************************************************/
 
 void CLuaBaseEntity::setTrueDetection(bool truedetection)

@@ -12,6 +12,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
+    zone:registerRegion(1, -95, 0, 75, -85, 5, 85)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -33,8 +34,6 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 10
     elseif prevZone == tpz.zone.NORTHERN_SAN_DORIA and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA) then
         cs = 509
-    elseif player:getCharVar("SecretWeaponStatus") == 1 then
-        cs = 0
     elseif currentMission == tpz.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 0 then
         cs = 116
     end
@@ -48,6 +47,13 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
+    local regionID = region:GetRegionID()
+
+    if regionID == 1 then
+        if player:getCharVar("SecretWeaponStatus") == 1 then
+            player:startEvent(0)
+        end
+    end
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
@@ -55,16 +61,16 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
 
-    if (csid == 555) then
+    if csid == 555 then
         player:setCharVar("MissionStatus", 3)
-    elseif (csid == 509) then
+    elseif csid == 509 then
         player:setCharVar("MissionStatus", 9)
         player:delKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA)
-    elseif (csid == 0) then
+    elseif csid == 0 then
         player:setCharVar("SecretWeaponStatus", 2)
-    elseif (csid == 10) then
+    elseif csid == 10 then
         player:setCharVar("MissionStatus", 2)
-    elseif (csid == 116) then
+    elseif csid == 116 then
         player:setCharVar("MissionStatus", 1)
     end
 
