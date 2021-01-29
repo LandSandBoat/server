@@ -13834,7 +13834,7 @@ INSERT INTO `mob_groups` VALUES (20,5015,261,'Resplendent_Luckybug',330,0,2965,0
 INSERT INTO `mob_groups` VALUES (21,5016,261,'Colossal_Spider',330,0,2969,0,0,99,107,0);
 INSERT INTO `mob_groups` VALUES (22,5017,261,'Downy_Emerald',330,0,2970,0,0,99,107,0);
 INSERT INTO `mob_groups` VALUES (23,5018,261,'Cornered_Heartwing',330,0,0,0,0,100,101,0);
-INSERT INTO `mob_groups` VALUES (24,5959,261,'Mischievous_Leafkin',330,0,0,20000,0,100,101,0);
+INSERT INTO `mob_groups` VALUES (24,6922,261,'Mischievous_Leafkin',330,0,0,20000,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (25,5019,261,'Velkk_Torturer',330,0,2964,0,0,100,103,0);
 INSERT INTO `mob_groups` VALUES (26,0,261,'Truculent_Mantis',0,128,0,0,0,0,0,0);
 
