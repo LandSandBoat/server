@@ -1291,6 +1291,7 @@ end
 tpz.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- dead players, or players not on this training regime, get no credit
+    -- also prevents error when this function is called onMobDeath from a mob not killed by a player
     if not player or player:getHP() == 0 or player:getCharVar("[regime]id") ~= regimeId then
         return
     end
