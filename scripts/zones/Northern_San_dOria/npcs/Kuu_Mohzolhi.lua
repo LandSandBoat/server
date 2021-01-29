@@ -45,28 +45,27 @@ entity.onTrade = function(player, npc, trade)
     end
 
     local GrowingFlowers = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
-    local gender = player:getGender()
 
     if itemQuality == 2 then
         if GrowingFlowers == QUEST_COMPLETED then
-            player:startEvent(605, gender, 231, 4)
+            player:startEvent(605, 0, 231, 4)
         else
-            player:startEvent(605, gender, 231, 2)
+            player:startEvent(605, 0, 231, 2)
         end
     elseif itemQuality == 1 then
         if GrowingFlowers == QUEST_ACCEPTED then
-            player:startEvent(605, gender, 231, 3)
+            player:startEvent(605, 0, 231, 3)
         else
-            player:startEvent(605, gender, 231, 1)
+            player:startEvent(605, 0, 231, 1)
         end
     else
-        player:startEvent(605, gender, 231, 0)
+        player:startEvent(605, 0, 231, 0)
     end
 
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(605, gender, 231, 10)
+    player:startEvent(605, 0, 231, 10)
 end
 
 entity.onEventUpdate = function(player, csid, option)
