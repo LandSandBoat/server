@@ -53,7 +53,7 @@ ability_object.onUseAbility = function(caster, target, ability, action)
     local total = caster:getLocalVar("corsairRollTotal")
     local prev_ability = getAbility(caster:getLocalVar("corsairActiveRoll"))
     if (prev_ability) then
-        action:animation(target:getID(), prev_ability:getAnimation())
+        action:setAnimation(target:getID(), prev_ability:getAnimation())
         action:actionID(prev_ability:getID())
         dofile("scripts/globals/abilities/" .. prev_ability:getName() .. ".lua")
         local total = applyRoll(caster, target, ability, action, total)

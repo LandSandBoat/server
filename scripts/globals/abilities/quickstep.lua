@@ -174,7 +174,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         ability:setMsg(tpz.msg.basic.JA_MISS)
     end
 
-    action:animation(target:getID(), getStepAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+    action:setAnimation(target:getID(), getStepAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
     action:speceffect(target:getID(), hit)
     return effect
 

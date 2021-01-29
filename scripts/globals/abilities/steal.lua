@@ -67,7 +67,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         target:triggerListener("ITEM_STOLEN", target, player, stolen)
     else
         ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed to steal
-        action:animation(target:getID(), 182)
+        action:setAnimation(target:getID(), 182)
     end
 
     -- Attempt Aura steal

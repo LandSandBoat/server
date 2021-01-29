@@ -91,7 +91,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         target:takeDamage(dmg, player, tpz.attackType.PHYSICAL, player:getWeaponDamageType(tpz.slot.MAIN))
         target:updateEnmityFromDamage(player, dmg)
 
-        action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
         action:speceffect(target:getID(), hit)
         return dmg
     else

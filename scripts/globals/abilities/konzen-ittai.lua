@@ -51,7 +51,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     else
         anim = 36
     end
-    action:animation(target:getID(), anim)
+    action:setAnimation(target:getID(), anim)
     action:speceffect(target:getID(), 1)
     return 0
 end

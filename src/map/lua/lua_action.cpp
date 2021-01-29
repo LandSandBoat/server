@@ -77,7 +77,20 @@ void CLuaAction::messageID(uint32 actionTargetID, uint16 messageID)
     }
 }
 
-void CLuaAction::animation(uint32 actionTargetID, uint16 animation)
+std::optional<uint16> CLuaAction::getAnimation(uint32 actionTargetID)
+{
+    for (auto&& actionList : m_PLuaAction->actionLists)
+    {
+        if (actionList.ActionTargetID == actionTargetID)
+        {
+            return actionList.actionTargets[0].animation;
+        }
+    }
+
+    return std::nullopt;
+}
+
+void CLuaAction::setAnimation(uint32 actionTargetID, uint16 animation)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
     {
@@ -159,7 +172,8 @@ void CLuaAction::Register()
     SOL_REGISTER("actionID", CLuaAction::actionID);
     SOL_REGISTER("param", CLuaAction::param);
     SOL_REGISTER("messageID", CLuaAction::messageID);
-    SOL_REGISTER("animation", CLuaAction::animation);
+    SOL_REGISTER("getAnimation", CLuaAction::getAnimation);
+    SOL_REGISTER("setAnimation", CLuaAction::setAnimation);
     SOL_REGISTER("speceffect", CLuaAction::speceffect);
     SOL_REGISTER("reaction", CLuaAction::reaction);
     SOL_REGISTER("additionalEffect", CLuaAction::additionalEffect);
