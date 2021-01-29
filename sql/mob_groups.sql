@@ -14080,38 +14080,53 @@ INSERT INTO `mob_groups` VALUES (105,0,264,'Siren_Prime',0,128,0,0,0,0,0,0);
 -- Morimar_Basalt_Fields (Zone 265)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5100,265,'Frosty_Twitherym',330,0,0,0,0,102,105,0);
-INSERT INTO `mob_groups` VALUES (2,5101,265,'Tephra_Lizard',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (3,5102,265,'Maca_Maca',330,0,0,0,0,102,105,0);
-INSERT INTO `mob_groups` VALUES (4,4958,265,'Snowcap_Umbril',180,1,0,0,999,103,106,0);
-INSERT INTO `mob_groups` VALUES (5,5103,265,'Qohanyk',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (6,5099,265,'Animosiraptor',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (7,5104,265,'Sinewy_Matamata',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (8,5105,265,'Hoarfrost_Gefyrst',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (9,4959,265,'Steam_Spout',330,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (10,4960,265,'Volcanic_Wivre',330,0,0,0,0,102,105,0);
-INSERT INTO `mob_groups` VALUES (11,4957,265,'Tundra_Eft',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (12,4956,265,'Mountain_Peiste',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (13,4859,265,'Felsic_Eruca',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (14,4858,265,'Mafic_Spider',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (15,4951,265,'Acerbic_Jagil',330,0,0,0,0,102,104,0);
-INSERT INTO `mob_groups` VALUES (16,4952,265,'Anthousai',330,0,0,0,0,105,110,0);
-INSERT INTO `mob_groups` VALUES (17,4953,265,'Lavawalker_Raptor',330,0,0,0,0,105,110,0);
-INSERT INTO `mob_groups` VALUES (18,4954,265,'Befuddled_Twitherym',330,0,0,0,0,105,110,0);
-INSERT INTO `mob_groups` VALUES (19,4955,265,'Petrous_Lizard',330,0,0,0,0,105,110,0);
-INSERT INTO `mob_groups` VALUES (20,4781,265,'Emberflash_Matamata',330,0,0,0,900,107,109,0);
-INSERT INTO `mob_groups` VALUES (21,4780,265,'Bumbling_Leafkin',330,0,0,0,0,103,104,0);
-INSERT INTO `mob_groups` VALUES (22,4779,265,'Twirling_Heartwing',330,0,0,0,0,103,106,0);
-INSERT INTO `mob_groups` VALUES (23,4865,265,'Grimy_Boulders',330,0,0,0,0,103,103,0);
-INSERT INTO `mob_groups` VALUES (24,4778,265,'Matamata',3600,0,0,0,0,103,103,0);
-INSERT INTO `mob_groups` VALUES (25,4777,265,'Basalt_Lizard',3600,0,0,20000,0,103,103,0);
-INSERT INTO `mob_groups` VALUES (26,4776,265,'Alpine_Eft',330,0,0,20000,0,102,103,0);
-INSERT INTO `mob_groups` VALUES (27,4866,265,'Outlands_Peiste',330,0,0,20000,0,103,103,0);
-INSERT INTO `mob_groups` VALUES (28,4775,265,'Snaggletooth_Raptor',3600,0,0,20000,0,103,103,0);
-INSERT INTO `mob_groups` VALUES (29,4950,265,'Bedrock_Crag',3600,0,0,0,0,103,103,0);
-INSERT INTO `mob_groups` VALUES (30,4677,265,'Achuka',10800,0,0,0,5000,115,117,0);
-INSERT INTO `mob_groups` VALUES (31,4867,265,'Volatile_Matamata',330,0,0,20000,0,110,112,0);
-INSERT INTO `mob_groups` VALUES (32,4868,265,'Perdurable_Raptor',330,0,0,20000,0,115,115,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,0,265,'Steamed_Jagil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,265,'Minacious_Matamata',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (3,5100,265,'Frosty_Twitherym',330,0,0,0,0,102,105,0);
+INSERT INTO `mob_groups` VALUES (4,5101,265,'Tephra_Lizard',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (5,5102,265,'Maca_Maca',330,0,0,0,0,102,105,0);
+INSERT INTO `mob_groups` VALUES (6,4958,265,'Snowcap_Umbril',180,1,0,0,999,103,106,0);
+INSERT INTO `mob_groups` VALUES (7,5103,265,'Qohanyk',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (8,5099,265,'Animosiraptor',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (9,5104,265,'Sinewy_Matamata',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (10,5105,265,'Hoarfrost_Gefyrst',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (11,4959,265,'Steam_Spout',330,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (12,4960,265,'Volcanic_Wivre',330,0,0,0,0,102,105,0);
+INSERT INTO `mob_groups` VALUES (13,4957,265,'Tundra_Eft',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (14,4956,265,'Mountain_Peiste',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (15,4859,265,'Felsic_Eruca',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (16,4858,265,'Mafic_Spider',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (17,4951,265,'Acerbic_Jagil',330,0,0,0,0,102,104,0);
+INSERT INTO `mob_groups` VALUES (18,4952,265,'Anthousai',330,0,0,0,0,105,110,0);
+INSERT INTO `mob_groups` VALUES (19,4953,265,'Lavawalker_Raptor',330,0,0,0,0,105,110,0);
+INSERT INTO `mob_groups` VALUES (20,4954,265,'Befuddled_Twitherym',330,0,0,0,0,105,110,0);
+INSERT INTO `mob_groups` VALUES (21,4955,265,'Petrous_Lizard',330,0,0,0,0,105,110,0);
+INSERT INTO `mob_groups` VALUES (22,4781,265,'Emberflash_Matamata',330,0,0,0,900,107,109,0);
+INSERT INTO `mob_groups` VALUES (23,4780,265,'Bumbling_Leafkin',330,0,0,0,0,103,104,0);
+INSERT INTO `mob_groups` VALUES (24,4779,265,'Twirling_Heartwing',330,0,0,0,0,103,106,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (25,4865,265,'Grimy_Boulders',0,128,0,0,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (26,4778,265,'Matamata',0,128,0,0,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (27,4777,265,'Basalt_Lizard',0,128,0,20000,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (28,4776,265,'Alpine_Eft',0,128,0,20000,0,102,103,0);
+INSERT INTO `mob_groups` VALUES (29,6926,265,'Wivre_Cragdweller',0,128,0,0,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (30,4866,265,'Outlands_Peiste',0,128,0,20000,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (31,4775,265,'Snaggletooth_Raptor',0,128,0,20000,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (32,4950,265,'Bedrock_Crag',0,128,0,0,0,103,103,0);
+INSERT INTO `mob_groups` VALUES (33,4677,265,'Achuka',0,128,0,0,5000,115,117,0);
+
+-- delve
+INSERT INTO `mob_groups` VALUES (34,4867,265,'Volatile_Matamata',0,128,0,20000,0,110,112,0);
+INSERT INTO `mob_groups` VALUES (35,4868,265,'Perdurable_Raptor',0,128,0,20000,0,115,115,0);
+INSERT INTO `mob_groups` VALUES (36,6927,265,'Shimmering_Tarichuk',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,6928,265,'Tutewehiwehi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,6929,265,'Kurma',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (39,6930,265,'Burgeoning_Flames',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,6931,265,'Deranged_Ameretat',0,128,0,0,0,109,109,0);
 
 -- ------------------------------------------------------------
 -- Marjami_Ravine (Zone 266)

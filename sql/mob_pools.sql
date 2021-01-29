@@ -6970,6 +6970,12 @@ INSERT INTO `mob_pools` VALUES (6922,'Mischievous_Leafkin','Mischievous_Leafkin'
 INSERT INTO `mob_pools` VALUES (6923,'Morseiu','Morseiu',464,0x0000F60900000000000000000000000000000000,2,2,7,240,100,0,1,0,1,2,0,32,0,157,0,0,0,0,0,464); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6924,'Inquisitor_Mortuus','Inquisitor_Mortuus',115,0x01001C03461149216030B8403950656200707380,11,11,2,240,100,0,1,1,1,2,0,0,0,133,0,0,0,0,0,115); -- TODO: skill list
 INSERT INTO `mob_pools` VALUES (6925,'Jovial_Ahriman','Jovial_Ahriman',4,0x0000080100000000000000000000000000000000,1,5,7,240,100,0,1,1,1,2,0,0,0,133,0,0,3,0,0,4); -- TODO: skill list, spell list
+INSERT INTO `mob_pools` VALUES (6926,'Wivre_Cragdweller','Wivre_Cragdweller',257,0x0000FC0600000000000000000000000000000000,1,1,5,240,100,0,1,0,0,2,0,0,0,131,0,0,0,0,0,257); -- TODO: skill list
+INSERT INTO `mob_pools` VALUES (6927,'Shimmering_Tarichuk','Shimmering_Tarichuk',98,0x0000460500000000000000000000000000000000,4,4,8,240,100,0,1,1,0,2,0,0,0,135,0,0,0,0,0,98); -- TODO: skill list, spell list
+INSERT INTO `mob_pools` VALUES (6928,'Tutewehiwehi','Tutewehiwehi',192,0x0000E00700000000000000000000000000000000,6,6,2,240,100,0,0,0,0,2,0,32,0,153,4,0,0,0,0,803); -- TODO: skill list
+INSERT INTO `mob_pools` VALUES (6929,'Kurma','Kurma',2,0x0000480900000000000000000000000000000000,4,5,12,240,100,0,1,1,0,2,0,32,0,665,0,0,2,0,0,2); -- TODO: skill list, spell list
+INSERT INTO `mob_pools` VALUES (6930,'Burgeoning_Flames','Burgeoning_Flames',102,0x0000B40100000000000000000000000000000000,4,5,12,240,100,0,0,0,0,2,0,0,0,129,0,0,17,0,0,102); -- TODO: skill list, spell list
+INSERT INTO `mob_pools` VALUES (6931,'Deranged_Ameretat','Deranged_Ameretat',186,0x00007E0100000000000000000000000000000000,1,1,7,200,100,0,1,0,0,2,0,0,0,131,0,0,0,0,0,186); -- TODO: skill list
 
 /*
   `poolid` int(10) unsigned NOT NULL,
