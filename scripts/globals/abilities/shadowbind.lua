@@ -22,7 +22,7 @@ end
 ability_object.onUseAbility = function(player, target, ability, action)
 
     if (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP) then -- can't have your crossbow/gun held like a bow, now can we?
-        action:animation(target:getID(), action:animation(target:getID()) + 1)
+        action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
 
     local duration = 30 + player:getMod(tpz.mod.SHADOW_BIND_EXT)

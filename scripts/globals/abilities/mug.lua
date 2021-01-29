@@ -50,7 +50,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
     else
         ability:setMsg(tpz.msg.basic.MUG_FAIL)
-        action:animation(target:getID(), 184)
+        action:setAnimation(target:getID(), 184)
     end
 
     return gil
