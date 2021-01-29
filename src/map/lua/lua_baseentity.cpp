@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -5776,13 +5776,14 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
 }
 
 /************************************************************************
- *  Function: setMissionLogEx()
- *  Purpose : Sets mission log extra data to correctly track progress in branching missions.
- *  Example : player:setMissionLogEx(xi.mission.log_id.COP, xi.mission.logEx.ULMIA, 14)
- *  Notes   :
+ *  Function: setMissionStatus()
+ *  Purpose : Sets mission progress data.
+ *  Example : player:setMissionStatus(player:getNation(), 14)
+ *  Notes   : setMissionStatus(log id,value[,index 0-7])
+ *            If optional index is used, value must be between 0-15.
  ************************************************************************/
 
-void CLuaBaseEntity::setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj)
+void CLuaBaseEntity::setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -5790,75 +5791,75 @@ void CLuaBaseEntity::setMissionLogEx(uint8 missionLogID, sol::object const& arg2
 
     if (missionLogID >= MAX_MISSIONAREA)
     {
-        ShowError(CL_RED "Lua::setMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        ShowError(CL_RED "Lua::setMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
         return;
     }
 
     if (arg3Obj.is<uint8>())
     {
-        uint8 missionLogExPos = arg2Obj.as<uint8>();
-        if (missionLogExPos > 7)
+        uint8 missionStatusPos = arg3Obj.as<uint8>();
+        if (missionStatusPos > 7)
         {
-            ShowError(CL_RED "Lua::setMissionLogEx: position %i is invalid\n" CL_RESET, missionLogExPos);
+            ShowError(CL_RED "Lua::setMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
             return;
         }
-        uint8 missionLogExValue = arg3Obj.as<uint8>();
-        if (missionLogExValue > 0xF)
+        uint8 missionStatusValue = arg2Obj.as<uint8>();
+        if (missionStatusValue > 0xF)
         {
-            ShowError(CL_RED "Lua::setMissionLogEx: value %i is invalid\n" CL_RESET, missionLogExValue);
+            ShowError(CL_RED "Lua::setMissionStatus: value %i is invalid\n" CL_RESET, missionStatusValue);
             return;
         }
-        uint32 logEx = (PChar->m_missionLog[missionLogID].logExUpper << 16) | PChar->m_missionLog[missionLogID].logExLower;
-        uint32 mask  = ~(0xF << (4 * missionLogExPos));
+        uint32 missionStatus = (PChar->m_missionLog[missionLogID].statusUpper << 16) | PChar->m_missionLog[missionLogID].statusLower;
+        uint32 mask  = ~(0xF << (4 * missionStatusPos));
 
-        logEx &= mask;
-        logEx |= missionLogExValue << (4 * missionLogExPos);
-        PChar->m_missionLog[missionLogID].logExLower = logEx;
-        PChar->m_missionLog[missionLogID].logExUpper = logEx >> 16;
+        missionStatus &= mask;
+        missionStatus |= missionStatusValue << (4 * missionStatusPos);
+        PChar->m_missionLog[missionLogID].statusLower = missionStatus;
+        PChar->m_missionLog[missionLogID].statusUpper = missionStatus >> 16;
         PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_CURRENT));
     }
     else
     {
-        uint32 missionLogExValue                     = arg2Obj.as<uint32>();
-        PChar->m_missionLog[missionLogID].logExLower = missionLogExValue;
-        PChar->m_missionLog[missionLogID].logExUpper = missionLogExValue >> 16;
+        uint32 missionStatusValue                     = arg2Obj.as<uint32>();
+        PChar->m_missionLog[missionLogID].statusLower = missionStatusValue;
+        PChar->m_missionLog[missionLogID].statusUpper = missionStatusValue >> 16;
     }
 
     charutils::SaveMissionsList(PChar);
 }
 
 /************************************************************************
- *  Function: getMissionLogEx()
- *  Purpose : Gets mission log extra data.
- *  Example : player:getMissionLogEx(xi.mission.log_id.COP, xi.mission.logEx.ULMIA)
- *  Notes   :  If arg2 isn't provided, the whole 32 bits are returned.
+ *  Function: getMissionStatus()
+ *  Purpose : Gets mission progress data.
+ *  Example : player:getMissionStatus(player:getNation())
+ *  Notes   : getMissionStatus(log id[,index 0-7])
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj)
+uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     if (missionLogID < MAX_MISSIONAREA)
     {
-        uint32 logEx = (PChar->m_missionLog[missionLogID].logExUpper << 16) | PChar->m_missionLog[missionLogID].logExLower;
-        if (missionLogExPosObj.is<uint8>())
+        uint32 missionStatus = (PChar->m_missionLog[missionLogID].statusUpper << 16) | PChar->m_missionLog[missionLogID].statusLower;
+        if (missionStatusPosObj.is<uint8>())
         {
-            uint8 missionLogExPos = missionLogExPosObj.as<uint8>();
-            if (missionLogExPos > 7)
+            uint8 missionStatusPos = missionStatusPosObj.as<uint8>();
+            if (missionStatusPos > 7)
             {
-                ShowError(CL_RED "Lua::getMissionLogEx: position %i is invalid\n" CL_RESET, missionLogExPos);
+                ShowError(CL_RED "Lua::getMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
                 return 0;
             }
-            return ((logEx >> (4 * missionLogExPos)) & 0xF);
+            return ((missionStatus >> (4 * missionStatusPos)) & 0xF);
         }
         else
         {
-            return logEx;
+            return missionStatus;
         }
     }
 
-    ShowError(CL_RED "Lua::getMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+    ShowError(CL_RED "Lua::getMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
     return 0;
 }
 
@@ -12810,8 +12811,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentMission", CLuaBaseEntity::getCurrentMission);
     SOL_REGISTER("hasCompletedMission", CLuaBaseEntity::hasCompletedMission);
     SOL_REGISTER("completeMission", CLuaBaseEntity::completeMission);
-    SOL_REGISTER("setMissionLogEx", CLuaBaseEntity::setMissionLogEx);
-    SOL_REGISTER("getMissionLogEx", CLuaBaseEntity::getMissionLogEx);
+    SOL_REGISTER("setMissionStatus", CLuaBaseEntity::setMissionStatus);
+    SOL_REGISTER("getMissionStatus", CLuaBaseEntity::getMissionStatus);
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);
     SOL_REGISTER("getNumEminenceCompleted", CLuaBaseEntity::getNumEminenceCompleted);
     SOL_REGISTER("setEminenceCompleted", CLuaBaseEntity::setEminenceCompleted);

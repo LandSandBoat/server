@@ -41,15 +41,22 @@ xi.mission.area =
     [xi.mission.log_id.ROV]         = 'rov',
 }
 
-xi.mission.logEx =
+--[[
+xi.mission.status =
 {
-    -- Chains of Promathia
-    SANDORIA   = 0,
-    WINDURST   = 1,
-    LOUVERANCE = 2,
-    TENZEN     = 3,
-    ULMIA      = 4,
+    COP =
+    {
+        SANDORIA   = 0,
+        WINDURST   = 1,
+        LOUVERANCE = 2,
+        TENZEN     = 3,
+        ULMIA      = 4,
+        PROMY      = 5,
+        CID        = 6,
+        RUBIOUS    = 7,
+    },
 }
+]]--
 
 xi.mission.id =
 {

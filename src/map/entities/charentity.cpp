@@ -152,8 +152,8 @@ CCharEntity::CCharEntity()
     m_missionLog[6].current = 101; // MISSION_COP
     for (auto& i : m_missionLog)
     {
-        i.logExUpper = 0;
-        i.logExLower = 0;
+        i.statusUpper = 0;
+        i.statusLower = 0;
     }
 
     m_copCurrent = 0;

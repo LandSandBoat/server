@@ -329,8 +329,8 @@ public:
     bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
     void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
 
-    void   setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission log extra data to correctly track progress in branching missions.
-    uint32 getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj);                  // Gets mission log extra data.
+    void   setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission progress data.
+    uint32 getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj);                  // Gets mission progress data.
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
     bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
