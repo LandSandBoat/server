@@ -28,6 +28,8 @@ from migrations import currency_columns
 from migrations import add_instance_zone_column
 from migrations import char_points_weekly_unity
 from migrations import char_profile_unity_leader
+from migrations import convert_mission_status
+from migrations import convert_zilart_status
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -47,7 +49,9 @@ migrations = [
     currency_columns,
     add_instance_zone_column,
     char_points_weekly_unity,
-    char_profile_unity_leader
+    char_profile_unity_leader,
+    convert_mission_status,
+    convert_zilart_status,
 ]
 # These are the default 'protected' files
 player_data = [
