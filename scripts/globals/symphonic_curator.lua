@@ -70,6 +70,12 @@ tpz.symphonic_curator.onTrigger = function(player, npc)
     instruments_available = utils.mask.setBit(instruments_available, 2, not player:hasItem(286))  -- Nanaa Statue I
     instruments_available = utils.mask.setBit(instruments_available, 3, not player:hasItem(287))  -- Nanaa Statue II
 
+    -- GMs get access to all music
+    if player:getGMLevel() > 0 then
+        song_packs = 65535
+        instruments_available = 0
+    end
+
     local arg0 = 0 -- Junk
     local arg1 = 4095 -- Must be positive
     local arg2 = song_packs
@@ -90,7 +96,7 @@ local optionToSongLookup = {
     [4]   = 126, -- Mog House
     [17]  = 196, -- Fighters of the Crystal
     [18]  = 108, -- Vana'diel March
-    [19]  = 900, -- Distant Worlds
+    [19]  = 69, -- Distant Worlds (Nanaa Mihgo Version)
     [20]  = 59,  -- The Pioneers
     [33]  = 230, -- A New Horizon
     [34]  = 107, -- The Kingdom of San d'Oria
@@ -122,7 +128,7 @@ local optionToSongLookup = {
     [258] = 119, -- Awakening
     [274] = 195, -- Belief
     [290] = 137, -- A Realm of Emptiness
-    [306] = 900, -- Distant Worlds
+    [306] = 77, -- Distant Worlds (Instrumental)
     [322] = 76,  -- Forever Today
     [338] = 83,  -- Unknown Item: Rhapsodies of Vana'diel
     [354] = 119, -- Awakening (The Shadow Lord Battle) (FFRK Ver.)
