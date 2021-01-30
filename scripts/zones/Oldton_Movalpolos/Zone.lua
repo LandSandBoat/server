@@ -22,7 +22,6 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    local currentday = tonumber(os.date("%j"))
     local louverancePath = player:getCharVar("COP_Louverance_s_Path")
     local cs = -1
 
@@ -32,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and (louverancePath == 3 or louverancePath == 4) then
         cs = 1
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") ~= currentday and player:getCharVar("COP_jabbos_story") == 0 then
+    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") < os.date() and player:getCharVar("COP_jabbos_story") == 0 then
         cs = 57
     end
 
