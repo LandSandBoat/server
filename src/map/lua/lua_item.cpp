@@ -276,9 +276,20 @@ auto CLuaItem::getSignature() -> std::string
         DecodeStringSignature((int8*)m_PLuaItem->getSignature(), signature);
     }
 
-    // TODO: wwe might lose this...
+    // TODO: we might lose this...
     return std::string(reinterpret_cast<const char*>(signature));
 }
+
+bool CLuaItem::isInstalled()
+{
+    if (!m_PLuaItem->isType(ITEM_FURNISHING))
+    {
+        return false;
+    }
+    auto* PFurnishing = static_cast<CItemFurnishing*>(m_PLuaItem);
+    return PFurnishing->isInstalled();
+}
+
 //==========================================================//
 
 void CLuaItem::Register()
@@ -310,6 +321,7 @@ void CLuaItem::Register()
     SOL_REGISTER("isHandToHand", CLuaItem::isHandToHand);
     SOL_REGISTER("isShield", CLuaItem::isShield);
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
+    SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
 }
 
 //======================================================//

@@ -76,6 +76,8 @@ public:
 
     auto getSignature() -> std::string;
 
+    bool isInstalled();
+
     static void Register();
 };
 
