@@ -68,7 +68,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
             ability:setMsg(tpz.msg.basic.JA_DAMAGE)
         end
         ability:setMsg(tpz.msg.basic.JA_ENFEEB_IS)
-        action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
         action:speceffect(target:getID(), 2)
         return tpz.effect.WEIGHT
     else

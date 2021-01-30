@@ -9,8 +9,8 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
 end
 
-entity.onTrigger = function(player, npc, event)
-    tpz.hunts.onTrigger(player, npc, event)
+entity.onTrigger = function(player, npc)
+    tpz.hunts.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)

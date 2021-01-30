@@ -30,7 +30,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability, action)
     if (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP) then
-        action:animation(target:getID(), action:animation(target:getID()) + 1)
+        action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
     local params = {}
     params.numHits = 1

@@ -58,7 +58,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         local power = processDebuff(player, target, ability, debuff) -- Also sets ability message
         target:addStatusEffect(debuff, power, 0, 90)
     else
-        action:animation(target:getID(), 182)
+        action:setAnimation(target:getID(), 182)
         ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed
     end
 

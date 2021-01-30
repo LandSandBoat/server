@@ -46,7 +46,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     else
         ability:setMsg(tpz.msg.basic.JA_NO_EFFECT)
     end
-    action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+    action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
     action:speceffect(target:getID(), 1)
     return 0
 end
