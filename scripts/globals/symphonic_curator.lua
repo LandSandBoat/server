@@ -4,6 +4,9 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/utils")
 -----------------------------------
+-- NOTE: You can force the Symphonic Curator to appear
+--       by using !cs 30034 and exiting the menu
+-----------------------------------
 
 -- Song data, from Windower Addon: setbgm.lua
 --[[
@@ -37,7 +40,12 @@ tpz.symphonic_curator = tpz.symphonic_curator or {}
 
 tpz.symphonic_curator.onTrigger = function(player, npc)
 
-   -- All music type 6 (Moghouse)
+    -- The first time you click, you'll always already be listening to Mog House
+    if player:getLocalVar("Symphonic_Curator_Music") == 0 then
+        player:setLocalVar("Symphonic_Curator_Music", 126)
+    end
+
+    -- All music type 6 (Moghouse)
     local song_packs = 0
 
     -- Default: Mog House (126), Vana'diel March (108)
@@ -144,16 +152,16 @@ local optionToSongLookup = {
 }
 
 tpz.symphonic_curator.onEventUpdate = function(player, csid, option)
-    -- Preview
     player:ChangeMusic(6, optionToSongLookup[option])
 end
 
 tpz.symphonic_curator.onEventFinish = function(player, csid, option)
     if option == 0 then
         -- Reset
-        player:ChangeMusic(6, 126) -- Mog House
+        player:ChangeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))
     else
         -- Confirmed, set
+        player:setLocalVar("Symphonic_Curator_Music", optionToSongLookup[option])
         player:ChangeMusic(6, optionToSongLookup[option])
     end
 end
