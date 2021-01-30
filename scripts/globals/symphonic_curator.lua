@@ -64,11 +64,20 @@ tpz.symphonic_curator.onTrigger = function(player, npc)
     -- 1111 = all instruments hidden
     local instruments_available = 15
 
-    -- TODO: Make binding to confirm that these are placed furnitures
-    instruments_available = utils.mask.setBit(instruments_available, 0, not player:hasItem(426))  -- Orchestrion
-    instruments_available = utils.mask.setBit(instruments_available, 1, not player:hasItem(3677)) -- Spinet
-    instruments_available = utils.mask.setBit(instruments_available, 2, not player:hasItem(286))  -- Nanaa Statue I
-    instruments_available = utils.mask.setBit(instruments_available, 3, not player:hasItem(287))  -- Nanaa Statue II
+    local orchestrion    = player:findItem(426)
+    local spinet         = player:findItem(3677)
+    local nanaa_status_1 = player:findItem(286)
+    local nanaa_status_2 = player:findItem(287)
+
+    local has_orchestrion    = orchestrion and orchestrion:isInstalled()
+    local has_spinet         = spinet and spinet:isInstalled()
+    local has_nanaa_statue_1 = nanaa_statue_1 and nanaa_statue_1:isInstalled()
+    local has_nanaa_statue_2 = nanaa_statue_2 and nanaa_statue_1:isInstalled()
+
+    instruments_available = utils.mask.setBit(instruments_available, 0, not has_orchestrion)    -- Orchestrion
+    instruments_available = utils.mask.setBit(instruments_available, 1, not has_spinet)         -- Spinet
+    instruments_available = utils.mask.setBit(instruments_available, 2, not has_nanaa_statue_1) -- Nanaa Statue I
+    instruments_available = utils.mask.setBit(instruments_available, 3, not has_nanaa_statue_2) -- Nanaa Statue II
 
     -- GMs get access to all music
     if player:getGMLevel() > 0 then
@@ -76,12 +85,7 @@ tpz.symphonic_curator.onTrigger = function(player, npc)
         instruments_available = 0
     end
 
-    local arg0 = 0 -- Junk
-    local arg1 = 4095 -- Must be positive
-    local arg2 = song_packs
-    local arg3 = instruments_available
-
-    player:startEvent(30034, arg0, arg1, arg2, arg3)
+    player:startEvent(30034, 0, 4095, song_packs, instruments_available)
 end
 
 -- The options that comes through the event doesn't line up with the song request packet,
@@ -96,7 +100,7 @@ local optionToSongLookup = {
     [4]   = 126, -- Mog House
     [17]  = 196, -- Fighters of the Crystal
     [18]  = 108, -- Vana'diel March
-    [19]  = 69, -- Distant Worlds (Nanaa Mihgo Version)
+    [19]  = 69,  -- Distant Worlds (Nanaa Mihgo Version)
     [20]  = 59,  -- The Pioneers
     [33]  = 230, -- A New Horizon
     [34]  = 107, -- The Kingdom of San d'Oria
@@ -128,7 +132,7 @@ local optionToSongLookup = {
     [258] = 119, -- Awakening
     [274] = 195, -- Belief
     [290] = 137, -- A Realm of Emptiness
-    [306] = 77, -- Distant Worlds (Instrumental)
+    [306] = 77,  -- Distant Worlds (Instrumental)
     [322] = 76,  -- Forever Today
     [338] = 83,  -- Unknown Item: Rhapsodies of Vana'diel
     [354] = 119, -- Awakening (The Shadow Lord Battle) (FFRK Ver.)
