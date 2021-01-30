@@ -34,12 +34,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local gender = player:getGender()
-
     if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
-        player:startEvent(60, 4366, 629, 919, gender) -- Start quest "Only the Best"
+        player:startEvent(60, 4366, 629, 919) -- Start quest "Only the Best"
     else
-        player:startEvent(61, 4366, 629, 919, gender) -- During & after completed quest "Only the Best"
+        player:startEvent(61, 4366, 629, 919) -- During & after completed quest "Only the Best"
     end
 end
 
