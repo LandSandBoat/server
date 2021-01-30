@@ -3203,6 +3203,54 @@ bool CLuaBaseEntity::addTempItem(uint16 itemID, sol::object const& arg1)
 }
 
 /************************************************************************
+ *  Function: findItem()
+ *  Purpose : Like hasItem, but returns the item object (nil if not found)
+ *  Example : local item = player:findItem(426) -- Orchestrion
+ *  Notes   :
+ ************************************************************************/
+std::optional<CLuaItem> CLuaBaseEntity::findItem(uint16 itemID, sol::object const& location)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return std::nullopt;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    // Look in a specific container
+    if (location != sol::nil)
+    {
+        uint8 locationID = LOC_INVENTORY;
+
+        locationID = location.as<uint8>();
+        locationID = (locationID < MAX_CONTAINER_ID ? locationID : LOC_INVENTORY);
+
+        if (auto slot = PChar->getStorage(locationID)->SearchItem(itemID); slot != ERROR_SLOTID)
+        {
+            auto* item = PChar->getStorage(locationID)->GetItem(slot);
+            return item ? std::optional<CLuaItem>(item) : std::nullopt;
+        }
+    }
+    else // Look in all containers
+    {
+        for (uint8 i = 0; i < MAX_CONTAINER_ID; ++i)
+        {
+            if (auto slot = PChar->getStorage(i)->SearchItem(itemID); slot != ERROR_SLOTID)
+            {
+                auto* item = PChar->getStorage(i)->GetItem(slot);
+                if (item && item->getID() == itemID)
+                {
+                    return std::optional<CLuaItem>(item);
+                }
+            }
+        }
+    }
+
+    // Didn't find any matches
+    return std::nullopt;
+}
+
+/************************************************************************
  *  Function: createShop()
  *  Purpose : Create a temporary shop for display to a player
  *  Example : player:createShop(Size, Nation);
@@ -12371,6 +12419,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addTempItem", CLuaBaseEntity::addTempItem);
     SOL_REGISTER("hasWornItem", CLuaBaseEntity::hasWornItem);
     SOL_REGISTER("createWornItem", CLuaBaseEntity::createWornItem);
+    SOL_REGISTER("findItem", CLuaBaseEntity::findItem);
 
     SOL_REGISTER("createShop", CLuaBaseEntity::createShop);
     SOL_REGISTER("addShopItem", CLuaBaseEntity::addShopItem);

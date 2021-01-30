@@ -196,6 +196,7 @@ public:
     bool   addTempItem(uint16 itemID, sol::object const& arg1); // Add temp item to Entity Temp inventory
     bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
     void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
+    auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
 
     void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
     void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
