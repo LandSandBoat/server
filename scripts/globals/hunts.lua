@@ -1342,6 +1342,12 @@ function tpz.hunts.onEventFinish(player, csid, option)
 end
 
 function tpz.hunts.checkHunt(mob, player, mobHuntID)
+    -- dead players and players out of XP range get no credit
+    -- also prevents error when this function is called onMobDeath from a mob not killed by a player
+    if not player or player:getHP() == 0 or player:checkDistance(mob) > 100 then
+        return
+    end
+
     local playerHuntID = player:getCharVar("[hunt]id")
 
     -- required NM has been defeated
