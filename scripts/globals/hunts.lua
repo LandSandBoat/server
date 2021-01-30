@@ -526,9 +526,9 @@ local zone =
         [ 634] = { params = 157227, huntId = 555 },
         [ 890] = { params = 157229, huntId = 557 },
         [1146] = { params = 157230, huntId = 558 },
-        [ 634] = { params = 174633, huntId = 553 },
-        [ 890] = { params = 174636, huntId = 556 },
-        [1146] = { params = 174639, huntId = 559 },
+        [1402] = { params = 174633, huntId = 553 },
+        [1658] = { params = 174636, huntId = 556 },
+        [1914] = { params = 174639, huntId = 559 },
     },
 
     [tpz.zone.NORTHERN_SAN_DORIA] =
@@ -1242,7 +1242,7 @@ local zone =
       lock |   Scyld Qty    | NM pageId #  | status
                                           (Has distinct values) ]]--
 
-function tpz.hunts.onTrigger(player, npc, event)
+function tpz.hunts.onTrigger(player, npc)
     local huntId = player:getCharVar("[hunt]id")
     local huntStatus = player:getCharVar("[hunt]status")
     local scyldBits = bit.lshift(player:getCurrency("scyld"), 14)
@@ -1342,6 +1342,12 @@ function tpz.hunts.onEventFinish(player, csid, option)
 end
 
 function tpz.hunts.checkHunt(mob, player, mobHuntID)
+    -- dead players and players out of XP range get no credit
+    -- also prevents error when this function is called onMobDeath from a mob not killed by a player
+    if not player or player:getHP() == 0 or player:checkDistance(mob) > 100 then
+        return
+    end
+
     local playerHuntID = player:getCharVar("[hunt]id")
 
     -- required NM has been defeated

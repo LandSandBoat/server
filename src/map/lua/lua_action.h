@@ -44,7 +44,8 @@ public:
     void actionID(uint16 actionid);
     void param(uint32 actionTargetID, int32 param);
     void messageID(uint32 actionTargetID, uint16 messageID);
-    void animation(uint32 actionTargetID, uint16 animation);
+    auto getAnimation(uint32 actionTargetID) -> std::optional<uint16>;
+    void setAnimation(uint32 actionTargetID, uint16 animation);
     void speceffect(uint32 actionTargetID, uint8 speceffect);
     void reaction(uint32 actionTargetID, uint8 reaction);
     void additionalEffect(uint32 actionTargetID, uint16 additionalEffect);

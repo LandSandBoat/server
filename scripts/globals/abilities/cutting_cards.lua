@@ -22,7 +22,7 @@ end
 function applyRoll(caster, target, ability, action, total)
     caster:doCuttingCards(target, total)
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
-    action:animation(target:getID(), 132 + (total) - 1)
+    action:setAnimation(target:getID(), 132 + (total) - 1)
     return total
 end
 
