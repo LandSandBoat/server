@@ -740,7 +740,7 @@ tpz.caskets.onTrade = function(player, npc, trade)
             local canGetHint   = false
 
             for digit in string.gmatch(tostring(correctNumber), "%d") do
-                table.insert(splitNumbers, digit)
+                table.insert(splitNumbers, tonumber(digit))
             end
 
             if firstAttempt == 0 or firstAttempt == nil then
@@ -758,13 +758,13 @@ tpz.caskets.onTrade = function(player, npc, trade)
                 local highNum = 0
                 local lowNum  = 0
 
-                if tonumber(splitNumbers[1]) == 1 then
+                if splitNumbers[1] == 1 then
                     lowNum  = 10
                     highNum = 20 + math.random(1, 9)
-                elseif tonumber(splitNumbers[1]) > 1 and tonumber(splitNumbers[1]) < 9 then
-                    lowNum  = tonumber(splitNumbers[1]) * 10 - 10 + math.random(1, 9)
-                    highNum = tonumber(splitNumbers[1]) * 10 + 10 + math.random(1, 9)
-                elseif tonumber(splitNumbers[1]) == 9 then
+                elseif splitNumbers[1] > 1 and splitNumbers[1] < 9 then
+                    lowNum  = splitNumbers[1] * 10 - 10 + math.random(1, 9)
+                    highNum = splitNumbers[1] * 10 + 10 + math.random(1, 9)
+                elseif splitNumbers[1] == 9 then
                     lowNum  = 80 + math.random(1, 9)
                     highNum = 99
                 end
@@ -819,7 +819,7 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
     end
 
     for digit in string.gmatch(tostring(correctNumber), "%d") do
-        table.insert(splitNumbers, digit)
+        table.insert(splitNumbers, tonumber(digit))
     end
 
     if locked == 1 then
@@ -855,12 +855,12 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                         npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                     end
                 elseif randText == 3 then
-                    if tonumber(splitNumbers[1]) <= 6 then
+                    if splitNumbers[1] <= 6 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.FIRST_DIGIT_IS,
                             splitNumbers[1],
                             splitNumbers[1] +1,
                             splitNumbers[1] +2, 0)
-                    elseif tonumber(splitNumbers[1]) == 9 then
+                    elseif splitNumbers[1] == 9 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.FIRST_DIGIT_IS,
                             splitNumbers[1] -2,
                             splitNumbers[1] -1,
@@ -873,12 +873,12 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                     end
                     npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                 elseif randText == 4 then
-                    if tonumber(splitNumbers[2]) <= 6 then
+                    if splitNumbers[2] <= 6 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.SECOND_DIGIT_IS,
                             splitNumbers[2],
                             splitNumbers[2] +1,
                             splitNumbers[2] +2, 0)
-                    elseif tonumber(splitNumbers[2]) == 9 then
+                    elseif splitNumbers[2] == 9 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.SECOND_DIGIT_IS,
                             splitNumbers[2] -2,
                             splitNumbers[2] -1,
@@ -902,13 +902,13 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                     local highNum = 0
                     local lowNum  = 0
 
-                    if tonumber(splitNumbers[1]) == 1 then
+                    if splitNumbers[1] == 1 then
                         lowNum  = 10
                         highNum = 20 + math.random(1, 9)
-                    elseif tonumber(splitNumbers[1]) > 1 and tonumber(splitNumbers[1]) < 9 then
-                        lowNum  = tonumber(splitNumbers[1]) * 10 - 10 + math.random(1, 9)
-                        highNum = tonumber(splitNumbers[1]) * 10 + 10 + math.random(1, 9)
-                    elseif tonumber(splitNumbers[1]) == 9 then
+                    elseif splitNumbers[1] > 1 and splitNumbers[1] < 9 then
+                        lowNum  = splitNumbers[1] * 10 - 10 + math.random(1, 9)
+                        highNum = splitNumbers[1] * 10 + 10 + math.random(1, 9)
+                    elseif splitNumbers[1] == 9 then
                         lowNum  = 80 + math.random(1, 9)
                         highNum = 99
                     end
@@ -926,12 +926,6 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
         -----------------------------------
         elseif lockedChoice == 1 then -- Input a number
             if inputNumber > 9 and inputNumber < 100 then
-                local splitNumbers = {}
-
-                for digit in string.gmatch(tostring(correctNumber), "%d") do
-                    table.insert(splitNumbers, digit)
-                end
-
                 if inputNumber == correctNumber then
                     if locked == 0 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.NO_COMBINATION, 0, 0, 0, 0)
