@@ -9018,11 +9018,6 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         return false;
     }
 
-    if (va.size() < 4)
-    {
-        return false;
-    }
-
     if (va[0].is<CLuaStatusEffect>())
     {
         auto PStatusEffect = va[0].as<CLuaStatusEffect>();
@@ -9030,6 +9025,11 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
     }
     else
     {
+        if (va.size() < 4)
+        {
+            return false;
+        }
+
         // Mandatory
         auto effectID   = va[0].as<EFFECT>();                      // The same
         auto effectIcon = va[0].as<uint16>();                      // The same
