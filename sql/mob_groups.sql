@@ -14189,34 +14189,51 @@ INSERT INTO `mob_groups` VALUES (44,6937,266,'Mligni-Vorgut',0,128,0,0,0,0,0,0);
 -- Kamihr_Drifts (Zone 267)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4800,267,'Snowpelt_Rabbit',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (2,4801,267,'Cyanotic_Raptor',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (3,4807,267,'Cicatricose_Raaz',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (4,4802,267,'Wailing_Umbril',330,1,0,0,5000,111,113,0);
-INSERT INTO `mob_groups` VALUES (5,4803,267,'Bedraggled_Lucerewe',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (6,4804,267,'Shaggy_Ovim',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (7,4805,267,'Graupel_Formation',960,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (8,4806,267,'Hailstone',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (9,4808,267,'Gnarring_Yztarg',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (10,4809,267,'Ashen_Tiger',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (11,4812,267,'Slobbering_Ruszor',960,0,0,0,5000,111,113,0);
-INSERT INTO `mob_groups` VALUES (12,6699,267,'Shivering_Heartwing',960,0,0,0,5000,111,113,0);
-INSERT INTO `mob_groups` VALUES (13,4810,267,'Sprightly_Leafkin',960,0,0,0,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (14,4786,267,'Wintry_Cave',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (15,4788,267,'Snowpaw_Rabbit',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (16,4785,267,'Famished_Raaz',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (17,4787,267,'Incensed_Lucerewe',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (18,4783,267,'Frostfang_Tiger',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (19,4784,267,'Contumacious_Ovim',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (20,4795,267,'Icy_Palisade',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (21,4789,267,'Alpine_Rabbit',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (22,4790,267,'Territorial_Lucerewe',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (23,4791,267,'Sharptusk_Raaz',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (24,4792,267,'Raptor_Nightstalker',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (25,4793,267,'Umberwood_Tiger',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (26,4794,267,'Chilblain_Snoll',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (27,4782,267,'Pungent_Ovim',960,0,0,20000,0,111,113,0);
-INSERT INTO `mob_groups` VALUES (28,4799,267,'Kumhau',0,128,0,0,5000,117,119,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,0,267,'Sleettooth_Jagil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,267,'Hoarvein_Leech',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,0,267,'Blubbering_Ruszor',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (4,4800,267,'Snowpelt_Rabbit',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (5,4801,267,'Cyanotic_Raptor',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (6,4807,267,'Cicatricose_Raaz',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (7,4802,267,'Wailing_Umbril',330,1,0,0,5000,111,113,0);
+INSERT INTO `mob_groups` VALUES (8,4803,267,'Bedraggled_Lucerewe',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (9,4804,267,'Shaggy_Ovim',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (10,4805,267,'Graupel_Formation',960,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (11,4806,267,'Hailstone',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (12,4808,267,'Gnarring_Yztarg',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (13,4809,267,'Ashen_Tiger',960,0,0,0,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (14,4812,267,'Slobbering_Ruszor',960,0,0,0,5000,111,113,0);
+INSERT INTO `mob_groups` VALUES (15,6699,267,'Shivering_Heartwing',960,0,0,0,5000,111,113,0);
+INSERT INTO `mob_groups` VALUES (16,4810,267,'Sprightly_Leafkin',960,0,0,0,0,111,113,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (17,4786,267,'Wintry_Cave',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (18,4788,267,'Snowpaw_Rabbit',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (19,4785,267,'Famished_Raaz',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (20,4787,267,'Incensed_Lucerewe',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (21,4783,267,'Frostfang_Tiger',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (22,4784,267,'Contumacious_Ovim',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (23,4795,267,'Icy_Palisade',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (24,4789,267,'Alpine_Rabbit',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (25,4790,267,'Territorial_Lucerewe',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (26,4791,267,'Sharptusk_Raaz',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (27,4792,267,'Raptor_Nightstalker',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (28,4793,267,'Umberwood_Tiger',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (29,4794,267,'Chilblain_Snoll',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (30,4782,267,'Pungent_Ovim',0,128,0,20000,0,111,113,0);
+INSERT INTO `mob_groups` VALUES (31,4799,267,'Kumhau',0,128,0,0,5000,117,119,0);
+INSERT INTO `mob_groups` VALUES (32,0,267,'Kumhaus_Claw',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (33,0,267,'Kumhaus_Fleshrender',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,0,267,'Kumhaus_Hoof',0,128,0,0,0,0,0,0);
+
+-- delve
+INSERT INTO `mob_groups` VALUES (35,6938,267,'Calydontis',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,0,267,'Azeman',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,0,267,'Sinaa',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,6939,267,'Cherti',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,6940,267,'Mirka',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Sih_Gates (Zone 268)
