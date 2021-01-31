@@ -14341,50 +14341,58 @@ INSERT INTO `mob_groups` VALUES (41,5398,269,'Apex_Eruca',180,0,0,0,0,124,127,0)
 -- Cirdas_Caverns (Zone 270)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,6443,270,'Balas_Bats',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (2,5065,270,'Pallid_Funguar',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (3,5077,270,'Foreboding_Funguar',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (4,5080,270,'Grossular_Bat',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (5,5066,270,'Livid_Umbril',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (6,5068,270,'Flatus_Acuex',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (7,5067,270,'Crepuscular_Worm',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (8,5078,270,'Tenebrous_Obdella',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (9,5069,270,'Tunnel_Lizard',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (10,5070,270,'Invidious_Lizard',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (11,5071,270,'Subterrane_Spider',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (12,5072,270,'Speckled_Spider',330,0,0,0,0,102,106,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,0,270,'Smirking_Jagil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,270,'Throbbing_Clot',0,128,0,0,0,0,0,0);
+
+INSERT INTO `mob_groups` VALUES (3,6443,270,'Balas_Bats',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (4,5065,270,'Pallid_Funguar',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (5,5077,270,'Foreboding_Funguar',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (6,5080,270,'Grossular_Bat',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (7,5066,270,'Livid_Umbril',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (8,5068,270,'Flatus_Acuex',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (9,5067,270,'Crepuscular_Worm',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (10,5078,270,'Tenebrous_Obdella',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (11,5069,270,'Tunnel_Lizard',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (12,5070,270,'Invidious_Lizard',330,0,0,0,0,102,106,0);
 INSERT INTO `mob_groups` VALUES (13,5073,270,'Asperous_Marolith',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (14,5074,270,'Fuliginous_Mandragora',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (15,5075,270,'Igneous_Clot',330,0,0,0,0,102,106,0);
-INSERT INTO `mob_groups` VALUES (16,4765,270,'Putrid_Acuex',330,0,0,0,5000,104,109,0);
-INSERT INTO `mob_groups` VALUES (17,4764,270,'Moist_Funguar',330,0,0,15000,5000,104,109,0);
--- zone 270 group 18: free
-INSERT INTO `mob_groups` VALUES (19,5060,270,'Pungent_Fungus',330,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (20,4763,270,'Banespore',330,0,0,15000,5000,104,106,0);
-INSERT INTO `mob_groups` VALUES (21,5076,270,'Acuex',3600,0,0,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (22,6710,270,'Knotted_Root',3600,0,0,20000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (23,4762,270,'Sordid_Lizard',3600,0,0,20000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (24,4761,270,'Molten_Clot',3600,0,0,17000,1000,107,108,0);
-INSERT INTO `mob_groups` VALUES (25,4760,270,'Umbril_Shadewarrior',180,0,0,20000,9999,102,103,0);
-INSERT INTO `mob_groups` VALUES (26,4759,270,'Putrid_Funguar',3600,0,0,10000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (27,4758,270,'Pyre_Bat',3600,0,0,10000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (28,4757,270,'Oregorger_Worm',3600,0,0,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (29,4756,270,'Tooth_Cave_Tarantula',3600,0,0,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (30,4755,270,'Tormented_Obdella',3600,0,0,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (31,4754,270,'Slag_Mandragora',3600,0,0,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (32,4753,270,'Frightful_Funguar',3600,0,0,12000,0,104,106,0);
-INSERT INTO `mob_groups` VALUES (33,6379,270,'Wetscale_Toad',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (34,6806,270,'Plodding_Funguar',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (35,5476,270,'Fulvous_Bats',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (36,6338,270,'Moldmouth_Attercop',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (37,5477,270,'Snippy_Rafflesia',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (38,6383,270,'Coagulum_Acuex',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (39,6807,270,'Obstinate_Clot',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (40,6444,270,'Drearyeyed_Bat',330,0,0,0,0,125,126,0);
-INSERT INTO `mob_groups` VALUES (41,6700,270,'Shadowshiver_Umbril',330,0,0,0,0,126,127,0);
-INSERT INTO `mob_groups` VALUES (42,5250,270,'Imposing_Dullahan',330,0,0,0,0,127,127,0);
-INSERT INTO `mob_groups` VALUES (43,6601,270,'Hefty_Marolith',330,0,0,0,0,127,128,0);
-INSERT INTO `mob_groups` VALUES (44,6704,270,'Bloodmoon_Umbril',330,0,0,0,0,106,109,0);
+INSERT INTO `mob_groups` VALUES (14,5071,270,'Subterrane_Spider',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (15,5072,270,'Speckled_Spider',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (16,5074,270,'Fuliginous_Mandragora',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (17,5075,270,'Igneous_Clot',330,0,0,0,0,102,106,0);
+INSERT INTO `mob_groups` VALUES (18,4765,270,'Putrid_Acuex',330,0,0,0,5000,104,109,0);
+INSERT INTO `mob_groups` VALUES (19,4764,270,'Moist_Funguar',330,0,0,15000,5000,104,109,0);
+INSERT INTO `mob_groups` VALUES (20,6704,270,'Bloodmoon_Umbril',330,0,0,0,0,106,109,0);
+INSERT INTO `mob_groups` VALUES (21,5060,270,'Pungent_Fungus',330,0,0,0,0,1,1,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (22,4763,270,'Banespore',0,128,0,15000,5000,104,106,0);
+INSERT INTO `mob_groups` VALUES (23,5076,270,'Acuex',0,128,0,12000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (24,6710,270,'Knotted_Root',0,128,0,20000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (25,4762,270,'Sordid_Lizard',0,128,0,20000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (26,4761,270,'Molten_Clot',0,128,0,17000,1000,107,108,0);
+INSERT INTO `mob_groups` VALUES (27,4760,270,'Umbril_Shadewarrior',0,128,0,20000,9999,102,103,0);
+INSERT INTO `mob_groups` VALUES (28,4759,270,'Putrid_Funguar',0,128,0,10000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (29,4758,270,'Pyre_Bat',0,128,0,10000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (30,4757,270,'Oregorger_Worm',0,128,0,12000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (31,4756,270,'Tooth_Cave_Tarantula',0,128,0,12000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (32,4755,270,'Tormented_Obdella',0,128,0,12000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (33,4754,270,'Slag_Mandragora',0,128,0,12000,0,104,106,0);
+INSERT INTO `mob_groups` VALUES (34,4753,270,'Frightful_Funguar',0,128,0,12000,0,104,106,0);
+
+INSERT INTO `mob_groups` VALUES (35,6941,270,'Ancestral_Rage',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,6379,270,'Wetscale_Toad',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (37,6806,270,'Plodding_Funguar',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (38,5476,270,'Fulvous_Bats',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (39,6338,270,'Moldmouth_Attercop',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (40,5477,270,'Snippy_Rafflesia',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (41,0,270,'Vemosia',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,6383,270,'Coagulum_Acuex',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (43,6807,270,'Obstinate_Clot',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (44,6444,270,'Drearyeyed_Bat',330,0,0,0,0,125,126,0);
+INSERT INTO `mob_groups` VALUES (45,6700,270,'Shadowshiver_Umbril',330,0,0,0,0,126,127,0);
+INSERT INTO `mob_groups` VALUES (46,5250,270,'Imposing_Dullahan',330,0,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (47,6601,270,'Hefty_Marolith',330,0,0,0,0,127,128,0);
 
 -- ------------------------------------------------------------
 -- Dho_Gates (Zone 272)
