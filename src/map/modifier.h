@@ -439,6 +439,7 @@ enum class Mod
     FORCE_JUMP_CRIT            = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH    = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974, // Adds subjob traits to wyvern on spawn
+    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe 
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
