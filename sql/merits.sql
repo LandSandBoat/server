@@ -279,7 +279,7 @@ INSERT INTO `merits` VALUES (2838,'nin_magic_attack',5,4,4096,7,43);
 INSERT INTO `merits` VALUES (2880,'deep_breathing',5,1,8192,7,44);
 INSERT INTO `merits` VALUES (2882,'angon',5,15,8192,7,44);
 INSERT INTO `merits` VALUES (2884,'empathy',5,1,8192,7,44);
-INSERT INTO `merits` VALUES (2886,'strafe',5,5,8192,7,44);
+INSERT INTO `merits` VALUES (2886,'strafe_effect',5,10,8192,7,44);
 INSERT INTO `merits` VALUES (2944,'meteor_strike',5,40,16384,7,45);
 INSERT INTO `merits` VALUES (2946,'heavenly_strike',5,40,16384,7,45);
 INSERT INTO `merits` VALUES (2948,'wind_blade',5,40,16384,7,45);

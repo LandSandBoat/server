@@ -39,8 +39,8 @@ CBaseEntity::CBaseEntity()
     memset(&loc, 0, sizeof(loc));
     animation    = ANIMATION_NONE;
     animationsub = 0;
-    speed        = 50 + map_config.speed_mod;
-    speedsub     = 50 + map_config.speed_mod;
+    speed        = 50;
+    speedsub     = 50;
     namevis      = 0;
     allegiance   = ALLEGIANCE_TYPE::MOB;
     updatemask   = 0;

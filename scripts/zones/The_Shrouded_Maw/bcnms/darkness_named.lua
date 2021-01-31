@@ -14,8 +14,8 @@ battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
-    local inst = player:getBattlefield():getArea()
+battlefield_object.onBattlefieldInitialise = function(battlefield)
+    local inst = battlefield:getArea()
     local tile = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst - 1) * 8
     for i = tile, tile + 7 do
         GetNPCByID(i):setAnimation(tpz.anim.CLOSE_DOOR)

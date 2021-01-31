@@ -1580,9 +1580,9 @@ tpz.mod =
     WYVERN_SUBJOB_TRAITS            = 974, -- Adds subjob traits to wyvern
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
+    WYVERN_BREATH_MACC              = 986,
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 986, -- stuff
     -- SPARE = 987, -- stuff
     -- SPARE = 988, -- stuff
 }
@@ -2059,7 +2059,7 @@ tpz.merit =
     DEEP_BREATHING              = MCATEGORY_DRG_2 + 0x00,
     ANGON                       = MCATEGORY_DRG_2 + 0x02,
     EMPATHY                     = MCATEGORY_DRG_2 + 0x04,
-    STRAFE                      = MCATEGORY_DRG_2 + 0x06,
+    STRAFE_EFFECT               = MCATEGORY_DRG_2 + 0x06,
 
     -- SMN 2
     METEOR_STRIKE               = MCATEGORY_SMN_2 + 0x00,
