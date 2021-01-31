@@ -587,7 +587,7 @@ end
 
 -- TO DO: add event trusts
 
-function tpz.sparkshop.onTrade(player, npc, trade)
+function tpz.sparkshop.onTrade(player, npc, trade, eventid)
     local copperVouchersStored = player:getCurrency("aman_vouchers")
     local count = trade:getItemQty(8711)
 
@@ -595,7 +595,7 @@ function tpz.sparkshop.onTrade(player, npc, trade)
         trade:confirmItem(8711, count)
         player:addCurrency("aman_vouchers", count)
         player:confirmTrade()
-        player:startEvent(4601, 8711, count + copperVouchersStored, 230)
+        player:startEvent(eventid, 8711, count + copperVouchersStored, 230)
     end
 end
 
@@ -701,5 +701,5 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
     end
 end
 
-function tpz.sparkshop.onEventFinish(player,csid,option)
+function tpz.sparkshop.onEventFinish(player, csid, option)
 end
