@@ -221,7 +221,22 @@ int32 CBattleEntity::GetMaxMP() const
 
 uint8 CBattleEntity::GetSpeed()
 {
-    int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed;
+    int8 bonus = 0;
+    // NPC's don't get a bonus. Just players, mobs, pets..
+
+    // Mobs get their speed boost while agro'd/engaged
+    if (objtype == TYPE_MOB && animation == ANIMATION_ATTACK)
+    {
+        bonus = map_config.mob_speed_mod;
+        // ShowDebug("mob speed bonus: '%i' \n", bonus);
+    }
+    // Pets share the owners map_config.
+    else if (objtype == TYPE_PC || objtype == TYPE_PET)
+    {
+        bonus = map_config.speed_mod;
+    }
+
+    int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed + bonus;
 
     // Mod::MOVE (169)
     // Mod::MOUNT_MOVE (972)
