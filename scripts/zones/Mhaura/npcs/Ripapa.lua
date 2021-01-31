@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
 
     local TrialByLightning = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
     local WhisperOfStorms = player:hasKeyItem(tpz.ki.WHISPER_OF_STORMS)
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
@@ -32,7 +31,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
-    elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByLightning_date"))) then
+    elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))) then
         player:startEvent(10016, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
     elseif (TrialByLightning == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_LIGHTNING) == false and WhisperOfStorms == false) then
         player:startEvent(10024, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
@@ -93,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_LIGHTNING)
             player:delKeyItem(tpz.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
-            player:setCharVar("TrialByLightning_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("TrialByLightning_date", getMidnight())
             player:addFame(MHAURA, 30)
             player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end

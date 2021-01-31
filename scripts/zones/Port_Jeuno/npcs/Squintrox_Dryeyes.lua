@@ -14,7 +14,6 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    local now = tonumber(os.date("%j"))
     local count = trade:getItemCount()
     local sLux = trade:hasItemQty(2740, 1)
     local sLuna = trade:hasItemQty(2741, 1)
@@ -36,13 +35,13 @@ entity.onTrade = function(player, npc, trade)
     if (ENABLE_ACP == 0 and ENABLE_AMK == 0 and ENABLE_ASA ==0) then
         player:showText(npc, ID.text.GET_LOST)
     else    -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
-        if (ENABLE_ACP == 1 and sLux and sLuna and sAstrum and count == 3 and ACPm >= tpz.mission.id.acp.GATHERER_OF_LIGHT_I and CrimsonKey == false and now ~= LastCrimson) then -- and timer stuff here) then
+        if (ENABLE_ACP == 1 and sLux and sLuna and sAstrum and count == 3 and ACPm >= tpz.mission.id.acp.GATHERER_OF_LIGHT_I and CrimsonKey == false and os.time() > LastCrimson) then -- and timer stuff here) then
             player:tradeComplete()
             player:addKeyItem(tpz.ki.CRIMSON_KEY)
-            player:setCharVar("LastCrimsonKey", os.date("%j"))
+            player:setCharVar("LastCrimsonKey", getMidnight())
             player:messageSpecial(ID.text.DRYEYES_2)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CRIMSON_KEY)
-        elseif (sLux and sLuna and sAstrum and count == 3 and (now == LastCrimson or CrimsonKey == true)) then
+        elseif (sLux and sLuna and sAstrum and count == 3 and (os.time() <= LastCrimson or CrimsonKey == true)) then
             player:messageSpecial(ID.text.DRYEYES_3, tpz.ki.CRIMSON_KEY)
         -- White Coral Key:
         -- elseif (ENABLE_AMK == 1 and
@@ -64,7 +63,6 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- uncommented printf till we have all optionIDs mapped out.
-    local now = tonumber(os.date("%j"))
     local ACPm = player:getCurrentMission(ACP)
     local AMKm = player:getCurrentMission(AMK)
     local ASAm = player:getCurrentMission(ASA)
@@ -78,15 +76,15 @@ entity.onEventFinish = function(player, csid, option)
         if (option == 1) then
             player:showText(player, ID.text.DRYEYES_1)
         elseif (option == 100) then
-            if (salad and juice and grub and ACPm >= tpz.mission.id.acp.GATHERER_OF_LIGHT_I and ViridianKey == false and now ~= LastViridian) then
+            if (salad and juice and grub and ACPm >= tpz.mission.id.acp.GATHERER_OF_LIGHT_I and ViridianKey == false and os.time() > LastViridian) then
                 player:addKeyItem(tpz.ki.VIRIDIAN_KEY)
                 player:delKeyItem(tpz.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
                 player:delKeyItem(tpz.ki.JUG_OF_GREASY_GOBLIN_JUICE)
                 player:delKeyItem(tpz.ki.CHUNK_OF_SMOKED_GOBLIN_GRUB)
-                player:setCharVar("LastViridianKey", os.date("%j"))
+                player:setCharVar("LastViridianKey", getMidnight())
                 player:showText(player, ID.text.DRYEYES_2)
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VIRIDIAN_KEY)
-            elseif (now == LastViridian or ViridianKey == true) then
+            elseif (os.time() <= LastViridian or ViridianKey == true) then
                 player:messageSpecial(ID.text.DRYEYES_3, tpz.ki.VIRIDIAN_KEY)
             else
                 -- player:showText(player, ? )

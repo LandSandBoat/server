@@ -59,7 +59,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 1
     elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 4 then
         cs = 0
-    elseif player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) and tonumber(os.date("%j")) == player:getCharVar("Wait1DayM8-1_date") then
+    elseif player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) and os.time() > player:getCharVar("Wait1DayM8-1_date") then
         cs = 16
     end
 
