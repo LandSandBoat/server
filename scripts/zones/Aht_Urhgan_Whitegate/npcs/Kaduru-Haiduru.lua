@@ -11,11 +11,10 @@ local function canUse_KaduruHaiduru_Service(player)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
     local shihuDanhuEncounters = player:getCharVar("ShihuDanhu_Encounters")
     local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
-    local currentDate = os.date("%j")
 
     -- Kaduru-Haiduru can be used unless the following are true.
-    if (currentDate - shihuDanhuDate < 1 and shihuDanhuEncounters > 1) or
-        (currentDate - caughtUsingShihuDanhuDate < 1) then
+    if (shihuDanhuEncounters > 1 and os.time() < shihuDanhuDate) or
+        (os.time() < caughtUsingShihuDanhuDate) then
         return false
     end
     return true
@@ -25,13 +24,12 @@ entity.onTrigger = function(player, npc)
     local caughtUsingShihuDanhuDate = player:getCharVar("Kaduru_ShihuDanhu_date")
     local shihuDanhuDate = player:getCharVar("ShihuDanhu_TP_date")
     local timesUsed = player:getCharVar("Kaduru_TimesUsed")
-    local currentDate = os.date("%j")
 
     if canUse_KaduruHaiduru_Service(player) then
         player:startEvent(151, 0, 0, timesUsed, 0, 0, 0, 0, 0, 0)
     else
         if caughtUsingShihuDanhuDate == 0 then
-            player:setCharVar("Kaduru_ShihuDanhu_date", os.date("%j"))
+            player:setCharVar("Kaduru_ShihuDanhu_date", getVanaMidnight())
             player:setCharVar("Kaduru_TimesUsed", 0)
         end
         player:startEvent(153, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -61,7 +59,7 @@ entity.onTrade = function(player, npc, trade)
         end
     else
         if caughtUsingShihuDanhuDate == 0 then
-            player:setCharVar("Kaduru_ShihuDanhu_date", os.date("%j"))
+            player:setCharVar("Kaduru_ShihuDanhu_date", getVanaMidnight())
             player:setCharVar("Kaduru_TimesUsed", 0)
         end
         player:startEvent(155, 0, 0, 0, 0, 0, 0, 0, 0, 0)

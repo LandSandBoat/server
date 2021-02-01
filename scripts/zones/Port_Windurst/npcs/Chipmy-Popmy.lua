@@ -12,8 +12,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local currentday = tonumber(os.date("%j"))
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") ~= currentday and player:getCharVar("COP_3-taru_story")== 0 ) then
+    if
+        player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and
+        player:getCharVar("PromathiaStatus") == 3 and
+        player:getCharVar("Promathia_kill_day") < os.time() and
+        player:getCharVar("COP_3-taru_story") == 0
+    then
         player:startEvent(619)
     else
         player:startEvent(202)

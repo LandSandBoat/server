@@ -31,7 +31,6 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local currentday = tonumber(os.date("%j"))
 
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
         cs = 368
@@ -46,7 +45,7 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") ~= currentday and player:getCharVar("COP_shikarees_story")== 0 then
+    if player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story")== 0 then
         cs = 322
     end
 

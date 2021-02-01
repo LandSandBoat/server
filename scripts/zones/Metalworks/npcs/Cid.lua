@@ -41,7 +41,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local currentday = tonumber(os.date("%j"))
     local CidsSecret = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)
     local LetterKeyItem = player:hasKeyItem(tpz.ki.UNFINISHED_LETTER)
     local currentMission = player:getCurrentMission(BASTOK)
@@ -53,7 +52,12 @@ entity.onTrigger = function(player, npc)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (currentCOPMission == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day")~=currentday and player:getCharVar("COP_tenzen_story")== 0 ) then
+    elseif
+        currentCOPMission == tpz.mission.id.cop.DAWN and
+        player:getCharVar("PromathiaStatus") == 3 and
+        player:getCharVar("Promathia_kill_day") < os.time() and
+        player:getCharVar("COP_tenzen_story") == 0
+    then
         player:startEvent(897) -- COP event
     elseif (currentCOPMission == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and player:hasKeyItem(tpz.ki.LETTERS_FROM_ULMIA_AND_PRISHE) == false and player:getCharVar("COP_Dalham_KILL") == 2 and player:getCharVar("COP_Boggelmann_KILL") == 2 and player:getCharVar("Cryptonberry_Executor_KILL")==2) then
         player:startEvent(892) -- COP event

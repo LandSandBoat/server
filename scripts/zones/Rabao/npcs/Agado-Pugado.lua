@@ -19,7 +19,6 @@ entity.onTrigger = function(player, npc)
 
     local TrialByWind = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
     local WhisperOfGales = player:hasKeyItem(tpz.ki.WHISPER_OF_GALES)
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
@@ -35,7 +34,7 @@ entity.onTrigger = function(player, npc)
         end
     -----------------------------------
     -- Trial by Wind
-    elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByWind_date"))) then
+    elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))) then
         player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"
     elseif (TrialByWind == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_WIND) == false and WhisperOfGales == false) then
         player:startEvent(107, 0, 331) -- Defeat against Avatar : Need new Fork
@@ -94,7 +93,7 @@ entity.onEventFinish = function(player, csid, option)
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_WIND)
             player:delKeyItem(tpz.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
-            player:setCharVar("TrialByWind_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("TrialByWind_date", getMidnight())
             player:addFame(RABAO, 30)
             player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
         end

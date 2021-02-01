@@ -60,7 +60,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
         if player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 2 then
             player:addKeyItem(tpz.ki.TEAR_OF_ALTANA)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TEAR_OF_ALTANA)
-            player:setCharVar("Promathia_kill_day", tonumber(os.date("%j")))
+            player:setCharVar("Promathia_kill_day", getMidnight())
             player:setCharVar("PromathiaStatus", 3)
         end
     end

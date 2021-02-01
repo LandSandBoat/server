@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(77) --Offer the quest if the player has the broken rod
     elseif player:hasKeyItem(tpz.ki.SERPENT_RUMORS) == true and Indomitable == QUEST_AVAILABLE then
         player:startEvent(131) --Begins Indomitable Spirit
-    elseif indomitableTimer ~= 0 and indomitableTimer == getConquestTally() then
+    elseif indomitableTimer ~= 0 and indomitableTimer > os.time() then
         player:startEvent(133) --Asks the player to wait (next CQ tally)
     elseif indomitableTimer ~= 0 then
         player:startEvent(134) --Ends the Quest
