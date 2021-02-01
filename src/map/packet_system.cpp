@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -128,6 +128,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/menu_config.h"
 #include "packets/menu_merit.h"
 #include "packets/menu_raisetractor.h"
+#include "packets/menu_unity.h"
 #include "packets/merit_points_categories.h"
 #include "packets/message_basic.h"
 #include "packets/message_combat.h"
@@ -6669,11 +6670,25 @@ void SmallPacket0x115(map_session_data_t* const PSession, CCharEntity* const PCh
  *  This stub only handles the needed RoE updates.                        *
  *                                                                        *
  ************************************************************************/
+void SmallPacket0x116(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
+{
+    TracyZoneScoped;
+    PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
+    PChar->pushPacket(new CMenuUnityPacket(PChar));
+}
+
+/************************************************************************
+ *                                                                        *
+ *  Unity Rankings Menu Packet (Possibly incomplete)                      *
+ *  This stub only handles the needed RoE updates.                        *
+ *                                                                        *
+ ************************************************************************/
 
 void SmallPacket0x117(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
+    PChar->pushPacket(new CMenuUnityPacket(PChar));
 }
 
 /************************************************************************
@@ -6800,7 +6815,7 @@ void PacketParserInitialize()
     PacketSize[0x113] = 0x06; PacketParser[0x113] = &SmallPacket0x113;
     PacketSize[0x114] = 0x00; PacketParser[0x114] = &SmallPacket0x114;
     PacketSize[0x115] = 0x02; PacketParser[0x115] = &SmallPacket0x115;
-    PacketSize[0x116] = 0x02; PacketParser[0x116] = &SmallPacket0xFFF; // not implemented
+    PacketSize[0x116] = 0x00; PacketParser[0x116] = &SmallPacket0x116;
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
     // clang-format on
 }

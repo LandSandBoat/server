@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2010-2015 Darkstar Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,26 +19,25 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#ifndef _CMENUUNITYPACKET_H
+#define _CMENUUNITYPACKET_H
 
-#include "roe_sparkupdate.h"
+#include "../../common/cbasetypes.h"
 
-#include "../entities/charentity.h"
+#include "basic.h"
 
-CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
+/************************************************************************
+ *																		*
+ *  																		*
+ *																		*
+ ************************************************************************/
+
+class CCharEntity;
+
+class CMenuUnityPacket : public CBasicPacket
 {
-    this->id(0x110);
-    this->length(0x10);
+public:
+    CMenuUnityPacket(CCharEntity* PChar);
+};
 
-    const char* query = "SELECT spark_of_eminence FROM char_points WHERE charid = %d";
-
-    int ret = Sql_Query(SqlHandle, query, PChar->id);
-    if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
-    {
-        ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0);
-        ref<uint8>(0x08)  = 0; // Deeds
-        ref<uint32>(0x0A) = 0xFFFFFFFF; // Unknown purpose
-        ref<uint16>(0x0E) = 0xFFFF;
-        ref<uint32>(0x10) = 0xFFFFFFFF;
-    }
-}
+#endif

@@ -136,6 +136,8 @@ set(SOURCES
     menu_raisetractor.h
     merit_points_categories.cpp
     merit_points_categories.h
+    menu_unity.cpp
+    menu_unity.h
     message_basic.cpp
     message_basic.h
     message_combat.cpp

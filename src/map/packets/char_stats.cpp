@@ -33,7 +33,7 @@
 CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
 {
     this->type = 0x61;
-    this->size = 0x30;
+    this->size = 0x64;
 
     ref<uint32>(0x04) = PChar->GetMaxHP();
     ref<uint32>(0x08) = PChar->GetMaxMP();
@@ -74,9 +74,22 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x4A) = PChar->profile.home_point.destination;
     ref<uint8>(0x50)  = PChar->profile.nation;
 
-    // 0x51 = New character has this as 0x01, 0x03 on seasoned 99
+    // 0x51 = 0x01 on fresh player, 0x03 with unity unlocked
     // 0x52 = superior level (1 or 2)
     // 0x54 = maximum item level
     // 0x55 = itemlevel over 99
     // 0x56 = main weapon item level
+
+    ref<uint32>(0x58) = (50000 << 10) | (0x00 << 5 | 0x04);
+
+    // Unity Points definition:
+    // Bytes 58~5B, 58 most significant nibble is least sig for Points
+    // 58: Unity Leader << 1 & least sig nibble
+
+    //ref<uint8>(0x59) = 0xA0; // Bits 2-16 Unity Points
+    //ref<uint8>(0x5A) = 0x0F;
+    //ref<uint8>(0x5B) = 0x01;
+
+    ref<uint16>(0x5C) = 21; // Partial Personal Eval
+    ref<uint16>(0x5E) = 42; // Personal Eval
 }
