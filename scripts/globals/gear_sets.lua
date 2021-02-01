@@ -167,9 +167,8 @@ local GearSets =  {
              {id = 215, items = {25616, 25689, 27120, 27305, 27476}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.MATT, 20, 10, 0}} }, -- Amalric +1
         }
 
-             -- increment id by (number of mods in previous gearset - 1)
-             -- remember to leave room for gear sets with multiple MODs
-             -- next id = 216
+             -- increment id by the number of mods in previous gearset (e.g. id 199 has 3 mods, 199 + 3 = 202)
+             -- so in this example, the next usable id after 199 would be 202.
 
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
 
