@@ -1874,9 +1874,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string name = effects::GetEffectName(PStatusEffect->GetStatusID());
+        std::string filename = fmt::format("./scripts/{}.lua", PStatusEffect->GetName());
 
-        sol::function onEffectGain = lua["tpz"]["globals"]["effects"][name]["onEffectGain"].get<sol::function>();
+        sol::function onEffectGain = GetCacheEntryFromFilename(filename)["onEffectGain"].get<sol::function>();
         if (!onEffectGain.valid())
         {
             return -1;
@@ -1897,14 +1897,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string name = effects::GetEffectName(PStatusEffect->GetStatusID());
+        std::string filename = fmt::format("./scripts/{}.lua", PStatusEffect->GetName());
 
-        sol::function onEffectTick;
-        if (auto cached_effect = lua["tpz"]["globals"]["effects"][name]; cached_effect.valid())
-        {
-            onEffectTick = cached_effect["onEffectTick"];
-        }
-
+        sol::function onEffectTick = GetCacheEntryFromFilename(filename)["onEffectTick"].get<sol::function>();
         if (!onEffectTick.valid())
         {
             return -1;
@@ -1925,14 +1920,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        std::string name = effects::GetEffectName(PStatusEffect->GetStatusID());
+        std::string filename = fmt::format("./scripts/{}.lua", PStatusEffect->GetName());
 
-        sol::function onEffectLose;
-        if (auto cached_effect = lua["tpz"]["globals"]["effects"][name]; cached_effect.valid())
-        {
-            onEffectLose = cached_effect["onEffectLose"];
-        }
-
+        sol::function onEffectLose = GetCacheEntryFromFilename(filename)["onEffectLose"].get<sol::function>();
         if (!onEffectLose.valid())
         {
             return -1;
@@ -2070,9 +2060,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PItem->getName();
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
 
-        auto onItemCheck = lua["tpz"]["globals"]["items"][name]["onItemCheck"];
+        sol::function onItemCheck = GetCacheEntryFromFilename(filename)["onItemCheck"].get<sol::function>();
         if (!onItemCheck.valid())
         {
             return { 56, 0, 0 };
@@ -2107,9 +2097,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PItem->getName();
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
 
-        auto onItemUse = lua["tpz"]["globals"]["items"][name]["onItemUse"];
+        sol::function onItemUse = GetCacheEntryFromFilename(filename)["onItemUse"].get<sol::function>();
         if (!onItemUse.valid())
         {
             return -1;
