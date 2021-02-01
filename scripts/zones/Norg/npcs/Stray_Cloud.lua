@@ -9,7 +9,6 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-
 function onTrade(player, npc, trade)
 end
 
@@ -29,7 +28,6 @@ function onTrigger(player, npc)
     else
         player:startEvent(231) -- Standard Conversation
     end
-
 end
 
 
@@ -37,7 +35,7 @@ function onEventUpdate(player, csid, option)
 end
 
 function onEventFinish(player, csid, option)
-    if (csid == 225) then
+    if csid == 225 then
         player:addQuest(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
         player:setCharVar("anUndyingPledgeCS", 1)
     elseif
@@ -51,5 +49,4 @@ function onEventFinish(player, csid, option)
     then
         player:delKeyItem(tpz.ki.CALIGINOUS_BLADE)
     end
-
 end
