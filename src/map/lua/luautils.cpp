@@ -173,6 +173,7 @@ namespace luautils
         set_function("getMagianTrial", &luautils::GetMagianTrial);
         set_function("getMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
         set_function("jstMidnight", &luautils::JstMidnight);
+        set_function("jstWeekday", &luautils::JstWeekday);
         set_function("vanadielTime", &luautils::VanadielTime);
         set_function("vanadielTOTD", &luautils::VanadielTOTD);
         set_function("vanadielHour", &luautils::VanadielHour);
@@ -902,6 +903,18 @@ namespace luautils
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getJstMidnight();
+    }
+
+    /************************************************************************
+     *                                                                       *
+     * JstWeekday - Returns days since Sunday JST
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 JstWeekday()
+    {
+        TracyZoneScoped;
+        return CVanaTime::getInstance()->getJstWeekDay();
     }
 
     /************************************************************************

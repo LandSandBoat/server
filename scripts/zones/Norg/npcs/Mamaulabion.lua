@@ -72,7 +72,6 @@ entity.onTrigger = function(player, npc)
     local mamaMia = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MAMA_MIA)
     local moonlitPath = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
     local evokersRing = player:hasItem(14625)
-    local realday = tonumber(os.date("%j"))  -- %M for next minute, %j for next day
     local questday = player:getCharVar("MamaMia_date")
 
     if mamaMia == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 and moonlitPath == QUEST_COMPLETED then
@@ -82,9 +81,9 @@ entity.onTrigger = function(player, npc)
         local tradesMamaMia = player:getCharVar("tradesMamaMia")
 
         if utils.mask.isFull(tradesMamaMia, 7) then
-            if realday == questday then
+            if os.time() < questday then
                 player:startEvent(196) --need to wait longer for reward
-            elseif questday ~= 0 then
+            else
                 player:startEvent(197) --Reward
             end
         else
@@ -116,7 +115,7 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif (csid == 195) then
         player:confirmTrade()
-        player:setCharVar("MamaMia_date", os.date("%j")) -- %M for next minute, %j for next day
+        player:setCharVar("MamaMia_date", getMidnight())
 
     elseif (csid == 197) then
         if (player:getFreeSlotsCount() == 0) then

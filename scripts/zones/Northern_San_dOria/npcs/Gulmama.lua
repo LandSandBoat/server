@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
 
     local TrialByIce = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
     local WhisperOfFrost = player:hasKeyItem(tpz.ki.WHISPER_OF_FROST)
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local ClassReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
 
@@ -31,7 +30,7 @@ entity.onTrigger = function(player, npc)
     elseif (ClassReunion == 1 and ClassReunionProgress == 5 and player:hasItem(1171) == false) then
         player:startEvent(712, 0, 1171, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
-    elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByIce_date"))) then
+    elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))) then
         player:startEvent(706, 0, tpz.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
     elseif (TrialByIce == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_ICE) == false and WhisperOfFrost == false) then
         player:startEvent(718, 0, tpz.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
@@ -92,7 +91,7 @@ entity.onEventFinish = function(player, csid, option)
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_ICE)
             player:delKeyItem(tpz.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
-            player:setCharVar("TrialByIce_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("TrialByIce_date", getMidnight())
             player:addFame(SANDORIA, 30)
             player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
         end
