@@ -10,25 +10,25 @@ zones[tpz.zone.VELUGANNON_PALACE] =
 {
     text =
     {
-        ITEM_CANNOT_BE_OBTAINED  = 6382,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED            = 6388,  -- Obtained: <item>.
-        GIL_OBTAINED             = 6389,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED         = 6391,  -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY  = 6402,  -- There is nothing out of the ordinary here.
-        CARRIED_OVER_POINTS      = 6999, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY  = 7000, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER             = 7001, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CONQUEST_BASE            = 7049,  -- Tallying conquest results...
-        CHEST_UNLOCKED           = 7216,  -- You unlock the chest!
-        EVIL_PRESENCE            = 7226,  -- You sense an evil presence lurking in the shadows...
-        KNIFE_CHANGES_SHAPE      = 7233,  -- The <item> begins to change shape.
-        NOTHING_HAPPENS          = 7234,  -- Nothing happens.
-        REGIME_REGISTERED        = 10159, -- New training regime registered!
-        PLAYER_OBTAINS_ITEM      = 11211, -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM    = 11212, -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM = 11213, -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP     = 11214, -- You already possess that temporary item.
-        NO_COMBINATION           = 11219, -- You were unable to enter a combination.
+        ITEM_CANNOT_BE_OBTAINED  = 6383,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED            = 6389,  -- Obtained: <item>.
+        GIL_OBTAINED             = 6390,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED         = 6392,  -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY  = 6403,  -- There is nothing out of the ordinary here.
+        CARRIED_OVER_POINTS      = 7000, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY  = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER             = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CONQUEST_BASE            = 7050,  -- Tallying conquest results...
+        CHEST_UNLOCKED           = 7217,  -- You unlock the chest!
+        EVIL_PRESENCE            = 7227,  -- You sense an evil presence lurking in the shadows...
+        KNIFE_CHANGES_SHAPE      = 7234,  -- The <item> begins to change shape.
+        NOTHING_HAPPENS          = 7235,  -- Nothing happens.
+        REGIME_REGISTERED        = 10160, -- New training regime registered!
+        PLAYER_OBTAINS_ITEM      = 11212, -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM    = 11213, -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM = 11214, -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP     = 11215, -- You already possess that temporary item.
+        NO_COMBINATION           = 11220, -- You were unable to enter a combination.
     },
     mob =
     {

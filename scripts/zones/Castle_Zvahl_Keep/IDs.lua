@@ -11,19 +11,19 @@ zones[tpz.zone.CASTLE_ZVAHL_KEEP] =
     text =
     {
         CONQUEST_BASE           = 0, -- Tallying conquest results...
-        ITEM_CANNOT_BE_OBTAINED = 6541, -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED           = 6547, -- Obtained: <item>.
-        GIL_OBTAINED            = 6548, -- Obtained <number> gil.
-        KEYITEM_OBTAINED        = 6550, -- Obtained key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY = 6561, -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET   = 6576, -- I'm ready. I suppose.
-        CARRIED_OVER_POINTS     = 7158, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7159, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER            = 7160, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        CHEST_UNLOCKED          = 7223, -- You unlock the chest!
-        ITEMS_ITEMS_LA_LA       = 7232, -- You can hear a strange voice... Items, items, la la la la la
-        GOBLIN_SLIPPED_AWAY     = 7238, -- The Goblin slipped away when you were not looking...
-        HOMEPOINT_SET           = 7281, -- Home point set!
+        ITEM_CANNOT_BE_OBTAINED = 6542, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED           = 6548, -- Obtained: <item>.
+        GIL_OBTAINED            = 6549, -- Obtained <number> gil.
+        KEYITEM_OBTAINED        = 6551, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY = 6562, -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET   = 6577, -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS     = 7159, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY = 7160, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_NUMBER            = 7161, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        CHEST_UNLOCKED          = 7224, -- You unlock the chest!
+        ITEMS_ITEMS_LA_LA       = 7233, -- You can hear a strange voice... Items, items, la la la la la
+        GOBLIN_SLIPPED_AWAY     = 7239, -- The Goblin slipped away when you were not looking...
+        HOMEPOINT_SET           = 7282, -- Home point set!
     },
     mob =
     {

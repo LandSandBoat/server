@@ -11,7 +11,12 @@ function onTrade(player,npc,trade)
 end
 
 function onTrigger(player,npc)
-    if player:getCharVar("OmensProgress") == 4 then
+    local omensProgress = player:getCharVar("OmensProgress")
+
+    if
+        omensProgress == 3 or
+        omensProgress == 4
+    then
         player:startEvent(9)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

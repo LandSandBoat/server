@@ -70,6 +70,13 @@ if(UNIX)
     link_libraries(dl)
 endif()
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+        message(FATAL_ERROR
+                "GCC version must be at least 9.0! Detected: ${CMAKE_CXX_COMPILER_VERSION}")
+    endif()
+endif()
+
 # TODO: These should be applied on a per-target level, not globally like this!
 string(REPLACE ";" " " FLAGS_AND_DEFINES_STR "${FLAGS_AND_DEFINES}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAGS_AND_DEFINES_STR}")

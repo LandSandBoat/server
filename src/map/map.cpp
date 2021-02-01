@@ -305,7 +305,6 @@ void do_final(int code)
     petutils::FreePetList();
     trustutils::FreeTrustList();
     zoneutils::FreeZoneList();
-    luautils::free();
     message::close();
     if (messageThread.joinable())
     {

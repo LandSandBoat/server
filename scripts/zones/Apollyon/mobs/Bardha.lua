@@ -66,7 +66,7 @@ function onMobDeath(mob, player, isKiller, noKiller)
         local battlefield = mob:getBattlefield()
         local randomF1 = battlefield:getLocalVar("randomF1")
         if mobID == randomF1 then
-            battlefield:setLocalVar("randomF2", ID.mob.APOLLYON_NW_MOB[2]+math.random(1,8))
+            battlefield:setLocalVar("randomF2", ID.mob.APOLLYON_NW_MOB[2]+math.random(1,7))
             tpz.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[1])
         end
     end

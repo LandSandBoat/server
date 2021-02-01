@@ -1402,6 +1402,9 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
     local zoneId = player:getZoneID()
     local regionId = player:getCurrentRegion()
 
+    -- HELM should remove invisible
+    player:delStatusEffect(tpz.effect.INVISIBLE)
+
     if trade:hasItemQty(info.tool, 1) and trade:getItemCount() == 1 then
         -- start event
         local item  = pickItem(player, info)

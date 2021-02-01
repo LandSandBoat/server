@@ -21,6 +21,8 @@ jobs:
     
     - name: Configure CMake
       run: |
+        export CC=/usr/bin/gcc-9
+        export CXX=/usr/bin/g++-9
         cmake .
         
     - name: Download Sonar Build Wrapper

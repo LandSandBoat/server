@@ -109,7 +109,6 @@ namespace luautils
     extern struct lua_State* LuaHandle;
 
     int32 init();
-    int32 free();
     int32 garbageCollect(); // performs a full garbage collecting cycle
     int   register_fp(int index);
     void  unregister_fp(int);
