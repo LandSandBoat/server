@@ -27,7 +27,6 @@ end
 entity.onTrigger = function(player, npc)
     local offset        = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
     local ACP           = player:getCurrentMission(ACP)
-    local currentDay    = tonumber(os.date("%j"))
     local needToZone    = player:needToZone()
     local progressMask  = player:getCharVar("SEED_AFTERGLOW_MASK")
     local intensity     = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
@@ -36,8 +35,8 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(tpz.ki.MARK_OF_SEED) or
         player:hasKeyItem(tpz.ki.AZURE_KEY) or
         player:hasKeyItem(tpz.ki.IVORY_KEY) or
-        CurrentDay == player:getCharVar("LastAzureKey") or
-        CurrentDay == player:getCharVar("LastIvoryKey") or
+        os.time() < player:getCharVar("LastAzureKey") or
+        os.time() < player:getCharVar("LastIvoryKey") or
         ACP < tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
     ) then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)

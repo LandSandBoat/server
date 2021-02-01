@@ -25,7 +25,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local MissionStatus = player:getCharVar("MissionStatus")
     local tuningIn = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TUNING_OUT)
@@ -110,7 +109,7 @@ entity.onTrigger = function(player, npc)
                 player:hasKeyItem(tpz.ki.FENRIR_WHISTLE) then availRewards = availRewards + 128; end -- Mount Pact
 
             player:startEvent(850, 0, 13399, 1208, 1125, availRewards, 18165, 13572)
-        elseif (realday ~= player:getCharVar("MoonlitPath_date")) then --24 hours have passed, flag a new fight
+        elseif (os.time() > player:getCharVar("MoonlitPath_date")) then --24 hours have passed, flag a new fight
             player:startEvent(848, 0, 1125, 334)
         end
     elseif tuningIn == QUEST_ACCEPTED then
@@ -179,7 +178,7 @@ entity.onEventFinish = function(player, csid, option)
         if (reward ~= nil) then
             player:addTitle(tpz.title.HEIR_OF_THE_NEW_MOON)
             player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-            player:setCharVar("MoonlitPath_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("MoonlitPath_date", getMidnight())
             player:addFame(WINDURST, 30)
             player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_MOONLIT_PATH)
         end
@@ -216,7 +215,7 @@ entity.onEventFinish = function(player, csid, option)
         if (reward ~= nil) then
             player:addTitle(tpz.title.HEIR_OF_THE_NEW_MOON)
             player:delKeyItem(tpz.ki.WHISPER_OF_THE_MOON)
-            player:setCharVar("MoonlitPath_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("MoonlitPath_date", getMidnight())
             player:addFame(WINDURST, 30)
         end
 

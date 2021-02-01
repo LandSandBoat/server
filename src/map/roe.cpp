@@ -380,16 +380,10 @@ namespace roeutils
         // Only chars with First Step Forward complete can get timed/daily records
         if (GetEminenceRecordCompletion(PChar, 1))
         {
-            time_t jstnow     = time(nullptr) + JST_OFFSET;
             time_t lastOnline = PChar->lastOnline;
+            time_t lastJstMidnight = CVanaTime::getInstance()->getJstMidnight() - (60 * 60 * 24); // Unix timestamp of the last JST midnight
 
             { // Daily Reset
-                tm* jst                = gmtime(&jstnow);
-                jst->tm_hour           = 0;
-                jst->tm_min            = 0;
-                jst->tm_sec            = 0;
-                time_t lastJstMidnight = timegm(jst) - JST_OFFSET; // Unix timestamp of the last JST midnight
-
                 if (lastOnline < lastJstMidnight)
                 {
                     ClearDailyRecords(PChar);
@@ -397,14 +391,10 @@ namespace roeutils
             }
 
             { // Weekly Reset
-                tm* jst                   = gmtime(&jstnow);
-                jst->tm_hour              = 0;
-                jst->tm_min               = 0;
-                jst->tm_sec               = 0;
-
-                // This is a bit wonky.  Grab the current Unix timestamp, subtract the JST_OFFSET, and then find number of days in the week to subtract.
-                // This will get us to an off by one state, so add an additional day to the timestamp.
-                time_t lastJstWeeklyReset = timegm(jst) - JST_OFFSET - (jst->tm_wday * 86400) + 86400; // Unix timestamp of last JST Midnight (Sunday->Monday)
+                // Get the current JST DOTW (0-6), that plus 6 mod 7 will push the start of the week to Monday.
+                // Multiply that to get seconds, and subtract from last JST midnight.
+                uint32 jstWeekday = (CVanaTime::getInstance()->getJstWeekDay() + 6) % 7;
+                time_t lastJstWeeklyReset = lastJstMidnight - (jstWeekday * (60 * 60 * 24)); // Unix timestamp of last JST Midnight (Sunday->Monday)
 
                 if (lastOnline < lastJstWeeklyReset)
                 {
@@ -414,11 +404,7 @@ namespace roeutils
             }
 
             { // 4hr Reset
-                tm* jst                  = gmtime(&jstnow);
-                jst->tm_hour             = jst->tm_hour & 0xFC;
-                jst->tm_min              = 0;
-                jst->tm_sec              = 0;
-                time_t lastJstTimedBlock = timegm(jst) - JST_OFFSET; // Unix timestamp of the start of the current 4-hr block
+                time_t lastJstTimedBlock = lastJstMidnight + (static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4) * (60 * 60 * 4)); // Unix timestamp of the start of the current 4-hr block
 
                 if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())
                 {

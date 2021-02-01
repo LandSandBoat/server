@@ -49,7 +49,6 @@ entity.onTrigger = function(player, npc)
     local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
     local BlueRibbonBlues = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
     local needZone = player:needToZone()
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local waking_dreams = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
 
     -- Awakening of the Gods
@@ -65,7 +64,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(876)
 
     -- Waking Dreams
-    elseif (player:hasKeyItem(tpz.ki.VIAL_OF_DREAM_INCENSE)==false and ((player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) and  waking_dreams == QUEST_AVAILABLE ) or(waking_dreams  == QUEST_COMPLETED and realday ~= player:getCharVar("Darkness_Named_date")))) then
+    elseif (player:hasKeyItem(tpz.ki.VIAL_OF_DREAM_INCENSE)==false and ((player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) and  waking_dreams == QUEST_AVAILABLE ) or(waking_dreams  == QUEST_COMPLETED and os.time() > player:getCharVar("Darkness_Named_date")))) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
         player:startEvent(918)--918
 
@@ -196,7 +195,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addGil(GIL_RATE*15000)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*15000) -- Gil
             player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
-            player:setCharVar("Darkness_Named_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("Darkness_Named_date", getMidnight())
             player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
 
         elseif (option == 6 and player:hasSpell(304)==false) then
@@ -206,11 +205,11 @@ entity.onEventFinish = function(player, csid, option)
         end
         if (addspell==1) then
             player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
-            player:setCharVar("Darkness_Named_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("Darkness_Named_date", getMidnight())
             player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
         elseif (item > 0 and player:getFreeSlotsCount()~=0) then
             player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
-            player:setCharVar("Darkness_Named_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("Darkness_Named_date", getMidnight())
             player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
             player:addItem(item)
             player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
