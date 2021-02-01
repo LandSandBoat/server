@@ -71,7 +71,7 @@ zone_object.onRegionEnter = function(player, region)
         end,
         [5] = function (x)
             if player:getCharVar("MeaChipRegistration") == 1 then
-                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpMea") ~= tonumber(os.date("%j")) then -- 5% Chance chip breaks
+                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpMea") < os.time() then -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
                 else
                     player:startEvent(169) -- Chip Breaks!
@@ -82,7 +82,7 @@ zone_object.onRegionEnter = function(player, region)
         end,
         [6] = function (x)
             if player:getCharVar("HollaChipRegistration") == 1 then
-                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpHolla") ~= tonumber(os.date("%j")) then -- 5% Chance chip breaks
+                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpHolla") < os.time() then -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
                 else
                     player:startEvent(170) -- Chip Breaks!
@@ -93,7 +93,7 @@ zone_object.onRegionEnter = function(player, region)
         end,
         [7] = function (x)
             if player:getCharVar("DemChipRegistration") == 1 then
-                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpDem") ~= tonumber(os.date("%j")) then -- 5% Chance chip breaks
+                if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpDem") < os.time() then -- 5% Chance chip breaks
                     player:startEvent(161) -- To Sky
                 else
                     player:startEvent(171) -- Chip Breaks!
@@ -133,11 +133,11 @@ zone_object.onEventFinish = function(player, csid, option)
         local prevZone = player:getPreviousZone()
 
         if prevZone == tpz.zone.LA_THEINE_PLATEAU then
-            player:setCharVar("LastSkyWarpHolla", tonumber(os.date("%j")))
+            player:setCharVar("LastSkyWarpHolla", getMidnight())
         elseif prevZone == tpz.zone.KONSCHTAT_HIGHLANDS then
-            player:setCharVar("LastSkyWarpDem", tonumber(os.date("%j")))
+            player:setCharVar("LastSkyWarpDem", getMidnight())
         elseif prevZone == tpz.zone.TAHRONGI_CANYON then
-            player:setCharVar("LastSkyWarpMea", tonumber(os.date("%j")))
+            player:setCharVar("LastSkyWarpMea", getMidnight())
         end
 
         tpz.teleport.to(player, tpz.teleport.id.SKY)

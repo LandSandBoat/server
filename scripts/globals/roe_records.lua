@@ -61,6 +61,16 @@ function getRoeRecords(triggers)
             reward =  { sparks = 100, xp = 500 }
         },
 
+        --[[ TODO
+        [1447] = { -- Exploring the Trove
+            reward =  { sparks = 100, xp = 500 }
+        },
+        ]]
+
+        [1448] = { -- Assist Channel
+            reward =  { sparks = 100, xp = 300 }
+        },
+
       -----------------------------------
       -- Tutorial -> Intermediate
       -----------------------------------

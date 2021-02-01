@@ -21,8 +21,6 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TOAUM3_DAY = player:getCharVar("TOAUM3_STARTDAY")
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local needToZone = player:needToZone()
 
     if (player:getCharVar("AssaultPromotion") >= 25 and player:hasKeyItem(tpz.ki.PFC_WILDCAT_BADGE) == false and player:getCharVar("PromotionPFC") == 0) then
@@ -35,7 +33,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(3002, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 1) then
         player:startEvent(73, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 2 and TOAUM3_DAY ~= realday and needToZone == false) then
+    elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PRESIDENT_SALAHEEM and player:getCharVar("AhtUrganStatus") == 2 and needToZone == false) then
         player:startEvent(3020, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 0) then
         player:startEvent(3021, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -109,7 +107,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 73) then
         player:setCharVar("AhtUrganStatus", 2)
-        player:setCharVar("TOAUM3_DAY", os.date("%j")) -- %M for next minute, %j for next day
     elseif (csid == 3002) then
         player:setCharVar("AhtUrganStatus", 0)
         player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES)
@@ -122,7 +119,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("AhtUrganStatus", 0)
         player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PRESIDENT_SALAHEEM)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.KNIGHT_OF_GOLD)
-        player:setCharVar("TOAUM3_DAY", 0)
     elseif (csid == 3028) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2185)

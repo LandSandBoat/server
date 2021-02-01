@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     elseif (beansAhoy == QUEST_ACCEPTED) then
         player:startEvent(335) -- Quest Active, NPC Repeats what he says but as normal 'text' instead of cutscene.
 
-    elseif (beansAhoy == QUEST_COMPLETED and getConquestTally() ~= player:getCharVar("BeansAhoy_ConquestWeek")) then
+    elseif (beansAhoy == QUEST_COMPLETED and os.time() > player:getCharVar("BeansAhoy_ConquestWeek")) then
         player:startEvent(342)
     elseif (beansAhoy == QUEST_COMPLETED) then
         player:startEvent(341)

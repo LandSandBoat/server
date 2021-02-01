@@ -19,9 +19,8 @@ entity.onTrigger = function(player, npc)
 
     TrialByFire = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
     WhisperOfFlames = player:hasKeyItem(tpz.ki.WHISPER_OF_FLAMES)
-    realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
 
-    if ((TrialByFire == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 6) or (TrialByFire == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByFire_date"))) then
+    if ((TrialByFire == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 6) or (TrialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date"))) then
         player:startEvent(270, 0, tpz.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
     elseif (TrialByFire == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_FIRE) == false and WhisperOfFlames == false) then
         player:startEvent(285, 0, tpz.ki.TUNING_FORK_OF_FIRE) -- Defeat against Ifrit : Need new Fork
@@ -82,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_FIRE)
             player:delKeyItem(tpz.ki.WHISPER_OF_FLAMES)
-            player:setCharVar("TrialByFire_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("TrialByFire_date", getMidnight())
             player:addFame(KAZHAM, 30)
             player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
         end

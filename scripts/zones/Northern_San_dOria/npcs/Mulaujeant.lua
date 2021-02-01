@@ -15,15 +15,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    starttime = player:getCharVar("MissionaryMan_date")
+    finishtime = player:getCharVar("MissionaryMan_date")
     MissionaryManVar = player:getCharVar("MissionaryManVar")
 
     if (MissionaryManVar == 2) then
         player:startEvent(698, 0, 1146) -- Start statue creation
-    elseif (MissionaryManVar == 3 and (starttime == realday or player:needToZone() == true)) then
+    elseif (MissionaryManVar == 3 and finishtime < os.time()) then
         player:startEvent(699) -- During statue creation
-    elseif (MissionaryManVar == 3 and starttime ~= realday and player:needToZone() == false) then
+    elseif (MissionaryManVar == 3 and finishtime >= os.time()) then
         player:startEvent(700) -- End of statue creation
     elseif (MissionaryManVar == 4) then
         player:startEvent(701) -- During quest (after creation)
@@ -38,7 +37,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 698) then
         player:setCharVar("MissionaryManVar", 3)
-        player:setCharVar("MissionaryMan_date", os.date("%j")) -- %M for next minute, %j for next day
+        player:setCharVar("MissionaryMan_date", os.time() + 60)
         player:delKeyItem(tpz.ki.RAUTEINOTS_PARCEL)
         player:needToZone(true)
 

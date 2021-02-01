@@ -17,10 +17,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local currentday = tonumber(os.date("%j"))
     local lastIDtag = player:getCharVar("LAST_IMPERIAL_TAG")
     local tagCount = player:getCurrency("id_tags")
-    local diffday = currentday - lastIDtag
+    local diffday = math.floor((os.time() - lastIDtag) / (60 * 60 * 24))
     local currentAssault = player:getCurrentAssault()
     local haveimperialIDtag
 
@@ -41,14 +40,14 @@ entity.onTrigger = function(player, npc)
         if lastIDtag == 0 then -- first time you get the tag
             tagCount = 1
             player:setCurrency("id_tags", tagCount)
-            player:setCharVar("LAST_IMPERIAL_TAG", currentday)
+            player:setCharVar("LAST_IMPERIAL_TAG", os.time())
         elseif diffday > 0 then
             tagCount = tagCount + diffday
             if tagCount > 3 then -- store 3 TAG max
                 tagCount = 3
             end
             player:setCurrency("id_tags", tagCount)
-            player:setCharVar("LAST_IMPERIAL_TAG", currentday)
+            player:setCharVar("LAST_IMPERIAL_TAG", os.time())
         end
 
         if player:hasKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG) then

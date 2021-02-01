@@ -2,7 +2,6 @@
 -- Area: Mhaura
 --  NPC: Lacia
 -- Starts Quest: Trial Size Trial By Lightning
---  The "TrialSizeLightning_date" still needs to be set at the BCNM/Mob level to reflect defeat by the Avatar
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -29,7 +28,7 @@ entity.onTrigger = function(player, npc)
 
         if (LightningFork == true) then
             player:startEvent(10018) --Dialogue given to remind player to be prepared
-        elseif (LightningFork == false and tonumber(os.date("%j")) ~= player:getCharVar("TrialSizeLightning_date")) then
+        else
             player:startEvent(10029, 0, 1548, 5, 20) --Need another mini tuning fork
         end
     elseif (TrialSizeLightning == QUEST_COMPLETED) then
@@ -47,7 +46,6 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1548) --Mini tuning fork
         else
-            player:setCharVar("TrialSizeLightning_date", 0)
             player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
             player:addItem(1548)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1548)
