@@ -37,7 +37,7 @@ entity.onEventFinish = function(player, csid, option)
         return
     end
     if (csid == 12 and option == 1) then
-        toPalaceEntrance(player)
+        player:setPos(-31.8, 0, -618.7, 190, 33)
     elseif (csid == 13) then
         player:setCharVar("PromathiaStatus", 0)
         player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SLANDEROUS_UTTERINGS)
