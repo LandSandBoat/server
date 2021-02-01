@@ -37,6 +37,7 @@ zones[tpz.zone.SEA_SERPENT_GROTTO] =
         GOLD_CHECK                 = 7348,  -- You see something gold glittering around the indentation.
         COMPLETED_CHECK            = 7349,  -- It is a door you can open using <item>!
         SENSE_OMINOUS_PRESENCE     = 7363,  -- You sense an ominous presence...
+        BODY_NUMB_DREAD            = 7550,  -- Your body goes numb with dread!
         PLAYER_OBTAINS_ITEM        = 7597,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM      = 7598,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM   = 7599,  -- <name> obtains the temporary item: <item>!
@@ -118,6 +119,7 @@ zones[tpz.zone.SEA_SERPENT_GROTTO] =
         },
         MIMIC        = 17498564,
         WATER_LEAPER = 17498565,
+        GLYRYVILU    = 17498566,
     },
     npc =
     {
