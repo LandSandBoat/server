@@ -74,6 +74,7 @@ end
 -- See doPhysicalWeaponskill or doRangedWeaponskill for how calcParams are determined.
 function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local targetLvl = target:getMainLvl()
+    local targetHp = target:getHP()
 
     -- Recalculate accuracy if it varies with TP, applied to all hits
     if wsParams.acc100 ~= 0 then
@@ -153,7 +154,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         end
 
         local fencerBonus = calcParams.fencerBonus or 0
-        nativecrit = nativecrit + attacker:getMod(tpz.mod.CRITHITRATE)/100 + attacker:getMerit(tpz.merit.CRIT_HIT_RATE)/100
+        nativecrit = nativecrit + attacker:getMod(tpz.mod.CRITHITRATE) / 100 + attacker:getMerit(tpz.merit.CRIT_HIT_RATE) / 100
                                 + fencerBonus - target:getMerit(tpz.merit.ENEMY_CRIT_RATE) / 100
 
         -- Innin critical boost when attacker is behind target
@@ -209,7 +210,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     if not wsParams.multiHitfTP then ftp = 1 end -- We'll recalculate our mainhand damage after doing offhand
 
     -- Do the extra hit for our offhand if applicable
-    if calcParams.extraOffhandHit then
+    if calcParams.extraOffhandHit and finaldmg < targetHp then
         local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
         hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
 
@@ -229,7 +230,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local hitsDone = 1
     local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
 
-    while hitsDone < numHits do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
+    while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
         if hitdmg > 0 then
@@ -284,6 +285,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
         ['weaponType'] = attacker:getWeaponSkillType(tpz.slot.MAIN),
         ['damageType'] = attacker:getWeaponDamageType(tpz.slot.MAIN)
     }
+
     local calcParams = {}
     calcParams.wsID = wsID
     calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
@@ -351,9 +353,11 @@ end
 
     -- Determine cratio and ccritratio
     local ignoredDef = 0
-    if (wsParams.ignoresDef == not nil and wsParams.ignoresDef == true) then
+
+    if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(tpz.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
+
     local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and params used for calculating weaponskill damage
@@ -365,6 +369,7 @@ end
         ['weaponType'] = attacker:getWeaponSkillType(tpz.slot.RANGED),
         ['damageType'] = attacker:getWeaponDamageType(tpz.slot.RANGED)
     }
+
     local calcParams =
     {
         wsID = wsID,
@@ -400,7 +405,12 @@ end
 
     finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
+
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+
+    if finaldmg > 0 then
+        attacker:trySkillUp(attack.weaponType, target:getMainLvl())
+    end
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -418,6 +428,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         ['weaponType'] = attacker:getWeaponSkillType(tpz.slot.MAIN),
         ['damageType'] = tpz.damageType.ELEMENTAL + wsParams.ele
     }
+
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
@@ -479,13 +490,13 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(tpz.mod.ALL_WSDMG_ALL_HITS) -- For any WS
-        if (attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then -- For specific WS
+        if attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then -- For specific WS
             bonusdmg = bonusdmg + attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
         end
 
         -- Add in bonusdmg
-        dmg = dmg * ((100 + bonusdmg)/100) -- Apply our "all hits" WS dmg bonuses
-        dmg = dmg + ((dmg * attacker:getMod(tpz.mod.ALL_WSDMG_FIRST_HIT))/100) -- Add in our "first hit" WS dmg bonus
+        dmg = dmg * ((100 + bonusdmg) / 100) -- Apply our "all hits" WS dmg bonuses
+        dmg = dmg + ((dmg * attacker:getMod(tpz.mod.ALL_WSDMG_FIRST_HIT)) / 100) -- Add in our "first hit" WS dmg bonus
 
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
@@ -502,6 +513,11 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     calcParams.wsID = wsID
 
     dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+
+    if dmg > 0 then
+        attacker:trySkillUp(attack.weaponType, target:getMainLvl())
+    end
+
     return dmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
@@ -560,27 +576,31 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
 end
 
 function fencerBonus(attacker)
+    local bonus = 0
+
     if attacker:getObjType() ~= tpz.objType.PC then
         return 0
     end
 
     local mainEquip = attacker:getStorageItem(0, 0, tpz.slot.MAIN)
-
     if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
         local subEquip = attacker:getStorageItem(0, 0, tpz.slot.SUB)
 
         if subEquip == nil or subEquip:getSkillType() == tpz.skill.NONE or subEquip:isShield() then
-            return attacker:getMod(tpz.mod.FENCER_CRITHITRATE) / 100
+            bonus = attacker:getMod(tpz.mod.FENCER_CRITHITRATE) / 100
         end
     end
 
-    return 0
+    return bonus
 end
 
 function souleaterBonus(attacker, numhits)
+    local bonus = 0
+
     if attacker:hasStatusEffect(tpz.effect.SOULEATER) then
         local damage = 0
         local percent = 0.1
+
         if attacker:getMainJob() ~= tpz.job.DRK then
             percent = percent / 2
         end
@@ -594,11 +614,12 @@ function souleaterBonus(attacker, numhits)
             end
             hitscounted = hitscounted + 1
         end
-        attacker:delHP(numhits*0.10*attacker:getHP())
+
+        attacker:delHP(numhits * 0.10 * attacker:getHP())
         return damage
-    else
-        return 0
     end
+
+    return bonus
 end
 
 function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
@@ -625,7 +646,7 @@ function getMeleeDmg(attacker, weaponType, kick)
     local offhandDamage = attacker:getOffhandDmg()
 
     if weaponType == tpz.skill.HAND_TO_HAND or weaponType == tpz.skill.NONE then
-        local h2hSkill = attacker:getSkillLevel(1) * 0.11 + 3
+        local h2hSkill = attacker:getSkillLevel(tpz.skill.HAND_TO_HAND) * 0.11 + 3
 
         if kick and attacker:hasStatusEffect(tpz.effect.FOOTWORK) then
             mainhandDamage = attacker:getMod(tpz.mod.KICK_DMG) -- Use Kick damage if footwork is on
@@ -772,9 +793,9 @@ end
 
 function calculatedIgnoredDef(tp, def, ignore1, ignore2, ignore3)
     if tp >= 1000 and tp < 2000 then
-        return (ignore1 + ( ((ignore2 - ignore1) / 1000) * (tp - 1000) ) ) * def
+        return (ignore1 + (((ignore2 - ignore1) / 1000) * (tp - 1000))) * def
     elseif tp >= 2000 and tp <= 3000 then
-        return (ignore2 + ( ((ignore3 - ignore2) / 1000) * (tp - 2000) ) ) * def
+        return (ignore2 + (((ignore3 - ignore2) / 1000) * (tp - 2000))) * def
     end
 
     return 1 -- no def ignore mod
@@ -797,13 +818,13 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
         attacker:delMod(tpz.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
     end
 
-    local levelcor = 0
+    local levelCorrection = 0
 
     if attacker:getMainLvl() < defender:getMainLvl() then
-        levelcor = 0.05 * (defender:getMainLvl() - attacker:getMainLvl())
+        levelCorrection = 0.05 * (defender:getMainLvl() - attacker:getMainLvl())
     end
 
-    cratio = cratio - levelcor
+    cratio = cratio - levelCorrection
 
     if cratio < 0 then
         cratio = 0
@@ -890,16 +911,16 @@ function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
     local cratio = attacker:getRATT() / (defender:getStat(tpz.mod.DEF) - ignoredDef)
 
-    local levelcor = 0
+    local levelCorrection = 0
     if attacker:getMainLvl() < defender:getMainLvl() then
-        levelcor = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
+        levelCorrection = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
     end
 
-    cratio = cratio - levelcor
+    cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
 
-    if cratio > 3 - levelcor then
-        cratio = 3 - levelcor
+    if cratio > 3 - levelCorrection then
+        cratio = 3 - levelCorrection
     end
 
     if cratio < 0 then
@@ -944,28 +965,35 @@ function cRangedRatio(attacker, defender, params, ignoredDef, tp)
 
 end
 
--- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
-function fSTR(atk_str, def_vit, weapon_rank)
-    local dSTR = atk_str - def_vit
+-- Returns fSTR based on range and divisor
+local function calculateRawFstr(dSTR, divisor)
     local fSTR = 0
 
     if dSTR >= 12 then
-        fSTR = (dSTR + 4) / 4
+        fSTR = (dSTR + 4) / divisor
     elseif dSTR >= 6 then
-        fSTR = (dSTR + 6) / 4
+        fSTR = (dSTR + 6) / divisor
     elseif dSTR >= 1 then
-        fSTR = (dSTR + 7) / 4
+        fSTR = (dSTR + 7) / divisor
     elseif dSTR >= -2 then
-        fSTR = (dSTR + 8) / 4
+        fSTR = (dSTR + 8) / divisor
     elseif dSTR >= -7 then
-        fSTR = (dSTR + 9) / 4
+        fSTR = (dSTR + 9) / divisor
     elseif dSTR >= -15 then
-        fSTR = (dSTR + 10) / 4
+        fSTR = (dSTR + 10) / divisor
     elseif dSTR >= -21 then
-        fSTR = (dSTR + 12) / 4
+        fSTR = (dSTR + 12) / divisor
     else
-        fSTR = (dSTR + 13) / 4
+        fSTR = (dSTR + 13) / divisor
     end
+
+    return fSTR
+end
+
+-- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)
+function fSTR(atk_str, def_vit, weapon_rank)
+    local dSTR = atk_str - def_vit
+    local fSTR = calculateRawFstr(dSTR, 4)
 
     -- Apply fSTR caps.
     local lower_cap = weapon_rank * -1
@@ -981,25 +1009,7 @@ end
 -- Given the attacker's str and the mob's vit, fSTR2 is calculated (for ranged WS)
 function fSTR2(atk_str, def_vit, weapon_rank)
     local dSTR = atk_str - def_vit
-    local fSTR2 = 0
-
-    if dSTR >= 12 then
-        fSTR2 = (dSTR + 4) / 2
-    elseif dSTR >= 6 then
-        fSTR2 = (dSTR + 6) / 2
-    elseif dSTR >= 1 then
-        fSTR2 = (dSTR + 7) / 2
-    elseif dSTR >= -2 then
-        fSTR2 = (dSTR + 8) / 2
-    elseif dSTR >= -7 then
-        fSTR2 = (dSTR + 9) / 2
-    elseif dSTR >= -15 then
-        fSTR2 = (dSTR + 10) / 2
-    elseif dSTR >= -21 then
-        fSTR2 = (dSTR + 12) / 2
-    else
-        fSTR2 = (dSTR + 13) / 2
-    end
+    local fSTR2 = calculateRawFstr(dSTR, 2)
 
     -- Apply fSTR2 caps.
     local lower_cap = weapon_rank * -2
@@ -1178,8 +1188,6 @@ function getFlourishAnimation(skill)
     end
 end
 
-
-
 function handleWSGorgetBelt(attacker)
     local ftpBonus = 0
     local accBonus = 0
@@ -1269,5 +1277,6 @@ function shadowAbsorb(target)
 
         return true
     end
+
     return false
 end
