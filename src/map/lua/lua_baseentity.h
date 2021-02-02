@@ -422,6 +422,8 @@ public:
     bool hasLearnedWeaponskill(uint8 wsID);
     void delLearnedWeaponskill(uint8 wsID);
 
+    void trySkillUp(uint8 skill, uint8 level);
+
     bool addWeaponSkillPoints(uint8 slotID, uint16 points); // Adds weapon skill points to an equipped weapon
 
     void   addLearnedAbility(uint16 abilityID); // Add spell to Entity spell list
