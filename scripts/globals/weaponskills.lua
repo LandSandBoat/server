@@ -68,6 +68,7 @@ end
 --
 -- See doPhysicalWeaponskill or doRangedWeaponskill for how calcParams are determined.
 function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
+    local targetLvl = target:getMainLvl()
 
     -- Recalculate accuracy if it varies with TP, applied to all hits
     if wsParams.acc100 ~= 0 then
@@ -168,6 +169,11 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Calculate the damage from the first hit
     local dmg = mainBase * ftp
     hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+
+    if hitdmg > 0 then
+        attacker:trySkillUp(calcParams.skillType, targetLvl)
+    end
+
     finaldmg = finaldmg + hitdmg
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
@@ -200,6 +206,11 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     if calcParams.extraOffhandHit then
         local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
         hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
+
+        if hitdmg > 0 then
+            attacker:trySkillUp(calcParams.skillType, targetLvl)
+        end
+
         finaldmg = finaldmg + hitdmg
     end
 
@@ -213,6 +224,11 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
     while (hitsDone < numHits) do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+
+        if hitdmg > 0 then
+            attacker:trySkillUp(calcParams.skillType, targetLvl)
+        end
+
         finaldmg = finaldmg + hitdmg
         hitsDone = hitsDone + 1
     end
@@ -285,6 +301,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(tpz.mod.WSACC)
     calcParams.bonusWSmods = wsParams.bonusWSmods or 0
     calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc)
+    calcParams.skillType = attack.weaponType
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
