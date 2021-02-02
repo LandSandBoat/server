@@ -4076,12 +4076,14 @@ namespace battleutils
         TPZ_DEBUG_BREAK_IF(PSource == nullptr);
         TPZ_DEBUG_BREAK_IF(PTarget == nullptr);
 
-        auto* PMasterSource = PSource->PMaster ? PSource->PMaster : PSource;
-        for (auto* entity : *PMasterSource->PNotorietyContainer)
+        for (auto* entity : *PTarget->PNotorietyContainer)
         {
             if (CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(entity))
             {
-                PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
+                {
+                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                }
             }
         }
     }

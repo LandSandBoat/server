@@ -3212,21 +3212,20 @@ namespace luautils
             return 87;
         }
 
-        auto name = (const char*)PAbility->getName();
-
-        sol::function onAbilityCheck;
+        std::string filename;
         if (PAbility->isPetAbility())
         {
-            onAbilityCheck = lua["tpz"]["globals"]["abilities"]["pets"][name]["onAbilityCheck"];
+            filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
         }
         else
         {
-            onAbilityCheck = lua["tpz"]["globals"]["abilities"][name]["onAbilityCheck"];
+            filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
         }
 
+        sol::function onAbilityCheck = GetCacheEntryFromFilename(filename)["onAbilityCheck"];
         if (!onAbilityCheck.valid())
         {
-            ShowWarning("luautils::onAbilityCheck\n");
+            ShowWarning("luautils::onAbilityCheck - Ability %s not found.\n", PAbility->getName());
             return 87;
         }
 
@@ -3258,9 +3257,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name     = (const char*)PMobSkill->getName();
+        std::string filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PMobSkill->getName());
 
-        auto onPetAbility = lua["tpz"]["globals"]["abilities"]["pets"][name]["onPetAbility"];
+        sol::function onPetAbility = GetCacheEntryFromFilename(filename)["onPetAbility"];
         if (!onPetAbility.valid())
         {
             return 0;
@@ -3302,18 +3301,17 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PAbility->getName();
-
-        sol::function onUseAbility;
-        if (PUser->objtype == TYPE_PET)
+        std::string filename;
+        if (PAbility->isPetAbility())
         {
-            onUseAbility = lua["tpz"]["globals"]["abilities"]["pets"][name]["onUseAbility"];
+            filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
         }
         else
         {
-            onUseAbility = lua["tpz"]["globals"]["abilities"][name]["onUseAbility"];
+            filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
         }
 
+        sol::function onUseAbility = GetCacheEntryFromFilename(filename)["onUseAbility"];
         if (!onUseAbility.valid())
         {
             ShowWarning("luautils::onUseAbility - Ability %s not found.\n", PAbility->getName());

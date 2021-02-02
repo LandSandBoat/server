@@ -12133,7 +12133,10 @@ void CLuaBaseEntity::setDropID(uint32 dropID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    static_cast<CMobEntity*>(m_PBaseEntity)->m_DropID = dropID;
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    PMob->m_DropID = dropID;
+    PMob->m_DropListModifications.clear();
 }
 
 /************************************************************************
@@ -12272,6 +12275,25 @@ int16 CLuaBaseEntity::getTHlevel()
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
     return PMob->isDead() ? PMob->m_THLvl : PMob->PEnmityContainer->GetHighestTH();
+}
+
+/************************************************************************
+ *  Function: addDropListModification()
+ *  Purpose : Adds a modification to the drop list of this mob, to be applied just before loot is rolled.
+ *  Example : mob:addDropListModification(4112, 1000) -- Set drop rate of Potion to 100%
+ *  Notes   : Erased on death, once the modifications are applied.
+ *          : Modifications are cleared if the drop list is changed.
+ ************************************************************************/
+
+void CLuaBaseEntity::addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    uint8 dropType = va[0].get_type() == sol::type::number ? va[0].as<uint8>() : 0;
+
+    PMob->m_DropListModifications[id] = std::pair<uint16, uint8>(newRate, dropType);
 }
 
 //==========================================================//
@@ -12954,6 +12976,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);
     SOL_REGISTER("itemStolen", CLuaBaseEntity::itemStolen);
     SOL_REGISTER("getTHlevel", CLuaBaseEntity::getTHlevel);
+    SOL_REGISTER("addDropListModification", CLuaBaseEntity::addDropListModification);
+
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 }
