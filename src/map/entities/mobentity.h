@@ -184,6 +184,9 @@ public:
 
     uint32 m_DropID; // dropid of items to be dropped. dropid in Database (mob_droplist)
 
+    // ItemID, <Droprate, DropType>
+    std::map<uint16, std::pair<uint16, uint8>> m_DropListModifications;
+
     uint8  m_minLevel; // lowest possible level of the mob
     uint8  m_maxLevel; // highest possible level of the mob
     uint32 HPmodifier; // HP in Database (mob_groups)
