@@ -24,11 +24,9 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-
 entity.onEventFinish = function(player, csid, option)
     if csid == 18 then
-        player:addKeyItem(tpz.ki.CALIGINOUS_BLADE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CALIGINOUS_BLADE)
+        npcUtil.giveKeyItem(player, tpz.ki.CALIGINOUS_BLADE)
         player:setCharVar("anUndyingPledgeCS", 3)
         player:setCharVar("anUndyingPledgeNM_killed", 0)
     end
