@@ -3225,8 +3225,9 @@ namespace luautils
         sol::function onAbilityCheck = GetCacheEntryFromFilename(filename)["onAbilityCheck"];
         if (!onAbilityCheck.valid())
         {
-            ShowWarning("luautils::onAbilityCheck - Ability %s not found.\n", PAbility->getName());
-            return 87;
+            // TODO: We rely on this to fail silently in certain cases, but this is bad :(
+            //ShowWarning("luautils::onAbilityCheck - Ability %s not found.\n", PAbility->getName());
+            return 0;
         }
 
         auto result = onAbilityCheck(CLuaBaseEntity(PChar), CLuaBaseEntity(PTarget), CLuaAbility(PAbility));
