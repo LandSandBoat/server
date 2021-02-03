@@ -14665,6 +14665,80 @@ INSERT INTO `mob_groups` VALUES (39,4845,274,'Apex_Twitherym',330,0,0,0,0,134,13
 INSERT INTO `mob_groups` VALUES (40,4846,274,'Apex_Ironclad',330,0,0,0,0,134,136,0);
 INSERT INTO `mob_groups` VALUES (41,4847,274,'Apex_Bat',330,0,0,0,0,134,136,0);
 
+-- --------------------------------------------------------------
+-- Outer_RaKaznar_[U] (Zone 275)
+-- --------------------------------------------------------------
+
+INSERT INTO `mob_groups` VALUES (1,0,275,'Acrimonious_Dullahan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,275,'Cantankerous_Yztarg',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,0,275,'Impervious_Marolith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,0,275,'Shambling_Naraka',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,0,275,'Watchdog_Orthrus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,0,275,'Unwavering_Ironclad',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,0,275,'Jaunting_Yecuex',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,0,275,'Tweeting_Caeferli',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,0,275,'Snorting_Skormoth',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,0,275,'Wafting_Fluturini',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,0,275,'Splenetic_Umbril',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,0,275,'Breathless_Clansman',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (13,0,275,'Effluvial_Acuex',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (14,0,275,'Dismal_Djinn',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (15,0,275,'Burnished_Mimic',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (16,0,275,'Spooked_Heartwing',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (17,0,275,'Putraxia',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (18,0,275,'Fire_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (19,0,275,'Ice_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (20,0,275,'Earth_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,0,275,'Air_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (22,0,275,'Thunder_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (23,0,275,'Water_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (24,0,275,'Light_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (25,0,275,'Dark_Elemental',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,0,275,'Wicked_Baelfyr',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,0,275,'Conniving_Gefyrst',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (28,0,275,'Vile_Byrgen',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,0,275,'Reckless_Ungeweder',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,0,275,'Blightslither',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (31,0,275,'Spiteful_Byrgen',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (32,0,275,'Psychotic_Gefyrst',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (33,0,275,'Insidivo',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,0,275,'Corrupt_Baelfyr',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,0,275,'Insidious_Ungeweder',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,0,275,'Rancibus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,0,275,'Ravaging_Acuex',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,0,275,'Gangrenous_Leech',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,0,275,'Dreary_Obdella',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,0,275,'Unabated_Mush',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,0,275,'Jaundiced_Slime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (42,0,275,'Murkcrawler',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (43,0,275,'Brimboil',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (44,0,275,'Palloritus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (45,0,275,'Spurned_Saboteur',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (46,0,275,'Spurned_Fluteslinger',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (47,0,275,'Spurned_Nightstalker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (48,0,275,'Spurned_Deeparrow',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (49,0,275,'Spurned_Hexer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (50,0,275,'Spurned_Elementalist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (51,0,275,'Spurned_Engraver',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (52,0,275,'Spurned_Valiant',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,275,'Shunned_Saboteur',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,275,'Shunned_Nightstalker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,275,'Shunned_Deeparrow',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,275,'Shunned_Fluteslinger',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,275,'Shunned_Hexer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (58,0,275,'Shunned_Elementalist',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (59,0,275,'Shunned_Engraver',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (60,0,275,'Shunned_Valiant',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (61,0,275,'Wailing_Corse',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (62,0,275,'Lightreaper',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (63,0,275,'Disdained_One',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (64,0,275,'Disdaineds_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (65,0,275,'Disdaineds_Hound',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (66,0,275,'Disdaineds_Wyvern',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (67,0,275,'Luopan',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (68,0,275,'Perfidien',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (69,0,275,'Plouton',0,128,0,0,0,0,0,0);
+
 -- ------------------------------------------------------------
 -- RaKaznar_Inner_Court (Zone 276)
 -- ------------------------------------------------------------
