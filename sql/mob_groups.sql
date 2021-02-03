@@ -14811,6 +14811,21 @@ INSERT INTO `mob_groups` VALUES (6,0,277,'Palloritus',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7,0,277,'Perfidien',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (8,0,277,'Plouton',0,128,0,0,0,0,0,0);
 
+-- --------------------------------------------------------------
+-- Walk_of_Echoes_[P2] (Zone 279)
+-- --------------------------------------------------------------
+
+INSERT INTO `mob_groups` VALUES (1,0,279,'Odin_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,279,'Cait_Sith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,0,279,'Alexander',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,0,279,'Lady_Lilith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,0,279,'Aquila',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,0,279,'Haudrale',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,0,279,'Larzos',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,0,279,'Dark_Gyves',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,0,279,'Lilith_Ascendant',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,0,279,'Light_Gyves',0,128,0,0,0,0,0,0);
+
 -- ------------------------------------------------------------
 -- Escha_ZiTah (Zone 288)
 -- ------------------------------------------------------------
