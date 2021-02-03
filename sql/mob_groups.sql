@@ -14799,6 +14799,19 @@ INSERT INTO `mob_groups` VALUES (51,5460,276,'Indomitable_Spurned5',0,128,0,0,0,
 INSERT INTO `mob_groups` VALUES (52,4842,276,'Indomitable_Spurned',0,128,0,0,0,118,124,0);
 
 -- ------------------------------------------------------------
+-- RaKaznar_Turris (Zone 277)
+-- ------------------------------------------------------------
+
+INSERT INTO `mob_groups` VALUES (1,0,277,'Hades',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,277,'Arciela',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,0,277,'Teodor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,0,277,'Putraxia',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,0,277,'Rancibus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,0,277,'Palloritus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,0,277,'Perfidien',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,0,277,'Plouton',0,128,0,0,0,0,0,0);
+
+-- ------------------------------------------------------------
 -- Escha_ZiTah (Zone 288)
 -- ------------------------------------------------------------
 
