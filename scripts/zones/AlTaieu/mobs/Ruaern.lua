@@ -9,6 +9,12 @@ require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
+local function clearTowerVars(player, towerNum)
+    player:setCharVar("Ru_aern_"..towerNum.."-1KILL", 0)
+    player:setCharVar("Ru_aern_"..towerNum.."-2KILL", 0)
+    player:setCharVar("Ru_aern_"..towerNum.."-3KILL", 0)
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") < 3) then
@@ -46,12 +52,6 @@ entity.onMobDeath = function(mob, player, isKiller)
             clearTowerVars(player, 3)
         end
     end
-end
-
-local function clearTowerVars(player, towerNum)
-    player:setCharVar("Ru_aern_"..towerNum.."-1KILL", 0)
-    player:setCharVar("Ru_aern_"..towerNum.."-2KILL", 0)
-    player:setCharVar("Ru_aern_"..towerNum.."-3KILL", 0)
 end
 
 return entity

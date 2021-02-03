@@ -7269,6 +7269,25 @@ void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsID)
 }
 
 /************************************************************************
+ *  Function: trySkillUp()
+ *  Purpose : Attempts to increase skill for <skill> based on compared mob <level>
+ *  Example : player:trySkillUp(tpz.skill.HAND_TO_HAND, 50)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::trySkillUp(uint8 skill, uint8 level)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("CLuaBaseEntity::trySkillUp() - Non-PC passed to function.\n");
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::TrySkillUP(PChar, static_cast<SKILLTYPE>(skill), level);
+}
+
+/************************************************************************
  *  Function: addWeaponSkillPoints()
  *  Purpose : Removes a learned weaponskill from the player
  *  Example : player:addWeaponSkillPoints(tpz.slot.MAIN, 300)
@@ -12662,6 +12681,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addLearnedWeaponskill", CLuaBaseEntity::addLearnedWeaponskill);
     SOL_REGISTER("hasLearnedWeaponskill", CLuaBaseEntity::hasLearnedWeaponskill);
     SOL_REGISTER("delLearnedWeaponskill", CLuaBaseEntity::delLearnedWeaponskill);
+    SOL_REGISTER("trySkillUp", CLuaBaseEntity::trySkillUp);
 
     SOL_REGISTER("addWeaponSkillPoints", CLuaBaseEntity::addWeaponSkillPoints);
 
