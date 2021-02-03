@@ -14745,9 +14745,9 @@ INSERT INTO `mob_groups` VALUES (69,0,275,'Plouton',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (1,6329,276,'Draftdance_Fluturini',330,0,0,0,0,117,123,0);
 INSERT INTO `mob_groups` VALUES (2,5432,276,'Poxhound',330,0,0,0,0,117,123,0);
-INSERT INTO `mob_groups` VALUES (3,6579,276,'Deserter_Draugar',330,0,0,0,0,117,123,0);
-INSERT INTO `mob_groups` VALUES (4,6580,276,'Deserter_Draugar',330,0,0,0,0,117,123,0);
-INSERT INTO `mob_groups` VALUES (5,6578,276,'Deserter_Draugar',330,0,0,0,9999,117,123,0);
+INSERT INTO `mob_groups` VALUES (3,6579,276,'Deserter_Draugar_drg',330,0,0,0,0,117,123,0);
+INSERT INTO `mob_groups` VALUES (4,6580,276,'Deserter_Draugar_blm',330,0,0,0,9999,117,123,0);
+INSERT INTO `mob_groups` VALUES (5,6578,276,'Deserter_Draugar_drk',330,0,0,0,9999,117,123,0);
 INSERT INTO `mob_groups` VALUES (6,5433,276,'Wayward_Bhoot',330,0,0,0,9000,117,123,0);
 INSERT INTO `mob_groups` VALUES (7,5434,276,'Dolorous_Cyhiraeth',330,0,0,0,9000,117,123,0);
 INSERT INTO `mob_groups` VALUES (8,5435,276,'Spurned_Saboteur',330,0,0,0,9000,117,123,0);
@@ -14771,9 +14771,9 @@ INSERT INTO `mob_groups` VALUES (25,5250,276,'Dullahan_Axegrinder',330,0,0,0,0,1
 INSERT INTO `mob_groups` VALUES (26,5461,276,'Ironclad_Wrecker',330,0,0,0,0,118,124,0);
 INSERT INTO `mob_groups` VALUES (27,5449,276,'Slimeskin_Obdella',330,0,0,0,0,118,124,0);
 INSERT INTO `mob_groups` VALUES (28,5448,276,'Bilespouting_Acuex',330,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (29,4824,276,'Apex_Draugar3',330,0,0,0,0,137,139,0);
-INSERT INTO `mob_groups` VALUES (30,4825,276,'Apex_Draugar2',330,0,0,0,0,137,139,0);
-INSERT INTO `mob_groups` VALUES (31,4826,276,'Apex_Draugar1',330,0,0,0,0,137,139,0);
+INSERT INTO `mob_groups` VALUES (29,4824,276,'Apex_Draugar_blm',330,0,0,0,0,137,139,0);
+INSERT INTO `mob_groups` VALUES (30,4825,276,'Apex_Draugar_drg',330,0,0,0,0,137,139,0);
+INSERT INTO `mob_groups` VALUES (31,4826,276,'Apex_Draugar_drk',330,0,0,0,0,137,139,0);
 INSERT INTO `mob_groups` VALUES (32,5450,276,'Disheveled_Naraka',330,0,0,0,9000,137,139,0);
 INSERT INTO `mob_groups` VALUES (33,4829,276,'Apex_Bhoot',330,0,0,0,0,137,139,0);
 INSERT INTO `mob_groups` VALUES (34,5462,276,'Inimical_Corse',330,0,0,0,0,137,139,0);
@@ -14786,15 +14786,17 @@ INSERT INTO `mob_groups` VALUES (40,5261,276,'Dimensional_Tether',330,0,0,0,0,11
 INSERT INTO `mob_groups` VALUES (41,4843,276,'Distraught_Draugar',3600,0,0,0,0,118,124,0);
 INSERT INTO `mob_groups` VALUES (42,6577,276,'Distraught_Draugar',3600,0,0,0,0,118,124,0);
 INSERT INTO `mob_groups` VALUES (43,5454,276,'Wretched_Umbril',330,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (44,5455,276,'Heliotrope_Barrier',330,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (45,5456,276,'Indomitable_Spurned1',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (46,5458,276,'Indomitable_Spurned3',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (47,5459,276,'Indomitable_Spurned4',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (48,5457,276,'Indomitable_Spurned2',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (49,4840,276,'Indomitable_Spurned',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (50,4841,276,'Indomitable_Spurned',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (51,5460,276,'Indomitable_Spurned5',3600,0,0,0,0,118,124,0);
-INSERT INTO `mob_groups` VALUES (52,4842,276,'Indomitable_Spurned',3600,0,0,0,0,118,124,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (44,5455,276,'Heliotrope_Barrier',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (45,5456,276,'Indomitable_Spurned1',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (46,5458,276,'Indomitable_Spurned3',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (47,5459,276,'Indomitable_Spurned4',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (48,5457,276,'Indomitable_Spurned2',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (49,4840,276,'Indomitable_Spurned',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (50,4841,276,'Indomitable_Spurned',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (51,5460,276,'Indomitable_Spurned5',0,128,0,0,0,118,124,0);
+INSERT INTO `mob_groups` VALUES (52,4842,276,'Indomitable_Spurned',0,128,0,0,0,118,124,0);
 
 -- ------------------------------------------------------------
 -- Escha_ZiTah (Zone 288)
