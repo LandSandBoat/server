@@ -14827,6 +14827,52 @@ INSERT INTO `mob_groups` VALUES (9,0,279,'Lilith_Ascendant',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (10,0,279,'Light_Gyves',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
+-- Maquette_Abdhaljs-Legion_B (Zone 287)
+-- ------------------------------------------------------------
+
+INSERT INTO `mob_groups` VALUES (1,5744,287,'Lofty_Behemoth',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,5745,287,'Lofty_Wyrm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,5746,287,'Lofty_Adamantoise',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,5747,287,'Lofty_Elasmoth',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,5748,287,'Lofty_Zilant',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,5749,287,'Lofty_Ferromantoise',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,5750,287,'Lofty_Harpeia',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,4203,287,'Varanus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,5791,287,'Mired_Cerberus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,5790,287,'Mired_Khimaira',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,5789,287,'Mired_Hydra',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,5794,287,'Mired_Orthrus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (13,5793,287,'Mired_Khrysokhimaira',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (14,5792,287,'Mired_Alfard',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (15,5783,287,'Mired_Mantis',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (16,5797,287,'Soaring_Corse',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (17,5796,287,'Soaring_Dvergr',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (18,5795,287,'Soaring_Vampyr',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (19,5800,287,'Soaring_Kumakatok',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (20,5799,287,'Soaring_Dweorg',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,5798,287,'Soaring_Strigoi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (22,5784,287,'Soaring_Naraka',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (23,5805,287,'Veiled_Amphiptere',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (24,5806,287,'Veiled_Ixion',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (25,5801,287,'Veiled_Sandworm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,5802,287,'Veiled_Sanguiptere',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,5803,287,'Veiled_Alicorn',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (28,5804,287,'Veiled_Gigaworm',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (29,5782,287,'Veiled_Ironclad',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (30,5781,287,'Paramount_Naraka',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (31,5780,287,'Paramount_Harpeia',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (32,5779,287,'Paramount_Mantis',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (33,5778,287,'Paramount_Ironclad',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (34,5777,287,'Paramount_Gallu',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (35,5776,287,'Paramount_Botulus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (36,0,287,'Paramount_Avatar',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (37,0,287,'Auspicious_Entity',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (38,0,287,'Bozzetto_Freyja',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (39,0,287,'Bozzetto_Frigg',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (40,0,287,'Bozzetto_Skathi',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (41,0,287,'Achimi',0,128,0,0,0,0,0,0);
+
+-- ------------------------------------------------------------
 -- Escha_ZiTah (Zone 288)
 -- ------------------------------------------------------------
 
