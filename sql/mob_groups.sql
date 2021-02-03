@@ -14578,37 +14578,43 @@ INSERT INTO `mob_groups` VALUES (45,5390,272,'Apex_Crab',300,0,0,0,0,128,130,0);
 -- Woh_Gates (Zone 273)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,6711,273,'Knotted_Root',3600,0,0,0,0,110,111,0);
-INSERT INTO `mob_groups` VALUES (2,6382,273,'Stonesoftener_Acuex',3600,0,0,0,0,110,111,0);
-INSERT INTO `mob_groups` VALUES (3,6477,273,'Draftrider_Bat',3600,0,0,0,0,110,111,0);
-INSERT INTO `mob_groups` VALUES (4,4989,273,'Cliffclinger_Toad',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (5,6340,273,'Drusy_Twitherym',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (6,6714,273,'Spinescent_Protuberance',600,0,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (7,6697,273,'Bergschrund_Gefyrst',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (8,4752,273,'Wheezing_Acuex',600,0,0,0,5000,124,127,0);
-INSERT INTO `mob_groups` VALUES (9,6808,273,'Talus_Tarichuk',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (10,6421,273,'Metalcruncher_Worm',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (11,5358,273,'Serac_Rabbit',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (12,6603,273,'Powdery_Snoll',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (13,6476,273,'Grimfang_Bat',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (14,6703,273,'Calcined_Umbril',600,0,0,0,9999,124,127,0);
-INSERT INTO `mob_groups` VALUES (15,6442,273,'Depthdiver_Bats',600,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (16,5640,273,'Malodorous_Tarichuk',330,0,0,0,0,121,123,0);
-INSERT INTO `mob_groups` VALUES (17,6339,273,'Bound_Twitherym',330,0,0,0,0,121,123,0);
-INSERT INTO `mob_groups` VALUES (18,6698,273,'Touched_Gefyrst',0,4,0,0,9999,121,123,0);
-INSERT INTO `mob_groups` VALUES (19,5756,273,'Slabspitter_Jagil',330,0,0,0,0,121,123,0);
-INSERT INTO `mob_groups` VALUES (20,6479,273,'Nesting_Hippogryph',330,0,0,0,0,124,127,0);
-INSERT INTO `mob_groups` VALUES (21,6381,273,'Pestiferous_Acuex',330,0,0,0,0,121,124,0);
-INSERT INTO `mob_groups` VALUES (22,6478,273,'Soundsplitter_Bat',330,0,0,0,0,121,124,0);
-INSERT INTO `mob_groups` VALUES (23,5250,273,'Wayward_Dullahan',330,0,0,0,0,121,124,0);
-INSERT INTO `mob_groups` VALUES (24,6706,273,'Schorl_Umbril',330,0,0,0,0,121,124,0);
-INSERT INTO `mob_groups` VALUES (25,5475,273,'Cowll_Hippogryph',0,128,0,0,0,130,130,0);
-INSERT INTO `mob_groups` VALUES (26,5393,273,'Apex_Jagil',300,0,0,0,0,130,133,0);
-INSERT INTO `mob_groups` VALUES (27,5219,273,'Velkk_Tearlicker',600,0,0,0,0,130,133,0);
-INSERT INTO `mob_groups` VALUES (28,5218,273,'Velkk_Mindmelter',600,0,0,0,5000,130,133,0);
-INSERT INTO `mob_groups` VALUES (29,5220,273,'Velkk_Junglemancer',600,0,0,0,5000,130,133,0);
-INSERT INTO `mob_groups` VALUES (30,5217,273,'Velkk_Abyssal',600,0,0,0,0,130,133,0);
-INSERT INTO `mob_groups` VALUES (31,5399,273,'Apex_Toad',300,0,0,0,0,130,133,0);
+-- fished
+INSERT INTO `mob_groups` VALUES (1,6942,273,'Chrysoberyl_Jagil',0,128,0,0,0,111,111,0);
+INSERT INTO `mob_groups` VALUES (2,0,273,'Deadwater_Toad',0,128,0,0,0,110,110,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (3,6711,273,'Knotted_Root',0,128,0,0,0,110,111,0);
+INSERT INTO `mob_groups` VALUES (4,6382,273,'Stonesoftener_Acuex',0,128,0,0,0,110,110,0);
+INSERT INTO `mob_groups` VALUES (5,6477,273,'Draftrider_Bat',0,128,0,0,0,110,110,0);
+
+INSERT INTO `mob_groups` VALUES (6,4989,273,'Cliffclinger_Toad',600,0,0,0,0,124,126,0);
+INSERT INTO `mob_groups` VALUES (7,6340,273,'Drusy_Twitherym',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (8,6714,273,'Spinescent_Protuberance',600,0,0,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (9,6697,273,'Bergschrund_Gefyrst',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (10,4752,273,'Wheezing_Acuex',600,0,0,0,5000,124,127,0);
+INSERT INTO `mob_groups` VALUES (11,6808,273,'Talus_Tarichuk',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (12,6421,273,'Metalcruncher_Worm',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (13,5358,273,'Serac_Rabbit',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (14,6603,273,'Powdery_Snoll',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (15,6476,273,'Grimfang_Bat',600,0,0,0,0,124,127,0);
+INSERT INTO `mob_groups` VALUES (16,6703,273,'Calcined_Umbril',600,0,0,0,9999,125,127,0);
+INSERT INTO `mob_groups` VALUES (17,6442,273,'Depthdiver_Bats',600,0,0,0,0,124,126,0);
+INSERT INTO `mob_groups` VALUES (18,5640,273,'Malodorous_Tarichuk',330,0,0,0,0,121,123,0);
+INSERT INTO `mob_groups` VALUES (19,6339,273,'Bound_Twitherym',330,0,0,0,0,121,123,0);
+INSERT INTO `mob_groups` VALUES (20,6698,273,'Touched_Gefyrst',300,4,0,0,9999,121,122,0);
+INSERT INTO `mob_groups` VALUES (21,5756,273,'Slabspitter_Jagil',330,0,0,0,0,121,123,0);
+INSERT INTO `mob_groups` VALUES (22,6479,273,'Nesting_Hippogryph',330,0,0,0,0,125,125,0);
+INSERT INTO `mob_groups` VALUES (23,6381,273,'Pestiferous_Acuex',330,0,0,0,0,121,124,0);
+INSERT INTO `mob_groups` VALUES (24,6478,273,'Soundsplitter_Bat',330,0,0,0,0,121,124,0);
+INSERT INTO `mob_groups` VALUES (25,5250,273,'Wayward_Dullahan',330,0,0,0,0,121,124,0);
+INSERT INTO `mob_groups` VALUES (26,6706,273,'Schorl_Umbril',330,0,0,0,0,122,124,0);
+INSERT INTO `mob_groups` VALUES (27,5475,273,'Cowll_Hippogryph',0,128,0,0,0,131,133,0);
+INSERT INTO `mob_groups` VALUES (28,5393,273,'Apex_Jagil',300,0,0,0,0,130,133,0);
+INSERT INTO `mob_groups` VALUES (29,5219,273,'Velkk_Tearlicker',600,0,0,0,0,130,133,0);
+INSERT INTO `mob_groups` VALUES (30,5218,273,'Velkk_Mindmelter',600,0,0,0,5000,130,133,0);
+INSERT INTO `mob_groups` VALUES (31,5220,273,'Velkk_Junglemancer',600,0,0,0,5000,130,133,0);
+INSERT INTO `mob_groups` VALUES (32,5217,273,'Velkk_Abyssal',600,0,0,0,0,130,133,0);
+INSERT INTO `mob_groups` VALUES (33,5399,273,'Apex_Toad',300,0,0,0,0,130,133,0);
 
 -- ------------------------------------------------------------
 -- Outer_RaKaznar (Zone 274)
