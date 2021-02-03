@@ -14620,10 +14620,10 @@ INSERT INTO `mob_groups` VALUES (33,5399,273,'Apex_Toad',300,0,0,0,0,130,133,0);
 -- Outer_RaKaznar (Zone 274)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,5316,274,'Legionless_Draugar3',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (2,5245,274,'Legionless_Draugar2',330,0,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (1,5316,274,'Legionless_Draugar_blm',330,0,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (2,5245,274,'Legionless_Draugar_drg',330,0,0,0,0,113,116,0);
 INSERT INTO `mob_groups` VALUES (3,5246,274,'Dreadhound',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (4,5244,274,'Legionless_Draugar1',330,0,0,0,9999,113,116,0);
+INSERT INTO `mob_groups` VALUES (4,5244,274,'Legionless_Draugar_drk',330,0,0,0,9999,113,116,0);
 INSERT INTO `mob_groups` VALUES (5,5236,274,'Restless_Twitherym',330,0,0,0,0,113,116,0);
 INSERT INTO `mob_groups` VALUES (6,5237,274,'Shunned_Deeparrow',330,0,0,0,0,113,116,0);
 INSERT INTO `mob_groups` VALUES (7,5238,274,'Shunned_Nightstalker',330,0,0,0,0,113,116,0);
@@ -14645,19 +14645,22 @@ INSERT INTO `mob_groups` VALUES (22,5255,274,'Shunned_Engraver',330,0,0,0,0,113,
 INSERT INTO `mob_groups` VALUES (23,5256,274,'Shunned_Valiant',330,0,0,0,0,113,116,0);
 INSERT INTO `mob_groups` VALUES (24,5257,274,'Bristlehair_Bat',330,0,0,0,0,113,116,0);
 INSERT INTO `mob_groups` VALUES (25,5258,274,'Ironclad',330,0,0,0,0,120,120,0);
-INSERT INTO `mob_groups` VALUES (26,5261,274,'Dimensional_Tether',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (27,5263,274,'Procrustean_Draugar2',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (28,5262,274,'Procrustean_Draugar1',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (29,5264,274,'Festering_Umbril',330,0,0,0,9999,113,116,0);
-INSERT INTO `mob_groups` VALUES (30,5265,274,'Amaranth_Barrier',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (31,5268,274,'Vengeful_Shunned_3',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (32,5267,274,'Vengeful_Shunned_2',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (33,5266,274,'Vengeful_Shunned_1',330,0,0,0,9999,113,116,0);
-INSERT INTO `mob_groups` VALUES (34,5269,274,'Vengeful_Shunned_4',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (35,5270,274,'Vengeful_Shunned_5',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (36,5272,274,'Vengeful_Shunned_7',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (37,5271,274,'Vengeful_Shunned_6',330,0,0,0,0,113,116,0);
-INSERT INTO `mob_groups` VALUES (38,5273,274,'Vengeful_Shunned_8',330,0,0,0,0,113,116,0);
+
+-- reive
+INSERT INTO `mob_groups` VALUES (26,5261,274,'Dimensional_Tether',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (27,5263,274,'Procrustean_Draugar_drg',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (28,5262,274,'Procrustean_Draugar_drk',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (29,5264,274,'Festering_Umbril',0,128,0,0,9999,113,116,0);
+INSERT INTO `mob_groups` VALUES (30,5265,274,'Amaranth_Barrier',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (31,5268,274,'Vengeful_Shunned_3',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (32,5267,274,'Vengeful_Shunned_2',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (33,5266,274,'Vengeful_Shunned_1',0,128,0,0,9999,113,116,0);
+INSERT INTO `mob_groups` VALUES (34,5269,274,'Vengeful_Shunned_4',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (35,5270,274,'Vengeful_Shunned_5',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (36,5272,274,'Vengeful_Shunned_7',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (37,5271,274,'Vengeful_Shunned_6',0,128,0,0,0,113,116,0);
+INSERT INTO `mob_groups` VALUES (38,5273,274,'Vengeful_Shunned_8',0,128,0,0,0,113,116,0);
+
 INSERT INTO `mob_groups` VALUES (39,4845,274,'Apex_Twitherym',330,0,0,0,0,134,136,0);
 INSERT INTO `mob_groups` VALUES (40,4846,274,'Apex_Ironclad',330,0,0,0,0,134,136,0);
 INSERT INTO `mob_groups` VALUES (41,4847,274,'Apex_Bat',330,0,0,0,0,134,136,0);
