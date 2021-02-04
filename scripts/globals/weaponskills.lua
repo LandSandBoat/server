@@ -64,6 +64,28 @@ function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
     return finaldmg, calcParams
 end
 
+local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDamage)
+    local adjustedDamage = rawDamage
+
+    if not wsParams.formless then
+        adjustedDamage = target:physicalDmgTaken(adjustedDamage, attackTbl.damageType)
+
+        if attackTbl.weaponType == tpz.skill.HAND_TO_HAND then
+            adjustedDamage = adjustedDamage * target:getMod(tpz.mod.HTHRES) / 1000
+        elseif attackTbl.weaponType == tpz.skill.DAGGER or attackTbl.weaponType == tpz.skill.POLEARM then
+            adjustedDamage = adjustedDamage * target:getMod(tpz.mod.PIERCERES) / 1000
+        elseif attackTbl.weaponType == tpz.skill.CLUB or attackTbl.weaponType == tpz.skill.STAFF then
+            adjustedDamage = adjustedDamage * target:getMod(tpz.mod.IMPACTRES) / 1000
+        else
+            adjustedDamage = adjustedDamage * target:getMod(tpz.mod.SLASHRES) / 1000
+        end
+    end
+
+    adjustedDamage = adjustedDamage + souleaterBonus(attacker)
+
+    return adjustedDamage
+end
+
 -- Calculates the raw damage for a weaponskill, used by both doPhysicalWeaponskill and doRangedWeaponskill.
 -- Behavior of damage calculations can vary based on the passed in calcParams, which are determined by the calling function
 -- depending on the type of weaponskill being done, and any special cases for that weaponskill
@@ -177,6 +199,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local dmg = mainBase * ftp
     hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
+    if calcParams.melee then
+        hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
+    end
+
     if hitdmg > 0 then
         attacker:trySkillUp(calcParams.skillType, targetLvl)
     end
@@ -214,6 +240,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
         hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
 
+        if calcParams.melee then
+            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
+        end
+
         if hitdmg > 0 then
             attacker:trySkillUp(calcParams.skillType, targetLvl)
         end
@@ -233,6 +263,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
+        if calcParams.melee then
+            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
+        end
+
         if hitdmg > 0 then
             attacker:trySkillUp(calcParams.skillType, targetLvl)
         end
@@ -243,15 +277,10 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     calcParams.extraHitsLanded = calcParams.hitsLanded
 
-    -- Apply Souleater bonus
-    if calcParams.melee then -- souleaterBonus() checks for the effect inside itself
-        finaldmg = finaldmg + souleaterBonus(attacker, (calcParams.tpHitsLanded+calcParams.extraHitsLanded))
-    end
-
     -- Factor in "all hits" bonus damage mods
     local bonusdmg = attacker:getMod(tpz.mod.ALL_WSDMG_ALL_HITS) -- For any WS
 
-    if (attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then -- For specific WS
+    if attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then -- For specific WS
         bonusdmg = bonusdmg + attacker:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
     end
 
@@ -288,6 +317,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
 
     local calcParams = {}
     calcParams.wsID = wsID
+    calcParams.attackInfo = attack
     calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.fSTR = fSTR(attacker:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), attacker:getWeaponDmgRank())
     calcParams.cratio = cratio
@@ -324,20 +354,6 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffectsByFlag(tpz.effectFlag.DETECTABLE)
     attacker:delStatusEffect(tpz.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(tpz.effect.BUILDING_FLOURISH)
-
-    -- Calculate reductions
-    if not wsParams.formless then
-        finaldmg = target:physicalDmgTaken(finaldmg, attack.damageType)
-        if attack.weaponType == tpz.skill.HAND_TO_HAND then
-            finaldmg = finaldmg * target:getMod(tpz.mod.HTHRES) / 1000
-        elseif attack.weaponType == tpz.skill.DAGGER or attack.weaponType == tpz.skill.POLEARM then
-            finaldmg = finaldmg * target:getMod(tpz.mod.PIERCERES) / 1000
-        elseif attack.weaponType == tpz.skill.CLUB or attack.weaponType == tpz.skill.STAFF then
-            finaldmg = finaldmg * target:getMod(tpz.mod.IMPACTRES) / 1000
-        else
-            finaldmg = finaldmg * target:getMod(tpz.mod.SLASHRES) / 1000
-        end
-    end
 
     finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
@@ -594,29 +610,24 @@ function fencerBonus(attacker)
     return bonus
 end
 
-function souleaterBonus(attacker, numhits)
+function souleaterBonus(attacker)
     local bonus = 0
 
     if attacker:hasStatusEffect(tpz.effect.SOULEATER) then
-        local damage = 0
         local percent = 0.1
 
         if attacker:getMainJob() ~= tpz.job.DRK then
             percent = percent / 2
         end
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(tpz.mod.SOULEATER_EFFECT))
 
-        local hitscounted = 0
-        while (hitscounted < numhits) do
-            local health = attacker:getHP()
-            if health > 10 then
-                damage = damage + health*percent
-            end
-            hitscounted = hitscounted + 1
+        percent = percent + math.min(0.02, 0.01 * attacker:getMod(tpz.mod.SOULEATER_EFFECT))
+        local health = attacker:getHP()
+
+        if health > 10 then
+            bonus = bonus + health * percent
         end
 
         attacker:delHP(numhits * 0.10 * attacker:getHP())
-        return damage
     end
 
     return bonus

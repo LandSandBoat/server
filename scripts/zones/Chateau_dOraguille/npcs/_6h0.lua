@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(90) -- Start
 
     -- Trust: San d'Oria (Trion)
-    elseif player:getRank() == 6 and player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+    elseif player:getRank() >= 6 and player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
     -- "A Boy's Dream" (PLD AF Feet)
