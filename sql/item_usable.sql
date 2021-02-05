@@ -33,7 +33,7 @@ CREATE TABLE `item_usable` (
   `reuseDelay` int(10) unsigned NOT NULL DEFAULT '0',
   `aoe` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

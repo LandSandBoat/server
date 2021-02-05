@@ -123,7 +123,7 @@ CREATE TABLE `char_points` (
   `deeds` smallint(5) unsigned NOT NULL DEFAULT '0',
 
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of char_points

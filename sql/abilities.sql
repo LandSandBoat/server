@@ -31,7 +31,7 @@ CREATE TABLE `abilities` (
   `addType` smallint(2) NOT NULL DEFAULT '0',
   `content_tag` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`abilityId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=56;
 
 --
 -- Dumping data for table `abilities`

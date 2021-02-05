@@ -30,7 +30,7 @@ CREATE TABLE `mob_droplist` (
   `itemId` smallint(5) unsigned NOT NULL DEFAULT '0',
   `itemRate` smallint(4) unsigned NOT NULL DEFAULT '0',
   KEY `dropId` (`dropId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=9;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=9;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
