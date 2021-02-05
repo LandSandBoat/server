@@ -94,7 +94,7 @@ local function checkForElevenRoll(caster)
 
         if
             effect:getType() == tpz.effect.RUNEISTS_ROLL and
-            effect:getSubPower() == 11)
+            effect:getSubPower() == 11
         then
             return true
         end
@@ -117,7 +117,7 @@ corsair.doWildCard = function(caster, target, ability, action, total)
     return total
 end
 
-corsair.corsairSetup - function(caster, ability, action, effect, job)
+corsair.corsairSetup = function(caster, ability, action, effect, job)
     local roll = math.random(1, 6)
     caster:delStatusEffectSilent(tpz.effect.DOUBLE_UP_CHANCE)
     caster:addStatusEffectEx(tpz.effect.DOUBLE_UP_CHANCE,
@@ -187,6 +187,17 @@ corsair.applyRoll = function(caster, target, ability, action, total)
     end
 
     return total
+end
+
+corsair.onAbilityCheck = function(player, target, ability, effectID)
+    ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
+    if player:hasStatusEffect(effectID) then
+        return tpz.msg.basic.ROLL_ALREADY_ACTIVE, 0
+    elseif corsair.atMaxCorsairBusts(player) then
+        return tpz.msg.basic.CANNOT_PERFORM, 0
+    else
+        return 0, 0
+    end
 end
 
 return corsair

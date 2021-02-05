@@ -34,14 +34,7 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     local effectID = tpz.effect.HEALERS_ROLL
-    ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
-    if player:hasStatusEffect(effectID) then
-        return tpz.msg.basic.ROLL_ALREADY_ACTIVE, 0
-    elseif corsair.atMaxCorsairBusts(player) then
-        return tpz.msg.basic.CANNOT_PERFORM, 0
-    else
-        return 0, 0
-    end
+    return corsair.onAbilityCheck(player, target, ability, effectID)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
