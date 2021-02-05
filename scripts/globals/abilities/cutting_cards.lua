@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
-corsair = require("scripts/globals/job_utils/corsair")
+local corsair = require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 

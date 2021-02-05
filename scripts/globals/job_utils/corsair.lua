@@ -17,7 +17,7 @@ local corsairRollMods =
     [tpz.jobAbility.CHAOS_ROLL       ] = { {6, 8, 9, 25, 11, 13, 16, 3, 17, 19, 31, 10},            3,    10, tpz.effect.CHAOS_ROLL,       tpz.mod.ATTP               },
     [tpz.jobAbility.MAGUSS_ROLL      ] = { {5, 20, 6, 8, 9, 3, 10, 13, 14, 15, 25, 5},              2,     8, tpz.effect.MAGUSS_ROLL,      tpz.mod.MDEF               },
     [tpz.jobAbility.HEALERS_ROLL     ] = { {3, 4, 12, 5, 6, 7, 1, 8, 9, 10, 16, 4},                 3,     4, tpz.effect.HEALERS_ROLL,     tpz.mod.CURE_POTENCY_RCVD  },
-    [tpz.jobAbility.DRACHEN_ROLL     ] = { {10, 13, 15, 40, 18, 20, 25, 5, 28, 30, 50, 15},         5,    15, tpz.effect.DRACHEN_ROLL,     MOD_PET_ACC                }, -- Mod Not Implemented
+    [tpz.jobAbility.DRACHEN_ROLL     ] = { {10, 13, 15, 40, 18, 20, 25, 5, 28, 30, 50, 15},         5,    15, tpz.effect.DRACHEN_ROLL,     MOD_PET_ACC                },
     [tpz.jobAbility.CHORAL_ROLL      ] = { {13, 55, 17, 20, 25, 8, 30, 35, 40, 45, 65, 25},         4,    25, tpz.effect.CHORAL_ROLL,      tpz.mod.SPELLINTERRUPT     },
     [tpz.jobAbility.MONKS_ROLL       ] = { {8, 10, 32, 12, 14, 16, 4, 20, 22, 24, 40, 11},          4,    10, tpz.effect.MONKS_ROLL,       tpz.mod.SUBTLE_BLOW        },
     [tpz.jobAbility.BEAST_ROLL       ] = { {4, 5, 7, 19, 8, 9, 11, 2, 13, 14, 23, 7},               3,    10, tpz.effect.BEAST_ROLL,       MOD_PET_ATTP               },
@@ -44,18 +44,22 @@ local corsairRollMods =
     [tpz.jobAbility.AVENGERS_ROLL    ] = { {2, 2, 3, 12, 4, 5, 6, 1, 7, 9, 18, 6},                  1,     0, tpz.effect.AVENGERS_ROLL,    tpz.mod.COUNTER            },
 }
 
-corsair.doCuttingCards = function(caster, target, ability, action, total)
-    caster:doCuttingCards(target, total)
-    ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
-    action:setAnimation(target:getID(), 132 + (total) - 1)
-    return total
-end
+-- Check for tpz.mod.PHANTOM_ROLL Value and apply non-stack logic.
+local function phantombuffMultiple(caster)
+    local phantomValue = caster:getMod(tpz.mod.PHANTOM_ROLL)
+    local phantombuffValue = 0
 
-corsair.doWildCard = function(caster, target, ability, action, total)
-    caster:doWildCard(target, total)
-    ability:setMsg(435 + math.floor((total-1)/2)*2)
-    action:setAnimation(target:getID(), 132 + (total) - 1)
-    return total
+    if phantomValue == 3 then
+        phantombuffMultiplier = 3
+    elseif phantomValue == 5 or phantomValue == 8 then
+        phantombuffMultiplier = 5
+    elseif phantomValue == 7 or phantomValue == 10 or phantomValue == 12 or phantomValue == 15 then
+        phantombuffMultiplier = 7
+    else
+        phantombuffMultiplier = 0
+    end
+
+    return phantombuffMultiplier
 end
 
 -- The following functions determine enhancement based on random vs effects
@@ -76,14 +80,91 @@ local function getRandomEnhancementRoll(caster, abilityId)
     return modValue ~= nil, randChance < modValue
 end
 
-corsair.applyRoll = function(abilityId, caster, target, ability, action, total)
+local function checkForElevenRoll(caster)
+    local effects = caster:getStatusEffects()
+
+    for _, effect in pairs(effects) do
+        if
+            effect:getType() >= tpz.effect.FIGHTERS_ROLL and
+            effect:getType() <= tpz.effect.NATURALISTS_ROLL and
+            effect:getSubPower() == 11
+        then
+            return true
+        end
+
+        if
+            effect:getType() == tpz.effect.RUNEISTS_ROLL and
+            effect:getSubPower() == 11)
+        then
+            return true
+        end
+    end
+
+    return false
+end
+
+corsair.doCuttingCards = function(caster, target, ability, action, total)
+    caster:doCuttingCards(target, total)
+    ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
+    action:setAnimation(target:getID(), 132 + (total) - 1)
+    return total
+end
+
+corsair.doWildCard = function(caster, target, ability, action, total)
+    caster:doWildCard(target, total)
+    ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
+    action:setAnimation(target:getID(), 132 + (total) - 1)
+    return total
+end
+
+corsair.corsairSetup - function(caster, ability, action, effect, job)
+    local roll = math.random(1, 6)
+    caster:delStatusEffectSilent(tpz.effect.DOUBLE_UP_CHANCE)
+    caster:addStatusEffectEx(tpz.effect.DOUBLE_UP_CHANCE,
+                             tpz.effect.DOUBLE_UP_CHANCE,
+                             roll,
+                             0,
+                             45,
+                             ability:getID(),
+                             effect,
+                             job,
+                             true)
+    caster:setLocalVar("corsairRollTotal", roll)
+    action:speceffect(caster:getID(), roll)
+
+    if checkForElevenRoll(caster) then
+        action:recast(action:recast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+    end
+
+    corsair.checkForJobBonus(caster, job)
+end
+
+corsair.checkForJobBonus = function(caster, job)
+    local jobBonus = 0
+
+    if caster:hasPartyJob(job) or math.random(0, 99) < caster:getMod(tpz.mod.JOB_BONUS_CHANCE) then
+        jobBonus = 1
+    end
+
+    caster:setLocalVar("corsairRollBonus", jobBonus)
+end
+
+corsair.atMaxCorsairBusts = function(caster)
+    local numBusts = caster:numBustEffects()
+    return (numBusts >= 2 and caster:getMainJob() == tpz.job.COR) or (numBusts >= 1 and caster:getMainJob() ~= tpz.job.COR)
+end
+
+corsair.applyRoll = function(caster, target, ability, action, total)
+    local abilityId = ability:getID()
     local duration = 300 + caster:getMerit(tpz.merit.WINNING_STREAK) + caster:getMod(tpz.mod.PHANTOM_DURATION)
     local effectpowers = corsairRollMods[abilityId][1]
     local effectpower = effectpowers[total]
     local isRandomEnhancement, doBonus = getRandomEnhancementRoll(caster, abilityId)
 
-    if isRandomEnhancement and doBonus then -- Broken out, because these are mutually exclusive.  Prevent the elseif from executing unintentionally.
-        effectpower = effectpower + corsairRollMods[abilityId][3]
+    if isRandomEnhancement then -- Broken out because these are mutually exclusive.  Prevent the elseif from executing unintentionally.
+        if doBonus then
+            effectpower = effectpower + corsairRollMods[abilityId][3]
+        end
     elseif caster:getLocalVar("corsairRollBonus") == 1 and total < 12 then
         effectpower = effectpower + corsairRollMods[abilityId][3]
     end

@@ -694,71 +694,6 @@ tpz.specEffect =
     CRITICAL_HIT   = 0x22,
 }
 
-function corsairSetup(caster, ability, action, effect, job)
-    local roll = math.random(1,6)
-    caster:delStatusEffectSilent(tpz.effect.DOUBLE_UP_CHANCE)
-    caster:addStatusEffectEx(tpz.effect.DOUBLE_UP_CHANCE,
-                             tpz.effect.DOUBLE_UP_CHANCE,
-                             roll,
-                             0,
-                             45,
-                             ability:getID(),
-                             effect,
-                             job,
-                             true)
-    caster:setLocalVar("corsairRollTotal", roll)
-    action:speceffect(caster:getID(), roll)
-    if (checkForElevenRoll(caster)) then
-        action:recast(action:recast()/2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
-    end
-    checkForJobBonus(caster, job)
-end
-
-function atMaxCorsairBusts(caster)
-    local numBusts = caster:numBustEffects()
-    return (numBusts >= 2 and caster:getMainJob() == tpz.job.COR) or (numBusts >= 1 and caster:getMainJob() ~= tpz.job.COR)
-end
-
-function checkForJobBonus(caster, job)
-    local jobBonus = 0
-    if (caster:hasPartyJob(job) or math.random(0, 99) < caster:getMod(tpz.mod.JOB_BONUS_CHANCE)) then
-        jobBonus = 1
-    end
-    caster:setLocalVar("corsairRollBonus", jobBonus)
-end
-
-function checkForElevenRoll(caster)
-    local effects = caster:getStatusEffects()
-    for _, effect in pairs(effects) do
-        if (effect:getType() >= tpz.effect.FIGHTERS_ROLL and
-            effect:getType() <= tpz.effect.NATURALISTS_ROLL and
-            effect:getSubPower() == 11) then
-            return true
-        end
-        if (effect:getType() == tpz.effect.RUNEISTS_ROLL and
-                effect:getSubPower() == 11) then
-            return true
-        end
-    end
-    return false
-end
-
-function phantombuffMultiple(caster) -- Check for tpz.mod.PHANTOM_ROLL Value and apply non-stack logic.
-    local phantomValue = caster:getMod(tpz.mod.PHANTOM_ROLL)
-    local phantombuffValue = 0
-    if (phantomValue == 3) then
-        phantombuffMultiplier = 3
-    elseif ((phantomValue == 5) or (phantomValue == 8)) then
-        phantombuffMultiplier = 5
-    elseif ((phantomValue == 7) or (phantomValue == 10) or (phantomValue == 12) or (phantomValue == 15)) then
-        phantombuffMultiplier = 7
-    else
-        phantombuffMultiplier = 0
-    end
-
-    return phantombuffMultiplier
-end
-
 function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav)
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
@@ -826,7 +761,6 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
 
     return dmg
 end
-
 
 function takeAbilityDamage(defender, attacker, params, primary, finaldmg, attackType, damageType, slot, tpHitsLanded, extraHitsLanded, shadowsAbsorbed, bonusTP, action, taChar)
     if tpHitsLanded + extraHitsLanded > 0 then

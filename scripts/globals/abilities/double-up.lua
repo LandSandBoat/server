@@ -9,7 +9,7 @@ require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
-corsair = require("scripts/globals/corsair")
+local corsair = require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
@@ -49,7 +49,7 @@ ability_object.onUseAbility = function(caster, target, ability, action)
         end
         caster:setLocalVar("corsairRollTotal", roll)
         action:speceffect(caster:getID(), roll - prev_roll:getSubPower())
-        checkForJobBonus(caster, job)
+        corsair.checkForJobBonus(caster, job)
     end
 
     local total = caster:getLocalVar("corsairRollTotal")
@@ -58,7 +58,7 @@ ability_object.onUseAbility = function(caster, target, ability, action)
     if (prev_ability) then
         action:setAnimation(target:getID(), prev_ability:getAnimation())
         action:actionID(prev_ability:getID())
-        local total = corsair.applyRoll(activeRoll, caster, target, ability, action, total)
+        local total = corsair.applyRoll(caster, target, prev_ability, action, total)
         local msg = ability:getMsg()
         if msg == 420 then
             ability:setMsg(tpz.msg.basic.DOUBLEUP)
