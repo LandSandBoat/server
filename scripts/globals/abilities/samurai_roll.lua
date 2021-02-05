@@ -31,15 +31,13 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     local effectID = tpz.effect.SAMURAI_ROLL
-    return corsair.onAbilityCheck(player, target, ability, effectID)
+    return corsair.onRollAbilityCheck(player, target, ability, effectID)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then
-        corsair.corsairSetup(caster, ability, action, tpz.effect.SAMURAI_ROLL, tpz.job.SAM)
-    end
-    local total = caster:getLocalVar("corsairRollTotal")
-    return corsair.applyRoll(caster, target, ability, action, total)
+    local effectID = tpz.effect.SAMURAI_ROLL
+    local bonusJob = tpz.job.SAM
+    return corsair.onRollUseAbility(caster, target, ability, action, effectID, bonusJob)
 end
 
 return ability_object

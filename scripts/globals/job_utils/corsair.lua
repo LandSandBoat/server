@@ -189,7 +189,7 @@ corsair.applyRoll = function(caster, target, ability, action, total)
     return total
 end
 
-corsair.onAbilityCheck = function(player, target, ability, effectID)
+corsair.onRollAbilityCheck = function(player, target, ability, effectID)
     ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
     if player:hasStatusEffect(effectID) then
         return tpz.msg.basic.ROLL_ALREADY_ACTIVE, 0
@@ -198,6 +198,15 @@ corsair.onAbilityCheck = function(player, target, ability, effectID)
     else
         return 0, 0
     end
+end
+
+corsair.onRollUseAbility = function(caster, target, ability, action, effectID, bonusJob)
+    if caster:getID() == target:getID() then
+        corsair.corsairSetup(caster, ability, action, tpz.effect.HUNTERS_ROLL, tpz.job.RNG)
+    end
+
+    local total = caster:getLocalVar("corsairRollTotal")
+    return applyRoll(caster, target, ability, action, total)
 end
 
 return corsair
