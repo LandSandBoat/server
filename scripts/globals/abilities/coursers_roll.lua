@@ -24,23 +24,16 @@
 -- 11          |+12
 -- Bust        |-5
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/ability")
-require("scripts/globals/status")
-require("scripts/globals/msg")
 local corsair = require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    local effectID = tpz.effect.COURSERS_ROLL
-    return corsair.onRollAbilityCheck(player, target, ability, effectID)
+    return corsair.onRollAbilityCheck(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    local effectID = tpz.effect.COURSERS_ROLL
-    local bonusJob = tpz.job.COR
-    return corsair.onRollUseAbility(caster, target, ability, action, effectID, bonusJob)
+    return corsair.onRollUseAbility(caster, target, ability, action)
 end
 
 return ability_object
