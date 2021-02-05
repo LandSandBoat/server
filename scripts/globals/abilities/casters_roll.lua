@@ -26,6 +26,7 @@ require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+corsair = require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
@@ -46,32 +47,7 @@ ability_object.onUseAbility = function(caster, target, ability, action)
         corsairSetup(caster, ability, action, tpz.effect.CASTERS_ROLL, tpz.job.COR)
     end
     local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster, target, ability, action, total)
-end
-
-function applyRoll(caster, target, ability, action, total)
-    local duration = 300 + caster:getMerit(tpz.merit.WINNING_STREAK) + caster:getMod(tpz.mod.PHANTOM_DURATION)
-    local effectpowers = {6, 15, 7, 8, 9, 10, 5, 11, 12, 13, 20, -10}
-    local effectpower = effectpowers[total]
--- Apply Buffs from Caster's Roll Enhancing Gear if present
-    if (math.random(0, 99) < caster:getMod(tpz.mod.ENHANCES_CASTERS_ROLL)) then
-        effectpower = effectpower + 10
-    end
--- Apply Additional Phantom Roll+ Buff
-    local phantomBase = 3 -- Base increment buff
-    local effectpower = effectpower + (phantomBase * phantombuffMultiple(caster))
--- Check if COR Main or Sub
-    if (caster:getMainJob() == tpz.job.COR and caster:getMainLvl() < target:getMainLvl()) then
-        effectpower = effectpower * (caster:getMainLvl() / target:getMainLvl())
-    elseif (caster:getSubJob() == tpz.job.COR and caster:getSubLvl() < target:getMainLvl()) then
-        effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
-    end
-    if (target:addCorsairRoll(caster:getMainJob(), caster:getMerit(tpz.merit.BUST_DURATION), tpz.effect.CASTERS_ROLL, effectpower, 0, duration, caster:getID(), total, tpz.mod.FASTCAST) == false) then
-        ability:setMsg(tpz.msg.basic.ROLL_MAIN_FAIL)
-    elseif total > 11 then
-        ability:setMsg(tpz.msg.basic.DOUBLEUP_BUST)
-    end
-    return total
+    return corsair.applyRoll(caster, target, ability, action, total)
 end
 
 return ability_object

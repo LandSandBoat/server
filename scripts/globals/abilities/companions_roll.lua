@@ -28,6 +28,7 @@ require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+corsair = require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
@@ -48,28 +49,7 @@ ability_object.onUseAbility = function(caster, target, ability, action)
         corsairSetup(caster, ability, action, tpz.effect.COMPANIONS_ROLL, tpz.job.COR)
     end
     local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster, target, ability, action, total)
-end
-
-function applyRoll(caster, target, ability, action, total)
-    local duration = 300 + caster:getMerit(tpz.merit.WINNING_STREAK) + caster:getMod(tpz.mod.PHANTOM_DURATION)
-    local effectpowers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0}
-    local effectpower = effectpowers[total]
--- Apply Additional Phantom Roll+ Buff
-    local phantomBase = 10 -- Used to pass either 30, 50, or 70 to effects/companions_roll.lua
-    local effectpower = effectpower + (phantomBase * phantombuffMultiple(caster))
--- Check if COR Main or Sub
-    if (caster:getMainJob() == tpz.job.COR and caster:getMainLvl() < target:getMainLvl()) then
-        effectpower = effectpower * (caster:getMainLvl() / target:getMainLvl())
-    elseif (caster:getSubJob() == tpz.job.COR and caster:getSubLvl() < target:getMainLvl()) then
-        effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
-    end
-    if (target:addCorsairRoll(caster:getMainJob(), caster:getMerit(tpz.merit.BUST_DURATION), tpz.effect.COMPANIONS_ROLL, effectpower, 0, duration, caster:getID(), total, MOD_PET_REGAIN) == false) then
-        ability:setMsg(tpz.msg.basic.ROLL_MAIN_FAIL)
-    elseif total > 11 then
-        ability:setMsg(tpz.msg.basic.DOUBLEUP_BUST)
-    end
-    return total
+    return corsair.applyRoll(caster, target, ability, action, total)
 end
 
 return ability_object

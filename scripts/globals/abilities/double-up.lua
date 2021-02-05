@@ -9,6 +9,7 @@ require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+corsair = require("scripts/globals/corsair")
 -----------------------------------
 local ability_object = {}
 
@@ -50,13 +51,14 @@ ability_object.onUseAbility = function(caster, target, ability, action)
         action:speceffect(caster:getID(), roll - prev_roll:getSubPower())
         checkForJobBonus(caster, job)
     end
+
     local total = caster:getLocalVar("corsairRollTotal")
-    local prev_ability = getAbility(caster:getLocalVar("corsairActiveRoll"))
+    local activeRoll = caster:getLocalVar("corsairActiveRoll")
+    local prev_ability = GetAbility(activeRoll)
     if (prev_ability) then
         action:setAnimation(target:getID(), prev_ability:getAnimation())
         action:actionID(prev_ability:getID())
-        dofile("scripts/globals/abilities/" .. prev_ability:getName() .. ".lua")
-        local total = applyRoll(caster, target, ability, action, total)
+        local total = corsair.applyRoll(activeRoll, caster, target, ability, action, total)
         local msg = ability:getMsg()
         if msg == 420 then
             ability:setMsg(tpz.msg.basic.DOUBLEUP)

@@ -107,6 +107,7 @@ void CLuaAbility::Register()
     SOL_REGISTER("getMsg", CLuaAbility::getMsg);
     SOL_REGISTER("getRecast", CLuaAbility::getRecast);
     SOL_REGISTER("getRange", CLuaAbility::getRange);
+    SOL_REGISTER("getName", CLuaAbility::getName);
     SOL_REGISTER("getAnimation", CLuaAbility::getAnimation);
     SOL_REGISTER("setMsg", CLuaAbility::setMsg);
     SOL_REGISTER("setAnimation", CLuaAbility::setAnimation);
