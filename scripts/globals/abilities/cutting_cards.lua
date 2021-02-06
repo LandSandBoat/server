@@ -6,24 +6,16 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
+local corsair = require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
-ability_object.onUseAbility = function(caster, target, ability, action)
-    if (caster:getID() == target:getID()) then
-        local roll = math.random(1, 6)
-        caster:setLocalVar("corsairRollTotal", roll)
-        action:speceffect(caster:getID(), roll)
-    end
-    local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster, target, ability, action, total)
+ability_object.onAbilityCheck = function(player, target, ability)
+    return 0, 0
 end
 
-function applyRoll(caster, target, ability, action, total)
-    caster:doCuttingCards(target, total)
-    ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
-    action:setAnimation(target:getID(), 132 + (total) - 1)
-    return total
+ability_object.onUseAbility = function(caster, target, ability, action)
+    corsair.useCuttingCards(caster, target, ability, action)
 end
 
 return ability_object

@@ -422,11 +422,11 @@ end
     finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
-    finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
-
     if finaldmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
     end
+
+    finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -528,11 +528,11 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     calcParams.finalDmg = dmg
     calcParams.wsID = wsID
 
-    dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
-
     if dmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
     end
+
+    dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return dmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
