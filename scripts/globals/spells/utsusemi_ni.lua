@@ -10,8 +10,12 @@ function onMagicCastingCheck(caster, target, spell)
 end
 
 function onSpellCast(caster, target, spell)
-    local effect = target:getStatusEffect(tpz.effect.COPY_IMAGE)
+    if (target:hasStatusEffect(tpz.effect.THIRD_EYE)) then
+        target:delStatusEffect(tpz.effect.THIRD_EYE) -- Third Eye and Utsusemi don't stack.  Utsusemi removes Third Eye.
+    end
 
+    local effect = target:getStatusEffect(tpz.effect.COPY_IMAGE)
+	
     -- Get extras shadows
     local numShadows = 3
     local icon = tpz.effect.COPY_IMAGE_3
