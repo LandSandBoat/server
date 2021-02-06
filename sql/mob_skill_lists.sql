@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `mob_skill_lists` (
   `skill_list_id` smallint(5) unsigned NOT NULL,
   `mob_skill_id` smallint(3) unsigned NOT NULL,
   PRIMARY KEY (`skill_list_id`,`mob_skill_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `mob_skill_lists`

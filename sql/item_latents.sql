@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `item_latents` (
   `latentId` smallint(5) NOT NULL,
   `latentParam` smallint(5) NOT NULL,
   PRIMARY KEY (`itemId`, `modId`, `value`, `latentId`, `latentParam`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 
 

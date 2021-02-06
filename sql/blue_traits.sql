@@ -19,7 +19,7 @@ CREATE TABLE `blue_traits` (
   `modifier` smallint(5) unsigned NOT NULL,
   `value` smallint(5) NOT NULL,
   PRIMARY KEY (`trait_category`,`trait_points_needed`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records 
