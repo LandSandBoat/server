@@ -14,5 +14,5 @@ CREATE TABLE `char_unlocks` (
   `homepoints` blob DEFAULT NULL,
   `survivals` blob DEFAULT NULL,
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

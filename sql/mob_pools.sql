@@ -49,7 +49,7 @@ CREATE TABLE `mob_pools` (
   `roamflag` smallint(3) unsigned NOT NULL DEFAULT '0',
   `skill_list_id` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`poolid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
