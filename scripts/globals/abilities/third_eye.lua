@@ -18,7 +18,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.COPY_IMAGE)
+    if player:hasStatusEffect(tpz.effect.COPY_IMAGE) then
         -- Returns "no effect" message when Copy Image is active when Third Eye is used.
         effect:setMsg(tpz.msg.basic.JA_NO_EFFECT)
     else
