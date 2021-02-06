@@ -390,6 +390,7 @@ end
     {
         wsID = wsID,
         weaponDamage = {attacker:getRangedDmg()},
+        skillType = attacker:getWeaponSkillType(tpz.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), attacker:getRangedDmgRank()),
         cratio = cratio,
         ccritratio = ccritratio,
@@ -421,10 +422,6 @@ end
 
     finaldmg = finaldmg * WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
-
-    if finaldmg > 0 then
-        attacker:trySkillUp(attack.weaponType, target:getMainLvl())
-    end
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
