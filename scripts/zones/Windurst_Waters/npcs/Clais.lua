@@ -5,7 +5,7 @@
 -- !pos -31 -3 11 238
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -16,8 +16,8 @@ entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
-    hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    if ((hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 8) == false) then
+    local hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    if ((hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 8) == false) then
         player:startEvent(57) -- Show Off Hat
     else
         player:startEvent(602) -- Standard Conversation

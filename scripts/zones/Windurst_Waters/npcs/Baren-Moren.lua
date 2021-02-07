@@ -9,11 +9,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    local featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     if (featherstatus >= 1 and trade:hasItemQty(842, 3) == true and trade:getGil() == 0 and trade:getItemCount() == 3) then
         player:startEvent(79, 1500) -- Quest Turn In
     end
@@ -27,14 +28,14 @@ entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
-    hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
-    pfame = player:getFameLevel(WINDURST)
-    if (hatstatus == 0) then
+    local hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    local featherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    local pfame = player:getFameLevel(WINDURST)
+    if (hatstatus == QUEST_AVAILABLE) then
         player:startEvent(48) -- Quest Offered
---    elseif ((hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) and player:getCharVar("QuestHatInHand_count") == 0) then
+--    elseif ((hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and player:getCharVar("QuestHatInHand_count") == 0) then
 --        player:startEvent(51, 80) -- Hat in Hand: During Quest - Objective Reminder
-    elseif (hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) then
+    elseif (hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) then
         --     Variable to track quest progress
         --     1 = Machitata       !pos 163 0 -22
         --    2 = Honoi-Gomoi       !pos -195 -11 -120
@@ -44,7 +45,7 @@ entity.onTrigger = function(player, npc)
         --  32 = Tosuka-Porika    !pos -26 -6 103
         --  64 = Pechiru-Mashiru !pos 162 -2 159
         --  128 = Bondada        !pos -66 -3 -148
-        count = player:getCharVar("QuestHatInHand_count")
+        local count = player:getCharVar("QuestHatInHand_count")
         if (count == 8) then                 -- 80 = HAT + FULL REWARD  =  8 NPCS - Option 5
             player:startEvent(52, 80)
         elseif (count >= 6) then            -- 50 = HAT + GOOD REWARD  >= 6-7 NPCS - Option 4
@@ -56,18 +57,18 @@ entity.onTrigger = function(player, npc)
         else                                -- 0/nill = NO REWARD         >= 0-1 NPCS - Option 1
             player:startEvent(52)
         end
-    elseif (featherstatus == 1 or player:getCharVar("QuestFeatherInOnesCap_var") == 1) then
+    elseif (featherstatus == QUEST_ACCEPTED or player:getCharVar("QuestFeatherInOnesCap_var") == 1) then
         player:startEvent(78, 0, 842) -- Quest Objective Reminder
-    elseif (hatstatus == 2 and featherstatus == 0 and pfame >= 3 and player:needToZone() == false and player:getCharVar("QuestHatInHand_var2") == 0) then
-        rand = math.random(1, 2)
+    elseif (hatstatus == QUEST_COMPLETED and featherstatus == QUEST_AVAILABLE and pfame >= 3 and player:needToZone() == false and player:getCharVar("QuestHatInHand_var2") == 0) then
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(75, 0, 842) -- Quest "Feather In One's Cap" offered
         else
             player:startEvent(49) -- Repeatable Quest "Hat In Hand" offered
         end
 
-    elseif     (featherstatus == 2 and player:needToZone() == false) then
-        rand = math.random(1, 2)
+    elseif (featherstatus == QUEST_COMPLETED and player:needToZone() == false) then
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(49) -- Repeatable Quest "Hat In Hand" offered
         else
@@ -75,8 +76,8 @@ entity.onTrigger = function(player, npc)
         end
     elseif (player:needToZone() == false) then
         player:startEvent(49) -- Repeatable Quest "Hat In Hand" offered
-    else   --  Will run through these if fame is not high enough for other quests
-        rand = math.random(1, 6)
+    else -- Will run through these if fame is not high enough for other quests
+        local rand = math.random(1, 6)
         if (rand == 1) then
             player:startEvent(42) -- Standard Conversation 1
         elseif (rand == 2) then
@@ -97,7 +98,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-printf("RESULT: %u", option)
+    local hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+
     if (csid == 48 and option == 1) then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
         player:addKeyItem(tpz.ki.NEW_MODEL_HAT)
@@ -131,7 +133,7 @@ printf("RESULT: %u", option)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*150)
 --        else (option == 1) then     -- 0/nill = NO REWARD      >= 0 NPCS - Option 1
         end
-        if (hatstatus == 1) then
+        if (hatstatus == QUEST_ACCEPTED) then
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)

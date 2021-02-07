@@ -4,9 +4,9 @@
 -- Involved in Quest: Forge Your Destiny, The Sacred Katana
 -- !pos 15 0 23 252
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 

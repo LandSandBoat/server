@@ -4,9 +4,8 @@
 -- Involved in Quests: Hat in Hand
 -- !pos 162 -2 159 238
 -----------------------------------
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -17,8 +16,8 @@ entity.onTrigger = function(player, npc)
     function testflag(set, flag)
         return (set % (2*flag) >= flag)
     end
-    hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    if ((hatstatus == 1  or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 64) == false) then
+    local hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    if ((hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 64) == false) then
         player:startEvent(54) -- Show Off Hat
     elseif player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
         player:startEvent(445)

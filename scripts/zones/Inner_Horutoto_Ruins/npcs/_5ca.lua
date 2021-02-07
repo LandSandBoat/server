@@ -5,8 +5,10 @@
 -- Involved in Mission 2-1
 -- !pos -11 0 20 192
 -----------------------------------
+require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -22,7 +24,7 @@ entity.onTrigger = function(player, npc)
     -- We should allow both missions and quests to activate
     if CurrentMission == tpz.mission.id.windurst.LOST_FOR_WORDS and MissionStatus == 4 then
         player:startEvent(46)
-    elseif MakingHeadlines == 1 then
+    elseif MakingHeadlines == QUEST_ACCEPTED then
         function testflag(set, flag)
             return (set % (2*flag) >= flag)
         end

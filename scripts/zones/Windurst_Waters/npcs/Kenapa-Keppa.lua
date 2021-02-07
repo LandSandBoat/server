@@ -5,10 +5,11 @@
 -- !pos 27 -6 -199 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -17,8 +18,8 @@ entity.onTrade = function(player, npc, trade)
     local KenapaFood = player:getCharVar("Kenapa_Food_var") -- Variable to track progress of Kenapa-Keppa in Food for Thought
 
     if (FoodForThought == QUEST_ACCEPTED) then
-        count = trade:getItemCount()
-        gil = trade:getGil()
+        local count = trade:getItemCount()
+        local gil = trade:getGil()
         if (trade:hasItemQty(4409, 1) == false) then -- Traded in wrong item. Not accepted.
             player:startEvent(329)
         elseif (count == 1 and trade:hasItemQty(4409, 1) == true and gil == 0) then
@@ -50,7 +51,7 @@ entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(WINDURST)
     local HourOfTheDay = VanadielHour()
 
-    if ((hatstatus == 1 or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 4) == false) then
+    if ((hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 4) == false) then
         player:startEvent(56) -- Show Off Hat
     elseif ((SayFlowers == QUEST_ACCEPTED or SayFlowers == QUEST_COMPLETED) and FlowerProgress == 2) then
         player:startEvent(519)
@@ -67,7 +68,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(320, 0, 4409) -- Gives Order
             player:setCharVar("Kenapa_Food_var", 3)
         elseif (FoodForThought == QUEST_ACCEPTED and KenapaFood == 3) then
-            rand = math.random(1, 3)
+            local rand = math.random(1, 3)
             if (rand == 1) then
                 player:startEvent(320, 0, 4409) -- Repeats Order
             elseif (rand == 2) then
@@ -76,7 +77,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(328) -- "..<Grin>.."
             end
         elseif (FoodForThought == QUEST_ACCEPTED and KenapaFood == 4) then -- Give standard conversation options if this NPC has been fed but others haven't
-            rand = math.random(1, 2)
+            local rand = math.random(1, 2)
             if (rand == 1) then
                 player:startEvent(302) -- Standard converstation
             else
@@ -120,14 +121,14 @@ entity.onTrigger = function(player, npc)
     elseif (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) == true and HourOfTheDay > 6) then
         player:startEvent(346) -- Failed to return in time
     elseif (OvernightDelivery == QUEST_COMPLETED) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(349) -- Random comment after Overnight Delivery #1
         else
             player:startEvent(350) -- Random comment after Overnight Delivery #2
         end
     else
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(302) -- Standard converstation
         else
@@ -154,7 +155,7 @@ entity.onEventFinish = function(player, csid, option)
         else -- If this is NOT the last NPC given food, flag this NPC as completed.
             player:setCharVar("Kenapa_Food_var", 4)
         end
-    elseif  (csid == 56) then  -- Show Off Hat
+    elseif (csid == 56) then  -- Show Off Hat
         player:addCharVar("QuestHatInHand_var", 4)
         player:addCharVar("QuestHatInHand_count", 1)
     elseif (csid == 336) then

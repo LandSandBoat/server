@@ -5,9 +5,8 @@
 -- !pos -58 -4 23 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/settings")
+require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
@@ -28,9 +27,9 @@ entity.onTrigger = function(player, npc)
         player:startEvent(873)
     elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 14)) then
         player:startEvent(939)
-    elseif ((hatstatus == 1  or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 16) == false) then
+    elseif ((hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 16) == false) then
         player:startEvent(60) -- Show Off Hat
-    elseif (MakingHeadlines == 1) then
+    elseif (MakingHeadlines == QUEST_ACCEPTED) then
         local prog = player:getCharVar("QuestMakingHeadlines_var")
         --  Variable to track if player has talked to 4 NPCs and a door
         --  1 = Kyume

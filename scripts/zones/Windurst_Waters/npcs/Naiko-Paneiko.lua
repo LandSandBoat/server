@@ -5,10 +5,11 @@
 -- !pos -246 -5 -308 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -31,12 +32,12 @@ entity.onTrigger = function(player, npc)
         return (set % (2*flag) >= flag)
     end
 
-    MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
 
-    if (MakingHeadlines == 0) then
+    if (MakingHeadlines == QUEST_AVAILABLE) then
         player:startEvent(665) -- Quest Start
-    elseif (MakingHeadlines == 1) then
-        prog = player:getCharVar("QuestMakingHeadlines_var")
+    elseif (MakingHeadlines == QUEST_ACCEPTED) then
+        local prog = player:getCharVar("QuestMakingHeadlines_var")
         --     Variable to track if player has talked to 4 NPCs and a door
         --     1 = Kyume
         --    2 = Yujuju
@@ -44,7 +45,7 @@ entity.onTrigger = function(player, npc)
         --    8 = Umumu
         --    16 = Mahogany Door
         if (testflag(tonumber(prog), 1) == false or testflag(tonumber(prog), 2) == false or testflag(tonumber(prog), 4) == false or testflag(tonumber(prog), 8) == false) then
-            rand = math.random(1, 2)
+            local rand = math.random(1, 2)
             if (rand == 1) then
                 player:startEvent(666) -- Quest Reminder 1
             else
@@ -53,10 +54,10 @@ entity.onTrigger = function(player, npc)
         elseif (testflag(tonumber(prog), 8) == true and testflag(tonumber(prog), 16) == false) then
             player:startEvent(673) -- Advises to validate story
         elseif (prog == 31) then
-            rand = math.random(1, 2)
+            local rand = math.random(1, 2)
             if (rand == 1) then
                 player:startEvent(674) -- Quest finish 1
-            elseif (scoop == 4 and door == 1) then
+            else
                 player:startEvent(670)    -- Quest finish 2
             end
         end

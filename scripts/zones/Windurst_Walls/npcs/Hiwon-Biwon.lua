@@ -4,10 +4,10 @@
 --  Involved In Quest: Making Headlines, Curses, Foiled...Again!?
 -- Working 100%
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
 local ID = require("scripts/zones/Windurst_Walls/IDs")
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
 
     -- Making Headlines
     elseif (MakingHeadlines == 1) then
-        prog = player:getCharVar("QuestMakingHeadlines_var")
+        local prog = player:getCharVar("QuestMakingHeadlines_var")
         --  Variable to track if player has talked to 4 NPCs and a door
         --  1 = Kyume
         -- 2 = Yujuju
@@ -53,19 +53,14 @@ entity.onTrigger = function(player, npc)
     else
         local rand = math.random(1, 5)
         if (rand == 1) then
-            print (rand)
             player:startEvent(305) -- Standard Conversation
         elseif (rand == 2) then
-            print (rand)
             player:startEvent(306) -- Standard Conversation
         elseif (rand == 3) then
-            print (rand)
             player:startEvent(168) -- Standard Conversation
         elseif (rand == 4) then
-            print (rand)
             player:startEvent(170) -- Standard Conversation
         elseif (rand == 5) then
-            print (rand)
             player:startEvent(169) -- Standard Conversation
         end
     end
@@ -79,7 +74,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Making Headlines
     if (csid == 281 or csid == 283 or csid == 284) then
-        prog = player:getCharVar("QuestMakingHeadlines_var")
+        local prog = player:getCharVar("QuestMakingHeadlines_var")
         player:addKeyItem(tpz.ki.WINDURST_WALLS_SCOOP)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WINDURST_WALLS_SCOOP)
         player:setCharVar("QuestMakingHeadlines_var", prog+4)
