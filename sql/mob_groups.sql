@@ -15241,6 +15241,16 @@ INSERT INTO `mob_groups` VALUES (73,0,292,'Ou',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (1,4819,293,'Cloud_of_Darkness',0,128,0,0,20000,130,130,0);
 INSERT INTO `mob_groups` VALUES (2,4821,293,'Darkness',0,128,0,0,0,130,130,0);
+INSERT INTO `mob_groups` VALUES (3,0,293,'Iroha_TOR',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,0,293,'Iroha_LFI',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,0,293,'Iroha_LFR_1',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,0,293,'Iroha_LFR_2',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,0,293,'Lion',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,0,293,'Prishe',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,0,293,'Nashmeira',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,0,293,'Lilisette',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,0,293,'Arciela',0,128,0,0,0,0,0,0);
+
 
 /*!40000 ALTER TABLE `mob_groups` ENABLE KEYS */;
 UNLOCK TABLES;
