@@ -1,9 +1,11 @@
 -----------------------------------
 -- Magian trials
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/zone")
 require("scripts/globals/magianobjectives")
+require("scripts/globals/common")
+require("scripts/globals/zone")
+require("scripts/globals/msg")
+-----------------------------------
 
 tpz = tpz or {}
 tpz.magian = tpz.magian or {}
