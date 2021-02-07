@@ -15158,6 +15158,84 @@ INSERT INTO `mob_groups` VALUES (90,5614,291,'Quetzalcoatls_Sibilus',0,128,0,0,0
 INSERT INTO `mob_groups` VALUES (91,0,291,'Mireu',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
+-- Reisenjima_Henge (Zone 292)
+-- ------------------------------------------------------------
+
+INSERT INTO `mob_groups` VALUES (1,0,292,'Sweetwater_Tiger',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (2,0,292,'Sweetwater_Fly',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (3,0,292,'Transcended_Tiger',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (4,0,292,'Transcended_Fly',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (5,0,292,'Sweetwater_Leech',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (6,0,292,'Sweetwater_Beetle',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (7,0,292,'Transcended_Beetle',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (8,0,292,'Transcended_Leech',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (9,0,292,'Glassy_Thinker',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,0,292,'Glassy_Craver',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (11,0,292,'Glassy_Gorger',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (12,0,292,'Sweetwater_Hippogryph',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (13,0,292,'Sweetwater_Goobbue',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (14,0,292,'Sweetwater_Faaz',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (15,0,292,'Sweetwater_Pugil',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (16,0,292,'Transcended_Hippogryph',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (17,0,292,'Transcended_Goobbue',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (18,0,292,'Transcended_Faaz',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (19,0,292,'Transcended_Pugil',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (20,0,292,'Sweetwater_Toad',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (21,0,292,'Sweetwater_Raptor',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (22,0,292,'Sweetwater_Mosquito',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (23,0,292,'Sweetwater_Bats',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (24,0,292,'Transcended_Toad',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (25,0,292,'Transcended_Raptor',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (26,0,292,'Transcended_Mosquito',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (27,0,292,'Transcended_Bats',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (28,0,292,'Sweetwater_Elemental',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (29,0,292,'Sweetwater_Slime',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (30,0,292,'Sweetwater_Lucani',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (31,0,292,'Sweetwater_Worm',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (32,0,292,'Transcended_Elemental',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (33,0,292,'Transcended_Slime',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (34,0,292,'Transcended_Lucani',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (35,0,292,'Transcended_Worm',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (36,0,292,'Sweetwater_Chapuli',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (37,0,292,'Sweetwater_Treant',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (38,0,292,'Sweetwater_Mantis',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (39,0,292,'Sweetwater_Doomed',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (40,0,292,'Transcended_Chapuli',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (41,0,292,'Transcended_Treant',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (42,0,292,'Transcended_Mantis',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (43,0,292,'Transcended_Doomed',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (44,0,292,'Sweetwater_Skeleton',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (45,0,292,'Sweetwater_Cyhiraeth',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (46,0,292,'Sweetwater_Ghost',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (47,0,292,'Sweetwater_Doll',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (48,0,292,'Transcended_Skeleton',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (49,0,292,'Transcended_Cyhiraeth',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (50,0,292,'Transcended_Ghost',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (51,0,292,'Transcended_Doll',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (52,0,292,'Kin',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (53,0,292,'Gin',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (54,0,292,'Kei',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (55,0,292,'Kyou',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (56,0,292,'Fu',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (57,0,292,'Sweetwater_Rabbit',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (58,0,292,'Sweetwater_Mandragora',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (59,0,292,'Sweetwater_Lizard',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (60,0,292,'Sweetwater_Vulture',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (61,0,292,'Sweetwater_Ladybug',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (62,0,292,'Sweetwater_Porxie',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (63,0,292,'Sweetwater_Panopt',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (64,0,292,'Sweetwater_Unseelie',0,128,0,0,0,127,127,0);
+INSERT INTO `mob_groups` VALUES (65,0,292,'Transcended_Rabbit',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (66,0,292,'Transcended_Mandragora',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (67,0,292,'Transcended_Lizard',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (68,0,292,'Transcended_Vulture',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (69,0,292,'Transcended_Ladybug',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (70,0,292,'Transcended_Porxie',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (71,0,292,'Transcended_Panopt',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (72,0,292,'Transcended_Unseelie',0,128,0,0,0,129,129,0);
+INSERT INTO `mob_groups` VALUES (73,0,292,'Ou',0,128,0,0,0,0,0,0);
+
+-- ------------------------------------------------------------
 -- Reisenjima_Sanctorium (Zone 293)
 -- ------------------------------------------------------------
 
