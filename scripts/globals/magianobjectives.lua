@@ -1,6 +1,8 @@
 -----------------------------------
 -- Magian Trial Objectives
 -----------------------------------
+require("scripts/globals/common")
+-----------------------------------
 
 -- This is a table of anon function for Magian Trial objectives/conditions.
 -- Keyed by trial ID, if they return true, the trials progress is incremented and saved.

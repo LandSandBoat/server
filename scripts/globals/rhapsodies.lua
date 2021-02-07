@@ -1,5 +1,6 @@
 -----------------------------------
 require("scripts/globals/missions")
+require("scripts/globals/common")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -24,15 +25,6 @@ tpz.rhapsodies.expansion =
     [tpz.rhapsodies.character.CAIT_SITH]  = WOTG,
     [tpz.rhapsodies.character.ARCIELA]    = SOA,
 }
-
--- ALERT, TODO, NOTE: To be removed when set constructor makes it into master!
-local set = function(list)
-    local set = {}
-    for _, item in pairs(list) do
-        set[item] = true
-    end
-    return set
-end
 
 tpz.rhapsodies.unavailability =
 {
