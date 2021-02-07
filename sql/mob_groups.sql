@@ -15755,6 +15755,21 @@ INSERT INTO `mob_groups` VALUES (119,0,297,'Volte_Communer',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (120,0,297,'Disjoined_Mithra',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (121,0,297,'Disjoineds_Odin',0,128,0,0,0,0,0,0);
 
+-- ------------------------------------------------------------
+-- Walk_of_Echoes_[P1] (Zone 298)
+-- ------------------------------------------------------------
+
+INSERT INTO `mob_groups` VALUES (1,0,298,'Odin_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,0,298,'Cait_Sith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,0,298,'Alexander',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (4,0,298,'Lady_Lilith',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (5,0,298,'Aquila',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,0,298,'Haudrale',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (7,0,298,'Larzos',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (8,0,298,'Dark_Gyves',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (9,0,298,'Lilith_Ascendant',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,0,298,'Light_Gyves',0,128,0,0,0,0,0,0);
+
 /*!40000 ALTER TABLE `mob_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
