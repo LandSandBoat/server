@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -22,11 +22,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "lua_item.h"
 
 #include "../../common/showmsg.h"
-#include "../map.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_general.h"
 #include "../items/item_weapon.h"
+#include "../map.h"
 #include "../utils/itemutils.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
@@ -102,28 +102,28 @@ auto CLuaItem::getMatchingTrials() -> sol::table
         "`reqItemAugValue4` = %u AND "
         "`trialTarget` <> 0;";
 
-    int32 augs[4][2] {};
-    for(int i = 0; i < 4; i++){
-        auto augbits = PItem->getAugment(i);
-        uint16 augmentid = (uint16)unpackBitsBE((uint8*)(&augbits), 0, 11);
-        uint8 augmentVal = (uint8)unpackBitsBE((uint8*)(&augbits), 11, 5);
-        augs[i][0] = augmentid;
-        augs[i][1] = augmentVal;
+    int32 augs[4][2]{};
+    for (int i = 0; i < 4; i++)
+    {
+        auto   augbits    = PItem->getAugment(i);
+        uint16 augmentid  = (uint16)unpackBitsBE((uint8*)(&augbits), 0, 11);
+        uint8  augmentVal = (uint8)unpackBitsBE((uint8*)(&augbits), 11, 5);
+        augs[i][0]        = augmentid;
+        augs[i][1]        = augmentVal;
     }
 
     int32 ret = Sql_Query(SqlHandle, Query, PItem->getID(),
-            augs[0][0], augs[1][0], augs[2][0], augs[3][0],
-            augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
+                          augs[0][0], augs[1][0], augs[2][0], augs[3][0],
+                          augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 
     sol::table table = luautils::lua.create_table();
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
     {
-        int32 trialCount {0};
-        while(Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        int32 trialCount = 0;
+        while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
-            auto count = ++trialCount;
-            auto id    = static_cast<int32>(Sql_GetIntData(SqlHandle, 0));
-            table.add(count, id);
+            auto id             = static_cast<int32>(Sql_GetIntData(SqlHandle, 0));
+            table[++trialCount] = id;
         }
     }
 
@@ -216,7 +216,7 @@ uint16 CLuaItem::getWeaponskillPoints()
 
     if (PItem)
     {
-        return  PItem->getCurrentUnlockPoints();
+        return PItem->getCurrentUnlockPoints();
     }
 
     return 0;
