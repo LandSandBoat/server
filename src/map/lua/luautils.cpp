@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -463,6 +463,23 @@ namespace luautils
         // Now that the list is verified, overwrite it with the same list; without "scripts"
         parts = std::vector<std::string>(it + 1, parts.end());
 
+        // Globals need to be nil'd before they're reloaded
+        if (parts.size() == 2 && parts[0] == "globals")
+        {
+            std::string requireName = fmt::format("scripts/globals/{}", parts[1]);
+
+            auto result = lua.safe_script(fmt::format("package.loaded[\"{}\"] = nil; require(\"{}\");", requireName, requireName));
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load global error: %s: %s\n", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"\n", filename, requireName);
+            return;
+        }
+
         if (!std::filesystem::exists(filename))
         {
             // ShowDebug("luautils::CacheLuaObjectFromFile: File does not exist: %s\n", filename);
@@ -503,8 +520,7 @@ namespace luautils
 
         if (printOutput)
         {
-            ShowInfo("[FileWatcher] %s\n", filename);
-            ShowInfo("[FileWatcher] %s\n", out_str);
+            ShowInfo("[FileWatcher] %s -> %s\n", filename, out_str);
         }
     }
 
