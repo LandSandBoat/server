@@ -12986,8 +12986,6 @@ INSERT INTO `mob_groups` VALUES (73,0,206,'Ullegore',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (74,0,206,'Mumor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (75,4006,206,'Trion',0,128,0,0,0,75,75,1); -- ally
 
-INSERT INTO `mob_groups` VALUES (14183,4006,206,'Trion',0,128,0,0,0,75,75,1); -- Trion for rank mission 9-2
-
 -- ------------------------------------------------------------
 -- Cloister_of_Flames (Zone 207)
 -- ------------------------------------------------------------
