@@ -15,14 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    function testflag(set, flag)
-        return (set % (2*flag) >= flag)
-    end
-    local hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    if ((hatstatus == QUEST_ACCEPTED or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 1) == false) then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, tpz.ki.NEW_MODEL_HAT)
-        player:addCharVar("QuestHatInHand_var", 1)
-        player:addCharVar("QuestHatInHand_count", 1)
+    if player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 0) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, tpz.ki.NEW_MODEL_HAT)
+        player:startEvent(58)
+    else
+        player:startEvent(526)
     end
 end
 
@@ -30,6 +27,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    if csid == 58 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 0, true))
+        player:addCharVar("QuestHatInHand_count", 1)
+    end
 end
 
 return entity

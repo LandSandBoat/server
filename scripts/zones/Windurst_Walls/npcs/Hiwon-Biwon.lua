@@ -1,11 +1,11 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Hiwon-Biwon
---  Involved In Quest: Making Headlines, Curses, Foiled...Again!?
+-- Involved In Quest: Making Headlines, Curses, Foiled...Again!?
 -- Working 100%
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -15,31 +15,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    function testflag(set, flag)
-        return (set % (2*flag) >= flag)
-    end
-
-    local MakingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
-    local CFA2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local makingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local cursesFoiledAgain1 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+    local cursesFoiledAgain2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
     -- Curses, Foiled ... Again!?
-    if (CFA2 == QUEST_ACCEPTED and player:hasItem(552) == false) then
+    if cursesFoiledAgain2 == QUEST_ACCEPTED and not player:hasItem(552) then
         player:startEvent(182) -- get Hiwon's hair
-    elseif (CFA2 == QUEST_COMPLETED and MakingHeadlines ~= QUEST_ACCEPTED) then
-        player:startEvent(185) -- New Dialog after CFA2
 
     -- Making Headlines
-    elseif (MakingHeadlines == 1) then
+    elseif makingHeadlines == QUEST_ACCEPTED then
+        -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
         local prog = player:getCharVar("QuestMakingHeadlines_var")
-        --  Variable to track if player has talked to 4 NPCs and a door
-        --  1 = Kyume
-        -- 2 = Yujuju
-        -- 4 = Hiwom
-        -- 8 = Umumu
-        -- 16 = Mahogany Door
-        if (testflag(tonumber(prog), 4) == false) then
-            if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1) == 1) then
-                if (math.random(1, 2) == 1) then
+
+        if not utils.mask.getBit(prog, 2) then
+            if cursesFoiledAgain1 == QUEST_ACCEPTED then
+                if math.random(1, 2) == 1 then
                     player:startEvent(283) -- Give scoop while sick
                 else
                     player:startEvent(284) -- Give scoop while sick
@@ -50,18 +41,25 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(282) -- "Getting back to the maater at hand-wand..."
         end
+
+    -- dialog after CFA2
+    elseif cursesFoiledAgain2 == QUEST_COMPLETED then
+        player:startEvent(185)
+
+    -- default dialog
     else
         local rand = math.random(1, 5)
-        if (rand == 1) then
-            player:startEvent(305) -- Standard Conversation
-        elseif (rand == 2) then
-            player:startEvent(306) -- Standard Conversation
-        elseif (rand == 3) then
-            player:startEvent(168) -- Standard Conversation
-        elseif (rand == 4) then
-            player:startEvent(170) -- Standard Conversation
-        elseif (rand == 5) then
-            player:startEvent(169) -- Standard Conversation
+
+        if rand == 1 then
+            player:startEvent(305)
+        elseif rand == 2 then
+            player:startEvent(306)
+        elseif rand == 3 then
+            player:startEvent(168)
+        elseif rand == 4 then
+            player:startEvent(170)
+        elseif rand == 5 then
+            player:startEvent(169)
         end
     end
 end
@@ -71,22 +69,14 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     -- Making Headlines
-    if (csid == 281 or csid == 283 or csid == 284) then
-        local prog = player:getCharVar("QuestMakingHeadlines_var")
-        player:addKeyItem(tpz.ki.WINDURST_WALLS_SCOOP)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WINDURST_WALLS_SCOOP)
-        player:setCharVar("QuestMakingHeadlines_var", prog+4)
+    if csid == 281 or csid == 283 or csid == 284 then
+        npcUtil.giveKeyItem(player, tpz.ki.WINDURST_WALLS_SCOOP)
+        player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 2, true))
 
     -- Curses, Foiled...Again!?
-    elseif (csid == 182) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 552) -- Hiwon's hair
-        else
-            player:addItem(552)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 552) -- Hiwon's hair
-        end
+    elseif csid == 182 then
+        npcUtil.giveItem(player, 552)
     end
 end
 
