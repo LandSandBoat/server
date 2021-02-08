@@ -4,9 +4,10 @@
 -- Involved in Quests: Hat in Hand
 -- !pos 162 -2 159 238
 -----------------------------------
-require("scripts/globals/settings")
+local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/globals/titles")
+require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
@@ -14,13 +15,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    function testflag(set, flag)
-        return (set % (2*flag) >= flag)
-    end
-    hatstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    if ((hatstatus == 1  or player:getCharVar("QuestHatInHand_var2") == 1) and testflag(tonumber(player:getCharVar("QuestHatInHand_var")), 64) == false) then
-        player:startEvent(54) -- Show Off Hat
-    elseif player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
+    local makingTheGrade = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
+
+    if player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 6) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, tpz.ki.NEW_MODEL_HAT)
+        player:startEvent(54)
+    elseif makingTheGrade == QUEST_ACCEPTED then
         player:startEvent(445)
     else
         player:startEvent(421) -- Standard Conversation
@@ -31,8 +31,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 54) then  -- Show Off Hat
-        player:addCharVar("QuestHatInHand_var", 64)
+    if csid == 54 then
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 6, true))
         player:addCharVar("QuestHatInHand_count", 1)
     end
 end

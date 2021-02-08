@@ -26,14 +26,14 @@ entity.onTrigger = function(player, npc)
         12473,  1863, 2,     --Poet's Circlet
         12499, 14400, 2,     --Flax Headband
         12457,  3272, 2,     --Cotton Hachimaki
-        12454,  3520, 2,     --Bone Mask
         12474, 10924, 2,     --Wool Hat
 
         12464,  1742, 3,     --Headgear
         12456,   552, 3,     --Hachimaki
         12498,  1800, 3,     --Cotton Headband
         12448,   151, 3,     --Bronze Cap
-        12449,  1471, 3      --Brass Cap
+        12449,  1471, 3,     --Brass Cap
+        12543,   690, 3,     --Windshear Hat
     }
     tpz.shop.nation(player, stock, tpz.nation.WINDURST)
 

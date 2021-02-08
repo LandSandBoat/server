@@ -25,6 +25,7 @@ zones[tpz.zone.INNER_HORUTOTO_RUINS] =
         NOT_BROKEN_ORB            = 7235,  -- The Mana Orb in this receptacle is not broken.
         EXAMINED_RECEPTACLE       = 7236,  -- You have already examined this receptacle.
         DOOR_FIRMLY_CLOSED        = 7263,  -- The door is firmly closed.
+        CAT_BURGLARS_HIDEOUT      = 7264,  -- It looks like that Cat Burglar's hideout lies behind this door! You were able to confirm <keyitem>!
         CHEST_UNLOCKED            = 7339,  -- You unlock the chest!
         PLAYER_OBTAINS_ITEM       = 7402,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM     = 7403,  -- You were unable to obtain the item.

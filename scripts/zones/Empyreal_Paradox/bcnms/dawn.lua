@@ -18,11 +18,11 @@ battlefield_object.onBattlefieldInitialise = function(battlefield)
     local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2
     local pos = GetMobByID(baseID):getSpawnPos()
 
-    local prishe = battlefield:insertEntity(14166, true, true)
+    local prishe = battlefield:insertEntity(11, true, true)
     prishe:setSpawn(pos.x - 6, pos.y, pos.z - 21.5, 192)
     prishe:spawn()
 
-    local selhteus = battlefield:insertEntity(14167, true, true)
+    local selhteus = battlefield:insertEntity(12, true, true)
     selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
     selhteus:spawn()
 end

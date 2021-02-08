@@ -1228,9 +1228,9 @@ Usage:
         allegiance, namevis, aggro, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, packet_name \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyid \
-        WHERE mob_groups.groupid = %u";
+        WHERE mob_groups.groupid = %u AND mob_groups.zoneid = %u";
 
-        int32 ret = Sql_Query(SqlHandle, Query, groupid);
+        int32 ret = Sql_Query(SqlHandle, Query, groupid, zoneID);
 
         CMobEntity* PMob = nullptr;
 
