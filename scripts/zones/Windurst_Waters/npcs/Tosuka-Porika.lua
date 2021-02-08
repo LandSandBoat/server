@@ -7,12 +7,10 @@
 -- !pos -26 -6 103 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
 require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -59,12 +57,9 @@ entity.onTrigger = function(player, npc)
         end
 
     -- Hat in Hand
-    elseif
-        (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED or
-        player:getCharVar("QuestHatInHand_var2") == 1) and
-        bit.band(player:getCharVar("QuestHatInHand_var"), bit.lshift(1, 5)) == 0
-    then
-        player:startEvent(55) -- Show Off Hat
+    elseif player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 5) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, tpz.ki.NEW_MODEL_HAT)
+        player:startEvent(55)
 
     -- Early Bird Catches the Bookworm
     elseif
@@ -137,7 +132,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Hat in Hand
     elseif csid == 55 then  -- Show Off Hat
-        player:addCharVar("QuestHatInHand_var", 32)
+        player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 5, true))
         player:addCharVar("QuestHatInHand_count", 1)
 
     -- Early Bird Catches the Bookworm
