@@ -50,8 +50,8 @@ zone_object.onEventFinish = function(player, csid, option)
             -- spawn trion and set ally positions
             local allies = battlefield:getAllies()
             if #allies == 0 then
-                local trion = battlefield:insertEntity(14183, true, true)
-                trion:setSpawn(unpack(allyPos[inst].trionPos))
+                local trion = battlefield:insertEntity(75, true, true)
+                trion:setSpawn(allyPos[inst].trionPos)
                 trion:spawn()
             end
             player:setPos(unpack(allyPos[inst].playerPos))
