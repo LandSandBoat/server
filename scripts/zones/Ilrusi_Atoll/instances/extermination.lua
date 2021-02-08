@@ -2,7 +2,7 @@
 -- Assault: Extermination
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
-require("scripts/globals/instance")
+local instance_helpers = require ("scripts/globals/instance")
 -----------------------------------
 local instance_object = {}
 
@@ -28,7 +28,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    updateInstanceTime(instance, elapsed, Ilrusi.text)
+    instance_helpers.updateInstanceTime(instance, elapsed, Ilrusi.text)
 end
 
 instance_object.onInstanceFailure = function(instance)

@@ -2,7 +2,7 @@
 -- Salvage: Arrapago Remnants
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
-require("scripts/globals/instance")
+local instance_helpers = require ("scripts/globals/instance")
 -----------------------------------
 local instance_object = {}
 
@@ -31,7 +31,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+    instance_helpers.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
