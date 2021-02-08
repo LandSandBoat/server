@@ -69,7 +69,7 @@ function onEventFinish(player, csid, option)
             -- spawn Ajido-Marujido and set ally positions
             local allies = battlefield:getAllies()
             if #allies == 0 then
-                local ajido = battlefield:insertEntity(14184, true, true)
+                local ajido = battlefield:insertEntity(33, true, true)
                 ajido:setSpawn(allyPos[inst].ajidoPos)
                 ajido:spawn()
             end
