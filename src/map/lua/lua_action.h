@@ -39,18 +39,19 @@ public:
         return m_PLuaAction;
     }
 
-    void ID(uint32 actionTargetID, uint16 newActionTargetID);
-    void recast(uint16 recast);
-    void actionID(uint16 actionid);
-    void param(uint32 actionTargetID, int32 param);
-    void messageID(uint32 actionTargetID, uint16 messageID);
-    auto getAnimation(uint32 actionTargetID) -> std::optional<uint16>;
-    void setAnimation(uint32 actionTargetID, uint16 animation);
-    void speceffect(uint32 actionTargetID, uint8 speceffect);
-    void reaction(uint32 actionTargetID, uint8 reaction);
-    void additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
-    void addEffectParam(uint32 actionTargetID, int32 addEffectParam);
-    void addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
+    void   ID(uint32 actionTargetID, uint16 newActionTargetID);
+    void   setRecast(uint16 recast);
+    uint16 getRecast();
+    void   actionID(uint16 actionid);
+    void   param(uint32 actionTargetID, int32 param);
+    void   messageID(uint32 actionTargetID, uint16 messageID);
+    auto   getAnimation(uint32 actionTargetID) -> std::optional<uint16>;
+    void   setAnimation(uint32 actionTargetID, uint16 animation);
+    void   speceffect(uint32 actionTargetID, uint8 speceffect);
+    void   reaction(uint32 actionTargetID, uint8 reaction);
+    void   additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
+    void   addEffectParam(uint32 actionTargetID, int32 addEffectParam);
+    void   addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);
 
     static void Register();
 };
