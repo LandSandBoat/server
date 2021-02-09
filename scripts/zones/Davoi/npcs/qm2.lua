@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     local teaProg = player:getCharVar('TEA_WITH_A_TONBERRY_PROG')
 
     if teaProg == 3 then
-        player:messageSpecial(7920, 0, 1682)
+        player:messageSpecial(ID.text.WHERE_THE_TONBERRY_TOLD_YOU, 0, 1682)
     elseif teaProg == 4 then
         player:startEvent(126, 149, 1682)
     elseif teaProg == 5 then

@@ -4,7 +4,8 @@
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
-
+require("scripts/globals/utils")
+-----------------------------------
 tpz = tpz or {}
 tpz.goblinfootprint = tpz.goblinfootprint or {}
 
@@ -200,7 +201,8 @@ function tpz.goblinfootprint.rewatch(player, trigger)
         end
     end
     if options > 1 then
-        player:startEvent(gobCS[zone], bit.bnot(options), -2, -2, -2)
+        local arg = utils.MAX_UINT32 - 1
+        player:startEvent(gobCS[zone], bit.bnot(options), arg, arg, arg)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

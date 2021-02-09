@@ -2,6 +2,10 @@ require("scripts/globals/status")
 
 utils = {}
 
+-- Max uint32 constant, replaces negative values in event parameters
+-- Note: If correcting a negative value, this is *already* -1, adjust accordingly!
+utils.MAX_UINT32 = 4294967295
+
 -- Shuffles a table and returns a copy of it, not the original.
 function utils.shuffle(tab)
     local copy = {}
