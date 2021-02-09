@@ -21,7 +21,7 @@ local function setInstanceLastTimeUpdateMessage (instance, players, remainingTim
 
     if message ~= 0 then
         for i, player in pairs(players) do
-            if (remainingTimeLimit >= 60) then
+            if remainingTimeLimit >= 60 then
                 player:messageSpecial(texttable.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
             else
                 player:messageSpecial(texttable.TIME_REMAINING_SECONDS, remainingTimeLimit)
@@ -49,7 +49,7 @@ instance_helpers.updateInstanceTime = function (instance, elapsed, texttable)
                 break
             end
         end
-        if (wipe) then
+        if wipe then
             for i, player in pairs(players) do
                 player:messageSpecial(texttable.PARTY_FALLEN, 3)
             end
