@@ -17,14 +17,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then
-        local roll = math.random(1, 6)
-        caster:setLocalVar("corsairRollTotal", roll)
-        action:speceffect(caster:getID(), roll)
-    end
-
-    local total = caster:getLocalVar("corsairRollTotal")
-    return corsair.doWildCard(caster, target, ability, action, total)
+    return corsair.useWildCard(caster, target, ability, action)
 end
 
 return ability_object

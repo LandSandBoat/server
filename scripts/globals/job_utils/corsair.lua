@@ -63,6 +63,17 @@ local function phantombuffMultiple(caster)
     return phantombuffMultiplier
 end
 
+-- Sets local var if party contains specified job
+local function checkForJobBonus(caster, job)
+    local jobBonus = 0
+
+    if job ~= tpz.job.NONE and (caster:hasPartyJob(job) or math.random(0, 99) < caster:getMod(tpz.mod.JOB_BONUS_CHANCE)) then
+        jobBonus = 1
+    end
+
+    caster:setLocalVar("corsairRollBonus", jobBonus)
+end
+
 -- The following functions determine enhancement based on random vs effects
 local function getRandomEnhancementRoll(caster, abilityId)
     local modValue = nil
@@ -125,13 +136,13 @@ local function corsairSetup(caster, ability, action, effect, job)
     action:speceffect(caster:getID(), roll)
 
     if checkForElevenRoll(caster) then
-        action:recast(action:recast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+        action:setRecast(action:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
     end
 
-    corsair.checkForJobBonus(caster, job)
+    checkForJobBonus(caster, job)
 end
 
-corsair.applyRoll = function(caster, target, ability, action, total)
+local function applyRoll(caster, target, ability, action, total)
     local abilityId = ability:getID()
     local duration = 300 + caster:getMerit(tpz.merit.WINNING_STREAK) + caster:getMod(tpz.mod.PHANTOM_DURATION)
     local effectpowers = corsairRollMods[abilityId][1]
@@ -184,23 +195,73 @@ corsair.useCuttingCards = function(caster, target, ability, action)
     return total
 end
 
-corsair.doWildCard = function(caster, target, ability, action, total)
+corsair.useDoubleUp = function(caster, target, ability, action)
+    if caster:getID() == target:getID() then
+        local du_effect = caster:getStatusEffect(tpz.effect.DOUBLE_UP_CHANCE)
+        local prev_roll = caster:getStatusEffect(du_effect:getSubPower())
+        local roll = prev_roll:getSubPower()
+        local job = du_effect:getTier()
+
+        caster:setLocalVar("corsairActiveRoll", du_effect:getSubType())
+        local snake_eye = caster:getStatusEffect(tpz.effect.SNAKE_EYE)
+        if snake_eye then
+            if prev_roll:getPower() >= 5 and math.random(100) < snake_eye:getPower() then
+                roll = 11
+            else
+                roll = roll + 1
+            end
+            caster:delStatusEffect(tpz.effect.SNAKE_EYE)
+        else
+            roll = roll + math.random(1, 6)
+
+            if roll > 12 then
+                roll = 12
+                caster:delStatusEffectSilent(tpz.effect.DOUBLE_UP_CHANCE)
+            end
+        end
+
+        if roll == 11 then
+            caster:resetRecast(tpz.recast.ABILITY, 193)
+        end
+
+        caster:setLocalVar("corsairRollTotal", roll)
+        action:speceffect(caster:getID(), roll - prev_roll:getSubPower())
+        checkForJobBonus(caster, job)
+    end
+
+    local total = caster:getLocalVar("corsairRollTotal")
+    local activeRoll = caster:getLocalVar("corsairActiveRoll")
+    local prev_ability = GetAbility(activeRoll)
+
+    if prev_ability then
+        action:setAnimation(target:getID(), prev_ability:getAnimation())
+        action:actionID(prev_ability:getID())
+        local total = applyRoll(caster, target, prev_ability, action, total)
+        local msg = ability:getMsg()
+        if msg == 420 then
+            ability:setMsg(tpz.msg.basic.DOUBLEUP)
+        elseif msg == 422 then
+            ability:setMsg(tpz.msg.basic.DOUBLEUP_FAIL)
+        end
+        return total
+    end
+end
+
+corsair.useWildCard = function(caster, target, ability, action)
+    if caster:getID() == target:getID() then
+        local roll = math.random(1, 6)
+        caster:setLocalVar("corsairRollTotal", roll)
+        action:speceffect(caster:getID(), roll)
+    end
+
+    local total = caster:getLocalVar("corsairRollTotal")
     caster:doWildCard(target, total)
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + (total) - 1)
     return total
 end
 
-corsair.checkForJobBonus = function(caster, job)
-    local jobBonus = 0
-
-    if job ~= tpz.job.NONE and (caster:hasPartyJob(job) or math.random(0, 99) < caster:getMod(tpz.mod.JOB_BONUS_CHANCE)) then
-        jobBonus = 1
-    end
-
-    caster:setLocalVar("corsairRollBonus", jobBonus)
-end
-
+-- Called by Phantom Rolls' onAbilityCheck
 corsair.onRollAbilityCheck = function(player, target, ability)
     local abilityId = ability:getID()
     local effectId = corsairRollMods[abilityId][4]
@@ -215,6 +276,7 @@ corsair.onRollAbilityCheck = function(player, target, ability)
     end
 end
 
+-- Called by Phantom Rolls' onUseAbility
 corsair.onRollUseAbility = function(caster, target, ability, action)
     local abilityId = ability:getID()
     local effectId = corsairRollMods[abilityId][4]
@@ -225,7 +287,18 @@ corsair.onRollUseAbility = function(caster, target, ability, action)
     end
 
     local total = caster:getLocalVar("corsairRollTotal")
-    return corsair.applyRoll(caster, target, ability, action, total)
+    return applyRoll(caster, target, ability, action, total)
+end
+
+-- Called by Double Up ability onAbilityCheck
+corsair.onDoubleUpAbilityCheck = function(player, target, ability)
+    ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
+
+    if not player:hasStatusEffect(tpz.effect.DOUBLE_UP_CHANCE) then
+        return tpz.msg.basic.NO_ELIGIBLE_ROLL, 0
+    else
+        return 0, 0
+    end
 end
 
 return corsair
