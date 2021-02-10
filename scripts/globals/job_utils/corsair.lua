@@ -6,7 +6,10 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local corsair = {}
+tpz = tpz or {}
+tpz.job_utils = tpz.job_utils or {}
+tpz.job_utils.corsair = tpz.job_utils.corsair or {}
+-----------------------------------
 
 -- rollModifiers format: Effect Powers table, phantomBase, roll bonus increase, Effect, Mod, Optimal Job
 -- NOTE: MOD_x items below are nil values, and remain from previous implementation.  This might break if parameters are added to various bindings
@@ -179,7 +182,7 @@ local function applyRoll(caster, target, ability, action, total)
 end
 
 -- TODO: Binding does not exist, implement this (old code remains)
-corsair.useCuttingCards = function(caster, target, ability, action)
+tpz.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
         local roll = math.random(1, 6)
         caster:setLocalVar("corsairRollTotal", roll)
@@ -195,7 +198,7 @@ corsair.useCuttingCards = function(caster, target, ability, action)
     return total
 end
 
-corsair.useDoubleUp = function(caster, target, ability, action)
+tpz.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
         local du_effect = caster:getStatusEffect(tpz.effect.DOUBLE_UP_CHANCE)
         local prev_roll = caster:getStatusEffect(du_effect:getSubPower())
@@ -247,7 +250,7 @@ corsair.useDoubleUp = function(caster, target, ability, action)
     end
 end
 
-corsair.useWildCard = function(caster, target, ability, action)
+tpz.job_utils.corsair.useWildCard = function(caster, target, ability, action)
     if caster:getID() == target:getID() then
         local roll = math.random(1, 6)
         caster:setLocalVar("corsairRollTotal", roll)
@@ -262,7 +265,7 @@ corsair.useWildCard = function(caster, target, ability, action)
 end
 
 -- Called by Phantom Rolls' onAbilityCheck
-corsair.onRollAbilityCheck = function(player, target, ability)
+tpz.job_utils.corsair.onRollAbilityCheck = function(player, target, ability)
     local abilityId = ability:getID()
     local effectId = corsairRollMods[abilityId][4]
 
@@ -277,7 +280,7 @@ corsair.onRollAbilityCheck = function(player, target, ability)
 end
 
 -- Called by Phantom Rolls' onUseAbility
-corsair.onRollUseAbility = function(caster, target, ability, action)
+tpz.job_utils.corsair.onRollUseAbility = function(caster, target, ability, action)
     local abilityId = ability:getID()
     local effectId = corsairRollMods[abilityId][4]
     local bonusJob = corsairRollMods[abilityId][6]
@@ -291,7 +294,7 @@ corsair.onRollUseAbility = function(caster, target, ability, action)
 end
 
 -- Called by Double Up ability onAbilityCheck
-corsair.onDoubleUpAbilityCheck = function(player, target, ability)
+tpz.job_utils.corsair.onDoubleUpAbilityCheck = function(player, target, ability)
     ability:setRange(ability:getRange() + player:getMod(tpz.mod.ROLL_RANGE))
 
     if not player:hasStatusEffect(tpz.effect.DOUBLE_UP_CHANCE) then
@@ -300,5 +303,3 @@ corsair.onDoubleUpAbilityCheck = function(player, target, ability)
         return 0, 0
     end
 end
-
-return corsair

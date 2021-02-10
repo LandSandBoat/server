@@ -23,16 +23,16 @@
 -- 12+         |-4hp(regen)/Tick    |-4hp(regen)/Tick
 -- A bust will cause a regen effect on you to be reduced by 4, it will not drain HP from you if no regen effect is active.
 -----------------------------------
-local corsair = require("scripts/globals/job_utils/corsair")
+require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return corsair.onRollAbilityCheck(player, target, ability)
+    return tpz.job_utils.corsair.onRollAbilityCheck(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    return corsair.onRollUseAbility(caster, target, ability, action)
+    return tpz.job_utils.corsair.onRollUseAbility(caster, target, ability, action)
 end
 
 return ability_object
