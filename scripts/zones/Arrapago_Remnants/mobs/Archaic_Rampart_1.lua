@@ -7,10 +7,10 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function (mob)
+entity.onMobSpawn = function(mob)
 end
 
-entity.onMobFight = function (mob, target)
+entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()
@@ -31,10 +31,10 @@ entity.onMobFight = function (mob, target)
     end
 end
 
-entity.onMobDeath = function (mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-entity.onMobDespawn = function (mob)
+entity.onMobDespawn = function(mob)
 end
 
 return entity

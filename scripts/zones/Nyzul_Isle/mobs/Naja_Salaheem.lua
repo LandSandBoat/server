@@ -24,8 +24,8 @@ local stage3Position =
     460, 0, -446,
 }
 
-entity.onMobSpawn = function (mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function (m, skillID)
+entity.onMobSpawn = function(mob)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(m, skillID)
         if skillID == 165 then
             m:showText(m, ID.text.CHA_CHING)
         elseif skillID == 168 then
@@ -36,7 +36,7 @@ entity.onMobSpawn = function (mob)
     end)
 end
 
-entity.onMobEngaged = function (mob, target)
+entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat she engages a new target.
     if mob:getLocalVar("started") == 0 then
         mob:showText(mob, ID.text.ALRRRIGHTY)
@@ -53,7 +53,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDisengage = function (mob, target)
+entity.onMobDisengage = function(mob, target)
     local ready = mob:getLocalVar("ready")
 
     if ready == 1 then
@@ -61,7 +61,7 @@ entity.onMobDisengage = function (mob, target)
     end
 end
 
-entity.onMobRoam = function (mob)
+entity.onMobRoam = function(mob)
     -- Advance to Stage 2 area
     if mob:getLocalVar("Stage") == 2 then
         mob:showText(mob, ID.text.OH_ARE_WE_DONE)
@@ -87,11 +87,11 @@ entity.onMobRoam = function (mob)
     end
 end
 
-entity.onCriticalHit = function (mob)
+entity.onCriticalHit = function(mob)
     mob:showText(mob, ID.text.OW)
 end
 
-entity.onMobDeath = function (mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Loss if Naja dies. Since player will be nil here, it'll only show once.
     mob:showText(mob, ID.text.ABQUHBAH)
     local instance = mob:getInstance()

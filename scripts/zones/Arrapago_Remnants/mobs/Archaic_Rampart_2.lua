@@ -8,10 +8,10 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function (mob)
+entity.onMobSpawn = function(mob)
 end
 
-entity.onMobFight = function (mob, target)
+entity.onMobFight = function(mob, target)
     local instance = mob:getInstance()
     local popTime = mob:getLocalVar("lastPetPop")
     local POS = mob:getPos()
@@ -23,7 +23,7 @@ entity.onMobFight = function (mob, target)
             PET1:setSpawn(POS.x, POS.y, POS.z, POS.rot)
             mob:useMobAbility(2034)
             mob:setLocalVar("lastPetPop", os.time())
-            mob:timer(2500, function (m)
+            mob:timer(2500, function(m)
                 SpawnMob((m:getID() +1), instance)
             end)
         elseif not PET2:isSpawned() then
@@ -43,7 +43,7 @@ entity.onMobFight = function (mob, target)
     end
 end
 
-entity.onMobDeath = function (mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local instance = mob:getInstance()
     if ID.mob[6].rampart1 == mob:getID() or ID.mob[6].rampart2 == mob:getID() then
         if instance:getStage() == 6 and instance:getProgress() >= 1 then
@@ -54,7 +54,7 @@ entity.onMobDeath = function (mob, player, isKiller)
     end
 end
 
-entity.onMobDespawn = function (mob)
+entity.onMobDespawn = function(mob)
 end
 
 return entity

@@ -10,16 +10,16 @@ require("scripts/globals/magic")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function (mob)
+entity.onMobSpawn = function(mob)
     -- Gessho will engage by himself ~1min in if you stall too long.
     -- Give a little buffer for while the instance loads
-    mob:timer(80000, function (m)
+    mob:timer(80000, function(m)
         if(m:getLocalVar("ready") == 0 and not(m:getTarget())) then
             tpz.ally.startAssist(m, tpz.ally.ASSIST_RANDOM)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function (m, skillID)
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(m, skillID)
         -- Hane Fubuki
         if skillID == 1998 then
             m:showText(m, ID.text.UNNATURAL_CURS)
@@ -36,7 +36,7 @@ entity.onMobSpawn = function (mob)
     end)
 end
 
-entity.onMobEngaged = function (mob, target)
+entity.onMobEngaged = function(mob, target)
     local dialog = mob:getLocalVar("dialog")
 
     if dialog == 0 then
@@ -45,7 +45,7 @@ entity.onMobEngaged = function (mob, target)
     end
 end
 
-entity.onMobRoam = function (mob)
+entity.onMobRoam = function(mob)
     local ready = mob:getLocalVar("ready")
 
     -- When Gessho becomes ready via you pulling, he will assist you
@@ -54,7 +54,7 @@ entity.onMobRoam = function (mob)
     end
 end
 
-entity.onMobFight = function (mob, target)
+entity.onMobFight = function(mob, target)
     local dialog = mob:getLocalVar("dialog")
 
     if mob:getHPP() <= 20 and dialog == 1 then
@@ -63,7 +63,7 @@ entity.onMobFight = function (mob, target)
     end
 end
 
-entity.onMobDeath = function (mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:showText(mob, ID.text.SO_I_FALL)
 end
 
