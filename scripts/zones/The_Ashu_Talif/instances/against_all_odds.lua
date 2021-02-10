@@ -2,9 +2,9 @@
 -- Against All Odds
 -- Cor AF2
 -----------------------------------
+require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
-local instance_helpers = require("scripts/globals/instance")
 -----------------------------------
 local instance_object = {}
 
@@ -22,7 +22,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    instance_helpers.updateInstanceTime(instance, elapsed, ID.text)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)

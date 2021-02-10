@@ -1,28 +1,28 @@
 -----------------------------------
 -- TOAU-15: The Black Coffin
 -----------------------------------
+require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
-local instance_helpers = require("scripts/globals/instance")
 -----------------------------------
 local instance_object = {}
 
-instance_object.afterInstanceRegister = function(player)
+instance_object.afterInstanceRegister = function (player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, tpz.ki.EPHRAMADIAN_GOLD_COIN)
     player:delKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
-instance_object.onInstanceCreated = function(instance)
+instance_object.onInstanceCreated = function (instance)
     SpawnMob(ID.mob.GESSHO, instance)
     for i, mob in pairs(ID.mob[1]) do
         SpawnMob(mob, instance)
     end
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    instance_helpers.updateInstanceTime(instance, elapsed, ID.text)
+instance_object.onInstanceTimeUpdate = function (instance, elapsed)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -34,7 +34,7 @@ instance_object.onInstanceFailure = function(instance)
     end
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instance_object.onInstanceProgressUpdate = function (instance, progress)
     if progress == 5 then
         for i, mob in pairs(ID.mob[2]) do
             SpawnMob(mob, instance)
@@ -51,8 +51,13 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
 
 end
 
-instance_object.onInstanceComplete = function(instance)
+instance_object.onInstanceComplete = function (instance)
     local players = instance:getChars()
+
+    DespawnMob(ID.mob.GESSHO, instance)
+    for i, mob in pairs(ID.mob[2]) do
+        DespawnMob(mob, instance)
+    end
 
     for i, player in pairs(players) do
         if player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:getCharVar("AhtUrganStatus") == 1 then

@@ -1,10 +1,10 @@
 -----------------------------------
 -- TOAU-31: Shades of Vengeance
 -----------------------------------
+require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Periqia/IDs")
-local instance_helpers = require("scripts/globals/instance")
 -----------------------------------
 local instance_object = {}
 
@@ -20,7 +20,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    instance_helpers.updateInstanceTime(instance, elapsed, ID.text)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
