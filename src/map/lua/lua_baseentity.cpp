@@ -9402,7 +9402,7 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
  *  Notes   : Used for removal of multiple effects with matching flag
  ************************************************************************/
 
-void CLuaBaseEntity::delStatusEffectsByFlag(uint16 flag, sol::object const& silent)
+void CLuaBaseEntity::delStatusEffectsByFlag(uint32 flag, sol::object const& silent)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
