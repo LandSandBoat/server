@@ -25,7 +25,7 @@ RUN mkdir build && cd build && cmake .. && make -j $(nproc) && cd .. && rm -r /t
 COPY /conf/default/* conf/
 
 # Ensure wait_for_db_then_launch.sh is executable
-RUN chmod +x ./tools/wait_for_db_then_launch.sh
+RUN chmod +x ./wait_for_db_then_launch.sh
 
 # Startup the server when the container starts
-ENTRYPOINT ./tools/wait_for_db_then_launch.sh
+ENTRYPOINT ./wait_for_db_then_launch.sh
