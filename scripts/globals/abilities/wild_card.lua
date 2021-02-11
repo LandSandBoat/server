@@ -5,10 +5,7 @@
 -- Recast Time: 1:00:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/ability")
-require("scripts/globals/status")
-local corsair = require("scripts/globals/job_utils/corsair")
+require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
@@ -17,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    return corsair.useWildCard(caster, target, ability, action)
+    return tpz.job_utils.corsair.useWildCard(caster, target, ability, action)
 end
 
 return ability_object
