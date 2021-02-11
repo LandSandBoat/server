@@ -1,8 +1,8 @@
 -----------------------------------
 -- Assault: Excavation Duty
 -----------------------------------
-local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/instance")
+local ID = require("scripts/zones/Lebros_Cavern/IDs")
 -----------------------------------
 local instance_object = {}
 
@@ -24,7 +24,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)

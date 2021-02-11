@@ -549,7 +549,7 @@ public:
     uint8  countEffect(uint16 StatusID);                                    // Gets the number of effects of a specific type on the player
 
     bool   delStatusEffect(uint16 StatusID, sol::object const& SubID);                   // Removes Status Effect
-    void   delStatusEffectsByFlag(uint16 flag, sol::object const& silent);               // Removes Status Effects by Flag
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);               // Removes Status Effects by Flag
     bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message
     uint16 eraseStatusEffect();                                                          // Used with "Erase" spell
     uint8  eraseAllStatusEffect();                                                       // Erases all effects and returns number erased

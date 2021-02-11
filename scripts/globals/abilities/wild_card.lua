@@ -5,10 +5,7 @@
 -- Recast Time: 1:00:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/ability")
-require("scripts/globals/status")
-local corsair = require("scripts/globals/job_utils/corsair")
+require("scripts/globals/job_utils/corsair")
 -----------------------------------
 local ability_object = {}
 
@@ -17,14 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then
-        local roll = math.random(1, 6)
-        caster:setLocalVar("corsairRollTotal", roll)
-        action:speceffect(caster:getID(), roll)
-    end
-
-    local total = caster:getLocalVar("corsairRollTotal")
-    return corsair.doWildCard(caster, target, ability, action, total)
+    return tpz.job_utils.corsair.useWildCard(caster, target, ability, action)
 end
 
 return ability_object

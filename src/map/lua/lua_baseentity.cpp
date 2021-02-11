@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -7279,7 +7279,7 @@ void CLuaBaseEntity::trySkillUp(uint8 skill, uint8 level)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::trySkillUp() - Non-PC passed to function.\n");
+        // Do not attempt to skillup for non-PCs
         return;
     }
 
@@ -9402,7 +9402,7 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
  *  Notes   : Used for removal of multiple effects with matching flag
  ************************************************************************/
 
-void CLuaBaseEntity::delStatusEffectsByFlag(uint16 flag, sol::object const& silent)
+void CLuaBaseEntity::delStatusEffectsByFlag(uint32 flag, sol::object const& silent)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 

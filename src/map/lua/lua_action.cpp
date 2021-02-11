@@ -23,7 +23,7 @@
 #include "../packets/action.h"
 
 CLuaAction::CLuaAction(action_t* Action)
-:m_PLuaAction(Action)
+: m_PLuaAction(Action)
 {
     if (Action == nullptr)
     {
@@ -43,9 +43,14 @@ void CLuaAction::ID(uint32 actionTargetID, uint16 newActionTargetID)
     }
 }
 
-void CLuaAction::recast(uint16 recast)
+void CLuaAction::setRecast(uint16 recast)
 {
     m_PLuaAction->recast = recast;
+}
+
+uint16 CLuaAction::getRecast()
+{
+    return m_PLuaAction->recast;
 }
 
 void CLuaAction::actionID(uint16 actionid)
@@ -168,7 +173,8 @@ void CLuaAction::Register()
 {
     SOL_USERTYPE("CAction", CLuaAction);
     SOL_REGISTER("ID", CLuaAction::ID);
-    SOL_REGISTER("recast", CLuaAction::recast);
+    SOL_REGISTER("getRecast", CLuaAction::getRecast);
+    SOL_REGISTER("setRecast", CLuaAction::setRecast);
     SOL_REGISTER("actionID", CLuaAction::actionID);
     SOL_REGISTER("param", CLuaAction::param);
     SOL_REGISTER("messageID", CLuaAction::messageID);
