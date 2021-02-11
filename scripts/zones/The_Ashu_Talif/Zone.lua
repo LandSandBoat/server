@@ -3,8 +3,6 @@
 -- Zone: The_Ashu_Talif
 --
 -----------------------------------
-local ID = require("scripts/zones/The_Ashu_Talif/IDs")
------------------------------------
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
@@ -25,9 +23,6 @@ zone_object.onEventUpdate = function(player, csid, option, target)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 101 or csid == 102 then
-        player:setPos(0, 0, 0, 0, 54)
-    end
 end
 
 return zone_object
