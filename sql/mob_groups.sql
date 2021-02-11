@@ -10292,6 +10292,7 @@ INSERT INTO `mob_groups` VALUES (22,3618,150,'Siegebreaker_Wujroj',0,128,0,0,0,6
 INSERT INTO `mob_groups` VALUES (23,3588,150,'Shatterskull_Mippdapp',0,128,0,0,0,69,75,0);
 INSERT INTO `mob_groups` VALUES (24,1814,150,'Grimbolt_Onkzok',0,128,0,0,0,69,75,0);
 INSERT INTO `mob_groups` VALUES (25,3552,150,'Sevenskewer_Krugglug',0,128,0,0,0,69,75,0);
+INSERT INTO `mob_groups` VALUES (26,0,150,'Orcish_Bewitcher',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Castle_Oztroja (Zone 151)
@@ -14869,10 +14870,6 @@ INSERT INTO `mob_groups` VALUES (34,5777,287,'Paramount_Gallu',0,128,0,0,0,0,0,0
 INSERT INTO `mob_groups` VALUES (35,5776,287,'Paramount_Botulus',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (36,0,287,'Paramount_Avatar',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (37,0,287,'Auspicious_Entity',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (38,0,287,'Bozzetto_Freyja',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (39,0,287,'Bozzetto_Frigg',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (40,0,287,'Bozzetto_Skathi',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (41,0,287,'Achimi',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
 -- Escha_ZiTah (Zone 288)

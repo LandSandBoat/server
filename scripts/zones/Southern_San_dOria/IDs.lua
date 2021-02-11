@@ -98,7 +98,7 @@ zones[tpz.zone.SOUTHERN_SAN_DORIA] =
         NOT_ENOUGH_SPARKS              = 15403, -- You do not possess enough sparks of eminence to complete the transaction.
         MAX_SPARKS_LIMIT_REACHED       = 15404, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
         YOU_NOW_HAVE_AMT_CURRENCY      = 15414, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
-        TEAR_IN_FABRIC_OF_SPACE        = 16558, -- There appears to be a tear in the fabric of space...
+        TEAR_IN_FABRIC_OF_SPACE        = 16481, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

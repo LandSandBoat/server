@@ -37,7 +37,7 @@ zones[tpz.zone.MONASTIC_CAVERN] =
     },
     npc =
     {
-        TREASURE_COFFER = 17391849,
+        TREASURE_COFFER = 17391850,
     },
 }
 
