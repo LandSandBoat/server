@@ -94,7 +94,7 @@ zones[tpz.zone.SOUTHERN_SAN_DORIA] =
         TUTORIAL_NPC                   = 13523, -- Greetings and well met! Guardian of the Kingdom, Alaune, at your most humble service.
         YOU_WISH_TO_EXCHANGE_SPARKS    = 15373, -- You wish to exchange your sparks?
         NOT_ENOUGH_SPARKS              = 15403, -- You do not possess enough sparks of eminence to complete the transaction.
-        TEAR_IN_FABRIC_OF_SPACE        = 16558, -- There appears to be a tear in the fabric of space...
+        TEAR_IN_FABRIC_OF_SPACE        = 16481, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {
