@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -7279,7 +7279,7 @@ void CLuaBaseEntity::trySkillUp(uint8 skill, uint8 level)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::trySkillUp() - Non-PC passed to function.\n");
+        // Do not attempt to skillup for non-PCs
         return;
     }
 
