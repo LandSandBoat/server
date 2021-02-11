@@ -39,7 +39,7 @@ Setup
 ## Installing Python
 `python --version`
 
-**This requires Python 3.4+ and pip.**  
+**This requires Python 3 and pip.**  
 **Website:** https://www.python.org/downloads/  
 Download the latest version from the website or check your package manager.
 
