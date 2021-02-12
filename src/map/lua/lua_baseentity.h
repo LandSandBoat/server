@@ -202,6 +202,7 @@ public:
     void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
     auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                                 // Gets current GP item id and max points
     bool breakLinkshell(std::string const& lsname);                                                     // Breaks all pearls/sacks
+    bool addLinkpearl(std::string const& lsname, bool equip);                                           // Creates a linkpearl (pearlsack for GMs)
 
     // Trading
     uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
