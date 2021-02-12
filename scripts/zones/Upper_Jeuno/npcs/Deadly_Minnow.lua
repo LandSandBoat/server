@@ -17,7 +17,6 @@ entity.onTrigger = function(player, npc)
 
     if player:getCharVar("BorghertzHandsFirstTime") == 1 then
         player:startEvent(24)
-        player:setCharVar("BorghertzHandsFirstTime", 2)
     else
         local stock =
         {
@@ -42,6 +41,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    if csid == 24 then
+        player:setCharVar("BorghertzHandsFirstTime", 2)
+    end
 end
 
 return entity
