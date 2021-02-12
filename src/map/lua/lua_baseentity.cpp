@@ -3380,7 +3380,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     LSTYPE lstype = PChar->m_GMlevel > 0 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL;
     if (PItemLinkPearl != NULL)
     {
-        const char* Query = "SELECT linkshellid,color FROM linkshells WHERE name='%s' AND broken = 0";
+        const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
         int32 ret = Sql_Query(SqlHandle, Query, lsname);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
