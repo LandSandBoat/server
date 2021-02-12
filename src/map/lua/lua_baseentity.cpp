@@ -3391,22 +3391,24 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
             PItemLinkPearl->SetLSID(Sql_GetUIntData(SqlHandle, 0));
             PItemLinkPearl->SetLSColor(Sql_GetIntData(SqlHandle, 1));
             PItemLinkPearl->SetLSType(lstype);
-            charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl);
-            // equip linkpearl to slot 2
-            if (equip)
+            if (charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl) != ERROR_SLOTID)
             {
-                linkshell::AddOnlineMember(PChar, PItemLinkPearl, 2);
-                PItemLinkPearl->setSubType(ITEM_LOCKED);
-                PChar->equip[SLOT_LINK2] = PItemLinkPearl->getSlotID();
-                PChar->equipLoc[SLOT_LINK2] = LOC_INVENTORY;
-                PChar->pushPacket(new CInventoryAssignPacket(PItemLinkPearl, INV_LINKSHELL));
-                charutils::SaveCharEquip(PChar);
-                PChar->pushPacket(new CLinkshellEquipPacket(PChar, PItemLinkPearl->GetLSID()));
-                PChar->pushPacket(new CInventoryItemPacket(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID()));
-                PChar->pushPacket(new CInventoryFinishPacket());
-                charutils::LoadInventory(PChar);
+                // equip linkpearl to slot 2
+                if (equip)
+                {
+                    linkshell::AddOnlineMember(PChar, PItemLinkPearl, 2);
+                    PItemLinkPearl->setSubType(ITEM_LOCKED);
+                    PChar->equip[SLOT_LINK2] = PItemLinkPearl->getSlotID();
+                    PChar->equipLoc[SLOT_LINK2] = LOC_INVENTORY;
+                    PChar->pushPacket(new CInventoryAssignPacket(PItemLinkPearl, INV_LINKSHELL));
+                    charutils::SaveCharEquip(PChar);
+                    PChar->pushPacket(new CLinkshellEquipPacket(PChar, PItemLinkPearl->GetLSID()));
+                    PChar->pushPacket(new CInventoryItemPacket(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID()));
+                    PChar->pushPacket(new CInventoryFinishPacket());
+                    charutils::LoadInventory(PChar);
+                }
+                return true;
             }
-            return true;
         }
     }
     return false;
