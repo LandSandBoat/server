@@ -15760,7 +15760,7 @@ INSERT INTO `mob_groups` VALUES (121,0,297,'Disjoineds_Odin',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (1,0,298,'Odin_Prime',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2,0,298,'Cait_Sith',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (3,0,298,'Alexander',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,82,298,'Alexander',0,128,0,0,0,119,119,0);
 INSERT INTO `mob_groups` VALUES (4,0,298,'Lady_Lilith',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (5,0,298,'Aquila',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6,0,298,'Haudrale',0,128,0,0,0,0,0,0);
