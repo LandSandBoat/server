@@ -168,8 +168,8 @@ jobs:
       run: |
         ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
-        screen -d -m -S topaz_game ./topaz_game --log map-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
+        screen -d -m -S topaz_game ./topaz_game --log map-server.log
         sleep 2m
         killall screen
     - name: Check for errors
@@ -188,4 +188,81 @@ jobs:
 
         if grep -qi "Error" search-server.log; then
             exit -1
+        fi
+
+  MultiInstance_Startup_Checks_2004:
+    runs-on: ubuntu-20.04
+    services:
+      mysql:
+        image: mariadb
+        env:
+          MYSQL_DATABASE: tpzdb
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 0
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
+    - name: Configure CMake
+      run: |
+        export CC=/usr/bin/gcc-9
+        export CXX=/usr/bin/g++-9
+        cmake .
+    - name: Build Binaies
+      run: |
+        make -j $(nproc)
+    - name: Verify MySQL connection from container
+      run: |
+        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    - name: Import SQL files
+      run: |
+        for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
+        done
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    - name: Assign odd zones a different port
+      run: |
+        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "UPDATE tpzdb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
+    - name: Copy confs
+      run: |
+        cp conf/default/* conf/
+    - name: Run services (2 mins)
+      env:
+        MYSQL_HOST: mysql
+      run: |
+        ls -l
+        screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
+        screen -d -m -S topaz_search ./topaz_search --log search-server.log
+        screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230
+        screen -d -m -S topaz_game ./topaz_game --log map-server-1.log --port 54231
+        sleep 2m
+        killall screen
+    - name: Check for errors
+      run: |
+        cat login-server.log
+        cat search-server.log
+        cat map-server-0.log
+        cat map-server-1.log
+
+        if grep -qi "Error" login-server.log; then
+            exit -1
+        fi
+
+        if grep -qi "Error" search-server.log; then
+            exit -1
+        fi
+
+        if grep -qi "Error" map-server-0.log; then
+            exit -1
+        fi
+
+        if grep -qi "Error" map-server-1.log; then
+          exit -1
         fi
