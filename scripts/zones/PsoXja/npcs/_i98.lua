@@ -11,9 +11,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus")==3 and not GetMobByID(ID.mob.NUNYUNUWI):isSpawned()) then
+    local copMission = player:getCurrentMission(COP)
+    local copStatus = player:getCharVar("PromathiaStatus")
+
+    if
+        copMission == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and
+        copStatus == 3 and
+        not GetMobByID(ID.mob.NUNYUNUWI):isSpawned()
+    then
         SpawnMob(ID.mob.NUNYUNUWI):updateClaim(player)
-    elseif ( (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus")==4) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)) then
+    elseif
+        (
+            copMission == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and
+            copStatus == 4
+        ) or
+        player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR) or
+        player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)
+    then
         if (player:getZPos() < 318) then
             player:startEvent(69)
         else
@@ -22,6 +36,7 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.DOOR_LOCKED)
     end
+
     return 1
 end
 

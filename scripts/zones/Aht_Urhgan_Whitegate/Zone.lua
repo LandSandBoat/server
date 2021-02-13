@@ -39,8 +39,12 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     end
 
-    if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 0 and
-            player:getCharVar("TOAUM38_STARTDAY") ~= VanadielDayOfTheYear() and player:needToZone() == false) then
+    if
+        player:getCurrentMission(TOAU) == tpz.mission.id.toau.STIRRINGS_OF_WAR and
+        player:getCharVar("AhtUrganStatus") == 0 and
+        player:getCharVar("TOAUM38_STARTDAY") ~= VanadielDayOfTheYear() and
+        not player:needToZone()
+    then
         cs = 3220
     end
 
@@ -52,6 +56,10 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
+    local toauMission = player:getCurrentMission(TOAU)
+    local needToZone = player:needToZone()
+    local vDay = VanadielDayOfTheYear()
+
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)  -- Cutscene for Got It All quest.
@@ -65,41 +73,46 @@ zone_object.onRegionEnter = function(player, region)
             end
         end,
         [3] = function (x) -- TOAU Mission 1
-            if (player:getCurrentMission(TOAU)== tpz.mission.id.toau.LAND_OF_SACRED_SERPENTS) then
+            if (toauMission == tpz.mission.id.toau.LAND_OF_SACRED_SERPENTS) then
                 player:startEvent(3000, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.A_MERCENARY_LIFE and player:needToZone() == false) then
+            elseif (toauMission == tpz.mission.id.toau.A_MERCENARY_LIFE and not needToZone) then
                 if (prevZone ~= tpz.zone.AHT_URHGAN_WHITEGATE) then
                     player:startEvent(3050, 3, 3, 3, 3, 3, 3, 3, 3, 0)
                 end
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.FINDERS_KEEPERS) then
+            elseif (toauMission == tpz.mission.id.toau.FINDERS_KEEPERS) then
                 player:startEvent(3093)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.SOCIAL_GRACES) then
+            elseif (toauMission == tpz.mission.id.toau.SOCIAL_GRACES) then
                 player:startEvent(3095)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.FOILED_AMBITION and player:getCharVar("TOAUM23_STARTDAY") ~= VanadielDayOfTheYear() and player:needToZone() == false) then
+            elseif (toauMission == tpz.mission.id.toau.FOILED_AMBITION and player:getCharVar("TOAUM23_STARTDAY") ~= vDay and not needToZone) then
                 player:startEvent(3097, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PLAYING_THE_PART and player:getCharVar("TOAUM24_STARTDAY") ~= VanadielDayOfTheYear() and player:needToZone() == false) then
+            elseif (toauMission == tpz.mission.id.toau.PLAYING_THE_PART and player:getCharVar("TOAUM24_STARTDAY") ~= vDay and not needToZone) then
                 player:startEvent(3110)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_BLOOD) then
+            elseif (toauMission == tpz.mission.id.toau.PATH_OF_BLOOD) then
                 player:startEvent(3131, 1, 1, 1, 1, 1, 1, 1, 1)
             end
         end,
         [4] = function (x) -- AH mission
-            if (player:getCurrentMission(TOAU)== tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 2) then
+            if (toauMission == tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 2) then
                 player:startEvent(3024, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (player:getCurrentMission(TOAU)== tpz.mission.id.toau.BASTION_OF_KNOWLEDGE) then
+            elseif (toauMission == tpz.mission.id.toau.BASTION_OF_KNOWLEDGE) then
                 player:startEvent(3112)
             end
         end,
         [5] = function (x) -- AH mission
-            if (player:getCurrentMission(TOAU)== tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 3) then
+            if (toauMission == tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 3) then
                 player:startEvent(3026, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
+            elseif (toauMission == tpz.mission.id.toau.WESTERLY_WINDS and player:getCharVar("AhtUrganStatus") == 0) then
                 player:startEvent(3027, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.SWEETS_FOR_THE_SOUL) then
+            elseif (toauMission == tpz.mission.id.toau.SWEETS_FOR_THE_SOUL) then
                 player:startEvent(3092)
-            elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
+            elseif (toauMission == tpz.mission.id.toau.STIRRINGS_OF_WAR and player:getCharVar("AhtUrganStatus") == 1) then
                 player:startEvent(3136, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and player:getMainJob() == tpz.job.COR and player:getMainLvl() >= AF3_QUEST_LEVEL) then
+            elseif
+                player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
+                player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
+                player:getMainJob() == tpz.job.COR and
+                player:getMainLvl() >= AF3_QUEST_LEVEL
+            then
                 player:startEvent(797)
             end
         end,

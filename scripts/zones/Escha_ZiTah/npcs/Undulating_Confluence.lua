@@ -19,7 +19,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 4 and option == 1 then
-        player:setPos(-203, -20, 81, 76, 126)
+        tpz.teleport.to(player, tpz.teleport.id.QUFIM_CONFLUENCE)
     end
 end
 

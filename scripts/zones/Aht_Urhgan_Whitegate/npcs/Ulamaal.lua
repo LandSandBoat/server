@@ -4,11 +4,10 @@
 -- Type: Standard NPC
 -- !pos 93.512 -7.5 -128.530 50
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/settings")
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -17,9 +16,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local vanishProg = player:getCharVar("vanishingactCS")
+
     if player:getCharVar("deliveringTheGoodsCS") == 1 then
         player:startEvent(40)
-    elseif player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_AVAILABLE and player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_COMPLETED and player:getCharVar("VANISHING_ACT_waitJPMidnight") < os.time() then
+    elseif
+        player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_COMPLETED and
+        player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_AVAILABLE and
+        player:getCharVar("VANISHING_ACT_waitJPMidnight") < os.time()
+    then
         player:startEvent(42)
     elseif vanishProg == 4 and player:hasKeyItem(tpz.ki.RAINBOW_BERRY) then
         player:startEvent(45)
