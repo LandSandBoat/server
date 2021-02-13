@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Heat Breath
 -- Deals fire damage to enemies within a fan-shaped area originating from the caster
 -- Spell cost: 169 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 49 seconds
 -- Magic Bursts on: Liquefaction, Fusion, Light
 -- Combos: Magic Attack Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local multi = 6.38
     local params = {}
     params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
@@ -52,3 +53,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

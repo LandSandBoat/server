@@ -5,34 +5,37 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("formTime", os.time() + math.random(43, 47))
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local roamTime = mob:getLocalVar("formTime")
 
-    if mob:AnimationSub() == 0 and os.time() > roamTime then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() == 0 and os.time() > roamTime then
+        mob:setAnimationSub(1)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
-    elseif mob:AnimationSub() == 1 and os.time() > roamTime then
-        mob:AnimationSub(0)
+    elseif mob:getAnimationSub() == 1 and os.time() > roamTime then
+        mob:setAnimationSub(0)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local fightTime = mob:getLocalVar("formTime")
 
-    if mob:AnimationSub() == 0 and os.time() > fightTime then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() == 0 and os.time() > fightTime then
+        mob:setAnimationSub(1)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
-    elseif mob:AnimationSub() == 1 and os.time() > fightTime then
-        mob:AnimationSub(0)
+    elseif mob:getAnimationSub() == 1 and os.time() > fightTime then
+        mob:setAnimationSub(0)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
 end
 
-function onMobDeath(mob)
+entity.onMobDeath = function(mob)
 end
+
+return entity

@@ -10,11 +10,12 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- HEADSTONE PILGRIMAGE
     if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE then
         if player:hasKeyItem(tpz.ki.LIGHT_FRAGMENT) then
@@ -37,30 +38,30 @@ function onTrigger(player, npc)
             then
                 player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.LIGHT_FRAGMENT)
                 player:addTitle(tpz.title.BEARER_OF_THE_EIGHT_PRAYERS)
-                player:completeMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
-                player:addMission(ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
+                player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
+                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
             else
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_FRAGMENT)
             end
         end
 
     -- SOUL SEARCHING
-    elseif player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES) and not player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING)
+    elseif player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES) and not player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING) then
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING)
         player:startEvent(202, tpz.ki.PRISMATIC_FRAGMENT)
 
     -- DEFAULT DIALOGS
-    elseif player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
         player:messageSpecial(ID.text.ZILART_MONUMENT)
     else
         player:messageSpecial(ID.text.CANNOT_REMOVE_FRAG)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- HEADSTONE PILGRIMAGE
     if csid == 200 and option == 1 then
         SpawnMob(ID.mob.DOOMED_PILGRIMS):updateClaim(player)
@@ -70,3 +71,5 @@ function onEventFinish(player, csid, option)
         npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.SOUL_SEARCHING, {item = 13416, title = tpz.title.GUIDER_OF_SOULS_TO_THE_SANCTUARY})
     end
 end
+
+return entity

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Occultation
 -- Creates shadow images that each absorb a single attack directed at you
 -- Spell cost: 138 MP
@@ -9,18 +9,19 @@
 -- Level: 88
 -- Casting Time: 2 seconds
 -- Recast Time: 1 minute, 30 seconds
---
+-----------------------------------
 -- Combos: Evasion Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.BLINK
     local skill = caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
     local power = (skill / 50)
@@ -49,3 +50,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

@@ -1,21 +1,23 @@
------------------------------------------
+-----------------------------------
 -- ID: 5838
 -- Item: tube_of_clear_salve_ii
 -- Item Effect: Instantly removes all negative status effects from pet
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     if not target:hasPet() then
         return tpz.msg.basic.REQUIRES_A_PET
     end
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local pet = target:getPet()
-    
+
     local effects =
     {
         tpz.effect.PETRIFICATION,
@@ -51,3 +53,5 @@ function onItemUse(target)
 
     return removed
 end
+
+return item_object

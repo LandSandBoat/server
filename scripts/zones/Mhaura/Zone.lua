@@ -10,27 +10,27 @@ require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onGameHour(zone)
+zone_object.onGameHour = function(zone)
     -- Script for Laughing Bison sign flip animations
     local timer = 1152 - ((os.time() - 1009810802)%1152)
 
     -- Next ferry is Al Zhabi for higher values.
     if timer >= 576 then
-        GetNPCByID(ID.npc.LAUGHING_BISON):AnimationSub(1)
+        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(1)
     else
-        GetNPCByID(ID.npc.LAUGHING_BISON):AnimationSub(0)
+        GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
     SetServerVariable("Mhaura_Deastination", math.random(1, 100))
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local currentday = tonumber(os.date("%j"))
 
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.RESONACE and player:getCharVar("RhapsodiesStatus") == 0 then
         cs = 368
@@ -45,18 +45,18 @@ function onZoneIn(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") ~= currentday and player:getCharVar("COP_shikarees_story")== 0 then
+    if player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story")== 0 then
         cs = 322
     end
 
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     if transport == 47 or transport == 46 then
         if not player:hasKeyItem(tpz.ki.BOARDING_PERMIT) or ENABLE_TOAU == 0 then
             player:setPos(8.200, -1.363, 3.445, 192)
@@ -69,10 +69,10 @@ function onTransportEvent(player, transport)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
         if DepartureTime % 8 == 0 then
@@ -91,7 +91,9 @@ function onEventFinish(player, csid, option)
     elseif csid == 368 then
         -- Flag ROV 1-3 Mhuara Route (2)
         player:setCharVar("RhapsodiesStatus", 2)
-        player:completeMission(ROV, tpz.mission.id.rov.RESONACE)
-        player:addMission(ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EMISSARY_FROM_THE_SEAS)
     end
 end
+
+return zone_object

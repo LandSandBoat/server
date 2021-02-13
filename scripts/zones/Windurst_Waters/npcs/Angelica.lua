@@ -10,6 +10,7 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local poseItems =
 {
@@ -37,11 +38,11 @@ local poseItems =
     [tpz.job.RUN] = 12576,
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local aPose = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+entity.onTrigger = function(player, npc)
+    local aPose = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
     local aPoseProg = player:getCharVar("QuestAPoseByOtherName_prog")
     local desiredBody = poseItems[player:getMainJob()]
     local currentBody = player:getEquipID(tpz.slot.BODY)
@@ -84,10 +85,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- pre-quest CS
     if csid == 87 then
         player:setCharVar("QuestAPoseByOtherName_prog", 1)
@@ -96,7 +97,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 92 then
         local desiredBody = poseItems[player:getMainJob()]
 
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
         player:setCharVar("QuestAPoseByOtherName_time", os.time())
         player:setCharVar("QuestAPoseByOtherName_prog", 2)
         player:setCharVar("QuestAPoseByOtherName_equip", desiredBody)
@@ -113,7 +114,7 @@ function onEventFinish(player, csid, option)
 
     -- fail quest
     elseif csid == 102 then
-        player:delQuest(WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
+        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
         player:addTitle(tpz.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
         player:setCharVar("QuestAPoseByOtherName_time", 0)
         player:setCharVar("QuestAPoseByOtherName_equip", 0)
@@ -121,3 +122,5 @@ function onEventFinish(player, csid, option)
         player:needToZone(true)
     end
 end
+
+return entity

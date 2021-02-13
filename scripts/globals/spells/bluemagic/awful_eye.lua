@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Awful Eye
 -- Lowers Strength of enemies within a fan-shaped area originating from the caster
 -- Spell cost: 32 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Reverberation, Distortion, and Darkness
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     if (target:hasStatusEffect(tpz.effect.STR_DOWN)) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
@@ -47,3 +48,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.STR_DOWN
 end
+
+return spell_object

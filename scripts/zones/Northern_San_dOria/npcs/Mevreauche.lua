@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.SMITHING)
 
@@ -33,7 +34,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.SMITHING)
     local testItem = getTestItem(player, npc, tpz.skill.SMITHING)
     local guildMember = isGuildMember(player, 8)
@@ -67,10 +68,10 @@ function onTrigger(player, npc)
 end
 
 -- 626  627  16  0  73  74
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local guildMember = isGuildMember(player, 8)
 
     if (csid == 626 and option == 2) then
@@ -92,3 +93,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

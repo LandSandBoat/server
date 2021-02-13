@@ -3,11 +3,12 @@
 --  NPC: Anoki
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("COP_optional_CS_Anoki") == 0) then
         player:startEvent(724)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("COP_optional_CS_Anoki") == 1) then
@@ -17,13 +18,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 724) then
         player:setCharVar("COP_optional_CS_Anoki", 1)
     elseif (csid == 728) then
         player:setCharVar("COP_optional_CS_Anoki", 2)
     end
 end
+
+return entity

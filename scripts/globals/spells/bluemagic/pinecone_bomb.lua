@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Pinecone Bomb
 -- Additional effect: Sleep. Duration of effect varies with TP
 -- Spell cost: 48 MP
@@ -11,13 +11,14 @@
 -- Recast Time: 26.5 seconds
 -- Skillchain Element(s): Fire (can open Scission or Fusion and can close Liquefaction)
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function inverseBellRand(min, max, weight)
+local function inverseBellRand(min, max, weight)
     if not weight then weight = 0.5 end
     local mid = math.floor((max - min) / 2)
     local rand = math.floor(mid * math.pow(math.random(), weight))
@@ -28,11 +29,11 @@ function inverseBellRand(min, max, weight)
     end
 end
 
-function onMagicCastingCheck(caster,target,spell)
+spell_object.onMagicCastingCheck = function(caster,target,spell)
     return 0
 end
 
-function onSpellCast(caster,target,spell)
+spell_object.onSpellCast = function(caster,target,spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
@@ -65,3 +66,5 @@ function onSpellCast(caster,target,spell)
 
     return damage
 end
+
+return spell_object

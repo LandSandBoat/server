@@ -4,7 +4,8 @@
 require("scripts/globals/quests")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
-
+require("scripts/globals/utils")
+-----------------------------------
 tpz = tpz or {}
 tpz.goblinfootprint = tpz.goblinfootprint or {}
 
@@ -25,20 +26,20 @@ local csReq = -- add checks to this table
 {
     [tpz.zone.LA_THEINE_PLATEAU] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.DARK_PUPPET)) end,
-        [2] = function(player) return (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)) end,
-        [3] = function(player) return (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)) end,
-        [4] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.A_TIMELY_VISIT)) end,
-        [5] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.A_TIMELY_VISIT)) end,
-        [6] = function(player) return (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)) end,
-        [7] = function(player) return (player:hasCompletedMission(COP, tpz.mission.id.cop.THREE_PATHS)) end,
-        [8] = function(player) return (player:hasCompletedQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.WAKING_THE_BEAST)) end,
-        [9] = function(player) return (player:hasCompletedQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.WAKING_THE_BEAST)) end,
-        [10] = function(player) return (player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)) end,
-        [11] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)) end,
-        [12] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)) end,
-        [13] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.AN_OFFICER_AND_A_PIRATE)) end,
-        [14] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.TENUOUS_EXISTENCE)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET)) end,
+        [2] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)) end,
+        [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)) end,
+        [4] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TIMELY_VISIT)) end,
+        [5] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TIMELY_VISIT)) end,
+        [6] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)) end,
+        [7] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THREE_PATHS)) end,
+        [8] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.WAKING_THE_BEAST)) end,
+        [9] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.WAKING_THE_BEAST)) end,
+        [10] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)) end,
+        [11] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)) end,
+        [12] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_GOLDSTRUCK_GIGAS)) end,
+        [13] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.AN_OFFICER_AND_A_PIRATE)) end,
+        [14] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.TENUOUS_EXISTENCE)) end,
         [15] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
         [16] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
         [17] = function(player) return false end,               -- QUEST NOT IMPLEMENTED (ROV)
@@ -54,53 +55,53 @@ local csReq = -- add checks to this table
     },
     [tpz.zone.NORTH_GUSTABERG] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)) end,
-        [2] = function(player) return (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_GUSTABERG_TOUR)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES)) end,
+        [2] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_GUSTABERG_TOUR)) end,
         [3] = function(player) return (player:hasItem(18306) or player:hasItem(18307) or player:hasItem(18644) or
         player:hasItem(18658) or player:hasItem(18672) or player:hasItem(19753) or player:hasItem(19846) or
         player:hasItem(20880) or player:hasItem(20881) or player:hasItem(21808)) end, -- RELIC: Apocalypse
-        [4] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE)) end,
-        [5] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE)) end,
+        [4] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE)) end,
+        [5] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.AN_ULCEROUS_URAGNITE)) end,
     },
     [tpz.zone.SOUTH_GUSTABERG] =
     {
-        [1] = function(player) return (player:hasCompletedMission(COP, tpz.mission.id.cop.A_TRANSIENT_DREAM)) end,
-        [2] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
-        [3] = function(player) return (player:hasCompletedQuest(ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
+        [1] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_TRANSIENT_DREAM)) end,
+        [2] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
+        [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)) end,
     },
     [tpz.zone.MERIPHATAUD_MOUNTAINS] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)) end,
     },
     [tpz.zone.ROMAEVE] =
     {
-        [1] = function(player) return (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.VAIN)) end,
-        [2] = function(player) return (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING)) end,
-        [3] = function(player) return (player:hasCompletedQuest(ZILART, tpz.quest.id.outlands.DIVINE_MIGHT)) end,
-        [4] = function(player) return (player:hasCompletedMission(ASA, tpz.mission.id.asa.FOUNTAIN_OF_TROUBLE)) end,
+        [1] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.VAIN)) end,
+        [2] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING)) end,
+        [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.ZILART, tpz.quest.id.outlands.DIVINE_MIGHT)) end,
+        [4] = function(player) return (player:hasCompletedMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.FOUNTAIN_OF_TROUBLE)) end,
     },
     [tpz.zone.CASTLE_ZVAHL_KEEP] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS)) end,
     },
     [tpz.zone.BOSTAUNIEUX_OUBLIETTE] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)) end,
-        [2] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)) end,
-        [3] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)) end,
-        [4] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)) end,
-        [5] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW)) end,
-        [6] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW)) end,
-        [7] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)) end,
+        [2] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)) end,
+        [3] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)) end,
+        [4] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST)) end,
+        [5] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW)) end,
+        [6] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW)) end,
+        [7] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW)) end,
     },
     [tpz.zone.MAZE_OF_SHAKHRAMI] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)) end,
     },
     [tpz.zone.GARLAIGE_CITADEL] =
     {
-        [1] = function(player) return (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.ESCORT_FOR_HIRE)) end,
-        [2] = function(player) return (player:hasCompletedQuest(SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)) end,
+        [1] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ESCORT_FOR_HIRE)) end,
+        [2] = function(player) return (player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)) end,
     },
 }
 
@@ -200,7 +201,8 @@ function tpz.goblinfootprint.rewatch(player, trigger)
         end
     end
     if options > 1 then
-        player:startEvent(gobCS[zone], bit.bnot(options), -2, -2, -2)
+        local arg = utils.MAX_UINT32 - 1
+        player:startEvent(gobCS[zone], bit.bnot(options), arg, arg, arg)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

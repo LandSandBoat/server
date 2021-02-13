@@ -1,15 +1,16 @@
------------------------------------------
+-----------------------------------
 -- Spell: Utsusemi: San
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     if target:hasStatusEffect(tpz.effect.THIRD_EYE) then
         -- Third Eye and Utsusemi don't stack. Utsusemi removes Third Eye.
         target:delStatusEffect(tpz.effect.THIRD_EYE)
@@ -29,3 +30,5 @@ function onSpellCast(caster, target, spell)
 
     return tpz.effect.COPY_IMAGE
 end
+
+return spell_object

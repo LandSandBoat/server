@@ -8,8 +8,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
         return tpz.msg.basic.REQUIRES_A_PET, 0
    elseif (player:getPetID() ~= tpz.pet.id.WYVERN) then
@@ -19,7 +20,9 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
    local wyvern = player:getPet()
    wyvern:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is "Magic Attack boost wears off."
 end
+
+return ability_object

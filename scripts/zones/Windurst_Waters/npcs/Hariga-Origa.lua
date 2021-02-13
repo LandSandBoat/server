@@ -10,10 +10,11 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    smudgeStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
 
     if (smudgeStatus == QUEST_ACCEPTED and trade:hasItemQty(637, 1) and trade:hasItemQty(4382, 1)) then
         player:startEvent(417, 3000)
@@ -21,11 +22,11 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    GlyphHanger = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
-    chasingStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHASING_TALES)
-    smudgeStatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    GlyphHanger = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+    chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
+    smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     Fame = player:getFameLevel(WINDURST)
 
     if (smudgeStatus == QUEST_COMPLETED and player:needToZone() == true) then
@@ -51,13 +52,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 381 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
         player:addKeyItem(tpz.ki.NOTES_FROM_HARIGAORIGA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NOTES_FROM_HARIGAORIGA)
     elseif (csid == 385) then
@@ -68,9 +69,9 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_THE_HORUTOTO_RUINS)
         end
         player:addFame(WINDURST, 120)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
     elseif (csid == 413 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     elseif (csid == 417) then
         player:needToZone(true)
         player:addGil(GIL_RATE*3000)
@@ -80,7 +81,9 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_FEIYIN)
         end
         player:addFame(WINDURST, 120)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     end
 
 end
+
+return entity

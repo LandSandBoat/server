@@ -1,23 +1,24 @@
------------------------------------------
+-----------------------------------
 -- Trust: Ajido-Marujido
------------------------------------------
+-----------------------------------
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/trust")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 local message_page_offset = 8
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return tpz.trust.canCast(caster, spell)
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     return tpz.trust.spawn(caster, spell)
 end
 
-function onMobSpawn(mob)
+spell_object.onMobSpawn = function(mob)
     tpz.trust.teamworkMessage(mob, message_page_offset, {
         [tpz.magic.spell.SHANTOTTO] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.STAR_SIBYL] = tpz.trust.message_offset.TEAMWORK_2,
@@ -39,10 +40,12 @@ function onMobSpawn(mob)
                         ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 60)
 end
 
-function onMobDespawn(mob)
+spell_object.onMobDespawn = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
-function onMobDeath(mob)
+spell_object.onMobDeath = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end
+
+return spell_object

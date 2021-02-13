@@ -6,10 +6,13 @@
 local ID = require("scripts/zones/Outer_Horutoto_Ruins/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.AH_PUCH_PH, 20, math.random(3600, 10800)) -- 1 to 3 hours
 end
+
+return entity

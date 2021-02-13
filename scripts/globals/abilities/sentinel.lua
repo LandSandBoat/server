@@ -7,12 +7,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
    -- Whether feet have to be equipped before using ability, or if they can be swapped in
    -- is disputed.  Source used: http://wiki.bluegartr.com/bg/Sentinel
     local power = 90 + player:getMod(tpz.mod.SENTINEL_EFFECT)
@@ -23,3 +24,5 @@ function onUseAbility(player, target, ability)
    player:addStatusEffect(tpz.effect.SENTINEL, power, 3, 30, 0, guardian)
 
 end
+
+return ability_object

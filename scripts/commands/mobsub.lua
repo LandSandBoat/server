@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: mobsub
 -- desc: Changes the sub-animation of the given mob. (For testing purposes.)
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 require("scripts/globals/status")
 
@@ -54,5 +54,5 @@ function onTrigger(player, arg1, arg2)
     end
 
     -- set animation sub
-    targ:AnimationSub( animationId )
+    targ:setAnimationSub( animationId )
 end

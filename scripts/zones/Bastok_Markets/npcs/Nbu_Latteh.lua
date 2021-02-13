@@ -10,13 +10,14 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(BASTOK)
-    local momTheAdventurer = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
+    local momTheAdventurer = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
     local questStatus = player:getCharVar("MomTheAdventurer_Event")
 
     if (player:needToZone()) then
@@ -31,7 +32,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(231)
         end
-    elseif (pFame >= 2 and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_AVAILABLE) then
+    elseif (pFame >= 2 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_AVAILABLE) then
         player:startEvent(235)
     else
         player:startEvent(127)
@@ -39,18 +40,18 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 230 and option == 0) then
         if (player:getFreeSlotsCount(0) > 0) then
             player:setCharVar("MomTheAdventurer_Event", 1)
             player:addItem(4096)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4096) -- Fire Crystal
-            if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_AVAILABLE) then
-                player:addQuest(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
+            if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_AVAILABLE) then
+                player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
             end
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4096)
@@ -68,15 +69,17 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*gilReward)
         player:setCharVar("MomTheAdventurer_Event", 0)
 
-        if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then
             player:addFame(BASTOK, 20)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER)
         else
             player:addFame(BASTOK, 8)
         end
     elseif (csid == 235 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
         player:setCharVar("MomTheAdventurer_Event", 0)
     end
 
 end
+
+return entity

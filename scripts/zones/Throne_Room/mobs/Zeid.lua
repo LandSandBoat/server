@@ -4,15 +4,17 @@
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 32004 then
 
         local bfid = player:getBattlefield():getArea()
@@ -37,3 +39,5 @@ function onEventFinish(player, csid, option)
         volker:spawn()
     end
 end
+
+return entity

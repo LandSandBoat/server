@@ -1,4 +1,4 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: reloadglobal
 -- desc: Attempt to reload specified global lua without a restart.
 --
@@ -9,7 +9,7 @@
 -- less experienced GMs do not mistakenly misuse it.
 --
 -- specify "I_am_sure" without quotes to attempt to reload things that are not in \scripts\globals\
----------------------------------------------------------------------------------------------------
+-----------------------------------
 
 cmdprops =
 {

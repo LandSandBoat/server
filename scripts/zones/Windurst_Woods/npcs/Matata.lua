@@ -7,14 +7,15 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local IAS = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.IN_A_STEW)
+entity.onTrigger = function(player, npc)
+    local IAS = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_STEW)
     local IASvar = player:getCharVar("IASvar")
-    local CB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
+    local CB = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHOCOBILIOUS)
 
     -- IN A STEW
     if IAS == QUEST_ACCEPTED and IASvar == 1 then
@@ -34,12 +35,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- IN A STEW
     if csid == 233 then
         player:setCharVar("IASvar", 2)
     end
 end
+
+return entity

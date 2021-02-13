@@ -8,6 +8,7 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
 function cutEmpathyEffectTable(validEffects, i, maxCount)
     local delindex = 1
@@ -25,7 +26,7 @@ function cutEmpathyEffectTable(validEffects, i, maxCount)
     return validEffects
 end
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
         return tpz.msg.basic.REQUIRES_A_PET, 0
     else
@@ -37,7 +38,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     local playerHP = player:getHP()
     local drainamount = (math.random(25, 35) / 100) * playerHP
@@ -94,7 +95,7 @@ function onUseAbility(player, target, ability)
         local i = 0 -- highest existing index
         local copyi = 0
 
-        for _, effect in ipairs(effects) do
+        for _, effect in pairs(effects) do
             if bit.band(effect:getFlag(), tpz.effectFlag.EMPATHY) == tpz.effectFlag.EMPATHY then
                 validEffects[i+1] = effect
                 i = i + 1
@@ -124,3 +125,5 @@ function onUseAbility(player, target, ability)
     player:addTP(petTP/2) --add half pet tp to you
     pet:delTP(petTP/2) -- remove half tp from pet
 end
+
+return ability_object

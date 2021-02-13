@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Pinning Shot
 --
 -- Description: Delivers a threefold ranged attack to targets in an area of effect. Additional effect: Bind
@@ -6,13 +6,14 @@
 -- Utsusemi/Blink absorb: 2-3 shadows
 -- Range: Unknown
 -- Notes: Used only by Medusa.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 1865) then
@@ -22,7 +23,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = math.random(2, 3)
     local accmod = 1
     local dmgmod = 1
@@ -35,3 +36,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

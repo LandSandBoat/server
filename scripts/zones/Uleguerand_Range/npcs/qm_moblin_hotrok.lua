@@ -8,10 +8,11 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     local louverancesPath = player:getCharVar("COP_Louverance_s_Path")
 
     -- Taking a logical guess what criteria displays what message.
@@ -39,9 +40,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+    local overTheHillsAndFarAway = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
     if overTheHillsAndFarAway == QUEST_COMPLETED then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -54,13 +55,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 10 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY, {gil = 2000, xp = 2000, ki = tpz.ki.MAP_OF_THE_ULEGUERAND_RANGE}) then
         player:confirmTrade()
     end
 
 end
+
+return entity

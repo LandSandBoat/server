@@ -1,15 +1,15 @@
-------------------------------------
+-----------------------------------
 -- Treasure Chests and Coffers
 -- http://ffxiclopedia.wikia.com/wiki/Picking_your_Coffers_and_Chests
 -- http://ffxiclopedia.wikia.com/wiki/Treasure_Chest_and_Coffer_Guide
-------------------------------------
+-----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.treasure = tpz.treasure or {}
@@ -136,7 +136,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(BASTOK, tpz.quest.id.bastok.FADED_PROMISES) == QUEST_ACCEPTED and player:getCharVar("FadedPromises") == 2 and not player:hasKeyItem(tpz.ki.DIARY_OF_MUKUNDA) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES) == QUEST_ACCEPTED and player:getCharVar("FadedPromises") == 2 and not player:hasKeyItem(tpz.ki.DIARY_OF_MUKUNDA) end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.DIARY_OF_MUKUNDA) end,
                     },
                 },
@@ -234,7 +234,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED and player:getCharVar("scatIntoShadowCS") == 1 and not player:hasItem(13121) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED and player:getCharVar("scatIntoShadowCS") == 1 and not player:hasItem(13121) end,
                         code = function(player) npcUtil.giveItem(player, 13121) end,
                     },
                 },
@@ -265,7 +265,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.GUIDING_BELL) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.GUIDING_BELL) end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.GUIDING_BELL) end,
                     },
                 },
@@ -291,7 +291,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.GUIDING_BELL) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.GUIDING_BELL) end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.GUIDING_BELL) end,
                     },
                 },
@@ -313,7 +313,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.UN_MOMENT) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.UN_MOMENT) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, tpz.ki.UN_MOMENT)
                             player:addCharVar("ATestOfTrueLoveProgress", 1)
@@ -349,7 +349,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.UN_MOMENT) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.UN_MOMENT) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, tpz.ki.UN_MOMENT)
                             player:addCharVar("ATestOfTrueLoveProgress", 1)
@@ -372,7 +372,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LEPHEMERE) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LEPHEMERE) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, tpz.ki.LEPHEMERE)
                             player:addCharVar("ATestOfTrueLoveProgress", 1)
@@ -467,13 +467,13 @@ local treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") >= 1 and not player:hasKeyItem(tpz.ki.TORN_OUT_PAGES)
+                            return player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") >= 1 and not player:hasKeyItem(tpz.ki.TORN_OUT_PAGES)
                         end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.TORN_OUT_PAGES) end,
                     },
                     {
                         test = function(player)
-                            return player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 0 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(tpz.ki.MAGICAL_PATTERN)
+                            return player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 0 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(tpz.ki.MAGICAL_PATTERN)
                         end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.MAGICAL_PATTERN) end,
                     },
@@ -541,7 +541,7 @@ local treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 1 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(tpz.ki.MAGICAL_PATTERN)
+                            return player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 1 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(tpz.ki.MAGICAL_PATTERN)
                         end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.MAGICAL_PATTERN) end,
                     },
@@ -607,7 +607,7 @@ local treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 2 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(tpz.ki.MAGICAL_PATTERN)
+                            return player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and VanadielRSELocation() == 2 and VanadielRSERace() == player:getRace() and not player:hasKeyItem(tpz.ki.MAGICAL_PATTERN)
                         end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.MAGICAL_PATTERN) end,
                     },
@@ -663,7 +663,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.FEIYIN_MAGIC_TOME) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SORCERY_OF_THE_NORTH) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.FEIYIN_MAGIC_TOME) end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.FEIYIN_MAGIC_TOME) end,
                     },
                 },
@@ -696,7 +696,7 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LANCIENNE) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LANCIENNE) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, tpz.ki.LANCIENNE)
                             player:addCharVar("ATestOfTrueLoveProgress", 1)
@@ -726,7 +726,7 @@ local treasureInfo =
         },
     },
 
-    -------------------------------------------------
+    -----------------------------------
 
     [tpz.treasure.type.COFFER] =
     {
@@ -1028,11 +1028,11 @@ local treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and player:getCharVar("trueWillCS") == 2 and not player:hasKeyItem(tpz.ki.LARGE_TRICK_BOX) end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and player:getCharVar("trueWillCS") == 2 and not player:hasKeyItem(tpz.ki.LARGE_TRICK_BOX) end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.LARGE_TRICK_BOX) end,
                     },
                     {
-                        test = function(player) return player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 1 end,
+                        test = function(player) return player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and player:getCharVar("KnightStalker_Progress") == 1 end,
                         code = function(player) npcUtil.giveKeyItem(player, tpz.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) end,
                     },
                 },
@@ -1254,9 +1254,9 @@ local treasureInfo =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function doMove(npc, x, y, z)
     return function(entity)
@@ -1287,9 +1287,9 @@ local function spawnMimic(player, npc)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 tpz.treasure.initZone = function(zone)
     local zoneId = zone:getID()
@@ -1333,8 +1333,8 @@ tpz.treasure.onTrade = function(player, npc, trade, chestType)
     local mLvl = player:getMainLvl()
     local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
     local illusionCooldown  = npc:getLocalVar("illusionCooldown")
-    
-    -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get 
+
+    -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get
     -- around this restriction. Strip invisible to make sure that case is covered.
     player:delStatusEffect(tpz.effect.INVISIBLE)
     -- Interacting with Treasures and Coffers drops Sneak
@@ -1426,7 +1426,7 @@ tpz.treasure.onTrade = function(player, npc, trade, chestType)
         chestType == tpz.treasure.type.COFFER and
         info.af and
         info.af[mJob] and
-        player:getQuestStatus(JEUNO, info.af[mJob].quest) >= QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, info.af[mJob].quest) >= QUEST_ACCEPTED and
         not player:hasItem(info.af[mJob].reward)
     then
         player:messageSpecial(msgBase)

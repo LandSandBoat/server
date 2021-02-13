@@ -4,7 +4,10 @@
 -- Type: Door
 -- !pos -180 1.375 -159 166
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     return 1
 end
+
+return entity

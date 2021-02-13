@@ -1,18 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Drain II
 -- Drain functions only on skill level!!
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 20 + (1.236 * caster:getSkillLevel(tpz.skill.DARK_MAGIC))
@@ -61,3 +62,5 @@ function onSpellCast(caster, target, spell)
     spell:setMsg(tpz.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
     return dmg
 end
+
+return spell_object

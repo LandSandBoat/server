@@ -6,11 +6,13 @@
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/shop")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local stock =
     {
         4128, 4445, 1,    --Ether
@@ -25,7 +27,7 @@ function onTrigger(player, npc)
         17336,   5, 3,     --Crossbow Bolt
     }
 
-    local rank = getNationRank(tpz.nation.BASTOK)
+    local rank = GetNationRank(tpz.nation.BASTOK)
 
     if (rank ~= 1) then
         table.insert(stock, 1022)    --Thief's Tools
@@ -42,8 +44,10 @@ function onTrigger(player, npc)
     tpz.shop.nation(player, stock, tpz.nation.BASTOK)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

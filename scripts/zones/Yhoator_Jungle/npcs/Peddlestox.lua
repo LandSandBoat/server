@@ -7,15 +7,18 @@
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
 require("scripts/globals/beastmentreasure")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player)
+entity.onTrigger = function(player)
     tpz.bmt.handleNpcOnTrigger(player, ID.npc.BEASTMEN_TREASURE)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     tpz.bmt.handleNpcOnTrade(player, trade, ID.npc.BEASTMEN_TREASURE)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.bmt.handleNpcOnEventFinish(player, csid)
 end
+
+return entity

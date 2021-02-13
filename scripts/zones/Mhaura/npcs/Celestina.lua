@@ -14,15 +14,16 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_ACCEPTED then
         if npcUtil.tradeHasExactly(trade, 13095) then
-            player:startEvent(127) -- Finish quest "The Sand Charm"
+            player:startEvent(127, 0, 13095) -- Finish quest "The Sand Charm"
         end
     end
 
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 5 then
         if npcUtil.tradeHasExactly(trade, 1127) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_3", 0)
@@ -32,7 +33,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("theSandCharmVar") == 3 then
         player:startEvent(126, 13095) -- During quest "The Sand Charm" - 3rd dialog
     else
@@ -42,10 +43,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 126 and option == 70 then
         player:setCharVar("theSandCharmVar", 4)
     elseif (csid == 127) then
@@ -58,3 +59,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("SmallDialogByBlandine", 1)
     end
 end
+
+return entity

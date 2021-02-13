@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- The Magical Gizmo Number, this number will be compared to the random
     -- value created by the mission The Horutoto Ruins Experiment, when you
     -- reach the Gizmo Door and have the cutscene
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- If we just finished the cutscene for Windurst Mission 1-1
     -- The cutscene that we opened the correct Magical Gizmo
     if csid == 50 then
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.NOT_BROKEN_ORB)
     end
 end
+
+return entity

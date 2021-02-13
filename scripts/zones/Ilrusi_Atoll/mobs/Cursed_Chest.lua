@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local PX = target:getXPos()
     local PY = target:getYPos()
     local PZ = target:getZPos()
@@ -19,7 +20,7 @@ function onMobFight(mob, target)
     end
 end
 
-function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, Rayon, maxRayon)
+local function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, Rayon, maxRayon)
     local difX = playerX-centerX
     local difY = playerY-centerY
     local difZ = playerZ-centerZ
@@ -32,5 +33,7 @@ function CheckForDrawnIn(centerX, centerY, centerZ, playerX, playerY, playerZ, R
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

@@ -10,17 +10,18 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 567) -- Well Water
     then
         player:startEvent(3)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local missionStatus = player:getCharVar("MissionStatus")
     local X = npc:getXPos()
@@ -38,15 +39,15 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 4 then
         player:setCharVar("MissionStatus", 2)
     elseif
         csid == 2 and
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
         not player:hasItem(547) and
         not player:hasItem(567) and
         npcUtil.giveItem(player, 547) -- Tomb Waterskin
@@ -59,3 +60,5 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.ANCIENT_SANDORIAN_BOOK)
     end
 end
+
+return entity

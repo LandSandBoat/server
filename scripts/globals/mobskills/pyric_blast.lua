@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 --  Pyric Blast
 --
 --  Description: Deals Fire damage to enemies within a fan-shaped area. Additional effect: Plague
 --  Type: Breath
 --  Ignores Shadows
 --  Range: Unknown Cone
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if(mob:getFamily() == 316) then
         local mobSkin = mob:getModelId()
 
@@ -22,14 +23,14 @@ function onMobSkillCheck(target, mob, skill)
         end
     end
 
-    if (mob:AnimationSub() == 0) then
+    if (mob:getAnimationSub() == 0) then
         return 0
     else
         return 1
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = MobBreathMove(mob, target, 0.01, 0.1, tpz.magic.ele.FIRE, 700)
     local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.FIRE, MOBPARAM_IGNORE_SHADOWS)
@@ -44,3 +45,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

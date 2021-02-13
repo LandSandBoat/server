@@ -7,13 +7,14 @@ require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ALWAYS_AGGRO, 1)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -22,7 +23,9 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.THE_HORNSPLITTER)
     tpz.tutorial.onMobDeath(player)
 end
+
+return entity

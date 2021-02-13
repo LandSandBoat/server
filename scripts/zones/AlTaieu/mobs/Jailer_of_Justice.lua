@@ -5,8 +5,9 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local popTime = mob:getLocalVar("lastPetPop")
     -- ffxiclopedia says 30 sec, bgwiki says 1-2 min..
     -- Going with 60 seconds until I see proof of retails timing.
@@ -26,5 +27,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

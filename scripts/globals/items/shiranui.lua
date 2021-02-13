@@ -1,13 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 17774
 -- Item: Shiranui
 -- Additional Effect: Light Damage (night time only)
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     if (VanadielHour() >= 18 or VanadielHour() <= 6) then
         local chance = 15
         if (math.random(0, 99) >= chance) then
@@ -33,3 +34,5 @@ function onAdditionalEffect(player, target, damage)
         return 0, 0, 0
     end
 end
+
+return item_object

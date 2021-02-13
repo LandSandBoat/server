@@ -6,8 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and player:getCharVar("MissionStatus") == 5) then
         if (trade:hasItemQty(599, 1) and trade:getItemCount() == 1) then -- Trade Mythril Sand
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     currentMission = player:getCurrentMission(WINDURST)
     MissionStatus = player:getCharVar("MissionStatus")
@@ -44,27 +45,29 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 254) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_WINDURST)
         player:setCharVar("MissionStatus", 3)
     elseif (csid == 256) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2)
         player:setCharVar("MissionStatus", 8)
     elseif (csid == 257) then
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
     elseif (csid == 255) then
         player:tradeComplete()
         player:setCharVar("MissionStatus", 7)
-        player:addMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
+        player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS)
     end
 
 end
+
+return entity

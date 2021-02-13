@@ -11,21 +11,22 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 require("scripts/globals/trust")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
     tpz.trust.onTradeCipher(player, trade, 3503, 3552, 3553)
 end
 
-function onTrigger(player, npc)
-    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+entity.onTrigger = function(player, npc)
+    local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
 
-    if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 then
-        if TrustSandoria == QUEST_AVAILABLE and (TrustWindurst == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
-            player:startEvent(3504)
-        elseif TrustSandoria == QUEST_AVAILABLE and TrustWindurst == QUEST_AVAILABLE and TrustBastok == QUEST_AVAILABLE then
+    if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 and TrustSandoria == QUEST_AVAILABLE then
+        if TrustWindurst == QUEST_AVAILABLE and TrustBastok == QUEST_AVAILABLE then
             player:startEvent(3500)
+        elseif TrustWindurst == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED then
+            player:startEvent(3504)
         end
     elseif player:hasKeyItem(tpz.ki.RED_INSTITUTE_CARD) then
         player:startEvent(3501)
@@ -36,18 +37,20 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 3500 or csid == 3504) and option == 2 then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
         npcUtil.giveKeyItem(player, tpz.ki.RED_INSTITUTE_CARD)
     elseif csid == 3503 or csid == 3553 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)
-        player:addSpell(spellID, false, true)
+        player:addSpell(spellID, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, spellID)
         player:tradeComplete()
     end
 end
+
+return entity

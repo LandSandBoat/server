@@ -1,22 +1,23 @@
 -----------------------------------
---
---     tpz.effect.LEAVEGAME
---
+-- tpz.effect.LEAVEGAME
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setAnimation(33)
     target:messageSystem(effect:getPower(), 30)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     if (effect:getTickCount() > 5) then
-        target:leavegame()
+        target:leaveGame()
     else
         target:messageSystem(effect:getPower(), 30-effect:getTickCount()*5)
     end
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:setAnimation(0)
 end
+
+return effect_object

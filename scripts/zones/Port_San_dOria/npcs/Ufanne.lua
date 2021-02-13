@@ -3,21 +3,22 @@
 --   NPC: Ufanne
 -- Type: Standard NPC
 -- !pos -15.965 -3 -47.748 232
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local fishCountVar = 0
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RIVALRY) == QUEST_ACCEPTED) then
         fishCountVar = player:getCharVar("theCompetitionFishCountVar")
         player:startEvent(309, 0, 0, fishCountVar)
-    elseif (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_COMPETITION) == QUEST_ACCEPTED) then
         fishCountVar = player:getCharVar("theCompetitionFishCountVar")
         player:startEvent(309, 1, 0, fishCountVar)
     else
@@ -25,8 +26,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

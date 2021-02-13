@@ -6,17 +6,18 @@
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- COP 4-2
     if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SAVAGE and player:getCharVar("PromathiaStatus") == 0 then
         player:startEvent(8)
     -- COP 4-1
-    elseif player:hasCompletedMission(COP, tpz.mission.id.cop.SHELTERING_DOUBT) then
+    elseif player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SHELTERING_DOUBT) then
         player:startEvent(551) -- Access to Sites A & B
     else
         player:startEvent(550) -- Access to Site A Only
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 8 then
         player:setCharVar("PromathiaStatus", 1)
@@ -39,3 +40,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

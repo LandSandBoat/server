@@ -11,15 +11,16 @@ require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_ACCEPTED and trade:hasItemQty(554, 1) == true and trade:getItemCount() == 1) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_ACCEPTED and trade:hasItemQty(554, 1) == true and trade:getItemCount() == 1) then
         player:startEvent(166) -- Ending quest
     end
 end
 
-function onTrigger(player, npc)
-    if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED and player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_AVAILABLE) then
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE) == QUEST_ACCEPTED and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO) == QUEST_AVAILABLE) then
         if (player:getFameLevel(NORG) >= 2) then
             player:startEvent(167) -- Start quest
         else
@@ -30,18 +31,20 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 167) then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
     elseif (csid == 166) then
         player:addTitle(tpz.title.TRADER_OF_RENOWN)
         player:addKeyItem(tpz.ki.CLOCK_TOWER_OIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLOCK_TOWER_OIL)
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DEAL_WITH_TENSHODO)
     end
 end
+
+return entity

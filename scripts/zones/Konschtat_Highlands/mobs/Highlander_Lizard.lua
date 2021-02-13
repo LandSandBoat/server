@@ -7,8 +7,9 @@ require("scripts/globals/regimes")
 require("scripts/globals/status")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     -- Higher TP Gain per melee hit than normal lizards.
     -- It is definitly NOT regain.
     mob:addMod(tpz.mod.STORETP, 25) -- May need adjustment.
@@ -17,7 +18,7 @@ function onMobInitialize(mob)
     mob:addMod(tpz.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 206)
     -- I think he still counts the FoV pages? Most NM's do not though.
     tpz.regime.checkRegime(player, mob, 20, 2, tpz.regime.type.FIELDS)
@@ -25,7 +26,9 @@ function onMobDeath(mob, player, isKiller)
     tpz.tutorial.onMobDeath(player)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(math.random(1200, 1800)) -- 20~30 min repop
 end
+
+return entity

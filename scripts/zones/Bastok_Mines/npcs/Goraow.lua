@@ -10,10 +10,11 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    local Vengeful = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+    local Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
 
     if (Vengeful ~= QUEST_AVAILABLE) then
         QuadavHelm = trade:hasItemQty(501, 1)
@@ -23,14 +24,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local Vengeful = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+    local Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
     local Fame = player:getFameLevel(BASTOK)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 16)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 16)) then
         player:startEvent(506)
     elseif (Vengeful == QUEST_AVAILABLE and Fame >= 3) then
         player:startEvent(106)
@@ -39,17 +40,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 106) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
     elseif (csid == 107) then
-        Vengeful = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
+        Vengeful = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH)
         if (Vengeful == QUEST_ACCEPTED) then
             player:addTitle(tpz.title.AVENGER)
             player:addFame(BASTOK, 120)
@@ -59,8 +60,10 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
         player:addGil(GIL_RATE*900)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*900)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
     elseif (csid == 506) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 16, true))
     end
 end
+
+return entity

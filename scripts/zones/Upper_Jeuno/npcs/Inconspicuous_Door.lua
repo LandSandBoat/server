@@ -7,11 +7,12 @@
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local jamInJeuno = player:getCurrentMission(AMK) == tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO
     local myDecrepitDomicile = player:getCurrentMission(AMK) == tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE
@@ -38,14 +39,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 10178 then
         player:setCharVar("AMK", 1)
-        player:completeMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
-        player:addMission(AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
+        player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)
+        player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
     elseif csid == 10179 then
         player:setCharVar("AMK", 2)
         player:delKeyItem(tpz.ki.STURDY_METAL_STRIP)
@@ -55,7 +56,9 @@ function onEventFinish(player, csid, option)
     elseif csid == 10181 then
         player:setCharVar("AMK", 0)
         player:delKeyItem(tpz.ki.SAVORY_LAMB_ROAST)
-        player:completeMission(AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
-        player:addMission(AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
+        player:completeMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE)
+        player:addMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.CURSES_A_HORRIFICALLY_HARROWING_HEX)
     end
 end
+
+return entity

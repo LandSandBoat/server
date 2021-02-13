@@ -8,14 +8,15 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- "Rosel the Armorer" quest status var
-    local RoselTheArmorer = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
+    local RoselTheArmorer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
 
     -- "Rosel the Armorer" - turn in reciept to prince
     if (RoselTheArmorer == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)) then
@@ -26,10 +27,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- "Rosel the Armorer", give receipt to NPC:Guilerme
     if (csid == 507) then
@@ -37,3 +38,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

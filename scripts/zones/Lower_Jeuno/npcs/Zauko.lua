@@ -12,8 +12,9 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     ----- Save The Clock Tower Quest -----
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
@@ -45,11 +46,11 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local hour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
-    local doneCommService = (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE) == QUEST_COMPLETED) and 1 or 0
+    local doneCommService = (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE) == QUEST_COMPLETED) and 1 or 0
     local currCommService = player:getCharVar("currCommService")
     local hasMembershipCard = player:hasKeyItem(tpz.ki.LAMP_LIGHTERS_MEMBERSHIP_CARD) and 1 or 0
 
@@ -90,19 +91,19 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 116 and option == 0) then
         -- player accepts quest
         -- if nobody else has already been assigned to the quest, including Vhana, give it to this player
 
-        local doneCommService = (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE) == QUEST_COMPLETED) and 1 or 0
+        local doneCommService = (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE) == QUEST_COMPLETED) and 1 or 0
         local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
         local hour = VanadielHour()
 
         if (playerOnQuestId == 0 and (hour >= 18 or hour < 1)) then
             -- nobody is currently on the quest
             SetServerVariable("[JEUNO]CommService", player:getID())
-            player:addQuest(JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE)
+            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE)
             player:setCharVar("currCommService", 1)
             player:updateEvent(1, doneCommService)
         else
@@ -112,7 +113,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- SAVE THE CLOCKTOWER
     if (csid == 50) then
         player:addCharVar("saveTheClockTowerVar", 1)
@@ -121,7 +122,7 @@ function onEventFinish(player, csid, option)
     -- COMMUNITY SERVICE
     elseif (csid == 117) then
         local params = {title = tpz.title.TORCHBEARER, var = "currCommService"}
-        if (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE) ~= QUEST_COMPLETED) then
+        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMMUNITY_SERVICE) ~= QUEST_COMPLETED) then
             -- first victory
             params.fame = 30
         else
@@ -143,3 +144,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

@@ -8,12 +8,13 @@ require("scripts/globals/npc_util")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local TheFumblingFriar = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
+entity.onTrigger = function(player, npc)
+    local TheFumblingFriar = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
     if TheFumblingFriar == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then
@@ -31,13 +32,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 26 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR)
     elseif csid == 28 and npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FUMBLING_FRIAR, {item = 4688}) then
         player:delKeyItem(tpz.ki.ORNATE_PACKAGE)
     end
 end
+
+return entity

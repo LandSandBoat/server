@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addMod(tpz.mod.DMG, -98)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
@@ -14,7 +15,7 @@ function onMobSpawn(mob)
     mob:setMod(tpz.mod.MDEF, 900)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local instance = mob:getInstance()
     if mob:getID() == ID.mob[21].BRITTLE_ROCK1 then
         GetNPCByID(ID.npc._1rx, instance):setAnimation(8)
@@ -29,7 +30,9 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
     instance:setProgress(instance:getProgress() + 1)
 end
+
+return entity

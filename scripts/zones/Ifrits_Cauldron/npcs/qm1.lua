@@ -7,19 +7,22 @@
 local ID = require("scripts/zones/Ifrits_Cauldron/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1189) and npcUtil.popFromQM(player, npc, ID.mob.TARASQUE, {claim = false, look = true}) then -- Rattling Egg
         player:confirmTrade()
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.EGGSHELLS_LIE_SCATTERED)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

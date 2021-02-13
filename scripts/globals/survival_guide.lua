@@ -25,9 +25,9 @@ local optionMap =
     TELEPORT_MENU = 7
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function checkForRegisteredSurvivalGuide(player, guide)
     local group = guide.group
@@ -90,9 +90,9 @@ local function teleportMenuUpdate(player, option)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- public functions
--------------------------------------------------
+-----------------------------------
 
 tpz.survivalGuide.onTrigger = function(player)
     local currentZoneId = player:getZoneID()
@@ -121,7 +121,7 @@ tpz.survivalGuide.onTrigger = function(player)
                 param = bit.bor(param, 0x2000)
             end
 
-            local G1, G2, G3, G4 = unpack(player:getTeleport(travelType))
+            local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
 
             -- param 1 = Does nothing.
             -- param 2 = current area, player amount of tabs, fee reducer(s) and menu layout (region/content).

@@ -49,6 +49,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         if (tick > (lastConquestTally + 1h))
         {
             conquest::UpdateWeekConquest();
+            roeutils::CycleWeeklyRecords();
             lastConquestTally = tick;
         }
     }
@@ -143,6 +144,8 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     CTransportHandler::getInstance()->TransportTimer();
 
     instanceutils::CheckInstance();
+
+    luautils::ReloadFilewatchList();
 
     TracyFrameMark;
     return 0;

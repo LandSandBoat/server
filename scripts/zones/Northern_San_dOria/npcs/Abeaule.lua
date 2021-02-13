@@ -10,10 +10,11 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    theTraderInTheForest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    theTraderInTheForest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
     if (theTraderInTheForest == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4367, 1) and trade:getItemCount() == 1) then -- Trade Batagreens
@@ -23,10 +24,10 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    theTraderInTheForest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
-    medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    theTraderInTheForest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
 
     if (theTraderInTheForest == QUEST_AVAILABLE) then
         if (player:getCharVar("theTraderInTheForestCS") == 1) then
@@ -50,17 +51,17 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- "The Trader in the Forest" Quest
     if (csid == 524 and option == 0 or csid == 592 and option == 0) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 592)
         else
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
             player:setCharVar("theTraderInTheForestCS", 0)
             player:addItem(592)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 592) -- Supplies Order
@@ -82,18 +83,20 @@ function onEventFinish(player, csid, option)
             player:addItem(12600)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12600) -- Robe
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
         end
     -- "The Medicine Woman" Quest
     elseif (csid == 613 and option == 0 or csid == 615 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     elseif (csid == 614) then
         player:addTitle(tpz.title.TRAVELING_MEDICINE_MAN)
         player:delKeyItem(tpz.ki.COLD_MEDICINE)
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     end
 
 end
+
+return entity

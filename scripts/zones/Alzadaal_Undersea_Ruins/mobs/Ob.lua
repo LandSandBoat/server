@@ -5,15 +5,18 @@
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 -- Todo: Pups can make it change frames, Overload causes Rage
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

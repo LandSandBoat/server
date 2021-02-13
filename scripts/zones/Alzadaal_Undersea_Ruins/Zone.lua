@@ -10,8 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -329, -2, 483, -323, 0, 489)  -- map 1 SE porter
     zone:registerRegion(2, -477, -2, 631, -471, 0, 636)  -- map 1 NW porter
     zone:registerRegion(3,  110, -2, -556, 116, 0, -551)  -- map 2 west porter (white)
@@ -39,7 +40,7 @@ function onInitialize(zone)
     zone:registerRegion(25, 134, -1, -584, 146, 1, -577)  -- transformations (quest)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == tpz.zone.ARRAPAGO_REMNANTS then
@@ -58,13 +59,13 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("1pa1")
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
@@ -151,10 +152,10 @@ function onRegionEnter(player, region)
     }
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 1 and option == 10 then -- start
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
     elseif csid == 1 and option == 1 then -- windows
@@ -169,28 +170,28 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
     if csid == 1 then
         player:addKeyItem(tpz.ki.ASTRAL_COMPASS)
-        player:completeMission(TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
-        player:addMission(TOAU, tpz.mission.id.toau.ASTRAL_WAVES)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.UNDERSEA_SCOUTING)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.ASTRAL_WAVES)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ASTRAL_COMPASS)
     elseif csid == 2 then
         player:setCharVar("TransformationsProgress", 3)
     elseif csid == 3 then
         player:setCharVar("TransformationsProgress", 4)
     elseif csid == 7 then
-        player:completeMission(TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PATH_OF_DARKNESS)
         player:setTitle(tpz.title.NAJAS_COMRADEINARMS)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.FANGS_OF_THE_LION)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.FANGS_OF_THE_LION)
     elseif csid == 10 then
-        player:completeMission(TOAU, tpz.mission.id.toau.NASHMEIRAS_PLEA)
+        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.NASHMEIRAS_PLEA)
         player:setTitle(tpz.title.PREVENTER_OF_RAGNAROK)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addMission(TOAU, tpz.mission.id.toau.RAGNAROK)
+        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.RAGNAROK)
     elseif csid == 116 and player:getLocalVar("SalvageArrapago") == 1 then -- enter Salvage Silver Sea zone
         player:setPos(0, 0, 0, 0, 74)
     elseif csid == 116 and player:getLocalVar("SalvageSilverSea") == 1 then -- enter Salvage Arrapago zone
@@ -199,3 +200,5 @@ function onEventFinish(player, csid, option)
         player:setPos(0, 0, 0, 0, 77)
     end
 end
+
+return zone_object

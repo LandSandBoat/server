@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Double Ray
 --
 --  Description: An energy ray zaps a single target.
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Melee
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local accmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4, tpz.magic.ele.THUNDER, dmgmod, TP_NO_EFFECT)
@@ -24,3 +25,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.LIGHTNING)
     return dmg
 end
+
+return mobskill_object

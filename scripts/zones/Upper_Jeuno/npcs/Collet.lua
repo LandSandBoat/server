@@ -8,8 +8,9 @@ require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (trade:hasItemQty(555, 1) == true and trade:getItemCount() == 1) then
         local a = player:getCharVar("saveTheClockTowerNPCz1") -- NPC zone1
         if
@@ -38,22 +39,23 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
+    local aClockMostdelicate = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_CLOCK_MOST_DELICATE)
     if (player:getFameLevel(JEUNO) >= 5 and aClockMostdelicate == QUEST_AVAILABLE and player:getCharVar("aClockMostdelicateVar") == 0) then
         player:startEvent(112)
     elseif (player:getCharVar("saveTheClockTowerVar") >= 1) then
         player:startEvent(164)
-    elseif (player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CLOCKMASTER) == QUEST_COMPLETED) then
         player:startEvent(163)
     else
         player:startEvent(114)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 112) then
         player:setCharVar("aClockMostdelicateVar", 1)
     elseif (csid == 115) then
@@ -61,3 +63,5 @@ function onEventFinish(player, csid, option)
         player:addCharVar("saveTheClockTowerNPCz1", 2)
     end
 end
+
+return entity

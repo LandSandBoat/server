@@ -3,8 +3,10 @@
 --  Mob: Light Elemental
 -----------------------------------
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     local mobID = mob:getID()
     if mobID == ID.mob.TEMENOS_C_MOB[2]+1 then
         GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):updateEnmity(target)
@@ -15,7 +17,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         switch (mob:getID()): caseof
         {
@@ -32,3 +34,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         }
     end
 end
+
+return entity

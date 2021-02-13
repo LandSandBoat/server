@@ -10,10 +10,11 @@ require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) ~= QUEST_AVAILABLE and player:getCharVar("MomTheAdventurer_Event") == 1) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MOM_THE_ADVENTURER) ~= QUEST_AVAILABLE and player:getCharVar("MomTheAdventurer_Event") == 1) then
         if (trade:hasItemQty(13454, 1) and trade:getItemCount() == 1) then -- Trade Copper Ring
             player:startEvent(95)
         end
@@ -21,10 +22,10 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local HasPainting = player:hasKeyItem(tpz.ki.PAINTING_OF_A_WINDMILL)
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and HasPainting == true) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and HasPainting == true) then
         player:startEvent(96)
     else
         player:startEvent(29)
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 95) then
         player:addKeyItem(tpz.ki.LETTER_FROM_ROH_LATTEH)
@@ -46,7 +47,7 @@ function onEventFinish(player, csid, option)
         local freeInventory = player:getFreeSlotsCount()
 
         if (freeInventory > 0) then
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT)
             player:delKeyItem(tpz.ki.PAINTING_OF_A_WINDMILL)
             player:addTitle(tpz.title.TREASURE_SCAVENGER)
             player:addFame(BASTOK, 50)
@@ -58,3 +59,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Tebbad Wing
 --
 --  Description: A hot wind deals Fire damage to enemies within a very wide area of effect. Additional effect: Plague
@@ -6,16 +6,17 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 30' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES)) then
         return 1
-    elseif (mob:AnimationSub() == 1) then
+    elseif (mob:getAnimationSub() == 1) then
         return 1
     elseif (target:isBehind(mob, 48) == true) then
         return 1
@@ -23,7 +24,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PLAGUE
 
     MobStatusEffectMove(mob, target, typeEffect, 10, 0, 120)
@@ -34,3 +35,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
     return dmg
 end
+
+return mobskill_object

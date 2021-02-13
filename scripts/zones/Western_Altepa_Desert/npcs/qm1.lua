@@ -7,7 +7,10 @@
 local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.wsquest.handleQmTrigger(tpz.wsquest.ground_strike, player, ID.mob.MAHARAJA)
 end
+
+return entity

@@ -5,10 +5,14 @@
 -----------------------------------
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
 require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.GARGANTUA_PH, 5, math.random(3600, 25200)) -- 1 to 7 hours
 end
+
+return entity

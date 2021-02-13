@@ -11,19 +11,20 @@
 -- Skillchain Properties: Darkness/Gravitation
 -- 100%TP    200%TP    300%TP
 -- 4.00      4.00      4.00
---
+-----------------------------------
 -- params.critical Hit Rate by TP:
 -- 100%TP    200%TP    300%TP
 -- 15%         20%       25%
---
+-----------------------------------
 -----------------------------------
 require("scripts/globals/aftermath")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
+local weaponskill_object = {}
 
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
     params.ftp100 = 4 params.ftp200 = 4 params.ftp300 = 4
@@ -45,3 +46,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
 
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

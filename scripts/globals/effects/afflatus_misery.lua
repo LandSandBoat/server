@@ -1,12 +1,11 @@
 -----------------------------------
---
 -- tpz.effect.AFFLATUS_MISERY
---
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setMod(tpz.mod.AFFLATUS_MISERY, 0)
 
     if (target:hasStatusEffect(tpz.effect.AUSPICE)) then
@@ -16,10 +15,10 @@ function onEffectGain(target, effect)
     end
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:setMod(tpz.mod.AFFLATUS_MISERY, 0)
 
     --Clean Up Afflatus Misery Bonuses
@@ -32,3 +31,5 @@ function onEffectLose(target, effect)
         target:setMod(tpz.mod.ENSPELL_DMG, 0)
     end
 end
+
+return effect_object

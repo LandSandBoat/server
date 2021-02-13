@@ -1,18 +1,19 @@
----------------------------------------------
+-----------------------------------
 -- Dissipation
 -- Dispels all buffs add terror effect
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.TERROR
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 10)
 
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return count
 end
+
+return mobskill_object

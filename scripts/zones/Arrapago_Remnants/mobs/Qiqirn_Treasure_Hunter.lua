@@ -7,20 +7,21 @@ require("scripts/globals/status")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobRoamAction(mob)
+entity.onMobRoamAction = function(mob)
 
     local instance = mob:getInstance()
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
     if (mob:isFollowingPath() == false) then
-        mob:speed(40)
+        mob:setSpeed(40)
         mob:pathThrough(ID.points[stage][prog].route, 9)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
 
     local target = mob:getTarget()
 
@@ -30,7 +31,7 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     local act = mob:getCurrentAction()
     local isBusy = false
@@ -61,10 +62,12 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     DespawnMob(mob:getID() +1, instance) -- despawn bomb
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("runTime", 0)
 end
+
+return entity

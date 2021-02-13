@@ -5,8 +5,9 @@
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "WS_START_MSG", function(mob, skillID)
         mob:showText(mob, ID.text.CARVE)
     end)
@@ -32,7 +33,7 @@ function onMobSpawn(mob)
 
             mob:timer(12000, function(mob)
                 mob:setHP(mob:getMaxHP())
-                mob:AnimationSub(3)
+                mob:setAnimationSub(3)
                 mob:resetAI()
                 mob:stun(3000)
                 local new_target = mob:getEntity(targetid)
@@ -89,7 +90,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.BEHAVIOR, 5)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     -- localVar because we don't want it to repeat every reraise.
     if (mob:getLocalVar("started") == 0) then
         mob:showText(mob, ID.text.PRAY)
@@ -97,7 +98,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     --[[ Mob version of Azure Lore needs scripted, then we can remove this block commenting.
     -- On his 2nd and 3rd "lives" Raubahn will use Azure Lore at low health.
     local hpTrigger = mob:getLocalVar("AzureLoreHP")
@@ -112,16 +113,18 @@ function onMobFight(mob, target)
     ]]
 end
 
-function onSpellPrecast(mob, spell)
+entity.onSpellPrecast = function(mob, spell)
     -- Eyes on Me
     if (spell == 641) then
         mob:showText(mob, ID.text.BEHOLD)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- If he's out of reraises, display text
     if (isKiller and mob:getMobMod(tpz.mobMod.BEHAVIOR) == 0) then
         mob:showText(mob, ID.text.MIRACLE)
     end
 end
+
+return entity

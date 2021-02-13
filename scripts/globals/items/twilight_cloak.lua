@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 11363
 -- Equip: Twilight Cloak
 -- Able to cast "Impact"
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
 
 local body = target:getEquipID(tpz.slot.BODY)
 
@@ -16,3 +17,5 @@ local body = target:getEquipID(tpz.slot.BODY)
         target:delSpell(503)
     end
 end
+
+return item_object

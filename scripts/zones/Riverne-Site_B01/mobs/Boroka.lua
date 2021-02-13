@@ -4,8 +4,11 @@
 -----------------------------------
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.BOROKA_BELEAGUERER)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hour respawn
 end
+
+return entity

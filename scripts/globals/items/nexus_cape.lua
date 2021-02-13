@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 11538
 -- Item: Nexus Cape
 -- Enchantment: "Teleport" (Party Leader)
------------------------------------------
+-----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/status")
 require('scripts/globals/zone')
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = tpz.msg.basic.ITEM_UNABLE_TO_USE -- Default is fail.
     local leader = target:getPartyLeader()
     -- In a party and we were able to find the leader
@@ -132,6 +133,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.LEADER, 0, 1)
 end
+
+return item_object

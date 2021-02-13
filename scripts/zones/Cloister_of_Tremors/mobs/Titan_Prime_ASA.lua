@@ -7,14 +7,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- ASA-4: Avatar is Unkillable Until Its Used Astral Flow At Least 5 times At Specified Intervals
     mob:setLocalVar("astralflows", 0)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- ASA-4: Astral Flow Behavior - Guaranteed to Use At Least 5 times before killable, at specified intervals.
     if mob:getCurrentAction() == tpz.act.ATTACK then
         local astralFlows = mob:getLocalVar("astralflows")
@@ -32,5 +33,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

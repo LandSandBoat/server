@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Voracious Trunk
 -- Steals an enemy's buff
 -- Spell cost: 72 MP
@@ -10,17 +10,18 @@
 -- Casting Time: 10 seconds
 -- Recast Time: 56 seconds
 -- Combos: Auto Refresh
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local resist = applyResistanceAbility(caster, target, tpz.magic.ele.WIND, 0, 0)
     local StealChance = math.random(1, 100)
     local stolen = 0
@@ -38,3 +39,5 @@ function onSpellCast(caster, target, spell)
 
     return stolen
 end
+
+return spell_object

@@ -8,12 +8,13 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    Guardian = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+entity.onTrigger = function(player, npc)
+    Guardian = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
     Pamamas = player:getCharVar("PamamaVar")
     pfame = player:getFameLevel(KAZHAM)
     needToZone = player:needToZone()
@@ -39,18 +40,18 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 68 and option == 1) then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
         player:setCharVar("PamamaVar", 0)
     elseif (csid == 71) then
         if (Pamamas == 1) then --First completion of quest; set title, complete quest, and give higher fame
             player:addGil(GIL_RATE*5000)
             player:messageSpecial(ID.text.GIL_OBTAINED, 5000)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
             player:addFame(WINDURST, 100)
             player:addTitle(tpz.title.KAZHAM_CALLER)
             player:setCharVar("PamamaVar", 0)
@@ -64,3 +65,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

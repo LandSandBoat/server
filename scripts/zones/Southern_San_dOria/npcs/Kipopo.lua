@@ -10,8 +10,9 @@ require("scripts/globals/crafting")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:hasKeyItem(tpz.ki.TORN_PATCHES_OF_LEATHER)
         and player:getCharVar("sayItWithAHandbagCS") == 2
@@ -21,13 +22,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
     local SkillCap = getCraftSkillCap(player, tpz.skill.LEATHERCRAFT)
     local SkillLevel = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
 
     if
-        player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
+        player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
         and player:getCharVar("sayItWithAHandbagBonusCS") == 1
     then
         player:startEvent(914)
@@ -54,10 +55,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 914 then
         player:setCharVar("sayItWithAHandbagBonusCS", 0)
     elseif csid == 912 then
@@ -75,3 +76,5 @@ function onEventFinish(player, csid, option)
         player:addStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
     end
 end
+
+return entity

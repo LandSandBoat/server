@@ -201,9 +201,9 @@ local HipsterSets = {
     {id = 199, hipster = true},
 }
 
-------------------------------------------
+-----------------------------------
 -- Checks for gear sets present on a player
--------------------------------------------
+-----------------------------------
 function checkForGearSet(player)
     -- print("---Removed existing gear set mods!---\n")
     player:clearGearSetMods()
@@ -271,9 +271,9 @@ function FindMatchByType(gearset, gearMatch)
     return false
 end
 
----------------------------------------
+-----------------------------------
 -- Applys a gear set mod
----------------------------------------
+-----------------------------------
 function ApplyMod(player, gearset, matches)
 
     for _, set in pairs(HipsterSets) do
@@ -374,7 +374,7 @@ Stronghold NM(WOTG)
 =======
 
 -- Molione's Sickle Set
--------------
+-----------------------------------
 18947 -- Molione's Sickle
 15818 -- Molione's Ring
 -- Set Bonus: +5 Accuracy
@@ -385,7 +385,7 @@ Empyrean +2
 =======
 
 --Aoidos' Attire +2 Set
--------------
+-----------------------------------
 11073 -- Aoidos' Calot+2
 11093 -- Aoidos' Hongreline +2
 11113 -- Aoidos' Manchettes +2
@@ -395,7 +395,7 @@ Empyrean +2
 -- Enhancing songs add an attribute bonus that corresponds to the element of the song (i.e. Thunder-based songs add +DEX). The attribute bonus begins at +1 for 2 pieces, increases by 1 for each additional piece, up to +5 for the whole set. For Dark-based songs, there is a bonus of +10 MP for 2 pieces, and increases by 10 for each additional piece.
 
 --Ferine' Attire +2 Set
--------------
+-----------------------------------
 11072 -- Ferine Cabasset+2
 11092 -- Ferine Gausape+2
 11112 -- Ferine Manoplas+2
@@ -406,7 +406,7 @@ Empyrean +2
 -- 5% Proc Rate
 
 --Goetia Attire +2 Set
--------------
+-----------------------------------
 11067 -- Goetia Petasos+2
 11087 -- Goetia Coat+2
 11107 -- Goetia Gloves+2
@@ -416,7 +416,7 @@ Empyrean +2
 -- Occasionally increases damage of elemental spells when Conserve MP is triggered. Increased amount is proportional to twice the ratio of MP conserved.
 
 --Mavi Attire +2 Set
--------------
+-----------------------------------
 11079 -- Mavi Kavuk+2
 11099 -- Mavi Mintan+2
 11119 -- Mavi Bazubands+2
@@ -427,7 +427,7 @@ Empyrean +2
 
 
 --Bale Armor +2 Set
--------------
+-----------------------------------
 11071 -- Bale Burgeonet+2
 11091 -- Bale Cuirass+2
 11111 -- Bale Gauntlets+2
@@ -437,7 +437,7 @@ Empyrean +2
 -- Occasionally increases damage in direct proportion to the percentage of current HP. At 100% HP, damage is doubled when triggered, at 50% HP, damage increases by 50%, and so on.
 
 --Lancer's Armor +2 Set
--------------
+-----------------------------------
 11077 -- Lancer's Mezail+2
 11097 -- Lancer's Plackart+2
 11117 -- Lancer's Vambrace+2
@@ -448,7 +448,7 @@ Empyrean +2
 
 
 --Cirque Attire +2 Set
--------------
+-----------------------------------
 11081 -- Cirque Capello+2
 11101 -- Cirque Farsetto+2
 11121 -- Cirque Gaunti+2
@@ -458,7 +458,7 @@ Empyrean +2
 -- Occasionally increases damage in direct proportion to the percentage of Automaton's current HP. At 100% HP, damage is doubled when triggered, at 50% HP, damage increases by 50%, and so on.
 
 --Estoqueur's Attire +2 Set
--------------
+-----------------------------------
 11068 -- Estoqueur's Chappel+2
 11088 -- Estoqueur's Sayon+2
 11108 -- Estoqueur's Gantherots+2
@@ -468,7 +468,7 @@ Empyrean +2
 -- Enhances duration of Enhancing Magic cast on OTHERS while under the effect of Composure by 10% for the first 2 pieces, and 15% for any additional pieces thereafter, up to 35% increase for 4 pieces and 50% for all 5 pieces. The "Increases enhancing magic effect duration" of the Estoqueur's Cape, Estoqueur's Houseaux +1 and Estoqueur's Houseaux +2 is multiplicative to this total.
 
 --Caller's Attire +2 Set
--------------
+-----------------------------------
 11078 -- Caller's Horn+2
 11098 -- Caller's Doublet+2
 11118 -- Caller's Bracers+2

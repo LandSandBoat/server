@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Magic Hammer
 -- Steals an amount of enemy's MP equal to damage dealt. Ineffective against undead
 -- Spell cost: 40 MP
@@ -18,18 +18,19 @@
 -- The bonuses from weather/day effects and Korin/Hachirin-no-Obi affect both accuracy and amount of MP drained.
 -- Can only drain MP from targets that have MP and cannot drain more MP than the target has.
 -- Damage and MP drained are enhanced by both Magic Attack Bonus and Magic Attack from Convergence.
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local dmg = 0
     local multi = 1.5
 
@@ -69,3 +70,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

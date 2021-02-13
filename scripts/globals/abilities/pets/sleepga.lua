@@ -1,19 +1,20 @@
------------------------------------------
+-----------------------------------
 -- Sleepga
------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/spell_data")
 require("scripts/globals/summon")
------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     local duration = 90
     local dINT = pet:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
     local bonus = getSummoningSkillOverCap(pet)
@@ -34,3 +35,5 @@ function onPetAbility(target, pet, skill)
 
     return tpz.effect.SLEEP_I
 end
+
+return ability_object

@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CInstance::CInstance(CZone* zone, uint8 instanceid)
 : CZoneEntities(zone)
+, m_zone(zone)
 , m_instanceid(instanceid)
 {
     LoadInstance();
@@ -113,6 +114,13 @@ void CInstance::LoadInstance()
         m_zone_music_override.m_songNight = Sql_GetUIntData(SqlHandle, 8);
         m_zone_music_override.m_bSongS    = Sql_GetUIntData(SqlHandle, 9);
         m_zone_music_override.m_bSongM    = Sql_GetUIntData(SqlHandle, 10);
+
+        // Add to Lua cache
+        // TODO: This will happen more often than needed, but not so often that it's a performance concern
+        auto zone     = (const char*)m_zone->GetName();
+        auto name     = m_instanceName;
+        auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
+        luautils::CacheLuaObjectFromFile(filename);
     }
     else
     {
@@ -171,6 +179,12 @@ duration CInstance::GetElapsedTime(time_point tick)
     return tick - m_startTime;
 }
 
+uint64_t CInstance::GetLocalVar(const std::string& name) const
+{
+    auto var = m_LocalVars.find(name);
+    return var != m_LocalVars.end() ? var->second : 0;
+}
+
 void CInstance::SetLevelCap(uint8 cap)
 {
     m_levelcap = cap;
@@ -203,6 +217,11 @@ void CInstance::SetStage(uint32 stage)
 void CInstance::SetWipeTime(duration time)
 {
     m_wipeTimer = time + m_startTime;
+}
+
+void CInstance::SetLocalVar(const std::string& name, uint64_t value)
+{
+    m_LocalVars[name] = value;
 }
 
 /************************************************************************

@@ -1,19 +1,18 @@
----------------------------------------------------
+-----------------------------------
 -- Sand Breath
 -- Deals Earth damage to enemies within a fan-shaped area. Additional effect: Blind
----------------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.BLINDNESS
 
     MobStatusEffectMove(mob, target, typeEffect, 20, 0, 180)
@@ -24,3 +23,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.EARTH)
     return dmg
 end
+
+return mobskill_object

@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Infernal Pestilence
 --
 --  Description: Releases a horrible disease on targets in front.
@@ -6,19 +6,18 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Front arc
 --  Notes: Only used by Chahnameed's Stomach.
----------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = tpz.effect.DISEASE
 
@@ -30,3 +29,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.WIND)
     return dmg
 end
+
+return mobskill_object

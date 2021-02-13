@@ -10,8 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1,  -21.469, 27,  -24.255,  -18.723, 32,  -19.877) -- 40 cap (H-8 Tower)
     zone:registerRegion(2,  337.376, 27,  -19.836,  342.340, 32,  -16.055) -- 50 cap area (J-8 Tower)
     zone:registerRegion(3,   95.659, 42, -302.390,   99.973, 48, -297.744) -- 60 cap area (H-10 Tower)
@@ -22,11 +23,11 @@ function onInitialize(zone)
     tpz.treasure.initZone(zone)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -42,7 +43,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function afterZoneIn(player)
+zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("brmp")
     player:entityVisualPacket("lirp")
     player:entityVisualPacket("kil1")
@@ -70,17 +71,17 @@ function afterZoneIn(player)
     end
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     player:startEvent(19 + region:GetRegionID())
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 1) then
         player:setCharVar("PromathiaStatus", 3)
     elseif (csid == 4) then
@@ -99,3 +100,5 @@ function onEventFinish(player, csid, option)
         player:setPos(100, -20.25, 140, 64, 111)
     end
 end
+
+return zone_object

@@ -10,12 +10,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     local sublimationComplete = player:getStatusEffect(tpz.effect.SUBLIMATION_COMPLETE)
     local sublimationCharging = player:getStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED)
@@ -52,3 +53,5 @@ function onUseAbility(player, target, ability)
     end
     return mp
 end
+
+return ability_object

@@ -146,6 +146,9 @@ namespace effects
 
                 uint16 sortKey                  = Sql_GetIntData(SqlHandle, 10);
                 EffectsParams[EffectID].SortKey = sortKey == 0 ? 10000 : sortKey; // default to high number to such that effects without a sort key aren't first
+
+                auto filename = fmt::format("./scripts/globals/effects/{}.lua", EffectsParams[EffectID].Name);
+                luautils::CacheLuaObjectFromFile(filename);
             }
         }
     }
@@ -154,6 +157,11 @@ namespace effects
     uint16 GetEffectElement(uint16 effect)
     {
         return EffectsParams[effect].Element;
+    }
+
+    std::string GetEffectName(uint16 effect)
+    {
+        return EffectsParams[effect].Name;
     }
 } // namespace effects
 
@@ -499,7 +507,7 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, bool 
         m_StatusEffectSet.insert(PStatusEffect);
 
         luautils::OnEffectGain(m_POwner, PStatusEffect);
-        m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", m_POwner, PStatusEffect);
+        m_POwner->PAI->EventHandler.triggerListener("EFFECT_GAIN", CLuaBaseEntity(m_POwner), CLuaStatusEffect(PStatusEffect));
 
         m_POwner->addModifiers(&PStatusEffect->modList);
 
@@ -603,7 +611,7 @@ void CStatusEffectContainer::RemoveStatusEffect(CStatusEffect* PStatusEffect, bo
         }
         PStatusEffect->deleted = true;
         luautils::OnEffectLose(m_POwner, PStatusEffect);
-        m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", m_POwner, PStatusEffect);
+        m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", CLuaBaseEntity(m_POwner), CLuaStatusEffect(PStatusEffect));
 
         m_POwner->delModifiers(&PStatusEffect->modList);
         if (m_POwner->objtype == TYPE_PC)
@@ -1631,7 +1639,7 @@ void CStatusEffectContainer::TickEffects(time_point tick)
         }
     }
     DeleteStatusEffects();
-    m_POwner->PAI->EventHandler.triggerListener("EFFECTS_TICK", m_POwner);
+    m_POwner->PAI->EventHandler.triggerListener("EFFECTS_TICK", CLuaBaseEntity(m_POwner));
 }
 
 /************************************************************************

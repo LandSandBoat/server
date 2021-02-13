@@ -1,14 +1,15 @@
----------------------------------------------------
+-----------------------------------
 -- Flame_Thrower
 -- Description: Uses a flamethrower that deals Fire damage to players in a fan-shaped area of effect. Additional effect: Plague
 -- Type: Magical
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -24,7 +25,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PLAGUE
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 5, 3, 30)
 
@@ -39,3 +40,4 @@ function onMobWeaponSkill(target, mob, skill)
     mob:setLocalVar("nuclearWaste", 0)
     return dmg
 end
+return mobskill_object

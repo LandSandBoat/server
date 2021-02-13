@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Black Cloud
 --
 --  Description: A cloud deals Dark damage to enemies in an area of effect. Additional effect: Blind
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 15' radial
 --  Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.BLINDNESS
 
     MobStatusEffectMove(mob, target, typeEffect, 18, 0, 180)
@@ -29,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

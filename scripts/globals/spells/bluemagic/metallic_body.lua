@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Metallic Body
 -- Absorbs an certain amount of damage from physical and magical attacks
 -- Spell cost: 19 MP
@@ -10,20 +10,21 @@
 -- Casting Time: 7 seconds
 -- Recast Time: 60 seconds
 -- Duration: 5 minutes
---
+-----------------------------------
 -- Combos: Max MP Boost
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.STONESKIN
     local blueskill = caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
     local power = (blueskill/3) + (caster:getMainLvl()/3) + 10
@@ -49,3 +50,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

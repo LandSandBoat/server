@@ -1,16 +1,17 @@
----------------------------------------------
+-----------------------------------
 -- Remove Poison
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
     if (target:delStatusEffect(tpz.effect.POISON)) then
         skill:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT)
     else
@@ -18,3 +19,5 @@ function onUseAbility(pet, target, skill, action)
     end
     return tpz.effect.POISON
 end
+
+return ability_object

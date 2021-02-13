@@ -1,10 +1,13 @@
-------------------------------
+-----------------------------------
 -- Area: The Eldieme Necropolis
 --   NM: Skull of Gluttony
-------------------------------
+-----------------------------------
 require("scripts/globals/hunts")
-------------------------------
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 184)
 end
+
+return entity

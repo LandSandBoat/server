@@ -3,11 +3,12 @@
 --   NPC: Yatniel
 -- Type: Standard NPC
 -- !pos -66.817 -7 -126.594 245
---
+-----------------------------------
 -- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     hittingTheMarquisateYatnielCS = player:getCharVar("hittingTheMarquisateYatnielCS")
 
@@ -17,7 +18,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     hittingTheMarquisateYatnielCS = player:getCharVar("hittingTheMarquisateYatnielCS")
 
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10029) then
         player:setCharVar("hittingTheMarquisateYatnielCS", 2)
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option)
 
 
 end
+
+return entity

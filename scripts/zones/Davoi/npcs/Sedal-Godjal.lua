@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Vain (Windurst 8-1)
     if
         npcUtil.tradeHas(trade, 17437) and -- Curse Wand
@@ -23,12 +24,12 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
 
     -- The Jester Who'd Be King (Windurst 8-2)
-    if 
+    if
         currentMission == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 1 and not
         player:hasKeyItem(tpz.ki.AURASTERY_RING)
@@ -66,10 +67,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- The Jester Who'd Be King (Windurst 8-2)
     if csid == 122 and npcUtil.giveKeyItem(player, tpz.ki.AURASTERY_RING) then
         if player:hasKeyItem(tpz.ki.RHINOSTERY_RING) and player:hasKeyItem(tpz.ki.OPTISTERY_RING) then
@@ -96,3 +97,5 @@ function onEventFinish(player, csid, option)
         npcUtil.giveKeyItem(player, tpz.ki.CRIMSON_ORB)
     end
 end
+
+return entity

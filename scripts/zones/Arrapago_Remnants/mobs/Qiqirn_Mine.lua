@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:hideName(true)
     mob:untargetable(true)
@@ -20,5 +21,7 @@ function onMobSpawn(mob)
     mob:setMobMod(tpz.mobMod.SOUND_RANGE, 15)
 end
 
-function onMobDeath(mob, player)
+entity.onMobDeath = function(mob, player)
 end
+
+return entity

@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Fulmination
 --
 -- Description: Deals heavy magical damage in an area of effect. Additional effect: Paralysis + Stun
 -- Type: Magical
 -- Utsusemi/Blink absorb: Wipes Shadows
 -- Range: 30 yalms
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if(mob:getFamily() == 316) then
         local mobSkin = mob:getModelId()
 
@@ -34,7 +35,7 @@ function onMobSkillCheck(target, mob, skill)
     return result
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
 -- TODO: Hits all players near Khimaira, not just alliance.
 
@@ -47,3 +48,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.LIGHTNING)
     return dmg
 end
+
+return mobskill_object

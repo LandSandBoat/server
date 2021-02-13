@@ -8,8 +8,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 715, 2, tpz.regime.type.GROUNDS)
 
     -- Curses, Foiled A-Golem!?
@@ -19,6 +20,8 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.GOLIATH_PH, 10, 3600) -- 1 hour
 end
+
+return entity

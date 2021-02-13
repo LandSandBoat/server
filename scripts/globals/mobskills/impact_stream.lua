@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Impact Stream
 --
 --  Description: 50% Defense Down, Stun
@@ -6,18 +6,19 @@
 --  Wipe Shadows
 --  Range: 10.0' AoE
 --  Notes:
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+-----------------------------------
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect1 = tpz.effect.STUN
     local typeEffect2 = tpz.effect.DEFENSE_DOWN
 
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.EARTH)
     return dmg
 end
+
+return mobskill_object

@@ -8,11 +8,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -23,7 +24,7 @@ function onTrigger(player, npc)
     elseif
         player:getRank() == 5 and
         currentMission == tpz.mission.id.windurst.NONE and
-        not player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
+        not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
     then
         player:startEvent(190)
     elseif player:hasKeyItem(tpz.ki.BURNT_SEAL) then
@@ -62,10 +63,10 @@ function onTrigger(player, npc)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 153 then
         player:setCharVar("MissionStatus", 1)
         player:delKeyItem(tpz.ki.STAR_CRESTED_SUMMONS)
@@ -73,7 +74,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 166 or csid == 190 then
         if option == 0 then
-            player:addMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
+            player:addMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL)
             player:addKeyItem(tpz.ki.NEW_FEIYIN_SEAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NEW_FEIYIN_SEAL)
             player:setCharVar("MissionStatus", 10)
@@ -104,3 +105,5 @@ function onEventFinish(player, csid, option)
         player:setPos(0, -16.750, 130, 64, 239)
     end
 end
+
+return entity

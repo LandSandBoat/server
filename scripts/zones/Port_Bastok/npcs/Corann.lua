@@ -7,10 +7,11 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
 
     if (TheQuadav == QUEST_ACCEPTED) then
         count = trade:getItemCount()
@@ -23,10 +24,10 @@ TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-TheQuadav = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
-OutOfOneShell = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
     if (OutOfOneShell == QUEST_COMPLETED) then
         player:startEvent(88)
@@ -40,19 +41,21 @@ OutOfOneShell = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_S
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 80) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
     elseif (csid == 81) then
         player:tradeComplete()
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
         player:addFame(BASTOK, 120)
         player:addItem(12832)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12832)
     end
 
 end
+
+return entity

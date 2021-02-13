@@ -1,18 +1,19 @@
---------------------------------------
+-----------------------------------
 -- Spell: Absorb-INT
 -- Steals an enemy's intelligence.
---------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     if (target:hasStatusEffect(tpz.effect.INT_DOWN) or caster:hasStatusEffect(tpz.effect.INT_BOOST)) then
         spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
@@ -35,3 +36,5 @@ function onSpellCast(caster, target, spell)
     end
     return tpz.effect.INT_DOWN
 end
+
+return spell_object

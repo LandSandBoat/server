@@ -8,13 +8,14 @@ require("scripts/quests/flyers_for_regine")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     quests.ffr.onTrade(player, npc, trade, 2) -- FLYERS FOR REGINE
 end
 
-function onTrigger(player, npc)
-    local thePickpocket = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET)
+entity.onTrigger = function(player, npc)
+    local thePickpocket = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET)
     local thePickpocketStat = player:getCharVar("thePickpocket")
 
     -- THE PICKPOCKET
@@ -34,10 +35,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- THE PICKPOCKET
     if csid == 502 then
         player:setCharVar("thePickpocket", 1)
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -5,11 +5,14 @@
 -- Recast Time: 0:30
 -- Duration: 30 seconds
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(user, target, ability)
+ability_object.onUseAbility = function(user, target, ability)
     --leave blank please! This file will be deleted when the core is updated.
 end
+
+return ability_object

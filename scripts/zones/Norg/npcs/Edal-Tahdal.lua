@@ -11,17 +11,17 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local TrialByWater = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+    local TrialByWater = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
     local WhisperOfTides = player:hasKeyItem(tpz.ki.WHISPER_OF_TIDES)
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
 
-    if ((TrialByWater == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4) or (TrialByWater == QUEST_COMPLETED and realday ~= player:getCharVar("TrialByWater_date"))) then
+    if ((TrialByWater == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4) or (TrialByWater == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWater_date"))) then
         player:startEvent(109, 0, tpz.ki.TUNING_FORK_OF_WATER) -- Start and restart quest "Trial by Water"
     elseif (TrialByWater == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_WATER) == false and WhisperOfTides == false) then
         player:startEvent(190, 0, tpz.ki.TUNING_FORK_OF_WATER) -- Defeat against Avatar : Need new Fork
@@ -43,16 +43,16 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 109 and option == 1) then
-        if (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
-            player:delQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
+            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         end
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         player:setCharVar("TrialByWater_date", 0)
         player:addKeyItem(tpz.ki.TUNING_FORK_OF_WATER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_WATER)
@@ -82,10 +82,12 @@ function onEventFinish(player, csid, option)
             end
             player:addTitle(tpz.title.HEIR_OF_THE_GREAT_WATER)
             player:delKeyItem(tpz.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
-            player:setCharVar("TrialByWater_date", os.date("%j")) -- %M for next minute, %j for next day
+            player:setCharVar("TrialByWater_date", getMidnight())
             player:addFame(NORG, 30)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
         end
     end
 
 end
+
+return entity

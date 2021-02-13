@@ -1,19 +1,18 @@
----------------------------------------------------
+-----------------------------------
 -- Vortex
 -- Creates a vortex that damages targets in an area of effect. Additional effect: Terror
----------------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 1.5
@@ -25,3 +24,5 @@ function onMobWeaponSkill(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
+
+return mobskill_object

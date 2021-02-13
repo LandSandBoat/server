@@ -6,11 +6,13 @@ require("scripts/globals/battlefield")
 require("scripts/globals/limbus")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
 local loot =
 {
     -- northern tower floor 1
-    [1299] = 
+    [1299] =
     {
         [1] =
         {
@@ -708,7 +710,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000},
-            },  
+            },
             {
                 {itemid =    0, droprate = 1000},
                 {itemid = 1875, droprate = 1000},
@@ -956,7 +958,7 @@ local loot =
             },
             {
                 {itemid = 1875, droprate = 1000},
-            },  
+            },
             {
                 {itemid = 1875, droprate = 1000},
             },
@@ -1252,10 +1254,10 @@ local loot =
     },
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
     if not battlefield then
         return
@@ -1268,7 +1270,7 @@ function onTrigger(player, npc)
     local bfid = battlefield:getID()
     local hold = false
     if npc:getLocalVar("open") == 0 then
-        switch (bfid): caseof 
+        switch (bfid): caseof
         {
             [1298] = function() -- Temenos West Crate Handling
                 if crateID ~= ID.npc.TEMENOS_W_CRATE[7] then
@@ -1450,8 +1452,9 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+return entity

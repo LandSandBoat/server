@@ -5,14 +5,15 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onEventUpdate(player, csid, option)
-    -- printf("updateCSID: %u", csid)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    -- printf("finishCSID: %u", csid)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

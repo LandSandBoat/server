@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 13689
 -- Hi-Ether Tank
 -- When used, you will obtain one hi-ether
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = tpz.msg.basic.ITEM_NO_USE_INVENTORY
@@ -14,7 +15,9 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addItem(4132, 1)
 end
 
+
+return item_object

@@ -10,9 +10,10 @@ require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") <= 2) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED and player:getCharVar("NavigatingtheUnfriendlySeas") <= 2) then
         if (trade:hasItemQty(2341, 1) and trade:getItemCount() == 1) then -- Trade Hydrogauage
             player:startEvent(283)
             player:setCharVar("NavigatingtheUnfriendlySeas", 2)
@@ -20,8 +21,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if (player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) >= QUEST_ACCEPTED) then
+entity.onTrigger = function(player, npc)
+    if (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) >= QUEST_ACCEPTED) then
         local letterGreen = player:getCharVar("LeleroonsLetterGreen")
         local letterBlue = player:getCharVar("LeleroonsLetterBlue")
         local letterRed = player:getCharVar("LeleroonsLetterRed")
@@ -46,10 +47,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 282) then
         if (option == 1) then
             player:addKeyItem(tpz.ki.LELEROONS_LETTER_GREEN)
@@ -66,3 +67,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

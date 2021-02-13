@@ -4,24 +4,25 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
+local attachment_object = {}
 
-function onEquip(pet)
-    onUpdate(pet, 0)
+attachment_object.onEquip = function(pet)
+    attachment_object.onUpdate(pet, 0)
 end
 
-function onUnequip(pet)
+attachment_object.onUnequip = function(pet)
     updateModPerformance(pet, tpz.mod.ACC, 'stabilizer_mod', 0)
 end
 
-function onManeuverGain(pet, maneuvers)
-    onUpdate(pet, maneuvers)
+attachment_object.onManeuverGain = function(pet, maneuvers)
+    attachment_object.onUpdate(pet, maneuvers)
 end
 
-function onManeuverLose(pet, maneuvers)
-    onUpdate(pet, maneuvers - 1)
+attachment_object.onManeuverLose = function(pet, maneuvers)
+    attachment_object.onUpdate(pet, maneuvers - 1)
 end
 
-function onUpdate(pet, maneuvers)
+attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
         updateModPerformance(pet, tpz.mod.ACC, 'stabilizer_mod', 5)
     elseif maneuvers == 1 then
@@ -32,3 +33,5 @@ function onUpdate(pet, maneuvers)
         updateModPerformance(pet, tpz.mod.ACC, 'stabilizer_mod', 20)
     end
 end
+
+return attachment_object

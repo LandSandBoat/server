@@ -7,11 +7,12 @@ require("scripts/globals/teleports")
 require("scripts/globals/missions")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(COP) > tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
         player:startEvent(12)
     elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS and player:getCharVar("PromathiaStatus") == 1) then
@@ -23,12 +24,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate CSID: %u", csid)
     -- printf("onUpdate RESULT: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 
@@ -37,11 +38,13 @@ function onEventFinish(player, csid, option)
     elseif (csid == 16) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 17) then
-        player:completeMission(COP, tpz.mission.id.cop.CALM_BEFORE_THE_STORM)
-        player:addMission(COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.CALM_BEFORE_THE_STORM)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH)
         player:setCharVar("PromathiaStatus", 0)
         player:setCharVar("COP_Dalham_KILL", 0)
         player:setCharVar("COP_Boggelmann_KILL", 0)
         player:setCharVar("Cryptonberry_Executor_KILL", 0)
     end
 end
+
+return entity

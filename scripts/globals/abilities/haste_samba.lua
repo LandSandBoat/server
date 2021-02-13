@@ -9,8 +9,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(tpz.effect.FAN_DANCE) then
         return tpz.msg.basic.UNABLE_TO_USE_JA2, 0
     elseif player:hasStatusEffect(tpz.effect.TRANCE) then
@@ -22,7 +23,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(tpz.effect.TRANCE) then
         player:delTP(350)
@@ -34,3 +35,5 @@ function onUseAbility(player, target, ability)
     player:delStatusEffect(tpz.effect.ASPIR_SAMBA)
     player:addStatusEffect(tpz.effect.HASTE_SAMBA, 500 + player:getMerit(tpz.merit.HASTE_SAMBA_EFFECT), 0, duration)
 end
+
+return ability_object

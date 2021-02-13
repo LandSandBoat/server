@@ -6,11 +6,14 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 2)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.THE_VIVISECTOR)
 end
+
+return entity

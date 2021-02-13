@@ -9,12 +9,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Gusgen_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local HealingTheLand = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
+entity.onTrigger = function(player, npc)
+    local HealingTheLand = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HEALING_THE_LAND)
 
     if (HealingTheLand == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SEAL_OF_BANISHING) == true) then
         player:delKeyItem(tpz.ki.SEAL_OF_BANISHING)
@@ -26,10 +27,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

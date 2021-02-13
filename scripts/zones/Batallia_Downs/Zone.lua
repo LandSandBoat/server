@@ -10,8 +10,9 @@ require("scripts/globals/chocobo_digging")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onChocoboDig(player, precheck)
+zone_object.onChocoboDig = function(player, precheck)
     return tpz.chocoboDig.start(player, precheck)
 end
 
@@ -21,12 +22,12 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local y = npc:getYPos()
     local z = npc:getZPos()
     local distance = 7
-    zone:registerRegion(zoneID, 
+    zone:registerRegion(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.AHTU);
     GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800));
 
@@ -36,8 +37,12 @@ function onInitialize(zone)
     registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1;
+
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+        player:setPos(-693.609, -14.583, 173.59, 30);
+    end
 
     if player:getCharVar("[QUEST]FullSpeedAhead") == 1 then -- Normal Mode
         player:addStatusEffect(tpz.effect.FULL_SPEED_AHEAD, 0, 3, tpz.fsa.duration)
@@ -45,10 +50,6 @@ function onZoneIn(player, prevZone)
     elseif player:getCharVar("[QUEST]FullSpeedAhead") == 2 then -- Easy Mode
         player:addStatusEffect(tpz.effect.FULL_SPEED_AHEAD, 1, 3, tpz.fsa.duration)
         return -1
-    end
-
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-693.609, -14.583, 173.59, 30);
     end
 
     if quests.rainbow.onZoneIn(player) then
@@ -60,23 +61,23 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     if player:hasStatusEffect(tpz.effect.FULL_SPEED_AHEAD) then
         tpz.fsa.onRegionEnter(player, region:GetRegionID())
     end
 end;
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if (csid == 901) then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 903 then
         if player:getZPos() >  -331 then
             player:updateEvent(0, 0, 0, 0, 0, 3)
@@ -93,3 +94,5 @@ function onEventFinish(player, csid, option)
         player:setPos(475, 8.8, -159, 128, 105)
     end
 end
+
+return zone_object

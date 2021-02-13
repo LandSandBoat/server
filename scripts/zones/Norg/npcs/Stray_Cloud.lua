@@ -8,12 +8,13 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local anUndyingPledge = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
+entity.onTrigger = function(player, npc)
+    local anUndyingPledge = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
 
     if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 then
         player:startEvent(225) -- Start quest
@@ -30,13 +31,12 @@ function onTrigger(player, npc)
     end
 end
 
-
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 225 then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
         player:setCharVar("anUndyingPledgeCS", 1)
     elseif
         csid == 227 and
@@ -50,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:delKeyItem(tpz.ki.CALIGINOUS_BLADE)
     end
 end
+
+return entity

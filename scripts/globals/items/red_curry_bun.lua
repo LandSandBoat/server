@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5759
 -- Item: red_curry_bun
 -- Food Effect: 30 Min, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group effects
 -- Health 25
 -- Strength 7
@@ -14,12 +14,13 @@
 -- Resist Sleep +3
 -- HP recovered when healing +2
 -- MP recovered when healing +1
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -27,11 +28,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 5759)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.HP, 25)
     target:addMod(tpz.mod.STR, 7)
     target:addMod(tpz.mod.AGI, 1)
@@ -46,7 +47,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.MPHEAL, 1)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.HP, 25)
     target:delMod(tpz.mod.STR, 7)
     target:delMod(tpz.mod.AGI, 1)
@@ -60,3 +61,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.HPHEAL, 2)
     target:delMod(tpz.mod.MPHEAL, 1)
 end
+
+return item_object

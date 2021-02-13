@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     -- Weight Door System (RegionID, X, Radius, Z)
     zone:registerRegion(1, -15, 5, -60, 0, 0, 0)
     zone:registerRegion(3, 15, 5, -180, 0, 0, 0)
@@ -40,11 +41,11 @@ function onInitialize(zone)
     npcUtil.UpdateNPCSpawnPoint(ID.npc.ANTICAN_TAG_QM, 60, 120, ID.npc.ANTICAN_TAG_POSITIONS, "[POP]Antican_Tag")
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-980.193, 14.913, -282.863, 60)
@@ -52,7 +53,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function getWeight(player)
+local function getWeight(player)
     local race = player:getRace()
     if race == tpz.race.GALKA then
         return 3
@@ -63,7 +64,7 @@ function getWeight(player)
     end
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
     local RegionID = region:GetRegionID()
 
     -- holes in the sand
@@ -103,7 +104,7 @@ function onRegionEnter(player, region)
     end
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
     local RegionID = region:GetRegionID()
 
     if (RegionID < 30) then
@@ -120,8 +121,10 @@ function onRegionLeave(player, region)
     end
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 end
+
+return zone_object

@@ -7,9 +7,9 @@ require("scripts/globals/npc_util")
 -----------------------------------
 
 local MISAREAUX_COAST = {
-    ------------------------------------------
+    -----------------------------------
     -- Handle spawn/despawn for Ziphius NM QMs
-    ------------------------------------------
+    -----------------------------------
     ziphiusHandleQM = function()
         local vHour = VanadielHour()
         if vHour >= 7 and vHour < 22 then -- Despawn traps for Ziphius
@@ -33,9 +33,9 @@ local MISAREAUX_COAST = {
             end
         end
     end,
-    ------------------------------------
+    -----------------------------------
     -- Trade function for Ziphius NM QMs
-    ------------------------------------
+    -----------------------------------
     ziphiusOnTrade = function(player, npc, trade)
         local baited = npc:getLocalVar("[Ziphius]Baited") == 1
         if not baited and npcUtil.tradeHas(trade, 16994) then -- Trade Slice of Carp
@@ -45,9 +45,9 @@ local MISAREAUX_COAST = {
             player:messageSpecial(ID.text.PUT_IN_TRAP, 16994)
         end
     end,
-    ------------------------------------
+    -----------------------------------
     -- Spawn function for Ziphius NM QMs
-    ------------------------------------
+    -----------------------------------
     ziphiusOnTrigger = function(player, npc)
         local baited = npc:getLocalVar("[Ziphius]Baited") == 1
         local baitedByPlayer = npc:getLocalVar("[Ziphius]Bait"..player:getName()) == 1

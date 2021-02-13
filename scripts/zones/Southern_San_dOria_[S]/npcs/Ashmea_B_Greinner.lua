@@ -3,16 +3,19 @@
 --  NPC: Ashmea B Greinner
 -- !pos 2 2 -81 80
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, 11690) -- How dare a baseborn peasant raise [his/her] voice to a noble knight!? Begone, before I strike you down myself!
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

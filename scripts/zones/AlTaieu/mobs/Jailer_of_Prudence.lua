@@ -7,12 +7,13 @@ local ID = require("scripts/zones/AlTaieu/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -27,7 +28,7 @@ function onMobSpawn(mob)
         },
     })
 
-    mob:AnimationSub(0) -- Mouth closed
+    mob:setAnimationSub(0) -- Mouth closed
     mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 60)
     mob:setMod(tpz.mod.TRIPLE_ATTACK, 20)
     mob:setMod(tpz.mod.REGEN, 10)
@@ -40,7 +41,7 @@ function onMobSpawn(mob)
     mob:addMod(tpz.mod.LULLABYRES, 30)
 end
 
-function onMobDisEngage(mob, target)
+entity.onMobDisengage = function(mob, target)
 end
 
 --[[ onMobskill -- When this functionlity is added, this should work.
@@ -61,21 +62,23 @@ function onUseAbility(mob, target, ability)
 end
 --]]
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
     if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then
         secondPrudence:setMobMod(tpz.mobMod.NO_DROPS, 0)
-        secondPrudence:AnimationSub(3) -- Mouth Open
+        secondPrudence:setAnimationSub(3) -- Mouth Open
         secondPrudence:addMod(tpz.mod.ATTP, 100)
         secondPrudence:delMod(tpz.mod.DEFP, -50)
     else
         firstPrudence:setMobMod(tpz.mobMod.NO_DROPS, 0)
-        firstPrudence:AnimationSub(3) -- Mouth Open
+        firstPrudence:setAnimationSub(3) -- Mouth Open
         firstPrudence:addMod(tpz.mod.ATTP, 100)
         firstPrudence:delMod(tpz.mod.DEFP, -50)
     end
 end
+
+return entity

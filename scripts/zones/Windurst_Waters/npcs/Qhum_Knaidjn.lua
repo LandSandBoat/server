@@ -7,6 +7,8 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
+-----------------------------------
+local entity = {}
 
 local keyitems = {
     [0] = {
@@ -79,24 +81,26 @@ local items = {
     }
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     unionRepresentativeTrade(player, npc, trade, 10025, 8)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     unionRepresentativeTrigger(player, 8, 10024, "guild_cooking", keyitems)
 end
 
-function onEventUpdate(player, csid, option, target)
+entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 10024) then
         unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
     end
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     if (csid == 10024) then
         unionRepresentativeTriggerFinish(player, option, target, 8, "guild_cooking", keyitems, items)
     elseif (csid == 10025) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
 end
+
+return entity

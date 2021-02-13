@@ -12,8 +12,9 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addListener("DEATH", "AERN_DEATH", function(mob)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
         if(math.random (1, 10) < 10) then
@@ -26,7 +27,7 @@ function onMobInitialize(mob)
             mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mob)
                 mob:setHP(mob:getMaxHP())
-                mob:AnimationSub(3)
+                mob:setAnimationSub(3)
                 mob:resetAI()
                 mob:stun(3000)
                 local new_target = mob:getEntity(targetid)
@@ -46,13 +47,13 @@ function onMobInitialize(mob)
     mob:addListener("AERN_RERAISE", "IX_DRK_RERAISE", function(mob, timesReraised)
         mob:setLocalVar("AERN_RERAISES", timesReraised + 1)
         mob:timer(5000, function(mob)
-            mob:AnimationSub(1)
+            mob:setAnimationSub(1)
         end)
     end)
 end
 
-function onMobSpawn(mob)
-    mob:AnimationSub(1)
+entity.onMobSpawn = function(mob)
+    mob:setAnimationSub(1)
 
     tpz.mix.jobSpecial.config(mob, {
         specials =
@@ -72,9 +73,11 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setLocalVar("AERN_RERAISES", 0)
 end
+
+return entity

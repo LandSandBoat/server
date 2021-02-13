@@ -74,7 +74,11 @@ local ids =
     RETRACE               = 60,
     SOUTHERN_SAN_DORIA_S  = 61,
     BASTOK_MARKETS_S      = 62,
-    WINDURST_WATERS_S     = 63
+    WINDURST_WATERS_S     = 63,
+    ESCHA_ZITAH           = 64,
+    QUFIM_CONFLUENCE      = 65,
+    ESCHA_RUAUN           = 66,
+    MISAREAUX_CONFLUENCE  = 67
 }
 tpz.teleport.id = ids
 
@@ -140,7 +144,11 @@ local destinations =
     [ids.ZVAHL_KEEP]            = {-555.996,  -70.100,   59.989,   0, 162},
     [ids.SOUTHERN_SAN_DORIA_S]  = { -98.000,    1.000,  -41.000, 224,  80},
     [ids.BASTOK_MARKETS_S]      = {-291.000,  -10.000, -107.000, 212,  87},
-    [ids.WINDURST_WATERS_S]     = { -31.442,   -5.000,  129.202, 128,  94}
+    [ids.WINDURST_WATERS_S]     = { -31.442,   -5.000,  129.202, 128,  94},
+    [ids.ESCHA_ZITAH]           = {    -338,        6,     -225, 172, 288},
+    [ids.QUFIM_CONFLUENCE]      = {    -203,      -20,       81,  76, 126},
+    [ids.ESCHA_RUAUN]           = {  -0.371,  -34.279, -466.980, 192, 289},
+    [ids.MISAREAUX_CONFLUENCE]  = { -57.385,  -21.460,  568.941, 160,  25}
 }
 
 tpz.teleport.type =

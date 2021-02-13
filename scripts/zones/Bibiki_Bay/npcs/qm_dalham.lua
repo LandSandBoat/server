@@ -5,11 +5,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 require("scripts/globals/missions")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(COP)
 
     if (cop == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and not GetMobByID(ID.mob.DALHAM):isSpawned() and player:getCharVar("COP_Dalham_KILL") == 0) then
@@ -21,11 +23,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 41) then
         player:setCharVar("COP_Dalham_KILL", 2)
     end
 end
+
+return entity

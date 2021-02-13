@@ -6,16 +6,17 @@ local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if
         GetMobByID(ID.mob.EASTERN_SPHINX):isDead() and
         GetMobByID(ID.mob.WESTERN_SPHINX):isDead() and
@@ -25,3 +26,5 @@ function onMobDeath(mob, player, isKiller)
         player:setCharVar("Mission6-1MobKilled", 1)
     end
 end
+
+return entity

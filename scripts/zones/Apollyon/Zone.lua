@@ -5,8 +5,10 @@ local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/zone")
 require("scripts/globals/status")
+-----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetServerVariable("[Central_Apollyon]Time", 0)
     SetServerVariable("[CS_Apollyon]Time", 0)
     SetServerVariable("[NE_Apollyon]Time", 0)
@@ -39,11 +41,11 @@ function onInitialize(zone)
     zone:registerRegion(37, -563,-4,356,  -556,4,363); -- appolyon NW telporter floor5 to entrance
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     cs = -1
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(643, 0.1, -600)
@@ -51,7 +53,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player,region)
+zone_object.onRegionEnter = function(player,region)
     local regionID = region:GetRegionID()
     local battlefield = player:getBattlefield()
     switch (regionID): caseof
@@ -124,13 +126,13 @@ function onRegionEnter(player,region)
     }
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player,csid,option)
+zone_object.onEventUpdate = function(player,csid,option)
 end
 
-function onEventFinish(player,csid,option)
+zone_object.onEventFinish = function(player,csid,option)
     if csid == 100 and option == 1 then
         player:setPos(557, -1, 441, 128, 33)  -- APOLLYON_SE_NE exit
     elseif csid == 101 and option == 1 then
@@ -143,3 +145,5 @@ function onEventFinish(player,csid,option)
         player:setPos(-646.000, 0.000, -616.000) -- West
     end
 end
+
+return zone_object

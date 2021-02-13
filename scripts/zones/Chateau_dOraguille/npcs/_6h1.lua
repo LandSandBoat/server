@@ -8,16 +8,17 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local sandyQuests = tpz.quest.id.sandoria
-    local whmAf1 = player:getQuestStatus(SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
-    local whmAf2 = player:getQuestStatus(SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
-    local whmAf3 = player:getQuestStatus(SANDORIA, sandyQuests.PIEUJE_S_DECISION)
+    local whmAf1 = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
+    local whmAf2 = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
+    local whmAf3 = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
     -- WHM AF quests
     if player:getMainJob() == tpz.job.WHM and player:getMainLvl() >= AF2_QUEST_LEVEL then
@@ -41,7 +42,7 @@ function onTrigger(player, npc)
     -- San d'Oria 8-2 "Lightbringer" (optional)
     elseif
         player:getRank() == 9 and player:getRankPoints() == 0 and
-        player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
+        player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
         (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
     then
         player:startEvent(74)
@@ -55,17 +56,19 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 551) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif (csid == 552) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
     elseif (csid == 74) then
         player:setCharVar("Cutscenes_8-2", 2)
     end
 
 end
+
+return entity

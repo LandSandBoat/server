@@ -8,12 +8,13 @@ require("scripts/globals/conquest")
 require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-function onZoneIn(player,prevZone)
+zone_object.onZoneIn = function(player,prevZone)
     local cs = -1
 
     if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
@@ -44,27 +45,29 @@ function onZoneIn(player,prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onTransportEvent(player, transport)
+zone_object.onTransportEvent = function(player, transport)
     player:startEvent(10002)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 305) then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 10002) then
         player:setPos(0, 0, 0, 0, 225)
     elseif csid == 30035 then
-        player:completeMission(ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
+
+return zone_object

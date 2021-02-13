@@ -1,18 +1,19 @@
----------------------------------------------------
+-----------------------------------
 -- Armor Shatterer
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
----------------------------------------------------
+-----------------------------------
+local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(tpz.effect.WIND_MANEUVER)
 end
 
-function onPetAbility(target, automaton, skill, master, action)
+ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 2,
         atkmulti = 2.25,
@@ -43,3 +44,5 @@ function onPetAbility(target, automaton, skill, master, action)
 
     return damage
 end
+
+return ability_object

@@ -9,8 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local gil = trade:getGil()
     local itemQuality = 0
@@ -50,7 +51,7 @@ function onTrade(player, npc, trade)
         end
     end
 
-    local PrettyLittleThings = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+    local PrettyLittleThings = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
 
     if (itemQuality == 2) then
         if (PrettyLittleThings == QUEST_COMPLETED) then
@@ -72,23 +73,25 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(10023, 0, 246, 10)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10023 and option == 4002) then
-        player:moghouseFlag(8)
+        player:setMoghouseFlag(8)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     elseif (csid == 10023 and option == 1) then
         player:tradeComplete()
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS)
     end
 end
+
+return entity

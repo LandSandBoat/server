@@ -8,11 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(tpz.ki.MAGICKED_ASTROLABE) then
         local cost = 10000
         if player:getLocalVar("Astrolabe") == 0 then
@@ -25,7 +26,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if csid == 1080 or csid == 1081 then
         if option == 1 and player:getGil() >= 10000 then
             player:updateEvent(tpz.ki.MAGICKED_ASTROLABE)
@@ -35,7 +36,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1080 and option ~= tpz.ki.MAGICKED_ASTROLABE then
         player:setLocalVar("Astrolabe", 1)
     elseif (csid == 1080 or csid == 1081) and option == tpz.ki.MAGICKED_ASTROLABE and player:getGil() >= 10000 then
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
         player:delGil(10000)
     end
 end
+
+return entity

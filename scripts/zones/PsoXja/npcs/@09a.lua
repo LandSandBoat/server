@@ -5,7 +5,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-function onSpawn(npc)
+local entity = {}
+
+entity.onSpawn = function(npc)
 
     local elevator =
     {
@@ -18,3 +20,5 @@ function onSpawn(npc)
 
     npc:setElevator(elevator.id, elevator.lowerDoor, elevator.upperDoor, elevator.elevator, elevator.reversedAnimations)
 end
+
+return entity

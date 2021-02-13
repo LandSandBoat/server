@@ -3,11 +3,15 @@
 --   NM: Quu Xijo the Illusory
 -----------------------------------
 require("scripts/globals/hunts")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 283)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(3600, 4200)) -- 60 to 70 minutes
 end
+
+return entity

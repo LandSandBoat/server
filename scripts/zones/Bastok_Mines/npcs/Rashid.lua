@@ -9,18 +9,19 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local CurrentMission = player:getCurrentMission(BASTOK)
     local Count = trade:getItemCount()
 
     if (CurrentMission ~= tpz.mission.id.bastok.NONE) then
-        if (CurrentMission == tpz.mission.id.bastok.FETICHISM and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.FETICHISM) == false and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
+        if (CurrentMission == tpz.mission.id.bastok.FETICHISM and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.FETICHISM) == false and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
             player:startEvent(1008) -- Finish Mission "Fetichism" (First Time)
         elseif (CurrentMission == tpz.mission.id.bastok.FETICHISM and trade:hasItemQty(606, 1) and trade:hasItemQty(607, 1) and trade:hasItemQty(608, 1) and trade:hasItemQty(609, 1) and Count == 4) then
             player:startEvent(1005) -- Finish Mission "Fetichism" (Repeat)
-        elseif (CurrentMission == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
+        elseif (CurrentMission == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES) == false and trade:hasItemQty(563, 1) and Count == 1) then
             player:startEvent(1010) -- Finish Mission "To the forsaken mines" (First Time)
         elseif (CurrentMission == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and trade:hasItemQty(563, 1) and Count == 1) then
             player:startEvent(1006) -- Finish Mission "To the forsaken mines" (Repeat)
@@ -29,7 +30,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getNation() ~= tpz.nation.BASTOK) then
         player:startEvent(1003) -- For non-Bastokian
@@ -46,7 +47,7 @@ function onTrigger(player, npc)
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
-        elseif (player:getRank() == 1 and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
+        elseif (player:getRank() == 1 and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
             player:startEvent(1000) -- Start First Mission "The Zeruhn Report"
         elseif (CurrentMission ~= tpz.mission.id.bastok.NONE) then
             player:startEvent(1002) -- Have mission already activated
@@ -58,11 +59,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     finishMissionTimeline(player, 1, csid, option)
 
 end
+
+return entity

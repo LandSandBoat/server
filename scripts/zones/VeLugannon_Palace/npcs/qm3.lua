@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 17622) then -- Buccaneer's Knife
         if npc:getLocalVar("PillarCharged") == 1 and math.random(1000) <= 50 then -- 50/1000 chance to obtain on trade.
             player:confirmTrade()
@@ -21,12 +22,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(2)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

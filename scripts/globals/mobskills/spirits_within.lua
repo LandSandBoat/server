@@ -1,18 +1,20 @@
----------------------------------------------
+-----------------------------------
 -- Spirits Within
 --
 -- Description: Delivers an unavoidable attack. Damage varies with HP and TP.
 -- Type: Magical/Breath
 -- Utsusemi/Blink absorb: Ignores shadows and most damage reduction.
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (mob:getPool() ~= 4249) then
         mob:messageBasic(tpz.msg.basic.READIES_WS, 0, 39)
     end
@@ -20,7 +22,7 @@ function onMobSkillCheck(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getPool() == 4249) then -- Volker@Throne_Room only
         target:showText(mob, zones[tpz.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
@@ -59,3 +61,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.ELEMENTAL)
     return dmg
 end
+
+return mobskill_object

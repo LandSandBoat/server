@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Calcifying Deluge
 --
 -- Description: Delivers a threefold ranged attack to targets in an area of effect. Additional effect: Petrification
@@ -6,17 +6,18 @@
 -- Utsusemi/Blink absorb: 2-3 shadows
 -- Range: Unknown
 -- Notes: Used only by Medusa.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod = 1
     local dmgmod = 2
@@ -29,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
     return dmg
 end
+
+return mobskill_object

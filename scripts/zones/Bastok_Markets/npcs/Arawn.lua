@@ -11,15 +11,16 @@ require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local StampHunt = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
+entity.onTrigger = function(player, npc)
+    local StampHunt = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 11)) then
+    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 11)) then
         player:startEvent(429)
     elseif (StampHunt == QUEST_AVAILABLE) then
         player:startEvent(225)
@@ -31,13 +32,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 225 and option == 0) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
         player:addKeyItem(tpz.ki.STAMP_SHEET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STAMP_SHEET)
     elseif (csid == 226) then
@@ -48,7 +49,7 @@ function onEventFinish(player, csid, option)
             player:delKeyItem(tpz.ki.STAMP_SHEET)
             player:setCharVar("StampHunt_Mask", 0)
             player:addFame(BASTOK, 50)
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13081)
         end
@@ -57,3 +58,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

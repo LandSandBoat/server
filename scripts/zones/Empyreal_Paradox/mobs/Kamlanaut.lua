@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
 local skillToAbsorb =
 {
@@ -16,11 +17,11 @@ local skillToAbsorb =
     [828] = tpz.mod.WATER_ABSORB, -- water_blade
 }
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:setLocalVar("nextEnSkill", os.time() + 10)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if os.time() > mob:getLocalVar("nextEnSkill") then
         local skill = math.random(823, 828)
         mob:setLocalVar("currentTP", mob:getTP())
@@ -29,7 +30,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+entity.onMobWeaponSkill = function(target, mob, skill)
     local skillId = skill:getID()
     local absorbId = skillToAbsorb[skillId]
 
@@ -37,6 +38,7 @@ function onMobWeaponSkill(target, mob, skill)
         -- ----------------------------------------------------------------------
         -- when using en-spell weapon skill, absorb damage of that element type
         -- ----------------------------------------------------------------------
+local entity = {}
 
         -- remove previous absorb mod, if set
         local previousAbsorb = mob:getLocalVar("currentAbsorb")
@@ -56,6 +58,7 @@ function onMobWeaponSkill(target, mob, skill)
         -- ----------------------------------------------------------------------
         -- when using Light Blade or Great Wheel, can do up to three WS in a row
         -- ----------------------------------------------------------------------
+local entity = {}
 
         local wsCount = mob:getLocalVar("wsCount")
         local wsMax = mob:getLocalVar("wsMax")
@@ -74,5 +77,7 @@ function onMobWeaponSkill(target, mob, skill)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

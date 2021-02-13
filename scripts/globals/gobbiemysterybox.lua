@@ -1,7 +1,7 @@
---------------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/utils")
--------------------------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.mystery = tpz.mystery or {}
@@ -161,7 +161,7 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
               --[??] = function()  end, -- furnishing
                 [13] = function()-- anniversary
                     if math.random(1,100) == 1 then -- 1% chance for ANV exclusive item?
-                        itemID = anniversaryItems[math.random(1, #anniversaryItems)] 
+                        itemID = anniversaryItems[math.random(1, #anniversaryItems)]
                     else
                         itemID = SelectDailyItem(player, 6)
                     end

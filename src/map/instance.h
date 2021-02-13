@@ -36,6 +36,9 @@ enum INSTANCE_STATUS
 class CInstance : public CZoneEntities
 {
 public:
+    CInstance(CZone*, uint8 instanceid);
+    ~CInstance();
+
     void RegisterChar(CCharEntity*);
 
     uint8       GetID() const;
@@ -48,6 +51,7 @@ public:
     uint32      GetStage() const;                // Tracks the progress through the instance (eg. floor #)
     duration    GetWipeTime();                   // Get time wipe happened (elapsed since start)
     duration    GetElapsedTime(time_point tick); // Get elapsed time so far
+    uint64_t    GetLocalVar(const std::string& name) const;
 
     void SetLevelCap(uint8 cap);
     void SetEntryLoc(float x, float y, float z, float rot); // Set entry location
@@ -55,6 +59,7 @@ public:
     void SetProgress(uint32 progress);                      // Set progress through current stage
     void SetStage(uint32 stage);                            // Set current stage (eg. floor #)
     void SetWipeTime(duration time);                        // Set elapsed time when a wipe is detected
+    void SetLocalVar(const std::string& name, uint64_t value);
 
     void CheckTime(time_point tick);         // Check time limit (run instance time script)
     bool CharRegistered(CCharEntity* PChar); // Check if PChar is registered to this instance
@@ -71,15 +76,13 @@ public:
     uint8 GetBackgroundMusicDay();
     uint8 GetBackgroundMusicNight();
 
-    CInstance(CZone*, uint8 instanceid);
-    ~CInstance();
-
 private:
     void LoadInstance();
 
     uint8               m_instanceid{ 0 };
     uint16              m_entrance{ 0 };
     string_t            m_instanceName;
+    CZone*              m_zone;
     uint32              m_commander{ 0 };
     uint8               m_levelcap{ 0 };
     duration            m_timeLimit{ duration::zero() };
@@ -94,6 +97,8 @@ private:
     INSTANCE_STATUS     m_status{ INSTANCE_NORMAL };
     std::vector<uint32> m_registeredChars;
     std::set<uint32>    m_enteredChars;
+
+    std::unordered_map<std::string, uint64_t> m_LocalVars;
 };
 
 #endif

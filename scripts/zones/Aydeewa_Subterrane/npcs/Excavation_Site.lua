@@ -6,8 +6,9 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if (player:hasKeyItem(tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)) then -- If no journal, just stop right here
         if (trade:hasItemQty(605, 1) and trade:getItemCount() == 1) then -- Trade Pickaxe
             local keyItems =
@@ -26,12 +27,14 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

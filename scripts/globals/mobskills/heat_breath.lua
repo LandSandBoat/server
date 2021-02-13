@@ -1,20 +1,22 @@
----------------------------------------------
+-----------------------------------
 --  Heat Breath
 --
 --  Description: Deals fire damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Fire)
 --
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+-----------------------------------
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = MobBreathMove(mob, target, 0.5, 1, tpz.magic.ele.FIRE, 500)
 
@@ -23,3 +25,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.FIRE)
     return dmg
 end
+
+return mobskill_object

@@ -9,20 +9,21 @@ local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     player:startEvent(532) -- What's this?  I don't need this.
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local aTasteForMeat = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
-    local medicineWoman = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local aTasteForMeat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
+    local medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
     local diaryPage = player:getCharVar("DiaryPage")
     local fameLevel = player:getFameLevel(SANDORIA)
 
     if player:getCharVar("aTasteForMeat") == 0 and aTasteForMeat == QUEST_COMPLETED and fameLevel >= 8 and medicineWoman == QUEST_COMPLETED and diaryPage >= 4 then
-        local overTheHillsAndFarAway = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+        local overTheHillsAndFarAway = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
 
         if overTheHillsAndFarAway == QUEST_AVAILABLE then
             player:startEvent(725) -- Start
@@ -56,13 +57,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 725 then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OVER_THE_HILLS_AND_FAR_AWAY)
     else
         if csid == 527 then
             player:setCharVar("aTasteForMeat", 1)
@@ -74,3 +75,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

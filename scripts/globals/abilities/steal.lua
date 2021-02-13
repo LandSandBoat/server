@@ -8,6 +8,8 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
 -- these are the quadavs that the thf af1 item can be stolen from
 -- bronze quadav groupid = 7949
@@ -31,7 +33,7 @@ validThfQuestMobs =
 
 
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getFreeSlotsCount() == 0) then
         return tpz.msg.basic.FULL_INVENTORY, 0
     else
@@ -39,7 +41,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local thfLevel
     local stolen = 0
 
@@ -65,7 +67,7 @@ function onUseAbility(player, target, ability, action)
         target:triggerListener("ITEM_STOLEN", target, player, stolen)
     else
         ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed to steal
-        action:animation(target:getID(), 182)
+        action:setAnimation(target:getID(), 182)
     end
 
     -- Attempt Aura steal
@@ -113,3 +115,5 @@ function checkThfAfQuest(player, target)
     return false
     end
 end
+
+return ability_object

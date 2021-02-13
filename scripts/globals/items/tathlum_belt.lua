@@ -1,11 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 15296
 -- tathlum_belt
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = tpz.msg.basic.ITEM_NO_USE_INVENTORY
@@ -13,6 +14,8 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addItem(17298, 8) -- tathlum
 end
+
+return item_object

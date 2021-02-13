@@ -1,10 +1,11 @@
 -----------------------------------
---
---
---
+-- tpz.effect.EMBRAVA
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     local skill = effect:getPower()
     local regen = math.floor(skill / 7) + 1
     local refresh = math.floor(skill / 100) + 1
@@ -15,10 +16,10 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.HASTE_MAGIC, haste)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     local skill = effect:getPower()
     local regen = math.floor(skill / 7) + 1
     local refresh = math.floor(skill / 100) + 1
@@ -28,3 +29,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.REFRESH, refresh)
     target:delMod(tpz.mod.HASTE_MAGIC, haste)
 end
+
+return effect_object

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Corrosive Ooze
 -- Deals water damage to an enemy. Additional Effect: Attack Down and Defense Down
 -- Spell cost: 55 MP
@@ -9,19 +9,20 @@
 -- Level: 66
 -- Casting Time: 5 seconds
 -- Recast Time: 30 seconds
---
+-----------------------------------
 -- Combos: Clear Mind
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     local multi = 2.125
@@ -65,3 +66,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

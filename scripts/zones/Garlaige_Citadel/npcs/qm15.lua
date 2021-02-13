@@ -8,11 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if
         player:getCharVar("hittingTheMarquisateHagainCS") == 8 and
         os.time() < GetNPCByID(ID.npc.CHANDELIER_QM):getLocalVar("chandelierCooldown")
@@ -31,10 +32,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 56 then
         if option == 1 then
             player:messageSpecial(ID.text.THE_PRESENCE_MOVES + 5) -- Something flies out from the ceiling!
@@ -44,3 +45,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

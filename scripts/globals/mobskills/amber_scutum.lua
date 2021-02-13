@@ -1,20 +1,21 @@
----------------------------------------------
+-----------------------------------
 -- Amber Scutum
 -- Family: Wamouracampa
 -- Description: Increases defense.
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local status = mob:getStatusEffect(tpz.effect.DEFENSE_BOOST)
     local power = 100
     if status ~= nil then
@@ -26,3 +27,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return tpz.effect.DEFENSE_BOOST
 end
+
+return mobskill_object

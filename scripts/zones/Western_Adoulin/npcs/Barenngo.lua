@@ -7,12 +7,13 @@
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local DELM = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.DONT_EVER_LEAF_ME)
+entity.onTrigger = function(player, npc)
+    local DELM = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DONT_EVER_LEAF_ME)
     if ((DELM == QUEST_ACCEPTED) and (player:getCharVar("DELM_Barenngo_Branch") < 1)) then
         -- Progresses Quest: 'Dont Ever Leaf Me'
         player:startEvent(5015)
@@ -25,12 +26,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 5015) then
         -- Progresses Quest: 'Dont Ever Leaf Me'
         player:setCharVar("DELM_Barenngo_Branch", 1)
     end
 end
+
+return entity

@@ -12,8 +12,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
         return tpz.msg.basic.REQUIRES_COMBAT, 0
     else
@@ -42,7 +43,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local hit = 4
     --get fstr
     local fstr = fSTR(player:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT), player:getWeaponDmgRank())
@@ -73,7 +74,7 @@ function onUseAbility(player, target, ability, action)
         hit = 3
         dmg = base * pdif
 
-        local spell = getSpell(252)
+        local spell = GetSpell(252)
         local params = {}
         params.diff = 0
         params.skillType = player:getWeaponSkillType(tpz.slot.MAIN)
@@ -90,7 +91,7 @@ function onUseAbility(player, target, ability, action)
         target:takeDamage(dmg, player, tpz.attackType.PHYSICAL, player:getWeaponDamageType(tpz.slot.MAIN))
         target:updateEnmityFromDamage(player, dmg)
 
-        action:animation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
         action:speceffect(target:getID(), hit)
         return dmg
     else
@@ -98,3 +99,5 @@ function onUseAbility(player, target, ability, action)
         return 0
     end
 end
+
+return ability_object

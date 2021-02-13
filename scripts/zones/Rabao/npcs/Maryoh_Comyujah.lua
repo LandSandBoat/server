@@ -8,11 +8,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
         if (player:getCharVar("ZilartStatus") == 0) then
@@ -24,7 +25,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(82)
         end
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)) then
         player:startEvent(85) -- New standard dialog after ZM12
     else
         player:startEvent(43) -- Standard dialog
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 81 and option == 1) then
         player:setCharVar("ZilartStatus", 1)
@@ -47,3 +48,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

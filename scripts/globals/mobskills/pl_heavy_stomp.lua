@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Heavy Stomp
 --
 -- Description: Deals heavy damage to targets within an area of effect. Additional effect: Paralysis
@@ -6,12 +6,14 @@
 -- Utsusemi/Blink absorb: 2-3 shadows
 -- Range: Unknown radial
 -- Notes: Paralysis effect has a very long duration.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+-----------------------------------
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 421) then
@@ -21,7 +23,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = math.random(2, 3)
     local accmod = 1
     local dmgmod = .7
@@ -34,3 +36,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

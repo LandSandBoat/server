@@ -5,13 +5,16 @@
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.PROBABLY_WORKS_WITH_SOMETHING_ELSE)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

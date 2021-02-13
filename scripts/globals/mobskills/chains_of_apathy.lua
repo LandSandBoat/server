@@ -1,16 +1,17 @@
----------------------------------------------
+-----------------------------------
 -- Chains of Apathy
 --
----------------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     local targets = mob:getEnmityList()
     for i, v in pairs(targets) do
         if (v.entity:isPC()) then
@@ -24,7 +25,7 @@ function onMobSkillCheck(target, mob, skill)
     return 1
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.TERROR
     local power = 30
     local duration = 30
@@ -36,3 +37,5 @@ function onMobWeaponSkill(target, mob, skill)
     end
     return typeEffect
 end
+
+return mobskill_object

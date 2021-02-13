@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5066
 -- Scroll of Lightning Threnody
 -- Teaches the song Lightning Threnody
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(458)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(458)
 end
+
+return item_object

@@ -28,11 +28,13 @@ require("scripts/globals/status")
 --    Do crit ws hits count differently than regular ws hits on retail?
 --    Should onCriticalHit count WS crit hits if regular WS hits do not count?
 -----------------------------------
-function onMobInitialize(mob)
+local entity = {}
+
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -45,8 +47,8 @@ function onMobSpawn(mob)
     mob:setSpellList(296) -- Set BLM spell list
 end
 
-function onMobFight(mob, target)
-    if mob:AnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
+entity.onMobFight = function(mob, target)
+    if mob:getAnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
         mob:setLocalVar("jobChanged", 1)
         mob:setSpellList(297) -- Set WHM spell list.
         -- set new JSA parameters
@@ -60,21 +62,23 @@ function onMobFight(mob, target)
     end
 end
 
-function onCriticalHit(mob)
+entity.onCriticalHit = function(mob)
     local RND = math.random(1, 100)
-    if mob:AnimationSub() == 0 and RND <= 10 then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() == 0 and RND <= 10 then
+        mob:setAnimationSub(1)
     end
 end
 
-function onWeaponskillHit(mob, attacker, weaponskill)
+entity.onWeaponskillHit = function(mob, attacker, weaponskill)
     local RND = math.random(1, 100)
-    if mob:AnimationSub() == 0 and RND <= 10 then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() == 0 and RND <= 10 then
+        mob:setAnimationSub(1)
     end
 
     return 0
 end
 
-function onMobDeath(mob, killer)
+entity.onMobDeath = function(mob, killer)
 end
+
+return entity

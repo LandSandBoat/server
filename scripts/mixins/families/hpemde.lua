@@ -10,15 +10,15 @@ local function dive(mob)
     mob:untargetable(true)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
-    mob:AnimationSub(5)
+    mob:setAnimationSub(5)
 end
 
 local function surface(mob)
     mob:hideName(false)
     mob:untargetable(false)
-    local animationSub = mob:AnimationSub()
+    local animationSub = mob:getAnimationSub()
     if animationSub == 0 or animationSub == 5 then
-        mob:AnimationSub(6)
+        mob:setAnimationSub(6)
         mob:wait(2000)
     end
 end
@@ -28,7 +28,7 @@ local function openMouth(mob)
     mob:addMod(tpz.mod.DEFP, -50)
     mob:addMod(tpz.mod.DMGMAGIC, -50)
     mob:setLocalVar("[hpemde]closeMouthHP", mob:getHP() - math.ceil(mob:getMaxHP() / 3))
-    mob:AnimationSub(3)
+    mob:setAnimationSub(3)
     mob:wait(2000)
 end
 
@@ -37,7 +37,7 @@ local function closeMouth(mob)
     mob:delMod(tpz.mod.DEFP, -50)
     mob:delMod(tpz.mod.DMGMAGIC, -50)
     mob:setLocalVar("[hpemde]changeTime", mob:getBattleTime() + 30)
-    mob:AnimationSub(6)
+    mob:setAnimationSub(6)
     mob:wait(2000)
 end
 
@@ -51,7 +51,7 @@ g_mixins.families.hpemde = function(mob)
         if mob:getHPP() == 100 then
             mob:setLocalVar("[hpemde]damaged", 0)
         end
-        if mob:AnimationSub() ~= 5 then
+        if mob:getAnimationSub() ~= 5 then
             dive(mob)
         end
     end)
@@ -79,16 +79,16 @@ g_mixins.families.hpemde = function(mob)
                 mob:disengage()
             end
         else
-            if mob:AnimationSub() == 6 and mob:getBattleTime() > mob:getLocalVar("[hpemde]changeTime") then
+            if mob:getAnimationSub() == 6 and mob:getBattleTime() > mob:getLocalVar("[hpemde]changeTime") then
                 openMouth(mob)
-            elseif mob:AnimationSub() == 3 and mob:getHP() <  mob:getLocalVar("[hpemde]closeMouthHP") then
+            elseif mob:getAnimationSub() == 3 and mob:getHP() <  mob:getLocalVar("[hpemde]closeMouthHP") then
                 closeMouth(mob)
             end
         end
     end)
 
     mob:addListener("CRITICAL_TAKE", "HPEMDE_CRITICAL_TAKE", function(mob)
-        if mob:AnimationSub() == 3 then
+        if mob:getAnimationSub() == 3 then
            closeMouth(mob)
         end
     end)

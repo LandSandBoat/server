@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("anUndyingPledgeCS") == 2 and player:getCharVar("anUndyingPledgeNM_killed") == 1 then
         player:startEvent(18)
     elseif
@@ -23,10 +24,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 18 then
         npcUtil.giveKeyItem(player, tpz.ki.CALIGINOUS_BLADE)
         player:setCharVar("anUndyingPledgeCS", 3)
         player:setCharVar("anUndyingPledgeNM_killed", 0)
     end
 end
+
+return entity

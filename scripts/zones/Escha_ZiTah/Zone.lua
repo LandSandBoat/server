@@ -6,11 +6,12 @@
 local ID = require("scripts/zones/Escha_ZiTah/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -24,18 +25,20 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:completeMission(ROV,tpz.mission.id.rov.EDDIES_OF_DESPAIR_I)
-        player:addMission(ROV,tpz.mission.id.rov.A_LAND_AFTER_TIME)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EDDIES_OF_DESPAIR_I)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
     end
 end
+
+return zone_object

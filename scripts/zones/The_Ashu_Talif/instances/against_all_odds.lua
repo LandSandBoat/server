@@ -6,25 +6,26 @@ require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
+instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, tpz.ki.LIFE_FLOAT)
     player:delKeyItem(tpz.ki.LIFE_FLOAT)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
-function onInstanceCreated(instance)
+instance_object.onInstanceCreated = function(instance)
     for i, v in pairs(ID.mob[54]) do
         SpawnMob(v, instance)
     end
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-function onInstanceFailure(instance)
+instance_object.onInstanceFailure = function(instance)
 
     local chars = instance:getChars()
 
@@ -34,7 +35,7 @@ function onInstanceFailure(instance)
     end
 end
 
-function onInstanceProgressUpdate(instance, progress)
+instance_object.onInstanceProgressUpdate = function(instance, progress)
 
     if (progress == 2) then
         instance:complete()
@@ -42,7 +43,7 @@ function onInstanceProgressUpdate(instance, progress)
 
 end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
 
     local chars = instance:getChars()
 
@@ -54,8 +55,10 @@ function onInstanceComplete(instance)
     end
 end
 
-function onEventUpdate(player, csid, option)
+instance_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+instance_object.onEventFinish = function(player, csid, option)
 end
+
+return instance_object

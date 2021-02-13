@@ -5,46 +5,49 @@
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Apollyon/IDs")
+-----------------------------------
+local entity = {}
+
 local flags = tpz.path.flag.NONE
 local path =
 {
-    [1] = 
+    [1] =
     {
         {-300.606, 0.000, 342.973},
         {-306.000, 0.000, 317.000}
     },
-    [3] = 
+    [3] =
     {
         {-331.642, 0.000, 219.558},
         {-356.735, 0.000, 239.488}
     },
-    [4] = 
+    [4] =
     {
         {-346.456, -1.018, 247.719},
         {-334.000, 0.000, 233.000}
     },
-    [5] = 
+    [5] =
     {
         {-314.122, 0.000, 275.821},
         {-317.276, 0.000, 240.435}
     },
-    [6] = 
+    [6] =
     {
         {-364.549, 0.000, 231.121},
         {-355.170, 0.000, 265.456}
     },
-    [7] = 
+    [7] =
     {
         {-310.297, 0.000, 297.337},
         {-324.275, 0.000, 332.532}
     }
 }
 
-function onPath(mob)
+entity.onPath = function(mob)
     mob:setLocalVar("pause", os.time()+5)
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     local offset = mob:getID() - ID.mob.APOLLYON_NW_MOB[2]
     local pause = mob:getLocalVar("pause")
     if pause < os.time() and offset ~= 2 then
@@ -55,7 +58,7 @@ function onMobRoam(mob)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local mobID = mob:getID()
         local battlefield = mob:getBattlefield()
@@ -66,3 +69,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         end
     end
 end
+
+return entity

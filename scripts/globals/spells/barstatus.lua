@@ -1,10 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Implementation of Bar-status
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
+-----------------------------------
 
-function calculateBarstatusPower(caster, enhanceSkill)
+local function calculateBarstatusPower(caster, enhanceSkill)
     local meritBonus = caster:getMerit(tpz.merit.BAR_SPELL_EFFECT)
 
     if (enhanceSkill == nil or enhanceSkill < 0) then
@@ -15,7 +16,7 @@ function calculateBarstatusPower(caster, enhanceSkill)
     return 1 + 0.02 * enhanceSkill + meritBonus
 end
 
-function calculateBarstatusDuration(caster, enhanceSkill)
+local function calculateBarstatusDuration(caster, enhanceSkill)
     -- Function call to allow configuration conditional for old duration formulas.
     return 480
 end

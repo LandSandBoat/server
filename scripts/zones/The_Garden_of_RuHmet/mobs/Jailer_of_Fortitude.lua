@@ -8,8 +8,10 @@ require("scripts/globals/settings")
 require("scripts/globals/limbus")
 require("scripts/globals/status")
 require("scripts/globals/magic")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -18,11 +20,11 @@ function onMobSpawn(mob)
     })
 
     -- Change animation to humanoid w/ prismatic core
-    mob:AnimationSub(1)
+    mob:setAnimationSub(1)
     mob:setModelId(1169)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local delay = mob:getLocalVar("delay")
     local LastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
@@ -45,26 +47,28 @@ function onMobFight(mob, target)
     end
 end
 
-function onMagicHit(caster, target, spell)
+entity.onMagicHit = function(caster, target, spell)
     if (spell:tookEffect() and (caster:isPC() or caster:isPet()) and spell:getSpellGroup() ~= tpz.magic.spellGroup.BLUE ) then
         -- Handle mimicked spells
         target:setLocalVar("COPY_SPELL", spell:getID())
         target:setLocalVar("LAST_CAST", target:getBattleTime())
         target:setLocalVar("reflectTime", target:getBattleTime())
-        target:AnimationSub(1)
+        target:setAnimationSub(1)
     end
 
     return 1
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Despawn the pets if alive
     DespawnMob(ID.mob.KFGHRAH_WHM)
     DespawnMob(ID.mob.KFGHRAH_BLM)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     -- Move QM to random location
     local pos = math.random(1, 5)
     GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM):setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[pos][3])
 end
+
+return entity

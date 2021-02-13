@@ -8,22 +8,23 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.EXPERTISE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {4400, 4447}) then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.EXPERTISE) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {4400, 4447}) then
         player:startEvent(103)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local expertiseStat = player:getCharVar("QUEST_EXPERTISE_STATE_var")
 
     -- HIS NAME IS VALGEIR
-    if player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ARAGONEU_PIZZA) then
+    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ARAGONEU_PIZZA) then
         player:startEvent(100)
 
     -- EXPERTISE
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.EXPERTISE) == QUEST_ACCEPTED and expertiseStat ~= 3 then
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.EXPERTISE) == QUEST_ACCEPTED and expertiseStat ~= 3 then
         if expertiseStat == 1 then
             player:startEvent(104)
         elseif expertiseStat == 2 then
@@ -40,9 +41,9 @@ function onTrigger(player, npc)
         end
 
     -- THE BASICS
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_BASICS) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.MHAURAN_COUSCOUS) then
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_BASICS) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.MHAURAN_COUSCOUS) then
         player:startEvent(106)
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_BASICS) == QUEST_COMPLETED and player:getCharVar("QuestTheBacisCommentary_var") == 1 then
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_BASICS) == QUEST_COMPLETED and player:getCharVar("QuestTheBacisCommentary_var") == 1 then
         player:startEvent(107)
 
     -- STANDARD DIALOG
@@ -51,10 +52,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- HIS NAME IS VALGEIR
     if csid == 100 then
         player:delKeyItem(tpz.ki.ARAGONEU_PIZZA)
@@ -81,3 +82,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("QuestTheBacisCommentary_var", 0)
     end
 end
+
+return entity

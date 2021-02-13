@@ -11,8 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
         return tpz.msg.basic.REQUIRES_COMBAT, 0
     else
@@ -26,7 +27,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(tpz.effect.TRANCE) then
         player:delTP(100)
@@ -173,8 +174,10 @@ function onUseAbility(player, target, ability, action)
         ability:setMsg(tpz.msg.basic.JA_MISS)
     end
 
-    action:animation(target:getID(), getStepAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+    action:setAnimation(target:getID(), getStepAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
     action:speceffect(target:getID(), hit)
     return effect
 
 end
+
+return ability_object

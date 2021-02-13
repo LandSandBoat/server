@@ -8,19 +8,22 @@
 -----------------------------------
 require("scripts/globals/abyssea")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     tpz.abyssea.qmOnTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.abyssea.qmOnTrigger(player, npc)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     tpz.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.abyssea.qmOnEventFinish(player, csid, option)
 end
+
+return entity

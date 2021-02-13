@@ -11,16 +11,17 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local sandyFame = player:getFameLevel(SANDORIA)
 
-    local questIntroToTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-    local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-    local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
+    local questIntroToTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+    local questIntermediateTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+    local questAdvancedTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
     if questIntroToTeamwork == QUEST_AVAILABLE and sandyFame >= 2 then
         player:startEvent(135) -- Starts first quest - 6 members same alliance
@@ -47,12 +48,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- csid 129 happens for both quests
     if csid == 129 then
-        local questIntroToTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-        local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-        local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
+        local questIntroToTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        local questIntermediateTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        local questAdvancedTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
         -- newer versions of these quests only require a party of 2.
         -- older versions require all 6
@@ -125,12 +126,12 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- csid 129 is the event for when they have selected ready/not ready option is always 0
     if csid == 129 and option == 0 then
-        local questIntroToTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
-        local questIntermediateTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
-        local questAdvancedTeamwork = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
+        local questIntroToTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        local questIntermediateTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        local questAdvancedTeamwork = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
 
         if questIntroToTeamwork == QUEST_ACCEPTED and player:getLocalVar("introToTmwrk_pass") == 1 then
             npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK, {
@@ -153,12 +154,13 @@ function onEventFinish(player, csid, option)
         end
     elseif csid == 131 and option == 1 then
         -- 131 is the third and last quest
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ADVANCED_TEAMWORK)
     elseif csid == 133 and option == 1 then
         -- 133 is the second quest
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTERMEDIATE_TEAMWORK)
     elseif csid == 135 and option == 1 then
         -- 135 is the first quest
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.INTRODUCTION_TO_TEAMWORK)
     end
 end
+return entity

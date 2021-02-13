@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Frypan
 -- Delivers an area attack. Additional effect: "Stun." Accuracy varies with TP
 -- Spell cost: 65 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 26 seconds
 -- Skillchain Element(s): Lightning (can open Liquefaction or Detonation can close Impaction or Fusion)
 -- Combos: Max HP Boost
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
     local params = {}
     params.diff = nil
@@ -58,3 +59,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

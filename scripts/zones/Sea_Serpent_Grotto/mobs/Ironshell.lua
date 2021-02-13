@@ -4,11 +4,14 @@
 -----------------------------------
 require("scripts/globals/regimes")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMobMod(tpz.mobMod.CHARMABLE, 1)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.regime.checkRegime(player, mob, 805, 1, tpz.regime.type.GROUNDS)
 end
+
+return entity

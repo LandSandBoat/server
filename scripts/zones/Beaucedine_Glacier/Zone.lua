@@ -9,15 +9,16 @@ require("scripts/globals/missions")
 require("scripts/globals/conquest")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.HUMBABA)
     GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
 
     tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if prevZone == tpz.zone.DYNAMIS_BEAUCEDINE then -- warp player to a correct position after dynamis
@@ -41,14 +42,14 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
     if csid == 114 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 116 then
@@ -58,13 +59,13 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 206 then
         player:setCharVar("PromathiaStatus", 10)
     end
 end
 
-function onZoneWeatherChange(weather)
+zone_object.onZoneWeatherChange = function(weather)
     local mirrorPond = GetNPCByID(ID.npc.MIRROR_POND_J8) -- Quest: Love And Ice
 
     if weather ~= tpz.weather.SNOW and weather ~= tpz.weather.BLIZZARDS then
@@ -73,3 +74,5 @@ function onZoneWeatherChange(weather)
         mirrorPond:setStatus(tpz.status.DISAPPEAR)
     end
 end
+
+return zone_object

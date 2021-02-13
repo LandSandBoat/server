@@ -1,20 +1,21 @@
----------------------------------------------
+-----------------------------------
 ---  Shadow Spread
----
+-----------------------------------
 ---  Description: A dark shroud renders any nearby targets blinded, asleep, and cursed.
----
+-----------------------------------
 ---------------------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = 0
     local currentMsg = tpz.msg.basic.NONE
     local msg = tpz.msg.basic.NONE
@@ -44,3 +45,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

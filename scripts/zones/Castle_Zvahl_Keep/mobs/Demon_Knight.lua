@@ -5,10 +5,14 @@
 -----------------------------------
 local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
 require("scripts/globals/mobs")
+-----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     tpz.mob.phOnDespawn(mob, ID.mob.COUNT_BIFRONS_PH, 10, math.random(3600, 28800)) -- 1 to 8 hours
 end
+
+return entity

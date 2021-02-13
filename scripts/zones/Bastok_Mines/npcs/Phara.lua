@@ -12,14 +12,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local theDoorman = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
-    local theTalekeeperTruth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+    local theDoorman = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+    local theTalekeeperTruth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
 
     if (theDoorman == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 40) then
         player:startEvent(151) -- Start Quests "The doorman"
@@ -35,13 +36,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 151) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
         player:setCharVar("theDoormanCS", 1)
     elseif (csid == 152) then
         player:setCharVar("theDoorman_time", VanadielDayOfTheYear())
@@ -57,3 +58,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

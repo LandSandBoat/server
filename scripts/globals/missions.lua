@@ -69,29 +69,29 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.SANDORIA]] =
     {
-        SMASH_THE_ORCISH_SCOUTS = 0,  -- ± --
-        BAT_HUNT                = 1,  -- ± --
-        SAVE_THE_CHILDREN       = 2,  -- ± --
-        THE_RESCUE_DRILL        = 3,  -- ± --
-        THE_DAVOI_REPORT        = 4,  -- ± --
-        JOURNEY_ABROAD          = 5,  -- ± --
-        JOURNEY_TO_BASTOK       = 6,  -- ± --
-        JOURNEY_TO_WINDURST     = 7,  -- ± --
-        JOURNEY_TO_BASTOK2      = 8,  -- ± --
-        JOURNEY_TO_WINDURST2    = 9,  -- ± --
-        INFILTRATE_DAVOI        = 10, -- ± --
-        THE_CRYSTAL_SPRING      = 11, -- ± --
-        APPOINTMENT_TO_JEUNO    = 12, -- ± --
-        MAGICITE                = 13, -- ± --
-        THE_RUINS_OF_FEI_YIN    = 14, -- ± --
-        THE_SHADOW_LORD         = 15, -- ± --
-        LEAUTE_S_LAST_WISHES    = 16, -- ± --
-        RANPERRE_S_FINAL_REST   = 17, -- ± --
-        PRESTIGE_OF_THE_PAPSQUE = 18, -- ± --
-        THE_SECRET_WEAPON       = 19, -- ± --
-        COMING_OF_AGE           = 20, -- ± --
-        LIGHTBRINGER            = 21, -- ± --
-        BREAKING_BARRIERS       = 22, -- ± --
+        SMASH_THE_ORCISH_SCOUTS = 0,  -- ±
+        BAT_HUNT                = 1,  -- ±
+        SAVE_THE_CHILDREN       = 2,  -- ±
+        THE_RESCUE_DRILL        = 3,  -- ±
+        THE_DAVOI_REPORT        = 4,  -- ±
+        JOURNEY_ABROAD          = 5,  -- ±
+        JOURNEY_TO_BASTOK       = 6,  -- ±
+        JOURNEY_TO_WINDURST     = 7,  -- ±
+        JOURNEY_TO_BASTOK2      = 8,  -- ±
+        JOURNEY_TO_WINDURST2    = 9,  -- ±
+        INFILTRATE_DAVOI        = 10, -- ±
+        THE_CRYSTAL_SPRING      = 11, -- ±
+        APPOINTMENT_TO_JEUNO    = 12, -- ±
+        MAGICITE                = 13, -- ±
+        THE_RUINS_OF_FEI_YIN    = 14, -- ±
+        THE_SHADOW_LORD         = 15, -- ±
+        LEAUTE_S_LAST_WISHES    = 16, -- ±
+        RANPERRE_S_FINAL_REST   = 17, -- ±
+        PRESTIGE_OF_THE_PAPSQUE = 18, -- ±
+        THE_SECRET_WEAPON       = 19, -- ±
+        COMING_OF_AGE           = 20, -- ±
+        LIGHTBRINGER            = 21, -- ±
+        BREAKING_BARRIERS       = 22, -- ±
         THE_HEIR_TO_THE_LIGHT   = 23,
         NONE                    = 65535,
     },
@@ -101,25 +101,25 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.BASTOK]] =
     {
-        THE_ZERUHN_REPORT         = 0,  -- ± --
-        GEOLOGICAL_SURVEY         = 1,  -- ± --
-        FETICHISM                 = 2,  -- ± --
-        THE_CRYSTAL_LINE          = 3,  -- ± --
-        WADING_BEASTS             = 4,  -- ± --
-        THE_EMISSARY              = 5,  -- ± --
-        THE_EMISSARY_SANDORIA     = 6,  -- ± --
-        THE_EMISSARY_WINDURST     = 7,  -- ± --
-        THE_EMISSARY_SANDORIA2    = 8,  -- ± --
-        THE_EMISSARY_WINDURST2    = 9,  -- ± --
-        THE_FOUR_MUSKETEERS       = 10, -- ± --
-        TO_THE_FORSAKEN_MINES     = 11, -- ± --
-        JEUNO                     = 12, -- ± --
-        MAGICITE                  = 13, -- ± --
-        DARKNESS_RISING           = 14, -- ± --
-        XARCABARD_LAND_OF_TRUTHS  = 15, -- ± --
-        RETURN_OF_THE_TALEKEEPER  = 16, -- ± --
-        THE_PIRATE_S_COVE         = 17, -- ± --
-        THE_FINAL_IMAGE           = 18, -- ± --
+        THE_ZERUHN_REPORT         = 0,  -- ±
+        GEOLOGICAL_SURVEY         = 1,  -- ±
+        FETICHISM                 = 2,  -- ±
+        THE_CRYSTAL_LINE          = 3,  -- ±
+        WADING_BEASTS             = 4,  -- ±
+        THE_EMISSARY              = 5,  -- ±
+        THE_EMISSARY_SANDORIA     = 6,  -- ±
+        THE_EMISSARY_WINDURST     = 7,  -- ±
+        THE_EMISSARY_SANDORIA2    = 8,  -- ±
+        THE_EMISSARY_WINDURST2    = 9,  -- ±
+        THE_FOUR_MUSKETEERS       = 10, -- ±
+        TO_THE_FORSAKEN_MINES     = 11, -- ±
+        JEUNO                     = 12, -- ±
+        MAGICITE                  = 13, -- ±
+        DARKNESS_RISING           = 14, -- ±
+        XARCABARD_LAND_OF_TRUTHS  = 15, -- ±
+        RETURN_OF_THE_TALEKEEPER  = 16, -- ±
+        THE_PIRATE_S_COVE         = 17, -- ±
+        THE_FINAL_IMAGE           = 18, -- ±
         ON_MY_WAY                 = 19,
         THE_CHAINS_THAT_BIND_US   = 20,
         ENTER_THE_TALEKEEPER      = 21,
@@ -133,26 +133,26 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.WINDURST]] =
     {
-        THE_HORUTOTO_RUINS_EXPERIMENT = 0,  -- ± --
-        THE_HEART_OF_THE_MATTER       = 1,  -- ± --
-        THE_PRICE_OF_PEACE            = 2,  -- ± --
-        LOST_FOR_WORDS                = 3,  -- ± --
-        A_TESTING_TIME                = 4,  -- ± --
-        THE_THREE_KINGDOMS            = 5,  -- ± --
-        THE_THREE_KINGDOMS_SANDORIA   = 6,  -- ± --
-        THE_THREE_KINGDOMS_BASTOK     = 7,  -- ± --
-        THE_THREE_KINGDOMS_SANDORIA2  = 8,  -- ± --
-        THE_THREE_KINGDOMS_BASTOK2    = 9,  -- ± --
-        TO_EACH_HIS_OWN_RIGHT         = 10, -- ± --
-        WRITTEN_IN_THE_STARS          = 11, -- ± --
-        A_NEW_JOURNEY                 = 12, -- ± --
-        MAGICITE                      = 13, -- ± --
-        THE_FINAL_SEAL                = 14, -- ± --
-        THE_SHADOW_AWAITS             = 15, -- ± --
-        FULL_MOON_FOUNTAIN            = 16, -- ± --
-        SAINTLY_INVITATION            = 17, -- ± --
-        THE_SIXTH_MINISTRY            = 18, -- ± --
-        AWAKENING_OF_THE_GODS         = 19, -- ± --
+        THE_HORUTOTO_RUINS_EXPERIMENT = 0,  -- ±
+        THE_HEART_OF_THE_MATTER       = 1,  -- ±
+        THE_PRICE_OF_PEACE            = 2,  -- ±
+        LOST_FOR_WORDS                = 3,  -- ±
+        A_TESTING_TIME                = 4,  -- ±
+        THE_THREE_KINGDOMS            = 5,  -- ±
+        THE_THREE_KINGDOMS_SANDORIA   = 6,  -- ±
+        THE_THREE_KINGDOMS_BASTOK     = 7,  -- ±
+        THE_THREE_KINGDOMS_SANDORIA2  = 8,  -- ±
+        THE_THREE_KINGDOMS_BASTOK2    = 9,  -- ±
+        TO_EACH_HIS_OWN_RIGHT         = 10, -- ±
+        WRITTEN_IN_THE_STARS          = 11, -- ±
+        A_NEW_JOURNEY                 = 12, -- ±
+        MAGICITE                      = 13, -- ±
+        THE_FINAL_SEAL                = 14, -- ±
+        THE_SHADOW_AWAITS             = 15, -- ±
+        FULL_MOON_FOUNTAIN            = 16, -- ±
+        SAINTLY_INVITATION            = 17, -- ±
+        THE_SIXTH_MINISTRY            = 18, -- ±
+        AWAKENING_OF_THE_GODS         = 19, -- ±
         VAIN                          = 20,
         THE_JESTER_WHO_D_BE_KING      = 21,
         DOLL_OF_THE_DEAD              = 22,
@@ -165,21 +165,21 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.ZILART]] =
     {
-        THE_NEW_FRONTIER              = 0,  -- ± --
-        WELCOME_TNORG                 = 4,  -- ± --
-        KAZAMS_CHIEFTAINESS           = 6,  -- ± --
-        THE_TEMPLE_OF_UGGALEPIH       = 8,  -- ± --
-        HEADSTONE_PILGRIMAGE          = 10, -- ± --
-        THROUGH_THE_QUICKSAND_CAVES   = 12, -- ± --
-        THE_CHAMBER_OF_ORACLES        = 14, -- ± --
-        RETURN_TO_DELKFUTTS_TOWER     = 16, -- ± --
-        ROMAEVE                       = 18, -- ± --
-        THE_TEMPLE_OF_DESOLATION      = 20, -- ± --
-        THE_HALL_OF_THE_GODS          = 22, -- ± --
-        THE_MITHRA_AND_THE_CRYSTAL    = 23, -- ± --
-        THE_GATE_OF_THE_GODS          = 24, -- ± --
-        ARK_ANGELS                    = 26, -- ± --
-        THE_SEALED_SHRINE             = 27, -- ± --
+        THE_NEW_FRONTIER              = 0,  -- ±
+        WELCOME_TNORG                 = 4,  -- ±
+        KAZAMS_CHIEFTAINESS           = 6,  -- ±
+        THE_TEMPLE_OF_UGGALEPIH       = 8,  -- ±
+        HEADSTONE_PILGRIMAGE          = 10, -- ±
+        THROUGH_THE_QUICKSAND_CAVES   = 12, -- ±
+        THE_CHAMBER_OF_ORACLES        = 14, -- ±
+        RETURN_TO_DELKFUTTS_TOWER     = 16, -- ±
+        ROMAEVE                       = 18, -- ±
+        THE_TEMPLE_OF_DESOLATION      = 20, -- ±
+        THE_HALL_OF_THE_GODS          = 22, -- ±
+        THE_MITHRA_AND_THE_CRYSTAL    = 23, -- ±
+        THE_GATE_OF_THE_GODS          = 24, -- ±
+        ARK_ANGELS                    = 26, -- ±
+        THE_SEALED_SHRINE             = 27, -- ±
         THE_CELESTIAL_NEXUS           = 28,
         AWAKENING                     = 30,
         THE_LAST_VERSE                = 31,
@@ -192,68 +192,68 @@ tpz.mission.id =
     [tpz.mission.area[tpz.mission.log_id.COP]] =
     {
         ANCIENT_FLAMES_BECKON            = 101,  -- Category
-        THE_RITES_OF_LIFE                = 110,  -- ± --
-        BELOW_THE_ARKS                   = 118,  -- ± --
-        THE_MOTHERCRYSTALS               = 128,  -- ± --
+        THE_RITES_OF_LIFE                = 110,  -- ±
+        BELOW_THE_ARKS                   = 118,  -- ±
+        THE_MOTHERCRYSTALS               = 128,  -- ±
         -- THE_ISLE_OF_FORGOTTEN_SAINTS  =     -- Category
-        AN_INVITATION_WEST               = 138,  -- ± --
-        THE_LOST_CITY                    = 218, -- ± --
-        DISTANT_BELIEFS                  = 228, -- ± --
-        AN_ETERNAL_MELODY                = 238, -- ± --
-        ANCIENT_VOWS                     = 248, -- ± --
+        AN_INVITATION_WEST               = 138,  -- ±
+        THE_LOST_CITY                    = 218, -- ±
+        DISTANT_BELIEFS                  = 228, -- ±
+        AN_ETERNAL_MELODY                = 238, -- ±
+        ANCIENT_VOWS                     = 248, -- ±
         A_TRANSIENT_DREAM                = 257, -- Category
-        THE_CALL_OF_THE_WYRMKING         = 258, -- ± --
-        A_VESSEL_WITHOUT_A_CAPTAIN       = 318, -- ± --
-        THE_ROAD_FORKS                   = 325, -- ± --
+        THE_CALL_OF_THE_WYRMKING         = 258, -- ±
+        A_VESSEL_WITHOUT_A_CAPTAIN       = 318, -- ±
+        THE_ROAD_FORKS                   = 325, -- ±
         -- EMERALD_WATERS                =     -- Sub-category
-        -- VICISSITUDES                  =     -- ± --
-        DESCENDANTS_OF_A_LINE_LOST       = 335, -- ± --
-        -- LOUVERANCE                    =     -- ± --
+        -- VICISSITUDES                  =     -- ±
+        DESCENDANTS_OF_A_LINE_LOST       = 335, -- ±
+        -- LOUVERANCE                    =     -- ±
         -- MEMORIES_OF_A_MAIDEN          =     -- Sub-category
-        COMEDY_OF_ERRORS_ACT_I           = 341, -- ± --
-        -- COMEDY_OF_ERRORS_ACT_II       =     -- ± --
-        -- EXIT_STAGE_LEFT               =     -- ± --
-        TENDING_AGED_WOUNDS              = 350, -- ± --
-        DARKNESS_NAMED                   = 358, -- ± --
+        COMEDY_OF_ERRORS_ACT_I           = 341, -- ±
+        -- COMEDY_OF_ERRORS_ACT_II       =     -- ±
+        -- EXIT_STAGE_LEFT               =     -- ±
+        TENDING_AGED_WOUNDS              = 350, -- ±
+        DARKNESS_NAMED                   = 358, -- ±
         -- THE_CRADLES_OF_CHILDREN_LOST  =     -- Category
-        SHELTERING_DOUBT                 = 368, -- ± --
-        THE_SAVAGE                       = 418, -- ± --
-        THE_SECRETS_OF_WORSHIP           = 428, -- ± --
-        SLANDEROUS_UTTERINGS             = 438, -- ± --
+        SHELTERING_DOUBT                 = 368, -- ±
+        THE_SAVAGE                       = 418, -- ±
+        THE_SECRETS_OF_WORSHIP           = 428, -- ±
+        SLANDEROUS_UTTERINGS             = 438, -- ±
         -- THE_RETURN_HOME               =     -- Category
-        THE_ENDURING_TUMULT_OF_WAR       = 448, -- ± --
-        DESIRES_OF_EMPTINESS             = 518, -- ± --
-        THREE_PATHS                      = 530, -- ± --
-        -- PAST_SINS                     =     -- ± --
-        -- SOUTHERN_LEGEND               =     -- ± --
-        PARTNERS_WITHOUT_FAME            = 543, -- ± --
-        -- A_CENTURY_OF_HARDSHIP         =     -- ± --
-        -- DEPARTURES                    =     -- ± --
-        -- THE_PURSUIT_OF_PARADISE       =     -- ± --
-        SPIRAL                           = 552, -- ± --
-        -- BRANDED                       =     -- ± --
-        -- PRIDE_AND_HONOR               =     -- ± --
-        -- AND_THE_COMPASS_GUIDES        =     -- ± --
-        WHERE_MESSENGERS_GATHER          = 560, -- ± --
-        -- ENTANGLEMENT                  =     -- ± --
-        -- HEAD_WIND                     =     -- ± --
-        FLAMES_FOR_THE_DEAD              = 568, -- ± --
+        THE_ENDURING_TUMULT_OF_WAR       = 448, -- ±
+        DESIRES_OF_EMPTINESS             = 518, -- ±
+        THREE_PATHS                      = 530, -- ±
+        -- PAST_SINS                     =     -- ±
+        -- SOUTHERN_LEGEND               =     -- ±
+        PARTNERS_WITHOUT_FAME            = 543, -- ±
+        -- A_CENTURY_OF_HARDSHIP         =     -- ±
+        -- DEPARTURES                    =     -- ±
+        -- THE_PURSUIT_OF_PARADISE       =     -- ±
+        SPIRAL                           = 552, -- ±
+        -- BRANDED                       =     -- ±
+        -- PRIDE_AND_HONOR               =     -- ±
+        -- AND_THE_COMPASS_GUIDES        =     -- ±
+        WHERE_MESSENGERS_GATHER          = 560, -- ±
+        -- ENTANGLEMENT                  =     -- ±
+        -- HEAD_WIND                     =     -- ±
+        FLAMES_FOR_THE_DEAD              = 568, -- ±
         -- ECHOES_OF_TIME                =     -- ± --   -- Category
-        FOR_WHOM_THE_VERSE_IS_SUNG       = 578, -- ± --
-        A_PLACE_TO_RETURN                = 618, -- ± --
-        MORE_QUESTIONS_THAN_ANSWERS      = 628, -- ± --
-        ONE_TO_BE_FEARED                 = 638, -- ± --
+        FOR_WHOM_THE_VERSE_IS_SUNG       = 578, -- ±
+        A_PLACE_TO_RETURN                = 618, -- ±
+        MORE_QUESTIONS_THAN_ANSWERS      = 628, -- ±
+        ONE_TO_BE_FEARED                 = 638, -- ±
         -- IN_THE_LIGHT_OF_THE_CRYSTAL   =     -- ± --   -- Category
-        CHAINS_AND_BONDS                 = 648, -- ± --
-        FLAMES_IN_THE_DARKNESS           = 718, -- ± --
-        FIRE_IN_THE_EYES_OF_MEN          = 728, -- ± --
-        CALM_BEFORE_THE_STORM            = 738, -- ± --
-        THE_WARRIOR_S_PATH               = 748, -- ± --
+        CHAINS_AND_BONDS                 = 648, -- ±
+        FLAMES_IN_THE_DARKNESS           = 718, -- ±
+        FIRE_IN_THE_EYES_OF_MEN          = 728, -- ±
+        CALM_BEFORE_THE_STORM            = 738, -- ±
+        THE_WARRIOR_S_PATH               = 748, -- ±
         EMPTINESS_BLEEDS                 = 758, -- ± ---- Category
-        GARDEN_OF_ANTIQUITY              = 800, -- ± --
-        A_FATE_DECIDED                   = 818, -- ± --
-        WHEN_ANGELS_FALL                 = 828, -- ± --
-        DAWN                             = 840, -- ± --
+        GARDEN_OF_ANTIQUITY              = 800, -- ±
+        A_FATE_DECIDED                   = 818, -- ±
+        WHEN_ANGELS_FALL                 = 828, -- ±
+        DAWN                             = 840, -- ±
         THE_LAST_VERSE                   = 850,
     },
 
@@ -378,15 +378,15 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.ACP]] =
     {
-        A_CRYSTALLINE_PROPHECY        = 0, -- ± --
-        THE_ECHO_AWAKENS              = 1, -- ± --
-        GATHERER_OF_LIGHT_I           = 2, -- ± --
+        A_CRYSTALLINE_PROPHECY        = 0, -- ±
+        THE_ECHO_AWAKENS              = 1, -- ±
+        GATHERER_OF_LIGHT_I           = 2, -- ±
         GATHERER_OF_LIGHT_II          = 3,
-        THOSE_WHO_LURK_IN_SHADOWS_I   = 4, -- ± --
-        THOSE_WHO_LURK_IN_SHADOWS_II  = 5, -- ± --
-        THOSE_WHO_LURK_IN_SHADOWS_III = 6, -- ± --
-        REMEMBER_ME_IN_YOUR_DREAMS    = 7, -- ± --
-        BORN_OF_HER_NIGHTMARES        = 8, -- ± --
+        THOSE_WHO_LURK_IN_SHADOWS_I   = 4, -- ±
+        THOSE_WHO_LURK_IN_SHADOWS_II  = 5, -- ±
+        THOSE_WHO_LURK_IN_SHADOWS_III = 6, -- ±
+        REMEMBER_ME_IN_YOUR_DREAMS    = 7, -- ±
+        BORN_OF_HER_NIGHTMARES        = 8, -- ±
         BANISHING_THE_ECHO            = 9,
         ODE_OF_LIFE_BESTOWING         = 10,
         A_CRYSTALLINE_PROPHECY_FIN    = 11,
@@ -397,11 +397,11 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.AMK]] =
     {
-        A_MOOGLE_KUPO_DETAT                 = 0,  -- ± --
-        DRENCHED_IT_BEGAN_WITH_A_RAINDROP   = 1,  -- ± --
-        HASTEN_IN_A_JAM_IN_JEUNO            = 2,  -- ± --
-        WELCOME_TO_MY_DECREPIT_DOMICILE     = 3,  -- ± --
-        CURSES_A_HORRIFICALLY_HARROWING_HEX = 4,  -- ± --
+        A_MOOGLE_KUPO_DETAT                 = 0,  -- ±
+        DRENCHED_IT_BEGAN_WITH_A_RAINDROP   = 1,  -- ±
+        HASTEN_IN_A_JAM_IN_JEUNO            = 2,  -- ±
+        WELCOME_TO_MY_DECREPIT_DOMICILE     = 3,  -- ±
+        CURSES_A_HORRIFICALLY_HARROWING_HEX = 4,  -- ±
         AN_ERRAND_THE_PROFESSORS_PRICE      = 5,
         SHOCK_ARRANT_ABUSE_OF_AUTHORITY     = 6,
         LENDER_BEWARE_READ_THE_FINE_PRINT   = 7,
@@ -419,10 +419,10 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.ASA]] =
     {
-        A_SHANTOTTO_ASCENSION       = 0, -- ± --
-        BURGEONING_DREAD            = 1, -- ± --
-        THAT_WHICH_CURDLES_BLOOD    = 2, -- ± --
-        SUGAR_COATED_DIRECTIVE      = 3, -- ± --
+        A_SHANTOTTO_ASCENSION       = 0, -- ±
+        BURGEONING_DREAD            = 1, -- ±
+        THAT_WHICH_CURDLES_BLOOD    = 2, -- ±
+        SUGAR_COATED_DIRECTIVE      = 3, -- ±
         ENEMY_OF_THE_EMPIRE_I       = 4,
         ENEMY_OF_THE_EMPIRE_II      = 5,
         SUGAR_COATED_SUBTERFUGE     = 6,
@@ -442,14 +442,14 @@ tpz.mission.id =
     [tpz.mission.area[tpz.mission.log_id.SOA]] =
     {
         -- THE_SACRED_CITY_OF_ADOULIN   =  -- Category
-        RUMORS_FROM_THE_WEST            = 0,   -- ± --
-        THE_GEOMAGNETRON                = 1,   -- ± --
-        ONWARD_TO_ADOULIN               = 3,   -- ± --
-        HEARTWINGS_AND_THE_KINDHEARTED  = 5,   -- ± --
-        PIONEER_REGISTRATION            = 6,   -- ± --
-        LIFE_ON_THE_FRONTIER            = 7,   -- ± --
-        MEETING_OF_THE_MINDS            = 8,   -- ± --
-        ARCIELA_APPEARS_AGAIN           = 9,   -- ± --
+        RUMORS_FROM_THE_WEST            = 0,   -- ±
+        THE_GEOMAGNETRON                = 1,   -- ±
+        ONWARD_TO_ADOULIN               = 3,   -- ±
+        HEARTWINGS_AND_THE_KINDHEARTED  = 5,   -- ±
+        PIONEER_REGISTRATION            = 6,   -- ±
+        LIFE_ON_THE_FRONTIER            = 7,   -- ±
+        MEETING_OF_THE_MINDS            = 8,   -- ±
+        ARCIELA_APPEARS_AGAIN           = 9,   -- ±
         -- THE_ANCIENT_PACT             =  -- Category
         BUILDING_PROSPECTS              = 11,
         THE_LIGHT_SHINING_IN_YOUR_EYES  = 12,
@@ -559,25 +559,25 @@ tpz.mission.id =
     -----------------------------------
     [tpz.mission.area[tpz.mission.log_id.ROV]] =
     {
-        RHAPSODIES_OF_VANADIEL          = 0,   -- ± --
+        RHAPSODIES_OF_VANADIEL          = 0,   -- ±
         -- CREATION_AND_REBIRTH         =  -- Category
-        RESONACE                        = 2,   -- ± --
-        EMISSARY_FROM_THE_SEAS          = 3,   -- ± --
-        SET_FREE                        = 4,   -- ± --
-        THE_BEGINNING                   = 6,   -- ± --
-        FLAMES_OF_PRAYER                = 10,  -- ± --
-        THE_PATH_UNTRAVELED             = 12,  -- ± --
-        AT_THE_HEAVENS_DOOR             = 18,  -- ± --
-        THE_LIONS_ROAR                  = 20,  -- ± --
-        EDDIES_OF_DESPAIR_I             = 22,  -- ± --
-        A_LAND_AFTER_TIME               = 26,  -- ± --
-        FATES_CALL                      = 28,  -- ± --
-        WHAT_LIES_BEYOND                = 30,  -- ± --
-        THE_TIES_THAT_BIND              = 32,  -- ± --
-        IMPURITY                        = 34,  -- ± --
-        THE_LOST_AVATAR                 = 36,  -- ± --
-        VOLTO_OSCURO                    = 40,  -- ± --
-        RING_MY_BELL                    = 42,  -- ± --
+        RESONACE                        = 2,   -- ±
+        EMISSARY_FROM_THE_SEAS          = 3,   -- ±
+        SET_FREE                        = 4,   -- ±
+        THE_BEGINNING                   = 6,   -- ±
+        FLAMES_OF_PRAYER                = 10,  -- ±
+        THE_PATH_UNTRAVELED             = 12,  -- ±
+        AT_THE_HEAVENS_DOOR             = 18,  -- ±
+        THE_LIONS_ROAR                  = 20,  -- ±
+        EDDIES_OF_DESPAIR_I             = 22,  -- ±
+        A_LAND_AFTER_TIME               = 26,  -- ±
+        FATES_CALL                      = 28,  -- ±
+        WHAT_LIES_BEYOND                = 30,  -- ±
+        THE_TIES_THAT_BIND              = 32,  -- ±
+        IMPURITY                        = 34,  -- ±
+        THE_LOST_AVATAR                 = 36,  -- ±
+        VOLTO_OSCURO                    = 40,  -- ±
+        RING_MY_BELL                    = 42,  -- ±
         -- REVITALIZATION               =  -- Category
         SPIRITS_AWOKEN                  = 44,
         CRASHING_WAVES                  = 46,
@@ -670,7 +670,7 @@ tpz.mission.id =
 --  Assault (7)
 -----------------------------------
 
-LEUJAOAM_CLEANSING                = 1 -- ± --
+LEUJAOAM_CLEANSING                = 1 -- ±
 ORICHALCUM_SURVEY                 = 2
 ESCORT_PROFESSOR_CHANOIX          = 3
 SHANARHA_GRASS_CONSERVATION       = 4
@@ -681,7 +681,7 @@ IMPERIAL_CODE                     = 8
 RED_VERSUS_BLUE                   = 9
 BLOODY_RONDO                      = 10
 IMPERIAL_AGENT_RESCUE             = 11
-PREEMPTIVE_STRIKE                 = 12 -- ± --
+PREEMPTIVE_STRIKE                 = 12 -- ±
 SAGELORD_ELIMINATION              = 13
 BREAKING_MORALE                   = 14
 THE_DOUBLE_AGENT                  = 15
@@ -701,7 +701,7 @@ EGG_CONSERVATION                  = 28
 OPERATION__BLACK_PEARL            = 29
 BETTER_THAN_ONE                   = 30
 SEAGULL_GROUNDED                  = 31
-REQUIEM                           = 32 -- ± --
+REQUIEM                           = 32 -- ±
 SAVING_PRIVATE_RYAAF              = 33
 SHOOTING_DOWN_THE_BARON           = 34
 BUILDING_BRIDGES                  = 35
@@ -710,9 +710,9 @@ DEFUSE_THE_THREAT                 = 37
 OPERATION__SNAKE_EYES             = 38
 WAKE_THE_PUPPET                   = 39
 THE_PRICE_IS_RIGHT                = 40
-GOLDEN_SALVAGE                    = 41 -- ± --
+GOLDEN_SALVAGE                    = 41 -- ±
 LAMIA_NO_13                       = 42
-EXTERMINATION                     = 43 -- ± --
+EXTERMINATION                     = 43 -- ±
 DEMOLITION_DUTY                   = 44
 SEARAT_SALVATION                  = 45
 APKALLU_SEIZURE                   = 46
@@ -771,29 +771,29 @@ function getMissionMask(player)
 
     if (nation == tpz.nation.WINDURST) then
         if (rank >= 1) then
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
                 -- 1-1 NOTE: This mission will not be listed in the Mission List for Windurst
                 --first_mission = first_mission + 1
             end
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
                 -- 1-2 NOTE: This mission will not be listed in the Mission List for Windurst
                 --first_mission = first_mission + 2
             end
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
                 -- 1-3 NOTE: This mission will not be listed in the Mission List for Windurst
                 --first_mission = first_mission + 4
             end
         end
         if (rank >= 2) then
             -- 2-1
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) == false and getMissionRankPoints(player, 3) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) == false and getMissionRankPoints(player, 3) == 1) then
                 first_mission = first_mission + 8
             else
-                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) and (rank > 2 or getMissionRankPoints(player, 4) == 1)) then
+                if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS) and (rank > 2 or getMissionRankPoints(player, 4) == 1)) then
                     -- 2-2 Repeatable
                     repeat_mission = repeat_mission + 16
                 end
-                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS) == false and getMissionRankPoints(player, 5) == 1) then
+                if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS) == false and getMissionRankPoints(player, 5) == 1) then
                     -- 2-3
                     first_mission = first_mission + 32
                 end
@@ -801,17 +801,17 @@ function getMissionMask(player)
         end
         if (rank >= 3) then
             -- 3-1
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT) == false and getMissionRankPoints(player, 10) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT) == false and getMissionRankPoints(player, 10) == 1) then
                 first_mission = first_mission + 1024
             else
-                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == true and getMissionRankPoints(player, 11) == 1) then
+                if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS) == true and getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 elseif (rank > 3 or getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 end
-                if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY) == false and getMissionRankPoints(player, 12) == 1) then
+                if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY) == false and getMissionRankPoints(player, 12) == 1) then
                     -- 3-3
                     first_mission = first_mission + 4096
                 end
@@ -822,59 +822,59 @@ function getMissionMask(player)
             -- first_mission = first_mission + 8192
         end
         if (rank == 5) then
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL) == false and getMissionRankPoints(player, 0) == 1 and mission_status == 0) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL) == false and getMissionRankPoints(player, 0) == 1 and mission_status == 0) then
                 first_mission = first_mission + 16384
             end
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL) and player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_SHADOW_AWAITS) == false and getMissionRankPoints(player, 15) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL) and player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SHADOW_AWAITS) == false and getMissionRankPoints(player, 15) == 1) then
                 -- 5-2
                 first_mission = first_mission + 32768
             end
         end
         if (rank == 6) then
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.FULL_MOON_FOUNTAIN) == false and getMissionRankPoints(player, 16) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.FULL_MOON_FOUNTAIN) == false and getMissionRankPoints(player, 16) == 1) then
                 -- 6-1
                 first_mission = first_mission + 65536
-            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION) == false and getMissionRankPoints(player, 17) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION) == false and getMissionRankPoints(player, 17) == 1) then
                 -- 6-2
                 first_mission = first_mission + 131072
             end
         end
         if (rank == 7) then
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) == false and getMissionRankPoints(player, 18) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) == false and getMissionRankPoints(player, 18) == 1) then
                 -- 7-1
                 first_mission = first_mission + 262144
-            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.AWAKENING_OF_THE_GODS) == false and getMissionRankPoints(player, 19) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.AWAKENING_OF_THE_GODS) == false and getMissionRankPoints(player, 19) == 1) then
                 -- 7-2
                 first_mission = first_mission + 524288
             end
         end
         if (rank == 8) then
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.VAIN) == false and getMissionRankPoints(player, 20) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.VAIN) == false and getMissionRankPoints(player, 20) == 1) then
                 -- 8-1
                 first_mission = first_mission + 1048576
-            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) == false and getMissionRankPoints(player, 21) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING) == false and getMissionRankPoints(player, 21) == 1) then
                 -- 8-2
                 first_mission = first_mission + 2097152
             end
         end
         if (rank == 9) then
-            if (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.DOLL_OF_THE_DEAD) == false and getMissionRankPoints(player, 22) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.DOLL_OF_THE_DEAD) == false and getMissionRankPoints(player, 22) == 1) then
                 -- 9-1
                 first_mission = first_mission + 4194304
-            elseif (player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING) == false and getMissionRankPoints(player, 23) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) == false and getMissionRankPoints(player, 23) == 1) then
                 -- 9-2
                 first_mission = first_mission + 8388608
             end
         end
     elseif (nation == tpz.nation.SANDORIA) then
         if (rank >= 1) then
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then -- The first mission is repeatable in San d'Oria
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false) then -- The first mission is repeatable in San d'Oria
                 -- 1-1
                 repeat_mission = repeat_mission + 1
-            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BAT_HUNT) == false) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.BAT_HUNT) == false) then
                 -- 1-2 If we completed 1-1, we can start and repeat this mission
                 repeat_mission = repeat_mission + 2 + 1
-            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN) == false) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN) == false) then
                 -- 1-3 If we completed 1-2, we can start and repeat this mission
                 repeat_mission = repeat_mission + 4 + 2 + 1
             else
@@ -883,14 +883,14 @@ function getMissionMask(player)
         end
         if (rank >= 2) then
             -- 2-1
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) == false and getMissionRankPoints(player, 3) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) == false and getMissionRankPoints(player, 3) == 1) then
                 first_mission = first_mission + 8
             else
                 if (rank > 2 or getMissionRankPoints(player, 4) == 1) then
                     -- 2-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 16
                 end
-                if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD) == false and getMissionRankPoints(player, 5) == 1) then
+                if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD) == false and getMissionRankPoints(player, 5) == 1) then
                     -- 2-3
                     first_mission = first_mission + 32
                 end
@@ -901,11 +901,11 @@ function getMissionMask(player)
                 -- 3-1
                 repeat_mission = repeat_mission + 1024
             end
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI) == true and getMissionRankPoints(player, 11) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI) == true and getMissionRankPoints(player, 11) == 1) then
                 -- 3-2 Repeatable & Skippable
                 repeat_mission = repeat_mission + 2048
             end
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO) == false and getMissionRankPoints(player, 12) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO) == false and getMissionRankPoints(player, 12) == 1) then
                 -- 3-3
                 first_mission = first_mission + 4096
             end
@@ -915,50 +915,50 @@ function getMissionMask(player)
             -- first_mission = first_mission + 8192
         end
         if (rank == 5) then
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) == false and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA) == false) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) == false and player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_SANDORIA) == false) then
                 first_mission = first_mission + 16384
             end
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) == false and player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) and getMissionRankPoints(player, 15) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD) == false and player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN) and getMissionRankPoints(player, 15) == 1) then
                 -- 5-2
                 first_mission = first_mission + 32768
             end
         end
         if (rank == 6) then
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES) == false and getMissionRankPoints(player, 16) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES) == false and getMissionRankPoints(player, 16) == 1) then
                 -- 6-1
                 first_mission = first_mission + 65536
-            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST) == false and getMissionRankPoints(player, 17) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST) == false and getMissionRankPoints(player, 17) == 1) then
                 -- 6-2
                 first_mission = first_mission + 131072
             end
         end
         if (rank == 7) then
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) == false and getMissionRankPoints(player, 18) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) == false and getMissionRankPoints(player, 18) == 1) then
                 -- 7-1
                 first_mission = first_mission + 262144
-            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_SECRET_WEAPON) == false and getMissionRankPoints(player, 19) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_SECRET_WEAPON) == false and getMissionRankPoints(player, 19) == 1) then
                 -- 7-2
                 first_mission = first_mission + 524288
             end
         end
         if (rank == 8) then
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) == false and getMissionRankPoints(player, 20) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE) == false and getMissionRankPoints(player, 20) == 1) then
                 -- 8-1
                 first_mission = first_mission + 1048576
-            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) == false and getMissionRankPoints(player, 21) == 1 and player:getCharVar("Mission8-1Completed") == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) == false and getMissionRankPoints(player, 21) == 1 and player:getCharVar("Mission8-1Completed") == 1) then
                 -- 8-2
                 first_mission = first_mission + 2097152
             end
         end
         if (rank == 9) then
-            if (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player, 22) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player, 22) == 1) then
                 -- 9-1
                 first_mission = first_mission + 4194304
-            elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player, 22) == 1 and player:getCharVar("Cutscenes_8-2") == 2) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS) == false and getMissionRankPoints(player, 22) == 1 and player:getCharVar("Cutscenes_8-2") == 2) then
                 -- 9-2
                 first_mission = first_mission + 8388608
 
-    elseif (player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) == false and getMissionRankPoints(player, 23) == 1) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) == false and getMissionRankPoints(player, 23) == 1) then
                 -- 9-2
                 first_mission = first_mission + 8388608
 
@@ -966,29 +966,29 @@ function getMissionMask(player)
         end
     elseif (nation == tpz.nation.BASTOK) then
         if (rank >= 1) then
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
                 -- 1-1 NOTE: This mission will not be listed in the Mission List for Bastok
                 --first_mission = first_mission + 1
             end
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == false) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == false) then
                 -- 1-2 NOTE: This mission will not be listed in the Mission List for Bastok
                 first_mission = first_mission + 2
             end
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == true) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY) == true) then
                 -- 1-3
                 repeat_mission = repeat_mission + 4
             end
         end
         if (rank >= 2) then
             -- 2-1
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_CRYSTAL_LINE) == false and getMissionRankPoints(player, 3) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_CRYSTAL_LINE) == false and getMissionRankPoints(player, 3) == 1) then
                 first_mission = first_mission + 8
             else
                 if (rank > 2 or getMissionRankPoints(player, 4) == 1) then
                     -- 2-2 Repeatable
                     repeat_mission = repeat_mission + 16
                 end
-                if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY) == false and getMissionRankPoints(player, 5) == 1) then
+                if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY) == false and getMissionRankPoints(player, 5) == 1) then
                     -- 2-3
                     first_mission = first_mission + 32
                 end
@@ -996,14 +996,14 @@ function getMissionMask(player)
         end
         if (rank >= 3) then
             -- 3-1
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_FOUR_MUSKETEERS) == false and getMissionRankPoints(player, 10) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_FOUR_MUSKETEERS) == false and getMissionRankPoints(player, 10) == 1) then
                 first_mission = first_mission + 1024
             else
                 if (rank > 3 or getMissionRankPoints(player, 11) == 1) then
                     -- 3-2 Repeatable & Skippable
                     repeat_mission = repeat_mission + 2048
                 end
-                if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.JEUNO) == false and getMissionRankPoints(player, 12) == 1) then
+                if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.JEUNO) == false and getMissionRankPoints(player, 12) == 1) then
                     -- 3-3
                     first_mission = first_mission + 4096
                 end
@@ -1014,46 +1014,46 @@ function getMissionMask(player)
             -- first_mission = first_mission + 8192
         end
         if (rank == 5) then
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) == false and getMissionRankPoints(player, 0) == 1 and mission_status == 0) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) == false and getMissionRankPoints(player, 0) == 1 and mission_status == 0) then
                 first_mission = first_mission + 16384
             end
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) and player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS) == false and getMissionRankPoints(player, 15) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.DARKNESS_RISING) and player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS) == false and getMissionRankPoints(player, 15) == 1) then
                 -- 5-2
                 first_mission = first_mission + 32768
             end
         end
         if (rank == 6) then
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER) == false and getMissionRankPoints(player, 16) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER) == false and getMissionRankPoints(player, 16) == 1) then
                 -- 6-1
                 first_mission = first_mission + 65536
-            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) == false and getMissionRankPoints(player, 17) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) == false and getMissionRankPoints(player, 17) == 1) then
                 -- 6-2
                 first_mission = first_mission + 131072
             end
         end
         if (rank == 7) then
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_FINAL_IMAGE) == false and getMissionRankPoints(player, 18) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_FINAL_IMAGE) == false and getMissionRankPoints(player, 18) == 1) then
                 -- 7-1
                 first_mission = first_mission + 262144
-            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ON_MY_WAY) == false and getMissionRankPoints(player, 19) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.ON_MY_WAY) == false and getMissionRankPoints(player, 19) == 1) then
                 -- 7-2
                 first_mission = first_mission + 524288
             end
         end
         if (rank == 8) then
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) == false and getMissionRankPoints(player, 20) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) == false and getMissionRankPoints(player, 20) == 1) then
                 -- 8-1
                 first_mission = first_mission + 1048576
-            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.ENTER_THE_TALEKEEPER) == false and getMissionRankPoints(player, 21) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.ENTER_THE_TALEKEEPER) == false and getMissionRankPoints(player, 21) == 1) then
                 -- 8-2
                 first_mission = first_mission + 2097152
             end
         end
         if (rank == 9) then
-            if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH) == false and getMissionRankPoints(player, 22) == 1) then
+            if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH) == false and getMissionRankPoints(player, 22) == 1) then
                 -- 9-1
                 first_mission = first_mission + 4194304
-            elseif (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) == false and getMissionRankPoints(player, 23) == 1) then
+            elseif (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) == false and getMissionRankPoints(player, 23) == 1) then
                 -- 9-2
                 first_mission = first_mission + 8388608
             end

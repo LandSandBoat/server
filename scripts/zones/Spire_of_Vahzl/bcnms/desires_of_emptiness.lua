@@ -6,18 +6,19 @@ require("scripts/globals/battlefield")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 -----------------------------------
+local battlefield_object = {}
 
-function onBattlefieldTick(battlefield, tick)
+battlefield_object.onBattlefieldTick = function(battlefield, tick)
     tpz.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-function onBattlefieldRegister(player, battlefield)
+battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
-function onBattlefieldEnter(player, battlefield)
+battlefield_object.onBattlefieldEnter = function(player, battlefield)
 end
 
-function onBattlefieldLeave(player, battlefield, leavecode)
+battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == tpz.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getCurrentMission(COP) ~= tpz.mission.id.cop.DESIRES_OF_EMPTINESS or player:getCharVar("PromathiaStatus") ~= 8) and 1 or 0
@@ -27,10 +28,10 @@ function onBattlefieldLeave(player, battlefield, leavecode)
     end
 end
 
-function onEventUpdate(player, csid, option)
+battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 8 then
             player:setCharVar("PromathiaStatus", 9)
@@ -40,3 +41,5 @@ function onEventFinish(player, csid, option)
         player:setPos(-340.00, -100.25, 140.00, 64, 111) -- {R}
     end
 end
+
+return battlefield_object

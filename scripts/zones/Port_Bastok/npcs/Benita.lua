@@ -7,14 +7,15 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
 count = trade:getItemCount()
 BombAsh = trade:hasItemQty(928, 1)
 
     if (count == 1 and BombAsh == true) then
-        TheWisdom = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        TheWisdom = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
         TheWisdomVar = player:getCharVar("TheWisdomVar")
         if (TheWisdom == 1 and TheWisdomVar == 2) then
             player:tradeComplete()
@@ -24,9 +25,9 @@ BombAsh = trade:hasItemQty(928, 1)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-TheWisdom = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+TheWisdom = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
 pLevel = player:getMainLvl()
 
     if (TheWisdom == 0 and pLevel >= 6) then
@@ -42,19 +43,19 @@ pLevel = player:getMainLvl()
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 174) then
-        player:addQuest(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
         player:setCharVar("TheWisdomVar", 1)
     elseif (csid == 176) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12500)
         else
-            player:completeQuest(BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS)
             player:addFame(BASTOK, 120)
             player:addItem(12500)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12500)
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

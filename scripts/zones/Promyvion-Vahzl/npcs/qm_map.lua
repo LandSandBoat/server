@@ -8,12 +8,13 @@
 local ID = require("scripts/zones/Promyvion-Vahzl/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.EERIE_GREEN_GLOW)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1723) and not player:hasKeyItem(tpz.ki.MAP_OF_PROMYVION_VAHZL) then
         player:startEvent(48)
     else
@@ -21,12 +22,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 48 then
         player:confirmTrade()
         npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_PROMYVION_VAHZL)
     end
 end
+return entity

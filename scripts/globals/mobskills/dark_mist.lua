@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Dark Mist
 --  Family: Gargouille
 --  Description: Deals dark damage to an enemy. Additional effect: Weight
@@ -6,21 +6,22 @@
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Radial
 --  Notes: Only used when flying
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() ~=1) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if (mob:getAnimationSub() ~=1) then
         return 1
     else
         return 0
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local dmgmod = 1
     local typeEffect = tpz.effect.WEIGHT
@@ -32,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dmg
 end
+
+return mobskill_object

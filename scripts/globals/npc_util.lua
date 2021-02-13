@@ -326,9 +326,10 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeQuest(player, SANDORIA, ROSEL_THE_ARMORER, {
+        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
             ki = tpz.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
+            fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
@@ -360,10 +361,10 @@ function npcUtil.completeQuest(player, area, quest, params)
     if params["fame"] == nil then
         params["fame"] = 30
     end
-    if area["fame_area"] ~= nil and type(params["fame"]) == "number" then
-        player:addFame(area, params["fame"])
-    elseif params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
+    if params["fameArea"] ~= nil and params["fameArea"]["fame_area"] ~= nil and type(params["fame"]) == "number" then
         player:addFame(params["fameArea"], params["fame"])
+    elseif (type(area) == "number" or area["fame_area"] ~= nil) and type(params["fame"]) == "number" then
+        player:addFame(area, params["fame"])
     end
 
     if params["gil"] ~= nil and type(params["gil"]) == "number" then
@@ -396,8 +397,20 @@ function npcUtil.completeQuest(player, area, quest, params)
         end
     end
 
+    local logId
+    if type(area) == "number" then
+        logId = area
+    elseif area["quest_log"] then
+        logId = area["quest_log"]
+    end
+
     -- successfully complete the quest
-    player:completeQuest(area, quest)
+    if logId then
+        player:completeQuest(logId, quest)
+    else
+        print("ERROR: invalid logId encountered in npcUtil.completeQuest")
+    end
+
     return true
 end
 
@@ -502,7 +515,7 @@ end
 
 -----------------------------------
 -- UpdateNPCSpawnPoint
-----------------------------------
+-----------------------------------
 
 function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     local npc = GetNPCByID(id)

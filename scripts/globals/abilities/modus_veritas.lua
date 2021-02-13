@@ -10,12 +10,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     local helix = target:getStatusEffect(tpz.effect.HELIX)
     if helix ~= nil then
         local mvPower = helix:getSubPower()
@@ -43,3 +44,5 @@ function onUseAbility(player, target, ability)
         ability:setMsg(tpz.msg.basic.JA_NO_EFFECT_2) -- No effect
     end
 end
+
+return ability_object

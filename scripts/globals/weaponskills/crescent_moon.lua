@@ -10,8 +10,10 @@
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
-------------------------------------
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+-----------------------------------
+local weaponskill_object = {}
+
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -35,3 +37,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     return tpHits, extraHits, criticalHit, damage
 end
+
+return weaponskill_object

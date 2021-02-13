@@ -6,14 +6,17 @@
 mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     if (mob:getID() > ID.mob.JAILER_OF_LOVE) then
         local JoL = GetMobByID(ID.mob.JAILER_OF_LOVE)
         local xzomitsKilled = JoL:getLocalVar("JoL_Qn_xzomit_Killed")
         JoL:setLocalVar("JoL_Qn_xzomit_Killed", xzomitsKilled + 1)
     end
 end
+
+return entity

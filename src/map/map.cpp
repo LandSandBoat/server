@@ -67,10 +67,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
-#ifdef DEBUG
-#include "filewatch/FileWatch.hpp"
-#endif
-
 #ifdef TRACY_ENABLE
 void* operator new(std::size_t count)
 {
@@ -101,7 +97,6 @@ uint16  map_port = 0;
 
 map_config_t       map_config; // map server settings
 map_session_list_t map_session_list;
-CCommandHandler    CmdHandler;
 
 std::thread messageThread;
 
@@ -199,7 +194,6 @@ int32 do_init(int32 argc, char** argv)
     ShowMessage("\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
 
     luautils::init();
-    CmdHandler.init(luautils::LuaHandle);
     PacketParserInitialize();
     SqlHandle = Sql_Malloc();
 
@@ -253,13 +247,13 @@ int32 do_init(int32 argc, char** argv)
     trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
     daily::LoadDailyItems();
-    roeutils::init();
 
     ShowStatus("do_init: loading zones");
     zoneutils::LoadZoneList();
     ShowMessage("\t\t\t - " CL_GREEN "[OK]" CL_RESET "\n");
 
     fishingutils::LoadFishingMessages();
+    instanceutils::LoadInstanceList();
 
     ShowStatus("do_init: server is binding with port %u", map_port == 0 ? map_config.usMapPort : map_port);
     map_fd = makeBind_udp(map_config.uiMapIp, map_port == 0 ? map_config.usMapPort : map_port);
@@ -279,6 +273,10 @@ int32 do_init(int32 argc, char** argv)
     PTempBuff = new int8[map_config.buffer_size + 20];
 
     PacketGuard::Init();
+
+#ifdef DEBUG
+    luautils::EnableFilewatcher();
+#endif // DEBUG
 
     ShowStatus("The map-server is " CL_GREEN "ready" CL_RESET " to work...\n");
     ShowMessage("=======================================================================\n");
@@ -1524,7 +1522,7 @@ int32 map_config_read(const int8* cfgName)
 int32 map_garbage_collect(time_point tick, CTaskMgr::CTask* PTask)
 {
     TracyZoneScoped;
-    luautils::garbageCollect();
+    luautils::garbageCollectStep();
     return 0;
 }
 

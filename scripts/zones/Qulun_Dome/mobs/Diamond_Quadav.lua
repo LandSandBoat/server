@@ -8,25 +8,26 @@ mixins = {require("scripts/mixins/job_special")}
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.AFFABLE_ADAMANTKING_OFFSET then
         mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
     end
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
         mob:showText(mob, ID.text.DIAMOND_QUADAV_DEATH)
     end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     local nqId = mob:getID()
 
     -- the quest version of this NM doesn't respawn or count toward hq nm
@@ -48,3 +49,5 @@ function onMobDespawn(mob)
         end
     end
 end
+
+return entity

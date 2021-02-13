@@ -10,15 +10,16 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local vanishingact = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT)
+entity.onTrigger = function(player, npc)
+    local vanishingact = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT)
     local deliveryGoodsProg = player:getCharVar("deliveringTheGoodsCS")
     local vanishActProg = player:getCharVar("vanishingactCS")
-    if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_AVAILABLE then
+    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_AVAILABLE then
         player:startEvent(39)
     elseif deliveryGoodsProg == 1 then
         player:startEvent(46)
@@ -37,12 +38,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 39 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS)
         player:setCharVar("deliveringTheGoodsCS", 1)
     elseif csid == 41 and npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS, { item = {2184, 3}, var = "deliveringTheGoodsCS"}) then
         player:setCharVar("VANISHING_ACT_waitJPMidnight", getMidnight())
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("vanishingactCS", 3)
     end
 end
+
+return entity

@@ -2,16 +2,11 @@
 -- Tables and Functions Used at Multiple Places within Aht Urgan Whitegate
 -----------------------------------
 require("scripts/globals/settings")
-
--- Lua Set Initializer http://www.lua.org/pil/11.5.html
-function Set (list)
-    local set = {}
-    for _, l in ipairs(list) do set[l] = true end
-    return set
-end
+require("scripts/globals/common")
+-----------------------------------
 
 -- Set of Royal Palace Approved Armor
-ROYAL_PALACE_ALLOWED_BODY_ARMORS = Set{
+local ROYAL_PALACE_ALLOWED_BODY_ARMORS = set{
     12548, -- Adaman Cuirass Lv. 73 WAR / PLD
     13746, -- Gem Cuirass Lv. 73 WAR / PLD
     13742, -- Aketon Lv. 60 MNK / WHM / RDM / THF / PLD / BST / BRD / DRG / SMN / BLU / COR / PUP / DNC

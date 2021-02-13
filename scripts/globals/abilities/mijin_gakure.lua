@@ -9,12 +9,13 @@ require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
 
     local dmg = (player:getHP() * 0.8) + (player:getMainLvl() / 0.5)
     local resist = applyPlayerResistance(player, nil, target, player:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), 0, tpz.magic.ele.NONE)
@@ -28,3 +29,5 @@ function onUseAbility(player, target, ability)
     player:setHP(0)
     return dmg
 end
+
+return ability_object

@@ -5,19 +5,21 @@
 require("scripts/globals/titles")
 require("scripts/globals/limbus")
 local ID = require("scripts/zones/Temenos/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
     mob:SetAutoAttackEnabled(true)
     mob:SetMobAbilityEnabled(true)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 0)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     tpz.limbus.setupArmouryCrates(mob:getBattlefieldID(), true)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local phase = mob:getLocalVar("battlePhase")
     if mob:actionQueueEmpty() then
         if mob:getHPP() < (80 - (phase * 20)) then
@@ -37,7 +39,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if player then
         player:addTitle(tpz.title.TEMENOS_LIBERATOR)
     end
@@ -45,3 +47,5 @@ function onMobDeath(mob, player, isKiller, noKiller)
         GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(tpz.status.NORMAL)
     end
 end
+
+return entity

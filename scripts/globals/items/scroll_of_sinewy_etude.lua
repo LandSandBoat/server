@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 5032
 -- Scroll of Sinewy Etude
 -- Teaches the song Sinewy Etude
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(424)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(424)
 end
+
+return item_object

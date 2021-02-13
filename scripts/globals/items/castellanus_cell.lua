@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Castellanus Cell
 -- ID 5366
 -- Unlocks head and neck equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return salvageUtil.onCellItemCheck(target, tpz.effect.ENCUMBRANCE_I, 0x0210)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     return salvageUtil.onCellItemUse(target, tpz.effect.ENCUMBRANCE_I, 0x0210, 1)
 end
+
+return item_object

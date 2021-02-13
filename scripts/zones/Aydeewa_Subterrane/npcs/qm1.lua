@@ -6,13 +6,16 @@
 local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2584) and npcUtil.popFromQM(player, npc, ID.mob.NOSFERATU) then -- Pure Blood
         player:confirmTrade()
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.NOTHING_HAPPENS)
 end
+
+return entity

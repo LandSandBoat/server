@@ -1,6 +1,6 @@
-------------------------------------
+-----------------------------------
 -- Dynamis
-------------------------------------
+-----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
-------------------------------------
+-----------------------------------
 
 dynamis = {}
 
@@ -116,7 +116,7 @@ local entryInfo =
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
             return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
     [tpz.zone.BUBURIMU_PENINSULA] =
@@ -130,7 +130,7 @@ local entryInfo =
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
             return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
     [tpz.zone.QUFIM_ISLAND] =
@@ -144,7 +144,7 @@ local entryInfo =
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
             return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
     [tpz.zone.TAVNAZIAN_SAFEHOLD] =
@@ -161,7 +161,7 @@ local entryInfo =
                    player:hasKeyItem(tpz.ki.DYNAMIS_BUBURIMU_SLIVER) and
                    player:hasKeyItem(tpz.ki.DYNAMIS_QUFIM_SLIVER) and
                    player:hasKeyItem(tpz.ki.DYNAMIS_VALKURM_SLIVER) and
-                  (player:hasCompletedMission(COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
 }
@@ -258,9 +258,9 @@ local dynaInfo =
     },
 }
 
--------------------------------------------------
+-----------------------------------
 -- local functions
--------------------------------------------------
+-----------------------------------
 
 local function arg3(player, bit)
     local csVar = player:getCharVar("Dynamis_Status")
@@ -275,9 +275,9 @@ local function arg3(player, bit)
     end
 end
 
--------------------------------------------------
+-----------------------------------
 -- global functions
--------------------------------------------------
+-----------------------------------
 
 dynamis.eye =
 {
@@ -548,7 +548,7 @@ dynamis.refillStatueOnSpawn = function(mob)
             for _, m in pairs(g) do
                 if m.mob == mobId then
                     found = true
-                    mob:AnimationSub(m.eye)
+                    mob:setAnimationSub(m.eye)
                     break
                 end
             end
@@ -611,7 +611,7 @@ dynamis.refillStatueOnDeath = function(mob, player, isKiller)
                         end
                     end
                 end
-                mob:AnimationSub(dynamis.eye.NONE)
+                mob:setAnimationSub(dynamis.eye.NONE)
 
                 -- spawn a new mob in this group
                 local nextId = group[math.random(#group)]
@@ -684,10 +684,10 @@ dynamis.qmOnTrigger = function(player, npc)
     end
 end
 
---------------------------------------------------
+-----------------------------------
 -- getDynamisMapList
 -- Produces a bitmask for the goblin ancient currency NPCs
---------------------------------------------------
+-----------------------------------
 
 function getDynamisMapList(player)
     local bitmask = 0

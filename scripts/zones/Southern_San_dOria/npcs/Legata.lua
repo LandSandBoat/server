@@ -3,16 +3,17 @@
 --  NPC: Legata
 -- Starts and Finishes Quest: Starting a Flame (R)
 -- !pos 82 0 116 230
--------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(768, 4) and trade:getItemCount() == 4) then
             player:startEvent(36)
         end
@@ -20,9 +21,9 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_AVAILABLE) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_AVAILABLE) then
         player:startEvent(37)
     else
         player:startEvent(35)
@@ -30,23 +31,25 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 37 and option == 1) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME)
     elseif (csid == 36) then
         player:tradeComplete()
         player:addGil(GIL_RATE*100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*100)
-        if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.STARTING_A_FLAME)
         else
             player:addFame(SANDORIA, 5)
         end
     end
 
 end
+
+return entity

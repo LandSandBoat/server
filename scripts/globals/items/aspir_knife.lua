@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 16509
 -- Item: Aspir Knife
 -- Additional effect: MP Drain
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if (math.random(0, 99) >= chance or target:isUndead()) then
@@ -31,3 +32,5 @@ function onAdditionalEffect(player, target, damage)
         return tpz.subEffect.MP_DRAIN, tpz.msg.basic.ADD_EFFECT_MP_DRAIN, player:addMP(drain)
     end
 end
+
+return item_object

@@ -1,16 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Cumulus Cell
 -- ID 5367
 -- Unlocks body equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/salvage")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return salvageUtil.onCellItemCheck(target, tpz.effect.ENCUMBRANCE_I, 0x0020)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     return salvageUtil.onCellItemUse(target, tpz.effect.ENCUMBRANCE_I, 0x0020, 2)
 end
+
+return item_object

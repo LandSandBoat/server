@@ -10,13 +10,14 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    troubleAtTheSluice = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+    troubleAtTheSluice = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
     NeutralizerKI = player:hasKeyItem(tpz.ki.NEUTRALIZER)
 
     if (troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3) then
@@ -31,13 +32,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 57 and option == 0) then
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         player:setCharVar("troubleAtTheSluiceVar", 1)
     elseif (csid == 56) then
         if (player:getFreeSlotsCount() == 0) then
@@ -48,8 +49,10 @@ function onEventFinish(player, csid, option)
             player:addItem(16706)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16706) -- Heavy Axe
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         end
     end
 
 end
+
+return entity

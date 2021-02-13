@@ -1,13 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 4692
 -- Scroll of Haste II
 -- Teaches the white magic Haste II
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return target:canLearnSpell(511)
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addSpell(511)
 end
+
+return item_object

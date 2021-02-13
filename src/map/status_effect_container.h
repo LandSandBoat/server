@@ -133,8 +133,9 @@ private:
 
 namespace effects
 {
-    void   LoadEffectsParameters();
-    uint16 GetEffectElement(uint16 effect);
+    void        LoadEffectsParameters();
+    uint16      GetEffectElement(uint16 effect);
+    std::string GetEffectName(uint16 effect);
 }; // namespace effects
 
 #endif

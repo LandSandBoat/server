@@ -1,9 +1,11 @@
 -----------------------------------
 --  PET: Wyvern
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/ability")
+require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local entity = {}
 
 local WYVERN_OFFENSIVE = 1
 local WYVERN_DEFENSIVE = 2
@@ -35,7 +37,7 @@ local wyvernTypes =
     [tpz.job.RUN] = WYVERN_MULTI,
 }
 
-function doHealingBreath(player, threshold, breath)
+local function doHealingBreath(player, threshold, breath)
     local breath_heal_range = 13
     local function inBreathRange(target)
         return player:getPet():getZoneID() == target:getZoneID() and player:getPet():checkDistance(target) <= breath_heal_range
@@ -45,7 +47,7 @@ function doHealingBreath(player, threshold, breath)
         player:getPet():useJobAbility(breath, player)
     else
         local party = player:getParty()
-        for _, member in ipairs(party) do
+        for _, member in pairs(party) do
             if member:getHPP() < threshold and inBreathRange(member) then
                 player:getPet():useJobAbility(breath, member)
                 break
@@ -54,7 +56,7 @@ function doHealingBreath(player, threshold, breath)
     end
 end
 
-function doStatusBreath(target, player)
+local function doStatusBreath(target, player)
     local usedBreath = true
     local wyvern = player:getPet()
 
@@ -75,7 +77,7 @@ function doStatusBreath(target, player)
     return usedBreath
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     local master = mob:getMaster()
     local strafe_trait = master:getMod(tpz.mod.WYVERN_BREATH_MACC)
     local strafe_effect_merit = master:getMerit(tpz.merit.STRAFE_EFFECT)
@@ -96,7 +98,7 @@ function onMobSpawn(mob)
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
                 local party = player:getParty()
-                for _, member in ipairs(party) do
+                for _, member in pairs(party) do
                     if doStatusBreath(member, player) then
                         break
                     end
@@ -211,7 +213,7 @@ function onMobSpawn(mob)
     end)
 end
 
-function onMobDeath(mob, player)
+entity.onMobDeath = function(mob, player)
     local master = mob:getMaster()
     local numLvls = mob:getLocalVar("level_Ups")
     if numLvls ~= 0 then
@@ -225,3 +227,5 @@ function onMobDeath(mob, player)
     master:removeListener("PET_WYVERN_DISENGAGE")
     master:removeListener("PET_WYVERN_EXP")
 end
+
+return entity

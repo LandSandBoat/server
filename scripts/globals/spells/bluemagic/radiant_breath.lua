@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Radiant Breath
 -- Deals light damage to enemies within a fan-shaped area of effect originating from the caster. Additional effect: Slow and Silence.
 -- Spell cost: 116 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 33.75 seconds
 -- Magic Bursts on: Transfixion, Fusion, Light
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local multi = 2.90
     if (caster:hasStatusEffect(tpz.effect.AZURE_LORE)) then
         multi = multi + 0.50
@@ -63,3 +64,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

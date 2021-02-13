@@ -1,17 +1,18 @@
------------------------------------------
+-----------------------------------
 -- Spell: Sacrifice
---
+-----------------------------------
 -----------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local count = 1
 
     local removables = {tpz.effect.FLASH, tpz.effect.BLINDNESS, tpz.effect.PARALYSIS, tpz.effect.POISON, tpz.effect.CURSE_I, tpz.effect.CURSE_II, tpz.effect.DISEASE, tpz.effect.PLAGUE}
@@ -37,3 +38,5 @@ function onSpellCast(caster, target, spell)
     spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
     return 0
 end
+
+return spell_object

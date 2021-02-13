@@ -1,10 +1,11 @@
------------------------------------------
+-----------------------------------
 -- Implementation of Bar-spells
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
+-----------------------------------
 
-function calculateBarspellPower(caster, enhanceSkill)
+local function calculateBarspellPower(caster, enhanceSkill)
     local meritBonus = caster:getMerit(tpz.merit.BAR_SPELL_EFFECT)
     local equipBonus = caster:getMod(tpz.mod.BARSPELL_AMOUNT)
 
@@ -23,7 +24,7 @@ function calculateBarspellPower(caster, enhanceSkill)
     return power + meritBonus + equipBonus
 end
 
-function calculateBarspellDuration(caster, enhanceSkill)
+local function calculateBarspellDuration(caster, enhanceSkill)
     -- Function call to allow configuration conditional for old duration formulas.
     return 480
 end

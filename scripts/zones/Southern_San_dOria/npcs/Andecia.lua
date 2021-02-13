@@ -9,18 +9,19 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getCharVar("OfferingWaterOK") == 1) then
             player:startEvent(624)
         end
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local Tomb = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+    local Tomb = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
     local WellWater = player:hasItem(567) -- Well Water
     local Waterskin = player:hasItem(547) -- Tomb Waterskin
 
@@ -38,16 +39,16 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 541 and option == 0) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
         else
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
             player:setCharVar("graveConcernsVar", 0)
             player:addItem(567)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 567) -- Well Water
@@ -59,7 +60,9 @@ function onEventFinish(player, csid, option)
         player:addGil(GIL_RATE*560)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*560)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
     end
 
 end
+
+return entity

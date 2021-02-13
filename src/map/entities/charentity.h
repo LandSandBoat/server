@@ -52,13 +52,13 @@ struct jobs_t
 
 struct event_t
 {
-    int32 EventID; // номер события
-    int32 Option;  // фиктивный возвращаемый результат
+    int32 EventID;
+    int32 Option;  // dummy return result
 
-    CBaseEntity* Target; // инициатор события
+    CBaseEntity* Target; // event initiator
 
-    string_t Script;   // путь к файлу, отвечающему за обработку события
-    string_t Function; // не используется
+    // TODO: Change this to something more descriptive
+    string_t Script; // path to the file responsible for handling the event
 
     void reset()
     {
@@ -66,7 +66,6 @@ struct event_t
         Option  = 0;
         Target  = 0;
         Script.clear();
-        Function.clear();
     }
 };
 
@@ -200,7 +199,7 @@ public:
     std::bitset<1024> m_SpellList;            // список изученных заклинаний
     uint8             m_TitleList[94];        // список заслуженных завний
     uint8             m_Abilities[62];        // список текущих способностей
-    uint8             m_LearnedAbilities[47]; // learnable abilities (corsair rolls)
+    uint8             m_LearnedAbilities[49]; // learnable abilities (corsair rolls)
     std::bitset<49>   m_LearnedWeaponskills;  // learnable weaponskills
     uint8             m_TraitList[16];        // список постянно активных способностей в виде битовой маски
     uint8             m_PetCommands[32];      // список доступных команд питомцу

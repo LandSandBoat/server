@@ -13,10 +13,11 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local wsQuest = tpz.wsquest.decimation
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
@@ -24,16 +25,16 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local chocoboOnTheLoose = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+    local chocoboOnTheLoose = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
     local chocoboOnTheLooseStat = player:getCharVar("ChocoboOnTheLoose")
-    local chocobosWounds = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local chocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     local chocobosWoundsStat = player:getCharVar("ChocobosWounds_Event")
-    local saveMySon = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
-    local pathOfTheBeastmaster = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
-    local wingsOfGold = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD)
-    local scatteredIntoShadow = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
+    local saveMySon = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
+    local pathOfTheBeastmaster = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
+    local wingsOfGold = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD)
+    local scatteredIntoShadow = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
     local scatteredIntoShadowStat = player:getCharVar("scatIntoShadowCS")
 
     local mLvl = player:getMainLvl()
@@ -119,10 +120,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- CHOCOBO ON THE LOOSE
     if csid == 10093 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
     elseif csid == 10094 then
         player:setCharVar("ChocoboOnTheLoose", 1)
     elseif csid == 10095 then
@@ -139,26 +140,26 @@ function onEventFinish(player, csid, option)
 
     -- CHOCOBO'S WOUNDS
     elseif csid == 71 and option == 1 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
         player:setCharVar("ChocobosWounds_Event", 1)
 
     -- PATH OF THE BEASTMASTER
     elseif csid == 70 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
         npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.PATH_OF_THE_BEASTMASTER, {title = tpz.title.ANIMAL_TRAINER})
         player:unlockJob(tpz.job.BST)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_BEASTMASTER)
 
     -- WINGS OF GOLD
     elseif (csid == 137 or csid == 139) and option == 1 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD)
         player:setCharVar("wingsOfGold_shortCS", 0)
     elseif csid == 138 and npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD, {item = 16680, fame = 20}) then
         player:delKeyItem(tpz.ki.GUIDING_BELL)
 
     -- SCATTERED INTO SHADOW
     elseif (csid == 141 or csid == 143) and option == 1 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
         player:setCharVar("scatIntoShadow_shortCS", 0)
         npcUtil.giveKeyItem(player, {tpz.ki.AQUAFLORA1, tpz.ki.AQUAFLORA2, tpz.ki.AQUAFLORA3})
     elseif csid == 144 then
@@ -171,3 +172,5 @@ function onEventFinish(player, csid, option)
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.DECIMATION_LEARNED)
     end
 end
+
+return entity

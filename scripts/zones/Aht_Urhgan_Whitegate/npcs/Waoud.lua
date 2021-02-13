@@ -12,9 +12,10 @@ require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local anEmptyVessel = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+entity.onTrade = function(player, npc, trade)
+    local anEmptyVessel = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local StoneID = player:getCharVar("EmptyVesselStone")
 
@@ -24,13 +25,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local anEmptyVessel = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+entity.onTrigger = function(player, npc)
+    local anEmptyVessel = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local divinationReady = vanaDay() > player:getCharVar("LastDivinationDay")
-    local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
-    local transformations = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+    local transformations = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     local currentJob = player:getMainJob()
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
@@ -126,7 +127,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- AN EMPTY VESSEL
     if csid == 60 then
         local success = player:getLocalVar("SuccessfullyAnswered")
@@ -170,9 +171,9 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
-    local beginnings = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+entity.onEventFinish = function(player, csid, option)
+    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
@@ -185,7 +186,7 @@ function onEventFinish(player, csid, option)
             player:setLocalVar("waoudNeedToZone", 1)
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 2)
-            player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+            player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
         elseif player:getGil() >= 1000 then
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 1)
@@ -205,7 +206,7 @@ function onEventFinish(player, csid, option)
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 705 and option == 1 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
     elseif csid == 706 and option == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
@@ -214,7 +215,7 @@ function onEventFinish(player, csid, option)
 
     -- OMENS
     elseif csid == 710 and beginnings == QUEST_COMPLETED then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
         player:setCharVar("OmensProgress", 1)
     elseif csid == 711 and option == 1 and omensProgress == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
@@ -238,3 +239,5 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     end
 end
+
+return entity

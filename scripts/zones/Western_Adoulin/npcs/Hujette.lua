@@ -12,8 +12,9 @@ require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- ALL THE WAY TO THE BANK
     if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE)) then
         local ATWTTB_Paid_Hujette = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 1)
@@ -23,7 +24,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.HUJETTE_SHOP_TEXT)
     local stock =
     {
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     tpz.shop.general(player, stock)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- ALL THE WAY TO THE BANK
     if (csid == 5070) then
         player:confirmTrade()
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

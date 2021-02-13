@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Level 5 Petrify
 --
 -- Description: AOE Petrify and on multiples of 5.
@@ -6,18 +6,19 @@
 -- Utsusemi/Blink absorb: Ignore
 -- Range: 15' radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PETRIFICATION
     if (target:getMainLvl()%5 == 0) then
 
@@ -32,3 +33,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return typeEffect
 end
+
+return mobskill_object

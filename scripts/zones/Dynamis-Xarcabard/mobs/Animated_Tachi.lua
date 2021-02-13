@@ -5,10 +5,11 @@
 require("scripts/globals/status")
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
 
-    if (mob:AnimationSub() == 3) then
+    if (mob:getAnimationSub() == 3) then
         SetDropRate(117, 1580, 1000)
     else
         SetDropRate(117, 1580, 0)
@@ -25,15 +26,15 @@ function onMobEngaged(mob, target)
 
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- TODO: add battle dialog
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:showText(mob, ID.text.ANIMATED_TACHI_DIALOG+2)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     player:showText(mob, ID.text.ANIMATED_TACHI_DIALOG+1)
 
@@ -45,3 +46,5 @@ function onMobDeath(mob, player, isKiller)
     DespawnMob(17330459)
 
 end
+
+return entity

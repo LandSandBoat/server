@@ -1,21 +1,21 @@
 -----------------------------------
---
 -- tpz.effect.FULL_SPEED_AHEAD
 -- Helper for quest: Full Speed Ahead!
---
 -----------------------------------
 require("scripts/quests/full_speed_ahead")
-require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target,effect)
+effect_object.onEffectGain = function(target, effect)
     tpz.fsa.onEffectGain(target, effect)
 end
 
-function onEffectTick(target,effect)
+effect_object.onEffectTick = function(target, effect)
     tpz.fsa.tick(target, effect)
 end
 
-function onEffectLose(target,effect)
+effect_object.onEffectLose = function(target, effect)
     tpz.fsa.onEffectLose(target, effect)
 end
+
+return effect_object

@@ -8,19 +8,20 @@ local ID = require("scripts/zones/Mamook/IDs")
 mixins = {require("scripts/mixins/job_special")}
 
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.DOUBLE_ATTACK, 20)
     mob:setMobMod(tpz.mobMod.DRAW_IN, 2)
 end
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
         SpawnMob(i):updateEnmity(target)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
 
     if (mob:getBattleTime() % 60 < 2 and mob:getBattleTime() > 10) then
         if (not GetMobByID(ID.mob.GULOOL_JA_JA + 1):isSpawned()) then
@@ -45,15 +46,17 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.SHINING_SCALE_RIFLER)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
 
-function onMobDespawn(mob)
+entity.onMobDespawn = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
+
+return entity

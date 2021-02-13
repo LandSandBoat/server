@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Ordelles_Caves/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL and
         player:getCharVar("MissionStatus") == 9 and
@@ -19,13 +20,13 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL then
         local missionStatus = player:getCharVar("MissionStatus")
 
         if missionStatus >= 2 and missionStatus <= 7 then
             player:startEvent(1)
-        elseif missionStatus >= 10 or player:hasCompletedMission(SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
+        elseif missionStatus >= 10 or player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG + 9)
         elseif missionStatus >= 8 then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG)
@@ -37,10 +38,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
         player:setCharVar("theRescueDrillRandomNPC", math.random(1, 3))
         player:setCharVar("MissionStatus", 8)
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:confirmTrade()
     end
 end
+
+return entity

@@ -3,16 +3,19 @@
 --  NPC: Rasdinice
 -- !pos -8 1 35 80
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, 11637) -- (Couldn't find default text so i threw this in) Perhaps you should first attend to more pressing matters...
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

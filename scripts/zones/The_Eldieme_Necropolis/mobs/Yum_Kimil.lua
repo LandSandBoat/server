@@ -6,9 +6,12 @@
 -----------------------------------
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCharVar("TheRequiemCS") == 3) then
         player:setCharVar("TheRequiemYumKilled", 1)
     end
 end
+
+return entity

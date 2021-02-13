@@ -4071,7 +4071,7 @@ namespace charutils
             }
         }
 
-        PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", PChar, exp);
+        PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", CLuaBaseEntity(PChar), exp);
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)
@@ -5007,6 +5007,12 @@ namespace charutils
     {
         if (PAbility->getAddType() & ADDTYPE_MERIT)
         {
+            if (!PChar->PMeritPoints->GetMerit((MERIT_TYPE)PAbility->getMeritModID()))
+            {
+                ShowWarning("charutils::CheckAbilityAddtype: Attempt to add invalid Merit Ability (%d).\n", PAbility->getMeritModID());
+                return false;
+            }
+
             if (!(PChar->PMeritPoints->GetMerit((MERIT_TYPE)PAbility->getMeritModID())->count > 0))
             {
                 return false;
@@ -5428,6 +5434,19 @@ namespace charutils
             return Sql_GetIntData(SqlHandle, 0);
         }
         return 0;
+    }
+
+    void SetCharVar(CCharEntity* PChar, const char* var, int32 value)
+    {
+        if (value == 0)
+        {
+            Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", PChar->id, var);
+        }
+        else
+        {
+            const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
+            Sql_Query(SqlHandle, fmtQuery, PChar->id, var, value, value);
+        }
     }
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level)

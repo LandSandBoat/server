@@ -1,13 +1,14 @@
------------------------------------------
+-----------------------------------
 -- ID: 21966
 -- Item: Zanmato +1
 -- Additional Effect: Dispel (Current dispel rate is guesstimate)
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 5
     if math.random(100) <= chance then
         local effect = target:dispelStatusEffect()
@@ -18,3 +19,5 @@ function onAdditionalEffect(player, target, damage)
 
     return 0, 0, 0
 end
+
+return item_object

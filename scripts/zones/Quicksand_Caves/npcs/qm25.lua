@@ -6,8 +6,9 @@
 local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (npcUtil.giveItem(player, 1190)) then
         local newPosition = npcUtil.pickNewPosition(npc:getID(), ID.npc.ANTICAN_TAG_POSITIONS, true)
         npc:hideNPC(7200)
@@ -15,3 +16,5 @@ function onTrigger(player, npc)
         SetServerVariable("[POP]Antican_Tag", os.time() + 7200) -- "pause" UpdateNPCSpawnPoint
     end
 end
+
+return entity

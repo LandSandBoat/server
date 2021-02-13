@@ -10,8 +10,9 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getID() == target:getID()) then
         return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
     elseif (player:getHP() < 4) then -- Fails if HP < 4
@@ -21,7 +22,7 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     -- Plus 5 percent hp recovers per extra martyr merit
     local meritBonus = player:getMerit(tpz.merit.MARTYR) - 5
     -- printf("Martyr Merit Bonus: %d", meritBonus)
@@ -49,3 +50,5 @@ function onUseAbility(player, target, ability)
 
     return healHP
 end
+
+return ability_object

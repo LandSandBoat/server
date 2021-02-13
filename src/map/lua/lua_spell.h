@@ -31,10 +31,6 @@ class CLuaSpell
     CSpell* m_PLuaSpell;
 
 public:
-    static const char                   className[];
-    static Lunar<CLuaSpell>::Register_t methods[];
-
-    CLuaSpell(lua_State*);
     CLuaSpell(CSpell*);
 
     CSpell* GetSpell() const
@@ -42,24 +38,27 @@ public:
         return m_PLuaSpell;
     }
 
-    int32 setMsg(lua_State*);
-    int32 setAoE(lua_State*);
-    int32 setFlag(lua_State*);
-    int32 setRadius(lua_State*);
-    int32 setAnimation(lua_State*);
-    int32 setMPCost(lua_State*);
-    int32 canTargetEnemy(lua_State*);
-    int32 isAoE(lua_State*);
-    int32 tookEffect(lua_State*);
-    int32 getTotalTargets(lua_State*);
-    int32 getMagicBurstMessage(lua_State*);
-    int32 getElement(lua_State*);
-    int32 getID(lua_State*);
-    int32 getMPCost(lua_State*);
-    int32 getSkillType(lua_State*);
-    int32 getSpellGroup(lua_State*);
-    int32 getFlag(lua_State*);
-    int32 castTime(lua_State*);
+    void   setMsg(uint16 messageID);
+    void   setAoE(uint8 aoe);
+    void   setFlag(uint8 flags);
+    void   setRadius(float radius);
+    void   setAnimation(uint16 animationID);
+    void   setCastTime(uint32 casttime);
+    void   setMPCost(uint16 mpcost);
+    bool   canTargetEnemy();
+    uint8  isAoE();
+    bool   tookEffect();
+    uint16 getTotalTargets();
+    uint16 getMagicBurstMessage();
+    uint16 getElement();
+    uint16 getID();
+    uint16 getMPCost();
+    uint8  getSkillType();
+    uint8  getSpellGroup();
+    uint8  getFlag();
+    uint32 getCastTime();
+
+    static void Register();
 };
 
 #endif

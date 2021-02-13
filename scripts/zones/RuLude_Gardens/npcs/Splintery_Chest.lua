@@ -6,11 +6,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
 end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player,npc)
     if ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
@@ -19,10 +20,10 @@ function onTrigger(player,npc)
 
 end
 
-function onEventUpdate(player,csid,option)
+entity.onEventUpdate = function(player,csid,option)
 end
 
-function onEventFinish(player,csid,option)
+entity.onEventFinish = function(player,csid,option)
     local itemId = 0
     local optionTable =
     {
@@ -40,9 +41,9 @@ function onEventFinish(player,csid,option)
         [44] = 19382, -- Crook
         [48] = 19387, -- Sparrow
         [52] = 19392, -- Thunderstick
-    --------------------
+    -----------------------------------
         -- Page 2
-    --------------------
+    -----------------------------------
         [64] = 19415, -- Barracudas
         [68] = 19419, -- Fusetto
         [72] = 19423, -- Machaera
@@ -57,9 +58,9 @@ function onEventFinish(player,csid,option)
         [108] = 18932, -- Sedikutchi
         [112] = 18936, -- Sparrowhawk
         [116] = 18940, -- Anachry
-    --------------------
+    -----------------------------------
         -- Page 3
-    --------------------
+    -----------------------------------
         [128] = 20544, -- Dumuzis -1
         [132] = 20631, -- Khandroma -1
         [140] = 20732, -- Brunello -1
@@ -88,3 +89,5 @@ function onEventFinish(player,csid,option)
         end
     end
 end
+
+return entity

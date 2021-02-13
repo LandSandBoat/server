@@ -34,8 +34,6 @@
 #include "ai/helpers/event_handler.h"
 #include "packets/weather.h"
 
-struct lua_State;
-
 class CItemContainer;
 
 class CBaseEntity;
@@ -68,6 +66,8 @@ struct RoeSystemData
     std::bitset<4096>        RetroactiveRecords;
     std::bitset<4096>        DailyRecords;
     std::vector<uint16>      DailyRecordIDs;
+    std::bitset<4096>        WeeklyRecords;
+    std::vector<uint16>      WeeklyRecordIDs;
     std::bitset<4096>        TimedRecords;
     std::array<uint32, 4096> NotifyThresholds;
 
@@ -115,8 +115,8 @@ namespace roeutils
     extern RoeSystemData RoeSystem;
 
     void  init();
-    int32 ParseRecords(lua_State* L);
-    int32 ParseTimedSchedule(lua_State* L);
+    void  ParseRecords(sol::table const& records_table);
+    void  ParseTimedSchedule(sol::table const& schedule_table);
 
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload);
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagram& payload);
@@ -135,6 +135,8 @@ namespace roeutils
 
     void ClearDailyRecords(CCharEntity* PChar);
     void CycleDailyRecords();
+    void ClearWeeklyRecords(CCharEntity* PChar);
+    void CycleWeeklyRecords();
 
     uint16 GetActiveTimedRecord();
     void   AddActiveTimedRecord(CCharEntity* PChar);

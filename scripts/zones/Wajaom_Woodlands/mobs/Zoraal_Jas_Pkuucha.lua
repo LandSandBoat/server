@@ -5,27 +5,28 @@
 local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
 require("scripts/globals/hunts")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setLocalVar("whenToPopZoraal", math.random(20, 50))
     mob:setLocalVar("hasPoppedZoraal", 0)
 end
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     mob:setLocalVar("hasPoppedZoraal", 0)
     if(GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned()) then
         DespawnMob(ID.mob.PERCIPIENT_ZORAAL_JA)
     end
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
     mob:setLocalVar("hasPoppedZoraal", 0)
     if(GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned()) then
         DespawnMob(ID.mob.PERCIPIENT_ZORAAL_JA)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if (
         mob:getHPP() <= mob:getLocalVar("whenToPopZoraal") and
         not GetMobByID(ID.mob.PERCIPIENT_ZORAAL_JA):isSpawned() and
@@ -39,6 +40,8 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.hunts.checkHunt(mob, player, 447)
 end
+
+return entity

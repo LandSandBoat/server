@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 -- Spell: Tractor
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     if target:isMob() then -- Because Prishe in CoP mission
         return tpz.msg.basic.CANNOT_ON_THAT_TARG
     end
@@ -14,7 +15,7 @@ function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     if target:getObjType() == tpz.objType.PC then
         target:sendTractor(caster:getXPos(), caster:getYPos(), caster:getZPos(), target:getRotPos())
         spell:setMsg(tpz.msg.basic.MAGIC_CASTS_ON)
@@ -22,3 +23,5 @@ function onSpellCast(caster, target, spell)
     end
     return 0
 end
+
+return spell_object

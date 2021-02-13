@@ -27,16 +27,18 @@
 
 class CBaseEntity;
 class CCharEntity;
+class CLuaBattlefield;
+class CLuaInstance;
+class CLuaItem;
+class CLuaSpell;
+class CLuaStatusEffect;
+class CLuaZone;
 
 class CLuaBaseEntity
 {
     CBaseEntity* m_PBaseEntity;
 
 public:
-    static const char                        className[];
-    static Lunar<CLuaBaseEntity>::Register_t methods[];
-
-    CLuaBaseEntity(lua_State*);
     CLuaBaseEntity(CBaseEntity*);
 
     CBaseEntity* GetBaseEntity() const
@@ -45,676 +47,702 @@ public:
     }
 
     // Messaging System
-    int32 showText(lua_State*); // Displays Dialog for npc
-    int32 messageText(lua_State* L);
-    int32 PrintToPlayer(lua_State* L); // for sending debugging messages/command confirmations to the player's client
-    int32 PrintToArea(lua_State* L);   // for sending area messages to multiple players at once
-    int32 messageBasic(lua_State*);    // Sends Basic Message
-    int32 messageName(lua_State* L);   // Sends a Message with a Name
-    int32 messagePublic(lua_State*);   // Sends a public Basic Message
-    int32 messageSpecial(lua_State*);  // Sends Special Message
-    int32 messageSystem(lua_State*);   // Sends System Message
-    int32 messageCombat(lua_State* L); // Sends Combat Message
+    void showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3); // Displays Dialog for npc
+    void messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3);
+    void PrintToPlayer(std::string const& message, sol::object messageType, sol::object name);                               // for sending debugging messages/command confirmations to the player's client
+    void PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // for sending area messages to multiple players at once
+    void messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target);            // Sends Basic Message
+    void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
+                     sol::object const& p2, sol::object const& p3, sol::object const& chat);                               // Sends a Message with a Name
+    void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3); // Sends a public Basic Message
+
+    void messageSpecial(uint16 messageID, sol::variadic_args va); // Sends Special Message
+
+    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1); // Sends System Message
+    void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);  // Sends Combat Message
 
     // Variables
-    int32 getCharVar(lua_State*); // Returns a character variable
-    int32 setCharVar(lua_State*); // Sets a character variable
-    int32 addCharVar(lua_State*); // Increments/decriments/sets a character variable
-    int32 getLocalVar(lua_State*);
-    int32 setLocalVar(lua_State*);
-    int32 resetLocalVars(lua_State*);
-    int32 getLastOnline(lua_State*); // Returns the unix timestamp of last time the player logged out or zoned
+    int32  getCharVar(std::string const& varName);              // Returns a character variable
+    void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
+    void   addCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    uint32 getLocalVar(std::string const& var);
+    void   setLocalVar(std::string const& var, uint32 val);
+    void   resetLocalVars();
+    uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
-    int32 injectPacket(lua_State*);       // Send the character a packet kept in a file
-    int32 injectActionPacket(lua_State*); // ONLY FOR DEBUGGING. Injects an action packet with the specified params.
-    int32 entityVisualPacket(lua_State* L);
-    int32 entityAnimationPacket(lua_State* L);
+    void injectPacket(std::string const& filename); // Send the character a packet kept in a file
+    void injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message);
+    void entityVisualPacket(std::string const& command, sol::object const& entity);
+    void entityAnimationPacket(const char* command);
 
-    int32 startEvent(lua_State*);        // Begins Event
-    int32 startEventString(lua_State*);  // Begins Event with string param (0x33 packet)
-    int32 updateEvent(lua_State*);       // Updates event
-    int32 updateEventString(lua_State*); // (string, string, string, string, uint32, ...)
-    int32 getEventTarget(lua_State*);    //
-    int32 release(lua_State*);           // Stops event
+    void startEvent(uint32 EventID, sol::variadic_args va);
+    void startEventString(uint16 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
+    void updateEvent(sol::variadic_args va);                      // Updates event
+    void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
+    auto getEventTarget() -> std::optional<CLuaBaseEntity>;
+    void release(); // Stops event
 
-    int32 setFlag(lua_State*);
-    int32 moghouseFlag(lua_State*);
-    int32 needToZone(lua_State*); // Check if player has zoned since the flag has been raised
+    void  setFlag(uint32 flags);
+    uint8 getMoghouseFlag();
+    void  setMoghouseFlag(uint8 flag);
+    bool  needToZone(sol::object const& arg0); // Check if player has zoned since the flag has been raised
 
     // Object Identification
-    int32 getID(lua_State* L); // Gets Entity Id
-    int32 getShortID(lua_State* L);
-    int32 getCursorTarget(lua_State* L); // Returns the ID any object under players in game cursor.
+    uint32 getID();
+    uint16 getShortID();
+    auto   getCursorTarget() -> std::optional<CLuaBaseEntity>; // Returns the ID any object under players in game cursor.
 
-    int32 getObjType(lua_State*);
-    int32 isPC(lua_State*);
-    int32 isNPC(lua_State*);
-    int32 isMob(lua_State*);
-    int32 isPet(lua_State*);
-    int32 isAlly(lua_State*);
+    uint8 getObjType();
+    bool  isPC();
+    bool  isNPC();
+    bool  isMob();
+    bool  isPet();
+    bool  isAlly();
 
     // AI and Control
-    int32 initNpcAi(lua_State* L);
-    int32 resetAI(lua_State* L);
-    int32 getStatus(lua_State*);
-    int32 setStatus(lua_State*); // Sets Character's Status
-    int32 getCurrentAction(lua_State* L);
+    void  initNpcAi();
+    void  resetAI();
+    uint8 getStatus();
+    void  setStatus(uint8 status); // Sets Character's Status
+    uint8 getCurrentAction();
 
-    int32 lookAt(lua_State* L);    // look at given position
-    int32 clearTargID(lua_State*); // clears target of entity
+    void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
+    void clearTargID();                                                                     // clears target of entity
 
-    int32 atPoint(lua_State* L);         // is at given point
-    int32 pathTo(lua_State* L);          // set new path to point without changing action
-    int32 pathThrough(lua_State* L);     // walk at normal speed through the given points
-    int32 isFollowingPath(lua_State* L); // checks if the entity is following a path
-    int32 clearPath(lua_State* L);       // removes current pathfind and stops moving
-    int32 checkDistance(lua_State*);     // Check Distacnce and returns distance number
-    int32 wait(lua_State* L);            // make the npc wait a number of ms and then back into roam
-    // int32 WarpTo(lua_State* L);           // warp to the given point
-    // int32 RoamAround(lua_State* L);       // pick a random point to walk to
-    // int32 LimitDistance(lua_State* L);    // limits the current path distance to given max distance
+    bool  atPoint(sol::variadic_args va);                                          // is at given point
+    void  pathTo(float x, float y, float z, sol::object const& flags);             // set new path to point without changing action
+    bool  pathThrough(sol::table const& pointsTable, sol::object const& flagsObj); // walk at normal speed through the given points
+    bool  isFollowingPath();                                                       // checks if the entity is following a path
+    void  clearPath();                                                             // removes current pathfind and stops moving
+    float checkDistance(sol::variadic_args va);                                    // Check Distacnce and returns distance number
+    void  wait(sol::object const& milliseconds);                                   // make the npc wait a number of ms and then back into roam
+    // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments
+    // int32 RoamAround(lua_Stat* L);       // pick a random point to walk to
+    // int32 LimitDistance(lua_Stat* L);    // limits the current path distance to given max distance
 
-    int32 openDoor(lua_State*);  // открываем дверь
-    int32 closeDoor(lua_State*); // npc.closeDoor(timeToStayClosed)
-    int32 setElevator(lua_State* L);
+    void openDoor(sol::object const& seconds);
+    void closeDoor(sol::object const& seconds);
+    void setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, uint32 elevatorId, bool reversed);
 
-    int32 addPeriodicTrigger(lua_State* L); // Adds a periodic trigger to the NPC that allows time based scripting
-    int32 showNPC(lua_State*);              // Show an NPC
-    int32 hideNPC(lua_State*);              // hide an NPC
-    int32 updateNPCHideTime(lua_State*);    // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
+    void addPeriodicTrigger(uint8 id, uint16 period, uint16 minOffset); // Adds a periodic trigger to the NPC that allows time based scripting
+    void showNPC(sol::object const& seconds);                           // Show an NPC
+    void hideNPC(sol::object const& seconds);                           // hide an NPC
+    void updateNPCHideTime(sol::object const& seconds);                 // Updates the length of time a NPC remains hidden, if shorter than the original hide time.
 
-    int32 getWeather(lua_State*); // Get Weather condition
-    int32 setWeather(lua_State*); // Set Weather condition (GM COMMAND)
+    uint8 getWeather();
+    void  setWeather(uint8 weatherType); // Set Weather condition (GM COMMAND)
 
     // PC Instructions
-    int32 ChangeMusic(lua_State* L); // Sets the specified music Track for specified music block.
-    int32 sendMenu(lua_State*);      // Displays a menu (AH,Raise,Tractor,MH etc)
-    int32 sendGuild(lua_State*);     // Sends guild shop menu
-    int32 openSendBox(lua_State*);   // Opens send box (to deliver items)
-    int32 leavegame(lua_State*);     // Character leaving game
-    int32 sendEmote(lua_State*);     // Character emits emote packet.
+    void ChangeMusic(uint8 blockID, uint8 musicTrackID);                    // Sets the specified music Track for specified music block.
+    void sendMenu(uint32 menu);                                             // Displays a menu (AH,Raise,Tractor,MH etc)
+    bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
+    void openSendBox();                                                     // Opens send box (to deliver items)
+    void leaveGame();                                                       // Character leaving game
+    void sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode);       // Character emits emote packet.
 
     // Location and Positioning
+    int16 getWorldAngle(CLuaBaseEntity const* target, sol::object const& deg);  // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
+    int16 getFacingAngle(CLuaBaseEntity const* target);                         // return angle between entity rot and target pos, aligned to number of degrees of difference
+    bool  isFacing(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you are facing the target
+    bool  isInfront(CLuaBaseEntity const* target, sol::object const& angleArg); // true if you're infront of the input target
+    bool  isBehind(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're behind the input target
+    bool  isBeside(CLuaBaseEntity const* target, sol::object const& angleArg);  // true if you're to the side of the input target
 
-    int32 getWorldAngle(lua_State* L);  // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree
-    int32 getFacingAngle(lua_State* L); // return angle between entity rot and target pos, aligned to number of degrees of difference
-    int32 isFacing(lua_State*);         // true if you are facing the target
-    int32 isInfront(lua_State*);        // true if you're infront of the input target
-    int32 isBehind(lua_State*);         // true if you're behind the input target
-    int32 isBeside(lua_State*);         // true if you're to the side of the input target
+    auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
+    uint16 getZoneID();                                                 // Get Entity zone ID
+    auto   getZoneName() -> const char*;                                // Get Entity zone name
+    bool   isZoneVisited(uint16 zone);                                  // true если указанная зона посещалась персонажем ранее
+    uint16 getPreviousZone();                                           // Get Entity previous zone
+    uint8  getCurrentRegion();                                          // Get Entity conquest region
+    uint8  getContinentID();                                            // узнаем континент, на котором находится сущность
+    bool   isInMogHouse();                                              // Check if entity inside a mog house
 
-    int32 getZone(lua_State*);          // Get Entity zone
-    int32 getZoneID(lua_State*);        // Get Entity zone ID
-    int32 getZoneName(lua_State*);      // Get Entity zone name
-    int32 isZoneVisited(lua_State*);    // true если указанная зона посещалась персонажем ранее
-    int32 getPreviousZone(lua_State*);  // Get Entity previous zone
-    int32 getCurrentRegion(lua_State*); // Get Entity conquest region
-    int32 getContinentID(lua_State*);   // узнаем континент, на котором находится сущность
-    int32 isInMogHouse(lua_State*);     // Check if entity inside a mog house
+    uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
+    void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
-    int32 getPlayerRegionInZone(lua_State*); // Returns the player's current region in the zone. (regions made with registerRegion)
-    int32 updateToEntireZone(lua_State*);    // Forces an update packet to update the NPC entity zone-wide
+    auto  getPos() -> sol::table; // Get Entity position (x,y,z)
+    void  showPosition();         // Display current position of character
+    float getXPos();              // Get Entity X position
+    float getYPos();              // Get Entity Y position
+    float getZPos();              // Get Entity Z position
+    uint8 getRotPos();            // Get Entity Rot position
 
-    int32 getPos(lua_State*);       // Get Entity position (x,y,z)
-    int32 showPosition(lua_State*); // Display current position of character
-    int32 getXPos(lua_State*);      // Get Entity X position
-    int32 getYPos(lua_State*);      // Get Entity Y position
-    int32 getZPos(lua_State*);      // Get Entity Z position
-    int32 getRotPos(lua_State*);    // Get Entity Rot position
+    void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
+    void warp();                                                              // Returns Character to home point
+    void teleport(std::map<std::string, float> pos, sol::object const& arg1); // Set Entity position (without entity despawn/spawn packets)
 
-    int32 setPos(lua_State*);   // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
-    int32 warp(lua_State*);     // Returns Character to home point
-    int32 teleport(lua_State*); // Set Entity position (without entity despawn/spawn packets)
+    void   addTeleport(uint8 teleType, uint32 bitval, sol::object const& setval); // Add new teleport means to char unlocks
+    uint32 getTeleport(uint8 type);                                               // Get unlocked teleport means
+    auto   getTeleportTable(uint8 type) -> sol::table;
+    bool   hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2); // Has access to specific teleport
+    void   setTeleportMenu(uint16 type, sol::table const& favs);         // Set favorites or menu layout preferences for homepoints or survival guides
+    auto   getTeleportMenu(uint8 type) -> sol::table;                    // Get favorites and menu layout preferences
+    void   setHomePoint();                                               // Sets character's homepoint
 
-    int32 addTeleport(lua_State*);     // Add new teleport means to char unlocks
-    int32 getTeleport(lua_State*);     // Get unlocked teleport means
-    int32 hasTeleport(lua_State*);     // Has access to specific teleport
-    int32 setTeleportMenu(lua_State*); // Set favorites or menu layout preferences for homepoints or survival guides
-    int32 getTeleportMenu(lua_State*); // Get favorites and menu layout preferences
-    int32 setHomePoint(lua_State*);    // Sets character's homepoint
+    void resetPlayer(const char* charName); // if player is stuck, GM command @resetPlayer name
 
-    int32 resetPlayer(lua_State*); // if player is stuck, GM command @resetPlayer name
-
-    int32 goToEntity(lua_State*);  // Warps self to NPC or Mob; works across multiple game servers
-    int32 gotoPlayer(lua_State*);  // warps self to target player
-    int32 bringPlayer(lua_State*); // warps target to self
+    void goToEntity(uint32 targetID, sol::object const& option); // Warps self to NPC or Mob; works across multiple game servers
+    bool gotoPlayer(std::string const& playerName);              // warps self to target player
+    bool bringPlayer(std::string const& playerName);             // warps target to self
 
     // Items
-    int32 getEquipID(lua_State*);      // Gets the Item Id of the item in specified slot
-    int32 getEquippedItem(lua_State*); // Returns the item object from specified slot
-    int32 hasItem(lua_State*);         // Check to see if Entity has item in inventory (hasItem(itemNumber))
-    int32 addItem(lua_State*);         // Add item to Entity inventory (additem(itemNumber,quantity))
-    int32 delItem(lua_State*);
-    int32 addUsedItem(lua_State*);    // Add charged item with timer already on full cooldown
-    int32 addTempItem(lua_State*);    // Add temp item to Entity Temp inventory
-    int32 hasWornItem(lua_State*);    // Check if the item is already worn (player:hasWornItem(itemid))
-    int32 createWornItem(lua_State*); // Update this item in worn item (player:createWornItem(itemid))
+    uint16 getEquipID(SLOTTYPE slot);                              // Gets the Item Id of the item in specified slot
+    auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
+    bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
+    bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
+    bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
+    bool   addUsedItem(uint16 itemID);                          // Add charged item with timer already on full cooldown
+    bool   addTempItem(uint16 itemID, sol::object const& arg1); // Add temp item to Entity Temp inventory
+    bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
+    void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
+    auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
 
-    int32 createShop(lua_State*);       // Prepare the container for work of shop ??
-    int32 addShopItem(lua_State*);      // Adds item to shop container (16 max)
-    int32 getCurrentGPItem(lua_State*); // Gets current GP item id and max points
-    int32 breakLinkshell(lua_State*);   // Breaks all pearls/sacks
+    void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
+    void addShopItem(uint16 itemID, double rawPrice, sol::object const& arg2, sol::object const& arg3); // Adds item to shop container (16 max)
+    auto getCurrentGPItem(uint8 guildID) -> std::tuple<uint16, uint16>;                                 // Gets current GP item id and max points
+    bool breakLinkshell(std::string const& lsname);                                                     // Breaks all pearls/sacks
+    bool addLinkpearl(std::string const& lsname, bool equip);                                           // Creates a linkpearl (pearlsack for GMs)
 
     // Trading
-    int32 getContainerSize(lua_State*);    // Gets the current capacity of a container
-    int32 changeContainerSize(lua_State*); // Increase/Decreases container size
-    int32 getFreeSlotsCount(lua_State*);   // Gets value of free slots in Entity inventory
-    int32 confirmTrade(lua_State*);        // Complete trade with an npc, only removing confirmed items
-    int32 tradeComplete(lua_State*);       // Complete trade with an npc
+    uint8 getContainerSize(uint8 locationID);                  // Gets the current capacity of a container
+    void  changeContainerSize(uint8 locationID, int8 newSize); // Increase/Decreases container size
+    uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
+    void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
+    void  tradeComplete();                                     // Complete trade with an npc
 
     // Equipping
-    int32 canEquipItem(lua_State*); // returns true if the player is able to equip the item
-    int32 equipItem(lua_State*);
-    int32 unequipItem(lua_State* L);
+    bool canEquipItem(uint16 itemID, sol::object const& chkLevel); // returns true if the player is able to equip the item
+    void equipItem(uint16 itemID, sol::object const& container);
+    void unequipItem(uint8 itemID);
 
-    int32 setEquipBlock(lua_State* L);
-    int32 lockEquipSlot(lua_State*);   // блокируем ячейку экипировки
-    int32 unlockEquipSlot(lua_State*); // снимаем блокировку с ячейки экипировки
+    void setEquipBlock(uint16 equipBlock);
+    void lockEquipSlot(uint8 slot);   // блокируем ячейку экипировки
+    void unlockEquipSlot(uint8 slot); // снимаем блокировку с ячейки экипировки
 
-    int32 getShieldSize(lua_State*); // Gets shield size of character
+    int8 getShieldSize(); // Gets shield size of character
 
-    int32 hasGearSetMod(lua_State*);    // Checks if character already has a gear set mod
-    int32 addGearSetMod(lua_State*);    // Sets the characters gear set mod
-    int32 clearGearSetMods(lua_State*); // Clears a characters gear set mods
+    bool hasGearSetMod(uint8 modNameId);                             // Checks if character already has a gear set mod
+    void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue); // Sets the characters gear set mod
+    void clearGearSetMods();                                         // Clears a characters gear set mods
 
-    int32 getStorageItem(lua_State*); // returns item object player:getStorageItem(containerid, slotid, equipslotid)
-    int32 storeWithPorterMoogle(lua_State* L);
-    int32 getRetrievableItemsForSlip(lua_State* L);
-    int32 retrieveItemFromSlip(lua_State* L);
+    // Storing
+    auto  getStorageItem(uint8 container, uint8 slotID, uint8 equipID) -> std::optional<CLuaItem>; // returns item object player:getStorageItem(containerid, slotid, equipslotid)
+    uint8 storeWithPorterMoogle(uint16 slipId, sol::table const& extraTable, sol::table const& storableItemIdsTable);
+    auto  getRetrievableItemsForSlip(uint16 slipId) -> sol::table;
+    void  retrieveItemFromSlip(uint16 slipId, uint16 itemId, uint16 extraId, uint8 extraData);
 
     // Player Appearance
-    int32 getRace(lua_State*);   // Gets Race of Entity
-    int32 getGender(lua_State*); // Returns the player character's gender
-    int32 getName(lua_State* L); // Gets Entity Name
-    int32 hideName(lua_State* L);
-    int32 checkNameFlags(lua_State* L); // this is check and not get because it tests for a flag, it doesn't return all flags
-    int32 getModelId(lua_State* L);
-    int32 setModelId(lua_State* L);
-    int32 costume(lua_State*);      // get or set user costume
-    int32 costume2(lua_State*);     // set monstrosity costume
-    int32 getAnimation(lua_State*); // Get Entity Animation
-    int32 setAnimation(lua_State*); // Set Entity Animation
-    int32 AnimationSub(lua_State*); // get or set animationsub
+    uint8  getRace();
+    uint8  getGender();              // Returns the player character's gender
+    auto   getName() -> const char*; // Gets Entity Name
+    void   hideName(bool isHidden);
+    bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
+    uint16 getModelId();
+    void   setModelId(uint16 modelId, sol::object const& slotObj);
+    void   setCostume(uint16 costume);
+    uint16 getCostume();
+    uint16 getCostume2(); // set monstrosity costume
+    void   setCostume2(uint16 costume);
+    uint8  getAnimation();                // Get Entity Animation
+    void   setAnimation(uint8 animation); // Set Entity Animation
+    uint8  getAnimationSub();
+    void   setAnimationSub(uint8 animationsub);
 
     // Player Status
-    int32 getNation(lua_State*); // Gets Nation of Entity
-    int32 setNation(lua_State*); // Sets Nation of Entity
-    int32 getAllegiance(lua_State* L);
-    int32 setAllegiance(lua_State* L);
-    int32 getCampaignAllegiance(lua_State*); // Gets Campaign Allegiance of Entity
-    int32 setCampaignAllegiance(lua_State*); // Sets Campaign Allegiance of Entity
+    uint8 getNation();             // Gets Nation of Entity
+    void  setNation(uint8 nation); // Sets Nation of Entity
+    uint8 getAllegiance();
+    void  setAllegiance(uint8 allegiance);
+    uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
+    void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
 
-    int32 isSeekingParty(lua_State* L);
-    int32 getNewPlayer(lua_State* L);
-    int32 setNewPlayer(lua_State* L);
-    int32 getMentor(lua_State* L);
-    int32 setMentor(lua_State* L);
+    bool isSeekingParty();
+    bool getNewPlayer();
+    void setNewPlayer(bool newplayer);
+    bool getMentor();
+    void setMentor(bool mentor);
 
-    int32 getGMLevel(lua_State* L);
-    int32 setGMLevel(lua_State* L);
-    int32 getGMHidden(lua_State* L);
-    int32 setGMHidden(lua_State* L);
+    uint8 getGMLevel();
+    void  setGMLevel(uint8 level);
+    bool  getGMHidden();
+    void  setGMHidden(bool isHidden);
 
-    int32 isJailed(lua_State* L); // Is the player jailed
-    int32 jail(lua_State* L);
+    bool isJailed(); // Is the player jailed
+    void jail();
 
-    int32 canUseMisc(lua_State*); // Check misc flags of current zone.
+    bool canUseMisc(uint16 misc); // Check misc flags of current zone.
 
-    int32 speed(lua_State*); // скорость передвижения сущности
+    uint8 getSpeed(); // скорость передвижения сущности
+    void  setSpeed(uint8 speedVal);
 
-    int32 getPlaytime(lua_State*);
-    int32 getTimeCreated(lua_State*);
+    uint32 getPlaytime(sol::object const& shouldUpdate);
+    int32  getTimeCreated();
 
     // Player Jobs and Levels
-    int32 getMainJob(lua_State*); // Returns Entity Main Job
-    int32 getSubJob(lua_State*);  // Get Entity Sub Job
-    int32 changeJob(lua_State*);  // changes the job of a char (testing only!)
-    int32 changesJob(lua_State*); // changes the sub job of a char (testing only!)
-    int32 unlockJob(lua_State*);  // Unlocks a job for the entity, sets job level to 1
-    int32 hasJob(lua_State*);     // Check to see if JOBTYPE is unlocked for a character
+    uint8 getMainJob();             // Returns Entity Main Job
+    uint8 getSubJob();              // Get Entity Sub Job
+    void  changeJob(uint8 newJob);  // changes the job of a char (testing only!)
+    void  changesJob(uint8 subJob); // changes the sub job of a char (testing only!)
+    void  unlockJob(uint8 JobID);   // Unlocks a job for the entity, sets job level to 1
+    bool  hasJob(uint8 job);        // Check to see if JOBTYPE is unlocked for a character
 
-    int32 getMainLvl(lua_State*);       // Gets Entity Main Job Level
-    int32 getSubLvl(lua_State*);        // Get Entity Sub Job Level
-    int32 getJobLevel(lua_State*);      // Gets character job level for specified JOBTYPE
-    int32 setLevel(lua_State*);         // sets the character's level
-    int32 setsLevel(lua_State*);        // sets the character's level
-    int32 levelCap(lua_State*);         // genkai
-    int32 levelRestriction(lua_State*); // Establish/return current level restriction
-    int32 addJobTraits(lua_State*);     // Add job traits
+    uint8 getMainLvl();             // Gets Entity Main Job Level
+    uint8 getSubLvl();              // Get Entity Sub Job Level
+    uint8 getJobLevel(uint8 JobID); // Gets character job level for specified JOBTYPE
+    void  setLevel(uint8 level);    // sets the character's level
+    void  setsLevel(uint8 slevel);  // sets the character's level
+    uint8 getLevelCap();            // genkai
+    void  setLevelCap(uint8 cap);
+    uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
+    void  addJobTraits(uint8 jobID, uint8 level);     // Add job traits
 
     // Player Titles and Fame
-    int32 getTitle(lua_State*); // Gets character's title
-    int32 hasTitle(lua_State*);
-    int32 addTitle(lua_State*);
-    int32 setTitle(lua_State*); // Sets character's title
-    int32 delTitle(lua_State*);
+    uint16 getTitle();
+    bool   hasTitle(uint16 titleID);
+    void   addTitle(uint16 titleID);
+    void   setTitle(uint16 titleID);
+    void   delTitle(uint16 titleID);
 
-    int32 getFame(lua_State*);      // Gets Fame
-    int32 addFame(lua_State*);      // Adds Fame
-    int32 setFame(lua_State*);      // Sets Fame
-    int32 getFameLevel(lua_State*); // Gets Fame Level for specified nation
+    uint16 getFame(sol::object const& areaObj);              // Gets Fame
+    void   addFame(sol::object const& areaObj, uint16 fame); // Adds Fame
+    void   setFame(sol::object const& areaObj, uint16 fame); // Sets Fame
+    uint8  getFameLevel(sol::object const& areaObj);         // Gets Fame Level for specified nation
 
-    int32 getRank(lua_State*);       // Get Current Rank
-    int32 setRank(lua_State*);       // Set Rank
-    int32 getRankPoints(lua_State*); // Get Current Rank points
-    int32 addRankPoints(lua_State*); // Add rank points to existing rank point total
-    int32 setRankPoints(lua_State*); // Set Current Rank points
+    uint8  getRank();                        // Get Rank for current active nation
+    uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
+    void   setRank(uint8 rank);              // Set Rank
+    uint32 getRankPoints();                  // Get Current Rank points
+    void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total
+    void   setRankPoints(uint32 rankpoints); // Set Current Rank points
 
-    int32 addQuest(lua_State*);          // Add Quest to Entity Quest Log
-    int32 delQuest(lua_State*);          // Remove quest from quest log (should be used for debugging only)
-    int32 getQuestStatus(lua_State*);    // Get Quest Status
-    int32 hasCompletedQuest(lua_State*); // Checks if quest has been completed
-    int32 completeQuest(lua_State*);     // Set a quest status to complete
+    void  addQuest(uint8 questLogID, uint16 questID);          // Add Quest to Entity Quest Log
+    void  delQuest(uint8 questLogID, uint16 questID);          // Remove quest from quest log (should be used for debugging only)
+    uint8 getQuestStatus(uint8 questLogID, uint16 questID);    // Get Quest Status
+    bool  hasCompletedQuest(uint8 questLogID, uint16 questID); // Checks if quest has been completed
+    void  completeQuest(uint8 questLogID, uint16 questID);     // Set a quest status to complete
 
-    int32 addMission(lua_State*);          // Add Mission
-    int32 delMission(lua_State*);          // Delete Mission from Mission Log
-    int32 getCurrentMission(lua_State*);   // Gets the current mission
-    int32 hasCompletedMission(lua_State*); // Checks if mission has been completed
-    int32 completeMission(lua_State*);     // Complete Mission
-    int32 setMissionLogEx(lua_State*);     // Sets mission log extra data to correctly track progress in branching missions.
-    int32 getMissionLogEx(lua_State*);     // Gets mission log extra data.
+    void   addMission(uint8 missionLogID, uint16 missionID);          // Add Mission
+    void   delMission(uint8 missionLogID, uint16 missionID);          // Delete Mission from Mission Log
+    uint16 getCurrentMission(sol::object const& missionLogObj);       // Gets the current mission
+    bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
+    void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
 
-    int32 setEminenceCompleted(lua_State* L); // Sets the complete flag for a record of eminence
-    int32 getEminenceCompleted(lua_State* L); // Gets the record completed flag
-    int32 setEminenceProgress(lua_State* L);  // Sets progress on a record of eminence
-    int32 getEminenceProgress(lua_State* L);  // gets progress on a record of eminence
+    void   setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission log extra data to correctly track progress in branching missions.
+    uint32 getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj);                  // Gets mission log extra data.
 
-    int32 addAssault(lua_State*);          // Add Mission
-    int32 delAssault(lua_State*);          // Delete Mission from Mission Log
-    int32 getCurrentAssault(lua_State*);   // Gets the current mission
-    int32 hasCompletedAssault(lua_State*); // Checks if mission has been completed
-    int32 completeAssault(lua_State*);     // Complete Mission
+    void setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
+    bool getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
+    bool setEminenceProgress(uint16 recordID, uint32 progress, sol::object const& arg2);          // Sets progress on a record of eminence
+    auto getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
 
-    int32 addKeyItem(lua_State*);    // Add key item to Entity Key Item collection
-    int32 hasKeyItem(lua_State*);    // Checks Entity key item collection to see if Entity has the key item
-    int32 delKeyItem(lua_State*);    // Removes key item from Entity key item collection
-    int32 seenKeyItem(lua_State*);   // If Key Item is viewed, add it to the seen key item collection
-    int32 unseenKeyItem(lua_State*); // Attempt to remove the keyitem from the seen key item collection, only works on logout
+    void  addAssault(uint8 missionID);          // Add Mission
+    void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
+    uint8 getCurrentAssault();                  // Gets the current mission
+    bool  hasCompletedAssault(uint8 missionID); // Checks if mission has been completed
+    void  completeAssault(uint8 missionID);     // Complete Mission
+
+    void addKeyItem(uint16 keyItemID);    // Add key item to Entity Key Item collection
+    bool hasKeyItem(uint16 keyItemID);    // Checks Entity key item collection to see if Entity has the key item
+    void delKeyItem(uint16 keyItemID);    // Removes key item from Entity key item collection
+    bool seenKeyItem(uint16 keyItemID);   // If Key Item is viewed, add it to the seen key item collection
+    void unseenKeyItem(uint16 keyItemID); // Attempt to remove the keyitem from the seen key item collection, only works on logout
 
     // Player Points
-    int32 addExp(lua_State*); // Add to Character Experience
-    int32 delExp(lua_State*); // Subtracts from Character Experience
-    int32 getMerit(lua_State*);
-    int32 getMeritCount(lua_State*); // Gets a players current merit count.
-    int32 setMerits(lua_State*);     // set merits (testing only!)
+    void  addExp(uint32 exp);
+    void  delExp(uint32 exp);
+    int32 getMerit(uint16 merit);
+    uint8 getMeritCount();
+    void  setMerits(uint8 numPoints); // set merits (testing only!)
 
-    int32 getGil(lua_State*); // Gets character's gil amount
-    int32 addGil(lua_State*); // adds gil to character
-    int32 setGil(lua_State*); // sets gil to value
-    int32 delGil(lua_State*); // removes gil from character
+    uint32 getGil();
+    void   addGil(int32 gil);
+    void   setGil(int32 amount);
+    bool   delGil(int32 gil);
 
-    int32 getCurrency(lua_State*); // Get Currency
-    int32 addCurrency(lua_State*); // Add Currency
-    int32 setCurrency(lua_State*); // Set Currency
-    int32 delCurrency(lua_State*); // Delete Currency
+    int32 getCurrency(std::string const& currencyType);
+    void  addCurrency(std::string const& currencyType, int32 amount, sol::object const& maxObj);
+    void  setCurrency(std::string const& currencyType, int32 amount);
+    void  delCurrency(std::string const& currencyType, int32 amount);
 
-    int32 getCP(lua_State*); // Get CP
-    int32 addCP(lua_State*); // Add CP
-    int32 delCP(lua_State*); // Delete CP
+    int32 getCP(); // Conquest points, not to be confused with Capacity Points
+    void  addCP(int32 cp);
+    void  delCP(int32 cp);
 
-    int32 getSeals(lua_State*); // Get Seals (beastman seals, etc)
-    int32 addSeals(lua_State*); // Add Seals
-    int32 delSeals(lua_State*); // Delete Seals
+    int32 getSeals(uint8 sealType);
+    void  addSeals(int32 points, uint8 sealType);
+    void  delSeals(int32 points, uint8 sealType);
 
-    int32 getAssaultPoint(lua_State*); // Get points for an assault area
-    int32 addAssaultPoint(lua_State*); // Add points for an assault area
-    int32 delAssaultPoint(lua_State*); // Delete points for an assault area
+    int32 getAssaultPoint(uint8 region);
+    void  addAssaultPoint(uint8 region, int32 points);
+    void  delAssaultPoint(uint8 region, int32 points);
 
-    int32 addGuildPoints(lua_State*); // add guild points
+    auto addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<uint8, int16>;
 
     // Health and Status
-    int32 getHP(lua_State*);      // Returns Entity Health
-    int32 getHPP(lua_State*);     // Returns Entity Health %
-    int32 getMaxHP(lua_State*);   // Get max hp of entity
-    int32 getBaseHP(lua_State*);  // Returns Entity base Health before modifiers
-    int32 addHP(lua_State*);      // Modify hp of Entity +/-
-    int32 setHP(lua_State*);      // Set hp of Entity to value
-    int32 restoreHP(lua_State*);  // Modify hp of Entity, but check if alive first
-    int32 delHP(lua_State*);      // Subtract hp of Entity
-    int32 takeDamage(lua_State*); // Takes damage from the provided attacker
-    int32 hideHP(lua_State* L);
+    int32 getHP();                     // Returns Entity Health
+    uint8 getHPP();                    // Returns Entity Health %
+    int32 getMaxHP();                  // Get max hp of entity
+    int32 getBaseHP();                 // Returns Entity base Health before modifiers
+    int32 addHP(int32 hpAdd);          // Modify hp of Entity +/-
+    void  setHP(int32 value);          // Set hp of Entity to value
+    int32 restoreHP(int32 restoreAmt); // Modify hp of Entity, but check if alive first
+    void  delHP(int32 delAmt);         // Subtract hp of Entity
+    void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
+                     sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
+    void  hideHP(bool value);
 
-    int32 getMP(lua_State*);     // Gets MP of Entity
-    int32 getMaxMP(lua_State*);  // Get max mp of entity
-    int32 getBaseMP(lua_State*); // Gets base MP before modifiers of Entity
-    int32 addMP(lua_State*);     // Modify mp of Entity +/-
-    int32 setMP(lua_State*);     // Set mp of Entity to value
-    int32 restoreMP(lua_State*); // Modify mp of Entity, but check if alive first
-    int32 delMP(lua_State*);     // Subtract mp of Entity
+    int32 getMP();
+    uint8 getMPP();
+    int32 getMaxMP();
+    int32 getBaseMP();
+    int32 addMP(int32 amount);     // Modify mp of Entity +/-
+    void  setMP(int32 value);      // Set mp of Entity to value
+    int32 restoreMP(int32 amount); // Modify mp of Entity, but check if alive first
+    void  delMP(int32 amount);     // Subtract mp of Entity
 
-    int32 getTP(lua_State*); // Get tp of Entity
-    int32 addTP(lua_State*); // Modify tp of Entity +/-
-    int32 setTP(lua_State*); // Set tp of Entity to value
-    int32 delTP(lua_State*); // Subtract tp of Entity
+    float getTP();
+    void  addTP(int16 amount); // Modify tp of Entity +/-
+    void  setTP(int16 value);  // Set tp of Entity to value
+    void  delTP(int16 amount); // Subtract tp of Entity
 
-    int32 updateHealth(lua_State* L);
+    void updateHealth();
 
     // Skills and Abilities
-    int32 capSkill(lua_State*);     // Caps the given skill id for the job you're on (GM COMMAND)
-    int32 capAllSkills(lua_State*); // Caps All skills, GM command
+    void capSkill(uint8 skill); // Caps the given skill id for the job you're on (GM COMMAND)
+    void capAllSkills();        // Caps All skills, GM command
 
-    int32 getSkillLevel(lua_State*);     // Get Current Skill Level
-    int32 setSkillLevel(lua_State*);     // Set Current Skill Level
-    int32 getMaxSkillLevel(lua_State*);  // Get Skill Cap for skill and rank
-    int32 getSkillRank(lua_State*);      // Get your current skill craft Rank
-    int32 setSkillRank(lua_State*);      // Set new skill craft rank
-    int32 getCharSkillLevel(lua_State*); // Get char skill level
+    uint16 getSkillLevel(uint16 skillId);                             // Get Current Skill Level
+    void   setSkillLevel(uint8 SkillID, uint16 SkillAmount);          // Set Current Skill Level
+    uint16 getMaxSkillLevel(uint8 level, uint8 jobId, uint8 skillId); // Get Skill Cap for skill and rank
+    uint8  getSkillRank(uint8 rankID);                                // Get your current skill craft Rank
+    void   setSkillRank(uint8 skillID, uint8 newrank);                // Set new skill craft rank
+    uint16 getCharSkillLevel(uint8 skillID);                          // Get char skill level
 
-    int32 addLearnedWeaponskill(lua_State*);
-    int32 hasLearnedWeaponskill(lua_State*);
-    int32 delLearnedWeaponskill(lua_State*);
+    void addLearnedWeaponskill(uint8 wsID);
+    bool hasLearnedWeaponskill(uint8 wsID);
+    void delLearnedWeaponskill(uint8 wsID);
 
-    int32 addWeaponSkillPoints(lua_State*); // Adds weapon skill points to an equipped weapon
+    void trySkillUp(uint8 skill, uint8 level);
 
-    int32 addLearnedAbility(lua_State*); // Add spell to Entity spell list
-    int32 hasLearnedAbility(lua_State*); // Check to see if character has item in spell list
-    int32 canLearnAbility(lua_State*);   // Check to see if character can learn spell, 0 if so
-    int32 delLearnedAbility(lua_State*); // Remove spell from Entity spell list
+    bool addWeaponSkillPoints(uint8 slotID, uint16 points); // Adds weapon skill points to an equipped weapon
 
-    int32 addSpell(lua_State*);      // Add spell to Entity spell list
-    int32 hasSpell(lua_State*);      // Check to see if character has item in spell list
-    int32 canLearnSpell(lua_State*); // Check to see if character can learn spell, 0 if so
-    int32 delSpell(lua_State*);      // Remove spell from Entity spell list
+    void   addLearnedAbility(uint16 abilityID); // Add spell to Entity spell list
+    bool   hasLearnedAbility(uint16 abilityID); // Check to see if character has item in spell list
+    uint32 canLearnAbility(uint16 abilityID);   // Check to see if character can learn spell, 0 if so
+    void   delLearnedAbility(uint16 abilityID); // Remove spell from Entity spell list
 
-    int32 recalculateSkillsTable(lua_State*);
-    int32 recalculateAbilitiesTable(lua_State*);
+    void   addSpell(uint16 spellID, sol::object const& arg_silent, sol::object const& arg_save); // Add spell to Entity spell list
+    bool   hasSpell(uint16 spellID);                                                             // Check to see if character has item in spell list
+    uint32 canLearnSpell(uint16 spellID);                                                        // Check to see if character can learn spell, 0 if so
+    void   delSpell(uint16 spellID);                                                             // Remove spell from Entity spell list
+
+    void recalculateSkillsTable();
+    void recalculateAbilitiesTable();
 
     // Parties and Alliances
-    int32 getParty(lua_State* L);
-    int32 getPartyWithTrusts(lua_State* L);
-    int32 getPartySize(lua_State* L); // Get the size of a party in an entity's alliance
-    int32 hasPartyJob(lua_State*);
-    int32 getPartyMember(lua_State* L); // Get a character entity from another entity's party or alliance
-    int32 getPartyLeader(lua_State* L);
-    int32 getLeaderID(lua_State* L); // Get the id of the alliance/party leader *falls back to player id if no party*
-    int32 getPartyLastMemberJoinedTime(lua_State* L);
-    int32 forMembersInRange(lua_State* L);
+    auto   getParty() -> sol::table;
+    auto   getPartyWithTrusts() -> sol::table;
+    uint8  getPartySize(sol::object const& arg0); // Get the size of a party in an entity's alliance
+    bool   hasPartyJob(uint8 job);
+    auto   getPartyMember(uint8 member, uint8 allianceparty) -> std::optional<CLuaBaseEntity>; // Get a character entity from another entity's party or alliance
+    auto   getPartyLeader() -> std::optional<CLuaBaseEntity>;
+    uint32 getLeaderID(); // Get the id of the alliance/party leader *falls back to player id if no party*
+    uint32 getPartyLastMemberJoinedTime();
+    void   forMembersInRange(float range, sol::function function);
 
-    int32 addPartyEffect(lua_State*);    // Adds Effect to all party members
-    int32 hasPartyEffect(lua_State*);    // Has Effect from all party members
-    int32 removePartyEffect(lua_State*); // Removes Effect from all party members
+    void addPartyEffect(sol::variadic_args va); // Adds Effect to all party members
+    bool hasPartyEffect(uint16 effectid);       // Has Effect from all party members
+    void removePartyEffect(uint16 effectid);    // Removes Effect from all party members
 
-    int32 getAlliance(lua_State* L);
-    int32 getAllianceSize(lua_State* L); // Get the size of an entity's alliance
+    auto  getAlliance() -> sol::table;
+    uint8 getAllianceSize(); // Get the size of an entity's alliance
 
-    int32 reloadParty(lua_State* L);
-    int32 disableLevelSync(lua_State* L);
-    int32 isLevelSync(lua_State* L);
+    void reloadParty();
+    void disableLevelSync();
+    bool isLevelSync();
 
-    int32 checkSoloPartyAlliance(lua_State*); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
+    uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance 0=Solo 1=Party 2=Alliance
 
-    int32 checkKillCredit(lua_State*);
+    bool checkKillCredit(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1, sol::object const& arg2);
 
     // Instances
-    int32 getInstance(lua_State* L);
-    int32 setInstance(lua_State* L);
-    int32 createInstance(lua_State* L);
-    int32 instanceEntry(lua_State* L);
-    int32 isInAssault(lua_State*); // If player is in a Instanced Assault Dungeon returns true
+    auto getInstance() -> std::optional<CLuaInstance>;
+    void setInstance(CLuaInstance* PLuaInstance);
+    void createInstance(uint8 instanceID, uint16 zoneID);
+    void instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 response);
+    // int32 isInAssault(lua_Stat*); // If player is in a Instanced Assault Dungeon returns true --- Not Implemented
 
-    int32 getConfrontationEffect(lua_State* L);
-    int32 copyConfrontationEffect(lua_State* L); // copy confrontation effect, param = targetEntity:getShortID()
+    uint16 getConfrontationEffect();
+    uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getShortID()
 
     // Battlefields
-    int32 getBattlefield(lua_State* L);      // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID(lua_State*);      // returns entity->PBattlefield->GetID() or -1 if not available
-    int32 registerBattlefield(lua_State*);   // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
-    int32 battlefieldAtCapacity(lua_State*); // 1 if this battlefield is full
-    int32 enterBattlefield(lua_State*);      // enter a battlefield entity is registered with
-    int32 leaveBattlefield(lua_State*);      // leave battlefield if inside one
-    int32 isInDynamis(lua_State*);           // If player is in Dynamis return true else false
+    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available
+    int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
+    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
+    bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
+    bool  enterBattlefield(sol::object const& area);                                                      // enter a battlefield entity is registered with
+    bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
+    bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
 
     // Battle Utilities
-    int32 isAlive(lua_State* L);
-    int32 isDead(lua_State* L);
-    int32 sendRaise(lua_State*);   // send raise request to char
-    int32 sendReraise(lua_State*); // send raise request to char
-    int32 sendTractor(lua_State*); // send tractor request to char
+    bool isAlive();
+    bool isDead();
+    void sendRaise(uint8 raiseLevel);
+    void sendReraise(uint8 raiseLevel);
+    void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
 
-    int32 countdown(lua_State* L);
-    int32 enableEntities(lua_State* L);
-    int32 independantAnimation(lua_State* L);
+    void countdown(sol::object const& secondsObj,
+                   sol::object const& bar1NameObj, sol::object const& bar1ValObj,
+                   sol::object const& bar2NameObj, sol::object const& bar2ValObj);
+    void enableEntities(std::vector<uint32> data);
+    void independantAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
-    int32 engage(lua_State* L);
-    int32 isEngaged(lua_State* L);
-    int32 disengage(lua_State* L);
-    int32 timer(lua_State* L); // execute lua closure after some time
-    int32 queue(lua_State* L);
-    int32 addRecast(lua_State*);
-    int32 hasRecast(lua_State*);
-    int32 resetRecast(lua_State*);  // Reset one recast ID
-    int32 resetRecasts(lua_State*); // Reset recasts for the caller
+    void engage(uint16 requestedTarget);
+    bool isEngaged();
+    void disengage();
+    void timer(int ms, sol::function func); // execute lua closure after some time
+    void queue(int ms, sol::function func);
+    void addRecast(uint8 recastCont, uint16 recastID, uint32 duration);
+    bool hasRecast(uint8 rType, uint16 recastID, sol::object const& arg2);
+    void resetRecast(uint8 rType, uint16 recastID); // Reset one recast ID
+    void resetRecasts();                            // Reset recasts for the caller
 
-    int32 addListener(lua_State* L);
-    int32 removeListener(lua_State* L);
-    int32 triggerListener(lua_State* L);
+    void addListener(std::string eventName, std::string identifier, sol::function func);
+    void removeListener(std::string identifier);
+    void triggerListener(std::string eventName, sol::variadic_args args);
 
-    int32 getEntity(lua_State* L);
-    int32 getNearbyEntities(lua_State* L);
-    int32 canChangeState(lua_State* L);
+    auto getEntity(uint16 targetID) -> std::optional<CLuaBaseEntity>;
+    bool canChangeState();
 
-    int32 wakeUp(lua_State*); // wakes target if necessary
+    void wakeUp(); // wakes target if necessary
 
-    int32 recalculateStats(lua_State* L);
-    int32 checkImbuedItems(lua_State* L);
+    void recalculateStats();
+    bool checkImbuedItems();
 
-    int32 isDualWielding(lua_State*); // Checks if the battle entity is dual wielding
+    bool isDualWielding(); // Checks if the battle entity is dual wielding
 
     // Enmity
-    int32 getCE(lua_State*);        // gets current CE the mob has towards the player
-    int32 getVE(lua_State*);        // gets current VE the mob has towards the player
-    int32 setCE(lua_State*);        // sets current CE the mob has towards the player
-    int32 setVE(lua_State*);        // sets current VE the mob has towards the player
-    int32 addEnmity(lua_State*);    // Add specified amount of enmity (target, CE, VE)
-    int32 lowerEnmity(lua_State*);  // lower enmity to player for specificed mob
-    int32 updateEnmity(lua_State*); // Adds Enmity to player for specified mob
-    int32 transferEnmity(lua_State*);
-    int32 updateEnmityFromDamage(lua_State*); // Adds Enmity to player for specified mob for the damage specified
-    int32 updateEnmityFromCure(lua_State*);
-    int32 resetEnmity(lua_State*);      // resets enmity to player for specificed mob
-    int32 updateClaim(lua_State*);      // Adds Enmity to player for specified mob and claims
-    int32 hasEnmity(lua_State*);        // Does the player have any enmity at all from any source
-    int32 getNotorietyList(lua_State*); // Returns a table with all of the entities on a chars notoriety list
+    int32 getCE(CLuaBaseEntity const* target);                    // gets current CE the mob has towards the player
+    int32 getVE(CLuaBaseEntity const* target);                    // gets current VE the mob has towards the player
+    void  setCE(CLuaBaseEntity* target, uint16 amount);           // sets current CE the mob has towards the player
+    void  setVE(CLuaBaseEntity* target, uint16 amount);           // sets current VE the mob has towards the player
+    void  addEnmity(CLuaBaseEntity* PEntity, int32 CE, int32 VE); // Add specified amount of enmity (target, CE, VE)
+    void  lowerEnmity(CLuaBaseEntity* PEntity, uint8 percent);    // lower enmity to player for specificed mob
+    void  updateEnmity(CLuaBaseEntity* PEntity);                  // Adds Enmity to player for specified mob
+    void  transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range);
+    void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
+    void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount);
+    void  resetEnmity(CLuaBaseEntity* PEntity);   // resets enmity to player for specificed mob
+    void  updateClaim(sol::object const& entity); // Adds Enmity to player for specified mob and claims
+    bool  hasEnmity();                            // Does the player have any enmity at all from any source
+    auto  getNotorietyList() -> sol::table;       // Returns a table with all of the entities on a chars notoriety list
 
     // Status Effects
-    int32 addStatusEffect(lua_State*);   // Adds status effect to character
-    int32 addStatusEffectEx(lua_State*); // Adds status effect to character
-    int32 getStatusEffect(lua_State*);
-    int32 getStatusEffects(lua_State*);
-    int32 getStatusEffectElement(lua_State*); // returns the element of the status effect
-    int32 canGainStatusEffect(lua_State*);    // Returns true if the effect can be added
-    int32 hasStatusEffect(lua_State*);        // Checks to see if character has specified effect
-    int32 hasStatusEffectByFlag(lua_State*);  // Checks to see if a character has an effect with the specified flag
-    int32 countEffect(lua_State*);            // Gets the number of effects of a specific type on the player
+    bool   addStatusEffect(sol::variadic_args va);
+    bool   addStatusEffectEx(sol::variadic_args va);
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID) -> std::optional<CLuaStatusEffect>;
+    auto   getStatusEffects() -> sol::table;
+    int16  getStatusEffectElement(uint16 statusId);
+    bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj); // Returns true if the effect can be added
+    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID);      // Checks to see if character has specified effect
+    uint16 hasStatusEffectByFlag(uint16 StatusID);                          // Checks to see if a character has an effect with the specified flag
+    uint8  countEffect(uint16 StatusID);                                    // Gets the number of effects of a specific type on the player
 
-    int32 delStatusEffect(lua_State*);        // Removes Status Effect
-    int32 delStatusEffectsByFlag(lua_State*); // Removes Status Effects by Flag
-    int32 delStatusEffectSilent(lua_State*);  // Removes Status Effect, suppresses message
-    int32 eraseStatusEffect(lua_State*);      // Used with "Erase" spell
-    int32 eraseAllStatusEffect(lua_State*);   // Erases all effects and returns number erased
-    int32 dispelStatusEffect(lua_State*);     // Used with "Dispel" spell
-    int32 dispelAllStatusEffect(lua_State*);  // Dispels all effects and returns number erased
-    int32 stealStatusEffect(lua_State*);      // Used in mob skills to steal effects
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubID);                   // Removes Status Effect
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);               // Removes Status Effects by Flag
+    bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();                                                          // Used with "Erase" spell
+    uint8  eraseAllStatusEffect();                                                       // Erases all effects and returns number erased
+    int32  dispelStatusEffect(sol::object const& flagObj);                               // Used with "Dispel" spell
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);                            // Dispels all effects and returns number erased
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj); // Used in mob skills to steal effects
 
-    int32 addMod(lua_State*); // Adds Modifier Value
-    int32 getMod(lua_State*); // Retrieves Modifier Value
-    int32 setMod(lua_State*); // Sets Modifier Value
-    int32 delMod(lua_State*); // Subtracts Modifier Value
+    void  addMod(uint16 type, int16 amount); // Adds Modifier Value
+    int16 getMod(uint16 modID);              // Retrieves Modifier Value
+    void  setMod(uint16 modID, int16 value); // Sets Modifier Value
+    void  delMod(uint16 modID, int16 value); // Subtracts Modifier Value
 
-    int32 addLatent(lua_State*); // Adds a latent effect
-    int32 delLatent(lua_State*); // Removes a latent effect
+    void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Adds a latent effect
+    bool delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue); // Removes a latent effect
 
-    int32 fold(lua_State*);
-    int32 doWildCard(lua_State*);
-    int32 addCorsairRoll(lua_State*); // Adds corsair roll effect
-    int32 hasCorsairEffect(lua_State*);
-    int32 hasBustEffect(lua_State*);  // Checks to see if a character has a specified busted corsair roll
-    int32 numBustEffects(lua_State*); // Gets the number of bust effects on the player
-    int32 healingWaltz(lua_State*);   // Used with "Healing Waltz" ability
-    int32 addBardSong(lua_State*);    // Adds bard song effect
+    void   fold();
+    void   doWildCard(CLuaBaseEntity* PEntity, uint8 total);
+    bool   addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 effectID, uint16 power, uint32 tick, uint32 duration,
+                          sol::object const& arg6, sol::object const& arg7, sol::object const& arg8); // Adds corsair roll effect
+    bool   hasCorsairEffect();
+    bool   hasBustEffect(uint16 id); // Checks to see if a character has a specified busted corsair roll
+    uint8  numBustEffects();         // Gets the number of bust effects on the player
+    uint16 healingWaltz();           // Used with "Healing Waltz" ability
+    bool   addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick,
+                       uint16 duration, uint16 subID, uint16 subPower, uint16 tier); // Adds bard song effect
 
-    int32 charm(lua_State*);   // applies charm on target
-    int32 uncharm(lua_State*); // removes charm on target
+    void charm(CLuaBaseEntity const* target); // applies charm on target
+    void uncharm();                           // removes charm on target
 
-    int32 addBurden(lua_State* L);
-    int32 setStatDebilitation(lua_State* L);
+    uint8 addBurden(uint8 element, uint8 burden);
+    void  setStatDebilitation(uint16 statDebil);
 
     // Damage Calculation
-    int32 getStat(lua_State*); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
-    int32 getACC(lua_State*);  // Get total ACC
-    int32 getEVA(lua_State*);  // Get total EVA
-    int32 getRACC(lua_State*); // Get total r.acc
-    int32 getRATT(lua_State*); // Get total r.attack
-    int32 getILvlMacc(lua_State* L);
-    int32 isSpellAoE(lua_State* L);
+    uint16 getStat(uint16 statId); // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF
+    uint16 getACC();
+    uint16 getEVA();
+    int    getRACC();
+    uint16 getRATT();
+    uint16 getILvlMacc();
+    bool   isSpellAoE(uint16 spellId);
 
-    int32 physicalDmgTaken(lua_State* L);
-    int32 magicDmgTaken(lua_State* L);
-    int32 rangedDmgTaken(lua_State* L);
-    int32 breathDmgTaken(lua_State* L);
-    int32 handleAfflatusMiseryDamage(lua_State* L);
+    int32 physicalDmgTaken(double damage, sol::variadic_args va);
+    int32 magicDmgTaken(double damage, sol::variadic_args va);
+    int32 rangedDmgTaken(double damage, sol::variadic_args va);
+    int32 breathDmgTaken(double damage);
+    void  handleAfflatusMiseryDamage(double damage);
 
-    int32 isWeaponTwoHanded(lua_State*);
-    int32 getMeleeHitDamage(lua_State*); // gets the damage of a single hit vs the specified mob
-    int32 getWeaponDmg(lua_State*);      // gets the current equipped weapons' DMG rating
-    int32 getWeaponDmgRank(lua_State*);  // gets the current equipped weapons' DMG rating for Rank calc
-    int32 getOffhandDmg(lua_State*);     // gets the current equipped offhand's DMG rating (used in WS calcs)
-    int32 getOffhandDmgRank(lua_State*); // gets the current equipped offhand's DMG rating for Rank calc
-    int32 getRangedDmg(lua_State*);      // Get ranged weapon DMG rating
-    int32 getRangedDmgRank(lua_State*);  // Get ranged weapond DMG rating used for calculating rank
-    int32 getAmmoDmg(lua_State*);        // Get ammo DMG rating
+    bool   isWeaponTwoHanded();
+    int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1); // gets the damage of a single hit vs the specified mob
+    uint16 getWeaponDmg();                                                             // gets the current equipped weapons' DMG rating
+    uint16 getWeaponDmgRank();                                                         // gets the current equipped weapons' DMG rating for Rank calc
+    uint16 getOffhandDmg();                                                            // gets the current equipped offhand's DMG rating (used in WS calcs)
+    uint16 getOffhandDmgRank();                                                        // gets the current equipped offhand's DMG rating for Rank calc
+    uint16 getRangedDmg();                                                             // Get ranged weapon DMG rating
+    uint16 getRangedDmgRank();                                                         // Get ranged weapond DMG rating used for calculating rank
+    uint16 getAmmoDmg();                                                               // Get ammo DMG rating
 
-    int32 removeAmmo(lua_State* L);
+    void removeAmmo();
 
-    int32 getWeaponSkillLevel(lua_State*);   // Get Skill for equipped weapon
-    int32 getWeaponDamageType(lua_State*);   // gets the type of weapon equipped
-    int32 getWeaponSkillType(lua_State*);    // gets the type of weapon equipped
-    int32 getWeaponSubSkillType(lua_State*); // gets the subskill of weapon equipped
-    int32 getWSSkillchainProp(lua_State* L); // returns weapon skill's skillchain properties (up to 3)
+    uint8  getWeaponSkillLevel(uint8 slotID);                        // Get Skill for equipped weapon
+    uint16 getWeaponDamageType(uint8 slotID);                        // gets the type of weapon equipped
+    uint8  getWeaponSkillType(uint8 slotID);                         // gets the type of weapon equipped
+    uint8  getWeaponSubSkillType(uint8 slotID);                      // gets the subskill of weapon equipped
+    auto   getWSSkillchainProp() -> std::tuple<uint8, uint8, uint8>; // returns weapon skill's skillchain properties (up to 3)
 
-    int32 takeWeaponskillDamage(lua_State* L);
-    int32 takeSpellDamage(lua_State* L);
+    int32 takeWeaponskillDamage(CLuaBaseEntity* attacker, int32 damage, uint8 atkType, uint8 dmgType, uint8 slot, bool primary,
+                                float tpMultiplier, uint16 bonusTP, float targetTPMultiplier);
+
+    int32 takeSpellDamage(CLuaBaseEntity* caster, CLuaSpell* spell, int32 damage, uint8 atkType, uint8 dmgType);
 
     // Pets and Automations
-    int32 spawnPet(lua_State*);   // Calls Pet
-    int32 despawnPet(lua_State*); // Despawns Pet
+    void spawnPet(sol::object const& arg0); // Calls Pet
+    void despawnPet();                      // Despawns Pet
 
-    int32 spawnTrust(lua_State*);
-    int32 clearTrusts(lua_State*);
-    int32 getTrustID(lua_State*);
-    int32 trustPartyMessage(lua_State*);
-    int32 addSimpleGambit(lua_State*);
-    int32 addFullGambit(lua_State*);
-    int32 setTrustTPSkillSettings(lua_State*);
+    void   spawnTrust(uint16 trustId);
+    void   clearTrusts();
+    uint32 getTrustID();
+    void   trustPartyMessage(uint32 message_id);
+    void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
+    int32  addFullGambit(lua_State*);
+    void   setTrustTPSkillSettings(uint16 trigger, uint16 select);
 
-    int32 isJugPet(lua_State*); // If the entity has a pet, test if it is a jug pet.
-    int32 hasValidJugPetItem(lua_State*);
+    bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
+    bool hasValidJugPetItem();
 
-    int32 hasPet(lua_State*);   // returns true if the player has a pet
-    int32 getPet(lua_State*);   // Creates an LUA reference to a pet entity
-    int32 getPetID(lua_State*); // If the entity has a pet, returns the PetID to identify pet type.
-    int32 getMaster(lua_State*);
-    int32 getPetElement(lua_State*);
+    bool   hasPet();                                  // returns true if the player has a pet
+    auto   getPet() -> std::optional<CLuaBaseEntity>; // Creates an LUA reference to a pet entity
+    uint32 getPetID();                                // If the entity has a pet, returns the PetID to identify pet type.
+    auto   getMaster() -> std::optional<CLuaBaseEntity>;
+    uint8  getPetElement();
 
-    int32 getPetName(lua_State*);
-    int32 setPetName(lua_State*);
+    auto getPetName() -> const char*;
+    void setPetName(uint8 pType, uint16 value, sol::object const& arg2);
 
-    int32 getCharmChance(lua_State*); // Gets the chance the entity has to charm its target.
-    int32 charmPet(lua_State*);       // Charms Pet (Beastmaster ability only)
+    float getCharmChance(CLuaBaseEntity const* target, sol::object const& mods); // Gets the chance the entity has to charm its target.
+    void  charmPet(CLuaBaseEntity const* target);                                // Charms Pet (Beastmaster ability only)
 
-    int32 petAttack(lua_State*); // Despawns Pet
-    int32 petAbility(lua_State*);
-    int32 petRetreat(lua_State*);
-    int32 familiar(lua_State*); // familiar on pet
+    void petAttack(CLuaBaseEntity* PEntity); // Despawns Pet
+    void petAbility(uint16 abilityID);       // Function exists, but is not implemented.  Warning will be displayed.
+    void petRetreat();
+    void familiar();
 
-    int32 addPetMod(lua_State*);
-    int32 setPetMod(lua_State*);
-    int32 delPetMod(lua_State*);
+    void addPetMod(uint16 modID, int16 amount);
+    void setPetMod(uint16 modID, int16 amount);
+    void delPetMod(uint16 modID, int16 amount);
 
-    int32 hasAttachment(lua_State*);
-    int32 getAutomatonName(lua_State*);
-    int32 getAutomatonFrame(lua_State* L);
-    int32 getAutomatonHead(lua_State* L);
-    int32 unlockAttachment(lua_State* L);
-    int32 getActiveManeuvers(lua_State*);
-    int32 removeOldestManeuver(lua_State*);
-    int32 removeAllManeuvers(lua_State*);
-    int32 updateAttachments(lua_State*);
+    bool  hasAttachment(uint16 itemID);
+    auto  getAutomatonName() -> const char*;
+    uint8 getAutomatonFrame();
+    uint8 getAutomatonHead();
+    bool  unlockAttachment(uint16 itemID);
+    uint8 getActiveManeuvers();
+    void  removeOldestManeuver();
+    void  removeAllManeuvers();
+    void  updateAttachments();
 
     // Mob Entity-Specific
-    int32 setMobLevel(lua_State*);
-    int32 getSystem(lua_State*);
-    int32 getFamily(lua_State*);
-    int32 isMobType(lua_State*); // True if mob is of type passed to function
-    int32 isUndead(lua_State*);  // True if mob is undead
-    int32 isNM(lua_State* L);
+    void   setMobLevel(uint8 level);
+    uint8  getSystem();
+    uint16 getFamily();
+    bool   isMobType(uint8 mobType); // True if mob is of type passed to function
+    bool   isUndead();               // True if mob is undead
+    bool   isNM();
 
-    int32 getModelSize(lua_State* L); // Gets model size
-    int32 setMobFlags(lua_State*);    // Used to manipulate the mob's flags for testing.
-    int32 getMobFlags(lua_State*);
+    uint8  getModelSize();
+    void   setMobFlags(uint32 flags, uint32 mobid); // Used to manipulate the mob's flags for testing.
+    uint32 getMobFlags();
 
-    int32 spawn(lua_State* L);
-    int32 isSpawned(lua_State*);
-    int32 getSpawnPos(lua_State*); // Get Mob spawn position (x,y,z)
-    int32 setSpawn(lua_State*);    // Sets spawn point
-    int32 getRespawnTime(lua_State*);
-    int32 setRespawnTime(lua_State*); // set respawn time
+    void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
+    bool   isSpawned();
+    auto   getSpawnPos() -> std::map<std::string, float>;               // Get Mob spawn position (x,y,z)
+    void   setSpawn(float x, float y, float z, sol::object const& rot); // Sets spawn point
+    uint32 getRespawnTime();
+    void   setRespawnTime(uint32 seconds); // set respawn time
 
-    int32 instantiateMob(lua_State* L);
+    void instantiateMob(uint32 groupID);
 
-    int32 hasTrait(lua_State*);
-    int32 hasImmunity(lua_State*); // Check if the mob has immunity for a type of spell (list at mobentity.h)
+    bool hasTrait(uint8 traitID);
+    bool hasImmunity(uint32 immunityID); // Check if the mob has immunity for a type of spell (list at mobentity.h)
 
-    int32 setAggressive(lua_State* L);
-    int32 setTrueDetection(lua_State* L);
-    int32 setUnkillable(lua_State* L);
-    int32 untargetable(lua_State* L);
+    void setAggressive(bool aggressive);
+    void setTrueDetection(bool truedetection);
+    void setUnkillable(bool unkillable);
+    void untargetable(bool untargetable);
 
-    int32 setDelay(lua_State*);  // sets a mobs weapon delay
-    int32 setDamage(lua_State*); // sets a mobs weapon damage
-    int32 hasSpellList(lua_State*);
-    int32 setSpellList(lua_State*);
-    int32 SetAutoAttackEnabled(lua_State*);   // halts/resumes auto attack of entity
-    int32 SetMagicCastingEnabled(lua_State*); // halt/resumes casting magic
-    int32 SetMobAbilityEnabled(lua_State*);   // halt/resumes mob skills
-    int32 SetMobSkillAttack(lua_State*);      // enable/disable using mobskills as regular attacks
+    void setDelay(uint16 delay);   // sets a mobs weapon delay
+    void setDamage(uint16 damage); // sets a mobs weapon damage
+    bool hasSpellList();
+    void setSpellList(uint16 spellList);
+    void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void SetMobSkillAttack(int16 value);     // enable/disable using mobskills as regular attacks
 
-    int32 getMobMod(lua_State*);
-    int32 setMobMod(lua_State*);
-    int32 addMobMod(lua_State*);
-    int32 delMobMod(lua_State*);
+    int16 getMobMod(uint16 mobModID);
+    void  setMobMod(uint16 mobModID, int16 value);
+    void  addMobMod(uint16 mobModID, int16 value);
+    void  delMobMod(uint16 mobModID, int16 value);
 
-    int32 getBattleTime(lua_State*); // Get the time in second of the battle
+    uint32 getBattleTime(); // Get the time in second of the battle
 
-    int32 getBehaviour(lua_State* L);
-    int32 setBehaviour(lua_State* L);
+    uint16 getBehaviour();
+    void   setBehaviour(uint16 behavior);
 
-    int32 getTarget(lua_State*);
-    int32 updateTarget(lua_State*); // Force mob to update target from enmity container (ie after updateEnmity)
-    int32 getEnmityList(lua_State* L);
-    int32 getTrickAttackChar(lua_State*); // true if TA target is available
+    auto getTarget() -> std::optional<CLuaBaseEntity>;
+    void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
+    auto getEnmityList() -> sol::table;
+    auto getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity) -> std::optional<CLuaBaseEntity>; // true if TA target is available
 
-    int32 actionQueueEmpty(lua_State*); // returns whether the action queue is empty or not
+    bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    int32 castSpell(lua_State*);     // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    int32 useJobAbility(lua_State*); // forces a job ability use (players/pets only)
-    int32 useMobAbility(lua_State*); // forces a mob to use a mobability (parameter = skill ID)
-    int32 hasTPMoves(lua_State*);
+    void castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
+    void useMobAbility(sol::variadic_args va);                    // forces a mob to use a mobability (parameter = skill ID)
+    bool hasTPMoves();
 
-    int32 weaknessTrigger(lua_State* L);
-    int32 hasPreventActionEffect(lua_State*);
-    int32 stun(lua_State* L);
+    void weaknessTrigger(uint8 level);
+    bool hasPreventActionEffect();
+    void stun(uint32 milliseconds);
 
-    int32 getPool(lua_State* L); // Returns a mobs pool ID. If entity is not a mob, returns nil.
-    int32 getDropID(lua_State* L);
-    int32 setDropID(lua_State* L);
-    int32 addTreasure(lua_State*);      // Add item to directly to treasure pool
-    int32 getStealItem(lua_State*);     // gets ItemID of droplist steal item from mob
-    int32 getDespoilItem(lua_State*);   // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
-    int32 getDespoilDebuff(lua_State*); // gets the status effect id to apply to the mob on successful despoil
-    int32 itemStolen(lua_State*);       // sets mob's ItemStolen var = true
-    int32 getTHlevel(lua_State*);       // Returns the Monster's current Treasure Hunter Tier
+    uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
+    uint32 getDropID();
+    void   setDropID(uint32 dropID);
+    void   addTreasure(uint16 itemID, sol::object const& arg1, sol::object const& arg2); // Add item to directly to treasure pool
+    uint16 getStealItem();                                                               // gets ItemID of droplist steal item from mob
+    uint16 getDespoilItem();                                                             // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
+    uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
+    bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
+    int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
+    void   addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va);    // Adds a modification to the drop list of this mob, erased on death
+
+    static void Register();
 };
 
 #endif

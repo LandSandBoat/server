@@ -5,11 +5,12 @@
 -----------------------------------
 local ID = require("scripts/zones/San_dOria-Jeuno_Airship/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local vHour = VanadielHour()
     local vMin  = VanadielMinute()
@@ -67,8 +68,10 @@ function onTrigger(player, npc)
     player:messageSpecial( message, math.floor((2.4 * vMinutes) / 60), math.floor( vMinutes / 60 + 0.5))
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

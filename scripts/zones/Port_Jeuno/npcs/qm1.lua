@@ -4,50 +4,50 @@
 -- Finish Quest: Borghertz's Hands (AF Hands, Many job)
 -- !pos -51 8 -4 246
 -----------------------------------
-local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
-require("scripts/globals/shop")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    OldGauntlets = player:hasKeyItem(tpz.ki.OLD_GAUNTLETS)
-    ShadowFlames = player:hasKeyItem(tpz.ki.SHADOW_FLAMES)
-    BorghertzCS = player:getCharVar("BorghertzCS")
+entity.onTrigger = function(player, npc)
+    local hasGauntlets = player:hasKeyItem(tpz.ki.OLD_GAUNTLETS)
+    local hasShadowFlames = player:hasKeyItem(tpz.ki.SHADOW_FLAMES)
+    local borghertzCS = player:getCharVar("BorghertzCS")
 
-    if (OldGauntlets == true and ShadowFlames == false and BorghertzCS == 1) then
+    if hasGauntlets and not hasShadowFlames and borghertzCS == 1 then
         player:startEvent(20)
-    elseif (OldGauntlets == true and ShadowFlames == false and BorghertzCS == 2) then
+    elseif hasGauntlets and not hasShadowFlames and borghertzCS == 2 then
         player:startEvent(49)
-    elseif (OldGauntlets == true and ShadowFlames == true) then
+    elseif hasGauntlets and hasShadowFlames then
         player:startEvent(48)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
-    if (csid == 20 and option == 1) then
+entity.onEventFinish = function(player, csid, option)
+    if csid == 20 and option == 1 then
         player:setCharVar("BorghertzCS", 2)
-    elseif (csid == 48) then
-        NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getCharVar("BorghertzAlreadyActiveWithJob") - 1
-        NumHands = 13960 + player:getCharVar("BorghertzAlreadyActiveWithJob")
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, NumHands)
-        else
-            player:addItem(NumHands)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, NumHands)
+    elseif csid == 48 then
+        local questJob = player:getCharVar("BorghertzAlreadyActiveWithJob")
+        local quest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + questJob - 1
+        local reward = 13960 + questJob
+
+        if
+            npcUtil.completeQuest(player, JEUNO, quest, {
+                item = reward,
+                var = {"BorghertzCS", "BorghertzAlreadyActiveWithJob"},
+            })
+        then
             player:delKeyItem(tpz.ki.OLD_GAUNTLETS)
             player:delKeyItem(tpz.ki.SHADOW_FLAMES)
-            player:setCharVar("BorghertzCS", 0)
-            player:setCharVar("BorghertzAlreadyActiveWithJob", 0)
-            player:addFame(JEUNO, 30)
-            player:completeQuest(JEUNO, NumQuest)
         end
     end
 end
+
+return entity

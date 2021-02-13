@@ -7,19 +7,22 @@ local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEALED_IRON_BOX) then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.ITS_NOT_YOUR_VAULT) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEALED_IRON_BOX) then
         player:addKeyItem(tpz.ki.SEALED_IRON_BOX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEALED_IRON_BOX)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

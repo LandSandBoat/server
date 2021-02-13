@@ -3,15 +3,16 @@
 --  Mob: Zeid (Phase 2)
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
+local ID = require("scripts/zones/Throne_Room/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room/IDs")
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -24,7 +25,7 @@ function onMobSpawn(mob)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local zeid = mob:getID()
     local shadow1 = GetMobByID(zeid + 1)
     local shadow2 = GetMobByID(zeid + 2)
@@ -34,7 +35,9 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     DespawnMob(mob:getID()+1)
     DespawnMob(mob:getID()+2)
 end
+
+return entity

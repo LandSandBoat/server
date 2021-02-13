@@ -9,18 +9,19 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/pathfind")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- speaking to pathing NPCs stops their progress, and they never resume
     -- so let's comment this out
 
     -- player:showText(npc, 7160)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     if (npc:isFollowingPath()) then
 
         -- if vasha reaches the end node, halt and disappear her.
@@ -51,8 +52,10 @@ function onPath(npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

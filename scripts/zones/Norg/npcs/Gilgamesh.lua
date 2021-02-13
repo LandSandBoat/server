@@ -8,8 +8,9 @@ require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_PIRATE_S_COVE and
         player:getCharVar("MissionStatus") == 2) then
@@ -20,8 +21,10 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
-    local ZilartMission = player:getCurrentMission(ZILART);
+entity.onTrigger = function(player, npc)
+    local ZilartMission = player:getCurrentMission(ZILART)
+    local rovMission = player:getCurrentMission(ROV)
+
     if (ZilartMission == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(7)
     elseif (ZilartMission == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
@@ -38,25 +41,27 @@ function onTrigger(player, npc)
         player:startEvent(171)
     elseif (ZilartMission == tpz.mission.id.zilart.THE_CELESTIAL_NEXUS) then
         player:startEvent(173);
-    elseif player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and player:getCharVar('Apoc_Nigh_RewardCS1') == 0 then
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
         player:startEvent(234, 252)
-    elseif player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
+    elseif player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
     elseif (ZilartMission == tpz.mission.id.zilart.AWAKENING) then
         player:startEvent(177)
+    elseif rovMission == tpz.mission.id.rov.THE_PATH_UNTRAVELED then
+        player:startEvent(263)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if (csid == 232 or csid == 234) and option == 99 then
         player:updateEvent(252, 15962, 15963, 15964, 15965)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 99) then
         player:tradeComplete()
         player:setCharVar("MissionStatus", 3)
@@ -81,13 +86,15 @@ function onEventFinish(player, csid, option)
                 item = reward,
                 var = {"ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1"}
             }) then
-                player:completeMission(COP, tpz.mission.id.cop.DAWN)
-                player:addMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)
+                player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)
+                player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)
                 player:setCharVar("PromathiaStatus", 0)
-                player:completeMission(ZILART, tpz.mission.id.cop.AWAKENING)
-                player:addMission(ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
+                player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.cop.AWAKENING)
+                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
                 player:setCharVar("ZilartStatus", 0)
             end
         end
     end
 end
+
+return entity

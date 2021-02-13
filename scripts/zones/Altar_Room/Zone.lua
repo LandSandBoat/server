@@ -9,17 +9,18 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local head = player:getEquipID(tpz.slot.HEAD)
 
     if player:getCharVar("FickblixCS") == 1 then
         cs = 10000
-    elseif player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
+    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
         player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time() then
         cs = 46
     elseif player:getCharVar("moral") == 4 and head == 15202 then -- Yagudo Headgear
@@ -33,22 +34,22 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if csid == 10000 then
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then
         player:setCharVar("moral", 1)
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
     elseif csid == 46 and option == 1 then
         player:setCharVar("moraldecline", getConquestTally())
     elseif csid == 47 then
@@ -62,3 +63,5 @@ function onEventFinish(player, csid, option)
         })
     end
 end
+
+return zone_object

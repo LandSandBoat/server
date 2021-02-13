@@ -4,8 +4,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
     local npc = npc:getID()
     local FIRST = {5367, 5371, 5383, 5384}
@@ -22,8 +23,10 @@ function onTrigger(player, npc)
     GetNPCByID(npc, instance):setStatus(tpz.status.DISAPPEAR)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(entity, eventid, result, door)
+entity.onEventFinish = function(entity, eventid, result, door)
 end
+
+return entity

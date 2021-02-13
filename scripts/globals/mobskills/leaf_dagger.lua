@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Leaf Dagger
 --
 --  Description: Deals piercing damage to a single target. Additional effect: Poison
@@ -6,17 +6,18 @@
 --  Utsusemi/Blink absorb: 2 shadows
 --  Range: Melee?
 --  Notes: On higher level Madragoras (Korrigans for example) the poision is 5hp/tick for about 5-6 ticks, damaging a total of 25-30 HP.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 2
     local accmod = 1
@@ -35,3 +36,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
     return dmg
 end
+
+return mobskill_object

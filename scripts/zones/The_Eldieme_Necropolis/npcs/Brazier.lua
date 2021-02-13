@@ -11,12 +11,13 @@ local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4 then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER) == QUEST_ACCEPTED and player:getCharVar("saveMySisterFireLantern") < 4 then
         player:setCharVar("saveMySisterLanternID", npc:getID())
         player:startEvent(44)
     else
@@ -24,10 +25,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 44 and option == 0 then
         local lanternOrder = player:getCharVar("saveMySisterFireLantern")
         local offset = player:getCharVar("saveMySisterLanternID") - ID.npc.BRAZIER_OFFSET
@@ -67,3 +68,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

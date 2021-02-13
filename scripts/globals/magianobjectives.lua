@@ -1,13 +1,15 @@
----------------------------
+-----------------------------------
 -- Magian Trial Objectives
----------------------------
+-----------------------------------
+require("scripts/globals/common")
+-----------------------------------
 
 -- This is a table of anon function for Magian Trial objectives/conditions.
 -- Keyed by trial ID, if they return true, the trials progress is incremented and saved.
 
 tpz = tpz or {}
 tpz.magian = tpz.magian or {}
-local checks = {} 
+local checks = {}
 
 checks.checkMobKill = function(reqs, params)
     return reqs.mobid and params.mob and reqs.mobid[params.mob:getID()] and 1 or 0

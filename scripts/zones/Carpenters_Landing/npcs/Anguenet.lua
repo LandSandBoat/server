@@ -6,10 +6,12 @@
 -----------------------------------
 local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/npc_util")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if 
-        player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
+entity.onTrade = function(player, npc, trade)
+    if
+        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
         player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 1 and
         npcUtil.tradeHas(trade, 1683)
     then
@@ -17,10 +19,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local teaGinseng = player:getCharVar('TEA_WITH_A_TONBERRY_PROG')
 
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED then
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED then
         if teaGinseng == 0 then
             player:startEvent(27, 0, 1683)
         elseif teaGinseng == 1 then
@@ -33,10 +35,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 27 then
         player:setCharVar('TEA_WITH_A_TONBERRY_PROG', 1)
     elseif csid == 29 then
@@ -46,3 +48,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar('TEA_WITH_A_TONBERRY_PROG', 2)
     end
 end
+
+return entity

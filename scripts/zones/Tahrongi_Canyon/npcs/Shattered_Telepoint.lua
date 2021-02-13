@@ -8,19 +8,20 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- RoV Missions
     if  player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank() >= 3 then
         player:startEvent(41)
     elseif player:getCharVar("LionIICipher") == 1 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
-            player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
             player:setCharVar("LionIICipher", 0)
         end
     elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
@@ -36,7 +37,7 @@ function onTrigger(player, npc)
         else
             player:startEvent(913)
         end
-    elseif player:getCurrentMission(COP) > tpz.mission.id.cop.THE_MOTHERCRYSTALS or player:hasCompletedMission(COP, tpz.mission.id.cop.THE_LAST_VERSE) or (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") > 1) then
+    elseif player:getCurrentMission(COP) > tpz.mission.id.cop.THE_MOTHERCRYSTALS or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) or (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") > 1) then
         player:startEvent(913) -- normal cs (third promyvion and each entrance after having that promyvion visited or mission completed)
 
     -- Default Message
@@ -46,19 +47,19 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- RoV Missions
     if csid == 41 then
-        player:completeMission(ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
-        player:addMission(ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_PATH_UNTRAVELED)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.AT_THE_HEAVENS_DOOR)
     elseif csid == 42 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
             npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_UMBER)
-            player:completeMission(ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
-            player:addMission(ROV, tpz.mission.id.rov.FATES_CALL)
+            player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+            player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
         else
             player:setCharVar("LionIICipher", 1)
         end
@@ -72,3 +73,5 @@ function onEventFinish(player, csid, option)
         player:setPos(280.066, -80.635, -67.096, 191, 14) -- To Hall of Transference {R}
     end
 end
+
+return entity

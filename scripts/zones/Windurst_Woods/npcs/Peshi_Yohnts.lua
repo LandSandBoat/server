@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.BONECRAFT)
 
@@ -33,7 +34,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.BONECRAFT)
     local testItem = getTestItem(player, npc, tpz.skill.BONECRAFT)
     local guildMember = isGuildMember(player, 2)
@@ -68,10 +69,10 @@ function onTrigger(player, npc)
 end
 
 -- 10016  10017  710  711  712  713  714  715  764
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local guildMember = isGuildMember(player, 2)
 
     if (csid == 10016 and option == 2) then
@@ -94,3 +95,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Frost Breath
 -- Deals ice damage to enemies within a fan-shaped area originating from the caster. Additional effect: Paralysis
 -- Spell cost: 136 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 42.75 seconds
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Conserve MP
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local multi = 2.08
     local params = {}
     params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
@@ -58,3 +59,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

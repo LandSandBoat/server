@@ -8,12 +8,13 @@ require("scripts/globals/npc_util")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local Eati = player:getQuestStatus(CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
+entity.onTrigger = function(player, npc)
+    local Eati = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
     if Eati == QUEST_AVAILABLE and player:hasKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then
@@ -31,14 +32,16 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 107 then
-        player:addQuest(CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
+        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
         npcUtil.giveKeyItem(player, tpz.ki.EVIL_WARDING_SEAL)
     elseif csid == 109 then
         npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET, {item = 4687})
     end
 end
+
+return entity

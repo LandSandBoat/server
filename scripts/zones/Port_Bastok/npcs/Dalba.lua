@@ -7,59 +7,60 @@
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
-    if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.FETICHISM)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.FETICHISM)) then
         BastokMissions = BastokMissions - 2 -- Fetichism.
     end
-    if (player:hasCompletedMission(BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
         BastokMissions = BastokMissions - 4 -- To the Forsaken Mines.
     end
 
     -- Bastok Quests.
     local BastokQuests = 0xFFFFFFFE
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)) then
         BastokQuests = BastokQuests - 2         -- Beauty and the Galka.
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)) then
         BastokQuests = BastokQuests - 4         -- Welcome to Bastok.
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GUEST_OF_HAUTEUR)) then
         BastokQuests = BastokQuests - 8         -- Guest of Hauteur.
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.CID_S_SECRET)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CID_S_SECRET)) then
         BastokQuests = BastokQuests - 16        -- Cid's Secret.
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_USUAL)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_USUAL)) then
         BastokQuests = BastokQuests - 32        -- The Usual.
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE)) then
         BastokQuests = BastokQuests - 64        -- Love and Ice(pt.1).
         BastokQuests = BastokQuests - 128     -- Love and Ice(pt.2).
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_TEST_OF_TRUE_LOVE)) then
         BastokQuests = BastokQuests - 256       -- A Test of True Love(pt.1).
         BastokQuests = BastokQuests - 512     -- A Test of True Love(pt.2).
         BastokQuests = BastokQuests - 1024     -- A Test of True Love(pt.3).
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVERS_IN_THE_DUSK)) then
         BastokQuests = BastokQuests - 2048      -- Lovers in the Dusk
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)) then
         BastokQuests = BastokQuests - 4096      -- Ghosts of the Past(pt.1).
         BastokQuests = BastokQuests - 8192     -- Ghosts of the Past(pt.2).
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)) then
         BastokQuests = BastokQuests - 16384     -- The First Meeting(pt.1).
         BastokQuests = BastokQuests - 32768     -- The First Meeting(pt.2).
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)) then
         BastokQuests = BastokQuests - 65536     -- Ayame and Kaede(pt.1).
         BastokQuests = BastokQuests - 131072     -- Ayame and Kaede(pt.2).
         BastokQuests = BastokQuests - 262144     -- Ayame and Kaede(pt.3).
@@ -67,18 +68,18 @@ function onTrigger(player, npc)
         BastokQuests = BastokQuests - 1048576     -- Ayame and Kaede(pt.5).
     end
 -- *Need to determine the correct csid/appropriate options for this cutscene
-    --if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)) then
+    --if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)) then
     --    BastokQuests = BastokQuests - 2097152   -- Trial by Earth.
     --end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WALLS_OF_YOUR_MIND)) then
         BastokQuests = BastokQuests - 4194304   -- The Walls of Your Mind(pt.1).
         BastokQuests = BastokQuests - 8388608     -- The Walls of Your Mind(pt.2).
         BastokQuests = BastokQuests - 16777216     -- The Walls of Your Mind(pt.3).
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.FADED_PROMISES)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FADED_PROMISES)) then
         BastokQuests = BastokQuests - 33554432  -- Faded Promises.
     end
-    if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.OUT_OF_THE_DEPTHS)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_THE_DEPTHS)) then
         BastokQuests = BastokQuests - 67108864  -- Out of the Depths(pt.1).
 
 -- *Need to determine the appropriate options for this cutscene
@@ -87,20 +88,20 @@ function onTrigger(player, npc)
 
     -- Other Quests.
     local OtherQuests = 0xFFFFFFFE
-    if (player:hasCompletedQuest(WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)) then
         OtherQuests = OtherQuests - 2 -- The Puppet Master(pt.1).
         OtherQuests = OtherQuests - 4 -- The Puppet Master(pt.2).
     end
-    if (player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS)) then
         OtherQuests = OtherQuests - 8  -- 20 in Pirate Years(pt.1).
         OtherQuests = OtherQuests - 16    -- 20 in Pirate Years(pt.2).
     end
-    if (player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)) then
+    if (player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX)) then
         OtherQuests = OtherQuests - 32 -- I'll Take the Big Box.
     end
 
 -- *Need the correct csids
-    -- if (player:hasCompletedQuest(BASTOK, tpz.quest.id.bastok.CHASING_DREAMS)) then
+    -- if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.CHASING_DREAMS)) then
     --     OtherQuests = OtherQuests - 64  -- Chasing Dreams(pt.1).
     --     OtherQuests = OtherQuests - 128 -- Chasing Dreams(pt.2).
     -- end
@@ -112,20 +113,20 @@ function onTrigger(player, npc)
 
     -- Promathia Missions.
     local PromathiaMissions = 0xFFFFFFFE
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)) then
         PromathiaMissions = PromathiaMissions - 2 -- The Call of the Wyrmking.
     end
-    if (player:hasCompletedMission(COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR)) then
         PromathiaMissions = PromathiaMissions - 4 -- The Enduring Tumult of War.
     end
 
     -- Add-on Scenarios.
     local AddonScenarios = 0xFFFFFFFE
-    if (player:hasCompletedMission(AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)) then
+    if (player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)) then
         AddonScenarios = AddonScenarios - 2 -- Drenched! It Began with a Raindrop.
     end
 -- *Need the correct csid
---    if (player:hasCompletedMission(AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)) then
+--    if (player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)) then
 --        AddonScenarios = AddonScenarios - 4 -- Hasten! In a Jam in Jeuno?
 --    end
 
@@ -143,7 +144,7 @@ function onTrigger(player, npc)
     player:startEvent(260, BastokMissions, BastokQuests, OtherQuests, PromathiaMissions, AddonScenarios, 0xFFFFFFFE, 10, gil)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 
     if (player:delGil(10) == false) then
         player:setLocalVar("Dalba_PlayCutscene", 2)  -- Cancel the cutscene.
@@ -153,7 +154,7 @@ function onEventUpdate(player, csid, option)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (player:getLocalVar("Dalba_PlayCutscene") < 2) then
         if (   option ==   1) then        -- Fetichism.
@@ -243,3 +244,5 @@ function onEventFinish(player, csid, option)
 
     player:setLocalVar("Dalba_PlayCutscene", 0)
 end
+
+return entity

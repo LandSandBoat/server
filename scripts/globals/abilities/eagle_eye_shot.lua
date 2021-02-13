@@ -10,8 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     local ranged = player:getStorageItem(0, 0, tpz.slot.RANGED)
     local ammo = player:getStorageItem(0, 0, tpz.slot.AMMO)
 
@@ -27,9 +28,9 @@ function onAbilityCheck(player, target, ability)
     return tpz.msg.basic.NO_RANGED_WEAPON, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     if (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP) then
-        action:animation(target:getID(), action:animation(target:getID()) + 1)
+        action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
     local params = {}
     params.numHits = 1
@@ -55,3 +56,5 @@ function onUseAbility(player, target, ability, action)
 
     return damage
 end
+
+return ability_object

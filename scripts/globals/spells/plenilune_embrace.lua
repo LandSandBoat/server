@@ -1,18 +1,19 @@
------------------------------------------
+-----------------------------------
 -- Spell: Plenilune Embrace
 -- Restores target party member's HP and enhances attack and magic attack..
 -- Shamelessly stolen from http://members.shaw.ca/pizza_steve/cure/Cure_Calculator.html
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local duration = 90
     local attBoost = 1
     local magAttBoost = 1
@@ -66,3 +67,5 @@ function onSpellCast(caster, target, spell)
     caster:updateEnmityFromCure(target, final)
     return final
 end
+
+return spell_object

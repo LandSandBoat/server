@@ -63,7 +63,7 @@ void CBaseEntity::Spawn()
     updatemask |= UPDATE_HP;
     ResetLocalVars();
     PAI->Reset();
-    PAI->EventHandler.triggerListener("SPAWN", this);
+    PAI->EventHandler.triggerListener("SPAWN", CLuaBaseEntity(this));
 }
 
 void CBaseEntity::FadeOut()

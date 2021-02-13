@@ -10,12 +10,13 @@ require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local ACSP = player:getQuestStatus(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+entity.onTrigger = function(player, npc)
+    local ACSP = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
     local SOA_Mission = player:getCurrentMission(SOA)
 
     if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
@@ -45,19 +46,19 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 2550) then
         -- Starting Quest: 'A Certain Substitute Patrolman'
-        player:addQuest(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
         player:addKeyItem(tpz.ki.WESTERN_ADOULIN_PATROL_ROUTE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WESTERN_ADOULIN_PATROL_ROUTE)
         player:setCharVar("ACSP_NPCs_Visited", 1)
     elseif (csid == 2552) then
         -- Finishing Quest: 'A Certain Substitute Patrolman'
-        player:completeQuest(ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
         player:addExp(1000 * EXP_RATE)
         player:addCurrency('bayld', 500 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 500 * BAYLD_RATE)
@@ -66,3 +67,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ACSP_NPCs_Visited", 0)
     end
 end
+
+return entity

@@ -11,16 +11,17 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) >= 1 and trade:hasItemQty(847, 1) == true and trade:hasItemQty(4368, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2) then
+entity.onTrade = function(player, npc, trade)
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) >= 1 and trade:hasItemQty(847, 1) == true and trade:hasItemQty(4368, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 2) then
         player:startEvent(440, 250, 847, 4368) -- -- Quest Finish
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local teacherstatus = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+    local teacherstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
 
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(752, 0, tpz.ki.STAR_SEEKER)
@@ -32,7 +33,7 @@ function onTrigger(player, npc)
         end
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.A_TESTING_TIME) then
         local MissionStatus = player:getCharVar("MissionStatus")
-        local alreadyCompleted = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
+        local alreadyCompleted = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
         if (MissionStatus == 0) then
             if (alreadyCompleted == false) then
                 player:startEvent(182) -- First start at tahrongi
@@ -99,7 +100,7 @@ function onTrigger(player, npc)
         end
     elseif (teacherstatus == QUEST_ACCEPTED) then
         player:startEvent(439, 0, 847, 4368) -- Quest Reminder
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         player:startEvent(444) -- During Making the GRADE
     else   --  Will run through these iffame is not high enough for other quests
         rand = math.random(1, 2)
@@ -112,21 +113,21 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 438 and option == 0) then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
     elseif (csid == 438 and option == 1) then
         player:setCharVar("QuestTeachersPet_prog", 0)
     elseif (csid == 440) then
         player:addGil(GIL_RATE*250)
         player:setCharVar("QuestTeachersPet_prog", 0)
         player:tradeComplete(trade)
-        if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
+        if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
             player:addFame(WINDURST, 75)
         else
             player:addFame(WINDURST, 8)
@@ -146,7 +147,7 @@ function onEventFinish(player, csid, option)
         player:setCharVar("testingTime_start_day", 0)
         player:setCharVar("testingTime_start_hour", 0)
         player:setCharVar("testingTime_start_time", 0)
-        player:delMission(WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
+        player:delMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)
     elseif (csid == 200 or csid == 201) then -- first time win
         finishMissionTimeline(player, 1, csid, option)
 
@@ -171,3 +172,5 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 3, csid, option)
     end
 end
+
+return entity

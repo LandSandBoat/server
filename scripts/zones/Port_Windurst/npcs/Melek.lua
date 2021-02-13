@@ -8,11 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     pNation = player:getNation()
 
@@ -63,13 +64,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 48) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST)
         player:setCharVar("MissionStatus", 2)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_BASTOK)
     elseif (csid == 53) then
@@ -78,13 +79,13 @@ function onEventFinish(player, csid, option)
         player:setCharVar("MissionStatus", 4)  --> Gideus next
         player:delKeyItem(tpz.ki.SWORD_OFFERING) -- remove sword offering
     elseif (csid == 55) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
         player:setCharVar("MissionStatus", 7) -- to Sandy now
     elseif (csid == 61) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST2)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY_WINDURST2)
         player:setCharVar("MissionStatus", 7)
     elseif (csid == 66) then
-        player:addMission(BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
+        player:addMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY)
         player:addKeyItem(tpz.ki.KINDRED_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KINDRED_REPORT)
         player:setCharVar("MissionStatus", 10)  -- return to Bastok
@@ -92,3 +93,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

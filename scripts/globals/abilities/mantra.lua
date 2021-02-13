@@ -7,12 +7,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     player:delStatusEffect(tpz.effect.MAX_HP_BOOST)
 
     local merits = player:getMerit(tpz.merit.MANTRA)
@@ -21,3 +22,5 @@ function onUseAbility(player, target, ability)
 
     return tpz.effect.MANTRA
 end
+
+return ability_object

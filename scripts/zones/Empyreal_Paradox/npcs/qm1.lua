@@ -6,13 +6,14 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player,npc)
+entity.onTrigger = function(player,npc)
     if
-        player:hasCompletedQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) and not
+        player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) and not
         (
             player:hasItem(15962) or
             player:hasItem(15963) or
@@ -26,18 +27,20 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player,csid,option,extras)
+entity.onEventUpdate = function(player,csid,option,extras)
 end
 
-function onEventFinish(player,csid,option)
+entity.onEventFinish = function(player,csid,option)
     if csid == 5 and option == 1 then
-        player:delMission(COP, tpz.mission.id.cop.THE_LAST_VERSE)
-        player:delMission(ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
-        player:addMission(COP, tpz.mission.id.cop.DAWN)
-        player:addMission(ZILART, tpz.mission.id.zilart.AWAKENING)
+        player:delMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)
+        player:delMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)
+        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.AWAKENING)
         player:setCharVar("ZilartStatus", 3)
         player:setCharVar("PromathiaStatus", 7)
-        player:delQuest(JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:delQuest(JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)
+        player:delQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:delQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH)
     end
 end
+
+return entity

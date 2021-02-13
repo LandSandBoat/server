@@ -8,11 +8,12 @@ require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(tpz.ki.POUCH_OF_WEIGHTED_STONES) == false) then
         player:addKeyItem(tpz.ki.POUCH_OF_WEIGHTED_STONES)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.POUCH_OF_WEIGHTED_STONES)
@@ -21,10 +22,12 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("CSID2: %u", csid)
     -- printf("RESULT2: %u", option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

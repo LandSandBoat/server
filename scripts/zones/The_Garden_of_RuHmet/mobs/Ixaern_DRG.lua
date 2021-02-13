@@ -4,8 +4,9 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Spawn the pets if they are despawned
     -- TODO: summon animations?
     local mobId = mob:getID()
@@ -26,7 +27,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- despawn pets
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 3 do
@@ -36,7 +37,7 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
     -- despawn pets
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 3 do
@@ -49,3 +50,5 @@ function onMobDespawn( mob )
     local groups = ID.mob.AWAERN_DRG_GROUPS
     SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
 end
+
+return entity

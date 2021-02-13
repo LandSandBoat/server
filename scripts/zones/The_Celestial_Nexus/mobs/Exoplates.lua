@@ -7,52 +7,52 @@ require("scripts/globals/titles")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:addMod(tpz.mod.REGAIN, 50)
 end
 
-function onMobSpawn(mob)
-    mob:AnimationSub(0)
+entity.onMobSpawn = function(mob)
+    mob:setAnimationSub(0)
     mob:SetAutoAttackEnabled(false)
     mob:setUnkillable(true)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local shifts = mob:getLocalVar("shifts")
     local shiftTime = mob:getLocalVar("shiftTime")
 
-    if (mob:AnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
+    if (mob:getAnimationSub() == 0 and shifts == 0 and mob:getHPP() <= 67) then
         mob:useMobAbility(993)
         mob:setLocalVar("shifts", shifts+1)
         mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
-    elseif (mob:AnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
+    elseif (mob:getAnimationSub() == 1 and shifts <= 1 and mob:getHPP() <= 33) then
         mob:useMobAbility(997)
         mob:setLocalVar("shifts", shifts+1)
         mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
-    elseif (mob:AnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
+    elseif (mob:getAnimationSub() == 2 and shifts <= 2 and mob:getHPP() <= 2) then
         mob:useMobAbility(1001)
         mob:setLocalVar("shifts", shifts+1)
         mob:setLocalVar("shiftTime", mob:getBattleTime()+5)
-    elseif (mob:getHPP() <= 67 and mob:AnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
-        mob:AnimationSub(1)
-    elseif (mob:getHPP() <= 33 and mob:AnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
-        mob:AnimationSub(2)
+    elseif (mob:getHPP() <= 67 and mob:getAnimationSub() == 0 and mob:getBattleTime() >= shiftTime ) then
+        mob:setAnimationSub(1)
+    elseif (mob:getHPP() <= 33 and mob:getAnimationSub() == 1 and mob:getBattleTime() >= shiftTime) then
+        mob:setAnimationSub(2)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     local eald_narche = GetMobByID(mob:getID() - 1)
     eald_narche:delStatusEffect(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
     eald_narche:delStatusEffect(tpz.effect.ARROW_SHIELD, 0, 1, 0, 0)
     eald_narche:delStatusEffect(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
-function onEventUpdate(player, csid, option)
-    -- printf("updateCSID: %u", csid)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, target)
+entity.onEventFinish = function(player, csid, option, target)
     -- printf("finishCSID: %u", csid)
 
     if (csid == 32004) then
@@ -68,3 +68,5 @@ function onEventFinish(player, csid, option, target)
     end
 
 end
+
+return entity

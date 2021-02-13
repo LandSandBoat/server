@@ -324,6 +324,9 @@ namespace zoneutils
                     memcpy(&PNpc->look, Sql_GetData(SqlHandle, 14), 20);
 
                     GetZone(ZoneID)->InsertNPC(PNpc);
+
+                    // Cache NPC Lua
+                    luautils::OnEntityLoad(PNpc);
                 }
             }
         }
@@ -511,6 +514,9 @@ namespace zoneutils
                     mobutils::InitializeMob(PMob, GetZone(ZoneID));
 
                     GetZone(ZoneID)->InsertMOB(PMob);
+
+                    // Cache Mob Lua
+                    luautils::OnEntityLoad(PMob);
                 }
             }
         }

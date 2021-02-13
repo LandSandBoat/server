@@ -7,6 +7,8 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
+-----------------------------------
+local ability_object = {}
 
 local despoilDebuffs =
 {
@@ -19,7 +21,7 @@ local despoilDebuffs =
     tpz.effect.SLOW
 }
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if player:getFreeSlotsCount() == 0 then
         return tpz.msg.basic.FULL_INVENTORY, 0
     end
@@ -33,7 +35,7 @@ function onAbilityCheck(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(player, target, ability, action)
+ability_object.onUseAbility = function(player, target, ability, action)
     local level = player:getMainLvl() -- Can only reach THF77 as main job
     local despoilMod = player:getMod(tpz.mod.DESPOIL)
     local despoilChance = 50 + despoilMod * 2 + level - target:getMainLvl() -- Same math as Steal
@@ -56,7 +58,7 @@ function onUseAbility(player, target, ability, action)
         local power = processDebuff(player, target, ability, debuff) -- Also sets ability message
         target:addStatusEffect(debuff, power, 0, 90)
     else
-        action:animation(target:getID(), 182)
+        action:setAnimation(target:getID(), 182)
         ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed
     end
 
@@ -95,3 +97,5 @@ function processDebuff(player, target, ability, debuff)
 
     return power
 end
+
+return ability_object

@@ -10,12 +10,13 @@ require("scripts/globals/npc_util")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local theRescue = player:getQuestStatus(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_RESCUE)
+entity.onTrigger = function(player, npc)
+    local theRescue = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE)
     local fame = math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) -- Selbina Fame
 
     if theRescue == QUEST_AVAILABLE and fame >= 1 then
@@ -31,13 +32,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 80 and option == 70 then
-        player:addQuest(OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_RESCUE)
+        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE)
     elseif csid == 81 and npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.THE_RESCUE, {fame_area = SELBINA, ki = tpz.ki.MAP_OF_THE_RANGUEMONT_PASS, title = tpz.title.HONORARY_CITIZEN_OF_SELBINA, gil = 3000}) then
         player:delKeyItem(tpz.ki.TRADERS_SACK)
     end
 end
+
+return entity

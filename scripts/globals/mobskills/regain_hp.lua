@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Dynamis Statue (Regain HP)
 --
 -- Description: Regain HP for party members within area of effect.
 --
----------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local hp = target:getMaxHP() - target:getHP()
 
     skill:setMsg(tpz.msg.basic.AOE_REGAIN_HP)
@@ -21,3 +22,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return hp
 end
+
+return mobskill_object

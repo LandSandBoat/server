@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- ID: 16791
 -- Item: Death Scythe +1
 -- Additional Effect: Drains HP
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if (math.random(0, 99) >= chance) then
@@ -32,3 +33,5 @@ function onAdditionalEffect(player, target, damage)
         return tpz.subEffect.HP_DRAIN, tpz.msg.basic.ADD_EFFECT_HP_DRAIN, power
     end
 end
+
+return item_object

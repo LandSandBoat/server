@@ -1,23 +1,26 @@
-----------------------------------
+-----------------------------------
 -- Area: Port Jeuno
 --  NPC: Digaga
 -- Type: Item Deliverer
 -- !pos -52.865 7.999 1.134 246
---
+-----------------------------------
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.ITEM_DELIVERY_DIALOG)
     player:openSendBox()
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

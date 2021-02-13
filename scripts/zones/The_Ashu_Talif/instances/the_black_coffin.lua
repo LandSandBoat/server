@@ -1,58 +1,49 @@
 -----------------------------------
---
 -- TOAU-15: The Black Coffin
---
 -----------------------------------
 require("scripts/globals/instance")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
+local instance_object = {}
 
-function afterInstanceRegister(player)
+instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, tpz.ki.EPHRAMADIAN_GOLD_COIN)
     player:delKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
-function onInstanceCreated(instance)
+instance_object.onInstanceCreated = function(instance)
     SpawnMob(ID.mob.GESSHO, instance)
-    for i, v in pairs(ID.mob[1]) do
-        SpawnMob(v, instance)
+    for i, mob in pairs(ID.mob[1]) do
+        SpawnMob(mob, instance)
     end
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-function onInstanceFailure(instance)
-
+instance_object.onInstanceFailure = function(instance)
     local chars = instance:getChars()
 
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
+    for i, char in pairs(chars) do
+        char:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
+        char:startEvent(102)
     end
 end
 
-function onInstanceProgressUpdate(instance, progress)
-
-    if (progress == 5) then
-        for i, v in pairs(ID.mob[2]) do
-            SpawnMob(v, instance)
+instance_object.onInstanceProgressUpdate = function(instance, progress)
+    if progress == 5 then
+        for i, mob in pairs(ID.mob[2]) do
+            SpawnMob(mob, instance)
         end
-    elseif (progress >= 10 and instance:completed() == false) then
-        local v = GetMobByID(ID.mob.GESSHO, instance)
+    elseif progress >= 10 and instance:completed() == false then
+        local ally = GetMobByID(ID.mob.GESSHO, instance)
 
-        if(v:isAlive()) then
-            v:setLocalVar("ready", 2)
-        end
-
-        local chars = instance:getChars()
-
-        for i, v in pairs(chars) do
-            v:startEvent(102)
+        if ally:isAlive() then
+            ally:setLocalVar("ready", 2)
         end
 
         instance:complete()
@@ -60,22 +51,29 @@ function onInstanceProgressUpdate(instance, progress)
 
 end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
+    local players = instance:getChars()
 
-    local chars = instance:getChars()
+    DespawnMob(ID.mob.GESSHO, instance)
+    for i, mob in pairs(ID.mob[2]) do
+        DespawnMob(mob, instance)
+    end
 
-    for i, v in pairs(chars) do
-        if (v:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and v:getCharVar("AhtUrganStatus") == 1) then
-            v:setCharVar("AhtUrganStatus", 2)
-            v:startEvent(101)
-        else
-            v:startEvent(102)
+    for i, player in pairs(players) do
+        if player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:getCharVar("AhtUrganStatus") == 1 then
+            player:setCharVar("AhtUrganStatus", 2)
         end
+        player:startEvent(102)
     end
 end
 
-function onEventUpdate(player, csid, option)
+instance_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+instance_object.onEventFinish = function(player, csid, option)
+    if csid == 102 then
+        player:setPos(0, 0, 0, 0, 54)
+    end
 end
+
+return instance_object

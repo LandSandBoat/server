@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Carpenters_Landing/IDs")
 mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     tpz.mix.jobSpecial.config(mob, {
         delay = 180,
         specials =
@@ -28,7 +29,7 @@ function onMobSpawn(mob)
     })
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- spawn Assassins when enmity is gained against Executor
     if mob:getLocalVar("spawnedAssassins") == 0 and mob:getCE(target) > 0 then
         mob:setLocalVar("spawnedAssassins", 1)
@@ -38,9 +39,11 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     mob:messageText(mob, ID.text.CRYPTONBERRY_EXECUTOR_DIE)
     if player:getCurrentMission(COP) == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("Cryptonberry_Executor_KILL") < 2 then
         player:setCharVar("Cryptonberry_Executor_KILL", 1)
     end
 end
+
+return entity

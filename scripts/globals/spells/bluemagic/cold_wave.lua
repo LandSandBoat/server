@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Cold Wave
 -- Deals ice damage that lowers Agility and gradually reduces HP of enemies within range
 -- Spell cost: 37 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Auto Refresh
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.FROST
     local dINT = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
     local params = {}
@@ -64,3 +65,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

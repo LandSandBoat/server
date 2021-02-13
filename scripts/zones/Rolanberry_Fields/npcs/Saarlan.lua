@@ -10,6 +10,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local wares =
 {
@@ -53,10 +54,10 @@ local wares =
     [0x00210002] = {item = 10786, lp = 6000, title = tpz.title.LEGENDARY_LEGIONNAIRE}, -- Mediator's Ring
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("LegionStatus") == 0 then
         player:startEvent(8004)
     elseif player:getCharVar("LegionStatus") == 1 then
@@ -73,10 +74,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 8004 then
         player:setCharVar("LegionStatus", 1)
     elseif csid == 8005 then
@@ -122,3 +123,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

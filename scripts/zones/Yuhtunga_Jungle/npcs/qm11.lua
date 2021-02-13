@@ -8,11 +8,12 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCurrentMission(ROV) == tpz.mission.id.rov.IMPURITY then
         player:startEvent(212)
     elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_LOST_AVATAR and player:getCharVar("RhapsodiesStatus") == 1 then
@@ -23,17 +24,18 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 212 then
-        player:completeMission(ROV, tpz.mission.id.rov.IMPURITY)
-        player:addMission(ROV, tpz.mission.id.rov.THE_LOST_AVATAR)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.IMPURITY)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_LOST_AVATAR)
     elseif csid == 213 then
         player:setCharVar("RhapsodiesStatus", 0)
         npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_AZURE)
-        player:completeMission(ROV, tpz.mission.id.rov.THE_LOST_AVATAR)
-        player:addMission(ROV, tpz.mission.id.rov.VOLTO_OSCURO)
+        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_LOST_AVATAR)
+        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.VOLTO_OSCURO)
     end
 end
+return entity

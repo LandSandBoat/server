@@ -1,24 +1,23 @@
----------------------------------------------
+-----------------------------------
 --  Decayed Filament
 --  Zedi, while in Animation form 2 (Bars)
 --  Blinkable 1-2 hit, addtional effect poison on hit.
----------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() ~= 2) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if (mob:getAnimationSub() ~= 2) then
         return 1
     end
 
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 2
     local accmod = 1
@@ -33,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
     return dmg
 
 end
+
+return mobskill_object

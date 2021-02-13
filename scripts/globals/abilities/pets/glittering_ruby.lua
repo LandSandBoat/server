@@ -1,17 +1,18 @@
----------------------------------------------
+-----------------------------------
 -- Glittering Ruby
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill)
+ability_object.onPetAbility = function(target, pet, skill)
     --randomly give str/dex/vit/agi/int/mnd/chr (+12)
     local effect = math.random()
     local effectid = tpz.effect.STR_BOOST
@@ -35,3 +36,5 @@ function onPetAbility(target, pet, skill)
     skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
     return effectid
 end
+
+return ability_object

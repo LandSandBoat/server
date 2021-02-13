@@ -4,21 +4,24 @@
 -----------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     moogleTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if not moogleTrigger(player, npc) then
         player:startEvent(61)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     moogleEventUpdate(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     moogleEventFinish(player, csid, option)
 end
+
+return entity

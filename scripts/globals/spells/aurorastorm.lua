@@ -1,16 +1,17 @@
---------------------------------------
+-----------------------------------
 -- Spell: Aurorastorm
 --     Changes the weather around target party member to "auroras."
---------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
---------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     target:delStatusEffectSilent(tpz.effect.FIRESTORM)
     target:delStatusEffectSilent(tpz.effect.SANDSTORM)
     target:delStatusEffectSilent(tpz.effect.RAINSTORM)
@@ -32,3 +33,5 @@ function onSpellCast(caster, target, spell)
     target:addStatusEffect(tpz.effect.AURORASTORM, power, 0, duration)
     return tpz.effect.AURORASTORM
 end
+
+return spell_object

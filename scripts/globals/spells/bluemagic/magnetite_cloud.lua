@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Magnetite Cloud
 -- Deals earth damage to enemies within a fan-shaped area originating from the caster. Additional effect: Weight
 -- Spell cost: 86 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 29.25 seconds
 -- Magic Bursts on: Scission, Gravitation, and Darkness
 -- Combos: Magic Defense Bonus
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.BREATH
     params.damageType = tpz.damageType.EARTH
@@ -53,3 +54,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

@@ -11,11 +11,12 @@ require("scripts/globals/settings")
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- Windurst 8-2
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getCharVar("MissionStatus") == 1) then
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- Curses, Foiled A_Golem!?
     if (csid == 14) then
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

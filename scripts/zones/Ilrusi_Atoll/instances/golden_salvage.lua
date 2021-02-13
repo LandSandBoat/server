@@ -1,21 +1,20 @@
 -----------------------------------
---
 -- Assault: Golden Salvage
---
+-- TODO: random the chest locations
 -----------------------------------
-local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 require("scripts/globals/instance")
+local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
--- Todo random the chest locations
+local instance_object = {}
 
-function afterInstanceRegister(player)
+instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     player:messageSpecial(ID.text.ASSAULT_41_START, 41)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
-function onInstanceCreated(instance)
+instance_object.onInstanceCreated = function(instance)
     local figureheadChest = math.random(ID.npc.ILRUSI_CURSED_CHEST_OFFSET, ID.npc.ILRUSI_CURSED_CHEST_OFFSET + 11)
 
     for i, v in pairs(ID.mob[1]) do
@@ -32,11 +31,11 @@ function onInstanceCreated(instance)
 
 end
 
-function onInstanceTimeUpdate(instance, elapsed)
-    updateInstanceTime(instance, elapsed, ID.text)
+instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-function onInstanceFailure(instance)
+instance_object.onInstanceFailure = function(instance)
 
     local chars = instance:getChars()
 
@@ -46,10 +45,10 @@ function onInstanceFailure(instance)
     end
 end
 
-function onInstanceProgressUpdate(instance, progress)
+instance_object.onInstanceProgressUpdate = function(instance, progress)
 end
 
-function onInstanceComplete(instance)
+instance_object.onInstanceComplete = function(instance)
 
     local chars = instance:getChars()
 
@@ -62,8 +61,10 @@ function onInstanceComplete(instance)
 
 end
 
-function onEventUpdate(player, csid, option)
+instance_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+instance_object.onEventFinish = function(player, csid, option)
 end
+
+return instance_object

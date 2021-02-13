@@ -9,10 +9,11 @@ local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local currentMission = player:getCurrentMission(WINDURST)
-    local nextMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
+    local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
 
     if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getCharVar("MissionStatus") == 3 then
         if trade:hasItemQty(16447, 3) and trade:getItemCount() == 3 then -- Trade Rusty Dagger
@@ -22,11 +23,11 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
-    local nextMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
-    local starsMissionFinished = player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
+    local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
+    local starsMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
     if
         currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
@@ -55,7 +56,7 @@ function onTrigger(player, npc)
         player:startEvent(194) -- her reaction after 5-1.
     elseif
         player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and
-        (missionStatus >= 3 or player:hasCompletedMission(WINDURST, tpz.mission.id.windurst.MOON_READING))
+        (missionStatus >= 3 or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING))
     then
         player:startEvent(387)
     else
@@ -63,10 +64,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 121 then
         player:addKeyItem(tpz.ki.CHARM_OF_LIGHT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHARM_OF_LIGHT)
@@ -79,3 +80,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("WindurstSecured", 0)
     end
 end
+
+return entity

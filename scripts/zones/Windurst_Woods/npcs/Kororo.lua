@@ -10,15 +10,16 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local C2000 = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
-    local AGreetingCardian = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
-    local LPB = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
+    local C2000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
+    local AGreetingCardian = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+    local LPB = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
     local AGCcs = player:getCharVar("AGreetingCardian_Event")
     local AGCtime = player:getCharVar("AGreetingCardian_timer")
 
@@ -26,8 +27,8 @@ function onTrigger(player, npc)
     if C2000 == QUEST_COMPLETED and AGreetingCardian == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 3 then
         player:startEvent(296) -- A Greeting Cardian quest start
     elseif AGreetingCardian == QUEST_ACCEPTED and AGCcs == 3 then
-        if player:needToZone() or tonumber(os.date("%j")) == AGCtime then
-            player:startEvent(277) -- standard dialog if JP midnight has not passed
+        if player:needToZone() or os.time() < AGCtime then
+            player:startEvent(277) -- standard dialog if 1 minute has not passed
         else
             player:startEvent(298) -- A Greeting Cardian part two
         end
@@ -44,15 +45,15 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- A Greeting Cardian
     if csid == 296 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
         player:setCharVar("AGreetingCardian_Event", 2)
-        player:setCharVar("AGreetingCardian_timer", os.date("%j"))
+        player:setCharVar("AGreetingCardian_timer", os.time() + 60)
         player:needToZone(true) -- wait one day and zone after next step
     elseif csid == 298 then
         player:setCharVar("AGreetingCardian_Event", 4)
@@ -63,10 +64,12 @@ function onEventFinish(player, csid, option)
             player:addItem(13330)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13330) -- Tourmaline Earring
             player:addFame(WINDURST, 30)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B
             player:setCharVar("AGreetingCardian_timer", 0)
             player:setCharVar("AGreetingCardian_Event", 0) -- finish cleanup of A Greeting Cardian variables
         end
     end
 end
+
+return entity

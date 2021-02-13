@@ -1,22 +1,23 @@
------------------------------------------
+-----------------------------------
 -- Trust: Shantotto
------------------------------------------
+-----------------------------------
 require("scripts/globals/gambits")
 require("scripts/globals/magic")
 require("scripts/globals/trust")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
 local message_page_offset = 0
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return tpz.trust.canCast(caster, spell, tpz.magic.spell.SHANTOTTO_II)
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     return tpz.trust.spawn(caster, spell)
 end
 
-function onMobSpawn(mob)
+spell_object.onMobSpawn = function(mob)
     tpz.trust.teamworkMessage(mob, message_page_offset, {
         [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_1,
         [tpz.magic.spell.STAR_SIBYL] = tpz.trust.message_offset.TEAMWORK_2,
@@ -28,24 +29,6 @@ function onMobSpawn(mob)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.NONE, 60)
 
-    mob:addFullGambit({
-        ['predicates'] =
-        {
-            {
-                ['target'] = ai.t.TARGET, ['condition'] = ai.c.MB_AVAILABLE, ['argument'] = 0,
-            }
-        },
-        ['actions'] =
-        {
-            {
-                ['reaction'] = ai.r.MA, ['select'] = ai.s.HIGHEST, ['argument'] = tpz.magic.spellFamily.NONE,
-            },
-            {
-                ['reaction'] = ai.r.MSG, ['select'] = ai.s.SPECIFIC, ['argument'] = tpz.trust.message_offset.SPECIAL_MOVE_1, -- Ohohoho!
-            },
-        },
-    })
-
     local power = mob:getMainLvl() / 10
     mob:addMod(tpz.mod.MATT, power)
     mob:addMod(tpz.mod.MACC, power)
@@ -53,10 +36,12 @@ function onMobSpawn(mob)
     mob:SetAutoAttackEnabled(false)
 end
 
-function onMobDespawn(mob)
+spell_object.onMobDespawn = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
 end
 
-function onMobDeath(mob)
+spell_object.onMobDeath = function(mob)
     tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
 end
+
+return spell_object

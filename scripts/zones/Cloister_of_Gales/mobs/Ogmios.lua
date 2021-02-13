@@ -6,8 +6,9 @@
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 
     player:setCharVar("BCNM_Killed", 1)
     record = 300
@@ -18,7 +19,7 @@ function onMobDeath(mob, player, isKiller)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate CSID: %u", csid)
     -- printf("onUpdate RESULT: %u", option)
 
@@ -28,7 +29,7 @@ function onEventUpdate(player, csid, option)
 
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish CSID: %u", csid)
     -- printf("onFinish RESULT: %u", option)
 
@@ -37,3 +38,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

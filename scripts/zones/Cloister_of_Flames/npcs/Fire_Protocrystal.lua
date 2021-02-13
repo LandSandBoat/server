@@ -4,16 +4,17 @@
 -- Involved in Quests: Trial by Fire, Trial Size Trial by Fire
 -- !pos -721 0 -598 207
 -----------------------------------
+local entity = {}
 
 require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 local ID = require("scripts/zones/Cloister_of_Flames/IDs")
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     TradeBCNM(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(ASA) == tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Scarlet") == 1) then
         player:startEvent(2)
@@ -25,11 +26,11 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option, extras)
+entity.onEventUpdate = function(player, csid, option, extras)
     EventUpdateBCNM(player, csid, option, extras)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     --printf("onFinish CSID: %u", csid)
     --printf("onFinish RESULT: %u", option)
 
@@ -43,3 +44,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

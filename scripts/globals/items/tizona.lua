@@ -1,11 +1,12 @@
------------------------------------------
+-----------------------------------
 -- ID: 19006
 -- Item: Tizona
 -- Additional effect: MP Gain from damage dealt
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
+local item_object = {}
 
 local chance =
 {
@@ -21,7 +22,7 @@ local chance =
     [20688] = 30  -- 119 III
 }
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     if math.random(100) <= chance[player:getEquipID(tpz.slot.MAIN)] then
         local drain = math.floor(damage * math.random(10, 20) / 100)
         player:addMP(drain)
@@ -31,3 +32,5 @@ function onAdditionalEffect(player, target, damage)
 
     return 0, 0, 0
 end
+
+return item_object

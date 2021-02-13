@@ -6,20 +6,24 @@
 -----------------------------------
 local ID = require("scripts/zones/Valkurm_Dunes/IDs")
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if (not GetMobByID(ID.mob.MARCHELUTE):isSpawned() and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED and not player:hasItem(1096)) then
+entity.onTrigger = function(player, npc)
+    if (not GetMobByID(ID.mob.MARCHELUTE):isSpawned() and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND) == QUEST_ACCEPTED and not player:hasItem(1096)) then
         SpawnMob(ID.mob.MARCHELUTE):updateClaim(player)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

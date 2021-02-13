@@ -1,20 +1,22 @@
----------------------------------------------
+-----------------------------------
 --  Hysteric Barrage
 --  Description: Delivers a fivefold attack. Damage varies with TP.
 --  Type: Physical only when weapon is broken
----------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
-    if mob:AnimationSub() == 1 then
+-----------------------------------
+local mobskill_object = {}
+
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if mob:getAnimationSub() == 1 then
         return 0
     else
         return 1
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 5
     local accmod = 1
     local dmgmod = .7
@@ -23,3 +25,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.H2H)
     return dmg
 end
+
+return mobskill_object

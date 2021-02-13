@@ -1,9 +1,11 @@
 -----------------------------------
---
---     tpz.effect.DIVINE_CARESS
---
+-- tpz.effect.DIVINE_CARESS
 -----------------------------------
-function onEffectGain(target, effect)
+require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
+
+effect_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.SLEEPRES, 98)
     target:addMod(tpz.mod.POISONRES, 98)
     target:addMod(tpz.mod.PARALYZERES, 98)
@@ -21,10 +23,10 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.LULLABYRES, 98)
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.SLEEPRES, 98)
     target:delMod(tpz.mod.POISONRES, 98)
     target:delMod(tpz.mod.PARALYZERES, 98)
@@ -41,3 +43,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.AMNESIARES, 98)
     target:delMod(tpz.mod.LULLABYRES, 98)
 end
+
+return effect_object

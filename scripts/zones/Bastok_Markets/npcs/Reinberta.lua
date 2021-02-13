@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/crafting")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
     local newRank = tradeTestItem(player, npc, trade, tpz.skill.GOLDSMITHING)
 
@@ -33,7 +34,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local craftSkill = player:getSkillLevel(tpz.skill.GOLDSMITHING)
     local testItem = getTestItem(player, npc, tpz.skill.GOLDSMITHING)
     local guildMember = isGuildMember(player, 6)
@@ -66,10 +67,10 @@ function onTrigger(player, npc)
 end
 
 -- 300  301  402
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local guildMember = isGuildMember(player, 6)
 
     if (csid == 300 and option == 2) then
@@ -92,3 +93,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

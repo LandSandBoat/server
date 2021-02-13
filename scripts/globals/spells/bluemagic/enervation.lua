@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Enervation
 -- Lowers the defense and magical defense of enemies within range
 -- Spell cost: 48 MP
@@ -11,18 +11,19 @@
 -- Recast Time: 60 seconds
 -- Magic Bursts on: Compression, Gravitation, and Darkness
 -- Combos: Counter
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffectOne = tpz.effect.DEFENSE_DOWN
     local typeEffectTwo = tpz.effect.MAGIC_DEF_DOWN
     local params = {}
@@ -53,3 +54,5 @@ function onSpellCast(caster, target, spell)
 
     return returnEffect
 end
+
+return spell_object

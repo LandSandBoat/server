@@ -7,20 +7,23 @@
 require("scripts/globals/status")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     if VanadielDayOfTheWeek() == tpz.day.WATERSDAY then
         mob:setMod(tpz.mod.REGEN, 6, 3, 0)
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.HP_DRAIN)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

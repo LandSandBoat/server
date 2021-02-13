@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Reprobation
 --
 -- Description: Dispels all buffs from targets in area of effect, including food.
@@ -6,18 +6,19 @@
 -- Utsusemi/Blink absorb: Dispels shadows
 -- Range: Area of Effect
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target,mob,skill)
+mobskill_object.onMobSkillCheck = function(target,mob,skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dispel =  target:dispelAllStatusEffect(bit.bor(tpz.effectFlag.DISPELABLE, tpz.effectFlag.FOOD))
     local msg = tpz.msg.basic.SKILL_NO_EFFECT
 
@@ -29,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dispel
 end
+
+return mobskill_object

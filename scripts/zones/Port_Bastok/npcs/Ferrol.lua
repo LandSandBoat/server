@@ -9,18 +9,19 @@ require("scripts/globals/quests")
 require("scripts/globals/teleports")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (trade:hasItemQty(1547, 1) and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
+    if (trade:hasItemQty(1547, 1) and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
         player:startEvent(298, 0, 1547, 1, 20)
     end
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    local TrialSizeEarth = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+    local TrialSizeEarth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 
     if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeEarth == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then -- Requires player to be Summoner at least lvl 20
         player:startEvent(297, 0, 1547, 1, 20)     --mini tuning fork, zone, level
@@ -29,10 +30,8 @@ function onTrigger(player, npc)
 
         if (EarthFork) then
             player:startEvent(251) -- Dialogue given to remind player to be prepared
-        elseif (EarthFork == false and tonumber(os.date("%j")) ~= player:getCharVar("TrialSizeEarth_date")) then
-            player:startEvent(301, 0, 1547, 1, 20) -- Need another mini tuning fork
         else
-            player:startEvent(303) -- Standard dialog when you loose, and you don't wait 1 real day
+            player:startEvent(301, 0, 1547, 1, 20) -- Need another mini tuning fork
         end
     elseif (TrialSizeEarth == QUEST_COMPLETED) then
         player:startEvent(300) -- Defeated Avatar
@@ -42,17 +41,16 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 297 and option == 1) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1547) --Mini tuning fork
         else
-            player:setCharVar("TrialSizeEarth_date", 0)
-            player:addQuest(BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
             player:addItem(1547)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1547)
         end
@@ -68,3 +66,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

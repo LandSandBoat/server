@@ -7,14 +7,15 @@
 require("scripts/globals/titles")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
 -- Cache COP missions for later reference
 local copMissions = tpz.mission.id.cop
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
 
@@ -40,22 +41,24 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if csid == 113 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, copMissions.DISTANT_BELIEFS)
-        player:addMission(COP, copMissions.AN_ETERNAL_MELODY)
+        player:completeMission(tpz.mission.log_id.COP, copMissions.DISTANT_BELIEFS)
+        player:addMission(tpz.mission.log_id.COP, copMissions.AN_ETERNAL_MELODY)
     elseif csid == 109 then
         player:setCharVar("PromathiaStatus", 3)
     elseif csid == 110 then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, copMissions.THE_SAVAGE)
-        player:addMission(COP, copMissions.THE_SECRETS_OF_WORSHIP)
+        player:completeMission(tpz.mission.log_id.COP, copMissions.THE_SAVAGE)
+        player:addMission(tpz.mission.log_id.COP, copMissions.THE_SECRETS_OF_WORSHIP)
         player:addTitle(tpz.title.NAGMOLADAS_UNDERLING)
     end
 
 end
+
+return entity

@@ -9,8 +9,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
@@ -35,14 +36,14 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.BROKEN_EGGS)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 138 or csid == 141) and option == 2 then -- player gives up
         player:confirmTrade()
@@ -57,3 +58,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

@@ -7,8 +7,9 @@
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- Trade Chamnaet Ice
     if (trade:hasItemQty(1780, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
@@ -16,7 +17,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local ZephyrFanCD = player:getCharVar("[ENM]ZephyrFan")
 
@@ -36,10 +37,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 13) then
         player:addKeyItem(tpz.ki.ZEPHYR_FAN)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ZEPHYR_FAN)
@@ -54,3 +55,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

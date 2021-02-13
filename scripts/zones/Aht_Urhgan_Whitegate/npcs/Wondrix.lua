@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/settings")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
+local entity = {}
 
 local events =
 {
@@ -24,18 +25,19 @@ local events =
     OTHER_BAD_TRADE         = 992
 }
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
     tpz.mystery.onTrade(player, npc, trade, events)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.mystery.onTrigger(player, npc, events)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     tpz.mystery.onEventUpdate(player, csid, option, events)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.mystery.onEventFinish(player, csid, options, events)
 end
+return entity

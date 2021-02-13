@@ -1,18 +1,21 @@
 -----------------------------------
---
---
---
+-- tpz.effect.DRACHEN_ROLL
 -----------------------------------
-
 require("scripts/globals/status")
+-----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addPetMod(tpz.mod.ACC, effect:getPower())
+    target:addPetMod(tpz.mod.RACC, effect:getPower())
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delPetMod(tpz.mod.ACC, effect:getPower())
+    target:delPetMod(tpz.mod.RACC, effect:getPower())
 end
+
+return effect_object

@@ -1,17 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 17492
 -- Item: Shiva's Claws
 -- Additional Effect: Paralyze
 -- Author: Gweivyth
-----------------------------------
-
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
-
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if (VanadielDayElement() == tpz.day.ICEDAY) then
@@ -25,3 +24,5 @@ function onAdditionalEffect(player, target, damage)
 
     return 0, 0, 0
 end
+
+return item_object

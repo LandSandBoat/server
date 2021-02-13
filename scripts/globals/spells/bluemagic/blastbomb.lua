@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Blastbomb
 -- Deals fire damage to enemies within area of effect. Additional effect: "Bind"
 -- Spell cost: 36 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 15 seconds
 -- Magic Bursts on: Liquefaction, Fusion, Light
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attackType = tpz.attackType.MAGICAL
     params.damageType = tpz.damageType.FIRE
@@ -53,3 +54,5 @@ function onSpellCast(caster, target, spell)
 
     return damage
 end
+
+return spell_object

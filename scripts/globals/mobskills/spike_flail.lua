@@ -1,15 +1,14 @@
----------------------------------------------------
+-----------------------------------
 -- Spike Flail
 -- Deals extreme damage in a threefold attack to targets behind the user.
----------------------------------------------------
-
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------------
-
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES) then
         return 1
     elseif mob:hasStatusEffect(tpz.effect.SUPER_BUFF) then
@@ -20,13 +19,13 @@ function onMobSkillCheck(target, mob, skill)
         return 1
     elseif target:isInfront(mob, 128) then
         return 1
-    elseif mob:AnimationSub() == 1 then
+    elseif mob:getAnimationSub() == 1 then
         return 1
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 2
     local dmgmod = math.random(5, 7)
@@ -35,3 +34,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

@@ -12,13 +12,14 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    AyameAndKaede = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
+    AyameAndKaede = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
 
     if (AyameAndKaede == QUEST_ACCEPTED) then
 
@@ -35,13 +36,13 @@ function onTrigger(player, npc)
         else
             player:startEvent(27)
         end
-    elseif (AyameAndKaede == QUEST_COMPLETED and player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) == QUEST_AVAILABLE) then
+    elseif (AyameAndKaede == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS) == QUEST_AVAILABLE) then
         player:startEvent(247)
     elseif (player:getCharVar("twentyInPirateYearsCS") == 2) then
         player:startEvent(262)
     elseif (player:getCharVar("twentyInPirateYearsCS") == 4) then
         player:startEvent(263)
-    elseif (player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 0) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 0) then
         player:startEvent(264)
     elseif (player:getCharVar("illTakeTheBigBoxCS") == 1) then
         player:startEvent(265)
@@ -52,10 +53,10 @@ function onTrigger(player, npc)
 end
 
 -- 27  240  242  243  245  246  247  262  263  264  265  261
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 242) then
         player:setCharVar("AyameAndKaede_Event", 2)
@@ -68,7 +69,7 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.UNLOCK_NINJA)
         player:setCharVar("AyameAndKaede_Event", 0)
         player:addFame(BASTOK, 30)
-        player:completeQuest(BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
+        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE)
     elseif (csid == 262) then
         player:setCharVar("twentyInPirateYearsCS", 3)
     elseif (csid == 264) then
@@ -76,3 +77,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

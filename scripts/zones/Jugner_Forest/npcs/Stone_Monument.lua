@@ -6,12 +6,13 @@
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(900)
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if trade:getItemCount() == 1 and trade:hasItemQty(571, 1) then
         player:tradeComplete()
         player:addItem(570)
@@ -20,8 +21,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

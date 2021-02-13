@@ -8,17 +8,18 @@ require("scripts/globals/conquest")
 require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -5, -24, 18, 5, -20, 27)
     zone:registerRegion(2, 104, -42, -88, 113, -38, -77)
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -38,7 +39,7 @@ function onZoneIn(player, prevZone)
     return cs
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 
     switch (region:GetRegionID()): caseof
     {
@@ -57,22 +58,22 @@ function onRegionEnter(player, region)
 
 end
 
-function onRegionLeave(player, region)
+zone_object.onRegionLeave = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 101) then
-        player:completeMission(COP, tpz.mission.id.cop.AN_INVITATION_WEST)
-        player:addMission(COP, tpz.mission.id.cop.THE_LOST_CITY)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_INVITATION_WEST)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LOST_CITY)
         player:setCharVar("PromathiaStatus", 0)
     elseif (csid == 105) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
-        player:addMission(COP, tpz.mission.id.cop.ANCIENT_VOWS)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ANCIENT_VOWS)
     elseif (csid == 107) then
         player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 112) then
@@ -82,3 +83,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return zone_object

@@ -5,13 +5,14 @@
 local ID = require("scripts/zones/Sealions_Den/IDs")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.EXP_BONUS, -100)
     mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- find mob offset for given battlefield instance
     local inst = mob:getBattlefield():getArea()
     local instOffset = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (inst - 1))
@@ -30,7 +31,7 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 11 then
         local battlefield = player:getBattlefield()
         local inst = battlefield:getArea()
@@ -51,3 +52,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

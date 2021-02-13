@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Feather Barrier
 -- Enhances evasion
 -- Spell cost: 29 MP
@@ -10,20 +10,21 @@
 -- Casting Time: 2 seconds
 -- Recast Time: 120 seconds
 -- Duration: 30 Seconds
---
+-----------------------------------
 -- Combos: Resist Gravity
------------------------------------------
+-----------------------------------
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = tpz.effect.EVASION_BOOST
     local power = 10
     local duration = 30
@@ -44,3 +45,5 @@ function onSpellCast(caster, target, spell)
 
     return typeEffect
 end
+
+return spell_object

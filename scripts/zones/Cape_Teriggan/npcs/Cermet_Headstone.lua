@@ -9,13 +9,15 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
     -- WANDERING SOULS
     if (trade:hasItemQty(949, 1) and trade:getItemCount() == 1) then
-        if (not player:hasCompletedQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS) and (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.WIND_FRAGMENT))) then
-            player:addQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
+        if (not player:hasCompletedQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS) and (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) or player:hasKeyItem(tpz.ki.WIND_FRAGMENT))) then
+            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
             player:startEvent(202, 949)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
@@ -23,7 +25,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     -- HEADSTONE PILGRIMAGE
     if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
@@ -47,25 +49,25 @@ function onTrigger(player, npc)
             ) then
                 player:messageSpecial(ID.text.FOUND_ALL_FRAGS, tpz.ki.WIND_FRAGMENT)
                 player:addTitle(tpz.title.BEARER_OF_THE_EIGHT_PRAYERS)
-                player:completeMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
-                player:addMission(ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
+                player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)
+                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
             else
                 player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WIND_FRAGMENT)
             end
         end
 
     -- DEFAULT DIALOGS
-    elseif (player:hasCompletedMission(ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)) then
+    elseif (player:hasCompletedMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE)) then
         player:messageSpecial(ID.text.ZILART_MONUMENT)
     else
         player:messageSpecial(ID.text.CANNOT_REMOVE_FRAG)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     -- HEADSTONE PILGRIMAGE
     if (csid == 200 and option == 1) then
@@ -80,7 +82,9 @@ function onEventFinish(player, csid, option)
             player:addItem(13248) -- Flagellant's Rope
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13248)
             player:addTitle(tpz.title.BEARER_OF_BONDS_BEYOND_TIME)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.WANDERING_SOULS)
         end
     end
 end
+
+return entity

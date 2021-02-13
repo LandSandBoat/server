@@ -8,8 +8,9 @@ local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY) then
         GetNPCByID(npc:getID() - 2):openDoor(15)
     else
@@ -17,7 +18,7 @@ function onTrigger(player, npc)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1658) then
         local smallKeyhole = GetNPCByID(ID.npc.SMALL_KEYHOLE)
         if smallKeyhole:getLocalVar("canTradeSecondKey") == 1 then
@@ -29,8 +30,10 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

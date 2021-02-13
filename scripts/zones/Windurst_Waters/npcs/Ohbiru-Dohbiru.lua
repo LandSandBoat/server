@@ -10,17 +10,19 @@ require("scripts/globals/common")
 require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
+-----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local turmoil = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+entity.onTrade = function(player, npc, trade)
+    local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
     local count = trade:getItemCount()
 
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4351, 1) and count == 1) then
             player:startEvent(355, 900)
         end
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
         local OhbiruFood = player:getCharVar("Ohbiru_Food_var")
 
         if (trade:hasItemQty(4493, 1) == true and trade:hasItemQty(4408, 1) == true and trade:hasItemQty(624, 1) == true and count == 3) then
@@ -49,19 +51,19 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- Check for Missions first (priority?)
     -- If the player has started the mission or not
     local pfame = player:getFameLevel(WINDURST)
-    local turmoil = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
-    local FoodForThought = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+    local FoodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
     local needToZone = player:needToZone()
     local OhbiruFood = player:getCharVar("Ohbiru_Food_var") -- Variable to track progress of Ohbiru-Dohbiru in Food for Thought
-    local waterWayToGo = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
-    local overnightDelivery = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
-    local SayFlowers = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local waterWayToGo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
+    local overnightDelivery = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+    local SayFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local FlowerProgress = player:getCharVar("FLOWER_PROGRESS")
-    local blueRibbonBlues = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+    local blueRibbonBlues = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
 
     if (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("MEMORIES_OF_A_MAIDEN_Status")==2) then
         player:startEvent(872)
@@ -122,10 +124,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     local tabre =
     {
@@ -138,14 +140,14 @@ function onEventFinish(player, csid, option)
     }
 
     -- Check Missions first (priority?)
-    local turmoil = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+    local turmoil = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
     if (csid == 143) then
         player:setCharVar("ohbiru_dohbiru_talk", 2)
     elseif (csid == 322 or csid == 325 or csid == 326) then
         player:tradeComplete()
         player:addGil(GIL_RATE*440)
         if (player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Kenapa_Food_var") == 4) then -- If this is the last NPC to be fed
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
             player:addFame(WINDURST, 100)
             player:addTitle(tpz.title.FAST_FOOD_DELIVERER)
             player:needToZone(true)
@@ -156,13 +158,13 @@ function onEventFinish(player, csid, option)
             player:setCharVar("Ohbiru_Food_var", 3)
         end
     elseif (csid == 785 and option == 1) then -- Adds Toraimarai turmoil
-        player:addQuest(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(tpz.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
         player:addGil(GIL_RATE*4500)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*4500)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:addFame(WINDURST, 100)
         player:addTitle(tpz.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()
@@ -173,8 +175,8 @@ function onEventFinish(player, csid, option)
         player:tradeComplete()
     elseif (csid == 352 and option == 0 or csid == 354) then
         if (player:getFreeSlotsCount() >= 1) then
-            if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_AVAILABLE) then
-                player:addQuest(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
+            if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_AVAILABLE) then
+                player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
             end
             player:addItem(504)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 504)
@@ -183,7 +185,7 @@ function onEventFinish(player, csid, option)
         end
     elseif (csid == 355) then
         player:addGil(GIL_RATE*900)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO)
         player:addFame(WINDURST, 40)
         player:tradeComplete()
         player:needToZone(true)
@@ -209,3 +211,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

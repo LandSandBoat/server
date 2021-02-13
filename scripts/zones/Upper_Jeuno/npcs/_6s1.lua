@@ -7,6 +7,7 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
 local ring =
 {
@@ -15,10 +16,10 @@ local ring =
     15545  -- Tamas Ring
 }
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local status = player:getCharVar("PromathiaStatus")
     local mission = player:getCurrentMission(COP)
 
@@ -28,7 +29,7 @@ function onTrigger(player, npc)
         player:startEvent(10012)
     elseif (mission == tpz.mission.id.cop.DAWN and status == 4) then
         player:startEvent(129)
-    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(COP, tpz.mission.id.cop.DAWN)) then
+    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)) then
         local hasRing = false
 
         for key, value in pairs(ring) do
@@ -53,19 +54,19 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
     if ((csid == 84 or csid == 204) and option == 4) then
         player:updateEvent(ring[1], ring[2], ring[3])
     end
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10011) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 10012) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(COP, tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS)
-        player:addMission(COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
+        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS)
+        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
     elseif (csid == 129) then
         player:setCharVar("PromathiaStatus", 5)
     elseif ((csid == 84 or csid == 204) and option >= 5 and option <= 7) then
@@ -81,3 +82,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

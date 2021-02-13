@@ -7,11 +7,12 @@
 require("scripts/globals/missions")
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
         local MissionStatus = player:getCharVar("MissionStatus")
@@ -43,10 +44,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 102) then
         player:setCharVar("MissionStatus", 4)
@@ -61,3 +62,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

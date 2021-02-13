@@ -1,15 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 18359
 -- Item: Boreas Cesti
 -- Additional Effect: Wind Damage
 -- 100% proc rate
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
     local dmg = math.random(4, 15)
     local params = {}
     params.bonusmab = 0
@@ -26,3 +27,5 @@ function onAdditionalEffect(player, target, damage)
 
     return tpz.subEffect.WIND_DAMAGE, message, dmg
 end
+
+return item_object

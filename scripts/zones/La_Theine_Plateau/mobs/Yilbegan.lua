@@ -5,8 +5,11 @@
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.YILBEGAN_HIDEFLAYER)
     tpz.tutorial.onMobDeath(player)
 end
+
+return entity

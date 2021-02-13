@@ -5,8 +5,9 @@
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     if mob:getHPP() < 50 then
         mob:setMobMod(tpz.mobMod.SPELL_LIST, 162)
     elseif mob:getHPP() < 75 then
@@ -18,6 +19,8 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(tpz.title.RANI_DECROWNER)
 end
+
+return entity

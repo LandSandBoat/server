@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 -- Cirrocumulus Cell
 -- ID 5370
 -- Unlocks back and waist equipment
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local encumbrance = target:getStatusEffect(tpz.effect.ENCUMBRANCE_I)
     if (encumbrance) then
         local power = encumbrance:getPower()
@@ -17,7 +18,7 @@ function onItemCheck(target)
     return -1
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local encumbrance = target:getStatusEffect(tpz.effect.ENCUMBRANCE_I)
     local power = encumbrance:getPower()
     local newpower = bit.band(power, bit.bnot(0x8400))
@@ -27,3 +28,5 @@ function onItemUse(target)
     end
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 5)
 end
+
+return item_object

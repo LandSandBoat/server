@@ -3,21 +3,22 @@ local ID = require("scripts/zones/Mog_Garden/IDs")
 require("scripts/globals/moghouse")
 require("scripts/globals/shop")
 -----------------------------------
+local entity = {}
 
 local BRONZE_PIECE_ITEMID = 2184
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     moogleTrade(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(1016)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 1016 and option == 0xFFF00FF) then -- Show the Mog House menu..
         -- Print the expire time for mog locker if exists..
         local lockerLease = getMogLockerExpiryTimestamp(player)
@@ -53,3 +54,5 @@ function onEventFinish(player, csid, option)
 
     end
 end
+
+return entity

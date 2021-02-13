@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 -- Geist Wall
 --
 -- Description: Dispels one effects from targets in an area of effect.
@@ -6,18 +6,19 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: 10' radial
 -- Notes:
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dispel = target:dispelStatusEffect()
 
     if (dispel == tpz.effect.NONE) then
@@ -29,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return dispel
 end
+
+return mobskill_object

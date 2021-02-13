@@ -101,7 +101,7 @@ local function CharCreate(player)
 
     -- set initial level cap
     if INITIAL_LEVEL_CAP ~= 50 then
-        player:levelCap(INITIAL_LEVEL_CAP)
+        player:setLevelCap(INITIAL_LEVEL_CAP)
     end
 
     -- increase starting inventory
@@ -135,8 +135,11 @@ end
 -- public functions
 -----------------------------------
 
+tpz = tpz or {}
+tpz.player = {}
+
 -- called by core after a player logs into the server or zones
-function onGameIn(player, firstLogin, zoning)
+tpz.player.onGameIn = function(player, firstLogin, zoning)
     if not zoning then
         -- things checked ONLY during logon go here
         if firstLogin then
@@ -175,7 +178,7 @@ function onGameIn(player, firstLogin, zoning)
         player:addHP(50000)
         player:setMP(50000)
     end
-    
+
     -- !immortal
     if player:getCharVar("Immortal") == 1 then
         player:setUnkillable(true)
@@ -190,14 +193,16 @@ function onGameIn(player, firstLogin, zoning)
     player:setLocalVar("ZoneInTime", os.time())
 end
 
-function onPlayerLevelUp(player)
+tpz.player.onPlayerLevelUp = function(player)
 end
 
-function onPlayerLevelDown(player)
+tpz.player.onPlayerLevelDown = function(player)
 end
 
-function onPlayerEmote(player, emoteId)   
+tpz.player.onPlayerEmote = function(player, emoteId)
     if emoteId == tpz.emote.CHEER and player:hasStatusEffect(tpz.effect.FULL_SPEED_AHEAD) then
         tpz.fsa.onCheer(player)
     end
 end
+
+return tpz.player

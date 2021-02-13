@@ -10,8 +10,9 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
         return tpz.msg.basic.ALREADY_HAS_A_PET, 0
     elseif not player:canUseMisc(tpz.zoneMisc.PET) then
@@ -21,6 +22,8 @@ function onAbilityCheck(player, target, ability)
     end
 end
 
-function onUseAbility(player, target, ability)
+ability_object.onUseAbility = function(player, target, ability)
     tpz.pet.spawnPet(player, tpz.pet.id.AUTOMATON)
 end
+
+return ability_object

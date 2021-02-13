@@ -44,9 +44,9 @@ local function meetsMission2Reqs(player)
     end
 
     local Q  = tpz.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
+    local Q1 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
+    local Q2 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
+    local Q3 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
 
     return Q1 or Q2 or Q3
 
@@ -111,14 +111,14 @@ tpz.maws.onEventFinish = function(player, csid, option)
     elseif maw.cs.add and csid == maw.cs.add and option == 1 then
         addMaw()
     elseif maw.cs.msn and csid == maw.cs.msn then
-        player:completeMission(WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
-        player:addMission(WOTG, tpz.mission.id.wotg.CAIT_SITH)
+        player:completeMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.CAIT_SITH)
         player:addTitle(tpz.title.CAIT_SITHS_ASSISTANT)
         addMaw() -- May not have yet, check
     elseif maw.cs.new and csid == maw.cs.new then
         local ID = zones[player:getZoneID()]
-        player:completeMission(WOTG, tpz.mission.id.wotg.CAVERNOUS_MAWS)
-        player:addMission(WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
+        player:completeMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.CAVERNOUS_MAWS)
+        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
         player:addKeyItem(tpz.ki.PURE_WHITE_FEATHER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PURE_WHITE_FEATHER)
         local x = math.random(1, 3)

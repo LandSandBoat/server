@@ -4,11 +4,12 @@
 require("scripts/globals/besieged")
 local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local instance = npc:getInstance()
 
@@ -20,10 +21,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
     local chars = instance:getChars()
     local id = instance:getID()
@@ -50,3 +51,5 @@ function onEventFinish(player, csid, option)
         player:setPos(0, 0, 0, 0, 79)
     end
 end
+
+return entity

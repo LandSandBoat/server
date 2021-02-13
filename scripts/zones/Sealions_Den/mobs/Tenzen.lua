@@ -4,8 +4,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
 -----------------------------------
+local entity = {}
 
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     -- three tarus fight with tenzen
     local mobId = mob:getID()
     local offset = mobId - ID.mob.WARRIORS_PATH_OFFSET
@@ -16,5 +17,7 @@ function onMobEngaged(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

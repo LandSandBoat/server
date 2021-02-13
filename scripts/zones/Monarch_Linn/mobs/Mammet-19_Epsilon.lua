@@ -4,13 +4,14 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
-function onMobFight(mob, target)
-    local form = mob:AnimationSub()
+entity.onMobFight = function(mob, target)
+    local form = mob:getAnimationSub()
 
     -- Mammets seem to be able to change to any given form, per YouTube videos
     -- Added a random chance to change forms every 3 seconds if 60 seconds have passed, just to make things less formulaic.
@@ -24,9 +25,9 @@ function onMobFight(mob, target)
 
 end
 
-function changeForm(mob)
+local function changeForm(mob)
     local newform = math.random(0, 2)
-    if (mob:AnimationSub() == newform) then
+    if (mob:getAnimationSub() == newform) then
         newform = 3
     end
     -- setDamage works beautifully, but setDelay doesn't seem to be working.  Increased DMG turned off.
@@ -48,9 +49,11 @@ function changeForm(mob)
         mob:setDelay(3700)
         mob:setDamage(40)
     end
-    mob:AnimationSub(newform)
+    mob:setAnimationSub(newform)
     mob:setLocalVar('changeTime', mob:getBattleTime())
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

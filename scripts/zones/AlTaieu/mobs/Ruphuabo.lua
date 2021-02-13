@@ -3,6 +3,9 @@
 --  Mob: Ru'phuabo
 -- Jailor of Love Pet version
 -----------------------------------
+local entity = {}
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

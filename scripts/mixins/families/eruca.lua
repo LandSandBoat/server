@@ -27,7 +27,7 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function bedTime(mob)
-    mob:AnimationSub(mob:AnimationSub() + 1)
+    mob:setAnimationSub(mob:getAnimationSub() + 1)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
     mob:setMobMod(tpz.mobMod.NO_AGGRO, 1)
     mob:setMobMod(tpz.mobMod.NO_LINK, 1)
@@ -35,7 +35,7 @@ local function bedTime(mob)
 end
 
 local function wakeUp(mob)
-    mob:AnimationSub(mob:AnimationSub() - 1)
+    mob:setAnimationSub(mob:getAnimationSub() - 1)
     mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
     mob:setMobMod(tpz.mobMod.NO_AGGRO, 0)
     mob:setMobMod(tpz.mobMod.NO_LINK, 0)
@@ -62,7 +62,7 @@ g_mixins.families.eruca = function(mob)
         local currentHour = VanadielHour()
         local sleepHour = mob:getLocalVar("[eruca]sleepHour")
         local wakeHour = mob:getLocalVar("[eruca]wakeHour")
-        local subAnimation = mob:AnimationSub()
+        local subAnimation = mob:getAnimationSub()
 
         if subAnimation == 0 and (currentHour >= sleepHour or currentHour < mob:getLocalVar("[eruca]wakeHour")) and not mob:isEngaged() then
             local resleepTime = mob:getLocalVar("ResleepTime")
@@ -83,7 +83,7 @@ g_mixins.families.eruca = function(mob)
     end)
 
     mob:addListener("ENGAGE", "ERUCA_ENGAGE", function(mob, target)
-        if mob:AnimationSub() == 1 then
+        if mob:getAnimationSub() == 1 then
             wakeUp(mob)
         end
     end)

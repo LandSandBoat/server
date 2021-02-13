@@ -7,13 +7,14 @@ mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize( mob )
+entity.onMobInitialize = function( mob )
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:setMod(tpz.mod.WINDRES, -64)
     mob:setMod(tpz.mod.SILENCERES, 35)
     mob:setMod(tpz.mod.STUNRES, 35)
@@ -23,7 +24,7 @@ function onMobSpawn(mob)
     mob:setLocalVar("numAdds", 1)
 end
 
-function onMobFight( mob, target )
+entity.onMobFight = function( mob, target )
     -- spawn gods
     local numAdds = mob:getLocalVar("numAdds")
     if (mob:getBattleTime() / 180 == numAdds) then
@@ -52,11 +53,11 @@ function onMobFight( mob, target )
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENSTONE)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle( tpz.title.KIRIN_CAPTIVATOR )
     player:showText( mob, ID.text.KIRIN_OFFSET + 1 )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
@@ -64,8 +65,10 @@ function onMobDeath(mob, player, isKiller)
     end
 end
 
-function onMobDespawn( mob )
+entity.onMobDespawn = function( mob )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)
     end
 end
+
+return entity

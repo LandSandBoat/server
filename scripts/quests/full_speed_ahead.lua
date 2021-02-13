@@ -9,7 +9,10 @@ require("scripts/globals/zone")
 
 --[[
 Debugging:
-Reset: !delquest 3 179
+Start: !setplayervar <name> [QUEST]FullSpeedAhead 1
+       !zone {Batallia Downs}
+
+Reset Quest: !delquest 3 179
 
 CharVar: [QUEST]FullSpeedAhead == ...
 1 : Starting minigame on Normal Mode
@@ -42,7 +45,7 @@ end
 
 tpz.full_speed_ahead.onEffectLose = function(player, effect)
     player:delStatusEffectSilent(tpz.effect.MOUNTED)
-    player:countdown(0) 
+    player:countdown(0)
     player:enableEntities({})
 
     -- If in Batallia Downs and didn't get the completion flag (failed/dismounted)
@@ -92,7 +95,7 @@ tpz.full_speed_ahead.onRegionEnter = function(player, index)
         local new_food_count = player:getLocalVar("FSA_FoodCount")
         local new_motivation = utils.clamp(motivation + tpz.full_speed_ahead.motivation_food_bonus, 0, 100)
         player:setLocalVar("FSA_Motivation", new_motivation)
-        
+
         -- Hearts
         player:independantAnimation(player, 251, 4)
 

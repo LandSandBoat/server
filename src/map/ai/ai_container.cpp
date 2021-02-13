@@ -355,7 +355,7 @@ void CAIContainer::Tick(time_point _tick)
     m_Tick     = _tick;
 
     //#TODO: timestamp in the event?
-    EventHandler.triggerListener("TICK", PEntity);
+    EventHandler.triggerListener("TICK", CLuaBaseEntity(PEntity));
     PEntity->Tick(_tick);
 
     //#TODO: check this in the controller instead maybe? (might not want to check every tick)

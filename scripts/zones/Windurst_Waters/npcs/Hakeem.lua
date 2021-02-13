@@ -8,11 +8,12 @@ require("scripts/globals/status")
 require("scripts/globals/crafting")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 4)
     local SkillCap = getCraftSkillCap(player, tpz.skill.COOKING)
     local SkillLevel = player:getSkillLevel(tpz.skill.COOKING)
@@ -28,12 +29,14 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 10017 and option == 1) then
         player:messageSpecial(ID.text.COOKING_SUPPORT, 0, 8, 2)
         player:addStatusEffect(tpz.effect.COOKING_IMAGERY, 1, 0, 120)
     end
 end
+
+return entity

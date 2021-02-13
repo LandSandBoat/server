@@ -1,15 +1,16 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Ambrosius
---
+-----------------------------------
 -- Quest NPC for "The Postman Always KOs Twice"
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
-    local postman = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+entity.onTrigger = function(player, npc)
+    local postman = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman == QUEST_AVAILABLE then
         player:startEvent(48)
@@ -20,8 +21,8 @@ function onTrigger(player, npc)
     end
 end
 
-function onTrade(player, npc, trade)
-    local postman = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+entity.onTrade = function(player, npc, trade)
+    local postman = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
 
     if postman ~= QUEST_AVAILABLE then
         reward = 0
@@ -61,32 +62,32 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 48 and option == 0 then
-        player:addQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 52 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 50)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 53 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 150)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 54 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 250)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 55 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 500)
         player:addFame(WINDURST, 80)
-        player:completeQuest(WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_POSTMAN_ALWAYS_KO_S_TWICE)
     elseif csid == 57 then
         player:tradeComplete()
         player:addGil(GIL_RATE * 50)
@@ -105,3 +106,5 @@ function onEventFinish(player, csid, option)
         player:addFame(WINDURST, 50)
     end
 end
+
+return entity

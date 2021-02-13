@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5548
 -- Item: Prime Beef Stewpot
 -- Food Effect: 4 Hrs, All Races
------------------------------------------
+-----------------------------------
 -- TODO: Group Effect
 -- HP +10% Cap 75
 -- MP +15
@@ -13,12 +13,13 @@
 -- MP Recovered while healing +2
 -- Attack 18% Cap 60
 -- Evasion +6
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
         result = tpz.msg.basic.IS_FULL
@@ -26,11 +27,11 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 5548)
 end
 
-function onEffectGain(target, effect)
+item_object.onEffectGain = function(target, effect)
     target:addMod(tpz.mod.FOOD_HPP, 10)
     target:addMod(tpz.mod.FOOD_HP_CAP, 75)
     target:addMod(tpz.mod.MP, 15)
@@ -44,7 +45,7 @@ function onEffectGain(target, effect)
     target:addMod(tpz.mod.EVA, 6)
 end
 
-function onEffectLose(target, effect)
+item_object.onEffectLose = function(target, effect)
     target:delMod(tpz.mod.FOOD_HPP, 10)
     target:delMod(tpz.mod.FOOD_HP_CAP, 75)
     target:delMod(tpz.mod.MP, 15)
@@ -57,3 +58,5 @@ function onEffectLose(target, effect)
     target:delMod(tpz.mod.FOOD_ATT_CAP, 60)
     target:delMod(tpz.mod.EVA, 6)
 end
+
+return item_object

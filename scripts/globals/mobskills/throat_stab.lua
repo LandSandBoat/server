@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Throat Stab
 --
 --  Description: Deals damage to a single target reducing their HP to 5%. Resets enmity.
@@ -6,18 +6,19 @@
 --  Utsusemi/Blink absorb: No
 --  Range: Single Target
 --  Notes: Very short range, easily evaded by walking away from it.
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/magic")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local currentHP = target:getHP()
     -- remove all by 5%
@@ -36,3 +37,5 @@ function onMobWeaponSkill(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
+
+return mobskill_object

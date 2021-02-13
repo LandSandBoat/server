@@ -12,16 +12,17 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(937, 1) and trade:getItemCount() == 1) then
             player:startEvent(277, 1500)
         else
             player:startEvent(275, 0, 937)
         end
-    elseif (player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED) then
         SecondReward = player:getCharVar("SecondRewardVar")
         if (trade:hasItemQty(17091, 1) and trade:hasItemQty(17061, 1) and trade:hasItemQty(17053, 1) and trade:getItemCount() == 3) then --Check that all 3 items have been traded, one each
             SecondReward = player:setCharVar("SecondRewardVar", 1)
@@ -35,15 +36,15 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    MakingAmends = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
-    MakingAmens = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
-    WonderWands = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    MakingAmends = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+    MakingAmens = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    WonderWands = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     needToZone = player:needToZone()
     pFame = player:getFameLevel(WINDURST)
 
-        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~ --
+        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
     if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(456, 0, 248)
     elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3) then
@@ -84,10 +85,10 @@ function onTrigger(player, npc)
 -- End Wonder Wands Section
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 90) then
         player:setCharVar("MissionStatus", 1)
@@ -107,16 +108,16 @@ function onEventFinish(player, csid, option)
         finishMissionTimeline(player, 1, csid, option)
 
     elseif (csid == 274 and option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
             player:addGil(GIL_RATE*1500)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS)
             player:addFame(WINDURST, 75)
             player:addTitle(tpz.title.QUICK_FIXER)
             player:needToZone(true)
             player:tradeComplete()
     elseif (csid == 259 and option == 1) then
-            player:addQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
     elseif (csid == 267) then
         rand = math.random(3) --Setup random variable to determine which 2 items are returned upon quest completion
         if (rand == 1) then
@@ -170,9 +171,9 @@ function onEventFinish(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets
             player:addFame(WINDURST, 150)
             player:addTitle(tpz.title.DOCTOR_SHANTOTTOS_GUINEA_PIG)
-            player:completeQuest(WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
+            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS)
         end
-        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~ --
+        -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
     elseif (csid == 456) then
             player:setCharVar("MissionStatus", 1)
             player:addKeyItem(tpz.ki.SOUTHWESTERN_STAR_CHARM)
@@ -180,3 +181,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

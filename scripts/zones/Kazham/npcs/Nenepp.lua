@@ -8,6 +8,7 @@ require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local path =
 {
@@ -16,18 +17,18 @@ local path =
     33.091000, -11.00000, -183.738000
 }
 
-function onSpawn(npc)
+entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    onPath(npc)
+    entity.onPath(npc)
 end
 
-function onPath(npc)
+entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
 
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     -- item IDs
     -- 483       Broken Mithran Fishing Rod
     -- 22        Workbench
@@ -39,7 +40,7 @@ function onTrade(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local OpoOpoAndIStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local OpoOpoAndIStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(4600, 1)
@@ -56,8 +57,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local OpoOpoAndIStatus = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+entity.onTrigger = function(player, npc)
+    local OpoOpoAndIStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
@@ -77,17 +78,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option, npc)
 
     if (csid == 241) then    -- correct trade, finished quest and receive opo opo crown and 3 pamamas
         local FreeSlots = player:getFreeSlotsCount()
         if (FreeSlots >= 4) then
             player:tradeComplete()
             player:addFame(KAZHAM, 75)
-            player:completeQuest(OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
             player:addItem(13870)   -- opo opo crown
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13870)
             player:addItem(4468, 3)  -- 3 pamamas
@@ -106,3 +107,5 @@ function onEventFinish(player, csid, option, npc)
         npc:wait(0)
     end
 end
+
+return entity

@@ -7,12 +7,15 @@
 -----------------------------------
 require("scripts/globals/wsquest")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.EXP_BONUS, -100)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     tpz.wsquest.handleWsnmDeath(tpz.wsquest.evisceration, player)
 end
+
+return entity

@@ -11,6 +11,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
+local entity = {}
 
 local TrustMemory = function(player)
     local memories = 0
@@ -19,22 +20,22 @@ local TrustMemory = function(player)
     end
     -- 4 - Chocobo racing
     --  memories = memories + 4
-    if player:hasCompletedQuest(WOTG, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) then
+    if player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) then
         memories = memories + 8
     end
-    if player:hasCompletedQuest(WOTG, tpz.quest.id.crystalWar.BLOOD_OF_HEROES) then
+    if player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BLOOD_OF_HEROES) then
         memories = memories + 16
     end
     return memories
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    local TrustSandoria = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok = player:getQuestStatus(BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+entity.onTrigger = function(player, npc)
+    local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
     local SandoriaFirstTrust = player:getCharVar("SandoriaFirstTrust")
     local ExcenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
     local Rank3 = player:getRank() >= 3 and 1 or 0
@@ -56,10 +57,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- TRUST
     if csid == 893 then
         player:addSpell(899, true, true)
@@ -68,7 +69,7 @@ function onEventFinish(player, csid, option)
     elseif csid == 895 then
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
+        npcUtil.completeQuest(player, tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
             ki = tpz.ki.SAN_DORIA_TRUST_PERMIT,
             title = tpz.title.THE_TRUSTWORTHY,
             var = "SandoriaFirstTrust"
@@ -79,8 +80,10 @@ function onEventFinish(player, csid, option)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 899)
         player:delKeyItem(tpz.ki.RED_INSTITUTE_CARD)
         player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.RED_INSTITUTE_CARD)
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
+        npcUtil.completeQuest(player, tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA, {
             ki = tpz.ki.SAN_DORIA_TRUST_PERMIT
         })
     end
 end
+
+return entity

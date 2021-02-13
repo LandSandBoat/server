@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: MP Drainkiss
 -- Steals an enemy's MP. Ineffective against undead
 -- Spell cost: 20 MP
@@ -19,19 +19,20 @@
 -- INT increases Magic Accuracy in general, but is not a modifier of this spell.
 -- Unlike Magic Hammer, MP drained is not enhanced by Magic Attack Bonus.
 -- A positive Monster Correlation (vs Birds) or a negative Monster Correlation (vs Aquans), affects both accuracy and potency.
------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     -- also have small constant to account for 0 dark skill
     local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC), 0, 165)
     -- get resist multiplier (1x if no resist)
@@ -71,3 +72,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

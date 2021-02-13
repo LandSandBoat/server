@@ -1,15 +1,16 @@
------------------------------------------
+-----------------------------------
 -- ID: 17704
 -- Item: Vulcan Sword
 -- Additional Effect: Fire Damage
 -- Enchantment: Enfire
------------------------------------------
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local item_object = {}
 
-function onAdditionalEffect(player, target, damage)
+item_object.onAdditionalEffect = function(player, target, damage)
 
     local dmg = math.random(3, 10)
     local params = {}
@@ -28,11 +29,13 @@ function onAdditionalEffect(player, target, damage)
     return tpz.subEffect.FIRE_DAMAGE, message, dmg
 end
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     return 0
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     local effect = tpz.effect.ENFIRE
     doEnspell(target, target, nil, effect)
 end
+
+return item_object

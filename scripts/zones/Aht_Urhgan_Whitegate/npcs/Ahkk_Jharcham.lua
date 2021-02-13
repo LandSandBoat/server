@@ -7,9 +7,10 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local keepingNotes = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+entity.onTrade = function(player, npc, trade)
+    local keepingNotes = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
 
     if keepingNotes == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {917, 929}) then -- parchment + black ink
         player:startEvent(11)
@@ -18,8 +19,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local keepingNotes = player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+entity.onTrigger = function(player, npc)
+    local keepingNotes = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
 
     if keepingNotes == QUEST_AVAILABLE then
         player:startEvent(9)
@@ -32,15 +33,17 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 9 then
-        player:addQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
     elseif csid == 11 then
         player:confirmTrade()
-        player:moghouseFlag(16)
-        player:completeQuest(AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
+        player:setMoghouseFlag(16)
+        player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES)
     end
 end
+
+return entity

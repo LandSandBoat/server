@@ -1,15 +1,16 @@
----------------------------------------------
+-----------------------------------
 -- Warm-Up
 --
 -- Description: Enhances accuracy and evasion.
 -- Type: Magical (Earth)
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- only brown-skinned mamool should use this move
     local mobSkin = mob:getModelId()
     if (mobSkin == 1639 or mobSkin == 1619) then
@@ -19,7 +20,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- This is nonsensically overpowering: mob:getMainLvl() + 0.05*mob:getMaxHP()*(skill:getTP()/1000)
     local power = 10 -- Power needs redone with retail MOB VERSION formula not players blue magic
     local EFFECT
@@ -46,3 +47,5 @@ function onMobWeaponSkill(target, mob, skill)
 
     return EFFECT
 end
+
+return mobskill_object

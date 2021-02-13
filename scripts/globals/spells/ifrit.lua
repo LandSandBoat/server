@@ -1,14 +1,15 @@
------------------------------------------
+-----------------------------------
 -- Spell: Ifrit
 -- Summons Ifrit to fight by your side
------------------------------------------
+-----------------------------------
 require("scripts/globals/summon")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 require("scripts/globals/status")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     if (not caster:canUseMisc(tpz.zoneMisc.PET)) then
         return tpz.msg.basic.CANT_BE_USED_IN_AREA
     elseif (caster:hasPet()) then
@@ -19,7 +20,9 @@ function onMagicCastingCheck(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
     tpz.pet.spawnPet(caster, tpz.pet.id.IFRIT)
     return 0
 end
+
+return spell_object

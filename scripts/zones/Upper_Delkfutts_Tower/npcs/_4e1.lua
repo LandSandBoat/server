@@ -3,20 +3,23 @@
 --  NPC: Door
 -- !pos 315 16 20 158
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(2)
     return 1
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 2 and option == 1 then
         player:setPos(524, 16, 20, 0, 184)    -- to Lower Delkfutt's Tower
     end
 end
+
+return entity

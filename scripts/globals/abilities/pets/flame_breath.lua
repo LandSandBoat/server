@@ -1,17 +1,18 @@
----------------------------------------------------
+-----------------------------------
 -- Flame Breath
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/ability")
+-----------------------------------
+local ability_object = {}
 
----------------------------------------------------
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onUseAbility(pet, target, skill, action)
+ability_object.onUseAbility = function(pet, target, skill, action)
     local master = pet:getMaster()
     ---------- Deep Breathing ----------
     -- 0 for none
@@ -34,3 +35,5 @@ function onUseAbility(pet, target, skill, action)
     target:takeDamage(dmg, pet, tpz.attackType.BREATH, tpz.damageType.FIRE)
     return dmg
 end
+
+return ability_object

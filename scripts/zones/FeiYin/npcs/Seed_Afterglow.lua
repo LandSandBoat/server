@@ -19,14 +19,14 @@ require("scripts/globals/npc_util")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local offset        = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
     local ACP           = player:getCurrentMission(ACP)
-    local currentDay    = tonumber(os.date("%j"))
     local needToZone    = player:needToZone()
     local progressMask  = player:getCharVar("SEED_AFTERGLOW_MASK")
     local intensity     = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
@@ -35,8 +35,8 @@ function onTrigger(player, npc)
         player:hasKeyItem(tpz.ki.MARK_OF_SEED) or
         player:hasKeyItem(tpz.ki.AZURE_KEY) or
         player:hasKeyItem(tpz.ki.IVORY_KEY) or
-        CurrentDay == player:getCharVar("LastAzureKey") or
-        CurrentDay == player:getCharVar("LastIvoryKey") or
+        os.time() < player:getCharVar("LastAzureKey") or
+        os.time() < player:getCharVar("LastIvoryKey") or
         ACP < tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
     ) then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)
@@ -64,10 +64,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 28 then
         player:delStatusEffectSilent(tpz.effect.MARK_OF_SEED)
 
@@ -79,3 +79,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

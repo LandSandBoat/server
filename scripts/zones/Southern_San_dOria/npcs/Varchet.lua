@@ -7,12 +7,13 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
 local GAME_WON  = 0
 local GAME_LOST = 2
 local GAME_TIE  = 3
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, {{"gil", 5}}) then
         player:confirmTrade()
 
@@ -36,18 +37,18 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
         player:startEvent(638)
     else
         player:startEvent(525)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 519 then
         local result = player:getLocalVar('VarchetGame')
         if result == GAME_WON then
@@ -55,7 +56,7 @@ function onEventFinish(player, csid, option)
             player:addGil(gilPayout)
             player:messageSpecial(ID.text.GIL_OBTAINED, gilPayout)
 
-            if player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
+            if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.EXIT_THE_GAMBLER) == QUEST_ACCEPTED then
                 player:setCharVar("exitTheGamblerStat", 1)
                 player:showText(player:getEventTarget(), ID.text.VARCHET_KEEP_PROMISE)
             end
@@ -69,3 +70,5 @@ function onEventFinish(player, csid, option)
         player:setLocalVar('VarchetGame', 0)
     end
 end
+
+return entity

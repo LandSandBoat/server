@@ -13,15 +13,16 @@ require("scripts/globals/shop")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
-    theCrimsonTrial = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
-    envelopedInDarkness = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
-    peaceForTheSpirit = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
+    theCrimsonTrial = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+    envelopedInDarkness = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+    peaceForTheSpirit = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
     peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
     OrcishDriedFood = player:hasKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
 
@@ -51,16 +52,16 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 70 or csid == 71) then
         if (csid == 70 and option == 0) then
             player:setCharVar("has_seen_rdmaf1_quest_already", 1)
         elseif (option == 1) then
-            player:addQuest(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
             player:setCharVar("has_seen_rdmaf1_quest_already", 0)
         end
     elseif (csid == 75) then
@@ -71,7 +72,7 @@ function onEventFinish(player, csid, option)
             player:addItem(16829)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16829) -- Fencing Degen
             player:addFame(SANDORIA, 30)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
         end
     elseif (csid == 64) then
         player:setCharVar("peaceForTheSpiritCS", 1)
@@ -80,3 +81,5 @@ function onEventFinish(player, csid, option)
     end
 
 end
+
+return entity

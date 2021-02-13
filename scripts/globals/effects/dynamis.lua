@@ -1,22 +1,17 @@
 -----------------------------------
---
---     tpz.effect.DYNAMIS
---
+-- tpz.effect.DYNAMIS
 -----------------------------------
 require("scripts/globals/keyitems")
+require("scripts/globals/status")
+require("scripts/globals/zone")
 -----------------------------------
--- onEffectGain Action
------------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:setLocalVar("dynamis_lasttimeupdate", effect:getTimeRemaining() / 1000)
 end
 
------------------------------------
--- onEffectTick Action
------------------------------------
-
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
     if target:getCurrentRegion() == tpz.region.DYNAMIS then
         local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
         local remainingTimeLimit = effect:getTimeRemaining() / 1000
@@ -53,11 +48,7 @@ function onEffectTick(target, effect)
     end
 end
 
------------------------------------
--- onEffectLose Action
------------------------------------
-
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delKeyItem(tpz.ki.CRIMSON_GRANULES_OF_TIME)
     target:delKeyItem(tpz.ki.AZURE_GRANULES_OF_TIME)
     target:delKeyItem(tpz.ki.AMBER_GRANULES_OF_TIME)
@@ -73,11 +64,9 @@ function onEffectLose(target, effect)
 end
 
 function onEventUpdate(target, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
 end
 
 function onEventFinish(target, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
 end
+
+return effect_object

@@ -1,4 +1,4 @@
----------------------------------------------------
+-----------------------------------
 --  Sweeping Flail
 --  Family: Bahamut
 --  Description: Spins around to deal physical damage to enemies behind user. Additional effect: Knockback
@@ -6,13 +6,14 @@
 --  Utsusemi/Blink absorb: 2-3 shadows
 --  Range: 20' cone
 --  Notes: Used when someone pulls hate from behind Bahamut.
----------------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
----------------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if (target:isBehind(mob, 55) == false) then
         return 1
     else
@@ -20,7 +21,7 @@ function onMobSkillCheck(target, mob, skill)
     end
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2
@@ -29,3 +30,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
     return dmg
 end
+
+return mobskill_object

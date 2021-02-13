@@ -6,8 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if player:getCharVar("SahaginKeyItems") == 1 then -- If player was told to use 3 Mythril Beastcoins
         if npcUtil.tradeHas(trade, {{749, 3}, {1135, 1}}) then
             player:startEvent(107)
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("SahaginKeyProgress") == 2 and not player:hasItem(1197) then -- If player has never before finished the quest
         player:startEvent(105)
         player:setCharVar("SahaginKeyItems", 1)
@@ -42,10 +43,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 107 and player:getCharVar("SahaginKeyProgress") == 2 and npcUtil.giveItem(player, 1197) then
         player:confirmTrade()
         player:setCharVar("SahaginKeyProgress", 3) -- Mark the quest progress
@@ -55,3 +56,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("SahaginKeyItems", 0)
     end
 end
+
+return entity

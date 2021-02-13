@@ -6,8 +6,9 @@
 -----------------------------------
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local walahraCoinCount = player:getCharVar("walahraCoinCount")
     local TradeCount = trade:getItemQty(2184)
 
@@ -37,13 +38,15 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- TODO besiege result can effect if this NPC will accept trades
     player:startEvent(102, 2184)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

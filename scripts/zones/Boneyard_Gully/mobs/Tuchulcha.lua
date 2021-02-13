@@ -7,8 +7,9 @@ mixins = {require("scripts/mixins/families/antlion_ambush")}
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
     mob:setMobMod(tpz.mobMod.SUPERLINK, 0)
 
@@ -17,14 +18,14 @@ function onMobSpawn(mob)
 end
 
 -- Reset restHP when re-engaging after a sandpit
-function onMobEngaged(mob, target)
+entity.onMobEngaged = function(mob, target)
     if mob:getMobMod(tpz.mobMod.NO_REST) == 1 then
         mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
         mob:setMobMod(tpz.mobMod.NO_REST, 0)
     end
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     -- Every 25% of its HP Tuchulcha will bury itself under the sand
     -- accompanied by use of the ability Sandpit
     if (mob:getHPP() < 75 and mob:getLocalVar('Sandpits') == 0)
@@ -39,7 +40,8 @@ function onMobFight(mob, target)
             local pos_index = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
             local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
             tuchulcha:setPos(coords)
-            for _, char in pairs(tuchulcha:getBattlefield():getPlayers()) do
+            local players = tuchulcha:getBattlefield():getPlayers()
+            for _, char in pairs(players) do
                 char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
                 char:disengage()
                 if char:hasPet() then
@@ -50,7 +52,7 @@ function onMobFight(mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     -- Used to grab the mob IDs
     -- Despawn the hunters
     if isKiller then
@@ -60,3 +62,5 @@ function onMobDeath(mob, player, isKiller)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].ARMORED_HUNTER_ID)
     end
 end
+
+return entity

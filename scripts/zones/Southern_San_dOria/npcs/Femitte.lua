@@ -3,23 +3,24 @@
 --  NPC: Femitte
 -- Involved in Quest: Lure of the Wildcat (San d'Oria), Distant Loyalties
 -- !pos -17 2 10 230
--------------------------------------
+-----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
 
     local DistantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
-    local DistantLoyalties = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+    local DistantLoyalties = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
     local WildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 3)) then
+    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 3)) then
         player:startEvent(807)
     elseif (player:getFameLevel(SANDORIA) >= 4 and DistantLoyalties == 0) then
         player:startEvent(663)
@@ -33,17 +34,17 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 
     if (csid == 807) then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
     elseif (csid == 663 and option == 0) then
         player:addKeyItem(tpz.ki.GOLDSMITHING_ORDER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GOLDSMITHING_ORDER)
-        player:addQuest(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
         player:setCharVar("DistantLoyaltiesProgress", 1)
     elseif (csid == 665) then
         if (player:getFreeSlotsCount() == 0) then
@@ -53,7 +54,7 @@ function onEventFinish(player, csid, option)
             player:addItem(13585, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13585)
             player:setCharVar("DistantLoyaltiesProgress", 0)
-            player:completeQuest(SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
+            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.DISTANT_LOYALTIES)
         end
     end
 
@@ -71,3 +72,5 @@ end
 --748
 --807  Lure of the Wildcat
 --945  CS with small mythra dancer
+
+return entity

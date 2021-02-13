@@ -2,7 +2,7 @@
 -- Area: Aht Urhgan Whitegate
 --  NPC: Fubruhn
 -- Mog Locker NPC
---
+-----------------------------------
 -- Event IDs:
 -- 600 = Not a mercenary + mog locker options
 -- 1st arg = Amount of time left on lease, as seconds past 2001/12/31 15:00:00.
@@ -15,10 +15,10 @@
 -- 6th arg =
 -- 7th arg =
 -- 8th arg = The number of days your lease is currently valid for
---
+-----------------------------------
 -- 601 = Lease increased
 -- 1st arg = number of seconds from 2001/12/31 15:00:00 it is valid till.
---
+-----------------------------------
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
@@ -27,8 +27,10 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/missions")
 require("scripts/globals/moghouse")
+-----------------------------------
+local entity = {}
 
-function getNumberOfCoinsToUpgradeSize(size)
+local function getNumberOfCoinsToUpgradeSize(size)
     if size == 30 then
         return 4
     elseif size == 40 then
@@ -44,7 +46,7 @@ function getNumberOfCoinsToUpgradeSize(size)
     end
 end
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local numBronze = trade:getItemQty(2184)
     local numMythril = trade:getItemQty(2186)
     local numGold = trade:getItemQty(2187)
@@ -85,7 +87,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     -- TODO: Check if they are >= Mission 2
     -- if < mission 2 then
     --      player:startEvent(600)
@@ -110,10 +112,10 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     -- printf("fCSID: %u", csid)
     -- printf("fRESULT: %u", option)
     if csid == 600 and option == 3 then
@@ -129,3 +131,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

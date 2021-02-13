@@ -11,15 +11,16 @@ require("scripts/globals/treasure")
 require("scripts/globals/quests")
 require("scripts/globals/zone")
 -----------------------------------
+local zone_object = {}
 
-function onInitialize(zone)
+zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.CAPRICIOUS_CASSIE)
     GetMobByID(ID.mob.CAPRICIOUS_CASSIE):setRespawnTime(math.random(900, 10800))
 
     tpz.treasure.initZone(zone)
 end
 
-function onZoneIn(player, prevZone)
+zone_object.onZoneIn = function(player, prevZone)
     local currentMission = player:getCurrentMission(player:getNation())
     local MissionStatus = player:getCharVar("MissionStatus")
     local cs = -1
@@ -38,26 +39,26 @@ function onZoneIn(player, prevZone)
         cs = 23 -- San d'Oria 9-2
     elseif (player:getCurrentMission(ACP) == tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
         cs = 29
-    elseif (prevZone == tpz.zone.QUBIA_ARENA and player:getQuestStatus(BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LETTER_FROM_DALZAKK)) then
+    elseif (prevZone == tpz.zone.QUBIA_ARENA and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.LETTER_FROM_DALZAKK)) then
         cs = 16 -- MNK AF
-    elseif (prevZone == tpz.zone.BEAUCEDINE_GLACIER and player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and player:getCharVar("pieujesDecisionCS") == 0) then
+    elseif (prevZone == tpz.zone.BEAUCEDINE_GLACIER and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and player:getCharVar("pieujesDecisionCS") == 0) then
         cs = 19 -- WHM AF
     end
 
     return cs
 end
 
-function onConquestUpdate(zone, updatetype)
+zone_object.onConquestUpdate = function(zone, updatetype)
     tpz.conq.onConquestUpdate(zone, updatetype)
 end
 
-function onRegionEnter(player, region)
+zone_object.onRegionEnter = function(player, region)
 end
 
-function onEventUpdate(player, csid, option)
+zone_object.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+zone_object.onEventFinish = function(player, csid, option)
     if (csid == 1) then
         player:setCharVar("MissionStatus", 11)
     elseif (csid == 16) then
@@ -68,7 +69,9 @@ function onEventFinish(player, csid, option)
     elseif (csid == 23) then
         player:setCharVar("MissionStatus", 3)
     elseif (csid == 29) then
-        player:completeMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
-        player:addMission(ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
+        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)
+        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
     end
 end
+
+return zone_object

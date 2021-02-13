@@ -10,8 +10,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     if
         player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and
         player:getCharVar("MissionStatus") == 4 and
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
 
     if currentMission == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and player:getCharVar("MissionStatus") == 4 and not player:hasKeyItem(tpz.ki.DELKFUTT_KEY) then
@@ -33,10 +34,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 0 then
         player:setCharVar("MissionStatus", 5)
 
@@ -46,3 +47,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity

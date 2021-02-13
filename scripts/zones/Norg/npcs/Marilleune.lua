@@ -6,20 +6,23 @@
 -----------------------------------
 require("scripts/globals/chocobo")
 -----------------------------------
+local entity = {}
 
 local eventSucceed = 131
 local eventFail    = 132
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     tpz.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     tpz.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
 end
+
+return entity

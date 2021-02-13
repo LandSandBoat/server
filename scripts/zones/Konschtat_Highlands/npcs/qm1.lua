@@ -8,12 +8,13 @@ local ID = require("scripts/zones/Konschtat_Highlands/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
-    if player:getQuestStatus(BASTOK, tpz.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
+entity.onTrigger = function(player, npc)
+    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
         player:addKeyItem(tpz.ki.TATTERED_MISSION_ORDERS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TATTERED_MISSION_ORDERS)
     else
@@ -21,8 +22,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

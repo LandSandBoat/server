@@ -1,18 +1,19 @@
----------------------------------------------
+-----------------------------------
 -- Zantetsuken
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local ability_object = {}
 
-function onAbilityCheck(player, target, ability)
+ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-function onPetAbility(target, pet, skill, master)
+ability_object.onPetAbility = function(target, pet, skill, master)
     local power = master:getMP() / master:getMaxMP()
     master:setMP(0)
 
@@ -39,3 +40,5 @@ function onPetAbility(target, pet, skill, master)
         end
     end
 end
+
+return ability_object

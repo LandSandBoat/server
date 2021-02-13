@@ -8,8 +8,9 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
     local missionStatus = player:getCharVar("MissionStatus")
 
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298, 2}}) then -- Parana Shield x2
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
 
     if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_ABROAD then
@@ -55,25 +56,27 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 448 then
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST)
         player:setCharVar("MissionStatus", 3)
         player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif csid == 457 then
         player:setCharVar("MissionStatus", 7)
         player:confirmTrade()
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
     elseif csid == 462 then
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST2)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST2)
         player:setCharVar("MissionStatus", 7)
     elseif csid == 467 then
-        player:addMission(SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
         player:delKeyItem(tpz.ki.KINDRED_CREST)
         player:setCharVar("MissionStatus", 11)
         npcUtil.giveKeyItem(player, tpz.ki.KINDRED_REPORT)
     end
 end
+
+return entity

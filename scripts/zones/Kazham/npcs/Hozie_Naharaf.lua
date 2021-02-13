@@ -3,11 +3,12 @@
 --  NPC: Hozie Naharaf
 -- Standard Info NPC
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if (player:getCharVar("BathedInScent") == 1) then
         player:startEvent(179) -- scent from Blue Rafflesias
     else
@@ -15,8 +16,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 end
+
+return entity

@@ -1,12 +1,13 @@
------------------------------------------
+-----------------------------------
 -- ID: 10293
 -- Chocobo Shirt
 -- Dispense: Crystals
------------------------------------------
+-----------------------------------
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local item_object = {}
 
-function onItemCheck(target)
+item_object.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = tpz.msg.basic.ITEM_NO_USE_INVENTORY
@@ -14,7 +15,7 @@ function onItemCheck(target)
     return result
 end
 
-function onItemUse(target)
+item_object.onItemUse = function(target)
     -- Crystal Item IDs:
     -- 4096 Fire
     -- 4097 Ice
@@ -27,3 +28,5 @@ function onItemUse(target)
     local itemID = 4095 + VanadielDayElement()
     target:addItem(itemID, math.random(2, 12))
 end
+
+return item_object

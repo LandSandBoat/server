@@ -11,13 +11,14 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.GA_CHANCE, 50)
     mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
 end
 
-function onMobSpawn(mob)
+entity.onMobSpawn = function(mob)
     mob:addMod(tpz.mod.MEVA, 95)
     mob:addMod(tpz.mod.MDEF, 30)
     mob:addMod(tpz.mod.SILENCERES, 20)
@@ -26,10 +27,10 @@ function onMobSpawn(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-function onMobRoam(mob)
+entity.onMobRoam = function(mob)
 end
 
-function onMobFight(mob, target)
+entity.onMobFight = function(mob, target)
     local hpp = mob:getHPP()
     local useChainspell = false
 
@@ -74,9 +75,11 @@ function onMobFight(mob, target)
     end
 end
 
-function onAdditionalEffect(mob, target, damage)
+entity.onAdditionalEffect = function(mob, target, damage)
     return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.POISON, {chance = 40, power = 50})
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

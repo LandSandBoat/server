@@ -1,4 +1,4 @@
----------------------------------------------
+-----------------------------------
 --  Gregale Wing
 --
 --  Description: An icy wind deals Ice damage to enemies within a very wide area of effect. Additional effect: Paralyze
@@ -6,20 +6,21 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: 30' radial.
 --  Notes: Used only Jormungand and Isgebind
----------------------------------------------
+-----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
+-----------------------------------
+local mobskill_object = {}
 
----------------------------------------------
-function onMobSkillCheck(target, mob, skill)
-    if (mob:AnimationSub() ~= 1) then
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if (mob:getAnimationSub() ~= 1) then
         return 1
     end
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = tpz.effect.PARALYSIS
 
     MobStatusEffectMove(mob, target, typeEffect, 40, 0, 120)
@@ -30,3 +31,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.ICE)
     return dmg
 end
+
+return mobskill_object

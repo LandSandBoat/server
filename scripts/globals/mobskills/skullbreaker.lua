@@ -1,22 +1,24 @@
----------------------------------------------
+-----------------------------------
 -- Skullbreaker
 --
 -- Description: Lowers enemy's INT. Chance of lowering INT varies with TP.
 -- Type: Physical
 -- Utsusemi/Blink absorb: 1 Shadow
 -- Range: Melee
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     mob:messageBasic(tpz.msg.basic.READIES_WS, 0, 165)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.0
@@ -30,3 +32,5 @@ function onMobWeaponSkill(target, mob, skill)
     target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
     return dmg
 end
+
+return mobskill_object

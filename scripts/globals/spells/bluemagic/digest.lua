@@ -1,4 +1,4 @@
------------------------------------------
+-----------------------------------
 -- Spell: Digest
 -- Steals an enemy's HP. Ineffective against undead
 -- Spell cost: 20 MP
@@ -11,17 +11,18 @@
 -- Recast Time: 90 seconds
 -- Magic Bursts on: Compression, Gravitation, Darkness
 -- Combos: None
------------------------------------------
+-----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
------------------------------------------
+-----------------------------------
+local spell_object = {}
 
-function onMagicCastingCheck(caster, target, spell)
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-function onSpellCast(caster, target, spell)
+spell_object.onSpellCast = function(caster, target, spell)
 
     local dmg = 5 + 0.575 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
     --get resist multiplier (1x if no resist)
@@ -59,3 +60,5 @@ function onSpellCast(caster, target, spell)
 
     return dmg
 end
+
+return spell_object

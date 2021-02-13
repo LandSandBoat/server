@@ -3,13 +3,17 @@
 --  Mob: Carthi
 -----------------------------------
 local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
+-----------------------------------
+local entity = {}
 
-function onMobDisengage(mob)
+entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (isKiller and GetMobByID(ID.mob.TIPHA):isDead()) then
         GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
     end
 end
+
+return entity

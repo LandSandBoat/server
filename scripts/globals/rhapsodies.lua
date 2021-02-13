@@ -1,7 +1,8 @@
-------------------------------------
+-----------------------------------
 require("scripts/globals/missions")
+require("scripts/globals/common")
 require("scripts/globals/status")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.rhapsodies = tpz.rhapsodies or {}
@@ -24,15 +25,6 @@ tpz.rhapsodies.expansion =
     [tpz.rhapsodies.character.CAIT_SITH]  = WOTG,
     [tpz.rhapsodies.character.ARCIELA]    = SOA,
 }
-
--- ALERT, TODO, NOTE: To be removed when set constructor makes it into master!
-local set = function(list)
-    local set = {}
-    for _, item in pairs(list) do
-        set[item] = true
-    end
-    return set
-end
 
 tpz.rhapsodies.unavailability =
 {
@@ -299,9 +291,9 @@ tpz.rhapsodies.requiredCharacters =
     },
 }
 
-------------------------------------
+-----------------------------------
 -- PUBLIC FUNCTIONS
-------------------------------------
+-----------------------------------
 -- Lockout Table:
 -- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 

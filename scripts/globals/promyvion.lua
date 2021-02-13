@@ -3,14 +3,14 @@ require("scripts/zones/Promyvion-Holla/IDs")
 require("scripts/zones/Promyvion-Mea/IDs")
 require("scripts/zones/Promyvion-Vahzl/IDs")
 require("scripts/globals/status")
-------------------------------------
+-----------------------------------
 
 tpz = tpz or {}
 tpz.promyvion = tpz.promyvion or {}
 
-------------------------------------
+-----------------------------------
 -- LOCAL FUNCTIONS
-------------------------------------
+-----------------------------------
 
 local function maxFloor(ID)
     local m = 0
@@ -48,9 +48,9 @@ local function findMother(mob)
     return mother
 end
 
-------------------------------------
+-----------------------------------
 -- PUBLIC FUNCTIONS
-------------------------------------
+-----------------------------------
 
 tpz.promyvion.initZone = function(zone)
     local ID = zones[zone:getID()]
@@ -71,7 +71,7 @@ tpz.promyvion.strayOnSpawn = function(mob)
 
     if mother ~= nil and mother:isSpawned() then
         mob:setPos(mother:getXPos(), mother:getYPos() - 5, mother:getZPos())
-        mother:AnimationSub(1)
+        mother:setAnimationSub(1)
     end
 end
 
@@ -91,7 +91,7 @@ tpz.promyvion.receptacleOnFight = function(mob, target)
             end
         end
     else
-        mob:AnimationSub(2)
+        mob:setAnimationSub(2)
     end
 end
 
@@ -103,7 +103,7 @@ tpz.promyvion.receptacleOnDeath = function(mob, isKiller)
         local streamId = ID.mob.MEMORY_RECEPTACLES[mobId][3]
         local stream = GetNPCByID(streamId)
 
-        mob:AnimationSub(0)
+        mob:setAnimationSub(0)
 
         -- open floor exit portal
         if stream:getLocalVar("[promy]floorExit") == 1 then

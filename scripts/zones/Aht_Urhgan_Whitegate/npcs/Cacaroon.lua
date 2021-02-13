@@ -8,9 +8,10 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    if player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 2 then
+entity.onTrade = function(player, npc, trade)
+    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 2 then
         if npcUtil.tradeHas(trade, 2184) then
             player:startEvent(850)
         end
@@ -21,7 +22,7 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:getCharVar("ratraceCS") == 2 then
         player:startEvent(853)
     elseif player:getCharVar("ratraceCS") >= 3 then
@@ -35,10 +36,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 3035 and option == 1 then
         player:setCharVar("AhtUrganStatus", 1)
     elseif csid == 3022 then
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         player:setCharVar("ratraceCS", 3)
     end
 end
+
+return entity

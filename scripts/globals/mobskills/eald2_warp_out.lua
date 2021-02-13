@@ -1,18 +1,19 @@
----------------------------------------------
+-----------------------------------
 -- Eald2 Warp Out
 -- End Eald'Narche ZM16 (phase 2) teleport
----------------------------------------------
+-----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
----------------------------------------------
+-----------------------------------
+local mobskill_object = {}
 
-function onMobSkillCheck(target, mob, skill)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-function onMobWeaponSkill(target, mob, skill)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local battletarget = mob:getTarget()
     local t = battletarget:getPos()
     t.rot = battletarget:getRotPos()
@@ -22,3 +23,5 @@ function onMobWeaponSkill(target, mob, skill)
     skill:setMsg(tpz.msg.basic.NONE)
     return 0
 end
+
+return mobskill_object

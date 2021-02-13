@@ -6,8 +6,9 @@
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     if player:hasKeyItem(tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS) then
         player:messageSpecial(ID.text.CANNOT_LEAVE, tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
     elseif player:getZPos() >= -39.1 and player:getZPos() <= -37 then
@@ -23,11 +24,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
 --[[    if csid == 114 and option == 0 then
         Todo add function that when entering staging point that a player looses all agro on mobs
     end]]
 end
+
+return entity

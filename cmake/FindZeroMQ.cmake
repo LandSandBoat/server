@@ -20,14 +20,7 @@ find_path(ZeroMQ_INCLUDE_DIR
     NAMES 
         zmq.hpp
     PATHS
-        ${PROJECT_SOURCE_DIR}/ext/zmq/include/zmq/
-        /usr/
-        /usr/bin/
-        /usr/include/
-        /usr/lib/
-        /usr/local/
-        /usr/local/bin/
-        /opt/)
+        ${PROJECT_SOURCE_DIR}/ext/zmq/include/zmq/) # Only look internally
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(ZeroMQ DEFAULT_MSG ZeroMQ_LIBRARY ZeroMQ_INCLUDE_DIR)

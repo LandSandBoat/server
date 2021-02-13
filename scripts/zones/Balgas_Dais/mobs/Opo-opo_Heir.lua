@@ -5,13 +5,14 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onMobSpawn (mob)
+entity.onMobSpawn = function(mob)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
 end
 
-function onMobFight (mob, target)
+entity.onMobFight = function(mob, target)
     local partner = (mob:getID() - 1)
     if (GetMobByID(partner):isDead() and mob:getLocalVar("buffed") == 0) then
         mob:setLocalVar("buffed", 1)
@@ -28,5 +29,7 @@ function onMobFight (mob, target)
     end
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity

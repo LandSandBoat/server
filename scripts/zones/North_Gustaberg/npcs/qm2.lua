@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/North_Gustaberg/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local thickAsThievesGamblingCS = player:getCharVar("thickAsThievesGamblingCS")
 
     if thickAsThievesGamblingCS == 5 then
@@ -21,11 +22,13 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 200 and npcUtil.giveItem(player, 1092) then
         player:setCharVar("thickAsThievesGamblingCS", 7)
     end
 end
+
+return entity

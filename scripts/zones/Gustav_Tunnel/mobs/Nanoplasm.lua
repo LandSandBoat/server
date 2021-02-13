@@ -6,12 +6,13 @@
 local ID = require("scripts/zones/Gustav_Tunnel/IDs")
 require("scripts/globals/missions")
 -----------------------------------
+local entity = {}
 
-function onMobInitialize(mob)
+entity.onMobInitialize = function(mob)
     mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
 end
 
-function onMobDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, isKiller)
     if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 2) then
         local victory = true
         for i = ID.mob.GIGAPLASM, ID.mob.GIGAPLASM + 14 do
@@ -26,3 +27,5 @@ function onMobDeath(mob, player, isKiller)
         end
     end
 end
+
+return entity

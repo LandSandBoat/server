@@ -4,19 +4,22 @@
 -- Admits players to the dock in Aht Urhgan
 -- !pos 5.195 -1 98.966 50
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     player:startEvent(223, player:getGil(), 100)
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 223 and option == 333 then
         player:delGil(100)
     end
 end
+
+return entity

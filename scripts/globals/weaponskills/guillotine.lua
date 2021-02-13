@@ -11,7 +11,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
+local weaponskill_object = {}
+
+weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 4
     -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
@@ -39,3 +41,5 @@ function onUseWeaponSkill(player, target, wsID, tp, primary, action, taChar)
     return tpHits, extraHits, criticalHit, damage
 
 end
+
+return weaponskill_object

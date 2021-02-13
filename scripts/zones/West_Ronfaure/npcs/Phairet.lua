@@ -7,9 +7,10 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
-    local theTraderInTheforest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+entity.onTrade = function(player, npc, trade)
+    local theTraderInTheforest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
     if theTraderInTheforest == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 592) then -- Trade Supplies Order
         player:startEvent(124)
@@ -18,8 +19,8 @@ function onTrade(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
-    local theTraderInTheforest = player:getQuestStatus(SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+entity.onTrigger = function(player, npc)
+    local theTraderInTheforest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
     local hasBatagreens = player:hasItem(4367) -- Clump of Batagreens
 
     if theTraderInTheforest == QUEST_ACCEPTED then
@@ -36,11 +37,13 @@ function onTrigger(player, npc)
 
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if csid == 124 and npcUtil.giveItem(player, 4367) then
         player:confirmTrade()
     end
 end
+
+return entity

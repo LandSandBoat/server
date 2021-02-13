@@ -8,10 +8,11 @@ require("scripts/globals/quests")
 require("scripts/globals/settings")
 local ID = require("scripts/zones/Nashmau/IDs")
 -----------------------------------
+local entity = {}
 
-function onTrade(player, npc, trade)
+entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 4) then
+    if (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 4) then
         if (trade:hasItemQty(5455, 1) and trade:hasItemQty(5453, 1) and trade:hasItemQty(5136, 1) and trade:hasItemQty(5456, 1) and trade:hasItemQty(5454, 1) and trade:getItemCount() == 5) then
             player:startEvent(310)
         end
@@ -19,7 +20,7 @@ function onTrade(player, npc, trade)
 
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc)
     local ratRaceProg = player:getCharVar("ratraceCS")
     if (ratRaceProg == 3) then
         player:startEvent(309)
@@ -32,10 +33,10 @@ function onTrigger(player, npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player, csid, option)
+entity.onEventFinish = function(player, csid, option)
     if (csid == 309) then
         player:setCharVar("ratraceCS", 4)
     elseif (csid == 310) then
@@ -49,3 +50,5 @@ function onEventFinish(player, csid, option)
         end
     end
 end
+
+return entity
