@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Escha - Zi'Tah Island (288)
+-- Area: Escha - Ru'Aun (289)
 --  NPC: Undulating Confluence
--- !pos --344.275 1.659 -182.613 288
+-- !pos -0.163 -34.106 -471.971 289
 -----------------------------------
 local ID = require("scripts/zones/Escha_ZiTah/IDs")
 -----------------------------------
@@ -11,15 +11,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(4)
+    player:startEvent(1)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 4 and option == 1 then
-        tpz.teleport.to(player, tpz.teleport.id.QUFIM_CONFLUENCE)
+    if csid == 1 and option == 1 then
+        tpz.teleport.to(player, tpz.teleport.id.MISAREAUX_CONFLUENCE)
     end
 end
 
