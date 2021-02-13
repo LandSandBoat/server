@@ -1,7 +1,6 @@
 -----------------------------------
 -- Spell: Esuna
 -----------------------------------
------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -17,10 +16,62 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (caster:getID() == target:getID()) then -- much of this should only run once per cast, otherwise it would only delete the debuffs from the caster.
 
         local statusNum = -1
-        local removables = {tpz.effect.FLASH, tpz.effect.BLINDNESS, tpz.effect.PARALYSIS, tpz.effect.POISON, tpz.effect.CURSE_I, tpz.effect.CURSE_II, tpz.effect.DISEASE, tpz.effect.PLAGUE}
+        local removables =
+        {
+            tpz.effect.FLASH,
+            tpz.effect.BLINDNESS,
+            tpz.effect.PARALYSIS,
+            tpz.effect.POISON,
+            tpz.effect.CURSE_I,
+            tpz.effect.CURSE_II,
+            tpz.effect.DISEASE,
+            tpz.effect.PLAGUE,
+        }
 
-        if (caster:hasStatusEffect(tpz.effect.AFFLATUS_MISERY)) then -- add extra statuses to the list of removables. Elegy and Requiem are specifically absent.
-            removables = {tpz.effect.FLASH, tpz.effect.BLINDNESS, tpz.effect.PARALYSIS, tpz.effect.POISON, tpz.effect.CURSE_I, tpz.effect.CURSE_II, tpz.effect.DISEASE, tpz.effect.PLAGUE, tpz.effect.WEIGHT, tpz.effect.BIND, tpz.effect.BIO, tpz.effect.DIA, tpz.effect.BURN, tpz.effect.FROST, tpz.effect.CHOKE, tpz.effect.RASP, tpz.effect.SHOCK, tpz.effect.DROWN, tpz.effect.STR_DOWN, tpz.effect.DEX_DOWN, tpz.effect.VIT_DOWN, tpz.effect.AGI_DOWN, tpz.effect.INT_DOWN, tpz.effect.MND_DOWN, tpz.effect.CHR_DOWN, tpz.effect.ADDLE, tpz.effect.SLOW, tpz.effect.HELIX, tpz.effect.ACCURACY_DOWN, tpz.effect.ATTACK_DOWN, tpz.effect.EVASION_DOWN, tpz.effect.DEFENSE_DOWN, tpz.effect.MAGIC_ACC_DOWN, tpz.effect.MAGIC_ATK_DOWN, tpz.effect.MAGIC_EVASION_DOWN, tpz.effect.MAGIC_DEF_DOWN, tpz.effect.MAX_TP_DOWN, tpz.effect.MAX_MP_DOWN, tpz.effect.MAX_HP_DOWN}
+        -- add extra statuses to the list of removables. Elegy and Requiem are specifically absent.
+        if (caster:hasStatusEffect(tpz.effect.AFFLATUS_MISERY)) then
+            removables =
+            {
+                tpz.effect.FLASH,
+                tpz.effect.BLINDNESS,
+                tpz.effect.PARALYSIS,
+                tpz.effect.POISON,
+                tpz.effect.CURSE_I,
+                tpz.effect.CURSE_II,
+                tpz.effect.DISEASE,
+                tpz.effect.PLAGUE,
+                tpz.effect.WEIGHT,
+                tpz.effect.BIND,
+                tpz.effect.BIO,
+                tpz.effect.DIA,
+                tpz.effect.BURN,
+                tpz.effect.FROST,
+                tpz.effect.CHOKE,
+                tpz.effect.RASP,
+                tpz.effect.SHOCK,
+                tpz.effect.DROWN,
+                tpz.effect.STR_DOWN,
+                tpz.effect.DEX_DOWN,
+                tpz.effect.VIT_DOWN,
+                tpz.effect.AGI_DOWN,
+                tpz.effect.INT_DOWN,
+                tpz.effect.MND_DOWN,
+                tpz.effect.CHR_DOWN,
+                tpz.effect.ADDLE,
+                tpz.effect.SLOW,
+                tpz.effect.HELIX,
+                tpz.effect.ACCURACY_DOWN,
+                tpz.effect.ATTACK_DOWN,
+                tpz.effect.EVASION_DOWN,
+                tpz.effect.DEFENSE_DOWN,
+                tpz.effect.MAGIC_ACC_DOWN,
+                tpz.effect.MAGIC_ATK_DOWN,
+                tpz.effect.MAGIC_EVASION_DOWN,
+                tpz.effect.MAGIC_DEF_DOWN,
+                tpz.effect.MAX_TP_DOWN,
+                tpz.effect.MAX_MP_DOWN,
+                tpz.effect.MAX_HP_DOWN,
+            }
         end
 
         local has = {}
