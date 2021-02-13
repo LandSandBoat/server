@@ -192,10 +192,10 @@ public:
     bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
     bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
-    bool   addUsedItem(uint16 itemID);                          // Add charged item with timer already on full cooldown
-    bool   addTempItem(uint16 itemID, sol::object const& arg1); // Add temp item to Entity Temp inventory
-    bool   hasWornItem(uint16 itemID);                          // Check if the item is already worn (player:hasWornItem(itemid))
-    void   createWornItem(uint16 itemID);                       // Update this item in worn item (player:createWornItem(itemid))
+    bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
+    bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
+    bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))
+    void   createWornItem(uint16 itemID);                                                   // Update this item in worn item (player:createWornItem(itemid))
     auto   findItem(uint16 itemID, sol::object const& location) -> std::optional<CLuaItem>; // Like hasItem, but returns the item object (nil if not found)
 
     void createShop(uint8 size, sol::object const& arg1);                                               // Prepare the container for work of shop ??
@@ -432,10 +432,10 @@ public:
     uint32 canLearnAbility(uint16 abilityID);   // Check to see if character can learn spell, 0 if so
     void   delLearnedAbility(uint16 abilityID); // Remove spell from Entity spell list
 
-    void   addSpell(uint16 spellID, sol::object const& arg_silent, sol::object const& arg_save); // Add spell to Entity spell list
-    bool   hasSpell(uint16 spellID);                                                             // Check to see if character has item in spell list
-    uint32 canLearnSpell(uint16 spellID);                                                        // Check to see if character can learn spell, 0 if so
-    void   delSpell(uint16 spellID);                                                             // Remove spell from Entity spell list
+    void   addSpell(uint16 spellID, sol::variadic_args va); // Add spell to Entity spell list
+    bool   hasSpell(uint16 spellID);                        // Check to see if character has item in spell list
+    uint32 canLearnSpell(uint16 spellID);                   // Check to see if character can learn spell, 0 if so
+    void   delSpell(uint16 spellID);                        // Remove spell from Entity spell list
 
     void recalculateSkillsTable();
     void recalculateAbilitiesTable();

@@ -3375,13 +3375,13 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
 bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity*    PChar          = (CCharEntity*)m_PBaseEntity;
     CItemLinkshell* PItemLinkPearl = PChar->m_GMlevel > 0 ? (CItemLinkshell*)itemutils::GetItem(514) : (CItemLinkshell*)itemutils::GetItem(515);
-    LSTYPE lstype = PChar->m_GMlevel > 0 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL;
+    LSTYPE          lstype         = PChar->m_GMlevel > 0 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL;
     if (PItemLinkPearl != NULL)
     {
         const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
-        int32 ret = Sql_Query(SqlHandle, Query, lsname);
+        int32       ret   = Sql_Query(SqlHandle, Query, lsname);
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
         {
             // build linkpearl
@@ -3398,7 +3398,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
                 {
                     linkshell::AddOnlineMember(PChar, PItemLinkPearl, 2);
                     PItemLinkPearl->setSubType(ITEM_LOCKED);
-                    PChar->equip[SLOT_LINK2] = PItemLinkPearl->getSlotID();
+                    PChar->equip[SLOT_LINK2]    = PItemLinkPearl->getSlotID();
                     PChar->equipLoc[SLOT_LINK2] = LOC_INVENTORY;
                     PChar->pushPacket(new CInventoryAssignPacket(PItemLinkPearl, INV_LINKSHELL));
                     charutils::SaveCharEquip(PChar);
@@ -7444,20 +7444,25 @@ void CLuaBaseEntity::delLearnedAbility(uint16 abilityID)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::addSpell(uint16 spellID, sol::object const& arg_silent, sol::object const& arg_save)
+void CLuaBaseEntity::addSpell(uint16 spellID, sol::variadic_args va)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    bool silent = (arg_silent != sol::nil) ? arg_silent.as<bool>() : false;
-    bool save   = (arg_save != sol::nil) ? arg_save.as<bool>() : true;
+    bool silentLog  = va[0].is<bool>() ? va[0].as<bool>() : false;
+    bool save       = va[1].is<bool>() ? va[1].as<bool>() : true;
+    bool sendUpdate = va[2].is<bool>() ? va[2].as<bool>() : true;
 
     if (charutils::addSpell(PChar, spellID))
     {
-        if (!silent)
+        if (sendUpdate)
         {
             PChar->pushPacket(new CCharSpellsPacket(PChar));
+        }
+
+        if (!silentLog)
+        {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 23));
         }
 
@@ -11910,10 +11915,10 @@ sol::table CLuaBaseEntity::getEnmityList()
             {
                 auto subTable = luautils::lua.create_table();
 
-                subTable["entity"] = CLuaBaseEntity(member.second.PEnmityOwner);
-                subTable["ce"] = member.second.CE;
-                subTable["ve"] = member.second.VE;
-                subTable["active"] = member.second.active;
+                subTable["entity"]   = CLuaBaseEntity(member.second.PEnmityOwner);
+                subTable["ce"]       = member.second.CE;
+                subTable["ve"]       = member.second.VE;
+                subTable["active"]   = member.second.active;
                 subTable["tameable"] = ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->IsTameable();
 
                 table.add(subTable);
