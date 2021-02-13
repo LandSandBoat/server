@@ -1690,7 +1690,7 @@ namespace luautils
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
-    int32 OnEventUpdate(CCharEntity* PChar, int8* string)
+    int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString)
     {
         TracyZoneScoped;
 
@@ -1707,7 +1707,7 @@ namespace luautils
             optTarget = CLuaBaseEntity(PChar->m_event.Target);
         }
 
-        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, string, optTarget);
+        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, updateString, optTarget);
         if (!result.valid())
         {
             sol::error err = result;
