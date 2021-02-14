@@ -13815,7 +13815,7 @@ INSERT INTO `mob_groups` VALUES (37,4739,260,'Lancing_Wasp',0,128,0,20000,999,10
 
 -- fished
 INSERT INTO `mob_groups` VALUES (1,0,261,'Crusty_Crab',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (2,0,261,'Barnacled_Orobon',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (2,6964,261,'Barnacled_Orobon',0,128,0,0,0,0,0,0);
 
 INSERT INTO `mob_groups` VALUES (3,5000,261,'Fluffy_Sheep',330,0,0,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (4,6696,261,'Irascible_Baelfyr',330,4,0,0,0,100,101,0);
@@ -13840,7 +13840,7 @@ INSERT INTO `mob_groups` VALUES (22,5017,261,'Downy_Emerald',330,0,2970,0,0,99,1
 INSERT INTO `mob_groups` VALUES (23,5018,261,'Cornered_Heartwing',330,0,0,0,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (24,6922,261,'Mischievous_Leafkin',330,0,0,20000,0,100,101,0);
 INSERT INTO `mob_groups` VALUES (25,5019,261,'Velkk_Torturer',330,0,2964,0,0,100,103,0);
-INSERT INTO `mob_groups` VALUES (26,0,261,'Truculent_Mantis',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (26,6965,261,'Truculent_Mantis',0,128,0,0,0,0,0,0);
 
 -- reive
 INSERT INTO `mob_groups` VALUES (27,4798,261,'Wasp_Nest',0,128,0,19000,0,100,101,0);
