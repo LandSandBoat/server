@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -3216,8 +3216,8 @@ void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     // uint32 charid = data.ref<uint32>(0x04);
-    int8* string = data[12];
-    luautils::OnEventUpdate(PChar, string);
+    std::string updateString = std::string((char*)data[12]);
+    luautils::OnEventUpdate(PChar, updateString);
 
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::UNKNOWN));
