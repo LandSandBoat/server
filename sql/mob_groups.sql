@@ -1115,7 +1115,7 @@ INSERT INTO `mob_groups` VALUES (41,4531,28,'Aqueduct_Spider',330,0,0,0,0,84,86,
 -- Riverne-Site_B01 (Zone 29)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2399,29,'Lesser_Roc',330,0,1514,2100,0,49,53,0);
+INSERT INTO `mob_groups` VALUES (1,2399,29,'Lesser_Roc',330,0,1514,2100,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (2,3242,29,'Pyrodrake',330,0,2048,0,0,50,55,0);
 INSERT INTO `mob_groups` VALUES (3,2882,29,'Nimbus_Hippogryph',330,0,1810,0,0,49,52,0);
 INSERT INTO `mob_groups` VALUES (4,3912,29,'Thunder_Elemental',330,4,2410,0,0,57,64,0);
