@@ -1202,10 +1202,10 @@ INSERT INTO `mob_groups` VALUES (6,2293,32,'Kukki-Chebukki',0,128,0,50000,0,75,7
 INSERT INTO `mob_groups` VALUES (7,710,32,'Cherukiki',0,128,0,50000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (8,2973,32,'Omega_HTBF',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (9,4083,32,'Ultima_HTBF',0,128,0,0,0,99,99,0);
-INSERT INTO `mob_groups` VALUES (10,3875,32,'Tenzen',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (11,2492,32,'Makki-Chebukki',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (12,2293,32,'Kukki-Chebukki',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (13,710,32,'Cherukiki',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (10,3875,32,'Tenzen',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (11,2492,32,'Makki-Chebukki',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (12,2293,32,'Kukki-Chebukki',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (13,710,32,'Cherukiki',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- AlTaieu (Zone 33)
