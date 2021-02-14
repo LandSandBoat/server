@@ -213,7 +213,7 @@ INSERT INTO `mob_groups` VALUES (2,4079,5,'Uleguerand_Tiger',330,0,2512,0,0,60,6
 INSERT INTO `mob_groups` VALUES (3,875,5,'Cwn_Annwn',330,1,553,0,0,59,64,0);
 INSERT INTO `mob_groups` VALUES (4,3683,5,'Snoll',330,0,2284,0,0,60,63,0);
 INSERT INTO `mob_groups` VALUES (5,553,5,'Buffalo',330,0,370,0,0,62,65,0);
-INSERT INTO `mob_groups` VALUES (6,2043,5,'Ice_Elemental',330,4,1347,0,0,66,71,0);
+INSERT INTO `mob_groups` VALUES (6,2043,5,'Ice_Elemental',330,4,1347,0,0,65,72,0);
 INSERT INTO `mob_groups` VALUES (7,1257,5,'Esbat',330,0,234,0,0,59,61,0);
 INSERT INTO `mob_groups` VALUES (8,1618,5,'Glacier_Eater',330,0,1003,0,0,58,62,0);
 INSERT INTO `mob_groups` VALUES (9,2892,5,'Nival_Raptor',330,0,1819,0,0,68,70,0);
@@ -258,7 +258,7 @@ INSERT INTO `mob_groups` VALUES (47,434,5,'Black_Coney',0,128,284,0,0,70,72,0);
 INSERT INTO `mob_groups` VALUES (48,6095,5,'Mountain_Worm_NM',75600,0,1801,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (49,6096,5,'Frost_Flambeau',7200,0,3129,8000,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (50,2043,5,'Ice_Elemental',330,4,1347,0,0,76,77,0);
-INSERT INTO `mob_groups` VALUES (51,2043,5,'Ice_Elemental',330,4,1347,0,0,83,84,0);
+INSERT INTO `mob_groups` VALUES (51,2043,5,'Ice_Elemental',330,4,1347,0,0,82,84,0);
 INSERT INTO `mob_groups` VALUES (52,994,5,'Demons_Elemental',0,128,0,0,0,66,66,0);
 INSERT INTO `mob_groups` VALUES (53,6813,5,'Camahueto',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (54,6811,5,'Isarukitsck',0,128,0,0,0,0,0,0);
