@@ -3241,13 +3241,13 @@ INSERT INTO `mob_groups` VALUES (7,4270,67,'Wabjahl',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (8,3933,67,'Tiyaash',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (9,2143,67,'Jasweem',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (10,2370,67,'Lancelord_Gaheel_Ja',0,128,0,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (11,2370,67,'Lancelord_Gaheel_Ja',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (12,0,67,'Mamool_Ja_Isangoma',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (13,0,67,'Mamool_Ja_Polemicist',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (14,0,67,'Mamool_Ja_Profligate',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (15,0,67,'Mamool_Ja_Unseen',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (16,0,67,'Mamool_Ja_Flamerearer',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
-INSERT INTO `mob_groups` VALUES (17,0,67,'Scorched-snout_Wyvern',0,128,0,0,0,99,99,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (11,2370,67,'Lancelord_Gaheel_Ja',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (12,6955,67,'Mamool_Ja_Isangoma',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (13,6956,67,'Mamool_Ja_Polemicist',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (14,6957,67,'Mamool_Ja_Profligate',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (15,6958,67,'Mamool_Ja_Unseen',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (16,6959,67,'Mamool_Ja_Flamerearer',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (17,6960,67,'Scorched-snout_Wyvern',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- Aydeewa_Subterrane (Zone 68)
