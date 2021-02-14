@@ -3192,10 +3192,10 @@ INSERT INTO `mob_groups` VALUES (2,5465,66,'Mamool_Ja_Warder_bst',0,128,0,0,0,77
 INSERT INTO `mob_groups` VALUES (3,2539,66,'Mamool_Jas_Lizard',0,128,0,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (4,2544,66,'Mamool_Ja_Warder_nin',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (5,1037,66,'Dilapidated_Gate',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (6,3225,66,'Puk_Executioner',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (7,2515,66,'Mamool_Ja_Executioner_wh',0,128,0,0,9999,77,78,0);
-INSERT INTO `mob_groups` VALUES (8,5467,66,'Mamool_Ja_Executioner_bu',0,128,0,0,0,77,78,0);
-INSERT INTO `mob_groups` VALUES (9,6501,66,'Mamool_Ja_Executioner_ni',0,128,0,0,0,77,78,0);
+INSERT INTO `mob_groups` VALUES (6,3225,66,'Puk_Executioner',0,128,0,0,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (7,2515,66,'Mamool_Ja_Executioner_wh',0,128,0,0,9999,76,78,0);
+INSERT INTO `mob_groups` VALUES (8,5467,66,'Mamool_Ja_Executioner_bu',0,128,0,0,0,76,78,0);
+INSERT INTO `mob_groups` VALUES (9,6501,66,'Mamool_Ja_Executioner_ni',0,128,0,0,0,76,78,0);
 INSERT INTO `mob_groups` VALUES (10,3437,66,'Sagelord_Molaal_Ja',0,128,0,0,0,82,84,0);
 INSERT INTO `mob_groups` VALUES (11,2542,66,'Mamool_Ja_Trainee_nin',0,128,0,0,0,77,78,0);
 INSERT INTO `mob_groups` VALUES (12,6675,66,'Mamool_Ja_Trainee_bst',0,128,0,0,0,77,78,0);
