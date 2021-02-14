@@ -12608,7 +12608,7 @@ INSERT INTO `mob_groups` VALUES (18,485,196,'Bogy',300,0,325,0,0,27,29,0);
 INSERT INTO `mob_groups` VALUES (19,4319,196,'Wendigo_war',300,0,2639,0,0,26,30,0);
 INSERT INTO `mob_groups` VALUES (20,3435,196,'Sadfly',300,0,2143,0,0,27,30,0);
 INSERT INTO `mob_groups` VALUES (21,2146,196,'Jelly',300,0,15,0,0,27,29,0);
-INSERT INTO `mob_groups` VALUES (22,6572,196,'Wight_war',300,0,2653,0,0,31,34,0);
+INSERT INTO `mob_groups` VALUES (22,6572,196,'Wight_war',300,0,2653,0,0,30,34,0);
 INSERT INTO `mob_groups` VALUES (23,6532,196,'Accursed_Soldier',300,0,1540,0,0,85,89,0);
 INSERT INTO `mob_groups` VALUES (24,6537,196,'Accursed_Sorcerer',300,0,1540,0,0,85,89,0);
 INSERT INTO `mob_groups` VALUES (25,6802,196,'Madfly',300,0,0,0,0,85,89,0);
@@ -12631,7 +12631,7 @@ INSERT INTO `mob_groups` VALUES (41,5530,196,'Earth_Elemental',0,128,0,0,0,75,75
 INSERT INTO `mob_groups` VALUES (42,251,196,'Aroma_Fly',0,128,172,0,0,44,48,0);
 INSERT INTO `mob_groups` VALUES (43,5311,196,'Lorbulcrud',0,128,0,0,99999,90,92,0);
 INSERT INTO `mob_groups` VALUES (44,6552,196,'Ghoul_blm',300,0,962,0,0,20,27,0);
-INSERT INTO `mob_groups` VALUES (45,6570,196,'Wight_blm',300,0,2653,0,0,31,34,0);
+INSERT INTO `mob_groups` VALUES (45,6570,196,'Wight_blm',300,0,2653,0,0,30,34,0);
 INSERT INTO `mob_groups` VALUES (46,1807,196,'Greater_Pugil',300,0,1232,0,0,29,31,0);
 
 -- ------------------------------------------------------------
