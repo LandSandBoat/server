@@ -14544,9 +14544,9 @@ INSERT INTO `mob_groups` VALUES (9,4903,272,'Velkk_Manipulator',0,128,0,20000,50
 INSERT INTO `mob_groups` VALUES (10,4979,272,'Leafdancer_Twitherym',900,0,0,0,999,121,123,0);
 INSERT INTO `mob_groups` VALUES (11,4981,272,'Ripsaw_Jagil',300,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (12,5524,272,'Velkk_Trampler',300,0,0,0,0,121,123,0);
-INSERT INTO `mob_groups` VALUES (13,5525,272,'Velkk_Dreadnought',300,0,0,0,0,122,123,0);
-INSERT INTO `mob_groups` VALUES (14,5523,272,'Velkk_Archmagus',300,0,0,0,9999,122,123,0);
-INSERT INTO `mob_groups` VALUES (15,5522,272,'Velkk_Cyclonicist',300,0,0,0,9999,122,123,0);
+INSERT INTO `mob_groups` VALUES (13,5525,272,'Velkk_Dreadnought',300,0,0,0,0,121,123,0);
+INSERT INTO `mob_groups` VALUES (14,5523,272,'Velkk_Archmagus',300,0,0,0,9999,121,123,0);
+INSERT INTO `mob_groups` VALUES (15,5522,272,'Velkk_Cyclonicist',300,0,0,0,9999,121,123,0);
 INSERT INTO `mob_groups` VALUES (16,4980,272,'Unyielding_Tarichuk',300,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (17,4918,272,'Spumous_Slug',300,0,0,0,0,121,123,0);
 INSERT INTO `mob_groups` VALUES (18,4917,272,'Septic_Acuex',300,0,0,0,0,121,123,0);
