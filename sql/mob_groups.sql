@@ -391,7 +391,7 @@ INSERT INTO `mob_groups` VALUES (13,5158,9,'Gargoyle',0,128,932,3900,0,57,58,0);
 INSERT INTO `mob_groups` VALUES (14,5158,9,'Gargoyle',0,128,932,4000,0,57,58,0);
 INSERT INTO `mob_groups` VALUES (15,5158,9,'Gargoyle',0,128,932,4100,0,58,59,0);
 INSERT INTO `mob_groups` VALUES (16,5158,9,'Gargoyle',0,128,932,4200,0,58,59,0);
-INSERT INTO `mob_groups` VALUES (17,4127,9,'Vampire_Bat',960,0,662,0,0,47,47,0);
+INSERT INTO `mob_groups` VALUES (17,4127,9,'Vampire_Bat',960,0,662,0,0,46,47,0);
 INSERT INTO `mob_groups` VALUES (18,5547,9,'Maze_Lizard',924,0,1644,0,0,43,47,0);
 INSERT INTO `mob_groups` VALUES (19,6386,9,'Blubber_Eyes',960,0,314,0,0,53,58,0);
 INSERT INTO `mob_groups` VALUES (20,854,9,'Cryptonberry_Plaguer',960,0,542,0,0,53,59,0);
@@ -430,7 +430,7 @@ INSERT INTO `mob_groups` VALUES (52,3992,9,'Treasure_Chest',0,128,0,0,0,55,60,0)
 INSERT INTO `mob_groups` VALUES (53,6387,9,'Gazer',924,0,315,0,0,42,44,0);
 INSERT INTO `mob_groups` VALUES (54,1040,9,'Diremite',924,0,657,0,0,42,46,0);
 INSERT INTO `mob_groups` VALUES (55,3685,9,'Snowball',924,0,2286,0,0,43,46,0);
-INSERT INTO `mob_groups` VALUES (56,1861,9,'Gyre-Carlin',0,32,1260,0,0,75,80,0);
+INSERT INTO `mob_groups` VALUES (56,6963,9,'Gyre-Carlin',0,32,1260,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (57,2922,9,'Nunyunuwi',0,128,0,3500,0,56,58,0);
 INSERT INTO `mob_groups` VALUES (58,292,9,'Avalanche',960,0,30,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (59,3231,9,'Purgatory_Bat',960,0,234,0,0,72,76,0);
@@ -445,12 +445,12 @@ INSERT INTO `mob_groups` VALUES (65,1750,9,'Golden-Tongued_Culberry',0,128,1190,
 -- The_Shrouded_Maw (Zone 10)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1027,10,'Diabolos',0,128,0,5200,5000,54,55,0);
-INSERT INTO `mob_groups` VALUES (2,5156,10,'Diremite',0,128,0,0,0,43,43,0);
+INSERT INTO `mob_groups` VALUES (1,1027,10,'Diabolos_DN',0,128,0,5200,5000,45,45,0);
+INSERT INTO `mob_groups` VALUES (2,5156,10,'Diremite_DN',0,128,0,0,0,38,40,0);
 INSERT INTO `mob_groups` VALUES (3,3104,10,'Pasuk',0,128,0,0,0,40,40,0);
-INSERT INTO `mob_groups` VALUES (4,5186,10,'Diabolos',0,128,0,11000,0,80,82,0);
+INSERT INTO `mob_groups` VALUES (4,5186,10,'Diabolos_WD',0,128,0,11000,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (5,5157,10,'Diremite_Dominator',0,128,0,0,0,78,78,0);
-INSERT INTO `mob_groups` VALUES (6,5157,10,'Diabolos_htbf',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (6,5186,10,'Diabolos_HTBF',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
 -- Oldton_Movalpolos (Zone 11)
