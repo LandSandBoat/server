@@ -13,35 +13,40 @@ tpz.job_utils.dragoon = tpz.job_utils.dragoon or {}
 -----------------------------------
 
 -- Returns a table of WS Parameters common to all damage-dealing jumps
-local function defaultJumpWSParams(player)
+local function getJumpWSParams(player, atkMultiplier, tpMultiplier)
     local ftp = 1 + (player:getStat(tpz.mod.VIT) / 256)
 
     local params =
     {
-        numHits = 1
-        ftp100 = ftp
-        ftp200 = ftp
-        ftp300 = ftp
+        numHits = 1,
+        ftp100 = ftp,
+        ftp200 = ftp,
+        ftp300 = ftp,
 
-        str_wsc = 0.0
-        dex_wsc = 0.0
-        vit_wsc = 0.0
-        agi_wsc = 0.0
-        int_wsc = 0.0
-        mnd_wsc = 0.0
-        chr_wsc = 0.0
+        str_wsc = 0.0,
+        dex_wsc = 0.0,
+        vit_wsc = 0.0,
+        agi_wsc = 0.0,
+        int_wsc = 0.0,
+        mnd_wsc = 0.0,
+        chr_wsc = 0.0,
 
-        crit100 = 0.0
-        crit200 = 0.0
-        crit300 = 0.0
-        canCrit = true
+        crit100 = 0.0,
+        crit200 = 0.0,
+        crit300 = 0.0,
+        canCrit = true,
 
-        acc100 = 0.0
-        acc200 = 0.0
-        acc300 = 0.0
+        acc100 = 0.0,
+        acc200 = 0.0,
+        acc300 = 0.0,
+
+        atk100 = atkMultiplier,
+        atk200 = atkMultiplier,
+        atk300 = atkMultiplier,
     
-        bonusTP = player:getMod(tpz.mod.JUMP_TP_BONUS)
-        hitsHigh = true
+        bonusTP = player:getMod(tpz.mod.JUMP_TP_BONUS),
+        targetTPMult = tpMultiplier,
+        hitsHigh = true,
     }
 
     if player:getMod(tpz.mod.FORCE_JUMP_CRIT) > 0 then
@@ -51,6 +56,41 @@ local function defaultJumpWSParams(player)
     end
 
     return params
+end
+
+local function getWyvern(player)
+    local pet = player:getPet()
+
+    if pet and player:getPetID() == tpz.pet.id.WYVERN then
+        return pet
+    end
+
+    return nil
+end
+
+local function hasWyvern(player)
+    return getWyvern(player) and true or false
+end
+
+-- Generic Function for damage-based Jumps
+local function performWSJump(player, target, action, params)
+    local taChar = player:getTrickAttackChar(target)
+    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
+    local totalHits = tpHits + extraHits
+
+    if totalHits > 0 then
+        if criticalHit then
+            action:speceffect(target:getID(), 38)
+        end
+
+        action:messageID(target:getID(), tpz.msg.basic.USES_JA_TAKE_DAMAGE)
+        action:speceffect(target:getID(), 32)
+    else
+        action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
+        action:speceffect(target:getID(), 0)
+    end
+
+    return damage, totalHits
 end
 
 local function cutEmpathyEffectTable(validEffects, i, maxCount)
@@ -72,7 +112,7 @@ end
 -- Ability Check Functions
 -- Note: This does not include Always-Allow abilitys (return 0, 0 by default)
 tpz.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability)
-    if target:getPet() == nil then
+    if not hasWyvern(target) then
         return tpz.msg.basic.REQUIRES_A_PET, 0
     else
         return 0, 0
@@ -92,10 +132,15 @@ tpz.job_utils.dragoon.abilityCheckCallWyvern = function(player, target, ability)
 end
 
 tpz.job_utils.dragoon.abilityCheckSpiritLink = function(player, target, ability)
-    if (player:getPet() == nil) then
+    local pet = player:getPet()
+
+    if not hasWyvern(player) then
         return tpz.msg.basic.REQUIRES_A_PET, 0
     else
-        if (player:getPet():getHP() == player:getPet():getMaxHP() and player:getMerit(tpz.merit.EMPATHY) == 0) then
+        if
+            pet:getHP() == pet:getMaxHP() and
+            player:getMerit(tpz.merit.EMPATHY) == 0
+        then
             return tpz.msg.basic.UNABLE_TO_USE_JA, 0
         else
             return 0, 0
@@ -106,7 +151,7 @@ end
 tpz.job_utils.dragoon.abilityCheckDeepBreathing = function(player, target, ability)
     if player:getPet() == nil then
         return tpz.msg.basic.REQUIRES_A_PET, 0
-    elseif player:getPetID() ~= tpz.pet.id.WYVERN then
+    elseif not hasWyvern(player) then
         return tpz.msg.basic.NO_EFFECT_ON_PET, 0
     else
         return 0, 0
@@ -123,7 +168,6 @@ tpz.job_utils.dragoon.abilityCheckAngon = function(player, target, ability)
     end
 end
 
--- Ability: Spirit Surge
 tpz.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
     local pet = player:getPet()
     local petTP = pet:getTP()
@@ -155,57 +199,38 @@ tpz.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
     target:addStatusEffect(tpz.effect.SPIRIT_SURGE, mhp_boost, 0, duration, 0, strBoost)
 end
 
--- Ability: Call Wyvern
 tpz.job_utils.dragoon.useCallWyvern = function(player, target, ability)
     tpz.pet.spawnPet(player, tpz.pet.id.WYVERN)
 end
 
--- Ability: Ancient Circle
 tpz.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local duration = 180 + player:getMod(tpz.mod.ANCIENT_CIRCLE_DURATION)
     target:addStatusEffect(tpz.effect.ANCIENT_CIRCLE, 15, 0, duration)
 end
 
--- Ability: Jump
 tpz.job_utils.dragoon.useJump = function(player, target, ability, action)
-    local params = defaultJumpWSParams(player)
+    local atkMultiplier = (player:getMod(tpz.mod.JUMP_ATT_BONUS) + 100) / 100
+    local params = getJumpWSParams(player, atkMultiplier, nil)
+    local damage, totalHits = performWSJump(player, target, action, params)
 
-    local atkMulti = (player:getMod(tpz.mod.JUMP_ATT_BONUS) + 100) / 100
-    params.atk100 = atkMulti
-    params.atk200 = atkMulti
-    params.atk300 = atkMulti
-
-    local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
-
-    if tpHits + extraHits > 0 then
-        -- Under Spirit Surge, Jump also decreases target defense by 20% for 60 seconds
-        if player:hasStatusEffect(tpz.effect.SPIRIT_SURGE) then
-            if not target:hasStatusEffect(tpz.effect.DEFENSE_DOWN) then
-                target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 20, 0, 60)
-            end
-        end
-
-        if criticalHit then
-            action:speceffect(target:getID(), 38)
-        end
-
-        action:messageID(target:getID(), tpz.msg.basic.USES_JA_TAKE_DAMAGE)
-        action:speceffect(target:getID(), 32)
-    else
-        action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
-        action:speceffect(target:getID(), 0)
+    -- Under Spirit Surge, Jump also decreases target defense by 20% for 60 seconds
+    if
+        totalHits > 0 and
+        player:hasStatusEffect(tpz.effect.SPIRIT_SURGE) and
+        not target:hasStatusEffect(tpz.effect.DEFENSE_DOWN)
+    then
+        target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 20, 0, 60)
     end
 
     return damage
 end
 
--- Ability: Spirit Link
 tpz.job_utils.dragoon.useSpiritLink = function(player, target, ability)
+    local pet = player:getPet()
     local playerHP = player:getHP()
     local drainamount = (math.random(25, 35) / 100) * playerHP
 
-    if player:getPet():getHP() == player:getPet():getMaxHP() then
+    if pet:getHP() == pet:getMaxHP() then
         drainamount = 0 -- Prevents player HP lose if wyvern is at full HP
     end
 
@@ -230,10 +255,9 @@ tpz.job_utils.dragoon.useSpiritLink = function(player, target, ability)
         player:takeDamage(drainamount)
     end
 
-    local pet = player:getPet()
     local healPet = drainamount * 2
     local petTP = pet:getTP()
-    local regenAmount = player:getMainLvl()/3 -- level/3 tic regen
+    local regenAmount = player:getMainLvl() / 3 -- level/3 tic regen
 
     if player:getEquipID(tpz.slot.HEAD) == 15238 then
         healPet = healPet + 15
@@ -246,6 +270,7 @@ tpz.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     if math.random(1, 2) == 1 then
         pet:delStatusEffect(tpz.effect.DOOM)
     end
+
     if pet:getHP() < pet:getMaxHP() then -- sleep is only removed if it heals the wyvern
         removeSleepEffects(pet)
     end
@@ -254,7 +279,7 @@ tpz.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local empathyTotal = player:getMerit(tpz.merit.EMPATHY)
     if empathyTotal > 0 then
         local effects = player:getStatusEffects()
-        local validEffects = { }
+        local validEffects = {}
         local i = 0 -- highest existing index
         local copyi = 0
 
@@ -285,22 +310,16 @@ tpz.job_utils.dragoon.useSpiritLink = function(player, target, ability)
 
     pet:addHP(healPet) --add the hp to pet
     pet:addStatusEffect(tpz.effect.REGEN, regenAmount, 3, 90, 0, 0, 0) -- 90 seconds of regen
-    player:addTP(petTP/2) --add half pet tp to you
-    pet:delTP(petTP/2) -- remove half tp from pet
+    player:addTP(petTP / 2) --add half pet tp to you
+    pet:delTP(petTP / 2) -- remove half tp from pet
 end
 
--- Ability: High Jump
 tpz.job_utils.dragoon.useHighJump = function(player, target, ability, action)
-    local params = defaultJumpWSParams(player)
-
-    params.atk100 = 1
-    params.atk200 = 1
-    params.atk300 = 1
-    params.targetTPMult = 0
+    local params = getJumpWSParams(player, 1, 0)
+    local damage, totalHits = performWSJump(player, target, action, params)
 
     if target:isMob() then
         local enmityShed = 50
-
         if player:getMainJob() ~= tpz.job.DRG then
             enmityShed = 30
         end
@@ -308,30 +327,17 @@ tpz.job_utils.dragoon.useHighJump = function(player, target, ability, action)
         target:lowerEnmity(player, enmityShed + player:getMod(tpz.mod.HIGH_JUMP_ENMITY_REDUCTION)) -- reduce total accumulated enmity
     end
 
-    local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
-
-    if tpHits + extraHits > 0 then
+    if
+        totalHits > 0 and
+        player:hasStatusEffect(tpz.effect.SPIRIT_SURGE)
+    then
         -- Under Spirit Surge, High Jump reduces TP of target
-        if player:hasStatusEffect(tpz.effect.SPIRIT_SURGE) then
-            target:delTP(damage * 0.2)
-        end
-
-        if criticalHit then
-            action:speceffect(target:getID(), 38)
-        end
-
-        action:messageID(target:getID(), tpz.msg.basic.USES_JA_TAKE_DAMAGE)
-        action:speceffect(target:getID(), 32)
-    else
-        action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
-        action:speceffect(target:getID(), 0)
+        target:delTP(damage * 0.2)
     end
-
+    
     return damage
 end
 
--- Ability: Super Jump
 tpz.job_utils.dragoon.useSuperJump = function(player, target, ability)
     -- Reduce 99% of total accumulated enmity
     if target:isMob() then
@@ -346,17 +352,15 @@ tpz.job_utils.dragoon.useSuperJump = function(player, target, ability)
     end)
 
     -- If the Dragoon's wyvern is out and alive, tell it to use Super Climb
-    local wyvern = player:getPet()
+    local wyvern = getWyvern(player)
     if
         wyvern ~= nil and
-        player:getPetID() == tpz.pet.id.WYVERN and
         wyvern:getHP() > 0
     then
         wyvern:useJobAbility(636, wyvern)
     end
 end
 
--- Ability: Angon
 tpz.job_utils.dragoon.useAngon = function(player, target, ability)
     local typeEffect = tpz.effect.DEFENSE_DOWN
     local duration = 15 + player:getMerit(tpz.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
@@ -371,93 +375,44 @@ tpz.job_utils.dragoon.useAngon = function(player, target, ability)
     return typeEffect
 end
 
--- Ability: Deep Breathing
 tpz.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
-   local wyvern = player:getPet()
+   local wyvern = getWyvern(player)
    wyvern:addStatusEffect(tpz.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is "Magic Attack boost wears off."
 end
 
--- Ability: Spirit Bond
 tpz.job_utils.dragoon.useSpiritBond = function(player, target, ability)
     player:addStatusEffect(tpz.effect.SPIRIT_BOND, 14, 0, 60)
 end
 
--- Ability: Spirit Jump
 tpz.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
+    local atkMultiplier = (player:getMod(tpz.mod.JUMP_ATT_BONUS) + 100) / 100
+    local params = getJumpWSParams(player, atkMultiplier, nil)
+    local damage, totalHits = performWSJump(player, target, action, params)
+
     -- Reduce 99% of total accumulated enmity
     if target:isMob() then
         target:lowerEnmity(player, 99)
     end
 
-    local params = defaultJumpWSParams(player)
-    local atkMulti = (player:getMod(tpz.mod.JUMP_ATT_BONUS) + 100) / 100
-    params.atk100 = atkMulti
-    params.atk200 = atkMulti
-    params.atk300 = atkMulti
-
-    local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
-
-    if tpHits + extraHits > 0 then
-
-        if criticalHit then
-            action:speceffect(target:getID(), 38)
-        end
-
-        action:messageID(target:getID(), tpz.msg.basic.USES_JA_TAKE_DAMAGE)
-        action:speceffect(target:getID(), 32)
-    else
-        action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
-        action:speceffect(target:getID(), 0)
-    end
-
     return damage
 end
 
--- Ability: Soul Jump
 tpz.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
+    local params = getJumpWSParams(player, 1, 0)
+    local damage, totalHits = performWSJump(player, target, action, params)
+
     -- Reduce 99% of total accumulated enmity
     if target:isMob() then
         target:lowerEnmity(player, 99)
     end
 
-    local params = defaultJumpWSParams(player)
-    params.atk100 = 1
-    params.atk200 = 1
-    params.atk300 = 1
-    params.targetTPMult = 0
-
-    if target:isMob() then
-        local enmityShed = 50
-        if player:getMainJob() ~= tpz.job.DRG then
-            enmityShed = 30
-        end
-    end
-
-    local taChar = player:getTrickAttackChar(target)
-    local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
-
-    if tpHits + extraHits > 0 then
-        if criticalHit then
-            action:speceffect(target:getID(), 38)
-        end
-
-        action:messageID(target:getID(), tpz.msg.basic.USES_JA_TAKE_DAMAGE)
-        action:speceffect(target:getID(), 32)
-    else
-        action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
-        action:speceffect(target:getID(), 0)
-    end
-
     return damage
 end
 
--- Ability: Dragon Breaker
 tpz.job_utils.dragoon.useDragonBreaker = function(player, target, ability)
     player:addStatusEffect(tpz.effect.DRAGON_BREAKER, 14, 0, 180)
 end
 
--- Ability: Fly High
 tpz.job_utils.dragoon.useFlyHigh = function(player, target, ability)
     player:addStatusEffect(tpz.effect.FLY_HIGH, 14, 0, 30)
 end
