@@ -15758,7 +15758,7 @@ INSERT INTO `mob_groups` VALUES (121,0,297,'Disjoineds_Odin',0,128,0,0,0,0,0,0);
 -- Walk_of_Echoes_[P1] (Zone 298)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,0,298,'Odin_Prime',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (1,6961,298,'Odin_Prime',0,128,0,0,0,124,129,0);
 INSERT INTO `mob_groups` VALUES (2,0,298,'Cait_Sith',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3,82,298,'Alexander',0,128,0,0,0,119,119,0);
 INSERT INTO `mob_groups` VALUES (4,0,298,'Lady_Lilith',0,128,0,0,0,0,0,0);
