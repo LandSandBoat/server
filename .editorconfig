@@ -1,9 +1,8 @@
 # top-most EditorConfig file
 root = true
 
-# Visual Studio add on:  https://visualstudiogallery.msdn.microsoft.com/c8bccfe2-650c-4b42-bc5c-845e21f96328
-# Notepad++ plugin:  https://sourceforge.net/projects/editorconfig/files/EditorConfig-Notepad%2B%2B-Plugin/
-# For other code editors:  http://editorconfig.org/#download
+# Visual Studio comes bundled with native support for EditorConfig
+# For other code editors:  https://editorconfig.org/#download
 
 [*.lua]
 indent_style = space
