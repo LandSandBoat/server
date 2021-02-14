@@ -5,8 +5,7 @@
 -- Recast Time: 01:00:00
 -- Duration: 00:00:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/dragoon")
 -----------------------------------
 local ability_object = {}
 
@@ -15,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.FLY_HIGH, 14, 0, 30)
+    tpz.job_utils.dragoon.useFlyHigh(player, target, ability)
 end
 
 return ability_object
