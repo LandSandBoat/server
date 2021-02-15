@@ -36,7 +36,10 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 333 and option == 1 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES)
-    elseif csid == 335 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES, {gil=600, fame=0, title=tpz.title.CRAWLER_CULLER}) then
+    elseif csid == 335 then
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CREEPY_CRAWLIES)
+        player:addTitle(tpz.title.CRAWLER_CULLER)
+        player:addGil(600 * GIL_RATE)
         player:confirmTrade()
     end
 end
