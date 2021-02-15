@@ -10,6 +10,7 @@ require("scripts/globals/settings")
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
+require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
