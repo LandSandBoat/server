@@ -6,7 +6,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "sis"
+    parameters = "is"
 }
 
 function error(player, msg)
@@ -36,5 +36,5 @@ function onTrigger(player, amount, target)
     -- add currency
     targ:addAccolades(amount)
     local newAmount = targ:getCurrency("unity_accolades")
-    player:PrintToPlayer(string.format("%s was given %i %s, for a total of %i.", targ:getName(), amount, currency, newAmount))
+    player:PrintToPlayer(string.format("%s was given %i accolades, for a total of %i.", targ:getName(), amount, newAmount))
 end

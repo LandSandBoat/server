@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2020 - Kreidos | github.com/kreidos
@@ -28,7 +28,7 @@
 CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 {
     this->id(0x110);
-    this->length(0x10);
+    this->length(0x14);
 
     const char* query = "SELECT spark_of_eminence FROM char_points WHERE charid = %d";
 

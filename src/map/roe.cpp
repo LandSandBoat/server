@@ -249,6 +249,8 @@ namespace roeutils
         {
             PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
         }
+
+        event(ROE_EVENT::ROE_NUMRECORDS_COMPLETE, PChar, RoeDatagram("numRoeRecords", GetNumEminenceCompleted(PChar)));
         charutils::SaveEminenceData(PChar);
     }
 
@@ -257,6 +259,24 @@ namespace roeutils
         uint16 page = recordID / 8;
         uint8  bit  = recordID % 8;
         return PChar->m_eminenceLog.complete[page] & (1 << bit);
+    }
+
+    uint16 GetNumEminenceCompleted(CCharEntity* PChar)
+    {
+        uint16 completedCount = 0;
+
+        for (int page = 0; page < 512; page++)
+        {
+            int pageVal = PChar->m_eminenceLog.complete[page];
+
+            while (pageVal)
+            {
+                completedCount += pageVal & 1;
+                pageVal >>= 1;
+            }
+        }
+
+        return completedCount;
     }
 
     bool AddEminenceRecord(CCharEntity* PChar, uint16 recordID)
@@ -380,7 +400,7 @@ namespace roeutils
         // Only chars with First Step Forward complete can get timed/daily records
         if (GetEminenceRecordCompletion(PChar, 1))
         {
-            time_t lastOnline = PChar->lastOnline;
+            time_t lastOnline      = PChar->lastOnline;
             time_t lastJstMidnight = CVanaTime::getInstance()->getJstMidnight() - (60 * 60 * 24); // Unix timestamp of the last JST midnight
 
             { // Daily Reset
@@ -393,7 +413,7 @@ namespace roeutils
             { // Weekly Reset
                 // Get the current JST DOTW (0-6), that plus 6 mod 7 will push the start of the week to Monday.
                 // Multiply that to get seconds, and subtract from last JST midnight.
-                uint32 jstWeekday = (CVanaTime::getInstance()->getJstWeekDay() + 6) % 7;
+                uint32 jstWeekday         = (CVanaTime::getInstance()->getJstWeekDay() + 6) % 7;
                 time_t lastJstWeeklyReset = lastJstMidnight - (jstWeekday * (60 * 60 * 24)); // Unix timestamp of last JST Midnight (Sunday->Monday)
 
                 if (lastOnline < lastJstWeeklyReset)
@@ -403,7 +423,7 @@ namespace roeutils
                 }
             }
 
-            { // 4hr Reset
+            {                                                                                                                                  // 4hr Reset
                 time_t lastJstTimedBlock = lastJstMidnight + (static_cast<uint8>(CVanaTime::getInstance()->getJstHour() / 4) * (60 * 60 * 4)); // Unix timestamp of the start of the current 4-hr block
 
                 if (lastOnline < lastJstTimedBlock || PChar->m_eminenceLog.active[30] != GetActiveTimedRecord())

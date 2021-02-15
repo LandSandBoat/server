@@ -4546,5 +4546,13 @@ function getRoeRecords(triggers)
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
         },
+
+      -----------------------------------
+      -- Hidden Gates - No Category
+      -----------------------------------
+
+        [4085] = { -- 10 RoE Objectives Complete (All for One requirement)
+
+        },
     }
 end

@@ -5866,6 +5866,15 @@ bool CLuaBaseEntity::getEminenceCompleted(uint16 recordID)
     return roeutils::GetEminenceRecordCompletion(PChar, recordID);
 }
 
+uint16 CLuaBaseEntity::getNumEminenceCompleted()
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    return roeutils::GetNumEminenceCompleted(PChar);
+}
+
 /************************************************************************
  *  Function: setEminenceProgress(record, progress, total)
  *  Purpose :
@@ -12664,6 +12673,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMissionLogEx", CLuaBaseEntity::setMissionLogEx);
     SOL_REGISTER("getMissionLogEx", CLuaBaseEntity::getMissionLogEx);
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);
+    SOL_REGISTER("getNumEminenceCompleted", CLuaBaseEntity::getNumEminenceCompleted);
     SOL_REGISTER("setEminenceCompleted", CLuaBaseEntity::setEminenceCompleted);
     SOL_REGISTER("getEminenceProgress", CLuaBaseEntity::getEminenceProgress);
     SOL_REGISTER("setEminenceProgress", CLuaBaseEntity::setEminenceProgress);
