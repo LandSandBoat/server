@@ -17,11 +17,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local FoiledAGolem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
+    local copMission = player:getCurrentMission(COP)
+    local copStatus = player:getCharVar("PromathiaStatus")
 
-    -- Curses, Foiled A_Golem!?
+    -- QUEST: CURSES, FOILED A-GOLEM!?
     if player:hasKeyItem(tpz.ki.SHANTOTTOS_EXSPELL) and FoiledAGolem == QUEST_ACCEPTED then
         player:startEvent(108) -- key item taken, wait one game day for new spell
     elseif player:getCharVar("golemwait") == 1 and FoiledAGolem == QUEST_ACCEPTED then
@@ -42,13 +43,20 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(104) -- receive key item
         end
+
+    -- QUEST: TUNING OUT
     elseif tuningOutProgress == 7 then
         player:startEvent(207) -- Ildy meets up with Rhinostery peers
     elseif tuningOutProgress == 8 then
         player:startEvent(208) -- Talks about Ildy being passionate about his work
 
+    -- CoP 5-2: DESIRES OF EMPTINESS
+    elseif copStatus > 8 and copMission == tpz.mission.id.cop.DESIRES_OF_EMPTINESS then
+        player:startEvent(211)
+
+    -- DEFAULT DIALOG
     else
-        player:startEvent(101) -- standard dialog
+        player:startEvent(101)
     end
 end
 
@@ -56,8 +64,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    -- Curses, Foiled A_Golem!?
+    -- QUEST: CURSES, FOILED A-GOLEM!?
     if csid == 104 and option == 1 then
         player:addKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item

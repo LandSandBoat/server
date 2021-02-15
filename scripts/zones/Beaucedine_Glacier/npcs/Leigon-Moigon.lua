@@ -13,7 +13,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local FoiledAGolem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local copMission = player:getCurrentMission(COP)
+    local copStatus = player:getCharVar("PromathiaStatus")
 
+    -- QUEST: CURSES, FOILED A-GOLEM!?
     if FoiledAGolem == QUEST_ACCEPTED then
         if player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) then
             player:startEvent(107)
@@ -22,6 +25,12 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(103)
         end
+
+    -- CoP 5-2: DESIRES OF EMPTINESS
+    elseif copStatus > 8 and copMission == tpz.mission.id.cop.DESIRES_OF_EMPTINESS then
+        player:startEvent(212)
+
+    -- DEFAULT DIALOG
     else
         player:startEvent(103)
     end
