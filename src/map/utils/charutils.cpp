@@ -129,9 +129,9 @@ namespace charutils
     {
         // Объявление переменных, нужных для рассчета.
 
-        float raceStat = 0; // конечное число HP для уровня на основе расы.
-        float jobStat  = 0; // конечное число HP для уровня на основе первичной профессии.
-        float sJobStat = 0; // коенчное число HP для уровня на основе вторичной профессии.
+        float raceStat  = 0; // конечное число HP для уровня на основе расы.
+        float jobStat   = 0; // конечное число HP для уровня на основе первичной профессии.
+        float sJobStat  = 0; // коенчное число HP для уровня на основе вторичной профессии.
         int32 bonusStat = 0; // бонусное число HP которое добавляется при соблюдении некоторых условий.
 
         int32 baseValueColumn   = 0; // номер колонки с базовым количеством HP
@@ -140,7 +140,7 @@ namespace charutils
         int32 scaleOver60Column = 3; // номер колонки с модификатором после 60 уровня
         int32 scaleOver75Column = 4; // номер колонки с модификатором после 75 уровня
         int32 scaleOver60       = 2; // номер колонки с модификатором для расчета MP после 60 уровня
-        int32 scaleOver75 = 3; // номер колонки с модификатором для расчета Статов после 75-го уровня
+        int32 scaleOver75       = 3; // номер колонки с модификатором для расчета Статов после 75-го уровня
 
         uint8 grade;
 
@@ -172,14 +172,14 @@ namespace charutils
 
         // Расчет прироста HP от main job
 
-        int32 mainLevelOver30 = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
-        int32 mainLevelUpTo60 = (mlvl < 60 ? mlvl - 1 : 59); // Первый режим рассчета до 60 уровня (Используется так же и для MP)
+        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
+        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // Первый режим рассчета до 60 уровня (Используется так же и для MP)
         int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Второй режим расчета после 60 уровня
         int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Третий режим расчета после 75 уровня
 
         //Расчет бонусного количества HP
 
-        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10); // +2HP на каждом уровне после 10
+        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP на каждом уровне после 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP на каждом уровне в промежутке от 50 до 60 уровня
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
 
@@ -471,7 +471,8 @@ namespace charutils
                    "fame_aby_altepa, "     // 15
                    "fame_aby_grauberg, "   // 16
                    "fame_aby_uleguerand, " // 17
-                   "fame_adoulin "         // 18
+                   "fame_adoulin,"         // 18
+                   "unity_leader "         // 19
                    "FROM char_profile "
                    "WHERE charid = %u;";
 
@@ -485,21 +486,22 @@ namespace charutils
             PChar->profile.rank[1] = (uint8)Sql_GetIntData(SqlHandle, 2);
             PChar->profile.rank[2] = (uint8)Sql_GetIntData(SqlHandle, 3);
 
-            PChar->profile.fame[0]  = (uint16)Sql_GetIntData(SqlHandle, 4);  // Sandoria
-            PChar->profile.fame[1]  = (uint16)Sql_GetIntData(SqlHandle, 5);  // Bastok
-            PChar->profile.fame[2]  = (uint16)Sql_GetIntData(SqlHandle, 6);  // Windurst
-            PChar->profile.fame[3]  = (uint16)Sql_GetIntData(SqlHandle, 7);  // Norg
-            PChar->profile.fame[4]  = (uint16)Sql_GetIntData(SqlHandle, 8);  // Jeuno
-            PChar->profile.fame[5]  = (uint16)Sql_GetIntData(SqlHandle, 9);  // AbysseaKonschtat
-            PChar->profile.fame[6]  = (uint16)Sql_GetIntData(SqlHandle, 10); // AbysseaTahrongi
-            PChar->profile.fame[7]  = (uint16)Sql_GetIntData(SqlHandle, 11); // AbysseaLaTheine
-            PChar->profile.fame[8]  = (uint16)Sql_GetIntData(SqlHandle, 12); // AbysseaMisareaux
-            PChar->profile.fame[9]  = (uint16)Sql_GetIntData(SqlHandle, 13); // AbysseaVunkerl
-            PChar->profile.fame[10] = (uint16)Sql_GetIntData(SqlHandle, 14); // AbysseaAttohwa
-            PChar->profile.fame[11] = (uint16)Sql_GetIntData(SqlHandle, 15); // AbysseaAltepa
-            PChar->profile.fame[12] = (uint16)Sql_GetIntData(SqlHandle, 16); // AbysseaGrauberg
-            PChar->profile.fame[13] = (uint16)Sql_GetIntData(SqlHandle, 17); // AbysseaUleguerand
-            PChar->profile.fame[14] = (uint16)Sql_GetIntData(SqlHandle, 18); // Adoulin
+            PChar->profile.fame[0]      = (uint16)Sql_GetIntData(SqlHandle, 4);  // Sandoria
+            PChar->profile.fame[1]      = (uint16)Sql_GetIntData(SqlHandle, 5);  // Bastok
+            PChar->profile.fame[2]      = (uint16)Sql_GetIntData(SqlHandle, 6);  // Windurst
+            PChar->profile.fame[3]      = (uint16)Sql_GetIntData(SqlHandle, 7);  // Norg
+            PChar->profile.fame[4]      = (uint16)Sql_GetIntData(SqlHandle, 8);  // Jeuno
+            PChar->profile.fame[5]      = (uint16)Sql_GetIntData(SqlHandle, 9);  // AbysseaKonschtat
+            PChar->profile.fame[6]      = (uint16)Sql_GetIntData(SqlHandle, 10); // AbysseaTahrongi
+            PChar->profile.fame[7]      = (uint16)Sql_GetIntData(SqlHandle, 11); // AbysseaLaTheine
+            PChar->profile.fame[8]      = (uint16)Sql_GetIntData(SqlHandle, 12); // AbysseaMisareaux
+            PChar->profile.fame[9]      = (uint16)Sql_GetIntData(SqlHandle, 13); // AbysseaVunkerl
+            PChar->profile.fame[10]     = (uint16)Sql_GetIntData(SqlHandle, 14); // AbysseaAttohwa
+            PChar->profile.fame[11]     = (uint16)Sql_GetIntData(SqlHandle, 15); // AbysseaAltepa
+            PChar->profile.fame[12]     = (uint16)Sql_GetIntData(SqlHandle, 16); // AbysseaGrauberg
+            PChar->profile.fame[13]     = (uint16)Sql_GetIntData(SqlHandle, 17); // AbysseaUleguerand
+            PChar->profile.fame[14]     = (uint16)Sql_GetIntData(SqlHandle, 18); // Adoulin
+            PChar->profile.unity_leader = (uint8)Sql_GetUIntData(SqlHandle, 19);
         }
 
         fmtQuery = "SELECT "
@@ -2662,7 +2664,7 @@ namespace charutils
                 uint16 skillCapD    = battleutils::GetMaxSkill((SKILLTYPE)i, JOB_SCH, PChar->GetMLevel());                      // D skill cap
                 uint16 skillCapE    = battleutils::GetMaxSkill(SKILL_DARK_MAGIC, JOB_RDM, PChar->GetMLevel());                  // E skill cap
                 auto   currentSkill = std::clamp<uint16>((PChar->RealSkills.skill[i] / 10), 0, std::max(MaxMSkill, MaxSSkill)); // working skill before bonuses
-                uint16 artsBaseline = 0; // Level based baseline to which to raise skills
+                uint16 artsBaseline = 0;                                                                                        // Level based baseline to which to raise skills
                 uint8  mLevel       = PChar->GetMLevel();
                 if (mLevel < 51)
                 {
@@ -4910,11 +4912,11 @@ namespace charutils
     {
         uint16 reduction = PChar->getMod(Mod::PERPETUATION_REDUCTION);
 
-        static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP,    Mod::ICE_AFFINITY_PERP,   Mod::WIND_AFFINITY_PERP,  Mod::EARTH_AFFINITY_PERP,
+        static const Mod strong[8] = { Mod::FIRE_AFFINITY_PERP, Mod::ICE_AFFINITY_PERP, Mod::WIND_AFFINITY_PERP, Mod::EARTH_AFFINITY_PERP,
                                        Mod::THUNDER_AFFINITY_PERP, Mod::WATER_AFFINITY_PERP, Mod::LIGHT_AFFINITY_PERP, Mod::DARK_AFFINITY_PERP };
 
-        static const WEATHER weatherStrong[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND,    WEATHER_DUST_STORM,
-                                                  WEATHER_THUNDER,   WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
+        static const WEATHER weatherStrong[8] = { WEATHER_HOT_SPELL, WEATHER_SNOW, WEATHER_WIND, WEATHER_DUST_STORM,
+                                                  WEATHER_THUNDER, WEATHER_RAIN, WEATHER_AURORAS, WEATHER_GLOOM };
 
         uint8 element = ((CPetEntity*)(PChar->PPet))->m_Element - 1;
 
@@ -5329,6 +5331,24 @@ namespace charutils
             return Sql_GetIntData(SqlHandle, 0);
         }
         return 0;
+    }
+
+    void AddUnityPoints(CCharEntity* PChar, int32 amount, int32 max)
+    {
+        float       evalPoints    = static_cast<float>(amount) / 1000;
+        const char* rankingQuery  = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d;";
+
+        if (amount < 0)
+        {
+            // Do not allow subracting points with this function
+            return;
+        }
+
+        AddPoints(PChar, "unity_accolades", amount, max);
+        AddPoints(PChar, "current_accolades", amount, std::numeric_limits<int32>::max()); // Do not cap current_accolades
+        Sql_Query(SqlHandle, rankingQuery, evalPoints, PChar->profile.unity_leader);
+
+        PChar->pushPacket(new CCharStatsPacket(PChar));
     }
 
     std::string GetConquestPointsName(CCharEntity* PChar)

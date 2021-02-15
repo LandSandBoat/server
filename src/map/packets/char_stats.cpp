@@ -74,22 +74,13 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x4A) = PChar->profile.home_point.destination;
     ref<uint8>(0x50)  = PChar->profile.nation;
 
-    // 0x51 = 0x01 on fresh player, 0x03 with unity unlocked
-    // 0x52 = superior level (1 or 2)
+    // 0x51 = 0x01 on fresh player, 0x03 with 99
+    // 0x52 = superior level (1 ~ 5)
     // 0x54 = maximum item level
     // 0x55 = itemlevel over 99
     // 0x56 = main weapon item level
 
-    ref<uint32>(0x58) = (50000 << 10) | (0x00 << 5 | 0x04);
-
-    // Unity Points definition:
-    // Bytes 58~5B, 58 most significant nibble is least sig for Points
-    // 58: Unity Leader << 1 & least sig nibble
-
-    //ref<uint8>(0x59) = 0xA0; // Bits 2-16 Unity Points
-    //ref<uint8>(0x5A) = 0x0F;
-    //ref<uint8>(0x5B) = 0x01;
-
-    ref<uint16>(0x5C) = 21; // Partial Personal Eval
-    ref<uint16>(0x5E) = 42; // Personal Eval
+    ref<uint32>(0x58) = (charutils::GetPoints(PChar, "unity_accolades") << 10) | (0x00 << 5 | PChar->profile.unity_leader);
+    ref<uint16>(0x5C) = charutils::GetPoints(PChar, "current_accolades") / 1000; // Partial Personal Eval
+    ref<uint16>(0x5E) = charutils::GetPoints(PChar, "prev_accolades") / 1000;    // Personal Eval
 }

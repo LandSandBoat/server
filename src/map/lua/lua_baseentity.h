@@ -360,6 +360,8 @@ public:
     void   setGil(int32 amount);
     bool   delGil(int32 gil);
 
+    void addAccolades(int32 accolades);
+
     int32 getCurrency(std::string const& currencyType);
     void  addCurrency(std::string const& currencyType, int32 amount, sol::object const& maxObj);
     void  setCurrency(std::string const& currencyType, int32 amount);
