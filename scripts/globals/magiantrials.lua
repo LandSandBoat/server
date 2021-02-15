@@ -1,10 +1,12 @@
 -----------------------------------
 -- Magian trials
 -----------------------------------
-require("scripts/globals/msg")
-require("scripts/globals/zone")
 require("scripts/globals/magianobjectives")
-
+require("scripts/globals/common")
+require("scripts/globals/zone")
+require("scripts/globals/msg")
+require("scripts/globals/utils")
+-----------------------------------
 tpz = tpz or {}
 tpz.magian = tpz.magian or {}
 tpz.magian.trialCache = tpz.magian.trialCache or {}
@@ -163,12 +165,12 @@ function tpz.magian.magianOrangeOnTrade(player,npc,trade)
     if player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == true then
         if not next(matchId) and item:isType(tpz.itemType.WEAPON) then
             player:setLocalVar("invalidItem", 1)
-            player:startEvent(10124,0,0,0,0,0,0,0,-1) -- invalid weapon
+            player:startEvent(10124, 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32) -- invalid weapon
             return
 
         -- player can only keep 10 trials at once
         elseif pt >= 10 and trialId == 0 then
-            player:startEvent(10124,0,0,0,0,0,0,0,-255)
+            player:startEvent(10124, 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32 - 254)
             return
 
         elseif trialId ~= 0 then
@@ -179,21 +181,21 @@ function tpz.magian.magianOrangeOnTrade(player,npc,trade)
                     if v.progress >= t.objectiveTotal then
                         player:startEvent(10129,0,0,0,t.rewardItem,0,0,0,itemId) -- completes trial
                     else
-                        player:startEvent(10125,trialId,itemId,0,0,v,0,0,-2) -- checks status of trial
+                        player:startEvent(10125, trialId, itemId, 0, 0, v, 0, 0, utils.MAX_UINT32 - 1) -- checks status of trial
                     end
                     return
                 end
             end
                 -- item has trial, player does not
                 player:setLocalVar("storeTrialId", trialId)
-                player:startEvent(10125,trialId,t.reqItem,0,0,0,0,0,-3)
+                player:startEvent(10125, trialId, t.reqItem, 0, 0, 0, 0, 0, utils.MAX_UINT32 - 2)
                 player:tradeComplete()
                 return
 
         elseif next(matchId) then
             player:setLocalVar("storeTrialId", matchId[1])
             player:tradeComplete()
-            player:startEvent(10124,matchId[1],matchId[2],matchId[3],matchId[4],0,itemId) -- starts trial
+            player:startEvent(10124, matchId[1], matchId[2], matchId[3], matchId[4], 0, itemId) -- starts trial
             return
         else
             player:messageSpecial(msg.ITEM_NOT_WEAPON_MAGIAN) -- item traded isn't a weapon
@@ -207,9 +209,9 @@ end
       value                 value
                                                   ]]--
 
-rareItems = set{ 16192,18574,19397,19398,19399,19400,19401,19402,19403,19404,19405,19406,19407,19408,19409,19410 }
+rareItems = set{ 16192, 18574, 19397, 19398, 19399, 19400, 19401, 19402, 19403, 19404, 19405, 19406, 19407, 19408, 19409, 19410 }
 
-function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
+function tpz.magian.magianOrangeEventUpdate(player, itemId, csid, option)
     local optionMod = bit.band(option, 0xFF)
 
     -- 10123 = trigger, 10124 = initial trade, 10125 = in-progress trade
@@ -259,7 +261,7 @@ function tpz.magian.magianOrangeEventUpdate(player,itemId,csid,option)
         local a1, a2 = reqAugmentParams(t)
         local slot = hasTrial(player, trialId)
         if slot then
-            player:updateEvent(0,0,0,0,0,0,0,-1)
+            player:updateEvent(0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32)
             return
         end
         player:updateEvent(2,a1,a2,t.reqItem)
@@ -322,7 +324,7 @@ function tpz.magian.magianOrangeOnEventFinish(player,itemId,csid,option)
         player:messageSpecial(msg.RETURN_MAGIAN_ITEM, t.reqItem)
         player:setLocalVar("storeTrialId", 0)
 
-    elseif csid == 10124 and (optionMod == 0 or option == -1) then
+    elseif csid == 10124 and (optionMod == 0 or option == utils.MAX_UINT32) then
         local trialId = player:getLocalVar("storeTrialId")
         local itemId = player:getLocalVar("storeItemId")
         local t = GetMagianTrial(trialId)

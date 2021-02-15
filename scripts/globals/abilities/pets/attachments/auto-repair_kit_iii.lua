@@ -34,11 +34,11 @@ attachment_object.onUnequip = function(pet)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)
-    onUpdate(pet, maneuvers)
+    attachment_object.onUpdate(pet, maneuvers)
 end
 
 attachment_object.onManeuverLose = function(pet, maneuvers)
-    onUpdate(pet, maneuvers - 1)
+    attachment_object.onUpdate(pet, maneuvers - 1)
 end
 
 attachment_object.onUpdate = function(pet, maneuvers)

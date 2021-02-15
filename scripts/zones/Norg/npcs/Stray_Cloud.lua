@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anUndyingPledge = player:getQuestStatus(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
+    local anUndyingPledge = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
 
     if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 then
         player:startEvent(225) -- Start quest
@@ -29,7 +29,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(231) -- Standard Conversation
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -37,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 225 then
-        player:addQuest(OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
+        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
         player:setCharVar("anUndyingPledgeCS", 1)
     elseif
         csid == 227 and

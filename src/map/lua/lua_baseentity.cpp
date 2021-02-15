@@ -120,10 +120,13 @@
 #include "../packets/guild_menu_buy.h"
 #include "../packets/independant_animation.h"
 #include "../packets/instance_entry.h"
+#include "../packets/inventory_assign.h"
 #include "../packets/inventory_finish.h"
+#include "../packets/inventory_item.h"
 #include "../packets/inventory_modify.h"
 #include "../packets/inventory_size.h"
 #include "../packets/key_items.h"
+#include "../packets/linkshell_equip.h"
 #include "../packets/menu_merit.h"
 #include "../packets/menu_mog.h"
 #include "../packets/menu_raisetractor.h"
@@ -3361,6 +3364,54 @@ bool CLuaBaseEntity::breakLinkshell(std::string const& lsname)
     }
 
     return found;
+}
+
+/************************************************************************
+ *  Function: addLinkpearl()
+ *  Purpose : Adds a linkpearl (pearlsack for GMs) to inventory, optionally equips to slot 2
+ *  Example : player:addLinkpearl("NewPlayers", true)
+ ************************************************************************/
+
+bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    CCharEntity*    PChar          = (CCharEntity*)m_PBaseEntity;
+    CItemLinkshell* PItemLinkPearl = PChar->m_GMlevel > 0 ? (CItemLinkshell*)itemutils::GetItem(514) : (CItemLinkshell*)itemutils::GetItem(515);
+    LSTYPE          lstype         = PChar->m_GMlevel > 0 ? LSTYPE_PEARLSACK : LSTYPE_LINKPEARL;
+    if (PItemLinkPearl != NULL)
+    {
+        const char* Query = "SELECT linkshellid, color FROM linkshells WHERE name = '%s' AND broken = 0";
+        int32       ret   = Sql_Query(SqlHandle, Query, lsname);
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            // build linkpearl
+            int8 EncodedString[16];
+            EncodeStringLinkshell((int8*)lsname.c_str(), EncodedString);
+            ((CItem*)PItemLinkPearl)->setSignature(EncodedString);
+            PItemLinkPearl->SetLSID(Sql_GetUIntData(SqlHandle, 0));
+            PItemLinkPearl->SetLSColor(Sql_GetIntData(SqlHandle, 1));
+            PItemLinkPearl->SetLSType(lstype);
+            if (charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl) != ERROR_SLOTID)
+            {
+                // equip linkpearl to slot 2
+                if (equip)
+                {
+                    linkshell::AddOnlineMember(PChar, PItemLinkPearl, 2);
+                    PItemLinkPearl->setSubType(ITEM_LOCKED);
+                    PChar->equip[SLOT_LINK2]    = PItemLinkPearl->getSlotID();
+                    PChar->equipLoc[SLOT_LINK2] = LOC_INVENTORY;
+                    PChar->pushPacket(new CInventoryAssignPacket(PItemLinkPearl, INV_LINKSHELL));
+                    charutils::SaveCharEquip(PChar);
+                    PChar->pushPacket(new CLinkshellEquipPacket(PChar, PItemLinkPearl->GetLSID()));
+                    PChar->pushPacket(new CInventoryItemPacket(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID()));
+                    PChar->pushPacket(new CInventoryFinishPacket());
+                    charutils::LoadInventory(PChar);
+                }
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 /************************************************************************
@@ -7269,6 +7320,25 @@ void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsID)
 }
 
 /************************************************************************
+ *  Function: trySkillUp()
+ *  Purpose : Attempts to increase skill for <skill> based on compared mob <level>
+ *  Example : player:trySkillUp(tpz.skill.HAND_TO_HAND, 50)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::trySkillUp(uint8 skill, uint8 level)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        // Do not attempt to skillup for non-PCs
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::TrySkillUP(PChar, static_cast<SKILLTYPE>(skill), level);
+}
+
+/************************************************************************
  *  Function: addWeaponSkillPoints()
  *  Purpose : Removes a learned weaponskill from the player
  *  Example : player:addWeaponSkillPoints(tpz.slot.MAIN, 300)
@@ -7374,20 +7444,25 @@ void CLuaBaseEntity::delLearnedAbility(uint16 abilityID)
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::addSpell(uint16 spellID, sol::object const& arg_silent, sol::object const& arg_save)
+void CLuaBaseEntity::addSpell(uint16 spellID, sol::variadic_args va)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    bool silent = (arg_silent != sol::nil) ? arg_silent.as<bool>() : false;
-    bool save   = (arg_save != sol::nil) ? arg_save.as<bool>() : true;
+    bool silentLog  = va[0].is<bool>() ? va[0].as<bool>() : false;
+    bool save       = va[1].is<bool>() ? va[1].as<bool>() : true;
+    bool sendUpdate = va[2].is<bool>() ? va[2].as<bool>() : true;
 
     if (charutils::addSpell(PChar, spellID))
     {
-        if (!silent)
+        if (sendUpdate)
         {
             PChar->pushPacket(new CCharSpellsPacket(PChar));
+        }
+
+        if (!silentLog)
+        {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 23));
         }
 
@@ -9383,7 +9458,7 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
  *  Notes   : Used for removal of multiple effects with matching flag
  ************************************************************************/
 
-void CLuaBaseEntity::delStatusEffectsByFlag(uint16 flag, sol::object const& silent)
+void CLuaBaseEntity::delStatusEffectsByFlag(uint32 flag, sol::object const& silent)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
@@ -11840,10 +11915,10 @@ sol::table CLuaBaseEntity::getEnmityList()
             {
                 auto subTable = luautils::lua.create_table();
 
-                subTable["entity"] = CLuaBaseEntity(member.second.PEnmityOwner);
-                subTable["ce"] = member.second.CE;
-                subTable["ve"] = member.second.VE;
-                subTable["active"] = member.second.active;
+                subTable["entity"]   = CLuaBaseEntity(member.second.PEnmityOwner);
+                subTable["ce"]       = member.second.CE;
+                subTable["ve"]       = member.second.VE;
+                subTable["active"]   = member.second.active;
                 subTable["tameable"] = ((CMobEntity*)m_PBaseEntity)->PEnmityContainer->IsTameable();
 
                 table.add(subTable);
@@ -12133,7 +12208,10 @@ void CLuaBaseEntity::setDropID(uint32 dropID)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
-    static_cast<CMobEntity*>(m_PBaseEntity)->m_DropID = dropID;
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    PMob->m_DropID = dropID;
+    PMob->m_DropListModifications.clear();
 }
 
 /************************************************************************
@@ -12272,6 +12350,25 @@ int16 CLuaBaseEntity::getTHlevel()
 
     auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
     return PMob->isDead() ? PMob->m_THLvl : PMob->PEnmityContainer->GetHighestTH();
+}
+
+/************************************************************************
+ *  Function: addDropListModification()
+ *  Purpose : Adds a modification to the drop list of this mob, to be applied just before loot is rolled.
+ *  Example : mob:addDropListModification(4112, 1000) -- Set drop rate of Potion to 100%
+ *  Notes   : Erased on death, once the modifications are applied.
+ *          : Modifications are cleared if the drop list is changed.
+ ************************************************************************/
+
+void CLuaBaseEntity::addDropListModification(uint16 id, uint16 newRate, sol::variadic_args va)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    uint8 dropType = va[0].get_type() == sol::type::number ? va[0].as<uint8>() : 0;
+
+    PMob->m_DropListModifications[id] = std::pair<uint16, uint8>(newRate, dropType);
 }
 
 //==========================================================//
@@ -12425,6 +12522,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addShopItem", CLuaBaseEntity::addShopItem);
     SOL_REGISTER("getCurrentGPItem", CLuaBaseEntity::getCurrentGPItem);
     SOL_REGISTER("breakLinkshell", CLuaBaseEntity::breakLinkshell);
+    SOL_REGISTER("addLinkpearl", CLuaBaseEntity::addLinkpearl);
 
     // Trading
     SOL_REGISTER("getContainerSize", CLuaBaseEntity::getContainerSize);
@@ -12640,6 +12738,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("addLearnedWeaponskill", CLuaBaseEntity::addLearnedWeaponskill);
     SOL_REGISTER("hasLearnedWeaponskill", CLuaBaseEntity::hasLearnedWeaponskill);
     SOL_REGISTER("delLearnedWeaponskill", CLuaBaseEntity::delLearnedWeaponskill);
+    SOL_REGISTER("trySkillUp", CLuaBaseEntity::trySkillUp);
 
     SOL_REGISTER("addWeaponSkillPoints", CLuaBaseEntity::addWeaponSkillPoints);
 
@@ -12954,6 +13053,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);
     SOL_REGISTER("itemStolen", CLuaBaseEntity::itemStolen);
     SOL_REGISTER("getTHlevel", CLuaBaseEntity::getTHlevel);
+    SOL_REGISTER("addDropListModification", CLuaBaseEntity::addDropListModification);
+
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 }

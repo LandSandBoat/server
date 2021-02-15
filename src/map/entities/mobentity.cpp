@@ -820,24 +820,73 @@ void CMobEntity::DistributeRewards()
 void CMobEntity::DropItems(CCharEntity* PChar)
 {
     // Adds an item to the treasure pool and returns true if the pool has been filled
-    auto AddItemToPool = [this, PChar](uint16 ItemID, uint8 dropCount) {
+    auto AddItemToPool = [this, PChar](uint16 ItemID, uint8 dropCount)
+    {
         PChar->PTreasurePool->AddItem(ItemID, this);
         return dropCount >= TREASUREPOOL_SIZE;
+    };
+
+    auto UpdateDroprateOrAddToList = [&](std::vector<DropItem_t>& list, uint8 dropType, uint16 itemID, uint16 dropRate)
+    {
+        // Try and update droprate for an item in place
+        bool updated = false;
+        for (auto& entry : list)
+        {
+            if (!updated && entry.ItemID == itemID)
+            {
+                entry.DropRate = dropRate;
+                updated        = true;
+            }
+        }
+
+        // If that item wasn't found and updated, add the item and droprate to the list
+        if (!updated)
+        {
+            list.emplace_back(DropItem_t(dropType, itemID, dropRate));
+        }
     };
 
     // Limit number of items that can drop to the treasure pool size
     uint8 dropCount = 0;
 
-    DropList_t* DropList = itemutils::GetDropList(m_DropID);
-    // ShowDebug(CL_CYAN"DropID: %u dropping with TH Level: %u\n" CL_RESET, PMob->m_DropID, PMob->m_THLvl);
+    // Make a temporary copy of the global droplist entry for this drop id
+    // so we can modify it without modifying the global lists
+    DropList_t DropList;
+    if (auto droplistPtr = itemutils::GetDropList(m_DropID))
+    {
+        DropList = *droplistPtr;
+    }
 
-    if (DropList != nullptr && !getMobMod(MOBMOD_NO_DROPS) && (!DropList->Items.empty() || !DropList->Groups.empty()))
+    // Apply m_DropListModifications changes to DropList
+    for (auto& entry : m_DropListModifications)
+    {
+        uint16 itemID = entry.first;
+        uint16 dropRate = entry.second.first;
+        DROP_TYPE dropType = static_cast<DROP_TYPE>(entry.second.second);
+
+        if (dropType == DROP_NORMAL)
+        {
+            UpdateDroprateOrAddToList(DropList.Items, DROP_NORMAL, itemID, dropRate);
+        }
+        else if (dropType == DROP_GROUPED)
+        {
+            for (auto& group : DropList.Groups)
+            {
+                UpdateDroprateOrAddToList(group.Items, DROP_NORMAL, itemID, dropRate);
+            }
+        }
+    }
+
+    // Make sure m_DropListModifications doesn't persist by clearing it out now
+    m_DropListModifications.clear();
+
+    if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
         int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
         int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
 
-        for (const DropGroup_t& group : DropList->Groups)
+        for (const DropGroup_t& group : DropList.Groups)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
@@ -865,7 +914,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
         }
 
-        for (const DropItem_t& item : DropList->Items)
+        for (const DropItem_t& item : DropList.Items)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {

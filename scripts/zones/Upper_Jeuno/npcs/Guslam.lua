@@ -4,174 +4,91 @@
 -- Starts Quest: Borghertz's Hands (AF Hands, Many job)
 -- !pos -5 1 48 244
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
+
+local prerequisites =
+{
+    [tpz.job.WAR] = { log = tpz.quest.log_id.BASTOK,   quest = tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
+    [tpz.job.MNK] = { log = tpz.quest.log_id.BASTOK,   quest = tpz.quest.id.bastok.THE_FIRST_MEETING            },
+    [tpz.job.WHM] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
+    [tpz.job.BLM] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.RECOLLECTIONS              },
+    [tpz.job.RDM] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS      },
+    [tpz.job.THF] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.AS_THICK_AS_THIEVES        },
+    [tpz.job.PLD] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.A_BOY_S_DREAM              },
+    [tpz.job.DRK] = { log = tpz.quest.log_id.BASTOK,   quest = tpz.quest.id.bastok.DARK_PUPPET                  },
+    [tpz.job.BST] = { log = tpz.quest.log_id.JEUNO,    quest = tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW         },
+    [tpz.job.BRD] = { log = tpz.quest.log_id.JEUNO,    quest = tpz.quest.id.jeuno.THE_REQUIEM                   },
+    [tpz.job.RNG] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.FIRE_AND_BRIMSTONE         },
+    [tpz.job.SAM] = { log = tpz.quest.log_id.OUTLANDS, quest = tpz.quest.id.outlands.YOMI_OKURI                 },
+    [tpz.job.NIN] = { log = tpz.quest.log_id.OUTLANDS, quest = tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX      },
+    [tpz.job.DRG] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.CHASING_QUOTAS             },
+    [tpz.job.SMN] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.CLASS_REUNION              },
+}
+
+local function isFirstHandsQuest(player)
+    local count = 0
+
+    for i = 0, 14 do
+        if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == QUEST_COMPLETED then
+            return false
+        end
+    end
+
+    return true
+end
+
 
 entity.onTrade = function(player, npc, trade)
 end
 
--- If it's the first Hands quest
-local function nbHandsQuestsCompleted(player)
-
-    local questNotAvailable = 0
-
-    for nb = 0, 14, 1 do
-        if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + nb) ~= QUEST_AVAILABLE) then
-            questNotAvailable = questNotAvailable + 1
-        end
-    end
-
-    return questNotAvailable
-
-end
-
 entity.onTrigger = function(player, npc)
-    -- TODO: table this stuff, rather than tall if-elseif
-    if (player:getMainLvl() >= 50 and player:getCharVar("BorghertzAlreadyActiveWithJob") == 0) then
-        if
-            player:getMainJob() == tpz.job.WAR and
-            player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for WAR
+    local mJob = player:getMainJob()
+    local prereq = prerequisites[mJob]
 
-        elseif
-            player:getMainJob() == tpz.job.MNK and
-            player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_STRIKING_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for MNK
+    -- HANDS QUEST
+    if
+        prereq and
+        player:getMainLvl() >= 50 and
+        player:getCharVar("BorghertzAlreadyActiveWithJob") == 0 and
+        player:getQuestStatus(prereq.log, prereq.quest) ~= QUEST_AVAILABLE and
+        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
+    then
+        player:startEvent(155)
+    elseif player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and not player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) then
+        player:startEvent(43)
+    elseif player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) then
+        player:startEvent(26)
 
-        elseif
-            player:getMainJob() == tpz.job.WHM and
-            player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_HEALING_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for WHM
-
-        elseif
-            player:getMainJob() == tpz.job.BLM and
-            player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_SORCEROUS_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for BLM
-
-        elseif
-            player:getMainJob() == tpz.job.RDM and
-            player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_VERMILLION_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for RDM
-
-        elseif
-            player:getMainJob() == tpz.job.THF and
-            player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_SNEAKY_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for THF
-
-        elseif
-            player:getMainJob() == tpz.job.PLD and
-            player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_STALWART_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for PLD
-
-        elseif
-            player:getMainJob() == tpz.job.DRK and
-            player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_SHADOWY_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for DRK
-
-        elseif
-            player:getMainJob() == tpz.job.BST and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WILD_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for BST
-
-        elseif
-            player:getMainJob() == tpz.job.BRD and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_HARMONIOUS_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for BRD
-
-        elseif
-            player:getMainJob() == tpz.job.RNG and
-            player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_CHASING_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for RNG
-
-        elseif
-            player:getMainJob() == tpz.job.SAM and
-            player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_LOYAL_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for SAM
-
-        elseif
-            player:getMainJob() == tpz.job.NIN and
-            player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_LURKING_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for NIN
-
-        elseif
-            player:getMainJob() == tpz.job.DRG and
-            player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_DRAGON_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for DRG
-
-        elseif
-            player:getMainJob() == tpz.job.SMN and
-            player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION) ~= QUEST_AVAILABLE and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS) == QUEST_AVAILABLE
-        then
-            player:startEvent(155) -- Start Quest for SMN
-
-        else
-            player:startEvent(154) -- Standard dialog
+        if player:getCharVar("BorghertzCS") == 0 then
+            if isFirstHandsQuest(player) then
+                if player:getCharVar("BorghertzHandsFirstTime") == 0 then
+                    player:setCharVar("BorghertzHandsFirstTime", 1)
+                end
+            else
+                player:setCharVar("BorghertzCS", 1)
+            end
         end
-    elseif (player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) == false) then
-        player:startEvent(43) -- During Quest before KI obtained
-    elseif (player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) == true) then
-        player:startEvent(26) -- Dialog with Old Gauntlets KI
 
-        if (nbHandsQuestsCompleted(player) == 1) then
-            player:setCharVar("BorghertzHandsFirstTime", 1)
-        else
-            player:setCharVar("BorghertzCS", 1)
-        end
+    -- DEFAULT DIALOG
     else
-        player:startEvent(154) -- Standard dialog
+        player:startEvent(154)
     end
-
 end
 
--- 154 Standard dialog
--- 155 Start Quest
--- 43 During Quest before KI obtained
--- 26 Dialog avec Old Gauntlets KI
--- 156 During Quest after Old Gauntlets KI ?
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    if csid == 155 then
+        local mJob = player:getMainJob()
 
-    if (csid == 155) then
-        local NumQuest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + player:getMainJob() - 1
-        player:addQuest(tpz.quest.log_id.JEUNO, NumQuest)
-        player:setCharVar("BorghertzAlreadyActiveWithJob", player:getMainJob())
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1)
+        player:setCharVar("BorghertzAlreadyActiveWithJob", mJob)
     end
-
 end
 
 return entity

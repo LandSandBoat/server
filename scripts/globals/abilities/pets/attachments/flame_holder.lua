@@ -1,23 +1,24 @@
 -----------------------------------
 -- Attachment: Flame Holder
 -----------------------------------
+require("scripts/globals/common")
 require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-local validskills = {
-    [1940] = true,
-    [1941] = true,
-    [1942] = true,
-    [1943] = true,
-    [2065] = true,
-    [2066] = true,
-    [2067] = true,
-    [2299] = true,
-    [2300] = true,
-    [2301] = true,
-    [2743] = true,
-    [2744] = true
+local validskills = set{
+    1940,
+    1941,
+    1942,
+    1943,
+    2065,
+    2066,
+    2067,
+    2299,
+    2300,
+    2301,
+    2743,
+    2744,
 }
 
 attachment_object.onEquip = function(pet)

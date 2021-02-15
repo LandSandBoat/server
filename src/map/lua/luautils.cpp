@@ -463,6 +463,23 @@ namespace luautils
         // Now that the list is verified, overwrite it with the same list; without "scripts"
         parts = std::vector<std::string>(it + 1, parts.end());
 
+        // Globals need to be nil'd before they're reloaded
+        if (parts.size() == 2 && parts[0] == "globals")
+        {
+            std::string requireName = fmt::format("scripts/globals/{}", parts[1]);
+
+            auto result = lua.safe_script(fmt::format("package.loaded[\"{}\"] = nil; require(\"{}\");", requireName, requireName));
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load global error: %s: %s\n", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"\n", filename, requireName);
+            return;
+        }
+
         if (!std::filesystem::exists(filename))
         {
             // ShowDebug("luautils::CacheLuaObjectFromFile: File does not exist: %s\n", filename);
@@ -503,8 +520,7 @@ namespace luautils
 
         if (printOutput)
         {
-            ShowInfo("[FileWatcher] %s\n", filename);
-            ShowInfo("[FileWatcher] %s\n", out_str);
+            ShowInfo("[FileWatcher] %s -> %s\n", filename, out_str);
         }
     }
 
@@ -1674,7 +1690,7 @@ namespace luautils
         return func_result.get_type() == sol::type::number ? func_result.get<int32>() : 1;
     }
 
-    int32 OnEventUpdate(CCharEntity* PChar, int8* string)
+    int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString)
     {
         TracyZoneScoped;
 
@@ -1691,7 +1707,7 @@ namespace luautils
             optTarget = CLuaBaseEntity(PChar->m_event.Target);
         }
 
-        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, string, optTarget);
+        auto result = onEventUpdate(CLuaBaseEntity(PChar), PChar->m_event.EventID, updateString, optTarget);
         if (!result.valid())
         {
             sol::error err = result;
@@ -1805,7 +1821,7 @@ namespace luautils
         return 0;
     }
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage)
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 damage)
     {
         TracyZoneScoped;
 
@@ -3212,22 +3228,22 @@ namespace luautils
             return 87;
         }
 
-        auto name = (const char*)PAbility->getName();
-
-        sol::function onAbilityCheck;
+        std::string filename;
         if (PAbility->isPetAbility())
         {
-            onAbilityCheck = lua["tpz"]["globals"]["abilities"]["pets"][name]["onAbilityCheck"];
+            filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
         }
         else
         {
-            onAbilityCheck = lua["tpz"]["globals"]["abilities"][name]["onAbilityCheck"];
+            filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
         }
 
+        sol::function onAbilityCheck = GetCacheEntryFromFilename(filename)["onAbilityCheck"];
         if (!onAbilityCheck.valid())
         {
-            ShowWarning("luautils::onAbilityCheck\n");
-            return 87;
+            // TODO: We rely on this to fail silently in certain cases, but this is bad :(
+            //ShowWarning("luautils::onAbilityCheck - Ability %s not found.\n", PAbility->getName());
+            return 0;
         }
 
         auto result = onAbilityCheck(CLuaBaseEntity(PChar), CLuaBaseEntity(PTarget), CLuaAbility(PAbility));
@@ -3258,9 +3274,9 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name     = (const char*)PMobSkill->getName();
+        std::string filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PMobSkill->getName());
 
-        auto onPetAbility = lua["tpz"]["globals"]["abilities"]["pets"][name]["onPetAbility"];
+        sol::function onPetAbility = GetCacheEntryFromFilename(filename)["onPetAbility"];
         if (!onPetAbility.valid())
         {
             return 0;
@@ -3302,18 +3318,17 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        auto name = (const char*)PAbility->getName();
-
-        sol::function onUseAbility;
-        if (PUser->objtype == TYPE_PET)
+        std::string filename;
+        if (PAbility->isPetAbility())
         {
-            onUseAbility = lua["tpz"]["globals"]["abilities"]["pets"][name]["onUseAbility"];
+            filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PAbility->getName());
         }
         else
         {
-            onUseAbility = lua["tpz"]["globals"]["abilities"][name]["onUseAbility"];
+            filename = fmt::format("./scripts/globals/abilities/{}.lua", PAbility->getName());
         }
 
+        sol::function onUseAbility = GetCacheEntryFromFilename(filename)["onUseAbility"];
         if (!onUseAbility.valid())
         {
             ShowWarning("luautils::onUseAbility - Ability %s not found.\n", PAbility->getName());

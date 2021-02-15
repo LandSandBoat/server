@@ -151,12 +151,24 @@ local GearSets =  {
              {id = 196, items = {26085, 23329, 23664, 23262, 23597, 23195, 23530, 23128, 23463, 23061, 23396}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.ACC, 15, 0, 0}, {tpz.mod.RACC, 15, 0, 0}, {tpz.mod.MACC, 15, 0, 0}} }, -- AF1 119 +2/3 GEO
              {id = 199, items = {26191, 23330, 23665, 23263, 23598, 23196, 23531, 23129, 23464, 23062, 23397}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.ACC, 15, 0, 0}, {tpz.mod.RACC, 15, 0, 0}, {tpz.mod.MACC, 15, 0, 0}} }, -- AF1 119 +2/3 RUN
 
-             {id = 200, items = {27740, 27881, 28029, 28168, 28306},  matches = 5, matchType = matchtype.any, mods = {{tpz.mod.DMGPHYS, -10, 0, 0}} },          -- Outrider set (Phys damage taken -10%)
-             {id = 201, items = {27741, 27882, 28030, 28169, 28307},  matches = 5, matchType = matchtype.any, mods = {{tpz.mod.CRIT_DMG_INCREASE, 10, 0, 0}} }, -- Espial set (Crit damage +10%)
-             {id = 202, items = {27742, 27883, 28031, 28170, 28308},  matches = 5, matchType = matchtype.any, mods = {{tpz.mod.REFRESH, 3, 0, 0}} },            -- Wayfarer set (Refresh+3)
+             {id = 202, items = {27740, 27881, 28029, 28168, 28306},  matches = 5, matchType = matchtype.any, mods = {{tpz.mod.DMGPHYS, -10, 0, 0}} },          -- Outrider set (Phys damage taken -10%)
+             {id = 203, items = {27741, 27882, 28030, 28169, 28307},  matches = 5, matchType = matchtype.any, mods = {{tpz.mod.CRIT_DMG_INCREASE, 10, 0, 0}} }, -- Espial set (Crit damage +10%)
+             {id = 204, items = {27742, 27883, 28031, 28170, 28308},  matches = 5, matchType = matchtype.any, mods = {{tpz.mod.REFRESH, 3, 0, 0}} },            -- Wayfarer set (Refresh+3)
+             {id = 205, items = {26677, 26853, 27029, 27205, 27381}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.BP_DAMAGE, 4, 2, 0}} }, -- Apogee +1
+             {id = 206, items = {25612, 25685, 27116, 27301, 27472}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.ATT, 20, 10, 0}} }, -- Ryuo +1
+             {id = 207, items = {26671, 26847, 27023, 27199, 27375}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.DMG, -4, -2, 0}} }, -- Souveran +1
+             {id = 208, items = {25610, 25683, 27114, 27299, 27470}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.DOUBLE_ATTACK, 4, 2, 0}} }, -- Emicho +1
+             {id = 209, items = {25618, 25691, 27122, 27307, 27478}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.CURE_POTENCY_II, 4, 2, 0}} }, -- Kaykaus +1
+             {id = 210, items = {26675, 26851, 27027, 27203, 27379}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.MARTIAL_ARTS, 8, 4, 0}} }, -- Rao +1
+             {id = 211, items = {25614, 25687, 27118, 27303, 27474}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.CRITHITRATE, 4, 2, 0}} }, -- Adhemar +1
+             {id = 212, items = {26679, 26855, 27031, 27207, 27383}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.ACC, 20, 10, 0}} }, -- Carmine +1
+             {id = 213, items = {26669, 26845, 27021, 27197, 27373}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.ALL_WSDMG_FIRST_HIT, 4, 2, 0}} }, -- Lustratio +1
+             {id = 214, items = {26673, 26849, 27025, 27201, 27377}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.DOUBLE_ATTACK, 4, 2, 0}} }, -- Argosy +1
+             {id = 215, items = {25616, 25689, 27120, 27305, 27476}, matches = 2, matchType = matchtype.any, mods = {{tpz.mod.MATT, 20, 10, 0}} }, -- Amalric +1
         }
 
-             -- increment id by (number of mods in previous gearset - 1)
+             -- increment id by the number of mods in previous gearset (e.g. id 199 has 3 mods, 199 + 3 = 202)
+             -- so in this example, the next usable id after 199 would be 202.
 
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
 

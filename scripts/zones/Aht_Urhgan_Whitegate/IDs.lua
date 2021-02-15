@@ -68,7 +68,7 @@ zones[tpz.zone.AHT_URHGAN_WHITEGATE] =
         SANCTION                      = 9807, -- You have received the Empire's Sanction.
         ZASSHAL_DIALOG                = 11001, -- 'ang about. Looks like the permit you got was the last one I 'ad, so it might take me a bit o' time to scrounge up some more. 'ere, don't gimme that look. I'll be restocked before you know it.
         RETRIEVE_DIALOG_ID            = 13520, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 14386, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 14309, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

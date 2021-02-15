@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -199,7 +199,7 @@ namespace luautils
     int32 OnTrigger(CCharEntity* PChar, CBaseEntity* PNpc);                                // triggered when user targets npc and clicks action button
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result, uint16 extras); // triggered when game triggers event update during cutscene with extra parameters (battlefield)
     int32 OnEventUpdate(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when game triggers event update during cutscene
-    int32 OnEventUpdate(CCharEntity* PChar, int8* string);                                 // triggered when game triggers event update during cutscene
+    int32 OnEventUpdate(CCharEntity* PChar, std::string const& updateString);              // triggered when game triggers event update during cutscene
     int32 OnEventFinish(CCharEntity* PChar, uint16 eventID, uint32 result);                // triggered when cutscene/event is completed
     int32 OnTrade(CCharEntity* PChar, CBaseEntity* PNpc);                                  // triggers when a trade completes with an npc
 
@@ -279,7 +279,7 @@ namespace luautils
     void   SetDropRate(uint16 dropid, uint16 itemid, uint16 rate); // Set drop rate of a mob SetDropRate(dropid,itemid,newrate)
     int32  UpdateServerMessage();                                  // update server message, first modify in conf and update
 
-    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, uint32 damage); // for items with additional effects
+    int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, CItemWeapon* PItem, actionTarget_t* Action, int32 damage); // for items with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, uint32 damage);                         // for mobs with spikes
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;

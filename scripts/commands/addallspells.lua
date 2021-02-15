@@ -67,12 +67,16 @@ function onTrigger(player, target)
 
     -- add all spells
     local save = true
-    local silent = true    -- prevent packet spam
+    local silent = true
+    local sendUpdate = false -- prevent packet spam
+
     for i = 1, #ValidSpells do
         if i == #ValidSpells then
             silent = false
+            sendUpdate = true
         end
-        targ:addSpell(ValidSpells[i], silent, save)
+
+        targ:addSpell(ValidSpells[i], silent, save, sendUpdate)
     end
     player:PrintToPlayer(string.format("%s now has all spells.", targ:getName()))
 end

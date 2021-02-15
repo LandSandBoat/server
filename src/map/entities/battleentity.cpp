@@ -1813,7 +1813,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             actionTarget.param = 0;
         }
 
-        if (actionTarget.reaction != REACTION::EVADE && actionTarget.reaction != REACTION::PARRY)
+        if (actionTarget.reaction != REACTION::EVADE && actionTarget.reaction != REACTION::PARRY && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
         {
             battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()],
                                        attack.GetDamage());

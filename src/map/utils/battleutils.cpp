@@ -889,7 +889,7 @@ namespace battleutils
         EFFECT previous_daze       = EFFECT_NONE;
         uint16 previous_daze_power = 0;
 
-        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA))
+        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
         {
             previous_daze       = EFFECT_DRAIN_DAZE;
             previous_daze_power = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_SAMBA)->GetPower();
@@ -4076,12 +4076,14 @@ namespace battleutils
         TPZ_DEBUG_BREAK_IF(PSource == nullptr);
         TPZ_DEBUG_BREAK_IF(PTarget == nullptr);
 
-        auto* PMasterSource = PSource->PMaster ? PSource->PMaster : PSource;
-        for (auto* entity : *PMasterSource->PNotorietyContainer)
+        for (auto* entity : *PTarget->PNotorietyContainer)
         {
             if (CMobEntity* PCurrentMob = dynamic_cast<CMobEntity*>(entity))
             {
-                PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
+                {
+                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                }
             }
         }
     }

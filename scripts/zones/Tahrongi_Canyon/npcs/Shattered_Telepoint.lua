@@ -14,8 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local rovMission = player:getCurrentMission(ROV)
+    local copMission = player:getCurrentMission(COP)
+
     -- RoV Missions
-    if  player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank() >= 3 then
+    if rovMission == tpz.mission.id.rov.THE_PATH_UNTRAVELED and player:getRank() >= 3 then
         player:startEvent(41)
     elseif player:getCharVar("LionIICipher") == 1 then
         if npcUtil.giveItem(player, 10159) then -- Cipher: Lion II
@@ -24,27 +27,39 @@ entity.onTrigger = function(player, npc)
             player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
             player:setCharVar("LionIICipher", 0)
         end
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.A_LAND_AFTER_TIME then
+    elseif rovMission == tpz.mission.id.rov.A_LAND_AFTER_TIME then
         local rank6 = (player:getRank(player:getNation()) >= 6) and 1 or 0
         player:startEvent(42, player:getZoneID(), 0, 0, 0, 0, 0, rank6)
 
     -- CoP Missions
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
+    elseif copMission == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1 then
         player:startEvent(913, 0, 0, 1) -- first time in promy -> have you made your preparations cs
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_MOTHERCRYSTALS and (player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) or player:hasKeyItem(tpz.ki.LIGHT_OF_DEM)) then
+    elseif
+        copMission == tpz.mission.id.cop.THE_MOTHERCRYSTALS and
+        (
+            player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) or
+            player:hasKeyItem(tpz.ki.LIGHT_OF_DEM)
+        )
+    then
         if player:getCharVar("cspromy2") == 1 then
             player:startEvent(912)  -- cs you get nearing second promyvion
         else
             player:startEvent(913)
         end
-    elseif player:getCurrentMission(COP) > tpz.mission.id.cop.THE_MOTHERCRYSTALS or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) or (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") > 1) then
+    elseif
+        copMission > tpz.mission.id.cop.THE_MOTHERCRYSTALS or
+        player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) or
+        (
+            copMission == tpz.mission.id.cop.BELOW_THE_ARKS and
+            player:getCharVar("PromathiaStatus") > 1
+        )
+    then
         player:startEvent(913) -- normal cs (third promyvion and each entrance after having that promyvion visited or mission completed)
 
     -- Default Message
     else
         player:messageSpecial(ID.text.TELEPOINT_HAS_BEEN_SHATTERED)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
