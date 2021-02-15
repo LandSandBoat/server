@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if(player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
+    if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
         player:startEvent(300)
     else
         player:startEvent(300, 0, 0, 0, 0, 0, 6)
@@ -36,7 +36,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    player:PrintToPlayer(string.format('Option1: %s', tostring(option)))
     if (csid == 300 and option == 99) then
         if (player:delGil(148000)) then
             player:addKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
