@@ -60,7 +60,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         if (tick > (lastConquestUpdate + 1h))
         {
             conquest::UpdateConquestSystem();
-            roeutils::UpdateUnityMembers();
+            roeutils::UpdateUnityRankings();
             lastConquestUpdate = tick;
         }
     }

@@ -591,16 +591,54 @@ namespace roeutils
         zoneutils::ForEachZone([](CZone* PZone) { PZone->ForEachChar([](CCharEntity* PChar) { ClearWeeklyRecords(PChar); }); });
     }
 
+    // Weekly Ranking Reset
     void CycleUnityRankings()
     {
         const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0;";
         Sql_Query(SqlHandle, rankingQuery);
+
+        roeutils::UpdateUnityRankings();
     }
 
-
-    void UpdateUnityMembers()
+    void UpdateUnityRankings()
     {
         const char* memberQuery = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members;";
         Sql_Query(SqlHandle, memberQuery);
+
+        const char* unityQuery = "SELECT leader, members_prev, points_prev FROM unity_system;";
+        int32       ret        = Sql_Query(SqlHandle, unityQuery);
+
+        std::pair<uint8, int32> unityEval[11];
+
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
+        {
+            while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+            {
+                uint8 unityLeader = Sql_GetIntData(SqlHandle, 0);
+
+                if (unityLeader > 0 && unityLeader < 12)
+                {
+                    int32 numMembers = Sql_GetIntData(SqlHandle, 1);
+                    int32 rawEval    = Sql_GetIntData(SqlHandle, 2);
+
+                    unityEval[unityLeader - 1].first  = unityLeader;
+                    unityEval[unityLeader - 1].second = (numMembers > 0) ? rawEval / numMembers : 0;
+                }
+            }
+        }
+
+        std::sort(std::begin(unityEval), std::end(unityEval),
+                  [](std::pair<uint8, uint32> a, std::pair<uint8, uint32> b) { return a.second > b.second; });
+
+        uint8 currentRank = 1;
+        for (uint8 i = 0; i < 11; i++)
+        {
+            roeutils::RoeSystem.unityLeaderRank[unityEval[i].first - 1] = currentRank;
+
+            if (unityEval[i + 1].second < unityEval[i].second)
+            {
+                currentRank++;
+            }
+        }
     }
 } // namespace roeutils
