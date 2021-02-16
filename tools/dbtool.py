@@ -26,6 +26,8 @@ from migrations import eminence_blob
 from migrations import char_timestamp
 from migrations import currency_columns
 from migrations import add_instance_zone_column
+from migrations import char_points_weekly_unity
+from migrations import char_profile_unity_leader
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -73,6 +75,7 @@ player_data = [
     'delivery_box.sql',
     'linkshells.sql',
     'server_variables.sql',
+    'unity_system.sql',
 ]
 import_files = []
 backups = []
