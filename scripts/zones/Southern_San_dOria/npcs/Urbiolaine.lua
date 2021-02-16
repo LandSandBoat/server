@@ -3,6 +3,7 @@
 -- NPC : Urbiolaine
 -- Unity NPC
 -----------------------------------
+local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/roe")
 -----------------------------------
 local entity = {}
@@ -46,6 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         changeUnityLeader(player, option)
         player:setCharVar("unity_changed", 1)
         tpz.roe.onRecordTrigger(player, 5)
+        player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, option)
     end
 end
 

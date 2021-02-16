@@ -2,6 +2,7 @@
 -- Records of Eminence
 -----------------------------------
 require("scripts/globals/npc_util")
+require("scripts/globals/msg")
 require("scripts/globals/quests")
 -----------------------------------
 
@@ -202,6 +203,7 @@ local function completeRecord(player, record)
 
     if rewards["accolades"] ~= nil and type(rewards["accolades"]) == "number" then
         player:addAccolades(rewards["accolades"])
+        player:messageBasic(tpz.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
     end
 
     if rewards["keyItem"] ~= nil then
