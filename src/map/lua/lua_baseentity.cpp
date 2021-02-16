@@ -5979,6 +5979,20 @@ uint8 CLuaBaseEntity::getUnityLeader()
 }
 
 /************************************************************************
+ *  Function: getUnityRank()
+ *  Purpose : Gets the current rank of the player's Unity
+ *  Example : player:getUnityRank()
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getUnityRank()
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return roeutils::RoeSystem.unityLeaderRank[PChar->profile.unity_leader - 1];
+}
+
+/************************************************************************
  *  Function: addAssault()
  *  Purpose : Adds an assault mission to the player's log
  *  Example : player:addAssault(bit.rshift(option,4))
@@ -12724,6 +12738,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("hasEminenceRecord", CLuaBaseEntity::hasEminenceRecord);
     SOL_REGISTER("setUnityLeader", CLuaBaseEntity::setUnityLeader);
     SOL_REGISTER("getUnityLeader", CLuaBaseEntity::getUnityLeader);
+    SOL_REGISTER("getUnityRank", CLuaBaseEntity::getUnityRank);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);

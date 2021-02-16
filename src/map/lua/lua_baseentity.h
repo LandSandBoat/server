@@ -339,6 +339,7 @@ public:
     bool   hasEminenceRecord(uint16 recordID);                                                      // Check if record is active
     void   setUnityLeader(uint8 leaderID);                                                          // Sets a player's unity leader
     uint8  getUnityLeader();                                                                        // Returns player's unity leader
+    uint8  getUnityRank();                                                                          // Returns current rank of player's unity
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
