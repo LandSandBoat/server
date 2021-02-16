@@ -591,4 +591,16 @@ namespace roeutils
         zoneutils::ForEachZone([](CZone* PZone) { PZone->ForEachChar([](CCharEntity* PChar) { ClearWeeklyRecords(PChar); }); });
     }
 
+    void CycleUnityRankings()
+    {
+        const char* rankingQuery = "UPDATE unity_system SET members_prev = members_current, points_prev = points_current, members_current = 0, points_current = 0;";
+        Sql_Query(SqlHandle, rankingQuery);
+    }
+
+
+    void UpdateUnityMembers()
+    {
+        const char* memberQuery = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members;";
+        Sql_Query(SqlHandle, memberQuery);
+    }
 } // namespace roeutils

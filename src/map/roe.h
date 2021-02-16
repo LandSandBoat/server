@@ -139,6 +139,8 @@ namespace roeutils
     void CycleDailyRecords();
     void ClearWeeklyRecords(CCharEntity* PChar);
     void CycleWeeklyRecords();
+    void CycleUnityRankings();
+    void UpdateUnityMembers();
 
     uint16 GetActiveTimedRecord();
     void   AddActiveTimedRecord(CCharEntity* PChar);
