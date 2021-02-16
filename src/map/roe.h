@@ -1,4 +1,4 @@
-﻿/*
+/*
  * roe.h
  *      Author: Kreidos | github.com/kreidos
  *
@@ -40,19 +40,19 @@ class CBaseEntity;
 
 enum ROE_EVENT
 {
-    ROE_MOBKILL             = 1,
-    ROE_WSKILL_USE          = 2,
-    ROE_LOOTITEM            = 3,
-    ROE_SYNTHSUCCESS        = 4,
-    ROE_DMGTAKEN            = 5,
-    ROE_DMGDEALT            = 6,
-    ROE_EXPGAIN             = 7,
-    ROE_HEALALLY            = 8,
-    ROE_BUFFALLY            = 9,
-    ROE_LEVELUP             = 10,
-    ROE_QUEST_COMPLETE      = 11,
-    ROE_MISSION_COMPLETE    = 12,
-    ROE_NUMRECORDS_COMPLETE = 13,
+    ROE_MOBKILL              = 1,
+    ROE_WSKILL_USE           = 2,
+    ROE_LOOTITEM             = 3,
+    ROE_SYNTHSUCCESS         = 4,
+    ROE_DMGTAKEN             = 5,
+    ROE_DMGDEALT             = 6,
+    ROE_EXPGAIN              = 7,
+    ROE_HEALALLY             = 8,
+    ROE_BUFFALLY             = 9,
+    ROE_LEVELUP              = 10,
+    ROE_QUEST_COMPLETE       = 11,
+    ROE_MISSION_COMPLETE     = 12,
+    ROE_NUMRECORDS_COMPLETED = 13,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 

@@ -250,7 +250,7 @@ namespace roeutils
             PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
         }
 
-        event(ROE_EVENT::ROE_NUMRECORDS_COMPLETE, PChar, RoeDatagram("numRoeRecords", GetNumEminenceCompleted(PChar)));
+        event(ROE_EVENT::ROE_NUMRECORDS_COMPLETED, PChar, RoeDatagram("numRecords", GetNumEminenceCompleted(PChar)));
         charutils::SaveEminenceData(PChar);
     }
 
@@ -275,6 +275,8 @@ namespace roeutils
                 pageVal >>= 1;
             }
         }
+
+        // TODO: Verify count is accurate.  We don't want to count hidden objectives
 
         return completedCount;
     }

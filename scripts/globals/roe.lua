@@ -26,7 +26,7 @@ local triggers =
     levelUp = 10,           -- Player levelup
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
-    numRoeComplete = 13,
+    numRoeCompleted = 13,
 }
 
 -----------------------------------
@@ -80,8 +80,9 @@ local checks =
     missionComplete = function(self, player, params) -- Player has {NATION, MISSION} marked complete
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
     end,
-    numRoeComplete = function(self, player, params)
-        return (player:getNumEminenceCompleted() >= self.reqs.numRoeRecords) and true or false
+    numRecords = function(self, player, params)
+        printf("Calling numRecords check: Current: %d, Required: %d", player:getNumEminenceCompleted(), self.reqs.numRecords)
+        return (player:getNumEminenceCompleted() >= self.reqs.numRecords) and true or false
     end,
 }
 
@@ -201,6 +202,14 @@ local function completeRecord(player, record)
 
     if rewards["keyItem"] ~= nil then
         npcUtil.giveKeyItem(player, rewards["keyItem"])
+    end
+
+    -- Workaround for Hidden Record #4085 (10 RoE Objectives Completed)
+    if
+        not player:getEminenceCompleted(4085) and
+        player:getNumEminenceCompleted() >= 10
+    then
+        player:setEminenceCompleted(4085)
     end
 
     return true

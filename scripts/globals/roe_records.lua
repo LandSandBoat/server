@@ -4552,7 +4552,6 @@ function getRoeRecords(triggers)
       -----------------------------------
 
         [4085] = { -- 10 RoE Objectives Complete (All for One requirement)
-
         },
     }
 end
