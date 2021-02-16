@@ -10,6 +10,7 @@ local entity = {}
 
 local function changeUnityLeader(player, leader)
     player:setUnityLeader(leader)
+    player:setCharVar("unity_changed", 1)
 
     -- Reset ranking data on change
     player:setCurrency("current_accolades", 0)
@@ -45,7 +46,6 @@ entity.onEventFinish = function(player, csid, option)
         option <= 11
     then
         changeUnityLeader(player, option)
-        player:setCharVar("unity_changed", 1)
         tpz.roe.onRecordTrigger(player, 5)
         player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, option)
     end

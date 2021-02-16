@@ -6383,8 +6383,10 @@ void CLuaBaseEntity::addAccolades(int32 accolades)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::AddUnityPoints(PChar, accolades, luautils::GetSettingsVariable("CAP_CURRENCY_ACCOLADES"));
+    auto* PChar       = static_cast<CCharEntity*>(m_PBaseEntity);
+    int32 accoladeCap = luautils::lua["CAP_CURRENCY_ACCOLADES"].valid() ? luautils::lua["CAP_CURRENCY_ACCOLADES"].get<int32>() : 99999;
+
+    charutils::AddUnityPoints(PChar, accolades, accoladeCap);
 }
 
 /************************************************************************
