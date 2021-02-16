@@ -50,6 +50,8 @@ CAP_CURRENCY_VALOR     = 50000
 
 -- Magian Trials
 ENABLE_MAGIAN_TRIALS = 1
+MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1
+MAGIAN_TRIALS_TRADE_MULTIPLIER = 1
 
 -- TREASURE CASKETS
 -- Retail droprate = 0.1 (10%) with no other effects active

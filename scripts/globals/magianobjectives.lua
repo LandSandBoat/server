@@ -37,6 +37,10 @@ checks.checkTrials = function(self, player, params)
     return 0
 end
 
+checks.checkTradeTrials = function(self, player, params)
+    return self.reqs.itemId[params.itemId] ~= nil and params.quantity or 0
+end
+
 tpz.magian.trials =
 {
 [   2] = { check = checks.checkTrials, reqs = { mobid = set{ 17563801 } } }, -- Nocuous Weapon
@@ -175,6 +179,8 @@ tpz.magian.trials =
 [2253] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.FINAL_HEAVEN }, mobSystem = set{ tpz.eco.ARCANA } } },   -- 80 -> 85
 [2664] = { check = checks.checkTrials, reqs = { mobid = set{ 17326088 } } }, -- 85 -> 90 (Mildaunegeux)
 [3097] = { check = checks.checkTrials, reqs = { mobid = set{ 17330199 } } }, -- 90 -> 95 (Animated Knuckles)
+[3560] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3610] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Mandau
 [991]  = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.MERCY_STROKE }, mobSystem = set{ tpz.eco.BEAST } } },    -- 75 -> 75 DMG+1
@@ -184,6 +190,8 @@ tpz.magian.trials =
 [2249] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.MERCY_STROKE }, mobSystem = set{ tpz.eco.DRAGON } } },    -- 80 -> 85
 [2660] = { check = checks.checkTrials, reqs = { mobid = set{ 17326087 } } }, -- 85 -> 90 (Quiebitiel)
 [3093] = { check = checks.checkTrials, reqs = { mobid = set{ 17330200 } } }, -- 90 -> 95 (Animated Dagger)
+[3556] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3606] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Excalibur
 [1012] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ tpz.eco.AQUAN } } },    -- 75 -> 75 DMG+1
@@ -193,6 +201,8 @@ tpz.magian.trials =
 [2256] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ tpz.eco.BIRD } } },      -- 80 -> 85
 [2667] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [3100] = { check = checks.checkTrials, reqs = { mobid = set{ 17330201 } } }, -- 90 -> 95 (Animated Longsword)
+[3563] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3613] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Ragnarok
 [1024] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.SCOURGE }, mobSystem = set{ tpz.eco.BIRD } } },     -- 75 -> 75 DMG+3
@@ -202,6 +212,8 @@ tpz.magian.trials =
 [2260] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.SCOURGE }, mobSystem = set{ tpz.eco.ARCANA } } },    -- 80 -> 85
 [2671] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [3104] = { check = checks.checkTrials, reqs = { mobid = set{ 17330202 } } }, -- 90 -> 95 (Animated Claymore)
+[3567] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3617] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Guttler
 [1027] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.ONSLAUGHT }, mobSystem = set{ tpz.eco.UNDEAD } } },   -- 75 -> 75 DMG+2
@@ -211,6 +223,8 @@ tpz.magian.trials =
 [2261] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.ONSLAUGHT }, mobSystem = set{ tpz.eco.BIRD } } },      -- 80 -> 85
 [2672] = { check = checks.checkTrials, reqs = { mobid = set{ 17326090 } } }, -- 85 -> 90 (Dagourmarche)
 [3105] = { check = checks.checkTrials, reqs = { mobid = set{ 17330203 } } }, -- 90 -> 95 (Animated Tabar)
+[3568] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3618] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Bravura
 [1033] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.METATRON_TORMENT }, mobSystem = set{ tpz.eco.LIZARD } } },   -- 75 -> 75 DMG+3
@@ -304,4 +318,7 @@ tpz.magian.trials =
 [4402] = { check = checks.checkTrials, reqs = { mobid = set{ 17534977 } } }, -- 80 -> 85 (Overlord's Tombstone)
 [4403] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [4448] = { check = checks.checkTrials, reqs = { mobid = set{ 17330214 } } }, -- 90 -> 95 (Animated Shield)
+
+ -- Unkai Kote
+[4327] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3161 } } }, -- 0 -> +1 (Unkai Seal: Hn.)
 }
