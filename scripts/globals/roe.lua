@@ -200,6 +200,10 @@ local function completeRecord(player, record)
         player:addExp(rewards["xp"] * ROE_EXP_RATE)
     end
 
+    if rewards["accolades"] ~= nil and type(rewards["accolades"]) == "number" then
+        player:addAccolades(rewards["accolades"])
+    end
+
     if rewards["keyItem"] ~= nil then
         npcUtil.giveKeyItem(player, rewards["keyItem"])
     end

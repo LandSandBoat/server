@@ -22,19 +22,23 @@ function getRoeRecords(triggers)
 
         [   2] = { -- Vanquish 1 Enemy +
             trigger = triggers.mobKill,
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
         },
 
         [   3] = { -- Undertake a FoV Training Regime
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
         },
 
         [   4] = { -- Heal without magic
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [   5] = { -- All for One
+            reward =  { sparks = 100, xp = 300, accolades = 1000 }
         },
 
         [  11] = { -- Undertake a GoV Training Regime
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
         },
 
         [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)

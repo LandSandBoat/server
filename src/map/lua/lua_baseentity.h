@@ -336,6 +336,7 @@ public:
     uint16 getNumEminenceCompleted();                                                               // Get total count of records completed for player
     bool   setEminenceProgress(uint16 recordID, uint32 progress, sol::object const& arg2);          // Sets progress on a record of eminence
     auto   getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
+    bool   hasEminenceRecord(uint16 recordID);                                                      // Check if record is active
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log

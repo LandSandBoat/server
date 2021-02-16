@@ -5937,6 +5937,20 @@ std::optional<uint32> CLuaBaseEntity::getEminenceProgress(uint16 recordID)
 }
 
 /************************************************************************
+ *  Function: hasEminenceRecord(record)
+ *  Purpose : Returns true if the record is active
+ *  Example : player:hasEminenceRecord(19)
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return roeutils::HasEminenceRecord(PChar, recordID);
+}
+
+/************************************************************************
  *  Function: addAssault()
  *  Purpose : Adds an assault mission to the player's log
  *  Example : player:addAssault(bit.rshift(option,4))
@@ -12677,6 +12691,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setEminenceCompleted", CLuaBaseEntity::setEminenceCompleted);
     SOL_REGISTER("getEminenceProgress", CLuaBaseEntity::getEminenceProgress);
     SOL_REGISTER("setEminenceProgress", CLuaBaseEntity::setEminenceProgress);
+    SOL_REGISTER("hasEminenceRecord", CLuaBaseEntity::hasEminenceRecord);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);

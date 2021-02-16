@@ -9,7 +9,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(3525)
+    if player:getNumEminenceCompleted() < 10 then
+        player:startEvent(3528)
+
+    -- Check for "All for One"
+    elseif not player:hasEminenceRecord(5) then
+        player:startEvent(3525)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
