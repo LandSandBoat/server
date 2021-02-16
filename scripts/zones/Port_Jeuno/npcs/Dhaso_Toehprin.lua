@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Port Jeuno
 --  NPC: Dhaso Toehprin
--- !zone 246
+-- !pos 4 8 -50 246
+-----------------------------------
+local ID = require("scripts/zones/Port_Jeuno/IDs")
 -----------------------------------
 local entity = {}
 
@@ -9,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
+    player:showText(npc, ID.text.DEPARTURE_NPC)
 end
 
 entity.onEventUpdate = function(player, csid, option)
