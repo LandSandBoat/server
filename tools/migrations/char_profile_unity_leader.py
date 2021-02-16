@@ -8,8 +8,8 @@ def check_preconditions(cur):
 	return
 
 def needs_to_run(cur):
-	# Ensure daily_tally column exists in char_points
-	cur.execute("SHOW COLUMNS FROM char_points LIKE 'daily_tally'")
+	# Ensure unity_leader column exists in char_profile
+	cur.execute("SHOW COLUMNS FROM char_profile LIKE 'unity_leader'")
 	if not cur.fetchone():
 		return True
 	return False

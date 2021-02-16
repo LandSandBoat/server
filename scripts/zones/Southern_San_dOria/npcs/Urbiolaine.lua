@@ -21,18 +21,24 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local hasAllForOne = player:hasEminenceRecord(5)
+    local allForOneCompleted = player:getEminenceCompleted(5)
+    local accolades = player:getCurrency("unity_accolades")
+    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
 
     -- Check player total records completed
     if player:getNumEminenceCompleted() < 10 then
         player:startEvent(3528)
 
     -- Check for "All for One"
-    elseif not player:hasEminenceRecord(5) then
+    elseif not hasAllForOne and not allForOneCompleted then
         player:startEvent(3525)
 
     -- First time selecting Unity
-    elseif not player:getEminenceCompleted(5) then
+    elseif not allForOneCompleted then
         player:startEvent(3526)
+    else
+        player:startEvent(3529, 0, 0, accolades, remainingLimit)
     end
 end
 

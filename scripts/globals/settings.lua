@@ -40,7 +40,7 @@ ENABLE_ROE            = 1
 ENABLE_ROE_TIMED      = 1 -- Enable 4-hour timed records
 ENABLE_EXCHANGE_LIMIT = 1 -- Enable Maximum limit of sparks spent per Week (default retail behavior: 1)
 
-WEEKLY_EXCHANGE_LIMIT = 100000 -- Maximum amount of sparks that can be spent per week (default retail value: 100000)
+WEEKLY_EXCHANGE_LIMIT = 100000 -- Maximum amount of sparks/accolades that can be spent per week (default retail value: 100000)
 
 -- Currency Caps (Change at your own risk!)
 CAP_CURRENCY_ACCOLADES = 99999

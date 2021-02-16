@@ -631,13 +631,19 @@ namespace roeutils
                   [](std::pair<uint8, uint32> a, std::pair<uint8, uint32> b) { return a.second > b.second; });
 
         uint8 currentRank = 1;
+        uint8 rankGap     = 1;
         for (uint8 i = 0; i < 11; i++)
         {
             roeutils::RoeSystem.unityLeaderRank[unityEval[i].first - 1] = currentRank;
 
             if (unityEval[i + 1].second < unityEval[i].second)
             {
-                currentRank++;
+                currentRank = currentRank + rankGap;
+                rankGap     = 1;
+            }
+            else
+            {
+                rankGap++;
             }
         }
     }
