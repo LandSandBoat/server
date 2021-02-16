@@ -5351,6 +5351,19 @@ namespace charutils
         PChar->pushPacket(new CCharStatsPacket(PChar));
     }
 
+    void SetUnityLeader(CCharEntity* PChar, uint8 leaderID)
+    {
+        const char* leaderQuery = "UPDATE char_profile SET unity_leader=%d WHERE charid = %u;";
+
+        if (leaderID < 1 || leaderID > 11)
+        {
+            return;
+        }
+
+        PChar->profile.unity_leader = leaderID;
+        Sql_Query(SqlHandle, leaderQuery, PChar->profile.unity_leader, PChar->id);
+    }
+
     std::string GetConquestPointsName(CCharEntity* PChar)
     {
         switch (PChar->profile.nation)

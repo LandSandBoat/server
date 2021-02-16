@@ -337,6 +337,8 @@ public:
     bool   setEminenceProgress(uint16 recordID, uint32 progress, sol::object const& arg2);          // Sets progress on a record of eminence
     auto   getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
     bool   hasEminenceRecord(uint16 recordID);                                                      // Check if record is active
+    void   setUnityLeader(uint8 leaderID);                                                          // Sets a player's unity leader
+    uint8  getUnityLeader();                                                                        // Returns player's unity leader
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log

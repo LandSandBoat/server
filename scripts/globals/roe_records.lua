@@ -34,7 +34,7 @@ function getRoeRecords(triggers)
         },
 
         [   5] = { -- All for One
-            reward =  { sparks = 100, xp = 300, accolades = 1000 }
+            reward =  { sparks = 100, xp = 300, accolades = 1000, keyItem = tpz.ki.CONCORDOLL }
         },
 
         [  11] = { -- Undertake a GoV Training Regime

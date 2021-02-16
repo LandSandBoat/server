@@ -5951,6 +5951,34 @@ bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
 }
 
 /************************************************************************
+ *  Function: setUnityLeader(leaderID)
+ *  Purpose : Sets a player's Unity Leader
+ *  Example : player:setUnityLeader(4)
+ ************************************************************************/
+
+void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::SetUnityLeader(PChar, leaderID);
+}
+
+/************************************************************************
+ *  Function: getUnityLeader()
+ *  Purpose : Gets a player's Unity Leader
+ *  Example : player:getUnityLeader()
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getUnityLeader()
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->profile.unity_leader;
+}
+
+/************************************************************************
  *  Function: addAssault()
  *  Purpose : Adds an assault mission to the player's log
  *  Example : player:addAssault(bit.rshift(option,4))
@@ -12692,6 +12720,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getEminenceProgress", CLuaBaseEntity::getEminenceProgress);
     SOL_REGISTER("setEminenceProgress", CLuaBaseEntity::setEminenceProgress);
     SOL_REGISTER("hasEminenceRecord", CLuaBaseEntity::hasEminenceRecord);
+    SOL_REGISTER("setUnityLeader", CLuaBaseEntity::setUnityLeader);
+    SOL_REGISTER("getUnityLeader", CLuaBaseEntity::getUnityLeader);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);
