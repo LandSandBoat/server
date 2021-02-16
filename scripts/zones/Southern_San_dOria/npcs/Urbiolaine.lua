@@ -3,7 +3,17 @@
 -- NPC : Urbiolaine
 -- Unity NPC
 -----------------------------------
+require("scripts/globals/roe")
+-----------------------------------
 local entity = {}
+
+local function changeUnityLeader(player, leader)
+    player:setUnityLeader(leader)
+
+    -- Reset ranking data on change
+    player:setCurrency("current_accolades", 0)
+    player:setCurrency("prev_accolades", 0)
+end
 
 entity.onTrade = function(player, npc, trade)
 end
@@ -33,7 +43,9 @@ entity.onEventFinish = function(player, csid, option)
         option >= 1 and
         option <= 11
     then
-        -- Set unity, complete quest, set charvar for has changed this week
+        changeUnityLeader(player, option)
+        player:setCharVar("unity_changed", 1)
+        tpz.roe.onRecordTrigger(player, 5)
     end
 end
 
