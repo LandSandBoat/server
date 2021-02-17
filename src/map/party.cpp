@@ -779,10 +779,7 @@ void CParty::ReloadParty()
             PChar->PLatentEffectContainer->CheckLatentsPartyMembers(members.size());
             PChar->PLatentEffectContainer->CheckLatentsPartyAvatar();
             PChar->ReloadPartyDec();
-            if (PLeader)
-            {
-                PChar->pushPacket(new CPartyDefinePacket(this, PChar->getZone() == PLeader->getZone()));
-            }
+            PChar->pushPacket(new CPartyDefinePacket(this, PLeader && PChar->getZone() == PLeader->getZone()));
             // auto effects = std::make_unique<CPartyEffectsPacket>();
             uint8 j = 0;
             for (auto&& memberinfo : info)
