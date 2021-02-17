@@ -417,6 +417,7 @@ namespace roeutils
                 // Multiply that to get seconds, and subtract from last JST midnight.
                 uint32 jstWeekday         = (CVanaTime::getInstance()->getJstWeekDay() + 6) % 7;
                 time_t lastJstWeeklyReset = lastJstMidnight - (jstWeekday * (60 * 60 * 24)); // Unix timestamp of last JST Midnight (Sunday->Monday)
+                time_t lastTwoJstResets   = lastJstWeeklyReset - (7 * (60 * 60 * 24));       // Unix timestamp of two JST resets ago
 
                 if (lastOnline < lastJstWeeklyReset)
                 {
@@ -426,7 +427,16 @@ namespace roeutils
                     charutils::SetCharVar(PChar, "unity_changed", 0);
 
                     int32 currentAccolades = charutils::GetPoints(PChar, "current_accolades");
-                    charutils::SetPoints(PChar, "prev_accolades", currentAccolades);
+
+                    if (lastOnline < lastTwoJstResets)
+                    {
+                        charutils::SetPoints(PChar, "prev_accolades", 0);
+                    }
+                    else
+                    {
+                        charutils::SetPoints(PChar, "prev_accolades", currentAccolades);
+                    }
+
                     charutils::SetPoints(PChar, "current_accolades", 0);
                 }
             }
