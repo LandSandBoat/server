@@ -1648,7 +1648,7 @@ function getRoeRecords(triggers)
             goal = 200,
             reqs = { mobXP = true },
             flags = set{"repeat"},
-            reward = { sparks = 1000, xp = 5000, unity = 100 },
+            reward = { sparks = 1000, xp = 5000, accolades = 100 },
         },
 
         [  13] = { -- Vanquish Multiple Enemies II - 500
@@ -1669,7 +1669,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             goal = 200,
             reqs = { mobXP = true , levelSync = true},
-            reward = { sparks = 2000, xp = 6000 , unity = 200 },
+            reward = { sparks = 2000, xp = 6000 , accolades = 200 },
         },
 
         [ 117] = { -- Level Sync to Vanquish II
@@ -1677,7 +1677,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true , levelSync = true},
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 600 , unity = 20  },
+            reward = { sparks = 200, xp = 600 , accolades = 20  },
         },
 
         [  16] = { -- Deal 500+ Damage
@@ -1685,7 +1685,7 @@ function getRoeRecords(triggers)
             goal = 200,
             reqs = { dmgMin = 500 },
             flags = set{"repeat"},
-            reward = { sparks = 1000, xp = 5000, unity = 100 },
+            reward = { sparks = 1000, xp = 5000, accolades = 100 },
         },
 
         [  17] = { -- Deal 1000+ Damage
@@ -1907,7 +1907,7 @@ function getRoeRecords(triggers)
             trigger = triggers.synthSuccess,
             goal = 30,
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 500, unity = 10 },
+            reward = { sparks = 100, xp = 500, accolades = 10 },
         },
 
       -----------------------------------
@@ -1919,7 +1919,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4096 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  72] = { -- Spoils - Ice Crystals
@@ -1927,7 +1927,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4097 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  73] = { -- Spoils - Wind Crystals
@@ -1935,7 +1935,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4098 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  74] = { -- Spoils - Earth Crystals
@@ -1943,7 +1943,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4099 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  75] = { -- Spoils - Lightning Crystals
@@ -1951,7 +1951,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4100 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  76] = { -- Spoils - Water Crystals
@@ -1959,7 +1959,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4101 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  77] = { -- Spoils - Light Crystals
@@ -1967,7 +1967,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4102 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  78] = { -- Spoils - Dark Crystals
@@ -1975,7 +1975,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4103 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  84] = { -- Spoils - Flame Geode
@@ -1983,7 +1983,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3297 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  85] = { -- Spoils - Snow Geode
@@ -1991,7 +1991,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3298 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  86] = { -- Spoils - Breeze Geode
@@ -1999,7 +1999,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3299 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  87] = { -- Spoils - Soil Geode
@@ -2007,7 +2007,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3300 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  88] = { -- Spoils - Thunder Geode
@@ -2015,7 +2015,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3301 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  89] = { -- Spoils - Aqua Geode
@@ -2023,7 +2023,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3302 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  90] = { -- Spoils - Light Geode
@@ -2031,7 +2031,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3303 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  91] = { -- Spoils - Shadow Geode
@@ -2039,7 +2039,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3304 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  92] = { -- Spoils - Ifritite
@@ -2047,7 +2047,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3520 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  93] = { -- Spoils - Shivite
@@ -2055,7 +2055,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3521 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  94] = { -- Spoils - Garudite
@@ -2063,7 +2063,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3522 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  95] = { -- Spoils - Titanite
@@ -2071,7 +2071,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3523 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  96] = { -- Spoils - Ramuite
@@ -2079,7 +2079,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3524 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  97] = { -- Spoils - Leviatite
@@ -2087,7 +2087,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3525 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  98] = { -- Spoils - Carbite
@@ -2095,7 +2095,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3526 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  99] = { -- Spoils - Fenrite
@@ -2103,7 +2103,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3527 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
       -----------------------------------
@@ -2115,7 +2115,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 922 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 121] = { -- Spoils - Black Tiger Fang
@@ -2123,7 +2123,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 884 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 122] = { -- Spoils - Flint Stone
@@ -2131,7 +2131,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 768 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 123] = { -- Spoils - Rabbit Hide
@@ -2139,7 +2139,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 856 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 124] = { -- Spoils - Honey
@@ -2147,7 +2147,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4370 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 125] = { -- Spoils - Sheepskin
@@ -2155,7 +2155,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 505 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 126] = { -- Spoils - Lizard Skin
@@ -2163,7 +2163,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 852 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 127] = { -- Spoils - Beetle Shell
@@ -2171,7 +2171,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 889 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 128] = { -- Spoils - Zeruhn Soot
@@ -2179,7 +2179,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 560 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 129] = { -- Spoils - Silver Name Tag
@@ -2187,7 +2187,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 13116 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 130] = { -- Spoils - Quadav Helm
@@ -2195,7 +2195,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 501 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 132] = { -- Spoils - Treant Bulb
@@ -2203,7 +2203,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 953 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 133] = { -- Spoils - Wild Onion
@@ -2211,7 +2211,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4387 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 134] = { -- Spoils - Sleepshroom
@@ -2219,7 +2219,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4374 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 135] = { -- Spoils - Sand Bat Fang
@@ -2227,7 +2227,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 1015 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 136] = { -- Spoils - Zinc Ore
@@ -2235,7 +2235,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 642 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 137] = { -- Spoils - Giant Bird Feather
@@ -2243,7 +2243,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 842 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 138] = { -- Spoils - Three-leaf Mandragora Bud
@@ -2251,7 +2251,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 1154 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 139] = { -- Spoils - Four-leaf Mandragora Bud
@@ -2259,7 +2259,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 4369 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 140] = { -- Spoils - Cornette
@@ -2267,7 +2267,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 17344 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 141] = { -- Spoils - Yuhtunga Sulfur
@@ -2275,7 +2275,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 934 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 142] = { -- Spoils - Snobby Letter
@@ -2283,7 +2283,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 1150 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 143] = { -- Spoils - Yagudo Bead Necklace
@@ -2291,7 +2291,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 498 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 144] = { -- Spoils - Woozyshroom
@@ -2299,7 +2299,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4373 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 145] = { -- Spoils - Beehive Chip
@@ -2307,7 +2307,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 912 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 146] = { -- Spoils - Remi Shell
@@ -2315,7 +2315,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 1016 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 147] = { -- Spoils - Twinstone Earring
@@ -2323,7 +2323,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 13360 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
       -----------------------------------
@@ -2335,7 +2335,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{100} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 4439 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4439 } },
         },
 
         [ 216] = { -- Subjugation: Jaggedy-Eared Jack
@@ -2349,7 +2349,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{101} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 12577 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 12577 } },
         },
 
         [ 218] = { -- Subjugation: Swamfisk
@@ -2363,7 +2363,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{140} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13331 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13331 } },
         },
 
         [ 220] = { -- Subjugation: Thousandarm Deshglesh
@@ -2377,7 +2377,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{141} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13333 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13333 } },
         },
 
         [ 222] = { -- Subjugation: Hundredscar Hajwaj
@@ -2391,7 +2391,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{142} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13336 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13336 } },
         },
 
         [ 224] = { -- Subjugation: Ashmaker Gotblut
@@ -2405,7 +2405,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{190} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13443 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13443 } },
         },
 
         [ 226] = { -- Subjugation: Barbastelle
@@ -2419,7 +2419,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{167} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 11532 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 11532 } },
         },
 
         [ 228] = { -- Subjugation: Bloodsucker
@@ -2433,7 +2433,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{103} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13456 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13456 } },
         },
 
         [ 230] = { -- Subjugation: Valkurm Emperor
@@ -2447,7 +2447,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{108} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13472 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13472 } },
         },
 
         [ 232] = { -- Subjugation: Bendigeit Vran
@@ -2461,7 +2461,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{196} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 100, unity = 5, item = { 13471 } },
+            reward = { sparks = 11, xp = 100, accolades = 5, item = { 13471 } },
         },
 
         [ 234] = { -- Subjugation: Juggler Hecatomb
@@ -2475,7 +2475,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{102} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13444 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13444 } },
         },
 
         [ 236] = { -- Subjugation: Bloodtear Baldurf
@@ -2490,7 +2490,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{193} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 100, unity = 5, item = { 13470 } },
+            reward = { sparks = 12, xp = 100, accolades = 5, item = { 13470 } },
         },
 
         [ 238] = { -- Subjugation: Morbolger
@@ -2508,7 +2508,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{104} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {4381, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {4381, 12} } },
         },
 
         [ 240] = { -- Subjugation: King Arthro
@@ -2522,7 +2522,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{105} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13685 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13685 } },
         },
 
         [ 242] = { -- Subjugation: Lumber Jack
@@ -2536,7 +2536,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{195} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 13198 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 13198 } },
         },
 
         [ 244] = { -- Subjugation: Cwn Cyrff
@@ -2550,7 +2550,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{149} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 12554 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 12554 } },
         },
 
         [ 246] = { -- Subjugation: Hawkeyed Dnatbat
@@ -2564,7 +2564,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{106} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 4488 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4488 } },
         },
 
         [ 248] = { -- Subjugation: Maighdean Uaine
@@ -2578,7 +2578,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{107} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 12592 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 12592 } },
         },
 
         [ 250] = { -- Subjugation: Carnero
@@ -2592,7 +2592,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{172} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13335 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13335 } },
         },
 
         [ 252] = { -- Conflict: Palborough Mines
@@ -2600,7 +2600,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{143} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13330 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13330 } },
         },
 
         [ 253] = { -- Subjugation: Zi-Ghi Bone-eater
@@ -2614,7 +2614,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{191} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13473 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13473 } },
         },
 
         [ 255] = { -- Subjugation: Teporingo
@@ -2628,7 +2628,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{109} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {5721, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {5721, 12} } },
         },
 
         [ 257] = { -- Subjugation: Ni'Zho Bladebender
@@ -2642,7 +2642,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{110} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 15487 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 15487 } },
         },
 
         [ 259] = { -- Subjugation: Simurgh
@@ -2656,7 +2656,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{197} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 13271 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 13271 } },
         },
 
         [ 261] = { -- Subjugation: Demonic Tiphia
@@ -2670,7 +2670,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{147} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13703 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13703 } },
         },
 
         [ 263] = { -- Subjugation: Zo'Khu Blackcloud
@@ -2688,7 +2688,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{115} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 4498 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4498 } },
         },
 
         [ 265] = { -- Subjugation: Nunyenunc
@@ -2702,7 +2702,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{116} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 12601 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 12601 } },
         },
 
         [ 267] = { -- Subjugation: Spiny Spipi
@@ -2716,7 +2716,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{145} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13337 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13337 } },
         },
 
         [ 269] = { -- Subjugation: Hoo Mjuu the Torrent
@@ -2730,7 +2730,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{169} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 13586 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 13586 } },
         },
 
         [ 271] = { -- Subjugation: Oni Carcass
@@ -2744,7 +2744,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{192} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13332 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13332 } },
         },
 
         [ 273] = { -- Subjugation: Maltha
@@ -2758,7 +2758,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{194} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13334 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13334 } },
         },
 
         [ 275] = { -- Subjugation: Bomb King
@@ -2772,7 +2772,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{118} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13474 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13474 } },
         },
 
         [ 277] = { -- Subjugation: Helldiver
@@ -2786,7 +2786,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{117} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13468 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13468 } },
         },
 
         [ 279] = { -- Subjugation: Serpopard Ishtar
@@ -2800,7 +2800,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{198} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 100, unity = 5, item = { 13321 } },
+            reward = { sparks = 12, xp = 100, accolades = 5, item = { 13321 } },
         },
 
         [ 281] = { -- Subjugation: Argus
@@ -2814,7 +2814,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{119} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {4413, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {4413, 12} } },
         },
 
         [ 283] = { -- Subjugation: Daggerclaw Dracos
@@ -2828,7 +2828,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{120} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13577 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13577 } },
         },
 
         [ 285] = { -- Subjugation: Roc
@@ -2842,7 +2842,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{200} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 15907 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 15907 } },
         },
 
         [ 287] = { -- Subjugation: Serket
@@ -2856,7 +2856,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{151} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13723 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13723 } },
         },
 
         [ 289] = { -- Subjugation: Lii Jixa the Somnolist
@@ -2874,7 +2874,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{111} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 16261 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 16261 } },
         },
 
         [ 291] = { -- Subjugation: Nue
@@ -2888,7 +2888,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{166} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 100, unity = 5, item = { 13323 } },
+            reward = { sparks = 11, xp = 100, accolades = 5, item = { 13323 } },
         },
 
         [ 293] = { -- Subjugation: Gloom Eye
@@ -2902,7 +2902,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{204} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 13324 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 13324 } },
         },
 
         [ 295] = { -- Subjugation: Goliath
@@ -2916,7 +2916,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{112} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13315 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13315 } },
         },
 
         [ 297] = { -- Subjugation: Biast
@@ -2930,7 +2930,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{161} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 750, unity = 5, item = { 13688 } },
+            reward = { sparks = 15, xp = 750, accolades = 5, item = { 13688 } },
         },
 
         [ 299] = { -- Subjugation: Duke Haborym
@@ -2944,7 +2944,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{162} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 750, unity = 5, item = { 13689 } },
+            reward = { sparks = 15, xp = 750, accolades = 5, item = { 13689 } },
         },
 
         [ 301] = { -- Subjugation: Baron Vapula
@@ -2958,7 +2958,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{126} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 16301 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 16301 } },
         },
 
         [ 303] = { -- Subjugation: Dosetsu Tree
@@ -2972,7 +2972,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{184} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 100, unity = 5, item = { {5147, 12} } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { {5147, 12} } },
         },
 
         [ 305] = { -- Subjugation: Epialtes
@@ -2986,7 +2986,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{157} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 100, unity = 5, item = { {5149, 12} } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { {5149, 12} } },
         },
 
         [ 307] = { -- Subjugation: Ogygos
@@ -3000,7 +3000,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{158} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { {5757, 12} } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { {5757, 12} } },
         },
 
         [ 309] = { -- Subjugation: Enkelados
@@ -3014,7 +3014,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{127} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { {4398, 12} } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { {4398, 12} } },
         },
 
       -----------------------------------
@@ -3034,7 +3034,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{121} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {4151, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {4151, 12} } },
         },
 
         [ 392] = { -- Conflict: Ro'Maeve
@@ -3042,7 +3042,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{122} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { {4156, 12} } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { {4156, 12} } },
         },
 
         [ 394] = { -- Conflict: Boyahda Tree
@@ -3050,7 +3050,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{153} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { {4166, 12} } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { {4166, 12} } },
         },
 
         [ 396] = { -- Conflict: Dragon's Aery
@@ -3058,7 +3058,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{154} },
             flags = set{"repeat"},
-            reward = { sparks = 17, xp = 850, unity = 5, item = { 4136 } },
+            reward = { sparks = 17, xp = 850, accolades = 5, item = { 4136 } },
         },
 
         [ 398] = { -- Conflict: Eastern Altepa Desert
@@ -3066,7 +3066,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{114} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { {4164, 12} } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { {4164, 12} } },
         },
 
         [ 400] = { -- Conflict: Western Altepa Desert
@@ -3074,7 +3074,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{125} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { {4165, 12} } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { {4165, 12} } },
         },
 
         [ 402] = { -- Conflict: Quicksand Caves
@@ -3082,7 +3082,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{208} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 13637 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 13637 } },
         },
 
         [ 404] = { -- Conflict: Gustav Tunnel
@@ -3090,7 +3090,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{212} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { 13579 } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { 13579 } },
         },
 
         [ 406] = { -- Conflict: Kuftal Tunnel
@@ -3098,7 +3098,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{174} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 16233 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 16233 } },
         },
 
         [ 408] = { -- Conflict: Cape Terrigan
@@ -3106,7 +3106,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{113} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 16263 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 16263 } },
         },
 
         [ 410] = { -- Conflict: Valley of Sorrows
@@ -3114,7 +3114,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{128} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13108 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13108 } },
         },
 
         [ 412] = { -- Conflict: Yuhtunga Jungle
@@ -3122,7 +3122,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{123} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13125 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13125 } },
         },
 
       -----------------------------------
@@ -3134,7 +3134,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{176 } },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 100, unity = 5, item = { 13207 } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { 13207 } },
         },
 
         [ 416] = { -- Conflict: Yhoator Jungle
@@ -3142,7 +3142,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{124} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13273 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13273 } },
         },
 
         [ 418] = { -- Conflict: Temple of Uggalepih
@@ -3150,7 +3150,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{159} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 15913 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 15913 } },
         },
 
         [ 420] = { -- Conflict: Den of Rancor
@@ -3158,7 +3158,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{160} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { 13208 } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { 13208 } },
         },
 
         [ 422] = { -- Conflict: Ifrit's Cauldron
@@ -3166,7 +3166,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{205} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { 13344 } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { 13344 } },
         },
 
         [ 424] = { -- Conflict: Ru'Aun Gardens
@@ -3174,7 +3174,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{130} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13346 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13346 } },
         },
 
         [ 426] = { -- Conflict: Ve'Lugannon Palace
@@ -3182,7 +3182,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{177} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 100, unity = 7, item = { 13348 } },
+            reward = { sparks = 70, xp = 100, accolades = 7, item = { 13348 } },
         },
 
         [ 428] = { -- Conflict: Shrine of Ru'Avitau
@@ -3190,7 +3190,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{178} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 100, unity = 7, item = { 13343 } },
+            reward = { sparks = 70, xp = 100, accolades = 7, item = { 13343 } },
         },
 
         [ 430] = { -- Conflict: Labyrinth of Onzozo
@@ -3198,7 +3198,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{213} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13345 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13345 } },
         },
 
         [ 432] = { -- Conflict: Korroloka Tunnel
@@ -3206,7 +3206,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{173} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13347 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13347 } },
         },
 
       -----------------------------------
@@ -3218,7 +3218,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{11} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13350 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13350 } },
         },
 
         [ 436] = { -- Conflict: Newton Movalpolos
@@ -3226,7 +3226,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{12} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13349 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13349 } },
         },
 
         [ 438] = { -- Conflict: Lufaise Meadows
@@ -3234,7 +3234,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{24} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 14725 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 14725 } },
         },
 
         [ 440] = { -- Conflict: Misareaux Coast
@@ -3242,7 +3242,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{25} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13417 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13417 } },
         },
 
         [ 442] = { -- Conflict: Phomiuna Aqueducts
@@ -3250,7 +3250,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{27} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13325 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13325 } },
         },
 
         [ 444] = { -- Conflict: Riverne - Site #A01
@@ -3258,7 +3258,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{30} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13461 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13461 } },
         },
 
         [ 446] = { -- Conflict: Riverne - Site #B01
@@ -3266,7 +3266,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{29} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 15813 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 15813 } },
         },
 
         [ 448] = { -- Conflict: Sacrarium
@@ -3274,7 +3274,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{28} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13485 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13485 } },
         },
 
         [ 450] = { -- Conflict: Promyvion - Holla
@@ -3282,7 +3282,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{16} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13487 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13487 } },
         },
 
         [ 452] = { -- Conflict: Promyvion - Dem
@@ -3290,7 +3290,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{18} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13489 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13489 } },
         },
 
         [ 454] = { -- Conflict: Promyvion - Mea
@@ -3298,7 +3298,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{20} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13484 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13484 } },
         },
 
         [ 456] = { -- Conflict: Yuhtunga Jungle
@@ -3306,7 +3306,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{22} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13486 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13486 } },
         },
 
       -----------------------------------
@@ -3318,7 +3318,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{33} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13488 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13488 } },
         },
 
         [ 460] = { -- Conflict: Grand Palace of Hu'Xzoi
@@ -3326,7 +3326,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{34} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13491 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13491 } },
         },
 
         [ 462] = { -- Conflict: Garden of Ru'Hmet
@@ -3334,7 +3334,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{35} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 17285 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 17285 } },
         },
 
         [ 464] = { -- Conflict: Carpenters' Landing
@@ -3342,7 +3342,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{2} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13490 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13490 } },
         },
 
         [ 468] = { -- Conflict: Bibiki Bay
@@ -3350,7 +3350,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{4} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13546 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13546 } },
         },
 
         [ 472] = { -- Conflict: Attohwa Chasm
@@ -3358,7 +3358,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{7} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13464 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13464 } },
         },
 
         [ 474] = { -- Conflict: Pso'Xja
@@ -3366,7 +3366,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{9} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13445 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13445 } },
         },
 
         [ 476] = { -- Conflict: Uleguerand Range
@@ -3374,7 +3374,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{5} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13591 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13591 } },
         },
 
       -----------------------------------
@@ -3386,7 +3386,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{52} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 12324 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 12324 } },
         },
 
         [ 535] = { -- Conflict: Mamook
@@ -3394,7 +3394,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{65} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 12309 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 12309 } },
         },
 
         [ 537] = { -- Conflict: Wajaom Woodlands
@@ -3402,7 +3402,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{51} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 13275 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 13275 } },
         },
 
         [ 539] = { -- Conflict: Aydeewa Subterrane
@@ -3410,7 +3410,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{68} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 13197 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 13197 } },
         },
 
         [ 541] = { -- Conflict: Halvung
@@ -3418,7 +3418,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{62} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15890 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15890 } },
         },
 
         [ 543] = { -- Conflict: Mount Zhayolm
@@ -3426,7 +3426,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{61} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13629 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13629 } },
         },
 
         [ 545] = { -- Conflict: Caedarva Mire
@@ -3434,7 +3434,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{79} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 13212 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 13212 } },
         },
 
         [ 547] = { -- Conflict: Arrapago Reef
@@ -3442,7 +3442,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{54} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 16235 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 16235 } },
         },
 
         [ 549] = { -- Conflict: Alza. Undersea Ruins
@@ -3450,7 +3450,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{72} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13587 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13587 } },
         },
 
       -----------------------------------
@@ -3462,7 +3462,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{81} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13092 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13092 } },
         },
 
         [ 555] = { -- Conflict: Jugner Forest [S]
@@ -3470,7 +3470,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{82} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 12311 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 12311 } },
         },
 
         [ 557] = { -- Conflict: Batallia Downs [S]
@@ -3478,7 +3478,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{84} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13087 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13087 } },
         },
 
         [ 559] = { -- Conflict: La Vaule [S]
@@ -3486,7 +3486,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{85} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13329 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13329 } },
         },
 
         [ 561] = { -- Conflict: Eldieme Necropolis [S]
@@ -3494,7 +3494,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{175} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 16231 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 16231 } },
         },
 
         [ 563] = { -- Conflict: North Gustaberg [S]
@@ -3502,7 +3502,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{88} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13088 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13088 } },
         },
 
         [ 565] = { -- Conflict: Grauberg [S]
@@ -3510,7 +3510,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{89} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13316 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13316 } },
         },
 
         [ 567] = { -- Conflict: Vunkerl Inlet [S]
@@ -3518,7 +3518,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{83} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 14727 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 14727 } },
         },
 
         [ 569] = { -- Conflict: Pashhow Marshlands [S]
@@ -3526,7 +3526,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{90} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13312 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13312 } },
         },
 
         [ 571] = { -- Conflict: Rolanberry Fields [S]
@@ -3534,7 +3534,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{91} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 12308 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 12308 } },
         },
 
         [ 573] = { -- Conflict: Beadeaux [S]
@@ -3542,7 +3542,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{92} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15991 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15991 } },
         },
 
         [ 575] = { -- Conflict: Crawlers' Nest [S]
@@ -3550,7 +3550,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{171} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 15993 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 15993 } },
         },
 
 
@@ -3563,7 +3563,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{95} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13079 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13079 } },
         },
 
         [ 579] = { -- Conflict: Fort Karugo-Narugo [S]
@@ -3571,7 +3571,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{96} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 16265 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 16265 } },
         },
 
         [ 581] = { -- Conflict: Meriph. Mountains [S]
@@ -3579,7 +3579,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{97} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 12302 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 12302 } },
         },
 
         [ 583] = { -- Conflict: Sauro. Champaign [S]
@@ -3587,7 +3587,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{98} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 16170 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 16170 } },
         },
 
         [ 585] = { -- Conflict: Castle Oztroja [S]
@@ -3595,7 +3595,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{99} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15803 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15803 } },
         },
 
         [ 587] = { -- Conflict: Garlaige Citadel [S]
@@ -3603,7 +3603,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{164} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13466 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13466 } },
         },
 
         [ 589] = { -- Conflict: Beaucedine Glacier [S]
@@ -3611,7 +3611,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{136} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15805 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15805 } },
         },
 
         [ 591] = { -- Conflict: Xarcabard [S]
@@ -3619,7 +3619,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{137} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 12385 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 12385 } },
         },
 
         [ 593] = { -- Conflict: Castle Zvahl Baileys [S]
@@ -3627,7 +3627,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{138} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 15539 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 15539 } },
         },
 
         [ 595] = { -- Conflict: Castle Zvahl Keep [S]
@@ -3635,7 +3635,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{155} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 15780 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 15780 } },
         },
 
       -----------------------------------
@@ -3647,7 +3647,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{132} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10914 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10914 } },
         },
 
         [ 614] = { -- Conflict: Abyssea - Konschtat
@@ -3655,7 +3655,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{15} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 15891 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 15891 } },
         },
 
         [ 615] = { -- Conflict: Abyssea - Tahrongi
@@ -3663,7 +3663,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{45} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11765 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11765 } },
         },
 
         [ 616] = { -- Conflict: Abyssea - Attohwa
@@ -3671,7 +3671,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{215} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11763 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11763 } },
         },
 
         [ 617] = { -- Conflict: Abyssea - Misareaux
@@ -3679,7 +3679,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{216} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10966 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10966 } },
         },
 
         [ 618] = { -- Conflict: Abyssea - Vunkerl
@@ -3687,7 +3687,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{217} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10964 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10964 } },
         },
 
         [ 619] = { -- Conflict: Abyssea - Altepa
@@ -3695,7 +3695,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{218} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10968 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10968 } },
         },
 
         [ 620] = { -- Conflict: Abyssea - Uleguerand
@@ -3703,7 +3703,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{253} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11664 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11664 } },
         },
 
         [ 621] = { -- Conflict: Abyssea - Grauberg
@@ -3711,7 +3711,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{254} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11644 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11644 } },
         },
 
       -----------------------------------
@@ -4411,14 +4411,14 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { mobXP = true },
             flags = set{"daily"},
-            reward = { sparks = 100, xp = 500, unity = 300, item = { 8711 } },
+            reward = { sparks = 100, xp = 500, accolades = 300, item = { 8711 } },
         },
 
         [4083] = { -- Buff Allies (D)
             trigger = triggers.buffAlly,
             goal = 20,
             flags = set{"daily"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4084] = { -- Heal for 500+ HP (D)
@@ -4426,7 +4426,7 @@ function getRoeRecords(triggers)
             goal = 100,
             reqs = { healMin = 500 },
             flags = set{"daily"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
 
@@ -4439,7 +4439,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4009] = {   -- Vanquish Beasts
@@ -4447,7 +4447,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4010] = {   -- Vanquish Plantoids
@@ -4455,7 +4455,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4011] = {   -- Vanquish Lizards
@@ -4463,7 +4463,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4012] = {   -- Vanquish Vermin
@@ -4471,7 +4471,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4013] = { -- Gain Experience
@@ -4479,7 +4479,7 @@ function getRoeRecords(triggers)
             goal = 5000,
             increment = 0,
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
             check = function(self, player, params)
                     if params.exp and params.exp > 0 then
                         params.progress = params.progress + params.exp
@@ -4494,7 +4494,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{1126, 1127, 2955, 2956, 2957} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4015] = {   -- Vanquish Birds (TODO: No abyssea zone kills for vanquishes when exists)
@@ -4502,7 +4502,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.BIRD} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4016] = {   -- Vanquish Amorphs
@@ -4510,7 +4510,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.AMORPH} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4017] = {   -- Vanquish Undead
@@ -4518,7 +4518,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.UNDEAD} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4018] = {   -- Vanquish Arcana
@@ -4526,13 +4526,13 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4019] = {   -- Crack Treasure Caskets (Triggered from caskets.lua)
             goal = 10,
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4020] = {  -- Physical Damage Kills
@@ -4540,7 +4540,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4021] = {  -- Magic Damage Kills
@@ -4548,7 +4548,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
       -----------------------------------
