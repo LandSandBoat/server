@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2020 - Kreidos | github.com/kreidos
@@ -37,7 +37,11 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
     {
         ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0);
         ref<uint8>(0x08)  = 0; // Deeds
-        ref<uint32>(0x0A) = 0xFFFFFFFF; // Unknown purpose
+        ref<uint16>(0x0A) = 0;
+
+        ref<uint8>(0x0C)  = 0x03;
+        ref<uint8>(0x0D)  = 0x03;
+
         ref<uint16>(0x0E) = 0xFFFF;
         ref<uint32>(0x10) = 0xFFFFFFFF;
     }

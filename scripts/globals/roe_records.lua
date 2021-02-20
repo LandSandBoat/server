@@ -41,6 +41,8 @@ function getRoeRecords(triggers)
             reward =  { sparks = 100, xp = 500 }
         },
 
+        -- 499 Stepping into an Ambuscade
+
         [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
             reward =  { sparks = 100, xp = 300, item = { 10116 } }
         },
@@ -3301,7 +3303,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 12, xp = 600, accolades = 5, item = { 13484 } },
         },
 
-        [ 456] = { -- Conflict: Yuhtunga Jungle
+        [ 456] = { -- Conflict: Promyvion - Vahzl
             trigger = triggers.mobKill,
             goal = 10,
             reqs = { zone = set{22} },

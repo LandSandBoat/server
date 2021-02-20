@@ -43,9 +43,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    printf("%d", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    printf("EVENT FINISH OPTION: %d", option)
     if
         csid == 3526 and
         option >= 1 and
