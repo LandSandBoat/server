@@ -13,7 +13,7 @@ local EVENT_IDS = {
     [3] = 10142
     [4] = 10143,
     [5] = 10144,
-    [6] = 10148
+    [6] = 10148,
 }
 
 entity.onTrade = function(player,npc,trade)
