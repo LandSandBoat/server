@@ -234,6 +234,8 @@ tpz.magian.trials =
 [2263] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.METATRON_TORMENT }, mobSystem = set{ tpz.eco.DRAGON } } },    -- 80 -> 85
 [2674] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [3107] = { check = checks.checkTrials, reqs = { mobid = set{ 17330204 } } }, -- 90 -> 95 (Animated Great Axe)
+[3570] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3620] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Gungnir
 [1039] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.GEIRSKOGUL }, mobSystem = set{ tpz.eco.AMORPH } } },  -- 75 -> 75 DMG+3
@@ -243,6 +245,8 @@ tpz.magian.trials =
 [2267] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.GEIRSKOGUL }, mobSystem = set{ tpz.eco.AQUAN } } },    -- 80 -> 85
 [2678] = { check = checks.checkTrials, reqs = { mobid = set{ 17326090 } } }, -- 85 -> 90 (Dagourmarche)
 [3111] = { check = checks.checkTrials, reqs = { mobid = set{ 17330205 } } }, -- 90 -> 95 (Animated Spear)
+[3574] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3624] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Apocalypse
 [1045] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.CATASTROPHE }, mobSystem = set{ tpz.eco.UNDEAD } } },  -- 75 -> 75 DMG+3
@@ -252,6 +256,8 @@ tpz.magian.trials =
 [2265] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.CATASTROPHE }, mobSystem = set{ tpz.eco.BEAST } } },    -- 80 -> 85
 [2676] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
 [3109] = { check = checks.checkTrials, reqs = { mobid = set{ 17330206 } } }, -- 90 -> 95 (Animated Scythe)
+[3572] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3622] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Kikoku
 [1051] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.BLADE_METSU }, mobSystem = set{ tpz.eco.BIRD } } },    -- 75 -> 75 DMG+1
@@ -261,6 +267,8 @@ tpz.magian.trials =
 [2269] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.BLADE_METSU }, mobSystem = set{ tpz.eco.UNDEAD } } },   -- 80 -> 85
 [2680] = { check = checks.checkTrials, reqs = { mobid = set{ 17326088 } } }, -- 85 -> 90 (Mildaunegeux)
 [3113] = { check = checks.checkTrials, reqs = { mobid = set{ 17330207 } } }, -- 90 -> 95 (Animated Kunai)
+[3576] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3626] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Amanomurakumo
 [1057] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.TACHI_KAITEN }, mobSystem = set{ tpz.eco.BEAST } } },    -- 75 -> 75 DMG+2
@@ -270,6 +278,8 @@ tpz.magian.trials =
 [2271] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.TACHI_KAITEN }, mobSystem = set{ tpz.eco.AQUAN } } },     -- 80 -> 85
 [2682] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
 [3115] = { check = checks.checkTrials, reqs = { mobid = set{ 17330208 } } }, -- 90 -> 95 (Animated Tachi)
+[3578] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3628] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Mjollnir
 [1063] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.RANDGRITH }, mobSystem = set{ tpz.eco.LIZARD } } },   -- 75 -> 75 DMG+2
@@ -279,6 +289,8 @@ tpz.magian.trials =
 [2273] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.RANDGRITH }, mobSystem = set{ tpz.eco.BIRD } } },      -- 80 -> 85
 [2684] = { check = checks.checkTrials, reqs = { mobid = set{ 17326087 } } }, -- 85 -> 90 (Quiebitiel)
 [3117] = { check = checks.checkTrials, reqs = { mobid = set{ 17330209 } } }, -- 90 -> 95 (Animated Tachi)
+[3581] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3630] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Claustrum
 [1069] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ tpz.eco.AQUAN } } },   -- 75 -> 75 DMG+4
@@ -288,15 +300,8 @@ tpz.magian.trials =
 [2275] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ tpz.eco.PLANTOID } } }, -- 80 -> 85
 [2686] = { check = checks.checkTrials, reqs = { mobid = set{ 17326090 } } }, -- 85 -> 90 (Dagourmarche)
 [3119] = { check = checks.checkTrials, reqs = { mobid = set{ 17330210 } } }, -- 90 -> 95 (Animated Staff)
-
--- Yoichinoyumi
-[1090] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AMORPH } } },   -- 75 -> 75 DMG+2
-[1091] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.BEAST } } },     -- 75 DMG+2 -> 75 DMG+5
-[1884] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.LIZARD } } },    -- 75 DMG+5 -> 75 DMG+8
-[1885] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AQUAN } } },     -- 75 DMG+8 -> 80
-[2279] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.VERMIN } } },    -- 80 -> 85
-[2690] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
-[3123] = { check = checks.checkTrials, reqs = { mobid = set{ 17330211 } } }, -- 90 -> 95 (Animated Longbow)
+[3582] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3632] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Annihilator
 [1081] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.CORONACH }, mobSystem = set{ tpz.eco.BEAST } } },    -- 75 -> 75 DMG+2
@@ -306,18 +311,35 @@ tpz.magian.trials =
 [2280] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.CORONACH }, mobSystem = set{ tpz.eco.UNDEAD } } },    -- 80 -> 85
 [2691] = { check = checks.checkTrials, reqs = { mobid = set{ 17326088 } } }, -- 85 -> 90 (Mildaunegeux)
 [3124] = { check = checks.checkTrials, reqs = { mobid = set{ 17330212 } } }, -- 90 -> 95 (Animated Gun)
+[3587] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3637] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
+
+-- Yoichinoyumi
+[1090] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AMORPH } } },   -- 75 -> 75 DMG+2
+[1091] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.BEAST } } },     -- 75 DMG+2 -> 75 DMG+5
+[1884] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.LIZARD } } },    -- 75 DMG+5 -> 75 DMG+8
+[1885] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AQUAN } } },     -- 75 DMG+8 -> 80
+[2279] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.VERMIN } } },    -- 80 -> 85
+[2690] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
+[3123] = { check = checks.checkTrials, reqs = { mobid = set{ 17330211 } } }, -- 90 -> 95 (Animated Longbow)
+[3586] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3636] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Gjallarhorn
 [2713] = { check = checks.checkTrials, reqs = { mobid = set{ 17547265 } } }, -- 75 -> 80 (Goblin Golem)
 [2714] = { check = checks.checkTrials, reqs = { mobid = set{ 17543169 } } }, -- 80 -> 85 (Tzee Xicu Idol)
 [2715] = { check = checks.checkTrials, reqs = { mobid = set{ 17326087 } } }, -- 85 -> 90 (Quiebitiel)
 [3128] = { check = checks.checkTrials, reqs = { mobid = set{ 17330213 } } }, -- 90 -> 95 (Animated Horn)
+[3591] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3641] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Aegis
 [4401] = { check = checks.checkTrials, reqs = { mobid = set{ 17539073 } } }, -- 75 -> 80 (Gu'Dha Effigy)
 [4402] = { check = checks.checkTrials, reqs = { mobid = set{ 17534977 } } }, -- 80 -> 85 (Overlord's Tombstone)
 [4403] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [4448] = { check = checks.checkTrials, reqs = { mobid = set{ 17330214 } } }, -- 90 -> 95 (Animated Shield)
+[4453] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[5056] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
  -- Unkai Kote
 [4327] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3161 } } }, -- 0 -> +1 (Unkai Seal: Hn.)
