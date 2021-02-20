@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local entity = {}
 local EVENT_IDS = {
     [2] = 10141,
-    [3] = 10142
+    [3] = 10142,
     [4] = 10143,
     [5] = 10144,
     [6] = 10148,
