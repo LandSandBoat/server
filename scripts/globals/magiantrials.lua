@@ -387,7 +387,7 @@ tpz.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
     player:setLocalVar("storeItemId", itemId)
 
     if player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == true and trade:getSlotCount() == 1 then
-        if (not next(matchId) and item:isType(TYPE)) then
+        if not next(matchId) and item:isType(TYPE) then
             player:setLocalVar("invalidItem", 1)
             player:startEvent(EVENT_IDS[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32) -- invalid weapon
             return
