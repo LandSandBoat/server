@@ -19,6 +19,8 @@
 ===========================================================================
 */
 
+#include <math.h>
+
 #include "../../common/socket.h"
 
 #include "roe_sparkupdate.h"
@@ -32,15 +34,19 @@ CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
 
     const char* query = "SELECT spark_of_eminence FROM char_points WHERE charid = %d";
 
+    uint32 daysSinceEpoch = floor(CVanaTime::getInstance()->getVanaTime() / (60 * 60 * 24));
+
     int ret = Sql_Query(SqlHandle, query, PChar->id);
     if (ret != SQL_ERROR && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         ref<uint32>(0x04) = Sql_GetIntData(SqlHandle, 0);
         ref<uint8>(0x08)  = 0; // Deeds
-        ref<uint16>(0x0A) = 0;
 
-        ref<uint8>(0x0C)  = 0x03;
-        ref<uint8>(0x0D)  = 0x03;
+        ref<uint8>(0x0A)  = 0x00;
+        ref<uint8>(0x0B)  = 0x00;
+
+        ref<uint8>(0x0C)  = daysSinceEpoch % 6; // Unity Shared Daily (0-5)
+        ref<uint8>(0x0D)  = daysSinceEpoch % 4; // Unity Leader Daily (0-3)
 
         ref<uint16>(0x0E) = 0xFFFF;
         ref<uint32>(0x10) = 0xFFFFFFFF;
