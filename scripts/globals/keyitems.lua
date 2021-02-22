@@ -2989,6 +2989,10 @@ tpz.keyItem =
     ADAMANTOISE_COMPANION                    = 3096,
     DHAMEL_COMPANION                         = 3097,
     DOLL_COMPANION                           = 3098,
+    GOLDEN_BOMB_COMPANION                    = 3099,
+    BUFFALO_COMPANION                        = 3100,
+    WIVRE_COMPANION                          = 3101,
+
     SHEET_OF_SHADOW_LORD_TUNES               = 3136,
     MYSTICAL_CANTEEN                         = 3137,
     YGNASS_INSIGNIA                          = 3138,

@@ -25,7 +25,7 @@ entity.onTrade = function(player,npc,trade)
         if item == 15533 then
             player:startEvent(10227, 15533, tpz.ki.TRAINERS_WHISTLE, tpz.mount.CHOCOBO)
             player:setLocalVar("FullSpeedAheadReward", tpz.ki.CHOCOBO_COMPANION)
-        elseif mount >= 0 and mount <= 24 then
+        elseif mount >= 0 and mount <= 30 then
             player:setLocalVar("FullSpeedAheadReward", tpz.ki.TIGER_COMPANION + mount)
             player:startEvent(10227, item, tpz.ki.TRAINERS_WHISTLE, tpz.mount.TIGER + mount - 1)
         end
