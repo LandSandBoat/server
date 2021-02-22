@@ -274,9 +274,7 @@ int32 do_init(int32 argc, char** argv)
 
     PacketGuard::Init();
 
-#ifdef DEBUG
     luautils::EnableFilewatcher();
-#endif // DEBUG
 
     ShowStatus("The map-server is " CL_GREEN "ready" CL_RESET " to work...\n");
     ShowMessage("=======================================================================\n");
