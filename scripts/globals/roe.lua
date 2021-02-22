@@ -27,7 +27,6 @@ local triggers =
     levelUp = 10,           -- Player levelup
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
-    numRoeCompleted = 13,
 }
 
 -----------------------------------
@@ -80,10 +79,6 @@ local checks =
     end,
     missionComplete = function(self, player, params) -- Player has {NATION, MISSION} marked complete
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
-    end,
-    numRecords = function(self, player, params)
-        printf("Calling numRecords check: Current: %d, Required: %d", player:getNumEminenceCompleted(), self.reqs.numRecords)
-        return (player:getNumEminenceCompleted() >= self.reqs.numRecords) and true or false
     end,
 }
 

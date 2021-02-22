@@ -250,7 +250,6 @@ namespace roeutils
             PChar->pushPacket(new CRoeQuestLogPacket(PChar, i));
         }
 
-        event(ROE_EVENT::ROE_NUMRECORDS_COMPLETED, PChar, RoeDatagram("numRecords", GetNumEminenceCompleted(PChar)));
         charutils::SaveEminenceData(PChar);
     }
 

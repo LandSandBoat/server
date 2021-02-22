@@ -6400,7 +6400,7 @@ void CLuaBaseEntity::addAccolades(int32 accolades)
     auto* PChar       = static_cast<CCharEntity*>(m_PBaseEntity);
     int32 accoladeCap = luautils::lua["CAP_CURRENCY_ACCOLADES"].valid() ? luautils::lua["CAP_CURRENCY_ACCOLADES"].get<int32>() : 99999;
 
-    charutils::AddUnityPoints(PChar, accolades, accoladeCap);
+    charutils::AddPoints(PChar, "unity_accolades", accolades, accoladeCap);
 }
 
 /************************************************************************

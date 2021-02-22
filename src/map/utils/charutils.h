@@ -198,7 +198,6 @@ namespace charutils
     void  AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max = INT32_MAX);
     void  SetPoints(CCharEntity* PChar, const char* type, int32 amount);
     int32 GetPoints(CCharEntity* PChar, const char* type);
-    void  AddUnityPoints(CCharEntity* PChar, int32 amount, int32 max);
     void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
     auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
     void  SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp);

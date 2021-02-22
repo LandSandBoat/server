@@ -5302,7 +5302,17 @@ namespace charutils
 
         Sql_Query(SqlHandle, Query, type, type, amount, max, PChar->id);
 
-        if (strcmp(type, "spark_of_eminence") == 0)
+        if (strcmp(type, "unity_accolades") == 0)
+        {
+            float       evalPoints   = static_cast<float>(amount) / 1000;
+            const char* rankingQuery = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d;";
+
+            AddPoints(PChar, "current_accolades", amount, std::numeric_limits<int32>::max()); // Do not cap current_accolades
+            Sql_Query(SqlHandle, rankingQuery, evalPoints, PChar->profile.unity_leader);
+
+            PChar->pushPacket(new CCharStatsPacket(PChar));
+        }
+        else if (strcmp(type, "spark_of_eminence") == 0)
         {
             PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
         }
@@ -5331,24 +5341,6 @@ namespace charutils
             return Sql_GetIntData(SqlHandle, 0);
         }
         return 0;
-    }
-
-    void AddUnityPoints(CCharEntity* PChar, int32 amount, int32 max)
-    {
-        float       evalPoints    = static_cast<float>(amount) / 1000;
-        const char* rankingQuery  = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d;";
-
-        if (amount < 0)
-        {
-            // Do not allow subracting points with this function
-            return;
-        }
-
-        AddPoints(PChar, "unity_accolades", amount, max);
-        AddPoints(PChar, "current_accolades", amount, std::numeric_limits<int32>::max()); // Do not cap current_accolades
-        Sql_Query(SqlHandle, rankingQuery, evalPoints, PChar->profile.unity_leader);
-
-        PChar->pushPacket(new CCharStatsPacket(PChar));
     }
 
     void SetUnityLeader(CCharEntity* PChar, uint8 leaderID)
