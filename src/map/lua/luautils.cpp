@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -406,7 +406,7 @@ namespace luautils
     {
         TracyZoneScoped;
         TracyZoneString(funcName);
-        TracyZoneIString(PEntity->GetName());
+        TracyZoneIString(PSpell->getName());
 
         auto name = (const char*)PSpell->getName();
 
