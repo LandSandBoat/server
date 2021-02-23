@@ -1,6 +1,6 @@
 -----------------------------------
--- Area: Southern San d'Oria
--- NPC : Urbiolaine
+-- Area: Bastok Markets
+-- NPC : Igsli
 -- Unity NPC
 -----------------------------------
 require("scripts/globals/unity")
