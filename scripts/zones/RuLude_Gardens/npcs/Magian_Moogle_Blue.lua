@@ -16,28 +16,28 @@ local EVENT_IDS = {
     [6] = 10148,
 }
 
-entity.onTrade = function(player,npc,trade)
+entity.onTrade = function(player, npc, trade)
     if ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
-    tpz.magian.magianOnTrade(player,npc,trade,tpz.itemType.ARMOR,EVENT_IDS)
+    tpz.magian.magianOnTrade(player, npc, trade,tpz.itemType.ARMOR, EVENT_IDS)
 end
 
-entity.onTrigger = function(player,npc)
+entity.onTrigger = function(player, npc)
     if ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
-    tpz.magian.magianOnTrigger(player,npc,EVENT_IDS)
+    tpz.magian.magianOnTrigger(player, npc, EVENT_IDS)
 end
 
-entity.onEventUpdate = function(player,csid,option)
-    tpz.magian.magianEventUpdate(player,itemId,csid,option,EVENT_IDS)
+entity.onEventUpdate = function(player, csid, option)
+    tpz.magian.magianEventUpdate(player, itemId, csid, option, EVENT_IDS)
 end
 
-entity.onEventFinish = function(player,csid,option)
-    tpz.magian.magianOnEventFinish(player,itemId,csid,option,EVENT_IDS)
+entity.onEventFinish = function(player, csid, option)
+    tpz.magian.magianOnEventFinish(player, itemId, csid, option, EVENT_IDS)
 end
 
 return entity
