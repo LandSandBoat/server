@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
-    tpz.magian.magianOnTrade(player, npc, trade,tpz.itemType.ARMOR, EVENT_IDS)
+    tpz.magian.magianOnTrade(player, npc, trade, tpz.itemType.ARMOR, EVENT_IDS)
 end
 
 entity.onTrigger = function(player, npc)
