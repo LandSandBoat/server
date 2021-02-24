@@ -110,20 +110,26 @@ function tpz.unity.onTrigger(player, npc)
     elseif not allForOneCompleted then
         player:startEvent(zoneEventIds[zoneId][3])
     else
-        player:startEvent(zoneEventIds[zoneId][4], 0, 0, accolades, remainingLimit)
+        player:startEvent(zoneEventIds[zoneId][4], 0, player:getUnityLeader(), accolades, 0, 0, 0, 0, 0)
     end
 end
 
 function tpz.unity.onEventUpdate(player, csid, option)
+    local accolades = player:getCurrency("unity_accolades")
+    local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
     local category  = bit.band(option, 0x1F)
-    local selection = bit.rshift(option, 5) -- This may need tuning
+    local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
+
+    if option == 10 then
+        player:updateEvent(0, 0, 0, remainingLimit, 0, 0, 0, 0)
+    end
 end
 
 function tpz.unity.onEventFinish(player, csid, option)
     local zoneId = player:getZoneID()
     local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local category  = bit.band(option, 0x1F)
-    local selection = bit.rshift(option, 5) -- This may need tuning
+    local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
 
     printf("Option = %d, zoneId=%d", option, zoneId)
 
@@ -139,9 +145,9 @@ function tpz.unity.onEventFinish(player, csid, option)
 
         -- Unity Warp
         if category == 1 then
-            if unityOptions[category] ~= nil then
+            if unityOptions[category] ~= nil then -- Covers unimplemented case with current table
                 player:delCurrency("unity_accolades", 100)
-                player:setPos(unityOptions[category][selection])
+                player:setPos(unpack(unityOptions[category][selection]))
             end
         end
     end

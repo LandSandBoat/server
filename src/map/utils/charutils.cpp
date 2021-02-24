@@ -5302,7 +5302,7 @@ namespace charutils
 
         Sql_Query(SqlHandle, Query, type, type, amount, max, PChar->id);
 
-        if (strcmp(type, "unity_accolades") == 0)
+        if (strcmp(type, "unity_accolades") == 0 && amount > 0)
         {
             float       evalPoints   = static_cast<float>(amount) / 1000;
             const char* rankingQuery = "UPDATE unity_system SET points_current = points_current+%f WHERE leader=%d;";

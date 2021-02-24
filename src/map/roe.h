@@ -68,6 +68,8 @@ struct RoeSystemData
     std::vector<uint16>      DailyRecordIDs;
     std::bitset<4096>        WeeklyRecords;
     std::vector<uint16>      WeeklyRecordIDs;
+    std::bitset<4096>        UnityRecords;
+    std::vector<uint16>      UnityRecordIDs;
     std::bitset<4096>        TimedRecords;
     std::array<uint32, 4096> NotifyThresholds;
     uint8                    unityLeaderRank[11]; // 0..10 for Unity Leader, stores rank position

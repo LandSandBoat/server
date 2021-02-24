@@ -197,7 +197,13 @@ local function completeRecord(player, record)
     end
 
     if rewards["accolades"] ~= nil and type(rewards["accolades"]) == "number" then
-        player:addCurrency("unity_accolades", rewards["accolades"], CAP_CURRENCY_ACCOLADES)
+        local bonusAccoladeRate = 1.0
+
+        if record ~= 5 then -- Do not grant a bonus for All for One
+            bonusAccoladeRate = bonusAccoladeRate + ((getUnityRank - 1) * 0.05)
+        end
+
+        player:addCurrency("unity_accolades", math.floor(rewards["accolades"] * bonusAccoladeRate), CAP_CURRENCY_ACCOLADES)
         player:messageBasic(tpz.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
     end
 

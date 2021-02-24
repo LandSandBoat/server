@@ -157,6 +157,11 @@ namespace roeutils
                         roeutils::RoeSystem.WeeklyRecords.set(recordID);
                         roeutils::RoeSystem.WeeklyRecordIDs.push_back(recordID);
                     }
+                    else if (flag == "unity")
+                    {
+                        roeutils::RoeSystem.UnityRecords.set(recordID);
+                        roeutils::RoeSystem.UnityRecordIDs.push_back(recordID);
+                    }
                     else if (flag == "timed")
                     {
                         roeutils::RoeSystem.TimedRecords.set(recordID);
