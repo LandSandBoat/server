@@ -17,9 +17,8 @@ loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23 days)
 -- Checks if a Login Campaign is active.
 tpz.events.loginCampaign.isCampaignActive = function()
     if ENABLE_LOGIN_CAMPAIGN == 1 then
-        local currentLocalTime = os.time(os.date('*t'))
-        local currentUTCTime = os.time(os.date('!*t'))
-        local jstOffset = currentUTCTime - currentLocalTime + 32400
+        local local_UTC_offset = os.time() - os.time(os.date('!*t'))
+        local JST_UTC_offset = 9 * 60 * 60
         local campaignStartDate = os.time({
             year = loginCampaignYear,
             month = loginCampaignMonth,
@@ -27,7 +26,7 @@ tpz.events.loginCampaign.isCampaignActive = function()
             hour = 0,
             min = 0,
             sec = 0
-        }) + jstOffset  -- JST time
+        }) + local_UTC_offset + JST_UTC_offset
         local campaignEndDate = campaignStartDate + loginCampaignDuration * 24 * 60 * 60
 
         if os.time() < campaignEndDate and os.time() > campaignStartDate then
