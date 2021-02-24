@@ -172,11 +172,11 @@ local function completeRecord(player, record)
     if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
         local bonus = 1
         if player:getEminenceCompleted(record) then
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE)
+            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE, CAP_CURRENCY_SPARKS)
             player:messageBasic(tpz.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         else
             bonus = 3
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE)
+            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE, CAP_CURRENCY_SPARKS)
             player:messageBasic(tpz.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         end
     end
@@ -197,7 +197,7 @@ local function completeRecord(player, record)
     end
 
     if rewards["accolades"] ~= nil and type(rewards["accolades"]) == "number" then
-        player:addAccolades(rewards["accolades"])
+        player:addCurrency("unity_accolades", rewards["accolades"], CAP_CURRENCY_ACCOLADES)
         player:messageBasic(tpz.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
     end
 

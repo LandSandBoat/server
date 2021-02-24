@@ -6388,22 +6388,6 @@ bool CLuaBaseEntity::delGil(int32 gil)
 }
 
 /************************************************************************
- *  Function: addAccolades()
- *  Purpose : Add unity accolade currency, and update unity leader
- *  Example : player:addAccolades(1000)
- ************************************************************************/
-
-void CLuaBaseEntity::addAccolades(int32 accolades)
-{
-    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar       = static_cast<CCharEntity*>(m_PBaseEntity);
-    int32 accoladeCap = luautils::lua["CAP_CURRENCY_ACCOLADES"].valid() ? luautils::lua["CAP_CURRENCY_ACCOLADES"].get<int32>() : 99999;
-
-    charutils::AddPoints(PChar, "unity_accolades", accolades, accoladeCap);
-}
-
-/************************************************************************
  *  Function: getCurrency()
  *  Purpose : Get a player's current balance of a specified type
  *  Example : player:getCurrency("cruor") -- Must pass a string value
@@ -12771,8 +12755,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getSeals", CLuaBaseEntity::getSeals);
     SOL_REGISTER("addSeals", CLuaBaseEntity::addSeals);
     SOL_REGISTER("delSeals", CLuaBaseEntity::delSeals);
-
-    SOL_REGISTER("addAccolades", CLuaBaseEntity::addAccolades);
 
     SOL_REGISTER("getCurrency", CLuaBaseEntity::getCurrency);
     SOL_REGISTER("addCurrency", CLuaBaseEntity::addCurrency);
