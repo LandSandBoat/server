@@ -1,7 +1,8 @@
 -----------------------------------
 -- Unity Concord NPC Global
 -----------------------------------
- require("scripts/globals/zone")
+require("scripts/globals/utils")
+require("scripts/globals/zone")
 -----------------------------------
 tpz = tpz or {}
 tpz.unity = tpz.unity or {}
@@ -60,32 +61,41 @@ local unityOptions =
         [37] = {  100.000,  -12.000, -163.000,  63,  51 }, -- Wajaom Woodlands
         [38] = {  408.000,   -0.375,  -73.520,  99,  24 }, -- Lufaise Meadows
         [39] = {   68.230,   -6.185,  148.040,   0, 113 }, -- Cape Teriggan
-    --  [40] = ???                  
+        [40] = nil,                                        -- ???                
         [41] = { -418.320,  -16.758, -103.470, 176,   5 }, -- Uleguerand Range
         [42] = {   23.750,   26.593, -259.740, 212, 160 }, -- Den of Rancor
         [43] = { -177.000,  -23.979, -171.000, 232, 204 }, -- Fei'Yin
-    --  [44] = ???                  
-    --  [45] = ???                  
+        [44] = nil,                                        -- ???                  
+        [45] = nil,                                        -- ???                   
         [46] = { -245.460,  -32.247,  245.440,  31,  25 }, -- Misareaux Coast
         [47] = { -613.000,  -21.301,  230.000, 224,  61 }, -- Mount Zhayolm
         [48] = {  -60.000,  -10.000, -119.000, 192, 212 }, -- Gustav Tunnel
         [49] = { -183.100,  -19.854,   57.900, 127, 127 }, -- Behemoth's Dominion
         [50] = {  -60.000,  -19.329,   17.000,  15, 153 }, -- The Boyahda Tree
-    --  [51] = Valley of Sorrows
-    --  [52] = Wajaom Woodlands
-    --  [53] = Mount Zhayolm
+        [51] = nil,                                        -- Valley of Sorrows
+        [52] = nil,                                        -- Wajaom Woodlands
+        [53] = nil,                                        -- Mount Zhayolm
     },
 
-    -- 5 - Change Unity
 }
 
 local function changeUnityLeader(player, leader)
     player:setUnityLeader(leader)
     player:setCharVar("unity_changed", 1)
-
-    -- Reset ranking data on change
     player:setCurrency("current_accolades", 0)
     player:setCurrency("prev_accolades", 0)
+end
+
+local function getChangeUnityCost(player, selection)
+    local currentRank = player:getUnityRank()
+    local newRank = player:getUnityRank(selection)
+    local changeCost = (500 * (11 - newRank)) - ((11 - currentRank) * 400)
+
+    if changeCost < 100 then
+        changeCost = 100
+    end
+
+    return changeCost
 end
 
 function tpz.unity.onTrade(player, npc, trade, eventid)
@@ -115,6 +125,8 @@ function tpz.unity.onTrigger(player, npc)
 end
 
 function tpz.unity.onEventUpdate(player, csid, option)
+    local zoneId = player:getZoneID()
+    local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local accolades = player:getCurrency("unity_accolades")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
     local category  = bit.band(option, 0x1F)
@@ -122,6 +134,14 @@ function tpz.unity.onEventUpdate(player, csid, option)
 
     if option == 10 then
         player:updateEvent(0, 0, 0, remainingLimit, 0, 0, 0, 0)
+    elseif category == 5 then
+        if player:getCharVar("unity_changed") == 1 then
+            player:updateEvent(utils.MAX_UINT32)
+            player:messageSpecial(ID.text.HAVE_ALREADY_CHANGED_UNITY, option)
+        else
+            local changeUnityCost = getChangeUnityCost(player, selection)
+            player:updateEvent(changeUnityCost, changeUnityCost)
+        end
     end
 end
 
@@ -131,24 +151,28 @@ function tpz.unity.onEventFinish(player, csid, option)
     local category  = bit.band(option, 0x1F)
     local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
 
-    printf("Option = %d, zoneId=%d", option, zoneId)
+    printf("Option = %d, zoneId=%d, cat=%d, selection=%d", option, zoneId, category, selection)
 
     -- First time joining Unity (Requirements met for num Objectives and All for One set)
-    if
-        csid == zoneEventIds[zoneId][3] and option >= 1 and option <= 11 then
+    if csid == zoneEventIds[zoneId][3] and option >= 1 and option <= 11 then
         changeUnityLeader(player, option)
         tpz.roe.onRecordTrigger(player, 5)
-        player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, option)
+        player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, option - 1)
 
     -- Player is a member of a Unity
     elseif csid == zoneEventIds[zoneId][4] then
 
         -- Unity Warp
-        if category == 1 then
-            if unityOptions[category] ~= nil then -- Covers unimplemented case with current table
-                player:delCurrency("unity_accolades", 100)
-                player:setPos(unpack(unityOptions[category][selection]))
-            end
+        if category == 1 and unityOptions[category][selection] ~= nil then
+            player:delCurrency("unity_accolades", 100)
+            player:setPos(unpack(unityOptions[category][selection]))
+
+        -- Change Unity
+        -- TODO: Move the rshift out if it is used elsewhere
+        elseif category == 6 and bit.rshift(selection, 4) == 200 then
+            local newUnityLeader = bit.band(selection, 0xF)
+            changeUnityLeader(player, newUnityLeader)
+            player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, newUnityLeader - 1)
         end
     end
 end

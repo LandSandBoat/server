@@ -5980,16 +5980,24 @@ uint8 CLuaBaseEntity::getUnityLeader()
 
 /************************************************************************
  *  Function: getUnityRank()
- *  Purpose : Gets the current rank of the player's Unity
+ *  Purpose : Gets the current rank of the player's Unity, if a parameter
+ *          : is specified, returns the rank of that unity
  *  Example : player:getUnityRank()
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getUnityRank()
+std::optional<uint8> CLuaBaseEntity::getUnityRank(sol::object const& unityObj)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    return roeutils::RoeSystem.unityLeaderRank[PChar->profile.unity_leader - 1];
+    uint8 unity = (unityObj != sol::nil) ? unityObj.as<uint8>() : PChar->profile.unity_leader;
+
+    if (unity >= 1 && unity <= 11)
+    {
+        return roeutils::RoeSystem.unityLeaderRank[unity - 1];
+    }
+
+    return std::nullopt;
 }
 
 /************************************************************************

@@ -80,6 +80,9 @@ local checks =
     missionComplete = function(self, player, params) -- Player has {NATION, MISSION} marked complete
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
     end,
+    unityLeader = function(self, player, params) -- Player is a member of the specified Unity (1..11)
+        return player:getUnityLeader() == self.reqs.unityLeader
+    end,
 }
 
 -- Main general check function for all-purpose use.
