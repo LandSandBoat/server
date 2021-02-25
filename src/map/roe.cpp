@@ -522,6 +522,13 @@ namespace roeutils
             PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
         }
 
+        for (auto record : RoeSystem.UnityRecordIDs)
+        {
+            uint16 page = record / 8;
+            uint8  bit  = record % 8;
+            PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
+        }
+
         charutils::SaveEminenceData(PChar);
 
         for (int i = 0; i < 4; i++)

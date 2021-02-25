@@ -168,9 +168,10 @@ function tpz.unity.onEventFinish(player, csid, option)
             player:setPos(unpack(unityOptions[category][selection]))
 
         -- Change Unity
-        -- TODO: Move the rshift out if it is used elsewhere
-        elseif category == 6 and bit.rshift(selection, 4) == 200 then
+        elseif category == 6 then
             local newUnityLeader = bit.band(selection, 0xF)
+
+            player:delCurrency("unity_accolades", getChangeUnityCost(player, newUnityLeader))
             changeUnityLeader(player, newUnityLeader)
             player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, newUnityLeader - 1)
         end
