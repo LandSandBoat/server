@@ -522,6 +522,7 @@ namespace roeutils
             PChar->m_eminenceLog.complete[page] &= ~(1 << bit);
         }
 
+        // Set completion for Unity Records, but maintain progress on active
         for (auto record : RoeSystem.UnityRecordIDs)
         {
             uint16 page = record / 8;

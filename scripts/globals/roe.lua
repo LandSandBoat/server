@@ -13,7 +13,7 @@ tpz.roe = tpz.roe or {}
 -- triggers
 -----------------------------------
 
-local triggers =
+tpz.roe.triggers =
 {
     mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
     wSkillUse = 2,          -- Player Weapon skill used
@@ -27,7 +27,10 @@ local triggers =
     levelUp = 10,           -- Player levelup
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
+    helmSuccess = 13,
 }
+
+local triggers = tpz.roe.triggers
 
 -----------------------------------
 -- checks
@@ -82,6 +85,9 @@ local checks =
     end,
     unityLeader = function(self, player, params) -- Player is a member of the specified Unity (1..11)
         return player:getUnityLeader() == self.reqs.unityLeader
+    end,
+    skillType = function(self, player, params)
+        return params.skillType == self.reqs.skillType and true or false
     end,
 }
 

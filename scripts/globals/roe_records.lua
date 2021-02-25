@@ -4399,25 +4399,233 @@ function getRoeRecords(triggers)
       -- Unity - Shared A
       -----------------------------------
 
+        [3002] = { -- Vanquish Multiple Enemies A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3003] = {   -- Vanquish Aquans A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3004] = {  -- Vanquish Amorphs with Physical Damage A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AMORPH} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3005] = {   -- Vanquish Beasts with Magic A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.BEAST} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3006] = { -- Total Successful Woodworking Syntheses A (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.WOODWORKING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3007] = { -- Total Successful Leatherworking Syntheses A (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.LEATHERCRAFT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3008] = { -- Total Suc. Mining Attempts A (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 4 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
       -----------------------------------
       -- Unity - Shared B
       -----------------------------------
+
+        [3011] = { -- Vanquish Multiple Enemies B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3012] = {   -- Vanquish Arcana B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3013] = {  -- Vanquish Undead with Physical Damage B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.UNDEAD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3014] = {   -- Vanquish Plantoids with Magic B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.PLANTOID} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
       -----------------------------------
       -- Unity - Shared C
       -----------------------------------
 
+        [3020] = { -- Vanquish Multiple Enemies C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3021] = {   -- Vanquish Vermin C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3022] = {  -- Vanquish Birds with Physical Damage C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.BIRD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3023] = {   -- Vanquish Lizards with Magic C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.LIZARD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
       -----------------------------------
       -- Unity - Shared D
       -----------------------------------
+
+        [3029] = { -- Vanquish Multiple Enemies D (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3030] = {   -- Vanquish Beasts D (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3031] = {  -- Vanquish Aquans with Physical Damage C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AQUAN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3032] = {   -- Vanquish Amorphs with Magic C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.AMORPH} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
       -----------------------------------
       -- Unity - Shared E
       -----------------------------------
 
+        [3038] = { -- Vanquish Multiple Enemies E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
       -----------------------------------
       -- Unity - Shared F
       -----------------------------------
+
+        [3046] = { -- Level Sync to Vanquish Enemies F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true , levelSync = true},
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500 , accolades = 100 },
+        },
+
+        [3047] = { -- Vanquish Multiple Enemies F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3048] = {   -- Vanquish Lizards F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3049] = {  -- Vanquish Vermin with Physical Damage F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.VERMIN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3050] = {   -- Vanquish Birds with Magic F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.BIRD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3051] = { -- Total Successful Alchemy Syntheses F (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.ALCHEMY },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
 
       -----------------------------------
       -- Vana'versary - 15th Vana'versary I

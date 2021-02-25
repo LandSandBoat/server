@@ -52,6 +52,7 @@ enum ROE_EVENT
     ROE_LEVELUP              = 10,
     ROE_QUEST_COMPLETE       = 11,
     ROE_MISSION_COMPLETE     = 12,
+    ROE_HELMSUCCESS          = 13,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
