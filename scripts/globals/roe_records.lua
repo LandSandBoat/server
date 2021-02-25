@@ -3728,6 +3728,13 @@ function getRoeRecords(triggers)
       -- Content (Other)                 
       -----------------------------------
 
+        [  63] = { -- Total Suc. Chocobo Digs
+            trigger = triggers.chocoboDigSuccess,
+            goal = 30,
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500 },
+        },
+
         [ 727] = { -- Subjugation: Kirin
             trigger = triggers.mobKill,
             reqs = { mobID = set{17506670} },
@@ -4458,6 +4465,13 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity - Shared B
       -----------------------------------
+
+        [3010] = { -- Chocobo Digging B (UC)
+            trigger = triggers.chocoboDigSuccess,
+            goal = 10,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
 
         [3011] = { -- Vanquish Multiple Enemies B (UC)
             trigger = triggers.mobKill,

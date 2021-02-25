@@ -28,6 +28,7 @@ tpz.roe.triggers =
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
     helmSuccess = 13,
+    chocoboDigSuccess = 14,
 }
 
 local triggers = tpz.roe.triggers

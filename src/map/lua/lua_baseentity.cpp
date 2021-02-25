@@ -5951,7 +5951,7 @@ bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
 }
 
 /************************************************************************
- *  Function: triggerRoeEvent(eventID, {"reqName", value})
+ *  Function: triggerRoeEvent(eventID, {["reqName"] = value})
  *  Purpose : Triggers roeutils::event()
  *  Example : player:triggerRoeEvent(19)
  *  Note    : This only supports int/string datagram events at the moment!
@@ -5960,7 +5960,7 @@ bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
 void CLuaBaseEntity::triggerRoeEvent(uint8 eventNum, sol::object const& reqTable)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    RoeDatagramList roeEventData;
+    RoeDatagramList roeEventData({});
     ROE_EVENT       eventID = static_cast<ROE_EVENT>(eventNum);
 
     if (reqTable.get_type() == sol::type::table)
