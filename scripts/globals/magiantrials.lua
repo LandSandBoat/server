@@ -35,7 +35,7 @@ local function parseParams(player)
     for _,v in pairs(getPlayerTrials(player)) do
         if v.trial > 0 then table.insert(paramTrials, v.trial) end
     end
-    local params = { 0, 0, 0, 0, 0}
+    local params = { 0, 0, 0, 0, 0 }
     for i = 1, #paramTrials, 2 do
         params[(i+1)/2] = paramTrials[i] + bit.lshift((paramTrials[i+1] or 0), 16)
     end
@@ -59,7 +59,11 @@ local function getPlayerTrialByItemId(player, itemId)
 
     for index, obj in pairs(trialsPlayer) do
         local trialId = obj.trial
-        if trials[trialId] and trials[trialId].reqs and trials[trialId].reqs.itemId and trials[trialId].reqs.itemId[itemId] and trialsPlayer[index].progress < trialsPlayer[index].objectiveTotal  then
+        if trials[trialId] and
+           trials[trialId].reqs and
+           trials[trialId].reqs.itemId and
+           trials[trialId].reqs.itemId[itemId] and
+           trialsPlayer[index].progress < trialsPlayer[index].objectiveTotal then
             table.insert(resultTrials, { trial = trialId, progress = trialsPlayer[index].progress, objectiveTotal = trialsPlayer[index].objectiveTotal })
         end
     end
