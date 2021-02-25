@@ -30,6 +30,7 @@
 #include "utils/zoneutils.h"
 #include "vana_time.h"
 
+#include "packets/char_spells.h"
 #include "packets/roe_questlog.h"
 #include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
@@ -387,6 +388,32 @@ namespace roeutils
         return false;
     }
 
+    void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate)
+    {
+        int32  curPoints        = charutils::GetPoints(PChar, "prev_accolades") / 1000;
+        int32  prevPoints       = charutils::GetPoints(PChar, "current_accolades") / 1000;
+        uint16 unityLeaderTrust = (PChar->profile.unity_leader > 0) ? ROE_TRUST_ID[PChar->profile.unity_leader - 1] : 0;
+
+        if (unityLeaderTrust > 0)
+        {
+            if (curPoints >= 5 || prevPoints >= 5)
+            {
+                charutils::addSpell(PChar, unityLeaderTrust);
+                charutils::SaveSpell(PChar, unityLeaderTrust);
+            }
+            else
+            {
+                charutils::delSpell(PChar, unityLeaderTrust);
+                charutils::DeleteSpell(PChar, unityLeaderTrust);
+            }
+        }
+
+        if (sendUpdate)
+        {
+            PChar->pushPacket(new CCharSpellsPacket(PChar));
+        }
+    }
+
     void onCharLoad(CCharEntity* PChar)
     {
         if (!RoeSystem.RoeEnabled)
@@ -426,22 +453,11 @@ namespace roeutils
                 if (lastOnline < lastJstWeeklyReset)
                 {
                     ClearWeeklyRecords(PChar);
-                    charutils::SetCharVar(PChar, "weekly_sparks_spent", 0);
-                    charutils::SetCharVar(PChar, "weekly_accolades_spent", 0);
-                    charutils::SetCharVar(PChar, "unity_changed", 0);
-
-                    int32 currentAccolades = charutils::GetPoints(PChar, "current_accolades");
 
                     if (lastOnline < lastTwoJstResets)
                     {
                         charutils::SetPoints(PChar, "prev_accolades", 0);
                     }
-                    else
-                    {
-                        charutils::SetPoints(PChar, "prev_accolades", currentAccolades);
-                    }
-
-                    charutils::SetPoints(PChar, "current_accolades", 0);
                 }
             }
 
@@ -595,6 +611,8 @@ namespace roeutils
         int32 currentAccolades = charutils::GetPoints(PChar, "current_accolades");
         charutils::SetPoints(PChar, "prev_accolades", currentAccolades);
         charutils::SetPoints(PChar, "current_accolades", 0);
+
+        UpdateUnityTrust(PChar);
 
         for (int i = 0; i < 4; i++)
         {

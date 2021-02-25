@@ -449,7 +449,6 @@ namespace charutils
             PChar->lastOnline = Sql_GetUIntData(SqlHandle, 29);
         }
 
-        roeutils::onCharLoad(PChar);
         LoadSpells(PChar);
 
         fmtQuery = "SELECT "
@@ -503,6 +502,8 @@ namespace charutils
             PChar->profile.fame[14]     = (uint16)Sql_GetIntData(SqlHandle, 18); // Adoulin
             PChar->profile.unity_leader = (uint8)Sql_GetUIntData(SqlHandle, 19);
         }
+
+        roeutils::onCharLoad(PChar);
 
         fmtQuery = "SELECT "
                    "inventory," // 0
@@ -5309,6 +5310,7 @@ namespace charutils
 
             AddPoints(PChar, "current_accolades", amount, std::numeric_limits<int32>::max()); // Do not cap current_accolades
             Sql_Query(SqlHandle, rankingQuery, evalPoints, PChar->profile.unity_leader);
+            roeutils::UpdateUnityTrust(PChar, true);
 
             PChar->pushPacket(new CCharStatsPacket(PChar));
         }

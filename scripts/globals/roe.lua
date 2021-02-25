@@ -86,7 +86,7 @@ local checks =
     unityLeader = function(self, player, params) -- Player is a member of the specified Unity (1..11)
         return player:getUnityLeader() == self.reqs.unityLeader
     end,
-    skillType = function(self, player, params)
+    skillType = function(self, player, params) -- Generic numeric check, used for synthSuccess and helmSuccess
         return params.skillType == self.reqs.skillType and true or false
     end,
 }

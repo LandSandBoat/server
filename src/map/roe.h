@@ -56,6 +56,21 @@ enum ROE_EVENT
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 
+const uint16 ROE_TRUST_ID[11] =
+{
+     953, // Pieuje
+    1005, // Ayame
+     954, // Invincible Shield
+     955, // Apururu
+    1006, // Maat
+    1007, // Aldo
+     956, // Jakoh Wahcondalo
+    1008, // Naja Salaheem
+     957, // Flaviria
+     980, // Yoran-Oran
+     981  // Sylvie
+};
+
 typedef std::array<uint16, 6>            RecordTimetable_D;
 typedef std::array<RecordTimetable_D, 7> RecordTimetable_W;
 struct RoeSystemData
@@ -144,6 +159,7 @@ namespace roeutils
     void CycleWeeklyRecords();
     void CycleUnityRankings();
     void UpdateUnityRankings();
+    void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate = false);
 
     uint16 GetActiveTimedRecord();
     void   AddActiveTimedRecord(CCharEntity* PChar);
