@@ -3825,6 +3825,98 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
+      -- Harvesting - Adoulin 1
+      -----------------------------------
+
+      -----------------------------------
+      -- Harvesting - Zilart
+      -----------------------------------
+
+        [ 478] = { -- Harvesting: Yuhtunga Jungle
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{123} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 479] = { -- Harvesting: Yhoator Jungle
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{124} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 480] = { -- Harvesting: Ifrit's Cauldron
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{205} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 485] = { -- Harvesting: Korroloka Tunnel
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{173} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+      -----------------------------------
+      -- Harvesting - Promathia
+      -----------------------------------
+
+        [ 481] = { -- Harvesting: Oldton Movalpolos
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{11} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 482] = { -- Harvesting: Newton Movalpolos
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{12} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 483] = { -- Harvesting: Lufaise Meadows
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{24} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 484] = { -- Harvesting: Misareaux Coast
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{25} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 486] = { -- Harvesting: Carpenters' Landing
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{2} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 487] = { -- Harvesting: Attohwa Chasm
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{7} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+      -----------------------------------
       -- Content (Other)                 
       -----------------------------------
 
