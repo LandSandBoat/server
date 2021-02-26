@@ -3917,6 +3917,110 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
+      -- Harvesting - Aht Urhgan
+      -----------------------------------
+
+        [ 599] = { -- Harvesting: Bhaflau Thickets
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{52} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 600] = { -- Harvesting: Mamook
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{65} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 601] = { -- Harvesting: Wajaom Woodlands
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{51} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 602] = { -- Harvesting: Halvung
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{62} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 603] = { -- Harvesting: Mount Zhayolm
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{61} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 604] = { -- Harvesting: Caedarva Mire
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{79} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+      -----------------------------------
+      -- Harvesting - Goddess
+      -----------------------------------
+
+        [ 606] = { -- Harvesting: East Ronfaure [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{81} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 607] = { -- Harvesting: Jugner Forest [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{82} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 608] = { -- Harvesting: North Gustaberg [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{88} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 609] = { -- Harvesting: Grauberg [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{89} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 610] = { -- Harvesting: West Sarutabaruta [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{95} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 611] = { -- Harvesting: Fort Karugo-Narugo [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{96} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+      -----------------------------------
       -- Content (Other)                 
       -----------------------------------
 
