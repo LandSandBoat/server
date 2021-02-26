@@ -3725,6 +3725,10 @@ function getRoeRecords(triggers)
       -----------------------------------
 
       -----------------------------------
+      -- Harvesting
+      -----------------------------------
+
+      -----------------------------------
       -- Content (Other)                 
       -----------------------------------
 
@@ -4505,6 +4509,22 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3015] = { -- Total Successful Blacksmithing Syntheses B (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.SMITHING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3017] = { -- Total Suc. Logging Attempts B (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 3 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
       -----------------------------------
       -- Unity - Shared C
       -----------------------------------
@@ -4541,6 +4561,22 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3024] = { -- Total Successful Goldsmithing Syntheses C (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.GOLDSMITHING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3026] = { -- Total Suc. Harvesting Attempts C (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 1 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
       -----------------------------------
       -- Unity - Shared D
       -----------------------------------
@@ -4561,7 +4597,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
-        [3031] = {  -- Vanquish Aquans with Physical Damage C (UC)
+        [3031] = {  -- Vanquish Aquans with Physical Damage D (UC)
             trigger = triggers.mobKill,
             goal = 20,
             reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AQUAN} },
@@ -4569,12 +4605,36 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
 
-        [3032] = {   -- Vanquish Amorphs with Magic C (UC)
+        [3032] = {   -- Vanquish Amorphs with Magic D (UC)
             trigger = triggers.mobKill,
             goal = 20,
             reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.AMORPH} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3033] = { -- Total Successful Cloth Syntheses D (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.CLOTHCRAFT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3034] = { -- Total Successful Bone Syntheses D (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.BONECRAFT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3035] = { -- Total Suc. Mining Attempts D (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 4 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
       -----------------------------------
@@ -4585,6 +4645,46 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             goal = 20,
             reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3039] = {   -- Vanquish Plantoids E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3040] = {  -- Vanquish Arcana with Physical Damage E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.ARCANA} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3041] = {   -- Vanquish Undead with Magic E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.UNDEAD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3042] = { -- Total Successful Cooking Syntheses E (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.COOKING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3044] = { -- Total Suc. Logging Attempts E (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 3 },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4637,6 +4737,14 @@ function getRoeRecords(triggers)
             trigger = triggers.synthSuccess,
             goal = 10,
             reqs = { skillType = tpz.skill.ALCHEMY },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3053] = { -- Total Suc. Harvesting Attempts F (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 1 },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
