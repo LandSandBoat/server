@@ -46,6 +46,8 @@ migrations = [
     char_timestamp,
     currency_columns,
     add_instance_zone_column,
+    char_points_weekly_unity,
+    char_profile_unity_leader
 ]
 # These are the default 'protected' files
 player_data = [
