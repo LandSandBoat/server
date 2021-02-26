@@ -6,7 +6,6 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -----------------------------------
 require("scripts/globals/monstertpmoves")
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -19,6 +18,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local slowed = false
     local weight = false
+    local typeEffect
 
     slowed = MobStatusEffectMove(mob, target, tpz.effect.SLOW, 1250, 0, 60)
     weight = MobStatusEffectMove(mob, target, tpz.effect.WEIGHT, 40, 0, 60)
