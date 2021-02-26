@@ -5045,10 +5045,60 @@ function getRoeRecords(triggers)
       -- Unity - Leader
       -----------------------------------
 
+        -- Pieuje 1
         [3488] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.CLUB },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3489] = { -- Conflict: Rala Waterways (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{258} },
+            flags = set{"unity"},
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4439 } },
+        },
+
+        [3498] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3508] = { -- Great Katana Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.GREAT_KATANA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3518] = { -- Archery Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.ARCHERY },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3528] = { -- Axe Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.AXE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3538] = { -- Great Axe Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.GREAT_AXE },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5057,6 +5107,127 @@ function getRoeRecords(triggers)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.CLUB },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3558] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3568] = { -- Hand-to-Hand Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.HAND_TO_HAND },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3578] = { -- Great Sword Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.GREAT_SWORD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3588] = { -- Dagger Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.DAGGER },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3598] = { -- Marksmanship Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.MARKSMANSHIP },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3608] = { -- Dagger Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.DAGGER },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3618] = { -- Archery Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.ARCHERY },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3628] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3638] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3648] = { -- Polearm Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.POLEARM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3658] = { -- Sword Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.SWORD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3668] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3678] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3688] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3698] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
