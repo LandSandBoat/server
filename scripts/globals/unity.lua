@@ -80,10 +80,10 @@ local unityOptions =
 }
 
 local function changeUnityLeader(player, leader)
-    player:setUnityLeader(leader)
     player:setCharVar("unity_changed", 1)
     player:setCurrency("current_accolades", 0)
     player:setCurrency("prev_accolades", 0)
+    player:setUnityLeader(leader)
 end
 
 local function getChangeUnityCost(player, selection)
