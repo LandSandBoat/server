@@ -3725,8 +3725,104 @@ function getRoeRecords(triggers)
       -----------------------------------
 
       -----------------------------------
-      -- Harvesting
+      -- Harvesting - Original Areas
       -----------------------------------
+
+        [ 180] = { -- Harvesting: East Ronfaure
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{101} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 181] = { -- Harvesting: Ghelsba Outpost
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{140} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 182] = { -- Harvesting: Gusgen Mines
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{196} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 183] = { -- Harvesting: Jugner Forest
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{104} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 184] = { -- Harvesting: Zeruhn Mines
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{172} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 185] = { -- Harvesting: Palborough Mines
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{143} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 186] = { -- Harvesting: West Sarutabaruta
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{115} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 187] = { -- Harvesting: Giddeus
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{145} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 188] = { -- Harvesting: Buburimu Peninsula
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{118} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 189] = { -- Harvesting: Tahrongi Canyon
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{117} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 190] = { -- Harvesting: Maze of Shakhrami
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{198} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 389] = { -- Harvesting: Yughott Grotto
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{142} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
 
       -----------------------------------
       -- Content (Other)                 
