@@ -5042,6 +5042,25 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
+      -- Unity - Leader
+      -----------------------------------
+
+        [3488] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB },
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        -- Apururu
+        [3548] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB },
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
       -- Vana'versary - 15th Vana'versary I
       -----------------------------------
 
