@@ -5045,6 +5045,8 @@ function getRoeRecords(triggers)
       -- Unity - Leader
       -----------------------------------
 
+        -- TODO: Assign a Unity Leader requirement to these
+
         -- Pieuje 1
         [3488] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5059,7 +5061,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{258} },
             flags = set{"unity"},
-            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4439 } },
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3498] = { -- Staff Weapon Skills (UC)
@@ -5070,12 +5072,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3499] = { -- Conflict: Eldieme Necropolis (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{195} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3508] = { -- Great Katana Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.GREAT_KATANA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3509] = { -- Conflict: North Gustaberg (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{106} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3518] = { -- Archery Weapon Skills (UC)
@@ -5086,6 +5104,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3519] = { -- Conflict: Crawlers' Nest (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{197} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3528] = { -- Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5094,12 +5120,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3529] = { -- Conflict: South Gustaberg (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{107} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3538] = { -- Great Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.GREAT_AXE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3539] = { -- Conflict: Ceizak Battlegrounds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{261} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         -- Apururu
@@ -5111,12 +5153,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3549] = { -- Conflict: West Sarutabaruta (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{115} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3558] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.STAFF },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3559] = { -- Conflict: Castle Oztroja (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{151} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
@@ -5127,12 +5185,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3569] = { -- Conflict: Yorcia Weald (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{263} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3578] = { -- Great Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.GREAT_SWORD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3579] = { -- Conflict: Meriphataud Mountains (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{119} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3588] = { -- Dagger Weapon Skills (UC)
@@ -5143,12 +5217,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3589] = { -- Conflict: Sanctuary of Zi'Tah (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{121} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3598] = { -- Marksmanship Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.MARKSMANSHIP },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3599] = { -- Conflict: Boyahda Tree (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{153} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3608] = { -- Dagger Weapon Skills (UC)
@@ -5159,12 +5249,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3609] = { -- Conflict: Yuhtunga Jungle (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{123} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3618] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.ARCHERY },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3619] = { -- Conflict: Marjami Ravine (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{266} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3628] = { -- Club Weapon Skills (UC)
@@ -5175,12 +5281,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3629] = { -- Conflict: Bhaflau Thickets (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{52} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3638] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.STAFF },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3639] = { -- Conflict: Wajaom Woodlands (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{51} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3648] = { -- Polearm Weapon Skills (UC)
@@ -5191,12 +5313,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3649] = { -- Conflict: Cirdas Caverns (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{270} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3658] = { -- Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.SWORD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3659] = { -- Conflict: Xarcabard (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{112} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3668] = { -- Club Weapon Skills (UC)
@@ -5207,12 +5345,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3669] = { -- Conflict: Giddeus (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{145} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3678] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.STAFF },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3679] = { -- Conflict: Toraimarai Canal (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{169} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3688] = { -- Club Weapon Skills (UC)
@@ -5223,12 +5377,28 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3689] = { -- Conflict: Sih Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{268} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3698] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
             reqs = { skillType = tpz.skill.STAFF },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3699] = { -- Conflict: Dho Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{272} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
       -----------------------------------
