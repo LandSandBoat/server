@@ -29,6 +29,7 @@ tpz.roe.triggers =
     missionComplete = 12,   -- Player completes mission
     helmSuccess = 13,
     chocoboDigSuccess = 14,
+    unityChat = 15,
 }
 
 local triggers = tpz.roe.triggers

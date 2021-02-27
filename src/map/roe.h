@@ -54,6 +54,7 @@ enum ROE_EVENT
     ROE_MISSION_COMPLETE     = 12,
     ROE_HELMSUCCESS          = 13,
     ROE_CHOCOBO_DIG_SUCCESS  = 14,
+    ROE_UNITY_CHAT           = 15,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 

@@ -4516,6 +4516,8 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         message::send(MSG_CHAT_UNITY, packetData, sizeof packetData,
                                       new CChatMessagePacket(PChar, MESSAGE_UNITY, (const char*)data[6]));
 
+                        roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", (const char*)data[6]));
+
                         if (map_config.audit_chat == 1 && map_config.audit_unity == 1)
                         {
                             char escaped_speaker[16 * 2 + 1];
