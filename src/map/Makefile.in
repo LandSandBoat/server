@@ -59,7 +59,7 @@ MAP_H    = map.h baseentity.h battleentity.h charentity.h mobentity.h npcentity.
    transport.h vana_time.h time_server.h trade_container.h modifier.h synthutils.h status_effect.h anticheat.h                                 \
    status_effect_container.h mobutils.h battleutils.h conquest_system.h                                                                        \
    ability.h alliance.h enmity_container.h fishingutils.h grades.h guildutils.h mobskill.h party.h petentity.h petutils.h                      \
-   spell.h trait.h treasure_pool.h universal_container.h weapon_skill.h region.h linkshell.h                                                   \
+   spell.h trait.h treasure_pool.h universal_container.h weapon_skill.h region.h linkshell.h unitychat.h                                       \
    packets/basic.h packets/zone_in.h packets/char_appearance.h packets/downloading_data.h                                                      \
    packets/char_jobs.h packets/zone_visited.h packets/server_message.h                                                                         \
    packets/inventory_assign.h packets/inventory_modify.h packets/inventory_finish.h                                                            \

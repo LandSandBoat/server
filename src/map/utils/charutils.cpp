@@ -83,6 +83,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../status_effect_container.h"
 #include "../trait.h"
 #include "../treasure_pool.h"
+#include "../unitychat.h"
 #include "../universal_container.h"
 #include "../vana_time.h"
 #include "../weapon_skill.h"
@@ -811,6 +812,7 @@ namespace charutils
         PChar->StatusEffectContainer->LoadStatusEffects();
 
         charutils::LoadEquip(PChar);
+        unitychat::AddOnlineMember(PChar, PChar->profile.unity_leader);
         PChar->health.hp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxHP() : HP;
         PChar->health.mp = zoneutils::IsResidentialArea(PChar) ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();

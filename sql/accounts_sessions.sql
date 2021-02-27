@@ -26,6 +26,7 @@ CREATE TABLE `accounts_sessions` (
   `accid` int(10) unsigned NOT NULL DEFAULT '0',
   `charid` int(10) unsigned NOT NULL DEFAULT '0',
   `targid` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `unitychat` int(10) unsigned NOT NULL DEFAULT '0',
   `linkshellid1` int(10) unsigned NOT NULL DEFAULT '0',
   `linkshellrank1` smallint(5) unsigned NOT NULL DEFAULT '0',
   `linkshellid2` int(10) unsigned NOT NULL DEFAULT '0',
