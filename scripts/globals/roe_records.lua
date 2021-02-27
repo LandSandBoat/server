@@ -5072,6 +5072,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3491] = { -- Subjugation: Rambukk (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17191044} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3494] = { -- Conflict: La Theine Plateau (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5086,6 +5092,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{46, 47}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3496] = { -- Subjugation: Tumbling Truffle (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17195259} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3498] = { -- Staff Weapon Skills (UC)
@@ -5112,6 +5124,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3501] = { -- Subjugation: Duke Decapod (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17252725} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3504] = { -- Conflict: Davoi (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5126,6 +5144,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{56}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3506] = { -- Subjugation: Poisonhand Gnadgad (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17387644} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3508] = { -- Great Katana Weapon Skills (UC)
@@ -5152,6 +5176,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3511] = { -- Subjugation: Stinging Sophie (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17211537, 17211561} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5166,6 +5196,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{70}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3516] = { -- Subjugation: Tococo (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17215778} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3518] = { -- Archery Weapon Skills (UC)
@@ -5192,6 +5228,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3521] = { -- Subjugation: Aqrabuamelu (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17584416} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3524] = { -- Conflict: Beadeaux (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5206,6 +5248,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3526] = { -- Subjugation: Ge'Dha Evileye (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17379450} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3528] = { -- Axe Weapon Skills (UC)
@@ -5232,6 +5280,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3531] = { -- Subjugation: Leaping Lizzy (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17215868, 17215888} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3534] = { -- Conflict: Pashhow Marshlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5246,6 +5300,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{116}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3536] = { -- Subjugation: Bloodpool Vorax (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17224019} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3538] = { -- Great Axe Weapon Skills (UC)
@@ -5272,6 +5332,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3541] = { -- Subjugation: Be'Hya Hundredwall (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17363258} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3544] = { -- Conflict: Beaucedine Glacier (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5286,6 +5352,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{210, 376, 377}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3546] = { -- Subjugation: Gargantua (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17232079} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         -- Apururu
@@ -5313,6 +5385,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3551] = { -- Subjugation: Tom Tit Tat (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17248468, 17248486} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3554] = { -- Conflict: Buburimu Peninsula (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5327,6 +5405,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{79}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3556] = { -- Subjugation: Buburimboo (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17261003} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3558] = { -- Staff Weapon Skills (UC)
@@ -5353,6 +5437,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3561] = { -- Subjugation: Mee Deggi the Punisher (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17395800} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3564] = { -- Conflict: Foret de Hennetiel (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5367,6 +5457,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{178}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3566] = { -- Subjugation: Juu Duzu the Whirlwind (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17371300} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
@@ -5393,6 +5489,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3571] = { -- Subjugation: Canal Moocher (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17469578} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3574] = { -- Conflict: Rolanberry Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5407,6 +5509,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{235}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3576] = { -- Subjugation: Eldritch Edge (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17228150} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3578] = { -- Great Sword Weapon Skills (UC)
@@ -5433,6 +5541,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3581] = { -- Subjugation: Patripatan (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17264972} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3584] = { -- Conflict: Sauromugue Champaign (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5447,6 +5561,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{139}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3586] = { -- Subjugation: Bashe (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17268788} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3588] = { -- Dagger Weapon Skills (UC)
@@ -5473,6 +5593,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3591] = { -- Subjugation: Bastet (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17273190} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3594] = { -- Conflict: Morimar Basalt Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5487,6 +5613,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3596] = { -- Subjugation: Nocuous Weapon (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17563801} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3598] = { -- Marksmanship Weapon Skills (UC)
@@ -5513,6 +5645,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3601] = { -- Subjugation: Aquarius (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17404000} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3604] = { -- Conflict: Western Altepa Desert (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5527,6 +5665,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{55}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3606] = { -- Subjugation: Cactuar Cantautor (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17289560} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3608] = { -- Dagger Weapon Skills (UC)
@@ -5553,6 +5697,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3611] = { -- Subjugation: Mischievous Micholas (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17281149} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3614] = { -- Conflict: East Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5567,6 +5717,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{217}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3616] = { -- Subjugation: Sharp-Eared Ropipi (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17252489, 17252508} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3618] = { -- Archery Weapon Skills (UC)
@@ -5593,6 +5749,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3621] = { -- Subjugation: Ah Puch (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17571903} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3624] = { -- Conflict: Sea Serpent Grotto (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5607,6 +5769,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{242}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3626] = { -- Subjugation: Fyuu the Seabellow (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17498269} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3628] = { -- Club Weapon Skills (UC)
@@ -5633,6 +5801,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3631] = { -- Subjugation: Emergent Elm (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{16990376} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3634] = { -- Conflict: West Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5647,6 +5821,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{198}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3636] = { -- Subjugation: Fungus Beetle (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17187047} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3638] = { -- Staff Weapon Skills (UC)
@@ -5673,6 +5853,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3641] = { -- Subjugation: Jaded Jody (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{16986378} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3644] = { -- Conflict: Kamihr Drifts (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5687,6 +5873,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{80}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3646] = { -- Subjugation: Trembler Tabitha (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17588278} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3648] = { -- Polearm Weapon Skills (UC)
@@ -5713,6 +5905,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3651] = { -- Subjugation: Hovering Hotpot (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17596628} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3654] = { -- Conflict: East Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5727,6 +5925,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{49}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3656] = { -- Subjugation: Bigmouth Billy (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17191196} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3658] = { -- Sword Weapon Skills (UC)
@@ -5753,6 +5957,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3661] = { -- Subjugation: Barbaric Weapon (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17236027} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3664] = { -- Conflict: Woh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5767,6 +5977,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{227}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3666] = { -- Subjugation: Hyakume (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17457236} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3668] = { -- Club Weapon Skills (UC)
@@ -5793,6 +6009,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3671] = { -- Subjugation: Herbage Hunter (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17256836} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3674] = { -- Conflict: Moh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5807,6 +6029,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{25}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3676] = { -- Subjugation: Antican Praefectus (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17629281} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3678] = { -- Staff Weapon Skills (UC)
@@ -5833,6 +6061,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3681] = { -- Subjugation: Ose (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17649822} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5847,6 +6081,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{447}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3686] = { -- Subjugation: Capricious Cassie (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17613130} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3688] = { -- Club Weapon Skills (UC)
@@ -5875,6 +6115,12 @@ function getRoeRecords(triggers)
         },
 --]]
 
+        [3691] = { -- Subjugation: Intulo (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{16793742} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3694] = { -- Conflict: Konschtat Highlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5889,6 +6135,12 @@ function getRoeRecords(triggers)
             reqs = { mobSystem = set{tpz.eco.DEMON}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3696] = { -- Subjugation: Marquis Naberius (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17436876} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3698] = { -- Staff Weapon Skills (UC)
@@ -5915,6 +6167,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3701] = { -- Subjugation: Dune Widow (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17244396} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
         [3704] = { -- Conflict: Qufim Island (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5929,6 +6187,12 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{338}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3706] = { -- Subjugation: Atkorkamuy (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17293485} },
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
       -----------------------------------
