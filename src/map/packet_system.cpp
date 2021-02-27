@@ -68,6 +68,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/puppetutils.h"
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
+#include "unitychat.h"
 #include "zone.h"
 
 #include "items/item_flowerpot.h"
@@ -4505,6 +4506,35 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                 }
                 break;
+                case MESSAGE_UNITY:
+                {
+                    if (PChar->PUnityChat != nullptr)
+                    {
+                        int8 packetData[8]{};
+                        ref<uint32>(packetData, 0) = PChar->PUnityChat->getLeader();
+                        ref<uint32>(packetData, 4) = PChar->id;
+                        message::send(MSG_CHAT_UNITY, packetData, sizeof packetData,
+                                      new CChatMessagePacket(PChar, MESSAGE_UNITY, (const char*)data[6]));
+
+                        if (map_config.audit_chat == 1 && map_config.audit_unity == 1)
+                        {
+                            char escaped_speaker[16 * 2 + 1];
+                            Sql_EscapeString(SqlHandle, escaped_speaker, (const char*)PChar->GetName());
+
+                            std::string escaped_full_string;
+                            escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
+                            Sql_EscapeString(SqlHandle, escaped_full_string.data(), (const char*)data[6]);
+
+
+                            const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
+                            if (Sql_Query(SqlHandle, fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
+                            {
+                                ShowError("packet_system::call: Failed to log inPrison MESSAGE_UNITY.\n");
+                            }
+                        }
+                    }
+                }
+                break;
             }
         }
     }
@@ -6692,6 +6722,25 @@ void SmallPacket0x117(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
+ *                                                                        *
+ *  Unity Chat Toggle                                                     *
+ *                                                                        *
+ ************************************************************************/
+
+void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
+{
+    bool active = data.ref<uint8>(0x04);
+    if (PChar->PUnityChat)
+    {
+        unitychat::DelOnlineMember(PChar, PChar->PUnityChat->getLeader());
+    }
+    if (active)
+    {
+        unitychat::AddOnlineMember(PChar, PChar->profile.unity_leader);
+    }
+}
+
+/************************************************************************
  *                                                                       *
  *  Packet Array Initialization                                          *
  *                                                                       *
@@ -6817,6 +6866,7 @@ void PacketParserInitialize()
     PacketSize[0x115] = 0x02; PacketParser[0x115] = &SmallPacket0x115;
     PacketSize[0x116] = 0x00; PacketParser[0x116] = &SmallPacket0x116;
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
+    PacketSize[0x118] = 0x00; PacketParser[0x118] = &SmallPacket0x118;
     // clang-format on
 }
 

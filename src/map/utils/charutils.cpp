@@ -83,6 +83,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../status_effect_container.h"
 #include "../trait.h"
 #include "../treasure_pool.h"
+#include "../unitychat.h"
 #include "../universal_container.h"
 #include "../vana_time.h"
 #include "../weapon_skill.h"
@@ -5355,6 +5356,11 @@ namespace charutils
         }
 
         PChar->profile.unity_leader = leaderID;
+        if (PChar->PUnityChat)
+        {
+            unitychat::DelOnlineMember(PChar, PChar->PUnityChat->getLeader());
+        }
+        unitychat::AddOnlineMember(PChar, PChar->profile.unity_leader);
         Sql_Query(SqlHandle, leaderQuery, PChar->profile.unity_leader, PChar->id);
     }
 

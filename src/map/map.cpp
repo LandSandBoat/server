@@ -1063,6 +1063,7 @@ int32 map_config_default()
     map_config.audit_yell                  = false;
     map_config.audit_party                 = false;
     map_config.audit_linkshell             = false;
+    map_config.audit_unity                 = false;
     map_config.msg_server_port             = 54003;
     map_config.msg_server_ip               = "127.0.0.1";
     map_config.healing_tick_delay          = 10;
@@ -1444,6 +1445,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "audit_linkshell") == 0)
         {
             map_config.audit_linkshell = atoi(w2);
+        }
+        else if (strcmp(w1, "audit_unity") == 0)
+        {
+            map_config.audit_unity = atoi(w2);
         }
         else if (strcmp(w1, "audit_party") == 0)
         {

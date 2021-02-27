@@ -140,6 +140,7 @@ struct map_config_t
     bool        audit_tell;
     bool        audit_yell;
     bool        audit_linkshell;
+    bool        audit_unity;
     bool        audit_party;
     uint8       healing_tick_delay;
     uint16      msg_server_port;        // central message server port

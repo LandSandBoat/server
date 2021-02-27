@@ -155,6 +155,7 @@ enum CHAR_SUBSTATE
 
 class CBasicPacket;
 class CLinkshell;
+class CUnityChat;
 class CMeritPoints;
 class CCharRecastContainer;
 class CLatentEffectContainer;
@@ -275,6 +276,7 @@ public:
 
     CLinkshell*    PLinkshell1;   // linkshell, в которой общается персонаж
     CLinkshell*    PLinkshell2;   // linkshell 2
+    CUnityChat*    PUnityChat;
     CTreasurePool* PTreasurePool; // сокровища, добытые с монстров
     CMeritPoints*  PMeritPoints;  //
     bool           MeritMode;     // If true then player is meriting
