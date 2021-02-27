@@ -27,9 +27,10 @@ tpz.roe.triggers =
     levelUp = 10,           -- Player levelup
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
-    helmSuccess = 13,
-    chocoboDigSuccess = 14,
-    unityChat = 15,
+    helmSuccess = 13,       -- Player has a successful harvesting event
+    chocoboDigSuccess = 14, -- Player successfully chocobo digs
+    unityChat = 15,         -- Player uses Unity Chat
+    magicBurst = 16,        -- Player performs a Magic Burst
 }
 
 local triggers = tpz.roe.triggers
