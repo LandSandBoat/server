@@ -4028,42 +4028,42 @@ function getRoeRecords(triggers)
             trigger = triggers.chocoboDigSuccess,
             goal = 30,
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 500 },
+            reward = { sparks = 100, xp = 500, accolades = 10 },
         },
 
         [ 727] = { -- Subjugation: Kirin
             trigger = triggers.mobKill,
             reqs = { mobID = set{17506670} },
             flags = set{"repeat"},
-            reward = { sparks = 1000, xp = 5000 },
+            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { 8711 } },
         },
 
         [ 728] = { -- Subjugation: Genbu
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309980} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
         [ 729] = { -- Subjugation: Suzaku
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309983} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
         [ 730] = { -- Subjugation: Seiryu
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309981} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
         [ 731] = { -- Subjugation: Byakko
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309982} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
       -----------------------------------
@@ -5080,6 +5080,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3495] = { -- Vanquish Bats (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{46, 47}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3498] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5110,6 +5118,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{149} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3505] = { -- Vanquish Bombs (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{56}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3508] = { -- Great Katana Weapon Skills (UC)
@@ -5144,6 +5160,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3515] = { -- Vanquish Cockatrices (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{70}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3518] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5174,6 +5198,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{147} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3525] = { -- Vanquish Crabs (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3528] = { -- Axe Weapon Skills (UC)
@@ -5208,6 +5240,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3535] = { -- Vanquish Funguars (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{116}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3538] = { -- Great Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5238,6 +5278,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{111} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3545] = { -- Vanquish Raptors (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{210, 376, 377}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         -- Apururu
@@ -5273,6 +5321,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3555] = { -- Vanquish Crawlers (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{79}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3558] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5303,6 +5359,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{262} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3565] = { -- Vanquish Mandragoras (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{178}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
@@ -5337,6 +5401,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3575] = { -- Vanquish Spiders (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{235}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3578] = { -- Great Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5367,6 +5439,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{120} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3585] = { -- Vanquish Hecteyes (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{139}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3588] = { -- Dagger Weapon Skills (UC)
@@ -5401,6 +5481,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3595] = { -- Vanquish Dolls (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3598] = { -- Marksmanship Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5431,6 +5519,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{125} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3605] = { -- Vanquish Crow-Type Birds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{55}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3608] = { -- Dagger Weapon Skills (UC)
@@ -5465,6 +5561,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3615] = { -- Vanquish Scorpions (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{217}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3618] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5495,6 +5599,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{176} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3625] = { -- Vanquish Tigers (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{242}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3628] = { -- Club Weapon Skills (UC)
@@ -5529,6 +5641,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3635] = { -- Vanquish Puks (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{198}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3638] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5559,6 +5679,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{267} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3645] = { -- Vanquish Dhalmel (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{80}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3648] = { -- Polearm Weapon Skills (UC)
@@ -5593,6 +5721,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3655] = { -- Vanquish Beetles (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{49}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3658] = { -- Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5623,6 +5759,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{273} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3665] = { -- Vanquish Skeletons (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{227}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3668] = { -- Club Weapon Skills (UC)
@@ -5657,6 +5801,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3675] = { -- Vanquish Antica (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{25}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3678] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5687,6 +5839,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{274} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3685] = { -- Vanquish Dullahan (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{447}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3688] = { -- Club Weapon Skills (UC)
@@ -5723,6 +5883,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
+        [3695] = { -- Vanquish Demons (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobSystem = set{tpz.eco.DEMON}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3698] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5753,6 +5921,14 @@ function getRoeRecords(triggers)
             reqs = { zone = set{126} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3705] = { -- Vanquish Twitherym (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{338}, mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
