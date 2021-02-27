@@ -5072,6 +5072,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3494] = { -- Conflict: La Theine Plateau (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{102} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3498] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5094,6 +5102,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{245}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3504] = { -- Conflict: Davoi (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{149} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3508] = { -- Great Katana Weapon Skills (UC)
@@ -5120,6 +5136,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{260} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3518] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5142,6 +5166,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{174}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3524] = { -- Conflict: Beadeaux (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{147} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3528] = { -- Axe Weapon Skills (UC)
@@ -5168,6 +5200,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3534] = { -- Conflict: Pashhow Marshlands (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{109} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3538] = { -- Great Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5190,6 +5230,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{113, 374}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3544] = { -- Conflict: Beaucedine Glacier (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{111} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         -- Apururu
@@ -5217,6 +5265,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3554] = { -- Conflict: Buburimu Peninsula (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{118} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3558] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5239,6 +5295,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{121}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3564] = { -- Conflict: Foret de Hennetiel (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{262} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
@@ -5265,6 +5329,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3574] = { -- Conflict: Rolanberry Fields (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{110} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3578] = { -- Great Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5287,6 +5359,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{266, 268}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3584] = { -- Conflict: Sauromugue Champaign (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{120} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3588] = { -- Dagger Weapon Skills (UC)
@@ -5313,6 +5393,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3594] = { -- Conflict: Morimar Basalt Fields (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{265} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3598] = { -- Marksmanship Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5335,6 +5423,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{228, 229, 230}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3604] = { -- Conflict: Western Altepa Desert (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{125} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3608] = { -- Dagger Weapon Skills (UC)
@@ -5361,6 +5457,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3614] = { -- Conflict: East Sarutabaruta (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{116} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3618] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5383,6 +5487,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{188}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3624] = { -- Conflict: Sea Serpent Grotto (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{176} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3628] = { -- Club Weapon Skills (UC)
@@ -5409,6 +5521,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3634] = { -- Conflict: West Ronfaure (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{100} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3638] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5431,6 +5551,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{99, 100, 101, 102, 103, 104, 105, 106}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3644] = { -- Conflict: Kamihr Drifts (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{267} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3648] = { -- Polearm Weapon Skills (UC)
@@ -5457,6 +5585,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3654] = { -- Conflict: East Ronfaure (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{101} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3658] = { -- Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5479,6 +5615,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{136}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3664] = { -- Conflict: Woh Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{273} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3668] = { -- Club Weapon Skills (UC)
@@ -5505,6 +5649,14 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
+        [3674] = { -- Conflict: Moh Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{269} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3678] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5527,6 +5679,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{71}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{274} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
         [3688] = { -- Club Weapon Skills (UC)
@@ -5555,6 +5715,14 @@ function getRoeRecords(triggers)
         },
 --]]
 
+        [3694] = { -- Conflict: Konschtat Highlands (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{108} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
         [3698] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5577,6 +5745,14 @@ function getRoeRecords(triggers)
             reqs = { mobFamily = set{342}, mobXP = true },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3704] = { -- Conflict: Qufim Island (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{126} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
         },
 
       -----------------------------------
