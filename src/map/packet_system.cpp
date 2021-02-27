@@ -6722,6 +6722,25 @@ void SmallPacket0x117(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
+ *                                                                        *
+ *  Unity Chat Toggle                                                     *
+ *                                                                        *
+ ************************************************************************/
+
+void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
+{
+    bool active = data.ref<uint8>(0x04);
+    if (PChar->PUnityChat)
+    {
+        unitychat::DelOnlineMember(PChar, PChar->PUnityChat->getLeader());
+    }
+    if (active)
+    {
+        unitychat::AddOnlineMember(PChar, PChar->profile.unity_leader);
+    }
+}
+
+/************************************************************************
  *                                                                       *
  *  Packet Array Initialization                                          *
  *                                                                       *
@@ -6847,6 +6866,7 @@ void PacketParserInitialize()
     PacketSize[0x115] = 0x02; PacketParser[0x115] = &SmallPacket0x115;
     PacketSize[0x116] = 0x00; PacketParser[0x116] = &SmallPacket0x116;
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
+    PacketSize[0x118] = 0x00; PacketParser[0x118] = &SmallPacket0x118;
     // clang-format on
 }
 
