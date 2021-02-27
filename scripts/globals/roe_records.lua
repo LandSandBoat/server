@@ -5078,12 +5078,10 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Unity - Leader
+      -- Unity Leader - Pieuje - Week 0
       -----------------------------------
 
         -- TODO: Assign a Unity Leader requirement to these
-
-        -- Pieuje 1
         [3488] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5114,6 +5112,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 1
+      -----------------------------------
+
         [3494] = { -- Conflict: La Theine Plateau (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5135,6 +5137,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17195259} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 2
+      -----------------------------------
 
         [3498] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5166,6 +5172,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 3
+      -----------------------------------
+
         [3504] = { -- Conflict: Davoi (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5187,6 +5197,16 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17387644} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+        [3507] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 0
+      -----------------------------------
 
         [3508] = { -- Great Katana Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5218,6 +5238,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 1
+      -----------------------------------
+
         [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5239,6 +5263,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17215778} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 2
+      -----------------------------------
 
         [3518] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5270,6 +5298,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 3
+      -----------------------------------
+
         [3524] = { -- Conflict: Beadeaux (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5291,6 +5323,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17379450} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 0
+      -----------------------------------
 
         [3528] = { -- Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5322,6 +5358,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 1
+      -----------------------------------
+
         [3534] = { -- Conflict: Pashhow Marshlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5343,6 +5383,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17224019} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 2
+      -----------------------------------
 
         [3538] = { -- Great Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5374,6 +5418,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 3
+      -----------------------------------
+
         [3544] = { -- Conflict: Beaucedine Glacier (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5396,7 +5444,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
-        -- Apururu
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 0
+      -----------------------------------
+
         [3548] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
@@ -5427,6 +5478,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 1
+      -----------------------------------
+
         [3554] = { -- Conflict: Buburimu Peninsula (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5448,6 +5503,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17261003} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 2
+      -----------------------------------
 
         [3558] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5479,6 +5538,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 3
+      -----------------------------------
+
         [3564] = { -- Conflict: Foret de Hennetiel (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5500,6 +5563,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17371300} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Maat - Week 0
+      -----------------------------------
 
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5531,6 +5598,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Maat - Week 1
+      -----------------------------------
+
         [3574] = { -- Conflict: Rolanberry Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5552,6 +5623,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17228150} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Maat - Week 2
+      -----------------------------------
 
         [3578] = { -- Great Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5583,6 +5658,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Maat - Week 3
+      -----------------------------------
+
         [3584] = { -- Conflict: Sauromugue Champaign (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5604,6 +5683,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17268788} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 0
+      -----------------------------------
 
         [3588] = { -- Dagger Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5635,6 +5718,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 1
+      -----------------------------------
+
         [3594] = { -- Conflict: Morimar Basalt Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5656,6 +5743,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17563801} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 2
+      -----------------------------------
 
         [3598] = { -- Marksmanship Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5687,6 +5778,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 3
+      -----------------------------------
+
         [3604] = { -- Conflict: Western Altepa Desert (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5708,6 +5803,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17289560} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 0
+      -----------------------------------
 
         [3608] = { -- Dagger Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5739,6 +5838,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 1
+      -----------------------------------
+
         [3614] = { -- Conflict: East Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5760,6 +5863,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17252489, 17252508} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 2
+      -----------------------------------
 
         [3618] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5791,6 +5898,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 3
+      -----------------------------------
+
         [3624] = { -- Conflict: Sea Serpent Grotto (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5812,6 +5923,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17498269} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 0
+      -----------------------------------
 
         [3628] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5843,6 +5958,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 1
+      -----------------------------------
+
         [3634] = { -- Conflict: West Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5864,6 +5983,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17187047} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 2
+      -----------------------------------
 
         [3638] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5895,6 +6018,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 3
+      -----------------------------------
+
         [3644] = { -- Conflict: Kamihr Drifts (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5916,6 +6043,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17588278} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 0
+      -----------------------------------
 
         [3648] = { -- Polearm Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5947,6 +6078,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 1
+      -----------------------------------
+
         [3654] = { -- Conflict: East Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5968,6 +6103,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17191196} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 2
+      -----------------------------------
 
         [3658] = { -- Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -5999,6 +6138,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 3
+      -----------------------------------
+
         [3664] = { -- Conflict: Woh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6020,6 +6163,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17457236} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 0
+      -----------------------------------
 
         [3668] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -6051,6 +6198,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 1
+      -----------------------------------
+
         [3674] = { -- Conflict: Moh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6072,6 +6223,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17629281} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 2
+      -----------------------------------
 
         [3678] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -6103,6 +6258,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 3
+      -----------------------------------
+
         [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6124,6 +6283,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17613130} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 0
+      -----------------------------------
 
         [3688] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -6157,6 +6320,10 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 1
+      -----------------------------------
+
         [3694] = { -- Conflict: Konschtat Highlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6178,6 +6345,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17436876} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 2
+      -----------------------------------
 
         [3698] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
@@ -6208,6 +6379,10 @@ function getRoeRecords(triggers)
             reqs = { mobID = set{17244396} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 3
+      -----------------------------------
 
         [3704] = { -- Conflict: Qufim Island (UC)
             trigger = triggers.mobKill,
