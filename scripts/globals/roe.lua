@@ -211,7 +211,7 @@ local function completeRecord(player, record)
         local bonusAccoladeRate = 1.0
 
         if record ~= 5 then -- Do not grant a bonus for All for One
-            bonusAccoladeRate = bonusAccoladeRate + ((getUnityRank - 1) * 0.05)
+            bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
         end
 
         player:addCurrency("unity_accolades", math.floor(rewards["accolades"] * bonusAccoladeRate), CAP_CURRENCY_ACCOLADES)

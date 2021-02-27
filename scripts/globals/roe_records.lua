@@ -4702,6 +4702,12 @@ function getRoeRecords(triggers)
       -- Unity - Shared A
       -----------------------------------
 
+        [3000] = { -- Unity Communique A (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
         [3002] = { -- Vanquish Multiple Enemies A (UC)
             trigger = triggers.mobKill,
             goal = 20,
@@ -4762,6 +4768,12 @@ function getRoeRecords(triggers)
       -- Unity - Shared B
       -----------------------------------
 
+        [3009] = { -- Unity Communique B (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
         [3010] = { -- Chocobo Digging B (UC)
             trigger = triggers.chocoboDigSuccess,
             goal = 10,
@@ -4821,6 +4833,12 @@ function getRoeRecords(triggers)
       -- Unity - Shared C
       -----------------------------------
 
+        [3018] = { -- Unity Communique C (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
         [3020] = { -- Vanquish Multiple Enemies C (UC)
             trigger = triggers.mobKill,
             goal = 20,
@@ -4872,6 +4890,12 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity - Shared D
       -----------------------------------
+
+        [3027] = { -- Unity Communique D (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
 
         [3029] = { -- Vanquish Multiple Enemies D (UC)
             trigger = triggers.mobKill,
@@ -4933,6 +4957,12 @@ function getRoeRecords(triggers)
       -- Unity - Shared E
       -----------------------------------
 
+        [3036] = { -- Unity Communique E (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
         [3038] = { -- Vanquish Multiple Enemies E (UC)
             trigger = triggers.mobKill,
             goal = 20,
@@ -4984,6 +5014,12 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity - Shared F
       -----------------------------------
+
+        [3045] = { -- Unity Communique F (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
 
         [3046] = { -- Level Sync to Vanquish Enemies F (UC)
             trigger = triggers.mobKill,
