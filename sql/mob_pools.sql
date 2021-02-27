@@ -7099,6 +7099,7 @@ INSERT INTO `mob_pools` VALUES (7044,'Memory_Receptacle_green','Memory_Receptacl
 INSERT INTO `mob_pools` VALUES (7045,'Memory_Receptacle_teal','Memory_Receptacle',507,0x00004E04,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
 INSERT INTO `mob_pools` VALUES (7046,'Pet_Siren','Pet_Siren',411,0x00001E0000000000000000000000000000000000,4,4,12,320,100,0,0,0,0,0,0,32,0,0,0,0,0,0,0,411,411);
 INSERT INTO `mob_pools` VALUES (7047,'Qnxzomit_jol','Qn_xzomit',269,_binary 0x0000100200000000000000000000000000000000,1,1,7,200,100,0,0,0,1,0,0,0,0,133,0,0,0,0,0,269,269);
+INSERT INTO `mob_pools` VALUES (7048,'Poison_Funguar','Poison_Funguar',116,0x0000780100000000000000000000000000000000,1,1,11,240,100,0,0,0,1,0,0,0,237,131,0,0,0,0,0,116,116);
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
