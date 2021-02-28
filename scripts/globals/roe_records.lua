@@ -5124,6 +5124,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Pieuje - Week 1
       -----------------------------------
 
+        [3493] = { -- Spoils - Bat Fangs (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 891 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3494] = { -- Conflict: La Theine Plateau (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5192,6 +5200,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Pieuje - Week 3
       -----------------------------------
+
+        [3503] = { -- Spoils - Bomb Ash (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 928 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3504] = { -- Conflict: Davoi (UC)
             trigger = triggers.mobKill,
@@ -5269,6 +5285,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Ayame - Week 1
       -----------------------------------
 
+        [3513] = { -- Spoils - Cockatrice Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4435 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5337,6 +5361,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Ayame - Week 3
       -----------------------------------
+
+        [3523] = { -- Spoils - Land Crab Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4400 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3524] = { -- Conflict: Beadeaux (UC)
             trigger = triggers.mobKill,
@@ -5414,6 +5446,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Invincible Shield - Week 1
       -----------------------------------
 
+        [3533] = { -- Spoils - Sleepshroom (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4374 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3534] = { -- Conflict: Pashhow Marshlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5482,6 +5522,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Invincible Shield - Week 3
       -----------------------------------
+
+        [3543] = { -- Spoils - Raptor Skin (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 853 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3544] = { -- Conflict: Beaucedine Glacier (UC)
             trigger = triggers.mobKill,
@@ -5559,6 +5607,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Apururu - Week 1
       -----------------------------------
 
+        [3553] = { -- Spoils - Silk Thread (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 816 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3554] = { -- Conflict: Buburimu Peninsula (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5627,6 +5683,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Apururu - Week 3
       -----------------------------------
+
+        [3563] = { -- Spoils - Saruta Cotton (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 834 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3564] = { -- Conflict: Foret de Hennetiel (UC)
             trigger = triggers.mobKill,
@@ -5704,6 +5768,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Maat - Week 1
       -----------------------------------
 
+        [3573] = { -- Spoils - Spider Web (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 838 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3574] = { -- Conflict: Rolanberry Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5772,6 +5844,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Maat - Week 3
       -----------------------------------
+
+        [3583] = { -- Spoils - Hecteyes Eye (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 939 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3584] = { -- Conflict: Sauromugue Champaign (UC)
             trigger = triggers.mobKill,
@@ -5849,6 +5929,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Aldo - Week 1
       -----------------------------------
 
+        [3593] = { -- Spoils - Doll Shard (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 1165 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3594] = { -- Conflict: Morimar Basalt Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -5917,6 +6005,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Aldo - Week 3
       -----------------------------------
+
+        [3603] = { -- Spoils - Bird Egg (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4570 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3604] = { -- Conflict: Western Altepa Desert (UC)
             trigger = triggers.mobKill,
@@ -5994,6 +6090,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Jakoh Wahcondalo - Week 1
       -----------------------------------
 
+        [3613] = { -- Spoils - Scorpion Claw (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 897 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3614] = { -- Conflict: East Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6062,6 +6166,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Jakoh Wahcondalo - Week 3
       -----------------------------------
+
+        [3623] = { -- Spoils - Black Tiger Fang (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 884 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3624] = { -- Conflict: Sea Serpent Grotto (UC)
             trigger = triggers.mobKill,
@@ -6139,6 +6251,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Naja Salaheem - Week 1
       -----------------------------------
 
+        [3633] = { -- Spoils - Puk Wing (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 2148 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3634] = { -- Conflict: West Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6207,6 +6327,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Naja Salaheem - Week 3
       -----------------------------------
+
+        [3643] = { -- Spoils - Dhalmel Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4359 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3644] = { -- Conflict: Kamihr Drifts (UC)
             trigger = triggers.mobKill,
@@ -6284,6 +6412,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Flaviria - Week 1
       -----------------------------------
 
+        [3653] = { -- Spoils - Beetle Shell (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 889 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3654] = { -- Conflict: East Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6352,6 +6488,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Flaviria - Week 3
       -----------------------------------
+
+        [3663] = { -- Spoils - Bone Chip (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 880 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3664] = { -- Conflict: Woh Gates (UC)
             trigger = triggers.mobKill,
@@ -6429,6 +6573,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Yoran-Oran - Week 1
       -----------------------------------
 
+        [3673] = { -- Spoils - Rotten Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 16995 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3674] = { -- Conflict: Moh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6497,6 +6649,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Yoran-Oran - Week 3
       -----------------------------------
+
+        [3683] = { -- Spoils - Dullahan Armor (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 8746 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
             trigger = triggers.mobKill,
@@ -6576,6 +6736,14 @@ function getRoeRecords(triggers)
       -- Unity Leader - Sylvie - Week 1
       -----------------------------------
 
+        [3693] = { -- Spoils - Demon Horn (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 902 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
         [3694] = { -- Conflict: Konschtat Highlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
@@ -6644,6 +6812,14 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Unity Leader - Sylvie - Week 3
       -----------------------------------
+
+        [3703] = { -- Spoils - Twitherym Wing (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 3930 } },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
 
         [3704] = { -- Conflict: Qufim Island (UC)
             trigger = triggers.mobKill,
