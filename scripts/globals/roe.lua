@@ -31,6 +31,7 @@ tpz.roe.triggers =
     chocoboDigSuccess = 14, -- Player successfully chocobo digs
     unityChat = 15,         -- Player uses Unity Chat
     magicBurst = 16,        -- Player performs a Magic Burst
+    healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
 }
 
 local triggers = tpz.roe.triggers
