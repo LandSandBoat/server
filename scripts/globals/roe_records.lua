@@ -5109,7 +5109,15 @@ function getRoeRecords(triggers)
         [3491] = { -- Subjugation: Rambukk (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17191044} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3492] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5135,6 +5143,7 @@ function getRoeRecords(triggers)
         [3496] = { -- Subjugation: Tumbling Truffle (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17195259} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5169,7 +5178,15 @@ function getRoeRecords(triggers)
         [3501] = { -- Subjugation: Duke Decapod (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17252725} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3502] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5195,12 +5212,14 @@ function getRoeRecords(triggers)
         [3506] = { -- Subjugation: Poisonhand Gnadgad (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17387644} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3507] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5235,7 +5254,15 @@ function getRoeRecords(triggers)
         [3511] = { -- Subjugation: Stinging Sophie (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17211537, 17211561} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3512] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5261,6 +5288,7 @@ function getRoeRecords(triggers)
         [3516] = { -- Subjugation: Tococo (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17215778} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5295,7 +5323,15 @@ function getRoeRecords(triggers)
         [3521] = { -- Subjugation: Aqrabuamelu (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17584416} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3522] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5321,12 +5357,14 @@ function getRoeRecords(triggers)
         [3526] = { -- Subjugation: Ge'Dha Evileye (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17379450} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3527] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
-            goal = 10,
+            goal = 5,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5361,7 +5399,15 @@ function getRoeRecords(triggers)
         [3531] = { -- Subjugation: Leaping Lizzy (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17215868, 17215888} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3532] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5387,6 +5433,7 @@ function getRoeRecords(triggers)
         [3536] = { -- Subjugation: Bloodpool Vorax (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17224019} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5421,7 +5468,15 @@ function getRoeRecords(triggers)
         [3541] = { -- Subjugation: Be'Hya Hundredwall (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17363258} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3542] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5447,12 +5502,14 @@ function getRoeRecords(triggers)
         [3546] = { -- Subjugation: Gargantua (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17232079} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3547] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
-            goal = 10,
+            goal = 5,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5487,7 +5544,15 @@ function getRoeRecords(triggers)
         [3551] = { -- Subjugation: Tom Tit Tat (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17248468, 17248486} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3552] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5513,6 +5578,7 @@ function getRoeRecords(triggers)
         [3556] = { -- Subjugation: Buburimboo (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17261003} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5547,7 +5613,15 @@ function getRoeRecords(triggers)
         [3561] = { -- Subjugation: Mee Deggi the Punisher (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17395800} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3562] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5573,12 +5647,14 @@ function getRoeRecords(triggers)
         [3566] = { -- Subjugation: Juu Duzu the Whirlwind (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17371300} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3567] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5613,7 +5689,15 @@ function getRoeRecords(triggers)
         [3571] = { -- Subjugation: Canal Moocher (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17469578} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3572] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5639,6 +5723,7 @@ function getRoeRecords(triggers)
         [3576] = { -- Subjugation: Eldritch Edge (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17228150} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5673,7 +5758,15 @@ function getRoeRecords(triggers)
         [3581] = { -- Subjugation: Patripatan (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17264972} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3582] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5699,12 +5792,14 @@ function getRoeRecords(triggers)
         [3586] = { -- Subjugation: Bashe (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17268788} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3587] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5739,7 +5834,15 @@ function getRoeRecords(triggers)
         [3591] = { -- Subjugation: Bastet (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17273190} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3592] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5765,6 +5868,7 @@ function getRoeRecords(triggers)
         [3596] = { -- Subjugation: Nocuous Weapon (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17563801} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5799,7 +5903,15 @@ function getRoeRecords(triggers)
         [3601] = { -- Subjugation: Aquarius (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17404000} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3602] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5825,12 +5937,14 @@ function getRoeRecords(triggers)
         [3606] = { -- Subjugation: Cactuar Cantautor (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17289560} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3607] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5865,7 +5979,15 @@ function getRoeRecords(triggers)
         [3611] = { -- Subjugation: Mischievous Micholas (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17281149} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3612] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5891,6 +6013,7 @@ function getRoeRecords(triggers)
         [3616] = { -- Subjugation: Sharp-Eared Ropipi (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17252489, 17252508} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -5925,7 +6048,15 @@ function getRoeRecords(triggers)
         [3621] = { -- Subjugation: Ah Puch (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17571903} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3622] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5951,12 +6082,14 @@ function getRoeRecords(triggers)
         [3626] = { -- Subjugation: Fyuu the Seabellow (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17498269} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3627] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -5991,7 +6124,15 @@ function getRoeRecords(triggers)
         [3631] = { -- Subjugation: Emergent Elm (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{16990376} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3632] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6017,6 +6158,7 @@ function getRoeRecords(triggers)
         [3636] = { -- Subjugation: Fungus Beetle (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17187047} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -6051,7 +6193,15 @@ function getRoeRecords(triggers)
         [3641] = { -- Subjugation: Jaded Jody (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{16986378} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3642] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6077,12 +6227,14 @@ function getRoeRecords(triggers)
         [3646] = { -- Subjugation: Trembler Tabitha (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17588278} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3647] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
-            goal = 10,
+            goal = 5,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -6117,7 +6269,15 @@ function getRoeRecords(triggers)
         [3651] = { -- Subjugation: Hovering Hotpot (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17596628} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3652] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6143,6 +6303,7 @@ function getRoeRecords(triggers)
         [3656] = { -- Subjugation: Bigmouth Billy (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17191196} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -6177,7 +6338,15 @@ function getRoeRecords(triggers)
         [3661] = { -- Subjugation: Barbaric Weapon (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17236027} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3662] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6203,12 +6372,14 @@ function getRoeRecords(triggers)
         [3666] = { -- Subjugation: Hyakume (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17457236} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3667] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -6243,7 +6414,15 @@ function getRoeRecords(triggers)
         [3671] = { -- Subjugation: Herbage Hunter (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17256836} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3672] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6269,6 +6448,7 @@ function getRoeRecords(triggers)
         [3676] = { -- Subjugation: Antican Praefectus (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17629281} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -6303,7 +6483,15 @@ function getRoeRecords(triggers)
         [3681] = { -- Subjugation: Ose (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17649822} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3682] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6329,12 +6517,14 @@ function getRoeRecords(triggers)
         [3686] = { -- Subjugation: Capricious Cassie (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17613130} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3687] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
@@ -6371,7 +6561,15 @@ function getRoeRecords(triggers)
         [3691] = { -- Subjugation: Intulo (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{16793742} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3692] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6397,6 +6595,7 @@ function getRoeRecords(triggers)
         [3696] = { -- Subjugation: Marquis Naberius (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17436876} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
@@ -6431,7 +6630,15 @@ function getRoeRecords(triggers)
         [3701] = { -- Subjugation: Dune Widow (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17244396} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3702] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6457,12 +6664,14 @@ function getRoeRecords(triggers)
         [3706] = { -- Subjugation: Atkorkamuy (UC)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17293485} },
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
         [3707] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
