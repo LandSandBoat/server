@@ -5324,6 +5324,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+        [3527] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
       -----------------------------------
       -- Unity Leader - Invincible Shield - Week 0
       -----------------------------------
@@ -5442,6 +5448,12 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17232079} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3547] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5564,6 +5576,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+        [3567] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
       -----------------------------------
       -- Unity Leader - Maat - Week 0
       -----------------------------------
@@ -5682,6 +5700,12 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17268788} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3587] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -5804,6 +5828,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+        [3607] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
       -----------------------------------
       -- Unity Leader - Jakoh Wahcondalo - Week 0
       -----------------------------------
@@ -5922,6 +5952,12 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17498269} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3627] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6044,6 +6080,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+        [3647] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
       -----------------------------------
       -- Unity Leader - Flaviria - Week 0
       -----------------------------------
@@ -6162,6 +6204,12 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17457236} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3667] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
@@ -6284,6 +6332,12 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
 
+        [3687] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
       -----------------------------------
       -- Unity Leader - Sylvie - Week 0
       -----------------------------------
@@ -6404,6 +6458,12 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             reqs = { mobID = set{17293485} },
             reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3707] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
       -----------------------------------
