@@ -5085,7 +5085,7 @@ function getRoeRecords(triggers)
         [3488] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB },
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5093,7 +5093,7 @@ function getRoeRecords(triggers)
         [3489] = { -- Conflict: Rala Waterways (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{258} },
+            reqs = { zone = set{258}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5101,14 +5101,14 @@ function getRoeRecords(triggers)
         [3490] = { -- Vanquish Rabbits (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{206}, mobXP = true },
+            reqs = { mobFamily = set{206}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3491] = { -- Subjugation: Rambukk (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17191044} },
+            reqs = { mobID = set{17191044}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5116,6 +5116,7 @@ function getRoeRecords(triggers)
         [3492] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5127,7 +5128,7 @@ function getRoeRecords(triggers)
         [3493] = { -- Spoils - Bat Fangs (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 891 } },
+            reqs = { itemID = set{ 891 }, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5135,7 +5136,7 @@ function getRoeRecords(triggers)
         [3494] = { -- Conflict: La Theine Plateau (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{102} },
+            reqs = { zone = set{102}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5143,14 +5144,14 @@ function getRoeRecords(triggers)
         [3495] = { -- Vanquish Bats (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{46, 47}, mobXP = true },
+            reqs = { mobFamily = set{46, 47}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3496] = { -- Subjugation: Tumbling Truffle (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17195259} },
+            reqs = { mobID = set{17195259}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5162,7 +5163,7 @@ function getRoeRecords(triggers)
         [3498] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF },
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5170,7 +5171,7 @@ function getRoeRecords(triggers)
         [3499] = { -- Conflict: Eldieme Necropolis (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{195} },
+            reqs = { zone = set{195}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5178,14 +5179,14 @@ function getRoeRecords(triggers)
         [3500] = { -- Vanquish Treants (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{245}, mobXP = true },
+            reqs = { mobFamily = set{245}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3501] = { -- Subjugation: Duke Decapod (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17252725} },
+            reqs = { mobID = set{17252725}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5193,6 +5194,7 @@ function getRoeRecords(triggers)
         [3502] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5204,7 +5206,7 @@ function getRoeRecords(triggers)
         [3503] = { -- Spoils - Bomb Ash (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 928 } },
+            reqs = { itemID = set{ 928 }, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5212,7 +5214,7 @@ function getRoeRecords(triggers)
         [3504] = { -- Conflict: Davoi (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{149} },
+            reqs = { zone = set{149}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5220,14 +5222,14 @@ function getRoeRecords(triggers)
         [3505] = { -- Vanquish Bombs (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{56}, mobXP = true },
+            reqs = { mobFamily = set{56}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3506] = { -- Subjugation: Poisonhand Gnadgad (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17387644} },
+            reqs = { mobID = set{17387644}, unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5235,6 +5237,7 @@ function getRoeRecords(triggers)
         [3507] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5246,7 +5249,7 @@ function getRoeRecords(triggers)
         [3508] = { -- Great Katana Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.GREAT_KATANA },
+            reqs = { skillType = tpz.skill.GREAT_KATANA, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5254,7 +5257,7 @@ function getRoeRecords(triggers)
         [3509] = { -- Conflict: North Gustaberg (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{106} },
+            reqs = { zone = set{106}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5262,14 +5265,14 @@ function getRoeRecords(triggers)
         [3510] = { -- Vanquish Worms (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{258}, mobXP = true },
+            reqs = { mobFamily = set{258}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3511] = { -- Subjugation: Stinging Sophie (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17211537, 17211561} },
+            reqs = { mobID = set{17211537, 17211561}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5277,6 +5280,7 @@ function getRoeRecords(triggers)
         [3512] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5288,7 +5292,7 @@ function getRoeRecords(triggers)
         [3513] = { -- Spoils - Cockatrice Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4435 } },
+            reqs = { itemID = set{ 4435 }, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5296,7 +5300,7 @@ function getRoeRecords(triggers)
         [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{260} },
+            reqs = { zone = set{260}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5304,14 +5308,14 @@ function getRoeRecords(triggers)
         [3515] = { -- Vanquish Cockatrices (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{70}, mobXP = true },
+            reqs = { mobFamily = set{70}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3516] = { -- Subjugation: Tococo (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17215778} },
+            reqs = { mobID = set{17215778}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5323,7 +5327,7 @@ function getRoeRecords(triggers)
         [3518] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.ARCHERY },
+            reqs = { skillType = tpz.skill.ARCHERY, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5331,7 +5335,7 @@ function getRoeRecords(triggers)
         [3519] = { -- Conflict: Crawlers' Nest (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{197} },
+            reqs = { zone = set{197}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5339,14 +5343,14 @@ function getRoeRecords(triggers)
         [3520] = { -- Vanquish Lizards (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{174}, mobXP = true },
+            reqs = { mobFamily = set{174}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3521] = { -- Subjugation: Aqrabuamelu (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17584416} },
+            reqs = { mobID = set{17584416}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5354,6 +5358,7 @@ function getRoeRecords(triggers)
         [3522] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5365,7 +5370,7 @@ function getRoeRecords(triggers)
         [3523] = { -- Spoils - Land Crab Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4400 } },
+            reqs = { itemID = set{ 4400 }, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5373,7 +5378,7 @@ function getRoeRecords(triggers)
         [3524] = { -- Conflict: Beadeaux (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{147} },
+            reqs = { zone = set{147}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5381,14 +5386,14 @@ function getRoeRecords(triggers)
         [3525] = { -- Vanquish Crabs (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true },
+            reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3526] = { -- Subjugation: Ge'Dha Evileye (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17379450} },
+            reqs = { mobID = set{17379450}, unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5396,6 +5401,7 @@ function getRoeRecords(triggers)
         [3527] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 5,
+            reqs = { unityLeader = tpz.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5407,7 +5413,7 @@ function getRoeRecords(triggers)
         [3528] = { -- Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.AXE },
+            reqs = { skillType = tpz.skill.AXE, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5415,7 +5421,7 @@ function getRoeRecords(triggers)
         [3529] = { -- Conflict: South Gustaberg (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{107} },
+            reqs = { zone = set{107}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5423,14 +5429,14 @@ function getRoeRecords(triggers)
         [3530] = { -- Vanquish Sea Monks (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{218, 219}, mobXP = true },
+            reqs = { mobFamily = set{218, 219}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3531] = { -- Subjugation: Leaping Lizzy (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17215868, 17215888} },
+            reqs = { mobID = set{17215868, 17215888}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5438,6 +5444,7 @@ function getRoeRecords(triggers)
         [3532] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5449,7 +5456,7 @@ function getRoeRecords(triggers)
         [3533] = { -- Spoils - Sleepshroom (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4374 } },
+            reqs = { itemID = set{ 4374 }, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5457,7 +5464,7 @@ function getRoeRecords(triggers)
         [3534] = { -- Conflict: Pashhow Marshlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{109} },
+            reqs = { zone = set{109}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5465,14 +5472,14 @@ function getRoeRecords(triggers)
         [3535] = { -- Vanquish Funguars (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{116}, mobXP = true },
+            reqs = { mobFamily = set{116}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3536] = { -- Subjugation: Bloodpool Vorax (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17224019} },
+            reqs = { mobID = set{17224019}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5484,7 +5491,7 @@ function getRoeRecords(triggers)
         [3538] = { -- Great Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.GREAT_AXE },
+            reqs = { skillType = tpz.skill.GREAT_AXE, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5492,7 +5499,7 @@ function getRoeRecords(triggers)
         [3539] = { -- Conflict: Ceizak Battlegrounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{261} },
+            reqs = { zone = set{261}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5500,14 +5507,14 @@ function getRoeRecords(triggers)
         [3540] = { -- Vanquish Flies (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{113, 374}, mobXP = true },
+            reqs = { mobFamily = set{113, 374}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3541] = { -- Subjugation: Be'Hya Hundredwall (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17363258} },
+            reqs = { mobID = set{17363258}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5515,6 +5522,7 @@ function getRoeRecords(triggers)
         [3542] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5526,7 +5534,7 @@ function getRoeRecords(triggers)
         [3543] = { -- Spoils - Raptor Skin (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 853 } },
+            reqs = { itemID = set{ 853 }, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5534,7 +5542,7 @@ function getRoeRecords(triggers)
         [3544] = { -- Conflict: Beaucedine Glacier (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{111} },
+            reqs = { zone = set{111}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5542,14 +5550,14 @@ function getRoeRecords(triggers)
         [3545] = { -- Vanquish Raptors (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{210, 376, 377}, mobXP = true },
+            reqs = { mobFamily = set{210, 376, 377}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3546] = { -- Subjugation: Gargantua (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17232079} },
+            reqs = { mobID = set{17232079}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5557,6 +5565,7 @@ function getRoeRecords(triggers)
         [3547] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 5,
+            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5568,7 +5577,7 @@ function getRoeRecords(triggers)
         [3548] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB },
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5576,7 +5585,7 @@ function getRoeRecords(triggers)
         [3549] = { -- Conflict: West Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{115} },
+            reqs = { zone = set{115}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5584,14 +5593,14 @@ function getRoeRecords(triggers)
         [3550] = { -- Vanquish Bees (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{48}, mobXP = true },
+            reqs = { mobFamily = set{48}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3551] = { -- Subjugation: Tom Tit Tat (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17248468, 17248486} },
+            reqs = { mobID = set{17248468, 17248486}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5599,6 +5608,7 @@ function getRoeRecords(triggers)
         [3552] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5610,7 +5620,7 @@ function getRoeRecords(triggers)
         [3553] = { -- Spoils - Silk Thread (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 816 } },
+            reqs = { itemID = set{ 816 }, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5618,7 +5628,7 @@ function getRoeRecords(triggers)
         [3554] = { -- Conflict: Buburimu Peninsula (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{118} },
+            reqs = { zone = set{118}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5626,14 +5636,14 @@ function getRoeRecords(triggers)
         [3555] = { -- Vanquish Crawlers (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{79}, mobXP = true },
+            reqs = { mobFamily = set{79}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3556] = { -- Subjugation: Buburimboo (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17261003} },
+            reqs = { mobID = set{17261003}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5645,7 +5655,7 @@ function getRoeRecords(triggers)
         [3558] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF },
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5653,7 +5663,7 @@ function getRoeRecords(triggers)
         [3559] = { -- Conflict: Castle Oztroja (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{151} },
+            reqs = { zone = set{151}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5661,14 +5671,14 @@ function getRoeRecords(triggers)
         [3560] = { -- Vanquish Ghosts (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{121}, mobXP = true },
+            reqs = { mobFamily = set{121}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3561] = { -- Subjugation: Mee Deggi the Punisher (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17395800} },
+            reqs = { mobID = set{17395800}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5676,6 +5686,7 @@ function getRoeRecords(triggers)
         [3562] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5687,7 +5698,7 @@ function getRoeRecords(triggers)
         [3563] = { -- Spoils - Saruta Cotton (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 834 } },
+            reqs = { itemID = set{ 834 }, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5695,7 +5706,7 @@ function getRoeRecords(triggers)
         [3564] = { -- Conflict: Foret de Hennetiel (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{262} },
+            reqs = { zone = set{262}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5703,14 +5714,14 @@ function getRoeRecords(triggers)
         [3565] = { -- Vanquish Mandragoras (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{178}, mobXP = true },
+            reqs = { mobFamily = set{178}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3566] = { -- Subjugation: Juu Duzu the Whirlwind (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17371300} },
+            reqs = { mobID = set{17371300}, unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5718,6 +5729,7 @@ function getRoeRecords(triggers)
         [3567] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5729,7 +5741,7 @@ function getRoeRecords(triggers)
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.HAND_TO_HAND },
+            reqs = { skillType = tpz.skill.HAND_TO_HAND, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5737,7 +5749,7 @@ function getRoeRecords(triggers)
         [3569] = { -- Conflict: Yorcia Weald (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{263} },
+            reqs = { zone = set{263}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5745,14 +5757,14 @@ function getRoeRecords(triggers)
         [3570] = { -- Vanquish Leeches (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{172, 369}, mobXP = true },
+            reqs = { mobFamily = set{172, 369}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3571] = { -- Subjugation: Canal Moocher (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17469578} },
+            reqs = { mobID = set{17469578}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5760,6 +5772,7 @@ function getRoeRecords(triggers)
         [3572] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5771,7 +5784,7 @@ function getRoeRecords(triggers)
         [3573] = { -- Spoils - Spider Web (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 838 } },
+            reqs = { itemID = set{ 838 }, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5779,7 +5792,7 @@ function getRoeRecords(triggers)
         [3574] = { -- Conflict: Rolanberry Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{110} },
+            reqs = { zone = set{110}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5787,14 +5800,14 @@ function getRoeRecords(triggers)
         [3575] = { -- Vanquish Spiders (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{235}, mobXP = true },
+            reqs = { mobFamily = set{235}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3576] = { -- Subjugation: Eldritch Edge (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17228150} },
+            reqs = { mobID = set{17228150}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5806,7 +5819,7 @@ function getRoeRecords(triggers)
         [3578] = { -- Great Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.GREAT_SWORD },
+            reqs = { skillType = tpz.skill.GREAT_SWORD, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5814,7 +5827,7 @@ function getRoeRecords(triggers)
         [3579] = { -- Conflict: Meriphataud Mountains (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{119} },
+            reqs = { zone = set{119}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5822,14 +5835,14 @@ function getRoeRecords(triggers)
         [3580] = { -- Vanquish Wyverns (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{266, 268}, mobXP = true },
+            reqs = { mobFamily = set{266, 268}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3581] = { -- Subjugation: Patripatan (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17264972} },
+            reqs = { mobID = set{17264972}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5837,6 +5850,7 @@ function getRoeRecords(triggers)
         [3582] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5848,7 +5862,7 @@ function getRoeRecords(triggers)
         [3583] = { -- Spoils - Hecteyes Eye (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 939 } },
+            reqs = { itemID = set{ 939 }, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5856,7 +5870,7 @@ function getRoeRecords(triggers)
         [3584] = { -- Conflict: Sauromugue Champaign (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{120} },
+            reqs = { zone = set{120}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5864,14 +5878,14 @@ function getRoeRecords(triggers)
         [3585] = { -- Vanquish Hecteyes (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{139}, mobXP = true },
+            reqs = { mobFamily = set{139}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3586] = { -- Subjugation: Bashe (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17268788} },
+            reqs = { mobID = set{17268788}, unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5879,6 +5893,7 @@ function getRoeRecords(triggers)
         [3587] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5890,7 +5905,7 @@ function getRoeRecords(triggers)
         [3588] = { -- Dagger Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.DAGGER },
+            reqs = { skillType = tpz.skill.DAGGER, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5898,7 +5913,7 @@ function getRoeRecords(triggers)
         [3589] = { -- Conflict: Sanctuary of Zi'Tah (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{121} },
+            reqs = { zone = set{121}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5906,14 +5921,14 @@ function getRoeRecords(triggers)
         [3590] = { -- Vanquish Hounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{142, 143}, mobXP = true },
+            reqs = { mobFamily = set{142, 143}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3591] = { -- Subjugation: Bastet (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17273190} },
+            reqs = { mobID = set{17273190}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5921,6 +5936,7 @@ function getRoeRecords(triggers)
         [3592] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5932,7 +5948,7 @@ function getRoeRecords(triggers)
         [3593] = { -- Spoils - Doll Shard (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 1165 } },
+            reqs = { itemID = set{ 1165 }, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5940,7 +5956,7 @@ function getRoeRecords(triggers)
         [3594] = { -- Conflict: Morimar Basalt Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{265} },
+            reqs = { zone = set{265}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5948,14 +5964,14 @@ function getRoeRecords(triggers)
         [3595] = { -- Vanquish Dolls (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true },
+            reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3596] = { -- Subjugation: Nocuous Weapon (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17563801} },
+            reqs = { mobID = set{17563801}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5967,7 +5983,7 @@ function getRoeRecords(triggers)
         [3598] = { -- Marksmanship Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.MARKSMANSHIP },
+            reqs = { skillType = tpz.skill.MARKSMANSHIP, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5975,7 +5991,7 @@ function getRoeRecords(triggers)
         [3599] = { -- Conflict: Boyahda Tree (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{153} },
+            reqs = { zone = set{153}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5983,14 +5999,14 @@ function getRoeRecords(triggers)
         [3600] = { -- Vanquish Slimes (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{228, 229, 230}, mobXP = true },
+            reqs = { mobFamily = set{228, 229, 230}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3601] = { -- Subjugation: Aquarius (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17404000} },
+            reqs = { mobID = set{17404000}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5998,6 +6014,7 @@ function getRoeRecords(triggers)
         [3602] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6009,7 +6026,7 @@ function getRoeRecords(triggers)
         [3603] = { -- Spoils - Bird Egg (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4570 } },
+            reqs = { itemID = set{ 4570 }, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6017,7 +6034,7 @@ function getRoeRecords(triggers)
         [3604] = { -- Conflict: Western Altepa Desert (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{125} },
+            reqs = { zone = set{125}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6025,14 +6042,14 @@ function getRoeRecords(triggers)
         [3605] = { -- Vanquish Crow-Type Birds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{55}, mobXP = true },
+            reqs = { mobFamily = set{55}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3606] = { -- Subjugation: Cactuar Cantautor (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17289560} },
+            reqs = { mobID = set{17289560}, unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6040,6 +6057,7 @@ function getRoeRecords(triggers)
         [3607] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6051,7 +6069,7 @@ function getRoeRecords(triggers)
         [3608] = { -- Dagger Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.DAGGER },
+            reqs = { skillType = tpz.skill.DAGGER, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6059,7 +6077,7 @@ function getRoeRecords(triggers)
         [3609] = { -- Conflict: Yuhtunga Jungle (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{123} },
+            reqs = { zone = set{123}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6067,14 +6085,14 @@ function getRoeRecords(triggers)
         [3610] = { -- Vanquish Sheep (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{226}, mobXP = true },
+            reqs = { mobFamily = set{226}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3611] = { -- Subjugation: Mischievous Micholas (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17281149} },
+            reqs = { mobID = set{17281149}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6082,6 +6100,7 @@ function getRoeRecords(triggers)
         [3612] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6093,7 +6112,7 @@ function getRoeRecords(triggers)
         [3613] = { -- Spoils - Scorpion Claw (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 897 } },
+            reqs = { itemID = set{ 897 }, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6101,7 +6120,7 @@ function getRoeRecords(triggers)
         [3614] = { -- Conflict: East Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{116} },
+            reqs = { zone = set{116}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6109,14 +6128,14 @@ function getRoeRecords(triggers)
         [3615] = { -- Vanquish Scorpions (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{217}, mobXP = true },
+            reqs = { mobFamily = set{217}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3616] = { -- Subjugation: Sharp-Eared Ropipi (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17252489, 17252508} },
+            reqs = { mobID = set{17252489, 17252508}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6128,7 +6147,7 @@ function getRoeRecords(triggers)
         [3618] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.ARCHERY },
+            reqs = { skillType = tpz.skill.ARCHERY, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6136,7 +6155,7 @@ function getRoeRecords(triggers)
         [3619] = { -- Conflict: Marjami Ravine (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{266} },
+            reqs = { zone = set{266}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6144,14 +6163,14 @@ function getRoeRecords(triggers)
         [3620] = { -- Vanquish Opo-Opos (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{188}, mobXP = true },
+            reqs = { mobFamily = set{188}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3621] = { -- Subjugation: Ah Puch (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17571903} },
+            reqs = { mobID = set{17571903}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6159,6 +6178,7 @@ function getRoeRecords(triggers)
         [3622] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6170,7 +6190,7 @@ function getRoeRecords(triggers)
         [3623] = { -- Spoils - Black Tiger Fang (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 884 } },
+            reqs = { itemID = set{ 884 }, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6178,7 +6198,7 @@ function getRoeRecords(triggers)
         [3624] = { -- Conflict: Sea Serpent Grotto (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{176} },
+            reqs = { zone = set{176}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6186,14 +6206,14 @@ function getRoeRecords(triggers)
         [3625] = { -- Vanquish Tigers (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{242}, mobXP = true },
+            reqs = { mobFamily = set{242}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3626] = { -- Subjugation: Fyuu the Seabellow (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17498269} },
+            reqs = { mobID = set{17498269}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6201,6 +6221,7 @@ function getRoeRecords(triggers)
         [3627] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6212,7 +6233,7 @@ function getRoeRecords(triggers)
         [3628] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB },
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6220,7 +6241,7 @@ function getRoeRecords(triggers)
         [3629] = { -- Conflict: Bhaflau Thickets (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{52} },
+            reqs = { zone = set{52}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6228,14 +6249,14 @@ function getRoeRecords(triggers)
         [3630] = { -- Vanquish Evil Weapons (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{110}, mobXP = true },
+            reqs = { mobFamily = set{110}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3631] = { -- Subjugation: Emergent Elm (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{16990376} },
+            reqs = { mobID = set{16990376}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6243,6 +6264,7 @@ function getRoeRecords(triggers)
         [3632] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6254,7 +6276,7 @@ function getRoeRecords(triggers)
         [3633] = { -- Spoils - Puk Wing (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 2148 } },
+            reqs = { itemID = set{ 2148 }, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6262,7 +6284,7 @@ function getRoeRecords(triggers)
         [3634] = { -- Conflict: West Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{100} },
+            reqs = { zone = set{100}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6270,14 +6292,14 @@ function getRoeRecords(triggers)
         [3635] = { -- Vanquish Puks (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{198}, mobXP = true },
+            reqs = { mobFamily = set{198}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3636] = { -- Subjugation: Fungus Beetle (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17187047} },
+            reqs = { mobID = set{17187047}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6289,7 +6311,7 @@ function getRoeRecords(triggers)
         [3638] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF },
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6297,7 +6319,7 @@ function getRoeRecords(triggers)
         [3639] = { -- Conflict: Wajaom Woodlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{51} },
+            reqs = { zone = set{51}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6305,14 +6327,14 @@ function getRoeRecords(triggers)
         [3640] = { -- Vanquish Elementals (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{99, 100, 101, 102, 103, 104, 105, 106}, mobXP = true },
+            reqs = { mobFamily = set{99, 100, 101, 102, 103, 104, 105, 106}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3641] = { -- Subjugation: Jaded Jody (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{16986378} },
+            reqs = { mobID = set{16986378}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6320,6 +6342,7 @@ function getRoeRecords(triggers)
         [3642] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6331,7 +6354,7 @@ function getRoeRecords(triggers)
         [3643] = { -- Spoils - Dhalmel Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4359 } },
+            reqs = { itemID = set{ 4359 }, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6339,7 +6362,7 @@ function getRoeRecords(triggers)
         [3644] = { -- Conflict: Kamihr Drifts (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{267} },
+            reqs = { zone = set{267}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6347,14 +6370,14 @@ function getRoeRecords(triggers)
         [3645] = { -- Vanquish Dhalmel (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{80}, mobXP = true },
+            reqs = { mobFamily = set{80}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3646] = { -- Subjugation: Trembler Tabitha (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17588278} },
+            reqs = { mobID = set{17588278}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6362,6 +6385,7 @@ function getRoeRecords(triggers)
         [3647] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 5,
+            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6373,7 +6397,7 @@ function getRoeRecords(triggers)
         [3648] = { -- Polearm Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.POLEARM },
+            reqs = { skillType = tpz.skill.POLEARM, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6381,7 +6405,7 @@ function getRoeRecords(triggers)
         [3649] = { -- Conflict: Cirdas Caverns (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{270} },
+            reqs = { zone = set{270}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6389,14 +6413,14 @@ function getRoeRecords(triggers)
         [3650] = { -- Vanquish Pugils (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{197}, mobXP = true },
+            reqs = { mobFamily = set{197}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3651] = { -- Subjugation: Hovering Hotpot (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17596628} },
+            reqs = { mobID = set{17596628}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6404,6 +6428,7 @@ function getRoeRecords(triggers)
         [3652] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6415,7 +6440,7 @@ function getRoeRecords(triggers)
         [3653] = { -- Spoils - Beetle Shell (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 889 } },
+            reqs = { itemID = set{ 889 }, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6423,7 +6448,7 @@ function getRoeRecords(triggers)
         [3654] = { -- Conflict: East Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{101} },
+            reqs = { zone = set{101}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6431,14 +6456,14 @@ function getRoeRecords(triggers)
         [3655] = { -- Vanquish Beetles (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{49}, mobXP = true },
+            reqs = { mobFamily = set{49}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3656] = { -- Subjugation: Bigmouth Billy (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17191196} },
+            reqs = { mobID = set{17191196}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6450,7 +6475,7 @@ function getRoeRecords(triggers)
         [3658] = { -- Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.SWORD },
+            reqs = { skillType = tpz.skill.SWORD, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6458,7 +6483,7 @@ function getRoeRecords(triggers)
         [3659] = { -- Conflict: Xarcabard (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{112} },
+            reqs = { zone = set{112}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6466,14 +6491,14 @@ function getRoeRecords(triggers)
         [3660] = { -- Vanquish Goobbues (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{136}, mobXP = true },
+            reqs = { mobFamily = set{136}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3661] = { -- Subjugation: Barbaric Weapon (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17236027} },
+            reqs = { mobID = set{17236027}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6481,6 +6506,7 @@ function getRoeRecords(triggers)
         [3662] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6492,7 +6518,7 @@ function getRoeRecords(triggers)
         [3663] = { -- Spoils - Bone Chip (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 880 } },
+            reqs = { itemID = set{ 880 }, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6500,7 +6526,7 @@ function getRoeRecords(triggers)
         [3664] = { -- Conflict: Woh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{273} },
+            reqs = { zone = set{273}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6508,14 +6534,14 @@ function getRoeRecords(triggers)
         [3665] = { -- Vanquish Skeletons (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{227}, mobXP = true },
+            reqs = { mobFamily = set{227}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3666] = { -- Subjugation: Hyakume (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17457236} },
+            reqs = { mobID = set{17457236}, unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6523,6 +6549,7 @@ function getRoeRecords(triggers)
         [3667] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6534,7 +6561,7 @@ function getRoeRecords(triggers)
         [3668] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB },
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6542,7 +6569,7 @@ function getRoeRecords(triggers)
         [3669] = { -- Conflict: Giddeus (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{145} },
+            reqs = { zone = set{145}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6550,14 +6577,14 @@ function getRoeRecords(triggers)
         [3670] = { -- Vanquish Efts (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{98}, mobXP = true },
+            reqs = { mobFamily = set{98}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3671] = { -- Subjugation: Herbage Hunter (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17256836} },
+            reqs = { mobID = set{17256836}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6565,6 +6592,7 @@ function getRoeRecords(triggers)
         [3672] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6576,7 +6604,7 @@ function getRoeRecords(triggers)
         [3673] = { -- Spoils - Rotten Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 16995 } },
+            reqs = { itemID = set{ 16995 }, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6584,7 +6612,7 @@ function getRoeRecords(triggers)
         [3674] = { -- Conflict: Moh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{269} },
+            reqs = { zone = set{269}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6592,14 +6620,14 @@ function getRoeRecords(triggers)
         [3675] = { -- Vanquish Antica (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{25}, mobXP = true },
+            reqs = { mobFamily = set{25}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3676] = { -- Subjugation: Antican Praefectus (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17629281} },
+            reqs = { mobID = set{17629281}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6611,7 +6639,7 @@ function getRoeRecords(triggers)
         [3678] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF },
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6619,7 +6647,7 @@ function getRoeRecords(triggers)
         [3679] = { -- Conflict: Toraimarai Canal (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{169} },
+            reqs = { zone = set{169}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6627,14 +6655,14 @@ function getRoeRecords(triggers)
         [3680] = { -- Vanquish Coeurls (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{71}, mobXP = true },
+            reqs = { mobFamily = set{71}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3681] = { -- Subjugation: Ose (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17649822} },
+            reqs = { mobID = set{17649822}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6642,6 +6670,7 @@ function getRoeRecords(triggers)
         [3682] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6653,7 +6682,7 @@ function getRoeRecords(triggers)
         [3683] = { -- Spoils - Dullahan Armor (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 8746 } },
+            reqs = { itemID = set{ 8746 }, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6661,7 +6690,7 @@ function getRoeRecords(triggers)
         [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{274} },
+            reqs = { zone = set{274}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6669,14 +6698,14 @@ function getRoeRecords(triggers)
         [3685] = { -- Vanquish Dullahan (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{447}, mobXP = true },
+            reqs = { mobFamily = set{447}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3686] = { -- Subjugation: Capricious Cassie (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17613130} },
+            reqs = { mobID = set{17613130}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6684,6 +6713,7 @@ function getRoeRecords(triggers)
         [3687] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6695,7 +6725,7 @@ function getRoeRecords(triggers)
         [3688] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB },
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6703,7 +6733,7 @@ function getRoeRecords(triggers)
         [3689] = { -- Conflict: Sih Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{268} },
+            reqs = { zone = set{268}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6712,7 +6742,7 @@ function getRoeRecords(triggers)
         [3690] = { -- Vanquish Acuex (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{???}, mobXP = true },
+            reqs = { mobFamily = set{???}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6720,7 +6750,7 @@ function getRoeRecords(triggers)
 
         [3691] = { -- Subjugation: Intulo (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{16793742} },
+            reqs = { mobID = set{16793742}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6728,6 +6758,7 @@ function getRoeRecords(triggers)
         [3692] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6739,7 +6770,7 @@ function getRoeRecords(triggers)
         [3693] = { -- Spoils - Demon Horn (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 902 } },
+            reqs = { itemID = set{ 902 }, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6747,7 +6778,7 @@ function getRoeRecords(triggers)
         [3694] = { -- Conflict: Konschtat Highlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{108} },
+            reqs = { zone = set{108}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6755,14 +6786,14 @@ function getRoeRecords(triggers)
         [3695] = { -- Vanquish Demons (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobSystem = set{tpz.eco.DEMON}, mobXP = true },
+            reqs = { mobSystem = set{tpz.eco.DEMON}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3696] = { -- Subjugation: Marquis Naberius (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17436876} },
+            reqs = { mobID = set{17436876}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6774,7 +6805,7 @@ function getRoeRecords(triggers)
         [3698] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF },
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6782,7 +6813,7 @@ function getRoeRecords(triggers)
         [3699] = { -- Conflict: Dho Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{272} },
+            reqs = { zone = set{272}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6790,14 +6821,14 @@ function getRoeRecords(triggers)
         [3700] = { -- Vanquish Velkk (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{342}, mobXP = true },
+            reqs = { mobFamily = set{342}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3701] = { -- Subjugation: Dune Widow (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17244396} },
+            reqs = { mobID = set{17244396}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6805,6 +6836,7 @@ function getRoeRecords(triggers)
         [3702] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6816,7 +6848,7 @@ function getRoeRecords(triggers)
         [3703] = { -- Spoils - Twitherym Wing (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 3930 } },
+            reqs = { itemID = set{ 3930 }, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6824,7 +6856,7 @@ function getRoeRecords(triggers)
         [3704] = { -- Conflict: Qufim Island (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{126} },
+            reqs = { zone = set{126}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6832,14 +6864,14 @@ function getRoeRecords(triggers)
         [3705] = { -- Vanquish Twitherym (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{338}, mobXP = true },
+            reqs = { mobFamily = set{338}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3706] = { -- Subjugation: Atkorkamuy (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17293485} },
+            reqs = { mobID = set{17293485}, unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6847,6 +6879,7 @@ function getRoeRecords(triggers)
         [3707] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },

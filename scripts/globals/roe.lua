@@ -10,7 +10,26 @@ tpz = tpz or {}
 tpz.roe = tpz.roe or {}
 
 -----------------------------------
--- triggers
+-- Leaders
+-----------------------------------
+tpz.roe.leaders =
+{
+    NONE              = 0,
+    PIEUJE            = 1,
+    AYAME             = 2,
+    INVINCIBLE_SHIELD = 3,
+    APURURU           = 4,
+    MAAT              = 5,
+    ALDO              = 6,
+    JAKOH_WAHCONDALO  = 7,
+    NAJA_SALAHEEM     = 8,
+    FLAVIRIA          = 9,
+    YORAN_ORAN        = 10,
+    SYLVIE            = 11,
+}
+
+-----------------------------------
+-- Triggers
 -----------------------------------
 
 tpz.roe.triggers =
@@ -37,7 +56,7 @@ tpz.roe.triggers =
 local triggers = tpz.roe.triggers
 
 -----------------------------------
--- checks
+-- Checks
 -----------------------------------
 
 local checks =
