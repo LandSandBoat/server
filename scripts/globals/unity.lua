@@ -77,6 +77,22 @@ local unityOptions =
         [53] = nil,                                        -- Mount Zhayolm
     },
 
+    [4] = -- Items (Item ID, askQuantity (0 = true), limitSize (99 = limit by accolades), cost)
+    {
+        [ 0] = { 9049, 0, 99, 15000 }, -- Refractive Crystal
+        [ 1] = { 8973, 0, 99, 15000 }, -- Special Gobbiedial Key
+        [ 2] = { 4181, 1,  1, 10 }, -- Scroll of Instant Warp
+        [ 3] = { 4182, 1,  1, 10 }, -- Scroll of Instant Reraise
+        [ 4] = { 5988, 1,  1, 10 }, -- Scroll of Instant Protect
+        [ 5] = { 5989, 1,  1, 10 }, -- Scroll of Instant Shell
+        [ 6] = { 5114, 0, 99, 10 }, -- Moist Rolanberry
+        [ 7] = { 5115, 0, 99, 10 }, -- Ravaged Moko Grass
+        [ 8] = { 5116, 0, 99, 10 }, -- Cavorting Worm
+        [ 9] = { 5117, 0, 99, 10 }, -- Levigated Rock
+        [10] = { 5118, 0, 99, 10 }, -- Little Lugworm
+        [11] = { 5119, 0, 99, 10 }, -- Training Manual
+        [12] = { 5945, 0, 99, 10 }, -- Prize Powder
+    },
 }
 
 local function changeUnityLeader(player, leader)
@@ -128,12 +144,38 @@ function tpz.unity.onEventUpdate(player, csid, option)
     local zoneId = player:getZoneID()
     local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local accolades = player:getCurrency("unity_accolades")
+    local weeklyAccoladesSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
-    local category  = bit.band(option, 0x1F)
-    local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
+    local category  = bit.band(option, 0xF)
+    local selection = bit.band(bit.rshift(option, 5), 0xFF)
 
     if option == 10 then
         player:updateEvent(0, 0, 0, remainingLimit, 0, 0, 0, 0)
+
+    -- Item Selected, enter amount/confirm
+    elseif category == 3 then
+        player:updateEvent(unityOptions[4][selection][2], unityOptions[4][selection][3], 0, 0, 0, 0, 0, player:getUnityLeader())
+
+    -- Attempt to grant the Item selected
+    elseif category == 4 then
+        local qty = bit.rshift(option, 13)
+        local itemId = unityOptions[category][selection][1]
+        local cost = unityOptions[category][selection][4] * qty
+
+        if npcUtil.giveItem(player, { {itemId, qty} }) then
+            accolades = accolades - cost
+            player:delCurrency("unity_accolades", cost)
+            if ENABLE_EXCHANGE_LIMIT == 1 then
+                remainingLimit = remainingLimit - cost
+                player:setCharVar("weekly_accolades_spent", weeklyAccoladesSpent + cost)
+            end
+
+            player:updateEvent(itemId, qty, accolades, remainingLimit, 0, 0, 0, player:getUnityLeader())
+        else
+            player:updateEvent(utils.MAX_UINT32)
+        end
+        
+    -- Change Unity
     elseif category == 5 then
         if player:getCharVar("unity_changed") == 1 then
             player:updateEvent(utils.MAX_UINT32)
@@ -150,8 +192,6 @@ function tpz.unity.onEventFinish(player, csid, option)
     local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local category  = bit.band(option, 0x1F)
     local selection = bit.rshift(option, 5) -- This may need tuning for other menu options
-
-    printf("Option = %d, zoneId=%d, cat=%d, selection=%d", option, zoneId, category, selection)
 
     -- First time joining Unity (Requirements met for num Objectives and All for One set)
     if csid == zoneEventIds[zoneId][3] and option >= 1 and option <= 11 then
