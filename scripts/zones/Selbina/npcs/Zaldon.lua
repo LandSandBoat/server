@@ -540,27 +540,27 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-entity.onTrigger = function(player, npc)
-    -- TODO: once fishing skill is implemented, replace all these mLvl checks with player:getSkillLevel(xi.skill.FISHING)
-
-    local theRealGift    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
-    local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
-    local mLvl           = player:getMainLvl()
+function onTrigger(player, npc)
+    local theRealGift    = player:getQuestStatus(OTHER_AREAS_LOG, xi.quest.id.otherAreas.THE_REAL_GIFT)
+    local insideTheBelly = player:getQuestStatus(OTHER_AREAS_LOG, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
+    local fishingSkill = player:getSkillLevel(xi.skill.FISHING)
+    local fishingRank = player:getSkillRank(xi.skill.FISHING)
+    local realSkill = (fishingSkill - fishingRank) / 32
 
     -- UNDER THE SEA
     if player:getCharVar("underTheSeaVar") == 3 then
         player:startEvent(34, 4501) -- During quest "Under the sea" - 3rd dialog
 
     -- INSIDE THE BELLY
-    elseif mLvl >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
+    elseif realSkill >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
         player:startEvent(161)
-    elseif mLvl >= 30 and mLvl < 39 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif realSkill >= 30 and realSkill < 39 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(162, 5799, 4481, 5802, 4428)
-    elseif mLvl >= 40 and mLvl < 49 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif realSkill >= 40 and realSkill < 49 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(163, 5805, 4385, 5800, 5802, 5450) -- 5802(Istavrit) is skill cap 41, and therefore is used in this and the previous csid
-    elseif mLvl >= 50 and mLvl <= 74 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif realSkill >= 50 and realSkill <= 74 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(164, 5806, 5451, 5801, 5804, 5807, 5135)
-    elseif mLvl >= 75 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
+    elseif realSkill >= 75 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(165, 4451, 4477, 5803, 4307, 4478, 5467, 4304, 4474)
 
     -- STANDARD DIALOG
