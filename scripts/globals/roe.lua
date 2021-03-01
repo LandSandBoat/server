@@ -228,7 +228,11 @@ local function completeRecord(player, record)
         player:addExp(rewards["xp"] * ROE_EXP_RATE)
     end
 
-    if rewards["accolades"] ~= nil and type(rewards["accolades"]) == "number" then
+    if
+        player:getUnityLeader() > 0 and
+        rewards["accolades"] ~= nil and
+        type(rewards["accolades"]) == "number"
+    then
         local bonusAccoladeRate = 1.0
 
         if record ~= 5 then -- Do not grant a bonus for All for One
