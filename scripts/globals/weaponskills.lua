@@ -1280,7 +1280,7 @@ function shadowAbsorb(target)
         target:setMod(shadowType, targShadows - 1)
         if targShadows - 1 == 0 then
             target:delStatusEffect(tpz.effect.COPY_IMAGE)
-            target:delStatusEffect(tpz.effect.COPY_BLINK)
+            target:delStatusEffect(tpz.effect.BLINK)
         end
 
         return true
