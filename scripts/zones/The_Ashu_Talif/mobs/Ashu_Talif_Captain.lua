@@ -2,7 +2,7 @@
 -- Area: The Ashu Talif (The Black Coffin)
 --   NM: Ashu Talif Captain
 -----------------------------------
-local ID = require("scripts/zones/The_mob_Talif/IDs")
+local ID = require("scripts/zones/The_Ashu_Talif/IDs")
 -----------------------------------
 local entity = {}
 
