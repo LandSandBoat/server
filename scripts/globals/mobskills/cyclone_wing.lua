@@ -14,23 +14,22 @@ require("scripts/globals/status")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() == 1) then
+    if mob:getAnimationSub() == 1 then
         return 1
-    elseif (target:isBehind(mob, 48) == true) then
+    elseif target:isBehind(mob, 48) then
         return 1
     end
+
     return 0
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.SLEEP_I
-
-    MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
-
     local dmgmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*5, tpz.magic.ele.DARK, dmgmod, TP_NO_EFFECT)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.DARK, MOBPARAM_WIPE_SHADOWS)
     target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.DARK)
+    MobStatusEffectMove(mob, target, tpz.effect.SLEEP_I, 1, 0, 60)
+
     return dmg
 end
 

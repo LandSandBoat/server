@@ -15,6 +15,7 @@
 
 #include "../../weapon_skill.h"
 #include "../controllers/player_controller.h"
+#include "../controllers/trust_controller.h"
 
 namespace gambits
 {
@@ -45,7 +46,11 @@ namespace gambits
     {
         TracyZoneScoped;
 
-        if (tick < m_lastAction)
+        auto* controller      = static_cast<CTrustController*>(POwner->PAI->GetController());
+        uint8 currentPartyPos = controller->GetPartyPosition();
+        auto  position_offset = static_cast<std::chrono::milliseconds>(currentPartyPos * 10);
+
+        if ((tick + position_offset) < m_lastAction)
         {
             return;
         }
@@ -60,8 +65,6 @@ namespace gambits
 
         auto random_offset = static_cast<std::chrono::milliseconds>(tpzrand::GetRandomNumber(1000, 2500));
         m_lastAction       = tick + random_offset;
-
-        auto* controller = static_cast<CTrustController*>(POwner->PAI->GetController());
 
         // Deal with TP skills before any gambits
         // TODO: Should this be its own special gambit?

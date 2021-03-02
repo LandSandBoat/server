@@ -18,6 +18,7 @@ zones[tpz.zone.RULUDE_GARDENS] =
         KEYITEM_OBTAINED                 = 6532, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                     = 6533, -- Lost key item: <keyitem>.
         ITEMS_OBTAINED                   = 6538, -- You obtain <number> <item>!
+        RETURN_ITEM                      = 6541, -- The <item> is returned to you.
         NOTHING_OUT_OF_ORDINARY          = 6543, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS              = 6568, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY          = 6569, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
@@ -58,6 +59,8 @@ zones[tpz.zone.RULUDE_GARDENS] =
         YOU_HAND_THE_THREE_SLIVERS       = 13742, -- You hand the three crystal slivers to Esha'ntarl.
         ITEM_NOT_WEAPON_MAGIAN           = 14497, -- As I advised you previously, my sole specialty is weapons. I have not the moogle magic at my disposal to augment items of this variety, kupo...
         RETURN_MAGIAN_ITEM               = 14517, -- The Magian Moogle returns your <item>.
+        DELIVERY_CRATE_TEXT              = 14530, -- A sturdy, sizable wooden crate lies before you. To complete an item acquisition trial, trade your retrieved items together with the corresponding inscribed piece of equipment.
+        ITEM_NOT_ARMOR_MAGIAN            = 14622, -- Uh, sorry, I'm only in charge of armor. Nande, for that item, you'll have to talk to the other dude.
         COMMON_SENSE_SURVIVAL            = 15691, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15874, -- There appears to be a tear in the fabric of space...
     },

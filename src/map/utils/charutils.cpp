@@ -2808,18 +2808,41 @@ namespace charutils
      *                                                                       *
      ************************************************************************/
 
-    void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl)
+    void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp, bool useSubSkill)
     {
         // This usually happens after a crash
         TPZ_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE); // выход за пределы допустимых умений
 
-        if ((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000))
+        if (((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000)) || useSubSkill)
         {
-            uint16 CurSkill = PChar->RealSkills.skill[SkillID];
-            uint16 CapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
+            uint16 CurSkill     = PChar->RealSkills.skill[SkillID];
+            uint16 MainCapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
+            uint16 SubCapSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), PChar->GetSLevel());
+            uint16 MainMaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
+            uint16 SubMaxSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), std::min(PChar->GetSLevel(), lvl));
+            uint16 MaxSkill     = 0;
+            uint16 CapSkill     = 0;
+
+            if (useSubSkill)
+            {
+                if (MainCapSkill > SubCapSkill)
+                {
+                    CapSkill = MainCapSkill;
+                    MaxSkill = MainMaxSkill;
+                }
+                else
+                {
+                    CapSkill = SubCapSkill;
+                    MaxSkill = SubMaxSkill;
+                }
+            }
+            else
+            {
+                CapSkill = MainCapSkill;
+                MaxSkill = MainMaxSkill;
+            }
             // Max skill this victim level will allow.
             // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
-            uint16 MaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
 
             int16  Diff          = MaxSkill - CurSkill / 10;
             double SkillUpChance = Diff / 5.0 + map_config.skillup_chance_multiplier * (2.0 - log10(1.0 + CurSkill / 100));
@@ -2843,7 +2866,7 @@ namespace charutils
                 SkillUpChance *= ((100.f + PChar->getMod(Mod::MAGIC_SKILLUP_RATE)) / 100.f);
             }
 
-            if (Diff > 0 && random < SkillUpChance)
+            if (Diff > 0 && (random < SkillUpChance || forceSkillUp))
             {
                 double chance      = 0;
                 uint8  SkillAmount = 1;
