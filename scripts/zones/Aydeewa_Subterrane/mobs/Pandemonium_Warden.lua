@@ -76,6 +76,17 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
+local function handlePet(mob, newPet, oldPet, target, modelId)
+
+    if oldPet:isSpawned() then
+        DespawnMob(oldPet:getID())
+    end
+    newPet:setModelId(modelId)
+    newPet:spawn()
+    newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
+    newPet:updateEnmity(target)
+end
+
 entity.onMobFight = function(mob, target)
 
     -- Init Vars
@@ -183,17 +194,6 @@ entity.onMobDespawn = function(mob)
             end
         end
     end
-end
-
-local function handlePet(mob, newPet, oldPet, target, modelId)
-
-    if oldPet:isSpawned() then
-        DespawnMob(oldPet:getID())
-    end
-    newPet:setModelId(modelId)
-    newPet:spawn()
-    newPet:setPos(mob:getXPos() + math.random(-2, 2), mob:getYPos(), mob:getZPos() + math.random(-2, 2))
-    newPet:updateEnmity(target)
 end
 
 return entity
