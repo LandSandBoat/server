@@ -19,6 +19,12 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(80)
         end
+    elseif player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.MAGICITE then
+        if player:getCharVar("FickblixCS") == 1 then
+            player:startEvent(81)
+        else
+            player:startEvent(79)
+        end
     else
         player:startEvent(15)
     end
