@@ -50,16 +50,16 @@ public:
     uint8  getType() const;
     uint8  getCraftType() const;
     uint8  getItemsCount() const;
-    uint8  getSlotCount();     // количество занятых ячеек
-    uint32 getTotalQuantity(); // общее количество предметов (gil считаются за 1)
+    uint8  getSlotCount();                      // Number of occupied cells
+    uint32 getTotalQuantity();                  // Total number of items (gil counts as 1)
     uint8  getGuildID(uint8 slotID);
     uint16 getGuildRank(uint8 slotID);
     CItem* getItem(uint8 slotID);
     uint16 getItemID(uint8 slotID);
     uint8  getInvSlotID(uint8 slotID);
-    uint32 getQuantity(uint8 slotID); // количество предметов в ячейке
+    uint32 getQuantity(uint8 slotID);           // Number of items in the slot
     uint8  getConfirmedStatus(uint8 slotID);
-    uint32 getItemQuantity(uint16 itemID); // количество предметов одного типа
+    uint32 getItemQuantity(uint16 itemID);      // Number of items of one type
     uint8  getSize();
     uint8  getExSize() const;
 
@@ -78,12 +78,12 @@ public:
     void setExSize(uint8 size); // Set "extra" size information; purpose changes depending on container's goal
     void unreserveUnconfirmed();
 
-    void Clean(); // отчищаем контейнер
+    void Clean(); // we clean the container
 
 private:
-    uint8 m_type;       // тип контейнера (тип кристалла, нация магазина и т.д.)
+    uint8 m_type;       // Container type (crystal type, store nation, etc.)
     uint8 m_craftType;  // The craft synthesis type (CRAFT_TYPE)
-    uint8 m_ItemsCount; // количество предметов в контейнере (устанавливаем самостоятельно)
+    uint8 m_ItemsCount; // The number of items in the container (set by yourself)
     uint8 m_exSize;     // Can be used as a custom delineation point inside a container
 
     std::vector<CItem*> m_PItem;

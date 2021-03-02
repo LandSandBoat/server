@@ -26,6 +26,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../ai/helpers/gambits_container.h"
 #include "../../ai/states/despawn_state.h"
 #include "../../ai/states/range_state.h"
+#include "../../ai/states/magic_state.h"
 #include "../../enmity_container.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
@@ -393,6 +394,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
     TracyZoneScoped;
 
     FaceTarget(targid);
+
     if (static_cast<CMobEntity*>(POwner)->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellid)))
     {
         return false;
@@ -402,6 +404,60 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
     if (PSpell->getValidTarget() == TARGET_SELF)
     {
         targid = POwner->targid;
+    }
+
+    auto  PTarget      = (CBattleEntity*)POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+    auto  PSpellFamily = PSpell->getSpellFamily();
+    bool  canCast      = true;
+
+    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+    {
+        if (PMember->objtype == TYPE_TRUST && PMember->PAI->IsCurrentState<CMagicState>())
+        {
+            auto MState = static_cast<CMagicState*>(PMember->PAI->GetCurrentState());
+
+            if (MState)
+            {
+                auto MSpell       = MState->GetSpell();
+                auto MTarget      = MState->GetTarget();
+                auto MSpellFamily = MSpell->getSpellFamily();
+                auto MSpellID     = MSpell->getID();
+
+                if (PSpell->isBuff())
+                {
+                    if (PSpellFamily == MSpellFamily && spellid <= MSpellID)
+                    {
+                        canCast = false;
+                    }
+                }
+                if (PSpell->isCure())
+                {
+                    if (PTarget == MTarget && PTarget->GetHPP() > 50)
+                    {
+                        canCast = false;
+                    }
+                }
+                if (PSpell->isDebuff())
+                {
+                    if (PSpellFamily == MSpellFamily && spellid <= MSpellID)
+                    {
+                        canCast = false;
+                    }
+                }
+                if (PSpell->isNa())
+                {
+                    if (PSpellFamily == MSpellFamily && spellid == MSpellID)
+                    {
+                        canCast = false;
+                    }
+                }
+            }
+        }
+    });
+
+    if (!canCast)
+    {
+        return false;
     }
 
     return CMobController::Cast(targid, spellid);

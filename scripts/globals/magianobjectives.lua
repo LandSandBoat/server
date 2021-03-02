@@ -37,6 +37,10 @@ checks.checkTrials = function(self, player, params)
     return 0
 end
 
+checks.checkTradeTrials = function(self, player, params)
+    return self.reqs.itemId[params.itemId] ~= nil and params.quantity or 0
+end
+
 tpz.magian.trials =
 {
 [   2] = { check = checks.checkTrials, reqs = { mobid = set{ 17563801 } } }, -- Nocuous Weapon
@@ -175,6 +179,8 @@ tpz.magian.trials =
 [2253] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.FINAL_HEAVEN }, mobSystem = set{ tpz.eco.ARCANA } } },   -- 80 -> 85
 [2664] = { check = checks.checkTrials, reqs = { mobid = set{ 17326088 } } }, -- 85 -> 90 (Mildaunegeux)
 [3097] = { check = checks.checkTrials, reqs = { mobid = set{ 17330199 } } }, -- 90 -> 95 (Animated Knuckles)
+[3560] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3610] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Mandau
 [991]  = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.MERCY_STROKE }, mobSystem = set{ tpz.eco.BEAST } } },    -- 75 -> 75 DMG+1
@@ -184,6 +190,8 @@ tpz.magian.trials =
 [2249] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.MERCY_STROKE }, mobSystem = set{ tpz.eco.DRAGON } } },    -- 80 -> 85
 [2660] = { check = checks.checkTrials, reqs = { mobid = set{ 17326087 } } }, -- 85 -> 90 (Quiebitiel)
 [3093] = { check = checks.checkTrials, reqs = { mobid = set{ 17330200 } } }, -- 90 -> 95 (Animated Dagger)
+[3556] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3606] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Excalibur
 [1012] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ tpz.eco.AQUAN } } },    -- 75 -> 75 DMG+1
@@ -193,6 +201,8 @@ tpz.magian.trials =
 [2256] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.KNIGHTS_OF_ROUND }, mobSystem = set{ tpz.eco.BIRD } } },      -- 80 -> 85
 [2667] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [3100] = { check = checks.checkTrials, reqs = { mobid = set{ 17330201 } } }, -- 90 -> 95 (Animated Longsword)
+[3563] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3613] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Ragnarok
 [1024] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.SCOURGE }, mobSystem = set{ tpz.eco.BIRD } } },     -- 75 -> 75 DMG+3
@@ -202,6 +212,8 @@ tpz.magian.trials =
 [2260] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.SCOURGE }, mobSystem = set{ tpz.eco.ARCANA } } },    -- 80 -> 85
 [2671] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [3104] = { check = checks.checkTrials, reqs = { mobid = set{ 17330202 } } }, -- 90 -> 95 (Animated Claymore)
+[3567] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3617] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Guttler
 [1027] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.ONSLAUGHT }, mobSystem = set{ tpz.eco.UNDEAD } } },   -- 75 -> 75 DMG+2
@@ -211,6 +223,8 @@ tpz.magian.trials =
 [2261] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.ONSLAUGHT }, mobSystem = set{ tpz.eco.BIRD } } },      -- 80 -> 85
 [2672] = { check = checks.checkTrials, reqs = { mobid = set{ 17326090 } } }, -- 85 -> 90 (Dagourmarche)
 [3105] = { check = checks.checkTrials, reqs = { mobid = set{ 17330203 } } }, -- 90 -> 95 (Animated Tabar)
+[3568] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3618] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Bravura
 [1033] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.METATRON_TORMENT }, mobSystem = set{ tpz.eco.LIZARD } } },   -- 75 -> 75 DMG+3
@@ -220,6 +234,8 @@ tpz.magian.trials =
 [2263] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.METATRON_TORMENT }, mobSystem = set{ tpz.eco.DRAGON } } },    -- 80 -> 85
 [2674] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [3107] = { check = checks.checkTrials, reqs = { mobid = set{ 17330204 } } }, -- 90 -> 95 (Animated Great Axe)
+[3570] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3620] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Gungnir
 [1039] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.GEIRSKOGUL }, mobSystem = set{ tpz.eco.AMORPH } } },  -- 75 -> 75 DMG+3
@@ -229,6 +245,8 @@ tpz.magian.trials =
 [2267] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.GEIRSKOGUL }, mobSystem = set{ tpz.eco.AQUAN } } },    -- 80 -> 85
 [2678] = { check = checks.checkTrials, reqs = { mobid = set{ 17326090 } } }, -- 85 -> 90 (Dagourmarche)
 [3111] = { check = checks.checkTrials, reqs = { mobid = set{ 17330205 } } }, -- 90 -> 95 (Animated Spear)
+[3574] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3624] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Apocalypse
 [1045] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.CATASTROPHE }, mobSystem = set{ tpz.eco.UNDEAD } } },  -- 75 -> 75 DMG+3
@@ -238,6 +256,8 @@ tpz.magian.trials =
 [2265] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.CATASTROPHE }, mobSystem = set{ tpz.eco.BEAST } } },    -- 80 -> 85
 [2676] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
 [3109] = { check = checks.checkTrials, reqs = { mobid = set{ 17330206 } } }, -- 90 -> 95 (Animated Scythe)
+[3572] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3622] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Kikoku
 [1051] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.BLADE_METSU }, mobSystem = set{ tpz.eco.BIRD } } },    -- 75 -> 75 DMG+1
@@ -247,6 +267,8 @@ tpz.magian.trials =
 [2269] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.BLADE_METSU }, mobSystem = set{ tpz.eco.UNDEAD } } },   -- 80 -> 85
 [2680] = { check = checks.checkTrials, reqs = { mobid = set{ 17326088 } } }, -- 85 -> 90 (Mildaunegeux)
 [3113] = { check = checks.checkTrials, reqs = { mobid = set{ 17330207 } } }, -- 90 -> 95 (Animated Kunai)
+[3576] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3626] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Amanomurakumo
 [1057] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.TACHI_KAITEN }, mobSystem = set{ tpz.eco.BEAST } } },    -- 75 -> 75 DMG+2
@@ -256,6 +278,8 @@ tpz.magian.trials =
 [2271] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.TACHI_KAITEN }, mobSystem = set{ tpz.eco.AQUAN } } },     -- 80 -> 85
 [2682] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
 [3115] = { check = checks.checkTrials, reqs = { mobid = set{ 17330208 } } }, -- 90 -> 95 (Animated Tachi)
+[3578] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3628] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Mjollnir
 [1063] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.RANDGRITH }, mobSystem = set{ tpz.eco.LIZARD } } },   -- 75 -> 75 DMG+2
@@ -265,6 +289,8 @@ tpz.magian.trials =
 [2273] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.RANDGRITH }, mobSystem = set{ tpz.eco.BIRD } } },      -- 80 -> 85
 [2684] = { check = checks.checkTrials, reqs = { mobid = set{ 17326087 } } }, -- 85 -> 90 (Quiebitiel)
 [3117] = { check = checks.checkTrials, reqs = { mobid = set{ 17330209 } } }, -- 90 -> 95 (Animated Tachi)
+[3581] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3630] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Claustrum
 [1069] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ tpz.eco.AQUAN } } },   -- 75 -> 75 DMG+4
@@ -274,15 +300,8 @@ tpz.magian.trials =
 [2275] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.GATE_OF_TARTARUS }, mobSystem = set{ tpz.eco.PLANTOID } } }, -- 80 -> 85
 [2686] = { check = checks.checkTrials, reqs = { mobid = set{ 17326090 } } }, -- 85 -> 90 (Dagourmarche)
 [3119] = { check = checks.checkTrials, reqs = { mobid = set{ 17330210 } } }, -- 90 -> 95 (Animated Staff)
-
--- Yoichinoyumi
-[1090] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AMORPH } } },   -- 75 -> 75 DMG+2
-[1091] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.BEAST } } },     -- 75 DMG+2 -> 75 DMG+5
-[1884] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.LIZARD } } },    -- 75 DMG+5 -> 75 DMG+8
-[1885] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AQUAN } } },     -- 75 DMG+8 -> 80
-[2279] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.VERMIN } } },    -- 80 -> 85
-[2690] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
-[3123] = { check = checks.checkTrials, reqs = { mobid = set{ 17330211 } } }, -- 90 -> 95 (Animated Longbow)
+[3582] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3632] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Annihilator
 [1081] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.CORONACH }, mobSystem = set{ tpz.eco.BEAST } } },    -- 75 -> 75 DMG+2
@@ -292,16 +311,381 @@ tpz.magian.trials =
 [2280] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.CORONACH }, mobSystem = set{ tpz.eco.UNDEAD } } },    -- 80 -> 85
 [2691] = { check = checks.checkTrials, reqs = { mobid = set{ 17326088 } } }, -- 85 -> 90 (Mildaunegeux)
 [3124] = { check = checks.checkTrials, reqs = { mobid = set{ 17330212 } } }, -- 90 -> 95 (Animated Gun)
+[3587] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3637] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
+
+-- Yoichinoyumi
+[1090] = { check = checks.checkTrials, reqs = { killWithWs=false, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AMORPH } } },   -- 75 -> 75 DMG+2
+[1091] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.BEAST } } },     -- 75 DMG+2 -> 75 DMG+5
+[1884] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.LIZARD } } },    -- 75 DMG+5 -> 75 DMG+8
+[1885] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.AQUAN } } },     -- 75 DMG+8 -> 80
+[2279] = { check = checks.checkTrials, reqs = { killWithWs=true, wSkill = set{ tpz.weaponskill.NAMAS_ARROW }, mobSystem = set{ tpz.eco.VERMIN } } },    -- 80 -> 85
+[2690] = { check = checks.checkTrials, reqs = { mobid = set{ 17326089 } } }, -- 85 -> 90 (Velosareon)
+[3123] = { check = checks.checkTrials, reqs = { mobid = set{ 17330211 } } }, -- 90 -> 95 (Animated Longbow)
+[3586] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3636] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Gjallarhorn
 [2713] = { check = checks.checkTrials, reqs = { mobid = set{ 17547265 } } }, -- 75 -> 80 (Goblin Golem)
 [2714] = { check = checks.checkTrials, reqs = { mobid = set{ 17543169 } } }, -- 80 -> 85 (Tzee Xicu Idol)
 [2715] = { check = checks.checkTrials, reqs = { mobid = set{ 17326087 } } }, -- 85 -> 90 (Quiebitiel)
 [3128] = { check = checks.checkTrials, reqs = { mobid = set{ 17330213 } } }, -- 90 -> 95 (Animated Horn)
+[3591] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[3641] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
 
 -- Aegis
 [4401] = { check = checks.checkTrials, reqs = { mobid = set{ 17539073 } } }, -- 75 -> 80 (Gu'Dha Effigy)
 [4402] = { check = checks.checkTrials, reqs = { mobid = set{ 17534977 } } }, -- 80 -> 85 (Overlord's Tombstone)
 [4403] = { check = checks.checkTrials, reqs = { mobid = set{ 17326086 } } }, -- 85 -> 90 (Goublefaupe)
 [4448] = { check = checks.checkTrials, reqs = { mobid = set{ 17330214 } } }, -- 90 -> 95 (Animated Shield)
+[4453] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 95 -> 99 (Umbral Marrow x5)
+[5056] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3502 } } }, -- 99 -> 99 (Umbral Marrow x250)
+
+-- Relic Armor | NQ = 0 -> +2 | HQ = +1 -> +2
+-- Bard
+--- Head
+[4744] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4745] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4746] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4747] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4748] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4749] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4750] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4751] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4752] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4753] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Beastmaster
+--- Head
+[4734] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4735] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4736] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4737] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4738] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4739] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4740] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4741] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4742] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4743] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Black Mage
+--- Head
+[4684] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4685] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4686] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4687] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4688] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4689] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4690] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4691] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4692] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4693] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Blue Mage
+--- Head
+[4804] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4805] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4806] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4807] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4808] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4809] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4810] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4811] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4812] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4813] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Corsair
+--- Head
+[4814] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4815] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4816] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4817] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4818] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4819] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4820] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4821] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4822] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4823] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Dancer
+--- Head
+[4834] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4835] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4836] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4837] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4838] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4839] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4840] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4841] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4842] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4843] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Dark Knight
+--- Head
+[4724] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4725] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4726] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4727] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4728] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4729] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4730] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4731] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4732] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4733] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Dragoon
+--- Head
+[4784] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4785] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4786] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4787] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4788] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4789] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4790] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4791] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4792] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4793] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Monk
+--- Head
+[4664] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4665] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4666] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4667] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4668] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4669] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4670] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4671] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4672] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4673] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Ninja
+--- Head
+[4774] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4775] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4776] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4777] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4778] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4779] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4780] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4781] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4782] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4783] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Paladin
+--- Head
+[4714] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4715] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4716] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4717] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4718] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4719] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4720] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4721] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4722] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4723] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Puppetmaster
+--- Head
+[4824] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4825] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4826] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4827] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4828] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4829] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4830] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4831] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4832] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4833] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Ranger
+--- Head
+[4754] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4755] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4756] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4757] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4758] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4759] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4760] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4761] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4762] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4763] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Red Mage
+--- Head
+[4694] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4695] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4696] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4697] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4698] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4699] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4700] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4701] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4702] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4703] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Samurai
+--- Head
+[4764] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4765] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4766] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4767] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4768] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4769] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4770] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4771] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4772] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4773] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Scholar
+--- Head
+[4844] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4845] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4846] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4847] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4848] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4849] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4850] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4851] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4852] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4853] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Summoner
+--- Head
+[4794] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4795] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4796] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4797] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4798] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4799] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4800] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4801] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4802] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4803] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Thief
+--- Head
+[4704] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4705] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4706] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4707] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4708] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4709] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4710] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4711] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4712] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4713] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- Warrior
+--- Head
+[4654] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4655] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4656] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4657] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4658] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4659] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4660] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4661] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4662] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4663] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+-- White Mage
+--- Head
+[4674] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- NQ Forgotten Thoughts x50
+[4675] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3493 } } }, -- HQ Forgotten Thoughts x30
+--- Body
+[4676] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- NQ Forgotten Hopes x50
+[4677] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3494 } } }, -- HQ Forgotten Hopes x30
+--- Hand
+[4678] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- NQ Forgotten Touches x50
+[4679] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3495 } } }, -- HQ Forgotten Touches x30
+--- Leg
+[4680] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- NQ Forgotten Journeys x50
+[4681] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3496 } } }, -- HQ Forgotten Journeys x30
+--- Feet
+[4682] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
+[4683] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
+
+
+
+
+-- Abyssean Armor
+-- Unkai Kote
+[4327] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3161 } } }, -- 0 -> +1 (Unkai Seal: Hn.)
 }

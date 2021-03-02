@@ -55,6 +55,8 @@ public:
 
     CBattleEntity* GetTopEnmity();
 
+    uint8 GetPartyPosition();
+
     std::unique_ptr<gambits::CGambitsContainer> m_GambitsContainer;
 
 private:
@@ -63,8 +65,6 @@ private:
 
     void Declump(CCharEntity* PMaster, CBattleEntity* PTarget);
     void PathOutToDistance(CBattleEntity* PTarget, float amount);
-
-    uint8 GetPartyPosition();
 
     CBattleEntity* m_LastTopEnmity;
 

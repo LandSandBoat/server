@@ -423,7 +423,7 @@ public:
     bool hasLearnedWeaponskill(uint8 wsID);
     void delLearnedWeaponskill(uint8 wsID);
 
-    void trySkillUp(uint8 skill, uint8 level);
+    void trySkillUp(uint8 skill, uint8 level, sol::object const& forceSkillUpObj, sol::object const& useSubSkillObj);
 
     bool addWeaponSkillPoints(uint8 slotID, uint16 points); // Adds weapon skill points to an equipped weapon
 
