@@ -15,6 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local BeautyAndTheGalka = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+    local theEleventhsHour = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
 
     if player:hasKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS) then
         player:startEvent(10)
@@ -27,7 +28,11 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar("BeautyAndTheGalkaDenied") == 1 then
         player:startEvent(7)
     elseif BeautyAndTheGalka == QUEST_COMPLETED then
-        player:startEvent(12)
+        if theEleventhsHour == QUEST_ACCEPTED then
+            player:startEvent(46)
+        else
+            player:startEvent(12)
+        end
     else
         player:startEvent(11)
     end

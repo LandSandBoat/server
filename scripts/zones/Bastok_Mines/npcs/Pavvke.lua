@@ -10,55 +10,52 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    local count = trade:getItemCount()
+    local SilverTag = trade:hasItemQty(13116, 1)
+    local Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
 
-count = trade:getItemCount()
-SilverTag = trade:hasItemQty(13116, 1)
-Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
-
-    if (Fallen == 1 and SilverTag == true and count == 1) then
+    if Fallen == 1 and SilverTag == true and count == 1 then
         player:tradeComplete()
         player:startEvent(91)
-    elseif (Fallen == 2 and SilverTag == true and count == 1) then
+    elseif Fallen == 2 and SilverTag == true and count == 1 then
         player:tradeComplete()
         player:startEvent(92)
     end
-
 end
 
 entity.onTrigger = function(player, npc)
+    local Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+    local theEleventhsHour = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+    local pLevel = player:getMainLvl(player)
+    local pFame = player:getFameLevel(BASTOK)
 
-Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
-pLevel = player:getMainLvl(player)
-pFame = player:getFameLevel(BASTOK)
-
-    if (Fallen == 0    and pLevel >= 12 and pFame >= 2) then
+    if Fallen == 0 and pLevel >= 12 and pFame >= 2 then
         player:startEvent(90)
     else
-        player:startEvent(75)
+        if theEleventhsHour == QUEST_ACCEPTED then
+            player:startEvent(48)
+        else
+            player:startEvent(75)
+        end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 90) then
+    if csid == 90 then
         player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
-    elseif (csid == 91) then
+    elseif csid == 91 then
         player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
         player:addFame(BASTOK, 120)
         player:addGil(GIL_RATE*550)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*550)
-    elseif (csid == 92) then
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 550)
+    elseif csid == 92 then
         player:addFame(BASTOK, 8)
         player:addGil(GIL_RATE*550)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 550)
     end
-
 end
 
 return entity
