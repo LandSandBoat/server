@@ -13,36 +13,32 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
+    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL then
         local MissionStatus = player:getCharVar("MissionStatus")
 
-        if (MissionStatus == 6) then
+        if MissionStatus == 6 then
             player:startEvent(107)
-        elseif (MissionStatus == 7) then
+        elseif MissionStatus == 7 then
             player:showText(npc, ID.text.RESCUE_DRILL + 14)
-        elseif (MissionStatus == 8) then
+        elseif MissionStatus == 8 then
             player:showText(npc, ID.text.RESCUE_DRILL + 21)
-        elseif (MissionStatus >= 9) then
+        elseif MissionStatus >= 9 then
             player:showText(npc, ID.text.RESCUE_DRILL + 26)
         else
             player:showText(npc, ID.text.RESCUE_DRILL)
         end
     else
-        player:showText(npc, ID.text.RESCUE_DRILL)
+        player:showText(npc, ID.text.RESCUE_DRILL + 37)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 107) then
+    if csid == 107 then
         player:setCharVar("MissionStatus", 7)
     end
-
 end
 
 return entity
