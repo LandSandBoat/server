@@ -1,9 +1,8 @@
 -----------------------------------
 -- Area: Port Windurst
 --  NPC: Five of Clubs
--- Working 100%
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -11,7 +10,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(221)
+    if player:getQuestStatus(WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN) == QUEST_ACCEPTED then
+        player:startEvent(448)
+    else
+        player:startEvent(221)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
