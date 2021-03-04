@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
         player:setCharVar("AGreetingCardian_Event", 2)
         player:setCharVar("AGreetingCardian_timer", os.time() + 60)
-        player:needToZone(true) -- wait one day and zone after next step
+        player:needToZone(true) -- wait one minute and zone after this step
     elseif csid == 298 then
         player:setCharVar("AGreetingCardian_Event", 4)
     elseif csid == 303 then

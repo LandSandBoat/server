@@ -251,20 +251,18 @@ entity.onEventFinish = function(player, csid, option)
     -- MIHGO'S AMIGO
     elseif csid == 80 or csid == 81 then
         player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
-    elseif csid == 88 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO, {
-        gil = 200,
-        title = tpz.title.CAT_BURGLAR_GROUPIE,
-        fameArea = NORG,
-        fame = 60
-    }) then
+    elseif csid == 88 then
         player:confirmTrade()
+        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
+        player:addTitle(tpz.title.CAT_BURGLAR_GROUPIE)
+        player:addGil(GIL_RATE * 200)
+        player:addFame(NORG, 60)
         player:needToZone(true)
     elseif csid == 494 then
         player:confirmTrade()
         player:addTitle(tpz.title.CAT_BURGLAR_GROUPIE)
         player:addGil(GIL_RATE * 200)
         player:addFame(NORG, 30)
-
     elseif csid == 865 and option == 2 then
         player:addSpell(901, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 901)

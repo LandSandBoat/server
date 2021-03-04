@@ -470,7 +470,7 @@ bool CNavMesh::raycast(const position_t& start, const position_t& end, bool look
     if (distanceToWall < 0.01f && lookOffMesh)
     {
         // Overwrite epos with closest valid point
-        status = m_navMeshQuery.closestPointOnPolyBoundary(startRef, epos, epos);
+        status = m_navMeshQuery.closestPointOnPolyBoundary(endRef, epos, epos);
 
         if (dtStatusFailed(status))
         {
