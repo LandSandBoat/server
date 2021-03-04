@@ -2195,10 +2195,10 @@ uint8 CLuaBaseEntity::getRotPos()
 
 void CLuaBaseEntity::setPos(sol::variadic_args va)
 {
-    float x;
-    float y;
-    float z;
-    uint8 rotation;
+    float x = 0;
+    float y = 0;
+    float z = 0;
+    uint8 rotation = 0;
 
     if (va[0].is<sol::table>())
     {
@@ -2212,10 +2212,10 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
         }
         else // Raw table
         {
-            x        = table[0].get_or<float>(m_PBaseEntity->loc.p.x);
-            y        = table[1].get_or<float>(m_PBaseEntity->loc.p.y);
-            z        = table[2].get_or<float>(m_PBaseEntity->loc.p.z);
-            rotation = table[3].get_or<uint8>(m_PBaseEntity->loc.p.rotation);
+            x        = table[1].get_or<float>(m_PBaseEntity->loc.p.x);
+            y        = table[2].get_or<float>(m_PBaseEntity->loc.p.y);
+            z        = table[3].get_or<float>(m_PBaseEntity->loc.p.z);
+            rotation = table[4].get_or<uint8>(m_PBaseEntity->loc.p.rotation);
         }
     }
     else if (va[0].is<float>()) // Pure args
@@ -2224,6 +2224,11 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
         y        = va[1].get_type() == sol::type::number ? va[1].as<float>() : m_PBaseEntity->loc.p.y;
         z        = va[2].get_type() == sol::type::number ? va[2].as<float>() : m_PBaseEntity->loc.p.z;
         rotation = va[3].get_type() == sol::type::number ? va[3].as<uint8>() : m_PBaseEntity->loc.p.rotation;
+    }
+    else
+    {
+        ShowError("CLuaBaseEntity::setPos() - Received non-table or float value for first parameter!\n");
+        return;
     }
 
     // Set
