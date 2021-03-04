@@ -4,7 +4,8 @@
 -- Type: Standard NPC
 -- !pos -54.916 -7.499 114.855 238
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied By Brawndo)
+require("scripts/globals/keyitems")
+require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -12,7 +13,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(373)
+    local glyphHanger = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+
+    if glyphHanger == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.NOTES_FROM_IPUPU) then
+        player:startEvent(383)
+    else
+        player:startEvent(373)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
