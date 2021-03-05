@@ -3812,10 +3812,11 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
 
     auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
 
-    auto extraSize = extraTable.size();
+    auto extraVec  = extraTable.as<std::vector<uint8>>();
+    auto extraSize = extraVec.size();
     for (size_t i = 0; i < extraSize; i++)
     {
-        auto extra = (uint8)extraTable[i];
+        auto extra = extraVec[i];
         if ((slip->m_extra[i] & extra) != 0)
         {
             return extra;
@@ -3823,12 +3824,13 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
         slip->m_extra[i] |= extra;
     }
 
-    auto   storableSize = storableItemIdsTable.size();
+    auto   storableItemIdsVec  = storableItemIdsTable.as<std::vector<uint16>>();
+    auto   storableItemIdsSize = storableItemIdsVec.size();
     uint16 storedItemIds[7];
 
-    for (size_t i = 0; i < storableSize; i++)
+    for (size_t i = 0; i < storableItemIdsSize; i++)
     {
-        auto itemId = (uint16)storableItemIdsTable[i];
+        auto itemId = storableItemIdsVec[i];
         if (itemId != 0)
         {
             storedItemIds[i] = itemId;
