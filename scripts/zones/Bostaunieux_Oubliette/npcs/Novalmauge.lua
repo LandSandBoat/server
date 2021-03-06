@@ -30,7 +30,6 @@ local wsQuest = tpz.wsquest.spiral_hell
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
@@ -42,13 +41,10 @@ entity.onTrade = function(player, npc, trade)
 
     if player:getCharVar("troubleAtTheSluiceVar") == 2 and npcUtil.tradeHas(trade, 959) then -- Dahlia
         player:startEvent(17)
-        npc:wait()
     elseif player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 930) then -- Beastman Blood
         player:startEvent(12)
-        npc:wait()
     elseif wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-        npc:wait()
     end
 end
 
@@ -58,8 +54,6 @@ entity.onTrigger = function(player, npc)
     local troubleAtTheSluiceStat = player:getCharVar("troubleAtTheSluiceVar")
     local theHolyCrestStat = player:getCharVar("TheHolyCrest_Event")
     local theRumor = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_RUMOR)
-
-    npc:wait()
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
@@ -109,8 +103,6 @@ entity.onEventFinish = function(player, csid, option, npc)
     else
         tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SPIRAL_HELL_LEARNED)
     end
-
-    npc:wait(0)
 end
 
 return entity

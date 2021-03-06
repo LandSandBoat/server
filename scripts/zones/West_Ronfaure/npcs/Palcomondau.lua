@@ -307,7 +307,6 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
@@ -329,7 +328,6 @@ entity.onTrigger = function(player, npc)
     else
         player:showText(npc, ID.text.PALCOMONDAU_DIALOG)
     end
-    --npc:wait(1500)
 end
 
 entity.onEventUpdate = function(player, csid, option)

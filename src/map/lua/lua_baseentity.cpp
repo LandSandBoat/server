@@ -747,6 +747,8 @@ void CLuaBaseEntity::entityAnimationPacket(const char* command)
 void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
 {
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PNpc  = PChar->m_event.Target;
+
     if (!PChar)
     {
         ShowError("CLuaBaseEntity::startEvent: Could not start event, Base Entity is not a Character Entity.\n");
@@ -761,6 +763,16 @@ void CLuaBaseEntity::startEvent(uint32 EventID, sol::variadic_args va)
     if (PChar->PPet)
     {
         PChar->PPet->PAI->Disengage();
+    }
+
+    if (PNpc && PNpc->objtype == TYPE_NPC)
+    {
+        PNpc->SetLocalVar("pauseNPCPathing", 1);
+
+        if (PNpc->PAI->PathFind != nullptr)
+        {
+            PNpc->PAI->PathFind->Clear();
+        }
     }
 
     uint32 param0 = va.get_type(0) == sol::type::number ? va.get<uint32>(0) : 0;
@@ -1386,16 +1398,38 @@ bool CLuaBaseEntity::isFollowingPath()
  *  Function: clearPath()
  *  Purpose : Clears all path points and stops entity movement
  *  Example : npc:clearPath()
- *  Notes   :
+ *  Notes   : Optional argument to stop AI onPath ticks for an NPC
  ************************************************************************/
 
-void CLuaBaseEntity::clearPath()
+void CLuaBaseEntity::clearPath(sol::object const& pauseObj)
 {
     auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+    bool  pause   = pauseObj.is<bool>() ? pauseObj.as<bool>() : false;
+
+    // Stop onPath ticks for NPCs if this is true
+    if (m_PBaseEntity->objtype == TYPE_NPC && pause)
+    {
+        m_PBaseEntity->SetLocalVar("pauseNPCPathing", 1);
+    }
 
     if (PBattle->PAI->PathFind != nullptr)
     {
         PBattle->PAI->PathFind->Clear();
+    }
+}
+
+/************************************************************************
+ *  Function: continuePath()
+ *  Purpose : Resumes NPC pathing
+ *  Example : npc:continuePath()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::continuePath()
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        m_PBaseEntity->SetLocalVar("pauseNPCPathing", 0);
     }
 }
 
@@ -12571,6 +12605,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("pathThrough", CLuaBaseEntity::pathThrough);
     SOL_REGISTER("isFollowingPath", CLuaBaseEntity::isFollowingPath);
     SOL_REGISTER("clearPath", CLuaBaseEntity::clearPath);
+    SOL_REGISTER("continuePath", CLuaBaseEntity::continuePath);
     SOL_REGISTER("checkDistance", CLuaBaseEntity::checkDistance);
     SOL_REGISTER("wait", CLuaBaseEntity::wait);
 

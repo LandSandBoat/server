@@ -114,7 +114,8 @@ public:
     void  pathTo(float x, float y, float z, sol::object const& flags);             // set new path to point without changing action
     bool  pathThrough(sol::table const& pointsTable, sol::object const& flagsObj); // walk at normal speed through the given points
     bool  isFollowingPath();                                                       // checks if the entity is following a path
-    void  clearPath();                                                             // removes current pathfind and stops moving
+    void  clearPath(sol::object const& pauseObj);                                  // removes current pathfind and stops moving
+    void  continuePath();                                                          // resumes previous pathfind if it was paused
     float checkDistance(sol::variadic_args va);                                    // Check Distacnce and returns distance number
     void  wait(sol::object const& milliseconds);                                   // make the npc wait a number of ms and then back into roam
     // int32 WarpTo(lua_Stat* L);           // warp to the given point -- These don't exist, breaking them just in case someone uncomments

@@ -1739,6 +1739,11 @@ namespace luautils
         std::optional<CLuaBaseEntity> optTarget = std::nullopt;
         if (PChar->m_event.Target)
         {
+            if (PChar->m_event.Target->objtype == TYPE_NPC)
+            {
+                PChar->m_event.Target->SetLocalVar("pauseNPCPathing", 0);
+            }
+
             optTarget = CLuaBaseEntity(PChar->m_event.Target);
         }
 
