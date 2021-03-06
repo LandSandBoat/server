@@ -331,10 +331,16 @@ public:
     void   setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission log extra data to correctly track progress in branching missions.
     uint32 getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj);                  // Gets mission log extra data.
 
-    void setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
-    bool getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
-    bool setEminenceProgress(uint16 recordID, uint32 progress, sol::object const& arg2);          // Sets progress on a record of eminence
-    auto getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
+    void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
+    bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
+    uint16 getNumEminenceCompleted();                                                               // Get total count of records completed for player
+    bool   setEminenceProgress(uint16 recordID, uint32 progress, sol::object const& arg2);          // Sets progress on a record of eminence
+    auto   getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
+    bool   hasEminenceRecord(uint16 recordID);                                                      // Check if record is active
+    void   triggerRoeEvent(uint8 eventNum, sol::object const& reqTable);
+    void   setUnityLeader(uint8 leaderID);                                                          // Sets a player's unity leader
+    uint8  getUnityLeader();                                                                        // Returns player's unity leader
+    auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>;                      // Returns current rank of player's unity
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log

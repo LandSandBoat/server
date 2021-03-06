@@ -2,6 +2,7 @@
 -- Records of Eminence
 -----------------------------------
 require("scripts/globals/npc_util")
+require("scripts/globals/msg")
 require("scripts/globals/quests")
 -----------------------------------
 
@@ -9,10 +10,29 @@ tpz = tpz or {}
 tpz.roe = tpz.roe or {}
 
 -----------------------------------
--- triggers
+-- Leaders
+-----------------------------------
+tpz.roe.leaders =
+{
+    NONE              = 0,
+    PIEUJE            = 1,
+    AYAME             = 2,
+    INVINCIBLE_SHIELD = 3,
+    APURURU           = 4,
+    MAAT              = 5,
+    ALDO              = 6,
+    JAKOH_WAHCONDALO  = 7,
+    NAJA_SALAHEEM     = 8,
+    FLAVIRIA          = 9,
+    YORAN_ORAN        = 10,
+    SYLVIE            = 11,
+}
+
+-----------------------------------
+-- Triggers
 -----------------------------------
 
-local triggers =
+tpz.roe.triggers =
 {
     mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
     wSkillUse = 2,          -- Player Weapon skill used
@@ -26,10 +46,17 @@ local triggers =
     levelUp = 10,           -- Player levelup
     questComplete = 11,     -- Player completes quest
     missionComplete = 12,   -- Player completes mission
+    helmSuccess = 13,       -- Player has a successful harvesting event
+    chocoboDigSuccess = 14, -- Player successfully chocobo digs
+    unityChat = 15,         -- Player uses Unity Chat
+    magicBurst = 16,        -- Player performs a Magic Burst
+    healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
 }
 
+local triggers = tpz.roe.triggers
+
 -----------------------------------
--- checks
+-- Checks
 -----------------------------------
 
 local checks =
@@ -78,6 +105,12 @@ local checks =
     end,
     missionComplete = function(self, player, params) -- Player has {NATION, MISSION} marked complete
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
+    end,
+    unityLeader = function(self, player, params) -- Player is a member of the specified Unity (1..11)
+        return player:getUnityLeader() == self.reqs.unityLeader
+    end,
+    skillType = function(self, player, params) -- Generic numeric check, used for synthSuccess and helmSuccess
+        return params.skillType == self.reqs.skillType and true or false
     end,
 }
 
@@ -171,11 +204,11 @@ local function completeRecord(player, record)
     if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
         local bonus = 1
         if player:getEminenceCompleted(record) then
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE)
+            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE, CAP_CURRENCY_SPARKS)
             player:messageBasic(tpz.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         else
             bonus = 3
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE)
+            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE, CAP_CURRENCY_SPARKS)
             player:messageBasic(tpz.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         end
     end
@@ -195,8 +228,31 @@ local function completeRecord(player, record)
         player:addExp(rewards["xp"] * ROE_EXP_RATE)
     end
 
+    if
+        player:getUnityLeader() > 0 and
+        rewards["accolades"] ~= nil and
+        type(rewards["accolades"]) == "number"
+    then
+        local bonusAccoladeRate = 1.0
+
+        if record ~= 5 then -- Do not grant a bonus for All for One
+            bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
+        end
+
+        player:addCurrency("unity_accolades", math.floor(rewards["accolades"] * bonusAccoladeRate), CAP_CURRENCY_ACCOLADES)
+        player:messageBasic(tpz.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
+    end
+
     if rewards["keyItem"] ~= nil then
         npcUtil.giveKeyItem(player, rewards["keyItem"])
+    end
+
+    -- Workaround for Hidden Record #4085 (10 RoE Objectives Completed)
+    if
+        not player:getEminenceCompleted(4085) and
+        player:getNumEminenceCompleted() >= 10
+    then
+        player:setEminenceCompleted(4085)
     end
 
     return true

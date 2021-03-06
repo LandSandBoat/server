@@ -26,6 +26,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "alliance.h"
 #include "linkshell.h"
+#include "unitychat.h"
 #include "party.h"
 #include "status_effect_container.h"
 
@@ -148,6 +149,18 @@ namespace message
                     CBasicPacket* newPacket = new CBasicPacket();
                     memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                     PLinkshell->PushPacket(ref<uint32>((uint8*)extra->data(), 4), newPacket);
+                }
+                break;
+            }
+            case MSG_CHAT_UNITY:
+            {
+                uint32           leader = ref<uint32>((uint8*)extra->data(), 0);
+                CUnityChat* PUnityChat  = unitychat::GetUnityChat(leader);
+                if (PUnityChat)
+                {
+                    CBasicPacket* newPacket = new CBasicPacket();
+                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
+                    PUnityChat->PushPacket(ref<uint32>((uint8*)extra->data(), 4), newPacket);
                 }
                 break;
             }

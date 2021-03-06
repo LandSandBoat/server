@@ -41,6 +41,7 @@
 #include "spell.h"
 #include "status_effect_container.h"
 #include "treasure_pool.h"
+#include "unitychat.h"
 #include "vana_time.h"
 #include "zone.h"
 #include "zone_entities.h"
@@ -979,6 +980,11 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     if (PChar->PLinkshell2 != nullptr)
     {
         PChar->PLinkshell2->DelMember(PChar);
+    }
+
+    if (PChar->PUnityChat != nullptr)
+    {
+        PChar->PUnityChat->DelMember(PChar);
     }
 
     if (PChar->PTreasurePool != nullptr) // TODO: условие для устранения проблем с MobHouse, надо блин решить ее раз и навсегда

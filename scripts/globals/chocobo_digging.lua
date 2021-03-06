@@ -3,6 +3,7 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
+require("scripts/globals/roe")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -977,6 +978,8 @@ tpz.chocoboDig.start = function(player, precheck)
                 else
                     player:messageSpecial(text.DIG_THROW_AWAY, itemId)
                 end
+
+                player:triggerRoeEvent(tpz.roe.triggers.chocoboDigSuccess)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else

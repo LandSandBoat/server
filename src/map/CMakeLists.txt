@@ -93,6 +93,8 @@ set(SOURCES
     transport.h
     treasure_pool.cpp
     treasure_pool.h
+    unitychat.cpp
+    unitychat.h
     universal_container.cpp
     universal_container.h
     vana_time.cpp

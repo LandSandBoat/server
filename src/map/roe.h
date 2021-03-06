@@ -40,19 +40,39 @@ class CBaseEntity;
 
 enum ROE_EVENT
 {
-    ROE_MOBKILL          = 1,
-    ROE_WSKILL_USE       = 2,
-    ROE_LOOTITEM         = 3,
-    ROE_SYNTHSUCCESS     = 4,
-    ROE_DMGTAKEN         = 5,
-    ROE_DMGDEALT         = 6,
-    ROE_EXPGAIN          = 7,
-    ROE_HEALALLY         = 8,
-    ROE_BUFFALLY         = 9,
-    ROE_LEVELUP          = 10,
-    ROE_QUEST_COMPLETE   = 11,
-    ROE_MISSION_COMPLETE = 12,
+    ROE_MOBKILL              = 1,
+    ROE_WSKILL_USE           = 2,
+    ROE_LOOTITEM             = 3,
+    ROE_SYNTHSUCCESS         = 4,
+    ROE_DMGTAKEN             = 5,
+    ROE_DMGDEALT             = 6,
+    ROE_EXPGAIN              = 7,
+    ROE_HEALALLY             = 8,
+    ROE_BUFFALLY             = 9,
+    ROE_LEVELUP              = 10,
+    ROE_QUEST_COMPLETE       = 11,
+    ROE_MISSION_COMPLETE     = 12,
+    ROE_HELMSUCCESS          = 13,
+    ROE_CHOCOBO_DIG_SUCCESS  = 14,
+    ROE_UNITY_CHAT           = 15,
+    ROE_MAGICBURST           = 16,
+    ROE_HEAL_UNITYALLY       = 17,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
+};
+
+const uint16 ROE_TRUST_ID[11] =
+{
+     953, // Pieuje
+    1005, // Ayame
+     954, // Invincible Shield
+     955, // Apururu
+    1006, // Maat
+    1007, // Aldo
+     956, // Jakoh Wahcondalo
+    1008, // Naja Salaheem
+     957, // Flaviria
+     980, // Yoran-Oran
+     981  // Sylvie
 };
 
 typedef std::array<uint16, 6>            RecordTimetable_D;
@@ -68,8 +88,11 @@ struct RoeSystemData
     std::vector<uint16>      DailyRecordIDs;
     std::bitset<4096>        WeeklyRecords;
     std::vector<uint16>      WeeklyRecordIDs;
+    std::bitset<4096>        UnityRecords;
+    std::vector<uint16>      UnityRecordIDs;
     std::bitset<4096>        TimedRecords;
     std::array<uint32, 4096> NotifyThresholds;
+    uint8                    unityLeaderRank[11]; // 0..10 for Unity Leader, stores rank position
 
     RoeSystemData()
     {
@@ -114,15 +137,16 @@ namespace roeutils
 {
     extern RoeSystemData RoeSystem;
 
-    void  init();
-    void  ParseRecords(sol::table const& records_table);
-    void  ParseTimedSchedule(sol::table const& schedule_table);
+    void init();
+    void ParseRecords(sol::table const& records_table);
+    void ParseTimedSchedule(sol::table const& schedule_table);
 
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload);
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagram& payload);
 
     void   SetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID, bool newStatus);
     bool   GetEminenceRecordCompletion(CCharEntity* PChar, uint16 recordID);
+    uint16 GetNumEminenceCompleted(CCharEntity* PChar);
     bool   AddEminenceRecord(CCharEntity* PChar, uint16 recordID);
     bool   DelEminenceRecord(CCharEntity* PChar, uint16 recordID);
     bool   HasEminenceRecord(CCharEntity* PChar, uint16 recordID);
@@ -137,6 +161,9 @@ namespace roeutils
     void CycleDailyRecords();
     void ClearWeeklyRecords(CCharEntity* PChar);
     void CycleWeeklyRecords();
+    void CycleUnityRankings();
+    void UpdateUnityRankings();
+    void UpdateUnityTrust(CCharEntity* PChar, bool sendUpdate = false);
 
     uint16 GetActiveTimedRecord();
     void   AddActiveTimedRecord(CCharEntity* PChar);

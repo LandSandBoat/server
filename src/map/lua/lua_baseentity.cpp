@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -5866,6 +5866,15 @@ bool CLuaBaseEntity::getEminenceCompleted(uint16 recordID)
     return roeutils::GetEminenceRecordCompletion(PChar, recordID);
 }
 
+uint16 CLuaBaseEntity::getNumEminenceCompleted()
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    return roeutils::GetNumEminenceCompleted(PChar);
+}
+
 /************************************************************************
  *  Function: setEminenceProgress(record, progress, total)
  *  Purpose :
@@ -5924,6 +5933,115 @@ std::optional<uint32> CLuaBaseEntity::getEminenceProgress(uint16 recordID)
     }
 
     // TODO: Verify that 0-return is acceptable in previous nil-cases (Its not)
+    return std::nullopt;
+}
+
+/************************************************************************
+ *  Function: hasEminenceRecord(record)
+ *  Purpose : Returns true if the record is active
+ *  Example : player:hasEminenceRecord(19)
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEminenceRecord(uint16 recordID)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return roeutils::HasEminenceRecord(PChar, recordID);
+}
+
+/************************************************************************
+ *  Function: triggerRoeEvent(eventID, {["reqName"] = value})
+ *  Purpose : Triggers roeutils::event()
+ *  Example : player:triggerRoeEvent(19)
+ *  Note    : This only supports int/string datagram events at the moment!
+ ************************************************************************/
+
+void CLuaBaseEntity::triggerRoeEvent(uint8 eventNum, sol::object const& reqTable)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    RoeDatagramList roeEventData({});
+    ROE_EVENT       eventID = static_cast<ROE_EVENT>(eventNum);
+
+    if (reqTable.get_type() == sol::type::table)
+    {
+        for (const auto& kv : reqTable.as<sol::table>())
+        {
+            if (kv.first.get_type() == sol::type::string)
+            {
+                if (kv.second.get_type() == sol::type::number)
+                {
+                    roeEventData.emplace_back(RoeDatagram(kv.first.as<std::string>(), kv.second.as<uint32>()));
+                }
+                else if (kv.second.get_type() == sol::type::string)
+                {
+                    roeEventData.emplace_back(RoeDatagram(kv.first.as<std::string>(), kv.second.as<std::string>()));
+                }
+            }
+        }
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    roeutils::event(eventID, PChar, roeEventData);
+}
+
+/************************************************************************
+ *  Function: setUnityLeader(leaderID)
+ *  Purpose : Sets a player's Unity Leader
+ *  Example : player:setUnityLeader(4)
+ ************************************************************************/
+
+void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    charutils::SetUnityLeader(PChar, leaderID);
+
+    // Update Unity Trust, assumes that values have been cleared
+    if (PChar->profile.unity_leader > 0)
+    {
+        uint8 oldUnity = PChar->profile.unity_leader - 1;
+        charutils::delSpell(PChar, ROE_TRUST_ID[oldUnity]);
+        charutils::DeleteSpell(PChar, ROE_TRUST_ID[oldUnity]);
+    }
+
+    roeutils::UpdateUnityTrust(PChar);
+}
+
+/************************************************************************
+ *  Function: getUnityLeader()
+ *  Purpose : Gets a player's Unity Leader
+ *  Example : player:getUnityLeader()
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getUnityLeader()
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return PChar->profile.unity_leader;
+}
+
+/************************************************************************
+ *  Function: getUnityRank()
+ *  Purpose : Gets the current rank of the player's Unity, if a parameter
+ *          : is specified, returns the rank of that unity
+ *  Example : player:getUnityRank()
+ ************************************************************************/
+
+std::optional<uint8> CLuaBaseEntity::getUnityRank(sol::object const& unityObj)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    uint8 unity = (unityObj != sol::nil) ? unityObj.as<uint8>() : PChar->profile.unity_leader;
+
+    if (unity >= 1 && unity <= 11)
+    {
+        return roeutils::RoeSystem.unityLeaderRank[unity - 1];
+    }
+
     return std::nullopt;
 }
 
@@ -12653,9 +12771,15 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMissionLogEx", CLuaBaseEntity::setMissionLogEx);
     SOL_REGISTER("getMissionLogEx", CLuaBaseEntity::getMissionLogEx);
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);
+    SOL_REGISTER("getNumEminenceCompleted", CLuaBaseEntity::getNumEminenceCompleted);
     SOL_REGISTER("setEminenceCompleted", CLuaBaseEntity::setEminenceCompleted);
     SOL_REGISTER("getEminenceProgress", CLuaBaseEntity::getEminenceProgress);
     SOL_REGISTER("setEminenceProgress", CLuaBaseEntity::setEminenceProgress);
+    SOL_REGISTER("hasEminenceRecord", CLuaBaseEntity::hasEminenceRecord);
+    SOL_REGISTER("triggerRoeEvent", CLuaBaseEntity::triggerRoeEvent);
+    SOL_REGISTER("setUnityLeader", CLuaBaseEntity::setUnityLeader);
+    SOL_REGISTER("getUnityLeader", CLuaBaseEntity::getUnityLeader);
+    SOL_REGISTER("getUnityRank", CLuaBaseEntity::getUnityRank);
 
     SOL_REGISTER("addAssault", CLuaBaseEntity::addAssault);
     SOL_REGISTER("delAssault", CLuaBaseEntity::delAssault);
