@@ -362,7 +362,8 @@ void CAIContainer::Tick(time_point _tick)
     ActionQueue.checkAction(_tick);
 
     // check pathfinding only if there is no controller to do it
-    if (!Controller && CanFollowPath())
+    bool isPathingPaused = PEntity->GetLocalVar("pauseNPCPathing");
+    if (!Controller && CanFollowPath() && !isPathingPaused)
     {
         PathFind->FollowPath();
         if (PathFind->OnPoint())
