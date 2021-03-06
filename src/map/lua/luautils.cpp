@@ -1558,12 +1558,13 @@ namespace luautils
         }
 
         auto name = (const char*)PChar->loc.zone->GetName();
+        auto zoneId = (const uint16*)PChar->loc.zone->GetID();
 
         sol::function onRegionLeave;
-        if (PChar->PInstance)
+        if (PChar->PInstance && zoneId == (const uint16*)PChar->PInstance->GetZone()->GetID())
         {
             auto instance_name = (const char*)PChar->PInstance->GetName();
-            onRegionLeave      = lua["tpz"]["zones"][name]["instance"][instance_name]["onRegionLeave"];
+            onRegionLeave = lua["tpz"]["zones"][name]["instance"][instance_name]["onRegionLeave"];
         }
         else
         {

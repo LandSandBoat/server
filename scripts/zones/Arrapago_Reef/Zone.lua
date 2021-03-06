@@ -46,13 +46,13 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN) and player:getCharVar("AhtUrganStatus") == 0) then
+    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN) and player:getCharVar("AhtUrganStatus") == 0 then
         player:startEvent(8)
-    elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PREVALENCE_OF_PIRATES and player:getCharVar("AhtUrganStatus") == 1) then
+    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.PREVALENCE_OF_PIRATES and player:getCharVar("AhtUrganStatus") == 1 then
         player:startEvent(14)
-    elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.TESTING_THE_WATERS and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)) then
+    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.TESTING_THE_WATERS and player:hasKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN) then
         player:startEvent(15)
-    elseif (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and player:getCharVar("AgainstAllOdds") == 1) then
+    elseif player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_ACCEPTED and player:getCharVar("AgainstAllOdds") == 1 then
         player:startEvent(237)
     end
 end
@@ -61,34 +61,34 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 8) then
+    if csid == 8 then
         player:setCharVar("AhtUrganStatus", 1)
         player:startEvent(34, 1, 1, 1, 1, 1, 1, 1, 1)
-    elseif (csid == 9) then
+    elseif csid == 9 then
         player:setCharVar("AhtUrganStatus", 3)
         player:setPos(0, 0, 0, 0, 53)
-    elseif (csid == 13) then
+    elseif csid == 13 then
         player:setCharVar("AhtUrganStatus", 1)
-    elseif (csid == 14) then
+    elseif csid == 14 then
         player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PREVALENCE_OF_PIRATES)
         player:setCharVar("AhtUrganStatus", 0)
         player:addKeyItem(tpz.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERIQIA_ASSAULT_AREA_ENTRY_PERMIT)
         player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SHADES_OF_VENGEANCE)
-    elseif (csid == 15) then
+    elseif csid == 15 then
         player:setCharVar("AhtUrganStatus", 1)
         player:setPos(0, 0, 0, 0, 57)
-    elseif (csid == 34 and player:getCharVar("AhtUrganStatus") == 1) then
+    elseif csid == 34 and player:getCharVar("AhtUrganStatus") == 1 then
         player:startEvent(35)
-    elseif (csid == 90) then -- enter instance: the ashu talif
-        player:setPos(0, 0, 0, 0, 60)
-    elseif (csid == 108) then -- enter instance: illrusi atoll
+    elseif csid == 108 then -- enter instance: illrusi atoll
         player:setPos(0, 0, 0, 0, 55)
-    elseif (csid == 237) then
+    elseif csid == 222 then -- Enter instance: Black coffin
+        player:setPos(0, 0, 0, 0, 60)
+    elseif csid == 237 then
         player:startEvent(240)
     elseif csid == 238 then
         npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS, { item=15266, var="AgainstAllOdds"})
-    elseif (csid == 240) then
+    elseif csid == 240 then
         player:setCharVar("AgainstAllOdds", 2)
     end
 end
