@@ -20,13 +20,11 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
-
 
 entity.onTrade = function(player, npc, trade)
     -- item IDs
@@ -44,9 +42,9 @@ entity.onTrade = function(player, npc, trade)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(4600, 1)
-    local badtrade = (trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(1147, 1))
+    local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(1147, 1)
 
-    if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
+    if OpoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 9 or failed == 10 then
             if goodtrade then
                 player:startEvent(241)
@@ -63,18 +61,16 @@ entity.onTrigger = function(player, npc)
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
 
-    if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
+    if OpoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(206)
-            npc:wait()
-        elseif (progress == 9 or failed == 10) then
+        elseif progress == 9 or failed == 10 then
                 player:startEvent(212)  -- asking for lucky egg
-        elseif (progress >= 10 or failed >= 11) then
+        elseif progress >= 10 or failed >= 11 then
             player:startEvent(250) -- happy with lucky egg
         end
     else
         player:startEvent(206)
-        npc:wait()
     end
 end
 
@@ -82,10 +78,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-
-    if (csid == 241) then    -- correct trade, finished quest and receive opo opo crown and 3 pamamas
+    if csid == 241 then    -- correct trade, finished quest and receive opo opo crown and 3 pamamas
         local FreeSlots = player:getFreeSlotsCount()
-        if (FreeSlots >= 4) then
+        if FreeSlots >= 4 then
             player:tradeComplete()
             player:addFame(KAZHAM, 75)
             player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
@@ -100,11 +95,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         end
-    elseif (csid == 238) then              -- wrong trade, restart at first opo
+    elseif csid == 238 then              -- wrong trade, restart at first opo
         player:setCharVar("OPO_OPO_FAILED", 1)
         player:setCharVar("OPO_OPO_RETRY", 10)
-    else
-        npc:wait(0)
     end
 end
 

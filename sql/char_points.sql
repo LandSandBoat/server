@@ -121,6 +121,8 @@ CREATE TABLE `char_points` (
   `light_crystals` smallint(5) unsigned NOT NULL DEFAULT 0,
   `dark_crystals` smallint(5) unsigned NOT NULL DEFAULT 0,
   `deeds` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `current_accolades` int(10) unsigned NOT NULL DEFAULT 0,
+  `prev_accolades` int(10) unsigned NOT NULL DEFAULT 0,
 
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

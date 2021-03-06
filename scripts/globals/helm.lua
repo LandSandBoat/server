@@ -9,6 +9,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
+require("scripts/globals/roe")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
@@ -1422,6 +1423,8 @@ tpz.helm.onTrade = function(player, npc, trade, helmType, csid)
             if uses == 0 then
                 movePoint(npc, zoneId, info)
             end
+
+            player:triggerRoeEvent(tpz.roe.triggers.helmSuccess, {["skillType"] = helmType})
         end
 
         -- quest stuff

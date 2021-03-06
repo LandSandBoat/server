@@ -152,13 +152,11 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
-
 
 entity.onTrade = function(player, npc, trade)
     -- item IDs
@@ -176,9 +174,9 @@ entity.onTrade = function(player, npc, trade)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(1157, 1)
-    local badtrade = (trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(1147, 1) or trade:hasItemQty(4600, 1))
+    local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(1147, 1) or trade:hasItemQty(4600, 1)
 
-    if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
+    if OpoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 3 or failed == 4 then
             if goodtrade then
                 player:startEvent(222)
@@ -195,18 +193,16 @@ entity.onTrigger = function(player, npc)
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
 
-    if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
+    if OpoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(200)
-            npc:wait()
-        elseif (progress == 3 or failed == 4) then
-                player:startEvent(210)  -- asking for sands of silence
-        elseif (progress >= 4 or failed >= 5) then
+        elseif progress == 3 or failed == 4 then
+            player:startEvent(210)  -- asking for sands of silence
+        elseif progress >= 4 or failed >= 5 then
             player:startEvent(245) -- happy with sands of silence
         end
     else
         player:startEvent(200)
-        npc:wait()
     end
 end
 
@@ -214,8 +210,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-
-    if (csid == 222) then    -- correct trade, onto next opo
+    if csid == 222 then    -- correct trade, onto next opo
         if player:getCharVar("OPO_OPO_PROGRESS") == 3 then
             player:tradeComplete()
             player:setCharVar("OPO_OPO_PROGRESS", 4)
@@ -223,11 +218,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:setCharVar("OPO_OPO_FAILED", 5)
         end
-    elseif (csid == 232) then              -- wrong trade, restart at first opo
+    elseif csid == 232 then              -- wrong trade, restart at first opo
         player:setCharVar("OPO_OPO_FAILED", 1)
         player:setCharVar("OPO_OPO_RETRY", 4)
-    else
-        npc:wait(0)
     end
 end
 

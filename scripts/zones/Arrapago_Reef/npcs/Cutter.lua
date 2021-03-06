@@ -46,7 +46,7 @@ entity.onEventUpdate = function(player, csid, option, target)
         player:createInstance(53, 60)
         player:setLocalVar("theblackcoffinfight", 0)
 
-        elseif player:getLocalVar("againstalloddsfight") == 1 then
+    elseif player:getLocalVar("againstalloddsfight") == 1 then
         if (party ~= nil) then
             for i, v in pairs(party) do
                 if v:getZoneID() == player:getZoneID() and v:checkDistance(player) > 50 then
@@ -63,23 +63,29 @@ entity.onEventUpdate = function(player, csid, option, target)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    if (csid == 221 and option == 4) or csid == 90 then
+    if csid == 221 and option == 4 then
+        local party = player:getParty()
+        if (party ~= nil) then
+            for i, v in pairs(party) do
+                if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
+                    v:startEvent(222, 6) -- may be wrong id but better than 90
+                end
+            end
+        end
         player:setPos(0, 0, 0, 0, 60)
     end
 end
 
 entity.onInstanceCreated = function(player, target, instance)
-    if (instance) then
+    if instance then
         player:setInstance(instance)
         player:instanceEntry(target, 4)
-
         local party = player:getParty()
-        if (party ~= nil) then
+        if party ~= nil then
             for i, v in pairs(party) do
                 if v:getID() ~= player:getID() and v:getZoneID() == player:getZoneID() then
                     v:setInstance(instance)
-                    v:startEvent(90) -- wrong csid, yet better than nothing
+                    v:instanceEntry(target, 4)
                 end
             end
         end

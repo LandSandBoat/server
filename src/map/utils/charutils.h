@@ -107,8 +107,8 @@ namespace charutils
     void   UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemWeapon* PItem);
     void   UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
 
-    bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID); // проверяем наличие ключевого предмета
-    bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID); // проверяем, было ли описание ключевого предмета прочитано
+    bool hasKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // проверяем наличие ключевого предмета
+    bool seenKeyItem(CCharEntity* PChar, uint16 KeyItemID);   // проверяем, было ли описание ключевого предмета прочитано
     void unseenKeyItem(CCharEntity* PChar, uint16 KeyItemID); // Attempt to remove keyitem from seen list
     void addKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // добавляем ключевой предмет
     void delKeyItem(CCharEntity* PChar, uint16 KeyItemID);    // улаляем ключевой предмет
@@ -160,20 +160,20 @@ namespace charutils
     void SaveCharInventoryCapacity(CCharEntity* PChar); // Save Character inventory capacity
     void SaveSpell(CCharEntity* PChar, uint16 spellID); // сохраняем выученные заклинания
     void DeleteSpell(CCharEntity* PChar, uint16 spellID);
-    void SaveLearnedAbilities(CCharEntity* PChar); // saved learned abilities (corsair rolls)
-    void SaveTitles(CCharEntity* PChar);           // сохраняем заслуженные звания
-    void SaveCharStats(CCharEntity* PChar);       // сохраняем флаги, текущие значения жихней, маны и профессий
-    void SaveCharGMLevel(CCharEntity* PChar);     // saves the char's gm level and nameflags
-    void SaveMentorFlag(CCharEntity* PChar);      // saves the char's mentor flag
-    void SaveMenuConfigFlags(CCharEntity* PChar); // saves the char's unnamed flags
-    void SaveCharNation(CCharEntity* PChar);      // Save the character's nation of allegiance.
-    void SaveCampaignAllegiance(CCharEntity* PChar);        // Save the character's campaign allegiance.
-    void SaveCharMoghancement(CCharEntity* PChar);          // Save the character's current moghancement
-    void SaveCharSkills(CCharEntity* PChar, uint8 skillID); // сохраняем указанный skill персонажа
-    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type);      // Homepoints, outposts, etc
-    void SaveDeathTime(CCharEntity* PChar);                 // Saves when this character last died.
-    void SavePlayTime(CCharEntity* PChar);                  // Saves this characters total play time.
-    bool hasMogLockerAccess(CCharEntity* PChar);            // true if have access, false otherwise.
+    void SaveLearnedAbilities(CCharEntity* PChar);             // saved learned abilities (corsair rolls)
+    void SaveTitles(CCharEntity* PChar);                       // сохраняем заслуженные звания
+    void SaveCharStats(CCharEntity* PChar);                    // сохраняем флаги, текущие значения жихней, маны и профессий
+    void SaveCharGMLevel(CCharEntity* PChar);                  // saves the char's gm level and nameflags
+    void SaveMentorFlag(CCharEntity* PChar);                   // saves the char's mentor flag
+    void SaveMenuConfigFlags(CCharEntity* PChar);              // saves the char's unnamed flags
+    void SaveCharNation(CCharEntity* PChar);                   // Save the character's nation of allegiance.
+    void SaveCampaignAllegiance(CCharEntity* PChar);           // Save the character's campaign allegiance.
+    void SaveCharMoghancement(CCharEntity* PChar);             // Save the character's current moghancement
+    void SaveCharSkills(CCharEntity* PChar, uint8 skillID);    // сохраняем указанный skill персонажа
+    void SaveTeleport(CCharEntity* PChar, TELEPORT_TYPE type); // Homepoints, outposts, etc
+    void SaveDeathTime(CCharEntity* PChar);                    // Saves when this character last died.
+    void SavePlayTime(CCharEntity* PChar);                     // Saves this characters total play time.
+    bool hasMogLockerAccess(CCharEntity* PChar);               // true if have access, false otherwise.
 
     float AddExpBonus(CCharEntity* PChar, float exp);
 
@@ -195,13 +195,14 @@ namespace charutils
 
     bool IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget);
 
-    void        AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max = INT32_MAX);
-    void        SetPoints(CCharEntity* PChar, const char* type, int32 amount);
-    int32       GetPoints(CCharEntity* PChar, const char* type);
-    std::string GetConquestPointsName(CCharEntity* PChar);
-    void        SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp);
-    void        HomePoint(CCharEntity* PChar);
-    bool        AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
+    void  AddPoints(CCharEntity* PChar, const char* type, int32 amount, int32 max = INT32_MAX);
+    void  SetPoints(CCharEntity* PChar, const char* type, int32 amount);
+    int32 GetPoints(CCharEntity* PChar, const char* type);
+    void  SetUnityLeader(CCharEntity* PChar, uint8 leaderID);
+    auto  GetConquestPointsName(CCharEntity* PChar) -> std::string;
+    void  SendToZone(CCharEntity* PChar, uint8 type, uint64 ipp);
+    void  HomePoint(CCharEntity* PChar);
+    bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
     int32 GetCharVar(CCharEntity* PChar, const char* var);
     void  SetCharVar(CCharEntity* PChar, const char* var, int32 value);

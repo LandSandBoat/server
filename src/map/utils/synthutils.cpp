@@ -990,7 +990,25 @@ namespace synthutils
             {
                 PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_SUCCESS, itemID, quantity));
             }
-            roeutils::event(ROE_EVENT::ROE_SYNTHSUCCESS, PChar, RoeDatagram("itemid", itemID));
+
+            // Calculate what craft this recipe "belongs" to based on highest skill required
+            uint32 skillType = 0;
+            uint32 highestSkill = 0;
+            for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+            {
+                uint8 skillRequired = PChar->CraftContainer->getQuantity(skillID - 40);
+                if (skillRequired > highestSkill)
+                {
+                    skillType = skillID;
+                    highestSkill = skillRequired;
+                }
+            }
+
+            RoeDatagram roeItemId = RoeDatagram("itemid", itemID);
+            RoeDatagram roeSkillType = RoeDatagram("skillType", skillType);
+            RoeDatagramList roeSynthResult({roeItemId, roeSkillType});
+
+            roeutils::event(ROE_EVENT::ROE_SYNTHSUCCESS, PChar, roeSynthResult);
         }
 
         doSynthSkillUp(PChar);

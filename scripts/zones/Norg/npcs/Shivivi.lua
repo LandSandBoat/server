@@ -57,12 +57,12 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    -- entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
     tpz.path.patrol(npc, path)
 end
+
 entity.onTrade = function(player, npc, trade)
 end
 
@@ -70,26 +70,22 @@ entity.onTrigger = function(player, npc)
     DampScroll = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     mLvl = player:getMainLvl()
 
-    if (DampScroll == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true) then
+    if DampScroll == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true then
         player:startEvent(31, 1210) -- Start the quest
-    elseif (DampScroll == QUEST_ACCEPTED) then
+    elseif DampScroll == QUEST_ACCEPTED then
         player:startEvent(32) -- Reminder Dialogue
     else
         player:startEvent(85)
     end
-
-    npc:wait(0)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if (csid == 31) then
+    if csid == 31 then
         player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
     end
-
-    npc:wait(0)
 end
 
 return entity

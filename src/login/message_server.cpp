@@ -123,6 +123,13 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             ret = Sql_Query(ChatSqlHandle, query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0));
             break;
         }
+        case MSG_CHAT_UNITY:
+        {
+            const char* query = "SELECT server_addr, server_port FROM accounts_sessions "
+                                "WHERE unitychat = %d GROUP BY server_addr, server_port;";
+            ret = Sql_Query(ChatSqlHandle, query, ref<uint32>((uint8*)extra->data(), 0), ref<uint32>((uint8*)extra->data(), 0));
+            break;
+        }
         case MSG_CHAT_YELL:
         {
             const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE misc & 1024 GROUP BY zoneip, zoneport;";

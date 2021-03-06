@@ -211,7 +211,6 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE));
                 return false;
             }
-            roeutils::event(ROE_WSKILL_USE, PChar, RoeDatagramList{});
 
             m_lastWeaponSkill = PWeaponSkill;
 

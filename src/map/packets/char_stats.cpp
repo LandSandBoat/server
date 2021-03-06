@@ -33,7 +33,7 @@
 CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
 {
     this->type = 0x61;
-    this->size = 0x30;
+    this->size = 0x64;
 
     ref<uint32>(0x04) = PChar->GetMaxHP();
     ref<uint32>(0x08) = PChar->GetMaxMP();
@@ -74,9 +74,13 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint16>(0x4A) = PChar->profile.home_point.destination;
     ref<uint8>(0x50)  = PChar->profile.nation;
 
-    // 0x51 = New character has this as 0x01, 0x03 on seasoned 99
-    // 0x52 = superior level (1 or 2)
+    // 0x51 = 0x01 on fresh player, 0x03 with 99
+    // 0x52 = superior level (1 ~ 5)
     // 0x54 = maximum item level
     // 0x55 = itemlevel over 99
     // 0x56 = main weapon item level
+
+    ref<uint32>(0x58) = (charutils::GetPoints(PChar, "unity_accolades") << 10) | (0x00 << 5 | PChar->profile.unity_leader);
+    ref<uint16>(0x5C) = charutils::GetPoints(PChar, "current_accolades") / 1000; // Partial Personal Eval
+    ref<uint16>(0x5E) = charutils::GetPoints(PChar, "prev_accolades") / 1000;    // Personal Eval
 }

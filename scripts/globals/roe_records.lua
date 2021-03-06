@@ -22,20 +22,26 @@ function getRoeRecords(triggers)
 
         [   2] = { -- Vanquish 1 Enemy +
             trigger = triggers.mobKill,
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
         },
 
         [   3] = { -- Undertake a FoV Training Regime
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
         },
 
         [   4] = { -- Heal without magic
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [   5] = { -- All for One
+            reward =  { sparks = 100, xp = 300, accolades = 1000, keyItem = tpz.ki.CONCORDOLL }
         },
 
         [  11] = { -- Undertake a GoV Training Regime
-            reward =  { sparks = 100, xp = 500}
+            reward =  { sparks = 100, xp = 500 }
         },
+
+        -- 499 Stepping into an Ambuscade
 
         [ 932] = { -- Call Forth an Alter Ego (gives Cipher: Valaineral)
             reward =  { sparks = 100, xp = 300, item = { 10116 } }
@@ -1644,7 +1650,7 @@ function getRoeRecords(triggers)
             goal = 200,
             reqs = { mobXP = true },
             flags = set{"repeat"},
-            reward = { sparks = 1000, xp = 5000, unity = 100 },
+            reward = { sparks = 1000, xp = 5000, accolades = 100 },
         },
 
         [  13] = { -- Vanquish Multiple Enemies II - 500
@@ -1665,7 +1671,7 @@ function getRoeRecords(triggers)
             trigger = triggers.mobKill,
             goal = 200,
             reqs = { mobXP = true , levelSync = true},
-            reward = { sparks = 2000, xp = 6000 , unity = 200 },
+            reward = { sparks = 2000, xp = 6000 , accolades = 200 },
         },
 
         [ 117] = { -- Level Sync to Vanquish II
@@ -1673,7 +1679,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true , levelSync = true},
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 600 , unity = 20  },
+            reward = { sparks = 200, xp = 600 , accolades = 20  },
         },
 
         [  16] = { -- Deal 500+ Damage
@@ -1681,7 +1687,7 @@ function getRoeRecords(triggers)
             goal = 200,
             reqs = { dmgMin = 500 },
             flags = set{"repeat"},
-            reward = { sparks = 1000, xp = 5000, unity = 100 },
+            reward = { sparks = 1000, xp = 5000, accolades = 100 },
         },
 
         [  17] = { -- Deal 1000+ Damage
@@ -1903,7 +1909,7 @@ function getRoeRecords(triggers)
             trigger = triggers.synthSuccess,
             goal = 30,
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 500, unity = 10 },
+            reward = { sparks = 100, xp = 500, accolades = 10 },
         },
 
       -----------------------------------
@@ -1915,7 +1921,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4096 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  72] = { -- Spoils - Ice Crystals
@@ -1923,7 +1929,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4097 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  73] = { -- Spoils - Wind Crystals
@@ -1931,7 +1937,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4098 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  74] = { -- Spoils - Earth Crystals
@@ -1939,7 +1945,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4099 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  75] = { -- Spoils - Lightning Crystals
@@ -1947,7 +1953,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4100 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  76] = { -- Spoils - Water Crystals
@@ -1955,7 +1961,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4101 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  77] = { -- Spoils - Light Crystals
@@ -1963,7 +1969,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4102 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  78] = { -- Spoils - Dark Crystals
@@ -1971,7 +1977,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { itemID = set{ 4103 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  84] = { -- Spoils - Flame Geode
@@ -1979,7 +1985,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3297 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  85] = { -- Spoils - Snow Geode
@@ -1987,7 +1993,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3298 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  86] = { -- Spoils - Breeze Geode
@@ -1995,7 +2001,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3299 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  87] = { -- Spoils - Soil Geode
@@ -2003,7 +2009,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3300 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  88] = { -- Spoils - Thunder Geode
@@ -2011,7 +2017,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3301 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  89] = { -- Spoils - Aqua Geode
@@ -2019,7 +2025,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3302 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  90] = { -- Spoils - Light Geode
@@ -2027,7 +2033,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3303 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  91] = { -- Spoils - Shadow Geode
@@ -2035,7 +2041,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3304 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  92] = { -- Spoils - Ifritite
@@ -2043,7 +2049,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3520 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  93] = { -- Spoils - Shivite
@@ -2051,7 +2057,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3521 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  94] = { -- Spoils - Garudite
@@ -2059,7 +2065,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3522 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  95] = { -- Spoils - Titanite
@@ -2067,7 +2073,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3523 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  96] = { -- Spoils - Ramuite
@@ -2075,7 +2081,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3524 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  97] = { -- Spoils - Leviatite
@@ -2083,7 +2089,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3525 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  98] = { -- Spoils - Carbite
@@ -2091,7 +2097,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3526 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
         [  99] = { -- Spoils - Fenrite
@@ -2099,7 +2105,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{ 3527 } },
             flags = set{"repeat"},
-            reward = { sparks = 200, xp = 1000, unity = 20 },
+            reward = { sparks = 200, xp = 1000, accolades = 20 },
         },
 
       -----------------------------------
@@ -2111,7 +2117,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 922 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 121] = { -- Spoils - Black Tiger Fang
@@ -2119,7 +2125,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 884 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 122] = { -- Spoils - Flint Stone
@@ -2127,7 +2133,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 768 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 123] = { -- Spoils - Rabbit Hide
@@ -2135,7 +2141,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 856 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 124] = { -- Spoils - Honey
@@ -2143,7 +2149,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4370 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 125] = { -- Spoils - Sheepskin
@@ -2151,7 +2157,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 505 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 126] = { -- Spoils - Lizard Skin
@@ -2159,7 +2165,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 852 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 127] = { -- Spoils - Beetle Shell
@@ -2167,7 +2173,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 889 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 128] = { -- Spoils - Zeruhn Soot
@@ -2175,7 +2181,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 560 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 129] = { -- Spoils - Silver Name Tag
@@ -2183,7 +2189,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 13116 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 130] = { -- Spoils - Quadav Helm
@@ -2191,7 +2197,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 501 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 132] = { -- Spoils - Treant Bulb
@@ -2199,7 +2205,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 953 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 133] = { -- Spoils - Wild Onion
@@ -2207,7 +2213,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4387 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 134] = { -- Spoils - Sleepshroom
@@ -2215,7 +2221,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4374 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 135] = { -- Spoils - Sand Bat Fang
@@ -2223,7 +2229,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 1015 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 136] = { -- Spoils - Zinc Ore
@@ -2231,7 +2237,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 642 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 137] = { -- Spoils - Giant Bird Feather
@@ -2239,7 +2245,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 842 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 138] = { -- Spoils - Three-leaf Mandragora Bud
@@ -2247,7 +2253,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 1154 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 139] = { -- Spoils - Four-leaf Mandragora Bud
@@ -2255,7 +2261,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 4369 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 140] = { -- Spoils - Cornette
@@ -2263,7 +2269,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 17344 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 141] = { -- Spoils - Yuhtunga Sulfur
@@ -2271,7 +2277,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 934 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 142] = { -- Spoils - Snobby Letter
@@ -2279,7 +2285,7 @@ function getRoeRecords(triggers)
             goal = 1,
             reqs = { itemID = set{ 1150 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 143] = { -- Spoils - Yagudo Bead Necklace
@@ -2287,7 +2293,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 498 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 144] = { -- Spoils - Woozyshroom
@@ -2295,7 +2301,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 4373 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 145] = { -- Spoils - Beehive Chip
@@ -2303,7 +2309,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 912 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 146] = { -- Spoils - Remi Shell
@@ -2311,7 +2317,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 1016 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
         [ 147] = { -- Spoils - Twinstone Earring
@@ -2319,7 +2325,7 @@ function getRoeRecords(triggers)
             goal = 2,
             reqs = { itemID = set{ 13360 } },
             flags = set{"repeat"},
-            reward = { sparks = 100, xp = 300, unity = 10 },
+            reward = { sparks = 100, xp = 300, accolades = 10 },
         },
 
       -----------------------------------
@@ -2331,7 +2337,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{100} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 4439 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4439 } },
         },
 
         [ 216] = { -- Subjugation: Jaggedy-Eared Jack
@@ -2345,7 +2351,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{101} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 12577 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 12577 } },
         },
 
         [ 218] = { -- Subjugation: Swamfisk
@@ -2359,7 +2365,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{140} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13331 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13331 } },
         },
 
         [ 220] = { -- Subjugation: Thousandarm Deshglesh
@@ -2373,7 +2379,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{141} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13333 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13333 } },
         },
 
         [ 222] = { -- Subjugation: Hundredscar Hajwaj
@@ -2387,7 +2393,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{142} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13336 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13336 } },
         },
 
         [ 224] = { -- Subjugation: Ashmaker Gotblut
@@ -2401,7 +2407,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{190} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13443 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13443 } },
         },
 
         [ 226] = { -- Subjugation: Barbastelle
@@ -2415,7 +2421,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{167} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 11532 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 11532 } },
         },
 
         [ 228] = { -- Subjugation: Bloodsucker
@@ -2429,7 +2435,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{103} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13456 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13456 } },
         },
 
         [ 230] = { -- Subjugation: Valkurm Emperor
@@ -2443,7 +2449,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{108} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13472 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13472 } },
         },
 
         [ 232] = { -- Subjugation: Bendigeit Vran
@@ -2457,7 +2463,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{196} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 100, unity = 5, item = { 13471 } },
+            reward = { sparks = 11, xp = 100, accolades = 5, item = { 13471 } },
         },
 
         [ 234] = { -- Subjugation: Juggler Hecatomb
@@ -2471,7 +2477,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{102} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13444 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13444 } },
         },
 
         [ 236] = { -- Subjugation: Bloodtear Baldurf
@@ -2486,7 +2492,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{193} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 100, unity = 5, item = { 13470 } },
+            reward = { sparks = 12, xp = 100, accolades = 5, item = { 13470 } },
         },
 
         [ 238] = { -- Subjugation: Morbolger
@@ -2504,7 +2510,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{104} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {4381, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {4381, 12} } },
         },
 
         [ 240] = { -- Subjugation: King Arthro
@@ -2518,7 +2524,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{105} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13685 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13685 } },
         },
 
         [ 242] = { -- Subjugation: Lumber Jack
@@ -2532,7 +2538,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{195} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 13198 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 13198 } },
         },
 
         [ 244] = { -- Subjugation: Cwn Cyrff
@@ -2546,7 +2552,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{149} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 12554 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 12554 } },
         },
 
         [ 246] = { -- Subjugation: Hawkeyed Dnatbat
@@ -2560,7 +2566,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{106} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 4488 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4488 } },
         },
 
         [ 248] = { -- Subjugation: Maighdean Uaine
@@ -2574,7 +2580,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{107} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 12592 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 12592 } },
         },
 
         [ 250] = { -- Subjugation: Carnero
@@ -2588,7 +2594,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{172} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13335 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13335 } },
         },
 
         [ 252] = { -- Conflict: Palborough Mines
@@ -2596,7 +2602,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{143} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13330 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13330 } },
         },
 
         [ 253] = { -- Subjugation: Zi-Ghi Bone-eater
@@ -2610,7 +2616,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{191} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13473 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13473 } },
         },
 
         [ 255] = { -- Subjugation: Teporingo
@@ -2624,7 +2630,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{109} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {5721, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {5721, 12} } },
         },
 
         [ 257] = { -- Subjugation: Ni'Zho Bladebender
@@ -2638,7 +2644,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{110} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 15487 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 15487 } },
         },
 
         [ 259] = { -- Subjugation: Simurgh
@@ -2652,7 +2658,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{197} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 13271 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 13271 } },
         },
 
         [ 261] = { -- Subjugation: Demonic Tiphia
@@ -2666,7 +2672,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{147} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13703 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13703 } },
         },
 
         [ 263] = { -- Subjugation: Zo'Khu Blackcloud
@@ -2684,7 +2690,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{115} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 4498 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 4498 } },
         },
 
         [ 265] = { -- Subjugation: Nunyenunc
@@ -2698,7 +2704,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{116} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 12601 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 12601 } },
         },
 
         [ 267] = { -- Subjugation: Spiny Spipi
@@ -2712,7 +2718,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{145} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 500, unity = 5, item = { 13337 } },
+            reward = { sparks = 10, xp = 500, accolades = 5, item = { 13337 } },
         },
 
         [ 269] = { -- Subjugation: Hoo Mjuu the Torrent
@@ -2726,7 +2732,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{169} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 13586 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 13586 } },
         },
 
         [ 271] = { -- Subjugation: Oni Carcass
@@ -2740,7 +2746,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{192} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13332 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13332 } },
         },
 
         [ 273] = { -- Subjugation: Maltha
@@ -2754,7 +2760,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{194} },
             flags = set{"repeat"},
-            reward = { sparks = 10, xp = 100, unity = 5, item = { 13334 } },
+            reward = { sparks = 10, xp = 100, accolades = 5, item = { 13334 } },
         },
 
         [ 275] = { -- Subjugation: Bomb King
@@ -2768,7 +2774,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{118} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13474 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13474 } },
         },
 
         [ 277] = { -- Subjugation: Helldiver
@@ -2782,7 +2788,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{117} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13468 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13468 } },
         },
 
         [ 279] = { -- Subjugation: Serpopard Ishtar
@@ -2796,7 +2802,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{198} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 100, unity = 5, item = { 13321 } },
+            reward = { sparks = 12, xp = 100, accolades = 5, item = { 13321 } },
         },
 
         [ 281] = { -- Subjugation: Argus
@@ -2810,7 +2816,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{119} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {4413, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {4413, 12} } },
         },
 
         [ 283] = { -- Subjugation: Daggerclaw Dracos
@@ -2824,7 +2830,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{120} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13577 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13577 } },
         },
 
         [ 285] = { -- Subjugation: Roc
@@ -2838,7 +2844,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{200} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 15907 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 15907 } },
         },
 
         [ 287] = { -- Subjugation: Serket
@@ -2852,7 +2858,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{151} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13723 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13723 } },
         },
 
         [ 289] = { -- Subjugation: Lii Jixa the Somnolist
@@ -2870,7 +2876,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{111} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 16261 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 16261 } },
         },
 
         [ 291] = { -- Subjugation: Nue
@@ -2884,7 +2890,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{166} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 100, unity = 5, item = { 13323 } },
+            reward = { sparks = 11, xp = 100, accolades = 5, item = { 13323 } },
         },
 
         [ 293] = { -- Subjugation: Gloom Eye
@@ -2898,7 +2904,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{204} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 13324 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 13324 } },
         },
 
         [ 295] = { -- Subjugation: Goliath
@@ -2912,7 +2918,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{112} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13315 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13315 } },
         },
 
         [ 297] = { -- Subjugation: Biast
@@ -2926,7 +2932,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{161} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 750, unity = 5, item = { 13688 } },
+            reward = { sparks = 15, xp = 750, accolades = 5, item = { 13688 } },
         },
 
         [ 299] = { -- Subjugation: Duke Haborym
@@ -2940,7 +2946,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{162} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 750, unity = 5, item = { 13689 } },
+            reward = { sparks = 15, xp = 750, accolades = 5, item = { 13689 } },
         },
 
         [ 301] = { -- Subjugation: Baron Vapula
@@ -2954,7 +2960,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{126} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 16301 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 16301 } },
         },
 
         [ 303] = { -- Subjugation: Dosetsu Tree
@@ -2968,7 +2974,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{184} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 100, unity = 5, item = { {5147, 12} } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { {5147, 12} } },
         },
 
         [ 305] = { -- Subjugation: Epialtes
@@ -2982,7 +2988,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{157} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 100, unity = 5, item = { {5149, 12} } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { {5149, 12} } },
         },
 
         [ 307] = { -- Subjugation: Ogygos
@@ -2996,7 +3002,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{158} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { {5757, 12} } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { {5757, 12} } },
         },
 
         [ 309] = { -- Subjugation: Enkelados
@@ -3010,7 +3016,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{127} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { {4398, 12} } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { {4398, 12} } },
         },
 
       -----------------------------------
@@ -3030,7 +3036,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{121} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { {4151, 12} } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { {4151, 12} } },
         },
 
         [ 392] = { -- Conflict: Ro'Maeve
@@ -3038,7 +3044,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{122} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { {4156, 12} } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { {4156, 12} } },
         },
 
         [ 394] = { -- Conflict: Boyahda Tree
@@ -3046,7 +3052,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{153} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { {4166, 12} } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { {4166, 12} } },
         },
 
         [ 396] = { -- Conflict: Dragon's Aery
@@ -3054,7 +3060,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{154} },
             flags = set{"repeat"},
-            reward = { sparks = 17, xp = 850, unity = 5, item = { 4136 } },
+            reward = { sparks = 17, xp = 850, accolades = 5, item = { 4136 } },
         },
 
         [ 398] = { -- Conflict: Eastern Altepa Desert
@@ -3062,7 +3068,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{114} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { {4164, 12} } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { {4164, 12} } },
         },
 
         [ 400] = { -- Conflict: Western Altepa Desert
@@ -3070,7 +3076,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{125} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { {4165, 12} } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { {4165, 12} } },
         },
 
         [ 402] = { -- Conflict: Quicksand Caves
@@ -3078,7 +3084,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{208} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 13637 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 13637 } },
         },
 
         [ 404] = { -- Conflict: Gustav Tunnel
@@ -3086,7 +3092,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{212} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { 13579 } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { 13579 } },
         },
 
         [ 406] = { -- Conflict: Kuftal Tunnel
@@ -3094,7 +3100,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{174} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 100, unity = 5, item = { 16233 } },
+            reward = { sparks = 14, xp = 100, accolades = 5, item = { 16233 } },
         },
 
         [ 408] = { -- Conflict: Cape Terrigan
@@ -3102,7 +3108,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{113} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 16263 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 16263 } },
         },
 
         [ 410] = { -- Conflict: Valley of Sorrows
@@ -3110,7 +3116,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{128} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13108 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13108 } },
         },
 
         [ 412] = { -- Conflict: Yuhtunga Jungle
@@ -3118,7 +3124,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{123} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13125 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13125 } },
         },
 
       -----------------------------------
@@ -3130,7 +3136,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{176 } },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 100, unity = 5, item = { 13207 } },
+            reward = { sparks = 13, xp = 100, accolades = 5, item = { 13207 } },
         },
 
         [ 416] = { -- Conflict: Yhoator Jungle
@@ -3138,7 +3144,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{124} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13273 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13273 } },
         },
 
         [ 418] = { -- Conflict: Temple of Uggalepih
@@ -3146,7 +3152,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{159} },
             flags = set{"repeat"},
-            reward = { sparks = 15, xp = 100, unity = 5, item = { 15913 } },
+            reward = { sparks = 15, xp = 100, accolades = 5, item = { 15913 } },
         },
 
         [ 420] = { -- Conflict: Den of Rancor
@@ -3154,7 +3160,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{160} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { 13208 } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { 13208 } },
         },
 
         [ 422] = { -- Conflict: Ifrit's Cauldron
@@ -3162,7 +3168,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{205} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 100, unity = 5, item = { 13344 } },
+            reward = { sparks = 16, xp = 100, accolades = 5, item = { 13344 } },
         },
 
         [ 424] = { -- Conflict: Ru'Aun Gardens
@@ -3170,7 +3176,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{130} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13346 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13346 } },
         },
 
         [ 426] = { -- Conflict: Ve'Lugannon Palace
@@ -3178,7 +3184,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{177} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 100, unity = 7, item = { 13348 } },
+            reward = { sparks = 70, xp = 100, accolades = 7, item = { 13348 } },
         },
 
         [ 428] = { -- Conflict: Shrine of Ru'Avitau
@@ -3186,7 +3192,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{178} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 100, unity = 7, item = { 13343 } },
+            reward = { sparks = 70, xp = 100, accolades = 7, item = { 13343 } },
         },
 
         [ 430] = { -- Conflict: Labyrinth of Onzozo
@@ -3194,7 +3200,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{213} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13345 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13345 } },
         },
 
         [ 432] = { -- Conflict: Korroloka Tunnel
@@ -3202,7 +3208,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{173} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13347 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13347 } },
         },
 
       -----------------------------------
@@ -3214,7 +3220,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{11} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13350 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13350 } },
         },
 
         [ 436] = { -- Conflict: Newton Movalpolos
@@ -3222,7 +3228,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{12} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13349 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13349 } },
         },
 
         [ 438] = { -- Conflict: Lufaise Meadows
@@ -3230,7 +3236,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{24} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 14725 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 14725 } },
         },
 
         [ 440] = { -- Conflict: Misareaux Coast
@@ -3238,7 +3244,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{25} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13417 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13417 } },
         },
 
         [ 442] = { -- Conflict: Phomiuna Aqueducts
@@ -3246,7 +3252,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{27} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13325 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13325 } },
         },
 
         [ 444] = { -- Conflict: Riverne - Site #A01
@@ -3254,7 +3260,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{30} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13461 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13461 } },
         },
 
         [ 446] = { -- Conflict: Riverne - Site #B01
@@ -3262,7 +3268,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{29} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 15813 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 15813 } },
         },
 
         [ 448] = { -- Conflict: Sacrarium
@@ -3270,7 +3276,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{28} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13485 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13485 } },
         },
 
         [ 450] = { -- Conflict: Promyvion - Holla
@@ -3278,7 +3284,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{16} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13487 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13487 } },
         },
 
         [ 452] = { -- Conflict: Promyvion - Dem
@@ -3286,7 +3292,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{18} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13489 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13489 } },
         },
 
         [ 454] = { -- Conflict: Promyvion - Mea
@@ -3294,15 +3300,15 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{20} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13484 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13484 } },
         },
 
-        [ 456] = { -- Conflict: Yuhtunga Jungle
+        [ 456] = { -- Conflict: Promyvion - Vahzl
             trigger = triggers.mobKill,
             goal = 10,
             reqs = { zone = set{22} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13486 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13486 } },
         },
 
       -----------------------------------
@@ -3314,7 +3320,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{33} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13488 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13488 } },
         },
 
         [ 460] = { -- Conflict: Grand Palace of Hu'Xzoi
@@ -3322,7 +3328,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{34} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13491 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13491 } },
         },
 
         [ 462] = { -- Conflict: Garden of Ru'Hmet
@@ -3330,7 +3336,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{35} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 17285 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 17285 } },
         },
 
         [ 464] = { -- Conflict: Carpenters' Landing
@@ -3338,7 +3344,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{2} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13490 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13490 } },
         },
 
         [ 468] = { -- Conflict: Bibiki Bay
@@ -3346,7 +3352,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{4} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13546 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13546 } },
         },
 
         [ 472] = { -- Conflict: Attohwa Chasm
@@ -3354,7 +3360,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{7} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13464 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13464 } },
         },
 
         [ 474] = { -- Conflict: Pso'Xja
@@ -3362,7 +3368,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{9} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 13445 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 13445 } },
         },
 
         [ 476] = { -- Conflict: Uleguerand Range
@@ -3370,7 +3376,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{5} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13591 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13591 } },
         },
 
       -----------------------------------
@@ -3382,7 +3388,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{52} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 12324 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 12324 } },
         },
 
         [ 535] = { -- Conflict: Mamook
@@ -3390,7 +3396,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{65} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 12309 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 12309 } },
         },
 
         [ 537] = { -- Conflict: Wajaom Woodlands
@@ -3398,7 +3404,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{51} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 13275 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 13275 } },
         },
 
         [ 539] = { -- Conflict: Aydeewa Subterrane
@@ -3406,7 +3412,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{68} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 13197 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 13197 } },
         },
 
         [ 541] = { -- Conflict: Halvung
@@ -3414,7 +3420,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{62} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15890 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15890 } },
         },
 
         [ 543] = { -- Conflict: Mount Zhayolm
@@ -3422,7 +3428,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{61} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13629 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13629 } },
         },
 
         [ 545] = { -- Conflict: Caedarva Mire
@@ -3430,7 +3436,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{79} },
             flags = set{"repeat"},
-            reward = { sparks = 60, xp = 800, unity = 6, item = { 13212 } },
+            reward = { sparks = 60, xp = 800, accolades = 6, item = { 13212 } },
         },
 
         [ 547] = { -- Conflict: Arrapago Reef
@@ -3438,7 +3444,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{54} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 16235 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 16235 } },
         },
 
         [ 549] = { -- Conflict: Alza. Undersea Ruins
@@ -3446,7 +3452,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{72} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13587 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13587 } },
         },
 
       -----------------------------------
@@ -3458,7 +3464,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{81} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13092 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13092 } },
         },
 
         [ 555] = { -- Conflict: Jugner Forest [S]
@@ -3466,7 +3472,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{82} },
             flags = set{"repeat"},
-            reward = { sparks = 14, xp = 700, unity = 5, item = { 12311 } },
+            reward = { sparks = 14, xp = 700, accolades = 5, item = { 12311 } },
         },
 
         [ 557] = { -- Conflict: Batallia Downs [S]
@@ -3474,7 +3480,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{84} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 13087 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 13087 } },
         },
 
         [ 559] = { -- Conflict: La Vaule [S]
@@ -3482,7 +3488,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{85} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 13329 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 13329 } },
         },
 
         [ 561] = { -- Conflict: Eldieme Necropolis [S]
@@ -3490,7 +3496,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{175} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 16231 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 16231 } },
         },
 
         [ 563] = { -- Conflict: North Gustaberg [S]
@@ -3498,7 +3504,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{88} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13088 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13088 } },
         },
 
         [ 565] = { -- Conflict: Grauberg [S]
@@ -3506,7 +3512,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{89} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 13316 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 13316 } },
         },
 
         [ 567] = { -- Conflict: Vunkerl Inlet [S]
@@ -3514,7 +3520,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{83} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 14727 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 14727 } },
         },
 
         [ 569] = { -- Conflict: Pashhow Marshlands [S]
@@ -3522,7 +3528,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{90} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13312 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13312 } },
         },
 
         [ 571] = { -- Conflict: Rolanberry Fields [S]
@@ -3530,7 +3536,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{91} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 12308 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 12308 } },
         },
 
         [ 573] = { -- Conflict: Beadeaux [S]
@@ -3538,7 +3544,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{92} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15991 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15991 } },
         },
 
         [ 575] = { -- Conflict: Crawlers' Nest [S]
@@ -3546,7 +3552,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{171} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 15993 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 15993 } },
         },
 
 
@@ -3559,7 +3565,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{95} },
             flags = set{"repeat"},
-            reward = { sparks = 11, xp = 550, unity = 5, item = { 13079 } },
+            reward = { sparks = 11, xp = 550, accolades = 5, item = { 13079 } },
         },
 
         [ 579] = { -- Conflict: Fort Karugo-Narugo [S]
@@ -3567,7 +3573,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{96} },
             flags = set{"repeat"},
-            reward = { sparks = 12, xp = 600, unity = 5, item = { 16265 } },
+            reward = { sparks = 12, xp = 600, accolades = 5, item = { 16265 } },
         },
 
         [ 581] = { -- Conflict: Meriph. Mountains [S]
@@ -3575,7 +3581,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{97} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 12302 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 12302 } },
         },
 
         [ 583] = { -- Conflict: Sauro. Champaign [S]
@@ -3583,7 +3589,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{98} },
             flags = set{"repeat"},
-            reward = { sparks = 13, xp = 650, unity = 5, item = { 16170 } },
+            reward = { sparks = 13, xp = 650, accolades = 5, item = { 16170 } },
         },
 
         [ 585] = { -- Conflict: Castle Oztroja [S]
@@ -3591,7 +3597,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{99} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15803 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15803 } },
         },
 
         [ 587] = { -- Conflict: Garlaige Citadel [S]
@@ -3599,7 +3605,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{164} },
             flags = set{"repeat"},
-            reward = { sparks = 16, xp = 800, unity = 5, item = { 13466 } },
+            reward = { sparks = 16, xp = 800, accolades = 5, item = { 13466 } },
         },
 
         [ 589] = { -- Conflict: Beaucedine Glacier [S]
@@ -3607,7 +3613,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{136} },
             flags = set{"repeat"},
-            reward = { sparks = 70, xp = 850, unity = 7, item = { 15805 } },
+            reward = { sparks = 70, xp = 850, accolades = 7, item = { 15805 } },
         },
 
         [ 591] = { -- Conflict: Xarcabard [S]
@@ -3615,7 +3621,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{137} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 12385 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 12385 } },
         },
 
         [ 593] = { -- Conflict: Castle Zvahl Baileys [S]
@@ -3623,7 +3629,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{138} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 15539 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 15539 } },
         },
 
         [ 595] = { -- Conflict: Castle Zvahl Keep [S]
@@ -3631,7 +3637,7 @@ function getRoeRecords(triggers)
             goal = 10,
             reqs = { zone = set{155} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 15780 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 15780 } },
         },
 
       -----------------------------------
@@ -3643,7 +3649,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{132} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10914 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10914 } },
         },
 
         [ 614] = { -- Conflict: Abyssea - Konschtat
@@ -3651,7 +3657,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{15} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 15891 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 15891 } },
         },
 
         [ 615] = { -- Conflict: Abyssea - Tahrongi
@@ -3659,7 +3665,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{45} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11765 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11765 } },
         },
 
         [ 616] = { -- Conflict: Abyssea - Attohwa
@@ -3667,7 +3673,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{215} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11763 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11763 } },
         },
 
         [ 617] = { -- Conflict: Abyssea - Misareaux
@@ -3675,7 +3681,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{216} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10966 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10966 } },
         },
 
         [ 618] = { -- Conflict: Abyssea - Vunkerl
@@ -3683,7 +3689,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{217} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10964 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10964 } },
         },
 
         [ 619] = { -- Conflict: Abyssea - Altepa
@@ -3691,7 +3697,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{218} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 10968 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 10968 } },
         },
 
         [ 620] = { -- Conflict: Abyssea - Uleguerand
@@ -3699,7 +3705,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{253} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11664 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11664 } },
         },
 
         [ 621] = { -- Conflict: Abyssea - Grauberg
@@ -3707,7 +3713,7 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { zone = set{254} },
             flags = set{"repeat"},
-            reward = { sparks = 80, xp = 900, unity = 8, item = { 11644 } },
+            reward = { sparks = 80, xp = 900, accolades = 8, item = { 11644 } },
         },
 
       -----------------------------------
@@ -3719,42 +3725,345 @@ function getRoeRecords(triggers)
       -----------------------------------
 
       -----------------------------------
+      -- Harvesting - Original Areas
+      -----------------------------------
+
+        [ 180] = { -- Harvesting: East Ronfaure
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{101} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 181] = { -- Harvesting: Ghelsba Outpost
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{140} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 182] = { -- Harvesting: Gusgen Mines
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{196} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 183] = { -- Harvesting: Jugner Forest
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{104} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 184] = { -- Harvesting: Zeruhn Mines
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{172} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 185] = { -- Harvesting: Palborough Mines
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{143} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 186] = { -- Harvesting: West Sarutabaruta
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{115} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 187] = { -- Harvesting: Giddeus
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{145} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 188] = { -- Harvesting: Buburimu Peninsula
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{118} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 189] = { -- Harvesting: Tahrongi Canyon
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{117} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 190] = { -- Harvesting: Maze of Shakhrami
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{198} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 389] = { -- Harvesting: Yughott Grotto
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{142} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+      -----------------------------------
+      -- Harvesting - Adoulin 1
+      -----------------------------------
+
+      -----------------------------------
+      -- Harvesting - Zilart
+      -----------------------------------
+
+        [ 478] = { -- Harvesting: Yuhtunga Jungle
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{123} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 479] = { -- Harvesting: Yhoator Jungle
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{124} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 480] = { -- Harvesting: Ifrit's Cauldron
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{205} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 485] = { -- Harvesting: Korroloka Tunnel
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{173} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+      -----------------------------------
+      -- Harvesting - Promathia
+      -----------------------------------
+
+        [ 481] = { -- Harvesting: Oldton Movalpolos
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{11} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 482] = { -- Harvesting: Newton Movalpolos
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{12} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 483] = { -- Harvesting: Lufaise Meadows
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{24} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 484] = { -- Harvesting: Misareaux Coast
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{25} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 486] = { -- Harvesting: Carpenters' Landing
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{2} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 487] = { -- Harvesting: Attohwa Chasm
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{7} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+      -----------------------------------
+      -- Harvesting - Aht Urhgan
+      -----------------------------------
+
+        [ 599] = { -- Harvesting: Bhaflau Thickets
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{52} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 600] = { -- Harvesting: Mamook
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{65} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 601] = { -- Harvesting: Wajaom Woodlands
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{51} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 602] = { -- Harvesting: Halvung
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{62} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 603] = { -- Harvesting: Mount Zhayolm
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{61} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 604] = { -- Harvesting: Caedarva Mire
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{79} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+      -----------------------------------
+      -- Harvesting - Goddess
+      -----------------------------------
+
+        [ 606] = { -- Harvesting: East Ronfaure [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{81} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 607] = { -- Harvesting: Jugner Forest [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{82} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+        [ 608] = { -- Harvesting: North Gustaberg [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{88} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {605, 12} } },
+        },
+
+        [ 609] = { -- Harvesting: Grauberg [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{89} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 610] = { -- Harvesting: West Sarutabaruta [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{95} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1020, 12} } },
+        },
+
+        [ 611] = { -- Harvesting: Fort Karugo-Narugo [S]
+            trigger = triggers.helmSuccess,
+            goal = 5,
+            reqs = { zone = set{96} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10, item = { {1021, 12} } },
+        },
+
+      -----------------------------------
       -- Content (Other)                 
       -----------------------------------
+
+        [  63] = { -- Total Suc. Chocobo Digs
+            trigger = triggers.chocoboDigSuccess,
+            goal = 30,
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, accolades = 10 },
+        },
 
         [ 727] = { -- Subjugation: Kirin
             trigger = triggers.mobKill,
             reqs = { mobID = set{17506670} },
             flags = set{"repeat"},
-            reward = { sparks = 1000, xp = 5000 },
+            reward = { sparks = 1000, xp = 5000, accolades = 100, item = { 8711 } },
         },
 
         [ 728] = { -- Subjugation: Genbu
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309980} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
         [ 729] = { -- Subjugation: Suzaku
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309983} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
         [ 730] = { -- Subjugation: Seiryu
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309981} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
         [ 731] = { -- Subjugation: Byakko
             trigger = triggers.mobKill,
             reqs = { mobID = set{17309982} },
             flags = set{"repeat"},
-            reward = { sparks = 300, xp = 1500 },
+            reward = { sparks = 300, xp = 1500, accolades = 30 },
         },
 
       -----------------------------------
@@ -4390,6 +4699,2192 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
+      -- Unity - Shared A
+      -----------------------------------
+
+        [3000] = { -- Unity Communique A (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3002] = { -- Vanquish Multiple Enemies A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3003] = {   -- Vanquish Aquans A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3004] = {  -- Vanquish Amorphs with Physical Damage A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AMORPH} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3005] = {   -- Vanquish Beasts with Magic A (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.BEAST} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3006] = { -- Total Successful Woodworking Syntheses A (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.WOODWORKING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3007] = { -- Total Successful Leatherworking Syntheses A (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.LEATHERCRAFT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3008] = { -- Total Suc. Mining Attempts A (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 4 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+      -----------------------------------
+      -- Unity - Shared B
+      -----------------------------------
+
+        [3009] = { -- Unity Communique B (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3010] = { -- Chocobo Digging B (UC)
+            trigger = triggers.chocoboDigSuccess,
+            goal = 10,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3011] = { -- Vanquish Multiple Enemies B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3012] = {   -- Vanquish Arcana B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3013] = {  -- Vanquish Undead with Physical Damage B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.UNDEAD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3014] = {   -- Vanquish Plantoids with Magic B (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.PLANTOID} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3015] = { -- Total Successful Blacksmithing Syntheses B (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.SMITHING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3017] = { -- Total Suc. Logging Attempts B (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 3 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+      -----------------------------------
+      -- Unity - Shared C
+      -----------------------------------
+
+        [3018] = { -- Unity Communique C (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3020] = { -- Vanquish Multiple Enemies C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3021] = {   -- Vanquish Vermin C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3022] = {  -- Vanquish Birds with Physical Damage C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.BIRD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3023] = {   -- Vanquish Lizards with Magic C (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.LIZARD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3024] = { -- Total Successful Goldsmithing Syntheses C (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.GOLDSMITHING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3026] = { -- Total Suc. Harvesting Attempts C (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 1 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+      -----------------------------------
+      -- Unity - Shared D
+      -----------------------------------
+
+        [3027] = { -- Unity Communique D (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3029] = { -- Vanquish Multiple Enemies D (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3030] = {   -- Vanquish Beasts D (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3031] = {  -- Vanquish Aquans with Physical Damage D (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AQUAN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3032] = {   -- Vanquish Amorphs with Magic D (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.AMORPH} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3033] = { -- Total Successful Cloth Syntheses D (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.CLOTHCRAFT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3034] = { -- Total Successful Bone Syntheses D (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.BONECRAFT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3035] = { -- Total Suc. Mining Attempts D (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 4 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+      -----------------------------------
+      -- Unity - Shared E
+      -----------------------------------
+
+        [3036] = { -- Unity Communique E (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3038] = { -- Vanquish Multiple Enemies E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3039] = {   -- Vanquish Plantoids E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3040] = {  -- Vanquish Arcana with Physical Damage E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.ARCANA} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3041] = {   -- Vanquish Undead with Magic E (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.UNDEAD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3042] = { -- Total Successful Cooking Syntheses E (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.COOKING },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3044] = { -- Total Suc. Logging Attempts E (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 3 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+      -----------------------------------
+      -- Unity - Shared F
+      -----------------------------------
+
+        [3045] = { -- Unity Communique F (UC)
+            trigger = triggers.unityChat,
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 100 },
+        },
+
+        [3046] = { -- Level Sync to Vanquish Enemies F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true , levelSync = true},
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500 , accolades = 100 },
+        },
+
+        [3047] = { -- Vanquish Multiple Enemies F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3048] = {   -- Vanquish Lizards F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3049] = {  -- Vanquish Vermin with Physical Damage F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.VERMIN} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 400 },
+        },
+
+        [3050] = {   -- Vanquish Birds with Magic F (UC)
+            trigger = triggers.mobKill,
+            goal = 20,
+            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.BIRD} },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3051] = { -- Total Successful Alchemy Syntheses F (UC)
+            trigger = triggers.synthSuccess,
+            goal = 10,
+            reqs = { skillType = tpz.skill.ALCHEMY },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3053] = { -- Total Suc. Harvesting Attempts F (UC)
+            trigger = triggers.helmSuccess,
+            goal = 10,
+            reqs = { skillType = 1 },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 0
+      -----------------------------------
+
+        -- TODO: Assign a Unity Leader requirement to these
+        [3488] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3489] = { -- Conflict: Rala Waterways (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{258}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3490] = { -- Vanquish Rabbits (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{206}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3491] = { -- Subjugation: Rambukk (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17191044}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3492] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 1
+      -----------------------------------
+
+        [3493] = { -- Spoils - Bat Fangs (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 891 }, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3494] = { -- Conflict: La Theine Plateau (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{102}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3495] = { -- Vanquish Bats (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{46, 47}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3496] = { -- Subjugation: Tumbling Truffle (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17195259}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 2
+      -----------------------------------
+
+        [3498] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3499] = { -- Conflict: Eldieme Necropolis (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{195}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3500] = { -- Vanquish Treants (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{245}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3501] = { -- Subjugation: Duke Decapod (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17252725}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3502] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Pieuje - Week 3
+      -----------------------------------
+
+        [3503] = { -- Spoils - Bomb Ash (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 928 }, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3504] = { -- Conflict: Davoi (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{149}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3505] = { -- Vanquish Bombs (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{56}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3506] = { -- Subjugation: Poisonhand Gnadgad (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17387644}, unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3507] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 0
+      -----------------------------------
+
+        [3508] = { -- Great Katana Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.GREAT_KATANA, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3509] = { -- Conflict: North Gustaberg (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{106}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3510] = { -- Vanquish Worms (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{258}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3511] = { -- Subjugation: Stinging Sophie (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17211537, 17211561}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3512] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 1
+      -----------------------------------
+
+        [3513] = { -- Spoils - Cockatrice Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4435 }, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{260}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3515] = { -- Vanquish Cockatrices (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{70}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3516] = { -- Subjugation: Tococo (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17215778}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 2
+      -----------------------------------
+
+        [3518] = { -- Archery Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.ARCHERY, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3519] = { -- Conflict: Crawlers' Nest (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{197}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3520] = { -- Vanquish Lizards (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{174}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3521] = { -- Subjugation: Aqrabuamelu (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17584416}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3522] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Ayame - Week 3
+      -----------------------------------
+
+        [3523] = { -- Spoils - Land Crab Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4400 }, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3524] = { -- Conflict: Beadeaux (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{147}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3525] = { -- Vanquish Crabs (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3526] = { -- Subjugation: Ge'Dha Evileye (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17379450}, unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3527] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 5,
+            reqs = { unityLeader = tpz.roe.leaders.AYAME },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 0
+      -----------------------------------
+
+        [3528] = { -- Axe Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.AXE, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3529] = { -- Conflict: South Gustaberg (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{107}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3530] = { -- Vanquish Sea Monks (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{218, 219}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3531] = { -- Subjugation: Leaping Lizzy (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17215868, 17215888}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3532] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 1
+      -----------------------------------
+
+        [3533] = { -- Spoils - Sleepshroom (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4374 }, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3534] = { -- Conflict: Pashhow Marshlands (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{109}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3535] = { -- Vanquish Funguars (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{116}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3536] = { -- Subjugation: Bloodpool Vorax (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17224019}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 2
+      -----------------------------------
+
+        [3538] = { -- Great Axe Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.GREAT_AXE, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3539] = { -- Conflict: Ceizak Battlegrounds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{261}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3540] = { -- Vanquish Flies (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{113, 374}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3541] = { -- Subjugation: Be'Hya Hundredwall (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17363258}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3542] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Invincible Shield - Week 3
+      -----------------------------------
+
+        [3543] = { -- Spoils - Raptor Skin (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 853 }, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3544] = { -- Conflict: Beaucedine Glacier (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{111}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3545] = { -- Vanquish Raptors (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{210, 376, 377}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3546] = { -- Subjugation: Gargantua (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17232079}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3547] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 5,
+            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 0
+      -----------------------------------
+
+        [3548] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3549] = { -- Conflict: West Sarutabaruta (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{115}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3550] = { -- Vanquish Bees (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{48}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3551] = { -- Subjugation: Tom Tit Tat (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17248468, 17248486}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3552] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 1
+      -----------------------------------
+
+        [3553] = { -- Spoils - Silk Thread (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 816 }, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3554] = { -- Conflict: Buburimu Peninsula (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{118}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3555] = { -- Vanquish Crawlers (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{79}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3556] = { -- Subjugation: Buburimboo (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17261003}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 2
+      -----------------------------------
+
+        [3558] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3559] = { -- Conflict: Castle Oztroja (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{151}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3560] = { -- Vanquish Ghosts (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{121}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3561] = { -- Subjugation: Mee Deggi the Punisher (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17395800}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3562] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Apururu - Week 3
+      -----------------------------------
+
+        [3563] = { -- Spoils - Saruta Cotton (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 834 }, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3564] = { -- Conflict: Foret de Hennetiel (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{262}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3565] = { -- Vanquish Mandragoras (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{178}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3566] = { -- Subjugation: Juu Duzu the Whirlwind (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17371300}, unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3567] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.APURURU },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Maat - Week 0
+      -----------------------------------
+
+        [3568] = { -- Hand-to-Hand Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.HAND_TO_HAND, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3569] = { -- Conflict: Yorcia Weald (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{263}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3570] = { -- Vanquish Leeches (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{172, 369}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3571] = { -- Subjugation: Canal Moocher (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17469578}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3572] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Maat - Week 1
+      -----------------------------------
+
+        [3573] = { -- Spoils - Spider Web (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 838 }, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3574] = { -- Conflict: Rolanberry Fields (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{110}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3575] = { -- Vanquish Spiders (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{235}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3576] = { -- Subjugation: Eldritch Edge (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17228150}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Maat - Week 2
+      -----------------------------------
+
+        [3578] = { -- Great Sword Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.GREAT_SWORD, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3579] = { -- Conflict: Meriphataud Mountains (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{119}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3580] = { -- Vanquish Wyverns (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{266, 268}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3581] = { -- Subjugation: Patripatan (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17264972}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3582] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Maat - Week 3
+      -----------------------------------
+
+        [3583] = { -- Spoils - Hecteyes Eye (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 939 }, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3584] = { -- Conflict: Sauromugue Champaign (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{120}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3585] = { -- Vanquish Hecteyes (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{139}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3586] = { -- Subjugation: Bashe (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17268788}, unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3587] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.MAAT },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 0
+      -----------------------------------
+
+        [3588] = { -- Dagger Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.DAGGER, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3589] = { -- Conflict: Sanctuary of Zi'Tah (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{121}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3590] = { -- Vanquish Hounds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{142, 143}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3591] = { -- Subjugation: Bastet (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17273190}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3592] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 1
+      -----------------------------------
+
+        [3593] = { -- Spoils - Doll Shard (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 1165 }, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3594] = { -- Conflict: Morimar Basalt Fields (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{265}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3595] = { -- Vanquish Dolls (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3596] = { -- Subjugation: Nocuous Weapon (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17563801}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 2
+      -----------------------------------
+
+        [3598] = { -- Marksmanship Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.MARKSMANSHIP, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3599] = { -- Conflict: Boyahda Tree (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{153}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3600] = { -- Vanquish Slimes (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{228, 229, 230}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3601] = { -- Subjugation: Aquarius (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17404000}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3602] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Aldo - Week 3
+      -----------------------------------
+
+        [3603] = { -- Spoils - Bird Egg (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4570 }, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3604] = { -- Conflict: Western Altepa Desert (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{125}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3605] = { -- Vanquish Crow-Type Birds (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{55}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3606] = { -- Subjugation: Cactuar Cantautor (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17289560}, unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3607] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.ALDO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 0
+      -----------------------------------
+
+        [3608] = { -- Dagger Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.DAGGER, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3609] = { -- Conflict: Yuhtunga Jungle (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{123}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3610] = { -- Vanquish Sheep (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{226}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3611] = { -- Subjugation: Mischievous Micholas (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17281149}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3612] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 1
+      -----------------------------------
+
+        [3613] = { -- Spoils - Scorpion Claw (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 897 }, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3614] = { -- Conflict: East Sarutabaruta (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{116}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3615] = { -- Vanquish Scorpions (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{217}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3616] = { -- Subjugation: Sharp-Eared Ropipi (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17252489, 17252508}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 2
+      -----------------------------------
+
+        [3618] = { -- Archery Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.ARCHERY, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3619] = { -- Conflict: Marjami Ravine (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{266}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3620] = { -- Vanquish Opo-Opos (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{188}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3621] = { -- Subjugation: Ah Puch (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17571903}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3622] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Jakoh Wahcondalo - Week 3
+      -----------------------------------
+
+        [3623] = { -- Spoils - Black Tiger Fang (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 884 }, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3624] = { -- Conflict: Sea Serpent Grotto (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{176}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3625] = { -- Vanquish Tigers (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{242}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3626] = { -- Subjugation: Fyuu the Seabellow (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17498269}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3627] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 0
+      -----------------------------------
+
+        [3628] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3629] = { -- Conflict: Bhaflau Thickets (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{52}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3630] = { -- Vanquish Evil Weapons (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{110}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3631] = { -- Subjugation: Emergent Elm (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{16990376}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3632] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 1
+      -----------------------------------
+
+        [3633] = { -- Spoils - Puk Wing (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 2148 }, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3634] = { -- Conflict: West Ronfaure (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{100}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3635] = { -- Vanquish Puks (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{198}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3636] = { -- Subjugation: Fungus Beetle (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17187047}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 2
+      -----------------------------------
+
+        [3638] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3639] = { -- Conflict: Wajaom Woodlands (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{51}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3640] = { -- Vanquish Elementals (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{99, 100, 101, 102, 103, 104, 105, 106}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3641] = { -- Subjugation: Jaded Jody (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{16986378}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3642] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Naja Salaheem - Week 3
+      -----------------------------------
+
+        [3643] = { -- Spoils - Dhalmel Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 4359 }, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3644] = { -- Conflict: Kamihr Drifts (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{267}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3645] = { -- Vanquish Dhalmel (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{80}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3646] = { -- Subjugation: Trembler Tabitha (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17588278}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3647] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 5,
+            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 0
+      -----------------------------------
+
+        [3648] = { -- Polearm Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.POLEARM, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3649] = { -- Conflict: Cirdas Caverns (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{270}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3650] = { -- Vanquish Pugils (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{197}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3651] = { -- Subjugation: Hovering Hotpot (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17596628}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3652] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 1
+      -----------------------------------
+
+        [3653] = { -- Spoils - Beetle Shell (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 889 }, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3654] = { -- Conflict: East Ronfaure (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{101}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3655] = { -- Vanquish Beetles (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{49}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3656] = { -- Subjugation: Bigmouth Billy (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17191196}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 2
+      -----------------------------------
+
+        [3658] = { -- Sword Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.SWORD, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3659] = { -- Conflict: Xarcabard (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{112}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3660] = { -- Vanquish Goobbues (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{136}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3661] = { -- Subjugation: Barbaric Weapon (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17236027}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3662] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Flaviria - Week 3
+      -----------------------------------
+
+        [3663] = { -- Spoils - Bone Chip (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 880 }, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3664] = { -- Conflict: Woh Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{273}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3665] = { -- Vanquish Skeletons (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{227}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3666] = { -- Subjugation: Hyakume (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17457236}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3667] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 0
+      -----------------------------------
+
+        [3668] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3669] = { -- Conflict: Giddeus (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{145}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3670] = { -- Vanquish Efts (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{98}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3671] = { -- Subjugation: Herbage Hunter (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17256836}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3672] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 1
+      -----------------------------------
+
+        [3673] = { -- Spoils - Rotten Meat (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 16995 }, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3674] = { -- Conflict: Moh Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{269}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3675] = { -- Vanquish Antica (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{25}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3676] = { -- Subjugation: Antican Praefectus (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17629281}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 2
+      -----------------------------------
+
+        [3678] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3679] = { -- Conflict: Toraimarai Canal (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{169}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3680] = { -- Vanquish Coeurls (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{71}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3681] = { -- Subjugation: Ose (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17649822}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3682] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Yoran-Oran - Week 3
+      -----------------------------------
+
+        [3683] = { -- Spoils - Dullahan Armor (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 8746 }, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{274}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3685] = { -- Vanquish Dullahan (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{447}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3686] = { -- Subjugation: Capricious Cassie (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17613130}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3687] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 0
+      -----------------------------------
+
+        [3688] = { -- Club Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3689] = { -- Conflict: Sih Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{268}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+--[[
+        [3690] = { -- Vanquish Acuex (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{???}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+--]]
+
+        [3691] = { -- Subjugation: Intulo (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{16793742}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3692] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 1
+      -----------------------------------
+
+        [3693] = { -- Spoils - Demon Horn (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 902 }, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3694] = { -- Conflict: Konschtat Highlands (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{108}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3695] = { -- Vanquish Demons (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobSystem = set{tpz.eco.DEMON}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3696] = { -- Subjugation: Marquis Naberius (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17436876}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 2
+      -----------------------------------
+
+        [3698] = { -- Staff Weapon Skills (UC)
+            trigger = triggers.wSkillUse,
+            goal = 30,
+            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3699] = { -- Conflict: Dho Gates (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{272}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3700] = { -- Vanquish Velkk (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{342}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3701] = { -- Subjugation: Dune Widow (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17244396}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3702] = { -- Heal Unity Allies (UC)
+            trigger = triggers.healUnityAlly,
+            goal = 30,
+            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
+      -- Unity Leader - Sylvie - Week 3
+      -----------------------------------
+
+        [3703] = { -- Spoils - Twitherym Wing (UC)
+            trigger = triggers.itemLooted,
+            goal = 5,
+            reqs = { itemID = set{ 3930 }, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3704] = { -- Conflict: Qufim Island (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { zone = set{126}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 300 },
+        },
+
+        [3705] = { -- Vanquish Twitherym (UC)
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobFamily = set{338}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+        [3706] = { -- Subjugation: Atkorkamuy (UC)
+            trigger = triggers.mobKill,
+            reqs = { mobID = set{17293485}, unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 1000 },
+        },
+
+        [3707] = { -- Magic Bursts (UC)
+            trigger = triggers.magicBurst,
+            goal = 10,
+            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
+            flags = set{"unity"},
+            reward = { sparks = 100, xp = 500, accolades = 500 },
+        },
+
+      -----------------------------------
       -- Vana'versary - 15th Vana'versary I
       -----------------------------------
 
@@ -4407,14 +6902,14 @@ function getRoeRecords(triggers)
             goal = 30,
             reqs = { mobXP = true },
             flags = set{"daily"},
-            reward = { sparks = 100, xp = 500, unity = 300, item = { 8711 } },
+            reward = { sparks = 100, xp = 500, accolades = 300, item = { 8711 } },
         },
 
         [4083] = { -- Buff Allies (D)
             trigger = triggers.buffAlly,
             goal = 20,
             flags = set{"daily"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4084] = { -- Heal for 500+ HP (D)
@@ -4422,7 +6917,7 @@ function getRoeRecords(triggers)
             goal = 100,
             reqs = { healMin = 500 },
             flags = set{"daily"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
 
@@ -4435,7 +6930,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4009] = {   -- Vanquish Beasts
@@ -4443,7 +6938,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4010] = {   -- Vanquish Plantoids
@@ -4451,7 +6946,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4011] = {   -- Vanquish Lizards
@@ -4459,7 +6954,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4012] = {   -- Vanquish Vermin
@@ -4467,7 +6962,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4013] = { -- Gain Experience
@@ -4475,7 +6970,7 @@ function getRoeRecords(triggers)
             goal = 5000,
             increment = 0,
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
             check = function(self, player, params)
                     if params.exp and params.exp > 0 then
                         params.progress = params.progress + params.exp
@@ -4490,7 +6985,7 @@ function getRoeRecords(triggers)
             goal = 3,
             reqs = { itemID = set{1126, 1127, 2955, 2956, 2957} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4015] = {   -- Vanquish Birds (TODO: No abyssea zone kills for vanquishes when exists)
@@ -4498,7 +6993,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.BIRD} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4016] = {   -- Vanquish Amorphs
@@ -4506,7 +7001,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.AMORPH} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4017] = {   -- Vanquish Undead
@@ -4514,7 +7009,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.UNDEAD} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4018] = {   -- Vanquish Arcana
@@ -4522,13 +7017,13 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4019] = {   -- Crack Treasure Caskets (Triggered from caskets.lua)
             goal = 10,
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4020] = {  -- Physical Damage Kills
@@ -4536,7 +7031,7 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
 
         [4021] = {  -- Magic Damage Kills
@@ -4544,7 +7039,14 @@ function getRoeRecords(triggers)
             goal = 20,
             reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL },
             flags = set{"timed", "repeat"},
-            reward = { sparks = 300, xp = 1500, unity = 300, item = { 8711 } },
+            reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
+        },
+
+      -----------------------------------
+      -- Hidden Gates - No Category
+      -----------------------------------
+
+        [4085] = { -- 10 RoE Objectives Complete (All for One requirement)
         },
     }
 end

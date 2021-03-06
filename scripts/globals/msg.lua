@@ -339,6 +339,7 @@ tpz.msg.basic =
     ROE_FIRST_TIME_SPARKS   = 707,  -- As a first-time bonus, you receive <amount> sparks of eminence for a total of <amount>!
     ROE_BONUS_ITEM_PLURAL   = 709,  -- As a special bonus for your valiant efforts, you have been awarded the following: <itemid> x<amount>!
     ROE_TIMED_CLEAR         = 710,  -- You are cleared to fulfill this objective once again.
+    ROE_RECEIVED_ACCOLADES  = 741,  -- You have gained <amount> Unity accolade[/s] for a total of <amount>!
 
     -- TRUST & ALTER EGO
     TRUST_NO_CAST_TRUST     = 700,  -- You are unable to use Trust magic at this time.

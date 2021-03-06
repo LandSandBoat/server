@@ -28,6 +28,8 @@ from migrations import char_timestamp
 from migrations import currency_columns
 from migrations import add_instance_zone_column
 from migrations import convert_all_tables_to_innodb
+from migrations import char_points_weekly_unity
+from migrations import char_profile_unity_leader
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -47,6 +49,8 @@ migrations = [
     currency_columns,
     add_instance_zone_column,
     convert_all_tables_to_innodb,
+    char_points_weekly_unity,
+    char_profile_unity_leader
 ]
 # These are the default 'protected' files
 player_data = [
@@ -76,6 +80,7 @@ player_data = [
     'delivery_box.sql',
     'linkshells.sql',
     'server_variables.sql',
+    'unity_system.sql',
 ]
 import_files = []
 backups = []

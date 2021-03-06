@@ -1496,6 +1496,12 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             if (PSpell->isHeal())
             {
                 roeutils::event(ROE_HEALALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
+
+                // We know its an ally or self, if not self and leader matches, credit the RoE Objective
+                if (this != PTarget && this->objtype == TYPE_PC && PTarget->objtype == TYPE_PC && static_cast<CCharEntity*>(this)->profile.unity_leader == static_cast<CCharEntity*>(PTarget)->profile.unity_leader)
+                {
+                    roeutils::event(ROE_HEAL_UNITYALLY, static_cast<CCharEntity*>(this), RoeDatagram("heal", actionTarget.param));
+                }
             }
             else if (this != PTarget && PSpell->isBuff() && actionTarget.param)
             {

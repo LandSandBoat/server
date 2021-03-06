@@ -1,5 +1,5 @@
 -----------------------------------
--- TO DO: add "Exchange A.M.A.N. currencies" options and event trusts
+-- TO DO: add event trusts
 -----------------------------------
  require("scripts/globals/npc_util")
  require("scripts/globals/zone")
