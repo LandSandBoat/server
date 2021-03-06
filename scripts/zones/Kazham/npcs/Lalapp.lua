@@ -17,7 +17,6 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
@@ -40,9 +39,9 @@ entity.onTrade = function(player, npc, trade)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(1147, 1)
-    local badtrade = (trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(4600, 1))
+    local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(1008, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(4600, 1)
 
-    if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
+    if OpoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 8 or failed == 9 then
             if goodtrade then
                 player:startEvent(227)
@@ -59,18 +58,16 @@ entity.onTrigger = function(player, npc)
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
 
-    if (OpoOpoAndIStatus == QUEST_ACCEPTED) then
+    if OpoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then                          -- has failed on future npc so disregard previous successful trade
             player:startEvent(205)
-            npc:wait()
-        elseif (progress == 8 or failed == 9) then
+        elseif progress == 8 or failed == 9 then
                 player:startEvent(214)  -- asking for ancient salt
-        elseif (progress >= 9 or failed >= 10) then
+        elseif progress >= 9 or failed >= 10 then
             player:startEvent(250) -- happy with ancient salt
         end
     else
         player:startEvent(205)
-        npc:wait()
     end
 end
 
@@ -78,8 +75,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-
-    if (csid == 227) then    -- correct trade, onto next opo
+    if csid == 227 then    -- correct trade, onto next opo
         if player:getCharVar("OPO_OPO_PROGRESS") == 8 then
             player:tradeComplete()
             player:setCharVar("OPO_OPO_PROGRESS", 9)
@@ -87,11 +83,9 @@ entity.onEventFinish = function(player, csid, option, npc)
         else
             player:setCharVar("OPO_OPO_FAILED", 10)
         end
-    elseif (csid == 237) then              -- wrong trade, restart at first opo
+    elseif csid == 237 then              -- wrong trade, restart at first opo
         player:setCharVar("OPO_OPO_FAILED", 1)
         player:setCharVar("OPO_OPO_RETRY", 9)
-    else
-        npc:wait(0)
     end
 end
 

@@ -28,7 +28,6 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
@@ -40,26 +39,21 @@ end
 
 entity.onTrigger = function(player, npc)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 15)) then
+
+    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 15) then
         player:startEvent(314)
     else
         player:startEvent(34)
     end
-
-    -- wait until event is over
-    npc:wait()
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if (csid == 314) then
+    if csid == 314 then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 15, true))
     end
-
-    npc:wait(0)
-
 end
 
 return entity

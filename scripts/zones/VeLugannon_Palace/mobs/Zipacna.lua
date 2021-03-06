@@ -97,7 +97,7 @@ end
 
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
-    if (mob:isFollowingPath() == false) then
+    if mob:isFollowingPath() == false then
         mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
     end
 end

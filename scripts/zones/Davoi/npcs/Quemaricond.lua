@@ -24,11 +24,9 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
-
     tpz.path.patrol(npc, path)
 end
 
@@ -36,29 +34,25 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 3) then
+    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 3 then
         player:startEvent(117)
-        npc:wait()
     else
         player:showText(npc, ID.text.QUEMARICOND_DIALOG)
+        npc:clearPath(true)
         npc:wait(2000)
+        npc:continuePath()
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-
-    if (csid == 117) then
+    if csid == 117 then
         player:setCharVar("MissionStatus", 4)
         player:addKeyItem(tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
     end
-
-    npc:wait(0)
 end
 
 return entity

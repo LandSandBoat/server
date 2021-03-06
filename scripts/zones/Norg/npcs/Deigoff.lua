@@ -72,7 +72,6 @@ local path =
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(tpz.path.first(path))
-    -- entity.onPath(npc)
 end
 
 entity.onPath = function(npc)
@@ -84,14 +83,12 @@ end
 
 entity.onTrigger = function(player, npc)
     player:startEvent(86)
-    npc:wait()
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    npc:wait(0)
 end
 
 return entity
