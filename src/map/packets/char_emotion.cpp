@@ -47,6 +47,26 @@ CCharEmotionPacket::CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint
             ref<uint16>(0x12) = PWeapon->getID();
         }
     }
+    else if (EmoteID == Emote::AIM)
+    {
+        ref<uint16>(0x12) = 65535;
+        CItemWeapon* PWeapon = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_RANGED])->GetItem(PChar->equip[SLOT_RANGED]));
+        if (PWeapon && PWeapon->getID() != 65535)
+        {
+            if (PWeapon->getSkillType() == SKILL_THROWING)
+            {
+                ref<uint16>(0x12) = PWeapon->getID();
+            }
+            else if (PWeapon->getSkillType() == SKILL_MARKSMANSHIP || PWeapon->getSkillType() == SKILL_ARCHERY)
+            {
+                CItemWeapon* PAmmo = static_cast<CItemWeapon*>(PChar->getStorage(PChar->equipLoc[SLOT_AMMO])->GetItem(PChar->equip[SLOT_AMMO]));
+                if (PAmmo && PAmmo->getID() != 65535)
+                {
+                    ref<uint16>(0x12) = PWeapon->getID();
+                }
+            }
+        }
+    }
     else if (EmoteID == Emote::JOB)
     {
         ref<uint8>(0x12) = (extra - 0x1F);

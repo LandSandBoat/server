@@ -76,7 +76,8 @@ enum class Emote : uint8
     DANCE2     = 66,
     DANCE3     = 67,
     DANCE4     = 68,
-    JOB        = 74
+    JOB        = 74,
+    AIM        = 96
 };
 
 enum class EmoteMode : uint8

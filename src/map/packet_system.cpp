@@ -3025,7 +3025,7 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     // Invalid Emote ID.
-    if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)
+    if (EmoteID < Emote::POINT || EmoteID > Emote::AIM)
     {
         return;
     }
