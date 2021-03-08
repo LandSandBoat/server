@@ -127,7 +127,7 @@ local function corsairSetup(caster, ability, action, effect, job)
     local roll = math.random(1, 6)
     caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
     caster:addStatusEffectEx(xi.effect.DOUBLE_UP_CHANCE,
-                              xi.effect.DOUBLE_UP_CHANCE,
+                             xi.effect.DOUBLE_UP_CHANCE,
                              roll,
                              0,
                              45,

@@ -1,26 +1,15 @@
-# Topaz Next 💎
-
-[![release build](https://img.shields.io/github/workflow/status/topaz-next/topaz/build/release?label=release)](https://github.com/topaz-next/topaz/actions?query=workflow%3Abuild+branch%3Arelease)
-[![canary build](https://img.shields.io/github/workflow/status/topaz-next/topaz/build/canary?label=canary)](https://github.com/topaz-next/topaz/actions?query=workflow%3Abuild+branch%3Acanary)
-[![Discord](https://img.shields.io/discord/785766425829572608.svg?label=discord&logo=discord)](https://discord.gg/YvM9mDHGKb)
-[![GitHub contributors](https://img.shields.io/github/contributors/topaz-next/topaz.svg)](https://GitHub.com/topaz-next/topaz/graphs/contributors/)
-![License](https://img.shields.io/github/license/topaz-next/topaz)
+# Ixion
+[![stable build status](https://gitlab.com/ixion-development/ixion/badges/stable/pipeline.svg?key_text=stable)](https://gitlab.com/ixion-development/ixion/-/commits/stable)
+[![unstable build status](https://gitlab.com/ixion-development/ixion/badges/unstable/pipeline.svg?key_text=unstable)](https://gitlab.com/ixion-development/ixion/-/commits/unstable)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Summary
 Welcome to Topaz Next, an open source server emulator for FFXI.
 
-## Current support chat
-https://discord.gg/6EWFPxkZja
-
-## Old Discord
-https://discord.gg/26dAmXTtCa
-
 ## Getting Started
 
-A quick-start guide, frequently asked questions, and a table of "what works" are all available on [our wiki](https://github.com/topaz-next/topaz/wiki).
+A quick-start guide, frequently asked questions, and a table of "what works" are all available on [our wiki](https://gitlab.com/ixion-development/ixion/-/wikis/home).
 
 ## LICENSE
 
-- Topaz Next is descended from Darkstar Project, which was licensed under [GNU GPL v3](https://github.com/topaz-next/topaz/blob/release/LICENSE)
-- Topaz Next is also descended from Project Topaz, which was licensed under [GNU GPL v3](https://github.com/topaz-next/topaz/blob/release/LICENSE)
-- Topaz Next itself is licensed under [GNU GPL v3](https://github.com/topaz-next/topaz/blob/release/LICENSE)
+- Ixion is licensed under [GNU GPL v3](https://gitlab.com/ixion-development/ixion/-/blob/stable/LICENSE)

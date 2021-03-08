@@ -21,6 +21,7 @@
 
 #include "../../common/showmsg.h"
 #include "../../common/utils.h"
+#include "../../common/version.h"
 
 #include <array>
 #include <filesystem>
@@ -197,6 +198,7 @@ namespace luautils
         set_function("clearVarFromAll", &luautils::ClearVarFromAll);
         set_function("sendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         set_function("updateServerMessage", &luautils::UpdateServerMessage);
+        set_function("getServerVersion", &luautils::GetServerVersion);
         set_function("getMobRespawnTime", &luautils::GetMobRespawnTime);
         set_function("disallowRespawn", &luautils::DisallowRespawn);
         set_function("updateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
@@ -4059,6 +4061,16 @@ namespace luautils
         }
 
         return 0;
+    }
+
+    sol::table GetServerVersion()
+    {
+        sol::table version = lua.create_table();
+        version["branch"] = IXION_RELEASE_FLAG;
+        version["major"] = IXION_MAJOR_VERSION;
+        version["minor"] = IXION_MINOR_VERSION;
+        version["rev"] = IXION_REVISION;
+        return version;
     }
 
     sol::table NearLocation(sol::table const& table, float radius, float theta)

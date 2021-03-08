@@ -907,11 +907,11 @@ entity.onTrigger = function(player, npc)
                         for j = 1, 5 do
                             if crateID == ID.npc.APOLLYON_NW_CRATE[i][j] then
                                 if model == 960 then
-                                     xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                     xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                     xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                 end
                             end
                         end
@@ -934,11 +934,11 @@ entity.onTrigger = function(player, npc)
                                 for j = 0, 9 do
                                     if crateID == ID.npc.APOLLYON_SW_CRATE[i]+j then
                                         if crateID == restorePH then
-                                             xi.battlefield.HealPlayers(battlefield)
+                                            xi.battlefield.HealPlayers(battlefield)
                                         elseif crateID == itemPH then
-                                             xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                            xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                         elseif crateID == timePH then
-                                             xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                            xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                         else
                                             if mimicSpawned == 0 or mimicSpawned == 2 or mimicSpawned == 4 or mimicSpawned == 6 then
                                                 npc:setStatus(xi.status.DISAPPEAR)
@@ -972,11 +972,11 @@ entity.onTrigger = function(player, npc)
                                     if j ~= 1 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+1):setStatus(xi.status.DISAPPEAR) end
                                     if j ~= 2 then GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i]+2):setStatus(xi.status.DISAPPEAR) end
                                     if model == 960 then
-                                         xi.battlefield.HealPlayers(battlefield)
+                                        xi.battlefield.HealPlayers(battlefield)
                                     elseif model == 961 then
-                                         xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                        xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                     elseif model == 962 then
-                                         xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                        xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                     end
                                 end
                             end
@@ -994,11 +994,11 @@ entity.onTrigger = function(player, npc)
                         for j = 1, 5 do
                             if crateID == ID.npc.APOLLYON_NE_CRATE[i][j] then
                                 if model == 960 then
-                                     xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                     xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                     xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
                                 end
                             end
                         end
@@ -1015,11 +1015,11 @@ entity.onTrigger = function(player, npc)
                         for j = 0, 2 do
                             if crateID == ID.npc.APOLLYON_SE_CRATE[i]+j then
                                 if model == 960 then
-                                     xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                     xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                     xi.limbus.extendTimeLimit(battlefield, 10, xi.zone.APOLLYON)
+                                    xi.limbus.extendTimeLimit(battlefield, 10, xi.zone.APOLLYON)
                                 end
                             end
                         end

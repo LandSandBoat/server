@@ -27,6 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
+#include "../common/version.h"
 
 #include <cstring>
 #include <utility>
@@ -1753,11 +1754,6 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
         if ((bool)Sql_GetUIntData(SqlHandle, 0))
         {
             PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Server does not support this client version."));
-        }
-        else
-        {
-            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1,
-                                                     "Report bugs on Topaz bugtracker if server admin confirms the bug occurs on stock Topaz."));
         }
     }
 }

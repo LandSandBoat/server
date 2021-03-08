@@ -50,7 +50,7 @@ int    arg_c   = 0;
 char** arg_v   = nullptr;
 
 char* SERVER_NAME = nullptr;
-char  SERVER_TYPE = TOPAZ_SERVER_NONE;
+char  SERVER_TYPE = IXION_SERVER_NONE;
 
 // Copyright (c) Athena Dev Teams
 // Added by Gabuzomeu
@@ -216,7 +216,7 @@ void signals_init()
 
 static void display_title()
 {
-    ShowInfo("Topaz\n");
+    ShowInfo("Ixion\n");
 }
 
 /************************************************************************
@@ -230,7 +230,7 @@ void usercheck()
 #ifndef _WIN32
     if ((getuid() == 0) && (getgid() == 0))
     {
-        ShowWarning("You are running Topaz as the root superuser.\n");
+        ShowWarning("You are running Ixion as the root superuser.\n");
         ShowWarning("It is unnecessary and unsafe to run with root privileges.\n");
         sleep(3);
     }

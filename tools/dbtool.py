@@ -117,6 +117,7 @@ def fetch_errors():
 def fetch_credentials():
     global database, host, port, login, password
     credentials = {}
+
     # Grab mysql credentials
     filename = '../conf/map.conf'
     try:
@@ -127,11 +128,11 @@ def fetch_credentials():
                 match = re.match(r'(mysql_\w+):\s+(\S+)', line)
                 if match:
                     credentials[match.group(1)] = match.group(2)
-        database = credentials['mysql_database']
-        host = credentials['mysql_host']
-        port = int(credentials['mysql_port'])
-        login = credentials['mysql_login']
-        password = credentials['mysql_password']
+        database = os.getenv('XI_DB_NAME') or credentials['mysql_database']
+        host = os.getenv('XI_DB_HOST') or credentials['mysql_host']
+        port = os.getenv('XI_DB_PORT') or int(credentials['mysql_port'])
+        login = os.getenv('XI_DB_USER') or credentials['mysql_login']
+        password = os.getenv('XI_DB_USER_PASSWD') or credentials['mysql_password']
     except:
         print(Fore.RED + 'Error fetching credentials.\nCheck ../conf/map.conf.')
         return False
@@ -485,7 +486,7 @@ def bad_selection():
 
 def menu():
     print(Fore.GREEN + 'o' + Fore.RED + '--------------------------------' + Fore.GREEN + 'o\n' + Fore.RED + 
-          '| ' + Style.RESET_ALL + 'Topaz Database Management Tool ' + Fore.RED + '|\n'
+          '| ' + Style.RESET_ALL + 'Ixion Database Management Tool ' + Fore.RED + '|\n'
           '| ' + Style.RESET_ALL + str('Connected to ' + database).center(30) + Fore.RED + ' |')
     if current_version:
         print(Fore.RED + '| ' + Style.RESET_ALL + str('#' + current_version).center(30) + Fore.RED + ' |')

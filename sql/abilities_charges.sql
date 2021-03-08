@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: xidb
-Target Host: localhost
-Target Database: xidb
-Date: 5/12/2013 12:29:07 AM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for abilities_charges

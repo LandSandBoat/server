@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.8
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Ven 03 Février 2012    22:54
--- Version du serveur: 6.0.0
--- Version de PHP: 5.2.9-2
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -14,12 +5,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
---
--- Base de données: `xidb`
---
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `mob_skill_lists`
@@ -2994,13 +2979,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,842); -- burning strike
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,845); -- fire_iv (bloodpact)
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,846); -- flaming_crush
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,847); -- meteor_strike
--- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,0); -- crimson _howl not in database at all
+-- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,0); -- crimson _howl not in xi database at all
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,842); -- burning strike
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,845); -- fire_iv (bloodpact)
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,846); -- flaming_crush
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,847); -- meteor_strike
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,913); -- inferno
--- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',876,0); -- crimson _howl not in database at all
+-- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',876,0); -- crimson _howl not in xi database at all
 INSERT INTO `mob_skill_lists` VALUES ('Titlacauan',877,530); -- Memento_Mori
 INSERT INTO `mob_skill_lists` VALUES ('Titlacauan',877,531); -- Silence_Seal
 INSERT INTO `mob_skill_lists` VALUES ('Titlacauan',877,533); -- danse macambre

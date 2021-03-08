@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(topaz CXX)
+project(ixion CXX)
 
 set_property(GLOBAL PROPERTY CXX_STANDARD 17)
 set_property(GLOBAL PROPERTY CXX_STANDARD_REQUIRED ON)

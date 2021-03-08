@@ -11,8 +11,8 @@ Tools
 
 This tool creates or connects to the database defined in `../conf/map.conf`. It 
 allows the user to backup or restore the database, import any `custom.sql` 
-stored in `../sql/backups/`, and import the latest SQL files provided by Project 
-Topaz. This tool also handles data migrations for character data.
+stored in `../sql/backups/`, and import the latest SQL files provided by Ixion 
+Development. This tool also handles data migrations for character data.
 
 ## Price Checker
 `python price_checker.py`

@@ -244,7 +244,7 @@ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     elseif peddlestox:getStatus() == xi.status.NORMAL then
         --[[
         TODO: Peddlestox should play a teleport animation and then fade out. On retail this is an 0x03A
-            packet with animation id 122. Currently 0x3A is not implemented in Topaz. Retail capture of
+            packet with animation id 122. Currently 0x3A is not implemented in Ixion. Retail capture of
             the correct animation packet is as follows:
              |  0  1  2  3   4  5  6  7   8  9  A  B   C  D  E  F    | 0123456789ABCDEF
         -----+----------------------------------------------------  -+------------------

@@ -339,7 +339,7 @@ void do_abort()
 
 void set_server_type()
 {
-    SERVER_TYPE = TOPAZ_SERVER_MAP;
+    SERVER_TYPE = IXION_SERVER_MAP;
     SOCKET_TYPE = socket_type::UDP;
 }
 
@@ -972,7 +972,7 @@ void map_helpscreen(int32 flag)
 
 void map_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
+    ShowInfo(CL_WHITE "Ixion version %d%02d_%d (%s)" CL_RESET "\n", IXION_MAJOR_VERSION, IXION_MINOR_VERSION, IXION_REVISION, IXION_RELEASE_FLAG ? "stable" : "unstable");
     if (flag)
     {
         exit(EXIT_FAILURE);

@@ -3,7 +3,6 @@
 --  NPC: Zubaba
 -- Involved in Mission 3-2
 -- !pos 15 -27 18 242
--- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/keyitems")

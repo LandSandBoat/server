@@ -3,7 +3,6 @@
 --  NPC: Mokyoko
 -- Starts Windurst Missions
 -- !pos -55 -8 227 238
--- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/settings")

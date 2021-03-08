@@ -25,25 +25,25 @@ entity.onTrigger = function(player, npc)
         player:startEvent(202)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
         if (xPos > 99 and xPos < 101) then -- Mithra Tower
-            if ( Race== xi.race.MITHRA ) then
+            if ( Race==xi.race.MITHRA ) then
                 player:startEvent(124)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
             end
         elseif (xPos > 739 and xPos < 741) then -- Elvaan Tower
-            if ( Race== xi.race.ELVAAN_M or Race== xi.race.ELVAAN_F) then
+            if ( Race==xi.race.ELVAAN_M or Race==xi.race.ELVAAN_F) then
                 player:startEvent(121)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
             end
         elseif (xPos > 256 and xPos < 258) then -- Tarutaru Tower
-            if ( Race== xi.race.TARU_M or Race== xi.race.TARU_F  ) then
+            if ( Race==xi.race.TARU_M or Race==xi.race.TARU_F  ) then
                 player:startEvent(123)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
             end
         elseif (xPos > 576 and xPos < 578) then -- Galka Tower
-            if ( Race== xi.race.GALKA) then
+            if ( Race==xi.race.GALKA) then
                 player:startEvent(122)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)

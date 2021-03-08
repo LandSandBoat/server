@@ -69,7 +69,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 121 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS, {title= xi.title.DARK_SIDER, var="ZeruhnMines_Zeid_CS"}) then
+    if csid == 121 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS, {title=xi.title.DARK_SIDER, var="ZeruhnMines_Zeid_CS"}) then
         player:unlockJob(xi.job.DRK)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_DARK_KNIGHT)
     elseif csid == 120 then

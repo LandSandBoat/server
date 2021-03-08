@@ -1278,11 +1278,11 @@ entity.onTrigger = function(player, npc)
                         for j = 0, 2 do
                             if crateID == ID.npc.TEMENOS_W_CRATE[i]+j then
                                 if model == 960 then
-                                     xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                     xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                     xi.limbus.extendTimeLimit(battlefield, 15, xi.zone.TEMENOS)
+                                    xi.limbus.extendTimeLimit(battlefield, 15, xi.zone.TEMENOS)
                                 end
                             end
                         end
@@ -1302,11 +1302,11 @@ entity.onTrigger = function(player, npc)
                                 if j ~= 1 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]+1):setStatus(xi.status.DISAPPEAR) end
                                 if j ~= 2 then GetNPCByID(ID.npc.TEMENOS_N_CRATE[i]+2):setStatus(xi.status.DISAPPEAR) end
                                 if model == 960 then
-                                     xi.battlefield.HealPlayers(battlefield)
+                                    xi.battlefield.HealPlayers(battlefield)
                                 elseif model == 961 then
-                                     xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
                                 elseif model == 962 then
-                                     xi.limbus.extendTimeLimit(battlefield, 15, xi.zone.TEMENOS)
+                                    xi.limbus.extendTimeLimit(battlefield, 15, xi.zone.TEMENOS)
                                 end
                             end
                         end
@@ -1337,8 +1337,8 @@ entity.onTrigger = function(player, npc)
                                     if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+2):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+2) end
                                     if GetMobByID(ID.mob.TEMENOS_E_MOB[i]+3):isAlive() then DespawnMob(ID.mob.TEMENOS_E_MOB[i]+3) end
                                     if model == 960 then
-                                         xi.battlefield.HealPlayers(battlefield)
-                                         xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
+                                        xi.battlefield.HealPlayers(battlefield)
+                                        xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
                                     elseif model == 961 then
                                         if mask > 7 and spawnMimic then
                                             battlefield:setLocalVar("crateMaskF"..i, mask-8)
@@ -1346,12 +1346,12 @@ entity.onTrigger = function(player, npc)
                                             SpawnMob(ID.mob.TEMENOS_E_MOB[i]+4):setPos(X, Y, Z)
                                             GetMobByID(ID.mob.TEMENOS_E_MOB[i]+4):updateClaim(player)
                                         else
-                                             xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
-                                             xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
+                                            xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc)
+                                            xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
                                         end
                                     elseif model == 962 then
-                                         xi.limbus.extendTimeLimit(battlefield, 15, xi.zone.TEMENOS)
-                                         xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
+                                        xi.limbus.extendTimeLimit(battlefield, 15, xi.zone.TEMENOS)
+                                        xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_E_GATE[i])
                                     end
                                 else
                                     hold = true
@@ -1371,7 +1371,7 @@ entity.onTrigger = function(player, npc)
                             battlefield:setLocalVar("otherCrate", otherCrate)
                         else
                             GetNPCByID(otherCrate):setStatus(xi.status.DISAPPEAR)
-                             xi.limbus.handleLootRolls(battlefield, loot[bfid][7], nil, npc)
+                            xi.limbus.handleLootRolls(battlefield, loot[bfid][7], nil, npc)
                             battlefield:setLocalVar("cutsceneTimer", 10)
                             battlefield:setLocalVar("lootSeen", 1)
                         end
@@ -1420,7 +1420,7 @@ entity.onTrigger = function(player, npc)
                         SpawnMob(MimicList[randmimic]):setPos(X, Y, Z)
                         GetMobByID(MimicList[randmimic]):updateClaim(player)
                     else
-                         xi.limbus.handleLootRolls(battlefield, loot[bfid][2], nil, npc)
+                        xi.limbus.handleLootRolls(battlefield, loot[bfid][2], nil, npc)
                     end
                     for i = ID.npc.TEMENOS_C_CRATE[4][1]+2, ID.npc.TEMENOS_C_CRATE[4][1]+20 do
                         if ID.npc.TEMENOS_C_CRATE[4][crateID] == ID.npc.TEMENOS_C_CRATE[4][i] then

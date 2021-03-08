@@ -100,7 +100,7 @@ entity.onEventFinish = function(player, csid, option)
             player,
             WINDURST,
             xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY,
-            {item = 13093, title= xi.title.STAR_ONION_BRIGADE_MEMBER, fame=10})
+            {item = 13093, title=xi.title.STAR_ONION_BRIGADE_MEMBER, fame=10})
         then
             player:setLocalVar('TruthZone', 1)
             player:tradeComplete()
@@ -115,7 +115,7 @@ entity.onEventFinish = function(player, csid, option)
             player,
             WINDURST,
             xi.quest.id.windurst.KNOW_ONE_S_ONIONS,
-            {item = 4857, title= xi.title.SOB_SUPER_HERO, var="KnowOnesOnions", fame=10})
+            {item = 4857, title=xi.title.SOB_SUPER_HERO, var="KnowOnesOnions", fame=10})
         then
             player:tradeComplete()
             player:setLocalVar("KnowOneOnionZone", 1)
@@ -127,7 +127,7 @@ entity.onEventFinish = function(player, csid, option)
             player,
             WINDURST,
             xi.quest.id.windurst.INSPECTOR_S_GADGET,
-            {item = 13204, title= xi.title.FAKEMOUSTACHED_INVESTIGATOR, fame=10})
+            {item = 13204, title=xi.title.FAKEMOUSTACHED_INVESTIGATOR, fame=10})
         then
             player:setLocalVar("InspectorsGadgetZone", 1)
         end

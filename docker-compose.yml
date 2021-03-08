@@ -16,7 +16,7 @@ services:
     ports:
       - "3306:3306"
 
-  # Ease of access tool for the DB, you can type in localhost:8080 to get a web interface to the DB. You can log in with root:topazisawesome
+  # Ease of access tool for the DB, you can type in localhost:8080 to get a web interface to the DB. You can log in with root:wheel
   db-admin-portal:
     image: adminer
     restart: always
@@ -27,16 +27,16 @@ services:
 
   # The server service
   game:
-    # Build whatever is in the Dockerfile in the topaz root folder
+    # Build whatever is in the Dockerfile in the ixion root folder
     build: .
     depends_on:
       - "db"
     ports:
-      # topaz_connect
+      # ixion_connect
       - "54230:54230/tcp"
       - "54231:54231/tcp"
       - "54001:54001/tcp"
-      # topaz_search
+      # ixion_search
       - "54002:54002/tcp"
-      # topaz_game
+      # ixion_game
       - "54230:54230/udp"

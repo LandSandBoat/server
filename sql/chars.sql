@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: xidb
-Target Host: localhost
-Target Database: xidb
-Date: 2/11/2013 11:16:49 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for chars

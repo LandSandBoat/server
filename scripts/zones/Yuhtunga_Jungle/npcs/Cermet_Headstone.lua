@@ -73,7 +73,7 @@ entity.onEventFinish = function(player, csid, option)
         SpawnMob(ID.mob.CARTHI):updateClaim(player)
 
     -- WRATH OF THE OPO-OPOS
-    elseif csid == 202 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS, {item=13143, title= xi.title.FRIEND_OF_THE_OPOOPOS}) then
+    elseif csid == 202 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.WRATH_OF_THE_OPO_OPOS, {item=13143, title=xi.title.FRIEND_OF_THE_OPOOPOS}) then
         player:confirmTrade()
     end
 end

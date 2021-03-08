@@ -1,8 +1,7 @@
 -----------------------------------
 -------------   GLOBAL SETTINGS   -------------
 -----------------------------------
-
--- This is to allow server operators to further customize their servers.  As more features are added to pXI, the list will surely expand.
+-- This is to allow server operators to further customize their servers.  As more features are added to Ixion, the list will surely expand.
 -- Anything scripted can be customized with proper script editing.
 
 -- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS YOU DO: ADD THIS LINE TO THE TOP!!!!

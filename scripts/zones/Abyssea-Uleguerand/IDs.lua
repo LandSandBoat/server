@@ -40,18 +40,18 @@ zones[xi.zone.ABYSSEA_ULEGUERAND] =
             --  [17813956] = { 'qm8',           {3255},                                                           {}, 17813938}, -- Anemic Aloysius
             --  [17813957] = { 'qm9',           {3256},                                                           {}, 17813939}, -- Chillwing Hwitti
             --  [17813958] = {'qm10',           {3258},                                                           {}, 17813940}, -- Audumbla
-            --  [17813959] = {'qm11',               {}, { xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD}, 17813910}, -- Pantokrator
-            --  [17813960] = {'qm12',               {},                                  { xi.ki.TORN_KHIMAIRA_WING}, 17813911}, -- Apademak
-            --  [17813961] = {'qm13',               {},                                { xi.ki.BEGRIMED_DRAGON_HIDE}, 17813912}, -- Isgebind
-            --  [17813962] = {'qm14',               {},                              { xi.ki.DECAYING_DIREMITE_FANG}, 17813913}, -- Resheph
-            --  [17813963] = {'qm15',               {}, { xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD}, 17813914}, -- Pantokrator
-            --  [17813964] = {'qm16',               {},                                  { xi.ki.TORN_KHIMAIRA_WING}, 17813915}, -- Apademak
-            --  [17813965] = {'qm17',               {},                                { xi.ki.BEGRIMED_DRAGON_HIDE}, 17813916}, -- Isgebind
-            --  [17813966] = {'qm18',               {},                              { xi.ki.DECAYING_DIREMITE_FANG}, 17813917}, -- Resheph
-            --  [17813967] = {'qm19',               {}, { xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD}, 17813918}, -- Pantokrator
-            --  [17813968] = {'qm20',               {},                                  { xi.ki.TORN_KHIMAIRA_WING}, 17813919}, -- Apademak
-            --  [17813969] = {'qm21',               {},                                { xi.ki.BEGRIMED_DRAGON_HIDE}, 17813920}, -- Isgebind
-            --  [17813970] = {'qm22',               {},                              { xi.ki.DECAYING_DIREMITE_FANG}, 17813921}, -- Resheph
+            --  [17813959] = {'qm11',               {}, {xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD}, 17813910}, -- Pantokrator
+            --  [17813960] = {'qm12',               {},                                  {xi.ki.TORN_KHIMAIRA_WING}, 17813911}, -- Apademak
+            --  [17813961] = {'qm13',               {},                                {xi.ki.BEGRIMED_DRAGON_HIDE}, 17813912}, -- Isgebind
+            --  [17813962] = {'qm14',               {},                              {xi.ki.DECAYING_DIREMITE_FANG}, 17813913}, -- Resheph
+            --  [17813963] = {'qm15',               {}, {xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD}, 17813914}, -- Pantokrator
+            --  [17813964] = {'qm16',               {},                                  {xi.ki.TORN_KHIMAIRA_WING}, 17813915}, -- Apademak
+            --  [17813965] = {'qm17',               {},                                {xi.ki.BEGRIMED_DRAGON_HIDE}, 17813916}, -- Isgebind
+            --  [17813966] = {'qm18',               {},                              {xi.ki.DECAYING_DIREMITE_FANG}, 17813917}, -- Resheph
+            --  [17813967] = {'qm19',               {}, {xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD}, 17813918}, -- Pantokrator
+            --  [17813968] = {'qm20',               {},                                  {xi.ki.TORN_KHIMAIRA_WING}, 17813919}, -- Apademak
+            --  [17813969] = {'qm21',               {},                                {xi.ki.BEGRIMED_DRAGON_HIDE}, 17813920}, -- Isgebind
+            --  [17813970] = {'qm22',               {},                              {xi.ki.DECAYING_DIREMITE_FANG}, 17813921}, -- Resheph
         },
     },
 }

@@ -3,7 +3,6 @@
 --  NPC: Janshura Rashura
 -- Starts Windurst Missions
 -- !pos -227 -8 184 240
--- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
 require("scripts/globals/settings")

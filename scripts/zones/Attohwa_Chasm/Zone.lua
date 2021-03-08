@@ -62,7 +62,7 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    -- TODO: Gasponia's shouldn't "always" poison you. However, in retail regions constantly reapply themselves without having to re-enter the region. In Topaz that doesn't happen so I'm leaving it as-is for now.
+    -- TODO: Gasponia's shouldn't "always" poison you. However, in retail regions constantly reapply themselves without having to re-enter the region. In Ixion that doesn't happen so I'm leaving it as-is for now.
     local regionId = region:GetRegionID()
     if (regionId <= 30) then
         local gasponia = GetNPCByID(ID.npc.GASPONIA_OFFSET + (regionId - 1))

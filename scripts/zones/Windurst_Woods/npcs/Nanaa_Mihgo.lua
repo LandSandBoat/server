@@ -220,7 +220,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
         player:setCharVar("thickAsThievesGamblingCS", 1)
         npcUtil.giveKeyItem(player,
-            { xi.ki.GANG_WHEREABOUTS_NOTE, xi.ki.FIRST_FORGED_ENVELOPE, xi.ki.SECOND_FORGED_ENVELOPE})
+            {xi.ki.GANG_WHEREABOUTS_NOTE, xi.ki.FIRST_FORGED_ENVELOPE, xi.ki.SECOND_FORGED_ENVELOPE})
     elseif (csid == 508 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES, {
         item = 12514,
         var = "thickAsThievesGamblingCS"

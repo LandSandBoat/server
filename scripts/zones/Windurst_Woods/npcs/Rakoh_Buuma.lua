@@ -3,7 +3,6 @@
 --  NPC: Rakoh Buuma
 -- Starts Windurst Missions
 -- !pos 106 -5 -23 241
--- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/keyitems")
