@@ -32,6 +32,8 @@ set(SOURCES
     char_check.h
     char_emotion.cpp
     char_emotion.h
+    char_emotion_jump.cpp
+    char_emotion_jump.h
     char_equip.cpp
     char_equip.h
     char_health.cpp

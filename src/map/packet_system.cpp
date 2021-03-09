@@ -91,6 +91,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/char_appearance.h"
 #include "packets/char_check.h"
 #include "packets/char_emotion.h"
+#include "packets/char_emotion_jump.h"
 #include "packets/char_equip.h"
 #include "packets/char_health.h"
 #include "packets/char_job_extra.h"
@@ -3024,7 +3025,7 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     // Invalid Emote ID.
-    if (EmoteID < Emote::POINT || EmoteID > Emote::JOB)
+    if (EmoteID < Emote::POINT || EmoteID > Emote::AIM)
     {
         return;
     }
@@ -6744,6 +6745,42 @@ void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
+ *  Jump (/jump)                                                         *
+ *                                                                       *
+ ************************************************************************/
+
+void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
+{
+    TracyZoneScoped;
+    if (jailutils::InPrison(PChar))
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+        return;
+    }
+
+    // Rate limit emotes
+    auto lastEmoteTime  = PChar->GetLocalVar("LastEmoteTime");
+    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
+    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
+    {
+        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
+    }
+    else
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x11D: Rate limiting jump packet for %s\n" CL_RESET, PChar->GetName());
+        return;
+    }
+
+    const auto targetID    = data.ref<uint32>(0x04);
+    const auto targetIndex = data.ref<uint16>(0x08);
+    const auto extra       = data.ref<uint16>(0x0A);
+
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionJumpPacket(PChar, targetIndex, extra));
+
+}
+
+/************************************************************************
+ *                                                                       *
  *  Packet Array Initialization                                          *
  *                                                                       *
  ************************************************************************/
@@ -6869,6 +6906,7 @@ void PacketParserInitialize()
     PacketSize[0x116] = 0x00; PacketParser[0x116] = &SmallPacket0x116;
     PacketSize[0x117] = 0x00; PacketParser[0x117] = &SmallPacket0x117;
     PacketSize[0x118] = 0x00; PacketParser[0x118] = &SmallPacket0x118;
+    PacketSize[0x11D] = 0x00; PacketParser[0x11D] = &SmallPacket0x11D;
     // clang-format on
 }
 
