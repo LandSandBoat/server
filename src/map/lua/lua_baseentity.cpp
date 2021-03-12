@@ -9237,7 +9237,7 @@ void CLuaBaseEntity::updateClaim(sol::object const& entity)
         return;
     }
 
-    if ((entity != sol::nil) || !entity.is<CLuaBaseEntity*>())
+    if ((entity == sol::nil) || !entity.is<CLuaBaseEntity*>())
     {
         static_cast<CMobEntity*>(m_PBaseEntity)->m_OwnerID.clean();
         static_cast<CMobEntity*>(m_PBaseEntity)->updatemask |= UPDATE_STATUS;
