@@ -1179,7 +1179,7 @@ function doDivineNuke(caster, target, spell, params)
 end
 
 function doNinjutsuNuke(caster, target, spell, params)
-    local mabBonus = params.mabBonus
+    local mabBonus = params.bonusmab
 
     mabBonus = mabBonus or 0
 
@@ -1189,7 +1189,7 @@ function doNinjutsuNuke(caster, target, spell, params)
     end
     params.skillType = xi.skill.NINJUTSU
     params.attribute = xi.mod.INT
-    params.mabBonus = mabBonus
+    params.bonusmab = mabBonus
 
     return doNuke(caster, target, spell, params)
 end
