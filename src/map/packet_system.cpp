@@ -2458,7 +2458,6 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0));
                     return;
                 }
-                PItem->setCharPrice(price); // not sure setCharPrice is right
                 PChar->pushPacket(new CAuctionHousePacket(action, PItem, quantity, price));
             }
         }
