@@ -33,10 +33,10 @@ then
 fi
 if [ $OS = "debian" ] || [[ $OS_LIKE =~ $DEBIAN ]]
 then
-    adduser $IXION_USER --gecos "Ixion - FFXI" --disabled-password || true
+    adduser --system --no-create-home --group --quiet $IXION_USER || true
 elif [ $OS = "arch" ] || [[ $OS_LIKE =~ $ARCH ]]
 then
-    useradd $IXION_USER -c "Ixion - FFXI" || true
+    useradd -r -s /usr/bin/nologin $IXION_USER || true
 else
     echo "Sorry, this OS is unsupported at this time." && exit
 fi
@@ -138,7 +138,7 @@ WantedBy=ixion.service
 # Create services and enable child services
 usermod -aG $IXION_USER $SUDO_USER
 chown -R $IXION_USER:$IXION_USER $PWD
-chmod 775 $PWD -R 2>/dev/null
+chmod -R g=u $PWD 2>/dev/null
 echo "$SYSTEMD_IXION" > /etc/systemd/system/ixion.service
 echo "$SYSTEMD_GAME" > /etc/systemd/system/ixion_game.service
 echo "$SYSTEMD_CONNECT" > /etc/systemd/system/ixion_connect.service
