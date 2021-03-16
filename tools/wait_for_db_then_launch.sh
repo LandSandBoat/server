@@ -12,9 +12,8 @@ else
     mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "CREATE TABLE `DB_VER` (`ver` VARCHAR(40) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
     XI_DB_VER=`git rev-parse --short=4 HEAD`
 fi
-echo -e "\n#DB_VER: ${XI_DB_VER}" >> conf/version.conf
+echo -e "\n#DB_VER: ${XI_DB_VER}" >> ../conf/version.conf
 # Update database if needed
-cd tools
 python3 dbtool.py update
 XI_DB_VER=`git rev-parse --short=4 HEAD`
 mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "UPDATE DB_VER SET ver = '${XI_DB_VER}'"

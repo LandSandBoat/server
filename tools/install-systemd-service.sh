@@ -21,6 +21,7 @@ then
     OS=$ID
     OS_LIKE=$ID_LIKE
 fi
+PPWD="$(dirname "$(pwd)")"
 DEBIAN="^debian|[[:space:]]debian|^ubuntu|[[:space:]]ubuntu"
 ARCH="^arch|[[:space:]]arch"
 # Try to create new user
@@ -76,17 +77,17 @@ Restart=always
 RestartSec=5
 User=$IXION_USER
 Group=$IXION_USER
-WorkingDirectory=$PWD
+WorkingDirectory=$PPWD
 # For multiple map servers:
 # - Make a copy of this file for each server. Rename appropriately, e.g. ixion_game-cities.service
 # - Uncomment line in update.sh 'echo IP=\$IP > ip.txt'.
 # - Change the zone ports in zone_settings table. A custom.sql file is useful for this, see update.sh.
 # - Run update.sh and change your server IP. Manually type the IP even if you're not changing it.
-# - Remove the line below, 'ExecStart=$PWD/ixion_game'.
+# - Remove the line below, 'ExecStart=$PPWD/ixion_game'.
 # - Uncomment and edit the 2 lines below with the appropriate port and log location for each zone server.
-#EnvironmentFile=$PWD/ip.txt
-#ExecStart=$PWD/ixion_game --ip \$IP --port 54230 --log $PWD/log/map_server.log
-ExecStart=$PWD/ixion_game
+#EnvironmentFile=$PPWD/ip.txt
+#ExecStart=$PPWD/ixion_game --ip \$IP --port 54230 --log $PPWD/log/map_server.log
+ExecStart=$PPWD/ixion_game
 
 [Install]
 WantedBy=ixion.service
@@ -107,8 +108,8 @@ Restart=always
 RestartSec=5
 User=$IXION_USER
 Group=$IXION_USER
-WorkingDirectory=$PWD
-ExecStart=$PWD/ixion_connect
+WorkingDirectory=$PPWD
+ExecStart=$PPWD/ixion_connect
 
 [Install]
 WantedBy=ixion.service
@@ -129,16 +130,16 @@ Restart=always
 RestartSec=5
 User=$IXION_USER
 Group=$IXION_USER
-WorkingDirectory=$PWD
-ExecStart=$PWD/ixion_search
+WorkingDirectory=$PPWD
+ExecStart=$PPWD/ixion_search
 
 [Install]
 WantedBy=ixion.service
 """
 # Create services and enable child services
 usermod -aG $IXION_USER $SUDO_USER
-chown -R $IXION_USER:$IXION_USER $PWD
-chmod -R g=u $PWD 2>/dev/null
+chown -R $IXION_USER:$IXION_USER $PPWD
+chmod -R g=u $PPWD 2>/dev/null
 echo "$SYSTEMD_IXION" > /etc/systemd/system/ixion.service
 echo "$SYSTEMD_GAME" > /etc/systemd/system/ixion_game.service
 echo "$SYSTEMD_CONNECT" > /etc/systemd/system/ixion_connect.service

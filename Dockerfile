@@ -29,7 +29,7 @@ COPY /conf/default/* conf/
 RUN pip3 install -r tools/requirements.txt
 
 # Ensure wait_for_db_then_launch.sh is executable
-RUN chmod +x ./wait_for_db_then_launch.sh
+RUN chmod +x ./tools/wait_for_db_then_launch.sh
 
 # Startup the server when the container starts
-ENTRYPOINT ./wait_for_db_then_launch.sh
+ENTRYPOINT ./tools/wait_for_db_then_launch.sh
