@@ -64,6 +64,9 @@ local checks =
     mobID = function(self, player, params)    -- Mob ID check
         return (params.mob and self.reqs.mobID[params.mob:getID()]) and true or false
     end,
+    mobName = function(self, player, params)
+        return (params.mob and self.reqs.mobName[params.mob:getName()]) and true or false
+    end,
     mobXP = function(self, player, params)    -- Mob yields xp
         return (params.mob and player:checkKillCredit(params.mob)) and true or false
     end,
