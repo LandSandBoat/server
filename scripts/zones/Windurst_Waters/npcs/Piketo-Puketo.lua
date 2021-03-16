@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -91,6 +92,10 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             player:setLocalVar("CookingTraded",0)
         end
+    end
+
+    if player:hasEminenceRecord(107) then
+        tpz.roe.onRecordTrigger(player, 107)
     end
 end
 

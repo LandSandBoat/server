@@ -103,6 +103,90 @@ function getRoeRecords(triggers)
         ]]
 
       -----------------------------------
+      -- Tutorial -> Synthesis
+      -----------------------------------
+
+        [ 100] = { -- Speak to Carpenters' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 101] = { -- Speak to Blacksmiths' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 102] = { -- Speak to Goldsmiths' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 103] = { -- Speak to Weavers' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 104] = { -- Speak to Tanners' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 105] = { -- Speak to Boneworkers' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 106] = { -- Speak to Alchemists' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 107] = { -- Speak to Culinarians' Guild Master
+            reward =  { sparks = 100, xp = 500 }
+        },
+
+        [ 108] = { -- Woodworking: Padded Box
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 2775 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 109] = { -- Smithing: Bronze Knife
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 16465, 16491 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 110] = { -- Goldsmithing: Copper Ring
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 13454, 13492 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 111] = { -- Weaving: Headgear
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 12464, 12471 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 112] = { -- Tanning: Leather Bandana
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 12440, 12542 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 113] = { -- Boneworking: Shell Powder
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 1883 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 114] = { -- Alchemy: Black Ink
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 929 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+        [ 115] = { -- Cooking: Pebble Soup
+            trigger = triggers.synthSuccess,
+            reqs = { itemID = set{ 4455, 4592 } },
+            reward = { sparks = 100, xp = 500 },
+        },
+
+      -----------------------------------
       -- Tutorial -> Quests 1
       -----------------------------------
 

@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -91,6 +92,10 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             player:setLocalVar("GoldsmithingTraded",0)
         end
+    end
+
+    if player:hasEminenceRecord(102) then
+        tpz.roe.onRecordTrigger(player, 102)
     end
 end
 
