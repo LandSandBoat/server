@@ -3023,6 +3023,174 @@ function getRoeRecords(triggers)
       -- Combat (Region) - Adoulin 1
       -----------------------------------
 
+        [ 310] = { -- Conflict: Rala Waterways I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Spoutdrenched_Toad"}, zone = set{258} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 311] = { -- Conflict: Rala Waterways II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Stillwater_Funguar"}, zone = set{258} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 312] = { -- Conflict: Rala Waterways III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Pewter_Diremite"}, zone = set{258} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 313] = { -- Conflict: Ceizak Battlegrounds I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Blanched_Mandragora"}, zone = set{261} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 314] = { -- Conflict: Ceizak Battlegrounds II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Careening_Twitherym"}, zone = set{261} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 315] = { -- Conflict: Ceizak Battlegrounds III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Resplendent_Luckybug"}, zone = set{261} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 316] = { -- Conflict: Yahse Hunting Grounds I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Calfcleaving_Chapuli"}, zone = set{260} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 317] = { -- Conflict: Yahse Hunting Grounds II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Twitherym_Infestation"}, zone = set{260} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 318] = { -- Conflict: Yahse Hunting Grounds III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Nettled_Wasp"}, zone = set{260} },
+            flags = set{"repeat"},
+            reward = { sparks = 100, xp = 500, capacity = 100, accolades = 10 },
+        },
+
+        [ 319] = { -- Conflict: Foret de Hennitiel I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Perfidious_Crab"}, zone = set{262} },
+            flags = set{"repeat"},
+            reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        },
+
+        [ 320] = { -- Conflict: Foret de Hennitiel II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Scummy_Slug"}, zone = set{262} },
+            flags = set{"repeat"},
+            reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        },
+
+        [ 321] = { -- Conflict: Foret de Hennitiel III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Vorst_Gnat"}, zone = set{262} },
+            flags = set{"repeat"},
+            reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        },
+
+        [ 322] = { -- Conflict: Morimar Basalt Fields I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Sinewy_Matamata"}, zone = set{265} },
+            flags = set{"repeat"},
+            reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        },
+
+        [ 323] = { -- Conflict: Morimar Basalt Fields II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Tephra_Lizard"}, zone = set{265} },
+            flags = set{"repeat"},
+            reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        },
+
+        [ 324] = { -- Conflict: Morimar Basalt Fields III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Maca_Maca"}, zone = set{265} },
+            flags = set{"repeat"},
+            reward = { sparks = 110, xp = 500, capacity = 100, accolades = 11 },
+        },
+
+        [ 325] = { -- Conflict: Yorcia Weald I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Snapweed"}, zone = set{263} },
+            flags = set{"repeat"},
+            reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        },
+
+        [ 326] = { -- Conflict: Yorcia Weald II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Cheeky_Opo-opo"}, zone = set{263} },
+            flags = set{"repeat"},
+            reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        },
+
+        [ 327] = { -- Conflict: Yorcia Weald III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Bronzecap"}, zone = set{263} },
+            flags = set{"repeat"},
+            reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        },
+
+        [ 328] = { -- Conflict: Marjami Ravine I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Vinelash_Vulture"}, zone = set{266} },
+            flags = set{"repeat"},
+            reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        },
+
+        [ 329] = { -- Conflict: Marjami Ravine II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Stryx"}, zone = set{266} },
+            flags = set{"repeat"},
+            reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        },
+
+        [ 330] = { -- Conflict: Marjami Ravine III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Lapinion"}, zone = set{266} },
+            flags = set{"repeat"},
+            reward = { sparks = 120, xp = 500, capacity = 100, accolades = 12 },
+        },
+
       -----------------------------------
       -- Combat (Region) - Adoulin 2
       -----------------------------------
