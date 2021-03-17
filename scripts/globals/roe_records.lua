@@ -3279,6 +3279,198 @@ function getRoeRecords(triggers)
       -- Combat (Region) - Adoulin 2
       -----------------------------------
 
+        [ 331] = { -- Conflict: Kamihr Drifts I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Snowpelt_Rabbit"}, zone = set{267} },
+            flags = set{"repeat"},
+            reward = { sparks = 130, xp = 500, capacity = 100, accolades = 13 },
+        },
+
+        [ 332] = { -- Conflict: Kamihr Drifts II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Cicatricose_Raaz"}, zone = set{267} },
+            flags = set{"repeat"},
+            reward = { sparks = 130, xp = 500, capacity = 100, accolades = 13 },
+        },
+
+        [ 333] = { -- Conflict: Kamihr Drifts III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Shaggy_Ovim"}, zone = set{267} },
+            flags = set{"repeat"},
+            reward = { sparks = 130, xp = 500, capacity = 100, accolades = 13 },
+        },
+
+        [ 334] = { -- Conflict: Sih Gates I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Bonaria"}, zone = set{268} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 335] = { -- Conflict: Sih Gates II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Loathsome_Obdella"}, zone = set{268} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 336] = { -- Conflict: Sih Gates III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Ferocious_Funguar"}, zone = set{268} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 337] = { -- Conflict: Moh Gates I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Conflagrant_Eruca"}, zone = set{269} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 338] = { -- Conflict: Moh Gates II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Erythemic_Eft"}, zone = set{269} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 339] = { -- Conflict: Moh Gates III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Writhing_Obdella"}, zone = set{269} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 340] = { -- Conflict: Cirdas Caverns I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Subterrane_Spider"}, zone = set{270} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 341] = { -- Conflict: Cirdas Caverns II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Livid_Umbril"}, zone = set{270} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 342] = { -- Conflict: Cirdas Caverns III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Flatus_Acuex"}, zone = set{270} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 343] = { -- Conflict: Dho Gates I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Velkk_Magus"}, zone = set{272} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 344] = { -- Conflict: Dho Gates II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Ripsaw_Jagil"}, zone = set{272} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 345] = { -- Conflict: Dho Gates III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Unyielding_Tarichuk"}, zone = set{272} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 346] = { -- Conflict: Woh Gates I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Metalcruncher_Worm"}, zone = set{273} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 347] = { -- Conflict: Woh Gates II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Drusy_Twitherym"}, zone = set{273} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 348] = { -- Conflict: Woh Gates III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Wheezing_Acuex"}, zone = set{273} },
+            flags = set{"repeat"},
+            reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
+        },
+
+        [ 494] = { -- Conflict: Outer Ra'Kaznar I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Restless_Twitherym"}, zone = set{274} },
+            flags = set{"repeat"},
+            reward = { sparks = 170, xp = 500, capacity = 100, accolades = 17 },
+        },
+
+        [ 495] = { -- Conflict: Outer Ra'Kaznar II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Bristlehair_Bat"}, zone = set{274} },
+            flags = set{"repeat"},
+            reward = { sparks = 170, xp = 500, capacity = 100, accolades = 17 },
+        },
+
+        [ 496] = { -- Conflict: Outer Ra'Kaznar III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Astringent_Acuex"}, zone = set{274} },
+            flags = set{"repeat"},
+            reward = { sparks = 170, xp = 500, capacity = 100, accolades = 17 },
+        },
+
+        [ 762] = { -- Conflict: Ra'Kaznar Inner Court I
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Bilespouting_Acuex"}, zone = set{276} },
+            flags = set{"repeat"},
+            reward = { sparks = 180, xp = 600, capacity = 100, accolades = 18 },
+        },
+
+        [ 763] = { -- Conflict: Ra'Kaznar Inner Court II
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Scowling_Vodoriga"}, zone = set{276} },
+            flags = set{"repeat"},
+            reward = { sparks = 180, xp = 600, capacity = 100, accolades = 18 },
+        },
+
+        [ 764] = { -- Conflict: Ra'Kaznar Inner Court III
+            trigger = triggers.mobKill,
+            goal = 5,
+            reqs = { mobName = set{"Unrepentant_Byrgen"}, zone = set{276} },
+            flags = set{"repeat"},
+            reward = { sparks = 180, xp = 600, capacity = 100, accolades = 18 },
+        },
+
       -----------------------------------
       -- Combat (Region) - Zilart 1
       -----------------------------------
