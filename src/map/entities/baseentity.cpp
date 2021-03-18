@@ -39,8 +39,8 @@ CBaseEntity::CBaseEntity()
     memset(&loc, 0, sizeof(loc));
     animation    = ANIMATION_NONE;
     animationsub = 0;
-    speed        = 50;
-    speedsub     = 50;
+    speed        = 50 + map_config.speed_mod; // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
+    speedsub     = 50; // Retail does NOT adjust this when speed is adjusted.
     namevis      = 0;
     allegiance   = ALLEGIANCE_TYPE::MOB;
     updatemask   = 0;
