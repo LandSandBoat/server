@@ -571,7 +571,7 @@ xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS
                 break
             end
         end
-        player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)
+        player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, 0)
         player:messageSpecial(msg.RETURN_MAGIAN_ITEM, t.reqItem)
 
     -- finishes a trial
