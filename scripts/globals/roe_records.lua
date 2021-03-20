@@ -1719,6 +1719,41 @@ function getRoeRecords(triggers)
           reward = { sparks = 300, xp = 500 },
       },
 
+      [1396] = { -- Chains of Promathia Chapter 4
+          trigger = triggers.missionComplete,
+          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.SLANDEROUS_UTTERINGS} },
+          flags = set{"retro"},
+          reward = { sparks = 300, xp = 500 },
+      },
+
+      [1397] = { -- Chains of Promathia Chapter 5
+          trigger = triggers.missionComplete,
+          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS} },
+          flags = set{"retro"},
+          reward = { sparks = 300, xp = 500 },
+      },
+
+      [1398] = { -- Chains of Promathia Chapter 6
+          trigger = triggers.missionComplete,
+          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED} },
+          flags = set{"retro"},
+          reward = { sparks = 300, xp = 500 },
+      },
+
+      [1399] = { -- Chains of Promathia Chapter 7
+          trigger = triggers.missionComplete,
+          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH} },
+          flags = set{"retro"},
+          reward = { sparks = 300, xp = 500 },
+      },
+
+      [1400] = { -- Chains of Promathia Chapter 7
+          trigger = triggers.missionComplete,
+          reqs = { missionComplete = {xi.mission.log_id.COP, xi.mission.id.cop.DAWN} },
+          flags = set{"retro"},
+          reward = { sparks = 300, xp = 500 },
+      },
+
       -----------------------------------
       -- Tutorial -> Missions (Treasures of Aht Urhgan)
       -----------------------------------

@@ -95,7 +95,7 @@ entity.onEventFinish = function(player, csid, option)
     end
 
     if player:hasEminenceRecord(107) then
-        tpz.roe.onRecordTrigger(player, 107)
+        xi.roe.onRecordTrigger(player, 107)
     end
 end
 
