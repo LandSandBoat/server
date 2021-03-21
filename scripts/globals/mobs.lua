@@ -1,6 +1,7 @@
 -----------------------------------
 -- Global version of onMobDeath
 -----------------------------------
+require("scripts/globals/magiantrials")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/status")
