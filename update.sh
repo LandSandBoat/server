@@ -4,7 +4,7 @@ REMOTE="origin" # Remote to pull from
 SERVICE="" # Systemd service (e.g. "ixion.service")
 
 stash() {
-    git diff-index --quiet HEAD --
+    git status --porcelain | grep "^." >/dev/null
     if [ $? -eq 0 ]
     then
         if git stash push -m "Auto stash for update on `date`"
