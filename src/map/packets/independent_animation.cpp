@@ -2,9 +2,9 @@
 
 #include "../entities/baseentity.h"
 
-#include "independant_animation.h"
+#include "independent_animation.h"
 
-CIndependantAnimationPacket::CIndependantAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, uint16 animId, uint8 type)
+CIndependentAnimationPacket::CIndependentAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, uint16 animId, uint8 type)
 {
     this->type = 0x3A;
     this->size = 0x14;

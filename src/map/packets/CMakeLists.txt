@@ -102,8 +102,8 @@ set(SOURCES
     guild_menu_sell.h
     guild_menu_sell_update.cpp
     guild_menu_sell_update.h
-    independant_animation.cpp
-    independant_animation.h
+    independent_animation.cpp
+    independent_animation.h
     instance_entry.cpp
     instance_entry.h
     inventory_assign.cpp

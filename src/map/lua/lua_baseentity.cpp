@@ -118,7 +118,7 @@
 #include "../packets/event_update_string.h"
 #include "../packets/guild_menu.h"
 #include "../packets/guild_menu_buy.h"
-#include "../packets/independant_animation.h"
+#include "../packets/independent_animation.h"
 #include "../packets/instance_entry.h"
 #include "../packets/inventory_assign.h"
 #include "../packets/inventory_finish.h"
@@ -8620,19 +8620,17 @@ void CLuaBaseEntity::enableEntities(std::vector<uint32> data)
 }
 
 /************************************************************************
- *  Function: independantAnimation()
- *  Purpose : Play an animation independant of action messages
- *  Example : player:independantAnimation(player, 251, 4) -- Plays little hearts
+ *  Function: independentAnimation()
+ *  Purpose : Play an animation independent of action messages
+ *  Example : player:independentAnimation(player, 251, 4) -- Plays little hearts
  *  Notes   :
  ************************************************************************/
-void CLuaBaseEntity::independantAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
+void CLuaBaseEntity::independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    PChar->pushPacket(new CIndependantAnimationPacket(PChar, PTarget->GetBaseEntity(), animId, mode));
+    CBaseEntity* PActor = (CCharEntity*)m_PBaseEntity;
+    PActor->loc.zone->PushPacket(PActor, CHAR_INRANGE_SELF, new CIndependentAnimationPacket(PActor, PTarget->GetBaseEntity(), animId, mode));
 }
 
 /************************************************************************
@@ -12979,7 +12977,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("countdown", CLuaBaseEntity::countdown);
     SOL_REGISTER("enableEntities", CLuaBaseEntity::enableEntities);
-    SOL_REGISTER("independantAnimation", CLuaBaseEntity::independantAnimation);
+    SOL_REGISTER("independentAnimation", CLuaBaseEntity::independentAnimation);
 
     SOL_REGISTER("engage", CLuaBaseEntity::engage);
     SOL_REGISTER("isEngaged", CLuaBaseEntity::isEngaged);
