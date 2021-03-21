@@ -188,7 +188,7 @@ def fetch_configs():
                         if value != '':
                             mysql_bin = value
                     if key == 'auto_backup':
-                        auto_backup = bool(value)
+                        auto_backup = int(value)
                     if key == 'auto_update_client':
                         auto_update_client = bool(value)
                     if key == 'player_data':
@@ -313,6 +313,8 @@ def setup_db():
 
 def backup_db(silent=False,lite=False):
     if silent or input('Would you like to backup your database? [y/N] ').lower() == 'y':
+        if not silent:
+            lite = input('Would you like to only backup protected tables? [y/N] ').lower() == 'y'
         if lite:
             tables = ' '
             for table in player_data:
@@ -336,7 +338,7 @@ def express_update(silent=False):
 
 def update_db(silent=False,express=False):
     if not silent or auto_backup:
-        backup_db(silent)
+        backup_db(silent, auto_backup == 2)
     if not express:
         fetch_files()
     if not silent:
@@ -372,8 +374,13 @@ def adjust_auto_backup():
     while True:
         choice = input('Would you like a backup to automatically be created when running an update from the command line? [y/n] ')
         if choice == 'y':
-            auto_backup = True
-            break
+            choice = input('Would you like to only automatically backup protected tables? [y/N] ')
+            if choice == 'y':
+                auto_backup = 2
+                break
+            else:
+                auto_backup = True
+                break
         elif choice == 'n':
             auto_backup = False
             break
@@ -511,7 +518,7 @@ def settings():
     print(Fore.GREEN + 'Current MySQL bin location: ' + Style.RESET_ALL + mysql_bin)
     if input('Change this location? [y/N] ').lower() == 'y':
         adjust_mysql_bin()
-    print(Fore.GREEN + 'Automatic backup for command line updates: ' + Style.RESET_ALL + str(auto_backup))
+    print(Fore.GREEN + 'Automatic backup for command line updates: ' + Style.RESET_ALL + str(bool(auto_backup)))
     if input('Change this? [y/N] ').lower() == 'y':
         adjust_auto_backup()
     print(Fore.GREEN + 'Automatic client version update for command line updates: ' + Style.RESET_ALL + str(auto_update_client))
