@@ -3431,6 +3431,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
             PItemLinkPearl->SetLSID(Sql_GetUIntData(SqlHandle, 0));
             PItemLinkPearl->SetLSColor(Sql_GetIntData(SqlHandle, 1));
             PItemLinkPearl->SetLSType(lstype);
+            PItemLinkPearl->setQuantity(1);
             if (charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl) != ERROR_SLOTID)
             {
                 // equip linkpearl to slot 2
