@@ -38,6 +38,8 @@ set(SOURCES
     item_container.cpp
     item_container.h
     items.h
+    job_points.cpp
+    job_points.h
     latent_effect_container.cpp
     latent_effect_container.h
     latent_effect.cpp

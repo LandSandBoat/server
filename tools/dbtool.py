@@ -30,6 +30,8 @@ from migrations import char_points_weekly_unity
 from migrations import char_profile_unity_leader
 from migrations import convert_mission_status
 from migrations import convert_zilart_status
+from migrations import add_job_master_column_chars
+
 # Append new migrations to this list and import above
 migrations = [
     unnamed_flags,
@@ -52,6 +54,7 @@ migrations = [
     char_profile_unity_leader,
     convert_mission_status,
     convert_zilart_status,
+    add_job_master_column_chars,
 ]
 # These are the default 'protected' files
 player_data = [
@@ -64,6 +67,7 @@ player_data = [
     'char_exp.sql',
     'char_inventory.sql',
     'char_jobs.sql',
+    'char_job_points.sql',
     'char_look.sql',
     'char_merit.sql',
     'char_pet.sql',
