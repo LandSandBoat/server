@@ -31,7 +31,7 @@ entity.onSpikesDamage = function(mob, target, damage)
     -- thus no status effect = no proc, but 2 spike effects can't coexist..
     local resist = getEffectResistance(target, xi.effect.CURSE_I)
     local rnd = math.random (1, 100)
-    -- This res check is a little screwy till we get Ixion's resistance handling closer to retail.
+    -- This res check is a little screwy till we get the server's resistance handling closer to retail.
     -- looks like applyResistanceAddEffect() doesn't even handle status resistance, only elemental.
     if (resist > rnd or rnd <= 20) then
         return 0, 0, 0

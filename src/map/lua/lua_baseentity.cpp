@@ -5091,7 +5091,7 @@ void CLuaBaseEntity::setTitle(uint16 titleID)
 /************************************************************************
  *  Function: delTitle()
  *  Purpose : Deletes a title from a character's profile
- *  Example : player:delTitle(xi.title.IXION_HORNBREAKER)
+ *  Example : player:delTitle(xi.title.FODDERCHIEF_FLAYER)
  ************************************************************************/
 
 void CLuaBaseEntity::delTitle(uint16 titleID)

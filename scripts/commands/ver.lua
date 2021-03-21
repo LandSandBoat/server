@@ -1,6 +1,6 @@
 -----------------------------------
 -- func: ver
--- desc: prints Ixion version to player
+-- desc: prints server version to player
 -----------------------------------
 
 cmdprops =
