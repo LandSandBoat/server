@@ -57,6 +57,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/inventory_modify.h"
 #include "../packets/key_items.h"
 #include "../packets/linkshell_equip.h"
+#include "../packets/menu_jobpoints.h"
 #include "../packets/menu_merit.h"
 #include "../packets/message_basic.h"
 #include "../packets/message_combat.h"
@@ -781,11 +782,13 @@ namespace charutils
         PChar->PMeritPoints = new CMeritPoints(PChar);
         PChar->PMeritPoints->SetMeritPoints(meritPoints);
         PChar->PMeritPoints->SetLimitPoints(limitPoints);
+        PChar->PJobPoints = new CJobPoints(PChar);
 
         fmtQuery = "SELECT "
-                   "gmlevel, "   // 0
-                   "mentor, "    // 1
-                   "nnameflags " // 2
+                   "gmlevel, "    // 0
+                   "mentor, "     // 1
+                   "job_master, " // 2
+                   "nnameflags "  // 3
                    "FROM chars "
                    "WHERE charid = %u;";
 
@@ -795,7 +798,8 @@ namespace charutils
         {
             PChar->m_GMlevel             = (uint8)Sql_GetUIntData(SqlHandle, 0);
             PChar->m_mentorUnlocked      = Sql_GetUIntData(SqlHandle, 1) > 0;
-            PChar->menuConfigFlags.flags = (uint32)Sql_GetUIntData(SqlHandle, 2);
+            PChar->m_jobMasterDisplay    = Sql_GetUIntData(SqlHandle, 2) > 0;
+            PChar->menuConfigFlags.flags = (uint32)Sql_GetUIntData(SqlHandle, 3);
         }
 
         charutils::LoadInventory(PChar);
@@ -4535,6 +4539,13 @@ namespace charutils
         const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
 
         Sql_Query(SqlHandle, Query, "chars", "mentor =", PChar->m_mentorUnlocked, PChar->id);
+    }
+
+    void SaveJobMasterDisplay(CCharEntity* PChar)
+    {
+        const char* Query = "UPDATE %s SET %s %u WHERE charid = %u;";
+
+        Sql_Query(SqlHandle, Query, "chars", "job_master =", PChar->m_jobMasterDisplay, PChar->id);
     }
 
     /************************************************************************

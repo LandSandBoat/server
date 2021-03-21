@@ -127,6 +127,7 @@
 #include "../packets/inventory_size.h"
 #include "../packets/key_items.h"
 #include "../packets/linkshell_equip.h"
+#include "../packets/menu_jobpoints.h"
 #include "../packets/menu_merit.h"
 #include "../packets/menu_mog.h"
 #include "../packets/menu_raisetractor.h"
@@ -6366,6 +6367,44 @@ void CLuaBaseEntity::setMerits(uint8 numPoints)
     PChar->pushPacket(new CMenuMeritPacket(PChar));
 
     charutils::SaveCharExp(PChar, PChar->GetMJob());
+}
+
+/************************************************************************
+*  Function: getJobPointLevel()
+*  Purpose : Returns the current value a specific job point
+*  Example : player:getJobPointLevel(JP_MIGHTY_STRIKES_EFFECT)
+*  Notes   :
+************************************************************************/
+uint8 CLuaBaseEntity::getJobPointLevel(uint16 jpType)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+        return PChar->PJobPoints->GetJobPointValue((JOBPOINT_TYPE)jpType);
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setJobPoints()
+ *  Purpose : Sets the job points for a player to a specified amount
+ *  Example : player:setJobPoints(30)
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::setJobPoints(uint16 amount)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to set Job Points for non-PC type!\n");
+        return;
+    }
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    PChar->PJobPoints->SetJobPoints(amount);
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
 }
 
 /************************************************************************
@@ -12840,6 +12879,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMerit", CLuaBaseEntity::getMerit);
     SOL_REGISTER("getMeritCount", CLuaBaseEntity::getMeritCount);
     SOL_REGISTER("setMerits", CLuaBaseEntity::setMerits);
+
+    SOL_REGISTER("getJobPointLevel", CLuaBaseEntity::getJobPointLevel);
+    SOL_REGISTER("setJobPoints", CLuaBaseEntity::setJobPoints);
 
     SOL_REGISTER("getGil", CLuaBaseEntity::getGil);
     SOL_REGISTER("addGil", CLuaBaseEntity::addGil);

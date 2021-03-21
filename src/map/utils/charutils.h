@@ -165,6 +165,7 @@ namespace charutils
     void SaveCharStats(CCharEntity* PChar);                    // сохраняем флаги, текущие значения жихней, маны и профессий
     void SaveCharGMLevel(CCharEntity* PChar);                  // saves the char's gm level and nameflags
     void SaveMentorFlag(CCharEntity* PChar);                   // saves the char's mentor flag
+    void SaveJobMasterDisplay(CCharEntity* PChar);             // Saves the char's job master display status
     void SaveMenuConfigFlags(CCharEntity* PChar);              // saves the char's unnamed flags
     void SaveCharNation(CCharEntity* PChar);                   // Save the character's nation of allegiance.
     void SaveCampaignAllegiance(CCharEntity* PChar);           // Save the character's campaign allegiance.

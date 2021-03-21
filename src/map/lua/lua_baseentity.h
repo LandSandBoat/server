@@ -330,7 +330,7 @@ public:
     void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
 
     void   setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission progress data.
-    uint32 getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj);                  // Gets mission progress data.
+    uint32 getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj);                 // Gets mission progress data.
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
     bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
@@ -339,9 +339,9 @@ public:
     auto   getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
     bool   hasEminenceRecord(uint16 recordID);                                                      // Check if record is active
     void   triggerRoeEvent(uint8 eventNum, sol::object const& reqTable);
-    void   setUnityLeader(uint8 leaderID);                                                          // Sets a player's unity leader
-    uint8  getUnityLeader();                                                                        // Returns player's unity leader
-    auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>;                      // Returns current rank of player's unity
+    void   setUnityLeader(uint8 leaderID);                                    // Sets a player's unity leader
+    uint8  getUnityLeader();                                                  // Returns player's unity leader
+    auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>; // Returns current rank of player's unity
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
@@ -361,6 +361,9 @@ public:
     int32 getMerit(uint16 merit);
     uint8 getMeritCount();
     void  setMerits(uint8 numPoints); // set merits (testing only!)
+
+    uint8 getJobPointLevel(uint16 jpType); // Returns Value of Job Point Type
+    void  setJobPoints(uint16 amount);     // Set Job Points for current job
 
     uint32 getGil();
     void   addGil(int32 gil);
