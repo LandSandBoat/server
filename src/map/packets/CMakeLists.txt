@@ -116,6 +116,10 @@ set(SOURCES
     inventory_modify.h
     inventory_size.cpp
     inventory_size.h
+    jobpoint_details.cpp
+    jobpoint_details.h
+    jobpoint_update.cpp
+    jobpoint_update.h
     key_items.cpp
     key_items.h
     linkshell_equip.cpp
@@ -130,6 +134,8 @@ set(SOURCES
     map_marker.h
     menu_config.cpp
     menu_config.h
+    menu_jobpoints.cpp
+    menu_jobpoints.h
     menu_merit.cpp
     menu_merit.h
     menu_mog.cpp
