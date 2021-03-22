@@ -1,17 +1,9 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               10.3.20-MariaDB-0ubuntu0.19.04.1 - Ubuntu 19.04
--- Server OS:                    debian-linux-gnu
--- HeidiSQL Version:             10.3.0.5771
--- --------------------------------------------------------
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table dspdb.job_point_gifts
 DROP TABLE IF EXISTS `job_point_gifts`;
 CREATE TABLE IF NOT EXISTS `job_point_gifts` (
   `jobid` tinyint(4) NOT NULL,
@@ -21,7 +13,6 @@ CREATE TABLE IF NOT EXISTS `job_point_gifts` (
   `desc` tinytext NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Dumping data for table dspdb.job_point_gifts: ~1,455 rows (approximately)
 /*!40000 ALTER TABLE `job_point_gifts` DISABLE KEYS */;
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 5, 1, 10, 'WAR_Physical Defense Bonus');

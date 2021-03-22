@@ -9,10 +9,12 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect)
     local jpLevel = target:getJobPointLevel(xi.jp.DEFENDER_EFFECT)
 
-    target:addMod(xi.mod.DEF, jpLevel * 3)
     target:addMod(xi.mod.DEFP, 25)
     target:addMod(xi.mod.RATTP, -25)
     target:addMod(xi.mod.ATTP, -25)
+
+    -- JP Bonus
+    target:addMod(xi.mod.DEF, jpLevel * 3)
 end
 
 effect_object.onEffectTick = function(target, effect)

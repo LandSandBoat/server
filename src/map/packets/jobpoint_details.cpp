@@ -20,7 +20,6 @@
 
 #include "../entities/charentity.h"
 #include "../job_points.h"
-#include "../utils/charutils.h"
 
 CJobPointDetailsPacket::CJobPointDetailsPacket(CCharEntity* PChar)
 {

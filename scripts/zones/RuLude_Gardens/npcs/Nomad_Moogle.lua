@@ -56,7 +56,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
         player:startEvent(10045, 0, 1, 5)
     elseif player:hasKeyItem(tpz.ki.LIMIT_BREAKER) == true and player:hasKeyItem(tpz.ki.JOB_BREAKER) == false and player:getMainLvl() >= 99 then
-        player:startEvent(10240,0,0,0,0);
+        player:startEvent(10240, 0, 0, 0, 0)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
@@ -222,8 +222,8 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Job Breaker (Enables Capacity/Job Point Acquisition)
     elseif csid == 10240 and option == 28 then
-        player:addKeyItem(xi.ki.JOB_BREAKER);
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.JOB_BREAKER);
+        player:addKeyItem(xi.ki.JOB_BREAKER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.JOB_BREAKER)
     end
 end
 

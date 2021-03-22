@@ -20,7 +20,6 @@
 #include "entities/charentity.h"
 #include "job_points.h"
 #include "map.h"
-#include "utils/charutils.h"
 
 CJobPoints::CJobPoints(CCharEntity* PChar)
 {

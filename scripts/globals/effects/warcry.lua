@@ -12,7 +12,7 @@ local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
     local jpLevel = target:getJobPointLevel(xi.jp.WARCRY_EFFECT)
-    local jpEffect = jpLevel * 3;
+    local jpEffect = jpLevel * 3
 
     target:addMod(xi.mod.ATTP, effect:getPower())
     target:addMod(xi.mod.TP_BONUS, effect:getSubPower())
@@ -27,7 +27,7 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     local jpLevel = target:getJobPointLevel(xi.jp.WARCRY_EFFECT)
-    local jpEffect = jpLevel * 3;
+    local jpEffect = jpLevel * 3
 
     target:delMod(xi.mod.ATTP, effect:getPower())
     target:delMod(xi.mod.TP_BONUS, effect:getSubPower())
