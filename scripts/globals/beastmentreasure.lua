@@ -252,7 +252,7 @@ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
           10 | 7A 00 00 BF                                           | z...
         ]]--
         peddlestox:independentAnimation(peddlestox, 122, 0)
-        npc:timer(5000, function(npc)
+        peddlestox:timer(5000, function(npc)
             peddlestox:setStatus(xi.status.DISAPPEAR)
         end)
     end

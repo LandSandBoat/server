@@ -784,6 +784,17 @@ void CMobEntity::DistributeRewards()
             blueutils::TryLearningSpells(PChar, this);
             m_UsedSkillIds.clear();
 
+            // RoE Mob kill event for all party members
+            PChar->ForAlliance([this, PChar](CBattleEntity* PMember) {
+                if (PMember->getZone() == PChar->getZone())
+                {
+                    RoeDatagramList datagrams;
+                    datagrams.push_back(RoeDatagram("mob", (CMobEntity*)this));
+                    datagrams.push_back(RoeDatagram("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType)));
+                    roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
+                }
+            });
+
             if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
             {
                 charutils::DistributeExperiencePoints(PChar, this);
@@ -796,17 +807,6 @@ void CMobEntity::DistributeRewards()
             {
                 charutils::DistributeGil(PChar, this); // TODO: REALISATION MUST BE IN TREASUREPOOL
             }
-
-            // RoE Mob kill event for all party members
-            PChar->ForAlliance([this, PChar](CBattleEntity* PMember) {
-                if (PMember->getZone() == PChar->getZone())
-                {
-                    RoeDatagramList datagrams;
-                    datagrams.push_back(RoeDatagram("mob", (CMobEntity*)this));
-                    datagrams.push_back(RoeDatagram("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType)));
-                    roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
-                }
-            });
 
             DropItems(PChar);
         }
