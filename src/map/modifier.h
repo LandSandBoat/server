@@ -305,14 +305,14 @@ enum class Mod
     DEFENDER_DURATION  = 956, // Defender Duration
 
     // Monk
-    BOOST_EFFECT        = 97,  // Boost power in tenths
-    CHAKRA_MULT         = 123, // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 124, // Extra statuses removed by Chakra
-    SUBTLE_BLOW         = 289, // How much TP to reduce.
-    COUNTER             = 291, // Percent chance to counter
-    KICK_ATTACK_RATE    = 292, // Percent chance to kick
-    PERFECT_COUNTER_ATT = 428, // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
-                               // not if fighting barehanded).
+    BOOST_EFFECT        = 97,   // Boost power in tenths
+    CHAKRA_MULT         = 123,  // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 124,  // Extra statuses removed by Chakra
+    SUBTLE_BLOW         = 289,  // How much TP to reduce.
+    COUNTER             = 291,  // Percent chance to counter
+    KICK_ATTACK_RATE    = 292,  // Percent chance to kick
+    PERFECT_COUNTER_ATT = 428,  // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
+                                // not if fighting barehanded).
     FOOTWORK_ATT_BONUS   = 429, // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT = 543, // Counterstance effect in percents
     DODGE_EFFECT         = 552, // Dodge effect in percents
@@ -439,7 +439,7 @@ enum class Mod
     FORCE_JUMP_CRIT            = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH    = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974, // Adds subjob traits to wyvern on spawn
-    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe 
+    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
@@ -820,9 +820,10 @@ enum class Mod
     SUBTLE_BLOW_II       = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     GARDENING_WILT_BONUS = 975, // Increases the number of Vanadays a plant can survive before it wilts
 
+    SUPERIOR_LEVEL = 986,  // SU0..5
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 986, // stuff
     // SPARE = 987, // stuff
     // SPARE = 988, // stuff
 };

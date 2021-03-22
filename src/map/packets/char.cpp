@@ -126,6 +126,12 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
             }
 
             ref<uint16>(0x30) = PChar->m_Costume;
+
+            if (PChar->getMod(Mod::SUPERIOR_LEVEL) == 5 && PChar->m_jobMasterDisplay)
+            {
+                ref<uint8>(0x42) = 0x80;
+            }
+
             ref<uint8>(0x43)  = 0x04;
 
             if (updatemask & UPDATE_LOOK)
