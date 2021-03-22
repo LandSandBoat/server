@@ -29,7 +29,7 @@ CMenuJobPointsPacket::CMenuJobPointsPacket(CCharEntity* PChar)
 #define PACKET_DATA_SIZE   0x06 //Size in number of uint8
 
     this->type = 0x63;
-    this->size = 0x9c;
+    this->size = 0x9C;
 
     JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
 
@@ -45,8 +45,8 @@ CMenuJobPointsPacket::CMenuJobPointsPacket(CCharEntity* PChar)
         JobPoints_t* PCurrentJobPoints = &PJobPoints[i];
         uint16       offset            = PACKET_DATA_OFFSET + (PACKET_DATA_SIZE * i);
 
-        ref<uint16>(offset)     = PCurrentJobPoints->capacity_points;
-        ref<uint16>(offset + 2) = PCurrentJobPoints->job_points;
-        ref<uint16>(offset + 4) = PCurrentJobPoints->job_points_spent;
+        ref<uint16>(offset)     = PCurrentJobPoints->capacityPoints;
+        ref<uint16>(offset + 2) = PCurrentJobPoints->currentJp;
+        ref<uint16>(offset + 4) = PCurrentJobPoints->totalJpSpent;
     }
 }

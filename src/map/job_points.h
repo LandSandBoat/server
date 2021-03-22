@@ -364,11 +364,11 @@ struct JobPointType_t
 
 struct JobPoints_t
 {
-    uint16         jobid;
-    uint16         job_category;
-    uint16         capacity_points;
-    uint16         job_points;
-    uint16         job_points_spent;
+    uint16         jobId;
+    uint16         jobCategory;
+    uint16         capacityPoints;
+    uint16         currentJp;
+    uint16         totalJpSpent;
     JobPointType_t job_point_types[JOBPOINTS_JPTYPE_PER_CATEGORY];
 };
 
@@ -411,8 +411,8 @@ public:
     std::vector<CModifier> current_gifts;
 
 private:
-    CCharEntity* jp_PChar;
-    JobPoints_t  job_points[MAX_JOBTYPE];
+    CCharEntity* m_PChar;
+    JobPoints_t  m_jobPoints[MAX_JOBTYPE];
 };
 
 namespace jobpointutils

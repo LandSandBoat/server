@@ -24,41 +24,42 @@
 
 CJobPoints::CJobPoints(CCharEntity* PChar)
 {
-    jp_PChar = PChar;
+    m_PChar = PChar;
     this->LoadJobPoints();
 }
 
 void CJobPoints::LoadJobPoints()
 {
-    memset(job_points, 0, sizeof(job_points));
+    memset(m_jobPoints, 0, sizeof(m_jobPoints));
     if (
         Sql_Query(SqlHandle, "SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
                              "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
                              "FROM char_job_points WHERE charid = %u ORDER BY jobid ASC",
-                  jp_PChar->id) != SQL_ERROR)
+                  m_PChar->id) != SQL_ERROR)
     {
         for (uint8 i = 0; i < Sql_NumRows(SqlHandle); i++)
         {
             if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                uint32      jobid            = Sql_GetUIntData(SqlHandle, 1);
-                uint16      job_category     = JobPointsCategoryByJobId(jobid);
-                JobPoints_t current_job      = {};
-                current_job.jobid            = jobid;
-                current_job.job_category     = job_category;
-                current_job.capacity_points  = Sql_GetUIntData(SqlHandle, 2);
-                current_job.job_points       = Sql_GetUIntData(SqlHandle, 3);
-                current_job.job_points_spent = Sql_GetUIntData(SqlHandle, 4);
+                uint32      jobId       = Sql_GetUIntData(SqlHandle, 1);
+                uint16      jobCategory = JobPointsCategoryByJobId(jobId);
+                JobPoints_t currentJob  = {};
+
+                currentJob.jobId          = jobId;
+                currentJob.jobCategory    = jobCategory;
+                currentJob.capacityPoints = Sql_GetUIntData(SqlHandle, 2);
+                currentJob.currentJp      = Sql_GetUIntData(SqlHandle, 3);
+                currentJob.totalJpSpent   = Sql_GetUIntData(SqlHandle, 4);
 
                 for (uint8 j = 0; j < JOBPOINTS_JPTYPE_PER_CATEGORY; j++)
                 {
-                    JobPointType_t current_type = {};
-                    current_type.id             = current_job.job_category + j;
-                    current_type.value          = Sql_GetUIntData(SqlHandle, JOBPOINTS_SQL_COLUMN_OFFSET + j);
-                    memcpy(&current_job.job_point_types[j], &current_type, sizeof(JobPointType_t));
+                    JobPointType_t currentType = {};
+                    currentType.id             = currentJob.jobCategory + j;
+                    currentType.value          = Sql_GetUIntData(SqlHandle, JOBPOINTS_SQL_COLUMN_OFFSET + j);
+                    memcpy(&currentJob.job_point_types[j], &currentType, sizeof(JobPointType_t));
                 }
 
-                memcpy(&job_points[jobid], &current_job, sizeof(JobPoints_t));
+                memcpy(&m_jobPoints[jobId], &currentJob, sizeof(JobPoints_t));
             }
         }
     }
@@ -66,7 +67,7 @@ void CJobPoints::LoadJobPoints()
 
 bool CJobPoints::IsJobPointExist(JOBPOINT_TYPE jp_type)
 {
-    if ((int16)jp_type < JOBPOINTS_CATEGORY_START)
+    if ((uint16)jp_type < JOBPOINTS_CATEGORY_START)
     {
         return false;
     }
@@ -88,7 +89,7 @@ JobPoints_t* CJobPoints::GetJobPointsByType(JOBPOINT_TYPE jp_type)
 {
     if (IsJobPointExist(jp_type))
     {
-        return &job_points[JobPointsCategoryIndexByJpType(jp_type)];
+        return &m_jobPoints[JobPointsCategoryIndexByJpType(jp_type)];
     }
 
     return nullptr;
@@ -98,7 +99,7 @@ JobPointType_t* CJobPoints::GetJobPointType(JOBPOINT_TYPE jp_type)
 {
     if (IsJobPointExist(jp_type))
     {
-        return &job_points[JobPointsCategoryIndexByJpType(jp_type)].job_point_types[JobPointTypeIndex(jp_type)];
+        return &m_jobPoints[JobPointsCategoryIndexByJpType(jp_type)].job_point_types[JobPointTypeIndex(jp_type)];
     }
 
     return nullptr;
@@ -111,22 +112,22 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jp_type)
 
     uint8 cost = JobPointCost(job_point->value);
 
-    if (cost != 0 && job->job_points >= cost)
+    if (cost != 0 && job->currentJp >= cost)
     {
-        job->job_points -= cost;
-        job->job_points_spent += cost;
+        job->currentJp -= cost;
+        job->totalJpSpent += cost;
         job_point->value += 1;
 
         Sql_Query(SqlHandle, "UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
-                  JobPointTypeIndex(job_point->id), job_point->value, job->job_points, job->job_points_spent, jp_PChar->id, job->jobid);
+                  JobPointTypeIndex(job_point->id), job_point->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
-        jobpointutils::AddGiftMods(jp_PChar);
+        jobpointutils::AddGiftMods(m_PChar);
     }
 }
 
 void CJobPoints::SetJobPoints(int16 amount)
 {
-    int8 job = (int8)jp_PChar->GetMJob();
+    int8 job = (int8)m_PChar->GetMJob();
 
     // Limit Job Points within bounds
     if (amount > 500)
@@ -139,24 +140,24 @@ void CJobPoints::SetJobPoints(int16 amount)
     }
 
     Sql_Query(SqlHandle, "INSERT INTO char_job_points SET charid='%u', jobid='%u', job_points='%u' ON DUPLICATE KEY UPDATE job_points='%u'",
-                  jp_PChar->id, job, amount, amount);
+              m_PChar->id, job, amount, amount);
 
     LoadJobPoints();
 }
 
 uint16 CJobPoints::GetJobPointsSpent()
 {
-    return job_points[jp_PChar->GetMJob()].job_points_spent;
+    return m_jobPoints[m_PChar->GetMJob()].totalJpSpent;
 }
 
 JobPoints_t* CJobPoints::GetAllJobPoints()
 {
-    return job_points;
+    return m_jobPoints;
 }
 
 uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jp_type)
 {
-    if (IsJobPointExist(jp_type) && jp_PChar->GetMLevel() >= 99 && jp_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jp_type))
+    if (IsJobPointExist(jp_type) && m_PChar->GetMLevel() >= 99 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jp_type))
     {
         return GetJobPointType(jp_type)->value;
     }
@@ -195,7 +196,6 @@ namespace jobpointutils
         if (current_gifts->empty() != true)
         {
             PChar->delModifiers(current_gifts);
-            ShowDebug("Clearing current gifts");
             current_gifts->clear();
         }
 
@@ -205,7 +205,6 @@ namespace jobpointutils
                 break;
 
             current_gifts->push_back(CModifier(static_cast<Mod>(gift.modid), gift.value));
-            ShowDebug("Current JP: %d, Gift: %d %d %d\n", current_jp, gift.jp_needed, gift.modid, gift.value);
         }
 
         PChar->addModifiers(current_gifts);
