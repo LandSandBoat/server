@@ -32,12 +32,12 @@ local JPCATEGORY_RUN      = 0x2C0
 xi.jp = {
 
     --WAR
-    MIGHTY_STRIKES_EFFECT    = JPCATEGORY_WAR + 0x00, --O p.acc +2
-    BRAZEN_RUSH_EFFECT       = JPCATEGORY_WAR + 0x02, --X p.atk +4
-    BERSERK_EFFECT           = JPCATEGORY_WAR + 0x01, --O p.atk +2
-    DEFENDER_EFFECT          = JPCATEGORY_WAR + 0x03, --O p.def +3
-    WARCRY_EFFECT            = JPCATEGORY_WAR + 0x04, --O p.atk +3
-    AGGRESSOR_EFFECT         = JPCATEGORY_WAR + 0x05, --O p.acc +1
+    MIGHTY_STRIKES_EFFECT    = JPCATEGORY_WAR + 0x00, --+ Physical Accuracy +2
+    BRAZEN_RUSH_EFFECT       = JPCATEGORY_WAR + 0x02, --+ Physical Attack +4
+    BERSERK_EFFECT           = JPCATEGORY_WAR + 0x01, --+ Physical Attack +2
+    DEFENDER_EFFECT          = JPCATEGORY_WAR + 0x03, --+ Physical Defense +3
+    WARCRY_EFFECT            = JPCATEGORY_WAR + 0x04, --+ Physical Attack +3
+    AGGRESSOR_EFFECT         = JPCATEGORY_WAR + 0x05, --+ Physical Accuracy +1
     RETALIATION_EFFECT       = JPCATEGORY_WAR + 0x06, --X retaliation chance +1
     RESTRAINT_EFFECT         = JPCATEGORY_WAR + 0x07, --X time to max ws bonus -2%
     BLOOD_RAGE_EFFECT        = JPCATEGORY_WAR + 0x08, --X crit. hit rate +1
