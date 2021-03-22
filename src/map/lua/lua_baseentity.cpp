@@ -6384,8 +6384,8 @@ uint8 CLuaBaseEntity::getJobPointLevel(uint16 jpType)
 {
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-        return PChar->PJobPoints->GetJobPointValue((JOBPOINT_TYPE)jpType);
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        return PChar->PJobPoints->GetJobPointValue(static_cast<JOBPOINT_TYPE>(jpType));
     }
 
     return 0;
@@ -6406,7 +6406,7 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
         return;
     }
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetJobPoints(amount);
     PChar->pushPacket(new CMenuJobPointsPacket(PChar));

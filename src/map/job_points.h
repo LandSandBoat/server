@@ -374,8 +374,8 @@ struct JobPoints_t
 
 struct JobPointGifts_t
 {
-    uint16 jp_needed;
-    uint16 modid;
+    uint16 jpRequired;
+    uint16 modId;
     int16  value;
 };
 
@@ -390,12 +390,12 @@ class CJobPoints
 {
 public:
     CJobPoints(CCharEntity* PChar);
-    bool IsJobPointExist(JOBPOINT_TYPE jp_type); // Check to see if JP exists
-    void RaiseJobPoint(JOBPOINT_TYPE jp_type);   // add upgrade
-    void SetJobPoints(int16 amt);                //set job points for all jobs
+    bool IsJobPointExist(JOBPOINT_TYPE jpType); // Check to see if JP exists
+    void RaiseJobPoint(JOBPOINT_TYPE jpType);   // Add upgrade
+    void SetJobPoints(int16 amount);            // Set job points for current job
 
-    JobPoints_t*    GetJobPointsByType(JOBPOINT_TYPE jp_type);
-    JobPointType_t* GetJobPointType(JOBPOINT_TYPE jp_type);
+    JobPoints_t*    GetJobPointsByType(JOBPOINT_TYPE jpType);
+    JobPointType_t* GetJobPointType(JOBPOINT_TYPE jpType);
 
     void LoadJobPoints(); // load JPs for char from db
 
@@ -403,11 +403,10 @@ public:
 
     uint16 GetJobPointsSpent();
 
-    /**
-         * Returns the level of a given job point type. Will return 0 if the type doesn't match the
-         * player's main job or if their main job is not 99
-         */
-    uint8                  GetJobPointValue(JOBPOINT_TYPE jp_type);
+    // Returns the level of a given job point type. Will return 0 if the type doesn't match the
+    // player's main job or if their main job is not 99
+    uint8 GetJobPointValue(JOBPOINT_TYPE jpType);
+
     std::vector<CModifier> current_gifts;
 
 private:
@@ -419,7 +418,7 @@ namespace jobpointutils
 {
     void                                LoadGifts();
     void                                AddGiftMods(CCharEntity* PChar);
-    extern std::vector<JobPointGifts_t> jp_gifts[MAX_JOBTYPE];
+    extern std::vector<JobPointGifts_t> jpGifts[MAX_JOBTYPE];
 } // namespace jobpointutils
 
 #endif

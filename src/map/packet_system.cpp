@@ -4665,13 +4665,13 @@ void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     if (PChar->m_moghouseID)
     {
-        JOBPOINT_TYPE jp_type = (JOBPOINT_TYPE)data.ref<uint16>(0x04);
+        JOBPOINT_TYPE jpType = static_cast<JOBPOINT_TYPE>(data.ref<uint16>(0x04));
 
-        if (PChar->PJobPoints->IsJobPointExist(jp_type))
+        if (PChar->PJobPoints->IsJobPointExist(jpType))
         {
-            PChar->PJobPoints->RaiseJobPoint(jp_type);
+            PChar->PJobPoints->RaiseJobPoint(jpType);
             PChar->pushPacket(new CMenuJobPointsPacket(PChar));
-            PChar->pushPacket(new CJobPointUpdatePacket(PChar, jp_type));
+            PChar->pushPacket(new CJobPointUpdatePacket(PChar, jpType));
         }
     }
 }
