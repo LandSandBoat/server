@@ -36,6 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ability.h"
 #include "alliance.h"
 #include "conquest_system.h"
+#include "job_points.h"
 #include "linkshell.h"
 #include "map.h"
 #include "message.h"
@@ -246,6 +247,7 @@ int32 do_init(int32 argc, char** argv)
     petutils::LoadPetList();
     trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
+    jobpointutils::LoadGifts();
     daily::LoadDailyItems();
     roeutils::UpdateUnityRankings();
 

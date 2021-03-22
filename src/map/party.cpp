@@ -24,6 +24,7 @@
 
 #include "alliance.h"
 #include "entities/battleentity.h"
+#include "job_points.h"
 #include "latent_effect_container.h"
 #include "map.h"
 #include "message.h"
@@ -1191,6 +1192,7 @@ void CParty::RefreshSync()
             charutils::ApplyAllEquipMods(member);
 
             blueutils::ValidateBlueSpells(member);
+            jobpointutils::AddGiftMods(member);
             charutils::BuildingCharSkillsTable(member);
             charutils::CalculateStats(member);
             charutils::BuildingCharTraitsTable(member);
