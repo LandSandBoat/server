@@ -55,6 +55,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10045, 0, 1, 5, 0, 1)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
         player:startEvent(10045, 0, 1, 5)
+    elseif player:hasKeyItem(tpz.ki.LIMIT_BREAKER) == true and player:hasKeyItem(tpz.ki.JOB_BREAKER) == false and player:getMainLvl() >= 99 then
+        player:startEvent(10240,0,0,0,0);
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)
     elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT) == QUEST_ACCEPTED) then
@@ -88,17 +90,17 @@ end
 entity.onEventFinish = function(player, csid, option)
     local meritCount = player:getMeritCount()
 
-    if (csid == 10045 and option == 4) then
-        player:addKeyItem(xi.ki.LIMIT_BREAKER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIMIT_BREAKER)
-    elseif (csid == 10045) then
-        if (option == 5) then
+    if csid == 10045 then
+        if option == 4 then
+            player:addKeyItem(xi.ki.LIMIT_BREAKER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIMIT_BREAKER)
+        elseif option == 5 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
-        elseif (option == 7 ) then
+        elseif option == 7 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
-        elseif (option == 9) then
+        elseif option == 9 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
-        elseif (option == 11) then
+        elseif option == 11 then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED)
 
         -- PRELUDE TO PUISSANCE + BEYOND INFINITY
@@ -162,21 +164,21 @@ entity.onEventFinish = function(player, csid, option)
             npcUtil.giveKeyItem(player, xi.ki.SOUL_GEM_CLASP)
         end
 
-    elseif (csid == 10135) then
+    elseif csid == 10135 then
         player:tradeComplete()
         player:setMerits(meritCount - 3)
         player:addFame(JEUNO, 50)
         player:setLevelCap(80)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT)
         player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_80)
-    elseif (csid == 10136) then
+    elseif csid == 10136 then
         player:tradeComplete()
         player:setMerits(meritCount - 4)
         player:addFame(JEUNO, 50)
         player:setLevelCap(85)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS)
         player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_85)
-    elseif (csid == 10137) then
+    elseif csid == 10137 then
         player:tradeComplete()
         player:setMerits(meritCount - 5)
         player:startEvent(10161) -- this is the scene that is suppose to play and you are suppose to have to do correctly inorder to level cap increase to 90
@@ -184,7 +186,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setLevelCap(90)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS)
         player:messageSpecial(ID.text.YOUR_LEVEL_LIMIT_IS_NOW_90)
-    elseif (csid == 10138) then
+    elseif csid == 10138 then
         player:tradeComplete()
         player:setMerits(meritCount - 10)
         player:addFame(JEUNO, 50)
@@ -217,6 +219,11 @@ entity.onEventFinish = function(player, csid, option)
         elseif option == 24 then -- Qu'bia Arena
             player:setPos(-225.146, -24.250, 20.057, 255, 206)
         end
+
+    -- Job Breaker (Enables Capacity/Job Point Acquisition)
+    elseif csid == 10240 and option == 28 then
+        player:addKeyItem(xi.ki.JOB_BREAKER);
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.JOB_BREAKER);
     end
 end
 
