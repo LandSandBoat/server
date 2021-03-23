@@ -90,7 +90,9 @@ CCurrencyPacket1::CCurrencyPacket1(CCharEntity* PChar)
         ref<uint16>(0x58) = Sql_GetUIntData(SqlHandle, 31); // chocobuck_sandoria
         ref<uint16>(0x5A) = Sql_GetUIntData(SqlHandle, 32); // chocobuck_bastok
         ref<uint16>(0x5C) = Sql_GetUIntData(SqlHandle, 33); // chocobuck_windurst
-        ref<uint16>(0x5E) = Sql_GetUIntData(SqlHandle, 34); // daily_tally
+
+        ref<uint16>(0x5E) = Sql_GetIntData(SqlHandle, 34) == -1 ? 0 : Sql_GetIntData(SqlHandle, 34); // daily_tally
+
         ref<uint32>(0x60) = Sql_GetIntData(SqlHandle, 35);  // research_mark
         ref<uint8>(0x64)  = Sql_GetUIntData(SqlHandle, 36); // tunnel_worm
         ref<uint8>(0x65)  = Sql_GetUIntData(SqlHandle, 37); // morion_worm
