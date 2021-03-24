@@ -17,7 +17,7 @@ local function getQuestId(mainJobId)
 end
 
 entity.onTrade = function(player, npc, trade)
-    for i, wepId in pairs(BaseNyzulWeapons) do
+    for i, wepId in pairs(xi.equip.baseNyzulWeapons) do
         if npcUtil.tradeHasExactly(trade, wepId) then
             local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(i))
             if unlockingAMyth == QUEST_ACCEPTED then
@@ -41,8 +41,8 @@ end
 entity.onTrigger = function(player, npc)
     local mainJobId = player:getMainJob()
     local unlockingAMyth = player:getQuestStatus(xi.quest.log_id.JEUNO, getQuestId(mainJobId))
-    local nyzulWeaponMain = isBaseNyzulWeapon(player:getEquipID(xi.slot.MAIN))
-    local nyzulWeaponRanged = isBaseNyzulWeapon(player:getEquipID(xi.slot.RANGED))
+    local nyzulWeaponMain = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.MAIN))
+    local nyzulWeaponRanged = xi.equip.isBaseNyzulWeapon(player:getEquipID(xi.slot.RANGED))
 
     if unlockingAMyth == QUEST_AVAILABLE then
         if player:needToZone() and player:getCharVar("Upset_Zalsuhm") > 0 then

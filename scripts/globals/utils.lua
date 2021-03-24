@@ -419,37 +419,6 @@ function utils.getSystemStrengthBonus(attacker, defender)
     return 0
 end
 
------------------------------------
--- Returns true if player has any tier of given relic,
---  if tier is specified, returns true only if player
---  has that tier
--- Tier:
--- 1  = 75
--- 2  = 80
--- 3  = 85
--- 4  = 90
--- 5  = 95
--- 6  = 99 I
--- 7  = 99 II
--- 8  = 119 I
--- 9  = 119 II
--- 10 = 119 III
--- 11 = 119 III (ammo dispensing)
------------------------------------
-function utils.hasRelic(player, relic, tier)
-    if tier ~= nil then
-        return player:hasItem(xi.relicTiers[relic][tier])
-    end
-
-    for i, itemID in pairs(xi.relicTiers[relic]) do
-        if player:hasItem(itemID) then
-            return true
-        end
-    end
-
-    return false
-end
-
 -- utils.mask contains functions for bitmask variables
 utils.mask =
 {
