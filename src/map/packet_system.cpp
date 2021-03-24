@@ -6784,6 +6784,19 @@ void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PCh
 ************************************************************************/
 void SmallPacket0x11B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
+    // Rate limit Job Master Display
+    auto lastJobMasterDisplayChange  = PChar->GetLocalVar("LastJobMasterDisplayTime");
+    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
+    if (lastJobMasterDisplayChange == 0 || (timeNowSeconds.time_since_epoch().count() - lastJobMasterDisplayChange) > 2)
+    {
+        PChar->SetLocalVar("LastJobMasterDisplayTime", (uint32)timeNowSeconds.time_since_epoch().count());
+    }
+    else
+    {
+        ShowWarning(CL_YELLOW "SmallPacket0x11B: Rate limiting Job Master Display Change packet for %s\n" CL_RESET, PChar->GetName());
+        return;
+    }
+
     PChar->m_jobMasterDisplay = data.ref<uint8>(0x04) > 0;
 
     charutils::SaveJobMasterDisplay(PChar);
