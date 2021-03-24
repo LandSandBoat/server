@@ -44,14 +44,14 @@ xi.jp = {
     DOUBLE_ATTACK_EFFECT     = JPCATEGORY_WAR + 0x09, --X double attack p.atk +1
 
     --MNK
-    HUNDRED_FISTS_EFFECT     = JPCATEGORY_MNK + 0x00, --O p.acc +2
+    HUNDRED_FISTS_EFFECT     = JPCATEGORY_MNK + 0x00, --+ Physical Accuracy +2
     INNER_STRENGTH_EFFECT    = JPCATEGORY_MNK + 0x02, --X hp recovered +2%
-    DODGE_EFFECT             = JPCATEGORY_MNK + 0x01, --O evasion +2
-    FOCUS_EFFECT             = JPCATEGORY_MNK + 0x03, --O accuracy +1
-    CHAKRA_EFFECT            = JPCATEGORY_MNK + 0x04, --O hp recovered from use +10
-    COUNTERSTANCE_EFFECT     = JPCATEGORY_MNK + 0x05, --O DEX +2
-    FOOTWORK_EFFECT          = JPCATEGORY_MNK + 0x06, --O kick attack dmg +1
-    PERFECT_COUNTER_EFFECT   = JPCATEGORY_MNK + 0x07, --O VIT bonus +1
+    DODGE_EFFECT             = JPCATEGORY_MNK + 0x01, --+ Evasion +2
+    FOCUS_EFFECT             = JPCATEGORY_MNK + 0x03, --+ Accuracy +1
+    CHAKRA_EFFECT            = JPCATEGORY_MNK + 0x04, --+ HP Recovered +10
+    COUNTERSTANCE_EFFECT     = JPCATEGORY_MNK + 0x05, --+ Counter Attack Bonus (2% DEX)
+    FOOTWORK_EFFECT          = JPCATEGORY_MNK + 0x06, --+ Kick Attack Damage +1
+    PERFECT_COUNTER_EFFECT   = JPCATEGORY_MNK + 0x07, --X VIT bonus +1
     IMPETUS_EFFECT           = JPCATEGORY_MNK + 0x08, --X maximum p.atk +2
     KICK_ATTACKS_EFFECT      = JPCATEGORY_MNK + 0x09, --X kick attacks atk +2 acc +1
 
