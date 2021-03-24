@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/battleentity.h"
 
 #include "../../packets/action.h"
+#include "../../packets/lock_on.h"
 #include "../../utils/battleutils.h"
 #include "../ai_container.h"
 
@@ -106,8 +107,26 @@ void CAttackState::UpdateTarget(uint16 targid)
         PNewTarget = m_PEntity->IsValidTarget(newTargid, TARGET_ENEMY, m_errorMsg);
         if (!PNewTarget)
         {
-            m_PEntity->PAI->ChangeTarget(0);
             newTargid = 0;
+            CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PEntity);
+            if (PChar && PChar->m_hasAutoTarget) // Auto-Target
+            {
+                for (auto&& PPotentialTarget : PChar->SpawnMOBList)
+                {
+                    if (PPotentialTarget.second->animation == ANIMATION_ATTACK && facing(PChar->loc.p, PPotentialTarget.second->loc.p, 64) &&
+                        distance(PChar->loc.p, PPotentialTarget.second->loc.p) <= 10)
+                    {
+                        std::unique_ptr<CBasicPacket> errMsg;
+                        if (PChar->IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
+                        {
+                            newTargid = PPotentialTarget.second->targid;
+                            PChar->pushPacket(new CLockOnPacket(PChar, static_cast<CBattleEntity*>(PPotentialTarget.second)));
+                            break;
+                        }
+                    }
+                }
+            }
+            m_PEntity->PAI->ChangeTarget(newTargid);
         }
     }
     if (targid != newTargid)

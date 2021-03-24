@@ -719,24 +719,6 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
-    if (PTarget->isDead())
-    {
-        if (this->m_hasAutoTarget && PTarget->objtype == TYPE_MOB) // Auto-Target
-        {
-            for (auto&& PPotentialTarget : this->SpawnMOBList)
-            {
-                if (PPotentialTarget.second->animation == ANIMATION_ATTACK && facing(this->loc.p, PPotentialTarget.second->loc.p, 64) &&
-                    distance(this->loc.p, PPotentialTarget.second->loc.p) <= 10)
-                {
-                    std::unique_ptr<CBasicPacket> errMsg;
-                    if (IsValidTarget(PPotentialTarget.second->targid, TARGET_ENEMY, errMsg))
-                    {
-                        controller->ChangeTarget(PPotentialTarget.second->targid);
-                    }
-                }
-            }
-        }
-    }
     return ret;
 }
 
