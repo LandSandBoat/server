@@ -2915,6 +2915,23 @@ namespace charutils
                 // convert to 10th units
                 CapSkill = CapSkill * 10;
 
+                for (auto i = 2884; i <= 2890; i+3) // RHAPSODY KI
+                {
+                    if (hasKeyItem(PChar, i))
+                    {
+                        SkillAmount *= 2;
+                        if (SkillAmount > 9)
+                        {
+                            SkillAmount = 9;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break; // No need to check further as you can't get KI out of order, so break out.
+                    }
+                }
+
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
                 if (map_config.skillup_amount_multiplier > 1)
                 {
@@ -4899,8 +4916,8 @@ namespace charutils
             }
         }
 
-        int32 rovBonus = 0;
-        for (auto i = 2884; i <= 2892; ++i) // RHAPSODY KI are sequential, so start at WHITE and end at OCHRE
+        int16 rovBonus = 0;
+        for (auto i = 2884; i <= 2889; ++i) // RHAPSODY KI are sequential, so start at WHITE and end at MAUVE, last 3 are CP
         {
             if (hasKeyItem(PChar, i))
             {
