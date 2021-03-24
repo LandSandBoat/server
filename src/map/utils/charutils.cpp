@@ -2915,7 +2915,7 @@ namespace charutils
                 // convert to 10th units
                 CapSkill = CapSkill * 10;
 
-                for (auto i = 2884; i <= 2890; i+3) // RHAPSODY KI
+                for (auto i = 2884; i <= 2890; i += 3) // RHAPSODY KI
                 {
                     if (hasKeyItem(PChar, i))
                     {
