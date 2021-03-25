@@ -2915,21 +2915,22 @@ namespace charutils
                 // convert to 10th units
                 CapSkill = CapSkill * 10;
 
+                int16 rovBonus = 1;
                 for (auto i = 2884; i <= 2890; i += 3) // RHAPSODY KI
                 {
                     if (hasKeyItem(PChar, i))
                     {
-                        SkillAmount *= 2;
-                        if (SkillAmount > 9)
-                        {
-                            SkillAmount = 9;
-                            break;
-                        }
+                        rovBonus += 1;
                     }
                     else
                     {
                         break; // No need to check further as you can't get KI out of order, so break out.
                     }
+                }
+                SkillAmount *= rovBonus;
+                if (SkillAmount > 9)
+                {
+                    SkillAmount = 9;
                 }
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
