@@ -480,6 +480,7 @@ bool CMobController::TryCastSpell()
         return true;
     }
 
+    TapDeaggroTime();
     return false;
 }
 
@@ -502,6 +503,7 @@ bool CMobController::CanCastSpells()
     // check for spell blockers e.g. silence
     if (PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE }))
     {
+        TapDeaggroTime();
         return false;
     }
 
