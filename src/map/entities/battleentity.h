@@ -25,6 +25,7 @@
 #include <set>
 #include <unordered_map>
 #include <vector>
+#include <mutex>
 
 #include "../alliance.h"
 #include "../map.h"
@@ -562,6 +563,8 @@ public:
     uint8 GetSpeed();
 
     DAMAGE_TYPE m_dmgType;
+
+    std::mutex scMutex;
 
     bool isDead(); // проверяем, мертва ли сущность
     bool isAlive();
