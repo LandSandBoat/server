@@ -16,14 +16,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_HORN_DIALOG)
-
-    SpawnMob(17330495):updateEnmity(target)
-    SpawnMob(17330496):updateEnmity(target)
-    SpawnMob(17330497):updateEnmity(target)
-    SpawnMob(17330503):updateEnmity(target)
-    SpawnMob(17330504):updateEnmity(target)
-    SpawnMob(17330505):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -35,16 +27,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:showText(mob, ID.text.ANIMATED_HORN_DIALOG+1)
-
-    DespawnMob(17330495)
-    DespawnMob(17330496)
-    DespawnMob(17330497)
-    DespawnMob(17330503)
-    DespawnMob(17330504)
-    DespawnMob(17330505)
-
 end
 
 return entity

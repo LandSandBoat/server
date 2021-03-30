@@ -17,13 +17,6 @@ entity.onMobEngaged = function(mob, target)
 
     target:showText(mob, ID.text.ANIMATED_LONGBOW_DIALOG)
 
-    SpawnMob(17330522):updateEnmity(target)
-    SpawnMob(17330523):updateEnmity(target)
-    SpawnMob(17330524):updateEnmity(target)
-    SpawnMob(17330525):updateEnmity(target)
-    SpawnMob(17330526):updateEnmity(target)
-    SpawnMob(17330527):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -37,14 +30,6 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
 
     player:showText(mob, ID.text.ANIMATED_LONGBOW_DIALOG+1)
-
-    DespawnMob(17330522)
-    DespawnMob(17330523)
-    DespawnMob(17330524)
-    DespawnMob(17330525)
-    DespawnMob(17330526)
-    DespawnMob(17330527)
-
 end
 
 return entity

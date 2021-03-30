@@ -16,14 +16,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_TACHI_DIALOG)
-
-    SpawnMob(17330445):updateEnmity(target)
-    SpawnMob(17330446):updateEnmity(target)
-    SpawnMob(17330447):updateEnmity(target)
-    SpawnMob(17330457):updateEnmity(target)
-    SpawnMob(17330458):updateEnmity(target)
-    SpawnMob(17330459):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -35,16 +27,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:showText(mob, ID.text.ANIMATED_TACHI_DIALOG+1)
-
-    DespawnMob(17330445)
-    DespawnMob(17330446)
-    DespawnMob(17330447)
-    DespawnMob(17330457)
-    DespawnMob(17330458)
-    DespawnMob(17330459)
-
 end
 
 return entity
