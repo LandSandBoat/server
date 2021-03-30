@@ -34,6 +34,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(276)
     elseif RhapsodiesMission == xi.mission.id.rov.FLAMES_OF_PRAYER then
         player:startEvent(277)
+    elseif RhapsodiesMission == xi.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) > 5 then
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
+        player:startEvent(278)
     elseif RhapsodiesMission == xi.mission.id.rov.WHAT_LIES_BEYOND then
         player:startEvent(278)
     elseif player:getCharVar("ZeidIICipher") == 1 then

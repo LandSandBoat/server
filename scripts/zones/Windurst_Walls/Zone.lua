@@ -22,7 +22,11 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
-    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) >= 5 then
+    elseif
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
         cs = 30036
     elseif
         ENABLE_ASA == 1 and player:getCurrentMission(ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION

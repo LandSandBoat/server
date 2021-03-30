@@ -65,6 +65,7 @@ xi.mission.id =
     -----------------------------------
     ['nation'] =
     {
+        RANK2       = 6,
         MAGICITE    = 13,
         ARCHLICH    = 14,
         SHADOW_LORD = 15,
