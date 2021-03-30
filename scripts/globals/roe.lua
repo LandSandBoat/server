@@ -4,6 +4,7 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/msg")
 require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -51,6 +52,7 @@ xi.roe.triggers =
     unityChat = 15,         -- Player uses Unity Chat
     magicBurst = 16,        -- Player performs a Magic Burst
     healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
+    talkToRoeNpc = 18,      -- Player talk to RoE
 }
 
 local triggers = xi.roe.triggers

@@ -80,27 +80,87 @@ function getRoeRecords(triggers)
       -----------------------------------
       -- Tutorial -> Intermediate
       -----------------------------------
-        --[[ TODO
         [1045] = { -- Achieve Level 99 (gives Kupon A-PK109 x5)
-            reward =  { sparks = 200, xp = 300, item = { 8733, 5 } }
+            check = function(self, player, params)
+                return player:getMainLvl() >= self.reqs.mJobLvl and true or false
+            end,
+            flags = set{"retro"},
+            reqs = { mJobLvl = 99 }, 
+            reward =  { 
+                sparks = 200,
+                xp = 300,
+                item = { { 8733, 5 } },
+            }
         },
 
         [1046] = { -- An Eminent Scholar (gives Kupon W-EMI)
-            reward =  { sparks = 200, xp = 200, item = { 9188 } }
+            check = function(self, player, params)
+                return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
+            end,
+            trigger = triggers.talkToRoeNpc,
+            reqs = { collectSparks = 2000 },
+            reward =  {
+                sparks = 200, 
+                xp = 200, 
+                item = { 9188 } 
+            }
         },
 
         [1047] = { -- An Eminent Scholar 2 (gives Kupon A-EMI)
-            reward =  { sparks = 200, xp = 200, item = { 9226 } }
+            check = function(self, player, params)
+                return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
+            end,
+            trigger = triggers.talkToRoeNpc,
+            reqs = { collectSparks = 4000 },
+            reward =  {
+                sparks = 200,
+                xp = 200,
+                item = { 9226 }
+            }
         },
 
         [1048] = { -- An Eminent Scholar 3 (gives Kupon A-EMI)
-            reward =  { sparks = 200, xp = 200, item = { 9226 } }
+            check = function(self, player, params)
+                return player:getCurrency("spark_of_eminence") >= self.reqs.collectSparks and true or false
+            end,
+            trigger = triggers.talkToRoeNpc,
+            reqs = { collectSparks = 6000 },
+            reward =  {
+                sparks = 200,
+                xp = 200,
+                item = { 9226 }
+            }
         },
 
         [1049] = { -- Always Stand on 117 (gives Cipher: Koru-Moru)
-            reward =  { sparks = 200, xp = 300, item = { 10140 }  }
+            check = function(self, player, params)
+                local count = 0
+                for _, slot in pairs( {
+                    xi.slot.MAIN, 
+                    xi.slot.SUB, 
+                    xi.slot.RANGED, 
+                    xi.slot.HEAD,
+                    xi.slot.BODY,
+                    xi.slot.HANDS,
+                    xi.slot.LEGS,
+                    xi.slot.FEET,
+                } ) do
+                    local item = player:getEquippedItem(slot)
+                    if item and item:getILvl() and item:getILvl() == self.reqs.hasEquip.ilevel then
+                        count = count + 1
+                    end
+                end
+                return count >= self.reqs.hasEquip.count and true or false
+            end,
+            trigger = triggers.talkToRoeNpc,
+            reqs = { hasEquip = { ilevel = 117, count = 3 } },
+            reward =  {
+                sparks = 200,
+                xp = 300,
+                item = { 10140 }
+            }
         },
-        ]]
+        
 
       -----------------------------------
       -- Tutorial -> Synthesis
