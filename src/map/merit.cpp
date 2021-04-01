@@ -160,7 +160,7 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
     /*
-        TPZ_DEBUG_BREAK_IF(sizeof(merits) != sizeof(merits::GMeritsTemplate));
+        XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(merits::GMeritsTemplate));
 
     memcpy(merits, merits::GMeritsTemplate, sizeof(merits));
 
@@ -176,7 +176,7 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
     }
         */
 
-    TPZ_DEBUG_BREAK_IF(sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate));
+    XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate));
 
     memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
 
@@ -384,7 +384,7 @@ const Merit_t* CMeritPoints::GetMerit(MERIT_TYPE merit)
 
 const Merit_t* CMeritPoints::GetMeritByIndex(uint16 index)
 {
-    TPZ_DEBUG_BREAK_IF(index >= MERITS_COUNT);
+    XI_DEBUG_BREAK_IF(index >= MERITS_COUNT);
 
     return &merits[index];
 }

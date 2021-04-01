@@ -42,7 +42,7 @@
 
 CAlliance::CAlliance(CBattleEntity* PEntity)
 {
-    TPZ_DEBUG_BREAK_IF(PEntity->PParty == nullptr);
+    XI_DEBUG_BREAK_IF(PEntity->PParty == nullptr);
 
     m_AllianceID = PEntity->PParty->GetPartyID();
 

@@ -372,7 +372,7 @@ CItemContainer* CCharEntity::getStorage(uint8 LocationID)
             return m_Wardrobe4.get();
     }
 
-    TPZ_DEBUG_BREAK_IF(LocationID >= MAX_CONTAINER_ID); // неразрешенный ID хранилища
+    XI_DEBUG_BREAK_IF(LocationID >= MAX_CONTAINER_ID); // неразрешенный ID хранилища
     return nullptr;
 }
 
@@ -1504,7 +1504,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 {
-    TPZ_DEBUG_BREAK_IF(PBattleTarget == nullptr);
+    XI_DEBUG_BREAK_IF(PBattleTarget == nullptr);
 
     if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
     {

@@ -32,7 +32,7 @@ CPartyInvitePacket::CPartyInvitePacket(uint32 id, uint16 targid, CCharEntity* PI
     this->type = 0xDC;
     this->size = 0x10;
 
-    // TPZ_DEBUG_BREAK_IF(PInviter->name.size() > 15);
+    // XI_DEBUG_BREAK_IF(PInviter->name.size() > 15);
 
     ref<uint32>(0x04) = id;
     ref<uint16>(0x08) = targid;

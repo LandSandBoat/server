@@ -35,8 +35,8 @@ CGuildMenuBuyPacket::CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGu
     this->type = 0x83;
     this->size = 0x7C;
 
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PGuild == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PGuild == nullptr);
 
     uint8 ItemCount   = 0;
     uint8 PacketCount = 0;

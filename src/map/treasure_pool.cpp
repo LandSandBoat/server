@@ -73,8 +73,8 @@ TREASUREPOOLTYPE CTreasurePool::GetPoolType()
 
 void CTreasurePool::AddMember(CCharEntity* PChar)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     members.push_back(PChar);
 
@@ -96,8 +96,8 @@ void CTreasurePool::AddMember(CCharEntity* PChar)
 
 void CTreasurePool::DelMember(CCharEntity* PChar)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     // if(m_TreasurePoolType != TREASUREPOOL_ZONE){
     // Zone drops e.g. Dynamis DO NOT remove previous lot info. Everything else does.
@@ -245,8 +245,8 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
 
 void CTreasurePool::UpdatePool(CCharEntity* PChar)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     if (PChar->status != STATUS_TYPE::DISAPPEAR)
     {
@@ -265,8 +265,8 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
 
 void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -306,8 +306,8 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
 
 void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -517,9 +517,9 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
 
 void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
 {
-    TPZ_DEBUG_BREAK_IF(winner == nullptr);
-    TPZ_DEBUG_BREAK_IF(winner->PTreasurePool != this);
-    TPZ_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
+    XI_DEBUG_BREAK_IF(winner == nullptr);
+    XI_DEBUG_BREAK_IF(winner->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 
@@ -543,9 +543,9 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
 
 void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
 {
-    TPZ_DEBUG_BREAK_IF(winner == nullptr);
-    TPZ_DEBUG_BREAK_IF(winner->PTreasurePool != this);
-    TPZ_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
+    XI_DEBUG_BREAK_IF(winner == nullptr);
+    XI_DEBUG_BREAK_IF(winner->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 
@@ -567,7 +567,7 @@ void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
 
 void CTreasurePool::TreasureLost(uint8 SlotID)
 {
-    TPZ_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
+    XI_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 

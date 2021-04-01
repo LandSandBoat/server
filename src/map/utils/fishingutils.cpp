@@ -144,17 +144,17 @@ namespace fishingutils
 
         WeaponItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
 
-        TPZ_DEBUG_BREAK_IF(WeaponItem == nullptr);
-        TPZ_DEBUG_BREAK_IF(WeaponItem->isType(ITEM_WEAPON) == false);
-        TPZ_DEBUG_BREAK_IF(WeaponItem->getSkillType() != SKILL_FISHING);
+        XI_DEBUG_BREAK_IF(WeaponItem == nullptr);
+        XI_DEBUG_BREAK_IF(WeaponItem->isType(ITEM_WEAPON) == false);
+        XI_DEBUG_BREAK_IF(WeaponItem->getSkillType() != SKILL_FISHING);
 
         uint16 RodID = WeaponItem->getID();
 
         WeaponItem = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
 
-        TPZ_DEBUG_BREAK_IF(WeaponItem == nullptr);
-        TPZ_DEBUG_BREAK_IF(WeaponItem->isType(ITEM_WEAPON) == false);
-        TPZ_DEBUG_BREAK_IF(WeaponItem->getSkillType() != SKILL_FISHING);
+        XI_DEBUG_BREAK_IF(WeaponItem == nullptr);
+        XI_DEBUG_BREAK_IF(WeaponItem->isType(ITEM_WEAPON) == false);
+        XI_DEBUG_BREAK_IF(WeaponItem->getSkillType() != SKILL_FISHING);
 
         uint16 LureID = WeaponItem->getID();
 
@@ -281,9 +281,9 @@ namespace fishingutils
     {
         CItemWeapon* PLure = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
 
-        TPZ_DEBUG_BREAK_IF(PLure == nullptr);
-        TPZ_DEBUG_BREAK_IF(PLure->isType(ITEM_WEAPON) == false);
-        TPZ_DEBUG_BREAK_IF(PLure->getSkillType() != SKILL_FISHING);
+        XI_DEBUG_BREAK_IF(PLure == nullptr);
+        XI_DEBUG_BREAK_IF(PLure->isType(ITEM_WEAPON) == false);
+        XI_DEBUG_BREAK_IF(PLure->getSkillType() != SKILL_FISHING);
 
         if (!RemoveFly && (PLure->getStackSize() == 1))
         {
@@ -310,7 +310,7 @@ namespace fishingutils
         uint8  SlotID = PChar->equip[SLOT_RANGED];
         CItem* PRod   = PChar->getStorage(LOC_INVENTORY)->GetItem(SlotID);
 
-        TPZ_DEBUG_BREAK_IF(PRod == nullptr);
+        XI_DEBUG_BREAK_IF(PRod == nullptr);
 
         uint16 BrokenRodID = 0;
 
@@ -360,7 +360,7 @@ namespace fishingutils
                 break;
         }
 
-        TPZ_DEBUG_BREAK_IF(BrokenRodID == 0);
+        XI_DEBUG_BREAK_IF(BrokenRodID == 0);
 
         charutils::EquipItem(PChar, 0, SLOT_RANGED, LOC_INVENTORY);
         charutils::UpdateItem(PChar, LOC_INVENTORY, SlotID, -1);
@@ -406,8 +406,8 @@ namespace fishingutils
                 {
                     // сообщение: "You caught fish!"
 
-                    TPZ_DEBUG_BREAK_IF(PChar->UContainer->GetType() != UCONTAINER_FISHING);
-                    TPZ_DEBUG_BREAK_IF(PChar->UContainer->GetItem(0) == nullptr);
+                    XI_DEBUG_BREAK_IF(PChar->UContainer->GetType() != UCONTAINER_FISHING);
+                    XI_DEBUG_BREAK_IF(PChar->UContainer->GetItem(0) == nullptr);
 
                     PChar->animation = ANIMATION_FISHING_CAUGHT;
                     PChar->updatemask |= UPDATE_HP;

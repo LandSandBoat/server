@@ -6257,8 +6257,8 @@ void SmallPacket0x104(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x105(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    TPZ_DEBUG_BREAK_IF(PChar->BazaarID.id != 0);
-    TPZ_DEBUG_BREAK_IF(PChar->BazaarID.targid != 0);
+    XI_DEBUG_BREAK_IF(PChar->BazaarID.id != 0);
+    XI_DEBUG_BREAK_IF(PChar->BazaarID.targid != 0);
 
     uint32 charid = data.ref<uint32>(0x04);
 

@@ -113,7 +113,7 @@ UCONTAINERTYPE CUContainer::GetType()
 
 void CUContainer::SetType(UCONTAINERTYPE Type)
 {
-    TPZ_DEBUG_BREAK_IF(m_ContainerType != UCONTAINER_EMPTY);
+    XI_DEBUG_BREAK_IF(m_ContainerType != UCONTAINER_EMPTY);
 
     m_ContainerType = Type;
 }

@@ -112,7 +112,7 @@ namespace zoneutils
 
     CZone* GetZone(uint16 ZoneID)
     {
-        TPZ_DEBUG_BREAK_IF(ZoneID >= MAX_ZONEID);
+        XI_DEBUG_BREAK_IF(ZoneID >= MAX_ZONEID);
         if (auto PZone = g_PZoneList.find(ZoneID); PZone != g_PZoneList.end())
         {
             return PZone->second;
@@ -988,7 +988,7 @@ namespace zoneutils
 
     int GetWeatherElement(WEATHER weather)
     {
-        TPZ_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
+        XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
 
         // TODO: Fix weather ordering; at the moment, this current fire, water, earth, wind, snow, thunder
         // order MUST be preserved due to the weather enums going in this order. Those enums will

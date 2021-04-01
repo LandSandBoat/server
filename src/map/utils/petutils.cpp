@@ -259,7 +259,7 @@ namespace petutils
 
     void AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget)
     {
-        TPZ_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
 
         CBattleEntity* PPet = PMaster->PPet;
 
@@ -271,7 +271,7 @@ namespace petutils
 
     void RetreatToMaster(CBattleEntity* PMaster)
     {
-        TPZ_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
 
         CBattleEntity* PPet = PMaster->PPet;
 
@@ -779,7 +779,7 @@ namespace petutils
 
     void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
-        TPZ_DEBUG_BREAK_IF(PMaster->PPet != nullptr);
+        XI_DEBUG_BREAK_IF(PMaster->PPet != nullptr);
         if (PMaster->objtype == TYPE_PC &&
             (PetID == PETID_HARLEQUINFRAME || PetID == PETID_VALOREDGEFRAME || PetID == PETID_SHARPSHOTFRAME || PetID == PETID_STORMWAKERFRAME))
         {
@@ -897,8 +897,8 @@ namespace petutils
 
     void DetachPet(CBattleEntity* PMaster)
     {
-        TPZ_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
-        TPZ_DEBUG_BREAK_IF(PMaster->objtype != TYPE_PC);
+        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        XI_DEBUG_BREAK_IF(PMaster->objtype != TYPE_PC);
 
         CBattleEntity* PPet  = PMaster->PPet;
         CCharEntity*   PChar = (CCharEntity*)PMaster;
@@ -990,7 +990,7 @@ namespace petutils
 
     void DespawnPet(CBattleEntity* PMaster)
     {
-        TPZ_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
 
         petutils::DetachPet(PMaster);
     }
@@ -1227,8 +1227,8 @@ namespace petutils
 
     void LoadPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
     {
-        TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
-        TPZ_DEBUG_BREAK_IF(PetID >= MAX_PETID);
+        XI_DEBUG_BREAK_IF(PMaster == nullptr);
+        XI_DEBUG_BREAK_IF(PetID >= MAX_PETID);
 
         Pet_t* PPetData = new Pet_t();
 

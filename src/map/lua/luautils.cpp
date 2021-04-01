@@ -3398,7 +3398,7 @@ namespace luautils
 
     void AfterInstanceRegister(CBaseEntity* PChar)
     {
-        TPZ_DEBUG_BREAK_IF(!PChar->PInstance);
+        XI_DEBUG_BREAK_IF(!PChar->PInstance);
 
         TracyZoneScoped;
 

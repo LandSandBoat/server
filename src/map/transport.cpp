@@ -122,7 +122,7 @@ void Elevator_t::closeDoor(CNpcEntity* npc) const
 
 void CTransportHandler::InitializeTransport()
 {
-    TPZ_DEBUG_BREAK_IF(townZoneList.size() != 0);
+    XI_DEBUG_BREAK_IF(townZoneList.size() != 0);
 
     const char* fmtQuery = "SELECT id, transport, door, dock_x, dock_y, dock_z, dock_rot, \
                             boundary, zone, anim_arrive, anim_depart, time_offset, time_interval, \
@@ -414,7 +414,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
 
         if (PElevator->Elevator->GetName() == elevator.Elevator->GetName() && PElevator->zoneID == elevator.zoneID)
         {
-            TPZ_DEBUG_BREAK_IF(true);
+            XI_DEBUG_BREAK_IF(true);
         }
     }
 

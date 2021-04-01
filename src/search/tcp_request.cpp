@@ -202,7 +202,7 @@ int32 CTCPRequestPacket::CheckPacketHash()
 
 uint8 CTCPRequestPacket::GetPacketType()
 {
-    TPZ_DEBUG_BREAK_IF(m_data == nullptr)
+    XI_DEBUG_BREAK_IF(m_data == nullptr)
 
     return m_data[0x0B];
 }

@@ -210,7 +210,7 @@ CStatusEffectContainer::CStatusEffectContainer(CBattleEntity* PEntity)
 : m_StatusEffectSet(statusOrdering)
 {
     m_POwner = PEntity;
-    TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     memset(m_StatusIcons, 0xFF, sizeof(m_StatusIcons));
 }
@@ -984,7 +984,7 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
 bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration)
 {
     // break if not a COR roll.
-    TPZ_DEBUG_BREAK_IF(!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
+    XI_DEBUG_BREAK_IF(!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
                          (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)));
 
     // if all match tier/id/effect then overwrite
@@ -1320,9 +1320,9 @@ void CStatusEffectContainer::UpdateStatusIcons()
 
 void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 {
-    TPZ_DEBUG_BREAK_IF(StatusEffect->GetStatusID() >= MAX_EFFECTID);
-    TPZ_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0);
-    TPZ_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0);
+    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() >= MAX_EFFECTID);
+    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0);
+    XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0);
 
     string_t name;
     EFFECT   effect = StatusEffect->GetStatusID();
@@ -1386,7 +1386,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
 
 void CStatusEffectContainer::LoadStatusEffects()
 {
-    TPZ_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
 
     const char* Query = "SELECT "
                         "effectid,"
@@ -1462,7 +1462,7 @@ void CStatusEffectContainer::LoadStatusEffects()
 
 void CStatusEffectContainer::SaveStatusEffects(bool logout)
 {
-    TPZ_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_POwner->objtype != TYPE_PC);
 
     Sql_Query(SqlHandle, "DELETE FROM char_effects WHERE charid = %u", m_POwner->id);
 
@@ -1539,7 +1539,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
 
 void CStatusEffectContainer::CheckEffectsExpiry(time_point tick)
 {
-    TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
     TracyZoneScoped;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1619,7 +1619,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 void CStatusEffectContainer::TickEffects(time_point tick)
 {
     TracyZoneScoped;
-    TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     if (!m_POwner->isDead())
     {
@@ -1651,7 +1651,7 @@ void CStatusEffectContainer::TickEffects(time_point tick)
 void CStatusEffectContainer::TickRegen(time_point tick)
 {
     TracyZoneScoped;
-    TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     if (!m_POwner->isDead())
     {

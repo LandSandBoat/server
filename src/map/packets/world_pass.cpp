@@ -46,7 +46,7 @@ CWorldPassPacket::CWorldPassPacket(uint32 WorldPass)
 
         /* Assumption made: MAX u32 value is 10 digits */
         std::string strbuff = fmt::sprintf("%" PRIu32, WorldPass);
-        TPZ_DEBUG_BREAK_IF(strbuff.length() > 10);
+        XI_DEBUG_BREAK_IF(strbuff.length() > 10);
         memset(data + 0x10, 0, 10);
         memcpy(data + 0x10, strbuff.c_str(), strbuff.length());
     }

@@ -96,7 +96,7 @@ std::string CPetEntity::GetScriptName()
 
 WYVERN_TYPE CPetEntity::getWyvernType()
 {
-    TPZ_DEBUG_BREAK_IF(PMaster == nullptr);
+    XI_DEBUG_BREAK_IF(PMaster == nullptr);
 
     switch (PMaster->GetSJob())
     {

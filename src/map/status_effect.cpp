@@ -138,7 +138,7 @@ void CStatusEffect::UnsetFlag(uint32 flag)
 
 void CStatusEffect::SetIcon(uint16 Icon)
 {
-    TPZ_DEBUG_BREAK_IF(m_POwner == nullptr);
+    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
 
     m_Icon = Icon;
     m_POwner->StatusEffectContainer->UpdateStatusIcons();

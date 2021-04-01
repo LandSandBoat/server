@@ -446,7 +446,7 @@ namespace linkshell
 
     bool AddOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell, uint8 lsNum)
     {
-        TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+        XI_DEBUG_BREAK_IF(PChar == nullptr);
         if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
         {
             CLinkshell* PLinkshell = nullptr;
@@ -474,7 +474,7 @@ namespace linkshell
 
     bool DelOnlineMember(CCharEntity* PChar, CItemLinkshell* PItemLinkshell)
     {
-        TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+        XI_DEBUG_BREAK_IF(PChar == nullptr);
         if (PItemLinkshell != nullptr && PItemLinkshell->isType(ITEM_LINKSHELL))
         {
             try

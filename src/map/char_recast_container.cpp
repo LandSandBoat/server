@@ -35,7 +35,7 @@ CCharRecastContainer::CCharRecastContainer(CCharEntity* PChar)
 : CRecastContainer(PChar)
 , m_PChar(PChar)
 {
-    TPZ_DEBUG_BREAK_IF(m_PChar == nullptr || m_PChar->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_PChar == nullptr || m_PChar->objtype != TYPE_PC);
 }
 
 /************************************************************************
@@ -143,7 +143,7 @@ RecastList_t* CCharRecastContainer::GetRecastList(RECASTTYPE type)
             return &RecastLootList;
     }
     // Unhandled Scenario
-    TPZ_DEBUG_BREAK_IF(true);
+    XI_DEBUG_BREAK_IF(true);
     return nullptr;
 }
 

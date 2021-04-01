@@ -164,7 +164,7 @@ namespace itemutils
 
     CItem* GetItem(CItem* PItem)
     {
-        TPZ_DEBUG_BREAK_IF(PItem == nullptr);
+        XI_DEBUG_BREAK_IF(PItem == nullptr);
 
         if (PItem->isType(ITEM_WEAPON))
         {

@@ -592,7 +592,7 @@ namespace spell
     // Get Spell By ID
     CSpell* GetSpell(SpellID SpellID)
     {
-        TPZ_DEBUG_BREAK_IF(static_cast<uint16>(SpellID) >= MAX_SPELL_ID);
+        XI_DEBUG_BREAK_IF(static_cast<uint16>(SpellID) >= MAX_SPELL_ID);
 
         auto id = static_cast<uint16>(SpellID);
         if (id >= MAX_SPELL_ID)

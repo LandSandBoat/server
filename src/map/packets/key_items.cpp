@@ -31,7 +31,7 @@ CKeyItemsPacket::CKeyItemsPacket(CCharEntity* PChar, KEYS_TABLE KeyTable)
     this->type = 0x55;
     this->size = 0x44;
 
-    TPZ_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
+    XI_DEBUG_BREAK_IF(KeyTable >= MAX_KEYS_TABLE);
 
     memcpy(data + (0x04), &(PChar->keys.tables[KeyTable].keyList), 0x40);
     memcpy(data + (0x44), &(PChar->keys.tables[KeyTable].seenList), 0x40);

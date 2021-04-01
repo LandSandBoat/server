@@ -138,7 +138,7 @@ protected:
     template <typename T, typename... Args>
     bool ChangeState(Args&&... args)
     {
-        TPZ_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
         if (CanChangeState())
         {
             try
@@ -157,7 +157,7 @@ protected:
     template <typename T, typename... Args>
     bool ForceChangeState(Args&&... args)
     {
-        TPZ_DEBUG_BREAK_IF(m_stateStack.size() > 10);
+        XI_DEBUG_BREAK_IF(m_stateStack.size() > 10);
         try
         {
             CheckCompletedStates();

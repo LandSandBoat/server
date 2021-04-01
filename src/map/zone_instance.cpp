@@ -177,9 +177,9 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
 
 void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
 
     // return char to instance (d/c or logout)
     if (!PChar->PInstance)

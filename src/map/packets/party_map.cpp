@@ -30,7 +30,7 @@ CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
     this->type = 0xA0;
     this->size = 0x0C;
 
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->getZone();

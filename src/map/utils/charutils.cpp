@@ -2447,7 +2447,7 @@ namespace charutils
 
     void BuildingCharPetAbilityTable(CCharEntity* PChar, CPetEntity* PPet, uint32 PetID)
     {
-        TPZ_DEBUG_BREAK_IF(PPet == nullptr || PChar == nullptr);
+        XI_DEBUG_BREAK_IF(PPet == nullptr || PChar == nullptr);
 
         memset(&PChar->m_PetCommands, 0, sizeof(PChar->m_PetCommands));
 
@@ -2811,7 +2811,7 @@ namespace charutils
     void TrySkillUP(CCharEntity* PChar, SKILLTYPE SkillID, uint8 lvl, bool forceSkillUp, bool useSubSkill)
     {
         // This usually happens after a crash
-        TPZ_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE); // выход за пределы допустимых умений
+        XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE); // выход за пределы допустимых умений
 
         if (((PChar->WorkingSkills.rank[SkillID] != 0) && !(PChar->WorkingSkills.skill[SkillID] & 0x8000)) || useSubSkill)
         {
@@ -3881,8 +3881,8 @@ namespace charutils
      ************************************************************************/
     void DelExperiencePoints(CCharEntity* PChar, float retainPercent, uint16 forcedXpLoss)
     {
-        TPZ_DEBUG_BREAK_IF(retainPercent > 1.0f || retainPercent < 0.0f);
-        TPZ_DEBUG_BREAK_IF(map_config.exp_loss_level > 99 || map_config.exp_loss_level < 1);
+        XI_DEBUG_BREAK_IF(retainPercent > 1.0f || retainPercent < 0.0f);
+        XI_DEBUG_BREAK_IF(map_config.exp_loss_level > 99 || map_config.exp_loss_level < 1);
 
         if (PChar->GetMLevel() < map_config.exp_loss_level && forcedXpLoss == 0)
         {
@@ -4602,7 +4602,7 @@ namespace charutils
 
     void SaveCharJob(CCharEntity* PChar, JOBTYPE job)
     {
-        TPZ_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
+        XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
 
         const char* fmtQuery;
 
@@ -4696,7 +4696,7 @@ namespace charutils
 
     void SaveCharExp(CCharEntity* PChar, JOBTYPE job)
     {
-        TPZ_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
+        XI_DEBUG_BREAK_IF(job == JOB_NON || job >= MAX_JOBTYPE);
 
         const char* Query;
 
@@ -4783,7 +4783,7 @@ namespace charutils
 
     void SaveCharSkills(CCharEntity* PChar, uint8 SkillID)
     {
-        TPZ_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
+        XI_DEBUG_BREAK_IF(SkillID >= MAX_SKILLTYPE);
 
         const char* Query = "INSERT INTO char_skills "
                             "SET "
@@ -4945,7 +4945,7 @@ namespace charutils
 
         uint8 element = ((CPetEntity*)(PChar->PPet))->m_Element - 1;
 
-        TPZ_DEBUG_BREAK_IF(element > 7);
+        XI_DEBUG_BREAK_IF(element > 7);
 
         reduction = reduction + PChar->getMod(strong[element]);
 
@@ -5398,7 +5398,7 @@ namespace charutils
             case 2:
                 return "windurst_cp";
             default:
-                TPZ_DEBUG_BREAK_IF(true);
+                XI_DEBUG_BREAK_IF(true);
                 return nullptr;
         }
     }

@@ -366,7 +366,7 @@ namespace battleutils
 
     CWeaponSkill* GetWeaponSkill(uint16 WSkillID)
     {
-        TPZ_DEBUG_BREAK_IF(WSkillID >= MAX_WEAPONSKILL_ID);
+        XI_DEBUG_BREAK_IF(WSkillID >= MAX_WEAPONSKILL_ID);
         if (WSkillID >= MAX_WEAPONSKILL_ID)
         {
             return nullptr;
@@ -383,7 +383,7 @@ namespace battleutils
 
     const std::list<CWeaponSkill*>& GetWeaponSkills(uint8 skill)
     {
-        TPZ_DEBUG_BREAK_IF(skill >= MAX_SKILLTYPE);
+        XI_DEBUG_BREAK_IF(skill >= MAX_SKILLTYPE);
 
         return g_PWeaponSkillsList[skill];
     }
@@ -3350,7 +3350,7 @@ namespace battleutils
 
     uint8 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain)
     {
-        TPZ_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
+        XI_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
 
         static const uint8 effects[] = {
             SUBEFFECT_NONE,          // SC_NONE
@@ -3377,7 +3377,7 @@ namespace battleutils
 
     uint8 GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain)
     {
-        TPZ_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
+        XI_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
 
         static const uint8 tiers[] = {
             0, // SC_NONE
@@ -3515,7 +3515,7 @@ namespace battleutils
             // Previous effect exists
             else if (PSCEffect && PSCEffect->GetTier() == 0)
             {
-                TPZ_DEBUG_BREAK_IF(!PSCEffect->GetPower());
+                XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
                 // Previous effect is an opening effect, meaning the power is
                 // actually the ID of the opening weaponskill.  We need all 3
                 // of the possible skillchain properties on the initial link.
@@ -3637,7 +3637,7 @@ namespace battleutils
                 break;
 
             default:
-                TPZ_DEBUG_BREAK_IF(true);
+                XI_DEBUG_BREAK_IF(true);
                 return 0;
                 break;
         }
@@ -3704,8 +3704,8 @@ namespace battleutils
 
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)
     {
-        TPZ_DEBUG_BREAK_IF(PAttacker == nullptr);
-        TPZ_DEBUG_BREAK_IF(PDefender == nullptr);
+        XI_DEBUG_BREAK_IF(PAttacker == nullptr);
+        XI_DEBUG_BREAK_IF(PDefender == nullptr);
 
         CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
 
@@ -3716,7 +3716,7 @@ namespace battleutils
         ELEMENT            appliedEle = ELEMENT_NONE;
         int16              resistance = GetSkillchainMinimumResistance(skillchain, PDefender, &appliedEle);
 
-        TPZ_DEBUG_BREAK_IF(chainLevel <= 0 || chainLevel > 4 || chainCount <= 0 || chainCount > 5);
+        XI_DEBUG_BREAK_IF(chainLevel <= 0 || chainLevel > 4 || chainCount <= 0 || chainCount > 5);
 
         // Skill chain damage = (Closing Damage)
         //                      × (Skill chain Level/Number from Table)
@@ -3780,7 +3780,7 @@ namespace battleutils
 
     CItemEquipment* GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot)
     {
-        TPZ_DEBUG_BREAK_IF(Slot < SLOT_HEAD || Slot > SLOT_LINK2);
+        XI_DEBUG_BREAK_IF(Slot < SLOT_HEAD || Slot > SLOT_LINK2);
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -3791,13 +3791,13 @@ namespace battleutils
 
     CItemWeapon* GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot)
     {
-        TPZ_DEBUG_BREAK_IF(Slot < SLOT_MAIN || Slot > SLOT_AMMO);
+        XI_DEBUG_BREAK_IF(Slot < SLOT_MAIN || Slot > SLOT_AMMO);
         return dynamic_cast<CItemWeapon*>(((CMobEntity*)PEntity)->m_Weapons[Slot]);
     }
 
     void MakeEntityStandUp(CBattleEntity* PEntity)
     {
-        TPZ_DEBUG_BREAK_IF(PEntity == nullptr);
+        XI_DEBUG_BREAK_IF(PEntity == nullptr);
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -3819,7 +3819,7 @@ namespace battleutils
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
     {
-        TPZ_DEBUG_BREAK_IF(PEntity == nullptr || PSpell == nullptr);
+        XI_DEBUG_BREAK_IF(PEntity == nullptr || PSpell == nullptr);
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -4073,8 +4073,8 @@ namespace battleutils
 
     void GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount)
     {
-        TPZ_DEBUG_BREAK_IF(PSource == nullptr);
-        TPZ_DEBUG_BREAK_IF(PTarget == nullptr);
+        XI_DEBUG_BREAK_IF(PSource == nullptr);
+        XI_DEBUG_BREAK_IF(PTarget == nullptr);
 
         for (auto* entity : *PTarget->PNotorietyContainer)
         {
@@ -4091,7 +4091,7 @@ namespace battleutils
     // Generate enmity for all targets in range
     void GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE)
     {
-        TPZ_DEBUG_BREAK_IF(PSource == nullptr);
+        XI_DEBUG_BREAK_IF(PSource == nullptr);
 
         CCharEntity* PIterSource = nullptr;
 
@@ -5850,7 +5850,7 @@ namespace battleutils
 
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {
-        TPZ_DEBUG_BREAK_IF(PTarget == nullptr);
+        XI_DEBUG_BREAK_IF(PTarget == nullptr);
         CBattleEntity* PMaster = PEntity;
 
         if (PEntity->PMaster != nullptr)

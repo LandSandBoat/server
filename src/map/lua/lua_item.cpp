@@ -85,7 +85,7 @@ uint16 CLuaItem::getTrialNumber()
 
 auto CLuaItem::getMatchingTrials() -> sol::table
 {
-    TPZ_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
+    XI_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
     auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 

@@ -441,7 +441,7 @@ namespace ability
 
     CAbility* GetTwoHourAbility(JOBTYPE JobID)
     {
-        TPZ_DEBUG_BREAK_IF(JobID < JOB_WAR || JobID >= MAX_JOBTYPE);
+        XI_DEBUG_BREAK_IF(JobID < JOB_WAR || JobID >= MAX_JOBTYPE);
 
         switch (JobID)
         {

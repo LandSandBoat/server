@@ -134,7 +134,7 @@ uint8 CItemContainer::AddSize(int8 size)
 
 uint8 CItemContainer::InsertItem(CItem* PItem)
 {
-    TPZ_DEBUG_BREAK_IF(PItem == nullptr);
+    XI_DEBUG_BREAK_IF(PItem == nullptr);
 
     for (uint8 SlotID = 1; SlotID <= m_size; ++SlotID)
     {

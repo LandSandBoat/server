@@ -503,7 +503,7 @@ void CZone::TransportDepart(uint16 boundary, uint16 zone)
 
 void CZone::SetWeather(WEATHER weather)
 {
-    TPZ_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
+    XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
 
     if (m_Weather == weather)
     {
@@ -626,9 +626,9 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
 
     PChar->targid = m_zoneEntities->GetNewTargID();
 

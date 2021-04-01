@@ -90,7 +90,7 @@ namespace unitychat
 
     bool AddOnlineMember(CCharEntity* PChar, uint32 leader)
     {
-        TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+        XI_DEBUG_BREAK_IF(PChar == nullptr);
         CUnityChat* PUnity = nullptr;
         if (auto UnityChatListUnity = UnityChatList.find(leader); UnityChatListUnity != UnityChatList.end())
         {
@@ -109,7 +109,7 @@ namespace unitychat
 
     bool DelOnlineMember(CCharEntity* PChar, uint32 leader)
     {
-        TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+        XI_DEBUG_BREAK_IF(PChar == nullptr);
         try
         {
             CUnityChat* PUnityChat = UnityChatList.at(leader).get();

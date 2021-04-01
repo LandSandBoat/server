@@ -213,8 +213,8 @@ void CZoneEntities::DeleteTRUST(CBaseEntity* PTrust)
 
 void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
 {
-    TPZ_DEBUG_BREAK_IF(PEntity == nullptr);
-    TPZ_DEBUG_BREAK_IF(PEntity->objtype != TYPE_MOB);
+    XI_DEBUG_BREAK_IF(PEntity == nullptr);
+    XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_MOB);
 
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
@@ -334,8 +334,8 @@ void CZoneEntities::WeatherChange(WEATHER weather)
 
 void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
 {
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
-    TPZ_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->loc.zone != m_zone);
     TracyZoneScoped;
 
     battleutils::RelinquishClaim(PChar);

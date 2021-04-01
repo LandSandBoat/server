@@ -33,7 +33,7 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
     this->type = 0x2A;
     this->size = 0x10;
 
-    // TPZ_DEBUG_BREAK_IF(PEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(PEntity == nullptr);
 
     ref<uint32>(0x04) = PEntity->id;
 

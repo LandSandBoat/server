@@ -38,7 +38,7 @@
 CRecastContainer::CRecastContainer(CBattleEntity* PEntity)
 : m_PEntity(PEntity)
 {
-    TPZ_DEBUG_BREAK_IF(m_PEntity == nullptr)
+    XI_DEBUG_BREAK_IF(m_PEntity == nullptr)
     std::ignore = m_PEntity;
 }
 
@@ -60,7 +60,7 @@ RecastList_t* CRecastContainer::GetRecastList(RECASTTYPE type)
             break;
     }
     // Unhandled Scenario
-    TPZ_DEBUG_BREAK_IF(true);
+    XI_DEBUG_BREAK_IF(true);
     return nullptr;
 }
 

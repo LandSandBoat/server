@@ -118,7 +118,7 @@ namespace traits
 
     TraitList_t* GetTraits(uint8 JobID)
     {
-        TPZ_DEBUG_BREAK_IF(JobID >= MAX_JOBTYPE);
+        XI_DEBUG_BREAK_IF(JobID >= MAX_JOBTYPE);
 
         return &PTraitsList[JobID];
     }

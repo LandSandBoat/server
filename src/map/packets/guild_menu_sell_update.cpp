@@ -35,7 +35,7 @@ CGuildMenuSellUpdatePacket::CGuildMenuSellUpdatePacket(CCharEntity* PChar, uint8
     this->type = 0x84;
     this->size = 0x04;
 
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
     ref<uint16>(0x04) = itemID;
     ref<uint8>(0x06)  = stock;

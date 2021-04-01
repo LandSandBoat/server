@@ -29,7 +29,7 @@ CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, 
     this->type = 0x86;
     this->size = 0x06;
 
-    // TPZ_DEBUG_BREAK_IF(open > close);
+    // XI_DEBUG_BREAK_IF(open > close);
 
     ref<uint8>(0x04) = status;
 

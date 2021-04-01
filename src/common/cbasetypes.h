@@ -15,17 +15,17 @@
 // define a break macro for debugging.
 #if defined(DEBUG)
 #if defined(_MSC_VER)
-#define TPZ_DEBUG_BREAK_IF(_CONDITION_)                                                                                                                        \
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                                                                                                                        \
     if (_CONDITION_)                                                                                                                                           \
     {                                                                                                                                                          \
         __debugbreak();                                                                                                                                        \
     }
 #else
 #include "assert.h"
-#define TPZ_DEBUG_BREAK_IF(_CONDITION_) assert(!(_CONDITION_));
+#define XI_DEBUG_BREAK_IF(_CONDITION_) assert(!(_CONDITION_));
 #endif
 #else
-#define TPZ_DEBUG_BREAK_IF(_CONDITION_)
+#define XI_DEBUG_BREAK_IF(_CONDITION_)
 #endif
 
 // typedef/using

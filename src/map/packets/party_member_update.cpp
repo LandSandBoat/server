@@ -35,7 +35,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
     this->type = 0xDD;
     this->size = 0x20;
 
-    TPZ_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
     ref<uint32>(0x04) = PChar->id;
 
@@ -72,7 +72,7 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
     this->type = 0xDD;
     this->size = 0x20;
 
-    TPZ_DEBUG_BREAK_IF(PTrust == nullptr);
+    XI_DEBUG_BREAK_IF(PTrust == nullptr);
 
     ref<uint32>(0x04) = PTrust->id;
 

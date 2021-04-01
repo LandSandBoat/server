@@ -100,7 +100,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
     this->type = 0x09;
     this->size = 0x18;
 
-    // TPZ_DEBUG_BREAK_IF(MessageID != 0x58);
+    // XI_DEBUG_BREAK_IF(MessageID != 0x58);
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
