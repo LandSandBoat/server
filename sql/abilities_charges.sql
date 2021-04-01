@@ -1,9 +1,9 @@
 /*
 MySQL Data Transfer
 Source Host: localhost
-Source Database: tpzdb
+Source Database: xidb
 Target Host: localhost
-Target Database: tpzdb
+Target Database: xidb
 Date: 5/12/2013 12:29:07 AM
 */
 

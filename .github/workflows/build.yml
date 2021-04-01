@@ -128,7 +128,7 @@ jobs:
       mysql:
         image: mariadb
         env:
-          MYSQL_DATABASE: tpzdb
+          MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
@@ -156,9 +156,9 @@ jobs:
       run: |
         for f in sql/*.sql; do
           echo -e "Importing $f into the database..."
-          mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Copy confs
       run: |
         cp conf/default/* conf/
@@ -196,7 +196,7 @@ jobs:
       mysql:
         image: mariadb
         env:
-          MYSQL_DATABASE: tpzdb
+          MYSQL_DATABASE: xidb
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
@@ -224,12 +224,12 @@ jobs:
       run: |
         for f in sql/*.sql; do
           echo -e "Importing $f into the database..."
-          mysql tpzdb -h 127.0.0.1 -uroot -proot < $f
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Assign odd zones a different port
       run: |
-        mysql tpzdb -h 127.0.0.1 -uroot -proot -e "UPDATE tpzdb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
+        mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
     - name: Copy confs
       run: |
         cp conf/default/* conf/

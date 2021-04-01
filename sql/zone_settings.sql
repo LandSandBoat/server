@@ -1,6 +1,6 @@
 -- MySQL dump 10.14  Distrib 5.5.37-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: tpzdbtest
+-- Host: localhost    Database: xidbtest
 -- ------------------------------------------------------
 -- Server version   5.5.40-MariaDB-0ubuntu0.14.04.1
 

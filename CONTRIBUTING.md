@@ -583,13 +583,13 @@ end
 **THIS IS THE ONE EXCEPTION TO THE GLOBAL NEWLINE-BRACE RULES** 
 ```lua
 -- Correct ✔️ 
-tpz.func({
+xi.func({
   entry = 1,
   entry = 2,
 })
 
 -- Wrong ❌
-tpz.func(
+xi.func(
     {
         entry = 1,
         entry = 2,
@@ -603,14 +603,14 @@ tpz.func(
 * If you're going to cache a long table entry into a var with a shorter name, make sure that name still conveys the original meaning.
 ```lua
 -- Correct ✔️ 
-local copCurrentMission = player:getCurrentMission(tpz.mission.log_id.COP)
+local copCurrentMission = player:getCurrentMission(xi.mission.log_id.COP)
 local copMissionStatus = player:getCharVar("PromathiaStatus")
-local sandyQuests = tpz.quest.id.sandoria
+local sandyQuests = xi.quest.id.sandoria
 
 -- Wrong ❌
-local currentMission = player:getCurrentMission(tpz.mission.log_id.COP)
+local currentMission = player:getCurrentMission(xi.mission.log_id.COP)
 local missionStatus = player:getCharVar("PromathiaStatus")
-local quests = tpz.quest.id.sandoria
+local quests = xi.quest.id.sandoria
 ```
 
 ## SQL

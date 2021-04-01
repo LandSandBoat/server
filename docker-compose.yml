@@ -9,7 +9,7 @@ services:
       MYSQL_USER: topazadmin
       MYSQL_PASSWORD: topazisawesome
       MYSQL_ROOT_PASSWORD: topazisawesome
-      MYSQL_DATABASE: tpzdb
+      MYSQL_DATABASE: xidb
     # Run all the .sql files in the /sql directory to initalize the DB. This only hapens the first time this service is started and will not handle additions/modifications
     volumes:
       - ./sql:/docker-entrypoint-initdb.d

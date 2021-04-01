@@ -1,6 +1,6 @@
 -- todo:
 -- see scripts/zones/Balgas_Dais/npcs/Armoury_Crate.lua
--- copy these into a loot table and pass to tpz.battlefield.HandleLootRolls (like in above script)
+-- copy these into a loot table and pass to xi.battlefield.HandleLootRolls (like in above script)
 -- most bcnms can use their ids as the key, though limbus does its own method
 
 -- you'll need to look up these ids in bcnm_loot table to find any bcnms theyre associated with

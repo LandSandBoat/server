@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de donn?es: `tpzdb`
+-- Base de donn?es: `xidb`
 --
 
 -- --------------------------------------------------------

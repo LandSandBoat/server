@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.13, for Win64 (x86_64)
 --
--- Host: localhost    Database: tpzdb
+-- Host: localhost    Database: xidb
 -- ------------------------------------------------------
 -- Server version   5.6.13-log
 

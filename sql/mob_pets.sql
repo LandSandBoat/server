@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.29, for debian-linux-gnu (i686)
 --
--- Host: localhost    Database: tpzdb
+-- Host: localhost    Database: xidb
 -- ------------------------------------------------------
 -- Server version   5.5.29-0ubuntu0.12.04.2
 

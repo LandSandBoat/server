@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : oo
 Source Server Version : 50136
 Source Host           : localhost:3306
-Source Database       : tpzdb
+Source Database       : xidb
 
 Target Server Type    : MYSQL
 Target Server Version : 50136

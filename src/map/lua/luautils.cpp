@@ -137,14 +137,14 @@ namespace luautils
                           [](float n, float m) { return xirand::GetRandomNumber<float>(n, m); });
         // clang-format on
 
-        // Get-or-create tpz.core
+        // Get-or-create xi.core
         auto tpz      = lua["tpz"].get_or_create<sol::table>();
         auto tpz_core = tpz["core"].get_or_create<sol::table>();
 
-        // Set functions in both global namespace and as part of tpz.core
+        // Set functions in both global namespace and as part of xi.core
         // Example:
         // set_function("getNPCByID", &luautils::GetNPCByID);
-        // -> GetNPCByID() or tpz.core.getNPCByID()
+        // -> GetNPCByID() or xi.core.getNPCByID()
         auto set_function = [&](std::string name, auto&& func) {
             auto lowerName = name;
             auto upperName = name;
@@ -438,7 +438,7 @@ namespace luautils
 
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
     // Object returned form that script will be cached to:
-    // tpz.folder0.folder1.folder2.mob_name
+    // xi.folder0.folder1.folder2.mob_name
     void CacheLuaObjectFromFile(std::string filename, bool printOutput /*= false*/)
     {
         TracyZoneScoped;
@@ -2143,7 +2143,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        // TODO: This shouldn't be global, attach to tpz.gear_sets or similar
+        // TODO: This shouldn't be global, attach to xi.gear_sets or similar
         auto checkForGearSet = lua["checkForGearSet"];
         if (!checkForGearSet.valid())
         {

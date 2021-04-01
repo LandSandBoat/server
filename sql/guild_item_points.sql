@@ -1,9 +1,9 @@
 /*
 MySQL Data Transfer
 Source Host: 192.168.0.140
-Source Database: tpzdbtest
+Source Database: xidbtest
 Target Host: 192.168.0.140
-Target Database: tpzdbtest
+Target Database: xidbtest
 Date: 3/26/2015 10:14:16 PM
 */
 
