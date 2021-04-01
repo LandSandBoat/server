@@ -1,0 +1,45 @@
+States/Actions
+
+TICK - Entity
+ROAM_TICK - Mob
+COMBAT_TICK - Mob
+
+EFFECTS_TICK - Entity
+EFFECT_GAIN - Entity, Effect
+EFFECT_LOSE - Entity, Effect
+
+ITEM_START - Entity, Item, action
+ITEM_USE - Entity, Item, action
+ITEM_STATE_EXIT - Entity, Item
+
+WEATHER_CHANGE - Entity, weather, weather element
+
+SPAWN - Entity
+ENGAGE - Entity, Target
+ATTACK - Attacker, defender, action
+ATTACKED - Defender, attacker, action
+DISENGAGE - Entity
+DEATH - Entity, optionalKiller
+DESPAWN - Entity
+
+EXPERIENCE_POINTS - Entity, exp
+
+TAKE_DAMAGE - Entity, amount, optionalAttacker, attackType, damageType
+CRITICAL_TAKE - Target, Attacker
+
+RANGE_START - Entity, action
+
+ABILITY_START - Entity, Ability
+ABILITY_USE - Entity, Target, Ability, action
+ABILITY_TAKE - Target, Entity, Ability, action
+ABILITY_STATE_EXIT - Entity, Ability
+
+WEAPONSKILL_STATE_ENTER - Entity, Skillid
+WEAPONSKILL_USE - Entity, Target, Skillid, TP, action
+WEAPONSKILL_TAKE - Target, Entity, Skillid, TP, action
+WEAPONSKILL_STATE_EXIT - Entity, Skillid
+
+MAGIC_START - Entity, Spell, action
+MAGIC_USE - Entity, Target, Spell, action
+MAGIC_STATE_EXIT - Entity, Spell
+MAGIC_TAKE - Target, Entity, Spell, ?action?

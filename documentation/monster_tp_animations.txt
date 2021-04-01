@@ -1,0 +1,85 @@
+Contains a list of mob animation ids for future use.
+Creates by Lautan.
+
+18 - mob 2 hour mijin makure
+20-24 - mob 2 hour EES
+
+86 - super sonic thing
+
+125 - chalmeleon skin
+
+239 - some weird dark sword bind effect
+
+345 - Weird dark drain effect
+
+443 - Some water skill bubble and water spit
+
+480-503 - Animations for zilart 8 NM
+
+510 - 670 - Avatar animations
+
+695~ - divine might animations
+
+// dynamis skills
+709-717 - All mob two hour animations for dynamis
+
+736 - knock back with slow
+737 - shieldbash
+
+770 - yugado rng two hour
+771 - qua rng two hour
+772 - recover hp
+773 - recover mp
+774 - warp out
+775 - warp in
+
+806+ - CoP animations
+
+931 - breakga
+
+962 - 964 - Jormungand breath/blast
+965 - 967 - Ouryu breath/blast
+968 - Vrtra breath
+973 - pugil jump
+
+979 - flash
+
+981 - gas released from head
+
+984 - red eyes and gaze hit
+986 - supersonics?
+987 - charm Fragrant Breath?
+989 - magical 2 hour eagle eye shot
+
+995 - jumping around. Fission?
+
+1003 - weird defensive ball thing
+1009 - crazy strong effect, probably CoP boss
+1015 - CoP boss stuff
+1030 - chr up or defense boost?
+1036 - ninja ws
+
+1041 - sam WS
+
+1045 - poison gas thing
+1046 - goblin dice, probably for goblin in movopolis
+1056 - crash jump effect
+1065 - flash effect
+1072 - strong gas with silence
+1074 - ice shield
+1086 - lazers
+1089 - from castle mob?
+1097 - angle effect lots of light
+1163 - some cute AoE paralyze effect
+1165 - AoE silence
+1170+ - TOAU tp moves
+
+1304 - puppet ws
+
+8901 - player two hour animations
+
+These need to be used together.  Teleport out, change pos, teleport in.
+Used by mobs such as Ark Angel TT, which teleports around the battlefield instead of moving.  Target isn't lost on AA TT.
+Not to be confused with worms moving, which is completely different.  Costume and walk around.
+Teleport out: 639, 674, 689
+Teleport in: ???, 675, 690

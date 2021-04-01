@@ -1,0 +1,2421 @@
+ 0    ??? Animation
+ 1    Foot Kick
+ 2    Dust Cloud
+ 3    Whirl Claws
+ 4    Lamb Chop
+ 5    Rage
+ 6    Sheep Charge
+ 7    ??? Animation
+ 8    Sheep Song
+ 9    Rage
+ 10    Ram Charge
+ 11    Rumble
+ 12    Great Bleat
+ 13    Petribreath
+ 14    Roar
+ 15    Razor Fang
+ 16    Ranged Attack
+ 17    Claw Cyclone
+ 18    Mijin Gakure
+ 19    ??? Animation
+ 20    Eagle Eye Shot
+ 21    ??? Animation
+ 22    ??? Animation
+ 23    ??? Animation
+ 24    Sonic Wave
+ 25    Stomping
+ 26    ??? Animation
+ 27    ??? Animation
+ 28    Cold Stare
+ 29    Whistle
+ 30    Berserk
+ 31    Healing Breeze
+ 32    Vicious Claw
+ 33    Stone Throw
+ 34    Spinning Claw
+ 35    Claw Storm
+ 36    Blank Gaze Dispel
+ 37    Wild Carrot
+ 38    Eye Scratch
+ 39    Magic Fruit
+ 40    ??? Animation
+ 41    ??? Animation
+ 42    ??? Animation
+ 43    ??? Animation
+ 44    Head Butt
+ 45    Dream Flower
+ 46    Wild Oats
+ 47    ??? Animation
+ 48    Photosynthesis
+ 49    Leaf Dagger
+ 50    Scream
+ 51    ??? Animation
+ 52    Frogkick
+ 53    Spore
+ 54    Queasyshroom
+ 55    Numbshroom
+ 56    Shakeshroom
+ 57    ??? Animation
+ 58    Silence Gas
+ 59    Dark Spore
+ 60    Impale
+ 61    Vampiric Lash
+ 62    Vampiric Root
+ 63    Bad Breath
+ 64    Sweet Breath
+ 65    Needleshot
+ 66    10000 Needles
+ 67    ??? Animation
+ 68    Photosynthesis
+ 69    ??? Animation
+ 70    ??? Animation
+ 71    ??? Animation
+ 72    Drill Branch
+ 73    Pinecone Bomb
+ 74    Shuffle
+ 75    Leafstorm
+ 76    Entangle
+ 77    Double Down
+ 78    Sharp Sting
+ 79    Pollen
+ 80    Final Sting
+ 81    ??? Animation
+ 82    Power Attack Beetle
+ 83    Hi-Freq Field
+ 84    Rhino Attack
+ 85    Rhino Guard
+ 86    ??? Animation
+ 87    Spoil
+ 88    Sticky Thread
+ 89    Poison Breath
+ 90    Cocoon
+ 91    ??? Animation
+ 92    Numbing Breath
+ 93    Cold Breath
+ 94    Mandible Bite
+ 95    Poison Sting
+ 96    ??? Animation
+ 97    Death Scissors
+ 98    Wild Rage
+ 99    Earthbreaker
+ 100    Evasion
+ 101    ??? Animation
+ 102    ??? Animation
+ 103    ??? Animation
+ 104    ??? Animation
+ 105    ??? Animation
+ 106    ??? Animation
+ 107    Death Trap
+ 108    ??? Animation
+ 109    ??? Animation
+ 110    Tail Blow
+ 111    Fireball
+ 112    Blockhead
+ 113    Brain Crush
+ 114    Baleful Gaze
+ 115    Plague Breath
+ 116    Infrasonics
+ 117    Secretion
+ 118    Ripper Fang
+ 119    ??? Animation
+ 120    Foul Breath
+ 121    Frost Breath
+ 122    Thunderbolt Breath
+ 123    Chomp Rush
+ 124    Scythe Tail
+ 125    ??? Animation
+ 126    ??? Animation
+ 127    ??? Animation
+ 128    healing breath i
+ 129    healing breath ii
+ 130    healing breath iii
+ 131    ??? Animation
+ 132    remove blindness
+ 133    remove paralysis
+ 134    flame breath
+ 135    frost breath
+ 136    Ultrasonics
+ 137    Sonic Boom
+ 138    Blood Drain
+ 139    Jet Stream
+ 140    ??? Animation
+ 141    camisado
+ 142    somnolence
+ 143    Scratch
+ 144    ultimate terror
+ 145    Gliding Spike
+ 146    Feather Barrier
+ 147    Stormwind
+ 148    nether blast
+ 149    Ruinous Omen
+ 150    Hammer Beak
+ 151    Zantetsuken
+ 152    Perfect defense
+ 153    ??? Animation
+ 154    Sound Blast
+ 155    Baleful Gaze
+ 156    ??? Animation
+ 157    ??? Animation
+ 158    Suction
+ 159    Acid Mist
+ 160    Sand Breath
+ 161    Drainkiss
+ 162    Regeneration
+ 163    ??? Animation
+ 164    TP Drainkiss
+ 165    MP Drainkiss
+ 166    ??? Animation
+ 167    Brain Drain
+ 168    Full-Force Blow
+ 169    Gastric Bomb
+ 170    Sandspin
+ 171    Tremors
+ 172    MP Absorption
+ 173    Sound Vacuum
+ 174    ??? Animation
+ 175    Fluid Spread
+ 176    Fluid Toss
+ 177    Digest
+ 178    ??? Animation
+ 179    ??? Animation
+ 180    ??? Animation
+ 181    Death Ray
+ 182    Hex Eye
+ 183    ??? Animation
+ 184    Catharsis
+ 185    ??? Animation
+ 186    Bubble Shower
+ 187    Bubble Curtain
+ 188    Big Scissors
+ 189    Scissor Guard
+ 190    Dimensional Death
+ 191    ??? Animation
+ 192    Metallic Body
+ 193    Intimidate
+ 194    Aqua Ball
+ 195    Splash Breath
+ 196    Screwdriver
+ 197    Water Wall
+ 198    Water Shield
+ 199    ??? Animation
+ 200    Tentacle
+ 201    ??? Animation
+ 202    Ink Jet
+ 203    Hard Membrane
+ 204    Cross Attack
+ 205    Regeneration
+ 206    Maelstrom
+ 207    Whirlwind
+ 208    ??? Animation
+ 209    Howling
+ 210    Poison Breath
+ 211    Rot Gas
+ 212    Dirty Claw
+ 213    Shadow Claw
+ 214    Methane Breath
+ 215    ??? Animation
+ 216    Grave Reel
+ 217    Ectosmash
+ 218    Fear Touch
+ 219    Terror Touch
+ 220    Curse
+ 221    Dark Sphere
+ 222    Hell Slash
+ 223    Horror Cloud
+ 224    ??? Animation
+ 225    ??? Animation
+ 226    ??? Animation
+ 227    ??? Animation
+ 228    Black Cloud
+ 229    Blood Saber
+ 230    Whip Tongue
+ 231    ??? Animation
+ 232    Acid Breath
+ 233    Stinking Gas
+ 234    Undead Mold
+ 235    Call of the Grave
+ 236    Abyss Blast
+ 237    ??? Animation
+ 238    ??? Animation
+ 239    ??? Animation
+ 240    ??? Animation
+ 241    Netherspikes
+ 242    Carnal Nightmare
+ 243    Aegis Schism
+ 244    Dancing Chains
+ 245    Barbed Crescent
+ 246    Shackled Fists
+ 247    Foxfire
+ 248    Grim Halo
+ 249    Netherspikes
+ 250    Carnal Nightmare
+ 251    Aegis Schism
+ 252    Dancing Chains
+ 253    Self-Destruct
+ 254    Berserk
+ 255    ??? Animation
+ 256    ??? Animation
+ 257    Smite of Rage
+ 258    Whirl of Rage
+ 259    ??? Animation
+ 260    ??? Animation
+ 261    ??? Animation
+ 262    ??? Animation
+ 263    ??? Animation
+ 264    Double Ray
+ 265    Spinning Attack
+ 266    Spectral Barrier
+ 267    Mysterious Light
+ 268    Mind Drain
+ 269    Battery Charge
+ 270    ??? Animation
+ 271    ??? Animation
+ 272    ??? Animation
+ 273    ??? Animation
+ 274    ??? Animation
+ 275    ??? Animation
+ 276    ??? Animation
+ 277    ??? Animation
+ 278    Kartstrahl
+ 279    Blitzstrahl
+ 280    Panzerfaust
+ 281    Berserk
+ 282    Panzerschreck
+ 283    Typhoon
+ 284    ??? Animation
+ 285    Gravity Field
+ 286    ??? Animation
+ 287    Meltdown
+ 288    ??? Animation
+ 289    ??? Animation
+ 290    ??? Animation
+ 291    Charged Whisker
+ 292    Blindeye
+ 293    Eyes On Me
+ 294    Hypnosis
+ 295    Mind Break
+ 296    Binding Wave
+ 297    Airy Shield
+ 298    ??? Animation
+ 299    Magic Barrier
+ 300    ??? Animation
+ 301    Level 5 Petrify
+ 302    ??? Animation
+ 303    Soul Drain
+ 304    Hecatomb Wave
+ 305    ??? Animation
+ 306    ??? Animation
+ 307    Demonic Howl
+ 308    ??? Animation
+ 309    ??? Animation
+ 310    ??? Animation
+ 311    Condemnation
+ 312    ??? Animation
+ 313    Quadrastrike
+ 314    ??? Animation
+ 315    ??? Animation
+ 316    Dynamic Implosion
+ 317    ??? Animation
+ 318    Mana Storm
+ 319    ??? Animation
+ 320    Dynamic Assault
+ 321    Tera Slash
+ 322    Oblivion Smash
+ 323    ??? Animation
+ 324    Violent Rupture
+ 325    Blow
+ 326    ??? Animation
+ 327    Beatdown
+ 328    Uppercut
+ 329    ??? Animation
+ 330    Blank Gaze
+ 331    Antiphase
+ 332    ??? Animation
+ 333    ??? Animation
+ 334    Goblin Rush
+ 335    Bomb Toss
+ 336    Bomb Toss Suicide
+ 337    ??? Animation
+ 338    Marrow Drain
+ 339    Subsonics
+ 340    ??? Animation
+ 341    ??? Animation
+ 342    ??? Animation
+ 343    ??? Animation
+ 344    ??? Animation
+ 345    ??? Animation
+ 346    ??? Animation
+ 347    ??? Animation
+ 348    ??? Animation
+ 349    Aerial Wheel
+ 350    Shoulder Attack
+ 351    Slam Dunk
+ 352    Arm Block
+ 353    Battle Dance
+ 354    Howl
+ 355    Ore Toss
+ 356    Head Butt
+ 357    Shell Bash
+ 358    Shell Guard
+ 359    ??? Animation
+ 360    ??? Animation
+ 361    Feather Storm
+ 362    Double Kick
+ 363    Parry
+ 364    Sweep
+ 365    ??? Animation
+ 366    Helldive
+ 367    Wing Cutter
+ 368    ??? Animation
+ 369    ??? Animation
+ 370    ??? Animation
+ 371    ??? Animation
+ 372    Wild Horn
+ 373    Thunderbolt
+ 374    Kick Out
+ 375    Shock Wave
+ 376    Flame Armor
+ 377    ??? Animation
+ 378    ??? Animation
+ 379    Burst
+ 380    Flame Arrow
+ 381    Firebomb
+ 382    Blastbomb
+ 383    Fountain
+ 384    ??? Animation
+ 385    ??? Animation
+ 386    Flame Breath
+ 387    Poison Breath
+ 388    Wind Breath
+ 389    Body Slam
+ 390    Heavy Stomp
+ 391    Chaos Blade
+ 392    Petro Eyes
+ 393    Voidsong
+ 394    Thornsong
+ 395    Lodesong
+ 396    Blaster
+ 397    Chaotic Eye
+ 398    ??? Animation
+ 399    ??? Animation
+ 400    ??? Animation
+ 401    Somersault
+ 402    Catapult
+ 403    Cursed Sphere
+ 404    Venom
+ 405    ??? Animation
+ 406    Lightning Roar
+ 407    Ice Roar
+ 408    Impact Roar
+ 409    Grand Slam
+ 410    Power Attack
+ 411    Power Attack Weapon
+ 412    Kick Back
+ 413    Implosion
+ 414    ??? Animation
+ 415    Umbra Smash
+ 416    Giga Slash
+ 417    Dark Nova
+ 418    Crystal Shield
+ 419    Heavy Strike
+ 420    Ice Break
+ 421    Thunder Break
+ 422    Crystal Rain
+ 423    Crystal Weapon Fire
+ 424    Crystal Weapon Stone
+ 425    Crystal Weapon Water
+ 426    Crystal Weapon Wind
+ 427    Bludgeon
+ 428    Deal Out
+ 429    Sprout Spin
+ 430    Slumber Powder
+ 431    Sprout Smack
+ 432    Mighty Strikes
+ 433    Benediction
+ 434    Hundred Fists
+ 435    Manafont
+ 436    Qn aern rdm
+ 437    Perfect Dodge
+ 438    Charm
+ 439    Blood Weapon
+ 440    ??? Animation
+ 441    ??? Animation
+ 442    Jumping Thrust
+ 443    Hydro Ball
+ 444    ??? Animation
+ 445    ??? Animation
+ 446    Bubble Armor
+ 447    ??? Animation
+ 448    ??? Animation
+ 449    Hydro Shot
+ 450    ??? Animation
+ 451    ??? Animation
+ 452    Spinning Fin
+ 453    ??? Animation
+ 454    ??? Animation
+ 455    Words of Bane
+ 456    Sigh
+ 457    Light of Penance
+ 458    Lateral Slash
+ 459    Vertical Slash
+ 460    Throat Stab
+ 461    Spikeball
+ 462    Shoulder Slam
+ 463    Magnetite Cloud
+ 464    Sandstorm
+ 465    Sand Veil
+ 466    Sand Shield
+ 467    Sand Trap
+ 468    Jamming Wave
+ 469    Deadly Hold
+ 470    Tail Swing
+ 471    Tail Smash
+ 472    Heat Breath
+ 473    Riddle
+ 474    Great Sandstorm
+ 475    Great Whirlwind
+ 476    Tortoise Song
+ 477    Head Butt Turtle
+ 478    Tortoise Stomp
+ 479    Harden Shell
+ 480    Earth Breath
+ 481    Aqua Breath
+ 482    Sickle Slash
+ 483    Acid Spray
+ 484    Spider Web
+ 485    Dispelling Wind
+ 486    Deadly Drive
+ 487    Wind Wall
+ 488    Fang Rush
+ 489    Dread Shriek
+ 490    Tail Crush
+ 491    ??? Animation
+ 492    ??? Animation
+ 493    Radiant Breath
+ 494    ??? Animation
+ 495    Fire Blade
+ 496    Frost Blade
+ 497    Wind Blade2
+ 498    Earth Blade
+ 499    Lightning Blade
+ 500    Water Blade
+ 501    Great Wheel
+ 502    Light Blade
+ 503    Everyones Grudge
+ 504    Everyones Rancor
+ 505    Activate
+ 506    ??? Animation
+ 507    ??? Animation
+ 508    ??? Animation
+ 509    ??? Animation
+ 510    ??? Animation
+ 511    ??? Animation
+ 512    ??? Animation
+ 513    moonlit charge
+ 514    crescent fang
+ 515    lunar cry
+ 516    ecliptic growl
+ 517    lunar roar
+ 518    eclipse bite
+ 519    ecliptic howl
+ 520    ??? Animation
+ 521    Howling Moon
+ 522    ??? Animation
+ 523    ??? Animation
+ 524    ??? Animation
+ 525    ??? Animation
+ 526    punch
+ 527    fire ii
+ 528    burning strike
+ 529    double punch
+ 530    crimson howl
+ 531    fire iv
+ 532    flaming crush
+ 533    meteor strike
+ 534    inferno
+ 535    ??? Animation
+ 536    ??? Animation
+ 537    ??? Animation
+ 538    ??? Animation
+ 539    rock throw
+ 540    stone ii
+ 541    rock buster
+ 542    megalith throw
+ 543    earthen ward
+ 544    stone iv
+ 545    mountain buster
+ 546    geocrush
+ 547    earthen fury
+ 548    ??? Animation
+ 549    ??? Animation
+ 550    lunar bay
+ 551    ??? Animation
+ 552    barracuda dive
+ 553    water ii
+ 554    tail whip
+ 555    spring water
+ 556    slowga
+ 557    water iv
+ 558    spinning dive
+ 559    grand fall
+ 560    Tidal Wave
+ 561    ??? Animation
+ 562    ??? Animation
+ 563    ??? Animation
+ 564    ??? Animation
+ 565    claw
+ 566    aero ii
+ 567    aerial armor
+ 568    hastega
+ 569    whispering wind
+ 570    aero iv
+ 571    predator claws
+ 572    wind blade
+ 573    Aerial Blast
+ 574    ??? Animation
+ 575    ??? Animation
+ 576    ??? Animation
+ 577    ??? Animation
+ 578    axe kick
+ 579    blizzard ii
+ 580    frost armor
+ 581    sleepga
+ 582    double slap
+ 583    blizzard iv
+ 584    rush
+ 585    heavenly strike
+ 586    diamond dust
+ 587    ??? Animation
+ 588    ??? Animation
+ 589    ??? Animation
+ 590    ??? Animation
+ 591    shock strike
+ 592    thunder ii
+ 593    rolling thunder
+ 594    thunderspark
+ 595    lightning armor
+ 596    thunder iv
+ 597    chaotic strike
+ 598    thunderstorm
+ 599    judgment bolt
+ 600    ??? Animation
+ 601    ??? Animation
+ 602    ??? Animation
+ 603    ??? Animation
+ 604    ??? Animation
+ 605    healing ruby
+ 606    poison nails
+ 607    ??? Animation
+ 608    ??? Animation
+ 609    meteorite
+ 610    healing ruby ii
+ 611    searing light
+ 612    ??? Animation
+ 613    ??? Animation
+ 614    ??? Animation
+ 615    ??? Animation
+ 616    ??? Animation
+ 617    ??? Animation
+ 618    ??? Animation
+ 619    ??? Animation
+ 620    ??? Animation
+ 621    ??? Animation
+ 622    ??? Animation
+ 623    ??? Animation
+ 624    ??? Animation
+ 625    ??? Animation
+ 626    ??? Animation
+ 627    ??? Animation
+ 628    ??? Animation
+ 629    ??? Animation
+ 630    ??? Animation
+ 631    ??? Animation
+ 632    ??? Animation
+ 633    Cross Reaver
+ 634    Havoc Spiral
+ 635    Dominion Slash
+ 636    Amon Drive
+ 637    Dragonfall
+ 638    Shield Strike
+ 639    Ark Guardian Tarutaru
+ 640    Circle Blade
+ 641    Swift Blade
+ 642    Spirits Within
+ 643    Vorpal Blade
+ 644    Rampage
+ 645    Calamity
+ 646    Spinning Scythe
+ 647    Guillotine
+ 648    Tachi Yukikaze
+ 649    Tachi Gekko
+ 650    Tachi Kasha
+ 651    ??? Animation
+ 652    Inferno Blast alt
+ 653    Hurricane Wing
+ 654    Spike Flail
+ 655    Dragon Breath
+ 656    Touchdown
+ 657    Inferno Blast
+ 658    Tebbad Wing Air
+ 659    Absolute Terror
+ 660    Horrid Roar 1
+ 661    ??? Animation
+ 662    ??? Animation
+ 663    Tarutaru Warp II
+ 664    ??? Animation
+ 665    ??? Animation
+ 666    ??? Animation
+ 667    ??? Animation
+ 668    ??? Animation
+ 669    Royal Bash
+ 670    Royal savior-protect
+ 671    Abyssal Drain
+ 672    Abyssal strike
+ 673    Berserk-Ruf
+ 674    ??? Animation
+ 675    ??? Animation
+ 676    red lotus blade
+ 677    Flat blade
+ 678    Savage blade
+ 679    red lotus blade
+ 680    Spirits Within
+ 681    Vorpal Blade
+ 682    Power Slash
+ 683    Freeze Bite
+ 684    GroundStrike
+ 685    Electrocharge
+ 686    Stellar burst
+ 687    Vortex
+ 688    ??? Animation
+ 689    Eald2 Warp In
+ 690    Eald2 Warp Out
+ 691    Gaea Stream Eta
+ 692    Uranos Cascade Eta
+ 693    Cronos Sling Eta
+ 694    Phase Shift 1
+ 695    Gaea Stream Theta
+ 696    Uranos Cascade Theta
+ 697    Cronos Sling Theta
+ 698    Phase Shift 2
+ 699    Gaea Stream Lambda
+ 700    Uranos Cascade Lambda
+ 701    Cronos Sling Lambda
+ 702    Phase Shift 3
+ 703    ??? Animation
+ 704    ??? Animation
+ 705    ??? Animation
+ 706    ??? Animation
+ 707    Omega javelin
+ 708    Summonshadows
+ 709    ??? Animation
+ 710    ??? Animation
+ 711    ??? Animation
+ 712    ??? Animation
+ 713    ??? Animation
+ 714    ??? Animation
+ 715    ??? Animation
+ 716    ??? Animation
+ 717    ??? Animation
+ 718    ??? Animation
+ 719    ??? Animation
+ 720    ??? Animation
+ 721    ??? Animation
+ 722    ??? Animation
+ 723    ??? Animation
+ 724    ??? Animation
+ 725    ??? Animation
+ 726    ??? Animation
+ 727    ??? Animation
+ 728    ??? Animation
+ 729    Tackle
+ 730    ??? Animation
+ 731    ??? Animation
+ 732    ??? Animation
+ 733    ??? Animation
+ 734    Dragon Kick
+ 735    Asuran Fists
+ 736    ??? Animation
+ 737    ??? Animation
+ 738    ??? Animation
+ 739    ??? Animation
+ 740    Fanatic Dance
+ 741    Doom
+ 742    The Wrath of GuDha
+ 743    Frypan
+ 744    Smokebomb
+ 745    Smokebomb
+ 746    Crispy Candle
+ 747    Crispy Candle
+ 748    Paralysis Shower
+ 749    Paralysis Shower
+ 750    Dice Heal
+ 751    Dice Curse
+ 752    Dice Damage
+ 753    Dice Stun
+ 754    Dice Poison
+ 755    Dice Disease
+ 756    Dice Sleep
+ 757    Dice Slow
+ 758    Dice TP Loss
+ 759    Dice Dispel
+ 760    Dice Reset
+ 761    Seismostomp
+ 762    Numbing Glare
+ 763    Seismostomp
+ 764    Tormentful Glare
+ 765    Seismostomp
+ 766    Torpid Glare
+ 767    Seismostomp
+ 768    Lead Breath
+ 769    Lead Breath
+ 770    Yagudo RNG 2 hour
+ 771    Quad RNG 2 hour
+ 772    heal HP
+ 773    heal MP
+ 774    ??? Animation
+ 775    ??? Animation
+ 776    ??? Animation
+ 777    ??? Animation
+ 778    ??? Animation
+ 779    ??? Animation
+ 780    ??? Animation
+ 781    ??? Animation
+ 782    ??? Animation
+ 783    ??? Animation
+ 784    ??? Animation
+ 785    ??? Animation
+ 786    ??? Animation
+ 787    ??? Animation
+ 788    ??? Animation
+ 789    ??? Animation
+ 790    ??? Animation
+ 791    ??? Animation
+ 792    Knights of Round
+ 793    Final Heaven
+ 794    Randgrith
+ 795    Onslaught
+ 796    Catastrophe
+ 797    Mercy Stroke
+ 798    Metatron Torment
+ 799    Scourge
+ 800    Geirskogul
+ 801    Gate of Tartarus
+ 802    Blade Metsu
+ 803    Tachi Kaiten
+ 804    Namas Arrow
+ 805    Coronach
+ 806    Soporific
+ 807    Palsy Pollen
+ 808    Gloeosuccus
+ 809    Sand Blast
+ 810    Sand Pit
+ 811    Venom Spray
+ 812    Pit Ambush
+ 813    Mandibular Bite
+ 814    Toxic Spit
+ 815    Geist Wall
+ 816    Numbing Noise
+ 817    Nimble Snap
+ 818    Cyclotail
+ 819    Tail Roll
+ 820    Tusk
+ 821    Scutum
+ 822    Bone Crunch
+ 823    Awful Eye
+ 824    Heavy Bellow
+ 825    Heavy Blow
+ 826    Heavy Whisk
+ 827    ??? Animation
+ 828    Flying Hip Press
+ 829    Earth Shock
+ 830    Double Claw
+ 831    Grapple
+ 832    Filamented Hold
+ 833    Spinning Top
+ 834    Empty Cutter
+ 835    Vacuous Osculation
+ 836    Hexagon Belt
+ 837    Auroral Drape
+ 838    ??? Animation
+ 839    ??? Animation
+ 840    ??? Animation
+ 841    ??? Animation
+ 842    ??? Animation
+ 843    ??? Animation
+ 844    ??? Animation
+ 845    Memory Of Dark
+ 846    Rampant Gnaw
+ 847    Big Horn
+ 848    Snort
+ 849    Rabid Dance
+ 850    Lowing
+ 851    Triclip
+ 852    Back Swish
+ 853    Mow
+ 854    Frightful Roar
+ 855    Mortal Ray
+ 856    Unblessed Armor
+ 857    Vanity Dive
+ 858    Empty Beleaguer
+ 859    Mirage
+ 860    Aura Of Persistence
+ 861    Gas Shell
+ 862    Venom Shell
+ 863    Palsynyxis
+ 864    Painful Whip
+ 865    Suctorial Tentacle
+ 866    Sling Bomb
+ 867    Formation Attack
+ 868    Refueling
+ 869    Circle of Flames
+ 870    ??? Animation
+ 871    ??? Animation
+ 872    Vanity Strike
+ 873    Occultation
+ 874    Empty Crush
+ 875    Berserk
+ 876    Lamentation
+ 877    Cold Wave
+ 878    Hypothermal Combustion
+ 879    ??? Animation
+ 880    PL Vulcanian Impact
+ 881    ??? Animation
+ 882    PL Hellstorm
+ 883    ??? Animation
+ 884    ??? Animation
+ 885    ??? Animation
+ 886    ??? Animation
+ 887    ??? Animation
+ 888    ??? Animation
+ 889    Velocious Blade
+ 890    Scission Thrust
+ 891    Sonic Blade
+ 892    Microquake
+ 893    Percussive Foin
+ 894    Gravity Wheel
+ 895    Psychomancy
+ 896    Mind Wall
+ 897    Transmogrification
+ 898    Tremorous Tread
+ 899    Empty Seed
+ 900    Memento Mori
+ 901    Silence Seal
+ 902    Envoutement
+ 903    Danse Macabre
+ 904    ??? Animation
+ 905    Quadratic Continuum
+ 906    Spirit Absorption
+ 907    Vanity Drive
+ 908    Stygian Flatus
+ 909    Promyvion Barrier
+ 910    Back Heel
+ 911    Jettatura
+ 912    Nihility Song
+ 913    ??? Animation
+ 914    ??? Animation
+ 915    ??? Animation
+ 916    ??? Animation
+ 917    ??? Animation
+ 918    ??? Animation
+ 919    Impalement
+ 920    Brain Spike
+ 921    Promyvion Brume
+ 922    Murk
+ 923    Material Fend
+ 924    Carousel
+ 925    ??? Animation
+ 926    ??? Animation
+ 927    ??? Animation
+ 928    ??? Animation
+ 929    ??? Animation
+ 930    ??? Animation
+ 931    ??? Animation
+ 932    ??? Animation
+ 933    Empty Cutter
+ 934    Negative Whirl
+ 935    Stygian Vapor
+ 936    Winds Of Promyvion
+ 937    Spirit Absorption
+ 938    Binary Absorption
+ 939    ??? Animation
+ 940    Spirit Tap
+ 941    Binary Tap
+ 942    ??? Animation
+ 943    Shadow Spread
+ 944    Wire Cutter
+ 945    Antimatter
+ 946    Equalizer
+ 947    Flame Thrower
+ 948    Cryo Jet
+ 949    Turbofan
+ 950    Smoke Discharger
+ 951    High-Tension Discharger
+ 952    Hydro Canon
+ 953    ??? Animation
+ 954    Chemical Bomb
+ 955    ??? Animation
+ 956    ??? Animation
+ 957    ??? Animation
+ 958    ??? Animation
+ 959    ??? Animation
+ 960    ??? Animation
+ 961    ??? Animation
+ 962    Glacial Breath
+ 963    Sleet Blast alt
+ 964    Sleet Blast
+ 965    Geotic Breath
+ 966    Ochre Blast alt
+ 967    Ochre Blast
+ 968    Sable Breath
+ 969    Snowball
+ 970    Snow Cloud
+ 971    Electromagnetic Field
+ 972    ??? Animation
+ 973    Recoil Dive
+ 974    ??? Animation
+ 975    ??? Animation
+ 976    ??? Animation
+ 977    ??? Animation
+ 978    ??? Animation
+ 979    ??? Animation
+ 980    ??? Animation
+ 981    ??? Animation
+ 982    ??? Animation
+ 983    ??? Animation
+ 984    ??? Animation
+ 985    ??? Animation
+ 986    ??? Animation
+ 987    ??? Animation
+ 988    ??? Animation
+ 989    ??? Animation
+ 990    ??? Animation
+ 991    ??? Animation
+ 992    ??? Animation
+ 993    ??? Animation
+ 994    ??? Animation
+ 995    ??? Animation
+ 996    ??? Animation
+ 997    ??? Animation
+ 998    Dual Strike
+ 999    Syphon Discharge
+ 1000    Mantle Pierce
+ 1001    Ink Cloud
+ 1002    Molluscous Mutation
+ 1003    Saline Coat
+ 1004    Aerial Collision
+ 1005    Vapor Spray
+ 1006    Spine Lash
+ 1007    Voiceless Storm
+ 1008    Tidal Dive
+ 1009    Plasma Charge
+ 1010    Wing Thrust
+ 1011    Auroral Wind
+ 1012    Impact Stream
+ 1013    Depuration
+ 1014    Crystaline Cocoon
+ 1015    ??? Animation
+ 1016    ??? Animation
+ 1017    Sideswipe
+ 1018    Glacier Splitter
+ 1019    Disseverment
+ 1020    Biotic Boomerang
+ 1021    Medusa Javelin
+ 1022    Vitriolic Barrage
+ 1023    Primal Drill
+ 1024    Concussive Oscillation
+ 1025    Ion Shower
+ 1026    ??? Animation
+ 1027    Asthenic Fog
+ 1028    Luminous Drape
+ 1029    ??? Animation
+ 1030    Rapid molt
+ 1031    Sinuate rush
+ 1032    noname
+ 1033    ??? Animation
+ 1034    ??? Animation
+ 1035    noname2
+ 1036    Amatsu torimai
+ 1037    Amatsu kazakiri
+ 1038    Amatsu yukiarashi
+ 1039    Amatsu tsukioboro
+ 1040    Amatsu anaikusa
+ 1041    Amatsu tsukikage
+ 1042    Oisoya
+ 1043    Tail thrust
+ 1044    Temporal Shift
+ 1045    Ichor stream
+ 1046    ??? Animation
+ 1047    ??? Animation
+ 1048    ??? Animation
+ 1049    ??? Animation
+ 1050    ??? Animation
+ 1051    ??? Animation
+ 1052    ??? Animation
+ 1053    ??? Animation
+ 1054    ??? Animation
+ 1055    ??? Animation
+ 1056    ??? Animation
+ 1057    ??? Animation
+ 1058    ??? Animation
+ 1059    ??? Animation
+ 1060    ??? Animation
+ 1061    Hexidiscs
+ 1062    Vorpal Blade
+ 1063    Damnation Dive
+ 1064    Sickle Slash
+ 1065    Actinic Burst
+ 1066    Core Meltdown
+ 1067    Viscid Nectar
+ 1068    Axial Bloom
+ 1069    Nutrient Aborption
+ 1070    Vertical Cleave
+ 1071    Efflorescent Foetor
+ 1072    Stupor Spores
+ 1073    Morning Glory
+ 1074    Reactor Cool
+ 1075    ??? Animation
+ 1076    Optic Induration
+ 1077    Static Filament
+ 1078    Decayed Filament
+ 1079    Reactor Overheat
+ 1080    Reactor Overload
+ 1081    Armor Buster
+ 1082    Energy Screen
+ 1083    Mana Screen
+ 1084    Dissipation
+ 1085    Colossal Blow
+ 1086    Laser Shower
+ 1087    Floodlight
+ 1088    Hyper Pulse
+ 1089    Stun Cannon
+ 1090    Guided Missile II
+ 1091    Hundred Fists
+ 1092    Benediction
+ 1093    Prishe Item 1
+ 1094    Prishe Item 2
+ 1095    Nullifying Dropkick
+ 1096    Auroral Uppercut
+ 1097    Rejuvenation
+ 1098    Revelation
+ 1099    Luminous Lance
+ 1100    Chains of Apathy
+ 1101    Chains of Arrogance
+ 1102    Chains of Cowardice
+ 1103    Chains of Rage
+ 1104    Chains of Envy
+ 1105    Malevolent blessing
+ 1106    Pestilent penance
+ 1107    Empty salvation
+ 1108    Infernal deliverance
+ 1109    Malevolent blessing
+ 1110    Pestilent penance
+ 1111    Empty salvation
+ 1112    Infernal deliverance
+ 1113    Wheel of Impregnability
+ 1114    Bastion of Twilight
+ 1115    Winds of oblivion
+ 1116    Seal of quiescence
+ 1117    ??? Animation
+ 1118    ??? Animation
+ 1119    ??? Animation
+ 1120    ??? Animation
+ 1121    ??? Animation
+ 1122    ??? Animation
+ 1123    ??? Animation
+ 1124    ??? Animation
+ 1125    ??? Animation
+ 1126    ??? Animation
+ 1127    ??? Animation
+ 1128    ??? Animation
+ 1129    ??? Animation
+ 1130    ??? Animation
+ 1131    ??? Animation
+ 1132    ??? Animation
+ 1133    Trample
+ 1134    Tempest wing
+ 1135    Sweeping  Flail
+ 1136    Megaflare
+ 1137    Gigaflare
+ 1138    Teraflare
+ 1139    Touchdown
+ 1140    Prodigious spike
+ 1141    Impulsion
+ 1142    Horrible roar
+ 1143    Absolute terror
+ 1144    ??? Animation
+ 1145    ??? Animation
+ 1146    ??? Animation
+ 1147    PW Rushing Slash
+ 1148    ??? Animation
+ 1149    Forceful Blow
+ 1150    Somersault Kick
+ 1151    Firespit
+ 1152    Warm-Up
+ 1153    ??? Animation
+ 1154    ??? Animation
+ 1155    ??? Animation
+ 1156    PW Groundburst
+ 1157    ??? Animation
+ 1158    ??? Animation
+ 1159    Yawn
+ 1160    Wing Slap
+ 1161    Beak Lunge
+ 1162    Frigid Shuffle
+ 1163    Wing Whirl
+ 1164    Gnash
+ 1165    Vile Belch
+ 1166    Hypnic Lamp
+ 1167    Seismic Tail
+ 1168    Seaspray
+ 1169    ??? Animation
+ 1170    Barrier Tusk
+ 1171    Onrush
+ 1172    Stampede
+ 1173    Flailing Trunk
+ 1174    Voracious Trunk
+ 1175    ??? Animation
+ 1176    Pecking Flurry
+ 1177    Snatch Morsel
+ 1178    Feather Tickle
+ 1179    ??? Animation
+ 1180    Frenetic Rip
+ 1181    Abrasive Tantara
+ 1182    Deafening Tantara
+ 1183    ??? Animation
+ 1184    ??? Animation
+ 1185    Hysteric Barrage
+ 1186    ??? Animation
+ 1187    ??? Animation
+ 1188    ??? Animation
+ 1189    ??? Animation
+ 1190    Tail Slap
+ 1191    PL Hypnotic Sway
+ 1192    ??? Animation
+ 1193    ??? Animation
+ 1194    Crosswind
+ 1195    Wind Shear
+ 1196    Obfuscate
+ 1197    Zephyr Mantle
+ 1198    Ill Wind
+ 1199    ??? Animation
+ 1200    Kibosh
+ 1201    ??? Animation
+ 1202    Sandspray
+ 1203    Faze
+ 1204    ??? Animation
+ 1205    Spinal Cleave
+ 1206    Mangle
+ 1207    Leaping Cleave
+ 1208    ??? Animation
+ 1209    ??? Animation
+ 1210    ??? Animation
+ 1211    ??? Animation
+ 1212    ??? Animation
+ 1213    ??? Animation
+ 1214    ??? Animation
+ 1215    ??? Animation
+ 1216    ??? Animation
+ 1217    ??? Animation
+ 1218    ??? Animation
+ 1219    ??? Animation
+ 1220    ??? Animation
+ 1221    ??? Animation
+ 1222    ??? Animation
+ 1223    Lava Spit
+ 1224    Sulfurous Breath
+ 1225    Scorching Lash
+ 1226    Ululation
+ 1227    Magma Hoplon
+ 1228    Gates of Hades
+ 1229    ??? Animation
+ 1230    ??? Animation
+ 1231    ??? Animation
+ 1232    Rock Smash
+ 1233    Diamondhide
+ 1234    Enervation
+ 1235    Quake Stomp
+ 1236    ??? Animation
+ 1237    ??? Animation
+ 1238    ??? Animation
+ 1239    ??? Animation
+ 1240    ??? Animation
+ 1241    ??? Animation
+ 1242    ??? Animation
+ 1243    ??? Animation
+ 1244    ??? Animation
+ 1245    ??? Animation
+ 1246    ??? Animation
+ 1247    ??? Animation
+ 1248    ??? Animation
+ 1249    ??? Animation
+ 1250    ??? Animation
+ 1251    ??? Animation
+ 1252    ??? Animation
+ 1253    ??? Animation
+ 1254    ??? Animation
+ 1255    ??? Animation
+ 1256    ??? Animation
+ 1257    ??? Animation
+ 1258    Tail Slap
+ 1259    ??? Animation
+ 1260    ??? Animation
+ 1261    ??? Animation
+ 1262    ??? Animation
+ 1263    ??? Animation
+ 1264    ??? Animation
+ 1265    Forceful Blow
+ 1266    Somersault Kick
+ 1267    Firespit
+ 1268    Warm-Up
+ 1269    ??? Animation
+ 1270    ??? Animation
+ 1271    ??? Animation
+ 1272    ??? Animation
+ 1273    ??? Animation
+ 1274    ??? Animation
+ 1275    Feeble Bleat
+ 1276    ??? Animation
+ 1277    ??? Animation
+ 1278    ??? Animation
+ 1279    PL Tidal Slash
+ 1280    ??? Animation
+ 1281    ??? Animation
+ 1282    ??? Animation
+ 1283    Amplification
+ 1284    Boiling Point
+ 1285    ??? Animation
+ 1286    Amorphic spikes
+ 1287    ??? Animation
+ 1288    ??? Animation
+ 1289    ??? Animation
+ 1290    Amber scutum
+ 1291    Vitriolic spray
+ 1292    Thermal Pulse
+ 1293    Cannonball
+ 1294    Heat barrier
+ 1295    ??? Animation
+ 1296    ??? Animation
+ 1297    ??? Animation
+ 1298    ??? Animation
+ 1299    ??? Animation
+ 1300    ??? Animation
+ 1301    ??? Animation
+ 1302    ??? Animation
+ 1303    Arcuballista
+ 1304    Chimera Ripper
+ 1305    String Clipper
+ 1306    Slapstick
+ 1307    ??? Animation
+ 1308    Pyric Blast
+ 1309    Polar Blast
+ 1310    Trembling
+ 1311    Serpentine Tail
+ 1312    Nerve Gas
+ 1313    Barofield
+ 1314    ??? Animation
+ 1315    ??? Animation
+ 1316    ??? Animation
+ 1317    ??? Animation
+ 1318    Pyric Bulwark
+ 1319    Polar Bulwark
+ 1320    ??? Animation
+ 1321    ??? Animation
+ 1322    ??? Animation
+ 1323    ??? Animation
+ 1324    ??? Animation
+ 1325    ??? Animation
+ 1326    ??? Animation
+ 1327    Mind Blast
+ 1328    ??? Animation
+ 1329    ??? Animation
+ 1330    Mind Purge
+ 1331    Tribulation
+ 1332    Immortal Anathema
+ 1333    ??? Animation
+ 1334    PW Calcifying Deluge
+ 1335    PW Shadow Thrust
+ 1336    ??? Animation
+ 1337    PW Pinning Shot
+ 1338    ??? Animation
+ 1339    PW Gorgon Dance
+ 1340    ??? Animation
+ 1341    ??? Animation
+ 1342    ??? Animation
+ 1343    ??? Animation
+ 1344    ??? Animation
+ 1345    Magma fan
+ 1346    Erratic flutter
+ 1347    Proboscis
+ 1348    Erosion dust
+ 1349    Exuviation
+ 1350    ??? Animation
+ 1351    Sledgehammer
+ 1352    Head Snatch
+ 1353    Haymaker
+ 1354    Incessant Fists
+ 1355    Arcane Stomp
+ 1356    Pleiades Ray
+ 1357    ??? Animation
+ 1358    ??? Animation
+ 1359    ??? Animation
+ 1360    Magic Hammer
+ 1361    Water Bomb
+ 1362    Frog Cheer
+ 1363    ??? Animation
+ 1364    ??? Animation
+ 1365    ??? Animation
+ 1366    ??? Animation
+ 1367    Tenebrous Mist
+ 1368    Thunderstrike
+ 1369    Dreadstorm
+ 1370    ??? Animation
+ 1371    Tourbillion
+ 1372    ??? Animation
+ 1373    PL Rail Cannon
+ 1374    ??? Animation
+ 1375    ??? Animation
+ 1376    PL Restoral
+ 1377    ??? Animation
+ 1378    ??? Animation
+ 1379    ??? Animation
+ 1380    ??? Animation
+ 1381    Fossilizing Breath
+ 1382    Plague Swipe
+ 1383    ??? Animation
+ 1384    ??? Animation
+ 1385    ??? Animation
+ 1386    Fulmination
+ 1387    ??? Animation
+ 1388    ??? Animation
+ 1389    ??? Animation
+ 1390    ??? Animation
+ 1391    ??? Animation
+ 1392    ??? Animation
+ 1393    ??? Animation
+ 1394    ??? Animation
+ 1395    ??? Animation
+ 1396    ??? Animation
+ 1397    ??? Animation
+ 1398    ??? Animation
+ 1399    Discharge
+ 1400    PW Homing missile
+ 1401    PW Mortal revolution
+ 1402    PW Discoid
+ 1403    PW Brainjack
+ 1404    Cannibal Blade
+ 1405    Daze
+ 1406    Knockout
+ 1407    Diffusion ray
+ 1408    Intertia stream
+ 1409    ??? Animation
+ 1410    ??? Animation
+ 1411    Dismemberment
+ 1412    Dire straight
+ 1413    Earth shatter
+ 1414    Sinker drill
+ 1415    Detonating grip
+ 1416    ??? Animation
+ 1417    ??? Animation
+ 1418    ??? Animation
+ 1419    ??? Animation
+ 1420    ??? Animation
+ 1421    ??? Animation
+ 1422    ??? Animation
+ 1423    ??? Animation
+ 1424    ??? Animation
+ 1425    ??? Animation
+ 1426    ??? Animation
+ 1427    ??? Animation
+ 1428    ??? Animation
+ 1429    ??? Animation
+ 1430    ??? Animation
+ 1431    ??? Animation
+ 1432    ??? Animation
+ 1433    ??? Animation
+ 1434    Demoralizing Roar
+ 1435    Boiling Blood
+ 1436    Clobber
+ 1437    Batterhorn
+ 1438    ??? Animation
+ 1439    Granite Skin
+ 1440    ??? Animation
+ 1441    ??? Animation
+ 1442    ??? Animation
+ 1443    ??? Animation
+ 1444    ??? Animation
+ 1445    ??? Animation
+ 1446    ??? Animation
+ 1447    ??? Animation
+ 1448    ??? Animation
+ 1449    Bloodrake
+ 1450    Decollation
+ 1451    Nosferatus kiss
+ 1452    Heliovoid
+ 1453    ??? Animation
+ 1454    Wings of Gehenna
+ 1455    ??? Animation
+ 1456    Hellsnap
+ 1457    Cackle
+ 1458    Bilgestorm
+ 1459    Thundris shriek
+ 1460    Hellclap
+ 1461    Necropurge
+ 1462    Necrobane
+ 1463    ??? Animation
+ 1464    ??? Animation
+ 1465    ??? Animation
+ 1466    ??? Animation
+ 1467    ??? Animation
+ 1468    ??? Animation
+ 1469    ??? Animation
+ 1470    ??? Animation
+ 1471    ??? Animation
+ 1472    ??? Animation
+ 1473    ??? Animation
+ 1474    ??? Animation
+ 1475    ??? Animation
+ 1476    ??? Animation
+ 1477    ??? Animation
+ 1478    ??? Animation
+ 1479    ??? Animation
+ 1480    ??? Animation
+ 1481    ??? Animation
+ 1482    ??? Animation
+ 1483    ??? Animation
+ 1484    ??? Animation
+ 1485    ??? Animation
+ 1486    Bone Crusher
+ 1487    Armor Piercer
+ 1488    Magic Mortar
+ 1489    ??? Animation
+ 1490    ??? Animation
+ 1491    ??? Animation
+ 1492    ??? Animation
+ 1493    ??? Animation
+ 1494    ??? Animation
+ 1495    ??? Animation
+ 1496    ??? Animation
+ 1497    ??? Animation
+ 1498    ??? Animation
+ 1499    ??? Animation
+ 1500    ??? Animation
+ 1501    ??? Animation
+ 1502    ??? Animation
+ 1503    ??? Animation
+ 1504    ??? Animation
+ 1505    ??? Animation
+ 1506    ??? Animation
+ 1507    ??? Animation
+ 1508    ??? Animation
+ 1509    String Shredder
+ 1510    Armor Shatterer
+ 1511    ??? Animation
+ 1512    ??? Animation
+ 1513    ??? Animation
+ 1514    ??? Animation
+ 1515    ??? Animation
+ 1516    ??? Animation
+ 1517    ??? Animation
+ 1518    ??? Animation
+ 1519    ??? Animation
+ 1520    ??? Animation
+ 1521    ??? Animation
+ 1522    ??? Animation
+ 1523    ??? Animation
+ 1524    ??? Animation
+ 1525    ??? Animation
+ 1526    ??? Animation
+ 1527    ??? Animation
+ 1528    ??? Animation
+ 1529    ??? Animation
+ 1530    ??? Animation
+ 1531    ??? Animation
+ 1532    ??? Animation
+ 1533    ??? Animation
+ 1534    ??? Animation
+ 1535    ??? Animation
+ 1536    ??? Animation
+ 1537    Dustvoid
+ 1538    Slaverous gale
+ 1539    Aeolian Void
+ 1540    Extreme Purgation
+ 1541    Desiccation
+ 1542    Doomvoid
+ 1543    Aqua Fortis
+ 1544    Regurgitation
+ 1545    Delta Thrust
+ 1546    Torpefying Charge
+ 1547    Grim Glower
+ 1548    ??? Animation
+ 1549    ??? Animation
+ 1550    ??? Animation
+ 1551    ??? Animation
+ 1552    ??? Animation
+ 1553    ??? Animation
+ 1554    ??? Animation
+ 1555    ??? Animation
+ 1556    ??? Animation
+ 1557    Ore Toss
+ 1558    Head Butt
+ 1559    Shell Bash
+ 1560    Shell Guard
+ 1561    Howl
+ 1562    ??? Animation
+ 1563    ??? Animation
+ 1564    ??? Animation
+ 1565    ??? Animation
+ 1566    ??? Animation
+ 1567    Insipid Nip
+ 1568    Pandemic Nip
+ 1569    Bombilation
+ 1570    Cimicine Discharge
+ 1571    Emetic Discharge
+ 1572    Fuscous ooze
+ 1573    Purulent ooze
+ 1574    Corrosive ooze
+ 1575    ??? Animation
+ 1576    Sudden Lunge
+ 1577    Noisome Powder
+ 1578    Nepenthean Hum
+ 1579    Spiral Spin
+ 1580    Spiral burst
+ 1581    Zephyr Arrow
+ 1582    Lethe Arrows
+ 1583    Spring Breeze
+ 1584    Summer Breeze
+ 1585    Autumn Breeze
+ 1586    Winter Breeze
+ 1587    Cyclonic Turmoil
+ 1588    Cyclonic Torrent
+ 1589    Fevered Pitch
+ 1590    Call of the Moon up
+ 1591    Call of the Moon down
+ 1592    Plenilune Embrace up
+ 1593    Plenilune Embrace down
+ 1594    Nox blast
+ 1595    Asuran claws
+ 1596    ??? Animation
+ 1597    Nocturnal Combustion
+ 1598    Berserk
+ 1599    Penumbral Impact
+ 1600    Dark Wave
+ 1601    ??? Animation
+ 1602    ??? Animation
+ 1603    Petal Pirouette
+ 1604    ??? Animation
+ 1605    ??? Animation
+ 1606    ??? Animation
+ 1607    ??? Animation
+ 1608    ??? Animation
+ 1609    ??? Animation
+ 1610    ??? Animation
+ 1611    ??? Animation
+ 1612    ??? Animation
+ 1613    ??? Animation
+ 1614    ??? Animation
+ 1615    ??? Animation
+ 1616    ??? Animation
+ 1617    ??? Animation
+ 1618    ??? Animation
+ 1619    ??? Animation
+ 1620    ??? Animation
+ 1621    ??? Animation
+ 1622    ??? Animation
+ 1623    ??? Animation
+ 1624    ??? Animation
+ 1625    ??? Animation
+ 1626    ??? Animation
+ 1627    ??? Animation
+ 1628    ??? Animation
+ 1629    ??? Animation
+ 1630    ??? Animation
+ 1631    ??? Animation
+ 1632    ??? Animation
+ 1633    ??? Animation
+ 1634    ??? Animation
+ 1635    ??? Animation
+ 1636    ??? Animation
+ 1637    ??? Animation
+ 1638    ??? Animation
+ 1639    Lightning spear
+ 1640    Wrath of zeus
+ 1641    Rampant stance
+ 1642    Acheron kick
+ 1643    ??? Animation
+ 1644    ??? Animation
+ 1645    ??? Animation
+ 1646    ??? Animation
+ 1647    ??? Animation
+ 1648    ??? Animation
+ 1649    ??? Animation
+ 1650    ??? Animation
+ 1651    ??? Animation
+ 1652    Scintillant lance
+ 1653    Damsel memento
+ 1654    ??? Animation
+ 1655    ??? Animation
+ 1656    ??? Animation
+ 1657    ??? Animation
+ 1658    ??? Animation
+ 1659    ??? Animation
+ 1660    ??? Animation
+ 1661    ??? Animation
+ 1662    ??? Animation
+ 1663    ??? Animation
+ 1664    ??? Animation
+ 1665    ??? Animation
+ 1666    ??? Animation
+ 1667    ??? Animation
+ 1668    ??? Animation
+ 1669    ??? Animation
+ 1670    ??? Animation
+ 1671    ??? Animation
+ 1672    ??? Animation
+ 1673    ??? Animation
+ 1674    ??? Animation
+ 1675    ??? Animation
+ 1676    ??? Animation
+ 1677    ??? Animation
+ 1678    Dark mist
+ 1679    Bloody claw
+ 1680    Triumphant roar
+ 1681    Terror eye
+ 1682    Dark orb
+ 1683    ??? Animation
+ 1684    ??? Animation
+ 1685    ??? Animation
+ 1686    Regal scratch
+ 1687    Mewing lullaby
+ 1688    Eerie eye
+ 1689    Divine favor
+ 1690    Level-1-Holy
+ 1691    Level-2-Holy
+ 1692    Level-3-Holy
+ 1693    Level-4-Holy
+ 1694    Level-5-Holy
+ 1695    Level-6-Holy
+ 1696    ??? Animation
+ 1697    Severing Fang
+ 1698    Sub-zero Smash
+ 1699    Aqua Blast
+ 1700    Frozen Mist
+ 1701    Hydro Wave
+ 1702    ??? Animation
+ 1703    ??? Animation
+ 1704    ??? Animation
+ 1705    Tail lash
+ 1706    Bloody beak
+ 1707    Feral peck
+ 1708    ??? Animation
+ 1709    Reaving wind
+ 1710    Storm wing
+ 1711    Calamitous wind
+ 1712    Dancers fury
+ 1713    Whirling edge
+ 1714    Thorned dance
+ 1715    Sensual dance
+ 1716    Rousing samba
+ 1717    Vivifying waltz
+ 1718    ??? Animation
+ 1719    ??? Animation
+ 1720    ??? Animation
+ 1721    ??? Animation
+ 1722    ??? Animation
+ 1723    ??? Animation
+ 1724    ??? Animation
+ 1725    ??? Animation
+ 1726    ??? Animation
+ 1727    ??? Animation
+ 1728    ??? Animation
+ 1729    ??? Animation
+ 1730    ??? Animation
+ 1731    ??? Animation
+ 1732    ??? Animation
+ 1733    ??? Animation
+ 1734    ??? Animation
+ 1735    ??? Animation
+ 1736    ??? Animation
+ 1737    ??? Animation
+ 1738    ??? Animation
+ 1739    ??? Animation
+ 1740    ??? Animation
+ 1741    ??? Animation
+ 1742    ??? Animation
+ 1743    ??? Animation
+ 1744    ??? Animation
+ 1745    ??? Animation
+ 1746    Boon void
+ 1747    Cruel slash
+ 1748    Spell wall
+ 1749    Implosion
+ 1750    Umbral orb
+ 1751    Cross smash
+ 1752    Blighting blitz
+ 1753    Spawn shadow
+ 1754    Soma wall
+ 1755    Doom arc
+ 1756    Dexter Wing
+ 1757    Sinister Wing
+ 1758    Chaos blast
+ 1759    Abyssic buster
+ 1760    Dancing tail
+ 1761    Dancing tailv2
+ 1762    Chilling roar
+ 1763    Chilling roarv2
+ 1764    Soul douse
+ 1765    Soul dousev2
+ 1766    Dark star
+ 1767    Dark starV2
+ 1768    ??? Animation
+ 1769    ??? Animation
+ 1770    ??? Animation
+ 1771    ??? Animation
+ 1772    ??? Animation
+ 1773    ??? Animation
+ 1774    ??? Animation
+ 1775    ??? Animation
+ 1776    ??? Animation
+ 1777    ??? Animation
+ 1778    ??? Animation
+ 1779    ??? Animation
+ 1780    ??? Animation
+ 1781    ??? Animation
+ 1782    ??? Animation
+ 1783    ??? Animation
+ 1784    ??? Animation
+ 1785    ??? Animation
+ 1786    Diabolic claw
+ 1787    Stygian cyclone
+ 1788    Deathly diminuendo
+ 1789    Hellish crescendo
+ 1790    Afflicting gaze
+ 1791    Stygian sphere
+ 1792    Malign invocation
+ 1793    Shadow wreck
+ 1794    Acrid Stream
+ 1795    Rime Spray
+ 1796    Blazing Bound
+ 1797    Molting Burst
+ 1798    ??? Animation
+ 1799    ??? Animation
+ 1800    ??? Animation
+ 1801    ??? Animation
+ 1802    ??? Animation
+ 1803    ??? Animation
+ 1804    ??? Animation
+ 1805    ??? Animation
+ 1806    ??? Animation
+ 1807    ??? Animation
+ 1808    ??? Animation
+ 1809    ??? Animation
+ 1810    Interference
+ 1811    Dark arrivisme
+ 1812    Royal decree
+ 1813    Besiegers bane
+ 1814    ??? Animation
+ 1815    ??? Animation
+ 1816    ??? Animation
+ 1817    Turbine cyclone
+ 1818    Seismic impact
+ 1819    Incinerator
+ 1820    Arm canon
+ 1821    Ballistic kick
+ 1822    Scapula beam
+ 1823    Eradicator
+ 1824    Auger Smash
+ 1825    Area Bombardment
+ 1826    ??? Animation
+ 1827    ??? Animation
+ 1828    ??? Animation
+ 1829    Benthic Typhoon
+ 1830    ??? Animation
+ 1831    Osmosis
+ 1832    Vacuole Discharge
+ 1833    ??? Animation
+ 1834    ??? Animation
+ 1835    ??? Animation
+ 1836    ??? Animation
+ 1837    ??? Animation
+ 1838    ??? Animation
+ 1839    ??? Animation
+ 1840    ??? Animation
+ 1841    ??? Animation
+ 1842    ??? Animation
+ 1843    Dark thorn
+ 1844    Petaline tempest
+ 1845    Durance whip
+ 1846    Subjugating slash
+ 1847    Fatal allure
+ 1848    Moonlight Veil
+ 1849    ??? Animation
+ 1850    Dark Flare
+ 1851    Dark Freeze
+ 1852    Dark Tornado
+ 1853    Dark Quake
+ 1854    Dark Burst
+ 1855    Dark Flood
+ 1856    Dark Moon
+ 1857    Dark Sun
+ 1858    ??? Animation
+ 1859    ??? Animation
+ 1860    ??? Animation
+ 1861    Shinryu Attack Right
+ 1862    Shinryu Attack Left
+ 1863    Shinryu Attack Right 2
+ 1864    Shinryu Attack Left 2
+ 1865    Shinryu Attack Tail 1
+ 1866    Shinryu Attack Tail 2
+ 1867    Shinryu Attack Tail Stun
+ 1868    Cosmic Breath
+ 1869    Cataclysmic Vortex
+ 1870    Mighty Guard
+ 1871    Atomic ray
+ 1872    Protostar
+ 1873    Shinryu Attack Right
+ 1874    Shinryu Attack Left
+ 1875    Shinryu Attack Right 2
+ 1876    Shinryu Attack Left 2
+ 1877    Shinryu Attack Tail 1
+ 1878    Shinryu Attack Tail 2
+ 1879    Shinryu Attack Tail Stun
+ 1880    Cosmic Breath
+ 1881    Cataclysmic Vortex
+ 1882    Gyre Charge
+ 1883    Darkmatter
+ 1884    Supernova
+ 1885    ??? Animation
+ 1886    ??? Animation
+ 1887    ??? Animation
+ 1888    ??? Animation
+ 1889    ??? Animation
+ 1890    ??? Animation
+ 1891    ??? Animation
+ 1892    ??? Animation
+ 1893    ??? Animation
+ 1894    ??? Animation
+ 1895    ??? Animation
+ 1896    ??? Animation
+ 1897    ??? Animation
+ 1898    ??? Animation
+ 1899    ??? Animation
+ 1900    Yaksha stance
+ 1901    Yaksha damnation
+ 1902    Yaksha bliss
+ 1903    Yaksha oblivion
+ 1904    Raksha stance
+ 1905    Raksha Judgment
+ 1906    Raksha illusion
+ 1907    Raksha vengeance
+ 1908    ??? Animation
+ 1909    ??? Animation
+ 1910    ??? Animation
+ 1911    ??? Animation
+ 1912    Rending talons
+ 1913    Shrieking gale
+ 1914    Wings of woe
+ 1915    Wings of agony
+ 1916    Typhoean rage
+ 1917    Ravenous wail
+ 1918    ??? Animation
+ 1919    ??? Animation
+ 1920    ??? Animation
+ 1921    ??? Animation
+ 1922    ??? Animation
+ 1923    Slicing Sickle
+ 1924    Dead Prophet
+ 1925    ??? Animation
+ 1926    Raptorial Claw
+ 1927    Phlegm Expulsion
+ 1928    Macerating Bile
+ 1929    Preying Posture
+ 1930    ??? Animation
+ 1931    ??? Animation
+ 1932    ??? Animation
+ 1933    ??? Animation
+ 1934    ??? Animation
+ 1935    ??? Animation
+ 1936    ??? Animation
+ 1937    ??? Animation
+ 1938    ??? Animation
+ 1939    ??? Animation
+ 1940    ??? Animation
+ 1941    ??? Animation
+ 1942    ??? Animation
+ 1943    ??? Animation
+ 1944    ??? Animation
+ 1945    ??? Animation
+ 1946    ??? Animation
+ 1947    ??? Animation
+ 1948    ??? Animation
+ 1949    ??? Animation
+ 1950    ??? Animation
+ 1951    ??? Animation
+ 1952    ??? Animation
+ 1953    ??? Animation
+ 1954    ??? Animation
+ 1955    ??? Animation
+ 1956    Diluvial wakes
+ 1957    Kurugi collapse
+ 1958    Searing halitus
+ 1959    Divesting gale
+ 1960    Bolt of perdition
+ 1961    Crippling rime
+ 1962    Oblivions mantle
+ 1963    ??? Animation
+ 1964    ??? Animation
+ 1965    ??? Animation
+ 1966    ??? Animation
+ 1967    ??? Animation
+ 1968    ??? Animation
+ 1969    ??? Animation
+ 1970    ??? Animation
+ 1971    ??? Animation
+ 1972    ??? Animation
+ 1973    ??? Animation
+ 1974    ??? Animation
+ 1975    ??? Animation
+ 1976    ??? Animation
+ 1977    ??? Animation
+ 1978    ??? Animation
+ 1979    ??? Animation
+ 1980    ??? Animation
+ 1981    ??? Animation
+ 1982    ??? Animation
+ 1983    ??? Animation
+ 1984    ??? Animation
+ 1985    ??? Animation
+ 1986    ??? Animation
+ 1987    ??? Animation
+ 1988    ??? Animation
+ 1989    ??? Animation
+ 1990    ??? Animation
+ 1991    ??? Animation
+ 1992    ??? Animation
+ 1993    ??? Animation
+ 1994    ??? Animation
+ 1995    ??? Animation
+ 1996    ??? Animation
+ 1997    ??? Animation
+ 1998    ??? Animation
+ 1999    ??? Animation
+ 2000    ??? Animation
+ 2001    ??? Animation
+ 2002    ??? Animation
+ 2003    ??? Animation
+ 2004    Echolocation
+ 2005    Deep sea dirge
+ 2006    Caudal capacitor
+ 2007    Baleen gurge
+ 2008    Depht charge
+ 2009    Blowhole blast
+ 2010    Waterspout
+ 2011    Angry seas
+ 2012    Thar she blows
+ 2013    ??? Animation
+ 2014    ??? Animation
+ 2015    ??? Animation
+ 2016    Night stalker
+ 2017    Atropine spore
+ 2018    Frond fatale
+ 2019    Full bloom
+ 2020    Deracinator
+ 2021    Beautiful death
+ 2022    ??? Animation
+ 2023    ??? Animation
+ 2024    ??? Animation
+ 2025    ??? Animation
+ 2026    ??? Animation
+ 2027    ??? Animation
+ 2028    ??? Animation
+ 2029    ??? Animation
+ 2030    ??? Animation
+ 2031    ??? Animation
+ 2032    ??? Animation
+ 2033    ??? Animation
+ 2034    ??? Animation
+ 2035    ??? Animation
+ 2036    ??? Animation
+ 2037    ??? Animation
+ 2038    ??? Animation
+ 2039    ??? Animation
+ 2040    ??? Animation
+ 2041    ??? Animation
+ 2042    ??? Animation
+ 2043    ??? Animation
+ 2044    ??? Animation
+ 2045    ??? Animation
+ 2046    ??? Animation
+ 2047    ??? Animation
+ 2048    ??? Animation
+ 2049    ??? Animation
+ 2050    ??? Animation
+ 2051    ??? Animation
+ 2052    ??? Animation
+ 2053    ??? Animation
+ 2054    ??? Animation
+ 2055    ??? Animation
+ 2056    Prismatic Breath
+ 2057    Acicular Brand
+ 2058    Orogenesis
+ 2059    Phason Beam
+ 2060    Diffractive Break
+ 2061    Euhedral Swat
+ 2062    ??? Animation
+ 2063    ??? Animation
+ 2064    ??? Animation
+ 2065    ??? Animation
+ 2066    ??? Animation
+ 2067    ??? Animation
+ 2068    ??? Animation
+ 2069    Prismatic Breath
+ 2070    Acicular Brand
+ 2071    Orogenesis
+ 2072    Phason Beam
+ 2073    Diffractive Break
+ 2074    Euhedral Swat
+ 2075    Crystallite Shower
+ 2076    Graviton Crux
+ 2077    Crystal Bolide
+ 2078    Fragor maximus
+ 2079    ??? Animation
+ 2080    ??? Animation
+ 2081    ??? Animation
+ 2082    ??? Animation
+ 2083    ??? Animation
+ 2084    ??? Animation
+ 2085    ??? Animation
+ 2086    Metamorphic Blast
+ 2087    Enervating grasp
+ 2088    Orogenic storm
+ 2089    Subduction
+ 2090    ??? Animation
+ 2091    ??? Animation
+ 2092    ??? Animation
+ 2093    ??? Animation
+ 2094    Soulshattering Roar
+ 2095    Calcifying Claw
+ 2096    Divesting Stampede
+ 2097    Bonebreaking Barrage
+ 2098    Beastruction
+ 2099    Retinal glare
+ 2100    Sylvan Slumber
+ 2101    Crushing Gaze
+ 2102    Vaskania
+ 2103    ??? Animation
+ 2104    ??? Animation
+ 2105    ??? Animation
+ 2106    ??? Animation
+ 2107    ??? Animation
+ 2108    ??? Animation
+ 2109    ??? Animation
+ 2110    ??? Animation
+ 2111    ??? Animation
+ 2112    ??? Animation
+ 2113    ??? Animation
+ 2114    ??? Animation
+ 2115    ??? Animation
+ 2116    ??? Animation
+ 2117    Ancestral Banishment
+ 2118    Heartfelt Aura
+ 2119    Impairing Glister
+ 2120    Crippling Gleam
+ 2121    ??? Animation
+ 2122    ??? Animation
+ 2123    ??? Animation
+ 2124    Cranial Thrust
+ 2125    Tail Thwack
+ 2126    Embalming Earth
+ 2127    Scalding Breath
+ 2128    Debilitating Spout
+ 2129    ??? Animation
+ 2130    ??? Animation
+ 2131    ??? Animation
+ 2132    ??? Animation
+ 2133    ??? Animation
+ 2134    ??? Animation
+ 2135    ??? Animation
+ 2136    Mandibular Lashing
+ 2137    Vespine Hurricane
+ 2138    Stinger volley
+ 2139    Droning Whirlwind
+ 2140    Incisive Denouement
+ 2141    Incisive Apotheosis
+ 2142    ??? Animation
+ 2143    ??? Animation
+ 2144    ??? Animation
+ 2145    Blistering Roar
+ 2146    Searing Serration
+ 2147    Volcanic Stasis
+ 2148    Tyrannical Blow
+ 2149    Batholithic Shell
+ 2150    Pyroclastic Surge
+ 2151    Incinerating Lahar
+ 2152    ??? Animation
+ 2153    animationfungus
+ 2154    ??? Animation
+ 2155    Glutinous Dart
+ 2156    Death Spin
+ 2157    Velkkan Pygmachia
+ 2158    Saurian Slide
+ 2159    Jungle Wallop
+ 2160    ??? Animation
+ 2161    ??? Animation
+ 2162    Consecration
+ 2163    Sacred Caper
+ 2164    Phototrophic Blessing
+ 2165    Phototrophic Wrath
+ 2166    Deific gambol
+ 2167    Natures meditation
+ 2168    Sensilla blades
+ 2169    Tegmina buffet
+ 2170    Sanguinary slash
+ 2171    Sanguinary slash
+ 2172    Stink Bomb
+ 2173    Stink Bomb
+ 2174    Nectarous Deluge
+ 2175    Nepenthic Plunge
+ 2176    Infaunal Flop
+ 2177    ??? Animation
+ 2178    ??? Animation
+ 2179    ??? Animation
+ 2180    Impenetrable carapace
+ 2181    Rending Deluge
+ 2182    Sundering Snip
+ 2183    Viscid Spindrift
+ 2184    Riptide Eupnea
+ 2185    Paralysing triad
+ 2186    Crepuscular Grasp
+ 2187    Necrotic brume
+ 2188    ??? Animation
+ 2189    Foul waters
+ 2190    Pestilent brume
+ 2191    Deadening haze
+ 2192    ??? Animation
+ 2193    ??? Animation
+ 2194    ??? Animation
+ 2195    ??? Animation
+ 2196    Protolithic puncture
+ 2197    Aquatic lance
+ 2198    Pelagic cleaver
+ 2199    Carcharian verve
+ 2200    Tidal Guillotine
+ 2201    Marine Mayhem
+ 2202    ??? Animation
+ 2203    Tempestuous Upheaval
+ 2204    Slicendice
+ 2205    Blackout
+ 2206    Potted Plant
+ 2207    Uproot
+ 2208    Canopierce
+ 2209    Firefly Fandango
+ 2210    Tiiimbeeer
+ 2211    ??? Animation
+ 2212    ??? Animation
+ 2213    ??? Animation
+ 2214    ??? Animation
+ 2215    ??? Animation
+ 2216    ??? Animation
+ 2217    ??? Animation
+ 2218    Crashing Thunder
+ 2219    Brownout
+ 2220    Reverse Current
+ 2221    Sparkstorm
+ 2222    Static Prison
+ 2223    ??? Animation
+ 2224    ??? Animation
+ 2225    ??? Animation
+ 2226    ??? Animation
+ 2227    ??? Animation
+ 2228    ??? Animation
+ 2229    ??? Animation
+ 2230    ??? Animation
+ 2231    ??? Animation
+ 2232    ??? Animation
+ 2233    Molting Plumage
+ 2234    Pentapeck
+ 2235    Swooping Frenzy
+ 2236    From the skies
+ 2237    ??? Animation
+ 2238    ??? Animation
+ 2239    ??? Animation
+ 2240    ??? Animation
+ 2241    ??? Animation
+ 2242    ??? Animation
+ 2243    ??? Animation
+ 2244    ??? Animation
+ 2245    ??? Animation
+ 2246    ??? Animation
+ 2247    ??? Animation
+ 2248    ??? Animation
+ 2249    ??? Animation
+ 2250    ??? Animation
+ 2251    ??? Animation
+ 2252    ??? Animation
+ 2253    ??? Animation
+ 2254    ??? Animation
+ 2255    ??? Animation
+ 2256    ??? Animation
+ 2257    ??? Animation
+ 2258    ??? Animation
+ 2259    ??? Animation
+ 2260    ??? Animation
+ 2261    Polar roar
+ 2262    Brain Freeze
+ 2263    Biting Abrogation
+ 2264    Permafrost Requiem
+ 2265    Glacial tomb
+ 2266    Glassy nova
+ 2267    ??? Animation
+ 2268    ??? Animation
+ 2269    ??? Animation
+ 2270    ??? Animation
+ 2271    ??? Animation
+ 2272    ??? Animation
+ 2273    ??? Animation
+ 2274    noname
+ 2275    Dazing Discord
+ 2276    Steaming Rage
+ 2277    noname
+ 2278    ??? Animation
+ 2279    ??? Animation
+ 2280    ??? Animation
+ 2281    ??? Animation
+ 2282    ??? Animation
+ 2283    ??? Animation
+ 2284    ??? Animation
+ 2285    ??? Animation
+ 2286    ??? Animation
+ 2287    ??? Animation
+ 2288    ??? Animation
+ 2289    Shining salvo
+ 2290    Palling salvo
+ 2291    Cathartic Caper
+ 2292    Bewailing wake
+ 2293    Flight of the Fluttyries
+ 2294    ??? Animation
+ 2295    ??? Animation
+ 2296    ??? Animation
+ 2297    ??? Animation
+ 2298    ??? Animation
+ 2299    Villainous Rebuke
+ 2300    Stygian Release
+ 2301    Infernal Bulwark
+ 2302    Atramentous Libations
+ 2303    ??? Animation
+ 2304    ??? Animation
+ 2305    ??? Animation
+ 2306    ??? Animation
+ 2307    ??? Animation
+ 2308    ??? Animation
+ 2309    ??? Animation
+ 2310    ??? Animation
+ 2311    ??? Animation
+ 2312    ??? Animation
+ 2313    ??? Animation
+ 2314    ??? Animation
+ 2315    ??? Animation
+ 2316    ??? Animation
+ 2317    ??? Animation
+ 2318    ??? Animation
+ 2319    ??? Animation
+ 2320    ??? Animation
+ 2321    ??? Animation
+ 2322    ??? Animation
+ 2323    Aurous charge
+ 2324    Howling gust
+ 2325    Righteous Rasp
+ 2326    Starward yowl
+ 2327    Stalking prey
+ 2328    ??? Animation
+ 2329    ??? Animation
+ 2330    ??? Animation
+ 2331    ??? Animation
+ 2332    ??? Animation
+ 2333    ??? Animation
+ 2334    ??? Animation
+ 2335    Vehement Resolution
+ 2336    Camaraderie oft the crevasse
+ 2337    Into the light
+ 2338    Arduous decision
+ 2339    12 blades of remorse
+ 2340    ??? Animation
+ 2341    ??? Animation
+ 2342    ??? Animation
+ 2343    ??? Animation
+ 2344    ??? Animation
+ 2345    ??? Animation
+ 2346    ??? Animation
+ 2347    Feast of Arrows
+ 2348    Cruel Joke
+ 2349    Regurgitated Swarm
+ 2350    Setting the Stage
+ 2351    Last Laugh
+ 2352    ??? Animation
+ 2353    ??? Animation
+ 2354    ??? Animation
+ 2355    ??? Animation
+ 2356    ??? Animation
+ 2357    ??? Animation
+ 2358    ??? Animation
+ 2359    ??? Animation
+ 2360    ??? Animation
+ 2361    ??? Animation
+ 2362    ??? Animation
+ 2363    ??? Animation
+ 2364    ??? Animation
+ 2365    ??? Animation
+ 2366    ??? Animation
+ 2367    ??? Animation
+ 2368    ??? Animation
+ 2369    ??? Animation
+ 2370    ??? Animation
+ 2371    ??? Animation
+ 2372    ??? Animation
+ 2373    Tearing Gust
+ 2374    Concussive Shock
+ 2375    Chokehold
+ 2376    Zap
+ 2377    Shrieking Gale
+ 2378    Undulating Shockwave
+ 2379    ??? Animation
+ 2380    ??? Animation
+ 2381    ??? Animation
+ 2382    Cesspool
+ 2383    Fetid Eddies
+ 2384    Nullifying rain
+ 2385    Noyade
+ 2386    Clobering wave
+ 2387    ??? Animation
+ 2388    ??? Animation
+ 2389    ??? Animation
+ 2390    Start From Scratch
+ 2391    Frenzied Thrust
+ 2392    Sinners Coss
+ 2393    Open Coffin
+ 2394    Ravenous Assault
+ 2395    Hemocladis
+ 2396    ??? Animation
+ 2397    ??? Animation
+ 2398    ??? Animation
+ 2399    Fulminous Smash
+ 2400    Flaming Kick
+ 2401    Icy Grasp
+ 2402    Flash Flood
+ 2403    Eroding Flesh
+ 2404    Vivisection
+ 2405    ??? Animation
+ 2406    ??? Animation
+ 2407    ??? Animation
+ 2408    ??? Animation
+ 2409    Impudence
+ 2410    Demonic Flower
+ 2411    Phantasmal Dance
+ 2412    Thunderous Yowl
+ 2413    Feather Maelstrom
+ 2414    Saucepan
+ 2415    Ensepulcher
+ 2416    Ceaseless Surge
+ 2417    Torrential Pain
+ 2418    Eternal Misery
+ 2419    Crippling Agony
+ 2420    Bane Of Tartarus

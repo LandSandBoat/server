@@ -1,0 +1,258 @@
+ ID    Official Name                Used for
+----------------------------------------------
+  0     None                        Silence
+  1     Unused ID                   Unused ID
+  2     Unused ID                   Unused ID
+  3     Unused ID                   Unused ID
+  4     Unused ID                   Unused ID
+  5     Unused ID                   Unused ID
+  6     Unused ID                   Unused ID
+  7     Unused ID                   Unused ID
+  8     Unused ID                   Unused ID
+  9     Unused ID                   Unused ID
+  10    Unused ID                   Unused ID
+  11    Unused ID                   Unused ID
+  12    Unused ID                   Unused ID
+  13    Unused ID                   Unused ID
+  14    Unused ID                   Unused ID
+  15    Unused ID                   Unused ID
+  16    Unused ID                   Unused ID
+  17    Unused ID                   Unused ID
+  18    Unused ID                   Unused ID
+  19    Unused ID                   Unused ID
+  20    Unused ID                   Unused ID
+  21    Unused ID                   Unused ID
+  22    Unused ID                   Unused ID
+  23    Unused ID                   Unused ID
+  24    Unused ID                   Unused ID
+  25    Unused ID                   Unused ID
+  26    Unused ID                   Unused ID
+  27    Unused ID                   Unused ID
+  28    Unused ID                   Unused ID
+  29    Unused ID                   Unused ID
+  30    Unused ID                   Unused ID
+  31    Unused ID                   Unused ID
+  32    Unused ID                   Unused ID
+  33    Unused ID                   Unused ID
+  34    Unused ID                   Unused ID
+  35    Unused ID                   Unused ID
+  36    Unused ID                   Unused ID
+  37    Unused ID                   Unused ID
+  38    Unused ID                   Unused ID
+  39    Unused ID                   Unused ID
+  40    Cloister of Time and Souls  CS
+  41    Royal Wanderlust            Cait Sith Theme
+  42    Snowdrift Waltz             Xarcabard [S]
+  43    Troubled Shadows            Castle Zvahl Baileys [S]/Castle Zvahl Keep [S]
+  44    Where Lords Rule Not        La Vaule [S]/Beadeaux [S]/Castle Oztroja [S]
+  45    Summers Lost                CS
+  46    Goddess Divine              WotG Final Battle
+  47    Echoes of Creation          ACP Final Battle
+  48    Main Theme                  CS
+  49    Luck of the Mog             AMK Final Battle
+  50    Feast of the Ladies         ASA Final Battle
+  51    Scarlet Skies, Shadowed Plains   Abyssea
+  52    Melodies Errant             Battle (Abyssea zones)
+  53    Shinryu                     Shinryu
+  54    Everlasting Bonds           CS
+  55    Provenance Watcher          Provenance Watcher Battle
+  56    Where it All Begins         Provenance
+  57    Steel Sings, Blades Dance   Battle (Seekers zones)
+  58    A New Direction             Title Screen 5 (Seekers)
+  59    The Pioneers                Western Adoulin
+  60    Into Lands Primeval         Yahse Hunting Grounds/Ceizak Battlegrounds/Foret de Hennetiel/Morimar Basalt Fields/Marjami Ravine
+  61    Water's Umbral Knell        Rala Waterways/Yorcia Weald
+  62    Keepers of the Wild         Wildkeeper Reive, Seekers instances
+  63    The Sacred City of Adoulin  Eastern Adoulin/Celennia Memorial Library
+  64    Breaking Ground             Colonization Reive
+  65    Hades                       CS
+  66    Arciela                     CS
+  67    Mog Resort                  Mog Garden
+  68    Worlds Away                 CS
+  69    ?                           CS
+  70    Monstrosity                 Monstrosity
+  71    The Pioneers (Piano)        CS
+  72    The Divine                  Kamihr Drifts
+  73    The Serpentine Labyrinth    Outer Ra'Kaznar
+  74    Clouds Over Ulbuka          Balamor's theme song
+  75    The Price                   Adoulin Final Battle
+  76    Forever Today               Adoulin Ending Song
+  77    Unused ID                   Unused ID
+  78    Forever Today (EP. Ver - Instrumental)
+  79    ?                           Reisenjima, Rhapsodies CS music
+  80    ?                           Escha Zi'Tah, Escha Ru'Aun
+  81    Isle of the Gods            Rhapsodies final boss
+  82    Wail of the Void            Rhapsodies finale
+  83    Rhapsodies of Vana'diel     Ending Song
+  84    Unknown name                Mount riding music
+  85    Unused ID                   Unused ID
+  86    Unused ID                   Unused ID
+  87    Unused ID                   Unused ID
+  88    Unused ID                   Unused ID
+  89    Unused ID                   Unused ID
+  90    Unused ID                   Unused ID
+  91    Unused ID                   Unused ID
+  92    Unused ID                   Unused ID
+  93    Unused ID                   Unused ID
+  94    Unused ID                   Unused ID
+  95    Unused ID                   Unused ID
+  96    Unused ID                   Unused ID
+  97    Unused ID                   Unused ID
+  98    Unused ID                   Unused ID
+  99    Unused ID                   Unused ID
+ 100    Unused ID                   Unused ID
+ 101    Battle Theme                Battle (solo, outdoor, )
+ 102    Battle in the Dungeon #2    Battle (party, dungeon, original zones)
+ 103    Battle Theme #2             Battle (party, outdoor, )
+ 104    A Road Once Travelled       CS
+ 105    Mhaura                      Mhaura
+ 106    Voyager                     Boats to/from Selbina/Mhaura
+ 107    The Kingdom of San d'Oria   Southern San dOria/Northern San dOria/Port San dOria
+ 108    Van'diel March              Title Screen 1 (Original+Zilart)
+ 109    Ronfaure                    East/West Ronfaure
+ 110    The Grand Duchy of Jeuno    Upper/Lower/Port Jeuno
+ 111    Blackout                    Death
+ 112    Selbina                     Selbina
+ 113    Sarutabaruta                East/West Sarutabaruta
+ 114    Batallia                    Batallia Downs
+ 115    Battle in the Dungeon       Battle (solo, dungeon, original zones)
+ 116    Gustaberg                   North/South Gustaberg
+ 117    Re'Lude Gardens             RuLude Gardens
+ 118    Rolanberry Fields           Rolanberry Fields
+ 119    Awakening                   Dynamis-Xarcabard / Shadow Lord fight
+ 120    Vana'diel March #2          Nation Selection
+ 121    Shadow Lord                 Dynamis-Valkurm/Buburimu/Qufim/Tavnazia/Beaucedine/San dOria/Bastok/Windurst/Jeuno/
+ 122    One Last Time               CS
+ 123    Hopelessness                CS
+ 124    Recollection                CS
+ 125    Tough Battle                BCNM (original)
+ 126    Mog House                   Mog House
+ 127    Anxiety                     CS
+ 128    Airship                     Airship
+ 129    Hook, Line and Sinker       Fishing 1
+ 130    Tarutaru Female             Character Creation - Taru Female
+ 131    Elvaan Female               Character Creation - Elvaan Female
+ 132    Elvaan Male                 Character Creation - ELvaan Male
+ 133    Hume Male                   Character Creation - Hume Male
+ 134    Yuhtunga Jungle             Yuhtunga/Yhoator Jungle
+ 135    Kazham                      Kazham
+ 136    The Big One                 Fishing 2
+ 137    A Realm of Emptiness        CoP Final Boss
+ 138    Mercenaries' Delight        Battle (party, Outdoor, Aht Urhgan Zones)
+ 139    Delve                       Battle (party, indoor, Aht Urhgan Zones)
+ 140    Wings of the Goddess        Title Screen 4 (WotG)
+ 141    The Cosmic Wheel            West Sarutabaruta [S]
+ 142    Fated Strife                Besieged
+ 143    Hellriders                  Einherjar
+ 144    Rapid Onslaught             Assault
+ 145    Encampment Dreams           CS
+ 146    The Colosseum               Pankration
+ 147    Eastward Bound              Boats to/from Nashmau/Al Zahbi
+ 148    Forbidden Seal              Nyzul Isle/Salvage
+ 149    Jeweled Boughs              Wajaom Woodlands/Bhaflau Thickets
+ 150    Ululations from Beyond      Arrapago Reef
+ 151    The Federation of Windurst  Windurst Waters/Walls/Woods/Port
+ 152    The Republic of Bastok      Bastok Mines/Markets/Port
+ 153    Prelude                     CS
+ 154    Metalworks                  Metalworks
+ 155    Castle Zvahl                Castle Zvahl Baileys/Castle Zvahl Keep/Throne Room
+ 156    Chateau d'Oraguille         Chateau dOraguille
+ 157    Fury                        CS
+ 158    Sauromugue Champaign        Sauromugue Champaign
+ 159    Sorrow                      CS
+ 160    Repression (Memoro)         CS
+ 161    Despair (Memoro)            CS
+ 162    Heavens Tower               Heavens Tower
+ 163    Sometime, Somewhere         CS
+ 164    Xarcabard                   Xarcabard
+ 165    Galka                       Character Creation - Galka
+ 166    Mithra                      Character Creation - Mithra
+ 167    Tarutaru Male               Character Creation - Taru Male
+ 168    Tarutaru Female             Character Creation - Hume Female
+ 169    Regeneracy                  CS
+ 170    Buccaneers                  Pirate Attacks
+ 171    Altepa Desert               Eastern/Western Altepa Desert
+ 172    Black Coffin                The Ashu Talif
+ 173    Illusions in the Mist       Caedarva Mire
+ 174    Whispers of the Gods        Aydeewa Subterrane
+ 175    Bandits' Market             Nashmau
+ 176    Circuit de Chocobo          Chocobo Circuit
+ 177    Run Chocobo, Run!           ???
+ 178    Bustle of the Capital       Al Zahbi/Aht Urhgan Whitegate
+ 179    Vana'diel March #4          Title Screen 3 (ToAU)
+ 180    Thunder of the March        Bastok Markets [S]
+ 181    ?                           Chocobo (short)
+ 182    Stargazing                  Windurst Waters [S]
+ 183    A Puppet's Slumber          Aphmau's Theme
+ 184    Eternal Gravestone          Luzaf's Theme
+ 185    Ever-turning Wheels         CS
+ 186    Iron Colossus               Odin's Theme
+ 187    Ragnarok                    Alexander's Theme
+ 188    Choc-a-bye Baby             CS
+ 189    An Invisible Crown          CS
+ 190    The Sanctuary of Zi'Tah     The Sanctuary of Zi'Tah
+ 191    Battle Theme #3             Battle (party, outdoor, zilart zone)
+ 192    Battle in the Dungeon #3    Battle (party, dungeon, zilart zone)
+ 193    Tough Battle #2             BCNM (Zilart)
+ 194    Bloody Promises             CS
+ 195    Belief                      Eald'narche (phase 2)
+ 196    Fighters of the Crystal     Ark angels/Divine Might
+ 197    To the Heavens              CS
+ 198    Eald'narche                 CS and Eald'narche (phase 1)
+ 199    Grav'iton                   CS
+ 200    Hidden Truths               CS
+ 201    End Theme                   Zilart Ending CS
+ 202    Moongate (Memoro)           CS / Memoria de la s^tona
+ 203    ?                           ???
+ 204    ?                           ???
+ 205    ?                           CS (Memoria de la S^tona ?)
+ 206    ?                           CS
+ 207    Ve'Lugannon Palace          VeLugannon Palace/The Shrine of RuAvitau
+ 208    Rabao                       Rabao
+ 209    Norg                        Norg
+ 210    Ru'Aun Gardens              RuAun Gardens
+ 211    Ro'Maeve                    RoMaeve
+ 212    Dash de Chocobo             Chocobo (long)
+ 213    Hall of the Gods            Hall of the Gods
+ 214    Eternal Oath                Wedding Music
+ 215    Clash of Standards          Battle (party, outdoor, WotG zones)
+ 216    On This Blade               Battle (party, dungeon, WotG zones)
+ 217    Kindred Cry                 Spitewardens theme (CS and WotG BCNMs)
+ 218    Depths of the Soul          Battle (party, dungeon, CoP zones)
+ 219    Onslaught                   Battle (party, outdoor, CoP zones)
+ 220    Turmoil                     BCNM (CoP)
+ 221    Moblin Menagerie            Oldton/Newton Movalpolos
+ 222    Faded Memories              Promyvion-Holla/Dem/Mea/Vahzl
+ 223    March of the Hero           Conflict
+ 224    Dusk and Dawn               Promathia phase 1
+ 225    Words Unspoken              PsoXja
+ 226    You Want to Live Forever?   Conflict
+ 227    Sunbreeze Shuffle           Summer Festival
+ 228    Gates of Paradise           The Garden of RuHmet
+ 229    Currents of Time            Phanauet Channel/Manaclipper
+ 230    A New Horizon               Lufaise Meadows/Misareaux Coast
+ 231    Celestial Thunder           CS
+ 232    The Ruler of the Skies      Bahamut's Theme
+ 233    The Celestial Capital       Al'Taieu
+ 234    Happily Ever After          CS
+ 235    Nocturne of the Gods        CS
+ 236    Clouded Dawn                CS
+ 237    Memoria de la Stona         CS
+ 238    A New Morning               CS
+ 239    Starlight Celebration       Christmas in Jeuno
+ 240    Distant Promises            CS
+ 241    A Time for Prayer           CS
+ 242    Unity                       Title Screen 2 (CoP)
+ 243    ?                           CS
+ 244    ?                           CS
+ 245    The Forgotten City          Tavnazian Safehold/Sealions Den
+ 246    March of the Allied Forces  CS
+ 247    Roar of the Battle Drums    Campaign Battle
+ 248    Young Griffons in Flight    CS
+ 249    Run maggot, run!            Ghoyu's Reverie, everbloom Hollow, Ruhotz Silvermines
+ 250    Under a Clouded Moon        CS
+ 251    Autumn Footfalls            East Ronfaure [S]
+ 252    Flowers on the Battlefield  Batallia Downs [S]/Rolanberry Fields [S]/Sauromugue Champaign [S]
+ 253    Echoes of a Zephyr          North Gustaberg [S]
+ 254    Griffons Never Die          Southern San dOria [S]
+ 255    Unused ID                   Unused ID

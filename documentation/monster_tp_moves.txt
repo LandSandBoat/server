@@ -1,0 +1,3842 @@
+﻿   ID     Mob Skill
+ ------------------------------------------
+    0     #0
+    1     Foot Kick
+    2     Dust Cloud
+    3     Whirl Claws
+    4     Lamb Chop
+    5     Rage
+    6     Sheep Charge
+    7     Sheep Bleat
+    8     Sheep Song
+    9     Rage
+   10     Ram Charge
+   11     Rumble
+   12     Great Bleat
+   13     Petribreath
+   14     Roar
+   15     Razor Fang
+   16     Ranged Attack
+   17     Claw Cyclone
+   18     Sheep Charge
+   19     Sandblast
+   20     Sandpit
+   21     Venom Spray
+   22     Pit Ambush
+   23     Mandibular Bite
+   24     Sonic Wave
+   25     Stomping
+   26     Back Kick
+   27     Spinning Tail
+   28     Cold Stare
+   29     Whistle
+   30     Berserk
+   31     Healing Breeze
+   32     Vicious Claw
+   33     Stone Throw
+   34     Spinning Claw
+   35     Claw Storm
+   36     Blank Gaze
+   37     Whistle Call
+   38     Eye Scratch
+   39     Magic Fruit
+   40     Drill Branch
+   41     Pinecone Bomb
+   42     Leafstorm
+   43     Entangle
+   44     Head Butt
+   45     Dream Flower
+   46     Wild Oats
+   47     Hundred Fists
+   48     Photosynthesis
+   49     Leaf Dagger
+   50     Scream
+   51     Substitute
+   52     Frogkick
+   53     Spore
+   54     Queasyshroom
+   55     Numbshroom
+   56     Shakeshroom
+   57     Counterspore
+   58     Silence Gas
+   59     Dark Spore
+   60     Impale
+   61     Vampiric Lash
+   62     Somersault
+   63     Bad Breath
+   64     Sweet Breath
+   65     Needleshot
+   66     1000 Needles
+   67     Wild Carrot
+   68     Photosynthesis
+   69     Random Kiss
+   70     Absorbing Kiss
+   71     Deep Kiss
+   72     Drill Branch
+   73     Pinecone Bomb
+   74     Shuffle
+   75     Leafstorm
+   76     Entangle
+   77     Double Down
+   78     Sharp Sting
+   79     Pollen
+   80     Final Sting
+   81     Noisy Buzz
+   82     Power Attack
+   83     Hi-Freq Field
+   84     Rhino Attack
+   85     Rhino Guard
+   86     Vulcanian Impact
+   87     Spoil
+   88     Sticky Thread
+   89     Poison Breath
+   90     Cocoon
+   91     Velocious Blade
+   92     Numbing Breath
+   93     Cold Breath
+   94     Mandible Bite
+   95     Poison Sting
+   96     Stunning Tail
+   97     Death Scissors
+   98     Wild Rage
+   99     Earth Pounder
+   100    Sharp Strike
+   101    Heavy Blow
+   102    Heavy Whisk
+   103    Bionic Boost
+   104    Flying Hip Press
+   105    Earthshock
+   106    Double Claw
+   107    Grapple
+   108    Filamented Hold
+   109    Spinning Top
+   110    Tail Blow
+   111    Fireball
+   112    Blockhead
+   113    Brain Crush
+   114    Baleful Gaze
+   115    Plaguebreath
+   116    Infrasonics
+   117    Secretion
+   118    Ripper Fang
+   119    Backlash Tail
+   120    Foul Breath
+   121    Frost Breath
+   122    Thunderbolt
+   123    Chomp Rush
+   124    Scythe Tail
+   125    Chameleon Skin
+   126    Tail Roll
+   127    Tusk
+   128    Scutum
+   129    Bone Crunch
+   130    Awful Eye
+   131    Heavy Bellow
+   132    Vanity Dive
+   133    Empty Beleaguer
+   134    Mirage
+   135    Aura of Persistence
+   136    Ultrasonics
+   137    Sonic Boom
+   138    Blood Drain
+   139    Jet Stream
+   140    Smite of Fury
+   141    Flurry of Rage
+   142    Whispers of Ire
+   143    Blind Vortex
+   144    Giga Scream
+   145    Dread Dive
+   146    Feather Barrier
+   147    Stormwind
+   148    Smite of Rage
+   149    Dire Whorl
+   150    Hammer Beak
+   151    Poison Pick
+   152    Sound Vacuum
+   153    Tail Rod
+   154    Sound Blast
+   155    Baleful Gaze
+   156    Ranged Attack
+   157    Eagle Eye Shot
+   158    Suction
+   159    Acid Mist
+   160    Sand Breath
+   161    Drainkiss
+   162    Regeneration
+   163    Scission Thrust
+   164    TP Drainkiss
+   165    MP Drainkiss
+   166    Sonic Blade
+   167    Brain Drain
+   168    Full-force Blow
+   169    Gastric Bomb
+   170    Sandspin
+   171    Tremors
+   172    MP Absorption
+   173    Sound Vacuum
+   174    Buff Drain
+   175    Fluid Spread
+   176    Fluid Toss
+   177    Digest
+   178    Soporific
+   179    Palsy Pollen
+   180    Gloeosuccus
+   181    Death Ray
+   182    Hex Eye
+   183    Petro Gaze
+   184    Catharsis
+   185    Microquake
+   186    Bubble Shower
+   187    Bubble Curtain
+   188    Big Scissors
+   189    Scissor Guard
+   190    Intimidate
+   191    Percussive Foin
+   192    Metallic Body
+   193    Intimidate
+   194    Aqua Ball
+   195    Splash Breath
+   196    Screwdriver
+   197    Water Wall
+   198    Water Shield
+   199    Aqua Lens
+   200    Tentacle
+   201    Gravity Wheel
+   202    Ink Jet
+   203    Hard Membrane
+   204    Cross Attack
+   205    Regeneration
+   206    Maelstrom
+   207    Whirlwind
+   208    Psychomancy
+   209    Howling
+   210    Poison Breath
+   211    Rot Gas
+   212    Dirty Claw
+   213    Shadow Claw
+   214    Methane Breath
+   215    Mind Wall
+   216    Grave Reel
+   217    Ectosmash
+   218    Fear Touch
+   219    Terror Touch
+   220    Curse
+   221    Dark Sphere
+   222    Hell Slash
+   223    Horror Cloud
+   224    Petrifactive Breath
+   225    Frenzied Rage
+   226    Pounce
+   227    Charged Whisker
+   228    Black Cloud
+   229    Blood Saber
+   230    Whip Tongue
+   231    Transmogrification
+   232    Acid Breath
+   233    Stinking Gas
+   234    Undead Mold
+   235    Call of the Grave
+   236    Abyss Blast
+   237    Rampant Gnaw
+   238    Big Horn
+   239    Snort
+   240    Rabid Dance
+   241    Lowing
+   242    Triclip
+   243    Back Swish
+   244    Mow
+   245    Frightful Roar
+   246    Mortal Ray
+   247    Unblest Armor
+   248    Gas Shell
+   249    Venom Shell
+   250    Palsynyxis
+   251    Painful Whip
+   252    Suctorial Tentacle
+   253    Self-Destruct
+   254    Berserk
+   255    Self-Destruct
+   256    Heat Wave
+   257    Smite of Rage
+   258    Whirl of Rage
+   259    Toxic Spit
+   260    Geist Wall
+   261    Numbing Noise
+   262    Nimble Snap
+   263    Cyclotail
+   264    Double Ray
+   265    Spinning Attack
+   266    Spectral Barrier
+   267    Mysterious Light
+   268    Mind Drain
+   269    Battery Charge
+   270    Berserk
+   271    Freeze Rush
+   272    Cold Wave
+   273    Hypothermal Combustion
+   274    Memento Mori
+   275    Silence Seal
+   276    Envoutement
+   277    Danse Macabre
+   278    Kartstrahl
+   279    Blitzstrahl
+   280    Panzerfaust
+   281    Berserk
+   282    Panzerschreck
+   283    Typhoon
+   284    Tremorous Tread
+   285    Gravity Field
+   286    Empty Seed
+   287    Meltdown
+   288    Camisado
+   289    Somnolence
+   290    Noctoshield
+   291    Ultimate Terror
+   292    Blindeye
+   293    Eyes On Me
+   294    Hypnosis
+   295    Mind Break
+   296    Binding Wave
+   297    Airy Shield
+   298    Pet Charm
+   299    Magic Barrier
+   300    Dream Shroud
+   301    Level 5 Petrify
+   302    Nightmare
+   303    Soul Drain
+   304    Hecatomb Wave
+   305    Electromagnetic Field
+   306    Reactive Armor
+   307    Demonic Howl
+   308    Condemnation
+   309    Quadrastrike
+   310    Quadrastrike
+   311    Sling Bomb
+   312    Formation Attack
+   313    Refueling
+   314    Circle of Flames
+   315    Self-Destruct
+   316    Self-Destruct
+   317    Self-Destruct
+   318    Self-Destruct
+   319    Self-Destruct
+   320    Back Heel
+   321    Jettatura
+   322    Nihility Song
+   323    Choke Breath
+   324    Fantod
+   325    Blow
+   326    Cacodemonia
+   327    Beatdown
+   328    Uppercut
+   329    Hekaton Punch
+   330    Blank Gaze
+   331    Antiphase
+   332    Death Trap
+   333    Mortal Ray
+   334    Goblin Rush
+   335    Bomb Toss
+   336    Bomb Toss
+   337    Berserk
+   338    Vulcanian Impact
+   339    Heat Wave
+   340    Hellstorm
+   341    Self-Destruct
+   342    Berserk
+   343    Arctic Impact
+   344    Cold Wave
+   345    Hiemal Storm
+   346    Hypothermal Combustion
+   347    Lateral Slash
+   348    Throat Stab
+   349    Aerial Wheel
+   350    Shoulder Attack
+   351    Slam Dunk
+   352    Arm Block
+   353    Battle Dance
+   354    Nether Blast
+   355    Ore Toss
+   356    Head Butt
+   357    Shell Bash
+   358    Shell Guard
+   359    Hellspin
+   360    Ruinous Omen
+   361    Feather Storm
+   362    Double Kick
+   363    Parry
+   364    Sweep
+   365    Snowball
+   366    Helldive
+   367    Wing Cutter
+   368    (Vulture 1)
+   369    (Vulture 2)
+   370    (Vulture 3)
+   371    (Vulture 4)
+   372    Wild Horn
+   373    Thunderbolt
+   374    Kick Out
+   375    Shock Wave
+   376    Flame Armor
+   377    Howl
+   378    Meteor
+   379    Burst
+   380    Flame Arrow
+   381    Firebomb
+   382    Blastbomb
+   383    Fountain
+   384    Touchdown
+   385    Recoil Dive
+   386    Flame Breath
+   387    Poison Breath
+   388    Wind Breath
+   389    Body Slam
+   390    Heavy Stomp
+   391    Chaos Blade
+   392    Petro Eyes
+   393    Voidsong
+   394    Thornsong
+   395    Lodesong
+   396    Blaster
+   397    Chaotic Eye
+   398    Double Whammy
+   399    Scurvy
+   400    Guilded Torpor
+   401    Calamitous Collapse
+   402    Catapult
+   403    Cursed Sphere
+   404    Venom
+   405    Snow Cloud
+   406    Lightning Roar
+   407    Ice Roar
+   408    Impact Roar
+   409    Grand Slam
+   410    Power Attack
+   411    Power Attack
+   412    Kick Back
+   413    Implosion
+   414    Implosion
+   415    Umbra Smash
+   416    Giga Slash
+   417    Dark Nova
+   418    Crystal Shield
+   419    Heavy Strike
+   420    Ice Break
+   421    Thunder Break
+   422    Crystal Rain
+   423    Crystal Weapon
+   424    Crystal Weapon
+   425    Crystal Weapon
+   426    Crystal Weapon
+   427    Bludgeon
+   428    Deal Out
+   429    Sprout Spin
+   430    Slumber Powder
+   431    Sprout Smack
+   432    Mighty Strikes
+   433    Benediction
+   434    Hundred Fists
+   435    Manafont
+   436    Chainspell
+   437    Perfect Dodge
+   438    Invincible
+   439    Blood Weapon
+   440    Soul Voice
+   441    Berserk
+   442    Defender
+   443    Aggressor
+   444    Boost
+   445    Focus
+   446    Dodge
+   447    Chakra
+   448    Counterstance
+   449    Hide
+   450    Bash
+   451    Sentinel
+   452    Last Resort
+   453    Souleater
+   454    Charm
+   455    Eagle Eye Shot
+   456    Eagle Eye Shot
+   457    Sharpshot
+   458    Camouflage
+   459    Barrage
+   460    Shadowbind
+   461    Venom Breath
+   462    Jump
+   463    Critical Bite
+   464    Venom Sting
+   465    Stasis
+   466    Venom Storm
+   467    Earthbreaker
+   468    Evasion
+   469    Impale
+   470    Drain Whip
+   471    Bad Breath
+   472    Sweet Breath
+   473    Death Trap
+   474    Meikyo Shisui
+   475    Mijin Gakure
+   476    Call Wyvern
+   477    Jump
+   478    Astral Flow
+   479    Eagle Eye Shot
+   480    Eagle Eye Shot
+   481    Eagle Eye Shot
+   482    Eagle Eye Shot
+   483    Eagle Eye Shot
+   484    Familiar
+   485    Quadratic Continuum
+   486    Quadratic Continuum
+   487    Quadratic Continuum
+   488    Spirit Absorption
+   489    Spirit Absorption
+   490    Spirit Absorption
+   491    Vanity Drive
+   492    Vanity Drive
+   493    Vanity Drive
+   494    Stygian Flatus
+   495    Stygian Flatus
+   496    Promyvion Barrier
+   497    Promyvion Barrier
+   498    Promyvion Barrier
+   499    Fission
+   500    Level 5 Petrify
+   501    Howl
+   502    Howl
+   503    Howl
+   504    Howl
+   505    Howl
+   506    Howl
+   507    Howl
+   508    Howl
+   509    Howl
+   510    Howl
+   511    Bow
+   512    Jumping Strike
+   513    Flying Punch
+   514    Jumping Thrust
+   515    Hydroball
+   516    Hydroball
+   517    Hydroball
+   518    Bubble Armor
+   519    Bubble Armor
+   520    Bubble Armor
+   521    Hydro Shot
+   522    Hydro Shot
+   523    Hydro Shot
+   524    Spinning Fin
+   525    Spinning Fin
+   526    Spinning Fin
+   527    Words of Bane
+   528    Sigh
+   529    Light of Penance
+   530    Lateral Slash
+   531    Vertical Slash
+   532    Throat Stab
+   533    Spikeball
+   534    Shoulder Slam
+   535    Magnetite Cloud
+   536    Sandstorm
+   537    Sand Veil
+   538    Sand Shield
+   539    Sand Trap
+   540    Jamming Wave
+   541    Deadly Hold
+   542    Tail Swing
+   543    Tail Smash
+   544    Heat Breath
+   545    Riddle
+   546    Great Sandstorm
+   547    Great Whirlwind
+   548    Tortoise Song
+   549    Head Butt
+   550    Tortoise Stomp
+   551    Harden Shell
+   552    Earth Breath
+   553    Aqua Breath
+   554    Sickle Slash
+   555    Acid Spray
+   556    Spider Web
+   557    Dispelling Wind
+   558    Deadly Drive
+   559    Wind Wall
+   560    Fang Rush
+   561    Dread Shriek
+   562    Tail Crush
+   563    Blizzard Breath
+   564    Thunder Breath
+   565    Radiant Breath
+   566    Chaos Breath
+   567    Fire Blade
+   568    Frost Blade
+   569    Wind Blade
+   570    Earth Blade
+   571    Lightning Blade
+   572    Water Blade
+   573    Great Wheel
+   574    Light Blade
+   575    Moonlit Charge
+   576    Crescent Fang
+   577    Lunar Cry
+   578    Ecliptic Growl
+   579    Lunar Roar
+   580    Eclipse Bite
+   581    Ecliptic Howl
+   582    Howling Moon
+   583    Howling Moon
+   584    Punch
+   585    Fire II
+   586    Burning Strike
+   587    Double Punch
+   588    Crimson Roar
+   589    Fire IV
+   590    Flaming Crush
+   591    Meteor Strike
+   592    Inferno
+   593    Rock Throw
+   594    Stone II
+   595    Rock Buster
+   596    Megalith Throw
+   597    Earthen Ward
+   598    Stone IV
+   599    Mountain Buster
+   600    Geocrush
+   601    Earthen Fury
+   602    Barracuda Dive
+   603    Water II
+   604    Tail Whip
+   605    Spring Water
+   606    Slowga
+   607    Water IV
+   608    Spinning Dive
+   609    Grand Fall
+   610    Tidal Wave
+   611    Claw
+   612    Aero II
+   613    Whispering Wind
+   614    Hastega
+   615    Aerial Armor
+   616    Aero IV
+   617    Predator Claws
+   618    Wind Blade
+   619    Aerial Blast
+   620    Axe Kick
+   621    Blizzard II
+   622    Frost Armor
+   623    Sleepga
+   624    Double Slap
+   625    Blizzard IV
+   626    Rush
+   627    Heavenly Strike
+   628    Diamond Dust
+   629    Shock Strike
+   630    Thunder II
+   631    Rolling Thunder
+   632    Thunderspark
+   633    Lightning Armor
+   634    Thunder IV
+   635    Chaotic Strike
+   636    Thunderstorm
+   637    Judgment Bolt
+   638    Healing Breath
+   639    Healing Breath II
+   640    Healing Breath III
+   641    Remove Poison
+   642    Remove Blindness
+   643    Remove Paralysis
+   644    Flame Breath
+   645    Frost Breath
+   646    Gust Breath
+   647    Sand Breath
+   648    Lightning Breath
+   649    Hydro Breath
+   650    Healing Ruby
+   651    Poison Nails
+   652    Shining Ruby
+   653    Glittering Ruby
+   654    Meteorite
+   655    Healing Ruby II
+   656    Searing Light
+   657    Inferno
+   658    Earthen Fury
+   659    Tidal Wave
+   660    Aerial Blast
+   661    Diamond Dust
+   662    Judgment Bolt
+   663    Searing Light
+   664    Everyone's Grudge
+   665    Everyone's Rancor
+   666    Blind Vortex
+   667    Giga Scream
+   668    Dread Dive
+   669    Feather Barrier
+   670    Stormwind
+   671    Drill Branch
+   672    Pinecone Bomb
+   673    Leafstorm
+   674    Entangle
+   675    Cross Reaver
+   676    Havoc Spiral
+   677    Dominion Slash
+   678    Shield Strike
+   679    Amon Drive
+   680    Ark Guardian: Tarutaru
+   681    Dragonfall
+   682    Circle Blade
+   683    Swift Blade
+   684    Rampage
+   685    Calamity
+   686    Spirits Within
+   687    Vorpal Blade
+   688    Spinning Scythe
+   689    Guillotine
+   690    Tachi: Yukikaze
+   691    Tachi: Gekko
+   692    Tachi: Kasha
+   693    Flame Blast
+   694    Flame Blast
+   695    Hurricane Wing
+   696    Spike Flail
+   697    Dragon Breath
+   698    Touchdown
+   699    Flame Blast
+   700    Hurricane Wing
+   701    Absolute Terror
+   702    Horrid Roar
+   703    Sickle Slash
+   704    Acid Spray
+   705    Spider Web
+   706    Tarutaru Warp II
+   707    Eald1
+   708    Eald1
+   709    Eald1
+   710    Eald1
+   711    Eald1
+   712    Red Lotus Blade
+   713    Flat Blade
+   714    Savage Blade
+   715    Royal Bash
+   716    Royal Savior
+   717    Red Lotus Blade
+   718    Spirits Within
+   719    Vorpal Blade
+   720    Berserk-Ruf
+   721    Warp
+   722    Warp
+   723    Power Slash
+   724    Freezebite
+   725    Ground Strike
+   726    Abyssal Drain
+   727    Abyssal Strike
+   728    Electrocharge
+   729    Stellar Burst
+   730    Vortex
+   731    Shockwave
+   732    Eald2 Warp In
+   733    Eald2 Warp Out
+   734    Gaea Stream: Eta
+   735    Uranos Cascade: Eta
+   736    Cronos Sling: Eta
+   737    Phase Shift
+   738    Gaea Stream: Theta
+   739    Uranos Cascade: Theta
+   740    Cronos Sling: Theta
+   741    Phase Shift
+   742    Gaea Stream: Lambda
+   743    Uranos Cascade: Lambda
+   744    Cronos Sling: Lambda
+   745    Phase Shift
+   746    #746
+   747    #747
+   748    #748
+   749    #749
+   750    Omega Javelin
+   751    #751
+   752    Mighty Strikes
+   753    Hundred Fists
+   754    Benediction
+   755    Manafont
+   756    Chainspell
+   757    Perfect Dodge
+   758    Invincible
+   759    Blood Weapon
+   760    Familiar
+   761    Call Beast
+   762    Soul Voice
+   763    Eagle Eye Shot
+   764    Meikyo Shisui
+   765    Mijin Gakure
+   766    Call Wyvern
+   767    Astral Flow
+   768    Warp Out
+   769    Warp In
+   770    Arbor Storm
+   771    Combo
+   772    Tackle
+   773    One-Ilm Punch        (yes this is what the client says in its data files, not "inch")
+   774    Backhand Blow
+   775    Spinning Attack
+   776    Howling Fist
+   777    Dragon Kick
+   778    Asuran Fists
+   779    Heavy Strike
+   780    Maat's Bash
+   781    Fireball 1
+   782    Fireball 2
+   783    Hurricane Wing
+   784    Spike Flail
+   785    Dragon Breath
+   786    Landing: to the surface
+   787    Giant fireball: Flying
+   788    Great wing gust: Flying
+   789    Absolute Terror
+   790    Horrid Roar
+   791    Tortoise Song
+   792    Head Butt
+   793    Tortoise Stomp
+   794    Harden Shell
+   795    Earth Breath
+   796    Aqua Breath
+   797    #797
+   798    (Sabotender Dustdevil)
+   799    (Sabotender Duststop)
+   800    Fanatic Dance
+   801    Aerial Wheel
+   802    Shoulder Attack
+   803    Slam Dunk
+   804    Arm Block
+   805    Battle Dance
+   806    Howl
+   807    Bow
+   808    Jump
+   809    Eagle Eye Shot
+   810    Fanatic Dance
+   811    Doom
+   812    Feather Storm
+   813    Double Kick
+   814    Parry
+   815    Sweep
+   816    Howl
+   817    Doom
+   818    The Wrath of Gu'Dha
+   819    Ore Toss
+   820    Head Butt
+   821    Shell Bash
+   822    Shell Guard
+   823    Howl
+   824    The Wrath of Gu'Dha
+   825    Frypan
+   826    Smokebomb
+   827    Smokebomb
+   828    Crispy Candle
+   829    Crispy Candle
+   830    Paralysis Shower
+   831    Paralysis Shower
+   832    Goblin Rush
+   833    Bomb Toss
+   834    Bomb Toss
+   835    Eagle Eye Shot
+   836    Frypan
+   837    Smokebomb
+   838    Smokebomb
+   839    Crispy Candle
+   840    Crispy Candle
+   841    Paralysis Shower
+   842    Paralysis Shower
+   843    Goblin Dice
+   844    Goblin Dice
+   845    Goblin Dice
+   846    Goblin Dice
+   847    Goblin Dice
+   848    Goblin Dice
+   849    Goblin Dice
+   850    Goblin Dice
+   851    Goblin Dice
+   852    Goblin Dice
+   853    Goblin Dice
+   854    Seismostomp
+   855    Numbing Glare
+   856    Seismostomp
+   857    Tormentful Glare
+   858    Seismostomp
+   859    Torpid Glare
+   860    Seismostomp
+   861    Lead Breath
+   862    Lead Breath
+   863    Frag Bomb
+   864    10,000 Needles
+   865    Eagle Eye Shot
+   866    Eagle Eye Shot
+   867    Ore Toss
+   868    #868
+   869    #869
+   870    #870
+   871    Dynamic Implosion
+   872    Transfusion
+   873    Manastrom
+   874    Dynamic Assault
+   875    Violent Rupture
+   876    Oblivion Smash
+   877    Oblivion Smash
+   878    Tera Slash
+   879    Tera Slash
+   880    Blindeye
+   881    Eyes On Me
+   882    Hypnosis
+   883    Mind Break
+   884    Binding Wave
+   885    Airy Shield
+   886    Pet Charm
+   887    Magic Barrier
+   888    Level 5 Petrify
+   889    Soul Drain
+   890    Hecatomb Wave
+   891    Demonic Howl
+   892    Condemnation
+   893    Quadrastrike
+   894    Quadrastrike
+   895    Eagle Eye Shot
+   896    Hecatomb Wave
+   897    Eagle Eye Shot
+   898    Ranged Attack
+   899    Subsonics
+   900    Marrow Drain
+   901    Slipstream
+   902    Turbulence
+   903    Broadside Barrage
+   904    Blind Side Barrage
+   905    Damnation Dive
+   906    Inferno
+   907    Earthen Fury
+   908    Tidal Wave
+   909    Aerial Blast
+   910    Diamond Dust
+   911    Judgment Bolt
+   912    Flame Breath
+   913    Poison Breath
+   914    Wind Breath
+   915    Body Slam
+   916    Heavy Stomp
+   917    Chaos Blade
+   918    Petro Eyes
+   919    Voidsong
+   920    Thornsong
+   921    Lodesong
+   922    Flame Breath
+   923    Poison Breath
+   924    Wind Breath
+   925    Body Slam
+   926    Heavy Stomp
+   927    Chaos Blade
+   928    Petro Eyes
+   929    Voidsong
+   930    Thornsong
+   931    Lodesong
+   932    Final Heaven
+   933    Mercy Stroke
+   934    Knights of Round
+   935    Scourge
+   936    Onslaught
+   937    Metatron Torment
+   938    Catastrophe
+   939    Geirskogul
+   940    Blade: Metsu
+   941    Tachi: Kaiten
+   942    Randgrith
+   943    Gate of Tartarus
+   944    Namas
+   945    Coronach
+   946    Ranged Attack
+   947    Ranged Attack
+   948    Ranged Attack
+   949    Ranged Attack
+   950    Ranged Attack
+   951    Arrow Squall
+   952    Arrow Squall
+   953    Ranged Attack
+   954    Ranged Attack
+   955    Ranged Attack
+   956    Ranged Attack
+   957    Ranged Attack
+   958    Ranged Attack
+   959    Infernal Roulette
+   960    Infernal Roulette
+   961    Empty Cutter
+   962    Vacuous Osculation
+   963    Hexagon Belt
+   964    Auroral Drape
+   965    Memory of Fire
+   966    Memory of Ice
+   967    Memory of Wind
+   968    Memory of Light
+   969    Memory of Earth
+   970    Memory of Lightning
+   971    Memory of Water
+   972    Memory of Dark
+   973    Brain Spike
+   974    Empty Thrash
+   975    Promyvion Brume
+   976    Murk
+   977    Material Fend
+   978    Carousel
+   979    Pile Pitch
+   980    Guided Missile
+   981    Hyper Pulse
+   982    Target Analysis
+   983    Discharger
+   984    Ion Efflux
+   985    Rear Lasers
+   986    Empty Cutter
+   987    Negative Whirl
+   988    Stygian Vapor
+   989    Winds of Promyvion
+   990    Spirit Absorption
+   991    Binary Absorption
+   992    Trinary Absorption
+   993    Spirit Tap
+   994    Binary Tap
+   995    Trinary Tap
+   996    Shadow Spread
+   997    Vanity Strike
+   998    Wanion
+   999    Occultation
+  1000    Empty Crush
+  1001    Special Attack
+  1002    Lamentation
+  1003    Wire Cutter
+  1004    Antimatter
+  1005    Equalizer
+  1006    Flame Thrower
+  1007    Cryojet
+  1008    Turbofan
+  1009    Smoke Discharger
+  1010    High-Tension Discharger
+  1011    Hydro Canon
+  1012    Nuclear Waste
+  1013    Chemical Bomb
+  1014    Particle Shield
+  1015    Empty Cutter
+  1016    Negative Whirl
+  1017    Winds of Promyvion
+  1018    Impalement
+  1019    Empty Thrash
+  1020    Promyvion Brume
+  1021    Inferno Blast
+  1022    Inferno Blast
+  1023    Tebbad Wing
+  1024    Spike Flail
+  1025    Fiery Breath
+  1026    Touchdown
+  1027    Inferno Blast
+  1028    Tebbad Wing
+  1029    Absolute Terror
+  1030    Horrid Roar
+  1031    Sleet Blast
+  1032    Sleet Blast
+  1033    Gregale Wing
+  1034    Spike Flail
+  1035    Glacial Breath
+  1036    Touchdown
+  1037    Sleet Blast
+  1038    Gregale Wing
+  1039    Absolute Terror
+  1040    Horrid Roar
+  1041    Ocher Blast
+  1042    Ocher Blast
+  1043    Typhoon Wing
+  1044    Spike Flail
+  1045    Geotic Breath
+  1046    Touchdown
+  1047    Ocher Blast
+  1048    Bai Wing
+  1049    Absolute Terror
+  1050    Horrid Roar
+  1051    Dark Matter Blast
+  1052    Dark Matter Blast
+  1053    Cyclone Wing
+  1054    Spike Flail
+  1055    Sable Breath
+  1056    Touchdown
+  1057    Dark Matter Blast
+  1058    Cyclone Wing
+  1059    Absolute Terror
+  1060    Horrid Roar
+  1061    Mucus Spread
+  1062    WZ_SLIME_04
+  1063    Epoxy Spread
+  1064    WZ_EYES_04
+  1065    WZ_CRAWL_03
+  1066    Gerjis' Grip
+  1067    WZ_BEES_04
+  1068    Debilitating Drone
+  1069    WZ_TRSAP_03
+  1070    Final Retribution
+  1071    Eagle Eye Shot
+  1072    Ink Jet
+  1073    Gala Macabre
+  1074    Hoof Volley
+  1075    Counterstance
+  1076    Extremely Bad Breath
+  1077    Contagion Transfer
+  1078    Contamination
+  1079    Toxic Pick
+  1080    Frenzied Rage
+  1081    Charm
+  1082    Infernal Pestilence
+  1083    Bane
+  1084    Crossthrash
+  1085    Knife Edge Circle
+  1086    Train Fall
+  1087    .
+  1088    .
+  1089    .
+  1090    .
+  1091    Dual Strike
+  1092    Siphon Discharge
+  1093    Mantle Pierce
+  1094    Ink Cloud
+  1095    Molluscous Mutation
+  1096    Saline Coat
+  1097    Aerial Collision
+  1098    Vapor Spray
+  1099    Spine Lash
+  1100    Voiceless Storm
+  1101    Tidal Dive
+  1102    Plasma Charge
+  1103    Chthonian Ray
+  1104    Apocalyptic Ray
+  1105    Viscid Secretion
+  1106    Wild Ginseng
+  1107    Hungry Crunch
+  1108    Mighty Snort
+  1109    Tail Thrust
+  1110    Temporal Shift
+  1111    Sinuate Rush
+  1112    Rapid Molt
+  1113    Ichor Stream
+  1114    Vitriolic Barrage
+  1115    Primal Drill
+  1116    Concussive Oscillation
+  1117    Ion Shower
+  1118    Torrential Torment
+  1119    Asthenic Fog
+  1120    Luminous Drape
+  1121    Fluorescence
+  1122    Wing Thrust
+  1123    Auroral Wind
+  1124    Impact Stream
+  1125    Depuration
+  1126    Crystalline Cocoon
+  1127    Glacier Splitter
+  1128    Disseverment
+  1129    Biotic Boomerang
+  1130    Medusa Javelin
+  1131    Sideswipe
+  1132    .
+  1133    Eagle Eye Shot
+  1134    Amatsu: Torimai
+  1135    Amatsu: Kazakiri
+  1136    Amatsu: Yukiarashi
+  1137    Amatsu: Tsukioboro
+  1138    Amatsu: Hanaikusa
+  1139    Amatsu: Tsukikage
+  1140    .
+  1141    Oisoya
+  1142    .
+  1143    .
+  1144    .
+  1145    Soul Accretion
+  1146    .
+  1147    Explosive Impulse
+  1148    Ocher Blast
+  1149    Ocher Blast
+  1150    Typhoon Wing
+  1151    Spike Flail
+  1152    Geotic Breath
+  1153    Touchdown
+  1154    Ocher Blast
+  1155    Bai Wing
+  1156    Absolute Terror
+  1157    Horrid Roar
+  1158    Marionette Dice
+  1159    Marionette Dice
+  1160    Marionette Dice
+  1161    Marionette Dice
+  1162    Marionette Dice
+  1163    Marionette Dice
+  1164    Marionette Dice
+  1165    Marionette Dice
+  1166    Marionette Dice
+  1167    Marionette Dice
+  1168    Marionette Dice
+  1169    Marionette Dice
+  1170    Marionette Dice
+  1171    Marionette Dice
+  1172    Warcry
+  1173    Counterstance
+  1174    Steal
+  1175    Shield Bash
+  1176    Weapon Bash
+  1177    Sic
+  1178    Barrage
+  1179    .
+  1180    Meditate
+  1181    Jump
+  1182    Blood Pact
+  1183    Aetheral Toxin
+  1184    Edge of Death
+  1185    Actinic Burst
+  1186    Core Meltdown
+  1187    Hexidiscs
+  1188    Vorpal Blade
+  1189    Damnation Dive
+  1190    Sickle Slash
+  1191    Vertical Cleave
+  1192    Efflorescent Foetor
+  1193    Stupor Spores
+  1194    Viscid Nectar
+  1195    Morning Glory
+  1196    Axial Bloom
+  1197    Nutrient Absorption
+  1198    Palsy Pollen
+  1199    Toxic Spit
+  1200    Filamented Hold
+  1201    Marionette Dice
+  1202    Self-Destruct
+  1203    Self-Destruct
+  1204    .
+  1205    Shield Bash
+  1206    Shield Bash
+  1207    Reactor Cool
+  1208    .
+  1209    Optic Induration
+  1210    Static Filament
+  1211    Decayed Filament
+  1212    Reactor Overheat
+  1213    Reactor Overload
+  1214    Self-Destruct
+  1215    Cattlepult
+  1216    Cattlepult
+  1217    Cattlepult
+  1218    #1218
+  1219    Bull Rush
+  1220    Red Lotus Blade
+  1221    Flat Blade
+  1222    Savage Blade
+  1223    Royal Bash
+  1224    Royal Savior
+  1225    Red Lotus Blade
+  1226    Spirits Within
+  1227    Vorpal Blade
+  1228    Berserk-Ruf
+  1229    Hundred Fists
+  1230    Benediction
+  1231    Prishe Item 1
+  1232    Prishe Item 2
+  1233    Nullifying Dropkick
+  1234    Auroral Uppercut
+  1235    Chains of Apathy
+  1236    Chains of Arrogance
+  1237    Chains of Cowardice
+  1238    Chains of Rage
+  1239    Chains of Envy
+  1240    Malevolent Blessing
+  1241    Pestilent Penance
+  1242    Empty Salvation
+  1243    Infernal Deliverance
+  1244    Malevolent Blessing
+  1245    Pestilent Penance
+  1246    Empty Salvation
+  1247    Infernal Deliverance
+  1248    Wheel of Impregnability
+  1249    Bastion of Twilight
+  1250    Winds of Oblivion
+  1251    Seal of Quiescence
+  1252    Luminous Lance
+  1253    Rejuvenation
+  1254    Revelation
+  1255    Slam Dunk
+  1256    Howl
+  1257    Ore Toss
+  1258    Howl
+  1259    Double Kick
+  1260    Howl
+  1261    Goblin Rush
+  1262    Goblin Dice
+  1263    Provoke
+  1264    Howling Moon
+  1265    Armor Buster
+  1266    Energy Screen
+  1267    Mana Screen
+  1268    Dissipation
+  1269    Guided Missile II
+  1270    Colossal Blow
+  1271    Laser Shower
+  1272    Floodlight
+  1273    Hyper Pulse
+  1274    Stun Cannon
+  1275    WZ_RECOVER_ALL
+  1276    Pod Ejection
+  1277    Pile Pitch
+  1278    Guided Missile
+  1279    Hyper Pulse
+  1280    Target Analysis
+  1281    Discharger
+  1282    Ion Efflux
+  1283    Rear Lasers
+  1284    Citadel Buster
+  1285    Blighted Gloom
+  1286    Trample
+  1287    Tempest Wing
+  1288    Touchdown
+  1289    Sweeping Flail
+  1290    Prodigious Spike
+  1291    Impulsion
+  1292    Absolute Terror
+  1293    Horrible Roar
+  1294    .
+  1295    Megaflare
+  1296    Gigaflare
+  1297    Teraflare
+  1298    Camisado
+  1299    Blessed Radiance
+  1300    Regeneration
+  1301    Eagle Eye Shot
+  1302    Smite of Fury
+  1303    Flurry of Rage
+  1304    Whispers of Ire
+  1305    Sonic Wave
+  1306    Stomping
+  1307    Cold Stare
+  1308    Whistle
+  1309    Berserk
+  1310    Healing Breeze
+  1311    Foot Kick
+  1312    Dust Cloud
+  1313    Whirl Claws
+  1314    Wild Carrot
+  1315    Gas Shell
+  1316    Venom Shell
+  1317    Palsynyxis
+  1318    Painful Whip
+  1319    Suctorial Tentacle
+  1320    Helldive
+  1321    Wing Cutter
+  1322    Broadside Barrage
+  1323    Blind Side Barrage
+  1324    Damnation Dive
+  1325    Sticky Thread
+  1326    Poison Breath
+  1327    Cocoon
+  1328    Head Butt
+  1329    Dream Flower
+  1330    Wild Oats
+  1331    Leaf Dagger
+  1332    Scream
+  1333    Bubble Shower
+  1334    Bubble Curtain
+  1335    Big Scissors
+  1336    Scissor Guard
+  1337    Metallic Body
+  1338    Toxic Spit
+  1339    Geist Wall
+  1340    Numbing Noise
+  1341    Nimble Snap
+  1342    Cyclotail
+  1343    Hammer Beak
+  1344    Poison Pick
+  1345    Sound Vacuum
+  1346    Sound Blast
+  1347    Baleful Gaze
+  1348    Miasmic Breath
+  1349    Miasmic Breath
+  1350    Fragrant Breath
+  1351    Fragrant Breath
+  1352    Putrid Breath
+  1353    Putrid Breath
+  1354    Extremely Bad Breath
+  1355    Vampiric Lash
+  1356    Gouging Branch
+  1357    Gloeosuccus
+  1358    Gloeosuccus
+  1359    Soporific
+  1360    Palsy Pollen
+  1361    Blow
+  1362    Uppercut
+  1363    Attractant
+  1364    Mephitic Spore
+  1365    Frogkick
+  1366    Cursed Sphere
+  1367    Venom
+  1368    Debilitating Drone
+  1369    2000 Needles
+  1370    4000 Needles
+  1371    Needleshot
+  1372    Heat Breath
+  1373    Riddle
+  1374    Great Sandstorm
+  1375    Great Whirlwind
+  1376    Choke Breath
+  1377    Sheep Bleat
+  1378    Sheep Song
+  1379    Sheep Charge
+  1380    Trebuchet
+  1381    Power Attack
+  1382    Lightning Roar
+  1383    Impact Roar
+  1384    Grand Slam
+  1385    Eagle Eye Shot
+  1386    Whirl of Rage
+  1387    Smite of Rage
+  1388    Hypothermal Combustion
+  1389    Freeze Rush
+  1390    Cold Wave
+  1391    Berserk
+  1392    Crystal Shield
+  1393    Heavy Strike
+  1394    Ice Break
+  1395    Thunder Break
+  1396    Crystal Rain
+  1397    Crystal Weapon
+  1398    Crystal Weapon
+  1399    Crystal Weapon
+  1400    Crystal Weapon
+  1401    Blind Vortex
+  1402    Giga Scream
+  1403    Dread Dive
+  1404    Feather Barrier
+  1405    Stormwind
+  1406    Ultrasonics
+  1407    Blood Drain
+  1408    Subsonics
+  1409    Marrow Drain
+  1410    Sonic Boom
+  1411    Jet Stream
+  1412    Slipstream
+  1413    Turbulence
+  1414    Tentacle
+  1415    Ink Jet
+  1416    Hard Membrane
+  1417    Cross Attack
+  1418    Regeneration
+  1419    Maelstrom
+  1420    Whirlwind
+  1421    Roar
+  1422    Razor Fang
+  1423    Claw Cyclone
+  1424    Predatory Glare
+  1425    Crossthrash
+  1426    Ripper Fang
+  1427    #1427
+  1428    Foul Breath
+  1429    Frost Breath
+  1430    Thunderbolt
+  1431    Chomp Rush
+  1432    Scythe Tail
+  1433    Double Claw
+  1434    Grapple
+  1435    Filamented Hold
+  1436    Spinning Top
+  1437    Gnash
+  1438    Vile Belch
+  1439    Hypnic Lamp
+  1440    Seismic Tail
+  1441    Seaspray
+  1442    Leeching Current
+  1443    Pecking Flurry
+  1444    Snatch Morsel
+  1445    Feather Tickle
+  1446    Wisecrack
+  1447    Barrier Tusk
+  1448    Onrush
+  1449    Stampede
+  1450    Flailing Trunk
+  1451    Voracious Trunk
+  1452    Proboscis Shower
+  1453    Abrasive Tantara
+  1454    Deafening Tantara
+  1455    Frenetic Rip
+  1456    Bugle Call
+  1457    Yawn
+  1458    Wing Slap
+  1459    Beak Lunge
+  1460    Frigid Shuffle
+  1461    Wing Whirl
+  1462    Crosswind
+  1463    #1463
+  1464    Wind Shear
+  1465    Obfuscate
+  1466    Zephyr Mantle
+  1467    Ill Wind
+  1468    White Wind
+  1469    Kibosh
+  1470    Cutpurse
+  1471    Sandspray
+  1472    Faze
+  1473    Bowshot
+  1474    Deadeye
+  1475    Forceful Blow
+  1476    Somersault Kick
+  1477    Firespit
+  1478    Warm-Up
+  1479    Javelin Throw
+  1480    Axe Throw
+  1481    Vorpal Blade
+  1482    Groundburst
+  1483    .
+  1484    .
+  1485    Potent Lunge
+  1486    Overthrow
+  1487    Rock Smash
+  1488    Diamondhide
+  1489    Enervation
+  1490    Quake Stomp
+  1491    Zarraqa
+  1492    Zarbzan
+  1493    Healing Stomp
+  1494    .
+  1495    .
+  1496    Gusting Gouge
+  1497    Hysteric Barrage
+  1498    Dukkeripen
+  1499    Dukkeripen
+  1500    Dukkeripen
+  1501    Dukkeripen
+  1502    Tail Slap
+  1503    Hypnotic Sway
+  1504    Swift Shot
+  1505    Arrow Deluge
+  1506    Belly Dance
+  1507    .
+  1508    .
+  1509    Gusting Gouge
+  1510    Hysteric Barrage
+  1511    Dukkeripen
+  1512    Dukkeripen
+  1513    Dukkeripen
+  1514    Dukkeripen
+  1515    Tail Slap
+  1516    Torrent
+  1517    Swift Shot
+  1518    Arrow Deluge
+  1519    Rising Swell
+  1520    .
+  1521    .
+  1522    Spinal Cleave
+  1523    Mangle
+  1524    Leaping Cleave
+  1525    Hex Palm
+  1526    Animating Wail
+  1527    Fortifying Wail
+  1528    Unblest Jambiya
+  1529    Lava Spit
+  1530    Sulfurous Breath
+  1531    Scorching Lash
+  1532    Ululation
+  1533    Magma Hoplon
+  1534    Gates of Hades
+  1535    Incinerate
+  1536    Nullsong
+  1537    Vampiric Root
+  1538    Perdition
+  1539    Malediction
+  1540    Piercing Shriek
+  1541    Rushing Slash
+  1542    Decussate
+  1543    Tyrannic Blare
+  1544    Miasma
+  1545    Vorpal Wheel
+  1546    Sledgehammer
+  1547    Head Snatch
+  1548    Haymaker
+  1549    Incessant Fists
+  1550    Arcane Stomp
+  1551    Pleiades Ray
+  1552    Petrifaction
+  1553    Shadow Thrust
+  1554    Tail Slap
+  1555    .
+  1556    Pinning Shot
+  1557    Calcifying Deluge
+  1558    Gorgon Dance
+  1559    Amber Scutum
+  1560    Vitriolic Spray
+  1561    Thermal Pulse
+  1562    Cannonball
+  1563    Heat Barrier
+  1564    Vitriolic Shower
+  1565    Amplification
+  1566    Boiling Point
+  1567    Xenoglossia
+  1568    Amorphic Spikes
+  1569    Amorphic Scythe
+  1570    Synergism
+  1571    Metastasis
+  1572    Pyric Blast
+  1573    Pyric Bulwark
+  1574    Polar Blast
+  1575    Polar Bulwark
+  1576    Barofield
+  1577    .
+  1578    Trembling
+  1579    Serpentine Tail
+  1580    Nerve Gas
+  1581    Feeble Bleat
+  1582    Mine Blast
+  1583    Rushing Slash
+  1584    Rushing Stab
+  1585    Sandblast
+  1586    Sandpit
+  1587    Venom Spray
+  1588    Pit Ambush
+  1589    Mandibular Bite
+  1590    Sharp Sting
+  1591    Frenzy Pollen
+  1592    Final Sting
+  1593    Sling Bomb
+  1594    Formation Attack
+  1595    Refueling
+  1596    Circle of Flames
+  1597    Self-Destruct
+  1598    Stellar Burst
+  1599    Self-Destruct
+  1600    Omega Javelin
+  1601    Self-Destruct
+  1602    Tail Roll
+  1603    Tusk
+  1604    Scutum
+  1605    Bone Crunch
+  1606    Awful Eye
+  1607    Heavy Bellow
+  1608    Intimidate
+  1609    Aqua Ball
+  1610    Splash Breath
+  1611    Screwdriver
+  1612    Water Wall
+  1613    Water Shield
+  1614    Recoil Dive
+  1615    Suction
+  1616    Acid Mist
+  1617    Sand Breath
+  1618    Drainkiss
+  1619    Regeneration
+  1620    TP Drainkiss
+  1621    MP Drainkiss
+  1622    Brain Drain
+  1623    Triclip
+  1624    Back Swish
+  1625    Mow
+  1626    Frightful Roar
+  1627    Mortal Ray
+  1628    Unblest Armor
+  1629    Full-force Blow
+  1630    Gastric Bomb
+  1631    Sandspin
+  1632    Tremors
+  1633    Spirit Vacuum
+  1634    Sound Vacuum
+  1635    Provoke
+  1636    .
+  1637    Spirit Surge
+  1638    Potent Lunge
+  1639    Overthrow
+  1640    Rock Smash
+  1641    Diamondhide
+  1642    Enervation
+  1643    Quake Stomp
+  1644    Healing Stomp
+  1645    .
+  1646    .
+  1647    Camisado
+  1648    Somnolence
+  1649    Noctoshield
+  1650    Ultimate Terror
+  1651    Dream Shroud
+  1652    Nightmare
+  1653    Cacodemonia
+  1654    Nether Blast
+  1655    Ruinous Omen
+  1656    Hypnogenesis
+  1657    Stunbolt
+  1658    Great Wheel
+  1659    .
+  1660    Blessed Radiance
+  1661    Sweeping Somnolence
+  1662    Nether Tempest
+  1663    Daydream
+  1664    Rushing Drub
+  1665    Forceful Blow
+  1666    Somersault Kick
+  1667    Firespit
+  1668    Warm-Up
+  1669    Stave Toss
+  1670    Groundburst
+  1671    .
+  1672    .
+  1673    Pole Swing
+  1674    Tidal Slash
+  1675    Eagle Eye Shot
+  1676    Eagle Eye Shot
+  1677    Azure Lore
+  1678    Wild Card
+  1679    Overdrive
+  1680    Shibaraku
+  1681    .
+  1682    .
+  1683    .
+  1684    Chimera Ripper
+  1685    String Clipper
+  1686    Arcuballista
+  1687    Slapstick
+  1688    Shield Bash
+  1689    Provoke
+  1690    Shock Absorber
+  1691    Flashbulb
+  1692    Mana Converter
+  1693    Ranged Attack
+  1694    Belly Dance
+  1695    Magma Fan
+  1696    Erratic Flutter
+  1697    Proboscis
+  1698    Erosion Dust
+  1699    Exuviation
+  1700    Fire Break
+  1701    Frog Song
+  1702    Magic Hammer
+  1703    Water Bomb
+  1704    Frog Cheer
+  1705    Providence
+  1706    Frog Chorus
+  1707    Mind Blast
+  1708    Immortal Mind
+  1709    Immortal Shield
+  1710    Mind Purge
+  1711    Tribulation
+  1712    Immortal Anathema
+  1713    Reprobation
+  1714    Eclosion
+  1715    .
+  1716    .
+  1717    .
+  1718    .
+  1719    .
+  1720    .
+  1721    Deathgnash
+  1722    Abominable Belch
+  1723    .
+  1724    Boreas Mantle
+  1725    .
+  1726    Nullifying Dropkick
+  1727    Auroral Uppercut
+  1728    Wisecrack
+  1729    Fighter's Roll
+  1730    Rogue's Roll
+  1731    Gallant's Roll
+  1732    Chaos Roll
+  1733    Hunter's Roll
+  1734    Ninja Roll
+  1735    Double-Up
+  1736    Fire Maneuver
+  1737    Ice Maneuver
+  1738    Wind Maneuver
+  1739    Earth Maneuver
+  1740    Thunder Maneuver
+  1741    Water Maneuver
+  1742    Hane Fubuki
+  1743    Hiden Sokyaku
+  1744    Shiko no Mitate
+  1745    Happobarai
+  1746    Rinpyotosha
+  1747    Grating Tantara
+  1748    Stifling Tantara
+  1749    Reward
+  1750    Azure Lore
+  1751    Wild Card
+  1752    Overdrive
+  1753    Fire Shot
+  1754    Ice Shot
+  1755    Wind Shot
+  1756    Earth Shot
+  1757    Thunder Shot
+  1758    Water Shot
+  1759    Light Shot
+  1760    Dark Shot
+  1761    .
+  1762    .
+  1763    .
+  1764    Hundred Fists
+  1765    Eraser
+  1766    Tenebrous Mist
+  1767    Thunderstrike
+  1768    Tourbillion
+  1769    Dreadstorm
+  1770    Fossilizing Breath
+  1771    Plague Swipe
+  1772    Fulmination
+  1773    .
+  1774    .
+  1775    Reactive Shield
+  1776    Roller Chain
+  1777    Choke Chain
+  1778    Reinforcements
+  1779    Biomagnet
+  1780    Astral Gate
+  1781    Warp
+  1782    Artificial Gravity
+  1783    Antigravity
+  1784    Rail Cannon
+  1785    Restoral
+  1786    Armature
+  1787    Artificial Gravity
+  1788    Antigravity
+  1789    Rail Cannon
+  1790    Artificial Gravity
+  1791    Antigravity
+  1792    Rail Cannon
+  1793    Artificial Gravity
+  1794    Antigravity
+  1795    Rail Cannon
+  1796    Restoral
+  1797    Heavy Armature
+  1798    Diffusion Ray
+  1799    Inertia Stream
+  1800    Discharge
+  1801    Mortal Revolution
+  1802    Homing Missile
+  1803    Discoid
+  1804    Brainjack
+  1805    Restoral
+  1806    Restoral
+  1807    Heavy Armature
+  1808    Heavy Armature
+  1809    Cannibal Blade
+  1810    Daze
+  1811    Knockout
+  1812    Economizer
+  1813    Tribulation
+  1814    Dismemberment
+  1815    Dire Straight
+  1816    Earthshatter
+  1817    Sinker Drill
+  1818    Detonating Grip
+  1819    Overthrow
+  1820    Rock Smash
+  1821    Diamondhide
+  1822    Enervation
+  1823    Quake Stomp
+  1824    Potent Lunge
+  1825    Hammer-Go-Round
+  1826    Hammerblow
+  1827    Drop Hammer
+  1828    Seismohammer
+  1829    Venomous Tail
+  1830    Grim Reaper
+  1831    .
+  1832    Victory Beacon
+  1833    Salamander Flame
+  1834    Typhonic Arrow
+  1835    Meteoric Impact
+  1836    Scouring Bubbles
+  1837    .
+  1838    Fire Angon
+  1839    Batterhorn
+  1840    Clobber
+  1841    Granite Skin
+  1842    Blazing Angon
+  1843    Batterhorn
+  1844    Clobber
+  1845    Demoralizing Roar
+  1846    Boiling Blood
+  1847    Granite Skin
+  1848    Crippling Slam
+  1849    Mijin Gakure
+  1850    Bloodrake
+  1851    Decollation
+  1852    Nosferatu's Kiss
+  1853    Heliovoid
+  1854    Wings of Gehenna
+  1855    Eternal Damnation
+  1856    Nocturnal Servitude
+  1857    Hellsnap
+  1858    Hellclap
+  1859    Cackle
+  1860    Necrobane
+  1861    Necropurge
+  1862    Bilgestorm
+  1863    Thundris Shriek
+  1864    Ofnir
+  1865    Valfodr
+  1866    Yggr
+  1867    Gagnrath
+  1868    Sanngetall
+  1869    Geirrothr
+  1870    Zantetsuken
+  1871    .
+  1872    .
+  1873    .
+  1874    Proboscis Shower
+  1875    .
+  1876    Replicator
+  1877    Liar's Dice
+  1878    Victory Beacon
+  1879    Salamander Flame
+  1880    Typhonic Arrow
+  1881    Meteoric Impact
+  1882    Scouring Bubbles
+  1883    Doom
+  1884    Peacebreaker
+  1885    Radiant Sacrament
+  1886    Mega Holy
+  1887    Perfect Defense
+  1888    Divine Spear
+  1889    Gospel of the Lost
+  1890    Void of Repentance
+  1891    Divine Judgement
+  1892    .
+  1893    .
+  1894    Snatch Morsel
+  1895    1000 Needles
+  1896    Aqua Fortis
+  1897    Regurgitation
+  1898    Delta Thrust
+  1899    Torpefying Charge
+  1900    Grim Glower
+  1901    Calcifying Mist
+  1902    Insipid Nip
+  1903    Pandemic Nip
+  1904    Bombilation
+  1905    Cimicine Discharge
+  1906    Emetic Discharge
+  1907    Seedspray
+  1908    Viscid Emission
+  1909    Rotten Stench
+  1910    Floral Bouquet
+  1911    Bloody Caress
+  1912    Bloody Caress
+  1913    Soothing Aroma
+  1914    Fevered Pitch
+  1915    Call of the Moon
+  1916    Call of the Moon
+  1917    Plenilune Embrace
+  1918    Plenilune Embrace
+  1919    Nox Blast
+  1920    Asuran Claws
+  1921    Cacophony
+  1922    Sudden Lunge
+  1923    Noisome Powder
+  1924    Nepenthean Hum
+  1925    Spiral Spin
+  1926    Spiral Burst
+  1927    Fuscous Ooze
+  1928    Purulent Ooze
+  1929    Corrosive Ooze
+  1930    Mucilaginous Ooze
+  1931    Dustvoid
+  1932    Slaverous Gale
+  1933    Aeolian Void
+  1934    Extreme Purgation
+  1935    Desiccation
+  1936    Doomvoid
+  1937    Zephyr Arrow
+  1938    Lethe Arrows
+  1939    Spring Breeze
+  1940    Summer Breeze
+  1941    Autumn Breeze
+  1942    Winter Breeze
+  1943    Cyclonic Turmoil
+  1944    Cyclonic Torrent
+  1945    Orcish Counterstance
+  1946    Berserker Dance
+  1947    Diamond Shell
+  1948    Ore Lob
+  1949    Feathered Furore
+  1950    Dark Invocation
+  1951    Disorienting Waul
+  1952    Microspores
+  1953    Blink of Peril
+  1954    Petal Pirouette
+  1955    .
+  1956    .
+  1957    .
+  1958    .
+  1959    .
+  1960    Nocturnal Combustion
+  1961    Berserk
+  1962    Penumbral Impact
+  1963    Dark Wave
+  1964    Tartarean Storm
+  1965    Hell Scissors
+  1966    Hurricane Breath
+  1967    Ore Toss
+  1968    Head Butt
+  1969    Shell Bash
+  1970    Shell Guard
+  1971    Howl
+  1972    The Wrath of Gu'Dha
+  1973    Poison Breath
+  1974    Poison Sting
+  1975    Venom
+  1976    Queasyshroom
+  1977    Diamond Shell
+  1978    Ore Lob
+  1979    Paralyzing Blast
+  1980    Silencing Blast
+  1981    Binding Blast
+  1982    Bloody Tomahawk
+  1983    Volant Angon
+  1984    Warden of Terror
+  1985    Call to Arms
+  1986    Mighty Strikes
+  1987    Hundred Fists
+  1988    Benediction
+  1989    Manafont
+  1990    Chainspell
+  1991    Perfect Dodge
+  1992    Invincible
+  1993    Blood Weapon
+  1994    Familiar
+  1995    Soul Voice
+  1996    Eagle Eye Shot
+  1997    Meikyo Shisui
+  1998    Mijin Gakure
+  1999    Spirit Surge
+  2000    Astral Flow
+  2001    Azure Lore
+  2002    Wild Card
+  2003    Overdrive
+  2004    Trance
+  2005    Tabula Rasa
+  2006    .
+  2007    Tornado Edge
+  2008    Shoulder Charge
+  2009    Skull Smash
+  2010    Shell Charge
+  2011    Skull Smash
+  2012    Shell Charge
+  2013    Kamaitachi
+  2014    Shirahadori
+  2015    Rising Dragon
+  2016    Bear Killer
+  2017    Uriel Blade
+  2018    Spine Chiller
+  2019    Prominence
+  2020    Arrow of Apathy
+  2021    Cruel Riposte
+  2022    Glory Slash
+  2023    Napalm Tomahawk
+  2024    Iainuki
+  2025    Oppressive Embrace
+  2026    Reverie Frolic
+  2027    Tartarus Torpor
+  2028    Death Knell
+  2029    Bloody Quarrel
+  2030    Leonine Legflail
+  2031    Soulfetter Arrow
+  2032    Heavy Artillery
+  2033    Immortal Shield
+  2034    Restoral
+  2035    Restoral
+  2036    Restoral
+  2037    Restoral
+  2038    Basilisk Cannon
+  2039    Beaked Bomber
+  2040    .
+  2041    .
+  2042    .
+  2043    Bone Crusher
+  2044    Armor Piercer
+  2045    Magic Mortar
+  2046    Light Arts
+  2047    Dark Arts
+  2048    Curing Waltz
+  2049    Healing Waltz
+  2050    Drain Samba
+  2051    Haste Samba
+  2052    Quickstep
+  2053    Box Step
+  2054    Stutter Step
+  2055    Building Flourish
+  2056    Desperate Flourish
+  2057    Reverse Flourish
+  2058    Parsimony
+  2059    Alacrity
+  2060    Manifestation
+  2061    Ebullience
+  2062    Curing Waltz II
+  2063    Curing Waltz III
+  2064    Curing Waltz IV
+  2065    Drain Samba II
+  2066    Drain Samba III
+  2067    Animated Flourish
+  2068    Violent Flourish
+  2069    Wild Flourish
+  2070    .
+  2071    Mine Blast
+  2072    .
+  2073    .
+  2074    .
+  2075    .
+  2076    .
+  2077    .
+  2078    Wrath of Zeus
+  2079    Lightning Spear
+  2080    Acheron Kick
+  2081    Damsel Memento
+  2082    Rampant Stance
+  2083    .
+  2084    Extreme Purgation
+  2085    .
+  2086    .
+  2087    .
+  2088    .
+  2089    .
+  2090    .
+  2091    .
+  2092    Glacial Bellow
+  2093    Daunting Hurl
+  2094    Scatter Shell
+  2095    Tear Grenade
+  2096    Sticky Grenade
+  2097    .
+  2098    .
+  2099    .
+  2100    .
+  2101    .
+  2102    Tabula Rasa
+  2103    Strap Cutter
+  2104    Wind Shear
+  2105    Stave Toss
+  2106    .
+  2107    .
+  2108    Unblest Jambiya
+  2109    Goddess's Shield
+  2110    Mine Blast
+  2111    Moribund Hack
+  2112    Damsel Memento
+  2113    Scintillant Lance
+  2114    Grace of Hera
+  2115    Noxious Spray
+  2116    Hellborn Yawp
+  2117    Veil of Chaos
+  2118    Torment of Gu'Dha
+  2119    Vorticose Sands
+  2120    Paroxysm
+  2121    Reviviscence
+  2122    Diamond Shell
+  2123    Invincible
+  2124    Monocular Scowl
+  2125    Double Kick
+  2126    Mijin Gakure
+  2127    Charm
+  2128    Orbital Earthrend
+  2129    Tongue Lash
+  2130    Cobra Clamp
+  2131    Fatal Scream
+  2132    Dirty Breath
+  2133    Lethal Triclip
+  2134    Accursed Armor
+  2135    Amnesic Blast
+  2136    Oppressive Glare
+  2137    Ritual Bind
+  2138    Moribund Hack
+  2139    Mine Blast
+  2140    .
+  2141    .
+  2142    .
+  2143    .
+  2144    .
+  2145    .
+  2146    .
+  2147    .
+  2148    .
+  2149    .
+  2150    Roar
+  2151    Charged Whisker
+  2152    .
+  2153    .
+  2154    Demonic Flower
+  2155    Phantasmal Dance
+  2156    Thunderous Yowl
+  2157    Feather Maelstrom
+  2158    Saucepan
+  2159    .
+  2160    Seed of Deception
+  2161    Seed of Deference
+  2162    Seed of Nihility
+  2163    Seed of Judgment
+  2164    Shackling Clout
+  2165    Dark Orb
+  2166    Dark Mist
+  2167    Triumphant Roar
+  2168    Terror Eye
+  2169    Bloody Claw
+  2170    Shadow Burst
+  2171    Tail Lash
+  2172    Bloody Beak
+  2173    Feral Peck
+  2174    Warped Wail
+  2175    Reaving Wind
+  2176    Storm Wing
+  2177    Calamitous Wind
+  2178    .
+  2179    Severing Fang
+  2180    Sub-zero Smash
+  2181    Aqua Blast
+  2182    Frozen Mist
+  2183    Hydro Wave
+  2184    Ice Guillotine
+  2185    Aqua Cannon
+  2186    Thorned Stance
+  2187    Sensual Dance
+  2188    Dancer's Fury
+  2189    Whirling Edge
+  2190    Rousing Samba
+  2191    Vivifying Waltz
+  2192    Regal Scratch
+  2193    Mewing Lullaby
+  2194    Eerie Eye
+  2195    Divine Favor
+  2196    Level ? Holy
+  2197    Level ? Holy
+  2198    Level ? Holy
+  2199    Level ? Holy
+  2200    Level ? Holy
+  2201    Level ? Holy
+  2202    Soul Vacuum
+  2203    Soul Infusion
+  2204    .
+  2205    Mog Bomb
+  2206    Mog Shrapnel
+  2207    Flowerpot
+  2208    .
+  2209    Bill Toss
+  2210    Washtub
+  2211    Crystalline Flare
+  2212    King Cobra Clamp
+  2213    Wasp Sting
+  2214    Dancing Edge
+  2215    Bistillot Blast
+  2216    Songbird Swoop
+  2217    Vunkerl Herb Tonic
+  2218    Stag's Cry
+  2219    Stag's Call
+  2220    Gyre Strike
+  2221    Stag's Charge
+  2222    Orcsbane
+  2223    Temblor Blade
+  2224    Inferno
+  2225    Tidal Wave
+  2226    Earthen Fury
+  2227    Diamond Dust
+  2228    Judgment Bolt
+  2229    Aerial Blast
+  2230    Salvation Scythe
+  2231    Salvation Scythe
+  2232    Divine Malison
+  2233    Divine Malison
+  2234    Fire Overload
+  2235    Ice Overload
+  2236    Wind Overload
+  2237    Earth Overload
+  2238    Lightning Overload
+  2239    Water Overload
+  2240    Light Overload
+  2241    Dark Overload
+  2242    .
+  2243    .
+  2244    .
+  2245    .
+  2246    .
+  2247    .
+  2248    .
+  2249    .
+  2250    .
+  2251    .
+  2252    .
+  2253    Hypothermal Combustion
+  2254    .
+  2255    Corpse Breath
+  2256    Venom Shower
+  2257    Mega Scissors
+  2258    Cytokinesis
+  2259    .
+  2260    Gravitic Horn
+  2261    Quake Blast
+  2262    Norn Arrows
+  2263    Dexter Wing
+  2264    Sinister Wing
+  2265    Chaos Blast
+  2266    Abyssic Buster
+  2267    Dancing Tail
+  2268    Dancing Tail
+  2269    Chilling Roar
+  2270    Chilling Roar
+  2271    Soul Douse
+  2272    Soul Douse
+  2273    Dark Star
+  2274    Dark Star
+  2275    Altair Bullet
+  2276    Savage Swordhand
+  2277    Lithic Ray
+  2278    Minax Glare
+  2279    Vicious Kick
+  2280    Boon Void
+  2281    Cruel Slash
+  2282    Spell Wall
+  2283    Implosion
+  2284    Umbral Orb
+  2285    Cross Smash
+  2286    Blighting Blitz
+  2287    Spawn Shadow
+  2288    Soma Wall
+  2289    Doom Arc
+  2290    .
+  2291    .
+  2292    Fluid Spread
+  2293    Fluid Toss
+  2294    Dissolve
+  2295    Mucus Spread
+  2296    Epoxy Spread
+  2297    .
+  2298    .
+  2299    .
+  2300    Ofnir
+  2301    Valfodr
+  2302    Yggr
+  2303    Gagnrath
+  2304    Sanngetall
+  2305    Geirrothr
+  2306    Acrid Stream
+  2307    Rime Spray
+  2308    Blazing Bound
+  2309    Molting Burst
+  2310    Diabolic Claw
+  2311    Stygian Cyclone
+  2312    Deathly Diminuendo
+  2313    Hellish Crescendo
+  2314    Afflicting Gaze
+  2315    Stygian Sphere
+  2316    Malign Invocation
+  2317    Shadow Wreck
+  2318    Thousand Spears
+  2319    Tainting Breath
+  2320    Mercurial Strike
+  2321    Mercurial Strike
+  2322    Colossal Slam
+  2323    Phaeosynthesis
+  2324    Pandora's Curse
+  2325    Pandora's Gift
+  2326    .
+  2327    .
+  2328    .
+  2329    Testudo Tremor
+  2330    Ecliptic Meteor
+  2331    Inspirit
+  2332    Debonair Rush
+  2333    Iridal Pierce
+  2334    Lunar Revolution
+  2335    Great Divide
+  2336    Darkling Blade
+  2337    Demonic Shear
+  2338    Quietus Sphere
+  2339    .
+  2340    .
+  2341    .
+  2342    .
+  2343    Tepal Twist
+  2344    Bloom Fouette
+  2345    Petalback Spin
+  2346    Mortal Blast
+  2347    Heat Breath
+  2348    Gorge
+  2349    Disgorge
+  2350    Carousel
+  2351    Agaricus
+  2352    Terminal Sting
+  2353    Booming Bleat
+  2354    Vacant Gaze
+  2355    Blaster
+  2356    Wild Carrot
+  2357    Spiral Spin
+  2358    Noisome Powder
+  2359    Stag's Cry
+  2360    .
+  2361    .
+  2362    .
+  2363    Turbine Cyclone
+  2364    Seismic Impact
+  2365    Incinerator
+  2366    Arm Cannon
+  2367    Ballistic Kick
+  2368    Scapula Beam
+  2369    Eradicator
+  2370    Auger Smash
+  2371    Area Bombardment
+  2372    Cauterizing Field
+  2373    Benthic Typhoon
+  2374    Pelagic Tempest
+  2375    Osmosis
+  2376    Vacuole Discharge
+  2377    Nucleic Implosion
+  2378    Interference
+  2379    Dark Arrivisme
+  2380    Banneret Charge
+  2381    Besieger's Bane
+  2382    Hadal Summons
+  2383    Mayhem Lantern
+  2384    Ruinous Scythe
+  2385    Psyche Suction
+  2386    Vermilion Wind
+  2387    Tyrant Tusk
+  2388    Somnial Durance
+  2389    Mud Stream
+  2390    Rancor Smash
+  2391    Melancholy Jig
+  2392    Forlorn Impact
+  2393    Essence Jack
+  2394    .
+  2395    .
+  2396    .
+  2397    .
+  2398    .
+  2399    .
+  2400    .
+  2401    .
+  2402    .
+  2403    .
+  2404    .
+  2405    .
+  2406    .
+  2407    .
+  2408    Cosmic Breath
+  2409    Cataclysmic Vortex
+  2410    Gyre Charge
+  2411    Mighty Guard
+  2412    Atomic Ray
+  2413    Dark Matter
+  2414    Protostar
+  2415    Supernova
+  2416    .
+  2417    .
+  2418    .
+  2419    Dark Thorn
+  2420    Petaline Tempest
+  2421    Durance Whip
+  2422    Subjugating Slash
+  2423    Fatal Allure
+  2424    Moonlight Veil
+  2425    .
+  2426    .
+  2427    .
+  2428    Dark Flare
+  2429    Dark Freeze
+  2430    Dark Tornado
+  2431    Dark Quake
+  2432    Dark Burst
+  2433    Dark Flood
+  2434    Dark Moon
+  2435    Dark Sun
+  2436    Royal Decree
+  2437    Virulent Haze
+  2438    Cyclonic Blight
+  2439    Torment Tusk
+  2440    Baleful Roar
+  2441    Infinite Terror
+  2442    Lithic Breath
+  2443    Tarsal Slam
+  2444    Enthrall
+  2445    Acheron Flame
+  2446    Terra Wing
+  2447    Dread Wind
+  2448    ??? Needles
+  2449    White Wind
+  2450    Smokebomb
+  2451    Paralysis Shower
+  2452    Cosmic Breath
+  2453    Cataclysmic Vortex
+  2454    Trance
+  2455    .
+  2456    .
+  2457    .
+  2458    Yaksha Stance
+  2459    Yaksha: Damnation
+  2460    Yaksha: Bliss
+  2461    Yaksha: Oblivion
+  2462    Raksha Stance
+  2463    Raksha: Judgment
+  2464    Raksha: Illusion
+  2465    Raksha: Vengeance
+  2466    .
+  2467    .
+  2468    .
+  2469    Rending Talons
+  2470    Shrieking Gale
+  2471    Wings of Woe
+  2472    Wings of Agony
+  2473    Typhoean Rage
+  2474    Ravenous Wail
+  2475    Incinerator
+  2476    Arm Cannon
+  2477    Ballistic Kick
+  2478    Cauterizing Field
+  2479    Searing Tempest
+  2480    Blinding Fulgor
+  2481    Spectral Floe
+  2482    Scouring Spate
+  2483    Anvil Lightning
+  2484    Silent Storm
+  2485    Entomb
+  2486    Tenebral Crush
+  2487    String Shredder
+  2488    Armor Shatterer
+  2489    Heat Capacitor
+  2490    Barrage Turbine
+  2491    Disruptor
+  2492    .
+  2493    .
+  2494    .
+  2495    Slicing Sickle
+  2496    Raptorial Claw
+  2497    Phlegm Expulsion
+  2498    Macerating Bile
+  2499    Preying Posture
+  2500    Death Prophet
+  2501    Sakra Storm
+  2502    Kaleidoscopic Fury
+  2503    Telsonic Tempest
+  2504    Preternatural Gleam
+  2505    Chupa Blossom
+  2506    Hell Slash
+  2507    Horror Cloud
+  2508    Black Cloud
+  2509    Blood Saber
+  2510    Malediction
+  2511    Crepuscule Blade
+  2512    Deathly Glare
+  2513    Blighted Bouquet
+  2514    Booming Bombination
+  2515    Gush o' Goo
+  2516    .
+  2517    .
+  2518    Flank Opening
+  2519    Tabbiyaa Gambit
+  2520    Shah Mat
+  2521    Benediction
+  2522    Reactive Shield
+  2523    Shock Absorber
+  2524    Replicator
+  2525    .
+  2526    .
+  2527    .
+  2528    Diluvial Wake
+  2529    Kurnugi Collapse
+  2530    Searing Halitus
+  2531    Divesting Gale
+  2532    Bolt of Perdition
+  2533    Crippling Rime
+  2534    Oblivion's Mantle
+  2535    .
+  2536    .
+  2537    .
+  2538    .
+  2539    .
+  2540    .
+  2541    .
+  2542    Gnash 'n Guttle
+  2543    Sloughy Sputum
+  2544    Chymous Reek
+  2545    Rancid Reflux
+  2546    Crowning Flatus
+  2547    Slimy Proposal
+  2548    Just Desserts
+  2549    Pawn's Penumbra
+  2550    Beleaguerment
+  2551    Unchivalrous Stab
+  2552    Discordant Gambit
+  2553    Immolating Claw
+  2554    Yama's Judgment
+  2555    Keraunos Quill
+  2556    Bilrost Squall
+  2557    Dunur Strike
+  2558    Yawn
+  2559    Wing Slap
+  2560    Beak Lunge
+  2561    Frigid Shuffle
+  2562    Wing Whirl
+  2563    Whiteout
+  2564    Keratinous Crush
+  2565    Accurst Spear
+  2566    Eldritch Wind
+  2567    Rhinowrecker
+  2568    Cloudscourge
+  2569    Louring Skies
+  2570    Exponential Burst
+  2571    Sudden Lunge
+  2572    Jettatura
+  2573    Aqua Breath
+  2574    Royal Decree
+  2575    Grace of Hera
+  2576    .
+  2577    .
+  2578    .
+  2579    .
+  2580    .
+  2581    .
+  2582    .
+  2583    Prismatic Breath
+  2584    Acicular Brand
+  2585    Orogenesis
+  2586    Phason Beam
+  2587    Diffractive Break
+  2588    Euhedral Swat
+  2589    .
+  2590    .
+  2591    .
+  2592    .
+  2593    .
+  2594    .
+  2595    .
+  2596    Prismatic Breath
+  2597    Acicular Brand
+  2598    Orogenesis
+  2599    Phason Beam
+  2600    Diffractive Break
+  2601    Euhedral Swat
+  2602    Crystallite Shower
+  2603    Graviton Crux
+  2604    Crystal Bolide
+  2605    Fragor Maximus
+  2606    .
+  2607    .
+  2608    .
+  2609    .
+  2610    .
+  2611    .
+  2612    Echolocation
+  2613    Deep Sea Dirge
+  2614    Caudal Capacitor
+  2615    Baleen Gurge
+  2616    Depth Charge
+  2617    Blowhole Blast
+  2618    Waterspout
+  2619    Angry Seas
+  2620    Thar She Blows
+  2621    .
+  2622    .
+  2623    .
+  2624    Night Stalker
+  2625    Atropine Spore
+  2626    Frond Fatale
+  2627    Full Bloom
+  2628    Deracinator
+  2629    Beautiful Death
+  2630    Exorender
+  2631    Tropic Tenor
+  2632    Dark Recital
+  2633    Usurping Scepter
+  2634    Gen'ei Ryodan
+  2635    Grapeshot
+  2636    Pirate Pummel
+  2637    Powder Keg
+  2638    Walk the Plank
+  2639    Knuckle Sandwich
+  2640    Imperial Authority
+  2641    Sixth Element
+  2642    Shield Subverter
+  2643    Shining Summer Samba
+  2644    Lovely Miracle Waltz
+  2645    Neo Crystal Jig
+  2646    Super Crusher Jig
+  2647    Eternal Vana Illusion
+  2648    Final Eternal Heart
+  2649    Shah's Decree
+  2650    False Promises
+  2651    Frog Song
+  2652    Frog Chorus
+  2653    Level 3 Petrify
+  2654    Citadel Siege
+  2655    Catastrophic Malfunction
+  2656    Zantetsuken Kai
+  2657    Electrocharge
+  2658    Rear Lasers
+  2659    Meeble Warble
+  2660    Thrashing Assault
+  2661    Drill Claw
+  2662    Puncturing Frenzy
+  2663    .
+  2664    .
+  2665    .
+  2666    Soulshattering Roar
+  2667    Calcifying Claw
+  2668    Divesting Stampede
+  2669    Bonebreaking Barrage
+  2670    Beastruction
+  2671    Metamorphic Blast
+  2672    Enervating Grasp
+  2673    Orogenic Storm
+  2674    Subduction
+  2675    Tectonic Shift
+  2676    Unrelenting Brand
+  2677    Searing Effulgence
+  2678    Blazing Shriek
+  2679    Volcanic Wrath
+  2680    Tarichutoxin
+  2681    Caliginosity
+  2682    .
+  2683    Mighty Strikes
+  2684    Invincible
+  2685    Eagle Eye Shot
+  2686    Chainspell
+  2687    Benediction
+  2688    Manafont
+  2689    Nature's Meditation
+  2690    Sensilla Blades
+  2691    Tegmina Buffet
+  2692    Sanguinary Slash
+  2693    Orthopterror
+  2694    Tempestuous Upheaval
+  2695    Slice 'n' Dice
+  2696    Blackout
+  2697    Smouldering Swarm
+  2698    .
+  2699    .
+  2700    .
+  2701    Impenetrable Carapace
+  2702    Rending Deluge
+  2703    Sundering Snip
+  2704    Viscid Spindrift
+  2705    Riptide Eupnea
+  2706    .
+  2707    .
+  2708    .
+  2709    Cranial Thrust
+  2710    Tail Thwack
+  2711    Embalming Earth
+  2712    Scalding Breath
+  2713    Debilitating Spout
+  2714    Paralyzing Triad
+  2715    Crepuscular Grasp
+  2716    Necrotic Brume
+  2717    Terminal Bloom
+  2718    Foul Waters
+  2719    Pestilent Plume
+  2720    Deadening Haze
+  2721    Venomous Vapor
+  2722    Consecration
+  2723    Sacred Caper
+  2724    Phototrophic Blessing
+  2725    Phototrophic Wrath
+  2726    Deific Gambol
+  2727    Ancestral Banishment
+  2728    Heartfelt Aura
+  2729    Impairing Glister
+  2730    Crippling Gleam
+  2731    .
+  2732    Glutinous Dart
+  2733    Death Spin
+  2734    Velkkan Pygmachia
+  2735    Saurian Slide
+  2736    Jungle Wallop
+  2737    .
+  2738    Glutinous Dart
+  2739    Death Spin
+  2740    Velkkan Pygmachia
+  2741    Saurian Swamp
+  2742    Jungle Hoodoo
+  2743    .
+  2744    .
+  2745    .
+  2746    Mandibular Lashing
+  2747    Vespine Hurricane
+  2748    Stinger Volley
+  2749    Droning Whirlwind
+  2750    Incisive Denouement
+  2751    Incisive Apotheosis
+  2752    .
+  2753    .
+  2754    .
+  2755    Protolithic Puncture
+  2756    Aquatic Lance
+  2757    Pelagic Cleaver
+  2758    Carcharian Verve
+  2759    Tidal Guillotine
+  2760    Marine Mayhem
+  2761    .
+  2762    .
+  2763    .
+  2764    Blistering Roar
+  2765    Searing Serration
+  2766    Volcanic Stasis
+  2767    Tyrannical Blow
+  2768    Batholithic Shell
+  2769    Pyroclastic Surge
+  2770    Incinerating Lahar
+  2771    .
+  2772    .
+  2773    .
+  2774    Retinal Glare
+  2775    Sylvan Slumber
+  2776    Crushing Gaze
+  2777    Vaskania
+  2778    .
+  2779    .
+  2780    .
+  2781    Flesh Syphon
+  2782    Umbral Expunction
+  2783    Sticky Situation
+  2784    Abdominal Assault
+  2785    Mandibular Massacre
+  2786    .
+  2787    Whirling Inferno
+  2788    Benumbing Blaze
+  2789    Concentric Pulse
+  2790    Foul Waters
+  2791    Pestilent Plume
+  2792    Deadening Haze
+  2793    Sensilla Blades
+  2794    Tegmina Buffet
+  2795    Mending Halation
+  2796    Radial Arcana
+  2797    Dynastic Gravitas
+  2798    .
+  2799    .
+  2800    .
+  2801    Root of the Problem
+  2802    Potted Plant
+  2803    Uproot
+  2804    Canopierce
+  2805    Firefly Fandango
+  2806    Tiiimbeeer
+  2807    Molting Plumage
+  2808    Pentapeck
+  2809    Swooping Frenzy
+  2810    From the Skies
+  2811    .
+  2812    .
+  2813    .
+  2814    .
+  2815    .
+  2816    Crashing Thunder
+  2817    Reverberating Cry
+  2818    Brownout
+  2819    Reverse Current
+  2820    Sparkstorm
+  2821    Static Prison
+  2822    .
+  2823    .
+  2824    .
+  2825    Velkkan Ambush
+  2826    Galumph
+  2827    Coming Through
+  2828    Merciless Mauling
+  2829    Croctastrophy
+  2830    .
+  2831    Battle Trance
+  2832    .
+  2833    .
+  2834    .
+  2835    Baneful Blades
+  2836    Wildwood Indignation
+  2837    Dryad's Kiss
+  2838    Infected Illusion
+  2839    Depraved Dandia
+  2840    Matriarchal Fiat
+  2841    Tickling Tendrils
+  2842    Stink Bomb
+  2843    Nectarous Deluge
+  2844    Nepenthic Plunge
+  2845    Infaunal Flop
+  2846    .
+  2847    Ignis
+  2848    Gelus
+  2849    Flabra
+  2850    Tellus
+  2851    Sulpor
+  2852    Unda
+  2853    Lux
+  2854    Tenebrae
+  2855    Vallation
+  2856    Pflug
+  2857    Lunge
+  2858    Gambit
+  2859    Bellatrix of Light
+  2860    Bellatrix of Shadows
+  2861    .
+  2862    .
+  2863    .
+  2864    .
+  2865    .
+  2866    .
+  2867    Fighting Stance α
+  2868    Fighting Stance β
+  2869    Fighting Stance γ
+  2870    Fighting Stance δ
+  2871    Frizz
+  2872    #1336
+  2873    #1337
+  2874    Barreling Smash
+  2875    Sweeping Gouge
+  2876    Zealous Snort
+  2877    Terrifying Snap
+  2878    #1342
+  2879    #1343
+  2880    #1344
+  2881    Polar Roar
+  2882    Brain Freeze
+  2883    Biting Abrogation
+  2884    Permafrost Requiem
+  2885    Glacial Tomb
+  2886    Glassy Nova
+  2887    #1351
+  2888    Jittering Jig
+  2889    Romp
+  2890    Frenetic Flurry
+  2891    #1355
+  2892    #1356
+  2893    Dazing Discord
+  2894    Steaming Rage
+  2895    #1359
+  2896    Shining Salvo
+  2897    Palling Salvo
+  2898    Cathartic Caper
+  2899    Bewailing Wake
+  2900    Flight of the Fluttyries
+  2901    .
+  2902    .
+  2903    .
+  2904    Vehement Resolution
+  2905    Camaraderie of the Crevasse
+  2906    Into the Light
+  2907    Arduous Decision
+  2908    12 Blades of Remorse
+  2909    .
+  2910    .
+  2911    .
+  2912    Aurous Charge
+  2913    Howling Gust
+  2914    Righteous Rasp
+  2915    Starward Yowl
+  2916    Stalking Prey
+  2917    Brazen Rush
+  2918    Cross Reaver
+  2919    Meikyo Shisui
+  2920    Chant du Cygne
+  2921    Intervene
+  2922    Arrogance Incarnate
+  2923    Chant du Cygne
+  2924    Soul Enslavement
+  2925    Amon Drive
+  2926    Larceny
+  2927    Charm
+  2928    Havoc Spiral
+  2929    Cloudsplitter
+  2930    Yaegasumi
+  2931    Dragonfall
+  2932    Tachi: Fudo
+  2933    King Cobra Clamp
+  2934    Red Lotus Blade
+  2935    Spirits Within
+  2936    Vorpal Blade
+  2937    Royal Bash
+  2938    Royal Savior
+  2939    Abyssal Drain
+  2940    Abyssal Strike
+  2941    Ground Strike
+  2942    Grapeshot
+  2943    Pirate Pummel
+  2944    Powder Keg
+  2945    Walk the Plank
+  2946    Uriel Blade
+  2947    Scouring Bubbles
+  2948    Amatsu: Tsukikage
+  2949    Berserk-Ruf
+  2950    Astral Distortion
+  2951    Ignition
+  2952    Glacification
+  2953    Vaporization
+  2954    Terrafication
+  2955    Electrification
+  2956    Liquification
+  2957    Vortex
+  2958    Light Blade
+  2959    Peacebreaker
+  2960    Red Lotus Blade
+  2961    Savage Blade
+  2962    Villainous Rebuke
+  2963    Stygian Release
+  2964    Infernal Bulwark
+  2965    Atramentous Libations
+  2966    Noahionto
+  2967    Shockiavona
+  2968    Hemorrhaze
+  2969    .
+  2970    .
+  2971    .
+  2972    .
+  2973    .
+  2974    Inspirit
+  2975    Debonair Rush
+  2976    Iridal Pierce
+  2977    Lunar Revolution
+  2978    Nullifying Dropkick
+  2979    Auroral Uppercut
+  2980    Knuckle Sandwich
+  2981    Victory Beacon
+  2982    Salamander Flame
+  2983    Typhonic Arrow
+  2984    Meteoric Impact
+  2985    Shining Salvo
+  2986    Palling Salvo
+  2987    Imperial Authority
+  2988    Sixth Element
+  2989    Shield Subverter
+  2990    Absolute Terror
+  2991    Terric Breath
+  2992    Amatsu: Kagamikaeshi
+  2993    Amatsu: Mizumari
+  2994    .
+  2995    Amatsu: Shirahadori
+  2996    Bisection
+  2997    Leaden Salute
+  2998    Akimbo Shot
+  2999    Grisly Horizon
+  3000    Hane Fubuki
+  3001    Shibaraku
+  3002    Shiko no Mitate
+  3003    Happobarai
+  3004    Rinpyotosha
+  3005    Bomb Toss
+  3006    Goblin Rush
+  3007    Bear Killer
+  3008    Salvation Scythe
+  3009    Elemental Sforzo
+  3010    Liement
+  3011    .
+  3012    .
+  3013    .
+  3014    .
+  3015    .
+  3016    .
+  3017    .
+  3018    .
+  3019    Burning Memories
+  3020    Kagedourou
+  3021    Karakuridourou
+  3022    Tsujikaze
+  3023    Sleepytime Boomboom
+  3024    Smelled It and Dealt It
+  3025    Somnic Shell
+  3026    Contaminating Concoction
+  3027    Iniquitous Stab
+  3028    Shockstorm Edge
+  3029    Choreographed Carnage
+  3030    Lock and Load
+  3031    Lunge
+  3032    Swath of Silence
+  3033    Damning Edict
+  3034    Bowels of Agony
+  3035    Stag's Call
+  3036    Gyre Strike
+  3037    Stag's Charge
+  3038    Orcsbane
+  3039    Songbird Swoop
+  3040    Temblor Blade
+  3041    Cobra Clamp
+  3042    Illustrious Aid
+  3043    .
+  3044    .
+  3045    .
+  3046    .
+  3047    Feast of Arrows
+  3048    Cruel Joke
+  3049    Regurgitated Swarm
+  3050    Setting the Stage
+  3051    Last Laugh
+  3052    Thorned Stance
+  3053    Sensual Dance
+  3054    Dancer's Fury
+  3055    Whirling Edge
+  3056    Rousing Samba
+  3057    Vivifying Waltz
+  3058    True Strike
+  3059    Hexa Strike
+  3060    Glutinous Dart
+  3061    Death Spin
+  3062    Velkkan Pygmachia
+  3063    Saurian Slide
+  3064    Jungle Wallop
+  3065    .
+  3066    Critical Mass
+  3067    Fiery Tailings
+  3068    Meteor Strike
+  3069    Inferno
+  3070    Wind Blade
+  3071    Aerial Blast
+  3072    Heavenly Strike
+  3073    Diamond Dust
+  3074    Thunderstorm
+  3075    Judgment Bolt
+  3076    Geocrush
+  3077    Earthen Fury
+  3078    Grand Fall
+  3079    Tidal Wave
+  3080    Howling Moon
+  3081    Lunar Bay
+  3082    Chaos Blast
+  3083    Oblivion's Mantle
+  3084    Dark Moon
+  3085    Dark Sun
+  3086    Dark Thorn
+  3087    Durance Whip
+  3088    .
+  3089    Dark Flare
+  3090    Dark Freeze
+  3091    Dark Tornado
+  3092    Dark Quake
+  3093    Dark Burst
+  3094    Dark Flood
+  3095    Wild Oats
+  3096    Photosynthesis
+  3097    Petal Pirouette
+  3098    Head Butt
+  3099    Blow
+  3100    Uppercut
+  3101    Antiphase
+  3102    Blank Gaze
+  3103    .
+  3104    .
+  3105    .
+  3106    .
+  3107    Tearing Gust
+  3108    Concussive Shock
+  3109    Chokehold
+  3110    Zap
+  3111    Shrieking Gale
+  3112    Undulating Shockwave
+  3113    .
+  3114    .
+  3115    .
+  3116    Cesspool
+  3117    Fetid Eddies
+  3118    Nullifying Rain
+  3119    Noyade
+  3120    Clobbering Wave
+  3121    .
+  3122    .
+  3123    .
+  3124    Start from Scratch
+  3125    Frenzied Thrust
+  3126    Sinner's Cross
+  3127    Open Coffin
+  3128    Ravenous Assault
+  3129    Hemocladis
+  3130    .
+  3131    .
+  3132    .
+  3133    Fulminous Smash
+  3134    Flaming Kick
+  3135    Icy Grasp
+  3136    Flashflood
+  3137    Eroding Flesh
+  3138    Vivisection
+  3139    .
+  3140    .
+  3141    .
+  3142    .
+  3143    Impudence
+  3144    Incessant Void
+  3145    Tenebrous Grip
+  3146    Demonfire
+  3147    Frozen Blood
+  3148    Blast of Reticence
+  3149    Ensepulcher
+  3150    Ceaseless Surge
+  3151    Torrential Pain
+  3152    Eternal Misery
+  3153    Crippling Agony
+  3154    Bane of Tartarus
+  3155    Power Slash
+  3156    Freezebite
+  3157    Combo
+  3158    One-Ilm Punch
+  3159    Howling Fist
+  3160    Dragon Kick
+  3161    Asuran Fists
+  3162    Amatsu: Torimai
+  3163    Amatsu: Kazakiri
+  3164    Amatsu: Yukiarashi
+  3165    Amatsu: Tsukioboro
+  3166    Amatsu: Hanaikusa
+  3167    Wasp Sting
+  3168    Dancing Edge
+  3169    Flat Blade
+  3170    Stink Bomb
+  3171    Nectarous Deluge
+  3172    Nepenthic Plunge
+  3173    Guiding Light
+  3174    Upgrowth
+  3175    Fast Blade
+  3176    Savage Blade
+  3177    Sheep Song
+  3178    Tachi: Kamai
+  3179    Iainuki
+  3180    Tachi: Goten
+  3181    Tachi: Kasha
+  3182    Dragon Breath
+  3183    Hurricane Wing
+  3184    Pocket Sand
+  3185    Tripe Gripe
+  3186    Sharp Eye
+  3187    Gloeosuccus
+  3188    Afflatus Misery
+  3189    Merciless Strike
+  3190    Villainous Rebuke
+  3191    Stygian Release
+  3192    Uppercut
+  3193    Infernal Bulwark
+  3194    Earthbreaker
+  3195    Dynastic Gravitas
+  3196    Illustrious Aid
+  3197    Guiding Light
+  3198    Coming Up Roses
+  3199    #1663
+  3200    #1664
+  3201    #1665
+  3202    #1666
+  3203    #1667
+  3204    #1668
+  3205    Bloody Breath
+  3206    Excessively Bad Breath
+  3207    #1671
+  3208    #1672
+  3209    #1673
+  3210    Paralyzing Microtube
+  3211    Silencing Microtube
+  3212    Binding Microtube
+  3213    Twirling Dervish
+  3214    Great Wheel
+  3215    Light Blade
+  3216    Vortex
+  3217    Stellar Burst
+  3218    Bubble Curtain
+  3219    Metallic Body
+  3220    Venom Storm
+  3221    Venom Sting
+  3222    Venom Breath
+  3223    Elemental Sforzo
+  3224    Mikage
+  3225    Azure Lore
+  3226    Bolster
+  3227    Scissor Guard
+  3228    Hemorrhaze
+  3229    Regulator
+  3230    Tongue Lash
+  3231    Sidewinder
+  3232    Arching Arrow
+  3233    Stellar Arrow
+  3234    Lux Arrow
+  3235    Grapeshot
+  3236    Pirate Pummel
+  3237    Powder Keg
+  3238    Walk the Plank
+  3239    Ground Strike
+  3240    Hollow Smite
+  3241    Sarva's Storm
+  3242    Sarva's Storm
+  3243    Soturi's Fury
+  3244    Celidon's Torment
+  3245    Tachi: Mudo
+  3246    Nott
+  3247    Justicebreaker
+  3248    Rancid Breath
+  3249    Geotic Spin
+  3250    Hellfire Arrow
+  3251    Incensed Pummel
+  3252    .
+  3253    .
+  3254    .
+  3255    Lunatic Voice
+  3256    Sonic Buffet
+  3257    Entice
+  3258    Hysteric Assault
+  3259    Clarsach Call
+  3260    Infected Leech
+  3261    Gloom Spray
+  3262    Bloody Mist
+  3263    Tendril Curse
+  3264    Frigid Pulse
+  3265    Gates of Hades
+  3266    Magma Hoplon
+  3267    Bad Breath
+  3268    Meteor
+  3269    Meteor
+  3270    Thunderbolt
+  3271    #1735
+  3272    #1736
+  3273    #1737
+  3274    Beastruction
+  3275    Bad Breath
+  3276    Wings of Agony
+  3277    Wings of Woe
+  3278    .
+  3279    .
+  3280    Spine Chiller
+  3281    Quietus Sphere
+  3282    Null Blast
+  3283    Psychoanima
+  3284    Hysteroanima
+  3285    Salaheem Spirit
+  3286    Oisoya
+  3287    Knuckle Sandwich
+  3288    Whirling Edge
+  3289    Tartarus Torpor
+  3290    Unbridled Wisdom
+  3291    Hard Membrane
+  3292    Regeneration
+  3293    Sandstorm
+  3294    Sand Veil
+  3295    Lunar Bay
+  3296    Impact
+  3297    Holy Mist
+  3298    Night Terror
+  3299    Ruinous Omen
+  3300    Amatsu: Fuga
+  3301    Amatsu: Kyori
+  3302    Amatsu: Hanadoki
+  3303    Amatsu: Choun
+  3304    Amatsu: Gachirin
+  3305    Amatsu: Suien
+  3306    Curtain Call
+  3307    Denied Prowess
+  3308    Aetheric Pull
+  3309    Necrotic Wave
+  3310    Shearing Gale
+  3311    Beclouding Dust
+  3312    Brewing Storm
+  3313    Debilitating Surge
+  3314    Weighted Flux
+  3315    Viscous Deluge
+  3316    Leeching Vines
+  3317    #1781
+  3318    #1782
+  3319    #1783
+  3320    #1784
+  3321    Ascension
+  3322    Descension
+  3323    Expunge Magic
+  3324    Harmonic Displacement
+  3325    Sight Unseen
+  3326    Darkest Hour
+  3327    Unceasing Dread
+  3328    Dignified Awe
+  3329    Naakual's Vengeance
+  3330    #1794
+  3331    #1795
+  3332    #1796
+  3333    #1797
+  3334    Daybreak
+  3335    Tartaric Sigil
+  3336    Null Field
+  3337    Alabaster Burst
+  3338    Noble Frenzy
+  3339    Fulminous Fury
+  3340    No Quarter
+  3341    #1805
+  3342    #1806
+  3343    #1807
+  3344    #1808
+  3345    #1809
+  3346    Repelling Shout
+  3347    Chastise
+  3348    Scorching Luminescense
+  3349    Rending Blow
+  3350    Vicious Rake
+  3351    Heavens' Grace
+  3352    Denounce
+  3353    Relentless Discord
+  3354    Ruthlessness
+  3355    Inexorable Strike
+  3356    Self-Aggrandizement
+  3357    #1821
+  3358    #1822
+  3359    #1823
+  3360    #1824
+  3361    Feast of Arrows
+  3362    Regurgitated Swarm
+  3363    Setting the Stage
+  3364    Last Laugh
+  3365    Luminous Lance
+  3366    Rejuvenation
+  3367    Revelation
+  3368    Memento Mori
+  3369    Silence Seal
+  3370    Envoutement
+  3371    Bored to Tears
+  3372    #1836
+  3373    #1837
+  3374    #1838
+  3375    Start from Scratch
+  3376    Frenzied Thrust
+  3377    Sinner's Cross
+  3378    Open Coffin
+  3379    Ravenous Assault
+  3380    Hemocladis
+  3381    Shining Summer Samba
+  3382    Lovely Miracle Waltz
+  3383    Neo Crystal Jig
+  3384    Super Crusher Jig
+  3385    Eternal Vana Illusion
+  3386    Final Eternal Heart
+  3387    Firesday Night Fever
+  3388    Ruthlessness
+  3389    Inexorable Strike
+  3390    Self-Aggrandizement
+  3391    Merciless Strike
+  3392    #1856
+  3393    #1857
+  3394    #1858
+  3395    #1859
+  3396    Daybreak
+  3397    Tartaric Sigil
+  3398    Null Field
+  3399    Alabaster Burst
+  3400    Noble Frenzy
+  3401    Fulminous Fury
+  3402    No Quarter
+  3403    #1867
+  3404    #1868
+  3405    #1869
+  3406    Baneful Blades
+  3407    Wildwood Indignation
+  3408    Dryad's Kiss
+  3409    Depraved Dandia
+  3410    Matriarchal Fiat
+  3411    Wings of Gehenna
+  3412    Decollation
+  3413    Nosferatu's Kiss
+  3414    Heliovoid
+  3415    Deep Sea Dirge
+  3416    Illustrious Aid
+  3417    .
+  3418    .
+  3419    .
+  3420    Vehement Resolution
+  3421    Camaraderie of the Crevasse
+  3422    Into the Light
+  3423    Arduous Decision
+  3424    12 Blades of Remorse
+  3425    .
+  3426    .
+  3427    .
+  3428    Aurous Charge
+  3429    Howling Gust
+  3430    Righteous Rasp
+  3431    Starward Yowl
+  3432    Stalking Prey
+  3433    Shuffle
+  3434    Double Down
+  3435    Bludgeon
+  3436    Deal Out
+  3437    .
+  3438    .
+  3439    .
+  3440    .
+  3441    Ascension
+  3442    Descension
+  3443    Expunge Magic
+  3444    Harmonic Displacement
+  3445    Sight Unseen
+  3446    Darkest Hour
+  3447    Unceasing Dread
+  3448    Dignified Awe
+  3449    Naakual's Vengeance
+  3450    Cross Reaver
+  3451    Circle Blade
+  3452    Swift Blade
+  3453    Chant du Cygne
+  3454    Arrogance Incarnate
+  3455    Vorpal Blade
+  3456    Dominion Slash
+  3457    Chant du Cygne
+  3458    Shield Strike
+  3459    Rampage
+  3460    Calamity
+  3461    Havoc Spiral
+  3462    Cloudsplitter
+  3463    Spinning Scythe
+  3464    Amon Drive
+  3465    Guillotine
+  3466    Tachi: Yukikaze
+  3467    Tachi: Gekko
+  3468    Dragonfall
+  3469    Tachi: Kasha
+  3470    Tachi: Fudo
+  3471    Disorienting Waul
+  3472    Arrogance Incarnate
+  3473    Amon Drive
+  3474    Self-Destruct
+  3475    Self-Destruct
+  3476    #1940
+  3477    #1941
+  3478    #1942
+  3479    #1943
+  3480    #1944
+  3481    #1945
+  3482    #1946
+  3483    #1947
+  3484    #1948
+  3485    #1949
+  3486    #1950
+  3487    #1951
+  3488    #1952
+  3489    #1953
+  3490    #1954
+  3491    #1955
+  3492    #1956
+  3493    #1957
+  3494    #1958
+  3495    #1959
+  3496    #1960
+  3497    #1961
+  3498    #1962
+  3499    #1963
+  3500    #1964
+  3501    #1965
+  3502    #1966
+  3503    #1967
+  3504    #1968
+  3505    #1969
+  3506    #1970
+  3507    #1971
+  3508    #1972
+  3509    #1973
+  3510    #1974
+  3511    #1975
+  3512    #1976
+  3513    #1977
+  3514    #1978
+  3515    #1979
+  3516    #1980
+  3517    #1981
+  3518    #1982
+  3519    #1983
+  3520    #1984
+  3521    #1985
+  3522    #1986
+  3523    #1987
+  3524    #1988
+  3525    #1989
+  3526    #1990
+  3527    #1991
+  3528    #1992
+  3529    #1993
+  3530    #1994
+  3531    #1995
+  3532    #1996
+  3533    #1997
+  3534    #1998
+  3535    #1999
+  3536    #2000
+  3537    #2001
+  3538    #2002
+  3539    #2003
+  3540    #2004
+  3541    #2005
+  3542    #2006
+  3543    #2007
+  3544    #2008
+  3545    #2009
+  3546    #2010
+  3547    #2011
+  3548    #2012
+  3549    #2013
+  3550    #2014
+  3551    #2015
+  3552    #2016
+  3553    #2017
+  3554    #2018
+  3555    #2019
+  3556    #2020
+  3557    #2021
+  3558    #2022
+  3559    #2023
+  3560    #2024
+  3561    #2025
+  3562    #2026
+  3563    #2027
+  3564    #2028
+  3565    #2029
+  3566    #2030
+  3567    #2031
+  3568    #2032
+  3569    #2033
+  3570    #2034
+  3571    #2035
+  3572    #2036
+  3573    #2037
+  3574    #2038
+  3575    #2039
+  3576    #2040
+  3577    #2041
+  3578    #2042
+  3579    #2043
+  3580    #2044
+  3581    #2045
+  3582    #2046
+  3583    #2047
+  3584    Foot Kick
+  3585    Dust Cloud
+  3586    Whirl Claws
+  3587    Head Butt
+  3588    Dream Flower
+  3589    Wild Oats
+  3590    Leaf Dagger
+  3591    Scream
+  3592    Roar
+  3593    Razor Fang
+  3594    Claw Cyclone
+  3595    Tail Blow
+  3596    Fireball
+  3597    Blockhead
+  3598    Brain Crush
+  3599    Infrasonics
+  3600    Secretion
+  3601    Lamb Chop
+  3602    Rage
+  3603    Sheep Charge
+  3604    Sheep Song
+  3605    Bubble Shower
+  3606    Bubble Curtain
+  3607    Big Scissors
+  3608    Scissor Guard
+  3609    Metallic Body
+  3610    Needleshot
+  3611    ??? Needles
+  3612    Frogkick
+  3613    Spore
+  3614    Queasyshroom
+  3615    Numbshroom
+  3616    Shakeshroom
+  3617    Silence Gas
+  3618    Dark Spore
+  3619    Power Attack
+  3620    Hi-Freq Field
+  3621    Rhino Attack
+  3622    Rhino Guard
+  3623    Spoil
+  3624    Cursed Sphere
+  3625    Venom
+  3626    Sandblast
+  3627    Sandpit
+  3628    Venom Spray
+  3629    Mandibular Bite
+  3630    Soporific
+  3631    Gloeosuccus
+  3632    Palsy Pollen
+  3633    Geist Wall
+  3634    Numbing Noise
+  3635    Nimble Snap
+  3636    Cyclotail
+  3637    Toxic Spit
+  3638    Double Claw
+  3639    Grapple
+  3640    Filamented Hold
+  3641    Spinning Top
+  3642    Chaotic Eye
+  3643    Blaster
+  3644    Suction
+  3645    Drainkiss
+  3646    Snow Cloud
+  3647    Wild Carrot
+  3648    Sudden Lunge
+  3649    Spiral Spin
+  3650    Noisome Powder
+  3651    Acid Mist
+  3652    TP Drainkiss
+  3653    Scythe Tail
+  3654    Ripper Fang
+  3655    Chomp Rush
+  3656    Charged Whisker
+  3657    Purulent Ooze
+  3658    Corrosive Ooze
+  3659    Back Heel
+  3660    Jettatura
+  3661    Choke Breath
+  3662    Fantod
+  3663    Tortoise Stomp
+  3664    Harden Shell
+  3665    Aqua Breath
+  3666    Wing Slap
+  3667    Beak Lunge
+  3668    Intimidate
+  3669    Recoil Dive
+  3670    Water Wall
+  3671    Sensilla Blades
+  3672    Tegmina Buffet
+  3673    Molting Plumage
+  3674    Swooping Frenzy
+  3675    Sweeping Gouge
+  3676    Zealous Snort
+  3677    Pentapeck
+  3678    Tickling Tendrils
+  3679    Stink Bomb
+  3680    Nectarous Deluge
+  3681    Nepenthic Plunge
+  3682    Somersault
+  3683    Foul Waters
+  3684    Pestilent Plume
+  3685    Pecking Flurry
+  3686    Sickle Slash
+  3687    Acid Spray
+  3688    Spider Web
+  3689    Infected Leech
+  3690    Gloom Spray
+  3691    Insipid Nip
+  3692    Pandemic Nip
+  3693    Cimicine Discharge
+  3694    #2158
+  3695    #2159
+  3696    #2160
+  3697    #2161
+  3698    #2162
+  3699    #2163
+  3700    #2164
+  3701    #2165
+  3702    #2166
+  3703    #2167
+  3704    #2168
+  3705    #2169
+  3706    #2170
+  3707    #2171
+  3708    #2172
+  3709    #2173
+  3710    #2174
+  3711    #2175
+  3712    #2176
+  3713    #2177
+  3714    #2178
+  3715    #2179
+  3716    #2180
+  3717    #2181
+  3718    #2182
+  3719    #2183
+  3720    #2184
+  3721    #2185
+  3722    #2186
+  3723    #2187
+  3724    #2188
+  3725    #2189
+  3726    #2190
+  3727    #2191
+  3728    #2192
+  3729    #2193
+  3730    #2194
+  3731    #2195
+  3732    #2196
+  3733    #2197
+  3734    #2198
+  3735    #2199
+  3736    #2200
+  3737    #2201
+  3738    #2202
+  3739    #2203
+  3740    #2204
+  3741    #2205
+  3742    #2206
+  3743    #2207
+  3744    #2208
+  3745    #2209
+  3746    #2210
+  3747    #2211
+  3748    #2212
+  3749    #2213
+  3750    #2214
+  3751    #2215
+  3752    #2216
+  3753    #2217
+  3754    #2218
+  3755    #2219
+  3756    #2220
+  3757    #2221
+  3758    #2222
+  3759    #2223
+  3760    #2224
+  3761    #2225
+  3762    #2226
+  3763    #2227
+  3764    #2228
+  3765    #2229
+  3766    #2230
+  3767    #2231
+  3768    #2232
+  3769    #2233
+  3770    #2234
+  3771    #2235
+  3772    #2236
+  3773    #2237
+  3774    #2238
+  3775    #2239
+  3776    #2240
+  3777    #2241
+  3778    #2242
+  3779    #2243
+  3780    #2244
+  3781    #2245
+  3782    #2246
+  3783    #2247
+  3784    #2248
+  3785    #2249
+  3786    #2250
+  3787    #2251
+  3788    #2252
+  3789    #2253
+  3790    #2254
+  3791    #2255
+  3792    #2256
+  3793    #2257
+  3794    #2258
+  3795    #2259
+  3796    #2260
+  3797    #2261
+  3798    #2262
+  3799    #2263
+  3800    #2264
+  3801    #2265
+  3802    #2266
+  3803    #2267
+  3804    #2268
+  3805    #2269
+  3806    #2270
+  3807    #2271
+  3808    #2272
+  3809    #2273
+  3810    #2274
+  3811    #2275
+  3812    #2276
+  3813    #2277
+  3814    #2278
+  3815    #2279
+  3816    #2280
+  3817    #2281
+  3818    #2282
+  3819    #2283
+  3820    #2284
+  3821    #2285
+  3822    #2286
+  3823    #2287
+  3824    #2288
+  3825    #2289
+  3826    #2290
+  3827    #2291
+  3828    #2292
+  3829    #2293
+  3830    #2294
+  3831    #2295
+  3832    #2296
+  3833    #2297
+  3834    #2298
+  3835    #2299
+  3836    #2300
+  3837    #2301
+  3838    #2302
+  3839    #2303

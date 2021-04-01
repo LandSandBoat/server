@@ -1,0 +1,241 @@
+0 - You could not enter the next area.
+1 - You could not enter the next area.
+2 - You could not enter the next area.
+3 - You could not enter the next area.
+4 - You could not enter the next area.
+5 - You could not enter your room.
+6 - Citizens of other nations must have a Rent-a-Room assigned to them in order to use the residential area facilities.
+7 - Executing logout in 0 seconds. Cancel healing to remain logged in.
+8 - Executing temporary logout in 0 seconds. Cancel healing to remain logged in.
+9 - Target out of range.
+10 - 0 seconds until position reset.
+11 - Your invitation was declined.
+12 - That person is a party member.
+13 - mes131
+14 - That request cannot be processed.
+15 - Player Name does not meet the necessary requirements to obtain the .  lost.
+16 - You find   on the .
+17 - Player Name's lot for the :  points.
+18 - Player Name obtains  .
+19 - Player Name obtains 0 gil.
+20 - Your call has been placed in the queue.
+21 - You are not the party leader.
+22 - Caution: All unclaimed treasure will be lost if you join a party.
+23 - You cannot invite that person at this time.
+24 - Player Name wishes to trade with you.
+25 - You have already sent a trade request to <player>.
+26 - You cannot trade with <player> at this time.
+27 - You cannot trade the <item> to <player>.
+28 - You cannot trade with that target.
+29 - Select a target to trade with.
+30 - Trade complete.
+31 - You do not meet the requirements to obtain the .  lost.
+32 - Unable to perform action in Mog House.
+33 - That person is currently away and cannot respond.
+34 - That person is currently using the PlayOnline Viewer and can only be reached by sending a "knock message" from the Search menu.
+35 - Executing shutdown in 0 seconds. Cancel healing to remain logged in.
+36 - There are no party members.
+37 - You do not have a linkshell item equipped.
+38 - You must wait longer to perform that action.
+39 - You don't have any .
+40 - mes40
+41 - DEBUG: Title changed. (0)
+42 - DEBUG: San d'Oria normal fame (0) Result=0
+43 - DEBUG: Bastok normal fame (0) Result=0
+44 - DEBUG: Windurst normal fame (0) Result=0
+45 - DEBUG: Tenshodo fame (0) Result=0
+46 - I'll look after your items, kupo!
+47 - You have new deliveries, kupo!
+48 - You should take the items out of your delivery box, kupo!
+49 - The delivery box is where things sent from the auction houses arrive, kupo!
+50 - Chaaange...job! Kupopopooo!
+51 - Choose a flowerpot, kupo!
+52 - This plant is growing well, kupo!
+53 - This plant is fruiting, kupo!
+54 - You can place new furnishings by selecting "Layout," kupo!
+55 - Be careful, master! You can't hear other people talk when you're looking at your diary, kupo!
+56 - Be careful, master! You can't hear other people talk when you're looking at your album, kupo!
+57 - ItPlayer Name's dangerous to pile things so high, kupo!
+58 - Powerful magicks are preventing you from using that ability.
+59 - I can't raise plants without a flowerpot, kupo...
+60 - You have to select "Layout" from the menu and place a flowerpot in the room, kupo. I can't raise plants without one, kupo.
+61 - Choose a flowerpot, kupo.
+62 - There is no plant in this flowerpot, kupo.
+63 - There are seeds planted in this flowerpot, kupo.
+64 - There are seeds in this pot, kupo.
+65 - This plant is growing well, kupo.ÅÙ
+66 - ItPlayer Name's doing well, kupo.ÅÙ
+67 - This plant isn't doing well, kupo... But I'm sure it'll get better now that you've looked at it, kupo!
+68 - This plant isn't doing well, kupo... But I'm sure it'll get better now that you've looked at it, kupo!
+69 - Flowers are blooming, kupo!
+70 - Beautiful flowers are blooming, kupo! They're so pretty, kupo!1
+71 - Kupo! This plant is ready to be picked, kupo!
+72 - ItPlayer Name's grown so big, kupoÅ`. ItPlayer Name's ready to be picked now, kupoÅ`.
+73 - Oh, no... This plant is all withered up, kupo...
+74 - ItPlayer Name's so dry and withered... I'm sorry, kupo...
+75 - Choose which type of seeds to plant, kupo.
+76 - Choose a crystal to use as fertilizer, kupo.
+77 - I'll make it into a dried flower with my secret moogle powers, kupo! It'll keep its shape forever, kupo!
+78 - I can pick its fruits, but doing so will empty the flowerpot, kupo.
+79 - This plant will be gone forever if I throw it out, kupo.
+80 - All right, I'll go over to the mog house, kupo! I'll be there in no time, kupo
+81 - I'm home, kupo. What do you want me to do, kupo...?
+82 - I'm back, kupo.
+83 - Plant these seeds, kupo?
+84 - Use this crystal, kupo?
+85 - Pick this, kupo?
+86 - Make it into a dried flower, kupo?
+87 - Throw it away, kupo!?
+88 - Dice roll!  rolls !
+89 -
+90 -
+91 - Looking at the items in Player Name's bazaar...
+92 - Player Name bought 0 .
+93 - Player Name bought 0 .
+94 - Purchase 0  for 0 gil?
+95 - Bazaar closed due to Player Name's settings change.
+96 - Player Name disappeared.
+97 - Player Name isn't selling anything.
+98 - I can't look after any more flowerpots, kupo...
+99 - Please, master. Don't bring home any more mannequins. Those things give me the creeps, kupo...
+100 -
+101 -
+102 -
+103 -
+104 - That item is already placed in the trade window.
+105 - You cannot use that command in the specified chat mode.
+106 - You have already cast your vote.
+107 - Trade canceled. Either your or your targetPlayer Name's inventory is full, or an error occurred during the transaction.
+108 - Equip a linkshell, pearlsack, or linkpearl before using that command.
+109 - You have been kicked out of the linkshell group.
+110 - That linkshell group no longer exists. This item is unusable.
+111 - That linkshell group has been terminated by the system. You can no longer equip this item.
+112 - The linkshell name you entered is already in use or otherwise unavailable. Please choose another name.
+113 - The linkshell name you entered is already in use or otherwise unavailable. Please choose another name.
+114 - The linkshell number limit in this world has been reached. You cannot create a new linkshell.
+115 - The party quartermaster already has. The  will be put in the party pool.
+116 - The party quartermaster cannot hold any more items. The  will be added to the partyPlayer Name's item pool.
+117 - Event skipped.
+118 - Your Friend List online status has been changed to "Online."
+119 - Your Friend List online status has been changed to "Away."
+120 - Your Friend List online status has been changed to "Busy."
+121 - Your Friend List online status has been changed to "Invisible."
+122 - An error occurred while changing your Friend List online status. Your online status was not changed.
+123 - The recipient is temporarily logged out to PlayOnline and cannot be reached.
+124 - Your message was not received.
+125 - Your tell was not received. The recipient is either offline or changing areas.
+126 - Communication error. Your tell was not received.
+127 - Auto-target: ON.
+128 - Auto-target: OFF.
+129 - Item sold.
+130 - You cast lots for the .
+131 - You obtain  .
+132 - Your moogle plants the  in the flowerpot.
+133 - Your moogle dries the plant in the .
+134 - Your moogle picked 0  from the plant!
+135 - Your moogle retrieves 0 .
+136 - Your moogle uses the  on the plant.
+137 - Kupo... I can't pick anything right now, kupo.
+138 - The chocobo refused to enter the next area.
+139 - This plant has been dried, kupo.
+140 - Player Name's proposal - Current poll results:
+141 - Player Name's proposal - Final poll results:
+142 - You cannot use that command at the moment. Please try again later.
+143 - Player Name has not proposed anything.
+144 - You can only choose from the  choices given.
+145 - You have already voted on Player Name's proposal.
+146 - Player Name's proposal to all (cast vote with command: "/vote ?"):
+147 - Player Name's proposal - Current poll results:
+148 - Player Name's proposal - Final poll results:
+149 - Player Name's proposal - Current poll results:
+150 - Player Name's proposal - Final poll results:
+151 - Player Name's proposal - Current poll results:
+152 - Player Name's proposal - Final poll results:
+153 - Player Name's proposal - Current poll results:
+154 - Player Name's proposal - Final poll results:
+155 - That request cannot be processed
+156 - The communications line is currently busy. Please try again later.
+157 - There are currently too many people accessing this linkshell group. You cannot access this linkshell.
+158 - You do not have access to those linkshell commands.
+159 - You cannot put a linkshell item up for sale.
+160 - You synthesized 0 .
+161 - You synthesized 0 .
+162 - You synthesized 0 .
+163 - You synthesized 0 .
+164 -   was lost.
+165 - You buy 0  from the guild.
+166 - You buy   from the guild.
+167 - You sell 0  to the guild.
+168 - You sell   to the guild.
+169 - You obtained 0
+170 - Slot 0: 0 gil, sent to you by .
+171 - Slot 0: The money the buyer paid for the  you put on auction, 0 gil.
+172 - You cannot use that command while invisible.
+173 - Your  sold.
+174 - Your  did not sell. Items that are not sold are sent to your Mog House.
+175 - Your character information is now hidden.
+176 - Your character information is now shown.
+177 - You buy the  for 0 gil.
+178 - You were unable to buy the  for 0 gil.
+179 - Obtained key item: .
+180 - You throw away 0 .
+181 - Your tell was not received. The recipient is currently away.
+182 - That person is already in an alliance.
+183 - Unable to process request.
+184 - Unable to enter next area. Expansion pack not registered.
+185 - Unable to enter next area. Expansion pack not installed.
+186 - Your 0  sold.
+187 - Your 0  did not sell. Items that are not sold are sent to your Mog House.
+188 - You buy the 0  for 0 gil.
+189 - You were unable to buy the 0  for 0 gil.
+190 - You take the 0 gil out of  slot 0.
+191 - You dispose of the 0 gil in  slot 0.
+192 - You return the 0 gil in  slot 0 to its sender.
+193 - You take the  out of  slot 0.
+194 - You take the 0  out of  slot 0.
+195 - You dispose of the  in  slot 0.
+196 - You dispose of the 0  in  slot 0.
+197 - You return the  in  slot 0 to its sender.
+198 - You return the 0  in  slot 0 to their sender.
+199 - Slot 0: The money the buyer paid for the 0  you put on auction, 0 gil.
+200 - Player Name synthesized 0 .
+201 - Player Name synthesized 0 .
+202 - Player Name synthesized 0 .
+203 - Player Name synthesized 0 .
+204 - Player Name lost  .
+205 - Player Name obtained 0 .
+206 - You have submitted an application for world emigration.
+207 - You have not submitted an application for world emigration.
+208 - You could not obtain the . Either your inventory is full or you can only hold one item of that type.
+209 - You cannot perform that action while holding a Petra.
+210 - You cannot perform that action without a Petra.
+211 - You lost your Petras.
+212 - Gate Breach status has been disengaged.
+213 - Recovery in 0 seconds.
+214 - Returning to battle.
+215 - Returning to camp.
+216 - That action cannot be performed while participating in Conflict.
+217 - That action cannot be performed while preparing for battle.
+218 - You find   in the .
+219 - Chevrons earned Gold: 0 Mythril: 0 Silver: 0 Bronze: 0 Job: 0
+220 - You cannot possess more than one of that item.
+221 - Blockaid activated. Magical assistance, trades, party invites etc. from non-party/alliance characters will be blocked. This effect will continue until changing areas, or executing the "/blockaid off" command.
+222 - Blockaid canceled. Magical assistance, trades, party invites etc. from non-party/alliance characters will be allowed.
+223 - Blockaid is currently active. ("/blockaid off" to cancel.)
+224 - Blockaid is currently inactive.
+225 - Target is currently blocking outside magical assistance, trades, and party invites.
+226 - Interaction from a non-party character was blocked by /blockaid.
+227 - Player Name checks your Ballista data.
+228 - Recovery in 0 seconds.
+229 - You cannot perform that action while holding a Flamme.
+230 - You buy 0  from the shop.
+231 - You buy   from the shop.
+232 - You sell 0  to the shop.
+233 - You sell   to the shop.
+234 - Unable to equip linkshell items.
+235 - Warning! This is a Level Sync party. Joining will result in your level being restricted. If you are in a different area, the restriction will occur as soon as you enter the same area.
+236 - You cannot invite that person at this time. This player is either undergoing Level Sync deactivation, or is under the effect of a status which prevents synchronization.
+237 - You cannot join this party. You are either undergoing Level Sync deactivation, or are under the effect of a status which prevents synchronization.
+238 - The partyPlayer Name's level has been restricted to 0. Straying too far from the Level Sync designee will result in an inability to receive experience points. Equipment affected by the level restriction will be adjusted accordingly.
+239 - The compass reads: X:0 Y:0 Z:0 (0).
+240 - Your message has been blocked by the spam filter.

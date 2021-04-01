@@ -1,0 +1,302 @@
+﻿List of known zones
+
+    0 -  00 - Tech Demo Area (Formerly mis-used as Mog House)
+    1 -  01 - Phanauet Channel
+    2 -  02 - Carpenters' Landing
+    3 -  03 - Manaclipper
+    4 -  04 - Bibiki Bay
+    5 -  05 - Uleguerand Range
+    6 -  06 - Bearclaw Pinnacle
+    7 -  07 - Attohwa Chasm
+    8 -  08 - Boneyard Gully
+    9 -  09 - Pso'Xja
+   10 -  0A - The Shrouded Maw
+   11 -  0B - Oldton Movalpolos
+   12 -  0C - Newton Movalpolos
+   13 -  0D - Mine Shaft #2716
+   14 -  0E - Hall of Transference
+   15 -  0F - Abyssea - Konschtat
+   16 -  10 - Promyvion - Holla
+   17 -  11 - Spire of Holla
+   18 -  12 - Promyvion -  Dem
+   19 -  13 - Spire of Dem
+   20 -  14 - Promyvion - Mea
+   21 -  15 - Spire of Mea
+   22 -  16 - Promyvion - Vahzl
+   23 -  17 - Spire of Vahzl
+   24 -  18 - Lufaise Meadows
+   25 -  19 - Misareaux Coast
+   26 -  1A - Tavnazian Safehold
+   27 -  1B - Phomiuna Aqueducts
+   28 -  1C - Sacrarium
+   29 -  1D - Riverne - Site #B01
+   30 -  1E - Riverne - Site #A01
+   31 -  1F - Monarch Linn
+   32 -  20 - Sealion's Den
+   33 -  21 - Al'Taieu
+   34 -  22 - Grand Palace of Hu'Xzoi
+   35 -  23 - The Garden of Ru'Hmet
+   36 -  24 - Empyreal Paradox
+   37 -  25 - Temenos
+   38 -  26 - Apollyon
+   39 -  27 - Dynamis - Valkurm
+   40 -  28 - Dynamis - Buburimu
+   41 -  29 - Dynamis - Qufim
+   42 -  2A - Dynamis - Tavnazia
+   43 -  2B - Diorama Abdhaljs-Ghelsba
+   44 -  2C - Abdhaljs Isle-Purgonorgo
+   45 -  2D - Abyssea - Tahrongi
+   46 -  2E - Open sea route to Al Zahbi
+   47 -  2F - Open sea route to Mhaura
+   48 -  30 - Al Zahbi
+   49 -  31 - Test Area (Checkerboard Zone)
+   50 -  32 - Aht Urhgan Whitegate
+   51 -  33 - Wajaom Woodlands
+   52 -  34 - Bhaflau Thickets
+   53 -  35 - Nashmau
+   54 -  36 - Arrapago Reef
+   55 -  37 - Ilrusi Atoll
+   56 -  38 - Periqia
+   57 -  39 - Talacca Cove
+   58 -  3A - Silver Sea route to Nashmau
+   59 -  3B - Silver Sea route to Al Zahbi
+   60 -  3C - The Ashu Talif
+   61 -  3D - Mount Zhayolm
+   62 -  3E - Halvung
+   63 -  3F - Lebros Cavern
+   64 -  40 - Navukgo Execution Chamber
+   65 -  41 - Mamook
+   66 -  42 - Mamool Ja Training Grounds
+   67 -  43 - Jade Sepulcher
+   68 -  44 - Aydeewa Subterrane
+   69 -  45 - Leujaoam Sanctum
+   70 -  46 - Chocobo Circuit
+   71 -  47 - The Colosseum
+   72 -  48 - Alzadaal Undersea Ruins
+   73 -  49 - Zhayolm Remnants
+   74 -  4A - Arrapago Remnants
+   75 -  4B - Bhaflau Remnants
+   76 -  4C - Silver Sea Remnants
+   77 -  4D - Nyzul Isle
+   78 -  4E - Hazhalm Testing Grounds
+   79 -  4F - Caedarva Mire
+   80 -  50 - Southern San d'Oria [S]
+   81 -  51 - East Ronfaure [S]
+   82 -  52 - Jugner Forest [S]
+   83 -  53 - Vunkerl Inlet [S]
+   84 -  54 - Batallia Downs [S]
+   85 -  55 - La Vaule [S]
+   86 -  56 - Everbloom Hollow
+   87 -  57 - Bastok Markets [S]
+   88 -  58 - North Gustaberg [S]
+   89 -  59 - Grauberg [S]
+   90 -  5A - Pashhow Marshlands [S]
+   91 -  5B - Rolanberry Fields [S]
+   92 -  5C - Beadeaux [S]
+   93 -  5D - Ruhotz Silvermines
+   94 -  5E - Windurst Waters [S]
+   95 -  5F - West Sarutabaruta [S]
+   96 -  60 - Fort Karugo-  -Narugo [S]
+   97 -  61 - Meriphataud Mountains [S]
+   98 -  62 - Sauromugue Champaign [S]
+   99 -  63 - Castle Oztroja [S]
+  100 -  64 - West Ronfaure
+  101 -  65 - East Ronfaure
+  102 -  66 - La Theine Plateau
+  103 -  67 - Valkurm Dunes
+  104 -  68 - Jugner Forest
+  105 -  69 - Batallia Downs
+  106 -  6A - North Gustaberg
+  107 -  6B - South Gustaberg
+  108 -  6C - Konschtat Highlands
+  109 -  6D - Pashhow Marshlands
+  110 -  6E - Rolanberry Fields
+  111 -  6F - Beaucedine Glacier
+  112 -  70 - Xarcabard
+  113 -  71 - Cape Teriggan
+  114 -  72 - Eastern Altepa Desert
+  115 -  73 - West Sarutabaruta
+  116 -  74 - East Sarutabaruta
+  117 -  75 - Tahrongi Canyon
+  118 -  76 - Buburimu Peninsula
+  119 -  77 - Meriphataud Mountains
+  120 -  78 - Sauromugue Champaign
+  121 -  79 - The Sanctuary of Zi'Tah
+  122 -  7A - Ro'Maeve
+  123 -  7B - Yuhtunga Jungle
+  124 -  7C - Yhoator Jungle
+  125 -  7D - Western Altepa Desert
+  126 -  7E - Qufim Island
+  127 -  7F - Behemoth's Dominion
+  128 -  80 - Valley of Sorrows
+  129 -  81 - Ghoyu's Reverie
+  130 -  82 - Ru'Aun Gardens
+  131 -  83 - Mordion Gaol
+  132 -  84 - Abyssea - La Theine
+  133 -  85 - Not a real zone: Character select screen background
+  134 -  86 - Dynamis - Beaucedine
+  135 -  87 - Dynamis - Xarcabard
+  136 -  88 - Beaucedine Glacier [S]
+  137 -  89 - Xarcabard [S]
+  138 -  8A - Castle Zvahl Baileys [S]
+  139 -  8B - Horlais Peak
+  140 -  8C - Ghelsba Outpost
+  141 -  8D - Fort Ghelsba
+  142 -  8E - Yughott Grotto
+  143 -  8F - Palborough Mines
+  144 -  90 - Waughroon Shrine
+  145 -  91 - Giddeus
+  146 -  92 - Balga's Dais
+  147 -  93 - Beadeaux
+  148 -  94 - Qulun Dome
+  149 -  95 - Davoi
+  150 -  96 - Monastic Cavern
+  151 -  97 - Castle Oztroja
+  152 -  98 - Altar Room
+  153 -  99 - The Boyahda Tree
+  154 -  9A - Dragon's Aery
+  155 -  9B - Castle Zvahl Keep [S]
+  156 -  9C - Throne Room [S]
+  157 -  9D - Middle Delkfutt's Tower
+  158 -  9E - Upper Delkfutt's Tower
+  159 -  9F - Temple of Uggalepih
+  160 -  A0 - Den of Rancor
+  161 -  A1 - Castle Zvahl Baileys
+  162 -  A2 - Castle Zvahl Keep
+  163 -  A3 - Sacrificial Chamber
+  164 -  A4 - Garlaige Citadel [S]
+  165 -  A5 - Throne Room
+  166 -  A6 - Ranguemont Pass
+  167 -  A7 - Bostaunieux Oubliette
+  168 -  A8 - Chamber of Oracles
+  169 -  A9 - Toraimarai Canal
+  170 -  AA - Full Moon Fountain
+  171 -  AB - Crawlers' Nest [S]
+  172 -  AC - Zeruhn Mines
+  173 -  AD - Korroloka Tunnel
+  174 -  AE - Kuftal Tunnel
+  175 -  AF - The Eldieme Necropolis [S]
+  176 -  B0 - Sea Serpent Grotto
+  177 -  B1 - Ve'Lugannon Palace
+  178 -  B2 - The Shrine of Ru'Avitau
+  179 -  B3 - Stellar Fulcrum
+  180 -  B4 - La'Loff Amphitheater
+  181 -  B5 - The Celestial Nexus
+  182 -  B6 - Walk of Echoes
+  183 -  B7 - Maquette Abdhaljs-Legion (Formerly "The Last Stand")
+  184 -  B8 - Lower Delkfutt's Tower
+  185 -  B9 - Dynamis - San d'Oria
+  186 -  BA - Dynamis - Bastok
+  187 -  BB - Dynamis - Windurst
+  188 -  BC - Dynamis - Jeuno
+  189 -  BD -
+  190 -  BE - King Ranperre's Tomb
+  191 -  BF - Dangruf Wadi
+  192 -  C0 - Inner Horutoto Ruins
+  193 -  C1 - Ordelle's Caves
+  194 -  C2 - Outer Horutoto Ruins
+  195 -  C3 - The Eldieme Necropolis
+  196 -  C4 - Gusgen Mines
+  197 -  C5 - Crawlers' Nest
+  198 -  C6 - Maze of Shakhrami
+  199 -  C7 -
+  200 -  C8 - Garlaige Citadel
+  201 -  C9 - Cloister of Gales
+  202 -  CA - Cloister of Storms
+  203 -  CB - Cloister of Frost
+  204 -  CC - Fei'Yin
+  205 -  CD - Ifrit's Cauldron
+  206 -  CE - Qu'Bia Arena
+  207 -  CF - Cloister of Flames
+  208 -  D0 - Quicksand Caves
+  209 -  D1 - Cloister of Tremors
+  210 -  D2 - GM Home (name comes from leaked official documentation)
+  211 -  D3 - Cloister of Tides
+  212 -  D4 - Gustav Tunnel
+  213 -  D5 - Labyrinth of Onzozo
+  214 -  D6 - Residential Area (Alt)
+  215 -  D7 - Abyssea - Attohwa
+  216 -  D8 - Abyssea - Misareaux
+  217 -  D9 - Abyssea - Vunkerl
+  218 -  DA - Abyssea - Altepa
+  219 -  DB -
+  220 -  DC - Ship bound for Selbina
+  221 -  DD - Ship bound for Mhaura
+  222 -  DE - Provenance
+  223 -  DF - San d'Oria-Jeuno Airship
+  224 -  E0 - Bastok-Jeuno Airship
+  225 -  E1 - Windurst-Jeuno Airship
+  226 -  E2 - Kazham-Jeuno Airship
+  227 -  E3 - Ship bound for Selbina (with Pirates)
+  228 -  E4 - Ship bound for Mhaura (with Pirates)
+  229 -  E5 -
+  230 -  E6 - Southern San d'Oria
+  231 -  E7 - Northern San d'Oria
+  232 -  E8 - Port San d'Oria
+  233 -  E9 - Chateau d'Oraguille
+  234 -  EA - Bastok Mines
+  235 -  EB - Bastok Markets
+  236 -  EC - Port Bastok
+  237 -  ED - Metalworks
+  238 -  EE - Windurst Waters
+  239 -  EF - Windurst Walls
+  240 -  F0 - Port Windurst
+  241 -  F1 - Windurst Woods
+  242 -  F2 - Heavens Tower
+  243 -  F3 - Ru'Lude Gardens
+  244 -  F4 - Upper Jeuno
+  245 -  F5 - Lower Jeuno
+  246 -  F6 - Port Jeuno
+  247 -  F7 - Rabao
+  248 -  F8 - Selbina
+  249 -  F9 - Mhaura
+  250 -  FA - Kazham
+  251 -  FB - Hall of the Gods
+  252 -  FC - Norg
+  253 -  FD - Abyssea - Uleguerand
+  254 -  FE - Abyssea - Grauberg
+  255 -  FF - Abyssea - Empyreal Paradox
+  256 - 100 - Western Adoulin
+  257 - 101 - Eastern Adoulin
+  258 - 102 - Rala Waterways
+  259 - 103 - Rala Waterways [U]
+  260 - 104 - Yahse Hunting Grounds
+  261 - 105 - Ceizak Battlegrounds
+  262 - 106 - Foret de Hennetiel
+  263 - 107 - Yorcia Weald
+  264 - 108 - Yorcia Weald [U]
+  265 - 109 - Morimar Basalt Fields
+  266 - 10A - Arjami Ravine
+  267 - 10B - Kamihr Drifts
+  268 - 10C - Sih Gates
+  269 - 10D - Moh Gates
+  270 - 10E - Cirdas Caverns
+  271 - 10F - Cirdas Caverns [U]
+  272 - 110 - Dho Gates
+  273 - 111 - Woh Gates
+  274 - 112 - Outer Ra'Kaznar
+  275 - 113 - Outer Ra'Kaznar [U]
+  276 - 114 - Ra'kaznar Inner Court
+  277 - 115 - Ra'Kaznar Turris
+  278 - 116 -
+  279 - 117 - Walk of Echoes [P2]
+  280 - 118 - Mog Garden
+  281 - 119 - Leafallia
+  282 - 11A - Mount Kamihr
+  283 - 11B - Silver Knife
+  284 - 11C - Celennia Memorial Library (formerly Wexworth Library)
+  285 - 11D - Feretory
+  286 - 11E -
+  287 - 11F - Maquette Abdhaljs-LegionB
+  288 - 120 - Escha - Zi'Tah
+  289 - 121 - Escha - Ru'Aun
+  290 - 122 - Desuetia - Empyreal Paradox
+  291 - 123 - Reisenjima
+  292 - 124 - Reisenjima Henge
+  293 - 125 - Reisenjima Sanctorium
+  294 - 126 - Dynamis - San d'Oria [D]
+  295 - 127 - Dynamis - Bastok [D]
+  296 - 128 - Dynamis - Windurst [D]
+  297 - 129 - Dynamis - Jeuno [D]
+  298 - 130 - Walk of Echoes [P1]
+

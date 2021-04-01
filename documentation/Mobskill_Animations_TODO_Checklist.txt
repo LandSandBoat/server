@@ -1,0 +1,159 @@
+-- To-Do Animations by Family. Based on http://wiki.ffxiclopedia.org/wiki/Beast_Strength_Chart
+
+Beasts:
+-- Behemoths (Elasmoth Subspecies)
+-- Buffalo - Mighty Snort, Cattlepult, Bull Rush
+-- Cerberusus (Orthro subspecies)
+-- Coeurls - Blink_of_Peril, Pretnatural_Gleam
+-- Marid - Proboscis_Shower
+-- Rabbits - (nm or abyssea area?) all
+-- Tigers - (Dynamis - Nightmare tiger / Einharjar?) all + Disorienting Waul
+-- Yztargs - all
+
+Lizards:
+-- Adamantoises - Testudo_Tremor
+-- Bugards - Tyrant Tusk, Tyrannic Tusk, Hungry Crunch
+-- Gabbrath - All abilities.
+-- Matamata - Needs testing. Lack of info online.
+-- Peistes (Sibilus subspecies) - Oppressive Gaze
+-- Wivre - Crippling_Slam
+
+Vermin:
+-- Antlions - Gravitic Horn, Quake Blast
+-- Apian Beasts - all
+-- Nightmare Bee(dynamis) - Frenzy pollen
+-- Bztavians - all
+-- Crawlers (Eruca) - Incinerate
+-- Diremites - Tarsal Slam
+-- Flies - Debilitating Drone, and confirm somersault animation?
+-- Scorpions - Hell Scissors
+-- Spiders (NM version??). 3 ws starting at ID 703.
+
+Plantoids:
+-- Belladonnas - all
+-- Funguars -- Microspores, Agaricus
+-- Mandragoros -- Petal_Pirouette
+                  Demonic_Flower
+                  Petalback_Spin
+                  Tepal_Twist
+                  Bloom_Fouette
+                  Fatal_Scream
+-- Morbols -- Extremely bad breath
+-- Sabotenders (Dynamis) - 2000 needles, 4000 needles, Needleshot
+-- Yggdreants - all
+
+Aquans:
+-- Crabs - Mega Scissors, Venom Shower
+-- Orobons - Leeching Current, Deathgnash, Abominable Belch, Mayhem Lantern
+-- Pugils (dynamis) - all
+
+Amorphs:
+-- Acuexes - all
+-- Botuli - all
+-- Leeches - Random kiss, absorbing kiss, deep kiss
+-- Sandworms - Gorge, Disgorge
+-- Slimes - Epoxy Spread, Mucus Spread,, HP Drain
+
+Birds:
+-- Cockatrices - Contagion Transfer, Toxic Pick
+-- Colibri - Wisecrack
+-- Harpeia - Kaleidoscopic Fury
+-- Greater Birds - Dread Wind
+-- Waktza - all
+
+Undead:
+-- Corpselights - all
+-- Corse (Kumakatok Subspecies) - Hadal_Summons
+-- Doomed - Infernal_Pestilence
+-- Fomor - Confirm IDs/Animations.
+-- Fomor (Dynamis) - all
+-- Ghosts (Bhoot Subspecies) - Perdition
+-- Naraka - Yamas_jugement, Sakra Storm
+-- Skeletons - Marrow Drain (Skele version)
+-- Skeletons (Drauger Subspecies) - Malediction, Dereliction
+-- Vampyres - Dirty Breath, Minax Glare, Nocturnal Servitude
+
+Arcana:
+-- Bombs (COP/TOAU Version) - Vulcanian Impact, Heat Wave, Hellstorm
+-- Clusters - Self Destruct (5 different animations)
+-- Evil Weapons -  Whispers_of_Ire
+                   Flurry_of_Rage
+                   Smite_of_Fury
+                   Furious_Flurry
+-- Khimaira - Lithic_Breath
+-- Mimics (Abyssea) - Pandora's Curse, Pandoras Gift (Unknown who uses this)
+-- Snolls - Arctic Impact, Hypothermal Combustion
+-- Spheroids (CoP/Abyssea) - Stunbolt, Reactive Shield needs Confirmation
+
+Dragon:
+-- Dragons (Dahak Subspecies) - Nullsong
+-- Wyverns - Hurricane Breath
+-- Zilant - all
+
+Demons:
+-- Demons (Dynamis) - all
+-- Imps - Grating Tantara, Stifling Tantara
+-- Tauri - Apocalyptic Ray, Chthonian Ray, Lethal Triclip
+-- Pixies - Norn Arrows, Cyclonic Blight
+
+No Ecosystem:
+-- Monoceros - Trample
+-- Moogles - Flowerpot
+             Mog_Bomb
+             Mog_Shrapnel
+             Crystalline_Flare
+             Washtub
+             Bill_Toss
+-- Gears - All. They have 4 different sets of ID's and possibly Animations..
+-- Ramparts - All.
+
+-- Biotech. Weapons - Citadel_Buster, Ion Efflux, Rear Lasers, Discharger. Needs to be broken up into individual mobs..
+-- Lady Lilith - all
+-- Lilith Ascendant - all
+-- Tubes - all
+-- Elementals - Searing Tempest, Blinding Fulgor
+
+Beastmen:
+-- Orcs - Phantasmal_Dance
+          Berserker_Dance
+          Shoulder_Charge
+          Veil_of_Chaos
+-- Quadav - Thunderous Yowl, Skull Smash, Shell Charge, Torment of Gu Dha
+-- Yagudo (dynamis) - Doom
+-- Yagudo - Feather_Maelstrom
+            Dark_Invocation
+            Shirahadori
+            Shibaraku
+            Kamaitachi
+            Vorticose_Sands
+            Hane_Fubuki
+            Rinpyotosha
+            Hiden_Sokyaku
+            Shiko_no_Mitate
+            Happobarai
+-- Goblins - Suacepan
+-- Tonberries - Ritual Bind
+-- Mamool Ja Knight (Mamool Ja on Wivres) - All
+-- Mamool Ja - Vorpal Wheel, Miasma, Trrannic Blare, Decussate
+-- Troll Destroyers (huge hammer version) - Overthrow
+                                            Rock_Smash
+                                            Diamondhide
+                                            Enervation
+                                            Potent Lunge
+                                            Quake_Stomp
+                                            Hammer-Go-Round
+                                            Hammerblow
+                                            Drop_Hammer
+                                            Seismohammer
+   Gurfurlur the Menacing - Sledgehammer
+                            Head_Snatch
+                            Haymaker
+                            Incessant_Fists
+                            Arcane_Stomp
+                            Pleiades_Ray
+
+-- Siege Turrets - Beaked Bomber, Heavy Artillery
+-- Qiqirn - Deadeye, Strap Cutter
+-- Lamia - Belly Dance , Dukkeripen x2 animations,
+   Medusa - Calcifying Deluge, Gorgon Dance, Pinning Shot, Shadow Thrust
+-- Merrow - Rising Swell
