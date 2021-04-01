@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- Player is on San d'Oria mission 8-1 "Coming of Age":
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.COMING_OF_AGE then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.COMING_OF_AGE then
         local missionStatus = player:getCharVar("MissionStatus")
         local mob1 = GetMobByID(ID.mob.VALOR):isSpawned()
         local mob2 = GetMobByID(ID.mob.HONOR):isSpawned()
@@ -23,9 +23,9 @@ entity.onTrigger = function(player, npc)
         if missionStatus == 2 and not mob1 and not mob2 then
             SpawnMob(ID.mob.VALOR)
             SpawnMob(ID.mob.HONOR)
-        elseif missionStatus == 3 and not mob1 and not mob2 and not player:hasKeyItem(tpz.ki.DROPS_OF_AMNIO) then
-            player:addKeyItem(tpz.ki.DROPS_OF_AMNIO)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DROPS_OF_AMNIO)
+        elseif missionStatus == 3 and not mob1 and not mob2 and not player:hasKeyItem(xi.ki.DROPS_OF_AMNIO) then
+            player:addKeyItem(xi.ki.DROPS_OF_AMNIO)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DROPS_OF_AMNIO)
         end
     -- Default
     else

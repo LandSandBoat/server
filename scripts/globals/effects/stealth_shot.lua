@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.STEALTH_SHOT
+-- xi.effect.STEALTH_SHOT
 -----------------------------------
 local effect_object = {}
 

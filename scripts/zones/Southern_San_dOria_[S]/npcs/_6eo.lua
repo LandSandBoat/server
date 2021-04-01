@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 3) then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE) == QUEST_ACCEPTED and player:getCharVar("KnotQuiteThere") == 3) then
         player:startEvent(63)
     end
 
@@ -28,7 +28,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 751)
         else
-            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.KNOT_QUITE_THERE)
+            player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.KNOT_QUITE_THERE)
             player:addItem(751)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 751) --Platinum Beastcoin
             player:setCharVar("KnotQuiteThere", 0)

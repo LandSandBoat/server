@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ISSEKIGAN
+-- xi.effect.ISSEKIGAN
 -----------------------------------
 local effect_object = {}
 

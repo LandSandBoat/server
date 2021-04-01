@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.THIRD_EYE
+-- xi.effect.THIRD_EYE
 -----------------------------------
 local effect_object = {}
 

@@ -11,8 +11,8 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.DOUBLE_ATTACK, 20)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 2)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -40,7 +40,7 @@ entity.onMobFight = function(mob, target)
     end
     for i = ID.mob.GULOOL_JA_JA + 1, ID.mob.GULOOL_JA_JA + 4 do
         local pet = GetMobByID(i)
-        if (pet:getCurrentAction() == tpz.act.ROAMING) then
+        if (pet:getCurrentAction() == xi.act.ROAMING) then
             pet:updateEnmity(target)
         end
     end
@@ -51,7 +51,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.SHINING_SCALE_RIFLER)
+    player:addTitle(xi.title.SHINING_SCALE_RIFLER)
     for i = 1, 4 do DespawnMob(ID.mob.GULOOL_JA_JA + i) end
 end
 

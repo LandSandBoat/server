@@ -14,14 +14,14 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if (not target:hasStatusEffect(tpz.effect.SNEAK)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
-        target:addStatusEffect(tpz.effect.SNEAK, 0, 10, math.floor(420 * SNEAK_INVIS_DURATION_MULTIPLIER))
+    if (not target:hasStatusEffect(xi.effect.SNEAK)) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+        target:addStatusEffect(xi.effect.SNEAK, 0, 10, math.floor(420 * SNEAK_INVIS_DURATION_MULTIPLIER))
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no tpz.effect.
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.
     end
 
-    return tpz.effect.SNEAK
+    return xi.effect.SNEAK
 end
 
 return spell_object

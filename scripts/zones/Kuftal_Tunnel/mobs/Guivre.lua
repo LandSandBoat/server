@@ -294,7 +294,7 @@ local pathNodes =
 }
 
 entity.onPath = function(mob)
-    tpz.path.patrol(mob, pathNodes)
+    xi.path.patrol(mob, pathNodes)
 end
 
 entity.onMobSpawn = function(mob)
@@ -304,7 +304,7 @@ end
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(pathNodes))
+        mob:pathThrough(xi.path.first(pathNodes))
     end
 end
 

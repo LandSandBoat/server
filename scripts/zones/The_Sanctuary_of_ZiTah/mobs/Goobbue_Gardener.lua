@@ -10,11 +10,11 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 114, 2, tpz.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 114, 2, xi.regime.type.FIELDS)
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.KEEPER_OF_HALIDOM_PH, 10, 7200) -- 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.KEEPER_OF_HALIDOM_PH, 10, 7200) -- 2 hours
 end
 
 return entity

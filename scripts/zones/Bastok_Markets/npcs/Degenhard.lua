@@ -12,21 +12,21 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
         npcUtil.tradeHasExactly(trade, {3541, 3542, 3543}) then
         player:startEvent(15)
-    elseif player:getQuestStatus(tpz.quest.log_id.BASTOK,tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 880) then
         player:startEvent(258)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
         player:startEvent(14)
     elseif player:getCharVar("BeatAroundTheBushin") == 3 then
         player:startEvent(342)
-    elseif player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_BARE_BONES) == QUEST_AVAILABLE then
+    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES) == QUEST_AVAILABLE then
         player:startEvent(256)
     else
         player:startEvent(255)
@@ -43,9 +43,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 342 then
         player:setCharVar("BeatAroundTheBushin", 4)
     elseif csid == 256 then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_BARE_BONES)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
     elseif csid == 258 then
-        if (npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_BARE_BONES, {ki = tpz.ki.MAP_OF_THE_DANGRUF_WADI, fame = 60})) then
+        if (npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_BARE_BONES, {ki = xi.ki.MAP_OF_THE_DANGRUF_WADI, fame = 60})) then
             player:confirmTrade()
         end
     end

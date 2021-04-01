@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.MEIKYO_SHISUI, 1, 0, 30)
+    player:addStatusEffect(xi.effect.MEIKYO_SHISUI, 1, 0, 30)
     player:addTP(3000)
 end
 

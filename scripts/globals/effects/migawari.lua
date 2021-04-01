@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MIGAWARI
+-- xi.effect.MIGAWARI
 -----------------------------------
 local effect_object = {}
 

@@ -9,27 +9,27 @@ local attachment_object = {}
 attachment_object.onEquip = function(pet)
     -- We do not have support to do a fraction of a percent so we rounded
     local frame = pet:getAutomatonFrame()
-    if frame == tpz.frames.HARLEQUIN then
-        pet:addMod(tpz.mod.HPP, 20)
-    elseif frame == tpz.frames.VALOREDGE then
-        pet:addMod(tpz.mod.HPP, 17)
-    elseif frame == tpz.frames.SHARPSHOT then
-        pet:addMod(tpz.mod.HPP, 22)
-    elseif frame == tpz.frames.STORMWAKER then
-        pet:addMod(tpz.mod.HPP, 25)
+    if frame == xi.frames.HARLEQUIN then
+        pet:addMod(xi.mod.HPP, 20)
+    elseif frame == xi.frames.VALOREDGE then
+        pet:addMod(xi.mod.HPP, 17)
+    elseif frame == xi.frames.SHARPSHOT then
+        pet:addMod(xi.mod.HPP, 22)
+    elseif frame == xi.frames.STORMWAKER then
+        pet:addMod(xi.mod.HPP, 25)
     end
 end
 
 attachment_object.onUnequip = function(pet)
     local frame = pet:getAutomatonFrame()
-    if frame == tpz.frames.HARLEQUIN then
-        pet:delMod(tpz.mod.HPP, 20)
-    elseif frame == tpz.frames.VALOREDGE then
-        pet:delMod(tpz.mod.HPP, 17)
-    elseif frame == tpz.frames.SHARPSHOT then
-        pet:delMod(tpz.mod.HPP, 22)
-    elseif frame == tpz.frames.STORMWAKER then
-        pet:delMod(tpz.mod.HPP, 25)
+    if frame == xi.frames.HARLEQUIN then
+        pet:delMod(xi.mod.HPP, 20)
+    elseif frame == xi.frames.VALOREDGE then
+        pet:delMod(xi.mod.HPP, 17)
+    elseif frame == xi.frames.SHARPSHOT then
+        pet:delMod(xi.mod.HPP, 22)
+    elseif frame == xi.frames.STORMWAKER then
+        pet:delMod(xi.mod.HPP, 25)
     end
 end
 
@@ -46,7 +46,7 @@ attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers > 0 then
         power = math.floor(12 + 3 * maneuvers + (pet:getMaxHP() * (2.4 + 0.6 * maneuvers) / 100))
     end
-    updateModPerformance(pet, tpz.mod.REGEN, 'autorepair_kit_ii_mod', power)
+    updateModPerformance(pet, xi.mod.REGEN, 'autorepair_kit_ii_mod', power)
 end
 
 return attachment_object

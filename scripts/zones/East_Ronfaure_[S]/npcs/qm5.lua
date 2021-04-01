@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS) == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.OXIDIZED_PLATE)) then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS) == QUEST_ACCEPTED) then
+        if (player:hasKeyItem(xi.ki.OXIDIZED_PLATE)) then
             player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
         else
             player:startEvent(3)
@@ -32,8 +32,8 @@ entity.onEventFinish = function(player, csid, option)
     -- print("CSID:", csid)
     -- print("RESULT:", option)
     if (csid == 3) then
-        player:addKeyItem(tpz.ki.OXIDIZED_PLATE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OXIDIZED_PLATE)
+        player:addKeyItem(xi.ki.OXIDIZED_PLATE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OXIDIZED_PLATE)
     end
 end
 

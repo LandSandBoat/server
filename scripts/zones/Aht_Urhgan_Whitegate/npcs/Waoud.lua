@@ -15,7 +15,7 @@ local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local anEmptyVessel = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+    local anEmptyVessel = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local StoneID = player:getCharVar("EmptyVesselStone")
 
@@ -26,12 +26,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anEmptyVessel = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+    local anEmptyVessel = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
     local anEmptyVesselProgress = player:getCharVar("AnEmptyVesselProgress")
     local divinationReady = vanaDay() > player:getCharVar("LastDivinationDay")
-    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
-    local transformations = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
+    local transformations = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
     local transformationsProgress = player:getCharVar("TransformationsProgress")
     local currentJob = player:getMainJob()
     local waoudNeedToZone = player:getLocalVar("WaoudNeedToZone")
@@ -57,8 +57,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(69) -- closing cutscene
 
     -- BEGINNINGS
-    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES
-            and currentJob == tpz.job.BLU and player:getMainLvl() >= AF1_QUEST_LEVEL then
+    elseif anEmptyVessel == QUEST_COMPLETED and beginnings == QUEST_AVAILABLE and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES
+            and currentJob == xi.job.BLU and player:getMainLvl() >= AF1_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -69,11 +69,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(63)
         end
     elseif beginnings == QUEST_ACCEPTED then
-        local brand1 = player:hasKeyItem(tpz.ki.BRAND_OF_THE_SPRINGSERPENT)
-        local brand2 = player:hasKeyItem(tpz.ki.BRAND_OF_THE_GALESERPENT)
-        local brand3 = player:hasKeyItem(tpz.ki.BRAND_OF_THE_FLAMESERPENT)
-        local brand4 = player:hasKeyItem(tpz.ki.BRAND_OF_THE_SKYSERPENT)
-        local brand5 = player:hasKeyItem(tpz.ki.BRAND_OF_THE_STONESERPENT)
+        local brand1 = player:hasKeyItem(xi.ki.BRAND_OF_THE_SPRINGSERPENT)
+        local brand2 = player:hasKeyItem(xi.ki.BRAND_OF_THE_GALESERPENT)
+        local brand3 = player:hasKeyItem(xi.ki.BRAND_OF_THE_FLAMESERPENT)
+        local brand4 = player:hasKeyItem(xi.ki.BRAND_OF_THE_SKYSERPENT)
+        local brand5 = player:hasKeyItem(xi.ki.BRAND_OF_THE_STONESERPENT)
         if brand1 and brand2 and brand3 and brand4 and brand5 then
             player:startEvent(707) -- reward immortal's scimitar
         else
@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- OMENS
-    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == tpz.job.BLU and player:getMainLvl() >= AF2_QUEST_LEVEL then
+    elseif beginnings == QUEST_COMPLETED and omens == QUEST_AVAILABLE and currentJob == xi.job.BLU and player:getMainLvl() >= AF2_QUEST_LEVEL then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -101,7 +101,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- TRANSFORMATIONS
-    elseif omens == QUEST_COMPLETED and transformations == QUEST_AVAILABLE and currentJob == tpz.job.BLU then
+    elseif omens == QUEST_COMPLETED and transformations == QUEST_AVAILABLE and currentJob == xi.job.BLU then
         if divinationReady then
             if waoudNeedToZone == 1 then
                 player:startEvent(78, player:getGil()) -- dummy questions, costs you 1000 gil
@@ -172,8 +172,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local beginnings = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+    local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
+    local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
@@ -186,7 +186,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setLocalVar("waoudNeedToZone", 1)
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 2)
-            player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+            player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
         elseif player:getGil() >= 1000 then
             player:setCharVar("LastDivinationDay", vanaDay())
             player:setCharVar("AnEmptyVesselProgress", 1)
@@ -206,22 +206,22 @@ entity.onEventFinish = function(player, csid, option)
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 705 and option == 1 then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
     elseif csid == 706 and option == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 707 then
-        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS, {item=17717})
 
     -- OMENS
     elseif csid == 710 and beginnings == QUEST_COMPLETED then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
         player:setCharVar("OmensProgress", 1)
     elseif csid == 711 and option == 1 and omensProgress == 1 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     elseif csid == 712 and omensProgress == 2 then
-        npcUtil.giveKeyItem(player, tpz.ki.SEALED_IMMORTAL_ENVELOPE)
+        npcUtil.giveKeyItem(player, xi.ki.SEALED_IMMORTAL_ENVELOPE)
         player:setCharVar("OmensProgress", 3)
     elseif csid == 713 and option == 1 and omensProgress == 3 and player:getGil() >= 1000 then
         player:delGil(1000)

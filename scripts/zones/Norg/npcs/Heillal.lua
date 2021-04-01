@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_BEGINNING then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.THE_BEGINNING then
         player:startEvent(281)
     else
         player:startEvent(64)

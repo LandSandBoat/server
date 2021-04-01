@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MAGIC_EVASION_DOWN
+-- xi.effect.MAGIC_EVASION_DOWN
 -----------------------------------
 local effect_object = {}
 

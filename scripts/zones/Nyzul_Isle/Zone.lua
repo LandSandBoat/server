@@ -19,7 +19,7 @@ zone_object.onInstanceZoneIn = function(player, instance)
         local entrypos = instance:getEntryPos()
         player:setPos(entrypos.x, entrypos.y, entrypos.z, entrypos.rot)
     end
-    if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.PATH_OF_DARKNESS) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.PATH_OF_DARKNESS) then
         cs = 51
     end
 

@@ -13,7 +13,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npcUtil.castingAnimation(npc, tpz.magic.spellGroup.BLACK, 16)
+    npcUtil.castingAnimation(npc, xi.magic.spellGroup.BLACK, 16)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -22,7 +22,7 @@ end
 entity.onTrigger = function(player, npc)
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 15) then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 15) then
         player:startEvent(623)
     else
         player:startEvent(228)

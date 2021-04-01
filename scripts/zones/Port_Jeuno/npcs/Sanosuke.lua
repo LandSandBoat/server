@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG) == QUEST_ACCEPTED) then
         aThiefinNorgCS = player:getCharVar("aThiefinNorgCS")
         if (aThiefinNorgCS == 1) then
             player:startEvent(304)

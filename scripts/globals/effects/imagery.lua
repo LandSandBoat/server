@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.IMAGERY
+-- xi.effect.IMAGERY
 -----------------------------------
 local effect_object = {}
 

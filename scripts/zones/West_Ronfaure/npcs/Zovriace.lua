@@ -1008,23 +1008,23 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(tpz.path.first(path))
+    npc:setPos(xi.path.first(path))
 end
 
 entity.onPath = function(npc)
-    if npc:atPoint(tpz.path.get(path, 288)) then
+    if npc:atPoint(xi.path.get(path, 288)) then
         GetNPCByID(npc:getID() + 4):showText(npc, ID.text.ZOVRIACE_REPORT)
         -- small delay after path finish
         npc:wait(8000)
     end
-    tpz.path.patrol(npc, path)
+    xi.path.patrol(npc, path)
 end
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED then
         player:showText(npc, ID.text.ZOVRIACE_DIALOG + 2)
     else
         player:showText(npc, ID.text.ZOVRIACE_DIALOG)

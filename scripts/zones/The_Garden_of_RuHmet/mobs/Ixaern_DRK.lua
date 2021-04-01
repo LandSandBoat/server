@@ -24,7 +24,7 @@ entity.onMobInitialize = function(mob)
             if target then
                 targetid = target:getShortID()
             end
-            mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
+            mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mob)
                 mob:setHP(mob:getMaxHP())
                 mob:setAnimationSub(3)
@@ -39,7 +39,7 @@ entity.onMobInitialize = function(mob)
             end)
         else
             -- death
-            mob:setMobMod(tpz.mobMod.NO_DROPS, 0)
+            mob:setMobMod(xi.mobMod.NO_DROPS, 0)
             DespawnMob(QnAernA)
             DespawnMob(QnAernB)
         end
@@ -55,11 +55,11 @@ end
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(1)
 
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {
-                id = tpz.jsa.BLOOD_WEAPON_IXDRK,
+                id = xi.jsa.BLOOD_WEAPON_IXDRK,
                 hpp = math.random(90, 95),
                 cooldown = 120,
                 endCode = function(mob)

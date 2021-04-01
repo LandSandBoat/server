@@ -11,17 +11,17 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 715, 2, tpz.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 715, 2, xi.regime.type.GROUNDS)
 
     -- Curses, Foiled A-Golem!?
-    if (player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)) then
-        player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
-        player:addKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)
+    if (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
+        player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
+        player:addKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
     end
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.GOLIATH_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.GOLIATH_PH, 10, 3600) -- 1 hour
 end
 
 return entity

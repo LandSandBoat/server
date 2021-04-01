@@ -13,11 +13,11 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -27,7 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-286.271, -21.619, 320.084, 255)
     end
 
-    if prevZone == tpz.zone.BEHEMOTHS_DOMINION and player:getCharVar("theTalekeepersGiftKilledNM") >= 3 then
+    if prevZone == xi.zone.BEHEMOTHS_DOMINION and player:getCharVar("theTalekeepersGiftKilledNM") >= 3 then
         cs = 100
     end
 
@@ -42,7 +42,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = tpz.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
+        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
     end
 end
 

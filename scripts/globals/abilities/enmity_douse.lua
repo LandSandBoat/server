@@ -16,7 +16,7 @@ end
 ability_object.onUseAbility = function(player, target, ability)
     if target:isMob() then
         local enmityShed = 100
-        if player:getMainJob() ~= tpz.job.BLM then
+        if player:getMainJob() ~= xi.job.BLM then
             enmityShed = 1000
         end
     end

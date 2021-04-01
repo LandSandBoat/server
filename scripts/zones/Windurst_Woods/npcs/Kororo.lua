@@ -17,9 +17,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local C2000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
-    local AGreetingCardian = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
-    local LPB = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LEGENDARY_PLAN_B)
+    local C2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
+    local AGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
+    local LPB = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
     local AGCcs = player:getCharVar("AGreetingCardian_Event")
     local AGCtime = player:getCharVar("AGreetingCardian_timer")
 
@@ -54,7 +54,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- A Greeting Cardian
     if csid == 296 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
         player:setCharVar("AGreetingCardian_Event", 2)
         player:setCharVar("AGreetingCardian_timer", os.time() + 60)
         player:needToZone(true) -- wait one minute and zone after this step
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(13330)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13330) -- Tourmaline Earring
             player:addFame(WINDURST, 30)
-            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
             player:needToZone(true) -- zone before starting Legendary Plan B
             player:setCharVar("AGreetingCardian_timer", 0)
             player:setCharVar("AGreetingCardian_Event", 0) -- finish cleanup of A Greeting Cardian variables

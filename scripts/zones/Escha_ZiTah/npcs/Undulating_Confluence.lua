@@ -19,7 +19,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 4 and option == 1 then
-        tpz.teleport.to(player, tpz.teleport.id.QUFIM_CONFLUENCE)
+        xi.teleport.to(player, xi.teleport.id.QUFIM_CONFLUENCE)
     end
 end
 

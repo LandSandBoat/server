@@ -28,7 +28,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)

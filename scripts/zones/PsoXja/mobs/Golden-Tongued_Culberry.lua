@@ -9,16 +9,16 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 6)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
 end
 
 entity.onMobFight = function(mob, target)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
     if target:isPet() then
-        mob:setMod(tpz.mod.FASTCAST, 100)
+        mob:setMod(xi.mod.FASTCAST, 100)
         mob:castSpell(367, target) -- Insta-death any pet with most enmity.
-        mob:setMod(tpz.mod.FASTCAST, 10)
+        mob:setMod(xi.mod.FASTCAST, 10)
     end
 end
 

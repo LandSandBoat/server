@@ -16,7 +16,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local base = math.random(10, 25)
-    local typeEffect = tpz.effect.BLINK
+    local typeEffect = xi.effect.BLINK
 
     skill:setMsg(MobBuffMove(mob, typeEffect, base, 0, 120))
     return typeEffect

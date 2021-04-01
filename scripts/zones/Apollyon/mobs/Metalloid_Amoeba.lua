@@ -7,9 +7,9 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.SLASHRES, 1500)
-    mob:setMod(tpz.mod.HTHRES, 0)
-    mob:setMod(tpz.mod.IMPACTRES, 0)
+    mob:setMod(xi.mod.SLASHRES, 1500)
+    mob:setMod(xi.mod.HTHRES, 0)
+    mob:setMod(xi.mod.IMPACTRES, 0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
@@ -22,13 +22,13 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local killCount = battlefield:getLocalVar("killCountF1")
         if killCount == 2 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]):setStatus(xi.status.NORMAL)
         elseif killCount == 4 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+1):setStatus(xi.status.NORMAL)
         elseif killCount == 8 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[1]+2):setStatus(xi.status.NORMAL)
         end
     end
 end

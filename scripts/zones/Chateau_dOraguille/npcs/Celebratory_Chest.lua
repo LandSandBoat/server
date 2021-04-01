@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.shop.celebratory(player)
+    xi.shop.celebratory(player)
     player:messageSpecial(ID.text.CELEBRATORY_GOODS)
 end
 

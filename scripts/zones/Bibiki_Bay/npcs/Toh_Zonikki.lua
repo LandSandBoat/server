@@ -76,7 +76,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if ( player:hasKeyItem(tpz.ki.CLAMMING_KIT)) then -- Player has clamming kit
+    if ( player:hasKeyItem(xi.ki.CLAMMING_KIT)) then -- Player has clamming kit
 
         if (player:getCharVar("ClammingKitBroken") == 1) then -- Broken bucket
             player:startEvent(30, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -101,7 +101,7 @@ entity.onEventUpdate = function(player, csid, option)
             enoughMoney = 1 --Player has enough Money
         end
 
-        player:updateEvent(tpz.ki.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0)
+        player:updateEvent(xi.ki.CLAMMING_KIT, enoughMoney, 0, 0, 0, 500, 0, 0)
     elseif  (csid == 29) then
         local clammingKitSize = player:getCharVar("ClammingKitSize")
 
@@ -114,17 +114,17 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 28) then
         if (option == 1) then -- Give 50pz clamming kit
             player:setCharVar("ClammingKitSize", 50)
-            player:addKeyItem(tpz.ki.CLAMMING_KIT)
+            player:addKeyItem(xi.ki.CLAMMING_KIT)
             player:delGil(500)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CLAMMING_KIT)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CLAMMING_KIT)
         end
     elseif (csid == 29) then
         if (option == 2) then -- Give player clammed items
 
             player:setCharVar("ClammingKitSize", 0)
             player:setCharVar("ClammingKitWeight", 0)
-            player:delKeyItem(tpz.ki.CLAMMING_KIT)
-            player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
+            player:delKeyItem(xi.ki.CLAMMING_KIT)
+            player:messageSpecial(ID.text.YOU_RETURN_THE, xi.ki.CLAMMING_KIT)
 
             giveClammedItems(player)
 
@@ -138,8 +138,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ClammingKitSize", 0)
         player:setCharVar("ClammingKitBroken", 0)
         player:setCharVar("ClammingKitWeight", 0)
-        player:delKeyItem(tpz.ki.CLAMMING_KIT)
-        player:messageSpecial(ID.text.YOU_RETURN_THE, tpz.ki.CLAMMING_KIT)
+        player:delKeyItem(xi.ki.CLAMMING_KIT)
+        player:messageSpecial(ID.text.YOU_RETURN_THE, xi.ki.CLAMMING_KIT)
     end
 end
 

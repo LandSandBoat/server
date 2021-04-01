@@ -29,16 +29,16 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = math.random(20, 25)
 
-    MobPhysicalStatusEffectMove(mob, target, skill, tpz.effect.ACCURACY_DOWN, power, 0, 60)
-    MobPhysicalStatusEffectMove(mob, target, skill, tpz.effect.ATTACK_DOWN, power, 0, 60)
-    MobPhysicalStatusEffectMove(mob, target, skill, tpz.effect.DEFENSE_DOWN, power, 0, 60)
+    MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.ACCURACY_DOWN, power, 0, 60)
+    MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.ATTACK_DOWN, power, 0, 60)
+    MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, power, 0, 60)
 
     local numhits = 1
     local accmod = 1
     local dmgmod = 2
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
 end
 

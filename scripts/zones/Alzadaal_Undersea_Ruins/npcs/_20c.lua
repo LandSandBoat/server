@@ -10,8 +10,8 @@ local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS) then
-        player:messageSpecial(ID.text.CANNOT_LEAVE, tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    if player:hasKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS) then
+        player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
     elseif player:getZPos() >= 77 and player:getZPos() <= 79 then
         player:messageSpecial(ID.text.STAGING_POINT_NYZUL)
         player:messageSpecial(ID.text.IMPERIAL_CONTROL)

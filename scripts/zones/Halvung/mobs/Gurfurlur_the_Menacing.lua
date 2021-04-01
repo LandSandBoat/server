@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
     for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do
         local pet = GetMobByID(i)
 
-        if pet:getCurrentAction() == tpz.act.ROAMING then
+        if pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
         end
     end
@@ -47,7 +47,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.TROLL_SUBJUGATOR)
+    player:addTitle(xi.title.TROLL_SUBJUGATOR)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 

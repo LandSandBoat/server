@@ -77,9 +77,9 @@ entity.onEventFinish = function(player, csid, option)
         elseif option == 2 then   -- Nation of Allegiance
             local nationDestination =
             {
-                [tpz.nation.SANDORIA] = {110,   0,  -7, 175, 231},
-                [tpz.nation.BASTOK  ] = { 90,   0, -67, 248, 234},
-                [tpz.nation.WINDURST] = {192, -12, 218,  60, 240}
+                [ xi.nation.SANDORIA] = {110,   0,  -7, 175, 231},
+                [ xi.nation.BASTOK  ] = { 90,   0, -67, 248, 234},
+                [ xi.nation.WINDURST] = {192, -12, 218,  60, 240}
             }
             player:setPos(unpack(nationDestination[player:getNation()]))
         end

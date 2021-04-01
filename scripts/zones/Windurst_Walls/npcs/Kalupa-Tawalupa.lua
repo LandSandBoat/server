@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ToBee = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+    local ToBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
     local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
     if (ToBeeOrNotStatus == 10) then

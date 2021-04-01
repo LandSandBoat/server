@@ -8,11 +8,11 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ALWAYS_AGGRO, 1) -- "Aggros regardless of level"
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1) -- "Aggros regardless of level"
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.MORBOLBANE)
+    player:addTitle(xi.title.MORBOLBANE)
 end
 
 entity.onMobDespawn = function(mob)

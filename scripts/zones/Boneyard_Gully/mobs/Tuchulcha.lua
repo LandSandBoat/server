@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
-    mob:setMobMod(tpz.mobMod.SUPERLINK, 0)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 0)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar("Sandpits", 0)
@@ -19,9 +19,9 @@ end
 
 -- Reset restHP when re-engaging after a sandpit
 entity.onMobEngaged = function(mob, target)
-    if mob:getMobMod(tpz.mobMod.NO_REST) == 1 then
-        mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
-        mob:setMobMod(tpz.mobMod.NO_REST, 0)
+    if mob:getMobMod(xi.mobMod.NO_REST) == 1 then
+        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+        mob:setMobMod(xi.mobMod.NO_REST, 0)
     end
 end
 
@@ -35,8 +35,8 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(276)
         mob:timer(4000, function(tuchulcha)
             tuchulcha:disengage()
-            tuchulcha:setMobMod(tpz.mobMod.NO_MOVE, 1)
-            tuchulcha:setMobMod(tpz.mobMod.NO_REST, 1)
+            tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
+            tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
             local pos_index = tuchulcha:getLocalVar("sand_pit" .. tuchulcha:getLocalVar('Sandpits'))
             local coords = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[pos_index]
             tuchulcha:setPos(coords)

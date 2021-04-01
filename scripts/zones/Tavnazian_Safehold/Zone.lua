@@ -16,7 +16,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -26,13 +26,13 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(27.971, -14.068, 43.735, 66)
     end
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.AN_INVITATION_WEST) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.AN_INVITATION_WEST) then
         if (player:getCharVar("PromathiaStatus") == 1) then
             cs = 101
         end
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.SHELTERING_DOUBT and player:getCharVar("PromathiaStatus") == 0) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.SHELTERING_DOUBT and player:getCharVar("PromathiaStatus") == 0) then
         cs = 107
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.CHAINS_AND_BONDS and player:getCharVar("PromathiaStatus") == 1) then
         cs = 114
     end
 
@@ -44,12 +44,12 @@ zone_object.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
-            if (player:getCurrentMission(COP) == tpz.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 2) then
+            if (player:getCurrentMission(COP) == xi.mission.id.cop.AN_ETERNAL_MELODY and player:getCharVar("PromathiaStatus") == 2) then
                 player:startEvent(105)
             end
         end,
         [2] = function (x)
-            if (player:getCurrentMission(COP) == tpz.mission.id.cop.SLANDEROUS_UTTERINGS and player:getCharVar("PromathiaStatus") == 0) then
+            if (player:getCurrentMission(COP) == xi.mission.id.cop.SLANDEROUS_UTTERINGS and player:getCharVar("PromathiaStatus") == 0) then
                 player:startEvent(112)
             end
         end,
@@ -67,13 +67,13 @@ end
 zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 101) then
-        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_INVITATION_WEST)
-        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LOST_CITY)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.AN_INVITATION_WEST)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LOST_CITY)
         player:setCharVar("PromathiaStatus", 0)
     elseif (csid == 105) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.AN_ETERNAL_MELODY)
-        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ANCIENT_VOWS)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.AN_ETERNAL_MELODY)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
     elseif (csid == 107) then
         player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 112) then

@@ -8,19 +8,19 @@ require("scripts/globals/conquest")
 -----------------------------------
 local entity = {}
 
-local teleporterNation = tpz.nation.WINDURST
+local teleporterNation = xi.nation.WINDURST
 local teleporterEvent  = 552
 
 entity.onTrigger = function(player, npc)
-    tpz.conquest.teleporterOnTrigger(player, teleporterNation, teleporterEvent)
+    xi.conquest.teleporterOnTrigger(player, teleporterNation, teleporterEvent)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.conquest.teleporterOnEventUpdate(player, csid, option, teleporterEvent)
+    xi.conquest.teleporterOnEventUpdate(player, csid, option, teleporterEvent)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.conquest.teleporterOnEventFinish(player, csid, option, teleporterEvent)
+    xi.conquest.teleporterOnEventFinish(player, csid, option, teleporterEvent)
 end
 
 return entity

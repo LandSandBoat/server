@@ -2,7 +2,7 @@
 https://ffxiclopedia.fandom.com/wiki/Category:Uragnites
 https://www.bg-wiki.com/bg/Category:Uragnite
 
-Uragnite mob can optionally be modified by calling tpz.mix.uragnite.config(mob, params) from within onMobSpawn.
+Uragnite mob can optionally be modified by calling xi.mix.uragnite.config(mob, params) from within onMobSpawn.
 
 params is a table that can contain the following keys:
     inShellSkillList : skill list given to mob when it enters shell (default: 250)
@@ -14,7 +14,7 @@ params is a table that can contain the following keys:
 
 Example:
 
-tpz.mix.uragnite.config(mob, {
+ xi.mix.uragnite.config(mob, {
     chanceToShell = 10,
     timeInShellMin = 45,
     timeInShellMin = 60,
@@ -26,8 +26,8 @@ require("scripts/globals/status")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.mix = tpz.mix or {}
-tpz.mix.uragnite = tpz.mix.uragnite or {}
+ xi.mix = xi.mix or {}
+ xi.mix.uragnite = xi.mix.uragnite or {}
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
@@ -35,28 +35,28 @@ g_mixins.families = g_mixins.families or {}
 local function enterShell(mob)
     mob:setAnimationSub(mob:getAnimationSub() + 1)
     mob:SetAutoAttackEnabled(false)
-    mob:addMod(tpz.mod.UDMGPHYS, -75)
-    mob:addMod(tpz.mod.UDMGRANGE, -75)
-    mob:addMod(tpz.mod.UDMGMAGIC, -75)
-    mob:addMod(tpz.mod.UDMGBREATH, -75)
-    mob:addMod(tpz.mod.REGEN, mob:getLocalVar("[uragnite]inShellRegen"))
-    mob:setMobMod(tpz.mobMod.SKILL_LIST, mob:getLocalVar("[uragnite]inShellSkillList"))
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+    mob:addMod(xi.mod.UDMGPHYS, -75)
+    mob:addMod(xi.mod.UDMGRANGE, -75)
+    mob:addMod(xi.mod.UDMGMAGIC, -75)
+    mob:addMod(xi.mod.UDMGBREATH, -75)
+    mob:addMod(xi.mod.REGEN, mob:getLocalVar("[uragnite]inShellRegen"))
+    mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar("[uragnite]inShellSkillList"))
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
 local function exitShell(mob)
     mob:setAnimationSub(mob:getAnimationSub() - 1)
     mob:SetAutoAttackEnabled(true)
-    mob:delMod(tpz.mod.UDMGPHYS, -75)
-    mob:delMod(tpz.mod.UDMGRANGE, -75)
-    mob:delMod(tpz.mod.UDMGMAGIC, -75)
-    mob:delMod(tpz.mod.UDMGBREATH, -75)
-    mob:delMod(tpz.mod.REGEN, mob:getLocalVar("[uragnite]inShellRegen"))
-    mob:setMobMod(tpz.mobMod.SKILL_LIST, mob:getLocalVar("[uragnite]noShellSkillList"))
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
+    mob:delMod(xi.mod.UDMGPHYS, -75)
+    mob:delMod(xi.mod.UDMGRANGE, -75)
+    mob:delMod(xi.mod.UDMGMAGIC, -75)
+    mob:delMod(xi.mod.UDMGBREATH, -75)
+    mob:delMod(xi.mod.REGEN, mob:getLocalVar("[uragnite]inShellRegen"))
+    mob:setMobMod(xi.mobMod.SKILL_LIST, mob:getLocalVar("[uragnite]noShellSkillList"))
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
-tpz.mix.uragnite.config = function(mob, params)
+ xi.mix.uragnite.config = function(mob, params)
     if params.inShellSkillList and type(params.inShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]inShellSkillList", params.inShellSkillList)
     end
@@ -80,7 +80,7 @@ end
 g_mixins.families.uragnite = function(mob)
 
     -- at spawn, give mob default skill lists for in-shell and out-of-shell states
-    -- these defaults can be overwritten by using tpz.mix.uragnite.config() in onMobSpawn.
+    -- these defaults can be overwritten by using xi.mix.uragnite.config() in onMobSpawn.
     mob:addListener("SPAWN", "URAGNITE_SPAWN", function(mob)
         mob:setLocalVar("[uragnite]noShellSkillList", 251)
         mob:setLocalVar("[uragnite]inShellSkillList", 250)
@@ -91,7 +91,7 @@ g_mixins.families.uragnite = function(mob)
     end)
 
     mob:addListener("TAKE_DAMAGE", "URAGNITE_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
-        if attackType == tpz.attackType.PHYSICAL then
+        if attackType == xi.attackType.PHYSICAL then
             if math.random(100) <= mob:getLocalVar("[uragnite]chanceToShell") and bit.band(mob:getAnimationSub(), 1) == 0 then
                 enterShell(mob)
                 local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))

@@ -16,12 +16,12 @@ entity.onTrigger = function(player, npc)
 
     local pantsQuestProgress = player:getCharVar("AF_SCH_PANTS")
 
-    player:delStatusEffect(tpz.effect.SNEAK)
+    player:delStatusEffect(xi.effect.SNEAK)
 
     -- SCH AF Quest - Legs
-    if (pantsQuestProgress > 0 and pantsQuestProgress < 3 and player:hasKeyItem(tpz.ki.DJINN_EMBER) == false) then
-        player:addKeyItem(tpz.ki.DJINN_EMBER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DJINN_EMBER)
+    if (pantsQuestProgress > 0 and pantsQuestProgress < 3 and player:hasKeyItem(xi.ki.DJINN_EMBER) == false) then
+        player:addKeyItem(xi.ki.DJINN_EMBER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DJINN_EMBER)
         player:setCharVar("AF_SCH_PANTS", pantsQuestProgress + 1)
         npc:hideNPC(60)
 

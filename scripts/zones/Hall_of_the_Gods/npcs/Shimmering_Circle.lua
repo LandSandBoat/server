@@ -17,14 +17,14 @@ entity.onTrigger = function(player, npc)
     local rozStat = player:getCharVar("ZilartStatus")
 
     if player:getZPos() < 200 then
-        if roz == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and rozStat == 0 then
+        if roz == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and rozStat == 0 then
             player:startEvent(3) -- First time.
         elseif
-            roz ~= tpz.mission.id.zilart.NONE and
+            roz ~= xi.mission.id.zilart.NONE and
             (
-                roz > tpz.mission.id.zilart.THE_GATE_OF_THE_GODS or
+                roz > xi.mission.id.zilart.THE_GATE_OF_THE_GODS or
                 (
-                    roz == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and
+                    roz == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and
                     rozStat > 0
                 )
             )

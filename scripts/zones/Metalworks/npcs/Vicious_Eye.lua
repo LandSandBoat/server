@@ -15,9 +15,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildSkillId = tpz.skill.SMITHING
-    local stock = tpz.shop.generalGuildStock[guildSkillId]
-    tpz.shop.generalGuild(player, stock, guildSkillId)
+    local guildSkillId = xi.skill.SMITHING
+    local stock = xi.shop.generalGuildStock[guildSkillId]
+    xi.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc, ID.text.VICIOUS_EYE_SHOP_DIALOG)
 end
 

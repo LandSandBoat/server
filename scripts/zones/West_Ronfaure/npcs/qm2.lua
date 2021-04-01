@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_DISMAYED_CUSTOMER) == QUEST_ACCEPTED and player:getCharVar("theDismayedCustomer") == 2 then
-        player:addKeyItem(tpz.ki.GULEMONTS_DOCUMENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.GULEMONTS_DOCUMENT)
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER) == QUEST_ACCEPTED and player:getCharVar("theDismayedCustomer") == 2 then
+        player:addKeyItem(xi.ki.GULEMONTS_DOCUMENT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.GULEMONTS_DOCUMENT)
         player:setCharVar("theDismayedCustomer", 0)
     else
         player:messageSpecial(ID.text.DISMAYED_CUSTOMER)

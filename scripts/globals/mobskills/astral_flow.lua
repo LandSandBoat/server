@@ -21,7 +21,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(tpz.msg.basic.USES)
+    skill:setMsg(xi.msg.basic.USES)
     local mobID = mob:getID()
     local avatar = 0
 
@@ -36,7 +36,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         SpawnMob(avatar):updateEnmity(mob:getTarget())
     end
 
-    return tpz.effect.ASTRAL_FLOW
+    return xi.effect.ASTRAL_FLOW
 end
 
 return mobskill_object

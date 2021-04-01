@@ -17,7 +17,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -25,7 +25,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-0.008, -33.595, 123.478, 62)
     end
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1 then
         cs = 3 -- doll telling "you're in the right area"
     end
     return cs
@@ -45,7 +45,7 @@ zone_object.onGameHour = function(zone)
         if moongate1:getLocalVar("romaeveActive") == 0 then
             -- Loop over the affected NPCs: Moongates, bridges and fountain
             for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                GetNPCByID(i):setAnimation(tpz.anim.OPEN_DOOR) -- Open them
+                GetNPCByID(i):setAnimation(xi.anim.OPEN_DOOR) -- Open them
             end
             moongate2:untargetable(true)
             moongate1:untargetable(true)
@@ -59,7 +59,7 @@ zone_object.onGameHour = function(zone)
 
         if moongate1:getLocalVar("romaeveActive") == 1 then
             for i = ID.npc.MOONGATE_OFFSET, ID.npc.MOONGATE_OFFSET + 7 do
-                GetNPCByID(i):setAnimation(tpz.anim.CLOSE_DOOR)
+                GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
             end
             moongate2:untargetable(false)
             moongate1:untargetable(false)

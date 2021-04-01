@@ -4,13 +4,13 @@
 --
 -----------------------------------
 tpz = tpz or {}
-tpz.pet = tpz.pet or {}
+ xi.pet = xi.pet or {}
 
 -----------------------------------
 -- Pet types
 -----------------------------------
 
-tpz.pet.type =
+ xi.pet.type =
 {
     AVATAR             = 0,
     WYVERN             = 1,
@@ -26,7 +26,7 @@ tpz.pet.type =
 --  Pet IDs
 -----------------------------------
 
-tpz.pet.id =
+ xi.pet.id =
 {
     --  Summoner
     FIRE_SPIRIT           =  0,
@@ -94,7 +94,7 @@ tpz.pet.id =
 -- Pet names
 -----------------------------------
 
-tpz.pet.name =
+ xi.pet.name =
 {
     AZURE         = 1,
     CERULEAN      = 2,
@@ -1224,8 +1224,8 @@ tpz.pet.name =
     FIRECRACKER   = 1126,
 }
 
-function tpz.pet.spawnPet(player, petID)
-    local effect = tpz.effect.DEBILITATION
+function xi.pet.spawnPet(player, petID)
+    local effect = xi.effect.DEBILITATION
 
     player:spawnPet(petID)
 

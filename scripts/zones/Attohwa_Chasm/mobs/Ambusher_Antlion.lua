@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/families/antlion_ambush")}
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 277)
+    xi.hunts.checkHunt(mob, player, 277)
 end
 
 return entity

@@ -23,22 +23,22 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local effect3 = target:dispelStatusEffect()
     local num = 0
 
-    if (effect ~= tpz.effect.NONE) then
+    if (effect ~= xi.effect.NONE) then
         num = num + 1
     end
 
-    if (effect2 ~= tpz.effect.NONE) then
+    if (effect2 ~= xi.effect.NONE) then
         num = num + 1
     end
 
-    if (effect3 ~= tpz.effect.NONE) then
+    if (effect3 ~= xi.effect.NONE) then
         num = num + 1
     end
 
     if (num == 0) then
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT) -- no effect
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else
-        skill:setMsg(tpz.msg.basic.DISAPPEAR_NUM)
+        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
     end
 
     return num

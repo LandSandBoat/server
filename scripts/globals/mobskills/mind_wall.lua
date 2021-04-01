@@ -20,8 +20,8 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    MobBuffMove(mob, tpz.effect.MAGIC_SHIELD, 2, 0, 30)
-    skill:setMsg(tpz.msg.basic.NONE)
+    MobBuffMove(mob, xi.effect.MAGIC_SHIELD, 2, 0, 30)
+    skill:setMsg(xi.msg.basic.NONE)
 
     return 0
 end

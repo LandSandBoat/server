@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.INNER_HORUTOTO_RUINS] =
+zones[ xi.zone.INNER_HORUTOTO_RUINS] =
 {
     text =
     {
@@ -56,4 +56,4 @@ zones[tpz.zone.INNER_HORUTOTO_RUINS] =
     },
 }
 
-return zones[tpz.zone.INNER_HORUTOTO_RUINS]
+return zones[ xi.zone.INNER_HORUTOTO_RUINS]

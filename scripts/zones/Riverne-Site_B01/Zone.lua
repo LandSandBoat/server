@@ -14,7 +14,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -27,7 +27,7 @@ end
 
 zone_object.afterZoneIn = function(player)
     if (ENABLE_COP_ZONE_CAP == 1) then -- ZONE WIDE LEVEL RESTRICTION
-        player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, 50, 0, 0) -- LV50 cap
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0) -- LV50 cap
     end
 end
 

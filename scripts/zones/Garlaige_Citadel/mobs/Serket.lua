@@ -9,7 +9,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobSpawn = function(mob)
@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.SERKET_BREAKER)
+    player:addTitle(xi.title.SERKET_BREAKER)
 end
 
 entity.onMobDespawn = function(mob)

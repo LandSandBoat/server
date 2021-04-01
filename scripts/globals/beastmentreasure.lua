@@ -8,15 +8,15 @@ require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
 tpz = tpz or {}
-tpz.beastmentreasure = tpz.beastmentreasure or {}
+ xi.beastmentreasure = xi.beastmentreasure or {}
 
 local zoneData = {
-    [tpz.zone.YUHTUNGA_JUNGLE] =
+    [ xi.zone.YUHTUNGA_JUNGLE] =
     {
         statusvar = 'BMT_Lowlands_Status',
         dsvar = 'BMT_Lowlands_Digsite',
-        mapid = tpz.ki.MAP_OF_THE_ELSHIMO_REGIONS,
-        day = tpz.day.WINDSDAY,
+        mapid = xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+        day = xi.day.WINDSDAY,
         fetchitems =
         {
             1480, -- Mermaid Head
@@ -30,12 +30,12 @@ local zoneData = {
             racial = {[887] = 3}    -- Coral Fragment
         }
     },
-    [tpz.zone.YHOATOR_JUNGLE] =
+    [ xi.zone.YHOATOR_JUNGLE] =
     {
         statusvar = 'BMT_Uplands_Status',
         dsvar = 'BMT_Uplands_Digsite',
-        mapid = tpz.ki.MAP_OF_THE_ELSHIMO_REGIONS,
-        day = tpz.day.LIGHTNINGDAY,
+        mapid = xi.ki.MAP_OF_THE_ELSHIMO_REGIONS,
+        day = xi.day.LIGHTNINGDAY,
         fetchitems =
         {
             1484, -- Rancor Mantle
@@ -49,12 +49,12 @@ local zoneData = {
             racial = {[4158] = 3}   -- Venom Potion
         }
     },
-    [tpz.zone.WESTERN_ALTEPA_DESERT] =
+    [ xi.zone.WESTERN_ALTEPA_DESERT] =
     {
         statusvar = 'BMT_Kuzotz_Status',
         dsvar = 'BMT_Kuzotz_Digsite',
-        mapid = tpz.ki.MAP_OF_THE_KUZOTZ_REGION,
-        day = tpz.day.EARTHSDAY,
+        mapid = xi.ki.MAP_OF_THE_KUZOTZ_REGION,
+        day = xi.day.EARTHSDAY,
         fetchitems =
         {
             1476, -- Xhifhut Strings
@@ -144,16 +144,16 @@ end
 local w_rocksgems   = convertToWeighted(sharedLoot.rocksgems)
 local w_seedsracial =
 {
-    [tpz.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[tpz.zone.YUHTUNGA_JUNGLE].loot.racial)),
-    [tpz.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[tpz.zone.YHOATOR_JUNGLE].loot.racial)),
-    [tpz.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[tpz.zone.WESTERN_ALTEPA_DESERT].loot.racial))
+    [ xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[ xi.zone.YUHTUNGA_JUNGLE].loot.racial)),
+    [ xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[ xi.zone.YHOATOR_JUNGLE].loot.racial)),
+    [ xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[ xi.zone.WESTERN_ALTEPA_DESERT].loot.racial))
 }
 local w_coins       = convertToWeighted(sharedLoot.coins)
 local w_sealsunique =
 {
-    [tpz.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[tpz.zone.YUHTUNGA_JUNGLE].loot.unique)),
-    [tpz.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[tpz.zone.YHOATOR_JUNGLE].loot.unique)),
-    [tpz.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[tpz.zone.WESTERN_ALTEPA_DESERT].loot.unique)),
+    [ xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[ xi.zone.YUHTUNGA_JUNGLE].loot.unique)),
+    [ xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[ xi.zone.YHOATOR_JUNGLE].loot.unique)),
+    [ xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[ xi.zone.WESTERN_ALTEPA_DESERT].loot.unique)),
 }
 
 local function weightedRandomSelect(w_loot)
@@ -193,7 +193,7 @@ local function startMapMarkerEvent(eventid, player, digsiteids)
     player:startEvent(eventid, player:getZoneID(), 0, pos.x * 1000, pos.z * 1000)
 end
 
-tpz.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
+ xi.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
     local zd = zoneData[player:getZoneID()]
     local status = player:getCharVar(zd.statusvar)
 
@@ -210,7 +210,7 @@ tpz.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
     end
 end
 
-tpz.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
+ xi.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
     local zd = zoneData[player:getZoneID()]
 
     if player:getCharVar(zd.statusvar) == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, zd.fetchitems) then
@@ -221,7 +221,7 @@ tpz.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
     end
 end
 
-tpz.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
+ xi.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     local zd = zoneData[player:getZoneID()]
 
     if csid == 100 then
@@ -232,7 +232,7 @@ tpz.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     end
 end
 
-tpz.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
+ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     --[[ Allows Peddlestox to appear on the appropriate day and disappear when the day is over.
     This function is called by each of the three zones where Peddlestox can appear: once on init,
     and once at the start of each new game day. Since Peddlestox is disabled in the db by default, we
@@ -240,8 +240,8 @@ tpz.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     local peddlestox = GetNPCByID(peddlestox)
 
     if zoneData[zone].day == VanadielDayOfTheWeek() then
-        peddlestox:setStatus(tpz.status.NORMAL)
-    elseif peddlestox:getStatus() == tpz.status.NORMAL then
+        peddlestox:setStatus(xi.status.NORMAL)
+    elseif peddlestox:getStatus() == xi.status.NORMAL then
         --[[
         TODO: Peddlestox should play a teleport animation and then fade out. On retail this is an 0x03A
             packet with animation id 122. Currently 0x3A is not implemented in Topaz. Retail capture of
@@ -252,11 +252,11 @@ tpz.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
           10 | 7A 00 00 BF                                           | z...
             An incomplete but similar 0x38 animation can be achieved with `entityAnimationPacket("shwh")`
         ]]--
-        peddlestox:setStatus(tpz.status.DISAPPEAR)
+        peddlestox:setStatus(xi.status.DISAPPEAR)
     end
 end
 
-tpz.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothingtext, digsiteids)
+ xi.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothingtext, digsiteids)
     local digsiteid = digsiteids[getAssignedDigSite(player)]
     local qmid = npc:getID()
 
@@ -268,7 +268,7 @@ tpz.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothi
     end
 end
 
-tpz.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
+ xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     local zoneid = player:getZoneID()
     local digsite = getAssignedDigSite(player)
 
@@ -287,7 +287,7 @@ tpz.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     end
 end
 
-tpz.beastmentreasure.handleQmOnEventFinish = function(player, csid)
+ xi.beastmentreasure.handleQmOnEventFinish = function(player, csid)
     local zoneid = player:getZoneID()
 
     if csid == 105 then
@@ -313,4 +313,4 @@ tpz.beastmentreasure.handleQmOnEventFinish = function(player, csid)
     end
 end
 
-tpz.bmt = tpz.beastmentreasure
+ xi.bmt = xi.beastmentreasure

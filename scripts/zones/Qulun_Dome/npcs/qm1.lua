@@ -16,9 +16,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.QUADAV_CREST) == false) then
-        player:addKeyItem(tpz.ki.QUADAV_CREST)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.QUADAV_CREST)
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.QUADAV_CREST) == false) then
+        player:addKeyItem(xi.ki.QUADAV_CREST)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.QUADAV_CREST)
     else
         player:messageSpecial(ID.text.YOU_FIND_NOTHING)
     end

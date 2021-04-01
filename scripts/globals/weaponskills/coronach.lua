@@ -40,7 +40,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     -- Apply aftermath
     if damage > 0 then
-        tpz.aftermath.addStatusEffect(player, tp, tpz.slot.RANGED, tpz.aftermath.type.RELIC)
+        xi.aftermath.addStatusEffect(player, tp, xi.slot.RANGED, xi.aftermath.type.RELIC)
     end
 
     return tpHits, extraHits, criticalHit, damage

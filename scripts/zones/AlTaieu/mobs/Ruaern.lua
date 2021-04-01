@@ -17,7 +17,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") < 3) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") < 3) then
         local aernKills =
         {
             [ID.mob.RUAERN_BASE + 0] = "Ru_aern_1-1KILL",

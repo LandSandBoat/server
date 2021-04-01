@@ -13,13 +13,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FoiledAGolem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local FoiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
 
     -- QUEST: CURSES, FOILED A-GOLEM!?
     if FoiledAGolem == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) then
+        if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
             player:startEvent(107)
         elseif player:getCharVar("foiledagolemdeliverycomplete") == 1 then
             player:startEvent(112)
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- CoP 5-2: DESIRES OF EMPTINESS
-    elseif copStatus > 8 and copMission == tpz.mission.id.cop.DESIRES_OF_EMPTINESS then
+    elseif copStatus > 8 and copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS then
         player:startEvent(212)
 
     -- DEFAULT DIALOG

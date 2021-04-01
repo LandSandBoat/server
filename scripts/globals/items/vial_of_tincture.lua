@@ -13,12 +13,12 @@ end
 
 item_object.onItemUse = function(target)
 
-    if (target:hasStatusEffect(tpz.effect.PLAGUE) == true) then
-        target:delStatusEffect(tpz.effect.PLAGUE)
+    if (target:hasStatusEffect(xi.effect.PLAGUE) == true) then
+        target:delStatusEffect(xi.effect.PLAGUE)
     end
 
-    if (target:hasStatusEffect(tpz.effect.DISEASE) == true) then
-        target:delStatusEffect(tpz.effect.DISEASE)
+    if (target:hasStatusEffect(xi.effect.DISEASE) == true) then
+        target:delStatusEffect(xi.effect.DISEASE)
     end
 end
 

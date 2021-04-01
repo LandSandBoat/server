@@ -25,28 +25,28 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local pINT = caster:getStat(tpz.mod.INT)
-    local mINT = target:getStat(tpz.mod.INT)
+    local pINT = caster:getStat(xi.mod.INT)
+    local mINT = target:getStat(xi.mod.INT)
     local dINT = pINT - mINT
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = nil
     local resist = applyResistance(caster, target, spell, params)
 
     if resist < 0.5 then
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST) --resist message
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST) --resist message
     else
-        if target:addStatusEffect(tpz.effect.SLOW, 2000, 0, getBlueEffectDuration(caster, resist, tpz.effect.SLOW)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+        if target:addStatusEffect(xi.effect.SLOW, 2000, 0, getBlueEffectDuration(caster, resist, xi.effect.SLOW)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     end
 
-    return tpz.effect.SLOW
+    return xi.effect.SLOW
 end
 
 return spell_object

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SOUL_VOICE
+-- xi.effect.SOUL_VOICE
 -----------------------------------
 local effect_object = {}
 

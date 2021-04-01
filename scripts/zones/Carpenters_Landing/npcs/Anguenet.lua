@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED and
         player:getCharVar('TEA_WITH_A_TONBERRY_PROG') == 1 and
         npcUtil.tradeHas(trade, 1683)
     then
@@ -22,7 +22,7 @@ end
 entity.onTrigger = function(player, npc)
     local teaGinseng = player:getCharVar('TEA_WITH_A_TONBERRY_PROG')
 
-    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY) == QUEST_ACCEPTED then
         if teaGinseng == 0 then
             player:startEvent(27, 0, 1683)
         elseif teaGinseng == 1 then
@@ -43,8 +43,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar('TEA_WITH_A_TONBERRY_PROG', 1)
     elseif csid == 29 then
         player:tradeComplete()
-        player:addKeyItem(tpz.keyItem.TONBERRY_BLACKBOARD)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.keyItem.TONBERRY_BLACKBOARD)
+        player:addKeyItem(xi.keyItem.TONBERRY_BLACKBOARD)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.TONBERRY_BLACKBOARD)
         player:setCharVar('TEA_WITH_A_TONBERRY_PROG', 2)
     end
 end

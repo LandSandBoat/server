@@ -8,12 +8,12 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
-    mob:setMobMod(tpz.mobMod.SUPERLINK, 0)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.SUPERLINK, 0)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

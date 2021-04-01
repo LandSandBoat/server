@@ -13,10 +13,10 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (target:addStatusEffect(tpz.effect.PHALANX, 10, 0, 180)) then -- Retail potency unknown, 10 is a guess. (someone 1000 needles test this thing!)
-        target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.PHALANX)
+    if (target:addStatusEffect(xi.effect.PHALANX, 10, 0, 180)) then -- Retail potency unknown, 10 is a guess. (someone 1000 needles test this thing!)
+        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.PHALANX)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

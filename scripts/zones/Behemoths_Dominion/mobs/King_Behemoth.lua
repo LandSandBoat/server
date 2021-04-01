@@ -13,26 +13,26 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 60)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 end
 
 entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN, {chance = 20, duration = math.random(5, 10)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 20, duration = math.random(5, 10)})
 end
 
 entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 218 then
-        spell:setAoE(tpz.magic.aoe.RADIAL)
-        spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
+        spell:setAoE(xi.magic.aoe.RADIAL)
+        spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280)
         spell:setMPCost(1)
@@ -40,7 +40,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.BEHEMOTH_DETHRONER)
+    player:addTitle(xi.title.BEHEMOTH_DETHRONER)
 end
 
 entity.onMobDespawn = function(mob)

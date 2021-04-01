@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.REGAIN, 50)
+    mob:addMod(xi.mod.REGAIN, 50)
     mob:SetAutoAttackEnabled(false)
 end
 

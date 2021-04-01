@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.KLIMAFORM
+-- xi.effect.KLIMAFORM
 -----------------------------------
 local effect_object = {}
 

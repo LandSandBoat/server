@@ -17,17 +17,17 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -292, -10, 90 , -258, 10, 105)
     quests.ffr.initZone(zone) -- register regions 2 through 6
     applyHalloweenNpcCostumes(zone:getID())
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
     end
 
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
         cs = 30036
     end
 
@@ -54,12 +54,12 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
-    if regionID==1 and player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2 then
+    if regionID==1 and player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2 then
         player:startEvent(758)
     end
     quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
@@ -79,11 +79,11 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif csid == 758 then
         player:setCharVar("COP_louverance_story", 3)
     elseif csid == 30035 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

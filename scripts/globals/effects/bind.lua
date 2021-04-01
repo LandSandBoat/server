@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BIND
+-- xi.effect.BIND
 -----------------------------------
 local effect_object = {}
 

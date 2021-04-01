@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SIRVENTE
+-- xi.effect.SIRVENTE
 -----------------------------------
 local effect_object = {}
 

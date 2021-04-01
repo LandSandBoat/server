@@ -10,7 +10,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local guardian = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    local guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
 
     if guardian == QUEST_ACCEPTED and trade:hasItemQty(4596, 1) then
         player:messageSpecial(ID.text.ALTAR_OFFERING, 0, 4596)
@@ -24,7 +24,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guardian = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    local guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
 
     if guardian == QUEST_ACCEPTED and (player:getCharVar("PamamaVar") == 1 or player:getCharVar("PamamaVar") == 2) then
         player:messageSpecial(ID.text.ALTAR_COMPLETED)

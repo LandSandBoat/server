@@ -9,11 +9,11 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 2) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_SALT_OF_THE_EARTH and player:getCharVar("BASTOK91") == 2) then
         local victory = true
         for i = ID.mob.GIGAPLASM, ID.mob.GIGAPLASM + 14 do
             if (GetMobByID(i):isAlive()) then

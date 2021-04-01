@@ -14,13 +14,13 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
-    tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end
 
 zone_object.onZoneIn = function( player, prevZone)
@@ -32,14 +32,14 @@ zone_object.onZoneIn = function( player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 48
-    elseif player:getCurrentMission(ASA) == tpz.mission.id.asa.BURGEONING_DREAD and prevZone == tpz.zone.WINDURST_WATERS then
+    elseif player:getCurrentMission(ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.WINDURST_WATERS then
         cs = 62
-    elseif player:getCurrentMission(ASA) == tpz.mission.id.asa.BURGEONING_DREAD and prevZone == tpz.zone.PORT_WINDURST then
+    elseif player:getCurrentMission(ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.PORT_WINDURST then
         cs = 63
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 50
     -- removed only "cs =" works onzonein and can't take parameters atm
-    -- elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    -- elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         -- player:startEvent(50, 0, 0, 0, 0, 0, 2) -- talking doll go east
     end
 
@@ -47,7 +47,7 @@ zone_object.onZoneIn = function( player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function( player, region)
@@ -69,8 +69,8 @@ end
 
 zone_object.onEventFinish = function( player, csid, option)
     if csid == 62 or csid == 63 then
-        player:completeMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.BURGEONING_DREAD)
-        player:addMission(tpz.mission.log_id.ASA, tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
+        player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
+        player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD)
     end
 end
 

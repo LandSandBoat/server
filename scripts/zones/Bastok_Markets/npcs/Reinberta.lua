@@ -12,15 +12,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.GOLDSMITHING)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.GOLDSMITHING)
 
     if
         newRank > 9 and
         player:getCharVar("GoldsmithingExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_GOLDSMITH)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
+            player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
             player:startEvent(301, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("GoldsmithingExpertQuest",0)
             player:setLocalVar("GoldsmithingTraded",1)
@@ -28,23 +28,23 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(301, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.GOLDSMITHING, newRank)
+        player:setSkillRank(xi.skill.GOLDSMITHING, newRank)
         player:startEvent(301, 0, 0, 0, 0, newRank)
         player:setLocalVar("GoldsmithingTraded",1)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.GOLDSMITHING)
-    local testItem = getTestItem(player, npc, tpz.skill.GOLDSMITHING)
+    local craftSkill = player:getSkillLevel(xi.skill.GOLDSMITHING)
+    local testItem = getTestItem(player, npc, xi.skill.GOLDSMITHING)
     local guildMember = isGuildMember(player, 6)
-    local rankCap = getCraftSkillCap(player, tpz.skill.GOLDSMITHING)
+    local rankCap = getCraftSkillCap(player, xi.skill.GOLDSMITHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.GOLDSMITHING)
+    local Rank = player:getSkillRank(xi.skill.GOLDSMITHING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("GoldsmithingExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_GOLDSMITH) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_GOLDSMITH) then
             expertQuestStatus = 600
         else
             expertQuestStatus = 550

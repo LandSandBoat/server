@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 local item_object = {}
 
 item_object.onFurniturePlaced = function(player)
-    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK) == QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK) == QUEST_AVAILABLE then
         player:setCharVar("[MS1]BedPlaced", 1)
     end
 end

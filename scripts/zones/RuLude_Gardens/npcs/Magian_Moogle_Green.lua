@@ -34,8 +34,8 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    local LearnerLog = player:hasKeyItem(tpz.ki.MAGIAN_LEARNERS_LOG)
-    local TrialLog = player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG)
+    local LearnerLog = player:hasKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
+    local TrialLog = player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG)
     if (player:getMainLvl() < 30) then
         player:startEvent(10151)
     elseif (player:getCharVar("MetGreenMagianMog") == 0 and LearnerLog == false) then
@@ -54,9 +54,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 10160 and option == 1) then
-        if (player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIAN_LEARNERS_LOG)
-            player:addKeyItem(tpz.ki.MAGIAN_LEARNERS_LOG)
+        if (player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) == false) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIAN_LEARNERS_LOG)
+            player:addKeyItem(xi.ki.MAGIAN_LEARNERS_LOG)
         end
         player:setCharVar("MetGreenMagianMog", 1)
     --elseif

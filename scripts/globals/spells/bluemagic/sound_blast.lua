@@ -25,21 +25,21 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
-    params.effect = tpz.effect.INT_DOWN
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.effect = xi.effect.INT_DOWN
     local resist = applyResistance(caster, target, spell, params)
     local duration = 30 * resist
     local power = 6
 
     if (resist > 0.5) then -- Do it!
         if (target:addStatusEffect(params.effect, power, 0, duration)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return params.effect

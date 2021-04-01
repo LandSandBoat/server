@@ -9,7 +9,7 @@ require("scripts/quests/tutorial")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobRoam = function(mob)
@@ -20,11 +20,11 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.EVA_DOWN)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVA_DOWN)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.tutorial.onMobDeath(player)
+    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

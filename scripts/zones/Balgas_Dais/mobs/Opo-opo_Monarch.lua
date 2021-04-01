@@ -12,12 +12,12 @@ entity.onMobFight = function(mob, target)
     if (GetMobByID(partner):isDead() and mob:getLocalVar("buffed") == 0) then
         mob:setLocalVar("buffed", 1)
         mob:addHP(mob:getMaxHP()/2)
-        mob:addMod(tpz.mod.ATT, 500)
+        mob:addMod(xi.mod.ATT, 500)
         if(math.random(2)==2) then
-            mob:addMod(tpz.mod.UDMGPHYS, -100)
-            mob:addMod(tpz.mod.UDMGRANGE, -100)
+            mob:addMod(xi.mod.UDMGPHYS, -100)
+            mob:addMod(xi.mod.UDMGRANGE, -100)
         else
-            mob:setMod(tpz.mod.UDMGMAGIC, -100)
+            mob:setMod(xi.mod.UDMGMAGIC, -100)
         end
     end
 end

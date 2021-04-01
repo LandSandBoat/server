@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.EAGLE_EYE_SHOT
+-- xi.effect.EAGLE_EYE_SHOT
 -----------------------------------
 local effect_object = {}
 

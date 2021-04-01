@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ENCHANTMENT
+-- xi.effect.ENCHANTMENT
 -----------------------------------
 local effect_object = {}
 

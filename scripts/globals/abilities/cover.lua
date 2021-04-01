@@ -13,7 +13,7 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if target == nil or target:getID() == player:getID() or not target:isPC() then
-        return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
+        return xi.msg.basic.CANNOT_PERFORM_TARG, 0
     else
         return 0, 0
     end
@@ -21,12 +21,12 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local baseDuration = 15
-    local bonusTime    = utils.clamp(math.floor((player:getStat(tpz.mod.VIT) + player:getStat(tpz.mod.MND) - target:getStat(tpz.mod.VIT) * 2) / 4), 0, 15)
-    local duration     = baseDuration + bonusTime + player:getMerit(tpz.merit.COVER_EFFECT_LENGTH) + player:getMod(tpz.mod.COVER_DURATION)
+    local bonusTime    = utils.clamp(math.floor((player:getStat(xi.mod.VIT) + player:getStat(xi.mod.MND) - target:getStat(xi.mod.VIT) * 2) / 4), 0, 15)
+    local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION)
 
-    player:addStatusEffect(tpz.effect.COVER, player:getMod(tpz.mod.COVER_TO_MP), 0, duration)
+    player:addStatusEffect(xi.effect.COVER, player:getMod(xi.mod.COVER_TO_MP), 0, duration)
     player:setLocalVar("COVER_ABILITY_TARGET", target:getID())
-    ability:setMsg(tpz.msg.basic.COVER_SUCCESS)
+    ability:setMsg(xi.msg.basic.COVER_SUCCESS)
 end
 
 

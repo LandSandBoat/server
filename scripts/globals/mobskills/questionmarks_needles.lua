@@ -19,9 +19,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- "Seen totals ranging from 15, 000 to 55, 000 needles."
     local needles = math.random(15000, 55000) / skill:getTotalTargets()
 
-    local dmg = MobFinalAdjustments(needles, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.LIGHT, MOBPARAM_WIPE_SHADOWS)
+    local dmg = MobFinalAdjustments(needles, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.LIGHT, MOBPARAM_WIPE_SHADOWS)
 
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.LIGHT)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.LIGHT)
 
     return dmg
 end

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PENALTY
+-- xi.effect.PENALTY
 -----------------------------------
 local effect_object = {}
 

@@ -10,20 +10,20 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
 entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
-    mob:addMod(tpz.mod.SLEEPRES, 50)
-    mob:addMod(tpz.mod.LULLABYRES, 50)
-    mob:addMod(tpz.mod.STUNRES, 50)
-    mob:addMod(tpz.mod.DMGMAGIC, 80)
+    mob:addMod(xi.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.LULLABYRES, 50)
+    mob:addMod(xi.mod.STUNRES, 50)
+    mob:addMod(xi.mod.DMGMAGIC, 80)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
     if
-        player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.LIGHTBRINGER and
+        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and
         player:getCharVar("MissionStatus") == 5 and
         GetMobByID(ID.mob.NIO_HUM):isDead()
     then

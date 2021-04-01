@@ -14,16 +14,16 @@ end
 
 item_object.onItemUse = function(target)
     local worked = false
-    if (not target:hasStatusEffect(tpz.effect.REGEN)) then
-        target:addStatusEffect(tpz.effect.REGEN, 5, 3, 300)
+    if (not target:hasStatusEffect(xi.effect.REGEN)) then
+        target:addStatusEffect(xi.effect.REGEN, 5, 3, 300)
         worked = true
     end
-    if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
-        target:addStatusEffect(tpz.effect.REFRESH, 5, 3, 300)
+    if (not target:hasStatusEffect(xi.effect.REFRESH)) then
+        target:addStatusEffect(xi.effect.REFRESH, 5, 3, 300)
         worked = true
     end
     if (not worked) then
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

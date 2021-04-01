@@ -37,13 +37,13 @@ function onTrigger(player, itemId, target)
     end
 
     -- search target inventory for item, and delete if found
-    for i = tpz.inv.INVENTORY, tpz.inv.WARDROBE4 do -- inventory locations enums
+    for i = xi.inv.INVENTORY, xi.inv.WARDROBE4 do -- inventory locations enums
         if (targ:hasItem(itemId, i)) then
             targ:delItem(itemId, 1, i)
             player:PrintToPlayer(string.format("Item %i was deleted from %s.", itemId, targ:getName()))
             break
         end
-        if (i == tpz.inv.WARDROBE4) then -- Wardrobe 4 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
+        if (i == xi.inv.WARDROBE4) then -- Wardrobe 4 is the last inventory location, if it reaches this point then the player does not have the item anywhere.
             player:PrintToPlayer(string.format("%s does not have item %i.", targ:getName(), itemId))
         end
     end

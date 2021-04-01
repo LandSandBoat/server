@@ -18,7 +18,7 @@ end
 
 item_object.onItemUse = function(target)
     if (target:getCampaignAllegiance() > 0) then
-        target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.RETRACE, 0, 2)
+        target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 2)
     end
 end
 

@@ -14,15 +14,15 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.TERROR
+    local typeEffect = xi.effect.TERROR
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 10)
 
     local count = target:dispelAllStatusEffect()
 
     if (count == 0) then
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else
-        skill:setMsg(tpz.msg.basic.DISAPPEAR_NUM)
+        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
     end
 
     return count

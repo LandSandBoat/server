@@ -12,12 +12,12 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.FAN_DANCE) then
-        return tpz.msg.basic.UNABLE_TO_USE_JA2, 0
-    elseif player:hasStatusEffect(tpz.effect.TRANCE) then
+    if player:hasStatusEffect(xi.effect.FAN_DANCE) then
+        return xi.msg.basic.UNABLE_TO_USE_JA2, 0
+    elseif player:hasStatusEffect(xi.effect.TRANCE) then
         return 0, 0
     elseif player:getTP() < 350 then
-        return tpz.msg.basic.NOT_ENOUGH_TP, 0
+        return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
         return 0, 0
     end
@@ -25,15 +25,15 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance.
-    if not player:hasStatusEffect(tpz.effect.TRANCE) then
+    if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(350)
     end
 
-    local duration = 120 + player:getMod(tpz.mod.SAMBA_DURATION)
-    duration = duration * (100 + player:getMod(tpz.mod.SAMBA_PDURATION)) / 100
-    player:delStatusEffect(tpz.effect.DRAIN_SAMBA)
-    player:delStatusEffect(tpz.effect.ASPIR_SAMBA)
-    player:addStatusEffect(tpz.effect.HASTE_SAMBA, 500 + player:getMerit(tpz.merit.HASTE_SAMBA_EFFECT), 0, duration)
+    local duration = 120 + player:getMod(xi.mod.SAMBA_DURATION)
+    duration = duration * (100 + player:getMod(xi.mod.SAMBA_PDURATION)) / 100
+    player:delStatusEffect(xi.effect.DRAIN_SAMBA)
+    player:delStatusEffect(xi.effect.ASPIR_SAMBA)
+    player:addStatusEffect(xi.effect.HASTE_SAMBA, 500 + player:getMerit(xi.merit.HASTE_SAMBA_EFFECT), 0, duration)
 end
 
 return ability_object

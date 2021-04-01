@@ -14,10 +14,10 @@ end
 
 item_object.onItemUse = function(target)
     local duration = math.random(60, 180)
-    if (target:hasStatusEffect(tpz.effect.INVISIBLE)) then
-        target:delStatusEffect(tpz.effect.INVISIBLE)
+    if (target:hasStatusEffect(xi.effect.INVISIBLE)) then
+        target:delStatusEffect(xi.effect.INVISIBLE)
     end
-    target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
+    target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
 end
 
 return item_object

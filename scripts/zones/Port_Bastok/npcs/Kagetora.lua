@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
 
         local AyameAndKaede = player:getCharVar("AyameAndKaede_Event")
 
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif (player:getCharVar("twentyInPirateYearsCS") == 1) then
         player:startEvent(261)
-    elseif (player:getCharVar("FadedPromises") == 2 and player:hasKeyItem(tpz.ki.DIARY_OF_MUKUNDA)) then
+    elseif (player:getCharVar("FadedPromises") == 2 and player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)) then
         player:startEvent(296)
     else
         player:startEvent(23)

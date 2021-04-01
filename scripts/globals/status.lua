@@ -12,7 +12,7 @@ tpz = tpz or {}
 -- Zone Misc Flags
 -----------------------------------
 
-tpz.zoneMisc =
+ xi.zoneMisc =
 {
     NONE       = 0x0000, -- Able to be used in any area
     ESCAPE     = 0x0001, -- Ability to use Escape Spell
@@ -33,7 +33,7 @@ tpz.zoneMisc =
 -- Job IDs
 -----------------------------------
 
-tpz.job =
+ xi.job =
 {
     NONE            =  0,
     WAR             =  1,
@@ -59,13 +59,13 @@ tpz.job =
     GEO             = 21,
     RUN             = 22,
 }
-tpz.MAX_JOB_TYPE = 23
+ xi.MAX_JOB_TYPE = 23
 
 -----------------------------------
 -- Race IDs
 -----------------------------------
 
-tpz.race =
+ xi.race =
 {
     HUME_M   = 1,
     HUME_F   = 2,
@@ -81,7 +81,7 @@ tpz.race =
 -- STATUSES
 -----------------------------------
 
-tpz.status =
+ xi.status =
 {
     NORMAL          =  0,
     UPDATE          =  1,
@@ -98,7 +98,7 @@ tpz.status =
 -- additional effects animations from battleentity.h
 -----------------------------------
 
-tpz.subEffect =
+ xi.subEffect =
 {
     -- ATTACKS
     FIRE_DAMAGE         = 1,   -- 110000        3
@@ -171,7 +171,7 @@ tpz.subEffect =
 -- They are simply for convenience.
 -----------------------------------
 
-tpz.effect =
+ xi.effect =
 {
     KO                       = 0,
     WEAKNESS                 = 1,
@@ -841,7 +841,7 @@ tpz.effect =
 -- Effect Flags
 -----------------------------------
 
-tpz.effectFlag =
+ xi.effectFlag =
 {
     NONE            = 0x0000,
     DISPELABLE      = 0x0001,
@@ -876,13 +876,13 @@ tpz.effectFlag =
 -----------------------------------
 
 function removeSleepEffects(target)
-    target:delStatusEffect(tpz.effect.SLEEP_I)
-    target:delStatusEffect(tpz.effect.SLEEP_II)
-    target:delStatusEffect(tpz.effect.LULLABY)
+    target:delStatusEffect(xi.effect.SLEEP_I)
+    target:delStatusEffect(xi.effect.SLEEP_II)
+    target:delStatusEffect(xi.effect.LULLABY)
 end
 
 function hasSleepEffects(target)
-    return target:hasStatusEffect(tpz.effect.SLEEP_I) or target:hasStatusEffect(tpz.effect.SLEEP_II) or target:hasStatusEffect(tpz.effect.LULLABY)
+    return target:hasStatusEffect(xi.effect.SLEEP_I) or target:hasStatusEffect(xi.effect.SLEEP_II) or target:hasStatusEffect(xi.effect.LULLABY)
 end
 
 -----------------------------------
@@ -892,11 +892,11 @@ end
 --
 -- Even if the particular mod is not completely (or at all) implemented yet, you can still script the effects using these codes.
 --
--- Example: target:getMod(tpz.mod.STR) will get the sum of STR bonuses/penalties from gear, food, STR Etude, Absorb-STR, and any other STR-related buff/debuff.
+-- Example: target:getMod(xi.mod.STR) will get the sum of STR bonuses/penalties from gear, food, STR Etude, Absorb-STR, and any other STR-related buff/debuff.
 -- Note that the above will ignore base statistics, and that getStat() should be used for stats, Attack, and Defense, while getACC(), getRACC(), and getEVA() also exist.
 -----------------------------------
 
-tpz.mod =
+ xi.mod =
 {
     NONE                            = 0,
     DEF                             = 1,
@@ -1587,7 +1587,7 @@ tpz.mod =
     -- SPARE = 988, -- stuff
 }
 
-tpz.latent =
+ xi.latent =
 {
     HP_UNDER_PERCENT         = 0,  -- hp less than or equal to % - PARAM: HP PERCENT
     HP_OVER_PERCENT          = 1,  -- hp more than % - PARAM: HP PERCENT
@@ -1718,7 +1718,7 @@ local MCATEGORY_RUN_2 = 0x0D80
 local MCATEGORY_START = 0x0040
 local MCATEGORY_COUNT = 0x0D80
 
-tpz.merit =
+ xi.merit =
 {
     -- HP
     MAX_HP                      = MCATEGORY_HP_MP + 0x00,
@@ -2118,7 +2118,7 @@ tpz.merit =
 -- Inventory locations
 -----------------------------------
 
-tpz.inventoryLocation =
+ xi.inventoryLocation =
 {
     INVENTORY       = 0,
     MOGSAFE         = 1,
@@ -2134,13 +2134,13 @@ tpz.inventoryLocation =
     WARDROBE3       = 11,
     WARDROBE4       = 12,
 }
-tpz.inv = tpz.inventoryLocation
+ xi.inv = xi.inventoryLocation
 
 -----------------------------------
 -- Equipment Slots
 -----------------------------------
 
-tpz.slot =
+ xi.slot =
 {
     MAIN   = 0,
     SUB    = 1,
@@ -2159,13 +2159,13 @@ tpz.slot =
     RING2  = 14,
     BACK   = 15,
 }
-tpz.MAX_SLOTID  = 15
+ xi.MAX_SLOTID  = 15
 
 -----------------------------------
 -- Objtype Definitions
 -----------------------------------
 
-tpz.objType =
+ xi.objType =
 {
     PC     = 0x01,
     NPC    = 0x02,
@@ -2180,7 +2180,7 @@ tpz.objType =
 -- Attack Type
 -----------------------------------
 
-tpz.attackType =
+ xi.attackType =
 {
     NONE     = 0,
     PHYSICAL = 1,
@@ -2194,7 +2194,7 @@ tpz.attackType =
 -- Damage Type
 -----------------------------------
 
-tpz.damageType =
+ xi.damageType =
 {
     NONE      = 0,
     PIERCING  = 1,
@@ -2225,7 +2225,7 @@ tpz.damageType =
 -- Allegiance
 -----------------------------------
 
-tpz.allegiance =
+ xi.allegiance =
 {
     MOB       = 0,
     PLAYER    = 1,
@@ -2238,7 +2238,7 @@ tpz.allegiance =
 -- Targetting for auras relative to objtype
 -----------------------------------
 
-tpz.auraTarget =
+ xi.auraTarget =
 {
     ALLIES  = 0,
     ENEMIES = 1,
@@ -2250,7 +2250,7 @@ tpz.auraTarget =
 -- always edit both
 -----------------------------------
 
-tpz.mobMod =
+ xi.mobMod =
 {
     NONE                = 0,
     GIL_MIN             = 1,  -- minimum gil drop -- spawn mod only
@@ -2329,7 +2329,7 @@ tpz.mobMod =
 -- Job Specials (1hr / 2hr moves)
 -----------------------------------
 
-tpz.jobSpecialAbility =
+ xi.jobSpecialAbility =
 {
     MIGHTY_STRIKES      = 688,
     MIGHTY_STRIKES_MAAT = 1008,
@@ -2432,13 +2432,13 @@ tpz.jobSpecialAbility =
     -- ELEMENTAL_SFORZO     = 3479,
      BOLSTER              = 3482,
 }
-tpz.jsa = tpz.jobSpecialAbility
+ xi.jsa = xi.jobSpecialAbility
 
 -----------------------------------
 -- Skills
 -----------------------------------
 
-tpz.skill =
+ xi.skill =
 {
     -- Combat Skills
     NONE = 0,
@@ -2508,7 +2508,7 @@ tpz.skill =
 -- Craft Skill Ranks
 -----------------------------------
 
-tpz.craftRank =
+ xi.craftRank =
 {
     AMATEUR     = 0,
     RECRUIT     = 1,
@@ -2533,7 +2533,7 @@ tpz.craftRank =
 -- Recast IDs
 -----------------------------------
 
-tpz.recast =
+ xi.recast =
 {
     ITEM     = 0,
     MAGIC    = 1,
@@ -2544,7 +2544,7 @@ tpz.recast =
 -- ACTION IDs
 -----------------------------------
 
-tpz.action =
+ xi.action =
 {
     NONE                 = 0,
     ATTACK               = 1,
@@ -2584,13 +2584,13 @@ tpz.action =
     MOBABILITY_INTERRUPT = 35,
     LEAVE                = 36,
 }
-tpz.act = tpz.action
+ xi.act = xi.action
 
 -----------------------------------
 -- ECOSYSTEM IDs
 -----------------------------------
 
-tpz.ecosystem =
+ xi.ecosystem =
 {
     ERROR          = 0,
     AMORPH         = 1,
@@ -2615,13 +2615,13 @@ tpz.ecosystem =
     VERMIN         = 20,
     VORAGEAN       = 21,
 }
-tpz.eco = tpz.ecosystem
+ xi.eco = xi.ecosystem
 
 -----------------------------------
 -- Behavior bits
 -----------------------------------
 
-tpz.behavior =
+ xi.behavior =
 {
     NONE         = 0x000,
     NO_DESPAWN   = 0x001, -- mob does not despawn on death
@@ -2635,7 +2635,7 @@ tpz.behavior =
 -- Elevator IDs
 -----------------------------------
 
-tpz.elevator =
+ xi.elevator =
 {
     TIMED_AUTOMATIC           = 0,
     DAVOI_LIFT                = 1,
@@ -2647,7 +2647,7 @@ tpz.elevator =
 -- Item Type
 -----------------------------------
 
-tpz.itemType =
+ xi.itemType =
 {
     BASIC       = 0x00,
     GENERAL     = 0x01,
@@ -2664,7 +2664,7 @@ tpz.itemType =
 -- Animations
 -----------------------------------
 
-tpz.animation =
+ xi.animation =
 {
     NONE                    = 0,
     ATTACK                  = 1,
@@ -2703,13 +2703,13 @@ tpz.animation =
     MOUNT                   = 85,
     -- TRUST                = 90, -- This is the animation for a trust NPC spawning in.
 }
-tpz.anim = tpz.animation
+ xi.anim = xi.animation
 
 -----------------------------------
 -- Mounts
 -----------------------------------
 
-tpz.mount =
+ xi.mount =
 {
     CHOCOBO        = 0,
     QUEST_RAPTOR   = 1,
@@ -2748,7 +2748,7 @@ tpz.mount =
 -- Automaton Frame IDs
 -----------------------------------
 
-tpz.frames =
+ xi.frames =
 {
     HARLEQUIN  = 0x20,
     VALOREDGE  = 0x21,
@@ -2760,7 +2760,7 @@ tpz.frames =
 -- Item Check Params
 -----------------------------------
 
-tpz.itemCheck =
+ xi.itemCheck =
 {
     NONE    = 0,
     EQUIP   = 1,
@@ -2770,7 +2770,7 @@ tpz.itemCheck =
 -----------------------------------
 -- Emote Values
 -----------------------------------
-tpz.emote =
+ xi.emote =
 {
     POINT = 0,
     BOW = 1,
@@ -2823,7 +2823,7 @@ tpz.emote =
     JOB = 74
 }
 
-tpz.emoteMode =
+ xi.emoteMode =
 {
     ALL = 0,
     TEXT = 1,
@@ -2834,7 +2834,7 @@ tpz.emoteMode =
 -- Relic/Mythic/Empyrean tables
 -----------------------------------
 
-tpz.relicIDs =
+ xi.relicIDs =
 {
     SPHARAI       = 0,
     MANDAU        = 1,
@@ -2854,69 +2854,69 @@ tpz.relicIDs =
     AEGIS         = 15
 }
 
-tpz.relicTiers =
+ xi.relicTiers =
 {
-    [tpz.relicIDs.SPHARAI] =
+    [ xi.relicIDs.SPHARAI] =
     {
         18264, 18265, 18637, 18651, 18665, 19746, 19839, 20480, 20481, 20509
     },
-    [tpz.relicIDs.MANDAU] =
+    [ xi.relicIDs.MANDAU] =
     {
         18270, 18271, 18638, 18652, 18666, 19747, 19840, 20555, 20556, 20583
     },
-    [tpz.relicIDs.EXCALIBUR] =
+    [ xi.relicIDs.EXCALIBUR] =
     {
         18276, 18277, 18639, 18653, 18667, 19748, 19841, 20645, 20646, 20685
     },
-    [tpz.relicIDs.RAGNAROK] =
+    [ xi.relicIDs.RAGNAROK] =
     {
         18282, 18283, 18640, 18654, 18668, 19749, 19842, 20745, 20746, 21683
     },
-    [tpz.relicIDs.GUTTLER] =
+    [ xi.relicIDs.GUTTLER] =
     {
         18288, 18289, 18641, 18655, 18669, 19750, 19843, 20790, 20791, 21750
     },
-    [tpz.relicIDs.BRAVURA] =
+    [ xi.relicIDs.BRAVURA] =
     {
         18294, 18295, 18642, 18656, 18670, 19751, 19844, 20835, 20836, 21756
     },
-    [tpz.relicIDs.APOCALYPSE] =
+    [ xi.relicIDs.APOCALYPSE] =
     {
         18306, 18307, 18644, 18658, 18672, 19753, 19846, 20880, 20881, 21808
     },
-    [tpz.relicIDs.GUNGNIR] =
+    [ xi.relicIDs.GUNGNIR] =
     {
         18300, 18301, 18643, 18657, 18671, 19752, 19845, 20925, 20926, 21857
     },
-    [tpz.relicIDs.KIKOKU] =
+    [ xi.relicIDs.KIKOKU] =
     {
         18312, 18313, 18645, 18659, 18673, 19754, 19847, 20970, 20971, 21906
     },
-    [tpz.relicIDs.AMANOMURAKUMO] =
+    [ xi.relicIDs.AMANOMURAKUMO] =
     {
         18318, 18319, 18646, 18660, 18674, 19755, 19848, 21015, 21016, 21954
     },
-    [tpz.relicIDs.MJOLLNIR] =
+    [ xi.relicIDs.MJOLLNIR] =
     {
         18324, 18325, 18647, 18661, 18675, 19756, 19849, 21060, 21061, 21077
     },
-    [tpz.relicIDs.CLAUSTRUM] =
+    [ xi.relicIDs.CLAUSTRUM] =
     {
         18330, 18331, 18648, 18662, 18676, 19757, 19850, 21135, 21136, 22060
     },
-    [tpz.relicIDs.YOICHINOYUMI] =
+    [ xi.relicIDs.YOICHINOYUMI] =
     {
         18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115, 22129
     },
-    [tpz.relicIDs.ANNIHILATOR] =
+    [ xi.relicIDs.ANNIHILATOR] =
     {
         18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 21267, 22140
     },
-    [tpz.relicIDs.GJALLARHORN] =
+    [ xi.relicIDs.GJALLARHORN] =
     {
         18342, 18577, 18578, 18579, 18580, 18572, 18840
     },
-    [tpz.relicIDs.AEGIS] =
+    [ xi.relicIDs.AEGIS] =
     {
         15070, 16195, 16196, 16197, 16198, 11927, 16200
     },

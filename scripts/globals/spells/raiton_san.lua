@@ -13,9 +13,9 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     --doNinjutsuNuke(V, M, caster, spell, target, hasMultipleTargetReduction, resistBonus)
-    local duration = 15 + caster:getMerit(tpz.merit.RAITON_EFFECT) -- T1 bonus debuff duration
+    local duration = 15 + caster:getMerit(xi.merit.RAITON_EFFECT) -- T1 bonus debuff duration
     local bonusAcc = 0
-    local bonusMab = caster:getMerit(tpz.merit.RAITON_EFFECT) -- T1 mag atk
+    local bonusMab = caster:getMerit(xi.merit.RAITON_EFFECT) -- T1 mag atk
 
     local params = {}
 
@@ -30,7 +30,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mabBonus = bonusMab
 
     dmg = doNinjutsuNuke(caster, target, spell, params)
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, tpz.mod.EARTHRES)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.EARTHRES)
 
     return dmg
 end

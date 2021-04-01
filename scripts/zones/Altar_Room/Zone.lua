@@ -16,11 +16,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local head = player:getEquipID(tpz.slot.HEAD)
+    local head = player:getEquipID(xi.slot.HEAD)
 
     if player:getCharVar("FickblixCS") == 1 then
         cs = 10000
-    elseif player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
+    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_AVAILABLE and
         player:getMainLvl() >= 60 and player:getCharVar("moraldecline") <= os.time() then
         cs = 46
     elseif player:getCharVar("moral") == 4 and head == 15202 then -- Yagudo Headgear
@@ -35,7 +35,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -49,15 +49,15 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then
         player:setCharVar("moral", 1)
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
     elseif csid == 46 and option == 1 then
         player:setCharVar("moraldecline", getConquestTally())
     elseif csid == 47 then
-        npcUtil.giveKeyItem(player, tpz.ki.VAULT_QUIPUS)
+        npcUtil.giveKeyItem(player, xi.ki.VAULT_QUIPUS)
         player:setCharVar("moral", 5)
     elseif csid == 51 then
         player:setCharVar("moralrebuy", 1)
-        npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.A_MORAL_MANIFEST, {
+        npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.A_MORAL_MANIFEST, {
             item = 748,
             var = "moral"
         })

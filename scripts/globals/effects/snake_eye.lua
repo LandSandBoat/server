@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SNAKE_EYE
+-- xi.effect.SNAKE_EYE
 -----------------------------------
 local effect_object = {}
 

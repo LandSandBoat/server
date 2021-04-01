@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.LAST_RESORT, 0, 0, 180)
+    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
 end
 
 return ability_object

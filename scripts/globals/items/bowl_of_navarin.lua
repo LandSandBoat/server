@@ -21,42 +21,42 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 10800, 4439)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 10800, 4439)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.FOOD_HPP, 3)
-    target:addMod(tpz.mod.FOOD_HP_CAP, 130)
-    target:addMod(tpz.mod.STR, 3)
-    target:addMod(tpz.mod.AGI, 1)
-    target:addMod(tpz.mod.VIT, 1)
-    target:addMod(tpz.mod.INT, -1)
-    target:addMod(tpz.mod.FOOD_ATTP, 27)
-    target:addMod(tpz.mod.FOOD_ATT_CAP, 30)
-    target:addMod(tpz.mod.EVA, 5)
-    target:addMod(tpz.mod.FOOD_RATTP, 27)
-    target:addMod(tpz.mod.FOOD_RATT_CAP, 30)
+    target:addMod(xi.mod.FOOD_HPP, 3)
+    target:addMod(xi.mod.FOOD_HP_CAP, 130)
+    target:addMod(xi.mod.STR, 3)
+    target:addMod(xi.mod.AGI, 1)
+    target:addMod(xi.mod.VIT, 1)
+    target:addMod(xi.mod.INT, -1)
+    target:addMod(xi.mod.FOOD_ATTP, 27)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 30)
+    target:addMod(xi.mod.EVA, 5)
+    target:addMod(xi.mod.FOOD_RATTP, 27)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 30)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.FOOD_HPP, 3)
-    target:delMod(tpz.mod.FOOD_HP_CAP, 130)
-    target:delMod(tpz.mod.STR, 3)
-    target:delMod(tpz.mod.AGI, 1)
-    target:delMod(tpz.mod.VIT, 1)
-    target:delMod(tpz.mod.INT, -1)
-    target:delMod(tpz.mod.FOOD_ATTP, 27)
-    target:delMod(tpz.mod.FOOD_ATT_CAP, 30)
-    target:delMod(tpz.mod.EVA, 5)
-    target:delMod(tpz.mod.FOOD_RATTP, 27)
-    target:delMod(tpz.mod.FOOD_RATT_CAP, 30)
+    target:delMod(xi.mod.FOOD_HPP, 3)
+    target:delMod(xi.mod.FOOD_HP_CAP, 130)
+    target:delMod(xi.mod.STR, 3)
+    target:delMod(xi.mod.AGI, 1)
+    target:delMod(xi.mod.VIT, 1)
+    target:delMod(xi.mod.INT, -1)
+    target:delMod(xi.mod.FOOD_ATTP, 27)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 30)
+    target:delMod(xi.mod.EVA, 5)
+    target:delMod(xi.mod.FOOD_RATTP, 27)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 30)
 end
 
 return item_object

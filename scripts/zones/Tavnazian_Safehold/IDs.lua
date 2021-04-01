@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.TAVNAZIAN_SAFEHOLD] =
+zones[ xi.zone.TAVNAZIAN_SAFEHOLD] =
 {
     text =
     {
@@ -50,4 +50,4 @@ zones[tpz.zone.TAVNAZIAN_SAFEHOLD] =
     },
 }
 
-return zones[tpz.zone.TAVNAZIAN_SAFEHOLD]
+return zones[ xi.zone.TAVNAZIAN_SAFEHOLD]

@@ -19,7 +19,7 @@ item_object.onItemUse = function(target)
     end
     target:addHP(hpHeal)
     target:updateEnmityFromCure(target, hpHeal)
-    target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, hpHeal)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)
 end
 
 return item_object

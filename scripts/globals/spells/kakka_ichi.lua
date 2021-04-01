@@ -13,7 +13,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.STORE_TP
+    local effect = xi.effect.STORE_TP
     caster:addStatusEffect(effect, 10, 0, 180)
     return effect
 end

@@ -25,7 +25,7 @@ attachment_object.onEquip = function(pet)
     pet:addListener("WEAPONSKILL_STATE_ENTER", "AUTO_FLAME_HOLDER_START", function(pet, skill)
         if not validskills[skill] then return end
         local master = pet:getMaster()
-        local maneuvers = master:countEffect(tpz.effect.FIRE_MANEUVER)
+        local maneuvers = master:countEffect(xi.effect.FIRE_MANEUVER)
         local amount = 0
         if maneuvers == 1 then
             amount = 25
@@ -39,7 +39,7 @@ attachment_object.onEquip = function(pet)
         else
             return
         end
-        pet:addMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE, amount)
+        pet:addMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, amount)
         pet:setLocalVar("flameholder", amount)
     end)
     pet:addListener("WEAPONSKILL_STATE_EXIT", "AUTO_FLAME_HOLDER_END", function(pet, skill)
@@ -47,9 +47,9 @@ attachment_object.onEquip = function(pet)
         local toremove = pet:getLocalVar("flameholdermaneuvers")
         if toremove == 0 then return end
         for i = 1, toremove do
-            master:delStatusEffectSilent(tpz.effect.FIRE_MANEUVER)
+            master:delStatusEffectSilent(xi.effect.FIRE_MANEUVER)
         end
-        pet:delMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE, pet:getLocalVar("flameholder"))
+        pet:delMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, pet:getLocalVar("flameholder"))
         pet:setLocalVar("flameholder", 0)
         pet:setLocalVar("flameholdermaneuvers", 0)
     end)

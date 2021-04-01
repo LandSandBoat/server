@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.RAPTURE
+-- xi.effect.RAPTURE
 -----------------------------------
 local effect_object = {}
 

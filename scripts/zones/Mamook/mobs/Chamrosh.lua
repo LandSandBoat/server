@@ -11,14 +11,14 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setLocalVar("changeTime", 150)
     mob:setLocalVar("useWise", math.random(25, 50))
-    mob:addMod(tpz.mod.UFASTCAST, 150)
+    mob:addMod(xi.mod.UFASTCAST, 150)
 end
 
 entity.onMobFight = function(mob, target)
@@ -27,7 +27,7 @@ entity.onMobFight = function(mob, target)
     local spell = mob:getLocalVar("COPY_SPELL")
     local changeTime = mob:getLocalVar("changeTime")
 
-    if spell > 0 and mob:hasStatusEffect(tpz.effect.SILENCE) == false then
+    if spell > 0 and mob:hasStatusEffect(xi.effect.SILENCE) == false then
         if delay >= 3 then
             mob:castSpell(spell)
             mob:setLocalVar("COPY_SPELL", 0)

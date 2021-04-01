@@ -19,16 +19,16 @@ end
 entity.onTrigger = function(player, npc)
     -- The Jester Who'd Be King (Windurst 8-2)
     if
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getCharVar("MissionStatus") == 1 and not
-        player:hasKeyItem(tpz.ki.RHINOSTERY_RING)
+        player:hasKeyItem(xi.ki.RHINOSTERY_RING)
     then
-        player:startEvent(22, 0, tpz.ki.RHINOSTERY_RING)
+        player:startEvent(22, 0, xi.ki.RHINOSTERY_RING)
 
     -- Curses, Foiled A_Golem!?
-    elseif player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) then
+    elseif player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
         player:startEvent(14) -- deliver spell
-    elseif player:hasKeyItem(tpz.ki.SHANTOTTOS_EXSPELL) then
+    elseif player:hasKeyItem(xi.ki.SHANTOTTOS_EXSPELL) then
         player:startEvent(13) -- spell erased, try again!
 
     -- standard dialog
@@ -44,11 +44,11 @@ entity.onEventFinish = function(player, csid, option)
     -- Curses, Foiled A_Golem!?
     if csid == 14 then
         player:setCharVar("foiledagolemdeliverycomplete", 1)
-        player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) -- remove key item
+        player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) -- remove key item
 
     -- The Jester Who'd Be King (Windurst 8-2)
-    elseif csid == 22 and npcUtil.giveKeyItem(player, tpz.ki.RHINOSTERY_RING) then
-        if player:hasKeyItem(tpz.ki.AURASTERY_RING) and player:hasKeyItem(tpz.ki.OPTISTERY_RING) then
+    elseif csid == 22 and npcUtil.giveKeyItem(player, xi.ki.RHINOSTERY_RING) then
+        if player:hasKeyItem(xi.ki.AURASTERY_RING) and player:hasKeyItem(xi.ki.OPTISTERY_RING) then
             player:setCharVar("MissionStatus", 2)
         end
     end

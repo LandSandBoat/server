@@ -15,9 +15,9 @@ entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
 
-    if (cop == tpz.mission.id.cop.A_FATE_DECIDED and copStat == 1 and not GetMobByID(ID.mob.IXGHRAH):isSpawned()) then
+    if (cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 1 and not GetMobByID(ID.mob.IXGHRAH):isSpawned()) then
         SpawnMob(ID.mob.IXGHRAH):updateClaim(player)
-    elseif (cop == tpz.mission.id.cop.A_FATE_DECIDED and copStat == 2) then
+    elseif (cop == xi.mission.id.cop.A_FATE_DECIDED and copStat == 2) then
         player:startEvent(3)
     end
 end
@@ -28,8 +28,8 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 3) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_FATE_DECIDED)
-        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.WHEN_ANGELS_FALL)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
     end
 end
 

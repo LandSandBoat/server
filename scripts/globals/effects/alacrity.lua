@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ALACRITY
+-- xi.effect.ALACRITY
 -----------------------------------
 local effect_object = {}
 

@@ -11,7 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.ENSTONE
+    local effect = xi.effect.ENSTONE
     doEnspell(caster, target, spell, effect)
     return effect
 end

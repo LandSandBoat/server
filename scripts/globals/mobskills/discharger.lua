@@ -23,8 +23,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = tpz.effect.MAGIC_SHIELD
-    local typeEffectTwo = tpz.effect.SHOCK_SPIKES
+    local typeEffectOne = xi.effect.MAGIC_SHIELD
+    local typeEffectTwo = xi.effect.SHOCK_SPIKES
 
     skill:setMsg(MobBuffMove(mob, typeEffectOne, 1, 0, 60))
     MobBuffMove(mob, typeEffectTwo, 25, 0, 60)

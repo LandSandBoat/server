@@ -24,12 +24,12 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local typeEffect = tpz.effect.BLINDNESS
-    local dINT = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
+    local typeEffect = xi.effect.BLINDNESS
+    local dINT = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
     params.effect = typeEffect
     local resist = applyResistanceEffect(caster, target, spell, params)
@@ -38,12 +38,12 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     if (resist > 0.5) then -- Do it!
         if (target:addStatusEffect(typeEffect, power, 0, duration)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return typeEffect

@@ -14,8 +14,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local power = 20 + player:getMod(tpz.mod.DODGE_EFFECT)
-    player:addStatusEffect(tpz.effect.DODGE, power, 0, 120)
+    local power = 20 + player:getMod(xi.mod.DODGE_EFFECT)
+    player:addStatusEffect(xi.effect.DODGE, power, 0, 120)
 end
 
 return ability_object

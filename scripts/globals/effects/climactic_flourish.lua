@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CLIMACTIC_FLOURISH
+-- xi.effect.CLIMACTIC_FLOURISH
 -----------------------------------
 local effect_object = {}
 

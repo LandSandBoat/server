@@ -14,16 +14,16 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
-        return tpz.msg.basic.ALREADY_HAS_A_PET, 0
-    elseif not player:canUseMisc(tpz.zoneMisc.PET) then
-        return tpz.msg.basic.CANT_BE_USED_IN_AREA, 0
+        return xi.msg.basic.ALREADY_HAS_A_PET, 0
+    elseif not player:canUseMisc(xi.zoneMisc.PET) then
+        return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
     else
         return 0, 0
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    tpz.pet.spawnPet(player, tpz.pet.id.AUTOMATON)
+    xi.pet.spawnPet(player, xi.pet.id.AUTOMATON)
 end
 
 return ability_object

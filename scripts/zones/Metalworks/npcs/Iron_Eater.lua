@@ -13,33 +13,33 @@ local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
 local entity = {}
 
-local wsQuest = tpz.wsquest.steel_cyclone
+local wsQuest = xi.wsquest.steel_cyclone
 
 local TrustMemory = function(player)
     local memories = 0
     --[[ TODO
     -- 2 - The Three Kingdoms
-    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
         memories = memories + 2
     end
     -- 4 - Where Two Paths Converge
-    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
+    if player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE) then
         memories = memories + 4
     end
     -- 8 - The Pirate's Cove
-    if player:hasCompletedMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE) then
+    if player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATE_S_COVE) then
         memories = memories + 8
     end
     -- 16 - Ayame and Kaede
-    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) then
+    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) then
         memories = memories + 16
     end
     -- 32 - Light of Judgement
-    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.LIGHT_OF_JUDGMENT) then
+    if player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.LIGHT_OF_JUDGMENT) then
         memories = memories + 32
     end
     -- 64 - True Strength
-    if player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) then
+    if player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) then
         memories = memories + 64
     end
     ]]--
@@ -58,7 +58,7 @@ local TrustMemory = function(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
+    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
@@ -66,7 +66,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
+    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getCharVar("MissionStatus")
 
@@ -74,11 +74,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(988, 0, 0, 0, TrustMemory(player))
     elseif wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (currentMission == tpz.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 0) then -- Four Musketeers
+    elseif (currentMission == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 0) then -- Four Musketeers
         player:startEvent(715)
-    elseif (currentMission == tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getCharVar("MissionStatus") == 0) then
+    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(780)
-    elseif (currentMission == tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getCharVar("MissionStatus") == 2) then
+    elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(782)
     elseif (player:getCharVar("Flagbastok") == 1) then
         if (player:getFreeSlotsCount() == 0) then
@@ -88,15 +88,15 @@ entity.onTrigger = function(player, npc)
             player:addItem(182)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 182)
         end
-    elseif (currentMission == tpz.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 1) then
+    elseif (currentMission == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 1) then
         player:startEvent(716)
-    elseif (currentMission == tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US and missionStatus == 0) then
+    elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US and missionStatus == 0) then
         player:startEvent(767) -- First cutscene of mission
-    elseif (currentMission == tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 2) then
+    elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 2) then
         player:showText(npc, 8596) -- Dialogue after first cutscene
-    elseif (currentMission == tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 3) then
+    elseif (currentMission == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 3) then
         player:startEvent(768) -- Cutscene on return from Quicksand Caves
-    elseif (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") == 1) then
             player:startEvent(956)
         else
@@ -125,18 +125,18 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 182)
         end
         player:setCharVar("MissionStatus", 0)
-        player:completeMission(tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
+        player:completeMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE)
         player:setRank(10)
         player:addGil(GIL_RATE * 100000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 100000)
-        player:setTitle(tpz.title.HERO_AMONG_HEROES)
+        player:setTitle(xi.title.HERO_AMONG_HEROES)
     elseif (csid == 956) then
         player:setCharVar("FiresOfDiscProg", 2)
     elseif csid == 988 then
         player:addSpell(917, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 917)
     else
-        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.STEEL_CYCLONE_LEARNED)
+        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.STEEL_CYCLONE_LEARNED)
     end
 end
 

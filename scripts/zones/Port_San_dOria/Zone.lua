@@ -19,11 +19,11 @@ end
 zone_object.onZoneIn = function(player,prevZone)
     local cs = -1
 
-    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
     end
 
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
         cs = 30036
     end
 
@@ -34,12 +34,12 @@ zone_object.onZoneIn = function(player,prevZone)
         end
         player:setPos(-104, -8, -128, 227)
         player:setHomePoint()
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 1) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 1) then
         cs = 4
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == tpz.zone.SAN_DORIA_JEUNO_AIRSHIP) then
+        if (prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP) then
             cs = 702
             player:setPos(-1.000, 0.000, 44.000, 0)
         else
@@ -51,7 +51,7 @@ zone_object.onZoneIn = function(player,prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -76,11 +76,11 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 4) then
         player:setCharVar("COP_Ulmia_s_Path",2)
     elseif csid == 30035 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

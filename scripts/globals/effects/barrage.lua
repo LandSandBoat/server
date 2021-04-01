@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BARRAGE
+-- xi.effect.BARRAGE
 -----------------------------------
 local effect_object = {}
 

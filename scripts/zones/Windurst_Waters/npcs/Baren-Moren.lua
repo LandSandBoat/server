@@ -15,7 +15,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local aFeatherInOnesCap = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    local aFeatherInOnesCap = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
 
     if
         (
@@ -29,13 +29,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hatInHand = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-    local aFeatherInOnesCap = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    local hatInHand = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
+    local aFeatherInOnesCap = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
     local pfame = player:getFameLevel(WINDURST)
 
     if hatInHand == QUEST_AVAILABLE then
         player:startEvent(48) -- Quest Offered
-    elseif player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) then
+    elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) then
         local count = player:getCharVar("QuestHatInHand_count")
 
         if count >= 8 then
@@ -85,11 +85,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local aFeatherInOnesCap = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+    local aFeatherInOnesCap = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
 
     if csid == 48 and option == 1 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
-        npcUtil.giveKeyItem(player, tpz.ki.NEW_MODEL_HAT)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
+        npcUtil.giveKeyItem(player, xi.ki.NEW_MODEL_HAT)
     elseif csid == 52 and option >= 1 then
         local rewardTier = player:getLocalVar("hatRewardTier")
         local rewards = {fame = 75, var = {"QuestHatInHand_var", "QuestHatInHand_count"}}
@@ -108,19 +108,19 @@ entity.onEventFinish = function(player, csid, option)
             rewards.gil = 300
         end
 
-        if npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.HAT_IN_HAND, rewards) then
-            player:delKeyItem(tpz.ki.NEW_MODEL_HAT)
+        if npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.HAT_IN_HAND, rewards) then
+            player:delKeyItem(xi.ki.NEW_MODEL_HAT)
             player:needToZone(true)
         end
     elseif csid == 75 and option == 1 then
         if aFeatherInOnesCap == QUEST_AVAILABLE then
-            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
+            player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP)
         elseif aFeatherInOnesCap == QUEST_COMPLETED then
             player:setCharVar("QuestFeatherInOnesCap_var", 1)
         end
     elseif csid == 79 then
         if aFeatherInOnesCap == QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP, {fame = 75})
+            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.A_FEATHER_IN_ONE_S_CAP, {fame = 75})
         else
             player:addFame(WINDURST, 8)
             player:setCharVar("QuestFeatherInOnesCap_var", 0)

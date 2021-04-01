@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.MAGICITE and
-        not player:hasKeyItem(tpz.ki.MAGICITE_ORASTONE) then
+    if player:getCurrentMission(player:getNation()) == xi.mission.id.nation.MAGICITE and
+        not player:hasKeyItem(xi.ki.MAGICITE_ORASTONE) then
         if player:getCharVar("Magicite") == 2 then
             player:startEvent(44, 152, 3, 1743, 3) -- play Lion part of the CS (this is last magicite)
         else
@@ -36,8 +36,8 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("Magicite", player:getCharVar("Magicite") + 1)
         end
         player:setCharVar("MissionStatus", 4)
-        player:addKeyItem(tpz.ki.MAGICITE_ORASTONE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGICITE_ORASTONE)
+        player:addKeyItem(xi.ki.MAGICITE_ORASTONE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGICITE_ORASTONE)
     end
 end
 

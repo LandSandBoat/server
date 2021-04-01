@@ -24,7 +24,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local letterRed = player:getCharVar("LeleroonsLetterRed")
-    if (player:hasKeyItem(tpz.ki.LELEROONS_LETTER_RED)) then
+    if (player:hasKeyItem(xi.ki.LELEROONS_LETTER_RED)) then
         player:startEvent(753) -- accept letter, now bring me four items
     elseif (letterRed == 2) then
         player:startEvent(754) -- i'm waiting for four items
@@ -49,7 +49,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 753) then
         player:setCharVar("LeleroonsLetterRed", 2)
-        player:delKeyItem(tpz.ki.LELEROONS_LETTER_RED)
+        player:delKeyItem(xi.ki.LELEROONS_LETTER_RED)
     elseif (csid == 755) then
         player:tradeComplete()
         player:setCharVar("LeleroonsLetterRed", 3)

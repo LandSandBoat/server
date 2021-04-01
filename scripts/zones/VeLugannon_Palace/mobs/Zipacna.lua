@@ -92,13 +92,13 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onPath = function(mob)
-    tpz.path.patrol(mob, path, tpz.path.flag.RUN)
+    xi.path.patrol(mob, path, xi.path.flag.RUN)
 end
 
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if mob:isFollowingPath() == false then
-        mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
+        mob:pathThrough(xi.path.first(path), xi.path.flag.RUN)
     end
 end
 

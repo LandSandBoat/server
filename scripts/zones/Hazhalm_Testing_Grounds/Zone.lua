@@ -18,7 +18,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(652.174, -272.632, -104.92, 148)
     end
 
-    if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.GAZE_OF_THE_SABOTEUR and player:getCharVar("AhtUrganStatus") == 0) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.GAZE_OF_THE_SABOTEUR and player:getCharVar("AhtUrganStatus") == 0) then
         cs = 6
     end
 

@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.POISON
+    local typeEffect = xi.effect.POISON
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, math.random(20, 30), 3, 60))
     return typeEffect

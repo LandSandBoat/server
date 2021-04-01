@@ -18,7 +18,7 @@ entity.onMobDeath = function(mob, player, isKiller)
             baby:setHP(0)
         end
     end
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 1 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 1 then
         player:setCharVar("PromathiaStatus", 2)
     end
 end

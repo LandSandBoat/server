@@ -13,14 +13,14 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local wsQuest = tpz.wsquest.asuran_fists
+local wsQuest = xi.wsquest.asuran_fists
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
+    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(13122, 1) and trade:getItemCount() == 1) then -- Trade Miner's Pendant
             player:startEvent(232) -- Finish Quest "Ghosts of the Past"
         end
@@ -28,19 +28,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local ghostsOfThePast = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
-    local theFirstMeeting = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
+    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
+    local ghostsOfThePast = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
+    local theFirstMeeting = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif (ghostsOfThePast == QUEST_AVAILABLE and mJob == tpz.job.MNK and mLvl >= 40) then
+    elseif (ghostsOfThePast == QUEST_AVAILABLE and mJob == xi.job.MNK and mLvl >= 40) then
         player:startEvent(231) -- Start Quest "Ghosts of the Past"
-    elseif (ghostsOfThePast == QUEST_COMPLETED and player:needToZone() == false and theFirstMeeting == QUEST_AVAILABLE and mJob == tpz.job.MNK and mLvl >= 50) then
+    elseif (ghostsOfThePast == QUEST_COMPLETED and player:needToZone() == false and theFirstMeeting == QUEST_AVAILABLE and mJob == xi.job.MNK and mLvl >= 50) then
         player:startEvent(233) -- Start Quest "The First Meeting"
-    elseif (player:hasKeyItem(tpz.ki.LETTER_FROM_DALZAKK) and player:hasKeyItem(tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)) then
+    elseif (player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK) and player:hasKeyItem(xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)) then
         player:startEvent(234) -- Finish Quest "The First Meeting"
     else
         player:startEvent(230) -- Standard Dialog
@@ -49,7 +49,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 231) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
     elseif (csid == 232) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17478) -- Beat Cesti
@@ -59,23 +59,23 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17478) -- Beat Cesti
             player:needToZone(true)
             player:addFame(BASTOK, 20)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST)
         end
     elseif (csid == 233) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
     elseif (csid == 234) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14090) -- Temple Gaiters
         else
-            player:delKeyItem(tpz.ki.LETTER_FROM_DALZAKK)
-            player:delKeyItem(tpz.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
+            player:delKeyItem(xi.ki.LETTER_FROM_DALZAKK)
+            player:delKeyItem(xi.ki.SANDORIAN_MARTIAL_ARTS_SCROLL)
             player:addItem(14090)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14090) -- Temple Gaiters
             player:addFame(BASTOK, 40)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
         end
     else
-        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.ASURAN_FISTS_LEARNED)
+        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.ASURAN_FISTS_LEARNED)
     end
 
 end

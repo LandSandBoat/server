@@ -7,11 +7,11 @@ require("scripts/globals/status")
 local attachment_object = {}
 
 attachment_object.onEquip = function(pet)
-    pet:addMod(tpz.mod.AUTO_SCHURZEN, 1)
+    pet:addMod(xi.mod.AUTO_SCHURZEN, 1)
 end
 
 attachment_object.onUnequip = function(pet)
-    pet:delMod(tpz.mod.AUTO_SCHURZEN, 1)
+    pet:delMod(xi.mod.AUTO_SCHURZEN, 1)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)

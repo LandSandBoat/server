@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HIDE
+-- xi.effect.HIDE
 -----------------------------------
 local effect_object = {}
 

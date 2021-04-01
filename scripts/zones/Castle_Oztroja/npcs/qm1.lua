@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH) == QUEST_ACCEPTED and
         not player:hasItem(1100) and -- Xalmo's Feather
         npcUtil.tradeHas(trade, 4558) and -- Yagudo Drink
         npcUtil.popFromQM(player, npc, ID.mob.HUU_XALMO_THE_SAVAGE, {hide = 0})

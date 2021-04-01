@@ -13,7 +13,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.SLEEP_I
+    local typeEffect = xi.effect.SLEEP_I
 
     skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, 30))
 

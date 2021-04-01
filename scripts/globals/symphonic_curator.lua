@@ -36,9 +36,9 @@ require("scripts/globals/utils")
 ]]
 
 tpz = tpz or {}
-tpz.symphonic_curator = tpz.symphonic_curator or {}
+ xi.symphonic_curator = xi.symphonic_curator or {}
 
-tpz.symphonic_curator.onTrigger = function(player, npc)
+ xi.symphonic_curator.onTrigger = function(player, npc)
 
     -- The first time you click, you'll always already be listening to Mog House
     if player:getLocalVar("Symphonic_Curator_Music") == 0 then
@@ -51,22 +51,22 @@ tpz.symphonic_curator.onTrigger = function(player, npc)
     -- Default: Mog House (126), Vana'diel March (108)
     song_packs = utils.mask.setBit(song_packs, 0, 1)
 
-    song_packs = utils.mask.setBit(song_packs, 1, player:hasKeyItem(tpz.ki.SHEET_OF_SAN_DORIAN_TUNES))   -- The Kingdom of San d'Oria (107), Chateau d'Oraguille (156), Ronfaure (109)
-    song_packs = utils.mask.setBit(song_packs, 2, player:hasKeyItem(tpz.ki.SHEET_OF_BASTOKAN_TUNES))     -- The Republic of Bastok (152), Metalworks (154), Gustaberg (116)
-    song_packs = utils.mask.setBit(song_packs, 3, player:hasKeyItem(tpz.ki.SHEET_OF_WINDURSTIAN_TUNES))  -- The Federation of Windurst (151), Heavens Tower (162), Sarutabaruta (113)
-    song_packs = utils.mask.setBit(song_packs, 4, player:hasKeyItem(tpz.ki.SHEET_OF_E_ADOULINIAN_TUNES)) -- The Sacred City of Adoulin (63)
-    song_packs = utils.mask.setBit(song_packs, 5, player:hasKeyItem(tpz.ki.SHEET_OF_W_ADOULINIAN_TUNES)) -- The Pioneers (59)
-    song_packs = utils.mask.setBit(song_packs, 6, player:hasKeyItem(tpz.ki.SHEET_OF_ZILART_TUNES))       -- Kazham (135), The Sanctuary of Zi'Tah (190), Tu'Lia (210)
+    song_packs = utils.mask.setBit(song_packs, 1, player:hasKeyItem(xi.ki.SHEET_OF_SAN_DORIAN_TUNES))   -- The Kingdom of San d'Oria (107), Chateau d'Oraguille (156), Ronfaure (109)
+    song_packs = utils.mask.setBit(song_packs, 2, player:hasKeyItem(xi.ki.SHEET_OF_BASTOKAN_TUNES))     -- The Republic of Bastok (152), Metalworks (154), Gustaberg (116)
+    song_packs = utils.mask.setBit(song_packs, 3, player:hasKeyItem(xi.ki.SHEET_OF_WINDURSTIAN_TUNES))  -- The Federation of Windurst (151), Heavens Tower (162), Sarutabaruta (113)
+    song_packs = utils.mask.setBit(song_packs, 4, player:hasKeyItem(xi.ki.SHEET_OF_E_ADOULINIAN_TUNES)) -- The Sacred City of Adoulin (63)
+    song_packs = utils.mask.setBit(song_packs, 5, player:hasKeyItem(xi.ki.SHEET_OF_W_ADOULINIAN_TUNES)) -- The Pioneers (59)
+    song_packs = utils.mask.setBit(song_packs, 6, player:hasKeyItem(xi.ki.SHEET_OF_ZILART_TUNES))       -- Kazham (135), The Sanctuary of Zi'Tah (190), Tu'Lia (210)
     -- Next page
-    song_packs = utils.mask.setBit(song_packs, 7, player:hasKeyItem(tpz.ki.SHEET_OF_CONFLICT_TUNES))     -- Awakening (119), Belief (195), A Realm of Emptiness (137)
-    song_packs = utils.mask.setBit(song_packs, 8, player:hasKeyItem(tpz.ki.SHEET_OF_PROMATHIA_TUNES))    -- Distant Worlds (900)
-    song_packs = utils.mask.setBit(song_packs, 9, player:hasKeyItem(tpz.ki.SHEET_OF_ADOULINIAN_TUNES))   -- Forever Today (76)
+    song_packs = utils.mask.setBit(song_packs, 7, player:hasKeyItem(xi.ki.SHEET_OF_CONFLICT_TUNES))     -- Awakening (119), Belief (195), A Realm of Emptiness (137)
+    song_packs = utils.mask.setBit(song_packs, 8, player:hasKeyItem(xi.ki.SHEET_OF_PROMATHIA_TUNES))    -- Distant Worlds (900)
+    song_packs = utils.mask.setBit(song_packs, 9, player:hasKeyItem(xi.ki.SHEET_OF_ADOULINIAN_TUNES))   -- Forever Today (76)
     song_packs = utils.mask.setBit(song_packs, 10, false)                                                -- Unknown Item: Rhapsodies of Vana'diel (83)
-    song_packs = utils.mask.setBit(song_packs, 11, player:hasKeyItem(tpz.ki.SHEET_OF_SHADOW_LORD_TUNES)) -- Awakening (The Shadow Lord Battle) (FFRK Ver.) (119)
-    song_packs = utils.mask.setBit(song_packs, 12, player:hasKeyItem(tpz.ki.SHEET_OF_MAPITOTO_TUNES))    -- Full Speed Ahead! (84)
-    song_packs = utils.mask.setBit(song_packs, 13, player:hasKeyItem(tpz.ki.SHEET_OF_ALTAIEU_TUNES))     -- The Celestial Capital - Al'Taieu (233)
-    song_packs = utils.mask.setBit(song_packs, 14, player:hasKeyItem(tpz.ki.SHEET_OF_JEUNO_TUNES))       -- The Grand Duchy of Jeuno (110), Ru'Lude Gardens (117)
-    song_packs = utils.mask.setBit(song_packs, 15, player:hasKeyItem(tpz.ki.SHEET_OF_HARVEST_TUNES))     -- Devils' Delight (29)
+    song_packs = utils.mask.setBit(song_packs, 11, player:hasKeyItem(xi.ki.SHEET_OF_SHADOW_LORD_TUNES)) -- Awakening (The Shadow Lord Battle) (FFRK Ver.) (119)
+    song_packs = utils.mask.setBit(song_packs, 12, player:hasKeyItem(xi.ki.SHEET_OF_MAPITOTO_TUNES))    -- Full Speed Ahead! (84)
+    song_packs = utils.mask.setBit(song_packs, 13, player:hasKeyItem(xi.ki.SHEET_OF_ALTAIEU_TUNES))     -- The Celestial Capital - Al'Taieu (233)
+    song_packs = utils.mask.setBit(song_packs, 14, player:hasKeyItem(xi.ki.SHEET_OF_JEUNO_TUNES))       -- The Grand Duchy of Jeuno (110), Ru'Lude Gardens (117)
+    song_packs = utils.mask.setBit(song_packs, 15, player:hasKeyItem(xi.ki.SHEET_OF_HARVEST_TUNES))     -- Devils' Delight (29)
 
     -- 0000 = all instruments shown
     -- 1111 = all instruments hidden
@@ -151,11 +151,11 @@ local optionToSongLookup = {
     [434] = 29,  -- Devils' Delight
 }
 
-tpz.symphonic_curator.onEventUpdate = function(player, csid, option)
+ xi.symphonic_curator.onEventUpdate = function(player, csid, option)
     player:ChangeMusic(6, optionToSongLookup[option])
 end
 
-tpz.symphonic_curator.onEventFinish = function(player, csid, option)
+ xi.symphonic_curator.onEventFinish = function(player, csid, option)
     if option == 0 then
         -- Reset
         player:ChangeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))

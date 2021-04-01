@@ -17,17 +17,17 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
+    if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
     end
 
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
         cs = 30036
     end
 
@@ -38,12 +38,12 @@ zone_object.onZoneIn = function(player, prevZone)
         end
         player:setPos(132, -8.5, -13, 179)
         player:setHomePoint()
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 0) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 0) then
         cs = 306
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == tpz.zone.BASTOK_JEUNO_AIRSHIP) then
+        if (prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP) then
             cs = 73
             player:setPos(-36.000, 7.000, -58.000, 194)
         else
@@ -58,7 +58,7 @@ end
 zone_object.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
     -- printf("regionID: %u", regionID)
-    if (regionID == 1 and player:getCurrentMission(COP) == tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("PromathiaStatus") == 0) then
+    if (regionID == 1 and player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(305)
     end
 end
@@ -86,11 +86,11 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_optional_CS_Despachaire", 0)
         player:setCharVar("PromathiaStatus", 1)
     elseif csid == 30035 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RHAPSODIES_OF_VANADIEL)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.RESONACE)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.RHAPSODIES_OF_VANADIEL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RESONACE)
     elseif csid == 30036 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.FATES_CALL)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.WHAT_LIES_BEYOND)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.FATES_CALL)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
     end
 end
 

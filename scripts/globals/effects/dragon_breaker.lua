@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DRAGON_BREAKER
+-- xi.effect.DRAGON_BREAKER
 -----------------------------------
 local effect_object = {}
 

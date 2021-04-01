@@ -20,24 +20,24 @@ local THE_ELDIEME_NECROPOLIS =
             local ANCIENT_PAPYRUS = 1088 -- Human readability
 
             if
-                player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
             then
                 npcUtil.giveKeyItem(player, ki)
             end
 
             if
-                player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1) and
-                player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2) and
-                player:hasKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3)
+                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
+                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
+                player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
             then
                 npcUtil.giveItem(player, ANCIENT_PAPYRUS)
             end
 
             if player:hasItem(ANCIENT_PAPYRUS) then
-                player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED1)
-                player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED2)
-                player:delKeyItem(tpz.ki.ANCIENT_PAPYRUS_SHRED3)
+                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
+                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
+                player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
             end
         end
     end,
@@ -46,8 +46,8 @@ local THE_ELDIEME_NECROPOLIS =
         click on any of the intersection gates
         ..............................................................................................]]
     gateOnTrigger = function(player, npc)
-        if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
-            if player:hasKeyItem(tpz.ki.MAGICKED_ASTROLABE) then
+        if npc:getAnimation() == xi.anim.CLOSE_DOOR then
+            if player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
                 npc:openDoor(8)
             else
                 player:messageSpecial(ID.text.SOLID_STONE)
@@ -62,8 +62,8 @@ local THE_ELDIEME_NECROPOLIS =
         -- toggle gates between open and close animations
         -- gates are grouped in groups of five. even numbered groups share one animation, while odd numbered groups share the other.
 
-        local animEven = (npc:getAnimation() == tpz.anim.OPEN_DOOR) and tpz.anim.CLOSE_DOOR or tpz.anim.OPEN_DOOR
-        local animOdd  = (npc:getAnimation() == tpz.anim.OPEN_DOOR) and tpz.anim.OPEN_DOOR or tpz.anim.CLOSE_DOOR
+        local animEven = (npc:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.CLOSE_DOOR or xi.anim.OPEN_DOOR
+        local animOdd  = (npc:getAnimation() == xi.anim.OPEN_DOOR) and xi.anim.OPEN_DOOR or xi.anim.CLOSE_DOOR
 
         for i = 0, 19 do
             local group = math.floor(i / 5)

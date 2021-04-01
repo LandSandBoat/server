@@ -16,7 +16,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(WOTG) == tpz.mission.id.wotg.THE_QUEEN_OF_THE_DANCE and player:getCharVar("QueenOfTheDance") == 1) then
+    if (player:getCurrentMission(WOTG) == xi.mission.id.wotg.THE_QUEEN_OF_THE_DANCE and player:getCharVar("QueenOfTheDance") == 1) then
         player:startEvent(10172)
     else
         player:startEvent(10158) --default dialogue
@@ -29,8 +29,8 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 10172) then
         player:setCharVar("QueenOfTheDance", 2)
-        player:addKeyItem(tpz.ki.MAYAKOV_SHOW_TICKET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAYAKOV_SHOW_TICKET)
+        player:addKeyItem(xi.ki.MAYAKOV_SHOW_TICKET)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAYAKOV_SHOW_TICKET)
     end
 end
 

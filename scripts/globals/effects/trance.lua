@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TRANCE
+-- xi.effect.TRANCE
 -----------------------------------
 local effect_object = {}
 

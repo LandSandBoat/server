@@ -11,8 +11,8 @@ require("scripts/globals/helm")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.treasure.initZone(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.MINING)
+    xi.treasure.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -26,7 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)

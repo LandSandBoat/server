@@ -32,7 +32,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- CHILDREN OF THE RUNE
-    local cotrQuestStatus = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+    local cotrQuestStatus = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
     -- NOTE: The if-statements are ordered in reverse order from when they occur
     -- for natural fallthrough, to avoid needing `not` statements in them.
     if cotrQuestStatus == QUEST_COMPLETED then
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(29)
     elseif player:getCharVar("RUN_COTR") == RUN_COTR.RUNE_ENHANCEMENT then
         player:startEvent(26, 1)
-    elseif cotrQuestStatus == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.YAHSE_WILDFLOWER_PETAL) then
+    elseif cotrQuestStatus == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL) then
         player:startEvent(26)
     elseif cotrQuestStatus == QUEST_ACCEPTED then
         player:startEvent(25)
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
         if option == 0 then
             player:setCharVar("RUN_COTR", RUN_COTR.TRIGGERED)
         elseif option == 1 then
-            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     elseif csid == 26 then
         if option == 0 then
@@ -89,12 +89,12 @@ entity.onEventFinish = function(player, csid, option)
     -- Attempt to issue the Children of the Rune reward if the player has space.
     if player:getCharVar("RUN_COTR") == RUN_COTR.REWARD_PENDING then
         if npcUtil.giveItem(player, 20781) then  -- Sowilo Claymore
-            player:unlockJob(tpz.job.RUN)
+            player:unlockJob(xi.job.RUN)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 1)  -- You can now become a rune fencer!
-            npcUtil.giveKeyItem(player, tpz.ki.JOB_GESTURE_RUNE_FENCER)
+            npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)
             player:setCharVar("RUN_COTR", 0)
-            player:delKeyItem(tpz.ki.YAHSE_WILDFLOWER_PETAL)
-            player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
+            player:delKeyItem(xi.ki.YAHSE_WILDFLOWER_PETAL)
+            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE)
         end
     end
 end

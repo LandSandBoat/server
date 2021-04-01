@@ -13,8 +13,8 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local flyersForRegine = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
-    local theBrugaireConsortium = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+    local flyersForRegine = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     -- FLYERS FOR REGINE
     if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, {{"gil", 10}} )) then
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ffr = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local ffr = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     -- FLYERS FOR REGINE
     if ffr == QUEST_AVAILABLE then -- ready to accept quest
@@ -52,14 +52,14 @@ entity.onEventFinish = function(player, csid, option)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
         if npcUtil.giveItem(player, {{532, 12}, {532, 3}}) then
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then
         npcUtil.completeQuest(
-            player, SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE,
+            player, SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE,
             {
                 gil = 440,
-                title = tpz.title.ADVERTISING_EXECUTIVE,
+                title = xi.title.ADVERTISING_EXECUTIVE,
                 var = '[ffr]deliveryMask',
             }
         )
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
             4651, 219, 3,  -- Scroll of Protect
             4656, 1584, 3  -- Scroll of Shell
         }
-        tpz.shop.nation(player, stockA, tpz.nation.SANDORIA)
+        xi.shop.nation(player, stockA, xi.nation.SANDORIA)
 
     -- BLACK MAGIC SHOP
     elseif (csid == 510 and option == 1) then
@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option)
             4772, 3261, 3, -- Scroll of Thunder
             4777, 140, 3   -- Scroll of Water
         }
-        tpz.shop.nation(player, stockB, tpz.nation.SANDORIA)
+        xi.shop.nation(player, stockB, xi.nation.SANDORIA)
     end
 end
 

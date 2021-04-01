@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LARCENY
+-- xi.effect.LARCENY
 -----------------------------------
 local effect_object = {}
 

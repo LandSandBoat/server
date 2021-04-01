@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         4509,    10, 3,     --Distilled Water
         4538,   846, 3      --Roast Pipira
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end
 

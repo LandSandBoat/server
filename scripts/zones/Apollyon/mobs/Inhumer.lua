@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.WALLHACK
+local flags = xi.path.flag.WALLHACK
 local path =
 {
     [1] =
@@ -65,9 +65,9 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.HTHRES, 1500)
-    mob:setMod(tpz.mod.IMPACTRES, 1500)
-    mob:setMod(tpz.mod.PIERCERES, 0)
+    mob:setMod(xi.mod.HTHRES, 1500)
+    mob:setMod(xi.mod.IMPACTRES, 1500)
+    mob:setMod(xi.mod.PIERCERES, 0)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -97,13 +97,13 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local random = math.random(1, 6)
         if killCount == 2 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]):setStatus(xi.status.NORMAL)
         elseif killCount == 4 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+1):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+1):setStatus(xi.status.NORMAL)
         elseif killCount == 8 then
             GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setPos(cratePos[random])
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[3]+2):setStatus(xi.status.NORMAL)
         end
     end
 end

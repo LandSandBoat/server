@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.INNER_STRENGTH, 2, 0, 30)
+    player:addStatusEffect(xi.effect.INNER_STRENGTH, 2, 0, 30)
 end
 
 return ability_object

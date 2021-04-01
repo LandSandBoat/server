@@ -13,27 +13,27 @@ local spell_object = {}
 local message_page_offset = 44
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return tpz.trust.canCast(caster, spell)
+    return xi.trust.canCast(caster, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return tpz.trust.spawn(caster, spell)
+    return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    tpz.trust.teamworkMessage(mob, message_page_offset, {
-        [tpz.magic.spell.STAR_SIBYL] = tpz.trust.message_offset.TEAMWORK_1,
-        [tpz.magic.spell.AJIDO_MARUJIDO] = tpz.trust.message_offset.TEAMWORK_2,
+    xi.trust.teamworkMessage(mob, message_page_offset, {
+        [ xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_1,
+        [ xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, tpz.effect.BARRAGE,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.BARRAGE)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.BARRAGE,
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.BARRAGE)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, tpz.effect.SHARPSHOT,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.SHARPSHOT)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SHARPSHOT,
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.SHARPSHOT)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.STEALTH_SHOT)
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.STEALTH_SHOT)
 
     -- Ranged Attack as much as possible (limited by "weapon" delay)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.RATTACK, 0, 0)
@@ -42,11 +42,11 @@ spell_object.onMobSpawn = function(mob)
 end
 
 spell_object.onMobDespawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

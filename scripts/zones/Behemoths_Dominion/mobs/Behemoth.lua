@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
         SetDropRate(270, 3342, 0) -- do not drop savory_shank
@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.BEHEMOTHS_BANE)
+    player:addTitle(xi.title.BEHEMOTHS_BANE)
 end
 
 entity.onMobDespawn = function(mob)

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.COOLDOWN
+-- xi.effect.COOLDOWN
 -----------------------------------
 local effect_object = {}
 

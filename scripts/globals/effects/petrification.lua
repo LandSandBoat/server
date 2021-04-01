@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PETRIFICATION
+-- xi.effect.PETRIFICATION
 -----------------------------------
 local effect_object = {}
 

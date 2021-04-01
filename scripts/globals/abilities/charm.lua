@@ -22,9 +22,9 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
-        return tpz.msg.basic.ALREADY_HAS_A_PET, 0
+        return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif target:getMaster() ~= nil and target:getMaster():isPC() then
-        return tpz.msg.basic.THAT_SOMEONES_PET, 0
+        return xi.msg.basic.THAT_SOMEONES_PET, 0
     else
         return 0, 0
     end
@@ -32,19 +32,19 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     if target:isPC() then
-        ability:setMsg(tpz.msg.basic.NO_EFFECT)
+        ability:setMsg(xi.msg.basic.NO_EFFECT)
     else
         local Tamed = false
 
         if player:getLocalVar("Tamed_Mob") == target:getID() then
-            player:addMod(tpz.mod.CHARM_CHANCE, 10)
+            player:addMod(xi.mod.CHARM_CHANCE, 10)
             Tamed = true
         end
 
         player:charmPet(target)
 
         if Tamed then
-            player:delMod(tpz.mod.CHARM_CHANCE, 10)
+            player:delMod(xi.mod.CHARM_CHANCE, 10)
             player:setLocalVar("Tamed_Mob", 0)
         end
     end

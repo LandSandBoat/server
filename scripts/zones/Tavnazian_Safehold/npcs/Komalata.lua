@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         4509,  10,    -- Distilled Water
     }
 
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 625)      -- Apple Vinegar
         table.insert(stock, 91)
         table.insert(stock, 4364)    -- Black Bread
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     end
 
     player:showText(npc, ID.text.KOMALATA_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

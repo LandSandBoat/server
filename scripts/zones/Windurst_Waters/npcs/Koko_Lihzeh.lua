@@ -14,19 +14,19 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 1) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 1) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_4", 0)
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.SPIRITED_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SPIRITED_STONE)
+            player:addKeyItem(xi.ki.SPIRITED_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SPIRITED_STONE)
         end
     end
 
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         player:startEvent(451) -- During Making the GRADE
     else
         player:startEvent(428) -- Standard conversation

@@ -35,9 +35,9 @@ function onTrigger(player, arg1, arg2, arg3, arg4)
         local entity_type = string.upper(arg3)
         if (entity_type == 'NPC') or (entity_type == 'MOB') then
             arg4 = tonumber(arg4)
-            if zone:getType() == tpz.zoneType.INSTANCED then
+            if zone:getType() == xi.zoneType.INSTANCED then
                 local instance = player:getInstance()
-                targ = instance:getEntity(bit.band(arg4, 0xFFF), tpz.objType[entity_type])
+                targ = instance:getEntity(bit.band(arg4, 0xFFF), xi.objType[entity_type])
             elseif entity_type == 'NPC' then
                 targ = GetNPCByID(arg4)
             else

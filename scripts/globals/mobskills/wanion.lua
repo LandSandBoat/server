@@ -14,12 +14,12 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- list of effects to give in AoE
-    local effects = {tpz.effect.POISON, tpz.effect.PARALYSIS, tpz.effect.BLINDNESS, tpz.effect.SILENCE,
-        tpz.effect.WEIGHT, tpz.effect.SLOW, tpz.effect.ADDLE, tpz.effect.DIA, tpz.effect.BIO, tpz.effect.BURN,
-        tpz.effect.FROST, tpz.effect.CHOKE, tpz.effect.RASP, tpz.effect.SHOCK, tpz.effect.DROWN, tpz.effect.STR_DOWN,
-        tpz.effect.DEX_DOWN, tpz.effect.VIT_DOWN, tpz.effect.AGI_DOWN, tpz.effect.INT_DOWN, tpz.effect.MND_DOWN,
-        tpz.effect.CHR_DOWN, tpz.effect.ACCURACY_DOWN, tpz.effect.ATTACK_DOWN, tpz.effect.EVASION_DOWN,
-        tpz.effect.DEFENSE_DOWN, tpz.effect.MAGIC_DEF_DOWN, tpz.effect.MAGIC_ACC_DOWN, tpz.effect.MAGIC_ATK_DOWN}
+    local effects = { xi.effect.POISON, xi.effect.PARALYSIS, xi.effect.BLINDNESS, xi.effect.SILENCE,
+        xi.effect.WEIGHT, xi.effect.SLOW, xi.effect.ADDLE, xi.effect.DIA, xi.effect.BIO, xi.effect.BURN,
+        xi.effect.FROST, xi.effect.CHOKE, xi.effect.RASP, xi.effect.SHOCK, xi.effect.DROWN, xi.effect.STR_DOWN,
+        xi.effect.DEX_DOWN, xi.effect.VIT_DOWN, xi.effect.AGI_DOWN, xi.effect.INT_DOWN, xi.effect.MND_DOWN,
+        xi.effect.CHR_DOWN, xi.effect.ACCURACY_DOWN, xi.effect.ATTACK_DOWN, xi.effect.EVASION_DOWN,
+        xi.effect.DEFENSE_DOWN, xi.effect.MAGIC_DEF_DOWN, xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN}
 
     for i, effect in ipairs(effects) do
         if mob:hasStatusEffect(effect) then
@@ -28,7 +28,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             mob:delStatusEffect(effect)
         end
     end
-    skill:setMsg(tpz.msg.basic.NONE)
+    skill:setMsg(xi.msg.basic.NONE)
 end
 
 return mobskill_object

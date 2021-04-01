@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         17335,    8,    -- Rusty Bolt
     }
 
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.SHELTERING_DOUBT then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
         table.insert(stock, 18375)    -- Falx
         table.insert(stock, 93240)
         table.insert(stock, 18214)    -- Voulge
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     end
 
     player:showText(npc, ID.text.MELLEUPAUX_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

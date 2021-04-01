@@ -13,9 +13,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local currentMission = player:getCurrentMission(WINDURST)
-    local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
+    local nextMissionFinished = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY)
 
-    if currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getCharVar("MissionStatus") == 3 then
+    if currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and player:getCharVar("MissionStatus") == 3 then
         if trade:hasItemQty(16447, 3) and trade:getItemCount() == 3 then -- Trade Rusty Dagger
             player:tradeComplete()
             player:startEvent(151)
@@ -26,11 +26,11 @@ end
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
-    local nextMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY)
-    local starsMissionFinished = player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)
+    local nextMissionFinished = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY)
+    local starsMissionFinished = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)
 
     if
-        currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
         not nextMissionFinished and
         not starsMissionFinished
     then
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(135)
         end
     elseif
-        currentMission == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        currentMission == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
         (nextMissionFinished or starsMissionFinished)
     then
         if missionStatus == 0 then
@@ -50,13 +50,13 @@ entity.onTrigger = function(player, npc)
         elseif missionStatus == 3 then
             player:startEvent(150, 0, 16447)
         end
-    elseif player:hasKeyItem(tpz.ki.STAR_CRESTED_SUMMONS) then
+    elseif player:hasKeyItem(xi.ki.STAR_CRESTED_SUMMONS) then
         player:startEvent(157)
-    elseif currentMission == tpz.mission.id.windurst.THE_SHADOW_AWAITS and player:hasKeyItem(tpz.ki.SHADOW_FRAGMENT) then
+    elseif currentMission == xi.mission.id.windurst.THE_SHADOW_AWAITS and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT) then
         player:startEvent(194) -- her reaction after 5-1.
     elseif
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.MOON_READING and
-        (missionStatus >= 3 or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING))
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and
+        (missionStatus >= 3 or player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING))
     then
         player:startEvent(387)
     else
@@ -69,8 +69,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 121 then
-        player:addKeyItem(tpz.ki.CHARM_OF_LIGHT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHARM_OF_LIGHT)
+        player:addKeyItem(xi.ki.CHARM_OF_LIGHT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHARM_OF_LIGHT)
         player:setCharVar("MissionStatus", 1)
     elseif csid == 149 or csid == 257 then
         player:setCharVar("MissionStatus", 3)

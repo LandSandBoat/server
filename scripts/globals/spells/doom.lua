@@ -13,12 +13,12 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.DOOM
+    local effect = xi.effect.DOOM
     if (target:hasStatusEffect(effect) == false) then
-        spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB) -- gains effect
+        spell:setMsg(xi.msg.basic.MAGIC_ENFEEB) -- gains effect
         target:addStatusEffect(effect, 10, 3, 30)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
 
     return effect

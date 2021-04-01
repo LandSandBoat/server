@@ -16,11 +16,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(1800, spell:getSkillType(), spell:getSpellGroup(), caster, target, false)
     duration = calculateDurationForLvl(duration, 68, target:getMainLvl())
 
-    local typeEffect = tpz.effect.SHELL
+    local typeEffect = xi.effect.SHELL
     if target:addStatusEffect(typeEffect, power, 0, duration) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
     return typeEffect
 end

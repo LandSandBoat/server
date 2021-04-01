@@ -14,7 +14,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local heartwingsAndTheKindhearted = player:getCurrentMission(SOA) == tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
+    local heartwingsAndTheKindhearted = player:getCurrentMission(SOA) == xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-142, 4, -18, 4)
@@ -45,12 +45,12 @@ zone_object.onEventFinish = function(player, csid, option)
 
         if (option == 1) then
             -- Starts Quest: 'Raptor Rapture'
-            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.RAPTOR_RAPTURE)
+            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.RAPTOR_RAPTURE)
             player:setCharVar("Raptor_Rapture_Status", 4)
         end
     elseif csid == 2 then
-        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
-        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.PIONEER_REGISTRATION)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.PIONEER_REGISTRATION)
     end
 end
 

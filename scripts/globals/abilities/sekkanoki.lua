@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:delStatusEffect(tpz.effect.SEKKANOKI)
-    target:addStatusEffect(tpz.effect.SEKKANOKI, 1, 0, 60)
+    target:delStatusEffect(xi.effect.SEKKANOKI)
+    target:addStatusEffect(xi.effect.SEKKANOKI, 1, 0, 60)
 end
 
 return ability_object

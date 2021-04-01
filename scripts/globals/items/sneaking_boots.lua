@@ -12,8 +12,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:delStatusEffect(tpz.effect.SNEAK)
-    target:addStatusEffect(tpz.effect.SNEAK, 1, 0, math.floor(180 * SNEAK_INVIS_DURATION_MULTIPLIER))
+    target:delStatusEffect(xi.effect.SNEAK)
+    target:addStatusEffect(xi.effect.SNEAK, 1, 0, math.floor(180 * SNEAK_INVIS_DURATION_MULTIPLIER))
 end
 
 return item_object

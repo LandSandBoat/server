@@ -24,8 +24,8 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.attackType = tpz.attackType.BREATH
-    params.damageType = tpz.damageType.WIND
+    params.attackType = xi.attackType.BREATH
+    params.damageType = xi.damageType.WIND
     params.multiplier = 2.775
     params.tMultiplier = 2.912
     params.duppercap = 58

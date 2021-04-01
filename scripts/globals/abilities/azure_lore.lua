@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.AZURE_LORE, 1, 0, 30)
+    player:addStatusEffect(xi.effect.AZURE_LORE, 1, 0, 30)
 end
 
 return ability_object

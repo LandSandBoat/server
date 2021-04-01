@@ -9,12 +9,12 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 158)
+    xi.hunts.checkHunt(mob, player, 158)
 end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    if not tpz.mob.phOnDespawn(mob, ID.mob.FRADUBIO_PH, 10, math.random(75600, 86400)) then -- 21-24 hours
+    if not xi.mob.phOnDespawn(mob, ID.mob.FRADUBIO_PH, 10, math.random(75600, 86400)) then -- 21-24 hours
         mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
     end
 end

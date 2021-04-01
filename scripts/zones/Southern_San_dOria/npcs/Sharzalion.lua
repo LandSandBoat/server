@@ -20,13 +20,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    theCrimsonTrial = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
-    envelopedInDarkness = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
-    peaceForTheSpirit = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
+    theCrimsonTrial = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
+    envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+    peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
     peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
-    OrcishDriedFood = player:hasKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
+    OrcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
 
-    if (player:getMainJob() == tpz.job.RDM and player:getMainLvl() >= AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
+    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_rdmaf1_quest_already") == 0) then
             player:startEvent(70)
         else
@@ -61,18 +61,18 @@ entity.onEventFinish = function(player, csid, option)
         if (csid == 70 and option == 0) then
             player:setCharVar("has_seen_rdmaf1_quest_already", 1)
         elseif (option == 1) then
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
             player:setCharVar("has_seen_rdmaf1_quest_already", 0)
         end
     elseif (csid == 75) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16829) -- Fencing Degen
         else
-            player:delKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
+            player:delKeyItem(xi.ki.ORCISH_DRIED_FOOD)
             player:addItem(16829)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16829) -- Fencing Degen
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
         end
     elseif (csid == 64) then
         player:setCharVar("peaceForTheSpiritCS", 1)

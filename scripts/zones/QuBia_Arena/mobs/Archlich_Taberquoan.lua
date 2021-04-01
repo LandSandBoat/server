@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.SOUND_RANGE, 32)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 32)
 end
 
 entity.onMobFight = function(mob, target)
@@ -31,7 +31,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.ARCHMAGE_ASSASSIN)
+    player:addTitle(xi.title.ARCHMAGE_ASSASSIN)
 end
 
 return entity

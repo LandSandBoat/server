@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.WALLHACK
+local flags = xi.path.flag.WALLHACK
 local path =
 {
     [1] =
@@ -68,8 +68,8 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.SLASHRES, 0)
-    mob:setMod(tpz.mod.PIERCERES, 1500)
+    mob:setMod(xi.mod.SLASHRES, 0)
+    mob:setMod(xi.mod.PIERCERES, 1500)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
@@ -78,11 +78,11 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         battlefield:setLocalVar("killCountF2", battlefield:getLocalVar("killCountF2")+1)
         local killCount = battlefield:getLocalVar("killCountF2")
         if killCount == 2 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]):setStatus(xi.status.NORMAL)
         elseif killCount == 4 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]+1):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]+1):setStatus(xi.status.NORMAL)
         elseif killCount == 8 then
-            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]+2):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_SE_CRATE[2]+2):setStatus(xi.status.NORMAL)
         end
     end
 end

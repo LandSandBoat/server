@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    local encumbrance = target:getStatusEffect(tpz.effect.ENCUMBRANCE_I)
+    local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
     if (encumbrance) then
         local power = encumbrance:getPower()
         if bit.band(power, 0x8400) > 0 then
@@ -19,12 +19,12 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local encumbrance = target:getStatusEffect(tpz.effect.ENCUMBRANCE_I)
+    local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
     local power = encumbrance:getPower()
     local newpower = bit.band(power, bit.bnot(0x8400))
-    target:delStatusEffectSilent(tpz.effect.ENCUMBRANCE_I)
+    target:delStatusEffectSilent(xi.effect.ENCUMBRANCE_I)
     if (newpower > 0) then
-        target:addStatusEffectEx(tpz.effect.ENCUMBRANCE_I, tpz.effect.ENCUMBRANCE_I, newpower, 0, 0)
+        target:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, newpower, 0, 0)
     end
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 5)
 end

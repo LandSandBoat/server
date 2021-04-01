@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         if (trade:hasItemQty(1660, 1) and trade:getItemCount() == 1) then -- Bronze Key
             player:tradeComplete()
             npc:openDoor(15)
-        elseif ((trade:hasItemQty(1115, 1) or trade:hasItemQty(1023, 1) or trade:hasItemQty(1022, 1)) and trade:getItemCount() == 1 and player:getMainJob() == tpz.job.THF) then
+        elseif ((trade:hasItemQty(1115, 1) or trade:hasItemQty(1023, 1) or trade:hasItemQty(1022, 1)) and trade:getItemCount() == 1 and player:getMainJob() == xi.job.THF) then
             -- thief's tool/living key/skeleton key as THF main
             player:tradeComplete()
             npc:openDoor(15)

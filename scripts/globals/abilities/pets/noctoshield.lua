@@ -14,12 +14,12 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onPetAbility = function(target, pet, skill, summoner)
-        local bonusTime = utils.clamp(summoner:getSkillLevel(tpz.skill.SUMMONING_MAGIC) - 300, 0, 200)
+        local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration = 180 + bonusTime
 
-    target:addStatusEffect(tpz.effect.PHALANX, 13, 0, duration)
-    skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
-    return tpz.effect.PHALANX
+    target:addStatusEffect(xi.effect.PHALANX, 13, 0, duration)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
+    return xi.effect.PHALANX
 end
 
 return ability_object

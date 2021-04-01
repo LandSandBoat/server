@@ -15,7 +15,7 @@ require("scripts/globals/beastmentreasure")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
@@ -31,21 +31,21 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.BRIGHT_HANDED_KUNBERRY)
     GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY):setRespawnTime(math.random(900, 10800))
 
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
-    tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
-    tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
-    tpz.chocobo.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.chocobo.initZone(zone)
 
-    tpz.bmt.updatePeddlestox(tpz.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
 zone_object.onGameDay = function()
-    tpz.bmt.updatePeddlestox(tpz.zone.YHOATOR_JUNGLE, ID.npc.PEDDLESTOX)
+    xi.bmt.updatePeddlestox(xi.zone.YHOATOR_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function( player, prevZone)

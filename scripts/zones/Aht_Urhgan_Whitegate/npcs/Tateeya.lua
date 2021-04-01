@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
     local tradeStatus = player:getCharVar('TateeyaTradeStatus')
     local automatonName = player:getAutomatonName()
     if tradeStatus == 0 then
-        if player:getMainJob() == tpz.job.PUP then
+        if player:getMainJob() == xi.job.PUP then
             player:startEventString(650, automatonName, automatonName, automatonName, automatonName) --trade me to unlock attachments
         else
             player:startEvent(258) --default no PUP CS

@@ -17,16 +17,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player,npc)
-    local noWeapons = player:getEquipID(tpz.slot.MAIN) == 0 and player:getEquipID(tpz.slot.SUB) == 0
-    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
+    local noWeapons = player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getCharVar("AhtUrganStatus") == 1 and
         doRoyalPalaceArmorCheck(player) and noWeapons then
         player:startEvent(3078, 0, 1, 0, 0, 0, 0, 0, 1, 0)
-    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.SEAL_OF_THE_SERPENT and noWeapons then
+    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.SEAL_OF_THE_SERPENT and noWeapons then
         player:startEvent(3111)
-    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMPERIAL_CORONATION and
+    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.IMPERIAL_CORONATION and
         doRoyalPalaceArmorCheck(player) and noWeapons then
-        player:startEvent(3140, tpz.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
-    elseif player:getCurrentMission(TOAU) >= tpz.mission.id.toau.IMPERIAL_CORONATION and
+        player:startEvent(3140, xi.besieged.getMercenaryRank(player), player:getTitle(), 0, 0, 0, 0, 0, 0, 0)
+    elseif player:getCurrentMission(TOAU) >= xi.mission.id.toau.IMPERIAL_CORONATION and
         doRoyalPalaceArmorCheck(player) and noWeapons then
         local ring = player:getCharVar("TOAU_RINGTIME")
         local standard = player:hasItem(129)
@@ -76,23 +76,23 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 3078 and npcUtil.giveItem(player, 2186) then
-        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF_THE_EMPIRE)
         player:setCharVar("AhtUrganStatus", 0)
-        player:addTitle(tpz.title.OVJANGS_ERRAND_RUNNER)
+        player:addTitle(xi.title.OVJANGS_ERRAND_RUNNER)
         player:needToZone(true)
         player:setCharVar("TOAUM18_STARTDAY", VanadielDayOfTheYear())
-        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.PASSING_GLORY)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY)
     elseif csid == 3111 then
-        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.SEAL_OF_THE_SERPENT)
-        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.MISPLACED_NOBILITY)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.SEAL_OF_THE_SERPENT)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.MISPLACED_NOBILITY)
     elseif csid == 3140 and player:getCharVar("TOAU_RINGRECV") == 1 then
-        player:completeMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IMPERIAL_CORONATION)
-        player:addMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.THE_EMPRESS_CROWNED)
+        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMPERIAL_CORONATION)
+        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
         npcUtil.giveItem(player, 129)
     elseif csid == 722 then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
         player:setCharVar("TransformationsProgress", 2)
         player:setCharVar("[BLUAF]Remaining", 7) -- Player can now craft BLU armor
     end

@@ -32,26 +32,26 @@ entity.onTrigger = function(player, npc)
     local intensity     = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
 
     if (
-        player:hasKeyItem(tpz.ki.MARK_OF_SEED) or
-        player:hasKeyItem(tpz.ki.AZURE_KEY) or
-        player:hasKeyItem(tpz.ki.IVORY_KEY) or
+        player:hasKeyItem(xi.ki.MARK_OF_SEED) or
+        player:hasKeyItem(xi.ki.AZURE_KEY) or
+        player:hasKeyItem(xi.ki.IVORY_KEY) or
         os.time() < player:getCharVar("LastAzureKey") or
         os.time() < player:getCharVar("LastIvoryKey") or
-        ACP < tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
+        ACP < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
     ) then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)
 
-    elseif (needToZone and not player:hasStatusEffect(tpz.effect.MARK_OF_SEED)) then
+    elseif (needToZone and not player:hasStatusEffect(xi.effect.MARK_OF_SEED)) then
         player:messageSpecial(ID.text.YOU_REACH_FOR_THE_LIGHT)
-    elseif (ACP >= tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not utils.mask.getBit(progressMask, offset)) then
+    elseif (ACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not utils.mask.getBit(progressMask, offset)) then
         player:setCharVar("SEED_AFTERGLOW_MASK", utils.mask.setBit(progressMask, offset, true))
         intensity = intensity + 1
         if (intensity == 9) then
             player:startEvent(28)
-        elseif (not needToZone and not player:hasStatusEffect(tpz.effect.MARK_OF_SEED)) then
+        elseif (not needToZone and not player:hasStatusEffect(xi.effect.MARK_OF_SEED)) then
             player:setCharVar("SEED_AFTERGLOW_INTENSITY", intensity)
             player:messageSpecial(ID.text.YOU_REACH_OUT_TO_THE_LIGHT, 0)
-            player:addStatusEffectEx(tpz.effect.MARK_OF_SEED, 0, 0, 30, 1800)
+            player:addStatusEffectEx(xi.effect.MARK_OF_SEED, 0, 0, 30, 1800)
             player:needToZone(true)
             player:messageSpecial(ID.text.THE_LIGHT_DWINDLES, 0)
         else
@@ -69,13 +69,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 28 then
-        player:delStatusEffectSilent(tpz.effect.MARK_OF_SEED)
+        player:delStatusEffectSilent(xi.effect.MARK_OF_SEED)
 
         if option == 100 then
             player:messageSpecial(ID.text.SCINTILLATING_BURST_OF_LIGHT)
-            npcUtil.giveKeyItem(player, tpz.ki.MARK_OF_SEED)
+            npcUtil.giveKeyItem(player, xi.ki.MARK_OF_SEED)
         elseif option == 200 then
-            npcUtil.giveKeyItem(player, tpz.ki.AZURE_KEY)
+            npcUtil.giveKeyItem(player, xi.ki.AZURE_KEY)
         end
     end
 end

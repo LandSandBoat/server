@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and
         player:getCharVar("bladeOfEvilCS") == 0 and
         npcUtil.tradeHas(trade, 1114) and
         not GetMobByID(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 0):isSpawned() and

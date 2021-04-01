@@ -9,10 +9,10 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
-    mob:setMod(tpz.mod.STUNRES, 50)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMod(xi.mod.STUNRES, 50)
 end
 
 entity.onMobSpawn = function(mob)

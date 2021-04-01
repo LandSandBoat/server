@@ -38,7 +38,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
 
-    player:addTitle(tpz.title.HYDRA_HEADHUNTER)
+    player:addTitle(xi.title.HYDRA_HEADHUNTER)
 
 end
 

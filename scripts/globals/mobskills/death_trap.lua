@@ -18,13 +18,13 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.POISON
+    local typeEffect = xi.effect.POISON
     local duration = 60
     local power = mob:getMainLvl() / 3
 
     if (math.random() <= 0.5) then
         -- stun
-        typeEffect = tpz.effect.STUN
+        typeEffect = xi.effect.STUN
         duration = 10
         power = 1
     end

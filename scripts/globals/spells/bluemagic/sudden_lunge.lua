@@ -23,19 +23,19 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
-    params.effect = tpz.effect.STUN
+    params.effect = xi.effect.STUN
     local resist = applyResistanceEffect(caster, target, spell, params)
     local params = {}
     -- Todo: determine if these param values are retail
     params.tpmod = TPMOD_DAMAGE
-    params.attackType = tpz.attackType.PHYSICAL
-    params.damageType = tpz.damageType.SLASHING
+    params.attackType = xi.attackType.PHYSICAL
+    params.damageType = xi.damageType.SLASHING
     params.scattr = SC_DETONATION
     params.numhits = 1
     params.multiplier = 1.875
@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (resist > 0.25) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, 20 * resist) -- Wiki says duration of "up to" 20 second..
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 20 * resist) -- Wiki says duration of "up to" 20 second..
     end
 
     return damage

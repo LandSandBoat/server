@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.RONFAURE)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+    local RegionOwner = GetRegionOwner(xi.region.RONFAURE)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.JOURILLE_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.JOURILLE_OPEN_DIALOG)
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
             610,    55,  -- San d'Orian Flour
             4431,   69,  -- San d'Orian Grape
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
     end
 end
 

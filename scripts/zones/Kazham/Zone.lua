@@ -11,17 +11,17 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == tpz.zone.KAZHAM_JEUNO_AIRSHIP) then
+        if (prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP) then
             cs = 10002
         end
         player:setPos(-4.000, -3.000, 14.000, 66)

@@ -14,8 +14,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    target:addStatusEffectEx(tpz.effect.SUPER_BUFF, 0, 50, 0, 30)
-    skill:setMsg(tpz.msg.basic.NONE)
+    target:addStatusEffectEx(xi.effect.SUPER_BUFF, 0, 50, 0, 30)
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 

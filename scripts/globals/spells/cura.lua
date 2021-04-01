@@ -15,7 +15,7 @@ local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     if (caster:getID() ~= target:getID()) then
-        return tpz.msg.basic.CANNOT_PERFORM_TARG
+        return xi.msg.basic.CANNOT_PERFORM_TARG
     else
         return 0
     end
@@ -77,9 +77,9 @@ spell_object.onSpellCast = function(caster, target, spell)
     end
 
     --Apply Afflatus Misery Bonus to Final Result
-    if (caster:hasStatusEffect(tpz.effect.AFFLATUS_MISERY)) then
+    if (caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY)) then
         if (caster:getID() == target:getID()) then -- Let's use a local var to hold the power of Misery so the boost is applied to all targets,
-            caster:setLocalVar("Misery_Power", caster:getMod(tpz.mod.AFFLATUS_MISERY))
+            caster:setLocalVar("Misery_Power", caster:getMod(xi.mod.AFFLATUS_MISERY))
         end
         local misery = caster:getLocalVar("Misery_Power")
         -- print(caster:getLocalVar("Misery_Power"))
@@ -105,11 +105,11 @@ spell_object.onSpellCast = function(caster, target, spell)
         --printf("AFTER AFFLATUS MISERY BONUS: %d", basecure)
 
         --Afflatus Misery Mod Gets Used Up
-        caster:setMod(tpz.mod.AFFLATUS_MISERY, 0)
+        caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
     end
 
     final = getCureFinal(caster, spell, basecure, minCure, false)
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....
     final = final * CURE_POWER
@@ -120,9 +120,9 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     --Enmity for Cura is fixed, so its CE/VE is set in the SQL and not calculated with updateEnmityFromCure
 
-    spell:setMsg(tpz.msg.basic.AOE_HP_RECOVERY)
+    spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(tpz.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

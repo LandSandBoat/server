@@ -13,8 +13,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.WARP, 0, 4)
-    spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 4)
+    spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
     return 0
 end
 

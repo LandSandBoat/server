@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.IMPAIRMENT
+-- xi.effect.IMPAIRMENT
 -----------------------------------
 local effect_object = {}
 

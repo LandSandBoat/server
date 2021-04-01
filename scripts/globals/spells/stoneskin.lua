@@ -16,9 +16,9 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local pMod = caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC) / 3 + caster:getStat(tpz.mod.MND)
+    local pMod = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC) / 3 + caster:getStat(xi.mod.MND)
     local pAbs = 0
-    local pEquipMods = caster:getMod(tpz.mod.STONESKIN_BONUS_HP)
+    local pEquipMods = caster:getMod(xi.mod.STONESKIN_BONUS_HP)
     local duration = 300
     if pMod < 80 then
         pAbs = pMod
@@ -36,13 +36,13 @@ spell_object.onSpellCast = function(caster, target, spell)
     duration = calculateDurationForLvl(duration, 28, target:getMainLvl())
 
     local final = pAbs + pEquipMods
-    if target:addStatusEffect(tpz.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+    if target:addStatusEffect(xi.effect.STONESKIN, final, 0, duration, 0, 0, 4) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.STONESKIN
+    return xi.effect.STONESKIN
 end
 
 return spell_object

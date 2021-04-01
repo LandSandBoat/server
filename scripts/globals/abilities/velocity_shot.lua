@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.VELOCITY_SHOT, 1, 0, 7200)
+    player:addStatusEffect(xi.effect.VELOCITY_SHOT, 1, 0, 7200)
 end
 
 return ability_object

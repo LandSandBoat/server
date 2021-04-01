@@ -20,11 +20,11 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(0, 0, 22, 192)
     end
 
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST and player:getCharVar("MissionStatus") == 3 then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST and player:getCharVar("MissionStatus") == 3 then
         cs = 42
-    elseif player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_EMISSARY_WINDURST and player:getCharVar("MissionStatus") == 2 then
+    elseif player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST and player:getCharVar("MissionStatus") == 2 then
         cs = 42
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.DOLL_OF_THE_DEAD and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getCharVar("MissionStatus") == 1 then
         cs = 335
     end
 
@@ -32,7 +32,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -63,7 +63,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("MissionStatus", 2)
     elseif csid == 42 then
         -- This cs should only play if you visit Windurst first.
-        if player:getNation() == tpz.nation.SANDORIA then
+        if player:getNation() == xi.nation.SANDORIA then
             player:setCharVar("MissionStatus", 4)
         else
             player:setCharVar("MissionStatus", 3)

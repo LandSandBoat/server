@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
-    GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(tpz.status.DISAPPEAR)
+    GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(xi.status.DISAPPEAR)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

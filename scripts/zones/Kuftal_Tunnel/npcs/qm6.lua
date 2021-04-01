@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     -- ENTER THE TALEKEEPER
-    if player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.ENTER_THE_TALEKEEPER then
+    if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ENTER_THE_TALEKEEPER then
         local missionStatus = player:getCharVar("MissionStatus")
         local anyGhostsAlive = false
         for i = 0, 2 do
@@ -48,7 +48,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
         player:setCharVar("MissionStatus", 4)
-        npcUtil.giveKeyItem(player, tpz.ki.OLD_PIECE_OF_WOOD)
+        npcUtil.giveKeyItem(player, xi.ki.OLD_PIECE_OF_WOOD)
     end
 end
 

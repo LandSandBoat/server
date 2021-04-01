@@ -10,11 +10,11 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(tpz.ki.OLD_RING) then
-        player:addKeyItem(tpz.ki.OLD_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_RING)
+    if not player:hasKeyItem(xi.ki.OLD_RING) then
+        player:addKeyItem(xi.ki.OLD_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RING)
     end
-    if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         npc:openDoor()
     end
 end

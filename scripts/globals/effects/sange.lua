@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SANGE
+-- xi.effect.SANGE
 -----------------------------------
 local effect_object = {}
 

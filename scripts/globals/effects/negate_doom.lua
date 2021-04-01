@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.NEGATE_DOOM
+-- xi.effect.NEGATE_DOOM
 -----------------------------------
 local effect_object = {}
 

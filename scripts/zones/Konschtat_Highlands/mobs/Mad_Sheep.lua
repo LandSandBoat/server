@@ -10,11 +10,11 @@ require("scripts/quests/tutorial")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.tutorial.onMobDeath(player)
+    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.STRAY_MARY_PH, 5, math.random(300, 3600)) -- 5-60 minutes
+    xi.mob.phOnDespawn(mob, ID.mob.STRAY_MARY_PH, 5, math.random(300, 3600)) -- 5-60 minutes
 end
 
 return entity

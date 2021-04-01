@@ -15,11 +15,11 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
-    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, {558, 559, 561, 562}, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
@@ -27,10 +27,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CollectTarutCards = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
-    local RubbishDay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-    local SearchingForTheRightWords = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local AllInTheCards = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
+    local CollectTarutCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
+    local RubbishDay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+    local SearchingForTheRightWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local AllInTheCards = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
     local cdate = player:getCharVar("AllInTheCards_date")
 
     if player:getFameLevel(JEUNO) >= 3 and CollectTarutCards == QUEST_AVAILABLE then
@@ -95,22 +95,22 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, card)
         else
-            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
             player:addItem(card, 5)
             player:messageSpecial(ID.text.ITEM_OBTAINED, card)
         end
     elseif (csid == 200) then
-        player:addTitle(tpz.title.CARD_COLLECTOR)
+        player:addTitle(xi.title.CARD_COLLECTOR)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COLLECT_TARUT_CARDS)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
     elseif (csid == 199 and option == 0) then
         player:addCharVar("RubbishDay_prog", 1)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
     elseif (csid == 198 and option == 0) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-        player:addKeyItem(tpz.ki.MAGIC_TRASH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAGIC_TRASH)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+        player:addKeyItem(xi.ki.MAGIC_TRASH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDay_prog", 0)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear())
     elseif (csid == 10110 or csid == 10112 or csid == 10113) and option == 0 then -- ALL_IN_THE_CARDS started, repeated, or additional cards given
@@ -128,22 +128,22 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if npcUtil.giveItem(player, {{card, 5}}) then
-            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS)
+            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
             player:setCharVar("AllInTheCards_date", getMidnight())
             player:setLocalVar("Cardstemp", 1)
         end
     elseif csid == 10111 then -- same day, have to return later
         player:setLocalVar("Cardstemp", 1)
     elseif csid == 10114 then
-        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.ALL_IN_THE_CARDS, {
+        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
             gil = 600,
-            title = tpz.title.CARD_COLLECTOR,
+            title = xi.title.CARD_COLLECTOR,
             var = {"AllInTheCards_date"}
         }) then
             trade:confirm()
         end
     elseif csid == 197 then
-        npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY, {
+        npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
             gil = 6000,
             item = 13083,
             var = {"RubbishDayVar"}

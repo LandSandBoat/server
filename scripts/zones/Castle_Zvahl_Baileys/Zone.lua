@@ -32,11 +32,11 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.GRAND_DUKE_BATYM)
     GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(900, 10800))
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

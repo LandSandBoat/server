@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MANA_CEDE
+-- xi.effect.MANA_CEDE
 -----------------------------------
 local effect_object = {}
 

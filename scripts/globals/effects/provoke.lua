@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PROVOKE
+-- xi.effect.PROVOKE
 -----------------------------------
 local effect_object = {}
 

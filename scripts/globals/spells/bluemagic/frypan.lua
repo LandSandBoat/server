@@ -23,19 +23,19 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 0
-    params.effect = tpz.effect.STUN
+    params.effect = xi.effect.STUN
     local resist = applyResistanceEffect(caster, target, spell, params)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ACC
-    params.attackType = tpz.attackType.PHYSICAL
-    params.damageType = tpz.damageType.BLUNT
+    params.attackType = xi.attackType.PHYSICAL
+    params.damageType = xi.damageType.BLUNT
     params.scattr = SC_IMPACTION
     params.numhits = 1
     params.multiplier = 1.78
@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (resist > 0.5) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, 5 * resist) -- pre-resist duration needs confirmed/adjusted
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist) -- pre-resist duration needs confirmed/adjusted
     end
 
     return damage

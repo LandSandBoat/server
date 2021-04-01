@@ -12,12 +12,12 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(pet, target, skill, action)
-    if (target:delStatusEffect(tpz.effect.POISON)) then
-        skill:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT)
+    if (target:delStatusEffect(xi.effect.POISON)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
     else
-        skill:setMsg(tpz.msg.basic.JA_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
-    return tpz.effect.POISON
+    return xi.effect.POISON
 end
 
 return ability_object

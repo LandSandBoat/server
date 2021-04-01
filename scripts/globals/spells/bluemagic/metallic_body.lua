@@ -25,8 +25,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local typeEffect = tpz.effect.STONESKIN
-    local blueskill = caster:getSkillLevel(tpz.skill.BLUE_MAGIC)
+    local typeEffect = xi.effect.STONESKIN
+    local blueskill = caster:getSkillLevel(xi.skill.BLUE_MAGIC)
     local power = (blueskill/3) + (caster:getMainLvl()/3) + 10
     local duration = 300
 
@@ -34,18 +34,18 @@ spell_object.onSpellCast = function(caster, target, spell)
         power = 150
     end
 
-    if (caster:hasStatusEffect(tpz.effect.DIFFUSION)) then
-        local diffMerit = caster:getMerit(tpz.merit.DIFFUSION)
+    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
+        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
         if (diffMerit > 0) then
             duration = duration + (duration/100)* diffMerit
         end
 
-        caster:delStatusEffect(tpz.effect.DIFFUSION)
+        caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
     if not target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, 2) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     return typeEffect

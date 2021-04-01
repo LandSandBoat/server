@@ -13,9 +13,9 @@ function onMobSkillCheck(target, automaton, skill)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
-    automaton:addRecast(tpz.recast.ABILITY, skill:getID(), 30)
+    automaton:addRecast(xi.recast.ABILITY, skill:getID(), 30)
     target:addEnmity(automaton, 1, 1800)
-    skill:setMsg(tpz.msg.basic.USES)
+    skill:setMsg(xi.msg.basic.USES)
     return 0
 end
 

@@ -14,7 +14,7 @@ entity.onMobFight = function(mob, target)
     local pet = GetMobByID(mobId + 2)
     if not pet:isSpawned() then
         SpawnMob(mobId + 2):updateEnmity(target)
-    elseif pet:getCurrentAction() == tpz.act.ROAMING then
+    elseif pet:getCurrentAction() == xi.act.ROAMING then
         pet:updateEnmity(target)
     end
 end

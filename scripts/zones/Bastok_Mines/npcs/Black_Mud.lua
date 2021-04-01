@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+Drachenfall = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 
     if (Drachenfall == QUEST_ACCEPTED) then
         count = trade:getItemCount()
@@ -27,7 +27,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+Drachenfall = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 Fame = player:getFameLevel(BASTOK)
 
     if (Drachenfall == QUEST_ACCEPTED) then
@@ -53,12 +53,12 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 101) then
-        Drachenfall = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+        Drachenfall = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
 
         if (Drachenfall == QUEST_AVAILABLE) then
             FreeSlots = player:getFreeSlotsCount()
             if (FreeSlots >= 1) then
-                player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+                player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
                 player:addItem(493)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 493)
             else
@@ -75,9 +75,9 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif (csid == 103) then
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DRACHENFALL)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DRACHENFALL)
         player:addFame(BASTOK, 120)
-        player:addTitle(tpz.title.DRACHENFALL_ASCETIC)
+        player:addTitle(xi.title.DRACHENFALL_ASCETIC)
         player:addGil(GIL_RATE*2000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2000)
     end

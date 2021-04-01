@@ -14,10 +14,10 @@ end
 entity.onTrigger = function(player, npc)
 
     -- COP 4-2
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_SAVAGE and player:getCharVar("PromathiaStatus") == 0 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_SAVAGE and player:getCharVar("PromathiaStatus") == 0 then
         player:startEvent(8)
     -- COP 4-1
-    elseif player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.SHELTERING_DOUBT) then
+    elseif player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.SHELTERING_DOUBT) then
         player:startEvent(551) -- Access to Sites A & B
     else
         player:startEvent(550) -- Access to Site A Only

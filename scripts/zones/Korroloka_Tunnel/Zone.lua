@@ -15,7 +15,7 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(2, -101, 7, -114, 0, 0, 0) -- Center Pool
     zone:registerRegion(3, -112, 3, -103, 0, 0, 0) -- Right Pool
 
-    tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -27,7 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)

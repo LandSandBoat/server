@@ -17,7 +17,7 @@ item_object.onAdditionalEffect = function(player, target, damage)
     if (math.random(0, 99) >= chance or target:isUndead()) then
         return 0, 0, 0
     else
-        local diff = player:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+        local diff = player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         if (diff > 20) then
             diff = 20 + (diff - 20) / 2
         end
@@ -25,14 +25,14 @@ item_object.onAdditionalEffect = function(player, target, damage)
         local params = {}
         params.bonusmab = 0
         params.includemab = false
-        drain = addBonusesAbility(player, tpz.magic.ele.DARK, target, drain, params)
-        drain = drain * applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0)
-        drain = adjustForTarget(target, drain, tpz.magic.ele.DARK)
+        drain = addBonusesAbility(player, xi.magic.ele.DARK, target, drain, params)
+        drain = drain * applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0)
+        drain = adjustForTarget(target, drain, xi.magic.ele.DARK)
         if (drain < 0) then
             drain = 0
         end
-        drain = finalMagicNonSpellAdjustments(player, target, tpz.magic.ele.DARK, drain)
-        return tpz.subEffect.HP_DRAIN, tpz.msg.basic.ADD_EFFECT_HP_DRAIN, player:addHP(drain)
+        drain = finalMagicNonSpellAdjustments(player, target, xi.magic.ele.DARK, drain)
+        return xi.subEffect.HP_DRAIN, xi.msg.basic.ADD_EFFECT_HP_DRAIN, player:addHP(drain)
     end
 end
 

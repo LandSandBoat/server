@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.NONE
+-- xi.effect.NONE
 -----------------------------------
 local effect_object = {}
 

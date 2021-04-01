@@ -12,15 +12,15 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.POISON
+    local effect = xi.effect.POISON
 
     local duration = 180
 
-    local pINT = caster:getStat(tpz.mod.INT)
-    local mINT = target:getStat(tpz.mod.INT)
+    local pINT = caster:getStat(xi.mod.INT)
+    local mINT = target:getStat(xi.mod.INT)
 
     local dINT = (pINT - mINT)
-    local power = caster:getSkillLevel(tpz.skill.ENFEEBLING_MAGIC) / 10 + 1
+    local power = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 10 + 1
     if power > 25 then
         power = 25
     end
@@ -29,9 +29,9 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     params.diff = nil
 
-    params.attribute = tpz.mod.INT
+    params.attribute = xi.mod.INT
 
-    params.skillType = tpz.skill.ENFEEBLING_MAGIC
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
 
     params.bonus = 0
 
@@ -42,13 +42,13 @@ spell_object.onSpellCast = function(caster, target, spell)
         duration = duration * resist
 
         if (target:addStatusEffect(effect, power, 3, duration)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
 
     else -- resist entirely.
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return effect

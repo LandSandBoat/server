@@ -4,15 +4,15 @@ require("scripts/globals/msg")
 
 function getSummoningSkillOverCap(avatar)
     local summoner = avatar:getMaster()
-    local summoningSkill = summoner:getSkillLevel(tpz.skill.SUMMONING_MAGIC)
-    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), tpz.job.SMN, tpz.skill.SUMMONING_MAGIC)
+    local summoningSkill = summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC)
+    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
 
     return math.max(summoningSkill - maxSkill, 0)
 end
 
 function getDexCritRate(source, target)
     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
-    local dDex = source:getStat(tpz.mod.DEX) - target:getStat(tpz.mod.AGI)
+    local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
     local dDexAbs = math.abs(dDex)
 
     local sign = 1
@@ -191,7 +191,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
     if numHitsLanded == 0 then
         -- Missed everything we can exit early
         finaldmg = 0
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
     else
         -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
         -- Crit rate has a base of 5% and no cap, 0-100% are valid
@@ -200,17 +200,17 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
         local maxCritRate = 1 -- 100%
         local minCritRate = 0 -- 0%
 
-        local critRate = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(tpz.mod.CRITHITRATE)
+        local critRate = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)
         critRate = critRate / 100
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
 
         local weaponDmg = avatar:getWeaponDmg()
 
-        local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(tpz.mod.STR), target:getStat(tpz.mod.VIT))
+        local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
 
         -- https://www.bg-wiki.com/bg/PDIF
         -- https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
-        local ratio = avatar:getStat(tpz.mod.ATT) / target:getStat(tpz.mod.DEF)
+        local ratio = avatar:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
         local cRatio = ratio
 
         if shouldApplyLevelCorrection then
@@ -226,7 +226,7 @@ function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod,
 
         numHitsProcessed = 0
 
-        local critAttackBonus = 1 + ((avatar:getMod(tpz.mod.CRIT_DMG_INCREASE) - target:getMod(tpz.mod.CRIT_DEF_BONUS)) / 100)
+        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS)) / 100)
 
         if firstHitLanded then
             local wRatio = cRatio
@@ -283,64 +283,64 @@ end
 function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav)
 
     -- physical attack missed, skip rest
-    if skilltype == tpz.attackType.PHYSICAL and dmg == 0 then
+    if skilltype == xi.attackType.PHYSICAL and dmg == 0 then
         return 0
     end
 
     -- set message to damage
     -- this is for AoE because its only set once
-    skill:setMsg(tpz.msg.basic.DAMAGE)
+    skill:setMsg(xi.msg.basic.DAMAGE)
 
     -- Handle shadows depending on shadow behaviour / skilltype
     if shadowbehav < 5 and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
-        local targShadows = target:getMod(tpz.mod.UTSUSEMI)
-        local shadowType = tpz.mod.UTSUSEMI
+        local targShadows = target:getMod(xi.mod.UTSUSEMI)
+        local shadowType = xi.mod.UTSUSEMI
         if targShadows == 0 then -- try blink, as utsusemi always overwrites blink this is okay
-            targShadows = target:getMod(tpz.mod.BLINK)
-            shadowType = tpz.mod.BLINK
+            targShadows = target:getMod(xi.mod.BLINK)
+            shadowType = xi.mod.BLINK
         end
 
         if targShadows > 0 then
             -- Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
             if targShadows >= shadowbehav then -- no damage, just suck the shadows
-                skill:setMsg(tpz.msg.basic.SHADOW_ABSORB)
+                skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
                 target:setMod(shadowType, targShadows - shadowbehav)
-                if shadowType == tpz.mod.UTSUSEMI then -- update icon
-                    effect = target:getStatusEffect(tpz.effect.COPY_IMAGE)
+                if shadowType == xi.mod.UTSUSEMI then -- update icon
+                    effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                     if effect ~= nil then
                         if targShadows - shadowbehav == 0 then
-                            target:delStatusEffect(tpz.effect.COPY_IMAGE)
-                            target:delStatusEffect(tpz.effect.BLINK)
+                            target:delStatusEffect(xi.effect.COPY_IMAGE)
+                            target:delStatusEffect(xi.effect.BLINK)
                         elseif targShadows - shadowbehav == 1 then
-                            effect:setIcon(tpz.effect.COPY_IMAGE)
+                            effect:setIcon(xi.effect.COPY_IMAGE)
                         elseif targShadows - shadowbehav == 2 then
-                            effect:setIcon(tpz.effect.COPY_IMAGE_2)
+                            effect:setIcon(xi.effect.COPY_IMAGE_2)
                         elseif targShadows - shadowbehav == 3 then
-                            effect:setIcon(tpz.effect.COPY_IMAGE_3)
+                            effect:setIcon(xi.effect.COPY_IMAGE_3)
                         end
                     end
                 end
                 return shadowbehav
             else -- less shadows than this move will take, remove all and factor damage down
                 dmg = dmg * (shadowbehav - targShadows) / shadowbehav
-                target:setMod(tpz.mod.UTSUSEMI, 0)
-                target:setMod(tpz.mod.BLINK, 0)
-                target:delStatusEffect(tpz.effect.COPY_IMAGE)
-                target:delStatusEffect(tpz.effect.BLINK)
+                target:setMod(xi.mod.UTSUSEMI, 0)
+                target:setMod(xi.mod.BLINK, 0)
+                target:delStatusEffect(xi.effect.COPY_IMAGE)
+                target:delStatusEffect(xi.effect.BLINK)
             end
         end
     elseif shadowbehav == MOBPARAM_WIPE_SHADOWS then -- take em all!
-        target:setMod(tpz.mod.UTSUSEMI, 0)
-        target:setMod(tpz.mod.BLINK, 0)
-        target:delStatusEffect(tpz.effect.COPY_IMAGE)
-        target:delStatusEffect(tpz.effect.BLINK)
+        target:setMod(xi.mod.UTSUSEMI, 0)
+        target:setMod(xi.mod.BLINK, 0)
+        target:delStatusEffect(xi.effect.COPY_IMAGE)
+        target:delStatusEffect(xi.effect.BLINK)
     end
 
     -- handle Third Eye using shadowbehav as a guide
-    local teye = target:getStatusEffect(tpz.effect.THIRD_EYE)
-    if teye ~= nil and skilltype == tpz.attackType.PHYSICAL then -- T.Eye only procs when active with PHYSICAL stuff
+    local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
+    if teye ~= nil and skilltype == xi.attackType.PHYSICAL then -- T.Eye only procs when active with PHYSICAL stuff
         if shadowbehav == MOBPARAM_WIPE_SHADOWS then -- e.g. aoe moves
-            target:delStatusEffect(tpz.effect.THIRD_EYE)
+            target:delStatusEffect(xi.effect.THIRD_EYE)
         elseif shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- it can be absorbed by shadows
             -- third eye doesnt care how many shadows, so attempt to anticipate, but reduce
             -- chance of anticipate based on previous successful anticipates.
@@ -348,51 +348,51 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
             if prevAnt == 0 then
                 -- 100% proc
                 teye:setPower(1)
-                skill:setMsg(tpz.msg.basic.ANTICIPATE)
+                skill:setMsg(xi.msg.basic.ANTICIPATE)
                 return 0
             end
             if math.random() * 10 < 8 - prevAnt then
                 -- anticipated!
                 teye:setPower(prevAnt + 1)
-                skill:setMsg(tpz.msg.basic.ANTICIPATE)
+                skill:setMsg(xi.msg.basic.ANTICIPATE)
                 return 0
             end
-            target:delStatusEffect(tpz.effect.THIRD_EYE)
+            target:delStatusEffect(xi.effect.THIRD_EYE)
         end
     end
 
     -- TODO: Handle anything else (e.g. if you have Magic Shield and its a Magic skill, then do 0 damage.
-    if skilltype == tpz.attackType.PHYSICAL and target:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) then
+    if skilltype == xi.attackType.PHYSICAL and target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) then
         return 0
     end
 
-    if skilltype == tpz.attackType.RANGED and target:hasStatusEffect(tpz.effect.ARROW_SHIELD) then
+    if skilltype == xi.attackType.RANGED and target:hasStatusEffect(xi.effect.ARROW_SHIELD) then
         return 0
     end
 
     -- handle elemental resistence
-    if skilltype == tpz.attackType.MAGICAL and target:hasStatusEffect(tpz.effect.MAGIC_SHIELD) then
+    if skilltype == xi.attackType.MAGICAL and target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         return 0
     end
 
     -- handling phalanx
-    dmg = dmg - target:getMod(tpz.mod.PHALANX)
+    dmg = dmg - target:getMod(xi.mod.PHALANX)
     if dmg < 0 then
         return 0
     end
 
     -- handle invincible
-    if target:hasStatusEffect(tpz.effect.INVINCIBLE) and skilltype == tpz.attackType.PHYSICAL then
+    if target:hasStatusEffect(xi.effect.INVINCIBLE) and skilltype == xi.attackType.PHYSICAL then
         return 0
     end
     -- handle pd
-    if target:hasStatusEffect(tpz.effect.PERFECT_DODGE) or target:hasStatusEffect(tpz.effect.TOO_HIGH) and skilltype ==
-        tpz.attackType.PHYSICAL then
+    if target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.TOO_HIGH) and skilltype ==
+        xi.attackType.PHYSICAL then
         return 0
     end
 
     -- Calculate Blood Pact Damage before stoneskin
-    dmg = dmg + dmg * mob:getMod(tpz.mod.BP_DAMAGE) / 100
+    dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
@@ -404,7 +404,7 @@ end
 -- used to stop tp move status effects
 function AvatarPhysicalHit(skill, dmg)
     -- if message is not the default. Then there was a miss, shadow taken etc
-    return skill:getMsg() == tpz.msg.basic.DAMAGE
+    return skill:getMsg() == xi.msg.basic.DAMAGE
 end
 
 function avatarFTP(tp, ftp1, ftp2, ftp3)
@@ -424,8 +424,8 @@ end
 function avatarMiniFightCheck(caster)
     local result = 0
     local bcnmid
-    if caster:hasStatusEffect(tpz.effect.BATTLEFIELD) then
-        bcnmid = caster:getStatusEffect(tpz.effect.BATTLEFIELD):getPower()
+    if caster:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        bcnmid = caster:getStatusEffect(xi.effect.BATTLEFIELD):getPower()
         if bcnmid == 418 or bcnmid == 609 or bcnmid == 450 or bcnmid == 482 or bcnmid == 545 or bcnmid == 578 then -- Mini Avatar Fights
             result = 40 -- Cannot use <spell> in this area.
         end

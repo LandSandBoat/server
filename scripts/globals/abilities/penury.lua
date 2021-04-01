@@ -20,16 +20,16 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.PENURY) then
-        return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
+    if player:hasStatusEffect(xi.effect.PENURY) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
     return 0, 0
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.PENURY, 1, 0, 60)
+    player:addStatusEffect(xi.effect.PENURY, 1, 0, 60)
 
-    return tpz.effect.PENURY
+    return xi.effect.PENURY
 end
 
 return ability_object

@@ -13,18 +13,18 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 3
 
-    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0) <= 0.5) then
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0) <= 0.5) then
         return 0, 0, 0
     elseif (target:isMob()) then
         if (target:isMobType(MOBTYPE_NOTORIOUS)) then
             return 0, 0, 0
         else
             target:setHP(0)
-            return tpz.subEffect.DEATH, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.KO
+            return xi.subEffect.DEATH, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.KO
         end
     else
         target:setHP(0)
-        return tpz.subEffect.DEATH, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.KO
+        return xi.subEffect.DEATH, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.KO
     end
 end
 

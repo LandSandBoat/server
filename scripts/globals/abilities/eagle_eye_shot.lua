@@ -13,23 +13,23 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    local ranged = player:getStorageItem(0, 0, tpz.slot.RANGED)
-    local ammo = player:getStorageItem(0, 0, tpz.slot.AMMO)
+    local ranged = player:getStorageItem(0, 0, xi.slot.RANGED)
+    local ammo = player:getStorageItem(0, 0, xi.slot.AMMO)
 
-    if ranged and ranged:isType(tpz.itemType.WEAPON) then
+    if ranged and ranged:isType(xi.itemType.WEAPON) then
         local skilltype = ranged:getSkillType()
-        if skilltype == tpz.skill.ARCHERY or skilltype == tpz.skill.MARKSMANSHIP or skilltype == tpz.skill.THROWING then
-            if ammo and (ammo:isType(tpz.itemType.WEAPON) or skilltype == tpz.skill.THROWING) then
+        if skilltype == xi.skill.ARCHERY or skilltype == xi.skill.MARKSMANSHIP or skilltype == xi.skill.THROWING then
+            if ammo and (ammo:isType(xi.itemType.WEAPON) or skilltype == xi.skill.THROWING) then
                 return 0, 0
             end
         end
     end
 
-    return tpz.msg.basic.NO_RANGED_WEAPON, 0
+    return xi.msg.basic.NO_RANGED_WEAPON, 0
 end
 
 ability_object.onUseAbility = function(player, target, ability, action)
-    if (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP) then
+    if (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP) then
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
     local params = {}
@@ -47,10 +47,10 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
     -- Set the message id ourselves
     if (tpHits + extraHits > 0) then
-        action:messageID(target:getID(), tpz.msg.basic.JA_DAMAGE)
+        action:messageID(target:getID(), xi.msg.basic.JA_DAMAGE)
         action:speceffect(target:getID(), 32)
     else
-        action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
+        action:messageID(target:getID(), xi.msg.basic.JA_MISS_2)
         action:speceffect(target:getID(), 0)
     end
 

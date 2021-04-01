@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    MissionaryMan = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+    MissionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
     MissionaryManVar = player:getCharVar("MissionaryManVar")
 
     if (MissionaryMan == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 3) then
@@ -43,23 +43,23 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 137 and option == 1) then
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         player:setCharVar("MissionaryManVar", 1)
     elseif (csid == 139) then
         player:setCharVar("MissionaryManVar", 2)
-        player:addKeyItem(tpz.ki.RAUTEINOTS_PARCEL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RAUTEINOTS_PARCEL)
+        player:addKeyItem(xi.ki.RAUTEINOTS_PARCEL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAUTEINOTS_PARCEL)
         player:tradeComplete()
     elseif (csid == 141) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4728)
         else
             player:setCharVar("MissionaryManVar", 0)
-            player:delKeyItem(tpz.ki.SUBLIME_STATUE_OF_THE_GODDESS)
+            player:delKeyItem(xi.ki.SUBLIME_STATUE_OF_THE_GODDESS)
             player:addItem(4728)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4728)
             player:addFame(WINDURST, 30)
-            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.MISSIONARY_MAN)
+            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
         end
     end
 end

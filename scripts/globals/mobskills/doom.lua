@@ -15,7 +15,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.DOOM
+    local typeEffect = xi.effect.DOOM
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 10, 3, 30))
 

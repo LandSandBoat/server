@@ -19,12 +19,12 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
     LA_THEINE_PLATEAU.moveFallenEgg()
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -36,9 +36,9 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 123
-    elseif (prevZone == tpz.zone.ORDELLES_CAVES and player:getCharVar("darkPuppetCS") == 5 and player:getFreeSlotsCount() >= 1) then
+    elseif (prevZone == xi.zone.ORDELLES_CAVES and player:getCharVar("darkPuppetCS") == 5 and player:getFreeSlotsCount() >= 1) then
         cs = 122
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
         cs = 125
     end
 
@@ -46,7 +46,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -62,7 +62,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 122) then
-        npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.DARK_PUPPET, {item=14096, fame=40, var="darkPuppetCS"}) -- Chaos Sollerets
+        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.DARK_PUPPET, {item=14096, fame=40, var="darkPuppetCS"}) -- Chaos Sollerets
     end
 end
 
@@ -71,10 +71,10 @@ zone_object.onZoneWeatherChange = function(weather)
     local TOTD = VanadielTOTD()
     local setRainbow = rainbow:getLocalVar("setRainbow")
 
-    if (setRainbow == 1 and weather ~= tpz.weather.RAIN and TOTD >= tpz.time.DAWN and TOTD <= tpz.time.EVENING and rainbow:getAnimation() == tpz.anim.CLOSE_DOOR) then
-        rainbow:setAnimation(tpz.anim.OPEN_DOOR)
-    elseif (setRainbow == 1 and weather == tpz.weather.RAIN and rainbow:getAnimation() == tpz.anim.OPEN_DOOR) then
-        rainbow:setAnimation(tpz.anim.CLOSE_DOOR)
+    if (setRainbow == 1 and weather ~= xi.weather.RAIN and TOTD >= xi.time.DAWN and TOTD <= xi.time.EVENING and rainbow:getAnimation() == xi.anim.CLOSE_DOOR) then
+        rainbow:setAnimation(xi.anim.OPEN_DOOR)
+    elseif (setRainbow == 1 and weather == xi.weather.RAIN and rainbow:getAnimation() == xi.anim.OPEN_DOOR) then
+        rainbow:setAnimation(xi.anim.CLOSE_DOOR)
         rainbow:setLocalVar('setRainbow', 0)
     end
 end
@@ -83,10 +83,10 @@ zone_object.onTOTDChange = function(TOTD)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local setRainbow = rainbow:getLocalVar("setRainbow")
 
-    if (setRainbow == 1 and TOTD >= tpz.time.DAWN and TOTD <= tpz.time.EVENING and rainbow:getAnimation() == tpz.anim.CLOSE_DOOR) then
-        rainbow:setAnimation(tpz.anim.OPEN_DOOR)
-    elseif (setRainbow == 1 and TOTD < tpz.time.DAWN or TOTD > tpz.time.EVENING and rainbow:getAnimation() == tpz.anim.OPEN_DOOR) then
-        rainbow:setAnimation(tpz.anim.CLOSE_DOOR)
+    if (setRainbow == 1 and TOTD >= xi.time.DAWN and TOTD <= xi.time.EVENING and rainbow:getAnimation() == xi.anim.CLOSE_DOOR) then
+        rainbow:setAnimation(xi.anim.OPEN_DOOR)
+    elseif (setRainbow == 1 and TOTD < xi.time.DAWN or TOTD > xi.time.EVENING and rainbow:getAnimation() == xi.anim.OPEN_DOOR) then
+        rainbow:setAnimation(xi.anim.CLOSE_DOOR)
         rainbow:setLocalVar('setRainbow', 0)
     end
 end

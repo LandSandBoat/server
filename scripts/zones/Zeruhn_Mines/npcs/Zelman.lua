@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     -- GROCERIES
     if groceries == 1 then
-        if player:seenKeyItem(tpz.ki.TAMIS_NOTE) then
+        if player:seenKeyItem(xi.ki.TAMIS_NOTE) then
             player:startEvent(162)
         else
             player:startEvent(161)
@@ -38,10 +38,10 @@ entity.onEventFinish = function(player, csid, option)
     -- GROCERIES
     if csid == 161 then
         player:setCharVar("Groceries", 2)
-        player:delKeyItem(tpz.ki.TAMIS_NOTE)
+        player:delKeyItem(xi.ki.TAMIS_NOTE)
     elseif csid == 162 then
         player:setCharVar("Groceries", 3)
-        player:delKeyItem(tpz.ki.TAMIS_NOTE)
+        player:delKeyItem(xi.ki.TAMIS_NOTE)
     end
 end
 

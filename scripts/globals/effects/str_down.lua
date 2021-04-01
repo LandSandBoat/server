@@ -1,15 +1,15 @@
 -----------------------------------
--- tpz.effect.STR_DOWN
+-- xi.effect.STR_DOWN
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    if ((target:getStat(tpz.mod.STR) - effect:getPower()) < 0) then
-        effect:setPower(target:getStat(tpz.mod.STR))
+    if ((target:getStat(xi.mod.STR) - effect:getPower()) < 0) then
+        effect:setPower(target:getStat(xi.mod.STR))
     end
-    target:addMod(tpz.mod.STR, -effect:getPower())
+    target:addMod(xi.mod.STR, -effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -17,14 +17,14 @@ effect_object.onEffectTick = function(target, effect)
     local downSTR_effect_size = effect:getPower()
     if (downSTR_effect_size > 0) then
         effect:setPower(downSTR_effect_size - 1)
-        target:delMod(tpz.mod.STR, -1)
+        target:delMod(xi.mod.STR, -1)
     end
 end
 
 effect_object.onEffectLose = function(target, effect)
     local downSTR_effect_size = effect:getPower()
     if (downSTR_effect_size > 0) then
-        target:delMod(tpz.mod.STR, -downSTR_effect_size)
+        target:delMod(xi.mod.STR, -downSTR_effect_size)
     end
 end
 

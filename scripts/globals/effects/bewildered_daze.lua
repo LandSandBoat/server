@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BEWILDERED_DAZE
+-- xi.effect.BEWILDERED_DAZE
 -----------------------------------
 local effect_object = {}
 

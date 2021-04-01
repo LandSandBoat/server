@@ -24,8 +24,8 @@ entity.onMobDeath = function(mob, player, isKiller)
         -- notify people on the quest who need the KI
         GetNPCByID(ID.npc.BOREAL_TIGER_QM):showNPC(FRIGICITE_TIME)
         if
-            not player:hasKeyItem(tpz.ki.ROUND_FRIGICITE) and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+            not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
         then
             player:messageSpecial(ID.text.BLOCKS_OF_ICE)
         end

@@ -22,8 +22,8 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local params = {}
     params.ftp100 = 1.5 params.ftp200 = 2 params.ftp300 = 2.5
     params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.2 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.ele = tpz.magic.ele.LIGHTNING
-    params.skill = tpz.skill.POLEARM
+    params.ele = xi.magic.ele.LIGHTNING
+    params.skill = xi.skill.POLEARM
     params.includemab = true
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then

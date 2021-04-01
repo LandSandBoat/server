@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.THE_SAVAGE then
-        if GetRegionOwner(tpz.region.TAVNAZIANARCH) ~= tpz.nation.SANDORIA then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+        if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.SANDORIA then
             player:showText(npc, ID.text.DEGUERENDARS_CLOSED_DIALOG)
         else
             local stock =
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
             }
 
             player:showText(npc, ID.text.DEGUERENDARS_OPEN_DIALOG)
-            tpz.shop.general(player, stock, SANDORIA)
+            xi.shop.general(player, stock, SANDORIA)
         end
     else
         player:showText(npc, ID.text.DEGUERENDARS_COP_NOT_COMPLETED)

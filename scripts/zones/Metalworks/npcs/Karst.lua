@@ -16,13 +16,13 @@ end
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
 
-    if (currentMission == tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:getCharVar("MissionStatus") == 0) then
+    if (currentMission == xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(602)
-    elseif (currentMission == tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:hasKeyItem(tpz.ki.SHADOW_FRAGMENT)) then
+    elseif (currentMission == xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)) then
         player:startEvent(603)
-    elseif (currentMission == tpz.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 0) then
+    elseif (currentMission == xi.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 0) then
         player:startEvent(765)
-    elseif (currentMission == tpz.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 3) then
+    elseif (currentMission == xi.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 3) then
         player:startEvent(766)
     else
         player:startEvent(601)

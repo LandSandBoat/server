@@ -6,7 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.promyvion = tpz.promyvion or {}
+ xi.promyvion = xi.promyvion or {}
 
 -----------------------------------
 -- LOCAL FUNCTIONS
@@ -52,7 +52,7 @@ end
 -- PUBLIC FUNCTIONS
 -----------------------------------
 
-tpz.promyvion.initZone = function(zone)
+ xi.promyvion.initZone = function(zone)
     local ID = zones[zone:getID()]
 
     -- register teleporter regions
@@ -66,7 +66,7 @@ tpz.promyvion.initZone = function(zone)
     end
 end
 
-tpz.promyvion.strayOnSpawn = function(mob)
+ xi.promyvion.strayOnSpawn = function(mob)
     local mother = GetMobByID(findMother(mob))
 
     if mother ~= nil and mother:isSpawned() then
@@ -75,7 +75,7 @@ tpz.promyvion.strayOnSpawn = function(mob)
     end
 end
 
-tpz.promyvion.receptacleOnFight = function(mob, target)
+ xi.promyvion.receptacleOnFight = function(mob, target)
     if os.time() > mob:getLocalVar("[promy]nextStray") then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
@@ -95,7 +95,7 @@ tpz.promyvion.receptacleOnFight = function(mob, target)
     end
 end
 
-tpz.promyvion.receptacleOnDeath = function(mob, isKiller)
+ xi.promyvion.receptacleOnDeath = function(mob, isKiller)
     if isKiller then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
@@ -116,7 +116,7 @@ tpz.promyvion.receptacleOnDeath = function(mob, isKiller)
     end
 end
 
-tpz.promyvion.onRegionEnter = function(player, region)
+ xi.promyvion.onRegionEnter = function(player, region)
     if player:getAnimation() == 0 then
         local ID = zones[player:getZoneID()]
         local regionId = region:GetRegionID()
@@ -126,7 +126,7 @@ tpz.promyvion.onRegionEnter = function(player, region)
             event = ID.npc.MEMORY_STREAMS[regionId][7][1]
         else
             local stream = GetNPCByID(regionId)
-            if stream ~= nil and stream:getAnimation() == tpz.anim.OPEN_DOOR then
+            if stream ~= nil and stream:getAnimation() == xi.anim.OPEN_DOOR then
                 event = stream:getLocalVar("[promy]destination")
             end
         end

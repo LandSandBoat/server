@@ -24,7 +24,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(356.503, -0.364, -179.607, 122)
     end
 
-    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.TEAHOUSE_TUMULT and player:getCharVar("AhtUrganStatus") == 0 then
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.TEAHOUSE_TUMULT and player:getCharVar("AhtUrganStatus") == 0 then
         cs = 10
     end
 
@@ -34,7 +34,7 @@ end
 zone_object.onRegionEnter = function(player, region)
     if region:GetRegionID() == 1 then
         local StoneID = player:getCharVar("EmptyVesselStone")
-        if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) == QUEST_ACCEPTED and player:getCharVar("AnEmptyVesselProgress") == 4 and player:hasItem(StoneID) then
+        if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) == QUEST_ACCEPTED and player:getCharVar("AnEmptyVesselProgress") == 4 and player:hasItem(StoneID) then
             player:startEvent(3, StoneID)
         end
     end
@@ -50,14 +50,14 @@ zone_object.onEventFinish = function(player, csid, option)
     if
         csid == 3 and
         option == 13 and
-        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, {title=tpz.title.BEARER_OF_THE_MARK_OF_ZAHAK, ki=tpz.ki.MARK_OF_ZAHAK, var={"AnEmptyVesselProgress", "EmptyVesselStone"}})
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, {title= xi.title.BEARER_OF_THE_MARK_OF_ZAHAK, ki= xi.ki.MARK_OF_ZAHAK, var={"AnEmptyVesselProgress", "EmptyVesselStone"}})
     then -- Accept and unlock
-        player:unlockJob(tpz.job.BLU)
+        player:unlockJob(xi.job.BLU)
         player:setPos(148, -2, 0, 130, 50)
     elseif csid == 3 and option ~= 13 then -- Make a mistake and get reset
         player:setCharVar("AnEmptyVesselProgress", 0)
         player:setCharVar("EmptyVesselStone", 0)
-        player:delQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
+        player:delQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL)
         player:setPos(148, -2, 0, 130, 50)
     elseif csid == 10 then
         player:setCharVar("AhtUrganStatus", 1)

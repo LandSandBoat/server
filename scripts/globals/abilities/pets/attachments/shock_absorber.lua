@@ -10,7 +10,7 @@ attachment_object.onEquip = function(pet)
     pet:setLocalVar("shockabsorber", pet:getLocalVar("shockabsorber") + 1)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_SHOCK_ABSORBER", function(automaton, target)
         local master = automaton:getMaster()
-        if not automaton:hasRecast(tpz.recast.ABILITY, 1946) and master and master:countEffect(tpz.effect.EARTH_MANEUVER) > 0 and automaton:getLocalVar("stoneskin") < VanadielTime() then
+        if not automaton:hasRecast(xi.recast.ABILITY, 1946) and master and master:countEffect(xi.effect.EARTH_MANEUVER) > 0 and automaton:getLocalVar("stoneskin") < VanadielTime() then
             automaton:useMobAbility(1946, automaton)
         end
     end)

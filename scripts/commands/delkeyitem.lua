@@ -23,7 +23,7 @@ function onTrigger(player, keyId, target)
         error(player, "You must supply a key item ID.")
         return
     end
-    keyId = tonumber(keyId) or tpz.ki[string.upper(keyId)]
+    keyId = tonumber(keyId) or xi.ki[string.upper(keyId)]
     if (keyId == nil or keyId < 1) then
         error(player, "Invalid Key Item ID.")
         return

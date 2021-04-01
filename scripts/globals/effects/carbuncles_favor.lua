@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CARBUNCLES_FAVOR
+-- xi.effect.CARBUNCLES_FAVOR
 -----------------------------------
 local effect_object = {}
 

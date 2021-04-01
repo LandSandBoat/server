@@ -16,7 +16,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local blueRibbonBlues = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+    local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
 
     -- BLUE RIBBON BLUES
     if blueRibbonBlues == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 12521) then -- blue_ribbon
@@ -30,7 +30,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- FOOD FOR THOUGHT
     elseif
-        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED and
         player:getCharVar("Kerutoto_Food_var") == 1 and
         npcUtil.tradeHas(trade, 4371) -- slice_of_grilled_hare
     then
@@ -38,43 +38,43 @@ entity.onTrade = function(player, npc, trade)
 
     -- RIDING ON THE CLOUDS
     elseif
-        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_4") == 3 and
         npcUtil.tradeHas(trade, 1127) -- kindreds_seal
     then
         player:setCharVar("ridingOnTheClouds_4", 0)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, tpz.ki.SPIRITED_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 
 entity.onTrigger = function(player, npc)
     local windurstMission = player:getCurrentMission(WINDURST)
     local windurstStatus = player:getCharVar("MissionStatus")
-    local blueRibbonBlues = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
-    local wakingDreams = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
-    local foodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
+    local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
+    local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
     local kerutotoFood = player:getCharVar("Kerutoto_Food_var")
     local ohbiruFood = player:getCharVar("Ohbiru_Food_var")
     local needZone = player:needToZone()
 
     -- AWAKENING OF THE GODS
-    if windurstMission == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 0 then
+    if windurstMission == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 0 then
         player:startEvent(737)
-    elseif windurstMission == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 1 then
+    elseif windurstMission == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 1 then
         player:startEvent(736)
-    elseif windurstMission == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 2 then
+    elseif windurstMission == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 2 then
         player:startEvent(738)
 
     -- THREE PATHS (ULMIA)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3 then
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Ulmia_s_Path") == 3 then
         player:startEvent(876)
 
     -- WAKING DREAMS
     elseif
-        not player:hasKeyItem(tpz.ki.VIAL_OF_DREAM_INCENSE) and
+        not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
         (
-            player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) and
+            player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and
             wakingDreams == QUEST_AVAILABLE
         ) or
         (
@@ -83,7 +83,7 @@ entity.onTrigger = function(player, npc)
         )
     then
         player:startEvent(918)
-    elseif player:hasKeyItem(tpz.ki.WHISPER_OF_DREAMS) then
+    elseif player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
         local availRewards = 0
             + (player:hasItem(17599) and 1 or 0) -- Diabolos's Pole
             + (player:hasItem(14814) and 2 or 0) -- Diabolos's Earring
@@ -116,7 +116,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(306) -- Standard Conversation
         end
     elseif
-        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY_TO_GO) == QUEST_COMPLETED and
         blueRibbonBlues == QUEST_AVAILABLE and
         player:getFameLevel(WINDURST) >= 5
     then
@@ -156,7 +156,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- FOOD FOR THOUGHT
     elseif (csid == 313 and option == 0) or (csid == 314 and option == 0) then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
         player:setCharVar("Kerutoto_Food_var", 1)
     elseif csid == 313 and option == 1 then
         player:setCharVar("Kerutoto_Food_var", 256)
@@ -166,8 +166,8 @@ entity.onEventFinish = function(player, csid, option)
 
         -- last NPC to be given food
         if player:getCharVar("Kenapa_Food_var") == 4 and player:getCharVar("Ohbiru_Food_var") == 3 then
-            npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT, {
-                title = tpz.title.FAST_FOOD_DELIVERER,
+            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT, {
+                title = xi.title.FAST_FOOD_DELIVERER,
                 fame = 100,
                 var = {"Kerutoto_Food_var", "Kenapa_Food_var", "Ohbiru_Food_var"},
             })
@@ -180,7 +180,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- BLUE RIBBON BLUES
     elseif csid == 357 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
     elseif csid == 358 or csid == 365 then
         player:confirmTrade()
         player:setCharVar("BlueRibbonBluesProg", 2)
@@ -191,8 +191,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 360 and npcUtil.giveItem(player, 13569) then
         player:setCharVar("BlueRibbonBluesProg", 3)
     elseif csid == 362 then
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.BLUE_RIBBON_BLUES, {
-            title = tpz.title.GHOSTIE_BUSTER,
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES, {
+            title = xi.title.GHOSTIE_BUSTER,
             fame = 140,
             var = "BlueRibbonBluesProg",
         })
@@ -200,8 +200,8 @@ entity.onEventFinish = function(player, csid, option)
 
     -- WAKING DREAMS
     elseif csid == 918 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WAKING_DREAMS)
-        npcUtil.giveKeyItem(player, tpz.ki.VIAL_OF_DREAM_INCENSE)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
+        npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_DREAM_INCENSE)
     elseif csid == 920 then
         local reward = {fame = 0}
 
@@ -220,8 +220,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.DIABOLOS_UNLOCKED, 0, 0, 0)
         end
 
-        if npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WAKING_DREAMS, reward) then
-            player:delKeyItem(tpz.ki.WHISPER_OF_DREAMS)
+        if npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.WAKING_DREAMS, reward) then
+            player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", getMidnight())
         end
 

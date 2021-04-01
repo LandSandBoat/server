@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
         1241,   354, 3      --Twinkle Powder
     }
 
-    rank = GetNationRank(tpz.nation.WINDURST)
+    rank = GetNationRank(xi.nation.WINDURST)
     if (rank ~= 1) then
         table.insert(stock, 1022) --Thief's Tools
         table.insert(stock, 3643)
@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         table.insert(stock, 5520)
         table.insert(stock, 3)
     end
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end
 

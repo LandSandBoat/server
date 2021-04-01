@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.OVERKILL, 11, 1, 60)
+    player:addStatusEffect(xi.effect.OVERKILL, 11, 1, 60)
 end
 
 return ability_object

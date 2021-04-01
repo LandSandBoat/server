@@ -19,38 +19,38 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 3600, 5202)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 5202)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.FOOD_HPP, 17)
-    target:addMod(tpz.mod.FOOD_HP_CAP, 140)
-    target:addMod(tpz.mod.DEX, 3)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.AGI, -1)
-    target:addMod(tpz.mod.MND, -2)
-    target:addMod(tpz.mod.CHR, -1)
-    target:addMod(tpz.mod.DOUBLE_ATTACK, 1)
-    target:addMod(tpz.mod.STORETP, 6)
+    target:addMod(xi.mod.FOOD_HPP, 17)
+    target:addMod(xi.mod.FOOD_HP_CAP, 140)
+    target:addMod(xi.mod.DEX, 3)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.AGI, -1)
+    target:addMod(xi.mod.MND, -2)
+    target:addMod(xi.mod.CHR, -1)
+    target:addMod(xi.mod.DOUBLE_ATTACK, 1)
+    target:addMod(xi.mod.STORETP, 6)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.FOOD_HPP, 17)
-    target:delMod(tpz.mod.FOOD_HP_CAP, 140)
-    target:delMod(tpz.mod.DEX, 3)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.AGI, -1)
-    target:delMod(tpz.mod.MND, -2)
-    target:delMod(tpz.mod.CHR, -1)
-    target:delMod(tpz.mod.DOUBLE_ATTACK, 1)
-    target:delMod(tpz.mod.STORETP, 6)
+    target:delMod(xi.mod.FOOD_HPP, 17)
+    target:delMod(xi.mod.FOOD_HP_CAP, 140)
+    target:delMod(xi.mod.DEX, 3)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.AGI, -1)
+    target:delMod(xi.mod.MND, -2)
+    target:delMod(xi.mod.CHR, -1)
+    target:delMod(xi.mod.DOUBLE_ATTACK, 1)
+    target:delMod(xi.mod.STORETP, 6)
 end
 
 return item_object

@@ -14,13 +14,13 @@ require("scripts/globals/trust")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    tpz.trust.onTradeCipher(player, trade, 437, 457, 458)
+    xi.trust.onTradeCipher(player, trade, 437, 457, 458)
 end
 
 entity.onTrigger = function(player, npc)
-    local TrustSandoria = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST)
+    local TrustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
+    local TrustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+    local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
     if player:getMainLvl() >= 5 and ENABLE_TRUST_QUESTS == 1 and TrustBastok == QUEST_AVAILABLE then
         if TrustWindurst == QUEST_AVAILABLE and TrustSandoria == QUEST_AVAILABLE then
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         elseif TrustWindurst == QUEST_COMPLETED or TrustSandoria == QUEST_COMPLETED then
             player:startEvent(438)
         end
-    elseif player:hasKeyItem(tpz.ki.BLUE_INSTITUTE_CARD) then
+    elseif player:hasKeyItem(xi.ki.BLUE_INSTITUTE_CARD) then
         player:startEvent(435)
     elseif TrustBastok == QUEST_COMPLETED then
         player:startEvent(436)
@@ -42,8 +42,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 434 or csid == 438) and option == 2 then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK)
-        npcUtil.giveKeyItem(player, tpz.ki.BLUE_INSTITUTE_CARD)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+        npcUtil.giveKeyItem(player, xi.ki.BLUE_INSTITUTE_CARD)
     elseif csid == 437 or csid == 458 then
         local spellID = player:getLocalVar("TradingTrustCipher")
         player:setLocalVar("TradingTrustCipher", 0)

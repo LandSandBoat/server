@@ -16,11 +16,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(2, -213.5, 2,  92.6, -212.7, 4,   94.0)  -- H-8 Geyser
     zone:registerRegion(3,  -67.3, 2, 532.8,  -66.3, 4,  534.0)  -- J-3 Geyser
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -47,9 +47,9 @@ zone_object.onRegionEnter = function(player, region)
             SendEntityVisualPacket(ID.npc.GEYSER_OFFSET + 2, "kkj3")
         end,
     }
-    if (player:hasKeyItem(tpz.ki.BLUE_ACIDITY_TESTER)) then
-        player:delKeyItem(tpz.ki.BLUE_ACIDITY_TESTER)
-        player:addKeyItem(tpz.ki.RED_ACIDITY_TESTER)
+    if (player:hasKeyItem(xi.ki.BLUE_ACIDITY_TESTER)) then
+        player:delKeyItem(xi.ki.BLUE_ACIDITY_TESTER)
+        player:addKeyItem(xi.ki.RED_ACIDITY_TESTER)
     end
 end
 
@@ -72,10 +72,10 @@ zone_object.onGameHour = function(zone)
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    if (weather == tpz.weather.NONE or weather == tpz.weather.SUNSHINE) then
-        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(tpz.status.NORMAL)
+    if (weather == xi.weather.NONE or weather == xi.weather.SUNSHINE) then
+        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.NORMAL)
     else
-        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.DISAPPEAR)
     end
 end
 

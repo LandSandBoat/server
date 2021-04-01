@@ -17,13 +17,13 @@ entity.onTrigger = function(player, npc)
 
     local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
 
-    player:delStatusEffect(tpz.effect.SNEAK)
+    player:delStatusEffect(xi.effect.SNEAK)
 
     -- SCH AF Quest - Boots
-    if (loafersQuestProgress > 0 and loafersQuestProgress < 3 and player:hasKeyItem(tpz.ki.RAFFLESIA_DREAMSPIT) == false) then
+    if (loafersQuestProgress > 0 and loafersQuestProgress < 3 and player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT) == false) then
 
-        player:addKeyItem(tpz.ki.RAFFLESIA_DREAMSPIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RAFFLESIA_DREAMSPIT)
+        player:addKeyItem(xi.ki.RAFFLESIA_DREAMSPIT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RAFFLESIA_DREAMSPIT)
         player:setCharVar("AF_SCH_BOOTS", loafersQuestProgress + 1)
 
         -- Move the markings around

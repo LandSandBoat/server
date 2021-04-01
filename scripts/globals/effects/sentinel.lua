@@ -1,14 +1,14 @@
 -----------------------------------
--- tpz.effect.SENTINEL
+-- xi.effect.SENTINEL
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.UDMGPHYS, -effect:getPower())
-    target:addMod(tpz.mod.ENMITY, 100)
-    target:addMod(tpz.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
+    target:addMod(xi.mod.UDMGPHYS, -effect:getPower())
+    target:addMod(xi.mod.ENMITY, 100)
+    target:addMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -24,14 +24,14 @@ effect_object.onEffectTick = function(target, effect)
          decayby = 8
       end
       effect:setPower(power-decayby)
-      target:delMod(tpz.mod.UDMGPHYS, -decayby)
+      target:delMod(xi.mod.UDMGPHYS, -decayby)
    end
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.UDMGPHYS, -effect:getPower())
-    target:delMod(tpz.mod.ENMITY, 100)
-    target:delMod(tpz.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
+    target:delMod(xi.mod.UDMGPHYS, -effect:getPower())
+    target:delMod(xi.mod.ENMITY, 100)
+    target:delMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 
 return effect_object

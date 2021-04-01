@@ -12,16 +12,16 @@ mixins =
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.MANAFONT, hpp = math.random(40, 95)},
+            {id = xi.jsa.MANAFONT, hpp = math.random(40, 95)},
         },
     })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 397)
+    xi.hunts.checkHunt(mob, player, 397)
 end
 
 return entity

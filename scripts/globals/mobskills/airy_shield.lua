@@ -17,7 +17,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.ARROW_SHIELD
+    local typeEffect = xi.effect.ARROW_SHIELD
 
     skill:setMsg(MobBuffMove(mob, typeEffect, 1, 0, 60))
 

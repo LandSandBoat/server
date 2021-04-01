@@ -18,9 +18,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialByLightning = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
-    local WhisperOfStorms = player:hasKeyItem(tpz.ki.WHISPER_OF_STORMS)
-    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local TrialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+    local WhisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+    local CarbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     -----------------------------------
@@ -32,11 +32,11 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     -- Trial by Lightning
     elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))) then
-        player:startEvent(10016, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
-    elseif (TrialByLightning == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_LIGHTNING) == false and WhisperOfStorms == false) then
-        player:startEvent(10024, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
+        player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
+    elseif (TrialByLightning == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) == false and WhisperOfStorms == false) then
+        player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
     elseif (TrialByLightning == QUEST_ACCEPTED and WhisperOfStorms == false) then
-        player:startEvent(10017, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING, 5)
+        player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
     elseif (TrialByLightning == QUEST_ACCEPTED and WhisperOfStorms) then
         numitem = 0
 
@@ -46,7 +46,7 @@ entity.onTrigger = function(player, npc)
         if (player:hasItem(1206)) then numitem = numitem + 8; end   -- Elder Branch
         if (player:hasSpell(303)) then numitem = numitem + 32; end  -- Ability to summon Ramuh
 
-        player:startEvent(10019, 0, tpz.ki.TUNING_FORK_OF_LIGHTNING, 5, 0, numitem)
+        player:startEvent(10019, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5, 0, numitem)
     else
         player:startEvent(10020) -- Standard dialog
     end
@@ -59,16 +59,16 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10016 and option == 1) then
-        if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
-            player:delQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
+            player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         player:setCharVar("TrialByLightning_date", 0)
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_LIGHTNING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_LIGHTNING)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
     elseif (csid == 10024) then
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_LIGHTNING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_LIGHTNING)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
     elseif (csid == 10019) then
         item = 0
         if (option == 1) then item = 17531         -- Ramuh's Staff
@@ -90,11 +90,11 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
-            player:addTitle(tpz.title.HEIR_OF_THE_GREAT_LIGHTNING)
-            player:delKeyItem(tpz.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
+            player:addTitle(xi.title.HEIR_OF_THE_GREAT_LIGHTNING)
+            player:delKeyItem(xi.ki.WHISPER_OF_STORMS) --Whisper of Storms, as a trade for the above rewards
             player:setCharVar("TrialByLightning_date", getMidnight())
             player:addFame(MHAURA, 30)
-            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
         end
     elseif (csid == 10022 or csid == 10023) then
         if (player:getFreeSlotsCount() ~= 0) then

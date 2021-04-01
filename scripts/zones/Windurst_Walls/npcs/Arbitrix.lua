@@ -25,18 +25,18 @@ local events =
 }
 
 entity.onTrade = function(player,npc,trade)
-    tpz.mystery.onTrade(player, npc, trade, events)
+    xi.mystery.onTrade(player, npc, trade, events)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.mystery.onTrigger(player, npc, events)
+    xi.mystery.onTrigger(player, npc, events)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.mystery.onEventUpdate(player, csid, option, events)
+    xi.mystery.onEventUpdate(player, csid, option, events)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.mystery.onEventFinish(player, csid, options, events)
+    xi.mystery.onEventFinish(player, csid, options, events)
 end
 return entity

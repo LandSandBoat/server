@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:hasKeyItem(tpz.ki.SHADOW_FRAGMENT)) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)) then
         player:startEvent(603)
     else
         player:startEvent(604)

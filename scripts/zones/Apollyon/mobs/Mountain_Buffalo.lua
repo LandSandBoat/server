@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     [1] =
@@ -65,7 +65,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local randomF2 = battlefield:getLocalVar("randomF2")
         if mobID == randomF2 then
             battlefield:setLocalVar("randomF3", ID.mob.APOLLYON_NW_MOB[3]+math.random(1,7))
-            tpz.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[2])
+            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[2])
         end
     end
 end

@@ -11,11 +11,11 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 2 then
+    if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 2 then
         if npcUtil.tradeHas(trade, 2184) then
             player:startEvent(850)
         end
-    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 1 then
+    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 1 then
         if npcUtil.tradeHas(trade, {{"gil", 1000}}) or npcUtil.tradeHas(trade, 2184) then
             player:startEvent(3022, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         end
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(853)
     elseif player:getCharVar("ratraceCS") >= 3 then
         player:startEvent(854)
-    elseif player:getCurrentMission(TOAU) == tpz.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 0 then
+    elseif player:getCurrentMission(TOAU) == xi.mission.id.toau.KNIGHT_OF_GOLD and player:getCharVar("AhtUrganStatus") == 0 then
         player:startEvent(3035, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     elseif player:getCharVar("AhtUrganStatus") == 1 then
         player:startEvent(3036, 0, 0, 0, 0, 0, 0, 0, 0, 0)

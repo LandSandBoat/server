@@ -24,9 +24,9 @@ end
 
 entity.onEventFinish = function(player,csid,option)
     if csid == 160 and option == 1 then
-        tpz.limbus.enter(player,1)
+        xi.limbus.enter(player,1)
     elseif csid == 159 and option == 1 then
-        tpz.limbus.enter(player,0)
+        xi.limbus.enter(player,0)
     end
 end
 

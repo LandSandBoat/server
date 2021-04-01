@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Cape_Teriggan/IDs")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.empyreal_arrow, player, ID.mob.STOLAS)
+    xi.wsquest.handleQmTrigger(xi.wsquest.empyreal_arrow, player, ID.mob.STOLAS)
 end
 
 return entity

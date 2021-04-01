@@ -11,8 +11,8 @@ end
 
 item_object.onItemUse = function(target)
     local duration = 2100
-    target:delStatusEffect(tpz.effect.RERAISE)
-    target:addStatusEffect(tpz.effect.RERAISE, 1, 0, duration)
+    target:delStatusEffect(xi.effect.RERAISE)
+    target:addStatusEffect(xi.effect.RERAISE, 1, 0, duration)
 end
 
 return item_object

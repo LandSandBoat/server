@@ -42,7 +42,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -67,61 +67,61 @@ zone_object.onRegionEnter = function(player,region)
 
     -- APOLLYON SE TELEPORTER
         [20] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[1]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(219) end
+            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(219) end
         end,
         [21] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[2]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(218) end
+            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(218) end
         end,
         [22] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[3]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(216) end
+            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(216) end
         end,
         [23] = function ()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[4]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(217) end
+            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(217) end
         end,
     -- APOLLYON NE TELEPORTER
         [24] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[1]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(214) end
+            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(214) end
         end,
         [25] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[2]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(212) end
+            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(212) end
         end,
         [26] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[3]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(210) end
+            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(210) end
         end,
         [27] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[4]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(215) end
+            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(215) end
         end,
         [28] = function ()
-            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[5]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(213) end
+            if GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[5]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(213) end
         end,
     -- APOLLYON SW TELEPORTER
         [29] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[1]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(208) end
+            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(208) end
         end,
         [30] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[2]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(209) end
+            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(209) end
         end,
         [31] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(207) end
+            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(207) end
         end,
         [32] = function ()
-            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[4]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(206) end
+            if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(206) end
         end,
     -- APOLLYON NW TELEPORTER
         [33] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[1]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(205) end
+            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(205) end
         end,
         [34] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[2]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(203) end
+            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(203) end
         end,
         [35] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[3]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(201) end
+            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(201) end
         end,
         [36] = function()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[4]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(200) end
+            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[4]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(200) end
         end,
         [37] = function ()
-            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[5]):getAnimation() == tpz.animation.OPEN_DOOR then player:startEvent(202) end
+            if GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[5]):getAnimation() == xi.animation.OPEN_DOOR then player:startEvent(202) end
         end,
     }
 end

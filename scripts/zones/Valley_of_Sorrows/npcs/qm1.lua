@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onSpawn = function(npc)
     if LandKingSystem_NQ < 1 and LandKingSystem_HQ < 1 then
-        npc:setStatus(tpz.status.DISAPPEAR)
+        npc:setStatus(xi.status.DISAPPEAR)
     end
 end
 

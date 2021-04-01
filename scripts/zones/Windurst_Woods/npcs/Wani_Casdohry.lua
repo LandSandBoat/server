@@ -10,8 +10,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local twinstoneBonding = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TWINSTONE_BONDING)
-    local mihgosAmigo = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MIHGO_S_AMIGO)
+    local twinstoneBonding = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
+    local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
     if twinstoneBonding == QUEST_COMPLETED then
         player:startEvent(492, 0, 13360)

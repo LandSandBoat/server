@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         5059, 28520, -- Scroll of Water Carol II
         4996, 123880  -- Scroll of Mage's Ballad III
     }
-    tpz.shop.general(player, stock, WINDURST)
+    xi.shop.general(player, stock, WINDURST)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -15,16 +15,16 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getID() == target:getID()) then
-        return tpz.msg.basic.CANNOT_PERFORM_TARG, 0
+        return xi.msg.basic.CANNOT_PERFORM_TARG, 0
     elseif (player:getTP() < 1000) then
-        return tpz.msg.basic.NOT_ENOUGH_TP, 0
+        return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
         return 0, 0
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local pTP = (player:getTP() - 1000) * (1 + ((player:getMerit(tpz.merit.SHIKIKOYO) - 12) / 100))
+    local pTP = (player:getTP() - 1000) * (1 + ((player:getMerit(xi.merit.SHIKIKOYO) - 12) / 100))
     pTP = utils.clamp(pTP, 0, 3000 - target:getTP())
 
     player:setTP(1000)

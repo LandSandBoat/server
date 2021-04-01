@@ -14,7 +14,7 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.MORBOLGER)
     GetMobByID(ID.mob.MORBOLGER):setRespawnTime(math.random(900, 10800))
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -22,14 +22,14 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-76.839, -1.696, 659.969, 122)
     end
-    if prevZone == tpz.zone.LA_THEINE_PLATEAU and player:getCharVar("darkPuppetCS") == 1 then
+    if prevZone == xi.zone.LA_THEINE_PLATEAU and player:getCharVar("darkPuppetCS") == 1 then
         cs = 10
     end
     return cs
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)

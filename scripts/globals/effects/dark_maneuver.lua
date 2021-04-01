@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DARK_MANEUVER
+-- xi.effect.DARK_MANEUVER
 -----------------------------------
 local effect_object = {}
 

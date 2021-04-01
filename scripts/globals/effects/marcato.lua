@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MARCATO
+-- xi.effect.MARCATO
 -----------------------------------
 local effect_object = {}
 

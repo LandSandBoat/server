@@ -37,8 +37,8 @@ spell_object.onSpellCast = function(caster,target,spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_DURATION
-    params.attackType = tpz.attackType.RANGED
-    params.damageType = tpz.damageType.PIERCING
+    params.attackType = xi.attackType.RANGED
+    params.damageType = xi.damageType.PIERCING
     params.scattr = SC_LIQUEFACTION
     params.numhits = 1
     params.multiplier = 2.25
@@ -61,7 +61,7 @@ spell_object.onSpellCast = function(caster,target,spell)
     -- preexisting sleep, if necesesary), apply the sleep effect for this spell.
     if (damage > 0) then
         local duration = inverseBellRand(15, 60, 0.3)
-        target:addStatusEffect(tpz.effect.SLEEP_II, 2, 0, duration)
+        target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, duration)
     end
 
     return damage

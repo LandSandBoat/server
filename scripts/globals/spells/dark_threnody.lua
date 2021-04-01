@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Threnody - tpz.mod.DARKRES
+-- Spell: Threnody - xi.mod.DARKRES
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -11,7 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return handleThrenody(caster, target, spell, 50, 60, tpz.mod.DARKRES)
+    return handleThrenody(caster, target, spell, 50, 60, xi.mod.DARKRES)
 end
 
 return spell_object

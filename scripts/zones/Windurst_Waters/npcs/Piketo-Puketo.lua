@@ -12,15 +12,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.COOKING)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.COOKING)
 
     if
         newRank > 9 and
         player:getCharVar("CookingExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CULINARIAN)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_CULINARIAN)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.COOKING, newRank)
+            player:setSkillRank(xi.skill.COOKING, newRank)
             player:startEvent(10014, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("CookingExpertQuest",0)
             player:setLocalVar("CookingTraded",1)
@@ -28,23 +28,23 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(10014, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.COOKING, newRank)
+        player:setSkillRank(xi.skill.COOKING, newRank)
         player:startEvent(10014, 0, 0, 0, 0, newRank)
         player:setLocalVar("CookingTraded",1)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.COOKING)
-    local testItem = getTestItem(player, npc, tpz.skill.COOKING)
+    local craftSkill = player:getSkillLevel(xi.skill.COOKING)
+    local testItem = getTestItem(player, npc, xi.skill.COOKING)
     local guildMember = isGuildMember(player, 4)
-    local rankCap = getCraftSkillCap(player, tpz.skill.COOKING)
+    local rankCap = getCraftSkillCap(player, xi.skill.COOKING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.COOKING)
+    local Rank = player:getSkillRank(xi.skill.COOKING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("CookingExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_CULINARIAN) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_CULINARIAN) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

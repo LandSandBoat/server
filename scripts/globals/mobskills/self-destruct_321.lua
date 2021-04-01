@@ -14,8 +14,8 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local amount = 9999 * skill:getTotalTargets()
-    local dmg = MobFinalAdjustments(amount, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.FIRE)
+    local dmg = MobFinalAdjustments(amount, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.FIRE)
     return dmg
 end
 

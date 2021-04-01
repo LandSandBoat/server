@@ -9,23 +9,23 @@ require("scripts/globals/status")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target,mob,skill)
-    if mob:hasStatusEffect(tpz.effect.SOUL_VOICE) then
+    if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
         return 0
     end
     return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.CHARM_I
+    local typeEffect = xi.effect.CHARM_I
     local power = 0
 
     if not target:isPC() then
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
         return typeEffect
     end
 
     local msg = MobStatusEffectMove(mob, target, typeEffect, power, 1, 30)
-    if msg == tpz.msg.basic.SKILL_ENFEEB_IS then
+    if msg == xi.msg.basic.SKILL_ENFEEB_IS then
         mob:charm(target)
     end
     skill:setMsg(msg)

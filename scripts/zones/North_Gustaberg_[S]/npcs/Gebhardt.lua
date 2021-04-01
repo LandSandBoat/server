@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.BATTLE_RATIONS)) == true then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.BATTLE_RATIONS)) == true then
         player:startEvent(102)
     else
         player:startEvent(110)
@@ -26,7 +26,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 102) then
-            player:delKeyItem(tpz.ki.BATTLE_RATIONS)
+            player:delKeyItem(xi.ki.BATTLE_RATIONS)
             player:setCharVar("THE_FIGHTING_FOURTH", 1)
     end
 end

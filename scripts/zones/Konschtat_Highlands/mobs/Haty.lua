@@ -14,7 +14,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.tutorial.onMobDeath(player)
+    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

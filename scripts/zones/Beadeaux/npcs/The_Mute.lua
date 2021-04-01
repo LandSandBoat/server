@@ -14,11 +14,11 @@ end
 entity.onTrigger = function(player, npc)
     local duration = math.random(600, 900)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectSilence") == 0) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectSilence") == 0) then
         player:setCharVar("cCollectSilence", 1)
     end
 
-    player:addStatusEffect(tpz.effect.SILENCE, 0, 0, duration)
+    player:addStatusEffect(xi.effect.SILENCE, 0, 0, duration)
 
 end
 

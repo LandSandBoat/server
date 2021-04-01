@@ -20,21 +20,21 @@ entity.onTrigger = function(player, npc)
     npc:openDoor(1)
 
     -- Animate lever's Gear - do not use openDoor() / closeDoor() here!
-    if gear:getAnimation() == tpz.animation.OPEN_DOOR then
-        gear:setAnimation(tpz.animation.CLOSE_DOOR)
+    if gear:getAnimation() == xi.animation.OPEN_DOOR then
+        gear:setAnimation(xi.animation.CLOSE_DOOR)
     else
-        gear:setAnimation(tpz.animation.OPEN_DOOR)
+        gear:setAnimation(xi.animation.OPEN_DOOR)
     end
 
     -- Animate bigWinch - do not use openDoor() / closeDoor() here!
-    if bigWinch:getAnimation() == tpz.animation.OPEN_DOOR then
-        bigWinch:setAnimation(tpz.animation.CLOSE_DOOR)
+    if bigWinch:getAnimation() == xi.animation.OPEN_DOOR then
+        bigWinch:setAnimation(xi.animation.CLOSE_DOOR)
     else
-        bigWinch:setAnimation(tpz.animation.OPEN_DOOR)
+        bigWinch:setAnimation(xi.animation.OPEN_DOOR)
     end
 
     -- Move platform
-    RunElevator(tpz.elevator.FORT_GHELSBA_LIFT)
+    RunElevator(xi.elevator.FORT_GHELSBA_LIFT)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -15,8 +15,8 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- DANCES WITH LUOPANS
-    if player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.FISTFUL_OF_HOMELAND_SOIL) and npcUtil.tradeHas(trade, 703) then -- Petrified Log
+    if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL) and npcUtil.tradeHas(trade, 703) then -- Petrified Log
             player:startEvent(34)
         end
     end
@@ -24,19 +24,19 @@ end
 
 entity.onTrigger = function(player, npc)
     -- Buying a replacement Matre Bell on Geomancer
-    if player:getLocalVar("Sylvie_Need_Zone") == 0 and player:getMainJob() == tpz.job.GEO and not player:hasItem(21460) then  -- Matre Bell
+    if player:getLocalVar("Sylvie_Need_Zone") == 0 and player:getMainJob() == xi.job.GEO and not player:hasItem(21460) then  -- Matre Bell
         player:setLocalVar("Sylvie_Need_Zone", 1)
         player:startEvent(37)
         return
     end
 
     -- DANCES WITH LUOPANS
-    local dwlQuestStatus = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
+    local dwlQuestStatus = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
     if dwlQuestStatus == QUEST_COMPLETED then
         player:startEvent(39)
     elseif player:getCharVar("GEO_DWL_Luopan") == 1 then
         player:startEvent(36)
-    elseif dwlQuestStatus == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.LUOPAN) then
+    elseif dwlQuestStatus == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.LUOPAN) then
         player:startEvent(35)
     elseif dwlQuestStatus == QUEST_ACCEPTED then
         player:startEvent(33)
@@ -70,19 +70,19 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("GEO_DWL_Triggered", 1)
         elseif option == 1 then
             player:setCharVar("GEO_DWL_Triggered", 0)
-            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
+            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
         end
     elseif csid == 34 then
         player:confirmTrade()
-        player:delKeyItem(tpz.ki.FISTFUL_OF_HOMELAND_SOIL)
-        npcUtil.giveKeyItem(player, tpz.ki.LUOPAN)
+        player:delKeyItem(xi.ki.FISTFUL_OF_HOMELAND_SOIL)
+        npcUtil.giveKeyItem(player, xi.ki.LUOPAN)
     elseif csid == 36 then
         if npcUtil.giveItem(player, { 6074, 21460 }) then -- 'plate of Indi-Poison' and 'Matre Bell'
-            player:unlockJob(tpz.job.GEO)
+            player:unlockJob(xi.job.GEO)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME, 0)  -- You can now become a geomancer!
-            npcUtil.giveKeyItem(player, tpz.ki.JOB_GESTURE_GEOMANCER)
+            npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_GEOMANCER)
             player:setCharVar("GEO_DWL_Luopan", 0)
-            player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS)
+            player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS)
         end
     end
 

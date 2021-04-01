@@ -17,9 +17,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if (ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
-        local HasStone = tpz.abyssea.getTravStonesTotal(player)
-        if (HasStone >= 1 and player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
-        and player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_FLUTTERY_FIEND) == QUEST_AVAILABLE) then
+        local HasStone = xi.abyssea.getTravStonesTotal(player)
+        if (HasStone >= 1 and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
+        and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) == QUEST_AVAILABLE) then
             player:startEvent(62)
         else
             player:startEvent(61, 0, 1) -- No param = no entry.
@@ -34,7 +34,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 62) then
-        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_FLUTTERY_FIEND)
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND)
     elseif (csid == 63) then
         -- Killed Itzpapalotl
     elseif (csid == 61 and option == 1) then

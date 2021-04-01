@@ -17,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.CHOCO_WINDURST, 0, 4)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.CHOCO_WINDURST, 0, 4)
 end
 
 return item_object

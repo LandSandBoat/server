@@ -10,7 +10,7 @@ local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(tpz.effect.LIGHT_MANEUVER)
+    return master:countEffect(xi.effect.LIGHT_MANEUVER)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
@@ -31,7 +31,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     end
 
     local hpdamage = (automaton:getMaxHP() - automaton:getHP()) * ftp
-    local skilldamage = automaton:getSkillLevel(tpz.skill.AUTOMATON_MELEE) * ftp
+    local skilldamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE) * ftp
     local damage = (hpdamage > skilldamage) and hpdamage or skilldamage
 
     if damage > 0 then
@@ -39,7 +39,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
        automaton:addTP(80)
     end
 
-    target:takeDamage(damage, pet, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
+    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     return damage
 end
 

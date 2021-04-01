@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED then
         player:setCharVar("IsonadeKilled", 1)
     end
 end

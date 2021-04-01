@@ -9,7 +9,7 @@ local ID = require("scripts/zones/PsoXja/IDs")
     correctSideOfDoor (boolean) true if player is trading from the near(gargoyle)-side of the gate
     ..............................................................................................]]
 function attemptPickLock(player, npc, correctSideOfDoor)
-    if (npc:getAnimation() == tpz.anim.CLOSE_DOOR and correctSideOfDoor) then
+    if (npc:getAnimation() == xi.anim.CLOSE_DOOR and correctSideOfDoor) then
         local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
         local gargoyle = ID.mob.GARGOYLE_OFFSET + offset
 
@@ -33,7 +33,7 @@ end
     correctSideOfDoor (boolean) true if player is clicking from the near(gargoyle)-side of gate
     ..............................................................................................]]
 function attemptOpenDoor(player, npc, correctSideOfDoor)
-    if (npc:getAnimation() == tpz.anim.CLOSE_DOOR) then
+    if (npc:getAnimation() == xi.anim.CLOSE_DOOR) then
         if (correctSideOfDoor) then
             local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
             local gargoyle = ID.mob.GARGOYLE_OFFSET + offset

@@ -10,8 +10,8 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(tpz.mod.REFRESH, 1)
-    mob:setMobMod(tpz.mobMod.TELEPORT_CD, 30)
+    mob:setMod(xi.mod.REFRESH, 1)
+    mob:setMobMod(xi.mobMod.TELEPORT_CD, 30)
 end
 
 entity.onMobSpawn = function(mob)
@@ -43,7 +43,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 0)
+    mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 0)
 end
 
 entity.onMobFight = function(mob, target)
@@ -52,7 +52,7 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("saidMessage", 1)
     end
     if target:isEngaged() then
-        mob:setMobMod(tpz.mobMod.TELEPORT_TYPE, 1)
+        mob:setMobMod(xi.mobMod.TELEPORT_TYPE, 1)
     end
 end
 

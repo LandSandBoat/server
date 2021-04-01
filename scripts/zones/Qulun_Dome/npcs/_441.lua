@@ -16,8 +16,8 @@ entity.onTrigger = function(player, npc)
 
     if (npc:getAnimation() == 9) then
         if (player:getZPos() < 46) then
-            if (player:hasKeyItem(tpz.ki.SILVER_BELL) and player:hasKeyItem(tpz.ki.CORUSCANT_ROSARY) and player:hasKeyItem(tpz.ki.BLACK_MATINEE_NECKLACE)) then
-                player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, tpz.ki.SILVER_BELL, tpz.ki.CORUSCANT_ROSARY, tpz.ki.BLACK_MATINEE_NECKLACE)
+            if (player:hasKeyItem(xi.ki.SILVER_BELL) and player:hasKeyItem(xi.ki.CORUSCANT_ROSARY) and player:hasKeyItem(xi.ki.BLACK_MATINEE_NECKLACE)) then
+                player:messageSpecial(ID.text.THE_3_ITEMS_GLOW_FAINTLY, xi.ki.SILVER_BELL, xi.ki.CORUSCANT_ROSARY, xi.ki.BLACK_MATINEE_NECKLACE)
                 npc:openDoor(20) -- retail timed
             else
                 player:messageSpecial(ID.text.IT_SEEMS_TO_BE_LOCKED_BY_POWERFUL_MAGIC)

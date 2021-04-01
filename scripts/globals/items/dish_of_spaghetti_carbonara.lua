@@ -20,38 +20,38 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 5190)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 5190)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.FOOD_HPP, 14)
-    target:addMod(tpz.mod.FOOD_HP_CAP, 175)
-    target:addMod(tpz.mod.MP, 10)
-    target:addMod(tpz.mod.STR, 4)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.INT, -3)
-    target:addMod(tpz.mod.FOOD_ATTP, 17)
-    target:addMod(tpz.mod.FOOD_ATT_CAP, 65)
-    target:addMod(tpz.mod.STORETP, 6)
+    target:addMod(xi.mod.FOOD_HPP, 14)
+    target:addMod(xi.mod.FOOD_HP_CAP, 175)
+    target:addMod(xi.mod.MP, 10)
+    target:addMod(xi.mod.STR, 4)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.INT, -3)
+    target:addMod(xi.mod.FOOD_ATTP, 17)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 65)
+    target:addMod(xi.mod.STORETP, 6)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.FOOD_HPP, 14)
-    target:delMod(tpz.mod.FOOD_HP_CAP, 175)
-    target:delMod(tpz.mod.MP, 10)
-    target:delMod(tpz.mod.STR, 4)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.INT, -3)
-    target:delMod(tpz.mod.FOOD_ATTP, 17)
-    target:delMod(tpz.mod.FOOD_ATT_CAP, 65)
-    target:delMod(tpz.mod.STORETP, 6)
+    target:delMod(xi.mod.FOOD_HPP, 14)
+    target:delMod(xi.mod.FOOD_HP_CAP, 175)
+    target:delMod(xi.mod.MP, 10)
+    target:delMod(xi.mod.STR, 4)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.INT, -3)
+    target:delMod(xi.mod.FOOD_ATTP, 17)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 65)
+    target:delMod(xi.mod.STORETP, 6)
 end
 
 return item_object

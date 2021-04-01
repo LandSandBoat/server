@@ -18,38 +18,38 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 3600, 6459)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 6459)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.HP, 55)
-    target:addMod(tpz.mod.STR, 6)
-    target:addMod(tpz.mod.VIT, 6)
-    target:addMod(tpz.mod.AGI, 4)
-    target:addMod(tpz.mod.FOOD_ATTP, 11)
-    target:addMod(tpz.mod.FOOD_ATT_CAP, 175)
-    target:addMod(tpz.mod.FOOD_RATTP, 11)
-    target:addMod(tpz.mod.FOOD_RATT_CAP, 175)
-    target:addMod(tpz.mod.SLOWRES, 15)
+    target:addMod(xi.mod.HP, 55)
+    target:addMod(xi.mod.STR, 6)
+    target:addMod(xi.mod.VIT, 6)
+    target:addMod(xi.mod.AGI, 4)
+    target:addMod(xi.mod.FOOD_ATTP, 11)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 175)
+    target:addMod(xi.mod.FOOD_RATTP, 11)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 175)
+    target:addMod(xi.mod.SLOWRES, 15)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.HP, 55)
-    target:delMod(tpz.mod.STR, 6)
-    target:delMod(tpz.mod.VIT, 6)
-    target:delMod(tpz.mod.AGI, 4)
-    target:delMod(tpz.mod.FOOD_ATTP, 11)
-    target:delMod(tpz.mod.FOOD_ATT_CAP, 175)
-    target:delMod(tpz.mod.FOOD_RATTP, 11)
-    target:delMod(tpz.mod.FOOD_RATT_CAP, 175)
-    target:delMod(tpz.mod.SLOWRES, 15)
+    target:delMod(xi.mod.HP, 55)
+    target:delMod(xi.mod.STR, 6)
+    target:delMod(xi.mod.VIT, 6)
+    target:delMod(xi.mod.AGI, 4)
+    target:delMod(xi.mod.FOOD_ATTP, 11)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 175)
+    target:delMod(xi.mod.FOOD_RATTP, 11)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 175)
+    target:delMod(xi.mod.SLOWRES, 15)
 end
 
 return item_object

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MEIKYO_SHISUI
+-- xi.effect.MEIKYO_SHISUI
 -----------------------------------
 local effect_object = {}
 

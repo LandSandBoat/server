@@ -13,15 +13,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (trade:hasItemQty(1546, 1) and player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
+    if (trade:hasItemQty(1546, 1) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN) then
         player:startEvent(109, 0, 1546, 3, 20)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local TrialSizeWind = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
+    local TrialSizeWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 2) then --Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(108, 0, 1546, 3, 20)     --mini tuning fork, zone, level
     elseif (TrialSizeWind == QUEST_ACCEPTED) then
         local WindFork = player:hasItem(1546)
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1546) --Mini tuning fork
         else
-            player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
+            player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
             player:addItem(1546)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1546)
         end
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1546)
         end
     elseif (csid == 109 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_GALES)
+        xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_GALES)
     end
 
 end

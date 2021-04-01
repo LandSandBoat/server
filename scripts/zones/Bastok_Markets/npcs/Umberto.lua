@@ -32,7 +32,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 5674)
             player:addFame(BASTOK, 30)
             player:setCharVar("TOO_MANY_CHEFS", 0)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)
         end
     end
 end

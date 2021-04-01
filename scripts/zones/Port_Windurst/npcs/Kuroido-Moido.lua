@@ -15,10 +15,10 @@ local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 local entity = {}
 
-local wsQuest = tpz.wsquest.black_halo
+local wsQuest = xi.wsquest.black_halo
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
+    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
@@ -26,13 +26,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
-    local makingAmends = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENDS) --First quest in series
-    local makingAmens = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS) --Second quest in series
-    local wonderWands = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
+    local makingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) --First quest in series
+    local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local pfame = player:getFameLevel(WINDURST)
     local needToZone = player:needToZone()
-    local brokenWand = player:hasKeyItem(tpz.ki.BROKEN_WAND)
+    local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(286, 0, 937) -- Post Making Amens! dialogue (before Wonder Wands)
         end
-    elseif (player:getCurrentMission(ASA) == tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD) then
+    elseif (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD) then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")
 
@@ -83,17 +83,17 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 280) then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     elseif (csid == 284) then
         player:needToZone(true)
-        player:delKeyItem(tpz.ki.BROKEN_WAND)
-        player:addTitle(tpz.title.HAKKURURINKURUS_BENEFACTOR)
+        player:delKeyItem(xi.ki.BROKEN_WAND)
+        player:addTitle(xi.title.HAKKURURINKURUS_BENEFACTOR)
         player:addGil(GIL_RATE*6000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*6000)
         player:addFame(WINDURST, 150)
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     else
-        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.BLACK_HALO_LEARNED)
+        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.BLACK_HALO_LEARNED)
     end
 end
 

@@ -12,7 +12,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local enhskill = caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC)
+    local enhskill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
     local final = 0
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 33, target:getMainLvl())
@@ -26,13 +26,13 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- Cap at 35
     final = math.min(final, 35)
 
-    if target:addStatusEffect(tpz.effect.PHALANX, final, 0, duration) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+    if target:addStatusEffect(xi.effect.PHALANX, final, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.PHALANX
+    return xi.effect.PHALANX
 end
 
 return spell_object

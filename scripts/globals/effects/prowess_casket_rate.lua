@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PROWESS
+-- xi.effect.PROWESS
 -- Increased treasure casket discovery
 -----------------------------------
 local effect_object = {}

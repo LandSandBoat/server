@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.RESTRAINT
+-- xi.effect.RESTRAINT
 -----------------------------------
 local effect_object = {}
 

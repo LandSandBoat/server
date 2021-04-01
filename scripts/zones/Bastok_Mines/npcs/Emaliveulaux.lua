@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.THE_SAVAGE then
-        if GetRegionOwner(tpz.region.TAVNAZIANARCH) ~= tpz.nation.BASTOK then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.THE_SAVAGE then
+        if GetRegionOwner(xi.region.TAVNAZIANARCH) ~= xi.nation.BASTOK then
             player:showText(npc, ID.text.EMALIVEULAUX_CLOSED_DIALOG)
         else
             local stock =
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             }
 
             player:showText(npc, ID.text.EMALIVEULAUX_OPEN_DIALOG)
-            tpz.shop.general(player, stock, BASTOK)
+            xi.shop.general(player, stock, BASTOK)
         end
     else
         player:showText(npc, ID.text.EMALIVEULAUX_COP_NOT_COMPLETED)

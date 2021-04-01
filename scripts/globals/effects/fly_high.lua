@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FLY_HIGH
+-- xi.effect.FLY_HIGH
 -----------------------------------
 local effect_object = {}
 

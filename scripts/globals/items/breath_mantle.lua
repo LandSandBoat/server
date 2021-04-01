@@ -9,32 +9,32 @@ require("scripts/globals/status")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    local effect = target:getStatusEffect(tpz.effect.ENCHANTMENT)
+    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
     if (effect ~= nil) then
         if (effect:getSubType() == 15486) then
-            target:delStatusEffect(tpz.effect.ENCHANTMENT)
+            target:delStatusEffect(xi.effect.ENCHANTMENT)
         end
     end
     return 0
 end
 
 item_object.onItemUse = function(target)
-    if (target:hasStatusEffect(tpz.effect.ENCHANTMENT) == true) then
-        target:delStatusEffect(tpz.effect.ENCHANTMENT)
-        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 1800, 15486)
+    if (target:hasStatusEffect(xi.effect.ENCHANTMENT) == true) then
+        target:delStatusEffect(xi.effect.ENCHANTMENT)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15486)
     else
-        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 1800, 15486)
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15486)
     end
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.HP, 18)
-    target:addMod(tpz.mod.ENMITY, 3)
+    target:addMod(xi.mod.HP, 18)
+    target:addMod(xi.mod.ENMITY, 3)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.HP, 18)
-    target:delMod(tpz.mod.ENMITY, 3)
+    target:delMod(xi.mod.HP, 18)
+    target:delMod(xi.mod.ENMITY, 3)
 end
 
 return item_object

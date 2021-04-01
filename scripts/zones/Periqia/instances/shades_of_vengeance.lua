@@ -20,7 +20,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -46,7 +46,7 @@ instance_object.onInstanceComplete = function(instance)
     local chars = instance:getChars()
 
     for i, v in pairs(chars) do
-        if (v:getCurrentMission(TOAU) == tpz.mission.id.toau.SHADES_OF_VENGEANCE) then
+        if (v:getCurrentMission(TOAU) == xi.mission.id.toau.SHADES_OF_VENGEANCE) then
             v:setCharVar("AhtUrganStatus", 1)
         end
 

@@ -12,26 +12,26 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dMND = (caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND))
+    local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.MND
-    params.skillType = tpz.skill.DIVINE_MAGIC
+    params.attribute = xi.mod.MND
+    params.skillType = xi.skill.DIVINE_MAGIC
     params.bonus = 0
-    params.effect = tpz.effect.SLEEP_II
+    params.effect = xi.effect.SLEEP_II
     local resist = applyResistanceEffect(caster, target, spell, params)
     if (resist < 0.5) then
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST) -- Resist
-        return tpz.effect.SLEEP_II
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- Resist
+        return xi.effect.SLEEP_II
     end
 
-    if (target:addStatusEffect(tpz.effect.SLEEP_II, 2, 0, 90*resist)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
+    if (target:addStatusEffect(xi.effect.SLEEP_II, 2, 0, 90*resist)) then
+        spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
     end
 
-    return tpz.effect.SLEEP_II
+    return xi.effect.SLEEP_II
 end
 
 return spell_object

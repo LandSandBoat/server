@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(tpz.ki.POUCH_OF_WEIGHTED_STONES) == false or player:getZPos() < 80.5) then
+    if (player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) == false or player:getZPos() < 80.5) then
         player:messageSpecial(ID.text.A_GATE_OF_STURDY_STEEL)
         return 1
     else

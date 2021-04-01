@@ -20,7 +20,7 @@ end
 entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(COP)
     local copMissionStatus = player:getCharVar("PromathiaStatus")
-    local copMissions = tpz.mission.id.cop
+    local copMissions = xi.mission.id.cop
 
     -- COP 2-2 "The Lost City"
     if copCurrentMission == copMissions.THE_LOST_CITY and copMissionStatus == 0 then

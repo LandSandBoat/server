@@ -15,10 +15,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and player:getCharVar("RubbishDayVar") == 0) then
         player:startEvent(11, 1) -- For the quest "Rubbish day"
-    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.BROKEN_WAND) == true) then
+    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED) then
+        if (player:hasKeyItem(xi.ki.BROKEN_WAND) == true) then
             player:startEvent(11, 3)
         else player:startEvent(11, 0) -- Making Amens dialogue
         end
@@ -31,14 +31,14 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-RubbishDay = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RUBBISH_DAY)
-MakingAmens = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_AMENS)
+RubbishDay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     if (csid == 11 and option == 1 and RubbishDay == QUEST_ACCEPTED) then
-        player:delKeyItem(tpz.ki.MAGIC_TRASH)
+        player:delKeyItem(xi.ki.MAGIC_TRASH)
         player:setCharVar("RubbishDayVar", 1)
     elseif (csid == 11 and option == 0 and MakingAmens == QUEST_ACCEPTED) then
-        player:addKeyItem(tpz.ki.BROKEN_WAND) --Broken Wand
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BROKEN_WAND)
+        player:addKeyItem(xi.ki.BROKEN_WAND) --Broken Wand
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BROKEN_WAND)
         player:tradeComplete()
     end
 end

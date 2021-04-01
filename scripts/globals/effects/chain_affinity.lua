@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CHAIN_AFFINITY
+-- xi.effect.CHAIN_AFFINITY
 -----------------------------------
 local effect_object = {}
 

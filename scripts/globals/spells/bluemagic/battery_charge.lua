@@ -25,26 +25,26 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local typeEffect = tpz.effect.REFRESH
+    local typeEffect = xi.effect.REFRESH
     local power = 3
     local duration = 300
 
-    if (caster:hasStatusEffect(tpz.effect.DIFFUSION)) then
-        local diffMerit = caster:getMerit(tpz.merit.DIFFUSION)
+    if (caster:hasStatusEffect(xi.effect.DIFFUSION)) then
+        local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
         if (diffMerit > 0) then
             duration = duration + (duration/100)* diffMerit
         end
 
-        caster:delStatusEffect(tpz.effect.DIFFUSION)
+        caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    if (target:hasStatusEffect(tpz.effect.REFRESH)) then
-        target:delStatusEffect(tpz.effect.REFRESH)
+    if (target:hasStatusEffect(xi.effect.REFRESH)) then
+        target:delStatusEffect(xi.effect.REFRESH)
     end
 
     if (target:addStatusEffect(typeEffect, power, 3, duration) == false) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     return typeEffect

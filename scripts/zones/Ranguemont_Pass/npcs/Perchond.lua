@@ -39,8 +39,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("sinHunting", 2)
     elseif (csid == 5) then
         player:tradeComplete()
-        player:addKeyItem(tpz.ki.PERCHONDS_ENVELOPE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PERCHONDS_ENVELOPE)
+        player:addKeyItem(xi.ki.PERCHONDS_ENVELOPE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PERCHONDS_ENVELOPE)
         player:setCharVar("sinHunting", 3)
     end
 

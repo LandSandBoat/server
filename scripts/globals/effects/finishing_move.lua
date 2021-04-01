@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FINISHING_MOVE
+-- xi.effect.FINISHING_MOVE
 -----------------------------------
 local effect_object = {}
 

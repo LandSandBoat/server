@@ -13,7 +13,7 @@ local entity = {}
 entity.onSpawn = function(npc)
     local elevator =
     {
-        id = tpz.elevator.TIMED_AUTOMATIC,
+        id = xi.elevator.TIMED_AUTOMATIC,
         lowerDoor = npc:getID() -1,
         upperDoor = npc:getID() -2,
         elevator = npc:getID(),

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BATTLEFIELD
+-- xi.effect.BATTLEFIELD
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -10,7 +10,7 @@ effect_object.onEffectGain = function(target, effect)
         target:getPet():addStatusEffect(effect)
     end
 
-    if target:getObjType() == tpz.objType.PC then
+    if target:getObjType() == xi.objType.PC then
         target:clearTrusts()
     end
 end
@@ -21,7 +21,7 @@ end
 effect_object.onEffectLose = function(target, effect)
     local pet = target:getPet()
     if pet then
-        pet:delStatusEffect(tpz.effect.BATTLEFIELD)
+        pet:delStatusEffect(xi.effect.BATTLEFIELD)
         pet:leaveBattlefield(1)
     end
     target:setLocalVar("[battlefield]area", 0)

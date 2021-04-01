@@ -12,19 +12,19 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.PLAGUE
+    local effect = xi.effect.PLAGUE
 
     local duration = 60
 
-    local pINT = caster:getStat(tpz.mod.INT)
-    local mINT = target:getStat(tpz.mod.INT)
+    local pINT = caster:getStat(xi.mod.INT)
+    local mINT = target:getStat(xi.mod.INT)
 
     local dINT = (pINT - mINT)
 
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.ENFEEBLING_MAGIC
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0
     params.effect = effect
     local resist = applyResistanceEffect(caster, target, spell, params)
@@ -32,13 +32,13 @@ spell_object.onSpellCast = function(caster, target, spell)
         duration = duration * resist
 
         if (target:addStatusEffect(effect, 5, 3, duration)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
 
     else -- resist entirely.
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
     return effect

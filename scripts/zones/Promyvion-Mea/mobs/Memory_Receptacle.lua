@@ -11,11 +11,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    tpz.promyvion.receptacleOnFight(mob, target)
+    xi.promyvion.receptacleOnFight(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.promyvion.receptacleOnDeath(mob, isKiller)
+    xi.promyvion.receptacleOnDeath(mob, isKiller)
 end
 
 return entity

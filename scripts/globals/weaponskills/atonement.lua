@@ -40,14 +40,14 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.enmityMult = 1
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.MYTHIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 
     local attack =
     {
-        ['type'] = tpz.attackType.BREATH,
-        ['slot'] = tpz.slot.MAIN,
-        ['weaponType'] = player:getWeaponSkillType(tpz.slot.MAIN),
-        ['damageType'] = tpz.damageType.ELEMENTAL
+        ['type'] = xi.attackType.BREATH,
+        ['slot'] = xi.slot.MAIN,
+        ['weaponType'] = player:getWeaponSkillType(xi.slot.MAIN),
+        ['damageType'] = xi.damageType.ELEMENTAL
     }
     local calcParams =
     {
@@ -60,7 +60,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     local damage = 0
 
-    if target:getObjType() ~= tpz.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
+    if target:getObjType() ~= xi.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
         if USE_ADOULIN_WEAPON_SKILL_CHANGES then
             params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 2.0
         end
@@ -83,8 +83,8 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
         dmg = utils.clamp(dmg, 0, player:getMainLvl() * 10) -- Damage is capped to player's level * 10, before WS damage mods
         damage = target:breathDmgTaken(dmg)
-        if player:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
-            damage = damage * (100 + player:getMod(tpz.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
+        if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
+            damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
         end
         damage = damage * WEAPON_SKILL_POWER
         calcParams.finalDmg = damage

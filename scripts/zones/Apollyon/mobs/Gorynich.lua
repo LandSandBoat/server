@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.WALLHACK
+local flags = xi.path.flag.WALLHACK
 local path =
 {
     [1] =
@@ -65,7 +65,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local battlefield = mob:getBattlefield()
         local randomF4 = battlefield:getLocalVar("randomF4")
         if mobID == randomF4 then
-            tpz.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[4])
+            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NW_PORTAL[4])
         end
     end
 end

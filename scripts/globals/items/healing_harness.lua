@@ -9,7 +9,7 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     if (target:getHP() == target:getMaxHP()) then
-        return tpz.msg.basic.ITEM_UNABLE_TO_USE
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
     return 0
 end
@@ -21,7 +21,7 @@ item_object.onItemUse = function(target)
         hpHeal = dif
     end
     target:addHP(hpHeal)
-    target:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, hpHeal)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, hpHeal)
 end
 
 return item_object

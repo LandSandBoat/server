@@ -11,8 +11,8 @@ end
 entity.onTrigger = function(player, npc)
     local duration = math.random(600, 900)
 
-    if (player:hasStatusEffect(tpz.effect.SILENCE) == false) then
-        player:addStatusEffect(tpz.effect.SILENCE, 0, 0, duration)
+    if (player:hasStatusEffect(xi.effect.SILENCE) == false) then
+        player:addStatusEffect(xi.effect.SILENCE, 0, 0, duration)
     end
 end
 

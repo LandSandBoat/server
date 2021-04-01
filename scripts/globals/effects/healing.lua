@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HEALING
+-- xi.effect.HEALING
 -- Activated through the /heal command
 -----------------------------------
 require("scripts/globals/keyitems")
@@ -42,35 +42,35 @@ effect_object.onEffectTick = function(target, effect)
 
     if healtime > 2 then
         -- curse II also known as "zombie"
-        if not(target:hasStatusEffect(tpz.effect.DISEASE)) and target:hasStatusEffect(tpz.effect.PLAGUE) == false and target:hasStatusEffect(tpz.effect.CURSE_II) == false then
+        if not(target:hasStatusEffect(xi.effect.DISEASE)) and target:hasStatusEffect(xi.effect.PLAGUE) == false and target:hasStatusEffect(xi.effect.CURSE_II) == false then
             local healHP = 0
-            if target:getContinentID() == 1 and target:hasStatusEffect(tpz.effect.SIGNET) then
-                healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(tpz.mod.HPHEAL)
+            if target:getContinentID() == 1 and target:hasStatusEffect(xi.effect.SIGNET) then
+                healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)
             else
                 target:addTP(HEALING_TP_CHANGE)
-                healHP = 10 + (healtime - 2) + target:getMod(tpz.mod.HPHEAL)
+                healHP = 10 + (healtime - 2) + target:getMod(xi.mod.HPHEAL)
             end
 
             -- Records of Eminence: Heal Without Using Magic
             if
-                target:getObjType() == tpz.objType.PC and
+                target:getObjType() == xi.objType.PC and
                 target:getEminenceProgress(4) and
                 healHP > 0 and
                 target:getHPP() < 100
             then
-                tpz.roe.onRecordTrigger(target, 4)
+                xi.roe.onRecordTrigger(target, 4)
             end
 
             target:addHP(healHP)
             target:updateEnmityFromCure(target, healHP)
-            target:addMP(12 + ((healtime - 2) * (1 + target:getMod(tpz.mod.CLEAR_MIND))) + target:getMod(tpz.mod.MPHEAL))
+            target:addMP(12 + ((healtime - 2) * (1 + target:getMod(xi.mod.CLEAR_MIND))) + target:getMod(xi.mod.MPHEAL))
         end
     end
 end
 
 effect_object.onEffectLose = function(target, effect)
     target:setAnimation(0)
-    target:delStatusEffect(tpz.effect.LEAVEGAME)
+    target:delStatusEffect(xi.effect.LEAVEGAME)
 
     -- Dances with Luopans
     target:setLocalVar("GEO_DWL_Resting", 0)

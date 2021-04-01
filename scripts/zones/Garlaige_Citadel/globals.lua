@@ -20,24 +20,24 @@ local GARLAIGE_CITADEL =
             local BOMB_COAL = 1090 -- Human readability
 
             if
-                player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(BOMB_COAL) and not player:hasKeyItem(ki)
             then
                 npcUtil.giveKeyItem(player, ki)
             end
 
             if
-                player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1) and
-                player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2) and
-                player:hasKeyItem(tpz.ki.BOMB_COAL_FRAGMENT3)
+                player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
+                player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
+                player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
             then
                 npcUtil.giveItem(player, BOMB_COAL)
             end
 
             if player:hasItem(BOMB_COAL) then
-                player:delKeyItem(tpz.ki.BOMB_COAL_FRAGMENT1)
-                player:delKeyItem(tpz.ki.BOMB_COAL_FRAGMENT2)
-                player:delKeyItem(tpz.ki.BOMB_COAL_FRAGMENT3)
+                player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
+                player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
+                player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
             end
         end
     end,

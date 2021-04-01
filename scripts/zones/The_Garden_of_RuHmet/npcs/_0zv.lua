@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.BRAND_OF_TWILIGHT)==false) then
+    if (player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)==false) then
         player:startEvent(111)
     end
 
@@ -24,8 +24,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 111 and option==1) then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRAND_OF_TWILIGHT)
-        player:addKeyItem(tpz.ki.BRAND_OF_TWILIGHT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
+        player:addKeyItem(xi.ki.BRAND_OF_TWILIGHT)
     end
 end
 

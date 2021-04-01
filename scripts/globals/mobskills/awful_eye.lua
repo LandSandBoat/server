@@ -13,7 +13,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.STR_DOWN
+    local typeEffect = xi.effect.STR_DOWN
 
     skill:setMsg(MobGazeMove(mob, target, typeEffect, 33, 3, 120))
     return typeEffect

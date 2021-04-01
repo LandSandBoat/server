@@ -17,20 +17,20 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local ANewDawn = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+    local ANewDawn = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
     local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
-    local ScatteredIntoShadow = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW)
+    local ScatteredIntoShadow = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
 
     local SaveMySon = player:getCharVar("SaveMySon_Event")
 
-    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
     -- A New Dawn (BST AF3)
     if (ScatteredIntoShadow == QUEST_COMPLETED and ANewDawn == QUEST_AVAILABLE) then
-        if (mJob == tpz.job.BST and mLvl >= 50) then
+        if (mJob == xi.job.BST and mLvl >= 50) then
             if (ANewDawnEvent == 0) then
                 player:startEvent(5)
             elseif (ANewDawnEvent == 1) then
@@ -49,15 +49,15 @@ entity.onTrigger = function(player, npc)
         player:startEvent(0)
 
     -- Save My Son
-    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_AVAILABLE and mLvl >= 30) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_AVAILABLE and mLvl >= 30) then
         player:startEvent(164)
-    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED) then
         if (SaveMySon == 0) then
             player:startEvent(229)
         elseif (SaveMySon == 1) then
             player:startEvent(163)
         end
-    elseif (player:needToZone() == false and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
+    elseif (player:needToZone() == false and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and SaveMySon == 2) then
         player:startEvent(132)
 
     -- Chocobos Wounds
@@ -81,10 +81,10 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 164 and option == 0) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
     elseif (csid == 163) then
         if (player:getFreeSlotsCount(0) >= 1) then
-            player:addTitle(tpz.title.LIFE_SAVER)
+            player:addTitle(xi.title.LIFE_SAVER)
             player:addItem(13110)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13110)
             player:addGil(GIL_RATE*2100)
@@ -92,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("SaveMySon_Event", 2)
             player:needToZone(true)
             player:addFame(JEUNO, 30)
-            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13110)
         end
@@ -101,11 +101,11 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 5) then
         player:setCharVar("ANewDawn_Event", 1)
         if (option == 1) then
-            player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+            player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
             player:setCharVar("ANewDawn_Event", 2)
         end
     elseif (csid == 4 and option == 1) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
         player:setCharVar("ANewDawn_Event", 2)
     elseif (csid == 0) then
         player:setCharVar("ANewDawn_Event", 0)

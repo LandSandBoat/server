@@ -9,7 +9,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED then
         player:addCharVar("theTalekeepersGiftKilledNM", 1)
     end
 end

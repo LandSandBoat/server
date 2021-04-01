@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local thePickpocket = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET)
+    local thePickpocket = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
     local thePickpocketStat = player:getCharVar("thePickpocket")
 
     -- THE PICKPOCKET

@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local forgeYourDestiny = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
+    local forgeYourDestiny = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
     local swordTimer = player:getCharVar("ForgeYourDestiny_timer")
 
     if forgeYourDestiny == QUEST_ACCEPTED and swordTimer == 0 then

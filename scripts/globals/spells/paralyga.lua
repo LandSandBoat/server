@@ -14,13 +14,13 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
 
-    if (target:hasStatusEffect(tpz.effect.PARALYSIS)) then --effect already on, do nothing
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+    if (target:hasStatusEffect(xi.effect.PARALYSIS)) then --effect already on, do nothing
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
         -- Calculate duration.
         local duration = 120
 
-        local dMND = caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
+        local dMND = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
 
         -- Calculate potency.
         local potency = math.floor(dMND / 4) + 15
@@ -35,26 +35,26 @@ spell_object.onSpellCast = function(caster, target, spell)
         --printf("Potency : %u", potency)
         local params = {}
         params.diff = nil
-        params.attribute = tpz.mod.MND
+        params.attribute = xi.mod.MND
         params.skillType = 35
         params.bonus = 0
-        params.effect = tpz.effect.PARALYSIS
+        params.effect = xi.effect.PARALYSIS
         local resist = applyResistanceEffect(caster, target, spell, params)
 
         if (resist >= 0.5) then --there are no quarter or less hits, if target resists more than .5 spell is resisted completely
-            if (target:addStatusEffect(tpz.effect.PARALYSIS, potency, 0, duration*resist)) then
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+            if (target:addStatusEffect(xi.effect.PARALYSIS, potency, 0, duration*resist)) then
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
                 -- no effect
-                spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
             end
         else
             -- resist
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         end
     end
 
-    return tpz.effect.PARALYSIS
+    return xi.effect.PARALYSIS
 end
 
 return spell_object

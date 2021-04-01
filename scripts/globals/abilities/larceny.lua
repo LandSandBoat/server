@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.LARCENY, 6, 0, 5)
+    player:addStatusEffect(xi.effect.LARCENY, 6, 0, 5)
 end
 
 return ability_object

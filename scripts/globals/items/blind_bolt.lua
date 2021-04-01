@@ -17,14 +17,14 @@ item_object.onAdditionalEffect = function(player, target, damage)
     end
     if (target:hasImmunity(64)) then
         return 0, 0, 0
-    elseif (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0) <= 0.5) then
+    elseif (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0) <= 0.5) then
         return 0, 0, 0
     else
-        target:delStatusEffect(tpz.effect.BLINDNESS)
-        if (not target:hasStatusEffect(tpz.effect.BLINDNESS)) then
-            target:addStatusEffect(tpz.effect.BLINDNESS, 10, 0, 30)
+        target:delStatusEffect(xi.effect.BLINDNESS)
+        if (not target:hasStatusEffect(xi.effect.BLINDNESS)) then
+            target:addStatusEffect(xi.effect.BLINDNESS, 10, 0, 30)
         end
-        return tpz.subEffect.BLIND, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.BLINDNESS
+        return xi.subEffect.BLIND, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.BLINDNESS
     end
 end
 

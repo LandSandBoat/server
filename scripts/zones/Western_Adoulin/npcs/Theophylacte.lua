@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         4151, 800,    -- Echo Drops
         4155, 3360,   -- Remedy
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

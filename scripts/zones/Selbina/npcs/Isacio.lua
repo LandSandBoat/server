@@ -13,7 +13,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local questStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ELDER_MEMORIES)
+    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
     if questStatus == QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
@@ -29,16 +29,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local questStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ELDER_MEMORIES)
+    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
 
-    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) ~= QUEST_AVAILABLE then
         player:startEvent(99)
     elseif questStatus == QUEST_COMPLETED then
         player:startEvent(118)
     elseif questStatus == QUEST_ACCEPTED then
         local IsacioElderMemVar = player:getCharVar("IsacioElderMemVar")
 
-        if player:hasKeyItem(tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
+        if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(117)
         elseif  IsacioElderMemVar == 1 then
             player:startEvent(114, 538)
@@ -61,7 +61,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 111 and option == 40 then
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ELDER_MEMORIES)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
         player:setCharVar("IsacioElderMemVar", 1)
     elseif csid == 115 then
         player:confirmTrade()
@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option)
         player:unlockJob(0)
         player:setCharVar("IsacioElderMemVar", 0)
         player:messageSpecial(ID.text.SUBJOB_UNLOCKED)
-        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ELDER_MEMORIES)
+        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES)
     end
 end
 

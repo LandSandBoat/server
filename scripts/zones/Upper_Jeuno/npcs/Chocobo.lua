@@ -13,7 +13,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
     if (ChocobosWounds == 0) then
         player:startEvent(62)
@@ -58,12 +58,12 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local ChocobosWounds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+    local ChocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
 
-    if (ChocobosWounds == QUEST_COMPLETED and player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) == false) then
+    if (ChocobosWounds == QUEST_COMPLETED and player:hasKeyItem(xi.ki.CHOCOBO_LICENSE) == false) then
         -- this is a quick hack to let people get their license if it was lost
-        player:addKeyItem(tpz.ki.CHOCOBO_LICENSE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHOCOBO_LICENSE)
+        player:addKeyItem(xi.ki.CHOCOBO_LICENSE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHOCOBO_LICENSE)
     elseif (ChocobosWounds == QUEST_AVAILABLE) then
         player:startEvent(62)
     elseif (ChocobosWounds == QUEST_ACCEPTED) then
@@ -114,14 +114,14 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ChocobosWounds_Min", os.time() + 60)
         player:tradeComplete()
     elseif (csid == 64) then
-        player:addKeyItem(tpz.ki.CHOCOBO_LICENSE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CHOCOBO_LICENSE)
-        player:addTitle(tpz.title.CHOCOBO_TRAINER)
+        player:addKeyItem(xi.ki.CHOCOBO_LICENSE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHOCOBO_LICENSE)
+        player:addTitle(xi.title.CHOCOBO_TRAINER)
         player:setCharVar("ChocobosWounds_Event", 0)
         player:setCharVar("ChocobosWounds_Min", 0)
         player:addFame(JEUNO, 30)
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
     end
 end
 

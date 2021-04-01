@@ -12,7 +12,7 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0) <= 0.5) then
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0) <= 0.5) then
         return 0, 0, 0
     else
         local duration = 25
@@ -20,11 +20,11 @@ item_object.onAdditionalEffect = function(player, target, damage)
             duration = duration - (target:getMainLvl() - player:getMainLvl())
         end
         duration = utils.clamp(duration, 1, 25)
-        duration = duration * applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0)
-        if (not target:hasStatusEffect(tpz.effect.SLEEP_I)) then
-            target:addStatusEffect(tpz.effect.SLEEP_I, 1, 0, duration)
+        duration = duration * applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0)
+        if (not target:hasStatusEffect(xi.effect.SLEEP_I)) then
+            target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration)
         end
-        return tpz.subEffect.SLEEP, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.SLEEP_I
+        return xi.subEffect.SLEEP, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.SLEEP_I
     end
 end
 

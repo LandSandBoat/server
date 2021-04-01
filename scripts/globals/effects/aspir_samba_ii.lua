@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ASPIR_SAMBA_II
+-- xi.effect.ASPIR_SAMBA_II
 -----------------------------------
 local effect_object = {}
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SCARLET_DELIRIUM
+-- xi.effect.SCARLET_DELIRIUM
 -----------------------------------
 local effect_object = {}
 

@@ -15,8 +15,8 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.MDEF, 60)
-    mob:addMod(tpz.mod.DEF, 60)
+    mob:addMod(xi.mod.MDEF, 60)
+    mob:addMod(xi.mod.DEF, 60)
     mob:setAnimationSub(0)
 end
 

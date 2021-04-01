@@ -15,7 +15,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local foodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
     local kenapaFood = player:getCharVar("Kenapa_Food_var") -- Variable to track progress of Kenapa-Keppa in Food for Thought
 
     if foodForThought == QUEST_ACCEPTED then
@@ -36,11 +36,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local overnightDelivery = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
-    local foodForThought = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT)
-    local sayItWithFlowers = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+    local overnightDelivery = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
+    local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
+    local sayItWithFlowers = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
     local flowerProgress = player:getCharVar("FLOWER_PROGRESS") -- progress of Say It with Flowers
-    local hatInHand = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    local hatInHand = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
     local kenapaFood = player:getCharVar("Kenapa_Food_var") -- progress of Kenapa-Keppa in Food for Thought
     local kenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- progress for Overnight Delivery
     local kenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- day the quest is started
@@ -49,8 +49,8 @@ entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(WINDURST)
     local vHour = VanadielHour()
 
-    if player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 2) then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, tpz.ki.NEW_MODEL_HAT)
+    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 2) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(56)
     elseif (sayItWithFlowers == QUEST_ACCEPTED or sayItWithFlowers == QUEST_COMPLETED) and flowerProgress == 2 then
         player:startEvent(519)
@@ -107,7 +107,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(336) -- Restart the quest from the beginning
         end
-    elseif overnightDelivery == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SMALL_BAG) then
+    elseif overnightDelivery == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SMALL_BAG) then
         if kenapaOvernight == 4 then
             player:startEvent(340) -- Reminder for Overnight Delivery #1
         elseif kenapaOvernight == 5 then
@@ -119,7 +119,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         overnightDelivery == QUEST_ACCEPTED and
-        player:hasKeyItem(tpz.ki.SMALL_BAG) and
+        player:hasKeyItem(xi.ki.SMALL_BAG) and
         (vHour <= 6 or vHour >= 18)
     then
         local vDay = VanadielDayOfTheYear()
@@ -131,7 +131,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(346) -- Failed to return in time
         end
-    elseif overnightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) and vHour > 6 then
+    elseif overnightDelivery == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SMALL_BAG) and vHour > 6 then
         player:startEvent(346) -- Failed to return in time
     elseif overnightDelivery == QUEST_COMPLETED then
         if math.random(1, 2) == 1 then
@@ -156,8 +156,8 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:addGil(GIL_RATE * 120)
         if player:getCharVar("Kerutoto_Food_var") == 2 and player:getCharVar("Ohbiru_Food_var") == 3 then -- last NPC to be fed
-            npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.FOOD_FOR_THOUGHT, {
-                title = tpz.title.FAST_FOOD_DELIVERER,
+            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT, {
+                title = xi.title.FAST_FOOD_DELIVERER,
                 fame = 100,
                 var = {"Kerutoto_Food_var", "Kenapa_Food_var", "Ohbiru_Food_var"},
             })
@@ -182,7 +182,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("Kenapa_Overnight_var", 3)
     elseif csid == 339 then
         if option == 0 then
-            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+            player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
             player:setCharVar("Kenapa_Overnight_var", 4)
         else
             player:setCharVar("Kenapa_Overnight_var", 0)
@@ -196,19 +196,19 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 343 then
         player:setCharVar("Kenapa_Overnight_var", 4) -- Begin reminder sequence
     elseif csid == 346 then
-        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
-        player:delKeyItem(tpz.ki.SMALL_BAG)
+        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
+        player:delKeyItem(xi.ki.SMALL_BAG)
         player:setCharVar("Kenapa_Overnight_Hour_var", 0)
         player:setCharVar("Kenapa_Overnight_var", 256)
     elseif
         csid == 348 and
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY, {
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY, {
             item = 12590, -- power_gi
             fame = 100,
             var = {"Kenapa_Overnight_var", "Kenapa_Overnight_Hour_var"},
         })
     then
-        player:delKeyItem(tpz.ki.SMALL_BAG)
+        player:delKeyItem(xi.ki.SMALL_BAG)
         player:needToZone(true)
     elseif csid == 519 then
         player:setCharVar("FLOWER_PROGRESS", 3)

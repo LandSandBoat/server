@@ -16,7 +16,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.PETRIFICATION
+    local typeEffect = xi.effect.PETRIFICATION
     skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, 25))
     return typeEffect
 end

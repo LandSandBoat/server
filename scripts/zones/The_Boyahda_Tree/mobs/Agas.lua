@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.MOONDROP) then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.MOONDROP) then
         player:setCharVar("Searching_AgasKilled", 1)
     end
 end

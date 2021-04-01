@@ -13,16 +13,16 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    if (trade:hasItemQty(1545, 1) and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN and count == 1) then -- Trade mini fork of ice
+    if (trade:hasItemQty(1545, 1) and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN and count == 1) then -- Trade mini fork of ice
         player:startEvent(734, 0, 1545, 4, 20)
     end
 end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialSizeByIce = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+    local TrialSizeByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then -- Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 2) then -- Requires player to be Summoner at least lvl 20
         player:startEvent(733, 0, 1545, 4, 20)     --mini tuning fork of ice, zone, level
     elseif (TrialSizeByIce == QUEST_ACCEPTED) then
         local IceFork = player:hasItem(1545)
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1545)
         else
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_SIZE_TRIAL_BY_ICE)
             player:addItem(1545)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1545)
         end
@@ -61,7 +61,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1545)
         end
     elseif (csid == 734 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_FROST)
+        xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_FROST)
     end
 
 end

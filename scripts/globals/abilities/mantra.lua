@@ -14,13 +14,13 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:delStatusEffect(tpz.effect.MAX_HP_BOOST)
+    player:delStatusEffect(xi.effect.MAX_HP_BOOST)
 
-    local merits = player:getMerit(tpz.merit.MANTRA)
+    local merits = player:getMerit(xi.merit.MANTRA)
 
-    target:addStatusEffect(tpz.effect.MAX_HP_BOOST, merits, 0, 180)
+    target:addStatusEffect(xi.effect.MAX_HP_BOOST, merits, 0, 180)
 
-    return tpz.effect.MANTRA
+    return xi.effect.MANTRA
 end
 
 return ability_object

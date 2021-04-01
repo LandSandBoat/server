@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(tpz.mod.EVA, 50)
+    mob:setMod(xi.mod.EVA, 50)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

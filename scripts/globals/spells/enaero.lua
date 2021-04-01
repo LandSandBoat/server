@@ -11,7 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.ENAERO
+    local effect = xi.effect.ENAERO
     doEnspell(caster, target, spell, effect)
     return effect
 end

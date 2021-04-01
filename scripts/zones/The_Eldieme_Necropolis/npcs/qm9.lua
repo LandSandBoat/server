@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    func.papyrusQmOnTrigger(player, tpz.ki.ANCIENT_PAPYRUS_SHRED3)
+    func.papyrusQmOnTrigger(player, xi.ki.ANCIENT_PAPYRUS_SHRED3)
 end
 
 entity.onEventUpdate = function(player, csid, option)

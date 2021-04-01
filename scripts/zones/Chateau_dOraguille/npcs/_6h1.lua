@@ -15,13 +15,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local sandyQuests = tpz.quest.id.sandoria
-    local whmAf1 = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
-    local whmAf2 = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
-    local whmAf3 = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
+    local sandyQuests = xi.quest.id.sandoria
+    local whmAf1 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
+    local whmAf2 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
+    local whmAf3 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
     -- WHM AF quests
-    if player:getMainJob() == tpz.job.WHM and player:getMainLvl() >= AF2_QUEST_LEVEL then
+    if player:getMainJob() == xi.job.WHM and player:getMainLvl() >= AF2_QUEST_LEVEL then
         if whmAf1 == QUEST_COMPLETED and whmAf2 == QUEST_AVAILABLE then
             player:startEvent(551) -- Start Quest "Prelude of Black and White"
         elseif whmAf2 == QUEST_COMPLETED and whmAf3 == QUEST_AVAILABLE then
@@ -29,12 +29,12 @@ entity.onTrigger = function(player, npc)
         end
 
     -- San d'Oria Rank 10 (new default)
-    elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() == 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() == 10 then
         player:startEvent(73)
 
     -- San d'Oria 9-2 "The Heir to the Light" (optional)
     elseif
-        player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
+        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
         player:getCharVar("MissionStatus") > 5
     then
         player:startEvent(5)
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
     -- San d'Oria 8-2 "Lightbringer" (optional)
     elseif
         player:getRank() == 9 and player:getRankPoints() == 0 and
-        player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) and
+        player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER) and
         (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
     then
         player:startEvent(74)
@@ -62,9 +62,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 551) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif (csid == 552) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
     elseif (csid == 74) then
         player:setCharVar("Cutscenes_8-2", 2)
     end

@@ -13,11 +13,11 @@ require("scripts/globals/status")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -29,7 +29,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 3;
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==
         1) then
         cs = 5
     end
@@ -38,7 +38,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -63,10 +63,10 @@ end
 
 zone_object.onZoneWeatherChange = function(weather)
     local qm1 = GetNPCByID(ID.npc.SUNSAND_QM) -- Quest: An Empty Vessel
-    if (weather == tpz.weather.DUST_STORM) then
-        qm1:setStatus(tpz.status.NORMAL)
+    if (weather == xi.weather.DUST_STORM) then
+        qm1:setStatus(xi.status.NORMAL)
     else
-        qm1:setStatus(tpz.status.DISAPPEAR)
+        qm1:setStatus(xi.status.DISAPPEAR)
     end
 end
 

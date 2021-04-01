@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.BRAZEN_STRENGTH, 1, 368, 30)
+    player:addStatusEffect(xi.effect.BRAZEN_STRENGTH, 1, 368, 30)
 end
 
 return ability_object

@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     {-596.004, -0.254, 242.034},
@@ -32,13 +32,13 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 60)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 end
 
 entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 218 then
-        spell:setAoE(tpz.magic.aoe.RADIAL)
-        spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
+        spell:setAoE(xi.magic.aoe.RADIAL)
+        spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280)
         spell:setMPCost(1)
@@ -47,7 +47,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.NORMAL)
     end
 end
 

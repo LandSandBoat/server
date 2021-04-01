@@ -12,7 +12,7 @@ attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_AI_TICK", "AUTO_PATTERN_READER_TICK", function(pet, target)
         if pet:getLocalVar("patternreadertick") > 0 then
             local master = pet:getMaster()
-            local maneuvers = master:countEffect(tpz.effect.WIND_MANEUVER)
+            local maneuvers = master:countEffect(xi.effect.WIND_MANEUVER)
             local lasttick = pet:getLocalVar("patternreadertick")
             local tick = VanadielTime()
             local dt = tick - lasttick
@@ -24,7 +24,7 @@ attachment_object.onEquip = function(pet)
                     amount = 30 - prevamount
                 end
                 if amount ~= 0 then
-                    pet:addMod(tpz.mod.EVA, amount)
+                    pet:addMod(xi.mod.EVA, amount)
                 end
             else
                 amount = -1 * dt
@@ -32,7 +32,7 @@ attachment_object.onEquip = function(pet)
                     amount = -prevamount
                 end
                 if amount ~= 0 then
-                    pet:delMod(tpz.mod.EVA, -amount)
+                    pet:delMod(xi.mod.EVA, -amount)
                 end
             end
             if amount ~= 0 then
@@ -43,7 +43,7 @@ attachment_object.onEquip = function(pet)
     end)
     pet:addListener("DISENGAGE", "AUTO_PATTERN_READER_DISENGAGE", function(pet)
         if pet:getLocalVar("patternreader") > 0 then
-            pet:delMod(tpz.mod.EVA, pet:getLocalVar("patternreader"))
+            pet:delMod(xi.mod.EVA, pet:getLocalVar("patternreader"))
             pet:setLocalVar("patternreader", 0)
         end
         pet:setLocalVar("patternreadertick", 0)

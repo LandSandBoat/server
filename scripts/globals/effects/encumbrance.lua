@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ENCUMBERANCE
+-- xi.effect.ENCUMBERANCE
 -----------------------------------
 local effect_object = {}
 

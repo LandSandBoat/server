@@ -10,7 +10,7 @@ local ID = require("scripts/zones/RoMaeve/IDs")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.black_halo, player, ID.mob.ELDHRIMNIR)
+    xi.wsquest.handleQmTrigger(xi.wsquest.black_halo, player, ID.mob.ELDHRIMNIR)
 end
 
 return entity

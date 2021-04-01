@@ -13,7 +13,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.SUBTLE_BLOW_PLUS
+    local effect = xi.effect.SUBTLE_BLOW_PLUS
     caster:addStatusEffect(effect, 10, 0, 180)
     return effect
 end

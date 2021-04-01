@@ -8,22 +8,22 @@ require("scripts/globals/strangeapparatus")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    tpz.strangeApparatus.onTrade(player, trade, 55)
+    xi.strangeApparatus.onTrade(player, trade, 55)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.strangeApparatus.onTrigger(player, 53)
+    xi.strangeApparatus.onTrigger(player, 53)
 end
 
 entity.onEventUpdate = function(player, csid, option)
     if csid == 53 then
-        tpz.strangeApparatus.onEventUpdate(player, option)
+        xi.strangeApparatus.onEventUpdate(player, option)
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 55 then
-        tpz.strangeApparatus.onEventFinish(player)
+        xi.strangeApparatus.onEventFinish(player)
     end
 end
 

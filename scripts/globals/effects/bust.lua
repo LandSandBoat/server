@@ -1,18 +1,18 @@
 -----------------------------------
--- tpz.effect.BUST
+-- xi.effect.BUST
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    if (effect:getSubType() == tpz.mod.DMG) then
-        target:addMod(tpz.mod.DMG, effect:getPower())
+    if (effect:getSubType() == xi.mod.DMG) then
+        target:addMod(xi.mod.DMG, effect:getPower())
     else
-        if (effect:getSubType() == tpz.mod.ACC) then
-            target:addMod(tpz.mod.RACC, -effect:getPower())
-        elseif (effect:getSubType() == tpz.mod.ATTP) then
-            target:addMod(tpz.mod.RATTP, -effect:getPower())
+        if (effect:getSubType() == xi.mod.ACC) then
+            target:addMod(xi.mod.RACC, -effect:getPower())
+        elseif (effect:getSubType() == xi.mod.ATTP) then
+            target:addMod(xi.mod.RATTP, -effect:getPower())
         -- elseif (effect:getSubType() == MOD_PET_MACC) then
         --     target:addMod(MOD_PET_MATT, -effect:getPower())
         end
@@ -25,13 +25,13 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    if (effect:getSubType() == tpz.mod.DMG) then
-        target:delMod(tpz.mod.DMG, effect:getPower())
+    if (effect:getSubType() == xi.mod.DMG) then
+        target:delMod(xi.mod.DMG, effect:getPower())
     else
-        if (effect:getSubType() == tpz.mod.ACC) then
-            target:delMod(tpz.mod.RACC, -effect:getPower())
-        elseif (effect:getSubType() == tpz.mod.ATTP) then
-            target:delMod(tpz.mod.RATTP, -effect:getPower())
+        if (effect:getSubType() == xi.mod.ACC) then
+            target:delMod(xi.mod.RACC, -effect:getPower())
+        elseif (effect:getSubType() == xi.mod.ATTP) then
+            target:delMod(xi.mod.RATTP, -effect:getPower())
         -- elseif (effect:getSubType() == MOD_PET_MACC) then
         --     target:delMod(MOD_PET_MATT, -effect:getPower())
         end

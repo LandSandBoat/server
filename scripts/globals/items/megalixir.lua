@@ -24,7 +24,7 @@ end
 item_object.onItemUse = function(target)
     target:addHP(target:getMaxHP())
     target:addMP(target:getMaxMP())
-    target:messageBasic(tpz.msg.basic.RECOVERS_HP_AND_MP)
+    target:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP)
 end
 
 return item_object

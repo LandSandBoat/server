@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.CELENNIA_MEMORIAL_LIBRARY] =
+zones[ xi.zone.CELENNIA_MEMORIAL_LIBRARY] =
 {
     text =
     {
@@ -26,4 +26,4 @@ zones[tpz.zone.CELENNIA_MEMORIAL_LIBRARY] =
     },
 }
 
-return zones[tpz.zone.CELENNIA_MEMORIAL_LIBRARY]
+return zones[ xi.zone.CELENNIA_MEMORIAL_LIBRARY]

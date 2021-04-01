@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
 entity.onMobSpawn = function(mob)

@@ -15,16 +15,16 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.CLOTHCRAFT)
-    local moralManifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.CLOTHCRAFT)
+    local moralManifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
 
     if
         newRank > 9 and
         player:getCharVar("ClothcraftExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_WEAVER)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_WEAVER)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
+            player:setSkillRank(xi.skill.CLOTHCRAFT, newRank)
             player:startEvent(10012, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("ClothcraftExpertQuest", 0)
             player:setLocalVar("ClothcraftTraded", 1)
@@ -32,7 +32,7 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(10012, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <= 9 then
-        player:setSkillRank(tpz.skill.CLOTHCRAFT, newRank)
+        player:setSkillRank(xi.skill.CLOTHCRAFT, newRank)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
         player:setLocalVar("ClothcraftTraded", 1)
     elseif moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 2 then
@@ -46,20 +46,20 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local moralManifest = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST)
+    local moralManifest = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST)
 
-    local craftSkill = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
-    local testItem = getTestItem(player, npc, tpz.skill.CLOTHCRAFT)
+    local craftSkill = player:getSkillLevel(xi.skill.CLOTHCRAFT)
+    local testItem = getTestItem(player, npc, xi.skill.CLOTHCRAFT)
     local guildMember = isGuildMember(player, 3)
-    local rankCap = getCraftSkillCap(player, tpz.skill.CLOTHCRAFT)
+    local rankCap = getCraftSkillCap(player, xi.skill.CLOTHCRAFT)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.CLOTHCRAFT)
+    local Rank = player:getSkillRank(xi.skill.CLOTHCRAFT)
     local realSkill = (craftSkill - Rank) / 32
 
     if guildMember == 1 then guildMember = 10000; end
 
     if player:getCharVar("ClothcraftExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_WEAVER) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_WEAVER) then
             expertQuestStatus = 600
         else
             expertQuestStatus = 550

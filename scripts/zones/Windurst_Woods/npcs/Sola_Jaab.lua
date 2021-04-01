@@ -11,10 +11,10 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 7 and npcUtil.tradeHas(trade, 1127) then -- Kindred Seal
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_4") == 7 and npcUtil.tradeHas(trade, 1127) then -- Kindred Seal
         player:confirmTrade()
         player:setCharVar("ridingOnTheClouds_4", 0)
-        npcUtil.giveKeyItem(player, tpz.ki.SPIRITED_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 

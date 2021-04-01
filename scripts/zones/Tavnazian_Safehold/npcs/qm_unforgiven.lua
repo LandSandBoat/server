@@ -14,11 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Unforgiven = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
+    local Unforgiven = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 
-    if (Unforgiven == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.ALABASTER_HAIRPIN) == false) then
-        player:addKeyItem(tpz.ki.ALABASTER_HAIRPIN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ALABASTER_HAIRPIN) -- ALABASTER HAIRPIN for Unforgiven Quest
+    if (Unforgiven == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.ALABASTER_HAIRPIN) == false) then
+        player:addKeyItem(xi.ki.ALABASTER_HAIRPIN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ALABASTER_HAIRPIN) -- ALABASTER HAIRPIN for Unforgiven Quest
     end
 end
 

@@ -14,11 +14,11 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.GUIVRE)
     GetMobByID(ID.mob.GUIVRE):setRespawnTime(math.random(900, 10800))
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -76,7 +76,7 @@ zone_object.onGameHour = function(zone)
     if dir > 0 then
         local shouldOpen = boulderOpen[dir][VanadielHour()]
         local boulder = GetNPCByID(ID.npc.DOOR_ROCK)
-        if shouldOpen and shouldOpen() and boulder:getAnimation() == tpz.anim.CLOSE_DOOR then
+        if shouldOpen and shouldOpen() and boulder:getAnimation() == xi.anim.CLOSE_DOOR then
             boulder:openDoor(144 * 6) -- one vanadiel hour is 144 earth seconds. lower boulder for 6 vanadiel hours.
         end
     end

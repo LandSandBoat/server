@@ -5,7 +5,7 @@ require("scripts/globals/settings")
 require("scripts/globals/zone")
 
 tpz = tpz or {}
-tpz.teleport = tpz.teleport or {}
+ xi.teleport = xi.teleport or {}
 
 -----------------------------------
 -- TELEPORT IDS
@@ -80,7 +80,7 @@ local ids =
     ESCHA_RUAUN           = 66,
     MISAREAUX_CONFLUENCE  = 67
 }
-tpz.teleport.id = ids
+ xi.teleport.id = ids
 
 -----------------------------------
 -- TELEPORT TO SINGLE DESTINATION
@@ -151,7 +151,7 @@ local destinations =
     [ids.MISAREAUX_CONFLUENCE]  = { -57.385,  -21.460,  568.941, 160,  25}
 }
 
-tpz.teleport.type =
+ xi.teleport.type =
 {
     OUTPOST_SANDORIA   = 0,
     OUTPOST_BASTOK     = 1,
@@ -166,7 +166,7 @@ tpz.teleport.type =
     SURVIVAL           = 10
 }
 
-tpz.teleport.runic_portal =
+ xi.teleport.runic_portal =
 {
     AZOUPH  = 1,
     DVUCCA  = 2,
@@ -176,7 +176,7 @@ tpz.teleport.runic_portal =
     NYZUL   = 6,
 }
 
-tpz.teleport.to = function(player, destination)
+ xi.teleport.to = function(player, destination)
     local dest = destinations[destination]
     if dest then
         player:setPos(unpack(dest))
@@ -187,7 +187,7 @@ end
 -- TELEPORT TO PARTY LEADER
 -----------------------------------
 
-tpz.teleport.toLeader = function(player)
+ xi.teleport.toLeader = function(player)
     local leader = player:getPartyLeader()
     if leader ~= nil and not leader:isInMogHouse() then
         player:gotoPlayer(leader:getName())
@@ -222,7 +222,7 @@ local campaignDestinations =
     [20] = { 294.350, -27.500,   19.947,   0, 175}, -- {R} The Eldieme Necropolis [S]
 }
 
-tpz.teleport.toCampaign = function(player, option)
+ xi.teleport.toCampaign = function(player, option)
     local dest = campaignDestinations[option]
     if dest then
         player:setPos(unpack(dest))
@@ -246,27 +246,27 @@ end
 
 local outpostDestinations =
 {
-    [tpz.region.RONFAURE]        = {-437.688, -20.255, -219.227, 124, 100}, -- Ronfaure {R}
-    [tpz.region.ZULKHEIM]        = { 148.231,  -7.975,   93.479, 154, 103}, -- Zulkheim {R}
-    [tpz.region.NORVALLEN]       = {  62.030,   0.463,   -2.025,  67, 104}, -- Norvallen {R}
-    [tpz.region.GUSTABERG]       = {-580.161,  39.578,   62.680,  89, 106}, -- Gustaberg {R}
-    [tpz.region.DERFLAND]        = { 465.820,  23.625,  423.164,  29, 109}, -- Derfland {R}
-    [tpz.region.SARUTABARUTA]    = { -17.921, -13.335,  318.156, 254, 115}, -- Sarutabaruta {R}
-    [tpz.region.KOLSHUSHU]       = {-480.237, -30.943,   58.079,  62, 118}, -- Kolshushu {R}
-    [tpz.region.ARAGONEU]        = {-297.047,  16.988,  418.026, 225, 119}, -- Aragoneu {R}
-    [tpz.region.FAUREGANDI]      = { -18.690, -60.048, -109.243, 100, 111}, -- Fauregandi {R}
-    [tpz.region.VALDEAUNIA]      = { 211.210, -24.016, -207.338, 160, 112}, -- Valdeaunia {R}
-    [tpz.region.QUFIMISLAND]     = {-243.049, -19.983,  306.712,  71, 126}, -- Qufim Island {R}
-    [tpz.region.LITELOR]         = { -37.669,   0.419, -141.216,  69, 121}, -- Li'Telor {R}
-    [tpz.region.KUZOTZ]          = {-249.983,   7.965, -252.976, 122, 114}, -- Kuzotz {R}
-    [tpz.region.VOLLBOW]         = {-176.360,   7.624,  -63.580, 122, 113}, -- Vollbow {R}
-    [tpz.region.ELSHIMOLOWLANDS] = {-240.860,  -0.031, -388.434,  64, 123}, -- Elshimo Lowlands {R}
-    [tpz.region.ELSHIMOUPLANDS]  = { 207.821,  -0.128,  -86.623, 159, 124}, -- Elshimo Uplands {R}
-    [tpz.region.TULIA]           = {   4.000, -54.000, -600.000, 192, 130}, -- Tu'Lia (can't acquire on retail, but exists in NCP event menu)
-    [tpz.region.TAVNAZIANARCH]   = {-535.861,  -7.149,  -53.628, 122,  24}, -- Tavnazia {R}
+    [ xi.region.RONFAURE]        = {-437.688, -20.255, -219.227, 124, 100}, -- Ronfaure {R}
+    [ xi.region.ZULKHEIM]        = { 148.231,  -7.975,   93.479, 154, 103}, -- Zulkheim {R}
+    [ xi.region.NORVALLEN]       = {  62.030,   0.463,   -2.025,  67, 104}, -- Norvallen {R}
+    [ xi.region.GUSTABERG]       = {-580.161,  39.578,   62.680,  89, 106}, -- Gustaberg {R}
+    [ xi.region.DERFLAND]        = { 465.820,  23.625,  423.164,  29, 109}, -- Derfland {R}
+    [ xi.region.SARUTABARUTA]    = { -17.921, -13.335,  318.156, 254, 115}, -- Sarutabaruta {R}
+    [ xi.region.KOLSHUSHU]       = {-480.237, -30.943,   58.079,  62, 118}, -- Kolshushu {R}
+    [ xi.region.ARAGONEU]        = {-297.047,  16.988,  418.026, 225, 119}, -- Aragoneu {R}
+    [ xi.region.FAUREGANDI]      = { -18.690, -60.048, -109.243, 100, 111}, -- Fauregandi {R}
+    [ xi.region.VALDEAUNIA]      = { 211.210, -24.016, -207.338, 160, 112}, -- Valdeaunia {R}
+    [ xi.region.QUFIMISLAND]     = {-243.049, -19.983,  306.712,  71, 126}, -- Qufim Island {R}
+    [ xi.region.LITELOR]         = { -37.669,   0.419, -141.216,  69, 121}, -- Li'Telor {R}
+    [ xi.region.KUZOTZ]          = {-249.983,   7.965, -252.976, 122, 114}, -- Kuzotz {R}
+    [ xi.region.VOLLBOW]         = {-176.360,   7.624,  -63.580, 122, 113}, -- Vollbow {R}
+    [ xi.region.ELSHIMOLOWLANDS] = {-240.860,  -0.031, -388.434,  64, 123}, -- Elshimo Lowlands {R}
+    [ xi.region.ELSHIMOUPLANDS]  = { 207.821,  -0.128,  -86.623, 159, 124}, -- Elshimo Uplands {R}
+    [ xi.region.TULIA]           = {   4.000, -54.000, -600.000, 192, 130}, -- Tu'Lia (can't acquire on retail, but exists in NCP event menu)
+    [ xi.region.TAVNAZIANARCH]   = {-535.861,  -7.149,  -53.628, 122,  24}, -- Tavnazia {R}
 }
 
-tpz.teleport.toOutpost = function(player, region)
+ xi.teleport.toOutpost = function(player, region)
     local dest = outpostDestinations[region]
     player:setPos(unpack(dest))
 end
@@ -275,11 +275,11 @@ end
 -- TELEPORT TO HOME NATION
 -----------------------------------
 
-tpz.teleport.toHomeNation = function(player)
+ xi.teleport.toHomeNation = function(player)
     local pNation = player:getNation()
-    if pNation == tpz.nation.BASTOK then
+    if pNation == xi.nation.BASTOK then
         player:setPos(89, 0 , -66, 0, 234)
-    elseif pNation == tpz.nation.SANDORIA then
+    elseif pNation == xi.nation.SANDORIA then
         player:setPos(49, -1 , 29, 164, 231)
     else
         player:setPos(193, -12 , 220, 64, 240)
@@ -290,16 +290,16 @@ end
 -- TELEPORT TO ALLIED NATION
 -----------------------------------
 
-tpz.teleport.toAlliedNation = function(player)
+ xi.teleport.toAlliedNation = function(player)
     local Allegiance = player:getCampaignAllegiance()
     local sandoriaPos = destinations[ids.SOUTHERN_SAN_DORIA_S]
     local bastokPos = destinations[ids.BASTOK_MARKETS_S]
     local windurstPos = destinations[ids.WINDURST_WATERS_S]
-    if Allegiance == tpz.alliedNation.SANDORIA then
+    if Allegiance == xi.alliedNation.SANDORIA then
         player:setPos(unpack(sandoriaPos))
-    elseif Allegiance == tpz.alliedNation.BASTOK then
+    elseif Allegiance == xi.alliedNation.BASTOK then
         player:setPos(unpack(bastokPos))
-    elseif Allegiance == tpz.alliedNation.WINDURST then
+    elseif Allegiance == xi.alliedNation.WINDURST then
         player:setPos(unpack(windurstPos))
     end
 end
@@ -308,7 +308,7 @@ end
 -- TELEPORT TO CHAMBER OF PASSAGE
 -----------------------------------
 
-tpz.teleport.toChamberOfPassage = function(player)
+ xi.teleport.toChamberOfPassage = function(player)
     if math.random(1, 2) == 1 then
         player:setPos(133.400, 1.485, 47.427, 96, 50) -- {R} Aht Urhgan Whitegate Chamber of Passage Left
     else
@@ -320,7 +320,7 @@ end
 -- TELEPORT TO EXPLORER MOOGLE
 -----------------------------------
 
-tpz.teleport.toExplorerMoogle = function(player, zone)
+ xi.teleport.toExplorerMoogle = function(player, zone)
     if zone == 231 then
         player:setPos(39.4, -0.2, 25, 253, zone)       -- Northern_San_d'Oria
     elseif zone == 234 then
@@ -338,7 +338,7 @@ end
 -- CAST ESCAPE SPELL
 -----------------------------------
 
-tpz.teleport.escape = function(player)
+ xi.teleport.escape = function(player)
     local zone = player:getZoneID()
 
     -- Ronfaure {R}
@@ -509,7 +509,7 @@ end
 -- EXPLORER MOOGLE EVENTS
 -----------------------------------
 
-tpz.teleport.explorerMoogleOnTrigger = function(player, event)
+ xi.teleport.explorerMoogleOnTrigger = function(player, event)
     local accept = 0
 
     if player:getGil() < 300 then
@@ -523,20 +523,20 @@ tpz.teleport.explorerMoogleOnTrigger = function(player, event)
     player:startEvent(event, player:getZoneID(), 0, accept)
 end
 
-tpz.teleport.explorerMoogleOnEventFinish = function(player, csid, option, event)
+ xi.teleport.explorerMoogleOnEventFinish = function(player, csid, option, event)
     local price = 300
 
     if csid == event then
         if option == 1 and player:delGil(price) then
-            tpz.teleport.toExplorerMoogle(player, 231)
+            xi.teleport.toExplorerMoogle(player, 231)
         elseif option == 2 and player:delGil(price) then
-            tpz.teleport.toExplorerMoogle(player, 234)
+            xi.teleport.toExplorerMoogle(player, 234)
         elseif option == 3 and player:delGil(price) then
-            tpz.teleport.toExplorerMoogle(player, 240)
+            xi.teleport.toExplorerMoogle(player, 240)
         elseif option == 4 and player:delGil(price) then
-            tpz.teleport.toExplorerMoogle(player, 248)
+            xi.teleport.toExplorerMoogle(player, 248)
         elseif option == 5 and player:delGil(price) then
-            tpz.teleport.toExplorerMoogle(player, 249)
+            xi.teleport.toExplorerMoogle(player, 249)
         end
     end
 end

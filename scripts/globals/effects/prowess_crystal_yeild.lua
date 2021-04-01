@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PROWESS
+-- xi.effect.PROWESS
 -- Increased crystal yield
 -----------------------------------
 local effect_object = {}

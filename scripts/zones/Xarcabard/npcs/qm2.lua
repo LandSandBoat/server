@@ -17,11 +17,11 @@ end
 entity.onTrigger = function(player, npc)
     if not OLDSCHOOL_G2 or GetMobByID(ID.mob.BOREAL_TIGER):isDead() then
         if
-            not player:hasKeyItem(tpz.ki.ROUND_FRIGICITE) and
-            player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
+            not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS) == QUEST_ACCEPTED
         then
-            player:addKeyItem(tpz.ki.ROUND_FRIGICITE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ROUND_FRIGICITE)
+            player:addKeyItem(xi.ki.ROUND_FRIGICITE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ROUND_FRIGICITE)
         else
             player:messageSpecial(ID.text.ONLY_SHARDS)
         end

@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1143) and player:getZPos() < 332 then -- Cursed Key
-        if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 4 then
+        if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 4 then
             player:confirmTrade()
             player:startEvent(23)
         else
@@ -39,9 +39,9 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 23 then
         player:setPos(340, 0, 333)
-        player:delKeyItem(tpz.ki.BLANK_BOOK_OF_THE_GODS)
-        player:addKeyItem(tpz.ki.BOOK_OF_THE_GODS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOOK_OF_THE_GODS)
+        player:delKeyItem(xi.ki.BLANK_BOOK_OF_THE_GODS)
+        player:addKeyItem(xi.ki.BOOK_OF_THE_GODS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOOK_OF_THE_GODS)
         player:setCharVar("MissionStatus", 5)
     end
 end

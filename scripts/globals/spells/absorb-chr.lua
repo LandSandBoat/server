@@ -15,26 +15,26 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
 
-    if (target:hasStatusEffect(tpz.effect.CHR_DOWN) or caster:hasStatusEffect(tpz.effect.CHR_BOOST)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if (target:hasStatusEffect(xi.effect.CHR_DOWN) or caster:hasStatusEffect(xi.effect.CHR_BOOST)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+        local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
-        params.attribute = tpz.mod.INT
+        params.attribute = xi.mod.INT
         params.skillType = 37
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_ABSORB_CHR)
-            caster:addStatusEffect(tpz.effect.CHR_BOOST, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(tpz.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK) -- caster gains CHR
-            target:addStatusEffect(tpz.effect.CHR_DOWN, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(tpz.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK)    -- target loses CHR
+            spell:setMsg(xi.msg.basic.MAGIC_ABSORB_CHR)
+            caster:addStatusEffect(xi.effect.CHR_BOOST, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK) -- caster gains CHR
+            target:addStatusEffect(xi.effect.CHR_DOWN, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK)    -- target loses CHR
         end
     end
-    return tpz.effect.CHR_DOWN
+    return xi.effect.CHR_DOWN
 end
 
 return spell_object

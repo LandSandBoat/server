@@ -16,10 +16,10 @@ end
 entity.onTrigger = function(player, npc)
 
     -- "Rosel the Armorer" quest status var
-    local RoselTheArmorer = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER)
+    local RoselTheArmorer = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER)
 
     -- "Rosel the Armorer" - turn in reciept to prince
-    if (RoselTheArmorer == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)) then
+    if (RoselTheArmorer == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.RECEIPT_FOR_THE_PRINCE)) then
         player:startEvent(507)
     else
         player:showText(npc, ID.text.GUILERME_DIALOG)
@@ -34,7 +34,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- "Rosel the Armorer", give receipt to NPC:Guilerme
     if (csid == 507) then
-        player:delKeyItem(tpz.ki.RECEIPT_FOR_THE_PRINCE)
+        player:delKeyItem(xi.ki.RECEIPT_FOR_THE_PRINCE)
     end
 
 end

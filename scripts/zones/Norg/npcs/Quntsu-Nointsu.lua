@@ -15,39 +15,39 @@ local titleInfo =
         cost = 200,
         title =
         {
-            tpz.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES,
-            tpz.title.BUSHIDO_BLADE,
-            tpz.title.BLACK_MARKETEER,
-            tpz.title.CRACKER_OF_THE_SECRET_CODE,
-            tpz.title.LOOKS_SUBLIME_IN_A_SUBLIGAR,
-            tpz.title.LOOKS_GOOD_IN_LEGGINGS,
+            xi.title.HONORARY_DOCTORATE_MAJORING_IN_TONBERRIES,
+            xi.title.BUSHIDO_BLADE,
+            xi.title.BLACK_MARKETEER,
+            xi.title.CRACKER_OF_THE_SECRET_CODE,
+            xi.title.LOOKS_SUBLIME_IN_A_SUBLIGAR,
+            xi.title.LOOKS_GOOD_IN_LEGGINGS,
         },
     },
     {
         cost = 300,
         title =
         {
-            tpz.title.APPRENTICE_SOMMELIER,
-            tpz.title.TREASUREHOUSE_RANSACKER,
-            tpz.title.HEIR_OF_THE_GREAT_WATER,
-            tpz.title.PARAGON_OF_SAMURAI_EXCELLENCE,
-            tpz.title.PARAGON_OF_NINJA_EXCELLENCE,
-            tpz.title.GUIDER_OF_SOULS_TO_THE_SANCTUARY,
-            tpz.title.BEARER_OF_BONDS_BEYOND_TIME,
-            tpz.title.FRIEND_OF_THE_OPOOPOS,
-            tpz.title.PENTACIDE_PERPETRATOR,
+            xi.title.APPRENTICE_SOMMELIER,
+            xi.title.TREASUREHOUSE_RANSACKER,
+            xi.title.HEIR_OF_THE_GREAT_WATER,
+            xi.title.PARAGON_OF_SAMURAI_EXCELLENCE,
+            xi.title.PARAGON_OF_NINJA_EXCELLENCE,
+            xi.title.GUIDER_OF_SOULS_TO_THE_SANCTUARY,
+            xi.title.BEARER_OF_BONDS_BEYOND_TIME,
+            xi.title.FRIEND_OF_THE_OPOOPOS,
+            xi.title.PENTACIDE_PERPETRATOR,
         },
     },
     {
         cost = 400,
         title =
         {
-            tpz.title.BEARER_OF_THE_WISEWOMANS_HOPE,
-            tpz.title.BEARER_OF_THE_EIGHT_PRAYERS,
-            tpz.title.LIGHTWEAVER,
-            tpz.title.DESTROYER_OF_ANTIQUITY,
-            tpz.title.SEALER_OF_THE_PORTAL_OF_THE_GODS,
-            tpz.title.BURIER_OF_THE_ILLUSION,
+            xi.title.BEARER_OF_THE_WISEWOMANS_HOPE,
+            xi.title.BEARER_OF_THE_EIGHT_PRAYERS,
+            xi.title.LIGHTWEAVER,
+            xi.title.DESTROYER_OF_ANTIQUITY,
+            xi.title.SEALER_OF_THE_PORTAL_OF_THE_GODS,
+            xi.title.BURIER_OF_THE_ILLUSION,
         },
     },
 }
@@ -56,14 +56,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.title.changerOnTrigger(player, eventId, titleInfo)
+    xi.title.changerOnTrigger(player, eventId, titleInfo)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
+    xi.title.changerOnEventFinish(player, csid, option, eventId, titleInfo)
 end
 
 return entity

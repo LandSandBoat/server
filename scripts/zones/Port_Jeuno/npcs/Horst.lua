@@ -11,9 +11,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local CRUOR = player:getCurrency("cruor")
-    if (player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED) then
         player:startEvent(339, 1, CRUOR, 7, 7, 7) -- Temp activated all locations till param handling sorted out.
-    elseif (player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_COMPLETED) then
         player:startEvent(339, 2, CRUOR, 7, 7, 7) -- Temp activated all locations till param handling sorted out.
     else
         player:startEvent(339, 0)

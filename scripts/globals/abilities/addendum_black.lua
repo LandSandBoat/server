@@ -20,27 +20,27 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.ADDENDUM_BLACK) then
-        return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
+    if player:hasStatusEffect(xi.effect.ADDENDUM_BLACK) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
     return 0, 0
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:delStatusEffectSilent(tpz.effect.LIGHT_ARTS)
-    player:delStatusEffectSilent(tpz.effect.ADDENDUM_WHITE)
-    player:delStatusEffectSilent(tpz.effect.DARK_ARTS)
+    player:delStatusEffectSilent(xi.effect.LIGHT_ARTS)
+    player:delStatusEffectSilent(xi.effect.ADDENDUM_WHITE)
+    player:delStatusEffectSilent(xi.effect.DARK_ARTS)
 
-    local skillbonus = player:getMod(tpz.mod.DARK_ARTS_SKILL)
-    local effectbonus = player:getMod(tpz.mod.DARK_ARTS_EFFECT)
+    local skillbonus = player:getMod(xi.mod.DARK_ARTS_SKILL)
+    local effectbonus = player:getMod(xi.mod.DARK_ARTS_EFFECT)
     local helixbonus = 0
-    if (player:getMainJob() == tpz.job.SCH and player:getMainLvl() >= 20) then
+    if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then
         helixbonus = math.floor(player:getMainLvl() / 4)
     end
 
-    player:addStatusEffectEx(tpz.effect.ADDENDUM_BLACK, tpz.effect.ADDENDUM_BLACK, effectbonus, 0, 7200, 0, helixbonus, true)
+    player:addStatusEffectEx(xi.effect.ADDENDUM_BLACK, xi.effect.ADDENDUM_BLACK, effectbonus, 0, 7200, 0, helixbonus, true)
 
-    return tpz.effect.ADDENDUM_BLACK
+    return xi.effect.ADDENDUM_BLACK
 end
 
 return ability_object

@@ -15,12 +15,12 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and
-        not player:hasKeyItem(tpz.ki.PAINTING_OF_A_WINDMILL)
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIGNPOST_MARKS_THE_SPOT) == QUEST_ACCEPTED and
+        not player:hasKeyItem(xi.ki.PAINTING_OF_A_WINDMILL)
     then
         player:messageSpecial(ID.text.SIGNPOST_DIALOG_2)
-        player:addKeyItem(tpz.ki.PAINTING_OF_A_WINDMILL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PAINTING_OF_A_WINDMILL)
+        player:addKeyItem(xi.ki.PAINTING_OF_A_WINDMILL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PAINTING_OF_A_WINDMILL)
     else
         player:messageSpecial(ID.text.SIGNPOST_DIALOG_1)
     end

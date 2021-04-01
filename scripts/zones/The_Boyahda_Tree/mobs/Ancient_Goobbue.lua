@@ -7,17 +7,17 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(tpz.mod.CRITHITRATE, 25)
+    mob:setMod(xi.mod.CRITHITRATE, 25)
 end
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95)},
+            {id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95)},
         },
     })
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.DROZGA_SHOP_DIALOG)
-    tpz.shop.general(player, stock, WINDURST)
+    xi.shop.general(player, stock, WINDURST)
 end
 
 entity.onEventUpdate = function(player, csid, option)

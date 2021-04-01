@@ -14,26 +14,26 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 180, 4391)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 180, 4391)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.FOOD_MPP, 8)
-    target:addMod(tpz.mod.FOOD_MP_CAP, 55)
-    target:addMod(tpz.mod.VIT, 2)
+    target:addMod(xi.mod.FOOD_MPP, 8)
+    target:addMod(xi.mod.FOOD_MP_CAP, 55)
+    target:addMod(xi.mod.VIT, 2)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.FOOD_MPP, 8)
-    target:delMod(tpz.mod.FOOD_MP_CAP, 55)
-    target:delMod(tpz.mod.VIT, 2)
+    target:delMod(xi.mod.FOOD_MPP, 8)
+    target:delMod(xi.mod.FOOD_MP_CAP, 55)
+    target:delMod(xi.mod.VIT, 2)
 end
 
 return item_object

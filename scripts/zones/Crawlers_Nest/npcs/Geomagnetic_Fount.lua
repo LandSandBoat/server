@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.geomagneticFount.checkFount(player, npc)
+    xi.geomagneticFount.checkFount(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)

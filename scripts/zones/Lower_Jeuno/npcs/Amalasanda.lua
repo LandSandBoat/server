@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.TENSHODO_MEMBERS_CARD) then
+    if player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
         local stock =
         {
             704,    144,    -- Bamboo Stick
@@ -76,7 +76,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.AMALASANDA_SHOP_DIALOG)
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
     end
 end
 

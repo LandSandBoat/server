@@ -16,9 +16,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FOOL = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+    local FOOL = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
     if (FOOL == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.BLIGHTBERRY)) then
+        if (player:hasKeyItem(xi.ki.BLIGHTBERRY)) then
             -- Finishes Quest: 'Flavors of Our Lives'
             player:startEvent(87)
         else
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 80) then
         if (option == 1) then
             -- Starts Quest: 'Flavors of Our Lives'
-            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
             player:setCharVar("FOOL_Refused_Once", 0)
         else
             -- Refuses Quest: 'Flavors of Our Lives'
@@ -56,17 +56,17 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 81) then
         if (option == 1) then
             -- Starts Quest: 'Flavors of Our Lives'
-            player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+            player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
             player:setCharVar("FOOL_Refused_Once", 0)
         end
     elseif (csid == 87) then
         -- Finishing Quest: 'Flavors of Our Lives'
-        player:delKeyItem(tpz.ki.BLIGHTBERRY)
-        player:completeQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+        player:delKeyItem(xi.ki.BLIGHTBERRY)
+        player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
         player:addExp(500 * EXP_RATE)
         player:addCurrency('bayld', 300 * BAYLD_RATE)
         player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * BAYLD_RATE)
-        player:addTitle(tpz.title.POTATION_PATHFINDER)
+        player:addTitle(xi.title.POTATION_PATHFINDER)
         player:addFame(ADOULIN)
     end
 end

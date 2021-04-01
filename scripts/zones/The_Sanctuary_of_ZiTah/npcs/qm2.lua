@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, 1021) and not player:hasItem(1153) and npcUtil.popFromQM(player, npc, ID.mob.GUARDIAN_TREANT, {hide = 0}) then
             player:confirmTrade()
         elseif npcUtil.tradeHas(trade, 1198) and player:getCharVar("ForgeYourDestiny_killed") == 1 and npcUtil.giveItem(player, 1153) then

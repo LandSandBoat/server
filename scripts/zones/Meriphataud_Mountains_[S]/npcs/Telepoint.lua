@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(tpz.ki.MERIPHATAUD_GATE_CRYSTAL) then
-        npcUtil.giveKeyItem(player, tpz.ki.MERIPHATAUD_GATE_CRYSTAL)
+    if not player:hasKeyItem(xi.ki.MERIPHATAUD_GATE_CRYSTAL) then
+        npcUtil.giveKeyItem(player, xi.ki.MERIPHATAUD_GATE_CRYSTAL)
     else
         player:messageSpecial(ID.text.ALREADY_OBTAINED_TELE)
     end

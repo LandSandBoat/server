@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.BOOK_OF_TASKS) and player:hasKeyItem(tpz.ki.BOOK_OF_THE_EAST) == false) then
+    if (player:hasKeyItem(xi.ki.BOOK_OF_TASKS) and player:hasKeyItem(xi.ki.BOOK_OF_THE_EAST) == false) then
         player:startEvent(633)
     else
         player:showText(npc, 7817) -- nothing to report
@@ -29,8 +29,8 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 633) then
-        player:addKeyItem(tpz.ki.BOOK_OF_THE_EAST)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOOK_OF_THE_EAST)
+        player:addKeyItem(xi.ki.BOOK_OF_THE_EAST)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOOK_OF_THE_EAST)
     end
 
 end

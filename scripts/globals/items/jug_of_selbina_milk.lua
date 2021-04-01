@@ -13,14 +13,14 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (not target:hasStatusEffect(tpz.effect.REGEN)) then
-        if (target:getEquipID(tpz.slot.BODY) == 14520) then -- Dream Robe +1
-            target:addStatusEffect(tpz.effect.REGEN, 1, 3, 150)
+    if (not target:hasStatusEffect(xi.effect.REGEN)) then
+        if (target:getEquipID(xi.slot.BODY) == 14520) then -- Dream Robe +1
+            target:addStatusEffect(xi.effect.REGEN, 1, 3, 150)
         else
-            target:addStatusEffect(tpz.effect.REGEN, 1, 3, 120)
+            target:addStatusEffect(xi.effect.REGEN, 1, 3, 120)
         end
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

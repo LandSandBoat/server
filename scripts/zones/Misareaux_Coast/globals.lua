@@ -14,21 +14,21 @@ local MISAREAUX_COAST = {
         local vHour = VanadielHour()
         if vHour >= 7 and vHour < 22 then -- Despawn traps for Ziphius
             for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE+5 do
-                GetNPCByID(i):setStatus(tpz.status.DISAPPEAR)
+                GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 GetNPCByID(i):resetLocalVars()
             end
         elseif vHour >= 22 or vHour < 4 then -- Spawn traps for Ziphius
             local random = GetNPCByID(ID.npc.ZIPHIUS_QM_BASE + math.random(0, 5))
-            if random:getStatus() == tpz.status.DISAPPEAR then
+            if random:getStatus() == xi.status.DISAPPEAR then
                 random:setLocalVar("[Ziphius]Spawn", 1)
             end
             for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE+5 do
-                GetNPCByID(i):setStatus(tpz.status.NORMAL)
+                GetNPCByID(i):setStatus(xi.status.NORMAL)
             end
         elseif vHour == 4 then -- Despawn non-baited traps
             for i = ID.npc.ZIPHIUS_QM_BASE, ID.npc.ZIPHIUS_QM_BASE+5 do
                 if GetNPCByID(i):getLocalVar("[Ziphius]Baited") == 0 then
-                    GetNPCByID(i):setStatus(tpz.status.DISAPPEAR)
+                    GetNPCByID(i):setStatus(xi.status.DISAPPEAR)
                 end
             end
         end
@@ -64,7 +64,7 @@ local MISAREAUX_COAST = {
             if baitedByPlayer then
                 if npc:getLocalVar("[Ziphius]Spawn") == 1 then
                     npc:resetLocalVars()
-                    npc:setStatus(tpz.status.DISAPPEAR)
+                    npc:setStatus(xi.status.DISAPPEAR)
                     SpawnMob(ID.mob.ZIPHIUS):updateClaim(player)
                     GetMobByID(ID.mob.ZIPHIUS):setPos(npc:getXPos(), npc:getYPos(), npc:getZPos()-1)
                 else

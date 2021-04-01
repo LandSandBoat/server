@@ -16,19 +16,19 @@ entity.onTrigger = function(player, npc)
     local MissionStatus = player:getCharVar("MissionStatus")
 
     if
-        Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK and MissionStatus == 3 or
-        Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2 and MissionStatus == 8
+        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK and MissionStatus == 3 or
+        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 and MissionStatus == 8
     then
         player:startEvent(355)
     elseif
-        Mission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and MissionStatus == 3 or
-        Mission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus == 8
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and MissionStatus == 3 or
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus == 8
     then
         player:startEvent(355, 1)
     elseif
-        Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK or
-        Mission == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-        Mission == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus < 11
+        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK or
+        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus < 11
     then
         player:startEvent(356)
     else

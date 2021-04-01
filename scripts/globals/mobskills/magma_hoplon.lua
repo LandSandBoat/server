@@ -14,13 +14,13 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = tpz.effect.STONESKIN
-    local typeEffectTwo = tpz.effect.BLAZE_SPIKES
+    local typeEffectOne = xi.effect.STONESKIN
+    local typeEffectTwo = xi.effect.BLAZE_SPIKES
     local randy = math.random(20, 30)
     skill:setMsg(MobBuffMove(mob, typeEffectOne, 1000, 0, 300))
     MobBuffMove(mob, typeEffectTwo, randy, 0, 180)
     local effect1 = mob:getStatusEffect(typeEffectOne)
-    effect1:unsetFlag(tpz.effectFlag.DISPELABLE)
+    effect1:unsetFlag(xi.effectFlag.DISPELABLE)
 
     return typeEffectOne
 end

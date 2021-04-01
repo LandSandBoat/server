@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     local killCount = player:getCharVar("EVERYONES_GRUDGE_KILLS")
 
-    if player:hasKeyItem(tpz.ki.TONBERRY_PRIEST_KEY) then
+    if player:hasKeyItem(xi.ki.TONBERRY_PRIEST_KEY) then
         if killCount >= 1 then
             local payment = 250 * (killCount / 20 + 1)
             player:startEvent(66, 0, payment)

@@ -13,14 +13,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.WEIGHT
+    local typeEffect = xi.effect.WEIGHT
     MobStatusEffectMove(mob, target, typeEffect, 50, 0, 120)
 
 
-    local dmgmod = MobBreathMove(mob, target, 0.167, 1.875, tpz.magic.ele.EARTH, 509)
+    local dmgmod = MobBreathMove(mob, target, 0.167, 1.875, xi.magic.ele.EARTH, 509)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.EARTH, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.EARTH)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)
     return dmg
 end
 

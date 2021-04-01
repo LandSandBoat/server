@@ -31,11 +31,11 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(tpz.path.first(path))
+    npc:setPos(xi.path.first(path))
 end
 
 entity.onPath = function(npc)
-    tpz.path.patrol(npc, path)
+    xi.path.patrol(npc, path)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -45,7 +45,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sentrysPerilStatus = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
+    local sentrysPerilStatus = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRY_S_PERIL)
 
     if sentrysPerilStatus == QUEST_AVAILABLE then
         player:startEvent(510) -- Starts "A Sentry's Peril"
@@ -63,10 +63,10 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 510 and option == 0 and npcUtil.giveItem(player, 600) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRY_S_PERIL)
     elseif csid == 644 then
         npcUtil.giveItem(player, 600)
-    elseif csid == 513 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.A_SENTRY_S_PERIL, {item = 12832, fame = 30, title = tpz.title.RONFAURIAN_RESCUER, var = "SentrysPerilTraded"}) then
+    elseif csid == 513 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.A_SENTRY_S_PERIL, {item = 12832, fame = 30, title = xi.title.RONFAURIAN_RESCUER, var = "SentrysPerilTraded"}) then
         player:confirmTrade()
     end
 end

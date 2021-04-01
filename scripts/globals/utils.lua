@@ -52,14 +52,14 @@ end
 function utils.stoneskin(target, dmg)
     --handling stoneskin
     if (dmg > 0) then
-        skin = target:getMod(tpz.mod.STONESKIN)
+        skin = target:getMod(xi.mod.STONESKIN)
         if (skin > 0) then
             if (skin > dmg) then --absorb all damage
-                target:delMod(tpz.mod.STONESKIN, dmg)
+                target:delMod(xi.mod.STONESKIN, dmg)
                 return 0
             else --absorbs some damage then wear
-                target:delStatusEffect(tpz.effect.STONESKIN)
-                target:setMod(tpz.mod.STONESKIN, 0)
+                target:delStatusEffect(xi.effect.STONESKIN)
+                target:setMod(xi.mod.STONESKIN, 0)
                 return dmg - skin
             end
         end
@@ -73,12 +73,12 @@ function utils.takeShadows(target, dmg, shadowbehav)
         shadowbehav = 1
     end
 
-    local targShadows = target:getMod(tpz.mod.UTSUSEMI)
-    local shadowType = tpz.mod.UTSUSEMI
+    local targShadows = target:getMod(xi.mod.UTSUSEMI)
+    local shadowType = xi.mod.UTSUSEMI
 
     if (targShadows == 0) then --try blink, as utsusemi always overwrites blink this is okay
-        targShadows = target:getMod(tpz.mod.BLINK)
-        shadowType = tpz.mod.BLINK
+        targShadows = target:getMod(xi.mod.BLINK)
+        shadowType = xi.mod.BLINK
     end
 
     if (targShadows > 0) then
@@ -90,28 +90,28 @@ function utils.takeShadows(target, dmg, shadowbehav)
 
             target:setMod(shadowType, shadowsLeft)
 
-            if (shadowsLeft > 0 and shadowType == tpz.mod.UTSUSEMI) then --update icon
-                effect = target:getStatusEffect(tpz.effect.COPY_IMAGE)
+            if (shadowsLeft > 0 and shadowType == xi.mod.UTSUSEMI) then --update icon
+                effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                 if (effect ~= nil) then
                     if (shadowsLeft == 1) then
-                        effect:setIcon(tpz.effect.COPY_IMAGE)
+                        effect:setIcon(xi.effect.COPY_IMAGE)
                     elseif (shadowsLeft == 2) then
-                        effect:setIcon(tpz.effect.COPY_IMAGE_2)
+                        effect:setIcon(xi.effect.COPY_IMAGE_2)
                     elseif (shadowsLeft == 3) then
-                        effect:setIcon(tpz.effect.COPY_IMAGE_3)
+                        effect:setIcon(xi.effect.COPY_IMAGE_3)
                     end
                 end
             end
             -- remove icon
             if (shadowsLeft <= 0) then
-                target:delStatusEffect(tpz.effect.COPY_IMAGE)
-                target:delStatusEffect(tpz.effect.BLINK)
+                target:delStatusEffect(xi.effect.COPY_IMAGE)
+                target:delStatusEffect(xi.effect.BLINK)
             end
 
             return 0
         else --less shadows than this move will take, remove all and factor damage down
-            target:delStatusEffect(tpz.effect.COPY_IMAGE)
-            target:delStatusEffect(tpz.effect.BLINK)
+            target:delStatusEffect(xi.effect.COPY_IMAGE)
+            target:delStatusEffect(xi.effect.BLINK)
             return dmg * ((shadowbehav-targShadows)/shadowbehav)
         end
     end
@@ -155,7 +155,7 @@ end
 function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
     --chance of anticipate based on previous successful anticipates.
-    local teye = target:getStatusEffect(tpz.effect.THIRD_EYE)
+    local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
 
     if (teye == nil) then
         return false
@@ -165,7 +165,7 @@ function utils.thirdeye(target)
 
     if ( prevAnt == 0 or (math.random()*100) < (80-(prevAnt*10)) ) then
         --anticipated!
-        target:delStatusEffect(tpz.effect.THIRD_EYE)
+        target:delStatusEffect(xi.effect.THIRD_EYE)
         return true
     end
 
@@ -324,94 +324,94 @@ function utils.getSystemStrengthBonus(attacker, defender)
     local attackerSystem = attacker:getSystem()
     local defenderSystem = defender:getSystem()
 
-    if (attackerSystem == tpz.eco.BEAST) then
-        if (defenderSystem == tpz.eco.LIZARD) then
+    if (attackerSystem == xi.eco.BEAST) then
+        if (defenderSystem == xi.eco.LIZARD) then
             return 1
-        elseif (defenderSystem == tpz.eco.PLANTOID) then
+        elseif (defenderSystem == xi.eco.PLANTOID) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.LIZARD) then
-        if (defenderSystem == tpz.eco.VERMIN) then
+    if (attackerSystem == xi.eco.LIZARD) then
+        if (defenderSystem == xi.eco.VERMIN) then
             return 1
-        elseif (defenderSystem == tpz.eco.BEAST) then
+        elseif (defenderSystem == xi.eco.BEAST) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.VERMIN) then
-        if (defenderSystem == tpz.eco.PLANTOID) then
+    if (attackerSystem == xi.eco.VERMIN) then
+        if (defenderSystem == xi.eco.PLANTOID) then
             return 1
-        elseif (defenderSystem == tpz.eco.LIZARD) then
+        elseif (defenderSystem == xi.eco.LIZARD) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.PLANTOID) then
-        if (defenderSystem == tpz.eco.BEAST) then
+    if (attackerSystem == xi.eco.PLANTOID) then
+        if (defenderSystem == xi.eco.BEAST) then
             return 1
-        elseif (defenderSystem == tpz.eco.VERMIN) then
+        elseif (defenderSystem == xi.eco.VERMIN) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.AQUAN) then
-        if (defenderSystem == tpz.eco.AMORPH) then
+    if (attackerSystem == xi.eco.AQUAN) then
+        if (defenderSystem == xi.eco.AMORPH) then
             return 1
-        elseif (defenderSystem == tpz.eco.BIRD) then
+        elseif (defenderSystem == xi.eco.BIRD) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.AMORPH) then
-        if (defenderSystem == tpz.eco.BIRD) then
+    if (attackerSystem == xi.eco.AMORPH) then
+        if (defenderSystem == xi.eco.BIRD) then
             return 1
-        elseif (defenderSystem == tpz.eco.AQUAN) then
+        elseif (defenderSystem == xi.eco.AQUAN) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.BIRD) then
-        if (defenderSystem == tpz.eco.AQUAN) then
+    if (attackerSystem == xi.eco.BIRD) then
+        if (defenderSystem == xi.eco.AQUAN) then
             return 1
-        elseif (defenderSystem == tpz.eco.AMORPH) then
+        elseif (defenderSystem == xi.eco.AMORPH) then
             return -1
         end
     end
 
-    if (attackerSystem == tpz.eco.UNDEAD) then
-        if (defenderSystem == tpz.eco.ARCANA) then
+    if (attackerSystem == xi.eco.UNDEAD) then
+        if (defenderSystem == xi.eco.ARCANA) then
             return 1
         end
     end
 
-    if (attackerSystem == tpz.eco.ARCANA) then
-        if (defenderSystem == tpz.eco.UNDEAD) then
+    if (attackerSystem == xi.eco.ARCANA) then
+        if (defenderSystem == xi.eco.UNDEAD) then
             return 1
         end
     end
 
-    if (attackerSystem == tpz.eco.DRAGON) then
-        if (defenderSystem == tpz.eco.DEMON) then
+    if (attackerSystem == xi.eco.DRAGON) then
+        if (defenderSystem == xi.eco.DEMON) then
             return 1
         end
     end
 
-    if (attackerSystem == tpz.eco.DEMON) then
-        if (defenderSystem == tpz.eco.DRAGON) then
+    if (attackerSystem == xi.eco.DEMON) then
+        if (defenderSystem == xi.eco.DRAGON) then
             return 1
         end
     end
 
-    if (attackerSystem == tpz.eco.LUMORIAN) then
-        if (defenderSystem == tpz.eco.LUMINION) then
+    if (attackerSystem == xi.eco.LUMORIAN) then
+        if (defenderSystem == xi.eco.LUMINION) then
             return 1
         end
     end
 
-    if (attackerSystem == tpz.eco.LUMINION) then
-        if (defenderSystem == tpz.eco.LUMORIAN) then
+    if (attackerSystem == xi.eco.LUMINION) then
+        if (defenderSystem == xi.eco.LUMORIAN) then
             return 1
         end
     end
@@ -438,10 +438,10 @@ end
 -----------------------------------
 function utils.hasRelic(player, relic, tier)
     if tier ~= nil then
-        return player:hasItem(tpz.relicTiers[relic][tier])
+        return player:hasItem(xi.relicTiers[relic][tier])
     end
 
-    for i, itemID in pairs(tpz.relicTiers[relic]) do
+    for i, itemID in pairs(xi.relicTiers[relic]) do
         if player:hasItem(itemID) then
             return true
         end

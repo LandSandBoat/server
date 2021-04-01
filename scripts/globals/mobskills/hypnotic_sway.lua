@@ -15,8 +15,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local message = tpz.msg.basic.SKILL_MISS
-    local typeEffect = tpz.effect.AMNESIA
+    local message = xi.msg.basic.SKILL_MISS
+    local typeEffect = xi.effect.AMNESIA
     local power = 1
     local duration = 60
 

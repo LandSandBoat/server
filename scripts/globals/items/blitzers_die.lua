@@ -6,11 +6,11 @@
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    return target:canLearnAbility(tpz.jobAbility.BLITZERS_ROLL)
+    return target:canLearnAbility(xi.jobAbility.BLITZERS_ROLL)
 end
 
 item_object.onItemUse = function(target)
-    target:addLearnedAbility(tpz.jobAbility.BLITZERS_ROLL)
+    target:addLearnedAbility(xi.jobAbility.BLITZERS_ROLL)
 end
 
 return item_object

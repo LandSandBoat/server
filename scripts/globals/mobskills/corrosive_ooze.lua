@@ -18,8 +18,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = tpz.effect.ATTACK_DOWN
-    local typeEffectTwo = tpz.effect.DEFENSE_DOWN
+    local typeEffectOne = xi.effect.ATTACK_DOWN
+    local typeEffectTwo = xi.effect.DEFENSE_DOWN
     local duration = 120
 
     MobStatusEffectMove(mob, target, typeEffectOne, 15, 0, duration)
@@ -27,9 +27,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg()*4.2
-    local info = MobMagicalMove(mob, target, skill, baseDamage, tpz.magic.ele.WATER, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.WATER, MOBPARAM_IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.WATER)
+    local info = MobMagicalMove(mob, target, skill, baseDamage, xi.magic.ele.WATER, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, MOBPARAM_IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
     return dmg
 end
 

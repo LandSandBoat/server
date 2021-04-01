@@ -14,8 +14,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.ELEMENTAL_SFORZO, 1, 0, 30)
-    return tpz.effect.ELEMENTAL_SFORZO
+    player:addStatusEffect(xi.effect.ELEMENTAL_SFORZO, 1, 0, 30)
+    return xi.effect.ELEMENTAL_SFORZO
 end
 
 return ability_object

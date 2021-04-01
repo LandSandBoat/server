@@ -14,11 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.IMPURITY then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.IMPURITY then
         player:startEvent(212)
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_LOST_AVATAR and player:getCharVar("RhapsodiesStatus") == 1 then
+    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.THE_LOST_AVATAR and player:getCharVar("RhapsodiesStatus") == 1 then
         player:startEvent(213)
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_LOST_AVATAR then
+    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.THE_LOST_AVATAR then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
         npcUtil.popFromQM(player, npc, ID.mob.SIREN, { look=true, hide=0 })
     end
@@ -29,13 +29,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 212 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.IMPURITY)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_LOST_AVATAR)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.IMPURITY)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LOST_AVATAR)
     elseif csid == 213 then
         player:setCharVar("RhapsodiesStatus", 0)
-        npcUtil.giveKeyItem(player, tpz.ki.RHAPSODY_IN_AZURE)
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_LOST_AVATAR)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.VOLTO_OSCURO)
+        npcUtil.giveKeyItem(player, xi.ki.RHAPSODY_IN_AZURE)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_LOST_AVATAR)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
     end
 end
 return entity

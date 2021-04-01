@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4527, 1) and trade:getItemCount() == 1) then
             player:startEvent(84)
         end
@@ -24,7 +24,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    sleeplessNights = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+    sleeplessNights = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
     if (player:getFameLevel(SANDORIA) >= 2 and sleeplessNights == QUEST_AVAILABLE) then
         player:startEvent(85)
@@ -43,14 +43,14 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 85 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     elseif (csid == 84) then
         player:tradeComplete()
-        player:addTitle(tpz.title.SHEEPS_MILK_DELIVERER)
+        player:addTitle(xi.title.SHEEPS_MILK_DELIVERER)
         player:addGil(GIL_RATE*5000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*5000)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SLEEPLESS_NIGHTS)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end
 
 end

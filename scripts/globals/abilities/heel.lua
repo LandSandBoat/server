@@ -13,7 +13,7 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
-      return tpz.msg.basic.REQUIRES_A_PET, 0
+      return xi.msg.basic.REQUIRES_A_PET, 0
     end
 
     return 0, 0
@@ -22,8 +22,8 @@ end
 ability_object.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
 
-    if (pet:hasStatusEffect(tpz.effect.HEALING)) then
-        pet:delStatusEffect(tpz.effect.HEALING)
+    if (pet:hasStatusEffect(xi.effect.HEALING)) then
+        pet:delStatusEffect(xi.effect.HEALING)
     end
 
     player:petRetreat()

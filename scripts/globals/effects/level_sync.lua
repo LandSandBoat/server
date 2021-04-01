@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LEVEL_SYNC
+-- xi.effect.LEVEL_SYNC
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -8,7 +8,7 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect)
     target:levelRestriction(effect:getPower())
 
-    if target:getObjType() == tpz.objType.PC then
+    if target:getObjType() == xi.objType.PC then
         target:clearTrusts()
     end
 end

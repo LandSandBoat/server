@@ -25,12 +25,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoamAction = function(mob)
-    tpz.path.patrol(mob, path, tpz.path.flag.REVERSE)
+    xi.path.patrol(mob, path, xi.path.flag.REVERSE)
 end
 
 entity.onMobRoam = function(mob)
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(path))
+        mob:pathThrough(xi.path.first(path))
     end
 end
 

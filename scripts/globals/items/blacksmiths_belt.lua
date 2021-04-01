@@ -14,22 +14,22 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.SMITHING_IMAGERY) == true) then
+    if (target:hasStatusEffect(xi.effect.SMITHING_IMAGERY) == true) then
         result = 237
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.SMITHING_IMAGERY, 3, 0, 120)
+    target:addStatusEffect(xi.effect.SMITHING_IMAGERY, 3, 0, 120)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.SMITH, 1)
+    target:addMod(xi.mod.SMITH, 1)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.SMITH, 1)
+    target:delMod(xi.mod.SMITH, 1)
 end
 
 return item_object

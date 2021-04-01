@@ -44,35 +44,35 @@ local path =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(tpz.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
+    mob:setMod(xi.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setStatus(tpz.status.INVISIBLE)
+    mob:setStatus(xi.status.INVISIBLE)
     entity.onMobRoam(mob)
 end
 
 entity.onPath = function(mob)
-    tpz.path.patrol(mob, path, tpz.path.flag.RUN)
+    xi.path.patrol(mob, path, xi.path.flag.RUN)
 end
 
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(path), tpz.path.flag.RUN)
+        mob:pathThrough(xi.path.first(path), xi.path.flag.RUN)
     end
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setStatus(tpz.status.UPDATE)
+    mob:setStatus(xi.status.UPDATE)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setStatus(tpz.status.INVISIBLE)
+    mob:setStatus(xi.status.INVISIBLE)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 119, 2, tpz.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 119, 2, xi.regime.type.FIELDS)
 end
 
 return entity

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SHIVAS_FAVOR
+-- xi.effect.SHIVAS_FAVOR
 -----------------------------------
 local effect_object = {}
 

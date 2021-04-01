@@ -55,8 +55,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local omensProgress = player:getCharVar("OmensProgress")
-    local omens = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS)
-    local transformations = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS)
+    local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
+    local transformations = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
 
     -- OMENS
     if omens == QUEST_ACCEPTED then
@@ -150,12 +150,12 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 714 and omensProgress == 3 then
         player:setCharVar("OmensProgress", 4)
     elseif csid == 716 and omensProgress == 5 then
-        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS, {
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS, {
             item = 15684,
-            title = tpz.title.IMMORTAL_LION,
+            title = xi.title.IMMORTAL_LION,
             var = { OmensProgress }
         })
-        player:delKeyItem(tpz.ki.SEALED_IMMORTAL_ENVELOPE)
+        player:delKeyItem(xi.ki.SEALED_IMMORTAL_ENVELOPE)
 
     -- BLU AF CRAFTING
     elseif csid == 732 + AFoffset then
@@ -165,7 +165,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:setCharVar("[BLUAF]CraftingStage", 2)
         player:setCharVar("[BLUAF]PaymentDay", vanaDay())
-        npcUtil.giveKeyItem(player, tpz.ki.MAGUS_ORDER_SLIP)
+        npcUtil.giveKeyItem(player, xi.ki.MAGUS_ORDER_SLIP)
     elseif csid == 736 + AFoffset and currentTask > 0 then
         if npcUtil.giveItem(player, craftingItems[currentTask].result) then
             player:setCharVar("[BLUAF]Remaining", utils.mask.setBit(remainingBLUAF, currentTask - 1, false))
@@ -180,7 +180,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("[BLUAF]RestingDay", vanaDay())
             end
 
-            player:delKeyItem(tpz.ki.MAGUS_ORDER_SLIP)
+            player:delKeyItem(xi.ki.MAGUS_ORDER_SLIP)
         end
     end
 end

@@ -32,7 +32,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(mob, target, 0, params, 0, nil, true, nil)
 
-    target:takeDamage(damage, mob, tpz.attackType.MAGICAL, tpz.damageType.ICE)
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.ICE)
     return damage
 end
 

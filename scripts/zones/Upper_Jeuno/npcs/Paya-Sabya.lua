@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.SILVER_BELL) and player:hasKeyItem(tpz.ki.YAGUDO_TORCH) == false and player:getCharVar("YagudoTorchCS") == 0) then
+    if (player:hasKeyItem(xi.ki.SILVER_BELL) and player:hasKeyItem(xi.ki.YAGUDO_TORCH) == false and player:getCharVar("YagudoTorchCS") == 0) then
         player:startEvent(80)
     else
         player:startEvent(79)

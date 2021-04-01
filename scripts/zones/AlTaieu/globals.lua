@@ -34,7 +34,7 @@ return {
 
         -- spawn ru'aerns
         if
-            cop == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and
+            cop == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and
             copStat < 3 and
             not thisCsAcquired and
             not thisFightDone and
@@ -44,7 +44,7 @@ return {
 
         -- post-fight CS
         elseif
-            cop == tpz.mission.id.cop.GARDEN_OF_ANTIQUITY and
+            cop == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and
             copStat == 2 and
             not thisCsAcquired and
             thisFightDone

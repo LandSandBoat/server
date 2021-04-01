@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Port_Jeuno/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
+    if (player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
         if
             trade:hasItemQty(1024, 1) == true and
             trade:hasItemQty(1025, 1) == true and
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
+    if (player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) == false) then
         player:startEvent(300)
     else
         player:startEvent(300, 0, 0, 0, 0, 0, 6)
@@ -38,7 +38,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     if (csid == 300 and option == 99) then
         if (player:delGil(148000)) then
-            player:addKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
+            player:addKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
             player:updateEvent(0, 1)
         end
     end
@@ -46,12 +46,12 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 300 and option == 33) then
-        if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM) == true) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        if (player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM) == true) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
         end
     elseif (csid == 301) then
-        player:addKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        player:addKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
         player:tradeComplete()
     end
 end

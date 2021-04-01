@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DOUBLE_UP_CHANCE
+-- xi.effect.DOUBLE_UP_CHANCE
 -----------------------------------
 local effect_object = {}
 

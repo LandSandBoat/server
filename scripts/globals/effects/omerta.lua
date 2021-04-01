@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.OMERTA
+-- xi.effect.OMERTA
 -----------------------------------
 local effect_object = {}
 

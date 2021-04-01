@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL then
         local MissionStatus = player:getCharVar("MissionStatus")
 
         if MissionStatus == 4 then
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         elseif MissionStatus == 10 then
             player:startEvent(115)
         elseif MissionStatus == 11 then
-            player:showText(npc, ID.text.RESCUE_DRILL + 29, tpz.ki.RESCUE_TRAINING_CERTIFICATE)
+            player:showText(npc, ID.text.RESCUE_DRILL + 29, xi.ki.RESCUE_TRAINING_CERTIFICATE)
         else
             player:startEvent(5)
         end
@@ -44,8 +44,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 108 then
         player:setCharVar("MissionStatus", 5)
     elseif csid == 115 then
-        player:addKeyItem(tpz.ki.RESCUE_TRAINING_CERTIFICATE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RESCUE_TRAINING_CERTIFICATE)
+        player:addKeyItem(xi.ki.RESCUE_TRAINING_CERTIFICATE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RESCUE_TRAINING_CERTIFICATE)
         player:setCharVar("theRescueDrillRandomNPC", 0)
         player:setCharVar("MissionStatus", 11)
     end

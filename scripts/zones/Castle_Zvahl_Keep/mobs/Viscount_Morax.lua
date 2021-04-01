@@ -8,8 +8,8 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 356)
-    player:addTitle(tpz.title.HELLSBANE)
+    xi.hunts.checkHunt(mob, player, 356)
+    player:addTitle(xi.title.HELLSBANE)
 end
 
 return entity

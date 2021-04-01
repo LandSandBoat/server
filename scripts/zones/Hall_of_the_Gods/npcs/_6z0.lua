@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasKeyItem(tpz.ki.CERULEAN_CRYSTAL) then
+    if not player:hasKeyItem(xi.ki.CERULEAN_CRYSTAL) then
         player:startEvent(1)
     else
-        if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL then
+        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL then
             player:startEvent(4) -- Zilart CS.
         else
             player:startEvent(2)
@@ -29,14 +29,14 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 1 and player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION then
-        player:addTitle(tpz.title.SEALER_OF_THE_PORTAL_OF_THE_GODS)
-        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
-        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_HALL_OF_THE_GODS)
+    if csid == 1 and player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION then
+        player:addTitle(xi.title.SEALER_OF_THE_PORTAL_OF_THE_GODS)
+        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
+        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS)
     elseif csid == 4 then
         player:setCharVar("ZilartStatus", 0)
-        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
-        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
+        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
+        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
     end
 end
 

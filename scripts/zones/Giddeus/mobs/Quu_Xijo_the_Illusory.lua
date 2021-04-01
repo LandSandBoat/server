@@ -7,7 +7,7 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 283)
+    xi.hunts.checkHunt(mob, player, 283)
 end
 
 entity.onMobDespawn = function(mob)

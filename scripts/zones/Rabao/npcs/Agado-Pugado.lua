@@ -17,14 +17,14 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialByWind = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
-    local WhisperOfGales = player:hasKeyItem(tpz.ki.WHISPER_OF_GALES)
-    local CarbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local TrialByWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
+    local WhisperOfGales = player:hasKeyItem(xi.ki.WHISPER_OF_GALES)
+    local CarbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     -----------------------------------
     -- Carbuncle Debacle
-    if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(tpz.ki.DAZEBREAKER_CHARM) == true) then
+    if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 5 and player:hasKeyItem(xi.ki.DAZEBREAKER_CHARM) == true) then
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
     elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 6) then
         if (player:hasItem(1174) == false) then
@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
     -- Trial by Wind
     elseif ((TrialByWind == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 5) or (TrialByWind == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWind_date"))) then
         player:startEvent(66, 0, 331) -- Start and restart quest "Trial by Wind"
-    elseif (TrialByWind == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_WIND) == false and WhisperOfGales == false) then
+    elseif (TrialByWind == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND) == false and WhisperOfGales == false) then
         player:startEvent(107, 0, 331) -- Defeat against Avatar : Need new Fork
     elseif (TrialByWind == QUEST_ACCEPTED and WhisperOfGales == false) then
         player:startEvent(67, 0, 331, 3)
@@ -60,16 +60,16 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 66 and option == 1) then
-        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
-            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND) == QUEST_COMPLETED) then
+            player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         player:setCharVar("TrialByWind_date", 0)
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_WIND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_WIND)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
     elseif (csid == 107) then
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_WIND)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_WIND)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
     elseif (csid == 69) then
         item = 0
         if (option == 1) then item = 17627         -- Garuda's Dagger
@@ -91,11 +91,11 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
-            player:addTitle(tpz.title.HEIR_OF_THE_GREAT_WIND)
-            player:delKeyItem(tpz.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
+            player:addTitle(xi.title.HEIR_OF_THE_GREAT_WIND)
+            player:delKeyItem(xi.ki.WHISPER_OF_GALES) --Whisper of Gales, as a trade for the above rewards
             player:setCharVar("TrialByWind_date", getMidnight())
             player:addFame(RABAO, 30)
-            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WIND)
+            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WIND)
         end
     elseif (csid == 86 or csid == 87) then
         if (player:getFreeSlotsCount() ~= 0) then

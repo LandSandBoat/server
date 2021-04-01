@@ -28,8 +28,8 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 2) then
         player:setCharVar("LuckOfTheDraw", 4)
-        player:addKeyItem(tpz.ki.FORGOTTEN_HEXAGUN)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FORGOTTEN_HEXAGUN)
+        player:addKeyItem(xi.ki.FORGOTTEN_HEXAGUN)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FORGOTTEN_HEXAGUN)
     end
 
 end

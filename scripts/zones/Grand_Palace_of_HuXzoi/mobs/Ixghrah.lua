@@ -8,10 +8,10 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    if (mob:getMod(tpz.mod.SLASHRES)) then mob:setMod(tpz.mod.SLASHRES, 1000); end
-    if (mob:getMod(tpz.mod.PIERCERES)) then mob:setMod(tpz.mod.PIERCERES, 1000); end
-    if (mob:getMod(tpz.mod.IMPACTRES)) then mob:setMod(tpz.mod.IMPACTRES, 1000); end
-    if (mob:getMod(tpz.mod.HTHRES)) then mob:setMod(tpz.mod.HTHRES, 1000); end
+    if (mob:getMod(xi.mod.SLASHRES)) then mob:setMod(xi.mod.SLASHRES, 1000); end
+    if (mob:getMod(xi.mod.PIERCERES)) then mob:setMod(xi.mod.PIERCERES, 1000); end
+    if (mob:getMod(xi.mod.IMPACTRES)) then mob:setMod(xi.mod.IMPACTRES, 1000); end
+    if (mob:getMod(xi.mod.HTHRES)) then mob:setMod(xi.mod.HTHRES, 1000); end
 end
 
 entity.onMobFight = function(mob, target)
@@ -24,7 +24,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus")==1) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus")==1) then
         player:setCharVar("PromathiaStatus", 2)
     end
 end

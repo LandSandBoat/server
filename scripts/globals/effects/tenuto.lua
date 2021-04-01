@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TENUTO
+-- xi.effect.TENUTO
 -----------------------------------
 local effect_object = {}
 

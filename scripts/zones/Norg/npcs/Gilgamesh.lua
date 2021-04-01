@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_PIRATE_S_COVE and
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_PIRATE_S_COVE and
         player:getCharVar("MissionStatus") == 2) then
         if (trade:hasItemQty(1160, 1) and trade:getItemCount() == 1) then -- Frag Rock
             player:startEvent(99) -- Bastok Mission 6-2
@@ -25,32 +25,32 @@ entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART)
     local rovMission = player:getCurrentMission(ROV)
 
-    if (ZilartMission == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
+    if (ZilartMission == xi.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(7)
-    elseif (ZilartMission == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
+    elseif (ZilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
         player:startEvent(8)
-    elseif (ZilartMission == tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
+    elseif (ZilartMission == xi.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
         player:startEvent(9)
-    elseif (ZilartMission == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER) then
+    elseif (ZilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER) then
         player:startEvent(13)
-    elseif (ZilartMission == tpz.mission.id.zilart.ROMAEVE) then
+    elseif (ZilartMission == xi.mission.id.zilart.ROMAEVE) then
         player:startEvent(11)
-    elseif (ZilartMission == tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
+    elseif (ZilartMission == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
         player:startEvent(170)
-    elseif (ZilartMission == tpz.mission.id.zilart.ARK_ANGELS) then
+    elseif (ZilartMission == xi.mission.id.zilart.ARK_ANGELS) then
         player:startEvent(171)
-    elseif (ZilartMission == tpz.mission.id.zilart.THE_CELESTIAL_NEXUS) then
+    elseif (ZilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS) then
         player:startEvent(173);
-    elseif player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and player:getCharVar('Apoc_Nigh_RewardCS1') == 0 then
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
         player:startEvent(234, 252)
-    elseif player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH) then
+    elseif player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
-    elseif (ZilartMission == tpz.mission.id.zilart.AWAKENING) then
+    elseif (ZilartMission == xi.mission.id.zilart.AWAKENING) then
         player:startEvent(177)
-    elseif rovMission == tpz.mission.id.rov.THE_PATH_UNTRAVELED then
+    elseif rovMission == xi.mission.id.rov.THE_PATH_UNTRAVELED then
         player:startEvent(263)
     end
 end
@@ -82,15 +82,15 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if reward ~= 0 then
-            if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.APOCALYPSE_NIGH, {
+            if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
                 item = reward,
                 var = {"ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1"}
             }) then
-                player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)
-                player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE)
+                player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
+                player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
                 player:setCharVar("PromathiaStatus", 0)
-                player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.cop.AWAKENING)
-                player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_LAST_VERSE)
+                player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.cop.AWAKENING)
+                player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
                 player:setCharVar("ZilartStatus", 0)
             end
         end

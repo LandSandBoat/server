@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
     local SilverTag = trade:hasItemQty(13116, 1)
-    local Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+    local Fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
     if Fallen == 1 and SilverTag == true and count == 1 then
         player:tradeComplete()
@@ -24,8 +24,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Fallen = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
-    local theEleventhsHour = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+    local Fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
+    local theEleventhsHour = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
     local pLevel = player:getMainLvl(player)
     local pFame = player:getFameLevel(BASTOK)
 
@@ -45,9 +45,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 90 then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
     elseif csid == 91 then
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FALLEN_COMRADES)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
         player:addFame(BASTOK, 120)
         player:addGil(GIL_RATE*550)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE * 550)

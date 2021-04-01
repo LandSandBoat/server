@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
@@ -22,9 +22,9 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.FRAELISSA)
     GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
 
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
-    tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
 
     local respawnTime = 900 + math.random(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
     for offset = 1, 10 do
@@ -47,7 +47,7 @@ zone_object.onZoneIn = function( player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function( player, region)

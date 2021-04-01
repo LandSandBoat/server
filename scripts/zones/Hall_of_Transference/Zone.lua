@@ -28,19 +28,19 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(274, -82, -62 , 180)
 
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_MOTHERCRYSTALS then
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS then
         -- cs you got when you enter hall of transference for the last promyvion
         if player:getCharVar("cspromy3") == 1 then
-            if prevZone == tpz.zone.LA_THEINE_PLATEAU then
-                if player:hasKeyItem(tpz.ki.LIGHT_OF_DEM) and player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) and not player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) then
+            if prevZone == xi.zone.LA_THEINE_PLATEAU then
+                if player:hasKeyItem(xi.ki.LIGHT_OF_DEM) and player:hasKeyItem(xi.ki.LIGHT_OF_MEA) and not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) then
                     cs = 155
                 end
-            elseif prevZone == tpz.zone.KONSCHTAT_HIGHLANDS then
-                if player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) and not player:hasKeyItem(tpz.ki.LIGHT_OF_DEM) then
+            elseif prevZone == xi.zone.KONSCHTAT_HIGHLANDS then
+                if player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(xi.ki.LIGHT_OF_MEA) and not player:hasKeyItem(xi.ki.LIGHT_OF_DEM) then
                     cs = 155
                 end
-            elseif prevZone == tpz.zone.TAHRONGI_CANYON then
-                if player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(tpz.ki.LIGHT_OF_DEM) and not player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) then
+            elseif prevZone == xi.zone.TAHRONGI_CANYON then
+                if player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(xi.ki.LIGHT_OF_DEM) and not player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
                     cs = 155
                 end
             end
@@ -122,34 +122,34 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("cspromy3", 0)
         player:setCharVar("cslastpromy", 1)
 
-        if not player:hasKeyItem(tpz.ki.LIGHT_OF_DEM) then
+        if not player:hasKeyItem(xi.ki.LIGHT_OF_DEM) then
             player:setPos(185.891, 0, -52.331, 128, 18) -- To Promyvion Dem {R}
-        elseif not player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) then
+        elseif not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) then
             player:setPos(92.033, 0, 80.380, 255, 16) -- To Promyvion Holla {R}
-        elseif not player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) then
+        elseif not player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
             player:setPos(-93.268, 0, 170.749, 162, 20) -- To Promyvion Mea {R}
         end
     elseif csid == 161 and option == 1 then
         local prevZone = player:getPreviousZone()
 
-        if prevZone == tpz.zone.LA_THEINE_PLATEAU then
+        if prevZone == xi.zone.LA_THEINE_PLATEAU then
             player:setCharVar("LastSkyWarpHolla", getMidnight())
-        elseif prevZone == tpz.zone.KONSCHTAT_HIGHLANDS then
+        elseif prevZone == xi.zone.KONSCHTAT_HIGHLANDS then
             player:setCharVar("LastSkyWarpDem", getMidnight())
-        elseif prevZone == tpz.zone.TAHRONGI_CANYON then
+        elseif prevZone == xi.zone.TAHRONGI_CANYON then
             player:setCharVar("LastSkyWarpMea", getMidnight())
         end
 
-        tpz.teleport.to(player, tpz.teleport.id.SKY)
+        xi.teleport.to(player, xi.teleport.id.SKY)
     elseif csid == 169 and option == 1 then
         player:setCharVar("MeaChipRegistration", 0)
-        tpz.teleport.to(player, tpz.teleport.id.SKY)
+        xi.teleport.to(player, xi.teleport.id.SKY)
     elseif csid == 170 and option == 1 then
         player:setCharVar("HollaChipRegistration", 0)
-        tpz.teleport.to(player, tpz.teleport.id.SKY)
+        xi.teleport.to(player, xi.teleport.id.SKY)
     elseif csid == 171 and option == 1 then
         player:setCharVar("DemChipRegistration", 0)
-        tpz.teleport.to(player, tpz.teleport.id.SKY)
+        xi.teleport.to(player, xi.teleport.id.SKY)
     end
 end
 

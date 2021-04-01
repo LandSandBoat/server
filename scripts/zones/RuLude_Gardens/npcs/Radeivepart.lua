@@ -39,7 +39,7 @@ entity.onTrade = function(player, npc, trade)
         then
             player:startEvent(160, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
-    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(16522, 1) == true and trade:getGil() == 0 and trade:getItemCount() == 1) then
             player:startEvent(61) -- Finish quest "Northward"
         end
@@ -47,7 +47,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local northward = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
+    local northward = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
 
     if (player:getFameLevel(JEUNO) >= 4 and northward == QUEST_AVAILABLE) then
         player:startEvent(159, 1, 0, 0, 0, 0, 0, 8)
@@ -69,13 +69,13 @@ entity.onEventFinish = function(player, csid, option)
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz1", 1)
     elseif (csid == 159 and option == 1) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
     elseif (csid == 61) then
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NORTHWARD)
-        player:addTitle(tpz.title.ENVOY_TO_THE_NORTH)
-        if (player:hasKeyItem(tpz.ki.MAP_OF_CASTLE_ZVAHL) == false) then
-            player:addKeyItem(tpz.ki.MAP_OF_CASTLE_ZVAHL)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_CASTLE_ZVAHL)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
+        player:addTitle(xi.title.ENVOY_TO_THE_NORTH)
+        if (player:hasKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_CASTLE_ZVAHL)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_CASTLE_ZVAHL)
         end
         player:addFame(JEUNO, 30)
         player:tradeComplete()

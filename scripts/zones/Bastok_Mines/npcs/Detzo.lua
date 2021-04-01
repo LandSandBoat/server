@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    Rivals = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
+    Rivals = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
 
     if (Rivals == QUEST_ACCEPTED) then
         FreeSlots = player:getFreeSlotsCount()
@@ -35,7 +35,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    Rivals = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
+    Rivals = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
 
     if (player:getCharVar("theTalekeeperGiftCS") == 1) then
         player:startEvent(171)
@@ -58,16 +58,16 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 93) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
     elseif (csid == 94) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13571)
         else
-            player:addTitle(tpz.title.CONTEST_RIGGER)
+            player:addTitle(xi.title.CONTEST_RIGGER)
             player:addItem(13571)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13571)
             player:addFame(BASTOK, 30)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.RIVALS)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
         end
     end
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DECOY_SHOT
+-- xi.effect.DECOY_SHOT
 -----------------------------------
 local effect_object = {}
 

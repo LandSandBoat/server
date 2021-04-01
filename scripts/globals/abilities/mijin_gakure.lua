@@ -18,12 +18,12 @@ end
 ability_object.onUseAbility = function(player, target, ability)
 
     local dmg = (player:getHP() * 0.8) + (player:getMainLvl() / 0.5)
-    local resist = applyPlayerResistance(player, nil, target, player:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT), 0, tpz.magic.ele.NONE)
+    local resist = applyPlayerResistance(player, nil, target, player:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.magic.ele.NONE)
 
     dmg = dmg * resist
 
     dmg = utils.stoneskin(target, dmg)
-    target:takeDamage(dmg, player, tpz.attackType.SPECIAL, tpz.damageType.ELEMENTAL)
+    target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
 
     player:setLocalVar("MijinGakure", 1)
     player:setHP(0)

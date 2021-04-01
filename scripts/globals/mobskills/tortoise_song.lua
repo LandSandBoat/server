@@ -19,12 +19,12 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local count = target:dispelAllStatusEffect(bit.bor(tpz.effectFlag.SONG, tpz.effectFlag.ROLL))
+    local count = target:dispelAllStatusEffect(bit.bor(xi.effectFlag.SONG, xi.effectFlag.ROLL))
 
     if (count == 0) then
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     else
-        skill:setMsg(tpz.msg.basic.DISAPPEAR_NUM)
+        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
     end
 
     return count

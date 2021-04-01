@@ -24,12 +24,12 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local typeEffectOne = tpz.effect.BLINDNESS
-    local typeEffectTwo = tpz.effect.BIND
+    local typeEffectOne = xi.effect.BLINDNESS
+    local typeEffectTwo = xi.effect.BIND
     local params = {}
-    params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
     local duration = 30 * resist
@@ -39,23 +39,23 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (resist >= 0.5) then
         if (target:isFacing(caster)) then
             if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo) and target:getTP() == 0) then
-                spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
             elseif (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then
                 target:delTP(power)
-                spell:setMsg(tpz.msg.basic.MAGIC_TP_REDUCE)
+                spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
             elseif (target:hasStatusEffect(typeEffectOne)) then
                 target:addStatusEffect(typeEffectTwo, 1, 0, duration)
                 target:delTP(power)
                 returnEffect = typeEffectTwo -- make it return bind message if blind can't be inflicted
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
                 target:addStatusEffect(typeEffectOne, 50, 0, duration)
                 target:addStatusEffect(typeEffectTwo, 1, 0, duration)
                 target:delTP(power)
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             end
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     end
 

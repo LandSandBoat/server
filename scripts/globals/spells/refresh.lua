@@ -17,17 +17,17 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(150, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 41, target:getMainLvl())
 
-    local mp = 3 + caster:getMod(tpz.mod.ENHANCES_REFRESH)
+    local mp = 3 + caster:getMod(xi.mod.ENHANCES_REFRESH)
 
-    if target:hasStatusEffect(tpz.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(tpz.effect.SUBLIMATION_COMPLETE) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+    if target:hasStatusEffect(xi.effect.SUBLIMATION_ACTIVATED) or target:hasStatusEffect(xi.effect.SUBLIMATION_COMPLETE) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return 0
     end
 
-    target:delStatusEffect(tpz.effect.REFRESH)
-    target:addStatusEffect(tpz.effect.REFRESH, mp, 0, duration)
+    target:delStatusEffect(xi.effect.REFRESH)
+    target:addStatusEffect(xi.effect.REFRESH, mp, 0, duration)
 
-    return tpz.effect.REFRESH
+    return xi.effect.REFRESH
 end
 
 return spell_object

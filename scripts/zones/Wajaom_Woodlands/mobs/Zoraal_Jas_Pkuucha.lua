@@ -41,7 +41,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 447)
+    xi.hunts.checkHunt(mob, player, 447)
 end
 
 return entity

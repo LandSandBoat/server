@@ -13,37 +13,37 @@ local spell_object = {}
 local message_page_offset = 4
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return tpz.trust.canCast(caster, spell, tpz.magic.spell.AYAME_UC)
+    return xi.trust.canCast(caster, spell, xi.magic.spell.AYAME_UC)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return tpz.trust.spawn(caster, spell)
+    return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    tpz.trust.teamworkMessage(mob, message_page_offset, {
-        [tpz.magic.spell.NAJI] = tpz.trust.message_offset.TEAMWORK_1,
-        [tpz.magic.spell.GILGAMESH] = tpz.trust.message_offset.TEAMWORK_2,
+    xi.trust.teamworkMessage(mob, message_page_offset, {
+        [ xi.magic.spell.NAJI] = xi.trust.message_offset.TEAMWORK_1,
+        [ xi.magic.spell.GILGAMESH] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, tpz.effect.HASSO,
-        ai.r.JA, ai.s.SPECIFIC, tpz.ja.HASSO)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.HASSO,
+        ai.r.JA, ai.s.SPECIFIC, xi.ja.HASSO)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
-        ai.r.JA, ai.s.SPECIFIC, tpz.ja.THIRD_EYE)
+        ai.r.JA, ai.s.SPECIFIC, xi.ja.THIRD_EYE)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.TP_LT, 1000,
-        ai.r.JA, ai.s.SPECIFIC, tpz.ja.MEDITATE)
+        ai.r.JA, ai.s.SPECIFIC, xi.ja.MEDITATE)
 
     mob:setTrustTPSkillSettings(ai.tp.OPENER, ai.s.SPECIAL_AYAME)
 end
 
 spell_object.onMobDespawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

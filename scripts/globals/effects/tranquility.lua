@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TRANQUILITY
+-- xi.effect.TRANQUILITY
 -----------------------------------
 local effect_object = {}
 

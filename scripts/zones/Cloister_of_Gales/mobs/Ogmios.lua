@@ -24,7 +24,7 @@ entity.onEventUpdate = function(player, csid, option)
     -- printf("onUpdate RESULT: %u", option)
 
     if (csid == 32001) then
-        player:delStatusEffect(tpz.effect.BATTLEFIELD)
+        player:delStatusEffect(xi.effect.BATTLEFIELD)
     end
 
 end
@@ -34,7 +34,7 @@ entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish RESULT: %u", option)
 
     if (csid == 32001) then
-        player:delKeyItem(tpz.ki.DAZEBREAKER_CHARM)
+        player:delKeyItem(xi.ki.DAZEBREAKER_CHARM)
     end
 
 end

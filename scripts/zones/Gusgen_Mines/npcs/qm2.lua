@@ -16,7 +16,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- TO THE FORSAKEN MINES: Hare Meat
     if (
-        player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES and
+        player:getCurrentMission(BASTOK) == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES and
         npcUtil.tradeHas(trade, 4358) and
         not player:hasItem(563) and
         not GetMobByID(ID.mob.BLIND_MOBY):isSpawned()
@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- BLADE OF DEATH: Chaosbringer
     elseif (
-        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED and
         player:getCharVar("ChaosbringerKills") >= 200 and
         npcUtil.tradeHas(trade, 16607)
     ) then
@@ -42,9 +42,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 10 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH, {item=16637, title=tpz.title.BLACK_DEATH, var="ChaosbringerKills"})) then
+    if (csid == 10 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH, {item=16637, title= xi.title.BLACK_DEATH, var="ChaosbringerKills"})) then
         player:confirmTrade()
-        player:delKeyItem(tpz.ki.LETTER_FROM_ZEID)
+        player:delKeyItem(xi.ki.LETTER_FROM_ZEID)
     end
 end
 

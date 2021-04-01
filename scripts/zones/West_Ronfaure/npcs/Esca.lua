@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and player:getCharVar("thePickpocket") == 1 and npcUtil.tradeHas(trade, 578) then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and player:getCharVar("thePickpocket") == 1 and npcUtil.tradeHas(trade, 578) then
         player:startEvent(121)
     end
 end
@@ -53,7 +53,7 @@ entity.onEventFinish = function(player, csid, option)
     -- CHASING QUOTAS
     elseif csid == 137 then
         player:setCharVar("ChasingQuotas_Progress", 5)
-        player:delKeyItem(tpz.ki.SHINY_EARRING)
+        player:delKeyItem(xi.ki.SHINY_EARRING)
     end
 end
 

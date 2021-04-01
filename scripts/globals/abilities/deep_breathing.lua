@@ -10,11 +10,11 @@ require("scripts/globals/job_utils/dragoon")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return tpz.job_utils.dragoon.abilityCheckDeepBreathing(player, target, ability)
+    return xi.job_utils.dragoon.abilityCheckDeepBreathing(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    tpz.job_utils.dragoon.useDeepBreathing(player, target, ability)
+    xi.job_utils.dragoon.useDeepBreathing(player, target, ability)
 end
 
 return ability_object

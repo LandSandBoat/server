@@ -12,19 +12,19 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_4") == 6 and
         npcUtil.tradeHas(trade, 1127)
     then
         player:setCharVar("ridingOnTheClouds_4", 0)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, tpz.ki.SPIRITED_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local allNewC2000 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ALL_NEW_C_2000)
-    local greetingCardian = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_GREETING_CARDIAN)
+    local allNewC2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
+    local greetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
 
     if allNewC2000 == QUEST_ACCEPTED then
         player:startEvent(290)

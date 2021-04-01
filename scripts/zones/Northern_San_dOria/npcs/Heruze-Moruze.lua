@@ -16,15 +16,15 @@ entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
 
-    if (pNation == tpz.nation.WINDURST) then
-        if (currentMission == tpz.mission.id.windurst.THE_THREE_KINGDOMS and player:getCharVar("MissionStatus") == 1) then
+    if (pNation == xi.nation.WINDURST) then
+        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and player:getCharVar("MissionStatus") == 1) then
             player:startEvent(582)
         else
             player:startEvent(554)
         end
-    elseif (pNation == tpz.nation.BASTOK) then
+    elseif (pNation == xi.nation.BASTOK) then
         player:startEvent(578)
-    elseif (pNation == tpz.nation.SANDORIA) then
+    elseif (pNation == xi.nation.SANDORIA) then
         player:startEvent(577)
     end
 

@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local attachment_object = {}
 
 attachment_object.onEquip = function(pet)
-    updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_ii_mod', 10)
+    updateModPerformance(pet, xi.mod.ENMITY, 'strobe_ii_mod', 10)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_STROBE_II", function(automaton, target)
         if automaton:getLocalVar("provoke") < VanadielTime() and (automaton:checkDistance(target) - target:getModelSize()) < 7 then
             automaton:useMobAbility(1945)
@@ -20,7 +20,7 @@ attachment_object.onEquip = function(pet)
 end
 
 attachment_object.onUnequip = function(pet)
-    updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_ii_mod', 0)
+    updateModPerformance(pet, xi.mod.ENMITY, 'strobe_ii_mod', 0)
     pet:removeListener("ATTACHMENT_STROBE_II")
 end
 
@@ -34,13 +34,13 @@ end
 
 attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_ii_mod', 10)
+        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_ii_mod', 10)
     elseif maneuvers == 1 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_ii_mod', 25)
+        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_ii_mod', 25)
     elseif maneuvers == 2 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_ii_mod', 40)
+        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_ii_mod', 40)
     elseif maneuvers == 3 then
-        updateModPerformance(pet, tpz.mod.ENMITY, 'strobe_ii_mod', 60)
+        updateModPerformance(pet, xi.mod.ENMITY, 'strobe_ii_mod', 60)
     end
 end
 

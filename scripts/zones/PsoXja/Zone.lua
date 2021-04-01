@@ -20,11 +20,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(5, -302.493, 42, -179.995, -297.386, 48, -176.078) -- Uncapped area 2 (G-9 Tower)
     zone:registerRegion(6,  299.847, 42,  257.716,  303.824, 48,  262.391) -- Uncapped area 3 (I-7 Tower)
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -34,9 +34,9 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-29.956, -1.903, 212.521, 188)
     end
 
-    if (player:getXPos() == -300 and player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 2) then
+    if (player:getXPos() == -300 and player:getCurrentMission(COP) == xi.mission.id.cop.THE_ENDURING_TUMULT_OF_WAR and player:getCharVar("PromathiaStatus") == 2) then
         cs = 1 -- COP event
-    elseif (player:getXPos() == 220 and player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 8) then
+    elseif (player:getXPos() == 220 and player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 8) then
         cs = 4
     end
 
@@ -66,7 +66,7 @@ zone_object.afterZoneIn = function(player)
     if (ENABLE_COP_ZONE_CAP == 1) then
         local LVLcap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
         if (LVLcap > 0) then -- LV cap depends on entrance
-            player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, LVLcap, 0, 0)
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, LVLcap, 0, 0)
         end
     end
 end

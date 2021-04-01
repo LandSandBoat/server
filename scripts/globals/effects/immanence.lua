@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.IMMANENCE
+-- xi.effect.IMMANENCE
 -----------------------------------
 local effect_object = {}
 

@@ -53,7 +53,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -65,7 +65,7 @@ end
 zone_object.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
     local cs
-    if GetNPCByID(ID.npc.TEMENOS_N_GATE[1] + (regionID - 1)):getAnimation() == tpz.animation.OPEN_DOOR then
+    if GetNPCByID(ID.npc.TEMENOS_N_GATE[1] + (regionID - 1)):getAnimation() == xi.animation.OPEN_DOOR then
         if regionID > 20 then
             cs = 120
         else

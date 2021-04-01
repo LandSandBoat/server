@@ -12,10 +12,10 @@ local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
 local entity = {}
 
-local wsQuest = tpz.wsquest.evisceration
+local wsQuest = xi.wsquest.evisceration
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
+    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
@@ -23,19 +23,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
+    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
-    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
+    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
         player:startEvent(114)
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(265)
     elseif tuningOutProgress == 1 then
         player:startEvent(293) -- Ildy meets Jakoh to inquire about Shikaree Y
 
     elseif (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
+    elseif (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
         player:startEvent(115)
 
     elseif tuningOutProgress == 2 then
@@ -48,16 +48,16 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 114) then
-        player:addKeyItem(tpz.ki.SACRIFICIAL_CHAMBER_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SACRIFICIAL_CHAMBER_KEY)
-        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS)
-        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
+        player:addKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SACRIFICIAL_CHAMBER_KEY)
+        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZAMS_CHIEFTAINESS)
+        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
     elseif (csid == 265) then
         player:setCharVar("MissionStatus", 3)
     elseif csid == 293 then
         player:setCharVar("TuningOut_Progress", 2)
     else
-        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.EVISCERATION_LEARNED)
+        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.EVISCERATION_LEARNED)
     end
 
 end

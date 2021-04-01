@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.GARUDAS_FAVOR
+-- xi.effect.GARUDAS_FAVOR
 -----------------------------------
 local effect_object = {}
 

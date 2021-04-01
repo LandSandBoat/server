@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.MUTE
+    local typeEffect = xi.effect.MUTE
     local power = 30
     local duration = 75
 

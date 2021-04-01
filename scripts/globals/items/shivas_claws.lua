@@ -13,13 +13,13 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if (VanadielDayElement() == tpz.day.ICEDAY) then
+    if (VanadielDayElement() == xi.day.ICEDAY) then
         chance = chance+6
     end
 
-    if math.random(100) <= chance and applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0) > 0.5 then
-        target:addStatusEffect(tpz.effect.PARALYSIS, 10, 0, 30)
-        return tpz.subEffect.PARALYSIS, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.PARALYSIS
+    if math.random(100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0) > 0.5 then
+        target:addStatusEffect(xi.effect.PARALYSIS, 10, 0, 30)
+        return xi.subEffect.PARALYSIS, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.PARALYSIS
     end
 
     return 0, 0, 0

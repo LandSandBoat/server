@@ -18,7 +18,7 @@ end
 function onTrigger(player, slot, points, target)
 
     -- validate slot
-    if slot < tpz.slot.MAIN or slot > tpz.slot.RANGED then
+    if slot < xi.slot.MAIN or slot > xi.slot.RANGED then
         error(player, "Slot out of range.")
         return
     end

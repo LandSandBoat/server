@@ -16,21 +16,21 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local wsQuest = tpz.wsquest.savage_blade
-local sandyQuests = tpz.quest.id.sandoria
+local wsQuest = xi.wsquest.savage_blade
+local sandyQuests = xi.quest.id.sandoria
 
 local TrustMemory = function(player)
     local memories = 0
     -- 2 - PEACE_FOR_THE_SPIRIT
-    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
         memories = memories + 2
     end
     -- 4 - OLD_WOUNDS
-    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OLD_WOUNDS) then
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS) then
         memories = memories + 4
     end
     -- 8 - THE_HEIR_TO_THE_LIGHT
-    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
+    if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT) then
         memories = memories + 8
     end
     -- 16 - Heroine's Combat BCNM
@@ -38,14 +38,14 @@ local TrustMemory = function(player)
     --  memories = memories + 16
     -- end
     -- 32 - FIT_FOR_A_PRINCE
-    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 32
     end
     return memories
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = tpz.wsquest.getTradeEvent(wsQuest, player, trade)
+    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
@@ -54,18 +54,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = tpz.wsquest.getTriggerEvent(wsQuest, player)
+    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
-    local theGeneralSecret = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
-    local envelopedInDarkness = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
-    local peaceForTheSpirit = player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
+    local theGeneralSecret = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+    local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
+    local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
     local Rank3 = player:getRank() >= 3 and 1 or 0
 
     -- Trust: San d'Oria (Curilla)
     if
-        player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and
-        not player:hasSpell(tpz.magic.spell.CURILLA) and
+        player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and
+        not player:hasSpell(xi.magic.spell.CURILLA) and
         player:getLocalVar("TrustDialogue") == 0
     then
         player:setLocalVar("TrustDialogue", 1)
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
 
     -- "Lure of the Wildcat"
     elseif
-        player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(player:getCharVar("WildcatSandy"), 15)
     then
         player:startEvent(562)
@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
     -- "The General's Secret"
     -- [Blocks everything further down]
     elseif theGeneralSecret == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.CURILLAS_BOTTLE_FULL) then
+        if player:hasKeyItem(xi.ki.CURILLAS_BOTTLE_FULL) then
             player:startEvent(54)
         else
             player:startEvent(53)
@@ -100,23 +100,23 @@ entity.onTrigger = function(player, npc)
             player:startEvent(108)
         end
     elseif
-        mJob == tpz.job.RDM and mLvl >= AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
+        mJob == xi.job.RDM and mLvl >= AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
         peaceForTheSpirit == QUEST_AVAILABLE
     then
         player:startEvent(109) -- Start
 
     -- "Enveloped in Darkness" (RDM AF Shoes)
     elseif envelopedInDarkness == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.OLD_POCKET_WATCH) and not player:hasKeyItem(tpz.ki.OLD_BOOTS) then
+        if player:hasKeyItem(xi.ki.OLD_POCKET_WATCH) and not player:hasKeyItem(xi.ki.OLD_BOOTS) then
             player:startEvent(93)
-        elseif player:hasKeyItem(tpz.ki.OLD_BOOTS) and player:getCharVar("needs_crawler_blood") == 0 then
+        elseif player:hasKeyItem(xi.ki.OLD_BOOTS) and player:getCharVar("needs_crawler_blood") == 0 then
             player:startEvent(101)
         elseif player:getCharVar("needs_crawler_blood") == 1 then
             player:startEvent(117)
         end
     elseif
-        mJob == tpz.job.RDM and mLvl >= AF2_QUEST_LEVEL and
-        player:getQuestStatus(tpz.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
+        mJob == xi.job.RDM and mLvl >= AF2_QUEST_LEVEL and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
         envelopedInDarkness == QUEST_AVAILABLE
     then
         player:startEvent(94) -- Start
@@ -128,10 +128,10 @@ entity.onTrigger = function(player, npc)
 
     -- San d'Oria Missions (optional dialogues)
     elseif
-        player:getNation() == tpz.nation.SANDORIA and
+        player:getNation() == xi.nation.SANDORIA and
         (player:getCharVar("SandoEpilogue") == 1 or player:getRank() ~= 10)
     then
-        local sandyMissions = tpz.mission.id.sandoria
+        local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -149,7 +149,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 9-1 "Breaking Barrier"
         elseif
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.BREAKING_BARRIERS) and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.BREAKING_BARRIERS) and
             currentMission ~= sandyMissions.THE_HEIR_TO_THE_LIGHT
         then
             player:startEvent(16)
@@ -166,14 +166,14 @@ entity.onTrigger = function(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(56)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(545)
@@ -200,25 +200,25 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 55 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
-        player:addKeyItem(tpz.ki.CURILLAS_BOTTLE_EMPTY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CURILLAS_BOTTLE_EMPTY)
+        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+        player:addKeyItem(xi.ki.CURILLAS_BOTTLE_EMPTY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CURILLAS_BOTTLE_EMPTY)
     elseif (csid == 54) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16409) -- Lynx Baghnakhs
         else
-            player:delKeyItem(tpz.ki.CURILLAS_BOTTLE_FULL)
+            player:delKeyItem(xi.ki.CURILLAS_BOTTLE_FULL)
             player:addItem(16409)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16409) -- Lynx Baghnakhs
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
+            player:completeQuest(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
         end
     elseif (csid == 94 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
-        player:addKeyItem(tpz.ki.OLD_POCKET_WATCH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_POCKET_WATCH)
+        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
+        player:addKeyItem(xi.ki.OLD_POCKET_WATCH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_POCKET_WATCH)
     elseif (csid == 109 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
+        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
         player:setCharVar("needs_crawler_blood", 0)
     elseif (csid == 101) then
         player:setCharVar("needs_crawler_blood", 1)
@@ -228,7 +228,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addSpell(902, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 902)
     else
-        tpz.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SAVAGE_BLADE_LEARNED)
+        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SAVAGE_BLADE_LEARNED)
     end
 end
 

@@ -29,7 +29,7 @@ function salvageUtil.onCellItemUse(target, effect, value, offset)
         local duration = math.floor(statusEffect:getTimeRemaining()/1000)
         target:addStatusEffectEx(effect, effect, newpower, 0, duration)
     end
-    if pet ~= nil and effect == tpz.effect.DEBILITATION then
+    if pet ~= nil and effect == xi.effect.DEBILITATION then
         pet:delStatusEffectSilent(effect)
         if newpower > 0 then
             local duration = math.floor(statusEffect:getTimeRemaining()/1000)

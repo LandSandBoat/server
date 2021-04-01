@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    quest_FatherAndSon = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FATHER_AND_SON)
+    quest_FatherAndSon = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
 
     if (quest_FatherAndSon == QUEST_COMPLETED) then
         player:startEvent(696)

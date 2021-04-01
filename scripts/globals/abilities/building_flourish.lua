@@ -18,37 +18,37 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if
-        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1) or
-        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2) or
-        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3) or
-        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4) or
-        player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) or
+        player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)
     then
         return 0, 0
     else
-        return tpz.msg.basic.NO_FINISHINGMOVES, 0
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
 
-    if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_1)
-        player:addStatusEffect(tpz.effect.BUILDING_FLOURISH, 1, 0, 60, 0, player:getMerit(tpz.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_2)
-        player:addStatusEffect(tpz.effect.BUILDING_FLOURISH, 2, 0, 60, 0, player:getMerit(tpz.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_3)
-        player:addStatusEffect(tpz.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(tpz.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_4)
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_1, 1, 0, 7200)
-        player:addStatusEffect(tpz.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(tpz.merit.BUILDING_FLOURISH_EFFECT))
-    elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
-        player:delStatusEffect(tpz.effect.FINISHING_MOVE_5)
-        player:addStatusEffect(tpz.effect.FINISHING_MOVE_2, 1, 0, 7200)
-        player:addStatusEffect(tpz.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(tpz.merit.BUILDING_FLOURISH_EFFECT))
+    if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 1, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 2, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
+    elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+        player:delStatusEffect(xi.effect.FINISHING_MOVE_5)
+        player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
+        player:addStatusEffect(xi.effect.BUILDING_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.BUILDING_FLOURISH_EFFECT))
     end
 
 end

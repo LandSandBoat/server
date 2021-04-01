@@ -8,8 +8,8 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.EXP_BONUS, -100)
-    mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
+    mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+    mob:setMobMod(xi.mobMod.GIL_MAX, -1)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
@@ -36,7 +36,7 @@ entity.onEventFinish = function(player, csid, option)
         local battlefield = player:getBattlefield()
         local inst = battlefield:getArea()
         -- players are healed in between fights, but their TP is set to 0
-        player:addTitle(tpz.title.BRANDED_BY_LIGHTNING)
+        player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
         player:setHP(player:getMaxHP())
         player:setMP(player:getMaxMP())
         player:setTP(0)

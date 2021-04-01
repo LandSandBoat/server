@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ALL_MISS
+-- xi.effect.ALL_MISS
 -----------------------------------
 local effect_object = {}
 

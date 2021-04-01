@@ -16,7 +16,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.WEIGHT
+    local typeEffect = xi.effect.WEIGHT
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 50, 0, 300))
 

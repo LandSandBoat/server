@@ -15,7 +15,7 @@ local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- can only use if not silenced
-    if (mob:getMainJob() == tpz.job.BRD and mob:hasStatusEffect(tpz.effect.SILENCE) == false) then
+    if (mob:getMainJob() == xi.job.BRD and mob:hasStatusEffect(xi.effect.SILENCE) == false) then
         return 0
     end
     return 1
@@ -24,7 +24,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = mob:getMainLvl() * 2
     local duration = 180
-    local typeEffect = tpz.effect.BLAZE_SPIKES
+    local typeEffect = xi.effect.BLAZE_SPIKES
     skill:setMsg(MobBuffMove(mob, typeEffect, power, 0, duration))
     return typeEffect
 end

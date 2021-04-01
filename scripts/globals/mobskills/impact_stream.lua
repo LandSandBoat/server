@@ -19,16 +19,16 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect1 = tpz.effect.STUN
-    local typeEffect2 = tpz.effect.DEFENSE_DOWN
+    local typeEffect1 = xi.effect.STUN
+    local typeEffect2 = xi.effect.DEFENSE_DOWN
 
     MobStatusEffectMove(mob, target, typeEffect1, 1, 0, 4)
     MobStatusEffectMove(mob, target, typeEffect2, 50, 0, 60)
 
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.5, tpz.magic.ele.LIGHT, dmgmod, 0, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.EARTH, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.EARTH)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*2.5, xi.magic.ele.LIGHT, dmgmod, 0, 1)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.EARTH)
     return dmg
 end
 

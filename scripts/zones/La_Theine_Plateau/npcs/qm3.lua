@@ -15,7 +15,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 1125) and
         utils.mask.isFull(player:getCharVar("I_CAN_HEAR_A_RAINBOW"), 7)
     then
@@ -24,7 +24,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 0) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Tenzen_s_Path") == 0) then
         player:startEvent(203)
     end
 end
@@ -34,9 +34,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 124) then
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
-        player:addTitle(tpz.title.RAINBOW_WEAVER)
-        player:unlockJob(tpz.job.SMN)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+        player:addTitle(xi.title.RAINBOW_WEAVER)
+        player:unlockJob(xi.job.SMN)
         player:addSpell(296)
         player:messageSpecial(ID.text.UNLOCK_SUMMONER)
         player:messageSpecial(ID.text.UNLOCK_CARBUNCLE)

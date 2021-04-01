@@ -16,7 +16,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE and
+        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE and
         trade:hasItemQty(4395, 1) and
         trade:getItemCount() == 1
     then
@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SmokeOnTheMountain = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+    local SmokeOnTheMountain = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
 
     if (SmokeOnTheMountain == QUEST_AVAILABLE) then
         player:startEvent(428)
@@ -39,15 +39,15 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 428) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
     elseif (csid == 429) then
         player:tradeComplete()
         player:addGil(GIL_RATE*300)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
-        player:addTitle(tpz.title.HOT_DOG)
-        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) == QUEST_ACCEPTED) then
+        player:addTitle(xi.title.HOT_DOG)
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) == QUEST_ACCEPTED) then
             player:addFame(BASTOK, 30)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
         else
             player:addFame(BASTOK, 5)
         end

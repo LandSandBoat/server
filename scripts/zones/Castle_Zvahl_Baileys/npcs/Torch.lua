@@ -16,14 +16,14 @@ end
 entity.onTrigger = function(player, npc)
     -- killed Dark Spark and clicked same torch used to spawn
     if player:getCharVar("BorghertzSparkKilled") == 1 then
-        npcUtil.giveKeyItem(player, tpz.ki.SHADOW_FLAMES)
+        npcUtil.giveKeyItem(player, xi.ki.SHADOW_FLAMES)
         player:setCharVar("BorghertzSparkKilled", 0)
         player:setCharVar("BorghertzCS", 0)
 
     -- attempt to spawn Dark Spark from torch
     elseif
-        player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) and
-        not player:hasKeyItem(tpz.ki.SHADOW_FLAMES) and
+        player:hasKeyItem(xi.ki.OLD_GAUNTLETS) and
+        not player:hasKeyItem(xi.ki.SHADOW_FLAMES) and
         player:getCharVar("BorghertzCS") >= 2 and
         npcUtil.popFromQM(player, npc, ID.mob.DARK_SPARK, {claim=true, hide=0})
     then

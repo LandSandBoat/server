@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    -- if (player:hasKeyItem(tpz.ki.MARK_OF_SEED) and player:getCurrentMission(ACP) == tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
+    -- if (player:hasKeyItem(xi.ki.MARK_OF_SEED) and player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II) then
     --     player:startEvent(5)
     -- elseif (EventTriggerBCNM(player, npc)) then
     -- Temp disabled pending fixes for the BCNM mobs.
@@ -29,8 +29,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 5) then
-        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
-        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
+        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II)
+        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_III)
     else
         EventFinishBCNM(player, csid, option)
     end

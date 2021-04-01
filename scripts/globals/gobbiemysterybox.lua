@@ -4,7 +4,7 @@ require("scripts/globals/utils")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.mystery = tpz.mystery or {}
+ xi.mystery = xi.mystery or {}
 
 local adoulinOptionOff = 0x80
 local pictlogicaOptionOff = 0x100
@@ -88,7 +88,7 @@ local gobbieJunk =
     18180,
     19220
 }
-tpz.mystery.onTrade = function (player, npc, trade, events)
+ xi.mystery.onTrade = function (player, npc, trade, events)
     if trade:getItemCount() == 1 then
         local tradeID = trade:getItemId(0)
         if keyToDial[tradeID] ~= nil then
@@ -108,7 +108,7 @@ tpz.mystery.onTrade = function (player, npc, trade, events)
     end
 end
 
-tpz.mystery.onTrigger = function (player, npc, events)
+ xi.mystery.onTrigger = function (player, npc, events)
     local event = events
     local playerAgeDays = (os.time() - player:getTimeCreated()) / 86400
     local dailyTallyPoints = player:getCurrency("daily_tally")
@@ -133,7 +133,7 @@ tpz.mystery.onTrigger = function (player, npc, events)
     end
 end
 
-tpz.mystery.onEventUpdate = function (player, csid, option, events)
+ xi.mystery.onEventUpdate = function (player, csid, option, events)
     local event = events
     local dailyTallyPoints = player:getCurrency("daily_tally")
     local holdingItem = player:getCharVar("gobbieBoxHoldingItem")
@@ -223,7 +223,7 @@ tpz.mystery.onEventUpdate = function (player, csid, option, events)
     end
 end
 
-tpz.mystery.onEventFinish = function (player, csid, option, events)
+ xi.mystery.onEventFinish = function (player, csid, option, events)
     local event = events
     if csid == event.INTRO then
         player:setCurrency("daily_tally", 50)

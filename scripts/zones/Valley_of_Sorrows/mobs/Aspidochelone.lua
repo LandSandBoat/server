@@ -12,14 +12,14 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.ASPIDOCHELONE_SINKER)
+    player:addTitle(xi.title.ASPIDOCHELONE_SINKER)
 end
 
 entity.onMobDespawn = function(mob)

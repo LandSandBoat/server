@@ -24,8 +24,8 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.attackType = tpz.attackType.MAGICAL
-    params.damageType = tpz.damageType.WATER
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.WATER
     params.multiplier = 1.83
     params.tMultiplier = 2.0
     params.duppercap = 69
@@ -45,14 +45,14 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     --TODO: Knockback? Where does that get handled? How much knockback does it have?
     local params = {}
-    params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
 
     if (damage > 0 and resist > 0.125) then
-        local typeEffect = tpz.effect.BIND
+        local typeEffect = xi.effect.BIND
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end

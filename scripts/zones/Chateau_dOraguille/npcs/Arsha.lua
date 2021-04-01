@@ -11,11 +11,11 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions
-    if player:getNation() ~= tpz.nation.SANDORIA then
+    if player:getNation() ~= xi.nation.SANDORIA then
         player:startEvent(513)
 
     else
-        local sandyMissions = tpz.mission.id.sandoria
+        local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 

@@ -27,7 +27,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     ]]
     local heal = math.random(100, 400)
 
-    skill:setMsg(tpz.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
 
     return MobHealMove(mob, heal)
 end

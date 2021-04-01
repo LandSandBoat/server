@@ -5,7 +5,7 @@
 -- Type: Enfeebling
 -- Utsusemi/Blink absorb: Ignores shadows.
 -- Range: Melee?
--- Notes: Very potent paralysis tpz.effect. Is NOT a Gaze Attack, unlike Chaotic Eye.
+-- Notes: Very potent paralysis xi.effect. Is NOT a Gaze Attack, unlike Chaotic Eye.
 -----------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.PARALYSIS
+    local typeEffect = xi.effect.PARALYSIS
 
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 50, 0, 60))

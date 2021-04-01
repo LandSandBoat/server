@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FANTASIA
+-- xi.effect.FANTASIA
 -----------------------------------
 local effect_object = {}
 

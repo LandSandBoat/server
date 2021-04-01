@@ -8,16 +8,16 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMod(tpz.mod.TRIPLE_ATTACK, 5)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.CURSE)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.CURSE)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 295)
+    xi.hunts.checkHunt(mob, player, 295)
 end
 
 return entity

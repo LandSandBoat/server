@@ -9,7 +9,7 @@ local item_object = {}
 
 item_object.onAdditionalEffect = function(player, target, damage)
     if (target:getFamily() == 277) then
-        target:setMobMod(tpz.mobMod.ADD_EFFECT, 0)
+        target:setMobMod(xi.mobMod.ADD_EFFECT, 0)
     end
     return 0, 0, 0
 end

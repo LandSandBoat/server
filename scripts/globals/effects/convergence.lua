@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CONVERGENCE
+-- xi.effect.CONVERGENCE
 -----------------------------------
 local effect_object = {}
 

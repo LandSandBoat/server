@@ -16,7 +16,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     for i, v in pairs(targets) do
         if (v.entity:isPC()) then
             local race = v.entity:getRace()
-            if (race == tpz.race.GALKA) and not v.entity:hasKeyItem(tpz.ki.LIGHT_OF_ALTAIEU) then
+            if (race == xi.race.GALKA) and not v.entity:hasKeyItem(xi.ki.LIGHT_OF_ALTAIEU) then
                 mob:showText(mob, ID.text.PROMATHIA_TEXT + 4)
                 return 0
             end
@@ -26,14 +26,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.TERROR
+    local typeEffect = xi.effect.TERROR
     local power = 30
     local duration = 30
 
-    if target:isPC() and ((target:getRace() == tpz.race.GALKA) and not target:hasKeyItem(tpz.ki.LIGHT_OF_ALTAIEU)) then
+    if target:isPC() and ((target:getRace() == xi.race.GALKA) and not target:hasKeyItem(xi.ki.LIGHT_OF_ALTAIEU)) then
         skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     else
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
 
     return typeEffect

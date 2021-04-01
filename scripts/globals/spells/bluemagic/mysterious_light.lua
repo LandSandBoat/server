@@ -24,11 +24,11 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
-    params.attackType = tpz.attackType.MAGICAL
-    params.damageType = tpz.damageType.WIND
-    params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.WIND
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     -- This data should match information on https://www.bg-wiki.com/bg/Calculating_Blue_Magic_Damage
     params.multiplier = 2.0
@@ -47,8 +47,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (damage > 0 and resist > 0.0625) then
-        target:delStatusEffect(tpz.effect.WEIGHT)
-        target:addStatusEffect(tpz.effect.WEIGHT, 4, 0, getBlueEffectDuration(caster, resist, tpz.effect.WEIGHT))
+        target:delStatusEffect(xi.effect.WEIGHT)
+        target:addStatusEffect(xi.effect.WEIGHT, 4, 0, getBlueEffectDuration(caster, resist, xi.effect.WEIGHT))
     end
 
     return damage

@@ -14,10 +14,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(tpz.msg.basic.NONE)
+    skill:setMsg(xi.msg.basic.NONE)
     if (mob:getTarget() and mob:getTarget():getFamily() == 478) then
         -- using Ambrosia!
-        target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 4511)
+        target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 4511)
         mob:messageText(mob, ID.text.PRISHE_TEXT + 8, false)
     else
         -- using Daedalus Wing!

@@ -8,10 +8,10 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.CALL_WYVERN, hpp = 100},
+            {id = xi.jsa.CALL_WYVERN, hpp = 100},
         },
     })
 end

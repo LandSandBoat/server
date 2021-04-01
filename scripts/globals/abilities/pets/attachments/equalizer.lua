@@ -11,7 +11,7 @@ attachment_object.onEquip = function(pet)
 end
 
 attachment_object.onUnequip = function(pet)
-    updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 0)
+    updateModPerformance(pet, xi.mod.AUTO_EQUALIZER, 'equalizer_mod', 0)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)
@@ -24,13 +24,13 @@ end
 
 attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 9)
+        updateModPerformance(pet, xi.mod.AUTO_EQUALIZER, 'equalizer_mod', 9)
     elseif maneuvers == 1 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 24)
+        updateModPerformance(pet, xi.mod.AUTO_EQUALIZER, 'equalizer_mod', 24)
     elseif maneuvers == 2 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 48)
+        updateModPerformance(pet, xi.mod.AUTO_EQUALIZER, 'equalizer_mod', 48)
     elseif maneuvers == 3 then
-        updateModPerformance(pet, tpz.mod.AUTO_EQUALIZER, 'equalizer_mod', 72)
+        updateModPerformance(pet, xi.mod.AUTO_EQUALIZER, 'equalizer_mod', 72)
     end
 end
 

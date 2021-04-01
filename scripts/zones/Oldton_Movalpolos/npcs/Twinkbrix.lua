@@ -15,9 +15,9 @@ entity.onTrade = function(player, npc, trade)
     local mineShaftWarpCost = 2000
     local tradeGil = trade:getGil()
 
-    if player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL) and npcUtil.tradeHas(trade, {{"gil", mineShaftWarpCost}}) then
+    if player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and npcUtil.tradeHas(trade, {{"gil", mineShaftWarpCost}}) then
         player:startEvent(56)
-    elseif not player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL) and tradeGil > 0 and tradeGil <= 10000 and npcUtil.tradeHas(trade, {{"gil", tradeGil}}) then
+    elseif not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and tradeGil > 0 and tradeGil <= 10000 and npcUtil.tradeHas(trade, {{"gil", tradeGil}}) then
         local maxRoll = tradeGil / 200
         local diceRoll = math.random(2, 100)
         player:startEvent(55, tradeGil, maxRoll, diceRoll, mineShaftWarpCost)
@@ -25,7 +25,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.SHAFT_GATE_OPERATING_DIAL) then
+    if player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) then
         player:startEvent(50)
     else
         player:startEvent(52)
@@ -37,13 +37,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 55 and option == 1 then
-        npcUtil.giveKeyItem(player, tpz.ki.SHAFT_GATE_OPERATING_DIAL)
+        npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
         player:confirmTrade()
     elseif csid == 55 and option == 0 then
         player:confirmTrade()
     elseif csid == 56 and option == 1 then
         player:confirmTrade()
-        tpz.teleport.to(player, tpz.teleport.id.MINESHAFT)
+        xi.teleport.to(player, xi.teleport.id.MINESHAFT)
     end
 end
 

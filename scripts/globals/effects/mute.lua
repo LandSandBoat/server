@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MUTE
+-- xi.effect.MUTE
 -----------------------------------
 local effect_object = {}
 

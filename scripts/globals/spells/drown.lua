@@ -15,26 +15,26 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
 
-    if (target:getStatusEffect(tpz.effect.SHOCK) ~= nil) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if (target:getStatusEffect(xi.effect.SHOCK) ~= nil) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
+        local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
-        params.attribute = tpz.mod.INT
+        params.attribute = xi.mod.INT
         params.skillType = 36
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            if (target:getStatusEffect(tpz.effect.BURN) ~= nil) then
-                target:delStatusEffect(tpz.effect.BURN)
+            if (target:getStatusEffect(xi.effect.BURN) ~= nil) then
+                target:delStatusEffect(xi.effect.BURN)
             end
-            local sINT = caster:getStat(tpz.mod.INT)
+            local sINT = caster:getStat(xi.mod.INT)
             local DOT = getElementalDebuffDOT(sINT)
-            local effect = target:getStatusEffect(tpz.effect.DROWN)
+            local effect = target:getStatusEffect(xi.effect.DROWN)
             local noeffect = false
             if (effect ~= nil) then
                 if (effect:getPower() >= DOT) then
@@ -42,23 +42,23 @@ spell_object.onSpellCast = function(caster, target, spell)
                 end
             end
             if (noeffect) then
-                spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+                spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
             else
                 if (effect ~= nil) then
-                    target:delStatusEffect(tpz.effect.DROWN)
+                    target:delStatusEffect(xi.effect.DROWN)
                 end
-                spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB)
+                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
                 local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist)
-                duration = duration + caster:getMerit(tpz.merit.ELEMENTAL_DEBUFF_DURATION)
+                duration = duration + caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_DURATION)
 
-                local mbonus = caster:getMerit(tpz.merit.ELEMENTAL_DEBUFF_EFFECT)
+                local mbonus = caster:getMerit(xi.merit.ELEMENTAL_DEBUFF_EFFECT)
                 DOT = DOT + mbonus/2 -- Damage
 
-                target:addStatusEffect(tpz.effect.DROWN, DOT, 3, duration)
+                target:addStatusEffect(xi.effect.DROWN, DOT, 3, duration)
             end
         end
     end
-    return tpz.effect.DROWN
+    return xi.effect.DROWN
 end
 
 return spell_object

@@ -12,7 +12,7 @@ require("scripts/globals/missions")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
@@ -25,11 +25,11 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-601.433, 35.204, -520.031, 1)
     end
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("VowsDone") == 1 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING and player:getCharVar("VowsDone") == 1 then
         cs = 906
     elseif quests.rainbow.onZoneIn(player) then
         cs = 901
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 37
     end
 
@@ -37,7 +37,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -59,9 +59,9 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 906 then
-        if player:getCurrentMission(COP) == tpz.mission.id.cop.A_TRANSIENT_DREAM then
-            player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.A_TRANSIENT_DREAM)
-            player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
+        if player:getCurrentMission(COP) == xi.mission.id.cop.A_TRANSIENT_DREAM then
+            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.A_TRANSIENT_DREAM)
+            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_CALL_OF_THE_WYRMKING)
         end
         player:setCharVar("VowsDone", 0)
     end

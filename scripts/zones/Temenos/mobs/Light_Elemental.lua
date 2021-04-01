@@ -23,12 +23,12 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         {
             [ID.mob.TEMENOS_C_MOB[2]+1] = function()
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[2]+2):isDead() then
-                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(tpz.status.NORMAL)
+                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(xi.status.NORMAL)
                 end
             end,
             [ID.mob.TEMENOS_C_MOB[2]+2] = function()
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[2]+1):isDead() then
-                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(tpz.status.NORMAL)
+                    GetNPCByID(ID.npc.TEMENOS_C_CRATE[2]):setStatus(xi.status.NORMAL)
                 end
             end,
         }

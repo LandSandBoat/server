@@ -11,9 +11,9 @@ require("scripts/globals/roe")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.trust = tpz.trust or {}
+ xi.trust = xi.trust or {}
 
-tpz.trust.message_offset =
+ xi.trust.message_offset =
 {
     SPAWN          = 1,
     TEAMWORK_1     = 4,
@@ -53,10 +53,10 @@ local rovKIBattlefieldIDs = set{
 -- TODO: RUN LB5
 }
 
-tpz.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
-    local hasPermit = player:hasKeyItem(tpz.ki.WINDURST_TRUST_PERMIT) or
-                      player:hasKeyItem(tpz.ki.BASTOK_TRUST_PERMIT) or
-                      player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT)
+ xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
+    local hasPermit = player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
+                      player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
+                      player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
 
     local itemId = trade:getItemId(0)
     local subId = trade:getItemSubId(0)
@@ -97,46 +97,46 @@ tpz.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
     end
 end
 
-tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
+ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
 
     -- Trusts must be enabled in settings
     if ENABLE_TRUST_CASTING == 0 then
-        return tpz.msg.basic.TRUST_NO_CAST_TRUST
+        return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
     -- Trusts not allowed in an alliance
     if caster:checkSoloPartyAlliance() == 2 then
-        return tpz.msg.basic.TRUST_NO_CAST_TRUST
+        return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
     -- Trusts only allowed in certain zones (Remove this for trusts everywhere)
-    if not caster:canUseMisc(tpz.zoneMisc.TRUST) then
-        return tpz.msg.basic.TRUST_NO_CALL_AE
+    if not caster:canUseMisc(xi.zoneMisc.TRUST) then
+        return xi.msg.basic.TRUST_NO_CALL_AE
     end
 
     -- You can only summon trusts if you are the party leader or solo
     local leader = caster:getPartyLeader()
     if leader and caster:getID() ~= leader:getID() then
-        caster:messageSystem(tpz.msg.system.TRUST_SOLO_OR_LEADER)
+        caster:messageSystem(xi.msg.system.TRUST_SOLO_OR_LEADER)
         return -1
     end
 
     -- Block summoning trusts if seeking a party
     if caster:isSeekingParty() then
-        caster:messageSystem(tpz.msg.system.TRUST_NO_SEEKING_PARTY)
+        caster:messageSystem(xi.msg.system.TRUST_NO_SEEKING_PARTY)
         return -1
     end
 
     -- Block summoning trusts if someone recently joined party (120s)
     local last_party_member_added_time = caster:getPartyLastMemberJoinedTime()
     if os.time() - last_party_member_added_time < 120 then
-        caster:messageSystem(tpz.msg.system.TRUST_DELAY_NEW_PARTY_MEMBER)
+        caster:messageSystem(xi.msg.system.TRUST_DELAY_NEW_PARTY_MEMBER)
         return -1
     end
 
     -- Trusts cannot be summoned if you have hate
     if caster:hasEnmity() then
-        caster:messageSystem(tpz.msg.system.TRUST_NO_ENMITY)
+        caster:messageSystem(xi.msg.system.TRUST_NO_ENMITY)
         return -1
     end
 
@@ -145,22 +145,22 @@ tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     local num_trusts = 0
     local party = caster:getPartyWithTrusts()
     for _, member in pairs(party) do
-        if member:getObjType() == tpz.objType.TRUST then
+        if member:getObjType() == xi.objType.TRUST then
             -- Check for same trust
             if member:getTrustID() == spell:getID() then
-                caster:messageSystem(tpz.msg.system.TRUST_ALREADY_CALLED)
+                caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
                 return -1
             -- Check not allowed trust combinations (Shantotto I vs Shantotto II)
             elseif type(not_allowed_trust_ids) == "number" then
                 if member:getTrustID() == not_allowed_trust_ids then
-                    caster:messageSystem(tpz.msg.system.TRUST_ALREADY_CALLED)
+                    caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
                     return -1
                 end
             elseif type(not_allowed_trust_ids) == "table" then
                 for _, v in pairs(not_allowed_trust_ids) do
                     if type(v) == "number" then
                         if member:getTrustID() == v then
-                            caster:messageSystem(tpz.msg.system.TRUST_ALREADY_CALLED)
+                            caster:messageSystem(xi.msg.system.TRUST_ALREADY_CALLED)
                             return -1
                         end
                     end
@@ -173,34 +173,34 @@ tpz.trust.canCast = function(caster, spell, not_allowed_trust_ids)
 
     -- Max party size
     if num_pt >= 6 then
-        caster:messageSystem(tpz.msg.system.TRUST_MAXIMUM_NUMBER)
+        caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER)
         return -1
     end
 
     -- Some battlefields allow trusts after you get this ROV Key Item
     local casterBattlefieldID = caster:getBattlefieldID()
-    if rovKIBattlefieldIDs[casterBattlefieldID] and not caster:hasKeyItem(tpz.ki.RHAPSODY_IN_UMBER) then
-        return tpz.msg.basic.TRUST_NO_CAST_TRUST
+    if rovKIBattlefieldIDs[casterBattlefieldID] and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_UMBER) then
+        return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
     -- Limits set by ROV Key Items
-    if num_trusts >= 3 and not caster:hasKeyItem(tpz.ki.RHAPSODY_IN_WHITE) then
-        caster:messageSystem(tpz.msg.system.TRUST_MAXIMUM_NUMBER)
+    if num_trusts >= 3 and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
+        caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER)
         return -1
-    elseif num_trusts >= 4 and not caster:hasKeyItem(tpz.ki.RHAPSODY_IN_CRIMSON) then
-        caster:messageSystem(tpz.msg.system.TRUST_MAXIMUM_NUMBER)
+    elseif num_trusts >= 4 and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_CRIMSON) then
+        caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER)
         return -1
     end
 
     return 0
 end
 
-tpz.trust.spawn = function(caster, spell)
+ xi.trust.spawn = function(caster, spell)
     caster:spawnTrust(spell:getID())
 
     -- Records of Eminence: Call Forth an Alter Ego
     if caster:getEminenceProgress(932) then
-        tpz.roe.onRecordTrigger(caster, 932)
+        xi.roe.onRecordTrigger(caster, 932)
     end
 
     return 0
@@ -209,24 +209,24 @@ end
 -- page_offset is: (summon_message_id - 1) / 100
 -- Example: Shantotto II summon message ID: 11201
 -- page_offset: (11201 - 1) / 100 = 112
-tpz.trust.message = function(mob, page_offset, message_offset)
+ xi.trust.message = function(mob, page_offset, message_offset)
 
     if page_offset > MAX_MESSAGE_PAGE then
         print("trust.lua: MAX_MESSAGE_PAGE exceeded!")
         return
     end
 
-    local trust_offset = tpz.msg.system.GLOBAL_TRUST_OFFSET + (page_offset * 100)
+    local trust_offset = xi.msg.system.GLOBAL_TRUST_OFFSET + (page_offset * 100)
     mob:trustPartyMessage(trust_offset + message_offset)
 end
 
-tpz.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
+ xi.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
     local messages = {}
 
     local master = mob:getMaster()
     local party = master:getPartyWithTrusts()
     for _, member in pairs(party) do
-        if member:getObjType() == tpz.objType.TRUST then
+        if member:getObjType() == xi.objType.TRUST then
             for id, message in pairs(teamwork_messages) do
                 if member:getTrustID() == id then
                     table.insert(messages, message)
@@ -236,22 +236,22 @@ tpz.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
     end
 
     if table.getn(messages) > 0 then
-        tpz.trust.message(mob, page_offset, messages[math.random(#messages)])
+        xi.trust.message(mob, page_offset, messages[math.random(#messages)])
     else
         -- Defaults to regular spawn message
-        tpz.trust.message(mob, page_offset, tpz.trust.message_offset.SPAWN)
+        xi.trust.message(mob, page_offset, xi.trust.message_offset.SPAWN)
     end
 end
 
 -- For debugging and lining up teamwork messages
-tpz.trust.dumpMessages = function(mob, page_offset)
+ xi.trust.dumpMessages = function(mob, page_offset)
     for i=0, 20 do
-        tpz.trust.message(mob, page_offset, i)
+        xi.trust.message(mob, page_offset, i)
     end
 end
 
-tpz.trust.dumpMessagePages = function(mob)
+ xi.trust.dumpMessagePages = function(mob)
     for i=0, 120 do
-        tpz.trust.message(mob, i, tpz.trust.message_offset.SPAWN)
+        xi.trust.message(mob, i, xi.trust.message_offset.SPAWN)
     end
 end

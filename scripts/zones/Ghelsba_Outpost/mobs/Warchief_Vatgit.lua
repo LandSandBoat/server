@@ -17,7 +17,7 @@ entity.onMobDeath = function(mob, player, isKiller)
         end
     end
 
-    player:addTitle(tpz.title.WARCHIEF_WRECKER)
+    player:addTitle(xi.title.WARCHIEF_WRECKER)
 
 end
 

@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == false) then
+    if (player:hasKeyItem(xi.ki.AIRSHIP_PASS) == false) then
         player:startEvent(517)
     elseif (player:getGil() < 200) then
         player:startEvent(716)

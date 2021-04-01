@@ -21,29 +21,29 @@ entity.onTrigger = function(player, npc)
     local Race = player:getRace()
     local xPos = npc:getXPos()
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(202)
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
         if (xPos > 99 and xPos < 101) then -- Mithra Tower
-            if ( Race==tpz.race.MITHRA ) then
+            if ( Race== xi.race.MITHRA ) then
                 player:startEvent(124)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
             end
         elseif (xPos > 739 and xPos < 741) then -- Elvaan Tower
-            if ( Race==tpz.race.ELVAAN_M or Race==tpz.race.ELVAAN_F) then
+            if ( Race== xi.race.ELVAAN_M or Race== xi.race.ELVAAN_F) then
                 player:startEvent(121)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
             end
         elseif (xPos > 256 and xPos < 258) then -- Tarutaru Tower
-            if ( Race==tpz.race.TARU_M or Race==tpz.race.TARU_F  ) then
+            if ( Race== xi.race.TARU_M or Race== xi.race.TARU_F  ) then
                 player:startEvent(123)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
             end
         elseif (xPos > 576 and xPos < 578) then -- Galka Tower
-            if ( Race==tpz.race.GALKA) then
+            if ( Race== xi.race.GALKA) then
                 player:startEvent(122)
             else
                 player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)
@@ -61,25 +61,25 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 202) then
         player:setCharVar("PromathiaStatus", 2)
     elseif (124 and option ~=0) then -- Mithra
-        player:addTitle(tpz.title.WARRIOR_OF_THE_CRYSTAL)
+        player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
-        player:addKeyItem(tpz.ki.LIGHT_OF_DEM)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_DEM)
+        player:addKeyItem(xi.ki.LIGHT_OF_DEM)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_DEM)
     elseif (121 and option ~=0) then -- Elvaan
-        player:addTitle(tpz.title.WARRIOR_OF_THE_CRYSTAL)
+        player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
-        player:addKeyItem(tpz.ki.LIGHT_OF_MEA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_MEA)
+        player:addKeyItem(xi.ki.LIGHT_OF_MEA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_MEA)
     elseif (123 and option ~=0) then -- Tarutaru
-        player:addTitle(tpz.title.WARRIOR_OF_THE_CRYSTAL)
+        player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
-        player:addKeyItem(tpz.ki.LIGHT_OF_HOLLA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_HOLLA)
+        player:addKeyItem(xi.ki.LIGHT_OF_HOLLA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_HOLLA)
     elseif (122 and option ~=0) then -- Galka
-        player:addTitle(tpz.title.WARRIOR_OF_THE_CRYSTAL)
+        player:addTitle(xi.title.WARRIOR_OF_THE_CRYSTAL)
         player:setCharVar("PromathiaStatus", 3)
-        player:addKeyItem(tpz.ki.LIGHT_OF_ALTAIEU)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LIGHT_OF_ALTAIEU)
+        player:addKeyItem(xi.ki.LIGHT_OF_ALTAIEU)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_OF_ALTAIEU)
     end
 end
 

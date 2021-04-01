@@ -25,7 +25,7 @@ require("scripts/globals/roe")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.caskets = tpz.caskets or {}
+ xi.caskets = xi.caskets or {}
 
 local casketInfo =
 {
@@ -62,14 +62,14 @@ local casketInfo =
         193, 194, 195, 196, 197, 198, 204, 205, 207, 208, 212, 213
     },
     splitZones = set{
-       tpz.zone.ZERUHN_MINES,
-       tpz.zone.KORROLOKA_TUNNEL,
-       tpz.zone.DANGRUF_WADI,
-       tpz.zone.KING_RANPERRES_TOMB,
-       tpz.zone.ORDELLES_CAVES,
-       tpz.zone.OUTER_HORUTOTO_RUINS,
-       tpz.zone.GUSGEN_MINES,
-       tpz.zone.MAZE_OF_SHAKHRAMI
+       xi.zone.ZERUHN_MINES,
+       xi.zone.KORROLOKA_TUNNEL,
+       xi.zone.DANGRUF_WADI,
+       xi.zone.KING_RANPERRES_TOMB,
+       xi.zone.ORDELLES_CAVES,
+       xi.zone.OUTER_HORUTOTO_RUINS,
+       xi.zone.GUSGEN_MINES,
+       xi.zone.MAZE_OF_SHAKHRAMI
     },
     cs =
     {
@@ -164,16 +164,16 @@ local function dropChance(player)
     -- GoV Prowess Increased Treasure Casket Discovery adds 5% per level (max 5 levels)
     -- for a total of 25% increase. -- NOTE this needs to be confirmed!
     -----------------------------------
-    --local kupowerMMBEffect    = player:getStatusEffect(tpz.effect.KUPOWERS_MYRIAD_MYSTERY_BOXES)  -- Super Kupowers Myriad Mystery Boxes not implimented yet.
-    local casketProwessEffect = player:getStatusEffect(tpz.effect.PROWESS_CASKET_RATE)
+    --local kupowerMMBEffect    = player:getStatusEffect(xi.effect.KUPOWERS_MYRIAD_MYSTERY_BOXES)  -- Super Kupowers Myriad Mystery Boxes not implimented yet.
+    local casketProwessEffect = player:getStatusEffect(xi.effect.PROWESS_CASKET_RATE)
     local kupowersMMBPower    = 0
     local prowessCasketsPower = 0
 
-    --if player:hasStatusEffect(tpz.effect.KUPOWERS_MYRIAD_MYSTERY_BOXES) then                       -- Super Kupowers Myriad Mystery Boxes not implimented yet.
+    --if player:hasStatusEffect(xi.effect.KUPOWERS_MYRIAD_MYSTERY_BOXES) then                       -- Super Kupowers Myriad Mystery Boxes not implimented yet.
     --     kupowersMMBPower = kupowerMMBEffect:getPower()
     --end
 
-    if player:hasStatusEffect(tpz.effect.PROWESS_CASKET_RATE) then
+    if player:hasStatusEffect(xi.effect.PROWESS_CASKET_RATE) then
         prowessCasketsPower = casketProwessEffect:getPower()
     end
 
@@ -207,7 +207,7 @@ end
 -----------------------------------
 local function removeChest(npc)
     npc:setAnimationSub(0)
-    npc:setStatus(tpz.status.DISAPPEAR)
+    npc:setStatus(xi.status.DISAPPEAR)
     npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.DESPAWNED)
 end
 
@@ -225,7 +225,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     local attempts         = math.random(4, 6)
     local kupowersBonus    = 0
 
-    -- if player:hasStatusEffect(tpz.effect.KUPOWERS_MYRIAD_MYSTERY_BOXES) then    -- Super Kupowers Myriad Mystery Boxes not implimented yet.
+    -- if player:hasStatusEffect(xi.effect.KUPOWERS_MYRIAD_MYSTERY_BOXES) then    -- Super Kupowers Myriad Mystery Boxes not implimented yet.
     --     kupowersBonus = 0.2
     -- end
 
@@ -261,7 +261,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
         npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_CLOSED)
         npc:setLocalVar("[caskets]SPAWNTIME", os.time())
         npc:setPos(x, y, z, r)
-        npc:setStatus(tpz.status.NORMAL)
+        npc:setStatus(xi.status.NORMAL)
         npc:entityAnimationPacket("deru")
         npc:setModelId(chestStyle)
         sendChestDropMessage(player)
@@ -419,12 +419,12 @@ function getDrops(npc, dropType, zoneId)
         if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
             if mobLvl > 50 then
-                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsHi
+                tempDrops = xi.casket_loot.casketItems[zoneId].tempsHi
             else
-                tempDrops = tpz.casket_loot.casketItems[zoneId].tempsLow
+                tempDrops = xi.casket_loot.casketItems[zoneId].tempsLow
             end
         else
-            tempDrops = tpz.casket_loot.casketItems[zoneId].temps
+            tempDrops = xi.casket_loot.casketItems[zoneId].temps
         end
 
         tempCount = randomTable[math.random(1, #randomTable)]
@@ -464,12 +464,12 @@ function getDrops(npc, dropType, zoneId)
         if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
             if mobLvl > 50 then
-                drops = tpz.casket_loot.casketItems[zoneId].itemsHi
+                drops = xi.casket_loot.casketItems[zoneId].itemsHi
             else
-                drops = tpz.casket_loot.casketItems[zoneId].itemsLow
+                drops = xi.casket_loot.casketItems[zoneId].itemsLow
             end
         else
-            drops = tpz.casket_loot.casketItems[zoneId].items
+            drops = xi.casket_loot.casketItems[zoneId].items
         end
 
         itemCount = randomTable[math.random(1, #randomTable)]
@@ -495,7 +495,7 @@ function getDrops(npc, dropType, zoneId)
                 items[i] = 4112 -- default to potion
             else
                 if math.random() < 0.05 then
-                    items[1] = tpz.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #tpz.casket_loot.casketItems[zoneId].regionalItems)]
+                    items[1] = xi.casket_loot.casketItems[zoneId].regionalItems[math.random(1, # xi.casket_loot.casketItems[zoneId].regionalItems)]
                 else
                     items[i] = item
                 end
@@ -634,7 +634,7 @@ end
 -----------------------------------
 -- Desc: Casket spawn checks, runs through all checks before spawning
 -----------------------------------
-tpz.caskets.spawnCasket = function (player, mob, x, y, z, r)
+ xi.caskets.spawnCasket = function (player, mob, x, y, z, r)
     local chestId    = getCasketID(mob)
     local npc        = GetNPCByID(chestId)
     local chestOwner = player:getLeaderID()
@@ -651,7 +651,7 @@ end
 -----------------------------------
 -- Main public casket functions
 -----------------------------------
-tpz.caskets.onTrigger = function(player, npc)
+ xi.caskets.onTrigger = function(player, npc)
     -----------------------------------
     -- Basic chest var's
     -----------------------------------
@@ -716,7 +716,7 @@ end
 -- (e.g. its between 24 and 58) its usually a good idea to start with this clue.
 -- Multiple tools may be used, however there is a low rate of success after the first.
 -----------------------------------
-tpz.caskets.onTrade = function(player, npc, trade)
+ xi.caskets.onTrade = function(player, npc, trade)
     local zoneId            = player:getZoneID()
     local ID                = zones[zoneId]
     local baseMessage       = ID.text.PLAYER_OBTAINS_TEMP_ITEM
@@ -728,14 +728,14 @@ tpz.caskets.onTrade = function(player, npc, trade)
 
     -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get
     -- around this restriction. Strip invisible to make sure that case is covered.
-    player:delStatusEffect(tpz.effect.INVISIBLE)
+    player:delStatusEffect(xi.effect.INVISIBLE)
 
     if leaderId ~= chestOwner then
         return
     end
 
     if locked == 1 then
-        if player:getMainJob() == tpz.job.THF and npcUtil.tradeHasExactly(trade, 1022) then
+        if player:getMainJob() == xi.job.THF and npcUtil.tradeHasExactly(trade, 1022) then
             local splitNumbers = {}
             local tradeAttempt = math.random()
             local firstAttempt = npc:getLocalVar("[caskets]HINT_TRADE")
@@ -779,7 +779,7 @@ tpz.caskets.onTrade = function(player, npc, trade)
     end
 end
 
-tpz.caskets.onEventFinish = function(player, csid, option, npc)
+ xi.caskets.onEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local ID = zones[zoneId]
     local baseMessage = ID.text.PLAYER_OBTAINS_TEMP_ITEM
@@ -940,7 +940,7 @@ tpz.caskets.onEventFinish = function(player, csid, option, npc)
                            npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
                            -- RoE Timed Record #4019 - Crack Tresure Caskets
                            if player:getEminenceProgress(4019) then
-                               tpz.roe.onRecordTrigger(player, 4019)
+                                xi.roe.onRecordTrigger(player, 4019)
                            end
                         end
                     end

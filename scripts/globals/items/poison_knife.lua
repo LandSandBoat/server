@@ -12,13 +12,13 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.WATER, 0) <= 0.5) then
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0) <= 0.5) then
         return 0, 0, 0
     else
-        if (not target:hasStatusEffect(tpz.effect.POISON)) then
-            target:addStatusEffect(tpz.effect.POISON, 4, 3, 30)
+        if (not target:hasStatusEffect(xi.effect.POISON)) then
+            target:addStatusEffect(xi.effect.POISON, 4, 3, 30)
         end
-        return tpz.subEffect.POISON, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.POISON
+        return xi.subEffect.POISON, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.POISON
     end
 end
 

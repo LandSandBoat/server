@@ -20,10 +20,10 @@ entity.onTrigger = function(player, npc)
     local executorKill = player:getCharVar("Cryptonberry_Executor_KILL")
     local executor = GetMobByID(ID.mob.CRYPTONBERRY_EXECUTOR)
 
-    if cop == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and (k1 * k2 * k3 * executorKill) == 1 then
+    if cop == xi.mission.id.cop.CALM_BEFORE_THE_STORM and (k1 * k2 * k3 * executorKill) == 1 then
         player:startEvent(37)
     elseif
-        cop == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and
+        cop == xi.mission.id.cop.CALM_BEFORE_THE_STORM and
         executorKill < 2 and
         not executor:isSpawned() and
         not GetMobByID(ID.mob.CRYPTONBERRY_EXECUTOR + 1):isSpawned() and

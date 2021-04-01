@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MAJESTY
+-- xi.effect.MAJESTY
 -----------------------------------
 local effect_object = {}
 

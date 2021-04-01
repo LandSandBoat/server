@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(818) -- Offer Eco-Warrior quest
     elseif ecoStatus == 201 then
         player:startEvent(820) -- Reminder dialogue to talk to Ahko
-    elseif ecoStatus == 203 and player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) then
+    elseif ecoStatus == 203 and player:hasKeyItem(xi.ki.INDIGESTED_MEAT) then
         player:startEvent(822) -- Complete quest
     elseif ecoStatus ~= 0 and ecoStatus < 200 then
         player:startEvent(823) -- Already on a different nation's Eco-Warrior
@@ -37,18 +37,18 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 818 and option == 1 then
-        if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ECO_WARRIOR) == QUEST_AVAILABLE then
-            player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ECO_WARRIOR)
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR) == QUEST_AVAILABLE then
+            player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ECO_WARRIOR)
         end
         player:setCharVar("EcoStatus", 201) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
-    elseif csid == 822 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.ECO_WARRIOR, {
+    elseif csid == 822 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.ECO_WARRIOR, {
         gil = 5000,
         item = 4198,
-        title = tpz.title.EMERALD_EXTERMINATOR,
+        title = xi.title.EMERALD_EXTERMINATOR,
         fame = 80,
         var = "EcoStatus"
     }) then
-        player:delKeyItem(tpz.ki.INDIGESTED_MEAT)
+        player:delKeyItem(xi.ki.INDIGESTED_MEAT)
         player:setCharVar("EcoReset", getConquestTally())
     end
 end

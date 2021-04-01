@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         5299, 148,    -- Salsa
         1523, 316,    -- Apple Mint
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

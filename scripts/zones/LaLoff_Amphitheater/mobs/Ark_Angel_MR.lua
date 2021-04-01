@@ -10,10 +10,10 @@ local entity = {}
 -- TODO: Allegedly has a 12 hp/sec regen.  Determine if true, and add to onMobInitialize if so.
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.PERFECT_DODGE},
+            {id = xi.jsa.PERFECT_DODGE},
         },
     })
 end
@@ -29,7 +29,7 @@ entity.onMobEngaged = function(mob, target)
 
     for member = mobid-1, mobid+6 do
         local m = GetMobByID(member)
-        if m:getCurrentAction() == tpz.act.ROAMING then
+        if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
         end
     end

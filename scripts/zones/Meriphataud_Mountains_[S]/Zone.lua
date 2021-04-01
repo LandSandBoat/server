@@ -10,7 +10,7 @@ require("scripts/globals/status")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -30,9 +30,9 @@ zone_object.onGameHour = function(zone)
 
     if npc then
         if hour == 17 then
-            npc:setStatus(tpz.status.DISAPPEAR)
+            npc:setStatus(xi.status.DISAPPEAR)
         elseif hour == 7 then
-            npc:setStatus(tpz.status.NORMAL)
+            npc:setStatus(xi.status.NORMAL)
         end
     end
 end

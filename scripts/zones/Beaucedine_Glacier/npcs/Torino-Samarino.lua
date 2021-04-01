@@ -18,13 +18,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FoiledAGolem = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local FoiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
 
     -- QUEST: CURSES, FOILED A-GOLEM!?
-    if player:hasKeyItem(tpz.ki.SHANTOTTOS_EXSPELL) and FoiledAGolem == QUEST_ACCEPTED then
+    if player:hasKeyItem(xi.ki.SHANTOTTOS_EXSPELL) and FoiledAGolem == QUEST_ACCEPTED then
         player:startEvent(108) -- key item taken, wait one game day for new spell
     elseif player:getCharVar("golemwait") == 1 and FoiledAGolem == QUEST_ACCEPTED then
         local gDay = VanadielDayOfTheYear()
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(109) -- re-write done
         end
     elseif FoiledAGolem == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL) then
+        if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
             player:startEvent(105)
         elseif player:getCharVar("foiledagolemdeliverycomplete") == 1 then
             player:startEvent(110) -- talk to Shantotto reminder
@@ -52,7 +52,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(208) -- Talks about Ildy being passionate about his work
 
     -- CoP 5-2: DESIRES OF EMPTINESS
-    elseif copStatus > 8 and copMission == tpz.mission.id.cop.DESIRES_OF_EMPTINESS then
+    elseif copStatus > 8 and copMission == xi.mission.id.cop.DESIRES_OF_EMPTINESS then
         player:startEvent(211)
 
     -- DEFAULT DIALOG
@@ -67,16 +67,16 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- QUEST: CURSES, FOILED A-GOLEM!?
     if csid == 104 and option == 1 then
-        player:addKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
+        player:addKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
     elseif csid == 108 then                                       -- start wait for new scroll
-        player:delKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)
+        player:delKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
         player:setCharVar("golemday", VanadielDayOfTheYear())
         player:setCharVar("golemyear", VanadielYear())
         player:setCharVar("golemwait", 1)
     elseif csid == 109 then
-        player:addKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
+        player:addKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SHANTOTTOS_NEW_SPELL)  -- add new spell key item
         player:setCharVar("golemday", 0)
         player:setCharVar("golemyear", 0)
         player:setCharVar("golemwait", 0)

@@ -14,15 +14,15 @@ end
 entity.onTrigger = function(player, npc)
     local Hrandom =math.random()
 
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 0) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(24)
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(25)
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS  and  player:getCharVar("COP_Tenzen_s_Path") == 3) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS  and  player:getCharVar("COP_Tenzen_s_Path") == 3) then
         player:startEvent(58)
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG  and  player:getCharVar("PromathiaStatus") == 0) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG  and  player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(10046)
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.A_PLACE_TO_RETURN and player:getCharVar("PromathiaStatus") == 1) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.A_PLACE_TO_RETURN and player:getCharVar("PromathiaStatus") == 1) then
         if (Hrandom<0.2) then
             player:startEvent(27)
         elseif (Hrandom<0.6) then
@@ -30,9 +30,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(29)
         end
-    elseif (player:getCurrentMission(COP) == tpz.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS  and  player:getCharVar("PromathiaStatus") == 0) then
+    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS  and  player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(10049)
-    elseif (player:getCurrentMission(TOAU) == tpz.mission.id.toau.UNRAVELING_REASON) then
+    elseif (player:getCurrentMission(TOAU) == xi.mission.id.toau.UNRAVELING_REASON) then
         if (player:getCharVar("TOAUM40_STARTDAY") ~= VanadielDayOfTheYear() and player:needToZone() == false) then
             player:startEvent(10098, 0, 0, 0, 0, 0, 0, 0, 0)
         else

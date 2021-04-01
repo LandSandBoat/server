@@ -16,7 +16,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.DECOY_SHOT, 11, 1, 30)
+    target:addStatusEffect(xi.effect.DECOY_SHOT, 11, 1, 30)
 end
 
 return ability_object

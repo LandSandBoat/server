@@ -13,7 +13,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.MAAT, 0, 1)
+    target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.MAAT, 0, 1)
 end
 
 return item_object

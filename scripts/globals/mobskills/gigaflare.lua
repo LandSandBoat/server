@@ -30,14 +30,14 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("tauntShown", 0)
     mob:SetMobAbilityEnabled(true) -- enable the spells/other mobskills again
     mob:SetMagicCastingEnabled(true)
-    if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) == 0) then -- re-enable noturn
-        mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
+    if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) == 0) then -- re-enable noturn
+        mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
     end
 
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*15, tpz.magic.ele.FIRE, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*15, xi.magic.ele.FIRE, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
 end
 

@@ -9,8 +9,8 @@ local instance_object = {}
 
 instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
-    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, tpz.ki.EPHRAMADIAN_GOLD_COIN)
-    player:delKeyItem(tpz.ki.EPHRAMADIAN_GOLD_COIN)
+    player:messageSpecial(ID.text.FADES_INTO_NOTHINGNESS, xi.ki.EPHRAMADIAN_GOLD_COIN)
+    player:delKeyItem(xi.ki.EPHRAMADIAN_GOLD_COIN)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
@@ -22,7 +22,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -60,7 +60,7 @@ instance_object.onInstanceComplete = function(instance)
     end
 
     for i, player in pairs(players) do
-        if player:getCurrentMission(TOAU) == tpz.mission.id.toau.THE_BLACK_COFFIN and player:getCharVar("AhtUrganStatus") == 1 then
+        if player:getCurrentMission(TOAU) == xi.mission.id.toau.THE_BLACK_COFFIN and player:getCharVar("AhtUrganStatus") == 1 then
             player:setCharVar("AhtUrganStatus", 2)
         end
         player:startEvent(102)

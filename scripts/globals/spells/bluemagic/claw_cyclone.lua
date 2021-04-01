@@ -26,8 +26,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_ATTACK
-    params.attackType = tpz.attackType.PHYSICAL
-    params.damageType = tpz.damageType.SLASHING
+    params.attackType = xi.attackType.PHYSICAL
+    params.damageType = xi.damageType.SLASHING
     params.scattr = SC_SCISSION
     params.numhits = 2
     params.multiplier = 1.4375

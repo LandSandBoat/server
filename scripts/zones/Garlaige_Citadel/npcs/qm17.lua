@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(tpz.ki.POUCH_OF_WEIGHTED_STONES) == false) then
-        player:addKeyItem(tpz.ki.POUCH_OF_WEIGHTED_STONES)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.POUCH_OF_WEIGHTED_STONES)
+    if (player:hasKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES) == false) then
+        player:addKeyItem(xi.ki.POUCH_OF_WEIGHTED_STONES)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.POUCH_OF_WEIGHTED_STONES)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

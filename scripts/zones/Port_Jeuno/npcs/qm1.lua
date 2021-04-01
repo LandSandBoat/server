@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hasGauntlets = player:hasKeyItem(tpz.ki.OLD_GAUNTLETS)
-    local hasShadowFlames = player:hasKeyItem(tpz.ki.SHADOW_FLAMES)
+    local hasGauntlets = player:hasKeyItem(xi.ki.OLD_GAUNTLETS)
+    local hasShadowFlames = player:hasKeyItem(xi.ki.SHADOW_FLAMES)
     local borghertzCS = player:getCharVar("BorghertzCS")
 
     if hasGauntlets and not hasShadowFlames and borghertzCS == 1 then
@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BorghertzCS", 2)
     elseif csid == 48 then
         local questJob = player:getCharVar("BorghertzAlreadyActiveWithJob")
-        local quest = tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + questJob - 1
+        local quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + questJob - 1
         local reward = 13960 + questJob
 
         if
@@ -44,8 +44,8 @@ entity.onEventFinish = function(player, csid, option)
                 var = {"BorghertzCS", "BorghertzAlreadyActiveWithJob"},
             })
         then
-            player:delKeyItem(tpz.ki.OLD_GAUNTLETS)
-            player:delKeyItem(tpz.ki.SHADOW_FLAMES)
+            player:delKeyItem(xi.ki.OLD_GAUNTLETS)
+            player:delKeyItem(xi.ki.SHADOW_FLAMES)
         end
     end
 end

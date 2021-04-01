@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CHAINBOUND
+-- xi.effect.CHAINBOUND
 -----------------------------------
 local effect_object = {}
 

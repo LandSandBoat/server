@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    KazhPass = player:hasKeyItem(tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    KazhPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
     Gil = player:getGil()
 
     if (KazhPass == false) then

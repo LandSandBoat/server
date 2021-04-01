@@ -17,9 +17,9 @@ end
 entity.onTrigger = function(player, npc)
     if ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30 then
         if
-            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
-            player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
-            tpz.abyssea.getTravStonesTotal(player) >= 1
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED and
+            player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER) == QUEST_AVAILABLE and
+            xi.abyssea.getTravStonesTotal(player) >= 1
         then
             player:startEvent(0)
         else
@@ -35,7 +35,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 0 then
-        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_BEAKED_BLUSTERER)
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_BEAKED_BLUSTERER)
     elseif csid == 1 then
         -- Killed Bennu
     elseif csid == 914 and option == 1 then

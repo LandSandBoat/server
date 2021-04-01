@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.WALLHACK
+local flags = xi.path.flag.WALLHACK
 local path =
 {
         {149.587, -0.293, -526.395},
@@ -27,19 +27,19 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.SLASHRES, 0)
-    mob:setMod(tpz.mod.PIERCERES, 1500)
-    tpz.mix.jobSpecial.config(mob, {
+    mob:setMod(xi.mod.SLASHRES, 0)
+    mob:setMod(xi.mod.PIERCERES, 1500)
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.HUNDRED_FISTS, hpp = 50},
+            {id = xi.jsa.HUNDRED_FISTS, hpp = 50},
         },
     })
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[2])
+        xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SE_PORTAL[2])
     end
 end
 

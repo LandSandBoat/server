@@ -13,14 +13,14 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.DEDICATION) == true) then
+    if (target:hasStatusEffect(xi.effect.DEDICATION) == true) then
         result = 56
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.DEDICATION, 100, 0, 86400, 0, 6000)
+    target:addStatusEffect(xi.effect.DEDICATION, 100, 0, 86400, 0, 6000)
 end
 
 return item_object

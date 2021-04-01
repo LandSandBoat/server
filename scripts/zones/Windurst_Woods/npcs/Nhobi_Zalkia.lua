@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.KUZOTZ)
-    if RegionOwner ~= tpz.nation.WINDURST then
+    local RegionOwner = GetRegionOwner(xi.region.KUZOTZ)
+    if RegionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.NHOBI_ZALKIA_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.NHOBI_ZALKIA_OPEN_DIALOG)
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             4412,  299,  -- Thundermelon
             4491,  184   -- Watermelon
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
     end
 end
 

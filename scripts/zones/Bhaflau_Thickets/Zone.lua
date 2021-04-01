@@ -11,14 +11,14 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
     GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
 
-    tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -26,7 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-100, -13.5, -479.514, 60)
     end
-    if (prevZone == tpz.zone.MAMOOL_JA_TRAINING_GROUNDS) then
+    if (prevZone == xi.zone.MAMOOL_JA_TRAINING_GROUNDS) then
         player:setPos(-186, -10, -802, 80)
     end
     return cs

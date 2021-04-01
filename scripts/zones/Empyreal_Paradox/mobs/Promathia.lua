@@ -10,8 +10,8 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.REGAIN, 50)
-    mob:addMod(tpz.mod.UFASTCAST, 50)
+    mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.UFASTCAST, 50)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -30,7 +30,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
+    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(xi.effect.STUN) then
         mob:setAnimationSub(0)
         mob:stun(1500)
     end

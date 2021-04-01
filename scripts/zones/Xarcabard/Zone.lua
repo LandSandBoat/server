@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -22,7 +22,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     local UnbridledPassionCS = player:getCharVar("unbridledPassion")
 
-    if prevZone == tpz.zone.DYNAMIS_XARCABARD then -- warp player to a correct position after dynamis
+    if prevZone == xi.zone.DYNAMIS_XARCABARD then -- warp player to a correct position after dynamis
         player:setPos(569.312, -0.098, -270.158, 90)
     end
 
@@ -31,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if
-        not player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
+        not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
         player:getRank() >= 6 and
         player:getMainLvl() >= 65 and
         not utils.mask.getBit(dynamisMask, 0)
@@ -41,7 +41,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 9
     elseif UnbridledPassionCS == 3 then
         cs = 4
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 11
     end
 
@@ -49,7 +49,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -59,7 +59,7 @@ zone_object.onEventUpdate = function(player, csid, option)
     if csid == 9 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 11 then
-        if player:getPreviousZone() == tpz.zone.BEAUCEDINE_GLACIER then
+        if player:getPreviousZone() == xi.zone.BEAUCEDINE_GLACIER then
             player:updateEvent(0, 0, 0, 0, 0, 2)
         else
             player:updateEvent(0, 0, 0, 0, 0, 3)

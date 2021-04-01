@@ -194,9 +194,9 @@ entity.onTrigger = function(player, npc)
     --cs 904 - give coffee
     --cs 905 - head complete
 
-    local NoStringsAttached = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
+    local NoStringsAttached = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)
     local NoStringsAttachedProgress = player:getCharVar("NoStringsAttachedProgress")
-    local Automaton = player:hasKeyItem(tpz.ki.ANTIQUE_AUTOMATON)
+    local Automaton = player:hasKeyItem(xi.ki.ANTIQUE_AUTOMATON)
     local automatonName = player:getAutomatonName()
     local CreationStarted_Day = player:getCharVar("CreationStarted_Day")
     local currentDay = VanadielDayOfTheYear()
@@ -238,7 +238,7 @@ entity.onTrigger = function(player, npc)
         elseif NoStringsAttachedProgress == 5 and CreationReady == true then
             player:startEvent(265) -- you go back for your automaton
         end
-    elseif NoStringsAttached == QUEST_COMPLETED and player:getMainJob() == tpz.job.PUP then
+    elseif NoStringsAttached == QUEST_COMPLETED and player:getMainJob() == xi.job.PUP then
         if attachments == 0 and attachmentStatus == 0 and playerLvl >= 10 then
             player:startEventString(620, automatonName, automatonName, automatonName, automatonName, attachments, 0, 0, 0, 0, 2185, 3, unlockedAttachments)
         elseif attachments == 0 and attachmentStatus == 1 then
@@ -323,7 +323,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("CreationStarted_Day", VanadielDayOfTheYear())
         player:setCharVar("CreationStarted_Year", VanadielYear())
         player:setCharVar("NoStringsAttachedProgress", 5)
-        player:delKeyItem(tpz.ki.ANTIQUE_AUTOMATON)
+        player:delKeyItem(xi.ki.ANTIQUE_AUTOMATON)
     elseif csid == 265 then
         player:setCharVar("NoStringsAttachedProgress", 6)
         player:setCharVar("CreationStarted_Day", 0)

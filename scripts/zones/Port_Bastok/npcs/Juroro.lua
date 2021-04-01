@@ -16,9 +16,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialByEarth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
-    local WhisperOfTremors = player:hasKeyItem(tpz.ki.WHISPER_OF_TREMORS)
-    local ThePuppetMaster = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+    local TrialByEarth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+    local WhisperOfTremors = player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+    local ThePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
     local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
 
     if (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 1) then
@@ -28,11 +28,11 @@ entity.onTrigger = function(player, npc)
     elseif (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 3) then
         player:startEvent(258)
     elseif ((TrialByEarth == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 6) or (TrialByEarth == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByEarth_date"))) then
-        player:startEvent(249, 0, tpz.ki.TUNING_FORK_OF_EARTH) -- Start and restart quest "Trial by Earth"
-    elseif (TrialByEarth == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_EARTH) == false and WhisperOfTremors == false) then
-        player:startEvent(284, 0, tpz.ki.TUNING_FORK_OF_EARTH) -- Defeat against Titan : Need new Fork
+        player:startEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Start and restart quest "Trial by Earth"
+    elseif (TrialByEarth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) == false and WhisperOfTremors == false) then
+        player:startEvent(284, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Defeat against Titan : Need new Fork
     elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors == false) then
-        player:startEvent(250, 0, tpz.ki.TUNING_FORK_OF_EARTH, 1)
+        player:startEvent(250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1)
     elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors) then
         numitem = 0
 
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
         if (player:hasItem(1205)) then numitem = numitem + 8; end   -- Desert Light
         if (player:hasSpell(299)) then numitem = numitem + 32; end  -- Ability to summon Titan
 
-        player:startEvent(252, 0, tpz.ki.TUNING_FORK_OF_EARTH, 1, 0, numitem)
+        player:startEvent(252, 0, xi.ki.TUNING_FORK_OF_EARTH, 1, 0, numitem)
     else
         player:startEvent(253) -- Standard dialog
     end
@@ -72,16 +72,16 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 258) then
         player:setCharVar("ThePuppetMasterProgress", 4)
     elseif (csid == 249 and option == 1) then
-        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
-            player:delQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED) then
+            player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         end
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         player:setCharVar("TrialByEarth_date", 0)
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_EARTH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_EARTH)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_EARTH)
     elseif (csid == 284) then
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_EARTH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_EARTH)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_EARTH)
     elseif (csid == 252) then
         local item = 0
         if (option == 1) then item = 17438         -- Titan's Cudgel
@@ -103,11 +103,11 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
-            player:addTitle(tpz.title.HEIR_OF_THE_GREAT_EARTH)
-            player:delKeyItem(tpz.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
+            player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
+            player:delKeyItem(xi.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
             player:setCharVar("TrialByEarth_date", getMidnight())
             player:addFame(BASTOK, 30)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRIAL_BY_EARTH)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         end
     end
 

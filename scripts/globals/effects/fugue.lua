@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FUGUE
+-- xi.effect.FUGUE
 -----------------------------------
 local effect_object = {}
 

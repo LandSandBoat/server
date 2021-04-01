@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CELERITY
+-- xi.effect.CELERITY
 -----------------------------------
 local effect_object = {}
 

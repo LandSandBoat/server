@@ -13,28 +13,28 @@ local WYVERN_MULTI = 3
 
 local wyvernTypes =
 {
-    [tpz.job.WAR] = WYVERN_OFFENSIVE,
-    [tpz.job.MNK] = WYVERN_OFFENSIVE,
-    [tpz.job.WHM] = WYVERN_DEFENSIVE,
-    [tpz.job.BLM] = WYVERN_DEFENSIVE,
-    [tpz.job.RDM] = WYVERN_DEFENSIVE,
-    [tpz.job.THF] = WYVERN_OFFENSIVE,
-    [tpz.job.PLD] = WYVERN_MULTI,
-    [tpz.job.DRK] = WYVERN_MULTI,
-    [tpz.job.BST] = WYVERN_OFFENSIVE,
-    [tpz.job.BRD] = WYVERN_MULTI,
-    [tpz.job.RNG] = WYVERN_OFFENSIVE,
-    [tpz.job.SAM] = WYVERN_OFFENSIVE,
-    [tpz.job.NIN] = WYVERN_MULTI,
-    [tpz.job.DRG] = WYVERN_OFFENSIVE,
-    [tpz.job.SMN] = WYVERN_DEFENSIVE,
-    [tpz.job.BLU] = WYVERN_DEFENSIVE,
-    [tpz.job.COR] = WYVERN_OFFENSIVE,
-    [tpz.job.PUP] = WYVERN_OFFENSIVE,
-    [tpz.job.DNC] = WYVERN_OFFENSIVE,
-    [tpz.job.SCH] = WYVERN_DEFENSIVE,
-    [tpz.job.GEO] = WYVERN_DEFENSIVE,
-    [tpz.job.RUN] = WYVERN_MULTI,
+    [ xi.job.WAR] = WYVERN_OFFENSIVE,
+    [ xi.job.MNK] = WYVERN_OFFENSIVE,
+    [ xi.job.WHM] = WYVERN_DEFENSIVE,
+    [ xi.job.BLM] = WYVERN_DEFENSIVE,
+    [ xi.job.RDM] = WYVERN_DEFENSIVE,
+    [ xi.job.THF] = WYVERN_OFFENSIVE,
+    [ xi.job.PLD] = WYVERN_MULTI,
+    [ xi.job.DRK] = WYVERN_MULTI,
+    [ xi.job.BST] = WYVERN_OFFENSIVE,
+    [ xi.job.BRD] = WYVERN_MULTI,
+    [ xi.job.RNG] = WYVERN_OFFENSIVE,
+    [ xi.job.SAM] = WYVERN_OFFENSIVE,
+    [ xi.job.NIN] = WYVERN_MULTI,
+    [ xi.job.DRG] = WYVERN_OFFENSIVE,
+    [ xi.job.SMN] = WYVERN_DEFENSIVE,
+    [ xi.job.BLU] = WYVERN_DEFENSIVE,
+    [ xi.job.COR] = WYVERN_OFFENSIVE,
+    [ xi.job.PUP] = WYVERN_OFFENSIVE,
+    [ xi.job.DNC] = WYVERN_OFFENSIVE,
+    [ xi.job.SCH] = WYVERN_DEFENSIVE,
+    [ xi.job.GEO] = WYVERN_DEFENSIVE,
+    [ xi.job.RUN] = WYVERN_MULTI,
 }
 
 local function doHealingBreath(player, threshold, breath)
@@ -60,16 +60,16 @@ local function doStatusBreath(target, player)
     local usedBreath = true
     local wyvern = player:getPet()
 
-    if target:hasStatusEffect(tpz.effect.POISON) then
-        wyvern:useJobAbility(tpz.jobAbility.REMOVE_POISON, target)
-    elseif target:hasStatusEffect(tpz.effect.BLINDNESS) and wyvern:getMainLvl() > 20 then
-        wyvern:useJobAbility(tpz.jobAbility.REMOVE_BLINDNESS, target)
-    elseif target:hasStatusEffect(tpz.effect.PARALYSIS) and wyvern:getMainLvl() > 40 then
-        wyvern:useJobAbility(tpz.jobAbility.REMOVE_PARALYSIS, target)
-    elseif (target:hasStatusEffect(tpz.effect.CURSE_I) or target:hasStatusEffect(tpz.effect.DOOM)) and wyvern:getMainLvl() > 60 then
-        wyvern:useJobAbility(tpz.jobAbility.REMOVE_CURSE, target)
-    elseif (target:hasStatusEffect(tpz.effect.DISEASE) or target:hasStatusEffect(tpz.effect.PLAGUE)) and wyvern:getMainLvl() > 80 then
-        wyvern:useJobAbility(tpz.jobAbility.REMOVE_DISEASE, target)
+    if target:hasStatusEffect(xi.effect.POISON) then
+        wyvern:useJobAbility(xi.jobAbility.REMOVE_POISON, target)
+    elseif target:hasStatusEffect(xi.effect.BLINDNESS) and wyvern:getMainLvl() > 20 then
+        wyvern:useJobAbility(xi.jobAbility.REMOVE_BLINDNESS, target)
+    elseif target:hasStatusEffect(xi.effect.PARALYSIS) and wyvern:getMainLvl() > 40 then
+        wyvern:useJobAbility(xi.jobAbility.REMOVE_PARALYSIS, target)
+    elseif (target:hasStatusEffect(xi.effect.CURSE_I) or target:hasStatusEffect(xi.effect.DOOM)) and wyvern:getMainLvl() > 60 then
+        wyvern:useJobAbility(xi.jobAbility.REMOVE_CURSE, target)
+    elseif (target:hasStatusEffect(xi.effect.DISEASE) or target:hasStatusEffect(xi.effect.PLAGUE)) and wyvern:getMainLvl() > 80 then
+        wyvern:useJobAbility(xi.jobAbility.REMOVE_DISEASE, target)
     else
         usedBreath = false
     end
@@ -79,20 +79,20 @@ end
 
 entity.onMobSpawn = function(mob)
     local master = mob:getMaster()
-    local strafe_trait = master:getMod(tpz.mod.WYVERN_BREATH_MACC)
-    local strafe_effect_merit = master:getMerit(tpz.merit.STRAFE_EFFECT)
+    local strafe_trait = master:getMod(xi.mod.WYVERN_BREATH_MACC)
+    local strafe_effect_merit = master:getMerit(xi.merit.STRAFE_EFFECT)
     
-    mob:addMod(tpz.mod.DMG, -40)
-    mob:addMod(tpz.mod.MACC, strafe_trait + strafe_effect_merit)
+    mob:addMod(xi.mod.DMG, -40)
+    mob:addMod(xi.mod.MACC, strafe_trait + strafe_effect_merit)
 
-    if master:getMod(tpz.mod.WYVERN_SUBJOB_TRAITS) > 0 then
+    if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 then
         mob:addJobTraits(master:getSubJob(), master:getSubLvl())
     end
     local wyvernType = wyvernTypes[master:getSubJob()]
-    local healingbreath = tpz.jobAbility.HEALING_BREATH
-    if mob:getMainLvl() >= 80 then healingbreath = tpz.jobAbility.HEALING_BREATH_IV
-    elseif mob:getMainLvl() >= 40 then healingbreath = tpz.jobAbility.HEALING_BREATH_III
-    elseif mob:getMainLvl() >= 20 then healingbreath = tpz.jobAbility.HEALING_BREATH_II
+    local healingbreath = xi.jobAbility.HEALING_BREATH
+    if mob:getMainLvl() >= 80 then healingbreath = xi.jobAbility.HEALING_BREATH_IV
+    elseif mob:getMainLvl() >= 40 then healingbreath = xi.jobAbility.HEALING_BREATH_III
+    elseif mob:getMainLvl() >= 20 then healingbreath = xi.jobAbility.HEALING_BREATH_II
     end
     if wyvernType == WYVERN_DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
@@ -105,11 +105,11 @@ entity.onMobSpawn = function(mob)
                 end
             end
         end)
-        if master:getSubJob() ~= tpz.job.SMN then
+        if master:getSubJob() ~= xi.job.SMN then
             master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
                 -- check master first!
                 local threshold = 33
-                if player:getMod(tpz.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
+                if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                     threshold = 50
                 end
                 doHealingBreath(player, threshold, healingbreath)
@@ -119,27 +119,27 @@ entity.onMobSpawn = function(mob)
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             local weaknessTargetChance = 75
             local breaths = {}
-            if player:getMod(tpz.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
+            if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 weaknessTargetChance = 100
             end
             if math.random(100) <= weaknessTargetChance then
                 local breathList =
                 {
-                    tpz.jobAbility.FLAME_BREATH,
-                    tpz.jobAbility.FROST_BREATH,
-                    tpz.jobAbility.GUST_BREATH,
-                    tpz.jobAbility.SAND_BREATH,
-                    tpz.jobAbility.LIGHTNING_BREATH,
-                    tpz.jobAbility.HYDRO_BREATH,
+                    xi.jobAbility.FLAME_BREATH,
+                    xi.jobAbility.FROST_BREATH,
+                    xi.jobAbility.GUST_BREATH,
+                    xi.jobAbility.SAND_BREATH,
+                    xi.jobAbility.LIGHTNING_BREATH,
+                    xi.jobAbility.HYDRO_BREATH,
                 }
                 local resistances =
                 {
-                    target:getMod(tpz.mod.FIRERES),
-                    target:getMod(tpz.mod.ICERES),
-                    target:getMod(tpz.mod.WINDRES),
-                    target:getMod(tpz.mod.EARTHRES),
-                    target:getMod(tpz.mod.THUNDERRES),
-                    target:getMod(tpz.mod.WATERRES),
+                    target:getMod(xi.mod.FIRERES),
+                    target:getMod(xi.mod.ICERES),
+                    target:getMod(xi.mod.WINDRES),
+                    target:getMod(xi.mod.EARTHRES),
+                    target:getMod(xi.mod.THUNDERRES),
+                    target:getMod(xi.mod.WATERRES),
                 }
                 local lowest = resistances[1]
                 local breath = breathList[1]
@@ -153,12 +153,12 @@ entity.onMobSpawn = function(mob)
             else
                 breaths =
                 {
-                    tpz.jobAbility.FLAME_BREATH,
-                    tpz.jobAbility.FROST_BREATH,
-                    tpz.jobAbility.GUST_BREATH,
-                    tpz.jobAbility.SAND_BREATH,
-                    tpz.jobAbility.LIGHTNING_BREATH,
-                    tpz.jobAbility.HYDRO_BREATH,
+                    xi.jobAbility.FLAME_BREATH,
+                    xi.jobAbility.FROST_BREATH,
+                    xi.jobAbility.GUST_BREATH,
+                    xi.jobAbility.SAND_BREATH,
+                    xi.jobAbility.LIGHTNING_BREATH,
+                    xi.jobAbility.HYDRO_BREATH,
                 }
             end
             player:getPet():useJobAbility(breaths[math.random(#breaths)], target)
@@ -168,7 +168,7 @@ entity.onMobSpawn = function(mob)
         master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
             -- check master first!
             local threshold = 25
-            if player:getMod(tpz.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
+            if player:getMod(xi.mod.WYVERN_EFFECTIVE_BREATH) > 0 then
                 threshold = 33
             end
             doHealingBreath(player, threshold, healingbreath)
@@ -198,14 +198,14 @@ entity.onMobSpawn = function(mob)
             local diff = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
             if diff ~= 0 then
                 -- wyvern levelled up (diff is the number of level ups)
-                pet:addMod(tpz.mod.ACC, 6 * diff)
-                pet:addMod(tpz.mod.HPP, 6 * diff)
-                pet:addMod(tpz.mod.ATTP, 5 * diff)
+                pet:addMod(xi.mod.ACC, 6 * diff)
+                pet:addMod(xi.mod.HPP, 6 * diff)
+                pet:addMod(xi.mod.ATTP, 5 * diff)
                 pet:setHP(pet:getMaxHP())
-                player:messageBasic(tpz.msg.basic.STATUS_INCREASED, 0, 0, pet)
-                master:addMod(tpz.mod.ATTP, 4 * diff)
-                master:addMod(tpz.mod.DEFP, 4 * diff)
-                master:addMod(tpz.mod.HASTE_ABILITY, 200 * diff)
+                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
+                master:addMod(xi.mod.ATTP, 4 * diff)
+                master:addMod(xi.mod.DEFP, 4 * diff)
+                master:addMod(xi.mod.HASTE_ABILITY, 200 * diff)
             end
             pet:setLocalVar("wyvern_exp", prev_exp + exp)
             pet:setLocalVar("level_Ups", pet:getLocalVar("level_Ups") + diff)
@@ -217,9 +217,9 @@ entity.onMobDeath = function(mob, player)
     local master = mob:getMaster()
     local numLvls = mob:getLocalVar("level_Ups")
     if numLvls ~= 0 then
-        master:delMod(tpz.mod.ATTP, 4 * numLvls)
-        master:delMod(tpz.mod.DEFP, 4 * numLvls)
-        master:delMod(tpz.mod.HASTE_ABILITY, 200 * numLvls)
+        master:delMod(xi.mod.ATTP, 4 * numLvls)
+        master:delMod(xi.mod.DEFP, 4 * numLvls)
+        master:delMod(xi.mod.HASTE_ABILITY, 200 * numLvls)
     end
     master:removeListener("PET_WYVERN_WS")
     master:removeListener("PET_WYVERN_MAGIC")

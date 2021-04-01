@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.DELKFUTT_KEY) then
+    if player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
         player:startEvent(16)
     else
         player:startEvent(10) -- door is firmly shut
@@ -29,8 +29,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 16 and option == 1 then
-        if not player:hasKeyItem(tpz.ki.DELKFUTT_KEY) then
-            npcUtil.giveKeyItem(player, tpz.ki.DELKFUTT_KEY)
+        if not player:hasKeyItem(xi.ki.DELKFUTT_KEY) then
+            npcUtil.giveKeyItem(player, xi.ki.DELKFUTT_KEY)
             player:confirmTrade()
         end
     end

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FUTAE
+-- xi.effect.FUTAE
 -----------------------------------
 local effect_object = {}
 

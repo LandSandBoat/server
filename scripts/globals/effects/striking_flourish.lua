@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.STRIKING_FLOURISH
+-- xi.effect.STRIKING_FLOURISH
 -----------------------------------
 local effect_object = {}
 

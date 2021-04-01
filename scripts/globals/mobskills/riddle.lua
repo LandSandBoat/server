@@ -17,7 +17,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.MAX_MP_DOWN
+    local typeEffect = xi.effect.MAX_MP_DOWN
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 42, 0, 120))
 

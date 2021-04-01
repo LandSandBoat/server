@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BURST_AFFINITY
+-- xi.effect.BURST_AFFINITY
 -----------------------------------
 local effect_object = {}
 

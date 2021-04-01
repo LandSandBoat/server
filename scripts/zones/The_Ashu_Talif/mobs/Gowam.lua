@@ -9,15 +9,15 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(tpz.mod.SLEEPRES, 150)
-    mob:addMod(tpz.mod.SILENCERES, 150)
+    mob:addMod(xi.mod.SLEEPRES, 150)
+    mob:addMod(xi.mod.SILENCERES, 150)
 end
 
 entity.onMobFight = function(mob, target)
-    if (mob:hasStatusEffect(tpz.effect.AZURE_LORE))then
-        mob:setMobMod(tpz.mobMod.MAGIC_COOL, 0)
+    if (mob:hasStatusEffect(xi.effect.AZURE_LORE))then
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 0)
     else
-        mob:setMobMod(tpz.mobMod.MAGIC_COOL, 20)
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     end
 end
 

@@ -13,7 +13,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    player:addKeyItem(tpz.ki.MAP_OF_ABDH_ISLE_PURGONORGO)
+    player:addKeyItem(xi.ki.MAP_OF_ABDH_ISLE_PURGONORGO)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(521.600, -3.000, 563.000, 64)

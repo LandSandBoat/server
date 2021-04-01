@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.COSTUME
+-- xi.effect.COSTUME
 -----------------------------------
 local effect_object = {}
 

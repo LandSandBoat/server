@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MAX_TP_DOWN
+-- xi.effect.MAX_TP_DOWN
 -----------------------------------
 local effect_object = {}
 

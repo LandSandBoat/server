@@ -17,9 +17,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TCCOM = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
-    local TCCOM_Need_KI = player:hasKeyItem(tpz.ki.MELVIENS_TURN) and not player:hasKeyItem(tpz.ki.MELVIENS_DEATH)
-    local Order_Up = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
+    local TCCOM = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_CURIOUS_CASE_OF_MELVIEN)
+    local TCCOM_Need_KI = player:hasKeyItem(xi.ki.MELVIENS_TURN) and not player:hasKeyItem(xi.ki.MELVIENS_DEATH)
+    local Order_Up = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
     local Order_Mastan = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 11)
 
     if Order_Up == QUEST_ACCEPTED and not Order_Mastan then
@@ -43,8 +43,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("Order_Up_NPCs", utils.mask.setBit(player:getCharVar("Order_Up_NPCs"), 11, true))
     elseif csid == 184 and option == 1 then
         -- Progresses Quest: 'The Curious Case of Melvien'
-        player:addKeyItem(tpz.ki.MELVIENS_DEATH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MELVIENS_DEATH)
+        player:addKeyItem(xi.ki.MELVIENS_DEATH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MELVIENS_DEATH)
     end
 end
 

@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.MANA_CEDE, 15, 1, 1)
+    target:addStatusEffect(xi.effect.MANA_CEDE, 15, 1, 1)
 end
 
 return ability_object

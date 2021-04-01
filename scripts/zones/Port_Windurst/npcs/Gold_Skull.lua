@@ -14,15 +14,15 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(BASTOK) ~= tpz.mission.id.bastok.NONE) then
+    if (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
         currentMission = player:getCurrentMission(BASTOK)
         missionStatus = player:getCharVar("MissionStatus")
 
-        if (player:hasKeyItem(tpz.ki.SWORD_OFFERING)) then
+        if (player:hasKeyItem(xi.ki.SWORD_OFFERING)) then
             player:startEvent(53)
-        elseif (player:hasKeyItem(tpz.ki.KINDRED_REPORT)) then
+        elseif (player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
             player:startEvent(68)
-        elseif (currentMission == tpz.mission.id.bastok.THE_EMISSARY_WINDURST2) then
+        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST2) then
             if (missionStatus == 7) then
                 player:startEvent(62)
             elseif (missionStatus == 8) then
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             elseif (missionStatus == 9) then
                 player:startEvent(57)
             end
-        elseif (currentMission == tpz.mission.id.bastok.THE_EMISSARY_WINDURST) then
+        elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY_WINDURST) then
             if (missionStatus == 2) then
                 player:startEvent(50)
             elseif (missionStatus == 12) then
@@ -53,9 +53,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 53) then
-        player:addKeyItem(tpz.ki.DULL_SWORD)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DULL_SWORD)
-        player:delKeyItem(tpz.ki.SWORD_OFFERING)
+        player:addKeyItem(xi.ki.DULL_SWORD)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DULL_SWORD)
+        player:delKeyItem(xi.ki.SWORD_OFFERING)
     end
 
 end

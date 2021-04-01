@@ -15,9 +15,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local makingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
-    local cursesFoiledAgain1 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-    local cursesFoiledAgain2 = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
+    local cursesFoiledAgain1 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
+    local cursesFoiledAgain2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
     -- Curses, Foiled ... Again!?
     if cursesFoiledAgain2 == QUEST_ACCEPTED and not player:hasItem(552) then
@@ -71,7 +71,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- Making Headlines
     if csid == 281 or csid == 283 or csid == 284 then
-        npcUtil.giveKeyItem(player, tpz.ki.WINDURST_WALLS_SCOOP)
+        npcUtil.giveKeyItem(player, xi.ki.WINDURST_WALLS_SCOOP)
         player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 2, true))
 
     -- Curses, Foiled...Again!?

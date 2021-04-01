@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if npc:getAnimation() == tpz.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         if player:getZPos() > 137 then
             npc:openDoor(3.2)
         else

@@ -15,17 +15,17 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if not target:hasStatusEffect(tpz.effect.DEODORIZE) then
+    if not target:hasStatusEffect(xi.effect.DEODORIZE) then
         local duration = calculateDuration(math.random(420, 540), spell:getSkillType(), spell:getSpellGroup(), caster, target)
         duration = calculateDurationForLvl(duration, 15, target:getMainLvl())
 
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
-        target:addStatusEffect(tpz.effect.DEODORIZE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
+        target:addStatusEffect(xi.effect.DEODORIZE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.DEODORIZE
+    return xi.effect.DEODORIZE
 end
 
 return spell_object

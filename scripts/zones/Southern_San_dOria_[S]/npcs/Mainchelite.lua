@@ -32,13 +32,13 @@ entity.onTrigger = function(player, npc)
     local Allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
-    local TheFightingFourth = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local SnakeOnThePlains = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local SteamedRams = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
-    local RedLetter = player:hasKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
-    local CharredPropeller = player:hasKeyItem(tpz.ki.CHARRED_PROPELLER)
-    local OxidizedPlate = player:hasKeyItem(tpz.ki.OXIDIZED_PLATE)
-    local ShatteredLumber = player:hasKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
+    local TheFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+    local SnakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local SteamedRams = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+    local RedLetter = player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
+    local CharredPropeller = player:hasKeyItem(xi.ki.CHARRED_PROPELLER)
+    local OxidizedPlate = player:hasKeyItem(xi.ki.OXIDIZED_PLATE)
+    local ShatteredLumber = player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
 
     if (TheFightingFourth == QUEST_ACCEPTED or SnakeOnThePlains == QUEST_ACCEPTED) then
         player:startEvent(9)
@@ -62,32 +62,32 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 7 and option == 0) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
         player:setCharVar("RED_R_LETTER_USED", 1)
-        player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
+        player:delKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 7 and option == 1) then
         player:setCharVar("RED_R_LETTER_USED", 1)
-        player:delKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER)
+        player:delKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
     elseif (csid == 8 and option == 0) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 10 and option == 0) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 11 and option == 0) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     elseif (csid == 12 and option == 0) then
         -- Is first join, so add Sprinter's Shoes and bronze medal
         if (player:getCharVar("Campaign_Nation") == 0) then
             if (player:getFreeSlotsCount() >= 1) then
                 player:setCampaignAllegiance(1)
                 player:setCharVar("RED_R_LETTER_USED", 0)
-                player:addTitle(tpz.title.KNIGHT_OF_THE_IRON_RAM)
-                player:addKeyItem(tpz.ki.BRONZE_RIBBON_OF_SERVICE)
+                player:addTitle(xi.title.KNIGHT_OF_THE_IRON_RAM)
+                player:addKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:addItem(15754)
-                player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
-                player:delKeyItem(tpz.ki.CHARRED_PROPELLER)
-                player:delKeyItem(tpz.ki.OXIDIZED_PLATE)
-                player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BRONZE_RIBBON_OF_SERVICE)
+                player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+                player:delKeyItem(xi.ki.CHARRED_PROPELLER)
+                player:delKeyItem(xi.ki.OXIDIZED_PLATE)
+                player:delKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
+                player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRONZE_RIBBON_OF_SERVICE)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 15754)
             else
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 15754)
@@ -95,14 +95,14 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:setCampaignAllegiance(1)
             player:setCharVar("RED_R_LETTER_USED", 0)
-            player:addTitle(tpz.title.KNIGHT_OF_THE_IRON_RAM)
-            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
-            player:delKeyItem(tpz.ki.CHARRED_PROPELLER)
-            player:delKeyItem(tpz.ki.OXIDIZED_PLATE)
-            player:delKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
+            player:addTitle(xi.title.KNIGHT_OF_THE_IRON_RAM)
+            player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+            player:delKeyItem(xi.ki.CHARRED_PROPELLER)
+            player:delKeyItem(xi.ki.OXIDIZED_PLATE)
+            player:delKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
         end
     elseif (csid == 13 and option == 1) then
-        player:delQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS)
+        player:delQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     end
 end
 

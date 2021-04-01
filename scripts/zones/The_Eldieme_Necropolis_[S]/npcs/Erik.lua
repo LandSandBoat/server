@@ -17,8 +17,8 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION) == QUEST_ACCEPTED
-        and not player:hasKeyItem(tpz.ki.LEFT_MAP_PIECE)
+        player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION) == QUEST_ACCEPTED
+        and not player:hasKeyItem(xi.ki.LEFT_MAP_PIECE)
     then
         player:startEvent(3)
     else
@@ -31,7 +31,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
-        npcUtil.giveKeyItem(player, tpz.ki.LEFT_MAP_PIECE)
+        npcUtil.giveKeyItem(player, xi.ki.LEFT_MAP_PIECE)
     end
 end
 

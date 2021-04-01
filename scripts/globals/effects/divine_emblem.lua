@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DIVINE_EMBLEM
+-- xi.effect.DIVINE_EMBLEM
 -----------------------------------
 local effect_object = {}
 

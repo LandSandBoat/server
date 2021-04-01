@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.EFFLUX
+-- xi.effect.EFFLUX
 -----------------------------------
 local effect_object = {}
 

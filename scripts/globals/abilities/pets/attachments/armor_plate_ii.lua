@@ -11,7 +11,7 @@ attachment_object.onEquip = function(pet)
 end
 
 attachment_object.onUnequip = function(pet)
-    updateModPerformance(pet, tpz.mod.DMGPHYS, 'armor_plate_ii_mod', 0)
+    updateModPerformance(pet, xi.mod.DMGPHYS, 'armor_plate_ii_mod', 0)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)
@@ -24,13 +24,13 @@ end
 
 attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
-        updateModPerformance(pet, tpz.mod.DMGPHYS, 'armor_plate_ii_mod', -10)
+        updateModPerformance(pet, xi.mod.DMGPHYS, 'armor_plate_ii_mod', -10)
     elseif maneuvers == 1 then
-        updateModPerformance(pet, tpz.mod.DMGPHYS, 'armor_plate_ii_mod', -15)
+        updateModPerformance(pet, xi.mod.DMGPHYS, 'armor_plate_ii_mod', -15)
     elseif maneuvers == 2 then
-        updateModPerformance(pet, tpz.mod.DMGPHYS, 'armor_plate_ii_mod', -20)
+        updateModPerformance(pet, xi.mod.DMGPHYS, 'armor_plate_ii_mod', -20)
     elseif maneuvers == 3 then
-        updateModPerformance(pet, tpz.mod.DMGPHYS, 'armor_plate_ii_mod', -25)
+        updateModPerformance(pet, xi.mod.DMGPHYS, 'armor_plate_ii_mod', -25)
     end
 end
 

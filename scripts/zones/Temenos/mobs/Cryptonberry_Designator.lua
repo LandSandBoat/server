@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     [3] =
@@ -48,8 +48,8 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        if GetNPCByID(ID.npc.TEMENOS_N_GATE[6]):getAnimation() == tpz.animation.CLOSE_DOOR then
-            tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[6])
+        if GetNPCByID(ID.npc.TEMENOS_N_GATE[6]):getAnimation() == xi.animation.CLOSE_DOOR then
+            xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[6])
         end
     end
 end

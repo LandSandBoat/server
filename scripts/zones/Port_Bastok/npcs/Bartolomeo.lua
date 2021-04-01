@@ -16,9 +16,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local WelcometoBastok = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK)
+    local WelcometoBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
 
-    if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(tpz.slot.SUB) == 12415) then -- Shell Shield
+    if (WelcometoBastok == QUEST_ACCEPTED and player:getCharVar("WelcometoBastok_Event") ~= 1 and player:getEquipID(xi.slot.SUB) == 12415) then -- Shell Shield
         player:startEvent(52)
     else
         player:messageSpecial(ID.text.BARTHOLOMEO_DIALOG)
@@ -31,7 +31,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 52 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
+    if (csid == 52 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK) == QUEST_ACCEPTED) then
         player:setCharVar("WelcometoBastok_Event", 1)
     end
 

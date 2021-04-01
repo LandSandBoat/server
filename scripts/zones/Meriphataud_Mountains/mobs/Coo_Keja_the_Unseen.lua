@@ -7,10 +7,10 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.MIJIN_GAKURE, hpp = math.random(10, 15)},
+            {id = xi.jsa.MIJIN_GAKURE, hpp = math.random(10, 15)},
         },
     })
 end

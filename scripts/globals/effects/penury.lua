@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PENURY
+-- xi.effect.PENURY
 -----------------------------------
 local effect_object = {}
 

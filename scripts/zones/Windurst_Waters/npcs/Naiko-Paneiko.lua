@@ -14,7 +14,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ridingOnTheClouds = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
+    local ridingOnTheClouds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS)
 
     if
         ridingOnTheClouds == QUEST_ACCEPTED and
@@ -23,12 +23,12 @@ entity.onTrade = function(player, npc, trade)
     then
         player:setCharVar("ridingOnTheClouds_4", 0)
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, tpz.ki.SPIRITED_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SPIRITED_STONE)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local makingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
 
     if makingHeadlines == QUEST_AVAILABLE then
         player:startEvent(665)
@@ -61,17 +61,17 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 665 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     elseif csid == 670 or csid == 674 then
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES, {
-            title = tpz.title.EDITORS_HATCHET_MAN,
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.MAKING_HEADLINES, {
+            title = xi.title.EDITORS_HATCHET_MAN,
             gil = 560,
             var = "QuestMakingHeadlines_var",
         })
-        player:delKeyItem(tpz.ki.WINDURST_WOODS_SCOOP)
-        player:delKeyItem(tpz.ki.WINDURST_WALLS_SCOOP)
-        player:delKeyItem(tpz.ki.WINDURST_WATERS_SCOOP)
-        player:delKeyItem(tpz.ki.PORT_WINDURST_SCOOP)
+        player:delKeyItem(xi.ki.WINDURST_WOODS_SCOOP)
+        player:delKeyItem(xi.ki.WINDURST_WALLS_SCOOP)
+        player:delKeyItem(xi.ki.WINDURST_WATERS_SCOOP)
+        player:delKeyItem(xi.ki.PORT_WINDURST_SCOOP)
     end
 end
 

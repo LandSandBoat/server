@@ -18,12 +18,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheWonderMagicSet = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_WONDER_MAGIC_SET)
-    local CooksPride = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
-    local TheKindCardian = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_KIND_CARDIAN)
+    local TheWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
+    local TheKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 13)) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 13)) then
         player:startEvent(10053)
     elseif (TheWonderMagicSet == QUEST_COMPLETED and CooksPride == QUEST_AVAILABLE) then
         if (player:getCharVar("CooksPrideVar") == 0) then
@@ -31,9 +31,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(188) -- Start quest "Cook's pride" Short CS
         end
-    elseif (CooksPride == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SUPER_SOUP_POT) == false) then
+    elseif (CooksPride == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SUPER_SOUP_POT) == false) then
         player:startEvent(186) -- During quest "Cook's pride"
-    elseif (player:hasKeyItem(tpz.ki.SUPER_SOUP_POT) == true) then
+    elseif (player:hasKeyItem(xi.ki.SUPER_SOUP_POT) == true) then
         player:startEvent(187) -- Finish quest "Cook's pride"
     elseif (CooksPride == QUEST_COMPLETED and TheKindCardian == QUEST_AVAILABLE) then
         if (player:getCharVar("theLostCardianVar") == 0) then
@@ -55,22 +55,22 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if ((csid == 189 or csid == 188) and option == 0) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
     elseif (csid == 189 and option == 1) then
         player:setCharVar("CooksPrideVar", 1)
     elseif (csid == 187) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13446)
         else
-            player:addTitle(tpz.title.MERCY_ERRAND_RUNNER)
-            player:delKeyItem(tpz.ki.SUPER_SOUP_POT)
+            player:addTitle(xi.title.MERCY_ERRAND_RUNNER)
+            player:delKeyItem(xi.ki.SUPER_SOUP_POT)
             player:setCharVar("CooksPrideVar", 0)
             player:addGil(GIL_RATE*3000)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
             player:addItem(13446)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13446) -- Mythril Ring
             player:addFame(JEUNO, 30)
-            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COOK_S_PRIDE)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
         end
     elseif (csid == 10053) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 13, true))

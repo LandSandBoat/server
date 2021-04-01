@@ -19,11 +19,11 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(tpz.path.first(path))
+    npc:setPos(xi.path.first(path))
 end
 
 entity.onPath = function(npc)
-    tpz.path.patrol(npc, path)
+    xi.path.patrol(npc, path)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -38,7 +38,7 @@ entity.onTrade = function(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local OpoOpoAndIStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local OpoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(4600, 1)
@@ -56,7 +56,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local OpoOpoAndIStatus = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local OpoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if FreeSlots >= 4 then
             player:tradeComplete()
             player:addFame(KAZHAM, 75)
-            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_OPO_OPO_AND_I)
+            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
             player:addItem(13870)   -- opo opo crown
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13870)
             player:addItem(4468, 3)  -- 3 pamamas
@@ -91,7 +91,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar("OPO_OPO_PROGRESS", 0)
             player:setCharVar("OPO_OPO_FAILED", 0)
             player:setCharVar("OPO_OPO_RETRY", 0)
-            player:setTitle(tpz.title.KING_OF_THE_OPOOPOS)
+            player:setTitle(xi.title.KING_OF_THE_OPOOPOS)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         end

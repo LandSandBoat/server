@@ -8,8 +8,8 @@ local entity = {}
 
 entity.onMobEngaged = function(mob, target)
     if GetMobByID(ID.mob.TEMENOS_C_MOB[1]+3):isDead() then
-        mob:addStatusEffect(tpz.effect.REGAIN, 7, 3, 0)
-        mob:addStatusEffect(tpz.effect.REGEN, 50, 3, 0)
+        mob:addStatusEffect(xi.effect.REGAIN, 7, 3, 0)
+        mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
     end
 end
 
@@ -23,7 +23,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()
             GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setPos(mobX, mobY, mobZ)
-            GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_C_CRATE[1]):setStatus(xi.status.NORMAL)
         end
     end
 end

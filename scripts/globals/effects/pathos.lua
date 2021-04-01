@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PATHOS
+-- xi.effect.PATHOS
 -----------------------------------
 local effect_object = {}
 

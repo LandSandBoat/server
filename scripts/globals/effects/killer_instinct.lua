@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.KILLER_INSTINCT
+-- xi.effect.KILLER_INSTINCT
 -----------------------------------
 local effect_object = {}
 

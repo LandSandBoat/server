@@ -1,13 +1,13 @@
 require('scripts/globals/status')
 
 tpz = tpz or {}
-tpz.magic = tpz.magic or {}
+ xi.magic = xi.magic or {}
 
 -----------------------------------
 -- Spell flag bits
 -----------------------------------
 
-tpz.magic.spellFlag =
+ xi.magic.spellFlag =
 {
     NONE           = 0x00,
     HIT_ALL        = 0x01, -- Hit all targets in range regardless of party
@@ -19,7 +19,7 @@ tpz.magic.spellFlag =
 -- Spell AOE IDs
 -----------------------------------
 
-tpz.magic.aoe =
+ xi.magic.aoe =
 {
     NONE        = 0,
     RADIAL      = 1,
@@ -34,7 +34,7 @@ tpz.magic.aoe =
 -- Spell Groups
 -----------------------------------
 
-tpz.magic.spellGroup =
+ xi.magic.spellGroup =
 {
     NONE      = 0,
     SONG      = 1,
@@ -49,7 +49,7 @@ tpz.magic.spellGroup =
 -- Elements
 -----------------------------------
 
-tpz.magic.element =
+ xi.magic.element =
 {
     NONE      = 0,
     FIRE      = 1,
@@ -62,55 +62,55 @@ tpz.magic.element =
     LIGHT     = 7,
     DARK      = 8,
 }
-tpz.magic.ele = tpz.magic.element
+ xi.magic.ele = xi.magic.element
 
 -----------------------------------
 -- Day to Element Mapping
 -----------------------------------
 
-tpz.magic.dayElement =
+ xi.magic.dayElement =
 {
-    [tpz.day.FIRESDAY]     = tpz.magic.element.FIRE,
-    [tpz.day.ICEDAY]       = tpz.magic.element.ICE,
-    [tpz.day.WINDSDAY]     = tpz.magic.element.WIND,
-    [tpz.day.EARTHSDAY]    = tpz.magic.element.EARTH,
-    [tpz.day.LIGHTNINGDAY] = tpz.magic.element.THUNDER,
-    [tpz.day.WATERSDAY]    = tpz.magic.element.WATER,
-    [tpz.day.LIGHTSDAY]    = tpz.magic.element.LIGHT,
-    [tpz.day.DARKSDAY]     = tpz.magic.element.DARK,
+    [ xi.day.FIRESDAY]     = xi.magic.element.FIRE,
+    [ xi.day.ICEDAY]       = xi.magic.element.ICE,
+    [ xi.day.WINDSDAY]     = xi.magic.element.WIND,
+    [ xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
+    [ xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
+    [ xi.day.WATERSDAY]    = xi.magic.element.WATER,
+    [ xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
+    [ xi.day.DARKSDAY]     = xi.magic.element.DARK,
 }
 
 -----------------------------------
 -- Elemental Strength Ordering
 -----------------------------------
-tpz.magic.elementAscendant =
+ xi.magic.elementAscendant =
 {
-    [tpz.magic.element.FIRE]    = tpz.magic.element.ICE,
-    [tpz.magic.element.ICE]     = tpz.magic.element.WIND,
-    [tpz.magic.element.WIND]    = tpz.magic.element.EARTH,
-    [tpz.magic.element.EARTH]   = tpz.magic.element.THUNDER,
-    [tpz.magic.element.THUNDER] = tpz.magic.element.WATER,
-    [tpz.magic.element.WATER]   = tpz.magic.element.FIRE,
-    [tpz.magic.element.LIGHT]   = tpz.magic.element.DARK,
-    [tpz.magic.element.DARK]    = tpz.magic.element.LIGHT,
+    [ xi.magic.element.FIRE]    = xi.magic.element.ICE,
+    [ xi.magic.element.ICE]     = xi.magic.element.WIND,
+    [ xi.magic.element.WIND]    = xi.magic.element.EARTH,
+    [ xi.magic.element.EARTH]   = xi.magic.element.THUNDER,
+    [ xi.magic.element.THUNDER] = xi.magic.element.WATER,
+    [ xi.magic.element.WATER]   = xi.magic.element.FIRE,
+    [ xi.magic.element.LIGHT]   = xi.magic.element.DARK,
+    [ xi.magic.element.DARK]    = xi.magic.element.LIGHT,
 }
 
-tpz.magic.elementDescendant =
+ xi.magic.elementDescendant =
 {
-    [tpz.magic.element.FIRE]     = tpz.magic.element.WATER,
-    [tpz.magic.element.ICE]      = tpz.magic.element.FIRE,
-    [tpz.magic.element.WIND]     = tpz.magic.element.ICE,
-    [tpz.magic.element.EARTH]    = tpz.magic.element.WIND,
-    [tpz.magic.element.THUNDER]  = tpz.magic.element.EARTH,
-    [tpz.magic.element.WATER]    = tpz.magic.element.THUNDER,
-    [tpz.magic.element.LIGHT]    = tpz.magic.element.DARK,
-    [tpz.magic.element.DARK]     = tpz.magic.element.LIGHT,
+    [ xi.magic.element.FIRE]     = xi.magic.element.WATER,
+    [ xi.magic.element.ICE]      = xi.magic.element.FIRE,
+    [ xi.magic.element.WIND]     = xi.magic.element.ICE,
+    [ xi.magic.element.EARTH]    = xi.magic.element.WIND,
+    [ xi.magic.element.THUNDER]  = xi.magic.element.EARTH,
+    [ xi.magic.element.WATER]    = xi.magic.element.THUNDER,
+    [ xi.magic.element.LIGHT]    = xi.magic.element.DARK,
+    [ xi.magic.element.DARK]     = xi.magic.element.LIGHT,
 }
 -----------------------------------
 -- Spell Families
 -----------------------------------
 
-tpz.magic.spellFamily =
+ xi.magic.spellFamily =
 {
     NONE               = 0,
     CURE               = 1,
@@ -275,7 +275,7 @@ tpz.magic.spellFamily =
 -- Spell IDs
 -----------------------------------
 
-tpz.magic.spell =
+ xi.magic.spell =
 {
     CURE                  =    1,
     CURE_II               =    2,

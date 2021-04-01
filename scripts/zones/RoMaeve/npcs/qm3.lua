@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.MOONGATE_PASS) then
+    if player:hasKeyItem(xi.ki.MOONGATE_PASS) then
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     else
         local moongateQMLocations =
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             { 151.779, 4.719,  68.553},
             {-134.518, 4.000, 106.042}
         }
-        npcUtil.giveKeyItem(player, tpz.ki.MOONGATE_PASS)
+        npcUtil.giveKeyItem(player, xi.ki.MOONGATE_PASS)
         npc:hideNPC(1800)
         local newPosition = npcUtil.pickNewPosition(npc:getID(), moongateQMLocations, true)
         npc:setPos(newPosition.x, newPosition.y, newPosition.z)

@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.SHADOW_LORD and player:getCharVar("MissionStatus") == 2) then
+    if (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getCharVar("MissionStatus") == 2) then
         player:startEvent(6)
     elseif (EventTriggerBCNM(player, npc)) then
         return 1

@@ -14,35 +14,35 @@ local spell_object = {}
 local message_page_offset = 1
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return tpz.trust.canCast(caster, spell)
+    return xi.trust.canCast(caster, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local BastokFirstTrust = caster:getCharVar("BastokFirstTrust")
     local zone = caster:getZoneID()
 
-    if BastokFirstTrust == 1 and (zone == tpz.zone.NORTH_GUSTABERG or zone == tpz.zone.SOUTH_GUSTABERG) then
+    if BastokFirstTrust == 1 and (zone == xi.zone.NORTH_GUSTABERG or zone == xi.zone.SOUTH_GUSTABERG) then
         caster:setCharVar("BastokFirstTrust", 2)
     end
 
-    return tpz.trust.spawn(caster, spell)
+    return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    tpz.trust.teamworkMessage(mob, message_page_offset, {
-        [tpz.magic.spell.AYAME] = tpz.trust.message_offset.TEAMWORK_1,
+    xi.trust.teamworkMessage(mob, message_page_offset, {
+        [ xi.magic.spell.AYAME] = xi.trust.message_offset.TEAMWORK_1,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_HAS_TOP_ENMITY, 0,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.PROVOKE)
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
 end
 
 spell_object.onMobDespawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

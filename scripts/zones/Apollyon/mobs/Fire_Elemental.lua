@@ -15,8 +15,8 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        if tpz.limbus.elementalsDead() then
-            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(tpz.status.NORMAL)
+        if xi.limbus.elementalsDead() then
+            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.NORMAL)
         end
     end
 end

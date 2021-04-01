@@ -16,10 +16,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local mercRank = tpz.besieged.getMercenaryRank(player)
-    local hasPermit = player:hasKeyItem(tpz.ki.RUNIC_PORTAL_USE_PERMIT) and 1 or 0
+    local mercRank = xi.besieged.getMercenaryRank(player)
+    local hasPermit = player:hasKeyItem(xi.ki.RUNIC_PORTAL_USE_PERMIT) and 1 or 0
     local points = player:getCurrency("imperial_standing")
-    local hasAstral = tpz.besieged.getAstralCandescence()
+    local hasAstral = xi.besieged.getAstralCandescence()
     local cost = 200 -- 200 IS to get a permit
     local captain = mercRank == 11 and 1 or 0
 
@@ -30,10 +30,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 140 and option == 1 and npcUtil.giveKeyItem(player, tpz.ki.RUNIC_PORTAL_USE_PERMIT) then
+    if csid == 140 and option == 1 and npcUtil.giveKeyItem(player, xi.ki.RUNIC_PORTAL_USE_PERMIT) then
         player:delCurrency("imperial_standing", 200)
     elseif csid == 140 and option == 2 then
-        npcUtil.giveKeyItem(player, tpz.ki.RUNIC_PORTAL_USE_PERMIT)
+        npcUtil.giveKeyItem(player, xi.ki.RUNIC_PORTAL_USE_PERMIT)
     end
 end
 

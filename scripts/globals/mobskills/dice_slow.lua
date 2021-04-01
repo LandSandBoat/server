@@ -21,16 +21,16 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local slowed = false
     local sleeped = false
 
-    slowed = MobStatusEffectMove(mob, target, tpz.effect.SLOW, 1250, 0, 120)
-    sleeped = MobStatusEffectMove(mob, target, tpz.effect.SLEEP_I, 1, 0, 30)
+    slowed = MobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120)
+    sleeped = MobStatusEffectMove(mob, target, xi.effect.SLEEP_I, 1, 0, 30)
 
-    skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
+    skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     if sleeped then
-        return tpz.effect.SLEEP_I
+        return xi.effect.SLEEP_I
     elseif slowed then
-        return tpz.effect.SLOW
+        return xi.effect.SLOW
     else
-        skill:setMsg(tpz.msg.basic.SKILL_MISS) -- no effect
+        skill:setMsg(xi.msg.basic.SKILL_MISS) -- no effect
     end
 
     return typeEffect

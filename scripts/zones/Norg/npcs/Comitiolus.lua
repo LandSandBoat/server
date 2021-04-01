@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(206) -- Declines request to speak to Kamui
     elseif tuningOutProgress == 7 then
         player:startEvent(208) -- Repeat hint for player to go to Beaucedine Glacier
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_BEGINNING then
+    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.THE_BEGINNING then
         player:startEvent(6)
     else
         player:startEvent(72)

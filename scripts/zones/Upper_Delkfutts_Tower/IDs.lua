@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.UPPER_DELKFUTTS_TOWER] =
+zones[ xi.zone.UPPER_DELKFUTTS_TOWER] =
 {
     text =
     {
@@ -56,4 +56,4 @@ zones[tpz.zone.UPPER_DELKFUTTS_TOWER] =
     },
 }
 
-return zones[tpz.zone.UPPER_DELKFUTTS_TOWER]
+return zones[ xi.zone.UPPER_DELKFUTTS_TOWER]

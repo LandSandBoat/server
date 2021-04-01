@@ -13,7 +13,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.MUTE
+    local typeEffect = xi.effect.MUTE
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60))
 

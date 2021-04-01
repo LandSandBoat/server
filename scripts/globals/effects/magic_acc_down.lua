@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MAGIC_ACC_DOWN
+-- xi.effect.MAGIC_ACC_DOWN
 -----------------------------------
 local effect_object = {}
 

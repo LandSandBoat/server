@@ -12,13 +12,13 @@ require("scripts/globals/helm")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
-    tpz.treasure.initZone(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.MINING)
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.treasure.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -29,9 +29,9 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(70.956, 5.99, 139.843, 134)
     end
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and (louverancePath == 3 or louverancePath == 4) then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and (louverancePath == 3 or louverancePath == 4) then
         cs = 1
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_jabbos_story") == 0 then
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_jabbos_story") == 0 then
         cs = 57
     end
 

@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.FERDOULEMIONT_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 
 entity.onEventUpdate = function(player, csid, option)

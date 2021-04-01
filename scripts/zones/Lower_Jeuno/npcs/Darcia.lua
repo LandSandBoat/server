@@ -15,8 +15,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rumorsFromTheWest = player:getCurrentMission(SOA) == tpz.mission.id.soa.RUMORS_FROM_THE_WEST
-    local theGeomagnetron = player:getCurrentMission(SOA) == tpz.mission.id.soa.THE_GEOMAGNETRON
+    local rumorsFromTheWest = player:getCurrentMission(SOA) == xi.mission.id.soa.RUMORS_FROM_THE_WEST
+    local theGeomagnetron = player:getCurrentMission(SOA) == xi.mission.id.soa.THE_GEOMAGNETRON
 
     -- Dialog options bits
     local turnOffNevermind      = 1
@@ -53,10 +53,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("SOA_1_CS2", 0)
         player:setCharVar("SOA_1_CS3", 0)
 
-        npcUtil.giveKeyItem(player, tpz.ki.GEOMAGNETRON)
+        npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)
 
-        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.RUMORS_FROM_THE_WEST)
-        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
     elseif
         (csid == 10117 and option == 2) or -- paid
         csid == 10118  -- quest complete
@@ -68,12 +68,12 @@ entity.onEventFinish = function(player, csid, option)
 
         if option == 2 then player:delGil(1000000) end
 
-        player:delKeyItem(tpz.ki.GEOMAGNETRON)
-        npcUtil.giveKeyItem(player, tpz.ki.GEOMAGNETRON)
-        npcUtil.giveKeyItem(player, tpz.ki.ADOULINIAN_CHARTER_PERMIT)
+        player:delKeyItem(xi.ki.GEOMAGNETRON)
+        npcUtil.giveKeyItem(player, xi.ki.GEOMAGNETRON)
+        npcUtil.giveKeyItem(player, xi.ki.ADOULINIAN_CHARTER_PERMIT)
 
-        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.THE_GEOMAGNETRON)
-        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.THE_GEOMAGNETRON)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
 
         player:setCharVar("SOA", 0)
     end

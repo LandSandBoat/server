@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.AUBADE
+-- xi.effect.AUBADE
 -----------------------------------
 local effect_object = {}
 

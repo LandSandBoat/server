@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
 
-    if (player:hasKeyItem(tpz.ki.YOMOTSU_HIRASAKA)) then
+    if (player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA)) then
         player:addCharVar("OkuriNMKilled", 1)
     end
 

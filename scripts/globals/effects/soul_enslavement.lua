@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SOUL_ENSLAVEMENT
+-- xi.effect.SOUL_ENSLAVEMENT
 -----------------------------------
 local effect_object = {}
 

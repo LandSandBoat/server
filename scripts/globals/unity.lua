@@ -5,15 +5,15 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------
 tpz = tpz or {}
-tpz.unity = tpz.unity or {}
+ xi.unity = xi.unity or {}
 
 -- Table Format: Needs 10 RoE Objectives, All for One not set, All for One set, Unity Joined, Zone Directory Name
 local zoneEventIds =
 {
-    [tpz.zone.SOUTHERN_SAN_DORIA ] = { 3528, 3525, 3526, 3529, "Southern_San_dOria" },
-    [tpz.zone.BASTOK_MARKETS     ] = {  597,  594,  595,  598, "Bastok_Markets"     },
-    [tpz.zone.WINDURST_WOODS     ] = {  878,  875,  876,  879, "Windurst_Woods"     },
-    [tpz.zone.WESTERN_ADOULIN    ] = { 5148, 5145, 5146, 5149, "Western_Adoulin"    },
+    [ xi.zone.SOUTHERN_SAN_DORIA ] = { 3528, 3525, 3526, 3529, "Southern_San_dOria" },
+    [ xi.zone.BASTOK_MARKETS     ] = {  597,  594,  595,  598, "Bastok_Markets"     },
+    [ xi.zone.WINDURST_WOODS     ] = {  878,  875,  876,  879, "Windurst_Woods"     },
+    [ xi.zone.WESTERN_ADOULIN    ] = { 5148, 5145, 5146, 5149, "Western_Adoulin"    },
 }
 
 -- Table Format: X, Y, Z, Rot, Zone ID
@@ -114,10 +114,10 @@ local function getChangeUnityCost(player, selection)
     return changeCost
 end
 
-function tpz.unity.onTrade(player, npc, trade, eventid)
+function xi.unity.onTrade(player, npc, trade, eventid)
 end
 
-function tpz.unity.onTrigger(player, npc)
+function xi.unity.onTrigger(player, npc)
     local zoneId = player:getZoneID()
     local hasAllForOne = player:hasEminenceRecord(5)
     local allForOneCompleted = player:getEminenceCompleted(5)
@@ -140,7 +140,7 @@ function tpz.unity.onTrigger(player, npc)
     end
 end
 
-function tpz.unity.onEventUpdate(player, csid, option)
+function xi.unity.onEventUpdate(player, csid, option)
     local zoneId = player:getZoneID()
     local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local accolades = player:getCurrency("unity_accolades")
@@ -187,7 +187,7 @@ function tpz.unity.onEventUpdate(player, csid, option)
     end
 end
 
-function tpz.unity.onEventFinish(player, csid, option)
+function xi.unity.onEventFinish(player, csid, option)
     local zoneId = player:getZoneID()
     local ID = require(string.format("scripts/zones/%s/IDs", zoneEventIds[zoneId][5]))
     local category  = bit.band(option, 0x1F)
@@ -196,7 +196,7 @@ function tpz.unity.onEventFinish(player, csid, option)
     -- First time joining Unity (Requirements met for num Objectives and All for One set)
     if csid == zoneEventIds[zoneId][3] and option >= 1 and option <= 11 then
         changeUnityLeader(player, option)
-        tpz.roe.onRecordTrigger(player, 5)
+        xi.roe.onRecordTrigger(player, 5)
         player:messageSpecial(ID.text.YOU_HAVE_JOINED_UNITY, option - 1)
 
     -- Player is a member of a Unity

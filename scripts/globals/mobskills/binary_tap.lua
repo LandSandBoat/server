@@ -20,8 +20,8 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- try to drain buff
-    local effectFirst = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE)
-    local effectSecond = mob:stealStatusEffect(target, tpz.effectFlag.DISPELABLE)
+    local effectFirst = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
+    local effectSecond = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
     local dmg = 0
 
     if (effectFirst ~= 0) then
@@ -31,13 +31,13 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             count = count + 1
         end
 
-        skill:setMsg(tpz.msg.basic.EFFECT_DRAINED)
+        skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
 
         return count
     else
         -- time to drain HP. 100-200
         local power = math.random(0, 101) + 100
-        dmg = MobFinalAdjustments(power, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+        dmg = MobFinalAdjustments(power, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
 
         skill:setMsg(MobPhysicalDrainMove(mob, target, skill, MOBDRAIN_HP, dmg))
         return dmg

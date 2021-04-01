@@ -13,7 +13,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.UNDERSTANDING_OVERLORD_OFFSET then
-        mob:setMobMod(tpz.mobMod.GIL_MAX, -1)
+        mob:setMobMod(xi.mobMod.GIL_MAX, -1)
     end
 end
 

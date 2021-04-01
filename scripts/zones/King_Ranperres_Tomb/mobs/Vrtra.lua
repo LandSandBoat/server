@@ -56,7 +56,7 @@ entity.onMobDisengage = function(mob, weather)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.VRTRA_VANQUISHER)
+    player:addTitle(xi.title.VRTRA_VANQUISHER)
 end
 
 entity.onMobDespawn = function(mob)

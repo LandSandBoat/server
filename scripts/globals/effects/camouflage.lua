@@ -1,19 +1,19 @@
 -----------------------------------
--- tpz.effect.CAMOUFLAGE
+-- xi.effect.CAMOUFLAGE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.ENMITY, -25)
+    target:addMod(xi.mod.ENMITY, -25)
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.ENMITY, -25)
+    target:delMod(xi.mod.ENMITY, -25)
 end
 
 return effect_object

@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(tpz.ki.MOONGATE_PASS) == true) then
+    if (player:hasKeyItem(xi.ki.MOONGATE_PASS) == true) then
         npc:openDoor(10)
     end
 end

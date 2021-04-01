@@ -22,15 +22,15 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    local typeEffect = tpz.effect.STUN
+    local typeEffect = xi.effect.STUN
 
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 7)
 
-    local dmgmod = MobBreathMove(mob, target, 0.333, 0.625, tpz.magic.ele.THUNDER, 500)
+    local dmgmod = MobBreathMove(mob, target, 0.333, 0.625, xi.magic.ele.THUNDER, 500)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.LIGHTNING, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.LIGHTNING, MOBPARAM_IGNORE_SHADOWS)
 
-    target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.LIGHTNING)
+    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.LIGHTNING)
     return dmg
 end
 

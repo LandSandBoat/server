@@ -36,10 +36,10 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(14094)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14094)
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE)
-        player:addTitle(tpz.title.PARAGON_OF_THIEF_EXCELLENCE)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE)
+        player:addTitle(xi.title.PARAGON_OF_THIEF_EXCELLENCE)
         player:setCharVar("hittingTheMarquisateNanaaCS", 0)
-        player:delKeyItem(tpz.ki.CAT_BURGLARS_NOTE)
+        player:delKeyItem(xi.ki.CAT_BURGLARS_NOTE)
         end
     end
 end

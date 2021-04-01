@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
-    tpz.magian.magianOnTrade(player, npc, trade, tpz.itemType.WEAPON, EVENT_IDS)
+    xi.magian.magianOnTrade(player, npc, trade, xi.itemType.WEAPON, EVENT_IDS)
 end
 
 entity.onTrigger = function(player, npc)
@@ -30,15 +30,15 @@ entity.onTrigger = function(player, npc)
         return
     end
 
-    tpz.magian.magianOnTrigger(player, npc, EVENT_IDS)
+    xi.magian.magianOnTrigger(player, npc, EVENT_IDS)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.magian.magianEventUpdate(player, itemId, csid, option, EVENT_IDS)
+    xi.magian.magianEventUpdate(player, itemId, csid, option, EVENT_IDS)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.magian.magianOnEventFinish(player, itemId, csid, option, EVENT_IDS)
+    xi.magian.magianOnEventFinish(player, itemId, csid, option, EVENT_IDS)
 end
 
 return entity

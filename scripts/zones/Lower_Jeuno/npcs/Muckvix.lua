@@ -13,13 +13,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.SILVER_BELL) and not player:hasKeyItem(tpz.ki.YAGUDO_TORCH) then
+    if player:hasKeyItem(xi.ki.SILVER_BELL) and not player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
         if player:getCharVar("YagudoTorchCS") == 1 then
             player:startEvent(184)
         else
             player:startEvent(80)
         end
-    elseif player:getCurrentMission(player:getNation()) == tpz.mission.id.nation.MAGICITE then
+    elseif player:getCurrentMission(player:getNation()) == xi.mission.id.nation.MAGICITE then
         if player:getCharVar("FickblixCS") == 1 then
             player:startEvent(81)
         else
@@ -35,8 +35,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 184 then
-        player:addKeyItem(tpz.ki.YAGUDO_TORCH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.YAGUDO_TORCH)
+        player:addKeyItem(xi.ki.YAGUDO_TORCH)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.YAGUDO_TORCH)
         player:setCharVar("YagudoTorchCS", 0)
         player:setCharVar("FickblixCS", 1)
     end

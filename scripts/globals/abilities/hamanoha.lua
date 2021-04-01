@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.HAMANOHA, 12, 0, 180)
+    target:addStatusEffect(xi.effect.HAMANOHA, 12, 0, 180)
 end
 
 return ability_object

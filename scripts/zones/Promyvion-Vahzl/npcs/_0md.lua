@@ -11,9 +11,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 3 and not GetMobByID(ID.mob.SOLICITOR):isSpawned() then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 3 and not GetMobByID(ID.mob.SOLICITOR):isSpawned() then
         SpawnMob(ID.mob.SOLICITOR):updateClaim(player)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 4 then
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.DESIRES_OF_EMPTINESS and player:getCharVar("PromathiaStatus") == 4 then
         player:startEvent(52)
     else
         player:messageSpecial(ID.text.OVERFLOWING_MEMORIES)

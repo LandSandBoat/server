@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+TheQuadav = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAV_S_CURSE)
 
     if (TheQuadav == QUEST_ACCEPTED) then
         count = trade:getItemCount()
@@ -26,8 +26,8 @@ end
 
 entity.onTrigger = function(player, npc)
 
-TheQuadav = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
-OutOfOneShell = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+TheQuadav = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAV_S_CURSE)
+OutOfOneShell = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
     if (OutOfOneShell == QUEST_COMPLETED) then
         player:startEvent(88)
@@ -47,10 +47,10 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 80) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAV_S_CURSE)
     elseif (csid == 81) then
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_QUADAV_S_CURSE)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAV_S_CURSE)
         player:addFame(BASTOK, 120)
         player:addItem(12832)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 12832)

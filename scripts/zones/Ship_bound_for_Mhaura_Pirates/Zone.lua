@@ -30,7 +30,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 512 then
-        player:setPos(0, 0, 0, 0, tpz.zone.MHAURA)
+        player:setPos(0, 0, 0, 0, xi.zone.MHAURA)
     end
 end
 

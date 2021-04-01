@@ -12,7 +12,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:addEnmity(mob, 1, 1800)
-    skill:setMsg(tpz.msg.basic.NONE)
+    skill:setMsg(xi.msg.basic.NONE)
 end
 
 return mobskill_object

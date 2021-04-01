@@ -15,11 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hatInHand = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HAT_IN_HAND)
+    local hatInHand = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND)
     local hatMask = player:getCharVar("QuestHatInHand_var")
 
-    if player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) and not utils.mask.getBit(hatMask, 7) then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, tpz.ki.NEW_MODEL_HAT)
+    if player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(hatMask, 7) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
 
         if utils.mask.isFull(hatMask, 7) then
             player:startEvent(61) -- Show Off Hat (She buys one)

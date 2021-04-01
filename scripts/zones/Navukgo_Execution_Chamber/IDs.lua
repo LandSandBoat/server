@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.NAVUKGO_EXECUTION_CHAMBER] =
+zones[ xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
 {
     text =
     {
@@ -41,4 +41,4 @@ zones[tpz.zone.NAVUKGO_EXECUTION_CHAMBER] =
     },
 }
 
-return zones[tpz.zone.NAVUKGO_EXECUTION_CHAMBER]
+return zones[ xi.zone.NAVUKGO_EXECUTION_CHAMBER]

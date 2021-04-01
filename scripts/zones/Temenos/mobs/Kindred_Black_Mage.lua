@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.WALLHACK + tpz.path.flag.RUN
+local flags = xi.path.flag.WALLHACK + xi.path.flag.RUN
 local path =
 {
     [5] =
@@ -51,7 +51,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local random = battlefield:getLocalVar("randomF4")
 
         if mob:getID() - ID.mob.TEMENOS_N_MOB[4] == random + 4 then
-            tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[4])
+            xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[4])
         end
     end
 end

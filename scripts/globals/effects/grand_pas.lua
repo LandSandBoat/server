@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.GRAND_PAS
+-- xi.effect.GRAND_PAS
 -----------------------------------
 local effect_object = {}
 

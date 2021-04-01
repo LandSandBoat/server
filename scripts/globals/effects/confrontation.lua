@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CONFRONTATION
+-- xi.effect.CONFRONTATION
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -16,7 +16,7 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     if target:getPet() then
-        target:getPet():delStatusEffect(tpz.effect.CONFRONTATION)
+        target:getPet():delStatusEffect(xi.effect.CONFRONTATION)
     end
 end
 

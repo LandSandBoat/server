@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(ASA) == tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Emerald") == 1) then
+    if (player:getCurrentMission(ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Emerald") == 1) then
         player:startEvent(2)
     elseif (EventTriggerBCNM(player, npc)) then
         return
@@ -33,9 +33,9 @@ entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish RESULT: %u", option)
 
     if (csid==2) then
-        player:delKeyItem(tpz.ki.DOMINAS_EMERALD_SEAL)
-        player:addKeyItem(tpz.ki.EMERALD_COUNTERSEAL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EMERALD_COUNTERSEAL)
+        player:delKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
+        player:addKeyItem(xi.ki.EMERALD_COUNTERSEAL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.EMERALD_COUNTERSEAL)
         player:setCharVar("ASA4_Emerald", "2")
     elseif (EventFinishBCNM(player, csid, option)) then
         return

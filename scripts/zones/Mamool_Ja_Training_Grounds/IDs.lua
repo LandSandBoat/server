@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.MAMOOL_JA_TRAINING_GROUNDS] =
+zones[ xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
 {
     text = {
         ITEM_CANNOT_BE_OBTAINED = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
@@ -99,4 +99,4 @@ zones[tpz.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     },
 }
 
-return zones[tpz.zone.MAMOOL_JA_TRAINING_GROUNDS]
+return zones[ xi.zone.MAMOOL_JA_TRAINING_GROUNDS]

@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.ELSHIMOLOWLANDS)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+    local RegionOwner = GetRegionOwner(xi.region.ELSHIMOLOWLANDS)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.FOMINA_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.FOMINA_OPEN_DIALOG)
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             632,    110,  -- Kukuru Bean
             1411,  1656   -- Phalaenopsis
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 

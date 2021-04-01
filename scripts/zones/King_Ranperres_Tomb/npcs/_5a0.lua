@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
 
     if
-        currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and
+        currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and
         missionStatus == 1 and
         not GetMobByID(ID.mob.CORRUPTED_YORGOS):isSpawned() and
         not GetMobByID(ID.mob.CORRUPTED_SOFFEIL):isSpawned() and
@@ -26,15 +26,15 @@ entity.onTrigger = function(player, npc)
         SpawnMob(ID.mob.CORRUPTED_SOFFEIL)
         SpawnMob(ID.mob.CORRUPTED_ULBRIG)
     end
-    if currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 2 then -- NMs killed
+    if currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 2 then -- NMs killed
         player:setCharVar("MissionStatus", 3)
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and player:getXPos() > -39.019 then -- standing outside
+    elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and player:getXPos() > -39.019 then -- standing outside
         player:startEvent(6) -- enter cutscene
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 then -- inside
+    elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 then -- inside
         player:startEvent(7) -- exit cutscene
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
+    elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 6 then
         player:startEvent(5)
-    elseif currentMission == tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 6 then
+    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 6 then
         player:startEvent(14)
     else
         player:messageSpecial(ID.text.HEAVY_DOOR)

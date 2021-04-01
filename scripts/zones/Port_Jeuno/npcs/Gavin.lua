@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.GAVIN_DIALOG, tpz.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    player:showText(npc, ID.text.GAVIN_DIALOG, xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
 end
 
 entity.onEventUpdate = function(player, csid, option)

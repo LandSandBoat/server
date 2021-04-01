@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    func.coalQmOnTrigger(player, tpz.ki.BOMB_COAL_FRAGMENT1)
+    func.coalQmOnTrigger(player, xi.ki.BOMB_COAL_FRAGMENT1)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -11,8 +11,8 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.REGAIN, 50)
-    mob:addMod(tpz.mod.UFASTCAST, 50)
+    mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.UFASTCAST, 50)
 end
 
 entity.onMobSpawn = function(mob)
@@ -38,12 +38,12 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(tpz.effect.STUN) then
+    if mob:getAnimationSub() == 3 and not mob:hasStatusEffect(xi.effect.STUN) then
         mob:setAnimationSub(0)
         mob:stun(1500)
-    elseif mob:getAnimationSub() == 2 and not mob:hasStatusEffect(tpz.effect.MAGIC_SHIELD) then
+    elseif mob:getAnimationSub() == 2 and not mob:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         mob:setAnimationSub(0)
-    elseif mob:getAnimationSub() == 1 and not mob:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) then
+    elseif mob:getAnimationSub() == 1 and not mob:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) then
         mob:setAnimationSub(0)
     end
 
@@ -57,8 +57,8 @@ end
 
 entity.onSpellPrecast = function(mob, spell)
     if spell:getID() == 218 then
-        spell:setAoE(tpz.magic.aoe.RADIAL)
-        spell:setFlag(tpz.magic.spellFlag.HIT_ALL)
+        spell:setAoE(xi.magic.aoe.RADIAL)
+        spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280)
         spell:setMPCost(1)

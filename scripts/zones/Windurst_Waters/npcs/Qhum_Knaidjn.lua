@@ -12,27 +12,27 @@ local entity = {}
 
 local keyitems = {
     [0] = {
-        id = tpz.ki.RAW_FISH_HANDLING,
+        id = xi.ki.RAW_FISH_HANDLING,
         rank = 3,
         cost = 30000
     },
     [1] = {
-        id = tpz.ki.NOODLE_KNEADING,
+        id = xi.ki.NOODLE_KNEADING,
         rank = 3,
         cost = 30000
     },
     [2] = {
-        id = tpz.ki.PATISSIER,
+        id = xi.ki.PATISSIER,
         rank = 3,
         cost = 8000
     },
     [3] = {
-        id = tpz.ki.STEWPOT_MASTERY,
+        id = xi.ki.STEWPOT_MASTERY,
         rank = 3,
         cost = 30000
     },
     [4] = {
-        id = tpz.ki.WAY_OF_THE_CULINARIAN,
+        id = xi.ki.WAY_OF_THE_CULINARIAN,
         rank = 9,
         cost = 20000
     }

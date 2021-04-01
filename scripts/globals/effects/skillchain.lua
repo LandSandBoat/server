@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SKILLCHAIN
+-- xi.effect.SKILLCHAIN
 -----------------------------------
 local effect_object = {}
 

@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/families/qutrub")}
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 470)
+    xi.hunts.checkHunt(mob, player, 470)
 end
 
 entity.onMobDespawn = function(mob)

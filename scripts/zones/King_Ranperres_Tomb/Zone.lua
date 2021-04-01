@@ -19,7 +19,7 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.BARBASTELLE)
     GetMobByID(ID.mob.BARBASTELLE):setRespawnTime(math.random(1800, 5400))
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -31,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)

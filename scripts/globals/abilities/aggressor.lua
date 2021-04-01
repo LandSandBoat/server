@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local merits = player:getMerit(tpz.merit.AGGRESSIVE_AIM)
-    player:addStatusEffect(tpz.effect.AGGRESSOR, merits, 0, 180 + player:getMod(tpz.mod.AGGRESSOR_DURATION))
+    local merits = player:getMerit(xi.merit.AGGRESSIVE_AIM)
+    player:addStatusEffect(xi.effect.AGGRESSOR, merits, 0, 180 + player:getMod(xi.mod.AGGRESSOR_DURATION))
 end
 
 return ability_object

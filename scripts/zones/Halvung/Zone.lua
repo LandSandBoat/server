@@ -9,7 +9,7 @@ require("scripts/globals/helm")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.MINING)
+    xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

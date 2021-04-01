@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CAPRICCIO
+-- xi.effect.CAPRICCIO
 -----------------------------------
 local effect_object = {}
 

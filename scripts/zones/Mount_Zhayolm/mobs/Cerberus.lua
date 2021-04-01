@@ -9,14 +9,14 @@ local entity = {}
 
 entity.onMobFight = function(mob, target)
     if mob:getHPP() > 25 then
-        mob:setMod(tpz.mod.REGAIN, 10)
+        mob:setMod(xi.mod.REGAIN, 10)
     else
-        mob:setMod(tpz.mod.REGAIN, 70)
+        mob:setMod(xi.mod.REGAIN, 70)
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.CERBERUS_MUZZLER)
+    player:addTitle(xi.title.CERBERUS_MUZZLER)
 end
 
 entity.onMobDespawn = function(mob)

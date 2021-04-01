@@ -11,37 +11,37 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.FISHING)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.FISHING)
 
     if
         newRank > 9 and
         player:getCharVar("FishingExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.ANGLERS_ALMANAC)
+        player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC)
     then
-        player:setSkillRank(tpz.skill.FISHING, newRank)
+        player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
         player:setCharVar("FishingExpertQuest",0)
         player:setLocalVar("FishingTraded",1)
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.FISHING, newRank)
+        player:setSkillRank(xi.skill.FISHING, newRank)
         player:startEvent(10010, 0, 0, 0, 0, newRank)
         player:setLocalVar("FishingTraded",1)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.FISHING)
-    local testItem = getTestItem(player, npc, tpz.skill.FISHING)
+    local craftSkill = player:getSkillLevel(xi.skill.FISHING)
+    local testItem = getTestItem(player, npc, xi.skill.FISHING)
     local guildMember = isGuildMember(player, 5)
-    local rankCap = getCraftSkillCap(player, tpz.skill.FISHING)
+    local rankCap = getCraftSkillCap(player, xi.skill.FISHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.FISHING)
+    local Rank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (craftSkill - Rank) / 32
 
     if (guildMember == 1) then guildMember = 150995375; end
 
     if player:getCharVar("FishingExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.ANGLERS_ALMANAC) then
+        if player:hasKeyItem(xi.keyItem.ANGLERS_ALMANAC) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

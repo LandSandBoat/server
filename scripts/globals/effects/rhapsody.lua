@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.RHAPSODY
+-- xi.effect.RHAPSODY
 -----------------------------------
 local effect_object = {}
 

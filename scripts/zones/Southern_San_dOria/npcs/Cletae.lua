@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Flyers_For_Regine needs to be reviewed.
-    local FlyerForRegine = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FLYERS_FOR_REGINE)
+    local FlyerForRegine = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
 
     if FlyerForRegine == 1 then
         if npcUtil.tradeHasExactly(trade, 532) then
@@ -24,9 +24,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildSkillId = tpz.skill.LEATHERCRAFT
-    local stock = tpz.shop.generalGuildStock[guildSkillId]
-    tpz.shop.generalGuild(player, stock, guildSkillId)
+    local guildSkillId = xi.skill.LEATHERCRAFT
+    local stock = xi.shop.generalGuildStock[guildSkillId]
+    xi.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc, ID.text.CLETAE_DIALOG)
 end
 

@@ -10,13 +10,13 @@ local entity = {}
 local function replaceWithCrate(mob)
     local crate = GetNPCByID(mob:getID() + 3)
     crate:teleport(mob:getPos(), mob:getRotPos())
-    crate:setStatus(tpz.status.NORMAL)
+    crate:setStatus(xi.status.NORMAL)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(tpz.mod.ATTP, -25)
-    mob:setMod(tpz.mod.DEFP, -25)
-    mob:setMod(tpz.mod.EVA, 50)
+    mob:setMod(xi.mod.ATTP, -25)
+    mob:setMod(xi.mod.DEFP, -25)
+    mob:setMod(xi.mod.EVA, 50)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -25,7 +25,7 @@ entity.onMobEngaged = function(mob, target)
     if mob:getLocalVar("engaged") == 0 then
         mob:setLocalVar("engaged", 1)
 
-        mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
         DespawnMob(mobId + 1)
         DespawnMob(mobId + 2)
 

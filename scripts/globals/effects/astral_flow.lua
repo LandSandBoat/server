@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ASTRAL_FLOW
+-- xi.effect.ASTRAL_FLOW
 -----------------------------------
 local effect_object = {}
 

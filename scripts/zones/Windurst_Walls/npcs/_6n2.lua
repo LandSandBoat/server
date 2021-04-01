@@ -18,13 +18,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local thePuppetMaster = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
-    local classReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
-    local carbuncleDebacle = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local iCanHearARainbow = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+    local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local iCanHearARainbow = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- LOST FOR WORDS
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.LOST_FOR_WORDS and player:getCharVar("MissionStatus") == 5 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and player:getCharVar("MissionStatus") == 5 then
         player:startEvent(337)
 
     -- KNOW ONE'S ONIONS
@@ -38,8 +38,8 @@ entity.onTrigger = function(player, npc)
     -- WILD CARD
     elseif player:getCharVar("WildCard") == 1 then
         player:startEvent(386)
-    elseif player:hasKeyItem(tpz.ki.JOKER_CARD) then
-        player:startEvent(387, 0, tpz.ki.JOKER_CARD)
+    elseif player:hasKeyItem(xi.ki.JOKER_CARD) then
+        player:startEvent(387, 0, xi.ki.JOKER_CARD)
 
     -- I CAN HEAR A RAINBOW
     elseif iCanHearARainbow == QUEST_AVAILABLE and player:getMainLvl() >= 30 and player:hasItem(1125) then
@@ -52,7 +52,7 @@ entity.onTrigger = function(player, npc)
         iCanHearARainbow == QUEST_COMPLETED and
         thePuppetMaster == QUEST_AVAILABLE and
         player:getMainLvl() >= AF1_QUEST_LEVEL and
-        player:getMainJob() == tpz.job.SMN
+        player:getMainJob() == xi.job.SMN
     then
         player:startEvent(402)
     elseif thePuppetMaster == QUEST_ACCEPTED and player:getCharVar("ThePuppetMasterProgress") == 1 then
@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
         thePuppetMaster == QUEST_COMPLETED and
         classReunion == QUEST_AVAILABLE and
         player:getMainLvl() >= AF2_QUEST_LEVEL and
-        player:getMainJob() == tpz.job.SMN and
+        player:getMainJob() == xi.job.SMN and
         not player:needToZone()
     then
         player:startEvent(413)
@@ -74,7 +74,7 @@ entity.onTrigger = function(player, npc)
         classReunion == QUEST_COMPLETED and
         carbuncleDebacle == QUEST_AVAILABLE and
         player:getMainLvl() >= AF3_QUEST_LEVEL and
-        player:getMainJob() == tpz.job.SMN and
+        player:getMainJob() == xi.job.SMN and
         not player:needToZone()
     then
         player:startEvent(415)
@@ -102,42 +102,42 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("KnowOnesOnions", 2)
 
     -- ONION RINGS
-    elseif csid == 289 and npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.ONION_RINGS, {
+    elseif csid == 289 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.ONION_RINGS, {
         item = 17029,
-        title = tpz.title.STAR_ONION_BRIGADIER,
+        title = xi.title.STAR_ONION_BRIGADIER,
         fame = 10,
         var = {"OnionRingsTime", "OnionRings"}
     }) then
-        player:delKeyItem(tpz.ki.OLD_RING)
+        player:delKeyItem(xi.ki.OLD_RING)
 
     -- WILD CARD
     elseif csid == 386 then
         player:setCharVar("WildCard", 2)
     elseif csid == 387 then
-        player:delKeyItem(tpz.ki.JOKER_CARD)
+        player:delKeyItem(xi.ki.JOKER_CARD)
         npcUtil.giveCurrency(player, 'gil', 8000)
 
     -- I CAN HEAR A RAINBOW
     elseif csid == 384 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- THE PUPPET MASTER
     elseif csid == 402 then
-        if player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
-            player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
+            player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
         end
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
         player:setCharVar("ThePuppetMasterProgress", 1)
 
     -- CLASS REUNION
     elseif csid == 413 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
-        npcUtil.giveKeyItem(player, tpz.ki.CARBUNCLES_TEAR)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
+        npcUtil.giveKeyItem(player, xi.ki.CARBUNCLES_TEAR)
         player:setCharVar("ClassReunionProgress", 1)
 
     -- CARBUNCLE DEBACLE
     elseif csid == 415 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
         player:setCharVar("CarbuncleDebacleProgress", 1)
     end
 end

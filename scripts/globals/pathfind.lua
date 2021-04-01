@@ -5,7 +5,7 @@
 -----------------------------------
 tpz = tpz or {}
 
-tpz.path =
+ xi.path =
 {
     flag =
     {
@@ -37,7 +37,7 @@ tpz.path =
 
     -- returns first point in given path
     first = function(points)
-        return tpz.path.get(points, 1)
+        return xi.path.get(points, 1)
     end,
 
     -- are two points the same?
@@ -47,14 +47,14 @@ tpz.path =
 
     -- returns last point in given path
     last = function(points)
-        local length = tpz.path.length(points)
-        return tpz.path.get(points, length)
+        local length = xi.path.length(points)
+        return xi.path.get(points, length)
     end,
 
     -- returns random point from given path
     random = function(points)
-        local length = tpz.path.length(points)
-        return tpz.path.get(points, math.random(length))
+        local length = xi.path.length(points)
+        return xi.path.get(points, math.random(length))
     end,
 
     -- returns the start path without the first element
@@ -62,13 +62,13 @@ tpz.path =
         start = start or 1
         local t2 = {}
         local maxLength = 50
-        local length = tpz.path.length(points)
+        local length = xi.path.length(points)
         local count = 1
         local pos = start + 1
         local index = 1
 
         while pos <= length and count <= maxLength do
-            local pt = tpz.path.get(points, pos)
+            local pt = xi.path.get(points, pos)
 
             t2[index] = pt[1]
             t2[index+1] = pt[2]
@@ -86,12 +86,12 @@ tpz.path =
     fromEnd = function(points, start)
         start = start or 1
         local t2 = {}
-        local length = tpz.path.length(points)
+        local length = xi.path.length(points)
         start = length - start
         local index = 1
 
         for i = start, 1, -1 do
-            local pt = tpz.path.get(points, i)
+            local pt = xi.path.get(points, i)
 
             t2[index] = pt[1]
             t2[index+1] = pt[2]
@@ -110,18 +110,18 @@ tpz.path =
     -- continusly run the path
     patrol = function(npc, points, flags)
         local nextPatrolIndex = npc:getLocalVar("nextPatrolIndex")
-        local length = tpz.path.length(points)
+        local length = xi.path.length(points)
         local i = nextPatrolIndex > 0 and nextPatrolIndex or 1
 
         if i <= length then
-            if npc:atPoint(tpz.path.get(points, i)) then
+            if npc:atPoint(xi.path.get(points, i)) then
                 i = i + 1
             end
         else
             i = 1
         end
 
-        npc:pathThrough(tpz.path.get(points, i), flags)
+        npc:pathThrough(xi.path.get(points, i), flags)
         npc:setLocalVar("nextPatrolIndex", i)
     end
 }

@@ -29,11 +29,11 @@ require("scripts/globals/job_utils/corsair")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return tpz.job_utils.corsair.onRollAbilityCheck(player, target, ability)
+    return xi.job_utils.corsair.onRollAbilityCheck(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    return tpz.job_utils.corsair.onRollUseAbility(caster, target, ability, action)
+    return xi.job_utils.corsair.onRollUseAbility(caster, target, ability, action)
 end
 
 return ability_object

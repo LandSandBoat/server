@@ -16,12 +16,12 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
-    tpz.chocobo.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -33,7 +33,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 35
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 37
     end
 
@@ -41,7 +41,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -51,9 +51,9 @@ zone_object.onEventUpdate = function(player, csid, option)
     if csid == 35 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 37 then
-        if player:getPreviousZone() == tpz.zone.EAST_SARUTABARUTA or player:getPreviousZone() == tpz.zone.BUBURIMU_PENINSULA then
+        if player:getPreviousZone() == xi.zone.EAST_SARUTABARUTA or player:getPreviousZone() == xi.zone.BUBURIMU_PENINSULA then
             player:updateEvent(0, 0, 0, 0, 0, 7)
-        elseif player:getPreviousZone() == tpz.zone.MAZE_OF_SHAKHRAMI then
+        elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
             player:updateEvent(0, 0, 0, 0, 0, 6)
         end
     end
@@ -63,7 +63,7 @@ zone_object.onEventFinish = function(player, csid, option)
 end
 
 local function isHabrokWeather(weather)
-    return (weather == tpz.weather.DUST_STORM or weather == tpz.weather.SAND_STORM or weather == tpz.weather.WIND or weather == tpz.weather.GALES)
+    return (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM or weather == xi.weather.WIND or weather == xi.weather.GALES)
 end
 
 zone_object.onZoneWeatherChange = function(weather)

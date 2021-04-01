@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SLEEP
+-- xi.effect.SLEEP
 -----------------------------------
 local effect_object = {}
 

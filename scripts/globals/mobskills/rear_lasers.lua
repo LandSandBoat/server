@@ -13,7 +13,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
     -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(tpz.mobMod.SKILL_LIST)
+    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
 
     if (skillList == 54 or (skillList == 727 and mob:getAnimationSub() == 1)) and target:isBehind(mob) then
         return 0
@@ -22,7 +22,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.PETRIFICATION
+    local typeEffect = xi.effect.PETRIFICATION
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
 

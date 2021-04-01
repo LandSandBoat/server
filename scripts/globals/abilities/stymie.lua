@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.STYMIE, 0, 0, 60)
+    target:addStatusEffect(xi.effect.STYMIE, 0, 0, 60)
 end
 
 return ability_object

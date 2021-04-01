@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.MANACLIPPER] =
+zones[ xi.zone.MANACLIPPER] =
 {
     text =
     {
@@ -29,4 +29,4 @@ zones[tpz.zone.MANACLIPPER] =
     },
 }
 
-return zones[tpz.zone.MANACLIPPER]
+return zones[ xi.zone.MANACLIPPER]

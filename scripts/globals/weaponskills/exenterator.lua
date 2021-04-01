@@ -24,21 +24,21 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local params = {}
     params.numHits = 4
     params.ftp100 = 1.0 params.ftp200 = 1.0 params.ftp300 = 1.0
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.85 + (player:getMerit(tpz.merit.EXENTERATOR) / 100) params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.85 + (player:getMerit(xi.merit.EXENTERATOR) / 100) params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1.0; params.atk200 = 1.0; params.atk300 = 1.0
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
-        params.agi_wsc = 0.7 + (player:getMerit(tpz.merit.EXENTERATOR) / 100)
+        params.agi_wsc = 0.7 + (player:getMerit(xi.merit.EXENTERATOR) / 100)
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.ACCURACY_DOWN) == false) then
-        local duration = (45 + (tp/1000 * 45)) * applyResistanceAddEffect(player, target, tpz.magic.ele.EARTH, 0)
-        target:addStatusEffect(tpz.effect.ACCURACY_DOWN, 20, 0, duration)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.ACCURACY_DOWN) == false) then
+        local duration = (45 + (tp/1000 * 45)) * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0)
+        target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
 end

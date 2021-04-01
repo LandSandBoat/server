@@ -26,11 +26,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     spellParams.M100 = 2
     spellParams.M200 = 2
     spellParams.I = 780
-    spellParams.bonusmab = caster:getMerit(tpz.merit.ANCIENT_MAGIC_ATK_BONUS)
-    spellParams.AMIIburstBonus = caster:getMerit(tpz.merit.ANCIENT_MAGIC_BURST_DMG)/100
+    spellParams.bonusmab = caster:getMerit(xi.merit.ANCIENT_MAGIC_ATK_BONUS)
+    spellParams.AMIIburstBonus = caster:getMerit(xi.merit.ANCIENT_MAGIC_BURST_DMG)/100
 
     -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, tpz.mod.ICERES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.ICERES)
 
     return doElementalNuke(caster, spell, target, spellParams)
 end

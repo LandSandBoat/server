@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.YAEGASUMI
+-- xi.effect.YAEGASUMI
 -----------------------------------
 local effect_object = {}
 

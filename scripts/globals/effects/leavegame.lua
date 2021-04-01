@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LEAVEGAME
+-- xi.effect.LEAVEGAME
 -----------------------------------
 local effect_object = {}
 

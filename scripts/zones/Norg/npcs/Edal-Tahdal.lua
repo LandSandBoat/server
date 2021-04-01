@@ -18,15 +18,15 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialByWater = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
-    local WhisperOfTides = player:hasKeyItem(tpz.ki.WHISPER_OF_TIDES)
+    local TrialByWater = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+    local WhisperOfTides = player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
 
     if ((TrialByWater == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4) or (TrialByWater == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWater_date"))) then
-        player:startEvent(109, 0, tpz.ki.TUNING_FORK_OF_WATER) -- Start and restart quest "Trial by Water"
-    elseif (TrialByWater == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_WATER) == false and WhisperOfTides == false) then
-        player:startEvent(190, 0, tpz.ki.TUNING_FORK_OF_WATER) -- Defeat against Avatar : Need new Fork
+        player:startEvent(109, 0, xi.ki.TUNING_FORK_OF_WATER) -- Start and restart quest "Trial by Water"
+    elseif (TrialByWater == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER) == false and WhisperOfTides == false) then
+        player:startEvent(190, 0, xi.ki.TUNING_FORK_OF_WATER) -- Defeat against Avatar : Need new Fork
     elseif (TrialByWater == QUEST_ACCEPTED and WhisperOfTides == false) then
-        player:startEvent(110, 0, tpz.ki.TUNING_FORK_OF_WATER, 2)
+        player:startEvent(110, 0, xi.ki.TUNING_FORK_OF_WATER, 2)
     elseif (TrialByWater == QUEST_ACCEPTED and WhisperOfTides) then
         numitem = 0
 
@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
         if (player:hasItem(1204)) then numitem = numitem + 8; end   -- Eye of Nept
         if (player:hasSpell(300)) then numitem = numitem + 32; end  -- Ability to summon Leviathan
 
-        player:startEvent(112, 0, tpz.ki.TUNING_FORK_OF_WATER, 2, 0, numitem)
+        player:startEvent(112, 0, xi.ki.TUNING_FORK_OF_WATER, 2, 0, numitem)
     else
         player:startEvent(113) -- Standard dialog
     end
@@ -49,16 +49,16 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 109 and option == 1) then
-        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
-            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
+            player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         player:setCharVar("TrialByWater_date", 0)
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_WATER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_WATER)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WATER)
     elseif (csid == 190) then
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_WATER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_WATER)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_WATER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WATER)
     elseif (csid == 112) then
         local item = 0
         if (option == 1) then item = 17439         -- Leviathan's Rod
@@ -80,11 +80,11 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
-            player:addTitle(tpz.title.HEIR_OF_THE_GREAT_WATER)
-            player:delKeyItem(tpz.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
+            player:addTitle(xi.title.HEIR_OF_THE_GREAT_WATER)
+            player:delKeyItem(xi.ki.WHISPER_OF_TIDES) --Whisper of Tides, as a trade for the above rewards
             player:setCharVar("TrialByWater_date", getMidnight())
             player:addFame(NORG, 30)
-            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_WATER)
+            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
     end
 

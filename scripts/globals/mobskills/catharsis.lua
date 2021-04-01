@@ -11,7 +11,7 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (target:getCurrentRegion() == tpz.region.TAVNAZIANARCH) then
+    if (target:getCurrentRegion() == xi.region.TAVNAZIANARCH) then
         return 0
     end
 
@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 
     potency = potency - math.random(0, potency/4)
-    skill:setMsg(tpz.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
 
     return MobHealMove(mob, mob:getMaxHP() * potency / 100)
 end

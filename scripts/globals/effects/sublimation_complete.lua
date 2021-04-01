@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SUBLIMATION_COMPLETE
+-- xi.effect.SUBLIMATION_COMPLETE
 -----------------------------------
 local effect_object = {}
 

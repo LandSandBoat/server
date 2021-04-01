@@ -15,11 +15,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 7)
-    local SkillCap = getCraftSkillCap(player, tpz.skill.LEATHERCRAFT)
-    local SkillLevel = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
+    local SkillCap = getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
+    local SkillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if (guildMember == 1) then
-        if (player:hasStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY) == false) then
+        if (player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) == false) then
             player:startEvent(652, SkillCap, SkillLevel, 2, 239, player:getGil(), 0, 0, 0)
         else
             player:startEvent(652, SkillCap, SkillLevel, 2, 239, player:getGil(), 7075, 0, 0)
@@ -35,7 +35,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 652 and option == 1) then
         player:messageSpecial(ID.text.LEATHER_SUPPORT, 0, 5, 2)
-        player:addStatusEffect(tpz.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
+        player:addStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY, 1, 0, 120)
     end
 end
 

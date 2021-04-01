@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
         4758, 22356, 3,     --Scroll of Blizzard II
         4773, 28520, 3      --Scroll of Thunder II
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 end
 
 entity.onEventUpdate = function(player, csid, option)

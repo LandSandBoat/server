@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MARK_OF_SEED
+-- xi.effect.MARK_OF_SEED
 -- DO NOT try to use this anywhere else but Fei'Yin!
 -----------------------------------
 local ID = require("scripts/zones/FeiYin/IDs")
@@ -28,7 +28,7 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    if (target:hasKeyItem(tpz.ki.MARK_OF_SEED) == false and player:hasKeyItem(tpz.ki.AZURE_KEY) == false) then
+    if (target:hasKeyItem(xi.ki.MARK_OF_SEED) == false and player:hasKeyItem(xi.ki.AZURE_KEY) == false) then
         target:messageSpecial(ID.text.MARK_OF_SEED_HAS_VANISHED)
     end
     target:setCharVar("SEED_AFTERGLOW_TIMER", 0)

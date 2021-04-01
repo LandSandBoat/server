@@ -14,9 +14,9 @@ end
 
 item_object.onItemUse = function(target)
     if (not hasSleepEffects(target)) then
-        target:addStatusEffect(tpz.effect.SLEEP_I, 1, 0, 60)
+        target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 60)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

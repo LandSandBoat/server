@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_SIXTH_MINISTRY or player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY) then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_SIXTH_MINISTRY or player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY) then
         for i = ID.mob.HINGE_OILS_OFFSET, ID.mob.HINGE_OILS_OFFSET + 3 do
             if not GetMobByID(i):isDead() then
                 player:startEvent(70, 0, 0, 0, 1) -- at least one hinge oil is alive

@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
-        player:addKeyItem(tpz.ki.TATTERED_MISSION_ORDERS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TATTERED_MISSION_ORDERS)
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT) == QUEST_ACCEPTED then
+        player:addKeyItem(xi.ki.TATTERED_MISSION_ORDERS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TATTERED_MISSION_ORDERS)
     else
         player:messageSpecial(ID.text.FIND_NOTHING)
     end

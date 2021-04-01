@@ -8,7 +8,7 @@ require("scripts/globals/bcnm")
 require("scripts/globals/missions")
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and ( player:getCharVar("COP_Louverance_s_Path") == 7 or player:getCharVar("COP_Louverance_s_Path") == 8 )) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and ( player:getCharVar("COP_Louverance_s_Path") == 7 or player:getCharVar("COP_Louverance_s_Path") == 8 )) then
         if (trade:getItemCount() == 1 and trade:hasItemQty(1684, 1)) then
             player:startEvent(3)
         end
@@ -18,7 +18,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and player:getCharVar("PromathiaStatus")==0) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN and player:getCharVar("PromathiaStatus")==0) then
         player:startEvent(4)
     else
         EventTriggerBCNM(player, npc)

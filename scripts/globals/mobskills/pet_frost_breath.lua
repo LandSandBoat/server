@@ -16,10 +16,10 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    local dmgmod = MobBreathMove(mob, target, 0.3, 0.75, tpz.magic.ele.ICE, 460)
+    local dmgmod = MobBreathMove(mob, target, 0.3, 0.75, xi.magic.ele.ICE, 460)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.ICE, MOBPARAM_IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.ICE)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.ICE, MOBPARAM_IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.ICE)
     return dmg
 end
 

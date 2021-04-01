@@ -23,19 +23,19 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 7, tpz.magic.ele.FIRE, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 7, xi.magic.ele.FIRE, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, MOBPARAM_WIPE_SHADOWS)
     local duration = 120
 
-    MobStatusEffectMove(mob, target, tpz.effect.PARALYSIS, 40, 3, duration)
-    MobStatusEffectMove(mob, target, tpz.effect.BLINDNESS, 40, 3, duration)
-    MobStatusEffectMove(mob, target, tpz.effect.POISON, 10, 3, duration)
-    MobStatusEffectMove(mob, target, tpz.effect.PLAGUE, 5, 3, duration)
-    MobStatusEffectMove(mob, target, tpz.effect.BIND, 1, 0, duration)
-    MobStatusEffectMove(mob, target, tpz.effect.SILENCE, 1, 0, duration)
-    MobStatusEffectMove(mob, target, tpz.effect.SLOW, 1250, 0, duration)
+    MobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 40, 3, duration)
+    MobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 40, 3, duration)
+    MobStatusEffectMove(mob, target, xi.effect.POISON, 10, 3, duration)
+    MobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, duration)
+    MobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, duration)
+    MobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, duration)
+    MobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, duration)
 
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.FIRE)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
 end
 

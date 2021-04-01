@@ -10,7 +10,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local theSacredKatana = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
+    local theSacredKatana = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
 
     if npcUtil.tradeHas(trade, {{737, 2}, 738}) then
         player:startEvent(43, 0, 0, 738, 737) -- Platinum Ore, Gold Ore
@@ -24,9 +24,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local forgeYourDestiny = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY)
+    local forgeYourDestiny = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY)
     local swordTimer = player:getCharVar("ForgeYourDestiny_timer")
-    local theSacredKatana = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA)
+    local theSacredKatana = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA)
 
     if forgeYourDestiny == QUEST_ACCEPTED and swordTimer == 0 then
         if player:hasItem(1153) then

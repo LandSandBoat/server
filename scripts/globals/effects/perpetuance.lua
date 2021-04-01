@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PERPETUANCE
+-- xi.effect.PERPETUANCE
 -----------------------------------
 local effect_object = {}
 

@@ -28,7 +28,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     spellParams.I = 552
 
     -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, tpz.mod.FIRERES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.FIRERES)
 
     return doElementalNuke(caster, spell, target, spellParams)
 end

@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_ZERUHN_REPORT then
-        if player:hasKeyItem(tpz.ki.ZERUHN_REPORT) then
+    if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_ZERUHN_REPORT then
+        if player:hasKeyItem(xi.ki.ZERUHN_REPORT) then
             player:messageSpecial(ID.text.MAKARIM_DIALOG_I)
         else
             player:startEvent(121)
@@ -30,8 +30,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 121 then
-        player:addKeyItem(tpz.ki.ZERUHN_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ZERUHN_REPORT)
+        player:addKeyItem(xi.ki.ZERUHN_REPORT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZERUHN_REPORT)
     end
 end
 

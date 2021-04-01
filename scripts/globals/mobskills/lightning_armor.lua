@@ -14,7 +14,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = 10
     local duration = 180
-    local typeEffect = tpz.effect.SHOCK_SPIKES
+    local typeEffect = xi.effect.SHOCK_SPIKES
 
     skill:setMsg(MobBuffMove(mob, typeEffect, power, 0, duration))
 

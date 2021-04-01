@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.GUSTABERG)
-    if RegionOwner ~= tpz.nation.WINDURST then
+    local RegionOwner = GetRegionOwner(xi.region.GUSTABERG)
+    if RegionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.NYALABICCIO_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.NYALABICCIO_OPEN_DIALOG)
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
             611,    36, -- Rye Flour
             4388,   40  -- Eggplant
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
     end
 end
 

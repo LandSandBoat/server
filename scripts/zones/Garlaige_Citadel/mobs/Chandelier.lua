@@ -16,7 +16,7 @@ entity.onMobEngaged = function(mob, target)
     local ce = mob:getCE(target)
     local ve = mob:getVE(target)
     if (ce==0 and ve==0) then
-        mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
+        mob:setMobMod(xi.mobMod.NO_DROPS, 1)
         mob:useMobAbility(511) -- self-destruct
     end
 end

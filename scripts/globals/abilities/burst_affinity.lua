@@ -15,9 +15,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.BURST_AFFINITY, 1, 0, 30)
+    player:addStatusEffect(xi.effect.BURST_AFFINITY, 1, 0, 30)
 
-    return tpz.effect.BURST_AFFINITY
+    return xi.effect.BURST_AFFINITY
 end
 
 return ability_object

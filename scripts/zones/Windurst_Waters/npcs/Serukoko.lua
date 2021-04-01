@@ -13,9 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local glyphHanger = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+    local glyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
-    if glyphHanger == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.NOTES_FROM_IPUPU) then
+    if glyphHanger == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU) then
         player:startEvent(383)
     else
         player:startEvent(373)

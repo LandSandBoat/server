@@ -12,11 +12,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobBuffMove(mob, tpz.effect.MIGHTY_STRIKES, 1, 0, 45)
+    MobBuffMove(mob, xi.effect.MIGHTY_STRIKES, 1, 0, 45)
 
-    skill:setMsg(tpz.msg.basic.USES)
+    skill:setMsg(xi.msg.basic.USES)
 
-    return tpz.effect.MIGHTY_STRIKES
+    return xi.effect.MIGHTY_STRIKES
 end
 
 return mobskill_object

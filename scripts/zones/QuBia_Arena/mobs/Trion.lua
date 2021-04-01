@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.REGAIN, 30)
+    mob:addMod(xi.mod.REGAIN, 30)
 end
 
 entity.onMobSpawn = function(mob)

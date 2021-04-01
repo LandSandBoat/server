@@ -10,11 +10,11 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 785, 1, tpz.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 785, 1, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.ENKELADOS_PH, 5, 1) -- no cooldown
+    xi.mob.phOnDespawn(mob, ID.mob.ENKELADOS_PH, 5, 1) -- no cooldown
 end
 
 return entity

@@ -14,15 +14,15 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
-    local dINT = (caster:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND))
+    local dINT = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
 
     local params = {}
 
     params.diff = nil
 
-    params.attribute = tpz.mod.INT
+    params.attribute = xi.mod.INT
 
-    params.skillType = tpz.skill.DIVINE_MAGIC
+    params.skillType = xi.skill.DIVINE_MAGIC
 
     params.bonus =  150
 
@@ -32,15 +32,15 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = 12 * resist
 
     if (resist > 0.0625) then
-        if (target:addStatusEffect(tpz.effect.FLASH, 200, 0, duration)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+        if (target:addStatusEffect(xi.effect.FLASH, 200, 0, duration)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
-    return tpz.effect.FLASH
+    return xi.effect.FLASH
 end
 
 return spell_object

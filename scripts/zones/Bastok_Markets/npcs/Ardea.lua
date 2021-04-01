@@ -15,11 +15,11 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local RockRacketeer = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ROCK_RACKETEER)
+    local RockRacketeer = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
     local Quotas_Status = player:getCharVar("ChasingQuotas_Progress")
 
     -- Rock Racketeer
-    if (RockRacketeer == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SHARP_GRAY_STONE)) then
+    if (RockRacketeer == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)) then
         player:startEvent(261)
 
     elseif (Quotas_Status == 3) then
@@ -39,7 +39,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Rock Racketeer
     if (csid == 261 and option ~= 1) then
-        player:delKeyItem(tpz.ki.SHARP_GRAY_STONE)
+        player:delKeyItem(xi.ki.SHARP_GRAY_STONE)
         player:addGil(GIL_RATE*10)
         player:setCharVar("rockracketeer_sold", 1)
     elseif (csid == 261 and option ~= 2) then

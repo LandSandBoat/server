@@ -13,12 +13,12 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if target:getObjType() == tpz.objType.PC then
-        if target:hasKeyItem(tpz.ki.PASHHOW_GATE_CRYSTAL) then
-            target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.PASHH, 0, 4.7)
-            spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
+    if target:getObjType() == xi.objType.PC then
+        if target:hasKeyItem(xi.ki.PASHHOW_GATE_CRYSTAL) then
+            target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.PASHH, 0, 4.7)
+            spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
         else
-            spell:setMsg(tpz.msg.basic.NONE)
+            spell:setMsg(xi.msg.basic.NONE)
         end
     end
     return 0

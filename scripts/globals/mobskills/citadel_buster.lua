@@ -22,7 +22,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
         mob:SetMobAbilityEnabled(false)
         mob:SetMagicCastingEnabled(false)
         mob:SetAutoAttackEnabled(false)
-        mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
         local battlefield = mob:getBattlefield()
         local players = battlefield:getPlayers()
         for _, member in pairs(players) do
@@ -63,7 +63,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
                                             mob:SetMagicCastingEnabled(true)
                                             mob:SetAutoAttackEnabled(true)
                                             mob:SetMobAbilityEnabled(true)
-                                            mob:setMobMod(tpz.mobMod.DRAW_IN, 0)
+                                            mob:setMobMod(xi.mobMod.DRAW_IN, 0)
                                         end)
                                     end)
                                 end)
@@ -79,11 +79,11 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local basedmg = 2088
-    if mob:getWeather() == tpz.weather.AURORAS or mob:getWeather() == tpz.weather.STELLAR_GLARE then basedmg = basedmg + 520 end
-    if VanadielDayElement() == tpz.day.LIGHTSDAY then basedmg = basedmg + 208 end
-    local damage = basedmg/(1+(target:getMod(tpz.mod.MDEF)/100))
-    local dmg = MobFinalAdjustments(damage,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
+    if mob:getWeather() == xi.weather.AURORAS or mob:getWeather() == xi.weather.STELLAR_GLARE then basedmg = basedmg + 520 end
+    if VanadielDayElement() == xi.day.LIGHTSDAY then basedmg = basedmg + 208 end
+    local damage = basedmg/(1+(target:getMod(xi.mod.MDEF)/100))
+    local dmg = MobFinalAdjustments(damage,mob,skill,target, xi.attackType.MAGICAL, xi.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     mob:resetEnmity(target)
     return dmg
 end

@@ -15,13 +15,13 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local count = 1
 
-    local removables = {tpz.effect.FLASH, tpz.effect.BLINDNESS, tpz.effect.PARALYSIS, tpz.effect.POISON, tpz.effect.CURSE_I, tpz.effect.CURSE_II, tpz.effect.DISEASE, tpz.effect.PLAGUE}
+    local removables = { xi.effect.FLASH, xi.effect.BLINDNESS, xi.effect.PARALYSIS, xi.effect.POISON, xi.effect.CURSE_I, xi.effect.CURSE_II, xi.effect.DISEASE, xi.effect.PLAGUE}
 
     -- remove one effect and add it to me
     for i, effect in ipairs(removables) do
 
         if (target:hasStatusEffect(effect)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ABSORB_AILMENT)
+            spell:setMsg(xi.msg.basic.MAGIC_ABSORB_AILMENT)
 
             local statusEffect = target:getStatusEffect(effect)
 
@@ -35,7 +35,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         end
     end
 
-    spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     return 0
 end
 

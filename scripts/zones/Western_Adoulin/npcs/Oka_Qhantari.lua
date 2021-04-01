@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Order_Up = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.ORDER_UP)
+    local Order_Up = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ORDER_UP)
     local Order_Oka_Qhantari = utils.mask.getBit(player:getCharVar("Order_Up_NPCs"), 9)
 
     if Order_Up == QUEST_ACCEPTED and not Order_Oka_Qhantari then

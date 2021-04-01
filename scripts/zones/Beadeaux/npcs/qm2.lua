@@ -16,9 +16,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEADEAUX_SMOG) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CORRUPTED_DIRT) == false and player:getWeather() == tpz.weather.RAIN) then
-        player:addKeyItem(tpz.ki.CORRUPTED_DIRT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CORRUPTED_DIRT)
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEADEAUX_SMOG) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CORRUPTED_DIRT) == false and player:getWeather() == xi.weather.RAIN) then
+        player:addKeyItem(xi.ki.CORRUPTED_DIRT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CORRUPTED_DIRT)
     end
 end
 

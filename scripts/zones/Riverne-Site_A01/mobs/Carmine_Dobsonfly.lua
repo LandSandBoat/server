@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(tpz.mobMod.SUPERLINK, ID.mob.CARMINE_DOBSONFLY_OFFSET)
+    mob:setMobMod(xi.mobMod.SUPERLINK, ID.mob.CARMINE_DOBSONFLY_OFFSET)
     mob:SetMagicCastingEnabled(false) -- does not cast spells while idle
 end
 

@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -----lady bug
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNE_S_LAMENT) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(2506, 1) and trade:getItemCount() == 1) then
             player:startEvent(891)
         end
@@ -21,7 +21,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local atellounesLament = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
+    local atellounesLament = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNE_S_LAMENT)
     local sanFame = player:getFameLevel(SANDORIA)
 
     if (atellounesLament == QUEST_AVAILABLE and sanFame >= 2) then
@@ -42,7 +42,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 890) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNE_S_LAMENT)
     elseif (csid == 891) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 15008) -- Trainee Gloves
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(15008)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 15008) -- Trainee Gloves
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ATELLOUNE_S_LAMENT)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ATELLOUNE_S_LAMENT)
         end
     end
 

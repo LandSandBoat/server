@@ -22,9 +22,9 @@ entity.onTrigger = function(player, npc)
     local a4 = player:getAssaultPoint(PERIQIA_ASSAULT_POINT)
     local a5 = player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
 
-    if player:hasKeyItem(tpz.ki.REMNANTS_PERMIT) then
+    if player:hasKeyItem(xi.ki.REMNANTS_PERMIT) then
         player:startEvent(821)
---[[    elseif player:getCurrentMission(TOAU) > tpz.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getMainLvl() >= 65 then
+--[[    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.GUESTS_OF_THE_EMPIRE and player:getMainLvl() >= 65 then
         if lastPermit == 0 then
             player:startEvent(818, a1, a2, a3, a4, a5)
         elseif diffday > 0 then
@@ -54,20 +54,20 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 818 or csid == 820) and option == 100 then
         if player:getLocalVar("SalvageValid") == 1 then
-            player:addKeyItem(tpz.ki.REMNANTS_PERMIT)
+            player:addKeyItem(xi.ki.REMNANTS_PERMIT)
             player:delCurrency("LEUJAOAM_ASSAULT_POINT", 500)
         elseif player:getLocalVar("SalvageValid") == 2 then
             player:delCurrency("MAMOOL_ASSAULT_POINT", 500)
-            player:addKeyItem(tpz.ki.REMNANTS_PERMIT)
+            player:addKeyItem(xi.ki.REMNANTS_PERMIT)
         elseif player:getLocalVar("SalvageValid") == 3 then
             player:delCurrency("LEBROS_ASSAULT_POINT", 500)
-            player:addKeyItem(tpz.ki.REMNANTS_PERMIT)
+            player:addKeyItem(xi.ki.REMNANTS_PERMIT)
         elseif player:getLocalVar("SalvageValid") == 4 then
             player:delCurrency("PERIQIA_ASSAULT_POINT", 500)
-            player:addKeyItem(tpz.ki.REMNANTS_PERMIT)
+            player:addKeyItem(xi.ki.REMNANTS_PERMIT)
         elseif player:getLocalVar("SalvageValid") == 5 then
             player:delCurrency("ILRUSI_ASSAULT_POINT", 500)
-            player:addKeyItem(tpz.ki.REMNANTS_PERMIT)
+            player:addKeyItem(xi.ki.REMNANTS_PERMIT)
         end
         player:setLocalVar("SalvageValid", 0)
         player:setCharVar("LAST_PERMIT", currentday)

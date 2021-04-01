@@ -18,11 +18,11 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     local power = 1465 -- 150/1024 ~14.65%
 
-    if not target:addStatusEffect(tpz.effect.HASTE, power, 0, duration) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+    if not target:addStatusEffect(xi.effect.HASTE, power, 0, duration) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.HASTE
+    return xi.effect.HASTE
 end
 
 return spell_object

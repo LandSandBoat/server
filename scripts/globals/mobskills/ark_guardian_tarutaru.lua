@@ -14,8 +14,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    mob:useMobAbility(mob:getMobMod(tpz.mobMod.TELEPORT_END))
-    skill:setMsg(tpz.msg.basic.NONE)
+    mob:useMobAbility(mob:getMobMod(xi.mobMod.TELEPORT_END))
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 

@@ -32,136 +32,136 @@ dynamis = {}
 
 local entryInfo =
 {
-    [tpz.zone.SOUTHERN_SAN_DORIA] =
+    [ xi.zone.SOUTHERN_SAN_DORIA] =
     {
         csBit = 1,
         csSand = 686,
         csWin = 698,
         csDyna = 685,
         winVar = "DynaSandoria_Win",
-        winKI = tpz.ki.HYDRA_CORPS_COMMAND_SCEPTER,
+        winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         enterPos = {161.838, -2.000, 161.673, 93, 185},
-        reqs = function(player) return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) end,
+        reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [tpz.zone.BASTOK_MINES] =
+    [ xi.zone.BASTOK_MINES] =
     {
         csBit = 2,
         csSand = 203,
         csWin = 215,
         csDyna = 201,
         winVar = "DynaBastok_Win",
-        winKI = tpz.ki.HYDRA_CORPS_EYEGLASS,
+        winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         enterPos = {116.482, 0.994, -72.121, 128, 186},
-        reqs = function(player) return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) end,
+        reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [tpz.zone.WINDURST_WALLS] =
+    [ xi.zone.WINDURST_WALLS] =
     {
         csBit = 3,
         csSand = 455,
         csWin = 465,
         csDyna = 452,
         winVar = "DynaWindurst_Win",
-        winKI = tpz.ki.HYDRA_CORPS_LANTERN,
+        winKI = xi.ki.HYDRA_CORPS_LANTERN,
         enterPos = {-221.988, 1.000, -120.184, 0, 187},
-        reqs = function(player) return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) end,
+        reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [tpz.zone.RULUDE_GARDENS] =
+    [ xi.zone.RULUDE_GARDENS] =
     {
         csBit = 4,
         csSand = 10016,
         csWin = 10026,
         csDyna = 10012,
         winVar = "DynaJeuno_Win",
-        winKI = tpz.ki.HYDRA_CORPS_TACTICAL_MAP,
+        winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         enterPos = {48.930, 10.002, -71.032, 195, 188},
-        reqs = function(player) return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) end,
+        reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [tpz.zone.BEAUCEDINE_GLACIER] =
+    [ xi.zone.BEAUCEDINE_GLACIER] =
     {
         csBit = 5,
         csWin = 134,
         csDyna = 119,
         winVar = "DynaBeaucedine_Win",
-        winKI = tpz.ki.HYDRA_CORPS_INSIGNIA,
+        winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         enterPos = {-284.751, -39.923, -422.948, 235, 134},
         reqs = function(player)
-            return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                   player:hasKeyItem(tpz.ki.HYDRA_CORPS_COMMAND_SCEPTER) and
-                   player:hasKeyItem(tpz.ki.HYDRA_CORPS_EYEGLASS) and
-                   player:hasKeyItem(tpz.ki.HYDRA_CORPS_LANTERN) and
-                   player:hasKeyItem(tpz.ki.HYDRA_CORPS_TACTICAL_MAP)
+            return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
+                   player:hasKeyItem(xi.ki.HYDRA_CORPS_COMMAND_SCEPTER) and
+                   player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
+                   player:hasKeyItem(xi.ki.HYDRA_CORPS_LANTERN) and
+                   player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP)
         end,
     },
-    [tpz.zone.XARCABARD] =
+    [ xi.zone.XARCABARD] =
     {
         csBit = 6,
         csWin = 32,
         csDyna = 16,
         winVar = "DynaXarcabard_Win",
-        winKI = tpz.ki.HYDRA_CORPS_BATTLE_STANDARD,
+        winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         enterPos = {569.312, -0.098, -270.158, 90, 135},
         reqs = function(player)
-            return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                   player:hasKeyItem(tpz.ki.HYDRA_CORPS_INSIGNIA)
+            return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
+                   player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA)
         end,
     },
-    [tpz.zone.VALKURM_DUNES] =
+    [ xi.zone.VALKURM_DUNES] =
     {
         csBit = 7,
         csFirst = 33,
         csWin = 39,
         csDyna = 58,
         winVar = "DynaValkurm_Win",
-        winKI = tpz.ki.DYNAMIS_VALKURM_SLIVER,
+        winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         enterPos = {100, -8, 131, 47, 39},
         reqs = function(player)
-            return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+            return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
-    [tpz.zone.BUBURIMU_PENINSULA] =
+    [ xi.zone.BUBURIMU_PENINSULA] =
     {
         csBit = 8,
         csFirst = 40,
         csWin = 46,
         csDyna = 64,
         winVar = "DynaBuburimu_Win",
-        winKI = tpz.ki.DYNAMIS_BUBURIMU_SLIVER,
+        winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         enterPos = {155, -1, -169, 170, 40},
         reqs = function(player)
-            return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+            return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
-    [tpz.zone.QUFIM_ISLAND] =
+    [ xi.zone.QUFIM_ISLAND] =
     {
         csBit = 9,
         csFirst = 22,
         csWin = 28,
         csDyna = 3,
         winVar = "DynaQufim_Win",
-        winKI = tpz.ki.DYNAMIS_QUFIM_SLIVER,
+        winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         enterPos = {-19, -17, 104, 253, 41},
         reqs = function(player)
-            return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+            return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
-    [tpz.zone.TAVNAZIAN_SAFEHOLD] =
+    [ xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
         csBit = 10,
         csFirst = 614,
         csWin = 615,
         csDyna = 588,
         winVar = "DynaTavnazia_Win",
-        winKI = tpz.ki.DYNAMIS_TAVNAZIA_SLIVER,
+        winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         enterPos = {0.1, -7, -21, 190, 42},
         reqs = function(player)
-            return player:hasKeyItem(tpz.ki.VIAL_OF_SHROUDED_SAND) and
-                   player:hasKeyItem(tpz.ki.DYNAMIS_BUBURIMU_SLIVER) and
-                   player:hasKeyItem(tpz.ki.DYNAMIS_QUFIM_SLIVER) and
-                   player:hasKeyItem(tpz.ki.DYNAMIS_VALKURM_SLIVER) and
-                  (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
+            return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) and
+                   player:hasKeyItem(xi.ki.DYNAMIS_BUBURIMU_SLIVER) and
+                   player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
+                   player:hasKeyItem(xi.ki.DYNAMIS_VALKURM_SLIVER) and
+                  (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
 }
@@ -176,83 +176,83 @@ local entryInfo =
 
 local dynaInfo =
 {
-    [tpz.zone.DYNAMIS_SAN_DORIA] =
+    [ xi.zone.DYNAMIS_SAN_DORIA] =
     {
         winVar = "DynaSandoria_Win",
-        winKI = tpz.ki.HYDRA_CORPS_COMMAND_SCEPTER,
-        winTitle = tpz.title.DYNAMIS_SAN_DORIA_INTERLOPER,
+        winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
+        winTitle = xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
         entryPos = {161.838, -2.000, 161.673, 93},
         ejectPos = {161.000, -2.000, 161.000, 94, 230},
     },
-    [tpz.zone.DYNAMIS_BASTOK] =
+    [ xi.zone.DYNAMIS_BASTOK] =
     {
         winVar = "DynaBastok_Win",
-        winKI = tpz.ki.HYDRA_CORPS_EYEGLASS,
-        winTitle = tpz.title.DYNAMIS_BASTOK_INTERLOPER,
+        winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
+        winTitle = xi.title.DYNAMIS_BASTOK_INTERLOPER,
         entryPos = {116.482, 0.994, -72.121, 128},
         ejectPos = {112.000, 0.994, -72.000, 127, 234},
     },
-    [tpz.zone.DYNAMIS_WINDURST] =
+    [ xi.zone.DYNAMIS_WINDURST] =
     {
         winVar = "DynaWindurst_Win",
-        winKI = tpz.ki.HYDRA_CORPS_LANTERN,
-        winTitle = tpz.title.DYNAMIS_WINDURST_INTERLOPER,
+        winKI = xi.ki.HYDRA_CORPS_LANTERN,
+        winTitle = xi.title.DYNAMIS_WINDURST_INTERLOPER,
         entryPos = {-221.988, 1.000, -120.184, 0},
         ejectPos = {-217.000, 1.000, -119.000, 94, 239},
     },
-    [tpz.zone.DYNAMIS_JEUNO] =
+    [ xi.zone.DYNAMIS_JEUNO] =
     {
         winVar = "DynaJeuno_Win",
-        winKI = tpz.ki.HYDRA_CORPS_TACTICAL_MAP,
-        winTitle = tpz.title.DYNAMIS_JEUNO_INTERLOPER,
+        winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
+        winTitle = xi.title.DYNAMIS_JEUNO_INTERLOPER,
         entryPos = {48.930, 10.002, -71.032, 195},
         ejectPos = {48.930, 10.002, -71.032, 195, 243},
     },
-    [tpz.zone.DYNAMIS_BEAUCEDINE] =
+    [ xi.zone.DYNAMIS_BEAUCEDINE] =
     {
         winVar = "DynaBeaucedine_Win",
-        winKI = tpz.ki.HYDRA_CORPS_INSIGNIA,
-        winTitle = tpz.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
+        winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
+        winTitle = xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
         entryPos = {-284.751, -39.923, -422.948, 235},
         ejectPos = {-284.751, -39.923, -422.948, 235, 111},
     },
-    [tpz.zone.DYNAMIS_XARCABARD] =
+    [ xi.zone.DYNAMIS_XARCABARD] =
     {
         winVar = "DynaXarcabard_Win",
-        winKI = tpz.ki.HYDRA_CORPS_BATTLE_STANDARD,
-        winTitle = tpz.title.DYNAMIS_XARCABARD_INTERLOPER,
+        winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
+        winTitle = xi.title.DYNAMIS_XARCABARD_INTERLOPER,
         entryPos = {569.312, -0.098, -270.158, 90},
         ejectPos = {569.312, -0.098, -270.158, 90, 112},
     },
-    [tpz.zone.DYNAMIS_VALKURM] =
+    [ xi.zone.DYNAMIS_VALKURM] =
     {
         winVar = "DynaValkurm_Win",
-        winKI = tpz.ki.DYNAMIS_VALKURM_SLIVER,
-        winTitle = tpz.title.DYNAMIS_VALKURM_INTERLOPER,
+        winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
+        winTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
         entryPos = {100, -8, 131, 47},
         ejectPos = {119, -9, 131, 52, 103},
     },
-    [tpz.zone.DYNAMIS_BUBURIMU] =
+    [ xi.zone.DYNAMIS_BUBURIMU] =
     {
         winVar = "DynaBuburimu_Win",
-        winKI = tpz.ki.DYNAMIS_BUBURIMU_SLIVER,
-        winTitle = tpz.title.DYNAMIS_BUBURIMU_INTERLOPER,
+        winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
+        winTitle = xi.title.DYNAMIS_BUBURIMU_INTERLOPER,
         entryPos = {155, -1, -169, 170},
         ejectPos = {154, -1, -170, 190, 118},
     },
-    [tpz.zone.DYNAMIS_QUFIM] =
+    [ xi.zone.DYNAMIS_QUFIM] =
     {
         winVar = "DynaQufim_Win",
-        winKI = tpz.ki.DYNAMIS_QUFIM_SLIVER,
-        winTitle = tpz.title.DYNAMIS_QUFIM_INTERLOPER,
+        winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
+        winTitle = xi.title.DYNAMIS_QUFIM_INTERLOPER,
         entryPos = {-19, -17, 104, 253},
         ejectPos = {18, -19, 162, 240, 126},
     },
-    [tpz.zone.DYNAMIS_TAVNAZIA] =
+    [ xi.zone.DYNAMIS_TAVNAZIA] =
     {
         winVar = "DynaTavnazia_Win",
-        winKI = tpz.ki.DYNAMIS_TAVNAZIA_SLIVER,
-        winTitle = tpz.title.DYNAMIS_TAVNAZIA_INTERLOPER,
+        winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
+        winTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
         entryPos = {0.1, -7, -21, 190},
         ejectPos = {0, -7, -23, 195, 26},
     },
@@ -264,7 +264,7 @@ local dynaInfo =
 
 local function arg3(player, bit)
     local csVar = player:getCharVar("Dynamis_Status")
-    local timeKI = player:hasKeyItem(tpz.ki.RHAPSODY_IN_AZURE) and 65536 or 0
+    local timeKI = player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) and 65536 or 0
 
     if csVar == 0 then
         return 1 + timeKI -- first time visiting any dynamis zone
@@ -314,7 +314,7 @@ dynamis.entryNpcOnTrigger = function(player, npc)
             player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL, DYNA_LEVEL_MIN)
         elseif (dynaWaitxDay + BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
             -- params: bit, cutscene option, Prismatic Hourglass KI, sJob option, junk, Shrouded Sand KI, Timeless Hourglass item ID, Perpetual Hourglass item ID
-            player:startEvent(info.csDyna, info.csBit, arg3(player, info.csBit), tpz.ki.PRISMATIC_HOURGLASS, 1, 0, tpz.ki.VIAL_OF_SHROUDED_SAND, 4236, 4237)
+            player:startEvent(info.csDyna, info.csBit, arg3(player, info.csBit), xi.ki.PRISMATIC_HOURGLASS, 1, 0, xi.ki.VIAL_OF_SHROUDED_SAND, 4236, 4237)
         else
             local dayRemaining = math.floor(((dynaWaitxDay + BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
             player:messageSpecial(ID.text.YOU_CANNOT_ENTER_DYNAMIS, dayRemaining, info.csBit)
@@ -332,7 +332,7 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
 
     -- shrouded sand cutscene
     if info.csSand and csid == info.csSand then
-        npcUtil.giveKeyItem(player, tpz.ki.VIAL_OF_SHROUDED_SAND)
+        npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_SHROUDED_SAND)
         player:setCharVar("Dynamis_Status", utils.mask.setBit(mask, 0, false))
 
     -- first visit cutscene
@@ -359,7 +359,7 @@ dynamis.entryNpcOnEventFinish = function(player, csid, option)
 
             if
                 (dynaWaitxDay + BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
-                not player:hasKeyItem(tpz.ki.RHAPSODY_IN_AZURE)
+                not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE)
             then
                 player:setCharVar("dynaWaitxDay", realDay)
             end
@@ -413,16 +413,16 @@ dynamis.zoneOnZoneIn = function(player, prevZone)
 
     if player:getCharVar("Dynamis_Entry") == 1 or player:getGMLevel() > 0 then
         if player:getCharVar("Dynamis_subjob") == 1 then
-            player:timer(5000, function(player) player:messageBasic(tpz.msg.basic.UNABLE_TO_ACCESS_SJ) end)
-            player:addStatusEffect(tpz.effect.SJ_RESTRICTION, 0, 0, 0, 7200)
+            player:timer(5000, function(player) player:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ) end)
+            player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 7200)
         end
-        player:addStatusEffectEx(tpz.effect.DYNAMIS, 0, 0, 3, 3600)
-        player:timer(5500, function(player) player:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, tpz.ki.PRISMATIC_HOURGLASS) end)
+        player:addStatusEffectEx(xi.effect.DYNAMIS, 0, 0, 3, 3600)
+        player:timer(5500, function(player) player:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS) end)
         player:setCharVar("Dynamis_Entry", 0)
         player:setCharVar("Dynamis_subjob", 0)
     end
 
-    if not player:hasStatusEffect(tpz.effect.DYNAMIS) then
+    if not player:hasStatusEffect(xi.effect.DYNAMIS) then
         cs = 100 -- eject event (same event in all dynamis zones)
     elseif player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(unpack(info.entryPos))
@@ -442,7 +442,7 @@ end
 
 dynamis.somnialThresholdOnTrigger = function(player, npc)
     -- ability to unlock SJ message
-    local canUnlockSJ = player:hasStatusEffect(tpz.effect.SJ_RESTRICTION) and 1 or 0
+    local canUnlockSJ = player:hasStatusEffect(xi.effect.SJ_RESTRICTION) and 1 or 0
 
     -- bitmask controls options in the menu. 1 = Leave Dynamis.  2 = Unlock support jobs.  4 = Nothing (quit menu)
     local menuBits = 5 + (canUnlockSJ * 2)
@@ -458,7 +458,7 @@ dynamis.somnialThresholdOnEventFinish = function(player, csid, option)
         if option == 1 then
             player:setPos(unpack(info.ejectPos))
         elseif option == 2 then
-            player:delStatusEffectSilent(tpz.effect.SJ_RESTRICTION)
+            player:delStatusEffectSilent(xi.effect.SJ_RESTRICTION)
         end
     end
 end
@@ -507,7 +507,7 @@ dynamis.timeExtensionOnDeath = function(mob, player, isKiller)
 
         if found then
             -- award KI and extension to those who have not yet received it
-            local effect = player:getStatusEffect(tpz.effect.DYNAMIS)
+            local effect = player:getStatusEffect(xi.effect.DYNAMIS)
             if effect and not player:hasKeyItem(te.ki) then
                 npcUtil.giveKeyItem(player, te.ki)
                 local old_duration = effect:getDuration()
@@ -602,11 +602,11 @@ dynamis.refillStatueOnDeath = function(mob, player, isKiller)
                             if eye == dynamis.eye.BLUE then
                                 local amt = player:getMaxMP() - player:getMP()
                                 player:restoreMP(amt)
-                                player:messageBasic(tpz.msg.basic.RECOVERS_MP, 0, amt)
+                                player:messageBasic(xi.msg.basic.RECOVERS_MP, 0, amt)
                             else
                                 local amt = player:getMaxHP() - player:getHP()
                                 player:restoreHP(amt)
-                                player:messageBasic(tpz.msg.basic.RECOVERS_HP, 0, amt)
+                                player:messageBasic(xi.msg.basic.RECOVERS_HP, 0, amt)
                             end
                         end
                     end
@@ -691,34 +691,34 @@ end
 
 function getDynamisMapList(player)
     local bitmask = 0
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_SANDORIA) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_SANDORIA) == true) then
         bitmask = bitmask + 2
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_BASTOK) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BASTOK) == true) then
         bitmask = bitmask + 4
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_WINDURST) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_WINDURST) == true) then
         bitmask = bitmask + 8
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_JEUNO) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_JEUNO) == true) then
         bitmask = bitmask + 16
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_BEAUCEDINE) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE) == true) then
         bitmask = bitmask + 32
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_XARCABARD) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_XARCABARD) == true) then
         bitmask = bitmask + 64
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_VALKURM) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_VALKURM) == true) then
         bitmask = bitmask + 128
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_BUBURIMU) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_BUBURIMU) == true) then
         bitmask = bitmask + 256
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_QUFIM) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_QUFIM) == true) then
         bitmask = bitmask + 512
     end
-    if (player:hasKeyItem(tpz.ki.MAP_OF_DYNAMIS_TAVNAZIA) == true) then
+    if (player:hasKeyItem(xi.ki.MAP_OF_DYNAMIS_TAVNAZIA) == true) then
         bitmask = bitmask + 1024
     end
 
@@ -728,7 +728,7 @@ end
 -- todo: fix these to use tables
 function dynamis.getExtensions(player)
     local count = 0
-    for i=tpz.ki.CRIMSON_GRANULES_OF_TIME, tpz.ki.OBSIDIAN_GRANULES_OF_TIME do
+    for i= xi.ki.CRIMSON_GRANULES_OF_TIME, xi.ki.OBSIDIAN_GRANULES_OF_TIME do
         if player:hasKeyItem(i) then count = count + 1 end
     end
     return count
@@ -742,22 +742,22 @@ function dynamis.procMonster(mob, player)
         end
         local extensions = dynamis.getExtensions(player)
         if extensions > 2 then
-            if player:getSubJob() == tpz.job.NONE and math.random(0, 99) == 0 then
+            if player:getSubJob() == xi.job.NONE and math.random(0, 99) == 0 then
                 mob:setLocalVar("dynamis_proc", 4)
                 mob:weaknessTrigger(3)
-                mob:addStatusEffect(tpz.effect.TERROR, 0, 0, 30)
+                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
             elseif extensions == 5 then
                 mob:setLocalVar("dynamis_proc", 3)
                 mob:weaknessTrigger(2)
-                mob:addStatusEffect(tpz.effect.TERROR, 0, 0, 30)
+                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
             elseif extensions == 4 then
                 mob:setLocalVar("dynamis_proc", 2)
                 mob:weaknessTrigger(1)
-                mob:addStatusEffect(tpz.effect.TERROR, 0, 0, 30)
+                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
             elseif extensions == 3 then
                 mob:setLocalVar("dynamis_proc", 1)
                 mob:weaknessTrigger(0)
-                mob:addStatusEffect(tpz.effect.TERROR, 0, 0, 30)
+                mob:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
             end
         end
     end

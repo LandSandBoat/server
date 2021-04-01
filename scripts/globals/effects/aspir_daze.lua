@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ASPIR_DAZE
+-- xi.effect.ASPIR_DAZE
 -----------------------------------
 local effect_object = {}
 

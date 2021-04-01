@@ -17,21 +17,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local makingHeadlines = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_HEADLINES)
+    local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     local currentMission = player:getCurrentMission(WINDURST)
     local missionStatus = player:getCharVar("MissionStatus")
 
     -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
     local prog = player:getCharVar("QuestMakingHeadlines_var")
 
-    if currentMission == tpz.mission.id.windurst.LOST_FOR_WORDS and missionStatus == 4 then
+    if currentMission == xi.mission.id.windurst.LOST_FOR_WORDS and missionStatus == 4 then
         player:startEvent(46)
     elseif
         makingHeadlines == QUEST_ACCEPTED and
         utils.mask.isFull(prog, 4) and
         not utils.mask.getBit(prog, 4)
     then
-        player:messageSpecial(ID.text.CAT_BURGLARS_HIDEOUT, 1, tpz.ki.WINDURST_WOODS_SCOOP) -- Confirm Story
+        player:messageSpecial(ID.text.CAT_BURGLARS_HIDEOUT, 1, xi.ki.WINDURST_WOODS_SCOOP) -- Confirm Story
         player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(prog, 4, true))
     else
         player:startEvent(44) -- "The door is firmly shut"

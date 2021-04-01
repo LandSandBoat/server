@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DIRGE
+-- xi.effect.DIRGE
 -----------------------------------
 local effect_object = {}
 

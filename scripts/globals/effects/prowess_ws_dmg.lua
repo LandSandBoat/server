@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PROWESS
+-- xi.effect.PROWESS
 -- Increased weapon skill damage
 -----------------------------------
 local effect_object = {}

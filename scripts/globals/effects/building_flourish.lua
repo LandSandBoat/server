@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BUILDING_FLOURISH
+-- xi.effect.BUILDING_FLOURISH
 -----------------------------------
 local effect_object = {}
 

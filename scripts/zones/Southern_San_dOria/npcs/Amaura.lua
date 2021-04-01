@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:hasKeyItem(tpz.ki.AMAURAS_FORMULA) == true then
+    if player:hasKeyItem(xi.ki.AMAURAS_FORMULA) == true then
         if trade:hasItemQty(920, 1) == true and trade:hasItemQty(642, 1) == true and trade:hasItemQty(846, 1) == true and trade:getItemCount() == 3 then
             player:startEvent(637)
         end
@@ -21,12 +21,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    local toCureaCough = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+    local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local toCureaCough = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
     if medicineWoman == QUEST_ACCEPTED then
-        local amaurasFormulaKI = player:hasKeyItem(tpz.ki.AMAURAS_FORMULA)
-        local coldMedicine = player:hasKeyItem(tpz.ki.COLD_MEDICINE)
+        local amaurasFormulaKI = player:hasKeyItem(xi.ki.AMAURAS_FORMULA)
+        local coldMedicine = player:hasKeyItem(xi.ki.COLD_MEDICINE)
 
         if amaurasFormulaKI == false and coldMedicine == false then
             player:startEvent(636)
@@ -38,9 +38,9 @@ entity.onTrigger = function(player, npc)
             player:startEvent(642)
         end
     elseif player:getCharVar("DiaryPage") == 3 or toCureaCough == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.THYME_MOSS) == false and player:hasKeyItem(tpz.ki.COUGH_MEDICINE) == false then
+        if player:hasKeyItem(xi.ki.THYME_MOSS) == false and player:hasKeyItem(xi.ki.COUGH_MEDICINE) == false then
             player:startEvent(645) -- need thyme moss for cough med
-        elseif player:hasKeyItem(tpz.ki.THYME_MOSS) == true then
+        elseif player:hasKeyItem(xi.ki.THYME_MOSS) == true then
             player:startEvent(646) -- receive cough med for Nenne
         end
     else
@@ -53,19 +53,19 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 636 and option == 0 then
-        player:addKeyItem(tpz.ki.AMAURAS_FORMULA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.AMAURAS_FORMULA)
+        player:addKeyItem(xi.ki.AMAURAS_FORMULA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AMAURAS_FORMULA)
     elseif csid == 637 then
         player:tradeComplete()
-        player:delKeyItem(tpz.ki.AMAURAS_FORMULA)
-        player:addKeyItem(tpz.ki.COLD_MEDICINE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.COLD_MEDICINE)
+        player:delKeyItem(xi.ki.AMAURAS_FORMULA)
+        player:addKeyItem(xi.ki.COLD_MEDICINE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.COLD_MEDICINE)
     elseif csid == 645 then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TO_CURE_A_COUGH)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
     elseif csid == 646 then
-        player:delKeyItem(tpz.ki.THYME_MOSS)
-        player:addKeyItem(tpz.ki.COUGH_MEDICINE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.COUGH_MEDICINE)
+        player:delKeyItem(xi.ki.THYME_MOSS)
+        player:addKeyItem(xi.ki.COUGH_MEDICINE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.COUGH_MEDICINE)
     end
 end
 

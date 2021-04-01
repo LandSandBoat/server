@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.MANAWELL, 4, 0, 60)
+    target:addStatusEffect(xi.effect.MANAWELL, 4, 0, 60)
 end
 
 return ability_object

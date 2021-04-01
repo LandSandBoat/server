@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unforgiven = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
+    local unforgiven = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 
     if unforgiven == QUEST_ACCEPTED and player:getCharVar("UnforgivenVar") == 1 then
         player:startEvent(204) -- Dialogue for final stage of Unforgiven Quest
@@ -31,11 +31,11 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 204 then
         player:setCharVar("UnforgivenVar", 2)
-        player:addKeyItem(tpz.ki.MAP_OF_TAVNAZIA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_TAVNAZIA) -- Map of Tavnazia
+        player:addKeyItem(xi.ki.MAP_OF_TAVNAZIA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_TAVNAZIA) -- Map of Tavnazia
         player:addExp(2000 * EXP_RATE)
         player:addGil(2000 * GIL_RATE)
-        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.UNFORGIVEN)
+        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
     elseif csid == 206 then
         player:setCharVar("UnforgivenVar", 0)
     end

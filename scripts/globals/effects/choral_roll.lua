@@ -1,19 +1,19 @@
 -----------------------------------
--- tpz.effect.CHORAL_ROLL
+-- xi.effect.CHORAL_ROLL
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.SPELLINTERRUPT, effect:getPower())
+    target:addMod(xi.mod.SPELLINTERRUPT, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.SPELLINTERRUPT, effect:getPower())
+    target:delMod(xi.mod.SPELLINTERRUPT, effect:getPower())
 end
 
 return effect_object

@@ -12,8 +12,8 @@ end
 
 entity.onTrigger = function(player,npc)
     if
-        (player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_BEGINNING and player:getCharVar("RhapsodiesStatus") == 1) or
-        player:getCurrentMission(ROV) >= tpz.mission.id.rov.FLAMES_OF_PRAYER
+        (player:getCurrentMission(ROV) == xi.mission.id.rov.THE_BEGINNING and player:getCharVar("RhapsodiesStatus") == 1) or
+        player:getCurrentMission(ROV) >= xi.mission.id.rov.FLAMES_OF_PRAYER
     then
         player:startEvent(179)
     else

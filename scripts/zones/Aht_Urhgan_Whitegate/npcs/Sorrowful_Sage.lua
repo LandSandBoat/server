@@ -15,11 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rank = tpz.besieged.getMercenaryRank(player)
+    local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local tokens = 3--player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
 
-    if player:hasKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG) then
+    if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         haveimperialIDtag = 1
     else
         haveimperialIDtag = 0
@@ -55,9 +55,9 @@ entity.onEventFinish = function(player, csid, option)
         if selectiontype == 1 then
             -- taken assault mission
             player:addAssault(bit.rshift(option, 4))
-            player:delKeyItem(tpz.ki.IMPERIAL_ARMY_ID_TAG)
-            player:addKeyItem(tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+            player:delKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)
+            player:addKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
         end
     end
 end

@@ -10,7 +10,7 @@ local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(tpz.effect.WIND_MANEUVER)
+    return master:countEffect(xi.effect.WIND_MANEUVER)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
@@ -18,7 +18,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         numHits = 1,
         atkmulti = 1,
         accBonus = 50,
-        weaponType = tpz.skill.CLUB,
+        weaponType = xi.skill.CLUB,
         ftp100 = 4.0,
         ftp200 = 5.0,
         ftp300 = 5.5,
@@ -44,8 +44,8 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill, action)
 
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.EVASION_DOWN) then
-            target:addStatusEffect(tpz.effect.EVASION_DOWN, 10, 0, 30)
+        if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
+            target:addStatusEffect(xi.effect.EVASION_DOWN, 10, 0, 30)
         end
     end
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PERFECT_DODGE
+-- xi.effect.PERFECT_DODGE
 -----------------------------------
 local effect_object = {}
 

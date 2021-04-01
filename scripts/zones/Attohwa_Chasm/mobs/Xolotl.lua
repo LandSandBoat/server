@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.XOLOTL_XTRAPOLATOR)
+    player:addTitle(xi.title.XOLOTL_XTRAPOLATOR)
 end
 
 entity.onMobDespawn = function(mob)

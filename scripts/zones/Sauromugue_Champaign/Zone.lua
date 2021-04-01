@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
@@ -31,7 +31,7 @@ zone_object.onZoneIn = function( player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 3
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
         cs = 5
     end
 
@@ -39,7 +39,7 @@ zone_object.onZoneIn = function( player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -56,11 +56,11 @@ zone_object.onEventUpdate = function(player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 5 then
-        if player:getPreviousZone() == tpz.zone.GARLAIGE_CITADEL then
+        if player:getPreviousZone() == xi.zone.GARLAIGE_CITADEL then
             player:updateEvent(0, 0, 0, 0, 0, 2)
-        elseif player:getPreviousZone() == tpz.zone.MERIPHATAUD_MOUNTAINS then
+        elseif player:getPreviousZone() == xi.zone.MERIPHATAUD_MOUNTAINS then
             player:updateEvent(0, 0, 0, 0, 0, 4)
-        elseif player:getPreviousZone() == tpz.zone.ROLANBERRY_FIELDS or player:getPreviousZone() == tpz.zone.PORT_JEUNO then
+        elseif player:getPreviousZone() == xi.zone.ROLANBERRY_FIELDS or player:getPreviousZone() == xi.zone.PORT_JEUNO then
             player:updateEvent(0, 0, 0, 0, 0, 3)
         end
     end

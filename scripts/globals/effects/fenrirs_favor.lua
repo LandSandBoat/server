@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FENRIRS_FAVOR
+-- xi.effect.FENRIRS_FAVOR
 -----------------------------------
 local effect_object = {}
 

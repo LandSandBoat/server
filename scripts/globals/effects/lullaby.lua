@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LULLABY
+-- xi.effect.LULLABY
 -----------------------------------
 local effect_object = {}
 

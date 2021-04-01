@@ -1,7 +1,7 @@
 -----------------------------------
 -- Regeneration
 --
--- Description: Adds a Regen tpz.effect.
+-- Description: Adds a Regen xi.effect.
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
@@ -20,7 +20,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = mob:getMainLvl()/10 * 4 + 5
     local duration = 60
 
-    local typeEffect = tpz.effect.REGEN
+    local typeEffect = xi.effect.REGEN
 
     skill:setMsg(MobBuffMove(mob, typeEffect, power, 3, duration))
     return typeEffect

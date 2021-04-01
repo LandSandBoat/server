@@ -16,7 +16,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local herMajestysGarden = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- HER MAJESTY'S GARDEN (derfland humus)
     if (herMajestysGarden == QUEST_ACCEPTED and trade:hasItemQty(533, 1) and trade:getItemCount() == 1) then
@@ -28,18 +28,18 @@ end
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
     local MissionStatus = player:getCharVar("MissionStatus")
-    local circleOfTime = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
-    local lureOfTheWildcat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local WildcatSandy = player:getCharVar("WildcatSandy")
-    local herMajestysGarden = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+    local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- THE CRYSTAL SPRING (San d'Oria 3-2)
-    if (currentMission == tpz.mission.id.sandoria.THE_CRYSTAL_SPRING and MissionStatus == 3) then
+    if (currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and MissionStatus == 3) then
         player:startEvent(556)
 
     -- LEAUTE'S LAST WISHES (San d'Oria 6-1)
-    elseif (currentMission == tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 4 and player:hasKeyItem(tpz.ki.DREAMROSE)) then
+    elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 4 and player:hasKeyItem(xi.ki.DREAMROSE)) then
         player:startEvent(111)
 
     -- CIRCLE OF TIME (Bard AF3)
@@ -83,14 +83,14 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("circleTime", 6)
     elseif ((csid == 98 or csid == 99) and option == 1) then
         player:setCharVar("circleTime", 7)
-        player:addKeyItem(tpz.ki.MOON_RING)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MOON_RING)
+        player:addKeyItem(xi.ki.MOON_RING)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_RING)
     elseif (csid == 96) then
         if (player:getFreeSlotsCount() ~= 0) then
             player:addItem(12647)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12647)
-            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME)
-            player:addTitle(tpz.title.PARAGON_OF_BARD_EXCELLENCE)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+            player:addTitle(xi.title.PARAGON_OF_BARD_EXCELLENCE)
             player:setCharVar("circleTime", 0)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
@@ -102,13 +102,13 @@ entity.onEventFinish = function(player, csid, option)
 
     -- HER MAJESTY'S GARDEN
     elseif (csid == 84 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
     elseif (csid == 83) then
         player:tradeComplete()
-        player:addKeyItem(tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_THE_NORTHLANDS_AREA)
+        player:addKeyItem(xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_NORTHLANDS_AREA)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     end
 end

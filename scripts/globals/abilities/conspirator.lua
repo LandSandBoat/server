@@ -36,11 +36,11 @@ ability_object.onUseAbility = function(player, target, ability)
 
         -- See if we should apply the effects to the player at the top of the hate list
         if mob:getTarget() == target then
-            scale = player:getMod(tpz.mod.AUGMENTS_CONSPIRATOR)
+            scale = player:getMod(xi.mod.AUGMENTS_CONSPIRATOR)
         end
     end
 
-    target:addStatusEffect(tpz.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
+    target:addStatusEffect(xi.effect.CONSPIRATOR, subtleBlow * scale, 0, 60, 0, accuracy * scale)
 end
 
 return ability_object

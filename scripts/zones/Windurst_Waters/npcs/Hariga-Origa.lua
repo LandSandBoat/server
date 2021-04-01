@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
 
     if (smudgeStatus == QUEST_ACCEPTED and trade:hasItemQty(637, 1) and trade:hasItemQty(4382, 1)) then
         player:startEvent(417, 3000)
@@ -24,9 +24,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    GlyphHanger = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
-    chasingStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CHASING_TALES)
-    smudgeStatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+    GlyphHanger = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+    chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
+    smudgeStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     Fame = player:getFameLevel(WINDURST)
 
     if (smudgeStatus == QUEST_COMPLETED and player:needToZone() == true) then
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     elseif (GlyphHanger == QUEST_COMPLETED and chasingStatus ~= QUEST_COMPLETED) then
         player:startEvent(386)
     elseif (GlyphHanger == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.NOTES_FROM_IPUPU)) then
+        if (player:hasKeyItem(xi.ki.NOTES_FROM_IPUPU)) then
             player:startEvent(385)
         else
             player:startEvent(382)
@@ -58,30 +58,30 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 381 and option == 0) then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
-        player:addKeyItem(tpz.ki.NOTES_FROM_HARIGAORIGA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.NOTES_FROM_HARIGAORIGA)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
+        player:addKeyItem(xi.ki.NOTES_FROM_HARIGAORIGA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NOTES_FROM_HARIGAORIGA)
     elseif (csid == 385) then
         player:needToZone(true)
-        player:delKeyItem(tpz.ki.NOTES_FROM_IPUPU)
-        if (player:hasKeyItem(tpz.ki.MAP_OF_THE_HORUTOTO_RUINS) == false) then
-            player:addKeyItem(tpz.ki.MAP_OF_THE_HORUTOTO_RUINS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_THE_HORUTOTO_RUINS)
+        player:delKeyItem(xi.ki.NOTES_FROM_IPUPU)
+        if (player:hasKeyItem(xi.ki.MAP_OF_THE_HORUTOTO_RUINS) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_THE_HORUTOTO_RUINS)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_HORUTOTO_RUINS)
         end
         player:addFame(WINDURST, 120)
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.GLYPH_HANGER)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
     elseif (csid == 413 and option == 0) then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     elseif (csid == 417) then
         player:needToZone(true)
         player:addGil(GIL_RATE*3000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
-        if (player:hasKeyItem(tpz.ki.MAP_OF_FEIYIN) == false) then
-            player:addKeyItem(tpz.ki.MAP_OF_FEIYIN)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_FEIYIN)
+        if (player:hasKeyItem(xi.ki.MAP_OF_FEIYIN) == false) then
+            player:addKeyItem(xi.ki.MAP_OF_FEIYIN)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_FEIYIN)
         end
         player:addFame(WINDURST, 120)
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_SMUDGE_ON_ONE_S_RECORD)
     end
 
 end

@@ -2,7 +2,7 @@
 -- Skill: Final Heaven
 -- H2H weapon skill
 -- Skill Level N/A
--- Additional effect: temporarily enhances Subtle Blow tpz.effect.
+-- Additional effect: temporarily enhances Subtle Blow xi.effect.
 -- Mods : VIT:60%
 -- 100%TP     200%TP     300%TP
 -- 3.0x        3.0x    3.0x
@@ -39,7 +39,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     end
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.RELIC)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
     -- damage = damage * ftp(tp, ftp100, ftp200, ftp300)
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

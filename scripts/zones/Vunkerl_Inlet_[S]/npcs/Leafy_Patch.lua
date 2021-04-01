@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getCharVar("BoyAndTheBeast") == 2) then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_ACCEPTED and player:getCharVar("BoyAndTheBeast") == 2) then
         if (VanadielHour() < 8) then
             player:startEvent(107)
         elseif (VanadielHour() < 16) then
@@ -32,12 +32,12 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 107) then
         if (option == 1) then
-            player:addKeyItem(tpz.ki.VUNKERL_HERB)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VUNKERL_HERB)
+            player:addKeyItem(xi.ki.VUNKERL_HERB)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VUNKERL_HERB)
             player:setCharVar("BoyAndTheBeast", 3)
         else
-            player:addKeyItem(tpz.ki.VUNKERL_HERB)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VUNKERL_HERB)
+            player:addKeyItem(xi.ki.VUNKERL_HERB)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VUNKERL_HERB)
             player:setCharVar("BoyAndTheBeast", 4)
         end
     end

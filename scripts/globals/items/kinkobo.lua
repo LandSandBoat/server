@@ -14,17 +14,17 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (target:addStatusEffect(tpz.effect.ENCHANTMENT) == false) then
-        target:addStatusEffect(tpz.effect.ENCHANTMENT, 0, 0, 3600, 17592)
+    if (target:addStatusEffect(xi.effect.ENCHANTMENT) == false) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 3600, 17592)
     end
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.SUBTLE_BLOW, 20)
+    target:addMod(xi.mod.SUBTLE_BLOW, 20)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.SUBTLE_BLOW, 20)
+    target:delMod(xi.mod.SUBTLE_BLOW, 20)
 end
 
 return item_object

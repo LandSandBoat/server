@@ -10,35 +10,35 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.NO_DROPS, 1)
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
 end
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {
-                id = tpz.jsa.PERFECT_DODGE,
+                id = xi.jsa.PERFECT_DODGE,
                 cooldown = 120, -- "Both can use Perfect Dodge multiple times, and will do so almost incessantly." (guessing a 2 minute cooldown)
                 hpp = 95,
                 endCode = function(mob)
-                    mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
+                    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
                 end,
             },
         },
     })
 
     mob:setAnimationSub(0) -- Mouth closed
-    mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 60)
-    mob:setMod(tpz.mod.TRIPLE_ATTACK, 20)
-    mob:setMod(tpz.mod.REGEN, 10)
-    mob:addMod(tpz.mod.BINDRES, 30)
-    mob:addMod(tpz.mod.SLOWRES, 10)
-    mob:addMod(tpz.mod.BLINDRES, 10)
-    mob:addMod(tpz.mod.SLEEPRES, 30)
-    mob:addMod(tpz.mod.PETRIFYRES, 10)
-    mob:addMod(tpz.mod.GRAVITYRES, 10)
-    mob:addMod(tpz.mod.LULLABYRES, 30)
+    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
+    mob:setMod(xi.mod.REGEN, 10)
+    mob:addMod(xi.mod.BINDRES, 30)
+    mob:addMod(xi.mod.SLOWRES, 10)
+    mob:addMod(xi.mod.BLINDRES, 10)
+    mob:addMod(xi.mod.SLEEPRES, 30)
+    mob:addMod(xi.mod.PETRIFYRES, 10)
+    mob:addMod(xi.mod.GRAVITYRES, 10)
+    mob:addMod(xi.mod.LULLABYRES, 30)
 end
 
 entity.onMobDisengage = function(mob, target)
@@ -53,10 +53,10 @@ function onUseAbility(mob, target, ability)
     local pTwoAct = pTwo:getCurrentAction()
 
     if ability:getID() == 437 then -- Perfect Dodge
-        mob:addStatusEffectEx(tpz.effect.FLEE, 0, 100, 0, 30)
-    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_1 and pTwoAct > 0 and pTwoAct ~= tpz.act.SLEEP and pTwoAct ~= tpz.act.STUN and pTwo:checkDistance(mob) <= 10 then
+        mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30)
+    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_1 and pTwoAct > 0 and pTwoAct ~= xi.act.SLEEP and pTwoAct ~= xi.act.STUN and pTwo:checkDistance(mob) <= 10 then
         pTwo:useMobAbility(ability:getID())
-    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_2 and pOneAct > 0 and pOneAct ~= tpz.act.SLEEP and pOneAct ~= tpz.act.STUN and pOne:checkDistance(mob) <= 10 then
+    elseif mobId == ID.mob.JAILER_OF_PRUDENCE_2 and pOneAct > 0 and pOneAct ~= xi.act.SLEEP and pOneAct ~= xi.act.STUN and pOne:checkDistance(mob) <= 10 then
         pOne:useMobAbility(ability:getID())
     end
 end
@@ -69,15 +69,15 @@ entity.onMobDespawn = function(mob)
     local firstPrudence     = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence    = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
     if (mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1) then
-        secondPrudence:setMobMod(tpz.mobMod.NO_DROPS, 0)
+        secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
-        secondPrudence:addMod(tpz.mod.ATTP, 100)
-        secondPrudence:delMod(tpz.mod.DEFP, -50)
+        secondPrudence:addMod(xi.mod.ATTP, 100)
+        secondPrudence:delMod(xi.mod.DEFP, -50)
     else
-        firstPrudence:setMobMod(tpz.mobMod.NO_DROPS, 0)
+        firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         firstPrudence:setAnimationSub(3) -- Mouth Open
-        firstPrudence:addMod(tpz.mod.ATTP, 100)
-        firstPrudence:delMod(tpz.mod.DEFP, -50)
+        firstPrudence:addMod(xi.mod.ATTP, 100)
+        firstPrudence:delMod(xi.mod.DEFP, -50)
     end
 end
 

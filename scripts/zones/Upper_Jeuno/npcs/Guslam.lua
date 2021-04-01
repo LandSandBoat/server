@@ -12,28 +12,28 @@ local entity = {}
 
 local prerequisites =
 {
-    [tpz.job.WAR] = { log = tpz.quest.log_id.BASTOK,   quest = tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
-    [tpz.job.MNK] = { log = tpz.quest.log_id.BASTOK,   quest = tpz.quest.id.bastok.THE_FIRST_MEETING            },
-    [tpz.job.WHM] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
-    [tpz.job.BLM] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.RECOLLECTIONS              },
-    [tpz.job.RDM] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS      },
-    [tpz.job.THF] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.AS_THICK_AS_THIEVES        },
-    [tpz.job.PLD] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.A_BOY_S_DREAM              },
-    [tpz.job.DRK] = { log = tpz.quest.log_id.BASTOK,   quest = tpz.quest.id.bastok.DARK_PUPPET                  },
-    [tpz.job.BST] = { log = tpz.quest.log_id.JEUNO,    quest = tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW         },
-    [tpz.job.BRD] = { log = tpz.quest.log_id.JEUNO,    quest = tpz.quest.id.jeuno.THE_REQUIEM                   },
-    [tpz.job.RNG] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.FIRE_AND_BRIMSTONE         },
-    [tpz.job.SAM] = { log = tpz.quest.log_id.OUTLANDS, quest = tpz.quest.id.outlands.YOMI_OKURI                 },
-    [tpz.job.NIN] = { log = tpz.quest.log_id.OUTLANDS, quest = tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX      },
-    [tpz.job.DRG] = { log = tpz.quest.log_id.SANDORIA, quest = tpz.quest.id.sandoria.CHASING_QUOTAS             },
-    [tpz.job.SMN] = { log = tpz.quest.log_id.WINDURST, quest = tpz.quest.id.windurst.CLASS_REUNION              },
+    [ xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
+    [ xi.job.MNK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_FIRST_MEETING            },
+    [ xi.job.WHM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
+    [ xi.job.BLM] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.RECOLLECTIONS              },
+    [ xi.job.RDM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS      },
+    [ xi.job.THF] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.AS_THICK_AS_THIEVES        },
+    [ xi.job.PLD] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.A_BOY_S_DREAM              },
+    [ xi.job.DRK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.DARK_PUPPET                  },
+    [ xi.job.BST] = { log = xi.quest.log_id.JEUNO,    quest = xi.quest.id.jeuno.SCATTERED_INTO_SHADOW         },
+    [ xi.job.BRD] = { log = xi.quest.log_id.JEUNO,    quest = xi.quest.id.jeuno.THE_REQUIEM                   },
+    [ xi.job.RNG] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.FIRE_AND_BRIMSTONE         },
+    [ xi.job.SAM] = { log = xi.quest.log_id.OUTLANDS, quest = xi.quest.id.outlands.YOMI_OKURI                 },
+    [ xi.job.NIN] = { log = xi.quest.log_id.OUTLANDS, quest = xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX      },
+    [ xi.job.DRG] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.CHASING_QUOTAS             },
+    [ xi.job.SMN] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.CLASS_REUNION              },
 }
 
 local function isFirstHandsQuest(player)
     local count = 0
 
     for i = 0, 14 do
-        if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == QUEST_COMPLETED then
             return false
         end
     end
@@ -55,12 +55,12 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() >= 50 and
         player:getCharVar("BorghertzAlreadyActiveWithJob") == 0 and
         player:getQuestStatus(prereq.log, prereq.quest) ~= QUEST_AVAILABLE and
-        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1) == QUEST_AVAILABLE
     then
         player:startEvent(155)
-    elseif player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and not player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) then
+    elseif player:getCharVar("BorghertzAlreadyActiveWithJob") >= 1 and not player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
         player:startEvent(43)
-    elseif player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) then
+    elseif player:hasKeyItem(xi.ki.OLD_GAUNTLETS) then
         player:startEvent(26)
 
         if player:getCharVar("BorghertzCS") == 0 then
@@ -86,7 +86,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 155 then
         local mJob = player:getMainJob()
 
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + mJob - 1)
         player:setCharVar("BorghertzAlreadyActiveWithJob", mJob)
     end
 end

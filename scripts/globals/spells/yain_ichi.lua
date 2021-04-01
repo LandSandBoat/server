@@ -13,10 +13,10 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    caster:delStatusEffect(tpz.effect.ENMITY_BOOST)
+    caster:delStatusEffect(xi.effect.ENMITY_BOOST)
 
-    caster:addStatusEffect(tpz.effect.PAX, 15, 0, 300)
-    return tpz.effect.PAX
+    caster:addStatusEffect(xi.effect.PAX, 15, 0, 300)
+    return xi.effect.PAX
 end
 
 return spell_object

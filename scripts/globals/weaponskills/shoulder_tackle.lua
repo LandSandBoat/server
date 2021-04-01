@@ -33,9 +33,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         params.vit_wsc = 1.0
     end
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.STUN) == false) then
-        local duration = (tp/500) * applyResistanceAddEffect(player, target, tpz.magic.ele.LIGHTNING, 0)
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, duration)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.STUN) == false) then
+        local duration = (tp/500) * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0)
+        target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
     return tpHits, extraHits, criticalHit, damage
 

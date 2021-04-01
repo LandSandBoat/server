@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.WESTERN_ADOULIN] =
+zones[ xi.zone.WESTERN_ADOULIN] =
 {
     text =
     {
@@ -53,4 +53,4 @@ zones[tpz.zone.WESTERN_ADOULIN] =
     },
 }
 
-return zones[tpz.zone.WESTERN_ADOULIN]
+return zones[ xi.zone.WESTERN_ADOULIN]

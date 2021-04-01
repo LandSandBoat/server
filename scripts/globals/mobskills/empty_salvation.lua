@@ -14,14 +14,14 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    target:dispelStatusEffect(tpz.effectFlag.DISPELABLE)
-    target:dispelStatusEffect(tpz.effectFlag.DISPELABLE)
-    target:dispelStatusEffect(tpz.effectFlag.DISPELABLE)
+    target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+    target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+    target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
 
     local dmgmod = 1
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2, tpz.magic.ele.DARK, dmgmod, TP_MAB_BONUS, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.DARK, MOBPARAM_3_SHADOW)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.DARK)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2, xi.magic.ele.DARK, dmgmod, TP_MAB_BONUS, 1)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, MOBPARAM_3_SHADOW)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
     return dmg
 end
 

@@ -6,8 +6,8 @@ require("scripts/globals/status")
 -----------------------------------
 
 local function calculateBarspellPower(caster, enhanceSkill)
-    local meritBonus = caster:getMerit(tpz.merit.BAR_SPELL_EFFECT)
-    local equipBonus = caster:getMod(tpz.mod.BARSPELL_AMOUNT)
+    local meritBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT)
+    local equipBonus = caster:getMod(xi.mod.BARSPELL_AMOUNT)
 
     if (enhanceSkill == nil or enhanceSkill < 0) then
         enhanceSkill = 0
@@ -30,12 +30,12 @@ local function calculateBarspellDuration(caster, enhanceSkill)
 end
 
 function applyBarspell(effectType, caster, target, spell)
-    local enhanceSkill = caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC)
-    local mdefBonus = caster:getMerit(tpz.merit.BAR_SPELL_EFFECT) + caster:getMod(tpz.mod.BARSPELL_MDEF_BONUS)
+    local enhanceSkill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
+    local mdefBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT) + caster:getMod(xi.mod.BARSPELL_MDEF_BONUS)
 
     local power = calculateBarspellPower(caster, enhanceSkill)
     local duration = calculateBarspellDuration(caster, enhanceSkill)
-    duration = calculateDuration(duration, tpz.skill.ENHANCING_MAGIC, tpz.magic.spellGroup.WHITE, caster, target)
+    duration = calculateDuration(duration, xi.skill.ENHANCING_MAGIC, xi.magic.spellGroup.WHITE, caster, target)
 
     target:addStatusEffect(effectType, power, 0, duration, 0, mdefBonus)
     return effectType

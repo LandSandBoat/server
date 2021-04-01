@@ -15,14 +15,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.WEAKNESS
+    local typeEffect = xi.effect.WEAKNESS
     local dmg1 = mob:getHP()*0.24
     local dmg2 = dmg1*0.5
     -- The dmg amounts and duration are guesstimated based on wiki info.
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, 90))
 
     mob:takeDamage(dmg1)
-    target:takeDamage(dmg2, mob, tpz.attackType.MAGICAL, tpz.damageType.ELEMENTAL)
+    target:takeDamage(dmg2, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
 
     return dmg2
 end

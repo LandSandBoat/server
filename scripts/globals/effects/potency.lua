@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.POTENCY
+-- xi.effect.POTENCY
 -----------------------------------
 local effect_object = {}
 

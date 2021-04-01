@@ -11,18 +11,18 @@ require("scripts/globals/status")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.SEIGAN) then
+    if player:hasStatusEffect(xi.effect.SEIGAN) then
         ability:setRecast(ability:getRecast() / 2)
     end
     return 0, 0
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.COPY_IMAGE) or player:hasStatusEffect(tpz.effect.BLINK) then
+    if player:hasStatusEffect(xi.effect.COPY_IMAGE) or player:hasStatusEffect(xi.effect.BLINK) then
         -- Returns "no effect" message when Copy Image is active when Third Eye is used.
-        ability:setMsg(tpz.msg.basic.JA_NO_EFFECT)
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
     else
-        player:addStatusEffect(tpz.effect.THIRD_EYE, 0, 0, 30) -- Power keeps track of procs
+        player:addStatusEffect(xi.effect.THIRD_EYE, 0, 0, 30) -- Power keeps track of procs
     end
 end
 

@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    wonderingstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+    wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     if (wonderingstatus == 1 and trade:hasItemQty(718, 1) == true and trade:getItemCount() == 1 and player:getCharVar("QuestWonderingMin_var") == 1) then
         player:startEvent(638)                 -- WONDERING_MINSTREL: Quest Finish
     end
@@ -21,10 +21,10 @@ end
 
 entity.onTrigger = function(player, npc)
 
-            --        player:delQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+            --        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
 
 
-    wonderingstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+    wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     fame = player:getFameLevel(WINDURST)
     if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then
         rand = math.random(1, 2)
@@ -57,17 +57,17 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 634) then    -- WONDERING_MINSTREL: Quest Start
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     elseif (csid == 638) then  -- WONDERING_MINSTREL: Quest Finish
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)
         else
             player:tradeComplete(trade)
-            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WONDERING_MINSTREL)
+            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
             player:addItem(17349)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17349)
             player:addFame(WINDURST, 75)
-            player:addTitle(tpz.title.DOWN_PIPER_PIPEUPPERER)
+            player:addTitle(xi.title.DOWN_PIPER_PIPEUPPERER)
             player:needToZone(true)
             player:setCharVar("QuestWonderingMin_var", 0)
         end

@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-ForemansBestFriend = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
+ForemansBestFriend = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
 
     if (ForemansBestFriend == QUEST_ACCEPTED) then
         player:startEvent(111)

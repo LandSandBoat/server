@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DIA
+-- xi.effect.DIA
 -----------------------------------
 -- Quick Explanation of Algorithm:
 -- Dia 1: Power of 1. Results in reduced defense of ~5.27%  (27/512) and 1 hp/tick damage.
@@ -13,8 +13,8 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
     local subpower = effect:getSubPower()
-    target:addMod(tpz.mod.REGEN_DOWN, power)
-    target:addMod(tpz.mod.DEFP, -subpower)
+    target:addMod(xi.mod.REGEN_DOWN, power)
+    target:addMod(xi.mod.DEFP, -subpower)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -23,8 +23,8 @@ end
 effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower()
     local subpower = effect:getSubPower()
-    target:delMod(tpz.mod.REGEN_DOWN, power)
-    target:delMod(tpz.mod.DEFP, -subpower)
+    target:delMod(xi.mod.REGEN_DOWN, power)
+    target:delMod(xi.mod.DEFP, -subpower)
 end
 
 return effect_object

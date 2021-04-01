@@ -9,10 +9,10 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.SOUL_VOICE, cooldown = 200, hpp = 95},
+            {id = xi.jsa.SOUL_VOICE, cooldown = 200, hpp = 95},
         },
     })
 end

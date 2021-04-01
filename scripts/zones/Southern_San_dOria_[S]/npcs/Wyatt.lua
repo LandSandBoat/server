@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local seeingSpots = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
+    local seeingSpots = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
     if (seeingSpots == QUEST_AVAILABLE) then
         player:startEvent(2)
     elseif (seeingSpots == QUEST_ACCEPTED) then
@@ -31,16 +31,16 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 2) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
     elseif (csid == 4) then
         player:tradeComplete()
-        if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS) == QUEST_ACCEPTED) then
-            player:addTitle(tpz.title.LADY_KILLER)
+        if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS) == QUEST_ACCEPTED) then
+            player:addTitle(xi.title.LADY_KILLER)
             player:addGil(GIL_RATE*3000)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
-            player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_SPOTS)
+            player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_SPOTS)
         else
-            player:addTitle(tpz.title.LADY_KILLER)
+            player:addTitle(xi.title.LADY_KILLER)
             player:addGil(GIL_RATE*3000)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
         end

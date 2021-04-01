@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)) then
+    if (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)) then
         player:startEvent(12)
     else
         player:messageSpecial(ID.text.AN_EMPTY_LIGHT_SWIRLS)
@@ -29,7 +29,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 12 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.LUFAISE_VORTEX)
+        xi.teleport.to(player, xi.teleport.id.LUFAISE_VORTEX)
     end
 
 end

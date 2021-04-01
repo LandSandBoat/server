@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local DELM = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DONT_EVER_LEAF_ME)
-    local FOOL = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
+    local DELM = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DONT_EVER_LEAF_ME)
+    local FOOL = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FLAVORS_OF_OUR_LIVES)
     if ((DELM == QUEST_ACCEPTED) and (player:getCharVar("DELM_Dewalt_Branch") < 1)) then
         -- Progresses Quest: 'Dont Ever Leaf Me'
         player:startEvent(5013)

@@ -12,7 +12,7 @@ attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_AI_TICK", "AUTO_HEAT_SEEKER_TICK", function(pet, target)
         if pet:getLocalVar("heatseekertick") > 0 then
             local master = pet:getMaster()
-            local maneuvers = master:countEffect(tpz.effect.THUNDER_MANEUVER)
+            local maneuvers = master:countEffect(xi.effect.THUNDER_MANEUVER)
             local lasttick = pet:getLocalVar("heatseekertick")
             local tick = VanadielTime()
             local dt = tick - lasttick
@@ -24,7 +24,7 @@ attachment_object.onEquip = function(pet)
                     amount = 30 - prevamount
                 end
                 if amount ~= 0 then
-                    pet:addMod(tpz.mod.ACC, amount)
+                    pet:addMod(xi.mod.ACC, amount)
                 end
             else
                 amount = -1 * dt
@@ -32,7 +32,7 @@ attachment_object.onEquip = function(pet)
                     amount = -prevamount
                 end
                 if amount ~= 0 then
-                    pet:delMod(tpz.mod.ACC, -amount)
+                    pet:delMod(xi.mod.ACC, -amount)
                 end
             end
             if amount ~= 0 then
@@ -43,7 +43,7 @@ attachment_object.onEquip = function(pet)
     end)
     pet:addListener("DISENGAGE", "AUTO_HEAT_SEEKER_DISENGAGE", function(pet)
         if pet:getLocalVar("heatseeker") > 0 then
-            pet:delMod(tpz.mod.ACC, pet:getLocalVar("heatseeker"))
+            pet:delMod(xi.mod.ACC, pet:getLocalVar("heatseeker"))
             pet:setLocalVar("heatseeker", 0)
         end
         pet:setLocalVar("heatseekertick", 0)

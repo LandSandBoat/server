@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
 
     local sausageTimer = player:getCharVar("SGusta_Sausage_Timer")
 
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) ~= QUEST_AVAILABLE then
         if sausageTimer == 0 then
             player:messageSpecial(ID.text.FIRE_GOOD)
         elseif os.time() < sausageTimer then

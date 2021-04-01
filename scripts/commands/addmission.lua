@@ -29,7 +29,7 @@ function onTrigger(player, logId, missionId, target)
     logId = logInfo.mission_log
 
     -- validate missionId
-    local areaMissionIds = tpz.mission.id[tpz.mission.area[logId]]
+    local areaMissionIds = xi.mission.id[ xi.mission.area[logId]]
     if (missionId ~= nil) then
         missionId = tonumber(missionId) or areaMissionIds[string.upper(missionId)] or _G[string.upper(missionId)]
     end

@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.MAMOOK] =
+zones[ xi.zone.MAMOOK] =
 {
     text =
     {
@@ -63,4 +63,4 @@ zones[tpz.zone.MAMOOK] =
     },
 }
 
-return zones[tpz.zone.MAMOOK]
+return zones[ xi.zone.MAMOOK]

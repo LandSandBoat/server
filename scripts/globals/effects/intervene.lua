@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.INTERVENE
+-- xi.effect.INTERVENE
 -----------------------------------
 local effect_object = {}
 

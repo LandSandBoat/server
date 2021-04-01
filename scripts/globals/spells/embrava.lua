@@ -15,19 +15,19 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- If Tabula Rasa wears before spell goes off, no Embrava for you!
-    if not caster:hasStatusEffect(tpz.effect.TABULA_RASA) then
-        spell:setMsg(tpz.msg.basic.MAGIC_CANNOT_CAST)
+    if not caster:hasStatusEffect(xi.effect.TABULA_RASA) then
+        spell:setMsg(xi.msg.basic.MAGIC_CANNOT_CAST)
         return 0
     end
 
     -- Skill caps at 500
-    local skill = math.min(caster:getSkillLevel(tpz.skill.ENHANCING_MAGIC), 500)
+    local skill = math.min(caster:getSkillLevel(xi.skill.ENHANCING_MAGIC), 500)
     local duration = calculateDuration(90, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 5, target:getMainLvl())
 
-    target:addStatusEffect(tpz.effect.EMBRAVA, skill, 0, duration)
+    target:addStatusEffect(xi.effect.EMBRAVA, skill, 0, duration)
 
-    return tpz.effect.EMBRAVA
+    return xi.effect.EMBRAVA
 end
 
 return spell_object

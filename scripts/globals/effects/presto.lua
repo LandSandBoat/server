@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PRESTO
+-- xi.effect.PRESTO
 -----------------------------------
 local effect_object = {}
 

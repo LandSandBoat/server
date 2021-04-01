@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.BLOOD_WEAPON, 1, 0, 30)
+    target:addStatusEffect(xi.effect.BLOOD_WEAPON, 1, 0, 30)
 end
 
 return ability_object

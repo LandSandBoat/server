@@ -11,8 +11,8 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
     if
         player:getCharVar("BorghertzSparkKilled") == 0 and
-        player:hasKeyItem(tpz.ki.OLD_GAUNTLETS) and
-        not player:hasKeyItem(tpz.ki.SHADOW_FLAMES) and
+        player:hasKeyItem(xi.ki.OLD_GAUNTLETS) and
+        not player:hasKeyItem(xi.ki.SHADOW_FLAMES) and
         player:getCharVar("BorghertzCS") >= 2
     then
         player:setCharVar("BorghertzSparkKilled", 1)

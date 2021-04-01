@@ -12,12 +12,12 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and
         player:getCharVar("ridingOnTheClouds_3") == 2 and
         npcUtil.tradeHas(trade, 1127)
     then
         player:setCharVar("ridingOnTheClouds_3", 0)
-        npcUtil.giveKeyItem(player, tpz.ki.SOMBER_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SOMBER_STONE)
         player:confirmTrade()
     end
 end

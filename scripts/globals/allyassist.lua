@@ -1,6 +1,6 @@
 tpz = tpz or {}
 
-tpz.ally =
+ xi.ally =
 {
     ASSIST_PLAYER = 1,
     ASSIST_RANDOM = 2,
@@ -9,7 +9,7 @@ tpz.ally =
         -- print("Ally Assist Initiated")
 
         if assistMode == nil then
-            assistMode = tpz.ally.ASSIST_PLAYER
+            assistMode = xi.ally.ASSIST_PLAYER
         end
 
         local mobs
@@ -38,7 +38,7 @@ tpz.ally =
         end
 
         -- In this mode, find a player with a battle target, and assist that player
-        if assistMode == tpz.ally.ASSIST_PLAYER then
+        if assistMode == xi.ally.ASSIST_PLAYER then
             local assistTarget = 0
 
             -- Loop players and find someone who is engaged in battle
@@ -50,9 +50,9 @@ tpz.ally =
                 end
             end
 
-            -- printf("tpz.ally.startAssist: target = %u (tpz.ally.ASSIST_PLAYER)", assistTarget)
+            -- printf(" xi.ally.startAssist: target = %u (xi.ally.ASSIST_PLAYER)", assistTarget)
 
-            -- Attack their target if found. If none found, we'll fall to tpz.ally.ASSIST_RANDOM.
+            -- Attack their target if found. If none found, we'll fall to xi.ally.ASSIST_RANDOM.
             -- A variety of reasons could cause this - players have hate but are not engaged is one.
             -- Being aggroed when not engaged is another.
 
@@ -64,7 +64,7 @@ tpz.ally =
             end
         end
 
-        -- tpz.ally.ASSIST RANDOM - also a fallback for tpz.ally.ASSIST_PLAYER
+        -- xi.ally.ASSIST RANDOM - also a fallback for xi.ally.ASSIST_PLAYER
         -- Pick an enemy to attack. Some allies do this intentionally. Some allies start to attack on their own if
         -- a player stalls too long. This can be used to set a target in both cases.
 

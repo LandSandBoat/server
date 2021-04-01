@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     {525.180,-0.500,288.169},
@@ -46,7 +46,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
             end
         end
         if allDead then
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[5]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[5]):setStatus(xi.status.NORMAL)
         end
     end
 end

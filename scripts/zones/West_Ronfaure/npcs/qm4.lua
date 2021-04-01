@@ -15,13 +15,13 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) and
+        player:getCurrentMission(SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE) and
         player:getCharVar("MissionStatus") == 1 and
         not GetMobByID(ID.mob.MARAUDER_DVOGZOG):isSpawned()
     then
         if player:getCharVar("Mission7-1MobKilled") == 1 and player:needToZone() then
-            player:addKeyItem(tpz.ki.ANCIENT_SANDORIAN_TABLET)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_SANDORIAN_TABLET)
+            player:addKeyItem(xi.ki.ANCIENT_SANDORIAN_TABLET)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_SANDORIAN_TABLET)
             player:setCharVar("Mission7-1MobKilled", 0)
             player:setCharVar("MissionStatus", 2)
         else

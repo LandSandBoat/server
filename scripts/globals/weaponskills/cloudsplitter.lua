@@ -22,8 +22,8 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local params = {}
     params.ftp100 = 3.75 params.ftp200 = 5.0 params.ftp300 = 6.0
     params.str_wsc = 0.4 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.4 params.chr_wsc = 0.0
-    params.ele = tpz.magic.ele.LIGHTNING
-    params.skill = tpz.skill.AXE
+    params.ele = xi.magic.ele.LIGHTNING
+    params.skill = xi.skill.AXE
     params.includemab = true
 
     if USE_ADOULIN_WEAPON_SKILL_CHANGES then
@@ -31,7 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     end
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 

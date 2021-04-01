@@ -10,7 +10,7 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.REGAIN, 50)
+    mob:addMod(xi.mod.REGAIN, 50)
 end
 
 entity.onMobSpawn = function(mob)
@@ -44,9 +44,9 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     local eald_narche = GetMobByID(mob:getID() - 1)
-    eald_narche:delStatusEffect(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
-    eald_narche:delStatusEffect(tpz.effect.ARROW_SHIELD, 0, 1, 0, 0)
-    eald_narche:delStatusEffect(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+    eald_narche:delStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
+    eald_narche:delStatusEffect(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
+    eald_narche:delStatusEffect(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -63,8 +63,8 @@ entity.onEventFinish = function(player, csid, option, target)
         mob = SpawnMob(target:getID()+1)
         mob:updateEnmity(player)
         -- the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
-        mob:addStatusEffectEx(tpz.effect.BIND, 0, 1, 0, 30)
-        mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
+        mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)
+        mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 40)
     end
 
 end

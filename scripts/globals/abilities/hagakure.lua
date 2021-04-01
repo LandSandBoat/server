@@ -14,8 +14,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:delStatusEffect(tpz.effect.HAGAKURE)
-    player:addStatusEffect(tpz.effect.HAGAKURE, 1, 0, 60)
+    target:delStatusEffect(xi.effect.HAGAKURE)
+    player:addStatusEffect(xi.effect.HAGAKURE, 1, 0, 60)
 end
 
 return ability_object

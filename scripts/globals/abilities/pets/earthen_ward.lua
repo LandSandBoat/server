@@ -13,11 +13,11 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onPetAbility = function(target, pet, skill)
-    target:delStatusEffect(tpz.effect.STONESKIN)
+    target:delStatusEffect(xi.effect.STONESKIN)
     local amount = pet:getMainLvl()*2 + 50
-    target:addStatusEffect(tpz.effect.STONESKIN, amount, 0, 900, 0, 0, 3)
-    skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
-    return tpz.effect.STONESKIN
+    target:addStatusEffect(xi.effect.STONESKIN, amount, 0, 900, 0, 0, 3)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
+    return xi.effect.STONESKIN
 end
 
 return ability_object

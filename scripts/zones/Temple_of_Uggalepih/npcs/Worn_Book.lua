@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.OLD_RUSTY_KEY) or player:hasKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS) then
+    if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) or player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
         player:messageSpecial(ID.text.NO_REASON_TO_INVESTIGATE)
     else
         local offset = npc:getID() - ID.npc.BOOK_OFFSET
@@ -36,9 +36,9 @@ entity.onEventFinish = function(player, csid, option)
     end
 
     if player:getCharVar("paintbrushOfSouls_book") == 7 then
-        player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, tpz.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(tpz.ki.OLD_RUSTY_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_RUSTY_KEY)
+        player:messageSpecial(ID.text.FALLS_FROM_THE_BOOK, xi.ki.OLD_RUSTY_KEY)
+        player:addKeyItem(xi.ki.OLD_RUSTY_KEY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_RUSTY_KEY)
         player:setCharVar("paintbrushOfSouls_book", 0)
     end
 end

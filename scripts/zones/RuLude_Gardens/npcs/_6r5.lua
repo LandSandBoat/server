@@ -15,18 +15,18 @@ end
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
 
-    if pNation == tpz.nation.SANDORIA then
+    if pNation == xi.nation.SANDORIA then
         local currentMission = player:getCurrentMission(pNation)
         local MissionStatus = player:getCharVar("MissionStatus")
 
-        if currentMission == tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 6 then
+        if currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 6 then
             player:startEvent(39)
         elseif player:getRank() == 4 and
-            currentMission == tpz.mission.id.sandoria.NONE and
+            currentMission == xi.mission.id.sandoria.NONE and
             getMissionRankPoints(player, 13) == 1 and
             MissionStatus == 0
         then
-            if player:hasKeyItem(tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
+            if player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
                 player:startEvent(130, 1)
             else
                 player:startEvent(130)
@@ -51,9 +51,9 @@ entity.onEventFinish = function(player, csid, option)
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 130 and option == 1 then
         player:setCharVar("MissionStatus", 1)
-        if not player:hasKeyItem(tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
-            player:addKeyItem(tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+        if not player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
+            player:addKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
         end
     end
 end

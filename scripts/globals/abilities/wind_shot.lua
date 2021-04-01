@@ -12,7 +12,7 @@ local ability_object = {}
 ability_object.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
-    if player:getWeaponSkillType(tpz.slot.RANGED) ~= tpz.skill.MARKSMANSHIP or player:getWeaponSkillType(tpz.slot.AMMO) ~= tpz.skill.MARKSMANSHIP then
+    if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
         return 216, 0
     end
     if player:hasItem(2178, 0) or player:hasItem(2974, 0) then
@@ -25,28 +25,28 @@ end
 ability_object.onUseAbility = function(player, target, ability, action)
     local params = {}
     params.includemab = true
-    local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(tpz.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(tpz.mod.QUICK_DRAW_DMG_PERCENT) / 100)
-    dmg  = addBonusesAbility(player, tpz.magic.ele.WIND, target, dmg, params)
-    local bonusAcc = player:getStat(tpz.mod.AGI) / 2 + player:getMerit(tpz.merit.QUICK_DRAW_ACCURACY) + player:getMod(tpz.mod.QUICK_DRAW_MACC)
-    dmg = dmg * applyResistanceAbility(player, target, tpz.magic.ele.WIND, tpz.skill.NONE, bonusAcc)
-    dmg = adjustForTarget(target, dmg, tpz.magic.ele.WIND)
+    local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
+    dmg  = addBonusesAbility(player, xi.magic.ele.WIND, target, dmg, params)
+    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+    dmg = dmg * applyResistanceAbility(player, target, xi.magic.ele.WIND, xi.skill.NONE, bonusAcc)
+    dmg = adjustForTarget(target, dmg, xi.magic.ele.WIND)
 
     params.targetTPMult = 0 -- Quick Draw does not feed TP
-    dmg = takeAbilityDamage(target, player, params, true, dmg, tpz.attackType.MAGICAL, tpz.damageType.WIND, tpz.slot.RANGED, 1, 0, 0, 0, action, nil)
+    dmg = takeAbilityDamage(target, player, params, true, dmg, xi.attackType.MAGICAL, xi.damageType.WIND, xi.slot.RANGED, 1, 0, 0, 0, action, nil)
 
     if dmg > 0 then
         local effects = {}
-        local choke = target:getStatusEffect(tpz.effect.CHOKE)
+        local choke = target:getStatusEffect(xi.effect.CHOKE)
         if choke ~= nil then
             table.insert(effects, choke)
         end
 
-        local threnody = target:getStatusEffect(tpz.effect.THRENODY)
-        if threnody ~= nil and threnody:getSubPower() == tpz.mod.EARTHRES then
+        local threnody = target:getStatusEffect(xi.effect.THRENODY)
+        if threnody ~= nil and threnody:getSubPower() == xi.mod.EARTHRES then
             table.insert(effects, threnody)
         end
         --TODO: Frightful Roar
-        --[[local frightfulRoar = target:getStatusEffect(tpz.effect.)
+        --[[local frightfulRoar = target:getStatusEffect(xi.effect.)
         if (frightfulRoar ~= nil) then
             effects[counter] = frightfulRoar
             counter = counter + 1

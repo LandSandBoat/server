@@ -39,10 +39,10 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("LuckOfTheDraw", 5) -- var will remain for af quests
             player:addItem(5493)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 5493)
-            player:delKeyItem(tpz.ki.FORGOTTEN_HEXAGUN)
-            player:unlockJob(tpz.job.COR)
+            player:delKeyItem(xi.ki.FORGOTTEN_HEXAGUN)
+            player:unlockJob(xi.job.COR)
             player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_CORSAIR)
-            player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
+            player:completeQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
         end
     elseif (EventFinishBCNM(player, csid, option)) then
         return

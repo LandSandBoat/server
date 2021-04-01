@@ -26,19 +26,19 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     local params = {}
 
-    params.diff = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    params.attribute = tpz.mod.INT
+    params.attribute = xi.mod.INT
 
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.skillType = xi.skill.BLUE_MAGIC
 
     params.bonus = 1.0
 
     local resist = applyResistance(caster, target, spell, params)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
-    params.attackType = tpz.attackType.BREATH
-    params.damageType = tpz.damageType.WIND
+    params.attackType = xi.attackType.BREATH
+    params.damageType = xi.damageType.WIND
     params.multiplier = 1.375
     params.tMultiplier = 1.0
     params.duppercap = 54
@@ -53,7 +53,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (damage > 0 and resist > 0.125) then
-        local typeEffect = tpz.effect.BLINDNESS
+        local typeEffect = xi.effect.BLINDNESS
         target:delStatusEffect(typeEffect)
         target:addStatusEffect(typeEffect, 5, 0, getBlueEffectDuration(caster, resist, typeEffect))
     end

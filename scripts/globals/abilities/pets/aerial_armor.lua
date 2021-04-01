@@ -13,10 +13,10 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onPetAbility = function(target, pet, skill)
-    target:delStatusEffect(tpz.effect.BLINK)
-    target:addStatusEffect(tpz.effect.BLINK, 3, 0, 900)
-    skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
-    return tpz.effect.BLINK
+    target:delStatusEffect(xi.effect.BLINK)
+    target:addStatusEffect(xi.effect.BLINK, 3, 0, 900)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
+    return xi.effect.BLINK
 end
 
 return ability_object

@@ -15,15 +15,15 @@ item_object.onAdditionalEffect = function(player, target, damage)
     if math.random(100) <= chance then
         local finalDMG = math.floor(player.getHP(player) / 4)
         if finalDMG > 0 then
-            local damageType = player:getWeaponDamageType(tpz.slot.MAIN)
-            local physicalResist = target:getMod(tpz.mod.SLASHRES) / 1000
+            local damageType = player:getWeaponDamageType(xi.slot.MAIN)
+            local physicalResist = target:getMod(xi.mod.SLASHRES) / 1000
             finalDMG = finalDMG * physicalResist
             finalDMG = target:physicalDmgTaken(finalDMG, damageType)
-            finalDMG = finalDMG - target:getMod(tpz.mod.PHALANX)
+            finalDMG = finalDMG - target:getMod(xi.mod.PHALANX)
             finalDMG = utils.clamp(finalDMG, 0, 99999)
             finalDMG = utils.stoneskin(target, finalDMG)
-            target:takeDamage(finalDMG, player, tpz.attackType.PHYSCIAL, damageType)
-            return tpz.subEffect.LIGHT_DAMAGE, tpz.msg.basic.ADD_EFFECT_DMG, finalDMG
+            target:takeDamage(finalDMG, player, xi.attackType.PHYSCIAL, damageType)
+            return xi.subEffect.LIGHT_DAMAGE, xi.msg.basic.ADD_EFFECT_DMG, finalDMG
         end
     end
 

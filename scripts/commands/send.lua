@@ -352,7 +352,7 @@ function onTrigger(player, bytes)
         if (tonumber(dest) ~= nil) then
             -- destination is a zone ID.
             zone = tonumber(dest)
-            if (zone < 0 or zone >= tpz.zone.MAX_ZONE) then
+            if (zone < 0 or zone >= xi.zone.MAX_ZONE) then
                 error(player, "Invalid zone ID.")
                 return
             end

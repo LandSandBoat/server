@@ -8,11 +8,11 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(tpz.mod.STUNRES, 50)
+    mob:addMod(xi.mod.STUNRES, 50)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 494)
+    xi.hunts.checkHunt(mob, player, 494)
 end
 
 return entity

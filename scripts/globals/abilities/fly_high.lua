@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    tpz.job_utils.dragoon.useFlyHigh(player, target, ability)
+    xi.job_utils.dragoon.useFlyHigh(player, target, ability)
 end
 
 return ability_object

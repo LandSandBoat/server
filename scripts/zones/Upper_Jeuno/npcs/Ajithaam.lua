@@ -45,14 +45,14 @@ Port Jeuno (West to East)
 ]]--
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+    if (trade:getGil() == 300 and trade:getItemCount() == 1 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_COMPLETED and player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES) then
         -- Needs a check for at least traded an invitation card to Naja Salaheem
         player:startEvent(10177)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local LureJeuno = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+    local LureJeuno = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
     local WildcatJeuno = player:getCharVar("WildcatJeuno")
     if (LureJeuno ~= 2 and ENABLE_TOAU == 1) then
         if (LureJeuno == 0) then
@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(10090)
             end
         end
-    elseif (player:getCurrentMission(TOAU) >= tpz.mission.id.toau.PRESIDENT_SALAHEEM) then
+    elseif (player:getCurrentMission(TOAU) >= xi.mission.id.toau.PRESIDENT_SALAHEEM) then
         player:startEvent(10176)
     else
         player:startEvent(10092)
@@ -78,21 +78,21 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 10088) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
         player:setCharVar("WildcatJeuno", 0)
-        player:addKeyItem(tpz.ki.WHITE_SENTINEL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WHITE_SENTINEL_BADGE)
+        player:addKeyItem(xi.ki.WHITE_SENTINEL_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHITE_SENTINEL_BADGE)
     elseif (csid == 10091) then
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
         player:addFame(JEUNO, 150)
         player:setCharVar("WildcatJeuno", 0)
-        player:delKeyItem(tpz.ki.WHITE_SENTINEL_BADGE)
-        player:addKeyItem(tpz.ki.WHITE_INVITATION_CARD)
-        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.WHITE_SENTINEL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WHITE_INVITATION_CARD)
+        player:delKeyItem(xi.ki.WHITE_SENTINEL_BADGE)
+        player:addKeyItem(xi.ki.WHITE_INVITATION_CARD)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.WHITE_SENTINEL_BADGE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHITE_INVITATION_CARD)
     elseif (csid == 10177) then
         player:tradeComplete()
-        tpz.teleport.to(player, tpz.teleport.id.WHITEGATE)
+        xi.teleport.to(player, xi.teleport.id.WHITEGATE)
     end
 end
 

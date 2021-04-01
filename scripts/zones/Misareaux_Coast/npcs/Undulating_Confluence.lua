@@ -19,7 +19,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 14 and option == 1 then
-        tpz.teleport.to(player, tpz.teleport.id.ESCHA_RUAUN)
+        xi.teleport.to(player, xi.teleport.id.ESCHA_RUAUN)
     end
 end
 

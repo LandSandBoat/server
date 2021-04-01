@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.FAFNIR_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
@@ -33,7 +33,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.NIDHOGG_SLAYER)
+    player:addTitle(xi.title.NIDHOGG_SLAYER)
 end
 
 entity.onMobDespawn = function(mob)

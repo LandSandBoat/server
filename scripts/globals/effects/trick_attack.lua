@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TRICK_ATTACK
+-- xi.effect.TRICK_ATTACK
 -----------------------------------
 local effect_object = {}
 

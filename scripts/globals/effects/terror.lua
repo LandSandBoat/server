@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TERROR
+-- xi.effect.TERROR
 -----------------------------------
 local effect_object = {}
 

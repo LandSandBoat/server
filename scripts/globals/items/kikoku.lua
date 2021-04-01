@@ -12,9 +12,9 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if math.random(100) <= chance and applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0) > 0.5 then
-        target:addStatusEffect(tpz.effect.PARALYSIS, 17, 0, 30) -- Power needs verification/adjustment.
-        return tpz.subEffect.PARALYSIS, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.PARALYSIS
+    if math.random(100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0) > 0.5 then
+        target:addStatusEffect(xi.effect.PARALYSIS, 17, 0, 30) -- Power needs verification/adjustment.
+        return xi.subEffect.PARALYSIS, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.PARALYSIS
     end
 
     return 0, 0, 0

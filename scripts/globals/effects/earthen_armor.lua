@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.EARTHEN_ARMOR
+-- xi.effect.EARTHEN_ARMOR
 -----------------------------------
 local effect_object = {}
 

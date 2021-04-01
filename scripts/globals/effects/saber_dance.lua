@@ -1,22 +1,22 @@
 -----------------------------------
--- tpz.effect.SABER_DANCE
+-- xi.effect.SABER_DANCE
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    local saberDanceMerits = target:getMerit(tpz.merit.SABER_DANCE)
+    local saberDanceMerits = target:getMerit(xi.merit.SABER_DANCE)
     if (saberDanceMerits>5) then
-        target:addMod(tpz.mod.SAMBA_PDURATION, (saberDanceMerits -5))
+        target:addMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits -5))
     end
     -- Does not stack with warrior Double Attack trait, so disable it
     if (target:hasTrait(15)) then --TRAIT_DOUBLE_ATTACK
-        target:delMod(tpz.mod.DOUBLE_ATTACK, 10)
+        target:delMod(xi.mod.DOUBLE_ATTACK, 10)
     end
-    target:addMod(tpz.mod.DOUBLE_ATTACK, effect:getPower())
+    target:addMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
 
-    target:delStatusEffect(tpz.effect.FAN_DANCE)
+    target:delStatusEffect(xi.effect.FAN_DANCE)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -26,20 +26,20 @@ effect_object.onEffectTick = function(target, effect)
    if (power > 20) then
         decayby = 3
         effect:setPower(power-decayby)
-        target:delMod(tpz.mod.DOUBLE_ATTACK, decayby)
+        target:delMod(xi.mod.DOUBLE_ATTACK, decayby)
     end
 end
 
 effect_object.onEffectLose = function(target, effect)
-    local saberDanceMerits = target:getMerit(tpz.merit.SABER_DANCE)
+    local saberDanceMerits = target:getMerit(xi.merit.SABER_DANCE)
     if (saberDanceMerits>1) then
-        target:delMod(tpz.mod.SAMBA_PDURATION, (saberDanceMerits -5))
+        target:delMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits -5))
     end
     if (target:hasTrait(15)) then --TRAIT_DOUBLE_ATTACK
         -- put Double Attack trait back on.
-        target:addMod(tpz.mod.DOUBLE_ATTACK, 10)
+        target:addMod(xi.mod.DOUBLE_ATTACK, 10)
     end
-    target:delMod(tpz.mod.DOUBLE_ATTACK, effect:getPower())
+    target:delMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
 end
 
 return effect_object

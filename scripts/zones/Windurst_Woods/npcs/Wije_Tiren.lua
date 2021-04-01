@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         5014,    98,       --Scroll of Herb Pastoral
         2864,  9200        --Federation Waystone
     }
-    tpz.shop.general(player, stock, WINDURST)
+    xi.shop.general(player, stock, WINDURST)
 end
 
 entity.onEventUpdate = function(player, csid, option)

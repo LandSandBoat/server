@@ -10,13 +10,13 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
             {
-                id = tpz.jsa.MIGHTY_STRIKES,
+                id = xi.jsa.MIGHTY_STRIKES,
                 endCode = function(mob)
-                    mob:addMod(tpz.mod.ATT, 200)
+                    mob:addMod(xi.mod.ATT, 200)
                 end,
             },
         },

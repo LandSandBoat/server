@@ -15,16 +15,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
-        if player:getCharVar("AyameAndKaede_Event") == 2 and not player:hasKeyItem(tpz.ki.STRANGELY_SHAPED_CORAL) then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED then
+        if player:getCharVar("AyameAndKaede_Event") == 2 and not player:hasKeyItem(xi.ki.STRANGELY_SHAPED_CORAL) then
             if
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_I):isSpawned() and
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_II):isSpawned() and
                 not GetMobByID(ID.mob.KORROLOKA_LEECH_III):isSpawned()
             then
                 if player:getCharVar("KorrolokaLeeches_Killed") > 0 then
-                    player:addKeyItem(tpz.ki.STRANGELY_SHAPED_CORAL)
-                    player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STRANGELY_SHAPED_CORAL)
+                    player:addKeyItem(xi.ki.STRANGELY_SHAPED_CORAL)
+                    player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STRANGELY_SHAPED_CORAL)
                     player:setCharVar("KorrolokaLeeches_Killed", 0)
 
                     if player:getCharVar("KorrolokaLeeches_SpawningPC") > 0 then

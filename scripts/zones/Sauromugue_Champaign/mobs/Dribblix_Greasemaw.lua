@@ -8,9 +8,9 @@ require("scripts/globals/keyitems")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if not player:hasKeyItem(tpz.ki.SEEDSPALL_VIRIDIS) and not player:hasKeyItem(tpz.ki.VIRIDIAN_KEY) then
-        player:addKeyItem(tpz.ki.SEEDSPALL_VIRIDIS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEEDSPALL_VIRIDIS)
+    if not player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS) and not player:hasKeyItem(xi.ki.VIRIDIAN_KEY) then
+        player:addKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEEDSPALL_VIRIDIS)
     end
 end
 

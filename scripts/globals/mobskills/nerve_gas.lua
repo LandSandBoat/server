@@ -1,7 +1,7 @@
 -----------------------------------
 -- Nerve Gas
 --
--- Description: Inflicts curse and powerful poison tpz.effect.
+-- Description: Inflicts curse and powerful poison xi.effect.
 -- Type: Magical
 -- Wipes Shadows
 -- Range: 10' Radial
@@ -35,9 +35,9 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobStatusEffectMove(mob, target, tpz.effect.CURSE_I, 50, 0, 420))
-    MobStatusEffectMove(mob, target, tpz.effect.POISON, 20, 3, 60)
-    return tpz.effect.CURSE_I
+    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.CURSE_I, 50, 0, 420))
+    MobStatusEffectMove(mob, target, xi.effect.POISON, 20, 3, 60)
+    return xi.effect.CURSE_I
 end
 
 return mobskill_object

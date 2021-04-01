@@ -25,11 +25,11 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if (basty == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and soteStat == 2 and not anyPlasmsAlive) then
+    if (basty == xi.mission.id.bastok.THE_SALT_OF_THE_EARTH and soteStat == 2 and not anyPlasmsAlive) then
         SpawnMob(ID.mob.GIGAPLASM):updateClaim(player)
-    elseif (basty == tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH and soteStat == 3 and not player:hasKeyItem(tpz.ki.MIRACLESALT)) then
-        player:addKeyItem(tpz.ki.MIRACLESALT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MIRACLESALT)
+    elseif (basty == xi.mission.id.bastok.THE_SALT_OF_THE_EARTH and soteStat == 3 and not player:hasKeyItem(xi.ki.MIRACLESALT)) then
+        player:addKeyItem(xi.ki.MIRACLESALT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MIRACLESALT)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     if player:getCharVar("rootProblem") == 2 then
         if player:getCharVar("rootProblemQ2") <= 1 then
-            if player:hasStatusEffect(tpz.effect.MANAFONT) then
+            if player:hasStatusEffect(xi.effect.MANAFONT) then
                 player:startEvent(47)
             else
                 player:startEvent(46)

@@ -9,14 +9,14 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(tpz.effect.PHALANX, 35, 0, 180)
-    mob:addStatusEffect(tpz.effect.STONESKIN, 350, 0, 300)
-    mob:addStatusEffect(tpz.effect.PROTECT, 175, 0, 1800)
-    mob:addStatusEffect(tpz.effect.SHELL, 24, 0, 1800)
+    mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
+    mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
+    mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
+    mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
 end
 
 entity.onMobFight = function(mob, target)
@@ -30,7 +30,7 @@ entity.onMobFight = function(mob, target)
     local isBusy = false
     local act = mob:getCurrentAction()
 
-    if act == tpz.act.MOBABILITY_START or act == tpz.act.MOBABILITY_USING or act == tpz.act.MOBABILITY_FINISH or act == tpz.act.MAGIC_START or act == tpz.act.MAGIC_CASTING or act == tpz.act.MAGIC_START then
+    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
         isBusy = true -- is set to true if Bahamut is in any stage of using a mobskill or casting a spell
     end
 
@@ -75,8 +75,8 @@ entity.onMobFight = function(mob, target)
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)
                 end
                 if (mob:checkDistance(target) <= 15) then -- without this check if the target is out of range it will keep attemping and failing to use Megaflare. Both Megaflare and Gigaflare have range 15.
-                    if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- default behaviour
-                        mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+                    if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- default behaviour
+                        mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                     end
                     mob:useMobAbility(1551)
                 end
@@ -86,8 +86,8 @@ entity.onMobFight = function(mob, target)
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
                 mob:setLocalVar("tauntShown", 3) -- again, taunt won't show again until the move is successfully used.
             end
-            if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- default behaviour
-                mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+            if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- default behaviour
+                mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
             end
             mob:useMobAbility(1552)
         end

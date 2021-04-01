@@ -19,11 +19,11 @@ zone_object.onInitialize = function(zone)
     Kreutzet:setLocalVar("cooldown", os.time() + Kreutzet:getRespawnTime()/1000)
     DisallowRespawn(Kreutzet:getID(), true) -- prevents accidental 'pop' during no wind weather and immediate despawn
 
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function( player, prevZone)
@@ -56,7 +56,7 @@ zone_object.onZoneWeatherChange = function(weather)
     local Kreutzet = GetMobByID(ID.mob.KREUTZET)
     if
         not Kreutzet:isSpawned() and os.time() > Kreutzet:getLocalVar("cooldown")
-        and (weather == tpz.weather.WIND or weather == tpz.weather.GALES)
+        and (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
         DisallowRespawn(Kreutzet:getID(), false)
         Kreutzet:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts

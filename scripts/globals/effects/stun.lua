@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.STUN
+-- xi.effect.STUN
 -----------------------------------
 local effect_object = {}
 

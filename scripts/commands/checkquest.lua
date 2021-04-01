@@ -28,7 +28,7 @@ function onTrigger(player, logId, questId, target)
     logId = questLog.quest_log
 
     -- validate questId
-    local areaQuestIds = tpz.quest.id[tpz.quest.area[logId]]
+    local areaQuestIds = xi.quest.id[ xi.quest.area[logId]]
     if (questId ~= nil) then
         questId = tonumber(questId) or areaQuestIds[string.upper(questId)]
     end

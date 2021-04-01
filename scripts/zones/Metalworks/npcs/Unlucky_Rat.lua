@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    local MeanMachine = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+    local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
     if (MeanMachine == QUEST_ACCEPTED) then
         local FreeSlots = player:getFreeSlotsCount()
@@ -32,7 +32,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local MeanMachine = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+    local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
     local Fame = player:getFameLevel(BASTOK)
 
     if (MeanMachine == QUEST_AVAILABLE and Fame >= 2) then
@@ -54,9 +54,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 556) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
     elseif (csid == 557) then
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MEAN_MACHINE)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
         player:addFame(BASTOK, 120)
         player:tradeComplete()
         player:addItem(4869)

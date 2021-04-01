@@ -15,8 +15,8 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions and has no default
-    if player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local missions = tpz.mission.id.sandoria
+    if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+        local missions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 7-1 "Prestige of the Papsque"
         elseif currentMission == missions.PRESTIGE_OF_THE_PAPSQUE then
-            if player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_TABLET) then
+            if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_TABLET) then
                 player:startEvent(8)
             elseif missionStatus == 1 then
                 player:startEvent(9)
@@ -39,7 +39,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 2-2 "The Davoi Report"
         elseif currentMission == missions.THE_DAVOI_REPORT and
-            player:hasKeyItem(tpz.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+            player:hasKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
         then
             player:startEvent(695)
         end

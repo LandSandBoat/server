@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CONCENTRATION
+-- xi.effect.CONCENTRATION
 -----------------------------------
 local effect_object = {}
 

@@ -17,9 +17,9 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = mob:getWeaponDmg() * 4
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.SPECIAL, tpz.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.SPECIAL, xi.damageType.DARK, MOBPARAM_IGNORE_SHADOWS)
 
-    target:takeDamage(dmg, mob, tpz.attackType.SPECIAL, tpz.damageType.DARK)
+    target:takeDamage(dmg, mob, xi.attackType.SPECIAL, xi.damageType.DARK)
 
     return dmg
 end

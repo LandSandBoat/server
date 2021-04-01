@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.SABER_DANCE, 50, 3, 300)
+    player:addStatusEffect(xi.effect.SABER_DANCE, 50, 3, 300)
 end
 
 return ability_object

@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.SOUL_ENSLAVEMENT, 8, 1, 30)
+    player:addStatusEffect(xi.effect.SOUL_ENSLAVEMENT, 8, 1, 30)
 end
 
 return ability_object

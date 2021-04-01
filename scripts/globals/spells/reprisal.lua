@@ -15,12 +15,12 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local maxReflectedDamage = target:getMaxHP() * 2
     local reflectedPercent = 33
-    local typeEffect = tpz.effect.REPRISAL
+    local typeEffect = xi.effect.REPRISAL
 
     if target:addStatusEffect(typeEffect, reflectedPercent, 0, duration, 0, maxReflectedDamage) then
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
     return typeEffect

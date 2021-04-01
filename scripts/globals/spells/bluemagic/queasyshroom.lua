@@ -26,8 +26,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.tpmod = TPMOD_CRITICAL
-    params.attackType = tpz.attackType.RANGED
-    params.damageType = tpz.damageType.PIERCING
+    params.attackType = xi.attackType.RANGED
+    params.damageType = xi.damageType.PIERCING
     params.scattr = SC_DARK
     params.numhits = 1
     params.multiplier = 1.25
@@ -49,8 +49,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     local chance = math.random()
 
     if (damage > 0 and chance > 10) then
-        target:delStatusEffect(tpz.effect.POISON)
-        target:addStatusEffect(tpz.effect.POISON, 3, 0, getBlueEffectDuration(caster, resist, tpz.effect.POISON))
+        target:delStatusEffect(xi.effect.POISON)
+        target:addStatusEffect(xi.effect.POISON, 3, 0, getBlueEffectDuration(caster, resist, xi.effect.POISON))
     end
 
     return damage

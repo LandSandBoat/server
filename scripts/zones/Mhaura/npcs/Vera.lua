@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Mhaura/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local questStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
+    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY)
 
     if (questStatus == QUEST_ACCEPTED and trade:getItemCount() == 1) then
         local VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
@@ -27,15 +27,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local questStatus = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
+    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY)
 
-    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.ELDER_MEMORIES) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) ~= QUEST_AVAILABLE) then
         player:startEvent(130)
     elseif (questStatus == QUEST_COMPLETED) then
         player:startEvent(138)
     elseif (questStatus == QUEST_ACCEPTED) then
         local VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
-        if player:hasKeyItem(tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
+        if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(137)
         elseif (VeraOldLadyVar == 1) then
             player:startEvent(132, 542)
@@ -58,7 +58,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 131 and option == 40) then
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY)
         player:setCharVar("VeraOldLadyVar", 1)
     elseif (csid == 135) then
         player:tradeComplete()
@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
         player:unlockJob(0)
         player:setCharVar("VeraOldLadyVar", 0)
         player:messageSpecial(ID.text.SUBJOB_UNLOCKED)
-        player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_OLD_LADY)
+        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY)
     end
 end
 

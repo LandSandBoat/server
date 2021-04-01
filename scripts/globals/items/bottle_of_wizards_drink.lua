@@ -13,8 +13,8 @@ end
 
 item_object.onItemUse = function(target)
     local duration = 900
-    target:delStatusEffect(tpz.effect.MAX_MP_BOOST)
-    target:addStatusEffect(tpz.effect.MAX_MP_BOOST, 100, 0, duration)
+    target:delStatusEffect(xi.effect.MAX_MP_BOOST)
+    target:addStatusEffect(xi.effect.MAX_MP_BOOST, 100, 0, duration)
 end
 
 return item_object

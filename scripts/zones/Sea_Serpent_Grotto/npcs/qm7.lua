@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.THE_TIES_THAT_BIND then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.THE_TIES_THAT_BIND then
         player:startEvent(34)
     end
 end
@@ -22,8 +22,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 34 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_TIES_THAT_BIND)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.IMPURITY)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_TIES_THAT_BIND)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.IMPURITY)
     end
 end
 return entity

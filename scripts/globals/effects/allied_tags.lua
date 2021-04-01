@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ALLIED_TAGS
+-- xi.effect.ALLIED_TAGS
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -16,7 +16,7 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     if (target:getPet()) then
-        target:getPet():delStatusEffect(tpz.effect.ALLIED_TAGS)
+        target:getPet():delStatusEffect(xi.effect.ALLIED_TAGS)
     end
 end
 

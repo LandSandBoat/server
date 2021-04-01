@@ -5,7 +5,7 @@
 -----------------------------------
 tpz = tpz or {}
 
-tpz.keyItem =
+ xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,
     PALBOROUGH_MINES_LOGS                    = 2,
@@ -3102,4 +3102,4 @@ tpz.keyItem =
     INFORMATION_ON_PROCNE                    = 3245,
     INFORMATION_ON_HENWEN                    = 3246,
 }
-tpz.ki = tpz.keyItem
+ xi.ki = xi.keyItem

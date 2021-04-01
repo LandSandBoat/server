@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         5038,   990        --Enchanting Etude
     }
     player:showText(npc, ID.text.MANYNY_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -123,8 +123,8 @@ instance_object.onInstanceComplete = function(instance)
 
     local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
     local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setStatus(tpz.status.NORMAL)
-    box:setStatus(tpz.status.NORMAL)
+    rune:setStatus(xi.status.NORMAL)
+    box:setStatus(xi.status.NORMAL)
 
 end
 

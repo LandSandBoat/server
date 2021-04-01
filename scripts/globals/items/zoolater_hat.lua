@@ -15,9 +15,9 @@ end
 item_object.onItemUse = function(target)
     local pet = target:getPet()
     if (pet) then
-        pet:addStatusEffect(tpz.effect.REGAIN, 15, 3, 15)
+        pet:addStatusEffect(xi.effect.REGAIN, 15, 3, 15)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

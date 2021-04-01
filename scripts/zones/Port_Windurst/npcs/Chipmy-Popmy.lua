@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and
+        player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and
         player:getCharVar("PromathiaStatus") == 3 and
         player:getCharVar("Promathia_kill_day") < os.time() and
         player:getCharVar("COP_3-taru_story") == 0

@@ -34,12 +34,12 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- also have small constant to account for 0 dark skill
-    local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(tpz.skill.BLUE_MAGIC), 0, 165)
+    local dmg = utils.clamp(5 + 0.375 * caster:getSkillLevel(xi.skill.BLUE_MAGIC), 0, 165)
     -- get resist multiplier (1x if no resist)
     local params = {}
-    params.diff = caster:getStat(tpz.mod.INT)-target:getStat(tpz.mod.INT)
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
+    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
     local resist = applyResistance(caster, target, spell, params)
     -- get the resisted damage
@@ -57,7 +57,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     dmg = dmg * BLUE_POWER
 
     if (target:isUndead()) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
     end
 

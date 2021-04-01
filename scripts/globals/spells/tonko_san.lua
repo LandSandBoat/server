@@ -13,13 +13,13 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if (target:hasStatusEffect(tpz.effect.INVISIBLE) == false) then
-        target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, 420)
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+    if (target:hasStatusEffect(xi.effect.INVISIBLE) == false) then
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 420)
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no tpz.effect.
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.
     end
-    return tpz.effect.INVISIBLE
+    return xi.effect.INVISIBLE
 end
 
 return spell_object

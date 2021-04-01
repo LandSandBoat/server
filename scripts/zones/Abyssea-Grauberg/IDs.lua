@@ -7,7 +7,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.ABYSSEA_GRAUBERG] =
+zones[ xi.zone.ABYSSEA_GRAUBERG] =
 {
     text =
     {
@@ -40,18 +40,18 @@ zones[tpz.zone.ABYSSEA_GRAUBERG] =
             --  [17818088] = { 'qm8',           {3270},                                                              {}, 17818048}, -- Ika-Roa
             --  [17818089] = { 'qm9',           {3271},                                                              {}, 17818049}, -- Lorelei
             --  [17818090] = {'qm10',           {3273},                                                              {}, 17818050}, -- Burstrox Powderpate
-            --  [17818091] = {'qm11',               {}, {tpz.ki.WARPED_CHARIOT_PLATE, tpz.ki.SHATTERED_IRON_GIANT_CHAIN}, 17818051}, -- Raja
-            --  [17818092] = {'qm12',               {},                                    {tpz.ki.VENOMOUS_HYDRA_FANG}, 17818052}, -- Alfard
-            --  [17818093] = {'qm13',               {},                                      {tpz.ki.VACANT_BUGARD_EYE}, 17818053}, -- Azdaja
-            --  [17818094] = {'qm14',               {},                              {tpz.ki.VARIEGATED_URAGNITE_SHELL}, 17818054}, -- Amphitrite
-            --  [17818095] = {'qm15',               {}, {tpz.ki.WARPED_CHARIOT_PLATE, tpz.ki.SHATTERED_IRON_GIANT_CHAIN}, 17818055}, -- Raja
-            --  [17818096] = {'qm16',               {},                                    {tpz.ki.VENOMOUS_HYDRA_FANG}, 17818056}, -- Alfard
-            --  [17818097] = {'qm17',               {},                                      {tpz.ki.VACANT_BUGARD_EYE}, 17818057}, -- Azdaja
-            --  [17818098] = {'qm18',               {},                              {tpz.ki.VARIEGATED_URAGNITE_SHELL}, 17818058}, -- Amphitrite
-            --  [17818099] = {'qm19',               {}, {tpz.ki.WARPED_CHARIOT_PLATE, tpz.ki.SHATTERED_IRON_GIANT_CHAIN}, 17818059}, -- Raja
-            --  [17818100] = {'qm20',               {},                                    {tpz.ki.VENOMOUS_HYDRA_FANG}, 17818060}, -- Alfard
-            --  [17818101] = {'qm21',               {},                                      {tpz.ki.VACANT_BUGARD_EYE}, 17818061}, -- Azdaja
-            --  [17818102] = {'qm22',               {},                              {tpz.ki.VARIEGATED_URAGNITE_SHELL}, 17818062}, -- Amphitrite
+            --  [17818091] = {'qm11',               {}, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN}, 17818051}, -- Raja
+            --  [17818092] = {'qm12',               {},                                    { xi.ki.VENOMOUS_HYDRA_FANG}, 17818052}, -- Alfard
+            --  [17818093] = {'qm13',               {},                                      { xi.ki.VACANT_BUGARD_EYE}, 17818053}, -- Azdaja
+            --  [17818094] = {'qm14',               {},                              { xi.ki.VARIEGATED_URAGNITE_SHELL}, 17818054}, -- Amphitrite
+            --  [17818095] = {'qm15',               {}, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN}, 17818055}, -- Raja
+            --  [17818096] = {'qm16',               {},                                    { xi.ki.VENOMOUS_HYDRA_FANG}, 17818056}, -- Alfard
+            --  [17818097] = {'qm17',               {},                                      { xi.ki.VACANT_BUGARD_EYE}, 17818057}, -- Azdaja
+            --  [17818098] = {'qm18',               {},                              { xi.ki.VARIEGATED_URAGNITE_SHELL}, 17818058}, -- Amphitrite
+            --  [17818099] = {'qm19',               {}, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN}, 17818059}, -- Raja
+            --  [17818100] = {'qm20',               {},                                    { xi.ki.VENOMOUS_HYDRA_FANG}, 17818060}, -- Alfard
+            --  [17818101] = {'qm21',               {},                                      { xi.ki.VACANT_BUGARD_EYE}, 17818061}, -- Azdaja
+            --  [17818102] = {'qm22',               {},                              { xi.ki.VARIEGATED_URAGNITE_SHELL}, 17818062}, -- Amphitrite
         },
         HARVESTING =
         {
@@ -65,4 +65,4 @@ zones[tpz.zone.ABYSSEA_GRAUBERG] =
     },
 }
 
-return zones[tpz.zone.ABYSSEA_GRAUBERG]
+return zones[ xi.zone.ABYSSEA_GRAUBERG]

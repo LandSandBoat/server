@@ -16,8 +16,8 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions
-    if player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local sandyMissions = tpz.mission.id.sandoria
+    if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+        local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -29,9 +29,9 @@ entity.onTrigger = function(player, npc)
         elseif currentMission == sandyMissions.BREAKING_BARRIERS and (missionStatus == 4 or missionStatus == 0) then
             if missionStatus == 4 then
                 if
-                    player:hasKeyItem(tpz.ki.FIGURE_OF_TITAN) and
-                    player:hasKeyItem(tpz.ki.FIGURE_OF_GARUDA) and
-                    player:hasKeyItem(tpz.ki.FIGURE_OF_LEVIATHAN)
+                    player:hasKeyItem(xi.ki.FIGURE_OF_TITAN) and
+                    player:hasKeyItem(xi.ki.FIGURE_OF_GARUDA) and
+                    player:hasKeyItem(xi.ki.FIGURE_OF_LEVIATHAN)
                 then
                     player:startEvent(76)
                 end
@@ -78,8 +78,8 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 537 then
         player:setCharVar("MissionStatus", 3)
-        player:addKeyItem(tpz.ki.LETTER_TO_THE_AMBASSADOR)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.LETTER_TO_THE_AMBASSADOR)
+        player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 61 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 87 then

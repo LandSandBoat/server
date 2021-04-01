@@ -18,7 +18,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     if (target:getHP()+base > target:getMaxHP()) then
         base = target:getMaxHP() - target:getHP() --cap it
     end
-    skill:setMsg(tpz.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
     target:addHP(base)
     return base
 end

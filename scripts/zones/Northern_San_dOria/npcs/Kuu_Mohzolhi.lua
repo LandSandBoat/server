@@ -44,7 +44,7 @@ entity.onTrade = function(player, npc, trade)
         end
     end
 
-    local GrowingFlowers = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
+    local GrowingFlowers = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
 
     if itemQuality == 2 then
         if GrowingFlowers == QUEST_COMPLETED then
@@ -75,13 +75,13 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 605 and option == 1002 then
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
         player:addFame(SANDORIA, 120)
         player:setMoghouseFlag(1)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
     elseif csid == 605 and option == 1 then
         player:tradeComplete()
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS)
     end
 end
 

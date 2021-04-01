@@ -11,7 +11,7 @@ local ID = require("scripts/zones/QuBia_Arena/IDs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addMod(tpz.mod.SLEEPRES, 50)
+    mob:addMod(xi.mod.SLEEPRES, 50)
 end
 
 entity.onMobSpawn = function(mob)

@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, 60)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, 60)
 end
 
 entity.onMobFight = function(mob, target)
@@ -19,7 +19,7 @@ entity.onMobFight = function(mob, target)
 
     -- queue curaga II on any sleeping ally
     for i = instOffset + 3, instOffset + 12 do
-        if GetMobByID(i):getCurrentAction() == tpz.act.SLEEP then
+        if GetMobByID(i):getCurrentAction() == xi.act.SLEEP then
             if mob:actionQueueEmpty() then
                 if mob:getLocalVar("cooldown") == 0 then
                     mob:castSpell(8, GetMobByID(i))

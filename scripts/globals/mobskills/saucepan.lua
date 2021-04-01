@@ -17,14 +17,14 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 0.8
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, info.hitslanded)
-    if (target:hasStatusEffect(tpz.effect.FOOD)) then
-        target:delStatusEffectSilent(tpz.effect.FOOD)
-    elseif (target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)) then
-        target:delStatusEffectSilent(tpz.effect.FIELD_SUPPORT_FOOD)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
+    if (target:hasStatusEffect(xi.effect.FOOD)) then
+        target:delStatusEffectSilent(xi.effect.FOOD)
+    elseif (target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+        target:delStatusEffectSilent(xi.effect.FIELD_SUPPORT_FOOD)
     end
-    target:addStatusEffectEx(tpz.effect.FIELD_SUPPORT_FOOD, tpz.effect.FOOD, 255, 0, 1800)
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    target:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, xi.effect.FOOD, 255, 0, 1800)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
 end
 

@@ -13,7 +13,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.INT_BOOST
+    local effect = xi.effect.INT_BOOST
     doBoostGain(caster, target, spell, effect)
     return effect
 end

@@ -22,7 +22,7 @@ g_mixins.atori_tutori_qm = function(mob)
         if mob:getHPP() < mob:getLocalVar("specialThreshold") then
             local ID = zones[mob:getZoneID()]
             mob:messageText(mob, ID.text.YOU_PACKED_MORE_OF_A_PUNCH)
-            MobBuffMove(mob, tpz.effect.HUNDRED_FISTS, 1, 0, 30)
+            MobBuffMove(mob, xi.effect.HUNDRED_FISTS, 1, 0, 30)
             mob:setLocalVar("specialThreshold", 0)
         end
     end)
@@ -34,14 +34,14 @@ g_mixins.atori_tutori_qm = function(mob)
 
     mob:addListener("EFFECT_GAIN", "TERRORIZED", function(mob, effect)
         local ID = zones[mob:getZoneID()]
-        if effect:getType() == tpz.effect.TERROR then
+        if effect:getType() == xi.effect.TERROR then
             mob:showText(mob, ID.text.YIKEY_WIKEYS)
         end
     end)
 
     mob:addListener("EFFECT_LOSE", "TERRORIZED", function(mob, effect)
         local ID = zones[mob:getZoneID()]
-        if effect:getType() == tpz.effect.TERROR then
+        if effect:getType() == xi.effect.TERROR then
             mob:showText(mob, ID.text.WHATS_THE_MATTARU)
         end
     end)

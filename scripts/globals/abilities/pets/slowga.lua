@@ -13,17 +13,17 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onPetAbility = function(target, pet, skill, summoner)
-    local duration = 180 + summoner:getMod(tpz.mod.SUMMONING)
+    local duration = 180 + summoner:getMod(xi.mod.SUMMONING)
     if duration > 350 then
         duration = 350
     end
 
-    if target:addStatusEffect(tpz.effect.SLOW, 3000, 0, duration) then
-        skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
+    if target:addStatusEffect(xi.effect.SLOW, 3000, 0, duration) then
+        skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     else
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
-    return tpz.effect.SLOW
+    return xi.effect.SLOW
 end
 
 return ability_object

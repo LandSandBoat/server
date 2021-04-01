@@ -19,17 +19,17 @@ item_object.onAdditionalEffect = function(player, target, damage)
         local params = {}
         params.bonusmab = 0
         params.includemab = false
-        -- drain = addBonusesAbility(player, tpz.magic.ele.DARK, target, drain, params)
-        drain = drain * applyResistanceAddEffect(player, target, tpz.magic.ele.DARK, 0)
-        drain = adjustForTarget(target, drain, tpz.magic.ele.DARK)
-        drain = finalMagicNonSpellAdjustments(player, target, tpz.magic.ele.DARK, drain)
+        -- drain = addBonusesAbility(player, xi.magic.ele.DARK, target, drain, params)
+        drain = drain * applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0)
+        drain = adjustForTarget(target, drain, xi.magic.ele.DARK)
+        drain = finalMagicNonSpellAdjustments(player, target, xi.magic.ele.DARK, drain)
 
         if (drain > target:getMP()) then
             drain = target:getMP()
         end
 
         target:addMP(-drain)
-        return tpz.subEffect.MP_DRAIN, tpz.msg.basic.ADD_EFFECT_MP_DRAIN, player:addMP(drain)
+        return xi.subEffect.MP_DRAIN, xi.msg.basic.ADD_EFFECT_MP_DRAIN, player:addMP(drain)
     end
 end
 

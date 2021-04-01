@@ -17,7 +17,7 @@ entity.onEventFinish = function(entity, eventid, result, door)
         -- spawn mobs, etc
         for i, v in pairs(ID.npc[1][2]) do
             local npc = GetNPCByID(v, instance)
-            npc:setStatus(tpz.status.NORMAL)
+            npc:setStatus(xi.status.NORMAL)
         end
         for id = ID.mob[1][2].mobs_start, ID.mob[1][2].mobs_end do
             SpawnMob(id, instance)

@@ -13,7 +13,7 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local theTraderInTheForest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    local theTraderInTheForest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
 
     if theTraderInTheForest == QUEST_ACCEPTED then
         if trade:hasItemQty(4367, 1) and trade:getItemCount() == 1 then -- Trade Batagreens
@@ -23,8 +23,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theTraderInTheForest = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
-    local medicineWoman = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+    local theTraderInTheForest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+    local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
 
     if theTraderInTheForest == QUEST_AVAILABLE then
         if player:getCharVar("theTraderInTheForestCS") == 1 then
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
             player:setCharVar("medicineWomanCS", 1)
         end
     elseif medicineWoman == QUEST_ACCEPTED then
-        if not player:hasKeyItem(tpz.ki.COLD_MEDICINE) then
+        if not player:hasKeyItem(xi.ki.COLD_MEDICINE) then
             player:showText(npc, ID.text.ABEAULE_DIALOG_HOME)
         else 
             player:startEvent(614)
@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 592)
         else
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
             player:setCharVar("theTraderInTheForestCS", 0)
             player:addItem(592)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 592) -- Supplies Order
@@ -80,22 +80,22 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12600) -- Robe
         else
             player:tradeComplete()
-            player:addTitle(tpz.title.GREEN_GROCER)
+            player:addTitle(xi.title.GREEN_GROCER)
             player:addItem(12600)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12600) -- Robe
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_TRADER_IN_THE_FOREST)
         end
     -- "The Medicine Woman" Quest
     elseif (csid == 613 and option == 0) or (csid == 615 and option == 0) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
     elseif csid == 614 then
-        player:addTitle(tpz.title.TRAVELING_MEDICINE_MAN)
-        player:delKeyItem(tpz.ki.COLD_MEDICINE)
+        player:addTitle(xi.title.TRAVELING_MEDICINE_MAN)
+        player:delKeyItem(xi.ki.COLD_MEDICINE)
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MEDICINE_WOMAN)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
     end
 end
 

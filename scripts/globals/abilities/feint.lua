@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local augment = player:getMod(tpz.mod.AUGMENTS_FEINT) * player:getMerit(tpz.merit.FEINT) / 25 -- Divide by the merit value (feint is 25) to get the number of merit points
-    player:addStatusEffect(tpz.effect.FEINT, 150 + augment, 0, 60) -- -150 Evasion base
+    local augment = player:getMod(xi.mod.AUGMENTS_FEINT) * player:getMerit(xi.merit.FEINT) / 25 -- Divide by the merit value (feint is 25) to get the number of merit points
+    player:addStatusEffect(xi.effect.FEINT, 150 + augment, 0, 60) -- -150 Evasion base
 end
 
 return ability_object

@@ -31,15 +31,15 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.MANAFONT, hpp = math.random(66, 95)},
-            {id = tpz.jsa.BENEDICTION, hpp = 0},
+            {id = xi.jsa.MANAFONT, hpp = math.random(66, 95)},
+            {id = xi.jsa.BENEDICTION, hpp = 0},
         },
     })
 
@@ -52,11 +52,11 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("jobChanged", 1)
         mob:setSpellList(297) -- Set WHM spell list.
         -- set new JSA parameters
-        tpz.mix.jobSpecial.config(mob, {
+        xi.mix.jobSpecial.config(mob, {
             specials =
             {
-                {id = tpz.jsa.MANAFONT, hpp = 0},
-                {id = tpz.jsa.BENEDICTION, hpp = math.random(25, 50)},
+                {id = xi.jsa.MANAFONT, hpp = 0},
+                {id = xi.jsa.BENEDICTION, hpp = math.random(25, 50)},
             },
         })
     end

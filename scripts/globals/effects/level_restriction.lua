@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LEVEL_RESTRICTION
+-- xi.effect.LEVEL_RESTRICTION
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -9,7 +9,7 @@ effect_object.onEffectGain = function(target, effect)
     target:levelRestriction(effect:getPower())
     target:messageBasic(314, effect:getPower()) -- <target>'s level is restricted to <param>
 
-    if target:getObjType() == tpz.objType.PC then
+    if target:getObjType() == xi.objType.PC then
         target:clearTrusts()
     end
 end

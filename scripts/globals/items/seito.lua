@@ -13,13 +13,13 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0) <= 0.5) then
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0) <= 0.5) then
         return 0, 0, 0
     else
-        if (not target:hasStatusEffect(tpz.effect.SILENCE)) then
-            target:addStatusEffect(tpz.effect.SILENCE, 1, 0, 60)
+        if (not target:hasStatusEffect(xi.effect.SILENCE)) then
+            target:addStatusEffect(xi.effect.SILENCE, 1, 0, 60)
         end
-        return tpz.subEffect.SILENCE, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.SILENCE
+        return xi.subEffect.SILENCE, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.SILENCE
     end
 end
 

@@ -13,15 +13,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.ALCHEMY)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.ALCHEMY)
 
     if
         newRank > 9 and
         player:getCharVar("AlchemyExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_ALCHEMIST)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.ALCHEMY, newRank)
+            player:setSkillRank(xi.skill.ALCHEMY, newRank)
             player:startEvent(121, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("AlchemyExpertQuest",0)
             player:setLocalVar("AlchemyTraded",1)
@@ -29,31 +29,31 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(121, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.ALCHEMY, newRank)
+        player:setSkillRank(xi.skill.ALCHEMY, newRank)
         player:startEvent(121, 0, 0, 0, 0, newRank)
         player:setLocalVar("AlchemyTraded",1)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.ALCHEMY)
-    local testItem = getTestItem(player, npc, tpz.skill.ALCHEMY)
+    local craftSkill = player:getSkillLevel(xi.skill.ALCHEMY)
+    local testItem = getTestItem(player, npc, xi.skill.ALCHEMY)
     local guildMember = isGuildMember(player, 1)
-    local rankCap = getCraftSkillCap(player, tpz.skill.ALCHEMY)
+    local rankCap = getCraftSkillCap(player, xi.skill.ALCHEMY)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.ALCHEMY)
+    local Rank = player:getSkillRank(xi.skill.ALCHEMY)
     local realSkill = (craftSkill - Rank) / 32
     local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("AlchemyExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_ALCHEMIST) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_ALCHEMIST) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600
         end
     end
 
-    if (player:getCurrentMission(ASA) == tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and canRankUp >= 3) then
+    if (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and canRankUp >= 3) then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")
 

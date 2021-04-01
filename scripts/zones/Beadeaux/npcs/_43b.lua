@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Beadeaux/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TRADERS_SACK) == false) then
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TRADERS_SACK) == false) then
         if (trade:hasItemQty(495, 1) == true and trade:getItemCount() == 1) then
             player:startEvent(1000)
         end
@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TRADERS_SACK) == false) then
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_RESCUE) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TRADERS_SACK) == false) then
         player:messageSpecial(ID.text.LOCKED_DOOR_QUADAV_HAS_KEY)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -33,8 +33,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 1000) then
-        player:addKeyItem(tpz.ki.TRADERS_SACK)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TRADERS_SACK)
+        player:addKeyItem(xi.ki.TRADERS_SACK)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRADERS_SACK)
     end
 end
 

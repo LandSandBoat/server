@@ -14,11 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anUndyingPledge = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
+    local anUndyingPledge = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
     if anUndyingPledge == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 then
         player:startEvent(225) -- Start quest
-    elseif anUndyingPledge == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CALIGINOUS_BLADE) then
+    elseif anUndyingPledge == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CALIGINOUS_BLADE) then
         player:startEvent(227) -- Quest Finish
     elseif anUndyingPledge == QUEST_ACCEPTED and player:getCharVar("anUndyingPledgeCS") == 1 then
         player:startEvent(228) -- Extra Dialogue
@@ -36,18 +36,18 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 225 then
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
         player:setCharVar("anUndyingPledgeCS", 1)
     elseif
         csid == 227 and
-        npcUtil.completeQuest(player, OUTLANDS, tpz.quest.id.outlands.AN_UNDYING_PLEDGE, {
+        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
             item = 12375,
             fameArea = NORG,
             fame = 50,
             var = "anUndyingPledgeCS",
         })
     then
-        player:delKeyItem(tpz.ki.CALIGINOUS_BLADE)
+        player:delKeyItem(xi.ki.CALIGINOUS_BLADE)
     end
 end
 

@@ -8,7 +8,7 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 304)
+    xi.hunts.checkHunt(mob, player, 304)
 end
 
 entity.onMobDespawn = function(mob)

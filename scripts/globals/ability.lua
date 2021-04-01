@@ -8,7 +8,7 @@ require("scripts/globals/msg")
 
 tpz = tpz or {}
 
-tpz.jobAbility =
+ xi.jobAbility =
 {
     MIGHTY_STRIKES     = 16,
     HUNDRED_FISTS      = 17,
@@ -671,9 +671,9 @@ tpz.jobAbility =
     WINDS_BLESSING     = 969,
     HYSTERIC_ASSAULT   = 970,
 }
-tpz.ja = tpz.jobAbility
+ xi.ja = xi.jobAbility
 
-tpz.reaction =
+ xi.reaction =
 {
     NONE     = 0x00,
     MISS     = 0x01,
@@ -684,7 +684,7 @@ tpz.reaction =
     GUARD    = 0x14,
 }
 
-tpz.specEffect =
+ xi.specEffect =
 {
     NONE           = 0x00,
     BLOOD          = 0x02,
@@ -702,15 +702,15 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
     end
 
     --handle pd
-    if ((target:hasStatusEffect(tpz.effect.PERFECT_DODGE) or target:hasStatusEffect(tpz.effect.TOO_HIGH) )
-            and skilltype == tpz.attackType.PHYSICAL) then
-        skill:setMsg(tpz.msg.basic.JA_MISS_2)
+    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.TOO_HIGH) )
+            and skilltype == xi.attackType.PHYSICAL) then
+        skill:setMsg(xi.msg.basic.JA_MISS_2)
         return 0
     end
 
     -- set message to damage
     -- this is for AoE because its only set once
-    skill:setMsg(tpz.msg.basic.USES_JA_TAKE_DAMAGE)
+    skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
     --Handle shadows depending on shadow behaviour / skilltype
     if (shadowbehav ~= MOBPARAM_WIPE_SHADOWS and shadowbehav ~= MOBPARAM_IGNORE_SHADOWS) then --remove 'shadowbehav' shadows.
@@ -719,34 +719,34 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
 
         -- dealt zero damage, so shadows took hit
         if (dmg == 0) then
-            skill:setMsg(tpz.msg.basic.SHADOW_ABSORB)
+            skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
             return shadowbehav
         end
 
     elseif (shadowbehav == MOBPARAM_WIPE_SHADOWS) then --take em all!
-        target:delStatusEffect(tpz.effect.COPY_IMAGE)
-        target:delStatusEffect(tpz.effect.BLINK)
-        target:delStatusEffect(tpz.effect.THIRD_EYE)
+        target:delStatusEffect(xi.effect.COPY_IMAGE)
+        target:delStatusEffect(xi.effect.BLINK)
+        target:delStatusEffect(xi.effect.THIRD_EYE)
     end
 
     --handle Third Eye using shadowbehav as a guide
-    if (skilltype == tpz.attackType.PHYSICAL and utils.thirdeye(target)) then
-        skill:setMsg(tpz.msg.basic.ANTICIPATE)
+    if (skilltype == xi.attackType.PHYSICAL and utils.thirdeye(target)) then
+        skill:setMsg(xi.msg.basic.ANTICIPATE)
         return 0
     end
 
-    if (skilltype == tpz.attackType.PHYSICAL) then
+    if (skilltype == xi.attackType.PHYSICAL) then
         dmg = target:physicalDmgTaken(dmg, skillparam)
-    elseif (skilltype == tpz.attackType.MAGICAL) then
+    elseif (skilltype == xi.attackType.MAGICAL) then
         dmg = target:magicDmgTaken(dmg)
-    elseif (skilltype == tpz.attackType.BREATH) then
+    elseif (skilltype == xi.attackType.BREATH) then
         dmg = target:breathDmgTaken(dmg)
-    elseif (skilltype == tpz.attackType.RANGED) then
+    elseif (skilltype == xi.attackType.RANGED) then
         dmg = target:rangedDmgTaken(dmg)
     end
 
     --handling phalanx
-    dmg = dmg - target:getMod(tpz.mod.PHALANX)
+    dmg = dmg - target:getMod(xi.mod.PHALANX)
 
     if (dmg < 0) then
         return 0
@@ -766,16 +766,16 @@ function takeAbilityDamage(defender, attacker, params, primary, finaldmg, attack
     if tpHitsLanded + extraHitsLanded > 0 then
         if finaldmg >= 0 then
             if finaldmg > 0 then
-                action:reaction(defender:getID(), tpz.reaction.HIT)
-                action:speceffect(defender:getID(), tpz.specEffect.RECOIL)
+                action:reaction(defender:getID(), xi.reaction.HIT)
+                action:speceffect(defender:getID(), xi.specEffect.RECOIL)
             end
         else
             -- TODO: ability absorb messages (if there are any)
-            -- action:messageID(defender:getID(), tpz.msg.basic.WHATEVER)
+            -- action:messageID(defender:getID(), xi.msg.basic.WHATEVER)
         end
         action:param(defender:getID(), finaldmg)
     elseif shadowsAbsorbed > 0 then
-        action:messageID(defender:getID(), tpz.msg.basic.SHADOW_ABSORB)
+        action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), shadowsAbsorbed)
     else
         -- no abilities that use ability message can miss (the rest use ws messages)

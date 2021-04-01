@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SABOTEUR
+-- xi.effect.SABOTEUR
 -----------------------------------
 local effect_object = {}
 

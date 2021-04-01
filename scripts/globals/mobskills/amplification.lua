@@ -13,17 +13,17 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect1 = tpz.effect.MAGIC_ATK_BOOST
-    local typeEffect2 = tpz.effect.MAGIC_DEF_BOOST
-    local mabTotal = mob:getStatusEffect(tpz.effect.MAGIC_ATK_BOOST)
-    local mdbTotal = mob:getStatusEffect(tpz.effect.MAGIC_DEF_BOOST)
+    local typeEffect1 = xi.effect.MAGIC_ATK_BOOST
+    local typeEffect2 = xi.effect.MAGIC_DEF_BOOST
+    local mabTotal = mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST)
+    local mdbTotal = mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST)
 
-    if (mob:getStatusEffect(tpz.effect.MAGIC_ATK_BOOST) ~= nil) then -- mag atk bonus stacking
+    if (mob:getStatusEffect(xi.effect.MAGIC_ATK_BOOST) ~= nil) then -- mag atk bonus stacking
         mabTotal = mabTotal:getPower() + 10
     else
         mabTotal = 10
     end
-    if (mob:getStatusEffect(tpz.effect.MAGIC_DEF_BOOST) ~= nil) then -- mag def bonus stacking
+    if (mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST) ~= nil) then -- mag def bonus stacking
         mdbTotal = mdbTotal:getPower() + 10
     else
         mdbTotal = 10

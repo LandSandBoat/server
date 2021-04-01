@@ -18,8 +18,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect1 = tpz.effect.PROTECT
-    local typeEffect2 = tpz.effect.SHELL
+    local typeEffect1 = xi.effect.PROTECT
+    local typeEffect2 = xi.effect.SHELL
     local power1 = 50
     local power2 = 20
     local duration = 300

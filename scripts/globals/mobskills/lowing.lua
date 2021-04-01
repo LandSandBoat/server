@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.PLAGUE
+    local typeEffect = xi.effect.PLAGUE
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 5, 0, 60))
 
     return typeEffect

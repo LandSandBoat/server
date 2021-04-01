@@ -22,7 +22,7 @@ end
 
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.MAGIC_SHIELD
+    local typeEffect = xi.effect.MAGIC_SHIELD
 
     skill:setMsg(MobBuffMove(mob, typeEffect, 1, 0, 60))
     return typeEffect

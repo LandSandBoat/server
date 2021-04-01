@@ -25,7 +25,7 @@ entity.onMobDeath = function(mob, player, isKiller)
         local hatedPlayer = qm2:getLocalVar("hatedPlayer")
         local isInTime = qm2:getLocalVar("hateTimer") > os.time()
 
-        if (qm2:getStatus() ~= tpz.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime)) then
+        if (qm2:getStatus() ~= xi.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime)) then
             -- if hated player took too long, reset
             if (hatedPlayer ~= 0) then
                 qm2:setLocalVar("hatedPlayer", 0)

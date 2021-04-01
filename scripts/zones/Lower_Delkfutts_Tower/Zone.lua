@@ -17,7 +17,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -26,11 +26,11 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(460.022, -1.77, -103.442, 188)
     end
-    if player:getCurrentMission(ZILART) == tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") <= 1 then
+    if player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") <= 1 then
         cs = 15
-    elseif ENABLE_COP == 1 and prevZone == tpz.zone.QUFIM_ISLAND and player:getCurrentMission(COP) < tpz.mission.id.cop.THE_RITES_OF_LIFE then
+    elseif ENABLE_COP == 1 and prevZone == xi.zone.QUFIM_ISLAND and player:getCurrentMission(COP) < xi.mission.id.cop.THE_RITES_OF_LIFE then
         cs = 22
-    elseif player:getCurrentMission(ACP) == tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES and prevZone == tpz.zone.QUFIM_ISLAND then
+    elseif player:getCurrentMission(ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and prevZone == xi.zone.QUFIM_ISLAND then
         cs = 34
     end
 
@@ -72,8 +72,8 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif csid == 22 then
         player:startEvent(36)
     elseif csid == 34 then
-        player:completeMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.BORN_OF_HER_NIGHTMARES)
-        player:addMission(tpz.mission.log_id.ACP, tpz.mission.id.acp.BANISHING_THE_ECHO)
+        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.BORN_OF_HER_NIGHTMARES)
+        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.BANISHING_THE_ECHO)
     elseif csid == 36 then
         player:startEvent(37)
     elseif csid == 37 then
@@ -81,8 +81,8 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif csid == 38 then
         player:startEvent(39)
     elseif csid == 39 then
-        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ANCIENT_FLAMES_BECKON)
-        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_RITES_OF_LIFE)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_FLAMES_BECKON)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)
         player:setCharVar("COP1", 1)
     end
 end

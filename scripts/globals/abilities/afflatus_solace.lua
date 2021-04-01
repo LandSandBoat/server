@@ -14,9 +14,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:delStatusEffect(tpz.effect.AFFLATUS_SOLACE)
-    target:delStatusEffect(tpz.effect.AFFLATUS_MISERY)
-    target:addStatusEffect(tpz.effect.AFFLATUS_SOLACE, 8, 0, 7200)
+    target:delStatusEffect(xi.effect.AFFLATUS_SOLACE)
+    target:delStatusEffect(xi.effect.AFFLATUS_MISERY)
+    target:addStatusEffect(xi.effect.AFFLATUS_SOLACE, 8, 0, 7200)
 end
 
 return ability_object

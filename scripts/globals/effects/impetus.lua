@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.IMPETUS
+-- xi.effect.IMPETUS
 -----------------------------------
 local effect_object = {}
 

@@ -9,12 +9,12 @@ local entity = {}
 
 local skillToAbsorb =
 {
-    [823] = tpz.mod.FIRE_ABSORB,  -- fire_blade
-    [824] = tpz.mod.ICE_ABSORB,   -- frost_blade
-    [825] = tpz.mod.WIND_ABSORB,  -- wind_blade2
-    [826] = tpz.mod.EARTH_ABSORB, -- earth_blade
-    [827] = tpz.mod.LTNG_ABSORB,  -- lightning_blade
-    [828] = tpz.mod.WATER_ABSORB, -- water_blade
+    [823] = xi.mod.FIRE_ABSORB,  -- fire_blade
+    [824] = xi.mod.ICE_ABSORB,   -- frost_blade
+    [825] = xi.mod.WIND_ABSORB,  -- wind_blade2
+    [826] = xi.mod.EARTH_ABSORB, -- earth_blade
+    [827] = xi.mod.LTNG_ABSORB,  -- lightning_blade
+    [828] = xi.mod.WATER_ABSORB, -- water_blade
 }
 
 entity.onMobEngaged = function(mob, target)

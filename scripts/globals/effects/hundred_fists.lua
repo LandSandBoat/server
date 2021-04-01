@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HUNDRED_FISTS
+-- xi.effect.HUNDRED_FISTS
 -----------------------------------
 local effect_object = {}
 

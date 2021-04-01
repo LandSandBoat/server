@@ -9,16 +9,16 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PLAGUE)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PLAGUE)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 478)
-    player:addTitle(tpz.title.OUPIRE_IMPALER)
+    xi.hunts.checkHunt(mob, player, 478)
+    player:addTitle(xi.title.OUPIRE_IMPALER)
 end
 
 entity.onMobDespawn = function(mob)

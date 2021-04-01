@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
         12856,  172, 3,    -- Slops
     }
 
-    local rank = GetNationRank(tpz.nation.SANDORIA)
+    local rank = GetNationRank(xi.nation.SANDORIA)
 
     if rank ~= 1 then
         table.insert(stock, 1022)    -- Thief's Tools
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
     end
 
     player:showText(npc, ID.text.OSTALIE_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.SANDORIA)
+    xi.shop.nation(player, stock, xi.nation.SANDORIA)
 end
 
 entity.onEventUpdate = function(player, csid, option)

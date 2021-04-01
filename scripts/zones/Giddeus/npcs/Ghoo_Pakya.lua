@@ -15,8 +15,8 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_PRICE_OF_PEACE) then
-        if (player:hasKeyItem(tpz.ki.DRINK_OFFERINGS)) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE) then
+        if (player:hasKeyItem(xi.ki.DRINK_OFFERINGS)) then
             -- We have the offerings
             player:startEvent(49)
         else
@@ -43,10 +43,10 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 49) then
-        player:delKeyItem(tpz.ki.DRINK_OFFERINGS)
+        player:delKeyItem(xi.ki.DRINK_OFFERINGS)
         player:setCharVar("ghoo_talk", 1)
 
-        if (player:hasKeyItem(tpz.ki.FOOD_OFFERINGS) == false) then
+        if (player:hasKeyItem(xi.ki.FOOD_OFFERINGS) == false) then
             player:setCharVar("MissionStatus", 2)
         end
     elseif (csid == 50) then

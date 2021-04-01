@@ -43,7 +43,7 @@ entity.onMobFight = function(mob, target)
     local POS = mob:getPos()
     local PET = GetMobByID((mob:getID()+1), instance)
 
-    if act == tpz.act.MOBABILITY_START or act == tpz.act.MOBABILITY_USING or act == tpz.act.MOBABILITY_FINISH or act == tpz.act.MAGIC_START or act == tpz.act.MAGIC_CASTING or act == tpz.act.MAGIC_START then
+    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
         isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     end
 
@@ -55,9 +55,9 @@ entity.onMobFight = function(mob, target)
             PET:updateEnmity(target)
             PET:setPos(POS.x, POS.y, POS.z, POS.rot)
             mob:setLocalVar("popTime", os.time())
-            PET:setStatus(tpz.status.UPDATE)
+            PET:setStatus(xi.status.UPDATE)
             PET:timer(1000, function(mob) mob:useMobAbility(1838) end)
-            PET:timer(4000, function(mob) mob:setStatus(tpz.status.DISAPPEAR) end)
+            PET:timer(4000, function(mob) mob:setStatus(xi.status.DISAPPEAR) end)
         end
     end
 end

@@ -17,7 +17,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-660.185, -12.079, -199.532, 192)
     end
 
-    if (player:getCurrentMission(TOAU) == tpz.mission.id.toau.SHIELD_OF_DIPLOMACY and player:getCharVar("AhtUrganStatus") == 0) then
+    if (player:getCurrentMission(TOAU) == xi.mission.id.toau.SHIELD_OF_DIPLOMACY and player:getCharVar("AhtUrganStatus") == 0) then
         cs = 1
     end
 

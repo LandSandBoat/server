@@ -14,22 +14,22 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if not player:getPet() then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
-        return tpz.msg.basic.NO_EFFECT_ON_PET, 0
+        return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
-        local id = player:getEquipID(tpz.slot.AMMO)
+        local id = player:getEquipID(xi.slot.AMMO)
         if (id >= 18731 and id <= 18733 or id == 19185) then
             return 0, 0
         else
-            return tpz.msg.basic.UNABLE_TO_USE_JA, 0
+            return xi.msg.basic.UNABLE_TO_USE_JA, 0
         end
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
     -- 1st need to get the pet food is equipped in the range slot.
-    local rangeObj = player:getEquipID(tpz.slot.AMMO)
+    local rangeObj = player:getEquipID(xi.slot.AMMO)
     local totalHealing = 0
     local regenAmount = 0
     local regenTime = 0
@@ -65,22 +65,22 @@ ability_object.onUseAbility = function(player, target, ability)
     }
 
     local function removeStatus()
-        --if pet:delStatusEffect(tpz.effect.DOOM) then return true end
-        if pet:delStatusEffect(tpz.effect.PETRIFICATION) then return true end
-        if pet:delStatusEffect(tpz.effect.SILENCE) then return true end
-        if pet:delStatusEffect(tpz.effect.BANE) then return true end
-        if pet:delStatusEffect(tpz.effect.CURSE_II) then return true end
-        if pet:delStatusEffect(tpz.effect.CURSE_I) then return true end
-        if pet:delStatusEffect(tpz.effect.PARALYSIS) then return true end
-        if pet:delStatusEffect(tpz.effect.PLAGUE) then return true end
-        if pet:delStatusEffect(tpz.effect.POISON) then return true end
-        if pet:delStatusEffect(tpz.effect.DISEASE) then return true end
-        if pet:delStatusEffect(tpz.effect.BLINDNESS) then return true end
+        --if pet:delStatusEffect(xi.effect.DOOM) then return true end
+        if pet:delStatusEffect(xi.effect.PETRIFICATION) then return true end
+        if pet:delStatusEffect(xi.effect.SILENCE) then return true end
+        if pet:delStatusEffect(xi.effect.BANE) then return true end
+        if pet:delStatusEffect(xi.effect.CURSE_II) then return true end
+        if pet:delStatusEffect(xi.effect.CURSE_I) then return true end
+        if pet:delStatusEffect(xi.effect.PARALYSIS) then return true end
+        if pet:delStatusEffect(xi.effect.PLAGUE) then return true end
+        if pet:delStatusEffect(xi.effect.POISON) then return true end
+        if pet:delStatusEffect(xi.effect.DISEASE) then return true end
+        if pet:delStatusEffect(xi.effect.BLINDNESS) then return true end
         if pet:eraseStatusEffect() ~= 255 then return true end
         return false
     end
 
-    local toremove = player:getMod(tpz.mod.REPAIR_EFFECT)
+    local toremove = player:getMod(xi.mod.REPAIR_EFFECT)
 
     --[[if (feet == 28240) then -- This item isn't implemented so im leaving this here for reference
         toremove = 1
@@ -91,11 +91,11 @@ ability_object.onUseAbility = function(player, target, ability)
         toremove = toremove - 1
     end
 
-    local bonus = 1 + player:getMerit(tpz.merit.REPAIR_EFFECT)/100
+    local bonus = 1 + player:getMerit(xi.merit.REPAIR_EFFECT)/100
 
     totalHealing = totalHealing * bonus
 
-    bonus = bonus + player:getMod(tpz.mod.REPAIR_POTENCY)/100
+    bonus = bonus + player:getMod(xi.mod.REPAIR_POTENCY)/100
 
     regenAmount = regenAmount * bonus
 
@@ -108,10 +108,10 @@ ability_object.onUseAbility = function(player, target, ability)
     pet:addHP(totalHealing)
     pet:wakeUp()
 
-    -- Apply regen tpz.effect.
+    -- Apply regen xi.effect.
 
-    pet:delStatusEffect(tpz.effect.REGEN)
-    pet:addStatusEffect(tpz.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
+    pet:delStatusEffect(xi.effect.REGEN)
+    pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
     player:removeAmmo()
 
     return totalHealing

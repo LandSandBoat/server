@@ -11,11 +11,11 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     -- The wyvern must be present in order to use Spirit Surge
-    return tpz.job_utils.dragoon.abilityCheckRequiresPet(player, target, ability)
+    return xi.job_utils.dragoon.abilityCheckRequiresPet(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    tpz.job_utils.dragoon.useSpiritSurge(player, target, ability)
+    xi.job_utils.dragoon.useSpiritSurge(player, target, ability)
 end
 
 return ability_object

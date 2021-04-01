@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CHARM
+-- xi.effect.CHARM
 -----------------------------------
 local effect_object = {}
 

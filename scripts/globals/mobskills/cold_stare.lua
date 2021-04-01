@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.SILENCE
+    local typeEffect = xi.effect.SILENCE
     skill:setMsg(MobGazeMove(mob, target, typeEffect, 1, 0, 60))
     return typeEffect
 end

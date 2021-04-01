@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
         4736, 74520, 3,     --Scroll of Protectra IV
         4868, 64400, 3      --Scroll of Dispel
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end
 

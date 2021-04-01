@@ -14,12 +14,12 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     else
         if ((player:getPet():getTarget() ~= nil) and (player:isJugPet())) then
             return 0, 0
         else
-            return tpz.msg.basic.PET_CANNOT_DO_ACTION, 0
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
         end
     end
 end

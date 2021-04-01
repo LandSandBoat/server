@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    BiteDust = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+    BiteDust = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
     if (BiteDust ~= QUEST_AVAILABLE and trade:hasItemQty(1015, 1) and trade:getItemCount() == 1) then
         player:tradeComplete()
@@ -23,7 +23,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    BiteDust = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+    BiteDust = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
 
     if (BiteDust == QUEST_AVAILABLE) then
         player:startEvent(191)
@@ -43,12 +43,12 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 191) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
     elseif (csid == 193) then
-        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST) == QUEST_ACCEPTED) then
-            player:addTitle(tpz.title.SAND_BLASTER)
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST) == QUEST_ACCEPTED) then
+            player:addTitle(xi.title.SAND_BLASTER)
             player:addFame(BASTOK, 120)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BITE_THE_DUST)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BITE_THE_DUST)
         else
             player:addFame(BASTOK, 80)
         end

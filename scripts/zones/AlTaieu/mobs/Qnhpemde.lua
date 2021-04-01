@@ -16,16 +16,16 @@ entity.onMobFight = function(mob, target)
 
     if (mob:getAnimationSub() == 6 and mob:getBattleTime() - changeTime > 30) then
         mob:setAnimationSub(3) -- Mouth Open
-        mob:addMod(tpz.mod.ATTP, 100)
-        mob:addMod(tpz.mod.DEFP, -50)
-        mob:addMod(tpz.mod.DMGMAGIC, -50)
+        mob:addMod(xi.mod.ATTP, 100)
+        mob:addMod(xi.mod.DEFP, -50)
+        mob:addMod(xi.mod.DMGMAGIC, -50)
         mob:setLocalVar("changeTime", mob:getBattleTime())
 
     elseif (mob:getAnimationSub() == 3 and mob:getBattleTime() - changeTime > 30) then
         mob:setAnimationSub(6) -- Mouth Closed
-        mob:addMod(tpz.mod.ATTP, -100)
-        mob:addMod(tpz.mod.DEFP, 50)
-        mob:addMod(tpz.mod.DMGMAGIC, 50)
+        mob:addMod(xi.mod.ATTP, -100)
+        mob:addMod(xi.mod.DEFP, 50)
+        mob:addMod(xi.mod.DMGMAGIC, 50)
         mob:setLocalVar("changeTime", mob:getBattleTime())
     end
 end

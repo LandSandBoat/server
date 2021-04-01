@@ -28,9 +28,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (damage > 0 and target:hasStatusEffect(tpz.effect.STUN) == false) then
-        local duration = (tp/500) * applyResistanceAddEffect(player, target, tpz.magic.ele.LIGHTNING, 0)
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, duration)
+    if (damage > 0 and target:hasStatusEffect(xi.effect.STUN) == false) then
+        local duration = (tp/500) * applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0)
+        target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
 
     local damage, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

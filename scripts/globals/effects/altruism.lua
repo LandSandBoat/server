@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ALTRUISM
+-- xi.effect.ALTRUISM
 -----------------------------------
 local effect_object = {}
 

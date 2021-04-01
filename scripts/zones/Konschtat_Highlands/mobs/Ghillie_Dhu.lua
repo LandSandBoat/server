@@ -13,16 +13,16 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     -- For its TP drain melee.
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 
     -- Hits especially hard for his level, even by NM standards.
-    mob:addMod(tpz.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
+    mob:addMod(xi.mod.ATT, 50) -- May need adjustment along with cmbDmgMult in mob_pools.sql
 end
 
 entity.onMobRoam = function(mob)
     -- Fairly sure he shouldn't be storing up max TP while idle.
-    if mob:getMod(tpz.mod.REGAIN) ~= 0 then
-        mob:setMod(tpz.mod.REGAIN, 0)
+    if mob:getMod(xi.mod.REGAIN) ~= 0 then
+        mob:setMod(xi.mod.REGAIN, 0)
     end
 end
 
@@ -30,20 +30,20 @@ entity.onMobFight = function(mob, target)
     -- Guesstimating the regain scales from 1-100,
     -- nobody has the excact values but it scales with HP.
     local TP = (100 - mob:getHPP()) * 0.5
-    if mob:getMod(tpz.mod.REGAIN) ~= utils.clamp(TP, 1, 100) then
-        mob:setMod(tpz.mod.REGAIN, utils.clamp(TP, 1, 100))
+    if mob:getMod(xi.mod.REGAIN) ~= utils.clamp(TP, 1, 100) then
+        mob:setMod(xi.mod.REGAIN, utils.clamp(TP, 1, 100))
     end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.TP_DRAIN, {power = math.random(10, 30)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, {power = math.random(10, 30)})
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 204)
+    xi.hunts.checkHunt(mob, player, 204)
     -- I think he still counts for the FoV page? Most NM's do not though.
-    tpz.regime.checkRegime(player, mob, 81, 1, tpz.regime.type.FIELDS)
-    tpz.tutorial.onMobDeath(player)
+    xi.regime.checkRegime(player, mob, 81, 1, xi.regime.type.FIELDS)
+    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

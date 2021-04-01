@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- THE PICKPOCKET
-    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 579) then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 579) then
         player:startEvent(550)
 
     -- DEFAULT DIALOG
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     -- THE PICKPOCKET
     if player:getCharVar("thePickpocket") > 0 then
         player:startEvent(547)
-    elseif player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET) == QUEST_COMPLETED then
         player:startEvent(580)
 
     -- STANDARD DIALOG
@@ -40,9 +40,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- THE PICKPOCKET
-    if csid == 547 and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET) == QUEST_AVAILABLE then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET)
-    elseif csid == 550 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.THE_PICKPOCKET, {item = 16667, title = tpz.title.PICKPOCKET_PINCHER, var = {"thePickpocket", "thePickpocketSkipNPC", "thePickpocketEagleButton"}}) then
+    if csid == 547 and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET) == QUEST_AVAILABLE then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
+    elseif csid == 550 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET, {item = 16667, title = xi.title.PICKPOCKET_PINCHER, var = {"thePickpocket", "thePickpocketSkipNPC", "thePickpocketEagleButton"}}) then
         player:confirmTrade()
     end
 end

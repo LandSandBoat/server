@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.FLASH
+    local typeEffect = xi.effect.FLASH
     local power = 200
     local duration = 20
 

@@ -21,7 +21,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
             GetMobByID(ID.mob.TEMENOS_W_MOB[7]+2):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7]+3):isDead() and
             GetMobByID(ID.mob.TEMENOS_W_MOB[7]+4):isDead() and GetMobByID(ID.mob.TEMENOS_W_MOB[7]+5):isDead()
         then
-            GetNPCByID(ID.npc.TEMENOS_W_CRATE[7]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_W_CRATE[7]):setStatus(xi.status.NORMAL)
         end
     end
 end

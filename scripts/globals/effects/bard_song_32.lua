@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BARD_SONG_32
+-- xi.effect.BARD_SONG_32
 -----------------------------------
 local effect_object = {}
 

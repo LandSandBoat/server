@@ -12,16 +12,16 @@ local ID = require("scripts/zones/Mhaura/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:hasItemQty(1548, 1) == true and player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and player:getMainJob() == tpz.job.SMN) then
+    if (trade:hasItemQty(1548, 1) == true and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and player:getMainJob() == xi.job.SMN) then
         player:startEvent(10026, 0, 1548, 5, 20)
     end
 end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialSizeLightning = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
+    local TrialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
-    if (player:getMainLvl() >= 20 and player:getMainJob() == tpz.job.SMN and TrialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2) then --Requires player to be Summoner at least lvl 20
+    if (player:getMainLvl() >= 20 and player:getMainJob() == xi.job.SMN and TrialSizeLightning == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2) then --Requires player to be Summoner at least lvl 20
         player:startEvent(10025, 0, 1548, 5, 20)     --mini tuning fork of lightning, zone, level
     elseif (TrialSizeLightning == QUEST_ACCEPTED) then
         local LightningFork = player:hasItem(1548)
@@ -46,7 +46,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1548) --Mini tuning fork
         else
-            player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
+            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
             player:addItem(1548)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1548)
         end
@@ -58,7 +58,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 1548)
         end
     elseif (csid == 10026 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.CLOISTER_OF_STORMS)
+        xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_STORMS)
     end
 end
 

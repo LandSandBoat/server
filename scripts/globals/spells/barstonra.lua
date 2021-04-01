@@ -11,7 +11,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return applyBarspell(tpz.effect.BARSTONE, caster, target, spell)
+    return applyBarspell(xi.effect.BARSTONE, caster, target, spell)
 end
 
 return spell_object

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.AVATARS_FAVOR
+-- xi.effect.AVATARS_FAVOR
 -----------------------------------
 local effect_object = {}
 

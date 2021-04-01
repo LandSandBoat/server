@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FOOD
+-- xi.effect.FOOD
 -----------------------------------
 local effect_object = {}
 

@@ -23,46 +23,46 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 3600, 5763)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 3600, 5763)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.HP, 30)
-    target:addMod(tpz.mod.STR, 5)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.AGI, 3)
-    target:addMod(tpz.mod.INT, -2)
-    target:addMod(tpz.mod.FOOD_ATTP, 22)
-    target:addMod(tpz.mod.FOOD_ATT_CAP, 85)
-    target:addMod(tpz.mod.FOOD_RATTP, 22)
-    target:addMod(tpz.mod.FOOD_RATT_CAP, 85)
-    target:addMod(tpz.mod.SLEEPRES, 5)
-    target:addMod(tpz.mod.STUNRES, 6)
-    target:addMod(tpz.mod.HPHEAL, 6)
-    target:addMod(tpz.mod.MPHEAL, 3)
+    target:addMod(xi.mod.HP, 30)
+    target:addMod(xi.mod.STR, 5)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.AGI, 3)
+    target:addMod(xi.mod.INT, -2)
+    target:addMod(xi.mod.FOOD_ATTP, 22)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 85)
+    target:addMod(xi.mod.FOOD_RATTP, 22)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 85)
+    target:addMod(xi.mod.SLEEPRES, 5)
+    target:addMod(xi.mod.STUNRES, 6)
+    target:addMod(xi.mod.HPHEAL, 6)
+    target:addMod(xi.mod.MPHEAL, 3)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.HP, 30)
-    target:delMod(tpz.mod.STR, 5)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.AGI, 3)
-    target:delMod(tpz.mod.INT, -2)
-    target:delMod(tpz.mod.FOOD_ATTP, 22)
-    target:delMod(tpz.mod.FOOD_ATT_CAP, 85)
-    target:delMod(tpz.mod.FOOD_RATTP, 22)
-    target:delMod(tpz.mod.FOOD_RATT_CAP, 85)
-    target:delMod(tpz.mod.SLEEPRES, 5)
-    target:delMod(tpz.mod.STUNRES, 6)
-    target:delMod(tpz.mod.HPHEAL, 6)
-    target:delMod(tpz.mod.MPHEAL, 3)
+    target:delMod(xi.mod.HP, 30)
+    target:delMod(xi.mod.STR, 5)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.AGI, 3)
+    target:delMod(xi.mod.INT, -2)
+    target:delMod(xi.mod.FOOD_ATTP, 22)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 85)
+    target:delMod(xi.mod.FOOD_RATTP, 22)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 85)
+    target:delMod(xi.mod.SLEEPRES, 5)
+    target:delMod(xi.mod.STUNRES, 6)
+    target:delMod(xi.mod.HPHEAL, 6)
+    target:delMod(xi.mod.MPHEAL, 3)
 end
 
 return item_object

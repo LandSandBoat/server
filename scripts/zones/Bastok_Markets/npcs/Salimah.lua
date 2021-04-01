@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
     if (Gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
         local count = trade:getItemCount()
@@ -52,7 +52,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
     else
         player:startEvent(200)
@@ -64,16 +64,16 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    local Gourmet = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
+    local Gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
     if (csid == 200) then
         if (Gourmet == QUEST_AVAILABLE) then
-            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
         end
     elseif (csid ~= 121) then
         player:tradeComplete()
         if (Gourmet == QUEST_ACCEPTED) then
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GOURMET)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
         end
 
         local gil=350
@@ -88,7 +88,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(gil*GIL_RATE)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil*GIL_RATE)
         player:addFame(BASTOK, fame)
-        player:addTitle(tpz.title.MOMMYS_HELPER)
+        player:addTitle(xi.title.MOMMYS_HELPER)
         player:needToZone(true)
     end
 end

@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.MANA_WALL, 4, 0, 300)
+    player:addStatusEffect(xi.effect.MANA_WALL, 4, 0, 300)
 end
 
 return ability_object

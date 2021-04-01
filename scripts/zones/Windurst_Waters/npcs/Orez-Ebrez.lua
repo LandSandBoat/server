@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
         12449,  1471, 3,     --Brass Cap
         12543,   690, 3,     --Windshear Hat
     }
-    tpz.shop.nation(player, stock, tpz.nation.WINDURST)
+    xi.shop.nation(player, stock, xi.nation.WINDURST)
 
 end
 

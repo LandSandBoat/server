@@ -11,27 +11,27 @@ g_mixins.gears = function(mob)
         if (mobHPP >= 26 and mobHPP <= 49) then
             if mob:getAnimationSub() ~= 1 then
                 mob:setAnimationSub(1) -- double gear
-                mob:setMobMod(tpz.mobMod.SKILL_LIST, 151)
+                mob:setMobMod(xi.mobMod.SKILL_LIST, 151)
             end
         if mob:getLocalVar("Def1") == 0 then
-            mob:delMod(tpz.mod.MDEF, 10)
-            mob:delMod(tpz.mod.DEF, 20)
+            mob:delMod(xi.mod.MDEF, 10)
+            mob:delMod(xi.mod.DEF, 20)
             mob:setLocalVar("Def1", 1)
         end
         elseif mobHPP <= 25 then
             if mob:getAnimationSub() ~= 2 then
                 mob:setAnimationSub(2) -- single gear
-                mob:setMobMod(tpz.mobMod.SKILL_LIST, 152)
+                mob:setMobMod(xi.mobMod.SKILL_LIST, 152)
             end
             if mob:getLocalVar("Def2") == 0 then
-                mob:delMod(tpz.mod.MDEF, 10)
-                mob:delMod(tpz.mod.DEF, 20)
+                mob:delMod(xi.mod.MDEF, 10)
+                mob:delMod(xi.mod.DEF, 20)
                 mob:setLocalVar("Def2", 1)
             end
         elseif mobHPP > 50 then
             if mob:getAnimationSub() ~= 0 then
                 mob:setAnimationSub(0) -- triple gear
-                mob:setMobMod(tpz.mobMod.SKILL_LIST, 150)
+                mob:setMobMod(xi.mobMod.SKILL_LIST, 150)
             end
         end
 

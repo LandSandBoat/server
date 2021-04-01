@@ -15,13 +15,13 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(913, 2) and trade:getItemCount() == 2) then -- Trade Lump of Beeswax
             player:startEvent(563)
         end
     end
 
-    if (player:hasKeyItem(tpz.ki.OLD_POCKET_WATCH) and player:hasKeyItem(tpz.ki.OLD_BOOTS) == false) then
+    if (player:hasKeyItem(xi.ki.OLD_POCKET_WATCH) and player:hasKeyItem(xi.ki.OLD_BOOTS) == false) then
         if (trade:hasItemQty(828, 1) and trade:getItemCount() == 1) then -- Trade Velvet Cloth
             player:startEvent(37)
         end
@@ -32,10 +32,10 @@ end
 entity.onTrigger = function(player, npc)
 
     sanFame = player:getFameLevel(SANDORIA)
-    undyingFlames = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
-    if (player:hasKeyItem(tpz.ki.OLD_POCKET_WATCH)) then
+    undyingFlames = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
+    if (player:hasKeyItem(xi.ki.OLD_POCKET_WATCH)) then
         player:startEvent(48)
-    elseif (player:hasKeyItem(tpz.ki.OLD_BOOTS)) then
+    elseif (player:hasKeyItem(xi.ki.OLD_BOOTS)) then
         player:startEvent(58)
     elseif (sanFame >= 2 and undyingFlames == QUEST_AVAILABLE) then
         player:startEvent(562)
@@ -55,23 +55,23 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 562 and option == 0) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
     elseif (csid == 563) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13211) -- Friars Rope
         else
             player:tradeComplete()
-            player:addTitle(tpz.title.FAITH_LIKE_A_CANDLE)
+            player:addTitle(xi.title.FAITH_LIKE_A_CANDLE)
             player:addItem(13211)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13211) -- Friars Rope
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDYING_FLAMES)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
         end
     elseif (csid == 37) then
         player:tradeComplete()
-        player:delKeyItem(tpz.ki.OLD_POCKET_WATCH)
-        player:addKeyItem(tpz.ki.OLD_BOOTS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.OLD_BOOTS)
+        player:delKeyItem(xi.ki.OLD_POCKET_WATCH)
+        player:addKeyItem(xi.ki.OLD_BOOTS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_BOOTS)
     end
 
 end

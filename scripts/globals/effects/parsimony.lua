@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PARSIMONY
+-- xi.effect.PARSIMONY
 -----------------------------------
 local effect_object = {}
 

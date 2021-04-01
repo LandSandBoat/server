@@ -15,18 +15,18 @@ entity.onTrigger = function(player, npc)
 
     -- Add-on Scenarios
     local AddonScenarios = 0xFFFFFFFE
-    if (player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)) then
+    if (player:hasCompletedMission(xi.mission.log_id.AMK, xi.mission.id.amk.DRENCHED_IT_BEGAN_WITH_A_RAINDROP)) then
         AddonScenarios = AddonScenarios - 2 -- Drenched! It Began with a Raindrop.
     end
 -- *Need the correct csid
---    if (player:hasCompletedMission(tpz.mission.log_id.AMK, tpz.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)) then
+--    if (player:hasCompletedMission(xi.mission.log_id.AMK, xi.mission.id.amk.HASTEN_IN_A_JAM_IN_JEUNO)) then
 --        AddonScenarios = AddonScenarios - 4 -- Hasten! In a Jam in Jeuno?
 --    end
 
     -- Seekers of Adoulin
     local SeekersOfAdoulin = 0xFFFFFFFE
 -- *Need the correct csid
---    if (player:hasCompletedMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.RUMORS_FROM_THE_WEST)) then
+--    if (player:hasCompletedMission(xi.mission.log_id.SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)) then
 --        SeekersOfAdoulin = SeekersOfAdoulin - 2 -- Rumors from the West
 --    end
 

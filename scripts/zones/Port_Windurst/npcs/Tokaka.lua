@@ -26,8 +26,8 @@ end
 
 entity.onTrigger = function(player, npc)
 
-SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
-    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
+SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
         player:setCharVar("BlastFromThePast_Prog", 1)
     elseif (SomethingFishy >= QUEST_ACCEPTED) then
@@ -38,7 +38,7 @@ SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.w
         end
     elseif (SomethingFishy == QUEST_AVAILABLE) then
         player:startEvent(208, 0, 4360)
-    elseif (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
+    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
         player:setCharVar("BlastFromThePast_Prog", 1)
     else
@@ -56,13 +56,13 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 208) then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
         player:setCharVar("TokakaSpokenTo", 1)
     elseif (csid == 210) then
-        SomethingFishy = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+        SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
         if (SomethingFishy == QUEST_ACCEPTED) then
-            player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SOMETHING_FISHY)
+            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
             player:addFame(WINDURST, 60)
         else
             player:addFame(WINDURST, 10)

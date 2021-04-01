@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, 567) -- Well Water
     then
         player:startEvent(3)
@@ -28,12 +28,12 @@ entity.onTrigger = function(player, npc)
     local Z = npc:getZPos()
 
     if X >= -1 and X <= 1 and Z >= -106 and Z <= -102 then
-        if currentMission == tpz.mission.id.sandoria.BAT_HUNT and missionStatus <= 1 then
+        if currentMission == xi.mission.id.sandoria.BAT_HUNT and missionStatus <= 1 then
             player:startEvent(4)
         else
             player:startEvent(2)
         end
-    elseif currentMission == tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and not player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) then
+    elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and missionStatus == 3 and not player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
         player:startEvent(8)
     end
 
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("MissionStatus", 2)
     elseif
         csid == 2 and
-        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
         not player:hasItem(547) and
         not player:hasItem(567) and
         npcUtil.giveItem(player, 547) -- Tomb Waterskin
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:setCharVar("OfferingWaterOK", 1)
     elseif csid == 8 then
-        npcUtil.giveKeyItem(player, tpz.ki.ANCIENT_SANDORIAN_BOOK)
+        npcUtil.giveKeyItem(player, xi.ki.ANCIENT_SANDORIAN_BOOK)
     end
 end
 

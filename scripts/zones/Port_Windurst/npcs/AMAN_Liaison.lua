@@ -33,7 +33,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 936 then
         if player:getEminenceProgress(1448) ~= nil then
-            tpz.roe.onRecordTrigger(player, 1448)
+            xi.roe.onRecordTrigger(player, 1448)
         end
     end
 end

@@ -11,17 +11,17 @@ local entity = {}
 
 local messages =
 {
-    [tpz.transport.message.NEARING] = ID.text.NEARING_NASHMAU,
-    [tpz.transport.message.DOCKING] = ID.text.DOCKING_IN_NASHMAU
+    [ xi.transport.message.NEARING] = ID.text.NEARING_NASHMAU,
+    [ xi.transport.message.DOCKING] = ID.text.DOCKING_IN_NASHMAU
 }
 
 entity.onSpawn = function(npc)
-    npc:addPeriodicTrigger(tpz.transport.message.NEARING, tpz.transport.messageTime.SILVER_SEA, tpz.transport.epochOffset.NEARING)
-    npc:addPeriodicTrigger(tpz.transport.message.DOCKING, tpz.transport.messageTime.SILVER_SEA, tpz.transport.epochOffset.DOCKING)
+    npc:addPeriodicTrigger(xi.transport.message.NEARING, xi.transport.messageTime.SILVER_SEA, xi.transport.epochOffset.NEARING)
+    npc:addPeriodicTrigger(xi.transport.message.DOCKING, xi.transport.messageTime.SILVER_SEA, xi.transport.epochOffset.DOCKING)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
-    tpz.transport.captainMessage(npc, triggerID, messages)
+    xi.transport.captainMessage(npc, triggerID, messages)
 end
 
 entity.onTrade = function(player, npc, trade)

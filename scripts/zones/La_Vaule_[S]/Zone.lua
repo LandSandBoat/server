@@ -17,7 +17,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(236.547, -2.25, 20, 120)
     end
-    if player:getCurrentMission(WOTG) == tpz.mission.id.wotg.A_TIMESWEPT_BUTTERFLY and prevZone == tpz.zone.JUGNER_FOREST_S then
+    if player:getCurrentMission(WOTG) == xi.mission.id.wotg.A_TIMESWEPT_BUTTERFLY and prevZone == xi.zone.JUGNER_FOREST_S then
         cs = 1
     end
     return cs
@@ -31,8 +31,8 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:completeMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
-        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.PURPLE_THE_NEW_BLACK)
+        player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TIMESWEPT_BUTTERFLY)
+        player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.PURPLE_THE_NEW_BLACK)
     end
 end
 

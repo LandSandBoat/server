@@ -8,15 +8,15 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobEngaged = function(mob, target)
-    mob:setMod(tpz.mod.REGAIN, 50)
+    mob:setMod(xi.mod.REGAIN, 50)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setMod(tpz.mod.REGAIN, 0)
+    mob:setMod(xi.mod.REGAIN, 0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 162)
+    xi.hunts.checkHunt(mob, player, 162)
 end
 
 entity.onMobDespawn = function(mob)

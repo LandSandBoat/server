@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.REFRESH
+    local typeEffect = xi.effect.REFRESH
 
     skill:setMsg(MobBuffMove(mob, typeEffect, 3, 3, 300))
 

@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.DABIHJAJALIOH_SHOP_DIALOG)
-    tpz.shop.general(player, stock, JEUNO)
+    xi.shop.general(player, stock, JEUNO)
 end
 
 entity.onEventUpdate = function(player, csid, option)

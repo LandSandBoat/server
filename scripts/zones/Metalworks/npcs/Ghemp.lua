@@ -12,15 +12,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.SMITHING)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.SMITHING)
 
     if
         newRank > 9 and
         player:getCharVar("SmithingExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_BLACKSMITH)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_BLACKSMITH)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.SMITHING, newRank)
+            player:setSkillRank(xi.skill.SMITHING, newRank)
             player:startEvent(102, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("SmithingExpertQuest",0)
             player:setLocalVar("SmithingTraded",1)
@@ -28,24 +28,24 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(102, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.SMITHING, newRank)
+        player:setSkillRank(xi.skill.SMITHING, newRank)
         player:startEvent(102, 0, 0, 0, 0, newRank)
         player:setLocalVar("SmithingTraded",1)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.SMITHING)
-    local testItem = getTestItem(player, npc, tpz.skill.SMITHING)
+    local craftSkill = player:getSkillLevel(xi.skill.SMITHING)
+    local testItem = getTestItem(player, npc, xi.skill.SMITHING)
     local guildMember = isGuildMember(player, 8)
-    local rankCap = getCraftSkillCap(player, tpz.skill.SMITHING)
+    local rankCap = getCraftSkillCap(player, xi.skill.SMITHING)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.SMITHING)
+    local Rank = player:getSkillRank(xi.skill.SMITHING)
     local realSkill = (craftSkill - Rank) / 32
     if (guildMember == 1) then guildMember = 150995375; end
 
     if player:getCharVar("SmithingExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_BLACKSMITH) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_BLACKSMITH) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600

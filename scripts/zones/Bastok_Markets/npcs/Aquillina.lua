@@ -12,7 +12,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) ~= QUEST_AVAILABLE and npcUtil.tradeHas(trade, {{768, 4}}) then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN) ~= QUEST_AVAILABLE and npcUtil.tradeHas(trade, {{768, 4}}) then
         if npc:getLocalVar("FlashInThePan") <= os.time() then
             player:startEvent(219)
         else
@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) == QUEST_AVAILABLE then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN) == QUEST_AVAILABLE then
         player:startEvent(217)
     else
         player:startEvent(116)
@@ -34,10 +34,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 217 then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN)
     elseif csid == 219 then
-        local fame = player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN) and 8 or 75
-        if npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.A_FLASH_IN_THE_PAN, {gil=100, fame=fame}) then
+        local fame = player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN) and 8 or 75
+        if npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN, {gil=100, fame=fame}) then
             player:confirmTrade()
             GetNPCByID(ID.npc.AQUILLINA):setLocalVar("FlashInThePan", os.time() + 900)
         end

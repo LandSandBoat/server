@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.SEPULCHER, 7, 0, 180)
+    target:addStatusEffect(xi.effect.SEPULCHER, 7, 0, 180)
 end
 
 return ability_object

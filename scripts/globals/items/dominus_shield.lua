@@ -18,7 +18,7 @@ item_object.onItemUse = function(target)
         mpHeal = dif
     end
     target:addMP(mpHeal)
-    target:messageBasic(tpz.msg.basic.RECOVERS_MP, 0, mpHeal)
+    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, mpHeal)
 end
 
 return item_object

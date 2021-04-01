@@ -20,24 +20,24 @@ local CRAWLERS_NEST =
             local EXORAY_MOLD = 1089 -- Human readability
 
             if
-                player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
                 not player:hasItem(EXORAY_MOLD) and not player:hasKeyItem(ki)
             then
                 npcUtil.giveKeyItem(player, ki)
             end
 
             if
-                player:hasKeyItem(tpz.ki.EXORAY_MOLD_CRUMB1) and
-                player:hasKeyItem(tpz.ki.EXORAY_MOLD_CRUMB2) and
-                player:hasKeyItem(tpz.ki.EXORAY_MOLD_CRUMB3)
+                player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
+                player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
+                player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
             then
                 npcUtil.giveItem(player, EXORAY_MOLD)
             end
 
             if player:hasItem(EXORAY_MOLD) then
-                player:delKeyItem(tpz.ki.EXORAY_MOLD_CRUMB1)
-                player:delKeyItem(tpz.ki.EXORAY_MOLD_CRUMB2)
-                player:delKeyItem(tpz.ki.EXORAY_MOLD_CRUMB3)
+                player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
+                player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
+                player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
             end
         end
     end,

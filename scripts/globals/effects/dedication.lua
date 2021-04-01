@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DEDICATION
+-- xi.effect.DEDICATION
 -----------------------------------
 local effect_object = {}
 

@@ -10,12 +10,12 @@ local ID = require("scripts/zones/Batallia_Downs/IDs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 74, 2, tpz.regime.type.FIELDS)
-    if (ENABLE_ACP == 1 and (player:hasKeyItem(tpz.ki.BOWL_OF_BLAND_GOBLIN_SALAD) == false) and player:getCurrentMission(ACP) >= tpz.mission.id.acp.THE_ECHO_AWAKENS) then
+    xi.regime.checkRegime(player, mob, 74, 2, xi.regime.type.FIELDS)
+    if (ENABLE_ACP == 1 and (player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD) == false) and player:getCurrentMission(ACP) >= xi.mission.id.acp.THE_ECHO_AWAKENS) then
         -- Guesstimating 15% chance
         if (math.random(1, 100) >= 85) then
-            player:addKeyItem(tpz.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
+            player:addKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD)
         end
     end
 

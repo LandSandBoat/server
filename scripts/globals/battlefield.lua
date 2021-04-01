@@ -30,9 +30,9 @@ end
 
 
 
-tpz.battlefield = {}
+ xi.battlefield = {}
 
-tpz.battlefield.status =
+ xi.battlefield.status =
 {
     OPEN     = 0,
     LOCKED   = 1,
@@ -40,7 +40,7 @@ tpz.battlefield.status =
     LOST     = 3,
 }
 
-tpz.battlefield.returnCode =
+ xi.battlefield.returnCode =
 {
     WAIT              = 1,
     CUTSCENE          = 2,
@@ -50,7 +50,7 @@ tpz.battlefield.returnCode =
     BATTLEFIELD_FULL  = 6
 }
 
-tpz.battlefield.leaveCode =
+ xi.battlefield.leaveCode =
 {
     EXIT = 1,
     WON = 2,
@@ -58,7 +58,7 @@ tpz.battlefield.leaveCode =
     LOST = 4
 }
 
-function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
+function xi.battlefield.onBattlefieldTick(battlefield, timeinside, players)
     local killedallmobs = true
     local mobs = battlefield:getMobs(true, false)
     local status = battlefield:getStatus()
@@ -67,9 +67,9 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
     local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
     local phaseChange = battlefield:getLocalVar("phaseChange")
 
-    if status == tpz.battlefield.status.LOST then
+    if status == xi.battlefield.status.LOST then
         leavecode = 4
-    elseif status == tpz.battlefield.status.WON then
+    elseif status == xi.battlefield.status.WON then
         leavecode = 2
     end
 
@@ -77,7 +77,7 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
         battlefield:setLocalVar("cutsceneTimer", cutsceneTimer + 1)
 
         local canLeave = battlefield:getLocalVar("loot") == 0
-        if status == tpz.battlefield.status.WON and not canLeave then
+        if status == xi.battlefield.status.WON and not canLeave then
             if battlefield:getLocalVar("lootSpawned") == 0 and battlefield:spawnLoot() then
                 canLeave = false
             elseif battlefield:getLocalVar("lootSeen") == 1 then
@@ -95,20 +95,20 @@ function tpz.battlefield.onBattlefieldTick(battlefield, timeinside, players)
             break
         end
     end
-    tpz.battlefield.HandleWipe(battlefield, players)
+    xi.battlefield.HandleWipe(battlefield, players)
 
     -- if we cant send anymore time prompts theyre out of time
-    if not tpz.battlefield.SendTimePrompts(battlefield, players) then
+    if not xi.battlefield.SendTimePrompts(battlefield, players) then
         battlefield:cleanup(true)
     end
 
     if killedallmobs and phaseChange == 0 then
-        battlefield:setStatus(tpz.battlefield.status.WON)
+        battlefield:setStatus(xi.battlefield.status.WON)
     end
 end
 
 -- returns false if out of time
-function tpz.battlefield.SendTimePrompts(battlefield, players)
+function xi.battlefield.SendTimePrompts(battlefield, players)
     local tick = battlefield:getTimeInside()
     local status = battlefield:getStatus()
     local remainingTime = battlefield:getRemainingTime()
@@ -131,7 +131,7 @@ function tpz.battlefield.SendTimePrompts(battlefield, players)
 
     if message ~= 0 then
         for i, player in pairs(players) do
-            player:messageBasic(tpz.msg.basic.TIME_LEFT, remainingTime)
+            player:messageBasic(xi.msg.basic.TIME_LEFT, remainingTime)
         end
         battlefield:setLastTimeUpdate(message)
     end
@@ -139,7 +139,7 @@ function tpz.battlefield.SendTimePrompts(battlefield, players)
     return remainingTime >= 0
 end
 
-function tpz.battlefield.HandleWipe(battlefield, players)
+function xi.battlefield.HandleWipe(battlefield, players)
     local rekt = true
     local wipeTime = battlefield:getWipeTime()
     local elapsed = battlefield:getTimeInside()
@@ -162,7 +162,7 @@ function tpz.battlefield.HandleWipe(battlefield, players)
         end
     else
         if (elapsed - wipeTime) > 180 then
-            battlefield:setStatus(tpz.battlefield.status.LOST)
+            battlefield:setStatus(xi.battlefield.status.LOST)
         else
             for _, player in pairs(players) do
                 if player:getHP() ~= 0 then
@@ -173,20 +173,20 @@ function tpz.battlefield.HandleWipe(battlefield, players)
             end
 
             if rekt then
-                battlefield:setStatus(tpz.battlefield.status.LOST)
+                battlefield:setStatus(xi.battlefield.status.LOST)
             end
         end
     end
 end
 
 
-function tpz.battlefield.onBattlefieldStatusChange(battlefield, players, status)
+function xi.battlefield.onBattlefieldStatusChange(battlefield, players, status)
 
 end
 
-function tpz.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
+function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     players = players or battlefield:getPlayers()
-    if battlefield:getStatus() == tpz.battlefield.status.WON and battlefield:getLocalVar("lootSeen") == 0 then
+    if battlefield:getStatus() == xi.battlefield.status.WON and battlefield:getLocalVar("lootSeen") == 0 then
         if npc then
             npc:setAnimation(90)
         end
@@ -222,7 +222,7 @@ function tpz.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     end
 end
 
-function tpz.battlefield.ExtendTimeLimit(battlefield, minutes, message, param, players)
+function xi.battlefield.ExtendTimeLimit(battlefield, minutes, message, param, players)
     local timeLimit = battlefield:getTimeLimit()
     local extension = minutes * 60
     battlefield:setTimeLimit(timeLimit + extension)
@@ -235,7 +235,7 @@ function tpz.battlefield.ExtendTimeLimit(battlefield, minutes, message, param, p
     end
 end
 
-function tpz.battlefield.HealPlayers(battlefield, players)
+function xi.battlefield.HealPlayers(battlefield, players)
     players = players or battlefield:getPlayers()
     for _, player in pairs(players) do
         local recoverHP = player:getMaxHP() - player:getHP()
@@ -243,7 +243,7 @@ function tpz.battlefield.HealPlayers(battlefield, players)
         player:addHP(recoverHP)
         player:addMP(recoverMP)
         player:resetRecasts()
-        player:messageBasic(tpz.msg.basic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
-        player:messageBasic(tpz.msg.basic.ALL_ABILITIES_RECHARGED)
+        player:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP, recoverHP, recoverMP)
+        player:messageBasic(xi.msg.basic.ALL_ABILITIES_RECHARGED)
     end
 end

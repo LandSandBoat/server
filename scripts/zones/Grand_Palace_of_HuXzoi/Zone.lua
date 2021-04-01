@@ -26,7 +26,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -49,7 +49,7 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if (player:getCharVar("Hu-Xzoi-TP") == 0 and player:getAnimation() == tpz.anim.NONE) then -- prevent 2cs at same time
+    if (player:getCharVar("Hu-Xzoi-TP") == 0 and player:getAnimation() == xi.anim.NONE) then -- prevent 2cs at same time
         player:startEvent(149 + region:GetRegionID())
     end
 end

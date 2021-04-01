@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CONTRADANCE
+-- xi.effect.CONTRADANCE
 -----------------------------------
 local effect_object = {}
 

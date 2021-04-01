@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
         17336,   5, 3,     --Crossbow Bolt
     }
 
-    local rank = GetNationRank(tpz.nation.BASTOK)
+    local rank = GetNationRank(xi.nation.BASTOK)
 
     if (rank ~= 1) then
         table.insert(stock, 1022)    --Thief's Tools
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     end
 
     player:showText(npc, ID.text.BOYTZ_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
 end
 
 entity.onEventUpdate = function(player, csid, option)

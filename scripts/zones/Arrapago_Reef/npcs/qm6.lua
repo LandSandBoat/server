@@ -20,22 +20,22 @@ entity.onTrigger = function(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
     local lotdCS = player:getCharVar("LuckOfTheDraw")
-    local efao   = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
+    local efao   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
     local efaoCS = player:getCharVar("EquippedforAllOccasions")
-    local ntus   = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
+    local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
     -- LUCK OF THE DRAW
     if lotdCS == 2 then
         player:startEvent(211)
 
     -- EQUIPPED FOR ALL OCCASIONS
-    elseif efao == QUEST_AVAILABLE and mJob == tpz.job.COR and mLvl >= AF1_QUEST_LEVEL then
+    elseif efao == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF1_QUEST_LEVEL then
         player:startEvent(228)
     elseif efao == QUEST_ACCEPTED and efaoCS == 3 then
         player:startEvent(231)
 
     -- NAVIGATING THE UNFRIENDLY SEAS
-    elseif efao == QUEST_COMPLETED and ntus == QUEST_AVAILABLE and mJob == tpz.job.COR and mLvl >= AF2_QUEST_LEVEL then
+    elseif efao == QUEST_COMPLETED and ntus == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF2_QUEST_LEVEL then
         player:startEvent(232)
     elseif player:getCharVar("NavigatingtheUnfriendlySeas") == 4 then
         player:startEvent(233)
@@ -56,18 +56,18 @@ entity.onEventFinish = function(player, csid, option)
 
     -- EQUIPPED FOR ALL OCCASIONS
     elseif csid == 228 then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
         player:setCharVar("EquippedforAllOccasions", 1)
     elseif csid == 231 then
-        player:delKeyItem(tpz.ki.WHEEL_LOCK_TRIGGER)
+        player:delKeyItem(xi.ki.WHEEL_LOCK_TRIGGER)
         player:setCharVar("EquippedforAllOccasions", 4)
 
     -- NAVIGATING THE UNFRIENDLY SEAS
     elseif csid == 232 then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
         player:setCharVar("NavigatingtheUnfriendlySeas", 1)
     elseif csid == 233 then
-        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS, {item=15601, var={"NavigatingtheUnfriendlySeas", "HydrogauageTimer"}})
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS, {item=15601, var={"NavigatingtheUnfriendlySeas", "HydrogauageTimer"}})
     end
 end
 

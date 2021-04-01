@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Apollyon/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     [1] =
@@ -64,7 +64,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.UDMGMAGIC, -100)
+    mob:setMod(xi.mod.UDMGMAGIC, -100)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
@@ -72,12 +72,12 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local battlefield = mob:getBattlefield()
         battlefield:setLocalVar("killCountF4", battlefield:getLocalVar("killCountF4")+1)
         local killCount = battlefield:getLocalVar("killCountF4")
-        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(tpz.mod.UDMGPHYS, -(8-killCount)*10)
+        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(xi.mod.UDMGPHYS, -(8-killCount)*10)
         if killCount == 1 then
-            GetNPCByID(ID.mob.APOLLYON_SE_MOB[4]):setStatus(tpz.status.DISAPPEAR)
+            GetNPCByID(ID.mob.APOLLYON_SE_MOB[4]):setStatus(xi.status.DISAPPEAR)
             GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):spawn()
         elseif killCount == 8 then
-            GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(tpz.mod.UDMGMAGIC, 0)
+            GetMobByID(ID.mob.APOLLYON_SE_MOB[4]):setMod(xi.mod.UDMGMAGIC, 0)
         end
     end
 end

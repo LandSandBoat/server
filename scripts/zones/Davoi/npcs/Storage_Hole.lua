@@ -12,11 +12,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(1103, 1) and trade:getItemCount() == 1) then
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.ORCISH_DRIED_FOOD)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ORCISH_DRIED_FOOD)
+            player:addKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ORCISH_DRIED_FOOD)
         end
     end
 
@@ -24,7 +24,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED) then
         player:messageSpecial(ID.text.AN_ORCISH_STORAGE_HOLE)
     else
         player:messageSpecial(ID.text.YOU_SEE_NOTHING)

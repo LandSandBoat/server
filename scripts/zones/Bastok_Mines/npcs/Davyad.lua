@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.TO_THE_FORSAKEN_MINES) then
         player:startEvent(54)
     else
         player:startEvent(53)

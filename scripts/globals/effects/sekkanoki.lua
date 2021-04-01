@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SEKKANOKI
+-- xi.effect.SEKKANOKI
 -----------------------------------
 local effect_object = {}
 

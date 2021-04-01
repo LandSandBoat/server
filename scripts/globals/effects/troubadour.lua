@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TROUBADOUR
+-- xi.effect.TROUBADOUR
 -----------------------------------
 local effect_object = {}
 

@@ -33,11 +33,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 
     -- Because shell matters, but we don't want to calculate damage normally via MobMagicalMove since this is a % attack
-    local damage = baseDamage * getElementalDamageReduction(target, tpz.magic.ele.WIND)
+    local damage = baseDamage * getElementalDamageReduction(target, xi.magic.ele.WIND)
     -- we still need final adjustments to handle stoneskin etc though
-    damage = MobFinalAdjustments(damage, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.WIND, MOBPARAM_WIPE_SHADOWS)
+    damage = MobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, MOBPARAM_WIPE_SHADOWS)
 
-    target:takeDamage(finalDamage, mob, tpz.attackType.MAGICAL, tpz.damageType.WIND)
+    target:takeDamage(finalDamage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
     mob:resetEnmity(target)
     return finalDamage
 end

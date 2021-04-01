@@ -13,8 +13,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.QUICKENING, 10, 0, 3600)
-    target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.QUICKENING)
+    target:addStatusEffect(xi.effect.QUICKENING, 10, 0, 3600)
+    target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.QUICKENING)
 end
 
 return item_object

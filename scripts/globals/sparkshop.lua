@@ -6,7 +6,7 @@
 -----------------------------------
 
 tpz = tpz or {}
-tpz.sparkshop = tpz.sparkshop or {}
+ xi.sparkshop = xi.sparkshop or {}
 
 local optionToItem = {
     [1] = { -- Items page
@@ -587,7 +587,7 @@ end
 
 -- TO DO: add event trusts
 
-function tpz.sparkshop.onTrade(player, npc, trade, eventid)
+function xi.sparkshop.onTrade(player, npc, trade, eventid)
     local copperVouchersStored = player:getCurrency("aman_vouchers")
     local count = trade:getItemQty(8711)
 
@@ -599,7 +599,7 @@ function tpz.sparkshop.onTrade(player, npc, trade, eventid)
     end
 end
 
-function tpz.sparkshop.onTrigger(player, npc, event)
+function xi.sparkshop.onTrigger(player, npc, event)
     local sparks = player:getCurrency("spark_of_eminence")
     local vouchers = player:getCurrency("aman_vouchers")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
@@ -608,7 +608,7 @@ function tpz.sparkshop.onTrigger(player, npc, event)
     player:startEvent(event, 0, sparks, vouchers, 0, 0, remainingLimit)
 end
 
-function tpz.sparkshop.onEventUpdate(player,csid,option)
+function xi.sparkshop.onEventUpdate(player,csid,option)
     local sparks = player:getCurrency("spark_of_eminence")
     local weeklySparksSpent = player:getCharVar("weekly_sparks_spent")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - weeklySparksSpent
@@ -701,5 +701,5 @@ function tpz.sparkshop.onEventUpdate(player,csid,option)
     end
 end
 
-function tpz.sparkshop.onEventFinish(player, csid, option)
+function xi.sparkshop.onEventFinish(player, csid, option)
 end

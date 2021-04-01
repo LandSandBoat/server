@@ -14,7 +14,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local portalTriggerF3 = battlefield:getLocalVar("portalTriggerF3")
         if portalTriggerF3 == mobID then
             battlefield:setLocalVar("randomF4", ID.mob.APOLLYON_NE_MOB[4]+math.random(0,2))
-            tpz.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[3])
+            xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[3])
         end
     end
 end

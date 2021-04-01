@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FLASHY_SHOT
+-- xi.effect.FLASHY_SHOT
 -----------------------------------
 local effect_object = {}
 

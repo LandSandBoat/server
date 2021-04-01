@@ -26,7 +26,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     local final = getCureFinal(caster, spell, getBaseCureOld(power, divisor, constant), minCure, false)
 
-    final = final + (final * (target:getMod(tpz.mod.CURE_POTENCY_RCVD)/100))
+    final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods....
     final = final * CURE_POWER
@@ -40,9 +40,9 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     caster:updateEnmityFromCure(target, final)
 
-    spell:setMsg(tpz.msg.basic.AOE_HP_RECOVERY)
+    spell:setMsg(xi.msg.basic.AOE_HP_RECOVERY)
 
-    local mpBonusPercent = (final*caster:getMod(tpz.mod.CURE2MP_PERCENT))/100
+    local mpBonusPercent = (final*caster:getMod(xi.mod.CURE2MP_PERCENT))/100
     if (mpBonusPercent > 0) then
         caster:addMP(mpBonusPercent)
     end

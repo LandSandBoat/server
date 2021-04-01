@@ -16,10 +16,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
         player:startEvent(111)
-    elseif player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES then
-        if tpz.besieged.hasRunicPortal(player, tpz.teleport.runic_portal.MAMOOL) then
+    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+        if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.MAMOOL) then
             player:startEvent(109)
         else
             player:startEvent(111)
@@ -35,9 +35,9 @@ end
 entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         if csid == 111 then
-            tpz.besieged.addRunicPortal(player, tpz.teleport.runic_portal.MAMOOL)
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.MAMOOL)
         end
-        tpz.teleport.toChamberOfPassage(player)
+        xi.teleport.toChamberOfPassage(player)
     end
 end
 

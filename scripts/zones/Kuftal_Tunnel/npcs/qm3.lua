@@ -10,7 +10,7 @@ require("scripts/globals/wsquest")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.tachi_kasha, player, ID.mob.KETTENKAEFER)
+    xi.wsquest.handleQmTrigger(xi.wsquest.tachi_kasha, player, ID.mob.KETTENKAEFER)
 end
 
 return entity

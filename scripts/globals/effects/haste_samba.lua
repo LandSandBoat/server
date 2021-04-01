@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HASTE_SAMBA
+-- xi.effect.HASTE_SAMBA
 -----------------------------------
 local effect_object = {}
 

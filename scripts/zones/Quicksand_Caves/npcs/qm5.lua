@@ -17,15 +17,15 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local TheMissingPiece = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_MISSING_PIECE)
-    local HasAncientFragment = player:hasKeyItem(tpz.ki.ANCIENT_TABLET_FRAGMENT)
-    local HasAncientTablet = player:hasKeyItem(tpz.ki.TABLET_OF_ANCIENT_MAGIC)
+    local TheMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+    local HasAncientFragment = player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+    local HasAncientTablet = player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
 
     -- Need to make sure the quest is flagged the player is no further along in the quest
 
-    if (TheMissingPiece == QUEST_ACCEPTED and not(HasAncientTablet or HasAncientFragment or player:getTitle() == tpz.title.ACQUIRER_OF_ANCIENT_ARCANUM)) then
-        player:addKeyItem(tpz.ki.ANCIENT_TABLET_FRAGMENT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_TABLET_FRAGMENT)
+    if (TheMissingPiece == QUEST_ACCEPTED and not(HasAncientTablet or HasAncientFragment or player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)) then
+        player:addKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_TABLET_FRAGMENT)
 
         -- move the ??? to a random location
         local i = math.random(0, 100)

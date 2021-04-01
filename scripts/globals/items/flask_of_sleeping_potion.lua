@@ -12,7 +12,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.SLEEP_I, 1, 0, 30)
+    target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 30)
 end
 
 

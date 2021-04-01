@@ -15,10 +15,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local lostInTranslocation = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
-    local leftMapPiece = player:hasKeyItem(tpz.ki.LEFT_MAP_PIECE)
-    local middleMapPiece = player:hasKeyItem(tpz.ki.MIDDLE_MAP_PIECE)
-    local rightMapPiece = player:hasKeyItem(tpz.ki.RIGHT_MAP_PIECE)
+    local lostInTranslocation = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
+    local leftMapPiece = player:hasKeyItem(xi.ki.LEFT_MAP_PIECE)
+    local middleMapPiece = player:hasKeyItem(xi.ki.MIDDLE_MAP_PIECE)
+    local rightMapPiece = player:hasKeyItem(xi.ki.RIGHT_MAP_PIECE)
     local anyMapPiece = leftMapPiece or middleMapPiece or rightMapPiece
 
     if lostInTranslocation == QUEST_COMPLETED then
@@ -41,25 +41,25 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 107 then
-        if player:hasKeyItem(tpz.ki.MAP_OF_GRAUBERG) then
-            npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
+        if player:hasKeyItem(xi.ki.MAP_OF_GRAUBERG) then
+            npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
                 gil = 2000,
                 xp = 2000,
                 var = "lostInTranslocationCS"
             })
         else
-            npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
-                ki = tpz.ki.MAP_OF_GRAUBERG,
+            npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION, {
+                ki = xi.ki.MAP_OF_GRAUBERG,
                 var = "lostInTranslocationCS"
             })
         end
-        player:delKeyItem(tpz.ki.LEFT_MAP_PIECE)
-        player:delKeyItem(tpz.ki.MIDDLE_MAP_PIECE)
-        player:delKeyItem(tpz.ki.RIGHT_MAP_PIECE)
+        player:delKeyItem(xi.ki.LEFT_MAP_PIECE)
+        player:delKeyItem(xi.ki.MIDDLE_MAP_PIECE)
+        player:delKeyItem(xi.ki.RIGHT_MAP_PIECE)
     elseif csid == 105 then
         player:setCharVar("lostInTranslocationCS", 1)
     elseif csid == 103 then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LOST_IN_TRANSLOCATION)
     end
 end
 

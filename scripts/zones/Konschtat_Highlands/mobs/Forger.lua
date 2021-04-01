@@ -8,11 +8,11 @@ require("scripts/quests/tutorial")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.tutorial.onMobDeath(player)
+    xi.tutorial.onMobDeath(player)
 end
 
 return entity

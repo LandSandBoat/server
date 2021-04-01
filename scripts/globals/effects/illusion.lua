@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ILLUSION
+-- xi.effect.ILLUSION
 -----------------------------------
 local effect_object = {}
 

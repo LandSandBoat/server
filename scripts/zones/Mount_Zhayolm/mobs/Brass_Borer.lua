@@ -9,7 +9,7 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)
@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     mob:setLocalVar("defUp", math.random(25, 50))
     mob:setLocalVar("DEF", math.random(3, 5))
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobRoam = function(mob)
@@ -25,11 +25,11 @@ entity.onMobRoam = function(mob)
 
     if mob:getAnimationSub() == 0 and os.time() > roamTime then
         mob:setAnimationSub(1)
-        mob:addMod(tpz.mod.MDEF, 10)
+        mob:addMod(xi.mod.MDEF, 10)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     elseif mob:getAnimationSub() == 1 and os.time() > roamTime then
         mob:setAnimationSub(0)
-        mob:delMod(tpz.mod.MDEF, 10)
+        mob:delMod(xi.mod.MDEF, 10)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
 end
@@ -39,11 +39,11 @@ entity.onMobFight = function(mob, target)
 
     if mob:getAnimationSub() == 0 and os.time() > fightTime then
         mob:setAnimationSub(1)
-        mob:addMod(tpz.mod.MDEF, 10)
+        mob:addMod(xi.mod.MDEF, 10)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     elseif mob:getAnimationSub() == 1 and os.time() > fightTime then
         mob:setAnimationSub(0)
-        mob:delMod(tpz.mod.MDEF, 10)
+        mob:delMod(xi.mod.MDEF, 10)
         mob:setLocalVar("formTime", os.time() + math.random(43, 47))
     end
 
@@ -57,7 +57,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENFIRE)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE)
 end
 
 entity.onMobDeath = function(mob)

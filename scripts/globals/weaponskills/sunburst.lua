@@ -24,12 +24,12 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.vit_wsc = 0.0 params.agi_wsc = 0.0
     params.int_wsc = 0.0 params.mnd_wsc = 0.4
     params.chr_wsc = 0.0
-    params.skill = tpz.skill.STAFF
+    params.skill = xi.skill.STAFF
     params.includemab = true
     -- 50/50 shot of being light or dark
-    params.ele = tpz.magic.ele.LIGHT
+    params.ele = xi.magic.ele.LIGHT
     if math.random() < 0.5 then
-        params.ele = tpz.magic.ele.DARK
+        params.ele = xi.magic.ele.DARK
     end
 
     if USE_ADOULIN_WEAPON_SKILL_CHANGES == true then

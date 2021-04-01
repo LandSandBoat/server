@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DYNAMIS
+-- xi.effect.DYNAMIS
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
@@ -12,7 +12,7 @@ effect_object.onEffectGain = function(target, effect)
 end
 
 effect_object.onEffectTick = function(target, effect)
-    if target:getCurrentRegion() == tpz.region.DYNAMIS then
+    if target:getCurrentRegion() == xi.region.DYNAMIS then
         local lastTimeUpdate = target:getLocalVar("dynamis_lasttimeupdate")
         local remainingTimeLimit = effect:getTimeRemaining() / 1000
         local message = 0
@@ -44,17 +44,17 @@ effect_object.onEffectTick = function(target, effect)
             target:setLocalVar("dynamis_lasttimeupdate", message)
         end
     else
-        target:delStatusEffectSilent(tpz.effect.DYNAMIS)
+        target:delStatusEffectSilent(xi.effect.DYNAMIS)
     end
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delKeyItem(tpz.ki.CRIMSON_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.AZURE_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.AMBER_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.ALABASTER_GRANULES_OF_TIME)
-    target:delKeyItem(tpz.ki.OBSIDIAN_GRANULES_OF_TIME)
-    if target:getCurrentRegion() == tpz.region.DYNAMIS then
+    target:delKeyItem(xi.ki.CRIMSON_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.AZURE_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.AMBER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.ALABASTER_GRANULES_OF_TIME)
+    target:delKeyItem(xi.ki.OBSIDIAN_GRANULES_OF_TIME)
+    if target:getCurrentRegion() == xi.region.DYNAMIS then
         if effect:getTimeRemaining() == 0 then
             target:messageSpecial(zones[target:getZoneID()].text.DYNAMIS_TIME_EXPIRED)
             target:disengage()

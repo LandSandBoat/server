@@ -16,13 +16,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local AltanaSorrow = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALTANA_S_SORROW)
-    local VirnageLetter = player:hasKeyItem(tpz.ki.LETTER_FROM_VIRNAGE)
-    local DivinePaint = player:hasKeyItem(tpz.ki.BUCKET_OF_DIVINE_PAINT)
+    local AltanaSorrow = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
+    local VirnageLetter = player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE)
+    local DivinePaint = player:hasKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
 
     if (AltanaSorrow == QUEST_ACCEPTED and VirnageLetter == false and DivinePaint == false) then
-        player:addKeyItem(tpz.ki.BUCKET_OF_DIVINE_PAINT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BUCKET_OF_DIVINE_PAINT)
+        player:addKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BUCKET_OF_DIVINE_PAINT)
     else
         player:messageSpecial(ID.text.YOU_FIND_NOTHING)
     end

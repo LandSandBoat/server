@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SHOCK
+-- xi.effect.SHOCK
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -7,16 +7,16 @@ require("scripts/globals/magic")
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.REGEN_DOWN, effect:getPower())
-    target:addMod(tpz.mod.MND, -getElementalDebuffStatDownFromDOT(effect:getPower()))
+    target:addMod(xi.mod.REGEN_DOWN, effect:getPower())
+    target:addMod(xi.mod.MND, -getElementalDebuffStatDownFromDOT(effect:getPower()))
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.REGEN_DOWN, effect:getPower())
-    target:delMod(tpz.mod.MND, -getElementalDebuffStatDownFromDOT(effect:getPower()))
+    target:delMod(xi.mod.REGEN_DOWN, effect:getPower())
+    target:delMod(xi.mod.MND, -getElementalDebuffStatDownFromDOT(effect:getPower()))
 end
 
 return effect_object

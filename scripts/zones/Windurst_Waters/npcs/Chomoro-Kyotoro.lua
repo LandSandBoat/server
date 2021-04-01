@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- needs check for tpz.ki.TATTERED_TEST_SHEET then sets to var 3
-    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
+    -- needs check for xi.ki.TATTERED_TEST_SHEET then sets to var 3
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         local prog = player:getCharVar("QuestMakingTheGrade_prog")
         if (prog == 0) then
             player:startEvent(454)
@@ -37,7 +37,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 460) then
         player:setCharVar("QuestMakingTheGrade_prog", 3)
-        player:delKeyItem(tpz.ki.TATTERED_TEST_SHEET)
+        player:delKeyItem(xi.ki.TATTERED_TEST_SHEET)
     end
 end
 

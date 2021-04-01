@@ -10,7 +10,7 @@ local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(tpz.effect.DARK_MANEUVER)
+    return master:countEffect(xi.effect.DARK_MANEUVER)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
@@ -18,8 +18,8 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         numHits = 1,
         atkmulti = 20.0,
         accBonus = 1000,
-        weaponDamage = automaton:getSkillLevel(tpz.skill.AUTOMATON_MELEE),
-        weaponType = tpz.skill.SWORD,
+        weaponDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE),
+        weaponType = xi.skill.SWORD,
         ftp100 = 0.25,
         ftp200 = 0.4,
         ftp300 = 0.6,
@@ -62,7 +62,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     if damage > 0 then
         if not target:isUndead() then
             automaton:addHP(damage)
-            skill:setMsg(tpz.msg.basic.SKILL_DRAIN_HP)
+            skill:setMsg(xi.msg.basic.SKILL_DRAIN_HP)
         end
     end
 

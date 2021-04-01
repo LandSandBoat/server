@@ -8,7 +8,7 @@ require("scripts/globals/regimes")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMonsterMagicPrepare = function(mob, target)
@@ -26,7 +26,7 @@ entity.onMonsterMagicPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 774, 1, tpz.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
 end
 
 return entity

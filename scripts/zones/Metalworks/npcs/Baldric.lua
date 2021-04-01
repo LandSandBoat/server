@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(503, 1) and trade:getItemCount() == 1) then
             player:startEvent(555)
         end
@@ -22,7 +22,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST) == QUEST_AVAILABLE and player:getFameLevel(BASTOK) >= 2) then
         player:startEvent(554)
     else
         player:startEvent(552)
@@ -35,12 +35,12 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 554) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     elseif (csid == 555) then
         player:tradeComplete()
         player:addGil(300)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*300)
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STARDUST)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STARDUST)
     end
 end
 

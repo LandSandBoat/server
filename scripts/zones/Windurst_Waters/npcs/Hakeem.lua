@@ -15,11 +15,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 4)
-    local SkillCap = getCraftSkillCap(player, tpz.skill.COOKING)
-    local SkillLevel = player:getSkillLevel(tpz.skill.COOKING)
+    local SkillCap = getCraftSkillCap(player, xi.skill.COOKING)
+    local SkillLevel = player:getSkillLevel(xi.skill.COOKING)
 
     if (guildMember == 1) then
-        if (player:hasStatusEffect(tpz.effect.COOKING_IMAGERY) == false) then
+        if (player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false) then
             player:startEvent(10017, SkillCap, SkillLevel, 2, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
         else
             player:startEvent(10017, SkillCap, SkillLevel, 2, 495, player:getGil(), 7094, 4095, 0)
@@ -35,7 +35,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 10017 and option == 1) then
         player:messageSpecial(ID.text.COOKING_SUPPORT, 0, 8, 2)
-        player:addStatusEffect(tpz.effect.COOKING_IMAGERY, 1, 0, 120)
+        player:addStatusEffect(xi.effect.COOKING_IMAGERY, 1, 0, 120)
     end
 end
 

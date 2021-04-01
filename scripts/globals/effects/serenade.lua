@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SERENADE
+-- xi.effect.SERENADE
 -----------------------------------
 local effect_object = {}
 

@@ -28,7 +28,7 @@ instance_object.onInstanceCreated = function(instance)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -59,8 +59,8 @@ instance_object.onInstanceComplete = function(instance)
 
     local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
     local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setStatus(tpz.status.NORMAL)
-    box:setStatus(tpz.status.NORMAL)
+    rune:setStatus(xi.status.NORMAL)
+    box:setStatus(xi.status.NORMAL)
 
 end
 

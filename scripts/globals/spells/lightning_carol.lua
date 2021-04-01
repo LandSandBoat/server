@@ -13,8 +13,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local sLvl = caster:getSkillLevel(tpz.skill.SINGING) -- Gets skill level of Singing
-    local iLvl = caster:getWeaponSkillLevel(tpz.slot.RANGED)
+    local sLvl = caster:getSkillLevel(xi.skill.SINGING) -- Gets skill level of Singing
+    local iLvl = caster:getWeaponSkillLevel(xi.slot.RANGED)
 
     local power = 20
 
@@ -26,28 +26,28 @@ spell_object.onSpellCast = function(caster, target, spell)
         power = 80
     end
 
-    local iBoost = caster:getMod(tpz.mod.CAROL_EFFECT) + caster:getMod(tpz.mod.ALL_SONGS_EFFECT)
+    local iBoost = caster:getMod(xi.mod.CAROL_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     power = power + iBoost*8
 
-    if (caster:hasStatusEffect(tpz.effect.SOUL_VOICE)) then
+    if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
         power = power * 2
-    elseif (caster:hasStatusEffect(tpz.effect.MARCATO)) then
+    elseif (caster:hasStatusEffect(xi.effect.MARCATO)) then
         power = power * 1.5
     end
-    caster:delStatusEffect(tpz.effect.MARCATO)
+    caster:delStatusEffect(xi.effect.MARCATO)
 
     local duration = 120
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(tpz.mod.SONG_DURATION_BONUS)/100) + 1)
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
 
-    if (caster:hasStatusEffect(tpz.effect.TROUBADOUR)) then
+    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
         duration = duration * 2
     end
 
-    if not (target:addBardSong(caster, tpz.effect.CAROL, power, 0, duration, caster:getID(), tpz.magic.ele.LIGHTNING, 1)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+    if not (target:addBardSong(caster, xi.effect.CAROL, power, 0, duration, caster:getID(), xi.magic.ele.LIGHTNING, 1)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.CAROL
+    return xi.effect.CAROL
 end
 
 return spell_object

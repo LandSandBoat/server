@@ -255,7 +255,7 @@ local abcShop =
 local COSMO_READY = 2147483649 -- BITMASK for the purchase
 
 local function getCosmoCleanseTime(player)
-    local cosmoWaitTime = player:hasKeyItem(tpz.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
+    local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
     local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
 
     if lastCosmoTime ~= 0 then
@@ -328,7 +328,7 @@ entity.onTrigger = function(player, npc)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     -- LURE OF THE WILDCAT
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 19) then
         player:startEvent(313)
 
     -- DEFAULT DIALOG (menu)
@@ -352,7 +352,7 @@ entity.onTrigger = function(player, npc)
         -- calculate cosmocleanse parameters
         local cosmoTime = 0
 
-        if player:hasKeyItem(tpz.ki.COSMOCLEANSE) then
+        if player:hasKeyItem(xi.ki.COSMOCLEANSE) then
             hasCosmoCleanse = 1
         else
             cosmoTime = getCosmoCleanseTime(player)
@@ -386,7 +386,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 310 and option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
         if cosmoTime == COSMO_READY and player:delGil(15000) then
-            npcUtil.giveKeyItem(player, tpz.ki.COSMOCLEANSE)
+            npcUtil.giveKeyItem(player, xi.ki.COSMOCLEANSE)
         end
 
     -- purchase item using ancient beastcoins

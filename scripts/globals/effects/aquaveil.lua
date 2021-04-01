@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.AQUAVEIL
+-- xi.effect.AQUAVEIL
 -----------------------------------
 local effect_object = {}
 

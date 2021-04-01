@@ -7,12 +7,12 @@ require("scripts/globals/quests")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.roe = tpz.roe or {}
+ xi.roe = xi.roe or {}
 
 -----------------------------------
 -- Leaders
 -----------------------------------
-tpz.roe.leaders =
+ xi.roe.leaders =
 {
     NONE              = 0,
     PIEUJE            = 1,
@@ -32,7 +32,7 @@ tpz.roe.leaders =
 -- Triggers
 -----------------------------------
 
-tpz.roe.triggers =
+ xi.roe.triggers =
 {
     mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
     wSkillUse = 2,          -- Player Weapon skill used
@@ -53,7 +53,7 @@ tpz.roe.triggers =
     healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
 }
 
-local triggers = tpz.roe.triggers
+local triggers = xi.roe.triggers
 
 -----------------------------------
 -- Checks
@@ -182,7 +182,7 @@ RoeParseRecords(records)
     completeRecord(player, record#)
     reward = {
         item = { {640,2}, 641 },          -- see npcUtil.giveItem for formats (Only given on first completion)
-        keyItem = tpz.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
+        keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
         xp = 1000
     })
@@ -194,30 +194,30 @@ local function completeRecord(player, record)
 
     if not player:getEminenceCompleted(record) and rewards["item"] then
         if not npcUtil.giveItem(player, rewards["item"]) then
-            player:messageBasic(tpz.msg.basic.ROE_UNABLE_BONUS_ITEM)
+            player:messageBasic(xi.msg.basic.ROE_UNABLE_BONUS_ITEM)
             return false
         end
     end
 
-    player:messageBasic(tpz.msg.basic.ROE_COMPLETE,record)
+    player:messageBasic(xi.msg.basic.ROE_COMPLETE,record)
 
     if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
         local bonus = 1
         if player:getEminenceCompleted(record) then
             player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE, CAP_CURRENCY_SPARKS)
-            player:messageBasic(tpz.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         else
             bonus = 3
             player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * SPARKS_RATE, CAP_CURRENCY_SPARKS)
-            player:messageBasic(tpz.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         end
     end
 
     if recordFlags["repeat"] then
         if recordFlags["timed"] then
-            player:messageBasic(tpz.msg.basic.ROE_TIMED_CLEAR)
+            player:messageBasic(xi.msg.basic.ROE_TIMED_CLEAR)
         else
-            player:messageBasic(tpz.msg.basic.ROE_REPEAT_OR_CANCEL)
+            player:messageBasic(xi.msg.basic.ROE_REPEAT_OR_CANCEL)
         end
         player:setEminenceCompleted(record, true)
     else
@@ -240,7 +240,7 @@ local function completeRecord(player, record)
         end
 
         player:addCurrency("unity_accolades", math.floor(rewards["accolades"] * bonusAccoladeRate), CAP_CURRENCY_ACCOLADES)
-        player:messageBasic(tpz.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
+        player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, rewards["accolades"], player:getCurrency("unity_accolades"))
     end
 
     if rewards["keyItem"] ~= nil then
@@ -262,7 +262,7 @@ end
 -- Even records which are completed through Lua scripts should point here and
 -- have record information entered in records. This keeps everything neat.
 
-function tpz.roe.onRecordTrigger(player, recordID, params)
+function xi.roe.onRecordTrigger(player, recordID, params)
     params = params or {}
     params.progress = params.progress or player:getEminenceProgress(recordID)
 
@@ -273,7 +273,7 @@ function tpz.roe.onRecordTrigger(player, recordID, params)
         local awaitingClaim = params.progress >= entry.goal
 
         if awaitingClaim and not isClaiming then
-            player:messageBasic(tpz.msg.basic.ROE_YET_TO_RECEIVE)
+            player:messageBasic(xi.msg.basic.ROE_YET_TO_RECEIVE)
             return
         elseif isClaiming or entry:check(player, params) then
             params.progress = params.progress + (isClaiming and 0 or entry.increment)

@@ -7,7 +7,7 @@ require("scripts/globals/helm")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    tpz.helm.onTrade(player, npc, trade, tpz.helm.type.HARVESTING, 901)
+    xi.helm.onTrade(player, npc, trade, xi.helm.type.HARVESTING, 901)
 end
 
 entity.onTrigger = function(player, npc)

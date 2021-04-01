@@ -18,10 +18,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.CHAINSPELL
+    local typeEffect = xi.effect.CHAINSPELL
     MobBuffMove(mob, typeEffect, 1, 0, 60)
 
-    skill:setMsg(tpz.msg.basic.USES)
+    skill:setMsg(xi.msg.basic.USES)
     return typeEffect
 end
 

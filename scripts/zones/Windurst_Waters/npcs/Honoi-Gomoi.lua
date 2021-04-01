@@ -26,19 +26,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cryingOverOnions  = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS)
-    local wildCard          = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WILD_CARD)
+    local cryingOverOnions  = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local wildCard          = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
     if
-        player:getCurrentMission(COP) == tpz.mission.id.cop.THE_ROAD_FORKS and
+        player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and
         player:getCharVar("MEMORIES_OF_A_MAIDEN_Status") == 5
     then
         player:startEvent(874) -- COP event
-    elseif player:hasKeyItem(tpz.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1) then
-        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, tpz.ki.NEW_MODEL_HAT)
+    elseif player:hasKeyItem(xi.ki.NEW_MODEL_HAT) and not utils.mask.getBit(player:getCharVar("QuestHatInHand_var"), 1) then
+        player:messageSpecial(ID.text.YOU_SHOW_OFF_THE, 0, xi.ki.NEW_MODEL_HAT)
         player:startEvent(59)
     elseif wildCard == QUEST_ACCEPTED then
-        if player:getCharVar("WildCard") == 3 and not player:hasKeyItem(tpz.ki.JOKER_CARD) then
+        if player:getCharVar("WildCard") == 3 and not player:hasKeyItem(xi.ki.JOKER_CARD) then
             player:startEvent(782)
         else
             player:startEvent(781)
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("CryingOverOnions", 3)
     elseif
         csid == 776 and
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.CRYING_OVER_ONIONS, {
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS, {
             fame = 120,
             var = "CryingOverOnions",
         })
@@ -90,11 +90,11 @@ entity.onEventFinish = function(player, csid, option)
 
     -- "Wild Card"
     elseif csid == 780 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.WILD_CARD)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
     elseif
         csid == 782 and
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.WILD_CARD, {
-            title = tpz.title.DREAM_DWELLER,
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.WILD_CARD, {
+            title = xi.title.DREAM_DWELLER,
             fame = 135,
             var = "WildCard",
         })
@@ -109,7 +109,7 @@ entity.onEventFinish = function(player, csid, option)
     -- COP Misson 3-3B "Memories of a Maiden"
     elseif csid == 874 then
         player:setCharVar("MEMORIES_OF_A_MAIDEN_Status", 6)
-        npcUtil.giveKeyItem(player, tpz.ki.CRACKED_MIMEO_MIRROR)
+        npcUtil.giveKeyItem(player, xi.ki.CRACKED_MIMEO_MIRROR)
     end
 end
 

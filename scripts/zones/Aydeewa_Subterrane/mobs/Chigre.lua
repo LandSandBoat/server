@@ -9,7 +9,7 @@ local entity = {}
 -- Todo: add enailments, Drain samba on target if all ailments on, very fast enmity decay, capture speed
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)

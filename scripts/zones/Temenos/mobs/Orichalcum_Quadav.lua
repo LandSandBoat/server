@@ -12,15 +12,15 @@ entity.onMobEngaged = function(mob, target)
         GetMobByID(ID.mob.TEMENOS_C_MOB[3]+14):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+15):isDead() and
         GetMobByID(ID.mob.TEMENOS_C_MOB[3]+16):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+17):isDead()
     then
-        mob:setMod(tpz.mod.SLASHRES, 1400)
-        mob:setMod(tpz.mod.PIERCERES, 1400)
-        mob:setMod(tpz.mod.IMPACTRES, 1400)
-        mob:setMod(tpz.mod.HTHRES, 1400)
+        mob:setMod(xi.mod.SLASHRES, 1400)
+        mob:setMod(xi.mod.PIERCERES, 1400)
+        mob:setMod(xi.mod.IMPACTRES, 1400)
+        mob:setMod(xi.mod.HTHRES, 1400)
     else
-        mob:setMod(tpz.mod.SLASHRES, 300)
-        mob:setMod(tpz.mod.PIERCERES, 300)
-        mob:setMod(tpz.mod.IMPACTRES, 300)
-        mob:setMod(tpz.mod.HTHRES, 300)
+        mob:setMod(xi.mod.SLASHRES, 300)
+        mob:setMod(xi.mod.PIERCERES, 300)
+        mob:setMod(xi.mod.IMPACTRES, 300)
+        mob:setMod(xi.mod.HTHRES, 300)
     end
     GetMobByID(ID.mob.TEMENOS_C_MOB[3]):updateEnmity(target)
     GetMobByID(ID.mob.TEMENOS_C_MOB[3]+2):updateEnmity(target)
@@ -31,7 +31,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         if GetMobByID(ID.mob.TEMENOS_C_MOB[3]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+1):isDead() and
             GetMobByID(ID.mob.TEMENOS_C_MOB[3]+2):isDead()
         then
-            GetNPCByID(ID.npc.TEMENOS_C_CRATE[3]):setStatus(tpz.status.NORMAL)
+            GetNPCByID(ID.npc.TEMENOS_C_CRATE[3]):setStatus(xi.status.NORMAL)
         end
     end
 end

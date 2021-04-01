@@ -12,7 +12,7 @@ require("scripts/globals/msg")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 
 entity.onMobDisengage = function(mob)
@@ -54,7 +54,7 @@ entity.onMobFight = function(mob, target)
     local stage = instance:getStage()
     local prog = instance:getProgress()
 
-    if act == tpz.act.MOBABILITY_START or act == tpz.act.MOBABILITY_USING or act == tpz.act.MOBABILITY_FINISH or act == tpz.act.MAGIC_START or act == tpz.act.MAGIC_CASTING or act == tpz.act.MAGIC_START then
+    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or act == xi.act.MAGIC_START then
         isBusy = true -- is set to true if mob is in any stage of using a mobskill or casting a spell
     end
 

@@ -9,11 +9,11 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
 
-    tpz.regime.checkRegime(player, mob, 712, 2, tpz.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 712, 2, xi.regime.type.GROUNDS)
     -- Curses, Foiled A-Golem!?
-    if (player:hasKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)) then
-        player:delKeyItem(tpz.ki.SHANTOTTOS_NEW_SPELL)
-        player:addKeyItem(tpz.ki.SHANTOTTOS_EXSPELL)
+    if (player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)) then
+        player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)
+        player:addKeyItem(xi.ki.SHANTOTTOS_EXSPELL)
     end
 
 end

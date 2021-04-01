@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local SOA_Mission = player:getCurrentMission(SOA)
-    if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         -- Standard dialogue
         player:startEvent(573)
     else

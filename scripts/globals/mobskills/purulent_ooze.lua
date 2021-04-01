@@ -20,13 +20,13 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local baseDamage = mob:getWeaponDmg()*3
-    local info = MobMagicalMove(mob, target, skill, baseDamage, tpz.magic.ele.WATER, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.WATER, MOBPARAM_WIPE_SHADOWS)
+    local info = MobMagicalMove(mob, target, skill, baseDamage, xi.magic.ele.WATER, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, MOBPARAM_WIPE_SHADOWS)
 
-    MobStatusEffectMove(mob, target, tpz.effect.BIO, 5, 3, 120, 0, 10)
-    MobStatusEffectMove(mob, target, tpz.effect.MAX_HP_DOWN, 10, 0, 120)
+    MobStatusEffectMove(mob, target, xi.effect.BIO, 5, 3, 120, 0, 10)
+    MobStatusEffectMove(mob, target, xi.effect.MAX_HP_DOWN, 10, 0, 120)
 
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.WATER)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
     return dmg
 end
 

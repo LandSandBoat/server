@@ -22,15 +22,15 @@ function item_utils.skillBookCheck(target, skillID)
     end
 
     if noSkill >= 2 then
-        return tpz.msg.basic.ITEM_UNABLE_TO_USE
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
     if mainCap > 0 and mainDif <= 0 then
-        return tpz.msg.basic.ITEM_UNABLE_TO_USE
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
     if subCap > 0 and mainCap == 0 and subDif <= 0 then
-        return tpz.msg.basic.ITEM_UNABLE_TO_USE
+        return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
 
     return 0

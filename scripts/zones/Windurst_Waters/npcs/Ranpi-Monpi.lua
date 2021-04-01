@@ -32,8 +32,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    crisisstatus = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    IAS = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.IN_A_STEW)
+    crisisstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+    IAS = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
     IASvar = player:getCharVar("IASvar")
 
     -- In a Stew
@@ -80,7 +80,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- A Crisis in the Making
     if (csid == 258 and option == 1) then  -- A Crisis in the Making + ITEM: Quest Offer - ACCEPTED
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:setCharVar("QuestCrisisMaking_var", 1)
         player:needToZone(true)
     elseif (csid == 258 and option == 2) then  -- A Crisis in the Making + ITEM: Quest Offer - REFUSED
@@ -94,15 +94,15 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(GIL_RATE*400)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*400)
         player:setCharVar("QuestCrisisMaking_var", 0)
-        player:delKeyItem(tpz.ki.OFF_OFFERING)
+        player:delKeyItem(xi.ki.OFF_OFFERING)
         player:addFame(WINDURST, 75)
-        player:completeQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
         player:needToZone(true)
     elseif (csid == 268) then -- A Crisis in the Making: Repeatable Quest Finish
         player:addGil(GIL_RATE*400)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*400)
         player:setCharVar("QuestCrisisMaking_var", 0)
-        player:delKeyItem(tpz.ki.OFF_OFFERING)
+        player:delKeyItem(xi.ki.OFF_OFFERING)
         player:addFame(WINDURST, 8)
         player:needToZone(true)
 
@@ -112,8 +112,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 556) then
         player:tradeComplete()
         player:setCharVar("IASvar", 4)
-        player:addKeyItem(tpz.ki.RANPIMONPIS_SPECIAL_STEW)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RANPIMONPIS_SPECIAL_STEW)
+        player:addKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANPIMONPIS_SPECIAL_STEW)
 
     end
 end

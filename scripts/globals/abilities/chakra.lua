@@ -23,22 +23,22 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local chakraRemoval = player:getMod(tpz.mod.CHAKRA_REMOVAL)
+    local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
     for k, v in pairs(ChakraStatusEffects) do
         if bit.band(chakraRemoval, v) == v then
-            player:delStatusEffect(tpz.effect[k])
+            player:delStatusEffect(xi.effect[k])
         end
     end
 
-    local recover = player:getStat(tpz.mod.VIT) * (2 + player:getMod(tpz.mod.CHAKRA_MULT) / 10) -- TODO: Figure out "function of level" addition (August 2017 update)
+    local recover = player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10) -- TODO: Figure out "function of level" addition (August 2017 update)
     player:setHP(player:getHP() + recover)
 
-    local merits = player:getMerit(tpz.merit.INVIGORATE)
+    local merits = player:getMerit(xi.merit.INVIGORATE)
     if merits > 0 then
-        if player:hasStatusEffect(tpz.effect.REGEN) then
-            player:delStatusEffect(tpz.effect.REGEN)
+        if player:hasStatusEffect(xi.effect.REGEN) then
+            player:delStatusEffect(xi.effect.REGEN)
         end
-        player:addStatusEffect(tpz.effect.REGEN, 10, 0, merits, 0, 0, 1)
+        player:addStatusEffect(xi.effect.REGEN, 10, 0, merits, 0, 0, 1)
     end
 
     return recover

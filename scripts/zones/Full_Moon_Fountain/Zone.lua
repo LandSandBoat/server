@@ -19,9 +19,9 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-260.136, 2.09, -325.702, 188)
     end
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3 then
         cs = 50
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.DOLL_OF_THE_DEAD and player:getCharVar("MissionStatus") == 7 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getCharVar("MissionStatus") == 7 then
         cs = 61
     end
     return cs
@@ -34,7 +34,7 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -48,7 +48,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 50 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 61 then
-        player:addTitle(tpz.title.GUIDING_STAR)
+        player:addTitle(xi.title.GUIDING_STAR)
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 32004 then
         local battlefield = player:getBattlefield()

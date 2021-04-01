@@ -17,7 +17,7 @@ function getRoeRecords(triggers)
       -----------------------------------
 
         [   1] = { -- First Step Forward +
-            reward =  { item = { {4376,6} }, keyItem = tpz.ki.MEMORANDOLL, sparks = 100, xp = 300 }
+            reward =  { item = { {4376,6} }, keyItem = xi.ki.MEMORANDOLL, sparks = 100, xp = 300 }
         },
 
         [   2] = { -- Vanquish 1 Enemy +
@@ -34,7 +34,7 @@ function getRoeRecords(triggers)
         },
 
         [   5] = { -- All for One
-            reward =  { sparks = 100, xp = 300, accolades = 1000, keyItem = tpz.ki.CONCORDOLL }
+            reward =  { sparks = 100, xp = 300, accolades = 1000, keyItem = xi.ki.CONCORDOLL }
         },
 
         [  11] = { -- Undertake a GoV Training Regime
@@ -108,35 +108,35 @@ function getRoeRecords(triggers)
 
         [ 500] = { -- Mog House Exit: San d'Oria
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GROWING_FLOWERS} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 501] = { -- Mog House Exit: Bastok
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 502] = { -- Mog House Exit: Windurst
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FLOWER_CHILD} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 503] = { -- Mog House Exit: Jeuno
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PRETTY_LITTLE_THINGS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 504] = { -- Mog House Exit: Aht Urhgan
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.KEEPING_NOTES} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -145,140 +145,140 @@ function getRoeRecords(triggers)
 
         [ 506] = { -- Obtain an Alter Ego: San d'Oria
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRUST_SANDORIA} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500 },
         },
 
         [ 507] = { -- Obtain an Alter Ego: Bastok
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUST_BASTOK} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500 },
         },
 
         [ 508] = { -- Obtain an Alter Ego: Windurst
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TRUST_WINDURST} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500 },
         },
 
         [ 509] = { -- Obtain a Chocobo License
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_S_WOUNDS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 600 },
         },
 
         [ 510] = { -- Obtain Job: Paladin
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_SQUIRE_S_TEST} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 511] = { -- Obtain Job: Dark Knight
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 512] = { -- Obtain Job: Beastmaster
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SON} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 513] = { -- Obtain Job: Bard
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_OLD_MONUMENT} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 514] = { -- Obtain Job: Ranger
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_FANGED_ONE} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 515] = { -- Obtain Job: Samurai
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.FORGE_YOUR_DESTINY} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 516] = { -- Obtain Job: Ninja
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.AYAME_AND_KAEDE} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 517] = { -- Obtain Job: Dragoon
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_HOLY_CREST} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 518] = { -- Obtain Job: Summoner
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.I_CAN_HEAR_A_RAINBOW} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 519] = { -- Obtain Job: Blue Mage
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AN_EMPTY_VESSEL} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 520] = { -- Obtain Job: Corsair
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 521] = { -- Obtain Job: Puppetmaster
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 522] = { -- Obtain Job: Dancer
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.LAKESIDE_MINUET} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LAKESIDE_MINUET} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 523] = { -- Obtain Job: Scholar
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.A_LITTLE_KNOWLEDGE} },
+            reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 524] = { -- Obtain Job: Geomancer
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 525] = { -- Obtain Job: Runefencer
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.CHILDREN_OF_THE_RUNE} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.CHILDREN_OF_THE_RUNE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -289,189 +289,189 @@ function getRoeRecords(triggers)
 
         [ 629] = { -- WAR Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 630] = { -- WAR Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 631] = { -- WAR Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 632] = { -- MNK Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.GHOSTS_OF_THE_PAST} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 633] = { -- MNK Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 634] = { -- MNK Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TRUE_STRENGTH} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 635] = { -- WHM Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.MESSENGER_FROM_BEYOND} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 636] = { -- WHM Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 637] = { -- WHM Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PIEUJE_S_DECISION} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 638] = { -- BLM Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_THREE_MAGI} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 639] = { -- BLM Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 640] = { -- BLM Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 641] = { -- RDM Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_CRIMSON_TRIAL} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 642] = { -- RDM Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.ENVELOPED_IN_DARKNESS} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 643] = { -- RDM Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.PEACE_FOR_THE_SPIRIT} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 644] = { -- THF Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_TENSHODO_SHOWDOWN} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 645] = { -- THF Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.AS_THICK_AS_THIEVES} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 646] = { -- THF Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.HITTING_THE_MARQUISATE} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 647] = { -- PLD Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SHARPENING_THE_SWORD} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 648] = { -- PLD Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 649] = { -- PLD Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 650] = { -- DRK Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_LEGACY} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 651] = { -- DRK Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.DARK_PUPPET} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 652] = { -- DRK Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 653] = { -- BST Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WINGS_OF_GOLD} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 654] = { -- BST Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SCATTERED_INTO_SHADOW} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 655] = { -- BST Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.A_NEW_DAWN} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -482,189 +482,189 @@ function getRoeRecords(triggers)
 
         [ 656] = { -- BRD Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.PAINFUL_MEMORY} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 657] = { -- BRD Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_REQUIEM} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 658] = { -- BRD Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_CIRCLE_OF_TIME} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 659] = { -- RNG Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.SIN_HUNTING} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 660] = { -- RNG Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FIRE_AND_BRIMSTONE} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FIRE_AND_BRIMSTONE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 661] = { -- RNG Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.UNBRIDLED_PASSION} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 662] = { -- SAM Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SACRED_KATANA} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 663] = { -- SAM Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 664] = { -- SAM Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.A_THIEF_IN_NORG} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 665] = { -- NIN Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TWENTY_IN_PIRATE_YEARS} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TWENTY_IN_PIRATE_YEARS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 666] = { -- NIN Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 667] = { -- NIN Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRUE_WILL} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 668] = { -- DRG Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_CRAFTSMAN_S_WORK} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 669] = { -- DRG Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.CHASING_QUOTAS} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 670] = { -- DRG Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.KNIGHT_STALKER} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 671] = { -- SMN Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.THE_PUPPET_MASTER} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 672] = { -- SMN Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 673] = { -- SMN Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CARBUNCLE_DEBACLE} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 674] = { -- BLU Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.BEGINNINGS} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 675] = { -- BLU Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OMENS} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 676] = { -- BLU Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.TRANSFORMATIONS} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 677] = { -- COR Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 678] = { -- COR Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 679] = { -- COR Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.AGAINST_ALL_ODDS} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 680] = { -- PUP Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 681] = { -- PUP Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OPERATION_TEATIME} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 682] = { -- PUP Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.PUPPETMASTER_BLUES} },
+            reqs = { questComplete = { xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -675,84 +675,84 @@ function getRoeRecords(triggers)
 
         [ 683] = { -- DNC Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_UNFINISHED_WALTZ} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 684] = { -- DNC Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_DIVADOM} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 685] = { -- DNC Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 686] = { -- SCH Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.ON_SABBATICAL} },
+            reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 687] = { -- SCH Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX} },
+            reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 688] = { -- SCH Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SEEING_BLOOD_RED} },
+            reqs = { questComplete = { xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 689] = { -- GEO Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FOR_WHOM_THE_BELL_TOLLS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 690] = { -- GEO Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_BLOODLINE_OF_ZACARIAH} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 691] = { -- GEO Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_COMMUNION} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_COMMUNION} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 692] = { -- RUN Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FORGING_NEW_BONDS} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FORGING_NEW_BONDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 693] = { -- RUN Artifact Quest II
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.LEGACIES_LOST_AND_FOUND} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.LEGACIES_LOST_AND_FOUND} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 694] = { -- RUN Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DESTINYS_DEVICE} },
+            reqs = { questComplete = { xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DESTINYS_DEVICE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -763,70 +763,70 @@ function getRoeRecords(triggers)
 
         [ 705] = { -- Level Cap Increase: 55 +
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.IN_DEFIANT_CHALLENGE} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 706] = { -- Level Cap Increase: 60
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ATOP_THE_HIGHEST_MOUNTAINS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 707] = { -- Level Cap Increase: 65
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 708] = { -- Level Cap Increase: 70
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 709] = { -- Level Cap Increase: 75
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SHATTERING_STARS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 710] = { -- Level Cap Increase: 80
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.NEW_WORLDS_AWAIT} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEW_WORLDS_AWAIT} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 711] = { -- Level Cap Increase: 85
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.EXPANDING_HORIZONS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EXPANDING_HORIZONS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 712] = { -- Level Cap Increase: 90
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_THE_STARS} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_STARS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 713] = { -- Level Cap Increase: 95
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.DORMANT_POWERS_DISLODGED} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DORMANT_POWERS_DISLODGED} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 714] = { -- Level Cap Increase: 99
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEYOND_INFINITY} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -837,91 +837,91 @@ function getRoeRecords(triggers)
 
         [ 715] = { -- Inventory Expansion 35
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_I} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_I} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 716] = { -- Inventory Expansion 40
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_II} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_II} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 717] = { -- Inventory Expansion 45
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_III} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_III} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 718] = { -- Inventory Expansion 50
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IV} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IV} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 719] = { -- Inventory Expansion 55
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_V} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 720] = { -- Inventory Expansion 60
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VI} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VI} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 721] = { -- Inventory Expansion 65
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VII} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VII} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 722] = { -- Inventory Expansion 70
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_VIII} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 723] = { -- Inventory Expansion 75
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_IX} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_IX} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 724] = { -- Inventory Expansion 80
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_GOBBIEBAG_PART_X} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBBIEBAG_PART_X} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 939] = { -- Mog Safe Expansion: 60
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK} },
+            reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.GIVE_A_MOOGLE_A_BREAK} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 940] = { -- Mog Safe Expansion: 70
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_MOOGLE_PICNIC} },
+            reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_MOOGLE_PICNIC} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 941] = { -- Mog Safe Expansion: 80
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.MOOGLES_IN_THE_WILD} },
+            reqs = { questComplete = { xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MOOGLES_IN_THE_WILD} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -932,98 +932,98 @@ function getRoeRecords(triggers)
 
         [ 839] = { -- Asuran Fists
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WALLS_OF_YOUR_MIND} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 840] = { -- Evisceration
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.CLOAK_AND_DAGGER} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 841] = { -- Savage Blade
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.OLD_WOUNDS} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 842] = { -- Ground Strike
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.INHERITANCE} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 843] = { -- Decimation
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.AXE_THE_COMPETITION} },
+            reqs = { questComplete = { xi.quest.log_id.JEUNO, xi.quest.id.jeuno.AXE_THE_COMPETITION} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 844] = { -- Steel Cyclone
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 845] = { -- Spiral Hell
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SOULS_IN_SHADOW} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 846] = { -- Impulse Drive
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.METHODS_CREATE_MADNESS} },
+            reqs = { questComplete = { xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 847] = { -- Blade: Ku
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.BUGI_SODEN} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.BUGI_SODEN} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 848] = { -- Tachi: Kasha
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_POTENTIAL_WITHIN} },
+            reqs = { questComplete = { xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 849] = { -- Black Halo
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.ORASTERY_WOES} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.ORASTERY_WOES} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 850] = { -- Retribution
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.BLOOD_AND_GLORY} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLOOD_AND_GLORY} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 851] = { -- Empyreal Arrow
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.FROM_SAPLINGS_GROW} },
+            reqs = { questComplete = { xi.quest.log_id.WINDURST, xi.quest.id.windurst.FROM_SAPLINGS_GROW} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
 
         [ 852] = { -- Detonator
             trigger = triggers.questComplete,
-            reqs = { questComplete = {tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER} },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -1034,140 +1034,140 @@ function getRoeRecords(triggers)
 
         [1313] = { -- San d'Oria Rank 1-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS} },
             flags = set{"retro"},
             reward = { item = { {4096,6} }, sparks = 300, xp = 500 },
         },
 
         [1314] = { -- San d'Oria Rank 1-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.BAT_HUNT} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT} },
             flags = set{"retro"},
             reward = { item = { {4097,6} }, sparks = 300, xp = 500 },
         },
 
         [1315] = { -- San d'Oria Rank 1-3
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN} },
             flags = set{"retro"},
             reward = { item = { {4096,6} }, sparks = 300, xp = 500 },
         },
 
         [1316] = { -- San d'Oria Rank 2-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RESCUE_DRILL} },
             flags = set{"retro"},
             reward = { item = { {4097,6} }, sparks = 300, xp = 500 },
         },
 
         [1317] = { -- San d'Oria Rank 2-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_DAVOI_REPORT} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_DAVOI_REPORT} },
             flags = set{"retro"},
             reward = { item = { {4096,6} }, sparks = 300, xp = 500 },
         },
 
         [1318] = { -- San d'Oria Rank 2-3
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD} },
             flags = set{"retro"},
             reward = { item = { {4097,6} }, sparks = 300, xp = 500 },
         },
 
         [1319] = { -- San d'Oria Rank 3-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI} },
             flags = set{"retro"},
             reward = { item = { {4096,6} }, sparks = 300, xp = 500 },
         },
 
         [1320] = { -- San d'Oria Rank 3-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_CRYSTAL_SPRING} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING} },
             flags = set{"retro"},
             reward = { item = { {4097,6} }, sparks = 300, xp = 500 },
         },
 
         [1321] = { -- San d'Oria Rank 3-3
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.APPOINTMENT_TO_JEUNO} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO} },
             flags = set{"retro"},
             reward = { item = { {4096,8} }, sparks = 300, xp = 500 },
         },
 
         [1322] = { -- San d'Oria Rank 4
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.MAGICITE} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE} },
             flags = set{"retro"},
             reward = { item = { {4097,8} }, sparks = 300, xp = 500 },
         },
 
         [1323] = { -- San d'Oria Rank 5-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RUINS_OF_FEI_YIN} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN} },
             flags = set{"retro"},
             reward = { item = { {4096,8} }, sparks = 300, xp = 500 },
         },
 
         [1324] = { -- San d'Oria Rank 5-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_SHADOW_LORD} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD} },
             flags = set{"retro"},
             reward = { item = { {4097,8} }, sparks = 300, xp = 500 },
         },
 
         [1325] = { -- San d'Oria Rank 6-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LEAUTE_S_LAST_WISHES} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES} },
             flags = set{"retro"},
             reward = { item = { {4096,10} }, sparks = 300, xp = 500 },
         },
 
         [1326] = { -- San d'Oria Rank 6-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.RANPERRE_S_FINAL_REST} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.RANPERRE_S_FINAL_REST} },
             flags = set{"retro"},
             reward = { item = { {4097,10} }, sparks = 300, xp = 500 },
         },
 
         [1327] = { -- San d'Oria Rank 7-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.PRESTIGE_OF_THE_PAPSQUE} },
             flags = set{"retro"},
             reward = { item = { {4096,10} }, sparks = 300, xp = 500 },
         },
 
         [1328] = { -- San d'Oria Rank 7-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_SECRET_WEAPON} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON} },
             flags = set{"retro"},
             reward = { item = { {4097,10} }, sparks = 300, xp = 500 },
         },
 
         [1329] = { -- San d'Oria Rank 8-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.COMING_OF_AGE} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.COMING_OF_AGE} },
             flags = set{"retro"},
             reward = { item = { {4096,12} }, sparks = 300, xp = 500 },
         },
 
         [1330] = { -- San d'Oria Rank 8-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER} },
             flags = set{"retro"},
             reward = { item = { {4097,12} }, sparks = 300, xp = 500 },
         },
 
         [1331] = { -- San d'Oria Rank 9-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.BREAKING_BARRIERS} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BREAKING_BARRIERS} },
             flags = set{"retro"},
             reward = { item = { {4096,12} }, sparks = 300, xp = 500 },
         },
 
         [1332] = { -- San d'Oria Rank 9-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT} },
+            reqs = { missionComplete = { xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT} },
             flags = set{"retro"},
             reward = { item = { {4097,12} }, sparks = 300, xp = 500 },
         },
@@ -1178,140 +1178,140 @@ function getRoeRecords(triggers)
 
         [1333] = { -- Bastok Rank 1-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_ZERUHN_REPORT} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT} },
             flags = set{"retro"},
             reward = { item = { {4100,6} }, sparks = 300, xp = 500 },
         },
 
         [1334] = { -- Bastok Rank 1-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.GEOLOGICAL_SURVEY} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.GEOLOGICAL_SURVEY} },
             flags = set{"retro"},
             reward = { item = { {4101,6} }, sparks = 300, xp = 500 },
         },
 
         [1335] = { -- Bastok Rank 1-3
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.FETICHISM} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.FETICHISM} },
             flags = set{"retro"},
             reward = { item = { {4100,6} }, sparks = 300, xp = 500 },
         },
 
         [1336] = { -- Bastok Rank 2-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_CRYSTAL_LINE} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CRYSTAL_LINE} },
             flags = set{"retro"},
             reward = { item = { {4101,6} }, sparks = 300, xp = 500 },
         },
 
         [1337] = { -- Bastok Rank 2-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WADING_BEASTS} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WADING_BEASTS} },
             flags = set{"retro"},
             reward = { item = { {4100,6} }, sparks = 300, xp = 500 },
         },
 
         [1338] = { -- Bastok Rank 2-3
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_EMISSARY} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY} },
             flags = set{"retro"},
             reward = { item = { {4101,6} }, sparks = 300, xp = 500 },
         },
 
         [1339] = { -- Bastok Rank 3-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_FOUR_MUSKETEERS} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FOUR_MUSKETEERS} },
             flags = set{"retro"},
             reward = { item = { {4100,6} }, sparks = 300, xp = 500 },
         },
 
         [1340] = { -- Bastok Rank 3-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES} },
             flags = set{"retro"},
             reward = { item = { {4101,6} }, sparks = 300, xp = 500 },
         },
 
         [1341] = { -- Bastok Rank 3-3
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.JEUNO} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.JEUNO} },
             flags = set{"retro"},
             reward = { item = { {4100,8} }, sparks = 300, xp = 500 },
         },
 
         [1342] = { -- Bastok Rank 4
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.MAGICITE} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.MAGICITE} },
             flags = set{"retro"},
             reward = { item = { {4101,8} }, sparks = 300, xp = 500 },
         },
 
         [1343] = { -- Bastok Rank 5-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.DARKNESS_RISING} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.DARKNESS_RISING} },
             flags = set{"retro"},
             reward = { item = { {4100,8} }, sparks = 300, xp = 500 },
         },
 
         [1344] = { -- Bastok Rank 5-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.XARCABARD_LAND_OF_TRUTHS} },
             flags = set{"retro"},
             reward = { item = { {4101,8} }, sparks = 300, xp = 500 },
         },
 
         [1345] = { -- Bastok Rank 6-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.RETURN_OF_THE_TALEKEEPER} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER} },
             flags = set{"retro"},
             reward = { item = { {4100,10} }, sparks = 300, xp = 500 },
         },
 
         [1346] = { -- Bastok Rank 6-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_PIRATE_S_COVE} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_PIRATE_S_COVE} },
             flags = set{"retro"},
             reward = { item = { {4101,10} }, sparks = 300, xp = 500 },
         },
 
         [1347] = { -- Bastok Rank 7-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_FINAL_IMAGE} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_FINAL_IMAGE} },
             flags = set{"retro"},
             reward = { item = { {4100,10} }, sparks = 300, xp = 500 },
         },
 
         [1348] = { -- Bastok Rank 7-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.ON_MY_WAY} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY} },
             flags = set{"retro"},
             reward = { item = { {4101,10} }, sparks = 300, xp = 500 },
         },
 
         [1349] = { -- Bastok Rank 8-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US} },
             flags = set{"retro"},
             reward = { item = { {4100,12} }, sparks = 300, xp = 500 },
         },
 
         [1350] = { -- Bastok Rank 8-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.ENTER_THE_TALEKEEPER} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.ENTER_THE_TALEKEEPER} },
             flags = set{"retro"},
             reward = { item = { {4101,12} }, sparks = 300, xp = 500 },
         },
 
         [1351] = { -- Bastok Rank 9-1
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.THE_SALT_OF_THE_EARTH} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_SALT_OF_THE_EARTH} },
             flags = set{"retro"},
             reward = { item = { {4100,12} }, sparks = 300, xp = 500 },
         },
 
         [1352] = { -- Bastok Rank 9-2
             trigger = triggers.missionComplete,
-            reqs = { missionComplete = {tpz.mission.log_id.BASTOK, tpz.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE} },
+            reqs = { missionComplete = { xi.mission.log_id.BASTOK, xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE} },
             flags = set{"retro"},
             reward = { item = { {4101,12} }, sparks = 300, xp = 500 },
         },
@@ -1322,35 +1322,35 @@ function getRoeRecords(triggers)
 
       [1353] = { -- Windurst Rank 1-1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT} },
           flags = set{"retro"},
           reward = { item = { {4098,6} }, sparks = 300, xp = 500 },
       },
 
       [1354] = { -- Windurst Rank 1-2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER} },
           flags = set{"retro"},
           reward = { item = { {4099,6} }, sparks = 300, xp = 500 },
       },
 
       [1355] = { -- Windurst Rank 1-3 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE} },
           flags = set{"retro"},
           reward = { item = { {4098,6} }, sparks = 300, xp = 500 },
       },
 
       [1356] = { -- Windurst Rank 2-1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.LOST_FOR_WORDS} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS} },
           flags = set{"retro"},
           reward = { item = { {4099,6} }, sparks = 300, xp = 500 },
       },
 
       [1357] = { -- Windurst Rank 2-2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME} },
           flags = set{"retro"},
           reward = { item = { {4098,6} }, sparks = 300, xp = 500 },
       },
@@ -1359,105 +1359,105 @@ function getRoeRecords(triggers)
                  -- Note: For testing purposes, this mission required changes to Kupipi.lua
                  --       missionStatus for THE_THREE_KINGDOMS should == 1, since it was accepted before onTrigger
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_THREE_KINGDOMS} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS} },
           flags = set{"retro"},
           reward = { item = { {4099,6} }, sparks = 300, xp = 500 },
       },
 
       [1359] = { -- Windurst Rank 3-1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT} },
           flags = set{"retro"},
           reward = { item = { {4098,6} }, sparks = 300, xp = 500 },
       },
 
       [1360] = { -- Windurst Rank 3-2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS} },
           flags = set{"retro"},
           reward = { item = { {4099,6} }, sparks = 300, xp = 500 },
       },
 
       [1361] = { -- Windurst Rank 3-3 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_NEW_JOURNEY} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_NEW_JOURNEY} },
           flags = set{"retro"},
           reward = { item = { {4098,8} }, sparks = 300, xp = 500 },
       },
 
       [1362] = { -- Windurst Rank 4 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MAGICITE} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MAGICITE} },
           flags = set{"retro"},
           reward = { item = { {4099,8} }, sparks = 300, xp = 500 },
       },
 
       [1363] = { -- Windurst Rank 5-1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_FINAL_SEAL} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL} },
           flags = set{"retro"},
           reward = { item = { {4098,8} }, sparks = 300, xp = 500 },
       },
 
       [1364] = { -- Windurst Rank 5-2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SHADOW_AWAITS} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SHADOW_AWAITS} },
           flags = set{"retro"},
           reward = { item = { {4099,8} }, sparks = 300, xp = 500 },
       },
 
       [1365] = { -- Windurst Rank 6-1
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.FULL_MOON_FOUNTAIN} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.FULL_MOON_FOUNTAIN} },
           flags = set{"retro"},
           reward = { item = { {4098,10} }, sparks = 300, xp = 500 },
       },
 
       [1366] = { -- Windurst Rank 6-2
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.SAINTLY_INVITATION} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.SAINTLY_INVITATION} },
           flags = set{"retro"},
           reward = { item = { {4099,10} }, sparks = 300, xp = 500 },
       },
 
       [1367] = { -- Windurst Rank 7-1
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_SIXTH_MINISTRY} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_SIXTH_MINISTRY} },
           flags = set{"retro"},
           reward = { item = { {4098,10} }, sparks = 300, xp = 500 },
       },
 
       [1368] = { -- Windurst Rank 7-2
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.AWAKENING_OF_THE_GODS} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.AWAKENING_OF_THE_GODS} },
           flags = set{"retro"},
           reward = { item = { {4099,10} }, sparks = 300, xp = 500 },
       },
 
       [1369] = { -- Windurst Rank 8-1
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.VAIN} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.VAIN} },
           flags = set{"retro"},
           reward = { item = { {4098,12} }, sparks = 300, xp = 500 },
       },
 
       [1370] = { -- Windurst Rank 8-2
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_JESTER_WHO_D_BE_KING} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING} },
           flags = set{"retro"},
           reward = { item = { {4099,12} }, sparks = 300, xp = 500 },
       },
 
       [1371] = { -- Windurst Rank 9-1
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.DOLL_OF_THE_DEAD} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.DOLL_OF_THE_DEAD} },
           flags = set{"retro"},
           reward = { item = { {4098,12} }, sparks = 300, xp = 500 },
       },
 
       [1372] = { -- Windurst Rank 9-2
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING} },
+          reqs = { missionComplete = { xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING} },
           flags = set{"retro"},
           reward = { item = { {4099,12} }, sparks = 300, xp = 500 },
       },
@@ -1468,28 +1468,28 @@ function getRoeRecords(triggers)
 
       [1373] = { -- Rhapsodies of Vana'diel 1-1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ROV, tpz.mission.id.rov.FLAMES_OF_PRAYER} },
+          reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.FLAMES_OF_PRAYER} },
           flags = set{"retro"},
           reward = { item = { {8711,2} }, sparks = 300, xp = 500 },
       },
 
       [1374] = { -- Rhapsodies of Vana'diel 1-2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME} },
+          reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME} },
           flags = set{"retro"},
           reward = { item = { {8711,2} }, sparks = 300, xp = 500 },
       },
 
       [1375] = { -- Rhapsodies of Vana'diel 1-3 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE} },
+          reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE} },
           flags = set{"retro"},
           reward = { item = { {8711,2} }, sparks = 300, xp = 500 },
       },
 
       [1416] = { -- Rhapsodies of Vana'diel 2-1 (Not Implemented in Release)
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ROV, tpz.mission.id.rov.CRASHING_WAVES} },
+          reqs = { missionComplete = { xi.mission.log_id.ROV, xi.mission.id.rov.CRASHING_WAVES} },
           flags = set{"retro"},
           reward = { item = { {8711,2} }, sparks = 300, xp = 500 },
       },
@@ -1500,112 +1500,112 @@ function getRoeRecords(triggers)
 
       [1377] = { -- Zilart Mission 1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_NEW_FRONTIER} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1378] = { -- Zilart Mission 2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.WELCOME_TNORG} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1379] = { -- Zilart Mission 3 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.KAZAMS_CHIEFTAINESS} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZAMS_CHIEFTAINESS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1380] = { -- Zilart Mission 4 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1381] = { -- Zilart Mission 5 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.HEADSTONE_PILGRIMAGE} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1382] = { -- Zilart Mission 6 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1383] = { -- Zilart Mission 7 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CHAMBER_OF_ORACLES} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1384] = { -- Zilart Mission 8 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1385] = { -- Zilart Mission 9 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ROMAEVE} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1386] = { -- Zilart Mission 10 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_TEMPLE_OF_DESOLATION} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1387] = { -- Zilart Mission 11 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_HALL_OF_THE_GODS} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1388] = { -- Zilart Mission 12 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1389] = { -- Zilart Mission 13 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1390] = { -- Zilart Mission 14 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1391] = { -- Zilart Mission 15 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1392] = { -- Zilart Mission 16 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS} },
+          reqs = { missionComplete = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
@@ -1616,21 +1616,21 @@ function getRoeRecords(triggers)
 
       [1393] = { -- Chains of Promathia Chapter 1 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS} },
+          reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1394] = { -- Chains of Promathia Chapter 2 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.COP, tpz.mission.id.cop.ANCIENT_VOWS} },
+          reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
 
       [1395] = { -- Chains of Promathia Chapter 3
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {tpz.mission.log_id.COP, tpz.mission.id.cop.DARKNESS_NAMED} },
+          reqs = { missionComplete = { xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },
@@ -4072,168 +4072,168 @@ function getRoeRecords(triggers)
 
         [1200] = { -- Level 30 Warrior +
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WAR, 30 } },
+            reqs = { jobLvl = { xi.job.WAR, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6152, 12} } },
         },
 
         [1201] = { -- Level 50 Warrior
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WAR, 50 } },
+            reqs = { jobLvl = { xi.job.WAR, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6151, 12} } },
         },
 
         [1202] = { -- Level 75 Warrior
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WAR, 75 } },
+            reqs = { jobLvl = { xi.job.WAR, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3190, 4} } },
         },
 
         [1203] = { -- Level 99 Warrior
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WAR, 99 } },
+            reqs = { jobLvl = { xi.job.WAR, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4064, 2} } },
         },
 
         [1204] = { -- Level 30 Monk
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.MNK, 30 } },
+            reqs = { jobLvl = { xi.job.MNK, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6147, 12} } },
         },
 
         [1205] = { -- Level 50 Monk
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.MNK, 50 } },
+            reqs = { jobLvl = { xi.job.MNK, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6158, 12} } },
         },
 
         [1206] = { -- Level 75 Monk
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.MNK, 75 } },
+            reqs = { jobLvl = { xi.job.MNK, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3191, 4} } },
         },
 
         [1207] = { -- Level 99 Monk
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.MNK, 99 } },
+            reqs = { jobLvl = { xi.job.MNK, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4065, 2} } },
         },
 
         [1208] = { -- Level 30 White Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WHM, 30 } },
+            reqs = { jobLvl = { xi.job.WHM, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6167, 12} } },
         },
 
         [1209] = { -- Level 50 White Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WHM, 50 } },
+            reqs = { jobLvl = { xi.job.WHM, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6166, 12} } },
         },
 
         [1210] = { -- Level 75 White Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WHM, 75 } },
+            reqs = { jobLvl = { xi.job.WHM, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3192, 4} } },
         },
 
         [1211] = { -- Level 99 White Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.WHM, 99 } },
+            reqs = { jobLvl = { xi.job.WHM, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
         },
 
         [1212] = { -- Level 30 Black Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLM, 30 } },
+            reqs = { jobLvl = { xi.job.BLM, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6170, 12} } },
         },
 
         [1213] = { -- Level 50 Black Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLM, 50 } },
+            reqs = { jobLvl = { xi.job.BLM, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6171, 12} } },
         },
 
         [1214] = { -- Level 75 Black Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLM, 75 } },
+            reqs = { jobLvl = { xi.job.BLM, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3193, 4} } },
         },
 
         [1215] = { -- Level 99 Black Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLM, 99 } },
+            reqs = { jobLvl = { xi.job.BLM, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
         },
 
         [1216] = { -- Level 30 Red Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RDM, 30 } },
+            reqs = { jobLvl = { xi.job.RDM, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6169, 12} } },
         },
 
         [1217] = { -- Level 50 Red Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RDM, 50 } },
+            reqs = { jobLvl = { xi.job.RDM, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6168, 12} } },
         },
 
         [1218] = { -- Level 75 Red Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RDM, 75 } },
+            reqs = { jobLvl = { xi.job.RDM, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3194, 4} } },
         },
 
         [1219] = { -- Level 99 Red Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RDM, 99 } },
+            reqs = { jobLvl = { xi.job.RDM, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
         },
 
         [1220] = { -- Level 30 Thief
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.THF, 30 } },
+            reqs = { jobLvl = { xi.job.THF, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6148, 12} } },
         },
 
         [1221] = { -- Level 50 Thief
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.THF, 50 } },
+            reqs = { jobLvl = { xi.job.THF, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6149, 12} } },
         },
 
         [1222] = { -- Level 75 Thief
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.THF, 75 } },
+            reqs = { jobLvl = { xi.job.THF, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3195, 4} } },
         },
 
         [1223] = { -- Level 99 Thief
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.THF, 99 } },
+            reqs = { jobLvl = { xi.job.THF, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4069, 2} } },
         },
@@ -4244,168 +4244,168 @@ function getRoeRecords(triggers)
 
         [1224] = { -- Level 30 Paladin
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PLD, 30 } },
+            reqs = { jobLvl = { xi.job.PLD, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6149, 12} } },
         },
 
         [1225] = { -- Level 50 Paladin
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PLD, 50 } },
+            reqs = { jobLvl = { xi.job.PLD, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6164, 12} } },
         },
 
         [1226] = { -- Level 75 Paladin
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PLD, 75 } },
+            reqs = { jobLvl = { xi.job.PLD, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3196, 4} } },
         },
 
         [1227] = { -- Level 99 Paladin
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PLD, 99 } },
+            reqs = { jobLvl = { xi.job.PLD, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4065, 2} } },
         },
 
         [1228] = { -- Level 30 Dark Knight
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRK, 30 } },
+            reqs = { jobLvl = { xi.job.DRK, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6153, 12} } },
         },
 
         [1229] = { -- Level 50 Dark Knight
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRK, 50 } },
+            reqs = { jobLvl = { xi.job.DRK, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6150, 12} } },
         },
 
         [1230] = { -- Level 75 Dark Knight
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRK, 75 } },
+            reqs = { jobLvl = { xi.job.DRK, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3197, 4} } },
         },
 
         [1231] = { -- Level 99 Dark Knight
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRK, 99 } },
+            reqs = { jobLvl = { xi.job.DRK, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
         },
 
         [1232] = { -- Level 30 Beastmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BST, 30 } },
+            reqs = { jobLvl = { xi.job.BST, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6151, 12} } },
         },
 
         [1233] = { -- Level 50 Beastmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BST, 50 } },
+            reqs = { jobLvl = { xi.job.BST, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6153, 12} } },
         },
 
         [1234] = { -- Level 75 Beastmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BST, 75 } },
+            reqs = { jobLvl = { xi.job.BST, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3198, 4} } },
         },
 
         [1235] = { -- Level 99 Beastmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BST, 99 } },
+            reqs = { jobLvl = { xi.job.BST, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
         },
 
         [1236] = { -- Level 30 Bard
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BRD, 30 } },
+            reqs = { jobLvl = { xi.job.BRD, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6172, 12} } },
         },
 
         [1237] = { -- Level 50 Bard
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BRD, 50 } },
+            reqs = { jobLvl = { xi.job.BRD, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6173, 12} } },
         },
 
         [1238] = { -- Level 75 Bard
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BRD, 75 } },
+            reqs = { jobLvl = { xi.job.BRD, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3199, 4} } },
         },
 
         [1239] = { -- Level 99 Bard
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BRD, 99 } },
+            reqs = { jobLvl = { xi.job.BRD, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
         },
 
         [1240] = { -- Level 30 Ranger
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RNG, 30 } },
+            reqs = { jobLvl = { xi.job.RNG, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6159, 12} } },
         },
 
         [1241] = { -- Level 50 Ranger
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RNG, 50 } },
+            reqs = { jobLvl = { xi.job.RNG, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6160, 12} } },
         },
 
         [1242] = { -- Level 75 Ranger
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RNG, 75 } },
+            reqs = { jobLvl = { xi.job.RNG, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3200, 4} } },
         },
 
         [1243] = { -- Level 99 Ranger
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RNG, 99 } },
+            reqs = { jobLvl = { xi.job.RNG, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4064, 2} } },
         },
 
         [1244] = { -- Level 30 Samurai
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SAM, 30 } },
+            reqs = { jobLvl = { xi.job.SAM, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6156, 12} } },
         },
 
         [1245] = { -- Level 50 Samurai
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SAM, 50 } },
+            reqs = { jobLvl = { xi.job.SAM, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6154, 12} } },
         },
 
         [1246] = { -- Level 75 Samurai
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SAM, 75 } },
+            reqs = { jobLvl = { xi.job.SAM, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3201, 4} } },
         },
 
         [1247] = { -- Level 99 Samurai
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SAM, 99 } },
+            reqs = { jobLvl = { xi.job.SAM, 99 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {4065, 2} } },
         },
@@ -4416,168 +4416,168 @@ function getRoeRecords(triggers)
 
         [1248] = { -- Level 30 Ninja
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.NIN, 30 } },
+            reqs = { jobLvl = { xi.job.NIN, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6155, 12} } },
         },
 
         [1249] = { -- Level 50 Ninja
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.NIN, 50 } },
+            reqs = { jobLvl = { xi.job.NIN, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6175, 12} } },
         },
 
         [1250] = { -- Level 75 Ninja
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.NIN, 75 } },
+            reqs = { jobLvl = { xi.job.NIN, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3202, 4} } },
         },
 
         [1251] = { -- Level 99 Ninja
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.NIN, 99 } },
+            reqs = { jobLvl = { xi.job.NIN, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
         },
 
         [1252] = { -- Level 30 Dragoon
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRG, 30 } },
+            reqs = { jobLvl = { xi.job.DRG, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6154, 12} } },
         },
 
         [1253] = { -- Level 50 Dragoon
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRG, 50 } },
+            reqs = { jobLvl = { xi.job.DRG, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6158, 12} } },
         },
 
         [1254] = { -- Level 75 Dragoon
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRG, 75 } },
+            reqs = { jobLvl = { xi.job.DRG, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3203, 4} } },
         },
 
         [1255] = { -- Level 99 Dragoon
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DRG, 99 } },
+            reqs = { jobLvl = { xi.job.DRG, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
         },
 
         [1256] = { -- Level 30 Summoner
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SMN, 30 } },
+            reqs = { jobLvl = { xi.job.SMN, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6176, 12} } },
         },
 
         [1257] = { -- Level 50 Summoner
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SMN, 50 } },
+            reqs = { jobLvl = { xi.job.SMN, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6158, 12} } },
         },
 
         [1258] = { -- Level 75 Summoner
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SMN, 75 } },
+            reqs = { jobLvl = { xi.job.SMN, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3204, 4} } },
         },
 
         [1259] = { -- Level 99 Summoner
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SMN, 99 } },
+            reqs = { jobLvl = { xi.job.SMN, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
         },
 
         [1260] = { -- Level 30 Blue Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLU, 30 } },
+            reqs = { jobLvl = { xi.job.BLU, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6149, 12} } },
         },
 
         [1261] = { -- Level 50 Blue Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLU, 50 } },
+            reqs = { jobLvl = { xi.job.BLU, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6177, 12} } },
         },
 
         [1262] = { -- Level 75 Blue Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLU, 75 } },
+            reqs = { jobLvl = { xi.job.BLU, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3205, 4} } },
         },
 
         [1263] = { -- Level 99 Blue Mage
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.BLU, 99 } },
+            reqs = { jobLvl = { xi.job.BLU, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4064, 2} } },
         },
 
         [1264] = { -- Level 30 Corsair
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.COR, 30 } },
+            reqs = { jobLvl = { xi.job.COR, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6148, 12} } },
         },
 
         [1265] = { -- Level 50 Corsair
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.COR, 50 } },
+            reqs = { jobLvl = { xi.job.COR, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6160, 12} } },
         },
 
         [1266] = { -- Level 75 Corsair
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.COR, 75 } },
+            reqs = { jobLvl = { xi.job.COR, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3206, 4} } },
         },
 
         [1267] = { -- Level 99 Corsair
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.COR, 99 } },
+            reqs = { jobLvl = { xi.job.COR, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4065, 2} } },
         },
 
         [1268] = { -- Level 30 Puppetmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PUP, 30 } },
+            reqs = { jobLvl = { xi.job.PUP, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6147, 12} } },
         },
 
         [1269] = { -- Level 50 Puppetmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PUP, 50 } },
+            reqs = { jobLvl = { xi.job.PUP, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6148, 12} } },
         },
 
         [1270] = { -- Level 75 Puppetmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PUP, 75 } },
+            reqs = { jobLvl = { xi.job.PUP, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3207, 4} } },
         },
 
         [1271] = { -- Level 99 Puppetmaster
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.PUP, 99 } },
+            reqs = { jobLvl = { xi.job.PUP, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4066, 2} } },
         },
@@ -4588,112 +4588,112 @@ function getRoeRecords(triggers)
 
         [1272] = { -- Level 30 Dancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DNC, 30 } },
+            reqs = { jobLvl = { xi.job.DNC, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6148, 12} } },
         },
 
         [1273] = { -- Level 50 Dancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DNC, 50 } },
+            reqs = { jobLvl = { xi.job.DNC, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6147, 12} } },
         },
 
         [1274] = { -- Level 75 Dancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DNC, 75 } },
+            reqs = { jobLvl = { xi.job.DNC, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3208, 4} } },
         },
 
         [1275] = { -- Level 99 Dancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.DNC, 99 } },
+            reqs = { jobLvl = { xi.job.DNC, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4067, 2} } },
         },
 
         [1276] = { -- Level 30 Scholar
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SCH, 30 } },
+            reqs = { jobLvl = { xi.job.SCH, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6158, 12} } },
         },
 
         [1277] = { -- Level 50 Scholar
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SCH, 50 } },
+            reqs = { jobLvl = { xi.job.SCH, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6157, 12} } },
         },
 
         [1278] = { -- Level 75 Scholar
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SCH, 75 } },
+            reqs = { jobLvl = { xi.job.SCH, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {3209, 4} } },
         },
 
         [1279] = { -- Level 99 Scholar
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.SCH, 99 } },
+            reqs = { jobLvl = { xi.job.SCH, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4068, 2} } },
         },
 
         [1280] = { -- Level 30 Geomancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.GEO, 30 } },
+            reqs = { jobLvl = { xi.job.GEO, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6178, 12} } },
         },
 
         [1281] = { -- Level 50 Geomancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.GEO, 50 } },
+            reqs = { jobLvl = { xi.job.GEO, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6179, 12} } },
         },
 
         [1282] = { -- Level 75 Geomancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.GEO, 75 } },
+            reqs = { jobLvl = { xi.job.GEO, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {6092, 1} } },
         },
 
         [1283] = { -- Level 99 Geomancer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.GEO, 99 } },
+            reqs = { jobLvl = { xi.job.GEO, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4069, 1} } },
         },
 
         [1284] = { -- Level 30 Runefencer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RUN, 30 } },
+            reqs = { jobLvl = { xi.job.RUN, 30 } },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 500, item = { {6150, 12} } },
         },
 
         [1285] = { -- Level 50 Runefencer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RUN, 50 } },
+            reqs = { jobLvl = { xi.job.RUN, 50 } },
             flags = set{"retro"},
             reward = { sparks = 200, xp = 500, item = { {6149, 12} } },
         },
 
         [1286] = { -- Level 75 Runefencer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RUN, 75 } },
+            reqs = { jobLvl = { xi.job.RUN, 75 } },
             flags = set{"retro"},
             reward = { sparks = 300, xp = 500, item = { {5103, 1} } },
         },
 
         [1287] = { -- Level 99 Runefencer
             trigger = triggers.levelUp,
-            reqs = { jobLvl = { tpz.job.RUN, 99 } },
+            reqs = { jobLvl = { xi.job.RUN, 99 } },
             flags = set{"retro"},
             reward = { sparks = 400, xp = 500, item = { {4070, 1} } },
         },
@@ -4719,7 +4719,7 @@ function getRoeRecords(triggers)
         [3003] = {   -- Vanquish Aquans A (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.AQUAN} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4727,7 +4727,7 @@ function getRoeRecords(triggers)
         [3004] = {  -- Vanquish Amorphs with Physical Damage A (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AMORPH} },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set{ xi.eco.AMORPH} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
@@ -4735,7 +4735,7 @@ function getRoeRecords(triggers)
         [3005] = {   -- Vanquish Beasts with Magic A (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.BEAST} },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set{ xi.eco.BEAST} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -4743,7 +4743,7 @@ function getRoeRecords(triggers)
         [3006] = { -- Total Successful Woodworking Syntheses A (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.WOODWORKING },
+            reqs = { skillType = xi.skill.WOODWORKING },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4751,7 +4751,7 @@ function getRoeRecords(triggers)
         [3007] = { -- Total Successful Leatherworking Syntheses A (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.LEATHERCRAFT },
+            reqs = { skillType = xi.skill.LEATHERCRAFT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4792,7 +4792,7 @@ function getRoeRecords(triggers)
         [3012] = {   -- Vanquish Arcana B (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.ARCANA} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4800,7 +4800,7 @@ function getRoeRecords(triggers)
         [3013] = {  -- Vanquish Undead with Physical Damage B (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.UNDEAD} },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set{ xi.eco.UNDEAD} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
@@ -4808,7 +4808,7 @@ function getRoeRecords(triggers)
         [3014] = {   -- Vanquish Plantoids with Magic B (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.PLANTOID} },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set{ xi.eco.PLANTOID} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -4816,7 +4816,7 @@ function getRoeRecords(triggers)
         [3015] = { -- Total Successful Blacksmithing Syntheses B (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.SMITHING },
+            reqs = { skillType = xi.skill.SMITHING },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4850,7 +4850,7 @@ function getRoeRecords(triggers)
         [3021] = {   -- Vanquish Vermin C (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.VERMIN} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4858,7 +4858,7 @@ function getRoeRecords(triggers)
         [3022] = {  -- Vanquish Birds with Physical Damage C (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.BIRD} },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set{ xi.eco.BIRD} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
@@ -4866,7 +4866,7 @@ function getRoeRecords(triggers)
         [3023] = {   -- Vanquish Lizards with Magic C (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.LIZARD} },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set{ xi.eco.LIZARD} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -4874,7 +4874,7 @@ function getRoeRecords(triggers)
         [3024] = { -- Total Successful Goldsmithing Syntheses C (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.GOLDSMITHING },
+            reqs = { skillType = xi.skill.GOLDSMITHING },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4908,7 +4908,7 @@ function getRoeRecords(triggers)
         [3030] = {   -- Vanquish Beasts D (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.BEAST} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4916,7 +4916,7 @@ function getRoeRecords(triggers)
         [3031] = {  -- Vanquish Aquans with Physical Damage D (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.AQUAN} },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set{ xi.eco.AQUAN} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
@@ -4924,7 +4924,7 @@ function getRoeRecords(triggers)
         [3032] = {   -- Vanquish Amorphs with Magic D (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.AMORPH} },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set{ xi.eco.AMORPH} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -4932,7 +4932,7 @@ function getRoeRecords(triggers)
         [3033] = { -- Total Successful Cloth Syntheses D (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.CLOTHCRAFT },
+            reqs = { skillType = xi.skill.CLOTHCRAFT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4940,7 +4940,7 @@ function getRoeRecords(triggers)
         [3034] = { -- Total Successful Bone Syntheses D (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.BONECRAFT },
+            reqs = { skillType = xi.skill.BONECRAFT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4974,7 +4974,7 @@ function getRoeRecords(triggers)
         [3039] = {   -- Vanquish Plantoids E (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.PLANTOID} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -4982,7 +4982,7 @@ function getRoeRecords(triggers)
         [3040] = {  -- Vanquish Arcana with Physical Damage E (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.ARCANA} },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set{ xi.eco.ARCANA} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
@@ -4990,7 +4990,7 @@ function getRoeRecords(triggers)
         [3041] = {   -- Vanquish Undead with Magic E (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.UNDEAD} },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set{ xi.eco.UNDEAD} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -4998,7 +4998,7 @@ function getRoeRecords(triggers)
         [3042] = { -- Total Successful Cooking Syntheses E (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.COOKING },
+            reqs = { skillType = xi.skill.COOKING },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5040,7 +5040,7 @@ function getRoeRecords(triggers)
         [3048] = {   -- Vanquish Lizards F (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.LIZARD} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5048,7 +5048,7 @@ function getRoeRecords(triggers)
         [3049] = {  -- Vanquish Vermin with Physical Damage F (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL, mobSystem = set{tpz.eco.VERMIN} },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL, mobSystem = set{ xi.eco.VERMIN} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 400 },
         },
@@ -5056,7 +5056,7 @@ function getRoeRecords(triggers)
         [3050] = {   -- Vanquish Birds with Magic F (UC)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL, mobSystem = set{tpz.eco.BIRD} },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL, mobSystem = set{ xi.eco.BIRD} },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5064,7 +5064,7 @@ function getRoeRecords(triggers)
         [3051] = { -- Total Successful Alchemy Syntheses F (UC)
             trigger = triggers.synthSuccess,
             goal = 10,
-            reqs = { skillType = tpz.skill.ALCHEMY },
+            reqs = { skillType = xi.skill.ALCHEMY },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5085,7 +5085,7 @@ function getRoeRecords(triggers)
         [3488] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { skillType = xi.skill.CLUB, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5093,7 +5093,7 @@ function getRoeRecords(triggers)
         [3489] = { -- Conflict: Rala Waterways (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{258}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { zone = set{258}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5101,14 +5101,14 @@ function getRoeRecords(triggers)
         [3490] = { -- Vanquish Rabbits (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{206}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobFamily = set{206}, mobXP = true, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3491] = { -- Subjugation: Rambukk (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17191044}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobID = set{17191044}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5116,7 +5116,7 @@ function getRoeRecords(triggers)
         [3492] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5128,7 +5128,7 @@ function getRoeRecords(triggers)
         [3493] = { -- Spoils - Bat Fangs (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 891 }, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { itemID = set{ 891 }, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5136,7 +5136,7 @@ function getRoeRecords(triggers)
         [3494] = { -- Conflict: La Theine Plateau (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{102}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { zone = set{102}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5144,14 +5144,14 @@ function getRoeRecords(triggers)
         [3495] = { -- Vanquish Bats (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{46, 47}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobFamily = set{46, 47}, mobXP = true, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3496] = { -- Subjugation: Tumbling Truffle (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17195259}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobID = set{17195259}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5163,7 +5163,7 @@ function getRoeRecords(triggers)
         [3498] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { skillType = xi.skill.STAFF, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5171,7 +5171,7 @@ function getRoeRecords(triggers)
         [3499] = { -- Conflict: Eldieme Necropolis (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{195}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { zone = set{195}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5179,14 +5179,14 @@ function getRoeRecords(triggers)
         [3500] = { -- Vanquish Treants (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{245}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobFamily = set{245}, mobXP = true, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3501] = { -- Subjugation: Duke Decapod (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17252725}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobID = set{17252725}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5194,7 +5194,7 @@ function getRoeRecords(triggers)
         [3502] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5206,7 +5206,7 @@ function getRoeRecords(triggers)
         [3503] = { -- Spoils - Bomb Ash (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 928 }, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { itemID = set{ 928 }, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5214,7 +5214,7 @@ function getRoeRecords(triggers)
         [3504] = { -- Conflict: Davoi (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{149}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { zone = set{149}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5222,14 +5222,14 @@ function getRoeRecords(triggers)
         [3505] = { -- Vanquish Bombs (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{56}, mobXP = true, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobFamily = set{56}, mobXP = true, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3506] = { -- Subjugation: Poisonhand Gnadgad (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17387644}, unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { mobID = set{17387644}, unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5237,7 +5237,7 @@ function getRoeRecords(triggers)
         [3507] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.PIEUJE },
+            reqs = { unityLeader = xi.roe.leaders.PIEUJE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5249,7 +5249,7 @@ function getRoeRecords(triggers)
         [3508] = { -- Great Katana Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.GREAT_KATANA, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { skillType = xi.skill.GREAT_KATANA, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5257,7 +5257,7 @@ function getRoeRecords(triggers)
         [3509] = { -- Conflict: North Gustaberg (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{106}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { zone = set{106}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5265,14 +5265,14 @@ function getRoeRecords(triggers)
         [3510] = { -- Vanquish Worms (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{258}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobFamily = set{258}, mobXP = true, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3511] = { -- Subjugation: Stinging Sophie (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17211537, 17211561}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobID = set{17211537, 17211561}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5280,7 +5280,7 @@ function getRoeRecords(triggers)
         [3512] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5292,7 +5292,7 @@ function getRoeRecords(triggers)
         [3513] = { -- Spoils - Cockatrice Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4435 }, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { itemID = set{ 4435 }, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5300,7 +5300,7 @@ function getRoeRecords(triggers)
         [3514] = { -- Conflict: Yahse Hunting Grounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{260}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { zone = set{260}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5308,14 +5308,14 @@ function getRoeRecords(triggers)
         [3515] = { -- Vanquish Cockatrices (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{70}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobFamily = set{70}, mobXP = true, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3516] = { -- Subjugation: Tococo (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17215778}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobID = set{17215778}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5327,7 +5327,7 @@ function getRoeRecords(triggers)
         [3518] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.ARCHERY, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { skillType = xi.skill.ARCHERY, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5335,7 +5335,7 @@ function getRoeRecords(triggers)
         [3519] = { -- Conflict: Crawlers' Nest (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{197}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { zone = set{197}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5343,14 +5343,14 @@ function getRoeRecords(triggers)
         [3520] = { -- Vanquish Lizards (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{174}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobFamily = set{174}, mobXP = true, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3521] = { -- Subjugation: Aqrabuamelu (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17584416}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobID = set{17584416}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5358,7 +5358,7 @@ function getRoeRecords(triggers)
         [3522] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5370,7 +5370,7 @@ function getRoeRecords(triggers)
         [3523] = { -- Spoils - Land Crab Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4400 }, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { itemID = set{ 4400 }, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5378,7 +5378,7 @@ function getRoeRecords(triggers)
         [3524] = { -- Conflict: Beadeaux (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{147}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { zone = set{147}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5386,14 +5386,14 @@ function getRoeRecords(triggers)
         [3525] = { -- Vanquish Crabs (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobFamily = set{75, 76, 77, 372}, mobXP = true, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3526] = { -- Subjugation: Ge'Dha Evileye (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17379450}, unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { mobID = set{17379450}, unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5401,7 +5401,7 @@ function getRoeRecords(triggers)
         [3527] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 5,
-            reqs = { unityLeader = tpz.roe.leaders.AYAME },
+            reqs = { unityLeader = xi.roe.leaders.AYAME },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5413,7 +5413,7 @@ function getRoeRecords(triggers)
         [3528] = { -- Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.AXE, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { skillType = xi.skill.AXE, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5421,7 +5421,7 @@ function getRoeRecords(triggers)
         [3529] = { -- Conflict: South Gustaberg (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{107}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { zone = set{107}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5429,14 +5429,14 @@ function getRoeRecords(triggers)
         [3530] = { -- Vanquish Sea Monks (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{218, 219}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobFamily = set{218, 219}, mobXP = true, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3531] = { -- Subjugation: Leaping Lizzy (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17215868, 17215888}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobID = set{17215868, 17215888}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5444,7 +5444,7 @@ function getRoeRecords(triggers)
         [3532] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5456,7 +5456,7 @@ function getRoeRecords(triggers)
         [3533] = { -- Spoils - Sleepshroom (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4374 }, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { itemID = set{ 4374 }, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5464,7 +5464,7 @@ function getRoeRecords(triggers)
         [3534] = { -- Conflict: Pashhow Marshlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{109}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { zone = set{109}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5472,14 +5472,14 @@ function getRoeRecords(triggers)
         [3535] = { -- Vanquish Funguars (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{116}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobFamily = set{116}, mobXP = true, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3536] = { -- Subjugation: Bloodpool Vorax (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17224019}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobID = set{17224019}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5491,7 +5491,7 @@ function getRoeRecords(triggers)
         [3538] = { -- Great Axe Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.GREAT_AXE, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { skillType = xi.skill.GREAT_AXE, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5499,7 +5499,7 @@ function getRoeRecords(triggers)
         [3539] = { -- Conflict: Ceizak Battlegrounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{261}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { zone = set{261}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5507,14 +5507,14 @@ function getRoeRecords(triggers)
         [3540] = { -- Vanquish Flies (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{113, 374}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobFamily = set{113, 374}, mobXP = true, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3541] = { -- Subjugation: Be'Hya Hundredwall (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17363258}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobID = set{17363258}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5522,7 +5522,7 @@ function getRoeRecords(triggers)
         [3542] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5534,7 +5534,7 @@ function getRoeRecords(triggers)
         [3543] = { -- Spoils - Raptor Skin (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 853 }, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { itemID = set{ 853 }, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5542,7 +5542,7 @@ function getRoeRecords(triggers)
         [3544] = { -- Conflict: Beaucedine Glacier (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{111}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { zone = set{111}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5550,14 +5550,14 @@ function getRoeRecords(triggers)
         [3545] = { -- Vanquish Raptors (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{210, 376, 377}, mobXP = true, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobFamily = set{210, 376, 377}, mobXP = true, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3546] = { -- Subjugation: Gargantua (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17232079}, unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { mobID = set{17232079}, unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5565,7 +5565,7 @@ function getRoeRecords(triggers)
         [3547] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 5,
-            reqs = { unityLeader = tpz.roe.leaders.INVINCIBLE_SHIELD },
+            reqs = { unityLeader = xi.roe.leaders.INVINCIBLE_SHIELD },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5577,7 +5577,7 @@ function getRoeRecords(triggers)
         [3548] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { skillType = xi.skill.CLUB, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5585,7 +5585,7 @@ function getRoeRecords(triggers)
         [3549] = { -- Conflict: West Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{115}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { zone = set{115}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5593,14 +5593,14 @@ function getRoeRecords(triggers)
         [3550] = { -- Vanquish Bees (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{48}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobFamily = set{48}, mobXP = true, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3551] = { -- Subjugation: Tom Tit Tat (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17248468, 17248486}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobID = set{17248468, 17248486}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5608,7 +5608,7 @@ function getRoeRecords(triggers)
         [3552] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5620,7 +5620,7 @@ function getRoeRecords(triggers)
         [3553] = { -- Spoils - Silk Thread (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 816 }, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { itemID = set{ 816 }, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5628,7 +5628,7 @@ function getRoeRecords(triggers)
         [3554] = { -- Conflict: Buburimu Peninsula (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{118}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { zone = set{118}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5636,14 +5636,14 @@ function getRoeRecords(triggers)
         [3555] = { -- Vanquish Crawlers (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{79}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobFamily = set{79}, mobXP = true, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3556] = { -- Subjugation: Buburimboo (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17261003}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobID = set{17261003}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5655,7 +5655,7 @@ function getRoeRecords(triggers)
         [3558] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { skillType = xi.skill.STAFF, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5663,7 +5663,7 @@ function getRoeRecords(triggers)
         [3559] = { -- Conflict: Castle Oztroja (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{151}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { zone = set{151}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5671,14 +5671,14 @@ function getRoeRecords(triggers)
         [3560] = { -- Vanquish Ghosts (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{121}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobFamily = set{121}, mobXP = true, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3561] = { -- Subjugation: Mee Deggi the Punisher (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17395800}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobID = set{17395800}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5686,7 +5686,7 @@ function getRoeRecords(triggers)
         [3562] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5698,7 +5698,7 @@ function getRoeRecords(triggers)
         [3563] = { -- Spoils - Saruta Cotton (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 834 }, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { itemID = set{ 834 }, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5706,7 +5706,7 @@ function getRoeRecords(triggers)
         [3564] = { -- Conflict: Foret de Hennetiel (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{262}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { zone = set{262}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5714,14 +5714,14 @@ function getRoeRecords(triggers)
         [3565] = { -- Vanquish Mandragoras (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{178}, mobXP = true, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobFamily = set{178}, mobXP = true, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3566] = { -- Subjugation: Juu Duzu the Whirlwind (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17371300}, unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { mobID = set{17371300}, unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5729,7 +5729,7 @@ function getRoeRecords(triggers)
         [3567] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.APURURU },
+            reqs = { unityLeader = xi.roe.leaders.APURURU },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5741,7 +5741,7 @@ function getRoeRecords(triggers)
         [3568] = { -- Hand-to-Hand Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.HAND_TO_HAND, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { skillType = xi.skill.HAND_TO_HAND, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5749,7 +5749,7 @@ function getRoeRecords(triggers)
         [3569] = { -- Conflict: Yorcia Weald (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{263}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { zone = set{263}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5757,14 +5757,14 @@ function getRoeRecords(triggers)
         [3570] = { -- Vanquish Leeches (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{172, 369}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobFamily = set{172, 369}, mobXP = true, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3571] = { -- Subjugation: Canal Moocher (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17469578}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobID = set{17469578}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5772,7 +5772,7 @@ function getRoeRecords(triggers)
         [3572] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5784,7 +5784,7 @@ function getRoeRecords(triggers)
         [3573] = { -- Spoils - Spider Web (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 838 }, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { itemID = set{ 838 }, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5792,7 +5792,7 @@ function getRoeRecords(triggers)
         [3574] = { -- Conflict: Rolanberry Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{110}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { zone = set{110}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5800,14 +5800,14 @@ function getRoeRecords(triggers)
         [3575] = { -- Vanquish Spiders (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{235}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobFamily = set{235}, mobXP = true, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3576] = { -- Subjugation: Eldritch Edge (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17228150}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobID = set{17228150}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5819,7 +5819,7 @@ function getRoeRecords(triggers)
         [3578] = { -- Great Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.GREAT_SWORD, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { skillType = xi.skill.GREAT_SWORD, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5827,7 +5827,7 @@ function getRoeRecords(triggers)
         [3579] = { -- Conflict: Meriphataud Mountains (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{119}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { zone = set{119}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5835,14 +5835,14 @@ function getRoeRecords(triggers)
         [3580] = { -- Vanquish Wyverns (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{266, 268}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobFamily = set{266, 268}, mobXP = true, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3581] = { -- Subjugation: Patripatan (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17264972}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobID = set{17264972}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5850,7 +5850,7 @@ function getRoeRecords(triggers)
         [3582] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5862,7 +5862,7 @@ function getRoeRecords(triggers)
         [3583] = { -- Spoils - Hecteyes Eye (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 939 }, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { itemID = set{ 939 }, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5870,7 +5870,7 @@ function getRoeRecords(triggers)
         [3584] = { -- Conflict: Sauromugue Champaign (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{120}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { zone = set{120}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5878,14 +5878,14 @@ function getRoeRecords(triggers)
         [3585] = { -- Vanquish Hecteyes (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{139}, mobXP = true, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobFamily = set{139}, mobXP = true, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3586] = { -- Subjugation: Bashe (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17268788}, unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { mobID = set{17268788}, unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5893,7 +5893,7 @@ function getRoeRecords(triggers)
         [3587] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.MAAT },
+            reqs = { unityLeader = xi.roe.leaders.MAAT },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5905,7 +5905,7 @@ function getRoeRecords(triggers)
         [3588] = { -- Dagger Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.DAGGER, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { skillType = xi.skill.DAGGER, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5913,7 +5913,7 @@ function getRoeRecords(triggers)
         [3589] = { -- Conflict: Sanctuary of Zi'Tah (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{121}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { zone = set{121}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5921,14 +5921,14 @@ function getRoeRecords(triggers)
         [3590] = { -- Vanquish Hounds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{142, 143}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobFamily = set{142, 143}, mobXP = true, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3591] = { -- Subjugation: Bastet (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17273190}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobID = set{17273190}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5936,7 +5936,7 @@ function getRoeRecords(triggers)
         [3592] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5948,7 +5948,7 @@ function getRoeRecords(triggers)
         [3593] = { -- Spoils - Doll Shard (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 1165 }, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { itemID = set{ 1165 }, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5956,7 +5956,7 @@ function getRoeRecords(triggers)
         [3594] = { -- Conflict: Morimar Basalt Fields (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{265}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { zone = set{265}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5964,14 +5964,14 @@ function getRoeRecords(triggers)
         [3595] = { -- Vanquish Dolls (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobFamily = set{83, 84, 85, 498}, mobXP = true, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3596] = { -- Subjugation: Nocuous Weapon (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17563801}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobID = set{17563801}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -5983,7 +5983,7 @@ function getRoeRecords(triggers)
         [3598] = { -- Marksmanship Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.MARKSMANSHIP, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { skillType = xi.skill.MARKSMANSHIP, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -5991,7 +5991,7 @@ function getRoeRecords(triggers)
         [3599] = { -- Conflict: Boyahda Tree (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{153}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { zone = set{153}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -5999,14 +5999,14 @@ function getRoeRecords(triggers)
         [3600] = { -- Vanquish Slimes (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{228, 229, 230}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobFamily = set{228, 229, 230}, mobXP = true, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3601] = { -- Subjugation: Aquarius (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17404000}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobID = set{17404000}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6014,7 +6014,7 @@ function getRoeRecords(triggers)
         [3602] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6026,7 +6026,7 @@ function getRoeRecords(triggers)
         [3603] = { -- Spoils - Bird Egg (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4570 }, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { itemID = set{ 4570 }, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6034,7 +6034,7 @@ function getRoeRecords(triggers)
         [3604] = { -- Conflict: Western Altepa Desert (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{125}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { zone = set{125}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6042,14 +6042,14 @@ function getRoeRecords(triggers)
         [3605] = { -- Vanquish Crow-Type Birds (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{55}, mobXP = true, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobFamily = set{55}, mobXP = true, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3606] = { -- Subjugation: Cactuar Cantautor (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17289560}, unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { mobID = set{17289560}, unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6057,7 +6057,7 @@ function getRoeRecords(triggers)
         [3607] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.ALDO },
+            reqs = { unityLeader = xi.roe.leaders.ALDO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6069,7 +6069,7 @@ function getRoeRecords(triggers)
         [3608] = { -- Dagger Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.DAGGER, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { skillType = xi.skill.DAGGER, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6077,7 +6077,7 @@ function getRoeRecords(triggers)
         [3609] = { -- Conflict: Yuhtunga Jungle (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{123}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { zone = set{123}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6085,14 +6085,14 @@ function getRoeRecords(triggers)
         [3610] = { -- Vanquish Sheep (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{226}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobFamily = set{226}, mobXP = true, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3611] = { -- Subjugation: Mischievous Micholas (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17281149}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobID = set{17281149}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6100,7 +6100,7 @@ function getRoeRecords(triggers)
         [3612] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6112,7 +6112,7 @@ function getRoeRecords(triggers)
         [3613] = { -- Spoils - Scorpion Claw (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 897 }, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { itemID = set{ 897 }, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6120,7 +6120,7 @@ function getRoeRecords(triggers)
         [3614] = { -- Conflict: East Sarutabaruta (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{116}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { zone = set{116}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6128,14 +6128,14 @@ function getRoeRecords(triggers)
         [3615] = { -- Vanquish Scorpions (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{217}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobFamily = set{217}, mobXP = true, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3616] = { -- Subjugation: Sharp-Eared Ropipi (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17252489, 17252508}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobID = set{17252489, 17252508}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6147,7 +6147,7 @@ function getRoeRecords(triggers)
         [3618] = { -- Archery Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.ARCHERY, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { skillType = xi.skill.ARCHERY, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6155,7 +6155,7 @@ function getRoeRecords(triggers)
         [3619] = { -- Conflict: Marjami Ravine (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{266}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { zone = set{266}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6163,14 +6163,14 @@ function getRoeRecords(triggers)
         [3620] = { -- Vanquish Opo-Opos (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{188}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobFamily = set{188}, mobXP = true, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3621] = { -- Subjugation: Ah Puch (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17571903}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobID = set{17571903}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6178,7 +6178,7 @@ function getRoeRecords(triggers)
         [3622] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6190,7 +6190,7 @@ function getRoeRecords(triggers)
         [3623] = { -- Spoils - Black Tiger Fang (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 884 }, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { itemID = set{ 884 }, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6198,7 +6198,7 @@ function getRoeRecords(triggers)
         [3624] = { -- Conflict: Sea Serpent Grotto (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{176}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { zone = set{176}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6206,14 +6206,14 @@ function getRoeRecords(triggers)
         [3625] = { -- Vanquish Tigers (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{242}, mobXP = true, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobFamily = set{242}, mobXP = true, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3626] = { -- Subjugation: Fyuu the Seabellow (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17498269}, unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { mobID = set{17498269}, unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6221,7 +6221,7 @@ function getRoeRecords(triggers)
         [3627] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.JAKOH_WAHCONDALO },
+            reqs = { unityLeader = xi.roe.leaders.JAKOH_WAHCONDALO },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6233,7 +6233,7 @@ function getRoeRecords(triggers)
         [3628] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { skillType = xi.skill.CLUB, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6241,7 +6241,7 @@ function getRoeRecords(triggers)
         [3629] = { -- Conflict: Bhaflau Thickets (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{52}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { zone = set{52}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6249,14 +6249,14 @@ function getRoeRecords(triggers)
         [3630] = { -- Vanquish Evil Weapons (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{110}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobFamily = set{110}, mobXP = true, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3631] = { -- Subjugation: Emergent Elm (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{16990376}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobID = set{16990376}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6264,7 +6264,7 @@ function getRoeRecords(triggers)
         [3632] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6276,7 +6276,7 @@ function getRoeRecords(triggers)
         [3633] = { -- Spoils - Puk Wing (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 2148 }, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { itemID = set{ 2148 }, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6284,7 +6284,7 @@ function getRoeRecords(triggers)
         [3634] = { -- Conflict: West Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{100}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { zone = set{100}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6292,14 +6292,14 @@ function getRoeRecords(triggers)
         [3635] = { -- Vanquish Puks (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{198}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobFamily = set{198}, mobXP = true, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3636] = { -- Subjugation: Fungus Beetle (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17187047}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobID = set{17187047}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6311,7 +6311,7 @@ function getRoeRecords(triggers)
         [3638] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { skillType = xi.skill.STAFF, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6319,7 +6319,7 @@ function getRoeRecords(triggers)
         [3639] = { -- Conflict: Wajaom Woodlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{51}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { zone = set{51}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6327,14 +6327,14 @@ function getRoeRecords(triggers)
         [3640] = { -- Vanquish Elementals (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{99, 100, 101, 102, 103, 104, 105, 106}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobFamily = set{99, 100, 101, 102, 103, 104, 105, 106}, mobXP = true, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3641] = { -- Subjugation: Jaded Jody (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{16986378}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobID = set{16986378}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6342,7 +6342,7 @@ function getRoeRecords(triggers)
         [3642] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6354,7 +6354,7 @@ function getRoeRecords(triggers)
         [3643] = { -- Spoils - Dhalmel Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 4359 }, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { itemID = set{ 4359 }, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6362,7 +6362,7 @@ function getRoeRecords(triggers)
         [3644] = { -- Conflict: Kamihr Drifts (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{267}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { zone = set{267}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6370,14 +6370,14 @@ function getRoeRecords(triggers)
         [3645] = { -- Vanquish Dhalmel (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{80}, mobXP = true, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobFamily = set{80}, mobXP = true, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3646] = { -- Subjugation: Trembler Tabitha (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17588278}, unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { mobID = set{17588278}, unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6385,7 +6385,7 @@ function getRoeRecords(triggers)
         [3647] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 5,
-            reqs = { unityLeader = tpz.roe.leaders.NAJA_SALAHEEM },
+            reqs = { unityLeader = xi.roe.leaders.NAJA_SALAHEEM },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6397,7 +6397,7 @@ function getRoeRecords(triggers)
         [3648] = { -- Polearm Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.POLEARM, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { skillType = xi.skill.POLEARM, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6405,7 +6405,7 @@ function getRoeRecords(triggers)
         [3649] = { -- Conflict: Cirdas Caverns (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{270}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { zone = set{270}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6413,14 +6413,14 @@ function getRoeRecords(triggers)
         [3650] = { -- Vanquish Pugils (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{197}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobFamily = set{197}, mobXP = true, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3651] = { -- Subjugation: Hovering Hotpot (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17596628}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobID = set{17596628}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6428,7 +6428,7 @@ function getRoeRecords(triggers)
         [3652] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6440,7 +6440,7 @@ function getRoeRecords(triggers)
         [3653] = { -- Spoils - Beetle Shell (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 889 }, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { itemID = set{ 889 }, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6448,7 +6448,7 @@ function getRoeRecords(triggers)
         [3654] = { -- Conflict: East Ronfaure (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{101}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { zone = set{101}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6456,14 +6456,14 @@ function getRoeRecords(triggers)
         [3655] = { -- Vanquish Beetles (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{49}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobFamily = set{49}, mobXP = true, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3656] = { -- Subjugation: Bigmouth Billy (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17191196}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobID = set{17191196}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6475,7 +6475,7 @@ function getRoeRecords(triggers)
         [3658] = { -- Sword Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.SWORD, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { skillType = xi.skill.SWORD, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6483,7 +6483,7 @@ function getRoeRecords(triggers)
         [3659] = { -- Conflict: Xarcabard (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{112}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { zone = set{112}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6491,14 +6491,14 @@ function getRoeRecords(triggers)
         [3660] = { -- Vanquish Goobbues (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{136}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobFamily = set{136}, mobXP = true, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3661] = { -- Subjugation: Barbaric Weapon (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17236027}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobID = set{17236027}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6506,7 +6506,7 @@ function getRoeRecords(triggers)
         [3662] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6518,7 +6518,7 @@ function getRoeRecords(triggers)
         [3663] = { -- Spoils - Bone Chip (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 880 }, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { itemID = set{ 880 }, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6526,7 +6526,7 @@ function getRoeRecords(triggers)
         [3664] = { -- Conflict: Woh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{273}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { zone = set{273}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6534,14 +6534,14 @@ function getRoeRecords(triggers)
         [3665] = { -- Vanquish Skeletons (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{227}, mobXP = true, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobFamily = set{227}, mobXP = true, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3666] = { -- Subjugation: Hyakume (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17457236}, unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { mobID = set{17457236}, unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6549,7 +6549,7 @@ function getRoeRecords(triggers)
         [3667] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.FLAVIRIA },
+            reqs = { unityLeader = xi.roe.leaders.FLAVIRIA },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6561,7 +6561,7 @@ function getRoeRecords(triggers)
         [3668] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { skillType = xi.skill.CLUB, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6569,7 +6569,7 @@ function getRoeRecords(triggers)
         [3669] = { -- Conflict: Giddeus (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{145}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { zone = set{145}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6577,14 +6577,14 @@ function getRoeRecords(triggers)
         [3670] = { -- Vanquish Efts (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{98}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobFamily = set{98}, mobXP = true, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3671] = { -- Subjugation: Herbage Hunter (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17256836}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobID = set{17256836}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6592,7 +6592,7 @@ function getRoeRecords(triggers)
         [3672] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6604,7 +6604,7 @@ function getRoeRecords(triggers)
         [3673] = { -- Spoils - Rotten Meat (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 16995 }, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { itemID = set{ 16995 }, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6612,7 +6612,7 @@ function getRoeRecords(triggers)
         [3674] = { -- Conflict: Moh Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{269}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { zone = set{269}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6620,14 +6620,14 @@ function getRoeRecords(triggers)
         [3675] = { -- Vanquish Antica (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{25}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobFamily = set{25}, mobXP = true, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3676] = { -- Subjugation: Antican Praefectus (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17629281}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobID = set{17629281}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6639,7 +6639,7 @@ function getRoeRecords(triggers)
         [3678] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { skillType = xi.skill.STAFF, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6647,7 +6647,7 @@ function getRoeRecords(triggers)
         [3679] = { -- Conflict: Toraimarai Canal (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{169}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { zone = set{169}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6655,14 +6655,14 @@ function getRoeRecords(triggers)
         [3680] = { -- Vanquish Coeurls (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{71}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobFamily = set{71}, mobXP = true, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3681] = { -- Subjugation: Ose (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17649822}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobID = set{17649822}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6670,7 +6670,7 @@ function getRoeRecords(triggers)
         [3682] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6682,7 +6682,7 @@ function getRoeRecords(triggers)
         [3683] = { -- Spoils - Dullahan Armor (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 8746 }, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { itemID = set{ 8746 }, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6690,7 +6690,7 @@ function getRoeRecords(triggers)
         [3684] = { -- Conflict: Outer Ra'Kaznar (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{274}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { zone = set{274}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6698,14 +6698,14 @@ function getRoeRecords(triggers)
         [3685] = { -- Vanquish Dullahan (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{447}, mobXP = true, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobFamily = set{447}, mobXP = true, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3686] = { -- Subjugation: Capricious Cassie (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17613130}, unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { mobID = set{17613130}, unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6713,7 +6713,7 @@ function getRoeRecords(triggers)
         [3687] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.YORAN_ORAN },
+            reqs = { unityLeader = xi.roe.leaders.YORAN_ORAN },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6725,7 +6725,7 @@ function getRoeRecords(triggers)
         [3688] = { -- Club Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.CLUB, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { skillType = xi.skill.CLUB, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6733,7 +6733,7 @@ function getRoeRecords(triggers)
         [3689] = { -- Conflict: Sih Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{268}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { zone = set{268}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6742,7 +6742,7 @@ function getRoeRecords(triggers)
         [3690] = { -- Vanquish Acuex (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{???}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobFamily = set{???}, mobXP = true, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6750,7 +6750,7 @@ function getRoeRecords(triggers)
 
         [3691] = { -- Subjugation: Intulo (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{16793742}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobID = set{16793742}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6758,7 +6758,7 @@ function getRoeRecords(triggers)
         [3692] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6770,7 +6770,7 @@ function getRoeRecords(triggers)
         [3693] = { -- Spoils - Demon Horn (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 902 }, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { itemID = set{ 902 }, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6778,7 +6778,7 @@ function getRoeRecords(triggers)
         [3694] = { -- Conflict: Konschtat Highlands (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{108}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { zone = set{108}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6786,14 +6786,14 @@ function getRoeRecords(triggers)
         [3695] = { -- Vanquish Demons (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobSystem = set{tpz.eco.DEMON}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobSystem = set{ xi.eco.DEMON}, mobXP = true, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3696] = { -- Subjugation: Marquis Naberius (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17436876}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobID = set{17436876}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6805,7 +6805,7 @@ function getRoeRecords(triggers)
         [3698] = { -- Staff Weapon Skills (UC)
             trigger = triggers.wSkillUse,
             goal = 30,
-            reqs = { skillType = tpz.skill.STAFF, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { skillType = xi.skill.STAFF, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6813,7 +6813,7 @@ function getRoeRecords(triggers)
         [3699] = { -- Conflict: Dho Gates (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{272}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { zone = set{272}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6821,14 +6821,14 @@ function getRoeRecords(triggers)
         [3700] = { -- Vanquish Velkk (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{342}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobFamily = set{342}, mobXP = true, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3701] = { -- Subjugation: Dune Widow (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17244396}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobID = set{17244396}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6836,7 +6836,7 @@ function getRoeRecords(triggers)
         [3702] = { -- Heal Unity Allies (UC)
             trigger = triggers.healUnityAlly,
             goal = 30,
-            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6848,7 +6848,7 @@ function getRoeRecords(triggers)
         [3703] = { -- Spoils - Twitherym Wing (UC)
             trigger = triggers.itemLooted,
             goal = 5,
-            reqs = { itemID = set{ 3930 }, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { itemID = set{ 3930 }, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6856,7 +6856,7 @@ function getRoeRecords(triggers)
         [3704] = { -- Conflict: Qufim Island (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { zone = set{126}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { zone = set{126}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 300 },
         },
@@ -6864,14 +6864,14 @@ function getRoeRecords(triggers)
         [3705] = { -- Vanquish Twitherym (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{338}, mobXP = true, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobFamily = set{338}, mobXP = true, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 
         [3706] = { -- Subjugation: Atkorkamuy (UC)
             trigger = triggers.mobKill,
-            reqs = { mobID = set{17293485}, unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { mobID = set{17293485}, unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 1000 },
         },
@@ -6879,7 +6879,7 @@ function getRoeRecords(triggers)
         [3707] = { -- Magic Bursts (UC)
             trigger = triggers.magicBurst,
             goal = 10,
-            reqs = { unityLeader = tpz.roe.leaders.SYLVIE },
+            reqs = { unityLeader = xi.roe.leaders.SYLVIE },
             flags = set{"unity"},
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
@@ -6928,7 +6928,7 @@ function getRoeRecords(triggers)
         [4008] = {   -- Vanquish Aquans
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.AQUAN} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.AQUAN} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -6936,7 +6936,7 @@ function getRoeRecords(triggers)
         [4009] = {   -- Vanquish Beasts
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.BEAST} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.BEAST} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -6944,7 +6944,7 @@ function getRoeRecords(triggers)
         [4010] = {   -- Vanquish Plantoids
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.PLANTOID} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.PLANTOID} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -6952,7 +6952,7 @@ function getRoeRecords(triggers)
         [4011] = {   -- Vanquish Lizards
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.LIZARD} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.LIZARD} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -6960,7 +6960,7 @@ function getRoeRecords(triggers)
         [4012] = {   -- Vanquish Vermin
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.VERMIN} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.VERMIN} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -6991,7 +6991,7 @@ function getRoeRecords(triggers)
         [4015] = {   -- Vanquish Birds (TODO: No abyssea zone kills for vanquishes when exists)
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.BIRD} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.BIRD} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -6999,7 +6999,7 @@ function getRoeRecords(triggers)
         [4016] = {   -- Vanquish Amorphs
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.AMORPH} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.AMORPH} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7007,7 +7007,7 @@ function getRoeRecords(triggers)
         [4017] = {   -- Vanquish Undead
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.UNDEAD} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.UNDEAD} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7015,7 +7015,7 @@ function getRoeRecords(triggers)
         [4018] = {   -- Vanquish Arcana
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, mobSystem = set{tpz.eco.ARCANA} },
+            reqs = { mobXP = true, mobSystem = set{ xi.eco.ARCANA} },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7029,7 +7029,7 @@ function getRoeRecords(triggers)
         [4020] = {  -- Physical Damage Kills
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.PHYSICAL },
+            reqs = { mobXP = true, atkType = xi.attackType.PHYSICAL },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },
@@ -7037,7 +7037,7 @@ function getRoeRecords(triggers)
         [4021] = {  -- Magic Damage Kills
             trigger = triggers.mobKill,
             goal = 20,
-            reqs = { mobXP = true, atkType = tpz.attackType.MAGICAL },
+            reqs = { mobXP = true, atkType = xi.attackType.MAGICAL },
             flags = set{"timed", "repeat"},
             reward = { sparks = 300, xp = 1500, accolades = 300, item = { 8711 } },
         },

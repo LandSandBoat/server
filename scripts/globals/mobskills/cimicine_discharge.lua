@@ -14,12 +14,12 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.SLOW
+    local typeEffect = xi.effect.SLOW
     local power = 1950
     local duration = math.random(60, 180)
 
-    if not mob:hasStatusEffect(tpz.effect.HASTE) then
-        mob:addStatusEffect(tpz.effect.HASTE, 1500, 0, duration)
+    if not mob:hasStatusEffect(xi.effect.HASTE) then
+        mob:addStatusEffect(xi.effect.HASTE, 1500, 0, duration)
     end
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
@@ -27,7 +27,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 
     --[[ Is there suppsoed to be a message about haste?
-    local typeEffect = tpz.effect.HASTE
+    local typeEffect = xi.effect.HASTE
     skill:setMsg(MobBuffMove(mob, typeEffect, 150, 0, duration))
     return typeEffect
     ]]--

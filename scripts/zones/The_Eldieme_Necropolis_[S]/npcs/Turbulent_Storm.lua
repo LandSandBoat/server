@@ -23,9 +23,9 @@ entity.onTrigger = function(player, npc)
             -- message for other nations missing
             player:startEvent(9)
         end
-    elseif (player:hasKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER) == true) then
+    elseif (player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) == true) then
         player:startEvent(8)
-    elseif (player:hasKeyItem(tpz.ki.RED_RECOMMENDATION_LETTER) == false) then
+    elseif (player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) == false) then
         player:startEvent(7)
     end
 end
@@ -35,8 +35,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 7 and option == 0) then
-        player:addKeyItem(tpz.ki.BLUE_RECOMMENDATION_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BLUE_RECOMMENDATION_LETTER)
+        player:addKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BLUE_RECOMMENDATION_LETTER)
     end
 end
 

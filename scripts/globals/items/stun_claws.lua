@@ -12,9 +12,9 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 5
 
-    if math.random(100) <= chance and applyResistanceAddEffect(player, target, tpz.magic.ele.LIGHTNING, 0) > 0.5 then
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, 3)
-        return tpz.subEffect.STUN, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.STUN
+    if math.random(100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0) > 0.5 then
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 3)
+        return xi.subEffect.STUN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.STUN
     end
 
     return 0, 0, 0

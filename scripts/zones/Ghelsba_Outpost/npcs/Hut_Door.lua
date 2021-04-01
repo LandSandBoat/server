@@ -17,8 +17,8 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.ORCISH_HUT_KEY)) then
-        if (player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.SAVE_THE_CHILDREN)) then
+    if (player:hasKeyItem(xi.ki.ORCISH_HUT_KEY)) then
+        if (player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)) then
             player:startEvent(3)
         else
             player:startEvent(55)
@@ -36,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 3 or csid == 55) then
-        player:delKeyItem(tpz.ki.ORCISH_HUT_KEY)
+        player:delKeyItem(xi.ki.ORCISH_HUT_KEY)
         player:setCharVar("MissionStatus", 4)
     else
         if (EventFinishBCNM(player, csid, option)) then

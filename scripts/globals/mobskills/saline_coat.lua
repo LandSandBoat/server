@@ -19,7 +19,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.MAGIC_DEF_BOOST
+    local typeEffect = xi.effect.MAGIC_DEF_BOOST
     skill:setMsg(MobBuffMove(mob, typeEffect, 50, 0, 60))
 
     return typeEffect

@@ -17,14 +17,14 @@ zone_object.onZoneIn = function(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-300, -1.5, -220, 62)
     end
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.DARKNESS_NAMED  and  player:getCharVar("PromathiaStatus") == 1) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED  and  player:getCharVar("PromathiaStatus") == 1) then
         cs =2
     end
     return cs
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)

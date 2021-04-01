@@ -16,8 +16,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffectEx(tpz.effect.DOUBT, tpz.effect.INTIMIDATE, 15, 0, 30)
-    return tpz.effect.INTIMIDATE
+    target:addStatusEffectEx(xi.effect.DOUBT, xi.effect.INTIMIDATE, 15, 0, 30)
+    return xi.effect.INTIMIDATE
 end
 
 return ability_object

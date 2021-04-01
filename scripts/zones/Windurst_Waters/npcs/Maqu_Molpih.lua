@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.ARAGONEU)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+    local RegionOwner = GetRegionOwner(xi.region.ARAGONEU)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.MAQUMOLPIH_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.MAQUMOLPIH_OPEN_DIALOG)
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             4505,   92,  -- Sunflower Seeds
             841,    36   -- Yagudo Feather
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 

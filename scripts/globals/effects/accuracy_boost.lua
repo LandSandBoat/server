@@ -1,12 +1,12 @@
 -----------------------------------
--- tpz.effect.ACCURACY_BOOST
+-- xi.effect.ACCURACY_BOOST
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.ACC, effect:getPower())
+    target:addMod(xi.mod.ACC, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -14,14 +14,14 @@ effect_object.onEffectTick = function(target, effect)
     local boostACC_effect_size = effect:getPower()
     if (boostACC_effect_size > 0) then
         effect:setPower(boostACC_effect_size - 1)
-        target:delMod(tpz.mod.ACC, 1)
+        target:delMod(xi.mod.ACC, 1)
     end
 end
 
 effect_object.onEffectLose = function(target, effect)
     local boostACC_effect_size = effect:getPower()
     if (boostACC_effect_size > 0) then
-        target:delMod(tpz.mod.ACC, effect:getPower())
+        target:delMod(xi.mod.ACC, effect:getPower())
     end
 end
 

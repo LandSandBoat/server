@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.OPERETTA
+-- xi.effect.OPERETTA
 -----------------------------------
 local effect_object = {}
 

@@ -17,8 +17,8 @@ local entity = {}
 --(based on above, going to assume it has regain...)
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.REGAIN, 30) -- unassisted by combat TP, will give a base of 1 wild carrot move approx every 100 sec while above 25% hp
-    mob:setMod(tpz.mod.ICERES, 150)
+    mob:setMod(xi.mod.REGAIN, 30) -- unassisted by combat TP, will give a base of 1 wild carrot move approx every 100 sec while above 25% hp
+    mob:setMod(xi.mod.ICERES, 150)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

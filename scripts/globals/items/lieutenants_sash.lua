@@ -12,8 +12,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:delStatusEffect(tpz.effect.FOOD)
-    target:delStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)
+    target:delStatusEffect(xi.effect.FOOD)
+    target:delStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)
 end
 
 return item_object

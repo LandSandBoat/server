@@ -18,7 +18,7 @@ end
 function onTrigger(player, speed)
     if not speed then
         player:PrintToPlayer(string.format("Current Speed: %u", player:getSpeed()))
-        player:PrintToPlayer(string.format("Current tpz.mod.MOVE: %u", player:getMod(tpz.mod.MOVE)))
+        player:PrintToPlayer(string.format("Current xi.mod.MOVE: %u", player:getMod(xi.mod.MOVE)))
         return
     end
 

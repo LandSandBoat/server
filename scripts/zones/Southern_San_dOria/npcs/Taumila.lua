@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(884, 3) and trade:getItemCount() == 3) then
             player:startEvent(572)
         end
@@ -24,7 +24,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local tigersTeeth = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+    local tigersTeeth = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
 
     if (player:getFameLevel(SANDORIA) >= 3 and tigersTeeth == QUEST_AVAILABLE) then
         player:startEvent(574)
@@ -44,15 +44,15 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 574 and option == 0) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
     elseif (csid == 572) then
         player:tradeComplete()
-        player:addTitle(tpz.title.FANG_FINDER)
+        player:addTitle(xi.title.FANG_FINDER)
         player:addGil(GIL_RATE*2100)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TIGER_S_TEETH)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)
         else
             player:addFame(SANDORIA, 5)
         end

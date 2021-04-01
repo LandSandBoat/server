@@ -14,8 +14,8 @@ end
 
 item_object.onItemUse = function(target)
     local duration = math.random(60, 180)
-    if (not target:hasStatusEffect(tpz.effect.SNEAK)) then
-        target:addStatusEffect(tpz.effect.SNEAK, 1, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
+    if (not target:hasStatusEffect(xi.effect.SNEAK)) then
+        target:addStatusEffect(xi.effect.SNEAK, 1, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))
     end
 end
 

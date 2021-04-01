@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
 
     local day = VanadielDayOfTheWeek()
 
-    if (day == tpz.day.LIGHTSDAY or day == tpz.day.DARKSDAY) then
+    if (day == xi.day.LIGHTSDAY or day == xi.day.DARKSDAY) then
         if (GetNPCByID(DoorOffset-1):getAnimation() == 8) then -- lamp light open ?
             GetNPCByID(DoorOffset-6):openDoor(15) -- Open Door _0rk
         end

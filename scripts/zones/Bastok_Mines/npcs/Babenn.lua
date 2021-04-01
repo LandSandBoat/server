@@ -15,12 +15,12 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 1) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_2") == 1) then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_2", 0)
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.SMILING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SMILING_STONE)
+            player:addKeyItem(xi.ki.SMILING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMILING_STONE)
         end
     end
 
@@ -28,7 +28,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR) == QUEST_ACCEPTED and player:getCharVar("EleventhsHour") == 1) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR) == QUEST_ACCEPTED and player:getCharVar("EleventhsHour") == 1) then
         player:startEvent(45)
     else
         player:startEvent(40)
@@ -47,12 +47,12 @@ entity.onEventFinish = function(player, csid, option)
 
         if (player:getFreeSlotsCount() > 1) then
             player:setCharVar("EleventhsHour", 0)
-            player:delKeyItem(tpz.ki.OLD_TOOLBOX)
-            player:addTitle(tpz.title.PURSUER_OF_THE_TRUTH)
+            player:delKeyItem(xi.ki.OLD_TOOLBOX)
+            player:addTitle(xi.title.PURSUER_OF_THE_TRUTH)
             player:addItem(16629)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16629)
             player:addFame(BASTOK, 30)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16629)
         end

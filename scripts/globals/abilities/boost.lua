@@ -14,14 +14,14 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local power = 12.5 + (0.10 * player:getMod(tpz.mod.BOOST_EFFECT))
+    local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
 
-    if (player:hasStatusEffect(tpz.effect.BOOST) == true) then
-        local effect = player:getStatusEffect(tpz.effect.BOOST)
+    if (player:hasStatusEffect(xi.effect.BOOST) == true) then
+        local effect = player:getStatusEffect(xi.effect.BOOST)
         effect:setPower(effect:getPower() + power)
-        player:addMod(tpz.mod.ATTP, power)
+        player:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(tpz.effect.BOOST, power, 1, 180)
+        player:addStatusEffect(xi.effect.BOOST, power, 1, 180)
     end
 end
 

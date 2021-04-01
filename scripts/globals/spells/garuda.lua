@@ -10,18 +10,18 @@ require("scripts/globals/status")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    if (not caster:canUseMisc(tpz.zoneMisc.PET)) then
-        return tpz.msg.basic.CANT_BE_USED_IN_AREA
+    if (not caster:canUseMisc(xi.zoneMisc.PET)) then
+        return xi.msg.basic.CANT_BE_USED_IN_AREA
     elseif (caster:hasPet()) then
-        return tpz.msg.basic.ALREADY_HAS_A_PET
-    elseif (caster:getObjType() == tpz.objType.PC) then
+        return xi.msg.basic.ALREADY_HAS_A_PET
+    elseif (caster:getObjType() == xi.objType.PC) then
         return avatarMiniFightCheck(caster)
     end
     return 0
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    tpz.pet.spawnPet(caster, tpz.pet.id.GARUDA)
+    xi.pet.spawnPet(caster, xi.pet.id.GARUDA)
     return 0
 end
 

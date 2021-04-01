@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ROUND
+-- xi.effect.ROUND
 -----------------------------------
 local effect_object = {}
 

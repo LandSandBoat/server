@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.EBULLIENCE
+-- xi.effect.EBULLIENCE
 -----------------------------------
 local effect_object = {}
 

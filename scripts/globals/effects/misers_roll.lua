@@ -1,19 +1,19 @@
 -----------------------------------
--- tpz.effect.MISERS_ROLL
+-- xi.effect.MISERS_ROLL
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.SAVETP, effect:getPower())
+    target:addMod(xi.mod.SAVETP, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.SAVETP, effect:getPower())
+    target:delMod(xi.mod.SAVETP, effect:getPower())
 end
 
 return effect_object

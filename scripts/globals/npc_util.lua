@@ -69,7 +69,7 @@ function npcUtil.popFromQM(player, qm, mobId, params)
 
     -- hide qm
     if params.hide > 0 then
-        qm:setStatus(tpz.status.DISAPPEAR)
+        qm:setStatus(xi.status.DISAPPEAR)
     end
 
     -- spawn mobs and give each a listener that will show QM after they are all dead
@@ -119,7 +119,7 @@ end
 
 --[[ *******************************************************************************
     Queue a position change for an NPC.  We do this because if you setPos() an NPC
-    immediately after you setStatus(tpz.status.DISAPPEAR) it, the QM does not hide
+    immediately after you setStatus(xi.status.DISAPPEAR) it, the QM does not hide
     on the players' screens.
 
     point may be any of the following formats:
@@ -292,9 +292,9 @@ end
     Message is displayed showing key items obtained.
 
     Examples of valid keyitems parameter:
-        tpz.ki.ZERUHN_REPORT
-        {tpz.ki.PALBOROUGH_MINES_LOGS}
-        {tpz.ki.BLUE_ACIDITY_TESTER, tpz.ki.RED_ACIDITY_TESTER}
+        xi.ki.ZERUHN_REPORT
+        { xi.ki.PALBOROUGH_MINES_LOGS}
+        { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER}
 ******************************************************************************* --]]
 function npcUtil.giveKeyItem(player, keyitems)
     local ID = zones[player:getZoneID()]
@@ -326,15 +326,15 @@ end
     Otherwise, return true.
 
     Example of usage with params (all params are optional):
-        npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ROSEL_THE_ARMORER, {
+        npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
-            ki = tpz.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
+            ki = xi.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
             fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
             gil = 200,
             xp = 1000,
-            title = tpz.title.ENTRANCE_DENIED,
+            title = xi.title.ENTRANCE_DENIED,
             var = {"foo1", "foo2"}      -- variable(s) to set to 0. string or table
         })
 ******************************************************************************* --]]
@@ -547,24 +547,24 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
     npc:timer(phaseDuration * 1000, function(npc)
         local anims =
         {
-            [tpz.anim.FISHING_NPC] = { duration = 5, nextAnim = { tpz.anim.FISHING_START } },
-            [tpz.anim.FISHING_START] = { duration = 10, nextAnim = { tpz.anim.FISHING_FISH } },
-            [tpz.anim.FISHING_FISH] = { duration = 10,
+            [ xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
+            [ xi.anim.FISHING_START] = { duration = 10, nextAnim = { xi.anim.FISHING_FISH } },
+            [ xi.anim.FISHING_FISH] = { duration = 10,
                                             nextAnim =
                                             {
-                                                tpz.anim.FISHING_CAUGHT,
-                                                tpz.anim.FISHING_ROD_BREAK,
-                                                tpz.anim.FISHING_LINE_BREAK,
+                                                 xi.anim.FISHING_CAUGHT,
+                                                 xi.anim.FISHING_ROD_BREAK,
+                                                 xi.anim.FISHING_LINE_BREAK,
                                             }
                                        },
-            [tpz.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { tpz.anim.FISHING_NPC } },
-            [tpz.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { tpz.anim.FISHING_NPC } },
-            [tpz.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { tpz.anim.FISHING_NPC } },
-            [tpz.anim.FISHING_STOP] = { duration = 3, nextAnim = { tpz.anim.FISHING_NPC } },
+            [ xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
+            [ xi.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
+            [ xi.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.anim.FISHING_NPC } },
+            [ xi.anim.FISHING_STOP] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
         }
 
         local anim = anims[npc:getAnimation()]
-        local nextAnimationId = tpz.anim.FISHING_NPC
+        local nextAnimationId = xi.anim.FISHING_NPC
         local nextAnimationDuration = 10
         local nextAnim = nil
         if anim then
@@ -594,8 +594,8 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     npc:timer(phaseDuration * 1000, function(npc)
         local anims =
         {
-            [tpz.magic.spellGroup.BLACK] = { start = "cabk", duration = 2000, stop = "shbk" },
-            [tpz.magic.spellGroup.WHITE] = { start = "cawh", duration = 1800, stop = "shwh" },
+            [ xi.magic.spellGroup.BLACK] = { start = "cabk", duration = 2000, stop = "shbk" },
+            [ xi.magic.spellGroup.WHITE] = { start = "cawh", duration = 1800, stop = "shwh" },
         }
         npc:entityAnimationPacket(anims[magicType].start)
         npc:timer(anims[magicType].duration, function(npc)

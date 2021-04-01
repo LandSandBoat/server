@@ -13,8 +13,8 @@ end
 
 item_object.onItemUse = function(target)
 
-    if (target:hasStatusEffect(tpz.effect.BLINDNESS) == true) then
-        target:delStatusEffect(tpz.effect.BLINDNESS)
+    if (target:hasStatusEffect(xi.effect.BLINDNESS) == true) then
+        target:delStatusEffect(xi.effect.BLINDNESS)
     end
 end
 

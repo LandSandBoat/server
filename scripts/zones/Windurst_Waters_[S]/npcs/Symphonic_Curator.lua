@@ -10,15 +10,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.symphonic_curator.onTrigger(player, npc)
+    xi.symphonic_curator.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.symphonic_curator.onEventUpdate(player, csid, option)
+    xi.symphonic_curator.onEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.symphonic_curator.onEventFinish(player, csid, option)
+    xi.symphonic_curator.onEventFinish(player, csid, option)
 end
 
 return entity

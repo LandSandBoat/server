@@ -19,11 +19,11 @@ entity.onTrigger = function(player, npc)
     local vanishProg = player:getCharVar("vanishingactCS")
     if player:getCharVar("deliveringTheGoodsCS") == 1 then
         player:startEvent(40)
-    elseif player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_COMPLETED and vanishProg == 1 then
+    elseif player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_COMPLETED and vanishProg == 1 then
         player:startEvent(42)
     elseif vanishProg == 2 then
         player:startEvent(54)
-    elseif vanishProg == 4 and player:hasKeyItem(tpz.ki.RAINBOW_BERRY) then
+    elseif vanishProg == 4 and player:hasKeyItem(xi.ki.RAINBOW_BERRY) then
         player:startEvent(45)
     else
         player:startEvent(51)
@@ -37,10 +37,10 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 40 then
         player:setCharVar("deliveringTheGoodsCS", 2)
     elseif csid == 42 and option == 0 then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT)
         player:setCharVar("vanishingactCS", 2)
-    elseif csid == 45 and npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.VANISHING_ACT, {item=2185, var="vanishingactCS"}) then
-        player:delKeyItem(tpz.ki.RAINBOW_BERRY)
+    elseif csid == 45 and npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT, {item=2185, var="vanishingactCS"}) then
+        player:delKeyItem(xi.ki.RAINBOW_BERRY)
     end
 end
 

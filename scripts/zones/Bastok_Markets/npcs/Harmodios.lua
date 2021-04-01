@@ -14,7 +14,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 10) then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 10) then
         player:startEvent(430)
     elseif player:getCharVar("comebackQueenCS") == 1 then
         player:startEvent(490)
@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.HARMODIOS_SHOP_DIALOG)
-        tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+        xi.shop.nation(player, stock, xi.nation.BASTOK)
     end
 end
 

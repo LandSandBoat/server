@@ -14,17 +14,17 @@ local spell_object = {}
 local message_page_offset = 14
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return tpz.trust.canCast(caster, spell)
+    return xi.trust.canCast(caster, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
 
     -- Records of Eminence: Alter Ego: Valaineral
     if caster:getEminenceProgress(933) then
-        tpz.roe.onRecordTrigger(caster, 933)
+        xi.roe.onRecordTrigger(caster, 933)
     end
 
-    return tpz.trust.spawn(caster, spell)
+    return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
@@ -32,27 +32,27 @@ spell_object.onMobSpawn = function(mob)
         Summon: With your courage and valor, Altana's children will live to see a brighter day.
         Summon (Formerly): Let the Royal Family’s blade be seared forever into their memories!
     ]]
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.SPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.SPAWN)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_HAS_TOP_ENMITY, 0,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.PROVOKE)
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
 
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, tpz.effect.FLASH,
-                        ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.FLASH)
+    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.FLASH,
+                        ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, tpz.effect.SENTINEL,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.SENTINEL)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SENTINEL,
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL)
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 50,
-                        ai.r.MA, ai.s.HIGHEST, tpz.magic.spellFamily.CURE)
+                        ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
 end
 
 spell_object.onMobDespawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

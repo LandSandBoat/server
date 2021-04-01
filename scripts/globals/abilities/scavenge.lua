@@ -37,7 +37,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
     else
 
-        local bonuses = (player:getMod(tpz.mod.SCAVENGE_EFFECT)  + player:getMerit(tpz.merit.SCAVENGE_EFFECT) ) / 100
+        local bonuses = (player:getMod(xi.mod.SCAVENGE_EFFECT)  + player:getMerit(xi.merit.SCAVENGE_EFFECT) ) / 100
         local arrowsToReturn = math.floor(math.floor(player:getLocalVar("ArrowsUsed")  % 10000) * (player:getMainLvl() / 200 + bonuses))
         local playerID = target:getID()
 

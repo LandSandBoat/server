@@ -10,15 +10,15 @@ local spell_object = {}
 local message_page_offset = 121
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return tpz.trust.canCast(caster, spell)
+    return xi.trust.canCast(caster, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return tpz.trust.spawn(caster, spell)
+    return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.SPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.SPAWN)
 
     -- "Prefers to open skillchains. Will remember the last weapon skill used by the party leader
     -- and will open the highest-tier skillchain possible. Will not open skillchains for other
@@ -27,11 +27,11 @@ spell_object.onMobSpawn = function(mob)
 end
 
 spell_object.onMobDespawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

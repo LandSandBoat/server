@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     npc:openDoor(3) -- lever animation
-    RunElevator(tpz.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
+    RunElevator(xi.elevator.DAVOI_LIFT) -- elevator @450 (actual npc script is _454)
 end
 
 entity.onEventUpdate = function(player, csid, option)

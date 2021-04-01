@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local sharpeningTheSwordStat = player:getCharVar("sharpeningTheSwordCS")
 
     if sharpeningTheSwordStat == 3 and player:getCharVar("PolevikKilled") == 1 then
-        npcUtil.giveKeyItem(player, tpz.ki.ORDELLE_WHETSTONE)
+        npcUtil.giveKeyItem(player, xi.ki.ORDELLE_WHETSTONE)
         player:setCharVar("PolevikKilled", 0)
         player:setCharVar("sharpeningTheSwordCS", 4)
     elseif sharpeningTheSwordStat == 3 and npcUtil.popFromQM(player, npc, ID.mob.POLEVIK, {hide = 0}) then

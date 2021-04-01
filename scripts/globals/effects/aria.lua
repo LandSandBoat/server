@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ARIA
+-- xi.effect.ARIA
 -----------------------------------
 local effect_object = {}
 

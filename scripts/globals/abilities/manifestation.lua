@@ -20,16 +20,16 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.MANIFESTATION) then
-        return tpz.msg.basic.EFFECT_ALREADY_ACTIVE, 0
+    if player:hasStatusEffect(xi.effect.MANIFESTATION) then
+        return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
     return 0, 0
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.MANIFESTATION, 1, 0, 60)
+    player:addStatusEffect(xi.effect.MANIFESTATION, 1, 0, 60)
 
-    return tpz.effect.MANIFESTATION
+    return xi.effect.MANIFESTATION
 end
 
 return ability_object

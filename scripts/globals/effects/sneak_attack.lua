@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SNEAK_ATTACK
+-- xi.effect.SNEAK_ATTACK
 -----------------------------------
 local effect_object = {}
 

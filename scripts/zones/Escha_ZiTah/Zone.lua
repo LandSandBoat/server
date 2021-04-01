@@ -18,7 +18,7 @@ zone_object.onZoneIn = function(player, prevZone)
         -- player:setPos(x, y, z, rot)
     end
 
-    if player:getCurrentMission(ROV) == tpz.mission.id.rov.EDDIES_OF_DESPAIR_I then
+    if player:getCurrentMission(ROV) == xi.mission.id.rov.EDDIES_OF_DESPAIR_I then
         cs = 1
     end
 
@@ -36,8 +36,8 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.EDDIES_OF_DESPAIR_I)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.A_LAND_AFTER_TIME)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.EDDIES_OF_DESPAIR_I)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.A_LAND_AFTER_TIME)
     end
 end
 

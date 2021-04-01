@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and player:getCharVar("recollectionsQuest") == 2) then
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and player:getCharVar("recollectionsQuest") == 2) then
         if (trade:hasItemQty(1106, 1) and trade:getItemCount() == 1) then
             player:startEvent(8, 1106)
         end
@@ -32,8 +32,8 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 8) then
         player:tradeComplete()
         player:setCharVar("recollectionsQuest", 3)
-        player:addKeyItem(tpz.ki.FOE_FINDER_MK_I)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.FOE_FINDER_MK_I)
+        player:addKeyItem(xi.ki.FOE_FINDER_MK_I)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FOE_FINDER_MK_I)
     end
 
 end

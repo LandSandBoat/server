@@ -15,14 +15,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
+    xi.chocobo.renterOnTrigger(player, eventSucceed, eventFail)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
+    xi.chocobo.renterOnEventFinish(player, csid, option, eventSucceed)
 end
 
 return entity

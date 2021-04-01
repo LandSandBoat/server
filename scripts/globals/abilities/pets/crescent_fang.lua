@@ -19,13 +19,13 @@ ability_object.onPetAbility = function(target, pet, skill)
 
     local totaldamage = 0
     local damage = AvatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, 0, TP_NO_EFFECT, 1, 2, 3)
-    totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING, numhits)
+    totaldamage = AvatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, numhits)
 
     if (damage.hitslanded > 0) then
-        target:addStatusEffect(tpz.effect.PARALYSIS, 22.5, 0, 90)
+        target:addStatusEffect(xi.effect.PARALYSIS, 22.5, 0, 90)
     end
 
-    target:takeDamage(totaldamage, pet, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
+    target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     target:updateEnmityFromDamage(pet, totaldamage)
 
     return totaldamage

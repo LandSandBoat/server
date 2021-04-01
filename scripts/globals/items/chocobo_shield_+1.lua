@@ -9,7 +9,7 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     if target:getFreeSlotsCount() == 0 then
-        return tpz.msg.basic.ITEM_NO_USE_INVENTORY
+        return xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
     return 0
 end

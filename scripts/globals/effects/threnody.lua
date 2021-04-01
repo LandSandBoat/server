@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.THRENODY
+-- xi.effect.THRENODY
 -- Reduces a targets given elemental resistance
 -----------------------------------
 local effect_object = {}

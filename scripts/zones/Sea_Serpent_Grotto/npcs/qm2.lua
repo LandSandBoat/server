@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.SEA_SERPENT_STATUE) then
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE) then
         player:startEvent(1)
     end
 end
@@ -23,8 +23,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 1 then
-        player:addKeyItem(tpz.ki.SEA_SERPENT_STATUE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SEA_SERPENT_STATUE)
+        player:addKeyItem(xi.ki.SEA_SERPENT_STATUE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEA_SERPENT_STATUE)
     end
 end
 

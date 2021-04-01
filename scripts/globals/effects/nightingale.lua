@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.NIGHTINGALE
+-- xi.effect.NIGHTINGALE
 -----------------------------------
 local effect_object = {}
 

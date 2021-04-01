@@ -14,22 +14,22 @@ end
 
 item_object.onItemUse = function(target)
 
-    if (target:hasStatusEffect(tpz.effect.SILENCE) == true) then
-        target:delStatusEffect(tpz.effect.SILENCE)
+    if (target:hasStatusEffect(xi.effect.SILENCE) == true) then
+        target:delStatusEffect(xi.effect.SILENCE)
     end
-    if (target:hasStatusEffect(tpz.effect.BLINDNESS) == true) then
-        target:delStatusEffect(tpz.effect.BLINDNESS)
+    if (target:hasStatusEffect(xi.effect.BLINDNESS) == true) then
+        target:delStatusEffect(xi.effect.BLINDNESS)
     end
-    if (target:hasStatusEffect(tpz.effect.POISON) == true) then
-        target:delStatusEffect(tpz.effect.POISON)
+    if (target:hasStatusEffect(xi.effect.POISON) == true) then
+        target:delStatusEffect(xi.effect.POISON)
     end
-    if (target:hasStatusEffect(tpz.effect.PARALYSIS) == true) then
-        target:delStatusEffect(tpz.effect.PARALYSIS)
+    if (target:hasStatusEffect(xi.effect.PARALYSIS) == true) then
+        target:delStatusEffect(xi.effect.PARALYSIS)
     end
 
     local rDisease = math.random(1, 2) -- Disease is not garunteed to be cured, 1 means removed 2 means fail. 50% chance
-    if (rDisease == 1 and target:hasStatusEffect(tpz.effect.DISEASE) == true) then
-        target:delStatusEffect(tpz.effect.DISEASE)
+    if (rDisease == 1 and target:hasStatusEffect(xi.effect.DISEASE) == true) then
+        target:delStatusEffect(xi.effect.DISEASE)
     end
 end
 

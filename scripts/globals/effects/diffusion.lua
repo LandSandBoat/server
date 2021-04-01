@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DIFFUSION
+-- xi.effect.DIFFUSION
 -----------------------------------
 local effect_object = {}
 

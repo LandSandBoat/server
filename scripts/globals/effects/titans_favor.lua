@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TITANS_FAVOR
+-- xi.effect.TITANS_FAVOR
 -----------------------------------
 local effect_object = {}
 

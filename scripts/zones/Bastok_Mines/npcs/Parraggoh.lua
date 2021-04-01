@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local BeautyAndTheGalka = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
-    local theEleventhsHour = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+    local BeautyAndTheGalka = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+    local theEleventhsHour = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
 
-    if player:hasKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS) then
+    if player:hasKeyItem(xi.ki.PALBOROUGH_MINES_LOGS) then
         player:startEvent(10)
     elseif BeautyAndTheGalka == QUEST_ACCEPTED then
         if math.random(2) == 1 then
@@ -43,12 +43,12 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 7 and option == 0 then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
     elseif csid == 10 then
         if player:getFreeSlotsCount() >= 1 then
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BEAUTY_AND_THE_GALKA)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BEAUTY_AND_THE_GALKA)
             player:setCharVar("BeautyAndTheGalkaDenied", 0)
-            player:delKeyItem(tpz.ki.PALBOROUGH_MINES_LOGS)
+            player:delKeyItem(xi.ki.PALBOROUGH_MINES_LOGS)
             player:addFame(BASTOK, 75)
             player:addItem(16465)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 16465)

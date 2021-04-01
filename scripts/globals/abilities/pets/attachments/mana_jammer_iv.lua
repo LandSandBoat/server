@@ -11,7 +11,7 @@ attachment_object.onEquip = function(pet)
 end
 
 attachment_object.onUnequip = function(pet)
-    updateModPerformance(pet, tpz.mod.MDEF, 'mana_jammer_iv_mod', 0)
+    updateModPerformance(pet, xi.mod.MDEF, 'mana_jammer_iv_mod', 0)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)
@@ -24,13 +24,13 @@ end
 
 attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers == 0 then
-        updateModPerformance(pet, tpz.mod.MDEF, 'mana_jammer_iv_mod', 40)
+        updateModPerformance(pet, xi.mod.MDEF, 'mana_jammer_iv_mod', 40)
     elseif maneuvers == 1 then
-        updateModPerformance(pet, tpz.mod.MDEF, 'mana_jammer_iv_mod', 50)
+        updateModPerformance(pet, xi.mod.MDEF, 'mana_jammer_iv_mod', 50)
     elseif maneuvers == 2 then
-        updateModPerformance(pet, tpz.mod.MDEF, 'mana_jammer_iv_mod', 60)
+        updateModPerformance(pet, xi.mod.MDEF, 'mana_jammer_iv_mod', 60)
     elseif maneuvers == 3 then
-        updateModPerformance(pet, tpz.mod.MDEF, 'mana_jammer_iv_mod', 70)
+        updateModPerformance(pet, xi.mod.MDEF, 'mana_jammer_iv_mod', 70)
     end
 end
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LIBRA
+-- xi.effect.LIBRA
 -----------------------------------
 local effect_object = {}
 

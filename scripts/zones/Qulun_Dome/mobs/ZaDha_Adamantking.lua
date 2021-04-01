@@ -11,7 +11,7 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -19,11 +19,11 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.SLOW, {power = 3000})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, {power = 3000})
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.ADAMANTKING_USURPER)
+    player:addTitle(xi.title.ADAMANTKING_USURPER)
     if isKiller then
         mob:showText(mob, ID.text.QUADAV_KING_DEATH)
     end

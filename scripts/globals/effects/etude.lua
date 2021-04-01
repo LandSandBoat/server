@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ETUDE
+-- xi.effect.ETUDE
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")

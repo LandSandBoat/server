@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(540)
     elseif gotItAllProg == 7 then
         player:startEvent(535)
-    elseif player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED then
         player:startEvent(530)
     end
 end

@@ -14,9 +14,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local WildcatBastok = player:getCharVar("WildcatBastok")
-    local StampHunt = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.STAMP_HUNT)
+    local StampHunt = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.STAMP_HUNT)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 14)) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 14)) then
         player:startEvent(431)
     elseif (StampHunt == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("StampHunt_Mask"), 2)) then
         player:startEvent(227)

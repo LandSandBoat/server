@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local notmeanttobe = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
+    local notmeanttobe = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
     local notMeantToBeProg = player:getCharVar("notmeanttobeCS")
     if (notmeanttobe == QUEST_AVAILABLE) then
         player:startEvent(293)
@@ -37,7 +37,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 293) then
         player:setCharVar("notmeanttobeCS", 1)
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
     elseif (csid == 294) then
         player:setCharVar("notmeanttobeCS", 3)
     elseif (csid == 297) then
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("notmeanttobeCS", 0)
             player:addItem(2187, 3)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2187, 3)
-            player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
+            player:completeQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NOT_MEANT_TO_BE)
         end
     end
 end

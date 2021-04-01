@@ -1,7 +1,7 @@
 --[[
 https://ffxiclopedia.fandom.com/wiki/Category:Crawlers
 
-Eruca mobs can optionally be modified by calling tpz.mix.eruca.config(mob, params) from within onMobSpawn.
+Eruca mobs can optionally be modified by calling xi.mix.eruca.config(mob, params) from within onMobSpawn.
 
 params is a table that can contain the following keys:
     sleepHour : changes hour at which eruca crawlers naturally fall asleep (default: 18)
@@ -9,7 +9,7 @@ params is a table that can contain the following keys:
 
 Example:
 
-tpz.mix.eruca.config(mob, {
+ xi.mix.eruca.config(mob, {
     sleepHour = 20,
     wakeHour = 4,
 })
@@ -20,29 +20,29 @@ require("scripts/globals/status")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.mix = tpz.mix or {}
-tpz.mix.eruca = tpz.mix.eruca or {}
+ xi.mix = xi.mix or {}
+ xi.mix.eruca = xi.mix.eruca or {}
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function bedTime(mob)
     mob:setAnimationSub(mob:getAnimationSub() + 1)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
-    mob:setMobMod(tpz.mobMod.NO_AGGRO, 1)
-    mob:setMobMod(tpz.mobMod.NO_LINK, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
+    mob:setMobMod(xi.mobMod.NO_LINK, 1)
     mob:setLocalVar("ResleepTime", 0)
 end
 
 local function wakeUp(mob)
     mob:setAnimationSub(mob:getAnimationSub() - 1)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 0)
-    mob:setMobMod(tpz.mobMod.NO_AGGRO, 0)
-    mob:setMobMod(tpz.mobMod.NO_LINK, 0)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
+    mob:setMobMod(xi.mobMod.NO_LINK, 0)
     mob:setLocalVar("ResleepTime", 0)
 end
 
-tpz.mix.eruca.config = function(mob, params)
+ xi.mix.eruca.config = function(mob, params)
     if params.sleepHour and type(params.sleepHour) == "number" then
         mob:setLocalVar("[eruca]sleepHour", params.sleepHour)
     end
@@ -52,7 +52,7 @@ tpz.mix.eruca.config = function(mob, params)
 end
 
 g_mixins.families.eruca = function(mob)
-    -- these defaults can be overwritten by using tpz.mix.eruca.config() in onMobSpawn.  sleepHour must be > wakeHour to function properly.
+    -- these defaults can be overwritten by using xi.mix.eruca.config() in onMobSpawn.  sleepHour must be > wakeHour to function properly.
     mob:addListener("SPAWN", "ERUCA_SPAWN", function(mob)
         mob:setLocalVar("[eruca]sleepHour", 18)
         mob:setLocalVar("[eruca]wakeHour", 6)
@@ -75,10 +75,10 @@ g_mixins.families.eruca = function(mob)
         elseif subAnimation == 1 and currentHour < sleepHour and currentHour >= mob:getLocalVar("[eruca]wakeHour") then
             wakeUp(mob)
         end
-        if VanadielDayElement() == tpz.day.FIRESDAY and mob:getMod(tpz.mod.REGAIN) == 0 then
-            mob:setMod(tpz.mod.REGAIN, 30)
-        elseif VanadielDayElement() ~= tpz.day.FIRESDAY and mob:getMod(tpz.mod.REGAIN) ~= 0 then
-            mob:setMod(tpz.mod.REGAIN, 0)
+        if VanadielDayElement() == xi.day.FIRESDAY and mob:getMod(xi.mod.REGAIN) == 0 then
+            mob:setMod(xi.mod.REGAIN, 30)
+        elseif VanadielDayElement() ~= xi.day.FIRESDAY and mob:getMod(xi.mod.REGAIN) ~= 0 then
+            mob:setMod(xi.mod.REGAIN, 0)
         end
     end)
 

@@ -21,44 +21,44 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 4271)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 4271)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.HP, 17)
-    target:addMod(tpz.mod.STR, 3)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.AGI, 1)
-    target:addMod(tpz.mod.FOOD_ATTP, 20)
-    target:addMod(tpz.mod.FOOD_ATT_CAP, 45)
-    target:addMod(tpz.mod.FOOD_RATTP, 30)
-    target:addMod(tpz.mod.FOOD_RATT_CAP, 45)
-    target:addMod(tpz.mod.HPHEAL, 2)
-    target:addMod(tpz.mod.MPHEAL, 2)
-    target:addMod(tpz.mod.ACC, 5)
-    target:addMod(tpz.mod.PARALYZERES, 4)
+    target:addMod(xi.mod.HP, 17)
+    target:addMod(xi.mod.STR, 3)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.AGI, 1)
+    target:addMod(xi.mod.FOOD_ATTP, 20)
+    target:addMod(xi.mod.FOOD_ATT_CAP, 45)
+    target:addMod(xi.mod.FOOD_RATTP, 30)
+    target:addMod(xi.mod.FOOD_RATT_CAP, 45)
+    target:addMod(xi.mod.HPHEAL, 2)
+    target:addMod(xi.mod.MPHEAL, 2)
+    target:addMod(xi.mod.ACC, 5)
+    target:addMod(xi.mod.PARALYZERES, 4)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.HP, 17)
-    target:delMod(tpz.mod.STR, 3)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.AGI, 1)
-    target:delMod(tpz.mod.FOOD_ATTP, 20)
-    target:delMod(tpz.mod.FOOD_ATT_CAP, 45)
-    target:delMod(tpz.mod.FOOD_RATTP, 30)
-    target:delMod(tpz.mod.FOOD_RATT_CAP, 45)
-    target:delMod(tpz.mod.HPHEAL, 2)
-    target:delMod(tpz.mod.MPHEAL, 2)
-    target:delMod(tpz.mod.ACC, 5)
-    target:delMod(tpz.mod.PARALYZERES, 4)
+    target:delMod(xi.mod.HP, 17)
+    target:delMod(xi.mod.STR, 3)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.AGI, 1)
+    target:delMod(xi.mod.FOOD_ATTP, 20)
+    target:delMod(xi.mod.FOOD_ATT_CAP, 45)
+    target:delMod(xi.mod.FOOD_RATTP, 30)
+    target:delMod(xi.mod.FOOD_RATT_CAP, 45)
+    target:delMod(xi.mod.HPHEAL, 2)
+    target:delMod(xi.mod.MPHEAL, 2)
+    target:delMod(xi.mod.ACC, 5)
+    target:delMod(xi.mod.PARALYZERES, 4)
 end
 
 return item_object

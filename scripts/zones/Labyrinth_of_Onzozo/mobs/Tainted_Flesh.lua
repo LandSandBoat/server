@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.HELLION_PH, 5, math.random(7200, 14400)) -- 2 to 4 hours
+    xi.mob.phOnDespawn(mob, ID.mob.HELLION_PH, 5, math.random(7200, 14400)) -- 2 to 4 hours
 end
 
 return entity

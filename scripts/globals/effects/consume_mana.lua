@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CONSUME_MANA
+-- xi.effect.CONSUME_MANA
 -----------------------------------
 local effect_object = {}
 

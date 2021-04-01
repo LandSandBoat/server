@@ -36,7 +36,7 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SERKET)
     GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -50,7 +50,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -59,12 +59,12 @@ zone_object.onRegionEnter = function(player, region)
     local gateId = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet)  -- the ID of the related gate
 
     -- if all levers are down, open gate for 30 seconds
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + regionId):setAnimation(tpz.anim.OPEN_DOOR)
+    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + regionId):setAnimation(xi.anim.OPEN_DOOR)
     if (
-        GetNPCByID(gateId + 1):getAnimation() == tpz.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 2):getAnimation() == tpz.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 3):getAnimation() == tpz.anim.OPEN_DOOR and
-        GetNPCByID(gateId + 4):getAnimation() == tpz.anim.OPEN_DOOR
+        GetNPCByID(gateId + 1):getAnimation() == xi.anim.OPEN_DOOR and
+        GetNPCByID(gateId + 2):getAnimation() == xi.anim.OPEN_DOOR and
+        GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
+        GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
     ) then
         player:messageSpecial(ID.text.BANISHING_GATES + leverSet)
         GetNPCByID(gateId):openDoor(30)
@@ -73,7 +73,7 @@ zone_object.onRegionEnter = function(player, region)
 end
 
 zone_object.onRegionLeave = function(player, region)
-    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + region:GetRegionID()):setAnimation(tpz.anim.CLOSE_DOOR)
+    GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + region:GetRegionID()):setAnimation(xi.anim.CLOSE_DOOR)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)

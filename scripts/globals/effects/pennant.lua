@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PENNANT
+-- xi.effect.PENNANT
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -16,7 +16,7 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     if (target:getPet()) then
-        target:getPet():delStatusEffect(tpz.effect.PENNANT)
+        target:getPet():delStatusEffect(xi.effect.PENNANT)
     end
 end
 

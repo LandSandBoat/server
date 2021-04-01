@@ -12,8 +12,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.PERIQIA_ASSAULT_ORDERS) then
-        player:messageSpecial(ID.text.CANNOT_LEAVE, tpz.ki.PERIQIA_ASSAULT_ORDERS)
+    if player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) then
+        player:messageSpecial(ID.text.CANNOT_LEAVE, xi.ki.PERIQIA_ASSAULT_ORDERS)
     elseif player:getZPos() <= -79.1 and player:getZPos() >= -82 then
         player:messageSpecial(ID.text.STAGING_POINT_DVUCCA)
         player:messageSpecial(ID.text.IMPERIAL_CONTROL)

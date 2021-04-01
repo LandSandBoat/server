@@ -1,19 +1,19 @@
 -----------------------------------
--- tpz.effect.REFRESH
+-- xi.effect.REFRESH
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.REFRESH, effect:getPower())
+    target:addMod(xi.mod.REFRESH, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.REFRESH, effect:getPower())
+    target:delMod(xi.mod.REFRESH, effect:getPower())
 end
 
 return effect_object

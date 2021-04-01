@@ -14,10 +14,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    for i = tpz.slot.MAIN, tpz.slot.BACK do
+    for i = xi.slot.MAIN, xi.slot.BACK do
         target:unequipItem(i)
     end
-    skill:setMsg(tpz.msg.basic.NONE)
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 

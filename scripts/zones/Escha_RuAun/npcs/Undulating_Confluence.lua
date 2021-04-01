@@ -19,7 +19,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 1 and option == 1 then
-        tpz.teleport.to(player, tpz.teleport.id.MISAREAUX_CONFLUENCE)
+        xi.teleport.to(player, xi.teleport.id.MISAREAUX_CONFLUENCE)
     end
 end
 

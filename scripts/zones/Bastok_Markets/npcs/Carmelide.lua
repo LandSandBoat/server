@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.CARMELIDE_SHOP_DIALOG)
-    tpz.shop.nation(player, stock, tpz.nation.BASTOK)
+    xi.shop.nation(player, stock, xi.nation.BASTOK)
 end
 
 return entity

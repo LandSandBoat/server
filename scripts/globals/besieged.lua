@@ -10,10 +10,10 @@ require("scripts/globals/teleports")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.besieged = tpz.besieged or {}
+ xi.besieged = xi.besieged or {}
 
-tpz.besieged.onTrigger = function(player, npc, eventBase)
-    local mercRank = tpz.besieged.getMercenaryRank(player)
+ xi.besieged.onTrigger = function(player, npc, eventBase)
+    local mercRank = xi.besieged.getMercenaryRank(player)
     if mercRank == 0 then
         player:startEvent(eventBase + 1, npc)
     else
@@ -22,15 +22,15 @@ tpz.besieged.onTrigger = function(player, npc, eventBase)
     end
 end
 
-tpz.besieged.onEventUpdate = function(player, csid, option)
+ xi.besieged.onEventUpdate = function(player, csid, option)
     local itemId = getISPItem(option)
     if itemId and option < 0x40000000 then
         local maps = getMapBitmask(player)
-        player:updateEvent(player:getCurrency("imperial_standing"), maps, tpz.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
+        player:updateEvent(player:getCurrency("imperial_standing"), maps, xi.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
     end
 end
 
-tpz.besieged.onEventFinish = function(player, csid, option)
+ xi.besieged.onEventFinish = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     if option == 0 or option == 16 or option == 32 or option == 48 then
         -- Sanction
@@ -38,14 +38,14 @@ tpz.besieged.onEventFinish = function(player, csid, option)
             player:delCurrency("imperial_standing", 100)
         end
 
-        player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
+        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
         local duration = getSanctionDuration(player)
         local subPower = 0 -- getImperialDefenseStats()
-        player:addStatusEffect(tpz.effect.SANCTION, option / 16, 0, duration, subPower)
+        player:addStatusEffect(xi.effect.SANCTION, option / 16, 0, duration, subPower)
         player:messageSpecial(ID.text.SANCTION)
     elseif bit.band(option, 0xFF) == 17 then
         -- Player bought a map
-        local ki = tpz.ki.MAP_OF_MAMOOK + bit.rshift(option, 8)
+        local ki = xi.ki.MAP_OF_MAMOOK + bit.rshift(option, 8)
         npcUtil.giveKeyItem(player, ki)
         player:delCurrency("imperial_standing", 1000)
     elseif option < 0x40000000 then
@@ -69,20 +69,20 @@ PERIQIA_ASSAULT_POINT = 3
 ILRUSI_ASSAULT_POINT = 4
 NYZUL_ISLE_ASSAULT_POINT = 5
 
-tpz.besieged.addRunicPortal = function(player, portal)
-    player:addTeleport(tpz.teleport.type.RUNIC_PORTAL, portal)
+ xi.besieged.addRunicPortal = function(player, portal)
+    player:addTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
 end
 
-tpz.besieged.hasRunicPortal = function(player, portal)
-    return player:hasTeleport(tpz.teleport.type.RUNIC_PORTAL, portal)
+ xi.besieged.hasRunicPortal = function(player, portal)
+    return player:hasTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
 end
 
-tpz.besieged.hasAssaultOrders = function(player)
+ xi.besieged.hasAssaultOrders = function(player)
     local event = 0
     local keyitem = 0
 
     for i = 0, 4 do
-        local ki = tpz.ki.LEUJAOAM_ASSAULT_ORDERS + i
+        local ki = xi.ki.LEUJAOAM_ASSAULT_ORDERS + i
         if player:hasKeyItem(ki) then
             event = 120 + i
             keyitem = ki
@@ -94,16 +94,16 @@ tpz.besieged.hasAssaultOrders = function(player)
 end
 
 -- TODO: Implement Astral Candescence
-tpz.besieged.getAstralCandescence = function()
+ xi.besieged.getAstralCandescence = function()
     return 1 -- Hardcoded to 1 for now
 end
 
-tpz.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
+ xi.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
 
-tpz.besieged.getMercenaryRank = function(player)
+ xi.besieged.getMercenaryRank = function(player)
     local rank = 0
 
-    for _, v in ipairs(tpz.besieged.badges) do
+    for _, v in ipairs(xi.besieged.badges) do
         if player:hasKeyItem(v) then
             rank = rank + 1
         end
@@ -127,10 +127,10 @@ function getRecommendedAssaultLevel(assaultid)
 end
 
 function getMapBitmask(player)
-    local mamook = player:hasKeyItem(tpz.ki.MAP_OF_MAMOOK) and 1 or 0 -- Map of Mammok
-    local halvung = player:hasKeyItem(tpz.ki.MAP_OF_HALVUNG) and 2 or 0 -- Map of Halvung
-    local arrapago = player:hasKeyItem(tpz.ki.MAP_OF_ARRAPAGO_REEF) and 4 or 0 -- Map of Arrapago Reef
-    local astral = bit.lshift(tpz.besieged.getAstralCandescence(), 31) -- Include astral candescence in the top byte
+    local mamook = player:hasKeyItem(xi.ki.MAP_OF_MAMOOK) and 1 or 0 -- Map of Mammok
+    local halvung = player:hasKeyItem(xi.ki.MAP_OF_HALVUNG) and 2 or 0 -- Map of Halvung
+    local arrapago = player:hasKeyItem(xi.ki.MAP_OF_ARRAPAGO_REEF) and 4 or 0 -- Map of Arrapago Reef
+    local astral = bit.lshift(xi.besieged.getAstralCandescence(), 31) -- Include astral candescence in the top byte
 
     return bit.bor(mamook, halvung, arrapago, astral)
 end
@@ -146,9 +146,9 @@ end
 -- I decided to use the formula duration (with AC) = 3 hours + (mercenary rank - 1) * 20 minutes.
 -----------------------------------
 function getSanctionDuration(player)
-    local duration = 10800 + 1200 * (tpz.besieged.getMercenaryRank(player) - 1)
+    local duration = 10800 + 1200 * (xi.besieged.getMercenaryRank(player) - 1)
 
-    if tpz.besieged.getAstralCandescence() == 0 then
+    if xi.besieged.getAstralCandescence() == 0 then
         duration = duration / 2
     end
 

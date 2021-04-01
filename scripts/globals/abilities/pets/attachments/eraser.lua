@@ -6,22 +6,22 @@ require("scripts/globals/status")
 local attachment_object = {}
 
 local removable = {
-    tpz.effect.PETRIFICATION,
-    tpz.effect.SILENCE,
-    tpz.effect.BANE,
-    tpz.effect.CURSE_II,
-    tpz.effect.CURSE_I,
-    tpz.effect.PARALYSIS,
-    tpz.effect.PLAGUE,
-    tpz.effect.POISON,
-    tpz.effect.DISEASE,
-    tpz.effect.BLINDNESS
+    xi.effect.PETRIFICATION,
+    xi.effect.SILENCE,
+    xi.effect.BANE,
+    xi.effect.CURSE_II,
+    xi.effect.CURSE_I,
+    xi.effect.PARALYSIS,
+    xi.effect.PLAGUE,
+    xi.effect.POISON,
+    xi.effect.DISEASE,
+    xi.effect.BLINDNESS
 }
 
 attachment_object.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_ERASER", function(automaton, target)
         local master = automaton:getMaster()
-        if not automaton:hasRecast(tpz.recast.ABILITY, 2021) and master and master:countEffect(tpz.effect.LIGHT_MANEUVER) > 0 then
+        if not automaton:hasRecast(xi.recast.ABILITY, 2021) and master and master:countEffect(xi.effect.LIGHT_MANEUVER) > 0 then
             local erasetarget = false
 
             local function checkEffects(entity)
@@ -31,9 +31,9 @@ attachment_object.onEquip = function(pet)
                 return false
             end
 
-            if automaton:hasStatusEffectByFlag(tpz.effectFlag.ERASABLE) or checkEffects(automaton) then
+            if automaton:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or checkEffects(automaton) then
                 erasetarget = automaton
-            elseif (automaton:checkDistance(master) - master:getModelSize()) < 7 and (master:hasStatusEffectByFlag(tpz.effectFlag.ERASABLE) or checkEffects(master)) then
+            elseif (automaton:checkDistance(master) - master:getModelSize()) < 7 and (master:hasStatusEffectByFlag(xi.effectFlag.ERASABLE) or checkEffects(master)) then
                 erasetarget = master
             end
 

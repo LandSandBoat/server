@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.MERIPHATAUD_MOUNTAINS_S] =
+zones[ xi.zone.MERIPHATAUD_MOUNTAINS_S] =
 {
     text =
     {
@@ -35,4 +35,4 @@ zones[tpz.zone.MERIPHATAUD_MOUNTAINS_S] =
     },
 }
 
-return zones[tpz.zone.MERIPHATAUD_MOUNTAINS_S]
+return zones[ xi.zone.MERIPHATAUD_MOUNTAINS_S]

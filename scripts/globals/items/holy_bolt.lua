@@ -19,17 +19,17 @@ item_object.onAdditionalEffect = function(player, target, damage)
     if (math.random(0, 99) >= chance) then
         return 0, 0, 0
     else
-        local dmg = player:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
+        local dmg = player:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
         if (dmg > 40) then
             dmg = dmg+(dmg-40)/2
         end
         local params = {}
         params.bonusmab = 0
         params.includemab = false
-        dmg = addBonusesAbility(player, tpz.magic.ele.LIGHT, target, dmg, params)
-        dmg = adjustForTarget(target, dmg, tpz.magic.ele.LIGHT)
-        dmg = finalMagicNonSpellAdjustments(player, target, tpz.magic.ele.LIGHT, dmg)
-        return tpz.subEffect.LIGHT_DAMAGE, tpz.msg.basic.ADD_EFFECT_DMG, dmg
+        dmg = addBonusesAbility(player, xi.magic.ele.LIGHT, target, dmg, params)
+        dmg = adjustForTarget(target, dmg, xi.magic.ele.LIGHT)
+        dmg = finalMagicNonSpellAdjustments(player, target, xi.magic.ele.LIGHT, dmg)
+        return xi.subEffect.LIGHT_DAMAGE, xi.msg.basic.ADD_EFFECT_DMG, dmg
     end
 end
 

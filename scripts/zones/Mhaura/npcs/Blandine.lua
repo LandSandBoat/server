@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local X = player:getXPos(); Z = player:getZPos()
-    local TheSandCharm = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM)
+    local TheSandCharm = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM)
 
     if (Z <= 29 or Z >= 38 or X <= 16 or X >= 32) then
         if (player:getFameLevel(WINDURST) >= 4 and TheSandCharm == QUEST_AVAILABLE) then
@@ -36,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 125) then
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.THE_SAND_CHARM)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM)
         player:setCharVar("theSandCharmVar", 1)
     elseif (csid == 124) then
         player:setCharVar("theSandCharmVar", 3)

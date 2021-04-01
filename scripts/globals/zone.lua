@@ -9,7 +9,7 @@ require('scripts/globals/settings')
 
 tpz = tpz or {}
 
-tpz.zoneType =
+ xi.zoneType =
 {
     NONE           = 0,
     CITY           = 1,
@@ -20,7 +20,7 @@ tpz.zoneType =
     INSTANCED      = 6,
 }
 
-tpz.continent =
+ xi.continent =
 {
     THE_MIDDLE_LANDS        = 1,
     THE_ARADJIAH_CONTINENT  = 2,
@@ -28,7 +28,7 @@ tpz.continent =
     OTHER_AREAS             = 4,
 }
 
-tpz.region =
+ xi.region =
 {
     RONFAURE         = 0,
     ZULKHEIM         = 1,
@@ -79,7 +79,7 @@ tpz.region =
     UNKNOWN          = 255,
 }
 
-tpz.nation =
+ xi.nation =
 {
     SANDORIA = 0,
     BASTOK   = 1,
@@ -88,7 +88,7 @@ tpz.nation =
     OTHER    = 4,
 }
 
-tpz.alliedNation =
+ xi.alliedNation =
 {
     NONE     = 0,
     SANDORIA = 1,
@@ -96,7 +96,7 @@ tpz.alliedNation =
     WINDURST = 3,
 }
 
-tpz.zone =
+ xi.zone =
 {
     UNKNOWN                         = 0,
     PHANAUET_CHANNEL                = 1,
@@ -397,30 +397,30 @@ tpz.zone =
     MAX_ZONE                        = 299
 }
 
-tpz.expansionRegion = tpz.expansionRegion or {}
-tpz.expansionRegion.ORIGINAL_ROTZ =
+ xi.expansionRegion = xi.expansionRegion or {}
+ xi.expansionRegion.ORIGINAL_ROTZ =
 {
-    [tpz.region.RONFAURE]        = true,
-    [tpz.region.ZULKHEIM]        = true,
-    [tpz.region.NORVALLEN]       = true,
-    [tpz.region.GUSTABERG]       = true,
-    [tpz.region.DERFLAND]        = true,
-    [tpz.region.SARUTABARUTA]    = true,
-    [tpz.region.KOLSHUSHU]       = true,
-    [tpz.region.ARAGONEU]        = true,
-    [tpz.region.FAUREGANDI]      = true,
-    [tpz.region.VALDEAUNIA]      = true,
-    [tpz.region.QUFIMISLAND]     = true,
-    [tpz.region.LITELOR]         = true,
-    [tpz.region.KUZOTZ]          = true,
-    [tpz.region.VOLLBOW]         = true,
-    [tpz.region.ELSHIMOLOWLANDS] = true,
-    [tpz.region.ELSHIMOUPLANDS]  = true,
-    [tpz.region.SANDORIA]        = true,
-    [tpz.region.BASTOK]          = true,
-    [tpz.region.WINDURST]        = true,
-    [tpz.region.JEUNO]           = true,
-    [tpz.region.DYNAMIS]         = true
+    [ xi.region.RONFAURE]        = true,
+    [ xi.region.ZULKHEIM]        = true,
+    [ xi.region.NORVALLEN]       = true,
+    [ xi.region.GUSTABERG]       = true,
+    [ xi.region.DERFLAND]        = true,
+    [ xi.region.SARUTABARUTA]    = true,
+    [ xi.region.KOLSHUSHU]       = true,
+    [ xi.region.ARAGONEU]        = true,
+    [ xi.region.FAUREGANDI]      = true,
+    [ xi.region.VALDEAUNIA]      = true,
+    [ xi.region.QUFIMISLAND]     = true,
+    [ xi.region.LITELOR]         = true,
+    [ xi.region.KUZOTZ]          = true,
+    [ xi.region.VOLLBOW]         = true,
+    [ xi.region.ELSHIMOLOWLANDS] = true,
+    [ xi.region.ELSHIMOUPLANDS]  = true,
+    [ xi.region.SANDORIA]        = true,
+    [ xi.region.BASTOK]          = true,
+    [ xi.region.WINDURST]        = true,
+    [ xi.region.JEUNO]           = true,
+    [ xi.region.DYNAMIS]         = true
 }
 
 -----------------------------------

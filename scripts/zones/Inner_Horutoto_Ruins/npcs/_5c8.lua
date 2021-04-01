@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     elseif player:getZPos() >= -15 then
         player:messageSpecial(ID.text.PORTAL_NOT_OPEN_THAT_SIDE)
     else
-        if player:hasKeyItem(tpz.ki.PORTAL_CHARM) then
+        if player:hasKeyItem(xi.ki.PORTAL_CHARM) then
             GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE):openDoor(30)
             GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 1):openDoor(30)
             GetNPCByID(ID.npc.PORTAL_CIRCLE_BASE + 2):openDoor(30)

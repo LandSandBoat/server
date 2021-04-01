@@ -12,7 +12,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local typeEffect = tpz.effect.TERROR
+    local typeEffect = xi.effect.TERROR
     local duration = 90
     local ID = zones[target:getZoneID()]
 
@@ -20,7 +20,7 @@ item_object.onItemUse = function(target)
     target:getID() == ID.mob.ATORI_TUTORI_QM[2] or target:getID() == ID.mob.ATORI_TUTORI_QM[3]) then
         target:addStatusEffect(typeEffect,1,3,duration)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

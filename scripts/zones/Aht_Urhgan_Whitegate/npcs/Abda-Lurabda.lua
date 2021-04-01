@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getMainJob() == tpz.job.PUP then
+    if player:getMainJob() == xi.job.PUP then
         player:startEvent(648, 0, 9800, player:getGil())
     else
         player:startEvent(257)
@@ -28,7 +28,7 @@ entity.onEventFinish = function(player, csid, option)
         player:delGil(9800)
         local page = bit.band(option, 0xF)
         local val = bit.rshift(bit.band(option, 0xFFFFF0), 4)
-        player:setPetName(tpz.pet.type.AUTOMATON, 86 + val + page * 32)
+        player:setPetName(xi.pet.type.AUTOMATON, 86 + val + page * 32)
         player:messageSpecial(ID.text.AUTOMATON_RENAME)
     end
 end

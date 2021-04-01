@@ -8,7 +8,7 @@ require("scripts/globals/missions")
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
-    tpz.battlefield.onBattlefieldTick(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
@@ -22,11 +22,11 @@ battlefield_object.onBattlefieldEnter = function(player, battlefield)
 end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
-    if leavecode == tpz.battlefield.leaveCode.WON then
+    if leavecode == xi.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:getCurrentMission(COP) ~= tpz.mission.id.cop.ONE_TO_BE_FEARED or player:getCharVar("PromathiaStatus") ~= 2) and 1 or 0
+        local arg8 = (player:getCurrentMission(COP) ~= xi.mission.id.cop.ONE_TO_BE_FEARED or player:getCharVar("PromathiaStatus") ~= 2) and 1 or 0
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
-    elseif leavecode == tpz.battlefield.leaveCode.LOST then
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
 end
@@ -36,9 +36,9 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getCurrentMission(COP) == tpz.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 2 then
-            player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.ONE_TO_BE_FEARED)
-            player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.CHAINS_AND_BONDS)
+        if player:getCurrentMission(COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and player:getCharVar("PromathiaStatus") == 2 then
+            player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.ONE_TO_BE_FEARED)
+            player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.CHAINS_AND_BONDS)
             player:setCharVar("PromathiaStatus", 0)
         end
         player:addExp(1500)

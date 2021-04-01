@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MIKAGE
+-- xi.effect.MIKAGE
 -----------------------------------
 local effect_object = {}
 

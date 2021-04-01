@@ -10,13 +10,13 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCurrentMission(COP) >= tpz.mission.id.cop.THREE_PATHS and npcUtil.tradeHas(trade, 1725) then
+    if player:getCurrentMission(COP) >= xi.mission.id.cop.THREE_PATHS and npcUtil.tradeHas(trade, 1725) then
         player:startEvent(32)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 7 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 7 then
         player:startEvent(34)
     else
         if math.random() < 0.5 then -- this isn't retail at all.

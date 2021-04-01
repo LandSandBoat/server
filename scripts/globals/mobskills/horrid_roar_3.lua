@@ -10,11 +10,11 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:hasStatusEffect(tpz.effect.MIGHTY_STRIKES)) then
+    if (mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
         return 1
-    elseif (mob:hasStatusEffect(tpz.effect.INVINCIBLE)) then
+    elseif (mob:hasStatusEffect(xi.effect.INVINCIBLE)) then
         return 1
-    elseif (mob:hasStatusEffect(tpz.effect.BLOOD_WEAPON)) then
+    elseif (mob:hasStatusEffect(xi.effect.BLOOD_WEAPON)) then
         return 1
     elseif (target:isBehind(mob, 48) == true) then
         return 1
@@ -25,13 +25,13 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dispel =  target:dispelAllStatusEffect(bit.bor(tpz.effectFlag.DISPELABLE, tpz.effectFlag.FOOD))
+    local dispel =  target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
     if (dispel == 0) then
         -- no effect
-        skill:setMsg(tpz.msg.basic.SKILL_NO_EFFECT) -- no effect
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     else
-        skill:setMsg(tpz.msg.basic.DISAPPEAR_NUM)
+        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
     end
 
     mob:lowerEnmity(target, 70)

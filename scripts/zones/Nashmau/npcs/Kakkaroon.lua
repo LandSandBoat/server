@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ratrace = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
+    local ratrace = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
     local ratRaceProg = player:getCharVar("ratraceCS")
     if (ratrace == QUEST_AVAILABLE) then
         player:startEvent(308)
@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 308) then
         player:setCharVar("ratraceCS", 1)
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
     elseif (csid == 312) then
         if (player:getFreeSlotsCount() <= 2) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINEDX, 2187, 2)
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2187, 2)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2186, 2)
             player:messageSpecial(ID.text.ITEM_OBTAINEDX, 2185, 3)
-            player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE)
+            player:completeQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
         end
     end
 end

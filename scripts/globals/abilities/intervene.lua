@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(tpz.effect.INTERVENE, 7, 0, 30)
+    target:addStatusEffect(xi.effect.INTERVENE, 7, 0, 30)
 end
 
 return ability_object

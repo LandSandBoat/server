@@ -17,8 +17,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local duration = 30 + player:getMod(tpz.mod.RAMPART_DURATION)
-    target:addStatusEffect(tpz.effect.RAMPART, 25, 0, duration)
+    local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
+    target:addStatusEffect(xi.effect.RAMPART, 25, 0, duration)
 end
 
 return ability_object

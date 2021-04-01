@@ -17,7 +17,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.EVASION_BOOST
+    local typeEffect = xi.effect.EVASION_BOOST
 
     skill:setMsg(MobBuffMove(mob, typeEffect, 20, 0, 120))
 

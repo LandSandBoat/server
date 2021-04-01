@@ -10,7 +10,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local effect = tpz.effect.ENSTONE
+    local effect = xi.effect.ENSTONE
     doEnspell(target, target, nil, effect)
 end
 

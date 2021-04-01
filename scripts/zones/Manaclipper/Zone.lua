@@ -16,7 +16,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    tpz.manaclipper.onZoneIn(player)
+    xi.manaclipper.onZoneIn(player)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(0, -3, -8, 60)
@@ -30,7 +30,7 @@ zone_object.onTransportEvent = function(player, transport)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
@@ -38,7 +38,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        player:setPos(0, 0, 0, 0, tpz.zone.BIBIKI_BAY)
+        player:setPos(0, 0, 0, 0, xi.zone.BIBIKI_BAY)
     end
 end
 

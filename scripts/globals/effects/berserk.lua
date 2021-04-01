@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BERSERK
+-- xi.effect.BERSERK
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -7,9 +7,9 @@ local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    target:addMod(tpz.mod.ATTP, power)
-    target:addMod(tpz.mod.RATTP, power)
-    target:addMod(tpz.mod.DEFP, -power)
+    target:addMod(xi.mod.ATTP, power)
+    target:addMod(xi.mod.RATTP, power)
+    target:addMod(xi.mod.DEFP, -power)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -17,9 +17,9 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower()
-    target:delMod(tpz.mod.ATTP, power)
-    target:delMod(tpz.mod.RATTP, power)
-    target:delMod(tpz.mod.DEFP, -power)
+    target:delMod(xi.mod.ATTP, power)
+    target:delMod(xi.mod.RATTP, power)
+    target:delMod(xi.mod.DEFP, -power)
 end
 
 return effect_object

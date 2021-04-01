@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.TACTICAL_SWITCH
+-- xi.effect.TACTICAL_SWITCH
 -----------------------------------
 local effect_object = {}
 

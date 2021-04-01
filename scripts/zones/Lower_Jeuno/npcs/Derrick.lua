@@ -21,8 +21,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    AirshipKI = player:hasKeyItem(tpz.ki.AIRSHIP_PASS)
-    saveTheClockTower = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
+    AirshipKI = player:hasKeyItem(xi.ki.AIRSHIP_PASS)
+    saveTheClockTower = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     NPCNumber = player:getCharVar("saveTheClockTowerVar") -- Quest step & number of npc
     AgreeSignPetition = player:getCharVar("saveTheClockTowerVar2") -- Sum of all NPC
 
@@ -45,7 +45,7 @@ entity.onEventUpdate = function(player, csid, option)
 
     if (csid == 230 and option == 10) then
         if (player:delGil(500000)) then
-            player:addKeyItem(tpz.ki.AIRSHIP_PASS)
+            player:addKeyItem(xi.ki.AIRSHIP_PASS)
             player:updateEvent(0, 1)
         else
             player:updateEvent(0, 0)
@@ -57,8 +57,8 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 230 and option == 10) then
-        if (player:hasKeyItem(tpz.ki.AIRSHIP_PASS) == true) then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.AIRSHIP_PASS)
+        if (player:hasKeyItem(xi.ki.AIRSHIP_PASS) == true) then
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS)
         end
     elseif (csid == 230 and option == 20) then
         if (player:getFreeSlotsCount() == 0) then
@@ -91,10 +91,10 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("saveTheClockTowerVar", 0)
         player:setCharVar("saveTheClockTowerNPCz1", 0)
         player:setCharVar("saveTheClockTowerNPCz2", 0)
-        player:addTitle(tpz.title.CLOCK_TOWER_PRESERVATIONIST)
+        player:addTitle(xi.title.CLOCK_TOWER_PRESERVATIONIST)
         player:addFame(JEUNO, 30)
         player:tradeComplete(trade)
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_THE_CLOCK_TOWER)
     end
 end
 

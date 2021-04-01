@@ -15,9 +15,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local guildSkillId = tpz.skill.WOODWORKING
-    local stock = tpz.shop.generalGuildStock[guildSkillId]
-    tpz.shop.generalGuild(player, stock, guildSkillId)
+    local guildSkillId = xi.skill.WOODWORKING
+    local stock = xi.shop.generalGuildStock[guildSkillId]
+    xi.shop.generalGuild(player, stock, guildSkillId)
     player:showText(npc, ID.text.CAUZERISTE_SHOP_DIALOG)
 end
 

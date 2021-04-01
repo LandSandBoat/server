@@ -20,10 +20,10 @@ entity.onTrigger = function(player, npc)
     local npcid = npc:getID()
     local event = nil
 
-    if player:getCurrentMission(TOAU) == tpz.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
+    if player:getCurrentMission(TOAU) == xi.mission.id.toau.IMMORTAL_SENTRIES and player:getCharVar("AhtUrganStatus") == 1 then
         event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 121 or 122
-    elseif player:getCurrentMission(TOAU) > tpz.mission.id.toau.IMMORTAL_SENTRIES then
-        if tpz.besieged.hasRunicPortal(player, tpz.teleport.runic_portal.NYZUL) then
+    elseif player:getCurrentMission(TOAU) > xi.mission.id.toau.IMMORTAL_SENTRIES then
+        if xi.besieged.hasRunicPortal(player, xi.teleport.runic_portal.NYZUL) then
             event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 117 or 118
         else
             event = npcid == ID.npc.RUNIC_PORTAL_NORTH and 121 or 122
@@ -43,9 +43,9 @@ end
 entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         if csid == 121 or csid == 122 then
-            tpz.besieged.addRunicPortal(player, tpz.teleport.runic_portal.NYZUL)
+            xi.besieged.addRunicPortal(player, xi.teleport.runic_portal.NYZUL)
         end
-        tpz.teleport.toChamberOfPassage(player)
+        xi.teleport.toChamberOfPassage(player)
     end
 end
 

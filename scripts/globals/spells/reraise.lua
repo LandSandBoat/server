@@ -11,9 +11,9 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     --duration = 1800
-    target:addStatusEffect(tpz.effect.RERAISE, 1, 0, 3600) --reraise 1, 30min duration
+    target:addStatusEffect(xi.effect.RERAISE, 1, 0, 3600) --reraise 1, 30min duration
 
-    return tpz.effect.RERAISE
+    return xi.effect.RERAISE
 end
 
 return spell_object

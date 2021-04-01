@@ -24,7 +24,7 @@ item_object.onAdditionalEffect = function(player, target, damage)
         target:addTP(-TpDrain)
         player:addTP(TpDrain)
 
-        return tpz.subEffect.TP_DRAIN, tpz.msg.basic.ADD_EFFECT_TP_DRAIN, TpDrain
+        return xi.subEffect.TP_DRAIN, xi.msg.basic.ADD_EFFECT_TP_DRAIN, TpDrain
     end
 end
 

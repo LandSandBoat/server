@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.COLURE_ACTIVE
+-- xi.effect.COLURE_ACTIVE
 -----------------------------------
 local effect_object = {}
 

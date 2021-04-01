@@ -13,10 +13,10 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = tpz.jsa.BLOOD_WEAPON, hpp = math.random(20, 50)},
+            {id = xi.jsa.BLOOD_WEAPON, hpp = math.random(20, 50)},
         },
     })
     local battlefield = mob:getBattlefield()

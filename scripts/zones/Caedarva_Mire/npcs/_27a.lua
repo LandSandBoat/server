@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.CYAN_DEEP_SALT)) then
+    if (player:hasKeyItem(xi.ki.CYAN_DEEP_SALT)) then
         player:startEvent(304)
     else
         player:startEvent(306)
@@ -26,7 +26,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 304 and option == 1) then
-        player:delKeyItem(tpz.ki.CYAN_DEEP_SALT)
+        player:delKeyItem(xi.ki.CYAN_DEEP_SALT)
     end
 
 end

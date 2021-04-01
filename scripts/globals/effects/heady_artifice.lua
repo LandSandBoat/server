@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HEADY_ARTIFICE
+-- xi.effect.HEADY_ARTIFICE
 -----------------------------------
 local effect_object = {}
 

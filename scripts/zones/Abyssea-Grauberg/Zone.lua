@@ -10,7 +10,7 @@ require("scripts/globals/helm")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -20,7 +20,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-555, 31, -760, 0)
     end
 
-    if player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED and player:getCharVar("1stTimeAbyssea") == 0 then
+    if player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS) == QUEST_ACCEPTED and player:getCharVar("1stTimeAbyssea") == 0 then
         player:setCharVar("1stTimeAbyssea", 1)
     end
 

@@ -14,9 +14,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and player:getCharVar("MissionStatus") == 1) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and player:getCharVar("MissionStatus") == 1) then
         player:showText(npc, ID.text.SAMA_GOHJIMA_PREDIALOG)
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and player:getCharVar("MissionStatus") ~= 1) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and player:getCharVar("MissionStatus") ~= 1) then
         player:messageSpecial(ID.text.SAMA_GOHJIMA_POSTDIALOG)
     else
         player:startEvent(43)

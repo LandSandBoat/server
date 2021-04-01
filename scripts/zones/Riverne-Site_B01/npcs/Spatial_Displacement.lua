@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 32003 then
         EventFinishBCNM(player, csid, option)
         if ENABLE_COP_ZONE_CAP == 1 and option == 4 then
-            player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, 50, 0, 0)
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     end
 end

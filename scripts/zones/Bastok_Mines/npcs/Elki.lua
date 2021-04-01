@@ -17,11 +17,11 @@ end
 entity.onTrigger = function(player, npc)
 
 Fame = player:getFameLevel(BASTOK)
-Hearts = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
+Hearts = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
 HeartsVar = player:getCharVar("HeartsOfMythril")
-Elevenths = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+Elevenths = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
 EleventhsVar = player:getCharVar("EleventhsHour")
-HasToolbox = player:hasKeyItem(tpz.ki.OLD_TOOLBOX)
+HasToolbox = player:hasKeyItem(xi.ki.OLD_TOOLBOX)
 
     if (Hearts == QUEST_AVAILABLE) then
         player:startEvent(41)
@@ -45,23 +45,23 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 41 and option == 0) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
-        player:addKeyItem(tpz.ki.BOUQUETS_FOR_THE_PIONEERS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOUQUETS_FOR_THE_PIONEERS)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
+        player:addKeyItem(xi.ki.BOUQUETS_FOR_THE_PIONEERS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOUQUETS_FOR_THE_PIONEERS)
     elseif (csid == 42) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12840)
         else
-            player:addTitle(tpz.title.PURSUER_OF_THE_PAST)
+            player:addTitle(xi.title.PURSUER_OF_THE_PAST)
             player:addItem(12840)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12840)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.HEARTS_OF_MYTHRIL)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
             player:addFame(BASTOK, 80)
             player:setCharVar("HeartsOfMythril", 0)
             player:needToZone(true)
         end
     elseif (csid == 43 and option == 1) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
     elseif (csid == 44) then
         player:setCharVar("EleventhsHour", 1)
     end

@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.KOLSHUSHU)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+    local RegionOwner = GetRegionOwner(xi.region.KOLSHUSHU)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.AHYEEKIH_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.AHYEEKIH_OPEN_DIALOG)
@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
             614,     72,  -- Mhaura Garlic
             4445,    40   -- Yagudo Cherry
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 

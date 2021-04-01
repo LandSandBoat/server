@@ -15,7 +15,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.ENBLIZZARD
+    local typeEffect = xi.effect.ENBLIZZARD
     skill:setMsg(MobBuffMove(mob, typeEffect, 65, 0, 60))
     return typeEffect
 end

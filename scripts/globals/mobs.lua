@@ -11,7 +11,7 @@ require("scripts/globals/msg")
 -----------------------------------
 
 tpz = tpz or {}
-tpz.mob = tpz.mob or {}
+ xi.mob = xi.mob or {}
 
 -- onMobDeathEx is called from the core
 function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
@@ -19,8 +19,8 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     if isKiller then
         -- DRK quest - Blade Of Darkness
         if
-            (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
-            player:getEquipID(tpz.slot.MAIN) == 16607 and
+            (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
+            player:getEquipID(xi.slot.MAIN) == 16607 and
             player:getCharVar("ChaosbringerKills") < 200 and
             not isWeaponSkillKill
         then
@@ -29,16 +29,16 @@ function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
     end
 
     -- Things that happen to any player in the party/alliance
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.A_TESTING_TIME then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.A_TESTING_TIME then
         if
-            (player:getZoneID() == tpz.zone.BUBURIMU_PENINSULA and player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME)) or
-            (player:getZoneID() == tpz.zone.TAHRONGI_CANYON and not player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.A_TESTING_TIME))
+            (player:getZoneID() == xi.zone.BUBURIMU_PENINSULA and player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)) or
+            (player:getZoneID() == xi.zone.TAHRONGI_CANYON and not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME))
         then
             player:addCharVar("testingTime_crea_count", 1)
         end
     end
 
-    tpz.magian.checkMagianTrial(player, {['mob'] = mob, ['triggerWs'] = false})
+    xi.magian.checkMagianTrial(player, {['mob'] = mob, ['triggerWs'] = false})
 end
 
 -----------------------------------
@@ -58,7 +58,7 @@ local function lotteryPrimed(phList)
 end
 
 -- potential lottery placeholder was killed
-tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
+ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
 
     if NM_LOTTERY_CHANCE then
@@ -107,7 +107,7 @@ end
 -- mob additional melee effects
 -----------------------------------
 
-tpz.mob.additionalEffect =
+ xi.mob.additionalEffect =
 {
     BLIND      = 0,
     CURSE      = 1,
@@ -132,247 +132,247 @@ tpz.mob.additionalEffect =
     TERROR     = 20,
     TP_DRAIN   = 21,
 }
-tpz.mob.ae = tpz.mob.additionalEffect
+ xi.mob.ae = xi.mob.additionalEffect
 
 local additionalEffects =
 {
-    [tpz.mob.ae.BLIND] =
+    [ xi.mob.ae.BLIND] =
     {
         chance = 25,
-        ele = tpz.magic.ele.DARK,
-        sub = tpz.subEffect.BLIND,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.BLIND,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.BLINDNESS,
+        eff = xi.effect.BLINDNESS,
         power = 20,
         duration = 30,
         minDuration = 1,
         maxDuration = 45,
     },
-    [tpz.mob.ae.CURSE] =
+    [ xi.mob.ae.CURSE] =
     {
         chance = 20,
-        ele = tpz.magic.ele.DARK,
-        sub = tpz.subEffect.CURSE,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.CURSE,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.CURSE_I,
+        eff = xi.effect.CURSE_I,
         power = 50,
         duration = 300,
         minDuration = 1,
         maxDuration = 300,
     },
-    [tpz.mob.ae.ENAERO] =
+    [ xi.mob.ae.ENAERO] =
     {
-        ele = tpz.magic.ele.WIND,
-        sub = tpz.subEffect.WIND_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.WIND,
+        sub = xi.subEffect.WIND_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENBLIZZARD] =
+    [ xi.mob.ae.ENBLIZZARD] =
     {
-        ele = tpz.magic.ele.ICE,
-        sub = tpz.subEffect.ICE_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.ICE,
+        sub = xi.subEffect.ICE_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENDARK] =
+    [ xi.mob.ae.ENDARK] =
     {
-        ele = tpz.magic.ele.DARK,
-        sub = tpz.subEffect.DARKNESS_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.DARKNESS_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENFIRE] =
+    [ xi.mob.ae.ENFIRE] =
     {
-        ele = tpz.magic.ele.FIRE,
-        sub = tpz.subEffect.FIRE_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.FIRE,
+        sub = xi.subEffect.FIRE_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENLIGHT] =
+    [ xi.mob.ae.ENLIGHT] =
     {
-        ele = tpz.magic.ele.LIGHT,
-        sub = tpz.subEffect.LIGHT_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.LIGHT,
+        sub = xi.subEffect.LIGHT_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENSTONE] =
+    [ xi.mob.ae.ENSTONE] =
     {
-        ele = tpz.magic.ele.EARTH,
-        sub = tpz.subEffect.EARTH_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.EARTH,
+        sub = xi.subEffect.EARTH_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENTHUNDER] =
+    [ xi.mob.ae.ENTHUNDER] =
     {
-        ele = tpz.magic.ele.LIGHTNING,
-        sub = tpz.subEffect.LIGHTNING_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.LIGHTNING,
+        sub = xi.subEffect.LIGHTNING_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.ENWATER] =
+    [ xi.mob.ae.ENWATER] =
     {
-        ele = tpz.magic.ele.WATER,
-        sub = tpz.subEffect.WATER_DAMAGE,
-        msg = tpz.msg.basic.ADD_EFFECT_DMG,
-        negMsg = tpz.msg.basic.ADD_EFFECT_HEAL,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.WATER,
+        sub = xi.subEffect.WATER_DAMAGE,
+        msg = xi.msg.basic.ADD_EFFECT_DMG,
+        negMsg = xi.msg.basic.ADD_EFFECT_HEAL,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [tpz.mob.ae.EVA_DOWN] =
+    [ xi.mob.ae.EVA_DOWN] =
     {
         chance = 25,
-        ele = tpz.magic.ele.ICE,
-        sub = tpz.subEffect.EVASION_DOWN,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.ICE,
+        sub = xi.subEffect.EVASION_DOWN,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.EVASION_DOWN,
+        eff = xi.effect.EVASION_DOWN,
         power = 25,
         duration = 30,
         minDuration = 1,
         maxDuration = 60,
     },
-    [tpz.mob.ae.HP_DRAIN] =
+    [ xi.mob.ae.HP_DRAIN] =
     {
         chance = 10,
-        ele = tpz.magic.ele.DARK,
-        sub = tpz.subEffect.HP_DRAIN,
-        msg = tpz.msg.basic.ADD_EFFECT_HP_DRAIN,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.HP_DRAIN,
+        msg = xi.msg.basic.ADD_EFFECT_HP_DRAIN,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) mob:addHP(power) end,
     },
-    [tpz.mob.ae.MP_DRAIN] =
+    [ xi.mob.ae.MP_DRAIN] =
     {
         chance = 10,
-        ele = tpz.magic.ele.DARK,
-        sub = tpz.subEffect.MP_DRAIN,
-        msg = tpz.msg.basic.ADD_EFFECT_MP_DRAIN,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.MP_DRAIN,
+        msg = xi.msg.basic.ADD_EFFECT_MP_DRAIN,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) local mp = math.min(power, target:getMP()) target:delMP(mp) mob:addMP(mp) end,
     },
-    [tpz.mob.ae.PARALYZE] =
+    [ xi.mob.ae.PARALYZE] =
     {
         chance = 25,
-        ele = tpz.magic.ele.ICE,
-        sub = tpz.subEffect.PARALYSIS,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.ICE,
+        sub = xi.subEffect.PARALYSIS,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.PARALYSIS,
+        eff = xi.effect.PARALYSIS,
         power = 20,
         duration = 30,
         minDuration = 1,
         maxDuration = 60,
     },
-    [tpz.mob.ae.PETRIFY] =
+    [ xi.mob.ae.PETRIFY] =
     {
         chance = 20,
-        ele = tpz.magic.ele.EARTH,
-        sub = tpz.subEffect.PETRIFY,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.EARTH,
+        sub = xi.subEffect.PETRIFY,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.PETRIFICATION,
+        eff = xi.effect.PETRIFICATION,
         power = 1,
         duration = 30,
         minDuration = 1,
         maxDuration = 45,
     },
-    [tpz.mob.ae.PLAGUE] =
+    [ xi.mob.ae.PLAGUE] =
     {
         chance = 25,
-        ele = tpz.magic.ele.WATER,
-        sub = tpz.subEffect.PLAGUE,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.WATER,
+        sub = xi.subEffect.PLAGUE,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.PLAGUE,
+        eff = xi.effect.PLAGUE,
         power = 1,
         duration = 60,
         minDuration = 1,
         maxDuration = 60,
     },
-    [tpz.mob.ae.POISON] =
+    [ xi.mob.ae.POISON] =
     {
         chance = 25,
-        ele = tpz.magic.ele.WATER,
-        sub = tpz.subEffect.POISON,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.WATER,
+        sub = xi.subEffect.POISON,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.POISON,
+        eff = xi.effect.POISON,
         power = 1,
         duration = 30,
         minDuration = 1,
         maxDuration = 30,
         tick = 3,
     },
-    [tpz.mob.ae.SILENCE] =
+    [ xi.mob.ae.SILENCE] =
     {
         chance = 25,
-        ele = tpz.magic.ele.WIND,
-        sub = tpz.subEffect.SILENCE,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.WIND,
+        sub = xi.subEffect.SILENCE,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.SILENCE,
+        eff = xi.effect.SILENCE,
         power = 1,
         duration = 30,
         minDuration = 1,
         maxDuration = 30,
     },
-    [tpz.mob.ae.SLOW] =
+    [ xi.mob.ae.SLOW] =
     {
         chance = 25,
-        ele = tpz.magic.ele.EARTH,
-        sub = tpz.subEffect.DEFENSE_DOWN,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.EARTH,
+        sub = xi.subEffect.DEFENSE_DOWN,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.SLOW,
+        eff = xi.effect.SLOW,
         power = 1000,
         duration = 30,
         minDuration = 1,
         maxDuration = 45,
     },
-    [tpz.mob.ae.STUN] =
+    [ xi.mob.ae.STUN] =
     {
         chance = 20,
-        ele = tpz.magic.ele.LIGHTNING,
-        sub = tpz.subEffect.STUN,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        ele = xi.magic.ele.LIGHTNING,
+        sub = xi.subEffect.STUN,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.STUN,
+        eff = xi.effect.STUN,
         duration = 5,
     },
-    [tpz.mob.ae.TERROR] =
+    [ xi.mob.ae.TERROR] =
     {
         chance = 20,
-        sub = tpz.subEffect.PARALYSIS,
-        msg = tpz.msg.basic.ADD_EFFECT_STATUS,
+        sub = xi.subEffect.PARALYSIS,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
-        eff = tpz.effect.TERROR,
+        eff = xi.effect.TERROR,
         duration = 5,
         code = function(mob, target, power) mob:resetEnmity(target) end,
     },
-    [tpz.mob.ae.TP_DRAIN] =
+    [ xi.mob.ae.TP_DRAIN] =
     {
         chance = 25,
-        ele = tpz.magic.ele.DARK,
-        sub = tpz.subEffect.TP_DRAIN,
-        msg = tpz.msg.basic.ADD_EFFECT_TP_DRAIN,
-        mod = tpz.mod.INT,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.TP_DRAIN,
+        msg = xi.msg.basic.ADD_EFFECT_TP_DRAIN,
+        mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) local tp = math.min(power, target:getTP()) target:delTP(tp) mob:addTP(tp) end,
     },
@@ -380,7 +380,7 @@ local additionalEffects =
 
 --[[
     mob, target, and damage are passed from core into mob script's onAdditionalEffect
-    effect should be of type tpz.mob.additionalEffect (see above)
+    effect should be of type xi.mob.additionalEffect (see above)
     params is a table that can contain any of:
         chance: percent chance that effect procs on hit (default 20)
         power: power of effect
@@ -388,7 +388,7 @@ local additionalEffects =
         code: additional code that will run when effect procs, of form function(mob, target, power)
     params will override effect's default settings
 --]]
-tpz.mob.onAddEffect = function(mob, target, damage, effect, params)
+ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
     if type(params) ~= "table" then params = {} end
 
     local ae = additionalEffects[effect]

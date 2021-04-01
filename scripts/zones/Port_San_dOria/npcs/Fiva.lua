@@ -12,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(tpz.region.KOLSHUSHU) ~= tpz.nation.SANDORIA then
+    if GetRegionOwner(xi.region.KOLSHUSHU) ~= xi.nation.SANDORIA then
         player:showText(npc, ID.text.FIVA_CLOSED_DIALOG)
     else
         local stock =
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.FIVA_OPEN_DIALOG)
-        tpz.shop.general(player, stock, SANDORIA)
+        xi.shop.general(player, stock, SANDORIA)
     end
 end
 

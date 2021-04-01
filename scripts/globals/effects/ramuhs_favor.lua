@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.RAMUHS_FAVOR
+-- xi.effect.RAMUHS_FAVOR
 -----------------------------------
 local effect_object = {}
 

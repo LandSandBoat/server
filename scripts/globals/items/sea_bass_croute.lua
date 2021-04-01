@@ -18,36 +18,36 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 4353)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 4353)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.FOOD_MPP, 5)
-    target:addMod(tpz.mod.FOOD_MP_CAP, 150)
-    target:addMod(tpz.mod.DEX, 4)
-    target:addMod(tpz.mod.ACC, 3)
-    target:addMod(tpz.mod.FOOD_RACCP, 6)
-    target:addMod(tpz.mod.FOOD_RACC_CAP, 20)
-    target:addMod(tpz.mod.HPHEAL, 9)
-    target:addMod(tpz.mod.MPHEAL, 2)
+    target:addMod(xi.mod.FOOD_MPP, 5)
+    target:addMod(xi.mod.FOOD_MP_CAP, 150)
+    target:addMod(xi.mod.DEX, 4)
+    target:addMod(xi.mod.ACC, 3)
+    target:addMod(xi.mod.FOOD_RACCP, 6)
+    target:addMod(xi.mod.FOOD_RACC_CAP, 20)
+    target:addMod(xi.mod.HPHEAL, 9)
+    target:addMod(xi.mod.MPHEAL, 2)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.FOOD_MPP, 5)
-    target:delMod(tpz.mod.FOOD_MP_CAP, 150)
-    target:delMod(tpz.mod.DEX, 4)
-    target:delMod(tpz.mod.ACC, 3)
-    target:delMod(tpz.mod.FOOD_RACCP, 6)
-    target:delMod(tpz.mod.FOOD_RACC_CAP, 20)
-    target:delMod(tpz.mod.HPHEAL, 9)
-    target:delMod(tpz.mod.MPHEAL, 2)
+    target:delMod(xi.mod.FOOD_MPP, 5)
+    target:delMod(xi.mod.FOOD_MP_CAP, 150)
+    target:delMod(xi.mod.DEX, 4)
+    target:delMod(xi.mod.ACC, 3)
+    target:delMod(xi.mod.FOOD_RACCP, 6)
+    target:delMod(xi.mod.FOOD_RACC_CAP, 20)
+    target:delMod(xi.mod.HPHEAL, 9)
+    target:delMod(xi.mod.MPHEAL, 2)
 end
 
 return item_object

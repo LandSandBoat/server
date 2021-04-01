@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     -- NOTE: uncertain of retailness of messages. Had expected but did not find any csid.
     if (
-        player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_HARD_DAY_S_KNIGHT) == QUEST_ACCEPTED and
         player:getCharVar("SPLINTERSPINE_GRUKJUK") <= 1 and
         not GetMobByID(ID.mob.SPLINTERSPINE_GRUKJUK):isSpawned()
     ) then

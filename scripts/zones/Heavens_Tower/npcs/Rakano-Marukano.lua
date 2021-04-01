@@ -12,13 +12,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local newNation = tpz.nation.WINDURST
+    local newNation = xi.nation.WINDURST
     local oldNation = player:getNation()
     local rank = GetNationRank(newNation)
 
     if oldNation == newNation then
         player:startEvent(10004, 0, 0, 0, oldNation)
-    elseif player:getCurrentMission(oldNation) ~= tpz.mission.id.nation.NONE or player:getCharVar("MissionStatus") ~= 0 then
+    elseif player:getCurrentMission(oldNation) ~= xi.mission.id.nation.NONE or player:getCharVar("MissionStatus") ~= 0 then
         player:startEvent(10003, 0, 0, 0, newNation)
     elseif oldNation ~= newNation then
         local hasGil = 0
@@ -45,7 +45,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 10002 and option == 1 then
-        local newNation = tpz.nation.WINDURST
+        local newNation = xi.nation.WINDURST
         local rank = GetNationRank(newNation)
         local cost = 0
 

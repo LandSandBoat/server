@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.INTENSION
+-- xi.effect.INTENSION
 -----------------------------------
 local effect_object = {}
 

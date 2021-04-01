@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FIRE_MANEUVER
+-- xi.effect.FIRE_MANEUVER
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -8,7 +8,7 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect)
     local pet = target:getPet()
     if (pet) then
-        pet:addMod(tpz.mod.STR, effect:getPower())
+        pet:addMod(xi.mod.STR, effect:getPower())
     end
 end
 
@@ -18,7 +18,7 @@ end
 effect_object.onEffectLose = function(target, effect)
     local pet = target:getPet()
     if (pet) then
-        pet:delMod(tpz.mod.STR, effect:getPower())
+        pet:delMod(xi.mod.STR, effect:getPower())
     end
 end
 

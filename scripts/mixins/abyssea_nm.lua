@@ -8,9 +8,9 @@ g_mixins = g_mixins or {}
 
 g_mixins.abyssea_nm = function(mob)
     mob:addListener("ENGAGE", "ABYSSEA_WEAKNESS_SET", function(mob)
-        mob:setLocalVar("abyssea_magic_weak", tpz.abyssea.getNewYellowWeakness(mob))
-        mob:setLocalVar("abyssea_ele_ws_weak", tpz.abyssea.getNewRedWeakness(mob))
-        mob:setLocalVar("abyssea_phys_ws_weak", tpz.abyssea.getNewBlueWeakness(mob))
+        mob:setLocalVar("abyssea_magic_weak", xi.abyssea.getNewYellowWeakness(mob))
+        mob:setLocalVar("abyssea_ele_ws_weak", xi.abyssea.getNewRedWeakness(mob))
+        mob:setLocalVar("abyssea_phys_ws_weak", xi.abyssea.getNewBlueWeakness(mob))
         mob:setLocalVar("abyssea_blue_proc_count", 0)
         mob:setLocalVar("abyssea_red_proc_count", 0)
         mob:setLocalVar("abyssea_yellow_proc_count", 0)
@@ -20,7 +20,7 @@ g_mixins.abyssea_nm = function(mob)
             if spell:getID() == target:getLocalVar("abyssea_magic_weak") then
                 --TODO: weakness trigger message
                 target:weaknessTrigger(1)
-                target:addStatusEffect(tpz.effect.SILENCE, 0, 0, 30)
+                target:addStatusEffect(xi.effect.SILENCE, 0, 0, 30)
                 target:setLocalVar("abyssea_yellow_proc_count", target:getLocalVar("abyssea_yellow_proc_count" + 1))
             else
                 --discernment
@@ -33,12 +33,12 @@ g_mixins.abyssea_nm = function(mob)
             if wsid == target:getLocalVar("abyssea_ele_ws_weak") then
                 --TODO: weakness trigger message
                 target:weaknessTrigger(2)
-                target:addStatusEffect(tpz.effect.TERROR, 0, 0, 30)
+                target:addStatusEffect(xi.effect.TERROR, 0, 0, 30)
                 target:setLocalVar("abyssea_red_proc_count", target:getLocalVar("abyssea_red_proc_count" + 1))
             elseif wsid == target:getLocalVar("abyssea_phys_ws_weak") then
                 --TODO: weakness trigger message
                 target:weaknessTrigger(0)
-                target:addStatusEffect(tpz.effect.AMNESIA, 0, 0, 30)
+                target:addStatusEffect(xi.effect.AMNESIA, 0, 0, 30)
                 target:setLocalVar("abyssea_blue_proc_count", target:getLocalVar("abyssea_blue_proc_count" + 1))
             else
                 --discernment (figure out if ws is elemental...)

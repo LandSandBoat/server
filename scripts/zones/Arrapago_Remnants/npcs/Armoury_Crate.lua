@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     else
         player:addTreasure(5374)
     end
-    GetNPCByID(npc, instance):setStatus(tpz.status.DISAPPEAR)
+    GetNPCByID(npc, instance):setStatus(xi.status.DISAPPEAR)
 end
 
 entity.onEventUpdate = function(player, csid, option)

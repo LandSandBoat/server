@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
     -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(tpz.mobMod.SKILL_LIST)
+    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     local mobhp = mob:getHPP()
     local phase = mob:getLocalVar("battlePhase")
 
@@ -28,8 +28,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffectOne = tpz.effect.ELEGY
-    local typeEffectTwo = tpz.effect.SLOW
+    local typeEffectOne = xi.effect.ELEGY
+    local typeEffectTwo = xi.effect.SLOW
 
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffectOne, 5000, 0, 120))
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffectTwo, 5000, 0, 120))

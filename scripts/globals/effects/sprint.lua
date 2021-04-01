@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SPRINT
+-- xi.effect.SPRINT
 -----------------------------------
 local effect_object = {}
 

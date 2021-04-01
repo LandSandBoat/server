@@ -12,7 +12,7 @@ battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
-    tpz.battlefield.onBattlefieldTick(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
 -- Physically entering the BCNM via bcnmEnter(bcnmid)
@@ -25,11 +25,11 @@ end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     -- print("leave code "..leavecode)
-    if leavecode == tpz.battlefield.leaveCode.WON then
+    if leavecode == xi.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
         -- player:setPos(0, 0, 0, 0, 0x00)
     end
-    if leavecode == tpz.battlefield.leaveCode.LOST then
+    if leavecode == xi.battlefield.leaveCode.LOST then
         -- SetServerVariable("[]UniqueID", 0)
     end
 end

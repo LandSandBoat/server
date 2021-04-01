@@ -13,13 +13,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local new_nation = tpz.nation.SANDORIA
+    local new_nation = xi.nation.SANDORIA
     local old_nation = player:getNation()
     local rank = GetNationRank(new_nation)
 
     if (old_nation == new_nation) then
         player:startEvent(608, 0, 0, 0, old_nation)
-    elseif (player:getCurrentMission(old_nation) ~= tpz.mission.id.nation.NONE or player:getCharVar("MissionStatus") ~= 0) then
+    elseif (player:getCurrentMission(old_nation) ~= xi.mission.id.nation.NONE or player:getCharVar("MissionStatus") ~= 0) then
         player:startEvent(607, 0, 0, 0, new_nation)
     elseif (old_nation ~= new_nation) then
         local has_gil = 0
@@ -47,7 +47,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 606 and option == 1) then
-        local new_nation = tpz.nation.SANDORIA
+        local new_nation = xi.nation.SANDORIA
         local rank = GetNationRank(new_nation)
         local cost = 0
 

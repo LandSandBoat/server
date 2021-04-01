@@ -11,7 +11,7 @@ local ability_object = {}
 ability_object.onAbilityCheck = function(player, target, ability)
     --ranged weapon/ammo: You do not have an appropriate ranged weapon equipped.
     --no card: <name> cannot perform that action.
-    if player:getWeaponSkillType(tpz.slot.RANGED) ~= tpz.skill.MARKSMANSHIP or player:getWeaponSkillType(tpz.slot.AMMO) ~= tpz.skill.MARKSMANSHIP then
+    if player:getWeaponSkillType(xi.slot.RANGED) ~= xi.skill.MARKSMANSHIP or player:getWeaponSkillType(xi.slot.AMMO) ~= xi.skill.MARKSMANSHIP then
         return 216, 0
     end
     if player:hasItem(2183, 0) or player:hasItem(2974, 0) then
@@ -23,27 +23,27 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local duration = 60
-    local bonusAcc = player:getStat(tpz.mod.AGI) / 2 + player:getMerit(tpz.merit.QUICK_DRAW_ACCURACY) + player:getMod(tpz.mod.QUICK_DRAW_MACC)
-    local resist = applyResistanceAbility(player, target, tpz.magic.ele.DARK, tpz.skill.NONE, bonusAcc)
+    local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
+    local resist = applyResistanceAbility(player, target, xi.magic.ele.DARK, xi.skill.NONE, bonusAcc)
 
     if resist < 0.25 then
-        ability:setMsg(tpz.msg.basic.JA_MISS_2) -- resist message
+        ability:setMsg(xi.msg.basic.JA_MISS_2) -- resist message
         return 0
     end
 
     duration = duration * resist
 
     local effects = {}
-    local bio = target:getStatusEffect(tpz.effect.BIO)
+    local bio = target:getStatusEffect(xi.effect.BIO)
     if bio ~= nil then
         table.insert(effects, bio)
     end
-    local blind = target:getStatusEffect(tpz.effect.BLINDNESS)
+    local blind = target:getStatusEffect(xi.effect.BLINDNESS)
     if blind ~= nil then
         table.insert(effects, blind)
     end
-    local threnody = target:getStatusEffect(tpz.effect.THRENODY)
-    if threnody ~= nil and threnody:getSubPower() == tpz.mod.LIGHTRES then
+    local threnody = target:getStatusEffect(xi.effect.THRENODY)
+    if threnody ~= nil and threnody:getSubPower() == xi.mod.LIGHTRES then
         table.insert(effects, threnody)
     end
 
@@ -65,11 +65,11 @@ ability_object.onUseAbility = function(player, target, ability)
         newEffect:setStartTime(startTime)
     end
 
-    ability:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT_2)
+    ability:setMsg(xi.msg.basic.JA_REMOVE_EFFECT_2)
     local dispelledEffect = target:dispelStatusEffect()
-    if dispelledEffect == tpz.effect.NONE then
+    if dispelledEffect == xi.effect.NONE then
         -- no effect
-        ability:setMsg(tpz.msg.basic.JA_NO_EFFECT_2)
+        ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
     local del = player:delItem(2183, 1) or player:delItem(2974, 1)

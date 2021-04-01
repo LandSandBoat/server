@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local gotitall = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
+    local gotitall = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL)
     local gotItAllProg = player:getCharVar("gotitallCS")
     local threeMenProg = player:getCharVar("threemenandaclosetCS")
     if gotitall == QUEST_AVAILABLE then
@@ -45,11 +45,11 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 520 then
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL)
         player:setCharVar("gotitallCS", 1)
     elseif csid == 525 and option == 0 then
         player:setCharVar("gotitallCS", 5)
-        player:delKeyItem(tpz.ki.VIAL_OF_LUMINOUS_WATER)
+        player:delKeyItem(xi.ki.VIAL_OF_LUMINOUS_WATER)
     elseif csid == 527 then
         player:setCharVar("gotitallCS", 7)
         player:setCharVar("Wait1DayForgotitallCS_date", getMidnight())
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 539 then
         player:setCharVar("gotitallCS", 8)
     elseif csid == 528 then
-        npcUtil.completeQuest(player, AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL, {item=18257, var={"Wait1DayForgotitallCS_date", "gotitallCS"}})
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL, {item=18257, var={"Wait1DayForgotitallCS_date", "gotitallCS"}})
     elseif csid == 843 and option == 1 then
         player:setCharVar("threemenandaclosetCS", 6)
     end

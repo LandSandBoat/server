@@ -9,7 +9,7 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
     dynamis.megaBossOnDeath(mob, player, isKiller)
-    player:addTitle(tpz.title.NIGHTMARE_AWAKENER)
+    player:addTitle(xi.title.NIGHTMARE_AWAKENER)
 end
 
 return entity

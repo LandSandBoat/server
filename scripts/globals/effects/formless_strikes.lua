@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FORMLESS_STRIKES
+-- xi.effect.FORMLESS_STRIKES
 -----------------------------------
 local effect_object = {}
 

@@ -18,18 +18,18 @@ entity.onTrigger = function(player, npc)
 
     if X < 21.6 and X > 18 and Z > -15.6 and Z < -12.4 then
         if VanadielDayOfTheYear() % 2 == 0 then
-            if brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR and npc:getAnimation() == tpz.anim.CLOSE_DOOR then
+            if brassDoor:getAnimation() == xi.anim.CLOSE_DOOR and npc:getAnimation() == xi.anim.CLOSE_DOOR then
                 npc:openDoor(8)
                 -- wait 1 second delay goes here
                 brassDoor:openDoor(6)
             end
         else
-            if trapDoor:getAnimation() == tpz.anim.CLOSE_DOOR and npc:getAnimation() == tpz.anim.CLOSE_DOOR then
+            if trapDoor:getAnimation() == xi.anim.CLOSE_DOOR and npc:getAnimation() == xi.anim.CLOSE_DOOR then
                 npc:openDoor(8)
                 -- wait 1 second delay goes here
                 trapDoor:openDoor(6)
             end
-            if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getCharVar("MissionStatus") == 3 then
+            if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getCharVar("MissionStatus") == 3 then
                 player:startEvent(43)
             end
         end

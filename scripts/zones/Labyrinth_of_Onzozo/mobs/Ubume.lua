@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED and player:getCharVar("yomiOkuriCS") <= 3 then
+    if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI) == QUEST_ACCEPTED and player:getCharVar("yomiOkuriCS") <= 3 then
         player:setCharVar("yomiOkuriKilledNM", 1)
     end
 end

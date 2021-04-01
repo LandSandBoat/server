@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local merits = player:getMerit(tpz.merit.DARK_SEAL)
-    player:addStatusEffect(tpz.effect.DARK_SEAL, merits, 0, 60)
+    local merits = player:getMerit(xi.merit.DARK_SEAL)
+    player:addStatusEffect(xi.effect.DARK_SEAL, merits, 0, 60)
 end
 
 return ability_object

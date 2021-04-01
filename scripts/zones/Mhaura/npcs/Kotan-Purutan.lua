@@ -14,17 +14,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local OvernightDelivery = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.OVERNIGHT_DELIVERY)
+    local OvernightDelivery = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.OVERNIGHT_DELIVERY)
     local KenapaOvernight = player:getCharVar("Kenapa_Overnight_var") -- Variable to track progress for Overnight Delivery
     local KenapaOvernightDay = player:getCharVar("Kenapa_Overnight_Day_var") -- Variable to track the day the quest is started.
     local KenapaOvernightHour = player:getCharVar("Kenapa_Overnight_Hour_var") -- Variable to track the hour the quest is started.
     local HourOfTheDay = VanadielHour()
 
-    if (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay < 6 or HourOfTheDay >= 18)) then
+    if (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay < 6 or HourOfTheDay >= 18)) then
         player:startEvent(141) -- Gives Key Item at correct times of night
-    elseif (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay >= 6 or HourOfTheDay < 18)) then
+    elseif (OvernightDelivery == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.SMALL_BAG) == false and (KenapaOvernight >= 4 and KenapaOvernight <= 7) and (HourOfTheDay >= 6 or HourOfTheDay < 18)) then
         player:startEvent(144) -- Only at night
-    elseif (player:hasKeyItem(tpz.ki.SMALL_BAG) == true) then
+    elseif (player:hasKeyItem(xi.ki.SMALL_BAG) == true) then
         player:startEvent(142)  -- Reminder Dialogue
     elseif (OvernightDelivery == QUEST_COMPLETED) then
         player:startEvent(143) -- Post quest
@@ -38,10 +38,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 141) then
-        player:addKeyItem(tpz.ki.SMALL_BAG)
+        player:addKeyItem(xi.ki.SMALL_BAG)
         player:setCharVar("Kenapa_Overnight_Day_var", VanadielDayOfTheYear())
         player:setCharVar("Kenapa_Overnight_Hour_var", VanadielHour())
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SMALL_BAG)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SMALL_BAG)
     end
 end
 

@@ -13,10 +13,10 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (target:hasStatusEffect(tpz.effect.REGEN)) then
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+    if (target:hasStatusEffect(xi.effect.REGEN)) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
-        target:addStatusEffect(tpz.effect.REGEN, 15, 3, 180)
+        target:addStatusEffect(xi.effect.REGEN, 15, 3, 180)
     end
 end
 

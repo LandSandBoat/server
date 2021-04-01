@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK) then
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK) then
         if (player:getCharVar("notReceivePickaxe") == 1) then
             player:startEvent(425)
         elseif (player:getCharVar("MissionStatus") == 4) then
@@ -24,13 +24,13 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(422)
         end
-    elseif (player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_BASTOK2) then
+    elseif (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) then
         if (player:getCharVar("MissionStatus") == 9) then
             player:startEvent(426)
         else
             player:startEvent(427)
         end
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK) then
         if (player:getCharVar("notReceivePickaxe") == 1) then
             player:startEvent(425, 1)
         elseif (player:getCharVar("MissionStatus") == 4) then
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(422)
         end
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
         if (player:getCharVar("MissionStatus") == 9) then
             player:startEvent(426, 1)
         else

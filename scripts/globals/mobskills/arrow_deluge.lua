@@ -13,7 +13,7 @@ require("scripts/globals/monstertpmoves")
 
 -----------------------------------
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMainJob() == tpz.job.RNG then
+    if mob:getMainJob() == xi.job.RNG then
         return 0
     else
         return 1
@@ -25,8 +25,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 2
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.RANGED, tpz.damageType.PIERCING, MOBPARAM_3_SHADOW)
-    target:takeDamage(dmg, mob, tpz.attackType.RANGED, tpz.damageType.PIERCING)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, MOBPARAM_3_SHADOW)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     return dmg
 end
 

@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    return tpz.job_utils.corsair.useWildCard(caster, target, ability, action)
+    return xi.job_utils.corsair.useWildCard(caster, target, ability, action)
 end
 
 return ability_object

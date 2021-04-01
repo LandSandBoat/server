@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MOUNTED
+-- xi.effect.MOUNTED
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -12,10 +12,10 @@ effect_object.onEffectGain = function(target, effect)
 
     if effect:getPower() == 0 then
         target:ChangeMusic(4, 212)
-        target:setAnimation(tpz.anim.CHOCOBO)
+        target:setAnimation(xi.anim.CHOCOBO)
     else
         target:ChangeMusic(4, 84)
-        target:setAnimation(tpz.anim.MOUNT)
+        target:setAnimation(xi.anim.MOUNT)
     end
 end
 
@@ -23,7 +23,7 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:setAnimation(tpz.anim.NONE)
+    target:setAnimation(xi.anim.NONE)
 end
 
 return effect_object

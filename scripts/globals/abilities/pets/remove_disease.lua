@@ -13,14 +13,14 @@ end
 
 ability_object.onUseAbility = function(pet, target, skill, action)
     local effect
-    if (target:delStatusEffect(tpz.effect.DISEASE)) then
-        skill:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT)
-        effect = tpz.effect.DISEASE
-    elseif (target:delStatusEffect(tpz.effect.PLAGUE)) then
-        skill:setMsg(tpz.msg.basic.JA_REMOVE_EFFECT)
-        effect = tpz.effect.PLAGUE
+    if (target:delStatusEffect(xi.effect.DISEASE)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        effect = xi.effect.DISEASE
+    elseif (target:delStatusEffect(xi.effect.PLAGUE)) then
+        skill:setMsg(xi.msg.basic.JA_REMOVE_EFFECT)
+        effect = xi.effect.PLAGUE
     else
-        skill:setMsg(tpz.msg.basic.JA_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.JA_NO_EFFECT)
     end
 
     return effect

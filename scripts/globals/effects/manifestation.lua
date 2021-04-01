@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MANIFESTATION
+-- xi.effect.MANIFESTATION
 -----------------------------------
 local effect_object = {}
 

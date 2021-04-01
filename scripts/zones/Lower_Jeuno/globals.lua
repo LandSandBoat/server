@@ -19,7 +19,7 @@ LOWER_JEUNO = {
             if (hour >= 20 and hour < 21) then
                 player:startEvent(lampCs, 4) -- It is too early to light it.  You must wait until nine o'clock.
             elseif (hour >= 21 or hour < 1) then
-                if (npc:getAnimation() == tpz.anim.OPEN_DOOR) then
+                if (npc:getAnimation() == xi.anim.OPEN_DOOR) then
                     player:startEvent(lampCs, 2) -- The lamp is already lit.
                 else
                     player:startEvent(lampCs, 1, lampNum) -- Light the lamp? Yes/No
@@ -29,7 +29,7 @@ LOWER_JEUNO = {
             end
 
         else
-            if (npc:getAnimation() == tpz.anim.OPEN_DOOR) then
+            if (npc:getAnimation() == xi.anim.OPEN_DOOR) then
                 player:startEvent(lampCs, 5) -- The lamp is lit.
             else
                 player:startEvent(lampCs, 6) -- You examine the lamp. It seems that it must be lit manually.
@@ -46,12 +46,12 @@ LOWER_JEUNO = {
         local lampCs = 120 + lampNum
 
         if (csid == lampCs and option == 1) then
-            GetNPCByID(lampId):setAnimation(tpz.anim.OPEN_DOOR)
+            GetNPCByID(lampId):setAnimation(xi.anim.OPEN_DOOR)
 
             local lampsRemaining = 12
             for i = 0, 11 do
                 local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
-                if (lamp:getAnimation() == tpz.anim.OPEN_DOOR) then
+                if (lamp:getAnimation() == xi.anim.OPEN_DOOR) then
                     lampsRemaining = lampsRemaining - 1
                 end
             end

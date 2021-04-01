@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     local instance = mob:getInstance()
     local players = instance:getChars()
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
 
     for i, v in pairs(players) do

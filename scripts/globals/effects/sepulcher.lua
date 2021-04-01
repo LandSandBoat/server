@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SEPULCHER
+-- xi.effect.SEPULCHER
 -----------------------------------
 local effect_object = {}
 

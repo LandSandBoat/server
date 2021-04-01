@@ -18,19 +18,19 @@ local entity = {}
 local function TrustMemory(player)
     local memories = 0
     -- 2 - LIGHTBRINGER
-    if player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.LIGHTBRINGER) then
+    if player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.LIGHTBRINGER) then
         memories = memories + 2
     end
     -- 4 - IMMORTAL_SENTRIES
-    if player:hasCompletedMission(tpz.mission.log_id.TOAU, tpz.mission.id.toau.IMMORTAL_SENTRIES) then
+    if player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) then
         memories = memories + 4
     end
     -- 8 - UNDER_OATH
-    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH) then
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH) then
         memories = memories + 8
     end
     -- 16 - FIT_FOR_A_PRINCE
-    if player:hasCompletedQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 16
     end
     -- 32 - Hero's Combat BCNM
@@ -46,20 +46,20 @@ end
 
 entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
-    local aBoysDream = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
-    local underOath = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+    local aBoysDream = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+    local underOath = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
     -- "Under Oath" (PLD AF Body)
     if player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(89)
     elseif
-        player:getMainJob() == tpz.job.PLD and mLvl >= AF2_QUEST_LEVEL and
+        player:getMainJob() == xi.job.PLD and mLvl >= AF2_QUEST_LEVEL and
         aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
 
     -- Trust: San d'Oria (Trion)
-    elseif player:getRank() >= 6 and player:hasKeyItem(tpz.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+    elseif player:getRank() >= 6 and player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
     -- "A Boy's Dream" (PLD AF Feet)
@@ -67,12 +67,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(88)
 
     -- San d'Oria Rank 10 (different default)
-    elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() == 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() == 10 then
         player:startEvent(62)
 
     -- San d'Oria Missions
-    elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local sandyMissions = tpz.mission.id.sandoria
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+        local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -83,7 +83,7 @@ entity.onTrigger = function(player, npc)
         -- San d'Oria 8-2 "Lightbringer" (optional)
         elseif
             player:getRank() == 9 and player:getRankPoints() == 0 and
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
             (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
         then
             player:startEvent(63)
@@ -104,7 +104,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(115)
@@ -112,9 +112,9 @@ entity.onTrigger = function(player, npc)
         -- San d'Oria 3-1 "Infiltrate Davoi"
         elseif currentMission == sandyMissions.INFILTRATE_DAVOI then
             if missionStatus == 4 then
-                player:startEvent(554, 0, tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
+                player:startEvent(554, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
             elseif missionStatus == 0 then
-                player:startEvent(553, 0, tpz.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
+                player:startEvent(553, 0, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
             end
 
         -- Default dialogue
@@ -143,18 +143,18 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
-            if (player:getMainJob() == tpz.job.PLD) then
-                player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+            if (player:getMainJob() == xi.job.PLD) then
+                player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
-            player:delKeyItem(tpz.ki.KNIGHTS_BOOTS)
+            player:delKeyItem(xi.ki.KNIGHTS_BOOTS)
             player:addItem(14095)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 14095) -- Gallant Leggings
             player:setCharVar("aBoysDreamCS", 0)
             player:addFame(SANDORIA, 40)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_BOY_S_DREAM)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         end
     elseif (csid == 90 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         player:setCharVar("UnderOathCS", 0)
     elseif (csid == 89) then
         if (player:getFreeSlotsCount() == 0) then
@@ -164,8 +164,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12644) -- Gallant Surcoat
             player:setCharVar("UnderOathCS", 9)
             player:addFame(SANDORIA, 60)
-            player:setTitle(tpz.title.PARAGON_OF_PALADIN_EXCELLENCE)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.UNDER_OATH)
+            player:setTitle(xi.title.PARAGON_OF_PALADIN_EXCELLENCE)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
         end
     elseif (csid == 81) then
         player:setCharVar("MissionStatus", 1)

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BARAMNESIA
+-- xi.effect.BARAMNESIA
 -----------------------------------
 local effect_object = {}
 

@@ -15,9 +15,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.ASTRAL_FLOW, 1, 0, 180)
+    player:addStatusEffect(xi.effect.ASTRAL_FLOW, 1, 0, 180)
 
-    return tpz.effect.ASTRAL_FLOW
+    return xi.effect.ASTRAL_FLOW
 end
 
 return ability_object

@@ -15,7 +15,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -27,7 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-177.804, -2.765, -37.893, 179)
     end
 
-    if (prevZone == tpz.zone.QUICKSAND_CAVES and CurrentMission == tpz.mission.id.windurst.MOON_READING and MissionStatus >= 1) then
+    if (prevZone == xi.zone.QUICKSAND_CAVES and CurrentMission == xi.mission.id.windurst.MOON_READING and MissionStatus >= 1) then
         cs = 3
     end
 
@@ -42,8 +42,8 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 3) then
-        player:addKeyItem(tpz.ki.ANCIENT_VERSE_OF_ALTEPA)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANCIENT_VERSE_OF_ALTEPA)
+        player:addKeyItem(xi.ki.ANCIENT_VERSE_OF_ALTEPA)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_VERSE_OF_ALTEPA)
     end
 end
 

@@ -14,17 +14,17 @@ end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local chance = 90
-    local damage = (automaton:getSkillLevel(tpz.skill.AUTOMATON_MELEE)/2) + automaton:getMod(tpz.mod.SHIELD_BASH)
+    local damage = (automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)/2) + automaton:getMod(xi.mod.SHIELD_BASH)
 
     damage = math.floor(damage)
 
     chance = chance + (automaton:getMainLvl() - target:getMainLvl()) * 5
 
     if math.random() * 100 < chance then
-        target:addStatusEffect(tpz.effect.STUN, 1, 0, 6)
+        target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
-    local slowPower = automaton:getMod(tpz.mod.AUTO_SHIELD_BASH_SLOW)
+    local slowPower = automaton:getMod(xi.mod.AUTO_SHIELD_BASH_SLOW)
     if slowPower > 0 then
         local duration = 20
         if slowPower == 12 then
@@ -34,11 +34,11 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         elseif slowPower == 25 then
             duration = math.random(70, 75)
         end
-        target:addStatusEffect(tpz.effect.SLOW, slowPower * 100, 0, duration)
+        target:addStatusEffect(xi.effect.SLOW, slowPower * 100, 0, duration)
     end
 
     -- randomize damage
-    local ratio = automaton:getStat(tpz.mod.ATT)/target:getStat(tpz.mod.DEF)
+    local ratio = automaton:getStat(xi.mod.ATT)/target:getStat(xi.mod.DEF)
     if ratio > 1.3 then
         ratio = 1.3
     end
@@ -51,7 +51,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
     damage = damage * (pdif / 1000)
 
     damage = utils.stoneskin(target, damage)
-    target:takeDamage(damage, automaton, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    target:takeDamage(damage, automaton, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(automaton, damage)
     target:addEnmity(automaton, 450, 900)
 

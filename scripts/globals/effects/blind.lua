@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BLIND
+-- xi.effect.BLIND
 -----------------------------------
 local effect_object = {}
 

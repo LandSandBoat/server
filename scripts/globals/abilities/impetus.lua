@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.IMPETUS, 2, 0, 180)
+    player:addStatusEffect(xi.effect.IMPETUS, 2, 0, 180)
 end
 
 return ability_object

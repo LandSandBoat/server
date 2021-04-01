@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SCHERZO
+-- xi.effect.SCHERZO
 -- TODO: MOD_CRITICAL_DAMAGE_REDUCTION
 -----------------------------------
 local effect_object = {}

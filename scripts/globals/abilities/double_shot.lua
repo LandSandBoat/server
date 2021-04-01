@@ -18,7 +18,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
     local chance = 40
 
-    player:addStatusEffect(tpz.effect.DOUBLE_SHOT, chance, 0, 90)
+    player:addStatusEffect(xi.effect.DOUBLE_SHOT, chance, 0, 90)
 end
 
 return ability_object

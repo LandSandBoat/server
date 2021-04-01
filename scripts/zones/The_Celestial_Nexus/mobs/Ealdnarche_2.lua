@@ -11,14 +11,14 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     -- 60% fast cast, -75% physical damage taken, 10tp/tick regain, no standback
-    mob:addMod(tpz.mod.UFASTCAST, 60)
-    mob:addMod(tpz.mod.UDMGPHYS, -75)
-    mob:addMod(tpz.mod.REGAIN, 100)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
+    mob:addMod(xi.mod.UFASTCAST, 60)
+    mob:addMod(xi.mod.UDMGPHYS, -75)
+    mob:addMod(xi.mod.REGAIN, 100)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(tpz.mobMod.GA_CHANCE, 25)
+    mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
     if GetMobByID(mob:getID() - 1):isDead() and GetMobByID(mob:getID() - 2):isDead() then
         mob:getBattlefield():setLocalVar("phaseChange", 0)
     end

@@ -27,16 +27,16 @@ entity.onMobDespawn = function(mob)
         switch (mob:getID()): caseof
         {
             [ID.mob.TEMENOS_C_MOB[5]+19] = function()
-                tpz.limbus.extendTimeLimit(battlefield, 5, tpz.zone.TEMENOS)
+                xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
             [ID.mob.TEMENOS_C_MOB[5]+20] = function()
-                tpz.limbus.extendTimeLimit(battlefield, 5, tpz.zone.TEMENOS)
+                xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
             [ID.mob.TEMENOS_C_MOB[5]+29] = function()
-                tpz.limbus.extendTimeLimit(battlefield, 5, tpz.zone.TEMENOS)
+                xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
             [ID.mob.TEMENOS_C_MOB[5]+30] = function()
-                tpz.limbus.extendTimeLimit(battlefield, 5, tpz.zone.TEMENOS)
+                xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.TEMENOS)
             end,
         }
         local leftAern=0

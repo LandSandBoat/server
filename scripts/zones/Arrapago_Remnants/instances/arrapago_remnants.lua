@@ -10,11 +10,11 @@ instance_object.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
     player:messageSpecial(ID.text.SALVAGE_START, 1)
-    player:addStatusEffectEx(tpz.effect.ENCUMBRANCE_I, tpz.effect.ENCUMBRANCE_I, 0xFFFF, 0, 0)
-    player:addStatusEffectEx(tpz.effect.OBLIVISCENCE, tpz.effect.OBLIVISCENCE, 0, 0, 0)
-    player:addStatusEffectEx(tpz.effect.OMERTA, tpz.effect.OMERTA, 0, 0, 0)
-    player:addStatusEffectEx(tpz.effect.IMPAIRMENT, tpz.effect.IMPAIRMENT, 0, 0, 0)
-    player:addStatusEffectEx(tpz.effect.DEBILITATION, tpz.effect.DEBILITATION, 0x1FF, 0, 0)
+    player:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, 0xFFFF, 0, 0)
+    player:addStatusEffectEx(xi.effect.OBLIVISCENCE, xi.effect.OBLIVISCENCE, 0, 0, 0)
+    player:addStatusEffectEx(xi.effect.OMERTA, xi.effect.OMERTA, 0, 0, 0)
+    player:addStatusEffectEx(xi.effect.IMPAIRMENT, xi.effect.IMPAIRMENT, 0, 0, 0)
+    player:addStatusEffectEx(xi.effect.DEBILITATION, xi.effect.DEBILITATION, 0x1FF, 0, 0)
     for i = 0, 15 do
         player:unequipItem(i)
     end
@@ -24,14 +24,14 @@ instance_object.onInstanceCreated = function(instance)
 
     for i, v in pairs(ID.npc[1][1]) do
         local npc = GetNPCByID(v, instance)
-        npc:setStatus(tpz.status.NORMAL)
+        npc:setStatus(xi.status.NORMAL)
     end
     instance:setStage(1)
     instance:setProgress(0)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    tpz.instance.updateInstanceTime(instance, elapsed, ID.text)
+    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -57,9 +57,9 @@ instance_object.onInstanceProgressUpdate = function(instance, progress, elapsed)
     if instance:getStage() == 1 and progress == 10 then
         SpawnMob(ID.mob[1][2].rampart, instance)
     elseif instance:getStage() == 2 and progress == 2 then -- attempt to spawn slot
-        GetNPCByID(ID.npc[2][2].SLOT, instance):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc[2][2].SLOT, instance):setStatus(xi.status.NORMAL)
     elseif instance:getStage() == 2 and progress == 3 then -- attempt to spawn socket
-        GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(xi.status.NORMAL)
     elseif instance:getStage() == 3 and progress == 1 then
         SpawnMob(ID.mob[2][0].astrologer, instance)
     elseif instance:getStage() == 6 and progress == 1 then

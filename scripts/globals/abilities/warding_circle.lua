@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local duration = 180 + player:getMod(tpz.mod.WARDING_CIRCLE_DURATION)
-    target:addStatusEffect(tpz.effect.WARDING_CIRCLE, 15, 0, duration)
+    local duration = 180 + player:getMod(xi.mod.WARDING_CIRCLE_DURATION)
+    target:addStatusEffect(xi.effect.WARDING_CIRCLE, 15, 0, duration)
 end
 
 return ability_object

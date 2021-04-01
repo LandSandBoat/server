@@ -8,15 +8,15 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 600)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 600)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    if mob:hasStatusEffect(tpz.effect.ENSTONE) then
+    if mob:hasStatusEffect(xi.effect.ENSTONE) then
         return 0, 0, 0
     else
-        return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN)
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
     end
 end
 

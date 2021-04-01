@@ -5,7 +5,7 @@
 -----------------------------------
 tpz = tpz or {}
 
-tpz.title =
+ xi.title =
 {
     FODDERCHIEF_FLAYER                        = 1,
     WARCHIEF_WRECKER                          = 2,
@@ -1097,7 +1097,7 @@ end
 -- public title changer functions
 -----------------------------------
 
-tpz.title.changerOnTrigger = function(player, eventId, titleInfo)
+ xi.title.changerOnTrigger = function(player, eventId, titleInfo)
     player:startEvent(
         eventId,
         titleMask(player, titleInfo[1]),
@@ -1111,7 +1111,7 @@ tpz.title.changerOnTrigger = function(player, eventId, titleInfo)
     )
 end
 
-tpz.title.changerOnEventFinish = function(player, csid, option, eventId, titleInfo)
+ xi.title.changerOnEventFinish = function(player, csid, option, eventId, titleInfo)
     if csid == eventId then
         local group = titleInfo[bit.rshift(option, 8) + 1]
         if group then

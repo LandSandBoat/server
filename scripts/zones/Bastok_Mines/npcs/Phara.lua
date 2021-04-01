@@ -19,12 +19,12 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local theDoorman = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
-    local theTalekeeperTruth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+    local theDoorman = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN)
+    local theTalekeeperTruth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
 
-    if (theDoorman == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 40) then
+    if (theDoorman == QUEST_AVAILABLE and player:getMainJob() == xi.job.WAR and player:getMainLvl() >= 40) then
         player:startEvent(151) -- Start Quests "The doorman"
-    elseif (player:hasKeyItem(tpz.ki.SWORD_GRIP_MATERIAL)) then
+    elseif (player:hasKeyItem(xi.ki.SWORD_GRIP_MATERIAL)) then
         player:startEvent(152) -- Need to wait 1 vanadiel day
     elseif (player:getCharVar("theDoormanCS") == 2 and VanadielDayOfTheYear() ~= player:getCharVar("theDoorman_time")) then
         player:startEvent(153) -- The doorman notification, go to naji
@@ -42,15 +42,15 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 151) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN)
         player:setCharVar("theDoormanCS", 1)
     elseif (csid == 152) then
         player:setCharVar("theDoorman_time", VanadielDayOfTheYear())
         player:setCharVar("theDoormanCS", 2)
-        player:delKeyItem(tpz.ki.SWORD_GRIP_MATERIAL)
+        player:delKeyItem(xi.ki.SWORD_GRIP_MATERIAL)
     elseif (csid == 153) then
-        player:addKeyItem(tpz.ki.YASINS_SWORD)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.YASINS_SWORD)
+        player:addKeyItem(xi.ki.YASINS_SWORD)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.YASINS_SWORD)
         player:setCharVar("theDoormanCS", 3)
         player:setCharVar("theDoorman_time", 0)
     elseif (csid == 154) then

@@ -22,15 +22,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:hasKeyItem(tpz.ki.MIMEO_JEWEL) == true) then
-        player:delKeyItem(tpz.ki.MIMEO_JEWEL)
-        player:messageSpecial(ID.text.KEYITEM_LOST, tpz.ki.MIMEO_JEWEL)
-        player:addKeyItem(tpz.ki.MIMEO_FEATHER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MIMEO_FEATHER)
-        player:addKeyItem(tpz.ki.SECOND_MIMEO_FEATHER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SECOND_MIMEO_FEATHER)
-        player:addKeyItem(tpz.ki.THIRD_MIMEO_FEATHER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.THIRD_MIMEO_FEATHER)
+    if (player:hasKeyItem(xi.ki.MIMEO_JEWEL) == true) then
+        player:delKeyItem(xi.ki.MIMEO_JEWEL)
+        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.MIMEO_JEWEL)
+        player:addKeyItem(xi.ki.MIMEO_FEATHER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MIMEO_FEATHER)
+        player:addKeyItem(xi.ki.SECOND_MIMEO_FEATHER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SECOND_MIMEO_FEATHER)
+        player:addKeyItem(xi.ki.THIRD_MIMEO_FEATHER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.THIRD_MIMEO_FEATHER)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

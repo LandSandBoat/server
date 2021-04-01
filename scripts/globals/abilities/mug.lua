@@ -18,7 +18,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local thfLevel
     local gil = 0
 
-    if (player:getMainJob() == tpz.job.THF) then
+    if (player:getMainJob() == xi.job.THF) then
         thfLevel = player:getMainLvl()
     else
         thfLevel = player:getSubLvl()
@@ -26,8 +26,8 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
     local mugChance = 90 + thfLevel - target:getMainLvl()
 
-    if (target:isMob() and math.random(100) < mugChance and target:getMobMod(tpz.mobMod.MUG_GIL) > 0) then
-        local purse = target:getMobMod(tpz.mobMod.MUG_GIL)
+    if (target:isMob() and math.random(100) < mugChance and target:getMobMod(xi.mobMod.MUG_GIL) > 0) then
+        local purse = target:getMobMod(xi.mobMod.MUG_GIL)
         local fatpurse = target:getGil()
         gil = fatpurse / (8 + math.random(0, 8))
         if (gil == 0) then
@@ -41,15 +41,15 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
 
         if (gil <= 0) then
-            ability:setMsg(tpz.msg.basic.MUG_FAIL)
+            ability:setMsg(xi.msg.basic.MUG_FAIL)
         else
-            gil = gil * (1 + player:getMod(tpz.mod.MUG_EFFECT))
+            gil = gil * (1 + player:getMod(xi.mod.MUG_EFFECT))
             player:addGil(gil)
-            target:setMobMod(tpz.mobMod.MUG_GIL, target:getMobMod(tpz.mobMod.MUG_GIL) - gil)
-            ability:setMsg(tpz.msg.basic.MUG_SUCCESS)
+            target:setMobMod(xi.mobMod.MUG_GIL, target:getMobMod(xi.mobMod.MUG_GIL) - gil)
+            ability:setMsg(xi.msg.basic.MUG_SUCCESS)
         end
     else
-        ability:setMsg(tpz.msg.basic.MUG_FAIL)
+        ability:setMsg(xi.msg.basic.MUG_FAIL)
         action:setAnimation(target:getID(), 184)
     end
 

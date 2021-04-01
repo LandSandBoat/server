@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PREPARATIONS
+-- xi.effect.PREPARATIONS
 -----------------------------------
 local effect_object = {}
 

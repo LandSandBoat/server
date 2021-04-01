@@ -9,18 +9,18 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMod(tpz.mod.COUNTER, 10) -- "Possesses a Counter trait"
-    mob:setMod(tpz.mod.REGEN, 25) -- "Posseses an Auto-Regen (low to moderate)"
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.COUNTER, 10) -- "Possesses a Counter trait"
+    mob:setMod(xi.mod.REGEN, 25) -- "Posseses an Auto-Regen (low to moderate)"
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(tpz.mobMod.SUPERLINK, mob:getShortID())
-    mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
-    mob:setMod(tpz.mod.UDMGPHYS, -75)
-    mob:setMod(tpz.mod.UDMGRANGE, -75)
-    mob:setMod(tpz.mod.UDMGMAGIC, 0)
-    mob:setMod(tpz.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
+    mob:setMobMod(xi.mobMod.SUPERLINK, mob:getShortID())
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setMod(xi.mod.UDMGPHYS, -75)
+    mob:setMod(xi.mod.UDMGRANGE, -75)
+    mob:setMod(xi.mod.UDMGMAGIC, 0)
+    mob:setMod(xi.mod.MOVE, 100) -- "Moves at Flee Speed in Quadrupedal stance and in the Final Form"
 end
 
 entity.onMobFight = function(mob, target)
@@ -33,22 +33,22 @@ entity.onMobFight = function(mob, target)
         currentForm = 1
         mob:setLocalVar("form", currentForm)
         formTime = os.time()
-        mob:setMod(tpz.mod.UDMGPHYS, 0)
-        mob:setMod(tpz.mod.UDMGRANGE, 0)
-        mob:setMod(tpz.mod.UDMGMAGIC, -75)
-        mob:setMod(tpz.mod.MOVE, 0)
+        mob:setMod(xi.mod.UDMGPHYS, 0)
+        mob:setMod(xi.mod.UDMGRANGE, 0)
+        mob:setMod(xi.mod.UDMGMAGIC, -75)
+        mob:setMod(xi.mod.MOVE, 0)
     end
 
     if currentForm == 1 then
         if formTime < os.time() then
             if mob:getAnimationSub() == 1 then
                 mob:setAnimationSub(2)
-                mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+                mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                 if not GetMobByID(mobID + 1):isSpawned() and math.random(0,1) == 1 then
                     mob:useMobAbility(1532)
                 end
             else
-                mob:setBehaviour(bit.bor(mob:getBehaviour(), tpz.behavior.NO_TURN))
+                mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
                 mob:setAnimationSub(1)
             end
             mob:setLocalVar("formWait", os.time() + 60)
@@ -56,13 +56,13 @@ entity.onMobFight = function(mob, target)
 
         if lifePercent < 30 then
             mob:setAnimationSub(2)
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
-            mob:setMod(tpz.mod.UDMGPHYS, -50)
-            mob:setMod(tpz.mod.UDMGRANGE, -50)
-            mob:setMod(tpz.mod.UDMGMAGIC, -50)
-            mob:setMod(tpz.mod.MOVE, 100)
-            mob:addStatusEffect(tpz.effect.REGAIN,7,3,0) -- The final form has Regain,
-            mob:getStatusEffect(tpz.effect.REGAIN):setFlag(tpz.effectFlag.DEATH)
+            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
+            mob:setMod(xi.mod.UDMGPHYS, -50)
+            mob:setMod(xi.mod.UDMGRANGE, -50)
+            mob:setMod(xi.mod.UDMGMAGIC, -50)
+            mob:setMod(xi.mod.MOVE, 100)
+            mob:addStatusEffect(xi.effect.REGAIN,7,3,0) -- The final form has Regain,
+            mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
             currentForm = 2
             mob:setLocalVar("form", currentForm)
         end
@@ -70,15 +70,15 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.STUN)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if player then
-        player:addTitle(tpz.title.APOLLYON_RAVAGER)
+        player:addTitle(xi.title.APOLLYON_RAVAGER)
     end
     if isKiller or noKiller then
-        GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.NORMAL)
     end
 end
 

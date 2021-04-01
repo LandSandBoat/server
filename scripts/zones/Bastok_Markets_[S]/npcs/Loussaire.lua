@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
 
     local mLvl          = player:getMainLvl()
     local mJob          = player:getMainJob()
-    local downwardHelix = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DOWNWARD_HELIX)
+    local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
     -- Controls the progress of each step. Everything will start at 1 and end at 4 (complete).
     local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
@@ -43,24 +43,24 @@ entity.onTrigger = function(player, npc)
         then
 
             local itemid   = 14580 -- Scholar's Gown
-            local FristKI  = tpz.ki.PEISTE_DUNG
-            local SecondKI = tpz.ki.SAMPLE_OF_GRAUBERG_CHERT
+            local FristKI  = xi.ki.PEISTE_DUNG
+            local SecondKI = xi.ki.SAMPLE_OF_GRAUBERG_CHERT
 
             if (loafersQuestProgress == 1 or loafersQuestProgress == 2) then
                 itemid   = 15748 -- Scholar's Loafers
-                FristKI  = tpz.ki.RAFFLESIA_DREAMSPIT
-                SecondKI = tpz.ki.DROGAROGAN_BONEMEAL
+                FristKI  = xi.ki.RAFFLESIA_DREAMSPIT
+                SecondKI = xi.ki.DROGAROGAN_BONEMEAL
 
             elseif (pantsQuestProgress == 1 or pantsQuestProgress == 2) then
                 itemid   = 16311 -- Scholar's Pants
-                FristKI  = tpz.ki.SLUG_MUCUS
-                SecondKI = tpz.ki.DJINN_EMBER
+                FristKI  = xi.ki.SLUG_MUCUS
+                SecondKI = xi.ki.DJINN_EMBER
             end
 
             player:startEvent(50, itemid, FristKI, SecondKI)
 
         -- Nothing in progress and meet the starting requirements.
-        elseif (downwardHelix == QUEST_COMPLETED and mJob == tpz.job.SCH and mLvl >= AF2_QUEST_LEVEL) then
+        elseif (downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= AF2_QUEST_LEVEL) then
 
             -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0
@@ -83,23 +83,23 @@ entity.onTrigger = function(player, npc)
             end
 
             -- Check Key Items and give them their dynamic event.
-            if (player:hasKeyItem(tpz.ki.RAFFLESIA_DREAMSPIT) and player:hasKeyItem(tpz.ki.DROGAROGAN_BONEMEAL) and loafersQuestProgress == 3) then -- Scholar's Loafers
+            if (player:hasKeyItem(xi.ki.RAFFLESIA_DREAMSPIT) and player:hasKeyItem(xi.ki.DROGAROGAN_BONEMEAL) and loafersQuestProgress == 3) then -- Scholar's Loafers
                 player:startEvent(cutsceneID, 15748)
                 player:setLocalVar("item", 15748)
-                player:setLocalVar("firstKI", tpz.ki.RAFFLESIA_DREAMSPIT)
-                player:setLocalVar("secondKI", tpz.ki.DROGAROGAN_BONEMEAL)
+                player:setLocalVar("firstKI", xi.ki.RAFFLESIA_DREAMSPIT)
+                player:setLocalVar("secondKI", xi.ki.DROGAROGAN_BONEMEAL)
 
-            elseif (player:hasKeyItem(tpz.ki.SLUG_MUCUS) and player:hasKeyItem(tpz.ki.DJINN_EMBER) and pantsQuestProgress == 3) then -- Scholar's Pants
+            elseif (player:hasKeyItem(xi.ki.SLUG_MUCUS) and player:hasKeyItem(xi.ki.DJINN_EMBER) and pantsQuestProgress == 3) then -- Scholar's Pants
                 player:startEvent(cutsceneID, 16311)
                 player:setLocalVar("item", 16311)
-                player:setLocalVar("firstKI", tpz.ki.SLUG_MUCUS)
-                player:setLocalVar("secondKI", tpz.ki.DJINN_EMBER)
+                player:setLocalVar("firstKI", xi.ki.SLUG_MUCUS)
+                player:setLocalVar("secondKI", xi.ki.DJINN_EMBER)
 
-            elseif (player:hasKeyItem(tpz.ki.PEISTE_DUNG) and player:hasKeyItem(tpz.ki.SAMPLE_OF_GRAUBERG_CHERT) and gownQuestProgress == 3) then -- Scholar's Gown
+            elseif (player:hasKeyItem(xi.ki.PEISTE_DUNG) and player:hasKeyItem(xi.ki.SAMPLE_OF_GRAUBERG_CHERT) and gownQuestProgress == 3) then -- Scholar's Gown
                 player:startEvent(cutsceneID, 14580)
                 player:setLocalVar("item", 14580)
-                player:setLocalVar("firstKI", tpz.ki.PEISTE_DUNG)
-                player:setLocalVar("secondKI", tpz.ki.SAMPLE_OF_GRAUBERG_CHERT)
+                player:setLocalVar("firstKI", xi.ki.PEISTE_DUNG)
+                player:setLocalVar("secondKI", xi.ki.SAMPLE_OF_GRAUBERG_CHERT)
 
             -- Show them the normal Menu to select from.
             else
@@ -141,15 +141,15 @@ entity.onEventUpdate = function(player, csid, option)
     if (csid == 49 or csid == 53) then
         -- Display Loafers
         if (option == 2) then
-            player:updateEvent(option, tpz.ki.RAFFLESIA_DREAMSPIT, tpz.ki.DROGAROGAN_BONEMEAL, 0, 0, 0, 0, 0)
+            player:updateEvent(option, xi.ki.RAFFLESIA_DREAMSPIT, xi.ki.DROGAROGAN_BONEMEAL, 0, 0, 0, 0, 0)
 
         -- Display Pants
         elseif (option == 4) then
-            player:updateEvent(option, tpz.ki.SLUG_MUCUS, tpz.ki.DJINN_EMBER, 0, 0, 0, 0, 0)
+            player:updateEvent(option, xi.ki.SLUG_MUCUS, xi.ki.DJINN_EMBER, 0, 0, 0, 0, 0)
 
         -- Display Gown
         elseif (option == 6) then
-            player:updateEvent(option, tpz.ki.PEISTE_DUNG, tpz.ki.SAMPLE_OF_GRAUBERG_CHERT, 0, 0, 0, 0, 0)
+            player:updateEvent(option, xi.ki.PEISTE_DUNG, xi.ki.SAMPLE_OF_GRAUBERG_CHERT, 0, 0, 0, 0, 0)
 
         -- Confirm Loafers
         elseif (option == 1) then

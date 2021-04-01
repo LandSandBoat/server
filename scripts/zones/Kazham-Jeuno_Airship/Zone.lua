@@ -31,9 +31,9 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 10) then
         local prevzone = player:getPreviousZone()
-        if (prevzone == tpz.zone.KAZHAM) then
+        if (prevzone == xi.zone.KAZHAM) then
             player:setPos(0, 0, 0, 0, 246)
-        elseif (prevzone == tpz.zone.PORT_JEUNO) then
+        elseif (prevzone == xi.zone.PORT_JEUNO) then
             player:setPos(0, 0, 0, 0, 250)
         end
     end

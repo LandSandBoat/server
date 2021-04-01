@@ -32,9 +32,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         buffvalue = 6
     end
 
-    target:addStatusEffect(tpz.effect.ACCURACY_DOWN, buffvalue, 0, 180)
-    target:addStatusEffect(tpz.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
-    skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_2)
+    target:addStatusEffect(xi.effect.ACCURACY_DOWN, buffvalue, 0, 180)
+    target:addStatusEffect(xi.effect.EVASION_DOWN, 32-buffvalue, 0, 180)
+    skill:setMsg(xi.msg.basic.SKILL_ENFEEB_2)
     return 0
 
 end

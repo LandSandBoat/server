@@ -16,18 +16,18 @@ end
 item_object.onItemUse = function(target)
     local mMP = target:getMaxMP()
     local cMP = target:getMP()
-    if (VanadielDayOfTheWeek() == tpz.day.LIGHTSDAY) then
+    if (VanadielDayOfTheWeek() == xi.day.LIGHTSDAY) then
         if (cMP < (mMP * .85)) then
-            if (not target:hasStatusEffect(tpz.effect.REFRESH)) then
-                target:addStatusEffect(tpz.effect.REFRESH, 2, 3, 1800)
+            if (not target:hasStatusEffect(xi.effect.REFRESH)) then
+                target:addStatusEffect(xi.effect.REFRESH, 2, 3, 1800)
             else
-                target:messageBasic(tpz.msg.basic.NO_EFFECT)
+                target:messageBasic(xi.msg.basic.NO_EFFECT)
             end
         else
-            target:messageBasic(tpz.msg.basic.NO_EFFECT)
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
         end
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

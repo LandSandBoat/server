@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MANAFONT
+-- xi.effect.MANAFONT
 -----------------------------------
 local effect_object = {}
 

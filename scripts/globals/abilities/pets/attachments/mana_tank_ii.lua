@@ -9,19 +9,19 @@ local attachment_object = {}
 attachment_object.onEquip = function(pet)
     -- We do not have support to do a fraction of a percent so we rounded
     local frame = pet:getAutomatonFrame()
-    if frame == tpz.frames.HARLEQUIN then
-        pet:addMod(tpz.mod.MPP, 10)
-    elseif frame == tpz.frames.STORMWAKER then
-        pet:addMod(tpz.mod.MPP, 8)
+    if frame == xi.frames.HARLEQUIN then
+        pet:addMod(xi.mod.MPP, 10)
+    elseif frame == xi.frames.STORMWAKER then
+        pet:addMod(xi.mod.MPP, 8)
     end
 end
 
 attachment_object.onUnequip = function(pet)
     local frame = pet:getAutomatonFrame()
-    if frame == tpz.frames.HARLEQUIN then
-        pet:delMod(tpz.mod.MPP, 10)
-    elseif frame == tpz.frames.STORMWAKER then
-        pet:delMod(tpz.mod.MPP, 8)
+    if frame == xi.frames.HARLEQUIN then
+        pet:delMod(xi.mod.MPP, 10)
+    elseif frame == xi.frames.STORMWAKER then
+        pet:delMod(xi.mod.MPP, 8)
     end
 end
 
@@ -38,7 +38,7 @@ attachment_object.onUpdate = function(pet, maneuvers)
     if maneuvers > 0 then
         power = math.floor(1 + maneuvers + (pet:getMaxMP() * (0.2 + 0.2 * maneuvers) / 100))
     end
-    updateModPerformance(pet, tpz.mod.REFRESH, 'mana_tank_ii_mod', power)
+    updateModPerformance(pet, xi.mod.REFRESH, 'mana_tank_ii_mod', power)
 end
 
 return attachment_object

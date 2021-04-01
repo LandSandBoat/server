@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_WISDOM_OF_ELDERS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS) == QUEST_ACCEPTED) then
         player:startEvent(175)
     else
         player:startEvent(35)

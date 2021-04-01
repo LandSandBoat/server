@@ -17,13 +17,13 @@ zone_object.onInitialize = function(zone)
         zone:registerRegion(k, unpack(v["coords"]))
     end
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -32,7 +32,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(333.017, -44.896, -458.35, 164)
     end
-    if (player:getCurrentMission(ZILART) == tpz.mission.id.zilart.THE_GATE_OF_THE_GODS and player:getCharVar("ZilartStatus") == 1) then
+    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and player:getCharVar("ZilartStatus") == 1) then
         cs = 51
     end
 
@@ -47,7 +47,7 @@ zone_object.onRegionEnter = function(player, region)
             player:startEvent(42)
         else
             title = player:getTitle()
-            if (title == tpz.title.WARRIOR_OF_THE_CRYSTAL) then
+            if (title == xi.title.WARRIOR_OF_THE_CRYSTAL) then
                 player:startEvent(41, title)
             else
                 player:startEvent(43, title)
@@ -55,7 +55,7 @@ zone_object.onRegionEnter = function(player, region)
         end
 
     elseif (p["portal"] ~= nil) then -- blue portal
-        if (GetNPCByID(p["portal"]):getAnimation() == tpz.anim.OPEN_DOOR) then
+        if (GetNPCByID(p["portal"]):getAnimation() == xi.anim.OPEN_DOOR) then
             player:startEvent(p["event"])
         end
 
@@ -79,8 +79,8 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("skyShortcut", 1)
     elseif (csid == 51) then
         player:setCharVar("ZilartStatus", 0)
-        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_GATE_OF_THE_GODS)
-        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.ARK_ANGELS)
+        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
+        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
     end
 end
 

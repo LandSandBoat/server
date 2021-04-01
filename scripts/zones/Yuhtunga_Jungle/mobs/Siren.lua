@@ -19,7 +19,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     local party = player:getParty()
     for _, member in pairs(party) do
-        if member:getCurrentMission(ROV) == tpz.mission.id.rov.THE_LOST_AVATAR then
+        if member:getCurrentMission(ROV) == xi.mission.id.rov.THE_LOST_AVATAR then
             player:setCharVar("RhapsodiesStatus", 1)
         end
     end

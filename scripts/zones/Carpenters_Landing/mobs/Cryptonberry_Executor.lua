@@ -10,16 +10,16 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180) -- 3 minutes
 end
 
 entity.onMobSpawn = function(mob)
-    tpz.mix.jobSpecial.config(mob, {
+    xi.mix.jobSpecial.config(mob, {
         delay = 180,
         specials =
         {
             {
-                id = tpz.jsa.MIJIN_GAKURE,
+                id = xi.jsa.MIJIN_GAKURE,
                 hpp = 100,
                 begCode = function(mob)
                     mob:messageText(mob, ID.text.CRYPTONBERRY_EXECUTOR_2HR)
@@ -41,7 +41,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     mob:messageText(mob, ID.text.CRYPTONBERRY_EXECUTOR_DIE)
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("Cryptonberry_Executor_KILL") < 2 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.CALM_BEFORE_THE_STORM and player:getCharVar("Cryptonberry_Executor_KILL") < 2 then
         player:setCharVar("Cryptonberry_Executor_KILL", 1)
     end
 end

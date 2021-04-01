@@ -11,7 +11,7 @@ local ID = require("scripts/zones/Rabao/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    ForgetTheAntidote = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    ForgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if ((ForgetTheAntidote == QUEST_ACCEPTED or ForgetTheAntidote == QUEST_COMPLETED) and trade:hasItemQty(1209, 1) and trade:getItemCount() == 1) then
         player:startEvent(4, 0, 1209)
@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    ForgetTheAntidote = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    ForgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
     if (ForgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(RABAO) >= 4) then
         player:startEvent(2, 0, 1209)
@@ -37,15 +37,15 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 2 and option == 1) then
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:setCharVar("DontForgetAntidoteVar", 1)
     elseif (csid == 4 and player:getCharVar("DontForgetAntidoteVar") == 1) then --If completing for the first time
         player:setCharVar("DontForgetAntidoteVar", 0)
         player:tradeComplete()
-        player:addTitle(tpz.title.DESERT_HUNTER)
+        player:addTitle(xi.title.DESERT_HUNTER)
         player:addItem(16974) -- Dotanuki
         player:messageSpecial(ID.text.ITEM_OBTAINED, 16974)
-        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+        player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
         player:addFame(RABAO, 60)
     elseif (csid == 4) then --Subsequent completions
         player:tradeComplete()

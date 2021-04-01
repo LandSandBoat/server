@@ -9,7 +9,7 @@ local entity = {}
 
 local function reraiseGhul(mob, reraises, target)
     mob:setLocalVar("RERAISES", reraises)
-    mob:setMod(tpz.mod.ATT, 25 * reraises)
+    mob:setMod(xi.mod.ATT, 25 * reraises)
     mob:setHP(mob:getMaxHP() * (1 - (0.10 * reraises)))
     mob:resetAI()
     mob:stun(3000)
@@ -27,7 +27,7 @@ entity.onMobInitialize = function(mob)
         -- spawn second form (BLM)
         if reraises == 3 then
             mob:timer(9000, function(mob)
-                mob:setStatus(tpz.status.DISAPPEAR)
+                mob:setStatus(xi.status.DISAPPEAR)
                 local finalMobId = mobId + 1
                 local finalMob = GetMobByID(finalMobId)
                 finalMob:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())

@@ -14,22 +14,22 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY) == true) then
+    if (target:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == true) then
         result = 238
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.GOLDSMITHING_IMAGERY, 3, 0, 120)
+    target:addStatusEffect(xi.effect.GOLDSMITHING_IMAGERY, 3, 0, 120)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.GOLDSMITH, 1)
+    target:addMod(xi.mod.GOLDSMITH, 1)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.GOLDSMITH, 1)
+    target:delMod(xi.mod.GOLDSMITH, 1)
 end
 
 return item_object

@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED and
         player:getCharVar("QuestMakingTheGrade_prog") == 0 and
         npcUtil.tradeHas(trade, 544)
     then
@@ -21,10 +21,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local teachersPet = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.TEACHER_S_PET)
-    local makingTheGrade = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
-    local letSleepingDogsLie = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
-    local classReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+    local teachersPet = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET)
+    local makingTheGrade = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
+    local letSleepingDogsLie = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
+    local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
 
     -- MAKING THE GRADE
     if
@@ -69,12 +69,12 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 442 and option == 1 then
-        player:addQuest(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE)
+        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE)
     elseif csid == 455 then -- Quest Progress: Test Papers Shown and told to deliver them to principal
         player:setCharVar("QuestMakingTheGrade_prog", 1)
     elseif
         csid == 458 and
-        npcUtil.completeQuest(player, WINDURST, tpz.quest.id.windurst.MAKING_THE_GRADE, {
+        npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE, {
             item = 4855,
             fame = 75,
             var = "QuestMakingTheGrade_prog",

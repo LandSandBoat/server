@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and not player:hasKeyItem(tpz.ki.ORCISH_CREST) then
-        player:addKeyItem(tpz.ki.ORCISH_CREST)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ORCISH_CREST)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WHENCE_BLOWS_THE_WIND) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ORCISH_CREST) then
+        player:addKeyItem(xi.ki.ORCISH_CREST)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ORCISH_CREST)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

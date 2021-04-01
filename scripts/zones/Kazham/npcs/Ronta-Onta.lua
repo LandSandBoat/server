@@ -17,15 +17,15 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    TrialByFire = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
-    WhisperOfFlames = player:hasKeyItem(tpz.ki.WHISPER_OF_FLAMES)
+    TrialByFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
+    WhisperOfFlames = player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
 
     if ((TrialByFire == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 6) or (TrialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date"))) then
-        player:startEvent(270, 0, tpz.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
-    elseif (TrialByFire == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_FIRE) == false and WhisperOfFlames == false) then
-        player:startEvent(285, 0, tpz.ki.TUNING_FORK_OF_FIRE) -- Defeat against Ifrit : Need new Fork
+        player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
+    elseif (TrialByFire == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) == false and WhisperOfFlames == false) then
+        player:startEvent(285, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Defeat against Ifrit : Need new Fork
     elseif (TrialByFire == QUEST_ACCEPTED and WhisperOfFlames == false) then
-        player:startEvent(271, 0, tpz.ki.TUNING_FORK_OF_FIRE, 0)
+        player:startEvent(271, 0, xi.ki.TUNING_FORK_OF_FIRE, 0)
     elseif (TrialByFire == QUEST_ACCEPTED and WhisperOfFlames) then
         numitem = 0
 
@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
         if (player:hasItem(1203)) then numitem = numitem + 8; end   -- Egil's Torch
         if (player:hasSpell(298)) then numitem = numitem + 32; end  -- Ability to summon Ifrit
 
-        player:startEvent(273, 0, tpz.ki.TUNING_FORK_OF_FIRE, 0, 0, numitem)
+        player:startEvent(273, 0, xi.ki.TUNING_FORK_OF_FIRE, 0, 0, numitem)
     else
         player:startEvent(274) -- Standard dialog
     end
@@ -48,16 +48,16 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 270 and option == 1) then
-        if (player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
-            player:delQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+        if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
+            player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         player:setCharVar("TrialByFire_date", 0)
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_FIRE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_FIRE)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
     elseif (csid == 285) then
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_FIRE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_FIRE)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
     elseif (csid == 273) then
         item = 0
         if (option == 1) then item = 17665         -- Ifrits Blade
@@ -79,11 +79,11 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
-            player:addTitle(tpz.title.HEIR_OF_THE_GREAT_FIRE)
-            player:delKeyItem(tpz.ki.WHISPER_OF_FLAMES)
+            player:addTitle(xi.title.HEIR_OF_THE_GREAT_FIRE)
+            player:delKeyItem(xi.ki.WHISPER_OF_FLAMES)
             player:setCharVar("TrialByFire_date", getMidnight())
             player:addFame(KAZHAM, 30)
-            player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.TRIAL_BY_FIRE)
+            player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end
     end
 

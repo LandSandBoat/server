@@ -16,12 +16,12 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and npcUtil.tradeHas(trade, 548) then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)
     elseif
-        player:getCurrentMission(COP) == tpz.mission.id.cop.DARKNESS_NAMED and
-        not player:hasKeyItem(tpz.ki.PSOXJA_PASS) and
+        player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and
+        not player:hasKeyItem(xi.ki.PSOXJA_PASS) and
         player:getCharVar("PXPassGetGems") == 1 and
         (
             npcUtil.tradeHas(trade, 1692) or
@@ -36,13 +36,13 @@ end
 entity.onTrigger = function(player, npc)
     local GetGems = player:getCharVar("PXPassGetGems")
 
-    if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
+    if player:getFameLevel(JEUNO) >= 2 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE then
         -- Start Quest: Tenshodo Membership
         player:startEvent(106, 8)
-    elseif player:hasKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM) then
+    elseif player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
         -- Finish Quest: Tenshodo Membership
         player:startEvent(107)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.DARKNESS_NAMED and not player:hasKeyItem(tpz.ki.PSOXJA_PASS) and GetGems == 0 then
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED and not player:hasKeyItem(xi.ki.PSOXJA_PASS) and GetGems == 0 then
         -- Mission: Darkness Named
         player:startEvent(54)
     elseif (GetGems == 1) then
@@ -64,25 +64,25 @@ entity.onEventFinish = function(player, csid, option)
             4467,    3,    -- Garlic Cracker
         }
 
-        tpz.shop.general(player, stock, NORG)
+        xi.shop.general(player, stock, NORG)
     elseif csid == 106 and option == 2 then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
     elseif csid == 107 then
         -- Finish Quest: Tenshodo Membership (Application Form)
-        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, ki=tpz.ki.TENSHODO_MEMBERS_CARD }) then
-            player:delKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM)
+        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title= xi.title.TENSHODO_MEMBER, ki= xi.ki.TENSHODO_MEMBERS_CARD }) then
+            player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
         end
     elseif csid == 108 then
         -- Finish Quest: Tenshodo Membership (Invitation)
-        if npcUtil.completeQuest(player, JEUNO, tpz.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title=tpz.title.TENSHODO_MEMBER, ki=tpz.ki.TENSHODO_MEMBERS_CARD }) then
+        if npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP, { item=548, title= xi.title.TENSHODO_MEMBER, ki= xi.ki.TENSHODO_MEMBERS_CARD }) then
             player:confirmTrade()
-            player:delKeyItem(tpz.ki.TENSHODO_APPLICATION_FORM)
+            player:delKeyItem(xi.ki.TENSHODO_APPLICATION_FORM)
         end
     elseif csid == 52 then
         player:confirmTrade()
         player:addGil(500 * GIL_RATE)
-        player:addKeyItem(tpz.ki.PSOXJA_PASS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PSOXJA_PASS)
+        player:addKeyItem(xi.ki.PSOXJA_PASS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PSOXJA_PASS)
         player:setCharVar("PXPassGetGems", 0)
     elseif csid == 54 then
         player:setCharVar("PXPassGetGems", 1)

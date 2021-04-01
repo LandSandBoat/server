@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local brassDoor = GetNPCByID(npc:getID() - 4)
 
-    if npc:getAnimation() == tpz.anim.CLOSE_DOOR and brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
+    if npc:getAnimation() == xi.anim.CLOSE_DOOR and brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
         player:startEvent(10)
     else
         player:messageSpecial(ID.text.TORCH_LIT)
@@ -25,11 +25,11 @@ end
 entity.onEventFinish = function(player, csid, option)
     if option == 1 then
         local brassDoor = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7)
-        if brassDoor:getAnimation() == tpz.anim.CLOSE_DOOR then
+        if brassDoor:getAnimation() == xi.anim.CLOSE_DOOR then
             brassDoor:openDoor(35)
             for i = 2, 5 do
                 local torch = GetNPCByID(ID.npc.BRASS_DOOR_FLOOR_4_H7 + i)
-                torch:setAnimation(tpz.anim.CLOSE_DOOR)
+                torch:setAnimation(xi.anim.CLOSE_DOOR)
                 torch:openDoor(39)
             end
         else

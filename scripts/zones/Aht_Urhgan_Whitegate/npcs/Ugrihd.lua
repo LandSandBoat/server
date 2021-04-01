@@ -39,8 +39,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rank = tpz.besieged.getMercenaryRank(player)
-    local badge = tpz.besieged.badges[rank]
+    local rank = xi.besieged.getMercenaryRank(player)
+    local badge = xi.besieged.badges[rank]
     local points = player:getCurrency("imperial_standing")
     player:startEvent(150, rank, badge, points, 0, 0, 0, 0, 0, 0)
 end

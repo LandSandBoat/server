@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     [1] =
@@ -42,7 +42,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         if battlefield:getLocalVar("crateOpenedF3") ~= 1 then
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
-                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.WINDDEF, -128)
+                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.WINDDEF, -128)
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+6):isAlive() then
                     DespawnMob(ID.mob.TEMENOS_C_MOB[2]+6)
                     SpawnMob(ID.mob.TEMENOS_C_MOB[2]+12)
@@ -53,7 +53,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
                 local mobZ = mob:getZPos()
                 local crateID = ID.npc.TEMENOS_E_CRATE[3] + (mobID - ID.mob.TEMENOS_E_MOB[3])
                 GetNPCByID(crateID):setPos(mobX, mobY, mobZ)
-                tpz.limbus.spawnRandomCrate(crateID, battlefield, "crateMaskF3", battlefield:getLocalVar("crateMaskF3"), true)
+                xi.limbus.spawnRandomCrate(crateID, battlefield, "crateMaskF3", battlefield:getLocalVar("crateMaskF3"), true)
             end
         end
     end

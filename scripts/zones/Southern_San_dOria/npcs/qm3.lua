@@ -28,8 +28,8 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 41 and option == 1) then
-        player:addKeyItem(tpz.ki.STRANGE_SHEET_OF_PAPER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STRANGE_SHEET_OF_PAPER)
+        player:addKeyItem(xi.ki.STRANGE_SHEET_OF_PAPER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STRANGE_SHEET_OF_PAPER)
     end
 end
 

@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SmokeOnTheMountain = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
+    local SmokeOnTheMountain = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
     if (SmokeOnTheMountain == QUEST_ACCEPTED) then
         player:startEvent(222)
     else

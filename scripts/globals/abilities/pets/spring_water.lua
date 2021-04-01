@@ -23,17 +23,17 @@ ability_object.onPetAbility = function(target, pet, skill)
     if (target:getHP()+base > target:getMaxHP()) then
         base = target:getMaxHP() - target:getHP() --cap it
     end
-    target:delStatusEffect(tpz.effect.BLINDNESS)
-    target:delStatusEffect(tpz.effect.POISON)
-    target:delStatusEffect(tpz.effect.PARALYSIS)
-    target:delStatusEffect(tpz.effect.DISEASE)
-    target:delStatusEffect(tpz.effect.PETRIFICATION)
+    target:delStatusEffect(xi.effect.BLINDNESS)
+    target:delStatusEffect(xi.effect.POISON)
+    target:delStatusEffect(xi.effect.PARALYSIS)
+    target:delStatusEffect(xi.effect.DISEASE)
+    target:delStatusEffect(xi.effect.PETRIFICATION)
         target:wakeUp()
-    target:delStatusEffect(tpz.effect.SILENCE)
+    target:delStatusEffect(xi.effect.SILENCE)
     if math.random() > 0.5 then
-        target:delStatusEffect(tpz.effect.SLOW)
+        target:delStatusEffect(xi.effect.SLOW)
     end
-    skill:setMsg(tpz.msg.basic.SELF_HEAL)
+    skill:setMsg(xi.msg.basic.SELF_HEAL)
     target:addHP(base)
     return base
 end

@@ -12,14 +12,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.matrimonialcoffer.startEvent(player)
+    xi.matrimonialcoffer.startEvent(player)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.matrimonialcoffer.finishEvent(player, csid, option)
+    xi.matrimonialcoffer.finishEvent(player, csid, option)
 end
 
 return entity

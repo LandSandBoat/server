@@ -11,10 +11,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_ACCEPTED and
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_MORAL_MANIFEST) == QUEST_ACCEPTED and
         player:getCharVar("moral") == 5 then
         player:setCharVar("moral", 6)
-        player:delKeyItem(tpz.ki.VAULT_QUIPUS);
+        player:delKeyItem(xi.ki.VAULT_QUIPUS);
     end
     for i = ID.mob.YAGUDO_AVATAR + 1, ID.mob.YAGUDO_AVATAR + 8 do
         DespawnMob(i)

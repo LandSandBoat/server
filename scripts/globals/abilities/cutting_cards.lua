@@ -13,7 +13,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(caster, target, ability, action)
-    tpz.job_utils.corsair.useCuttingCards(caster, target, ability, action)
+    xi.job_utils.corsair.useCuttingCards(caster, target, ability, action)
 end
 
 return ability_object

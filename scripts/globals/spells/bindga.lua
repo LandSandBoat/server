@@ -14,7 +14,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
 
     --Pull base stats.
-    local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT))
+    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
     --Duration, including resistance.  May need more research.
     local duration = 60
@@ -22,24 +22,24 @@ spell_object.onSpellCast = function(caster, target, spell)
     --Resist
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
+    params.attribute = xi.mod.INT
     params.skillType = 35
     params.bonus = 0
-    params.effect = tpz.effect.BIND
+    params.effect = xi.effect.BIND
     local resist = applyResistanceEffect(caster, target, spell, params)
 
     if (resist >= 0.5) then --Do it!
         --Try to erase a weaker bind.
-        if (target:addStatusEffect(tpz.effect.BIND, target:getSpeed(), 0, duration*resist)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+        if (target:addStatusEffect(xi.effect.BIND, target:getSpeed(), 0, duration*resist)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
-    return tpz.effect.BIND
+    return xi.effect.BIND
 
 end
 

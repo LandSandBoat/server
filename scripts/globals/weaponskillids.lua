@@ -9,7 +9,7 @@ tpz = tpz or {}
 -- Weaponskill IDs
 -----------------------------------
 
-tpz.weaponskill =
+ xi.weaponskill =
 {
     -----------------------------------
     -- H2H
@@ -274,13 +274,13 @@ tpz.weaponskill =
     WILDFIRE            = 220,
     LAST_STAND          = 221,
 }
-tpz.ws = tpz.weaponskill
+ xi.ws = xi.weaponskill
 
 -----------------------------------
 -- Weaponskill Unlock IDs
 -----------------------------------
 
-tpz.ws_unlock =
+ xi.ws_unlock =
 {
     ASURAN_FISTS        = 1,
     EVISCERATION        = 2,

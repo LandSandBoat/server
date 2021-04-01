@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
@@ -23,9 +23,9 @@ zone_object.onInitialize = function(zone)
         GetMobByID(ID.mob.BACKOO):setRespawnTime(1)
     end
 
-    tpz.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
-    tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -37,7 +37,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 3
-    elseif player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1 then
         cs = 5 -- zone 4 buburimu no update (north)
     end
 
@@ -45,7 +45,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -73,9 +73,9 @@ zone_object.onEventUpdate = function( player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)
     elseif csid == 5 then
-        if player:getPreviousZone() == tpz.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == tpz.zone.MHAURA then
+        if player:getPreviousZone() == xi.zone.LABYRINTH_OF_ONZOZO or player:getPreviousZone() == xi.zone.MHAURA then
             player:updateEvent(0, 0, 0, 0, 0, 7)
-        elseif player:getPreviousZone() == tpz.zone.MAZE_OF_SHAKHRAMI then
+        elseif player:getPreviousZone() == xi.zone.MAZE_OF_SHAKHRAMI then
             player:updateEvent(0, 0, 0, 0, 0, 6)
         end
     end

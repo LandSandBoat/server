@@ -15,7 +15,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- ALL THE WAY TO THE BANK
-    if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE)) then
+    if (player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE)) then
         local ATWTTB_Paid_Defliaa = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 0)
         if (not ATWTTB_Paid_Defliaa and npcUtil.tradeHas( trade, {{"gil", 19440}} )) then
             player:startEvent(5069)
@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
         4356, 200,    -- White Bread
         5686, 800,    -- Cheese Sandwich
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 0, true))
         if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
-            npcUtil.giveKeyItem(player, tpz.ki.TARUTARU_SAUCE_RECEIPT)
+            npcUtil.giveKeyItem(player, xi.ki.TARUTARU_SAUCE_RECEIPT)
         end
     end
 end

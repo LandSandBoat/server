@@ -53,8 +53,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 10009) then
         player:setCharVar("unbridledPassion", 2)
     elseif (csid == 10011) then
-        player:addKeyItem(tpz.ki.KOHS_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.KOHS_LETTER)
+        player:addKeyItem(xi.ki.KOHS_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.KOHS_LETTER)
         player:tradeComplete()
         player:setCharVar("unbridledPassion", 3)
     end

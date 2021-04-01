@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.SARUTABARUTA)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+    local RegionOwner = GetRegionOwner(xi.region.SARUTABARUTA)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.BAEHUFAEHU_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.BAEHUFAEHU_OPEN_DIALOG)
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             4392,  29,  -- Saruta Orange
             635,   18   -- Windurstian Tea Leaves
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.NETHER_VOID
+-- xi.effect.NETHER_VOID
 -----------------------------------
 local effect_object = {}
 

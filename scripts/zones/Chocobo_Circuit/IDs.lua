@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.CHOCOBO_CIRCUIT] =
+zones[ xi.zone.CHOCOBO_CIRCUIT] =
 {
     text =
     {
@@ -26,4 +26,4 @@ zones[tpz.zone.CHOCOBO_CIRCUIT] =
     },
 }
 
-return zones[tpz.zone.CHOCOBO_CIRCUIT]
+return zones[ xi.zone.CHOCOBO_CIRCUIT]

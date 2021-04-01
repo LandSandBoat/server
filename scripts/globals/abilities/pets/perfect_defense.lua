@@ -16,17 +16,17 @@ ability_object.onPetAbility = function(target, pet, skill, master)
     local power = 100 * (master:getMP() / master:getMaxMP())
     duration = 60
     if (master ~= nil) then
-        local summoningSkill = master:getSkillLevel(tpz.skill.SUMMONING_MAGIC)
+        local summoningSkill = master:getSkillLevel(xi.skill.SUMMONING_MAGIC)
         if (summoningSkill > 600) then
             summoningSkill = 600
         end
         duration = 30 + summoningSkill / 20
     end
-    target:delStatusEffect(tpz.effect.PERFECT_DEFENSE)
-    target:addStatusEffect(tpz.effect.PERFECT_DEFENSE, power, 3, duration)
-    skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
+    target:delStatusEffect(xi.effect.PERFECT_DEFENSE)
+    target:addStatusEffect(xi.effect.PERFECT_DEFENSE, power, 3, duration)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     master:setMP(0)
-    return tpz.effect.PERFECT_DEFENSE
+    return xi.effect.PERFECT_DEFENSE
 end
 
 return ability_object

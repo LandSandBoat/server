@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.AZURE_LORE
+-- xi.effect.AZURE_LORE
 -----------------------------------
 local effect_object = {}
 

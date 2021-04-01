@@ -33,9 +33,9 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    MobPhysicalStatusEffectMove(mob, target, skill, tpz.effect.STUN, 1, 0, 4)
+    MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.STUN, 1, 0, 4)
 
-    return tpz.effect.STUN
+    return xi.effect.STUN
 end
 
 return mobskill_object

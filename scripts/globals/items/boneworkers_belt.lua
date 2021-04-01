@@ -14,22 +14,22 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.BONECRAFT_IMAGERY) == true) then
+    if (target:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) == true) then
         result = 241
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.BONECRAFT_IMAGERY, 3, 0, 120)
+    target:addStatusEffect(xi.effect.BONECRAFT_IMAGERY, 3, 0, 120)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.BONE, 1)
+    target:addMod(xi.mod.BONE, 1)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.BONE, 1)
+    target:delMod(xi.mod.BONE, 1)
 end
 
 return item_object

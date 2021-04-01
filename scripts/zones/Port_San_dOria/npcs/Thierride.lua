@@ -17,12 +17,12 @@ entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
     if (trade:hasItemQty(4358, 5) and count == 5) then
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_ACCEPTED) then
             player:startEvent(528)
         else
             player:startEvent(526)
         end
-    elseif (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED and trade:hasItemQty(595, 1) == true and count == 1) then
+    elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED and trade:hasItemQty(595, 1) == true and count == 1) then
         player:tradeComplete()
         player:startEvent(539)
         player:setCharVar("TheBrugaireConsortium-Parcels", 31)
@@ -34,7 +34,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    aTasteForMeat = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
+    aTasteForMeat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
     if (aTasteForMeat == QUEST_AVAILABLE and player:getCharVar("aTasteForMeat") == 1 or aTasteForMeat == QUEST_ACCEPTED) then
         player:startEvent(526)
     else
@@ -49,9 +49,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 526) then
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_AVAILABLE) then
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT) == QUEST_AVAILABLE) then
             player:setCharVar("aTasteForMeat", 0)
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
         end
     elseif (csid == 528) then
         player:tradeComplete()
@@ -59,8 +59,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addFame(SANDORIA, 30)
         player:addGil(GIL_RATE*150)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*150)
-        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.A_TASTE_FOR_MEAT)
-        player:addTitle(tpz.title.RABBITER)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TASTE_FOR_MEAT)
+        player:addTitle(xi.title.RABBITER)
     end
 
 end

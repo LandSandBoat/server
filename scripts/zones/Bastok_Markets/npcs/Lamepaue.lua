@@ -15,40 +15,40 @@ entity.onTrigger = function(player, npc)
 
     -- Bastok Missions.
     local BastokMissions = 0xFFFFFFFE
-    if (player:hasCompletedMission (BASTOK, tpz.mission.id.bastok.FETICHISM)) then
+    if (player:hasCompletedMission (BASTOK, xi.mission.id.bastok.FETICHISM)) then
         BastokMissions = BastokMissions - 2 -- Fetichism.
     end
-    if (player:hasCompletedMission (BASTOK, tpz.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
+    if (player:hasCompletedMission (BASTOK, xi.mission.id.bastok.TO_THE_FORSAKEN_MINES)) then
         BastokMissions = BastokMissions - 4 -- To the Forsaken Mines.
     end
 
     -- Bastok Quests.
     local BastokQuests = 0xFFFFFFFE
-    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)) then
         BastokQuests = BastokQuests - 2     -- The Return of the Adventurer
     end
 -- *Need the correct csid
---     if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_FIRST_MEETING)) then
+--     if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)) then
 --         BastokQuests = BastokQuests - 4     -- The First Meeting
 --     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.WISH_UPON_A_STAR)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WISH_UPON_A_STAR)) then
         BastokQuests = BastokQuests - 8     -- Wish Upon a Star (pt.1)
         BastokQuests = BastokQuests - 16    -- Wish Upon a Star (pt.2)
         BastokQuests = BastokQuests - 32    -- Wish Upon a Star (pt.3)
     end
 
 -- *Need the correct csid/parameters
---    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ALL_BY_MYSELF)) then
+--    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALL_BY_MYSELF)) then
 --        BastokQuests = BastokQuests - 64    -- All by Myself
 --    end
-    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.ACHIEVING_TRUE_POWER)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ACHIEVING_TRUE_POWER)) then
         BastokQuests = BastokQuests - 128   -- Achieving True Power
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.TOO_MANY_CHEFS)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TOO_MANY_CHEFS)) then
         BastokQuests = BastokQuests - 512   -- Too Many Chefs
 
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_PROPER_BURIAL)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_PROPER_BURIAL)) then
         BastokQuests = BastokQuests - 1024  -- A Proper Burial (pt.1)
         BastokQuests = BastokQuests - 2048  -- A Proper Burial (pt.2)
         BastokQuests = BastokQuests - 4096  -- A Proper Burial (pt.3)
@@ -59,26 +59,26 @@ entity.onTrigger = function(player, npc)
 
     -- Other Quests.
     local OtherQuests = 0xFFFFFFFE
-    if (player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)) then
         OtherQuests = OtherQuests - 2      -- Beat Around the Bushin
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)) then
         OtherQuests = OtherQuests - 4      -- Confessions of a Bellmaker
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.PICTURE_PERFECT)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PICTURE_PERFECT)) then
         OtherQuests = OtherQuests - 8      -- Picture Perfect (pt.1)
         OtherQuests = OtherQuests - 16     -- Picture Perfect (pt.2)
         OtherQuests = OtherQuests - 32     -- Picture Perfect (pt.3)
         OtherQuests = OtherQuests - 64     -- Picture Perfect (pt.4)
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED)) then
         OtherQuests = OtherQuests - 128    -- No Strings Attached
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)) then
         OtherQuests = OtherQuests - 256    -- Puppetmaster Blues (pt.1)
         OtherQuests = OtherQuests - 512    -- Puppetmaster Blues (pt.2)
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.COMEBACK_QUEEN)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)) then
         OtherQuests = OtherQuests - 1024   -- Comeback Queen
     end
 
@@ -87,13 +87,13 @@ entity.onTrigger = function(player, npc)
 --         OtherQuests = OtherQuests - 2048   -- Dancer Attire (pt.1)
 --         OtherQuests = OtherQuests - 4096   -- Dancer Attire (pt.2)
 --     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.DRAFTED_BY_THE_DUCHY)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DRAFTED_BY_THE_DUCHY)) then
         OtherQuests = OtherQuests - 8192   -- Drafted by the Duchy
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BATTLE_ON_A_NEW_FRONT)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BATTLE_ON_A_NEW_FRONT)) then
         OtherQuests = OtherQuests - 16384  -- Battle on a New Front
     end
-    if (player:hasCompletedQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.VOIDWALKER_OP_126)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.VOIDWALKER_OP_126)) then
         OtherQuests = OtherQuests - 32768  -- VW Op. #126: Qufim Incursion
     end
 
@@ -116,7 +116,7 @@ entity.onTrigger = function(player, npc)
     -- Seekers of Adoulin
     local SeekersOfAdoulin = 0xFFFFFFFE
 -- *Need the correct csid
---    if (player:hasCompletedMission (SOA, tpz.mission.id.soa.RUMORS_FROM_THE_WEST)) then
+--    if (player:hasCompletedMission (SOA, xi.mission.id.soa.RUMORS_FROM_THE_WEST)) then
 --        SeekersOfAdoulin = SeekersOfAdoulin - 2 -- Rumors from the West
 --    end
 

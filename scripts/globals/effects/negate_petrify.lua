@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.NEGATE_PETRIFY
+-- xi.effect.NEGATE_PETRIFY
 -----------------------------------
 local effect_object = {}
 

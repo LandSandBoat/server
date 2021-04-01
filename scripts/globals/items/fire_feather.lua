@@ -13,7 +13,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.ENFIRE, 10, 0, 180) -- This is a guess, no potency or duration info is known
+    target:addStatusEffect(xi.effect.ENFIRE, 10, 0, 180) -- This is a guess, no potency or duration info is known
 end
 
 return item_object

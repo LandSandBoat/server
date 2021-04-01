@@ -27,7 +27,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.numHits = 2
     params.ftp100 = 2 params.ftp200 = 2.125 params.ftp300 = 2.25
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0
-    params.agi_wsc = 0.85 + (player:getMerit(tpz.merit.LAST_STAND) / 100) params.int_wsc = 0.0 params.mnd_wsc = 0.0
+    params.agi_wsc = 0.85 + (player:getMerit(xi.merit.LAST_STAND) / 100) params.int_wsc = 0.0 params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
@@ -37,7 +37,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if (USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp200 = 3 params.ftp300 = 4
-        params.agi_wsc = 0.7 + (player:getMerit(tpz.merit.LAST_STAND) / 100)
+        params.agi_wsc = 0.7 + (player:getMerit(xi.merit.LAST_STAND) / 100)
     end
 
     local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, wsID, params, tp, action, primary)

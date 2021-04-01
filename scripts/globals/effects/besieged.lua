@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BESIEGED
+-- xi.effect.BESIEGED
 -----------------------------------
 local effect_object = {}
 

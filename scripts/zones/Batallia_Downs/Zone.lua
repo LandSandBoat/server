@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onChocoboDig = function(player, precheck)
-    return tpz.chocoboDig.start(player, precheck)
+    return xi.chocoboDig.start(player, precheck)
 end
 
 local function registerRegionAroundNPC(zone, NPCID, zoneID)
@@ -45,16 +45,16 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if player:getCharVar("[QUEST]FullSpeedAhead") == 1 then -- Normal Mode
-        player:addStatusEffect(tpz.effect.FULL_SPEED_AHEAD, 0, 3, tpz.fsa.duration)
+        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, 0, 3, xi.fsa.duration)
         return -1
     elseif player:getCharVar("[QUEST]FullSpeedAhead") == 2 then -- Easy Mode
-        player:addStatusEffect(tpz.effect.FULL_SPEED_AHEAD, 1, 3, tpz.fsa.duration)
+        player:addStatusEffect(xi.effect.FULL_SPEED_AHEAD, 1, 3, xi.fsa.duration)
         return -1
     end
 
     if quests.rainbow.onZoneIn(player) then
         cs = 901
-    elseif (player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1) then
         cs = 903
     end
 
@@ -62,12 +62,12 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if player:hasStatusEffect(tpz.effect.FULL_SPEED_AHEAD) then
-        tpz.fsa.onRegionEnter(player, region:GetRegionID())
+    if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
+        xi.fsa.onRegionEnter(player, region:GetRegionID())
     end
 end;
 
@@ -85,7 +85,7 @@ zone_object.onEventFinish = function(player, csid, option)
             player:updateEvent(0, 0, 0, 0, 0, 2)
         end
     elseif csid == 24 then
-        tpz.fsa.completeGame(player)
+        xi.fsa.completeGame(player)
     elseif csid == 26 and option == 0 then
         player:setCharVar("[QUEST]FullSpeedAhead", 1)
         player:setPos(475, 8.8, -159, 128, 105)

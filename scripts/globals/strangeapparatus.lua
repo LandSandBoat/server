@@ -44,7 +44,7 @@ local DARK_CLUSTER      = 4111
 
 local strAppData =
 {
-    [tpz.zone.DANGRUF_WADI] =
+    [ xi.zone.DANGRUF_WADI] =
     {
         suffix  = 'DW',
         uid     = 0,
@@ -67,7 +67,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.ORDELLES_CAVES] =
+    [ xi.zone.ORDELLES_CAVES] =
     {
         suffix  = 'OC',
         uid     = 3,
@@ -90,7 +90,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.OUTER_HORUTOTO_RUINS] =
+    [ xi.zone.OUTER_HORUTOTO_RUINS] =
     {
         suffix  = 'HR',
         uid     = 5,
@@ -113,7 +113,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.THE_ELDIEME_NECROPOLIS] =
+    [ xi.zone.THE_ELDIEME_NECROPOLIS] =
     {
         suffix  = 'EN',
         uid     = 4,
@@ -136,7 +136,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.GUSGEN_MINES] =
+    [ xi.zone.GUSGEN_MINES] =
     {
         suffix  = 'GM',
         uid     = 1,
@@ -159,7 +159,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.CRAWLERS_NEST] =
+    [ xi.zone.CRAWLERS_NEST] =
     {
         suffix  = 'CN',
         uid     = 2,
@@ -182,7 +182,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.MAZE_OF_SHAKHRAMI] =
+    [ xi.zone.MAZE_OF_SHAKHRAMI] =
     {
         suffix  = 'MS',
         uid     = 7,
@@ -205,7 +205,7 @@ local strAppData =
               931, 1.0000, 8, -- cermet_chunk
         },
     },
-    [tpz.zone.GARLAIGE_CITADEL] =
+    [ xi.zone.GARLAIGE_CITADEL] =
     {
         suffix  = 'GC',
         uid     = 6,
@@ -287,7 +287,7 @@ end
 -- strangeApparatus object
 -----------------------------------
 
-tpz.strangeApparatus =
+ xi.strangeApparatus =
 {
     onTrade = function(player, trade, eventId)
         local zone = player:getZoneID()

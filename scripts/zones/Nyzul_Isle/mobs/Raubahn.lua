@@ -71,23 +71,23 @@ entity.onMobSpawn = function(mob)
                 -- 2nd reraise should use ID.text.NOW_UNDERSTAND instead
                 if (phys >= magic and phys >= ranged) then
                     mob:showText(mob, ID.text.RESIST_MELEE)
-                    mob:setMod(tpz.mod.UDMGPHYS, -100)
+                    mob:setMod(xi.mod.UDMGPHYS, -100)
                 elseif (magic >= phys and magic >= ranged) then
                     mob:showText(mob, ID.text.RESIST_MAGIC)
-                    mob:addMod(tpz.mod.UDMGMAGIC, -100)
+                    mob:addMod(xi.mod.UDMGMAGIC, -100)
                 else
                     mob:showText(mob, ID.text.RESIST_RANGE)
-                    mob:addMod(tpz.mod.UDMGRANGE, -100)
+                    mob:addMod(xi.mod.UDMGRANGE, -100)
                 end
             end
         else
             -- We're out of raises, so we can go away now
-            mob:setMobMod(tpz.mobMod.BEHAVIOR, 0)
+            mob:setMobMod(xi.mobMod.BEHAVIOR, 0)
         end
     end)
 
     -- We're able to be raised initially and shouldn't despawn
-    mob:setMobMod(tpz.mobMod.BEHAVIOR, 5)
+    mob:setMobMod(xi.mobMod.BEHAVIOR, 5)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -107,7 +107,7 @@ entity.onMobFight = function(mob, target)
         if (mob:getHPP() <= hpTrigger and usedAzure == 0) then
             mob:setLocalVar("usedAzureLore", 1)
             mob:setLocalVar("AzureLoreHP", math.random(20, 50) -- Re-rolling the % for next "life"
-            mob:useMobAbility(tpz.jsa.AZURE_LORE)
+            mob:useMobAbility(xi.jsa.AZURE_LORE)
         end
     end
     ]]
@@ -122,7 +122,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     -- If he's out of reraises, display text
-    if (isKiller and mob:getMobMod(tpz.mobMod.BEHAVIOR) == 0) then
+    if (isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0) then
         mob:showText(mob, ID.text.MIRACLE)
     end
 end

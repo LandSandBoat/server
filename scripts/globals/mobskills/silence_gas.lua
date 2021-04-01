@@ -17,16 +17,16 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.SILENCE
+    local typeEffect = xi.effect.SILENCE
 
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 60)
 
 
-    local dmgmod = MobBreathMove(mob, target, 0.25, 2, tpz.magic.ele.WIND, 800)
+    local dmgmod = MobBreathMove(mob, target, 0.25, 2, xi.magic.ele.WIND, 800)
 
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, tpz.attackType.BREATH, tpz.damageType.WIND, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, MOBPARAM_IGNORE_SHADOWS)
 
-    target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.WIND)
+    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WIND)
     return dmg
 end
 

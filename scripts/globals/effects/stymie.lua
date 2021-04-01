@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.STYMIE
+-- xi.effect.STYMIE
 -----------------------------------
 local effect_object = {}
 

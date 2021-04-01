@@ -8,11 +8,11 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(tpz.mod.DMG, -98)
-    mob:setMobMod(tpz.mobMod.NO_MOVE, 1)
+    mob:addMod(xi.mod.DMG, -98)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
-    mob:setMod(tpz.mod.DEF, 1500)
-    mob:setMod(tpz.mod.MDEF, 900)
+    mob:setMod(xi.mod.DEF, 1500)
+    mob:setMod(xi.mod.MDEF, 900)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

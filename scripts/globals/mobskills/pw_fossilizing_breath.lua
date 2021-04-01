@@ -23,7 +23,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.PETRIFICATION
+    local typeEffect = xi.effect.PETRIFICATION
     local power = 1
     local duration = 30
 

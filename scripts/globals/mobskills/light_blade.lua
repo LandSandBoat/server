@@ -19,7 +19,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 8
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.RANGED, tpz.damageType.SLASHING, info.hitslanded)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.SLASHING, info.hitslanded)
     -- TODO: There's no MOBPARAM_RANGED, but MOBPARAM doesn't appear to do anything?
     -- Guessing ~40-100% damage based on range (20/50+).
     -- TODO: Find better data?
@@ -30,7 +30,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     distance = utils.clamp(distance, 0, 40)
     dmg = dmg * ((50 - distance) / 50)
 
-    target:takeDamage(dmg, mob, tpz.attackType.RANGED, tpz.damageType.SLASHING)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.SLASHING)
     return dmg
 end
 

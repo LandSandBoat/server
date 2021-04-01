@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FOCALIZATION
+-- xi.effect.FOCALIZATION
 -----------------------------------
 local effect_object = {}
 

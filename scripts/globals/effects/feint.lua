@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.FEINT
+-- xi.effect.FEINT
 -----------------------------------
 local effect_object = {}
 

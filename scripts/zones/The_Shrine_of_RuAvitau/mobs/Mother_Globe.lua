@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addStatusEffectEx(tpz.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
+    mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
     -- TODO: Effect can be stolen, giving a THF (Aura Steal) or BLU (Voracious Trunk) a 60 minute shock spikes effect (unknown potency).
     -- If effect is stolen, he will recast it instantly.
 end
@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
     -- Keep pets linked
     for i = motherGlobe + 1, motherGlobe + 6 do
         local pet = GetMobByID(i)
-        if pet:getCurrentAction() == tpz.act.ROAMING then
+        if pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
         end
     end

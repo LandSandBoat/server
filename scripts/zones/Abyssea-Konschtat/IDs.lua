@@ -7,7 +7,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.ABYSSEA_KONSCHTAT] =
+zones[ xi.zone.ABYSSEA_KONSCHTAT] =
 {
     text =
     {
@@ -65,17 +65,17 @@ zones[tpz.zone.ABYSSEA_KONSCHTAT] =
             --  [16839087] = {'qm10', {2912},                                                                                                                                           {}, 16838979}, -- Alkonost
             --  [16839088] = {'qm11', {2913},                                                                                                                                           {}, 16838993}, -- Arimaspi
             --  [16839089] = {'qm12', {2905},                                                                                                                                           {}, 16839033}, -- Fear Gorta
-            --  [16839090] = {'qm13',     {}, {tpz.ki.FRAGRANT_TREANT_PETAL, tpz.ki.FETID_RAFFLESIA_STALK, tpz.ki.DECAYING_MORBOL_TOOTH, tpz.ki.TURBID_SLIME_OIL, tpz.ki.VENOMOUS_PEISTE_CLAW}, 16839007}, -- Eccentric Eve
-            --  [16839091] = {'qm14',     {},                                                     {tpz.ki.TATTERED_HIPPOGRYPH_WING, tpz.ki.CRACKED_WIVRE_HORN, tpz.ki.MUCID_AHRIMAN_EYEBALL}, 16838872}, -- Kukulkan
-            --  [16839092] = {'qm15',     {},                                                                                                              {tpz.ki.TWISTED_TONBERRY_CROWN}, 16839068}, -- Bloodeye Vileberry
-            --  [16839093] = {'qm16',     {}, {tpz.ki.FRAGRANT_TREANT_PETAL, tpz.ki.FETID_RAFFLESIA_STALK, tpz.ki.DECAYING_MORBOL_TOOTH, tpz.ki.TURBID_SLIME_OIL, tpz.ki.VENOMOUS_PEISTE_CLAW}, 16839069}, -- Eccentric Eve
-            --  [16839094] = {'qm17',     {},                                                     {tpz.ki.TATTERED_HIPPOGRYPH_WING, tpz.ki.CRACKED_WIVRE_HORN, tpz.ki.MUCID_AHRIMAN_EYEBALL}, 16839070}, -- Kukulkan
-            --  [16839095] = {'qm18',     {},                                                                                                              {tpz.ki.TWISTED_TONBERRY_CROWN}, 16839071}, -- Bloodeye Vileberry
-            --  [16839096] = {'qm19',     {}, {tpz.ki.FRAGRANT_TREANT_PETAL, tpz.ki.FETID_RAFFLESIA_STALK, tpz.ki.DECAYING_MORBOL_TOOTH, tpz.ki.TURBID_SLIME_OIL, tpz.ki.VENOMOUS_PEISTE_CLAW}, 16839072}, -- Eccentric Eve
-            --  [16839097] = {'qm20',     {},                                                     {tpz.ki.TATTERED_HIPPOGRYPH_WING, tpz.ki.CRACKED_WIVRE_HORN, tpz.ki.MUCID_AHRIMAN_EYEBALL}, 16839073}, -- Kukulkan
-            --  [16839098] = {'qm21',     {},                                                                                                              {tpz.ki.TWISTED_TONBERRY_CROWN}, 16839074}, -- Bloodeye Vileberry
+            --  [16839090] = {'qm13',     {}, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW}, 16839007}, -- Eccentric Eve
+            --  [16839091] = {'qm14',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16838872}, -- Kukulkan
+            --  [16839092] = {'qm15',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839068}, -- Bloodeye Vileberry
+            --  [16839093] = {'qm16',     {}, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW}, 16839069}, -- Eccentric Eve
+            --  [16839094] = {'qm17',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16839070}, -- Kukulkan
+            --  [16839095] = {'qm18',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839071}, -- Bloodeye Vileberry
+            --  [16839096] = {'qm19',     {}, { xi.ki.FRAGRANT_TREANT_PETAL, xi.ki.FETID_RAFFLESIA_STALK, xi.ki.DECAYING_MORBOL_TOOTH, xi.ki.TURBID_SLIME_OIL, xi.ki.VENOMOUS_PEISTE_CLAW}, 16839072}, -- Eccentric Eve
+            --  [16839097] = {'qm20',     {},                                                     { xi.ki.TATTERED_HIPPOGRYPH_WING, xi.ki.CRACKED_WIVRE_HORN, xi.ki.MUCID_AHRIMAN_EYEBALL}, 16839073}, -- Kukulkan
+            --  [16839098] = {'qm21',     {},                                                                                                              { xi.ki.TWISTED_TONBERRY_CROWN}, 16839074}, -- Bloodeye Vileberry
         },
     },
 }
 
-return zones[tpz.zone.ABYSSEA_KONSCHTAT]
+return zones[ xi.zone.ABYSSEA_KONSCHTAT]

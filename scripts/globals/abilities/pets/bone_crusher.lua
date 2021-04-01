@@ -10,14 +10,14 @@ local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(tpz.effect.LIGHT_MANEUVER)
+    return master:countEffect(xi.effect.LIGHT_MANEUVER)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 3,
         atkmulti = 1,
-        weaponType = tpz.skill.CLUB,
+        weaponType = xi.skill.CLUB,
         ftp100 = 1.5,
         ftp200 = 1.5,
         ftp300 = 1.5,
@@ -56,8 +56,8 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
 
     if damage > 0 then
         local chance = 0.033 * skill:getTP()
-        if not target:hasStatusEffect(tpz.effect.STUN) and chance >= math.random()*100 then
-            target:addStatusEffect(tpz.effect.STUN, 1, 0, 4)
+        if not target:hasStatusEffect(xi.effect.STUN) and chance >= math.random()*100 then
+            target:addStatusEffect(xi.effect.STUN, 1, 0, 4)
         end
     end
 

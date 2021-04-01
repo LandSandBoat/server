@@ -10,7 +10,7 @@ local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(tpz.effect.FIRE_MANEUVER)
+    return master:countEffect(xi.effect.FIRE_MANEUVER)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)

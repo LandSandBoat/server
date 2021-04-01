@@ -12,13 +12,13 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if (target:getStatusEffect(tpz.effect.PARALYSIS) ~= nil) then
-        target:delStatusEffect(tpz.effect.PARALYSIS)
-        spell:setMsg(tpz.msg.basic.MAGIC_REMOVE_EFFECT)
+    if (target:getStatusEffect(xi.effect.PARALYSIS) ~= nil) then
+        target:delStatusEffect(xi.effect.PARALYSIS)
+        spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
-    return tpz.effect.PARALYSIS
+    return xi.effect.PARALYSIS
 end
 
 return spell_object

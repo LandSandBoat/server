@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.RERAISE
+-- xi.effect.RERAISE
 -----------------------------------
 local effect_object = {}
 

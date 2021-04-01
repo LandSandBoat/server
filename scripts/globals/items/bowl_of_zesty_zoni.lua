@@ -24,46 +24,46 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD) then
-        result = tpz.msg.basic.IS_FULL
+    if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 14400, 5619)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 14400, 5619)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.HP, 12)
-    target:addMod(tpz.mod.MP, 12)
-    target:addMod(tpz.mod.STR, 2)
-    target:addMod(tpz.mod.DEX, 2)
-    target:addMod(tpz.mod.VIT, 2)
-    target:addMod(tpz.mod.AGI, 2)
-    target:addMod(tpz.mod.ACC, 2)
-    target:addMod(tpz.mod.RACC, 2)
-    target:addMod(tpz.mod.ATT, 2)
-    target:addMod(tpz.mod.RATT, 2)
-    target:addMod(tpz.mod.EVA, 2)
-    target:addMod(tpz.mod.HPHEAL, 1)
-    target:addMod(tpz.mod.MPHEAL, 1)
+    target:addMod(xi.mod.HP, 12)
+    target:addMod(xi.mod.MP, 12)
+    target:addMod(xi.mod.STR, 2)
+    target:addMod(xi.mod.DEX, 2)
+    target:addMod(xi.mod.VIT, 2)
+    target:addMod(xi.mod.AGI, 2)
+    target:addMod(xi.mod.ACC, 2)
+    target:addMod(xi.mod.RACC, 2)
+    target:addMod(xi.mod.ATT, 2)
+    target:addMod(xi.mod.RATT, 2)
+    target:addMod(xi.mod.EVA, 2)
+    target:addMod(xi.mod.HPHEAL, 1)
+    target:addMod(xi.mod.MPHEAL, 1)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.HP, 12)
-    target:delMod(tpz.mod.MP, 12)
-    target:delMod(tpz.mod.STR, 2)
-    target:delMod(tpz.mod.DEX, 2)
-    target:delMod(tpz.mod.VIT, 2)
-    target:delMod(tpz.mod.AGI, 2)
-    target:delMod(tpz.mod.ACC, 2)
-    target:delMod(tpz.mod.RACC, 2)
-    target:delMod(tpz.mod.ATT, 2)
-    target:delMod(tpz.mod.RATT, 2)
-    target:delMod(tpz.mod.EVA, 2)
-    target:delMod(tpz.mod.HPHEAL, 1)
-    target:delMod(tpz.mod.MPHEAL, 1)
+    target:delMod(xi.mod.HP, 12)
+    target:delMod(xi.mod.MP, 12)
+    target:delMod(xi.mod.STR, 2)
+    target:delMod(xi.mod.DEX, 2)
+    target:delMod(xi.mod.VIT, 2)
+    target:delMod(xi.mod.AGI, 2)
+    target:delMod(xi.mod.ACC, 2)
+    target:delMod(xi.mod.RACC, 2)
+    target:delMod(xi.mod.ATT, 2)
+    target:delMod(xi.mod.RATT, 2)
+    target:delMod(xi.mod.EVA, 2)
+    target:delMod(xi.mod.HPHEAL, 1)
+    target:delMod(xi.mod.MPHEAL, 1)
 end
 
 return item_object

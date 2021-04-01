@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PASTORAL
+-- xi.effect.PASTORAL
 -----------------------------------
 local effect_object = {}
 

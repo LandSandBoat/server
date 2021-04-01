@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_ACCEPTED) then
         if (player:getCharVar("BetterPartOfValProg") == 0) then
             player:startEvent(116)
         elseif (player:getCharVar("BetterPartOfValProg") == 4) then
@@ -23,9 +23,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(117)
         end
-    elseif (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_COMPLETED and player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_AVAILABLE) then
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_AVAILABLE) then
             player:startEvent(120)
-    elseif (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_ACCEPTED) then
         if (player:getCharVar("FiresOfDiscProg") < 2) then
             player:startEvent(121)
         elseif (player:getCharVar("FiresOfDiscProg") == 2) then
@@ -39,7 +39,7 @@ entity.onTrigger = function(player, npc)
         elseif (player:getCharVar("FiresOfDiscProg") == 6) then
             player:startEvent(164)
         end
-    elseif (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT) == QUEST_COMPLETED) then
         player:startEvent(165)
     else
         player:startEvent(104)
@@ -53,25 +53,25 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 116) then
         player:setCharVar("BetterPartOfValProg", 1)
-        player:delKeyItem(tpz.ki.CLUMP_OF_ANIMAL_HAIR)
+        player:delKeyItem(xi.ki.CLUMP_OF_ANIMAL_HAIR)
     elseif (csid == 118) then
-        player:delKeyItem(tpz.ki.XHIFHUT)
-        player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BETTER_PART_OF_VALOR)
-        player:addKeyItem(tpz.ki.WARNING_LETTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.WARNING_LETTER)
+        player:delKeyItem(xi.ki.XHIFHUT)
+        player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BETTER_PART_OF_VALOR)
+        player:addKeyItem(xi.ki.WARNING_LETTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WARNING_LETTER)
         player:addGil(GIL_RATE*10000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10000)
         player:setCharVar("BetterPartOfValProg", 0)
         player:needToZone(true)
     elseif (csid == 120) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT)
-        player:delKeyItem(tpz.ki.WARNING_LETTER)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT)
+        player:delKeyItem(xi.ki.WARNING_LETTER)
     elseif (csid == 124) then
         player:setCharVar("FiresOfDiscProg", 3)
     elseif (csid == 126) then
         player:setCharVar("FiresOfDiscProg", 5)
     elseif (csid == 164) then
-        player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.FIRES_OF_DISCONTENT)
+        player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FIRES_OF_DISCONTENT)
         player:addGil(GIL_RATE*10000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*10000)
         player:setCharVar("FiresOfDiscProg", 0)

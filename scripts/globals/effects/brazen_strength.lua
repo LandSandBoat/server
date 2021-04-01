@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.BRAZEN_STRENGTH
+-- xi.effect.BRAZEN_STRENGTH
 -----------------------------------
 local effect_object = {}
 

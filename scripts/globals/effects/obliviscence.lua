@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.OBLIVISCENCE
+-- xi.effect.OBLIVISCENCE
 -----------------------------------
 local effect_object = {}
 

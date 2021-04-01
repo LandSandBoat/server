@@ -21,12 +21,12 @@ entity.onTrigger = function(player, npc)
         player:messageSpecial(ID.text.THE_PRESENCE_MOVES + 7) -- You sense a presence from the ceiling, but nothing seems to happen.
     elseif
         not GetMobByID(ID.mob.CHANDELIER):isSpawned() and
-        player:hasKeyItem(tpz.ki.BOMB_INCENSE) and
+        player:hasKeyItem(xi.ki.BOMB_INCENSE) and
         player:getCharVar("hittingTheMarquisateHagainCS") == 8 and
         os.time() > GetNPCByID(ID.npc.CHANDELIER_QM):getLocalVar("chandelierCooldown")
     then
         player:messageSpecial(ID.text.HEAT_FROM_CEILING)
-        player:startEvent(56, tpz.keyItem.BOMB_INCENSE)
+        player:startEvent(56, xi.keyItem.BOMB_INCENSE)
     else
         player:messageSpecial(ID.text.HOLE_IN_THE_CEILING) -- Default
     end

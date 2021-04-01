@@ -12,8 +12,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 258)
-    tpz.tutorial.onMobDeath(player)
+    xi.hunts.checkHunt(mob, player, 258)
+    xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)

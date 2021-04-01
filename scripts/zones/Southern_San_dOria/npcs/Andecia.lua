@@ -12,7 +12,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(547, 1) and trade:getItemCount() == 1 and player:getCharVar("OfferingWaterOK") == 1) then
             player:startEvent(624)
         end
@@ -21,7 +21,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local Tomb = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+    local Tomb = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     local WellWater = player:hasItem(567) -- Well Water
     local Waterskin = player:hasItem(547) -- Tomb Waterskin
 
@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
         else
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
             player:setCharVar("graveConcernsVar", 0)
             player:addItem(567)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 567) -- Well Water
@@ -56,11 +56,11 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 624) then
         player:tradeComplete()
         player:setCharVar("OfferingWaterOK", 0)
-        player:addTitle(tpz.title.ROYAL_GRAVE_KEEPER)
+        player:addTitle(xi.title.ROYAL_GRAVE_KEEPER)
         player:addGil(GIL_RATE*560)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*560)
         player:addFame(SANDORIA, 30)
-        player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.GRAVE_CONCERNS)
+        player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     end
 
 end

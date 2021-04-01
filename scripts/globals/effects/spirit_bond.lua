@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SPIRIT_BOND
+-- xi.effect.SPIRIT_BOND
 -----------------------------------
 local effect_object = {}
 

@@ -23,15 +23,15 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local multi = 1.0
-    if (caster:hasStatusEffect(tpz.effect.AZURE_LORE)) then
+    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
         multi = multi + 1.50
     end
     local params = {}
-    params.attackType = tpz.attackType.MAGICAL
-    params.damageType = tpz.damageType.WATER
-    params.attribute = tpz.mod.INT
-    params.skillType = tpz.skill.BLUE_MAGIC
-    params.effect = tpz.effect.NONE
+    params.attackType = xi.attackType.MAGICAL
+    params.damageType = xi.damageType.WATER
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.effect = xi.effect.NONE
     params.multiplier = multi
     params.tMultiplier = 3.5
     params.duppercap = 100

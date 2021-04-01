@@ -15,14 +15,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local sayItWithAHandbag = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
+    local sayItWithAHandbag = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
 
     if sayItWithAHandbag == QUEST_COMPLETED then
         player:startEvent(175)
-    elseif player:hasKeyItem(tpz.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
+    elseif player:hasKeyItem(xi.ki.REPAIRED_HANDBAG) and sayItWithAHandbagCS == 4 then
         player:startEvent(174)
-    elseif player:hasKeyItem(tpz.ki.TORN_PATCHES_OF_LEATHER) or sayItWithAHandbagCS == 3 then
+    elseif player:hasKeyItem(xi.ki.TORN_PATCHES_OF_LEATHER) or sayItWithAHandbagCS == 3 then
         player:startEvent(173)
     elseif sayItWithAHandbag == QUEST_ACCEPTED and sayItWithAHandbagCS == 1 then
         player:startEvent(172)
@@ -38,17 +38,17 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 174 then -- Option doesn't matter as NPC will take key item if yes or no
-        if npcUtil.completeQuest(player, CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG, {
+        if npcUtil.completeQuest(player, CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG, {
             item = 19110, -- Trainee's Needle
             var = "sayItWithAHandbagCS"
         }) then
-            player:delKeyItem(tpz.ki.REPAIRED_HANDBAG)
+            player:delKeyItem(xi.ki.REPAIRED_HANDBAG)
             player:setCharVar("sayItWithAHandbagBonusCS", 1)
         end
     elseif csid == 172 then
-        npcUtil.giveKeyItem(player, tpz.ki.TORN_PATCHES_OF_LEATHER)
+        npcUtil.giveKeyItem(player, xi.ki.TORN_PATCHES_OF_LEATHER)
     elseif csid == 169 then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG)
     end
 end
 

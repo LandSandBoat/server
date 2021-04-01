@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.AMNESIA
+-- xi.effect.AMNESIA
 -----------------------------------
 local effect_object = {}
 

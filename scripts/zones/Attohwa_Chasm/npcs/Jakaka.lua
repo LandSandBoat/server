@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
 
     local MiasmaFilterCD = player:getCharVar("[ENM]MiasmaFilter")
 
-    if (player:hasKeyItem(tpz.ki.MIASMA_FILTER)) then
+    if (player:hasKeyItem(xi.ki.MIASMA_FILTER)) then
         player:startEvent(11)
     else
         if (MiasmaFilterCD >= os.time()) then
@@ -43,8 +43,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 12) then
-        player:addKeyItem(tpz.ki.MIASMA_FILTER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MIASMA_FILTER)
+        player:addKeyItem(xi.ki.MIASMA_FILTER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MIASMA_FILTER)
         player:setCharVar("[ENM]MiasmaFilter", os.time()+(ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     elseif (csid == 13) then
         if (player:getFreeSlotsCount() == 0) then

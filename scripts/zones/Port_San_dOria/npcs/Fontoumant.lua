@@ -15,7 +15,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_ACCEPTED) then
         if (count == 1 and trade:getGil() == 100) then  -- pay to replace package
             local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
             if (prog == 10 and player:hasItem(593) == false) then
@@ -31,12 +31,12 @@ entity.onTrade = function(player, npc, trade)
         end
     end
 
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 6) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 6) then
         if (trade:hasItemQty(1127, 1) and count == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_1", 0)
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.SCOWLING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SCOWLING_STONE)
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
 
@@ -44,7 +44,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TheBrugaireConsortium = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+    local TheBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
     if (TheBrugaireConsortium == QUEST_AVAILABLE) then
         player:startEvent(509)
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
         if (freeSlots ~= 0) then
             player:addItem(593)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 593)
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:setCharVar("TheBrugaireConsortium-Parcels", 10)
         else
             player:startEvent(537)
@@ -104,8 +104,8 @@ entity.onEventFinish = function(player, csid, option)
         if (freeSlots ~= 0) then
             player:addItem(12289)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12289)
-            player:addTitle(tpz.title.COURIER_EXTRAORDINAIRE)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+            player:addTitle(xi.title.COURIER_EXTRAORDINAIRE)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
             player:addFame(SANDORIA, 30)
             player:setCharVar("TheBrugaireConsortium-Parcels", 0)
         else

@@ -14,28 +14,28 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local power = 3
 
-    local iBoost = caster:getMod(tpz.mod.BALLAD_EFFECT) + caster:getMod(tpz.mod.ALL_SONGS_EFFECT)
+    local iBoost = caster:getMod(xi.mod.BALLAD_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     power = power + iBoost
 
-    if (caster:hasStatusEffect(tpz.effect.SOUL_VOICE)) then
+    if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
         power = power * 2
-    elseif (caster:hasStatusEffect(tpz.effect.MARCATO)) then
+    elseif (caster:hasStatusEffect(xi.effect.MARCATO)) then
         power = power * 1.5
     end
-    caster:delStatusEffect(tpz.effect.MARCATO)
+    caster:delStatusEffect(xi.effect.MARCATO)
 
     local duration = 120
-    duration = duration * ((iBoost * 0.1) + (caster:getMod(tpz.mod.SONG_DURATION_BONUS)/100) + 1)
+    duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
 
-    if (caster:hasStatusEffect(tpz.effect.TROUBADOUR)) then
+    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
         duration = duration * 2
     end
 
-    if not (target:addBardSong(caster, tpz.effect.BALLAD, power, 0, duration, caster:getID(), 0, 3)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+    if not (target:addBardSong(caster, xi.effect.BALLAD, power, 0, duration, caster:getID(), 0, 3)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
-    return tpz.effect.BALLAD
+    return xi.effect.BALLAD
 end
 
 return spell_object

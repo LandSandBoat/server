@@ -23,13 +23,13 @@ entity.onTrigger = function(player, npc)
     local status = player:getCharVar("PromathiaStatus")
     local mission = player:getCurrentMission(COP)
 
-    if (mission == tpz.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG and status == 1) then
+    if (mission == xi.mission.id.cop.FOR_WHOM_THE_VERSE_IS_SUNG and status == 1) then
         player:startEvent(10011)
-    elseif (mission == tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS and status == 3) then
+    elseif (mission == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and status == 3) then
         player:startEvent(10012)
-    elseif (mission == tpz.mission.id.cop.DAWN and status == 4) then
+    elseif (mission == xi.mission.id.cop.DAWN and status == 4) then
         player:startEvent(129)
-    elseif ((mission == tpz.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN)) then
+    elseif ((mission == xi.mission.id.cop.DAWN and status > 4) or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)) then
         local hasRing = false
 
         for key, value in pairs(ring) do
@@ -65,8 +65,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("PromathiaStatus", 2)
     elseif (csid == 10012) then
         player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FLAMES_IN_THE_DARKNESS)
-        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_THE_DARKNESS)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
     elseif (csid == 129) then
         player:setCharVar("PromathiaStatus", 5)
     elseif ((csid == 84 or csid == 204) and option >= 5 and option <= 7) then

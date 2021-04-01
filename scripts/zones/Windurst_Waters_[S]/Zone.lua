@@ -9,7 +9,7 @@ require("scripts/globals/chocobo")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

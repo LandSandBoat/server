@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DISEASE
+-- xi.effect.DISEASE
 -----------------------------------
 local effect_object = {}
 

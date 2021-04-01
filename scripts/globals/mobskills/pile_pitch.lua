@@ -17,7 +17,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
     -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(tpz.mobMod.SKILL_LIST)
+    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     local mobhp = mob:getHPP()
 
     if ((skillList == 54 and mobhp < 26) or (skillList == 727 and mob:getAnimationSub() == 1)) then
@@ -30,10 +30,10 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     local damage = currentHP * .90
-    local typeEffect = tpz.effect.BIND
-    local dmg = MobFinalAdjustments(damage,mob,skill,target,tpz.attackType.MAGICAL,tpz.damageType.NONE,MOBPARAM_IGNORE_SHADOWS)
+    local typeEffect = xi.effect.BIND
+    local dmg = MobFinalAdjustments(damage,mob,skill,target, xi.attackType.MAGICAL, xi.damageType.NONE,MOBPARAM_IGNORE_SHADOWS)
     MobStatusEffectMove(mob, target, typeEffect, 1, 0, 30)
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.NONE)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     mob:resetEnmity(target)
     return dmg
 end

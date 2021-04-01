@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.YAGUDO_TORCH) then
+    if player:hasKeyItem(xi.ki.YAGUDO_TORCH) then
         player:startEvent(11)
     else
         player:messageSpecial(ID.text.PROBABLY_WORKS_WITH_SOMETHING_ELSE)

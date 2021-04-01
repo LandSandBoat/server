@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.EF_BADGE
+-- xi.effect.EF_BADGE
 -----------------------------------
 local effect_object = {}
 

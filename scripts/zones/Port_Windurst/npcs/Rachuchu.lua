@@ -10,7 +10,7 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onSpawn = function(npc)
-    npcUtil.castingAnimation(npc, tpz.magic.spellGroup.WHITE, 10.5)
+    npcUtil.castingAnimation(npc, xi.magic.spellGroup.WHITE, 10.5)
 end
 
 entity.onTrade = function(player, npc, trade)

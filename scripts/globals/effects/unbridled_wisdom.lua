@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.UNBRIDLED_WISDOM
+-- xi.effect.UNBRIDLED_WISDOM
 -----------------------------------
 local effect_object = {}
 

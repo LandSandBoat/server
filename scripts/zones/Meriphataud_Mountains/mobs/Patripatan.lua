@@ -9,18 +9,18 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMod(tpz.mod.DOUBLE_ATTACK, 10) -- "Noted Double Attack"
-    mob:addMod(tpz.mod.REGAIN, 50) -- "fairly potent Regain effect"
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 10) -- "Noted Double Attack"
+    mob:addMod(xi.mod.REGAIN, 50) -- "fairly potent Regain effect"
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PARALYZE)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 269)
-    tpz.regime.checkRegime(player, mob, 63, 1, tpz.regime.type.FIELDS)
+    xi.hunts.checkHunt(mob, player, 269)
+    xi.regime.checkRegime(player, mob, 63, 1, xi.regime.type.FIELDS)
 end
 
 return entity

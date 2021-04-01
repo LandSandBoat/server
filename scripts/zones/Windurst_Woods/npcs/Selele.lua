@@ -18,14 +18,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.tutorial.onTrigger(player, npc, 813, 2)
+    xi.tutorial.onTrigger(player, npc, 813, 2)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.tutorial.onEventFinish(player, csid, option, 813, 2)
+    xi.tutorial.onEventFinish(player, csid, option, 813, 2)
 end
 
 return entity

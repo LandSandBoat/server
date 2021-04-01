@@ -13,7 +13,7 @@ DEN_OF_RANCOR = {
         ..............................................................................................]]
     onTradeLanternChamber = function(player, npc, trade)
         if npcUtil.tradeHas(trade, 1139) then -- Rancor Flame
-            if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+            if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
@@ -45,7 +45,7 @@ DEN_OF_RANCOR = {
         ..............................................................................................]]
     onTradeLanternHaku = function(player, npc, trade)
         if npcUtil.tradeHas(trade, 1139) then -- Rancor Flame
-            if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+            if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
@@ -78,7 +78,7 @@ DEN_OF_RANCOR = {
         local itemId = 1131 + npc:getID() - ID.npc.LANTERN_OFFSET
 
         if npcUtil.tradeHas(trade, itemId) then -- Flame of Crimson or Blue Rancor
-            if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+            if npc:getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
             else
                 player:confirmTrade()
@@ -105,7 +105,7 @@ DEN_OF_RANCOR = {
     end,
 
     onTriggerLantern = function(player, npc)
-        if npc:getAnimation() == tpz.anim.OPEN_DOOR then
+        if npc:getAnimation() == xi.anim.OPEN_DOOR then
             player:messageSpecial(ID.text.LANTERN_OFFSET + 7) -- already lit
         else
             player:messageSpecial(ID.text.LANTERN_OFFSET + 20) -- unlit

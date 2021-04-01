@@ -22,13 +22,13 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1.5
-    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, tpz.magic.ele.LIGHT, dmgmod, TP_MAB_BONUS, 1)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.MAGICAL, tpz.damageType.LIGHT, MOBPARAM_IGNORE_SHADOWS)
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHT, dmgmod, TP_MAB_BONUS, 1)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, MOBPARAM_IGNORE_SHADOWS)
 
-    MobStatusEffectMove(mob, target, tpz.effect.BLINDNESS, 15, 3, 120)
-    MobStatusEffectMove(mob, target, tpz.effect.SILENCE, 1, 0, 60)
+    MobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 3, 120)
+    MobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
 
-    target:takeDamage(dmg, mob, tpz.attackType.MAGICAL, tpz.damageType.LIGHT)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     return dmg
 end
 

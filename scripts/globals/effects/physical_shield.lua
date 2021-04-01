@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PHYSICAL_SHIELD
+-- xi.effect.PHYSICAL_SHIELD
 -- Blocks all physical attacks
 -----------------------------------
 require("scripts/globals/status")
@@ -8,9 +8,9 @@ local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
     if (effect:getPower() < 2) then
-        target:addMod(tpz.mod.UDMGPHYS, -100)
+        target:addMod(xi.mod.UDMGPHYS, -100)
     else
-        target:addMod(tpz.mod.PHYS_ABSORB, 100)
+        target:addMod(xi.mod.PHYS_ABSORB, 100)
     end
 end
 
@@ -19,9 +19,9 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     if (effect:getPower() < 2) then
-        target:delMod(tpz.mod.UDMGPHYS, -100)
+        target:delMod(xi.mod.UDMGPHYS, -100)
     else
-        target:delMod(tpz.mod.PHYS_ABSORB, 100)
+        target:delMod(xi.mod.PHYS_ABSORB, 100)
     end
 end
 

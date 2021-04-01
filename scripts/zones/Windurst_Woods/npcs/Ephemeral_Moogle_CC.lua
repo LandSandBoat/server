@@ -14,19 +14,19 @@ local tradeEvent = 898
 local failEvent = 900
 
 entity.onTrade = function(player, npc, trade)
-    tpz.ephemeral.onTrade(player, trade, tradeEvent, failEvent)
+    xi.ephemeral.onTrade(player, trade, tradeEvent, failEvent)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.ephemeral.onTrigger(player, triggerEvent)
+    xi.ephemeral.onTrigger(player, triggerEvent)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.ephemeral.onEventUpdate(player)
+    xi.ephemeral.onEventUpdate(player)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.ephemeral.onEventFinish(player, option, csid == tradeEvent)
+    xi.ephemeral.onEventFinish(player, option, csid == tradeEvent)
 end
 
 return entity

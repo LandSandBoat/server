@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PALISADE
+-- xi.effect.PALISADE
 -----------------------------------
 local effect_object = {}
 

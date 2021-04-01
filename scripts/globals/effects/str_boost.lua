@@ -1,12 +1,12 @@
 -----------------------------------
--- tpz.effect.STR_BOOST
+-- xi.effect.STR_BOOST
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.STR, effect:getPower())
+    target:addMod(xi.mod.STR, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -14,14 +14,14 @@ effect_object.onEffectTick = function(target, effect)
     local boostSTR_effect_size = effect:getPower()
     if (boostSTR_effect_size > 0) then
         effect:setPower(boostSTR_effect_size - 1)
-        target:delMod(tpz.mod.STR, 1)
+        target:delMod(xi.mod.STR, 1)
     end
 end
 
 effect_object.onEffectLose = function(target, effect)
     local boostSTR_effect_size = effect:getPower()
     if (boostSTR_effect_size > 0) then
-        target:delMod(tpz.mod.STR, boostSTR_effect_size)
+        target:delMod(xi.mod.STR, boostSTR_effect_size)
     end
 end
 

@@ -15,26 +15,26 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
 
-    if (target:hasStatusEffect(tpz.effect.AGI_DOWN) or caster:hasStatusEffect(tpz.effect.AGI_BOOST)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if (target:hasStatusEffect(xi.effect.AGI_DOWN) or caster:hasStatusEffect(xi.effect.AGI_BOOST)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.INT)
+        local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
-        params.attribute = tpz.mod.INT
+        params.attribute = xi.mod.INT
         params.skillType = 37
         params.bonus = 0
         params.effect = nil
         local resist = applyResistance(caster, target, spell, params)
         if (resist <= 0.125) then
-            spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+            spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_ABSORB_AGI)
-            caster:addStatusEffect(tpz.effect.AGI_BOOST, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(tpz.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK) -- caster gains AGI
-            target:addStatusEffect(tpz.effect.AGI_DOWN, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(tpz.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK)    -- target loses AGI
+            spell:setMsg(xi.msg.basic.MAGIC_ABSORB_AGI)
+            caster:addStatusEffect(xi.effect.AGI_BOOST, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK) -- caster gains AGI
+            target:addStatusEffect(xi.effect.AGI_DOWN, ABSORB_SPELL_AMOUNT*resist*((100+(caster:getMod(xi.mod.AUGMENTS_ABSORB)))/100), ABSORB_SPELL_TICK, ABSORB_SPELL_AMOUNT*ABSORB_SPELL_TICK)    -- target loses AGI
         end
     end
-    return tpz.effect.AGI_DOWN
+    return xi.effect.AGI_DOWN
 end
 
 return spell_object

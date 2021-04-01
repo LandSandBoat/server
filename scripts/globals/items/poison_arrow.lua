@@ -16,15 +16,15 @@ item_object.onAdditionalEffect = function(player, target, damage)
         chance = utils.clamp(chance, 5, 95)
     end
     if (target:hasImmunity(256)) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
-    elseif (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.WATER, 0) <= 0.5) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    elseif (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0) <= 0.5) then
         return 0, 0, 0
     else
-        target:delStatusEffect(tpz.effect.POISON)
-        if (not target:hasStatusEffect(tpz.effect.POISON)) then
-            target:addStatusEffect(tpz.effect.POISON, 4, 3, 30)
+        target:delStatusEffect(xi.effect.POISON)
+        if (not target:hasStatusEffect(xi.effect.POISON)) then
+            target:addStatusEffect(xi.effect.POISON, 4, 3, 30)
         end
-        return tpz.subEffect.POISON, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.POISON
+        return xi.subEffect.POISON, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.POISON
     end
 end
 

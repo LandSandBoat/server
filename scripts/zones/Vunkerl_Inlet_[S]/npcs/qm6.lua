@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Eati = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.EVIL_AT_THE_INLET)
+    local Eati = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
 
-    if Eati == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.EVIL_WARDING_SEAL) then
+    if Eati == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.EVIL_WARDING_SEAL) then
         player:startEvent(112)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
@@ -28,7 +28,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 112 then
-        player:delKeyItem(tpz.ki.EVIL_WARDING_SEAL)
+        player:delKeyItem(xi.ki.EVIL_WARDING_SEAL)
     end
 end
 

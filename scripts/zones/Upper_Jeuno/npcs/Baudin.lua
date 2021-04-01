@@ -40,17 +40,17 @@ entity.onTrade = function(player, npc, trade)
         then
             player:startEvent(177, 10 - player:getCharVar("saveTheClockTowerVar")) -- "Save the Clock Tower" Quest
         end
-    elseif (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then
+    elseif (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI) == QUEST_ACCEPTED and trade:hasItemQty(4377, 1) and trade:getItemCount() == 1) then
         player:startEvent(171) -- Finish Quest "Crest of Davoi" Start Quest "Save my Sister" with var, not addquest()
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local CrestOfDavoi = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
-    local SaveMySister = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+    local CrestOfDavoi = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
+    local SaveMySister = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
 
     -- You need to talk to Aldo before you can obtain the Crest of Davoi or Yagudo Torch
-    if (player:hasKeyItem(tpz.ki.SILVER_BELL) and CrestOfDavoi == QUEST_AVAILABLE) then
+    if (player:hasKeyItem(xi.ki.SILVER_BELL) and CrestOfDavoi == QUEST_AVAILABLE) then
         player:startEvent(174) -- Start Quest "Crest of Davoi"
     elseif (CrestOfDavoi == QUEST_ACCEPTED) then
         player:startEvent(175) -- During Quest "Crest of Davoi"
@@ -77,14 +77,14 @@ entity.onEventFinish = function(player, csid, option)
         player:addCharVar("saveTheClockTowerVar", 1)
         player:addCharVar("saveTheClockTowerNPCz2", 32)
     elseif (csid == 174 and option == 1) then
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
     elseif (csid == 171) then
         player:tradeComplete()
         player:setCharVar("saveMySisterVar", 1)
-        player:addKeyItem(tpz.ki.CREST_OF_DAVOI_KI)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CREST_OF_DAVOI_KI)
+        player:addKeyItem(xi.ki.CREST_OF_DAVOI_KI)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CREST_OF_DAVOI_KI)
         player:addFame(JEUNO, 30)
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CREST_OF_DAVOI)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CREST_OF_DAVOI)
 
     elseif (csid == 105) then
         player:setCharVar("saveMySisterVar", 3)
@@ -92,14 +92,14 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17041)
         else
-            player:addTitle(tpz.title.EXORCIST_IN_TRAINING)
+            player:addTitle(xi.title.EXORCIST_IN_TRAINING)
             player:addGil(GIL_RATE*3000)
             player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*3000)
             player:addItem(17041)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17041)
             player:tradeComplete()
             player:addFame(JEUNO, 30)
-            player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.SAVE_MY_SISTER)
+            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
         end
     end
 end

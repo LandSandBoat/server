@@ -34,7 +34,7 @@ entity.onEventFinish = function(player,csid,option)
     elseif csid == 5 then
         npcUtil.completeQuest(player, AHT_URHGAN, TRANSFORMATIONS, {
             item = 15265,
-            title = tpz.title.PARAGON_OF_BLUE_MAGE_EXCELLENCE,
+            title = xi.title.PARAGON_OF_BLUE_MAGE_EXCELLENCE,
             var = {"TransformationsProgress"}
         })
     end

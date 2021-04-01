@@ -10,12 +10,12 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 92, 2, tpz.regime.type.FIELDS)
-    tpz.regime.checkRegime(player, mob, 93, 2, tpz.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 92, 2, xi.regime.type.FIELDS)
+    xi.regime.checkRegime(player, mob, 93, 2, xi.regime.type.FIELDS)
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.SPINY_SPIPI_PH, 10, math.random(2700, 7200)) -- 45 to 120 minutes
+    xi.mob.phOnDespawn(mob, ID.mob.SPINY_SPIPI_PH, 10, math.random(2700, 7200)) -- 45 to 120 minutes
 end
 
 return entity

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.IFRITS_FAVOR
+-- xi.effect.IFRITS_FAVOR
 -----------------------------------
 local effect_object = {}
 

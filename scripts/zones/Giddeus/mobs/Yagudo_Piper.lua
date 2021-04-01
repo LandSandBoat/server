@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    tpz.mob.phOnDespawn(mob, ID.mob.VUU_PUQU_THE_BEGUILER_PH, 5, 900) -- 15 minutes
+    xi.mob.phOnDespawn(mob, ID.mob.VUU_PUQU_THE_BEGUILER_PH, 5, 900) -- 15 minutes
 end
 
 return entity

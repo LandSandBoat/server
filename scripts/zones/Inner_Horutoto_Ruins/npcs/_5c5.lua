@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and
         player:getCharVar("MissionStatus") == 1
     then
         player:startEvent(42)

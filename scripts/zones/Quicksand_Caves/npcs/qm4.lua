@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
-    if (player:getCurrentMission(BASTOK) == tpz.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 2) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CHAINS_THAT_BIND_US) and (missionStatus == 2) then
         player:startEvent(10)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

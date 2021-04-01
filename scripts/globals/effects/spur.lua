@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SPUR
+-- xi.effect.SPUR
 -----------------------------------
 local effect_object = {}
 

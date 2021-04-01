@@ -30,7 +30,7 @@ entity.onPath = function(npc)
         -- once a pathThrough begins, there doesn't seem to be a clean way to stop onPath
         -- from being called forever.
 
-        if (npc:atPoint(tpz.path.get(LOWER_JEUNO.lampPath, 48))) then
+        if (npc:atPoint(xi.path.get(LOWER_JEUNO.lampPath, 48))) then
             npc:clearPath()
             npc:setStatus(2)
 
@@ -39,11 +39,11 @@ entity.onPath = function(npc)
 
         else
             for i, v in ipairs(LOWER_JEUNO.lampPoints) do
-                local lampPos = tpz.path.get(LOWER_JEUNO.lampPath, v)
+                local lampPos = xi.path.get(LOWER_JEUNO.lampPath, v)
                 if (npc:atPoint(lampPos)) then
                     -- Vhana is at a lamp (she reaches them in reverse order)
                     local lampId = ID.npc.STREETLAMP_OFFSET + (12 - i)
-                    GetNPCByID(lampId):setAnimation(tpz.anim.OPEN_DOOR)
+                    GetNPCByID(lampId):setAnimation(xi.anim.OPEN_DOOR)
                     break
                 end
             end

@@ -13,9 +13,9 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:delStatusEffect(tpz.effect.RERAISE)
-    target:addStatusEffect(tpz.effect.RERAISE, 3, 0, 7200)
-    target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.RERAISE)
+    target:delStatusEffect(xi.effect.RERAISE)
+    target:addStatusEffect(xi.effect.RERAISE, 3, 0, 7200)
+    target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.RERAISE)
 end
 
 return item_object

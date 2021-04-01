@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SUBLIMATION_ACTIVATED
+-- xi.effect.SUBLIMATION_ACTIVATED
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -11,28 +11,28 @@ end
 effect_object.onEffectTick = function(target, effect)
     local complete = false
     local level = 0
-    if (target:getMainJob() == tpz.job.SCH) then
+    if (target:getMainJob() == xi.job.SCH) then
         level = target:getMainLvl()
     else
         level = target:getSubLvl()
     end
     local basemp = math.floor((level - 15)/10)
-    local bonus = target:getMod(tpz.mod.SUBLIMATION_BONUS)
+    local bonus = target:getMod(xi.mod.SUBLIMATION_BONUS)
 
     local dmg = 2 + bonus
 
     local store = effect:getPower() + basemp + bonus
 
-    local limit = math.floor((target:getBaseHP() + target:getMod(tpz.mod.HP) + target:getMerit(tpz.merit.MAX_HP)) / 4) +
-        target:getMerit(tpz.merit.MAX_SUBLIMATION)
+    local limit = math.floor((target:getBaseHP() + target:getMod(xi.mod.HP) + target:getMerit(xi.merit.MAX_HP)) / 4) +
+        target:getMerit(xi.merit.MAX_SUBLIMATION)
 
     if not (target:getHPP() < 51 ) then
-        if (target:hasStatusEffect(tpz.effect.STONESKIN)) then
-            local skin = target:getMod(tpz.mod.STONESKIN)
+        if (target:hasStatusEffect(xi.effect.STONESKIN)) then
+            local skin = target:getMod(xi.mod.STONESKIN)
             if (skin >= dmg) then --absorb all damage
-                target:delMod(tpz.mod.STONESKIN, dmg)
+                target:delMod(xi.mod.STONESKIN, dmg)
             else
-                target:delStatusEffect(tpz.effect.STONESKIN)
+                target:delStatusEffect(xi.effect.STONESKIN)
                 target:takeDamage(dmg - skin)
                 if (target:getHPP() < 51 ) then
                     complete = true
@@ -54,8 +54,8 @@ effect_object.onEffectTick = function(target, effect)
     end
 
     if (complete) then
-        target:delStatusEffectSilent(tpz.effect.SUBLIMATION_ACTIVATED)
-        target:addStatusEffect(tpz.effect.SUBLIMATION_COMPLETE, store, 0, 7200)
+        target:delStatusEffectSilent(xi.effect.SUBLIMATION_ACTIVATED)
+        target:addStatusEffect(xi.effect.SUBLIMATION_COMPLETE, store, 0, 7200)
     else
         effect:setPower(store)
     end

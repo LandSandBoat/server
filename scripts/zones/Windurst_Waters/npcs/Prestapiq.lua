@@ -14,8 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(tpz.region.MOVALPOLOS)
-    if (RegionOwner ~= tpz.nation.WINDURST) then
+    local RegionOwner = GetRegionOwner(xi.region.MOVALPOLOS)
+    if (RegionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.PRESTAPIQ_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.PRESTAPIQ_OPEN_DIALOG)
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             1650,  6500,   --Kopparnickel Ore
             5165,   736    --Movalpolos Water
         }
-        tpz.shop.general(player, stock, WINDURST)
+        xi.shop.general(player, stock, WINDURST)
 
     end
 

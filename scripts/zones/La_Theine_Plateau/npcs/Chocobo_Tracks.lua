@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE) == QUEST_ACCEPTED and player:getCharVar("ChocoboOnTheLoose") < 2) then
+    if (player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE) == QUEST_ACCEPTED and player:getCharVar("ChocoboOnTheLoose") < 2) then
         player:startEvent(209)
     else
         player:messageSpecial(ID.text.CHOCOBO_TRACKS)

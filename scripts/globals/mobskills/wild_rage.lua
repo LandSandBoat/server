@@ -36,16 +36,16 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         info.dmg = info.dmg * (1 + WILD_RAGE_DMG_INCREASE * num_scorps_dead)
     end
 
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING, MOBPARAM_3_SHADOW)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, MOBPARAM_3_SHADOW)
 
     -- king vinegrroon
     if (mob:getPool() == 2262) then
-        local typeEffect = tpz.effect.POISON
+        local typeEffect = xi.effect.POISON
         local power = 25
         MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 3, 60)
     end
 
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.SLASHING)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end
 

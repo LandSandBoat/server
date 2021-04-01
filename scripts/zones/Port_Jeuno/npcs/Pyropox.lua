@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(349)
     else
         player:showText(npc, ID.text.PYROPOX_SHOP_DIALOG)
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
     end
 end
 
@@ -44,7 +44,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 349 and option == 0 then
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
         player:setCharVar("spokePyropox", 0)
     end
 end

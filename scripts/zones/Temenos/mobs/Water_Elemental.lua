@@ -13,7 +13,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         if battlefield:getLocalVar("crateOpenedF6") ~= 1 then
             local mobID = mob:getID()
             if mobID >= ID.mob.TEMENOS_C_MOB[2] then
-                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(tpz.mod.WATERDEF, -128)
+                GetMobByID(ID.mob.TEMENOS_C_MOB[2]):setMod(xi.mod.WATERDEF, -128)
                 if GetMobByID(ID.mob.TEMENOS_C_MOB[2]+3):isAlive() then
                     DespawnMob(ID.mob.TEMENOS_C_MOB[2]+3)
                     SpawnMob(ID.mob.TEMENOS_C_MOB[2]+9)
@@ -24,7 +24,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
                 local mobZ = mob:getZPos()
                 local crateID = ID.npc.TEMENOS_E_CRATE[6] + (mobID - ID.mob.TEMENOS_E_MOB[6])
                 GetNPCByID(crateID):setPos(mobX, mobY, mobZ)
-                tpz.limbus.spawnRandomCrate(crateID, player, "crateMaskF6", battlefield:getLocalVar("crateMaskF6"), true)
+                xi.limbus.spawnRandomCrate(crateID, player, "crateMaskF6", battlefield:getLocalVar("crateMaskF6"), true)
             end
         end
     end

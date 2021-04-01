@@ -9,13 +9,13 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    --mob:setMobMod(tpz.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
+    --mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() ~= tpz.animation.OPEN_DOOR then
-            tpz.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])
+        if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() ~= xi.animation.OPEN_DOOR then
+            xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])
         end
     end
 end

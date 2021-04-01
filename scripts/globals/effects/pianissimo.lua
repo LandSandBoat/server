@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PIANISSIMO
+-- xi.effect.PIANISSIMO
 -----------------------------------
 local effect_object = {}
 

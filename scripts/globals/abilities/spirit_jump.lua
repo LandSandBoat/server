@@ -13,7 +13,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability, action)
-    return tpz.job_utils.dragoon.useSpiritJump(player, target, ability, action)
+    return xi.job_utils.dragoon.useSpiritJump(player, target, ability, action)
 end
 
 return ability_object

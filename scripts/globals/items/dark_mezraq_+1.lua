@@ -12,12 +12,12 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 15
 
-    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.ICE, 0) <= 0.5) then
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0) <= 0.5) then
         return 0, 0, 0
     else
-        target:delStatusEffect(tpz.effect.EVASION_BOOST)
-        target:addStatusEffect(tpz.effect.EVASION_DOWN, 25, 0, 30)
-        return tpz.subEffect.EVASION_DOWN, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.EVASION_DOWN
+        target:delStatusEffect(xi.effect.EVASION_BOOST)
+        target:addStatusEffect(xi.effect.EVASION_DOWN, 25, 0, 30)
+        return xi.subEffect.EVASION_DOWN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.EVASION_DOWN
     end
 end
 

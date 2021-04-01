@@ -13,45 +13,45 @@ local spell_object = {}
 local message_page_offset = 86
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return tpz.trust.canCast(caster, spell, 906)
+    return xi.trust.canCast(caster, spell, 906)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    return tpz.trust.spawn(caster, spell)
+    return xi.trust.spawn(caster, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.SPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.SPAWN)
 
     -- Stun all the things!
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_WS, 0,
-                        ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.STUN)
+                        ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_MS, 0,
-                        ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.STUN)
+                        ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_JA, 0,
-                        ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.STUN)
+                        ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 0,
-                        ai.r.MA, ai.s.SPECIFIC, tpz.magic.spell.STUN)
+                        ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STUN)
 
     -- Non-stun things
     mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.SOULEATER)
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.SOULEATER)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.ALWAYS, 0,
-                        ai.r.JA, ai.s.SPECIFIC, tpz.ja.LAST_RESORT)
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.LAST_RESORT)
 
     mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.RANDOM)
 end
 
 spell_object.onMobDespawn = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DESPAWN)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DESPAWN)
 end
 
 spell_object.onMobDeath = function(mob)
-    tpz.trust.message(mob, message_page_offset, tpz.trust.message_offset.DEATH)
+    xi.trust.message(mob, message_page_offset, xi.trust.message_offset.DEATH)
 end
 
 return spell_object

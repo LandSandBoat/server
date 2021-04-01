@@ -10,7 +10,7 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMainJob() == tpz.job.COR then
+    if mob:getMainJob() == xi.job.COR then
         return 0
     else
         return 1
@@ -19,9 +19,9 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    skill:setMsg(MobBuffMove(mob, tpz.effect.BLINK, 10, 0, 120))
+    skill:setMsg(MobBuffMove(mob, xi.effect.BLINK, 10, 0, 120))
 
-    return tpz.effect.BLINK
+    return xi.effect.BLINK
 end
 
 return mobskill_object

@@ -23,7 +23,7 @@ RIVERNE_SITE_B01 = {
         click on unstable displacement NPC
         ..............................................................................................]]
     unstableDisplacementTrigger = function(player, npc, event)
-        if (npc:getAnimation() == tpz.anim.OPEN_DOOR) then
+        if (npc:getAnimation() == xi.anim.OPEN_DOOR) then
             player:startEvent(event)
         else
             player:messageSpecial(ID.text.SD_VERY_SMALL)

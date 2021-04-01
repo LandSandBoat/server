@@ -13,25 +13,25 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1) then
+    if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return 0, 0
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
         return 0, 0
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_3) then
         return 0, 0
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_4) then
         return 0, 0
-    elseif player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5) then
+    elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_5) then
         return 0, 0
     else
-        return tpz.msg.basic.NO_FINISHINGMOVES, 0
+        return xi.msg.basic.NO_FINISHINGMOVES, 0
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    for move = tpz.effect.FINISHING_MOVE_1, tpz.effect.FINISHING_MOVE_5 do
+    for move = xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_5 do
         player:delStatusEffect(move)
-        player:addStatusEffect(tpz.effect.CLIMACTIC_FLOURISH, 3, 0, 60, 0, player:getMerit(tpz.merit.CLIMACTIC_FLOURISH_EFFECT))
+        player:addStatusEffect(xi.effect.CLIMACTIC_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.CLIMACTIC_FLOURISH_EFFECT))
     end
 end
 

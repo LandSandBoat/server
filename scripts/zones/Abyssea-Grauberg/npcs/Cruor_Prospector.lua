@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local cruor = player:getCurrency("cruor")
-    local demilune = tpz.abyssea.getDemiluneAbyssite(player)
+    local demilune = xi.abyssea.getDemiluneAbyssite(player)
     player:startEvent(2002, cruor, demilune)
 end
 

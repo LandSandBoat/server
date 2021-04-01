@@ -58,7 +58,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- ZM 15 -> ZM 16
     if
-        ZilartMission == tpz.mission.id.zilart.THE_SEALED_SHRINE and
+        ZilartMission == xi.mission.id.zilart.THE_SEALED_SHRINE and
         player:getCharVar("ZilartStatus") == 1 and
         xPos >= -45 and yPos >= -4 and zPos >= -240 and
         xPos <= -33 and yPos <= 0 and zPos <= -226 and
@@ -75,7 +75,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -143,8 +143,8 @@ end
 zone_object.onEventFinish = function(player, csid, option)
 
     if (csid == 51) then
-        player:completeMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_SEALED_SHRINE)
-        player:addMission(tpz.mission.log_id.ZILART, tpz.mission.id.zilart.THE_CELESTIAL_NEXUS)
+        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
+        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
         player:setCharVar("ZilartStatus", 0)
     end
 end

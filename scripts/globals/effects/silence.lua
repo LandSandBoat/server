@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SILENCE
+-- xi.effect.SILENCE
 -----------------------------------
 local effect_object = {}
 

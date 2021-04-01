@@ -10,9 +10,9 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (target:hasStatusEffect(tpz.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(tpz.effect.MAGIC_SHIELD)) then
+    if (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) then
         return 1
-    elseif (mob:hasStatusEffect(tpz.effect.PLAGUE) or mob:hasStatusEffect(tpz.effect.CURSE_I) or mob:hasStatusEffect(tpz.effect.MUTE)) then
+    elseif (mob:hasStatusEffect(xi.effect.PLAGUE) or mob:hasStatusEffect(xi.effect.CURSE_I) or mob:hasStatusEffect(xi.effect.MUTE)) then
         return 0
     elseif (math.random() < 0.25) then
         return 1
@@ -21,21 +21,21 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(tpz.msg.basic.NONE)
-    if (mob:hasStatusEffect(tpz.effect.PLAGUE) or mob:hasStatusEffect(tpz.effect.CURSE_I) or mob:hasStatusEffect(tpz.effect.MUTE)) then
+    skill:setMsg(xi.msg.basic.NONE)
+    if (mob:hasStatusEffect(xi.effect.PLAGUE) or mob:hasStatusEffect(xi.effect.CURSE_I) or mob:hasStatusEffect(xi.effect.MUTE)) then
         -- use Remedy!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 12, false)
-        mob:delStatusEffect(tpz.effect.PLAGUE)
-        mob:delStatusEffect(tpz.effect.CURSE_I)
-        mob:delStatusEffect(tpz.effect.MUTE)
+        mob:delStatusEffect(xi.effect.PLAGUE)
+        mob:delStatusEffect(xi.effect.CURSE_I)
+        mob:delStatusEffect(xi.effect.MUTE)
     elseif (math.random() < 0.5) then
         -- Carnal Incense!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 10, false)
-        mob:addStatusEffect(tpz.effect.PHYSICAL_SHIELD, 0, 0, 30)
+        mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 0, 30)
     else
         -- Spiritual Incense!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 11, false)
-        mob:addStatusEffect(tpz.effect.MAGIC_SHIELD, 0, 0, 30)
+        mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 0, 0, 30)
     end
     return 0
 end

@@ -12,7 +12,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+    local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(576, 1) and trade:getItemCount() == 1) then
@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SirensTear = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+    local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIREN_S_TEAR)
 
     if (SirensTear == QUEST_AVAILABLE) then
         player:startEvent(81)
@@ -39,14 +39,14 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 81) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIREN_S_TEAR)
     elseif (csid == 82) then
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_SIREN_S_TEAR)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIREN_S_TEAR)
         player:addFame(BASTOK, 120)
         player:addGil(150*GIL_RATE)
         player:messageSpecial(ID.text.GIL_OBTAINED, 150*GIL_RATE)
-        player:addTitle(tpz.title.TEARJERKER)
+        player:addTitle(xi.title.TEARJERKER)
         player:setCharVar("SirensTear", 0)
     end
 end

@@ -21,7 +21,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 100 and option == 1) then
-        tpz.teleport.to(player, tpz.teleport.id.VALKURM_VORTEX)
+        xi.teleport.to(player, xi.teleport.id.VALKURM_VORTEX)
     end
 
 end

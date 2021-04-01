@@ -35,13 +35,13 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     -- addEx to pervent dispel
-    mob:addStatusEffectEx(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 45)
-    skill:setMsg(tpz.msg.basic.SKILL_GAIN_EFFECT)
+    mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 45)
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     if (mob:getFamily() == 313) then -- Tinnin follows this up immediately with Nerve Gas
         mob:useMobAbility(1580)
     end
 
-    return tpz.effect.PHYSICAL_SHIELD
+    return xi.effect.PHYSICAL_SHIELD
 end
 
 return mobskill_object

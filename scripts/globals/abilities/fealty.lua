@@ -15,9 +15,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local power = player:getMerit(tpz.merit.FEALTY)
+    local power = player:getMerit(xi.merit.FEALTY)
 
-    player:addStatusEffect(tpz.effect.FEALTY, power, 0, 60 + (power * 5))
+    player:addStatusEffect(xi.effect.FEALTY, power, 0, 60 + (power * 5))
 end
 
 return ability_object

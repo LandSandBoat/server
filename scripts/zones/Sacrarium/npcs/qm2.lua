@@ -19,13 +19,13 @@ entity.onTrigger = function(player, npc)
     local prof = GetMobByID(ID.mob.OLD_PROFESSOR_MARISELLE)
     local profLoc = GetServerVariable("Old_Prof_Spawn_Location")
 
-    if (cop == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and copStat == 3 and not player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY) and not prof:isSpawned() and profLoc == 2) then
+    if (cop == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and copStat == 3 and not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and not prof:isSpawned() and profLoc == 2) then
         player:messageSpecial(ID.text.EVIL_PRESENCE)
         SpawnMob(ID.mob.OLD_PROFESSOR_MARISELLE):updateClaim(player)
         prof:setPos(npc:getXPos()+1, npc:getYPos(), npc:getZPos()+1) -- Set Prof. spawn x and z pos. +1 from NPC
-    elseif (cop == tpz.mission.id.cop.THE_SECRETS_OF_WORSHIP and copStat == 4 and not player:hasKeyItem(tpz.ki.RELIQUIARIUM_KEY)) then
-        player:addKeyItem(tpz.ki.RELIQUIARIUM_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.RELIQUIARIUM_KEY)
+    elseif (cop == xi.mission.id.cop.THE_SECRETS_OF_WORSHIP and copStat == 4 and not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY)) then
+        player:addKeyItem(xi.ki.RELIQUIARIUM_KEY)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RELIQUIARIUM_KEY)
     elseif (profLoc == 2) then
         player:messageSpecial(ID.text.DRAWER_SHUT)
     else

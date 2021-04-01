@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DEODORIZE
+-- xi.effect.DEODORIZE
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------
@@ -11,7 +11,7 @@ end
 effect_object.onEffectTick = function(target, effect)
     local tick = effect:getLastTick()
     if (tick < 4 and tick ~= 0) then
-        target:messageBasic(tpz.msg.basic.ABOUT_TO_WEAR_OFF, effect:getType())
+        target:messageBasic(xi.msg.basic.ABOUT_TO_WEAR_OFF, effect:getType())
     end
 end
 

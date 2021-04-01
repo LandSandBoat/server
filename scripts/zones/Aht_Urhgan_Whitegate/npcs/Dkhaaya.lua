@@ -14,11 +14,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local olduumQuest = player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+    local olduumQuest = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
     local ringCheck = player:hasItem(2217)
     if olduumQuest == QUEST_AVAILABLE then
         player:startEvent(4)
-    elseif player:hasKeyItem(tpz.ki.ELECTROLOCOMOTIVE) or player:hasKeyItem(tpz.ki.ELECTROPOT) or player:hasKeyItem(tpz.ki.ELECTROCELL) and ringCheck == false then
+    elseif player:hasKeyItem(xi.ki.ELECTROLOCOMOTIVE) or player:hasKeyItem(xi.ki.ELECTROPOT) or player:hasKeyItem(xi.ki.ELECTROCELL) and ringCheck == false then
         if olduumQuest == QUEST_ACCEPTED then
             player:startEvent(6)
         else
@@ -38,19 +38,19 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if csid == 4 then
-        player:addKeyItem(tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
-        player:addQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+        player:addKeyItem(xi.ki.DKHAAYAS_RESEARCH_JOURNAL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DKHAAYAS_RESEARCH_JOURNAL)
+        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
     elseif csid == 6 or csid == 8 then
         if player:getFreeSlotsCount() >= 1 then
             player:addItem(2217)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 2217)
-            player:delKeyItem(tpz.ki.DKHAAYAS_RESEARCH_JOURNAL)
-            player:delKeyItem(tpz.ki.ELECTROLOCOMOTIVE)
-            player:delKeyItem(tpz.ki.ELECTROPOT)
-            player:delKeyItem(tpz.ki.ELECTROCELL)
+            player:delKeyItem(xi.ki.DKHAAYAS_RESEARCH_JOURNAL)
+            player:delKeyItem(xi.ki.ELECTROLOCOMOTIVE)
+            player:delKeyItem(xi.ki.ELECTROPOT)
+            player:delKeyItem(xi.ki.ELECTROCELL)
             if csid == 6 then
-                player:completeQuest(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.OLDUUM)
+                player:completeQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
             end
         else
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 2217)

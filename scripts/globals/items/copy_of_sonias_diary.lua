@@ -10,11 +10,11 @@ require("scripts/globals/item_utils")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    return item_utils.skillBookCheck(target, tpz.skill.EVASION)
+    return item_utils.skillBookCheck(target, xi.skill.EVASION)
 end
 
 item_object.onItemUse = function(target)
-    item_utils.skillBookUse(target, tpz.skill.EVASION)
+    item_utils.skillBookUse(target, xi.skill.EVASION)
 end
 
 return item_object

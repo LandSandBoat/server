@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL and
+        player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL and
         player:getCharVar("MissionStatus") == 9 and
         npcUtil.tradeHas(trade, 16535) -- bronze sword
     then
@@ -21,16 +21,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.THE_RESCUE_DRILL then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL then
         local missionStatus = player:getCharVar("MissionStatus")
 
         if missionStatus >= 2 and missionStatus <= 7 then
             player:startEvent(1)
-        elseif missionStatus >= 10 or player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.THE_RESCUE_DRILL) then
+        elseif missionStatus >= 10 or player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_RESCUE_DRILL) then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG + 9)
         elseif missionStatus >= 8 then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG)
-        elseif player:getNation() == tpz.nation.SANDORIA then
+        elseif player:getNation() == xi.nation.SANDORIA then
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG + 2)
         else
             player:showText(npc, ID.text.RUILLONT_INITIAL_DIALOG + 1)

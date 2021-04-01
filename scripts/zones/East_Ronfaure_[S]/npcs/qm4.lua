@@ -13,8 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.STEAMED_RAMS) == QUEST_ACCEPTED) then
-        if (player:hasKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)) then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS) == QUEST_ACCEPTED) then
+        if (player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)) then
             player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
         else
             player:startEvent(2)
@@ -31,8 +31,8 @@ entity.onEventFinish = function(player, csid, option)
     -- print("CSID:", csid)
     -- print("RESULT:", option)
     if (csid == 2) then
-        player:addKeyItem(tpz.ki.PIECE_OF_SHATTERED_LUMBER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PIECE_OF_SHATTERED_LUMBER)
+        player:addKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PIECE_OF_SHATTERED_LUMBER)
     end
 end
 

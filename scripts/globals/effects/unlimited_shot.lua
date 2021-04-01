@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.UNLIMITED_SHOT
+-- xi.effect.UNLIMITED_SHOT
 -----------------------------------
 local effect_object = {}
 

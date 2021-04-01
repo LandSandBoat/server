@@ -15,7 +15,7 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     target:dispelStatusEffect()
     target:dispelStatusEffect()
-    skill:setMsg(tpz.msg.basic.NONE)
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 

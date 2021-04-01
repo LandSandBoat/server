@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.TEMPLE_KNIGHT_KEY) then
+    if player:hasKeyItem(xi.ki.TEMPLE_KNIGHT_KEY) then
         GetNPCByID(npc:getID() - 2):openDoor(15)
     else
         player:messageSpecial(ID.text.LARGE_KEYHOLE_DESCRIPTION)

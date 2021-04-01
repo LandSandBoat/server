@@ -16,12 +16,12 @@ end
 
 entity.onTrigger = function(player, npc)
     local TOTD = VanadielTOTD()
-    local TheStarsOfIfrit = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_STARS_OF_IFRIT)
+    local TheStarsOfIfrit = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
 
-    if (TOTD == tpz.time.NIGHT and IsMoonFull()) then
-        if (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CARRIER_PIGEON_LETTER) == false) then
-            player:addKeyItem(tpz.ki.CARRIER_PIGEON_LETTER)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.CARRIER_PIGEON_LETTER)
+    if (TOTD == xi.time.NIGHT and IsMoonFull()) then
+        if (TheStarsOfIfrit == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == false) then
+            player:addKeyItem(xi.ki.CARRIER_PIGEON_LETTER)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CARRIER_PIGEON_LETTER)
         end
     end
 end

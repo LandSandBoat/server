@@ -58,35 +58,35 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(tpz.path.first(path))
+    npc:setPos(xi.path.first(path))
 end
 
 entity.onPath = function(npc)
-    if npc:atPoint(tpz.path.get(path, 23)) then
+    if npc:atPoint(xi.path.get(path, 23)) then
         npc:lookAt(GetNPCByID(ID.npc.ARPETION):getPos())
         npc:wait()
-    elseif npc:atPoint(tpz.path.get(path, -1)) then
+    elseif npc:atPoint(xi.path.get(path, -1)) then
         -- give package to Lusiane, wait 4 seconds, then continue
         local lus = GetNPCByID(ID.npc.LUSIANE)
         lus:showText(npc, ID.text.RAMINEL_DELIVERY)
         npc:showText(lus, ID.text.LUSIANE_THANK)
         npc:wait()
-    elseif npc:atPoint(tpz.path.last(path)) then
+    elseif npc:atPoint(xi.path.last(path)) then
         -- when I walk away stop looking at me
         GetNPCByID(ID.npc.LUSIANE):clearTargID()
     end
 
     -- go back and forth the set path
-    tpz.path.patrol(npc, path)
+    xi.path.patrol(npc, path)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 1 then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 1 then
         if (trade:hasItemQty(1127, 1) and trade:getItemCount() == 1) then -- Trade Kindred seal
             player:setCharVar("ridingOnTheClouds_1", 0)
             player:tradeComplete()
-            player:addKeyItem(tpz.ki.SCOWLING_STONE)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.SCOWLING_STONE)
+            player:addKeyItem(xi.ki.SCOWLING_STONE)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SCOWLING_STONE)
         end
     end
 end

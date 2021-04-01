@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onPetAbility = function(target, pet, skill, summoner)
-    local bonusTime = utils.clamp(summoner:getSkillLevel(tpz.skill.SUMMONING_MAGIC) - 300, 0, 200)
+    local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration = 180 + bonusTime
 
     local moon = VanadielMoonPhase()
@@ -34,21 +34,21 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
     else
         buffvalue = 1
     end
-    target:delStatusEffect(tpz.effect.STR_BOOST)
-    target:delStatusEffect(tpz.effect.DEX_BOOST)
-    target:delStatusEffect(tpz.effect.VIT_BOOST)
-    target:delStatusEffect(tpz.effect.AGI_BOOST)
-    target:delStatusEffect(tpz.effect.MND_BOOST)
-    target:delStatusEffect(tpz.effect.CHR_BOOST)
+    target:delStatusEffect(xi.effect.STR_BOOST)
+    target:delStatusEffect(xi.effect.DEX_BOOST)
+    target:delStatusEffect(xi.effect.VIT_BOOST)
+    target:delStatusEffect(xi.effect.AGI_BOOST)
+    target:delStatusEffect(xi.effect.MND_BOOST)
+    target:delStatusEffect(xi.effect.CHR_BOOST)
 
-    target:addStatusEffect(tpz.effect.STR_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(tpz.effect.DEX_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(tpz.effect.VIT_BOOST, buffvalue, 0, duration)
-    target:addStatusEffect(tpz.effect.AGI_BOOST, 8-buffvalue, 0, duration)
-    target:addStatusEffect(tpz.effect.INT_BOOST, 8-buffvalue, 0, duration)
-    target:addStatusEffect(tpz.effect.MND_BOOST, 8-buffvalue, 0, duration)
-    target:addStatusEffect(tpz.effect.CHR_BOOST, 8-buffvalue, 0, duration)
-    skill:setMsg(tpz.msg.basic.NONE)
+    target:addStatusEffect(xi.effect.STR_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.DEX_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.VIT_BOOST, buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.AGI_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.INT_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.MND_BOOST, 8-buffvalue, 0, duration)
+    target:addStatusEffect(xi.effect.CHR_BOOST, 8-buffvalue, 0, duration)
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 

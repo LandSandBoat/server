@@ -16,36 +16,36 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getAnimation() ~= 1) then
-        return tpz.msg.basic.REQUIRES_COMBAT, 0
+        return xi.msg.basic.REQUIRES_COMBAT, 0
     else
-        if (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_1)) then
-            player:delStatusEffect(tpz.effect.FINISHING_MOVE_1)
+        if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
+            player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_2)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_2)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_1, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_2)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_1, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_3)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_3)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_2, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_3)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_2, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_4)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_4)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_3, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_4)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_3, 1, 0, 7200)
             return 0, 0
-        elseif (player:hasStatusEffect(tpz.effect.FINISHING_MOVE_5)) then
-            player:delStatusEffectSilent(tpz.effect.FINISHING_MOVE_5)
-            player:addStatusEffect(tpz.effect.FINISHING_MOVE_4, 1, 0, 7200)
+        elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
+            player:delStatusEffectSilent(xi.effect.FINISHING_MOVE_5)
+            player:addStatusEffect(xi.effect.FINISHING_MOVE_4, 1, 0, 7200)
             return 0, 0
         else
-            return tpz.msg.basic.NO_FINISHINGMOVES, 0
+            return xi.msg.basic.NO_FINISHINGMOVES, 0
         end
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability, action)
 
-    local isSneakValid = player:hasStatusEffect(tpz.effect.SNEAK_ATTACK)
+    local isSneakValid = player:hasStatusEffect(xi.effect.SNEAK_ATTACK)
     if (isSneakValid and not player:isBehind(target)) then
         isSneakValid = false
     end
@@ -57,22 +57,22 @@ ability_object.onUseAbility = function(player, target, ability, action)
         local spell = GetSpell(216)
         local params = {}
         params.diff = 0
-        params.skillType = player:getWeaponSkillType(tpz.slot.MAIN)
-        params.bonus = 50 - target:getMod(tpz.mod.STUNRES)
+        params.skillType = player:getWeaponSkillType(xi.slot.MAIN)
+        params.bonus = 50 - target:getMod(xi.mod.STUNRES)
         local resist = applyResistance(player, target, spell, params)
 
         if resist > 0.25 then
-            target:delStatusEffectSilent(tpz.effect.WEIGHT)
-            target:addStatusEffect(tpz.effect.WEIGHT, 50, 0, 60 * resist)
+            target:delStatusEffectSilent(xi.effect.WEIGHT)
+            target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60 * resist)
         else
-            ability:setMsg(tpz.msg.basic.JA_DAMAGE)
+            ability:setMsg(xi.msg.basic.JA_DAMAGE)
         end
-        ability:setMsg(tpz.msg.basic.JA_ENFEEB_IS)
-        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(tpz.slot.MAIN)))
+        ability:setMsg(xi.msg.basic.JA_ENFEEB_IS)
+        action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
         action:speceffect(target:getID(), 2)
-        return tpz.effect.WEIGHT
+        return xi.effect.WEIGHT
     else
-        ability:setMsg(tpz.msg.basic.JA_MISS)
+        ability:setMsg(xi.msg.basic.JA_MISS)
         return 0
     end
 end

@@ -15,10 +15,10 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local effect = target:eraseStatusEffect()
 
-    if (effect == tpz.effect.NONE) then
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no effect
+    if (effect == xi.effect.NONE) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_ERASE)
+        spell:setMsg(xi.msg.basic.MAGIC_ERASE)
     end
 
     return effect

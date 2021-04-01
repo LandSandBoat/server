@@ -17,10 +17,10 @@ g_mixins.spawn_casket = function(mob)
             if mob:getMaster() ~= nil then
                 local master = mob:getMaster()
                 if master:isMob() then -- sanity check, ensuring the mob killed is not a player's pet.
-                    tpz.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                    xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
                 end
             else
-                tpz.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
+                xi.caskets.spawnCasket(player, mob, mobPos.x, mobPos.y, mobPos.z, mobPos.rot)
             end
         end
     end)

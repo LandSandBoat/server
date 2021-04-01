@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if GetRegionOwner(tpz.region.ELSHIMOUPLANDS) ~= tpz.nation.BASTOK then
+    if GetRegionOwner(xi.region.ELSHIMOUPLANDS) ~= xi.nation.BASTOK then
         player:showText(npc, ID.text.DHENTEVRYUKOH_CLOSED_DIALOG)
     else
         local stock =
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         }
 
         player:showText(npc, ID.text.DHENTEVRYUKOH_OPEN_DIALOG)
-        tpz.shop.general(player, stock, BASTOK)
+        xi.shop.general(player, stock, BASTOK)
     end
 end
 

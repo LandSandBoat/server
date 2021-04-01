@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    func.moldQmOnTrigger(player, tpz.ki.EXORAY_MOLD_CRUMB1)
+    func.moldQmOnTrigger(player, xi.ki.EXORAY_MOLD_CRUMB1)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -12,21 +12,21 @@ local item_object = {}
 item_object.onItemCheck = function(target)
     pet = target:getPet()
     if (pet == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET
-    elseif (pet:hasStatusEffect(tpz.effect.MEDICINE)) then
-        return tpz.msg.basic.ITEM_NO_USE_MEDICATED
+        return xi.msg.basic.REQUIRES_A_PET
+    elseif (pet:hasStatusEffect(xi.effect.MEDICINE)) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
     return 0
 end
 
 item_object.onItemUse = function(target)
-    if (target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 180, 5320)) then
-        target:messageBasic(GAINS_EFFECT_OF_STATUS, tpz.effect.MEDICINE)
-        pet:delStatusEffect(tpz.effect.SLEEP_I)
-        pet:delStatusEffect(tpz.effect.SLEEP_II)
-        pet:delStatusEffect(tpz.effect.LULLABY)
+    if (target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180, 5320)) then
+        target:messageBasic(GAINS_EFFECT_OF_STATUS, xi.effect.MEDICINE)
+        pet:delStatusEffect(xi.effect.SLEEP_I)
+        pet:delStatusEffect(xi.effect.SLEEP_II)
+        pet:delStatusEffect(xi.effect.LULLABY)
     else
-        target:messageBasic(tpz.msg.basic.NO_EFFECT)
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
     end
 end
 

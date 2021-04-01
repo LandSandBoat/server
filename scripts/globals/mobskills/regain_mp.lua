@@ -15,7 +15,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local mp = target:getMaxMP() - target:getMP()
 
-    skill:setMsg(tpz.msg.basic.AOE_REGAIN_MP)
+    skill:setMsg(xi.msg.basic.AOE_REGAIN_MP)
 
     target:addMP(mp)
 

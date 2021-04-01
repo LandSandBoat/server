@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+    local questStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
 
     if (questStatus == QUEST_ACCEPTED and questStatusVar == 1) then
@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
     local passYear = player:getCharVar("THE_ROAD_TO_AHT_URHGAN_Year")
     local currentDay = VanadielDayOfTheYear()
     local passReady = ((passDay < currentDay) or (passDay > currentDay and passYear < VanadielYear()))
-    local questStatus = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+    local questStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     local questStatusVar = player:getCharVar("THE_ROAD_TO_AHT_URHGAN")
 
     if (questStatus == QUEST_AVAILABLE and ENABLE_TOAU == 1) then
@@ -92,7 +92,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 10062 and option == 1) then -- Offer Quest, First Dialog.
-        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
     elseif (csid == 10063 or csid == 10064) then
         if (csid == 10063 and option == 1 or csid == 10063 and option == 2) then -- Offically offer quest, Second Dialog.
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 1)
@@ -103,22 +103,22 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Year", VanadielYear())
         end
     elseif (csid == 10067) then
-        player:addKeyItem(tpz.ki.MAP_OF_WAJAOM_WOODLANDS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MAP_OF_WAJAOM_WOODLANDS)
-        player:addKeyItem(tpz.ki.BOARDING_PERMIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOARDING_PERMIT)
+        player:addKeyItem(xi.ki.MAP_OF_WAJAOM_WOODLANDS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_WAJAOM_WOODLANDS)
+        player:addKeyItem(xi.ki.BOARDING_PERMIT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOARDING_PERMIT)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 4)
-        tpz.teleport.to(player, tpz.teleport.id.WAJAOM_LEYPOINT)
+        xi.teleport.to(player, xi.teleport.id.WAJAOM_LEYPOINT)
     elseif (csid == 10068) then
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Day", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Year", 0)
         player:addFame(JEUNO, 30)
     elseif (csid == 10070) then
-        player:addKeyItem(tpz.ki.BOARDING_PERMIT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.BOARDING_PERMIT)
-        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
+        player:addKeyItem(xi.ki.BOARDING_PERMIT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BOARDING_PERMIT)
+        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_AHT_URHGAN)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Day", 0)
         player:setCharVar("THE_ROAD_TO_AHT_URHGAN_Year", 0)

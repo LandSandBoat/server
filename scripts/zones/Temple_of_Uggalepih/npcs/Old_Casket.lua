@@ -13,9 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.OLD_RUSTY_KEY) then
-        player:startEvent(64, tpz.ki.OLD_RUSTY_KEY)
-    elseif player:hasKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS) then
+    if player:hasKeyItem(xi.ki.OLD_RUSTY_KEY) then
+        player:startEvent(64, xi.ki.OLD_RUSTY_KEY)
+    elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) then
         player:messageSpecial(ID.text.NO_REASON_TO_INVESTIGATE)
     else
         player:messageSpecial(ID.text.THE_BOX_IS_LOCKED)
@@ -27,9 +27,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 64 and option == 1 then
-        player:delKeyItem(tpz.ki.OLD_RUSTY_KEY)
-        player:addKeyItem(tpz.ki.PAINTBRUSH_OF_SOULS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PAINTBRUSH_OF_SOULS)
+        player:delKeyItem(xi.ki.OLD_RUSTY_KEY)
+        player:addKeyItem(xi.ki.PAINTBRUSH_OF_SOULS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PAINTBRUSH_OF_SOULS)
     end
 end
 

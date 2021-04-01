@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.PROWESS
+-- xi.effect.PROWESS
 -- Increased combat and magic skill gain
 -----------------------------------
 local effect_object = {}

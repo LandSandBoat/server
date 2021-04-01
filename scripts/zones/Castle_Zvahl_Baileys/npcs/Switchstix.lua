@@ -135,7 +135,7 @@ local function hasRelic(entity, isTrade)
         return nil
     else
         for key, value in pairs(relics) do
-            if (entity:hasItem(key, tpz.inv.INVENTORY)) then
+            if (entity:hasItem(key, xi.inv.INVENTORY)) then
                 return key
             end
         end

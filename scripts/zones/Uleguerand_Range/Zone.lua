@@ -23,7 +23,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -31,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(363.025, 16, -60, 12)
     end
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 1 ) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 1 ) then
         cs=17
     end
     return cs
@@ -51,13 +51,13 @@ end
 
 zone_object.onZoneWeatherChange = function(weather)
     local waterfall = GetNPCByID(ID.npc.WATERFALL)
-    if (weather == tpz.weather.SNOW or weather == tpz.weather.BLIZZARDS) then
-        if (waterfall:getAnimation() ~= tpz.anim.CLOSE_DOOR) then
-            waterfall:setAnimation(tpz.anim.CLOSE_DOOR)
+    if (weather == xi.weather.SNOW or weather == xi.weather.BLIZZARDS) then
+        if (waterfall:getAnimation() ~= xi.anim.CLOSE_DOOR) then
+            waterfall:setAnimation(xi.anim.CLOSE_DOOR)
         end
     else
-        if (waterfall:getAnimation() ~= tpz.anim.OPEN_DOOR) then
-            waterfall:setAnimation(tpz.anim.OPEN_DOOR)
+        if (waterfall:getAnimation() ~= xi.anim.OPEN_DOOR) then
+            waterfall:setAnimation(xi.anim.OPEN_DOOR)
         end
     end
 end

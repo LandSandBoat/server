@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HASTE_DAZE
+-- xi.effect.HASTE_DAZE
 -----------------------------------
 local effect_object = {}
 

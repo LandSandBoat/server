@@ -15,7 +15,7 @@ local entity = {}
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getNation() ~= tpz.nation.WINDURST) then
+    if (player:getNation() ~= xi.nation.WINDURST) then
         player:startEvent(71) -- for other nation
     else
         local CurrentMission = player:getCurrentMission(WINDURST)
@@ -23,34 +23,34 @@ entity.onTrigger = function(player, npc)
         local pRank = player:getRank()
         local cs, p, offset = getMissionOffset(player, 3, CurrentMission, MissionStatus)
 
-        if (CurrentMission <= tpz.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (CurrentMission == tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
+        if (CurrentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (CurrentMission == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then
             if (cs == 0) then
                 player:showText(npc, ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
-        elseif (CurrentMission ~= tpz.mission.id.windurst.NONE) then
+        elseif (CurrentMission ~= xi.mission.id.windurst.NONE) then
             player:startEvent(76)
-        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) == false) then
             player:startEvent(83)
-        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_HEART_OF_THE_MATTER) == false) then
             player:startEvent(104)
-        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_PRICE_OF_PEACE) == false) then
             player:startEvent(109)
-        elseif (player:hasKeyItem(tpz.ki.MESSAGE_TO_JEUNO_WINDURST)) then
+        elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)) then
             player:startEvent(163)
-        elseif (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.MOON_READING) == true) then
+        elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING) == true) then
             player:startEvent(567)
         else
             local param3
             local flagMission, repeatMission = getMissionMask(player)
             -- NPC dialog changes when starting 3-2 according to whether it's the first time or being repeated
-            if (player:hasCompletedMission(tpz.mission.log_id.WINDURST, tpz.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
+            if (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.WRITTEN_IN_THE_STARS)) then
                 param3 = 1
             else
                 param3 = 0
             end
-            player:startEvent(78, flagMission, 0, param3, 0, tpz.ki.STAR_CRESTED_SUMMONS, repeatMission)
+            player:startEvent(78, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS, repeatMission)
         end
     end
 
@@ -64,10 +64,10 @@ entity.onEventFinish = function(player, csid, option)
     finishMissionTimeline(player, 3, csid, option)
 
     if (csid == 118 and option == 1) then
-        player:addTitle(tpz.title.NEW_BEST_OF_THE_WEST_RECRUIT)
+        player:addTitle(xi.title.NEW_BEST_OF_THE_WEST_RECRUIT)
     elseif (csid == 78 and (option == 12 or option == 15)) then
-        player:addKeyItem(tpz.ki.STAR_CRESTED_SUMMONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.STAR_CRESTED_SUMMONS)
+        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS)
     end
     if (csid == 567) then
         player:setCharVar("WWatersRTenText", 1)

@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         4692, 396825, -- Scroll of Haste II
         5105, 396825, -- Scroll of Flurry II
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

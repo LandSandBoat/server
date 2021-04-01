@@ -19,9 +19,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local totaldamage = 0
     local damage = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, 0, TP_NO_EFFECT, 1, 2, 3)
-    totaldamage = MobFinalAdjustments(damage.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT, numhits)
-    target:addStatusEffect(tpz.effect.BLINDNESS, 20, 0, 30)
-    target:takeDamage(totaldamage, mob, tpz.attackType.PHYSICAL, tpz.damageType.BLUNT)
+    totaldamage = MobFinalAdjustments(damage.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, numhits)
+    target:addStatusEffect(xi.effect.BLINDNESS, 20, 0, 30)
+    target:takeDamage(totaldamage, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
     return totaldamage
 

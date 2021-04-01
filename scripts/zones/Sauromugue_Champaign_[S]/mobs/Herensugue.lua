@@ -7,12 +7,12 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(tpz.mod.TRIPLE_ATTACK, 90) -- "Triple Attacks almost every round"
-    mob:addMod(tpz.mod.REGAIN, 75) -- "appears to have a high rate of Regain"
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 90) -- "Triple Attacks almost every round"
+    mob:addMod(xi.mod.REGAIN, 75) -- "appears to have a high rate of Regain"
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 531)
+    xi.hunts.checkHunt(mob, player, 531)
 end
 
 entity.onMobDespawn = function(mob)

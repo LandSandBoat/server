@@ -10,10 +10,10 @@ require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz.maws = tpz.maws or {}
+ xi.maws = xi.maws or {}
 
-local ZN = tpz.zone
-local MAW = tpz.teleport.type.PAST_MAW
+local ZN = xi.zone
+local MAW = xi.teleport.type.PAST_MAW
 
 local pastMaws =
 { --[ZONE ID]                    = {Bit Slot in Array, Cutscenes{new to WoTg or add new, mission, warp}, Destination {Coordinates}}
@@ -39,20 +39,20 @@ local pastMaws =
 
 local function meetsMission2Reqs(player)
 
-    if not player:getCurrentMission(WOTG) == tpz.mission.id.wotg.BACK_TO_THE_BEGINNING then
+    if not player:getCurrentMission(WOTG) == xi.mission.id.wotg.BACK_TO_THE_BEGINNING then
         return false
     end
 
-    local Q  = tpz.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
+    local Q  = xi.quest.id.crystalWar
+    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
+    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
+    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
 
     return Q1 or Q2 or Q3
 
 end
 
-tpz.maws.onTrigger = function(player, npc)
+ xi.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
     if ENABLE_WOTG == 0 then
@@ -70,7 +70,7 @@ tpz.maws.onTrigger = function(player, npc)
     elseif hasMaw then
         event = maw.cs.warp
     else
-        local hasFeather = player:hasKeyItem(tpz.ki.PURE_WHITE_FEATHER)
+        local hasFeather = player:hasKeyItem(xi.ki.PURE_WHITE_FEATHER)
         if maw.cs.new and not hasFeather then
             event = maw.cs.new
             event_params = {maw.bit}
@@ -91,7 +91,7 @@ tpz.maws.onTrigger = function(player, npc)
 
 end
 
-tpz.maws.onEventFinish = function(player, csid, option)
+ xi.maws.onEventFinish = function(player, csid, option)
 
     local maw = pastMaws[player:getZoneID()]
 
@@ -111,16 +111,16 @@ tpz.maws.onEventFinish = function(player, csid, option)
     elseif maw.cs.add and csid == maw.cs.add and option == 1 then
         addMaw()
     elseif maw.cs.msn and csid == maw.cs.msn then
-        player:completeMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
-        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.CAIT_SITH)
-        player:addTitle(tpz.title.CAIT_SITHS_ASSISTANT)
+        player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
+        player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)
+        player:addTitle(xi.title.CAIT_SITHS_ASSISTANT)
         addMaw() -- May not have yet, check
     elseif maw.cs.new and csid == maw.cs.new then
         local ID = zones[player:getZoneID()]
-        player:completeMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.CAVERNOUS_MAWS)
-        player:addMission(tpz.mission.log_id.WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING)
-        player:addKeyItem(tpz.ki.PURE_WHITE_FEATHER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.PURE_WHITE_FEATHER)
+        player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS_MAWS)
+        player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
+        player:addKeyItem(xi.ki.PURE_WHITE_FEATHER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PURE_WHITE_FEATHER)
         local x = math.random(1, 3)
         if x == 1 then
             maw = pastMaws[ZN.BATALLIA_DOWNS]

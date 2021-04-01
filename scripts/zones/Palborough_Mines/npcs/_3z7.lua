@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    RunElevator(tpz.elevator.PALBOROUGH_MINES_LIFT)
+    RunElevator(xi.elevator.PALBOROUGH_MINES_LIFT)
 end
 
 entity.onEventUpdate = function(player, csid, option)

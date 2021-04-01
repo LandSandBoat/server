@@ -22,12 +22,12 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 3
     local dmgmod = 4
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 1, 2, 3)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.RANGED, tpz.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, MOBPARAM_IGNORE_SHADOWS)
 
-    MobStatusEffectMove(mob, target, tpz.effect.BIND, 1, 0, 120)
-    MobStatusEffectMove(mob, target, tpz.effect.AMNESIA, 1, 0, 120)
+    MobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 120)
+    MobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 120)
 
-    target:takeDamage(dmg, mob, tpz.attackType.RANGED, tpz.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     return dmg
 end
 

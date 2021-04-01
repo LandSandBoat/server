@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if (npc:getID() == ID.npc.MIRROR_POND_J8) then
-        if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LOVE_AND_ICE) == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.CARMELOS_SONG_SHEET)) then
+        if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CARMELOS_SONG_SHEET)) then
             player:startEvent(100)
         end
     end
@@ -27,7 +27,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 100) then
         player:setCharVar("LoveAndIceProgress", 1)
-        player:delKeyItem(tpz.ki.CARMELOS_SONG_SHEET)
+        player:delKeyItem(xi.ki.CARMELOS_SONG_SHEET)
     end
 end
 

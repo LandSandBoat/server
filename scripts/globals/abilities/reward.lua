@@ -15,15 +15,15 @@ local ability_object = {}
 ability_object.onAbilityCheck = function(player, target, ability)
     local pet = player:getPet()
     if not pet then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
-    elseif not player:isJugPet() and pet:getObjType() ~= tpz.objType.MOB then
-        return tpz.msg.basic.NO_EFFECT_ON_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
+    elseif not player:isJugPet() and pet:getObjType() ~= xi.objType.MOB then
+        return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
-        local id = player:getEquipID(tpz.slot.AMMO)
+        local id = player:getEquipID(xi.slot.AMMO)
         if (id >= 17016 and id <= 17023) then
             return 0, 0
         else
-            return tpz.msg.basic.MUST_HAVE_FOOD, 0
+            return xi.msg.basic.MUST_HAVE_FOOD, 0
         end
     end
 end
@@ -31,12 +31,12 @@ end
 ability_object.onUseAbility = function(player, target, ability, action)
 
     -- 1st need to get the pet food is equipped in the range slot.
-    local rangeObj = player:getEquipID(tpz.slot.AMMO)
+    local rangeObj = player:getEquipID(xi.slot.AMMO)
 
     local minimumHealing = 0
     local totalHealing = 0
-    local playerMnd = player:getStat(tpz.mod.MND)
-    local rewardHealingMod = player:getMod(tpz.mod.REWARD_HP_BONUS)
+    local playerMnd = player:getStat(xi.mod.MND)
+    local rewardHealingMod = player:getMod(xi.mod.REWARD_HP_BONUS)
     local regenAmount = 1 -- 1 is the minimum.
     local regenTime = 180 -- 3 minutes
 
@@ -103,43 +103,43 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
 
     -- Now calculating the bonus based on gear.
-    local body = player:getEquipID(tpz.slot.BODY)
+    local body = player:getEquipID(xi.slot.BODY)
 
 
     switch (body) : caseof {
         [12646] = function (x) -- beast jackcoat
             -- This will remove Paralyze, Poison and Blind from the pet.
             -- printf("Beast jackcoat detected.")
-            pet:delStatusEffect(tpz.effect.PARALYSIS)
-            pet:delStatusEffect(tpz.effect.POISON)
-            pet:delStatusEffect(tpz.effect.BLINDNESS)
+            pet:delStatusEffect(xi.effect.PARALYSIS)
+            pet:delStatusEffect(xi.effect.POISON)
+            pet:delStatusEffect(xi.effect.BLINDNESS)
             end,
         [14481] = function (x) -- beast jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             -- printf("Beast jackcoat +1 detected.")
-            pet:delStatusEffect(tpz.effect.PARALYSIS)
-            pet:delStatusEffect(tpz.effect.POISON)
-            pet:delStatusEffect(tpz.effect.BLINDNESS)
-            pet:delStatusEffect(tpz.effect.WEIGHT)
-            pet:delStatusEffect(tpz.effect.SLOW)
-            pet:delStatusEffect(tpz.effect.SILENCE)
+            pet:delStatusEffect(xi.effect.PARALYSIS)
+            pet:delStatusEffect(xi.effect.POISON)
+            pet:delStatusEffect(xi.effect.BLINDNESS)
+            pet:delStatusEffect(xi.effect.WEIGHT)
+            pet:delStatusEffect(xi.effect.SLOW)
+            pet:delStatusEffect(xi.effect.SILENCE)
             end,
         [15095] = function (x) -- monster jackcoat
             -- This will remove Weight, Slow and Silence from the pet.
             -- printf("Monster jackcoat detected.")
-            pet:delStatusEffect(tpz.effect.WEIGHT)
-            pet:delStatusEffect(tpz.effect.SLOW)
-            pet:delStatusEffect(tpz.effect.SILENCE)
+            pet:delStatusEffect(xi.effect.WEIGHT)
+            pet:delStatusEffect(xi.effect.SLOW)
+            pet:delStatusEffect(xi.effect.SILENCE)
             end,
         [14481] = function (x) -- monster jackcoat +1
             -- This will remove Paralyze, Poison, Blind, Weight, Slow and Silence from the pet.
             -- printf("Monster jackcoat +1 detected.")
-            pet:delStatusEffect(tpz.effect.PARALYSIS)
-            pet:delStatusEffect(tpz.effect.POISON)
-            pet:delStatusEffect(tpz.effect.BLINDNESS)
-            pet:delStatusEffect(tpz.effect.WEIGHT)
-            pet:delStatusEffect(tpz.effect.SLOW)
-            pet:delStatusEffect(tpz.effect.SILENCE)
+            pet:delStatusEffect(xi.effect.PARALYSIS)
+            pet:delStatusEffect(xi.effect.POISON)
+            pet:delStatusEffect(xi.effect.BLINDNESS)
+            pet:delStatusEffect(xi.effect.WEIGHT)
+            pet:delStatusEffect(xi.effect.SLOW)
+            pet:delStatusEffect(xi.effect.SILENCE)
             end,
     }
 
@@ -158,10 +158,10 @@ ability_object.onUseAbility = function(player, target, ability, action)
     pet:addHP(totalHealing)
     pet:wakeUp()
 
-    -- Apply regen tpz.effect.
+    -- Apply regen xi.effect.
 
-    pet:delStatusEffect(tpz.effect.REGEN)
-    pet:addStatusEffect(tpz.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
+    pet:delStatusEffect(xi.effect.REGEN)
+    pet:addStatusEffect(xi.effect.REGEN, regenAmount, 3, regenTime) -- 3 = tick, each 3 seconds.
     player:removeAmmo()
 
     pet:updateEnmityFromCure(pet, totalHealing)

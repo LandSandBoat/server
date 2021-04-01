@@ -18,7 +18,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(ASA) == tpz.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Violet") == 1) then
+    if (player:getCurrentMission(ASA) == xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and player:getCharVar("ASA4_Violet") == 1) then
         player:startEvent(2)
     elseif (EventTriggerBCNM(player, npc)) then
         return
@@ -36,9 +36,9 @@ entity.onEventFinish = function(player, csid, option)
     -- printf("onFinish RESULT: %u", option)
 
     if (csid==2) then
-        player:delKeyItem(tpz.ki.DOMINAS_VIOLET_SEAL)
-        player:addKeyItem(tpz.ki.VIOLET_COUNTERSEAL)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VIOLET_COUNTERSEAL)
+        player:delKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
+        player:addKeyItem(xi.ki.VIOLET_COUNTERSEAL)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIOLET_COUNTERSEAL)
         player:setCharVar("ASA4_Violet", "2")
     elseif (EventFinishBCNM(player, csid, option)) then
         return

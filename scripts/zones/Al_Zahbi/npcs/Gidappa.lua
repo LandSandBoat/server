@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
 
     if guildMember == 1 then
         if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
-            if player:hasStatusEffect(tpz.effect.CLOTHCRAFT_IMAGERY) == false then
+            if player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) == false then
                 player:tradeComplete()
                 player:startEvent(229, 8, 0, 0, 0, 188, 0, 4, 0)
             else
@@ -28,10 +28,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = isGuildMember(player, 3)
-    local SkillLevel = player:getSkillLevel(tpz.skill.CLOTHCRAFT)
+    local SkillLevel = player:getSkillLevel(xi.skill.CLOTHCRAFT)
 
     if guildMember == 1 then
-        if player:hasStatusEffect(tpz.effect.CLOTHCRAFT_IMAGERY) == false then
+        if player:hasStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY) == false then
             player:startEvent(228, 8, SkillLevel, 0, 511, 188, 0, 4, 2184)
         else
             player:startEvent(228, 8, SkillLevel, 0, 511, 188, 7127, 4, 2184)
@@ -48,10 +48,10 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 228 and option == 1 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 4, 1)
-        player:addStatusEffect(tpz.effect.CLOTHCRAFT_IMAGERY, 1, 0, 120)
+        player:addStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY, 1, 0, 120)
     elseif csid == 229 then
         player:messageSpecial(ID.text.IMAGE_SUPPORT, 0, 4, 0)
-        player:addStatusEffect(tpz.effect.CLOTHCRAFT_IMAGERY, 3, 0, 480)
+        player:addStatusEffect(xi.effect.CLOTHCRAFT_IMAGERY, 3, 0, 480)
     end
 end
 

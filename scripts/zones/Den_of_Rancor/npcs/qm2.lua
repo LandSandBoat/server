@@ -10,7 +10,7 @@ local ID = require("scripts/zones/Den_of_Rancor/IDs")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    tpz.wsquest.handleQmTrigger(tpz.wsquest.spiral_hell, player, ID.mob.MOKUMOKUREN)
+    xi.wsquest.handleQmTrigger(xi.wsquest.spiral_hell, player, ID.mob.MOKUMOKUREN)
 end
 
 return entity

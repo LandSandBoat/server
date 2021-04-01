@@ -13,7 +13,7 @@ require("scripts/globals/status")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.promyvion.initZone(zone)
+    xi.promyvion.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -23,17 +23,17 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(185.891, 0, -52.331, 128)
     end
 
-    if player:getCurrentMission(COP) == tpz.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 2 then
-        player:completeMission(tpz.mission.log_id.COP, tpz.mission.id.cop.BELOW_THE_ARKS)
-        player:addMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_MOTHERCRYSTALS)
+    if player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS and player:getCharVar("PromathiaStatus") == 2 then
+        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS)
+        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS)
         player:setCharVar("PromathiaStatus", 0)
-    elseif player:getCurrentMission(COP) == tpz.mission.id.cop.THE_MOTHERCRYSTALS then
-        if player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) then
+    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_MOTHERCRYSTALS then
+        if player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) and player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
             if player:getCharVar("cslastpromy") == 1 then
                 player:setCharVar("cslastpromy", 0)
                 cs = 52
             end
-        elseif player:hasKeyItem(tpz.ki.LIGHT_OF_HOLLA) or player:hasKeyItem(tpz.ki.LIGHT_OF_MEA) then
+        elseif player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA) then
             if player:getCharVar("cs2ndpromy") == 1 then
                 player:setCharVar("cs2ndpromy", 0)
                 cs = 51
@@ -50,12 +50,12 @@ end
 
 zone_object.afterZoneIn = function(player)
     if ENABLE_COP_ZONE_CAP == 1 then
-        player:addStatusEffect(tpz.effect.LEVEL_RESTRICTION, 30, 0, 0)
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 30, 0, 0)
     end
 end
 
 zone_object.onRegionEnter = function(player, region)
-    tpz.promyvion.onRegionEnter(player, region)
+    xi.promyvion.onRegionEnter(player, region)
 end
 
 zone_object.onRegionLeave = function(player, region)

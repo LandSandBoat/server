@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-local flags = tpz.path.flag.NONE
+local flags = xi.path.flag.NONE
 local path =
 {
     [0] =
@@ -59,18 +59,18 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         local spawn = math.random(3) == 1
         local battlefield = mob:getBattlefield()
-        if GetNPCByID(ID.npc.TEMENOS_W_GATE[3]):getAnimation() == tpz.animation.CLOSE_DOOR then
-            tpz.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_W_GATE[3])
+        if GetNPCByID(ID.npc.TEMENOS_W_GATE[3]):getAnimation() == xi.animation.CLOSE_DOOR then
+            xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_W_GATE[3])
         end
 
         if spawn then
             for i = 0, 2 do
-                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[3]+i):getStatus() == tpz.status.DISAPPEAR then
+                if GetNPCByID(ID.npc.TEMENOS_W_CRATE[3]+i):getStatus() == xi.status.DISAPPEAR then
                     local mobX = mob:getXPos()
                     local mobY = mob:getYPos()
                     local mobZ = mob:getZPos()
                     GetNPCByID(ID.npc.TEMENOS_W_CRATE[3]+i):setPos(mobX, mobY, mobZ)
-                    tpz.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[3]+i, battlefield, "crateMaskF3", battlefield:getLocalVar("crateMaskF3"))
+                    xi.limbus.spawnRandomCrate(ID.npc.TEMENOS_W_CRATE[3]+i, battlefield, "crateMaskF3", battlefield:getLocalVar("crateMaskF3"))
                     break
                 end
             end

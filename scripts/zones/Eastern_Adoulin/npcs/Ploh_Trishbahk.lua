@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local meetingOfTheMinds = player:getCurrentMission(SOA) == tpz.mission.id.soa.MEETING_OF_THE_MINDS
+    local meetingOfTheMinds = player:getCurrentMission(SOA) == xi.mission.id.soa.MEETING_OF_THE_MINDS
     local dinnerTime = VanadielHour() >= 15 and VanadielHour() <= 22
 
     if meetingOfTheMinds then
@@ -28,10 +28,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 1500 then
-        player:delKeyItem(tpz.ki.DINNER_INVITATION)
+        player:delKeyItem(xi.ki.DINNER_INVITATION)
 
-        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.MEETING_OF_THE_MINDS)
-        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ARCIELA_APPEARS_AGAIN)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.MEETING_OF_THE_MINDS)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELA_APPEARS_AGAIN)
     end
 end
 

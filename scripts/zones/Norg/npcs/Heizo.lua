@@ -14,7 +14,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    ShiningLeggings = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     Legging = trade:getItemQty(14117)
 
     if (Legging > 0 and Legging == trade:getItemCount()) then
@@ -38,7 +38,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    ShiningLeggings = player:getQuestStatus(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
 
     if (ShiningLeggings == QUEST_AVAILABLE and  player:getFameLevel(NORG) >= 3) then
         player:startEvent(127) -- Start Like Shining Leggings
@@ -56,15 +56,15 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 127) then
-        player:addQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     elseif (csid == 129) then
         player:tradeComplete()
         player:addItem(4958) -- Scroll of Dokumori: Ichi
         player:messageSpecial(ID.text.ITEM_OBTAINED, 4958) -- Scroll of Dokumori: Ichi
         player:addFame(NORG, 100)
-        player:addTitle(tpz.title.LOOKS_GOOD_IN_LEGGINGS)
+        player:addTitle(xi.title.LOOKS_GOOD_IN_LEGGINGS)
         player:setCharVar("shiningLeggings_nb", 0)
-        player:completeQuest(tpz.quest.log_id.OUTLANDS, tpz.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+        player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
     end
 
 end

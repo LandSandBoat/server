@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.CRITICAL_HIT_EVASION_DOWN
+-- xi.effect.CRITICAL_HIT_EVASION_DOWN
 -----------------------------------
 local effect_object = {}
 

@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.FAFNIR_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
         SetDropRate(918, 3340, 0) -- do not drop cup_of_sweet_tea
@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.FAFNIR_SLAYER)
+    player:addTitle(xi.title.FAFNIR_SLAYER)
 end
 
 entity.onMobDespawn = function(mob)

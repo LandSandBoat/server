@@ -15,8 +15,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    if (not target:hasStatusEffect(tpz.effect.INVISIBLE)) then
-        target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, math.floor(200 * SNEAK_INVIS_DURATION_MULTIPLIER))
+    if (not target:hasStatusEffect(xi.effect.INVISIBLE)) then
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(200 * SNEAK_INVIS_DURATION_MULTIPLIER))
     end
 end
 

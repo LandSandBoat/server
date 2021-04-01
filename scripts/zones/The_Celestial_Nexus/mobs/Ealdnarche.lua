@@ -11,20 +11,20 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     --50% fast cast, no standback
-    mob:addMod(tpz.mod.UFASTCAST, 50)
-    mob:setMobMod(tpz.mobMod.HP_STANDBACK, -1)
+    mob:addMod(xi.mod.UFASTCAST, 50)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
 end
 
 entity.onMobSpawn = function(mob)
     mob:SetAutoAttackEnabled(false)
-    mob:setMobMod(tpz.mobMod.GA_CHANCE, 25)
-    mob:addStatusEffectEx(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
-    mob:addStatusEffectEx(tpz.effect.ARROW_SHIELD, 0, 1, 0, 0)
-    mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+    mob:setMobMod(xi.mobMod.GA_CHANCE, 25)
+    mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
+    mob:addStatusEffectEx(xi.effect.ARROW_SHIELD, 0, 1, 0, 0)
+    mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 5)
+    mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 5)
     GetMobByID(mob:getID() + 1):updateEnmity(target)
 end
 
@@ -64,8 +64,8 @@ entity.onEventFinish = function(player, csid, option, target)
         mob = SpawnMob(target:getID()+2)
         mob:updateEnmity(player)
         --the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
-        mob:addStatusEffectEx(tpz.effect.BIND, 0, 1, 0, 30)
-        mob:addStatusEffectEx(tpz.effect.SILENCE, 0, 1, 0, 40)
+        mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)
+        mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 40)
     end
 end
 

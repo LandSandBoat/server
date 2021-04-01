@@ -11,7 +11,7 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(856, 3) and trade:getItemCount() == 3) then
             player:startEvent(89)
         end
@@ -20,7 +20,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-TheMerchantsBidding = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
+TheMerchantsBidding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
 
     if (TheMerchantsBidding == QUEST_AVAILABLE) then
         player:startEvent(90)
@@ -36,14 +36,14 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 90 and option == 1) then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
     elseif (csid == 89) then
         player:tradeComplete()
         player:addGil(GIL_RATE*120)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*120)
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING) == QUEST_ACCEPTED) then
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING) == QUEST_ACCEPTED) then
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
         else
             player:addFame(SANDORIA, 5)
         end

@@ -19,14 +19,14 @@ entity.onTrigger = function(player, npc)
 
     -- "Lure of the Wildcat"
     if
-        player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(WildcatSandy, 18)
     then
         player:startEvent(560)
 
     -- San d'Oria Missions
-    elseif player:getNation() == tpz.nation.SANDORIA and player:getRank() ~= 10 then
-        local sandyMissions = tpz.mission.id.sandoria
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+        local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -40,7 +40,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 6-2 "Ranperre's Final Rest" (optional dialogue)
         elseif currentMission == sandyMissions.RANPERRE_S_FINAL_REST then
-            if player:hasKeyItem(tpz.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
+            if player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) and missionStatus > 2 and missionStatus < 6 then
                 player:startEvent(49)
             elseif missionStatus == 6 then
                 player:startEvent(50)

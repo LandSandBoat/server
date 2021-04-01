@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ACCESSION
+-- xi.effect.ACCESSION
 -----------------------------------
 local effect_object = {}
 

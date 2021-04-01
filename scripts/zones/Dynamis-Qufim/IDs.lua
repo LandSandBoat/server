@@ -8,7 +8,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.DYNAMIS_QUFIM] =
+zones[ xi.zone.DYNAMIS_QUFIM] =
 {
     text =
     {
@@ -31,11 +31,11 @@ zones[tpz.zone.DYNAMIS_QUFIM] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = tpz.ki.CRIMSON_GRANULES_OF_TIME,   mob = {16945163, 16945173, 16945183}},
-            {minutes = 10, ki = tpz.ki.AZURE_GRANULES_OF_TIME,     mob = {16945193, 16945203, 16945213}},
-            {minutes = 10, ki = tpz.ki.AMBER_GRANULES_OF_TIME,     mob = {16945223, 16945233, 16945243}},
-            {minutes = 10, ki = tpz.ki.ALABASTER_GRANULES_OF_TIME, mob = {16945253, 16945263, 16945273}},
-            {minutes = 20, ki = tpz.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = {16945480, 16945491, 16945500, 16945509, 16945530, 16945539, 16945548, 16945568, 16945578, 16945588, 16945608, 16945618, 16945628}},
+            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = {16945163, 16945173, 16945183}},
+            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = {16945193, 16945203, 16945213}},
+            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = {16945223, 16945233, 16945243}},
+            {minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = {16945253, 16945263, 16945273}},
+            {minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = {16945480, 16945491, 16945500, 16945509, 16945530, 16945539, 16945548, 16945568, 16945578, 16945588, 16945608, 16945618, 16945628}},
         },
         REFILL_STATUE =
         {
@@ -186,4 +186,4 @@ zones[tpz.zone.DYNAMIS_QUFIM] =
     },
 }
 
-return zones[tpz.zone.DYNAMIS_QUFIM]
+return zones[ xi.zone.DYNAMIS_QUFIM]

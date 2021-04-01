@@ -18,9 +18,9 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local TrialByIce = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
-    local WhisperOfFrost = player:hasKeyItem(tpz.ki.WHISPER_OF_FROST)
-    local ClassReunion = player:getQuestStatus(tpz.quest.log_id.WINDURST, tpz.quest.id.windurst.CLASS_REUNION)
+    local TrialByIce = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
+    local WhisperOfFrost = player:hasKeyItem(xi.ki.WHISPER_OF_FROST)
+    local ClassReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
     local ClassReunionProgress = player:getCharVar("ClassReunionProgress")
 
     -----------------------------------
@@ -31,11 +31,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(712, 0, 1171, 0, 0, 0, 0, 0, 0) -- lost the ice pendulum need another one
     -----------------------------------
     elseif ((TrialByIce == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 6) or (TrialByIce == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByIce_date"))) then
-        player:startEvent(706, 0, tpz.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
-    elseif (TrialByIce == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TUNING_FORK_OF_ICE) == false and WhisperOfFrost == false) then
-        player:startEvent(718, 0, tpz.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
+        player:startEvent(706, 0, xi.ki.TUNING_FORK_OF_ICE) -- Start and restart quest "Trial by ice"
+    elseif (TrialByIce == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE) == false and WhisperOfFrost == false) then
+        player:startEvent(718, 0, xi.ki.TUNING_FORK_OF_ICE) -- Defeat against Shiva : Need new Fork
     elseif (TrialByIce == QUEST_ACCEPTED and WhisperOfFrost == false) then
-        player:startEvent(707, 0, tpz.ki.TUNING_FORK_OF_ICE, 4)
+        player:startEvent(707, 0, xi.ki.TUNING_FORK_OF_ICE, 4)
     elseif (TrialByIce == QUEST_ACCEPTED and WhisperOfFrost) then
         local numitem = 0
 
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         if (player:hasItem(1207)) then numitem = numitem + 8; end   -- Rust 'B' Gone
         if (player:hasSpell(302)) then numitem = numitem + 32; end  -- Ability to summon Shiva
 
-        player:startEvent(709, 0, tpz.ki.TUNING_FORK_OF_ICE, 4, 0, numitem)
+        player:startEvent(709, 0, xi.ki.TUNING_FORK_OF_ICE, 4, 0, numitem)
     else
         player:startEvent(710) -- Standard dialog
     end
@@ -58,16 +58,16 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 706 and option == 1) then
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
-            player:delQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE) == QUEST_COMPLETED) then
+            player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         player:setCharVar("TrialByIce_date", 0)
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_ICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_ICE)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
     elseif (csid == 718) then
-        player:addKeyItem(tpz.ki.TUNING_FORK_OF_ICE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TUNING_FORK_OF_ICE)
+        player:addKeyItem(xi.ki.TUNING_FORK_OF_ICE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_ICE)
     elseif (csid == 709) then
         local item = 0
         if (option == 1) then item = 17492         -- Shiva's Claws
@@ -89,11 +89,11 @@ entity.onEventFinish = function(player, csid, option)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
             end
-            player:addTitle(tpz.title.HEIR_OF_THE_GREAT_ICE)
-            player:delKeyItem(tpz.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
+            player:addTitle(xi.title.HEIR_OF_THE_GREAT_ICE)
+            player:delKeyItem(xi.ki.WHISPER_OF_FROST) --Whisper of Frost, as a trade for the above rewards
             player:setCharVar("TrialByIce_date", getMidnight())
             player:addFame(SANDORIA, 30)
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TRIAL_BY_ICE)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRIAL_BY_ICE)
         end
     elseif (csid == 713 or csid == 712) then
         if (player:getFreeSlotsCount() ~= 0) then

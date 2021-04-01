@@ -13,10 +13,10 @@ local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
-        return tpz.msg.basic.REQUIRES_A_PET, 0
+        return xi.msg.basic.REQUIRES_A_PET, 0
     else
         if (target:getID() == player:getPet():getID() or (target:getMaster() ~= nil and target:getMaster():isPC())) then
-            return tpz.msg.basic.CANNOT_ATTACK_TARGET, 0
+            return xi.msg.basic.CANNOT_ATTACK_TARGET, 0
         else
             return 0, 0
         end
@@ -27,8 +27,8 @@ ability_object.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
 
     if (player:checkDistance(pet) <= 25) then
-        if (pet:hasStatusEffect(tpz.effect.HEALING)) then
-            pet:delStatusEffect(tpz.effect.HEALING)
+        if (pet:hasStatusEffect(xi.effect.HEALING)) then
+            pet:delStatusEffect(xi.effect.HEALING)
         end
 
         player:petAttack(target)

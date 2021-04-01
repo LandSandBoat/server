@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local SOA_Mission = player:getCurrentMission(SOA)
-    if ((SOA_Mission >= tpz.mission.id.soa.BEAUTY_AND_THE_BEAST) and (SOA_Mission <= tpz.mission.id.soa.SALVATION)) then
+    if ((SOA_Mission >= xi.mission.id.soa.BEAUTY_AND_THE_BEAST) and (SOA_Mission <= xi.mission.id.soa.SALVATION)) then
         -- Speech while Arciela is 'kidnapped'
         player:startEvent(151)
     else

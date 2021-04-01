@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.HYMNUS
+-- xi.effect.HYMNUS
 -----------------------------------
 local effect_object = {}
 

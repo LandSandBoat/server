@@ -112,7 +112,7 @@ entity.onPath = function(npc)
     end
 
     -- go back and forth the set path
-    -- tpz.path.patrol(npc, path)
+    -- xi.path.patrol(npc, path)
 
 end
 

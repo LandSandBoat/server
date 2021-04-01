@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.HERMINIA_SHOP_DIALOG)
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

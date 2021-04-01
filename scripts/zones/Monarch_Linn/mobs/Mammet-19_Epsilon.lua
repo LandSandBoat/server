@@ -19,7 +19,7 @@ entity.onMobFight = function(mob, target)
         -- Believe it or not, these changes may be too slow @ 50% chance.  Probability is a pain.
     -- L40 means their "weapons" are 40 DMG by default.
     if ((mob:getBattleTime() > mob:getLocalVar('changeTime') + 60 or mob:getLocalVar('changeTime') == 0) and math.random(0, 1) == 1
-        and not mob:hasStatusEffect(tpz.effect.FOOD)) then
+        and not mob:hasStatusEffect(xi.effect.FOOD)) then
         changeForm(mob)
     end
 
@@ -44,7 +44,7 @@ local function changeForm(mob)
         mob:setDelay(3250)
         mob:setDamage(75)
     elseif (newform == 3) then -- Staff Form, ~4s delay, ~10 seconds between spell ends and next cast
-        mob:setMobMod(tpz.mobMod.MAGIC_COOL, 10)
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
         mob:SetMagicCastingEnabled(true)
         mob:setDelay(3700)
         mob:setDamage(40)

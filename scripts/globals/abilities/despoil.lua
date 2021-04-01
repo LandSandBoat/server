@@ -12,21 +12,21 @@ local ability_object = {}
 
 local despoilDebuffs =
 {
-    tpz.effect.EVASION_DOWN,
-    tpz.effect.DEFENSE_DOWN,
-    tpz.effect.ACCURACY_DOWN,
-    tpz.effect.ATTACK_DOWN,
-    tpz.effect.MAGIC_ATK_DOWN,
-    tpz.effect.MAGIC_DEF_DOWN,
-    tpz.effect.SLOW
+    xi.effect.EVASION_DOWN,
+    xi.effect.DEFENSE_DOWN,
+    xi.effect.ACCURACY_DOWN,
+    xi.effect.ATTACK_DOWN,
+    xi.effect.MAGIC_ATK_DOWN,
+    xi.effect.MAGIC_DEF_DOWN,
+    xi.effect.SLOW
 }
 
 ability_object.onAbilityCheck = function(player, target, ability)
     if player:getFreeSlotsCount() == 0 then
-        return tpz.msg.basic.FULL_INVENTORY, 0
+        return xi.msg.basic.FULL_INVENTORY, 0
     end
 
-    if player:getObjType() == tpz.objType.TRUST then
+    if player:getObjType() == xi.objType.TRUST then
         if player:getMaster():getFreeSlotsCount() == 0 then
             return 1, 0
         end
@@ -37,12 +37,12 @@ end
 
 ability_object.onUseAbility = function(player, target, ability, action)
     local level = player:getMainLvl() -- Can only reach THF77 as main job
-    local despoilMod = player:getMod(tpz.mod.DESPOIL)
+    local despoilMod = player:getMod(xi.mod.DESPOIL)
     local despoilChance = 50 + despoilMod * 2 + level - target:getMainLvl() -- Same math as Steal
 
     local stolen = target:getDespoilItem()
     if target:isMob() and math.random(100) < despoilChance and stolen then
-        if player:getObjType() == tpz.objType.TRUST then
+        if player:getObjType() == xi.objType.TRUST then
             player:getMaster():addItem(stolen)
         else
             player:addItem(stolen)
@@ -59,7 +59,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         target:addStatusEffect(debuff, power, 0, 90)
     else
         action:setAnimation(target:getID(), 182)
-        ability:setMsg(tpz.msg.basic.STEAL_FAIL) -- Failed
+        ability:setMsg(xi.msg.basic.STEAL_FAIL) -- Failed
     end
 
     return stolen
@@ -67,26 +67,26 @@ end
 
 function processDebuff(player, target, ability, debuff)
     local power = 10
-    if debuff == tpz.effect.ATTACK_DOWN then
-        ability:setMsg(tpz.msg.basic.DESPOIL_ATT_DOWN)
+    if debuff == xi.effect.ATTACK_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_ATT_DOWN)
         power = 20
-    elseif debuff == tpz.effect.DEFENSE_DOWN then
-        ability:setMsg(tpz.msg.basic.DESPOIL_DEF_DOWN)
+    elseif debuff == xi.effect.DEFENSE_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_DEF_DOWN)
         power = 30
-    elseif debuff == tpz.effect.MAGIC_ATK_DOWN then
-        ability:setMsg(tpz.msg.basic.DESPOIL_MATT_DOWN)
-    elseif debuff == tpz.effect.MAGIC_DEF_DOWN then
-        ability:setMsg(tpz.msg.basic.DESPOIL_MDEF_DOWN)
+    elseif debuff == xi.effect.MAGIC_ATK_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_MATT_DOWN)
+    elseif debuff == xi.effect.MAGIC_DEF_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_MDEF_DOWN)
         power = 20
-    elseif debuff == tpz.effect.EVASION_DOWN then
-        ability:setMsg(tpz.msg.basic.DESPOIL_EVA_DOWN)
+    elseif debuff == xi.effect.EVASION_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_EVA_DOWN)
         power = 30
-    elseif debuff == tpz.effect.ACCURACY_DOWN then
-        ability:setMsg(tpz.msg.basic.DESPOIL_ACC_DOWN)
+    elseif debuff == xi.effect.ACCURACY_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_ACC_DOWN)
         power = 20
-    elseif debuff == tpz.effect.SLOW then
-        ability:setMsg(tpz.msg.basic.DESPOIL_SLOW)
-        local dMND = player:getStat(tpz.mod.MND) - target:getStat(tpz.mod.MND)
+    elseif debuff == xi.effect.SLOW then
+        ability:setMsg(xi.msg.basic.DESPOIL_SLOW)
+        local dMND = player:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
         if dMND >= 0 then
             power = 2 * dMND + 1500
         else

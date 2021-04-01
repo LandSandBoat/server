@@ -7,13 +7,13 @@ local ID = require("scripts/zones/Apollyon/IDs")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(tpz.mod.UDMGMAGIC, -100)
-    mob:setMod(tpz.mod.UDMGPHYS, -80)
+    mob:setMod(xi.mod.UDMGMAGIC, -100)
+    mob:setMod(xi.mod.UDMGPHYS, -80)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        GetNPCByID(ID.npc.APOLLYON_SE_CRATE[4]):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc.APOLLYON_SE_CRATE[4]):setStatus(xi.status.NORMAL)
     end
 end
 

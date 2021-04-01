@@ -21,7 +21,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     target:resetRecasts()
 
-    skill:setMsg(tpz.msg.basic.ABILITIES_RECHARGED)
+    skill:setMsg(xi.msg.basic.ABILITIES_RECHARGED)
 
     return 1
 end

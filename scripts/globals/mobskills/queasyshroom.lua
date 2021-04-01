@@ -15,26 +15,26 @@ require("scripts/globals/monstertpmoves")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getMobMod(tpz.mobMod.VAR) == 0) then
+    if (mob:getMobMod(xi.mobMod.VAR) == 0) then
         return 0
     end
     return 1
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    mob:setMobMod(tpz.mobMod.VAR, 1)
+    mob:setMobMod(xi.mobMod.VAR, 1)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_DMG_VARIES, 1, 2, 3)
-    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING, MOBPARAM_WIPE_SHADOWS)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, MOBPARAM_WIPE_SHADOWS)
 
-    local typeEffect = tpz.effect.POISON
+    local typeEffect = xi.effect.POISON
     local power = mob:getMainLvl() / 4 + 1
 
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, power, 3, 60)
 
-    target:takeDamage(dmg, mob, tpz.attackType.PHYSICAL, tpz.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     return dmg
 end
 

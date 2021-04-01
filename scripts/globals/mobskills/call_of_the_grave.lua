@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.INT_DOWN
+    local typeEffect = xi.effect.INT_DOWN
     skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 10, 3, 120))
 
     return typeEffect

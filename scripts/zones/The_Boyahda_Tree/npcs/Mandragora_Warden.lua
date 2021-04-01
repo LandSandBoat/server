@@ -14,7 +14,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    if player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.DOLL_OF_THE_DEAD and (missionStatus == 4 or missionStatus == 5) and npcUtil.tradeHas(trade, 1181) then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and (missionStatus == 4 or missionStatus == 5) and npcUtil.tradeHas(trade, 1181) then
         player:startEvent(13)
     end
 end
@@ -34,7 +34,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 13 then
         player:setCharVar("MissionStatus", 6)
-        npcUtil.giveKeyItem(player, tpz.ki.LETTER_FROM_ZONPAZIPPA)
+        npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_ZONPAZIPPA)
     end
 end
 

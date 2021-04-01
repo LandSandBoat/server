@@ -43,7 +43,7 @@ itemQuality = 0
         end
     end
 
-    ALadysHeart = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
+    ALadysHeart = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART)
 
     if (itemQuality == 2) then
         if (ALadysHeart == QUEST_COMPLETED) then
@@ -76,13 +76,13 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 160 and option == 2002) then
         player:tradeComplete()
-        player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
+        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART)
         player:addFame(BASTOK, 120)
         player:setMoghouseFlag(2)
         player:messageSpecial(ID.text.MOGHOUSE_EXIT)
     elseif (csid == 160 and option == 1) then
         player:tradeComplete()
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.A_LADY_S_HEART)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART)
     end
 end
 

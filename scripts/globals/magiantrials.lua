@@ -8,12 +8,12 @@ require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
 tpz = tpz or {}
-tpz.magian = tpz.magian or {}
-tpz.magian.trialCache = tpz.magian.trialCache or {}
+ xi.magian = xi.magian or {}
+ xi.magian.trialCache = xi.magian.trialCache or {}
 
 -- creates table to track trial and progress per trial slot
 local function getPlayerTrials(player)
-    local activeTrials = tpz.magian.trialCache[player:getID()]
+    local activeTrials = xi.magian.trialCache[player:getID()]
     if activeTrials then
         return activeTrials
     end
@@ -26,7 +26,7 @@ local function getPlayerTrials(player)
         local objectiveTotal = trialSQL.objectiveTotal or 0
         activeTrials[i] = { trial = trialId, progress = progression, objectiveTotal = objectiveTotal }
     end
-    tpz.magian.trialCache[player:getID()] = activeTrials
+    xi.magian.trialCache[player:getID()] = activeTrials
     return activeTrials
 end
 -- packs current trials into params for onTrigger
@@ -53,7 +53,7 @@ end
 
 -- Get the active trials who requires the item in parameter
 local function getPlayerTrialByItemId(player, itemId)
-    local trials = tpz.magian.trials
+    local trials = xi.magian.trials
     local trialsPlayer = getPlayerTrials(player)
     local resultTrials = {}
 
@@ -128,7 +128,7 @@ end
 
 
 local function checkAndSetProgression(player, trialId, conditions, multiplier)
-    local trials = tpz.magian.trials
+    local trials = xi.magian.trials
     local cachePosition, cacheData = hasTrial(player, trialId)
     if trialId and cachePosition then
         local increment = trials[trialId]:check(player, conditions)
@@ -138,9 +138,9 @@ local function checkAndSetProgression(player, trialId, conditions, multiplier)
                 local remainingObjectives = cacheData.objectiveTotal - newProgress
                 setTrial(player, cachePosition, trialId, newProgress)
                 if remainingObjectives == 0 then
-                    player:messageBasic(tpz.msg.basic.MAGIAN_TRIAL_COMPLETE, trialId) -- trial complete
+                    player:messageBasic(xi.msg.basic.MAGIAN_TRIAL_COMPLETE, trialId) -- trial complete
                 else
-                    player:messageBasic(tpz.msg.basic.MAGIAN_TRIAL_COMPLETE - 1, trialId, remainingObjectives) -- trial <trialid>: x objectives remain
+                    player:messageBasic(xi.msg.basic.MAGIAN_TRIAL_COMPLETE - 1, trialId, remainingObjectives) -- trial <trialid>: x objectives remain
                 end
             elseif cacheData.progress > cacheData.objectiveTotal then
                 setTrial(player, cachePosition, trialId, cacheData.objectiveTotal)
@@ -197,7 +197,7 @@ local function getTrialsBits(player, trials)
 end
 
 local function getItemIdByTrials(trialId)
-    local trial = tpz.magian.trials[trialId]
+    local trial = xi.magian.trials[trialId]
     local itemId = 0
     if trial and trial.reqs and trial.reqs.itemId then
         for item in pairs(trial.reqs.itemId) do
@@ -225,13 +225,13 @@ end
 -- Delivery Crate
 -----------------------------------
 
-tpz.magian.deliveryCrateOnTrigger = function(player, npc)
+ xi.magian.deliveryCrateOnTrigger = function(player, npc)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
     player:messageSpecial(msg.DELIVERY_CRATE_TEXT, itemId)
 end
 
-tpz.magian.deliveryCrateOnTrade = function(player, npc, trade)
+ xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     -- items = parts of stuff
     -- itemsTrial = items for trial
     local items, itemsTrial = getItemsInTrade(trade)
@@ -296,7 +296,7 @@ tpz.magian.deliveryCrateOnTrade = function(player, npc, trade)
     returnUselessItems(player, items, currentItem.id)
 end
 
-tpz.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
+ xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
     local optionMod = bit.band(option, 0xFF)
     local itemTrialId = player:getLocalVar("storeItemTrialId")
     local nbTrialsPlayer = player:getLocalVar("storeNbTrialsPlayer")
@@ -315,7 +315,7 @@ tpz.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
 
 end
 
-tpz.magian.deliveryCrateOnEventFinish = function(player, csid, option)
+ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
     local optionMod = bit.band(option, 0xFF)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
@@ -347,8 +347,8 @@ tpz.magian.deliveryCrateOnEventFinish = function(player, csid, option)
 end
 
 -- increments progress if conditions are met
-tpz.magian.checkMagianTrial = function(player, conditions)
-    for _, slot in pairs( {tpz.slot.MAIN, tpz.slot.SUB, tpz.slot.RANGED} ) do
+ xi.magian.checkMagianTrial = function(player, conditions)
+    for _, slot in pairs( { xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
             checkAndSetProgression(player, trialIdOnItem, conditions, MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
@@ -360,13 +360,13 @@ end
 -- Magian Orange / Blue
 -----------------------------------
 
-tpz.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
+ xi.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
     local p, t = parseParams(player)
 
     if EVENT_IDS[1] and player:getMainLvl() < 75 then
         player:startEvent(EVENT_IDS[1]) -- can't take a trial before lvl 75
 
-    elseif player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == false then
+    elseif player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) == false then
         player:startEvent(EVENT_IDS[2]) -- player can start magian for the first time
 
     else
@@ -374,7 +374,7 @@ tpz.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
     end
 end
 
-tpz.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
+ xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
     local itemId = trade:getItemId()
     local item = trade:getItem()
     local matchId = item:getMatchingTrials()
@@ -386,7 +386,7 @@ tpz.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
 
     player:setLocalVar("storeItemId", itemId)
 
-    if player:hasKeyItem(tpz.ki.MAGIAN_TRIAL_LOG) == true and trade:getSlotCount() == 1 then
+    if player:hasKeyItem(xi.ki.MAGIAN_TRIAL_LOG) == true and trade:getSlotCount() == 1 then
         if not next(matchId) and item:isType(TYPE) then
             player:setLocalVar("invalidItem", 1)
             player:startEvent(EVENT_IDS[4], 0, 0, 0, 0, 0, 0, 0, utils.MAX_UINT32) -- invalid weapon
@@ -431,7 +431,7 @@ end
 
 local rareItems = set{ 16192, 18574, 19397, 19398, 19399, 19400, 19401, 19402, 19403, 19404, 19405, 19406, 19407, 19408, 19409, 19410 }
 
-tpz.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
+ xi.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
 
     if (csid == EVENT_IDS[3] or csid == EVENT_IDS[4] or csid == EVENT_IDS[5]) and optionMod == 1 then
@@ -519,15 +519,15 @@ tpz.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
     end
 end
 
-tpz.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS)
+ xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
     local ID = require("scripts/zones/RuLude_Gardens/IDs")
 
     if csid == EVENT_IDS[2] and option == 1 then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED,tpz.ki.MAGIAN_TRIAL_LOG)
-        player:addKeyItem(tpz.ki.MAGIAN_TRIAL_LOG)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAGIAN_TRIAL_LOG)
+        player:addKeyItem(xi.ki.MAGIAN_TRIAL_LOG)
 
     -- starts a trial
     elseif csid == EVENT_IDS[4] and optionMod == 7 then

@@ -25,52 +25,52 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(tpz.effect.FOOD) or target:hasStatusEffect(tpz.effect.FIELD_SUPPORT_FOOD)) then
-        result = tpz.msg.basic.IS_FULL
+    if (target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
+        result = xi.msg.basic.IS_FULL
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(tpz.effect.FOOD, 0, 0, 1800, 6339)
+    target:addStatusEffect(xi.effect.FOOD, 0, 0, 1800, 6339)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(tpz.mod.HP, 20)
-    target:addMod(tpz.mod.DEX, 2)
-    target:addMod(tpz.mod.VIT, 3)
-    target:addMod(tpz.mod.FOOD_ACCP, 10)
-    target:addMod(tpz.mod.FOOD_ACC_CAP, 80)
-    target:addMod(tpz.mod.FOOD_RACCP, 10)
-    target:addMod(tpz.mod.FOOD_RACC_CAP, 80)
-    target:addMod(tpz.mod.MACC, 50)
-    target:addPetMod(tpz.mod.HP, 20)
-    target:addPetMod(tpz.mod.DEX, 2)
-    target:addPetMod(tpz.mod.VIT, 3)
-    target:addPetMod(tpz.mod.FOOD_ACCP, 10)
-    target:addPetMod(tpz.mod.FOOD_ACC_CAP, 105)
-    target:addPetMod(tpz.mod.FOOD_RACCP, 10)
-    target:addPetMod(tpz.mod.FOOD_RACC_CAP, 105)
-    target:addPetMod(tpz.mod.MACC, 75)
+    target:addMod(xi.mod.HP, 20)
+    target:addMod(xi.mod.DEX, 2)
+    target:addMod(xi.mod.VIT, 3)
+    target:addMod(xi.mod.FOOD_ACCP, 10)
+    target:addMod(xi.mod.FOOD_ACC_CAP, 80)
+    target:addMod(xi.mod.FOOD_RACCP, 10)
+    target:addMod(xi.mod.FOOD_RACC_CAP, 80)
+    target:addMod(xi.mod.MACC, 50)
+    target:addPetMod(xi.mod.HP, 20)
+    target:addPetMod(xi.mod.DEX, 2)
+    target:addPetMod(xi.mod.VIT, 3)
+    target:addPetMod(xi.mod.FOOD_ACCP, 10)
+    target:addPetMod(xi.mod.FOOD_ACC_CAP, 105)
+    target:addPetMod(xi.mod.FOOD_RACCP, 10)
+    target:addPetMod(xi.mod.FOOD_RACC_CAP, 105)
+    target:addPetMod(xi.mod.MACC, 75)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(tpz.mod.HP, 20)
-    target:delMod(tpz.mod.DEX, 2)
-    target:delMod(tpz.mod.VIT, 3)
-    target:delMod(tpz.mod.FOOD_ACCP, 10)
-    target:delMod(tpz.mod.FOOD_ACC_CAP, 80)
-    target:delMod(tpz.mod.FOOD_RACCP, 10)
-    target:delMod(tpz.mod.FOOD_RACC_CAP, 80)
-    target:delMod(tpz.mod.MACC, 50)
-    target:delPetMod(tpz.mod.HP, 20)
-    target:delPetMod(tpz.mod.DEX, 2)
-    target:delPetMod(tpz.mod.VIT, 3)
-    target:delPetMod(tpz.mod.FOOD_ACCP, 10)
-    target:delPetMod(tpz.mod.FOOD_ACC_CAP, 105)
-    target:delPetMod(tpz.mod.FOOD_RACCP, 10)
-    target:delPetMod(tpz.mod.FOOD_RACC_CAP, 105)
-    target:delPetMod(tpz.mod.MACC, 75)
+    target:delMod(xi.mod.HP, 20)
+    target:delMod(xi.mod.DEX, 2)
+    target:delMod(xi.mod.VIT, 3)
+    target:delMod(xi.mod.FOOD_ACCP, 10)
+    target:delMod(xi.mod.FOOD_ACC_CAP, 80)
+    target:delMod(xi.mod.FOOD_RACCP, 10)
+    target:delMod(xi.mod.FOOD_RACC_CAP, 80)
+    target:delMod(xi.mod.MACC, 50)
+    target:delPetMod(xi.mod.HP, 20)
+    target:delPetMod(xi.mod.DEX, 2)
+    target:delPetMod(xi.mod.VIT, 3)
+    target:delPetMod(xi.mod.FOOD_ACCP, 10)
+    target:delPetMod(xi.mod.FOOD_ACC_CAP, 105)
+    target:delPetMod(xi.mod.FOOD_RACCP, 10)
+    target:delPetMod(xi.mod.FOOD_RACC_CAP, 105)
+    target:delPetMod(xi.mod.MACC, 75)
 end
 
 return item_object

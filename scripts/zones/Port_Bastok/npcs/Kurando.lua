@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4526, 1) and trade:getItemCount() == 1) then
             player:startEvent(171) -- Quest Completion Dialogue
         end
@@ -21,7 +21,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FearofFlying = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
+    local FearofFlying = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
     -- csid 173 ?
     if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(BASTOK) >=3) then
         player:startEvent(170) -- Quest Start Dialogue
@@ -39,7 +39,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 170) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
 
     elseif (csid == 171) then
         if    (player:getFreeSlotsCount() == 0) then
@@ -49,8 +49,8 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             player:addItem(13113, 1)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13113)
-            player:setTitle(tpz.title.AIRSHIP_DENOUNCER)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.FEAR_OF_FLYING)
+            player:setTitle(xi.title.AIRSHIP_DENOUNCER)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
             player:addFame(BASTOK, 30)
         end
     end

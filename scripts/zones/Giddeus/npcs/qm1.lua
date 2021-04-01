@@ -25,8 +25,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCharVar("darkLegacyCS") == 5 and not player:hasKeyItem(tpz.ki.DARKSTEEL_FORMULA)) then
-        npcUtil.giveKeyItem(player, tpz.ki.DARKSTEEL_FORMULA)
+    if (player:getCharVar("darkLegacyCS") == 5 and not player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
+        npcUtil.giveKeyItem(player, xi.ki.DARKSTEEL_FORMULA)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

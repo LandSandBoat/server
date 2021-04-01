@@ -15,8 +15,8 @@ entity.onTrigger = function(player, npc)
 
     if (player:getZPos() > 38.5) then
         if
-            player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_ACCEPTED and
-            player:hasKeyItem(tpz.ki.ARAGONEU_PIZZA)
+            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_ACCEPTED and
+            player:hasKeyItem(xi.ki.ARAGONEU_PIZZA)
         then
             player:startEvent(230)
         else

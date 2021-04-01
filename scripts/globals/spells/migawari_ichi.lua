@@ -21,8 +21,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.MIGAWARI
-    local ninjutsu = target:getSkillLevel(tpz.skill.NINJUTSU)
+    local effect = xi.effect.MIGAWARI
+    local ninjutsu = target:getSkillLevel(xi.skill.NINJUTSU)
     local negationThreshold = math.floor(100 * ((ninjutsu / 5) / 100))
     caster:addStatusEffect(effect, negationThreshold, 0, 60, 0, 100)
     return effect

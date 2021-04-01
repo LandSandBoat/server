@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.VISITANT
+-- xi.effect.VISITANT
 -----------------------------------
 local effect_object = {}
 

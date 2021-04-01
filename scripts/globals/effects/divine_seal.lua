@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DIVINE_SEAL
+-- xi.effect.DIVINE_SEAL
 -----------------------------------
 local effect_object = {}
 

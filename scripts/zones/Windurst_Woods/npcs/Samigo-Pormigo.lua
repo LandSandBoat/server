@@ -14,25 +14,25 @@ local keyitems =
 {
     [0] =
     {
-        id = tpz.ki.BONE_PURIFICATION,
+        id = xi.ki.BONE_PURIFICATION,
         rank = 3,
         cost = 40000
     },
     [1] =
     {
-        id = tpz.ki.BONE_ENSORCELLMENT,
+        id = xi.ki.BONE_ENSORCELLMENT,
         rank = 3,
         cost = 40000
     },
     [2] =
     {
-        id = tpz.ki.FILING,
+        id = xi.ki.FILING,
         rank = 3,
         cost = 10000
     },
     [3] =
     {
-        id = tpz.ki.WAY_OF_THE_BONEWORKER,
+        id = xi.ki.WAY_OF_THE_BONEWORKER,
         rank = 9,
         cost = 20000
     }

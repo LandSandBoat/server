@@ -6,11 +6,11 @@ require("scripts/globals/status")
 local attachment_object = {}
 
 attachment_object.onEquip = function(pet)
-    pet:addMod(tpz.mod.PREVENT_OVERLOAD, 1)
+    pet:addMod(xi.mod.PREVENT_OVERLOAD, 1)
 end
 
 attachment_object.onUnequip = function(pet)
-    pet:delMod(tpz.mod.PREVENT_OVERLOAD, 1)
+    pet:delMod(xi.mod.PREVENT_OVERLOAD, 1)
 end
 
 attachment_object.onManeuverGain = function(pet, maneuvers)

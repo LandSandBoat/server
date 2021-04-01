@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1723) and not player:hasKeyItem(tpz.ki.MAP_OF_PROMYVION_VAHZL) then
+    if npcUtil.tradeHas(trade, 1723) and not player:hasKeyItem(xi.ki.MAP_OF_PROMYVION_VAHZL) then
         player:startEvent(48)
     else
         player:messageSpecial(ID.text.NOTHING_HAPPENS)
@@ -28,7 +28,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 48 then
         player:confirmTrade()
-        npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_PROMYVION_VAHZL)
+        npcUtil.giveKeyItem(player, xi.ki.MAP_OF_PROMYVION_VAHZL)
     end
 end
 return entity

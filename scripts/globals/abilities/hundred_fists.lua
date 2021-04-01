@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.HUNDRED_FISTS, 1, 0, 45)
+    player:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 45)
 end
 
 return ability_object

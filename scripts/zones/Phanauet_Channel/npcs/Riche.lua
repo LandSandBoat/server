@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.keyItem.TONBERRY_BLACKBOARD) then
+    if player:hasKeyItem(xi.keyItem.TONBERRY_BLACKBOARD) then
         player:startEvent(5, 1, 627, 1682, 63, 3, 30, 30, 0)
     end
 end
@@ -20,7 +20,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 5 then
-        player:delKeyItem(tpz.keyItem.TONBERRY_BLACKBOARD) -- No message as the cutscene ends with the NPC taking it
+        player:delKeyItem(xi.keyItem.TONBERRY_BLACKBOARD) -- No message as the cutscene ends with the NPC taking it
         player:setCharVar('TEA_WITH_A_TONBERRY_PROG', 3)
     end
 end

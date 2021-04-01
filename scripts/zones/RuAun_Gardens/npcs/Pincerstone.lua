@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
     local portalId = ID.npc.PINCERSTONES[npcId]
     if (portalId ~= nil) then
         local portal = GetNPCByID(portalId)
-        if (portal:getAnimation() == tpz.anim.CLOSE_DOOR) then
+        if (portal:getAnimation() == xi.anim.CLOSE_DOOR) then
             GetNPCByID(npcId - 1):openDoor(120)
             portal:openDoor(120)
         else

@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local duration = 30 + player:getMod(tpz.mod.PERFECT_DODGE)
-    player:addStatusEffect(tpz.effect.PERFECT_DODGE, 1, 0, duration)
+    local duration = 30 + player:getMod(xi.mod.PERFECT_DODGE)
+    player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, duration)
 end
 
 return ability_object

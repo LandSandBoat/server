@@ -10,14 +10,14 @@ local ability_object = {}
 
 function onMobSkillCheck(target, automaton, skill)
     local master = automaton:getMaster()
-    return master:countEffect(tpz.effect.THUNDER_MANEUVER)
+    return master:countEffect(xi.effect.THUNDER_MANEUVER)
 end
 
 ability_object.onPetAbility = function(target, automaton, skill, master, action)
     local params = {
         numHits = 2,
         atkmulti = 1.36,
-        weaponType = tpz.skill.SWORD,
+        weaponType = xi.skill.SWORD,
         ftp100 = 1.5,
         ftp200 = 1.5,
         ftp300 = 1.5,

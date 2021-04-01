@@ -9,7 +9,7 @@ local entity = {}
 --TODO: Immortal Mind - Magic Atk Boost
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 180)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

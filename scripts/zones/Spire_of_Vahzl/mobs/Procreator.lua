@@ -5,7 +5,7 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.LINK_RADIUS, 50)
+    mob:setMobMod(xi.mobMod.LINK_RADIUS, 50)
 end
 
 entity.onMobSpawn = function(mob)

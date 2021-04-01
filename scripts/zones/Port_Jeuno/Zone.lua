@@ -13,7 +13,7 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.chocobo.initZone(zone)
+    xi.chocobo.initZone(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -29,22 +29,22 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if
         ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30
-        and player:getQuestStatus(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
+        and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         cs = 324
     end
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == tpz.zone.SAN_DORIA_JEUNO_AIRSHIP) then
+        if (prevZone == xi.zone.SAN_DORIA_JEUNO_AIRSHIP) then
             cs = 10018
             player:setPos(-87.000, 12.000, 116.000, 128)
-        elseif (prevZone == tpz.zone.BASTOK_JEUNO_AIRSHIP) then
+        elseif (prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP) then
             cs = 10020
             player:setPos(-50.000, 12.000, -116.000, 0)
-        elseif (prevZone == tpz.zone.WINDURST_JEUNO_AIRSHIP) then
+        elseif (prevZone == xi.zone.WINDURST_JEUNO_AIRSHIP) then
             cs = 10019
             player:setPos(16.000, 12.000, -117.000, 0)
-        elseif (prevZone == tpz.zone.KAZHAM_JEUNO_AIRSHIP) then
+        elseif (prevZone == xi.zone.KAZHAM_JEUNO_AIRSHIP) then
             cs = 10021
             player:setPos(-24.000, 12.000, 116.000, 128)
         else
@@ -57,7 +57,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onTransportEvent = function(player, transport)
@@ -85,7 +85,7 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 10013) then
         player:setPos(0, 0, 0, 0, 226)
     elseif (csid == 324) then
-        player:addQuest(tpz.quest.log_id.ABYSSEA, tpz.quest.id.abyssea.A_JOURNEY_BEGINS)
+        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)
     end
 end
 

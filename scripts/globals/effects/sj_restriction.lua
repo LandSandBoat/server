@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.SJ_RESTRICTION
+-- xi.effect.SJ_RESTRICTION
 -----------------------------------
 local effect_object = {}
 

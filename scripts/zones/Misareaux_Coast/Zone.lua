@@ -11,12 +11,12 @@ local MISAREAUX_COAST = require("scripts/zones/Misareaux_Coast/globals")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helm.type.LOGGING)
     MISAREAUX_COAST.ziphiusHandleQM()
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

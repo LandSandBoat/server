@@ -3,7 +3,7 @@ function updateModPerformance(pet, mod, key, value, cap)
     if previous ~= 0 then
         pet:delMod(mod, previous)
     end
-    value = value + value * (pet:getMod(tpz.mod.AUTO_PERFORMANCE_BOOST) / 100)
+    value = value + value * (pet:getMod(xi.mod.AUTO_PERFORMANCE_BOOST) / 100)
     if cap then
         value = math.min(value, cap)
     end

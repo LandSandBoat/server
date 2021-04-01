@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.EQUANIMITY
+-- xi.effect.EQUANIMITY
 -----------------------------------
 local effect_object = {}
 

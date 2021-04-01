@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DARK_SEAL
+-- xi.effect.DARK_SEAL
 -----------------------------------
 local effect_object = {}
 

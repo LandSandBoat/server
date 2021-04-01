@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("WildcatSandy"), 13) then
+    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("WildcatSandy"), 13) then
         player:startEvent(747)
     elseif player:getCharVar("thePickpocket") == 1 then
         player:showText(npc, ID.text.PICKPOCKET_PARCARIN)

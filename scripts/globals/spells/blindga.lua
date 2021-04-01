@@ -14,7 +14,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
 
     -- Pull base stats.
-    local dINT = (caster:getStat(tpz.mod.INT) - target:getStat(tpz.mod.MND)) --blind uses caster INT vs target MND
+    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.MND)) --blind uses caster INT vs target MND
 
     -- Base power.  May need more research.
     local power = math.floor(dINT * 9/40) + 23
@@ -32,23 +32,23 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = 180
     local params = {}
     params.diff = nil
-    params.attribute = tpz.mod.INT
+    params.attribute = xi.mod.INT
     params.skillType = 35
     params.bonus = 0
-    params.effect = tpz.effect.BLINDNESS
+    params.effect = xi.effect.BLINDNESS
     duration = duration * applyResistanceEffect(caster, target, spell, params)
 
     if (duration >= 60) then --Do it!
 
-        if (target:addStatusEffect(tpz.effect.BLINDNESS, power, 0, duration)) then
-            spell:setMsg(tpz.msg.basic.MAGIC_ENFEEB_IS)
+        if (target:addStatusEffect(xi.effect.BLINDNESS, power, 0, duration)) then
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT)
+            spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         end
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_RESIST)
+        spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
-    return tpz.effect.BLINDNESS
+    return xi.effect.BLINDNESS
 end
 
 return spell_object

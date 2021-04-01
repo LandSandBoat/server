@@ -38,7 +38,7 @@ local ZoneID =
 }
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 570) then
         local tablets = player:getCharVar("anExplorer-ClayTablets")
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
 
@@ -64,7 +64,7 @@ entity.onTrade = function(player, npc, trade)
     end
 
     if
-        player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE and
+        player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE and
         npcUtil.tradeHas(trade,{{9082, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 1
     then
@@ -73,12 +73,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local anExplorersFootsteps = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
-    local signedInBlood = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
+    local anExplorersFootsteps = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+    local signedInBlood = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
     local signedInBloodStat = player:getCharVar("SIGNED_IN_BLOOD_Prog")
 
     -- SIGNED IN BLOOD (will only activate if An Explorer's Footsteps is not active, or if it is completed)
-    if signedInBlood == QUEST_ACCEPTED and player:hasKeyItem(tpz.ki.TORN_OUT_PAGES) and anExplorersFootsteps ~= QUEST_ACCEPTED and signedInBloodStat == 2 then
+    if signedInBlood == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TORN_OUT_PAGES) and anExplorersFootsteps ~= QUEST_ACCEPTED and signedInBloodStat == 2 then
         player:startEvent(1106)
     elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 1 and anExplorersFootsteps ~= QUEST_ACCEPTED then
         player:startEvent(1104)
@@ -113,7 +113,7 @@ entity.onTrigger = function(player, npc)
                 end
             end
         end
-    elseif player:getCurrentMission(ROV) == tpz.mission.id.rov.SET_FREE then
+    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE then
         player:startEvent(181)
     end
 end
@@ -130,7 +130,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- AN EXPLORER'S FOOTSTEPS
     elseif csid == 40 and option ~= 0 and npcUtil.giveItem(player, 571) then
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar("anExplorer-ClayTablets", 0)
     elseif csid == 42 and option == 100 and npcUtil.giveItem(player, 571) then
         player:setCharVar("anExplorer-CurrentTablet", 0)
@@ -151,7 +151,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if csid == 47 then
-            player:completeQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
+            player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
             player:setCharVar("anExplorer-ClayTablets", 0)
         end
 
@@ -162,19 +162,19 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if (tablets % (2 * 0x7fff)) >= 0x7fff then
-            npcUtil.giveKeyItem(player, tpz.ki.MAP_OF_THE_CRAWLERS_NEST)
+            npcUtil.giveKeyItem(player, xi.ki.MAP_OF_THE_CRAWLERS_NEST)
         end
 
     -- RoV: Set Free
     elseif csid == 178 then
         player:confirmTrade()
         if player:hasJob(0) == false then -- Is Subjob Unlocked
-            npcUtil.giveKeyItem(player, tpz.ki.GILGAMESHS_INTRODUCTORY_LETTER)
+            npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
             if not npcUtil.giveItem(player, 8711) then return end
         end
-        player:completeMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.SET_FREE)
-        player:addMission(tpz.mission.log_id.ROV, tpz.mission.id.rov.THE_BEGINNING)
+        player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
+        player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_BEGINNING)
     end
 end
 

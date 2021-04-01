@@ -9,7 +9,7 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobDrawIn = function(mob, target)
@@ -18,17 +18,17 @@ entity.onMobDrawIn = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.PETRIFY, {chance = 100})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY, {chance = 100})
 end
 
 entity.onMobDisengage = function(mob, weather)
-    if weather ~= tpz.weather.DUST_STORM and weather ~= tpz.weather.SAND_STORM then
+    if weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
         DespawnMob(mob:getID())
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.VINEGAR_EVAPORATOR)
+    player:addTitle(xi.title.VINEGAR_EVAPORATOR)
 end
 
 entity.onMobDespawn = function(mob)

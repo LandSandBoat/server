@@ -14,12 +14,12 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.ASH_DRAGON)
     GetMobByID(ID.mob.ASH_DRAGON):setRespawnTime(math.random(900, 10800))
 
-    tpz.treasure.initZone(zone)
-    tpz.helm.initZone(zone, tpz.helm.type.MINING)
+    xi.treasure.initZone(zone)
+    xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

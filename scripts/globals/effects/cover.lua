@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.mod.COVER_EFFECT
+-- xi.mod.COVER_EFFECT
 -----------------------------------
 local effect_object = {}
 

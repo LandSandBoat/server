@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.COOLDOWN, 18, 1, 1)
+    player:addStatusEffect(xi.effect.COOLDOWN, 18, 1, 1)
 end
 
 return ability_object

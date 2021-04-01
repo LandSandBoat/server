@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DIABOLOSS_FAVOR
+-- xi.effect.DIABOLOSS_FAVOR
 -----------------------------------
 local effect_object = {}
 

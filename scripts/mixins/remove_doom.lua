@@ -7,12 +7,12 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 
 tpz = tpz or {}
-tpz.mix = tpz.mix or {}
-tpz.mix.clear_doom = tpz.mix.clear_doom or {}
+ xi.mix = xi.mix or {}
+ xi.mix.clear_doom = xi.mix.clear_doom or {}
 
 g_mixins = g_mixins or {}
 
-tpz.mix.clear_doom.config = function(mob, params)
+ xi.mix.clear_doom.config = function(mob, params)
     if params.doomRemovalChance and type(params.doomRemovalChance) == "number" then
         mob:setLocalVar("[remove_doom]removalChance", params.doomRemovalChance)
     end
@@ -28,8 +28,8 @@ g_mixins.clear_doom = function(mob)
             local players = mob:getZone():getPlayers()
             for name, player in pairs(players) do
                 if mob:checkDistance(player) < 30 then
-                    if player:delStatusEffectSilent(tpz.effect.DOOM) then
-                        player:messagePublic(tpz.msg.basic.NARROWLY_ESCAPE, player)
+                    if player:delStatusEffectSilent(xi.effect.DOOM) then
+                        player:messagePublic(xi.msg.basic.NARROWLY_ESCAPE, player)
                     end
                 end
             end

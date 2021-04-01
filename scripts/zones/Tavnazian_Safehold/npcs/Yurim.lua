@@ -58,7 +58,7 @@ local nosTrades =
 }
 
 entity.onTrade = function(player, npc, trade)
-    local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+    local nameOfScience  = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 
     if itemInProgress > 0 and npcUtil.tradeHas(trade, nosTrades[itemInProgress].organs) then
@@ -78,8 +78,8 @@ end
 
 entity.onTrigger = function(player, npc)
     -- IN THE NAME OF SCIENCE
-    if player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_WARRIOR_S_PATH) then
-        local nameOfScience  = player:getQuestStatus(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH) then
+        local nameOfScience  = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
 
         if nameOfScience == QUEST_AVAILABLE then
@@ -109,14 +109,14 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 524 then
-        player:addQuest(tpz.quest.log_id.OTHER_AREAS, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
+        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE)
     elseif csid == 531 then
         player:confirmTrade()
     elseif csid == 526 then
         player:confirmTrade()
     elseif csid == 529 then
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
-        if npcUtil.completeQuest(player, OTHER_AREAS_LOG, tpz.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
+        if npcUtil.completeQuest(player, OTHER_AREAS_LOG, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
             player:confirmTrade()
         end
     end

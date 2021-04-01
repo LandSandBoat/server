@@ -33,16 +33,16 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local theDoorman = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_DOORMAN)
-    local theTalekeeperTruth = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+    local theDoorman = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN)
+    local theTalekeeperTruth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
     local theTalekeeperTruthCS = player:getCharVar("theTalekeeperTruthCS")
     local Wait1DayForAF3 = player:getCharVar("DeidoggWait1DayForAF3")
     local theTalekeeperGiftCS = player:getCharVar("theTalekeeperGiftCS")
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 18)) then
         player:startEvent(504)
-    elseif (theDoorman == QUEST_COMPLETED and theTalekeeperTruth == QUEST_AVAILABLE and player:getMainJob() == tpz.job.WAR and player:getMainLvl() >= 50) then
+    elseif (theDoorman == QUEST_COMPLETED and theTalekeeperTruth == QUEST_AVAILABLE and player:getMainJob() == xi.job.WAR and player:getMainLvl() >= 50) then
         if (theTalekeeperTruthCS == 1) then
             player:startEvent(160)
             player:setCharVar("theTalekeeperTruthCS", 2)
@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(165) -- Finish Quest "The Talekeeper's Truth"
     elseif (theTalekeeperTruthCS == 5 or (theTalekeeperTruth == QUEST_COMPLETED and (player:needToZone() or VanadielDayOfTheYear() == Wait1DayForAF3))) then
         player:startEvent(166) -- New standard dialog after "The Talekeeper's Truth"
-    elseif (player:needToZone() == false and VanadielDayOfTheYear() ~= Wait1DayForAF3 and Wait1DayForAF3 ~= 0 and theTalekeeperGiftCS == 0 and player:getMainJob() == tpz.job.WAR) then
+    elseif (player:needToZone() == false and VanadielDayOfTheYear() ~= Wait1DayForAF3 and Wait1DayForAF3 ~= 0 and theTalekeeperGiftCS == 0 and player:getMainJob() == xi.job.WAR) then
         player:startEvent(170)
         player:setCharVar("theTalekeeperGiftCS", 1)
         player:setCharVar("DeidoggWait1DayForAF3", 0)
@@ -73,7 +73,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 161) then
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         player:setCharVar("theTalekeeperTruthCS", 3)
     elseif (csid == 162) then
         player:tradeComplete()
@@ -93,11 +93,11 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("DeidoggWait1DayForAF3", VanadielDayOfTheYear())
             player:needToZone(true)
             player:addFame(BASTOK, 40)
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
         end
     elseif (csid == 172) then
         player:tradeComplete()
-        player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
+        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
         player:setCharVar("theTalekeeperGiftCS", 3)
     elseif (csid == 504) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 18, true))

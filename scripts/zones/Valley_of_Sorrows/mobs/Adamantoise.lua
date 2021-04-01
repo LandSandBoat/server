@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     if LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(tpz.status.DISAPPEAR)
+        GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
     end
     if LandKingSystem_HQ == 0 then
         SetDropRate(24, 3344, 0) -- do not drop clump_of_red_pondweed
@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.TORTOISE_TORTURER)
+    player:addTitle(xi.title.TORTOISE_TORTURER)
 end
 
 entity.onMobDespawn = function(mob)

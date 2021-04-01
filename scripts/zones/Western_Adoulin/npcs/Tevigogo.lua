@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         17308, 60,     -- Hawkeye
         17320, 8,      -- Iron Arrow
     }
-    tpz.shop.general(player, stock)
+    xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)

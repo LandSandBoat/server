@@ -15,7 +15,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local lufetSalt = trade:hasItemQty(1019, 1)
     local cnt = trade:getItemCount()
-    local beansAhoy = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+    local beansAhoy = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
     if (lufetSalt and cnt == 1 and beansAhoy == QUEST_ACCEPTED) then
         if (player:getCharVar("BeansAhoy") == 0 == true) then
 
@@ -34,7 +34,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local beansAhoy = player:getQuestStatus(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+    local beansAhoy = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
     if (beansAhoy == QUEST_AVAILABLE) then
         player:startEvent(334) -- Quest Start
 
@@ -57,7 +57,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 334) then
-        player:addQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
 
     elseif (csid == 337) then
         player:tradeComplete()
@@ -73,7 +73,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 5704)
             player:setCharVar("BeansAhoy_ConquestWeek", getConquestTally())
             if (csid == 340) then
-                player:completeQuest(tpz.quest.log_id.CRYSTAL_WAR, tpz.quest.id.crystalWar.BEANS_AHOY)
+                player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BEANS_AHOY)
                 player:setCharVar("BeansAhoy", 0)
                 player:tradeComplete()
             end

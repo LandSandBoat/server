@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:hasKeyItem(tpz.ki.CREST_OF_DAVOI_KI)) then
+    if (player:hasKeyItem(xi.ki.CREST_OF_DAVOI_KI)) then
         player:startEvent(54)
     else
         player:startEvent(55)

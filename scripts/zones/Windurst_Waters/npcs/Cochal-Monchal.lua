@@ -15,11 +15,11 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCharVar("darkLegacyCS") == 2) then
-        player:startEvent(697, 0, tpz.ki.DARKSTEEL_FORMULA)
+        player:startEvent(697, 0, xi.ki.DARKSTEEL_FORMULA)
     elseif (player:getCharVar("darkLegacyCS") == 3) then
-        player:startEvent(698, 0, tpz.ki.DARKSTEEL_FORMULA)
-    elseif (player:hasKeyItem(tpz.ki.DARKSTEEL_FORMULA)) then
-        player:startEvent(699, 0, tpz.ki.DARKSTEEL_FORMULA)
+        player:startEvent(698, 0, xi.ki.DARKSTEEL_FORMULA)
+    elseif (player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
+        player:startEvent(699, 0, xi.ki.DARKSTEEL_FORMULA)
     else
         player:startEvent(696)
     end
@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 697) then
         player:setCharVar("darkLegacyCS", 3)
-        player:delKeyItem(tpz.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
+        player:delKeyItem(xi.ki.LETTER_FROM_THE_DARKSTEEL_FORGE)
     end
 
 end

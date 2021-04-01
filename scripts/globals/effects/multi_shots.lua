@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.MULTI_SHOTS
+-- xi.effect.MULTI_SHOTS
 -----------------------------------
 local effect_object = {}
 

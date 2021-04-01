@@ -10,7 +10,7 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMainJob() == tpz.job.COR then
+    if mob:getMainJob() == xi.job.COR then
         return 0
     else
         return 1
@@ -18,12 +18,12 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = tpz.effect.PARALYSIS
+    local typeEffect = xi.effect.PARALYSIS
 
     if MobStatusEffectMove(mob, target, typeEffect, 20, 0, 120) then
-        skill:setMsg(tpz.msg.basic.SKILL_ENFEEB_IS)
+        skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
     else
-        skill:setMsg(tpz.msg.basic.SKILL_MISS)
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
     return typeEffect

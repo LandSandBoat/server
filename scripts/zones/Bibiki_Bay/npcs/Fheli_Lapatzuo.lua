@@ -8,14 +8,14 @@ require("scripts/globals/manaclipper")
 -----------------------------------
 local entity = {}
 
-local timekeeperLocation = tpz.manaclipper.location.SUNSET_DOCKS
+local timekeeperLocation = xi.manaclipper.location.SUNSET_DOCKS
 local timekeeperEventId = 18
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.manaclipper.timekeeperOnTrigger(player, timekeeperLocation, timekeeperEventId)
+    xi.manaclipper.timekeeperOnTrigger(player, timekeeperLocation, timekeeperEventId)
 end
 
 entity.onEventUpdate = function(player, csid, option)

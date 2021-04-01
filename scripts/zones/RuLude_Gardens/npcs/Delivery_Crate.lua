@@ -9,19 +9,19 @@ require("scripts/globals/magiantrials")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    tpz.magian.deliveryCrateOnTrade(player, npc, trade)
+    xi.magian.deliveryCrateOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    tpz.magian.deliveryCrateOnTrigger(player, npc)
+    xi.magian.deliveryCrateOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.magian.deliveryCrateOnEventUpdate(player, csid, option)
+    xi.magian.deliveryCrateOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    tpz.magian.deliveryCrateOnEventFinish(player, csid, option)
+    xi.magian.deliveryCrateOnEventFinish(player, csid, option)
 end
 
 return entity

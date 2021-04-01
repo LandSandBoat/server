@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
         if (chance > 0) then
             player:confirmTrade()
             npc:setLocalVar("[SEA]IxAern_DropRate", chance) -- adjusts drops in IxAern (MNK)'s onMobSpawn.
-            npc:setStatus(tpz.status.DISAPPEAR)
+            npc:setStatus(xi.status.DISAPPEAR)
 
             -- spawn Ix'Aern (MNK) and minions
             nm:setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos())

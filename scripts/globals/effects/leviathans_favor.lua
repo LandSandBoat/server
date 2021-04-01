@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.LEVIATHANS_FAVOR
+-- xi.effect.LEVIATHANS_FAVOR
 -----------------------------------
 local effect_object = {}
 

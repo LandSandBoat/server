@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    tpz.teleport.to(target, tpz.teleport.id.PURGONORGO)
+    xi.teleport.to(target, xi.teleport.id.PURGONORGO)
 end
 
 return item_object

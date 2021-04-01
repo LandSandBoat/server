@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.GAVOTTE
+-- xi.effect.GAVOTTE
 -----------------------------------
 local effect_object = {}
 

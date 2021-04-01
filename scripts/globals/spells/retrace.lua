@@ -18,10 +18,10 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     if (target:getCampaignAllegiance() > 0) then
-        target:addStatusEffectEx(tpz.effect.TELEPORT, 0, tpz.teleport.id.RETRACE, 0, 4)
-        spell:setMsg(tpz.msg.basic.MAGIC_TELEPORT)
+        target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.RETRACE, 0, 4)
+        spell:setMsg(xi.msg.basic.MAGIC_TELEPORT)
     else
-        spell:setMsg(tpz.msg.basic.NONE)
+        spell:setMsg(xi.msg.basic.NONE)
     end
     return 0
 end

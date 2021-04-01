@@ -9,7 +9,7 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
 
-local body = target:getEquipID(tpz.slot.BODY)
+local body = target:getEquipID(xi.slot.BODY)
 
     if (body == 11363) then
         target:addSpell(503)

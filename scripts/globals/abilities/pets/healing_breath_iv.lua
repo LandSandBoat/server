@@ -29,12 +29,12 @@ ability_object.onUseAbility = function(pet, target, skill, action)
     -- TODO: 5 per merit for augmented AF2 (10663 *w/ augment*)
     local master = pet:getMaster()
     local deep = 0
-    if (pet:hasStatusEffect(tpz.effect.MAGIC_ATK_BOOST) == true) then
-        deep = 50 + (master:getMerit(tpz.merit.DEEP_BREATHING) - 1) * 5
-        pet:delStatusEffect(tpz.effect.MAGIC_ATK_BOOST)
+    if (pet:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) == true) then
+        deep = 50 + (master:getMerit(xi.merit.DEEP_BREATHING) - 1) * 5
+        pet:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
     end
 
-    local gear = master:getMod(tpz.mod.WYVERN_BREATH) -- Master gear that enhances breath
+    local gear = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
 
     local tp = math.floor(pet:getTP() / 200) / 1.165 -- HP only increases for every 20% TP
     pet:setTP(0)
@@ -43,7 +43,7 @@ ability_object.onUseAbility = function(pet, target, skill, action)
     if (target:getHP() + base > target:getMaxHP()) then
         base = target:getMaxHP() - target:getHP() --cap it
     end
-    skill:setMsg(tpz.msg.basic.JA_RECOVERS_HP)
+    skill:setMsg(xi.msg.basic.JA_RECOVERS_HP)
     target:addHP(base)
     return base
 end

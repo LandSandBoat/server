@@ -10,8 +10,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:delStatusEffect(tpz.effect.FLEE)
-    target:addStatusEffect(tpz.effect.FLEE, 100, 0, 30)
+    target:delStatusEffect(xi.effect.FLEE)
+    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
 end
 
 return item_object

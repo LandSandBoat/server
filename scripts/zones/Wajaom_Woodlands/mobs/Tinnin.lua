@@ -16,19 +16,19 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.GIL_MIN, 12000)
-    mob:setMobMod(tpz.mobMod.GIL_MAX, 30000)
-    mob:setMobMod(tpz.mobMod.MUG_GIL, 8000)
-    mob:setMobMod(tpz.mobMod.DRAW_IN, 1)
-    mob:setMod(tpz.mod.UDMGBREATH, -100) -- immune to breath damage
-    mob:setMobMod(tpz.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMod(xi.mod.UDMGBREATH, -100) -- immune to breath damage
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
     mob:setHP(mob:getMaxHP()/2)
     mob:setUnkillable(true)
-    mob:setMod(tpz.mod.REGEN, 50)
+    mob:setMod(xi.mod.REGEN, 50)
 
     -- Regen Head every 1.5-4 minutes 90-240
     mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
@@ -60,7 +60,7 @@ entity.onMobRoam = function(mob)
         -- First time it regens third head, 25%. Reduced afterwards.
         if (mob:getLocalVar("thirdHead") == 0) then
             mob:addHP(mob:getMaxHP() * .25)
-            mob:setMod(tpz.mod.REGEN, 10)
+            mob:setMod(xi.mod.REGEN, 10)
             mob:setLocalVar("thirdHead", 1)
             mob:setUnkillable(false) -- It can be killed now that has all his heads
         else
@@ -82,8 +82,8 @@ entity.onMobFight = function(mob, target)
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+        if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
         -- These need to be listed in reverse order as forced moves are added to the top of the queue.
         mob:useMobAbility(1830) -- Polar Blast
@@ -95,15 +95,15 @@ entity.onMobFight = function(mob, target)
 
         -- First time it regens third head, 25%. Reduced afterwards.
         if (mob:getLocalVar("thirdHead") == 0) then
-            mob:setMod(tpz.mod.REGEN, 10)
+            mob:setMod(xi.mod.REGEN, 10)
             mob:addHP(mob:getMaxHP() * .25)
             mob:setLocalVar("thirdHead", 1)
             mob:setUnkillable(false) -- It can be killed now that has all his heads
         else
             mob:addHP(mob:getMaxHP() * .05)
         end
-        if (bit.band(mob:getBehaviour(), tpz.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
-            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(tpz.behavior.NO_TURN)))
+        if (bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0) then -- disable no turning for the forced mobskills upon head growth
+            mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
         end
         -- Reverse order, same deal.
         mob:useMobAbility(1828) -- Pyric Blast

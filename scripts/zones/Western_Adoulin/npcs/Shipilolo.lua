@@ -19,21 +19,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TOMATH = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
-    local Fertile_Ground = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.FERTILE_GROUND)
-    local Wayward_Waypoints = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.WAYWARD_WAYPOINTS)
+    local TOMATH = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
+    local Fertile_Ground = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.FERTILE_GROUND)
+    local Wayward_Waypoints = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.WAYWARD_WAYPOINTS)
     Wayward_Waypoints = (Wayward_Waypoints == QUEST_ACCEPTED) and (player:getCharVar("WW_Need_Shipilolo") > 0)
-    local ACSP = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
+    local ACSP = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_CERTAIN_SUBSTITUTE_PATROLMAN)
     local SOA_Mission = player:getCurrentMission(SOA)
 
-    if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
-        if ((TOMATH == QUEST_ACCEPTED) and player:hasKeyItem(tpz.ki.BROKEN_HARPOON)) then
+    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+        if ((TOMATH == QUEST_ACCEPTED) and player:hasKeyItem(xi.ki.BROKEN_HARPOON)) then
             -- Progresses Quest: 'The Old Man and the Harpoon'
             player:startEvent(2543)
-        elseif ((Fertile_Ground == QUEST_ACCEPTED) and (not player:hasKeyItem(tpz.ki.BOTTLE_OF_FERTILIZER_X))) then
+        elseif ((Fertile_Ground == QUEST_ACCEPTED) and (not player:hasKeyItem(xi.ki.BOTTLE_OF_FERTILIZER_X))) then
             -- Progresses Quest: 'Fertile Ground'
             player:startEvent(2850)
-        elseif (Wayward_Waypoints and (not player:hasKeyItem(tpz.ki.WAYPOINT_RECALIBRATION_KIT))) then
+        elseif (Wayward_Waypoints and (not player:hasKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT))) then
             -- Progresses Quest: 'Wayward Waypoints'
             player:startEvent(79)
         elseif ((ACSP == QUEST_ACCEPTED) and (player:getCharVar("ACSP_NPCs_Visited") == 5)) then
@@ -55,14 +55,14 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 2543) then
         -- Progresses Quest: 'The Old Man and the Harpoon'
-        player:delKeyItem(tpz.ki.BROKEN_HARPOON)
-        player:addKeyItem(tpz.ki.EXTRAVAGANT_HARPOON)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.EXTRAVAGANT_HARPOON)
+        player:delKeyItem(xi.ki.BROKEN_HARPOON)
+        player:addKeyItem(xi.ki.EXTRAVAGANT_HARPOON)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.EXTRAVAGANT_HARPOON)
     elseif (csid == 2850) then
         -- Progresses Quest: 'Fertile Ground'
-        player:addKeyItem(tpz.ki.BOTTLE_OF_FERTILIZER_X)
+        player:addKeyItem(xi.ki.BOTTLE_OF_FERTILIZER_X)
     elseif (csid == 79) then
-        player:addKeyItem(tpz.ki.WAYPOINT_RECALIBRATION_KIT)
+        player:addKeyItem(xi.ki.WAYPOINT_RECALIBRATION_KIT)
         player:setCharVar("WW_Need_Shipilolo", 0)
     elseif (csid == 2557) then
         -- Progresses Quest: 'A Certain Substitute Patrolman'

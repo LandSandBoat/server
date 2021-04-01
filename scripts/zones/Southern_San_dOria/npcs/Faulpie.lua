@@ -13,15 +13,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
-    local newRank = tradeTestItem(player, npc, trade, tpz.skill.LEATHERCRAFT)
+    local newRank = tradeTestItem(player, npc, trade, xi.skill.LEATHERCRAFT)
 
     if
         newRank > 9 and
         player:getCharVar("LeathercraftExpertQuest") == 1 and
-        player:hasKeyItem(tpz.keyItem.WAY_OF_THE_TANNER)
+        player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER)
     then
         if signed ~=0 then
-            player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
+            player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
             player:startEvent(649, 0, 0, 0, 0, newRank, 1)
             player:setCharVar("LeathercraftExpertQuest",0)
             player:setLocalVar("LeathercraftTraded",1)
@@ -29,31 +29,31 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(649, 0, 0, 0, 0, newRank, 0)
         end
     elseif newRank ~= 0 and newRank <=9 then
-        player:setSkillRank(tpz.skill.LEATHERCRAFT, newRank)
+        player:setSkillRank(xi.skill.LEATHERCRAFT, newRank)
         player:startEvent(649, 0, 0, 0, 0, newRank)
         player:setLocalVar("LeathercraftTraded",1)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local craftSkill = player:getSkillLevel(tpz.skill.LEATHERCRAFT)
-    local testItem = getTestItem(player, npc, tpz.skill.LEATHERCRAFT)
+    local craftSkill = player:getSkillLevel(xi.skill.LEATHERCRAFT)
+    local testItem = getTestItem(player, npc, xi.skill.LEATHERCRAFT)
     local guildMember = isGuildMember(player, 7)
-    local rankCap = getCraftSkillCap(player, tpz.skill.LEATHERCRAFT)
+    local rankCap = getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
     local expertQuestStatus = 0
-    local Rank = player:getSkillRank(tpz.skill.LEATHERCRAFT)
+    local Rank = player:getSkillRank(xi.skill.LEATHERCRAFT)
     local realSkill = (craftSkill - Rank) / 32
     local canRankUp = rankCap - realSkill -- used to make sure rank up isn't overridden by ASA mission
     if (guildMember == 1) then guildMember = 150995375; end
     if player:getCharVar("LeathercraftExpertQuest") == 1 then
-        if player:hasKeyItem(tpz.keyItem.WAY_OF_THE_TANNER) then
+        if player:hasKeyItem(xi.keyItem.WAY_OF_THE_TANNER) then
             expertQuestStatus = 550
         else
             expertQuestStatus = 600
         end
     end
 
-    if (player:getCurrentMission(ASA) == tpz.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and
+    if (player:getCurrentMission(ASA) == xi.mission.id.asa.THAT_WHICH_CURDLES_BLOOD and guildMember == 150995375 and
         canRankUp >= 3) then
         local item = 0
         local asaStatus = player:getCharVar("ASA_Status")

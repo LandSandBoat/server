@@ -13,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298, 2}}) then -- Parana Shield x2
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298, 2}}) then -- Parana Shield x2
         if missionStatus == 5 then
             player:startEvent(455) -- before deliver shield to the yagudo
         elseif missionStatus == 6 then
@@ -25,7 +25,7 @@ end
 entity.onTrigger = function(player, npc)
     local missionStatus = player:getCharVar("MissionStatus")
 
-    if player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_ABROAD then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_ABROAD then
         -- San d'Oria Mission 2-3 Part I - Windurst > Bastok
         if missionStatus == 2 then
             player:startEvent(448)
@@ -38,14 +38,14 @@ entity.onTrigger = function(player, npc)
             player:startEvent(468)
         end
     -- San d'Oria Mission 2-3 Part I - Windurst > Bastok
-    elseif player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST then
+    elseif player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST then
         if missionStatus >= 3 and missionStatus <= 5 then
             player:startEvent(449)
         elseif missionStatus == 6 then
             player:startEvent(456)
         end
     -- San d'Oria Mission 2-3 Part II - Bastok > Windurst
-    elseif player:getCurrentMission(SANDORIA) == tpz.mission.id.sandoria.JOURNEY_TO_WINDURST2 then
+    elseif player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST2 then
         if missionStatus == 7 or missionStatus == 8 then
             player:startEvent(463)
         elseif missionStatus == 9 or missionStatus == 10 then
@@ -61,21 +61,21 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 448 then
-        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST)
+        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
         player:setCharVar("MissionStatus", 3)
-        player:delKeyItem(tpz.ki.LETTER_TO_THE_CONSULS_SANDORIA)
+        player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif csid == 457 then
         player:setCharVar("MissionStatus", 7)
         player:confirmTrade()
-        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
+        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
     elseif csid == 462 then
-        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_TO_WINDURST2)
+        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2)
         player:setCharVar("MissionStatus", 7)
     elseif csid == 467 then
-        player:addMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.JOURNEY_ABROAD)
-        player:delKeyItem(tpz.ki.KINDRED_CREST)
+        player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
+        player:delKeyItem(xi.ki.KINDRED_CREST)
         player:setCharVar("MissionStatus", 11)
-        npcUtil.giveKeyItem(player, tpz.ki.KINDRED_REPORT)
+        npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
     end
 end
 

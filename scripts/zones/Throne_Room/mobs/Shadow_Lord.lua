@@ -35,11 +35,11 @@ entity.onMobFight = function(mob, target)
             -- subanimation 0 is first phase subanim, so just go straight to magic mode
             if (mob:getAnimationSub() == 0) then
                 mob:setAnimationSub(1)
-                mob:delStatusEffect(tpz.effect.PHYSICAL_SHIELD)
-                mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+                mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
+                mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
                 mob:SetAutoAttackEnabled(false)
                 mob:SetMagicCastingEnabled(true)
-                mob:setMobMod(tpz.mobMod.MAGIC_COOL, 2)
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 2)
                 --and record the time and HP this immunity was started
                 mob:setLocalVar("changeTime", mob:getBattleTime())
                 mob:setLocalVar("changeHP", mob:getHP())
@@ -47,11 +47,11 @@ entity.onMobFight = function(mob, target)
             elseif (mob:getAnimationSub() == 2 and (mob:getHP() <= changeHP - 1000 or
                     mob:getBattleTime() - changeTime > 300)) then
                 mob:setAnimationSub(1)
-                mob:delStatusEffect(tpz.effect.PHYSICAL_SHIELD)
-                mob:addStatusEffectEx(tpz.effect.MAGIC_SHIELD, 0, 1, 0, 0)
+                mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
+                mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 0)
                 mob:SetAutoAttackEnabled(false)
                 mob:SetMagicCastingEnabled(true)
-                mob:setMobMod(tpz.mobMod.MAGIC_COOL, 2)
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 2)
                 mob:setLocalVar("changeTime", mob:getBattleTime())
                 mob:setLocalVar("changeHP", mob:getHP())
             -- subanimation 1 is magic mode, so check if he should change into physical mode
@@ -60,11 +60,11 @@ entity.onMobFight = function(mob, target)
                 -- and use an ability before changing
                 mob:useMobAbility(673)
                 mob:setAnimationSub(2)
-                mob:delStatusEffect(tpz.effect.MAGIC_SHIELD)
-                mob:addStatusEffectEx(tpz.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
+                mob:delStatusEffect(xi.effect.MAGIC_SHIELD)
+                mob:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, 0, 1, 0, 0)
                 mob:SetAutoAttackEnabled(true)
                 mob:SetMagicCastingEnabled(false)
-                mob:setMobMod(tpz.mobMod.MAGIC_COOL, 10)
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
                 mob:setLocalVar("changeTime", mob:getBattleTime())
                 mob:setLocalVar("changeHP", mob:getHP())
             end
@@ -85,14 +85,14 @@ entity.onMobDeath = function(mob, player, isKiller)
         player:startEvent(32004)
         player:setCharVar("mobid", mob:getID())
     else
-        player:addTitle(tpz.title.SHADOW_BANISHER)
+        player:addTitle(xi.title.SHADOW_BANISHER)
     end
     -- reset everything on death
     mob:setAnimationSub(0)
     mob:SetAutoAttackEnabled(true)
     mob:SetMagicCastingEnabled(true)
-    mob:delStatusEffect(tpz.effect.MAGIC_SHIELD)
-    mob:delStatusEffect(tpz.effect.PHYSICAL_SHIELD)
+    mob:delStatusEffect(xi.effect.MAGIC_SHIELD)
+    mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
 end
 
 entity.onMobDespawn = function(mob)
@@ -100,8 +100,8 @@ entity.onMobDespawn = function(mob)
     mob:setAnimationSub(0)
     mob:SetAutoAttackEnabled(true)
     mob:SetMagicCastingEnabled(true)
-    mob:delStatusEffect(tpz.effect.MAGIC_SHIELD)
-    mob:delStatusEffect(tpz.effect.PHYSICAL_SHIELD)
+    mob:delStatusEffect(xi.effect.MAGIC_SHIELD)
+    mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -15,21 +15,21 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- SIGNED IN BLOOD
-    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
+    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
         player:startEvent(734, 0, 1662)
 
     -- RIDING ON THE CLOUDS
-    elseif npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
+    elseif npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
         player:setCharVar("ridingOnTheClouds_1", 0)
-        npcUtil.giveKeyItem(player, tpz.ki.SCOWLING_STONE)
+        npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE)
         player:confirmTrade()
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local signedInBlood = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
+    local signedInBlood = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
     local bloodProg = player:getCharVar("SIGNED_IN_BLOOD_Prog")
-    local teaWithATonberry = player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY)
+    local teaWithATonberry = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
     -- SHARPENING THE SWORD
     if player:getCharVar("sharpeningTheSwordCS") >= 2 then
@@ -69,17 +69,17 @@ entity.onEventFinish = function(player, csid, option)
 
     -- SIGNED IN BLOOD
     elseif csid == 732 and option == 1 then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD)
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
     elseif csid == 734 then
         player:setCharVar("SIGNED_IN_BLOOD_Prog", 1)
-    elseif csid == 736 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.SIGNED_IN_BLOOD, {item = 14760, gil = 3500, var = "SIGNED_IN_BLOOD_Prog"}) then
-        player:delKeyItem(tpz.ki.TORN_OUT_PAGES)
+    elseif csid == 736 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD, {item = 14760, gil = 3500, var = "SIGNED_IN_BLOOD_Prog"}) then
+        player:delKeyItem(xi.ki.TORN_OUT_PAGES)
         player:confirmTrade()
     elseif csid == 735 then
         player:needToZone(true)
     elseif csid == 738 then
-        player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY)
-    elseif csid == 740 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.TEA_WITH_A_TONBERRY, {item = 13174}) then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
+    elseif csid == 740 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY, {item = 13174}) then
         player:setCharVar("TEA_WITH_A_TONBERRY_PROG", 0)
     end
 end

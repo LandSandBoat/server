@@ -15,11 +15,11 @@ zone_object.onInitialize = function(zone)
     for k, v in pairs(ID.mob.CHARYBDIS_PH) do table.insert(keys, k) end
     DespawnMob(keys[math.random(#keys)])
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

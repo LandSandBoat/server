@@ -40,12 +40,12 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     -- Apply aftermath
-    tpz.aftermath.addStatusEffect(player, tp, tpz.slot.MAIN, tpz.aftermath.type.EMPYREAN)
+    xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
     if damage > 0 then
-        if not target:hasStatusEffect(tpz.effect.SLOW) then
-            local duration = 60 * applyResistanceAddEffect(player, target, tpz.magic.ele.EARTH, 0)
-            target:addStatusEffect(tpz.effect.SLOW, 1500, 0, duration)
+        if not target:hasStatusEffect(xi.effect.SLOW) then
+            local duration = 60 * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0)
+            target:addStatusEffect(xi.effect.SLOW, 1500, 0, duration)
         end
     end
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.ARCANE_CREST
+-- xi.effect.ARCANE_CREST
 -----------------------------------
 local effect_object = {}
 

@@ -26,11 +26,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(10, -415, -98, 104, -411, -97, 108 ) -- Seventh Floor  H-6 porter to Sixth Floor "J"
     zone:registerRegion(11, -489, -130, 84, -484, -129, 88 ) -- Ninth Floor F-6 porter to Upper Delkfutt's Tower
 
-    tpz.treasure.initZone(zone)
+    xi.treasure.initZone(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -43,7 +43,7 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
-    if regionId == 8 and player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
+    if regionId == 8 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
         player:startEvent(14)
     else
         player:startEvent(regionId - 1)
@@ -70,7 +70,7 @@ zone_object.onEventFinish = function(player, csid, option)
         end
 
     -- BLADE OF EVIL
-    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title=tpz.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
+    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title= xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
         player:setCharVar("bladeOfEvilCS", 0)
     end
 end

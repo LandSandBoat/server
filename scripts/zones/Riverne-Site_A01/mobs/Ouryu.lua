@@ -7,7 +7,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.OURYU_OVERWHELMER)
+    player:addTitle(xi.title.OURYU_OVERWHELMER)
 end
 
 return entity

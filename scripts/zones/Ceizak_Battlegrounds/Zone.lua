@@ -20,7 +20,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local onwardToAdoulin = player:getCurrentMission(SOA) == tpz.mission.id.soa.ONWARD_TO_ADOULIN
+    local onwardToAdoulin = player:getCurrentMission(SOA) == xi.mission.id.soa.ONWARD_TO_ADOULIN
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(431, 0, 178, 110)
@@ -35,8 +35,8 @@ end
 
 -- Cutscene for Dances with Luopans.
 local function triggerUncannySensationMessage(player)
-    if player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.LUOPAN) and player:getCharVar("GEO_DWL_Luopan") == 0 then
+    if player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.DANCES_WITH_LUOPANS) == QUEST_ACCEPTED then
+        if player:hasKeyItem(xi.ki.LUOPAN) and player:getCharVar("GEO_DWL_Luopan") == 0 then
             player:messageSpecial(ID.text.UNCANNY_SENSATION)
             player:setLocalVar("GEO_DWL_Locus_Area", 1)
         end
@@ -60,8 +60,8 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 3 then
-        player:completeMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.ONWARD_TO_ADOULIN)
-        player:addMission(tpz.mission.log_id.SOA, tpz.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
+        player:completeMission(xi.mission.log_id.SOA, xi.mission.id.soa.ONWARD_TO_ADOULIN)
+        player:addMission(xi.mission.log_id.SOA, xi.mission.id.soa.HEARTWINGS_AND_THE_KINDHEARTED)
     end
 end
 

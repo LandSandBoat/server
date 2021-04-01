@@ -15,12 +15,12 @@ item_object.onAdditionalEffect = function(player, target, damage)
         chance = chance - 5 * (target:getMainLvl() - player:getMainLvl())
         chance = utils.clamp(chance, 5, 95)
     end
-    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, tpz.magic.ele.WIND, 0) <= 0.5) then
+    if (math.random(0, 99) >= chance or applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0) <= 0.5) then
         return 0, 0, 0
     else
-        target:delStatusEffect(tpz.effect.DEFENSE_BOOST)
-        target:addStatusEffect(tpz.effect.DEFENSE_DOWN, 1, 0, 60)
-        return tpz.subEffect.DEFENSE_DOWN, tpz.msg.basic.ADD_EFFECT_STATUS, tpz.effect.DEFENSE_DOWN
+        target:delStatusEffect(xi.effect.DEFENSE_BOOST)
+        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 1, 0, 60)
+        return xi.subEffect.DEFENSE_DOWN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.DEFENSE_DOWN
     end
 end
 

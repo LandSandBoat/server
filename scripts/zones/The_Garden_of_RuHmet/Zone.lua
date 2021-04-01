@@ -107,7 +107,7 @@ zone_object.onGameHour = function(zone)
     end
 
     -- Ix'DRK spawn randomiser
-    if (VanadielHour % 12 == 0 and qm2:getStatus() ~= tpz.status.DISAPPEAR) then -- Change ??? position every 12 hours Vana'diel time (30 mins)
+    if (VanadielHour % 12 == 0 and qm2:getStatus() ~= xi.status.DISAPPEAR) then -- Change ??? position every 12 hours Vana'diel time (30 mins)
         qm2:hideNPC(30)
         local qm2position = math.random(1, 4)
         qm2:setLocalVar("position", qm2position)
@@ -116,7 +116,7 @@ zone_object.onGameHour = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -124,7 +124,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-351.136, -2.25, -380, 253)
     end
-    if (player:getCurrentMission(COP) == tpz.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 0) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 0) then
         cs = 201
     end
     player:setCharVar("Ru-Hmet-TP", 0)
@@ -136,7 +136,7 @@ zone_object.onRegionEnter = function(player, region)
         switch (region:GetRegionID()): caseof
         {
             [1] = function (x)
-                if (player:getCurrentMission(COP)==tpz.mission.id.cop.DAWN or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.DAWN) or player:hasCompletedMission(tpz.mission.log_id.COP, tpz.mission.id.cop.THE_LAST_VERSE) ) then
+                if (player:getCurrentMission(COP)== xi.mission.id.cop.DAWN or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE) ) then
                     player:startEvent(101)
                 else
                     player:startEvent(155)
@@ -144,7 +144,7 @@ zone_object.onRegionEnter = function(player, region)
             end, --101
 
             [2] = function (x)
-                if (player:hasKeyItem(tpz.ki.BRAND_OF_DAWN) and player:hasKeyItem(tpz.ki.BRAND_OF_TWILIGHT)) then
+                if (player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT)) then
                     player:startEvent(156)
                 else
                     player:startEvent(183)
@@ -212,8 +212,8 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("Ru-Hmet-TP", 0)
     elseif (csid == 201) then
         player:setCharVar("PromathiaStatus", 1)
-        player:addKeyItem(tpz.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.MYSTERIOUS_AMULET)
+        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
     elseif (csid == 32000 and option==1) then
         player:setPos(420, 0, 398, 68)
     end

@@ -9,17 +9,17 @@ require("scripts/globals/msg")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    if (target:hasStatusEffect(tpz.effect.MEDICINE)) then
-        return tpz.msg.basic.ITEM_NO_USE_MEDICATED
+    if (target:hasStatusEffect(xi.effect.MEDICINE)) then
+        return xi.msg.basic.ITEM_NO_USE_MEDICATED
     end
     return 0
 end
 
 item_object.onItemUse = function(target)
-    target:delStatusEffect(tpz.effect.FLEE)
-    target:addStatusEffect(tpz.effect.FLEE, 100, 0, 30)
-    target:messageBasic(tpz.msg.basic.GAINS_EFFECT_OF_STATUS, tpz.effect.FLEE)
-    target:addStatusEffect(tpz.effect.MEDICINE, 0, 0, 900)
+    target:delStatusEffect(xi.effect.FLEE)
+    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
+    target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.FLEE)
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
 end
 
 return item_object

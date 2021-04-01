@@ -15,11 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local APBIF = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+    local APBIF = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
     local SOA_Mission = player:getCurrentMission(SOA)
 
-    if (SOA_Mission >= tpz.mission.id.soa.LIFE_ON_THE_FRONTIER) then
-        if ((APBIF == QUEST_ACCEPTED) and (not player:hasStatusEffect(tpz.effect.IONIS))) then
+    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+        if ((APBIF == QUEST_ACCEPTED) and (not player:hasStatusEffect(xi.effect.IONIS))) then
             -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2523)
         else
@@ -38,8 +38,8 @@ end
 entity.onEventFinish = function(player, csid, option)
     if (csid == 2523) then
         -- Progresses Quest: 'A Pioneers Best (Imaginary) Friend'
-        player:delStatusEffectsByFlag(tpz.effectFlag.INFLUENCE, true)
-        player:addStatusEffect(tpz.effect.IONIS, 0, 0, 9000)
+        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+        player:addStatusEffect(xi.effect.IONIS, 0, 0, 9000)
     end
 end
 

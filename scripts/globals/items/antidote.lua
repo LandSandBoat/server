@@ -13,8 +13,8 @@ end
 
 item_object.onItemUse = function(target)
 
-    if (target:hasStatusEffect(tpz.effect.POISON) == true) then
-        target:delStatusEffect(tpz.effect.POISON)
+    if (target:hasStatusEffect(xi.effect.POISON) == true) then
+        target:delStatusEffect(xi.effect.POISON)
     end
 end
 

@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 5) then
+    if (player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE) == QUEST_ACCEPTED and player:getCharVar("ratraceCS") == 5) then
         if (trade:hasItemQty(5595, 1) and trade:getItemCount() == 1) then
             player:startEvent(311)
         end
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(263)
     elseif (ratRaceProg == 6) then
         player:startEvent(316)
-    elseif (player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.RAT_RACE) == QUEST_COMPLETED) then
+    elseif (player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE) == QUEST_COMPLETED) then
         player:startEvent(317)
     else
         player:startEvent(263)

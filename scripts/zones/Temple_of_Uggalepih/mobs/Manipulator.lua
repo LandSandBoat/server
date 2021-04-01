@@ -69,18 +69,18 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onPath = function(mob)
-    tpz.path.patrol(mob, path)
+    xi.path.patrol(mob, path)
 end
 
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(path))
+        mob:pathThrough(xi.path.first(path))
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.hunts.checkHunt(mob, player, 383)
+    xi.hunts.checkHunt(mob, player, 383)
 end
 
 entity.onMobDespawn = function(mob)

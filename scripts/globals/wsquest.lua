@@ -4,7 +4,7 @@ require('scripts/globals/status')
 require('scripts/globals/weaponskillids')
 
 tpz = tpz or {}
-tpz.wsquest =
+ xi.wsquest =
 {
     -----------------------------------
     -- Quest: The Walls of Your Mind
@@ -13,13 +13,13 @@ tpz.wsquest =
     -----------------------------------
     ['asuran_fists'] =
     {
-        ['wsId'] = tpz.weaponskill.ASURAN_FISTS,
-        ['wsUnlockId'] = tpz.ws_unlock.ASURAN_FISTS,
-        ['skillId'] = tpz.skill.HAND_TO_HAND,
+        ['wsId'] = xi.weaponskill.ASURAN_FISTS,
+        ['wsUnlockId'] = xi.ws_unlock.ASURAN_FISTS,
+        ['skillId'] = xi.skill.HAND_TO_HAND,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 17507,
-        ['logId'] = tpz.quest.log_id.BASTOK,
-        ['questId'] = tpz.quest.id.bastok.THE_WALLS_OF_YOUR_MIND,
+        ['logId'] = xi.quest.log_id.BASTOK,
+        ['questId'] = xi.quest.id.bastok.THE_WALLS_OF_YOUR_MIND,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
         {
@@ -44,13 +44,13 @@ tpz.wsquest =
     -----------------------------------
     ['evisceration'] =
     {
-        ['wsId'] = tpz.weaponskill.EVISCERATION,
-        ['wsUnlockId'] = tpz.ws_unlock.EVISCERATION,
-        ['skillId'] = tpz.skill.DAGGER,
+        ['wsId'] = xi.weaponskill.EVISCERATION,
+        ['wsUnlockId'] = xi.ws_unlock.EVISCERATION,
+        ['skillId'] = xi.skill.DAGGER,
         ['minSkill'] = 230,
         ['trialWeaponId'] = 17616,
-        ['logId'] = tpz.quest.log_id.OUTLANDS,
-        ['questId'] = tpz.quest.id.outlands.CLOAK_AND_DAGGER,
+        ['logId'] = xi.quest.log_id.OUTLANDS,
+        ['questId'] = xi.quest.id.outlands.CLOAK_AND_DAGGER,
         ['fameRegion'] = KAZHAM,
         ['eventIds'] =
         {
@@ -75,13 +75,13 @@ tpz.wsquest =
     -----------------------------------
     ['savage_blade'] =
     {
-        ['wsId'] = tpz.weaponskill.SAVAGE_BLADE,
-        ['wsUnlockId'] = tpz.ws_unlock.SAVAGE_BLADE,
-        ['skillId'] = tpz.skill.SWORD,
+        ['wsId'] = xi.weaponskill.SAVAGE_BLADE,
+        ['wsUnlockId'] = xi.ws_unlock.SAVAGE_BLADE,
+        ['skillId'] = xi.skill.SWORD,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 17654,
-        ['logId'] = tpz.quest.log_id.SANDORIA,
-        ['questId'] = tpz.quest.id.sandoria.OLD_WOUNDS,
+        ['logId'] = xi.quest.log_id.SANDORIA,
+        ['questId'] = xi.quest.id.sandoria.OLD_WOUNDS,
         ['fameRegion'] = SANDORIA,
         ['eventIds'] =
         {
@@ -106,13 +106,13 @@ tpz.wsquest =
     -----------------------------------
     ['ground_strike'] =
     {
-        ['wsId'] = tpz.weaponskill.GROUND_STRIKE,
-        ['wsUnlockId'] = tpz.ws_unlock.GROUND_STRIKE,
-        ['skillId'] = tpz.skill.GREAT_SWORD,
+        ['wsId'] = xi.weaponskill.GROUND_STRIKE,
+        ['wsUnlockId'] = xi.ws_unlock.GROUND_STRIKE,
+        ['skillId'] = xi.skill.GREAT_SWORD,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 16952,
-        ['logId'] = tpz.quest.log_id.BASTOK,
-        ['questId'] = tpz.quest.id.bastok.INHERITANCE,
+        ['logId'] = xi.quest.log_id.BASTOK,
+        ['questId'] = xi.quest.id.bastok.INHERITANCE,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
         {
@@ -137,13 +137,13 @@ tpz.wsquest =
     -----------------------------------
     ['decimation'] =
     {
-        ['wsId'] = tpz.weaponskill.DECIMATION,
-        ['wsUnlockId'] = tpz.ws_unlock.DECIMATION,
-        ['skillId'] = tpz.skill.AXE,
+        ['wsId'] = xi.weaponskill.DECIMATION,
+        ['wsUnlockId'] = xi.ws_unlock.DECIMATION,
+        ['skillId'] = xi.skill.AXE,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 17933,
-        ['logId'] = tpz.quest.log_id.JEUNO,
-        ['questId'] = tpz.quest.id.jeuno.AXE_THE_COMPETITION,
+        ['logId'] = xi.quest.log_id.JEUNO,
+        ['questId'] = xi.quest.id.jeuno.AXE_THE_COMPETITION,
         ['fameRegion'] = JEUNO,
         ['eventIds'] =
         {
@@ -168,13 +168,13 @@ tpz.wsquest =
     -----------------------------------
     ['steel_cyclone'] =
     {
-        ['wsId'] = tpz.weaponskill.STEEL_CYCLONE,
-        ['wsUnlockId'] = tpz.ws_unlock.STEEL_CYCLONE,
-        ['skillId'] = tpz.skill.GREAT_AXE,
+        ['wsId'] = xi.weaponskill.STEEL_CYCLONE,
+        ['wsUnlockId'] = xi.ws_unlock.STEEL_CYCLONE,
+        ['skillId'] = xi.skill.GREAT_AXE,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 16735,
-        ['logId'] = tpz.quest.log_id.BASTOK,
-        ['questId'] = tpz.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS,
+        ['logId'] = xi.quest.log_id.BASTOK,
+        ['questId'] = xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
         {
@@ -199,13 +199,13 @@ tpz.wsquest =
     -----------------------------------
     ['spiral_hell'] =
     {
-        ['wsId'] = tpz.weaponskill.SPIRAL_HELL,
-        ['wsUnlockId'] = tpz.ws_unlock.SPIRAL_HELL,
-        ['skillId'] = tpz.skill.SCYTHE,
+        ['wsId'] = xi.weaponskill.SPIRAL_HELL,
+        ['wsUnlockId'] = xi.ws_unlock.SPIRAL_HELL,
+        ['skillId'] = xi.skill.SCYTHE,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 16793,
-        ['logId'] = tpz.quest.log_id.SANDORIA,
-        ['questId'] = tpz.quest.id.sandoria.SOULS_IN_SHADOW,
+        ['logId'] = xi.quest.log_id.SANDORIA,
+        ['questId'] = xi.quest.id.sandoria.SOULS_IN_SHADOW,
         ['fameRegion'] = SANDORIA,
         ['eventIds'] =
         {
@@ -230,13 +230,13 @@ tpz.wsquest =
     -----------------------------------
     ['impulse_drive'] =
     {
-        ['wsId'] = tpz.weaponskill.IMPULSE_DRIVE,
-        ['wsUnlockId'] = tpz.ws_unlock.IMPULSE_DRIVE,
-        ['skillId'] = tpz.skill.POLEARM,
+        ['wsId'] = xi.weaponskill.IMPULSE_DRIVE,
+        ['wsUnlockId'] = xi.ws_unlock.IMPULSE_DRIVE,
+        ['skillId'] = xi.skill.POLEARM,
         ['minSkill'] = 240,
         ['trialWeaponId'] = 16892,
-        ['logId'] = tpz.quest.log_id.SANDORIA,
-        ['questId'] = tpz.quest.id.sandoria.METHODS_CREATE_MADNESS,
+        ['logId'] = xi.quest.log_id.SANDORIA,
+        ['questId'] = xi.quest.id.sandoria.METHODS_CREATE_MADNESS,
         ['fameRegion'] = SANDORIA,
         ['eventIds'] =
         {
@@ -261,13 +261,13 @@ tpz.wsquest =
     -----------------------------------
     ['blade_ku'] =
     {
-        ['wsId'] = tpz.weaponskill.BLADE_KU,
-        ['wsUnlockId'] = tpz.ws_unlock.BLADE_KU,
-        ['skillId'] = tpz.skill.KATANA,
+        ['wsId'] = xi.weaponskill.BLADE_KU,
+        ['wsUnlockId'] = xi.ws_unlock.BLADE_KU,
+        ['skillId'] = xi.skill.KATANA,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 17773,
-        ['logId'] = tpz.quest.log_id.OUTLANDS,
-        ['questId'] = tpz.quest.id.outlands.BUGI_SODEN,
+        ['logId'] = xi.quest.log_id.OUTLANDS,
+        ['questId'] = xi.quest.id.outlands.BUGI_SODEN,
         ['fameRegion'] = NORG,
         ['eventIds'] =
         {
@@ -292,13 +292,13 @@ tpz.wsquest =
     -----------------------------------
     ['tachi_kasha'] =
     {
-        ['wsId'] = tpz.weaponskill.TACHI_KASHA,
-        ['wsUnlockId'] = tpz.ws_unlock.TACHI_KASHA,
-        ['skillId'] = tpz.skill.GREAT_KATANA,
+        ['wsId'] = xi.weaponskill.TACHI_KASHA,
+        ['wsUnlockId'] = xi.ws_unlock.TACHI_KASHA,
+        ['skillId'] = xi.skill.GREAT_KATANA,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 17815,
-        ['logId'] = tpz.quest.log_id.OUTLANDS,
-        ['questId'] = tpz.quest.id.outlands.THE_POTENTIAL_WITHIN,
+        ['logId'] = xi.quest.log_id.OUTLANDS,
+        ['questId'] = xi.quest.id.outlands.THE_POTENTIAL_WITHIN,
         ['fameRegion'] = NORG,
         ['eventIds'] =
         {
@@ -323,13 +323,13 @@ tpz.wsquest =
     -----------------------------------
     ['black_halo'] =
     {
-        ['wsId'] = tpz.weaponskill.BLACK_HALO,
-        ['wsUnlockId'] = tpz.ws_unlock.BLACK_HALO,
-        ['skillId'] = tpz.skill.CLUB,
+        ['wsId'] = xi.weaponskill.BLACK_HALO,
+        ['wsUnlockId'] = xi.ws_unlock.BLACK_HALO,
+        ['skillId'] = xi.skill.CLUB,
         ['minSkill'] = 230,
         ['trialWeaponId'] = 17456,
-        ['logId'] = tpz.quest.log_id.WINDURST,
-        ['questId'] = tpz.quest.id.windurst.ORASTERY_WOES,
+        ['logId'] = xi.quest.log_id.WINDURST,
+        ['questId'] = xi.quest.id.windurst.ORASTERY_WOES,
         ['fameRegion'] = WINDURST,
         ['eventIds'] =
         {
@@ -354,13 +354,13 @@ tpz.wsquest =
     -----------------------------------
     ['retribution'] =
     {
-        ['wsId'] = tpz.weaponskill.RETRIBUTION,
-        ['wsUnlockId'] = tpz.ws_unlock.RETRIBUTION,
-        ['skillId'] = tpz.skill.STAFF,
+        ['wsId'] = xi.weaponskill.RETRIBUTION,
+        ['wsUnlockId'] = xi.ws_unlock.RETRIBUTION,
+        ['skillId'] = xi.skill.STAFF,
         ['minSkill'] = 230,
         ['trialWeaponId'] = 17527,
-        ['logId'] = tpz.quest.log_id.WINDURST,
-        ['questId'] = tpz.quest.id.windurst.BLOOD_AND_GLORY,
+        ['logId'] = xi.quest.log_id.WINDURST,
+        ['questId'] = xi.quest.id.windurst.BLOOD_AND_GLORY,
         ['fameRegion'] = WINDURST,
         ['eventIds'] =
         {
@@ -385,13 +385,13 @@ tpz.wsquest =
     -----------------------------------
     ['empyreal_arrow'] =
     {
-        ['wsId'] = tpz.weaponskill.EMPYREAL_ARROW,
-        ['wsUnlockId'] = tpz.ws_unlock.EMPYREAL_ARROW,
-        ['skillId'] = tpz.skill.ARCHERY,
+        ['wsId'] = xi.weaponskill.EMPYREAL_ARROW,
+        ['wsUnlockId'] = xi.ws_unlock.EMPYREAL_ARROW,
+        ['skillId'] = xi.skill.ARCHERY,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 18144,
-        ['logId'] = tpz.quest.log_id.WINDURST,
-        ['questId'] = tpz.quest.id.windurst.FROM_SAPLINGS_GROW,
+        ['logId'] = xi.quest.log_id.WINDURST,
+        ['questId'] = xi.quest.id.windurst.FROM_SAPLINGS_GROW,
         ['fameRegion'] = WINDURST,
         ['eventIds'] =
         {
@@ -416,13 +416,13 @@ tpz.wsquest =
     -----------------------------------
     ['detonator'] =
     {
-        ['wsId'] = tpz.weaponskill.DETONATOR,
-        ['wsUnlockId'] = tpz.ws_unlock.DETONATOR,
-        ['skillId'] = tpz.skill.MARKSMANSHIP,
+        ['wsId'] = xi.weaponskill.DETONATOR,
+        ['wsUnlockId'] = xi.ws_unlock.DETONATOR,
+        ['skillId'] = xi.skill.MARKSMANSHIP,
         ['minSkill'] = 250,
         ['trialWeaponId'] = 18146,
-        ['logId'] = tpz.quest.log_id.BASTOK,
-        ['questId'] = tpz.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER,
+        ['logId'] = xi.quest.log_id.BASTOK,
+        ['questId'] = xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER,
         ['fameRegion'] = BASTOK,
         ['eventIds'] =
         {
@@ -450,9 +450,9 @@ local WSQUEST_FINISH = 3 -- Player has killed NM and received Annals of Truth ('
 local function getQuestState(quest, player)
     local status = player:getQuestStatus(quest.logId, quest.questId)
     if status == QUEST_ACCEPTED then
-        if player:hasKeyItem(tpz.ki.ANNALS_OF_TRUTH) then
+        if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
             return WSQUEST_FINISH
-        elseif player:hasKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
+        elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
             return WSQUEST_CONT2
         else
             return WSQUEST_CONT1
@@ -461,7 +461,7 @@ local function getQuestState(quest, player)
         local canEquip = player:canEquipItem(quest.trialWeaponId, true)
         local sufficientSkill = player:getCharSkillLevel(quest.skillId) / 10 >= quest.minSkill
         local hasWeapon = player:hasItem(quest.trialWeaponId)
-        local hasTrainingGuide = player:hasKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
+        local hasTrainingGuide = player:hasKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
 
         if canEquip and sufficientSkill and not hasWeapon and not hasTrainingGuide then
             return WSQUEST_START
@@ -471,7 +471,7 @@ local function getQuestState(quest, player)
     return nil
 end
 
-tpz.wsquest.getTradeEvent = function(quest, player, trade)
+ xi.wsquest.getTradeEvent = function(quest, player, trade)
     local wsPoints = (trade:getItem(0):getWeaponskillPoints())
     if getQuestState(quest, player) == WSQUEST_CONT1 and trade:hasItemQty(quest.trialWeaponId, 1) and trade:getItemCount() == 1 then
         if wsPoints < 300 then
@@ -484,7 +484,7 @@ tpz.wsquest.getTradeEvent = function(quest, player, trade)
     return nil
 end
 
-tpz.wsquest.getTriggerEvent = function(quest, player)
+ xi.wsquest.getTriggerEvent = function(quest, player)
     local state = getQuestState(quest, player)
 
     if state == WSQUEST_START then
@@ -500,12 +500,12 @@ tpz.wsquest.getTriggerEvent = function(quest, player)
     return nil
 end
 
-tpz.wsquest.handleQmTrigger = function(quest, player, wsnmId)
+ xi.wsquest.handleQmTrigger = function(quest, player, wsnmId)
     local ID = zones[player:getZoneID()]
     if getQuestState(quest, player) == WSQUEST_CONT2 then
         if player:getLocalVar('killed_wsnm') == 1 then
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.ANNALS_OF_TRUTH)
-            player:addKeyItem(tpz.ki.ANNALS_OF_TRUTH)
+            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
+            player:addKeyItem(xi.ki.ANNALS_OF_TRUTH)
         elseif not GetMobByID(wsnmId):isSpawned() then
             player:messageSpecial(ID.text.SENSE_OMINOUS_PRESENCE)
             SpawnMob(wsnmId):updateClaim(player)
@@ -515,22 +515,22 @@ tpz.wsquest.handleQmTrigger = function(quest, player, wsnmId)
     end
 end
 
-tpz.wsquest.handleWsnmDeath = function(quest, player)
+ xi.wsquest.handleWsnmDeath = function(quest, player)
     if getQuestState(quest, player) == WSQUEST_CONT2 then
         player:setLocalVar('killed_wsnm', 1)
     end
 end
 
-tpz.wsquest.handleEventFinish = function(quest, player, csid, option, learnedId)
+ xi.wsquest.handleEventFinish = function(quest, player, csid, option, learnedId)
     if csid == quest.eventIds.start then -- WS Quest start
         if quest.options.acceptStart == nil or option == quest.options.acceptStart then
             if player:getFreeSlotsCount() < 1 then
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, quest.trialWeaponId)
             else
                 player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, quest.trialWeaponId)
-                player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, tpz.ki.WEAPON_TRAINING_GUIDE)
+                player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.WEAPON_TRAINING_GUIDE)
                 player:addItem(quest.trialWeaponId)
-                player:addKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
+                player:addKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                 player:addQuest(quest.logId, quest.questId)
             end
         end
@@ -545,20 +545,20 @@ tpz.wsquest.handleEventFinish = function(quest, player, csid, option, learnedId)
         end
         if option == quest.options.abandon then -- Abandon quest
             player:delQuest(quest.logId, quest.questId)
-            player:delKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
-            player:delKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+            player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
+            player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
         end
     elseif csid == quest.eventIds.tradedFinishedWeapon then -- WS Quest ongoing stage 2
         player:tradeComplete()
-        player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-        player:addKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+        player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+        player:addKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
     elseif csid == quest.eventIds.finish then -- WS Quest completed
         player:messageSpecial(learnedId)
         player:addLearnedWeaponskill(quest.wsUnlockId)
         player:addFame(quest.fameRegion, 30)
-        player:delKeyItem(tpz.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
-        player:delKeyItem(tpz.ki.ANNALS_OF_TRUTH)
-        player:delKeyItem(tpz.ki.WEAPON_TRAINING_GUIDE)
+        player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
+        player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
+        player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
         player:completeQuest(quest.logId, quest.questId)
     end
 end

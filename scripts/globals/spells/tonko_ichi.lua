@@ -14,14 +14,14 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    if (not target:hasStatusEffect(tpz.effect.INVISIBLE)) then
-        target:addStatusEffect(tpz.effect.INVISIBLE, 0, 10, math.floor(420 * SNEAK_INVIS_DURATION_MULTIPLIER))
-        spell:setMsg(tpz.msg.basic.MAGIC_GAIN_EFFECT)
+    if (not target:hasStatusEffect(xi.effect.INVISIBLE)) then
+        target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(420 * SNEAK_INVIS_DURATION_MULTIPLIER))
+        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else
-        spell:setMsg(tpz.msg.basic.MAGIC_NO_EFFECT) -- no tpz.effect.
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no xi.effect.
     end
 
-    return tpz.effect.INVISIBLE
+    return xi.effect.INVISIBLE
 end
 
 return spell_object

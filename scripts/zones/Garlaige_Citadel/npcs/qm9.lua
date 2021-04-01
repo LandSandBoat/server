@@ -14,9 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasKeyItem(tpz.ki.BOMB_INCENSE) and player:getCharVar("hittingTheMarquisateHagainCS") == 7 then
+    if player:hasKeyItem(xi.ki.BOMB_INCENSE) and player:getCharVar("hittingTheMarquisateHagainCS") == 7 then
         player:messageSpecial(ID.text.PRESENCE_FROM_CEILING)
-        player:startEvent(55, tpz.keyItem.BOMB_INCENSE)
+        player:startEvent(55, xi.keyItem.BOMB_INCENSE)
     else
         player:messageSpecial(ID.text.HOLE_IN_THE_CEILING) -- Default
     end

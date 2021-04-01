@@ -15,10 +15,10 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        player:getCurrentMission(WINDURST) == tpz.mission.id.windurst.WRITTEN_IN_THE_STARS and
+        player:getCurrentMission(WINDURST) == xi.mission.id.windurst.WRITTEN_IN_THE_STARS and
         player:getCharVar("MissionStatus") == 1
     then
-        player:startEvent(41, 0, tpz.ki.CHARM_OF_LIGHT)
+        player:startEvent(41, 0, xi.ki.CHARM_OF_LIGHT)
     else
         player:messageSpecial(ID.text.DOOR_FIRMLY_CLOSED)
     end
@@ -32,7 +32,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 41 then
         player:setCharVar("MissionStatus", 2)
-        player:delKeyItem(tpz.ki.CHARM_OF_LIGHT)
+        player:delKeyItem(xi.ki.CHARM_OF_LIGHT)
     end
 end
 

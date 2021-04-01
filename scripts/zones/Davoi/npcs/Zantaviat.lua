@@ -16,15 +16,15 @@ end
 entity.onTrigger = function(player, npc)
 
     local CurrentMission = player:getCurrentMission(SANDORIA)
-    local infiltrateDavoi = player:hasCompletedMission(tpz.mission.log_id.SANDORIA, tpz.mission.id.sandoria.INFILTRATE_DAVOI)
+    local infiltrateDavoi = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI)
 
-    if (CurrentMission == tpz.mission.id.sandoria.THE_DAVOI_REPORT and player:getCharVar("MissionStatus") == 0) then
+    if (CurrentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(100)
-    elseif (CurrentMission == tpz.mission.id.sandoria.THE_DAVOI_REPORT and player:hasKeyItem(tpz.ki.LOST_DOCUMENT)) then
+    elseif (CurrentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:hasKeyItem(xi.ki.LOST_DOCUMENT)) then
         player:startEvent(104)
-    elseif (CurrentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi and player:getCharVar("MissionStatus") == 0) then
+    elseif (CurrentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi and player:getCharVar("MissionStatus") == 0) then
         player:startEvent(102)
-    elseif (CurrentMission == tpz.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 9) then
+    elseif (CurrentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 9) then
         player:startEvent(105)
     else
         player:startEvent(101)
@@ -41,16 +41,16 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("MissionStatus", 1)
     elseif (csid == 104) then
         player:setCharVar("MissionStatus", 3)
-        player:delKeyItem(tpz.ki.LOST_DOCUMENT)
-        player:addKeyItem(tpz.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+        player:delKeyItem(xi.ki.LOST_DOCUMENT)
+        player:addKeyItem(xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEMPLE_KNIGHTS_DAVOI_REPORT)
     elseif (csid == 102) then
         player:setCharVar("MissionStatus", 6)
     elseif (csid == 105) then
         player:setCharVar("MissionStatus", 10)
-        player:delKeyItem(tpz.ki.EAST_BLOCK_CODE)
-        player:delKeyItem(tpz.ki.SOUTH_BLOCK_CODE)
-        player:delKeyItem(tpz.ki.NORTH_BLOCK_CODE)
+        player:delKeyItem(xi.ki.EAST_BLOCK_CODE)
+        player:delKeyItem(xi.ki.SOUTH_BLOCK_CODE)
+        player:delKeyItem(xi.ki.NORTH_BLOCK_CODE)
     end
 
 end

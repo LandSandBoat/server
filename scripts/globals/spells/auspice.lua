@@ -13,7 +13,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local effect = tpz.effect.AUSPICE
+    local effect = xi.effect.AUSPICE
     doEnspell(caster, target, spell, effect)
     return effect
 end

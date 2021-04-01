@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, isKiller, noKiller)
         local mobY = mob:getYPos()
         local mobZ = mob:getZPos()
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[3][1]):setPos(mobX, mobY, mobZ)
-        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[3][1]):setStatus(tpz.status.NORMAL)
+        GetNPCByID(ID.npc.APOLLYON_NW_CRATE[3][1]):setStatus(xi.status.NORMAL)
     end
 end
 

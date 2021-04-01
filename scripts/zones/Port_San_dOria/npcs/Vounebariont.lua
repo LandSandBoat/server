@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) ~= QUEST_AVAILABLE) then
         if (trade:hasItemQty(889, 5) and trade:getItemCount() == 5) then -- Trade Beetle Shell
             player:startEvent(514)
         end
@@ -36,19 +36,19 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 516) then
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
-            player:addQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == QUEST_AVAILABLE) then
+            player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
         end
     elseif (csid == 514) then
-        if (player:getQuestStatus(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
-            player:completeQuest(tpz.quest.log_id.SANDORIA, tpz.quest.id.sandoria.THICK_SHELLS)
+        if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS) == QUEST_ACCEPTED) then
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THICK_SHELLS)
             player:addFame(SANDORIA, 30)
         else
             player:addFame(SANDORIA, 5)
         end
 
         player:tradeComplete()
-        player:addTitle(tpz.title.BUG_CATCHER)
+        player:addTitle(xi.title.BUG_CATCHER)
         player:addGil(GIL_RATE*750)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*750)
     end

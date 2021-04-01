@@ -8,7 +8,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[tpz.zone.DYNAMIS_VALKURM] =
+zones[ xi.zone.DYNAMIS_VALKURM] =
 {
     text =
     {
@@ -31,11 +31,11 @@ zones[tpz.zone.DYNAMIS_VALKURM] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = tpz.ki.CRIMSON_GRANULES_OF_TIME,   mob = 16937214},
-            {minutes = 10, ki = tpz.ki.AZURE_GRANULES_OF_TIME,     mob = 16937239},
-            {minutes = 10, ki = tpz.ki.AMBER_GRANULES_OF_TIME,     mob = 16937264},
-            {minutes = 10, ki = tpz.ki.ALABASTER_GRANULES_OF_TIME, mob = 16937289},
-            {minutes = 20, ki = tpz.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = {16937500, 16937525, 16937550, 16937575}},
+            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 16937214},
+            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 16937239},
+            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 16937264},
+            {minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 16937289},
+            {minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = {16937500, 16937525, 16937550, 16937575}},
         },
         REFILL_STATUE =
         {
@@ -141,4 +141,4 @@ zones[tpz.zone.DYNAMIS_VALKURM] =
     },
 }
 
-return zones[tpz.zone.DYNAMIS_VALKURM]
+return zones[ xi.zone.DYNAMIS_VALKURM]

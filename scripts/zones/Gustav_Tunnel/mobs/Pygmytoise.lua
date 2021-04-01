@@ -15,18 +15,18 @@ entity.onMobInitialize = function(mob)
     along with a damage bonus on ice (all spell get a partial resist).
     These are annoyingly x/256 scaled.
     ]]
-    mob:setMod(tpz.mod.FIREDEF, 128)
-    mob:setMod(tpz.mod.ICEDEF, 52)
-    mob:setMod(tpz.mod.WINDDEF, 128)
-    mob:setMod(tpz.mod.EARTHDEF, 200)
-    mob:setMod(tpz.mod.THUNDERDEF, 200)
-    mob:setMod(tpz.mod.WATERDEF, 128)
-    mob:setMod(tpz.mod.LIGHTDEF, 128)
-    mob:setMod(tpz.mod.DARKDEF, 128)
+    mob:setMod(xi.mod.FIREDEF, 128)
+    mob:setMod(xi.mod.ICEDEF, 52)
+    mob:setMod(xi.mod.WINDDEF, 128)
+    mob:setMod(xi.mod.EARTHDEF, 200)
+    mob:setMod(xi.mod.THUNDERDEF, 200)
+    mob:setMod(xi.mod.WATERDEF, 128)
+    mob:setMod(xi.mod.LIGHTDEF, 128)
+    mob:setMod(xi.mod.DARKDEF, 128)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    tpz.regime.checkRegime(player, mob, 770, 2, tpz.regime.type.GROUNDS)
+    xi.regime.checkRegime(player, mob, 770, 2, xi.regime.type.GROUNDS)
 end
 
 return entity

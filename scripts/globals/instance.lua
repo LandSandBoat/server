@@ -2,7 +2,7 @@
 -- Instance
 -----------------------------------
 tpz = tpz or {}
-tpz.instance = {}
+ xi.instance = {}
 
 local function setInstanceLastTimeUpdateMessage(instance, players, remainingTimeLimit)
     local message = 0
@@ -32,7 +32,7 @@ local function setInstanceLastTimeUpdateMessage(instance, players, remainingTime
     end
 end
 
-tpz.instance.updateInstanceTime = function(instance, elapsed, texttable)
+ xi.instance.updateInstanceTime = function(instance, elapsed, texttable)
     local players = instance:getChars()
     local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
     local wipeTime = instance:getWipeTime()

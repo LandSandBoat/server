@@ -118,7 +118,7 @@ local pathNodes =
 }
 
 entity.onPath = function(mob)
-    tpz.path.patrol(mob, pathNodes, tpz.path.flag.RUN)
+    xi.path.patrol(mob, pathNodes, xi.path.flag.RUN)
 end
 
 entity.onMobSpawn = function(mob)
@@ -129,12 +129,12 @@ end
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(tpz.path.first(pathNodes), tpz.path.flag.RUN)
+        mob:pathThrough(xi.path.first(pathNodes), xi.path.flag.RUN)
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(tpz.title.CACTROT_DESACELERADOR)
+    player:addTitle(xi.title.CACTROT_DESACELERADOR)
 end
 
 entity.onMobDespawn = function(mob)

@@ -9,14 +9,14 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.HP_HEAL_CHANCE, 90)
-    mob:setMobMod(tpz.mobMod.HEAL_CHANCE, 100)
-    mob:setMod(tpz.mod.REGEN, 0)
+    mob:setMobMod(xi.mobMod.HP_HEAL_CHANCE, 90)
+    mob:setMobMod(xi.mobMod.HEAL_CHANCE, 100)
+    mob:setMod(xi.mod.REGEN, 0)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(tpz.mobMod.MAGIC_COOL, 20)
-    mob:setMobMod(tpz.mobMod.SOUND_RANGE, 13)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 13)
 end
 
 entity.onMobFight = function(mob, target)

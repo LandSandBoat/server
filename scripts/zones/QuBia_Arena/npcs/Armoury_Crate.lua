@@ -456,7 +456,7 @@ end
 entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
     if battlefield then
-        tpz.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 end
 

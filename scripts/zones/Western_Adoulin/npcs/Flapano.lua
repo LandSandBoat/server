@@ -16,10 +16,10 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local exoticDelacacies = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
+    local exoticDelacacies = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- ALL THE WAY TO THE BANK
-    if (player:hasKeyItem(tpz.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas( trade, {{"gil", 5600}} )) then
+    if (player:hasKeyItem(xi.ki.TARUTARU_SAUCE_INVOICE) and npcUtil.tradeHas( trade, {{"gil", 5600}} )) then
         local ATWTTB_Paid_Flapano = utils.mask.getBit(player:getCharVar("ATWTTB_Payments"), 2)
         if (not ATWTTB_Paid_Flapano) then
             player:startEvent(5071)
@@ -36,8 +36,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theWeatherspoonWar = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.THE_WEATHERSPOON_WAR)
-    local exoticDelacacies = player:getQuestStatus(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
+    local theWeatherspoonWar = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_WEATHERSPOON_WAR)
+    local exoticDelacacies = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
 
     -- THE WEATHERSPOON WAR
     if (theWeatherspoonWar == QUEST_ACCEPTED and player:getCharVar("Weatherspoon_War_Status") == 6) then
@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
             4405, 160,   -- Rice Ball
             5676, 76475, -- Mushroom Saute
         }
-        tpz.shop.general(player, stock)
+        xi.shop.general(player, stock)
 
         if (exoticDelicacies ~= QUEST_COMPLETED) then
             player:setCharVar("Flapano_Odd_Even", 0)
@@ -84,14 +84,14 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:setCharVar("ATWTTB_Payments", utils.mask.setBit(player:getCharVar("ATWTTB_Payments"), 2, true))
         if utils.mask.isFull(player:getCharVar("ATWTTB_Payments"), 5) then
-            npcUtil.giveKeyItem(tpz.ki.TARUTARU_SAUCE_RECEIPT)
+            npcUtil.giveKeyItem(xi.ki.TARUTARU_SAUCE_RECEIPT)
         end
 
     -- EXOTIC DELICACIES
     elseif (csid == 2860 and option == 1) then
-        player:addQuest(tpz.quest.log_id.ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES)
+        player:addQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES)
     elseif (csid == 2861) then
-        if (npcUtil.completeQuest(player, ADOULIN, tpz.quest.id.adoulin.EXOTIC_DELICACIES, {bayld=500, item=5975, xp=1000})) then
+        if (npcUtil.completeQuest(player, ADOULIN, xi.quest.id.adoulin.EXOTIC_DELICACIES, {bayld=500, item=5975, xp=1000})) then
             player:confirmTrade()
             player:setCharVar("Flapano_Odd_Even", 0)
         end

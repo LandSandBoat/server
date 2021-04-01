@@ -13,11 +13,11 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions
-    if player:getNation() ~= tpz.nation.SANDORIA then
+    if player:getNation() ~= xi.nation.SANDORIA then
         player:startEvent(516)
 
     else
-        local sandyMissions = tpz.mission.id.sandoria
+        local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getCharVar("MissionStatus")
 
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 8-2 "Lightbringer" (optional)
         elseif
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
             player:getRank() == 9 and player:getRankPoints() == 0
         then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA + 3)
@@ -42,7 +42,7 @@ entity.onTrigger = function(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(tpz.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(33)

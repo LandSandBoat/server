@@ -1,5 +1,5 @@
 -----------------------------------
--- tpz.effect.DRAIN_SAMBA_II
+-- xi.effect.DRAIN_SAMBA_II
 -----------------------------------
 local effect_object = {}
 

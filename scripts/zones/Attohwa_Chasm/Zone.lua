@@ -46,7 +46,7 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.TIAMAT)
     GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
 
-    tpz.helm.initZone(zone, tpz.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -58,7 +58,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
-    tpz.conq.onConquestUpdate(zone, updatetype)
+    xi.conq.onConquestUpdate(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -68,8 +68,8 @@ zone_object.onRegionEnter = function(player, region)
         local gasponia = GetNPCByID(ID.npc.GASPONIA_OFFSET + (regionId - 1))
         if (gasponia ~= nil) then
             gasponia:openDoor(3)
-            if (not player:hasStatusEffect(tpz.effect.POISON)) then
-                player:addStatusEffect(tpz.effect.POISON, 15, 0, math.random(30, 60))
+            if (not player:hasStatusEffect(xi.effect.POISON)) then
+                player:addStatusEffect(xi.effect.POISON, 15, 0, math.random(30, 60))
                 player:messageSpecial(ID.text.GASPONIA_POISON)
             end
         end

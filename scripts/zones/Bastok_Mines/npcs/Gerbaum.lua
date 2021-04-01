@@ -16,7 +16,7 @@ count = trade:getItemCount()
 ZeruhnSoot = trade:hasItemQty(560, 3)
 
     if (ZeruhnSoot == true and count == 3) then
-        MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+        MineSweep = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
         if (MineSweep >= 1) then
             player:tradeComplete()
             player:startEvent(109)
@@ -27,7 +27,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+MineSweep = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
     if (MineSweep == 0) then
         player:startEvent(108)
@@ -49,17 +49,17 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-MineSweep = player:getQuestStatus(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+MineSweep = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
 
     if (csid == 108) then
         if (MineSweep == 0) then
-            player:addQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+            player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
         end
     elseif (csid == 109) then
         if (MineSweep == 1) then
-            player:completeQuest(tpz.quest.log_id.BASTOK, tpz.quest.id.bastok.MINESWEEPER)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MINESWEEPER)
             player:addFame(BASTOK, 75)
-            player:addTitle(tpz.title.ZERUHN_SWEEPER)
+            player:addTitle(xi.title.ZERUHN_SWEEPER)
         else
             player:addFame(BASTOK, 8)
         end

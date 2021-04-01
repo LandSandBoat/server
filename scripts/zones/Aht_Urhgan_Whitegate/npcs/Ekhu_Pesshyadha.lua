@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(536)
     elseif gotItAllProg == 3 then
         player:startEvent(524)
-    elseif player:getQuestStatus(tpz.quest.log_id.AHT_URHGAN, tpz.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED then
+    elseif player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED then
         player:startEvent(531)
     else
         player:startEvent(532)
@@ -36,8 +36,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 537 then
         player:setCharVar("gotitallCS", 2)
     elseif csid == 524 then
-        player:addKeyItem(tpz.ki.VIAL_OF_LUMINOUS_WATER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, tpz.ki.VIAL_OF_LUMINOUS_WATER)
+        player:addKeyItem(xi.ki.VIAL_OF_LUMINOUS_WATER)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.VIAL_OF_LUMINOUS_WATER)
         player:setCharVar("gotitallCS", 4)
     end
 end

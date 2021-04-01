@@ -16,9 +16,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(tpz.effect.CHAIN_AFFINITY, 1, 0, 30)
+    player:addStatusEffect(xi.effect.CHAIN_AFFINITY, 1, 0, 30)
 
-    return tpz.effect.CHAIN_AFFINITY
+    return xi.effect.CHAIN_AFFINITY
 end
 
 return ability_object
