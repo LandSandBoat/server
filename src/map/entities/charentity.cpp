@@ -885,7 +885,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                         StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
                         recycleChance = 100;
                     }
-                    if (tpzrand::GetRandomNumber(100) > recycleChance)
+                    if (xirand::GetRandomNumber(100) > recycleChance)
                     {
                         battleutils::RemoveAmmo(this);
                     }
@@ -1099,9 +1099,9 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                     if ((PAbility->getAddType() & ADDTYPE_ASTRAL_FLOW) == 0)
                     {
                         int16 bloodBoonRate = getMod(Mod::BLOOD_BOON);
-                        if (tpzrand::GetRandomNumber(100) < bloodBoonRate)
+                        if (xirand::GetRandomNumber(100) < bloodBoonRate)
                         {
-                            mpCost *= tpzrand::GetRandomNumber(8.f, 16.f) / 16.f;
+                            mpCost *= xirand::GetRandomNumber(8.f, 16.f) / 16.f;
                         }
                     }
 
@@ -1328,7 +1328,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             actionTarget.speceffect = SPECEFFECT::NONE;
             hitCount                = i; // end barrage, shot missed
         }
-        else if (tpzrand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget))
@@ -1337,7 +1337,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             }
             else
             {
-                bool  isCritical = tpzrand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, true);
+                bool  isCritical = xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, true);
                 float pdif       = battleutils::GetRangedDamageRatio(this, PTarget, isCritical);
 
                 if (isCritical)
@@ -1402,7 +1402,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             recycleChance = 100;
         }
 
-        if (PAmmo != nullptr && tpzrand::GetRandomNumber(100) > recycleChance)
+        if (PAmmo != nullptr && xirand::GetRandomNumber(100) > recycleChance)
         {
             ++ammoConsumed;
             TrackArrowUsageForScavenge(PAmmo);
@@ -1475,7 +1475,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         uint16 power = StatusEffectContainer->GetStatusEffect(EFFECT_SANGE)->GetPower();
 
         // remove shadows
-        while (realHits-- && tpzrand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
+        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
         {
             ;
         }
@@ -1492,7 +1492,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // if (this->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBLE_SHOT, 0) && !this->secondDoubleShotTaken &&	!isBarrage && !isSange)
     //{
     //    uint16 doubleShotChance = getMod(Mod::DOUBLE_SHOT_RATE);
-    //    if (tpzrand::GetRandomNumber(100) < doubleShotChance)
+    //    if (xirand::GetRandomNumber(100) < doubleShotChance)
     //    {
     //        this->secondDoubleShotTaken = true;
     //        m_ActionType = ACTION_RANGED_FINISH;

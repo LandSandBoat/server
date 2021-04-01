@@ -796,7 +796,7 @@ EFFECT CStatusEffectContainer::EraseStatusEffect()
     }
     if (!erasableList.empty())
     {
-        auto   rndIdx = tpzrand::GetRandomNumber(erasableList.size());
+        auto   rndIdx = xirand::GetRandomNumber(erasableList.size());
         EFFECT result = erasableList.at(rndIdx)->GetStatusID();
         RemoveStatusEffect(erasableList.at(rndIdx));
         return result;
@@ -817,7 +817,7 @@ EFFECT CStatusEffectContainer::HealingWaltz()
     }
     if (!waltzableList.empty())
     {
-        auto   rndIdx = tpzrand::GetRandomNumber(waltzableList.size());
+        auto   rndIdx = xirand::GetRandomNumber(waltzableList.size());
         EFFECT result = waltzableList.at(rndIdx)->GetStatusID();
         RemoveStatusEffect(waltzableList.at(rndIdx));
         return result;
@@ -862,7 +862,7 @@ EFFECT CStatusEffectContainer::DispelStatusEffect(EFFECTFLAG flag)
     }
     if (!dispelableList.empty())
     {
-        auto   rndIdx = tpzrand::GetRandomNumber(dispelableList.size());
+        auto   rndIdx = xirand::GetRandomNumber(dispelableList.size());
         EFFECT result = dispelableList.at(rndIdx)->GetStatusID();
         RemoveStatusEffect(dispelableList.at(rndIdx), true);
         return result;
@@ -1245,7 +1245,7 @@ CStatusEffect* CStatusEffectContainer::StealStatusEffect(EFFECTFLAG flag)
     }
     if (!dispelableList.empty())
     {
-        auto rndIdx = tpzrand::GetRandomNumber(dispelableList.size());
+        auto rndIdx = xirand::GetRandomNumber(dispelableList.size());
 
         CStatusEffect* oldEffect = dispelableList.at(rndIdx);
 

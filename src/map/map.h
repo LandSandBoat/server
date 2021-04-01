@@ -30,7 +30,7 @@
 #include "../common/socket.h"
 #include "../common/sql.h"
 #include "../common/taskmgr.h"
-#include "../common/tpzrand.h"
+#include "../common/xirand.h"
 
 #include <list>
 #include <map>

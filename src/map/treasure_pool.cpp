@@ -495,7 +495,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
             else
             {
                 // select random member from this pool to give item to
-                CCharEntity* PChar = candidates.at(tpzrand::GetRandomNumber(candidates.size()));
+                CCharEntity* PChar = candidates.at(xirand::GetRandomNumber(candidates.size()));
                 if (charutils::AddItem(PChar, LOC_INVENTORY, m_PoolItems[SlotID].ID, 1, true) != ERROR_SLOTID)
                 {
                     TreasureWon(PChar, SlotID);

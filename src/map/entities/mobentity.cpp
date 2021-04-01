@@ -182,7 +182,7 @@ uint32 CMobEntity::GetRandomGil()
             ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting\n");
         }
 
-        return tpzrand::GetRandomNumber(min, max);
+        return xirand::GetRandomNumber(min, max);
     }
 
     float gil = (float)pow(GetMLevel(), 1.05f);
@@ -205,7 +205,7 @@ uint32 CMobEntity::GetRandomGil()
     }
 
     // randomize it
-    gil += tpzrand::GetRandomNumber(highGil);
+    gil += xirand::GetRandomNumber(highGil);
 
     if (min && gil < min)
     {
@@ -244,7 +244,7 @@ bool CMobEntity::CanStealGil()
 
 void CMobEntity::ResetGilPurse()
 {
-    uint32 purse = GetRandomGil() / ((tpzrand::GetRandomNumber(4, 7)));
+    uint32 purse = GetRandomGil() / ((xirand::GetRandomNumber(4, 7)));
     if (purse == 0)
     {
         purse = GetRandomGil();
@@ -537,7 +537,7 @@ void CMobEntity::Spawn()
     // Generate a random level between min and max level
     if (m_maxLevel > m_minLevel)
     {
-        level += tpzrand::GetRandomNumber(0, m_maxLevel - m_minLevel + 1);
+        level += xirand::GetRandomNumber(0, m_maxLevel - m_minLevel + 1);
     }
 
     SetMLevel(level);
@@ -891,12 +891,12 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
                 // Determine if this group should drop an item
-                if (group.GroupRate > 0 && tpzrand::GetRandomNumber(1000) < group.GroupRate * map_config.drop_rate_multiplier + bonus)
+                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * map_config.drop_rate_multiplier + bonus)
                 {
                     // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                     // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
                     uint16 previousRateValue = 0;
-                    uint16 itemRoll          = tpzrand::GetRandomNumber(1000);
+                    uint16 itemRoll          = xirand::GetRandomNumber(1000);
                     for (const DropItem_t& item : group.Items)
                     {
                         if (previousRateValue + item.DropRate > itemRoll)
@@ -918,7 +918,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
-                if (item.DropRate > 0 && tpzrand::GetRandomNumber(1000) < item.DropRate * map_config.drop_rate_multiplier + bonus)
+                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * map_config.drop_rate_multiplier + bonus)
                 {
                     if (AddItemToPool(item.ItemID, ++dropCount))
                     {
@@ -942,12 +942,12 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         >= 75 = Kindred Crests ID=2955
         >= 90 = High Kindred Crests ID=2956
         */
-        if (tpzrand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
+        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
         {
             // RULES: Only 1 kind may drop per mob
             if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
             {
-                switch (tpzrand::GetRandomNumber(4))
+                switch (xirand::GetRandomNumber(4))
                 {
                     case 0:
 
@@ -978,7 +978,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
             else if (GetMLevel() >= 70 && luautils::IsContentEnabled("ABYSSEA")) // b.seal & k.seal & k.crest
             {
-                switch (tpzrand::GetRandomNumber(3))
+                switch (xirand::GetRandomNumber(3))
                 {
                     case 0:
                         if (AddItemToPool(1126, ++dropCount))
@@ -1002,7 +1002,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
             else if (GetMLevel() >= 50) // b.seal & k.seal only
             {
-                if (tpzrand::GetRandomNumber(2) == 0)
+                if (xirand::GetRandomNumber(2) == 0)
                 {
                     if (AddItemToPool(1126, ++dropCount))
                     {
@@ -1092,7 +1092,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         });
         for (uint8 i = 0; i < crystalRolls; i++)
         {
-            if (tpzrand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
+            if (xirand::GetRandomNumber(100) < 20 && AddItemToPool(4095 + m_Element, ++dropCount))
             {
                 return;
             }

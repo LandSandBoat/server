@@ -54,10 +54,10 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
         if (charutils::hasTrait(PChar, TRAIT_RAPID_SHOT))
         {
             auto chance{ PChar->getMod(Mod::RAPID_SHOT) + PChar->PMeritPoints->GetMeritValue(MERIT_RAPID_SHOT_RATE, PChar) };
-            if (tpzrand::GetRandomNumber(100) < chance)
+            if (xirand::GetRandomNumber(100) < chance)
             {
                 // reduce delay by 10%-50%
-                delay       = (int16)(delay * (10 - tpzrand::GetRandomNumber(1, 6)) / 10.f);
+                delay       = (int16)(delay * (10 - xirand::GetRandomNumber(1, 6)) / 10.f);
                 m_rapidShot = true;
             }
         }

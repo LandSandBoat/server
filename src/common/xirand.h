@@ -1,6 +1,6 @@
 ﻿#include <random>
 
-class tpzrand
+class xirand
 {
 public:
     static std::mt19937& mt()

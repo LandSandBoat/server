@@ -35,7 +35,7 @@ namespace attackutils
      ************************************************************************/
     uint8 getHitCount(uint8 hits)
     {
-        uint8 distribution = tpzrand::GetRandomNumber(100);
+        uint8 distribution = xirand::GetRandomNumber(100);
         uint8 num          = 1;
 
         switch (hits)
@@ -239,7 +239,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
-            return (tpzrand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender));
+            return (xirand::GetRandomNumber(100) < battleutils::GetParryRate(PAttacker, PDefender));
         }
         return false;
     }
@@ -253,7 +253,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64))
         {
-            return (tpzrand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
+            return (xirand::GetRandomNumber(100) < battleutils::GetGuardRate(PAttacker, PDefender));
         }
         return false;
     }
@@ -267,7 +267,7 @@ namespace attackutils
     {
         if (facing(PDefender->loc.p, PAttacker->loc.p, 64) && !PDefender->StatusEffectContainer->HasPreventActionEffect())
         {
-            return (tpzrand::GetRandomNumber(100) < battleutils::GetBlockRate(PAttacker, PDefender));
+            return (xirand::GetRandomNumber(100) < battleutils::GetBlockRate(PAttacker, PDefender));
         }
         return false;
     }
@@ -309,23 +309,23 @@ namespace attackutils
         float occ_extra_dmg        = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::OCC_DO_EXTRA_DMG) / 100.f;
         int16 occ_extra_dmg_chance = battleutils::GetScaledItemModifier(PChar, PWeapon, Mod::EXTRA_DMG_CHANCE) / 10;
 
-        if (occ_extra_dmg > 3.f && occ_extra_dmg_chance > 0 && tpzrand::GetRandomNumber(100) <= occ_extra_dmg_chance)
+        if (occ_extra_dmg > 3.f && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
         {
             return (uint32)(damage * occ_extra_dmg);
         }
-        else if (occ_do_triple_dmg > 0 && tpzrand::GetRandomNumber(100) <= occ_do_triple_dmg)
+        else if (occ_do_triple_dmg > 0 && xirand::GetRandomNumber(100) <= occ_do_triple_dmg)
         {
             return (uint32)(damage * 3.f);
         }
-        else if (occ_extra_dmg > 2.f && occ_extra_dmg_chance > 0 && tpzrand::GetRandomNumber(100) <= occ_extra_dmg_chance)
+        else if (occ_extra_dmg > 2.f && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
         {
             return (uint32)(damage * occ_extra_dmg);
         }
-        else if (occ_do_double_dmg > 0 && tpzrand::GetRandomNumber(100) <= occ_do_double_dmg)
+        else if (occ_do_double_dmg > 0 && xirand::GetRandomNumber(100) <= occ_do_double_dmg)
         {
             return (uint32)(damage * 2.f);
         }
-        else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && tpzrand::GetRandomNumber(100) <= occ_extra_dmg_chance)
+        else if (occ_extra_dmg > 0 && occ_extra_dmg_chance > 0 && xirand::GetRandomNumber(100) <= occ_extra_dmg_chance)
         {
             return (uint32)(damage * occ_extra_dmg);
         }
@@ -333,27 +333,27 @@ namespace attackutils
         switch (attackType)
         {
             case PHYSICAL_ATTACK_TYPE::ZANSHIN:
-                if (tpzrand::GetRandomNumber(100) < PChar->getMod(Mod::ZANSHIN_DOUBLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::ZANSHIN_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }
             case PHYSICAL_ATTACK_TYPE::TRIPLE:
-                if (tpzrand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DAMAGE))
                 {
                     return originalDamage * 3;
                 }
             case PHYSICAL_ATTACK_TYPE::DOUBLE:
-                if (tpzrand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }
             case PHYSICAL_ATTACK_TYPE::RAPID_SHOT:
-                if (tpzrand::GetRandomNumber(100) < PChar->getMod(Mod::RAPID_SHOT_DOUBLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::RAPID_SHOT_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }
             case PHYSICAL_ATTACK_TYPE::SAMBA:
-                if (tpzrand::GetRandomNumber(100) < PChar->getMod(Mod::SAMBA_DOUBLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::SAMBA_DOUBLE_DAMAGE))
                 {
                     return originalDamage * 2;
                 }

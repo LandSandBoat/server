@@ -299,30 +299,30 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, shadows);
     }
     // Quad/Triple/Double Attack
-    else if (tpzrand::GetRandomNumber(100) < quadAttack)
+    else if (xirand::GetRandomNumber(100) < quadAttack)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 3);
     }
-    else if (tpzrand::GetRandomNumber(100) < tripleAttack)
+    else if (xirand::GetRandomNumber(100) < tripleAttack)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::TRIPLE, direction, 2);
     }
-    else if (tpzrand::GetRandomNumber(100) < doubleAttack)
+    else if (xirand::GetRandomNumber(100) < doubleAttack)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::DOUBLE, direction, 1);
     }
     // Mythic Weapons Aftermath, only main hand
-    else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && tpzrand::GetRandomNumber(100) < occAttThriceRate)
+    else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttThriceRate)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 2);
     }
-    else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && tpzrand::GetRandomNumber(100) < occAttTwiceRate)
+    else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttTwiceRate)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
     }
     // Iga Garb +2 Set augment: possibility to add another swing while using Dual Wield
     // TODO: Double check correct priority for Empyrian armor modifiers? Outsource? Lua function?
-    else if (direction == LEFTATTACK && tpzrand::GetRandomNumber(100) < m_attacker->getMod(Mod::EXTRA_DUAL_WIELD_ATTACK))
+    else if (direction == LEFTATTACK && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::EXTRA_DUAL_WIELD_ATTACK))
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, RIGHTATTACK, 1);
     }
@@ -335,7 +335,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // TODO: Dynamis [D] weapons Follow-Up attack chance
 
     // Additional swing modifier (stacks!), mostly for Amood weapons
-    if (isPC && tpzrand::GetRandomNumber(100) < m_attacker->getMod(Mod::ADDITIONAL_SWING_CHANCE))
+    if (isPC && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::ADDITIONAL_SWING_CHANCE))
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
     }
@@ -354,7 +354,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
 
         // Two handed and Hand-to-Hand
         if (battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 2 &&
-            tpzrand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
+            xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
         {
             AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
             ammoCount += 1;
@@ -363,13 +363,13 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         else
         {
             if (direction == RIGHTATTACK && battleutils::GetScaledItemModifier(PChar, PMain, Mod::AMMO_SWING_TYPE) == 1 &&
-                tpzrand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
+                xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
             {
                 AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, RIGHTATTACK, 1);
                 ammoCount += 1;
             }
             if (direction == LEFTATTACK && PSub != nullptr && battleutils::GetScaledItemModifier(PChar, PSub, Mod::AMMO_SWING_TYPE) == 1 &&
-                tpzrand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
+                xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::AMMO_SWING) && PAmmo != nullptr && ammoCount < PAmmo->getQuantity())
             {
                 AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, LEFTATTACK, 1);
                 ammoCount += 1;
@@ -412,14 +412,14 @@ void CAttackRound::CreateKickAttacks()
 
         kickAttack = std::clamp<uint16>(kickAttack, 0, 100);
 
-        if (tpzrand::GetRandomNumber(100) < kickAttack)
+        if (xirand::GetRandomNumber(100) < kickAttack)
         {
             AddAttackSwing(PHYSICAL_ATTACK_TYPE::KICK, RIGHTATTACK, 1);
             m_kickAttackOccured = true;
         }
 
         // Tantra set mod: Try an extra left kick attack.
-        if (m_kickAttackOccured && tpzrand::GetRandomNumber(100) < m_attacker->getMod(Mod::EXTRA_KICK_ATTACK))
+        if (m_kickAttackOccured && xirand::GetRandomNumber(100) < m_attacker->getMod(Mod::EXTRA_KICK_ATTACK))
         {
             AddAttackSwing(PHYSICAL_ATTACK_TYPE::KICK, LEFTATTACK, 1);
         }
@@ -439,7 +439,7 @@ void CAttackRound::CreateDakenAttack()
         if (PAmmo && PAmmo->isShuriken())
         {
             uint16 daken = m_attacker->getMod(Mod::DAKEN);
-            if (tpzrand::GetRandomNumber(100) < daken)
+            if (xirand::GetRandomNumber(100) < daken)
             {
                 AddAttackSwing(PHYSICAL_ATTACK_TYPE::DAKEN, RIGHTATTACK, 1);
             }

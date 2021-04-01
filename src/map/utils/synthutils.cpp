@@ -254,7 +254,7 @@ namespace synthutils
 
         double success = 0;
         double chance  = 0;
-        double random  = tpzrand::GetRandomNumber(1.);
+        double random  = xirand::GetRandomNumber(1.);
 
         for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
         {
@@ -407,7 +407,7 @@ namespace synthutils
 
             if (random < chance && canHQ) // we try for HQ
             {
-                random = tpzrand::GetRandomNumber(0, 16);
+                random = xirand::GetRandomNumber(0, 16);
 
                 if (random == 0)
                 {
@@ -510,7 +510,7 @@ namespace synthutils
                     skillUpChance = skillUpChance / 2;
                 }
 
-                double random = tpzrand::GetRandomNumber(1.);
+                double random = xirand::GetRandomNumber(1.);
 #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Skill up chance: %g  Random: %g\n" CL_RESET, skillUpChance, random);
 #endif
@@ -700,7 +700,7 @@ namespace synthutils
                 nextSlotID = PChar->CraftContainer->getInvSlotID(slotID + 1);
             }
 
-            random = tpzrand::GetRandomNumber(1.);
+            random = xirand::GetRandomNumber(1.);
 #ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
             ShowDebug(CL_CYAN "Lost Item: %g  Random: %g\n" CL_RESET, lostItem, random);
 #endif

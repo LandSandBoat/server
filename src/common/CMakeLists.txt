@@ -18,7 +18,7 @@ set(SOURCES
     taskmgr.h
     timer.cpp
     timer.h
-    tpzrand.h
+    xirand.h
     utils.cpp
     utils.h
     version.h

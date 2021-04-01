@@ -138,7 +138,7 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
     Clear();
     // position_t* lastPoint = &point;
 
-    // float randomRadian = tpzrand::GetRandomNumber<float>(0, 2 * (float)M_PI);
+    // float randomRadian = xirand::GetRandomNumber<float>(0, 2 * (float)M_PI);
     // lastPoint->x += cosf(randomRadian) * distanceFromPoint;
     // lastPoint->z += sinf(randomRadian) * distanceFromPoint;
 
@@ -363,7 +363,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 maxTurns, uint16 roamFlags)
 {
     TracyZoneScoped;
-    auto m_turnLength = tpzrand::GetRandomNumber((int)maxTurns) + 1;
+    auto m_turnLength = xirand::GetRandomNumber((int)maxTurns) + 1;
 
     position_t startPosition = start;
 

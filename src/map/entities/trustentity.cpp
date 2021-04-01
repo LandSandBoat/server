@@ -222,7 +222,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
             actionTarget.speceffect = SPECEFFECT::NONE;
             hitCount                = i; // end barrage, shot missed
         }
-        else if (tpzrand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget))
@@ -231,7 +231,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
             }
             else
             {
-                bool  isCritical = tpzrand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, true);
+                bool  isCritical = xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, true);
                 float pdif       = battleutils::GetRangedDamageRatio(this, PTarget, isCritical);
 
                 if (isCritical)
@@ -297,7 +297,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
             recycleChance = 100;
         }
 
-        if (PAmmo != nullptr && tpzrand::GetRandomNumber(100) > recycleChance)
+        if (PAmmo != nullptr && xirand::GetRandomNumber(100) > recycleChance)
         {
             ++ammoConsumed;
             TrackArrowUsageForScavenge(PAmmo);
@@ -371,7 +371,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
         uint16 power = StatusEffectContainer->GetStatusEffect(EFFECT_SANGE)->GetPower();
 
         // remove shadows
-        while (realHits-- && tpzrand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
+        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
         {
             ;
         }

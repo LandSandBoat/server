@@ -184,7 +184,7 @@ int32 do_init(int32 argc, char** argv)
     MAP_CONF_FILENAME = "./conf/map.conf";
 
     srand((uint32)time(nullptr));
-    tpzrand::seed();
+    xirand::seed();
 
     map_config_default();
     map_config_read((const int8*)MAP_CONF_FILENAME);

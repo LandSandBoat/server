@@ -158,7 +158,7 @@ namespace fishingutils
 
         uint16 LureID = WeaponItem->getID();
 
-        int32 FishingChance = tpzrand::GetRandomNumber(100);
+        int32 FishingChance = xirand::GetRandomNumber(100);
 
         if (FishingChance <= 20)
         {
@@ -219,7 +219,7 @@ namespace fishingutils
 
                 if (!caughtQuestedFish)
                 {
-                    int32 luckyFish = tpzrand::GetRandomNumber((int32)Sql_NumRows(SqlHandle));
+                    int32 luckyFish = xirand::GetRandomNumber((int32)Sql_NumRows(SqlHandle));
                     PFish           = new CItemFish(*itemutils::GetItemPointer(fishIDs[luckyFish]));
 
                     PChar->UContainer->SetType(UCONTAINER_FISHING);
@@ -250,7 +250,7 @@ namespace fishingutils
             if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
             {
                 int32 FisherLuck    = 0;
-                int32 FishingChance = tpzrand::GetRandomNumber(1000);
+                int32 FishingChance = xirand::GetRandomNumber(1000);
 
                 while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
                 {

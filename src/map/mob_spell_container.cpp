@@ -186,7 +186,7 @@ bool CMobSpellContainer::HasMPSpells() const
 std::optional<SpellID> CMobSpellContainer::GetAggroSpell()
 {
     // high chance to return ga spell
-    if (HasGaSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE))
+    if (HasGaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE))
     {
         return GetGaSpell();
     }
@@ -199,13 +199,13 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
 {
     // prioritize curing if health low enough
     if (HasHealSpells() && m_PMob->GetHPP() <= m_PMob->getMobMod(MOBMOD_HP_HEAL_CHANCE) &&
-        tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_HEAL_CHANCE))
+        xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_HEAL_CHANCE))
     {
         return GetHealSpell();
     }
 
     // almost always use na if I can
-    if (HasNaSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_NA_CHANCE))
+    if (HasNaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_NA_CHANCE))
     {
         // will return -1 if no proper na spell exists
         auto naSpell = GetNaSpell();
@@ -216,18 +216,18 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
     }
 
     // try something really destructive
-    if (HasSevereSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE))
+    if (HasSevereSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_SEVERE_SPELL_CHANCE))
     {
         return GetSevereSpell();
     }
 
     // try ga spell
-    if (HasGaSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE))
+    if (HasGaSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_GA_CHANCE))
     {
         return GetGaSpell();
     }
 
-    if (HasBuffSpells() && tpzrand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_BUFF_CHANCE))
+    if (HasBuffSpells() && xirand::GetRandomNumber(100) < m_PMob->getMobMod(MOBMOD_BUFF_CHANCE))
     {
         return GetBuffSpell();
     }
@@ -271,7 +271,7 @@ std::optional<SpellID> CMobSpellContainer::GetGaSpell()
         return {};
     }
 
-    return m_gaList[tpzrand::GetRandomNumber(m_gaList.size())];
+    return m_gaList[xirand::GetRandomNumber(m_gaList.size())];
 }
 
 std::optional<SpellID> CMobSpellContainer::GetDamageSpell()
@@ -281,7 +281,7 @@ std::optional<SpellID> CMobSpellContainer::GetDamageSpell()
         return {};
     }
 
-    return m_damageList[tpzrand::GetRandomNumber(m_damageList.size())];
+    return m_damageList[xirand::GetRandomNumber(m_damageList.size())];
 }
 
 std::optional<SpellID> CMobSpellContainer::GetBuffSpell()
@@ -291,7 +291,7 @@ std::optional<SpellID> CMobSpellContainer::GetBuffSpell()
         return {};
     }
 
-    return m_buffList[tpzrand::GetRandomNumber(m_buffList.size())];
+    return m_buffList[xirand::GetRandomNumber(m_buffList.size())];
 }
 
 std::optional<SpellID> CMobSpellContainer::GetDebuffSpell()
@@ -301,7 +301,7 @@ std::optional<SpellID> CMobSpellContainer::GetDebuffSpell()
         return {};
     }
 
-    return m_debuffList[tpzrand::GetRandomNumber(m_debuffList.size())];
+    return m_debuffList[xirand::GetRandomNumber(m_debuffList.size())];
 }
 
 std::optional<SpellID> CMobSpellContainer::GetHealSpell()
@@ -311,7 +311,7 @@ std::optional<SpellID> CMobSpellContainer::GetHealSpell()
         return {};
     }
 
-    return m_healList[tpzrand::GetRandomNumber(m_healList.size())];
+    return m_healList[xirand::GetRandomNumber(m_healList.size())];
 }
 
 std::optional<SpellID> CMobSpellContainer::GetNaSpell()
@@ -365,7 +365,7 @@ std::optional<SpellID> CMobSpellContainer::GetSevereSpell()
         return {};
     }
 
-    return m_severeList[tpzrand::GetRandomNumber(m_severeList.size())];
+    return m_severeList[xirand::GetRandomNumber(m_severeList.size())];
 }
 
 bool CMobSpellContainer::HasGaSpells() const

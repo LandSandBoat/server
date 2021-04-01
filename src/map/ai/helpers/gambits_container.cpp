@@ -63,7 +63,7 @@ namespace gambits
             return;
         }
 
-        auto random_offset = static_cast<std::chrono::milliseconds>(tpzrand::GetRandomNumber(1000, 2500));
+        auto random_offset = static_cast<std::chrono::milliseconds>(xirand::GetRandomNumber(1000, 2500));
         m_lastAction       = tick + random_offset;
 
         // Deal with TP skills before any gambits
@@ -489,7 +489,7 @@ namespace gambits
             }
             case G_CONDITION::RANDOM:
             {
-                return tpzrand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
+                return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
                 break;
             }
             default:
@@ -556,7 +556,7 @@ namespace gambits
             {
                 case G_SELECT::RANDOM:
                 {
-                    chosen_skill = tpzrand::GetRandomElement(tp_skills);
+                    chosen_skill = xirand::GetRandomElement(tp_skills);
                     break;
                 }
                 case G_SELECT::HIGHEST: // Form the best possible skillchain

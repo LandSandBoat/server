@@ -580,7 +580,7 @@ namespace puppetutils
             int16  Diff          = MaxSkill - CurSkill / 10;
             double SkillUpChance = Diff / 5.0 + map_config.skillup_chance_multiplier * (2.0 - log10(1.0 + CurSkill / 100));
 
-            double random = tpzrand::GetRandomNumber(1.);
+            double random = xirand::GetRandomNumber(1.);
 
             if (SkillUpChance > 0.5)
             {
@@ -597,7 +597,7 @@ namespace puppetutils
 
                 for (uint8 i = 0; i < 4; ++i) // 1 + 4 возможных дополнительных (максимум 5)
                 {
-                    random = tpzrand::GetRandomNumber(1.);
+                    random = xirand::GetRandomNumber(1.);
 
                     switch (tier)
                     {

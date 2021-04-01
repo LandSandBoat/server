@@ -973,7 +973,7 @@ void SmallPacket0x01B(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     // 0 - world pass, 2 - gold world pass; +1 - purchase
 
-    PChar->pushPacket(new CWorldPassPacket(data.ref<uint8>(0x04) & 1 ? (uint32)tpzrand::GetRandomNumber(9999999999) : 0));
+    PChar->pushPacket(new CWorldPassPacket(data.ref<uint8>(0x04) & 1 ? (uint32)xirand::GetRandomNumber(9999999999) : 0));
 }
 
 /************************************************************************
@@ -1687,7 +1687,7 @@ void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (!PChar->PTreasurePool->HasLottedItem(PChar, SlotID))
         {
-            PChar->PTreasurePool->LotItem(PChar, SlotID, tpzrand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
+            PChar->PTreasurePool->LotItem(PChar, SlotID, xirand::GetRandomNumber(1, 1000)); // 1 ~ 998+1
         }
     }
 }
@@ -4201,7 +4201,7 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0A2(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint16 diceroll = tpzrand::GetRandomNumber(1000);
+    uint16 diceroll = xirand::GetRandomNumber(1000);
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageStandardPacket(PChar, diceroll, MsgStd::DiceRoll));
 }
@@ -5765,7 +5765,7 @@ void SmallPacket0x0FC(map_session_data_t* const PSession, CCharEntity* const PCh
         PPotItem->cleanPot();
         PPotItem->setPlant(CItemFlowerpot::getPlantFromSeed(itemID));
         PPotItem->setPlantTimestamp(CVanaTime::getInstance()->getVanaTime());
-        PPotItem->setStrength(tpzrand::GetRandomNumber(32));
+        PPotItem->setStrength(xirand::GetRandomNumber(32));
         gardenutils::GrowToNextStage(PPotItem);
     }
     else if (itemID >= 4096 && itemID <= 4111)

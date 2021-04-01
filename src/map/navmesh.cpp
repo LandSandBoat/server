@@ -21,7 +21,7 @@
 
 #include "navmesh.h"
 #include "../../ext/detour/detour/DetourNavMeshQuery.h"
-#include "../common/tpzrand.h"
+#include "../common/xirand.h"
 #include "../common/utils.h"
 #include <cfloat>
 #include <cstring>
@@ -338,7 +338,7 @@ std::pair<int16, position_t> CNavMesh::findRandomPosition(const position_t& star
     }
 
     status = m_navMeshQuery.findRandomPointAroundCircle(
-        startRef, spos, maxRadius, &filter, []() -> float { return tpzrand::GetRandomNumber(1.f); }, &randomRef, randomPt);
+        startRef, spos, maxRadius, &filter, []() -> float { return xirand::GetRandomNumber(1.f); }, &randomRef, randomPt);
 
     if (dtStatusFailed(status))
     {
