@@ -2994,13 +2994,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,842); -- burning strike
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,845); -- fire_iv (bloodpact)
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,846); -- flaming_crush
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,847); -- meteor_strike
--- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,0); -- crimson _howl not in tpz database at all
+-- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',875,0); -- crimson _howl not in database at all
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,842); -- burning strike
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,845); -- fire_iv (bloodpact)
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,846); -- flaming_crush
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,847); -- meteor_strike
 INSERT INTO `mob_skill_lists` VALUES ('Tejas_post50',876,913); -- inferno
--- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',876,0); -- crimson _howl not in tpz database at all
+-- INSERT INTO `mob_skill_lists` VALUES ('Tejas_Pre50',876,0); -- crimson _howl not in database at all
 INSERT INTO `mob_skill_lists` VALUES ('Titlacauan',877,530); -- Memento_Mori
 INSERT INTO `mob_skill_lists` VALUES ('Titlacauan',877,531); -- Silence_Seal
 INSERT INTO `mob_skill_lists` VALUES ('Titlacauan',877,533); -- danse macambre
