@@ -6,11 +6,11 @@ RUN apt clean
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Set env variables to override the configuration settings
-ENV TPZ_DB_HOST=db
-ENV TPZ_DB_PORT=3306
-ENV TPZ_DB_USER=xiadmin
-ENV TPZ_DB_USER_PASSWD=notarealpassword
-ENV TPZ_DB_NAME=xidb
+ENV XI_DB_HOST=db
+ENV XI_DB_PORT=3306
+ENV XI_DB_USER=xiadmin
+ENV XI_DB_USER_PASSWD=notarealpassword
+ENV XI_DB_NAME=xidb
 
 # Working directory will be /topaz meaning that the contents of topaz will exist in /topaz
 WORKDIR /topaz
