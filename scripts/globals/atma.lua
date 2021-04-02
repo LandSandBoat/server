@@ -8,8 +8,8 @@ require("scripts/globals/keyitems")
 require("scripts/globals/status")
 -----------------------------------
 
-tpz = tpz or {}
- xi.atma = xi.atma or {}
+xi = xi or {}
+xi.atma = xi.atma or {}
 
 local ATMA_OFFSET = xi.ki.ATMA_OF_THE_LION - 1
 
@@ -165,7 +165,7 @@ local atmaMods =
     [ xi.ki.ATMA_OF_THE_SAVIOR]                 = {},
 }
 
- xi.atma.onEffectGain = function(target, effect)
+xi.atma.onEffectGain = function(target, effect)
     local atma = ATMA_OFFSET + effect:getPower()
     local mods = atmaMods[atma]
     if mods ~= nil then
@@ -175,7 +175,7 @@ local atmaMods =
     end
 end
 
- xi.atma.onEffectLose = function(target, effect)
+xi.atma.onEffectLose = function(target, effect)
     local atma = ATMA_OFFSET + effect:getPower()
     local mods = atmaMods[atma]
     if mods ~= nil then

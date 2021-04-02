@@ -3,9 +3,9 @@
 --  KEYITEMS IDS
 --
 -----------------------------------
-tpz = tpz or {}
+xi = xi or {}
 
- xi.keyItem =
+xi.keyItem =
 {
     ZERUHN_REPORT                            = 1,
     PALBOROUGH_MINES_LOGS                    = 2,
@@ -3102,4 +3102,4 @@ tpz = tpz or {}
     INFORMATION_ON_PROCNE                    = 3245,
     INFORMATION_ON_HENWEN                    = 3246,
 }
- xi.ki = xi.keyItem
+xi.ki = xi.keyItem

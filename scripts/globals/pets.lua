@@ -3,14 +3,14 @@
 --  PETS ID
 --
 -----------------------------------
-tpz = tpz or {}
- xi.pet = xi.pet or {}
+xi = xi or {}
+xi.pet = xi.pet or {}
 
 -----------------------------------
 -- Pet types
 -----------------------------------
 
- xi.pet.type =
+xi.pet.type =
 {
     AVATAR             = 0,
     WYVERN             = 1,
@@ -26,7 +26,7 @@ tpz = tpz or {}
 --  Pet IDs
 -----------------------------------
 
- xi.pet.id =
+xi.pet.id =
 {
     --  Summoner
     FIRE_SPIRIT           =  0,
@@ -94,7 +94,7 @@ tpz = tpz or {}
 -- Pet names
 -----------------------------------
 
- xi.pet.name =
+xi.pet.name =
 {
     AZURE         = 1,
     CERULEAN      = 2,

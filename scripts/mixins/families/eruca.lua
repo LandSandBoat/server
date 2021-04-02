@@ -9,7 +9,7 @@ params is a table that can contain the following keys:
 
 Example:
 
- xi.mix.eruca.config(mob, {
+xi.mix.eruca.config(mob, {
     sleepHour = 20,
     wakeHour = 4,
 })
@@ -19,9 +19,9 @@ require("scripts/globals/mixins")
 require("scripts/globals/status")
 -----------------------------------
 
-tpz = tpz or {}
- xi.mix = xi.mix or {}
- xi.mix.eruca = xi.mix.eruca or {}
+xi = xi or {}
+xi.mix = xi.mix or {}
+xi.mix.eruca = xi.mix.eruca or {}
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
@@ -42,7 +42,7 @@ local function wakeUp(mob)
     mob:setLocalVar("ResleepTime", 0)
 end
 
- xi.mix.eruca.config = function(mob, params)
+xi.mix.eruca.config = function(mob, params)
     if params.sleepHour and type(params.sleepHour) == "number" then
         mob:setLocalVar("[eruca]sleepHour", params.sleepHour)
     end

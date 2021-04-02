@@ -5,12 +5,12 @@ require("scripts/globals/pets")
 require("scripts/globals/status")
 -----------------------------------
 
-tpz = tpz or {}
- xi.geo = xi.geo or {}
+xi = xi or {}
+xi.geo = xi.geo or {}
 
 -- TODO: After elements are aligned in the codebase, this should become:
 -- xi.geo.spawnLuopan = function(player, target, spell, tick_effect, tick_power, target_type)
- xi.geo.spawnLuopan = function(player, target, modelID, tick_effect, tick_power, target_type, spell)
+xi.geo.spawnLuopan = function(player, target, modelID, tick_effect, tick_power, target_type, spell)
 
     xi.pet.spawnPet(player, xi.pet.id.LUOPAN)
     local luopan = player:getPet()

@@ -13,8 +13,8 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.conquest = xi.conquest or {}
+xi = xi or {}
+xi.conquest = xi.conquest or {}
 
 -----------------------------------
 -- (LOCAL) constants
@@ -854,7 +854,7 @@ end
 -- (PUBLIC) conquest
 -----------------------------------
 
- xi.conquest.guard =
+xi.conquest.guard =
 {
     CITY    = 1,
     FOREIGN = 2,
@@ -862,11 +862,11 @@ end
     BORDER  = 4,
 }
 
- xi.conquest.areAllies = function(nationA, nationB)
+xi.conquest.areAllies = function(nationA, nationB)
     return IsConquestAlliance() and GetNationRank(nationA) > 1 and GetNationRank(nationB) > 1
 end
 
- xi.conquest.outpostFee = function(player, region)
+xi.conquest.outpostFee = function(player, region)
     if not hasOutpost(player, region) then
         return 0
     end
@@ -879,7 +879,7 @@ end
     end
 end
 
- xi.conquest.canTeleportToOutpost = function(player, region)
+xi.conquest.canTeleportToOutpost = function(player, region)
     local outpost = outposts[region]
     if
         outpost == nil or
@@ -891,7 +891,7 @@ end
     return true
 end
 
- xi.conquest.setRegionalConquestOverseers = function(region)
+xi.conquest.setRegionalConquestOverseers = function(region)
     local zone = outposts[region].zone
 
     if zone then
@@ -929,7 +929,7 @@ end
 -- (PUBLIC) overseer
 -----------------------------------
 
- xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
+xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
     if player:getNation() == guardNation or guardNation == xi.nation.OTHER then
         local item = trade:getItemId()
         local tradeConfirmed = false
@@ -995,7 +995,7 @@ end
     end
 end
 
- xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, guardEvent, guardRegion)
+xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, guardEvent, guardRegion)
     local pNation = player:getNation()
 
     -- SUPPLY RUNS
@@ -1037,7 +1037,7 @@ end
     end
 end
 
- xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
+xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
@@ -1074,7 +1074,7 @@ end
     end
 end
 
- xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
+xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
     local pNation  = player:getNation()
     local pRank    = player:getRank()
     local sRegion  = player:getCharVar("supplyQuest_region")
@@ -1187,7 +1187,7 @@ end
 -- (PUBLIC) vendor
 -----------------------------------
 
- xi.conquest.vendorOnTrigger = function(player, vendorRegion, vendorEvent)
+xi.conquest.vendorOnTrigger = function(player, vendorRegion, vendorEvent)
     local pNation = player:getNation()
     local owner = GetRegionOwner(vendorRegion)
 
@@ -1202,12 +1202,12 @@ end
     player:startEvent(vendorEvent, nation, fee, 0, fee, player:getCP(), 0, 0, 0)
 end
 
- xi.conquest.vendorOnEventUpdate = function(player, vendorRegion)
+xi.conquest.vendorOnEventUpdate = function(player, vendorRegion)
     local fee = xi.conquest.outpostFee(player, vendorRegion)
     player:updateEvent(player:getGil(), fee, 0, fee, player:getCP())
 end
 
- xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
+xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
     local fee = xi.conquest.outpostFee(player, vendorRegion)
 
     if option == 1 then
@@ -1226,7 +1226,7 @@ end
 -- (PUBLIC) outpost teleport NPC
 -----------------------------------
 
- xi.conquest.teleporterOnTrigger = function(player, teleporterNation, teleporterEvent)
+xi.conquest.teleporterOnTrigger = function(player, teleporterNation, teleporterEvent)
     local sandyRegions = getRegionsMask(xi.nation.SANDORIA)
     local bastokRegions = getRegionsMask(xi.nation.BASTOK)
     local windyRegions = getRegionsMask(xi.nation.WINDURST)
@@ -1236,7 +1236,7 @@ end
     player:startEvent(teleporterEvent, sandyRegions, bastokRegions, windyRegions, beastmenRegions, 0, nationBits, player:getMainLvl(), allowedTeleports)
 end
 
- xi.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterEvent)
+xi.conquest.teleporterOnEventUpdate = function(player, csid, option, teleporterEvent)
     if csid == teleporterEvent then
         local region = option - 1073741829
         local fee = xi.conquest.outpostFee(player, region)
@@ -1246,7 +1246,7 @@ end
     end
 end
 
- xi.conquest.teleporterOnEventFinish = function(player, csid, option, teleporterEvent)
+xi.conquest.teleporterOnEventFinish = function(player, csid, option, teleporterEvent)
     if csid == teleporterEvent then
         -- TELEPORT WITH GIL
         if option >= 5 and option <= 23 then
@@ -1274,7 +1274,7 @@ end
 -- (PUBLIC) conquest messages
 -----------------------------------
 
- xi.conquest.onConquestUpdate = function(zone, updatetype)
+xi.conquest.onConquestUpdate = function(zone, updatetype)
     local region = zone:getRegionID()
     local owner = GetRegionOwner(region)
     local players = zone:getPlayers()
@@ -1382,4 +1382,4 @@ end
     end
 end
 
- xi.conq = xi.conquest
+xi.conq = xi.conquest

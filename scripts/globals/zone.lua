@@ -7,9 +7,9 @@
 require('scripts/globals/settings')
 -----------------------------------
 
-tpz = tpz or {}
+xi = xi or {}
 
- xi.zoneType =
+xi.zoneType =
 {
     NONE           = 0,
     CITY           = 1,
@@ -20,7 +20,7 @@ tpz = tpz or {}
     INSTANCED      = 6,
 }
 
- xi.continent =
+xi.continent =
 {
     THE_MIDDLE_LANDS        = 1,
     THE_ARADJIAH_CONTINENT  = 2,
@@ -28,7 +28,7 @@ tpz = tpz or {}
     OTHER_AREAS             = 4,
 }
 
- xi.region =
+xi.region =
 {
     RONFAURE         = 0,
     ZULKHEIM         = 1,
@@ -79,7 +79,7 @@ tpz = tpz or {}
     UNKNOWN          = 255,
 }
 
- xi.nation =
+xi.nation =
 {
     SANDORIA = 0,
     BASTOK   = 1,
@@ -88,7 +88,7 @@ tpz = tpz or {}
     OTHER    = 4,
 }
 
- xi.alliedNation =
+xi.alliedNation =
 {
     NONE     = 0,
     SANDORIA = 1,
@@ -96,7 +96,7 @@ tpz = tpz or {}
     WINDURST = 3,
 }
 
- xi.zone =
+xi.zone =
 {
     UNKNOWN                         = 0,
     PHANAUET_CHANNEL                = 1,
@@ -397,8 +397,8 @@ tpz = tpz or {}
     MAX_ZONE                        = 299
 }
 
- xi.expansionRegion = xi.expansionRegion or {}
- xi.expansionRegion.ORIGINAL_ROTZ =
+xi.expansionRegion = xi.expansionRegion or {}
+xi.expansionRegion.ORIGINAL_ROTZ =
 {
     [ xi.region.RONFAURE]        = true,
     [ xi.region.ZULKHEIM]        = true,

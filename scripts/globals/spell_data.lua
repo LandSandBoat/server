@@ -1,13 +1,13 @@
 require('scripts/globals/status')
 
-tpz = tpz or {}
- xi.magic = xi.magic or {}
+xi = xi or {}
+xi.magic = xi.magic or {}
 
 -----------------------------------
 -- Spell flag bits
 -----------------------------------
 
- xi.magic.spellFlag =
+xi.magic.spellFlag =
 {
     NONE           = 0x00,
     HIT_ALL        = 0x01, -- Hit all targets in range regardless of party
@@ -19,7 +19,7 @@ tpz = tpz or {}
 -- Spell AOE IDs
 -----------------------------------
 
- xi.magic.aoe =
+xi.magic.aoe =
 {
     NONE        = 0,
     RADIAL      = 1,
@@ -34,7 +34,7 @@ tpz = tpz or {}
 -- Spell Groups
 -----------------------------------
 
- xi.magic.spellGroup =
+xi.magic.spellGroup =
 {
     NONE      = 0,
     SONG      = 1,
@@ -49,7 +49,7 @@ tpz = tpz or {}
 -- Elements
 -----------------------------------
 
- xi.magic.element =
+xi.magic.element =
 {
     NONE      = 0,
     FIRE      = 1,
@@ -62,13 +62,13 @@ tpz = tpz or {}
     LIGHT     = 7,
     DARK      = 8,
 }
- xi.magic.ele = xi.magic.element
+xi.magic.ele = xi.magic.element
 
 -----------------------------------
 -- Day to Element Mapping
 -----------------------------------
 
- xi.magic.dayElement =
+xi.magic.dayElement =
 {
     [ xi.day.FIRESDAY]     = xi.magic.element.FIRE,
     [ xi.day.ICEDAY]       = xi.magic.element.ICE,
@@ -83,7 +83,7 @@ tpz = tpz or {}
 -----------------------------------
 -- Elemental Strength Ordering
 -----------------------------------
- xi.magic.elementAscendant =
+xi.magic.elementAscendant =
 {
     [ xi.magic.element.FIRE]    = xi.magic.element.ICE,
     [ xi.magic.element.ICE]     = xi.magic.element.WIND,
@@ -95,7 +95,7 @@ tpz = tpz or {}
     [ xi.magic.element.DARK]    = xi.magic.element.LIGHT,
 }
 
- xi.magic.elementDescendant =
+xi.magic.elementDescendant =
 {
     [ xi.magic.element.FIRE]     = xi.magic.element.WATER,
     [ xi.magic.element.ICE]      = xi.magic.element.FIRE,
@@ -110,7 +110,7 @@ tpz = tpz or {}
 -- Spell Families
 -----------------------------------
 
- xi.magic.spellFamily =
+xi.magic.spellFamily =
 {
     NONE               = 0,
     CURE               = 1,
@@ -275,7 +275,7 @@ tpz = tpz or {}
 -- Spell IDs
 -----------------------------------
 
- xi.magic.spell =
+xi.magic.spell =
 {
     CURE                  =    1,
     CURE_II               =    2,

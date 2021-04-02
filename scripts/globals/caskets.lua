@@ -24,8 +24,8 @@ require("scripts/globals/roe")
 -- 2425 -- Black with Red chest 2
 -----------------------------------
 
-tpz = tpz or {}
- xi.caskets = xi.caskets or {}
+xi = xi or {}
+xi.caskets = xi.caskets or {}
 
 local casketInfo =
 {
@@ -634,7 +634,7 @@ end
 -----------------------------------
 -- Desc: Casket spawn checks, runs through all checks before spawning
 -----------------------------------
- xi.caskets.spawnCasket = function (player, mob, x, y, z, r)
+xi.caskets.spawnCasket = function (player, mob, x, y, z, r)
     local chestId    = getCasketID(mob)
     local npc        = GetNPCByID(chestId)
     local chestOwner = player:getLeaderID()
@@ -651,7 +651,7 @@ end
 -----------------------------------
 -- Main public casket functions
 -----------------------------------
- xi.caskets.onTrigger = function(player, npc)
+xi.caskets.onTrigger = function(player, npc)
     -----------------------------------
     -- Basic chest var's
     -----------------------------------
@@ -716,7 +716,7 @@ end
 -- (e.g. its between 24 and 58) its usually a good idea to start with this clue.
 -- Multiple tools may be used, however there is a low rate of success after the first.
 -----------------------------------
- xi.caskets.onTrade = function(player, npc, trade)
+xi.caskets.onTrade = function(player, npc, trade)
     local zoneId            = player:getZoneID()
     local ID                = zones[zoneId]
     local baseMessage       = ID.text.PLAYER_OBTAINS_TEMP_ITEM
@@ -779,7 +779,7 @@ end
     end
 end
 
- xi.caskets.onEventFinish = function(player, csid, option, npc)
+xi.caskets.onEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local ID = zones[zoneId]
     local baseMessage = ID.text.PLAYER_OBTAINS_TEMP_ITEM

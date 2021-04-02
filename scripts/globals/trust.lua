@@ -10,10 +10,10 @@ require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------
 
-tpz = tpz or {}
- xi.trust = xi.trust or {}
+xi = xi or {}
+xi.trust = xi.trust or {}
 
- xi.trust.message_offset =
+xi.trust.message_offset =
 {
     SPAWN          = 1,
     TEAMWORK_1     = 4,
@@ -53,7 +53,7 @@ local rovKIBattlefieldIDs = set{
 -- TODO: RUN LB5
 }
 
- xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
+xi.trust.onTradeCipher = function(player, trade, csid, rovCs, arkAngelCs)
     local hasPermit = player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
                       player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
                       player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT)
@@ -97,7 +97,7 @@ local rovKIBattlefieldIDs = set{
     end
 end
 
- xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
+xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
 
     -- Trusts must be enabled in settings
     if ENABLE_TRUST_CASTING == 0 then
@@ -195,7 +195,7 @@ end
     return 0
 end
 
- xi.trust.spawn = function(caster, spell)
+xi.trust.spawn = function(caster, spell)
     caster:spawnTrust(spell:getID())
 
     -- Records of Eminence: Call Forth an Alter Ego
@@ -209,7 +209,7 @@ end
 -- page_offset is: (summon_message_id - 1) / 100
 -- Example: Shantotto II summon message ID: 11201
 -- page_offset: (11201 - 1) / 100 = 112
- xi.trust.message = function(mob, page_offset, message_offset)
+xi.trust.message = function(mob, page_offset, message_offset)
 
     if page_offset > MAX_MESSAGE_PAGE then
         print("trust.lua: MAX_MESSAGE_PAGE exceeded!")
@@ -220,7 +220,7 @@ end
     mob:trustPartyMessage(trust_offset + message_offset)
 end
 
- xi.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
+xi.trust.teamworkMessage = function(mob, page_offset, teamwork_messages)
     local messages = {}
 
     local master = mob:getMaster()
@@ -244,13 +244,13 @@ end
 end
 
 -- For debugging and lining up teamwork messages
- xi.trust.dumpMessages = function(mob, page_offset)
+xi.trust.dumpMessages = function(mob, page_offset)
     for i=0, 20 do
         xi.trust.message(mob, page_offset, i)
     end
 end
 
- xi.trust.dumpMessagePages = function(mob)
+xi.trust.dumpMessagePages = function(mob)
     for i=0, 120 do
         xi.trust.message(mob, i, xi.trust.message_offset.SPAWN)
     end

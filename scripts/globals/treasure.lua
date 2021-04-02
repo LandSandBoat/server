@@ -11,10 +11,10 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.treasure = xi.treasure or {}
+xi = xi or {}
+xi.treasure = xi.treasure or {}
 
- xi.treasure.type =
+xi.treasure.type =
 {
     CHEST   = 1,
     COFFER  = 2,
@@ -1291,7 +1291,7 @@ end
 -- public functions
 -----------------------------------
 
- xi.treasure.initZone = function(zone)
+xi.treasure.initZone = function(zone)
     local zoneId = zone:getID()
     local ID = zones[zoneId]
 
@@ -1324,7 +1324,7 @@ end
     7 The chest appears to be locked. If only you had <item>, perhaps you could open it...
 --]]
 
- xi.treasure.onTrade = function(player, npc, trade, chestType)
+xi.treasure.onTrade = function(player, npc, trade, chestType)
     local zoneId = player:getZoneID()
     local ID = zones[zoneId]
     local msgBase = ID.text.CHEST_UNLOCKED
@@ -1513,7 +1513,7 @@ end
     moveChest(npc, zoneId, chestType)
 end
 
- xi.treasure.onTrigger = function(player, chestType)
+xi.treasure.onTrigger = function(player, chestType)
     local zoneId = player:getZoneID()
     local msgBase = zones[zoneId].text.CHEST_UNLOCKED
     local info = treasureInfo[chestType].zone[zoneId]

@@ -2,8 +2,8 @@ require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/survival_guide_map")
 
-tpz = tpz or {}
- xi.survivalGuide = xi.survivalGuide or {}
+xi = xi or {}
+xi.survivalGuide = xi.survivalGuide or {}
 
 -- Determines if the survival guide teleport cost is like if you had a Rhapsody in White key item. Does not affect UI! (Default: 0)
 local SURVIVAL_GUIDE_TELEPORT_COST_GIL = 1000
@@ -12,7 +12,7 @@ local SURVIVAL_GUIDE_TELEPORT_COST_TABS = 50
 -- This is used for the NationTeleport save/get
 local travelType = xi.teleport.type.SURVIVAL
 local cutsceneID = 8500
- xi.survivalGuide.expansions = 3 + (4 * ENABLE_COP) + (8 * ENABLE_TOAU) + (16 * ENABLE_WOTG) + (2048 * ENABLE_SOA)
+xi.survivalGuide.expansions = 3 + (4 * ENABLE_COP) + (8 * ENABLE_TOAU) + (16 * ENABLE_WOTG) + (2048 * ENABLE_SOA)
 
 local optionMap =
 {
@@ -94,7 +94,7 @@ end
 -- public functions
 -----------------------------------
 
- xi.survivalGuide.onTrigger = function(player)
+xi.survivalGuide.onTrigger = function(player)
     local currentZoneId = player:getZoneID()
     local tableIndex = zoneIdToGuideIdMap[currentZoneId]
     local guide = survivalGuides[tableIndex]
@@ -138,11 +138,11 @@ end
     end
 end
 
- xi.survivalGuide.onEventUpdate = function(player, csid, option)
+xi.survivalGuide.onEventUpdate = function(player, csid, option)
     teleportMenuUpdate(player, option)
 end
 
- xi.survivalGuide.onEventFinish = function(player, eventId, option)
+xi.survivalGuide.onEventFinish = function(player, eventId, option)
     if cutsceneID == eventId and bit.band(option, 0xFF) == optionMap.TELEPORT  then
         local selectedMenuId = bit.rshift(option, 16)
 

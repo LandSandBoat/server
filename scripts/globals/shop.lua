@@ -24,9 +24,9 @@ curio =
     -- keyitems not implemented yet
 }
 
-tpz = tpz or {}
+xi = xi or {}
 
- xi.shop =
+xi.shop =
 {
     --[[ *******************************************************************************
         send general shop dialog to player

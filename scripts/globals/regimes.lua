@@ -18,10 +18,10 @@ require("scripts/globals/msg")
 require("scripts/globals/roe")
 -----------------------------------
 
-tpz = tpz or {}
- xi.regime = xi.regime or {}
+xi = xi or {}
+xi.regime = xi.regime or {}
 
- xi.regime.type =
+xi.regime.type =
 {
     FIELDS  = 1,
     GROUNDS = 2,
@@ -1036,7 +1036,7 @@ local function addGovProwessBonusEffect(player)
 end
 
 -- function made global to be called by hunts.lua
- xi.regime.clearRegimeVars = function(player)
+xi.regime.clearRegimeVars = function(player)
     player:setCharVar("[regime]type", 0)
     player:setCharVar("[regime]zone", 0)
     player:setCharVar("[regime]id", 0)
@@ -1049,7 +1049,7 @@ end
     end
 end
 
- xi.regime.bookOnTrigger = function(player, regimeType)
+xi.regime.bookOnTrigger = function(player, regimeType)
     local info = regimeInfo[regimeType].zone[player:getZoneID()]
      -- checks if hunt is active, if so prompts player to cancel
     if player:getCharVar("[hunt]status") >= 1 then
@@ -1077,7 +1077,7 @@ end
     end
 end
 
- xi.regime.bookOnEventUpdate = function(player, option, regimeType)
+xi.regime.bookOnEventUpdate = function(player, option, regimeType)
     local page = getPageByRegimeId(player:getCharVar("[regime]type"), player:getCharVar("[regime]zone"), player:getCharVar("[regime]id"))
 
     -- check valid option
@@ -1113,7 +1113,7 @@ end
     end
 end
 
- xi.regime.bookOnEventFinish = function(player, option, regimeType)
+xi.regime.bookOnEventFinish = function(player, option, regimeType)
     local zoneId = player:getZoneID()
     local msgOffset = zones[zoneId].text.REGIME_REGISTERED
     local tabs = player:getCurrency("valor_point")
@@ -1288,7 +1288,7 @@ end
     end
 end
 
- xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
+xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- dead players, or players not on this training regime, get no credit
     -- also prevents error when this function is called onMobDeath from a mob not killed by a player

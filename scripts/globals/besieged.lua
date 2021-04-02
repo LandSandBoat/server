@@ -9,10 +9,10 @@ require("scripts/globals/status")
 require("scripts/globals/teleports")
 -----------------------------------
 
-tpz = tpz or {}
- xi.besieged = xi.besieged or {}
+xi = xi or {}
+xi.besieged = xi.besieged or {}
 
- xi.besieged.onTrigger = function(player, npc, eventBase)
+xi.besieged.onTrigger = function(player, npc, eventBase)
     local mercRank = xi.besieged.getMercenaryRank(player)
     if mercRank == 0 then
         player:startEvent(eventBase + 1, npc)
@@ -22,7 +22,7 @@ tpz = tpz or {}
     end
 end
 
- xi.besieged.onEventUpdate = function(player, csid, option)
+xi.besieged.onEventUpdate = function(player, csid, option)
     local itemId = getISPItem(option)
     if itemId and option < 0x40000000 then
         local maps = getMapBitmask(player)
@@ -30,7 +30,7 @@ end
     end
 end
 
- xi.besieged.onEventFinish = function(player, csid, option)
+xi.besieged.onEventFinish = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     if option == 0 or option == 16 or option == 32 or option == 48 then
         -- Sanction
@@ -69,15 +69,15 @@ PERIQIA_ASSAULT_POINT = 3
 ILRUSI_ASSAULT_POINT = 4
 NYZUL_ISLE_ASSAULT_POINT = 5
 
- xi.besieged.addRunicPortal = function(player, portal)
+xi.besieged.addRunicPortal = function(player, portal)
     player:addTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
 end
 
- xi.besieged.hasRunicPortal = function(player, portal)
+xi.besieged.hasRunicPortal = function(player, portal)
     return player:hasTeleport(xi.teleport.type.RUNIC_PORTAL, portal)
 end
 
- xi.besieged.hasAssaultOrders = function(player)
+xi.besieged.hasAssaultOrders = function(player)
     local event = 0
     local keyitem = 0
 
@@ -94,13 +94,13 @@ end
 end
 
 -- TODO: Implement Astral Candescence
- xi.besieged.getAstralCandescence = function()
+xi.besieged.getAstralCandescence = function()
     return 1 -- Hardcoded to 1 for now
 end
 
- xi.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
+xi.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
 
- xi.besieged.getMercenaryRank = function(player)
+xi.besieged.getMercenaryRank = function(player)
     local rank = 0
 
     for _, v in ipairs(xi.besieged.badges) do

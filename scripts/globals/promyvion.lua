@@ -5,8 +5,8 @@ require("scripts/zones/Promyvion-Vahzl/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-tpz = tpz or {}
- xi.promyvion = xi.promyvion or {}
+xi = xi or {}
+xi.promyvion = xi.promyvion or {}
 
 -----------------------------------
 -- LOCAL FUNCTIONS
@@ -52,7 +52,7 @@ end
 -- PUBLIC FUNCTIONS
 -----------------------------------
 
- xi.promyvion.initZone = function(zone)
+xi.promyvion.initZone = function(zone)
     local ID = zones[zone:getID()]
 
     -- register teleporter regions
@@ -66,7 +66,7 @@ end
     end
 end
 
- xi.promyvion.strayOnSpawn = function(mob)
+xi.promyvion.strayOnSpawn = function(mob)
     local mother = GetMobByID(findMother(mob))
 
     if mother ~= nil and mother:isSpawned() then
@@ -75,7 +75,7 @@ end
     end
 end
 
- xi.promyvion.receptacleOnFight = function(mob, target)
+xi.promyvion.receptacleOnFight = function(mob, target)
     if os.time() > mob:getLocalVar("[promy]nextStray") then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
@@ -95,7 +95,7 @@ end
     end
 end
 
- xi.promyvion.receptacleOnDeath = function(mob, isKiller)
+xi.promyvion.receptacleOnDeath = function(mob, isKiller)
     if isKiller then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
@@ -116,7 +116,7 @@ end
     end
 end
 
- xi.promyvion.onRegionEnter = function(player, region)
+xi.promyvion.onRegionEnter = function(player, region)
     if player:getAnimation() == 0 then
         local ID = zones[player:getZoneID()]
         local regionId = region:GetRegionID()

@@ -35,10 +35,10 @@ require("scripts/globals/utils")
     [900]='Distant Worlds'
 ]]
 
-tpz = tpz or {}
- xi.symphonic_curator = xi.symphonic_curator or {}
+xi = xi or {}
+xi.symphonic_curator = xi.symphonic_curator or {}
 
- xi.symphonic_curator.onTrigger = function(player, npc)
+xi.symphonic_curator.onTrigger = function(player, npc)
 
     -- The first time you click, you'll always already be listening to Mog House
     if player:getLocalVar("Symphonic_Curator_Music") == 0 then
@@ -151,11 +151,11 @@ local optionToSongLookup = {
     [434] = 29,  -- Devils' Delight
 }
 
- xi.symphonic_curator.onEventUpdate = function(player, csid, option)
+xi.symphonic_curator.onEventUpdate = function(player, csid, option)
     player:ChangeMusic(6, optionToSongLookup[option])
 end
 
- xi.symphonic_curator.onEventFinish = function(player, csid, option)
+xi.symphonic_curator.onEventFinish = function(player, csid, option)
     if option == 0 then
         -- Reset
         player:ChangeMusic(6, player:getLocalVar("Symphonic_Curator_Music"))

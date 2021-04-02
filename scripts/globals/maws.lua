@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
 
- xi.maws = xi.maws or {}
+xi.maws = xi.maws or {}
 
 local ZN = xi.zone
 local MAW = xi.teleport.type.PAST_MAW
@@ -52,7 +52,7 @@ local function meetsMission2Reqs(player)
 
 end
 
- xi.maws.onTrigger = function(player, npc)
+xi.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
     if ENABLE_WOTG == 0 then
@@ -91,7 +91,7 @@ end
 
 end
 
- xi.maws.onEventFinish = function(player, csid, option)
+xi.maws.onEventFinish = function(player, csid, option)
 
     local maw = pastMaws[player:getZoneID()]
 

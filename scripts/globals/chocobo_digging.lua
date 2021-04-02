@@ -10,8 +10,8 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.chocoboDig = xi.chocoboDig or {}
+xi = xi or {}
+xi.chocoboDig = xi.chocoboDig or {}
 
 local digReq =
 {
@@ -944,7 +944,7 @@ local function getChocoboDiggingItem(player)
     return itemId
 end
 
- xi.chocoboDig.start = function(player, precheck)
+xi.chocoboDig.start = function(player, precheck)
     local zoneId = player:getZoneID()
     local text = zones[zoneId].text
 

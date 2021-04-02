@@ -10,8 +10,8 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------
 
-tpz = tpz or {}
- xi.mob = xi.mob or {}
+xi = xi or {}
+xi.mob = xi.mob or {}
 
 -- onMobDeathEx is called from the core
 function onMobDeathEx(mob, player, isKiller, isWeaponSkillKill)
@@ -58,7 +58,7 @@ local function lotteryPrimed(phList)
 end
 
 -- potential lottery placeholder was killed
- xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
+xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
 
     if NM_LOTTERY_CHANCE then
@@ -107,7 +107,7 @@ end
 -- mob additional melee effects
 -----------------------------------
 
- xi.mob.additionalEffect =
+xi.mob.additionalEffect =
 {
     BLIND      = 0,
     CURSE      = 1,
@@ -132,7 +132,7 @@ end
     TERROR     = 20,
     TP_DRAIN   = 21,
 }
- xi.mob.ae = xi.mob.additionalEffect
+xi.mob.ae = xi.mob.additionalEffect
 
 local additionalEffects =
 {
@@ -388,7 +388,7 @@ local additionalEffects =
         code: additional code that will run when effect procs, of form function(mob, target, power)
     params will override effect's default settings
 --]]
- xi.mob.onAddEffect = function(mob, target, damage, effect, params)
+xi.mob.onAddEffect = function(mob, target, damage, effect, params)
     if type(params) ~= "table" then params = {} end
 
     local ae = additionalEffects[effect]

@@ -15,10 +15,10 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.helm = xi.helm or {}
+xi = xi or {}
+xi.helm = xi.helm or {}
 
- xi.helm.type =
+xi.helm.type =
 {
     HARVESTING = 1,
     EXCAVATION = 2,
@@ -1384,7 +1384,7 @@ end
 -- public functions
 -----------------------------------
 
- xi.helm.initZone = function(zone, helmType)
+xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
     local info = helmInfo[helmType]
     local npcs = zones[zoneId].npc[info.id]
@@ -1398,7 +1398,7 @@ end
     end
 end
 
- xi.helm.onTrade = function(player, npc, trade, helmType, csid)
+xi.helm.onTrade = function(player, npc, trade, helmType, csid)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
     local regionId = player:getCurrentRegion()
@@ -1468,7 +1468,7 @@ end
     end
 end
 
- xi.helm.onTrigger = function(player, helmType)
+xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
     local info = helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)

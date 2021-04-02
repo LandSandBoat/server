@@ -5,8 +5,8 @@
  require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.sparkshop = xi.sparkshop or {}
+xi = xi or {}
+xi.sparkshop = xi.sparkshop or {}
 
 local optionToItem = {
     [1] = { -- Items page

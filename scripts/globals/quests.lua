@@ -1,8 +1,8 @@
 require("scripts/globals/log_ids")
 require("scripts/globals/zone")
 
-tpz = tpz or {}
- xi.quest = xi.quest or {}
+xi = xi or {}
+xi.quest = xi.quest or {}
 
 -----------------------------------
 --
@@ -18,7 +18,7 @@ QUEST_COMPLETED = 2
 -- branch that will be merged in at a later date. Used
 -- as keys for the quest ID tables below.
 
- xi.quest.log_id =
+xi.quest.log_id =
 {
     SANDORIA    =  0,
     BASTOK      =  1,
@@ -33,7 +33,7 @@ QUEST_COMPLETED = 2
     COALITION   = 10
 }
 
- xi.quest.area =
+xi.quest.area =
 {
     [ xi.quest.log_id.SANDORIA]    = 'sandoria',
     [ xi.quest.log_id.BASTOK]      = 'bastok',
@@ -48,7 +48,7 @@ QUEST_COMPLETED = 2
     [ xi.quest.log_id.COALITION]   = 'coalition'
 }
 
- xi.quest.id =
+xi.quest.id =
 {
     -----------------------------------
     --  San d'Oria

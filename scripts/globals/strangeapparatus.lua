@@ -10,7 +10,7 @@ require("scripts/globals/npc_util")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
+xi = xi or {}
 
 local RED_CHIP          = 474
 local BLUE_CHIP         = 475
@@ -287,7 +287,7 @@ end
 -- strangeApparatus object
 -----------------------------------
 
- xi.strangeApparatus =
+xi.strangeApparatus =
 {
     onTrade = function(player, trade, eventId)
         local zone = player:getZoneID()

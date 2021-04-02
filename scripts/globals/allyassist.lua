@@ -1,6 +1,6 @@
-tpz = tpz or {}
+xi = xi or {}
 
- xi.ally =
+xi.ally =
 {
     ASSIST_PLAYER = 1,
     ASSIST_RANDOM = 2,

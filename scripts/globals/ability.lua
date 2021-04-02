@@ -6,9 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 
-tpz = tpz or {}
+xi = xi or {}
 
- xi.jobAbility =
+xi.jobAbility =
 {
     MIGHTY_STRIKES     = 16,
     HUNDRED_FISTS      = 17,
@@ -671,9 +671,9 @@ tpz = tpz or {}
     WINDS_BLESSING     = 969,
     HYSTERIC_ASSAULT   = 970,
 }
- xi.ja = xi.jobAbility
+xi.ja = xi.jobAbility
 
- xi.reaction =
+xi.reaction =
 {
     NONE     = 0x00,
     MISS     = 0x01,
@@ -684,7 +684,7 @@ tpz = tpz or {}
     GUARD    = 0x14,
 }
 
- xi.specEffect =
+xi.specEffect =
 {
     NONE           = 0x00,
     BLOOD          = 0x02,

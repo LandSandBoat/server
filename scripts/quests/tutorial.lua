@@ -7,10 +7,10 @@ require("scripts/globals/settings")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-tpz = tpz or {}
- xi.tutorial = xi.tutorial or {}
+xi = xi or {}
+xi.tutorial = xi.tutorial or {}
 
- xi.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
+xi.tutorial.onTrigger = function(player, npc, npc_event_offset, nation_offset)
     local stage = player:getCharVar("TutorialProgress")
     if stage == 0 then
         player:startEvent(npc_event_offset + 17)
@@ -73,13 +73,13 @@ tpz = tpz or {}
     end
 end
 
- xi.tutorial.onAuctionTrigger = function(player)
+xi.tutorial.onAuctionTrigger = function(player)
     if player:getCharVar("TutorialProgress") == 5 then
         player:setCharVar("TutorialProgress", 6)
     end
 end
 
- xi.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, nation_offset)
+xi.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, nation_offset)
     if csid == npc_event_offset then
         player:setCharVar("TutorialProgress", 2)
     elseif csid == (npc_event_offset + 2) then
@@ -123,7 +123,7 @@ end
     end
 end
 
- xi.tutorial.onMobDeath = function(player)
+xi.tutorial.onMobDeath = function(player)
     if player and player:getCharVar("TutorialProgress") == 8 then
         player:setCharVar("TutorialProgress", 9)
     end

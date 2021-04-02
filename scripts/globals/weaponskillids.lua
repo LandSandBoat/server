@@ -3,13 +3,13 @@
 --
 -- Contains readable values for Weaponskill IDs
 -----------------------------------
-tpz = tpz or {}
+xi = xi or {}
 
 -----------------------------------
 -- Weaponskill IDs
 -----------------------------------
 
- xi.weaponskill =
+xi.weaponskill =
 {
     -----------------------------------
     -- H2H
@@ -274,13 +274,13 @@ tpz = tpz or {}
     WILDFIRE            = 220,
     LAST_STAND          = 221,
 }
- xi.ws = xi.weaponskill
+xi.ws = xi.weaponskill
 
 -----------------------------------
 -- Weaponskill Unlock IDs
 -----------------------------------
 
- xi.ws_unlock =
+xi.ws_unlock =
 {
     ASURAN_FISTS        = 1,
     EVISCERATION        = 2,

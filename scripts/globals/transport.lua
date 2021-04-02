@@ -4,27 +4,27 @@
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.transport = xi.transport or {}
+xi = xi or {}
+xi.transport = xi.transport or {}
 
- xi.transport.message =
+xi.transport.message =
 {
     NEARING = 0,
     DOCKING = 1
 }
 
- xi.transport.epochOffset =
+xi.transport.epochOffset =
 {
     NEARING = 265,
     DOCKING = 290
 }
 
- xi.transport.messageTime =
+xi.transport.messageTime =
 {
     SILVER_SEA = 480
 }
 
- xi.transport.trigger =
+xi.transport.trigger =
 {
     mhaura =
     {
@@ -35,7 +35,7 @@ tpz = tpz or {}
     }
 }
 
- xi.transport.interval =
+xi.transport.interval =
 {
     mhaura =
     {
@@ -44,7 +44,7 @@ tpz = tpz or {}
     }
 }
 
- xi.transport.offset =
+xi.transport.offset =
 {
     mhaura =
     {
@@ -55,7 +55,7 @@ tpz = tpz or {}
     }
 }
 
- xi.transport.pos =
+xi.transport.pos =
 {
     mhaura =
     {
@@ -68,14 +68,14 @@ tpz = tpz or {}
 -- public functions
 -----------------------------------
 
- xi.transport.captainMessage = function(npc, triggerID, messages)
+xi.transport.captainMessage = function(npc, triggerID, messages)
     local playersInZone = npc:getZone():getPlayers()
     for _, player in pairs(playersInZone) do
         player:showText(player, messages[triggerID])
     end
 end
 
- xi.transport.dockMessage = function(npc, triggerID, messages, dock)
+xi.transport.dockMessage = function(npc, triggerID, messages, dock)
     npc:showText(npc, messages[triggerID])
     if (triggerID % 2) == 0 then
         npc:pathThrough(xi.transport.pos[dock].ARRIVING, PATHFLAG_WALLHACK)

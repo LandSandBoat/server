@@ -7,8 +7,8 @@ require('scripts/globals/quests')
 require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
-tpz = tpz or {}
- xi.beastmentreasure = xi.beastmentreasure or {}
+xi = xi or {}
+xi.beastmentreasure = xi.beastmentreasure or {}
 
 local zoneData = {
     [ xi.zone.YUHTUNGA_JUNGLE] =
@@ -193,7 +193,7 @@ local function startMapMarkerEvent(eventid, player, digsiteids)
     player:startEvent(eventid, player:getZoneID(), 0, pos.x * 1000, pos.z * 1000)
 end
 
- xi.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
+xi.beastmentreasure.handleNpcOnTrigger = function(player, digsiteids)
     local zd = zoneData[player:getZoneID()]
     local status = player:getCharVar(zd.statusvar)
 
@@ -210,7 +210,7 @@ end
     end
 end
 
- xi.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
+xi.beastmentreasure.handleNpcOnTrade = function(player, trade, digsiteids)
     local zd = zoneData[player:getZoneID()]
 
     if player:getCharVar(zd.statusvar) == QUEST_ACCEPTED and npcUtil.tradeHasExactly(trade, zd.fetchitems) then
@@ -221,7 +221,7 @@ end
     end
 end
 
- xi.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
+xi.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     local zd = zoneData[player:getZoneID()]
 
     if csid == 100 then
@@ -232,7 +232,7 @@ end
     end
 end
 
- xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
+xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
     --[[ Allows Peddlestox to appear on the appropriate day and disappear when the day is over.
     This function is called by each of the three zones where Peddlestox can appear: once on init,
     and once at the start of each new game day. Since Peddlestox is disabled in the db by default, we
@@ -256,7 +256,7 @@ end
     end
 end
 
- xi.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothingtext, digsiteids)
+xi.beastmentreasure.handleQmOnTrigger = function(player, npc, buriedtext, nothingtext, digsiteids)
     local digsiteid = digsiteids[getAssignedDigSite(player)]
     local qmid = npc:getID()
 
@@ -268,7 +268,7 @@ end
     end
 end
 
- xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
+xi.beastmentreasure.handleQmOnTrade = function(player, npc, trade, digsiteids)
     local zoneid = player:getZoneID()
     local digsite = getAssignedDigSite(player)
 
@@ -287,7 +287,7 @@ end
     end
 end
 
- xi.beastmentreasure.handleQmOnEventFinish = function(player, csid)
+xi.beastmentreasure.handleQmOnEventFinish = function(player, csid)
     local zoneid = player:getZoneID()
 
     if csid == 105 then
@@ -313,4 +313,4 @@ end
     end
 end
 
- xi.bmt = xi.beastmentreasure
+xi.bmt = xi.beastmentreasure

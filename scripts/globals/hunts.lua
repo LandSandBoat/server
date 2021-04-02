@@ -8,8 +8,8 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/regimes")
 
-tpz = tpz or {}
- xi.hunts = xi.hunts or {}
+xi = xi or {}
+xi.hunts = xi.hunts or {}
 
 local hunts =
 {
@@ -1293,7 +1293,7 @@ function xi.hunts.onEventUpdate(player, csid, option)
     end
 end
 
- xi.hunts.clearHuntVars = function(player)
+xi.hunts.clearHuntVars = function(player)
     player:setCharVar("[hunt]id", 0)
     player:setCharVar("[hunt]status", 0)
 end

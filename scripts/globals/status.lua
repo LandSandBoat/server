@@ -6,13 +6,13 @@ require("scripts/globals/world")
 --
 -- Contains variable-ized definitions of things like core enums for use in lua scripts.
 -----------------------------------
-tpz = tpz or {}
+xi = xi or {}
 
 -----------------------------------
 -- Zone Misc Flags
 -----------------------------------
 
- xi.zoneMisc =
+xi.zoneMisc =
 {
     NONE       = 0x0000, -- Able to be used in any area
     ESCAPE     = 0x0001, -- Ability to use Escape Spell
@@ -33,7 +33,7 @@ tpz = tpz or {}
 -- Job IDs
 -----------------------------------
 
- xi.job =
+xi.job =
 {
     NONE            =  0,
     WAR             =  1,
@@ -59,13 +59,13 @@ tpz = tpz or {}
     GEO             = 21,
     RUN             = 22,
 }
- xi.MAX_JOB_TYPE = 23
+xi.MAX_JOB_TYPE = 23
 
 -----------------------------------
 -- Race IDs
 -----------------------------------
 
- xi.race =
+xi.race =
 {
     HUME_M   = 1,
     HUME_F   = 2,
@@ -81,7 +81,7 @@ tpz = tpz or {}
 -- STATUSES
 -----------------------------------
 
- xi.status =
+xi.status =
 {
     NORMAL          =  0,
     UPDATE          =  1,
@@ -98,7 +98,7 @@ tpz = tpz or {}
 -- additional effects animations from battleentity.h
 -----------------------------------
 
- xi.subEffect =
+xi.subEffect =
 {
     -- ATTACKS
     FIRE_DAMAGE         = 1,   -- 110000        3
@@ -171,7 +171,7 @@ tpz = tpz or {}
 -- They are simply for convenience.
 -----------------------------------
 
- xi.effect =
+xi.effect =
 {
     KO                       = 0,
     WEAKNESS                 = 1,
@@ -841,7 +841,7 @@ tpz = tpz or {}
 -- Effect Flags
 -----------------------------------
 
- xi.effectFlag =
+xi.effectFlag =
 {
     NONE            = 0x0000,
     DISPELABLE      = 0x0001,
@@ -896,7 +896,7 @@ end
 -- Note that the above will ignore base statistics, and that getStat() should be used for stats, Attack, and Defense, while getACC(), getRACC(), and getEVA() also exist.
 -----------------------------------
 
- xi.mod =
+xi.mod =
 {
     NONE                            = 0,
     DEF                             = 1,
@@ -1587,7 +1587,7 @@ end
     -- SPARE = 988, -- stuff
 }
 
- xi.latent =
+xi.latent =
 {
     HP_UNDER_PERCENT         = 0,  -- hp less than or equal to % - PARAM: HP PERCENT
     HP_OVER_PERCENT          = 1,  -- hp more than % - PARAM: HP PERCENT
@@ -1718,7 +1718,7 @@ local MCATEGORY_RUN_2 = 0x0D80
 local MCATEGORY_START = 0x0040
 local MCATEGORY_COUNT = 0x0D80
 
- xi.merit =
+xi.merit =
 {
     -- HP
     MAX_HP                      = MCATEGORY_HP_MP + 0x00,
@@ -2118,7 +2118,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Inventory locations
 -----------------------------------
 
- xi.inventoryLocation =
+xi.inventoryLocation =
 {
     INVENTORY       = 0,
     MOGSAFE         = 1,
@@ -2134,13 +2134,13 @@ local MCATEGORY_COUNT = 0x0D80
     WARDROBE3       = 11,
     WARDROBE4       = 12,
 }
- xi.inv = xi.inventoryLocation
+xi.inv = xi.inventoryLocation
 
 -----------------------------------
 -- Equipment Slots
 -----------------------------------
 
- xi.slot =
+xi.slot =
 {
     MAIN   = 0,
     SUB    = 1,
@@ -2159,13 +2159,13 @@ local MCATEGORY_COUNT = 0x0D80
     RING2  = 14,
     BACK   = 15,
 }
- xi.MAX_SLOTID  = 15
+xi.MAX_SLOTID  = 15
 
 -----------------------------------
 -- Objtype Definitions
 -----------------------------------
 
- xi.objType =
+xi.objType =
 {
     PC     = 0x01,
     NPC    = 0x02,
@@ -2180,7 +2180,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Attack Type
 -----------------------------------
 
- xi.attackType =
+xi.attackType =
 {
     NONE     = 0,
     PHYSICAL = 1,
@@ -2194,7 +2194,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Damage Type
 -----------------------------------
 
- xi.damageType =
+xi.damageType =
 {
     NONE      = 0,
     PIERCING  = 1,
@@ -2225,7 +2225,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Allegiance
 -----------------------------------
 
- xi.allegiance =
+xi.allegiance =
 {
     MOB       = 0,
     PLAYER    = 1,
@@ -2238,7 +2238,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Targetting for auras relative to objtype
 -----------------------------------
 
- xi.auraTarget =
+xi.auraTarget =
 {
     ALLIES  = 0,
     ENEMIES = 1,
@@ -2250,7 +2250,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- always edit both
 -----------------------------------
 
- xi.mobMod =
+xi.mobMod =
 {
     NONE                = 0,
     GIL_MIN             = 1,  -- minimum gil drop -- spawn mod only
@@ -2329,7 +2329,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Job Specials (1hr / 2hr moves)
 -----------------------------------
 
- xi.jobSpecialAbility =
+xi.jobSpecialAbility =
 {
     MIGHTY_STRIKES      = 688,
     MIGHTY_STRIKES_MAAT = 1008,
@@ -2432,13 +2432,13 @@ local MCATEGORY_COUNT = 0x0D80
     -- ELEMENTAL_SFORZO     = 3479,
      BOLSTER              = 3482,
 }
- xi.jsa = xi.jobSpecialAbility
+xi.jsa = xi.jobSpecialAbility
 
 -----------------------------------
 -- Skills
 -----------------------------------
 
- xi.skill =
+xi.skill =
 {
     -- Combat Skills
     NONE = 0,
@@ -2508,7 +2508,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Craft Skill Ranks
 -----------------------------------
 
- xi.craftRank =
+xi.craftRank =
 {
     AMATEUR     = 0,
     RECRUIT     = 1,
@@ -2533,7 +2533,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Recast IDs
 -----------------------------------
 
- xi.recast =
+xi.recast =
 {
     ITEM     = 0,
     MAGIC    = 1,
@@ -2544,7 +2544,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- ACTION IDs
 -----------------------------------
 
- xi.action =
+xi.action =
 {
     NONE                 = 0,
     ATTACK               = 1,
@@ -2584,13 +2584,13 @@ local MCATEGORY_COUNT = 0x0D80
     MOBABILITY_INTERRUPT = 35,
     LEAVE                = 36,
 }
- xi.act = xi.action
+xi.act = xi.action
 
 -----------------------------------
 -- ECOSYSTEM IDs
 -----------------------------------
 
- xi.ecosystem =
+xi.ecosystem =
 {
     ERROR          = 0,
     AMORPH         = 1,
@@ -2615,13 +2615,13 @@ local MCATEGORY_COUNT = 0x0D80
     VERMIN         = 20,
     VORAGEAN       = 21,
 }
- xi.eco = xi.ecosystem
+xi.eco = xi.ecosystem
 
 -----------------------------------
 -- Behavior bits
 -----------------------------------
 
- xi.behavior =
+xi.behavior =
 {
     NONE         = 0x000,
     NO_DESPAWN   = 0x001, -- mob does not despawn on death
@@ -2635,7 +2635,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Elevator IDs
 -----------------------------------
 
- xi.elevator =
+xi.elevator =
 {
     TIMED_AUTOMATIC           = 0,
     DAVOI_LIFT                = 1,
@@ -2647,7 +2647,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Item Type
 -----------------------------------
 
- xi.itemType =
+xi.itemType =
 {
     BASIC       = 0x00,
     GENERAL     = 0x01,
@@ -2664,7 +2664,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Animations
 -----------------------------------
 
- xi.animation =
+xi.animation =
 {
     NONE                    = 0,
     ATTACK                  = 1,
@@ -2703,13 +2703,13 @@ local MCATEGORY_COUNT = 0x0D80
     MOUNT                   = 85,
     -- TRUST                = 90, -- This is the animation for a trust NPC spawning in.
 }
- xi.anim = xi.animation
+xi.anim = xi.animation
 
 -----------------------------------
 -- Mounts
 -----------------------------------
 
- xi.mount =
+xi.mount =
 {
     CHOCOBO        = 0,
     QUEST_RAPTOR   = 1,
@@ -2748,7 +2748,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Automaton Frame IDs
 -----------------------------------
 
- xi.frames =
+xi.frames =
 {
     HARLEQUIN  = 0x20,
     VALOREDGE  = 0x21,
@@ -2760,7 +2760,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Item Check Params
 -----------------------------------
 
- xi.itemCheck =
+xi.itemCheck =
 {
     NONE    = 0,
     EQUIP   = 1,
@@ -2770,7 +2770,7 @@ local MCATEGORY_COUNT = 0x0D80
 -----------------------------------
 -- Emote Values
 -----------------------------------
- xi.emote =
+xi.emote =
 {
     POINT = 0,
     BOW = 1,
@@ -2823,7 +2823,7 @@ local MCATEGORY_COUNT = 0x0D80
     JOB = 74
 }
 
- xi.emoteMode =
+xi.emoteMode =
 {
     ALL = 0,
     TEXT = 1,
@@ -2834,7 +2834,7 @@ local MCATEGORY_COUNT = 0x0D80
 -- Relic/Mythic/Empyrean tables
 -----------------------------------
 
- xi.relicIDs =
+xi.relicIDs =
 {
     SPHARAI       = 0,
     MANDAU        = 1,
@@ -2854,7 +2854,7 @@ local MCATEGORY_COUNT = 0x0D80
     AEGIS         = 15
 }
 
- xi.relicTiers =
+xi.relicTiers =
 {
     [ xi.relicIDs.SPHARAI] =
     {

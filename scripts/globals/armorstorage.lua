@@ -6,8 +6,8 @@
 require("scripts/globals/keyitems")
 -----------------------------------
 
-tpz = tpz or {}
- xi.armorStorage = xi.armorStorage or {}
+xi = xi or {}
+xi.armorStorage = xi.armorStorage or {}
 
 -- {SetId, SetGroup, SetMask, SetCount, Head, Body, Hands, Legs, Feet, StorageCost, KeyItem}
 local armorSets =
@@ -103,7 +103,7 @@ local armorSets =
     89, 2, 0x040000, 2, 0,     11310, 0,     16365, 0,     600,  xi.ki.ARGENT_ATTIRE_CLAIM_SLIP,
 }
 
- xi.armorStorage.onTrade = function(player, trade, deposit)
+xi.armorStorage.onTrade = function(player, trade, deposit)
     local returnValue = false
 
     for i = 1, #armorSets, 11 do
@@ -132,7 +132,7 @@ local armorSets =
     return returnValue
 end
 
- xi.armorStorage.onTrigger = function(player, withdrawal)
+xi.armorStorage.onTrigger = function(player, withdrawal)
     local G1 = 0
     local G2 = 0
     local G3 = 0
@@ -161,7 +161,7 @@ end
     player:startEvent(withdrawal, G1, G2, G3, G4, player:getGil(), G5)
 end
 
- xi.armorStorage.onEventUpdate = function(player, csid, option, withdrawal)
+xi.armorStorage.onEventUpdate = function(player, csid, option, withdrawal)
     if csid == withdrawal then
         player:updateEvent(
             armorSets[option * 11 - 6],
@@ -174,7 +174,7 @@ end
     end
 end
 
- xi.armorStorage.onEventFinish = function(player, csid, option, deposit, withdrawal)
+xi.armorStorage.onEventFinish = function(player, csid, option, deposit, withdrawal)
     if csid == deposit then
         player:tradeComplete()
 

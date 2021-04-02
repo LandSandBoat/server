@@ -7,8 +7,8 @@ require('scripts/globals/zone')
 require('scripts/globals/status')
 -----------------------------------
 
-tpz = tpz or {}
- xi.artisan = xi.artisan or {}
+xi = xi or {}
+xi.artisan = xi.artisan or {}
 
 local event =
 {
@@ -24,7 +24,7 @@ local menuFlags =
     aexpand = 0x2,
 }
 
- xi.artisan.moogleOnTrigger = function(player, npc)
+xi.artisan.moogleOnTrigger = function(player, npc)
     local csid = event[player:getZoneID()]
     local menuMask = 0
     local sackSize = player:getContainerSize(xi.inv.MOGSACK)
@@ -38,7 +38,7 @@ local menuFlags =
     player:startEvent(csid, 0, 0, 0, sackSize, 0, 0, menuMask, mogVisited)
 end
 
- xi.artisan.moogleOnUpdate = function(player, csid, option)
+xi.artisan.moogleOnUpdate = function(player, csid, option)
 
     if option == 1 then -- Buy sack
         if player:getGil() >= 9980 and player:getContainerSize(xi.inv.MOGSACK) == 0 then
@@ -73,7 +73,7 @@ end
     end
 end
 
- xi.artisan.moogleOnFinish = function(player, csid, option)
+xi.artisan.moogleOnFinish = function(player, csid, option)
     local zone = zones[player:getZoneID()]
 
     if option == 99 then -- Get Scroll

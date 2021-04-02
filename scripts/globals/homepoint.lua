@@ -2,8 +2,8 @@ require("scripts/globals/settings")
 require("scripts/globals/teleports")
 -----------------------------------
 
-tpz = tpz or {}
- xi.homepoint = xi.homepoint or {}
+xi = xi or {}
+xi.homepoint = xi.homepoint or {}
 
 local HPs =
 {
@@ -172,7 +172,7 @@ local function goToHP(player, choice, index)
 
 end
 
- xi.homepoint.onTrigger = function(player, csid, index)
+xi.homepoint.onTrigger = function(player, csid, index)
 
     if HOMEPOINT_HEAL == 1 then -- Settings.lua Homepoint Heal enabled
         player:addHP(player:getMaxHP())
@@ -205,7 +205,7 @@ end
 
 end
 
- xi.homepoint.onEventUpdate = function(player, csid, option)
+xi.homepoint.onEventUpdate = function(player, csid, option)
 
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
@@ -255,7 +255,7 @@ end
     end
 end
 
- xi.homepoint.onEventFinish = function(player, csid, option, event)
+xi.homepoint.onEventFinish = function(player, csid, option, event)
 
     if csid == event then
         choice = bit.band(option, 0xFF)

@@ -4,8 +4,8 @@
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 -----------------------------------
-tpz = tpz or {}
- xi.unity = xi.unity or {}
+xi = xi or {}
+xi.unity = xi.unity or {}
 
 -- Table Format: Needs 10 RoE Objectives, All for One not set, All for One set, Unity Joined, Zone Directory Name
 local zoneEventIds =

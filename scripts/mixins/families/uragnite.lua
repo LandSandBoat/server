@@ -14,7 +14,7 @@ params is a table that can contain the following keys:
 
 Example:
 
- xi.mix.uragnite.config(mob, {
+xi.mix.uragnite.config(mob, {
     chanceToShell = 10,
     timeInShellMin = 45,
     timeInShellMin = 60,
@@ -25,9 +25,9 @@ require("scripts/globals/mixins")
 require("scripts/globals/status")
 -----------------------------------
 
-tpz = tpz or {}
- xi.mix = xi.mix or {}
- xi.mix.uragnite = xi.mix.uragnite or {}
+xi = xi or {}
+xi.mix = xi.mix or {}
+xi.mix.uragnite = xi.mix.uragnite or {}
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
@@ -56,7 +56,7 @@ local function exitShell(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
- xi.mix.uragnite.config = function(mob, params)
+xi.mix.uragnite.config = function(mob, params)
     if params.inShellSkillList and type(params.inShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]inShellSkillList", params.inShellSkillList)
     end

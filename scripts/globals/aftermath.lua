@@ -5,11 +5,11 @@ require("scripts/globals/common")
 require("scripts/globals/status")
 require("scripts/globals/weaponskillids")
 
-tpz = tpz or {}
+xi = xi or {}
 
- xi.aftermath = {}
+xi.aftermath = {}
 
- xi.aftermath.type =
+xi.aftermath.type =
 {
     RELIC    = 1,
     MYTHIC   = 2,
@@ -27,7 +27,7 @@ local getTier2RelicDuration = function(tp)
     return math.floor(tp * 0.06)
 end
 
- xi.aftermath.effects =
+xi.aftermath.effects =
 {
     -----------------------------------
     -- Tier 1 Relic
@@ -203,7 +203,7 @@ end
     }
 }
 
- xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
+xi.aftermath.addStatusEffect = function(player, tp, weaponSlot, aftermathType)
     local weapon = player:getStorageItem(0, 0, weaponSlot)
     if not weapon then return end
 
@@ -264,7 +264,7 @@ end
 -- Effect SubPower = TP
 -- Effect Tier = Aftermath Type
 -----------------------------------
- xi.aftermath.onEffectGain = function(target, effect)
+xi.aftermath.onEffectGain = function(target, effect)
     local aftermath = xi.aftermath.effects[effect:getPower()]
     switch (effect:getTier()) : caseof
     {
@@ -300,7 +300,7 @@ end
     }
 end
 
- xi.aftermath.onEffectLose = function(target, effect)
+xi.aftermath.onEffectLose = function(target, effect)
     local aftermath = xi.aftermath.effects[effect:getPower()]
     switch (effect:getTier()) : caseof
     {
@@ -336,7 +336,7 @@ end
     }
 end
 
- xi.aftermath.canOverwrite = function(player, tp, aftermathId, aftermathType)
+xi.aftermath.canOverwrite = function(player, tp, aftermathId, aftermathType)
     local effect = player:getStatusEffect(xi.effect.AFTERMATH)
     if not effect then
         return true

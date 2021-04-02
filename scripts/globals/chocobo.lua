@@ -10,8 +10,8 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.chocobo = xi.chocobo or {}
+xi = xi or {}
+xi.chocobo = xi.chocobo or {}
 
 --[[
 Description:
@@ -73,7 +73,7 @@ end
 -- Public functions
 -----------------------------------
 
- xi.chocobo.initZone = function(zone)
+xi.chocobo.initZone = function(zone)
     local zoneId = zone:getID()
     local info = chocoboInfo[zoneId]
 
@@ -85,7 +85,7 @@ end
     end
 end
 
- xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
+xi.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
     local mLvl   = player:getMainLvl()
     local zoneId = player:getZoneID()
     local info   = chocoboInfo[zoneId]
@@ -113,7 +113,7 @@ end
     end
 end
 
- xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
+xi.chocobo.renterOnEventFinish = function(player, csid, option, eventSucceed)
     if csid == eventSucceed and option == 0 then
         local mLvl   = player:getMainLvl()
         local zoneId = player:getZoneID()

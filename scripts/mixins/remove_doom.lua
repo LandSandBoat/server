@@ -6,13 +6,13 @@ require("scripts/globals/mixins")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 
-tpz = tpz or {}
- xi.mix = xi.mix or {}
- xi.mix.clear_doom = xi.mix.clear_doom or {}
+xi = xi or {}
+xi.mix = xi.mix or {}
+xi.mix.clear_doom = xi.mix.clear_doom or {}
 
 g_mixins = g_mixins or {}
 
- xi.mix.clear_doom.config = function(mob, params)
+xi.mix.clear_doom.config = function(mob, params)
     if params.doomRemovalChance and type(params.doomRemovalChance) == "number" then
         mob:setLocalVar("[remove_doom]removalChance", params.doomRemovalChance)
     end

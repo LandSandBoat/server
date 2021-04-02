@@ -7,9 +7,9 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
-tpz = tpz or {}
- xi.magian = xi.magian or {}
- xi.magian.trialCache = xi.magian.trialCache or {}
+xi = xi or {}
+xi.magian = xi.magian or {}
+xi.magian.trialCache = xi.magian.trialCache or {}
 
 -- creates table to track trial and progress per trial slot
 local function getPlayerTrials(player)
@@ -225,13 +225,13 @@ end
 -- Delivery Crate
 -----------------------------------
 
- xi.magian.deliveryCrateOnTrigger = function(player, npc)
+xi.magian.deliveryCrateOnTrigger = function(player, npc)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
     player:messageSpecial(msg.DELIVERY_CRATE_TEXT, itemId)
 end
 
- xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
+xi.magian.deliveryCrateOnTrade = function(player, npc, trade)
     -- items = parts of stuff
     -- itemsTrial = items for trial
     local items, itemsTrial = getItemsInTrade(trade)
@@ -296,7 +296,7 @@ end
     returnUselessItems(player, items, currentItem.id)
 end
 
- xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
+xi.magian.deliveryCrateOnEventUpdate = function(player, csid, option)
     local optionMod = bit.band(option, 0xFF)
     local itemTrialId = player:getLocalVar("storeItemTrialId")
     local nbTrialsPlayer = player:getLocalVar("storeNbTrialsPlayer")
@@ -315,7 +315,7 @@ end
 
 end
 
- xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
+xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
     local optionMod = bit.band(option, 0xFF)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text
@@ -347,7 +347,7 @@ end
 end
 
 -- increments progress if conditions are met
- xi.magian.checkMagianTrial = function(player, conditions)
+xi.magian.checkMagianTrial = function(player, conditions)
     for _, slot in pairs( { xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
@@ -360,7 +360,7 @@ end
 -- Magian Orange / Blue
 -----------------------------------
 
- xi.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
+xi.magian.magianOnTrigger = function(player, npc, EVENT_IDS)
     local p, t = parseParams(player)
 
     if EVENT_IDS[1] and player:getMainLvl() < 75 then
@@ -374,7 +374,7 @@ end
     end
 end
 
- xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
+xi.magian.magianOnTrade = function(player, npc, trade, TYPE, EVENT_IDS)
     local itemId = trade:getItemId()
     local item = trade:getItem()
     local matchId = item:getMatchingTrials()
@@ -431,7 +431,7 @@ end
 
 local rareItems = set{ 16192, 18574, 19397, 19398, 19399, 19400, 19401, 19402, 19403, 19404, 19405, 19406, 19407, 19408, 19409, 19410 }
 
- xi.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
+xi.magian.magianEventUpdate = function(player, itemId, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
 
     if (csid == EVENT_IDS[3] or csid == EVENT_IDS[4] or csid == EVENT_IDS[5]) and optionMod == 1 then
@@ -519,7 +519,7 @@ local rareItems = set{ 16192, 18574, 19397, 19398, 19399, 19400, 19401, 19402, 1
     end
 end
 
- xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS)
+xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS)
     local optionMod = bit.band(option, 0xFF)
     local zoneid = player:getZoneID()
     local msg = zones[zoneid].text

@@ -7,8 +7,8 @@ require("scripts/globals/common")
 -- This is a table of anon function for Magian Trial objectives/conditions.
 -- Keyed by trial ID, if they return true, the trials progress is incremented and saved.
 
-tpz = tpz or {}
- xi.magian = xi.magian or {}
+xi = xi or {}
+xi.magian = xi.magian or {}
 local checks = {}
 
 checks.checkMobKill = function(reqs, params)
@@ -41,7 +41,7 @@ checks.checkTradeTrials = function(self, player, params)
     return self.reqs.itemId[params.itemId] ~= nil and params.quantity or 0
 end
 
- xi.magian.trials =
+xi.magian.trials =
 {
 [   2] = { check = checks.checkTrials, reqs = { mobid = set{ 17563801 } } }, -- Nocuous Weapon
 [   3] = { check = checks.checkTrials, reqs = { mobid = set{ 17227972, 17227992 } } }, -- Black Triple Stars

@@ -6,8 +6,8 @@ require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
 
-tpz = tpz or {}
- xi.manaclipper = xi.manaclipper or {}
+xi = xi or {}
+xi.manaclipper = xi.manaclipper or {}
 
 local act =
 {
@@ -25,7 +25,7 @@ local dest =
 }
 
 -- locations for timekeeper NPCs
- xi.manaclipper.location =
+xi.manaclipper.location =
 {
     SUNSET_DOCKS    = 0,
     PURGONORGO_ISLE = 1,
@@ -66,7 +66,7 @@ local manaclipperSchedule =
     },
 }
 
- xi.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
+xi.manaclipper.timekeeperOnTrigger = function(player, location, eventId)
     local schedule = manaclipperSchedule[location]
 
     if schedule then
@@ -95,11 +95,11 @@ local manaclipperSchedule =
     end
 end
 
- xi.manaclipper.aboard = function(player, regionId, isAboard)
+xi.manaclipper.aboard = function(player, regionId, isAboard)
     player:setCharVar("[manaclipper]aboard", isAboard and regionId or 0)
 end
 
- xi.manaclipper.onZoneIn = function(player)
+xi.manaclipper.onZoneIn = function(player)
     local zoneId = player:getZoneID()
 
     -- zoning onto manaclipper. set [manaclipper]arrivalEventId based on schedule.
@@ -135,7 +135,7 @@ end
     end
 end
 
- xi.manaclipper.onTransportEvent = function(player, transport)
+xi.manaclipper.onTransportEvent = function(player, transport)
     local ID = zones[player:getZoneID()]
     local aboard = player:getCharVar("[manaclipper]aboard")
 

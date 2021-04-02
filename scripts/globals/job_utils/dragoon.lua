@@ -7,9 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 -----------------------------------
-tpz = tpz or {}
- xi.job_utils = xi.job_utils or {}
- xi.job_utils.dragoon = xi.job_utils.dragoon or {}
+xi = xi or {}
+xi.job_utils = xi.job_utils or {}
+xi.job_utils.dragoon = xi.job_utils.dragoon or {}
 -----------------------------------
 
 -- Returns a table of WS Parameters common to all damage-dealing jumps
@@ -111,7 +111,7 @@ end
 
 -- Ability Check Functions
 -- Note: This does not include Always-Allow abilitys (return 0, 0 by default)
- xi.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability)
+xi.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability)
     if not hasWyvern(target) then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
@@ -119,7 +119,7 @@ end
     end
 end
 
- xi.job_utils.dragoon.abilityCheckCallWyvern = function(player, target, ability)
+xi.job_utils.dragoon.abilityCheckCallWyvern = function(player, target, ability)
     if player:getPet() ~= nil then
          return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif player:hasStatusEffect(xi.effect.SPIRIT_SURGE) then
@@ -131,7 +131,7 @@ end
     end
 end
 
- xi.job_utils.dragoon.abilityCheckSpiritLink = function(player, target, ability)
+xi.job_utils.dragoon.abilityCheckSpiritLink = function(player, target, ability)
     local pet = player:getPet()
 
     if not hasWyvern(player) then
@@ -148,7 +148,7 @@ end
     end
 end
 
- xi.job_utils.dragoon.abilityCheckDeepBreathing = function(player, target, ability)
+xi.job_utils.dragoon.abilityCheckDeepBreathing = function(player, target, ability)
     if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif not hasWyvern(player) then
@@ -158,7 +158,7 @@ end
     end
 end
 
- xi.job_utils.dragoon.abilityCheckAngon = function(player, target, ability)
+xi.job_utils.dragoon.abilityCheckAngon = function(player, target, ability)
     local id = player:getEquipID(xi.slot.AMMO)
 
     if id == 18259 then
@@ -168,7 +168,7 @@ end
     end
 end
 
- xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
+xi.job_utils.dragoon.useSpiritSurge = function(player, target, ability)
     local pet = player:getPet()
     local petTP = pet:getTP()
     local duration = 60
@@ -199,16 +199,16 @@ end
     target:addStatusEffect(xi.effect.SPIRIT_SURGE, mhp_boost, 0, duration, 0, strBoost)
 end
 
- xi.job_utils.dragoon.useCallWyvern = function(player, target, ability)
+xi.job_utils.dragoon.useCallWyvern = function(player, target, ability)
     xi.pet.spawnPet(player, xi.pet.id.WYVERN)
 end
 
- xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
+xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.ANCIENT_CIRCLE_DURATION)
     target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, 15, 0, duration)
 end
 
- xi.job_utils.dragoon.useJump = function(player, target, ability, action)
+xi.job_utils.dragoon.useJump = function(player, target, ability, action)
     local atkMultiplier = (player:getMod(xi.mod.JUMP_ATT_BONUS) + 100) / 100
     local params = getJumpWSParams(player, atkMultiplier, nil)
     local damage, totalHits = performWSJump(player, target, action, params)
@@ -225,7 +225,7 @@ end
     return damage
 end
 
- xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
+xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local pet = player:getPet()
     local playerHP = player:getHP()
     local drainamount = (math.random(25, 35) / 100) * playerHP
@@ -314,7 +314,7 @@ end
     pet:delTP(petTP / 2) -- remove half tp from pet
 end
 
- xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
+xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
     local params = getJumpWSParams(player, 1, 0)
     local damage, totalHits = performWSJump(player, target, action, params)
 
@@ -338,7 +338,7 @@ end
     return damage
 end
 
- xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
+xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
     -- Reduce 99% of total accumulated enmity
     if target:isMob() then
         target:lowerEnmity(player, 99)
@@ -361,7 +361,7 @@ end
     end
 end
 
- xi.job_utils.dragoon.useAngon = function(player, target, ability)
+xi.job_utils.dragoon.useAngon = function(player, target, ability)
     local typeEffect = xi.effect.DEFENSE_DOWN
     local duration = 15 + player:getMerit(xi.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
 
@@ -375,16 +375,16 @@ end
     return typeEffect
 end
 
- xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
+xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
    local wyvern = getWyvern(player)
    wyvern:addStatusEffect(xi.effect.MAGIC_ATK_BOOST, 0, 0, 180) -- Message when effect is lost is "Magic Attack boost wears off."
 end
 
- xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
+xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
     player:addStatusEffect(xi.effect.SPIRIT_BOND, 14, 0, 60)
 end
 
- xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
+xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)
     local atkMultiplier = (player:getMod(xi.mod.JUMP_ATT_BONUS) + 100) / 100
     local params = getJumpWSParams(player, atkMultiplier, nil)
     local damage, totalHits = performWSJump(player, target, action, params)
@@ -397,7 +397,7 @@ end
     return damage
 end
 
- xi.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
+xi.job_utils.dragoon.useSoulJump = function(player, target, ability, action)
     local params = getJumpWSParams(player, 1, 0)
     local damage, totalHits = performWSJump(player, target, action, params)
 
@@ -409,10 +409,10 @@ end
     return damage
 end
 
- xi.job_utils.dragoon.useDragonBreaker = function(player, target, ability)
+xi.job_utils.dragoon.useDragonBreaker = function(player, target, ability)
     player:addStatusEffect(xi.effect.DRAGON_BREAKER, 14, 0, 180)
 end
 
- xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
+xi.job_utils.dragoon.useFlyHigh = function(player, target, ability)
     player:addStatusEffect(xi.effect.FLY_HIGH, 14, 0, 30)
 end

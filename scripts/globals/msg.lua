@@ -1,14 +1,14 @@
 -----------------------------------
 -- This file holds all global (not zone specific) text references
 -----------------------------------
-tpz = tpz or {}
- xi.msg = xi.msg or {}
+xi = xi or {}
+xi.msg = xi.msg or {}
 
 -----------------------------------
 -- Message Channels
 -----------------------------------
 
- xi.msg.channel =
+xi.msg.channel =
 {
     SAY            = 0,
     SHOUT          = 1,
@@ -46,7 +46,7 @@ tpz = tpz or {}
 }
 
 -- used by PrintToArea
- xi.msg.area =
+xi.msg.area =
 {
     SYSTEM      = 0, -- Server wide like the purple stuff :)
     SAY         = 1, -- Will display in small area around player
@@ -59,7 +59,7 @@ tpz = tpz or {}
 -- Basic Messages
 -----------------------------------
 
- xi.msg.basic =
+xi.msg.basic =
 {
     NONE    = 0, -- Display nothing
     HIT_DMG = 1, -- <actor> hits <target> for <amount> points of damage.
@@ -350,7 +350,7 @@ tpz = tpz or {}
 -- System Messages
 -----------------------------------
 
- xi.msg.system =
+xi.msg.system =
 {
     GLOBAL_TRUST_OFFSET          = 0,
     TRUST_NO_SEEKING_PARTY       = 296, -- You cannot use Trust magic while seeking a party.

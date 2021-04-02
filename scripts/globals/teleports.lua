@@ -4,8 +4,8 @@
 require("scripts/globals/settings")
 require("scripts/globals/zone")
 
-tpz = tpz or {}
- xi.teleport = xi.teleport or {}
+xi = xi or {}
+xi.teleport = xi.teleport or {}
 
 -----------------------------------
 -- TELEPORT IDS
@@ -80,7 +80,7 @@ local ids =
     ESCHA_RUAUN           = 66,
     MISAREAUX_CONFLUENCE  = 67
 }
- xi.teleport.id = ids
+xi.teleport.id = ids
 
 -----------------------------------
 -- TELEPORT TO SINGLE DESTINATION
@@ -151,7 +151,7 @@ local destinations =
     [ids.MISAREAUX_CONFLUENCE]  = { -57.385,  -21.460,  568.941, 160,  25}
 }
 
- xi.teleport.type =
+xi.teleport.type =
 {
     OUTPOST_SANDORIA   = 0,
     OUTPOST_BASTOK     = 1,
@@ -166,7 +166,7 @@ local destinations =
     SURVIVAL           = 10
 }
 
- xi.teleport.runic_portal =
+xi.teleport.runic_portal =
 {
     AZOUPH  = 1,
     DVUCCA  = 2,
@@ -176,7 +176,7 @@ local destinations =
     NYZUL   = 6,
 }
 
- xi.teleport.to = function(player, destination)
+xi.teleport.to = function(player, destination)
     local dest = destinations[destination]
     if dest then
         player:setPos(unpack(dest))
@@ -187,7 +187,7 @@ end
 -- TELEPORT TO PARTY LEADER
 -----------------------------------
 
- xi.teleport.toLeader = function(player)
+xi.teleport.toLeader = function(player)
     local leader = player:getPartyLeader()
     if leader ~= nil and not leader:isInMogHouse() then
         player:gotoPlayer(leader:getName())
@@ -222,7 +222,7 @@ local campaignDestinations =
     [20] = { 294.350, -27.500,   19.947,   0, 175}, -- {R} The Eldieme Necropolis [S]
 }
 
- xi.teleport.toCampaign = function(player, option)
+xi.teleport.toCampaign = function(player, option)
     local dest = campaignDestinations[option]
     if dest then
         player:setPos(unpack(dest))
@@ -266,7 +266,7 @@ local outpostDestinations =
     [ xi.region.TAVNAZIANARCH]   = {-535.861,  -7.149,  -53.628, 122,  24}, -- Tavnazia {R}
 }
 
- xi.teleport.toOutpost = function(player, region)
+xi.teleport.toOutpost = function(player, region)
     local dest = outpostDestinations[region]
     player:setPos(unpack(dest))
 end
@@ -275,7 +275,7 @@ end
 -- TELEPORT TO HOME NATION
 -----------------------------------
 
- xi.teleport.toHomeNation = function(player)
+xi.teleport.toHomeNation = function(player)
     local pNation = player:getNation()
     if pNation == xi.nation.BASTOK then
         player:setPos(89, 0 , -66, 0, 234)
@@ -290,7 +290,7 @@ end
 -- TELEPORT TO ALLIED NATION
 -----------------------------------
 
- xi.teleport.toAlliedNation = function(player)
+xi.teleport.toAlliedNation = function(player)
     local Allegiance = player:getCampaignAllegiance()
     local sandoriaPos = destinations[ids.SOUTHERN_SAN_DORIA_S]
     local bastokPos = destinations[ids.BASTOK_MARKETS_S]
@@ -308,7 +308,7 @@ end
 -- TELEPORT TO CHAMBER OF PASSAGE
 -----------------------------------
 
- xi.teleport.toChamberOfPassage = function(player)
+xi.teleport.toChamberOfPassage = function(player)
     if math.random(1, 2) == 1 then
         player:setPos(133.400, 1.485, 47.427, 96, 50) -- {R} Aht Urhgan Whitegate Chamber of Passage Left
     else
@@ -320,7 +320,7 @@ end
 -- TELEPORT TO EXPLORER MOOGLE
 -----------------------------------
 
- xi.teleport.toExplorerMoogle = function(player, zone)
+xi.teleport.toExplorerMoogle = function(player, zone)
     if zone == 231 then
         player:setPos(39.4, -0.2, 25, 253, zone)       -- Northern_San_d'Oria
     elseif zone == 234 then
@@ -338,7 +338,7 @@ end
 -- CAST ESCAPE SPELL
 -----------------------------------
 
- xi.teleport.escape = function(player)
+xi.teleport.escape = function(player)
     local zone = player:getZoneID()
 
     -- Ronfaure {R}
@@ -509,7 +509,7 @@ end
 -- EXPLORER MOOGLE EVENTS
 -----------------------------------
 
- xi.teleport.explorerMoogleOnTrigger = function(player, event)
+xi.teleport.explorerMoogleOnTrigger = function(player, event)
     local accept = 0
 
     if player:getGil() < 300 then
@@ -523,7 +523,7 @@ end
     player:startEvent(event, player:getZoneID(), 0, accept)
 end
 
- xi.teleport.explorerMoogleOnEventFinish = function(player, csid, option, event)
+xi.teleport.explorerMoogleOnEventFinish = function(player, csid, option, event)
     local price = 300
 
     if csid == event then

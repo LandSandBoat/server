@@ -5,10 +5,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
 
-tpz = tpz or {}
- xi.geomagneticFount = xi.geomagneticFount or {}
+xi = xi or {}
+xi.geomagneticFount = xi.geomagneticFount or {}
 
- xi.geomagneticFount.checkFount = function(player, npc)
+xi.geomagneticFount.checkFount = function(player, npc)
     local theGeomagnetron = player:getCurrentMission(SOA) == xi.mission.id.soa.THE_GEOMAGNETRON
     local charged = player:getCharVar("SOA") == 1
 

@@ -6,13 +6,13 @@ require("scripts/globals/msg")
 require("scripts/globals/quests")
 -----------------------------------
 
-tpz = tpz or {}
- xi.roe = xi.roe or {}
+xi = xi or {}
+xi.roe = xi.roe or {}
 
 -----------------------------------
 -- Leaders
 -----------------------------------
- xi.roe.leaders =
+xi.roe.leaders =
 {
     NONE              = 0,
     PIEUJE            = 1,
@@ -32,7 +32,7 @@ tpz = tpz or {}
 -- Triggers
 -----------------------------------
 
- xi.roe.triggers =
+xi.roe.triggers =
 {
     mobKill = 1,            -- Player kills a Mob (Counts for mobs killed by partymembers)
     wSkillUse = 2,          -- Player Weapon skill used

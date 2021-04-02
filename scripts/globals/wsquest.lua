@@ -3,8 +3,8 @@ require('scripts/globals/quests')
 require('scripts/globals/status')
 require('scripts/globals/weaponskillids')
 
-tpz = tpz or {}
- xi.wsquest =
+xi = xi or {}
+xi.wsquest =
 {
     -----------------------------------
     -- Quest: The Walls of Your Mind
@@ -471,7 +471,7 @@ local function getQuestState(quest, player)
     return nil
 end
 
- xi.wsquest.getTradeEvent = function(quest, player, trade)
+xi.wsquest.getTradeEvent = function(quest, player, trade)
     local wsPoints = (trade:getItem(0):getWeaponskillPoints())
     if getQuestState(quest, player) == WSQUEST_CONT1 and trade:hasItemQty(quest.trialWeaponId, 1) and trade:getItemCount() == 1 then
         if wsPoints < 300 then
@@ -484,7 +484,7 @@ end
     return nil
 end
 
- xi.wsquest.getTriggerEvent = function(quest, player)
+xi.wsquest.getTriggerEvent = function(quest, player)
     local state = getQuestState(quest, player)
 
     if state == WSQUEST_START then
@@ -500,7 +500,7 @@ end
     return nil
 end
 
- xi.wsquest.handleQmTrigger = function(quest, player, wsnmId)
+xi.wsquest.handleQmTrigger = function(quest, player, wsnmId)
     local ID = zones[player:getZoneID()]
     if getQuestState(quest, player) == WSQUEST_CONT2 then
         if player:getLocalVar('killed_wsnm') == 1 then
@@ -515,13 +515,13 @@ end
     end
 end
 
- xi.wsquest.handleWsnmDeath = function(quest, player)
+xi.wsquest.handleWsnmDeath = function(quest, player)
     if getQuestState(quest, player) == WSQUEST_CONT2 then
         player:setLocalVar('killed_wsnm', 1)
     end
 end
 
- xi.wsquest.handleEventFinish = function(quest, player, csid, option, learnedId)
+xi.wsquest.handleEventFinish = function(quest, player, csid, option, learnedId)
     if csid == quest.eventIds.start then -- WS Quest start
         if quest.options.acceptStart == nil or option == quest.options.acceptStart then
             if player:getFreeSlotsCount() < 1 then

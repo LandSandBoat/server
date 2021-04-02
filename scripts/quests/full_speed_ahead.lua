@@ -25,15 +25,15 @@ FULL_SPEED_AHEAD effect power:
 1 : Easy Mode
 ]]--
 
-tpz = tpz or {}
- xi.full_speed_ahead = xi.full_speed_ahead or {}
+xi = xi or {}
+xi.full_speed_ahead = xi.full_speed_ahead or {}
 
- xi.full_speed_ahead.duration = 600
- xi.full_speed_ahead.motivation_decay = 2
- xi.full_speed_ahead.motivation_food_bonus = 15
- xi.full_speed_ahead.pep_growth = 1
+xi.full_speed_ahead.duration = 600
+xi.full_speed_ahead.motivation_decay = 2
+xi.full_speed_ahead.motivation_food_bonus = 15
+xi.full_speed_ahead.pep_growth = 1
 
- xi.full_speed_ahead.onEffectGain = function(player, effect)
+xi.full_speed_ahead.onEffectGain = function(player, effect)
     player:setLocalVar("FSA_Time", os.time() + xi.full_speed_ahead.duration)
     player:setLocalVar("FSA_Motivation", 100)
     player:setLocalVar("FSA_Pep", 0)
@@ -43,7 +43,7 @@ tpz = tpz or {}
     player:setCharVar("[QUEST]FullSpeedAhead", 3)
 end
 
- xi.full_speed_ahead.onEffectLose = function(player, effect)
+xi.full_speed_ahead.onEffectLose = function(player, effect)
     player:delStatusEffectSilent(xi.effect.MOUNTED)
     player:countdown(0)
     player:enableEntities({})
@@ -54,7 +54,7 @@ end
     end
 end
 
- xi.full_speed_ahead.tick = function(player, effect)
+xi.full_speed_ahead.tick = function(player, effect)
     player:setLocalVar("FSA_Motivation", player:getLocalVar("FSA_Motivation") - xi.full_speed_ahead.motivation_decay + effect:getPower())
     player:setLocalVar("FSA_Pep", player:getLocalVar("FSA_Pep") + xi.full_speed_ahead.pep_growth + effect:getPower())
 
@@ -80,7 +80,7 @@ end
     end
 end
 
- xi.full_speed_ahead.onRegionEnter = function(player, index)
+xi.full_speed_ahead.onRegionEnter = function(player, index)
     local food_byte = player:getLocalVar("FSA_Food")
     local food_count = player:getLocalVar("FSA_FoodCount")
     local motivation = player:getLocalVar("FSA_Motivation")
@@ -107,7 +107,7 @@ end
     end
 end
 
- xi.full_speed_ahead.onCheer = function(player)
+xi.full_speed_ahead.onCheer = function(player)
     local timeLeft = player:getLocalVar("FSA_Time") - os.time()
     local motivation = player:getLocalVar("FSA_Motivation")
     local pep = player:getLocalVar("FSA_Pep")
@@ -125,10 +125,10 @@ end
     player:countdown(timeLeft, "Motivation", new_motivation, "Pep", 0)
 end
 
- xi.full_speed_ahead.completeGame = function(player)
+xi.full_speed_ahead.completeGame = function(player)
     player:setCharVar("[QUEST]FullSpeedAhead", 4)
     player:delStatusEffectSilent(xi.effect.FULL_SPEED_AHEAD)
     player:setPos(-104.5, 0, 187.4, 64, 244)
 end
 
- xi.fsa = xi.full_speed_ahead
+xi.fsa = xi.full_speed_ahead

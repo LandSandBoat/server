@@ -3,8 +3,8 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 
-tpz = tpz or {}
- xi.matrimonialcoffer = xi.matrimonialcoffer or {}
+xi = xi or {}
+xi.matrimonialcoffer = xi.matrimonialcoffer or {}
 
 function xi.matrimonialcoffer.startEvent(player)
     local playerGender = player:getGender()

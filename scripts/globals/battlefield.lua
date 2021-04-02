@@ -1,6 +1,6 @@
 require("scripts/globals/msg")
 
-tpz = tpz or {}
+xi = xi or {}
 
 local MaxAreas =
 {
@@ -30,9 +30,9 @@ end
 
 
 
- xi.battlefield = {}
+xi.battlefield = {}
 
- xi.battlefield.status =
+xi.battlefield.status =
 {
     OPEN     = 0,
     LOCKED   = 1,
@@ -40,7 +40,7 @@ end
     LOST     = 3,
 }
 
- xi.battlefield.returnCode =
+xi.battlefield.returnCode =
 {
     WAIT              = 1,
     CUTSCENE          = 2,
@@ -50,7 +50,7 @@ end
     BATTLEFIELD_FULL  = 6
 }
 
- xi.battlefield.leaveCode =
+xi.battlefield.leaveCode =
 {
     EXIT = 1,
     WON = 2,

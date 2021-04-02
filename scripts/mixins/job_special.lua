@@ -20,13 +20,13 @@ params is a table that can contain the following keys:
 Examples:
 
 -- mob has a 50% chance to use its special, and if it does it will wait at least a minute (note: it must still be below its default HPP trigger)
- xi.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     chance = 50,
     delay  = 60,
 })
 
 -- mob will use its special at the start of fight (100 HPP), and every 60 seconds thereafter.
- xi.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     specials =
     {
         {id = xi.jsa.MEIKYO_SHISUI, cooldown = 60, hpp = 100},
@@ -34,7 +34,7 @@ Examples:
 })
 
 -- mob will use Mighty Strikes immediately, but the effect will only last 10 seconds
- xi.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     specials =
     {
         {id = xi.jsa.MIGHTY_STRIKES, duration = 10, hpp = 100},
@@ -45,7 +45,7 @@ Examples:
 -- Manafont will only be used under 75% HP.  Chainspell will only be used under 25% HP.
 -- 30 seconds must elapse between the two specials, no matter how fast you take it down to 25% HP.
 -- There's a 50% chance it will not use a special at all.
- xi.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     between = 30,
     chance = 50,
     specials =
@@ -56,7 +56,7 @@ Examples:
 })
 
 -- every 20 seconds the mob will pick one of its three specials, which are always ready (no cooldown, and 100% HPP trigger), and use it.
- xi.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     between = 20,
     specials =
     {
@@ -67,7 +67,7 @@ Examples:
 })
 
 -- mob will use Perfect Dodge at 30% HP. before and after its use, it will make a sassy remark.
- xi.mix.jobSpecial.config(mob, {
+xi.mix.jobSpecial.config(mob, {
     specials =
     {
         {
@@ -88,9 +88,9 @@ require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 
-tpz = tpz or {}
- xi.mix = xi.mix or {}
- xi.mix.jobSpecial = xi.mix.jobSpecial or {}
+xi = xi or {}
+xi.mix = xi.mix or {}
+xi.mix.jobSpecial = xi.mix.jobSpecial or {}
 
 g_mixins = g_mixins or {}
 
@@ -176,7 +176,7 @@ local effectByAbility =
 -- [ xi.jsa.ELEMENTAL_SFORZO] = xi.effect.ELEMENTAL_SFORZO,
 }
 
- xi.mix.jobSpecial.config = function(mob, params)
+xi.mix.jobSpecial.config = function(mob, params)
     if params.between and type(params.between) == "number" then
         mob:setLocalVar("[jobSpecial]between", utils.clamp(params.between, 0))
     end

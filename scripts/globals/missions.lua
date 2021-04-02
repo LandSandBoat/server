@@ -2,10 +2,10 @@ require("scripts/globals/keyitems")
 require("scripts/globals/log_ids")
 require("scripts/globals/zone")
 
-tpz = tpz or {}
- xi.mission = xi.mission or {}
+xi = xi or {}
+xi.mission = xi.mission or {}
 
- xi.mission.log_id =
+xi.mission.log_id =
 {
     SANDORIA    =  0,
     BASTOK      =  1,
@@ -23,7 +23,7 @@ tpz = tpz or {}
     ROV         = 13,
 }
 
- xi.mission.area =
+xi.mission.area =
 {
     [ xi.mission.log_id.SANDORIA]    = 'sandoria',
     [ xi.mission.log_id.BASTOK]      = 'bastok',
@@ -41,7 +41,7 @@ tpz = tpz or {}
     [ xi.mission.log_id.ROV]         = 'rov',
 }
 
- xi.mission.logEx =
+xi.mission.logEx =
 {
     -- Chains of Promathia
     SANDORIA   = 0,
@@ -51,7 +51,7 @@ tpz = tpz or {}
     ULMIA      = 4,
 }
 
- xi.mission.id =
+xi.mission.id =
 {
     -----------------------------------
     --  All Nations

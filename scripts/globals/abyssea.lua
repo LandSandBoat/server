@@ -9,8 +9,8 @@ require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/zone")
 
-tpz = tpz or {}
- xi.abyssea = xi.abyssea or {}
+xi = xi or {}
+xi.abyssea = xi.abyssea or {}
 
 -----------------------------------
 -- local data
@@ -85,7 +85,7 @@ local popEvents =
 -----------------------------------
 
 -- returns Traverser Stone KI cap
- xi.abyssea.getMaxTravStones = function(player)
+xi.abyssea.getMaxTravStones = function(player)
     local stones = 3
 
     for ki = xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE, xi.ki.VERMILLION_ABYSSITE_OF_AVARICE do
@@ -99,7 +99,7 @@ end
 
 -- returns total Traverser Stone KI
 -- (NOT the reserve value from currency menu)
- xi.abyssea.getTravStonesTotal = function(player)
+xi.abyssea.getTravStonesTotal = function(player)
     local stones = 0
 
     for ki = xi.ki.TRAVERSER_STONE1, xi.ki.TRAVERSER_STONE6 do
@@ -112,7 +112,7 @@ end
 end
 
 -- removes Traverser Stone KIs
- xi.abyssea.spendTravStones = function(player, spentstones)
+xi.abyssea.spendTravStones = function(player, spentstones)
     if spentstones == 4 then
         if player:hasKeyItem(xi.ki.TRAVERSER_STONE6) then
             spentstones = 3
@@ -197,7 +197,7 @@ end
 end
 
 -- returns total "Abyssite of <thing>"
- xi.abyssea.getAbyssiteTotal = function(player, abyssite)
+xi.abyssea.getAbyssiteTotal = function(player, abyssite)
     local sojourn = 0
     local furtherance = 0
     local merit = 0
@@ -227,7 +227,7 @@ end
 end
 
 -- returns total value of Demulune KeyItems
- xi.abyssea.getDemiluneAbyssite = function(player)
+xi.abyssea.getDemiluneAbyssite = function(player)
     local demilune = 0
     -- Todo: change this into proper bitmask
     if player:hasKeyItem(xi.ki.CLEAR_DEMILUNE_ABYSSITE) then
@@ -266,7 +266,7 @@ end
     return demilune
 end
 
- xi.abyssea.getNewYellowWeakness = function(mob)
+xi.abyssea.getNewYellowWeakness = function(mob)
     local day = VanadielDayOfTheWeek()
     local weakness = math.random(day - 1, day + 1)
 
@@ -275,11 +275,11 @@ end
     return yellowWeakness[element][math.random(#yellowWeakness[element])]
 end
 
- xi.abyssea.getNewRedWeakness = function(mob)
+xi.abyssea.getNewRedWeakness = function(mob)
     return redWeakness[math.random(#redWeakness)]
 end
 
- xi.abyssea.getNewBlueWeakness = function(mob)
+xi.abyssea.getNewBlueWeakness = function(mob)
     local time = VanadielHour()
     local table = 3
 
@@ -293,7 +293,7 @@ end
 end
 
 -- trade to QM to pop mob
- xi.abyssea.qmOnTrade = function(player, npc, trade)
+xi.abyssea.qmOnTrade = function(player, npc, trade)
     -- validate QM pop data
     local zoneId = player:getZoneID()
     local pop = zones[zoneId].npc.QM_POPS[npc:getID()] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table
@@ -330,7 +330,7 @@ end
     return true
 end
 
- xi.abyssea.qmOnTrigger = function(player, npc)
+xi.abyssea.qmOnTrigger = function(player, npc)
     -- validate QM pop data
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
@@ -390,11 +390,11 @@ end
     end
 end
 
- xi.abyssea.qmOnEventUpdate = function(player, csid, option)
+xi.abyssea.qmOnEventUpdate = function(player, csid, option)
     return false
 end
 
- xi.abyssea.qmOnEventFinish = function(player, csid, option)
+xi.abyssea.qmOnEventFinish = function(player, csid, option)
     local zoneId = player:getZoneID()
     local events = popEvents[zoneId]
     local pop = zones[zoneId].npc.QM_POPS[player:getLocalVar("abysseaQM")] -- TODO: Once I (Wren) finish entity-QC on all Abyssea zones, I must adjust the format of QM_POPS table

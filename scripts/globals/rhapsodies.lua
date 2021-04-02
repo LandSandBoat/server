@@ -4,10 +4,10 @@ require("scripts/globals/common")
 require("scripts/globals/status")
 -----------------------------------
 
-tpz = tpz or {}
- xi.rhapsodies = xi.rhapsodies or {}
+xi = xi or {}
+xi.rhapsodies = xi.rhapsodies or {}
 
- xi.rhapsodies.character = {
+xi.rhapsodies.character = {
     PRISHE     = 0,
     TENZEN     = 1,
     APHMAU     = 2,
@@ -16,7 +16,7 @@ tpz = tpz or {}
     ARCIELA    = 5,
 }
 
- xi.rhapsodies.expansion =
+xi.rhapsodies.expansion =
 {
     [ xi.rhapsodies.character.PRISHE]     = COP,
     [ xi.rhapsodies.character.TENZEN]     = COP,
@@ -26,7 +26,7 @@ tpz = tpz or {}
     [ xi.rhapsodies.character.ARCIELA]    = SOA,
 }
 
- xi.rhapsodies.unavailability =
+xi.rhapsodies.unavailability =
 {
     [ xi.rhapsodies.character.PRISHE] = set{
        xi.mission.id.cop.DARKNESS_NAMED,
@@ -156,7 +156,7 @@ tpz = tpz or {}
     },
 }
 
- xi.rhapsodies.requiredCharacters =
+xi.rhapsodies.requiredCharacters =
 {
     [ xi.mission.id.rov.RING_MY_BELL] = {
         xi.rhapsodies.character.TENZEN,
@@ -297,7 +297,7 @@ tpz = tpz or {}
 -- Lockout Table:
 -- http://forum.square-enix.com/ffxi/threads/47983-What-should-I-do-if-I-can%E2%80%99t-progress-in-Rhapsodies-of-Vana%E2%80%99diel
 
- xi.rhapsodies.charactersAvailable = function(player)
+xi.rhapsodies.charactersAvailable = function(player)
     local rov_mission = player:getCurrentMission(ROV)
     for _, char in pairs(xi.rhapsodies.requiredCharacters[rov_mission]) do
         local expansion_mission = player:getCurrentMission(xi.rhapsodies.expansion[char])
