@@ -10,22 +10,22 @@
   * You shall, at Our request, indemnify, defend, and hold harmless Topaz Next, its affiliates, and its officers from and against any and all claims, losses, liabilities, damages, expenses and costs (including reasonable attorneys' fees), arising from your breach, or alleged breach, of this Section 1.
 * **2. Contribution License**
 * You grant to Us a perpetual, worldwide, non-exclusive, transferable, royalty-free, irrevocable license to, at any time, and without notice to You:
-  * License or relicense, and then convey, the Contribution under any version of the GPL or AGPL
+  * License or relicense, and then convey, the Contribution **under any version of the GPL or AGPL**
   * Add to, modify, or remove from the Contribution any Additional Permissions under Section 7, Additional Terms of either the GPLv3 or AGPLv3 licenses, provided:
     * The Additional Permission is or was a reasonable attempt to increase user modification, server customization, or project adoption; or 
     * The Additional Permission is or was a reasonable attempt to restrict the requirements of Section 13, Remote Network Interaction of the AGPLv3, from applying to a modification or Program which falls outside the current scope of Topaz Next; and
     * The Additional Permission would not violate the terms of a hypothetical _GPLv3_ license (_not_ AGPLv3) which _lacks_ Additional Permissions
   * Add to, modify, or remove from the Contribution any supplemental _non-permissive_ terms which are allowed under Section 7, Additional Terms of either the GPLv3 or AGPLv3
   * License or relicense, and then convey, the Contribution under any version of the Topaz Next License, provided:
-  	* That version of the Topaz Next License does not violate the terms of a GPLv3 license (_with_ any supplemental non-permissive terms allowed under Section 7, Additional Terms); and
-  	* In the event that version of the Topaz Next License would violate a term of the GPLv3 license, the rest of the Topaz Next License will remain in the full effect allowed by the GPLv3
+    * That version of the Topaz Next License does not violate the terms of a GPLv3 license (_with_ any supplemental non-permissive terms allowed under Section 7, Additional Terms); and
+    * In the event that version of the Topaz Next License would violate a term of the GPLv3 license, the rest of the Topaz Next License will remain in the full effect allowed by the GPLv3
   * Grant to third parties, at Our sole discretion, a limited license applying to Your Contribution which exempts them from being bound by any requirement of Section 13, Remote Network Interaction of the AGPLv3, if at the time the license is granted:
     * Their modification would be in violation of the Additional Permissions enumerated in the current version of the Topaz Next License; 
     * Their modification can not be reasonably achieved with the methods the Program provides or intends for modification, without violating the Additional Permissions of that Topaz Next License; and
     * The license expires when the modification can be reasonably achieved with methods the Program later provides or intends for modification, while fully abiding by the Topaz Next License
 * All references to both the GNU General Public License and the GNU Affero Public License may, at Our sole option, and without notice to You: 
-	* Be updated to any later version of those licenses, and we may relicense Your Contribution under those later versions
-	* Any restrictions placed on the terms for which We may license Your Contribution may be updated to reference those later versions
+    * Be updated to any later version of those licenses, and we may relicense Your Contribution under those later versions
+    * Any restrictions placed on the terms for which We may license Your Contribution may be updated to reference those later versions
 * **3. Compensation; Attribution; Waiver**
   * The potential inclusion of Your Contribution in Topaz Next is the only compensation for Your Contribution. You are not entitled to any payments, royalties, or other consideration of any kind.
   * We may, but are not required to, include attribution to You in files which Topaz Next uses to track or list contributors, such as an AUTHORS file.
