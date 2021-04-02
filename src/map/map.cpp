@@ -1077,13 +1077,13 @@ int32 map_config_default()
 
 int32 map_config_from_env()
 {
-    map_config.mysql_login     = std::getenv("TPZ_DB_USER") ? std::getenv("TPZ_DB_USER") : map_config.mysql_login;
-    map_config.mysql_password  = std::getenv("TPZ_DB_USER_PASSWD") ? std::getenv("TPZ_DB_USER_PASSWD") : map_config.mysql_password;
-    map_config.mysql_host      = std::getenv("TPZ_DB_HOST") ? std::getenv("TPZ_DB_HOST") : map_config.mysql_host;
-    map_config.mysql_port      = std::getenv("TPZ_DB_PORT") ? std::stoi(std::getenv("TPZ_DB_PORT")) : map_config.mysql_port;
-    map_config.mysql_database  = std::getenv("TPZ_DB_NAME") ? std::getenv("TPZ_DB_NAME") : map_config.mysql_database;
-    map_config.msg_server_ip   = std::getenv("TPZ_MSG_IP") ? std::getenv("TPZ_MSG_IP") : map_config.msg_server_ip;
-    map_config.msg_server_port = std::getenv("TPZ_MSG_PORT") ? std::stoi(std::getenv("TPZ_MSG_PORT")) : map_config.msg_server_port;
+    map_config.mysql_login     = std::getenv("XI_DB_USER") ? std::getenv("XI_DB_USER") : map_config.mysql_login;
+    map_config.mysql_password  = std::getenv("XI_DB_USER_PASSWD") ? std::getenv("XI_DB_USER_PASSWD") : map_config.mysql_password;
+    map_config.mysql_host      = std::getenv("XI_DB_HOST") ? std::getenv("XI_DB_HOST") : map_config.mysql_host;
+    map_config.mysql_port      = std::getenv("XI_DB_PORT") ? std::stoi(std::getenv("XI_DB_PORT")) : map_config.mysql_port;
+    map_config.mysql_database  = std::getenv("XI_DB_NAME") ? std::getenv("XI_DB_NAME") : map_config.mysql_database;
+    map_config.msg_server_ip   = std::getenv("XI_MSG_IP") ? std::getenv("XI_MSG_IP") : map_config.msg_server_ip;
+    map_config.msg_server_port = std::getenv("XI_MSG_PORT") ? std::stoi(std::getenv("XI_MSG_PORT")) : map_config.msg_server_port;
     return 0;
 }
 

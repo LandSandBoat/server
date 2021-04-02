@@ -48,7 +48,7 @@
 #include "synthutils.h"
 #include "zoneutils.h"
 
-//#define _TPZ_SYNTH_DEBUG_MESSAGES_ // enable debugging messages
+//#define _XI_SYNTH_DEBUG_MESSAGES_ // enable debugging messages
 
 namespace synthutils
 {
@@ -93,7 +93,7 @@ namespace synthutils
             {
                 // in the ninth cell write the id of the recipe
                 PChar->CraftContainer->setItem(9, Sql_GetUIntData(SqlHandle, 0), 0xFF, 0);
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Recipe matches ID %u.\n" CL_RESET, PChar->CraftContainer->getItemID(9));
 #endif
 
@@ -114,13 +114,13 @@ namespace synthutils
                     // skill write in the quantity field of cells 9-16
                     PChar->CraftContainer->setQuantity(skillID - 40, skillValue);
 
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                     ShowDebug(CL_CYAN "Current skill = %u, Recipe skill = %u\n" CL_RESET, currentSkill, skillValue * 10);
 #endif
                     if (currentSkill < (skillValue * 10 - 150)) // Check player skill against recipe level. Range must be 14 or less.
                     {
                         PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_NOSKILL));
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                         ShowDebug(CL_CYAN "Not enough skill. Synth aborted.\n" CL_RESET);
 #endif
                         return false;
@@ -131,7 +131,7 @@ namespace synthutils
         }
 
         PChar->pushPacket(new CSynthMessagePacket(PChar, SYNTH_BADRECIPE));
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
         ShowDebug(CL_CYAN "Recipe not found. Synth aborted.\n" CL_RESET);
         ShowDebug(CL_CYAN "Ingredient1 = %u\n" CL_RESET, PChar->CraftContainer->getItemID(1));
         ShowDebug(CL_CYAN "Ingredient2 = %u\n" CL_RESET, PChar->CraftContainer->getItemID(2));
@@ -187,7 +187,7 @@ namespace synthutils
         uint8  charSkill = PChar->RealSkills.skill[skillID] / 10; // player skill level is truncated before synth difficulty is calced
         double difficult = PChar->CraftContainer->getQuantity(skillID - 40) - (double)(charSkill + PChar->getMod(ModID));
 
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
         ShowDebug(CL_CYAN "Difficulty = %g\n" CL_RESET, difficult);
 #endif
 
@@ -314,7 +314,7 @@ namespace synthutils
                         success = 0.05;
                     }
 
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                     ShowDebug(CL_CYAN "SkillID %u: difficulty > 0\n" CL_RESET, skillID);
 #endif
                 }
@@ -341,7 +341,7 @@ namespace synthutils
                     success = 0.99;
                 }
 
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Success: %g  Random: %g\n" CL_RESET, success, random);
 #endif
 
@@ -401,7 +401,7 @@ namespace synthutils
                 }
             }
 
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
             ShowDebug(CL_CYAN "HQ Tier: %i HQ Chance: %g Random: %g SkillID: %u\n" CL_RESET, hqtier, chance, random, skillID);
 #endif
 
@@ -435,31 +435,31 @@ namespace synthutils
         {
             case SYNTHESIS_FAIL:
                 result = RESULT_FAIL;
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Synth failed.\n" CL_RESET);
 #endif
                 break;
             case SYNTHESIS_SUCCESS:
                 result = RESULT_SUCCESS;
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Synth success.\n" CL_RESET);
 #endif
                 break;
             case SYNTHESIS_HQ:
                 result = RESULT_HQ;
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Synth HQ.\n" CL_RESET);
 #endif
                 break;
             case SYNTHESIS_HQ2:
                 result = RESULT_HQ;
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Synth HQ2.\n" CL_RESET);
 #endif
                 break;
             case SYNTHESIS_HQ3:
                 result = RESULT_HQ;
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Synth HQ3.\n" CL_RESET);
 #endif
                 break;
@@ -511,7 +511,7 @@ namespace synthutils
                 }
 
                 double random = xirand::GetRandomNumber(1.);
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowDebug(CL_CYAN "Skill up chance: %g  Random: %g\n" CL_RESET, skillUpChance, random);
 #endif
 
@@ -548,7 +548,7 @@ namespace synthutils
 
                         for (uint8 i = 0; i < 4; i++) // cicle up to 4 times until cap (0.5) or break. The lower the satier, the more likely it will break
                         {
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                             ShowDebug(CL_CYAN "SkillUpAmount Tier: %i  Random: %g\n" CL_RESET, satier, random);
 #endif
 
@@ -701,7 +701,7 @@ namespace synthutils
             }
 
             random = xirand::GetRandomNumber(1.);
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
             ShowDebug(CL_CYAN "Lost Item: %g  Random: %g\n" CL_RESET, lostItem, random);
 #endif
 
@@ -724,7 +724,7 @@ namespace synthutils
 
                     if (lostCount > 0)
                     {
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                         ShowDebug(CL_CYAN "Removing quantity %u from inventory slot %u\n" CL_RESET, lostCount, invSlotID);
 #endif
 
@@ -892,7 +892,7 @@ namespace synthutils
             if (animationDuration < 5s)
             {
 // Attempted cheating - Did not spend enough time doing the synth animation.
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                 ShowExploit(CL_CYAN "Caught player cheating by injecting synth done packet.\n");
 #endif
                 // Check whether the cheat type action requires us to actively block the cheating attempt
@@ -943,7 +943,7 @@ namespace synthutils
                 {
                     if (invSlotID != 0xFF)
                     {
-#ifdef _TPZ_SYNTH_DEBUG_MESSAGES_
+#ifdef _XI_SYNTH_DEBUG_MESSAGES_
                         ShowDebug(CL_CYAN "Removing quantity %u from inventory slot %u\n" CL_RESET, removeCount, invSlotID);
 #endif
                         auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);

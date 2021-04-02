@@ -9,12 +9,12 @@
 #if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) ||                          \
     defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) ||                \
     defined(__MIBSEB__)
-#define TPZ_BIG_ENDIAN 1
+#define XI_BIG_ENDIAN 1
 #else
-#define TPZ_BIG_ENDIAN 0
+#define XI_BIG_ENDIAN 0
 #endif
 
-#if TPZ_BIG_ENDIAN
+#if XI_BIG_ENDIAN
 #if defined(__clang__) || (__GNUC__ >= 4 && __GNUC_MINOR__ >= 3 && !defined(__MINGW32__) && !defined(__MINGW64__))
 #define bswap16 __builtin_bswap16
 #define bswap32 __builtin_bswap32
@@ -54,7 +54,7 @@ static struct zlib zlib;
 
 static void swap32_if_be(const uint32* v, const size_t memb)
 {
-#if TPZ_BIG_ENDIAN
+#if XI_BIG_ENDIAN
     for (size_t i = 0; i < memb; ++i)
         v[i] = bswap32(v[i]);
 #else
