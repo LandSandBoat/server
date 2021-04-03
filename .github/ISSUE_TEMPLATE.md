@@ -3,6 +3,6 @@
 - [ ] I have searched existing [issues](https://github.com/DerpyProjectGroup/topaz/issues) to see if the issue has already been opened
 - [ ] I have checked the commit log to see if the issue has been resolved since my server was last updated
 - [ ] I have read the [Contributing Guide](https://github.com/DerpyProjectGroup/topaz/blob/release/CONTRIBUTING.md)
-- [ ] I have specified what branch this happens on branch: EDITME
+- [ ] I have specified what branch this happens on: EDITME
 
 **_Additional Information_** (Steps to reproduce/Expected behavior) **:** 
