@@ -22,7 +22,6 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.hasMultipleTargetReduction = false
     params.multiplier = 2.335
     params.resistBonus = 1.0
-    params.skillType = 37
     params.skillType = xi.skill.ELEMENTAL_MAGIC
 
     local resist = applyResistance(caster, target, spell, params)
