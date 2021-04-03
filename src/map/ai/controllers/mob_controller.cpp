@@ -34,6 +34,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai_container.h"
 #include "../helpers/targetfind.h"
 #include "../states/ability_state.h"
+#include "../states/inactive_state.h"
 #include "../states/magic_state.h"
 #include "../states/weaponskill_state.h"
 
@@ -624,6 +625,11 @@ void CMobController::DoCombatTick(time_point tick)
 void CMobController::FaceTarget(uint16 targid)
 {
     TracyZoneScoped;
+    if (PMob->PAI->IsCurrentState<CInactiveState>())
+    {
+        return;
+    }
+
     CBaseEntity* targ = PTarget;
     if (targid != 0 && ((targ && targid != targ->targid) || !targ))
     {
