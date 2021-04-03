@@ -20,11 +20,9 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.dmg = basedmg
     params.multiplier = 3
     params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.attribute = xi.mod.INT
+    params.attribute = xi.mod.MND
     params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.diff = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
     params.bonus = 1.0
 
     -- Calculate raw damage
