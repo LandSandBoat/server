@@ -4086,9 +4086,9 @@ namespace luautils
         position_t pos = nearPosition(center, radius, theta);
 
         sol::table nearPos = lua.create_table();
-        nearPos.add("x", pos.x);
-        nearPos.add("y", pos.y);
-        nearPos.add("z", pos.z);
+        nearPos["x"] = pos.x;
+        nearPos["y"] = pos.y;
+        nearPos["z"] = pos.z;
 
         return nearPos;
     }
