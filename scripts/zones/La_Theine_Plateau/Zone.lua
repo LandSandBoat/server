@@ -25,6 +25,7 @@ end
 zone_object.onInitialize = function(zone)
     LA_THEINE_PLATEAU.moveFallenEgg()
     xi.chocobo.initZone(zone)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

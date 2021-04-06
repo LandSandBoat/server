@@ -39,6 +39,16 @@ zones[xi.zone.XARCABARD] =
         NO_COMBINATION                 = 8187,  -- You were unable to enter a combination.
         REGIME_REGISTERED              = 10365, -- New training regime registered!
         COMMON_SENSE_SURVIVAL          = 11550, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 11484, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11485, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11486, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 11487, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 11488, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 11489, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 11490, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 11491, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 11492, -- Obtained key item: ≺abyssite>!    
     },
     mob =
     {
@@ -71,6 +81,29 @@ zones[xi.zone.XARCABARD] =
         BOREAL_COEURL   = 17236203,
         BOREAL_TIGER    = 17236204,
         KOENIGSTIGER    = 17236205,
+        VOIDWALKER      =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17236241, -- Gorehound
+                17236240, -- Gorehound
+                17236239, -- Gorehound
+                17236238, -- Gorehound
+                17236237, -- Gjenganger
+                17236236, -- Gjenganger
+                17236235, -- Gjenganger
+                17236234, -- Gjenganger
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17236233, -- Erebus
+                17236232  -- Feuerunke
+            },
+            [xi.keyItem.PURPLE_ABYSSITE] = {
+                17236231  -- Lord Ruthven
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17236230  -- Yilbegan
+            }
+        }
     },
     npc =
     {

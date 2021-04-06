@@ -3681,4 +3681,45 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,133); -- Blade: Ei
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,134); -- Blade: Jin
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,141); -- Blade: Shun
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,138); -- Blade: Kamu
+
+--Voidwalker
+INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,451); -- Splash Breath
+INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,641); -- Recoil Dive
+INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,449); -- Intimidate
+INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,450); -- Aqua Ball
+INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,454); -- Water Shield
+INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,453); -- Water Wall
+
+INSERT INTO `mob_skill_lists` VALUES ('Krabkatoa',1150,448); -- Metallic Body
+INSERT INTO `mob_skill_lists` VALUES ('Krabkatoa',1150,443); -- Bubble Curtain
+INSERT INTO `mob_skill_lists` VALUES ('Krabkatoa',1150,442); -- Bubble Shower
+INSERT INTO `mob_skill_lists` VALUES ('Krabkatoa',1150,445); -- Scissor Guard
+INSERT INTO `mob_skill_lists` VALUES ('Krabkatoa',1150,2513); -- Mega Scissor
+INSERT INTO `mob_skill_lists` VALUES ('Krabkatoa',1150,2512); -- Venom Shower
+
+INSERT INTO `mob_skill_lists` VALUES ('LampreyLord',1151,415); -- Acid Mist
+
+INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,431);  -- Fluid_Spread
+INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,433);  -- Digest
+INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,1317); -- Mucus_Spread
+INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,1319); -- Epoxy_Spread
+INSERT INTO `mob_skill_lists` VALUES ('Blobdingnag',1152,2514); -- Cytokinesis
+
+INSERT INTO `mob_skill_lists` VALUES ('FarrucaFly',1153,659);
+INSERT INTO `mob_skill_lists` VALUES ('FarrucaFly',1153,660);
+INSERT INTO `mob_skill_lists` VALUES ('FarrucaFly',1153,318);
+
+INSERT INTO `mob_skill_lists` VALUES ('Orcus',1154,279);
+INSERT INTO `mob_skill_lists` VALUES ('Orcus',1154,2517);
+INSERT INTO `mob_skill_lists` VALUES ('Orcus',1154,2516);
+
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2106);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2107);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2108);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2109);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2110);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2111);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2388);
+INSERT INTO `mob_skill_lists` VALUES ('LordRuthen',1155,2534);
+
 -- Next available ID: 1149

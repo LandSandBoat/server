@@ -35,6 +35,7 @@ zone_object.onInitialize = function(zone)
         registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
     end
     registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

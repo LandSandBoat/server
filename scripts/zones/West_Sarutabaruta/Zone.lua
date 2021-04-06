@@ -21,6 +21,7 @@ zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function( player, prevZone)
