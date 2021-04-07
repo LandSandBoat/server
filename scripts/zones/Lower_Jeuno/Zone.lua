@@ -111,7 +111,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 20 then
-        player:addCharVar("ZilartStatus", 2)
+        player:setMissionStatus(xi.mission.log_id.ZILART, player:getMissionStatus(xi.mission.log_id.ZILART) + 2)
     elseif csid == 10094 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THE_ECHO_AWAKENS)

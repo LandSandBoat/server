@@ -61,7 +61,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_NEW_FRONTIER)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
     elseif csid == 176 then
-        player:addCharVar("ZilartStatus", 1)
+        player:setMissionStatus(xi.mission.log_id.ZILART, player:getMissionStatus(xi.mission.log_id.ZILART) + 1)
     elseif csid == 226 then
         player:setCharVar("anUndyingPledgeCS", 2)
     end

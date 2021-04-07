@@ -50,7 +50,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local windurstMission = player:getCurrentMission(WINDURST)
-    local windurstStatus = player:getCharVar("MissionStatus")
+    local windurstStatus = player:getMissionStatus(player:getNation())
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
     local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
     local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
@@ -224,12 +224,9 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", getMidnight())
         end
-    elseif (csid == 736) then
-        player:setMissionStatus(player:getNation(), 2)
-
     -- AWAKENING OF THE GODS
     elseif csid == 736 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     end
 end
 
