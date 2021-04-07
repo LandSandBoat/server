@@ -31,6 +31,10 @@ Q: I need help! Is there anywhere I can ask questions besides the github issues?
 
 A: https://discord.gg/6EWFPxkZja
 
+Q: so..no discord then?
+
+A: not at this time, no. I hope to use Github's [discussions](https://github.com/DerpyProjectGroup/topaz/discussions) feature for anything outside teh scope of bugreporting for now. This may change in the future.
+
 Q: Gimme a staff role! I can help!
 
 A: You can help on 99% of things without any special roles. Things aren't gated much. But if I see you regularly being helpful, you will likely get a role to facilitate additional helping.
