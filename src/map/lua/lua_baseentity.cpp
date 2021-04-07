@@ -8951,9 +8951,9 @@ void CLuaBaseEntity::recalculateStats()
         jobpointutils::AddGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
         charutils::CalculateStats(PChar);
+        charutils::BuildingCharTraitsTable(PChar);
         charutils::CheckValidEquipment(PChar);
         charutils::BuildingCharAbilityTable(PChar);
-        charutils::BuildingCharTraitsTable(PChar);
 
         PChar->UpdateHealth();
 
