@@ -798,6 +798,7 @@ void CMobEntity::DistributeRewards()
             if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
             {
                 charutils::DistributeExperiencePoints(PChar, this);
+                charutils::DistributeCapacityPoints(PChar, this);
             }
 
             // check for gil (beastmen drop gil, some NMs drop gil)

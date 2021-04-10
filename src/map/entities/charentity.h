@@ -82,6 +82,12 @@ struct profile_t
     uint8      unity_leader;
 };
 
+struct capacityChain_t
+{
+    uint16 chainNumber;
+    uint32 chainTime;
+};
+
 struct expChain_t
 {
     uint16 chainNumber;
@@ -188,6 +194,7 @@ public:
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
     profile_t  profile;             // профиль персонажа (все, что связывает города и персонажа)
+    capacityChain_t capacityChain;  // Capacity Point Chains
     expChain_t expChain;            // Exp Chains
     search_t   search;              // данные и комментарий, отображаемые в окне поиска
     bazaar_t   bazaar;              // все данные, необходимые для таботы bazaar

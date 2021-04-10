@@ -390,9 +390,10 @@ class CJobPoints
 {
 public:
     CJobPoints(CCharEntity* PChar);
-    bool IsJobPointExist(JOBPOINT_TYPE jpType); // Check to see if JP exists
-    void RaiseJobPoint(JOBPOINT_TYPE jpType);   // Add upgrade
-    void SetJobPoints(int16 amount);            // Set job points for current job
+    bool   IsJobPointExist(JOBPOINT_TYPE jpType); // Check to see if JP exists
+    void   RaiseJobPoint(JOBPOINT_TYPE jpType);   // Add upgrade
+    uint16 GetJobPoints();                        // Get unspent job points for current job
+    void   SetJobPoints(int16 amount);            // Set job points for current job
 
     JobPoints_t*    GetJobPointsByType(JOBPOINT_TYPE jpType);
     JobPointType_t* GetJobPointType(JOBPOINT_TYPE jpType);
@@ -402,6 +403,10 @@ public:
     JobPoints_t* GetAllJobPoints();
 
     uint16 GetJobPointsSpent();
+
+    bool   AddCapacityPoints(uint16 amount); // Add Capacity Points for current job, and increase JP as needed
+    uint32 GetCapacityPoints();              // Get Capacity Points for Character's Current Job
+    void   SetCapacityPoints(uint16 amount); // Set Capacity Points for Character's Current Job, does not handle JP increase!
 
     // Returns the level of a given job point type. Will return 0 if the type doesn't match the
     // player's main job or if their main job is not 99

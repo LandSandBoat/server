@@ -116,6 +116,7 @@ CCharEntity::CCharEntity()
     memset(&equipLoc, 0, sizeof(equipLoc));
     memset(&RealSkills, 0, sizeof(RealSkills));
     memset(&expChain, 0, sizeof(expChain));
+    memset(&capacityChain, 0, sizeof(capacityChain));
     memset(&nameflags, 0, sizeof(nameflags));
     memset(&menuConfigFlags, 0, sizeof(menuConfigFlags));
 

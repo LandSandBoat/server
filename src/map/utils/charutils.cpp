@@ -3898,6 +3898,156 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
+     *  Allocate capacity points                                             *
+     *                                                                       *
+     ************************************************************************/
+
+    void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
+    {
+        // TODO: Capacity Points cannot be gained in Abyssea or Reives.  In addition, Gates areas,
+        //       Ra'Kaznar, Escha, and Reisenjima reduce party penalty for capacity points earned.
+        REGION_TYPE region   = PChar->loc.zone->GetRegionID();
+        uint8       mobLevel = PMob->GetMLevel();
+
+        PChar->ForAlliance([&PMob, &region, &mobLevel](CBattleEntity* PPartyMember) {
+            CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
+
+            if (!PMember || PMember->isDead() || (PMember->loc.zone->GetRegionID() != region))
+            {
+                // Do not grant Capacity points if null, Dead, or in a different area
+                return;
+            }
+
+            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 99)
+            {
+                // Do not grant Capacity points without Job Breaker or Level 99
+                return;
+            }
+
+            bool  chainActive = false;
+            int16 levelDiff   = mobLevel - 99; // Passed previous 99 check, no need to calculate
+
+            // Capacity Chains are only granted for Mobs level 100+
+            // Ref: https://www.bg-wiki.com/ffxi/Job_Points
+            float capacityPoints = 0;
+
+            if (mobLevel > 99)
+            {
+                // Base Capacity Point formula derived from the table located at:
+                // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
+                capacityPoints = 0.0089 * (levelDiff ^ 3) + 0.0533 * (levelDiff ^ 2) + 3.7439 * levelDiff + 89.7;
+
+                if (PMember->capacityChain.chainTime > gettick() || PMember->capacityChain.chainTime == 0)
+                {
+                    chainActive = true;
+
+                    // TODO: Needs verification, pulled from Exp Chain
+                    switch (PMember->capacityChain.chainNumber)
+                    {
+                        case 0:
+                            capacityPoints *= 1.0f;
+                            break;
+                        case 1:
+                            capacityPoints *= 1.2f;
+                            break;
+                        case 2:
+                            capacityPoints *= 1.25f;
+                            break;
+                        case 3:
+                            capacityPoints *= 1.3f;
+                            break;
+                        case 4:
+                            capacityPoints *= 1.4f;
+                            break;
+                        case 5:
+                            capacityPoints *= 1.5f;
+                            break;
+                        default:
+                            capacityPoints *= 1.55f;
+                            break;
+                    }
+                }
+                else
+                {
+                    // TODO: Capacity Chain Timer is reduced after Chain 30
+                    PMember->expChain.chainTime   = gettick() + 30000;
+                    PMember->expChain.chainNumber = 1;
+                }
+
+                if (chainActive)
+                {
+                    PMember->expChain.chainTime = gettick() + 30000;
+                }
+
+                AddCapacityPoints(PMember, PMob, capacityPoints, levelDiff, chainActive);
+            }
+        });
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Return adjusted Capacity point value based on bonuses                *
+    *                                                                       *
+    ************************************************************************/
+
+    uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
+    {
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  Add Capacity Points to an individual player                          *
+    *                                                                       *
+    ************************************************************************/
+
+    void AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff, bool isCapacityChain)
+    {
+        if (PChar->isDead())
+        {
+            return;
+        }
+
+        capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
+
+        uint16 currentCapacity  = PChar->PJobPoints->GetCapacityPoints();
+
+        // exp added from raise shouldn't display a message. Don't need a message for zero exp either
+        if (capacityPoints > 0)
+        {
+            // Capacity Chains start at lv100 mobs
+            if (levelDiff >= 1 && isCapacityChain)
+            {
+                ShowDebug("Chain: %d", PChar->capacityChain.chainNumber);
+                if (PChar->capacityChain.chainNumber != 0)
+                {
+                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735));
+                }
+                else
+                {
+                    PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
+                }
+                PChar->capacityChain.chainNumber++;
+            }
+            else
+            {
+                PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
+            }
+        }
+
+        // add limit points
+        if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
+        {
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 50));
+        }
+
+        if (PMob != PChar) // Only mob kills count for gain EXP records
+        {
+            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("capacity", capacityPoints));
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Losing exp on death. retainPercent is the amount of exp to be        *
      *  saved on death, e.g. 0.05 = retain 5% of lost exp. A value of        *
      *  1 means no exp loss. A value of 0 means full exp loss.               *
