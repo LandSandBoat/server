@@ -10,8 +10,8 @@ effect_object.onEffectGain = function(target, effect)
     local jpLevel = target:getJobPointLevel(xi.jp.MIGHTY_STRIKES_EFFECT)
 
     target:addMod(xi.mod.CRITHITRATE, 100)
-    target:addMod(tpz.mod.ACC, jpLevel * 2)
-    target:addMod(tpz.mod.RACC, jpLevel * 2)
+    target:addMod(xi.mod.ACC, jpLevel * 2)
+    target:addMod(xi.mod.RACC, jpLevel * 2)
 end
 
 effect_object.onEffectTick = function(target, effect)
