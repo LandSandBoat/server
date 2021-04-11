@@ -17,23 +17,19 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- get helix acc/att merits
     local merit = caster:getMerit(xi.merit.HELIX_MAGIC_ACC_ATT)
 
-    -- calculate raw damage
     local params = {}
     params.dmg = 35
     params.multiplier = 1
     params.skillType = xi.skill.ELEMENTAL_MAGIC
     params.attribute = xi.mod.INT
     params.hasMultipleTargetReduction = false
+    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    params.bonus = merit*3
 
+    -- calculate raw damage
     local dmg = calculateMagicDamage(caster, target, spell, params)
     dmg = dmg + caster:getMod(xi.mod.HELIX_EFFECT)
     -- get resist multiplier (1x if no resist)
-    local params = {}
-    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.ELEMENTAL_MAGIC
-    -- bonus accuracy from merit
-    params.bonus = merit*3
     local resist = applyResistance(caster, target, spell, params)
     -- get the resisted damage
     dmg = dmg*resist
