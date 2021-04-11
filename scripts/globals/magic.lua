@@ -150,6 +150,7 @@ function getCurePower(caster, isBlueMagic)
     local power = math.floor(MND/2) + math.floor(VIT/4) + skill
     return power
 end
+
 function getCurePowerOld(caster)
     local MND = caster:getStat(xi.mod.MND)
     local VIT = caster:getStat(xi.mod.VIT)
@@ -157,9 +158,11 @@ function getCurePowerOld(caster)
     local power = ((3 * MND) + VIT + (3 * math.floor(skill/5)))
     return power
 end
+
 function getBaseCure(power, divisor, constant, basepower)
     return ((power - basepower) / divisor) + constant
 end
+
 function getBaseCureOld(power, divisor, constant)
     return (power / 2) / divisor + constant
 end
@@ -500,6 +503,7 @@ function getSpellBonusAcc(caster, target, spell, params)
     local skill = spell:getSkillType()
     local spellGroup = spell:getSpellGroup()
     local element = spell:getElement()
+    local casterJob = caster:getMainJob()
 
     if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
@@ -512,7 +516,7 @@ function getSpellBonusAcc(caster, target, spell, params)
     local skillchainTier, skillchainCount = FormMagicBurst(element, target)
 
     --add acc for skillchains
-    if (skillchainTier > 0) then
+    if skillchainTier > 0 then
         magicAccBonus = magicAccBonus + 25
     end
 
@@ -523,24 +527,46 @@ function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
-    --add for blm elemental magic merits
-    if skill == xi.skill.ELEMENTAL_MAGIC then
-        magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+    if casterJob == xi.job.BLM then
+        -- Add MACC for BLM Elemental Magic Merits
+        if skill == xi.skill.ELEMENTAL_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+        end
+
+        -- BLM Job Point: MACC Bonus +1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+
     end
 
-    --Add acc for dark seal
-    if (skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL)) then
-        magicAccBonus = magicAccBonus + 256
+    if casterJob == xi.job.DRK then
+        -- Add MACC for Dark Seal
+        if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+            magicAccBonus = magicAccBonus + 256
+        end
     end
 
-    --add acc for RDM group 1 merits
-    if (element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER) then
-        magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+    if casterJob == xi.job.RDM then
+        -- Add MACC for RDM group 1 merits
+        if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+        end
+
+        -- RDM Job Point: During saboteur, Enfeebling MACC +2
+        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+
+            magicAccBonus = magicAccBonus + (jpValue * 2)
+        end
+
+        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+        magicAccBonus = magicAccBonus + getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
     end
 
-    -- BLU mag acc merits - nuke acc is handled in bluemagic.lua
-    if (skill == xi.skill.BLUE_MAGIC) then
-        magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+    if casterJob == xi.job.BLU then
+        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+        if skill == xi.skill.BLUE_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+        end
     end
 
     return magicAccBonus
@@ -729,58 +755,56 @@ function calculateMagicBurst(caster, spell, target, params)
 end
 
 function addBonuses(caster, spell, target, dmg, params)
-    params = params or {}
-
     local ele = spell:getElement()
-
     local affinityBonus = AffinityBonusDmg(caster, ele)
-    dmg = math.floor(dmg * affinityBonus)
+    local magicDefense = getElementalDamageReduction(target, ele)
+    local dayWeatherBonus = 1.00
+    local weather = caster:getWeather()
+    local casterJob = caster:getMainJob()
 
+    params = params or {}
     params.bonusmab = params.bonusmab or 0
     params.AMIIburstBonus = params.AMIIburstBonus or 0
 
-    local magicDefense = getElementalDamageReduction(target, ele)
+    dmg = math.floor(dmg * affinityBonus)
     dmg = math.floor(dmg * magicDefense)
 
-    local dayWeatherBonus = 1.00
-    local weather = caster:getWeather()
-
-    if (weather == xi.magic.singleWeatherStrong[ele]) then
-        if (caster:getMod(xi.mod.IRIDESCENCE) >= 1) then
-            if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+    if weather == xi.magic.singleWeatherStrong[ele] then
+        if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+            if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
                 dayWeatherBonus = dayWeatherBonus + 0.10
             end
         end
-        if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif (caster:getWeather() == xi.magic.singleWeatherWeak[ele]) then
-        if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+    elseif caster:getWeather() == xi.magic.singleWeatherWeak[ele] then
+        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
-    elseif (weather == xi.magic.doubleWeatherStrong[ele]) then
-        if (caster:getMod(xi.mod.IRIDESCENCE) >= 1) then
-            if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+    elseif weather == xi.magic.doubleWeatherStrong[ele] then
+        if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
+            if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
                 dayWeatherBonus = dayWeatherBonus + 0.10
             end
         end
-        if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
             dayWeatherBonus = dayWeatherBonus + 0.25
         end
-    elseif (weather == xi.magic.doubleWeatherWeak[ele]) then
-        if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+    elseif weather == xi.magic.doubleWeatherWeak[ele] then
+        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
             dayWeatherBonus = dayWeatherBonus - 0.25
         end
     end
 
     local dayElement = VanadielDayElement()
-    if (dayElement == ele) then
+    if dayElement == ele then
         dayWeatherBonus = dayWeatherBonus + caster:getMod(xi.mod.DAY_NUKE_BONUS)/100 -- sorc. tonban(+1)/zodiac ring
-        if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
             dayWeatherBonus = dayWeatherBonus + 0.10
         end
-    elseif (dayElement == xi.magic.elementDescendant[ele]) then
-        if (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell)) then
+    elseif dayElement == xi.magic.elementDescendant[ele] then
+        if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 or isHelixSpell(spell) then
             dayWeatherBonus = dayWeatherBonus - 0.10
         end
     end
@@ -793,7 +817,7 @@ function addBonuses(caster, spell, target, dmg, params)
 
     local burst = calculateMagicBurst(caster, spell, target, params)
 
-    if (burst > 1.0) then
+    if burst > 1.0 then
         spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
 
         caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
@@ -803,10 +827,11 @@ function addBonuses(caster, spell, target, dmg, params)
     local mabbonus = 0
     local spellId = spell:getID()
 
-    if (spellId >= 245 and spellId <= 248) then -- Drain/Aspir (II)
-        mabbonus = 1 + caster:getMod(xi.mod.ENH_DRAIN_ASPIR)/100
+    if spellId >= 245 and spellId <= 248 then -- Drain/Aspir (II)
+        mabbonus = 1 + caster:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+
         if spellId == 247 or spellId == 248 then
-            mabbonus = mabbonus + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT)/100
+            mabbonus = mabbonus + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT) / 100
         end
     else
         local mab = caster:getMod(xi.mod.MATT) + params.bonusmab
@@ -816,39 +841,39 @@ function addBonuses(caster, spell, target, dmg, params)
         end
 
         local mab_crit = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
-        if ( math.random(1, 100) < mab_crit ) then
+        if math.random(1, 100) < mab_crit then
            mab = mab + ( 10 + caster:getMod(xi.mod.MAGIC_CRIT_DMG_INCREASE ) )
         end
 
         local mdefBarBonus = 0
-        if (ele >= xi.magic.element.FIRE and ele <= xi.magic.element.WATER) then
+        if ele >= xi.magic.element.FIRE and ele <= xi.magic.element.WATER then
             mab = mab + caster:getMerit(blmMerit[ele])
-            if (target:hasStatusEffect(xi.magic.barSpell[ele])) then -- bar- spell magic defense bonus
+            if target:hasStatusEffect(xi.magic.barSpell[ele]) then -- bar- spell magic defense bonus
                 mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
             end
         end
+
+        if casterJob == xi.job.RDM then
+            mab = mab + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ATK_BONUS)
+        elseif casterJob == xi.job.GEO then
+            mab = mab + caster:getJobPointLevel(xi.jp.GEO_MAGIC_ATK_BONUS)
+        end
+
         mabbonus = (100 + mab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     end
 
-    if (mabbonus < 0) then
+    if mabbonus < 0 then
         mabbonus = 0
     end
 
     dmg = math.floor(dmg * mabbonus)
 
-    if (caster:hasStatusEffect(xi.effect.EBULLIENCE)) then
+    if caster:hasStatusEffect(xi.effect.EBULLIENCE) then
         dmg = dmg * (1.2 + caster:getMod(xi.mod.EBULLIENCE_AMOUNT)/100)
         caster:delStatusEffectSilent(xi.effect.EBULLIENCE)
     end
 
     dmg = math.floor(dmg)
-
-    -- print(affinityBonus)
-    -- print(speciesReduction)
-    -- print(dayWeatherBonus)
-    -- print(burst)
-    -- print(mab)
-    -- print(magicDmgMod)
 
     return dmg
 end
@@ -1261,12 +1286,16 @@ function calculateDurationForLvl(duration, spellLvl, targetLvl)
 end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
+    local casterJob = caster:getMainJob()
+
     if magicSkill == xi.skill.ENHANCING_MAGIC then -- Enhancing Magic
         -- Gear mods
         duration = duration + duration * caster:getMod(xi.mod.ENH_MAGIC_DURATION) / 100
 
         -- prior according to bg-wiki
-        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+        if casterJob == xi.job.RDM then
+            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+        end
 
         -- Default is true
         useComposure = useComposure or (useComposure == nill and true)
@@ -1290,7 +1319,18 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
         end
 
         -- After Saboteur according to bg-wiki
-        duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
+        if casterJob == xi.job.RDM then
+            -- RDM Merit: Enfeebling Magic Duration
+            duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
+
+            -- RDM Job Point: Enfeebling Magic Duration
+            duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+
+            -- RDM Job Point: Stymie effect
+            if caster:hasStatusEffect(tpz.effect.STYMIE) and target:canGainStatusEffect(effect) then
+                duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
+            end
+        end
     end
 
     return math.floor(duration)
