@@ -3987,16 +3987,15 @@ namespace charutils
         }
 
         capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
+        capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
 
         uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
 
-        // exp added from raise shouldn't display a message. Don't need a message for zero exp either
         if (capacityPoints > 0)
         {
             // Capacity Chains start at lv100 mobs
             if (levelDiff >= 1 && isCapacityChain)
             {
-                ShowDebug("Chain: %d", PChar->capacityChain.chainNumber);
                 if (PChar->capacityChain.chainNumber != 0)
                 {
                     PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735));
@@ -4011,17 +4010,18 @@ namespace charutils
             {
                 PChar->pushPacket(new CMessageCombatPacket(PChar, PChar, capacityPoints, 0, 718));
             }
-        }
 
-        // Add capacity points
-        if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
-        {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 200));
-        }
+            // Add capacity points
+            if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
+            {
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
+            }
+            PChar->pushPacket(new CMenuJobPointsPacket(PChar));
 
-        if (PMob != PChar) // Only mob kills count for gain EXP records
-        {
-            roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("capacity", capacityPoints));
+            if (PMob != PChar) // Only mob kills count for gain EXP records
+            {
+                roeutils::event(ROE_EXPGAIN, PChar, RoeDatagram("capacity", capacityPoints));
+            }
         }
     }
 

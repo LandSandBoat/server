@@ -181,8 +181,9 @@ uint32 CJobPoints::GetCapacityPoints()
 
 void CJobPoints::SetCapacityPoints(uint16 amount)
 {
-    uint8 currentJob = static_cast<uint8>(m_PChar->GetMJob());
-    amount           = std::clamp<int16>(amount, 0, 30000);
+    uint8 currentJob                       = static_cast<uint8>(m_PChar->GetMJob());
+    amount                                 = std::clamp<int16>(amount, 0, 30000);
+    m_jobPoints[currentJob].capacityPoints = amount;
 
     Sql_Query(SqlHandle, "INSERT INTO char_job_points SET charid='%u', jobid='%u', capacity_points='%u' ON DUPLICATE KEY UPDATE capacity_points='%u'",
               m_PChar->id, currentJob, amount, amount);
