@@ -40,6 +40,20 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local despoilMod = player:getMod(xi.mod.DESPOIL)
     local despoilChance = 50 + despoilMod * 2 + level - target:getMainLvl() -- Same math as Steal
 
+    -- TODO: Need to verify if there's a message associated with this
+    local jpValue = player:getJobPointLevel(xi.jp.DESPOIL_EFFECT)
+    if jpValue > 0 and player:getMainJob() == xi.job.THF then
+        local tpSteal = jpValue * 0.02
+        local mobTP = target:getTP()
+
+        if tpSteal > mobTP then
+            tpSteal = mobTP
+        end
+
+        target:addTP(-tpSteal)
+        player:addTP(tpSteal)
+    end
+
     local stolen = target:getDespoilItem()
     if target:isMob() and math.random(100) < despoilChance and stolen then
         if player:getObjType() == xi.objType.TRUST then

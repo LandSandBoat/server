@@ -37,6 +37,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
     if (player:getFreeSlotsCount() == 0) then
         return xi.msg.basic.FULL_INVENTORY, 0
     else
+        -- JP Recast Reduction
+        local jpValue = player:getJobPointLevel(xi.jp.STEAL_RECAST)
+        ability:setRecast(ability:getRecast() - 2 * jpValue)
         return 0, 0
     end
 end

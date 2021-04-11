@@ -92,15 +92,15 @@ xi.jp = {
     ENHANCING_DURATION       = JPCATEGORY_RDM + 0x09, --O dur. +1s
 
     --THF
-    PERFECT_DODGE_EFFECT     = JPCATEGORY_THF + 0x00, --O m.eva +3
+    PERFECT_DODGE_EFFECT     = JPCATEGORY_THF + 0x00, --+ m.eva +3
     LARCENY_EFFECT           = JPCATEGORY_THF + 0x02, --X dur. +1s
-    SNEAK_ATTACK_EFFECT      = JPCATEGORY_THF + 0x01, --O DEX bonus +1%
-    TRICK_ATTACK_EFFECT      = JPCATEGORY_THF + 0x03, --O AGI bonus +1%
-    STEAL_RECAST             = JPCATEGORY_THF + 0x04, --O recast -2s
-    MUG_EFFECT               = JPCATEGORY_THF + 0x05, --X drain HP == 5% (DEX + AGI)
-    DESPOIL_EFFECT           = JPCATEGORY_THF + 0x06, --X drain 2% tp
-    CONSPIRATOR_EFFECT       = JPCATEGORY_THF + 0x07, --O p.acc +1
-    BULLY_EFFECT             = JPCATEGORY_THF + 0x08, --O intimidation chance +1%
+    SNEAK_ATTACK_EFFECT      = JPCATEGORY_THF + 0x01, --+ DEX bonus +1%
+    TRICK_ATTACK_EFFECT      = JPCATEGORY_THF + 0x03, --+ AGI bonus +1%
+    STEAL_RECAST             = JPCATEGORY_THF + 0x04, --+ recast -2s
+    MUG_EFFECT               = JPCATEGORY_THF + 0x05, --+ drain HP == 5% (DEX + AGI)
+    DESPOIL_EFFECT           = JPCATEGORY_THF + 0x06, --+ drain 2% tp
+    CONSPIRATOR_EFFECT       = JPCATEGORY_THF + 0x07, --+ p.acc +1
+    BULLY_EFFECT             = JPCATEGORY_THF + 0x08, --+ intimidation chance +1%
     TRIPLE_ATTACK_EFFECT     = JPCATEGORY_THF + 0x09, --X p.atk +1
 
     --PLD

@@ -16,7 +16,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffectEx(xi.effect.DOUBT, xi.effect.INTIMIDATE, 15, 0, 30)
+    local jpValue = player:getJobPointLevel(xi.jp.BULLY_EFFECT)
+
+    target:addStatusEffectEx(xi.effect.DOUBT, xi.effect.INTIMIDATE, 15 + jpValue, 0, 30)
     return xi.effect.INTIMIDATE
 end
 
