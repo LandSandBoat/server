@@ -3906,13 +3906,13 @@ namespace charutils
     {
         // TODO: Capacity Points cannot be gained in Abyssea or Reives.  In addition, Gates areas,
         //       Ra'Kaznar, Escha, and Reisenjima reduce party penalty for capacity points earned.
-        REGION_TYPE region   = PChar->loc.zone->GetRegionID();
-        uint8       mobLevel = PMob->GetMLevel();
+        ZONEID zone     = PChar->loc.zone->GetID();
+        uint8  mobLevel = PMob->GetMLevel();
 
-        PChar->ForAlliance([&PMob, &region, &mobLevel](CBattleEntity* PPartyMember) {
+        PChar->ForAlliance([&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember) {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
 
-            if (!PMember || PMember->isDead() || (PMember->loc.zone->GetRegionID() != region))
+            if (!PMember || PMember->isDead() || (PMember->loc.zone->GetID() != zone))
             {
                 // Do not grant Capacity points if null, Dead, or in a different area
                 return;
@@ -3941,31 +3941,10 @@ namespace charutils
                 {
                     chainActive = true;
 
-                    // TODO: Needs verification, pulled from Exp Chain
-                    switch (PMember->capacityChain.chainNumber)
-                    {
-                        case 0:
-                            capacityPoints *= 1.0f;
-                            break;
-                        case 1:
-                            capacityPoints *= 1.2f;
-                            break;
-                        case 2:
-                            capacityPoints *= 1.25f;
-                            break;
-                        case 3:
-                            capacityPoints *= 1.3f;
-                            break;
-                        case 4:
-                            capacityPoints *= 1.4f;
-                            break;
-                        case 5:
-                            capacityPoints *= 1.5f;
-                            break;
-                        default:
-                            capacityPoints *= 1.55f;
-                            break;
-                    }
+                    // TODO: Needs verification, pulled from: https://www.bluegartr.com/threads/120445-Job-Points-discussion?p=6138288&viewfull=1#post6138288
+                    // Assumption: Chain0 is no bonus, Chains 10+ capped at 1.5 value, f(chain) = 1 + 0.05 * chain
+                    float chainModifier = std::min(1 + 0.05 * PMember->capacityChain.chainNumber, 1.5);
+                    capacityPoints *= chainModifier;
                 }
                 else
                 {
@@ -4009,7 +3988,7 @@ namespace charutils
 
         capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
 
-        uint16 currentCapacity  = PChar->PJobPoints->GetCapacityPoints();
+        uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
 
         // exp added from raise shouldn't display a message. Don't need a message for zero exp either
         if (capacityPoints > 0)
@@ -4034,10 +4013,10 @@ namespace charutils
             }
         }
 
-        // add limit points
+        // Add capacity points
         if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
         {
-            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 50));
+            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 200));
         }
 
         if (PMob != PChar) // Only mob kills count for gain EXP records
