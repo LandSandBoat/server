@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `transport` (
   `time_anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `zone` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `transport`

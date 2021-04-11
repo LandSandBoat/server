@@ -44,7 +44,7 @@ CREATE TABLE `synth_recipes` (
   `ResultHQ3Qty` tinyint(2) unsigned NOT NULL,
   `ResultName` tinytext NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3500 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=79;
+) ENGINE=InnoDB AUTO_INCREMENT=3500 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=79;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DELIMITER $$

@@ -36,4 +36,4 @@ CREATE TABLE IF NOT EXISTS `linkshells` (
   `postrights` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `broken` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`linkshellid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

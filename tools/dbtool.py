@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 import re
 import time
@@ -26,6 +27,7 @@ from migrations import eminence_blob
 from migrations import char_timestamp
 from migrations import currency_columns
 from migrations import add_instance_zone_column
+from migrations import convert_all_tables_to_innodb
 from migrations import char_points_weekly_unity
 from migrations import char_profile_unity_leader
 # Append new migrations to this list and import above
@@ -46,6 +48,7 @@ migrations = [
     char_timestamp,
     currency_columns,
     add_instance_zone_column,
+    convert_all_tables_to_innodb,
     char_points_weekly_unity,
     char_profile_unity_leader
 ]
@@ -260,10 +263,21 @@ def write_version(silent=False):
         print(Fore.RED + 'Error writing version.')
 
 def import_file(file):
-    updatecmd = '"' + mysql_bin + 'mysql' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' ' + database
     print('Importing ' + file + '...')
-    os.system(updatecmd + ' < ../sql/' + file + log_errors)
-    fetch_errors()
+    result = subprocess.run([
+        '{}mysql{}'.format(mysql_bin, exe),
+        '-h', host,
+        '-P', str(port),
+        '-u', login,
+        '-p{}'.format(password),
+        database,
+        '-e', 'SET autocommit=0; SET unique_checks=0; SET foreign_key_checks=0; source ../sql/{}; SET unique_checks=1; SET foreign_key_checks=1; COMMIT;'.format(file)],
+        capture_output=True, text=True)
+
+    for line in result.stderr.splitlines():
+        # Safe to ignore this warning
+        if 'Using a password on the command line interface can be insecure' not in line:
+            print(Fore.RED + line)
 
 def connect():
     global db, cur
