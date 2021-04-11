@@ -24,8 +24,6 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.hasMultipleTargetReduction = false
     params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.DARK_MAGIC
     params.bonus = 1.0
 
     -- Calculate raw damage

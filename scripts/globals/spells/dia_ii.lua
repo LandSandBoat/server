@@ -20,15 +20,12 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.dmg = basedmg
     params.multiplier = 3
     params.skillType = xi.skill.ENFEEBLING_MAGIC
-    params.attribute = xi.mod.INT
     params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.ENFEEBLING_MAGIC
+    params.diff = 0
     params.bonus = 1.0
 
     -- Calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
+    local dmg = basedmg
     -- Softcaps at 8, should always do at least 1
     dmg = utils.clamp(dmg, 1, 8)
     -- Get resist multiplier (1x if no resist)
