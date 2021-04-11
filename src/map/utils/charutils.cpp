@@ -3977,7 +3977,33 @@ namespace charutils
 
         // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
         // This value is stored as uint, as a whole number percentage value
-        rawBonus += PChar->getMod(Mod::CAPACITY_BONUS); 
+        rawBonus += PChar->getMod(Mod::CAPACITY_BONUS);
+
+        // Unity Concord Ranking: 2 * (Unity Ranking - 1)
+        uint8 unity = PChar->profile.unity_leader;
+        if (unity >= 1 && unity <= 11)
+        {
+            rawBonus += 2 * (roeutils::RoeSystem.unityLeaderRank[unity - 1] - 1);
+        }
+
+        // RoE Objectives (There might be a formulaic way to do some of these)
+        // Nation Mission Completion (10%)
+        for (uint16 nationRecord = 1332; nationRecord <= 1372; nationRecord += 20)
+        {
+            if (roeutils::GetEminenceRecordCompletion(PChar, nationRecord))
+            {
+                rawBonus += 10;
+            }
+        }
+
+        // RoV Key Items - Fuchsia, Puce, Ochre (30%)
+        for (uint16 rovKeyItem = 2890; rovKeyItem <= 2892; rovKeyItem++)
+        {
+            if (hasKeyItem(PChar, rovKeyItem))
+            {
+                rawBonus += 30;
+            }
+        }
 
         capacityPoints *= 1.f + rawBonus / 100;
         return capacityPoints;
