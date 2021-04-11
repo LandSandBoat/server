@@ -3958,6 +3958,7 @@ namespace charutils
                     PMember->expChain.chainTime = gettick() + 30000;
                 }
 
+                capacityPoints = AddCapacityBonus(PMember, capacityPoints);
                 AddCapacityPoints(PMember, PMob, capacityPoints, levelDiff, chainActive);
             }
         });
@@ -3966,11 +3967,20 @@ namespace charutils
     /************************************************************************
     *                                                                       *
     *  Return adjusted Capacity point value based on bonuses                *
-    *                                                                       *
+    *  Note: rawBonus uses whole number percentage values until returning   *
+    *                                                                       * 
     ************************************************************************/
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints)
     {
+        float rawBonus = 0;
+
+        // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
+        // This value is stored as uint, as a whole number percentage value
+        rawBonus += PChar->getMod(Mod::CAPACITY_BONUS); 
+
+        capacityPoints *= 1.f + rawBonus / 100;
+        return capacityPoints;
     }
 
     /************************************************************************
@@ -3986,7 +3996,6 @@ namespace charutils
             return;
         }
 
-        capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
         capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
 
         uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
