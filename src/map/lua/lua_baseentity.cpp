@@ -6392,6 +6392,27 @@ uint8 CLuaBaseEntity::getJobPointLevel(uint16 jpType)
 }
 
 /************************************************************************
+ *  Function: setCapacityPoints()
+ *  Purpose : Sets the capacity points for a player to a specified amount
+ *  Example : player:setCapacityPoints(5000)
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::setCapacityPoints(uint16 amount)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to set Capacity Points for non-PC type!\n");
+        return;
+    }
+
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->PJobPoints->SetCapacityPoints(amount);
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+}
+
+/************************************************************************
  *  Function: setJobPoints()
  *  Purpose : Sets the job points for a player to a specified amount
  *  Example : player:setJobPoints(30)
@@ -12890,6 +12911,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMerits", CLuaBaseEntity::setMerits);
 
     SOL_REGISTER("getJobPointLevel", CLuaBaseEntity::getJobPointLevel);
+    SOL_REGISTER("setCapacityPoints", CLuaBaseEntity::setCapacityPoints);
     SOL_REGISTER("setJobPoints", CLuaBaseEntity::setJobPoints);
 
     SOL_REGISTER("getGil", CLuaBaseEntity::getGil);
