@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/ability")
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -21,16 +22,16 @@ local corsairRollMods =
     [xi.jobAbility.CHAOS_ROLL       ] = { {6, 8, 9, 25, 11, 13, 16, 3, 17, 19, 31, 10},            3,    10, xi.effect.CHAOS_ROLL,       xi.mod.ATTP,               xi.job.DRK  },
     [xi.jobAbility.MAGUSS_ROLL      ] = { {5, 20, 6, 8, 9, 3, 10, 13, 14, 15, 25, 5},              2,     8, xi.effect.MAGUSS_ROLL,      xi.mod.MDEF,               xi.job.BLU  },
     [xi.jobAbility.HEALERS_ROLL     ] = { {3, 4, 12, 5, 6, 7, 1, 8, 9, 10, 16, 4},                 3,     4, xi.effect.HEALERS_ROLL,     xi.mod.CURE_POTENCY_RCVD,  xi.job.WHM  },
-    [xi.jobAbility.DRACHEN_ROLL     ] = { {10, 13, 15, 40, 18, 20, 25, 5, 28, 30, 50, 15},         5,    15, xi.effect.DRACHEN_ROLL,     MOD_PET_ACC,                xi.job.DRG  },
+    [xi.jobAbility.DRACHEN_ROLL     ] = { {10, 13, 15, 40, 18, 20, 25, 5, 28, 30, 50, 15},         5,    15, xi.effect.DRACHEN_ROLL,     MOD_PET_ACC,               xi.job.DRG  },
     [xi.jobAbility.CHORAL_ROLL      ] = { {13, 55, 17, 20, 25, 8, 30, 35, 40, 45, 65, 25},         4,    25, xi.effect.CHORAL_ROLL,      xi.mod.SPELLINTERRUPT,     xi.job.BRD  },
     [xi.jobAbility.MONKS_ROLL       ] = { {8, 10, 32, 12, 14, 16, 4, 20, 22, 24, 40, 11},          4,    10, xi.effect.MONKS_ROLL,       xi.mod.SUBTLE_BLOW,        xi.job.MNK  },
-    [xi.jobAbility.BEAST_ROLL       ] = { {4, 5, 7, 19, 8, 9, 11, 2, 13, 14, 23, 7},               3,    10, xi.effect.BEAST_ROLL,       MOD_PET_ATTP,               xi.job.BST  },
+    [xi.jobAbility.BEAST_ROLL       ] = { {4, 5, 7, 19, 8, 9, 11, 2, 13, 14, 23, 7},               3,    10, xi.effect.BEAST_ROLL,       MOD_PET_ATTP,              xi.job.BST  },
     [xi.jobAbility.SAMURAI_ROLL     ] = { {8, 32, 10, 12, 14, 4, 16, 20, 22, 24, 40, 5},           4,    10, xi.effect.SAMURAI_ROLL,     xi.mod.STORETP,            xi.job.SAM  },
     [xi.jobAbility.EVOKERS_ROLL     ] = { {1, 1, 1, 1, 3, 2, 2, 2, 1, 3, 4, 1},                    1,     1, xi.effect.EVOKERS_ROLL,     xi.mod.REFRESH,            xi.job.SMN  },
     [xi.jobAbility.ROGUES_ROLL      ] = { {2, 2, 3, 4, 12, 5, 6, 6, 1, 8, 19, 6},                  1,     6, xi.effect.ROGUES_ROLL,      xi.mod.CRITHITRATE,        xi.job.THF  },
     [xi.jobAbility.WARLOCKS_ROLL    ] = { {2, 3, 4, 12, 5, 6, 7, 1, 8, 9, 15, 5},                  1,     5, xi.effect.WARLOCKS_ROLL,    xi.mod.MACC,               xi.job.RDM  },
     [xi.jobAbility.FIGHTERS_ROLL    ] = { {2, 2, 3, 4, 12, 5, 6, 7, 1, 9, 18, 6},                  1,     6, xi.effect.FIGHTERS_ROLL,    xi.mod.DOUBLE_ATTACK,      xi.job.WAR  },
-    [xi.jobAbility.PUPPET_ROLL      ] = { {4, 5, 18, 7, 9, 10, 2, 11, 13, 15, 22, 8},              3,     8, xi.effect.PUPPET_ROLL,      MOD_PET_MACC,               xi.job.PUP  },
+    [xi.jobAbility.PUPPET_ROLL      ] = { {4, 5, 18, 7, 9, 10, 2, 11, 13, 15, 22, 8},              3,     8, xi.effect.PUPPET_ROLL,      MOD_PET_MACC,              xi.job.PUP  },
     [xi.jobAbility.GALLANTS_ROLL    ] = { {6, 8, 24, 9, 11, 12, 3, 15, 17, 18, 30, 5},          2.34,     5, xi.effect.GALLANTS_ROLL,    xi.mod.DMG,                xi.job.PLD  },
     [xi.jobAbility.WIZARDS_ROLL     ] = { {4, 6, 8, 10, 25, 12, 14, 17, 2, 20, 30, 10},            2,    10, xi.effect.WIZARDS_ROLL,     xi.mod.MATT,               xi.job.BLM  },
     [xi.jobAbility.DANCERS_ROLL     ] = { {3, 4, 12, 5, 6, 7, 1, 8, 9, 10, 16, 4},                 2,     4, xi.effect.DANCERS_ROLL,     xi.mod.REGEN,              xi.job.DNC  },
@@ -39,12 +40,12 @@ local corsairRollMods =
     [xi.jobAbility.RUNEISTS_ROLL    ] = { {4, 6, 8, 25, 10, 12, 14, 2, 17, 20, 30, -10},           2,     7, xi.effect.RUNEISTS_ROLL,    xi.mod.MEVA,               xi.job.RUN  },
     [xi.jobAbility.BOLTERS_ROLL     ] = { {6, 6, 16, 8, 8, 10, 10, 12, 4, 14, 20, 0},              4,     0, xi.effect.BOLTERS_ROLL,     xi.mod.MOVE,               xi.job.NONE },
     [xi.jobAbility.CASTERS_ROLL     ] = { {6, 15, 7, 8, 9, 10, 5, 11, 12, 13, 20, -10},            3,    10, xi.effect.CASTERS_ROLL,     xi.mod.FASTCAST,           xi.job.NONE },
-    [xi.jobAbility.COURSERS_ROLL    ] = { {2, 3, 11, 4, 5, 6, 7, 8, 1, 10, 12, -5},                1,     3, xi.effect.COURSERS_ROLL,    MOD_SNAPSHOT,               xi.job.NONE },
+    [xi.jobAbility.COURSERS_ROLL    ] = { {2, 3, 11, 4, 5, 6, 7, 8, 1, 10, 12, -5},                1,     3, xi.effect.COURSERS_ROLL,    MOD_SNAPSHOT,              xi.job.NONE },
     [xi.jobAbility.BLITZERS_ROLL    ] = { {2, 3, 4, 11, 5, 6, 7, 8, 1, 10, 12, -5},                1,     3, xi.effect.BLITZERS_ROLL,    xi.mod.DELAY,              xi.job.NONE },
     [xi.jobAbility.TACTICIANS_ROLL  ] = { {10, 10, 10, 10, 30, 10, 10, 0, 20, 20, 40, -10},        2,    10, xi.effect.TACTICIANS_ROLL,  xi.mod.REGAIN,             xi.job.NONE },
     [xi.jobAbility.ALLIES_ROLL      ] = { {2, 3, 20, 5, 7, 9, 11, 13, 15, 1, 25, -5},              1,     5, xi.effect.ALLIES_ROLL,      xi.mod.SKILLCHAINBONUS,    xi.job.NONE },
     [xi.jobAbility.MISERS_ROLL      ] = { {30, 50, 70, 90, 200, 110, 20, 130, 150, 170, 250, 0},  15,     0, xi.effect.MISERS_ROLL,      xi.mod.SAVETP,             xi.job.NONE },
-    [xi.jobAbility.COMPANIONS_ROLL  ] = { {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0},                 10,     0, xi.effect.COMPANIONS_ROLL,  MOD_PET_REGAIN,             xi.job.NONE },
+    [xi.jobAbility.COMPANIONS_ROLL  ] = { {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0},                 10,     0, xi.effect.COMPANIONS_ROLL,  MOD_PET_REGAIN,            xi.job.NONE },
     [xi.jobAbility.AVENGERS_ROLL    ] = { {2, 2, 3, 12, 4, 5, 6, 1, 7, 9, 18, 6},                  1,     0, xi.effect.AVENGERS_ROLL,    xi.mod.COUNTER,            xi.job.NONE },
 }
 
@@ -147,7 +148,7 @@ end
 
 local function applyRoll(caster, target, ability, action, total)
     local abilityId = ability:getID()
-    local duration = 300 + caster:getMerit(xi.merit.WINNING_STREAK) + caster:getMod(xi.mod.PHANTOM_DURATION)
+    local duration = 300 + caster:getMerit(xi.merit.WINNING_STREAK) + caster:getMod(xi.mod.PHANTOM_DURATION) + (caster:getJobPointLevel(xi.jp.PHANTOM_ROLL_DURATION) * 2)
     local effectpowers = corsairRollMods[abilityId][1]
     local effectpower = effectpowers[total]
     local doBonus = getRandomEnhancementRoll(caster, abilityId)

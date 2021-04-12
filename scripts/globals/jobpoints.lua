@@ -188,9 +188,9 @@ xi.jp = {
     TACTICAL_PARRY_EFFECT    = JPCATEGORY_NIN + 0x09, --X counter when parry +1%
 
     --DRG
-    SPIRIT_SURGE_EFFECT      = JPCATEGORY_DRG + 0x00, --O Weapon DMG +1
+    SPIRIT_SURGE_EFFECT      = JPCATEGORY_DRG + 0x00, --+ Weapon DMG +1
     FLY_HIGH_EFFECT          = JPCATEGORY_DRG + 0x02, --X all jump p.atk +5
-    ANCIENT_CIRCLE_EFFECT    = JPCATEGORY_DRG + 0x01, --X dmg taken -1
+    ANCIENT_CIRCLE_EFFECT    = JPCATEGORY_DRG + 0x01, --+ dmg taken -1
     JUMP_EFFECT              = JPCATEGORY_DRG + 0x03, --X jump/spirit jump p.atk +3 -- missing spirit jump
     SPIRIT_LINK_EFFECT       = JPCATEGORY_DRG + 0x04, --O hp consumption -1%
     WYVERN_MAX_HP_BONUS      = JPCATEGORY_DRG + 0x05, --O wyvern max hp +10
@@ -213,8 +213,8 @@ xi.jp = {
 
     --BLU
     AZURE_LORE_EFFECT        = JPCATEGORY_BLU + 0x00, --O dmg +1 --needs verification
-    UNBRIDLED_WISDOM_EFFECT  = JPCATEGORY_BLU + 0x02, --X conserve mp +3
-    BLUE_MAGIC_POINT_BONUS   = JPCATEGORY_BLU + 0x01, --O blue magic points +1
+    UNBRIDLED_WISDOM_EFFECT  = JPCATEGORY_BLU + 0x02, --+ conserve mp +3
+    BLUE_MAGIC_POINT_BONUS   = JPCATEGORY_BLU + 0x01, --+ blue magic points +1
     BURST_AFFINITY_BONUS     = JPCATEGORY_BLU + 0x03, --X dmg +2
     CHAIN_AFFINITY_EFFECT    = JPCATEGORY_BLU + 0x04, --X sc dmg +1%
     BLUE_PHYS_AE_ACC_BONUS   = JPCATEGORY_BLU + 0x05, --X phys. add. effect acc +1
@@ -224,12 +224,12 @@ xi.jp = {
     BLU_MAGIC_ACC_BONUS      = JPCATEGORY_BLU + 0x09, --X m.acc +1
 
     --COR
-    WILD_CARD_EFFECT         = JPCATEGORY_COR + 0x00, --O probability of reset +1%
+    WILD_CARD_EFFECT         = JPCATEGORY_COR + 0x00, --X probability of reset +1%
     CUTTING_CARDS_EFFECT     = JPCATEGORY_COR + 0x02, --X recast of party abil. -1%
-    PHANTOM_ROLL_DURATION    = JPCATEGORY_COR + 0x01, --O dur. +2s
+    PHANTOM_ROLL_DURATION    = JPCATEGORY_COR + 0x01, --+ dur. +2s
     BUST_EVASION             = JPCATEGORY_COR + 0x03, --X bust chance -1%
     QUICK_DRAW_EFFECT        = JPCATEGORY_COR + 0x04, --X m.dmg +2
-    AMMO_CONSUMPTION         = JPCATEGORY_COR + 0x05, --O no ammo chance +1%
+    AMMO_CONSUMPTION         = JPCATEGORY_COR + 0x05, --X no ammo chance +1%
     RANDOM_DEAL_EFFECT       = JPCATEGORY_COR + 0x06, --X 2 abil random deal +2%
     COR_RANGED_ACC_BONUS     = JPCATEGORY_COR + 0x07, --X r.acc +1
     TRIPLE_SHOT_EFFECT       = JPCATEGORY_COR + 0x08, --X triple shot chance +1%

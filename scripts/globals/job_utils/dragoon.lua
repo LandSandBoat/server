@@ -6,6 +6,7 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
+require("scripts/globals/jobpoints")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -205,7 +206,14 @@ end
 
 xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.ANCIENT_CIRCLE_DURATION)
-    target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, 15, 0, duration)
+    local jpValue = player:getJobPointLevel(xi.jp.ANCIENT_CIRCLE_EFFECT)
+    local power = 5
+
+    if player:getMainJob() == xi.job.DRG then
+        power = 15 + jpValue
+    end
+
+    target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, power, 0, duration)
 end
 
 xi.job_utils.dragoon.useJump = function(player, target, ability, action)
