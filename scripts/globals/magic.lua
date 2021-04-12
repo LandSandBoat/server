@@ -562,6 +562,13 @@ function getSpellBonusAcc(caster, target, spell, params)
         magicAccBonus = magicAccBonus + getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
     end
 
+    if casterJob == xi.job.NIN then
+        -- NIN Job Point: Ninjitsu Accuracy Bonus
+        if skill == xi.skill.NINJUTSU then
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+        end        
+    end
+
     if casterJob == xi.job.BLU then
         -- BLU MACC merits - nuke acc is handled in bluemagic.lua
         if skill == xi.skill.BLUE_MAGIC then
@@ -1226,21 +1233,24 @@ function doNuke(caster, target, spell, params)
     local resist = applyResistance(caster, target, spell, params)
     --get the resisted damage
     dmg = dmg*resist
-    if (skill == xi.skill.NINJUTSU) then
-        if (caster:getMainJob() == xi.job.NIN) then -- NIN main gets a bonus to their ninjutsu nukes
+    if skill == xi.skill.NINJUTSU then
+        if caster:getMainJob() == xi.job.NIN then -- NIN main gets a bonus to their ninjutsu nukes
             local ninSkillBonus = 100
-            if (spell:getID() % 3 == 2) then -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
+            if spell:getID() % 3 == 2 then -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
                 ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50)/2) -- getSkillLevel includes bonuses from merits and modifiers (ie. gear)
-            elseif (spell:getID() % 3 == 0) then -- ni nuke spell ids are 1 more than their corresponding ichi spell
+            elseif spell:getID() % 3 == 0 then -- ni nuke spell ids are 1 more than their corresponding ichi spell
                 ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125)/2)
             else -- san nuke spell, also has ids 1 more than their corresponding ni spell
                 ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275)/2)
             end
+
             ninSkillBonus = utils.clamp(ninSkillBonus, 100, 200) -- bonus caps at +100%, and does not go negative
+            dmg = dmg + (caster:getJobPointValue(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
             dmg = dmg * ninSkillBonus/100
         end
         -- boost with Futae
-        if (caster:hasStatusEffect(xi.effect.FUTAE)) then
+        if caster:hasStatusEffect(xi.effect.FUTAE) then
+            dmg = dmg + (caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5)
             dmg = math.floor(dmg * 1.50)
             caster:delStatusEffect(xi.effect.FUTAE)
         end

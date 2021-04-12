@@ -178,13 +178,13 @@ xi.jp = {
     --NIN
     MIJIN_GAUKURE_EFFECT     = JPCATEGORY_NIN + 0x00, --+ dmg +3%
     MIKAGE_EFFECT            = JPCATEGORY_NIN + 0x02, --+ p.atk +3
-    YONIN_EFFECT             = JPCATEGORY_NIN + 0x01, --O p.eva +2
-    INNIN_EFFECT             = JPCATEGORY_NIN + 0x03, --O p.acc +1
-    NINJITSU_ACC_BONUS       = JPCATEGORY_NIN + 0x04, --O ninjitsu acc +1
-    NINJITSU_CAST_TIME_BONUS = JPCATEGORY_NIN + 0x05, --O casting time -1%
-    FUTAE_EFFECT             = JPCATEGORY_NIN + 0x06, --O m.dmg +5
-    ELEM_NINJITSU_EFFECT     = JPCATEGORY_NIN + 0x07, --O m.dmg +2
-    ISSEKIGAN_EFFECT         = JPCATEGORY_NIN + 0x08, --O vol. emnity +10
+    YONIN_EFFECT             = JPCATEGORY_NIN + 0x01, --+ p.eva +2
+    INNIN_EFFECT             = JPCATEGORY_NIN + 0x03, --+ p.acc +1
+    NINJITSU_ACC_BONUS       = JPCATEGORY_NIN + 0x04, --+ ninjitsu acc +1
+    NINJITSU_CAST_TIME_BONUS = JPCATEGORY_NIN + 0x05, --+ casting time -1%
+    FUTAE_EFFECT             = JPCATEGORY_NIN + 0x06, --+ m.dmg +5
+    ELEM_NINJITSU_EFFECT     = JPCATEGORY_NIN + 0x07, --+ m.dmg +2
+    ISSEKIGAN_EFFECT         = JPCATEGORY_NIN + 0x08, --+ vol. emnity +10
     TACTICAL_PARRY_EFFECT    = JPCATEGORY_NIN + 0x09, --X counter when parry +1%
 
     --DRG

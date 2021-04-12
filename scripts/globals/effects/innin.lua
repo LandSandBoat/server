@@ -8,6 +8,9 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect) --power=30 initially, subpower=20 for enmity
     target:addMod(xi.mod.EVA, -effect:getPower())
     target:addMod(xi.mod.ENMITY, -effect:getSubPower())
+
+    local jpValue = target:getJobPointLevel(xi.jp.INNIN_EFFECT)
+    target:addMod(xi.mod.ACC, jpValue)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -24,6 +27,9 @@ effect_object.onEffectLose = function(target, effect)
     --remove the remaining power
     target:delMod(xi.mod.EVA, -effect:getPower())
     target:delMod(xi.mod.ENMITY, -effect:getSubPower())
+
+    local jpValue = target:getJobPointLevel(xi.jp.INNIN_EFFECT)
+    target:delMod(xi.mod.ACC, jpValue)
 end
 
 return effect_object
