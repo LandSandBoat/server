@@ -2,6 +2,7 @@
 -- Spell: Foe Lullaby II
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
@@ -29,7 +30,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     else
         local iBoost = caster:getMod(xi.mod.LULLABY_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
 
-        duration = duration * (iBoost * 0.1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100 + 1)
+        duration = duration * (iBoost * 0.1 + caster:getMod(xi.mod.SONG_DURATION_BONUS) / 100 + 1) + caster:getJobPointLevel(xi.jp.LULLABY_DURATION)
 
         if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
             duration = duration * 2

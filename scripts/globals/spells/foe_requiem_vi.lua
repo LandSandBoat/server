@@ -2,6 +2,7 @@
 -- Spell: Foe Requiem VI
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
@@ -26,33 +27,36 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.bonus = 0
     params.effect = nil
     resm = applyResistance(caster, target, spell, params)
-    if (resm < 0.5) then
+    if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
         return 1
     end
 
     -- level 75 gets a bonus
-    if (caster:getMainLvl() >= 75) then
+    if caster:getMainLvl() >= 75 then
         power = power + 1
     end
 
     local iBoost = caster:getMod(xi.mod.REQUIEM_EFFECT) + caster:getMod(xi.mod.ALL_SONGS_EFFECT)
     power = power + iBoost
 
-    if (caster:hasStatusEffect(xi.effect.SOUL_VOICE)) then
+     -- JP Bonus
+    power = power + caster:getJobPointLevel(xi.jp.REQUIEM_EFFECT) * 3
+
+    if caster:hasStatusEffect(xi.effect.SOUL_VOICE) then
         power = power * 2
-    elseif (caster:hasStatusEffect(xi.effect.MARCATO)) then
+    elseif caster:hasStatusEffect(xi.effect.MARCATO) then
         power = power * 1.5
     end
     caster:delStatusEffect(xi.effect.MARCATO)
 
     duration = duration * ((iBoost * 0.1) + (caster:getMod(xi.mod.SONG_DURATION_BONUS)/100) + 1)
 
-    if (caster:hasStatusEffect(xi.effect.TROUBADOUR)) then
+    if caster:hasStatusEffect(xi.effect.TROUBADOUR) then
         duration = duration * 2
     end
     -- Try to overwrite weaker slow / haste
-    if (canOverwrite(target, effect, power)) then
+    if canOverwrite(target, effect, power) then
         -- overwrite them
         target:delStatusEffect(effect)
         target:addStatusEffect(effect, power, 3, duration)

@@ -140,16 +140,16 @@ xi.jp = {
     PET_EMNITY_BONUS         = JPCATEGORY_BST + 0x09, --X emnity +1
 
     --BRD
-    SOUL_VOICE_EFFECT        = JPCATEGORY_BRD + 0x00, --O casting time -2%
+    SOUL_VOICE_EFFECT        = JPCATEGORY_BRD + 0x00, --+ casting time -2%
     CLARION_CALL_EFFECT      = JPCATEGORY_BRD + 0x02, --X effect dur. +2s
-    MINNE_EFFECT             = JPCATEGORY_BRD + 0x01, --O p.def +1
-    MINUET_EFFECT            = JPCATEGORY_BRD + 0x03, --O p.atk +1
-    PIANISSIMO_EFFECT        = JPCATEGORY_BRD + 0x04, --O casting time -2%
+    MINNE_EFFECT             = JPCATEGORY_BRD + 0x01, --+ p.def +1
+    MINUET_EFFECT            = JPCATEGORY_BRD + 0x03, --+ p.atk +1
+    PIANISSIMO_EFFECT        = JPCATEGORY_BRD + 0x04, --+ casting time -2%
     SONG_ACC_BONUS           = JPCATEGORY_BRD + 0x05, --X song acc +1
     TENUTO_EFFECT            = JPCATEGORY_BRD + 0x06, --X song dur. +1s
-    LULLABY_DURATION         = JPCATEGORY_BRD + 0x07, --O lullaby dur. +1
+    LULLABY_DURATION         = JPCATEGORY_BRD + 0x07, --+ lullaby dur. +1
     MARCATO_EFFECT           = JPCATEGORY_BRD + 0x08, --X song dur. +1s
-    REQUIEM_EFFECT           = JPCATEGORY_BRD + 0x09, --O dot dmg +3
+    REQUIEM_EFFECT           = JPCATEGORY_BRD + 0x09, --+ dot dmg +3
 
     --RNG
     EAGLE_EYE_SHOT_EFFECT    = JPCATEGORY_RNG + 0x00, --+ dmg +3%
