@@ -1,6 +1,9 @@
 -----------------------------------
 -- xi.effect.MIKAGE
 -----------------------------------
+require("scripts/globals/jobpoints")
+require("scripts/globals/status")
+-----------------------------------
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.DODGE
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}

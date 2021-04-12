@@ -5,6 +5,7 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
