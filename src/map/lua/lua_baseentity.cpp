@@ -6044,7 +6044,6 @@ void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::SetUnityLeader(PChar, leaderID);
 
     // Update Unity Trust, assumes that values have been cleared
     if (PChar->profile.unity_leader > 0)
@@ -6054,6 +6053,7 @@ void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
         charutils::DeleteSpell(PChar, ROE_TRUST_ID[oldUnity]);
     }
 
+    charutils::SetUnityLeader(PChar, leaderID);
     roeutils::UpdateUnityTrust(PChar);
 }
 
