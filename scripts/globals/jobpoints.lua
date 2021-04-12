@@ -164,15 +164,15 @@ xi.jp = {
     UNLIMITED_SHOT_EFFECT    = JPCATEGORY_RNG + 0x09, --+ emnity -2
 
     --SAM
-    MEIKYO_SHISUI_EFFECT     = JPCATEGORY_SAM + 0x00, --O sc dmg +2%
+    MEIKYO_SHISUI_EFFECT     = JPCATEGORY_SAM + 0x00, --+ sc dmg +2%
     YAEGASUMI_EFFECT         = JPCATEGORY_SAM + 0x02, --X tp bonus +30
-    WARDING_CIRCLE_EFFECT    = JPCATEGORY_SAM + 0x01, --X dmg taken -1
-    HASSO_EFFECT             = JPCATEGORY_SAM + 0x03, --O STR +1
-    MEDITATE_EFFECT          = JPCATEGORY_SAM + 0x04, --O tp +5 per tick
-    SEIGAN_EFFECT            = JPCATEGORY_SAM + 0x05, --O p.def +3
+    WARDING_CIRCLE_EFFECT    = JPCATEGORY_SAM + 0x01, --+ dmg taken -1
+    HASSO_EFFECT             = JPCATEGORY_SAM + 0x03, --+ STR +1
+    MEDITATE_EFFECT          = JPCATEGORY_SAM + 0x04, --+ tp +5 per tick
+    SEIGAN_EFFECT            = JPCATEGORY_SAM + 0x05, --+ p.def +3
     KONZEN_ITTAI_EFFECT      = JPCATEGORY_SAM + 0x06, --X sc dmg +1%
-    HAMANOHA_DURATION        = JPCATEGORY_SAM + 0x07, --X dur. +1s
-    HAGAKURE_EFFECT          = JPCATEGORY_SAM + 0x08, --O tp bonus +10
+    HAMANOHA_DURATION        = JPCATEGORY_SAM + 0x07, --+ dur. +1s
+    HAGAKURE_EFFECT          = JPCATEGORY_SAM + 0x08, --+ tp bonus +10
     ZANSHIN_EFFECT           = JPCATEGORY_SAM + 0x09, --X zanshin follow-ups p.atk +2
 
     --NIN
