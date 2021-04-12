@@ -112,7 +112,7 @@ void CJobPoints::RaiseJobPoint(JOBPOINT_TYPE jpType)
         Sql_Query(SqlHandle, "UPDATE char_job_points SET jptype%u='%u', job_points='%u', job_points_spent='%u' WHERE charid='%u' AND jobid='%u'",
                   JobPointTypeIndex(jobPoint->id), jobPoint->value, job->currentJp, job->totalJpSpent, m_PChar->id, job->jobId);
 
-        jobpointutils::AddGiftMods(m_PChar);
+        jobpointutils::RefreshGiftMods(m_PChar);
     }
 }
 
@@ -221,7 +221,7 @@ namespace jobpointutils
         }
     }
 
-    void AddGiftMods(CCharEntity* PChar)
+    void RefreshGiftMods(CCharEntity* PChar)
     {
         uint16 totalJpSpent = PChar->PJobPoints->GetJobPointsSpent();
         uint8  jobId        = static_cast<uint8>(PChar->GetMJob());
@@ -236,7 +236,9 @@ namespace jobpointutils
         for (auto&& gift : jpGifts[jobId])
         {
             if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < 99)
+            {
                 break;
+            }
 
             currentGifts->push_back(CModifier(static_cast<Mod>(gift.modId), gift.value));
         }

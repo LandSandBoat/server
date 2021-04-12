@@ -18,8 +18,8 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.TP_BONUS, effect:getSubPower())
 
     -- Job Point Bonus
-    target:addMod(tpz.mod.ATT, jpEffect)
-    target:addMod(tpz.mod.RATT, jpEffect)
+    target:addMod(xi.mod.ATT, jpEffect)
+    target:addMod(xi.mod.RATT, jpEffect)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -33,8 +33,8 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.TP_BONUS, effect:getSubPower())
 
     -- Job Point Bonus
-    target:delMod(tpz.mod.ATT, jpEffect)
-    target:delMod(tpz.mod.RATT, jpEffect)
+    target:delMod(xi.mod.ATT, jpEffect)
+    target:delMod(xi.mod.RATT, jpEffect)
 end
 
 return effect_object

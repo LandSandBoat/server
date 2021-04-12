@@ -1192,7 +1192,7 @@ void CParty::RefreshSync()
             charutils::ApplyAllEquipMods(member);
 
             blueutils::ValidateBlueSpells(member);
-            jobpointutils::AddGiftMods(member);
+            jobpointutils::RefreshGiftMods(member);
             charutils::BuildingCharSkillsTable(member);
             charutils::CalculateStats(member);
             charutils::BuildingCharTraitsTable(member);

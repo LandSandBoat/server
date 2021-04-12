@@ -1008,6 +1008,7 @@ int32 map_config_default()
     map_config.exp_loss_rate               = 1.0f;
     map_config.exp_retain                  = 0.0f;
     map_config.exp_loss_level              = 4;
+    map_config.capacity_rate               = 1.0f;
     map_config.level_sync_enable           = false;
     map_config.disable_gear_scaling        = false;
     map_config.all_jobs_widescan           = true;
@@ -1207,6 +1208,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "exp_party_gap_penalties") == 0)
         {
             map_config.exp_party_gap_penalties = (uint8)atof(w2);
+        }
+        else if (strcmp(w1, "capacity_rate") == 0)
+        {
+            map_config.capacity_rate = (float)atof(w2);
         }
         else if (strcmp(w1, "mob_tp_multiplier") == 0)
         {

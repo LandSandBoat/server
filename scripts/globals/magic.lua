@@ -1327,7 +1327,7 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
             duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
 
             -- RDM Job Point: Stymie effect
-            if caster:hasStatusEffect(tpz.effect.STYMIE) and target:canGainStatusEffect(effect) then
+            if caster:hasStatusEffect(xi.effect.STYMIE) and target:canGainStatusEffect(effect) then
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end

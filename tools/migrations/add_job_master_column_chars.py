@@ -8,7 +8,7 @@ def check_preconditions(cur):
 	return
 
 def needs_to_run(cur):
-	# Ensure unity_leader column exists in char_profile
+	# Ensure job_master column exists in char_profile
 	cur.execute("SHOW COLUMNS FROM chars LIKE 'job_master'")
 	if not cur.fetchone():
 		return True

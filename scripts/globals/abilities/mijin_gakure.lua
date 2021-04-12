@@ -16,10 +16,11 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-
     local dmg = (player:getHP() * 0.8) + (player:getMainLvl() / 0.5)
     local resist = applyPlayerResistance(player, nil, target, player:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, xi.magic.ele.NONE)
 
+    -- Job Point Bonus (3% per Level)
+    dmg = dmg * (1 + (player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03))
     dmg = dmg * resist
 
     dmg = utils.stoneskin(target, dmg)
