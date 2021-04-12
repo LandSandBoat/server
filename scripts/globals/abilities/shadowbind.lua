@@ -25,7 +25,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
 
-    local duration = 30 + player:getMod(xi.mod.SHADOW_BIND_EXT)
+    local duration = 30 + player:getMod(xi.mod.SHADOW_BIND_EXT) + player:getJobPointLevel(xi.jp.SHADOWBIND_DURATION)
     local recycleChance = player:getMod(xi.mod.RECYCLE) + player:getMerit(xi.merit.RECYCLE)
     if (player:hasStatusEffect(xi.effect.UNLIMITED_SHOT)) then
         player:delStatusEffect(xi.effect.UNLIMITED_SHOT)

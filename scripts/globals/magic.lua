@@ -1245,7 +1245,7 @@ function doNuke(caster, target, spell, params)
             end
 
             ninSkillBonus = utils.clamp(ninSkillBonus, 100, 200) -- bonus caps at +100%, and does not go negative
-            dmg = dmg + (caster:getJobPointValue(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
+            dmg = dmg + (caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
             dmg = dmg * ninSkillBonus/100
         end
         -- boost with Futae

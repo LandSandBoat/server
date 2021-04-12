@@ -29,7 +29,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability, action)
-    if (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP) then
+    if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
     local params = {}
@@ -43,10 +43,14 @@ ability_object.onUseAbility = function(player, target, ability, action)
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
     params.enmityMult = 0.5
 
+    -- Job Point Bonus Damage
+    local jpValue = player:getJobPointLevel(xi.jp.EAGLE_EYE_SHOT_EFFECT)
+    player:addMod(xi.mod.ALL_WSDMG_ALL_HITS, jpValue * 3)
+
     local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, 0, params, 0, action, true)
 
     -- Set the message id ourselves
-    if (tpHits + extraHits > 0) then
+    if tpHits + extraHits > 0 then
         action:messageID(target:getID(), xi.msg.basic.JA_DAMAGE)
         action:speceffect(target:getID(), 32)
     else

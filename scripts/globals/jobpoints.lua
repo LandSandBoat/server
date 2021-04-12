@@ -152,16 +152,16 @@ xi.jp = {
     REQUIEM_EFFECT           = JPCATEGORY_BRD + 0x09, --O dot dmg +3
 
     --RNG
-    EAGLE_EYE_SHOT_EFFECT    = JPCATEGORY_RNG + 0x00, --O dmg +3%
+    EAGLE_EYE_SHOT_EFFECT    = JPCATEGORY_RNG + 0x00, --+ dmg +3%
     OVERKILL_EFFECT          = JPCATEGORY_RNG + 0x02, --X emnity -1
-    SHARPSHOT_EFFECT         = JPCATEGORY_RNG + 0x01, --O r.atk +2
-    CAMOUFLAGE_EFFECT        = JPCATEGORY_RNG + 0x03, --O crit. hit rate +1%
-    BARRAGE_EFFECT           = JPCATEGORY_RNG + 0x04, --O r.atk +3
-    SHADOWBIND_DURATION      = JPCATEGORY_RNG + 0x05, --O dur. +1s
-    VELOCITY_SHOT_EFFECT     = JPCATEGORY_RNG + 0x06, --O r.atk +2
-    DOUBLE_SHOT_EFFECT       = JPCATEGORY_RNG + 0x07, --O chance +1%
+    SHARPSHOT_EFFECT         = JPCATEGORY_RNG + 0x01, --+ r.atk +2
+    CAMOUFLAGE_EFFECT        = JPCATEGORY_RNG + 0x03, --+ crit. hit rate +1%
+    BARRAGE_EFFECT           = JPCATEGORY_RNG + 0x04, --+ r.atk +3
+    SHADOWBIND_DURATION      = JPCATEGORY_RNG + 0x05, --+ dur. +1s
+    VELOCITY_SHOT_EFFECT     = JPCATEGORY_RNG + 0x06, --+ r.atk +2
+    DOUBLE_SHOT_EFFECT       = JPCATEGORY_RNG + 0x07, --+ chance +1%
     DECOY_SHOT_EFFECT        = JPCATEGORY_RNG + 0x08, --X max emnity vol. +15, cum. +5
-    UNLIMITED_SHOT_EFFECT    = JPCATEGORY_RNG + 0x09, --O emnity -2
+    UNLIMITED_SHOT_EFFECT    = JPCATEGORY_RNG + 0x09, --+ emnity -2
 
     --SAM
     MEIKYO_SHISUI_EFFECT     = JPCATEGORY_SAM + 0x00, --O sc dmg +2%
