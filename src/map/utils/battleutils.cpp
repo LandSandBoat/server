@@ -970,7 +970,15 @@ namespace battleutils
                 Action->additionalEffect = SUBEFFECT_HP_DRAIN;
                 Action->addEffectMessage = 161;
 
-                Action->addEffectParam = PAttacker->addHP(Action->param);
+                // Increase HP Absorbed by 2% per JP
+                int32 absorbed = Action->param;
+                if (PAttacker->objtype == TYPE_PC)
+                {
+                    absorbed += (int32)floor(
+                        absorbed * 0.02f * static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_BLOOD_WEAPON_EFFECT));
+                }
+
+                Action->addEffectParam = PAttacker->addHP(absorbed);
 
                 if (PChar != nullptr)
                 {

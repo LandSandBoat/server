@@ -5,6 +5,7 @@
 -- Cast Time: Instant
 -- Recast Time: 3:00 minutes
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -34,7 +35,8 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 
     -- Calculating and applying Weapon Bash damage
-    local damage = math.floor(((darkKnightLvl + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
+    local jpValue = target:getJobPointLevel(xi.jp.WEAPON_BASH_EFFECT)
+    local damage = math.floor(((darkKnightLvl + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH) + jpValue * 10)
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
 
