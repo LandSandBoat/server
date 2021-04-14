@@ -51,7 +51,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         isSneakValid = false
     end
 
-    local hitrate = getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)
+    local hitrate = getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT))
 
     if (math.random() <= hitrate or isSneakValid) then
 

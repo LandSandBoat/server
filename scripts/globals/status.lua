@@ -1545,6 +1545,13 @@ xi.mod =
     WS_MND_BONUS                    = 984, -- % bonus to mnd_wsc.
     WS_CHR_BONUS                    = 985, -- % bonus to chr_wsc.
 
+    PET_ATK_DEF                     = 990, -- Increases pet physical attack, ranged attack, and physical defense
+    PET_ACC_EVA                     = 991, -- Increases pet physical accuracy, ranged accuracy, and evasion
+    PET_MAB_MDB                     = 992, -- Increases pet magic attack and magic defense
+    PET_MACC_MEVA                   = 993, -- Increases pet magic accuracy and evasion
+    PET_ATTR_BONUS                  = 994, -- Increases pet attributes
+    PET_TP_BONUS                    = 995, -- Increases pet TP bonus
+
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
     ARCANE_CIRCLE_DURATION          = 858,
@@ -1581,10 +1588,13 @@ xi.mod =
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     WYVERN_BREATH_MACC              = 986,
+
+    SUPERIOR_LEVEL  = 986, -- SU0..5
+    ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
+
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 987, -- stuff
-    -- SPARE = 988, -- stuff
+    -- For Next ID, see modifier.h
 }
 
 xi.latent =

@@ -116,6 +116,9 @@ xi.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability)
     if not hasWyvern(target) then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
+        if ability:getID() == xi.jobAbility.SPIRIT_SURGE then
+            ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+        end
         return 0, 0
     end
 end
