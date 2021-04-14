@@ -5,6 +5,7 @@
 -- Recast Time: 1:00:00
 -- Duration: 1:00
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -16,6 +17,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     player:addStatusEffect(xi.effect.TRANCE, 1, 0, 60)
+    player:addTP(100 * player:getJobPointLevel(xi.jp.TRANCE_EFFECT))
 end
 
 return ability_object

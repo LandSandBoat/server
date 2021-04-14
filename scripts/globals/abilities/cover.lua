@@ -6,6 +6,7 @@
 -- Duration: 0:00:15 - 0:00:30
 -- Info from https://www.bg-wiki.com/bg/Cover
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -22,7 +23,8 @@ end
 ability_object.onUseAbility = function(player, target, ability)
     local baseDuration = 15
     local bonusTime    = utils.clamp(math.floor((player:getStat(xi.mod.VIT) + player:getStat(xi.mod.MND) - target:getStat(xi.mod.VIT) * 2) / 4), 0, 15)
-    local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION)
+    local jpValue      = player:getJobPointValue(xi.jp.COVER_DURATION)
+    local duration     = baseDuration + bonusTime + player:getMerit(xi.merit.COVER_EFFECT_LENGTH) + player:getMod(xi.mod.COVER_DURATION) + jpValue
 
     player:addStatusEffect(xi.effect.COVER, player:getMod(xi.mod.COVER_TO_MP), 0, duration)
     player:setLocalVar("COVER_ABILITY_TARGET", target:getID())

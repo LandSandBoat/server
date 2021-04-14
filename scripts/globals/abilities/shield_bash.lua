@@ -5,6 +5,7 @@
 -- Recast Time: 1:00 minute (3:00 for Valoredge version)
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -22,6 +23,7 @@ end
 ability_object.onUseAbility = function(player, target, ability)
 
     local shieldSize = player:getShieldSize()
+    local jpValue = player:getJobPointLevel(xi.jp.SHIELD_BASH_EFFECT)
     local damage = 0
     local chance = 90
     damage = player:getMod(xi.mod.SHIELD_BASH)
@@ -43,6 +45,8 @@ ability_object.onUseAbility = function(player, target, ability)
     else
         damage = math.floor(damage)
     end
+
+    damage = damage + jpValue * 10
 
     -- Calculate stun proc chance
     chance = chance + (player:getMainLvl() - target:getMainLvl()) * 5

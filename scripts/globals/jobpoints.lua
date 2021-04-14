@@ -104,16 +104,16 @@ xi.jp = {
     TRIPLE_ATTACK_EFFECT     = JPCATEGORY_THF + 0x09, --X p.atk +1
 
     --PLD
-    INVINCIBLE_EFFECT        = JPCATEGORY_PLD + 0x00, --O emnity +100
+    INVINCIBLE_EFFECT        = JPCATEGORY_PLD + 0x00, --+ emnity +100
     INTERVENE_EFFECT         = JPCATEGORY_PLD + 0x02, --X dmg +2%
     HOLY_CIRCLE_EFFECT       = JPCATEGORY_PLD + 0x01, --X dmg taken -1
-    SENTINEL_EFFECT          = JPCATEGORY_PLD + 0x03, --O emnity +1
-    SHIELD_BASH_EFFECT       = JPCATEGORY_PLD + 0x04, --O dmg +10
-    COVER_DURATION           = JPCATEGORY_PLD + 0x05, --X dur. +1s
+    SENTINEL_EFFECT          = JPCATEGORY_PLD + 0x03, --X emnity +1
+    SHIELD_BASH_EFFECT       = JPCATEGORY_PLD + 0x04, --+ dmg +10
+    COVER_DURATION           = JPCATEGORY_PLD + 0x05, --+ dur. +1s
     DIVINE_EMBLEM_EFFECT     = JPCATEGORY_PLD + 0x06, --X m.dmg +2
     SEPULCHER_DURATION       = JPCATEGORY_PLD + 0x07, --X dur. +1s
     PALISADE_EFFECT          = JPCATEGORY_PLD + 0x08, --X block chance +1%
-    ENLIGHT_EFFECT           = JPCATEGORY_PLD + 0x09, --O ae.dmg +1 p.acc +1
+    ENLIGHT_EFFECT           = JPCATEGORY_PLD + 0x09, --+ enlight dmg +1 p.acc +1
 
     --DRK
     BLOOD_WEAPON_EFFECT      = JPCATEGORY_DRK + 0x00, --O hp absorb +2%
@@ -236,19 +236,19 @@ xi.jp = {
     OPTIMAL_RANGE_BONUS      = JPCATEGORY_COR + 0x09, --X sweet spot dmg +1
 
     --PUP
-    OVERDRIVE_EFFECT         = JPCATEGORY_PUP + 0x00, --O all pet attr. +5
+    OVERDRIVE_EFFECT         = JPCATEGORY_PUP + 0x00, --+ all pet attr. +5
     HEADY_ARTIFICE_EFFECT    = JPCATEGORY_PUP + 0x02, --X increase head effects (see wiki)
-    AUTOMATON_HP_MP_BONUS    = JPCATEGORY_PUP + 0x01, --O pet hp+10, mp+5
-    ACTIVATE_EFFECT          = JPCATEGORY_PUP + 0x03, --O burden -1
+    AUTOMATON_HP_MP_BONUS    = JPCATEGORY_PUP + 0x01, --+ pet hp+10, mp+5
+    ACTIVATE_EFFECT          = JPCATEGORY_PUP + 0x03, --+ burden -1
     REPAIR_EFFECT            = JPCATEGORY_PUP + 0x04, --O mp hot based on oil (see wiki)
-    DEUS_EX_AUTOMATA_RECAST  = JPCATEGORY_PUP + 0x05, --O recast -1s
+    DEUS_EX_AUTOMATA_RECAST  = JPCATEGORY_PUP + 0x05, --+ recast -1s
     TACTICAL_SWITCH_BONUS    = JPCATEGORY_PUP + 0x06, --X tp +20
     COOLDOWN_EFFECT          = JPCATEGORY_PUP + 0x07, --O burden -1
     DEACTIVATE_EFFECT        = JPCATEGORY_PUP + 0x08, --X hp require. -1%
     PUP_MARTIAL_ARTS_EFFECT  = JPCATEGORY_PUP + 0x09, --X delay -2
 
     --DNC
-    TRANCE_EFFECT            = JPCATEGORY_DNC + 0x00, --O tp +100
+    TRANCE_EFFECT            = JPCATEGORY_DNC + 0x00, --+ tp +100
     GRAND_PAS_EFFECT         = JPCATEGORY_DNC + 0x02, --X dmg +1
     STEP_DURATION            = JPCATEGORY_DNC + 0x01, --X dur. +1s
     SAMBA_DURATION           = JPCATEGORY_DNC + 0x03, --X dur. +2s

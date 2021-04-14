@@ -5,12 +5,16 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:30
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
+    local jpValue = player:getJobPointLevel(xi.jp.INVINCIBLE_EFFECT)
+
+    ability:setVE(ability:getVE() + 100 * jpValue)
     return 0, 0
 end
 
