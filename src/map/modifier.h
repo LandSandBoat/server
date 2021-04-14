@@ -326,6 +326,7 @@ enum class Mod
     REGEN_MULTIPLIER = 838, // Multiplier to base regen rate
     CURE2MP_PERCENT  = 860, // Converts % of "Cure" amount to MP
     DIVINE_BENISON   = 910, // Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
+    REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
     CLEAR_MIND  = 295, // Used in conjunction with HEALMP to increase amount between tics
@@ -520,16 +521,17 @@ enum class Mod
     AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
 
     // Dancer
-    FINISHING_MOVES         = 333, // Tracks # of finishing moves
-    SAMBA_DURATION          = 490, // Samba duration bonus
-    WALTZ_POTENTCY          = 491, // Waltz Potentcy Bonus
-    JIG_DURATION            = 492, // Jig duration bonus in percents
-    VFLOURISH_MACC          = 493, // Violent Flourish accuracy bonus
-    STEP_FINISH             = 494, // Bonus finishing moves from steps
-    STEP_ACCURACY           = 403, // Bonus accuracy for Dancer's steps
-    WALTZ_DELAY             = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
-    SAMBA_PDURATION         = 498, // Samba percent duration bonus
-    REVERSE_FLOURISH_EFFECT = 836, // Reverse Flourish effect in tenths of squared term multiplier
+    FINISHING_MOVES          = 333, // Tracks # of finishing moves
+    SAMBA_DURATION           = 490, // Samba duration bonus
+    WALTZ_POTENTCY           = 491, // Waltz Potentcy Bonus
+    JIG_DURATION             = 492, // Jig duration bonus in percents
+    VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
+    STEP_FINISH              = 494, // Bonus finishing moves from steps
+    STEP_ACCURACY            = 403, // Bonus accuracy for Dancer's steps
+    WALTZ_DELAY              = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
+    SAMBA_PDURATION          = 498, // Samba percent duration bonus
+    REVERSE_FLOURISH_EFFECT  = 836, // Reverse Flourish effect in tenths of squared term multiplier
+    MAX_FINISHING_MOVE_BONUS = 988, // Increases the maximum number of finishing moves that may be stored
 
     // Scholar
     BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
@@ -821,11 +823,11 @@ enum class Mod
     SUBTLE_BLOW_II       = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     GARDENING_WILT_BONUS = 975, // Increases the number of Vanadays a plant can survive before it wilts
 
-    SUPERIOR_LEVEL = 986,  // SU0..5
+    SUPERIOR_LEVEL = 986, // SU0..5
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 988, // stuff
+    // SPARE = 990, // stuff
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -64,7 +64,7 @@ xi.jp = {
     AFFLATUS_MISERY_EFFECT   = JPCATEGORY_WHM + 0x05, --X banish +2 m.dmg, miss => acc +1 dmg +1
     DIVINE_CARESS_DURATION   = JPCATEGORY_WHM + 0x06, --X dur. +2 sec
     SACROSANCTITY_EFFECT     = JPCATEGORY_WHM + 0x07, --X minimum DEF +1
-    REGEN_DURATION           = JPCATEGORY_WHM + 0x08, --O dur. +3 sec
+    REGEN_DURATION           = JPCATEGORY_WHM + 0x08, --+ dur. +3 sec
     BAR_SPELL_EFFECT         = JPCATEGORY_WHM + 0x09, --O resistance +2
 
     --BLM
@@ -253,17 +253,17 @@ xi.jp = {
     STEP_DURATION            = JPCATEGORY_DNC + 0x01, --X dur. +1s
     SAMBA_DURATION           = JPCATEGORY_DNC + 0x03, --X dur. +2s
     WALTZ_POTENCY_BONUS      = JPCATEGORY_DNC + 0x04, --X waltz potency +2 (not %)
-    JIG_DURATION             = JPCATEGORY_DNC + 0x05, --X dur. +1s
+    JIG_DURATION             = JPCATEGORY_DNC + 0x05, --+ dur. +1s
     FLOURISH_I_EFFECT        = JPCATEGORY_DNC + 0x06, --X effect bonuses (see wiki)
     FLOURISH_II_EFFECT       = JPCATEGORY_DNC + 0x07, --X effect bonuses (see wiki)
     FLOURISH_III_EFFECT      = JPCATEGORY_DNC + 0x08, --X CHR bonus +1%
     CONTRADANCE_EFFECT       = JPCATEGORY_DNC + 0x09, --X waltz tp -3%
 
     --SCH
-    TABULA_RASA_EFFECT       = JPCATEGORY_SCH + 0x00, --O mp recov. +2%
+    TABULA_RASA_EFFECT       = JPCATEGORY_SCH + 0x00, --+ mp recov. +2%
     CAPER_EMMISSARIUS_EFFECT = JPCATEGORY_SCH + 0x02, --X hp recov. +2%
     LIGHT_ARTS_EFFECT        = JPCATEGORY_SCH + 0x01, --O dur. +3s
-    DARK_ARTS_EFFECT         = JPCATEGORY_SCH + 0x03, --O dur. +3s
+    DARK_ARTS_EFFECT         = JPCATEGORY_SCH + 0x03, --+ dur. +3s
     STRATEGEM_EFFECT_I       = JPCATEGORY_SCH + 0x04, --O m.acc +1
     STRATEGEM_EFFECT_II      = JPCATEGORY_SCH + 0x05, --O cast time -1%
     STRATEGEM_EFFECT_III     = JPCATEGORY_SCH + 0x06, --O m.dmg +2

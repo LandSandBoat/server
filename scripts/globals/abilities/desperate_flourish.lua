@@ -6,6 +6,7 @@
 -- Recast Time: 00:20
 -- Duration: ??
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/weaponskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -50,7 +51,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         isSneakValid = false
     end
 
-    local hitrate = getHitRate(player, target, true)
+    local hitrate = getHitRate(player, target, true, player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)
 
     if (math.random() <= hitrate or isSneakValid) then
 

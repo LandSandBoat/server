@@ -357,7 +357,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 545, 915, 23, 'WHM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(3, 550, 960, 5, 'WHM_Regen Bonus');
+	(3, 550, 989, 5, 'WHM_Regen Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 605, 29, 14, 'WHM_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2447,7 +2447,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 100, 986, 1, 'DNC_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 100, 986, 2, 'DNC_Maximum Finishing Moves Bonus');
+	(19, 100, 988, 2, 'DNC_Maximum Finishing Moves Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 125, 421, 2, 'DNC_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2525,7 +2525,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 1200, 986, 1, 'DNC_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 1200, 986, 2, 'DNC_Maximum Finishing Moves Bonus');
+	(19, 1200, 988, 2, 'DNC_Maximum Finishing Moves Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 1280, 1, 15, 'DNC_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES

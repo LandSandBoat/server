@@ -1025,6 +1025,13 @@ function getHelixDuration(caster)
     elseif (casterLevel <= 99) then
         duration = 90
     end
+
+    if caster:hasStatusEffect(xi.effect.DARK_ARTS) then
+        local jpValue = caster:getJobPointLevel(xi.jp.DARK_ARTS_EFFECT)
+
+        duration = duration + (3 * jpValue)
+    end
+
     return duration
 end
 

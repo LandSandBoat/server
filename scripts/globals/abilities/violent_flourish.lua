@@ -6,6 +6,7 @@
 -- Recast Time: 0:20
 -- Duration: ??
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/weaponskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -78,7 +79,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         local params = {}
         params.diff = 0
         params.skillType = player:getWeaponSkillType(xi.slot.MAIN)
-        params.bonus = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC)
+        params.bonus = 50 - target:getMod(xi.mod.STUNRES) + player:getMod(xi.mod.VFLOURISH_MACC) + player:getJobPointLevel(xi.jp.FLOURISH_I_EFFECT)
         local resist = applyResistance(player, target, spell, params)
 
         if resist > 0.25 then
