@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../entities/mobentity.h"
 #include "../grades.h"
 #include "../items/item_weapon.h"
+#include "../job_points.h"
 #include "../latent_effect_container.h"
 #include "../map.h"
 #include "../mob_spell_list.h"
@@ -483,10 +484,10 @@ namespace petutils
         PPet->WorkingSkills.dark            = amaSkill;
 
         // Объявление переменных, нужных для рассчета.
-        float raceStat = 0; // конечное число HP для уровня на основе расы.
-        float jobStat  = 0; // конечное число HP для уровня на основе первичной профессии.
-        float sJobStat = 0; // коенчное число HP для уровня на основе вторичной профессии.
-        int32 bonusStat = 0; // бонусное число HP которое добавляется при соблюдении некоторых условий.
+        float raceStat          = 0; // конечное число HP для уровня на основе расы.
+        float jobStat           = 0; // конечное число HP для уровня на основе первичной профессии.
+        float sJobStat          = 0; // коенчное число HP для уровня на основе вторичной профессии.
+        int32 bonusStat         = 0; // бонусное число HP которое добавляется при соблюдении некоторых условий.
         int32 baseValueColumn   = 0; // номер колонки с базовым количеством HP
         int32 scaleTo60Column   = 1; // номер колонки с модификатором до 60 уровня
         int32 scaleOver30Column = 2; // номер колонки с модификатором после 30 уровня
@@ -501,13 +502,13 @@ namespace petutils
         JOBTYPE mjob = PPet->GetMJob();
         JOBTYPE sjob = PPet->GetSJob();
         // Расчет прироста HP от main job
-        int32 mainLevelOver30 = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
-        int32 mainLevelUpTo60 = (mlvl < 60 ? mlvl - 1 : 59); // Первый режим рассчета до 60 уровня (Используется так же и для MP)
+        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
+        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // Первый режим рассчета до 60 уровня (Используется так же и для MP)
         int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Второй режим расчета после 60 уровня
         int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Третий режим расчета после 75 уровня
 
         //Расчет бонусного количества HP
-        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10); // +2HP на каждом уровне после 10
+        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP на каждом уровне после 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP на каждом уровне в промежутке от 50 до 60 уровня
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
 
@@ -632,22 +633,35 @@ namespace petutils
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, PPet->GetMLevel()));
                 break;
         }
+
+        // Add Job Point Stat Bonuses
+        if (PMaster->GetMJob() == JOB_PUP)
+        {
+            PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
+            PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
+            PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
+            PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
+            PPet->addModifier(Mod::MATT, PMaster->getMod(Mod::PET_MAB_MDB));
+            PPet->addModifier(Mod::MDEF, PMaster->getMod(Mod::PET_MAB_MDB));
+            PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
+            PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
+        }
     }
 
-    void LoadAvatarStats(CPetEntity* PPet)
+    void LoadAvatarStats(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         // Объявление переменных, нужных для рассчета.
-        float raceStat = 0; // конечное число HP для уровня на основе расы.
-        float jobStat  = 0; // конечное число HP для уровня на основе первичной профессии.
-        float sJobStat = 0; // коенчное число HP для уровня на основе вторичной профессии.
-        int32 bonusStat = 0; // бонусное число HP которое добавляется при соблюдении некоторых условий.
+        float raceStat          = 0; // конечное число HP для уровня на основе расы.
+        float jobStat           = 0; // конечное число HP для уровня на основе первичной профессии.
+        float sJobStat          = 0; // коенчное число HP для уровня на основе вторичной профессии.
+        int32 bonusStat         = 0; // бонусное число HP которое добавляется при соблюдении некоторых условий.
         int32 baseValueColumn   = 0; // номер колонки с базовым количеством HP
         int32 scaleTo60Column   = 1; // номер колонки с модификатором до 60 уровня
         int32 scaleOver30Column = 2; // номер колонки с модификатором после 30 уровня
         int32 scaleOver60Column = 3; // номер колонки с модификатором после 60 уровня
         int32 scaleOver75Column = 4; // номер колонки с модификатором после 75 уровня
         int32 scaleOver60       = 2; // номер колонки с модификатором для расчета MP после 60 уровня
-        int32 scaleOver75 = 3; // номер колонки с модификатором для расчета Статов после 75-го уровня
+        int32 scaleOver75       = 3; // номер колонки с модификатором для расчета Статов после 75-го уровня
 
         uint8 grade;
 
@@ -656,13 +670,13 @@ namespace petutils
         uint8   race = 3; // Tarutaru
 
         // Расчет прироста HP от main job
-        int32 mainLevelOver30 = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
-        int32 mainLevelUpTo60 = (mlvl < 60 ? mlvl - 1 : 59); // Первый режим рассчета до 60 уровня (Используется так же и для MP)
+        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Расчет условия +1HP каждый лвл после 30 уровня
+        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // Первый режим рассчета до 60 уровня (Используется так же и для MP)
         int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Второй режим расчета после 60 уровня
         int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Третий режим расчета после 75 уровня
 
         //Расчет бонусного количества HP
-        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10); // +2HP на каждом уровне после 10
+        int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP на каждом уровне после 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP на каждом уровне в промежутке от 50 до 60 уровня
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
 
@@ -768,6 +782,19 @@ namespace petutils
             // Вывод значения
             ref<uint16>(&PPet->stats, counter) = (uint16)(raceStat + jobStat);
             counter += 2;
+        }
+
+        // SMN Job Gift Bonuses, DRG and PUP handled in their respective functions
+        if (PMaster->GetMJob() == JOB_SMN)
+        {
+            PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
+            PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
+            PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
+            PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
+            PPet->addModifier(Mod::MATT, PMaster->getMod(Mod::PET_MAB_MDB));
+            PPet->addModifier(Mod::MDEF, PMaster->getMod(Mod::PET_MAB_MDB));
+            PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
+            PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
         }
     }
 
@@ -1403,7 +1430,7 @@ namespace petutils
                 ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. \n", PMaster->GetName());
                 PPet->SetMLevel(1);
             }
-            LoadAvatarStats(PPet); // follows PC calcs (w/o SJ)
+            LoadAvatarStats(PMaster, PPet); // follows PC calcs (w/o SJ)
 
             PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
 
@@ -1478,6 +1505,12 @@ namespace petutils
                 PPet->addModifier(Mod::ATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ATTACK, PChar));
                 PPet->addModifier(Mod::MACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ACCURACY, PChar));
                 PPet->addModifier(Mod::ACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ACCURACY, PChar));
+
+                PPet->addModifier(Mod::ACC, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_ACC_BONUS));
+                PPet->addModifier(Mod::MACC, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_MAGIC_ACC_BONUS));
+                PPet->addModifier(Mod::ATT, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_PHYS_ATK_BONUS) * 2);
+                PPet->addModifier(Mod::MAGIC_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_SUMMON_MAGIC_DMG_BONUS) * 5);
+                PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_BLOOD_PACT_DMG_BONUS) * 3);
             }
 
             PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, PPet->GetMLevel()));
@@ -1585,7 +1618,7 @@ namespace petutils
         PPet->SetMJob(JOB_DRG);
         PPet->SetMLevel(PMaster->GetMLevel());
 
-        LoadAvatarStats(PPet);                                                                             // follows PC calcs (w/o SJ)
+        LoadAvatarStats(PMaster, PPet);                                                                    // follows PC calcs (w/o SJ)
         ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
         ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(PPet->GetMLevel() * 0.9f)));
         // Set A+ weapon skill
@@ -1594,6 +1627,24 @@ namespace petutils
         // Set D evasion and def
         PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
         PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
+
+        // Job Point: Wyvern Max HP
+        if (PMaster->objtype == TYPE_PC)
+        {
+            uint8 jpValue = static_cast<CCharEntity*>(PMaster)->PJobPoints->GetJobPointValue(JP_WYVERN_MAX_HP_BONUS);
+            if (jpValue > 0)
+            {
+                PPet->addModifier(Mod::HP, jpValue * 10);
+            }
+
+            if (PMaster->GetMJob() == JOBTYPE::JOB_DRG)
+            {
+                PPet->addModifier(Mod::ACC, PMaster->getMod(Mod::PET_ACC_EVA));
+                PPet->addModifier(Mod::EVA, PMaster->getMod(Mod::PET_ACC_EVA));
+                PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
+                PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
+            }
+        }
 
         if (finalize)
         {

@@ -202,14 +202,14 @@ xi.jp = {
     --SMN
     ASTRAL_FLOW_EFFECT       = JPCATEGORY_SMN + 0x00, --O all pet attr. +5
     ASTRAL_CONDUIT_EFFECT    = JPCATEGORY_SMN + 0x02, --X BPR: dmg +1% BPW: duration +1%
-    SUMMON_ACC_BONUS         = JPCATEGORY_SMN + 0x01, --O pet p.acc +1
-    SUMMON_MAGIC_ACC_BONUS   = JPCATEGORY_SMN + 0x03, --O pet m.acc +1
+    SUMMON_ACC_BONUS         = JPCATEGORY_SMN + 0x01, --+ pet p.acc +1
+    SUMMON_MAGIC_ACC_BONUS   = JPCATEGORY_SMN + 0x03, --+ pet m.acc +1
     ELEMENTAL_SIPHON_EFFECT  = JPCATEGORY_SMN + 0x04, --O mp recov. +3
-    SUMMON_PHYS_ATK_BONUS    = JPCATEGORY_SMN + 0x05, --O pet p.atk +2
+    SUMMON_PHYS_ATK_BONUS    = JPCATEGORY_SMN + 0x05, --+ pet p.atk +2
     MANA_CEDE_EFFECT         = JPCATEGORY_SMN + 0x06, --X pet tp +50
     AVATARS_FAVOR_EFFECT     = JPCATEGORY_SMN + 0x07, --X favor +3s dur. bonus
-    SUMMON_MAGIC_DMG_BONUS   = JPCATEGORY_SMN + 0x08, --O pet m.dmg +5
-    BLOOD_PACT_DMG_BONUS     = JPCATEGORY_SMN + 0x09, --O BPR/BPW dmg +5
+    SUMMON_MAGIC_DMG_BONUS   = JPCATEGORY_SMN + 0x08, --+ pet m.dmg +5
+    BLOOD_PACT_DMG_BONUS     = JPCATEGORY_SMN + 0x09, --+ BPR/BPW dmg +5
 
     --BLU
     AZURE_LORE_EFFECT        = JPCATEGORY_BLU + 0x00, --O dmg +1 --needs verification

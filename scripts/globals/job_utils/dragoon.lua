@@ -237,6 +237,9 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local pet = player:getPet()
     local playerHP = player:getHP()
     local drainamount = (math.random(25, 35) / 100) * playerHP
+    local jpValue = player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)
+
+    drainamount = drainamount * (1 - (0.01 * jpValue))
 
     if pet:getHP() == pet:getMaxHP() then
         drainamount = 0 -- Prevents player HP lose if wyvern is at full HP

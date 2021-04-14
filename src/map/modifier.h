@@ -814,6 +814,14 @@ enum class Mod
     WS_MND_BONUS        = 984, // % bonus to mnd_wsc.
     WS_CHR_BONUS        = 985, // % bonus to chr_wsc.
 
+    // Pet Modifiers (Job Point Gifts)
+    PET_ATK_DEF    = 990, // Increases pet physical attack, ranged attack, and physical defense
+    PET_ACC_EVA    = 991, // Increases pet physical accuracy, ranged accuracy, and evasion
+    PET_MAB_MDB    = 992, // Increases pet magic attack and magic defense
+    PET_MACC_MEVA  = 993, // Increases pet magic accuracy and evasion
+    PET_ATTR_BONUS = 994, // Increases pet attributes
+    PET_TP_BONUS   = 995, // Increases pet TP bonus
+
     EXPERIENCE_RETAINED   = 914, // Experience points retained upon death (this is a percentage)
     CAPACITY_BONUS        = 915, // Capacity point bonus granted
     CONQUEST_BONUS        = 933, // Conquest points bonus granted (percentage)
@@ -827,7 +835,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 990, // stuff
+    // SPARE = 996, 
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
