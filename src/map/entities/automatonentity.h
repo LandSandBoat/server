@@ -79,6 +79,7 @@ public:
 
     void  burdenTick();
     void  setInitialBurden();
+    void  setBurden(uint8 burden);
     uint8 addBurden(uint8 element, int8 burden);
 
     void PostTick() override;

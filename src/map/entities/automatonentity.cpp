@@ -121,6 +121,11 @@ void CAutomatonEntity::setInitialBurden()
     m_Burden.fill(30);
 }
 
+void CAutomatonEntity::setBurden(uint8 burden)
+{
+    m_Burden.fill(burden);
+}
+
 uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
 {
     // Handle Kenkonken Suppress Overload

@@ -517,6 +517,7 @@ enum class Mod
     AUTO_EQUALIZER              = 941, // Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST      = 942, // Increases the performance of other attachments by a percentage
     AUTO_ANALYZER               = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
+    AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
 
     // Dancer
     FINISHING_MOVES         = 333, // Tracks # of finishing moves
@@ -824,7 +825,6 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 987, // stuff
     // SPARE = 988, // stuff
 };
 

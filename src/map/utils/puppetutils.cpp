@@ -22,6 +22,7 @@
 #include "puppetutils.h"
 #include "../entities/automatonentity.h"
 #include "../lua/luautils.h"
+#include "../job_points.h"
 #include "../packets/char_job_extra.h"
 #include "../packets/message_basic.h"
 #include "../status_effect_container.h"
@@ -86,12 +87,16 @@ namespace puppetutils
                     {
                         tempEquip.Attachments[i] = 0;
                     }
+
+                    int16 elemCapacityBonus = 0 + PChar->getMod(Mod::AUTO_ELEM_CAPACITY);
+
                     for (int i = 0; i < 6; i++)
                     {
-                        PChar->PAutomaton->setElementMax(i, 5);
+                        PChar->PAutomaton->setElementMax(i, 5 + elemCapacityBonus);
                     }
-                    PChar->PAutomaton->setElementMax(6, 3);
-                    PChar->PAutomaton->setElementMax(7, 3);
+                    PChar->PAutomaton->setElementMax(6, 3 + elemCapacityBonus);
+                    PChar->PAutomaton->setElementMax(7, 3 + elemCapacityBonus);
+
                     for (int i = 0; i < 8; i++)
                     {
                         PChar->PAutomaton->m_ElementEquip[i] = 0;
@@ -118,6 +123,9 @@ namespace puppetutils
                         setAttachment(PChar, i, tempEquip.Attachments[i]);
                     }
                 }
+
+                // Set burden based on JP
+                PChar->PAutomaton->setBurden(30 - PChar->PJobPoints->GetJobPointValue(JP_ACTIVATE_EFFECT));
 
                 PChar->PAutomaton->UpdateHealth();
                 PChar->PAutomaton->health.hp = PChar->PAutomaton->GetMaxHP();

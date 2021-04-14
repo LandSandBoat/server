@@ -2307,7 +2307,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 95, 915, 11, 'PUP_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 100, 985, 2, 'PUP_Automaton Elemental Capacity Bonus');
+	(18, 100, 987, 2, 'PUP_Automaton Elemental Capacity Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 100, 986, 1, 'PUP_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2387,7 +2387,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 1200, 986, 1, 'PUP_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 1200, 985, 2, 'PUP_Automation Elemental Capacity Bonus');
+	(18, 1200, 987, 2, 'PUP_Automation Elemental Capacity Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 1280, 23, 15, 'PUP_Attack Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
