@@ -1,21 +1,17 @@
 -----------------------------------
 -- Ability: Defender
--- Enhances defense but weakens attacks.
--- Obtained: Warrior Level 25
--- Recast Time: 3:00
--- Duration: 3:00
+-- Job: Warrior
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/warrior")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.warrior.checkDefender(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.DEFENDER, 1, 0, 180 + player:getMod(xi.mod.DEFENDER_DURATION))
+    xi.job_utils.warrior.useDefender(player, target, ability)
 end
 
 return ability_object
