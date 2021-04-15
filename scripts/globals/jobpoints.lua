@@ -68,16 +68,16 @@ xi.jp = {
     BAR_SPELL_EFFECT         = JPCATEGORY_WHM + 0x09, --O resistance +2
 
     --BLM
-    MANAFONT_EFFECT          = JPCATEGORY_BLM + 0x00, --O elemental m.dmg +2
-    SUBTLE_SORCERY_EFFECT    = JPCATEGORY_BLM + 0x02, --X spellcasting time -1%
+    MANAFONT_EFFECT          = JPCATEGORY_BLM + 0x00, --+ elemental m.dmg +2
+    SUBTLE_SORCERY_EFFECT    = JPCATEGORY_BLM + 0x02, --+ spellcasting time -1%
     ELEMENTAL_SEAL_EFFECT    = JPCATEGORY_BLM + 0x01, --X elemental magic emnity -3
-    MAGIC_BURST_DMG_BONUS    = JPCATEGORY_BLM + 0x03, --O magic burst dmg +1%
+    MAGIC_BURST_DMG_BONUS    = JPCATEGORY_BLM + 0x03, --+ magic burst dmg +1%
     MANA_WALL_EFFECT         = JPCATEGORY_BLM + 0x04, --X mp consumed -1%
     BLM_MAGIC_ACC_BONUS      = JPCATEGORY_BLM + 0x05, --+ m.acc +1
     EMNITY_DOUSE_RECAST      = JPCATEGORY_BLM + 0x06, --X recast -3sec
-    MANAWELL_EFFECT          = JPCATEGORY_BLM + 0x07, --O m.dmg +1
+    MANAWELL_EFFECT          = JPCATEGORY_BLM + 0x07, --+ m.dmg +1
     MAGIC_BURST_EMNITY_BONUS = JPCATEGORY_BLM + 0x08, --X emnity -1
-    MAGIC_DMG_BONUS          = JPCATEGORY_BLM + 0x09, --O m.dmg +1
+    MAGIC_DMG_BONUS          = JPCATEGORY_BLM + 0x09, --+ m.dmg +1
 
     --RDM
     CHAINSPELL_EFFECT        = JPCATEGORY_RDM + 0x00, --+ elem. m.dmg +2

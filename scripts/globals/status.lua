@@ -1589,7 +1589,7 @@ xi.mod =
 
     WYVERN_BREATH_MACC              = 986,
 
-    SUPERIOR_LEVEL  = 986, -- SU0..5
+    SUPERIOR_LEVEL  = 997, -- SU0..5
     ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

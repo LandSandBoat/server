@@ -831,12 +831,12 @@ enum class Mod
     SUBTLE_BLOW_II       = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     GARDENING_WILT_BONUS = 975, // Increases the number of Vanadays a plant can survive before it wilts
 
-    SUPERIOR_LEVEL  = 986, // SU0..5
+    SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 997,
+    // SPARE = 998,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

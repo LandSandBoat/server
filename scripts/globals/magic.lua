@@ -728,6 +728,9 @@ function calculateMagicBurst(caster, spell, target, params)
         modburst = modburst + (caster:getMerit(xi.merit.INNIN_EFFECT)/100)
     end
 
+    -- BLM Job Point: Magic Burst Damage
+    modburst = modburst + (caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100)
+
     -- Cap bonuses from first multiplier at 40% or 1.4
     if (modburst > 1.4) then
         modburst = 1.4
@@ -1153,6 +1156,20 @@ function doElementalNuke(caster, spell, target, spellParams)
         local hasMultipleTargetReduction = spellParams.hasMultipleTargetReduction --still unused!!!
         local resistBonus = spellParams.resistBonus
         local mDMG = caster:getMod(xi.mod.MAGIC_DAMAGE)
+
+        -- BLM Job Point: Manafont Elemental Magic Damage +3
+        if caster:hasStatusEffect(xi.effect.MANAFONT) then
+            mDMG = mDMG + (caster:getJobPointLevel(xi.jp.MANAFONT_EFFECT) * 3)
+        end
+
+        -- BLM Job Point: With Manawell mDMG +1
+        if caster:hasStatusEffect(xi.effect.MANAWELL) then
+            mDMG = mDMG + caster:getJobPointLevel(xi.jp.MANAWELL_EFFECT)
+            caster:delStatusEffectSilent(xi.effect.MANAWELL)
+        end
+
+        -- BLM Job Point: Magic Damage Bonus
+        mDMG = mDMG + caster:getJobPointLevel(xi.jp.MAGIC_DMG_BONUS)
 
         --[[
                 Calculate base damage:

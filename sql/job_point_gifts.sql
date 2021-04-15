@@ -33,7 +33,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 45, 31, 5, 'WAR_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(1, 50, 986, 1, 'WAR_Superior 1');
+	(1, 50, 997, 1, 'WAR_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 55, 915, 9, 'WAR_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 100, 165, 5, 'WAR_Critical Hit Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(1, 100, 986, 1, 'WAR_Superior 2');
+	(1, 100, 997, 1, 'WAR_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 125, 288, 2, 'WAR_Double Attack Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -83,7 +83,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 500, 421, 2, 'WAR_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(1, 500, 986, 1, 'WAR_Superior 3');
+	(1, 500, 997, 1, 'WAR_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 545, 915, 23, 'WAR_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -123,7 +123,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 1200, 165, 5, 'WAR_Critical Hit Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(1, 1200, 986, 1, 'WAR_Superior 4');
+	(1, 1200, 997, 1, 'WAR_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 1280, 1, 25, 'WAR_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -149,7 +149,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 2000, 421, 3, 'WAR_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(1, 2100, 986, 1, 'WAR_Superior 5');
+	(1, 2100, 997, 1, 'WAR_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(1, 2100, 996, 15, 'WAR_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -171,7 +171,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 45, 31, 5, 'MNK_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(2, 50, 986, 1, 'MNK_Superior 1');
+	(2, 50, 997, 1, 'MNK_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 55, 915, 9, 'MNK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -183,7 +183,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 100, 173, 5, 'MNK_Martial Arts Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(2, 100, 986, 1, 'MNK_Superior 2');
+	(2, 100, 997, 1, 'MNK_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 125, 289, 2, 'MNK_Subtle Blow Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -221,7 +221,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 500, 291, 2, 'MNK_Counter Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(2, 500, 986, 1, 'MNK_Superior 3');
+	(2, 500, 997, 1, 'MNK_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 545, 915, 23, 'MNK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -261,7 +261,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 1200, 173, 5, 'MNK_Martial Arts Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(2, 1200, 986, 44, 'MNK_Superior 4');
+	(2, 1200, 997, 44, 'MNK_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 1280, 1, 13, 'MNK_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -287,7 +287,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 2000, 291, 3, 'MNK_Counter Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(2, 2100, 986, 1, 'MNK_Superior 5');
+	(2, 2100, 997, 1, 'MNK_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(2, 2100, 996, 15, 'MNK_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -307,7 +307,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 45, 26, 2, 'WHM_Ranged Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(3, 50, 986, 1, 'WHM_Superior 1');
+	(3, 50, 997, 1, 'WHM_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 55, 915, 9, 'WHM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -317,7 +317,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 95, 915, 11, 'WHM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(3, 100, 986, 1, 'WHM_Superior 2');
+	(3, 100, 997, 1, 'WHM_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 125, 374, 5, 'WHM_Cure Potency Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -353,7 +353,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 500, 519, 2, 'WHM_Healing Magic Cast Time Decrease');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(3, 500, 986, 1, 'WHM_Superior 3');
+	(3, 500, 997, 1, 'WHM_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 545, 915, 23, 'WHM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -389,7 +389,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 1195, 915, 33, 'WHM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(3, 1200, 986, 1, 'WHM_Superior 4');
+	(3, 1200, 997, 1, 'WHM_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 1280, 29, 18, 'WHM_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -413,7 +413,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 2000, 519, 2, 'WHM_Healing Magic Cast Time Decrease');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(3, 2100, 986, 1, 'WHM_Superior 5');
+	(3, 2100, 997, 1, 'WHM_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(3, 2100, 996, 15, 'WHM_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -431,7 +431,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 45, 115, 5, 'BLM_Elemental Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(4, 50, 986, 1, 'BLM_Superior 1');
+	(4, 50, 997, 1, 'BLM_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 55, 915, 9, 'BLM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -441,7 +441,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 95, 915, 11, 'BLM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(4, 100, 986, 1, 'BLM_Superior 2');
+	(4, 100, 997, 1, 'BLM_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 125, 311, 5, 'BLM_Magic Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -475,7 +475,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 500, 901, 2, 'BLM_Elemental Celerity Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(4, 500, 986, 1, 'BLM_Superior 3');
+	(4, 500, 997, 1, 'BLM_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 545, 915, 23, 'BLM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -507,7 +507,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 1195, 915, 33, 'BLM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(4, 1200, 986, 1, 'BLM_Superior 4');
+	(4, 1200, 997, 1, 'BLM_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 1280, 29, 5, 'BLM_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -529,7 +529,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 2000, 901, 2, 'BLM_Elemental Celerity Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(4, 2100, 986, 1, 'BLM_Superior 5');
+	(4, 2100, 997, 1, 'BLM_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(4, 2100, 996, 15, 'BLM_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -549,7 +549,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 45, 26, 3, 'RDM_Ranged Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(5, 50, 986, 1, 'RDM_Superior 1');
+	(5, 50, 997, 1, 'RDM_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 55, 915, 9, 'RDM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -559,7 +559,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 95, 915, 11, 'RDM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(5, 100, 986, 1, 'RDM_Superior 2');
+	(5, 100, 997, 1, 'RDM_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 125, 432, 5, 'RDM_Enhanced Weapon Enchantment Damage');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -595,7 +595,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 500, 170, 2, 'RDM_Enhanced Fast Cast Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(5, 500, 986, 1, 'RDM_Superior 3');
+	(5, 500, 997, 1, 'RDM_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 545, 915, 23, 'RDM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -629,7 +629,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 1195, 915, 33, 'RDM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(5, 1200, 986, 1, 'RDM_Superior 4');
+	(5, 1200, 997, 1, 'RDM_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 1280, 29, 10, 'RDM_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -653,7 +653,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 2000, 170, 2, 'RDM_Fast Cast Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(5, 2100, 986, 1, 'RDM_Superior 5');
+	(5, 2100, 997, 1, 'RDM_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(5, 2100, 996, 15, 'RDM_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -675,7 +675,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 45, 31, 5, 'THF_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(6, 50, 986, 1, 'THF_Superior 1');
+	(6, 50, 997, 1, 'THF_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 55, 915, 9, 'THF_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -687,7 +687,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 100, 961, 1, 'THF_Maximum Treasure Hunter Value');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(6, 100, 986, 1, 'THF_Superior 2');
+	(6, 100, 997, 1, 'THF_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 125, 302, 2, 'THF_Triple Attack Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -725,7 +725,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 500, 421, 2, 'THF_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(6, 500, 986, 1, 'THF_Superior 3');
+	(6, 500, 997, 1, 'THF_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 545, 915, 23, 'THF_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -765,7 +765,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 1200, 961, 1, 'THF_Maximum Treasure Hunter Value');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(6, 1200, 986, 1, 'THF_Superior 4');
+	(6, 1200, 997, 1, 'THF_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 1280, 1, 10, 'THF_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -791,7 +791,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 2000, 421, 2, 'THF_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(6, 2000, 986, 1, 'THF_Superior 5');
+	(6, 2000, 997, 1, 'THF_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(6, 2100, 996, 15, 'THF_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -813,7 +813,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 45, 31, 6, 'PLD_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(7, 50, 986, 1, 'PLD_Superior 1');
+	(7, 50, 997, 1, 'PLD_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 55, 915, 9, 'PLD_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -823,7 +823,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 95, 915, 11, 'PLD_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(7, 100, 986, 1, 'PLD_Superior 2');
+	(7, 100, 997, 1, 'PLD_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 125, 485, 3, 'PLD_Shield Mastery Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -861,7 +861,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 500, 908, 2, 'PLD_Critical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(7, 500, 986, 1, 'PLD_Superior 3');
+	(7, 500, 997, 1, 'PLD_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 545, 915, 23, 'PLD_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -901,7 +901,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 1200, 964, 20, 'PLD_Reprisal Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(7, 1200, 986, 1, 'PLD_Superior 4');
+	(7, 1200, 997, 1, 'PLD_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 1280, 1, 38, 'PLD_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -927,7 +927,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 2000, 908, 2, 'PLD_Critical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(7, 2100, 986, 1, 'PLD_Superior 5');
+	(7, 2100, 997, 1, 'PLD_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(7, 2100, 996, 15, 'PLD_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -949,7 +949,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 45, 31, 6, 'DRK_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(8, 50, 986, 11, 'DRK_Superior 1');
+	(8, 50, 997, 11, 'DRK_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 55, 915, 9, 'DRK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -959,7 +959,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 95, 915, 11, 'DRK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(8, 100, 986, 1, 'DRK_Superior 2');
+	(8, 100, 997, 1, 'DRK_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 125, 421, 2, 'DRK_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -997,7 +997,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 500, 840, 2, 'DRK_Weapon Skill Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(8, 500, 986, 1, 'DRK_Superior 3');
+	(8, 500, 997, 1, 'DRK_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 545, 915, 23, 'DRK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1035,7 +1035,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 1200, 965, 20, 'DRK_Dread Spikes Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(8, 1200, 986, 1, 'DRK_Superior 4');
+	(8, 1200, 997, 1, 'DRK_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 1280, 1, 10, 'DRK_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1061,7 +1061,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 2000, 840, 2, 'DRK_Weapon Skill Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(8, 2100, 986, 1, 'DRK_Superior 5');
+	(8, 2100, 997, 1, 'DRK_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 2100, 996, 15, 'DRK_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1083,7 +1083,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 45, 31, 5, 'BST_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(9, 50, 986, 1, 'BST_Superior 1');
+	(9, 50, 997, 1, 'BST_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 55, 915, 9, 'BST_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1095,7 +1095,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 100, 966, 5, 'BST_Sic and Ready Recast Time');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(9, 100, 986, 1, 'BST_Superior 2');
+	(9, 100, 997, 1, 'BST_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 125, 991, 10, 'BST_Familiar Phys. Acc. and Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1133,7 +1133,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 500, 903, 50, 'BST_Fencer Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(9, 500, 986, 1, 'BST_Superior 3');
+	(9, 500, 997, 1, 'BST_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 545, 915, 23, 'BST_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1173,7 +1173,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 1200, 995, 40, 'BST_Familiar TP Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(9, 1200, 972, 1, 'BST_Superior 4');
+	(9, 1200, 997, 1, 'BST_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 1280, 1, 25, 'BST_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1199,7 +1199,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 2000, 903, 70, 'BST_Fencer Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(9, 2100, 986, 1, 'BST_Superior 5');
+	(9, 2100, 997, 1, 'BST_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(9, 2100, 996, 15, 'BST_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1219,7 +1219,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 45, 31, 5, 'BRD_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(10, 50, 986, 1, 'BRD_Superior 1');
+	(10, 50, 997, 1, 'BRD_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 55, 915, 9, 'BRD_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1229,7 +1229,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 95, 915, 11, 'BRD_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(10, 100, 986, 1, 'BRD_Superior 2');
+	(10, 100, 997, 1, 'BRD_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 125, 120, 5, 'BRD_String Instrument Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1265,7 +1265,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 500, 121, 8, 'BRD_Wind Instrument Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(10, 500, 986, 1, 'BRD_Superior 3');
+	(10, 500, 997, 1, 'BRD_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 545, 915, 23, 'BRD_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1303,7 +1303,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 1200, 454, 5, 'BRD_Song Effect Duration');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(10, 1200, 986, 1, 'BRD_Superior 4');
+	(10, 1200, 997, 1, 'BRD_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 1280, 1, 8, 'BRD_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1327,7 +1327,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 2000, 121, 13, 'BRD_Wind Instrument Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(10, 2100, 986, 1, 'BRD_Superior 5');
+	(10, 2100, 997, 1, 'BRD_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(10, 2100, 996, 15, 'BRD_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1349,7 +1349,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 45, 31, 5, 'RNG_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(11, 50, 986, 1, 'RNG_Superior 1');
+	(11, 50, 997, 1, 'RNG_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 55, 915, 9, 'RNG_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1361,7 +1361,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 100, 973, 5, 'RNG_Velocity Shot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(11, 100, 986, 1, 'RNG_Superior 2');
+	(11, 100, 997, 1, 'RNG_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 125, 974, 2, 'RNG_True Shot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1399,7 +1399,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 500, 975, 2, 'RNG_Dead Aim Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(11, 500, 986, 1, 'RNG_Superior 3');
+	(11, 500, 997, 1, 'RNG_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 545, 915, 23, 'RNG_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1439,7 +1439,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 1200, 973, 5, 'RNG_Velocity Shot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(11, 1200, 986, 1, 'RNG_Superior 4');
+	(11, 1200, 997, 1, 'RNG_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 1280, 1, 8, 'RNG_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1465,7 +1465,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 2000, 975, 2, 'RNG_Dead Aim Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(11, 2100, 986, 1, 'RNG_Superior 5');
+	(11, 2100, 997, 1, 'RNG_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(11, 2100, 996, 15, 'RNG_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1487,7 +1487,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 45, 31, 5, 'SAM_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(12, 50, 986, 1, 'SAM_Superior 1');
+	(12, 50, 997, 1, 'SAM_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 55, 915, 9, 'SAM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1499,7 +1499,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 100, 977, 5, 'SAM_Zanshin Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(12, 100, 986, 1, 'SAM_Superior 2');
+	(12, 100, 997, 1, 'SAM_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 125, 73, 2, 'SAM_Store TP Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1537,7 +1537,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 500, 174, 2, 'SAM_Skillchain Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(12, 500, 986, 1, 'SAM_Superior 3');
+	(12, 500, 997, 1, 'SAM_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 545, 915, 23, 'SAM_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1577,7 +1577,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 1200, 977, 5, 'SAM_Zanshin Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(12, 1200, 986, 1, 'SAM_Superior 4');
+	(12, 1200, 997, 1, 'SAM_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 1280, 1, 25, 'SAM_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1603,7 +1603,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 2000, 174, 2, 'SAM_Skillchain Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(12, 2100, 986, 1, 'SAM_Superior 5');
+	(12, 2100, 997, 1, 'SAM_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(12, 2100, 996, 15, 'SAM_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1625,7 +1625,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 45, 28, 4, 'NIN_Magic Attack Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(13, 50, 986, 1, 'NIN_Superior 1');
+	(13, 50, 997, 1, 'NIN_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 55, 915, 9, 'NIN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1635,7 +1635,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 95, 915, 11, 'NIN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(13, 100, 986, 1, 'NIN_Superior 2');
+	(13, 100, 997, 1, 'NIN_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 125, 118, 5, 'NIN_Ninjutsu Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1673,7 +1673,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 500, 911, 3, 'NIN_Daken Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(13, 500, 986, 1, 'NIN_Superior 3');
+	(13, 500, 997, 1, 'NIN_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 545, 915, 23, 'NIN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1713,7 +1713,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 1200, 840, 5, 'NIN_Weapon Skill Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(13, 1200, 986, 1, 'NIN_Superior 4');
+	(13, 1200, 997, 1, 'NIN_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 1280, 1, 20, 'NIN_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1739,7 +1739,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 2000, 911, 5, 'NIN_Daken Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(13, 2100, 986, 1, 'NIN_Superior 5');
+	(13, 2100, 997, 1, 'NIN_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(13, 2100, 996, 15, 'NIN_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1761,7 +1761,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 45, 31, 5, 'DRG_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(14, 50, 986, 1, 'DRG_Superior 1');
+	(14, 50, 997, 1, 'DRG_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 55, 915, 9, 'DRG_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1773,7 +1773,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 100, 980, 1, 'DRG_Wyvern Attribute Increase Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(14, 5, 986, 1, 'DRG_Superior 2');
+	(14, 5, 997, 1, 'DRG_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 125, 991, 10, 'DRG_Wyvern Phys. Acc. and Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1811,7 +1811,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 500, 993, 10, 'DRG_Wyvern Mag. Acc. and Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(14, 500, 986, 1, 'DRG_Superior 3');
+	(14, 500, 997, 1, 'DRG_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 545, 915, 23, 'DRG_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1851,7 +1851,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 1200, 980, 2, 'DRG_Wyvern Attribute Increase Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(14, 1200, 986, 1, 'DRG_Superior 4');
+	(14, 1200, 997, 1, 'DRG_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 1280, 1, 25, 'DRG_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1877,7 +1877,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 2000, 993, 25, 'DRG_Wyvern Mag. Acc. and Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(14, 2100, 986, 1, 'DRG_Superior 5');
+	(14, 2100, 997, 1, 'DRG_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(14, 2100, 996, 15, 'DRG_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1895,7 +1895,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 45, 982, 15, 'SMN_Avatar/Spirit Phys. Atk. & Def. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(15, 50, 986, 1, 'SMN_Superior 1');
+	(15, 50, 997, 1, 'SMN_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 55, 915, 9, 'SMN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1907,7 +1907,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 100, 357, 5, 'SMN_Blood Pact Recast Time');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(15, 100, 986, 1, 'SMN_Superior 2');
+	(15, 100, 997, 1, 'SMN_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 125, 993, 10, 'SMN_Spirit/Avatar Mag. Acc. & Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1941,7 +1941,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 500, 117, 8, 'SMN_Summoning Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(15, 500, 986, 33, 'SMN_Superior 3');
+	(15, 500, 997, 33, 'SMN_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 545, 915, 23, 'SMN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1977,7 +1977,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 1200, 357, 5, 'SMN_Blood Pact Recast Time');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(15, 1200, 986, 1, 'SMN_Superior 4');
+	(15, 1200, 997, 1, 'SMN_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 1280, 29, 8, 'SMN_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -1999,7 +1999,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 2000, 117, 13, 'SMN_Summoning Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(15, 2100, 986, 1, 'SMN_Superior 5');
+	(15, 2100, 997, 1, 'SMN_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(15, 2100, 996, 15, 'SMN_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2021,7 +2021,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 45, 31, 5, 'BLU_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(16, 50, 986, 1, 'BLU_Superior 1');
+	(16, 50, 997, 1, 'BLU_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 55, 915, 9, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2031,7 +2031,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 95, 915, 11, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(16, 100, 986, 1, 'BLU_Superior 2');
+	(16, 100, 997, 1, 'BLU_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 100, 982, 1, 'BLU_Job Trait Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2069,7 +2069,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 450, 30, 8, 'BLU_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(16, 500, 986, 1, 'BLU_Superior 3');
+	(16, 500, 997, 1, 'BLU_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 500, 122, 8, 'BLU_Blue Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2109,7 +2109,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 1195, 915, 33, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(16, 1200, 986, 1, 'BLU_Superior 4');
+	(16, 1200, 997, 1, 'BLU_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 1200, 982, 1, 'BLU_Jobs Trait Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2137,7 +2137,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 2000, 122, 13, 'BLU_Blue Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(16, 2100, 986, 1, 'BLU_Superior 5');
+	(16, 2100, 997, 1, 'BLU_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(16, 2100, 996, 15, 'BLU_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2159,7 +2159,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 45, 28, 2, 'COR_Magic Attack Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(17, 50, 986, 1, 'COR_Superior 1');
+	(17, 50, 997, 1, 'COR_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 55, 915, 9, 'COR_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2171,7 +2171,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 100, 365, 5, 'COR_Snapshot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(17, 100, 986, 1, 'COR_Superior 2');
+	(17, 100, 997, 1, 'COR_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 125, 305, 2, 'COR_Reduced Ammunition Consumption');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2207,7 +2207,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 450, 305, 2, 'COR_Reduced Ammunition Consumption');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(17, 500, 986, 1, 'COR_Superior 3');
+	(17, 500, 997, 1, 'COR_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 500, 972, 2, 'COR_True Shot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2247,7 +2247,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 1195, 915, 33, 'COR_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(17, 1200, 986, 1, 'COR_Superior 4');
+	(17, 1200, 997, 1, 'COR_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 1200, 365, 5, 'COR_Snapshot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2275,7 +2275,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 2000, 972, 2, 'COR_True Shot Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(17, 2100, 986, 1, 'COR_Superior 5');
+	(17, 2100, 997, 1, 'COR_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(17, 2100, 996, 15, 'COR_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2297,7 +2297,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 45, 30, 5, 'PUP_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 50, 986, 1, 'PUP_Superior 1');
+	(18, 50, 997, 1, 'PUP_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 55, 915, 9, 'PUP_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2309,7 +2309,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 100, 987, 2, 'PUP_Automaton Elemental Capacity Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 100, 986, 1, 'PUP_Superior 2');
+	(18, 100, 997, 1, 'PUP_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 125, 992, 5, 'PUP_Automaton Mag. Atk. and Def. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2345,7 +2345,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 450, 992, 8, 'PUP_Automaton Mag. Atk. and Def. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 500, 986, 1, 'PUP_Superior 3');
+	(18, 500, 997, 1, 'PUP_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 500, 993, 15, 'PUP_Automaton Mag. Acc. and Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2385,7 +2385,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 1195, 915, 33, 'PUP_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 1200, 986, 1, 'PUP_Superior 4');
+	(18, 1200, 997, 1, 'PUP_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 1200, 987, 2, 'PUP_Automation Elemental Capacity Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2413,7 +2413,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 2000, 993, 25, 'PUP_Automaton Mag. Acc. and Eva. Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(18, 2100, 986, 1, 'PUP_Superior 5');
+	(18, 2100, 997, 1, 'PUP_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(18, 2100, 996, 15, 'PUP_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2435,7 +2435,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 45, 31, 5, 'DNC_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 50, 986, 1, 'DNC_Superior 1');
+	(19, 50, 997, 1, 'DNC_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 55, 915, 9, 'DNC_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2445,7 +2445,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 95, 915, 11, 'DNC_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 100, 986, 1, 'DNC_Superior 2');
+	(19, 100, 997, 1, 'DNC_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 100, 988, 2, 'DNC_Maximum Finishing Moves Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2483,7 +2483,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 450, 421, 2, 'DNC_Critical Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 500, 986, 1, 'DNC_Superior 3');
+	(19, 500, 997, 1, 'DNC_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 500, 174, 2, 'DNC_Skillchain Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2523,7 +2523,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 1195, 915, 33, 'DNC_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 1200, 986, 1, 'DNC_Superior 4');
+	(19, 1200, 997, 1, 'DNC_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 1200, 988, 2, 'DNC_Maximum Finishing Moves Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2551,7 +2551,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 2000, 174, 2, 'DNC_Skillchain Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(19, 2100, 986, 1, 'DNC_Superior 5');
+	(19, 2100, 997, 1, 'DNC_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(19, 2100, 996, 15, 'DNC_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2569,7 +2569,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 45, 116, 5, 'SCH_Dark Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(20, 50, 986, 1, 'SCH_Superior 1');
+	(20, 50, 997, 1, 'SCH_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 55, 915, 9, 'SCH_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2579,7 +2579,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 95, 915, 11, 'SCH_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(20, 100, 986, 1, 'SCH_Superior 2');
+	(20, 100, 997, 1, 'SCH_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 125, 112, 5, 'SCH_Healing Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2611,7 +2611,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 450, 112, 8, 'SCH_Healing Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(20, 500, 986, 1, 'SCH_Superior 3');
+	(20, 500, 997, 1, 'SCH_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 500, 487, 3, 'SCH_Magic Burst Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2647,7 +2647,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 1195, 915, 33, 'SCH_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(20, 1200, 986, 1, 'SCH_Superior 4');
+	(20, 1200, 997, 1, 'SCH_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 1280, 29, 8, 'SCH_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2669,7 +2669,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 2000, 487, 4, 'SCH_Magic Burst Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(20, 2100, 986, 1, 'SCH_Superior 5');
+	(20, 2100, 997, 1, 'SCH_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(20, 2100, 996, 15, 'SCH_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2687,7 +2687,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 45, 988, 5, 'GEO_Geomancy Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(21, 50, 986, 1, 'GEO_Superior 1');
+	(21, 50, 997, 1, 'GEO_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 55, 915, 9, 'GEO_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2697,7 +2697,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 95, 915, 11, 'GEO_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(21, 100, 986, 1, 'GEO_Superior 2');
+	(21, 100, 997, 1, 'GEO_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 125, 116, 5, 'GEO_Dark Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2729,7 +2729,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 450, 116, 8, 'GEO_Dark Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(21, 500, 986, 1, 'GEO_Superior 3');
+	(21, 500, 997, 1, 'GEO_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 500, 311, 3, 'GEO_Magic Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2763,7 +2763,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 1195, 915, 33, 'GEO_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(21, 1200, 986, 1, 'GEO_Superior 4');
+	(21, 1200, 997, 1, 'GEO_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 1280, 29, 10, 'GEO_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2785,7 +2785,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 2000, 311, 4, 'GEO_Magic Damage Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(21, 2100, 986, 1, 'GEO_Superior 5');
+	(21, 2100, 997, 1, 'GEO_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(21, 2100, 996, 15, 'GEO_1 Hour Delay');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2807,7 +2807,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 45, 29, 8, 'RUN_Magic Defense Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(22, 50, 986, 1, 'RUN_Superior 1');
+	(22, 50, 997, 1, 'RUN_Superior 1');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 55, 915, 9, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2819,7 +2819,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 100, 991, 10, 'RUN_Enhancing Magic Received Duration');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(22, 100, 986, 1, 'RUN_Superior 2');
+	(22, 100, 997, 1, 'RUN_Superior 2');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 125, 113, 5, 'RUN_Enhancing Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2855,7 +2855,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 450, 113, 8, 'RUN_Enhancing Magic Skill Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(22, 500, 986, 1, 'RUN_Superior 3');
+	(22, 500, 997, 1, 'RUN_Superior 3');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 500, 992, 2, 'RUN_Inquartata Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2893,7 +2893,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 1195, 915, 33, 'RUN_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(22, 1200, 986, 1, 'RUN_Superior 4');
+	(22, 1200, 997, 1, 'RUN_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 1200, 991, 10, 'RUN_Enh. Magic Received Duration');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
@@ -2921,7 +2921,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 2000, 992, 2, 'RUN_Inquartata Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(22, 2100, 986, 1, 'RUN_Superior 5');
+	(22, 2100, 997, 1, 'RUN_Superior 5');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(22, 2100, 996, 15, 'RUN_1 Hour Delay');
 /*!40000 ALTER TABLE `job_point_gifts` ENABLE KEYS */;
