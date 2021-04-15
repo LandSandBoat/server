@@ -1,6 +1,7 @@
 -----------------------------------
 -- Implementation of Bar-spells
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
@@ -8,6 +9,7 @@ require("scripts/globals/status")
 local function calculateBarspellPower(caster, enhanceSkill)
     local meritBonus = caster:getMerit(xi.merit.BAR_SPELL_EFFECT)
     local equipBonus = caster:getMod(xi.mod.BARSPELL_AMOUNT)
+    local jpBonus    = caster:getJobPointLevel(xi.jp.BAR_SPELL_EFFECT) * 2
 
     if (enhanceSkill == nil or enhanceSkill < 0) then
         enhanceSkill = 0
@@ -21,7 +23,7 @@ local function calculateBarspellPower(caster, enhanceSkill)
     else
         power = 40 + math.floor(enhanceSkill * 0.2)
     end
-    return power + meritBonus + equipBonus
+    return power + meritBonus + equipBonus + jpBonus
 end
 
 local function calculateBarspellDuration(caster, enhanceSkill)

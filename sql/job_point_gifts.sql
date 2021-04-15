@@ -1033,7 +1033,7 @@ INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) V
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 1195, 915, 33, 'DRK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
-	(8, 1200, 965, 20, 'DRK_Dread Spikes Effect');
+	(8, 1200, 998, 20, 'DRK_Dread Spikes Effect');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES
 	(8, 1200, 997, 1, 'DRK_Superior 4');
 INSERT INTO `job_point_gifts` (`jobid`, `jp_needed`, `modid`, `value`, `desc`) VALUES

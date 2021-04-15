@@ -59,13 +59,13 @@ xi.jp = {
     BENEDICTION_EFFECT       = JPCATEGORY_WHM + 0x00, --X mp recovered +1%
     ASYLUM_EFFECT            = JPCATEGORY_WHM + 0x02, --X m.eva +4
     DIVINE_SEAL_EFFECT       = JPCATEGORY_WHM + 0x01, --X reduce emnity from use +3
-    WHM_MAGIC_ACC_BONUS      = JPCATEGORY_WHM + 0x03, --O m.acc +1
+    WHM_MAGIC_ACC_BONUS      = JPCATEGORY_WHM + 0x03, --+ m.acc +1
     AFFLATUS_SOLACE_EFFECT   = JPCATEGORY_WHM + 0x04, --X cure potency +2 (not %) ||||I DON'T KNOW WHAT THIS MEANS||||
     AFFLATUS_MISERY_EFFECT   = JPCATEGORY_WHM + 0x05, --X banish +2 m.dmg, miss => acc +1 dmg +1
     DIVINE_CARESS_DURATION   = JPCATEGORY_WHM + 0x06, --X dur. +2 sec
     SACROSANCTITY_EFFECT     = JPCATEGORY_WHM + 0x07, --X minimum DEF +1
     REGEN_DURATION           = JPCATEGORY_WHM + 0x08, --+ dur. +3 sec
-    BAR_SPELL_EFFECT         = JPCATEGORY_WHM + 0x09, --O resistance +2
+    BAR_SPELL_EFFECT         = JPCATEGORY_WHM + 0x09, --+ resistance +2
 
     --BLM
     MANAFONT_EFFECT          = JPCATEGORY_BLM + 0x00, --+ elemental m.dmg +2
@@ -89,7 +89,7 @@ xi.jp = {
     SABOTEUR_EFFECT          = JPCATEGORY_RDM + 0x06, --+ enfeeble m.acc +2
     ENFEEBLE_DURATION        = JPCATEGORY_RDM + 0x07, --+ enfeeble dur. +1s
     QUICK_MAGIC_EFFECT       = JPCATEGORY_RDM + 0x08, --X MP consumption -2%
-    ENHANCING_DURATION       = JPCATEGORY_RDM + 0x09, --O dur. +1s
+    ENHANCING_DURATION       = JPCATEGORY_RDM + 0x09, --+ dur. +1s
 
     --THF
     PERFECT_DODGE_EFFECT     = JPCATEGORY_THF + 0x00, --+ m.eva +3
@@ -228,7 +228,7 @@ xi.jp = {
     CUTTING_CARDS_EFFECT     = JPCATEGORY_COR + 0x02, --X recast of party abil. -1%
     PHANTOM_ROLL_DURATION    = JPCATEGORY_COR + 0x01, --+ dur. +2s
     BUST_EVASION             = JPCATEGORY_COR + 0x03, --X bust chance -1%
-    QUICK_DRAW_EFFECT        = JPCATEGORY_COR + 0x04, --X m.dmg +2
+    QUICK_DRAW_EFFECT        = JPCATEGORY_COR + 0x04, --+ m.dmg +2
     AMMO_CONSUMPTION         = JPCATEGORY_COR + 0x05, --X no ammo chance +1%
     RANDOM_DEAL_EFFECT       = JPCATEGORY_COR + 0x06, --X 2 abil random deal +2%
     COR_RANGED_ACC_BONUS     = JPCATEGORY_COR + 0x07, --X r.acc +1
@@ -264,12 +264,12 @@ xi.jp = {
     CAPER_EMMISSARIUS_EFFECT = JPCATEGORY_SCH + 0x02, --X hp recov. +2%
     LIGHT_ARTS_EFFECT        = JPCATEGORY_SCH + 0x01, --O dur. +3s
     DARK_ARTS_EFFECT         = JPCATEGORY_SCH + 0x03, --+ dur. +3s
-    STRATEGEM_EFFECT_I       = JPCATEGORY_SCH + 0x04, --O m.acc +1
-    STRATEGEM_EFFECT_II      = JPCATEGORY_SCH + 0x05, --O cast time -1%
+    STRATEGEM_EFFECT_I       = JPCATEGORY_SCH + 0x04, --+ m.acc +1
+    STRATEGEM_EFFECT_II      = JPCATEGORY_SCH + 0x05, --+ cast time -1%
     STRATEGEM_EFFECT_III     = JPCATEGORY_SCH + 0x06, --O m.dmg +2
     STRATEGEM_EFFECT_IV      = JPCATEGORY_SCH + 0x07, --O recast -2%
-    MODUS_VERITAS_EFFECT     = JPCATEGORY_SCH + 0x08, --O dot +3
-    SUBLIMATION_EFFECT       = JPCATEGORY_SCH + 0x09, --O sublimation mp +3%
+    MODUS_VERITAS_EFFECT     = JPCATEGORY_SCH + 0x08, --+ dot +3
+    SUBLIMATION_EFFECT       = JPCATEGORY_SCH + 0x09, --+ sublimation mp +3%
 
     --GEO
     BOLSTER_EFFECT           = JPCATEGORY_GEO + 0x00, --X luopan hp +3% perp. -1mp

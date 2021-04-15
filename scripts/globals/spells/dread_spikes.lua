@@ -17,6 +17,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.DREAD_SPIKES
     local drainAmount = target:getMaxHP() / 2
 
+    drainAmount = drainAmount * (1 + (caster:getMod(xi.mod.DREAD_SPIKES_EFFECT) / 100))
+
     if target:addStatusEffect(typeEffect, 0, 0, duration, 0, drainAmount, 1) then
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else

@@ -369,6 +369,7 @@ enum class Mod
     SOULEATER_EFFECT       = 96,  // Souleater power in percents
     DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
     STALWART_SOUL          = 907, // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
 
     // Beastmaster
     TAME                = 304, // Additional percent chance to charm
@@ -836,7 +837,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 998,
+    // SPARE = 999,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

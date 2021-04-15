@@ -528,6 +528,10 @@ function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
+    if casterJob == xi.job.WHM then
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+    end
+
     if casterJob == xi.job.BLM then
         -- Add MACC for BLM Elemental Magic Merits
         if skill == xi.skill.ELEMENTAL_MAGIC then
@@ -574,6 +578,16 @@ function getSpellBonusAcc(caster, target, spell, params)
         -- BLU MACC merits - nuke acc is handled in bluemagic.lua
         if skill == xi.skill.BLUE_MAGIC then
             magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+        end
+    end
+
+    if casterJob == xi.job.SCH then
+        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+        then
+            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
+
+            magicAccBonus = magicAccBonus + jpValue
         end
     end
 
@@ -1329,7 +1343,7 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
 
         -- prior according to bg-wiki
         if casterJob == xi.job.RDM then
-            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
         end
 
         -- Default is true

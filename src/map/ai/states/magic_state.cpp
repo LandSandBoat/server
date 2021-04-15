@@ -25,6 +25,7 @@
 #include "../../enmity_container.h"
 #include "../../entities/battleentity.h"
 #include "../../entities/mobentity.h"
+#include "../../job_points.h"
 #include "../../lua/luautils.h"
 #include "../../packets/action.h"
 #include "../../packets/message_basic.h"
@@ -251,6 +252,14 @@ void CMagicState::SpendCost()
     else if (m_PSpell->hasMPCost() && !m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT) && !(m_flags & MAGICFLAGS_IGNORE_MP))
     {
         int16 cost = battleutils::CalculateSpellCost(m_PEntity, GetSpell());
+
+        // RDM Job Point: Quick Magic Effect
+        if (IsInstantCast() && m_PEntity->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+
+            cost = (int16)(cost * (1.f - (float)((PChar->PJobPoints->GetJobPointValue(JP_QUICK_MAGIC_EFFECT) * 2) / 100)));
+        }
 
         // conserve mp
         int16 rate = m_PEntity->getMod(Mod::CONSERVE_MP);

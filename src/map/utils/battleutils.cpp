@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -5918,8 +5918,17 @@ namespace battleutils
                 // Only apply Alacrity/celerity mod if the spell element matches the weather.
                 if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), (uint8)PSpell->getElement()))
                 {
-                    bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
+                    bonus += PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
                 }
+
+                // SCH JP: Stratagem II - 1% reduction in cast time per point
+                if (PEntity->objtype == TYPE_PC)
+                {
+                    auto* PChar = static_cast<CCharEntity*>(PEntity);
+
+                    bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
+                }
+
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
                 applyArts = false;
             }
@@ -5944,8 +5953,17 @@ namespace battleutils
                 // Only apply Alacrity/celerity mod if the spell element matches the weather.
                 if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), (uint8)PSpell->getElement()))
                 {
-                    bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
+                    bonus += PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
                 }
+
+                // SCH JP: Stratagem II - 1% reduction in cast time per point
+                if (PEntity->objtype == TYPE_PC)
+                {
+                    auto* PChar = static_cast<CCharEntity*>(PEntity);
+
+                    bonus += PChar->PJobPoints->GetJobPointValue(JP_STRATEGEM_EFFECT_II);
+                }                
+
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
                 applyArts = false;
             }
