@@ -11441,6 +11441,37 @@ void CLuaBaseEntity::updateAttachments()
 }
 
 /************************************************************************
+ *  Function: reduceBurden()
+ *  Purpose : Reduces individual burden values based on percentage decrease
+ *  Example : master:reduceBurden(50)
+ *  Notes   : Used by Cooldown ability, optional arg is static decrease
+ *            after percentage is applied.
+ ************************************************************************/
+
+void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& intReductionObj)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(PEntity->PPet);
+
+    if (!PAutomaton)
+    {
+        return;
+    }
+
+    std::array<uint8, 8> burden = PAutomaton->getBurden();
+    for (int i = 0; i < 8; i++)
+    {
+        uint8 intReduction = (intReductionObj != sol::nil) ? intReductionObj.as<uint8>() : 0;
+
+        burden[i] = (uint8)std::max(0.f, burden[i] * (1 - ((percentReduction / 100) - PEntity->PJobPoints->GetJobPointValue(JP_COOLDOWN_EFFECT))) - intReduction);
+    }
+
+    PAutomaton->setBurdenArray(burden);
+}
+
+/************************************************************************
  *  Function: setMobLevel()
  *  Purpose : Updates the monsters level and recalculates stats
  *  Example : mob:setMobLevel(125)
@@ -13212,6 +13243,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("removeOldestManeuver", CLuaBaseEntity::removeOldestManeuver);
     SOL_REGISTER("removeAllManeuvers", CLuaBaseEntity::removeAllManeuvers);
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
+    SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
 
     // Trust related
     SOL_REGISTER("spawnTrust", CLuaBaseEntity::spawnTrust);

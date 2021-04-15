@@ -677,6 +677,7 @@ public:
     void  removeOldestManeuver();
     void  removeAllManeuvers();
     void  updateAttachments();
+    void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);

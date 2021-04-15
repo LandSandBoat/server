@@ -1588,6 +1588,7 @@ xi.mod =
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     WYVERN_BREATH_MACC              = 986,
+    REGEN_BONUS                     = 989,
 
     SUPERIOR_LEVEL  = 997, -- SU0..5
     ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.

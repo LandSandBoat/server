@@ -125,7 +125,7 @@ namespace puppetutils
                 }
 
                 // Set burden based on JP
-                PChar->PAutomaton->setBurden(30 - PChar->PJobPoints->GetJobPointValue(JP_ACTIVATE_EFFECT));
+                PChar->PAutomaton->setAllBurden(30 - PChar->PJobPoints->GetJobPointValue(JP_ACTIVATE_EFFECT));
 
                 PChar->PAutomaton->UpdateHealth();
                 PChar->PAutomaton->health.hp = PChar->PAutomaton->GetMaxHP();

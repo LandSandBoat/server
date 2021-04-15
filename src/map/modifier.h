@@ -432,6 +432,7 @@ enum class Mod
     NINJA_TOOL     = 308, // Percent chance to not use a tool.
     NIN_NUKE_BONUS = 522, // magic attack bonus for NIN nukes
     DAKEN          = 911, // chance to throw a shuriken without consuming it
+    NINJUTSU_DURATION = 1000,
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859, // Ancient Circle extended duration in seconds
@@ -838,7 +839,7 @@ enum class Mod
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 1000,
+    // SPARE = 1001,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
