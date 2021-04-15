@@ -1,4 +1,4 @@
-﻿# Table of Contents
+# Table of Contents
 1. [General Guidelines](#general-guidelines)
 2. [License](#license)
 3. [Workflow Guide](#workflow-guide)
