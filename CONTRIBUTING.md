@@ -1,4 +1,4 @@
-# Table of Contents
+﻿# Table of Contents
 1. [General Guidelines](#general-guidelines)
 2. [License](#license)
 3. [Workflow Guide](#workflow-guide)
@@ -16,7 +16,7 @@
 
 # License
 
-* We operate under [GNU General Public License v3.0](). We do not accept contributions that use other more restrictive licenses (such as AGPL3) or completely incompatible incenses (such as proprietary code).
+* We operate under [GNU General Public License v3.0](https://github.com/DerpyProjectGroup/topaz/blob/info/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3) or completely incompatible incenses (such as proprietary code).
 
 # Workflow Guide
 
