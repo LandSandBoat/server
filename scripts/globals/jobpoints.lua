@@ -232,7 +232,7 @@ xi.jp = {
     AMMO_CONSUMPTION         = JPCATEGORY_COR + 0x05, --X no ammo chance +1%
     RANDOM_DEAL_EFFECT       = JPCATEGORY_COR + 0x06, --X 2 abil random deal +2%
     COR_RANGED_ACC_BONUS     = JPCATEGORY_COR + 0x07, --X r.acc +1
-    TRIPLE_SHOT_EFFECT       = JPCATEGORY_COR + 0x08, --X triple shot chance +1%
+    TRIPLE_SHOT_EFFECT       = JPCATEGORY_COR + 0x08, --+ triple shot chance +1%
     OPTIMAL_RANGE_BONUS      = JPCATEGORY_COR + 0x09, --X sweet spot dmg +1
 
     --PUP
