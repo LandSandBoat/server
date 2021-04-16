@@ -1572,6 +1572,12 @@ void CCharEntity::OnRaise()
             hpReturned             = (uint16)(GetMaxHP() * 0.5);
             ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
         }
+        else if (m_hasRaise == 4)
+        {
+            actionTarget.animation = 496; // TODO: Verify this Reraise animation
+            hpReturned             = (uint16)GetMaxHP();
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - map_config.exp_retain);
+        }
         addHP(((hpReturned < 1) ? 1 : hpReturned));
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;

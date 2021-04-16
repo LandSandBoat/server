@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -8603,7 +8603,7 @@ void CLuaBaseEntity::sendReraise(uint8 raiseLevel)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (raiseLevel == 0 || raiseLevel > 3)
+    if (raiseLevel == 0 || raiseLevel > 4)
     {
         ShowDebug(CL_CYAN "lua::sendRaise raise value is not valide!\n" CL_RESET);
     }

@@ -328,14 +328,6 @@ enum JOBPOINT_TYPE : uint16
     JP_GAMBIT_DURATION         = JPCATEGORY_RUN + 0x09, //dur +1s
 };
 
-/**
- * Abilities modified by
- */
-enum JP_MODIFICATIONS : uint16
-{
-    JP_STEAL_ID = 28
-};
-
 #define JOBPOINTS_CATEGORY_COUNT      22
 #define JOBPOINTS_CATEGORY_START      0x020
 #define JOBPOINTS_JPTYPE_COUNT        220

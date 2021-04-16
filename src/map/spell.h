@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -909,7 +909,25 @@ enum class SpellID : uint16
     Frazzle     = 843,
     Frazzle_II  = 844,
     Flurry      = 845,
-    Flurry_II   = 846
+    Flurry_II   = 846,
+
+    Reraise_IV = 848,
+
+    Fire_VI     = 849,
+    Blizzard_VI = 850,
+    Aero_VI     = 851,
+    Stone_VI    = 852,
+    Thunder_VI  = 853,
+    Water_VI    = 854,
+
+    Fire_Threnody_II      = 871,
+    Ice_Threnody_II       = 872,
+    Wind_Threnody_II      = 873,
+    Earth_Threnody_II     = 874,
+    Lightning_Threnody_II = 875,
+    Water_Threnody_II     = 876,
+    Light_Threnody_II     = 877,
+    Dark_Threnody_II      = 878,
 };
 
 #define MAX_SPELL_ID 1024U

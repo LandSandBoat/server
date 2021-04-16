@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2021 Ixion Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -20,6 +20,8 @@
 #include "entities/charentity.h"
 #include "job_points.h"
 #include "map.h"
+#include "packets/char_spells.h"
+#include "utils/charutils.h"
 
 CJobPoints::CJobPoints(CCharEntity* PChar)
 {
@@ -244,5 +246,72 @@ namespace jobpointutils
         }
 
         PChar->addModifiers(currentGifts);
+
+        // Add JP Spells
+        bool sendUpdate = false;
+        switch (jobId)
+        {
+            case JOB_BLM:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_VI))
+                {
+                    for (const SpellID elementalSpell : { SpellID::Fire_VI,
+                                                          SpellID::Blizzard_VI,
+                                                          SpellID::Aero_VI,
+                                                          SpellID::Stone_VI,
+                                                          SpellID::Thunder_VI,
+                                                          SpellID::Water_VI })
+                    {
+                        charutils::addSpell(PChar, (uint16)elementalSpell);
+                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                    }
+
+                    sendUpdate = true;
+                }
+                // TODO: 550 JP Gift: Aspir III
+                break;
+            case JOB_BRD:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_Threnody_II))
+                {
+                    for (const SpellID threnodySpell : { SpellID::Fire_Threnody_II,
+                                                         SpellID::Ice_Threnody_II,
+                                                         SpellID::Wind_Threnody_II,
+                                                         SpellID::Earth_Threnody_II,
+                                                         SpellID::Lightning_Threnody_II,
+                                                         SpellID::Water_Threnody_II,
+                                                         SpellID::Light_Threnody_II,
+                                                         SpellID::Dark_Threnody_II })
+                    {
+                        charutils::addSpell(PChar, (uint16)threnodySpell);
+                        charutils::SaveSpell(PChar, (uint16)threnodySpell);
+                    }
+
+                    sendUpdate = true;
+                }
+                break;
+            case JOB_NIN:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Utsusemi_San))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Utsusemi_San);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Utsusemi_San);
+
+                    sendUpdate = true;
+                }
+                break;
+            case JOB_WHM:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Reraise_IV))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Reraise_IV);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Reraise_IV);
+
+                    sendUpdate = true;
+                }
+                // TODO: 1200JP Gift: Full Cure
+                break;
+        }
+
+        if (sendUpdate)
+        {
+            PChar->pushPacket(new CCharSpellsPacket(PChar));
+        }
     }
 } // namespace jobpointutils
