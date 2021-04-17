@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `spell_list`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `spell_list` (
   `spellid` smallint(3) unsigned NOT NULL,
-  `name` char(20) NOT NULL,
+  `name` varchar(24) NOT NULL,
   `jobs` binary(22) NOT NULL,
   `group` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `family` smallint(4) unsigned NOT NULL DEFAULT '0',

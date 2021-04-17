@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10045, 0, 1, 5, 0, 1)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRELUDE_TO_PUISSANCE) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_AVAILABLE then
         player:startEvent(10045, 0, 1, 5)
-    elseif player:hasKeyItem(xi.ki.LIMIT_BREAKER) == true and player:hasKeyItem(xi.ki.JOB_BREAKER) == false and player:getMainLvl() >= 99 then
+    elseif player:hasKeyItem(xi.ki.LIMIT_BREAKER) and not player:hasKeyItem(xi.ki.JOB_BREAKER) and player:getMainLvl() >= 99 then
         player:startEvent(10240, 0, 0, 0, 0)
     elseif player:getCharVar("BeyondInfinityCS") == 2 then
         player:startEvent(10139)

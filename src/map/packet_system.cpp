@@ -343,7 +343,13 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CInventorySizePacket(PChar));
     PChar->pushPacket(new CMenuConfigPacket(PChar));
     PChar->pushPacket(new CCharJobsPacket(PChar));
-    PChar->pushPacket(new CJobPointDetailsPacket(PChar));
+
+    if (charutils::hasKeyItem(PChar, 2544))
+    {
+        // Only send Job Points Packet if the player has unlocked them
+        PChar->pushPacket(new CJobPointDetailsPacket(PChar));
+    }
+
 
     // TODO: While in mog house; treasure pool is not created.
     if (PChar->PTreasurePool != nullptr)
@@ -3240,8 +3246,14 @@ void SmallPacket0x061(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CMenuMeritPacket(PChar));
-    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
-    PChar->pushPacket(new CJobPointDetailsPacket(PChar));
+
+    if (charutils::hasKeyItem(PChar, 2544))
+    {
+        // Only send Job Points Packet if the player has unlocked them
+        PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+        PChar->pushPacket(new CJobPointDetailsPacket(PChar));
+    }
+
     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
     PChar->pushPacket(new CStatusEffectPacket(PChar));
@@ -4684,7 +4696,11 @@ void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0x0C0(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    PChar->pushPacket(new CJobPointDetailsPacket(PChar));
+    if (charutils::hasKeyItem(PChar, 2544))
+    {
+        // Only send Job Points Packet if the player has unlocked them
+        PChar->pushPacket(new CJobPointDetailsPacket(PChar));
+    }
 }
 
 /************************************************************************
