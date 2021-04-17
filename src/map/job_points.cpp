@@ -267,8 +267,24 @@ namespace jobpointutils
 
                     sendUpdate = true;
                 }
-                // TODO: 550 JP Gift: Aspir III
+
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Aspir_III))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Aspir_III);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Aspir_III);
+
+                    sendUpdate = true;
+                }
+
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Death))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Death);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Death);
+
+                    sendUpdate = true;
+                }
                 break;
+
             case JOB_BRD:
                 if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_Threnody_II))
                 {
@@ -288,6 +304,67 @@ namespace jobpointutils
                     sendUpdate = true;
                 }
                 break;
+
+            case JOB_DRK:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Endark_II))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Endark_II);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Endark_II);
+
+                    sendUpdate = true;
+                }
+
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Drain_III))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Drain_III);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Drain_III);
+
+                    sendUpdate = true;
+                }
+                break;
+
+            case JOB_GEO:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_V))
+                {
+                    for (const SpellID elementalSpell : { SpellID::Fire_V,
+                                                          SpellID::Blizzard_V,
+                                                          SpellID::Aero_V,
+                                                          SpellID::Stone_V,
+                                                          SpellID::Thunder_V,
+                                                          SpellID::Water_V })
+                    {
+                        charutils::addSpell(PChar, (uint16)elementalSpell);
+                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                    }
+
+                    sendUpdate = true;
+                }
+
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Aspir_III))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Aspir_III);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Aspir_III);
+
+                    sendUpdate = true;
+                }
+
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Fira_III))
+                {
+                    for (const SpellID elementalSpell : { SpellID::Fira_III,
+                                                          SpellID::Blizzara_III,
+                                                          SpellID::Aera_III,
+                                                          SpellID::Stonera_III,
+                                                          SpellID::Thundara_III,
+                                                          SpellID::Watera_III })
+                    {
+                        charutils::addSpell(PChar, (uint16)elementalSpell);
+                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                    }
+
+                    sendUpdate = true;
+                }                
+                break;
+
             case JOB_NIN:
                 if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Utsusemi_San))
                 {
@@ -297,6 +374,70 @@ namespace jobpointutils
                     sendUpdate = true;
                 }
                 break;
+
+            case JOB_PLD:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Enlight_II))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Enlight_II);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Enlight_II);
+
+                    sendUpdate = true;
+                }
+                break;
+
+            case JOB_RDM:
+                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_V))
+                {
+                    for (const SpellID elementalSpell : { SpellID::Fire_V,
+                                                          SpellID::Blizzard_V,
+                                                          SpellID::Aero_V,
+                                                          SpellID::Stone_V,
+                                                          SpellID::Thunder_V,
+                                                          SpellID::Water_V })
+                    {
+                        charutils::addSpell(PChar, (uint16)elementalSpell);
+                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                    }
+
+                    sendUpdate = true;
+                }
+
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Addle_II))
+                {
+                    for (const SpellID enfeeblingSpell : { SpellID::Addle_II,
+                                                           SpellID::Distract_III,
+                                                           SpellID::Frazzle_III })
+                    {
+                        charutils::addSpell(PChar, (uint16)enfeeblingSpell);
+                        charutils::SaveSpell(PChar, (uint16)enfeeblingSpell);
+                    }
+
+                    sendUpdate = true;
+                }
+
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Refresh_III))
+                {
+                    for (const SpellID enfeeblingSpell : { SpellID::Refresh_III,
+                                                           SpellID::Temper_II })
+                    {
+                        charutils::addSpell(PChar, (uint16)enfeeblingSpell);
+                        charutils::SaveSpell(PChar, (uint16)enfeeblingSpell);
+                    }
+
+                    sendUpdate = true;
+                }
+                break;
+
+            case JOB_RUN:
+                if (totalJpSpent >= 550 && !charutils::hasSpell(PChar, (uint16)SpellID::Temper))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Temper);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Temper);
+
+                    sendUpdate = true;
+                }
+                break;
+
             case JOB_WHM:
                 if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Reraise_IV))
                 {
@@ -305,7 +446,14 @@ namespace jobpointutils
 
                     sendUpdate = true;
                 }
-                // TODO: 1200JP Gift: Full Cure
+
+                if (totalJpSpent >= 1200 && !charutils::hasSpell(PChar, (uint16)SpellID::Full_Cure))
+                {
+                    charutils::addSpell(PChar, (uint16)SpellID::Full_Cure);
+                    charutils::SaveSpell(PChar, (uint16)SpellID::Full_Cure);
+
+                    sendUpdate = true;
+                }
                 break;
         }
 
