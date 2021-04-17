@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     elseif (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY_WINDURST) then
         if (player:hasKeyItem(xi.ki.DULL_SWORD)) then
             player:startEvent(40)
-        elseif (player:getCharVar("MissionStatus") == 5) then
+        elseif (player:getMissionStatus(player:getNation()) == 5) then
             player:startEvent(43)
         else
             player:startEvent(44)
@@ -40,13 +40,13 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 40) then
-        player:setCharVar("MissionStatus", 5)
+        player:setMissionStatus(player:getNation(), 5)
         player:delKeyItem(xi.ki.DULL_SWORD)
     elseif (csid == 41) then
         player:tradeComplete()
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     elseif (csid == 42) then
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
         player:delKeyItem(xi.ki.SHIELD_OFFERING)
     end
 end

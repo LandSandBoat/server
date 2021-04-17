@@ -82,21 +82,21 @@ entity.onTrigger = function(player, npc)
         elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY and player:hasKeyItem(xi.ki.KINDRED_REPORT)) then
             player:startEvent(714)
         elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
-            if (player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) == false and player:getCharVar("MissionStatus") ==
+            if (player:hasKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK) == false and player:getMissionStatus(player:getNation()) ==
                 0) then
                 player:startEvent(713)
             else
                 player:showText(npc, ID.text.GOOD_LUCK)
             end
-        elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK) and player:getCharVar("MissionStatus") == 0) then
+        elseif (player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK) and player:getMissionStatus(player:getNation()) == 0) then
             player:startEvent(720)
-        elseif (currentMission == xi.mission.id.bastok.DARKNESS_RISING and player:getCharVar("MissionStatus") == 1) then
+        elseif (currentMission == xi.mission.id.bastok.DARKNESS_RISING and player:getMissionStatus(player:getNation()) == 1) then
             player:startEvent(721)
         elseif (player:hasKeyItem(xi.ki.BURNT_SEAL)) then
             player:startEvent(722)
-        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 0) then
+        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 0) then
             player:startEvent(761)
-        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getCharVar("MissionStatus") == 3) then
+        elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 3) then
             player:startEvent(762)
         else
             player:startEvent(700)
@@ -133,17 +133,17 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 713) then
         player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 720 and option == 0 or csid == 721) then
         player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK)
         player:addKeyItem(xi.ki.NEW_FEIYIN_SEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NEW_FEIYIN_SEAL)
-        player:setCharVar("MissionStatus", 10)
+        player:setMissionStatus(player:getNation(), 10)
     elseif (csid == 720 and option == 1) then
         player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_BASTOK)
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 761) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 714 or csid == 722 or csid == 762) then
         finishMissionTimeline(player, 1, csid, option);
 

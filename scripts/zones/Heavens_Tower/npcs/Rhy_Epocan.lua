@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if currentMission == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and missionStatus == 1 then
         player:startEvent(107)
@@ -36,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 107 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 114 then
         finishMissionTimeline(player, 2, csid, option)
     elseif csid == 405 then

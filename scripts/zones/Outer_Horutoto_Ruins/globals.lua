@@ -93,7 +93,7 @@ OUTER_HORUTOTO_RUINS = {
         local msgBase = ID.text.ORB_ALREADY_PLACED
 
         if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER then
-            local missionStatus = player:getCharVar("MissionStatus")
+            local missionStatus = player:getMissionStatus(player:getNation())
 
             -- placing dark mana orbs
             if missionStatus == 2 then
@@ -149,7 +149,7 @@ OUTER_HORUTOTO_RUINS = {
                         player:getCharVar("MissionStatus_orb6") == 2
                     then
                         player:messageSpecial(msgBase + 5) -- "You have set all of the Dark Mana Orbs in place."
-                        player:setCharVar("MissionStatus", 3)
+                        player:setMissionStatus(player:getNation(), 3)
                     end
                 end
 
@@ -171,7 +171,7 @@ OUTER_HORUTOTO_RUINS = {
                         player:getCharVar("MissionStatus_orb6") == 3
                     then
                         player:messageSpecial(msgBase + 4)
-                        player:setCharVar("MissionStatus", 5)
+                        player:setMissionStatus(player:getNation(), 5)
                     end
                 end
             end

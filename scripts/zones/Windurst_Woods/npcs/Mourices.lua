@@ -11,7 +11,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_WINDURST and npcUtil.tradeHas(trade, {{12298, 2}}) then -- Parana Shield x2
         if missionStatus == 5 then
@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_ABROAD then
         -- San d'Oria Mission 2-3 Part I - Windurst > Bastok
@@ -62,19 +62,19 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 448 then
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
         player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif csid == 457 then
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
         player:confirmTrade()
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
     elseif csid == 462 then
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_WINDURST2)
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
     elseif csid == 467 then
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
         player:delKeyItem(xi.ki.KINDRED_CREST)
-        player:setCharVar("MissionStatus", 11)
+        player:setMissionStatus(player:getNation(), 11)
         npcUtil.giveKeyItem(player, xi.ki.KINDRED_REPORT)
     end
 end

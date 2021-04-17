@@ -38,9 +38,9 @@ battlefield_object.onEventFinish = function(player, csid, option)
     if
         csid == 32001 and
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and
-        player:getCharVar("MissionStatus") == 2
+        player:getMissionStatus(player:getNation()) == 2
     then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     end
 end
 

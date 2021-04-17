@@ -2,6 +2,8 @@
 -- Magian Trial Objectives
 -----------------------------------
 require("scripts/globals/common")
+require("scripts/globals/status")
+require("scripts/globals/weaponskillids")
 -----------------------------------
 
 -- This is a table of anon function for Magian Trial objectives/conditions.

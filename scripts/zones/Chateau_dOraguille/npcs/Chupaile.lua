@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     else
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria 5-2 "The Shadow Lord" (optional)
         -- Only after speaking to Halver and obtaining Rank 6 and before entering the Great Hall

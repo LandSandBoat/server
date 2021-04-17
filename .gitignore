@@ -130,12 +130,12 @@ UpgradeLog*.XML
 *.app
 
 # Generated executables
-/topaz_connect
-/topaz_game
-/topaz_search
-/topaz_connect_64
-/topaz_game_64
-/topaz_search_64
+/ixion_connect
+/ixion_game
+/ixion_search
+/ixion_connect_64
+/ixion_game_64
+/ixion_search_64
 
 # Generated files, mostly autotools-related
 .deps
@@ -149,7 +149,6 @@ UpgradeLog*.XML
 /depcomp
 /missing
 /install-sh
-/tools/config.yaml
 
 src/common/config.h
 src/common/config.h.in
@@ -169,7 +168,7 @@ log/leaks.txt
 .metadata/**
 .project
 .vs
-/win32/.vs/topaz/v15
+/win32/.vs/ixion/v15
 
 # VS Code
 .vscode
@@ -199,6 +198,10 @@ cmake_install.cmake
 /conf/search_server.conf
 /conf/server_message.conf
 /conf/server_message_fr.conf
+
+# Tool/misc configs
+/tools/config.yaml
+ip.txt
 
 # Tracy download
 ext/tracy/

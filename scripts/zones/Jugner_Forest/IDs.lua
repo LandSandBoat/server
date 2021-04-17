@@ -34,6 +34,16 @@ zones[xi.zone.JUGNER_FOREST] =
         NO_COMBINATION           = 8666,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 10871, -- New training regime registered!
         COMMON_SENSE_SURVIVAL    = 13100, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 12089, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 12090, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 12091, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 12092, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 12093, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 12094, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 12095, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 12096, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 12097, -- Obtained key item: ≺abyssite>!
     },
     mob =
     {
@@ -52,6 +62,29 @@ zones[xi.zone.JUGNER_FOREST] =
         },
         KING_ARTHRO = 17203216,
         FRAELISSA   = 17203447,
+        VOIDWALKER  =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17203695, -- Sunderclaw
+                17203694, -- Sunderclaw
+                17203693, -- Sunderclaw
+                17203692, -- Sunderclaw
+                17203691,  -- Quagmire Pugil
+                17203690,  -- Quagmire Pugil
+                17203689,  -- Quagmire Pugil
+                17203688,  -- Quagmire Pugil
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17203687, -- Capricornus
+                17203686  -- Yacumama
+            },
+            [xi.keyItem.BLUE_ABYSSITE] = {
+                17203685  -- Krabkatoa
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17203684  -- Yilbegan
+            }
+        }
     },
     npc =
     {

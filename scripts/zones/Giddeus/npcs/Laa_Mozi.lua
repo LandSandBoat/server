@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("laa_talk", 1)
 
         if (player:hasKeyItem(xi.ki.DRINK_OFFERINGS) == false) then
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         end
     elseif (csid == 46) then
         player:setCharVar("laa_talk", 2)

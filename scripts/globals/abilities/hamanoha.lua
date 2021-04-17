@@ -5,6 +5,7 @@
 -- Recast Time: 00:05:00
 -- Duration: 0:03:00
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -15,7 +16,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.HAMANOHA, 12, 0, 180)
+    local jpValue = target:getJobPointLevel(xi.jp.HAMANOHA_DURATION)
+
+    target:addStatusEffect(xi.effect.HAMANOHA, 12, 0, 180 + jpValue)
 end
 
 return ability_object

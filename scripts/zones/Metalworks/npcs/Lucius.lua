@@ -51,7 +51,7 @@ end
 entity.onTrigger = function(player, npc)
     local Rank6 = player:getRank() >= 6 and 1 or 0
 
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.JEUNO and player:getCharVar("MissionStatus") == 0) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.JEUNO and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(322);
     elseif player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) and not player:hasSpell(903) then
         player:startEvent(986, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank6)
@@ -66,7 +66,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 322) then
-        player:setCharVar("MissionStatus", 1);
+        player:setMissionStatus(player:getNation(), 1);
         player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR);
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR);
     elseif csid == 986 and option == 2 then

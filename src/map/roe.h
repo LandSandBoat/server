@@ -57,6 +57,7 @@ enum ROE_EVENT
     ROE_UNITY_CHAT           = 15,
     ROE_MAGICBURST           = 16,
     ROE_HEAL_UNITYALLY       = 17,
+    ROE_TALK_NPC             = 18,
     ROE_NONE // End of enum marker and OOB checkpost. Do not move or remove, place any new types above.
 };
 

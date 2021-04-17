@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local roz = player:getCurrentMission(ZILART)
-    local rozStat = player:getCharVar("ZilartStatus")
+    local rozStat = player:getMissionStatus(xi.mission.log_id.ZILART)
 
     if player:getZPos() < 200 then
         if roz == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and rozStat == 0 then
@@ -43,7 +43,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
-        player:setCharVar("ZilartStatus", 1)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 1)
     end
 end
 

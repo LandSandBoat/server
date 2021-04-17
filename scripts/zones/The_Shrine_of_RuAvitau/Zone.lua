@@ -59,7 +59,7 @@ zone_object.onZoneIn = function(player, prevZone)
     -- ZM 15 -> ZM 16
     if
         ZilartMission == xi.mission.id.zilart.THE_SEALED_SHRINE and
-        player:getCharVar("ZilartStatus") == 1 and
+        player:getMissionStatus(xi.mission.log_id.ZILART) == 1 and
         xPos >= -45 and yPos >= -4 and zPos >= -240 and
         xPos <= -33 and yPos <= 0 and zPos <= -226 and
         DMEarrings <= NUMBER_OF_DM_EARRINGS
@@ -145,7 +145,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if (csid == 51) then
         player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
-        player:setCharVar("ZilartStatus", 0)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
     end
 end
 

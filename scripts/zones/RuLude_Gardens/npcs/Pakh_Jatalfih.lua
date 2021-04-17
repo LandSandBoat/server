@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     if pNation == xi.nation.WINDURST then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 1 then
             player:startEvent(43)
@@ -54,10 +54,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 43 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
         player:delKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 141 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif csid == 37 then
         finishMissionTimeline(player, 1, csid, option)
     end

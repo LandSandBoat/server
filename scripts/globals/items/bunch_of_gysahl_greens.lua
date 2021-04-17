@@ -22,7 +22,8 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.FOOD, ChocoboShirt(target), 0, 300, 4545)
+    chocoboShirt = target:getEquipID(xi.slot.BODY) == 10293
+    target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
 end
 
 item_object.onEffectGain = function(target, effect)

@@ -5,6 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
@@ -30,8 +31,9 @@ ability_object.onUseAbility = function(player, target, ability)
         end
     end
 
+    local jpLevel = target:getJobPointLevel(xi.jp.CHAKRA_EFFECT) * 10
     local recover = player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10) -- TODO: Figure out "function of level" addition (August 2017 update)
-    player:setHP(player:getHP() + recover)
+    player:setHP(player:getHP() + recover + jpLevel)
 
     local merits = player:getMerit(xi.merit.INVIGORATE)
     if merits > 0 then

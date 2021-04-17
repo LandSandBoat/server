@@ -21,6 +21,16 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         FISHING_MESSAGE_OFFSET      = 7077, -- You can't fish here.
         DOOR_OFFSET                 = 7435, -- The door is sealed shut...
         COMMON_SENSE_SURVIVAL       = 9259, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 8359, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 8360, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 8361, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 8362, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 8363, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 8364, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 8365, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 8366, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 8367, -- Obtained key item: ≺abyssite>!
     },
     mob =
     {
@@ -32,6 +42,29 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         {
             [17166701] = 17166705, -- 78.836 -0.109 -199.204
         },
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17166778, -- Raker bee
+                17166777, -- Raker bee
+                17166776, -- Raker bee
+                17166775, -- Raker bee
+                17166774,  -- Rummager beetle
+                17166773,  -- Rummager beetle
+                17166772,  -- Rummager beetle
+                17166771,  -- Rummager beetle
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17166770,  -- Jyeshtha
+                17166769, -- Farruca Fly
+            },
+            [xi.keyItem.BROWN_ABYSSITE] = {
+                17166768  -- Orcus
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17166767  -- Yilbegan
+            }
+        }
     },
     npc =
     {

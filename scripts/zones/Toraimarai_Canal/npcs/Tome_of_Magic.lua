@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.TOME_OF_MAGIC_OFFSET
 
-    if offset == 4 and player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_SIXTH_MINISTRY and player:getCharVar("MissionStatus") == 1 then
+    if offset == 4 and player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_SIXTH_MINISTRY and player:getMissionStatus(player:getNation()) == 1 then
         player:startEvent(69)
     elseif offset >= 0 and offset <= 3 then
         player:startEvent(65 + offset)
@@ -27,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 69 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     end
 end
 

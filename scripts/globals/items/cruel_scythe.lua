@@ -16,7 +16,7 @@ item_object.onAdditionalEffect = function(player, target, damage)
         return 0, 0, 0
     else
         target:delStatusEffect(xi.effect.EVASION_BOOST)
-        target:addStatusEffect(xi.effect.EVASION_DOWN, 12, 0, 60) -- Retail is actually 12.5% but Topaz doesn't have the decimal place
+        target:addStatusEffect(xi.effect.EVASION_DOWN, 12, 0, 60) -- Retail is actually 12.5% but we don't have the decimal place
         return xi.subEffect.EVASION_DOWN, xi.msg.basic.ADD_EFFECT_STATUS, xi.effect.EVASION_DOWN
     end
 end

@@ -15,6 +15,7 @@ zone_object.onInitialize = function(zone)
     GetMobByID(ID.mob.MYRADROSH):setRespawnTime(math.random(5400, 7200))
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

@@ -80,7 +80,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local basedmg = 2088
     if mob:getWeather() == xi.weather.AURORAS or mob:getWeather() == xi.weather.STELLAR_GLARE then basedmg = basedmg + 520 end
-    if VanadielDayElement() == xi.day.LIGHTSDAY then basedmg = basedmg + 208 end
+    if VanadielDayElement() == xi.magic.ele.LIGHT then basedmg = basedmg + 208 end
     local damage = basedmg/(1+(target:getMod(xi.mod.MDEF)/100))
     local dmg = MobFinalAdjustments(damage,mob,skill,target, xi.attackType.MAGICAL, xi.damageType.LIGHT,MOBPARAM_IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)

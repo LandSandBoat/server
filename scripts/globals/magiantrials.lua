@@ -348,7 +348,7 @@ end
 
 -- increments progress if conditions are met
 xi.magian.checkMagianTrial = function(player, conditions)
-    for _, slot in pairs( { xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
+    for _, slot in pairs( {xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
             checkAndSetProgression(player, trialIdOnItem, conditions, MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
@@ -571,7 +571,7 @@ xi.magian.magianOnEventFinish = function(player, itemId, csid, option, EVENT_IDS
                 break
             end
         end
-        player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, trialId)
+        player:addItem(t.reqItem, 1, t.reqItemAug1, t.reqItemAugValue1, t.reqItemAug2, t.reqItemAugValue2, t.reqItemAug3, t.reqItemAugValue3, t.reqItemAug4, t.reqItemAugValue4, 0)
         player:messageSpecial(msg.RETURN_MAGIAN_ITEM, t.reqItem)
 
     -- finishes a trial

@@ -25,7 +25,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
+    local MissionStatus = player:getMissionStatus(player:getNation())
     local tuningIn = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
@@ -38,13 +39,13 @@ entity.onTrigger = function(player, npc)
             player:startEvent(142) -- Keep displaying the instructions
         end
     -- Check if we are on Windurst Mission 7-2
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 0) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(734)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 1) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(735)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 2) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(739)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getCharVar("MissionStatus") == 5 and player:hasKeyItem(xi.ki.BOOK_OF_THE_GODS)) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 5 and player:hasKeyItem(xi.ki.BOOK_OF_THE_GODS)) then
         player:startEvent(742)
     -----------------------------------
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT) == QUEST_ACCEPTED) then
@@ -132,7 +133,7 @@ entity.onEventFinish = function(player, csid, option)
     local reward = 0
 
     if (csid == 140) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:setCharVar("ohbiru_dohbiru_talk", 0)
         player:addKeyItem(xi.ki.FOOD_OFFERINGS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FOOD_OFFERINGS)
@@ -234,7 +235,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.MOON_BAUBLE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MOON_BAUBLE)
     elseif (csid == 734) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 742) then
         finishMissionTimeline(player, 3, csid, option)
 

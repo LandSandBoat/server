@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
 
     if pNation == xi.nation.BASTOK then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if currentMission == xi.mission.id.bastok.JEUNO and MissionStatus == 4 then
             player:startEvent(38)
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 38 then
         finishMissionTimeline(player, 1, csid, option)
     elseif csid == 129 and option == 1 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         if not player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) then
             player:addKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ARCHDUCAL_AUDIENCE_PERMIT)

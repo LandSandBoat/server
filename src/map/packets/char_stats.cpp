@@ -75,7 +75,7 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar)
     ref<uint8>(0x50)  = PChar->profile.nation;
 
     // 0x51 = 0x01 on fresh player, 0x03 with 99
-    // 0x52 = superior level (1 ~ 5)
+    ref<uint8>(0x52) = PChar->getMod(Mod::SUPERIOR_LEVEL);
     // 0x54 = maximum item level
     // 0x55 = itemlevel over 99
     // 0x56 = main weapon item level

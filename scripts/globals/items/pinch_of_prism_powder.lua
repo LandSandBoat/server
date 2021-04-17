@@ -13,7 +13,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local duration = math.random(60, 180)
+    local duration = math.random(300, 480)
     if (target:hasStatusEffect(xi.effect.INVISIBLE)) then
         target:delStatusEffect(xi.effect.INVISIBLE)
     end

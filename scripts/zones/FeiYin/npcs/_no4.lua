@@ -19,7 +19,7 @@ end
 entity.onTrigger = function(player, npc)
 
     -- Windurst 8-2
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getCharVar("MissionStatus") == 1) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(22)
 
     -- Curses, Foiled A_Golem!?
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.RHINOSTERY_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_RING)
         if (player:hasKeyItem(xi.ki.AURASTERY_RING) and player:hasKeyItem(xi.ki.OPTISTERY_RING)) then
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         end
     end
 end

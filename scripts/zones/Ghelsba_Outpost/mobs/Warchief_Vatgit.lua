@@ -11,9 +11,9 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
 
-    if (player:getCurrentMission(player:getNation()) == 6) then
-        if (player:getCharVar("MissionStatus") == 4) then
-            player:setCharVar("MissionStatus", 5)
+    if (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.RANK2) then
+        if (player:getMissionStatus(player:getNation()) == 4) then
+            player:setMissionStatus(player:getNation(), 5)
         end
     end
 

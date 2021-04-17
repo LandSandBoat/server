@@ -255,7 +255,7 @@ void do_abort()
 }
 void set_server_type()
 {
-    SERVER_TYPE = TOPAZ_SERVER_LOGIN;
+    SERVER_TYPE = IXION_SERVER_LOGIN;
     SOCKET_TYPE = socket_type::TCP;
 }
 
@@ -500,7 +500,7 @@ void login_config_default()
     login_config.login_auth_ip   = "127.0.0.1";
     login_config.login_auth_port = 54231;
 
-    login_config.servername = "Topaz";
+    login_config.servername = "Ixion";
 
     login_config.mysql_host     = "";
     login_config.mysql_login    = "";
@@ -670,8 +670,8 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
-    ShowInfo(CL_GREEN "Forum:" CL_RESET "\thttps://github.com/topaz-next/topaz\n");
+    ShowInfo(CL_WHITE "Ixion version %d.%02d.%02d" CL_RESET "\n", IXION_MAJOR_VERSION, IXION_MINOR_VERSION, IXION_REVISION);
+    ShowInfo(CL_GREEN "Website:" CL_RESET "\thttps://ixion.dev\n");
     if (flag)
     {
         exit(EXIT_FAILURE);

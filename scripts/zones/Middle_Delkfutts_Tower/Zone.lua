@@ -70,7 +70,7 @@ zone_object.onEventFinish = function(player, csid, option)
         end
 
     -- BLADE OF EVIL
-    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title= xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
+    elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title=xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
         player:setCharVar("bladeOfEvilCS", 0)
     end
 end

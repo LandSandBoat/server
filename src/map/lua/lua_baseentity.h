@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -329,8 +329,8 @@ public:
     bool   hasCompletedMission(uint8 missionLogID, uint16 missionID); // Checks if mission has been completed
     void   completeMission(uint8 missionLogID, uint16 missionID);     // Complete Mission
 
-    void   setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission log extra data to correctly track progress in branching missions.
-    uint32 getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj);                  // Gets mission log extra data.
+    void   setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj); // Sets mission progress data.
+    uint32 getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj);                 // Gets mission progress data.
 
     void   setEminenceCompleted(uint16 recordID, sol::object const& arg1, sol::object const& arg2); // Sets the complete flag for a record of eminence
     bool   getEminenceCompleted(uint16 recordID);                                                   // Gets the record completed flag
@@ -339,9 +339,9 @@ public:
     auto   getEminenceProgress(uint16 recordID) -> std::optional<uint32>;                           // gets progress on a record of eminence
     bool   hasEminenceRecord(uint16 recordID);                                                      // Check if record is active
     void   triggerRoeEvent(uint8 eventNum, sol::object const& reqTable);
-    void   setUnityLeader(uint8 leaderID);                                                          // Sets a player's unity leader
-    uint8  getUnityLeader();                                                                        // Returns player's unity leader
-    auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>;                      // Returns current rank of player's unity
+    void   setUnityLeader(uint8 leaderID);                                    // Sets a player's unity leader
+    uint8  getUnityLeader();                                                  // Returns player's unity leader
+    auto   getUnityRank(sol::object const& unityObj) -> std::optional<uint8>; // Returns current rank of player's unity
 
     void  addAssault(uint8 missionID);          // Add Mission
     void  delAssault(uint8 missionID);          // Delete Mission from Mission Log
@@ -361,6 +361,10 @@ public:
     int32 getMerit(uint16 merit);
     uint8 getMeritCount();
     void  setMerits(uint8 numPoints); // set merits (testing only!)
+
+    uint8 getJobPointLevel(uint16 jpType); // Returns Value of Job Point Type
+    void  setJobPoints(uint16 amount);     // Set Job Points for current job
+    void  setCapacityPoints(uint16 amount);
 
     uint32 getGil();
     void   addGil(int32 gil);
@@ -503,7 +507,7 @@ public:
                    sol::object const& bar1NameObj, sol::object const& bar1ValObj,
                    sol::object const& bar2NameObj, sol::object const& bar2ValObj);
     void enableEntities(std::vector<uint32> data);
-    void independantAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
+    void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
     void engage(uint16 requestedTarget);
     bool isEngaged();
@@ -673,6 +677,7 @@ public:
     void  removeOldestManeuver();
     void  removeAllManeuvers();
     void  updateAttachments();
+    void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);

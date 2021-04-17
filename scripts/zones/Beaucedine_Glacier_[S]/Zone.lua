@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Beaucedine_Glacier_[S]/IDs")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

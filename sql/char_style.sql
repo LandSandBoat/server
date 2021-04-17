@@ -1,11 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: xidb
-Target Host: localhost
-Target Database: xidb
-Date: 03/05/2015 09:21:00 PM
-*/
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- ----------------------------

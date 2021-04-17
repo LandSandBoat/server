@@ -34,7 +34,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS)
     elseif csid == 4 then
-        player:setCharVar("ZilartStatus", 0)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
         player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
     end

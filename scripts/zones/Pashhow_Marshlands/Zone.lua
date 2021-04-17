@@ -21,6 +21,7 @@ zone_object.onInitialize = function(zone)
     GetMobByID(ID.mob.BOWHO_WARMONGER):setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -31,7 +32,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     if prevZone == xi.zone.BEADEAUX and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FOUR_MUSKETEERS then
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         if missionStatus > 0 and missionStatus < 22 then
             cs = 10
@@ -40,7 +41,7 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     elseif quests.rainbow.onZoneIn(player) then
         cs = 13
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 15
     end
 

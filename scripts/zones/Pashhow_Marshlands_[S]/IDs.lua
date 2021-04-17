@@ -21,6 +21,16 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
         FISHING_MESSAGE_OFFSET  = 7147, -- You can't fish here.
         ALREADY_OBTAINED_TELE   = 7692, -- You already possess the gate crystal for this telepoint.
         COMMON_SENSE_SURVIVAL   = 9072, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 8035, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 8036, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 8037, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 8038, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 8039, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 8040, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 8041, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 8042, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 8043, -- Obtained key item: ≺abyssite>!
     },
     mob =
     {
@@ -38,6 +48,41 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
             [17146008] = 17146012, -- -165.745 24.499 349.06
         },
         KINEPIKWA = 17146147,
+        VOIDWALKER  =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17146186, -- Globster
+                17146185, -- Globster
+                17146184, -- Globster
+                17146183, -- Globster
+                17146182,  -- Ground Guzzler
+                17146181,  -- Ground Guzzler
+                17146180,  -- Ground Guzzler
+                17146179,  -- Ground Guzzler
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17146178, -- Lamprey Lord
+                17146177, -- Shoggoth
+            },
+            [xi.keyItem.ORANGE_ABYSSITE] = {
+                17146170  -- Blobdingnag
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17146169  -- Yilbegan
+            }
+        }
+    },
+    pet = 
+    {
+        [17146170] = -- Blobdingnag
+        {
+            17146176,-- Septic Boils
+            17146175,-- Septic Boils
+            17146174,-- Septic Boils
+            17146173,-- Septic Boils
+            17146172,-- Septic Boils
+            17146171,-- Septic Boils
+        },
     },
     npc =
     {

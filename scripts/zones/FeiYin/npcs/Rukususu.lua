@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     -- The Jester Who'd Be King (Windurst 8-2)
     if
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getCharVar("MissionStatus") == 1 and not
+        player:getMissionStatus(player:getNation()) == 1 and not
         player:hasKeyItem(xi.ki.RHINOSTERY_RING)
     then
         player:startEvent(22, 0, xi.ki.RHINOSTERY_RING)
@@ -49,7 +49,7 @@ entity.onEventFinish = function(player, csid, option)
     -- The Jester Who'd Be King (Windurst 8-2)
     elseif csid == 22 and npcUtil.giveKeyItem(player, xi.ki.RHINOSTERY_RING) then
         if player:hasKeyItem(xi.ki.AURASTERY_RING) and player:hasKeyItem(xi.ki.OPTISTERY_RING) then
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         end
     end
 end

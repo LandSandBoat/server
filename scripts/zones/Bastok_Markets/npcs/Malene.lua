@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif (csid == 104) then
         local fame = player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) and 8 or 50
-        if (npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY, {title= xi.title.CRAB_CRUSHER, gil=500, fame=fame})) then
+        if (npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY, {title=xi.title.CRAB_CRUSHER, gil=500, fame=fame})) then
             player:confirmTrade()
         end
 

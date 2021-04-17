@@ -15,9 +15,9 @@ end
 entity.onTrigger = function(player, npc)
     local curentticket=0
     if  (player:hasKeyItem(xi.ki.MANACLIPPER_TICKET)) then
-        curentticket= xi.ki.MANACLIPPER_TICKET
+        curentticket=xi.ki.MANACLIPPER_TICKET
     elseif (player:hasKeyItem(xi.ki.MANACLIPPER_MULTITICKET)) then
-        curentticket= xi.ki.MANACLIPPER_MULTITICKET
+        curentticket=xi.ki.MANACLIPPER_MULTITICKET
     end
 
     if ( curentticket ~= 0 ) then

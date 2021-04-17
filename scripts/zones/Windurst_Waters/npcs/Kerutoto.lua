@@ -50,7 +50,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local windurstMission = player:getCurrentMission(WINDURST)
-    local windurstStatus = player:getCharVar("MissionStatus")
+    local windurstStatus = player:getMissionStatus(player:getNation())
     local blueRibbonBlues = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES)
     local wakingDreams = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
     local foodForThought = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FOOD_FOR_THOUGHT)
@@ -58,12 +58,12 @@ entity.onTrigger = function(player, npc)
     local ohbiruFood = player:getCharVar("Ohbiru_Food_var")
     local needZone = player:needToZone()
 
-    -- AWAKENING OF THE GODS
-    if windurstMission == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 0 then
+    -- Awakening of the Gods
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(737)
-    elseif windurstMission == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 1 then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(736)
-    elseif windurstMission == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and windurstStatus == 2 then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(738)
 
     -- THREE PATHS (ULMIA)
@@ -224,10 +224,9 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.WHISPER_OF_DREAMS)
             player:setCharVar("Darkness_Named_date", getMidnight())
         end
-
     -- AWAKENING OF THE GODS
     elseif csid == 736 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     end
 end
 

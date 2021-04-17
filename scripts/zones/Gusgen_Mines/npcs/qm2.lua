@@ -42,7 +42,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 10 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH, {item=16637, title= xi.title.BLACK_DEATH, var="ChaosbringerKills"})) then
+    if (csid == 10 and npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH, {item=16637, title=xi.title.BLACK_DEATH, var="ChaosbringerKills"})) then
         player:confirmTrade()
         player:delKeyItem(xi.ki.LETTER_FROM_ZEID)
     end

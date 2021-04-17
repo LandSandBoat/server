@@ -133,7 +133,7 @@ entity.onTrigger = function(player, npc)
     then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria Epilogue
         if player:getRank() == 10 then

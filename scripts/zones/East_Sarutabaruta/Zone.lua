@@ -31,11 +31,11 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- Check if we are on Windurst Mission 1-2
     if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER and
-        player:getCharVar("MissionStatus") == 5 and prevZone == xi.zone.OUTER_HORUTOTO_RUINS) then
+        player:getMissionStatus(player:getNation()) == 5 and prevZone == xi.zone.OUTER_HORUTOTO_RUINS) then
         cs = 48;
     elseif quests.rainbow.onZoneIn(player) then
         cs = 50;
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
         1) then
         cs = 52 -- go north no parameters (0 = north NE 1 E 2 SE 3 S 4 SW 5 W6 NW 7 @ as the 6th parameter)
     elseif (player:getCurrentMission(ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.WINDURST_WOODS and
@@ -76,7 +76,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 48) then
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
         -- Remove the glowing orb key items
         player:delKeyItem(xi.ki.FIRST_GLOWING_MANA_ORB);
         player:delKeyItem(xi.ki.SECOND_GLOWING_MANA_ORB);

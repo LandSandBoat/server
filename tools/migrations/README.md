@@ -7,7 +7,7 @@ a new table, so a migration script has been created to do this for you.
 
 ## Running Migrations
 
-Go into the `topaz/tools` directory and execute the `dbtool.py` file.
+Go into the `ixion/tools` directory and execute the `dbtool.py` file.
 
 From the command line: `python dbtool.py`
 

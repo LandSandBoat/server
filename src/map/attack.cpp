@@ -439,6 +439,8 @@ bool CAttack::CheckCounter()
     { // Perfect Counter only counters hits that normal counter misses, always critical, can counter 1-3 times before wearing
         m_isCountered = true;
         m_isCritical  = true;
+
+        // TODO: Implement VIT-based formula for Perfect Counter wearing off, and add JP bonus
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_PERFECT_COUNTER);
     }
     return m_isCountered;

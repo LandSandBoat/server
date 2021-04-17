@@ -15,12 +15,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ZilartStatus = player:getCharVar("ZilartStatus")
+    local ZilartStatus = player:getMissionStatus(xi.mission.log_id.ZILART)
 
     if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES) then
         if (player:hasKeyItem(xi.ki.DARK_FRAGMENT)) then
             player:delKeyItem(xi.ki.DARK_FRAGMENT)
-            player:setCharVar("ZilartStatus", ZilartStatus + 2)
+            player:setMissionStatus(xi.mission.log_id.ZILART, ZilartStatus + 2)
             player:messageSpecial(ID.text.YOU_PLACE_THE, xi.ki.DARK_FRAGMENT)
 
             if (ZilartStatus == 255) then
@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 1) then
         player:addTitle(xi.title.LIGHTWEAVER)
-        player:setCharVar("ZilartStatus", 0)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
         player:addKeyItem(xi.ki.PRISMATIC_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PRISMATIC_FRAGMENT)
         player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES)

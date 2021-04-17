@@ -49,7 +49,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 77 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_IMMORTAL_LU_SHANG)
-    elseif csid == 78 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.THE_IMMORTAL_LU_SHANG, {item=17386, fameArea=RABAO, fame=60, title= xi.title.THE_IMMORTAL_FISHER_LU_SHANG}) then
+    elseif csid == 78 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.THE_IMMORTAL_LU_SHANG, {item=17386, fameArea=RABAO, fame=60, title=xi.title.THE_IMMORTAL_FISHER_LU_SHANG}) then
         player:confirmTrade()
     elseif csid == 131 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.INDOMITABLE_SPIRIT)
@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
         player:setCharVar("IndomitableSpiritTimer", getConquestTally()) -- Player must wait until next CQ tally
     elseif csid == 134 then
-        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.INDOMITABLE_SPIRIT, {item=17011, fameArea=RABAO, fame=100, title= xi.title.INDOMITABLE_FISHER, var="IndomitableSpiritTimer"})
+        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.INDOMITABLE_SPIRIT, {item=17011, fameArea=RABAO, fame=100, title=xi.title.INDOMITABLE_FISHER, var="IndomitableSpiritTimer"})
     end
 end
 

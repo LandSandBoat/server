@@ -243,16 +243,18 @@ xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
         peddlestox:setStatus(xi.status.NORMAL)
     elseif peddlestox:getStatus() == xi.status.NORMAL then
         --[[
-        TODO: Peddlestox should play a teleport animation and then fade out. On retail this is an 0x03A
-            packet with animation id 122. Currently 0x3A is not implemented in Topaz. Retail capture of
+            Peddlestox should play a teleport animation and then fade out. On retail this is an 0x03A
+            packet with animation id 122. Retail capture of
             the correct animation packet is as follows:
              |  0  1  2  3   4  5  6  7   8  9  A  B   C  D  E  F    | 0123456789ABCDEF
         -----+----------------------------------------------------  -+------------------
            0 | 3A 0A B5 00  67 B2 07 01  67 B2 07 01  67 02 67 02    | :...g...g...g.g.
           10 | 7A 00 00 BF                                           | z...
-            An incomplete but similar 0x38 animation can be achieved with `entityAnimationPacket("shwh")`
         ]]--
-        peddlestox:setStatus(xi.status.DISAPPEAR)
+        peddlestox:independentAnimation(peddlestox, 122, 0)
+        peddlestox:timer(5000, function(npc)
+            peddlestox:setStatus(xi.status.DISAPPEAR)
+        end)
     end
 end
 

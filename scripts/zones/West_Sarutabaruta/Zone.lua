@@ -21,6 +21,7 @@ zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function( player, prevZone)
@@ -36,10 +37,10 @@ zone_object.onZoneIn = function( player, prevZone)
         cs = 62
     elseif player:getCurrentMission(ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.PORT_WINDURST then
         cs = 63
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 50
     -- removed only "cs =" works onzonein and can't take parameters atm
-    -- elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    -- elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         -- player:startEvent(50, 0, 0, 0, 0, 0, 2) -- talking doll go east
     end
 

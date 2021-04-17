@@ -79,6 +79,9 @@ public:
 
     void  burdenTick();
     void  setInitialBurden();
+    auto  getBurden() -> std::array<uint8, 8>;
+    void  setAllBurden(uint8 burden);
+    void  setBurdenArray(std::array<uint8, 8> burdenArray);
     uint8 addBurden(uint8 element, int8 burden);
 
     void PostTick() override;

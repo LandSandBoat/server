@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if
         currentMission == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and
@@ -52,7 +52,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 68 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
         player:delKeyItem(xi.ki.SOUTHWESTERN_STAR_CHARM)
     end
 end

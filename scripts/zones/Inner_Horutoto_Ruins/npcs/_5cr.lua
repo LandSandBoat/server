@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     -- Check if we are on Windurst Mission 1-1
     if
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and
-        player:getCharVar("MissionStatus") == 2
+        player:getMissionStatus(player:getNation()) == 2
     then
         -- Check if we found the correct Magical Gizmo or not
         if player:getCharVar("MissionStatus_rv") == magical_gizmo_no then
@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option)
     -- If we just finished the cutscene for Windurst Mission 1-1
     -- The cutscene that we opened the correct Magical Gizmo
     if csid == 52 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
         player:setCharVar("MissionStatus_rv", 0)
         player:addKeyItem(xi.ki.CRACKED_MANA_ORBS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CRACKED_MANA_ORBS)

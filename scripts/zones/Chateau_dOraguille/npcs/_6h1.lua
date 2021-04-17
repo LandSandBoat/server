@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     -- San d'Oria 9-2 "The Heir to the Light" (optional)
     elseif
         player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and
-        player:getCharVar("MissionStatus") > 5
+        player:getMissionStatus(player:getNation()) > 5
     then
         player:startEvent(5)
 

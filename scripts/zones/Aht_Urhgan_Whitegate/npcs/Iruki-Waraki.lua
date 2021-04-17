@@ -85,7 +85,7 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 260 then
         player:setCharVar("NoStringsAttachedProgress", 2)
-    elseif csid == 266 and npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED, {item=17859, title= xi.title.PROUD_AUTOMATON_OWNER, var="NoStringsAttachedProgress"}) then
+    elseif csid == 266 and npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED, {item=17859, title=xi.title.PROUD_AUTOMATON_OWNER, var="NoStringsAttachedProgress"}) then
         player:unlockJob(xi.job.PUP)
         player:messageSpecial(ID.text.YOU_CAN_BECOME_PUP) -- "You can now become a puppetmaster."
         player:setPetName(xi.pet.type.AUTOMATON, option+118)

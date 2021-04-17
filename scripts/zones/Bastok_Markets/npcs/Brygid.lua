@@ -66,11 +66,11 @@ entity.onTrigger = function(player, npc)
         BrygidReturns ~= QUEST_ACCEPTED and
         BrygidTheStylist == QUEST_COMPLETED and
         (
-            isArtifactArmor(head) or
-            isArtifactArmor(body) or
-            isArtifactArmor(hands) or
-            isArtifactArmor(legs) or
-            isArtifactArmor(feet)
+            xi.equip.isArtifactArmor(head) or
+            xi.equip.isArtifactArmor(body) or
+            xi.equip.isArtifactArmor(hands) or
+            xi.equip.isArtifactArmor(legs) or
+            xi.equip.isArtifactArmor(feet)
         )
     then
             -- Randomize and store sets here

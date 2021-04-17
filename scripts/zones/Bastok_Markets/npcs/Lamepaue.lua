@@ -82,7 +82,7 @@ entity.onTrigger = function(player, npc)
         OtherQuests = OtherQuests - 1024   -- Comeback Queen
     end
 
--- *This quest, as of the time this script was written, is not yet defined in Topaz Next.
+-- *This quest, as of the time this script was written, is not yet defined.
 --     if (player:hasCompletedQuest(**Unknown**, DANCER_ATTIRE)) then
 --         OtherQuests = OtherQuests - 2048   -- Dancer Attire (pt.1)
 --         OtherQuests = OtherQuests - 4096   -- Dancer Attire (pt.2)
@@ -97,17 +97,17 @@ entity.onTrigger = function(player, npc)
         OtherQuests = OtherQuests - 32768  -- VW Op. #126: Qufim Incursion
     end
 
--- *This quest, as of the time this script was written, is not yet defined in Topaz Next.
+-- *This quest, as of the time this script was written, is not yet defined.
 --     if (player:hasCompletedQuest(**Unknown**, RECORDS_OF_EMINENCE)) then
 --         OtherQuests = OtherQuests - 65536  -- Records of Eminence
 --     end
 
--- *This quest, as of the time this script was written, is not yet defined in Topaz Next.
+-- *This quest, as of the time this script was written, is not yet defined.
 --     if (player:hasCompletedQuest(**Unknown**, TRUST_MUMOR)) then
 --         OtherQuests = OtherQuests - 131072 -- Trust (Mumor)
 --     end
 
--- *This quest, as of the time this script was written, is not yet defined in Topaz Next.
+-- *This quest, as of the time this script was written, is not yet defined.
 --     if (player:hasCompletedQuest(**Unknown**, UNITY_CONCORD)) then
 --         OtherQuests = OtherQuests - 262144 -- Unity Concord (pt.1)
 --         OtherQuests = OtherQuests - 524288 -- Unity Concord (pt.2)

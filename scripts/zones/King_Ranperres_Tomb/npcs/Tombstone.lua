@@ -23,7 +23,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
     local X = npc:getXPos()
     local Z = npc:getZPos()
 
@@ -44,7 +44,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 4 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif
         csid == 2 and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS) == QUEST_ACCEPTED and
