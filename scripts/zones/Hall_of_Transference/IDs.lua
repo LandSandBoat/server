@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.HALL_OF_TRANSFERENCE] =
+zones[xi.zone.HALL_OF_TRANSFERENCE] =
 {
     text =
     {
@@ -27,4 +27,4 @@ zones[ xi.zone.HALL_OF_TRANSFERENCE] =
     },
 }
 
-return zones[ xi.zone.HALL_OF_TRANSFERENCE]
+return zones[xi.zone.HALL_OF_TRANSFERENCE]

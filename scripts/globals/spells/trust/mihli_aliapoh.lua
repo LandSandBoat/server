@@ -29,10 +29,10 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.RUGHADJEEN] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.GADALAR] = xi.trust.message_offset.TEAMWORK_2,
-        [ xi.magic.spell.NAJELITH] = xi.trust.message_offset.TEAMWORK_3,
-        [ xi.magic.spell.ZAZARG] = xi.trust.message_offset.TEAMWORK_4,
+        [xi.magic.spell.RUGHADJEEN] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.GADALAR] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.NAJELITH] = xi.trust.message_offset.TEAMWORK_3,
+        [xi.magic.spell.ZAZARG] = xi.trust.message_offset.TEAMWORK_4,
     })
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)

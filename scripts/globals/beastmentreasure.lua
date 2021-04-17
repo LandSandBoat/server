@@ -11,7 +11,7 @@ xi = xi or {}
 xi.beastmentreasure = xi.beastmentreasure or {}
 
 local zoneData = {
-    [ xi.zone.YUHTUNGA_JUNGLE] =
+    [xi.zone.YUHTUNGA_JUNGLE] =
     {
         statusvar = 'BMT_Lowlands_Status',
         dsvar = 'BMT_Lowlands_Digsite',
@@ -30,7 +30,7 @@ local zoneData = {
             racial = {[887] = 3}    -- Coral Fragment
         }
     },
-    [ xi.zone.YHOATOR_JUNGLE] =
+    [xi.zone.YHOATOR_JUNGLE] =
     {
         statusvar = 'BMT_Uplands_Status',
         dsvar = 'BMT_Uplands_Digsite',
@@ -49,7 +49,7 @@ local zoneData = {
             racial = {[4158] = 3}   -- Venom Potion
         }
     },
-    [ xi.zone.WESTERN_ALTEPA_DESERT] =
+    [xi.zone.WESTERN_ALTEPA_DESERT] =
     {
         statusvar = 'BMT_Kuzotz_Status',
         dsvar = 'BMT_Kuzotz_Digsite',
@@ -144,16 +144,16 @@ end
 local w_rocksgems   = convertToWeighted(sharedLoot.rocksgems)
 local w_seedsracial =
 {
-    [ xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[ xi.zone.YUHTUNGA_JUNGLE].loot.racial)),
-    [ xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[ xi.zone.YHOATOR_JUNGLE].loot.racial)),
-    [ xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[ xi.zone.WESTERN_ALTEPA_DESERT].loot.racial))
+    [xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[xi.zone.YUHTUNGA_JUNGLE].loot.racial)),
+    [xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[xi.zone.YHOATOR_JUNGLE].loot.racial)),
+    [xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seeds, zoneData[xi.zone.WESTERN_ALTEPA_DESERT].loot.racial))
 }
 local w_coins       = convertToWeighted(sharedLoot.coins)
 local w_sealsunique =
 {
-    [ xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[ xi.zone.YUHTUNGA_JUNGLE].loot.unique)),
-    [ xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[ xi.zone.YHOATOR_JUNGLE].loot.unique)),
-    [ xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[ xi.zone.WESTERN_ALTEPA_DESERT].loot.unique)),
+    [xi.zone.YUHTUNGA_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[xi.zone.YUHTUNGA_JUNGLE].loot.unique)),
+    [xi.zone.YHOATOR_JUNGLE] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[xi.zone.YHOATOR_JUNGLE].loot.unique)),
+    [xi.zone.WESTERN_ALTEPA_DESERT] = convertToWeighted(addLoot(sharedLoot.seals, zoneData[xi.zone.WESTERN_ALTEPA_DESERT].loot.unique)),
 }
 
 local function weightedRandomSelect(w_loot)

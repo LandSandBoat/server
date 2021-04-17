@@ -21,16 +21,16 @@ local shop = {
     28, 658,  -- Damascus Ingot
 }
 local maps = {
-    [ xi.ki.MAP_OF_DYNAMIS_SANDORIA]   = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
-    [ xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
-    [ xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
-    [ xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
+    [xi.ki.MAP_OF_DYNAMIS_SANDORIA]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_BASTOK]     = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_WINDURST]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_JEUNO]      = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_BEAUCEDINE] = 15000,
+    [xi.ki.MAP_OF_DYNAMIS_XARCABARD]  = 20000,
+    [xi.ki.MAP_OF_DYNAMIS_VALKURM]    = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_BUBURIMU]   = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_QUFIM]      = 10000,
+    [xi.ki.MAP_OF_DYNAMIS_TAVNAZIA]   = 20000,
 }
 -----------------------------------
 local entity = {}

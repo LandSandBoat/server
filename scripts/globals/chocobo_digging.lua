@@ -24,34 +24,34 @@ local digReq =
 
 local crystalMap =
 {
-    [ xi.weather.HOT_SPELL    ] = 4096, -- fire crystal
-    [ xi.weather.HEAT_WAVE    ] = 4104, -- fire cluster
-    [ xi.weather.RAIN         ] = 4101, -- water crystal
-    [ xi.weather.SQUALL       ] = 4109, -- water cluster
-    [ xi.weather.DUST_STORM   ] = 4099, -- earth crystal
-    [ xi.weather.SAND_STORM   ] = 4107, -- earth cluster
-    [ xi.weather.WIND         ] = 4098, -- wind crystal
-    [ xi.weather.GALES        ] = 4106, -- wind cluster
-    [ xi.weather.SNOW         ] = 4097, -- ice crystal
-    [ xi.weather.BLIZZARDS    ] = 4105, -- ice cluster
-    [ xi.weather.THUNDER      ] = 4100, -- lightning crystal
-    [ xi.weather.THUNDERSTORMS] = 4108, -- lightning cluster
-    [ xi.weather.AURORAS      ] = 4102, -- light crystal
-    [ xi.weather.STELLAR_GLARE] = 4110, -- light cluster
-    [ xi.weather.GLOOM        ] = 4103, -- dark crystal
-    [ xi.weather.DARKNESS     ] = 4111, -- dark cluster
+    [xi.weather.HOT_SPELL    ] = 4096, -- fire crystal
+    [xi.weather.HEAT_WAVE    ] = 4104, -- fire cluster
+    [xi.weather.RAIN         ] = 4101, -- water crystal
+    [xi.weather.SQUALL       ] = 4109, -- water cluster
+    [xi.weather.DUST_STORM   ] = 4099, -- earth crystal
+    [xi.weather.SAND_STORM   ] = 4107, -- earth cluster
+    [xi.weather.WIND         ] = 4098, -- wind crystal
+    [xi.weather.GALES        ] = 4106, -- wind cluster
+    [xi.weather.SNOW         ] = 4097, -- ice crystal
+    [xi.weather.BLIZZARDS    ] = 4105, -- ice cluster
+    [xi.weather.THUNDER      ] = 4100, -- lightning crystal
+    [xi.weather.THUNDERSTORMS] = 4108, -- lightning cluster
+    [xi.weather.AURORAS      ] = 4102, -- light crystal
+    [xi.weather.STELLAR_GLARE] = 4110, -- light cluster
+    [xi.weather.GLOOM        ] = 4103, -- dark crystal
+    [xi.weather.DARKNESS     ] = 4111, -- dark cluster
 }
 
 local oreMap =
 {
-    [ xi.day.FIRESDAY    ] = 1255, -- fire ore
-    [ xi.day.EARTHSDAY   ] = 1258, -- earth ore
-    [ xi.day.WATERSDAY   ] = 1260, -- water ore
-    [ xi.day.WINDSDAY    ] = 1257, -- wind ore
-    [ xi.day.ICEDAY      ] = 1256, -- ice ore
-    [ xi.day.LIGHTNINGDAY] = 1259, -- lightning ore
-    [ xi.day.LIGHTSDAY   ] = 1261, -- light ore
-    [ xi.day.DARKSDAY    ] = 1262, -- dark ore
+    [xi.day.FIRESDAY    ] = 1255, -- fire ore
+    [xi.day.EARTHSDAY   ] = 1258, -- earth ore
+    [xi.day.WATERSDAY   ] = 1260, -- water ore
+    [xi.day.WINDSDAY    ] = 1257, -- wind ore
+    [xi.day.ICEDAY      ] = 1256, -- ice ore
+    [xi.day.LIGHTNINGDAY] = 1259, -- lightning ore
+    [xi.day.LIGHTSDAY   ] = 1261, -- light ore
+    [xi.day.DARKSDAY    ] = 1262, -- dark ore
 }
 
 -----------------------------------
@@ -59,7 +59,7 @@ local oreMap =
 -----------------------------------
 local digInfo =
 {
-    [ xi.zone.CARPENTERS_LANDING] = -- 2
+    [xi.zone.CARPENTERS_LANDING] = -- 2
     {
         { 4504, 152, digReq.NONE    },
         {  688, 182, digReq.NONE    },
@@ -86,7 +86,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.BIBIKI_BAY] = -- 4
+    [xi.zone.BIBIKI_BAY] = -- 4
     {
         {  847,  70, digReq.NONE    },
         {  887,  10, digReq.NONE    },
@@ -119,7 +119,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.WAJAOM_WOODLANDS] = -- 51
+    [xi.zone.WAJAOM_WOODLANDS] = -- 51
     {
         {  646,   3, digReq.NONE    },
         {  845,  75, digReq.NONE    },
@@ -152,7 +152,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.BHAFLAU_THICKETS] = -- 52
+    [xi.zone.BHAFLAU_THICKETS] = -- 52
     {
         {  770,  50, digReq.NONE    },
         { 2150,  60, digReq.NONE    },
@@ -185,7 +185,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.WEST_RONFAURE] = -- 100
+    [xi.zone.WEST_RONFAURE] = -- 100
     {
         { 4504, 120, digReq.NONE    },
         {  688, 111, digReq.NONE    },
@@ -209,7 +209,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  573,  23, digReq.NIGHT   },
     },
-    [ xi.zone.EAST_RONFAURE] = -- 101
+    [xi.zone.EAST_RONFAURE] = -- 101
     {
         { 4504, 224, digReq.NONE    },
         {  688, 184, digReq.NONE    },
@@ -233,7 +233,7 @@ local digInfo =
         { 4532,  11, digReq.MODIFIER},
         {  574,  37, digReq.NIGHT   },
     },
-    [ xi.zone.LA_THEINE_PLATEAU] = -- 102
+    [xi.zone.LA_THEINE_PLATEAU] = -- 102
     {
         {  688, 153, digReq.NONE    },
         {17396, 155, digReq.NONE    },
@@ -260,7 +260,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 1237,  12, digReq.MODIFIER},
     },
-    [ xi.zone.VALKURM_DUNES] = -- 103
+    [xi.zone.VALKURM_DUNES] = -- 103
     {
         {  770,   1, digReq.NONE    },
         {  880, 166, digReq.NONE    },
@@ -292,7 +292,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.JUGNER_FOREST] = -- 104
+    [xi.zone.JUGNER_FOREST] = -- 104
     {
         { 4504, 152, digReq.NONE    },
         {  688, 182, digReq.NONE    },
@@ -317,7 +317,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.BATALLIA_DOWNS] = -- 105
+    [xi.zone.BATALLIA_DOWNS] = -- 105
     {
         {  847,  69, digReq.NONE    },
         {  880, 137, digReq.NONE    },
@@ -344,7 +344,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.NORTH_GUSTABERG] = -- 106
+    [xi.zone.NORTH_GUSTABERG] = -- 106
     {
         {  880, 226, digReq.NONE    },
         {17396, 264, digReq.NONE    },
@@ -369,7 +369,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         { 1236,   3, digReq.NIGHT   },
     },
-    [ xi.zone.SOUTH_GUSTABERG] = -- 107
+    [xi.zone.SOUTH_GUSTABERG] = -- 107
     {
         {17296, 252, digReq.NONE    },
         {17396, 227, digReq.NONE    },
@@ -392,7 +392,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  575,  14, digReq.NIGHT   },
     },
-    [ xi.zone.KONSCHTAT_HIGHLANDS] = -- 108
+    [xi.zone.KONSCHTAT_HIGHLANDS] = -- 108
     {
         {  847,  13, digReq.NONE    },
         {  880, 165, digReq.NONE    },
@@ -418,7 +418,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.PASHHOW_MARSHLANDS] = -- 109
+    [xi.zone.PASHHOW_MARSHLANDS] = -- 109
     {
         {  846, 216, digReq.NONE    },
         {17296, 210, digReq.NONE    },
@@ -442,7 +442,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.ROLANBERRY_FIELDS] = -- 110
+    [xi.zone.ROLANBERRY_FIELDS] = -- 110
     {
         { 4450,  30, digReq.NONE    },
         { 4566,   7, digReq.NONE    },
@@ -470,7 +470,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.EASTERN_ALTEPA_DESERT] = -- 114
+    [xi.zone.EASTERN_ALTEPA_DESERT] = -- 114
     {
         {  880, 167, digReq.NONE    },
         {  893,  88, digReq.NONE    },
@@ -500,7 +500,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.WEST_SARUTABARUTA] = -- 115
+    [xi.zone.WEST_SARUTABARUTA] = -- 115
     {
         {  689, 205, digReq.NONE    },
         {17396, 295, digReq.NONE    },
@@ -523,7 +523,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         { 1237,  10, digReq.NIGHT   },
     },
-    [ xi.zone.EAST_SARUTABARUTA] = -- 116
+    [xi.zone.EAST_SARUTABARUTA] = -- 116
     {
         {  689, 132, digReq.NONE    },
         {  938,  79, digReq.NONE    },
@@ -549,7 +549,7 @@ local digInfo =
         { 4532,  12, digReq.MODIFIER},
         {  572, 100, digReq.NIGHT   },
     },
-    [ xi.zone.TAHRONGI_CANYON] = -- 117
+    [xi.zone.TAHRONGI_CANYON] = -- 117
     {
         {  880, 118, digReq.NONE    },
         {  893, 121, digReq.NONE    },
@@ -581,7 +581,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.BUBURIMU_PENINSULA] = -- 118
+    [xi.zone.BUBURIMU_PENINSULA] = -- 118
     {
         {  847,  45, digReq.NONE    },
         {  887,   1, digReq.NONE    },
@@ -614,7 +614,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.MERIPHATAUD_MOUNTAINS] = -- 119
+    [xi.zone.MERIPHATAUD_MOUNTAINS] = -- 119
     {
         {  646,   4, digReq.NONE    },
         {  845,  12, digReq.NONE    },
@@ -646,7 +646,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.SAUROMUGUE_CHAMPAIGN] = -- 120
+    [xi.zone.SAUROMUGUE_CHAMPAIGN] = -- 120
     {
         {  845,   8, digReq.NONE    },
         {  880, 126, digReq.NONE    },
@@ -680,7 +680,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.THE_SANCTUARY_OF_ZITAH] = -- 121
+    [xi.zone.THE_SANCTUARY_OF_ZITAH] = -- 121
     {
         {  688, 117, digReq.NONE    },
         {17296, 150, digReq.NONE    },
@@ -708,7 +708,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.YUHTUNGA_JUNGLE] = -- 123
+    [xi.zone.YUHTUNGA_JUNGLE] = -- 123
     {
         {  880, 185, digReq.NONE    },
         {  628,  72, digReq.NONE    },
@@ -738,7 +738,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.YHOATOR_JUNGLE] = -- 124
+    [xi.zone.YHOATOR_JUNGLE] = -- 124
     {
         {  880, 282, digReq.NONE    },
         {  689, 177, digReq.NONE    },
@@ -766,7 +766,7 @@ local digInfo =
         { 1188,  10, digReq.MODIFIER},
         { 4532,  12, digReq.MODIFIER},
     },
-    [ xi.zone.WESTERN_ALTEPA_DESERT] = -- 125
+    [xi.zone.WESTERN_ALTEPA_DESERT] = -- 125
     {
         {  880, 224, digReq.NONE    },
         {  887,  39, digReq.NONE    },

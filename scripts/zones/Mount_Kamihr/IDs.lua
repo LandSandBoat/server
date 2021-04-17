@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.MOUNT_KAMIHR] =
+zones[xi.zone.MOUNT_KAMIHR] =
 {
     text =
     {
@@ -28,4 +28,4 @@ zones[ xi.zone.MOUNT_KAMIHR] =
     },
 }
 
-return zones[ xi.zone.MOUNT_KAMIHR]
+return zones[xi.zone.MOUNT_KAMIHR]

@@ -234,13 +234,13 @@ function checkForGearSet(player)
             end
 
             -- doesnt count as a match if the same item is in both slots
-            if (gearMatch[ xi.slot.EAR1+1] == gearMatch[ xi.slot.EAR2+1] and gearMatch[ xi.slot.EAR1+1] ~= nil) then
+            if (gearMatch[xi.slot.EAR1+1] == gearMatch[xi.slot.EAR2+1] and gearMatch[xi.slot.EAR1+1] ~= nil) then
                 matches = matches - 1
             end
-            if (gearMatch[ xi.slot.RING1+1] == gearMatch[ xi.slot.RING2+1] and gearMatch[ xi.slot.RING1+1] ~= nil) then
+            if (gearMatch[xi.slot.RING1+1] == gearMatch[xi.slot.RING2+1] and gearMatch[xi.slot.RING1+1] ~= nil) then
                 matches = matches - 1
             end
-            if (gearMatch[ xi.slot.MAIN+1] == gearMatch[ xi.slot.SUB+1] and gearMatch[ xi.slot.MAIN+1] ~= nil) then
+            if (gearMatch[xi.slot.MAIN+1] == gearMatch[xi.slot.SUB+1] and gearMatch[xi.slot.MAIN+1] ~= nil) then
                 matches = matches - 1
             end
 
@@ -256,14 +256,14 @@ end
 function FindMatchByType(gearset, gearMatch)
     if (gearset.matchType == matchtype.any) then
         return true
-    elseif (gearset.matchType == matchtype.ring_armor and (gearMatch[ xi.slot.HEAD+1] ~= nil or gearMatch[ xi.slot.BODY+1] ~= nil or gearMatch[ xi.slot.HANDS+1] ~= nil or gearMatch[ xi.slot.LEGS+1] ~= nil or gearMatch[ xi.slot.FEET+1] ~= nil) and (gearMatch[ xi.slot.RING1+1] ~= nil or gearMatch[ xi.slot.RING2+1] ~= nil)) then
+    elseif (gearset.matchType == matchtype.ring_armor and (gearMatch[xi.slot.HEAD+1] ~= nil or gearMatch[xi.slot.BODY+1] ~= nil or gearMatch[xi.slot.HANDS+1] ~= nil or gearMatch[xi.slot.LEGS+1] ~= nil or gearMatch[xi.slot.FEET+1] ~= nil) and (gearMatch[xi.slot.RING1+1] ~= nil or gearMatch[xi.slot.RING2+1] ~= nil)) then
         return true
     end
 
     for _, id in ipairs(gearMatch) do
-        if (gearset.matchType == matchtype.earring_weapon and (gearMatch[ xi.slot.MAIN+1] ~= nil or gearMatch[ xi.slot.SUB+1] ~= nil) and (gearMatch[ xi.slot.EAR1+1] ~= nil or gearMatch[ xi.slot.EAR2+1] ~= nil)) then
+        if (gearset.matchType == matchtype.earring_weapon and (gearMatch[xi.slot.MAIN+1] ~= nil or gearMatch[xi.slot.SUB+1] ~= nil) and (gearMatch[xi.slot.EAR1+1] ~= nil or gearMatch[xi.slot.EAR2+1] ~= nil)) then
             return true
-        elseif (gearset.matchType == matchtype.weapon_weapon and (gearMatch[ xi.slot.MAIN+1] ~= nil and gearMatch[ xi.slot.SUB+1] ~= nil)) then
+        elseif (gearset.matchType == matchtype.weapon_weapon and (gearMatch[xi.slot.MAIN+1] ~= nil and gearMatch[xi.slot.SUB+1] ~= nil)) then
             return true
         end
     end

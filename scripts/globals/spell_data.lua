@@ -70,14 +70,14 @@ xi.magic.ele = xi.magic.element
 
 xi.magic.dayElement =
 {
-    [ xi.day.FIRESDAY]     = xi.magic.element.FIRE,
-    [ xi.day.ICEDAY]       = xi.magic.element.ICE,
-    [ xi.day.WINDSDAY]     = xi.magic.element.WIND,
-    [ xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
-    [ xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
-    [ xi.day.WATERSDAY]    = xi.magic.element.WATER,
-    [ xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
-    [ xi.day.DARKSDAY]     = xi.magic.element.DARK,
+    [xi.day.FIRESDAY]     = xi.magic.element.FIRE,
+    [xi.day.ICEDAY]       = xi.magic.element.ICE,
+    [xi.day.WINDSDAY]     = xi.magic.element.WIND,
+    [xi.day.EARTHSDAY]    = xi.magic.element.EARTH,
+    [xi.day.LIGHTNINGDAY] = xi.magic.element.THUNDER,
+    [xi.day.WATERSDAY]    = xi.magic.element.WATER,
+    [xi.day.LIGHTSDAY]    = xi.magic.element.LIGHT,
+    [xi.day.DARKSDAY]     = xi.magic.element.DARK,
 }
 
 -----------------------------------
@@ -85,26 +85,26 @@ xi.magic.dayElement =
 -----------------------------------
 xi.magic.elementAscendant =
 {
-    [ xi.magic.element.FIRE]    = xi.magic.element.ICE,
-    [ xi.magic.element.ICE]     = xi.magic.element.WIND,
-    [ xi.magic.element.WIND]    = xi.magic.element.EARTH,
-    [ xi.magic.element.EARTH]   = xi.magic.element.THUNDER,
-    [ xi.magic.element.THUNDER] = xi.magic.element.WATER,
-    [ xi.magic.element.WATER]   = xi.magic.element.FIRE,
-    [ xi.magic.element.LIGHT]   = xi.magic.element.DARK,
-    [ xi.magic.element.DARK]    = xi.magic.element.LIGHT,
+    [xi.magic.element.FIRE]    = xi.magic.element.ICE,
+    [xi.magic.element.ICE]     = xi.magic.element.WIND,
+    [xi.magic.element.WIND]    = xi.magic.element.EARTH,
+    [xi.magic.element.EARTH]   = xi.magic.element.THUNDER,
+    [xi.magic.element.THUNDER] = xi.magic.element.WATER,
+    [xi.magic.element.WATER]   = xi.magic.element.FIRE,
+    [xi.magic.element.LIGHT]   = xi.magic.element.DARK,
+    [xi.magic.element.DARK]    = xi.magic.element.LIGHT,
 }
 
 xi.magic.elementDescendant =
 {
-    [ xi.magic.element.FIRE]     = xi.magic.element.WATER,
-    [ xi.magic.element.ICE]      = xi.magic.element.FIRE,
-    [ xi.magic.element.WIND]     = xi.magic.element.ICE,
-    [ xi.magic.element.EARTH]    = xi.magic.element.WIND,
-    [ xi.magic.element.THUNDER]  = xi.magic.element.EARTH,
-    [ xi.magic.element.WATER]    = xi.magic.element.THUNDER,
-    [ xi.magic.element.LIGHT]    = xi.magic.element.DARK,
-    [ xi.magic.element.DARK]     = xi.magic.element.LIGHT,
+    [xi.magic.element.FIRE]     = xi.magic.element.WATER,
+    [xi.magic.element.ICE]      = xi.magic.element.FIRE,
+    [xi.magic.element.WIND]     = xi.magic.element.ICE,
+    [xi.magic.element.EARTH]    = xi.magic.element.WIND,
+    [xi.magic.element.THUNDER]  = xi.magic.element.EARTH,
+    [xi.magic.element.WATER]    = xi.magic.element.THUNDER,
+    [xi.magic.element.LIGHT]    = xi.magic.element.DARK,
+    [xi.magic.element.DARK]     = xi.magic.element.LIGHT,
 }
 -----------------------------------
 -- Spell Families

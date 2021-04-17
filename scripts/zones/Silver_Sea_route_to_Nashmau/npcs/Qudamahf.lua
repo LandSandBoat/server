@@ -11,8 +11,8 @@ local entity = {}
 
 local messages =
 {
-    [ xi.transport.message.NEARING] = ID.text.NEARING_NASHMAU,
-    [ xi.transport.message.DOCKING] = ID.text.DOCKING_IN_NASHMAU
+    [xi.transport.message.NEARING] = ID.text.NEARING_NASHMAU,
+    [xi.transport.message.DOCKING] = ID.text.DOCKING_IN_NASHMAU
 }
 
 entity.onSpawn = function(npc)

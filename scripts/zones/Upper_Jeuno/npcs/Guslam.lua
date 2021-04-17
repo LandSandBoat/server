@@ -12,21 +12,21 @@ local entity = {}
 
 local prerequisites =
 {
-    [ xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
-    [ xi.job.MNK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_FIRST_MEETING            },
-    [ xi.job.WHM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
-    [ xi.job.BLM] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.RECOLLECTIONS              },
-    [ xi.job.RDM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS      },
-    [ xi.job.THF] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.AS_THICK_AS_THIEVES        },
-    [ xi.job.PLD] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.A_BOY_S_DREAM              },
-    [ xi.job.DRK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.DARK_PUPPET                  },
-    [ xi.job.BST] = { log = xi.quest.log_id.JEUNO,    quest = xi.quest.id.jeuno.SCATTERED_INTO_SHADOW         },
-    [ xi.job.BRD] = { log = xi.quest.log_id.JEUNO,    quest = xi.quest.id.jeuno.THE_REQUIEM                   },
-    [ xi.job.RNG] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.FIRE_AND_BRIMSTONE         },
-    [ xi.job.SAM] = { log = xi.quest.log_id.OUTLANDS, quest = xi.quest.id.outlands.YOMI_OKURI                 },
-    [ xi.job.NIN] = { log = xi.quest.log_id.OUTLANDS, quest = xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX      },
-    [ xi.job.DRG] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.CHASING_QUOTAS             },
-    [ xi.job.SMN] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.CLASS_REUNION              },
+    [xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
+    [xi.job.MNK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_FIRST_MEETING            },
+    [xi.job.WHM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
+    [xi.job.BLM] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.RECOLLECTIONS              },
+    [xi.job.RDM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS      },
+    [xi.job.THF] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.AS_THICK_AS_THIEVES        },
+    [xi.job.PLD] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.A_BOY_S_DREAM              },
+    [xi.job.DRK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.DARK_PUPPET                  },
+    [xi.job.BST] = { log = xi.quest.log_id.JEUNO,    quest = xi.quest.id.jeuno.SCATTERED_INTO_SHADOW         },
+    [xi.job.BRD] = { log = xi.quest.log_id.JEUNO,    quest = xi.quest.id.jeuno.THE_REQUIEM                   },
+    [xi.job.RNG] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.FIRE_AND_BRIMSTONE         },
+    [xi.job.SAM] = { log = xi.quest.log_id.OUTLANDS, quest = xi.quest.id.outlands.YOMI_OKURI                 },
+    [xi.job.NIN] = { log = xi.quest.log_id.OUTLANDS, quest = xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX      },
+    [xi.job.DRG] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.CHASING_QUOTAS             },
+    [xi.job.SMN] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.CLASS_REUNION              },
 }
 
 local function isFirstHandsQuest(player)

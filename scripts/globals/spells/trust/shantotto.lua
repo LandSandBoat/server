@@ -19,10 +19,10 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_2,
-        [ xi.magic.spell.KORU_MORU] = xi.trust.message_offset.TEAMWORK_3,
-        [ xi.magic.spell.KING_OF_HEARTS] = xi.trust.message_offset.TEAMWORK_4
+        [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.KORU_MORU] = xi.trust.message_offset.TEAMWORK_3,
+        [xi.magic.spell.KING_OF_HEARTS] = xi.trust.message_offset.TEAMWORK_4
     })
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.MB_AVAILABLE, 0, ai.r.MA, ai.s.MB_ELEMENT, xi.magic.spellFamily.NONE)

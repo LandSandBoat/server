@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.EVERBLOOM_HOLLOW] =
+zones[xi.zone.EVERBLOOM_HOLLOW] =
 {
     text =
     {
@@ -26,4 +26,4 @@ zones[ xi.zone.EVERBLOOM_HOLLOW] =
     },
 }
 
-return zones[ xi.zone.EVERBLOOM_HOLLOW]
+return zones[xi.zone.EVERBLOOM_HOLLOW]

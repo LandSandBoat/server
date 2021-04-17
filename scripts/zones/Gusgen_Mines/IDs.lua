@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.GUSGEN_MINES] =
+zones[xi.zone.GUSGEN_MINES] =
 {
     text =
     {
@@ -63,4 +63,4 @@ zones[ xi.zone.GUSGEN_MINES] =
     },
 }
 
-return zones[ xi.zone.GUSGEN_MINES]
+return zones[xi.zone.GUSGEN_MINES]

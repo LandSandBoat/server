@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.VUNKERL_INLET_S] =
+zones[xi.zone.VUNKERL_INLET_S] =
 {
     text =
     {
@@ -35,4 +35,4 @@ zones[ xi.zone.VUNKERL_INLET_S] =
     },
 }
 
-return zones[ xi.zone.VUNKERL_INLET_S]
+return zones[xi.zone.VUNKERL_INLET_S]

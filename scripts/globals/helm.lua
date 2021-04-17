@@ -33,7 +33,7 @@ xi.helm.type =
 
 local helmInfo =
 {
-    [ xi.helm.type.HARVESTING] =
+    [xi.helm.type.HARVESTING] =
     {
         id = "HARVESTING",
         animation = xi.emote.HARVESTING,
@@ -44,7 +44,7 @@ local helmInfo =
         tool = 1020,
         zone =
         {
-            [ xi.zone.WAJAOM_WOODLANDS] =
+            [xi.zone.WAJAOM_WOODLANDS] =
             {
                 drops =
                 {
@@ -82,7 +82,7 @@ local helmInfo =
                     { 213.094, -26.000,  283.819},
                 },
             },
-            [ xi.zone.BHAFLAU_THICKETS] =
+            [xi.zone.BHAFLAU_THICKETS] =
             {
                 drops =
                 {
@@ -112,7 +112,7 @@ local helmInfo =
                     { 336.927, -18.188,  393.128},  -- {R}H-7
                 },
             },
-            [ xi.zone.GRAUBERG_S] =
+            [xi.zone.GRAUBERG_S] =
             {
                 drops =
                 {
@@ -135,7 +135,7 @@ local helmInfo =
                     { 482.951,  39.900, -401.927},
                 },
             },
-            [ xi.zone.WEST_SARUTABARUTA_S] =
+            [xi.zone.WEST_SARUTABARUTA_S] =
             {
                 drops =
                 {
@@ -162,7 +162,7 @@ local helmInfo =
                     { -41.743, -16.149,   -2.631},
                 },
             },
-            [ xi.zone.WEST_SARUTABARUTA] =
+            [xi.zone.WEST_SARUTABARUTA] =
             {
                 drops =
                 {
@@ -192,7 +192,7 @@ local helmInfo =
                     {-159.075, -16.103,  394.371},
                 },
             },
-            [ xi.zone.YUHTUNGA_JUNGLE] =
+            [xi.zone.YUHTUNGA_JUNGLE] =
             {
                 drops =
                 {
@@ -211,7 +211,7 @@ local helmInfo =
                     { -60.695,   8.121,  308.915},
                 },
             },
-            [ xi.zone.YHOATOR_JUNGLE] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
                 drops =
                 {
@@ -230,7 +230,7 @@ local helmInfo =
                     { 108.884,   8.263, -579.216},
                 },
             },
-            [ xi.zone.GIDDEUS] =
+            [xi.zone.GIDDEUS] =
             {
                 drops =
                 {
@@ -286,7 +286,7 @@ local helmInfo =
                     { 136.799,   0.682, -225.955},  -- {R}J-11
                 },
             },
-            [ xi.zone.ABYSSEA_GRAUBERG] =
+            [xi.zone.ABYSSEA_GRAUBERG] =
             {
                 drops =
                 {
@@ -314,7 +314,7 @@ local helmInfo =
 
     -----------------------------------
 
-    [ xi.helm.type.EXCAVATION] =
+    [xi.helm.type.EXCAVATION] =
     {
         id = "EXCAVATION",
         animation = xi.emote.EXCAVATION,
@@ -325,7 +325,7 @@ local helmInfo =
         tool = 605,
         zone =
         {
-            [ xi.zone.ATTOHWA_CHASM] =
+            [xi.zone.ATTOHWA_CHASM] =
             {
                 drops =
                 {
@@ -349,7 +349,7 @@ local helmInfo =
                     {-378.857,  -3.720,  342.842},
                 },
             },
-            [ xi.zone.TAHRONGI_CANYON] =
+            [xi.zone.TAHRONGI_CANYON] =
             {
                 drops =
                 {
@@ -383,7 +383,7 @@ local helmInfo =
                     { 439.581,  47.928,  475.796},
                 },
             },
-            [ xi.zone.KORROLOKA_TUNNEL] =
+            [xi.zone.KORROLOKA_TUNNEL] =
             {
                 drops =
                 {
@@ -412,7 +412,7 @@ local helmInfo =
                     {  61.890,   0.012,   90.298},
                 },
             },
-            [ xi.zone.MAZE_OF_SHAKHRAMI] =
+            [xi.zone.MAZE_OF_SHAKHRAMI] =
             {
                 drops =
                 {
@@ -448,7 +448,7 @@ local helmInfo =
 
     -----------------------------------
 
-    [ xi.helm.type.LOGGING] =
+    [xi.helm.type.LOGGING] =
     {
         id = "LOGGING",
         animation = xi.emote.LOGGING,
@@ -459,7 +459,7 @@ local helmInfo =
         tool = 1021,
         zone =
         {
-            [ xi.zone.CARPENTERS_LANDING] =
+            [xi.zone.CARPENTERS_LANDING] =
             {
                 drops =
                 {
@@ -479,7 +479,7 @@ local helmInfo =
                     {-203.024,  -6.850,  117.348},
                 },
             },
-            [ xi.zone.LUFAISE_MEADOWS] =
+            [xi.zone.LUFAISE_MEADOWS] =
             {
                 drops =
                 {
@@ -500,7 +500,7 @@ local helmInfo =
                     { 120.026,  -8.607,   -9.430},
                 },
             },
-            [ xi.zone.MISAREAUX_COAST] =
+            [xi.zone.MISAREAUX_COAST] =
             {
                 drops =
                 {
@@ -521,7 +521,7 @@ local helmInfo =
                     {-213.362, -32.315,  150.466},
                 },
             },
-            [ xi.zone.MAMOOK] =
+            [xi.zone.MAMOOK] =
             {
                 drops =
                 {
@@ -545,7 +545,7 @@ local helmInfo =
                     { 243.243,  13.635, -236.196},
                 },
             },
-            [ xi.zone.CAEDARVA_MIRE] =
+            [xi.zone.CAEDARVA_MIRE] =
             {
                 drops =
                 {
@@ -569,7 +569,7 @@ local helmInfo =
                     { 443.342, -10.943, -332.972},
                 },
             },
-            [ xi.zone.EAST_RONFAURE_S] =
+            [xi.zone.EAST_RONFAURE_S] =
             {
                 drops =
                 {
@@ -595,7 +595,7 @@ local helmInfo =
                     { 531.209, -40.911,   62.020},
                 },
             },
-            [ xi.zone.JUGNER_FOREST_S] =
+            [xi.zone.JUGNER_FOREST_S] =
             {
                 drops =
                 {
@@ -619,7 +619,7 @@ local helmInfo =
                     { 321.760,   0.396,  375.028},
                 },
             },
-            [ xi.zone.FORT_KARUGO_NARUGO_S] =
+            [xi.zone.FORT_KARUGO_NARUGO_S] =
             {
                 drops =
                 {
@@ -641,7 +641,7 @@ local helmInfo =
                     { 717.546,  19.000,   79.003},
                 },
             },
-            [ xi.zone.EAST_RONFAURE] =
+            [xi.zone.EAST_RONFAURE] =
             {
                 drops =
                 {
@@ -682,7 +682,7 @@ local helmInfo =
                     { 531.105, -40.381,   61.704},
                 },
             },
-            [ xi.zone.JUGNER_FOREST] =
+            [xi.zone.JUGNER_FOREST] =
             {
                 drops =
                 {
@@ -725,7 +725,7 @@ local helmInfo =
                     { 331.033, -16.324, -430.928},
                 },
             },
-            [ xi.zone.BUBURIMU_PENINSULA] =
+            [xi.zone.BUBURIMU_PENINSULA] =
             {
                 drops =
                 {
@@ -776,7 +776,7 @@ local helmInfo =
                     { 525.399,   0.082, -245.548},
                 },
             },
-            [ xi.zone.YUHTUNGA_JUNGLE] =
+            [xi.zone.YUHTUNGA_JUNGLE] =
             {
                 drops =
                 {
@@ -801,7 +801,7 @@ local helmInfo =
                     {  22.268,   4.422, -496.500},
                 },
             },
-            [ xi.zone.YHOATOR_JUNGLE] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
                 drops =
                 {
@@ -842,7 +842,7 @@ local helmInfo =
                     {  -5.442,  -3.153,  -84.789},
                 },
             },
-            [ xi.zone.GHELSBA_OUTPOST] =
+            [xi.zone.GHELSBA_OUTPOST] =
             {
                 drops =
                 {
@@ -875,7 +875,7 @@ local helmInfo =
 
     -----------------------------------
 
-    [ xi.helm.type.MINING] =
+    [xi.helm.type.MINING] =
     {
         id = "MINING",
         animation = xi.emote.EXCAVATION,
@@ -886,7 +886,7 @@ local helmInfo =
         tool = 605,
         zone =
         {
-            [ xi.zone.OLDTON_MOVALPOLOS] =
+            [xi.zone.OLDTON_MOVALPOLOS] =
             {
                 drops =
                 {
@@ -923,7 +923,7 @@ local helmInfo =
                     { -26.393,  11.359, -141.096},
                 },
             },
-            [ xi.zone.NEWTON_MOVALPOLOS] =
+            [xi.zone.NEWTON_MOVALPOLOS] =
             {
                 drops =
                 {
@@ -954,7 +954,7 @@ local helmInfo =
                     { 109.614,  19.689, -104.522}, -- {R}I-10
                 },
             },
-            [ xi.zone.MOUNT_ZHAYOLM] =
+            [xi.zone.MOUNT_ZHAYOLM] =
             {
                 drops =
                 {
@@ -999,7 +999,7 @@ local helmInfo =
                     { 783.844, -15.593,  172.404},
                 },
             },
-            [ xi.zone.HALVUNG] =
+            [xi.zone.HALVUNG] =
             {
                 drops =
                 {
@@ -1042,7 +1042,7 @@ local helmInfo =
                     { 270.880,   2.490,  226.690},
                 },
             },
-            [ xi.zone.NORTH_GUSTABERG_S] =
+            [xi.zone.NORTH_GUSTABERG_S] =
             {
                 drops =
                 {
@@ -1092,7 +1092,7 @@ local helmInfo =
                     { 394.958, -20.922,  458.055},
                 },
             },
-            [ xi.zone.YUGHOTT_GROTTO] =
+            [xi.zone.YUGHOTT_GROTTO] =
             {
                 drops =
                 {
@@ -1145,7 +1145,7 @@ local helmInfo =
                     { 363.273, -24.758,  164.485},
                 },
             },
-            [ xi.zone.PALBOROUGH_MINES] =
+            [xi.zone.PALBOROUGH_MINES] =
             {
                 drops =
                 {
@@ -1183,7 +1183,7 @@ local helmInfo =
                     { 306.015, -16.275,   49.876},
                 },
             },
-            [ xi.zone.ZERUHN_MINES] =
+            [xi.zone.ZERUHN_MINES] =
             {
                 drops =
                 {
@@ -1224,7 +1224,7 @@ local helmInfo =
                     { 146.979,   7.881, -209.748},
                 },
             },
-            [ xi.zone.GUSGEN_MINES] =
+            [xi.zone.GUSGEN_MINES] =
             {
                 drops =
                 {
@@ -1260,7 +1260,7 @@ local helmInfo =
                     { 155.746, -20.678,  216.857}, -- {R}I-9
                 },
             },
-            [ xi.zone.IFRITS_CAULDRON] =
+            [xi.zone.IFRITS_CAULDRON] =
             {
                 drops =
                 {

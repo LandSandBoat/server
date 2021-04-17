@@ -30,11 +30,11 @@ local keyType =
 
 local treasureInfo =
 {
-    [ xi.treasure.type.CHEST] =
+    [xi.treasure.type.CHEST] =
     {
         zone =
         {
-            [ xi.zone.PSOXJA] = -- 9
+            [xi.zone.PSOXJA] = -- 9
             {
                 treasureLvl = 53,
                 key = 1064,
@@ -54,7 +54,7 @@ local treasureInfo =
                 gil = {0.762, 5200, 12500},
                 gem = {0.238, 811, 798, 815, 790, 799, 788, 808},
             },
-            [ xi.zone.OLDTON_MOVALPOLOS] = -- 11
+            [xi.zone.OLDTON_MOVALPOLOS] = -- 11
             {
                 treasureLvl = 43,
                 key = 1062,
@@ -77,7 +77,7 @@ local treasureInfo =
                 gil = {0.731, 3200, 6400},
                 gem = {0.269, 811, 808, 796, 799, 788, 815, 798},
             },
-            [ xi.zone.SACRARIUM] = -- 28
+            [xi.zone.SACRARIUM] = -- 28
             {
                 treasureLvl = 53,
                 key = 1061,
@@ -95,7 +95,7 @@ local treasureInfo =
                 gil = {0.929, 5100, 9900},
                 gem = {0.071, 790, 799, 815, 788, 796},
             },
-            [ xi.zone.FORT_GHELSBA] = -- 141
+            [xi.zone.FORT_GHELSBA] = -- 141
             {
                 treasureLvl = 53,
                 key = 1024,
@@ -111,7 +111,7 @@ local treasureInfo =
                 gem = {0.036, 814, 800, 795, 807, 806},
                 item = {0.464, 16702},
             },
-            [ xi.zone.YUGHOTT_GROTTO] = -- 142
+            [xi.zone.YUGHOTT_GROTTO] = -- 142
             {
                 treasureLvl = 53,
                 key = 1024,
@@ -129,7 +129,7 @@ local treasureInfo =
                 gem = {0.100, 814, 800, 795, 807, 806},
                 item = {0.450, 16702},
             },
-            [ xi.zone.PALBOROUGH_MINES] = -- 143
+            [xi.zone.PALBOROUGH_MINES] = -- 143
             {
                 treasureLvl = 43,
                 key = 1025,
@@ -159,7 +159,7 @@ local treasureInfo =
                 gem = {0.136, 795, 800, 814, 807, 806, 809},
                 item = {0.409, 17291},
             },
-            [ xi.zone.GIDDEUS] = -- 145
+            [xi.zone.GIDDEUS] = -- 145
             {
                 treasureLvl = 43,
                 key = 1026,
@@ -181,7 +181,7 @@ local treasureInfo =
                 gem = {0.069, 814, 800, 809, 795, 807, 806},
                 item = {0.483, 13365},
             },
-            [ xi.zone.BEADEAUX] = -- 147
+            [xi.zone.BEADEAUX] = -- 147
             {
                 treasureLvl = 53,
                 key = 1034,
@@ -204,7 +204,7 @@ local treasureInfo =
                 gem = {0.090, 811, 790, 796, 798, 808, 815},
                 item = {0.758, 13230},
             },
-            [ xi.zone.DAVOI] = -- 149
+            [xi.zone.DAVOI] = -- 149
             {
                 treasureLvl = 43,
                 key = 1033,
@@ -227,7 +227,7 @@ local treasureInfo =
                 gem = {0.107, 811, 790, 808, 796, 799, 788, 815, 798},
                 item = {0.464, 13515},
             },
-            [ xi.zone.CASTLE_OZTROJA] = -- 151
+            [xi.zone.CASTLE_OZTROJA] = -- 151
             {
                 treasureLvl = 43,
                 key = 1035,
@@ -258,7 +258,7 @@ local treasureInfo =
                 gem = {0.080, 811, 790, 808, 796, 788, 807, 815, 798},
                 item = {0.480, 13840},
             },
-            [ xi.zone.MIDDLE_DELKFUTTS_TOWER] = -- 157
+            [xi.zone.MIDDLE_DELKFUTTS_TOWER] = -- 157
             {
                 treasureLvl = 43,
                 key = 1036,
@@ -284,7 +284,7 @@ local treasureInfo =
                 gem = {0.161, 814, 800, 809, 795, 796, 799, 806},
                 item = {0.484, 16674},
             },
-            [ xi.zone.UPPER_DELKFUTTS_TOWER] = -- 158
+            [xi.zone.UPPER_DELKFUTTS_TOWER] = -- 158
             {
                 treasureLvl = 43,
                 key = 1036,
@@ -306,7 +306,7 @@ local treasureInfo =
                 gem = {0.161, 814, 800, 809, 795, 796, 799, 806},
                 item = {0.484, 16674},
             },
-            [ xi.zone.CASTLE_ZVAHL_BAILEYS] = -- 161
+            [xi.zone.CASTLE_ZVAHL_BAILEYS] = -- 161
             {
                 treasureLvl = 53,
                 key = 1038,
@@ -342,7 +342,7 @@ local treasureInfo =
                 gem = {0.008, 811, 790, 808, 788, 799, 815},
                 item = {0.610, 13516},
             },
-            [ xi.zone.CASTLE_ZVAHL_KEEP] = -- 162
+            [xi.zone.CASTLE_ZVAHL_KEEP] = -- 162
             {
                 treasureLvl = 53,
                 key = 1038,
@@ -364,7 +364,7 @@ local treasureInfo =
                 gem = {0.204, 798, 790, 808, 788, 815, 796},
                 item = {0.490, 13516},
             },
-            [ xi.zone.SEA_SERPENT_GROTTO] = -- 176
+            [xi.zone.SEA_SERPENT_GROTTO] = -- 176
             {
                 treasureLvl = 53,
                 key = 1055,
@@ -396,7 +396,7 @@ local treasureInfo =
                 gil = {0.929, 3355, 8900},
                 gem = {0.071, 811, 808, 790, 796, 815, 788, 799, 798},
             },
-            [ xi.zone.KING_RANPERRES_TOMB] = -- 190
+            [xi.zone.KING_RANPERRES_TOMB] = -- 190
             {
                 treasureLvl = 43,
                 key = 1027,
@@ -421,7 +421,7 @@ local treasureInfo =
                 gem = {0.093, 814, 800, 809, 795, 807, 806},
                 item = {0.433, 12799},
             },
-            [ xi.zone.DANGRUF_WADI] = -- 191
+            [xi.zone.DANGRUF_WADI] = -- 191
             {
                 treasureLvl = 43,
                 key = 1028,
@@ -447,7 +447,7 @@ local treasureInfo =
                 gem = {0.230, 814, 800, 809, 795, 807, 806},
                 item = {0.462, 12341},
             },
-            [ xi.zone.INNER_HORUTOTO_RUINS] = -- 192
+            [xi.zone.INNER_HORUTOTO_RUINS] = -- 192
             {
                 treasureLvl = 43,
                 key = 1029,
@@ -459,7 +459,7 @@ local treasureInfo =
                 gem = {0.109, 814, 800, 809, 795, 806},
                 item = {0.432, 16719},
             },
-            [ xi.zone.ORDELLES_CAVES] = -- 193
+            [xi.zone.ORDELLES_CAVES] = -- 193
             {
                 treasureLvl = 43,
                 key = 1030,
@@ -500,7 +500,7 @@ local treasureInfo =
                 gem = {0.214, 800, 809, 806, 807, 796, 795, 814, 799},
                 item = {0.476, 13222},
             },
-            [ xi.zone.OUTER_HORUTOTO_RUINS] = -- 194
+            [xi.zone.OUTER_HORUTOTO_RUINS] = -- 194
             {
                 treasureLvl = 43,
                 key = 1029,
@@ -512,7 +512,7 @@ local treasureInfo =
                 gem = {0.109, 814, 800, 809, 795, 806},
                 item = {0.432, 16719},
             },
-            [ xi.zone.THE_ELDIEME_NECROPOLIS] = -- 195
+            [xi.zone.THE_ELDIEME_NECROPOLIS] = -- 195
             {
                 treasureLvl = 53,
                 key = 1039,
@@ -533,7 +533,7 @@ local treasureInfo =
                 gem = {0.105, 811, 808, 796, 799, 815, 790},
                 item = {0.474, 16771},
             },
-            [ xi.zone.GUSGEN_MINES] = -- 196
+            [xi.zone.GUSGEN_MINES] = -- 196
             {
                 treasureLvl = 43,
                 key = 1031,
@@ -565,7 +565,7 @@ local treasureInfo =
                 gem = {0.233, 806, 809, 814, 800, 796, 795, 799},
                 item = {0.465, 12338, 17426},
             },
-            [ xi.zone.CRAWLERS_NEST] = -- 197
+            [xi.zone.CRAWLERS_NEST] = -- 197
             {
                 treasureLvl = 43,
                 key = 1040,
@@ -599,7 +599,7 @@ local treasureInfo =
                 gem = {0.162, 811, 790, 808, 796, 799, 788, 815, 798},
                 item = {0.444, 16710},
             },
-            [ xi.zone.MAZE_OF_SHAKHRAMI] = -- 198
+            [xi.zone.MAZE_OF_SHAKHRAMI] = -- 198
             {
                 treasureLvl = 43,
                 key = 1032,
@@ -635,7 +635,7 @@ local treasureInfo =
                 gem = {0.060, 814, 800, 809, 795, 796, 799, 807, 806},
                 item = {0.415, 17071},
             },
-            [ xi.zone.GARLAIGE_CITADEL] = -- 200
+            [xi.zone.GARLAIGE_CITADEL] = -- 200
             {
                 treasureLvl = 53,
                 key = 1041,
@@ -656,7 +656,7 @@ local treasureInfo =
                 gem = {0.059, 811, 790, 808, 796, 799, 788, 815, 798},
                 item = {0.365, 13723},
             },
-            [ xi.zone.FEIYIN] = -- 204
+            [xi.zone.FEIYIN] = -- 204
             {
                 treasureLvl = 53,
                 key = 1037,
@@ -688,7 +688,7 @@ local treasureInfo =
                 gem = {0.091, 811, 790, 808, 796, 799, 788, 815, 798},
                 item = {0.440, 13231},
             },
-            [ xi.zone.LABYRINTH_OF_ONZOZO] = -- 213
+            [xi.zone.LABYRINTH_OF_ONZOZO] = -- 213
             {
                 treasureLvl = 43,
                 key = 1056,
@@ -728,12 +728,12 @@ local treasureInfo =
 
     -----------------------------------
 
-    [ xi.treasure.type.COFFER] =
+    [xi.treasure.type.COFFER] =
     {
         zone =
         {
 
-            [ xi.zone.NEWTON_MOVALPOLOS] = -- 12
+            [xi.zone.NEWTON_MOVALPOLOS] = -- 12
             {
                 treasureLvl = 53,
                 key = 1063,
@@ -753,7 +753,7 @@ local treasureInfo =
                 gil = {0.927, 9800, 19180},
                 gem = {0.073, 791, 797, 784, 803, 805, 801, 802},
             },
-            [ xi.zone.RUAUN_GARDENS] = -- 130
+            [xi.zone.RUAUN_GARDENS] = -- 130
             {
                 treasureLvl = 53,
                 key = 1058,
@@ -776,18 +776,18 @@ local treasureInfo =
                 gil = {0.821, 9576, 19460},
                 gem = {0.179, 791, 801, 810, 784, 802, 797, 805, 803},
             },
-            [ xi.zone.BEADEAUX] = -- 147
+            [xi.zone.BEADEAUX] = -- 147
             {
                 treasureLvl = 53,
                 key = 1043,
                 hands = {
-                    [ xi.job.WHM] = true,
+                    [xi.job.WHM] = true,
                 },
                 af =
                 {
-                    [ xi.job.BST] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WILD_HANDS,     reward = 12646}, -- Beast Jackcoat
-                    [ xi.job.PLD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STALWART_HANDS, reward = 14220}, -- Gallant Breeches
-                    [ xi.job.MNK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STRIKING_HANDS, reward = 12639}, -- Temple Cyclas
+                    [xi.job.BST] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WILD_HANDS,     reward = 12646}, -- Beast Jackcoat
+                    [xi.job.PLD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STALWART_HANDS, reward = 14220}, -- Gallant Breeches
+                    [xi.job.MNK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STRIKING_HANDS, reward = 12639}, -- Temple Cyclas
                 },
                 points =
                 {
@@ -804,18 +804,18 @@ local treasureInfo =
                 gem = {0.240, 791, 801, 802, 797, 788, 803, 805, 810, 784},
                 item = {0.385, 4820},
             },
-            [ xi.zone.MONASTIC_CAVERN] = -- 150
+            [xi.zone.MONASTIC_CAVERN] = -- 150
             {
                 treasureLvl = 53,
                 key = 1042,
                 hands = {
-                    [ xi.job.THF] = true,
+                    [xi.job.THF] = true,
                 },
                 af =
                 {
-                    [ xi.job.DRK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SHADOWY_HANDS,   reward = 14221}, -- Chaos Flanchard
-                    [ xi.job.RNG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CHASING_HANDS,   reward = 12648}, -- Hunter's Jerkin
-                    [ xi.job.BLM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SORCEROUS_HANDS, reward = 12641}, -- Wizard's Coat
+                    [xi.job.DRK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SHADOWY_HANDS,   reward = 14221}, -- Chaos Flanchard
+                    [xi.job.RNG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CHASING_HANDS,   reward = 12648}, -- Hunter's Jerkin
+                    [xi.job.BLM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SORCEROUS_HANDS, reward = 12641}, -- Wizard's Coat
                 },
                 points =
                 {
@@ -834,16 +834,16 @@ local treasureInfo =
                 gem = {0.055, 801, 810, 784, 802, 797, 803},
                 item = {0.127, 13398},
             },
-            [ xi.zone.CASTLE_OZTROJA] = -- 151
+            [xi.zone.CASTLE_OZTROJA] = -- 151
             {
                 treasureLvl = 53,
                 key = 1044,
                 af =
                 {
-                    [ xi.job.DRK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SHADOWY_HANDS,    reward = 12645}, -- Chaos Cuirass
-                    [ xi.job.BRD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HARMONIOUS_HANDS, reward = 14223}, -- Choral Cannions
-                    [ xi.job.THF] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SNEAKY_HANDS,     reward = 14219}, -- Rogue's Culottes
-                    [ xi.job.RDM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_VERMILLION_HANDS, reward = 12642}, -- Warlock's Tabard
+                    [xi.job.DRK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SHADOWY_HANDS,    reward = 12645}, -- Chaos Cuirass
+                    [xi.job.BRD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HARMONIOUS_HANDS, reward = 14223}, -- Choral Cannions
+                    [xi.job.THF] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SNEAKY_HANDS,     reward = 14219}, -- Rogue's Culottes
+                    [xi.job.RDM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_VERMILLION_HANDS, reward = 12642}, -- Warlock's Tabard
                 },
                 points =
                 {
@@ -862,17 +862,17 @@ local treasureInfo =
                 gem = {0.044, 791, 801, 810, 784, 802, 797, 803, 805},
                 item = {0.304, 14670},
             },
-            [ xi.zone.THE_BOYAHDA_TREE] = -- 153
+            [xi.zone.THE_BOYAHDA_TREE] = -- 153
             {
                 treasureLvl = 53,
                 key = 1052,
                 map = xi.ki.MAP_OF_THE_BOYAHDA_TREE,
                 hands = {
-                    [ xi.job.DRG] = true,
+                    [xi.job.DRG] = true,
                 },
                 af =
                 {
-                    [ xi.job.NIN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LURKING_HANDS, reward = 13869}, -- Ninja Hatsuburi
+                    [xi.job.NIN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LURKING_HANDS, reward = 13869}, -- Ninja Hatsuburi
                 },
                 points =
                 {
@@ -895,15 +895,15 @@ local treasureInfo =
                 gem = {0.092, 791, 801, 810, 784, 802, 803, 805, 797},
                 item = {0.115, 4447},
             },
-            [ xi.zone.TEMPLE_OF_UGGALEPIH] = -- 159
+            [xi.zone.TEMPLE_OF_UGGALEPIH] = -- 159
             {
                 treasureLvl = 53,
                 key = 1049,
                 map = xi.ki.MAP_OF_THE_TEMPLE_OF_UGGALEPIH,
                 af =
                 {
-                    [ xi.job.SMN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS, reward = 12650}, -- Evoker's Doublet
-                    [ xi.job.SAM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LOYAL_HANDS,   reward = 13781}, -- Myochin Domaru
+                    [xi.job.SMN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS, reward = 12650}, -- Evoker's Doublet
+                    [xi.job.SAM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LOYAL_HANDS,   reward = 13781}, -- Myochin Domaru
                 },
                 points =
                 {
@@ -921,7 +921,7 @@ local treasureInfo =
                 gil = {0.846, 7320, 14400},
                 gem = {0.154, 797, 801, 810, 802, 805, 803},
             },
-            [ xi.zone.DEN_OF_RANCOR] = -- 160
+            [xi.zone.DEN_OF_RANCOR] = -- 160
             {
                 treasureLvl = 53,
                 key = 1050,
@@ -944,17 +944,17 @@ local treasureInfo =
                 gil = {0.700, 8000, 16770},
                 gem = {0.300, 797, 805},
             },
-            [ xi.zone.CASTLE_ZVAHL_BAILEYS] = -- 161
+            [xi.zone.CASTLE_ZVAHL_BAILEYS] = -- 161
             {
                 treasureLvl = 53,
                 key = 1048,
                 hands = {
-                    [ xi.job.BRD] = true,
+                    [xi.job.BRD] = true,
                 },
                 af =
                 {
-                    [ xi.job.WAR] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS, reward = 14214}, -- Fighter's Cuisses
-                    [ xi.job.THF] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SNEAKY_HANDS,  reward = 12643}, -- Rogue's Vest
+                    [xi.job.WAR] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS, reward = 14214}, -- Fighter's Cuisses
+                    [xi.job.THF] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SNEAKY_HANDS,  reward = 12643}, -- Rogue's Vest
                 },
                 misc =
                 {
@@ -978,13 +978,13 @@ local treasureInfo =
                 gem = {0.080, 791, 801, 810, 784, 802, 797, 803, 805},
                 item = {0.189, 4995},
             },
-            [ xi.zone.TORAIMARAI_CANAL] = -- 169
+            [xi.zone.TORAIMARAI_CANAL] = -- 169
             {
                 treasureLvl = 53,
                 key = 1057,
                 af =
                 {
-                    [ xi.job.SMN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS, reward = 14103}, -- Evoker's Pigaches
+                    [xi.job.SMN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CALLING_HANDS, reward = 14103}, -- Evoker's Pigaches
                 },
                 misc =
                 {
@@ -1017,13 +1017,13 @@ local treasureInfo =
                 gil = {0.900, 7440, 14280},
                 gem = {0.100, 791, 801, 784, 802, 797, 803, 805},
             },
-            [ xi.zone.KUFTAL_TUNNEL] = -- 174
+            [xi.zone.KUFTAL_TUNNEL] = -- 174
             {
                 treasureLvl = 53,
                 key = 1051,
                 map = xi.ki.MAP_OF_THE_KUFTAL_TUNNEL,
                 hands = {
-                    [ xi.job.SAM] = true,
+                    [xi.job.SAM] = true,
                 },
                 misc =
                 {
@@ -1055,17 +1055,17 @@ local treasureInfo =
                 gil = {0.943, 5200, 16100},
                 gem = {0.057, 802, 801, 797, 784, 803, 791, 805, 810},
             },
-            [ xi.zone.SEA_SERPENT_GROTTO] = -- 176
+            [xi.zone.SEA_SERPENT_GROTTO] = -- 176
             {
                 treasureLvl = 53,
                 key = 1059,
                 map = xi.ki.MAP_OF_THE_SEA_SERPENT_GROTTO,
                 hands = {
-                    [ xi.job.SMN] = true,
+                    [xi.job.SMN] = true,
                 },
                 af =
                 {
-                    [ xi.job.NIN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LURKING_HANDS, reward = 14101}, -- Ninja Kyahan
+                    [xi.job.NIN] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LURKING_HANDS, reward = 14101}, -- Ninja Kyahan
                 },
                 points =
                 {
@@ -1084,7 +1084,7 @@ local treasureInfo =
                 gil = {0.550, 6145, 19580},
                 gem = {0.450, 791, 810, 784, 802, 803, 797, 801},
             },
-            [ xi.zone.VELUGANNON_PALACE] = -- 177
+            [xi.zone.VELUGANNON_PALACE] = -- 177
             {
                 treasureLvl = 53,
                 key = 1060,
@@ -1104,19 +1104,19 @@ local treasureInfo =
                 gil = {0.500, 9940, 18900},
                 gem = {0.500, 791, 805},
             },
-            [ xi.zone.THE_ELDIEME_NECROPOLIS] = -- 195
+            [xi.zone.THE_ELDIEME_NECROPOLIS] = -- 195
             {
                 treasureLvl = 53,
                 key = 1046,
                 hands = {
-                    [ xi.job.WAR] = true,
-                    [ xi.job.RDM] = true,
-                    [ xi.job.PLD] = true,
-                    [ xi.job.DRK] = true,
+                    [xi.job.WAR] = true,
+                    [xi.job.RDM] = true,
+                    [xi.job.PLD] = true,
+                    [xi.job.DRK] = true,
                 },
                 af =
                 {
-                    [ xi.job.BLM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SORCEROUS_HANDS, reward = 14217}, -- Wizard's Tonban
+                    [xi.job.BLM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_SORCEROUS_HANDS, reward = 14217}, -- Wizard's Tonban
                 },
                 points =
                 {
@@ -1134,20 +1134,20 @@ local treasureInfo =
                 gem = {0.250, 801, 810, 802, 797, 803},
                 item = {0.250, 4175},
             },
-            [ xi.zone.CRAWLERS_NEST] = -- 197
+            [xi.zone.CRAWLERS_NEST] = -- 197
             {
                 treasureLvl = 53,
                 key = 1045,
                 hands = {
-                    [ xi.job.MNK] = true,
-                    [ xi.job.BST] = true,
+                    [xi.job.MNK] = true,
+                    [xi.job.BST] = true,
                 },
                 af =
                 {
-                    [ xi.job.BRD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HARMONIOUS_HANDS, reward = 13857}, -- Choral Roundlet
-                    [ xi.job.WAR] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS,    reward = 12511}, -- Fighter's Mask
-                    [ xi.job.WHM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HEALING_HANDS,    reward = 14216}, -- Healer's Pantaloons
-                    [ xi.job.RNG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CHASING_HANDS,    reward = 14224}, -- Hunter's Braccae
+                    [xi.job.BRD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HARMONIOUS_HANDS, reward = 13857}, -- Choral Roundlet
+                    [xi.job.WAR] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS,    reward = 12511}, -- Fighter's Mask
+                    [xi.job.WHM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HEALING_HANDS,    reward = 14216}, -- Healer's Pantaloons
+                    [xi.job.RNG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_CHASING_HANDS,    reward = 14224}, -- Hunter's Braccae
                 },
                 points =
                 {
@@ -1163,21 +1163,21 @@ local treasureInfo =
                 gem = {0.387, 791, 801, 784, 797, 805, 803},
                 item = {0.226, 4173},
             },
-            [ xi.zone.GARLAIGE_CITADEL] = -- 200
+            [xi.zone.GARLAIGE_CITADEL] = -- 200
             {
                 treasureLvl = 53,
                 key = 1047,
                 hands = {
-                    [ xi.job.BLM] = true,
-                    [ xi.job.RNG] = true,
+                    [xi.job.BLM] = true,
+                    [xi.job.RNG] = true,
                 },
                 af =
                 {
-                    [ xi.job.BST] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WILD_HANDS,       reward = 12517}, -- Beast Helm
-                    [ xi.job.PLD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STALWART_HANDS,   reward = 12515}, -- Gallant Coronet
-                    [ xi.job.WHM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HEALING_HANDS,    reward = 13855}, -- Healer's Cap
-                    [ xi.job.MNK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STRIKING_HANDS,   reward = 12512}, -- Temple Crown
-                    [ xi.job.RDM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_VERMILLION_HANDS, reward = 14218}, -- Warlock's Tights
+                    [xi.job.BST] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_WILD_HANDS,       reward = 12517}, -- Beast Helm
+                    [xi.job.PLD] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STALWART_HANDS,   reward = 12515}, -- Gallant Coronet
+                    [xi.job.WHM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_HEALING_HANDS,    reward = 13855}, -- Healer's Cap
+                    [xi.job.MNK] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_STRIKING_HANDS,   reward = 12512}, -- Temple Crown
+                    [xi.job.RDM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_VERMILLION_HANDS, reward = 14218}, -- Warlock's Tights
                 },
                 points =
                 {
@@ -1193,17 +1193,17 @@ local treasureInfo =
                 gem = {0.125, 801, 784, 802},
                 item = {0.125, 13977},
             },
-            [ xi.zone.IFRITS_CAULDRON] = -- 205
+            [xi.zone.IFRITS_CAULDRON] = -- 205
             {
                 treasureLvl = 53,
                 key = 1053,
                 map = xi.ki.MAP_OF_IFRITS_CAULDRON,
                 hands = {
-                    [ xi.job.NIN] = true,
+                    [xi.job.NIN] = true,
                 },
                 af =
                 {
-                    [ xi.job.DRG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_DRAGON_HANDS, reward = 12649}, -- Drachen Mail
+                    [xi.job.DRG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_DRAGON_HANDS, reward = 12649}, -- Drachen Mail
                 },
                 points =
                 {
@@ -1224,15 +1224,15 @@ local treasureInfo =
                 gil = {0.897, 7200, 21060},
                 gem = {0.103, 802, 797, 803, 801, 810, 791},
             },
-            [ xi.zone.QUICKSAND_CAVES] = -- 208
+            [xi.zone.QUICKSAND_CAVES] = -- 208
             {
                 treasureLvl = 53,
                 key = 1054,
                 map = xi.ki.MAP_OF_THE_QUICKSAND_CAVES,
                 af =
                 {
-                    [ xi.job.DRG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_DRAGON_HANDS, reward = 14102}, -- Drachen Greaves
-                    [ xi.job.SAM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LOYAL_HANDS,  reward = 14225}, -- Myochin Haidate
+                    [xi.job.DRG] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_DRAGON_HANDS, reward = 14102}, -- Drachen Greaves
+                    [xi.job.SAM] = {quest = xi.quest.id.jeuno.BORGHERTZ_S_LOYAL_HANDS,  reward = 14225}, -- Myochin Haidate
                 },
                 points =
                 {
