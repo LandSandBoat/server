@@ -27,7 +27,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getPool() == 4249) then -- Volker@Throne_Room only
-        target:showText(mob, zones[ xi.zone.THRONE_ROOM].text.BLADE_ANSWER)
+        target:showText(mob, zones[xi.zone.THRONE_ROOM].text.BLADE_ANSWER)
     end
 
     local numhits = 4

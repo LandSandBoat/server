@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.OUTER_RAKAZNAR] =
+zones[xi.zone.OUTER_RAKAZNAR] =
 {
     text =
     {
@@ -26,4 +26,4 @@ zones[ xi.zone.OUTER_RAKAZNAR] =
     },
 }
 
-return zones[ xi.zone.OUTER_RAKAZNAR]
+return zones[xi.zone.OUTER_RAKAZNAR]

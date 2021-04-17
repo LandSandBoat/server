@@ -430,7 +430,7 @@ local hunts =
 
 local zone =
 {
-    [ xi.zone.RULUDE_GARDENS] =
+    [xi.zone.RULUDE_GARDENS] =
     {
         -- these params display the correct number of hunts
         huntMenu =
@@ -531,7 +531,7 @@ local zone =
         [1914] = { params = 174639, huntId = 559 },
     },
 
-    [ xi.zone.NORTHERN_SAN_DORIA] =
+    [xi.zone.NORTHERN_SAN_DORIA] =
     {
         huntMenu =
         {
@@ -626,7 +626,7 @@ local zone =
         [ 890] = { params = 174624, huntId = 544 },
     },
 
-    [ xi.zone.BASTOK_MINES] =
+    [xi.zone.BASTOK_MINES] =
     {
         huntMenu =
         {
@@ -720,7 +720,7 @@ local zone =
         [ 890] = { params = 174627, huntId = 547 },
     },
 
-    [ xi.zone.PORT_WINDURST] =
+    [xi.zone.PORT_WINDURST] =
     {
         huntMenu =
         {
@@ -822,7 +822,7 @@ local zone =
         [ 898] = { params = 174630, huntId = 550 },
     },
 
-    [ xi.zone.KAZHAM] =
+    [xi.zone.KAZHAM] =
     {
         huntMenu =
         {
@@ -885,7 +885,7 @@ local zone =
         [1330] = { params = 140691, huntId = 403 },
     },
 
-    [ xi.zone.NORG] =
+    [xi.zone.NORG] =
     {
         huntMenu =
         {
@@ -948,7 +948,7 @@ local zone =
         [1330] = { params = 140691, huntId = 403 },
     },
 
-    [ xi.zone.RABAO] =
+    [xi.zone.RABAO] =
     {
         huntMenu =
         {
@@ -1005,7 +1005,7 @@ local zone =
         [3378] = { params = 141750, huntId = 438 },
     },
 
-    [ xi.zone.TAVNAZIAN_SAFEHOLD] =
+    [xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
         huntMenu =
         {
@@ -1025,7 +1025,7 @@ local zone =
         [1042] = { params = 104894, huntId = 446 },
     },
 
-    [ xi.zone.AHT_URHGAN_WHITEGATE] =
+    [xi.zone.AHT_URHGAN_WHITEGATE] =
     {
         huntMenu =
         {
@@ -1066,7 +1066,7 @@ local zone =
         [ 818] = { params = 173523, huntId = 467 },
     },
 
-    [ xi.zone.NASHMAU] =
+    [xi.zone.NASHMAU] =
     {
         huntMenu =
         {
@@ -1089,7 +1089,7 @@ local zone =
         [ 794] = { params = 174558, huntId = 478 },
     },
 
-    [ xi.zone.SOUTHERN_SAN_DORIA_S] =
+    [xi.zone.SOUTHERN_SAN_DORIA_S] =
     {
         huntMenu =
         {
@@ -1138,7 +1138,7 @@ local zone =
         [1082] = { params = 174623, huntId = 543 },
     },
 
-    [ xi.zone.BASTOK_MARKETS_S] =
+    [xi.zone.BASTOK_MARKETS_S] =
     {
         huntMenu =
         {
@@ -1187,7 +1187,7 @@ local zone =
         [1082] = { params = 174623, huntId = 543 },
     },
 
-    [ xi.zone.WINDURST_WATERS_S] =
+    [xi.zone.WINDURST_WATERS_S] =
     {
         huntMenu =
         {

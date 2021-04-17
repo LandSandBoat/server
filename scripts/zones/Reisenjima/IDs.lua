@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.REISENJIMA] =
+zones[xi.zone.REISENJIMA] =
 {
     text =
     {
@@ -27,4 +27,4 @@ zones[ xi.zone.REISENJIMA] =
     },
 }
 
-return zones[ xi.zone.REISENJIMA]
+return zones[xi.zone.REISENJIMA]

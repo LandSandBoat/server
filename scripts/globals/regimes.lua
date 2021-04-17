@@ -41,7 +41,7 @@ local regimeInfo = {
     -- Fields of Valor information
     -----------------------------------
 
-    [ xi.regime.type.FIELDS] =
+    [xi.regime.type.FIELDS] =
     {
         sharedOptions =
         {
@@ -84,7 +84,7 @@ local regimeInfo = {
         },
         zone =
         {
-            [ xi.zone.WEST_RONFAURE] =
+            [xi.zone.WEST_RONFAURE] =
             {
                 event = 61,
                 page =
@@ -96,7 +96,7 @@ local regimeInfo = {
                     { 6, 1, 0, 0, 4, 8, 330, 56},
                 },
             },
-            [ xi.zone.EAST_RONFAURE] =
+            [xi.zone.EAST_RONFAURE] =
             {
                 event = 61,
                 page =
@@ -108,7 +108,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 4, 8, 330, 68},
                 },
             },
-            [ xi.zone.LA_THEINE_PLATEAU] =
+            [xi.zone.LA_THEINE_PLATEAU] =
             {
                 event = 61,
                 page =
@@ -120,7 +120,7 @@ local regimeInfo = {
                     { 5, 3, 0, 0, 10, 15, 450, 71},
                 },
             },
-            [ xi.zone.VALKURM_DUNES] =
+            [xi.zone.VALKURM_DUNES] =
             {
                 event = 47,
                 page =
@@ -132,7 +132,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 22, 25, 575, 57},
                 },
             },
-            [ xi.zone.JUGNER_FOREST] =
+            [xi.zone.JUGNER_FOREST] =
             {
                 event = 32,
                 page =
@@ -144,7 +144,7 @@ local regimeInfo = {
                     { 6, 3, 0, 0, 24, 25, 630, 14},
                 },
             },
-            [ xi.zone.BATALLIA_DOWNS] =
+            [xi.zone.BATALLIA_DOWNS] =
             {
                 event = 61,
                 page =
@@ -156,7 +156,7 @@ local regimeInfo = {
                     { 9, 0, 0, 0, 31, 32, 730, 75},
                 },
             },
-            [ xi.zone.NORTH_GUSTABERG] =
+            [xi.zone.NORTH_GUSTABERG] =
             {
                 event = 266,
                 page =
@@ -168,7 +168,7 @@ local regimeInfo = {
                     { 3, 4, 0, 0, 3, 8, 330, 59},
                 },
             },
-            [ xi.zone.SOUTH_GUSTABERG] =
+            [xi.zone.SOUTH_GUSTABERG] =
             {
                 event = 61,
                 page =
@@ -180,7 +180,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 4, 8, 330, 80},
                 },
             },
-            [ xi.zone.KONSCHTAT_HIGHLANDS] =
+            [xi.zone.KONSCHTAT_HIGHLANDS] =
             {
                 event = 61,
                 page =
@@ -192,7 +192,7 @@ local regimeInfo = {
                     { 2, 2, 2, 0, 12, 14, 400, 84},
                 },
             },
-            [ xi.zone.PASHHOW_MARSHLANDS] =
+            [xi.zone.PASHHOW_MARSHLANDS] =
             {
                 event = 28,
                 page =
@@ -204,7 +204,7 @@ local regimeInfo = {
                     { 5, 4, 1, 0, 22, 25, 660, 60},
                 },
             },
-            [ xi.zone.ROLANBERRY_FIELDS] =
+            [xi.zone.ROLANBERRY_FIELDS] =
             {
                 event = 61,
                 page =
@@ -216,7 +216,7 @@ local regimeInfo = {
                     { 5, 0, 0, 0, 36, 37, 800, 88},
                 },
             },
-            [ xi.zone.BEAUCEDINE_GLACIER] =
+            [xi.zone.BEAUCEDINE_GLACIER] =
             {
                 event = 218,
                 page =
@@ -228,7 +228,7 @@ local regimeInfo = {
                     { 5, 4, 2, 0, 40, 43, 990, 50},
                 },
             },
-            [ xi.zone.XARCABARD] =
+            [xi.zone.XARCABARD] =
             {
                 event = 48,
                 page =
@@ -240,7 +240,7 @@ local regimeInfo = {
                     { 5, 4, 3, 0, 45, 52, 1100, 55},
                 },
             },
-            [ xi.zone.CAPE_TERIGGAN] =
+            [xi.zone.CAPE_TERIGGAN] =
             {
                 event = 61,
                 page =
@@ -252,7 +252,7 @@ local regimeInfo = {
                     { 4, 5, 0, 0, 71, 79, 1450, 108},
                 },
             },
-            [ xi.zone.EASTERN_ALTEPA_DESERT] =
+            [xi.zone.EASTERN_ALTEPA_DESERT] =
             {
                 event = 61,
                 page =
@@ -264,7 +264,7 @@ local regimeInfo = {
                     { 3, 3, 2, 1, 45, 49, 970, 113},
                 },
             },
-            [ xi.zone.WEST_SARUTABARUTA] =
+            [xi.zone.WEST_SARUTABARUTA] =
             {
                 event = 52,
                 page =
@@ -276,7 +276,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 4, 8, 330, 61},
                 },
             },
-            [ xi.zone.EAST_SARUTABARUTA] =
+            [xi.zone.EAST_SARUTABARUTA] =
             {
                 event = 61,
                 page =
@@ -288,7 +288,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 3, 6, 330, 93},
                 },
             },
-            [ xi.zone.TAHRONGI_CANYON] =
+            [xi.zone.TAHRONGI_CANYON] =
             {
                 event = 61,
                 page =
@@ -300,7 +300,7 @@ local regimeInfo = {
                     { 3, 4, 0, 0, 12, 16, 475, 96},
                 },
             },
-            [ xi.zone.BUBURIMU_PENINSULA] =
+            [xi.zone.BUBURIMU_PENINSULA] =
             {
                 event = 51,
                 page =
@@ -312,7 +312,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 22, 27, 575, 62},
                 },
             },
-            [ xi.zone.MERIPHATAUD_MOUNTAINS] =
+            [xi.zone.MERIPHATAUD_MOUNTAINS] =
             {
                 event = 46,
                 page =
@@ -324,7 +324,7 @@ local regimeInfo = {
                     { 3, 5, 0, 0, 25, 27, 660, 63},
                 },
             },
-            [ xi.zone.SAUROMUGUE_CHAMPAIGN] =
+            [xi.zone.SAUROMUGUE_CHAMPAIGN] =
             {
                 event = 61,
                 page =
@@ -336,7 +336,7 @@ local regimeInfo = {
                     { 5, 3, 0, 0, 36, 38, 770, 100},
                 },
             },
-            [ xi.zone.THE_SANCTUARY_OF_ZITAH] =
+            [xi.zone.THE_SANCTUARY_OF_ZITAH] =
             {
                 event = 61,
                 page =
@@ -348,7 +348,7 @@ local regimeInfo = {
                     { 3, 5, 0, 0, 44, 50, 1100, 118},
                 },
             },
-            [ xi.zone.ROMAEVE] =
+            [xi.zone.ROMAEVE] =
             {
                 event = 61,
                 page =
@@ -360,7 +360,7 @@ local regimeInfo = {
                     { 6, 1, 0, 0, 79, 82, 1570, 123},
                 },
             },
-            [ xi.zone.YUHTUNGA_JUNGLE] =
+            [xi.zone.YUHTUNGA_JUNGLE] =
             {
                 event = 61,
                 page =
@@ -372,7 +372,7 @@ local regimeInfo = {
                     { 4, 6, 0, 0, 34, 41, 920, 128},
                 },
             },
-            [ xi.zone.YHOATOR_JUNGLE] =
+            [xi.zone.YHOATOR_JUNGLE] =
             {
                 event = 61,
                 page =
@@ -384,7 +384,7 @@ local regimeInfo = {
                     {10, 0, 0, 0, 45, 49, 1000, 133},
                 },
             },
-            [ xi.zone.WESTERN_ALTEPA_DESERT] =
+            [xi.zone.WESTERN_ALTEPA_DESERT] =
             {
                 event = 61,
                 page =
@@ -396,7 +396,7 @@ local regimeInfo = {
                     { 4, 6, 0, 0, 54, 58, 1140, 138},
                 },
             },
-            [ xi.zone.QUFIM_ISLAND] =
+            [xi.zone.QUFIM_ISLAND] =
             {
                 event = 33,
                 page =
@@ -408,7 +408,7 @@ local regimeInfo = {
                     { 5, 4, 1, 0, 28, 34, 770, 45},
                 },
             },
-            [ xi.zone.BEHEMOTHS_DOMINION] =
+            [xi.zone.BEHEMOTHS_DOMINION] =
             {
                 event = 61,
                 page =
@@ -418,7 +418,7 @@ local regimeInfo = {
                     { 3, 2, 0, 0, 43, 47, 450, 103},
                 },
             },
-            [ xi.zone.VALLEY_OF_SORROWS] =
+            [xi.zone.VALLEY_OF_SORROWS] =
             {
                 event = 61,
                 page =
@@ -428,7 +428,7 @@ local regimeInfo = {
                     { 4, 1, 0, 0, 69, 74, 1300, 141},
                 },
             },
-            [ xi.zone.RUAUN_GARDENS] =
+            [xi.zone.RUAUN_GARDENS] =
             {
                 event = 73,
                 page =
@@ -447,7 +447,7 @@ local regimeInfo = {
     -- Grounds of Valor information
     -----------------------------------
 
-    [ xi.regime.type.GROUNDS] =
+    [xi.regime.type.GROUNDS] =
     {
         sharedOptions =
         {
@@ -494,7 +494,7 @@ local regimeInfo = {
         },
         zone =
         {
-            [ xi.zone.THE_BOYAHDA_TREE] =
+            [xi.zone.THE_BOYAHDA_TREE] =
             {
                 event = 17,
                 page =
@@ -509,7 +509,7 @@ local regimeInfo = {
                     { 2, 2, 2, 0, 102, 105, 2040, 726},
                 },
             },
-            [ xi.zone.MIDDLE_DELKFUTTS_TOWER] =
+            [xi.zone.MIDDLE_DELKFUTTS_TOWER] =
             {
                 event = 18,
                 page =
@@ -519,7 +519,7 @@ local regimeInfo = {
                     { 4, 4, 0, 0, 30, 34, 1290, 784},
                 },
             },
-            [ xi.zone.UPPER_DELKFUTTS_TOWER] =
+            [xi.zone.UPPER_DELKFUTTS_TOWER] =
             {
                 event = 20,
                 page =
@@ -531,7 +531,7 @@ local regimeInfo = {
                     { 2, 2, 2, 0, 65, 69, 1540, 789},
                 },
             },
-            [ xi.zone.TEMPLE_OF_UGGALEPIH] =
+            [xi.zone.TEMPLE_OF_UGGALEPIH] =
             {
                 event = 83,
                 page =
@@ -544,7 +544,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 61, 68, 1660, 795},
                 },
             },
-            [ xi.zone.DEN_OF_RANCOR] =
+            [xi.zone.DEN_OF_RANCOR] =
             {
                 event = 13,
                 page =
@@ -559,7 +559,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 75, 80, 1790, 803},
                 },
             },
-            [ xi.zone.RANGUEMONT_PASS] =
+            [xi.zone.RANGUEMONT_PASS] =
             {
                 event = 24,
                 page =
@@ -574,7 +574,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 88, 90, 1850, 609},
                 },
             },
-            [ xi.zone.BOSTAUNIEUX_OUBLIETTE] =
+            [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
             {
                 event = 114,
                 page =
@@ -589,7 +589,7 @@ local regimeInfo = {
                     { 2, 5, 0, 0, 95, 99, 2480, 617},
                 },
             },
-            [ xi.zone.TORAIMARAI_CANAL] =
+            [xi.zone.TORAIMARAI_CANAL] =
             {
                 event = 100,
                 page =
@@ -604,7 +604,7 @@ local regimeInfo = {
                     { 8, 2, 0, 0, 94, 99, 2050, 625},
                 },
             },
-            [ xi.zone.ZERUHN_MINES] =
+            [xi.zone.ZERUHN_MINES] =
             {
                 event = 210,
                 page =
@@ -616,7 +616,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 75, 80, 1700, 630},
                 },
             },
-            [ xi.zone.KORROLOKA_TUNNEL] =
+            [xi.zone.KORROLOKA_TUNNEL] =
             {
                 event = 4,
                 page =
@@ -631,7 +631,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 87, 91, 2140, 734},
                 },
             },
-            [ xi.zone.KUFTAL_TUNNEL] =
+            [xi.zone.KUFTAL_TUNNEL] =
             {
                 event = 29,
                 page =
@@ -646,7 +646,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 99, 103, 1900, 742},
                 },
             },
-            [ xi.zone.SEA_SERPENT_GROTTO] =
+            [xi.zone.SEA_SERPENT_GROTTO] =
             {
                 event = 24,
                 page =
@@ -661,7 +661,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 66, 69, 1500, 811},
                 },
             },
-            [ xi.zone.VELUGANNON_PALACE] =
+            [xi.zone.VELUGANNON_PALACE] =
             {
                 event = 4,
                 page =
@@ -674,7 +674,7 @@ local regimeInfo = {
                     { 6, 0, 0, 0, 79, 80, 2180, 748},
                 },
             },
-            [ xi.zone.THE_SHRINE_OF_RUAVITAU] =
+            [xi.zone.THE_SHRINE_OF_RUAVITAU] =
             {
                 event = 61,
                 page =
@@ -687,7 +687,7 @@ local regimeInfo = {
                     { 7, 0, 0, 0, 81, 84, 2390, 754},
                 },
             },
-            [ xi.zone.LOWER_DELKFUTTS_TOWER] =
+            [xi.zone.LOWER_DELKFUTTS_TOWER] =
             {
                 event = 40,
                 page =
@@ -699,7 +699,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 25, 35, 940, 781},
                 },
             },
-            [ xi.zone.KING_RANPERRES_TOMB] =
+            [xi.zone.KING_RANPERRES_TOMB] =
             {
                 event = 100,
                 page =
@@ -714,7 +714,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 80, 83, 1720, 638},
                 },
             },
-            [ xi.zone.DANGRUF_WADI] =
+            [xi.zone.DANGRUF_WADI] =
             {
                 event = 160,
                 page =
@@ -729,7 +729,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 90, 93, 2260, 646},
                 },
             },
-            [ xi.zone.INNER_HORUTOTO_RUINS] =
+            [xi.zone.INNER_HORUTOTO_RUINS] =
             {
                 event = 100,
                 page =
@@ -744,7 +744,7 @@ local regimeInfo = {
                     { 2, 4, 0, 0, 81, 84, 1780, 654},
                 },
             },
-            [ xi.zone.ORDELLES_CAVES] =
+            [xi.zone.ORDELLES_CAVES] =
             {
                 event = 100,
                 page =
@@ -759,7 +759,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 86, 88, 1890, 662},
                 },
             },
-            [ xi.zone.OUTER_HORUTOTO_RUINS] =
+            [xi.zone.OUTER_HORUTOTO_RUINS] =
             {
                 event = 110,
                 page =
@@ -774,7 +774,7 @@ local regimeInfo = {
                     { 5, 1, 0, 0, 82, 85, 1850, 670},
                 },
             },
-            [ xi.zone.THE_ELDIEME_NECROPOLIS] =
+            [xi.zone.THE_ELDIEME_NECROPOLIS] =
             {
                 event = 100,
                 page =
@@ -789,7 +789,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 91, 95, 1890, 678},
                 },
             },
-            [ xi.zone.GUSGEN_MINES] =
+            [xi.zone.GUSGEN_MINES] =
             {
                 event = 100,
                 page =
@@ -804,7 +804,7 @@ local regimeInfo = {
                     { 2, 5, 0, 0, 85, 89, 2180, 686},
                 },
             },
-            [ xi.zone.CRAWLERS_NEST] =
+            [xi.zone.CRAWLERS_NEST] =
             {
                 event = 100,
                 page =
@@ -819,7 +819,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 92, 96, 2220, 694},
                 },
             },
-            [ xi.zone.MAZE_OF_SHAKHRAMI] =
+            [xi.zone.MAZE_OF_SHAKHRAMI] =
             {
                 event = 100,
                 page =
@@ -834,7 +834,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 86, 88, 1830, 702},
                 },
             },
-            [ xi.zone.GARLAIGE_CITADEL] =
+            [xi.zone.GARLAIGE_CITADEL] =
             {
                 event = 110,
                 page =
@@ -849,7 +849,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 92, 96, 2220, 710},
                 },
             },
-            [ xi.zone.FEIYIN] =
+            [xi.zone.FEIYIN] =
             {
                 event = 100,
                 page =
@@ -864,7 +864,7 @@ local regimeInfo = {
                     { 4, 3, 0, 0, 95, 99, 2250, 718},
                 },
             },
-            [ xi.zone.IFRITS_CAULDRON] =
+            [xi.zone.IFRITS_CAULDRON] =
             {
                 event = 51,
                 page =
@@ -879,7 +879,7 @@ local regimeInfo = {
                     { 4, 2, 0, 0, 71, 78, 1760, 762},
                 },
             },
-            [ xi.zone.QUICKSAND_CAVES] =
+            [xi.zone.QUICKSAND_CAVES] =
             {
                 event = 15,
                 page =
@@ -894,7 +894,7 @@ local regimeInfo = {
                     { 3, 3, 0, 0, 65, 69, 1540, 819},
                 },
             },
-            [ xi.zone.GUSTAV_TUNNEL] =
+            [xi.zone.GUSTAV_TUNNEL] =
             {
                 event = 17,
                 page =
@@ -909,7 +909,7 @@ local regimeInfo = {
                     { 5, 2, 0, 0, 100, 103, 2310, 770},
                 },
             },
-            [ xi.zone.LABYRINTH_OF_ONZOZO] =
+            [xi.zone.LABYRINTH_OF_ONZOZO] =
             {
                 event = 3,
                 page =

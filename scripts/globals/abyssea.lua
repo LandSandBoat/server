@@ -38,21 +38,21 @@ local redWeakness =
 local yellowWeakness =
 {
     --fire
-    [ xi.magic.element.FIRE] = { 146, 147, 176, 204, 591, 321, 455 },
+    [xi.magic.element.FIRE] = { 146, 147, 176, 204, 591, 321, 455 },
     --ice
-    [ xi.magic.element.ICE] = { 151, 152, 181, 206, 531, 324, 456 },
+    [xi.magic.element.ICE] = { 151, 152, 181, 206, 531, 324, 456 },
     --wind
-    [ xi.magic.element.WIND] = { 156, 157, 186, 208, 534, 327, 457 },
+    [xi.magic.element.WIND] = { 156, 157, 186, 208, 534, 327, 457 },
     --earth
-    [ xi.magic.element.EARTH] = { 161, 162, 191, 210, 555, 330, 458 },
+    [xi.magic.element.EARTH] = { 161, 162, 191, 210, 555, 330, 458 },
     --ltng
-    [ xi.magic.element.THUNDER] = { 166, 167, 196, 212, 644, 333, 459 },
+    [xi.magic.element.THUNDER] = { 166, 167, 196, 212, 644, 333, 459 },
     --water
-    [ xi.magic.element.WATER] = { 171, 172, 201, 515, 336, 454 },
+    [xi.magic.element.WATER] = { 171, 172, 201, 515, 336, 454 },
     --light
-    [ xi.magic.element.LIGHT] = { 29, 30, 38, 39, 21, 112, 565, 461 },
+    [xi.magic.element.LIGHT] = { 29, 30, 38, 39, 21, 112, 565, 461 },
     --dark
-    [ xi.magic.element.DARK] = { 247, 245, 231, 260, 557, 348, 460 }
+    [xi.magic.element.DARK] = { 247, 245, 231, 260, 557, 348, 460 }
 }
 
 local blueWeakness =
@@ -68,16 +68,16 @@ local blueWeakness =
 -- [ZoneID] = {Required Trades Event, Has Key Items Event, Missing Key Item Event}
 local popEvents =
 {
-    [ xi.zone.ABYSSEA_KONSCHTAT]        = {1010, 1020, 1021},
-    [ xi.zone.ABYSSEA_TAHRONGI]         = {1010, 1020, 1021},
-    [ xi.zone.ABYSSEA_LA_THEINE]        = {1010, 1020, 1021},
-    [ xi.zone.ABYSSEA_ATTOHWA]          = {1010, 1022, 1023},
-    [ xi.zone.ABYSSEA_MISAREAUX]        = {1010, 1022, 1021},
-    [ xi.zone.ABYSSEA_VUNKERL]          = {1010, 1015, 1120},
-    [ xi.zone.ABYSSEA_ALTEPA]           = {1010, 1020, 1021},
-    [ xi.zone.ABYSSEA_ULEGUERAND]       = {1010, 1020, 1025},
-    [ xi.zone.ABYSSEA_GRAUBERG]         = {1010, 1020, 1021},
-    [ xi.zone.ABYSSEA_EMPYREAL_PARADOX] = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_KONSCHTAT]        = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_TAHRONGI]         = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_LA_THEINE]        = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_ATTOHWA]          = {1010, 1022, 1023},
+    [xi.zone.ABYSSEA_MISAREAUX]        = {1010, 1022, 1021},
+    [xi.zone.ABYSSEA_VUNKERL]          = {1010, 1015, 1120},
+    [xi.zone.ABYSSEA_ALTEPA]           = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_ULEGUERAND]       = {1010, 1020, 1025},
+    [xi.zone.ABYSSEA_GRAUBERG]         = {1010, 1020, 1021},
+    [xi.zone.ABYSSEA_EMPYREAL_PARADOX] = {1010, 1020, 1021},
 }
 
 -----------------------------------

@@ -30,8 +30,8 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.SHANTOTTO] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.SHANTOTTO] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.STAR_SIBYL] = xi.trust.message_offset.TEAMWORK_2,
     })
 
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 25, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)

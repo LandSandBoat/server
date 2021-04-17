@@ -17,7 +17,7 @@ require("scripts/globals/zone")
 --]]
 
 local battlefields = {
-    [ xi.zone.BEARCLAW_PINNACLE] =
+    [xi.zone.BEARCLAW_PINNACLE] =
     {
         { 0,  640,    0},   -- Flames of the Dead (PM5-3 U3)
      -- { 1,  641,    0},   -- Follow the White Rabbit (ENM)
@@ -27,7 +27,7 @@ local battlefields = {
      -- { 5,    ?, 3454},   -- Taurassic Park (HKC30)
     },
 
-    [ xi.zone.BONEYARD_GULLY] =
+    [xi.zone.BONEYARD_GULLY] =
     {
         { 0,  672,    0},   -- Head Wind (PM5-3 U2)
      -- { 1,  673,    0},   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle
@@ -40,7 +40,7 @@ local battlefields = {
      -- { 8,    ?,    0},   -- *Head Wind (HTMBF)
     },
 
-    [ xi.zone.THE_SHROUDED_MAW] =
+    [xi.zone.THE_SHROUDED_MAW] =
     {
         { 0,  704,    0},   -- Darkness Named (PM3-5)
      -- { 1,  705,    0},   -- Test Your Mite (ENM)
@@ -48,7 +48,7 @@ local battlefields = {
      -- { 3,    ?,    0},   -- *Waking Dreams (HTMBF)
     },
 
-    [ xi.zone.MINE_SHAFT_2716] =
+    [xi.zone.MINE_SHAFT_2716] =
     {
         { 0,  736,    0},   -- A Century of Hardship (PM5-3 L3)
      -- { 1,  737,    0},   -- Return to the Depths (Quest)
@@ -58,46 +58,46 @@ local battlefields = {
      -- { 5,  741, 3455},   -- The Mobline Comedy (HKC50)
     },
 
-    [ xi.zone.SPIRE_OF_HOLLA] =
+    [xi.zone.SPIRE_OF_HOLLA] =
     {
         { 0,  768,    0},   -- Ancient Flames Beckon (PM1-3)
      -- { 1,  769,    0},   -- Simulant (ENM)
      -- { 2,  770, 3351},   -- Empty Hopes (KC30)
     },
 
-    [ xi.zone.SPIRE_OF_DEM] =
+    [xi.zone.SPIRE_OF_DEM] =
     {
         { 0,  800,    0},   -- Ancient Flames Beckon (PM1-3)
      -- { 1,  801,    0},   -- You Are What You Eat (ENM)
      -- { 2,  802, 3351},   -- Empty Dreams (KC30)
     },
 
-    [ xi.zone.SPIRE_OF_MEA] =
+    [xi.zone.SPIRE_OF_MEA] =
     {
         { 0,  832,    0},   -- Ancient Flames Beckon (PM1-3)
      -- { 1,  833,    0},   -- Playing Host (ENM)
      -- { 2,  834, 3351},   -- Empty Desires (KC30)
     },
 
-    [ xi.zone.SPIRE_OF_VAHZL] =
+    [xi.zone.SPIRE_OF_VAHZL] =
     {
         { 0,  864,    0},   -- Desires of Emptiness (PM5-2)
      -- { 1,  865,    0},   -- Pulling the Plug (ENM)
      -- { 2,  866, 3352},   -- Empty Aspirations (KC50)
     },
 
-    [ xi.zone.RIVERNE_SITE_B01] =
+    [xi.zone.RIVERNE_SITE_B01] =
     {
         { 0,  896,    0},   -- Storms of Fate (Quest)
      -- { 1,  897, 2108},   -- The Wyrmking Descends (BCNM)
     },
 
-    [ xi.zone.RIVERNE_SITE_A01] =
+    [xi.zone.RIVERNE_SITE_A01] =
     {
      -- { 0,  928, 1842},   -- Ouryu Cometh (BCNM)
     },
 
-    [ xi.zone.MONARCH_LINN] =
+    [xi.zone.MONARCH_LINN] =
     {
         { 0,  960,    0},   -- Ancient Vows (PM2-5)
         { 1,  961,    0},   -- The Savage (PM4-2)
@@ -110,7 +110,7 @@ local battlefields = {
      -- { 8,    ?,    0},   -- *The Savage (HTMBF)
     },
 
-    [ xi.zone.SEALIONS_DEN] =
+    [xi.zone.SEALIONS_DEN] =
     {
         { 0,  992,    0},   -- One to Be Feared (PM6-4)
         { 1,  993,    0},   -- The Warrior's Path (PM7-5)
@@ -118,12 +118,12 @@ local battlefields = {
      -- { 3,    ?,    0},   -- *One to Be Feared (HTMBF)
     },
 
-    [ xi.zone.THE_GARDEN_OF_RUHMET] =
+    [xi.zone.THE_GARDEN_OF_RUHMET] =
     {
         { 0, 1024,    0},   -- When Angels Fall (PM8-3)
     },
 
-    [ xi.zone.EMPYREAL_PARADOX] =
+    [xi.zone.EMPYREAL_PARADOX] =
     {
         { 0, 1056,    0},   -- Dawn (PM8-4)
         { 1, 1057,    0},   -- Apocalypse Nigh (Quest)
@@ -133,7 +133,7 @@ local battlefields = {
      -- { 5,    ?,    0},   -- Sealed Fate (Master Trial)
     },
 
-    [ xi.zone.TEMENOS] =
+    [xi.zone.TEMENOS] =
     {
      -- { 0, 1299,    0},   -- Northern Tower
      -- { 1, 1300,    0},   -- Eastern Tower
@@ -147,7 +147,7 @@ local battlefields = {
      -- { 9, 1307,    0},   -- Central 4th Floor II
     },
 
-    [ xi.zone.APOLLYON] =
+    [xi.zone.APOLLYON] =
     {
      -- { 0, 1291,    0},   -- SW Apollyon
      -- { 1, 1290,    0},   -- NW Apollyon
@@ -159,12 +159,12 @@ local battlefields = {
      -- { 7, 1297,    0},   -- Central Apollyon II
     },
 
-    [ xi.zone.ARRAPAGO_REEF] =
+    [xi.zone.ARRAPAGO_REEF] =
     {
      -- { 0,    ?,    0},   -- Lamia Reprisal
     },
 
-    [ xi.zone.TALACCA_COVE] =
+    [xi.zone.TALACCA_COVE] =
     {
      -- { 0, 1088,    0},   -- Call to Arms (ISNM)
      -- { 1, 1089,    0},   -- Compliments to the Chef (ISNM)
@@ -174,12 +174,12 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Legacy of the Lost (HTMBF)
     },
 
-    [ xi.zone.HALVUNG] =
+    [xi.zone.HALVUNG] =
     {
      -- { 0,    ?,    0},   -- Halvung Invasion
     },
 
-    [ xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
+    [xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
     {
      -- { 0, 1120,    0},   -- Tough Nut to Crack (ISNM)
      -- { 1, 1121,    0},   -- Happy Caster (ISNM)
@@ -188,12 +188,12 @@ local battlefields = {
         { 4, 1124,    0},   -- Shield of Diplomacy (TOAU22)
     },
 
-    [ xi.zone.MAMOOK] =
+    [xi.zone.MAMOOK] =
     {
      -- { 0,    ?,    0},   -- Mamook Incursion
     },
 
-    [ xi.zone.JADE_SEPULCHER] =
+    [xi.zone.JADE_SEPULCHER] =
     {
      -- { 0, 1152,    0},   -- Making a Mockery (ISNM)
      -- { 1, 1153,    0},   -- Shadows of the Mind (ISNM)
@@ -203,25 +203,25 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Puppet in Peril (HTMBF)
     },
 
-    [ xi.zone.HAZHALM_TESTING_GROUNDS] =
+    [xi.zone.HAZHALM_TESTING_GROUNDS] =
     {
      -- { 0, 1184,    0},   -- The Rider Cometh (Quest)
     },
 
-    [ xi.zone.LA_VAULE_S] =
+    [xi.zone.LA_VAULE_S] =
     {
      -- { 0,    ?,    0},   -- Splitting Heirs (S)
      -- { 1,    ?,    0},   -- Purple, The New Black
      -- { 2,    ?,    0},   -- The Blood-bathed Crown
     },
 
-    [ xi.zone.BEADEAUX_S] =
+    [xi.zone.BEADEAUX_S] =
     {
      -- { 0,    ?,    0},   -- Cracking Shells (B)
      -- { 1,    ?,    0},   -- The Buried God
     },
 
-    [ xi.zone.CASTLE_OZTROJA_S] =
+    [xi.zone.CASTLE_OZTROJA_S] =
     {
      -- { 0,    ?,    0},   -- Plucking Wings (W)
      -- { 1,    ?,    0},   -- A Malicious Manifest
@@ -229,7 +229,7 @@ local battlefields = {
      -- { 3,    ?,    0},   -- At Journey's End
     },
 
-    [ xi.zone.HORLAIS_PEAK] =
+    [xi.zone.HORLAIS_PEAK] =
     {
         { 0,    0,    0},   -- The Rank 2 Final Mission (Mission 2-3)
         { 1,    1, 1131},   -- Tails of Woe (BS40)
@@ -261,7 +261,7 @@ local battlefields = {
      -- {27,    ?,    0},   -- Inv. from Excenmille and Co.
     },
 
-    [ xi.zone.GHELSBA_OUTPOST] =
+    [xi.zone.GHELSBA_OUTPOST] =
     {
         { 0,   32,    0},   -- Save the Children (Sandy 1-3)
         { 1,   33,    0},   -- The Holy Crest (Quest)
@@ -271,7 +271,7 @@ local battlefields = {
      -- { 5,   37,    0},   -- Mirror, Mirror (Quest)
     },
 
-    [ xi.zone.WAUGHROON_SHRINE] =
+    [xi.zone.WAUGHROON_SHRINE] =
     {
         { 0,   64,    0},   -- The Rank 2 Final Mission (Mission 2-3)
         { 1,   65, 1131},   -- The Worm's Turn (BS40)
@@ -304,7 +304,7 @@ local battlefields = {
      -- {28,    ?,    0},   -- Invitation from Naji and Co.
     },
 
-    [ xi.zone.BALGAS_DAIS] =
+    [xi.zone.BALGAS_DAIS] =
     {
         { 0,   96,    0},   -- The Rank 2 Final Mission (Mission 2-3)
         { 1,   97, 1131},   -- Steamed Sprouts (BS40)
@@ -336,7 +336,7 @@ local battlefields = {
      -- {27,    ?,    0},   -- Inv. from Kupipi and Co.
     },
 
-    [ xi.zone.THRONE_ROOM_S] =
+    [xi.zone.THRONE_ROOM_S] =
     {
      -- { 0,  352,    0},   -- Fiat Lux (Campaign)
      -- { 1,  353,    0},   -- Darkness Descends (WOTG37)
@@ -344,7 +344,7 @@ local battlefields = {
      -- { 3,    ?,    0},   -- Unafraid of the Dark (Merit Battlefield)
     },
 
-    [ xi.zone.SACRIFICIAL_CHAMBER] =
+    [xi.zone.SACRIFICIAL_CHAMBER] =
     {
         { 0,  128,    0},   -- The Temple of Uggalepih (ZM4)
         { 1,  129, 1130},   -- Jungle Boogymen (BS60)
@@ -355,7 +355,7 @@ local battlefields = {
      -- { 6,    ?, 4063},   -- *Amphibian Assault (SKC20)
     },
 
-    [ xi.zone.THRONE_ROOM] =
+    [xi.zone.THRONE_ROOM] =
     {
         { 0,  160,    0},   -- The Shadow Lord Battle (Mission 5-2)
         { 1,  161,    0},   -- Where Two Paths Converge (Basty 9-2)
@@ -368,7 +368,7 @@ local battlefields = {
      -- { 8,    ?,    0},   -- A Fond Farewell
     },
 
-    [ xi.zone.CHAMBER_OF_ORACLES] =
+    [xi.zone.CHAMBER_OF_ORACLES] =
     {
         { 0,  192,    0},   -- Through the Quicksand Caves (ZM6)
         { 1,  193, 1130},   -- Legion XI Comitatensis (BS60)
@@ -383,7 +383,7 @@ local battlefields = {
      -- {10,    ?, 4063},   -- *Legion XI Comitatensis (SKC20)
     },
 
-    [ xi.zone.FULL_MOON_FOUNTAIN] =
+    [xi.zone.FULL_MOON_FOUNTAIN] =
     {
         { 0,  224,    0},   -- The Moonlit Path (Quest)
         { 1,  225,    0},   -- Moon Reading (Windy 9-2)
@@ -393,7 +393,7 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Waking the Beast (HTMBF)
     },
 
-    [ xi.zone.STELLAR_FULCRUM] =
+    [xi.zone.STELLAR_FULCRUM] =
     {
         { 0,  256,    0},   -- Return to Delkfutt's Tower (ZM8)
      -- { 1,  257,    0},   -- The Indomitable Triumvirate (Mog Bonanza)
@@ -407,7 +407,7 @@ local battlefields = {
      -- { 9,    ?,    0},   -- A Fond Farewell
     },
 
-    [ xi.zone.LALOFF_AMPHITHEATER] =
+    [xi.zone.LALOFF_AMPHITHEATER] =
     {
         { 0,  288,    0},   -- Ark Angels 1 (ZM14)
         { 1,  289,    0},   -- Ark Angels 2 (ZM14)
@@ -423,13 +423,13 @@ local battlefields = {
      -- {11,    ?,    0},   -- *Divine Might (HTMBF)
     },
 
-    [ xi.zone.THE_CELESTIAL_NEXUS] =
+    [xi.zone.THE_CELESTIAL_NEXUS] =
     {
         { 0,  320,    0},   -- The Celestial Nexus (ZM16)
      -- { 1,    ?,    0},   -- *The Celestial Nexus (HTMBF)
     },
 
-    [ xi.zone.WALK_OF_ECHOES] =
+    [xi.zone.WALK_OF_ECHOES] =
     {
      -- { 0,    ?,    0},   -- When Wills Collide (WOTG46)
      -- { 1,  385,    0},   -- Maiden of the Dusk (WOTG51)
@@ -437,7 +437,7 @@ local battlefields = {
      -- { 3,    ?,    0},   -- A Forbidden Reunion (Quest)
     },
 
-    [ xi.zone.CLOISTER_OF_GALES] =
+    [xi.zone.CLOISTER_OF_GALES] =
     {
         { 0,  416,    0},   -- Trial by Wind (Quest)
         { 1,  417, 1174},   -- Carbuncle Debacle (Quest)
@@ -447,7 +447,7 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Wind (HTMBF)
     },
 
-    [ xi.zone.CLOISTER_OF_STORMS] =
+    [xi.zone.CLOISTER_OF_STORMS] =
     {
         { 0,  448,    0},   -- Trial by Lightning (Quest)
         { 1,  449, 1172},   -- Carbuncle Debacle (Quest)
@@ -457,7 +457,7 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Lightning (HTMBF)
     },
 
-    [ xi.zone.CLOISTER_OF_FROST] =
+    [xi.zone.CLOISTER_OF_FROST] =
     {
         { 0,  480,    0},   -- Trial by Ice (Quest)
         { 1,  481, 1171},   -- Class Reunion (Quest)
@@ -467,7 +467,7 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Ice (HTMBF)
     },
 
-    [ xi.zone.QUBIA_ARENA] =
+    [xi.zone.QUBIA_ARENA] =
     {
         { 0,  512,    0},   -- The Rank 5 Mission (Mission 5-1)
      -- { 1,  513, 1175},   -- Come Into My Parlor (KS30)
@@ -497,7 +497,7 @@ local battlefields = {
      -- {25,    ?,    0},   -- Mumor's Encore (Sunbreeze Festival)
     },
 
-    [ xi.zone.CLOISTER_OF_FLAMES] =
+    [xi.zone.CLOISTER_OF_FLAMES] =
     {
         { 0,  544,    0},   -- Trial by Fire (Quest)
         { 1,  545, 1544},   -- Trial-size Trial by Fire (Quest)
@@ -506,7 +506,7 @@ local battlefields = {
      -- { 4,    ?,    0},   -- *Trial by Fire (HTMBF)
     },
 
-    [ xi.zone.CLOISTER_OF_TREMORS] =
+    [xi.zone.CLOISTER_OF_TREMORS] =
     {
         { 0,  576,    0},   -- Trial by Earth (Quest)
         { 1,  577, 1169},   -- The Puppet Master (Quest)
@@ -516,7 +516,7 @@ local battlefields = {
      -- { 5,    ?,    0},   -- *Trial by Earth (HTMBF)
     },
 
-    [ xi.zone.CLOISTER_OF_TIDES] =
+    [xi.zone.CLOISTER_OF_TIDES] =
     {
         { 0,  608,    0},   -- Trial by Water (Quest)
         { 1,  609, 1549},   -- Trial-size Trial by Water (Quest)

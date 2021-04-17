@@ -32,7 +32,7 @@ dynamis = {}
 
 local entryInfo =
 {
-    [ xi.zone.SOUTHERN_SAN_DORIA] =
+    [xi.zone.SOUTHERN_SAN_DORIA] =
     {
         csBit = 1,
         csSand = 686,
@@ -43,7 +43,7 @@ local entryInfo =
         enterPos = {161.838, -2.000, 161.673, 93, 185},
         reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [ xi.zone.BASTOK_MINES] =
+    [xi.zone.BASTOK_MINES] =
     {
         csBit = 2,
         csSand = 203,
@@ -54,7 +54,7 @@ local entryInfo =
         enterPos = {116.482, 0.994, -72.121, 128, 186},
         reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [ xi.zone.WINDURST_WALLS] =
+    [xi.zone.WINDURST_WALLS] =
     {
         csBit = 3,
         csSand = 455,
@@ -65,7 +65,7 @@ local entryInfo =
         enterPos = {-221.988, 1.000, -120.184, 0, 187},
         reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [ xi.zone.RULUDE_GARDENS] =
+    [xi.zone.RULUDE_GARDENS] =
     {
         csBit = 4,
         csSand = 10016,
@@ -76,7 +76,7 @@ local entryInfo =
         enterPos = {48.930, 10.002, -71.032, 195, 188},
         reqs = function(player) return player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) end,
     },
-    [ xi.zone.BEAUCEDINE_GLACIER] =
+    [xi.zone.BEAUCEDINE_GLACIER] =
     {
         csBit = 5,
         csWin = 134,
@@ -92,7 +92,7 @@ local entryInfo =
                    player:hasKeyItem(xi.ki.HYDRA_CORPS_TACTICAL_MAP)
         end,
     },
-    [ xi.zone.XARCABARD] =
+    [xi.zone.XARCABARD] =
     {
         csBit = 6,
         csWin = 32,
@@ -105,7 +105,7 @@ local entryInfo =
                    player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA)
         end,
     },
-    [ xi.zone.VALKURM_DUNES] =
+    [xi.zone.VALKURM_DUNES] =
     {
         csBit = 7,
         csFirst = 33,
@@ -119,7 +119,7 @@ local entryInfo =
                   (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
-    [ xi.zone.BUBURIMU_PENINSULA] =
+    [xi.zone.BUBURIMU_PENINSULA] =
     {
         csBit = 8,
         csFirst = 40,
@@ -133,7 +133,7 @@ local entryInfo =
                   (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
-    [ xi.zone.QUFIM_ISLAND] =
+    [xi.zone.QUFIM_ISLAND] =
     {
         csBit = 9,
         csFirst = 22,
@@ -147,7 +147,7 @@ local entryInfo =
                   (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1)
         end,
     },
-    [ xi.zone.TAVNAZIAN_SAFEHOLD] =
+    [xi.zone.TAVNAZIAN_SAFEHOLD] =
     {
         csBit = 10,
         csFirst = 614,
@@ -176,7 +176,7 @@ local entryInfo =
 
 local dynaInfo =
 {
-    [ xi.zone.DYNAMIS_SAN_DORIA] =
+    [xi.zone.DYNAMIS_SAN_DORIA] =
     {
         winVar = "DynaSandoria_Win",
         winKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
@@ -184,7 +184,7 @@ local dynaInfo =
         entryPos = {161.838, -2.000, 161.673, 93},
         ejectPos = {161.000, -2.000, 161.000, 94, 230},
     },
-    [ xi.zone.DYNAMIS_BASTOK] =
+    [xi.zone.DYNAMIS_BASTOK] =
     {
         winVar = "DynaBastok_Win",
         winKI = xi.ki.HYDRA_CORPS_EYEGLASS,
@@ -192,7 +192,7 @@ local dynaInfo =
         entryPos = {116.482, 0.994, -72.121, 128},
         ejectPos = {112.000, 0.994, -72.000, 127, 234},
     },
-    [ xi.zone.DYNAMIS_WINDURST] =
+    [xi.zone.DYNAMIS_WINDURST] =
     {
         winVar = "DynaWindurst_Win",
         winKI = xi.ki.HYDRA_CORPS_LANTERN,
@@ -200,7 +200,7 @@ local dynaInfo =
         entryPos = {-221.988, 1.000, -120.184, 0},
         ejectPos = {-217.000, 1.000, -119.000, 94, 239},
     },
-    [ xi.zone.DYNAMIS_JEUNO] =
+    [xi.zone.DYNAMIS_JEUNO] =
     {
         winVar = "DynaJeuno_Win",
         winKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
@@ -208,7 +208,7 @@ local dynaInfo =
         entryPos = {48.930, 10.002, -71.032, 195},
         ejectPos = {48.930, 10.002, -71.032, 195, 243},
     },
-    [ xi.zone.DYNAMIS_BEAUCEDINE] =
+    [xi.zone.DYNAMIS_BEAUCEDINE] =
     {
         winVar = "DynaBeaucedine_Win",
         winKI = xi.ki.HYDRA_CORPS_INSIGNIA,
@@ -216,7 +216,7 @@ local dynaInfo =
         entryPos = {-284.751, -39.923, -422.948, 235},
         ejectPos = {-284.751, -39.923, -422.948, 235, 111},
     },
-    [ xi.zone.DYNAMIS_XARCABARD] =
+    [xi.zone.DYNAMIS_XARCABARD] =
     {
         winVar = "DynaXarcabard_Win",
         winKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
@@ -224,7 +224,7 @@ local dynaInfo =
         entryPos = {569.312, -0.098, -270.158, 90},
         ejectPos = {569.312, -0.098, -270.158, 90, 112},
     },
-    [ xi.zone.DYNAMIS_VALKURM] =
+    [xi.zone.DYNAMIS_VALKURM] =
     {
         winVar = "DynaValkurm_Win",
         winKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
@@ -232,7 +232,7 @@ local dynaInfo =
         entryPos = {100, -8, 131, 47},
         ejectPos = {119, -9, 131, 52, 103},
     },
-    [ xi.zone.DYNAMIS_BUBURIMU] =
+    [xi.zone.DYNAMIS_BUBURIMU] =
     {
         winVar = "DynaBuburimu_Win",
         winKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
@@ -240,7 +240,7 @@ local dynaInfo =
         entryPos = {155, -1, -169, 170},
         ejectPos = {154, -1, -170, 190, 118},
     },
-    [ xi.zone.DYNAMIS_QUFIM] =
+    [xi.zone.DYNAMIS_QUFIM] =
     {
         winVar = "DynaQufim_Win",
         winKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
@@ -248,7 +248,7 @@ local dynaInfo =
         entryPos = {-19, -17, 104, 253},
         ejectPos = {18, -19, 162, 240, 126},
     },
-    [ xi.zone.DYNAMIS_TAVNAZIA] =
+    [xi.zone.DYNAMIS_TAVNAZIA] =
     {
         winVar = "DynaTavnazia_Win",
         winKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,

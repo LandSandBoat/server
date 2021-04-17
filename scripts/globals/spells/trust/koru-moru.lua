@@ -22,9 +22,9 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.SHANTOTTO] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.SHANTOTTO_II] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.SHANTOTTO] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.SHANTOTTO_II] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.AJIDO_MARUJIDO] = xi.trust.message_offset.TEAMWORK_2,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 5,

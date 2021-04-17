@@ -35,17 +35,17 @@ xi.quest.log_id =
 
 xi.quest.area =
 {
-    [ xi.quest.log_id.SANDORIA]    = 'sandoria',
-    [ xi.quest.log_id.BASTOK]      = 'bastok',
-    [ xi.quest.log_id.WINDURST]    = 'windurst',
-    [ xi.quest.log_id.JEUNO]       = 'jeuno',
-    [ xi.quest.log_id.OTHER_AREAS] = 'otherAreas',
-    [ xi.quest.log_id.OUTLANDS]    = 'outlands',
-    [ xi.quest.log_id.AHT_URHGAN]  = 'ahtUrhgan',
-    [ xi.quest.log_id.CRYSTAL_WAR] = 'crystalWar',
-    [ xi.quest.log_id.ABYSSEA]     = 'abyssea',
-    [ xi.quest.log_id.ADOULIN]     = 'adoulin',
-    [ xi.quest.log_id.COALITION]   = 'coalition'
+    [xi.quest.log_id.SANDORIA]    = 'sandoria',
+    [xi.quest.log_id.BASTOK]      = 'bastok',
+    [xi.quest.log_id.WINDURST]    = 'windurst',
+    [xi.quest.log_id.JEUNO]       = 'jeuno',
+    [xi.quest.log_id.OTHER_AREAS] = 'otherAreas',
+    [xi.quest.log_id.OUTLANDS]    = 'outlands',
+    [xi.quest.log_id.AHT_URHGAN]  = 'ahtUrhgan',
+    [xi.quest.log_id.CRYSTAL_WAR] = 'crystalWar',
+    [xi.quest.log_id.ABYSSEA]     = 'abyssea',
+    [xi.quest.log_id.ADOULIN]     = 'adoulin',
+    [xi.quest.log_id.COALITION]   = 'coalition'
 }
 
 xi.quest.id =
@@ -53,7 +53,7 @@ xi.quest.id =
     -----------------------------------
     --  San d'Oria
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.SANDORIA]] =
+    [xi.quest.area[xi.quest.log_id.SANDORIA]] =
     {
         A_SENTRY_S_PERIL                = 0,  -- ±
         WATER_OF_THE_CHEVAL             = 1,  -- ±
@@ -142,7 +142,7 @@ xi.quest.id =
     -----------------------------------
     --  Bastok
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.BASTOK]] =
+    [xi.quest.area[xi.quest.log_id.BASTOK]] =
     {
         THE_SIREN_S_TEAR                = 0,  -- ±
         BEAUTY_AND_THE_GALKA            = 1,  -- ±
@@ -242,7 +242,7 @@ xi.quest.id =
     -----------------------------------
     --  Windurst
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.WINDURST]] =
+    [xi.quest.area[xi.quest.log_id.WINDURST]] =
     {
         HAT_IN_HAND                     = 0,  -- +
         A_FEATHER_IN_ONE_S_CAP          = 1,  -- +
@@ -339,7 +339,7 @@ xi.quest.id =
     -----------------------------------
     --  Jeuno
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.JEUNO]] =
+    [xi.quest.area[xi.quest.log_id.JEUNO]] =
     {
         CREST_OF_DAVOI                  = 0,  -- +
         SAVE_MY_SISTER                  = 1,  -- +
@@ -492,7 +492,7 @@ xi.quest.id =
     -----------------------------------
     --  Other Areas
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.OTHER_AREAS]] =
+    [xi.quest.area[xi.quest.log_id.OTHER_AREAS]] =
     {
         RYCHARDE_THE_CHEF               = 0,  -- +
         WAY_OF_THE_COOK                 = 1,  -- +
@@ -565,7 +565,7 @@ xi.quest.id =
     -----------------------------------
     --  Outlands
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.OUTLANDS]] =
+    [xi.quest.area[xi.quest.log_id.OUTLANDS]] =
     {
         -- Kazham (1-15)
         THE_FIREBLOOM_TREE              = 1,
@@ -637,7 +637,7 @@ xi.quest.id =
     -----------------------------------
     --  Aht Urhgan
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.AHT_URHGAN]] =
+    [xi.quest.area[xi.quest.log_id.AHT_URHGAN]] =
     {
         KEEPING_NOTES                   = 0,
         ARTS_AND_CRAFTS                 = 1,
@@ -695,7 +695,7 @@ xi.quest.id =
     -----------------------------------
     --  Crystal War
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.CRYSTAL_WAR]] =
+    [xi.quest.area[xi.quest.log_id.CRYSTAL_WAR]] =
     {
         LOST_IN_TRANSLOCATION            = 0, -- +
         MESSAGE_ON_THE_WINDS             = 1,
@@ -794,7 +794,7 @@ xi.quest.id =
     -----------------------------------
     --  Abyssea
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.ABYSSEA]] =
+    [xi.quest.area[xi.quest.log_id.ABYSSEA]] =
     {
         -- For some reason these did not match dat file order,
         -- had to adjust IDs >120 after using @addquest
@@ -995,7 +995,7 @@ xi.quest.id =
     -----------------------------------
     --  Adoulin
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.ADOULIN]] =
+    [xi.quest.area[xi.quest.log_id.ADOULIN]] =
     {
         -- These also do not match the DAT file order, had
         -- discrepencies and swapped orders from the start.
@@ -1101,7 +1101,7 @@ xi.quest.id =
     -----------------------------------
     --  Coalition
     -----------------------------------
-    [ xi.quest.area[ xi.quest.log_id.COALITION]] =
+    [xi.quest.area[xi.quest.log_id.COALITION]] =
     {
         -- Also slightly incongruent with DAT file order
         PROCURE_CEIZAK_BATTLEGROUNDS    = 0,

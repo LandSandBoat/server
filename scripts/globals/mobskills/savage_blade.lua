@@ -23,7 +23,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getPool() == 4006) then -- Trion@QuBia_Arena only
-        target:showText(mob, zones[ xi.zone.QUBIA_ARENA].text.SAVAGE_LAND)
+        target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.SAVAGE_LAND)
     end
 
     local numhits = 2

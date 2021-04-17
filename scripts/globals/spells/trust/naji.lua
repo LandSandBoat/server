@@ -30,7 +30,7 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.AYAME] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.AYAME] = xi.trust.message_offset.TEAMWORK_1,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_HAS_TOP_ENMITY, 0,

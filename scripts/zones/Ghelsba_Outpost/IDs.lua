@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.GHELSBA_OUTPOST] =
+zones[xi.zone.GHELSBA_OUTPOST] =
 {
     text =
     {
@@ -53,4 +53,4 @@ zones[ xi.zone.GHELSBA_OUTPOST] =
     },
 }
 
-return zones[ xi.zone.GHELSBA_OUTPOST]
+return zones[xi.zone.GHELSBA_OUTPOST]

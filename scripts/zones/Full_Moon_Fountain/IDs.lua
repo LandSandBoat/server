@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.FULL_MOON_FOUNTAIN] =
+zones[xi.zone.FULL_MOON_FOUNTAIN] =
 {
     text =
     {
@@ -32,4 +32,4 @@ zones[ xi.zone.FULL_MOON_FOUNTAIN] =
     },
 }
 
-return zones[ xi.zone.FULL_MOON_FOUNTAIN]
+return zones[xi.zone.FULL_MOON_FOUNTAIN]

@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.MANACLIPPER] =
+zones[xi.zone.MANACLIPPER] =
 {
     text =
     {
@@ -29,4 +29,4 @@ zones[ xi.zone.MANACLIPPER] =
     },
 }
 
-return zones[ xi.zone.MANACLIPPER]
+return zones[xi.zone.MANACLIPPER]

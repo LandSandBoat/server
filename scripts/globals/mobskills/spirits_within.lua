@@ -24,7 +24,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getPool() == 4249) then -- Volker@Throne_Room only
-        target:showText(mob, zones[ xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
+        target:showText(mob, zones[xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
     local tp = skill:getTP()

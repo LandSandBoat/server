@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.OUTER_HORUTOTO_RUINS] =
+zones[xi.zone.OUTER_HORUTOTO_RUINS] =
 {
     text =
     {
@@ -64,4 +64,4 @@ zones[ xi.zone.OUTER_HORUTOTO_RUINS] =
     },
 }
 
-return zones[ xi.zone.OUTER_HORUTOTO_RUINS]
+return zones[xi.zone.OUTER_HORUTOTO_RUINS]

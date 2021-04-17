@@ -8,7 +8,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.DYNAMIS_TAVNAZIA] =
+zones[xi.zone.DYNAMIS_TAVNAZIA] =
 {
     text =
     {
@@ -99,4 +99,4 @@ zones[ xi.zone.DYNAMIS_TAVNAZIA] =
     },
 }
 
-return zones[ xi.zone.DYNAMIS_TAVNAZIA]
+return zones[xi.zone.DYNAMIS_TAVNAZIA]
