@@ -35,7 +35,7 @@ local optionToKI =
 
 local prizes =
 {
-    [ xi.ki.CRIMSON_KEY] =
+    [xi.ki.CRIMSON_KEY] =
     {
         {cutoff =   70, itemId = 13206, augments = {{9, 0,  5}, {516, 0, 1}, {517, 0, 1}, {518, 0, 1}, { 32, 0, 1}, { 96, 0, 1}}}, -- Gold Obi
         {cutoff =   80, itemId = 13445, augments = {{9, 0,  8}, {516, 0, 1}, {517, 0, 1}, {518, 0, 2}, { 39, 0, 1}, { 35, 0, 2}}}, -- Gold Ring
@@ -66,7 +66,7 @@ local prizes =
         {cutoff =  993, itemId =   652}, -- Steel Ingot
         {cutoff = 1003, itemId =  4947}, -- Scroll of Utsusemi: Ni
     },
-    [ xi.ki.VIRIDIAN_KEY] =
+    [xi.ki.VIRIDIAN_KEY] =
     {
         {cutoff =   65, itemId = 13639}, -- Aurora Mantle
         {cutoff =  142, itemId = 13271}, -- Corsette
@@ -96,7 +96,7 @@ local prizes =
         {cutoff = 1044, itemId =   771}, -- Yellow Rock
         {cutoff = 1056, itemId =   798}, -- Turquoise
     },
-    [ xi.ki.AMBER_KEY] =
+    [xi.ki.AMBER_KEY] =
     {
         {cutoff = 111, itemId = 16263}, -- Beak Necklace
         {cutoff = 219, itemId = 13207}, -- Brocade Obi
@@ -123,7 +123,7 @@ local prizes =
         {cutoff = 946, itemId =   866}, -- Wyvern Scales
         {cutoff = 961, itemId =  1122}, -- Wyvern Skin
     },
-    [ xi.ki.AZURE_KEY] =
+    [xi.ki.AZURE_KEY] =
     {
         {cutoff = 106, itemId = 13597}, -- Beak Mantle
         {cutoff = 203, itemId = 13092}, -- Coeurl Gorget
@@ -148,7 +148,7 @@ local prizes =
         {cutoff = 956, itemId =   803}, -- Sunstone
         {cutoff = 960, itemId =   866}, -- Wyvern Scales
     },
-    [ xi.ki.IVORY_KEY] =
+    [xi.ki.IVORY_KEY] =
     {
         {cutoff =   62, itemId = 13357}, -- Angels Earring
         {cutoff =   70, itemId = 13356}, -- Death Earring
@@ -170,7 +170,7 @@ local prizes =
         {cutoff = 1124, itemId =  1132}, -- Raxa
         {cutoff = 1172, itemId =  4174}, -- Vile Elixir
     },
-    [ xi.ki.EBON_KEY] =
+    [xi.ki.EBON_KEY] =
     {
         {cutoff =  31, itemId = 13463}, -- Angels Ring
         {cutoff =  82, itemId = 13462}, -- Death Ring
@@ -198,7 +198,7 @@ local prizes =
         {cutoff = 987, itemId =  4174}, -- Vile Elixir
         {cutoff = 997, itemId =  4748}, -- Scroll of Raise III
     },
-    [ xi.ki.WHITE_CORAL_KEY] =
+    [xi.ki.WHITE_CORAL_KEY] =
     {
         {cutoff =   31, itemId = 12433}, -- Brass Mask
         {cutoff =  109, itemId = 12986}, -- Chestnut Sabots
@@ -221,7 +221,7 @@ local prizes =
         {cutoff = 1015, itemId =  4947}, -- Scroll of Utsusemi: Ni
         {cutoff = 1031, itemId =  4751}, -- Scroll of Erase
     },
-    [ xi.ki.BLUE_CORAL_KEY] =
+    [xi.ki.BLUE_CORAL_KEY] =
     {
         {cutoff =   42, itemId = 12571}, -- Cuir Bouilli
         {cutoff =  250, itemId = 14118}, -- Iron Greaves
@@ -239,7 +239,7 @@ local prizes =
         {cutoff =  960, itemId =   769}, -- Red Rock
         {cutoff = 1002, itemId =   798}, -- Turquoise
     },
-    [ xi.ki.PEACH_CORAL_KEY] =
+    [xi.ki.PEACH_CORAL_KEY] =
     {
         {cutoff =   66, itemId = 13712}, -- Carapace Harness
         {cutoff =  198, itemId = 12956}, -- Raptor Ledelsens
@@ -265,7 +265,7 @@ local prizes =
         {cutoff = 1087, itemId =   866}, -- Wyvern Scales
         {cutoff = 1103, itemId =  1122}, -- Wyvern Skin
     },
-    [ xi.ki.BLACK_CORAL_KEY] =
+    [xi.ki.BLACK_CORAL_KEY] =
     {
         {cutoff =   90, itemId = 13698}, -- Beak Helm
         {cutoff =  194, itemId = 12988}, -- Pigaches
@@ -284,7 +284,7 @@ local prizes =
         {cutoff = 1000, itemId =   652}, -- Steel Ingot
         {cutoff = 1015, itemId =   805}, -- Zircon
     },
-    [ xi.ki.RED_CORAL_KEY] =
+    [xi.ki.RED_CORAL_KEY] =
     {
         {cutoff =  109, itemId = 16289}, -- Alloy Torque
         {cutoff =  200, itemId = 16288}, -- Aureate Necklace
@@ -303,7 +303,7 @@ local prizes =
         {cutoff =  999, itemId =  4174}, -- Vile Elixir
         {cutoff = 1017, itemId =  4517}, -- Yellow Curry
     },
-    [ xi.ki.ANGEL_SKIN_KEY] =
+    [xi.ki.ANGEL_SKIN_KEY] =
     {
         {cutoff =   65, itemId = 16254}, -- Altius Mantle
         {cutoff =  162, itemId = 16253}, -- Chiffon Cape
@@ -327,7 +327,7 @@ local prizes =
         {cutoff = 1037, itemId =  4774}, -- Scroll of Thunder III
         {cutoff = 1047, itemId =  4748}, -- Scroll of Raise III
     },
-    [ xi.ki.MOOGLE_KEY] =
+    [xi.ki.MOOGLE_KEY] =
     {
         {cutoff =  167, itemId = 12442}, -- Studded Bandana
         {cutoff =  374, itemId = 13209}, -- Chain Belt
@@ -336,7 +336,7 @@ local prizes =
         {cutoff = 1041, itemId =   653}, -- Mythril Ingot
         {cutoff = 1100, itemId =   744}, -- Silver Ingot
     },
-    [ xi.ki.BIRD_KEY] =
+    [xi.ki.BIRD_KEY] =
     {
         {cutoff = 143, itemId = 12987}, -- Ebony Sabots
         {cutoff = 393, itemId = 13783}, -- Iron Scale Mail
@@ -358,7 +358,7 @@ local prizes =
         {cutoff = 967, itemId =   771}, -- Yellow Rock
         {cutoff = 972, itemId =   774}, -- Purple Rock
     },
-    [ xi.ki.CACTUAR_KEY] =
+    [xi.ki.CACTUAR_KEY] =
     {
         {cutoff = 109, itemId = 13111}, -- Nodowa
         {cutoff = 196, itemId = 12604}, -- Silk Coat
@@ -379,7 +379,7 @@ local prizes =
         {cutoff = 913, itemId =   895}, -- Ram Horn
         {cutoff = 935, itemId =   859}, -- Ram Skin
     },
-    [ xi.ki.BOMB_KEY] =
+    [xi.ki.BOMB_KEY] =
     {
         {cutoff = 308, itemId = 12980}, -- Battle Boots
         {cutoff = 462, itemId = 12860}, -- Silk Slops
@@ -389,7 +389,7 @@ local prizes =
         {cutoff = 824, itemId =   654}, -- Darksteel Ingot
         {cutoff = 901, itemId =   645}, -- Darksteel Ore
     },
-    [ xi.ki.CHOCOBO_KEY] =
+    [xi.ki.CHOCOBO_KEY] =
     {
         {cutoff =  190, itemId = 16008}, -- Aptus Earring
         {cutoff =  285, itemId = 16372}, -- Stearc Subligar
@@ -406,7 +406,7 @@ local prizes =
         {cutoff = 1115, itemId =  4174}, -- Vile Elixir
         {cutoff = 1186, itemId =   844}, -- Phoenix Feather
     },
-    [ xi.ki.TONBERRY_KEY] =
+    [xi.ki.TONBERRY_KEY] =
     {
         {cutoff =  291, itemId = 15938}, -- Esprit Belt
         {cutoff =  600, itemId = 15937}, -- Fettle Belt

@@ -136,7 +136,7 @@ xi.mob.ae = xi.mob.additionalEffect
 
 local additionalEffects =
 {
-    [ xi.mob.ae.BLIND] =
+    [xi.mob.ae.BLIND] =
     {
         chance = 25,
         ele = xi.magic.ele.DARK,
@@ -149,7 +149,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 45,
     },
-    [ xi.mob.ae.CURSE] =
+    [xi.mob.ae.CURSE] =
     {
         chance = 20,
         ele = xi.magic.ele.DARK,
@@ -162,7 +162,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 300,
     },
-    [ xi.mob.ae.ENAERO] =
+    [xi.mob.ae.ENAERO] =
     {
         ele = xi.magic.ele.WIND,
         sub = xi.subEffect.WIND_DAMAGE,
@@ -171,7 +171,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENBLIZZARD] =
+    [xi.mob.ae.ENBLIZZARD] =
     {
         ele = xi.magic.ele.ICE,
         sub = xi.subEffect.ICE_DAMAGE,
@@ -180,7 +180,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENDARK] =
+    [xi.mob.ae.ENDARK] =
     {
         ele = xi.magic.ele.DARK,
         sub = xi.subEffect.DARKNESS_DAMAGE,
@@ -189,7 +189,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENFIRE] =
+    [xi.mob.ae.ENFIRE] =
     {
         ele = xi.magic.ele.FIRE,
         sub = xi.subEffect.FIRE_DAMAGE,
@@ -198,7 +198,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENLIGHT] =
+    [xi.mob.ae.ENLIGHT] =
     {
         ele = xi.magic.ele.LIGHT,
         sub = xi.subEffect.LIGHT_DAMAGE,
@@ -207,7 +207,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENSTONE] =
+    [xi.mob.ae.ENSTONE] =
     {
         ele = xi.magic.ele.EARTH,
         sub = xi.subEffect.EARTH_DAMAGE,
@@ -216,7 +216,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENTHUNDER] =
+    [xi.mob.ae.ENTHUNDER] =
     {
         ele = xi.magic.ele.LIGHTNING,
         sub = xi.subEffect.LIGHTNING_DAMAGE,
@@ -225,7 +225,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.ENWATER] =
+    [xi.mob.ae.ENWATER] =
     {
         ele = xi.magic.ele.WATER,
         sub = xi.subEffect.WATER_DAMAGE,
@@ -234,7 +234,7 @@ local additionalEffects =
         mod = xi.mod.INT,
         bonusAbilityParams = {bonusmab = 0, includemab = false},
     },
-    [ xi.mob.ae.EVA_DOWN] =
+    [xi.mob.ae.EVA_DOWN] =
     {
         chance = 25,
         ele = xi.magic.ele.ICE,
@@ -247,7 +247,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 60,
     },
-    [ xi.mob.ae.HP_DRAIN] =
+    [xi.mob.ae.HP_DRAIN] =
     {
         chance = 10,
         ele = xi.magic.ele.DARK,
@@ -257,7 +257,7 @@ local additionalEffects =
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) mob:addHP(power) end,
     },
-    [ xi.mob.ae.MP_DRAIN] =
+    [xi.mob.ae.MP_DRAIN] =
     {
         chance = 10,
         ele = xi.magic.ele.DARK,
@@ -267,7 +267,7 @@ local additionalEffects =
         bonusAbilityParams = {bonusmab = 0, includemab = false},
         code = function(mob, target, power) local mp = math.min(power, target:getMP()) target:delMP(mp) mob:addMP(mp) end,
     },
-    [ xi.mob.ae.PARALYZE] =
+    [xi.mob.ae.PARALYZE] =
     {
         chance = 25,
         ele = xi.magic.ele.ICE,
@@ -280,7 +280,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 60,
     },
-    [ xi.mob.ae.PETRIFY] =
+    [xi.mob.ae.PETRIFY] =
     {
         chance = 20,
         ele = xi.magic.ele.EARTH,
@@ -293,7 +293,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 45,
     },
-    [ xi.mob.ae.PLAGUE] =
+    [xi.mob.ae.PLAGUE] =
     {
         chance = 25,
         ele = xi.magic.ele.WATER,
@@ -306,7 +306,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 60,
     },
-    [ xi.mob.ae.POISON] =
+    [xi.mob.ae.POISON] =
     {
         chance = 25,
         ele = xi.magic.ele.WATER,
@@ -320,7 +320,7 @@ local additionalEffects =
         maxDuration = 30,
         tick = 3,
     },
-    [ xi.mob.ae.SILENCE] =
+    [xi.mob.ae.SILENCE] =
     {
         chance = 25,
         ele = xi.magic.ele.WIND,
@@ -333,7 +333,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 30,
     },
-    [ xi.mob.ae.SLOW] =
+    [xi.mob.ae.SLOW] =
     {
         chance = 25,
         ele = xi.magic.ele.EARTH,
@@ -346,7 +346,7 @@ local additionalEffects =
         minDuration = 1,
         maxDuration = 45,
     },
-    [ xi.mob.ae.STUN] =
+    [xi.mob.ae.STUN] =
     {
         chance = 20,
         ele = xi.magic.ele.LIGHTNING,
@@ -356,7 +356,7 @@ local additionalEffects =
         eff = xi.effect.STUN,
         duration = 5,
     },
-    [ xi.mob.ae.TERROR] =
+    [xi.mob.ae.TERROR] =
     {
         chance = 20,
         sub = xi.subEffect.PARALYSIS,
@@ -366,7 +366,7 @@ local additionalEffects =
         duration = 5,
         code = function(mob, target, power) mob:resetEnmity(target) end,
     },
-    [ xi.mob.ae.TP_DRAIN] =
+    [xi.mob.ae.TP_DRAIN] =
     {
         chance = 25,
         ele = xi.magic.ele.DARK,

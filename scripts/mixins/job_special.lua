@@ -95,29 +95,29 @@ xi.mix.jobSpecial = xi.mix.jobSpecial or {}
 g_mixins = g_mixins or {}
 
 local job2hr = {
-    [ xi.job.WAR] = xi.jsa.MIGHTY_STRIKES,
-    [ xi.job.MNK] = xi.jsa.HUNDRED_FISTS,
-    [ xi.job.WHM] = xi.jsa.BENEDICTION,
-    [ xi.job.BLM] = xi.jsa.MANAFONT,
-    [ xi.job.RDM] = xi.jsa.CHAINSPELL,
-    [ xi.job.THF] = xi.jsa.PERFECT_DODGE,
-    [ xi.job.PLD] = xi.jsa.INVINCIBLE,
-    [ xi.job.DRK] = xi.jsa.BLOOD_WEAPON,
-    [ xi.job.BST] = xi.jsa.FAMILIAR,
-    [ xi.job.BRD] = xi.jsa.SOUL_VOICE,
-    [ xi.job.SAM] = xi.jsa.MEIKYO_SHISUI,
-    [ xi.job.NIN] = xi.jsa.MIJIN_GAKURE,
-    [ xi.job.DRG] = xi.jsa.CALL_WYVERN,
-    [ xi.job.SMN] = xi.jsa.ASTRAL_FLOW,
-    [ xi.job.BLU] = xi.jsa.AZURE_LORE,
+    [xi.job.WAR] = xi.jsa.MIGHTY_STRIKES,
+    [xi.job.MNK] = xi.jsa.HUNDRED_FISTS,
+    [xi.job.WHM] = xi.jsa.BENEDICTION,
+    [xi.job.BLM] = xi.jsa.MANAFONT,
+    [xi.job.RDM] = xi.jsa.CHAINSPELL,
+    [xi.job.THF] = xi.jsa.PERFECT_DODGE,
+    [xi.job.PLD] = xi.jsa.INVINCIBLE,
+    [xi.job.DRK] = xi.jsa.BLOOD_WEAPON,
+    [xi.job.BST] = xi.jsa.FAMILIAR,
+    [xi.job.BRD] = xi.jsa.SOUL_VOICE,
+    [xi.job.SAM] = xi.jsa.MEIKYO_SHISUI,
+    [xi.job.NIN] = xi.jsa.MIJIN_GAKURE,
+    [xi.job.DRG] = xi.jsa.CALL_WYVERN,
+    [xi.job.SMN] = xi.jsa.ASTRAL_FLOW,
+    [xi.job.BLU] = xi.jsa.AZURE_LORE,
 
 -- following abilities are not yet defined on xi.jsa:
---  [ xi.job.COR] = xi.jsa.WILD_CARD,
---  [ xi.job.PUP] = xi.jsa.OVERDRIVE,
---  [ xi.job.DNC] = xi.jsa.TRANCE,
---  [ xi.job.SCH] = xi.jsa.TABULA_RASA,
---  [ xi.job.GEO] = xi.jsa.BOLSTER,
---  [ xi.job.RUN] = xi.jsa.ELEMENTAL_SFORZO,
+--  [xi.job.COR] = xi.jsa.WILD_CARD,
+--  [xi.job.PUP] = xi.jsa.OVERDRIVE,
+--  [xi.job.DNC] = xi.jsa.TRANCE,
+--  [xi.job.SCH] = xi.jsa.TABULA_RASA,
+--  [xi.job.GEO] = xi.jsa.BOLSTER,
+--  [xi.job.RUN] = xi.jsa.ELEMENTAL_SFORZO,
 }
 
 -- eagle eye shot ability IDs by mob family
@@ -158,22 +158,22 @@ local familyEES =
 
 local effectByAbility =
 {
-    [ xi.jsa.MIGHTY_STRIKES] = xi.effect.MIGHTY_STRIKES,
-    [ xi.jsa.HUNDRED_FISTS]  = xi.effect.HUNDRED_FISTS,
-    [ xi.jsa.MANAFONT]       = xi.effect.MANAFONT,
-    [ xi.jsa.CHAINSPELL]     = xi.effect.CHAINSPELL,
-    [ xi.jsa.PERFECT_DODGE]  = xi.effect.PERFECT_DODGE,
-    [ xi.jsa.INVINCIBLE]     = xi.effect.INVINCIBLE,
-    [ xi.jsa.BLOOD_WEAPON]   = xi.effect.BLOOD_WEAPON,
-    [ xi.jsa.SOUL_VOICE]     = xi.effect.SOUL_VOICE,
-    [ xi.jsa.AZURE_LORE]     = xi.effect.AZURE_LORE,
+    [xi.jsa.MIGHTY_STRIKES] = xi.effect.MIGHTY_STRIKES,
+    [xi.jsa.HUNDRED_FISTS]  = xi.effect.HUNDRED_FISTS,
+    [xi.jsa.MANAFONT]       = xi.effect.MANAFONT,
+    [xi.jsa.CHAINSPELL]     = xi.effect.CHAINSPELL,
+    [xi.jsa.PERFECT_DODGE]  = xi.effect.PERFECT_DODGE,
+    [xi.jsa.INVINCIBLE]     = xi.effect.INVINCIBLE,
+    [xi.jsa.BLOOD_WEAPON]   = xi.effect.BLOOD_WEAPON,
+    [xi.jsa.SOUL_VOICE]     = xi.effect.SOUL_VOICE,
+    [xi.jsa.AZURE_LORE]     = xi.effect.AZURE_LORE,
 
 -- following abilities are not yet defined on xi.jsa, and/or do not have effect luas:
--- [ xi.jsa.OVERDRIVE]        = xi.effect.OVERDRIVE,
--- [ xi.jsa.TRANCE]           = xi.effect.TRANCE,
--- [ xi.jsa.TABULA_RASA]      = xi.effect.TABULA_RASA,
--- [ xi.jsa.BOLSTER]          = xi.effect.BOLSTER,
--- [ xi.jsa.ELEMENTAL_SFORZO] = xi.effect.ELEMENTAL_SFORZO,
+-- [xi.jsa.OVERDRIVE]        = xi.effect.OVERDRIVE,
+-- [xi.jsa.TRANCE]           = xi.effect.TRANCE,
+-- [xi.jsa.TABULA_RASA]      = xi.effect.TABULA_RASA,
+-- [xi.jsa.BOLSTER]          = xi.effect.BOLSTER,
+-- [xi.jsa.ELEMENTAL_SFORZO] = xi.effect.ELEMENTAL_SFORZO,
 }
 
 xi.mix.jobSpecial.config = function(mob, params)

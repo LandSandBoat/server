@@ -22,9 +22,9 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.CURILLA] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.RAHAL] = xi.trust.message_offset.TEAMWORK_2,
-        [ xi.magic.spell.HALVER] = xi.trust.message_offset.TEAMWORK_3,
+        [xi.magic.spell.CURILLA] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.RAHAL] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.HALVER] = xi.trust.message_offset.TEAMWORK_3,
     })
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_HAS_TOP_ENMITY, 0,

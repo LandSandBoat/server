@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.LEUJAOAM_SANCTUM] =
+zones[xi.zone.LEUJAOAM_SANCTUM] =
 {
     text = {
         ITEM_CANNOT_BE_OBTAINED    = 6383, -- You cannot obtain the <item>. Come back after sorting your inventory.
@@ -126,4 +126,4 @@ zones[ xi.zone.LEUJAOAM_SANCTUM] =
     }
 }
 
-return zones[ xi.zone.LEUJAOAM_SANCTUM]
+return zones[xi.zone.LEUJAOAM_SANCTUM]

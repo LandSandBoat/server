@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
+zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
 {
     text =
     {
@@ -30,4 +30,4 @@ zones[ xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
     },
 }
 
-return zones[ xi.zone.OPEN_SEA_ROUTE_TO_MHAURA]
+return zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA]

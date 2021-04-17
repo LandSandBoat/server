@@ -155,7 +155,7 @@ xi.shop =
     ******************************************************************************* --]]
     generalGuildStock =
     {
-        [ xi.skill.COOKING] =
+        [xi.skill.COOKING] =
         {
                  936,      16,      xi.craftRank.AMATEUR,      -- Rock Salt
                 4509,      12,      xi.craftRank.AMATEUR,      -- Distilled Water
@@ -194,7 +194,7 @@ xi.shop =
                 8911,    5300,      xi.craftRank.AMATEUR,      -- Cooking Kit 45
                 8912,    7600,      xi.craftRank.AMATEUR       -- Cooking Kit 50
         },
-        [ xi.skill.CLOTHCRAFT] =
+        [xi.skill.CLOTHCRAFT] =
         {
                 2128,      75,      xi.craftRank.AMATEUR,      -- Spindle
                 2145,      75,      xi.craftRank.AMATEUR,      -- Zephyr Thread
@@ -219,7 +219,7 @@ xi.shop =
                 8856,    7600,      xi.craftRank.AMATEUR,      -- Clothcraft Kit 50
                 9251, 1126125,      xi.craftRank.AMATEUR       -- Khoma Thread
         },
-        [ xi.skill.GOLDSMITHING] =
+        [xi.skill.GOLDSMITHING] =
         {
                 2144,      75,      xi.craftRank.AMATEUR,      -- Workshop Anvil
                 2143,      75,      xi.craftRank.AMATEUR,      -- Mandrel
@@ -265,7 +265,7 @@ xi.shop =
                 8842,    7600,      xi.craftRank.AMATEUR,      -- Goldsmithing Kit 50
                 9249, 1126125,      xi.craftRank.AMATEUR       -- Ruthenium Ore
         },
-        [ xi.skill.WOODWORKING] =
+        [xi.skill.WOODWORKING] =
         {
                 1657,     100,      xi.craftRank.AMATEUR,      -- Bundling Twine
                  688,      25,      xi.craftRank.AMATEUR,      -- Arrowwood Log
@@ -295,7 +295,7 @@ xi.shop =
                 8814,    7600,      xi.craftRank.AMATEUR,      -- Smithing Kit 50
                 9245, 1126125,      xi.craftRank.AMATEUR       -- Cypress Log
         },
-        [ xi.skill.ALCHEMY] =
+        [xi.skill.ALCHEMY] =
         {
                 2131,      75,      xi.craftRank.AMATEUR,      -- Triturator
                  912,      40,      xi.craftRank.AMATEUR,      -- Beehive Chip
@@ -327,7 +327,7 @@ xi.shop =
                 8898,    7600,      xi.craftRank.AMATEUR,      -- Alchemy Kit 50
                 9257, 1126125,      xi.craftRank.AMATEUR       -- Azure Leaf
         },
-        [ xi.skill.BONECRAFT] =
+        [xi.skill.BONECRAFT] =
         {
                 2130,      75,      xi.craftRank.AMATEUR,      -- Shagreen File
                  880,     150,      xi.craftRank.AMATEUR,      -- Bone Chip
@@ -356,7 +356,7 @@ xi.shop =
                 8884,    7600,      xi.craftRank.AMATEUR,      -- Bonecraft Kit 50
                 9255, 1126125,      xi.craftRank.AMATEUR       -- Cyan Coral
         },
-        [ xi.skill.LEATHERCRAFT] =
+        [xi.skill.LEATHERCRAFT] =
         {
                 2129,      75,      xi.craftRank.AMATEUR,      -- Tanning Vat
                  505,     100,      xi.craftRank.AMATEUR,      -- Sheepskin
@@ -384,7 +384,7 @@ xi.shop =
                 8870,    7600,      xi.craftRank.AMATEUR,      -- Leathercraft Kit 50
                 9253, 1126125,      xi.craftRank.AMATEUR       -- Synthetic Faulpie Leather
         },
-        [ xi.skill.SMITHING] =
+        [xi.skill.SMITHING] =
         {
                 2144,      75,      xi.craftRank.AMATEUR,      -- Workshop Anvil
                 2143,      75,      xi.craftRank.AMATEUR,      -- Mandrel

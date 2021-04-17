@@ -51,21 +51,21 @@ g_mixins.maat = function(mob)
     mob:addListener("COMBAT_TICK", "MAAT_CTICK", function(mob)
         local defaultAbility =
         {
-            [ xi.job.WAR] = xi.jsa.MIGHTY_STRIKES_MAAT,
-            [ xi.job.MNK] = xi.jsa.HUNDRED_FISTS_MAAT,
-            [ xi.job.WHM] = xi.jsa.BENEDICTION_MAAT,
-            [ xi.job.BLM] = xi.jsa.MANAFONT_MAAT,
-            [ xi.job.RDM] = xi.jsa.CHAINSPELL_MAAT,
-            [ xi.job.THF] = xi.jsa.PERFECT_DODGE_MAAT,
-            [ xi.job.PLD] = xi.jsa.INVINCIBLE_MAAT,
-            [ xi.job.DRK] = xi.jsa.BLOOD_WEAPON_MAAT,
-            [ xi.job.BST] = xi.jsa.FAMILIAR_MAAT,
-            [ xi.job.BRD] = xi.jsa.SOUL_VOICE_MAAT,
-            [ xi.job.RNG] = xi.jsa.EES_MAAT,
-            [ xi.job.SAM] = xi.jsa.MEIKYO_SHISUI_MAAT,
-            [ xi.job.NIN] = xi.jsa.MIJIN_GAKURE_MAAT,
-            [ xi.job.DRG] = xi.jsa.CALL_WYVERN_MAAT,
-            [ xi.job.SMN] = xi.jsa.ASTRAL_FLOW_MAAT,
+            [xi.job.WAR] = xi.jsa.MIGHTY_STRIKES_MAAT,
+            [xi.job.MNK] = xi.jsa.HUNDRED_FISTS_MAAT,
+            [xi.job.WHM] = xi.jsa.BENEDICTION_MAAT,
+            [xi.job.BLM] = xi.jsa.MANAFONT_MAAT,
+            [xi.job.RDM] = xi.jsa.CHAINSPELL_MAAT,
+            [xi.job.THF] = xi.jsa.PERFECT_DODGE_MAAT,
+            [xi.job.PLD] = xi.jsa.INVINCIBLE_MAAT,
+            [xi.job.DRK] = xi.jsa.BLOOD_WEAPON_MAAT,
+            [xi.job.BST] = xi.jsa.FAMILIAR_MAAT,
+            [xi.job.BRD] = xi.jsa.SOUL_VOICE_MAAT,
+            [xi.job.RNG] = xi.jsa.EES_MAAT,
+            [xi.job.SAM] = xi.jsa.MEIKYO_SHISUI_MAAT,
+            [xi.job.NIN] = xi.jsa.MIJIN_GAKURE_MAAT,
+            [xi.job.DRG] = xi.jsa.CALL_WYVERN_MAAT,
+            [xi.job.SMN] = xi.jsa.ASTRAL_FLOW_MAAT,
         }
 
         if mob:getHPP() < mob:getLocalVar("specialThreshold") then

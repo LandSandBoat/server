@@ -21,7 +21,7 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.ROMAA_MIHGO] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.ROMAA_MIHGO] = xi.trust.message_offset.TEAMWORK_1,
     })
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0,

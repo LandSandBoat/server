@@ -547,9 +547,9 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
     npc:timer(phaseDuration * 1000, function(npc)
         local anims =
         {
-            [ xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
-            [ xi.anim.FISHING_START] = { duration = 10, nextAnim = { xi.anim.FISHING_FISH } },
-            [ xi.anim.FISHING_FISH] = { duration = 10,
+            [xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
+            [xi.anim.FISHING_START] = { duration = 10, nextAnim = { xi.anim.FISHING_FISH } },
+            [xi.anim.FISHING_FISH] = { duration = 10,
                                             nextAnim =
                                             {
                                                  xi.anim.FISHING_CAUGHT,
@@ -557,10 +557,10 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
                                                  xi.anim.FISHING_LINE_BREAK,
                                             }
                                        },
-            [ xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
-            [ xi.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
-            [ xi.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.anim.FISHING_NPC } },
-            [ xi.anim.FISHING_STOP] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
+            [xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
+            [xi.anim.FISHING_LINE_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
+            [xi.anim.FISHING_CAUGHT] = { duration = 5, nextAnim = { xi.anim.FISHING_NPC } },
+            [xi.anim.FISHING_STOP] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
         }
 
         local anim = anims[npc:getAnimation()]
@@ -594,8 +594,8 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     npc:timer(phaseDuration * 1000, function(npc)
         local anims =
         {
-            [ xi.magic.spellGroup.BLACK] = { start = "cabk", duration = 2000, stop = "shbk" },
-            [ xi.magic.spellGroup.WHITE] = { start = "cawh", duration = 1800, stop = "shwh" },
+            [xi.magic.spellGroup.BLACK] = { start = "cabk", duration = 2000, stop = "shbk" },
+            [xi.magic.spellGroup.WHITE] = { start = "cawh", duration = 1800, stop = "shwh" },
         }
         npc:entityAnimationPacket(anims[magicType].start)
         npc:timer(anims[magicType].duration, function(npc)

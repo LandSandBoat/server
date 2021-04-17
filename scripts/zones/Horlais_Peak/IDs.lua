@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.HORLAIS_PEAK] =
+zones[xi.zone.HORLAIS_PEAK] =
 {
     text =
     {
@@ -50,4 +50,4 @@ zones[ xi.zone.HORLAIS_PEAK] =
     },
 }
 
-return zones[ xi.zone.HORLAIS_PEAK]
+return zones[xi.zone.HORLAIS_PEAK]

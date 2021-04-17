@@ -24,9 +24,9 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
     if bfid == 1290 or bfid == 1291 or bfid == 1292 or bfid == 1293 or
         bfid == 1294 or bfid == 1296
     then
-        ID = zones[ xi.zone.APOLLYON]
+        ID = zones[xi.zone.APOLLYON]
     else
-        ID = zones[ xi.zone.TEMENOS]
+        ID = zones[xi.zone.TEMENOS]
     end
 
     switch (bfid): caseof
@@ -134,9 +134,9 @@ function xi.limbus.handleDoors(battlefield, open, door)
     if open then animation = xi.animation.OPEN_DOOR end
     local ID
     if bfid == 1290 or bfid == 1291 or bfid == 1292 or bfid == 1293 then
-        ID = zones[ xi.zone.APOLLYON]
+        ID = zones[xi.zone.APOLLYON]
     else
-        ID = zones[ xi.zone.TEMENOS]
+        ID = zones[xi.zone.TEMENOS]
     end
 
     if door then
@@ -363,7 +363,7 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
 end
 
 function xi.limbus.elementalsDead()
-    local ID = zones[ xi.zone.APOLLYON]
+    local ID = zones[xi.zone.APOLLYON]
     local day = VanadielDayOfTheWeek()
     local daykill = false
     if day == 0 then  --  fire
