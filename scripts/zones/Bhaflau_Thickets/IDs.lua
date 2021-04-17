@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.BHAFLAU_THICKETS] =
+zones[xi.zone.BHAFLAU_THICKETS] =
 {
     text =
     {
@@ -69,4 +69,4 @@ zones[ xi.zone.BHAFLAU_THICKETS] =
     },
 }
 
-return zones[ xi.zone.BHAFLAU_THICKETS]
+return zones[xi.zone.BHAFLAU_THICKETS]

@@ -60,25 +60,25 @@ end
 
 local outposts =
 {
-    [ xi.region.RONFAURE]        = {zone = 100, ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100},
-    [ xi.region.ZULKHEIM]        = {zone = 103, ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100},
-    [ xi.region.NORVALLEN]       = {zone = 104, ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150},
-    [ xi.region.GUSTABERG]       = {zone = 106, ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100},
-    [ xi.region.DERFLAND]        = {zone = 109, ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
-    [ xi.region.SARUTABARUTA]    = {zone = 115, ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100},
-    [ xi.region.KOLSHUSHU]       = {zone = 118, ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100},
-    [ xi.region.ARAGONEU]        = {zone = 119, ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
-    [ xi.region.FAUREGANDI]      = {zone = 111, ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350},
-    [ xi.region.VALDEAUNIA]      = {zone = 112, ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400},
-    [ xi.region.QUFIMISLAND]     = {zone = 126, ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150},
-    [ xi.region.LITELOR]         = {zone = 121, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250},
-    [ xi.region.KUZOTZ]          = {zone = 114, ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300},
-    [ xi.region.VOLLBOW]         = {zone = 113, ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500},
-    [ xi.region.ELSHIMOLOWLANDS] = {zone = 123, ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250},
-    [ xi.region.ELSHIMOUPLANDS]  = {zone = 124, ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350},
-    [ xi.region.TULIA]           = {zone = 130,                                             cp = 0,  lvl = 70, fee = 500},
-    [ xi.region.MOVALPOLOS]      = {zone =  11,                                             cp = 40, lvl = 25, fee = 250},
-    [ xi.region.TAVNAZIANARCH]   = {zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300},
+    [xi.region.RONFAURE]        = {zone = 100, ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100},
+    [xi.region.ZULKHEIM]        = {zone = 103, ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100},
+    [xi.region.NORVALLEN]       = {zone = 104, ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150},
+    [xi.region.GUSTABERG]       = {zone = 106, ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100},
+    [xi.region.DERFLAND]        = {zone = 109, ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
+    [xi.region.SARUTABARUTA]    = {zone = 115, ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100},
+    [xi.region.KOLSHUSHU]       = {zone = 118, ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100},
+    [xi.region.ARAGONEU]        = {zone = 119, ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
+    [xi.region.FAUREGANDI]      = {zone = 111, ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350},
+    [xi.region.VALDEAUNIA]      = {zone = 112, ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400},
+    [xi.region.QUFIMISLAND]     = {zone = 126, ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150},
+    [xi.region.LITELOR]         = {zone = 121, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250},
+    [xi.region.KUZOTZ]          = {zone = 114, ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300},
+    [xi.region.VOLLBOW]         = {zone = 113, ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500},
+    [xi.region.ELSHIMOLOWLANDS] = {zone = 123, ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250},
+    [xi.region.ELSHIMOUPLANDS]  = {zone = 124, ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350},
+    [xi.region.TULIA]           = {zone = 130,                                             cp = 0,  lvl = 70, fee = 500},
+    [xi.region.MOVALPOLOS]      = {zone =  11,                                             cp = 40, lvl = 25, fee = 250},
+    [xi.region.TAVNAZIANARCH]   = {zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300},
 }
 
 local function hasOutpost(player, region)
@@ -213,7 +213,7 @@ end
 
 local overseerOffsets =
 {
-    [ xi.region.RONFAURE] =
+    [xi.region.RONFAURE] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Doladepaiton, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Ballie, R.K.
@@ -231,7 +231,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- Flag
         {offset = 10, nation = xi.nation.OTHER},    -- Harvetour
     },
-    [ xi.region.ZULKHEIM] =
+    [xi.region.ZULKHEIM] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Quanteilleron, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Prunilla, R.K.
@@ -249,7 +249,7 @@ local overseerOffsets =
         {offset = 15, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Medicine Axe
     },
-    [ xi.region.NORVALLEN] =
+    [xi.region.NORVALLEN] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Chaplion, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Taumiale, R.K.
@@ -267,7 +267,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Mionie
     },
-    [ xi.region.GUSTABERG] =
+    [xi.region.GUSTABERG] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Ennigreaud, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Quellebie, R.K.
@@ -285,7 +285,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Kuleo
     },
-    [ xi.region.DERFLAND] =
+    [xi.region.DERFLAND] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Mesachedeau, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Ioupie, R.K.
@@ -303,7 +303,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Tahmasp
     },
-    [ xi.region.SARUTABARUTA] =
+    [xi.region.SARUTABARUTA] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Naguipeillont, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Banege, R.K.
@@ -321,7 +321,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Mahien-Uhien
     },
-    [ xi.region.KOLSHUSHU] =
+    [xi.region.KOLSHUSHU] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Bonbavour, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Craigine, R.K.
@@ -339,7 +339,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Lobho Ukipturi
     },
-    [ xi.region.ARAGONEU] =
+    [xi.region.ARAGONEU] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Chegourt, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Buliame, R.K.
@@ -357,7 +357,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Mushosho
     },
-    [ xi.region.FAUREGANDI] =
+    [xi.region.FAUREGANDI] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Parledaire, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Leaufetie, R.K.
@@ -375,7 +375,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Gueriette
     },
-    [ xi.region.VALDEAUNIA] =
+    [xi.region.VALDEAUNIA] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Jeantelas, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Pilcha, R.K.
@@ -393,7 +393,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Pelogrant
     },
-    [ xi.region.QUFIMISLAND] =
+    [xi.region.QUFIMISLAND] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Pitoire, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Matica, R.K.
@@ -411,7 +411,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Jiwon
     },
-    [ xi.region.LITELOR] =
+    [xi.region.LITELOR] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Credaurion, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Limion, R.K.
@@ -429,7 +429,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Kasim
     },
-    [ xi.region.KUZOTZ] =
+    [xi.region.KUZOTZ] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Eaulevisat, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Laimeve, R.K.
@@ -447,7 +447,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Sowande
     },
-    [ xi.region.VOLLBOW] =
+    [xi.region.VOLLBOW] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Salimardi, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Paise, R.K.
@@ -465,7 +465,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Bright Moon
     },
-    [ xi.region.ELSHIMOLOWLANDS] =
+    [xi.region.ELSHIMOLOWLANDS] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Zorchorevi, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Mupia, R.K.
@@ -483,7 +483,7 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Robino-Mobino
     },
-    [ xi.region.ELSHIMOUPLANDS] =
+    [xi.region.ELSHIMOUPLANDS] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Ilieumort, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Emila, R.K.
@@ -501,21 +501,21 @@ local overseerOffsets =
         {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
         {offset = 10, nation = xi.nation.OTHER},    -- Mugha Dovajaiho
     },
-    [ xi.region.TULIA] =
+    [xi.region.TULIA] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- flag
         {offset =  1, nation = xi.nation.BASTOK},   -- flag
         {offset =  2, nation = xi.nation.WINDURST}, -- flag
         {offset =  3, nation = xi.nation.BEASTMEN}, -- flag
     },
-    [ xi.region.MOVALPOLOS] =
+    [xi.region.MOVALPOLOS] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- flag
         {offset =  1, nation = xi.nation.BASTOK},   -- flag
         {offset =  2, nation = xi.nation.WINDURST}, -- flag
         {offset =  3, nation = xi.nation.BEASTMEN}, -- flag
     },
-    [ xi.region.TAVNAZIANARCH] =
+    [xi.region.TAVNAZIANARCH] =
     {
         {offset =  0, nation = xi.nation.SANDORIA}, -- Jemmoquel, R.K.
         {offset =  7, nation = xi.nation.SANDORIA}, -- Chilaumme, R.K.

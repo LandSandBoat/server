@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.SPIRE_OF_DEM] =
+zones[xi.zone.SPIRE_OF_DEM] =
 {
     text =
     {
@@ -28,4 +28,4 @@ zones[ xi.zone.SPIRE_OF_DEM] =
     },
 }
 
-return zones[ xi.zone.SPIRE_OF_DEM]
+return zones[xi.zone.SPIRE_OF_DEM]

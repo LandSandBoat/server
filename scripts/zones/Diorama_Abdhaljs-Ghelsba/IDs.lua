@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.DIORAMA_ABDHALJS_GHELSBA] =
+zones[xi.zone.DIORAMA_ABDHALJS_GHELSBA] =
 {
     text =
     {
@@ -26,4 +26,4 @@ zones[ xi.zone.DIORAMA_ABDHALJS_GHELSBA] =
     },
 }
 
-return zones[ xi.zone.DIORAMA_ABDHALJS_GHELSBA]
+return zones[xi.zone.DIORAMA_ABDHALJS_GHELSBA]

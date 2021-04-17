@@ -22,9 +22,9 @@ end
 
 spell_object.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, message_page_offset, {
-        [ xi.magic.spell.NAJI] = xi.trust.message_offset.TEAMWORK_1,
-        [ xi.magic.spell.CID] = xi.trust.message_offset.TEAMWORK_2,
-        [ xi.magic.spell.KLARA] = xi.trust.message_offset.TEAMWORK_3,
+        [xi.magic.spell.NAJI] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.CID] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.KLARA] = xi.trust.message_offset.TEAMWORK_3,
     })
 
     mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50,

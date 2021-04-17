@@ -6,7 +6,7 @@ require("scripts/globals/zone")
 
 zones = zones or {}
 
-zones[ xi.zone.LABYRINTH_OF_ONZOZO] =
+zones[xi.zone.LABYRINTH_OF_ONZOZO] =
 {
     text =
     {
@@ -94,4 +94,4 @@ zones[ xi.zone.LABYRINTH_OF_ONZOZO] =
     },
 }
 
-return zones[ xi.zone.LABYRINTH_OF_ONZOZO]
+return zones[xi.zone.LABYRINTH_OF_ONZOZO]

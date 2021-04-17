@@ -34,7 +34,7 @@ xi.manaclipper.location =
 
 local manaclipperSchedule =
 {
-    [ xi.manaclipper.location.SUNSET_DOCKS] =
+    [xi.manaclipper.location.SUNSET_DOCKS] =
     {
         {time =   10, act = act.ARRIVE, dest = dest.DHALMEL_ROCK},      -- 00:10
         {time =   50, act = act.DEPART, dest = dest.DHALMEL_ROCK},      -- 00:50
@@ -46,7 +46,7 @@ local manaclipperSchedule =
         {time = 1050, act = act.DEPART, dest = dest.PURGONORGO_ISLE},   -- 17:30
         {time = 1450, act = act.ARRIVE, dest = dest.DHALMEL_ROCK},      -- 24:10
     },
-    [ xi.manaclipper.location.PURGONORGO_ISLE] =
+    [xi.manaclipper.location.PURGONORGO_ISLE] =
     {
         {time =  510, act = act.ARRIVE, dest = dest.SUNSET_DOCKS}, -- 08:30
         {time =  555, act = act.DEPART, dest = dest.SUNSET_DOCKS}, -- 09:15
@@ -54,7 +54,7 @@ local manaclipperSchedule =
         {time = 1275, act = act.DEPART, dest = dest.SUNSET_DOCKS}, -- 21:15
         {time = 1950, act = act.ARRIVE, dest = dest.SUNSET_DOCKS}, -- 32:30
     },
-    [ xi.manaclipper.location.MANACLIPPER] =
+    [xi.manaclipper.location.MANACLIPPER] =
     {
         {time =   10, act = act.ARRIVE, route = dest.SUNSET_DOCKS},      -- 00:10
         {time =  290, act = act.ARRIVE, route = dest.DHALMEL_ROCK},      -- 04:50
@@ -104,7 +104,7 @@ xi.manaclipper.onZoneIn = function(player)
 
     -- zoning onto manaclipper. set [manaclipper]arrivalEventId based on schedule.
     if zoneId == xi.zone.MANACLIPPER then
-        local schedule = manaclipperSchedule[ xi.manaclipper.location.MANACLIPPER]
+        local schedule = manaclipperSchedule[xi.manaclipper.location.MANACLIPPER]
         local currentTime = VanadielHour() * 60 + VanadielMinute()
         local nextEvent = nil
 

@@ -25,20 +25,20 @@ xi.mission.log_id =
 
 xi.mission.area =
 {
-    [ xi.mission.log_id.SANDORIA]    = 'sandoria',
-    [ xi.mission.log_id.BASTOK]      = 'bastok',
-    [ xi.mission.log_id.WINDURST]    = 'windurst',
-    [ xi.mission.log_id.ZILART]      = 'zilart',
-    [ xi.mission.log_id.TOAU]        = 'toau',
-    [ xi.mission.log_id.WOTG]        = 'wotg',
-    [ xi.mission.log_id.COP]         = 'cop',
-    [ xi.mission.log_id.ASSAULT]     = 'assault',
-    [ xi.mission.log_id.CAMPAIGN]    = 'campaign',
-    [ xi.mission.log_id.ACP]         = 'acp',
-    [ xi.mission.log_id.AMK]         = 'amk',
-    [ xi.mission.log_id.ASA]         = 'asa',
-    [ xi.mission.log_id.SOA]         = 'soa',
-    [ xi.mission.log_id.ROV]         = 'rov',
+    [xi.mission.log_id.SANDORIA]    = 'sandoria',
+    [xi.mission.log_id.BASTOK]      = 'bastok',
+    [xi.mission.log_id.WINDURST]    = 'windurst',
+    [xi.mission.log_id.ZILART]      = 'zilart',
+    [xi.mission.log_id.TOAU]        = 'toau',
+    [xi.mission.log_id.WOTG]        = 'wotg',
+    [xi.mission.log_id.COP]         = 'cop',
+    [xi.mission.log_id.ASSAULT]     = 'assault',
+    [xi.mission.log_id.CAMPAIGN]    = 'campaign',
+    [xi.mission.log_id.ACP]         = 'acp',
+    [xi.mission.log_id.AMK]         = 'amk',
+    [xi.mission.log_id.ASA]         = 'asa',
+    [xi.mission.log_id.SOA]         = 'soa',
+    [xi.mission.log_id.ROV]         = 'rov',
 }
 
 xi.mission.logEx =
@@ -67,7 +67,7 @@ xi.mission.id =
     -----------------------------------
     --  San d'Oria (0)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.SANDORIA]] =
+    [xi.mission.area[xi.mission.log_id.SANDORIA]] =
     {
         SMASH_THE_ORCISH_SCOUTS = 0,  -- ±
         BAT_HUNT                = 1,  -- ±
@@ -99,7 +99,7 @@ xi.mission.id =
     -----------------------------------
     --  Bastok (1)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.BASTOK]] =
+    [xi.mission.area[xi.mission.log_id.BASTOK]] =
     {
         THE_ZERUHN_REPORT         = 0,  -- ±
         GEOLOGICAL_SURVEY         = 1,  -- ±
@@ -131,7 +131,7 @@ xi.mission.id =
     -----------------------------------
     --  Windurst (2)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.WINDURST]] =
+    [xi.mission.area[xi.mission.log_id.WINDURST]] =
     {
         THE_HORUTOTO_RUINS_EXPERIMENT = 0,  -- ±
         THE_HEART_OF_THE_MATTER       = 1,  -- ±
@@ -163,7 +163,7 @@ xi.mission.id =
     -----------------------------------
     --  Zilart Missions (3)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.ZILART]] =
+    [xi.mission.area[xi.mission.log_id.ZILART]] =
     {
         THE_NEW_FRONTIER              = 0,  -- ±
         WELCOME_TNORG                 = 4,  -- ±
@@ -189,7 +189,7 @@ xi.mission.id =
     -----------------------------------
     --  Promathia Missions (6)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.COP]] =
+    [xi.mission.area[xi.mission.log_id.COP]] =
     {
         ANCIENT_FLAMES_BECKON            = 101,  -- Category
         THE_RITES_OF_LIFE                = 110,  -- ±
@@ -260,7 +260,7 @@ xi.mission.id =
     -----------------------------------
     --  Aht Urhgan Missions (4)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.TOAU]] =
+    [xi.mission.area[xi.mission.log_id.TOAU]] =
     {
         LAND_OF_SACRED_SERPENTS = 0,
         IMMORTAL_SENTRIES       = 1,
@@ -315,7 +315,7 @@ xi.mission.id =
     -----------------------------------
     --  Wings of the Goddess (5)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.WOTG]] =
+    [xi.mission.area[xi.mission.log_id.WOTG]] =
     {
         CAVERNOUS_MAWS             = 0,
         BACK_TO_THE_BEGINNING      = 1,
@@ -376,7 +376,7 @@ xi.mission.id =
     -----------------------------------
     --  A Crystalline Prophecy (9)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.ACP]] =
+    [xi.mission.area[xi.mission.log_id.ACP]] =
     {
         A_CRYSTALLINE_PROPHECY        = 0, -- ±
         THE_ECHO_AWAKENS              = 1, -- ±
@@ -395,7 +395,7 @@ xi.mission.id =
     -----------------------------------
     --  A Moogle Kupo d'Etat (10)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.AMK]] =
+    [xi.mission.area[xi.mission.log_id.AMK]] =
     {
         A_MOOGLE_KUPO_DETAT                 = 0,  -- ±
         DRENCHED_IT_BEGAN_WITH_A_RAINDROP   = 1,  -- ±
@@ -417,7 +417,7 @@ xi.mission.id =
     -----------------------------------
     --  A Shantotto Ascension (11)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.ASA]] =
+    [xi.mission.area[xi.mission.log_id.ASA]] =
     {
         A_SHANTOTTO_ASCENSION       = 0, -- ±
         BURGEONING_DREAD            = 1, -- ±
@@ -439,7 +439,7 @@ xi.mission.id =
     -----------------------------------
     --  Seekers of Adoulin (12)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.SOA]] =
+    [xi.mission.area[xi.mission.log_id.SOA]] =
     {
         -- THE_SACRED_CITY_OF_ADOULIN   =  -- Category
         RUMORS_FROM_THE_WEST            = 0,   -- ±
@@ -557,7 +557,7 @@ xi.mission.id =
     -----------------------------------
     --  Rhapsodies of Vana Diel (13)
     -----------------------------------
-    [ xi.mission.area[ xi.mission.log_id.ROV]] =
+    [xi.mission.area[xi.mission.log_id.ROV]] =
     {
         RHAPSODIES_OF_VANADIEL          = 0,   -- ±
         -- CREATION_AND_REBIRTH         =  -- Category
@@ -657,8 +657,8 @@ xi.mission.id =
         THE_ORBS_RADIANCE               = 224,
         A_RHAPSODY_FOR_THE_AGES         = 226,
     },
-    [ xi.mission.area[ xi.mission.log_id.ASSAULT]] = {},
-    [ xi.mission.area[ xi.mission.log_id.CAMPAIGN]] = {},
+    [xi.mission.area[xi.mission.log_id.ASSAULT]] = {},
+    [xi.mission.area[xi.mission.log_id.CAMPAIGN]] = {},
 }
 
 -- Assault and Campaign IDs deliberately left out of mission table

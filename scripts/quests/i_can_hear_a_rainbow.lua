@@ -17,7 +17,7 @@ quests.i_can_hear_a_rainbow = quests.i_can_hear_a_rainbow or {}
 
 local rubyData =
 {
-    [ xi.weather.HOT_SPELL] =
+    [xi.weather.HOT_SPELL] =
     {
         bit = 0,
         zones = set{
@@ -31,7 +31,7 @@ local rubyData =
             xi.zone.WESTERN_ALTEPA_DESERT,
         },
     },
-    [ xi.weather.NONE] =
+    [xi.weather.NONE] =
     {
         bit = 1,
         zones = set{
@@ -46,7 +46,7 @@ local rubyData =
             xi.zone.YHOATOR_JUNGLE,
         },
     },
-    [ xi.weather.DUST_STORM] =
+    [xi.weather.DUST_STORM] =
     {
         bit = 2,
         zones = set{
@@ -60,7 +60,7 @@ local rubyData =
             xi.zone.WESTERN_ALTEPA_DESERT,
         },
     },
-    [ xi.weather.WIND] =
+    [xi.weather.WIND] =
     {
         bit = 3,
         zones = set{
@@ -70,7 +70,7 @@ local rubyData =
             xi.zone.BUBURIMU_PENINSULA,
         },
     },
-    [ xi.weather.RAIN] =
+    [xi.weather.RAIN] =
     {
         bit = 4,
         zones = set{
@@ -84,7 +84,7 @@ local rubyData =
             xi.zone.YHOATOR_JUNGLE,
         },
     },
-    [ xi.weather.SNOW] =
+    [xi.weather.SNOW] =
     {
         bit = 5,
         zones = set{
@@ -93,7 +93,7 @@ local rubyData =
             xi.zone.XARCABARD,
         },
     },
-    [ xi.weather.THUNDER] =
+    [xi.weather.THUNDER] =
     {
         bit = 6,
         zones = set{
