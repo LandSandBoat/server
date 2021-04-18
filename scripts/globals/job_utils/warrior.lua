@@ -11,52 +11,18 @@ xi.job_utils.warrior = xi.job_utils.warrior or {}
 -----------------------------------
 -- Ability Check Functions
 -----------------------------------
-xi.job_utils.warrior.checkAggressor = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkBerserk = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkBloodRage = function(player, target, ability)
-    return 0, 0
-end
-
 xi.job_utils.warrior.checkBrazenRush = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkDefender = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
 xi.job_utils.warrior.checkMightyStrikes = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkProvoke = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkRestraint = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkRetaliation = function(player, target, ability)
+    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
     return 0, 0
 end
 
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
-    --placeholder
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkWarcry = function(player, target, ability)
-    return 0, 0
-end
-
-xi.job_utils.warrior.checkWarriorsCharge = function(player, target, ability)
+    --Placeholder code. Needs to check for direction and equiped ammo.
     return 0, 0
 end
 
@@ -77,7 +43,7 @@ xi.job_utils.warrior.useBloodRage = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBrazenRush = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BRAZEN_STRENGTH, 1, 368, 30)
+    player:addStatusEffect(xi.effect.BRAZEN_RUSH, 100, 3, 30)
 end
 
 xi.job_utils.warrior.useDefender = function(player, target, ability)
@@ -86,10 +52,6 @@ end
 
 xi.job_utils.warrior.useMightyStrikes = function(player, target, ability)
     player:addStatusEffect(xi.effect.MIGHTY_STRIKES, 1, 0, 45)
-end
-
-xi.job_utils.warrior.useProvoke = function(user, target, ability)
-    --Leave blank
 end
 
 xi.job_utils.warrior.useRestraint = function(player, target, ability)

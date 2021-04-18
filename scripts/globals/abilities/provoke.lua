@@ -7,11 +7,11 @@ require("scripts/globals/job_utils/warrior")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return xi.job_utils.warrior.checkProvoke(player, target, ability)
+    return 0, 0
 end
 
 ability_object.onUseAbility = function(user, target, ability)
-    xi.job_utils.warrior.useProvoke(user, target, ability)
+    --Leave blank.
 end
 
 return ability_object
