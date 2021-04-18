@@ -22,7 +22,7 @@ CREATE TABLE `fishing_rod` (
   `fishid` smallint(5) unsigned NOT NULL,
   `flag` int(10) unsigned NOT NULL,
   PRIMARY KEY (`rodid`,`fishid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=38;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=38;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -11,7 +11,7 @@ CREATE TABLE `augments` (
   `isPet` tinyint(1) NOT NULL DEFAULT '0',
   `petType` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`augmentId`,`multiplier`,`modId`,`isPet`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `augments`

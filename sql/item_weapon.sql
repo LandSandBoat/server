@@ -30,7 +30,7 @@ CREATE TABLE `item_weapon` (
   `dmg` int(10) unsigned NOT NULL DEFAULT '0',
   `unlock_points` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=54 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=54 PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

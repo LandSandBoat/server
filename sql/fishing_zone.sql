@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `fishing_zone` (
   `name` text NOT NULL,
   `fishid` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`zoneid`,`fishid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=27;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=27;
 
 --
 -- Contenu de la table `fishing_zone`

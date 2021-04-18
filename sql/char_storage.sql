@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS `char_storage` (
   `wardrobe4` tinyint(2) unsigned NOT NULL DEFAULT '80',
 
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

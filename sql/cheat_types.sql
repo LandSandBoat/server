@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `cheat_types` (
   `argument` int(10) unsigned NOT NULL,
   `action_bitmask` int(10) unsigned NOT NULL,
   `warning_message` varchar(128) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cheat_types`
