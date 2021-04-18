@@ -1,4 +1,4 @@
-Topaz Next Docker
+Topaz Docker
 ==========
 
 This guide assumes you have Docker (https://www.docker.com/) installed on your machine.

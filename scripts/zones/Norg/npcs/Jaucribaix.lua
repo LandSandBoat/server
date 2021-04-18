@@ -117,7 +117,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 27) then
         player:confirmTrade()
         player:setCharVar("ForgeYourDestiny_timer", os.time() + 10368) -- 3 game days
-    elseif (csid == 29 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY, {item=17809, fame=30, fameArea=NORG, title= xi.title.BUSHIDO_BLADE, var={"ForgeYourDestiny_timer", "ForgeYourDestiny_Event"}})) then -- Mumeito
+    elseif (csid == 29 and npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY, {item=17809, fame=30, fameArea=NORG, title=xi.title.BUSHIDO_BLADE, var={"ForgeYourDestiny_timer", "ForgeYourDestiny_Event"}})) then -- Mumeito
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_SAMURAI, 17809)
         player:unlockJob(xi.job.SAM)
 
@@ -158,7 +158,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("aThiefinNorgCS", 9)
         player:needToZone(true)
     elseif (csid == 164) then
-        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, {item=13868, title= xi.title.PARAGON_OF_SAMURAI_EXCELLENCE, fame=60, fameArea=NORG, var={"aThiefinNorgCS"}})
+        npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, {item=13868, title=xi.title.PARAGON_OF_SAMURAI_EXCELLENCE, fame=60, fameArea=NORG, var={"aThiefinNorgCS"}})
 
     else
         xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.TACHI_KASHA_LEARNED)

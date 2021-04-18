@@ -4,6 +4,7 @@
 -- Frost Effect: Enhanced DoT and AGI-
 -----------------------------------
 require("scripts/globals/ability")
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 -----------------------------------
@@ -26,6 +27,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local params = {}
     params.includemab = true
     local dmg = (2 * (player:getRangedDmg() + player:getAmmoDmg()) + player:getMod(xi.mod.QUICK_DRAW_DMG)) * (1 + player:getMod(xi.mod.QUICK_DRAW_DMG_PERCENT) / 100)
+    dmg = dmg + 2 * player:getJobPointLevel(xi.jp.QUICK_DRAW_EFFECT)
     dmg  = addBonusesAbility(player, xi.magic.ele.ICE, target, dmg, params)
     local bonusAcc = player:getStat(xi.mod.AGI) / 2 + player:getMerit(xi.merit.QUICK_DRAW_ACCURACY) + player:getMod(xi.mod.QUICK_DRAW_MACC)
     dmg = dmg * applyResistanceAbility(player, target, xi.magic.ele.ICE, xi.skill.NONE, bonusAcc)

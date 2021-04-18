@@ -41,6 +41,16 @@ zones[xi.zone.NORTH_GUSTABERG] =
         NO_COMBINATION                = 8091,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10412, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12485, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 11531, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11532, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11533, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 11534, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 11535, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 11536, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 11537, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 11538, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 11539, -- Obtained key item: ≺abyssite>!
     },
     mob =
     {
@@ -73,6 +83,41 @@ zones[xi.zone.NORTH_GUSTABERG] =
             [17211711] = 17211702, -- 289.709 -0.297 750.252
         },
         GAMBILOX_WANDERLING = 17211848,
+        VOIDWALKER  =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17211881, -- Globster
+                17211880, -- Globster
+                17211879, -- Globster
+                17211878, -- Globster
+                17211877,  -- Ground Guzzler
+                17211876,  -- Ground Guzzler
+                17211875,  -- Ground Guzzler
+                17211874,  -- Ground Guzzler
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17211873, -- Lamprey Lord
+                17211872,  -- Shoggoth
+            },
+            [xi.keyItem.ORANGE_ABYSSITE] = {
+                17211865  -- Blobdingnag
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17211864  -- Yilbegan
+            }
+        }
+    },
+    pet = 
+    {
+        [17211865] = -- Blobdingnag
+        {
+            17211871,-- Septic Boils
+            17211870,-- Septic Boils
+            17211869,-- Septic Boils
+            17211868,-- Septic Boils
+            17211867,-- Septic Boils
+            17211866,-- Septic Boils
+        },
     },
     npc =
     {

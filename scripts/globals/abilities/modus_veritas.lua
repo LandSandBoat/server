@@ -5,6 +5,7 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -30,7 +31,7 @@ ability_object.onUseAbility = function(player, target, ability)
             local mvMerits = player:getMerit(xi.merit.MODUS_VERITAS_DURATION)
             local durationMultiplier = 0.5 + (0.05 * mvMerits)
             mvPower = mvPower + 1
-            local helixPower = helix:getPower() * 2
+            local helixPower = helix:getPower() * 2 + (3 * player:getJobPointLevel(xi.jp.MODUS_VERITAS_EFFECT))
             local duration = helix:getDuration()
             local remaining = math.floor(helix:getTimeRemaining() / 1000) -- from milliseconds
             -- print(string.format("helix original dot stats: %i, duration: %i, remaining: %i", helixPower / 2, duration, remaining))

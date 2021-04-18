@@ -53,7 +53,7 @@ struct jobs_t
 struct event_t
 {
     int32 EventID;
-    int32 Option;  // dummy return result
+    int32 Option; // dummy return result
 
     CBaseEntity* Target; // event initiator
 
@@ -80,6 +80,12 @@ struct profile_t
     location_t home_point; // точка возрождения персонажа
     uint8      campaign_allegiance;
     uint8      unity_leader;
+};
+
+struct capacityChain_t
+{
+    uint16 chainNumber;
+    uint32 chainTime;
 };
 
 struct expChain_t
@@ -156,6 +162,7 @@ enum CHAR_SUBSTATE
 class CBasicPacket;
 class CLinkshell;
 class CUnityChat;
+class CJobPoints;
 class CMeritPoints;
 class CCharRecastContainer;
 class CLatentEffectContainer;
@@ -176,9 +183,9 @@ typedef std::vector<EntityID_t>        BazaarList_t;
 class CCharEntity : public CBattleEntity
 {
 public:
-    jobs_t     jobs;    // доступрые профессии персонажа
-    keyitems_t keys;    // таблица ключевых предметов
-    event_t    m_event; // структура для запуска событый
+    jobs_t     jobs;       // доступрые профессии персонажа
+    keyitems_t keys;       // таблица ключевых предметов
+    event_t    m_event;    // структура для запуска событый
     skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
 
     nameflags_t nameflags;           // флаги перед именем персонажа
@@ -186,11 +193,12 @@ public:
     uint32      lastOnline{ 0 };     // UTC Unix Timestamp of the last time char zoned or logged out
     bool        isNewPlayer() const; // Checks if new player bit is unset.
 
-    profile_t  profile;  // профиль персонажа (все, что связывает города и персонажа)
-    expChain_t expChain; // Exp Chains
-    search_t   search;   // данные и комментарий, отображаемые в окне поиска
-    bazaar_t   bazaar;   // все данные, необходимые для таботы bazaar
-    uint16     m_EquipFlag; // текущие события, обрабатываемые экипировкой (потом упакую в структуру, вместе с equip[])
+    profile_t  profile;             // профиль персонажа (все, что связывает города и персонажа)
+    capacityChain_t capacityChain;  // Capacity Point Chains
+    expChain_t expChain;            // Exp Chains
+    search_t   search;              // данные и комментарий, отображаемые в окне поиска
+    bazaar_t   bazaar;              // все данные, необходимые для таботы bazaar
+    uint16     m_EquipFlag;         // текущие события, обрабатываемые экипировкой (потом упакую в структуру, вместе с equip[])
     uint16     m_EquipBlock;        // заблокированные ячейки экипировки
     uint16     m_StatsDebilitation; // Debilitation arrows
     uint8      equip[18];           //      SlotID where equipment is
@@ -274,16 +282,17 @@ public:
     void          erasePackets(uint8 num); // erase num elements from front of packet list
     virtual void  HandleErrorMessage(std::unique_ptr<CBasicPacket>&) override;
 
-    CLinkshell*    PLinkshell1;   // linkshell, в которой общается персонаж
-    CLinkshell*    PLinkshell2;   // linkshell 2
+    CLinkshell*    PLinkshell1; // linkshell, в которой общается персонаж
+    CLinkshell*    PLinkshell2; // linkshell 2
     CUnityChat*    PUnityChat;
     CTreasurePool* PTreasurePool; // сокровища, добытые с монстров
     CMeritPoints*  PMeritPoints;  //
+    CJobPoints*    PJobPoints;
     bool           MeritMode;     // If true then player is meriting
 
     CLatentEffectContainer* PLatentEffectContainer;
 
-    CItemContainer* PGuildShop; // текущий магазин гильдии, в котором персонаж производит закупки
+    CItemContainer* PGuildShop;                   // текущий магазин гильдии, в котором персонаж производит закупки
     CItemContainer* getStorage(uint8 LocationID); // получение указателя на соответствующее хранилище
 
     CTradeContainer* TradeContainer; // Container used specifically for trading.
@@ -306,7 +315,7 @@ public:
     EntityID_t   BazaarID;        // Pointer to the bazaar we are browsing.
     BazaarList_t BazaarCustomers; // Array holding the IDs of the current customers
 
-    uint32     m_InsideRegionID; // номер региона, в котором сейчас находится персонаж (??? может засунуть в m_event ???)
+    uint32     m_InsideRegionID;     // номер региона, в котором сейчас находится персонаж (??? может засунуть в m_event ???)
     uint8      m_LevelRestriction;   // ограничение уровня персонажа
     uint16     m_Costume;            // карнавальный костюм персонажа (модель)
     uint16     m_Monstrosity;        // Monstrosity model ID
@@ -314,9 +323,9 @@ public:
     uint32     m_DeathTimestamp;     // Timestamp when death counter has been saved to database
     time_point m_deathSyncTime;      // Timer used for sending an update packet at a regular interval while the character is dead
 
-    uint8      m_hasTractor;    // checks if player has tractor already
-    uint8      m_hasRaise;      // checks if player has raise already
-    uint8      m_hasAutoTarget; // возможность использования AutoTarget функции
+    uint8      m_hasTractor;     // checks if player has tractor already
+    uint8      m_hasRaise;       // checks if player has raise already
+    uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
     position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
 
     uint32 m_PlayTime;
@@ -328,6 +337,7 @@ public:
     bool  m_isGMHidden; // GM Hidden flag to prevent player updates from being processed.
 
     bool   m_mentorUnlocked;
+    bool   m_jobMasterDisplay; // Job Master Stars display
     uint32 m_moghouseID;
     uint16 m_moghancementID;
 

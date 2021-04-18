@@ -6,6 +6,7 @@
 -- Recast Time: 1:00
 -- Duration: 2:00
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -16,7 +17,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local baseDuration = 120
+    local baseDuration = 120 + player:getJobPointLevel(xi.jp.JIG_DURATION)
     local durationMultiplier = 1.0 + utils.clamp(player:getMod(xi.mod.JIG_DURATION), 0, 50) / 100
     local finalDuration = math.floor(baseDuration * durationMultiplier)
 

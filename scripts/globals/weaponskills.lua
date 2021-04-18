@@ -9,6 +9,7 @@
 -- applications of damage mods ('Damage varies with TP.')
 -- performance of the actual WS (rand numbers, etc)
 require("scripts/globals/magicburst")
+require("scripts/globals/magiantrials")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -81,7 +82,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         end
     end
 
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker)
+    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -607,7 +608,7 @@ function fencerBonus(attacker)
     return bonus
 end
 
-function souleaterBonus(attacker)
+function souleaterBonus(attacker, wsParams)
     local bonus = 0
 
     if attacker:hasStatusEffect(xi.effect.SOULEATER) then
@@ -624,7 +625,7 @@ function souleaterBonus(attacker)
             bonus = bonus + health * percent
         end
 
-        attacker:delHP(numhits * 0.10 * attacker:getHP())
+        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
     end
 
     return bonus

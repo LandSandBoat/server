@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
         currentMission = player:getCurrentMission(BASTOK)
-        missionStatus = player:getCharVar("MissionStatus")
+        missionStatus = player:getMissionStatus(player:getNation())
 
         if (player:hasKeyItem(xi.ki.SWORD_OFFERING)) then
             player:startEvent(53)

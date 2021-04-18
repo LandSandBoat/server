@@ -16,6 +16,7 @@ zone_object.onInitialize = function(zone)
     GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -34,7 +35,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 206
     elseif quests.rainbow.onZoneIn(player) then
         cs = 114
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==
         1 then
         cs = 116
     end

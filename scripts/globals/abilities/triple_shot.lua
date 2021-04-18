@@ -3,8 +3,9 @@
 -- Description: Occasionally uses three units of ammunition to deal extra damage.
 -- Obtained: COR Level 87
 -- Recast Time: 00:05:00
--- Duration: 0:01:00
+-- Duration: 0:01:30
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -15,7 +16,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.TRIPLE_SHOT, 17, 0, 60)
+    player:addStatusEffect(xi.effect.TRIPLE_SHOT, 40, 0, 90)
 end
 
 return ability_object

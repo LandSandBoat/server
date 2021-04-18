@@ -653,7 +653,7 @@ xi.effect =
     ENDRAIN                  = 487, -- FENRIR 96
     ENASPIR                  = 488, -- FENRIR 96
     AFTERGLOW                = 489, -- WS AFTEREFFECT
-    BRAZEN_STRENGTH          = 490, --
+    BRAZEN_RUSH              = 490, --
     INNER_STRENGTH           = 491,
     ASYLUM                   = 492,
     SUBTLE_SORCERY           = 493,
@@ -1545,6 +1545,13 @@ xi.mod =
     WS_MND_BONUS                    = 984, -- % bonus to mnd_wsc.
     WS_CHR_BONUS                    = 985, -- % bonus to chr_wsc.
 
+    PET_ATK_DEF                     = 990, -- Increases pet physical attack, ranged attack, and physical defense
+    PET_ACC_EVA                     = 991, -- Increases pet physical accuracy, ranged accuracy, and evasion
+    PET_MAB_MDB                     = 992, -- Increases pet magic attack and magic defense
+    PET_MACC_MEVA                   = 993, -- Increases pet magic accuracy and evasion
+    PET_ATTR_BONUS                  = 994, -- Increases pet attributes
+    PET_TP_BONUS                    = 995, -- Increases pet TP bonus
+
     -- Circle Abilities Extended Duration from AF/AF+1
     HOLY_CIRCLE_DURATION            = 857,
     ARCANE_CIRCLE_DURATION          = 858,
@@ -1581,10 +1588,16 @@ xi.mod =
     GARDENING_WILT_BONUS            = 975, -- Increases the number of Vanadays a plant can survive before it wilts
 
     WYVERN_BREATH_MACC              = 986,
+    REGEN_BONUS                     = 989,
+
+    SUPERIOR_LEVEL  = 997, -- SU0..5
+    ONE_HOUR_RECAST = 996, -- Decreases the recast time of one-hour abilities by n minutes.
+
+    DREAD_SPIKES_EFFECT = 998,
+
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
-    -- SPARE = 987, -- stuff
-    -- SPARE = 988, -- stuff
+    -- For Next ID, see modifier.h
 }
 
 xi.latent =
@@ -2828,96 +2841,4 @@ xi.emoteMode =
     ALL = 0,
     TEXT = 1,
     MOTION = 2
-}
-
------------------------------------
--- Relic/Mythic/Empyrean tables
------------------------------------
-
-xi.relicIDs =
-{
-    SPHARAI       = 0,
-    MANDAU        = 1,
-    EXCALIBUR     = 2,
-    RAGNAROK      = 3,
-    GUTTLER       = 4,
-    BRAVURA       = 5,
-    APOCALYPSE    = 6,
-    GUNGNIR       = 7,
-    KIKOKU        = 8,
-    AMANOMURAKUMO = 9,
-    MJOLLNIR      = 10,
-    CLAUSTRUM     = 11,
-    YOICHINOYUMI  = 12,
-    ANNIHILATOR   = 13,
-    GJALLARHORN   = 14,
-    AEGIS         = 15
-}
-
-xi.relicTiers =
-{
-    [xi.relicIDs.SPHARAI] =
-    {
-        18264, 18265, 18637, 18651, 18665, 19746, 19839, 20480, 20481, 20509
-    },
-    [xi.relicIDs.MANDAU] =
-    {
-        18270, 18271, 18638, 18652, 18666, 19747, 19840, 20555, 20556, 20583
-    },
-    [xi.relicIDs.EXCALIBUR] =
-    {
-        18276, 18277, 18639, 18653, 18667, 19748, 19841, 20645, 20646, 20685
-    },
-    [xi.relicIDs.RAGNAROK] =
-    {
-        18282, 18283, 18640, 18654, 18668, 19749, 19842, 20745, 20746, 21683
-    },
-    [xi.relicIDs.GUTTLER] =
-    {
-        18288, 18289, 18641, 18655, 18669, 19750, 19843, 20790, 20791, 21750
-    },
-    [xi.relicIDs.BRAVURA] =
-    {
-        18294, 18295, 18642, 18656, 18670, 19751, 19844, 20835, 20836, 21756
-    },
-    [xi.relicIDs.APOCALYPSE] =
-    {
-        18306, 18307, 18644, 18658, 18672, 19753, 19846, 20880, 20881, 21808
-    },
-    [xi.relicIDs.GUNGNIR] =
-    {
-        18300, 18301, 18643, 18657, 18671, 19752, 19845, 20925, 20926, 21857
-    },
-    [xi.relicIDs.KIKOKU] =
-    {
-        18312, 18313, 18645, 18659, 18673, 19754, 19847, 20970, 20971, 21906
-    },
-    [xi.relicIDs.AMANOMURAKUMO] =
-    {
-        18318, 18319, 18646, 18660, 18674, 19755, 19848, 21015, 21016, 21954
-    },
-    [xi.relicIDs.MJOLLNIR] =
-    {
-        18324, 18325, 18647, 18661, 18675, 19756, 19849, 21060, 21061, 21077
-    },
-    [xi.relicIDs.CLAUSTRUM] =
-    {
-        18330, 18331, 18648, 18662, 18676, 19757, 19850, 21135, 21136, 22060
-    },
-    [xi.relicIDs.YOICHINOYUMI] =
-    {
-        18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115, 22129
-    },
-    [xi.relicIDs.ANNIHILATOR] =
-    {
-        18336, 18337, 18649, 18663, 18677, 19758, 19851, 21260, 21261, 21267, 22140
-    },
-    [xi.relicIDs.GJALLARHORN] =
-    {
-        18342, 18577, 18578, 18579, 18580, 18572, 18840
-    },
-    [xi.relicIDs.AEGIS] =
-    {
-        15070, 16195, 16196, 16197, 16198, 11927, 16200
-    },
 }

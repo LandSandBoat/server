@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.SAINTLY_INVITATION and player:getCharVar("MissionStatus") == 2) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.SAINTLY_INVITATION and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(45, 0, 200)
     else
         player:startEvent(46)
@@ -33,7 +33,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.HOLY_ONES_OATH)
             player:addItem(13134) -- Ashura Necklace
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13134)
-            player:setCharVar("MissionStatus", 3)
+            player:setMissionStatus(player:getNation(), 3)
         end
     end
 end

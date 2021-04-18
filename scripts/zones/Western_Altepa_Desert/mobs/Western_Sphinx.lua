@@ -21,7 +21,7 @@ entity.onMobDeath = function(mob, player, isKiller)
         GetMobByID(ID.mob.EASTERN_SPHINX):isDead() and
         GetMobByID(ID.mob.WESTERN_SPHINX):isDead() and
         player:getCurrentMission(BASTOK) == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and
-        player:getCharVar("MissionStatus") == 2
+        player:getMissionStatus(player:getNation()) == 2
     then
         player:setCharVar("Mission6-1MobKilled", 1)
     end

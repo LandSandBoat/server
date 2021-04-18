@@ -118,7 +118,7 @@
 #include "../packets/event_update_string.h"
 #include "../packets/guild_menu.h"
 #include "../packets/guild_menu_buy.h"
-#include "../packets/independant_animation.h"
+#include "../packets/independent_animation.h"
 #include "../packets/instance_entry.h"
 #include "../packets/inventory_assign.h"
 #include "../packets/inventory_finish.h"
@@ -127,6 +127,7 @@
 #include "../packets/inventory_size.h"
 #include "../packets/key_items.h"
 #include "../packets/linkshell_equip.h"
+#include "../packets/menu_jobpoints.h"
 #include "../packets/menu_merit.h"
 #include "../packets/menu_mog.h"
 #include "../packets/menu_raisetractor.h"
@@ -3430,6 +3431,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
             PItemLinkPearl->SetLSID(Sql_GetUIntData(SqlHandle, 0));
             PItemLinkPearl->SetLSColor(Sql_GetIntData(SqlHandle, 1));
             PItemLinkPearl->SetLSType(lstype);
+            PItemLinkPearl->setQuantity(1);
             if (charutils::AddItem(PChar, LOC_INVENTORY, PItemLinkPearl) != ERROR_SLOTID)
             {
                 // equip linkpearl to slot 2
@@ -4665,6 +4667,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
     puppetutils::LoadAutomaton(PChar);
     charutils::SetStyleLock(PChar, false);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
+    jobpointutils::RefreshGiftMods(PChar);
     charutils::BuildingCharSkillsTable(PChar);
     charutils::CalculateStats(PChar);
     charutils::CheckValidEquipment(PChar);
@@ -4838,6 +4841,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         blueutils::ValidateBlueSpells(PChar);
         charutils::CalculateStats(PChar);
         charutils::CheckValidEquipment(PChar);
+        jobpointutils::RefreshGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
         charutils::BuildingCharAbilityTable(PChar);
         charutils::BuildingCharTraitsTable(PChar);
@@ -4881,6 +4885,7 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
     PChar->jobs.exp[PChar->GetSJob()] = charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetSJob()]) - 1;
 
     charutils::SetStyleLock(PChar, false);
+    jobpointutils::RefreshGiftMods(PChar);
     charutils::BuildingCharSkillsTable(PChar);
     charutils::CalculateStats(PChar);
     charutils::CheckValidEquipment(PChar);
@@ -4978,6 +4983,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
             if (PChar->status != STATUS_TYPE::DISAPPEAR)
             {
                 blueutils::ValidateBlueSpells(PChar);
+                jobpointutils::RefreshGiftMods(PChar);
                 charutils::BuildingCharSkillsTable(PChar);
                 charutils::CalculateStats(PChar);
                 charutils::BuildingCharTraitsTable(PChar);
@@ -5091,7 +5097,7 @@ void CLuaBaseEntity::setTitle(uint16 titleID)
 /************************************************************************
  *  Function: delTitle()
  *  Purpose : Deletes a title from a character's profile
- *  Example : player:delTitle(xi.title.IXION_HORNBREAKER)
+ *  Example : player:delTitle(xi.title.FODDERCHIEF_FLAYER)
  ************************************************************************/
 
 void CLuaBaseEntity::delTitle(uint16 titleID)
@@ -5776,13 +5782,14 @@ void CLuaBaseEntity::completeMission(uint8 missionLogID, uint16 missionID)
 }
 
 /************************************************************************
- *  Function: setMissionLogEx()
- *  Purpose : Sets mission log extra data to correctly track progress in branching missions.
- *  Example : player:setMissionLogEx(xi.mission.log_id.COP, xi.mission.logEx.ULMIA, 14)
- *  Notes   :
+ *  Function: setMissionStatus()
+ *  Purpose : Sets mission progress data.
+ *  Example : player:setMissionStatus(player:getNation(), 14)
+ *  Notes   : setMissionStatus(log id,value[,index 0-7])
+ *            If optional index is used, value must be between 0-15.
  ************************************************************************/
 
-void CLuaBaseEntity::setMissionLogEx(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj)
+void CLuaBaseEntity::setMissionStatus(uint8 missionLogID, sol::object const& arg2Obj, sol::object const& arg3Obj)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
@@ -5790,75 +5797,75 @@ void CLuaBaseEntity::setMissionLogEx(uint8 missionLogID, sol::object const& arg2
 
     if (missionLogID >= MAX_MISSIONAREA)
     {
-        ShowError(CL_RED "Lua::setMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+        ShowError(CL_RED "Lua::setMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
         return;
     }
 
     if (arg3Obj.is<uint8>())
     {
-        uint8 missionLogExPos = arg2Obj.as<uint8>();
-        if (missionLogExPos > 7)
+        uint8 missionStatusPos = arg3Obj.as<uint8>();
+        if (missionStatusPos > 7)
         {
-            ShowError(CL_RED "Lua::setMissionLogEx: position %i is invalid\n" CL_RESET, missionLogExPos);
+            ShowError(CL_RED "Lua::setMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
             return;
         }
-        uint8 missionLogExValue = arg3Obj.as<uint8>();
-        if (missionLogExValue > 0xF)
+        uint8 missionStatusValue = arg2Obj.as<uint8>();
+        if (missionStatusValue > 0xF)
         {
-            ShowError(CL_RED "Lua::setMissionLogEx: value %i is invalid\n" CL_RESET, missionLogExValue);
+            ShowError(CL_RED "Lua::setMissionStatus: value %i is invalid\n" CL_RESET, missionStatusValue);
             return;
         }
-        uint32 logEx = (PChar->m_missionLog[missionLogID].logExUpper << 16) | PChar->m_missionLog[missionLogID].logExLower;
-        uint32 mask  = ~(0xF << (4 * missionLogExPos));
+        uint32 missionStatus = (PChar->m_missionLog[missionLogID].statusUpper << 16) | PChar->m_missionLog[missionLogID].statusLower;
+        uint32 mask  = ~(0xF << (4 * missionStatusPos));
 
-        logEx &= mask;
-        logEx |= missionLogExValue << (4 * missionLogExPos);
-        PChar->m_missionLog[missionLogID].logExLower = logEx;
-        PChar->m_missionLog[missionLogID].logExUpper = logEx >> 16;
+        missionStatus &= mask;
+        missionStatus |= missionStatusValue << (4 * missionStatusPos);
+        PChar->m_missionLog[missionLogID].statusLower = missionStatus;
+        PChar->m_missionLog[missionLogID].statusUpper = missionStatus >> 16;
         PChar->pushPacket(new CQuestMissionLogPacket(PChar, missionLogID, LOG_MISSION_CURRENT));
     }
     else
     {
-        uint32 missionLogExValue                     = arg2Obj.as<uint32>();
-        PChar->m_missionLog[missionLogID].logExLower = missionLogExValue;
-        PChar->m_missionLog[missionLogID].logExUpper = missionLogExValue >> 16;
+        uint32 missionStatusValue                     = arg2Obj.as<uint32>();
+        PChar->m_missionLog[missionLogID].statusLower = missionStatusValue;
+        PChar->m_missionLog[missionLogID].statusUpper = missionStatusValue >> 16;
     }
 
     charutils::SaveMissionsList(PChar);
 }
 
 /************************************************************************
- *  Function: getMissionLogEx()
- *  Purpose : Gets mission log extra data.
- *  Example : player:getMissionLogEx(xi.mission.log_id.COP, xi.mission.logEx.ULMIA)
- *  Notes   :  If arg2 isn't provided, the whole 32 bits are returned.
+ *  Function: getMissionStatus()
+ *  Purpose : Gets mission progress data.
+ *  Example : player:getMissionStatus(player:getNation())
+ *  Notes   : getMissionStatus(log id[,index 0-7])
  ************************************************************************/
 
-uint32 CLuaBaseEntity::getMissionLogEx(uint8 missionLogID, sol::object const& missionLogExPosObj)
+uint32 CLuaBaseEntity::getMissionStatus(uint8 missionLogID, sol::object const& missionStatusPosObj)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
     if (missionLogID < MAX_MISSIONAREA)
     {
-        uint32 logEx = (PChar->m_missionLog[missionLogID].logExUpper << 16) | PChar->m_missionLog[missionLogID].logExLower;
-        if (missionLogExPosObj.is<uint8>())
+        uint32 missionStatus = (PChar->m_missionLog[missionLogID].statusUpper << 16) | PChar->m_missionLog[missionLogID].statusLower;
+        if (missionStatusPosObj.is<uint8>())
         {
-            uint8 missionLogExPos = missionLogExPosObj.as<uint8>();
-            if (missionLogExPos > 7)
+            uint8 missionStatusPos = missionStatusPosObj.as<uint8>();
+            if (missionStatusPos > 7)
             {
-                ShowError(CL_RED "Lua::getMissionLogEx: position %i is invalid\n" CL_RESET, missionLogExPos);
+                ShowError(CL_RED "Lua::getMissionStatus: position %i is invalid\n" CL_RESET, missionStatusPos);
                 return 0;
             }
-            return ((logEx >> (4 * missionLogExPos)) & 0xF);
+            return ((missionStatus >> (4 * missionStatusPos)) & 0xF);
         }
         else
         {
-            return logEx;
+            return missionStatus;
         }
     }
 
-    ShowError(CL_RED "Lua::getMissionLogEx: missionLogID %i is invalid\n" CL_RESET, missionLogID);
+    ShowError(CL_RED "Lua::getMissionStatus: missionLogID %i is invalid\n" CL_RESET, missionLogID);
     return 0;
 }
 
@@ -6037,7 +6044,6 @@ void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::SetUnityLeader(PChar, leaderID);
 
     // Update Unity Trust, assumes that values have been cleared
     if (PChar->profile.unity_leader > 0)
@@ -6047,6 +6053,7 @@ void CLuaBaseEntity::setUnityLeader(uint8 leaderID)
         charutils::DeleteSpell(PChar, ROE_TRUST_ID[oldUnity]);
     }
 
+    charutils::SetUnityLeader(PChar, leaderID);
     roeutils::UpdateUnityTrust(PChar);
 }
 
@@ -6365,6 +6372,65 @@ void CLuaBaseEntity::setMerits(uint8 numPoints)
     PChar->pushPacket(new CMenuMeritPacket(PChar));
 
     charutils::SaveCharExp(PChar, PChar->GetMJob());
+}
+
+/************************************************************************
+*  Function: getJobPointLevel()
+*  Purpose : Returns the current value a specific job point
+*  Example : player:getJobPointLevel(JP_MIGHTY_STRIKES_EFFECT)
+*  Notes   :
+************************************************************************/
+uint8 CLuaBaseEntity::getJobPointLevel(uint16 jpType)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        return PChar->PJobPoints->GetJobPointValue(static_cast<JOBPOINT_TYPE>(jpType));
+    }
+
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setCapacityPoints()
+ *  Purpose : Sets the capacity points for a player to a specified amount
+ *  Example : player:setCapacityPoints(5000)
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::setCapacityPoints(uint16 amount)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to set Capacity Points for non-PC type!\n");
+        return;
+    }
+
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->PJobPoints->SetCapacityPoints(amount);
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
+}
+
+/************************************************************************
+ *  Function: setJobPoints()
+ *  Purpose : Sets the job points for a player to a specified amount
+ *  Example : player:setJobPoints(30)
+ *  Notes   : Used in GM command
+ ************************************************************************/
+
+void CLuaBaseEntity::setJobPoints(uint16 amount)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Warning: Attempt to set Job Points for non-PC type!\n");
+        return;
+    }
+
+    CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+    PChar->PJobPoints->SetJobPoints(amount);
+    PChar->pushPacket(new CMenuJobPointsPacket(PChar));
 }
 
 /************************************************************************
@@ -7348,6 +7414,7 @@ void CLuaBaseEntity::setSkillLevel(uint8 SkillID, uint16 SkillAmount)
     PChar->RealSkills.skill[SkillID]    = SkillAmount;
     PChar->WorkingSkills.skill[SkillID] = (SkillAmount / 10) * 0x20 + PChar->WorkingSkills.rank[SkillID];
 
+    jobpointutils::RefreshGiftMods(PChar);
     charutils::BuildingCharSkillsTable(PChar);
     charutils::CheckWeaponSkill(PChar, SkillID);
     charutils::SaveCharSkills(PChar, SkillID);
@@ -7402,6 +7469,7 @@ void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
     PChar->RealSkills.rank[skillID]     = newrank;
     // PChar->RealSkills.skill[skillID] += 1;
 
+    jobpointutils::RefreshGiftMods(PChar);
     charutils::BuildingCharSkillsTable(PChar);
     charutils::SaveCharSkills(PChar, skillID);
     PChar->pushPacket(new CCharSkillsPacket(PChar));
@@ -8535,7 +8603,7 @@ void CLuaBaseEntity::sendReraise(uint8 raiseLevel)
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    if (raiseLevel == 0 || raiseLevel > 3)
+    if (raiseLevel == 0 || raiseLevel > 4)
     {
         ShowDebug(CL_CYAN "lua::sendRaise raise value is not valide!\n" CL_RESET);
     }
@@ -8619,19 +8687,17 @@ void CLuaBaseEntity::enableEntities(std::vector<uint32> data)
 }
 
 /************************************************************************
- *  Function: independantAnimation()
- *  Purpose : Play an animation independant of action messages
- *  Example : player:independantAnimation(player, 251, 4) -- Plays little hearts
+ *  Function: independentAnimation()
+ *  Purpose : Play an animation independent of action messages
+ *  Example : player:independentAnimation(player, 251, 4) -- Plays little hearts
  *  Notes   :
  ************************************************************************/
-void CLuaBaseEntity::independantAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
+void CLuaBaseEntity::independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    PChar->pushPacket(new CIndependantAnimationPacket(PChar, PTarget->GetBaseEntity(), animId, mode));
+    CBaseEntity* PActor = (CCharEntity*)m_PBaseEntity;
+    PActor->loc.zone->PushPacket(PActor, CHAR_INRANGE_SELF, new CIndependentAnimationPacket(PActor, PTarget->GetBaseEntity(), animId, mode));
 }
 
 /************************************************************************
@@ -8902,11 +8968,13 @@ void CLuaBaseEntity::recalculateStats()
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
         auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
+
+        jobpointutils::RefreshGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
         charutils::CalculateStats(PChar);
+        charutils::BuildingCharTraitsTable(PChar);
         charutils::CheckValidEquipment(PChar);
         charutils::BuildingCharAbilityTable(PChar);
-        charutils::BuildingCharTraitsTable(PChar);
 
         PChar->UpdateHealth();
 
@@ -9237,7 +9305,7 @@ void CLuaBaseEntity::updateClaim(sol::object const& entity)
         return;
     }
 
-    if ((entity != sol::nil) || !entity.is<CLuaBaseEntity*>())
+    if ((entity == sol::nil) || !entity.is<CLuaBaseEntity*>())
     {
         static_cast<CMobEntity*>(m_PBaseEntity)->m_OwnerID.clean();
         static_cast<CMobEntity*>(m_PBaseEntity)->updatemask |= UPDATE_STATUS;
@@ -11373,6 +11441,37 @@ void CLuaBaseEntity::updateAttachments()
 }
 
 /************************************************************************
+ *  Function: reduceBurden()
+ *  Purpose : Reduces individual burden values based on percentage decrease
+ *  Example : master:reduceBurden(50)
+ *  Notes   : Used by Cooldown ability, optional arg is static decrease
+ *            after percentage is applied.
+ ************************************************************************/
+
+void CLuaBaseEntity::reduceBurden(float percentReduction, sol::object const& intReductionObj)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PEntity = static_cast<CCharEntity*>(m_PBaseEntity);
+    auto* PAutomaton = dynamic_cast<CAutomatonEntity*>(PEntity->PPet);
+
+    if (!PAutomaton)
+    {
+        return;
+    }
+
+    std::array<uint8, 8> burden = PAutomaton->getBurden();
+    for (int i = 0; i < 8; i++)
+    {
+        uint8 intReduction = (intReductionObj != sol::nil) ? intReductionObj.as<uint8>() : 0;
+
+        burden[i] = (uint8)std::max(0.f, burden[i] * (1 - ((percentReduction / 100) - PEntity->PJobPoints->GetJobPointValue(JP_COOLDOWN_EFFECT))) - intReduction);
+    }
+
+    PAutomaton->setBurdenArray(burden);
+}
+
+/************************************************************************
  *  Function: setMobLevel()
  *  Purpose : Updates the monsters level and recalculates stats
  *  Example : mob:setMobLevel(125)
@@ -12810,8 +12909,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getCurrentMission", CLuaBaseEntity::getCurrentMission);
     SOL_REGISTER("hasCompletedMission", CLuaBaseEntity::hasCompletedMission);
     SOL_REGISTER("completeMission", CLuaBaseEntity::completeMission);
-    SOL_REGISTER("setMissionLogEx", CLuaBaseEntity::setMissionLogEx);
-    SOL_REGISTER("getMissionLogEx", CLuaBaseEntity::getMissionLogEx);
+    SOL_REGISTER("setMissionStatus", CLuaBaseEntity::setMissionStatus);
+    SOL_REGISTER("getMissionStatus", CLuaBaseEntity::getMissionStatus);
     SOL_REGISTER("getEminenceCompleted", CLuaBaseEntity::getEminenceCompleted);
     SOL_REGISTER("getNumEminenceCompleted", CLuaBaseEntity::getNumEminenceCompleted);
     SOL_REGISTER("setEminenceCompleted", CLuaBaseEntity::setEminenceCompleted);
@@ -12841,6 +12940,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMerit", CLuaBaseEntity::getMerit);
     SOL_REGISTER("getMeritCount", CLuaBaseEntity::getMeritCount);
     SOL_REGISTER("setMerits", CLuaBaseEntity::setMerits);
+
+    SOL_REGISTER("getJobPointLevel", CLuaBaseEntity::getJobPointLevel);
+    SOL_REGISTER("setCapacityPoints", CLuaBaseEntity::setCapacityPoints);
+    SOL_REGISTER("setJobPoints", CLuaBaseEntity::setJobPoints);
 
     SOL_REGISTER("getGil", CLuaBaseEntity::getGil);
     SOL_REGISTER("addGil", CLuaBaseEntity::addGil);
@@ -12978,7 +13081,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("countdown", CLuaBaseEntity::countdown);
     SOL_REGISTER("enableEntities", CLuaBaseEntity::enableEntities);
-    SOL_REGISTER("independantAnimation", CLuaBaseEntity::independantAnimation);
+    SOL_REGISTER("independentAnimation", CLuaBaseEntity::independentAnimation);
 
     SOL_REGISTER("engage", CLuaBaseEntity::engage);
     SOL_REGISTER("isEngaged", CLuaBaseEntity::isEngaged);
@@ -13140,6 +13243,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("removeOldestManeuver", CLuaBaseEntity::removeOldestManeuver);
     SOL_REGISTER("removeAllManeuvers", CLuaBaseEntity::removeAllManeuvers);
     SOL_REGISTER("updateAttachments", CLuaBaseEntity::updateAttachments);
+    SOL_REGISTER("reduceBurden", CLuaBaseEntity::reduceBurden);
 
     // Trust related
     SOL_REGISTER("spawnTrust", CLuaBaseEntity::spawnTrust);

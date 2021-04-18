@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San D'Oria 9-2 "The Heir to the Light"
         if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and missionStatus == 5 then
@@ -77,7 +77,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if csid == 537 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
         player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
     elseif csid == 61 then
@@ -86,15 +86,15 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar('MissionStatus', 2)
     elseif csid == 100 then
         player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 104 then
         player:setCharVar("Mission8-2Kills", 0)
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 8 then
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     elseif csid == 32 then
         player:setCharVar("Cutscenes_8-2", 0) -- dont need this var now that mission is flagged and cs have been triggered to progress
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 76 then
         finishMissionTimeline(player, 3, csid, option)
     end

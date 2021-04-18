@@ -44,6 +44,11 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     {
         throw CStateInitException(std::move(m_errorMsg));
     }
+    if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
+        throw CStateInitException(std::move(m_errorMsg));
+    }
 
     auto delay = m_PEntity->GetRangedWeaponDelay(false);
     delay      = battleutils::GetSnapshotReduction(m_PEntity, delay);
@@ -187,11 +192,6 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
     if (!facing(m_PEntity->loc.p, PTarget->loc.p, 64))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
-        return false;
-    }
-    if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
-    {
-        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
         return false;
     }
     if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))

@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     local iCanHearARainbow = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
 
     -- LOST FOR WORDS
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and player:getCharVar("MissionStatus") == 5 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.LOST_FOR_WORDS and player:getMissionStatus(player:getNation()) == 5 then
         player:startEvent(337)
 
     -- KNOW ONE'S ONIONS
@@ -95,7 +95,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- LOST FOR WORDS
     if csid == 337 then
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
 
     -- KNOW ONE'S ONIONS
     elseif csid == 288 then

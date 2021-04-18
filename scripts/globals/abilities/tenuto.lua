@@ -15,6 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
+    -- TODO: Implement this ability
     player:addStatusEffect(xi.effect.TENUTO, 0, 0, 60)
 end
 

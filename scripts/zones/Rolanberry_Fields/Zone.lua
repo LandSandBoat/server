@@ -19,6 +19,7 @@ end
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SIMURGH)
     GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -30,7 +31,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 2
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 4
     end
 

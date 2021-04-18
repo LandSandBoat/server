@@ -121,6 +121,21 @@ void CAutomatonEntity::setInitialBurden()
     m_Burden.fill(30);
 }
 
+auto CAutomatonEntity::getBurden() -> std::array<uint8, 8>
+{
+    return m_Burden;
+}
+
+void CAutomatonEntity::setAllBurden(uint8 burden)
+{
+    m_Burden.fill(burden);
+}
+
+void CAutomatonEntity::setBurdenArray(std::array<uint8, 8> burdenArray)
+{
+    m_Burden = burdenArray;
+}
+
 uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
 {
     // Handle Kenkonken Suppress Overload

@@ -17,6 +17,7 @@ xi.mix.eruca.config(mob, {
 --]]
 require("scripts/globals/mixins")
 require("scripts/globals/status")
+require("scripts/globals/magic")
 -----------------------------------
 
 xi = xi or {}
@@ -75,9 +76,9 @@ g_mixins.families.eruca = function(mob)
         elseif subAnimation == 1 and currentHour < sleepHour and currentHour >= mob:getLocalVar("[eruca]wakeHour") then
             wakeUp(mob)
         end
-        if VanadielDayElement() == xi.day.FIRESDAY and mob:getMod(xi.mod.REGAIN) == 0 then
+        if VanadielDayElement() == xi.magic.ele.FIRE and mob:getMod(xi.mod.REGAIN) == 0 then
             mob:setMod(xi.mod.REGAIN, 30)
-        elseif VanadielDayElement() ~= xi.day.FIRESDAY and mob:getMod(xi.mod.REGAIN) ~= 0 then
+        elseif VanadielDayElement() ~= xi.magic.ele.FIRE and mob:getMod(xi.mod.REGAIN) ~= 0 then
             mob:setMod(xi.mod.REGAIN, 0)
         end
     end)

@@ -28,7 +28,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
 
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     -- FIRST LOGIN (START CS)
@@ -40,7 +40,11 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setHomePoint()
     elseif ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
-    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    elseif
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and MissionStatus >= 4))
+    then
         cs = 30036
     -- SOA 1-1 Optional CS
     elseif
@@ -104,9 +108,9 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 535 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536) -- adventurer coupon
     elseif csid == 1 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 0 then
-        player:setCharVar("MissionStatus", 5)
+        player:setMissionStatus(player:getNation(), 5)
     elseif csid == 569 then
         player:setPos(0, 0, -13, 192, 233)
     elseif csid == 49 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT, {item = 12513, fame = 60, title = xi.title.PARAGON_OF_RED_MAGE_EXCELLENCE}) then

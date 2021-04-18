@@ -18,7 +18,7 @@ entity.onTrigger = function(player, npc)
     if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
         local missions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
         if

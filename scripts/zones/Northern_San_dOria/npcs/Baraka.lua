@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
-        local missionStatus = player:getCharVar("MissionStatus")
+        local missionStatus = player:getMissionStatus(player:getNation())
         if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY) then
             if (missionStatus == 1) then
                 player:startEvent(581)
@@ -47,8 +47,8 @@ entity.onEventFinish = function(player, csid, option)
         -- This cs should only play if you visit San d'Oria first
         -- If you visit Windurst first you will encounter Lion in Heaven's Tower instead
         if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_EMISSARY
-        and player:getCharVar("MissionStatus") < 2) then
-            player:setCharVar("MissionStatus", 2)
+        and player:getMissionStatus(player:getNation()) < 2) then
+            player:setMissionStatus(player:getNation(), 2)
             player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_BASTOK)
         end
     end

@@ -26,7 +26,11 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 30035
     end
 
-    if player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    if
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
         cs = 30036
     end
 
@@ -61,7 +65,7 @@ zone_object.onRegionEnter = function(player, region)
     {
         [1] = function (x)  -- Windurst Mission 1-3, final cutscene with Leepe-Hoppe
             -- If we're on Windurst Mission 1-3
-            if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and player:getCharVar("MissionStatus") == 2 then
+            if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and player:getMissionStatus(player:getNation()) == 2 then
                 player:startEvent(146)
             end
         end,
@@ -76,7 +80,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 531 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 146 then -- Returned from Giddeus, Windurst 1-3
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
         player:setCharVar("ghoo_talk", 0)
         player:setCharVar("laa_talk", 0)
     elseif csid == 30035 then

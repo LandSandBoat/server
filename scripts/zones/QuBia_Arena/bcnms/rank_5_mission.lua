@@ -35,7 +35,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 and player:hasKeyItem(xi.ki.NEW_FEIYIN_SEAL) then
         player:addKeyItem(xi.ki.BURNT_SEAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BURNT_SEAL)
-        player:setCharVar("MissionStatus", 12)
+        player:setMissionStatus(player:getNation(), 12)
         player:delKeyItem(xi.ki.NEW_FEIYIN_SEAL)
     end
 end

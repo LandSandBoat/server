@@ -40,10 +40,10 @@ battlefield_object.onEventFinish = function(player, csid, option)
                 player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 or
                 player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2
             ) and
-            player:getCharVar("MissionStatus") == 10
+            player:getMissionStatus(player:getNation()) == 10
         then
             npcUtil.giveKeyItem(player, xi.ki.KINDRED_CREST)
-            player:setCharVar("MissionStatus", 11)
+            player:setMissionStatus(player:getNation(), 11)
         end
     end
 end

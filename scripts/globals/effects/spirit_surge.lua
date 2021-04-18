@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.SPIRIT_SURGE
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
@@ -19,6 +20,9 @@ effect_object.onEffectGain = function(target, effect)
 
     -- The dragoon gets 25% Haste (see http://wiki.bluegartr.com/bg/Job_Ability_Haste for haste calculation)
     target:addMod(xi.mod.HASTE_ABILITY, 2500)
+
+    -- DMG + 1 * JP
+    target:addMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -36,6 +40,8 @@ effect_object.onEffectLose = function(target, effect)
 
     -- The dragoon loses 25% Haste
     target:delMod(xi.mod.HASTE_ABILITY, 2500)
+
+    target:delMod(xi.mod.MAIN_DMG_RATING, target:getJobPointLevel(xi.jp.SPIRIT_SURGE_EFFECT))
 end
 
 return effect_object

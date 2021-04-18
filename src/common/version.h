@@ -22,15 +22,14 @@
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define TOPAZ_MAJOR_VERSION 1 // Major Version
-#define TOPAZ_MINOR_VERSION 0 // Minor Version
-#define TOPAZ_REVISION      0 // Revision
+#define XI_MAJOR_VERSION 2021 // Major Version
+#define XI_MINOR_VERSION 2    // Minor Version
+#define XI_REVISION      1    // Revision
 
-#define TOPAZ_RELEASE_FLAG  1 // 1=Develop,0=Stable
-#define TOPAZ_OFFICIAL_FLAG 1 // 1=Mod,0=Official
+#define XI_RELEASE_FLAG 1 // 1=Stable,0=Unstable
 
-#define TOPAZ_SERVER_NONE  0 // not defined
-#define TOPAZ_SERVER_LOGIN 1 // login server
-#define TOPAZ_SERVER_MAP   2 // map server
+#define XI_SERVER_NONE     0 // not defined
+#define XI_SERVER_LOGIN  1 // login server
+#define XI_SERVER_MAP      2 // map server
 
 #endif /* _VERSION_H_ */

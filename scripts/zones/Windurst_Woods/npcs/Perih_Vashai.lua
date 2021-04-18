@@ -107,7 +107,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 351 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
         player:setCharVar("TheFangedOneCS", 1)
-    elseif (csid == 357 or csid == 358) and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.THE_FANGED_ONE, {item=13117, title= xi.title.THE_FANGED_ONE, var={"TheFangedOne_Event", "TheFangedOneCS"}}) then
+    elseif (csid == 357 or csid == 358) and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.THE_FANGED_ONE, {item=13117, title=xi.title.THE_FANGED_ONE, var={"TheFangedOne_Event", "TheFangedOneCS"}}) then
         player:delKeyItem(xi.ki.OLD_TIGERS_FANG)
         player:unlockJob(xi.job.RNG)
         player:messageSpecial(ID.text.PERIH_VASHAI_DIALOG)

@@ -5,6 +5,7 @@
 -- Recast Time: 1:00
 -- Duration: 5:00
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -23,7 +24,7 @@ ability_object.onUseAbility = function(player, target, ability)
     local strboost = 0
 
     if target:getMainJob() == xi.job.SAM then
-        strboost = target:getMainLvl() / 7
+        strboost = (target:getMainLvl() / 7) + target:getJobPointLevel(xi.jp.HASSO_EFFECT)
     elseif target:getSubJob() == xi.job.SAM then
         strboost = target:getSubLvl() / 7
     end

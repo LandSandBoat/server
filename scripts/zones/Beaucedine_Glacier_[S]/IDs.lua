@@ -18,6 +18,16 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         COMMON_SENSE_SURVIVAL   = 8688, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 8655, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 8656, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 8657, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 8658, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 8659, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 8660, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 8661, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 8662, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 8663, -- Obtained key item: ≺abyssite>!    
     },
     mob =
     {
@@ -27,6 +37,29 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
             [17334476] = 17334482,
             [17334477] = 17334482,
         },
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17334561, -- Gorehound
+                17334560, -- Gorehound
+                17334559, -- Gorehound
+                17334558, -- Gorehound
+                17334557, -- Gjenganger
+                17334556, -- Gjenganger
+                17334555, -- Gjenganger
+                17334554, -- Gjenganger
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17334555, -- Erebus
+                17334556  -- Feuerunke
+            },
+            [xi.keyItem.PURPLE_ABYSSITE] = {
+                17334557  -- Lord Ruthven
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17334558  -- Yilbegan
+            }
+        }
     },
     npc =
     {

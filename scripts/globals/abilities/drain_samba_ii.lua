@@ -6,6 +6,7 @@
 -- Recast Time: 1:00
 -- Duration: 1:30
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -31,7 +32,7 @@ ability_object.onUseAbility = function(player, target, ability)
         player:delTP(250)
     end
 
-    local duration = 120 + player:getMod(xi.mod.SAMBA_DURATION)
+    local duration = 120 + player:getMod(xi.mod.SAMBA_DURATION) + (player:getJobPointLevel(xi.jp.SAMBA_DURATION) * 2)
     duration = duration * (100 + player:getMod(xi.mod.SAMBA_PDURATION))/100
     player:delStatusEffect(xi.effect.HASTE_SAMBA)
     player:delStatusEffect(xi.effect.ASPIR_SAMBA)

@@ -48,7 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("GiohAijhriSpokenTo", 0)
 
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING) == QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title= xi.title.BOND_FIXER})
+            npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING, {item=17154, fame=80, title=xi.title.BOND_FIXER})
         else
             player:addFame(WINDURST, 10)
             player:addGil(GIL_RATE*900)

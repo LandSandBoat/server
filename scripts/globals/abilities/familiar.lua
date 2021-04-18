@@ -21,6 +21,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
         pet:setLocalVar("ReceivedFamiliar", 1)
+        ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
         return 0, 0
     end
 end

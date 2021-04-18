@@ -34,6 +34,16 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         AWAIT_YOUR_CHALLENGE     = 12184, -- We await your challenge, traveler.
         LACK_LEGION_POINTS       = 12221, -- It would seem that you lack the necessary amount of Legion points.
         COMMON_SENSE_SURVIVAL    = 12278, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        --Voidwalker
+        VOIDWALKER_NO_MOB        = 10959, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 10960, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 10961, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 10962, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 10963, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 10964, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 10965, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 10966, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 10967, -- Obtained key item: ≺abyssite>!   
     },
     mob =
     {
@@ -55,6 +65,29 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         SILK_CATERPILLAR  = 17227782,
         SIMURGH           = 17228242,
         CHUGLIX_BERRYPAWS = 17228249,
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17228261,  -- Lacus
+                17228260,  -- Thunor
+                17228259, -- Beorht
+                17228258, -- Pruina
+                17228257,  -- Puretos
+                17228256,  -- Eorthe
+                17228255, -- Deorc
+                17228254, -- Aither
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17228253, -- Skuld
+                17228252  -- Urd
+            },
+            [xi.keyItem.YELLOW_ABYSSITE] = {
+                17228251  -- Verthandi
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17228250  -- Yilbegan
+            }
+        }
     },
     npc =
     {

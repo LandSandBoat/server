@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK and player:getCharVar("MissionStatus") == 5) then
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK and player:getMissionStatus(player:getNation()) == 5) then
         if (trade:hasItemQty(599, 1) and trade:getItemCount() == 1) then -- Trade Mythril Sand
             player:startEvent(205)
         end
@@ -23,12 +23,12 @@ end
 entity.onTrigger = function(player, npc)
 
     -- San d'Oria Mission 2-3 Part I - Bastok > Windurst
-    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_ABROAD and player:getCharVar("MissionStatus") == 2) then
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_ABROAD and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(204)
     -- San d'Oria Mission 2-3 Part II - Windurst > Bastok
-    elseif (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_ABROAD and player:getCharVar("MissionStatus") == 7) then
+    elseif (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_ABROAD and player:getMissionStatus(player:getNation()) == 7) then
         player:startEvent(206)
-    elseif (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 and player:getCharVar("MissionStatus") == 11) then
+    elseif (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 and player:getMissionStatus(player:getNation()) == 11) then
         player:startEvent(207)
     -----------------------------------
     elseif (player:getCurrentMission(SANDORIA) ~= xi.mission.id.sandoria.NONE) then
@@ -46,15 +46,15 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 204) then
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
         player:delKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif (csid == 205) then
         player:tradeComplete()
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
     elseif (csid == 206) then
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2)
-        player:setCharVar("MissionStatus", 8)
+        player:setMissionStatus(player:getNation(), 8)
     elseif (csid == 207) then
         player:addMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_ABROAD)
         player:delKeyItem(xi.ki.KINDRED_CREST)

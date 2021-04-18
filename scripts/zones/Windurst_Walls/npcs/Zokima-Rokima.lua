@@ -3,7 +3,6 @@
 --  NPC: Zokima-Rokima
 -- Starts Windurst Missions
 -- !pos 0 -16 124 239
--- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/settings")
@@ -19,7 +18,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(87) -- for other nation
     else
         local CurrentMission = player:getCurrentMission(WINDURST)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
         local pRank = player:getRank()
         local cs, p, offset = getMissionOffset(player, 4, CurrentMission, MissionStatus)
 

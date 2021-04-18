@@ -16,11 +16,11 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
-        if (player:getCharVar("ZilartStatus") == 0) then
+        if (player:getMissionStatus(xi.mission.log_id.ZILART) == 0) then
             player:startEvent(81) -- Start
         elseif (player:hasKeyItem(xi.ki.SCRAP_OF_PAPYRUS)) then
             player:startEvent(83) -- Finish
-        elseif (player:getCharVar("ZilartStatus") == 2) then
+        elseif (player:getMissionStatus(xi.mission.log_id.ZILART) == 2) then
             player:startEvent(84) -- Go to hall of the gods
         else
             player:startEvent(82)
@@ -39,9 +39,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 81 and option == 1) then
-        player:setCharVar("ZilartStatus", 1)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 1)
     elseif (csid == 83) then
-        player:setCharVar("ZilartStatus", 2)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 2)
         player:delKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
         player:addKeyItem(xi.ki.CERULEAN_CRYSTAL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_CRYSTAL)

@@ -21,6 +21,7 @@ entity.onTrigger = function(player, npc)
     elseif player:hasKeyItem(xi.ki.MEMORANDOLL) == false then
         player:startEvent(5080)
     else
+        player:triggerRoeEvent(xi.roe.triggers.talkToRoeNpc)
         player:messageSpecial(ID.text.SPARK_EXCHANGE)
         xi.sparkshop.onTrigger(player, npc, 5081)
     end

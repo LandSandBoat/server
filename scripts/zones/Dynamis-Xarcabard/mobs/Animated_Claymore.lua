@@ -16,14 +16,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_CLAYMORE_DIALOG)
-
-    SpawnMob(17330365):updateEnmity(target)
-    SpawnMob(17330366):updateEnmity(target)
-    SpawnMob(17330367):updateEnmity(target)
-    SpawnMob(17330372):updateEnmity(target)
-    SpawnMob(17330373):updateEnmity(target)
-    SpawnMob(17330374):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -35,16 +27,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:showText(mob, ID.text.ANIMATED_CLAYMORE_DIALOG+1)
-
-    DespawnMob(17330365)
-    DespawnMob(17330366)
-    DespawnMob(17330367)
-    DespawnMob(17330372)
-    DespawnMob(17330373)
-    DespawnMob(17330374)
-
 end
 
 return entity

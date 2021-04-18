@@ -6,7 +6,7 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = "ss"
 }
 
 function error(player, msg)

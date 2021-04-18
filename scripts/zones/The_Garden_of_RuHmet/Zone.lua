@@ -136,7 +136,7 @@ zone_object.onRegionEnter = function(player, region)
         switch (region:GetRegionID()): caseof
         {
             [1] = function (x)
-                if (player:getCurrentMission(COP)== xi.mission.id.cop.DAWN or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE) ) then
+                if (player:getCurrentMission(COP)==xi.mission.id.cop.DAWN or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE) ) then
                     player:startEvent(101)
                 else
                     player:startEvent(155)

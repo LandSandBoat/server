@@ -149,7 +149,6 @@ UpgradeLog*.XML
 /depcomp
 /missing
 /install-sh
-/tools/config.yaml
 
 src/common/config.h
 src/common/config.h.in
@@ -199,6 +198,10 @@ cmake_install.cmake
 /conf/search_server.conf
 /conf/server_message.conf
 /conf/server_message_fr.conf
+
+# Tool/misc configs
+/tools/config.yaml
+ip.txt
 
 # Tracy download
 ext/tracy/

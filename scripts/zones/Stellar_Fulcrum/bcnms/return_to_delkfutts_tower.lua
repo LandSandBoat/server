@@ -36,7 +36,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
         if player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER then
             player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
             player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE)
-            player:setCharVar("ZilartStatus", 0)
+            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
         end
         -- Play last CS if not skipped.
         if option == 1 then

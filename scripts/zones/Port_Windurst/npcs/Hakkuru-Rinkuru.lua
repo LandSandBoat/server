@@ -45,13 +45,13 @@ entity.onTrigger = function(player, npc)
     pFame = player:getFameLevel(WINDURST)
 
         -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 0) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(456, 0, 248)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(457)
     -- Check if we are on Windurst Mission 1-1
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
-        MissionStatus = player:getCharVar("MissionStatus")
+        MissionStatus = player:getMissionStatus(player:getNation())
         if (MissionStatus == 0) then
             player:startEvent(90)
         elseif (MissionStatus == 1) then
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         elseif (MissionStatus == 3) then
             player:startEvent(94, 0, xi.ki.CRACKED_MANA_ORBS) -- Finish Mission 1-1
         end
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getCharVar("MissionStatus") == 2) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(147)
 -- Begin Making Amends Section
     elseif (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
@@ -91,9 +91,9 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 90) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 147) then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif (csid == 94) then
 
         -- Delete the variable(s) that was created for this mission
@@ -175,7 +175,7 @@ entity.onEventFinish = function(player, csid, option)
         end
         -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
     elseif (csid == 456) then
-            player:setCharVar("MissionStatus", 1)
+            player:setMissionStatus(player:getNation(), 1)
             player:addKeyItem(xi.ki.SOUTHWESTERN_STAR_CHARM)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SOUTHWESTERN_STAR_CHARM)
     end

@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER and
-        player:getCharVar("MissionStatus") == 3 and
+        player:getMissionStatus(player:getNation()) == 3 and
         player:hasKeyItem(xi.ki.SOUTHEASTERN_STAR_CHARM)
     then
         player:startEvent(44)
@@ -32,7 +32,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 44 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:messageSpecial(ID.text.ALL_G_ORBS_ENERGIZED)
         player:delKeyItem(xi.ki.SOUTHEASTERN_STAR_CHARM)
     end

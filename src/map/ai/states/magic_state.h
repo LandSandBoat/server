@@ -63,6 +63,11 @@ public:
         m_instantCast = bInstantCast;
     }
 
+    bool IsInstantCast()
+    {
+        return m_instantCast;
+    }
+
 protected:
     bool CanCastSpell(CBattleEntity* PTarget);
 

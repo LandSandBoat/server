@@ -29,7 +29,11 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setHomePoint()
     elseif ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
-    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    elseif
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
         cs = 30036
     -- SOA 1-1 Optional CS
     elseif

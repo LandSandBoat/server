@@ -36,6 +36,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ability.h"
 #include "alliance.h"
 #include "conquest_system.h"
+#include "job_points.h"
 #include "linkshell.h"
 #include "map.h"
 #include "message.h"
@@ -246,6 +247,7 @@ int32 do_init(int32 argc, char** argv)
     petutils::LoadPetList();
     trustutils::LoadTrustList();
     mobutils::LoadCustomMods();
+    jobpointutils::LoadGifts();
     daily::LoadDailyItems();
     roeutils::UpdateUnityRankings();
 
@@ -339,7 +341,7 @@ void do_abort()
 
 void set_server_type()
 {
-    SERVER_TYPE = TOPAZ_SERVER_MAP;
+    SERVER_TYPE = XI_SERVER_MAP;
     SOCKET_TYPE = socket_type::UDP;
 }
 
@@ -972,7 +974,7 @@ void map_helpscreen(int32 flag)
 
 void map_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
+    ShowInfo(CL_WHITE "Topaz version %d%02d_%d (%s)" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION, XI_RELEASE_FLAG ? "stable" : "unstable");
     if (flag)
     {
         exit(EXIT_FAILURE);
@@ -1006,6 +1008,7 @@ int32 map_config_default()
     map_config.exp_loss_rate               = 1.0f;
     map_config.exp_retain                  = 0.0f;
     map_config.exp_loss_level              = 4;
+    map_config.capacity_rate               = 1.0f;
     map_config.level_sync_enable           = false;
     map_config.disable_gear_scaling        = false;
     map_config.all_jobs_widescan           = true;
@@ -1205,6 +1208,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "exp_party_gap_penalties") == 0)
         {
             map_config.exp_party_gap_penalties = (uint8)atof(w2);
+        }
+        else if (strcmp(w1, "capacity_rate") == 0)
+        {
+            map_config.capacity_rate = (float)atof(w2);
         }
         else if (strcmp(w1, "mob_tp_multiplier") == 0)
         {

@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if
         (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and missionStatus >= 3) or

@@ -18,6 +18,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     elseif not player:getPetID() or not (player:getPetID() >= 69 and player:getPetID() <= 72) then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
+        ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
         return 0, 0
     end
 end

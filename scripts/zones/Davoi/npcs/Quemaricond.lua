@@ -34,7 +34,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getCharVar("MissionStatus") == 3 then
+
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(117)
     else
         player:showText(npc, ID.text.QUEMARICOND_DIALOG)
@@ -48,8 +49,9 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 117 then
-        player:setCharVar("MissionStatus", 4)
+
+    if (csid == 117) then
+        player:setMissionStatus(player:getNation(), 4)
         player:addKeyItem(xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ROYAL_KNIGHTS_DAVOI_REPORT)
     end

@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local offset = npc:getID() - ID.npc.FOSSIL_ROCK_OFFSET
     local windyMiss = player:getCurrentMission(WINDURST)
-    local windyStat = player:getCharVar("MissionStatus")
+    local windyStat = player:getMissionStatus(player:getNation())
     local randfoss = player:getCharVar("MissionStatus_randfoss")
 
     -- LOST FOR WORDS
@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
             if player:hasKeyItem(xi.ki.LAPIS_CORAL) then
                 player:messageSpecial(ID.text.FOSSIL_EXTRACTED)
             else
-                player:setCharVar("MissionStatus", 3)
+                player:setMissionStatus(player:getNation(), 3)
                 npcUtil.giveKeyItem(player, xi.ki.LAPIS_CORAL)
             end
         else

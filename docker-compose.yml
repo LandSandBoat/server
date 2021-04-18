@@ -16,7 +16,7 @@ services:
     ports:
       - "3306:3306"
 
-  # Ease of access tool for the DB, you can type in localhost:8080 to get a web interface to the DB. You can log in with root:topazisawesome
+  # Ease of access tool for the DB, you can type in localhost:8080 to get a web interface to the DB. You can log in with root:wheel
   db-admin-portal:
     image: adminer
     restart: always

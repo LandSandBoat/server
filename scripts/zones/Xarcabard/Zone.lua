@@ -14,6 +14,7 @@ local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -41,7 +42,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 9
     elseif UnbridledPassionCS == 3 then
         cs = 4
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 11
     end
 

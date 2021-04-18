@@ -46,9 +46,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
--- 78 oh zut j'ai besoin de cette marmite
--- 30 j'ai été trop dur avec two... et percé la marmite
--- 40 du moment que j'ai cette boite et la marmite je vais enfin battre ce gars
 entity.onEventUpdate = function(player, csid, option)
 end
 

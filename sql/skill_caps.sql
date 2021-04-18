@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.5.25a, for Win64 (x86)
---
--- Host: localhost    Database: xidb
--- ------------------------------------------------------
--- Server version	5.5.25a
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;

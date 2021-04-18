@@ -27,7 +27,11 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 30035
     end
 
-    if player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getCurrentMission(player:getNation()) > 15 then
+    if
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
         cs = 30036
     end
 
@@ -39,7 +43,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(-45, -0, 26, 213)
         player:setHomePoint()
     -- ENTER THE TALEKEEPER
-    elseif prevZone == xi.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 5 then
+    elseif prevZone == xi.zone.ZERUHN_MINES and player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and player:getMissionStatus(player:getNation()) == 5 then
         cs = 176
     end
 

@@ -35,12 +35,10 @@ entity.onTrade = function(player, npc, trade)
 
     if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
-    elseif
-        player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and
-        player:getCharVar("MissionStatus") == 1 and
-        npcUtil.tradeHas(trade, 613)
-    then
-        player:startEvent(506)
+    elseif (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_CRYSTAL_LINE and player:getMissionStatus(player:getNation()) == 1) then
+        if (trade:getItemQty(613, 1) and trade:getItemCount() == 1) then
+            player:startEvent(506)
+        end
     end
 end
 
@@ -48,7 +46,7 @@ entity.onTrigger = function(player, npc)
     local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     local bastokMission = player:getCurrentMission(BASTOK)
-    local bastokStatus = player:getCharVar("MissionStatus")
+    local bastokStatus = player:getMissionStatus(player:getNation())
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
     local ulmiasPath = player:getCharVar("COP_Ulmia_s_Path")
@@ -182,15 +180,12 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(505)
         end
-
-    -- THE FINAL IMAGE
-    elseif bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and bastokStatus == 0 then
-        player:startEvent(763)
-    elseif bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and bastokStatus == 2 then
-        player:startEvent(764)
-
-    -- CID'S SECRET
-    elseif player:getFameLevel(BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE then
+    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
+        player:startEvent(763) -- Bastok Mission 7-1
+    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
+        player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
+    --Begin Cid's Secret
+    elseif (player:getFameLevel(BASTOK) >= 4 and CidsSecret == QUEST_AVAILABLE) then
         player:startEvent(507)
     elseif cidsSecret == QUEST_ACCEPTED and not hasLetter and player:getCharVar("CidsSecret_Event") == 1 then
         player:startEvent(508) -- After talking to Hilda, Cid gives information on the item she needs
@@ -263,29 +258,36 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.giveKeyItem(player, xi.ki.BLUE_ACIDITY_TESTER)
     elseif csid == 504 or csid == 764 then
         finishMissionTimeline(player, 1, csid, option)
-    elseif csid == 505 and option == 0 then
-        if player:getCharVar("MissionStatus") == 0 then
-            local crystal = math.random(4096, 4103)
-
-            if npcUtil.giveItem(player, crystal) then
-                player:setCharVar("MissionStatus", 1)
+    elseif (csid == 505 and option == 0) then
+        if (player:getMissionStatus(player:getNation()) == 0) then
+            if (player:getFreeSlotsCount(0) >= 1) then
+                crystal = math.random(4096, 4103)
+                player:addItem(crystal)
+                player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
+                player:setMissionStatus(player:getNation(), 1)
+            else
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, crystal)
             end
         end
-    elseif csid == 506 and option == 0 then
-        npcUtil.giveKeyItem(player, xi.ki.C_L_REPORTS)
-        player:confirmTrade()
-    elseif csid == 763 then
-        player:setCharVar("MissionStatus", 1)
-    elseif csid == 507 then
+    elseif (csid == 506 and option == 0) then
+        player:tradeComplete()
+        player:addKeyItem(xi.ki.C_L_REPORTS)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.C_L_REPORTS)
+    elseif (csid == 763) then
+        player:setMissionStatus(player:getNation(), 1)
+    elseif (csid == 507) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
-    elseif
-        csid == 509 and
-        npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.CID_S_SECRET, {
-            item = 13570,
-            var = "CidsSecret_Event",
-        })
-    then
-        player:delKeyItem(xi.ki.UNFINISHED_LETTER)
+    elseif (csid == 509) then
+        if (player:getFreeSlotsCount(0) >= 1) then
+            player:delKeyItem(xi.ki.UNFINISHED_LETTER)
+            player:setCharVar("CidsSecret_Event", 0)
+            player:addItem(13570)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 13570) -- Ram Mantle
+            player:addFame(BASTOK, 30)
+            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
+        else
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13570)
+        end
     else
         xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.DETONATOR_LEARNED)
     end

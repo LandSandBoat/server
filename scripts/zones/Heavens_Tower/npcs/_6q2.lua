@@ -15,7 +15,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 0 then
         player:startEvent(153)
@@ -68,7 +68,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 153 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
         player:addKeyItem(xi.ki.LETTER_TO_THE_AMBASSADOR)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_AMBASSADOR)
@@ -77,15 +77,15 @@ entity.onEventFinish = function(player, csid, option)
             player:addMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL)
             player:addKeyItem(xi.ki.NEW_FEIYIN_SEAL)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NEW_FEIYIN_SEAL)
-            player:setCharVar("MissionStatus", 10)
+            player:setMissionStatus(player:getNation(), 10)
         end
         player:delKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST)
     elseif csid == 214 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
         player:delKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
         player:addTitle(xi.title.STARORDAINED_WARRIOR)
     elseif csid == 310 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         player:addTitle(xi.title.HERO_ON_BEHALF_OF_WINDURST)
         player:addKeyItem(xi.ki.HOLY_ONES_INVITATION)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.HOLY_ONES_INVITATION)
@@ -94,13 +94,13 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 192 or csid == 216 then
         finishMissionTimeline(player, 1, csid, option)
     elseif csid == 362 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif csid == 384 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 385 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 386 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif csid == 407 then
         player:setPos(0, -16.750, 130, 64, 239)
     end

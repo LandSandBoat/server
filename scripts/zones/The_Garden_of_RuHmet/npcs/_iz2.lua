@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 1) then
         player:startEvent(202)
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.WHEN_ANGELS_FALL  and player:getCharVar("PromathiaStatus") == 2) then
-        if ( Race== xi.race.HUME_M or Race== xi.race.HUME_F) then
+        if ( Race==xi.race.HUME_M or Race==xi.race.HUME_F) then
             player:startEvent(120)
         else
             player:messageSpecial(ID.text.NO_NEED_INVESTIGATE)

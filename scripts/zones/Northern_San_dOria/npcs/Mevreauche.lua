@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -91,6 +92,10 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             player:setLocalVar("SmithingTraded",0)
         end
+    end
+
+    if player:hasEminenceRecord(101) then
+        xi.roe.onRecordTrigger(player, 101)
     end
 end
 

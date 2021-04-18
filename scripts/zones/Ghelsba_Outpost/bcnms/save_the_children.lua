@@ -39,11 +39,11 @@ battlefield_object.onEventFinish = function(player, csid, option)
         csid == 32001 and
         option == 0 and
         player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.SAVE_THE_CHILDREN and
-        player:getCharVar("MissionStatus") == 2
+        player:getMissionStatus(player:getNation()) == 2
     then
         npcUtil.giveKeyItem(player, xi.ki.ORCISH_HUT_KEY)
         player:setTitle(xi.title.FODDERCHIEF_FLAYER)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     end
 end
 

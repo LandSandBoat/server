@@ -1,3 +1,6 @@
 [submodule "navmeshes"]
 	path = navmeshes
-	url = https://github.com/topaz-next/xiNavmeshes.git
+	url = https://github.com/DerpyProjectGroup/xiNavmeshes.git
+[submodule "xiNavmeshes"]
+	path = xiNavmeshes
+	url = https://github.com/DerpyProjectGroup/xiNavmeshes.git

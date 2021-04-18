@@ -14,7 +14,7 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getCharVar("MissionStatus") == 9
+        player:getMissionStatus(player:getNation()) == 9
     then
         player:startEvent(75)
     else
@@ -29,7 +29,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 75 then
-        player:setCharVar("MissionStatus", 10)
+        player:setMissionStatus(player:getNation(), 10)
     end
 end
 

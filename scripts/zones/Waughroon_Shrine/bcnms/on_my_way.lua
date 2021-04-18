@@ -35,9 +35,9 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ON_MY_WAY and player:getCharVar("MissionStatus") == 2 then
+        if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ON_MY_WAY and player:getMissionStatus(player:getNation()) == 2 then
             npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_WEREI)
-            player:setCharVar("MissionStatus", 3)
+            player:setMissionStatus(player:getNation(), 3)
         end
     end
 end

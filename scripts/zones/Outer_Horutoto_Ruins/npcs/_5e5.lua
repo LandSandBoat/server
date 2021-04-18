@@ -16,14 +16,14 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getCharVar("MissionStatus") == 4 and
+        player:getMissionStatus(player:getNation()) == 4 and
         not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0):isSpawned() and
         not GetMobByID(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1):isSpawned()
     then
         SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 0)
         SpawnMob(ID.mob.JESTER_WHO_D_BE_KING_OFFSET + 1)
 
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getCharVar("MissionStatus") == 5) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and player:getMissionStatus(player:getNation()) == 5) then
         player:startEvent(71)
     end
 end
@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 71 then
         player:addKeyItem(xi.ki.ORASTERY_RING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ORASTERY_RING)
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     end
 end
 

@@ -19,9 +19,9 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-260.136, 2.09, -325.702, 188)
     end
-    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getCharVar("MissionStatus") == 3 then
+    if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 3 then
         cs = 50
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getCharVar("MissionStatus") == 7 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.DOLL_OF_THE_DEAD and player:getMissionStatus(player:getNation()) == 7 then
         cs = 61
     end
     return cs

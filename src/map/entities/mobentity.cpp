@@ -784,19 +784,6 @@ void CMobEntity::DistributeRewards()
             blueutils::TryLearningSpells(PChar, this);
             m_UsedSkillIds.clear();
 
-            if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
-            {
-                charutils::DistributeExperiencePoints(PChar, this);
-            }
-
-            // check for gil (beastmen drop gil, some NMs drop gil)
-            if ((map_config.mob_gil_multiplier > 0 && CanDropGil()) ||
-                (map_config.all_mobs_gil_bonus > 0 &&
-                 getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
-            {
-                charutils::DistributeGil(PChar, this); // TODO: REALISATION MUST BE IN TREASUREPOOL
-            }
-
             // RoE Mob kill event for all party members
             PChar->ForAlliance([this, PChar](CBattleEntity* PMember) {
                 if (PMember->getZone() == PChar->getZone())
@@ -807,6 +794,20 @@ void CMobEntity::DistributeRewards()
                     roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
                 }
             });
+
+            if (m_giveExp && !PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+            {
+                charutils::DistributeExperiencePoints(PChar, this);
+                charutils::DistributeCapacityPoints(PChar, this);
+            }
+
+            // check for gil (beastmen drop gil, some NMs drop gil)
+            if ((map_config.mob_gil_multiplier > 0 && CanDropGil()) ||
+                (map_config.all_mobs_gil_bonus > 0 &&
+                 getMobMod(MOBMOD_GIL_MAX) >= 0)) // Negative value of MOBMOD_GIL_MAX is used to prevent gil drops in Dynamis/Limbus.
+            {
+                charutils::DistributeGil(PChar, this); // TODO: REALISATION MUST BE IN TREASUREPOOL
+            }
 
             DropItems(PChar);
         }

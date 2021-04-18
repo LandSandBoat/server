@@ -50,7 +50,7 @@ xi.ally =
                 end
             end
 
-            -- printf(" xi.ally.startAssist: target = %u (xi.ally.ASSIST_PLAYER)", assistTarget)
+            -- printf("xi.ally.startAssist: target = %u (xi.ally.ASSIST_PLAYER)", assistTarget)
 
             -- Attack their target if found. If none found, we'll fall to xi.ally.ASSIST_RANDOM.
             -- A variety of reasons could cause this - players have hate but are not engaged is one.

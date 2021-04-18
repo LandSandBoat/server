@@ -13,8 +13,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL then
-        local MissionStatus = player:getCharVar("MissionStatus")
+
+    if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL) then
+        local MissionStatus = player:getMissionStatus(player:getNation())
 
         if MissionStatus >= 5 and MissionStatus <= 7 then
             player:startEvent(103)

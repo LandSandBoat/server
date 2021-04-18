@@ -21,6 +21,16 @@ zones[xi.zone.EAST_RONFAURE_S] =
         LOGGING_IS_POSSIBLE_HERE = 7147, -- Logging is possible here if you have <item>.
         FISHING_MESSAGE_OFFSET   = 7731, -- You can't fish here.
         COMMON_SENSE_SURVIVAL    = 8958, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 8040, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 8041, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 8042, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 8043, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 8044, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 8045, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 8046, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 8047, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 8048, -- Obtained key item: ≺abyssite>!
     },
     mob =
     {
@@ -36,6 +46,29 @@ zones[xi.zone.EAST_RONFAURE_S] =
             [17109308] = 17109338,
         },
         MYRADROSH    = 17109235,
+        VOIDWALKER   =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17109393, -- Sunderclaw
+                17109392, -- Sunderclaw
+                17109391, -- Sunderclaw
+                17109390, -- Sunderclaw
+                17109389,  -- Quagmire Pugil
+                17109388,  -- Quagmire Pugil
+                17109387,  -- Quagmire Pugil
+                17109386,  -- Quagmire Pugil
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17109385, -- Capricornus
+                17109384  -- Yacumama
+            },
+            [xi.keyItem.BLUE_ABYSSITE] = {
+                17109383  -- Krabkatoa
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17109382  -- Yilbegan
+            }
+        }
     },
     npc =
     {

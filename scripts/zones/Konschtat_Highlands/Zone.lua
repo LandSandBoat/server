@@ -18,6 +18,7 @@ end
 
 zone_object.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function( player, prevZone)
@@ -29,7 +30,7 @@ zone_object.onZoneIn = function( player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 104
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") == 1 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) == 1 then
         cs = 106
     end
 

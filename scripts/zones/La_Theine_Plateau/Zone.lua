@@ -25,6 +25,7 @@ end
 zone_object.onInitialize = function(zone)
     LA_THEINE_PLATEAU.moveFallenEgg()
     xi.chocobo.initZone(zone)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -38,7 +39,7 @@ zone_object.onZoneIn = function(player, prevZone)
         cs = 123
     elseif (prevZone == xi.zone.ORDELLES_CAVES and player:getCharVar("darkPuppetCS") == 5 and player:getFreeSlotsCount() >= 1) then
         cs = 122
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getCharVar("MissionStatus") ==1) then
+    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.VAIN and player:getMissionStatus(player:getNation()) ==1) then
         cs = 125
     end
 

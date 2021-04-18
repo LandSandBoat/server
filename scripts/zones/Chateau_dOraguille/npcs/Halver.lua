@@ -19,11 +19,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    --print(player:getCharVar("MissionStatus"))
+    --print(player:getMissionStatus(player:getNation()))
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
     local WildcatSandy = player:getCharVar("WildcatSandy")
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     -- Lure of the Wildcat San d'Oria
     if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 16)) then
@@ -156,33 +156,33 @@ entity.onEventFinish = function(player, csid, option)
 
     if (csid == 501) then
         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA)
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 503) then
-        player:setCharVar("MissionStatus", 9)
+        player:setMissionStatus(player:getNation(), 9)
     elseif (csid == 508) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 505) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
         player:addKeyItem(xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_TO_THE_CONSULS_SANDORIA)
     elseif (csid == 502) then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 558) then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 16, true))
     elseif (csid == 504) then
-        player:setCharVar("MissionStatus", 9)
+        player:setMissionStatus(player:getNation(), 9)
     elseif (csid == 546) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 507 or csid == 534 or csid == 548) then
         finishMissionTimeline(player, 3, csid, option)
     elseif (csid == 533) then
         player:addKeyItem(xi.ki.NEW_FEIYIN_SEAL)
-        player:setCharVar("MissionStatus", 10)
+        player:setMissionStatus(player:getNation(), 10)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.NEW_FEIYIN_SEAL)
     elseif (csid == 25) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif (csid == 22) then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif (csid == 9) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 181)
@@ -191,7 +191,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(181)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 181)
         end
-        player:setCharVar("MissionStatus", 0)
+        player:setMissionStatus(player:getNation(), 0)
         player:completeMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT)
         player:setRank(10)
         player:addGil(100000)
@@ -199,7 +199,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setTitle(xi.title.SAN_DORIAN_ROYAL_HEIR)
         player:setCharVar("SandoEpilogue", 1)
     elseif (csid == 58) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 102) then
         finishMissionTimeline(player, 3, csid, option)
         player:setCharVar("Wait1DayM8-1_date", os.time() + 60)

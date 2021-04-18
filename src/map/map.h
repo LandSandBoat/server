@@ -86,6 +86,7 @@ struct map_config_t
     uint8       exp_party_gap_penalties;     // if 1 Party Gap Penalties will apply
     float       exp_retain;                  // percentage of normally lost experience to retain upon death
     int8        exp_loss_level;              // Minimum main job level at which a character may lose experience points.
+    float       capacity_rate;               // Capacity Point rate increase per kill
     bool        level_sync_enable;           // Enable/disable Level Sync
     bool        disable_gear_scaling;        // Disables ability to equip higher level gear when level cap/sync effect is on player.
     bool        all_jobs_widescan;           // Enable/disable jobs other than BST and RNG having widescan.

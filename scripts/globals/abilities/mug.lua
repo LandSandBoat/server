@@ -4,6 +4,7 @@
 -- Obtained: Thief Level 35
 -- Recast Time: 5:00
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -22,6 +23,20 @@ ability_object.onUseAbility = function(player, target, ability, action)
         thfLevel = player:getMainLvl()
     else
         thfLevel = player:getSubLvl()
+    end
+
+    -- TODO: Need to verify if there's a message associated with this
+    local jpValue = player:getJobPointLevel(xi.jp.MUG_EFFECT)
+    if jpValue > 0 and player:getMainJob() == xi.job.THF then
+        local hpSteal = ((player:getStat(xi.mod.AGI) + player:getStat(xi.mod.DEX)) * jpValue) * 0.05
+        local mobHP = target:getHP()
+
+        if hpSteal > mobHP then
+            hpSteal = mobHP
+        end
+
+        target:addHP(-hpSteal)
+        player:addHP(hpSteal)
     end
 
     local mugChance = 90 + thfLevel - target:getMainLvl()

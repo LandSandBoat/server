@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
     local data = questData[inventorySize]
 
     -- LURE OF THE WILDCAT
-    if lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(WildcatJeuno, 12) then
+    if lureOfTheWildcat == QUEST_ACCEPTED and not utils.mask.getBit(wildcatJeuno, 12) then
         player:startEvent(10056)
 
     -- GOBBIEBAG QUESTS
