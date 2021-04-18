@@ -27,16 +27,16 @@ services:
 
   # The server service
   game:
-    # Build whatever is in the Dockerfile in the ixion root folder
+    # Build whatever is in the Dockerfile in the topaz root folder
     build: .
     depends_on:
       - "db"
     ports:
-      # ixion_connect
+      # topaz_connect
       - "54230:54230/tcp"
       - "54231:54231/tcp"
       - "54001:54001/tcp"
-      # ixion_search
+      # topaz_search
       - "54002:54002/tcp"
-      # ixion_game
+      # topaz_game
       - "54230:54230/udp"

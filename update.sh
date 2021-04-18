@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REMOTE="origin" # Remote to pull from
-SERVICE="" # Systemd service (e.g. "ixion.service")
+SERVICE="" # Systemd service (e.g. "topaz.service")
 
 stash() {
     git status --porcelain | grep "^." >/dev/null
@@ -46,10 +46,10 @@ then
     python3 dbtool.py update
     # Set zoneip
     cd ..
-    IXION_LOGIN=`grep -oP 'mysql_login:\s+\K\w+' conf/map.conf`
-    IXION_PASSWORD=`grep -oP 'mysql_password:\s+\K\w+' conf/map.conf`
-    IXION_DB=`grep -oP 'mysql_database:\s+\K\w+' conf/map.conf`
-    IP=`mysql -u $IXION_LOGIN -p$IXION_PASSWORD $IXION_DB -N -e "SELECT zoneip FROM zone_settings LIMIT 1;"`
+    XI_LOGIN=`grep -oP 'mysql_login:\s+\K\w+' conf/map.conf`
+    XI_PASSWORD=`grep -oP 'mysql_password:\s+\K\w+' conf/map.conf`
+    XI_DB=`grep -oP 'mysql_database:\s+\K\w+' conf/map.conf`
+    IP=`mysql -u $XI_LOGIN -p$XI_PASSWORD $XI_DB -N -e "SELECT zoneip FROM zone_settings LIMIT 1;"`
     echo -e "\nCurrent zoneip: $IP"
     echo && read -r -p "Would you like to change the server IP? [y/N] " ZONEIP
     if [ ! -z "$ZONEIP" ] && [[ "$ZONEIP" =~ ^[Yy]$ ]]
@@ -64,7 +64,7 @@ then
         echo && read -r -p "Enter zoneip (leave empty to keep current): " IP
         if [ ! -z "$IP" ]
         then
-            mysql -u $IXION_LOGIN -p$IXION_PASSWORD $IXION_DB -e "UPDATE zone_settings SET zoneip = '$IP';"
+            mysql -u $XI_LOGIN -p$XI_PASSWORD $XI_DB -e "UPDATE zone_settings SET zoneip = '$IP';"
             # Following line used for systemd service.
             #echo IP=$IP > ip.txt
             echo "Set zoneip to '$IP'!"
@@ -75,7 +75,7 @@ then
     # Run custom sql (e.g. update ports)
     #if [ -e sql/backups/custom.sql ]
     #then
-    #    mysql -u $IXION_LOGIN -p$IXION_PASSWORD $IXION_DB < sql/backups/custom.sql
+    #    mysql -u $XI_LOGIN -p$XI_PASSWORD $XI_DB < sql/backups/custom.sql
     #fi
     if [ ! -z "$SERVICE" ]
     then

@@ -106,7 +106,7 @@ entity.onTrigger = function(player, npc)
     --     OtherQuests = OtherQuests - 128 -- Chasing Dreams(pt.2).
     -- end
 
--- *This quest, as of the time this script was written, is not yet defined in Ixion.
+-- *This quest, as of the time this script was written, is not yet defined.
     -- if (player:hasCompletedQuest(**Unknown**, MONSTROSITY)) then
     --     OtherQuests = OtherQuests - 256 -- Monstrosity.
     -- end

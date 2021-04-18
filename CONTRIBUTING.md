@@ -12,13 +12,13 @@
 
 # General Guidelines
 
-* By contributing to Ixion, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
+* By contributing to Topaz, either through issues or pull requests, you are expected to abide by the rules laid out here in this Contributing Guide.
 * We do not support out-of-date clients or client modification.
 * We do not support piracy of any kind. We encourage you to maintain an active retail subscription and support the game.
 
 # License
 
-* We operate under [GNU General Public License v3.0](https://gitlab.com/ixion-development/ixion/blob/stable/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
+* We operate under [GNU General Public License v3.0](https://github.com/DerpyProjectGroup/topaz/blob/topaz/LICENSE). We do not accept contributions that use other more restrictive licenses (such as AGPL3).
 
 # Workflow Guide
 
@@ -35,7 +35,7 @@
 
 # Pull Request Contributions:
 
-All contributions must be done through pull requests to the Ixion repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
+All contributions must be done through pull requests to the Topaz repository. We don't take fixes from Discord to apply ourselves. If you need help with making a pull request, there is a GitHub guide on how to do so. If you still need help after consulting the guide, you can ask for help in Discord and we will be happy to help you.
 
 We prefer submitting early and often, over monolithic and once. If you're implementing a complex feature, please try to submit PRs as you get each smaller functional aspect working (use your best judgment on what counts as a useful PR). This way we can help make sure you're on the right track before you sink a lot of time into implementations we might want done in a different way.
 

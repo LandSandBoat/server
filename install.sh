@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Remote Usage:
-# bash -c "$(curl -fsSL https://ixion.dev/raw/stable/install.sh)"
 
 if [ -f /etc/os-release ]
 then
@@ -34,8 +33,8 @@ fi
 # Download the latest code, install Python requirements, and copy the configuration files:
 if [ ! -e install.sh ]
 then
-    git clone --recursive https://gitlab.com/ixion-development/ixion.git
-    cd ixion
+    git clone --recursive https://github.com/DerpyProjectGroup/topaz.git
+    cd topaz
 fi
 pip3 install -r tools/requirements.txt
 cp conf/default/* conf/
@@ -43,48 +42,48 @@ clear
 # Run the following script to improve database security:
 sudo mysql_secure_installation
 # Change these to improve security:
-echo -e "\nCreate a Ixion MySQL user. (default: ixion)"
+echo -e "\nCreate a Topaz MySQL user. (default: topaz)"
 echo "WARNING! This user will be dropped if it exists. Leave blank for default."
-read -r -p "Login: " IXION_LOGIN
-if [ -z "$IXION_LOGIN" ]
+read -r -p "Login: " XI_LOGIN
+if [ -z "$XI_LOGIN" ]
 then
-    IXION_LOGIN="ixion"
+    XI_LOGIN="topaz"
 fi
-read -r -p "Password: " IXION_PASSWORD
-if [ -z "$IXION_PASSWORD" ]
+read -r -p "Password: " XI_PASSWORD
+if [ -z "$XI_PASSWORD" ]
 then
-    IXION_PASSWORD="password"
+    XI_PASSWORD="password"
 fi
 echo "Name your database. (default: xidb)"
 echo "WARNING! This database will be reset to default if it exists. Leave blank for default."
-read -r -p "Name: " IXION_DB
-if [ -z "$IXION_DB" ]
+read -r -p "Name: " XI_DB
+if [ -z "$XI_DB" ]
 then
-    IXION_DB="xidb"
+    XI_DB="xidb"
 fi
 # Create a database user and empty database with the login, password, and database name provided:
 echo -e "\nEnter the MySQL root password."
-DB_QUERY="DROP USER IF EXISTS '$IXION_LOGIN'@'localhost'; \
-    CREATE USER '$IXION_LOGIN'@'localhost' IDENTIFIED BY '$IXION_PASSWORD'; \
-    CREATE DATABASE IF NOT EXISTS $IXION_DB;USE $IXION_DB; \
-    GRANT ALL PRIVILEGES ON $IXION_DB.* TO '$IXION_LOGIN'@'localhost';"
+DB_QUERY="DROP USER IF EXISTS '$XI_LOGIN'@'localhost'; \
+    CREATE USER '$XI_LOGIN'@'localhost' IDENTIFIED BY '$XI_PASSWORD'; \
+    CREATE DATABASE IF NOT EXISTS $XI_DB;USE $XI_DB; \
+    GRANT ALL PRIVILEGES ON $XI_DB.* TO '$XI_LOGIN'@'localhost';"
 sudo mysql -u root -p -e "$DB_QUERY" || exit
-# Edit the new login.conf, map.conf, and search_server.conf files in ixion/conf/ and change MySQL info
-sed -i "s/mysql_login:     root/mysql_login:     "$IXION_LOGIN"/g" conf/map.conf
-sed -i "s/mysql_login:     root/mysql_login:     "$IXION_LOGIN"/g" conf/login.conf
-sed -i "s/mysql_login:     root/mysql_login:     "$IXION_LOGIN"/g" conf/search_server.conf
-sed -i "s/mysql_password:  root/mysql_password:  "$IXION_PASSWORD"/g" conf/map.conf
-sed -i "s/mysql_password:  root/mysql_password:  "$IXION_PASSWORD"/g" conf/login.conf
-sed -i "s/mysql_password:  root/mysql_password:  "$IXION_PASSWORD"/g" conf/search_server.conf
-sed -i "s/mysql_database:  xidb/mysql_database:  "$IXION_DB"/g" conf/map.conf
-sed -i "s/mysql_database:  xidb/mysql_database:  "$IXION_DB"/g" conf/login.conf
-sed -i "s/mysql_database:  xidb/mysql_database:  "$IXION_DB"/g" conf/search_server.conf
+# Edit the new login.conf, map.conf, and search_server.conf files in topaz/conf/ and change MySQL info
+sed -i "s/mysql_login:     root/mysql_login:     "$XI_LOGIN"/g" conf/map.conf
+sed -i "s/mysql_login:     root/mysql_login:     "$XI_LOGIN"/g" conf/login.conf
+sed -i "s/mysql_login:     root/mysql_login:     "$XI_LOGIN"/g" conf/search_server.conf
+sed -i "s/mysql_password:  root/mysql_password:  "$XI_PASSWORD"/g" conf/map.conf
+sed -i "s/mysql_password:  root/mysql_password:  "$XI_PASSWORD"/g" conf/login.conf
+sed -i "s/mysql_password:  root/mysql_password:  "$XI_PASSWORD"/g" conf/search_server.conf
+sed -i "s/mysql_database:  xidb/mysql_database:  "$XI_DB"/g" conf/map.conf
+sed -i "s/mysql_database:  xidb/mysql_database:  "$XI_DB"/g" conf/login.conf
+sed -i "s/mysql_database:  xidb/mysql_database:  "$XI_DB"/g" conf/search_server.conf
 # Build the database:
 cd sql
 for SQL_FILE in *.sql
     do
         echo "Importing $SQL_FILE..."
-        mysql -u $IXION_LOGIN -p$IXION_PASSWORD $IXION_DB < "$SQL_FILE"
+        mysql -u $XI_LOGIN -p$XI_PASSWORD $XI_DB < "$SQL_FILE"
     done
 DB_VER=`git rev-parse --short=4 HEAD`
 echo -e "\n#DB_VER: $DB_VER" >> ../conf/version.conf
@@ -98,7 +97,7 @@ cd ../build
 cmake ..
 make -j $(nproc)
 # Set zoneip
-IP=`mysql -u $IXION_LOGIN -p$IXION_PASSWORD $IXION_DB -N -e "SELECT zoneip FROM zone_settings LIMIT 1;"`
+IP=`mysql -u $XI_LOGIN -p$XI_PASSWORD $XI_DB -N -e "SELECT zoneip FROM zone_settings LIMIT 1;"`
 echo -e "\nCurrent zoneip: $IP"
 echo && read -r -p "Would you like to change the server IP? [y/N] " ZONEIP
 if [ ! -z "$ZONEIP" ] && [[ "$ZONEIP" =~ ^[Yy]$ ]]
@@ -113,7 +112,7 @@ then
     echo && read -r -p "Enter zoneip (leave empty to keep current): " IP
     if [ ! -z "$IP" ]
     then
-        mysql -u $IXION_LOGIN -p$IXION_PASSWORD $IXION_DB -e "UPDATE zone_settings SET zoneip = '$IP';" || exit
+        mysql -u $XI_LOGIN -p$XI_PASSWORD $XI_DB -e "UPDATE zone_settings SET zoneip = '$IP';" || exit
         echo "Set zoneip to '$IP'!"
     else
         echo "Set zoneid skipped."

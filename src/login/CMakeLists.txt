@@ -18,20 +18,20 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/connectserver.rc")
 endif()
 
-add_executable(ixion_connect ${SOURCES} ${resource})
+add_executable(topaz_connect ${SOURCES} ${resource})
 
 if(WIN32)
-    set_target_properties(ixion_connect PROPERTIES OUTPUT_NAME ixion_connect${spacer}${platform_suffix})
+    set_target_properties(topaz_connect PROPERTIES OUTPUT_NAME topaz_connect${spacer}${platform_suffix})
 endif()
 
 target_compile_definitions(
-    ixion_connect
+    topaz_connect
     PUBLIC
     -DdsTCPSERV
     -DDEBUGLOGLOGIN
 )
 
-target_link_libraries(ixion_connect
+target_link_libraries(topaz_connect
     PUBLIC
     common
     project_options
@@ -39,4 +39,4 @@ target_link_libraries(ixion_connect
     project_warnings
 )
 
-set_target_output_directory(ixion_connect)
+set_target_output_directory(topaz_connect)

@@ -22,14 +22,14 @@
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define IXION_MAJOR_VERSION 2021 // Major Version
-#define IXION_MINOR_VERSION 2 // Minor Version
-#define IXION_REVISION      1 // Revision
+#define XI_MAJOR_VERSION 2021 // Major Version
+#define XI_MINOR_VERSION 2    // Minor Version
+#define XI_REVISION      1    // Revision
 
-#define IXION_RELEASE_FLAG  1 // 1=Stable,0=Unstable
+#define XI_RELEASE_FLAG 1 // 1=Stable,0=Unstable
 
-#define IXION_SERVER_NONE  0 // not defined
-#define IXION_SERVER_LOGIN 1 // login server
-#define IXION_SERVER_MAP   2 // map server
+#define XI_SERVER_NONE     0 // not defined
+#define XI_SERVER_LOGIN  1 // login server
+#define XI_SERVER_MAP      2 // map server
 
 #endif /* _VERSION_H_ */

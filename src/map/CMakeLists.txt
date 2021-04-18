@@ -123,22 +123,22 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/gameserver.rc")
 endif()
 
-add_executable(ixion_game
+add_executable(topaz_game
     ${SOURCES}
     ${resource})
 
 if(WIN32)
-    set_target_properties(ixion_game PROPERTIES OUTPUT_NAME ixion_game${spacer}${platform_suffix})
+    set_target_properties(topaz_game PROPERTIES OUTPUT_NAME topaz_game${spacer}${platform_suffix})
 endif()
 
 target_compile_definitions(
-    ixion_game
+    topaz_game
     PUBLIC
     -DdsUDPSERV
     -DDEBUGLOGMAP
 )
 
-target_link_libraries(ixion_game
+target_link_libraries(topaz_game
     PUBLIC
     filewatch
     sol2_single
@@ -156,12 +156,12 @@ target_link_libraries(ixion_game
 )
 
 if(TRACY_ENABLE)
-    target_link_libraries(ixion_game PUBLIC tracy_client)
+    target_link_libraries(topaz_game PUBLIC tracy_client)
 endif(TRACY_ENABLE)
 
 if(APPLE)
-    link_options(ixion_game PUBLIC -pagezero_size 10000 -image_base 100000000)
+    link_options(topaz_game PUBLIC -pagezero_size 10000 -image_base 100000000)
 endif()
 
-set_target_output_directory(ixion_game)
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ixion_game)
+set_target_output_directory(topaz_game)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT topaz_game)

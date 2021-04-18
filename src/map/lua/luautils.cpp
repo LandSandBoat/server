@@ -97,10 +97,10 @@ namespace luautils
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
 
-    std::mutex reloadListBottleneck;
+    std::mutex                    reloadListBottleneck;
     std::map<std::string, uint64> toReloadList;
     std::vector<std::string>      filteredList;
-    void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func)
+    void                          SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func)
     {
         std::lock_guard bottleneck(reloadListBottleneck);
         func(toReloadList);
@@ -361,7 +361,7 @@ namespace luautils
         TracyZoneString(funcName);
         TracyZoneIString(PEntity->GetName());
 
-	if (PEntity->objtype == TYPE_NPC)
+        if (PEntity->objtype == TYPE_NPC)
         {
             std::string zone_name = (const char*)PEntity->loc.zone->GetName();
             std::string npc_name  = (const char*)PEntity->GetName();
@@ -383,7 +383,7 @@ namespace luautils
         }
         else if (PEntity->objtype == TYPE_PET)
         {
-            std::string mob_name  = static_cast<CPetEntity*>(PEntity)->GetScriptName();
+            std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
 
             if (auto cached_func = lua["xi"]["globals"]["pets"][mob_name][funcName]; cached_func.valid())
             {
@@ -447,7 +447,7 @@ namespace luautils
         TracyZoneString(filename);
 
         // Handle filename -> path conversion
-        std::filesystem::path path(filename);
+        std::filesystem::path    path(filename);
         std::vector<std::string> parts;
         for (auto part : path)
         {
@@ -505,7 +505,7 @@ namespace luautils
 
         // file_result should be good, cache it!
 
-        auto table = lua["xi"].get_or_create<sol::table>();
+        auto        table   = lua["xi"].get_or_create<sol::table>();
         std::string out_str = "xi";
         for (auto& part : parts)
         {
@@ -564,7 +564,7 @@ namespace luautils
 
         return table;
     }
-    
+
     void OnEntityLoad(CBaseEntity* PEntity)
     {
         TracyZoneScoped;
@@ -1379,7 +1379,7 @@ namespace luautils
 
         auto filename = fmt::format("./scripts/zones/{}/Zone.lua", name);
 
-		CacheLuaObjectFromFile(filename);
+        CacheLuaObjectFromFile(filename);
 
         auto onInitialize = lua["xi"]["zones"][name]["Zone"]["onInitialize"];
         if (!onInitialize.valid())
@@ -1559,14 +1559,14 @@ namespace luautils
             PChar->m_event.Script = filename;
         }
 
-        auto name = (const char*)PChar->loc.zone->GetName();
+        auto name   = (const char*)PChar->loc.zone->GetName();
         auto zoneId = (const uint16*)PChar->loc.zone->GetID();
 
         sol::function onRegionLeave;
         if (PChar->PInstance && zoneId == (const uint16*)PChar->PInstance->GetZone()->GetID())
         {
             auto instance_name = (const char*)PChar->PInstance->GetName();
-            onRegionLeave = lua["xi"]["zones"][name]["instance"][instance_name]["onRegionLeave"];
+            onRegionLeave      = lua["xi"]["zones"][name]["instance"][instance_name]["onRegionLeave"];
         }
         else
         {
@@ -1841,8 +1841,8 @@ namespace luautils
         }
         else
         {
-            auto zone = (const char*)PAttacker->loc.zone->GetName();
-            auto name = (const char*)PAttacker->GetName();
+            auto zone          = (const char*)PAttacker->loc.zone->GetName();
+            auto name          = (const char*)PAttacker->GetName();
             onAdditionalEffect = lua[sol::create_if_nil]["xi"]["zones"][zone]["mobs"][name]["onAdditionalEffect"];
         }
 
@@ -2112,7 +2112,6 @@ namespace luautils
 
         return { messageId, param1, param2 };
     }
-
 
     // We use the subject. The return value is the message number or 0.
     // It is also necessary to somehow pass the message parameter (for example,
@@ -2785,7 +2784,6 @@ namespace luautils
                 return -1;
             }
 
-
             PChar->ForAlliance([PMob, PChar, &onMobDeathEx](CBattleEntity* PMember) {
                 if (PMember->getZone() == PChar->getZone())
                 {
@@ -2943,7 +2941,7 @@ namespace luautils
             return -1;
         }
 
-        auto onMobDespawn = getEntityCachedFunction(PMob , "onMobDespawn");
+        auto onMobDespawn = getEntityCachedFunction(PMob, "onMobDespawn");
         if (!onMobDespawn.valid())
         {
             return -1;
@@ -4066,10 +4064,10 @@ namespace luautils
     sol::table GetServerVersion()
     {
         sol::table version = lua.create_table();
-        version["branch"] = IXION_RELEASE_FLAG;
-        version["major"] = IXION_MAJOR_VERSION;
-        version["minor"] = IXION_MINOR_VERSION;
-        version["rev"] = IXION_REVISION;
+        version["branch"]  = XI_RELEASE_FLAG;
+        version["major"]   = XI_MAJOR_VERSION;
+        version["minor"]   = XI_MINOR_VERSION;
+        version["rev"]     = XI_REVISION;
         return version;
     }
 
@@ -4086,9 +4084,9 @@ namespace luautils
         position_t pos = nearPosition(center, radius, theta);
 
         sol::table nearPos = lua.create_table();
-        nearPos["x"] = pos.x;
-        nearPos["y"] = pos.y;
-        nearPos["z"] = pos.z;
+        nearPos["x"]       = pos.x;
+        nearPos["y"]       = pos.y;
+        nearPos["z"]       = pos.z;
 
         return nearPos;
     }
@@ -4196,7 +4194,7 @@ namespace luautils
         }
 
         auto zone_filename = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-        auto funcFromZone = GetCacheEntryFromFilename(zone_filename)[functionName];
+        auto funcFromZone  = GetCacheEntryFromFilename(zone_filename)[functionName];
         if (funcFromZone.valid())
         {
             return funcFromZone;

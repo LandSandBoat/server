@@ -12,16 +12,16 @@ ENV XI_DB_USER=xiadmin
 ENV XI_DB_USER_PASSWD=notarealpassword
 ENV XI_DB_NAME=xidb
 
-# Working directory will be /ixion meaning that the contents of ixion will exist in /ixion
-WORKDIR /ixion
+# Working directory will be /topaz meaning that the contents of topaz will exist in /topaz
+WORKDIR /topaz
 
 # Update and install all requirements as well as some useful tools such as net-tools and nano
 RUN apt update && apt install -y net-tools nano software-properties-common git python3 python3-pip g++-9 cmake make libluajit-5.1-dev libzmq3-dev libssl-dev zlib1g-dev mariadb-server libmariadb-dev luarocks
 
-# Copy everything from the host machine ixion folder to /ixion
-ADD . /ixion
+# Copy everything from the host machine topaz folder to /topaz
+ADD . /topaz
 
-RUN mkdir build && cd build && cmake .. && make -j $(nproc)  && cd .. && rm -r /ixion/build
+RUN mkdir build && cd build && cmake .. && make -j $(nproc)  && cd .. && rm -r /topaz/build
 
 # Copy the docker config files to the conf folder instead of the default config
 COPY /conf/default/* conf/

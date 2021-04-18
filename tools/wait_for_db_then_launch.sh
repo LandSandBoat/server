@@ -19,11 +19,11 @@ XI_DB_VER=`git rev-parse --short=4 HEAD`
 mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "UPDATE DB_VER SET ver = '${XI_DB_VER}'"
 cd ..
 # Start servers
-echo "starting ixion_connect"
-nohup ./ixion_connect > ixion_connect.log &
+echo "starting topaz_connect"
+nohup ./topaz_connect > topaz_connect.log &
 sleep 5
-echo "starting ixion_game"
-nohup ./ixion_game > ixion_game.log &
+echo "starting topaz_game"
+nohup ./topaz_game > topaz_game.log &
 sleep 5
-echo "starting ixion_search"
-./ixion_search > ixion_search.log
+echo "starting topaz_search"
+./topaz_search > topaz_search.log

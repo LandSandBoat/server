@@ -501,7 +501,7 @@ def bad_selection():
 
 def menu():
     print(Fore.GREEN + 'o' + Fore.RED + '--------------------------------' + Fore.GREEN + 'o\n' + Fore.RED + 
-          '| ' + Style.RESET_ALL + 'Ixion Database Management Tool ' + Fore.RED + '|\n'
+          '| ' + Style.RESET_ALL + 'Topaz Database Management Tool ' + Fore.RED + '|\n'
           '| ' + Style.RESET_ALL + str('Connected to ' + database).center(30) + Fore.RED + ' |')
     if current_version:
         print(Fore.RED + '| ' + Style.RESET_ALL + str('#' + current_version).center(30) + Fore.RED + ' |')

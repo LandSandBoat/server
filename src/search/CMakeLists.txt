@@ -14,24 +14,24 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/searchserver.rc")
 endif()
 
-add_executable(ixion_search
+add_executable(topaz_search
     ${SOURCES}
     ${resource})
 
 if(WIN32)
-    set_target_properties(ixion_search PROPERTIES OUTPUT_NAME ixion_search${spacer}${platform_suffix})
+    set_target_properties(topaz_search PROPERTIES OUTPUT_NAME topaz_search${spacer}${platform_suffix})
 endif()
 
 target_compile_definitions(
-    ixion_search
+    topaz_search
     PUBLIC
     -DDEBUGLOGSEARCH
     -DDEFINE_OWN_MAIN
 )
 
-target_compile_definitions(ixion_search PUBLIC DEFINE_OWN_MAIN)
+target_compile_definitions(topaz_search PUBLIC DEFINE_OWN_MAIN)
 
-target_link_libraries(ixion_search
+target_link_libraries(topaz_search
     PUBLIC
     common
     search_packets
@@ -40,4 +40,4 @@ target_link_libraries(ixion_search
     project_warnings
 )
 
-set_target_output_directory(ixion_search)
+set_target_output_directory(topaz_search)
