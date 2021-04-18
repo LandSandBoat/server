@@ -50,7 +50,7 @@ int    arg_c   = 0;
 char** arg_v   = nullptr;
 
 char* SERVER_NAME = nullptr;
-char  SERVER_TYPE = TOPAZ_SERVER_NONE;
+char  SERVER_TYPE = XI_SERVER_NONE;
 
 // Copyright (c) Athena Dev Teams
 // Added by Gabuzomeu

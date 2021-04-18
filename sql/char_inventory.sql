@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : oo
-Source Server Version : 50136
-Source Host           : localhost:3306
-Source Database       : xidb
-
-Target Server Type    : MYSQL
-Target Server Version : 50136
-File Encoding         : 65001
-
-Date: 2013-01-21 00:16:20
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `char_inventory`

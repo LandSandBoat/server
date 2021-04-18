@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getCharVar("MissionStatus") == 1 then
+    if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 1 then
         player:setCharVar("Mission7-1MobKilled", 1)
     end
 end

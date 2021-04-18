@@ -18,6 +18,7 @@ local stock = {
     11811,  -- Destrier Beret
     10293,  -- Chocobo Shirt
 }
+
 local festiveItemVars = {
     [1] = "festiveMoogleNomadCap",
     [2] = "festiveMoogleMoogleCap",
@@ -28,6 +29,18 @@ local festiveItemVars = {
     [7] = "festiveMoogleDestrierBeret",
     [8] = "festiveMoogleChocoboShirt",
 }
+
+local function getFestiveItems(player)
+    local festiveItemsAvailable = {}
+
+    for i = 1, #festiveItemVars, 1 do
+        if player:getCharVar(festiveItemVars[i]) == 1 then
+            table.insert(festiveItemsAvailable, stock[i])
+        end
+    end
+    return festiveItemsAvailable
+end
+
 entity.onTrade = function(player,npc,trade)
     --TODO: trade of pells for prize
 end
@@ -56,17 +69,6 @@ entity.onEventFinish = function(player, csid, option)
             end
         end
     end
-end
-
-local function getFestiveItems(player)
-    local festiveItemsAvailable = {}
-
-    for i = 1, #festiveItemVars, 1 do
-        if player:getCharVar(festiveItemVars[i]) == 1 then
-            table.insert(festiveItemsAvailable, stock[i])
-        end
-    end
-    return festiveItemsAvailable
 end
 
 return entity

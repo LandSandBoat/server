@@ -61,7 +61,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
     local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
     local tenshodoShowdown = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN)
@@ -193,9 +193,9 @@ entity.onEventFinish = function(player, csid, option)
     -- WINDURST 2-1: LOST FOR WORDS
     if csid == 165 and option == 1 then
         npcUtil.giveKeyItem(player, xi.ki.LAPIS_MONOCLE)
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 169 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
         player:setCharVar("MissionStatus_randfoss", 0)
         player:delKeyItem(xi.ki.LAPIS_MONOCLE)
         player:delKeyItem(xi.ki.LAPIS_CORAL)
@@ -220,7 +220,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES)
         player:setCharVar("thickAsThievesGamblingCS", 1)
         npcUtil.giveKeyItem(player,
-            { xi.ki.GANG_WHEREABOUTS_NOTE, xi.ki.FIRST_FORGED_ENVELOPE, xi.ki.SECOND_FORGED_ENVELOPE})
+            {xi.ki.GANG_WHEREABOUTS_NOTE, xi.ki.FIRST_FORGED_ENVELOPE, xi.ki.SECOND_FORGED_ENVELOPE})
     elseif (csid == 508 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES, {
         item = 12514,
         var = "thickAsThievesGamblingCS"

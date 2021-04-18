@@ -13,7 +13,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getCharVar("MissionStatus") == 0) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(180)
     else
         player:startEvent(25)
@@ -32,7 +32,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 180) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     end
 end
 

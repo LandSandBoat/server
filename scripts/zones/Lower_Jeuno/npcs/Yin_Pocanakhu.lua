@@ -14,7 +14,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(220)
     elseif
         player:getCurrentMission(player:getNation()) == xi.mission.id.nation.MAGICITE and
-        player:getCharVar("MissionStatus") == 3
+        player:getMissionStatus(player:getNation()) == 3
     then
         player:startEvent(210)
     else

@@ -9,6 +9,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -118,6 +119,10 @@ entity.onEventFinish = function(player, csid, option)
             player:tradeComplete()
             player:setLocalVar("ClothcraftTraded", 0)
         end
+    end
+
+    if player:hasEminenceRecord(103) then
+        xi.roe.onRecordTrigger(player, 103)
     end
 end
 

@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: xidb
-Target Host: localhost
-Target Database: xidb
-Date: 7/5/2013 7:20:16 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for blue_traits

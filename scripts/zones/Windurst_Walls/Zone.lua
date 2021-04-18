@@ -22,14 +22,18 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if ENABLE_ROV == 1 and player:getCurrentMission(ROV) == xi.mission.id.rov.RHAPSODIES_OF_VANADIEL and player:getMainLvl()>=3 then
         cs = 30035
-    elseif player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and player:getRank(player:getNation()) >= 5 then
+    elseif
+        player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
+        (player:getRank(player:getNation()) > 5 or
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
+    then
         cs = 30036
     elseif
         ENABLE_ASA == 1 and player:getCurrentMission(ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION
         and (prevZone == xi.zone.WINDURST_WATERS or prevZone == xi.zone.WINDURST_WOODS) and player:getMainLvl()>=10
     then
         cs = 510
-    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and player:getCharVar("MissionStatus") == 4 then
+    elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and player:getMissionStatus(player:getNation()) == 4 then
         cs = 443
     end
 
@@ -72,7 +76,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("ASA_Status", 0)
     elseif csid == 443 then
         player:completeMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
-        player:setCharVar("MissionStatus", 0)
+        player:setMissionStatus(player:getNation(), 0)
         player:setRank(10)
         player:addGil(GIL_RATE*100000)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*100000)

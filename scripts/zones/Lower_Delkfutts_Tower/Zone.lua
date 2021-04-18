@@ -26,7 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(460.022, -1.77, -103.442, 188)
     end
-    if player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") <= 1 then
+    if player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getMissionStatus(xi.mission.log_id.ZILART) <= 1 then
         cs = 15
     elseif ENABLE_COP == 1 and prevZone == xi.zone.QUFIM_ISLAND and player:getCurrentMission(COP) < xi.mission.id.cop.THE_RITES_OF_LIFE then
         cs = 22
@@ -59,7 +59,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 15 then
-        player:setCharVar("ZilartStatus", 2)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 2)
     elseif csid == 4 and option == 1 then
         if player:getCharVar("option") == 1 then
             player:setPos(-28, -48, 80, 111, 157)

@@ -70,7 +70,7 @@ zone_object.onRegionEnter = function(player, region)
                 elseif
                     player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
                     player:getCurrentMission(ZILART) == xi.mission.id.zilart.AWAKENING and
-                    player:getCharVar("ZilartStatus") == 3 and
+                    player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
                     player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
                     player:getCharVar("StormsOfFateWait") <= os.time()
                 then

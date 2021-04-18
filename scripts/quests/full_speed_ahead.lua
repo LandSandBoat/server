@@ -55,6 +55,8 @@ xi.full_speed_ahead.onEffectLose = function(player, effect)
 end
 
 xi.full_speed_ahead.tick = function(player, effect)
+    -- TODO: slow mount speed under 50% motivation
+    -- TODO: motivation drains faster when climbing steep hills, red exclamation mark and sweat animation
     player:setLocalVar("FSA_Motivation", player:getLocalVar("FSA_Motivation") - xi.full_speed_ahead.motivation_decay + effect:getPower())
     player:setLocalVar("FSA_Pep", player:getLocalVar("FSA_Pep") + xi.full_speed_ahead.pep_growth + effect:getPower())
 
@@ -97,7 +99,7 @@ xi.full_speed_ahead.onRegionEnter = function(player, index)
         player:setLocalVar("FSA_Motivation", new_motivation)
 
         -- Hearts
-        player:independantAnimation(player, 251, 4)
+        player:independentAnimation(player, 251, 4)
 
         player:messageSpecial(ID.text.RAPTOR_OVERCOME_MUNCHIES, new_food_count, 5)
 
@@ -120,7 +122,7 @@ xi.full_speed_ahead.onCheer = function(player)
     player:messageSpecial(ID.text.RAPTOR_SECOND_WIND)
 
     -- Music Notes
-    player:independantAnimation(player, 252, 4)
+    player:independentAnimation(player, 252, 4)
 
     player:countdown(timeLeft, "Motivation", new_motivation, "Pep", 0)
 end

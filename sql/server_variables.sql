@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : Topaz
-Source Server Version : 50516
-Source Host           : localhost:3306
-Source Database       : xidb
-
-Target Server Type    : MYSQL
-Target Server Version : 50516
-File Encoding         : 65001
-
-Date: 2012-05-19 17:40:04
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

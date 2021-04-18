@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.BREAKING_BARRIERS and player:getCharVar("MissionStatus") == 2 then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.BREAKING_BARRIERS and player:getMissionStatus(player:getNation()) == 2 then
         player:addKeyItem(xi.ki.FIGURE_OF_GARUDA)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FIGURE_OF_GARUDA)
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

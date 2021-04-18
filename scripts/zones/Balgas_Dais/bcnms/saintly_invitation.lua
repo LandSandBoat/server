@@ -42,7 +42,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
         if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.SAINTLY_INVITATION then
             player:addTitle(xi.title.VICTOR_OF_THE_BALGA_CONTEST)
             npcUtil.giveKeyItem(player, xi.ki.BALGA_CHAMPION_CERTIFICATE)
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         end
     end
 end

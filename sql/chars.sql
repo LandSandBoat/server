@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: xidb
-Target Host: localhost
-Target Database: xidb
-Date: 2/11/2013 11:16:49 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for chars
@@ -45,6 +36,7 @@ CREATE TABLE `chars` (
   `unlocked_weapons` blob,
   `gmlevel` smallint(3) unsigned NOT NULL DEFAULT '0',
   `mentor` smallint(3) NOT NULL DEFAULT '0',
+  `job_master` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `campaign_allegiance` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `isstylelocked` tinyint(1) NOT NULL DEFAULT '0',
   `nnameflags` int(10) UNSIGNED NOT NULL DEFAULT '0',

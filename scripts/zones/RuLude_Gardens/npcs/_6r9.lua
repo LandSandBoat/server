@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     CurrentMission = player:getCurrentMission(player:getNation())
     if ( player:getCurrentMission(COP) == xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS and player:getCharVar("PromathiaStatus")==1) then
         player:startEvent(10050)
-    elseif (player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and CurrentMission == xi.mission.id.nation.NONE and player:getCharVar("MissionStatus") == 1) then
+    elseif (player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and CurrentMission == xi.mission.id.nation.NONE and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(128)
     elseif (player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)) then
         if (player:hasKeyItem(xi.ki.AIRSHIP_PASS)) then
@@ -42,7 +42,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 128) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
         player:addMission(player:getNation(), 13)
         player:addKeyItem(xi.ki.LETTERS_TO_ALDO)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTERS_TO_ALDO)
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.AIRSHIP_PASS)
             player:addTitle(xi.title.HAVE_WINGS_WILL_FLY)
         end
-        player:setCharVar("MissionStatus", 6) -- all that's left is to go back to the embassy
+        player:setMissionStatus(player:getNation(), 6) -- all that's left is to go back to the embassy
     elseif (csid == 10050) then
         player:setCharVar("PromathiaStatus", 2)
     end

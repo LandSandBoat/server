@@ -17,15 +17,15 @@ entity.onTrigger = function(player, npc)
     if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK) then
         if (player:getCharVar("notReceivePickaxe") == 1) then
             player:startEvent(425)
-        elseif (player:getCharVar("MissionStatus") == 4) then
+        elseif (player:getMissionStatus(player:getNation()) == 4) then
             player:startEvent(423)
-        elseif (player:getCharVar("MissionStatus") == 5 and player:hasItem(599) == false) then
+        elseif (player:getMissionStatus(player:getNation()) == 5 and player:hasItem(599) == false) then
             player:startEvent(424)
         else
             player:startEvent(422)
         end
     elseif (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) then
-        if (player:getCharVar("MissionStatus") == 9) then
+        if (player:getMissionStatus(player:getNation()) == 9) then
             player:startEvent(426)
         else
             player:startEvent(427)
@@ -33,15 +33,15 @@ entity.onTrigger = function(player, npc)
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK) then
         if (player:getCharVar("notReceivePickaxe") == 1) then
             player:startEvent(425, 1)
-        elseif (player:getCharVar("MissionStatus") == 4) then
+        elseif (player:getMissionStatus(player:getNation()) == 4) then
             player:startEvent(423, 1)
-        elseif (player:getCharVar("MissionStatus") == 5 and player:hasItem(599) == false) then
+        elseif (player:getMissionStatus(player:getNation()) == 5 and player:hasItem(599) == false) then
             player:startEvent(424, 1)
         else
             player:startEvent(422)
         end
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
-        if (player:getCharVar("MissionStatus") == 9) then
+        if (player:getMissionStatus(player:getNation()) == 9) then
             player:startEvent(426, 1)
         else
             player:startEvent(427, 1)
@@ -64,11 +64,11 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addItem(605, 5)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 605) -- Pickaxes
-            player:setCharVar("MissionStatus", 5)
+            player:setMissionStatus(player:getNation(), 5)
             player:setCharVar("notReceivePickaxe", 0)
         end
     elseif (csid == 426) then
-        player:setCharVar("MissionStatus", 10)
+        player:setMissionStatus(player:getNation(), 10)
     end
 
 end

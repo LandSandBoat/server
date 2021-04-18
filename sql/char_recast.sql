@@ -1,12 +1,3 @@
-/*
-MySQL Data Transfer
-Source Host: 192.168.0.140
-Source Database: xidb
-Target Host: 192.168.0.140
-Target Database: xidb
-Date: 1/21/2015 1:06:39 PM
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for char_recast

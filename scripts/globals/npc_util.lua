@@ -293,8 +293,8 @@ end
 
     Examples of valid keyitems parameter:
         xi.ki.ZERUHN_REPORT
-        { xi.ki.PALBOROUGH_MINES_LOGS}
-        { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER}
+        {xi.ki.PALBOROUGH_MINES_LOGS}
+        {xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER}
 ******************************************************************************* --]]
 function npcUtil.giveKeyItem(player, keyitems)
     local ID = zones[player:getZoneID()]
@@ -552,9 +552,9 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
             [xi.anim.FISHING_FISH] = { duration = 10,
                                             nextAnim =
                                             {
-                                                 xi.anim.FISHING_CAUGHT,
-                                                 xi.anim.FISHING_ROD_BREAK,
-                                                 xi.anim.FISHING_LINE_BREAK,
+                                                xi.anim.FISHING_CAUGHT,
+                                                xi.anim.FISHING_ROD_BREAK,
+                                                xi.anim.FISHING_LINE_BREAK,
                                             }
                                        },
             [xi.anim.FISHING_ROD_BREAK] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },

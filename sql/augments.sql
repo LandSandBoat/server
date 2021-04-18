@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
---
--- Host: localhost    Database: xidb
--- ------------------------------------------------------
--- Server version	5.5.5-10.0.20-MariaDB
-
 --
 -- Table structure for table `augments`
 --
@@ -2350,5 +2344,3 @@ INSERT INTO `augments` VALUES (2046, 0, 0, 0, 0, 0);
 -- End unused block
 
 INSERT INTO `augments` VALUES (2047, 0, 0, 0, 0, 0); -- ??? (it literally just says "???") - used by WotG scenario reward
-
--- Dump completed on 2017-03-02  0:17:46

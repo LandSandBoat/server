@@ -16,14 +16,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG)
-
-    SpawnMob(17330309):updateEnmity(target)
-    SpawnMob(17330310):updateEnmity(target)
-    SpawnMob(17330311):updateEnmity(target)
-    SpawnMob(17330319):updateEnmity(target)
-    SpawnMob(17330320):updateEnmity(target)
-    SpawnMob(17330321):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -35,16 +27,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:showText(mob, ID.text.ANIMATED_KNUCKLES_DIALOG+1)
-
-    DespawnMob(17330309)
-    DespawnMob(17330310)
-    DespawnMob(17330311)
-    DespawnMob(17330319)
-    DespawnMob(17330320)
-    DespawnMob(17330321)
-
 end
 
 return entity

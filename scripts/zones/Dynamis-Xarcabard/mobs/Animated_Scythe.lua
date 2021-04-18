@@ -16,14 +16,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG)
-
-    SpawnMob(17330420):updateEnmity(target)
-    SpawnMob(17330421):updateEnmity(target)
-    SpawnMob(17330422):updateEnmity(target)
-    SpawnMob(17330432):updateEnmity(target)
-    SpawnMob(17330433):updateEnmity(target)
-    SpawnMob(17330434):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -35,16 +27,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:showText(mob, ID.text.ANIMATED_SCYTHE_DIALOG+1)
-
-    DespawnMob(17330420)
-    DespawnMob(17330421)
-    DespawnMob(17330422)
-    DespawnMob(17330432)
-    DespawnMob(17330433)
-    DespawnMob(17330434)
-
 end
 
 return entity

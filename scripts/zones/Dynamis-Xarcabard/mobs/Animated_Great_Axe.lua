@@ -16,14 +16,6 @@ entity.onMobEngaged = function(mob, target)
     end
 
     target:showText(mob, ID.text.ANIMATED_GREATAXE_DIALOG)
-
-    SpawnMob(17330383):updateEnmity(target)
-    SpawnMob(17330384):updateEnmity(target)
-    SpawnMob(17330385):updateEnmity(target)
-    SpawnMob(17330395):updateEnmity(target)
-    SpawnMob(17330396):updateEnmity(target)
-    SpawnMob(17330397):updateEnmity(target)
-
 end
 
 entity.onMobFight = function(mob, target)
@@ -35,16 +27,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:showText(mob, ID.text.ANIMATED_GREATAXE_DIALOG+1)
-
-    DespawnMob(17330383)
-    DespawnMob(17330384)
-    DespawnMob(17330385)
-    DespawnMob(17330395)
-    DespawnMob(17330396)
-    DespawnMob(17330397)
-
 end
 
 return entity

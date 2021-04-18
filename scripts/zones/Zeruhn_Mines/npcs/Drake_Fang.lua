@@ -14,7 +14,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
-    local MissionStatus = player:getCharVar("MissionStatus")
+    local MissionStatus = player:getMissionStatus(player:getNation())
 
     -- Enter the Talekeeper 8-2
     if currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and MissionStatus == 4 then
@@ -38,11 +38,11 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 200 then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 202 then
-        player:setCharVar("Missionstatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 204 then
-        player:setCharVar("Missionstatus", 5)
+        player:setMissionStatus(player:getNation(), 5)
         player:delKeyItem(xi.ki.OLD_PIECE_OF_WOOD)
         player:setPos(23, 0, 4)
     end

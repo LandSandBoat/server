@@ -15,14 +15,14 @@ end
 entity.onTrigger = function(player, npc)
     if
         player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and
-        player:getCharVar("MissionStatus") == 2 and
+        player:getMissionStatus(player:getNation()) == 2 and
         not GetMobByID(ID.mob.SABOTENDER_ENAMORADO):isSpawned()
     then
         if player:getCharVar("Mission6-1MobKilled") == 1 then
             player:addKeyItem(xi.ki.DREAMROSE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DREAMROSE)
             player:setCharVar("Mission6-1MobKilled", 0)
-            player:setCharVar("MissionStatus", 3)
+            player:setMissionStatus(player:getNation(), 3)
         else
             SpawnMob(ID.mob.SABOTENDER_ENAMORADO):updateClaim(player)
         end

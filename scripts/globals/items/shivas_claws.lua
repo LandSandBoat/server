@@ -13,7 +13,7 @@ local item_object = {}
 item_object.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
-    if (VanadielDayElement() == xi.day.ICEDAY) then
+    if (VanadielDayElement() == xi.magic.ele.ICE) then
         chance = chance+6
     end
 

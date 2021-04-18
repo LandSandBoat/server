@@ -56,7 +56,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
     local kindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
@@ -136,7 +136,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- WINDURST 1-2: THE HEART OF THE MATTER
     if csid == 137 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
 
         npcUtil.giveKeyItem(player, {
             xi.ki.FIRST_DARK_MANA_ORB,
@@ -172,25 +172,25 @@ entity.onEventFinish = function(player, csid, option)
 
         -- WINDURST 8-2: THE JESTER WHO'D BE KING
     elseif csid == 588 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
         npcUtil.giveKeyItem(player, xi.ki.MANUSTERY_RING)
     elseif csid == 601 then
-        player:setCharVar("MissionStatus", 3)
+        player:setMissionStatus(player:getNation(), 3)
     elseif csid == 590 then
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
     elseif csid == 592 then
-        player:setCharVar("MissionStatus", 9)
+        player:setMissionStatus(player:getNation(), 9)
     elseif csid == 609 then
         player:setCharVar("ShantottoCS", 1)
         finishMissionTimeline(player, 3, csid, option)
 
         -- WINDURST 9-1: DOLL OF THE DEAD
     elseif csid == 619 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 620 then
-        player:setCharVar("MissionStatus", 4)
+        player:setMissionStatus(player:getNation(), 4)
     elseif csid == 621 then
-        player:setCharVar("MissionStatus", 7)
+        player:setMissionStatus(player:getNation(), 7)
         player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.LETTER_FROM_ZONPAZIPPA)
         player:delKeyItem(xi.ki.LETTER_FROM_ZONPAZIPPA)
 

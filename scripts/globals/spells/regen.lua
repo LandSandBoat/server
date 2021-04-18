@@ -2,6 +2,7 @@
 -- Spell: Regen
 -- Gradually restores target's HP.
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
@@ -16,9 +17,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     local hp = math.ceil(5 * (1 + 0.01 * caster:getMod(xi.mod.REGEN_MULTIPLIER))) -- spell base times gear multipliers
     hp = hp + caster:getMerit(xi.merit.REGEN_EFFECT) -- bonus hp from merits
     hp = hp + caster:getMod(xi.mod.LIGHT_ARTS_REGEN) -- bonus hp from light arts
+    hp = hp + caster:getMod(xi.mod.REGEN_BONUS)      -- bonus hp from jobpoint gift
 
     local duration = calculateDuration(75 + caster:getMod(xi.mod.REGEN_DURATION), spell:getSkillType(), spell:getSpellGroup(), caster, target)
     duration = calculateDurationForLvl(duration, 21, target:getMainLvl())
+    duration = duration + (caster:getJobPointLevel(xi.jp.REGEN_DURATION) * 3)
 
     if target:addStatusEffect(xi.effect.REGEN, hp, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)

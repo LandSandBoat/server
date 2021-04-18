@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
---
--- Host: localhost    Database: xidb
--- ------------------------------------------------------
--- Server version   5.5.5-10.0.20-MariaDB
-
 --
 -- Table structure for table `bcnm_battlefield`
 --
@@ -1784,5 +1778,3 @@ INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929085,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929086,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929087,3);-- Temenos Aern
 INSERT INTO `bcnm_battlefield` VALUES (1301,8,16929088,2);-- Temenos Ghrah
-
--- Dump completed on 2017-01-31 10:38:38

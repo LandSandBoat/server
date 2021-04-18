@@ -3,7 +3,6 @@
 --  NPC: Janshura Rashura
 -- Starts Windurst Missions
 -- !pos -227 -8 184 240
--- Note: Includes Topaz modifications which may be subject to Topaz license
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
 require("scripts/globals/settings")
@@ -19,7 +18,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(71) -- for other nation
     else
         local CurrentMission = player:getCurrentMission(WINDURST)
-        local MissionStatus = player:getCharVar("MissionStatus")
+        local MissionStatus = player:getMissionStatus(player:getNation())
         local pRank = player:getRank()
         local cs, p, offset = getMissionOffset(player, 3, CurrentMission, MissionStatus)
 

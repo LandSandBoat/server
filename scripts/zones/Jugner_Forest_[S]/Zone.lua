@@ -13,6 +13,7 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
     xi.chocobo.initZone(zone)
+    xi.voidwalker.zoneOnInit(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

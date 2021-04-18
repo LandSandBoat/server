@@ -15,11 +15,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getCharVar("MissionStatus") == 1 then
+    if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 1 then
         if player:getCharVar("Mission7-1MobKilled") == 1 then
             npcUtil.giveKeyItem(player, xi.ki.REINFORCED_CERMET)
             player:setCharVar("Mission7-1MobKilled", 0)
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         elseif npcUtil.popFromQM(player, npc, {ID.mob.MOKKURKALFI_I, ID.mob.MOKKURKALFI_II}, {claim=false, look=true, radius=2}) then
             -- move QM
             local newPosition = npcUtil.pickNewPosition(npc:getID(), ID.npc.BASTOK_7_1_QM_POS, true)

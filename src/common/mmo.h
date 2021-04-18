@@ -186,8 +186,8 @@ struct questlog_t
 struct missionlog_t
 {
     uint16 current;
-    uint16 logExUpper;
-    uint16 logExLower;
+    uint16 statusUpper;
+    uint16 statusLower;
     bool   complete[64];
 };
 

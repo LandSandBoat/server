@@ -42,15 +42,15 @@ zones[xi.zone.ABYSSEA_TAHRONGI] =
             --  [16961963] = {'qm10',           {2924},                                                                                                                     {}, 16961926}, -- Tefnet
             --  [16961964] = {'qm11',      {2925, 2950},                                                                                                                     {}, 16961927}, -- Muscaliet
             --  [16961965] = {'qm12',           {2926},                                                                                                                     {}, 16961928}, -- Lachrymater
-            --  [16961966] = {'qm13',               {},         { xi.ki.VEINOUS_HECTEYES_EYELID, xi.ki.TORN_BAT_WING, xi.ki.GORY_SCORPION_CLAW, xi.ki.MOSSY_ADAMANTOISE_SHELL}, 16961929}, -- Chloris
-            --  [16961967] = {'qm14',               {}, { xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961930}, -- Glavoid
-            --  [16961968] = {'qm15',               {},                                                     { xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961931}, -- Lacovie
-            --  [16961969] = {'qm16',               {},         { xi.ki.VEINOUS_HECTEYES_EYELID, xi.ki.TORN_BAT_WING, xi.ki.GORY_SCORPION_CLAW, xi.ki.MOSSY_ADAMANTOISE_SHELL}, 16961946}, -- Chloris
-            --  [16961970] = {'qm17',               {}, { xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961947}, -- Glavoid
-            --  [16961971] = {'qm18',               {},                                                     { xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961948}, -- Lacovie
-            --  [16961972] = {'qm19',               {},         { xi.ki.VEINOUS_HECTEYES_EYELID, xi.ki.TORN_BAT_WING, xi.ki.GORY_SCORPION_CLAW, xi.ki.MOSSY_ADAMANTOISE_SHELL}, 16961949}, -- Chloris
-            --  [16961973] = {'qm20',               {}, { xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961950}, -- Glavoid
-            --  [16961974] = {'qm21',               {},                                                     { xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961951}, -- Lacovie
+            --  [16961966] = {'qm13',               {},         {xi.ki.VEINOUS_HECTEYES_EYELID, xi.ki.TORN_BAT_WING, xi.ki.GORY_SCORPION_CLAW, xi.ki.MOSSY_ADAMANTOISE_SHELL}, 16961929}, -- Chloris
+            --  [16961967] = {'qm14',               {}, {xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961930}, -- Glavoid
+            --  [16961968] = {'qm15',               {},                                                     {xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961931}, -- Lacovie
+            --  [16961969] = {'qm16',               {},         {xi.ki.VEINOUS_HECTEYES_EYELID, xi.ki.TORN_BAT_WING, xi.ki.GORY_SCORPION_CLAW, xi.ki.MOSSY_ADAMANTOISE_SHELL}, 16961946}, -- Chloris
+            --  [16961970] = {'qm17',               {}, {xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961947}, -- Glavoid
+            --  [16961971] = {'qm18',               {},                                                     {xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961948}, -- Lacovie
+            --  [16961972] = {'qm19',               {},         {xi.ki.VEINOUS_HECTEYES_EYELID, xi.ki.TORN_BAT_WING, xi.ki.GORY_SCORPION_CLAW, xi.ki.MOSSY_ADAMANTOISE_SHELL}, 16961949}, -- Chloris
+            --  [16961973] = {'qm20',               {}, {xi.ki.FAT_LINED_COCKATRICE_SKIN, xi.ki.SODDEN_SANDWORM_HUSK, xi.ki.LUXURIANT_MANTICORE_MANE, xi.ki.STICKY_GNAT_WING}, 16961950}, -- Glavoid
+            --  [16961974] = {'qm21',               {},                                                     {xi.ki.OVERGROWN_MANDRAGORA_FLOWER, xi.ki.CHIPPED_SANDWORM_TOOTH}, 16961951}, -- Lacovie
         },
     },
 }

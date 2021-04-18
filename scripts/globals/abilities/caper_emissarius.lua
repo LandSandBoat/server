@@ -16,6 +16,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     if (target == nil or target:getID() == player:getID() or not target:isPC()) then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
     else
+        ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
         return 0, 0
     end
 end

@@ -495,7 +495,7 @@ function getDrops(npc, dropType, zoneId)
                 items[i] = 4112 -- default to potion
             else
                 if math.random() < 0.05 then
-                    items[1] = xi.casket_loot.casketItems[zoneId].regionalItems[math.random(1, # xi.casket_loot.casketItems[zoneId].regionalItems)]
+                    items[1] = xi.casket_loot.casketItems[zoneId].regionalItems[math.random(1, #xi.casket_loot.casketItems[zoneId].regionalItems)]
                 else
                     items[i] = item
                 end
@@ -940,7 +940,7 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                            npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
                            -- RoE Timed Record #4019 - Crack Tresure Caskets
                            if player:getEminenceProgress(4019) then
-                                xi.roe.onRecordTrigger(player, 4019)
+                               xi.roe.onRecordTrigger(player, 4019)
                            end
                         end
                     end

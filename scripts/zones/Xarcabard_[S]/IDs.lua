@@ -18,6 +18,16 @@ zones[xi.zone.XARCABARD_S] =
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         HOMEPOINT_SET           = 8749, -- Home point set!
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 8569, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 8570, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 8571, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 8572, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 8573, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 8574, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 8575, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 8576, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 8577, -- Obtained key item: ≺abyssite>!  
     },
     mob =
     {
@@ -25,6 +35,29 @@ zones[xi.zone.XARCABARD_S] =
         {
             [17338384] = 17338386,
         },
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17338607, -- Gorehound
+                17338606, -- Gorehound
+                17338605, -- Gorehound
+                17338604, -- Gorehound
+                17338603, -- Gjenganger
+                17338602, -- Gjenganger
+                17338601, -- Gjenganger
+                17338600, -- Gjenganger
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17338599, -- Erebus
+                17338598  -- Feuerunke
+            },
+            [xi.keyItem.PURPLE_ABYSSITE] = {
+                17338597  -- Lord Ruthven
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17338596  -- Yilbegan
+            }
+        }
     },
     npc =
     {

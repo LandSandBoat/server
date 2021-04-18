@@ -4,6 +4,7 @@
 require("scripts/globals/npc_util")
 require("scripts/globals/msg")
 require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -51,6 +52,7 @@ xi.roe.triggers =
     unityChat = 15,         -- Player uses Unity Chat
     magicBurst = 16,        -- Player performs a Magic Burst
     healUnityAlly = 17,     -- Player heals someone in their party/alliance with the same Unity
+    talkToRoeNpc = 18,      -- Player talk to RoE
 }
 
 local triggers = xi.roe.triggers
@@ -63,6 +65,9 @@ local checks =
 {
     mobID = function(self, player, params)    -- Mob ID check
         return (params.mob and self.reqs.mobID[params.mob:getID()]) and true or false
+    end,
+    mobName = function(self, player, params)
+        return (params.mob and self.reqs.mobName[params.mob:getName()]) and true or false
     end,
     mobXP = function(self, player, params)    -- Mob yields xp
         return (params.mob and player:checkKillCredit(params.mob)) and true or false

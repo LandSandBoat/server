@@ -161,7 +161,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 141 or csid == 143) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
         player:setCharVar("scatIntoShadow_shortCS", 0)
-        npcUtil.giveKeyItem(player, { xi.ki.AQUAFLORA1, xi.ki.AQUAFLORA2, xi.ki.AQUAFLORA3})
+        npcUtil.giveKeyItem(player, {xi.ki.AQUAFLORA1, xi.ki.AQUAFLORA2, xi.ki.AQUAFLORA3})
     elseif csid == 144 then
         player:setCharVar("scatIntoShadowCS", 1)
     elseif csid == 135 then

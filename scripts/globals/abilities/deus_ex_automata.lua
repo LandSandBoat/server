@@ -5,6 +5,7 @@
 -- Recast Time: 1:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/pets")
@@ -18,6 +19,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
     elseif not player:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA, 0
     else
+        local jpValue = player:getJobPointLevel(xi.jp.DEUS_EX_AUTOMATA_RECAST)
+
+        ability:setRecast(ability:getRecast() - jpValue)
         return 0, 0
     end
 end

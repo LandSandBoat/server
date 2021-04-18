@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and player:getCharVar("MissionStatus") == 5 then
+    if player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.LIGHTBRINGER and player:getMissionStatus(player:getNation()) == 5 then
         if
             player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) and
             player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) and
@@ -38,7 +38,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 65 then
         player:setCharVar("Mission8-2Kills", 0)
-        player:setCharVar("MissionStatus", 6)
+        player:setMissionStatus(player:getNation(), 6)
     end
 end
 

@@ -24,7 +24,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     local cs = -1
 
-    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getCharVar("ZilartStatus") >= 0) then
+    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and player:getMissionStatus(xi.mission.log_id.ZILART) >= 0) then
         cs = 0
     end
 
@@ -57,7 +57,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if (csid == 8 and option == 1) then
         player:setPos(-370, -178, -40, 243, 158)
     elseif (csid == 0) then
-        player:setCharVar("ZilartStatus", 3)
+        player:setMissionStatus(xi.mission.log_id.ZILART, 3)
     end
 
 end

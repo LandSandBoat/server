@@ -255,7 +255,7 @@ void do_abort()
 }
 void set_server_type()
 {
-    SERVER_TYPE = TOPAZ_SERVER_LOGIN;
+    SERVER_TYPE = XI_SERVER_LOGIN;
     SOCKET_TYPE = socket_type::TCP;
 }
 
@@ -670,8 +670,8 @@ int32 config_write(const char* fileName, const char* config, const std::function
 
 void login_versionscreen(int32 flag)
 {
-    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", TOPAZ_MAJOR_VERSION, TOPAZ_MINOR_VERSION, TOPAZ_REVISION);
-    ShowInfo(CL_GREEN "Forum:" CL_RESET "\thttps://github.com/topaz-next/topaz\n");
+    ShowInfo(CL_WHITE "Topaz version %d.%02d.%02d" CL_RESET "\n", XI_MAJOR_VERSION, XI_MINOR_VERSION, XI_REVISION);
+    ShowInfo(CL_GREEN "Website:" CL_RESET "\thttps://github.com/DerpyProjectGroup/topaz\n");
     if (flag)
     {
         exit(EXIT_FAILURE);

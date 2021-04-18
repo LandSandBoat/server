@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.YONIN
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
@@ -14,6 +15,9 @@ effect_object.onEffectGain = function(target, effect) --power=30 initially, subp
     if yoninMerits ~= 0 then
         target:addMod(xi.mod.HP, yoninMerits)
     end
+
+    local jpValue = target:getJobPointLevel(xi.jp.YONIN_EFFECT)
+    target:addMod(xi.mod.EVA, 2 * jpValue)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -37,6 +41,9 @@ effect_object.onEffectLose = function(target, effect)
     if yoninMerits ~= 0 then
         target:delMod(xi.mod.HP, yoninMerits)
     end
+
+    local jpValue = target:getJobPointLevel(xi.jp.YONIN_EFFECT)
+    target:delMod(xi.mod.EVA, 2 * jpValue)
 end
 
 return effect_object

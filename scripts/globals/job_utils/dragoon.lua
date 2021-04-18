@@ -6,6 +6,7 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
+require("scripts/globals/jobpoints")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -115,6 +116,9 @@ xi.job_utils.dragoon.abilityCheckRequiresPet = function(player, target, ability)
     if not hasWyvern(target) then
         return xi.msg.basic.REQUIRES_A_PET, 0
     else
+        if ability:getID() == xi.jobAbility.SPIRIT_SURGE then
+            ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+        end
         return 0, 0
     end
 end
@@ -205,7 +209,14 @@ end
 
 xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.ANCIENT_CIRCLE_DURATION)
-    target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, 15, 0, duration)
+    local jpValue = player:getJobPointLevel(xi.jp.ANCIENT_CIRCLE_EFFECT)
+    local power = 5
+
+    if player:getMainJob() == xi.job.DRG then
+        power = 15 + jpValue
+    end
+
+    target:addStatusEffect(xi.effect.ANCIENT_CIRCLE, power, 0, duration)
 end
 
 xi.job_utils.dragoon.useJump = function(player, target, ability, action)
@@ -229,6 +240,9 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     local pet = player:getPet()
     local playerHP = player:getHP()
     local drainamount = (math.random(25, 35) / 100) * playerHP
+    local jpValue = player:getJobPointLevel(xi.jp.SPIRIT_LINK_EFFECT)
+
+    drainamount = drainamount * (1 - (0.01 * jpValue))
 
     if pet:getHP() == pet:getMaxHP() then
         drainamount = 0 -- Prevents player HP lose if wyvern is at full HP

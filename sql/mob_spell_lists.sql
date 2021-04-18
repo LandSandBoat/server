@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.13, for Win64 (x86_64)
---
--- Host: localhost    Database: xidb
--- ------------------------------------------------------
--- Server version   5.6.13-log
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -3922,8 +3916,187 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Bladmall',434,4,41,255);  -- Cur
 
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Matsui-P',435,149,24,255); -- Blizzard
 
--- Next Available: 436
+-- Voidwalker
+INSERT INTO `mob_spell_lists` VALUES ('Ground_Guzzler',436,191,63,255); -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Ground_Guzzler',436,210,54,255); -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Ground_Guzzler',436,54,68,255);  -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Ground_Guzzler',436,238,18,255); -- Rasp
+INSERT INTO `mob_spell_lists` VALUES ('Ground_Guzzler',436,258,7,255);  -- Bind
 
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,162,1,255);  -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,147,1,255);  -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,152,1,255);  -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,157,1,255);  -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,167,1,255);  -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,172,1,255);  -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,176,1,255);  -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,181,1,255);  -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,186,1,255);  -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,191,1,255);  -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,196,1,255);  -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,201,1,255);  -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Shoggoth',437,274,1,255);  -- Sleepga II
+
+INSERT INTO `mob_spell_lists` VALUES ('FarrucaFly',438,366,1,255);  -- Graviga
+INSERT INTO `mob_spell_lists` VALUES ('FarrucaFly',438,359,1,255);  -- Silencega
+INSERT INTO `mob_spell_lists` VALUES ('FarrucaFly',438,157,1,255);  -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('FarrucaFly',438,53,1,255);   -- Blink
+INSERT INTO `mob_spell_lists` VALUES ('FarrucaFly',438,186,1,255);  -- Aeroga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,162,1,255);  -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,147,1,255);  -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,152,1,255);  -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,157,1,255);  -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,167,1,255);  -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,172,1,255);  -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,176,1,255);  -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,181,1,255);  -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,186,1,255);  -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,191,1,255);  -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,196,1,255);  -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,201,1,255);  -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,204,1,255);  -- Flare
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,206,1,255);  -- Freeze
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,208,1,255);  -- Tornado
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,210,1,255);  -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,212,1,255);  -- Burst
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,214,1,255);  -- Flood
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,245,1,255);  -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Gjenganger',439,247,1,255);  -- Aspir
+
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,162,1,255);  -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,147,1,255);  -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,152,1,255);  -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,157,1,255);  -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,167,1,255);  -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,172,1,255);  -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,176,1,255);  -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,181,1,255);  -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,186,1,255);  -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,191,1,255);  -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,196,1,255);  -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Erebus',440,201,1,255);  -- Waterga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Feuerunke',441,357,1,255);  -- Slowga
+
+INSERT INTO `mob_spell_lists` VALUES ('Dawon',442,186,1,255);  -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Dawon',442,366,1,255);  -- Graviga
+INSERT INTO `mob_spell_lists` VALUES ('Dawon',442,359,1,255);  -- Silencega
+INSERT INTO `mob_spell_lists` VALUES ('Dawon',442,57,1,255);   -- Haste
+
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,237,1,255);   -- Choke
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,216,1,255);   -- Gravity
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,208,1,255);   -- Tornado
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,157,1,255);   -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,59,1,255);    -- Silence
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,102,1,255);   -- Enaero
+INSERT INTO `mob_spell_lists` VALUES ('Aither',443,186,1,255);   -- Aeroga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,236,1,255);   -- Frost
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,206,1,255);   -- Freeze
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,152,1,255);   -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,250,1,255);   -- Ice Spike
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,258,1,255);   -- Bind
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,313,1,255);   -- Enblizzard
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,181,1,255);   -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Pruina',444,58,1,255);    -- Paralyze
+
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,232,1,255);   -- Bio III
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,260,1,255);   -- Dispel
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,245,1,255);   -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,247,1,255);   -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,271,1,255);   -- Absorb MND
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,272,1,255);   -- Absorb CHR
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,269,1,255);   -- Absorb AGI
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,270,1,255);   -- Absorb INT
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,274,1,255);   -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES ('Deorc',445,252,1,255);   -- Stun
+
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,57,1,255);   -- Haste
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,53,1,255);   -- Blink
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,24,1,255);   -- Dia II
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,21,1,255);   -- Holy
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,40,1,255);   -- Banishga III
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,30,1,255);   -- Banish III
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,55,1,255);   -- Aquaveil
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,54,1,255);   -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,108,1,255);  -- Regen
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,34,1,255);   -- Diaga II
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,46,1,255);   -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,51,1,255);   -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Beorht',446,112,1,255);  -- Flash
+
+INSERT INTO `mob_spell_lists` VALUES ('Eorthe',447,238,1,255);   -- Rasp
+INSERT INTO `mob_spell_lists` VALUES ('Eorthe',447,210,1,255);   -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Eorthe',447,162,1,255);   -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Eorthe',447,103,1,255);   -- Enstone
+INSERT INTO `mob_spell_lists` VALUES ('Eorthe',447,191,1,255);   -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Eorthe',447,54,1,255);    -- Stoneskin
+
+INSERT INTO `mob_spell_lists` VALUES ('Thunor',448,239,1,255);   -- Shock
+INSERT INTO `mob_spell_lists` VALUES ('Thunor',448,212,1,255);   -- Burst
+INSERT INTO `mob_spell_lists` VALUES ('Thunor',448,167,1,255);   -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Thunor',448,251,1,255);   -- Shock Spikes
+INSERT INTO `mob_spell_lists` VALUES ('Thunor',448,104,1,255);   -- Enthunder
+INSERT INTO `mob_spell_lists` VALUES ('Thunor',448,196,1,255);   -- Thundaga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Puretos',449,235,1,255);   -- Burn
+INSERT INTO `mob_spell_lists` VALUES ('Puretos',449,204,1,255);   -- Flare
+INSERT INTO `mob_spell_lists` VALUES ('Puretos',449,147,1,255);   -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Puretos',449,249,1,255);   -- Blaze Spikes
+INSERT INTO `mob_spell_lists` VALUES ('Puretos',449,100,1,255);   -- Enfire
+INSERT INTO `mob_spell_lists` VALUES ('Puretos',449,176,1,255);   -- Firaga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Lacus',450,226,1,255);   -- Poisonga II
+INSERT INTO `mob_spell_lists` VALUES ('Lacus',450,214,1,255);   -- Flood
+INSERT INTO `mob_spell_lists` VALUES ('Lacus',450,172,1,255);   -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Lacus',450,55,1,255);    -- Aquaveil
+INSERT INTO `mob_spell_lists` VALUES ('Lacus',450,105,1,255);   -- Enwater
+INSERT INTO `mob_spell_lists` VALUES ('Lacus',450,201,1,255);   -- Waterga III
+
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,162,1,255);  -- Stone IV
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,147,1,255);  -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,152,1,255);  -- Blizzard IV
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,157,1,255);  -- Aero IV
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,167,1,255);  -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,172,1,255);  -- Water IV
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,176,1,255);  -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,181,1,255);  -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,186,1,255);  -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,191,1,255);  -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,196,1,255);  -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,201,1,255);  -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,356,1,255);  -- Paralyga
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,362,1,255);  -- Bindga
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,360,1,255);  -- Dispelga
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,357,1,255);  -- Slowga
+INSERT INTO `mob_spell_lists` VALUES ('Skuld',451,366,1,255);  -- Graviga
+
+INSERT INTO `mob_spell_lists` VALUES ('Urd',452,46,1,255);   -- Protect IV
+INSERT INTO `mob_spell_lists` VALUES ('Urd',452,51,1,255);   -- Shell IV
+INSERT INTO `mob_spell_lists` VALUES ('Urd',452,54,1,255);   -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Urd',452,108,1,255);  -- Regen
+INSERT INTO `mob_spell_lists` VALUES ('Urd',452,4,1,255);    -- Cure IV
+
+INSERT INTO `mob_spell_lists` VALUES ('Verthandi',453,47,1,255);   -- Protect V
+INSERT INTO `mob_spell_lists` VALUES ('Verthandi',453,52,1,255);   -- Shell V
+INSERT INTO `mob_spell_lists` VALUES ('Verthandi',453,54,1,255);   -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Verthandi',453,108,1,255);  -- Regen
+INSERT INTO `mob_spell_lists` VALUES ('Verthandi',453,22,1,255);   -- Holy II
+
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,191,90,90);  -- Stonega III
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,181,90,90);  -- Blizzaga III
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,201,90,90);  -- Waterga III
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,356,90,90);  -- Paralyga
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,362,90,90);  -- Bindga
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,357,90,90);  -- Slowga
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,186,91,91);  -- Aeroga III
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,176,91,91);  -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,196,91,91);  -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,366,91,91);  -- Graviga
+INSERT INTO `mob_spell_lists` VALUES ('Yilbegan',454,359,91,91);  -- Silencega
+
+-- Next Available: 455
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -3937,4 +4110,3 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-07 20:12:54

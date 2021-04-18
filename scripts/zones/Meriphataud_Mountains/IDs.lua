@@ -36,6 +36,16 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         NO_COMBINATION           = 8364,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 10604, -- New training regime registered!
         COMMON_SENSE_SURVIVAL    = 12633, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        -- Voidwalker
+        VOIDWALKER_NO_MOB        = 11723, -- The <abyssite> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR   = 11724, -- The <abyssite> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT      = 11725, -- The <abyssite> resonates <hint>, sending a radiant beam of light lancing towards a spot roughly <distance> <direction> of here.
+        VOIDWALKER_SPAWN_MOB     = 11726, -- A monster materializes out of nowhere!
+        VOIDWALKER_DESPAWN       = 11727, -- The monster fades before your eyes, a look of disappointment on its face.
+        VOIDWALKER_UPGRADE_KI_1  = 11728, -- The <current abyssite> takes on a slightly deeper hue and becomes <next abyssite>!
+        VOIDWALKER_UPGRADE_KI_2  = 11729, -- The <current abyssite> takes on a deeper, richer hue and becomes <next abyssite>!
+        VOIDWALKER_BREAK_KI      = 11730, -- The <abyssite> shatters into tiny fragments.
+        VOIDWALKER_OPTAIN_KI     = 11731, -- Obtained key item: ≺abyssite>!
     },
     mob =
     {
@@ -55,6 +65,29 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
         },
         WARAXE_BEAK         = 17264828,
         COO_KEJA_THE_UNSEEN = 17264946,
+        VOIDWALKER        =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] = {
+                17265129, -- Raker bee
+                17265128, -- Raker bee
+                17265127, -- Raker bee
+                17265126, -- Raker bee
+                17265125,  -- Rummager beetle
+                17265124,  -- Rummager beetle
+                17265123,  -- Rummager beetle
+                17265122,  -- Rummager beetle
+            },
+            [xi.keyItem.COLORFUL_ABYSSITE] = {
+                17265121,  -- Jyeshtha
+                17265120, -- Farruca Fly
+            },
+            [xi.keyItem.BROWN_ABYSSITE] = {
+                17265119  -- Orcus
+            },
+            [xi.keyItem.BLACK_ABYSSITE] = {
+                17265118  -- Yilbegan
+            }
+        }
     },
     npc =
     {

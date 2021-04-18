@@ -1,8 +1,7 @@
 -----------------------------------
 -------------   GLOBAL SETTINGS   -------------
 -----------------------------------
-
--- This is to allow server operators to further customize their servers.  As more features are added to pXI, the list will surely expand.
+-- This is to allow server operators to further customize their servers.  As more features are added to the server, the list will surely expand.
 -- Anything scripted can be customized with proper script editing.
 
 -- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS YOU DO: ADD THIS LINE TO THE TOP!!!!
@@ -52,6 +51,9 @@ CAP_CURRENCY_VALOR     = 50000
 ENABLE_MAGIAN_TRIALS = 1
 MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1
 MAGIAN_TRIALS_TRADE_MULTIPLIER = 1
+
+-- VoidWalker
+ENABLE_VOIDWALKER = 1
 
 -- TREASURE CASKETS
 -- Retail droprate = 0.1 (10%) with no other effects active

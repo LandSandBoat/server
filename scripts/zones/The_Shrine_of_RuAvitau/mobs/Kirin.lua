@@ -58,7 +58,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:addTitle(xi.title.KIRIN_CAPTIVATOR )
+    player:addTitle( xi.title.KIRIN_CAPTIVATOR )
     player:showText( mob, ID.text.KIRIN_OFFSET + 1 )
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         DespawnMob(i)

@@ -35,10 +35,10 @@ entity.onMobFight = function(mob)
             mob:setMod(xi.mod.SLASHRES, 2000)
             mob:setMod(xi.mod.PIERCERES, 2000)
             mob:setMod(xi.mod.IMPACTRES, 2000)
-            for n =1, # xi.magic.resistMod, 1 do
+            for n =1, #xi.magic.resistMod, 1 do
                 mob:setMod(xi.magic.resistMod[n], 2000)
             end
-            for n =1, # xi.magic.defenseMod, 1 do
+            for n =1, #xi.magic.defenseMod, 1 do
                 mob:setMod(xi.magic.defenseMod[n], -1000)
             end
         else -- Reset all damage types
@@ -46,10 +46,10 @@ entity.onMobFight = function(mob)
             mob:setMod(xi.mod.SLASHRES, 1000)
             mob:setMod(xi.mod.PIERCERES, 1000)
             mob:setMod(xi.mod.IMPACTRES, 1000)
-            for n =1, # xi.magic.resistMod, 1 do
+            for n =1, #xi.magic.resistMod, 1 do
                 mob:setMod(xi.magic.resistMod[n], 1000)
             end
-            for n =1, # xi.magic.defenseMod, 1 do
+            for n =1, #xi.magic.defenseMod, 1 do
                 mob:setMod(xi.magic.defenseMod[n], 1000)
             end
         end

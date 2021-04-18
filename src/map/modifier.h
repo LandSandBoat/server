@@ -305,14 +305,14 @@ enum class Mod
     DEFENDER_DURATION  = 956, // Defender Duration
 
     // Monk
-    BOOST_EFFECT        = 97,  // Boost power in tenths
-    CHAKRA_MULT         = 123, // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 124, // Extra statuses removed by Chakra
-    SUBTLE_BLOW         = 289, // How much TP to reduce.
-    COUNTER             = 291, // Percent chance to counter
-    KICK_ATTACK_RATE    = 292, // Percent chance to kick
-    PERFECT_COUNTER_ATT = 428, // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
-                               // not if fighting barehanded).
+    BOOST_EFFECT        = 97,   // Boost power in tenths
+    CHAKRA_MULT         = 123,  // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 124,  // Extra statuses removed by Chakra
+    SUBTLE_BLOW         = 289,  // How much TP to reduce.
+    COUNTER             = 291,  // Percent chance to counter
+    KICK_ATTACK_RATE    = 292,  // Percent chance to kick
+    PERFECT_COUNTER_ATT = 428,  // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
+                                // not if fighting barehanded).
     FOOTWORK_ATT_BONUS   = 429, // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT = 543, // Counterstance effect in percents
     DODGE_EFFECT         = 552, // Dodge effect in percents
@@ -326,6 +326,7 @@ enum class Mod
     REGEN_MULTIPLIER = 838, // Multiplier to base regen rate
     CURE2MP_PERCENT  = 860, // Converts % of "Cure" amount to MP
     DIVINE_BENISON   = 910, // Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
+    REGEN_BONUS      = 989, // Increases the amount of HP restored by Regen
 
     // Black Mage
     CLEAR_MIND  = 295, // Used in conjunction with HEALMP to increase amount between tics
@@ -368,6 +369,7 @@ enum class Mod
     SOULEATER_EFFECT       = 96,  // Souleater power in percents
     DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
     STALWART_SOUL          = 907, // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
 
     // Beastmaster
     TAME                = 304, // Additional percent chance to charm
@@ -430,6 +432,7 @@ enum class Mod
     NINJA_TOOL     = 308, // Percent chance to not use a tool.
     NIN_NUKE_BONUS = 522, // magic attack bonus for NIN nukes
     DAKEN          = 911, // chance to throw a shuriken without consuming it
+    NINJUTSU_DURATION = 1000,
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859, // Ancient Circle extended duration in seconds
@@ -439,7 +442,7 @@ enum class Mod
     FORCE_JUMP_CRIT            = 828, // Critical hit rate bonus for jump and high jump
     WYVERN_EFFECTIVE_BREATH    = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
     WYVERN_SUBJOB_TRAITS       = 974, // Adds subjob traits to wyvern on spawn
-    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe 
+    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
 
     // Summoner
     AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
@@ -460,6 +463,7 @@ enum class Mod
     EXP_BONUS        = 382, //
     ROLL_RANGE       = 528, // Additional range for COR roll abilities.
     JOB_BONUS_CHANCE = 542, // Chance to apply job bonus to COR roll without having the job in the party.
+    TRIPLE_SHOT_RATE = 999, // Percent increase to Triple Shot Rate
 
     DMG_REFLECT            = 316, // Tracks totals
     ROLL_ROGUES            = 317, // Tracks totals
@@ -517,18 +521,20 @@ enum class Mod
     AUTO_EQUALIZER              = 941, // Reduces damage received according to damage taken
     AUTO_PERFORMANCE_BOOST      = 942, // Increases the performance of other attachments by a percentage
     AUTO_ANALYZER               = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
+    AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
 
     // Dancer
-    FINISHING_MOVES         = 333, // Tracks # of finishing moves
-    SAMBA_DURATION          = 490, // Samba duration bonus
-    WALTZ_POTENTCY          = 491, // Waltz Potentcy Bonus
-    JIG_DURATION            = 492, // Jig duration bonus in percents
-    VFLOURISH_MACC          = 493, // Violent Flourish accuracy bonus
-    STEP_FINISH             = 494, // Bonus finishing moves from steps
-    STEP_ACCURACY           = 403, // Bonus accuracy for Dancer's steps
-    WALTZ_DELAY             = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
-    SAMBA_PDURATION         = 498, // Samba percent duration bonus
-    REVERSE_FLOURISH_EFFECT = 836, // Reverse Flourish effect in tenths of squared term multiplier
+    FINISHING_MOVES          = 333, // Tracks # of finishing moves
+    SAMBA_DURATION           = 490, // Samba duration bonus
+    WALTZ_POTENTCY           = 491, // Waltz Potentcy Bonus
+    JIG_DURATION             = 492, // Jig duration bonus in percents
+    VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
+    STEP_FINISH              = 494, // Bonus finishing moves from steps
+    STEP_ACCURACY            = 403, // Bonus accuracy for Dancer's steps
+    WALTZ_DELAY              = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
+    SAMBA_PDURATION          = 498, // Samba percent duration bonus
+    REVERSE_FLOURISH_EFFECT  = 836, // Reverse Flourish effect in tenths of squared term multiplier
+    MAX_FINISHING_MOVE_BONUS = 988, // Increases the maximum number of finishing moves that may be stored
 
     // Scholar
     BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
@@ -811,6 +817,14 @@ enum class Mod
     WS_MND_BONUS        = 984, // % bonus to mnd_wsc.
     WS_CHR_BONUS        = 985, // % bonus to chr_wsc.
 
+    // Pet Modifiers (Job Point Gifts)
+    PET_ATK_DEF    = 990, // Increases pet physical attack, ranged attack, and physical defense
+    PET_ACC_EVA    = 991, // Increases pet physical accuracy, ranged accuracy, and evasion
+    PET_MAB_MDB    = 992, // Increases pet magic attack and magic defense
+    PET_MACC_MEVA  = 993, // Increases pet magic accuracy and evasion
+    PET_ATTR_BONUS = 994, // Increases pet attributes
+    PET_TP_BONUS   = 995, // Increases pet TP bonus
+
     EXPERIENCE_RETAINED   = 914, // Experience points retained upon death (this is a percentage)
     CAPACITY_BONUS        = 915, // Capacity point bonus granted
     CONQUEST_BONUS        = 933, // Conquest points bonus granted (percentage)
@@ -820,11 +834,12 @@ enum class Mod
     SUBTLE_BLOW_II       = 973, // Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     GARDENING_WILT_BONUS = 975, // Increases the number of Vanadays a plant can survive before it wilts
 
+    SUPERIOR_LEVEL  = 997, // SU0..5
+    ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
+
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
-    // SPARE = 986, // stuff
-    // SPARE = 987, // stuff
-    // SPARE = 988, // stuff
+    // SPARE = 1001,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

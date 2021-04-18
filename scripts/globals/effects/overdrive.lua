@@ -1,6 +1,7 @@
 -----------------------------------
 -- xi.effect.OVERDRIVE
 -----------------------------------
+require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
@@ -8,6 +9,8 @@ local effect_object = {}
 effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.OVERLOAD_THRESH, 5000)
     local pet = target:getPet()
+    local jpBonus = target:getJobPointLevel(xi.jp.OVERDRIVE_EFFECT) * 5
+
     if pet then
         pet:setLocalVar("overdrive", 1)
         pet:addMod(xi.mod.HASTE_MAGIC, 2500)
@@ -21,6 +24,15 @@ effect_object.onEffectGain = function(target, effect)
         pet:addMod(xi.mod.MEVA, 50)
         pet:addMod(xi.mod.REVA, 50)
         pet:addMod(xi.mod.DMG, -50)
+        if jpBonus > 0 then
+            pet:addMod(xi.mod.STR, jpBonus)
+            pet:addMod(xi.mod.DEX, jpBonus)
+            pet:addMod(xi.mod.VIT, jpBonus)
+            pet:addMod(xi.mod.AGI, jpBonus)
+            pet:addMod(xi.mod.INT, jpBonus)
+            pet:addMod(xi.mod.MND, jpBonus)
+            pet:addMod(xi.mod.CHR, jpBonus)
+        end
     end
 end
 
@@ -30,6 +42,8 @@ end
 effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.OVERLOAD_THRESH, 5000)
     local pet = target:getPet()
+    local jpBonus = target:getJobPointLevel(xi.jp.OVERDRIVE_EFFECT) * 5
+
     if pet and pet:getLocalVar("overdrive") ~= 0 then
         pet:setLocalVar("overdrive", 0)
         pet:delMod(xi.mod.HASTE_MAGIC, 2500)
@@ -43,6 +57,15 @@ effect_object.onEffectLose = function(target, effect)
         pet:delMod(xi.mod.MEVA, 50)
         pet:delMod(xi.mod.REVA, 50)
         pet:delMod(xi.mod.DMG, -50)
+        if jpBonus > 0 then
+            pet:delMod(xi.mod.STR, jpBonus)
+            pet:delMod(xi.mod.DEX, jpBonus)
+            pet:delMod(xi.mod.VIT, jpBonus)
+            pet:delMod(xi.mod.AGI, jpBonus)
+            pet:delMod(xi.mod.INT, jpBonus)
+            pet:delMod(xi.mod.MND, jpBonus)
+            pet:delMod(xi.mod.CHR, jpBonus)
+        end
     end
 end
 

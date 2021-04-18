@@ -21,13 +21,13 @@ entity.onTrigger = function(player, npc)
     local bookwormStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.EARLY_BIRD_CATCHES_THE_BOOKWORM)
     local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
     local currentMission = player:getCurrentMission(WINDURST)
-    local missionStatus = player:getCharVar("MissionStatus")
+    local missionStatus = player:getMissionStatus(player:getNation())
     local windurstFame = player:getFameLevel(WINDURST)
 
     -- The Jester Who'd Be King (Windurst 8-2)
     if
         currentMission == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
-        player:getCharVar("MissionStatus") == 1 and not
+        player:getMissionStatus(player:getNation()) == 1 and not
         player:hasKeyItem(xi.ki.OPTISTERY_RING)
     then
         player:startEvent(801, 0, xi.ki.OPTISTERY_RING)
@@ -115,18 +115,18 @@ entity.onEventFinish = function(player, csid, option)
     -- The Jester Who'd Be King (Windurst 8-2)
     elseif csid == 801 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
         if player:hasKeyItem(xi.ki.RHINOSTERY_RING) and player:hasKeyItem(xi.ki.AURASTERY_RING) then
-            player:setCharVar("MissionStatus", 2)
+            player:setMissionStatus(player:getNation(), 2)
         end
 
     -- The Sixth Ministry (Windurst 7-1)
     elseif csid == 715 and npcUtil.giveKeyItem(player, xi.ki.OPTISTERY_RING) then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 724 then
         finishMissionTimeline(player, 3, csid, option)
 
     -- Lost for Words (Windurst 2-1)
     elseif csid == 160 then
-        player:setCharVar("MissionStatus", 1)
+        player:setMissionStatus(player:getNation(), 1)
     elseif csid == 168 then
         finishMissionTimeline(player, 1, csid, option)
 

@@ -8,6 +8,7 @@ require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/roe")
+require("scripts/globals/voidwalker")
 -----------------------------------
 local effect_object = {}
 
@@ -34,10 +35,11 @@ effect_object.onEffectGain = function(target, effect)
             end
         end)
     end
+    
+    xi.voidwalker.onHealing(target)
 end
 
 effect_object.onEffectTick = function(target, effect)
-
     local healtime = effect:getTickCount()
 
     if healtime > 2 then

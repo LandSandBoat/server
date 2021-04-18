@@ -21,7 +21,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
         duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
 
-        duration = calculateDurationForLvl(duration, 20, target:getMainLvl())
+        duration = math.max(300, calculateDurationForLvl(duration, 20, target:getMainLvl()))
 
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
         target:addStatusEffect(xi.effect.INVISIBLE, 0, 10, math.floor(duration * SNEAK_INVIS_DURATION_MULTIPLIER))

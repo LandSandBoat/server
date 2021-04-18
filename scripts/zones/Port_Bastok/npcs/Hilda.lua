@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
 
     local WildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ON_MY_WAY) and (player:getCharVar("MissionStatus") == 1) then
+    if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ON_MY_WAY) and (player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(255)
     elseif (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 3)) then
         player:startEvent(356)
@@ -97,7 +97,7 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL)
         end
     elseif (csid == 255) then
-        player:setCharVar("MissionStatus", 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif (csid == 356) then
         player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 3, true))
     end
