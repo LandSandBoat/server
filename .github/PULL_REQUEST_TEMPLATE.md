@@ -2,5 +2,5 @@
 **_I affirm:_**
 - [x] I have paid attention to this example and will edit again if need be to not break the formatting, or I will be ignored
 - [ ] that I agree to Topaz Next's [Limited Contributor License Agreement](https://github.com/DerpyProjectGroup/topaz/blob/info/.github/CONTRIBUTOR_AGREEMENT.md), as written on this date
-- [ ] that I have **read the [Contributing Guide]https://github.com/DerpyProjectGroup/topaz/blob/info/CONTRIBUTING.md)**
+- [ ] that I have **read the [Contributing Guide](https://github.com/DerpyProjectGroup/topaz/blob/info/CONTRIBUTING.md)**
 - [ ] that I've _**tested my code and things my code changed**_ since the last commit in the PR, and will test after any later commits
