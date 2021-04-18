@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `item_furnishing` (
   `element` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `aura` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=25 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=25 PACK_KEYS=1 CHECKSUM=1;
 
 --
 -- Contenu de la table `item_furnishing`

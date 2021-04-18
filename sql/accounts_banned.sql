@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS `accounts_banned` (
   `timeunbann` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `banncomment` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`accid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

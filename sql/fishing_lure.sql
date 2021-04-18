@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `fishing_lure` (
   `fishid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `luck` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`lureid`,`fishid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=28;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=28;
 
 --
 -- Contenu de la table `fishing_lure`

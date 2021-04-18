@@ -12,7 +12,7 @@ CREATE TABLE `blue_spell_list` (
   `primary_sc` smallint(2) NOT NULL,
   `secondary_sc` smallint(2) NOT NULL,
   PRIMARY KEY (`spellid`,`mob_skill_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records 

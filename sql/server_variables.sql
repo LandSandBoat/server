@@ -8,7 +8,7 @@ CREATE TABLE `server_variables` (
   `name` varchar(50) NOT NULL,
   `value` int(11) NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of server_variables

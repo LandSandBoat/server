@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS `char_equip` (
   `equipslotid` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `containerid` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`,`equipslotid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=41;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=41;

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `item_mods_pet` (
  `value` smallint(5) NOT NULL DEFAULT '0',
  `petType` tinyint(3) unsigned NOT NULL DEFAULT '0',
  PRIMARY KEY (`itemId`,`modId`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 -- (Please keep item ID sequential)
 INSERT INTO `item_mods_pet` VALUES (10296,25,3,3);      -- Charivari Earring Automaton: Accuracy+3
