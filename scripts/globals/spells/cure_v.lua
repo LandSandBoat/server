@@ -111,13 +111,10 @@ spell_object.onSpellCast = function(caster, target, spell)
             params.skillType = xi.skill.HEALING_MAGIC
             params.attribute = xi.mod.MND
             params.hasMultipleTargetReduction = false
+            params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
+            params.bonus = 1.0
 
             local dmg = calculateMagicDamage(caster, target, spell, params)*0.5
-            local params = {}
-            params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
-            params.attribute = xi.mod.MND
-            params.skillType = xi.skill.HEALING_MAGIC
-            params.bonus = 1.0
             local resist = applyResistance(caster, target, spell, params)
             dmg = dmg*resist
             dmg = addBonuses(caster, spell, target, dmg)
