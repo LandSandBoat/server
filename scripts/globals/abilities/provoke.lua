@@ -2,8 +2,6 @@
 -- Ability: Provoke
 -- Job: Warrior
 -----------------------------------
-require("scripts/globals/job_utils/warrior")
------------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
