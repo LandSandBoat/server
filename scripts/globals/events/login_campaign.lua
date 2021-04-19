@@ -4,9 +4,9 @@
 require("scripts/globals/npc_util")
 ------------------------------------
 
-tpz = tpz or {}
-tpz.events = tpz.events or {}
-tpz.events.loginCampaign = tpz.events.loginCampaign or {}
+xi = xi or {}
+xi.events = xi.events or {}
+xi.events.loginCampaign = xi.events.loginCampaign or {}
 
 -- Change vars below to modify settings for current login campaign
 loginCampaignYear = 2020
@@ -15,7 +15,7 @@ loginCampaignDay = 10
 loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23 days)
 
 -- Checks if a Login Campaign is active.
-tpz.events.loginCampaign.isCampaignActive = function()
+xi.events.loginCampaign.isCampaignActive = function()
     if ENABLE_LOGIN_CAMPAIGN == 1 then
         local local_UTC_offset = os.time() - os.time(os.date('!*t'))
         local JST_UTC_offset = 9 * 60 * 60
@@ -36,8 +36,8 @@ tpz.events.loginCampaign.isCampaignActive = function()
 end
 
 -- Gives Login Points once a day.
-tpz.events.loginCampaign.onGameIn = function(player)
-    if not tpz.events.loginCampaign.isCampaignActive()  then
+xi.events.loginCampaign.onGameIn = function(player)
+    if not xi.events.loginCampaign.isCampaignActive()  then
         return
     end
 
@@ -93,8 +93,8 @@ require("scripts/globals/events/login_campaign_data")
 
 -- Beginning of CS with Greeter Moogle.
 -- Handles showing the correct list of prices and hiding the options that are not available
-tpz.events.loginCampaign.onTrigger = function(player, csid)
-    if not tpz.events.loginCampaign.isCampaignActive()  then
+xi.events.loginCampaign.onTrigger = function(player, csid)
+    if not xi.events.loginCampaign.isCampaignActive()  then
         return
     end
 
@@ -102,7 +102,7 @@ tpz.events.loginCampaign.onTrigger = function(player, csid)
     local cYear = loginCampaignYear
     local cMonth = loginCampaignMonth
     local cDate = bit.bor(cYear, bit.lshift(loginCampaignMonth, 28))
-    local currentLoginCampaign = tpz.events.loginCampaign.prizes[cYear][cMonth]
+    local currentLoginCampaign = xi.events.loginCampaign.prizes[cYear][cMonth]
     local price = {}
     local priceShift = {}
     local hideOptions = 0
@@ -141,8 +141,8 @@ end
 
 -- Shows list of items depending on option selected.
 -- It also is in charge of purchasing selected item.
-tpz.events.loginCampaign.onEventUpdate = function(player, csid, option)
-    if not tpz.events.loginCampaign.isCampaignActive() then
+xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
+    if not xi.events.loginCampaign.isCampaignActive() then
         return
     end
 
@@ -151,7 +151,7 @@ tpz.events.loginCampaign.onEventUpdate = function(player, csid, option)
     local itemQuantity = bit.band(bit.rshift(option, 11), 511)
     local cYear = loginCampaignYear
     local cMonth = loginCampaignMonth
-    local currentLoginCampaign = tpz.events.loginCampaign.prizes[cYear][cMonth]
+    local currentLoginCampaign = xi.events.loginCampaign.prizes[cYear][cMonth]
     local loginPoints = player:getCurrency("login_points")
 
     if

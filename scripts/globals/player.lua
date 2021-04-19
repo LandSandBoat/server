@@ -195,7 +195,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     player:setLocalVar("ZoneInTime", os.time())
 
     -- Login Campaign rewards points once daily
-    player:timer(2000, function (player) tpz.events.loginCampaign.onGameIn(player) end) -- Hacky recommendation by Teo.
+    player:timer(2000, function (player) xi.events.loginCampaign.onGameIn(player) end) -- Hacky recommendation by Teo.
 end
 
 xi.player.onPlayerLevelUp = function(player)

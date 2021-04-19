@@ -12,11 +12,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local csid = 806
-    tpz.events.loginCampaign.onTrigger(player, csid)
+    xi.events.loginCampaign.onTrigger(player, csid)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    tpz.events.loginCampaign.onEventUpdate(player, csid, option)
+    xi.events.loginCampaign.onEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)

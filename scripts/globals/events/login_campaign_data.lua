@@ -2,7 +2,7 @@
 -- other lua scripts, which should instead require() login_campaign.lua directly.
 
 -- items table can only hold up to 20 items per option.
-tpz.events.loginCampaign.prizes =
+xi.events.loginCampaign.prizes =
 {
     [2019] =
     {
