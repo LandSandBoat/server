@@ -2806,7 +2806,7 @@ namespace luautils
             sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
             if (!onMobDeath.valid())
             {
-                ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
+                // ShowError("luautils::onMobDeath (%s): undefined procedure onMobDeath\n", filename);
                 return -1;
             }
 
@@ -2842,7 +2842,7 @@ namespace luautils
             sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
             if (!onMobDeath.valid())
             {
-                ShowError("luautils::onMobDeath (%s - %s): undefined procedure onMobDeath\n", PMob->GetName(), PMob->loc.zone->GetName());
+                // ShowError("luautils::onMobDeath (%s - %s): undefined procedure onMobDeath\n", PMob->GetName(), PMob->loc.zone->GetName());
                 return -1;
             }
 
