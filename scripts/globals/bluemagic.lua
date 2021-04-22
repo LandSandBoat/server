@@ -144,7 +144,9 @@ function BluePhysicalSpell(caster, target, spell, params)
             hitslanded = hitslanded + 1
 
             -- increment target's TP (100TP per hit landed)
-            target:addTP(100)
+            if (finaldmg > 0) then
+                target:addTP(100)
+            end
         end
 
         hitsdone = hitsdone + 1

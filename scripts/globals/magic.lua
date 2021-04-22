@@ -678,7 +678,7 @@ end
         target:handleAfflatusMiseryDamage(dmg)
         target:updateEnmityFromDamage(caster, dmg)
         -- Only add TP if the target is a mob
-        if (target:getObjType() ~= xi.objType.PC) then
+        if (target:getObjType() ~= xi.objType.PC and dmg > 0) then
             target:addTP(100)
         end
     end
