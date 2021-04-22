@@ -564,7 +564,7 @@ function getSpellBonusAcc(caster, target, spell, params)
         end
 
         -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-        magicAccBonus = magicAccBonus + getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
     end
 
     if casterJob == xi.job.NIN then
