@@ -1078,6 +1078,7 @@ int32 map_config_default()
     map_config.seal_recast_time            = 300;
     map_config.seal_drop_rate              = 20;
     map_config.drop_list_shuffle           = false;
+    map_config.blue_magic_learning_rate    = 33;
     return 0;
 }
 
@@ -1511,6 +1512,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "drop_list_shuffle") == 0)
         {
             map_config.drop_list_shuffle = atoi(w2);
+        }
+        else if (strcmp(w1, "blue_magic_learning_rate") == 0)
+        {
+            map_config.blue_magic_learning_rate = atoi(w2);
         }
         else
         {

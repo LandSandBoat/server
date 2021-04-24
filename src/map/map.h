@@ -154,6 +154,7 @@ struct map_config_t
     uint16      seal_recast_time;
     uint8       seal_drop_rate;
     bool        drop_list_shuffle;
+    uint8       blue_magic_learning_rate;
 };
 
 /************************************************************************
