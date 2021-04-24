@@ -158,6 +158,7 @@ struct map_config_t
     uint8       mob_link_radius;
     bool        mount_anywhere_area;
     uint16      mounted_time_limit;
+    uint8       unity_leader_trust_coefficient;
 };
 
 /************************************************************************
