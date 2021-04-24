@@ -915,7 +915,12 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
         }
 
-        for (const DropItem_t& item : DropList.Items)
+        auto itemList = DropList.Items;
+        if (map_config.drop_list_shuffle)
+        {
+            std::shuffle(itemList.begin(), itemList.end(), xirand::mt());
+        }
+        for (const DropItem_t& item : itemList)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {

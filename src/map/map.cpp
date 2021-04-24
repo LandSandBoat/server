@@ -1077,6 +1077,7 @@ int32 map_config_default()
     map_config.daily_tally_limit           = 50000;
     map_config.seal_recast_time            = 300;
     map_config.seal_drop_rate              = 20;
+    map_config.drop_list_shuffle           = false;
     return 0;
 }
 
@@ -1506,6 +1507,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "seal_drop_rate") == 0)
         {
             map_config.seal_drop_rate = atoi(w2);
+        }
+        else if (strcmp(w1, "drop_list_shuffle") == 0)
+        {
+            map_config.drop_list_shuffle = atoi(w2);
         }
         else
         {

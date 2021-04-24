@@ -153,6 +153,7 @@ struct map_config_t
     uint16      daily_tally_limit;      // Upper limit of daily tally points for Gobbie Mystery Box
     uint16      seal_recast_time;
     uint8       seal_drop_rate;
+    bool        drop_list_shuffle;
 };
 
 /************************************************************************
