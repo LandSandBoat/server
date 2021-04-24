@@ -942,7 +942,7 @@ namespace mobutils
         PMob->m_Immunity |= PMob->getMobMod(MOBMOD_IMMUNITY);
 
         PMob->defaultMobMod(MOBMOD_SKILL_LIST, PMob->m_MobSkillList);
-        PMob->defaultMobMod(MOBMOD_LINK_RADIUS, 10);
+        PMob->defaultMobMod(MOBMOD_LINK_RADIUS, map_config.mob_link_radius);
         PMob->defaultMobMod(MOBMOD_TP_USE_CHANCE,
                             92); // 92 = 0.92% chance per 400ms tick (50% chance by 30 seconds) while mob HPP>25 and mob TP >=1000 but <3000
         PMob->defaultMobMod(MOBMOD_SIGHT_RANGE, (int16)CMobEntity::sight_range);

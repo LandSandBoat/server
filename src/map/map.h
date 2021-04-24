@@ -155,6 +155,7 @@ struct map_config_t
     uint8       seal_drop_rate;
     bool        drop_list_shuffle;
     uint8       blue_magic_learning_rate;
+    uint8       mob_link_radius;
 };
 
 /************************************************************************
