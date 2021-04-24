@@ -159,6 +159,7 @@ struct map_config_t
     bool        mount_anywhere_area;
     uint16      mounted_time_limit;
     uint8       unity_leader_trust_coefficient;
+    float       support_job_exp_rate;
 };
 
 /************************************************************************
