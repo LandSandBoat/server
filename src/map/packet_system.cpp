@@ -932,7 +932,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 71));
             }
-            else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT))
+            else if (!PChar->loc.zone->CanUseMisc(MISC_MOUNT) && !map_config.mount_anywhere_area)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
             }
@@ -957,7 +957,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                     return;
                 }
 
-                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MOUNTED, EFFECT_MOUNTED, (MountID ? ++MountID : 0), 0, 1800), true);
+                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_MOUNTED, EFFECT_MOUNTED, (MountID ? ++MountID : 0), 0, map_config.mounted_time_limit), true);
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
                 PChar->pushPacket(new CCharRecastPacket(PChar));
             }

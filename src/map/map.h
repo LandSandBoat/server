@@ -156,6 +156,8 @@ struct map_config_t
     bool        drop_list_shuffle;
     uint8       blue_magic_learning_rate;
     uint8       mob_link_radius;
+    bool        mount_anywhere_area;
+    uint16      mounted_time_limit;
 };
 
 /************************************************************************

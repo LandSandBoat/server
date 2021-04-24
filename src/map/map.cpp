@@ -1080,6 +1080,8 @@ int32 map_config_default()
     map_config.drop_list_shuffle           = false;
     map_config.blue_magic_learning_rate    = 33;
     map_config.mob_link_radius             = 10;
+    map_config.mount_anywhere_area         = false;
+    map_config.mounted_time_limit          = 1800;
     return 0;
 }
 
@@ -1521,6 +1523,14 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "mob_link_radius") == 0)
         {
             map_config.mob_link_radius = atoi(w2);
+        }
+        else if (strcmp(w1, "mount_anywhere_area") == 0)
+        {
+            map_config.mount_anywhere_area = atoi(w2);
+        }
+        else if (strcmp(w1, "mounted_time_limit") == 0)
+        {
+            map_config.mounted_time_limit = atoi(w2);
         }
         else
         {
