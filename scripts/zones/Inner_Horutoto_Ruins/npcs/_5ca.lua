@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
     -- bitmask of progress: 0 = Kyume-Romeh, 1 = Yuyuju, 2 = Hiwom-Gomoi, 3 = Umumu, 4 = Mahogany Door
     local prog = player:getCharVar("QuestMakingHeadlines_var")
 
-    if currentMission == xi.mission.id.windurst.LOST_FOR_WORDS and missionStatus == 4 then
+    if CurrentMission == xi.mission.id.windurst.LOST_FOR_WORDS and MissionStatus == 4 then
         player:startEvent(46)
     elseif
         makingHeadlines == QUEST_ACCEPTED and
