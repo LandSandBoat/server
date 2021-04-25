@@ -1084,6 +1084,7 @@ int32 map_config_default()
     map_config.mounted_time_limit          = 1800;
     map_config.unity_leader_trust_coefficient = 5;
     map_config.support_job_exp_rate        = 0.0f;
+    map_config.item_acquisition_record     = false;
     return 0;
 }
 
@@ -1541,6 +1542,10 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "support_job_exp_rate") == 0)
         {
             map_config.support_job_exp_rate = atof(w2);
+        }
+        else if (strcmp(w1, "item_acquisition_record") == 0)
+        {
+            map_config.item_acquisition_record = atoi(w2);
         }
         else
         {

@@ -1286,6 +1286,32 @@ namespace charutils
             }
             PChar->pushPacket(new CInventoryItemPacket(PItem, LocationID, SlotID));
             PChar->pushPacket(new CInventoryFinishPacket());
+
+            if (map_config.item_acquisition_record)
+            {
+                // アイテム図鑑登録
+                const char* QueryItem = "INSERT IGNORE INTO char_achieve_item("
+                                        "charid,"
+                                        "itemId) "
+                                        "VALUES(%u,%u)";
+                if (Sql_Query(SqlHandle, QueryItem, PChar->id, PItem->getID()) == SQL_ERROR)
+                {
+                    ShowError(CL_RED "charplugin::AddItem: Cannot insert item to database\n" CL_RESET);
+                    PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
+                    delete PItem;
+                    return ERROR_SLOTID;
+                }
+
+                auto addCount = Sql_AffectedRows(SqlHandle);
+                if (addCount > 0)
+                {
+                    // 図鑑ポイント登録
+                    Sql_Query(SqlHandle,
+                              "INSERT INTO char_achieve_point SET charid = %d, totalPoint = %d, nowPoint = %d "
+                              "ON DUPLICATE KEY UPDATE totalPoint = totalPoint + %d, nowPoint = nowPoint + %d;",
+                              addCount, addCount, PChar->id, addCount, addCount);
+                }
+            }
         }
         else
         {
