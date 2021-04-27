@@ -26,16 +26,16 @@ end
 entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
     local tuningIn = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     -- Check if we are on Windurst Mission 1-3 and haven't already delivered both offerings.
-    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and MissionStatus < 3) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_PRICE_OF_PEACE and missionStatus < 3) then
         if (player:hasKeyItem(xi.ki.FOOD_OFFERINGS) == false and player:hasKeyItem(xi.ki.DRINK_OFFERINGS) == false) then
             player:startEvent(140)
-        elseif (MissionStatus >= 1) then
+        elseif (missionStatus >= 1) then
             player:startEvent(142) -- Keep displaying the instructions
         end
     -- Check if we are on Windurst Mission 7-2

@@ -14,19 +14,19 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(BASTOK)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     -- Enter the Talekeeper 8-2
-    if currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and MissionStatus == 4 then
+    if currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and missionStatus == 4 then
         player:startEvent(204)
-    elseif currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and MissionStatus > 1 and MissionStatus < 4 then
+    elseif currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and missionStatus > 1 and missionStatus < 4 then
         player:startEvent(203)
-    elseif currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and MissionStatus == 0 then
+    elseif currentMission == xi.mission.id.bastok.ENTER_THE_TALEKEEPER and missionStatus == 0 then
         player:startEvent(202)
     -- Return of the Talekeeper 6-1
-    elseif currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and MissionStatus > 1 then
+    elseif currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and missionStatus > 1 then
         player:startEvent(201)
-    elseif currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and MissionStatus == 1 then
+    elseif currentMission == xi.mission.id.bastok.RETURN_OF_THE_TALEKEEPER and missionStatus == 1 then
         player:startEvent(200)
     else
         player:startEvent(108)

@@ -19,15 +19,15 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    local CurrentMission = player:getCurrentMission(WINDURST)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local currentMission = player:getCurrentMission(WINDURST)
+    local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-177.804, -2.765, -37.893, 179)
     end
 
-    if (prevZone == xi.zone.QUICKSAND_CAVES and CurrentMission == xi.mission.id.windurst.MOON_READING and MissionStatus >= 1) then
+    if (prevZone == xi.zone.QUICKSAND_CAVES and currentMission == xi.mission.id.windurst.MOON_READING and missionStatus >= 1) then
         cs = 3
     end
 

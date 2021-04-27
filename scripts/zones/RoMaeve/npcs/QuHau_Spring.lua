@@ -26,12 +26,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CurrentMission = player:getCurrentMission(WINDURST)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local currentMission = player:getCurrentMission(WINDURST)
+    local missionStatus = player:getMissionStatus(player:getNation())
 
-    if (CurrentMission == xi.mission.id.windurst.VAIN and MissionStatus >= 1) then
+    if (currentMission == xi.mission.id.windurst.VAIN and missionStatus >= 1) then
         player:startEvent(2)
-    elseif (CurrentMission == xi.mission.id.windurst.MOON_READING and MissionStatus >= 1) then
+    elseif (currentMission == xi.mission.id.windurst.MOON_READING and missionStatus >= 1) then
         player:startEvent(4)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

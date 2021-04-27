@@ -36,7 +36,7 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    player:setMissionStatus(player:getNation(), 2) -- This should be MissionStatus..But all battlefields of same var need updated.
+    player:setMissionStatus(player:getNation(), 2) -- This should be missionStatus..But all battlefields of same var need updated.
 end
 
 return battlefield_object

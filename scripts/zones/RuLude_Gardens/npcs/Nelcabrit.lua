@@ -17,25 +17,25 @@ entity.onTrigger = function(player, npc)
 
     if pNation == xi.nation.SANDORIA then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 3 then
+        if currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 3 then
             player:startEvent(42)
-        elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 4 then
+        elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 4 then
             player:startEvent(67)
-        elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 5 then
+        elseif currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 5 then
             player:startEvent(140)
-        elseif player:getRank() == 4 and MissionStatus == 0 then
+        elseif player:getRank() == 4 and missionStatus == 0 then
             if getMissionRankPoints(player, 13) == 1 then
                 player:startEvent(45)
             else
                 player:startEvent(49)
             end
-        elseif currentMission == xi.mission.id.sandoria.MAGICITE and MissionStatus == 1 then
+        elseif currentMission == xi.mission.id.sandoria.MAGICITE and missionStatus == 1 then
             player:startEvent(133)
-        elseif currentMission == xi.mission.id.sandoria.MAGICITE and MissionStatus <= 5 then
+        elseif currentMission == xi.mission.id.sandoria.MAGICITE and missionStatus <= 5 then
             player:startEvent(136)
-        elseif currentMission == xi.mission.id.sandoria.MAGICITE and MissionStatus == 6 then
+        elseif currentMission == xi.mission.id.sandoria.MAGICITE and missionStatus == 6 then
             player:startEvent(36)
         elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_SANDORIA) then
             player:startEvent(56)

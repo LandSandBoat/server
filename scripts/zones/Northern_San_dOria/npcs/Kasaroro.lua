@@ -19,30 +19,30 @@ entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     if (pNation == xi.nation.WINDURST) then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
 
         if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS) then
-            if (MissionStatus == 2) then
+            if (missionStatus == 2) then
                 player:startEvent(546)
-            elseif (MissionStatus == 6) then
+            elseif (missionStatus == 6) then
                 player:showText(npc, ID.text.KASARORO_DIALOG + 7)
-            elseif (MissionStatus == 7) then
+            elseif (missionStatus == 7) then
                 player:startEvent(547)
-            elseif (MissionStatus == 11) then
+            elseif (missionStatus == 11) then
                 player:showText(npc, ID.text.KASARORO_DIALOG + 20)
             end
         elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA) then
-            if (MissionStatus == 3) then
+            if (missionStatus == 3) then
                 player:showText(npc, ID.text.KASARORO_DIALOG)
-            elseif (MissionStatus == 4) then
+            elseif (missionStatus == 4) then
                 player:startEvent(549)
-            elseif (MissionStatus == 5) then
+            elseif (missionStatus == 5) then
                 player:startEvent(550) -- done with Sandy first path, now go to bastok
             end
         elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
-            if (MissionStatus == 8) then
+            if (missionStatus == 8) then
                 player:showText(npc, ID.text.KASARORO_DIALOG)
-            elseif (MissionStatus == 10) then
+            elseif (missionStatus == 10) then
                 player:startEvent(551)
             end
         elseif (player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS)) then

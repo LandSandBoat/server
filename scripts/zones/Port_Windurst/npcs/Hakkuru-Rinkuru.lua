@@ -51,12 +51,12 @@ entity.onTrigger = function(player, npc)
         player:startEvent(457)
     -- Check if we are on Windurst Mission 1-1
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
-        MissionStatus = player:getMissionStatus(player:getNation())
-        if (MissionStatus == 0) then
+        missionStatus = player:getMissionStatus(player:getNation())
+        if (missionStatus == 0) then
             player:startEvent(90)
-        elseif (MissionStatus == 1) then
+        elseif (missionStatus == 1) then
             player:startEvent(91)
-        elseif (MissionStatus == 3) then
+        elseif (missionStatus == 3) then
             player:startEvent(94, 0, xi.ki.CRACKED_MANA_ORBS) -- Finish Mission 1-1
         end
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.TO_EACH_HIS_OWN_RIGHT and player:getMissionStatus(player:getNation()) == 2) then
