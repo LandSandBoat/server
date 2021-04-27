@@ -33,7 +33,7 @@ zone_object.onZoneIn = function(player, prevZone)
         SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
-    if (prevZone == xi.zone.BEAUCEDINE_GLACIER and currentMission == xi.mission.id.nation.ARCHLICH and MissionStatus == 10) then
+    if (currentMission == xi.mission.id.nation.ARCHLICH and MissionStatus == 10) then
         cs = 1 -- MISSION 5-1
     elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 2) then
         cs = 23 -- San d'Oria 9-2
