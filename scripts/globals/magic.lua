@@ -649,7 +649,7 @@ end
     end
 
     local skill = spell:getSkillType()
-    if skill == xi.skill.ELEMENTAL_MAGIC) then
+    if skill == xi.skill.ELEMENTAL_MAGIC then
         dmg = dmg * ELEMENTAL_POWER
     elseif skill == xi.skill.DARK_MAGIC then
         dmg = dmg * DARK_POWER
@@ -971,9 +971,9 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     end
 
     if params ~= nil and params.bonusmab ~= nil and params.includemab == true then
-        mab = 100 + caster:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus
+        mab = (100 + caster:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     elseif params == nil or (params ~= nil and params.includemab == true) then
-        mab = 100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus
+        mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     end
 
     if mab < 0 then
