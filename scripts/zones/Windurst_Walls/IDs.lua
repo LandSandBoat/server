@@ -35,7 +35,7 @@ zones[xi.zone.WINDURST_WALLS] =
         YOU_CANNOT_ENTER_DYNAMIS       = 9089, -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 9091, -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 9103, -- The strands of grass here have been tied together.
-        TEAR_IN_FABRIC_OF_SPACE        = 10828, -- There appears to be a tear in the fabric of space...
+        TEAR_IN_FABRIC_OF_SPACE        = 10838, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {
