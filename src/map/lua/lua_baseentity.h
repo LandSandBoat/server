@@ -68,6 +68,7 @@ public:
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
     void   resetLocalVars();
+    void   clearVarsWithPrefix(std::string const& prefix);
     uint32 getLastOnline(); // Returns the unix timestamp of last time the player logged out or zoned
 
     // Packets, Events, and Flags
@@ -81,7 +82,11 @@ public:
     void updateEvent(sol::variadic_args va);                      // Updates event
     void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;
+    bool isInEvent(); // Returns true if the player is in an event
     void release(); // Stops event
+    bool startSequence(); // Flags the player as being in a sequence
+    bool didGetMessage(); // Used by interaction framework to determine if player triggered something else
+    void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
     void  setFlag(uint32 flags);
     uint8 getMoghouseFlag();
@@ -168,6 +173,7 @@ public:
     float getYPos();              // Get Entity Y position
     float getZPos();              // Get Entity Z position
     uint8 getRotPos();            // Get Entity Rot position
+    void setRotation(uint8 rotation); // Set Entity rotation
 
     void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
     void warp();                                                              // Returns Character to home point

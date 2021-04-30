@@ -86,6 +86,8 @@ CCharEntity::CCharEntity()
     m_EcoSystem = ECOSYSTEM::HUMANOID;
 
     m_event.reset();
+    inSequence = false;
+    gotMessage = false;
 
     m_GMlevel    = 0;
     m_isGMHidden = false;
@@ -2174,4 +2176,14 @@ bool CCharEntity::OnAttackError(CAttackState& state)
         return true;
     }
     return false;
+}
+
+bool CCharEntity::isInEvent()
+{
+    return m_event.EventID != -1;
+}
+
+bool CCharEntity::isNpcLocked()
+{
+    return isInEvent() || inSequence;
 }

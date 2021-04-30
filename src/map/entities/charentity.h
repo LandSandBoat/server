@@ -186,6 +186,8 @@ public:
     jobs_t     jobs;       // доступрые профессии персонажа
     keyitems_t keys;       // таблица ключевых предметов
     event_t    m_event;    // структура для запуска событый
+    bool       inSequence; // True if the player is locked in a NPC sequence
+    bool       gotMessage; // Used to let the interaction framework know that a message outside of it was triggered.
     skills_t   RealSkills; // структура всех реальных умений персонажа, с точностью до 0.1 и не ограниченных уровнем
 
     nameflags_t nameflags;           // флаги перед именем персонажа
@@ -398,6 +400,9 @@ public:
     int32 GetTimeRemainingUntilDeathHomepoint() const; // Amount of time remaining before the player should be forced back to homepoint while dead
 
     int32 GetTimeCreated();
+
+    bool isInEvent();
+    bool isNpcLocked();
 
     void SetMoghancement(uint16 moghancementID);
     bool hasMoghancement(uint16 moghancementID) const;

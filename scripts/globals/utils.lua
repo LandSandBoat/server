@@ -475,3 +475,13 @@ utils.mask =
         return bit.band(mask, fullMask) == fullMask
     end,
 }
+
+function utils.prequire(...)
+    local ok, result = pcall(require, ...)
+    if ok then
+        return result
+    else
+        local vars = {...}
+        printf("Error while trying to load '%s': %s", vars[1], result)
+    end
+end

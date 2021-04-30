@@ -133,11 +133,12 @@ bool CAIContainer::RangedAttack(uint16 targid)
     return false;
 }
 
-bool CAIContainer::Trigger(uint16 targID)
+bool CAIContainer::Trigger(CCharEntity* player)
 {
+    bool isDoor = luautils::OnTrigger(player, PEntity) == -1;
+    auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
     if (CanChangeState())
     {
-        auto ret = ChangeState<CTriggerState>(PEntity, targID);
         if (PathFind)
         {
             PathFind->Clear(); //#TODO: pause/resume after?

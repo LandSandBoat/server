@@ -684,7 +684,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
-                PNpc->PAI->Trigger(PChar->targid);
+                PNpc->PAI->Trigger(PChar);
             }
 
             // Releasing a trust
@@ -694,7 +694,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->RemoveTrust(PTrust);
             }
 
-            if (PChar->m_event.EventID == -1)
+            if (!PChar->isNpcLocked())
             {
                 PChar->m_event.reset();
                 PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::STANDARD));
@@ -5492,7 +5492,7 @@ void SmallPacket0x0EA(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0EB(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (PChar->m_event.EventID == -1)
+    if (!PChar->isNpcLocked())
     {
         return;
     }
