@@ -9,11 +9,11 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local beastman_seal = 0         -- blˆóÍ
-local kindred_seal = 1          -- b_ˆóÍ
-local kindred_crest = 2         -- –‚lˆóÍ
-local high_kindred_crest = 3    -- –‚‰¤ˆóÍ
-local sacred_kindred_crest = 4  -- –‚_ˆóÍ
+local beastman_seal = 0         -- ÂbÂlË†Ã³ÂÃ
+local kindred_seal = 1          -- ÂbÂ_Ë†Ã³ÂÃ
+local kindred_crest = 2         -- â€“â€šÂlË†Ã³ÂÃ
+local high_kindred_crest = 3    -- â€“â€šâ€°Â¤Ë†Ã³ÂÃ
+local sacred_kindred_crest = 4  -- â€“â€šÂ_Ë†Ã³ÂÃ
 
 -- 0:Convert at 3: 1
 -- 1:Convert at 2: 1 (campaignAdditional Seal Battlefield Spoils Campaign)

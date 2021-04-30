@@ -3682,7 +3682,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,134); -- Blade: Jin
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,141); -- Blade: Shun
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mastui-P',1148,138); -- Blade: Kamu
 
---Voidwalker
+-- Voidwalker
 INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,451); -- Splash Breath
 INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,641); -- Recoil Dive
 INSERT INTO `mob_skill_lists` VALUES ('Capricornus',1149,449); -- Intimidate
