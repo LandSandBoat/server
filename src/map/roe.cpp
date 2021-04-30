@@ -396,7 +396,7 @@ namespace roeutils
 
         if (unityLeaderTrust > 0)
         {
-            if (curPoints >= 5 || prevPoints >= 5)
+            if (curPoints >= map_config.unity_leader_trust_coefficient || prevPoints >= map_config.unity_leader_trust_coefficient)
             {
                 charutils::addSpell(PChar, unityLeaderTrust);
                 charutils::SaveSpell(PChar, unityLeaderTrust);

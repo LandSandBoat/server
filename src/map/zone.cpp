@@ -883,7 +883,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->loc.destination  = 0;
     PChar->m_InsideRegionID = 0;
 
-    if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
+    if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT) && !map_config.mount_anywhere_area)
     {
         PChar->animation = ANIMATION_NONE;
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);

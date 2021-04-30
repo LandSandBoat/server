@@ -72,18 +72,18 @@ INITIAL_LEVEL_CAP = 50 -- The initial level cap for new players.  There seems to
 MAX_LEVEL = 99 -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
 NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0 -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0 -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
-START_GIL = 10 -- Amount of gil given to newly created characters.
-START_INVENTORY = 30 -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
+START_GIL = 1000 -- Amount of gil given to newly created characters.
+START_INVENTORY = 80 -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
 NEW_CHARACTER_CUTSCENE = 1 -- Set to 1 to enable opening cutscenes, 0 to disable.
 SUBJOB_QUEST_LEVEL = 18 -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
 ADVANCED_JOB_LEVEL = 30 -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
 ALL_MAPS = 0 -- Set to 1 to give starting characters all the maps.
 UNLOCK_OUTPOST_WARPS = 0 -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
 
-SHOP_PRICE      = 1.000 -- Multiplies prices in NPC shops.
-GIL_RATE        = 1.000 -- Multiplies gil earned from quests.  Won't always display in game.
-BAYLD_RATE      = 1.000 -- Multiples bayld earned from quests.
-EXP_RATE        = 1.000 -- Multiplies exp earned from fov and quests.
+SHOP_PRICE      = 0.100 -- Multiplies prices in NPC shops.
+GIL_RATE        = 10.000 -- Multiplies gil earned from quests.  Won't always display in game.
+BAYLD_RATE      = 10.000 -- Multiples bayld earned from quests.
+EXP_RATE        = 10.000 -- Multiplies exp earned from fov and quests.
 TABS_RATE       = 1.000 -- Multiplies tabs earned from fov.
 ROE_EXP_RATE    = 1.000 -- Multiplies exp earned from records of eminence.
 SPARKS_RATE     = 1.000 -- Multiplies sparks earned from records of eminence.
@@ -127,9 +127,9 @@ LandKingSystem_NQ = 1
 LandKingSystem_HQ = 1
 
 -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
-NM_LOTTERY_CHANCE = 1.0
+NM_LOTTERY_CHANCE = -1
 -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
-NM_LOTTERY_COOLDOWN = 1.0
+NM_LOTTERY_COOLDOWN = 0
 
 -- DYNAMIS SETTINGS
 BETWEEN_2DYNA_WAIT_TIME  = 24       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
