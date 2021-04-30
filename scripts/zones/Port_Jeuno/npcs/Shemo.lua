@@ -49,8 +49,8 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 352 then
         local addnum = bit.rshift(option, 8)
-        local in_seal = bit.rshift(bit.band(option, 0xFF), 4) - 1
-        local out_seal = bit.band(option, 0xF) - 1
+        local out_seal = bit.rshift(bit.band(option, 0xFF), 4) - 1
+        local in_seal = bit.band(option, 0xF) - 1
         local dellseals = addnum * 3
         if (isTradeNum2 == 1) then
             dellseals = addnum * 2
