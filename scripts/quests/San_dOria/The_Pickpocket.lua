@@ -8,7 +8,7 @@
 -- Esca !pos -624 -51 278 100
 -----------------------------------
 require('scripts/globals/zone')
--- require('scripts/globals/items') -- TODO: uncomment when file exists
+require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
@@ -16,13 +16,6 @@ require('scripts/globals/npc_util')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_PICKPOCKET)
-
--- TODO: remove once global enumeration file exists
-xi.items = xi.items or {}
-xi.items.LIGHT_AXE = 16667
-xi.items.EAGLE_BUTTON = 578
-xi.items.GILT_GLASSES = 579
-
 
 quest.reward = {
     fame = 30,
