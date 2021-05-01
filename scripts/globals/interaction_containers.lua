@@ -61,4 +61,8 @@ return {
     "scripts/quests/ahtUrhgan/Vanishing_Act",
     "scripts/quests/ahtUrhgan/What_Friends_Are_For",
 
+    -- Hidden quests
+    "scripts/quests/hiddenQuests/AssaultRank_PFC",
+    "scripts/quests/hiddenQuests/AssaultRank_SP",
+
 }
