@@ -38,5 +38,12 @@ return {
     "scripts/quests/jeuno/Unlocking_a_Myth",
 
     -- Other Areas
+    "scripts/quests/otherAreas/Confessions_of_a_Bellmaker",
+    "scripts/quests/otherAreas/Missionary_Moblin",
+
+    -- Outlands
+    "scripts/quests/outlands/Bugi_Soden",
+    "scripts/quests/outlands/Cloak_and_Dagger",
+    "scripts/quests/outlands/The_Potential_Within",
 
 }
