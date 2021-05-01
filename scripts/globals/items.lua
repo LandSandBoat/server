@@ -18,7 +18,11 @@ xi.items =
     WILLPOWER_TORQUE             = 13174,
     WING_PENDANT                 = 13183,
     LIGHT_AXE                    = 16667,
+    AXE_OF_TRIALS                = 16735,
     SCYTHE_OF_TRIALS             = 16793,
     SPEAR_OF_TRIALS              = 16892,
+    SWORD_OF_TRIALS              = 16952,
+    KNUCKLES_OF_TRIALS           = 17507,
     SAPARA_OF_TRIALS             = 17654,
+    GUN_OF_TRIALS                = 18146,
 }
