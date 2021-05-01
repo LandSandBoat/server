@@ -9,10 +9,10 @@ require("scripts/globals/items")
 require("scripts/globals/quests")
 require('scripts/globals/interaction/quest')
 require("scripts/globals/npc_util")
-require("scripts/globals/weather")
+-- require("scripts/globals/weather")
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, GIVE_PEACE_A_CHANCE)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GIVE_PEACE_A_CHANCE)
 
 quest.reward = {
     item = xi.items.IMPERIAL_SILVER_PIECE,

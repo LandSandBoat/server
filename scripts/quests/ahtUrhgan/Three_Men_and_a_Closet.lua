@@ -11,7 +11,7 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, THREE_MEN_AND_A_CLOSET)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THREE_MEN_AND_A_CLOSET)
 
 quest.reward = {
     item = xi.items.IMPERIAL_BRONZE_PIECE,

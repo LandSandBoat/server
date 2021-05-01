@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/npc_util")
 -----------------------------------
 
-local quest = Quest:new(SANDORIA, WATER_OF_THE_CHEVAL)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATER_OF_THE_CHEVAL)
 
 quest.reward = {
     fame = 30,

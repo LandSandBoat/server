@@ -7,14 +7,14 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
-require('scripts/globals/npc/quest')
+require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 local CarpentersLandingID = require("scripts/zones/Carpenters_Landing/IDs")
 local DavoiID = require("scripts/zones/Davoi/IDs")
 
 
-local quest = Quest:new(SANDORIA, TEA_WITH_A_TONBERRY)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
 quest.repeatable = false
 quest.reward = {

@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/weaponskillids")
 -----------------------------------
 
-local quest = Quest:new(BASTOK, THE_WEIGHT_OF_YOUR_LIMITS)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WEIGHT_OF_YOUR_LIMITS)
 
 quest.reward = {
     fame = 30,

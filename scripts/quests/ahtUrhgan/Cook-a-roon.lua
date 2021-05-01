@@ -8,7 +8,7 @@ require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, COOK_A_ROON)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.COOK_A_ROON)
 
 quest.sections = {
 

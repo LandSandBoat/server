@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/weaponskillids")
 -----------------------------------
 
-local quest = Quest:new(SANDORIA, SOULS_IN_SHADOW)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
 
 quest.reward = {
     fame = 30,

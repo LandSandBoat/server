@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/npc_util")
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, OLDUUM)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OLDUUM)
 
 quest.reward = {
     item = xi.items.LIGHTNING_BAND,

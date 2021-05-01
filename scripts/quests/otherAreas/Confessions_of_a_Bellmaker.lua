@@ -12,7 +12,7 @@ require('scripts/globals/npc_util')
 -----------------------------------
 
 
-local quest = Quest:new(OTHER_AREAS_LOG, CONFESSIONS_OF_A_BELLMAKER)
+local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)
 
 quest.reward = {
     item = xi.items.MINSTRELS_DAGGER,

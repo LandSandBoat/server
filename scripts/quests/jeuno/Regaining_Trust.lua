@@ -5,14 +5,14 @@
 -- Giant Footprint !pos -501 -11 354 126
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/pets/fellow")
+-- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
 
-local quest = Quest:new(JEUNO, REGAINING_TRUST)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.REGAINING_TRUST)
 
 quest.reward = {}
 

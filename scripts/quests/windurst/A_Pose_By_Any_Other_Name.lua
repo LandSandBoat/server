@@ -10,7 +10,7 @@ require('scripts/globals/titles')
 -----------------------------------
 
 
-local quest = Quest:new(WINDURST, A_POSE_BY_ANY_OTHER_NAME)
+local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
 
 quest.reward = {
     fame = 75,

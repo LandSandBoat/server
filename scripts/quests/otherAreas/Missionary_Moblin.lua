@@ -9,7 +9,7 @@ require('scripts/globals/npc_util')
 -----------------------------------
 
 
-local quest = Quest:new(OTHER_AREAS_LOG, MISSIONARY_MOBLIN)
+local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN)
 
 quest.reward = {
     gil = 4000,

@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/weaponskillids")
 -----------------------------------
 
-local quest = Quest:new(OUTLANDS, THE_POTENTIAL_WITHIN)
+local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_POTENTIAL_WITHIN)
 
 quest.reward = {
     fame = 30,

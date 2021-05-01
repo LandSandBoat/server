@@ -8,7 +8,7 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
-require("scripts/globals/pets/fellow")
+-- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -16,7 +16,7 @@ require('scripts/globals/status')
 -----------------------------------
 
 
-local quest = Quest:new(JEUNO, BLESSED_RADIANCE)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
 
 quest.reward = {}
 

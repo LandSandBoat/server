@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/weaponskillids")
 -----------------------------------
 
-local quest = Quest:new(OUTLANDS, CLOAK_AND_DAGGER)
+local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CLOAK_AND_DAGGER)
 
 quest.reward = {
     fame = 30,

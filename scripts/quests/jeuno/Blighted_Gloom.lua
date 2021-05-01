@@ -7,14 +7,14 @@
 -- qm1 (???) Ranguemont Pass !pos 54 10 -147 166
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/pets/fellow")
+-- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
 
-local quest = Quest:new(JEUNO, BLIGHTED_GLOOM)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
 
 quest.reward = {}
 

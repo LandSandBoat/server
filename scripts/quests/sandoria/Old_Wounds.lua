@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/weaponskillids")
 -----------------------------------
 
-local quest = Quest:new(SANDORIA, OLD_WOUNDS)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS)
 
 quest.reward = {
     fame = 30,

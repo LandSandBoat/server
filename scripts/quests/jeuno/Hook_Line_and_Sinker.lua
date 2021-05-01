@@ -10,7 +10,7 @@ require('scripts/globals/npc_util')
 -----------------------------------
 
 
-local quest = Quest:new(JEUNO, HOOK_LINE_AND_SINKER)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.HOOK_LINE_AND_SINKER)
 
 quest.reward = {
     gil = 3000,

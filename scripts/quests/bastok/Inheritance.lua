@@ -10,7 +10,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/weaponskillids")
 -----------------------------------
 
-local quest = Quest:new(BASTOK, INHERITANCE)
+local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.INHERITANCE)
 
 quest.reward = {
     fame = 30,

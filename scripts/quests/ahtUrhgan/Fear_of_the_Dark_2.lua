@@ -9,7 +9,7 @@ require('scripts/globals/interaction/quest')
 require("scripts/globals/titles")
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, FEAR_OF_THE_DARK_II)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.FEAR_OF_THE_DARK_II)
 
 quest.reward = {
     gil = 200,

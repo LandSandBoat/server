@@ -6,14 +6,14 @@
 -- Qm1 !pos 260 40 79 148
 -----------------------------------
 require('scripts/globals/items')
-require("scripts/globals/pets/fellow")
+-- require("scripts/globals/pets/fellow")
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
 
-local quest = Quest:new(JEUNO, MIXED_SIGNALS)
+local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIXED_SIGNALS)
 
 quest.sections = {
 

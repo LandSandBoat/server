@@ -12,7 +12,7 @@ require("scripts/globals/zone")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, VANISHING_ACT)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT)
 
 quest.reward = {
     item = xi.items.IMPERIAL_SILVER_PIECE

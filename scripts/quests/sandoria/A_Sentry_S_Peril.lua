@@ -6,11 +6,11 @@
 require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
-require('scripts/globals/npc/quest')
+require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
-local quest = Quest:new(SANDORIA, A_SENTRY_S_PERIL)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SENTRY_S_PERIL)
 
 quest.reward = {
     fame = 30,

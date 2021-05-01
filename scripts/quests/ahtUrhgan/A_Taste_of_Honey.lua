@@ -8,7 +8,7 @@ require("scripts/globals/npc_util")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(AHT_URHGAN, A_TASTE_OF_HONEY)
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.A_TASTE_OF_HONEY)
 
 quest.reward = {
     item = xi.items.IRMIK_HELVASI

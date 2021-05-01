@@ -35,7 +35,7 @@ return {
     "scripts/quests/jeuno/Hook_Line_and_Sinker",
     "scripts/quests/jeuno/Mixed_Signals",
     "scripts/quests/jeuno/Regaining_Trust",
-    "scripts/quests/jeuno/Unlocking_a_Myth",
+ --   "scripts/quests/jeuno/Unlocking_a_Myth", This needs to move, and does not follow quest format
 
     -- Other Areas
     "scripts/quests/otherAreas/Confessions_of_a_Bellmaker",
