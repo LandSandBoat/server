@@ -46,4 +46,19 @@ return {
     "scripts/quests/outlands/Cloak_and_Dagger",
     "scripts/quests/outlands/The_Potential_Within",
 
+    -- Aht Urhgan
+    "scripts/quests/ahtUrhgan/A_Taste_of_Honey",
+    "scripts/quests/ahtUrhgan/Arts_and_Crafts",
+    "scripts/quests/ahtUrhgan/Cook-a-roon",
+    "scripts/quests/ahtUrhgan/Delivering_the_Goods",
+    "scripts/quests/ahtUrhgan/Fear_of_the_Dark_2",
+    "scripts/quests/ahtUrhgan/Give_Peace_a_Chance",
+    "scripts/quests/ahtUrhgan/Got_It_All",
+    "scripts/quests/ahtUrhgan/Keeping_Notes",
+    "scripts/quests/ahtUrhgan/Olduum",
+    "scripts/quests/ahtUrhgan/Rock_Bottom",
+    "scripts/quests/ahtUrhgan/Three_Men_and_a_Closet",
+    "scripts/quests/ahtUrhgan/Vanishing_Act",
+    "scripts/quests/ahtUrhgan/What_Friends_Are_For",
+
 }
