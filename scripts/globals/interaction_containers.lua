@@ -23,6 +23,20 @@ return {
     "scripts/quests/bastok/The_Weight_of_Your_Limits",
 
     -- Windurst
+    "scripts/quests/windurst/A_Pose_By_Any_Other_Name",
+    "scripts/quests/windurst/Blood_And_Glory",
+    "scripts/quests/windurst/From_Saplings_Grow",
+    "scripts/quests/windurst/Orastery_Woes",
 
+    -- Jeuno
+    "scripts/quests/jeuno/Axe_the_Competition",
+    "scripts/quests/jeuno/Blessed_Radiance",
+    "scripts/quests/jeuno/Blighted_Gloom",
+    "scripts/quests/jeuno/Hook_Line_and_Sinker",
+    "scripts/quests/jeuno/Mixed_Signals",
+    "scripts/quests/jeuno/Regaining_Trust",
+    "scripts/quests/jeuno/Unlocking_a_Myth",
+
+    -- Other Areas
 
 }
