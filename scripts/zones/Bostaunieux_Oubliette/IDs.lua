@@ -69,7 +69,7 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
     },
     npc =
     {
-        CASKET_BASE = 17461487,
+        CASKET_BASE = 17461488,
     },
 }
 

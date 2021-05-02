@@ -100,9 +100,9 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         NOT_ENOUGH_SPARKS              = 15403, -- You do not possess enough sparks of eminence to complete the transaction.
         MAX_SPARKS_LIMIT_REACHED       = 15404, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
         YOU_NOW_HAVE_AMT_CURRENCY      = 15414, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
-        HAVE_ALREADY_CHANGED_UNITY     = 16020, -- You have already changed Unities. Please wait until the next tabulation period.
-        YOU_HAVE_JOINED_UNITY          = 16021, -- You have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
-        TEAR_IN_FABRIC_OF_SPACE        = 16481, -- There appears to be a tear in the fabric of space...
+        YOU_HAVE_JOINED_UNITY          = 15954, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
+        HAVE_ALREADY_CHANGED_UNITY     = 16030, -- ou have already changed Unities. Please wait until the next tabulation period.
+        TEAR_IN_FABRIC_OF_SPACE        = 16491, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {
