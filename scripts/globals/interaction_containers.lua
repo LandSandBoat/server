@@ -65,4 +65,7 @@ return {
     "scripts/quests/hiddenQuests/AssaultRank_PFC",
     "scripts/quests/hiddenQuests/AssaultRank_SP",
 
+    -- Zilart Mission (test)
+    "scripts/missions/zilart/The_New_Frontier",
+
 }

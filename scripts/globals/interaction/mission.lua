@@ -9,9 +9,9 @@ Mission.__eq = function(m1, m2)
     return m1.areaId == m2.areaId and m1.missionId == m2.missionId
 end
 
-Quest.reward = {}
+Mission.reward = {}
 
-function Mission:new(areaId, questId)
+function Mission:new(areaId, missionId)
     local obj = Container:new(Mission.getVarPrefix(areaId, missionId))
     setmetatable(obj, self)
     obj.areaId = areaId
@@ -24,7 +24,7 @@ function Mission.getVarPrefix(areaId, missionId)
 end
 
 function Mission:getCheckArgs(player)
-    return { player:getMissionStatus(self.areaId, self.missionId) }
+    return { player:getCurrentMission(self.areaId), player:getMissionStatus(self.areaId, self.missionId) }
 end
 
 -----------------------------
