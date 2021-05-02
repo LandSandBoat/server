@@ -18,7 +18,6 @@ mission.reward =
 
 mission.sections =
 {
-    -- Section: Zone into Norg
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
@@ -26,7 +25,8 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['Gilgamesh'] = {
+            ['Gilgamesh'] =
+            {
                 onTrigger = function(player, npc)
                     return mission:event(7)
                 end,
@@ -34,18 +34,20 @@ mission.sections =
         },
 
         [xi.zone.KAZHAM] = {
-            ['Jakoh_Wahcondalo'] = {
+            ['Jakoh_Wahcondalo'] =
+            {
                 onTrigger = function(player, npc)
                     return mission:event(114)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [114] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,
             },
-        }
+        },
     },
 }
 

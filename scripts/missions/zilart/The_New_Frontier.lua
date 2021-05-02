@@ -18,7 +18,6 @@ mission.reward =
 
 mission.sections =
 {
-    -- Section: Zone into Norg
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and player:getRank(player:getNation()) >= 6
@@ -26,13 +25,15 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            onZoneIn = {
+            onZoneIn =
+            {
                 function(player, prevZone)
                     return 1
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [1] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,

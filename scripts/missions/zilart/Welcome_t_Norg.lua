@@ -16,7 +16,6 @@ mission.reward =
 
 mission.sections =
 {
-    -- Section: Zone into Norg
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
@@ -24,13 +23,15 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['_700'] = {
+            ['_700'] =
+            {
                 onTrigger = function(player, npc)
                     return mission:event(2)
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [2] = function(player, csid, option, npc)
                     if option == 0 then
                         mission:complete(player)
