@@ -64,6 +64,8 @@ public:
     // Variables
     int32  getCharVar(std::string const& varName);              // Returns a character variable
     void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
+    int32  getVar(std::string const& varName);                  // Returns a character variable (Wrapper for getCharVar)
+    void   setVar(std::string const& varname, int32 value);     // Sets a character variable (Wrapper for getCharVar)
     void   addCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
@@ -82,10 +84,10 @@ public:
     void updateEvent(sol::variadic_args va);                      // Updates event
     void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;
-    bool isInEvent(); // Returns true if the player is in an event
-    void release(); // Stops event
-    bool startSequence(); // Flags the player as being in a sequence
-    bool didGetMessage(); // Used by interaction framework to determine if player triggered something else
+    bool isInEvent();       // Returns true if the player is in an event
+    void release();         // Stops event
+    bool startSequence();   // Flags the player as being in a sequence
+    bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
     void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
 
     void  setFlag(uint32 flags);
@@ -167,13 +169,13 @@ public:
     uint32 getPlayerRegionInZone();                                                           // Returns the player's current region in the zone. (regions made with registerRegion)
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
-    auto  getPos() -> sol::table; // Get Entity position (x,y,z)
-    void  showPosition();         // Display current position of character
-    float getXPos();              // Get Entity X position
-    float getYPos();              // Get Entity Y position
-    float getZPos();              // Get Entity Z position
-    uint8 getRotPos();            // Get Entity Rot position
-    void setRotation(uint8 rotation); // Set Entity rotation
+    auto  getPos() -> sol::table;      // Get Entity position (x,y,z)
+    void  showPosition();              // Display current position of character
+    float getXPos();                   // Get Entity X position
+    float getYPos();                   // Get Entity Y position
+    float getZPos();                   // Get Entity Z position
+    uint8 getRotPos();                 // Get Entity Rot position
+    void  setRotation(uint8 rotation); // Set Entity rotation
 
     void setPos(sol::variadic_args va);                                       // Set Entity position (x,y,z,rot) or (x,y,z,rot,zone)
     void warp();                                                              // Returns Character to home point
