@@ -44,6 +44,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, {item = 18702, var = {"EquippedforAllOccasions", "LuckOfTheDraw"}})
     elseif csid == 604 then
         npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
+        player:setCharVar("AgainstTimer", getMidnight())
     end
 end
 
