@@ -25,7 +25,11 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Set Weeping Willow's respawn time (21-24 hours)
-    GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(mob:getID() -6):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
+    end
 end
 
 return entity

@@ -28,13 +28,25 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(22, -130, -1, 322, -128, 1, 324)
 
     UpdateNMSpawnPoint(ID.mob.OLD_TWO_WINGS)
-    GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.SKEWER_SAM)
-    GetMobByID(ID.mob.SKEWER_SAM):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.SKEWER_SAM):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.SKEWER_SAM):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.SERKET)
-    GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.treasure.initZone(zone)
 end

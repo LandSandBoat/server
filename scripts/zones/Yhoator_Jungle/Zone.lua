@@ -20,16 +20,32 @@ end
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.WOODLAND_SAGE)
-    GetMobByID(ID.mob.WOODLAND_SAGE):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.WOODLAND_SAGE):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.WOODLAND_SAGE):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.POWDERER_PENNY)
-    GetMobByID(ID.mob.POWDERER_PENNY):setRespawnTime(math.random(5400, 7200))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.POWDERER_PENNY):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.POWDERER_PENNY):setRespawnTime(math.random(5400, 7200))
+    end
 
     UpdateNMSpawnPoint(ID.mob.BISQUE_HEELED_SUNBERRY)
-    GetMobByID(ID.mob.BISQUE_HEELED_SUNBERRY):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.BISQUE_HEELED_SUNBERRY):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.BISQUE_HEELED_SUNBERRY):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.BRIGHT_HANDED_KUNBERRY)
-    GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.BRIGHT_HANDED_KUNBERRY):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 

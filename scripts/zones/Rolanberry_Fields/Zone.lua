@@ -18,7 +18,11 @@ end
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.SIMURGH)
-    GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.SIMURGH):setRespawnTime(math.random(900, 7200))
+    end
     xi.voidwalker.zoneOnInit(zone)
 end
 

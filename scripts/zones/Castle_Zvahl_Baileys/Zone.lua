@@ -18,19 +18,39 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
 
     UpdateNMSpawnPoint(ID.mob.LIKHO)
-    GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
+    end
 
     UpdateNMSpawnPoint(ID.mob.MARQUIS_ALLOCEN)
-    GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.MARQUIS_AMON)
-    GetMobByID(ID.mob.MARQUIS_AMON):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.MARQUIS_AMON):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.MARQUIS_AMON):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.DUKE_HABORYM)
-    GetMobByID(ID.mob.DUKE_HABORYM):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.DUKE_HABORYM):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.DUKE_HABORYM):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.GRAND_DUKE_BATYM)
-    GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.GRAND_DUKE_BATYM):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.treasure.initZone(zone)
 end

@@ -10,7 +10,11 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.random(12, 36) * 3600)
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.CERBERUS):setRespawnTime(math.random(12, 36) * 3600)
+    end
 
     xi.helm.initZone(zone, xi.helm.type.MINING)
 end

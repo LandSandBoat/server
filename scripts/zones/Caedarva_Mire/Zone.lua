@@ -13,8 +13,13 @@ local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.AYNU_KAYSEY)
-    GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(900, 10800))
-    GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.random(12, 36)*3600) -- 12 to 36 hours after maintenance, in 1-hour increments
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+        GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX)) -- 12 to 36 hours after maintenance, in 1-hour increments
+    else
+        GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(900, 10800))
+        GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.random(12, 36)*3600) -- 12 to 36 hours after maintenance, in 1-hour increments
+    end
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end

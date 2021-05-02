@@ -48,7 +48,11 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     local motherGlobe = mob:getID()
 
-    mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
+    if RESPAWN_SAVE_TIME then
+        mob:setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        mob:setRespawnTime(math.random(10800, 21600)) -- 3 to 6 hours
+    end
 
     for i = motherGlobe + 1, motherGlobe + 6 do
         local pet = GetMobByID(i)
@@ -59,7 +63,11 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(10800, 21600)) -- 3 to 6 hours
+    if RESPAWN_SAVE_TIME then
+        mob:setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        mob:setRespawnTime(math.random(10800, 21600)) -- 3 to 6 hours
+    end
 end
 
 return entity

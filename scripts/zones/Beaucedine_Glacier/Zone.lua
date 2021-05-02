@@ -13,7 +13,11 @@ local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.HUMBABA)
-    GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)

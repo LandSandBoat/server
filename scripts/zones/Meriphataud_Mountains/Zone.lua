@@ -18,10 +18,18 @@ end
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.WARAXE_BEAK)
-    GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.WARAXE_BEAK):setRespawnTime(math.random(900, 10800))
+    end
 
     UpdateNMSpawnPoint(ID.mob.COO_KEJA_THE_UNSEEN)
-    GetMobByID(ID.mob.COO_KEJA_THE_UNSEEN):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.COO_KEJA_THE_UNSEEN):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.COO_KEJA_THE_UNSEEN):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)

@@ -19,7 +19,11 @@ end
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)
-    GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
+    end
 end
 
 zone_object.onZoneIn = function(player, prevZone)

@@ -15,7 +15,11 @@ end
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     if not xi.mob.phOnDespawn(mob, ID.mob.FRADUBIO_PH, 10, math.random(75600, 86400)) then -- 21-24 hours
-        mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
+        if RESPAWN_SAVE_TIME then
+            mob:setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+        else
+            mob:setRespawnTime(math.random(3600, 4500)) -- 60 to 75 minutes
+        end
     end
 end
 

@@ -16,7 +16,11 @@ end
 
 zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
-    GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end
