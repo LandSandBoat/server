@@ -4454,6 +4454,7 @@ INSERT INTO `item_weapon` VALUES (21619,'eletta_sword',3,0,231,231,231,2,1,240,1
 INSERT INTO `item_weapon` VALUES (21620,'kaja_sword',3,0,242,242,242,2,1,240,156,0);      -- DMG:156 Delay:240
 INSERT INTO `item_weapon` VALUES (21621,'naegling',3,0,250,250,250,2,1,240,166,0);        -- DMG:166 Delay:240
 INSERT INTO `item_weapon` VALUES (21622,'voluspa_sword',3,0,215,215,215,2,1,233,126,0);
+INSERT INTO `item_weapon` VALUES (21623,'twinned_blade',3,0,0,0,0,2,1,240,1,0);
 INSERT INTO `item_weapon` VALUES (21625,'duelists_sword',3,0,242,242,228,2,1,268,178,0);  -- DMG:178 Delay:268
 INSERT INTO `item_weapon` VALUES (21626,'vitiation_sword',3,0,255,255,242,2,1,260,179,0); -- DMG:179 Delay:260
 INSERT INTO `item_weapon` VALUES (21627,'crocea_mors',3,0,269,269,255,2,1,260,180,0);     -- DMG:180 Delay:260

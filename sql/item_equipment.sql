@@ -10639,6 +10639,7 @@ INSERT INTO `item_equipment` VALUES (21619,'eletta_sword',99,119,2209777,288,0,0
 INSERT INTO `item_equipment` VALUES (21620,'kaja_sword',99,119,2209777,837,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21621,'naegling',99,119,2209777,848,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21622,'voluspa_sword',99,119,2195665,275,0,0,3,0);
+INSERT INTO `item_equipment` VALUES (21623,'twinned_blade',1,0,4194303,265,0,0,3,0); -- TODO: capture model from retail (using Onion Sword model)
 INSERT INTO `item_equipment` VALUES (21625,'duelists_sword',99,119,16,278,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21626,'vitiation_sword',99,119,16,278,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21627,'crocea_mors',99,119,16,819,0,0,3,0);
@@ -11498,6 +11499,14 @@ INSERT INTO `item_equipment` VALUES (23751,'heidrek_boots',99,119,2462754,252,0,
 INSERT INTO `item_equipment` VALUES (23752,'angantyr_boots',99,119,1720860,267,0,0,256,0);
 INSERT INTO `item_equipment` VALUES (23753,'sandogasa',1,0,4194303,0,0,0,16,0);
 INSERT INTO `item_equipment` VALUES (23754,'sandogasa_+1',1,0,4194303,0,0,0,16,0);
+INSERT INTO `item_equipment` VALUES (23761,'nyame_helm',99,119,4194303,15,0,0,16,0); -- TODO: capture model from retail (using Bronze Cap model)
+INSERT INTO `item_equipment` VALUES (23768,'nyame_mail',99,119,4194303,15,0,0,32,0); -- TODO: capture model from retail (using Bronze Harness model)
+INSERT INTO `item_equipment` VALUES (23775,'nyame_gauntlets',99,119,4194303,15,0,0,64,0); -- TODO: capture model from retail (using Bronze Mittens model)
+INSERT INTO `item_equipment` VALUES (23782,'nyame_flanchard',99,119,4194303,15,0,0,128,0); -- TODO: capture model from retail (using Bronze Subligar model)
+INSERT INTO `item_equipment` VALUES (23789,'nyame_sollerets',99,119,4194303,15,0,0,256,0); -- TODO: capture model from retail (using Bronze Leggings model)
+INSERT INTO `item_equipment` VALUES (26271,'hi-elixir_tank',1,0,4194303,0,0,0,32768,0);
+INSERT INTO `item_equipment` VALUES (26272,'super_reraiser_tank',1,0,4194303,0,0,0,32768,0);
+INSERT INTO `item_equipment` VALUES (26414,'twinned_shield',1,0,4194303,36,2,0,2,0); -- TODO: capture model from retail (using Maple Shield model)
 INSERT INTO `item_equipment` VALUES (25417,'warriors_beads',99,0,1,0,0,0,512,0);
 INSERT INTO `item_equipment` VALUES (25418,'war._beads_+1',99,0,1,0,0,0,512,0);
 INSERT INTO `item_equipment` VALUES (25419,'war._beads_+2',99,0,1,0,0,0,512,0);
