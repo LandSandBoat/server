@@ -237,6 +237,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) -- Start of af 3 not completed yet
         player:addKeyItem(xi.ki.LIFE_FLOAT) -- BCNM KEY ITEM TO ENTER BCNM
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LIFE_FLOAT)
+        player:setCharVar("AgainstAllOddsTimer", getMidnight())
     end
 end
 
