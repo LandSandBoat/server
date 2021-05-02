@@ -111,7 +111,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         THANK_YOU                = 13057, -- Thank you...
         FFR_LOOKS_CURIOUSLY_BASE = 13381, -- Coullene looks over curiously for a moment.
         RETRIEVE_DIALOG_ID       = 18125, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL    = 18459, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 18469, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

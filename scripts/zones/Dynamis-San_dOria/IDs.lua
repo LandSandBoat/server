@@ -26,7 +26,7 @@ zones[xi.zone.DYNAMIS_SAN_DORIA] =
         DYNAMIS_TIME_UPDATE_1   = 7217, -- ou will be expelled from Dynamis in <number> [second/minute] (Earth time).
         DYNAMIS_TIME_UPDATE_2   = 7218, -- ou will be expelled from Dynamis in <number> [seconds/minutes] (Earth time).
         DYNAMIS_TIME_EXPIRED    = 7220, -- The sands of the hourglass have emptied...
-        OMINOUS_PRESENCE        = 7231, -- You feel an ominous presence, as if something might happen if you possessed <item>.
+        OMINOUS_PRESENCE        = 7232, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
     mob =
     {
