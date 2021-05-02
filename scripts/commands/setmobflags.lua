@@ -42,5 +42,6 @@ function onTrigger(player, flags, target)
 
     -- set flags
     player:setMobFlags(flags, targ:getID())
-    player:PrintToPlayer( string.format("Set %s %i flags to %i.", targ:getName(), targ:getID(), flags) )
+    local hex = "0x" .. string.format("%08x", flags)
+    player:PrintToPlayer( string.format("Set %s %i flags to %s (%i).", targ:getName(), targ:getID(), hex, flags) )
 end
