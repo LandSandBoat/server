@@ -18,7 +18,7 @@ quest.sections = {
 
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getQuestStatus(AHT_URHGAN, VANISHING_ACT) == QUEST_COMPLETED
+            return status == QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_COMPLETED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] = {

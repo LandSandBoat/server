@@ -22,7 +22,7 @@ quest.sections = {
 
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getQuestStatus(AHT_URHGAN, DELIVERING_THE_GOODS) == QUEST_COMPLETED
+            return status == QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.DELIVERING_THE_GOODS) == QUEST_COMPLETED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] = {
