@@ -357,6 +357,7 @@ public:
 
     // Player Points
     void  addExp(uint32 exp);
+    void  addCapacityPoints(uint32 capacity);
     void  delExp(uint32 exp);
     int32 getMerit(uint16 merit);
     uint8 getMeritCount();
