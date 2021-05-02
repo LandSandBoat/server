@@ -67,5 +67,7 @@ return {
 
     -- Zilart Mission (test)
     "scripts/missions/zilart/The_New_Frontier",
+    "scripts/missions/zilart/Welcome_t_Norg",
+    "scripts/missions/zilart/Kazham_s_Chieftainess",
 
 }

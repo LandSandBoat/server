@@ -59,8 +59,6 @@ entity.onTrigger = function(player, npc)
             metTenzen = (PromathiaMission >= xi.mission.id.cop.DAWN) and 2 or 1
         end
         player:startEvent(284, metTenzen, metPrishe)
-    elseif (ZilartMission == xi.mission.id.zilart.WELCOME_TNORG) then
-        player:startEvent(2) -- Zilart Missions 2
     elseif (ZilartMission == xi.mission.id.zilart.ROMAEVE and player:getMissionStatus(xi.mission.log_id.ZILART) <= 1) then
         player:startEvent(3) -- Zilart Missions 9
     elseif (ZilartMission == xi.mission.id.zilart.THE_HALL_OF_THE_GODS) then
@@ -88,10 +86,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 2 and option == 0) then
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZAMS_CHIEFTAINESS)
-    elseif (csid == 3 and option == 0) then
+    if (csid == 3 and option == 0) then
         player:setMissionStatus(xi.mission.log_id.ZILART, 0)
         player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)

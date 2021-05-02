@@ -26,9 +26,7 @@ entity.onTrigger = function(player, npc)
     local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local tuningOutProgress = player:getCharVar("TuningOut_Progress")
 
-    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
-        player:startEvent(114)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.AWAKENING_OF_THE_GODS and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(265)
     elseif tuningOutProgress == 1 then
         player:startEvent(293) -- Ildy meets Jakoh to inquire about Shikaree Y
@@ -47,12 +45,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 114) then
-        player:addKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SACRIFICIAL_CHAMBER_KEY)
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZAMS_CHIEFTAINESS)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH)
-    elseif (csid == 265) then
+    if (csid == 265) then
         player:setMissionStatus(player:getNation(), 3)
     elseif csid == 293 then
         player:setCharVar("TuningOut_Progress", 2)
