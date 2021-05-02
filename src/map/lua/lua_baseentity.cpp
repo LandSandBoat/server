@@ -494,14 +494,6 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
     return charutils::GetCharVar(PChar, varName.c_str());
 }
 
-int32 CLuaBaseEntity::getVar(std::string const& varName)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::GetCharVar(PChar, varName.c_str());
-}
-
-
 /************************************************************************
  *  Function: setCharVar()
  *  Purpose : Updates PC's variable to an explicit value
@@ -510,13 +502,6 @@ int32 CLuaBaseEntity::getVar(std::string const& varName)
  ************************************************************************/
 
 void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::SetCharVar(PChar, varName.c_str(), value);
-}
-
-void CLuaBaseEntity::setVar(std::string const& varName, int32 value)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
