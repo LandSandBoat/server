@@ -21,7 +21,7 @@ quest.sections = {
     -- Section: Begin quest
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getQuestStatus(AHT_URHGAN, GOT_IT_ALL) == QUEST_COMPLETED
+            return status == QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.GOT_IT_ALL) == QUEST_COMPLETED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] = {

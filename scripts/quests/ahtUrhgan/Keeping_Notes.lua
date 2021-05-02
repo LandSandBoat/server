@@ -54,7 +54,7 @@ quest.sections = {
             onEventFinish = {
                 [11] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    player:moghouseFlag(16)
+                    player:setMoghouseFlag(16)
                     quest:complete(player)
                 end,
             },
