@@ -20,7 +20,7 @@ local sacred_kindred_crest = 4
 local isTradeNum2 = 0
 
 entity.onTrigger = function(player, npc)
-    local csid = 0x0160
+    local csid = 352
     local sealShift = {}
     local hideOptions = 0
 
