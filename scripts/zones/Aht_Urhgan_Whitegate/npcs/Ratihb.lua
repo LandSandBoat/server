@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(552)
     elseif player:getCharVar("EquippedforAllOccasions") == 4 and player:getCharVar("LuckOfTheDraw") == 6 then
         player:startEvent(772)
-    if player:getCharVar("AgainstAllOdds") == 2 and (player:getCharVar("AgainstAllOddsTimer") < os.time() or player:getCharVar("AgainstAllOddsTimer") == 0) then
+    elseif player:getCharVar("AgainstAllOdds") == 2 and (player:getCharVar("AgainstAllOddsTimer") < os.time() or player:getCharVar("AgainstAllOddsTimer") == 0) then
         player:startEvent(604) -- reacquire life float, account for chars on quest previously without a var
     else
         player:startEvent(603)
