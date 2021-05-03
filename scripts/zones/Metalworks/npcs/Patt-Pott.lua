@@ -21,20 +21,20 @@ end
 entity.onTrigger = function(player, npc)
 
     currentMission = player:getCurrentMission(WINDURST)
-    MissionStatus = player:getMissionStatus(player:getNation())
+    missionStatus = player:getMissionStatus(player:getNation())
 
     if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS) then
-        if (MissionStatus == 1) then
+        if (missionStatus == 1) then
             player:startEvent(254)
-        elseif (MissionStatus == 6) then
+        elseif (missionStatus == 6) then
             player:startEvent(256)
-        elseif (MissionStatus == 7) then
+        elseif (missionStatus == 7) then
             player:startEvent(258)
-        elseif (MissionStatus == 11) then
+        elseif (missionStatus == 11) then
             player:startEvent(259)
         end
     elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) then
-        if (MissionStatus == 11) then
+        if (missionStatus == 11) then
             player:startEvent(257)
         else
             player:startEvent(258)
