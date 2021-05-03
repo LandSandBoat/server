@@ -66,7 +66,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
         chance = NM_LOTTERY_CHANCE >= 0 and (chance * NM_LOTTERY_CHANCE) or 100
     end
 
-    if NM_LOTTERYCOOLDOWN then
+    if NM_LOTTERY_COOLDOWN then
         cooldown = NM_LOTTERY_COOLDOWN >= 0 and (cooldown * NM_LOTTERY_COOLDOWN) or cooldown
     end
 
