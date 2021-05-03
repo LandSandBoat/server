@@ -9,18 +9,18 @@ require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local beastman_seal = 0         -- 獣人印章
-local kindred_seal = 1          -- 獣神印章
-local kindred_crest = 2         -- 魔人印章
-local high_kindred_crest = 3    -- 魔王印章
-local sacred_kindred_crest = 4  -- 魔神印章
+local beastman_seal = 0
+local kindred_seal = 1
+local kindred_crest = 2
+local high_kindred_crest = 3
+local sacred_kindred_crest = 4
 
 -- 0:Convert at 3: 1
 -- 1:Convert at 2: 1 (campaignAdditional Seal Battlefield Spoils Campaign)
 local isTradeNum2 = 0
 
 entity.onTrigger = function(player, npc)
-    local csid = 0x0160
+    local csid = 352
     local sealShift = {}
     local hideOptions = 0
 
@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
         local out_seal = bit.rshift(bit.band(option, 0xFF), 4) - 1
         local in_seal = bit.band(option, 0xF) - 1
         local dellseals = addnum * 3
-        if (isTradeNum2 == 1) then
+        if isTradeNum2 == 1 then
             dellseals = addnum * 2
         end
 
