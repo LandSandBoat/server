@@ -25,9 +25,7 @@ entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART)
     local rovMission = player:getCurrentMission(ROV)
 
-    if (ZilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
-        player:startEvent(8)
-    elseif (ZilartMission == xi.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
+    if (ZilartMission == xi.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
         player:startEvent(9)
     elseif (ZilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER) then
         player:startEvent(13)

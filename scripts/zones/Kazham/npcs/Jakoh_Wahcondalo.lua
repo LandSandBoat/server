@@ -33,9 +33,6 @@ entity.onTrigger = function(player, npc)
 
     elseif (wsQuestEvent ~= nil) then
         player:startEvent(wsQuestEvent)
-    elseif (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
-        player:startEvent(115)
-
     elseif tuningOutProgress == 2 then
         player:startEvent(294) -- Mentions expedition that was talked about in CS 293
     else

@@ -66,8 +66,10 @@ return {
     "scripts/quests/hiddenQuests/AssaultRank_SP",
 
     -- Zilart Mission (test)
-    "scripts/missions/zilart/The_New_Frontier",
-    "scripts/missions/zilart/Welcome_t_Norg",
-    "scripts/missions/zilart/Kazham_s_Chieftainess",
+    "scripts/missions/zilart/01_The_New_Frontier",
+    "scripts/missions/zilart/02_Welcome_tNorg",
+    "scripts/missions/zilart/03_Kazhams_Chieftainess",
+    "scripts/missions/zilart/04_The_Temple_of_Uggalepih",
+    "scripts/missions/zilart/05_Headstone_Pilgrimage",
 
 }
