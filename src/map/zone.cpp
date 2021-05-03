@@ -239,6 +239,11 @@ uint8 CZone::GetBackgroundMusicNight() const
 
 bool CZone::CanUseMisc(uint16 misc) const
 {
+    if (map_config.mogmenu_anywhere_area && misc == MISC_MOGMENU)
+    {
+        return true;
+    }
+
     return (m_miscMask & misc) == misc;
 }
 
