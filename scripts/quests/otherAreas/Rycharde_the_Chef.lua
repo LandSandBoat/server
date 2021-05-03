@@ -21,27 +21,11 @@ quest.sections =
     -- Section: Steps prior to getting the quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_AVAILABLE and vars.Prog == 0
         end,
 
         [xi.zone.MHAURA] =
         {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    quest:event(69)
-                end,
-            },
-
-            ['Take'] =
-            {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(60)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [50] = function(player, csid, option, npc)
@@ -49,6 +33,21 @@ quest.sections =
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_AVAILABLE and vars.Prog == 1
+        end,
+
+        [xi.zone.MHAURA] =
+        {
+            ['Take'] = quest:progressEvent(60),
+
+            onEventFinish =
+            {
                 [60] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
@@ -59,42 +58,42 @@ quest.sections =
     -- Section: Get quest.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and vars.Prog > 1
+            return status == QUEST_AVAILABLE and vars.Prog == 2
         end,
 
         [xi.zone.MHAURA] =
         {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 then
-                        return quest:progressEvent(70, xi.items.DHAMEL_MEAT)
-                    elseif quest:getVar(player, 'Prog') == 3 then -- You rejected the quest and you ask again.
-                        return quest:progressEvent(71, xi.items.DHAMEL_MEAT)
-                    end
-                end,
-            },
-
-            ['Take'] =
-            {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 then
-                        return quest:event(68)
-                    end
-                end,
-            },
+            ['Rycharde'] = quest:progressEvent(70, xi.items.DHALMEL_MEAT),
+            ['Take'] = quest:event(68),
 
             onEventFinish =
             {
                 [70] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    if (option == 71 or option == 72) then    --70 = answer no; 71 = answer yes!
+                    if option == 71 or option == 72 then    --70 = answer no; 71 = answer yes!
                         quest:begin(player)
+                    elseif option == 70 then
+                        quest:setVar(player, 'Prog', 3)      
                     end
                 end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_AVAILABLE and vars.Prog == 3
+        end,
+
+        [xi.zone.MHAURA] =
+        {
+            ['Rycharde'] = quest:progressEvent(71, xi.items.DHALMEL_MEAT), -- You rejected the quest and you ask again.
+
+            onEventFinish =
+            {
                 [71] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    if (option == 71 or option == 72) then    --70 = answer no; 71 = answer yes!
+                    if option == 71 or option == 72 then    --70 = answer no; 71 = answer yes!
                         quest:begin(player)
                     end
                 end,
@@ -119,11 +118,9 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    local tradeCount  = trade:getItemCount()
-                    local dhalmelMeat = trade:hasItemQty(xi.items.DHAMEL_MEAT, trade:getItemCount())
-                    if dhalmelMeat  == true and tradeCount == 2 then
+                    if npcUtil.tradeHasExactly(trade, {{xi.items.DHALMEL_MEAT, 2}}) then
                         return quest:progressEvent(74) -- Completed OK
-                    elseif dhalmelMeat  == true and tradeCount == 1 then
+                    elseif npcUtil.tradeHasExactly(trade, {{xi.items.DHALMEL_MEAT, 1}}) then
                         return quest:event(73) -- That's not enough!
                     end
                 end,
@@ -132,11 +129,10 @@ quest.sections =
             onEventFinish =
             {
                 [74] = function(player, csid, option, npc)
-                    player:confirmTrade()
                     quest:complete(player)
-                    quest:setVar(player, 'Prog', 0)
                     player:setCharVar("QuestRychardeTCCompDay_var", VanadielDayOfTheYear()) -- Used for next quest wait time.
                     player:setCharVar("QuestRychardeTCCompYear_var", VanadielYear())        -- Used for next quest wait time.
+                    player:confirmTrade()
                 end,
             },
         },
