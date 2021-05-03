@@ -8,8 +8,9 @@ on:
       - reopened
   push:
     branches:
-      - release
-      - canary
+      - freedom
+      - allegedly-stable
+      - topaz
       - 'feature/**'
 
 jobs:
