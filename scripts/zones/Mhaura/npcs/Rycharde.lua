@@ -2,16 +2,16 @@
 -- Area: Mhaura
 --  NPC: Rycharde
 --    Standard Info NPC
---  Starts & Finishes non Repeatable Quest: Rycharde the Chef,
 --  WAY_OF_THE_COOK, UNENDING_CHASE
 --     his name is Valgeir (not completed correctly, ferry not implemented)
 --     the clue (100%)
 --     the basics (not completed correctly, ferry not implemented)
 -----------------------------------
+local ID = require("scripts/zones/Mhaura/IDs")
+
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
-local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
@@ -42,18 +42,7 @@ local entity = {}
 --   player:startEvent(98)-- sixth quest completed commentary 2
 
 entity.onTrade = function(player, npc, trade)
-
-    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)== QUEST_ACCEPTED) then
-        local count = trade:getItemCount()
-        local DhalmelMeat  = trade:hasItemQty(4359, trade:getItemCount()) --4359 - slice_of_dhalmel_meat
-
-        if (DhalmelMeat  == true and count == 2) then
-            player:startEvent(74) -- completed ok
-        elseif (DhalmelMeat  == true and count == 1) then
-            player:startEvent(73) -- that's not enogh!
-        end
-
-    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == QUEST_ACCEPTED) then
 
         local count = trade:getItemCount()
         local DhalmelMeat  = trade:hasItemQty(4359, 1) --4359 - slice_of_dhalmel_meat
@@ -97,118 +86,93 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
------------------------------------- QUEST RYCHARDE_THE_CHEF-----------------------------------------
-if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)==QUEST_AVAILABLE) then
-    QuestStatus = player:getCharVar("QuestRychardetheChef_var")
-    if (QuestStatus == 2 ) then  -- seconnd stage one quest
-        player:startEvent(70, 4359) -- ask if player would do quest
-    elseif (QuestStatus == 3 ) then
-        player:startEvent(71, 4359) -- said no, ask again if player would do quest
-    else
-        player:startEvent(69) -- talk about something else
-    end
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)==QUEST_ACCEPTED) then
-    player:startEvent(72) -- not done yet huh?
 --------------------------------------------- quest WAY_OF_THE_COOK
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)==QUEST_AVAILABLE and player:getFameLevel(WINDURST)>2) then    -- quest WAY_OF_THE_COOK
-    if (player:getCharVar("QuestRychardeTCCompDay_var")+ 7 < VanadielDayOfTheYear() or player:getCharVar("QuestRychardeTCCompYear_var") < VanadielYear()) then  --8 days or so after the completition of the last quest ... and required fame
-        player:startEvent(76, 4359, 912)-- second quest WAY_OF_THE_COOK
-    else
-        player:startEvent(75) -- nothing to do
-    end
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)==QUEST_ACCEPTED) then
-    Dayspassed=VanadielDayOfTheYear()-player:getCharVar("QuestRychardeTCDayStarted_var")
-    TotalHourLeft=72-(VanadielHour()+Dayspassed*24)+player:getCharVar("QuestWayotcHourStarted_var")
-    if (TotalHourLeft>0) then
-        player:startEvent(78, TotalHourLeft) -- you have x hours left
-    else
-        player:startEvent(79) -- not yet done
-    end
----------------------------QUEST UNENDING_CHASE--------------------------------------------------
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)==QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2) then
-    if (player:getCharVar("QuestWayofTCCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestWayofTCCompYear_var") < VanadielYear()) then  -- days between quest
-        if (player:getCharVar("QuestUnendingCAskedAlready_var")==2) then
-            player:startEvent(84, 4448)-- third quest  said no, ask again
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)==QUEST_AVAILABLE and player:getFameLevel(WINDURST)>2) then    -- quest WAY_OF_THE_COOK
+        if (player:getCharVar("QuestRychardeTCCompDay_var")+ 7 < VanadielDayOfTheYear() or player:getCharVar("QuestRychardeTCCompYear_var") < VanadielYear()) then  --8 days or so after the completition of the last quest ... and required fame
+            player:startEvent(76, 4359, 912)-- second quest WAY_OF_THE_COOK
         else
-            player:startEvent(82, 4448)-- third quest UNENDING_CHASE    4448 - puffball
+            player:startEvent(75) -- nothing to do
         end
-    else
-        player:startEvent(75) -- nothing to do
-    end
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)==QUEST_ACCEPTED) then
-    player:startEvent(85)-- third quest  comment no hurry
--------------------------QUEST HIS_NAME_IS_VALGEIR--------------------------------------------------
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)==QUEST_AVAILABLE and player:getFameLevel(WINDURST)>2) then
-    if (player:getCharVar("QuestUnendingCCompDay_var")+2< VanadielDayOfTheYear() or player:getCharVar("QuestUnendingCCompYear_var")< VanadielYear()) then
-        player:startEvent(86)-- forth quest   His Name is Valgeir
-    else
-        player:startEvent(75) -- nothing to do
-    end
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)==QUEST_ACCEPTED) then
-    if (player:hasKeyItem(xi.ki.ARAGONEU_PIZZA)) then
-        player:startEvent(87)-- forth quest   not done yet
-    else
-        player:startEvent(88)-- forth quest   done!
-    end
----------------------------QUEST THE CLUE--------------------------------------------------------
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)==QUEST_AVAILABLE and player:getFameLevel(WINDURST)>4) then
-    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)==QUEST_COMPLETED) then
-        if (player:getCharVar("QuestExpertiseCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestExpertiseCompYear_var") < VanadielYear()) then
-            if (player:getCharVar("QuestTheClueStatus_var")==1) then
-                player:startEvent(91, 4357)-- fifth quest The Clue asked again 4357 - crawler_egg
+
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)==QUEST_ACCEPTED) then
+        Dayspassed=VanadielDayOfTheYear()-player:getCharVar("QuestRychardeTCDayStarted_var")
+        TotalHourLeft=72-(VanadielHour()+Dayspassed*24)+player:getCharVar("QuestWayotcHourStarted_var")
+        if (TotalHourLeft>0) then
+            player:startEvent(78, TotalHourLeft) -- you have x hours left
+        else
+            player:startEvent(79) -- not yet done
+        end
+---------------------------QUEST UNENDING_CHASE--------------------------------------------------
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)==QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2) then
+        if (player:getCharVar("QuestWayofTCCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestWayofTCCompYear_var") < VanadielYear()) then  -- days between quest
+            if (player:getCharVar("QuestUnendingCAskedAlready_var")==2) then
+                player:startEvent(84, 4448)-- third quest  said no, ask again
             else
-                player:startEvent(90, 4357)-- fifth quest The Clue 4357 - crawler_egg
+                player:startEvent(82, 4448)-- third quest UNENDING_CHASE    4448 - puffball
             end
         else
             player:startEvent(75) -- nothing to do
         end
-    else
-        player:startEvent(75) -- nothing to do
-    end
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)==QUEST_ACCEPTED) then
-    player:startEvent(85)-- third quest  comment no hurry
----------------------------QUEST THE Basics--------------------------------------------------------
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)==QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 4) then
-    if (player:getCharVar("QuestTheClueCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestTheClueCompYear_var") < VanadielYear()) then
-        player:startEvent(94)-- sixth quest The Basics
-    else
-        player:startEvent(75) -- nothing to do standar dialog
-    end
-elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)==QUEST_ACCEPTED) then
-    player:startEvent(95)-- sixth quest not done yet
-else
-    if (player:getCharVar("QuestTheBasicsComentary_var")==1) then
-        player:startEvent(97)-- sixth quest completed commentary
-    else
-        player:startEvent(98)-- sixth quest completed commentary 2
-    end
-end
-end
 
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)==QUEST_ACCEPTED) then
+        player:startEvent(85)-- third quest  comment no hurry
+-------------------------QUEST HIS_NAME_IS_VALGEIR--------------------------------------------------
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)==QUEST_AVAILABLE and player:getFameLevel(WINDURST)>2) then
+        if (player:getCharVar("QuestUnendingCCompDay_var")+2< VanadielDayOfTheYear() or player:getCharVar("QuestUnendingCCompYear_var")< VanadielYear()) then
+            player:startEvent(86)-- forth quest   His Name is Valgeir
+        else
+            player:startEvent(75) -- nothing to do
+        end
+
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)==QUEST_ACCEPTED) then
+        if (player:hasKeyItem(xi.ki.ARAGONEU_PIZZA)) then
+            player:startEvent(87)-- forth quest   not done yet
+        else
+            player:startEvent(88)-- forth quest   done!
+        end
+---------------------------QUEST THE CLUE--------------------------------------------------------
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)==QUEST_AVAILABLE and player:getFameLevel(WINDURST)>4) then
+        if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)==QUEST_COMPLETED) then
+            if (player:getCharVar("QuestExpertiseCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestExpertiseCompYear_var") < VanadielYear()) then
+                if (player:getCharVar("QuestTheClueStatus_var")==1) then
+                    player:startEvent(91, 4357)-- fifth quest The Clue asked again 4357 - crawler_egg
+                else
+                    player:startEvent(90, 4357)-- fifth quest The Clue 4357 - crawler_egg
+                end
+            else
+                player:startEvent(75) -- nothing to do
+            end
+        else
+            player:startEvent(75) -- nothing to do
+        end
+
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)==QUEST_ACCEPTED) then
+        player:startEvent(85)-- third quest  comment no hurry
+---------------------------QUEST THE Basics--------------------------------------------------------
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)==QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 4) then
+        if (player:getCharVar("QuestTheClueCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestTheClueCompYear_var") < VanadielYear()) then
+            player:startEvent(94)-- sixth quest The Basics
+        else
+            player:startEvent(75) -- nothing to do standar dialog
+        end
+
+    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)==QUEST_ACCEPTED) then
+        player:startEvent(95)-- sixth quest not done yet
+
+    else
+        if (player:getCharVar("QuestTheBasicsComentary_var")==1) then
+            player:startEvent(97)-- sixth quest completed commentary
+        else
+            player:startEvent(98)-- sixth quest completed commentary 2
+        end
+    end
+end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-
-    if (csid == 70 or csid == 71) then  --accept quest 1
-        player:setCharVar("QuestRychardetheChef_var", 3); --
-        if (option == 71 or option == 72) then    --70 = answer no  71 answer yes!
-            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)
-        end
-    elseif (csid == 74) then   -- end quest 1 RYCHARDE_THE_CHEF
-        player:tradeComplete()
-        player:addFame(WINDURST, 120)
-        player:addTitle(xi.title.PURVEYOR_IN_TRAINING)
-        player:addGil(GIL_RATE*1500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
-        player:setCharVar("QuestRychardetheChef_var", 0)
-        player:setCharVar("QuestRychardeTCCompDay_var", VanadielDayOfTheYear())
-        player:setCharVar("QuestRychardeTCCompYear_var", VanadielYear())
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)
-    elseif (csid == 76) then  -- accept quest 2
+    if (csid == 76) then  -- accept quest 2
         if (option == 74 ) then -- answer yes!
             player:setCharVar("QuestWayotcHourStarted_var", VanadielHour())
             player:setCharVar("QuestRychardeTCDayStarted_var", VanadielDayOfTheYear())
@@ -296,7 +260,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)
     elseif (csid == 94) then  --accept quest the basics
         if (option == 85 ) then
-                        --TODO pay for ferry
+            --TODO pay for ferry
             player:addKeyItem(xi.ki.MHAURAN_COUSCOUS) -- xi.ki.MHAURAN_COUSCOUS                = 92
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MHAURAN_COUSCOUS)
             player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)

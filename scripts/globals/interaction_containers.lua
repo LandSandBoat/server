@@ -40,6 +40,7 @@ return {
     -- Other Areas
     "scripts/quests/otherAreas/Confessions_of_a_Bellmaker",
     "scripts/quests/otherAreas/Missionary_Moblin",
+    "scripts/quests/otherAreas/Rycharde_the_Chef",
 
     -- Outlands
     "scripts/quests/outlands/Bugi_Soden",

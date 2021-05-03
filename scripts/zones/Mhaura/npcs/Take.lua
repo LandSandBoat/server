@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
 --  NPC: Take
--- Involved In Quest: RYCHARDE_THE_CHEF
 --  Starts and finishes quest: Expertice
 -----------------------------------
 require("scripts/globals/titles")
@@ -27,17 +26,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF)==QUEST_AVAILABLE) then -- if available and allready talked to mayor assistant
-        if (player:getCharVar("QuestRychardetheChef_var") == 1) then
-            player:startEvent(60) -- tell to look for ricarde
-        elseif (player:getCharVar("QuestRychardetheChef_var") == 2) then
-            player:startEvent(68) -- not talked to rycharde yet
-        else
-            player:startEvent(59) -- talk abaout something else
-        end
-
-
-    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)==QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR )==QUEST_COMPLETED) then --
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)==QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR )==QUEST_COMPLETED) then --
         player:startEvent(61)-- accept expertice quest
 
 
@@ -66,9 +55,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 60) then
-        player:setCharVar("QuestRychardetheChef_var", 2) -- second stage on quest
-    elseif (csid == 61) then  -- accept quest EXPERTICE
+    if (csid == 61) then  -- accept quest EXPERTICE
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)
     elseif (csid == 62) then   -- end quest expertice
         player:addFame(WINDURST, 120)

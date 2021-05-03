@@ -27,6 +27,7 @@ xi.items =
     IMPERIAL_BRONZE_PIECE           = 2184,
     IMPERIAL_SILVER_PIECE           = 2185,
     LIGHTNING_BAND                  = 2217,
+    DHAMEL_MEAT                     = 4359,
     COBALT_JELLYFISH                = 4443,
     CRESCENT_FISH                   = 4473,
     THREE_EYED_FISH                 = 4478,
