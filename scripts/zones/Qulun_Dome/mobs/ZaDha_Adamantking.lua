@@ -37,7 +37,11 @@ entity.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)
     UpdateNMSpawnPoint(nqId)
-    GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(nqId):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+    end
 end
 
 return entity

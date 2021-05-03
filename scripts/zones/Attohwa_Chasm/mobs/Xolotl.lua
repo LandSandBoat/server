@@ -16,7 +16,11 @@ end
 
 entity.onMobDespawn = function(mob)
     -- Do not respawn Xolotl for 21-24 hours
-    mob:setRespawnTime(math.random(75600, 86400), true)
+    if RESPAWN_SAVE_TIME then
+        mob:setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        mob:setRespawnTime(math.random(75600, 86400), true)
+    end
 end
 
 return entity

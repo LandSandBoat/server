@@ -44,7 +44,11 @@ end
 
 entity.onMobDespawn = function(mob)
     -- UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(1800, 10800)) -- 30 minutes to 3 hrs
+    if RESPAWN_SAVE_TIME then
+        mob:setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        mob:setRespawnTime(math.random(1800, 10800)) -- 30 minutes to 3 hrs
+    end
 end
 
 return entity

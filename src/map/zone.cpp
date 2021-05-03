@@ -239,6 +239,11 @@ uint8 CZone::GetBackgroundMusicNight() const
 
 bool CZone::CanUseMisc(uint16 misc) const
 {
+    if (map_config.mogmenu_anywhere_area && misc == MISC_MOGMENU)
+    {
+        return true;
+    }
+
     return (m_miscMask & misc) == misc;
 }
 
@@ -883,7 +888,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->loc.destination  = 0;
     PChar->m_InsideRegionID = 0;
 
-    if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT))
+    if (PChar->isMounted() && !CanUseMisc(MISC_MOUNT) && !map_config.mount_anywhere_area)
     {
         PChar->animation = ANIMATION_NONE;
         PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);

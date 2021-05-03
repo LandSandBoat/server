@@ -151,6 +151,17 @@ struct map_config_t
     bool        anticheat_jail_disable; // Globally disable auto-jailing by the anti-cheat system
     uint16      daily_tally_amount;     // Amount of daily tally points given at midnight for Gobbie Mystery Box
     uint16      daily_tally_limit;      // Upper limit of daily tally points for Gobbie Mystery Box
+    uint16      seal_recast_time;
+    uint8       seal_drop_rate;
+    bool        drop_list_shuffle;
+    uint8       blue_magic_learning_rate;
+    uint8       mob_link_radius;
+    bool        mogmenu_anywhere_area;
+    bool        mount_anywhere_area;
+    uint16      mounted_time_limit;
+    uint8       unity_leader_trust_coefficient;
+    float       support_job_exp_rate;
+    bool        item_acquisition_record;
 };
 
 /************************************************************************

@@ -1286,6 +1286,32 @@ namespace charutils
             }
             PChar->pushPacket(new CInventoryItemPacket(PItem, LocationID, SlotID));
             PChar->pushPacket(new CInventoryFinishPacket());
+
+            if (map_config.item_acquisition_record)
+            {
+                // アイテム図鑑登録
+                const char* QueryItem = "INSERT IGNORE INTO char_achieve_item("
+                                        "charid,"
+                                        "itemId) "
+                                        "VALUES(%u,%u)";
+                if (Sql_Query(SqlHandle, QueryItem, PChar->id, PItem->getID()) == SQL_ERROR)
+                {
+                    ShowError(CL_RED "charplugin::AddItem: Cannot insert item to database\n" CL_RESET);
+                    PChar->getStorage(LocationID)->InsertItem(nullptr, SlotID);
+                    delete PItem;
+                    return ERROR_SLOTID;
+                }
+
+                auto addCount = Sql_AffectedRows(SqlHandle);
+                if (addCount > 0)
+                {
+                    // 図鑑ポイント登録
+                    Sql_Query(SqlHandle,
+                              "INSERT INTO char_achieve_point SET charid = %d, totalPoint = %d, nowPoint = %d "
+                              "ON DUPLICATE KEY UPDATE totalPoint = totalPoint + %d, nowPoint = nowPoint + %d;",
+                              addCount, addCount, PChar->id, addCount, addCount);
+                }
+            }
         }
         else
         {
@@ -4288,6 +4314,79 @@ namespace charutils
         }
 
         PChar->PAI->EventHandler.triggerListener("EXPERIENCE_POINTS", CLuaBaseEntity(PChar), exp);
+
+        if (map_config.support_job_exp_rate > 0.0f)
+        {
+            auto sjob = PChar->GetSJob();
+            if (sjob != JOB_NON)
+            {
+                // サポートジョブにも経験値を付与する
+                // 限界レベル未満、もしくは限界レベルでかつ、経験値がカンストしていない
+                if (PChar->jobs.job[sjob] < PChar->jobs.genkai || (PChar->jobs.job[sjob] >= PChar->jobs.genkai && PChar->jobs.exp[sjob] < GetExpNEXTLevel(PChar->jobs.job[sjob] - 1)))
+                {
+                    auto sjob_exp = exp * map_config.support_job_exp_rate;
+                    PChar->jobs.exp[sjob] += sjob_exp;
+
+                    // レベルが上ったか確認
+                    if (PChar->jobs.exp[sjob] >= GetExpNEXTLevel(PChar->jobs.job[sjob]))
+                    {
+                        // 限界レベルの場合
+                        if (PChar->jobs.job[sjob] >= PChar->jobs.genkai)
+                        {
+                            // 経験値をカンストさせる
+                            PChar->jobs.exp[sjob] = GetExpNEXTLevel(PChar->jobs.job[sjob]) - 1;
+                            if (PChar->PParty && PChar->PParty->GetSyncTarget() == PChar)
+                            {
+                                PChar->PParty->SetSyncTarget(nullptr, 556);
+                            }
+                        }
+                        else
+                        {
+                            PChar->jobs.exp[sjob] -= GetExpNEXTLevel(PChar->jobs.job[sjob]);
+                            // レベルが2つ以上上がらないように経験値を調整する
+                            if (PChar->jobs.exp[sjob] >= GetExpNEXTLevel(PChar->jobs.job[sjob] + 1))
+                            {
+                                PChar->jobs.exp[sjob] = GetExpNEXTLevel(PChar->jobs.job[sjob] + 1) - 1;
+                            }
+                            PChar->jobs.job[sjob] += 1;
+                            PChar->SetSLevel(PChar->jobs.job[sjob]);
+
+                            BuildingCharSkillsTable(PChar);
+                            CalculateStats(PChar);
+                            BuildingCharAbilityTable(PChar);
+                            BuildingCharTraitsTable(PChar);
+                            BuildingCharWeaponSkills(PChar);
+                            PChar->PLatentEffectContainer->CheckLatentsJobLevel();
+                            PChar->UpdateHealth();
+
+                            PChar->health.hp = PChar->GetMaxHP();
+                            PChar->health.mp = PChar->GetMaxMP();
+
+                            SaveCharStats(PChar);
+                            SaveCharJob(PChar, PChar->GetSJob());
+                            SaveCharExp(PChar, PChar->GetSJob());
+
+                            PChar->pushPacket(new CCharJobsPacket(PChar));
+                            PChar->pushPacket(new CCharUpdatePacket(PChar));
+                            PChar->pushPacket(new CCharSkillsPacket(PChar));
+                            PChar->pushPacket(new CCharRecastPacket(PChar));
+                            PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+                            PChar->pushPacket(new CMenuMeritPacket(PChar));
+                            PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
+                            PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
+                            PChar->pushPacket(new CCharSyncPacket(PChar));
+
+                            PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->jobs.job[sjob], 0, 9));
+                            PChar->pushPacket(new CCharStatsPacket(PChar));
+
+                            luautils::OnPlayerLevelUp(PChar);
+                            roeutils::event(ROE_EVENT::ROE_LEVELUP, PChar, RoeDatagramList{});
+                            PChar->updatemask |= UPDATE_HP;
+                        }
+                    }
+                }
+            }
+        }
 
         // Player levels up
         if ((currentExp + exp) >= GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) && !onLimitMode)

@@ -44,7 +44,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(30, -385.349, 5, -173.973, 0, 0, 0)
 
     UpdateNMSpawnPoint(ID.mob.TIAMAT)
-    GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
+    end
 
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end

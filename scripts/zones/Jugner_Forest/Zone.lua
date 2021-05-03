@@ -20,7 +20,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
 
     UpdateNMSpawnPoint(ID.mob.FRAELISSA)
-    GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
+    if RESPAWN_SAVE_TIME then
+        GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(RESPAWN_SAVE_TIME_MIN, RESPAWN_SAVE_TIME_MAX))
+    else
+        GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 

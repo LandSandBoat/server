@@ -915,7 +915,12 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
         }
 
-        for (const DropItem_t& item : DropList.Items)
+        auto itemList = DropList.Items;
+        if (map_config.drop_list_shuffle)
+        {
+            std::shuffle(itemList.begin(), itemList.end(), xirand::mt());
+        }
+        for (const DropItem_t& item : itemList)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
@@ -943,7 +948,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         >= 75 = Kindred Crests ID=2955
         >= 90 = High Kindred Crests ID=2956
         */
-        if (xirand::GetRandomNumber(100) < 20 && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
+        if (xirand::GetRandomNumber(100) < map_config.seal_drop_rate && PChar->PTreasurePool->CanAddSeal() && !getMobMod(MOBMOD_NO_DROPS))
         {
             // RULES: Only 1 kind may drop per mob
             if (GetMLevel() >= 75 && luautils::IsContentEnabled("ABYSSEA")) // all 4 types
