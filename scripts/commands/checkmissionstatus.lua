@@ -1,6 +1,6 @@
 -----------------------------------
 -- func: checkmissionstatus <Log ID> <Player>
--- desc: Prints current MissionStatus for the given LogID and target Player to the in game chatlog
+-- desc: Prints current missionStatus for the given LogID and target Player to the in game chatlog
 -----------------------------------
 
 require("scripts/globals/missions")
@@ -52,8 +52,8 @@ function onTrigger(player, target, logId, statusIndex)
     -- report mission
     local currentMissionStatus = targ:getMissionStatus(logId, statusIndex)
     if statusIndex then
-        player:PrintToPlayer( string.format( "MissionStatus for %s (%s index %s): %s", targ:getName(), logName, statusIndex, currentMissionStatus) )
+        player:PrintToPlayer( string.format( "missionStatus for %s (%s index %s): %s", targ:getName(), logName, statusIndex, currentMissionStatus) )
     else
-        player:PrintToPlayer( string.format( "MissionStatus for %s (%s): %s", targ:getName(), logName, currentMissionStatus) )
+        player:PrintToPlayer( string.format( "missionStatus for %s (%s): %s", targ:getName(), logName, currentMissionStatus) )
     end
 end
