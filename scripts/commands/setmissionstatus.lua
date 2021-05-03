@@ -1,6 +1,6 @@
 -----------------------------------
 -- func: setmissionstatus {Player} {value} {LogID} {index}
--- desc: Sets MissionStatus for the given LogID and target Player
+-- desc: Sets missionStatus for the given LogID and target Player
 -----------------------------------
 
 require("scripts/globals/missions")
@@ -52,8 +52,8 @@ function onTrigger(player, target, value, logId, statusIndex)
     -- set mission
     targ:setMissionStatus(logId, value, statusIndex)
     if statusIndex then
-        player:PrintToPlayer( string.format( "MissionStatus for %s (%s index %s) set to %s", targ:getName(), logName, statusIndex, value) )
+        player:PrintToPlayer( string.format( "missionStatus for %s (%s index %s) set to %s", targ:getName(), logName, statusIndex, value) )
     else
-        player:PrintToPlayer( string.format( "MissionStatus for %s (%s) set to %s", targ:getName(), logName, value) )
+        player:PrintToPlayer( string.format( "missionStatus for %s (%s) set to %s", targ:getName(), logName, value) )
     end
 end

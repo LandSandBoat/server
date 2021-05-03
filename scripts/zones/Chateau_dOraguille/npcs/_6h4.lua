@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 61 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 87 then
-        player:setCharVar('MissionStatus', 2)
+        player:setCharVar('missionStatus', 2)
     elseif csid == 100 then
         player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.
         player:setMissionStatus(player:getNation(), 1)

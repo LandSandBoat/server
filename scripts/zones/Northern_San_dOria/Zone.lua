@@ -28,7 +28,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
 
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     -- FIRST LOGIN (START CS)
@@ -43,7 +43,7 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif
         player:getCurrentMission(ROV) == xi.mission.id.rov.FATES_CALL and
         (player:getRank(player:getNation()) > 5 or
-        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and MissionStatus >= 4))
+        (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and missionStatus >= 4))
     then
         cs = 30036
     -- SOA 1-1 Optional CS
@@ -59,9 +59,9 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif player:getCurrentMission(COP) == xi.mission.id.cop.THE_ROAD_FORKS and player:getCharVar("EMERALD_WATERS_Status") == 1 then --EMERALD_WATERS-- COP 3-3A: San d'Oria Route
         player:setCharVar("EMERALD_WATERS_Status", 2)
         cs = 14
-    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 0 then
+    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 0 then
         cs = 1
-    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 4 then
+    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 4 then
         cs = 0
     elseif player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.COMING_OF_AGE) then
         local waitDate = player:getCharVar("Wait1DayM8-1_date")

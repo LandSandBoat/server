@@ -18,9 +18,9 @@ entity.onTrigger = function(player, npc)
 
     if pNation == xi.nation.WINDURST then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 4 then
+        if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 4 then
             player:startEvent(40)
         elseif player:getRank() == 4 and
             currentMission == xi.mission.id.windurst.NONE and

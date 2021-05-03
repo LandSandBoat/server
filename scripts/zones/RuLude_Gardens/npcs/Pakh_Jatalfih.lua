@@ -17,25 +17,25 @@ entity.onTrigger = function(player, npc)
 
     if pNation == xi.nation.WINDURST then
         local currentMission = player:getCurrentMission(pNation)
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 1 then
+        if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 1 then
             player:startEvent(43)
-        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 2 then
+        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 2 then
             player:startEvent(68)
-        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and MissionStatus == 3 then
+        elseif currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 3 then
             player:startEvent(141)
-        elseif player:getRank() == 4 and MissionStatus == 0 then
+        elseif player:getRank() == 4 and missionStatus == 0 then
             if getMissionRankPoints(player, 13) == 1 then
                 player:startEvent(50)
             else
                 player:startEvent(54)
             end
-        elseif currentMission == xi.mission.id.windurst.MAGICITE and MissionStatus == 1 then
+        elseif currentMission == xi.mission.id.windurst.MAGICITE and missionStatus == 1 then
             player:startEvent(134)
-        elseif currentMission == xi.mission.id.windurst.MAGICITE and MissionStatus <= 5 then
+        elseif currentMission == xi.mission.id.windurst.MAGICITE and missionStatus <= 5 then
             player:startEvent(137)
-        elseif currentMission == xi.mission.id.windurst.MAGICITE and MissionStatus == 6 then
+        elseif currentMission == xi.mission.id.windurst.MAGICITE and missionStatus == 6 then
             player:startEvent(37)
         elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
             player:startEvent(57)
