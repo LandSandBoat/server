@@ -220,6 +220,16 @@ mission.sections =
             },
         },
 
+        [xi.zone.NORG] =
+        {
+            ['Gilgamesh'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(9)
+                end,
+            },
+        },
+
         [xi.zone.THE_SANCTUARY_OF_ZITAH] =
         {
             ['Cermet_Headstone'] =
