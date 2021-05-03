@@ -17,10 +17,10 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    CurrentMission = player:getCurrentMission(player:getNation())
+    currentMission = player:getCurrentMission(player:getNation())
     if ( player:getCurrentMission(COP) == xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS and player:getCharVar("PromathiaStatus")==1) then
         player:startEvent(10050)
-    elseif (player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and CurrentMission == xi.mission.id.nation.NONE and player:getMissionStatus(player:getNation()) == 1) then
+    elseif (player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and currentMission == xi.mission.id.nation.NONE and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(128)
     elseif (player:hasKeyItem(xi.ki.MAGICITE_OPTISTONE) and player:hasKeyItem(xi.ki.MAGICITE_AURASTONE) and player:hasKeyItem(xi.ki.MAGICITE_ORASTONE)) then
         if (player:hasKeyItem(xi.ki.AIRSHIP_PASS)) then

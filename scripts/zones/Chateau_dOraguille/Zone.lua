@@ -18,7 +18,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
 
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -30,11 +30,11 @@ zone_object.onZoneIn = function(player, prevZone)
         player:getMissionStatus(player:getNation()) == 2
     then
         cs = 555
-    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 1 then
+    elseif currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 1 then
         cs = 10
     elseif prevZone == xi.zone.NORTHERN_SAN_DORIA and player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_SANDORIA) then
         cs = 509
-    elseif currentMission == xi.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 0 then
+    elseif currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 0 then
         cs = 116
     end
 

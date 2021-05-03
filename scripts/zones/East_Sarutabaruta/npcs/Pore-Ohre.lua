@@ -17,10 +17,10 @@ entity.onTrigger = function(player, npc)
 
     -- Check if we are on Windurst Mission 1-2
     if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER) then
-        MissionStatus = player:getMissionStatus(player:getNation())
-        if (MissionStatus == 1) then
+        missionStatus = player:getMissionStatus(player:getNation())
+        if (missionStatus == 1) then
             player:startEvent(46)
-        elseif (MissionStatus == 2) then
+        elseif (missionStatus == 2) then
             player:startEvent(47)
         end
     end

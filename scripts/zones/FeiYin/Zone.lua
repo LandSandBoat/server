@@ -22,7 +22,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local currentMission = player:getCurrentMission(player:getNation())
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
     local cs = -1
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -33,9 +33,9 @@ zone_object.onZoneIn = function(player, prevZone)
         SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
-    if (prevZone == xi.zone.BEAUCEDINE_GLACIER and currentMission == xi.mission.id.nation.ARCHLICH and MissionStatus == 10) then
+    if (prevZone == xi.zone.BEAUCEDINE_GLACIER and currentMission == xi.mission.id.nation.ARCHLICH and missionStatus == 10) then
         cs = 1 -- MISSION 5-1
-    elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 2) then
+    elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 2) then
         cs = 23 -- San d'Oria 9-2
     elseif (player:getCurrentMission(ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I) then
         cs = 29
