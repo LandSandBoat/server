@@ -1077,7 +1077,7 @@ function getMissionMask(player)
     return mission_mask, repeat_mission
 end
 
-function getMissionOffset(player, guard, pMission, MissionStatus)
+function getMissionOffset(player, guard, pMission, missionStatus)
 
     offset = 0 cs = 0 params = {0, 0, 0, 0, 0, 0, 0, 0}
     nation = player:getNation()
@@ -1090,22 +1090,22 @@ function getMissionOffset(player, guard, pMission, MissionStatus)
 
         switch (pMission) : caseof {
             [0] = function (x) offset = 0 end, -- Mission 1-1
-            [1] = function (x) if (MissionStatus == 2) then cs = GuardCS[1] else cs = GuardCS[2] end end, -- Mission 1-2 (1) after check tombstone
-            [2] = function (x) if (MissionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
-                           elseif (MissionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
-                           elseif (MissionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
-            [3] = function (x) if (MissionStatus == 11) then cs = GuardCS[6] else offset = 36 end end,
-            [4] = function (x) if (MissionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
-                           elseif (MissionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
-            [5] = function (x) if (MissionStatus == 0) then offset = 50 else offset = 51 end end,
-            [10] = function (x) if (MissionStatus == 0) then cs = GuardCS[9]
-                            elseif (MissionStatus == 4) then offset = 55
-                            elseif (MissionStatus == 5) then offset = 60
-                            elseif (MissionStatus == 10) then cs = GuardCS[10] end end,
-            [11] = function (x) if (MissionStatus == 0) then offset = 68
-                            elseif (MissionStatus == 2) then cs = GuardCS[11] end end,
-            [12] = function (x) if (MissionStatus == 0) then offset = 74 end end,
-            [14] = function (x) if (MissionStatus == 0) then cs = 61 end end,
+            [1] = function (x) if (missionStatus == 2) then cs = GuardCS[1] else cs = GuardCS[2] end end, -- Mission 1-2 (1) after check tombstone
+            [2] = function (x) if (missionStatus == 0) then cs = GuardCS[3] -- Mission 1-3 before Battlefield
+                           elseif (missionStatus == 4 and player:hasCompletedMission(0, 2) == false) then cs = GuardCS[4] -- Mission 1-3 after Battlefield
+                           elseif (missionStatus == 4) then cs = GuardCS[5] else offset = 24 end end, -- Mission 1-3 after Battlefield (Finish Quest)
+            [3] = function (x) if (missionStatus == 11) then cs = GuardCS[6] else offset = 36 end end,
+            [4] = function (x) if (missionStatus == 3 and player:hasCompletedMission(0, 4)) then cs = GuardCS[7]
+                           elseif (missionStatus == 3) then cs = GuardCS[8] params = {0, 0, 0, 44} else offset = 44 end end,
+            [5] = function (x) if (missionStatus == 0) then offset = 50 else offset = 51 end end,
+            [10] = function (x) if (missionStatus == 0) then cs = GuardCS[9]
+                            elseif (missionStatus == 4) then offset = 55
+                            elseif (missionStatus == 5) then offset = 60
+                            elseif (missionStatus == 10) then cs = GuardCS[10] end end,
+            [11] = function (x) if (missionStatus == 0) then offset = 68
+                            elseif (missionStatus == 2) then cs = GuardCS[11] end end,
+            [12] = function (x) if (missionStatus == 0) then offset = 74 end end,
+            [14] = function (x) if (missionStatus == 0) then cs = 61 end end,
         }
         return cs, params, offset
 
@@ -1145,7 +1145,7 @@ function getMissionOffset(player, guard, pMission, MissionStatus)
         switch (pMission) : caseof {
             [0] = function (x) cs = GuardCS[1] end,
             [1] = function (x) cs = GuardCS[2] end,
-            [2] = function (x) if (MissionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
+            [2] = function (x) if (missionStatus <= 2) then cs = GuardCS[3] else cs = GuardCS[4] end end,
             [3] = function (x) cs = GuardCS[5] end,
             [4] = function (x) cs = GuardCS[6] end,
             [5] = function (x) cs = GuardCS[7] end,

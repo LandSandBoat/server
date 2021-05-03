@@ -15,16 +15,16 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local CurrentMission = player:getCurrentMission(SANDORIA)
+    local currentMission = player:getCurrentMission(SANDORIA)
     local infiltrateDavoi = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.INFILTRATE_DAVOI)
 
-    if (CurrentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:getMissionStatus(player:getNation()) == 0) then
+    if (currentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(100)
-    elseif (CurrentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:hasKeyItem(xi.ki.LOST_DOCUMENT)) then
+    elseif (currentMission == xi.mission.id.sandoria.THE_DAVOI_REPORT and player:hasKeyItem(xi.ki.LOST_DOCUMENT)) then
         player:startEvent(104)
-    elseif (CurrentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi and player:getMissionStatus(player:getNation()) == 0) then
+    elseif (currentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and infiltrateDavoi and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(102)
-    elseif (CurrentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getMissionStatus(player:getNation()) == 9) then
+    elseif (currentMission == xi.mission.id.sandoria.INFILTRATE_DAVOI and player:getMissionStatus(player:getNation()) == 9) then
         player:startEvent(105)
     else
         player:startEvent(101)

@@ -11,25 +11,25 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local CurrentMission = player:getCurrentMission(SANDORIA)
+    local currentMission = player:getCurrentMission(SANDORIA)
     local OrcishScoutCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS)
     local BatHuntCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.BAT_HUNT)
     local TheCSpringCompleted = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_CRYSTAL_SPRING)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
     local Count = trade:getItemCount()
 
-    if CurrentMission ~= xi.mission.id.sandoria.NONE then
-        if CurrentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and trade:hasItemQty(16656, 1) and Count == 1 and OrcishScoutCompleted == false then -- Trade Orcish Axe
+    if currentMission ~= xi.mission.id.sandoria.NONE then
+        if currentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and trade:hasItemQty(16656, 1) and Count == 1 and OrcishScoutCompleted == false then -- Trade Orcish Axe
             player:startEvent(1020) -- Finish Mission "Smash the Orcish scouts" (First Time)
-        elseif CurrentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and trade:hasItemQty(16656, 1) and Count == 1 then -- Trade Orcish Axe
+        elseif currentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and trade:hasItemQty(16656, 1) and Count == 1 then -- Trade Orcish Axe
             player:startEvent(1002) -- Finish Mission "Smash the Orcish scouts" (Repeat)
-        elseif CurrentMission == xi.mission.id.sandoria.BAT_HUNT and trade:hasItemQty(1112, 1) and Count == 1 and BatHuntCompleted == false and MissionStatus == 2 then -- Trade Orcish Mail Scales
+        elseif currentMission == xi.mission.id.sandoria.BAT_HUNT and trade:hasItemQty(1112, 1) and Count == 1 and BatHuntCompleted == false and missionStatus == 2 then -- Trade Orcish Mail Scales
             player:startEvent(1023) -- Finish Mission "Bat Hunt"
-        elseif CurrentMission == xi.mission.id.sandoria.BAT_HUNT and trade:hasItemQty(891, 1) and Count == 1 and BatHuntCompleted == true then -- Trade Bat Fang
+        elseif currentMission == xi.mission.id.sandoria.BAT_HUNT and trade:hasItemQty(891, 1) and Count == 1 and BatHuntCompleted == true then -- Trade Bat Fang
             player:startEvent(1003) -- Finish Mission "Bat Hunt" (repeat)
-        elseif CurrentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted == false then -- Trade Crystal Bass
+        elseif currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted == false then -- Trade Crystal Bass
             player:startEvent(1030) -- Dialog During Mission "The Crystal Spring"
-        elseif CurrentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted then -- Trade Crystal Bass
+        elseif currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and trade:hasItemQty(4528, 1) and Count == 1 and TheCSpringCompleted then -- Trade Crystal Bass
             player:startEvent(1013) -- Finish Mission "The Crystal Spring" (repeat)
         else
             player:startEvent(1008) -- Wrong Item
@@ -47,12 +47,12 @@ entity.onTrigger = function(player, npc)
     if (player:getNation() ~= xi.nation.SANDORIA) then
         player:startEvent(1011) -- for Non-San d'Orians
     else
-        local CurrentMission = player:getCurrentMission(SANDORIA)
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local currentMission = player:getCurrentMission(SANDORIA)
+        local missionStatus = player:getMissionStatus(player:getNation())
         local pRank = player:getRank()
-        local cs, p, offset = getMissionOffset(player, 1, CurrentMission, MissionStatus)
+        local cs, p, offset = getMissionOffset(player, 1, currentMission, missionStatus)
 
-        if CurrentMission <= xi.mission.id.sandoria.THE_SHADOW_LORD and (cs ~= 0 or offset ~= 0 or (CurrentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and offset == 0)) then
+        if currentMission <= xi.mission.id.sandoria.THE_SHADOW_LORD and (cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and offset == 0)) then
             if (cs == 0) then
                 player:showText(npc, ID.text.ORIGINAL_MISSION_OFFSET + offset) -- dialog after accepting mission
             else
@@ -60,21 +60,21 @@ entity.onTrigger = function(player, npc)
             end
         elseif pRank == 1 and player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS) == false then
             player:startEvent(1000) -- Start First Mission "Smash the Orcish scouts"
-        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
+        elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:hasKeyItem(xi.ki.ANCIENT_SANDORIAN_BOOK) then
             player:startEvent(1035)
-        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 4 then
+        elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 4 then
             if player:getLocalVar("RanperresRest") == 1 then -- Requires player to zone.
                 player:startEvent(1037)
             else
                 player:startEvent(1039)
             end
-        elseif CurrentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 7 then
+        elseif currentMission == xi.mission.id.sandoria.RANPERRE_S_FINAL_REST and player:getMissionStatus(player:getNation()) == 7 then
             player:startEvent(1033)
-        elseif CurrentMission ~= xi.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player, 19) == 1 and player:getCharVar("SecretWeaponStatus") < 2 then
+        elseif currentMission ~= xi.mission.id.sandoria.THE_SECRET_WEAPON and pRank == 7 and PresOfPapsqueCompleted == true and getMissionRankPoints(player, 19) == 1 and player:getCharVar("SecretWeaponStatus") < 2 then
             player:startEvent(1041)
-        elseif CurrentMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") == 3 then
+        elseif currentMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and player:getCharVar("SecretWeaponStatus") == 3 then
             player:startEvent(1043)
-        elseif CurrentMission ~= xi.mission.id.sandoria.NONE then
+        elseif currentMission ~= xi.mission.id.sandoria.NONE then
             player:startEvent(1001) -- Have mission already activated
         else
             local mission_mask, repeat_mask = getMissionMask(player)

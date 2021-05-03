@@ -27,7 +27,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local currentMission = player:getCurrentMission(SANDORIA)
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar("circleTime")
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
@@ -35,11 +35,11 @@ entity.onTrigger = function(player, npc)
     local herMajestysGarden = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HER_MAJESTY_S_GARDEN)
 
     -- THE CRYSTAL SPRING (San d'Oria 3-2)
-    if (currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and MissionStatus == 3) then
+    if (currentMission == xi.mission.id.sandoria.THE_CRYSTAL_SPRING and missionStatus == 3) then
         player:startEvent(556)
 
     -- LEAUTE'S LAST WISHES (San d'Oria 6-1)
-    elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 4 and player:hasKeyItem(xi.ki.DREAMROSE)) then
+    elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 4 and player:hasKeyItem(xi.ki.DREAMROSE)) then
         player:startEvent(111)
 
     -- CIRCLE OF TIME (Bard AF3)

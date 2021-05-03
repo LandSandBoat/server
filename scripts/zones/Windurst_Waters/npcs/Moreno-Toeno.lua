@@ -32,15 +32,15 @@ entity.onTrigger = function(player, npc)
             player:startEvent(758)
         end
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.A_TESTING_TIME) then
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
         local alreadyCompleted = player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)
-        if (MissionStatus == 0) then
+        if (missionStatus == 0) then
             if (alreadyCompleted == false) then
                 player:startEvent(182) -- First start at tahrongi
             else
                 player:startEvent(687) -- Repeat at buburimu
             end
-        elseif (MissionStatus == 1) then
+        elseif (missionStatus == 1) then
             start_time = player:getCharVar("testingTime_start_time")
             seconds_passed = os.time() - start_time
 

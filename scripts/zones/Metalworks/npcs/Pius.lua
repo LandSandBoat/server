@@ -13,22 +13,22 @@ end
 
 entity.onTrigger = function(player, npc)
     local Mission = player:getCurrentMission(player:getNation())
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     if
-        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK and MissionStatus == 3 or
-        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 and MissionStatus == 8
+        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK and missionStatus == 3 or
+        Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 and missionStatus == 8
     then
         player:startEvent(355)
     elseif
-        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and MissionStatus == 3 or
-        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus == 8
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK and missionStatus == 3 or
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus == 8
     then
         player:startEvent(355, 1)
     elseif
         Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK or
         Mission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and MissionStatus < 11
+        Mission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2 and missionStatus < 11
     then
         player:startEvent(356)
     else

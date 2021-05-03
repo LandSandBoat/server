@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
     local pNation = player:getNation()
     local currentMission = player:getCurrentMission(pNation)
     local WildcatSandy = player:getCharVar("WildcatSandy")
-    local MissionStatus = player:getMissionStatus(player:getNation())
+    local missionStatus = player:getMissionStatus(player:getNation())
 
     -- Lure of the Wildcat San d'Oria
     if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 16)) then
@@ -51,59 +51,59 @@ entity.onTrigger = function(player, npc)
         if player:getRank() == 10 then
             player:startEvent(31)
         -- Mission San D'Oria 9-2 The Heir to the Light
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus == 7) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 7) then
             player:startEvent(9)
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 5) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 5) then
             player:startEvent(30)
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 4) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 4) then
             player:showText(npc, ID.text.HEIR_TO_LIGHT_EXTRA)
-        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and MissionStatus > 1) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus > 1) then
             player:startEvent(29)
         -- Mission San d'Oria 9-1 Lightbringer (optional)
-        elseif (currentMission == xi.mission.id.sandoria.BREAKING_BARRIERS and MissionStatus == 0) then
+        elseif (currentMission == xi.mission.id.sandoria.BREAKING_BARRIERS and missionStatus == 0) then
             player:startEvent(26)
-        elseif (currentMission == xi.mission.id.sandoria.BREAKING_BARRIERS and MissionStatus == 1) then
+        elseif (currentMission == xi.mission.id.sandoria.BREAKING_BARRIERS and missionStatus == 1) then
             player:startEvent(1)
         -- Mission San d'Oria 8-2 Lightbringer (optional)
-        elseif (currentMission == xi.mission.id.sandoria.LIGHTBRINGER and MissionStatus == 6) then
+        elseif (currentMission == xi.mission.id.sandoria.LIGHTBRINGER and missionStatus == 6) then
             player:showText(npc, ID.text.LIGHTBRINGER_EXTRA)
         -- Mission San d'Oria 8-1 Coming of Age
-        elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 3 and player:hasKeyItem(xi.ki.DROPS_OF_AMNIO)) then
+        elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 3 and player:hasKeyItem(xi.ki.DROPS_OF_AMNIO)) then
             player:startEvent(102)
-        elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and MissionStatus == 1) then
+        elseif (currentMission == xi.mission.id.sandoria.COMING_OF_AGE and missionStatus == 1) then
             player:startEvent(58)
         -- Mission San D'Oria 6-1 Leaute's last wishes
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 3) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 3) then
             player:startEvent(22)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 2) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 2) then
             player:startEvent(24)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 1) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 1) then
             player:startEvent(23)
-        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and MissionStatus == 0) then
+        elseif (currentMission == xi.mission.id.sandoria.LEAUTE_S_LAST_WISHES and missionStatus == 0) then
             player:startEvent(25)
         -- Mission San D'Oria 5-2 The Shadow Lord
         elseif (player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SHADOW_LORD) and currentMission == xi.mission.id.sandoria.NONE) then
             player:showText(npc, ID.text.HALVER_OFFSET+500)
-        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 5) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 5) then
             player:showText(npc, ID.text.HALVER_OFFSET+471)
-        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 4 and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 4 and player:hasKeyItem(xi.ki.SHADOW_FRAGMENT)) then
             player:startEvent(548)
-        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and MissionStatus == 0) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_SHADOW_LORD and missionStatus == 0) then
             player:startEvent(546)
             -- Mission San D'Oria 5-1 The Ruins of Fei'Yin
-        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and MissionStatus == 12 and player:hasKeyItem(xi.ki.BURNT_SEAL)) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 12 and player:hasKeyItem(xi.ki.BURNT_SEAL)) then
             player:startEvent(534)
-        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and MissionStatus == 10) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 10) then
             player:showText(npc, ID.text.HALVER_OFFSET+334)
-        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and MissionStatus == 9) then
+        elseif (currentMission == xi.mission.id.sandoria.THE_RUINS_OF_FEI_YIN and missionStatus == 9) then
             player:startEvent(533)
         -- Mission San D'Oria 3-3 Appointment to Jeuno
-        elseif (currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and MissionStatus == 0) then
+        elseif (currentMission == xi.mission.id.sandoria.APPOINTMENT_TO_JEUNO and missionStatus == 0) then
             player:startEvent(508)
         -- Mission San D'Oria 2-3 Journey Abroad
-        elseif (currentMission == xi.mission.id.sandoria.JOURNEY_ABROAD and MissionStatus == 11) then
+        elseif (currentMission == xi.mission.id.sandoria.JOURNEY_ABROAD and missionStatus == 11) then
             player:startEvent(507)
-        elseif (currentMission == xi.mission.id.sandoria.JOURNEY_ABROAD and MissionStatus == 0) then
+        elseif (currentMission == xi.mission.id.sandoria.JOURNEY_ABROAD and missionStatus == 0) then
             player:startEvent(505)
         elseif (currentMission == xi.mission.id.sandoria.JOURNEY_ABROAD) then
             player:startEvent(532)
@@ -114,7 +114,7 @@ entity.onTrigger = function(player, npc)
     elseif (pNation == xi.nation.BASTOK) then
         -- Bastok 2-3 San -> Win
         if (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
-            if (MissionStatus == 3) then
+            if (missionStatus == 3) then
                 player:startEvent(501)
             end
         -- Bastok 2-3 San -> Win, report to consulate
@@ -122,9 +122,9 @@ entity.onTrigger = function(player, npc)
             player:showText(npc, ID.text.HALVER_OFFSET+279)
         -- Bastok 2-3 Win -> San
         elseif (currentMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2) then
-            if (MissionStatus == 8) then
+            if (missionStatus == 8) then
                 player:startEvent(503)
-            elseif (MissionStatus <= 10) then
+            elseif (missionStatus <= 10) then
                 player:showText(npc, ID.text.HALVER_OFFSET+279)
             end
         else
@@ -132,12 +132,12 @@ entity.onTrigger = function(player, npc)
         end
     elseif (pNation == xi.nation.WINDURST) then
         -- Windurst 2-3
-        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and MissionStatus < 3) then
+        if (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS and missionStatus < 3) then
             player:startEvent(532)
         elseif (currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA or currentMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) then
-            if (MissionStatus == 3) then
+            if (missionStatus == 3) then
                 player:startEvent(502)
-            elseif (MissionStatus == 8) then
+            elseif (missionStatus == 8) then
                 player:startEvent(504)
             else
                 player:showText(npc, ID.text.HALVER_OFFSET+279)

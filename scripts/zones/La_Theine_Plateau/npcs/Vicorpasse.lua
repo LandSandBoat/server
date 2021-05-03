@@ -16,19 +16,19 @@ end
 entity.onTrigger = function(player, npc)
 
     if (player:getCurrentMission(SANDORIA) == xi.mission.id.sandoria.THE_RESCUE_DRILL) then
-        local MissionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
 
-        if MissionStatus == 4 then
+        if missionStatus == 4 then
             player:startEvent(108)
-        elseif MissionStatus >= 5 and MissionStatus <= 7 then
+        elseif missionStatus >= 5 and missionStatus <= 7 then
             player:showText(npc, ID.text.RESCUE_DRILL + 19)
-        elseif MissionStatus == 8 then
+        elseif missionStatus == 8 then
             player:showText(npc, ID.text.RESCUE_DRILL + 21)
-        elseif MissionStatus == 9 then
+        elseif missionStatus == 9 then
             player:showText(npc, ID.text.RESCUE_DRILL + 26)
-        elseif MissionStatus == 10 then
+        elseif missionStatus == 10 then
             player:startEvent(115)
-        elseif MissionStatus == 11 then
+        elseif missionStatus == 11 then
             player:showText(npc, ID.text.RESCUE_DRILL + 29, xi.ki.RESCUE_TRAINING_CERTIFICATE)
         else
             player:startEvent(5)
