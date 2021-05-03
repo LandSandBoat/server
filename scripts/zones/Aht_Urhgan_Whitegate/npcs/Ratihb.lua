@@ -24,8 +24,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(552)
     elseif player:getCharVar("EquippedforAllOccasions") == 4 and player:getCharVar("LuckOfTheDraw") == 6 then
         player:startEvent(772)
-    elseif againstAllOdds == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.LIFE_FLOAT) then
-        player:startEvent(604)
+    if player:getCharVar("AgainstAllOdds") == 2 and (player:getCharVar("AgainstAllOddsTimer") < os.time() or player:getCharVar("AgainstAllOddsTimer") == 0) then
+        player:startEvent(604) -- reacquire life float, account for chars on quest previously without a var
     else
         player:startEvent(603)
     end
@@ -44,6 +44,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS, {item = 18702, var = {"EquippedforAllOccasions", "LuckOfTheDraw"}})
     elseif csid == 604 then
         npcUtil.giveKeyItem(player, xi.ki.LIFE_FLOAT)
+        player:setCharVar("AgainstTimer", getMidnight())
     end
 end
 

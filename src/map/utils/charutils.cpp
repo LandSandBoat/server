@@ -3949,13 +3949,13 @@ namespace charutils
                 else
                 {
                     // TODO: Capacity Chain Timer is reduced after Chain 30
-                    PMember->expChain.chainTime   = gettick() + 30000;
-                    PMember->expChain.chainNumber = 1;
+                    PMember->capacityChain.chainTime   = gettick() + 30000;
+                    PMember->capacityChain.chainNumber = 1;
                 }
 
                 if (chainActive)
                 {
-                    PMember->expChain.chainTime = gettick() + 30000;
+                    PMember->capacityChain.chainTime = gettick() + 30000;
                 }
 
                 capacityPoints = AddCapacityBonus(PMember, capacityPoints);
