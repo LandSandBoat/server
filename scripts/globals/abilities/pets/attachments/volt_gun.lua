@@ -34,7 +34,7 @@ attachment_object.onManeuverLose = function(pet, maneuvers)
         pet:delMod(xi.mod.ENSPELL, pet:getMod(xi.mod.ENSPELL))
         pet:delMod(xi.mod.ENSPELL_DMG, pet:getMod(xi.mod.ENSPELL_DMG))
         pet:delMod(xi.mod.ENSPELL_CHANCE, pet:getMod(xi.mod.ENSPELL_CHANCE))
-        onEquip(pet)
+        attachment_object.onEquip(pet)
     end
 end
 
