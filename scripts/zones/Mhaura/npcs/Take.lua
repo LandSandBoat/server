@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Mhaura
---  NPC: Take
---  Starts and finishes quest: Expertice
+-- NPC: Take
+-- Starts and finishes quest: Expertice
+-----------------------------------
+-- Used in: scripts/quests/otherAreas/Rycharde_the_Chef.lua
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -12,14 +14,14 @@ local entity = {}
 
 -- player:startEvent(59) -- standar dialog
 -- player:startEvent(60) -- tell to look for ricarde
---player:startEvent(68) -- not talked to rycharde yet
---player:startEvent(61)-- accept expertice quest
---player:startEvent(62)-- expertice completed
---player:startEvent(63)-- expertice not done yet
---player:startEvent(64) -- after expertice quest
---player:startEvent(65) -- good luck
---player:startEvent(66)-- Valgeir cook was delicious
---player:startEvent(67)-- after back to basics i think
+-- player:startEvent(68) -- not talked to rycharde yet
+-- player:startEvent(61)-- accept expertice quest
+-- player:startEvent(62)-- expertice completed
+-- player:startEvent(63)-- expertice not done yet
+-- player:startEvent(64) -- after expertice quest
+-- player:startEvent(65) -- good luck
+-- player:startEvent(66)-- Valgeir cook was delicious
+-- player:startEvent(67)-- after back to basics i think
 
 entity.onTrade = function(player, npc, trade)
 end

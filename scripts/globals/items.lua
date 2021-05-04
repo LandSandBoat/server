@@ -15,6 +15,7 @@ xi.items =
     SKIN_OF_CHEVAL_RIVER_WATER      = 603,
     PICKAXE                         = 605,
     CHUNK_OF_TIN_ORE                = 641,
+    BEEHIVE_CHIP                    = 912,
     SHEET_OF_PARCHMENT              = 917,
     JAR_OF_BLACK_INK                = 929,
     SICKLE                          = 1020,

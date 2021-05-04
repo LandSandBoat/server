@@ -41,6 +41,7 @@ return {
     "scripts/quests/otherAreas/Confessions_of_a_Bellmaker",
     "scripts/quests/otherAreas/Missionary_Moblin",
     "scripts/quests/otherAreas/Rycharde_the_Chef",
+    "scripts/quests/otherAreas/Way_of_the_Cook",
 
     -- Outlands
     "scripts/quests/outlands/Bugi_Soden",

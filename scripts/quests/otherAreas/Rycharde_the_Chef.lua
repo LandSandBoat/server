@@ -1,6 +1,11 @@
 -----------------------------------
 -- Rycharde the Chef
 -----------------------------------
+-- Zone,   NPC,          POS
+-- Mhaura, Rycharde,     !pos 
+-- Mhaura, Take,         !pos 
+-- Mhaura, Numi Adaligo, !pos 
+-----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
@@ -18,7 +23,7 @@ quest.reward =
 
 quest.sections =
 {
-    -- Section: Steps prior to getting the quest.
+    -- Section: Talk to Numi Adaligo and ask for work.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 0
@@ -29,7 +34,7 @@ quest.sections =
             onEventFinish =
             {
                 [50] = function(player, csid, option, npc)
-                    if option == 2 then
+                    if option == 2 then -- Ask for work.
                         quest:setVar(player, 'Prog', 1)
                     end
                 end,
@@ -37,6 +42,7 @@ quest.sections =
         },
     },
 
+    -- Section: Talk with Take
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 1
@@ -55,7 +61,7 @@ quest.sections =
         },
     },
 
-    -- Section: Get quest.
+    -- Section: Talk with Rycharde. Get quest (or decline). Handle "Take" optional dialog.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 2
@@ -64,15 +70,15 @@ quest.sections =
         [xi.zone.MHAURA] =
         {
             ['Rycharde'] = quest:progressEvent(70, xi.items.DHALMEL_MEAT),
-            ['Take'] = quest:event(68),
+            ['Take'] = quest:event(68), -- Optional dialog.
 
             onEventFinish =
             {
                 [70] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    if option == 71 or option == 72 then    --70 = answer no; 71 = answer yes!
+                    if option == 71 or option == 72 then -- Accept quest.
                         quest:begin(player)
-                    elseif option == 70 then
+                    elseif option == 70 then -- Decline quest.
                         quest:setVar(player, 'Prog', 3)      
                     end
                 end,
@@ -80,6 +86,7 @@ quest.sections =
         },
     },
 
+    -- Section: Talk with Rycharde if you declined. Get quest (or decline again).
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 3
@@ -93,7 +100,7 @@ quest.sections =
             {
                 [71] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    if option == 71 or option == 72 then    --70 = answer no; 71 = answer yes!
+                    if option == 71 or option == 72 then  -- Accept quest.
                         quest:begin(player)
                     end
                 end,
@@ -101,7 +108,7 @@ quest.sections =
         },
     },
 
-    -- Section: Actual questing.
+    -- Section: Quest accepted. Handle trade outcomes. Handle talk with Rycharde.
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED
@@ -113,15 +120,15 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 3 then
-                        return quest:event(72)
+                        return quest:event(72) -- Interaction dialog.
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {{xi.items.DHALMEL_MEAT, 2}}) then
-                        return quest:progressEvent(74) -- Completed OK
+                        return quest:progressEvent(74) -- Quest completed dialog.
                     elseif npcUtil.tradeHasExactly(trade, {{xi.items.DHALMEL_MEAT, 1}}) then
-                        return quest:event(73) -- That's not enough!
+                        return quest:event(73) -- "That's not enough!" dialog.
                     end
                 end,
             },
@@ -130,8 +137,8 @@ quest.sections =
             {
                 [74] = function(player, csid, option, npc)
                     quest:complete(player)
-                    player:setCharVar("QuestRychardeTCCompDay_var", VanadielDayOfTheYear()) -- Used for next quest wait time.
-                    player:setCharVar("QuestRychardeTCCompYear_var", VanadielYear())        -- Used for next quest wait time.
+                    player:setCharVar("RychardeTheChefCompDay", VanadielDayOfTheYear()) -- Used for next quest wait time.
+                    player:setCharVar("RychardeTheChefCompYear", VanadielYear())        -- Used for next quest wait time.
                     player:confirmTrade()
                 end,
             },
