@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.HEADY_ARTIFICE, 18, 1, 1)
+    -- target:addStatusEffect(xi.effect.HEADY_ARTIFICE, 18, 1, 1) -- TODO: implement xi.effect.HEADY_ARTIFICE
 end
 
 return ability_object
