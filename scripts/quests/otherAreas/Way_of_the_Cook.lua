@@ -6,8 +6,10 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
+require("scripts/globals/titles")
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
+local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
 local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
 local questInTime    = false
@@ -15,47 +17,22 @@ local daysPassed     = 0
 local totalHoursLeft = 0
 -----------------------------------
 
-if questInTime == true then
-    quest.reward =
-    {
-        fame  = 120,
-        title = xi.title.ONESTAR_PURVEYOR,
-        gil   = 1500,
-    }
-else
-    quest.reward =
-    {
-        fame  = 120,
-        title = xi.title.ONESTAR_PURVEYOR,
-        gil   = 1000,
-    }
-end
+quest.reward =
+{
+    fame  = 120,
+    title = xi.title.ONESTAR_PURVEYOR,
+}
 
 quest.sections =
 {
     -- Section: Check if quest is available.
     {
-        check = function(player, status, vars) -- Check for quest available, previous quest completed and fame requirement
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == QUEST_COMPLETED and
-                player:getFameLevel(WINDURST) > 2
+        check = function(player, status, vars)
+            return status == QUEST_AVAILABLE
         end,
 
         [xi.zone.MHAURA] =
         {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:getCharVar("RychardeTheChefCompDay") + 7 < VanadielDayOfTheYear() or
-                        player:getCharVar("RychardeTheChefCompYear") < VanadielYear()
-                    then -- Check wait time.
-                        quest:progressEvent(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Accept quest (or not).
-                    else
-                        quest:event(75) -- Nothing to do.
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [76] = function(player, csid, option, npc)
@@ -116,7 +93,8 @@ quest.sections =
                     player:setCharVar("WayOfTheCookDayStarted", 0)  -- Delete current quest started variables
                     player:setCharVar("WayOfTheCookCompDay", VanadielDayOfTheYear()) -- Set completition day of WAY_OF_THE_COOK quest.
                     player:setCharVar("WayOfTheCookCompYear", VanadielYear())        -- Set completition day of WAY_OF_THE_COOK quest.
-                    questInTime = true
+                    player:addGil(GIL_RATE*1500)
+                    player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
                     quest:complete(player)
                 end,
 
@@ -126,6 +104,8 @@ quest.sections =
                     player:setCharVar("WayOfTheCookDayStarted", 0)  -- Delete current quest started variables
                     player:setCharVar("WayOfTheCookCompDay", VanadielDayOfTheYear()) -- Set completition day of WAY_OF_THE_COOK quest.
                     player:setCharVar("WayOfTheCookCompYear", VanadielYear())        -- Set completition day of WAY_OF_THE_COOK quest.
+                    player:addGil(GIL_RATE*1000)
+                    player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1000)
                     quest:complete(player)
                 end,
             },
