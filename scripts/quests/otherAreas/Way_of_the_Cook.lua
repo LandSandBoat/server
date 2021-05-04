@@ -9,7 +9,7 @@ require('scripts/globals/quests')
 require("scripts/globals/titles")
 require('scripts/globals/npc_util')
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/Mhaura/IDs")
+local mhauraID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
 local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
 local daysPassed     = 0
@@ -103,7 +103,7 @@ quest.sections =
                     player:setCharVar("WayOfTheCookCompDay", VanadielDayOfTheYear()) -- Set completition day of WAY_OF_THE_COOK quest.
                     player:setCharVar("WayOfTheCookCompYear", VanadielYear())        -- Set completition day of WAY_OF_THE_COOK quest.
                     player:addGil(GIL_RATE*1500)
-                    player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1500)
+                    player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1500)
                     quest:complete(player)
                 end,
 
@@ -114,7 +114,7 @@ quest.sections =
                     player:setCharVar("WayOfTheCookCompDay", VanadielDayOfTheYear()) -- Set completition day of WAY_OF_THE_COOK quest.
                     player:setCharVar("WayOfTheCookCompYear", VanadielYear())        -- Set completition day of WAY_OF_THE_COOK quest.
                     player:addGil(GIL_RATE*1000)
-                    player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*1000)
+                    player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1000)
                     quest:complete(player)
                 end,
             },

@@ -43,14 +43,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 --[[
-    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_ACCEPTED) then
-        local puffball  = trade:hasItemQty(4448, 1) --4448 - puffball
-
-        if (puffball  == true) then
-            player:startEvent(83) -- completed quest 3 UNENDING_CHASE
-        end
-
-    elseif (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_ACCEPTED) then
+    if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
         local DhalmelMeat  = trade:hasItemQty(4357, trade:getItemCount()) --4357 - crawler egg
 
@@ -71,42 +64,8 @@ end
 
 entity.onTrigger = function(player, npc)
 --[[
----------------------------QUEST UNENDING_CHASE--------------------------------------------------
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == QUEST_COMPLETED and
-        player:getFameLevel(WINDURST) > 2
-    then
-        if (player:getCharVar("QuestWayofTCCompDay_var")+7 < VanadielDayOfTheYear() or player:getCharVar("QuestWayofTCCompYear_var") < VanadielYear()) then  -- days between quest
-            if (player:getCharVar("QuestUnendingCAskedAlready_var")==2) then
-                player:startEvent(84, 4448)-- third quest  said no, ask again
-            else
-                player:startEvent(82, 4448)-- third quest UNENDING_CHASE    4448 - puffball
-            end
-        else
-            player:startEvent(75) -- nothing to do
-        end
-
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_ACCEPTED then
-        player:startEvent(85)-- third quest  comment no hurry
--------------------------QUEST HIS_NAME_IS_VALGEIR--------------------------------------------------
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_COMPLETED and
-        player:getFameLevel(WINDURST) > 2
-    then
-        if player:getCharVar("QuestUnendingCCompDay_var")+2< VanadielDayOfTheYear() or player:getCharVar("QuestUnendingCCompYear_var") < VanadielYear() then
-            player:startEvent(86)-- forth quest   His Name is Valgeir
-        else
-            player:startEvent(75) -- nothing to do
-        end
-
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_ACCEPTED then
-        if (player:hasKeyItem(xi.ki.ARAGONEU_PIZZA)) then
-            player:startEvent(87)-- forth quest   not done yet
-        else
-            player:startEvent(88)-- forth quest   done!
-        end
 ---------------------------QUEST THE CLUE--------------------------------------------------------
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE and
+    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE and
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_COMPLETED and
         player:getFameLevel(WINDURST) > 4
     then
@@ -155,44 +114,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 --[[
-    if (csid == 82) then  -- accept quest 3 UNENDING_CHASE
-        player:setCharVar("QuestUnendingCAskedAlready_var", 2)
-        if (option == 77 ) then -- answer yes!
-            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
-        end
-    elseif (csid == 84) then  -- accept quest 3 UNENDING_CHASE
-        if (option == 78 ) then -- answer yes!
-            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
-        end
-    elseif (csid == 83) then  -- end quest 3 UNENDING_CHASE
-        player:tradeComplete()
-        player:addFame(WINDURST, 120)
-        player:addTitle(xi.title.TWOSTAR_PURVEYOR)
-        player:addGil(GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*2100)
-        player:setCharVar("QuestUnendingCAskedAlready_var", 0)
-        player:setCharVar("QuestWayofTCCompDay_var", 0) -- completition day of WAY_OF_THE_COOK delete variable
-        player:setCharVar("QuestWayofTCCompYear_var", 0)
-        player:setCharVar("QuestUnendingCCompDay_var", VanadielDayOfTheYear()) -- completition day of unending chase
-        player:setCharVar("QuestUnendingCCompYear_var", VanadielYear())
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE)
-    elseif (csid == 86) then  -- accept quest 4 HIS_NAME_IS_VALGEIR
-        if (option == 80 ) then -- answer yes!
-
-            player:addKeyItem(xi.ki.ARAGONEU_PIZZA) --give pizza to player
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ARAGONEU_PIZZA)
-            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
-        end
-    elseif (csid == 88) then  -- end quest 4 his name is Valgeir
-        player:addFame(WINDURST, 120)
-        player:addKeyItem(xi.ki.MAP_OF_THE_TORAIMARAI_CANAL) --reward Map of the Toraimarai Canal
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_TORAIMARAI_CANAL)
-        player:setCharVar("QuestUnendingCCompDay_var", 0) -- completition day of unending chase delete
-        player:setCharVar("QuestUnendingCCompYear_var", 0)
-        player:setCharVar("QuestHNIVCCompDay_var", VanadielDayOfTheYear()) -- completition day of unending chase
-        player:setCharVar("QuestHNIVCCompYear_var", VanadielYear())
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
-    elseif (csid == 90 or csid == 91) then  --accept quest the clue
+    if (csid == 90 or csid == 91) then  --accept quest the clue
         player:setCharVar("QuestTheClueStatus_var", 1)
         if (option == 83 ) then
             player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE)

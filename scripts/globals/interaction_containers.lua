@@ -42,6 +42,11 @@ return {
     "scripts/quests/otherAreas/Missionary_Moblin",
     "scripts/quests/otherAreas/Rycharde_the_Chef",
     "scripts/quests/otherAreas/Way_of_the_Cook",
+    "scripts/quests/otherAreas/Unending_Chase",
+    "scripts/quests/otherAreas/His_Name_is_Valgeir",
+    "scripts/quests/otherAreas/Expertise",
+    "scripts/quests/otherAreas/The_Clue",
+    "scripts/quests/otherAreas/The_Basics",
 
     -- Outlands
     "scripts/quests/outlands/Bugi_Soden",

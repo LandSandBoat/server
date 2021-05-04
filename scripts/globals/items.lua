@@ -6,6 +6,7 @@ xi = xi or {}
 
 xi.items =
 {
+    TABLEWARE_SET                   = 132,
     COPY_OF_ANCIENT_BLOOD           = 206,
     EAGLE_BUTTON                    = 578,
     GILT_GLASSES                    = 579,
@@ -29,7 +30,10 @@ xi.items =
     IMPERIAL_SILVER_PIECE           = 2185,
     LIGHTNING_BAND                  = 2217,
     DHALMEL_MEAT                    = 4359,
+    LAND_CRAB_MEAT                  = 4400,
     COBALT_JELLYFISH                = 4443,
+    SCREAM_FUNGUS                   = 4447,
+    PUFFBALL                        = 4448,
     CRESCENT_FISH                   = 4473,
     THREE_EYED_FISH                 = 4478,
     ISTAVRIT                        = 5136,
