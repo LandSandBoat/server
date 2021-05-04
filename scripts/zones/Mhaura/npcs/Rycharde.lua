@@ -70,20 +70,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == QUEST_AVAILABLE then
-        player:startEvent(75) -- nothing to do
-
-    elseif player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == QUEST_AVAILABLE and
-        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == QUEST_COMPLETED and
-        player:getFameLevel(WINDURST) > 2
-    then
-        if (player:getCharVar("RychardeTheChefCompDay") + 7 < VanadielDayOfTheYear() or player:getCharVar("RychardeTheChefCompYear") < VanadielYear()) then
-            player:startEvent(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
-        else
-            player:startEvent(75) -- nothing to do
-        end
-    end
 --[[
 ---------------------------QUEST UNENDING_CHASE--------------------------------------------------
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_AVAILABLE and

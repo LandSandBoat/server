@@ -12,7 +12,6 @@ require('scripts/globals/interaction/quest')
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
 local quest          = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK)
-local questInTime    = false
 local daysPassed     = 0
 local totalHoursLeft = 0
 -----------------------------------
@@ -28,21 +27,31 @@ quest.sections =
     -- Section: Check if quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and
+                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == QUEST_COMPLETED
         end,
 
         [xi.zone.MHAURA] =
         {
+            ['Rycharde'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:getCharVar("RychardeTheChefCompDay") + 7 < VanadielDayOfTheYear() or player:getCharVar("RychardeTheChefCompYear") < VanadielYear() then
+                        return quest:event(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
+                    else
+                        return quest:event(75) -- nothing to do
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
                         player:setCharVar("RychardeTheChefCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
                         player:setCharVar("RychardeTheChefCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
-
                         player:setCharVar("WayOfTheCookHourStarted", VanadielHour())        -- Set current quest started variables
                         player:setCharVar("WayOfTheCookDayStarted", VanadielDayOfTheYear()) -- Set current quest started variables
-
                         quest:begin(player)
                     end
                 end,
@@ -65,9 +74,9 @@ quest.sections =
                         totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + player:getCharVar("WayOfTheCookHourStarted")
 
                         if totalHoursLeft > 0 then
-                            quest:progressEvent(78, totalHoursLeft) -- You have x hours left.
+                            return quest:event(78, totalHoursLeft) -- You have x hours left.
                         else
-                            quest:progressEvent(79) -- Not done yet.
+                            return quest:event(79) -- Not done yet.
                         end
                 end,
 
@@ -77,9 +86,9 @@ quest.sections =
                         totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + player:getCharVar("WayOfTheCookHourStarted")
 
                         if totalHoursLeft > 0 then
-                            return quest:progressEvent(80) -- Quest completed in time.
+                            return quest:event(80) -- Quest completed in time.
                         else
-                            return quest:progressEvent(81) -- Quest completed late.
+                            return quest:event(81) -- Quest completed late.
                         end
                     end
                 end,
