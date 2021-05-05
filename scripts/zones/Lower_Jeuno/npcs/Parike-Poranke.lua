@@ -4,8 +4,6 @@
 -- Type: Adventurer's Assistant
 -- !pos -33.161 -1 -61.303 245
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
------------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 -----------------------------------
 local entity = {}

@@ -4,8 +4,6 @@
 -- Type: Event Scene Replayer
 -- !pos -16.426 -28.889 109.626 26
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

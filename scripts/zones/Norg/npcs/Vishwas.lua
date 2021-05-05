@@ -4,8 +4,6 @@
 -- Type: Standard NPC
 -- !pos 44.028 -7.282 13.663 252
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

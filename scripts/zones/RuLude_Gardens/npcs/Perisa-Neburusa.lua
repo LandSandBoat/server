@@ -4,8 +4,6 @@
 -- Type: Residence Renter
 -- !pos 54.651 8.999 -74.372 243
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

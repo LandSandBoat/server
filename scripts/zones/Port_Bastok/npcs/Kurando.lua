@@ -4,8 +4,6 @@
 -- Type: Quest Giver
 -- !pos -23.887 3.898 0.870 236
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/titles")

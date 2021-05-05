@@ -4,8 +4,6 @@
 -- Type: Standard NPC
 -- !pos -15.965 -3 -47.748 232
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

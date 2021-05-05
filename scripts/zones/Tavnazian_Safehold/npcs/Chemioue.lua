@@ -4,8 +4,6 @@
 -- Type: NPC Quest
 -- !pos 82.041 -34.964 67.636 26
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

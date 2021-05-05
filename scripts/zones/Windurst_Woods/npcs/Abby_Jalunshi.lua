@@ -4,8 +4,6 @@
 -- Type: Moghouse Renter
 -- !pos -101.895 -5 36.172 241
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied By Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

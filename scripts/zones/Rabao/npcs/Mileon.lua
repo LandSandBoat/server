@@ -4,8 +4,6 @@
 -- Type: Lucky Roll Gambler
 -- !pos 26.080 8.201 65.297 247
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

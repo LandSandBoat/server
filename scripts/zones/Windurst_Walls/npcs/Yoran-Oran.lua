@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Yoran-Oran
+--  NPC: Yoran-Oran
 -- Type: Standard NPC
 -- !pos -109.987 -14 203.338 239
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/missions")

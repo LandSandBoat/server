@@ -4,8 +4,6 @@
 -- Type: Quest Giver
 -- !pos -56.533 1.392 -29.432 236
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

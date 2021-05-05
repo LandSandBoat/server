@@ -4,8 +4,6 @@
 -- Type: Mission Starter
 -- !pos -227.964 -9 187.087 240
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied By Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

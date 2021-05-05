@@ -4,8 +4,6 @@
 -- Type: ENM Quest Activator
 -- !pos -74.308 -24.782 -28.475 26
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

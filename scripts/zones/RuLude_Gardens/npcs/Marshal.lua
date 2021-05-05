@@ -4,8 +4,6 @@
 -- Type: Marshal
 -- !pos 41.143 -0.998 -26.566 243
 -----------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
