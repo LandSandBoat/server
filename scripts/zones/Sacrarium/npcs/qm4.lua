@@ -1,5 +1,5 @@
 -----------------------------------
--- Area:  Sacrarium
+-- Area: Sacrarium
 --  NPC: qm4 (???)
 -- Notes: Used to spawn Old Prof. Mariselle
 -- !pos 22.669 -3.111 127.279 28

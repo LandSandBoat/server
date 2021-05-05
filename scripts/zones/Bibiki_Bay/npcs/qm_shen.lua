@@ -1,7 +1,7 @@
 -----------------------------------
--- Area:  Bibiki Bay
+-- Area: Bibiki Bay
 --  NPC: ???
--- Notes: Used to spawn Shen
+-- Note: Used to spawn Shen
 -- !pos -115.108 0.300 -724.664 4
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")

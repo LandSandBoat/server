@@ -1,5 +1,5 @@
 -----------------------------------
---  Area: Uleguerand_Range
+-- Area: Uleguerand_Range
 --  NPC: Rabbit Footprint (Spawns White/Black Coney)
 -----------------------------------
 local ID = require("scripts/zones/Uleguerand_Range/IDs")
