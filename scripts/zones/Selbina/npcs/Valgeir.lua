@@ -31,7 +31,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- THE BASICS
-    elseif csid == 106 and npcUtil.giveItem(player, 4436) then
+    if csid == 106 and npcUtil.giveItem(player, 4436) then
         player:setCharVar("QuestTheBacisCommentary_var", 1)
         player:delKeyItem(xi.ki.MHAURAN_COUSCOUS)
     elseif csid == 107 then

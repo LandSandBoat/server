@@ -40,7 +40,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("WayOfTheCookCompDay") + 2 < VanadielDayOfTheYear() or player:getCharVar("WayOfTheCookCompYear") < VanadielYear() then
+                    if player:getCharVar("UnendingChaseCompDay") + 2 < VanadielDayOfTheYear() or player:getCharVar("UnendingChaseCompYear") < VanadielYear() then
                         return quest:event(86) -- His Name is Valgeir starting event.
                     end
                 end,
@@ -93,6 +93,7 @@ quest.sections =
             {
                 [100] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.ARAGONEU_PIZZA)
+                    player:messageSpecial(selbinaID.text.KEYITEM_LOST, xi.ki.ARAGONEU_PIZZA)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
@@ -111,7 +112,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(88) -- Finish quest.
+                    return quest:progressEvent(88) -- Finish quest.
                 end,
             },
 
