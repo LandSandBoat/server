@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Riverne Site #B01
--- NPC:  Unstable Displacement
+--  NPC: Unstable Displacement
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/settings")

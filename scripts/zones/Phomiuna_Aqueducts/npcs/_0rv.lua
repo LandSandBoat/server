@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC: Oil Lamp - South (West)
+--  NPC: Oil Lamp - South (West)
 -- Opens Door at F-9 from inside.
 -- !pos -63 -26 37
 -----------------------------------

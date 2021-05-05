@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst (240)
--- NPC: Kuriodo-Moido
+--  NPC: Kuriodo-Moido
 -- Involved In Quest: Making Amends, Wonder Wands,
 -- Starts and Finishes: Making Amens!, Orastery Woes
 -- !pos -112.5 -4.2 102.9 240

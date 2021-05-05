@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Dagoza-Beruza
+--  NPC: Dagoza-Beruza
 -- Type: Mission NPC
 -- !pos -54.523 -6 229.271 238
 -----------------------------------

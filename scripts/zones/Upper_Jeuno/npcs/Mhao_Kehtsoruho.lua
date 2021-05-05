@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
---   NPC: Mhao Kehtsoruho
+--  NPC: Mhao Kehtsoruho
 -- Type: Past Event Watcher
 -- !pos -73.032 -1 146.919 244
 -----------------------------------

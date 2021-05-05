@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
---   NPC: Enaremand
+--  NPC: Enaremand
 -- Type: Standard NPC
 -- !pos 95.962 -42.003 51.613 26
 -----------------------------------

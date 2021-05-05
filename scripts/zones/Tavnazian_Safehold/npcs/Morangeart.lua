@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
---   NPC: Morangeart
+--  NPC: Morangeart
 -- Type: ENM Quest Activator
 -- !pos -74.308 -24.782 -28.475 26
 -----------------------------------

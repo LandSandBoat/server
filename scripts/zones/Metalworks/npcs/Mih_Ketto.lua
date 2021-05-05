@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
---   NPC: Mih Ketto
+--  NPC: Mih Ketto
 -- Type: Standard NPC
 -- !pos 24.046 -17 32.751 237
 -----------------------------------

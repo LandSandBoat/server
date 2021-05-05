@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Spire_of_vahlz
--- NPC:  web of regret
+--  NPC: web of regret
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

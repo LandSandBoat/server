@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Buburimu Peninsula
--- NPC:  Signpost
+--  NPC: Signpost
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Remnants
--- NPC: Armoury Crate (Arrapago)
+--  NPC: Armoury Crate (Arrapago)
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

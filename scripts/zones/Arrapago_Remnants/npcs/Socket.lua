@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Remnants
--- NPC: Socket
+--  NPC: Socket
 -- Trade Slavage Cells to pop Wahzil
 -- Wahzil drops 2x the Cells traded
 -----------------------------------

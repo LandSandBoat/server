@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
---   NPC: Synergy Engineer
+--  NPC: Synergy Engineer
 -- Type: Standard NPC
 -- !pos 37.700 -0.3 -50.500 236
 -----------------------------------

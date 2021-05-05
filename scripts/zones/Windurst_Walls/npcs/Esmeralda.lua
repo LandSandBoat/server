@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Esmeralda
+--  NPC: Esmeralda
 -- Type: Consul. Rep.
 -- !pos 128.629 -12.5 139.387 239
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Castle Zvahl Baileys
--- NPC: Switchstix
+--  NPC: Switchstix
 -- Type: Standard NPC
 -- !pos 386.091 -13 -17.399 161
 -----------------------------------

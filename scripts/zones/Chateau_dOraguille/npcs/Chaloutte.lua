@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
---   NPC: Chaloutte
+--  NPC: Chaloutte
 -- Type: Event Scene Replayer
 -- !pos 10.450 -1 -11.985 233
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
---   NPC: Abby Jalunshi
+--  NPC: Abby Jalunshi
 -- Type: Moghouse Renter
 -- !pos -101.895 -5 36.172 241
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
---   NPC: Ominous Cloud
+--  NPC: Ominous Cloud
 -- Type: Ninjutsu Toolbag Maker
 -- !pos 146.962 7.499 -63.316 236
 -----------------------------------

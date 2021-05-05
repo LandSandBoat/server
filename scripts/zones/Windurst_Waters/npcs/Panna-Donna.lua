@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Panna-Donna
+--  NPC: Panna-Donna
 -- Type: Mission NPC
 -- !pos -57.502 -6 229.571 238
 -----------------------------------

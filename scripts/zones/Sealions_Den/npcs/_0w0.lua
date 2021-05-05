@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sealion's Den
--- NPC:  Iron Gate
+--  NPC: Iron Gate
 -- !pos 612 132 774 32
 -----------------------------------
 require("scripts/globals/teleports")

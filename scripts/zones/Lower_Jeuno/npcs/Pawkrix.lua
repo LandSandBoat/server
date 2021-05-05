@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
--- NPC: Pawkrix
+--  NPC: Pawkrix
 -- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")

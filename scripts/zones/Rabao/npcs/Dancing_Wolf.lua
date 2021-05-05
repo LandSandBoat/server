@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Rabao
---   NPC: Dancing Wolf
+--  NPC: Dancing Wolf
 -- Type: Standard NPC
 -- !pos 7.619 7 81.209 247
 -----------------------------------

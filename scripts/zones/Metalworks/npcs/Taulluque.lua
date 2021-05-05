@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
---   NPC: Taulluque
+--  NPC: Taulluque
 -- Type: Past Event Watcher
 -- !pos 39.907 -14.999 -21.083 237
 -----------------------------------

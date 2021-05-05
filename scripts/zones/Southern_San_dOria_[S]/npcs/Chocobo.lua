@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern SandOria [S]
--- NPC: Chocobo
+--  NPC: Chocobo
 -- !zone 80
 -----------------------------------
 local entity = {}

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
---   NPC: Hungry Wolf
+--  NPC: Hungry Wolf
 -- Type: Quest Giver
 -- !pos -25.861 -11 -30.172 237
 -----------------------------------

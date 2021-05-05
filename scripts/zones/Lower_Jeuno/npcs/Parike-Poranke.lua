@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
---   NPC: Parike-Poranke
+--  NPC: Parike-Poranke
 -- Type: Adventurer's Assistant
 -- !pos -33.161 -1 -61.303 245
 -----------------------------------

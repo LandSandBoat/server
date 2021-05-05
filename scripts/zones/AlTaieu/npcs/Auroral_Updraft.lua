@@ -1,7 +1,7 @@
 -----------------------------------
---  Area: Al'Taieu
---  NPC:  Auroral Updraft
---  Type: Standard NPC
+-- Area: Al'Taieu
+--  NPC: Auroral Updraft
+-- Type: Standard NPC
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------

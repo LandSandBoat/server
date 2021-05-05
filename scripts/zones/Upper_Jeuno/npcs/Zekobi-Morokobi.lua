@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
---   NPC: Zekobi-Morokobi
+--  NPC: Zekobi-Morokobi
 -- Type: Standard NPC
 -- !pos 41.258 -5.999 -74.105 244
 -----------------------------------

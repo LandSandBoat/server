@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
--- NPC:  ??? (Suzaku's Spawn)
+--  NPC: ??? (Suzaku's Spawn)
 -- Allows players to spawn the HNM Suzaku with a Gem of the South and a Summerstone.
 -- !pos -514 -70 -264 130
 -----------------------------------

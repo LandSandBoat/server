@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Mamook
--- NPC: Toads Footprint
+--  NPC: Toads Footprint
 -- !pos 5.9660 42.7575 -100.5741
 -----------------------------------
 local ID = require("scripts/zones/Mamook/IDs")

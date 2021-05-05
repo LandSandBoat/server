@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Appolyon
--- NPC:  Radiant_Aureole
+--  NPC: Radiant_Aureole
 -- !pos
 -----------------------------------
 require("scripts/globals/bcnm")

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Boneyard Gully
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/titles")

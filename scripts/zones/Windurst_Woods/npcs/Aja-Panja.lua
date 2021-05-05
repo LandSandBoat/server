@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
---   NPC: Aja-Panja
+--  NPC: Aja-Panja
 -- Type: Standard NPC
 -- !pos -7.251 -6.55 -134.127 241
 -----------------------------------

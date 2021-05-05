@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Kameel
+--  NPC: Kameel
 -- Type: Standard NPC
 -----------------------------------
 local entity = {}

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Beaucedine Glacier (S)
---   NPC: Gray Colossus, L.C.
+--  NPC: Gray Colossus, L.C.
 -- Type: Campaign Arbiter
 -- !pos 76.178 -60.763 -48.775 136
 -----------------------------------

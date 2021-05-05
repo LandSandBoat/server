@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
---   NPC: Chimh Dlesbah
+--  NPC: Chimh Dlesbah
 -- Type: Event Scene Replayer
 -- !pos -71.995 -1 -115.882 245
 -----------------------------------

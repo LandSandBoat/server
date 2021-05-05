@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
--- NPC: A.M.A.N Liaison
+--  NPC: A.M.A.N Liaison
 -----------------------------------
 require("scripts/globals/roe")
 -----------------------------------

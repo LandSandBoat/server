@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Frost
--- NPC:  Ice Protocrystal
+--  NPC: Ice Protocrystal
 -- Involved in Quests: Trial by Ice, Trial Size Trial by Ice
 -- !pos 558 0 596 203
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Dienger
+--  NPC: Dienger
 -- Type: Melody Minstrel
 -- !pos -46.448 -6.312 212.384 238
 -----------------------------------

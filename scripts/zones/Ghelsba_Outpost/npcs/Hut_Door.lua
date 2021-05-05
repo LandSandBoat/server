@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ghelsba_Outpost
--- NPC:  Hut Door
+--  NPC: Hut Door
 -- !pos -165.357 -11.672 77.771 140
 -----------------------------------
 require("scripts/globals/bcnm")

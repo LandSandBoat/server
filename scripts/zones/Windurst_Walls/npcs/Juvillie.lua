@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Juvillie
+--  NPC: Juvillie
 -- Type: Event Replayer
 -- !pos -180.731 -3.451 143.138 239
 -----------------------------------

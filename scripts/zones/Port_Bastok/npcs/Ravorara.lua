@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
---   NPC: Ravorara
+--  NPC: Ravorara
 -- Type: Quest Giver
 -- !pos -151.062 -7 -7.243 236
 -----------------------------------

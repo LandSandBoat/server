@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
---   NPC: Dohhel
+--  NPC: Dohhel
 -- Type: Event Scene Replayer
 -- !pos -156.031 -2 6.051 246
 -----------------------------------

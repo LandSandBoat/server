@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Tonule
+--  NPC: Tonule
 -- Type: Event Replayer
 -- !pos -209.385 -9.117 195.217 240
 -----------------------------------

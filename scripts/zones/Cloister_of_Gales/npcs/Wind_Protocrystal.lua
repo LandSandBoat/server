@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Cloister of Gales
--- NPC:  Wind Protocrystal
+--  NPC: Wind Protocrystal
 -- Involved in Quests: Trial by Wind, Trial Size Trial By Wind
 -- !pos -361 1 -381 201
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
---   NPC: Hurr the Betrayer
+--  NPC: Hurr the Betrayer
 -- Type: Involved in the "Sahagin Key Quest"
 -- !pos 305.882 26.768 234.279 176
 -----------------------------------

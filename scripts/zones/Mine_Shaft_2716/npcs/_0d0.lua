@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Mine_Shaft_2716
--- NPC:  Shaft entrance
+--  NPC: Shaft entrance
 -----------------------------------
 local entity = {}
 

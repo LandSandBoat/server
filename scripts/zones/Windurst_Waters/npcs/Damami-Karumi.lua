@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Damami-Karumi
+--  NPC: Damami-Karumi
 -- Type: Standard NPC
 -- !pos -5.362 -2 18.059 238
 -----------------------------------

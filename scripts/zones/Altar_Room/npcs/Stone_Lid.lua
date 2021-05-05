@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Altar Room
--- NPC: Stone Lid
+--  NPC: Stone Lid
 -- !pos -316.4390, 24.7654, 12.1590
 -----------------------------------
 local ID = require("scripts/zones/Altar_Room/IDs")

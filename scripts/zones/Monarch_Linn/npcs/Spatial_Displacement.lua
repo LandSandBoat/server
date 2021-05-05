@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Monarch_Linn
--- NPC:  Spatial Displacement
+--  NPC: Spatial Displacement
 -- !pos -35 -1 -539 31
 -----------------------------------
 local ID = require("scripts/zones/Monarch_Linn/IDs")

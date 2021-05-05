@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Woods
--- NPC: A.M.A.N Liaison
+--  NPC: A.M.A.N Liaison
 -----------------------------------
 require("scripts/globals/roe")
 -----------------------------------

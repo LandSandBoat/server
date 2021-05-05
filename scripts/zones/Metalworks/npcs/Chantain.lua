@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
---   NPC: Chantain
+--  NPC: Chantain
 -- Type: Consulate Representative
 -- !pos 21.729 -17 -30.888 237
 -----------------------------------

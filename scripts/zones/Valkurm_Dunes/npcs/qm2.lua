@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Valkurm Dunes
--- NPC:  qm2 (???)
+--  NPC: qm2 (???)
 -- Involved In Quest: Messenger from Beyond
 -- !pos -716 -10 66 103
 -----------------------------------

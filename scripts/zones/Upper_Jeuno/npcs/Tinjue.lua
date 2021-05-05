@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
---   NPC: Tinjue
+--  NPC: Tinjue
 -- Type: Past Event Watcher
 -- !pos -73.790 -1 148.181 244
 -----------------------------------

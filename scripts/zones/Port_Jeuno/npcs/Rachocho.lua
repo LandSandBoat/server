@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
---   NPC: Rachocho
+--  NPC: Rachocho
 -- Type: Standard NPC
 -- !pos 3.789 7 -59.411 246
 -----------------------------------

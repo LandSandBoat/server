@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
---   NPC: Migliorozz
+--  NPC: Migliorozz
 -- Type: Standard NPC
 -- !pos -37.760 -2.499 12.924 244
 -----------------------------------

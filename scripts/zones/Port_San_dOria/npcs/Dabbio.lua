@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Dabbio
+--  NPC: Dabbio
 -- Type: Standard NPC
 -- !pos -7.819 -15 -106.990 232
 -----------------------------------

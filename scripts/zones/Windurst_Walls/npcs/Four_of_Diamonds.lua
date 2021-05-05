@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
---   NPC: Four of Diamonds
+--  NPC: Four of Diamonds
 -- Type: Standard NPC
 -- !pos -187.184 -3.545 151.092 239
 -----------------------------------

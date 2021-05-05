@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
---   NPC: Sodragamm
+--  NPC: Sodragamm
 -- Type: Item Deliverer
 -- !pos -24.741 -1 -64.944 234
 -----------------------------------

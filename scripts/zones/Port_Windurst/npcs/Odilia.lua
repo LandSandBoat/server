@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Odilia
+--  NPC: Odilia
 -- Type: Standard NPC
 -- !pos 78.801 -6 118.653 240
 -----------------------------------

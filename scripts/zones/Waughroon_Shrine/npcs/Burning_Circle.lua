@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Waughroon Shrine
--- NPC:  Burning Circle
+--  NPC: Burning Circle
 -- Waughroon Shrine Burning Circle
 -- !pos -345 104 -260 144
 -----------------------------------
