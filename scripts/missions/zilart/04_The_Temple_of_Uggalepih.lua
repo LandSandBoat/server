@@ -47,16 +47,16 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    mission:event(7)
+                    return mission:event(7)
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    mission:event(8)
+                    return mission:event(8)
                 end,
 
                 [8] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
-                    mission:complete()
+                    mission:complete(player)
                 end,
             },
         },

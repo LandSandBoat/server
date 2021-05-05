@@ -2,6 +2,17 @@
 -- Headstone Pilgrimage
 -- Zilart M5
 -----------------------------------
+-- Cermet Headstones:
+-- Behemoth's Dominion   - Lightning - !pos -74 -4 -87 127
+-- Cape Teriggan         - Wind      - !pos -107 -8 450 113
+-- Cloister of Frost     - Ice       - !pos 566 0 606 203
+-- La Theine Plateau     - Water     - !pos -170 39 -504 102
+-- Sanctuary of Zi'Tah   - Light     - !pos 235 0 280 121
+-- Western Altepa Desert - Earth     - !pos -108 10 -216 125
+-- Yuntunga Jungle       - Fire      - !pos 491 20 301 123
+-- Additional Dialogue:
+-- Gilgamesh                         - !pos 122.452 -9.009 -12.052 252
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')
@@ -104,7 +115,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.LIGHTNING_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(behemothsDominionID.text.FOUND_ALL_FRAGS, xi.ki.LIGHTNING_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(behemothsDominionID.text.KEYITEM_OBTAINED, xi.ki.LIGHTNING_FRAGMENT)
                         end
@@ -140,7 +151,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.WIND_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(capeTerigganID.text.FOUND_ALL_FRAGS, xi.ki.WIND_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(capeTerigganID.text.KEYITEM_OBTAINED, xi.ki.WIND_FRAGMENT)
                         end
@@ -180,7 +191,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.ICE_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(cloisterOfFrostID.text.FOUND_ALL_FRAGS, xi.ki.ICE_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(cloisterOfFrostID.text.KEYITEM_OBTAINED, xi.ki.ICE_FRAGMENT)
                         end
@@ -211,7 +222,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.WATER_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(laTheinePlateauID.text.FOUND_ALL_FRAGS, xi.ki.WATER_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(laTheinePlateauID.text.KEYITEM_OBTAINED, xi.ki.WATER_FRAGMENT)
                         end
@@ -247,7 +258,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.LIGHT_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(sanctuaryOfZitahID.text.FOUND_ALL_FRAGS, xi.ki.LIGHT_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(sanctuaryOfZitahID.text.KEYITEM_OBTAINED, xi.ki.LIGHT_FRAGMENT)
                         end
@@ -287,7 +298,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.EARTH_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(westernAltepaID.text.FOUND_ALL_FRAGS, xi.ki.EARTH_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(westernAltepaID.text.KEYITEM_OBTAINED, xi.ki.EARTH_FRAGMENT)
                         end
@@ -313,7 +324,7 @@ mission.sections =
                         player:addKeyItem(xi.ki.FIRE_FRAGMENT)
                         if hasAllFragments(player) then
                             player:messageSpecial(yuhtungaJungleID.text.FOUND_ALL_FRAGS, xi.ki.FIRE_FRAGMENT)
-                            mission:complete()
+                            mission:complete(player)
                         else
                             player:messageSpecial(yuhtungaJungleID.text.KEYITEM_OBTAINED, xi.ki.FIRE_FRAGMENT)
                         end
@@ -336,6 +347,7 @@ mission.sections =
     -- Section: Mission has been Completed
     {
         check = function(player, currentMission, missionStatus, vars)
+            -- Note: This is triggered after completing the active section as well, need to find a workaround
             return player:hasCompletedMission(mission.areaId, mission.missionId)
         end,
 

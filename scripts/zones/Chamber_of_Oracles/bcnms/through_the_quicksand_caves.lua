@@ -32,10 +32,6 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
-    if csid == 32001 and player:getCurrentMission(ZILART) == xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES then
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CHAMBER_OF_ORACLES)
-    end
 end
 
 return battlefield_object

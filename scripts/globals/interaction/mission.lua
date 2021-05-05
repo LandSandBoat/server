@@ -24,7 +24,7 @@ function Mission.getVarPrefix(areaId, missionId)
 end
 
 function Mission:getCheckArgs(player)
-    return { player:getCurrentMission(self.areaId), player:getMissionStatus(self.areaId, self.missionId) }
+    return { player:getCurrentMission(self.areaId), player:getMissionStatus(self.areaId) }
 end
 
 -----------------------------

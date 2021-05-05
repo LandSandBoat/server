@@ -71,5 +71,7 @@ return {
     "scripts/missions/zilart/03_Kazhams_Chieftainess",
     "scripts/missions/zilart/04_The_Temple_of_Uggalepih",
     "scripts/missions/zilart/05_Headstone_Pilgrimage",
+    "scripts/missions/zilart/06_Through_the_Quicksand_Caves",
+    "scripts/missions/zilart/07_The_Chamber_of_Oracles",
 
 }
