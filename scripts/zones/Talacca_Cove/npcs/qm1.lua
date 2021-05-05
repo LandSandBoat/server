@@ -2,7 +2,6 @@
 -- Area: Talacca_Cove
 --  NPC: ??? (corsair job flag quest)
 -----------------------------------
------------------------------------
 local ID = require("scripts/zones/Talacca_Cove/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------

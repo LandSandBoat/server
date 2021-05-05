@@ -4,8 +4,6 @@
 -- Type: Mog Tablet
 -- !pos 1.000 -1 0.000 243
 -----------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

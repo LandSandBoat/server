@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
--- NPC : Abeaule
+--  NPC: Abeaule
 -- Starts and Finishes Quest: The Trader in the Forest, The Medicine Woman
 -- !pos -136 -2 56 231
 -----------------------------------
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
     elseif medicineWoman == QUEST_ACCEPTED then
         if not player:hasKeyItem(xi.ki.COLD_MEDICINE) then
             player:showText(npc, ID.text.ABEAULE_DIALOG_HOME)
-        else 
+        else
             player:startEvent(614)
         end
     else

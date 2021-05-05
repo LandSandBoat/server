@@ -2,7 +2,6 @@
 -- Area: Ru'Lude Gardens
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

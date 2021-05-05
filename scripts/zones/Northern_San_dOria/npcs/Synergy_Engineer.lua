@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Synergy Engineer
+--  NPC: Synergy Engineer
 -- Type: Standard NPC
 -- !pos -123.000 10.5 244.000 231
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,6 @@
 -- Area: Al Zahbi
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Arnau
---  Involved in Mission: Save the Children
+-- Involved in Mission: Save the Children
 -- !pos 148 0 139 231
 -----------------------------------
 require("scripts/globals/missions")

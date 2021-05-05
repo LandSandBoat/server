@@ -2,7 +2,6 @@
 -- Area: Port Bastok
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

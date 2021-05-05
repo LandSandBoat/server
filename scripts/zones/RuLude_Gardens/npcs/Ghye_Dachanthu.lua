@@ -4,7 +4,6 @@
 -- Type: Item Deliverer
 -- !pos -62.789 11.999 -25.959 243
 -----------------------------------
------------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
 -----------------------------------
 local entity = {}
