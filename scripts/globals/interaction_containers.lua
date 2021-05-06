@@ -30,11 +30,11 @@ return {
 
     -- Jeuno
     "scripts/quests/jeuno/Axe_the_Competition",
-    "scripts/quests/jeuno/Blessed_Radiance",
-    "scripts/quests/jeuno/Blighted_Gloom",
+ --   "scripts/quests/jeuno/Blessed_Radiance", -- Requires Adventuring Fellow Support
+ --   "scripts/quests/jeuno/Blighted_Gloom", -- Requires Adventuring Fellow Support
     "scripts/quests/jeuno/Hook_Line_and_Sinker",
-    "scripts/quests/jeuno/Mixed_Signals",
-    "scripts/quests/jeuno/Regaining_Trust",
+ --   "scripts/quests/jeuno/Mixed_Signals", -- Requires Adventuring Fellow Support
+ --   "scripts/quests/jeuno/Regaining_Trust", -- Requires Adventuring Fellow Support
  --   "scripts/quests/jeuno/Unlocking_a_Myth", This needs to move, and does not follow quest format
 
     -- Other Areas
