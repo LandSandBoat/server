@@ -299,7 +299,7 @@ local hunts =
     [430] = { bounty = 20, fee =   0 }, -- Antican Proconsul
     [431] = { bounty = 20, fee =   0 }, -- Antican Praefectus
     [432] = { bounty = 20, fee =   0 }, -- Antican Tribunus
-    [433] = { bounty = 20, fee =   0 }, -- Sabotender Bailarina
+    [433] = { bounty = 20, fee =   0 }, -- Sabotender Bailarin
     [434] = { bounty = 25, fee =   0 }, -- Tribunus VII-I
     [435] = { bounty = 30, fee =   0 }, -- Nussknacker
     [436] = { bounty = 30, fee =   0 }, -- Triarius X-XV
