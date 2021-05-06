@@ -326,7 +326,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-                          (target:hasStatusEffect(xi.effect.TOO_HIGH) and not wsParams.hitsHigh)
+                          (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
     calcParams.sneakApplicable = attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK) and
                                  (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or
                                  target:hasStatusEffect(xi.effect.DOUBT))
@@ -1119,7 +1119,7 @@ function getMultiAttacks(attacker, target, numHits)
 
         if i == 1 then
             attacker:delStatusEffect(xi.effect.ASSASSINS_CHARGE)
-            attacker:delStatusEffect(xi.effect.WARRIOR_S_CHARGE)
+            attacker:delStatusEffect(xi.effect.WARRIORS_CHARGE)
 
             -- recalculate DA/TA/QA rate
             doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100

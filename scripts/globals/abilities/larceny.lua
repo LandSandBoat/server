@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.LARCENY, 6, 0, 5)
+    -- player:addStatusEffect(xi.effect.LARCENY, 6, 0, 5) -- TODO: implement xi.effect.LARCENY
 end
 
 return ability_object

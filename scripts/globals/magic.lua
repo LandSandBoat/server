@@ -484,7 +484,7 @@ function getEffectResistance(target, effect)
         effectres = xi.mod.SLOWRES
     elseif effect == xi.effect.STUN then
         effectres = xi.mod.STUNRES
-    elseif effect == xi.effect.CHARM then
+    elseif effect == xi.effect.CHARM_I or effect == xi.effect.CHARM_II then
         effectres = xi.mod.CHARMRES
     elseif effect == xi.effect.AMNESIA then
         effectres = xi.mod.AMNESIARES
@@ -571,7 +571,7 @@ function getSpellBonusAcc(caster, target, spell, params)
         -- NIN Job Point: Ninjitsu Accuracy Bonus
         if skill == xi.skill.NINJUTSU then
             magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end        
+        end
     end
 
     if casterJob == xi.job.BLU then

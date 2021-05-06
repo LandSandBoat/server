@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.LIBRA, 20, 1, 1)
+    -- player:addStatusEffect(xi.effect.LIBRA, 20, 1, 1) -- TODO: implement xi.effect.LIBRA
 end
 
 return ability_object

@@ -16,7 +16,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local merits = player:getMerit(xi.merit.WARRIORS_CHARGE)
-    player:addStatusEffect(xi.effect.WARRIOR_S_CHARGE, merits-5, 0, 60)
+    player:addStatusEffect(xi.effect.WARRIORS_CHARGE, merits-5, 0, 60)
 end
 
 return ability_object

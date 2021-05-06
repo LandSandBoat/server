@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60)
+    -- player:addStatusEffect(xi.effect.CONTRADANCE, 19, 1, 60) -- TODO: implement xi.effect.CONTRADANCE
 end
 
 return ability_object

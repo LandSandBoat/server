@@ -462,7 +462,7 @@ function MobFinalAdjustments(dmg, mob, skill, target, attackType, damageType, sh
     end
 
     --handle pd
-    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.TOO_HIGH) )
+    if ((target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) )
             and attackType== xi.attackType.PHYSICAL) then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0

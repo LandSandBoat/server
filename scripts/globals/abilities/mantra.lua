@@ -20,7 +20,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
     target:addStatusEffect(xi.effect.MAX_HP_BOOST, merits, 0, 180)
 
-    return xi.effect.MANTRA
+    -- return xi.effect.MANTRA -- TODO: implement xi.effect.MANTRA
 end
 
 return ability_object
