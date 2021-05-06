@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Martin
+--  NPC: Martin
 -- Type: Standard NPC
 -----------------------------------
 local entity = {}

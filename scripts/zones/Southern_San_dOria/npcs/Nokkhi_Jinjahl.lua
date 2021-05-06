@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern San d'Oria
---   NPC: Nokkhi Jinjahl
+--  NPC: Nokkhi Jinjahl
 -- Type: Travelling Merchant NPC / NPC Quiver Maker / San d'Oria 1st Place
 -- !pos 23 2 -13 230
 -----------------------------------

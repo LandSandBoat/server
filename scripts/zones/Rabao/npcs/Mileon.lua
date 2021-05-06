@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Rabao
---   NPC: Mileon
+--  NPC: Mileon
 -- Type: Lucky Roll Gambler
 -- !pos 26.080 8.201 65.297 247
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

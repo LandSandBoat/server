@@ -1,5 +1,5 @@
 -----------------------------------
--- xi.effect.SHININY_RUBY
+-- xi.effect.SHINING_RUBY
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

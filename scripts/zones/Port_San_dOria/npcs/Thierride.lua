@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Thierride
+--  NPC: Thierride
 -- Type: Quest Giver
 -- !pos -67 -5 -28 232
 -----------------------------------

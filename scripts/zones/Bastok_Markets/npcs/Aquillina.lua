@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Aquillina
+--  NPC: Aquillina
 -- Starts & Finishes Repeatable Quest: A Flash In The Pan
 -- Note: Reapeatable server-wide every 15 minutes.
 -- !pos -97 -5 -81 235

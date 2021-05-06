@@ -1,9 +1,9 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Defliaa
---  Type: Quest NPC and Shop NPC
---  Involved with Quest: 'All the Way to the Bank'
---  !pos 43 2 -113 256
+-- Type: Quest NPC and Shop NPC
+-- Involved with Quest: 'All the Way to the Bank'
+-- !pos 43 2 -113 256
 -----------------------------------
 local ID = require("scripts/zones/Western_Adoulin/IDs")
 require("scripts/globals/keyitems")

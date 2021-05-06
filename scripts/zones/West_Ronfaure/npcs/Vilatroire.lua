@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: West Ronfaure
--- NPC: Vilatroire
+--  NPC: Vilatroire
 -- Involved in Quests: "Introduction To Teamwork", "Intermediate Teamwork",
 -- "Advanced Teamwork"
 -- !pos -260.361 -70.999 423.420 100

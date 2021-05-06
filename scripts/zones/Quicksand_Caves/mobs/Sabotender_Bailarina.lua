@@ -7,7 +7,7 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.hunts.checkHunt(mob, player, 433)
+    xi.hunts.checkHunt(mob, player, 438)
 end
 
 return entity

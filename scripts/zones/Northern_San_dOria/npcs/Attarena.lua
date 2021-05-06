@@ -1,7 +1,7 @@
 -----------------------------------
---      Area: Northern San d'Oria
---      NPC: Attarena
---      Only sells when San d'Oria controlls Li'Telor Region
+-- Area: Northern San d'Oria
+--  NPC: Attarena
+-- Only sells when San d'Oria controlls Li'Telor Region
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/events/harvest_festivals")

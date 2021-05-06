@@ -40,7 +40,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-                          (target:hasStatusEffect(xi.effect.TOO_HIGH) and not wsParams.hitsHigh)
+                          (target:hasStatusEffect(xi.effect.ALL_MISS) and not wsParams.hitsHigh)
 
     calcParams.sneakApplicable = false
     calcParams.taChar = taChar

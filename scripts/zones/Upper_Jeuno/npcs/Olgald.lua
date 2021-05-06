@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Upper Jeuno
---   NPC: Olgald
+--  NPC: Olgald
 -- Type: Standard NPC
 -- !pos -53.072 -1 103.380 244
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

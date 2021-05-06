@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis
--- NPC:  Brazier
+--  NPC: Brazier
 -- Involved in Quests: Save my Sister
 -- !pos 101 -33 -59 195 (F-9)
 -- !pos 259 -33 99 195 (H-7)

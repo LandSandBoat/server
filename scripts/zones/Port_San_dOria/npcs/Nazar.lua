@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Nazar
+--  NPC: Nazar
 -- Type: Standard NPC
 -----------------------------------
 local entity = {}

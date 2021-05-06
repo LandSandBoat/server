@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
---  NPC:  qm3 (???) (Tower 3)
+--  NPC: qm3 (???) (Tower 3)
 -- Involved in Quest: THF AF "As Thick As Thieves"
 -- !pos 417.121 15.598 -137.466 120
 -----------------------------------

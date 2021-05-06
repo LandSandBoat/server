@@ -1,7 +1,7 @@
 -----------------------------------
--- Area:  Castle Oztroja
--- NPC:   _47i (Handle)
--- Notes: Opens door _471
+-- Area: Castle Oztroja
+--  NPC: _47i (Handle)
+-- Note: Opens door _471
 -- !pos -182 -15 -19 151
 -----------------------------------
 local CASTLE_OZTROJA = require("scripts/zones/Castle_Oztroja/globals")

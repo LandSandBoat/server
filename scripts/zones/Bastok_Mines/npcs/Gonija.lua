@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Mines
---   NPC: Gonija
+--  NPC: Gonija
 -- Type: Chocobo Breeder
 -- !pos 28 0 -105 234
 -----------------------------------

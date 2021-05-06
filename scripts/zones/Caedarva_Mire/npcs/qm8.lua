@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Caedarva Mire
--- NPC:  qm8
+--  NPC: qm8
 -- Gives Lamian Fang Key
 -----------------------------------
 local ID = require("scripts/zones/Caedarva_Mire/IDs")

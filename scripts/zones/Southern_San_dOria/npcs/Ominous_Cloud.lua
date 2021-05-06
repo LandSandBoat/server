@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern Sandoria
---   NPC: Ominous Cloud
+--  NPC: Ominous Cloud
 -- Type: Ninjutsu Toolbag Maker
 -- !pos -41.550 1.999 -2.845 230
 -----------------------------------

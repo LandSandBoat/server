@@ -44,7 +44,7 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier)
         atk100 = atkMultiplier,
         atk200 = atkMultiplier,
         atk300 = atkMultiplier,
-    
+
         bonusTP = player:getMod(xi.mod.JUMP_TP_BONUS),
         targetTPMult = tpMultiplier,
         hitsHigh = true,
@@ -348,7 +348,7 @@ xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
         -- Under Spirit Surge, High Jump reduces TP of target
         target:delTP(damage * 0.2)
     end
-    
+
     return damage
 end
 
@@ -395,7 +395,7 @@ xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
 end
 
 xi.job_utils.dragoon.useSpiritBond = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SPIRIT_BOND, 14, 0, 60)
+    -- player:addStatusEffect(xi.effect.SPIRIT_BOND, 14, 0, 60) -- TODO: implement xi.effect.SPIRIT_BOND
 end
 
 xi.job_utils.dragoon.useSpiritJump = function(player, target, ability, action)

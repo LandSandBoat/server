@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.MAJESTY, 7, 0, 180)
+    -- player:addStatusEffect(xi.effect.MAJESTY, 7, 0, 180) -- TODO: implement xi.effect.MAJESTY
 end
 
 return ability_object

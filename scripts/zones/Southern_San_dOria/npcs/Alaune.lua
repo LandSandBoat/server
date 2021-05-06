@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern San d`Oria
---   NPC: Alaune
+--  NPC: Alaune
 -- Type: Tutorial NPC
 -- !pos -90 1 -56 230
 -----------------------------------

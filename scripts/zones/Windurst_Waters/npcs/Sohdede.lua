@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Sohdede
+--  NPC: Sohdede
 -- Type: Standard NPC
 -- !pos -60.601 -7.499 111.639 238
 -----------------------------------

@@ -2,7 +2,6 @@
 -- Area: Bastok Mines
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

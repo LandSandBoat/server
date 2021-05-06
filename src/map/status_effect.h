@@ -641,7 +641,7 @@ enum EFFECT
     EFFECT_FAST_CAST               = 574,
     EFFECT_GESTATION               = 575,
     EFFECT_DOUBT                   = 576, // Bully: Intimidation Enfeeble status
-    EFFECT_CAIT_SITH_S_FAVOR       = 577,
+    EFFECT_CAIT_SITHS_FAVOR        = 577,
     EFFECT_FISHY_INTUITION         = 578,
     EFFECT_COMMITMENT              = 579,
     EFFECT_GEO_HASTE               = 580,

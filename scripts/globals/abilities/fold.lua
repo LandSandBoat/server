@@ -29,7 +29,7 @@ ability_object.onUseAbility = function(player, target, ability)
         target:resetRecast(xi.recast.ABILITY, 193)
     end
 
-    return xi.effect.FOLD
+    -- return xi.effect.FOLD -- TODO: implement xi.effect.FOLD
 end
 
 return ability_object

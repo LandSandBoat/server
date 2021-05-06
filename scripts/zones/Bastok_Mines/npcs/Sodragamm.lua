@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Bastok Mines
---   NPC: Sodragamm
+--  NPC: Sodragamm
 -- Type: Item Deliverer
 -- !pos -24.741 -1 -64.944 234
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 -----------------------------------

@@ -2,7 +2,6 @@
 -- Area: Port Jeuno
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

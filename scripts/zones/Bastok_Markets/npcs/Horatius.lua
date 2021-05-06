@@ -1,8 +1,8 @@
 -----------------------------------
---  Area: Bastok Markets
---  NPC:  Horatius
---  Type: Quest Giver
---  Starts and Finishes: Breaking Stones
+-- Area: Bastok Markets
+--  NPC: Horatius
+-- Type: Quest Giver
+-- Starts and Finishes: Breaking Stones
 -- !pos -158 -6 -117 235
 -----------------------------------
 require("scripts/globals/npc_util")

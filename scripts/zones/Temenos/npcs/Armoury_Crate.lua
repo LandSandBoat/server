@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Temenos
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/limbus")

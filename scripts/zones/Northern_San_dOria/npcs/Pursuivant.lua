@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Pursuivant
+--  NPC: Pursuivant
 -- Type: Standard NPC
 -- !pos 54.000 -1.199 11.937 231
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: LaLoff_Amphitheater
--- NPC:  Shimmering Circle (BCNM Exits)
+--  NPC: Shimmering Circle (BCNM Exits)
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

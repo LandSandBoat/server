@@ -26,7 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     duration = 60
 
     isEnfeeble = true
-    typeEffect = xi.effect.NAME
+    typeEffect = xi.effect.CHARM_I
     statmod = xi.mod.INT
 
     resist = applyPlayerResistance(mob, typeEffect, target, isEnfeeble, typeEffect, statmod)

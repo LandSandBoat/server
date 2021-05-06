@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Abyssea_Altepa
--- NPC:Mheca Khetashipah
+--  NPC: Mheca Khetashipah
 -- Standard Info NPC
 -----------------------------------
 local entity = {}

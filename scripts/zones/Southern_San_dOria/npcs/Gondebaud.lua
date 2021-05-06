@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern San d'Oria
--- NPC: Gondebaud
+--  NPC: Gondebaud
 -- Trust NPC
 -- !pos 123.754 0.000 92.125 230
 -----------------------------------

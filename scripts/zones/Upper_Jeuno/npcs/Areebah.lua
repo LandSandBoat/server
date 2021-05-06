@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Upper Jeuno
--- NPC: Areebah
+--  NPC: Areebah
 -- Standard Merchant NPC
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")

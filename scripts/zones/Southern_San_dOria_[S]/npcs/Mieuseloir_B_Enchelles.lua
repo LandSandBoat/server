@@ -2,7 +2,6 @@
 -- Area: Southern SandOria [S]
 --  NPC: Miuseloir B Enchelles
 -- !pos 120 0 104 80
------------------------------------
 ------------------------------------
 local entity = {}
 

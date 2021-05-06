@@ -5,6 +5,7 @@
 --
 -----------------------------------
 require('scripts/globals/settings')
+require('scripts/globals/common')
 -----------------------------------
 
 xi = xi or {}
@@ -398,29 +399,28 @@ xi.zone =
 }
 
 xi.expansionRegion = xi.expansionRegion or {}
-xi.expansionRegion.ORIGINAL_ROTZ =
-{
-    [xi.region.RONFAURE]        = true,
-    [xi.region.ZULKHEIM]        = true,
-    [xi.region.NORVALLEN]       = true,
-    [xi.region.GUSTABERG]       = true,
-    [xi.region.DERFLAND]        = true,
-    [xi.region.SARUTABARUTA]    = true,
-    [xi.region.KOLSHUSHU]       = true,
-    [xi.region.ARAGONEU]        = true,
-    [xi.region.FAUREGANDI]      = true,
-    [xi.region.VALDEAUNIA]      = true,
-    [xi.region.QUFIMISLAND]     = true,
-    [xi.region.LITELOR]         = true,
-    [xi.region.KUZOTZ]          = true,
-    [xi.region.VOLLBOW]         = true,
-    [xi.region.ELSHIMOLOWLANDS] = true,
-    [xi.region.ELSHIMOUPLANDS]  = true,
-    [xi.region.SANDORIA]        = true,
-    [xi.region.BASTOK]          = true,
-    [xi.region.WINDURST]        = true,
-    [xi.region.JEUNO]           = true,
-    [xi.region.DYNAMIS]         = true
+xi.expansionRegion.ORIGINAL_ROTZ = set{
+    xi.region.RONFAURE,
+    xi.region.ZULKHEIM,
+    xi.region.NORVALLEN,
+    xi.region.GUSTABERG,
+    xi.region.DERFLAND,
+    xi.region.SARUTABARUTA,
+    xi.region.KOLSHUSHU,
+    xi.region.ARAGONEU,
+    xi.region.FAUREGANDI,
+    xi.region.VALDEAUNIA,
+    xi.region.QUFIMISLAND,
+    xi.region.LITELOR,
+    xi.region.KUZOTZ,
+    xi.region.VOLLBOW,
+    xi.region.ELSHIMOLOWLANDS,
+    xi.region.ELSHIMOUPLANDS,
+    xi.region.SANDORIA,
+    xi.region.BASTOK,
+    xi.region.WINDURST,
+    xi.region.JEUNO,
+    xi.region.DYNAMIS,
 }
 
 -----------------------------------

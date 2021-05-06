@@ -1,7 +1,7 @@
 -----------------------------------
--- Area:  Misareaux Coast
+-- Area: Misareaux Coast
 --  NPC: Dilapidated Gate
---  Notes: Entrance to Misareaux Coast
+-- Note: Entrance to Misareaux Coast
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------

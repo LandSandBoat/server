@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Gulemont
+--  NPC: Gulemont
 -- Type: Quest Giver
 -- !pos -69 -5 -38 232
 -----------------------------------

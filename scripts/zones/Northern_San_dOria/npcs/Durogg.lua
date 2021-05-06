@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Durogg
+--  NPC: Durogg
 -- Type: Past Event Watcher
 -- !pos 15 0 -18 231
 -----------------------------------

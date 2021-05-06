@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.BOUNTY_SHOT, 11, 1, 30)
+    -- target:addStatusEffect(xi.effect.BOUNTY_SHOT, 11, 1, 30) -- TODO: implement xi.effect.BOUNTY_SHOT
 end
 
 return ability_object

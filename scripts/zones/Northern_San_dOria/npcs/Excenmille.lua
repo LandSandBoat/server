@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Excenmille
+--  NPC: Excenmille
 -- Type: Trust NPC, Ballista Pursuivant
 -- !pos -229.344 6.999 22.976 231
 -----------------------------------

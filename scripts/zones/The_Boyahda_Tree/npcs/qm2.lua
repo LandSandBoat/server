@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Boyahda Tree
--- NPC: qm2 (???)
+--  NPC: qm2 (???)
 -- Involved in Quest: Searching for the Right Words
 -- !pos 34.651 -20.183 -61.647 153
 -----------------------------------

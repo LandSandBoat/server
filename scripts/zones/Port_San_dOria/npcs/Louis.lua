@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port San d'Oria
---   NPC: Louis
+--  NPC: Louis
 -- Type: Standard NPC
 -----------------------------------
 local entity = {}

@@ -4,7 +4,6 @@
 -- Type: Standard Dialogue NPC
 -- !pos -37.292 -2.000 -6.817 231
 -----------------------------------
------------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 local entity = {}

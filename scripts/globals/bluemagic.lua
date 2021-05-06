@@ -62,7 +62,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- TODO: Under Azure Lore.
 
     -----------------------------------
-    -- Calculate the final D value  -
+    -- Calculate the final D value
     -----------------------------------
     -- worked out from http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     -- Final D value ??= floor(D+fSTR+WSC) * Multiplier
@@ -243,7 +243,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
 end
 
 -----------------------------------
--- Utility functions below ---
+-- Utility functions below
 -----------------------------------
 
 function BlueGetWsc(attacker, params)

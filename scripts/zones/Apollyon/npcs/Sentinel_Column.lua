@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Appolyon
--- NPC:  Sentinel_Column
+--  NPC: Sentinel_Column
 -- !pos 643 0 -609 38
 -----------------------------------
 local entity = {}

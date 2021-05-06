@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Horlais Peak
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/bcnm")

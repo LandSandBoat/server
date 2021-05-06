@@ -1,10 +1,10 @@
 -----------------------------------
---  Area: Western Adoulin
+-- Area: Western Adoulin
 --  NPC: Chanteillie
---  Type: Standard NPC and Quest NPC
---  Involved with Quests: 'Do Not Go Into the Light'
---                        'Vegetable Vegetable Crisis'
---  !pos 89 0 -75 256
+-- Type: Standard NPC and Quest NPC
+-- Involved with Quests: 'Do Not Go Into the Light'
+--                       'Vegetable Vegetable Crisis'
+-- !pos 89 0 -75 256
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")

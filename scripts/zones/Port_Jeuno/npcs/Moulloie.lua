@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Port Jeuno
---   NPC: Moulloie
+--  NPC: Moulloie
 -- Type: Standard NPC
 -- !pos -77.724 7.003 59.044 246
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local entity = {}
 
