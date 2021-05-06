@@ -68,7 +68,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(63) -- Not goten the dish from Valgeir.
+                    return quest:progressEvent(63) -- Not goten the dish from Valgeir.
                 end,
             },
         },
@@ -146,7 +146,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(63) -- Not goten the dish from Valgeir.
+                    return quest:progressEvent(63) -- Not goten the dish from Valgeir.
                 end,
             },
         },
@@ -198,6 +198,23 @@ quest.sections =
                     player:setCharVar("ExpertiseCompYear", VanadielYear())        -- Completition year of Expertise quest.
                     player:delKeyItem(xi.ki.LAND_CRAB_BISQUE)                     -- Give Land Crab Bisque from Valgeir.
                     quest:complete(player)
+                end,
+            },
+        },
+    },
+
+    -- Section: Quest completed. Change default message for Take.
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE
+        end,
+
+        [xi.zone.MHAURA] =
+        {
+            ['Take'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:replaceDefault(64) -- Default message after clompleting Expertise quest and before accepting The Clue quest.
                 end,
             },
         },

@@ -126,6 +126,23 @@ quest.sections =
             },
         },
     },
+
+    -- Section: Quest completed. Change default message for Rycharde.
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE
+        end,
+
+        [xi.zone.MHAURA] =
+        {
+            ['Rycharde'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:replaceDefault(89) -- Default message after clompleting this quest and before accepting The Clue quest.
+                end,
+            },
+        },
+    },
 }
 
 return quest

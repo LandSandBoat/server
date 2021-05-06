@@ -86,7 +86,7 @@ quest.sections =
         },
     },
 
-    -- Section: Talk with Rycharde if you declined. Get quest (or decline again).
+    -- Section: (OPTIONAL) Talk with Rycharde if you declined. Get quest (or decline again).
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 3
@@ -140,6 +140,23 @@ quest.sections =
                     player:setCharVar("RychardeTheChefCompDay", VanadielDayOfTheYear()) -- Used for next quest wait time.
                     player:setCharVar("RychardeTheChefCompYear", VanadielYear())        -- Used for next quest wait time.
                     player:confirmTrade()
+                end,
+            },
+        },
+    },
+
+        -- Section: Quest completed. Change default message for Rycharde.
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR) == QUEST_AVAILABLE
+        end,
+
+        [xi.zone.MHAURA] =
+        {
+            ['Rycharde'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:replaceDefault(75) -- Default message after clompleting this quest and before accepting His name is Valgeir quest.
                 end,
             },
         },

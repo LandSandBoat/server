@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Mhaura
--- NPC: Numi Adaligo
+--  NPC: Numi Adaligo
 -----------------------------------
 -- Used in: scripts/quests/otherAreas/Rycharde_the_Chef.lua
 -----------------------------------

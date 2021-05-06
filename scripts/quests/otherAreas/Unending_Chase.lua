@@ -44,9 +44,9 @@ quest.sections =
             {
                 [82] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
+                    player:setCharVar("WayOfTheCookCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
+                    player:setCharVar("WayOfTheCookCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
                     if option == 77 then -- Accept quest option.
-                        player:setCharVar("WayOfTheCookCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
-                        player:setCharVar("WayOfTheCookCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
                         quest:begin(player)
                     end
                 end,
@@ -54,7 +54,7 @@ quest.sections =
         },
     },
 
-    -- Section: Quest available but rejected.
+    -- Section: (OPTIONAL) Quest available but rejected.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and vars.Prog == 1
@@ -65,7 +65,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                        return quest:event(84, xi.items.PUFFBALL) -- Unending Chase starting event.
+                    return quest:event(84, xi.items.PUFFBALL) -- Unending Chase starting event.
                 end,
             },
 
@@ -73,8 +73,6 @@ quest.sections =
             {
                 [84] = function(player, csid, option, npc)
                     if option == 78 then -- Accept quest option.
-                        player:setCharVar("WayOfTheCookCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
-                        player:setCharVar("WayOfTheCookCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
                         quest:begin(player)
                     end
                 end,
