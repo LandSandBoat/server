@@ -32,9 +32,6 @@ zone_object.onZoneIn = function(player, prevZone)
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(333.017, -44.896, -458.35, 164)
     end
-    if (player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and player:getMissionStatus(xi.mission.log_id.ZILART) == 1) then
-        cs = 51
-    end
 
     return cs
 end
@@ -77,10 +74,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 41 and option ~= 0) then
         player:setCharVar("skyShortcut", 1)
-    elseif (csid == 51) then
-        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
     end
 end
 

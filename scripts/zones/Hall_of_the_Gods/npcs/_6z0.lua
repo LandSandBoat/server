@@ -15,13 +15,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if not player:hasKeyItem(xi.ki.CERULEAN_CRYSTAL) then
-        player:startEvent(1)
+        player:startEvent(1) -- NOTE: This CS onEventFinish is handled by ZM10 mission script
     else
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL then
-            player:startEvent(4) -- Zilart CS.
-        else
-            player:startEvent(2)
-        end
+        player:startEvent(2)
     end
 end
 
@@ -29,15 +25,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 1 and player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION then
-        player:addTitle(xi.title.SEALER_OF_THE_PORTAL_OF_THE_GODS)
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS)
-    elseif csid == 4 then
-        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_GATE_OF_THE_GODS)
-    end
 end
 
 return entity

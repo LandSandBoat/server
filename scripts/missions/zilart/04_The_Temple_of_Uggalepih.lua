@@ -47,7 +47,9 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    return mission:event(7)
+                    if player:getLocalVar("battlefieldWin") == 128 then
+                        return mission:event(7)
+                    end
                 end,
 
                 [7] = function(player, csid, option, npc)

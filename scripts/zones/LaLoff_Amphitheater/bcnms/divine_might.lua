@@ -31,6 +31,11 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
+
+        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.ARK_ANGELS then
+            player:setLocalVar("battlefieldWin", battlefield:getID())
+        end
+
         local arg8 = (player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)) and 1 or 0
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 180, battlefield:getLocalVar("[cs]bit"), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
@@ -45,15 +50,6 @@ battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED then
             player:setCharVar("DivineMight", 2) -- Used to use 2 to track completion, so that's preserved to maintain compatibility
-            for i = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
-                player:addKeyItem(i)
-                player:messageSpecial(ID.text.KEYITEM_OBTAINED, i)
-            end
-            if player:getCurrentMission(ZILART) == xi.mission.id.zilart.ARK_ANGELS then
-                player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-                player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_SEALED_SHRINE)
-                player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-            end
         elseif player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.MOONLIGHT_ORE) then
             player:setCharVar("DivineMight", 2)
         end

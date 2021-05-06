@@ -3,7 +3,7 @@
 -- Quests
 -----------------------------------
 
--- TODO: Auto-generate this based on xi.quest.area, create two separate functions to handle missions/quests
+-- TODO: Auto-generate this based on xi.quest.area, xi.mission.area and concatenate the return
 
 return {
 
@@ -65,7 +65,7 @@ return {
     "scripts/quests/hiddenQuests/AssaultRank_PFC",
     "scripts/quests/hiddenQuests/AssaultRank_SP",
 
-    -- Zilart Mission (test)
+    -- Zilart Mission
     "scripts/missions/zilart/01_The_New_Frontier",
     "scripts/missions/zilart/02_Welcome_tNorg",
     "scripts/missions/zilart/03_Kazhams_Chieftainess",
@@ -73,5 +73,10 @@ return {
     "scripts/missions/zilart/05_Headstone_Pilgrimage",
     "scripts/missions/zilart/06_Through_the_Quicksand_Caves",
     "scripts/missions/zilart/07_The_Chamber_of_Oracles",
-
+    "scripts/missions/zilart/08_Return_to_Delkfutts_Tower",
+    "scripts/missions/zilart/09_RoMaeve",
+    "scripts/missions/zilart/10_The_Temple_of_Desolation",
+    "scripts/missions/zilart/11_The_Hall_of_the_Gods",
+    "scripts/missions/zilart/12_The_Mithra_and_the_Crystal",
+    "scripts/missions/zilart/13_The_Gate_of_the_Gods",
 }

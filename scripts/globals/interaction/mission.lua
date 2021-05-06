@@ -35,7 +35,6 @@ function Mission:begin(player)
 end
 
 function Mission:complete(player)
-    -- TODO: Implement npcUtil.completeMission()
     local didComplete = npcUtil.completeMission(player, self.areaId, self.missionId, self.reward)
     if didComplete then
         self:cleanup(player)
