@@ -8,13 +8,14 @@ on:
       - reopened
   push:
     branches:
-      - release
-      - canary
+      - freedom
+      - allegedly-stable
+      - topaz
       - 'feature/**'
 
 jobs:
-  Linux_1804_Clang_9_64bit:
-    runs-on: ubuntu-18.04
+  Linux_2004_Clang_9_64bit:
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -32,8 +33,8 @@ jobs:
       run: |
         make -j $(nproc)
 
-  Linux_1804_GCC9_64bit:
-    runs-on: ubuntu-18.04
+  Linux_2004_GCC9_64bit:
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
