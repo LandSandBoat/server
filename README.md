@@ -23,15 +23,15 @@ Q: Will you review my PR Teo? Does this mean Teo is developer again? Or Lead dev
 
 A: No, No, and oh hell no. The most I will do for the freedom branch is check the reviews others have left. If a merged PR broke something, someone will have to PR a fix or PR a revert. Github makes this easy. https://github.blog/2014-06-24-introducing-the-revert-button/
 
-Q: what standards do reviewers hold PRs to?
+Q: What standards do reviewers hold PRs to?
 
-A: All code styling requirements from Topaz-Next are still valid, but if reviewers miss things its "Not Teo's problem". 
+A: All code styling requirements from Topaz-Next are still valid, but if reviewers miss things its "Not Teo's problem".
 
 Q: I need help! Is there anywhere I can ask questions besides the github issues?
 
 A: https://discord.gg/6EWFPxkZja
 
-Q: so..no discord then?
+Q: So..no discord then?
 
 A: not at this time, no. I hope to use Github's [discussions](https://github.com/DerpyProjectGroup/topaz/discussions) feature for anything outside teh scope of bugreporting for now. This may change in the future.
 
