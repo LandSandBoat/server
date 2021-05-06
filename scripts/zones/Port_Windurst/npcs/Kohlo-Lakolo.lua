@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
--- NPC: Kohlo-Lakolo
+--  NPC: Kohlo-Lakolo
 -- Invloved In Quests:
 -- Truth, Justice, and the Onion Way!,
 -- Know One's Onions,

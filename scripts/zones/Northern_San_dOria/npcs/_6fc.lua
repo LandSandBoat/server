@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Papal Chambers
---  Finish Mission: The Davoi Report
+-- Finish Mission: The Davoi Report
 -- !pos 131 -11 122 231
 -----------------------------------
 require("scripts/globals/missions")

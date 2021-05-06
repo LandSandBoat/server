@@ -2,7 +2,6 @@
 -- Area: Port San d'Oria
 --  NPC: Moogle
 -----------------------------------
------------------------------------
 require("scripts/globals/moghouse")
 -----------------------------------
 local entity = {}

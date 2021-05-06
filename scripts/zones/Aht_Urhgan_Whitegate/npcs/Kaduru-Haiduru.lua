@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Aht Urhgan Whitegate
--- NPC: Kaduru-Haiduru
+--  NPC: Kaduru-Haiduru
 -- Teleport NPC
 -----------------------------------
 require("scripts/globals/zone")

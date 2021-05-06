@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern San d'Oria
---   NPC: Hantileon
+--  NPC: Hantileon
 -- Type: VCS Chocobo Trainer
 -- !pos -2.675 -1.1 -105.287 230
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Balgas Dais
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -- Balgas Dais Burning Cicrcle Armoury Crate
 -----------------------------------
 require("scripts/globals/battlefield")

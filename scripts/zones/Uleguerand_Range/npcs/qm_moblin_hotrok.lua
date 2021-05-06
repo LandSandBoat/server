@@ -1,6 +1,6 @@
 -----------------------------------
---  Area: Uleguerand_Range
---   NPC: ??? (Trade Moblin Hotrok for Map of Uleguerand Range)
+-- Area: Uleguerand_Range
+--  NPC: ??? (Trade Moblin Hotrok for Map of Uleguerand Range)
 -- !pos -299 -62 -18
 -- Involved in Quests: Over The Hills And Far Away
 -----------------------------------

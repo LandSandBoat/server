@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Norg
--- NPC: Jaucribaix
+--  NPC: Jaucribaix
 -- Starts and Finishes Quest: Forge Your Destiny, The Sacred Katana, Yomi Okuri, A Thief in Norg!?, The Potential Within
 -- !pos 91 -7 -8 252
 -----------------------------------

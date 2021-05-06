@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: temenos
--- NPC:  Matter diffusion module
+--  NPC: Matter diffusion module
 -- !pos
 -----------------------------------
 require("scripts/globals/bcnm")

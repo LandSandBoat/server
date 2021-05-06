@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
---   NPC: Assai Nybaem
--- Type: NPC Voidwalker 
+--  NPC: Assai Nybaem
+-- Type: NPC Voidwalker
 -- !pos -32 0 -76 243
 -----------------------------------
 require("scripts/globals/voidwalker")

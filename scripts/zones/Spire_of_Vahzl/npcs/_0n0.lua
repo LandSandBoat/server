@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Spire of Vahzl
--- NPC:  Web of Recollection
+--  NPC: Web of Recollection
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

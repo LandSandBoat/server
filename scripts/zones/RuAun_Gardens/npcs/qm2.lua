@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
--- NPC:  ??? (Seiryu's Spawn)
+--  NPC: ??? (Seiryu's Spawn)
 -- Allows players to spawn the HNM Seiryu with a Gem of the East and a Springstone.
 -- !pos 569 -70 -80 130
 -----------------------------------

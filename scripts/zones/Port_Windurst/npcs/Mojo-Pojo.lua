@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Windurst
---   NPC: Mojo-Pojo
+--  NPC: Mojo-Pojo
 -- Type: Standard NPC
 -- !pos -108.041 -4.25 109.545 240
 -----------------------------------

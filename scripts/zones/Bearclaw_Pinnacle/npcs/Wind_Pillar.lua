@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bearclaw Pinnacle
--- NPC:  Wind Pillar
+--  NPC: Wind Pillar
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

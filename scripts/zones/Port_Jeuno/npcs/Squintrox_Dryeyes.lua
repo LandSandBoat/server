@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Jeuno
---   NPC: Squintrox Dryeyes
+--  NPC: Squintrox Dryeyes
 -- Type: Addon Mission Merchant
 -- !pos -100.071 -1 11.869 246
 -----------------------------------

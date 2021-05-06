@@ -1,9 +1,7 @@
 -----------------------------------
----  Shadow Spread
+-- Shadow Spread
+-- Description: A dark shroud renders any nearby targets blinded, asleep, and cursed.
 -----------------------------------
----  Description: A dark shroud renders any nearby targets blinded, asleep, and cursed.
------------------------------------
----------------------------------------------
 require("scripts/globals/monstertpmoves")
 require("scripts/globals/settings")
 require("scripts/globals/status")

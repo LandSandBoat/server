@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
--- NPC:  ??? (Genbu's Spawn)
+--  NPC: ??? (Genbu's Spawn)
 -- Allows players to spawn the HNM Genbu with a Gem of the North and a Winterstone.
 -- !pos 257 -70 517 130
 -----------------------------------

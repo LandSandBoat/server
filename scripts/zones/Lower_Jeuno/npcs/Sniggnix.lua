@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Lower Jeuno
---   NPC: Sniggnix
+--  NPC: Sniggnix
 -- Type: Standard NPC
 -- !pos -45.832 4.498 -135.029 245
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/keyitems")

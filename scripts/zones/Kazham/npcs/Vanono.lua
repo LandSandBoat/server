@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Kazham
---   NPC: Vanono
+--  NPC: Vanono
 -- Type: Standard NPC
 -- !pos -23.140 -5 -23.101 250
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
---   NPC: Dalba
+--  NPC: Dalba
 -- Type: Past Event Watcher
 -- !pos -174.101 -7 -19.611 236
 -----------------------------------

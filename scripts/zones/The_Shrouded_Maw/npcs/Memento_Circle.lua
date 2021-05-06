@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The_Shrouded_Maw
--- NPC:  MementoCircle
+--  NPC: MementoCircle
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

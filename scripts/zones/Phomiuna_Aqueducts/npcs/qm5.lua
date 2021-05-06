@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna Aqueducts
---   NPC: qm5 (???)
+--  NPC: qm5 (???)
 -- Notes: Opens door @ F-8 from behind
 -- !pos -65.512 -25.262 62.918 27
 -----------------------------------

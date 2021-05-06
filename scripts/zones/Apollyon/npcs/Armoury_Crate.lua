@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Apollyon
--- NPC:  Armoury Crate
+--  NPC: Armoury Crate
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")

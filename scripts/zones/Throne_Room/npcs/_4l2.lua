@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Throne Room
--- NPC:  Ore Door
+--  NPC: Ore Door
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

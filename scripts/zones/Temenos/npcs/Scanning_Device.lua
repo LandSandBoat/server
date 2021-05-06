@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Temenos
--- NPC:  Scanning_Device
+--  NPC: Scanning_Device
 -- !pos 586 0 66 37
 -----------------------------------
 require("scripts/globals/npc_util")

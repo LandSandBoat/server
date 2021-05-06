@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Pursuivant
+--  NPC: Pursuivant
 -- Type: Pursuivant
 -- !pos 113.971 -3.077 51.524 238
------------------------------------
--- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
 local entity = {}
 

@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Woods
---   NPC: Erpolant
+--  NPC: Erpolant
 -- Type: Standard NPC
 -- !pos -63.224 -0.749 -33.424 241
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local entity = {}
 

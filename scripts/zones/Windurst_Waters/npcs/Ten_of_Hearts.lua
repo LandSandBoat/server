@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Windurst Waters
---   NPC: Ten of Hearts
+--  NPC: Ten of Hearts
 -- Type: Standard NPC
 -- !pos -49.441 -5.909 226.524 238
------------------------------------
--- Auto-Script: Requires Verification (Verfied By Brawndo)
 -----------------------------------
 local entity = {}
 

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Throne Room
--- NPC:  Throne Room
+--  NPC: Throne Room
 -- Type: Door
 -- !pos -111 -6 0 165
 -----------------------------------

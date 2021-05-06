@@ -1,15 +1,13 @@
 -----------------------------------
------------------------------------
 -- Spell: Migawari: Ichi
 -- Nullifies a Death Blow for the Caster
 -- A Death Blow is, in general, Damage >= Max HP
 -- Threshold for negation is thought to be reduced
 -- by 1% for every 5 Ninjutsu Skill
------------------------------------
+--
 -- Effect Power: Damage Threshold %
 -- Effect Sub Power: Damage Reduction % (In this case, 100%)
 -----------------------------------
----------------------------------------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")

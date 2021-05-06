@@ -516,7 +516,8 @@ end
 -----------------------------------
 -- Temp item functions
 -----------------------------------
------------------------------------------------------------------------------------------------------
+
+-----------------------------------
 -- Desc: Returns an temp items id based on the the local variable i.e. npc:getLocalVariable("TEMP1").
 -----------------------------------
 local function getTempDrop(npc, tempNum)
@@ -576,7 +577,8 @@ end
 -----------------------------------
 -- Basic item functions
 -----------------------------------
-------------------------------------------------------------------------------------------------
+
+-----------------------------------
 -- Desc: Returns an items id based on the the local variable i.e. npc:getLocalVariable("ITEM1").
 -----------------------------------
 local function getChestItem(npc, slot)

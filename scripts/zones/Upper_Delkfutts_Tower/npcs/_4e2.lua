@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Upper Delkfutt's Tower
--- NPC:  Elevator
+--  NPC: Elevator
 -- !pos -294 -143 27 158
 -----------------------------------
 local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")

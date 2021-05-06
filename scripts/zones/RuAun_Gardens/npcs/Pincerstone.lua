@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
--- NPC:  Pincerstone
+--  NPC: Pincerstone
 -- NPCs which activates the blue teleports in sky
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")

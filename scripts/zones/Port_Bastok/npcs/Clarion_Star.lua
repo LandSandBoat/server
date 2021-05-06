@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
--- NPC: Clarion Star
+--  NPC: Clarion Star
 -- Trust NPC
 -- !pos 81.478 7.500 -24.169 236
 -----------------------------------

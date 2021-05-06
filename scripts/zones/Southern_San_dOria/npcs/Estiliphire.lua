@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Southern Sandoria
---   NPC: Estiliphire
+--  NPC: Estiliphire
 -- Type: Event Sideshow NPC
 -- !pos -41.550 1.999 -2.845 230
 -----------------------------------

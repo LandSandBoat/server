@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: AlTaieu
--- NPC:  Dimensional Portal
+--  NPC: Dimensional Portal
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------

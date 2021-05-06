@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Remnants
--- NPC: Slot
+--  NPC: Slot
 -- trade card to pop NM
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")

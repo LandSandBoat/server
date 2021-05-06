@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
--- NPC:  ??? (Spawn Olla Pequena)
+--  NPC: ??? (Spawn Olla Pequena)
 -- !pos 851 0.1 92 178
 -----------------------------------
 local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")

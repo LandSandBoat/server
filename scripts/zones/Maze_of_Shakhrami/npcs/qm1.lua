@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Maze of Shakhrami
--- NPC: ???
+--  NPC: ???
 -- Spawns Aroma Crawler - RSE Satchets
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")

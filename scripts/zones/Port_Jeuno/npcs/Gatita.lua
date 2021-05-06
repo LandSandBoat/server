@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Port Jeuno
---   NPC: Gatita
+--  NPC: Gatita
 -- Type: Standard NPC
 -- !pos -60.207 7.002 -59.143 246
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local entity = {}
 

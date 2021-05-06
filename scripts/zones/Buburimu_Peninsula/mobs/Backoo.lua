@@ -1,7 +1,7 @@
 -----------------------------------
--- Area:  Buburimu Peninsula (118)
--- NM:    Backoo
--- Notes: Spawns only from hours 06 to 16.
+-- Area: Buburimu Peninsula (118)
+--   NM: Backoo
+-- Note: Spawns only from hours 06 to 16.
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
 require("scripts/globals/hunts")

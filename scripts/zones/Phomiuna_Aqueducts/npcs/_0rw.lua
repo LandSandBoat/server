@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC: Oil Lamp - North (East)
+--  NPC: Oil Lamp - North (East)
 -- Opens Door at J-7 from inside.
 -- !pos 104 -26 83
 -----------------------------------

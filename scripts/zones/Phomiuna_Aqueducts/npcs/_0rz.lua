@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
--- NPC: Oil Lamp - Thunder (East)
+--  NPC: Oil Lamp - Thunder (East)
 -- !pos 104 -26 67
 -----------------------------------
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")

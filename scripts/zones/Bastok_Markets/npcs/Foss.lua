@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
--- NPC: Foss
+--  NPC: Foss
 -- Starts & Finishes Repeatable Quest: Buckets of Gold
 -- !pos -283 -12 -37 235
 -----------------------------------

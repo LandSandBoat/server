@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sacrificial Chamber
--- NPC:  Mahogany Door
+--  NPC: Mahogany Door
 -- !pos 299 0.1 349 163
 -----------------------------------
 require("scripts/globals/bcnm")

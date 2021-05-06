@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Bhaflau Thickets
---   NPC: Hamta-Iramta
+--  NPC: Hamta-Iramta
 -- Type: Alzadaal Undersea Ruins
 -- !pos -459.942 -20.048 -4.999 52
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

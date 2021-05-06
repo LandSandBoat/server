@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Shakir
+--  NPC: Shakir
 -- Type: Standard NPC
 -- !pos 48.952 -2.999 -16.687 231
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Metalworks
---   NPC: Topuru-Kuperu
+--  NPC: Topuru-Kuperu
 -- Type: Standard NPC
 -- !pos 28.284 -17.39 42.269 237
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

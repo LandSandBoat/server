@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna Aqueducts
---   NPC: qm6 (???)
+--  NPC: qm6 (???)
 -- Notes: Opens door @ J-8 from behind
 -- !pos 105.502 -25.262 57.138 27
 -----------------------------------

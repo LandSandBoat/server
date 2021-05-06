@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok (236)
--- NPC: Oggbi
+--  NPC: Oggbi
 -- Starts and Finishes: Ghosts of the Past, The First Meeting, The Walls of Your Mind
 -- !pos -159 -7 5 236
 -----------------------------------

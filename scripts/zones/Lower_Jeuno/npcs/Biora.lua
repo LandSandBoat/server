@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Lower Jeuno
---   NPC: Biora
+--  NPC: Biora
 -- Type: Map Viewer
 -- !pos -28.768 -2 -11.300 245
------------------------------------
--- Auto-Script: Requires Verification (Verfied by Brawndo)
 -----------------------------------
 local entity = {}
 

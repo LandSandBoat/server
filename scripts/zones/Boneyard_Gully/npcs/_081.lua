@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Boneyard_Gully
--- NPC:  _081 (Dark Miasma)
+--  NPC: _081 (Dark Miasma)
 -----------------------------------
 require("scripts/globals/bcnm")
 -----------------------------------

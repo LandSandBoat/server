@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
---   NPC: Nachou
+--  NPC: Nachou
 -- Type: Standard NPC
 -- !pos -39.965 -3.999 34.292 233
------------------------------------
--- Auto-Script: Requires Verification (Verified by Brawndo)
 -----------------------------------
 local entity = {}
 

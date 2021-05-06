@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Ordelle's Caves
--- NPC: ???
+--  NPC: ???
 -- Spawns Aroma Leech - RSE Satchets
 -----------------------------------
 local ID = require("scripts/zones/Ordelles_Caves/IDs")

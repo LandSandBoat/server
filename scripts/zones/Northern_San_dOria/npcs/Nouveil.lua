@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Northern San d'Oria
---   NPC: Nouveil
+--  NPC: Nouveil
 -- Type: General
 -- !pos 123 0 106 231
 -----------------------------------

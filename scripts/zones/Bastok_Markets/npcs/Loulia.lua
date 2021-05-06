@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
---   NPC: Loulia
+--  NPC: Loulia
 -- Type: Room Renters
 -- !pos -176.212 -9 -25.049 235
 -----------------------------------
