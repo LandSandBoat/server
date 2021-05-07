@@ -137,9 +137,10 @@ quest.sections =
             onEventFinish =
             {
                 [74] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:complete(player)
-                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Used for next quest wait time.
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                        quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Used for next quest wait time.
+                    end
                 end,
             },
         },

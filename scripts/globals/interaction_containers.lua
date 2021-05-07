@@ -40,13 +40,13 @@ return {
     -- Other Areas
     "scripts/quests/otherAreas/Confessions_of_a_Bellmaker",
     "scripts/quests/otherAreas/Missionary_Moblin",
-    "scripts/quests/otherAreas/Rycharde_the_Chef",
-    "scripts/quests/otherAreas/Way_of_the_Cook",
-    "scripts/quests/otherAreas/Unending_Chase",
-    "scripts/quests/otherAreas/His_Name_is_Valgeir",
-    "scripts/quests/otherAreas/Expertise",
-    "scripts/quests/otherAreas/The_Clue",
-    "scripts/quests/otherAreas/The_Basics",
+    "scripts/quests/otherAreas/RQ1_Rycharde_the_Chef",
+    "scripts/quests/otherAreas/RQ2_Way_of_the_Cook",
+    "scripts/quests/otherAreas/RQ3_Unending_Chase",
+    "scripts/quests/otherAreas/RQ4_His_Name_is_Valgeir",
+    "scripts/quests/otherAreas/RQ5_Expertise",
+    "scripts/quests/otherAreas/RQ6_The_Clue",
+    "scripts/quests/otherAreas/RQ7_The_Basics",
 
     -- Outlands
     "scripts/quests/outlands/Bugi_Soden",

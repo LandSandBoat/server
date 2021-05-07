@@ -117,9 +117,10 @@ quest.sections =
             onEventFinish =
             {
                 [88] = function(player, csid, option, npc)
-                    quest:complete(player)
-                    player:addExp(2000)
-                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
+                    if quest:complete(player) then
+                        player:addExp(2000)
+                        quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
+                    end
                 end,
             },
         },

@@ -117,9 +117,10 @@ quest.sections =
             onEventFinish =
             {
                 [92] = function(player, csid, option, npc)
-                    player:tradeComplete()
-                    quest:complete(player)
-                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
+                    if quest:complete(player) then
+                        player:tradeComplete()
+                        quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
+                    end
                 end,
             },
         },

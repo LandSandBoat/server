@@ -14,7 +14,6 @@ require("scripts/globals/titles")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mhauraID  = require("scripts/zones/Mhaura/IDs")
-local selbinaID = require("scripts/zones/Selbina/IDs")
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.EXPERTISE)
 local daysPassed = 0
@@ -192,10 +191,11 @@ quest.sections =
             onEventFinish =
             {
                 [62] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.LAND_CRAB_BISQUE)                     -- Give Land Crab Bisque from Valgeir.
-                    player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED + 1, xi.ki.LAND_CRAB_BISQUE)
-                    quest:complete(player)
-                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Completition day of Expertise quest.
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.LAND_CRAB_BISQUE) -- Give Land Crab Bisque from Valgeir.
+                        player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED + 1, xi.ki.LAND_CRAB_BISQUE) 
+                        quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Completition day of Expertise quest.
+                    end
                 end,
             },
         },

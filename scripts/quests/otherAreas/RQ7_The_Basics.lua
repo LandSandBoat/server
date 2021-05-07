@@ -13,7 +13,6 @@ require('scripts/globals/quests')
 require("scripts/globals/titles")
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local mhauraID  = require("scripts/zones/Mhaura/IDs")
 local selbinaID = require("scripts/zones/Selbina/IDs")
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_BASICS)
@@ -125,11 +124,12 @@ quest.sections =
             onEventFinish =
             {
                 [96] = function(player, csid, option, npc)
-                    player:tradeComplete()
-                    quest:complete(player)
-                    player:addExp(2000)
-                    quest:setVar(player, 'CommentaryValgeir', 1)
-                    quest:setVar(player, 'CommentaryRycharde', 1)
+                    if quest:complete(player) then
+                        player:tradeComplete()
+                        player:addExp(2000)
+                        quest:setVar(player, 'CommentaryValgeir', 1)
+                        quest:setVar(player, 'CommentaryRycharde', 1)
+                    end
                 end,
             },
         },

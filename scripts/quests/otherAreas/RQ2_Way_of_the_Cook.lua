@@ -97,19 +97,21 @@ quest.sections =
             onEventFinish =
             {
                 [80] = function(player, csid, option, npc)
-                    player:tradeComplete()
-                    player:addGil(GIL_RATE*1500)
-                    player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1500)
-                    quest:complete(player)
-                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
+                    if quest:complete(player) then
+                        player:tradeComplete()
+                        player:addGil(GIL_RATE*1500)
+                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1500)
+                        quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
+                    end
                 end,
 
                 [81] = function(player, csid, option, npc)
-                    player:tradeComplete()
-                    player:addGil(GIL_RATE*1000)
-                    player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1000)
-                    quest:complete(player)
-                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
+                    if quest:complete(player) then
+                        player:tradeComplete()
+                        player:addGil(GIL_RATE*1000)
+                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1000)
+                        quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
+                    end
                 end,
             },
         },
