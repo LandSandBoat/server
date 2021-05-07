@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Lower_Jeuno (245)
---
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/zones/Lower_Jeuno/globals")
@@ -52,11 +50,6 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if region:GetRegionID() == 1 then
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.AWAKENING and player:getMissionStatus(xi.mission.log_id.ZILART) < 2 then
-            player:startEvent(20)
-        end
-    end
 end
 
 zone_object.onGameHour = function(zone)
@@ -110,9 +103,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 20 then
-        player:setMissionStatus(xi.mission.log_id.ZILART, player:getMissionStatus(xi.mission.log_id.ZILART) + 2)
-    elseif csid == 10094 then
+    if csid == 10094 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THE_ECHO_AWAKENS)
     end

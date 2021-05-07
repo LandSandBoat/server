@@ -32,8 +32,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(234, 252)
     elseif player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
-    elseif (ZilartMission == xi.mission.id.zilart.AWAKENING) then
-        player:startEvent(177)
     elseif rovMission == xi.mission.id.rov.THE_PATH_UNTRAVELED then
         player:startEvent(263)
     end

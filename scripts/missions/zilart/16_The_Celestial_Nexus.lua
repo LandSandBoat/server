@@ -36,6 +36,7 @@ mission.sections =
                     if player:getLocalVar("battlefieldWin") == 320 then
                         mission:complete()
                     end
+                    player:setPos(0, -18, 137, 64, 251) -- Hall of the Gods
                 end,
             },
         },
