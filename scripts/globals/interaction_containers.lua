@@ -79,4 +79,6 @@ return {
     "scripts/missions/zilart/11_The_Hall_of_the_Gods",
     "scripts/missions/zilart/12_The_Mithra_and_the_Crystal",
     "scripts/missions/zilart/13_The_Gate_of_the_Gods",
+    "scripts/missions/zilart/14_Ark_Angels",
+    "scripts/missions/zilart/15_The_Sealed_Shrine"
 }

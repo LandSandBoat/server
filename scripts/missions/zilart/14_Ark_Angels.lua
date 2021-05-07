@@ -33,6 +33,17 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId
+        end,
+
+        [xi.zone.NORG] =
+        {
+            ['Gilgamesh'] = mission:event(171),
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 0
         end,
 

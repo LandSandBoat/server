@@ -25,11 +25,7 @@ entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART)
     local rovMission = player:getCurrentMission(ROV)
 
-    if (ZilartMission == xi.mission.id.zilart.ARK_ANGELS) then
-        player:startEvent(171)
-    elseif (ZilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS) then
-        player:startEvent(173);
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and player:getCharVar('Apoc_Nigh_RewardCS1') == 0 then
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
