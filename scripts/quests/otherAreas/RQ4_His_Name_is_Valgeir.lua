@@ -1,5 +1,6 @@
 -----------------------------------
 -- His Name is Valgeir
+-- Variable Prefix: [4][3]
 -----------------------------------
 -- Zone,    NPC,          POS
 -- Mhaura,  Rycharde,     !pos
@@ -20,7 +21,6 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_
 
 quest.reward =
 {
-    -- exp     = 2000,
     fame    = 120,
     gil     = 2000,
     keyItem = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
@@ -40,7 +40,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("UnendingChaseCompDay") + 2 < VanadielDayOfTheYear() or player:getCharVar("UnendingChaseCompYear") < VanadielYear() then
+                    if player:getCharVar("[4][2]DayCompleted") + 2 < VanadielUniqueDay() then
                         return quest:event(86) -- His Name is Valgeir starting event.
                     end
                 end,
@@ -50,10 +50,8 @@ quest.sections =
             {
                 [86] = function(player, csid, option, npc)
                     if option == 80 then -- Accept quest option.
-                        player:setCharVar("UnendingChaseCompDay", 0)  -- Delete previous quest (Unending Chase) variables
-                        player:setCharVar("UnendingChaseCompYear", 0) -- Delete previous quest (Unending Chase) variables
-                        player:addKeyItem(xi.ki.ARAGONEU_PIZZA) --give pizza to player
-                        player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED, xi.ki.ARAGONEU_PIZZA)
+                        player:setCharVar("[4][2]DayCompleted", 0)  -- Delete previous quest (Unending Chase) variables
+                        npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA)   --give pizza to player
                         quest:begin(player)
                     end
                 end,
@@ -93,7 +91,7 @@ quest.sections =
             {
                 [100] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.ARAGONEU_PIZZA)
-                    player:messageSpecial(selbinaID.text.KEYITEM_LOST, xi.ki.ARAGONEU_PIZZA)
+                    player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.ARAGONEU_PIZZA)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
@@ -119,9 +117,9 @@ quest.sections =
             onEventFinish =
             {
                 [88] = function(player, csid, option, npc)
-                    player:setCharVar("HisNameIsValgeirCompDay", VanadielDayOfTheYear()) -- Set completition day of quest.
-                    player:setCharVar("HisNameIsValgeirCompYear", VanadielYear())        -- Set completition year of quest.
                     quest:complete(player)
+                    player:addExp(2000)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
                 end,
             },
         },

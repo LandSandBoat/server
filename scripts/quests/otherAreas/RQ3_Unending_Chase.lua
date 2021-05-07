@@ -1,5 +1,6 @@
 -----------------------------------
 -- Unending Chase
+-- Variable Prefix: [4][2]
 -----------------------------------
 -- Zone,   NPC,          POS
 -- Mhaura, Rycharde,     !pos 
@@ -34,7 +35,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("WayOfTheCookCompDay") + 7 < VanadielDayOfTheYear() or player:getCharVar("WayOfTheCookCompYear") < VanadielYear() then
+                    if player:getCharVar("[4][1]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(82, xi.items.PUFFBALL) -- Unending Chase starting event.
                     end
                 end,
@@ -44,8 +45,7 @@ quest.sections =
             {
                 [82] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:setCharVar("WayOfTheCookCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
-                    player:setCharVar("WayOfTheCookCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
+                    player:setCharVar("[4][1]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
                     if option == 77 then -- Accept quest option.
                         quest:begin(player)
                     end
@@ -105,9 +105,8 @@ quest.sections =
             {
                 [83] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:setCharVar("UnendingChaseCompDay", VanadielDayOfTheYear()) -- Set completition day of quest.
-                    player:setCharVar("UnendingChaseCompYear", VanadielYear())        -- Set completition year of quest.
                     quest:complete(player)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
                 end,
             },
         },

@@ -1,5 +1,6 @@
 -----------------------------------
 -- The Basics
+-- Variable Prefix: [4][6]
 -----------------------------------
 -- Zone,    NPC,          POS
 -- Mhaura,  Rycharde,     !pos
@@ -20,7 +21,6 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_
 
 quest.reward =
 {
-    -- exp     = 2000,
     fame    = 120,
     item    = xi.items.TEA_SET,
     title   = xi.title.FIVESTAR_PURVEYOR,
@@ -40,7 +40,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("TheClueCompDay") + 7 < VanadielDayOfTheYear() or player:getCharVar("TheClueCompYear") < VanadielYear() then
+                    if player:getCharVar("[4][5]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(94) -- Quest starting event.
                     end
                 end,
@@ -50,10 +50,8 @@ quest.sections =
             {
                 [94] = function(player, csid, option, npc)
                     if option == 85 then -- Accept quest option.
-                        player:setCharVar("TheClueCompDay", 0)  -- Delete previous quest (The clue) variables.
-                        player:setCharVar("TheClueCompYear", 0) -- Delete previous quest (The clue) variables.
-                        player:addKeyItem(xi.ki.MHAURAN_COUSCOUS) -- Give Key Item to player.
-                        player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED, xi.ki.MHAURAN_COUSCOUS)
+                        player:setCharVar("[4][5]DayCompleted", 0)  -- Delete previous quest (The clue) variables.
+                        npcUtils:giveKeyItem(player, xi.ki.MHAURAN_COUSCOUS) -- Give Key Item to player.
                         quest:begin(player)
                     end
                 end,
@@ -94,7 +92,7 @@ quest.sections =
                 [106] = function(player, csid, option, npc)
                     npcUtil.giveItem(player, xi.items.BAKED_POPOTO)
                     player:delKeyItem(xi.ki.MHAURAN_COUSCOUS)
-                    player:messageSpecial(selbinaID.text.KEYITEM_LOST, xi.ki.MHAURAN_COUSCOUS)
+                    player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.MHAURAN_COUSCOUS)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
@@ -129,8 +127,9 @@ quest.sections =
                 [96] = function(player, csid, option, npc)
                     player:tradeComplete()
                     quest:complete(player)
-                    player:setCharVar("TheBasicsCommentaryValgeir", 1)
-                    player:setCharVar("TheBasicsCommentaryRycharde", 1)
+                    player:addExp(2000)
+                    quest:setVar(player, 'CommentaryValgeir', 1)
+                    quest:setVar(player, 'CommentaryRycharde', 1)
                 end,
             },
         },
@@ -147,7 +146,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("TheBasicsCommentaryRycharde") == 1 then
+                    if vars.CommentaryRycharde == 1 then
                         return quest:event(97) -- Optional dialog.
                     else
                         return quest:replaceDefault(98) -- Default message after clompleting this quest.
@@ -165,7 +164,7 @@ quest.sections =
             onEventFinish =
             {
                 [97] = function(player, csid, option, npc)
-                    player:setCharVar("TheBasicsCommentaryRycharde", 0)
+                    quest:setVar(player, 'CommentaryRycharde', 0)
                 end,
             },
         },
@@ -175,7 +174,7 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("TheBasicsCommentaryValgeir") == 1 then
+                    if vars.CommentaryValgeir == 1 then
                         return quest:event(107) -- Optional dialog.
                     -- else
                         -- return quest:replaceDefault(140) -- Default message after clompleting this quest. TODO: Investigate if this is truly the one. This one is already the default.
@@ -186,7 +185,7 @@ quest.sections =
             onEventFinish =
             {
                 [107] = function(player, csid, option, npc)
-                    player:setCharVar("TheBasicsCommentaryValgeir", 0)
+                    quest:setVar(player, 'CommentaryValgeir', 0)
                 end,
             },
         },

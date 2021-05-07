@@ -1,5 +1,6 @@
 -----------------------------------
 -- The Clue
+-- Variable Prefix: [4][5]
 -----------------------------------
 -- Zone,   NPC,          POS
 -- Mhaura, Rycharde,     !pos 
@@ -34,7 +35,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("ExpertiseCompDay") + 7 < VanadielDayOfTheYear() or player:getCharVar("ExpertiseCompYear") < VanadielYear() then
+                    if player:getCharVar("[4][4]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(90, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
                     end
                 end,
@@ -44,8 +45,7 @@ quest.sections =
             {
                 [90] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:setCharVar("ExpertiseCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
-                    player:setCharVar("ExpertiseCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
+                    player:setCharVar("[4][4]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
                     if option == 83 then -- Accept quest option.
                         quest:begin(player)
                     end
@@ -118,9 +118,8 @@ quest.sections =
             {
                 [92] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:setCharVar("TheClueCompDay", VanadielDayOfTheYear()) -- Set completition day of quest.
-                    player:setCharVar("TheClueCompYear", VanadielYear())        -- Set completition year of quest.
                     quest:complete(player)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
                 end,
             },
         },

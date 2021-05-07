@@ -14,7 +14,6 @@ zones[xi.zone.SELBINA] =
         ITEM_OBTAINED           = 6389, -- Obtained: <item>.
         GIL_OBTAINED            = 6390, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6392, -- Obtained key item: <keyitem>.
-        KEYITEM_LOST            = 6393, -- Obtained key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL     = 6394, -- You do not have enough gil.
         CARRIED_OVER_POINTS     = 6428, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 6429, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>

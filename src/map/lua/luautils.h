@@ -164,6 +164,7 @@ namespace luautils
     uint32 VanadielDayOfTheWeek();  // Gets day of the week (Fire Earth Water Wind Ice Lightning Light Dark)
     uint32 VanadielYear();          // Gets the current Vanadiel Year
     uint32 VanadielMonth();         // Gets the current Vanadiel Month
+    uint32 VanadielUniqueDay();     // Gets the unique day number. (Vanadiel year * 360 + VanadielDayOfTheYear)
     uint8  VanadielDayElement();    // Gets element of the day (1: fire, 2: ice, 3: wind, 4: earth, 5: thunder, 6: water, 7: light, 8: dark)
     uint32 VanadielMoonPhase();     // Gets the current Vanadiel Moon Phase
     uint8  VanadielMoonDirection(); // Gets the current Vanadiel Moon Phasing direction (waxing, waning, neither)

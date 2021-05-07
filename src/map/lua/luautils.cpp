@@ -861,6 +861,27 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     *   Return Vanadiel Unique Day                                          *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 VanadielUniqueDay()
+    {
+        TracyZoneScoped;
+
+        int32 day;
+        int32 month;
+        int32 year;
+
+        day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        month = CVanaTime::getInstance()->getMonth();
+        year  = CVanaTime::getInstance()->getYear();
+
+        return (year * 360) + (month * 30 - 30) + day;
+    }
+
+    /************************************************************************
+     *                                                                       *
      *   Return Vanadiel Day of Year                                         *
      *                                                                       *
      ************************************************************************/

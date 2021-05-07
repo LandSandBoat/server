@@ -1,5 +1,6 @@
 -----------------------------------
 -- Expertise
+-- Variable Prefix: [4][4]
 -----------------------------------
 -- Zone,    NPC,     POS
 -- Mhaura,  Take,    !pos
@@ -40,7 +41,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("HisNameIsValgeirCompDay") + 8 < VanadielDayOfTheYear() or player:getCharVar("HisNameIsValgeirCompYear") < VanadielYear() then
+                    if player:getCharVar("[4][3]DayCompleted") + 8 < VanadielUniqueDay() then
                         return quest:event(61) -- Quest starting event.
                     end
                 end,
@@ -49,8 +50,7 @@ quest.sections =
             onEventFinish =
             {
                 [61] = function(player, csid, option, npc)
-                    player:setCharVar("HisNameIsValgeirCompDay", 0) -- Delete Variable
-                    player:setCharVar("HisNameIsValgeirCompYear", 0)  -- Delete Variable
+                    player:setCharVar("[4][3]DayCompleted", 0) -- Delete Variable
                     quest:begin(player)
                 end,
             },
@@ -127,8 +127,8 @@ quest.sections =
             {
                 [103] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
-                    player:setCharVar("ExpertiseHourStarted", VanadielHour())
-                    player:setCharVar("ExpertiseDayStarted", VanadielDayOfTheYear())
+                    quest:setVar(player, 'HourStarted', VanadielHour())
+                    quest:setVar(player, 'Started', VanadielDayOfTheYear())
                     player:confirmTrade()
                 end,
             },
@@ -156,8 +156,8 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    daysPassed = VanadielDayOfTheYear() - player:getCharVar("ExpertiseDayStarted")
-                    hoursLeft  = 24 - VanadielHour() - (daysPassed * 24) + player:getCharVar("ExpertiseHourStarted")
+                    daysPassed = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
+                    hoursLeft  = 24 - VanadielHour() - (daysPassed * 24) + quest:getVar(player, "HourStarted")
                     if hoursLeft < 0 then -- Done waiting
                         return quest:event(105) -- Get food.
                     end
@@ -168,8 +168,6 @@ quest.sections =
             {
                 [105] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 3)
-                    player:setCharVar("ExpertiseHourStarted", 0) -- Delete Variable
-                    player:setCharVar("ExpertiseDayStarted", 0)  -- Delete Variable
                     npcUtil.giveKeyItem(player, xi.ki.LAND_CRAB_BISQUE)
                 end,
             },
@@ -194,10 +192,10 @@ quest.sections =
             onEventFinish =
             {
                 [62] = function(player, csid, option, npc)
-                    player:setCharVar("ExpertiseCompDay", VanadielDayOfTheYear()) -- Completition day of Expertise quest.
-                    player:setCharVar("ExpertiseCompYear", VanadielYear())        -- Completition year of Expertise quest.
                     player:delKeyItem(xi.ki.LAND_CRAB_BISQUE)                     -- Give Land Crab Bisque from Valgeir.
+                    player:messageSpecial(mhauraID.text.KEYITEM_OBTAINED + 1, xi.ki.LAND_CRAB_BISQUE)
                     quest:complete(player)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Completition day of Expertise quest.
                 end,
             },
         },

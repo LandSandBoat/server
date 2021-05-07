@@ -1,5 +1,6 @@
 -----------------------------------
--- Rycharde the Chef
+-- Way of the Cook
+-- Variable Prefix: [4][1]
 -----------------------------------
 -- Zone,   NPC,          POS
 -- Mhaura, Rycharde,     !pos 
@@ -36,7 +37,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("RychardeTheChefCompDay") + 7 < VanadielDayOfTheYear() or player:getCharVar("RychardeTheChefCompYear") < VanadielYear() then
+                    if player:getCharVar("[4][0]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
                     else
                         return quest:event(75) -- nothing to do
@@ -48,10 +49,9 @@ quest.sections =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
-                        player:setCharVar("RychardeTheChefCompDay", 0)  -- Delete previous quest (Rycharde the Chef) variables
-                        player:setCharVar("RychardeTheChefCompYear", 0) -- Delete previous quest (Rycharde the Chef) variables
-                        player:setCharVar("WayOfTheCookHourStarted", VanadielHour())        -- Set current quest started variables
-                        player:setCharVar("WayOfTheCookDayStarted", VanadielDayOfTheYear()) -- Set current quest started variables
+                        player:setCharVar("[4][0]DayCompleted", 0)         -- Delete previous quest (Rycharde the Chef) variables
+                        quest:setVar('HourStarted', VanadielHour())        -- Set current quest started variables
+                        quest:setVar('DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
                         quest:begin(player)
                     end
                 end,
@@ -70,8 +70,8 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                        daysPassed     = VanadielDayOfTheYear() - player:getCharVar("WayOfTheCookDayStarted")
-                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + player:getCharVar("WayOfTheCookHourStarted")
+                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
+                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
 
                         if totalHoursLeft > 0 then
                             return quest:event(78, totalHoursLeft) -- You have x hours left.
@@ -82,8 +82,8 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP}) then
-                        daysPassed     = VanadielDayOfTheYear() - player:getCharVar("WayOfTheCookDayStarted")
-                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + player:getCharVar("WayOfTheCookHourStarted")
+                        daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
+                        totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
 
                         if totalHoursLeft > 0 then
                             return quest:event(80) -- Quest completed in time.
@@ -98,24 +98,18 @@ quest.sections =
             {
                 [80] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:setCharVar("WayOfTheCookHourStarted", 0) -- Delete current quest started variables
-                    player:setCharVar("WayOfTheCookDayStarted", 0)  -- Delete current quest started variables
-                    player:setCharVar("WayOfTheCookCompDay", VanadielDayOfTheYear()) -- Set completition day of WAY_OF_THE_COOK quest.
-                    player:setCharVar("WayOfTheCookCompYear", VanadielYear())        -- Set completition day of WAY_OF_THE_COOK quest.
                     player:addGil(GIL_RATE*1500)
                     player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1500)
                     quest:complete(player)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                 end,
 
                 [81] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:setCharVar("WayOfTheCookHourStarted", 0) -- Delete current quest started variables
-                    player:setCharVar("WayOfTheCookDayStarted", 0)  -- Delete current quest started variables
-                    player:setCharVar("WayOfTheCookCompDay", VanadielDayOfTheYear()) -- Set completition day of WAY_OF_THE_COOK quest.
-                    player:setCharVar("WayOfTheCookCompYear", VanadielYear())        -- Set completition day of WAY_OF_THE_COOK quest.
                     player:addGil(GIL_RATE*1000)
                     player:messageSpecial(mhauraID.text.GIL_OBTAINED, GIL_RATE*1000)
                     quest:complete(player)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                 end,
             },
         },

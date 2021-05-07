@@ -1,5 +1,6 @@
 -----------------------------------
 -- Rycharde the Chef
+-- Variable Prefix: [4][0]
 -----------------------------------
 -- Zone,   NPC,          POS
 -- Mhaura, Rycharde,     !pos 
@@ -136,10 +137,9 @@ quest.sections =
             onEventFinish =
             {
                 [74] = function(player, csid, option, npc)
-                    quest:complete(player)
-                    player:setCharVar("RychardeTheChefCompDay", VanadielDayOfTheYear()) -- Used for next quest wait time.
-                    player:setCharVar("RychardeTheChefCompYear", VanadielYear())        -- Used for next quest wait time.
                     player:confirmTrade()
+                    quest:complete(player)
+                    quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Used for next quest wait time.
                 end,
             },
         },
