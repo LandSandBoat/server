@@ -2,9 +2,9 @@
 -- His Name is Valgeir
 -- Variable Prefix: [4][3]
 -----------------------------------
--- Zone,    NPC,          POS
--- Mhaura,  Rycharde,     !pos
--- Selbina, Valgeir,      !pos
+-- ZONE,    NPC,      POS
+-- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
+-- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 require('scripts/globals/items')
 require("scripts/globals/keyitems")
@@ -40,7 +40,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("[4][2]DayCompleted") + 2 < VanadielUniqueDay() then
+                    if player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() then
                         return quest:event(86) -- His Name is Valgeir starting event.
                     end
                 end,
@@ -50,7 +50,7 @@ quest.sections =
             {
                 [86] = function(player, csid, option, npc)
                     if option == 80 then -- Accept quest option.
-                        player:setCharVar("[4][2]DayCompleted", 0)  -- Delete previous quest (Unending Chase) variables
+                        player:setCharVar("Quest[4][2]DayCompleted", 0)  -- Delete previous quest (Unending Chase) variables
                         npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA)   --give pizza to player
                         quest:begin(player)
                     end
@@ -62,7 +62,7 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == QUEST_ACCEPTED  and vars.Prog == 0
         end,
 
         [xi.zone.MHAURA] =
@@ -137,7 +137,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:replaceDefault(89) -- Default message after clompleting this quest and before accepting The Clue quest.
+                    return quest:event(89):replaceDefault() -- Default message after clompleting this quest and before accepting The Clue quest.
                 end,
             },
         },

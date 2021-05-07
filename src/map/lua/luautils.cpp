@@ -185,6 +185,7 @@ namespace luautils
         set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
         set_function("vanadielYear", &luautils::VanadielYear);
         set_function("vanadielMonth", &luautils::VanadielMonth);
+        set_function("vanadielUniqueDay", &luautils::VanadielUniqueDay);
         set_function("vanadielDayElement", &luautils::VanadielDayElement);
         set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
         set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);

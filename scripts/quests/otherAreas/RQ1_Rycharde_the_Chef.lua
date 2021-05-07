@@ -2,10 +2,10 @@
 -- Rycharde the Chef
 -- Variable Prefix: [4][0]
 -----------------------------------
--- Zone,   NPC,          POS
--- Mhaura, Rycharde,     !pos 
--- Mhaura, Take,         !pos 
--- Mhaura, Numi Adaligo, !pos 
+-- ZONE,    NPC,         POS
+-- Mhaura,  Rycharde,    !pos  17.451 -16.000 88.815 249
+-- Mhaura,  Take,        !pos  20.616  -8.000 69.757 249
+-- Mhaura, Numi Adaligo, !pos -80.332 -24.050 34.794 249
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -157,7 +157,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:replaceDefault(75) -- Default message after clompleting this quest and before accepting His name is Valgeir quest.
+                    return quest:event(75):replaceDefault() -- Default message after clompleting this quest and before accepting His name is Valgeir quest.
                 end,
             },
         },

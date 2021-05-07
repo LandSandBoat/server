@@ -2,8 +2,8 @@
 -- Way of the Cook
 -- Variable Prefix: [4][1]
 -----------------------------------
--- Zone,   NPC,          POS
--- Mhaura, Rycharde,     !pos 
+-- ZONE,    NPC,      POS
+-- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -37,10 +37,8 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("[4][0]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
-                    else
-                        return quest:event(75) -- nothing to do
                     end
                 end,
             },
@@ -49,9 +47,9 @@ quest.sections =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
-                        player:setCharVar("[4][0]DayCompleted", 0)         -- Delete previous quest (Rycharde the Chef) variables
-                        quest:setVar('HourStarted', VanadielHour())        -- Set current quest started variables
-                        quest:setVar('DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
+                        player:setCharVar("Quest[4][0]DayCompleted", 0)         -- Delete previous quest (Rycharde the Chef) variables
+                        quest:setVar(player, 'HourStarted', VanadielHour())        -- Set current quest started variables
+                        quest:setVar(player, 'DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
                         quest:begin(player)
                     end
                 end,

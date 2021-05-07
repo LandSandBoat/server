@@ -2,9 +2,9 @@
 -- The Basics
 -- Variable Prefix: [4][6]
 -----------------------------------
--- Zone,    NPC,          POS
--- Mhaura,  Rycharde,     !pos
--- Selbina, Valgeir,      !pos
+-- ZONE,    NPC,      POS
+-- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
+-- Selbina, Valgeir,  !pos 57.496 -15.273 20.229 248
 -----------------------------------
 require('scripts/globals/items')
 require("scripts/globals/keyitems")
@@ -39,7 +39,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("[4][5]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if player:getCharVar("Quest[4][5]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(94) -- Quest starting event.
                     end
                 end,
@@ -49,8 +49,8 @@ quest.sections =
             {
                 [94] = function(player, csid, option, npc)
                     if option == 85 then -- Accept quest option.
-                        player:setCharVar("[4][5]DayCompleted", 0)  -- Delete previous quest (The clue) variables.
-                        npcUtils:giveKeyItem(player, xi.ki.MHAURAN_COUSCOUS) -- Give Key Item to player.
+                        player:setCharVar("Quest[4][5]DayCompleted", 0)  -- Delete previous quest (The clue) variables.
+                        npcUtil.giveKeyItem(player, xi.ki.MHAURAN_COUSCOUS) -- Give Key Item to player.
                         quest:begin(player)
                     end
                 end,
@@ -61,7 +61,7 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == QUEST_ACCEPTED and vars.Prog == 0
         end,
 
         [xi.zone.MHAURA] =
@@ -110,7 +110,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(97) -- Commentary.
+                    return quest:progressEvent(95) -- Commentary.
                 end,
 
                 onTrade = function(player, npc, trade)
@@ -133,6 +133,16 @@ quest.sections =
                 end,
             },
         },
+
+        [xi.zone.SELBINA] =
+        {
+            ['Valgeir'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(145)
+                end,
+            },
+        },
     },
 
     -- Section: Quest completed.
@@ -146,10 +156,10 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if vars.CommentaryRycharde == 1 then
+                    if quest:getVar(player, 'CommentaryRycharde') == 1 then
                         return quest:event(97) -- Optional dialog.
                     else
-                        return quest:replaceDefault(98) -- Default message after clompleting this quest.
+                        return quest:event(98):replaceDefault() -- Default message after clompleting this quest.
                     end
                 end,
             },
@@ -157,7 +167,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:replaceDefault(67) -- Default message after clompleting this quest.
+                    return quest:event(67):replaceDefault() -- Default message after clompleting this quest.
                 end,
             },
 
@@ -174,10 +184,10 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    if vars.CommentaryValgeir == 1 then
+                    if quest:getVar(player, 'CommentaryValgeir') == 1 then
                         return quest:event(107) -- Optional dialog.
-                    -- else
-                        -- return quest:replaceDefault(140) -- Default message after clompleting this quest. TODO: Investigate if this is truly the one. This one is already the default.
+                    else
+                        return quest:event(146):replaceDefault() -- Default message after clompleting this quest.
                     end
                 end,
             },

@@ -2,9 +2,9 @@
 -- Expertise
 -- Variable Prefix: [4][4]
 -----------------------------------
--- Zone,    NPC,     POS
--- Mhaura,  Take,    !pos
--- Selbina, Valgeir, !pos
+-- ZONE,    NPC,     POS
+-- Mhaura,  Take,    !pos 20.616  -8.000 69.757 249
+-- Selbina, Valgeir, !pos 57.496 -15.273 20.229 248
 -----------------------------------
 require('scripts/globals/items')
 require("scripts/globals/keyitems")
@@ -40,7 +40,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("[4][3]DayCompleted") + 8 < VanadielUniqueDay() then
+                    if player:getCharVar("Quest[4][3]DayCompleted") + 8 < VanadielUniqueDay() then
                         return quest:event(61) -- Quest starting event.
                     end
                 end,
@@ -49,7 +49,7 @@ quest.sections =
             onEventFinish =
             {
                 [61] = function(player, csid, option, npc)
-                    player:setCharVar("[4][3]DayCompleted", 0) -- Delete Variable
+                    player:setCharVar("Quest[4][3]DayCompleted", 0) -- Delete Variable
                     quest:begin(player)
                 end,
             },
@@ -59,7 +59,7 @@ quest.sections =
     -- Section: Quest accepeted. Ask Valgeir to cook.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == QUEST_ACCEPTED  and vars.Prog == 0
         end,
 
         [xi.zone.MHAURA] =
@@ -127,7 +127,7 @@ quest.sections =
                 [103] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                     quest:setVar(player, 'HourStarted', VanadielHour())
-                    quest:setVar(player, 'Started', VanadielDayOfTheYear())
+                    quest:setVar(player, 'DayStarted', VanadielDayOfTheYear())
                     player:confirmTrade()
                 end,
             },
@@ -159,6 +159,8 @@ quest.sections =
                     hoursLeft  = 24 - VanadielHour() - (daysPassed * 24) + quest:getVar(player, "HourStarted")
                     if hoursLeft < 0 then -- Done waiting
                         return quest:event(105) -- Get food.
+                    else
+                        return quest:event(141)
                     end
                 end,
             },
@@ -199,6 +201,16 @@ quest.sections =
                 end,
             },
         },
+
+        [xi.zone.SELBINA] =
+        {
+            ['Valgeir'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(142)
+                end,
+            },
+        },
     },
 
     -- Section: Quest completed. Change default message for Take.
@@ -212,7 +224,17 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:replaceDefault(64) -- Default message after clompleting Expertise quest and before accepting The Clue quest.
+                    return quest:event(64):replaceDefault() -- Default message after clompleting Expertise quest and before accepting The Clue quest.
+                end,
+            },
+        },
+
+        [xi.zone.SELBINA] =
+        {
+            ['Valgeir'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(143):replaceDefault() -- Default message after clompleting Expertise quest and before accepting The Clue quest.
                 end,
             },
         },

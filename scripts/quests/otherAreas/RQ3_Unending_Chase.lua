@@ -2,8 +2,8 @@
 -- Unending Chase
 -- Variable Prefix: [4][2]
 -----------------------------------
--- Zone,   NPC,          POS
--- Mhaura, Rycharde,     !pos 
+-- ZONE,    NPC,      POS
+-- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -26,7 +26,7 @@ quest.sections =
     -- Section: Quest is available and never interacted.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and
+            return status == QUEST_AVAILABLE and player:getFameLevel(WINDURST) > 2 and vars.Prog == 0 and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAY_OF_THE_COOK) == QUEST_COMPLETED
         end,
 
@@ -35,7 +35,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("[4][1]DayCompleted") + 7 < VanadielUniqueDay() then
+                    if player:getCharVar("Quest[4][1]DayCompleted") + 7 < VanadielUniqueDay() then
                         return quest:event(82, xi.items.PUFFBALL) -- Unending Chase starting event.
                     end
                 end,
@@ -45,7 +45,7 @@ quest.sections =
             {
                 [82] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:setCharVar("[4][1]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
+                    player:setCharVar("Quest[4][1]DayCompleted", 0)  -- Delete previous quest (Rycharde the Chef) variables
                     if option == 77 then -- Accept quest option.
                         quest:begin(player)
                     end
