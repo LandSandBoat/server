@@ -2,6 +2,9 @@
 -- Welcome t'Norg
 -- Zilart M2
 -----------------------------------
+-- !addmission 3 4
+-- Oaken door: !pos 97 -7 -12 252
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/zone')
@@ -26,7 +29,7 @@ mission.sections =
             ['_700'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:event(2)
+                    return mission:progressEvent(2)
                 end,
             },
 

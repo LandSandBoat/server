@@ -2,6 +2,8 @@
 -- The Temple of Desolation
 -- Zilart M10
 -----------------------------------
+-- !addmission 3 20
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

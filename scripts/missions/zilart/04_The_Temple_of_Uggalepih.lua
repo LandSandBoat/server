@@ -2,6 +2,13 @@
 -- The Temple of Uggalepih
 -- Zilart M4
 -----------------------------------
+-- !addmission 3 8
+-- Additional Dialogue:
+-- Gilgamesh: !pos 122.452 -9.009 -12.052 252
+-- Jakoh Wahcondalo: !pos 101 -16 -115 250
+-- Mahogany Door (BCNM): !pos 299 0.1 349 163
+-- BCNM: The Temple of Uggalepih
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')
@@ -29,6 +36,7 @@ mission.sections =
             ['Gilgamesh'] =
             {
                 onTrigger = function(player, npc)
+                    -- Reminder text
                     return mission:event(8)
                 end,
             },
@@ -38,6 +46,7 @@ mission.sections =
             ['Jakoh_Wahcondalo'] =
             {
                 onTrigger = function(player, npc)
+                    -- Reminder text
                     return mission:event(115)
                 end,
             },
@@ -57,6 +66,7 @@ mission.sections =
                 end,
 
                 [8] = function(player, csid, option, npc)
+                    -- TODO: npcUtil and message about removing the KI?
                     player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
                     mission:complete(player)
                 end,
