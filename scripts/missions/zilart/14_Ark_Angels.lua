@@ -2,6 +2,16 @@
 -- Ark Angels
 -- Zilart M14
 -----------------------------------
+-- !addmission 3 26
+-- Gilgamesh          : !pos 122.452 -9.009 -12.052 252
+-- blank_divine_might : !pos -40 0 -151 178
+-- BCNM Entrances:
+-- qm1_1 : !pos -605.063 -22.681 483.937 180
+-- qm1_2 : !pos -264.782 -137.313 374.516 180
+-- qm1_3 : !pos 14.148 -224.334 488.125 180
+-- qm1_4 : !pos 235.650 -173.572 361.266 180
+-- qm1_5 : !pos 555.998 -38.205 520.627 180
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

@@ -5,7 +5,7 @@
 -- NOTE: xi.mission.id.zilart.THE_NEW_FRONTIER is set after the Nation 5-1 Shadow Lord Battle
 -- !addmission 3 0
 -- !setrank <name> 6
--- Norg: !zone 252
+-- Norg : !zone 252
 -----------------------------------
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

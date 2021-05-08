@@ -3,8 +3,8 @@
 -- Zilart M9
 -----------------------------------
 -- !addmission 3 18
--- Oaken door: !pos 97 -7 -12 252
--- Aldo: !pos 20 3 -58 245
+-- _700 (Oaken Door) : !pos 97 -7 -12 252
+-- Aldo              : !pos 20 3 -58 245
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")

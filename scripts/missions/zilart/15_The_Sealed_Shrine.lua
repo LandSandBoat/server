@@ -2,6 +2,11 @@
 -- The Sealed Shrine
 -- Zilart M15
 -----------------------------------
+-- !addmission 3 27
+-- _700 (Oaken Door) : !pos 97 -7 -12 252
+-- Aldo              : !pos 20 3 -58 245
+-- DM Earring        : !additem 14739
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')
@@ -19,6 +24,7 @@ local function getNumDMEarrings(player)
             DMEarrings = DMEarrings + 1
         end
     end
+    return DMEarrings
 end
 
 mission.reward =

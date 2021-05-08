@@ -2,6 +2,10 @@
 -- The Celestial Nexus
 -- Zilart M16
 -----------------------------------
+-- !addmission 3 28
+-- Gilgamesh          : !pos 122.452 -9.009 -12.052 252
+-- _515 (BCNM Entry)  : !pos -112.513 -27.768 -25.072 181
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

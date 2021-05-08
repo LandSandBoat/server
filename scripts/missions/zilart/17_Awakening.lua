@@ -2,6 +2,11 @@
 -- Awakening
 -- Zilart M17
 -----------------------------------
+-- !addmission 3 30
+-- Gilgamesh   : !pos 122.452 -9.009 -12.052 252
+-- Lower Jeuno : !zone 245
+-- Norg        : !zone 252
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

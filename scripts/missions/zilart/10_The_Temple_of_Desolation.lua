@@ -3,6 +3,8 @@
 -- Zilart M10
 -----------------------------------
 -- !addmission 3 20
+-- Kamui : !pos 120.121 -8.009 -7.298 252
+-- _6z0  : !pos 0 -12 48 251
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")

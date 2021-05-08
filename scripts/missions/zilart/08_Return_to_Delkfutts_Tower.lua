@@ -3,11 +3,11 @@
 -- Zilart M8
 -----------------------------------
 -- !addmission 3 16
--- Gilgamesh: !pos 122.452 -9.009 -12.052 252
--- Aldo: !pos 20 3 -58 245
--- Lower Delkfutt's Tower: !zone 184
--- Stellar Fulcrum: !zone 179
--- Qe'Lov Gate (BCNM): !pos -520 -4 17 179
+-- Gilgamesh              : !pos 122.452 -9.009 -12.052 252
+-- Aldo                   : !pos 20 3 -58 245
+-- Lower Delkfutt's Tower : !zone 184
+-- Stellar Fulcrum        : !zone 179
+-- Qe'Lov Gate (BCNM)     : !pos -520 -4 17 179
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
