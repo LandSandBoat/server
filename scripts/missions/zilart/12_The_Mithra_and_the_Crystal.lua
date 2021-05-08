@@ -1,8 +1,12 @@
 -----------------------------------
 -- The Mithra and the Crystal
 -- Zilart M12
+-----------------------------------
+-- !addmission 3 23
+-- Gilgamesh       : !pos 122.452 -9.009 -12.052 252
 -- Maryoh_Comyujah : !pos 0 8 73 247
 -- qm7             : !pos -504 20 -419 208
+-- _6z0            : !pos 0 -12 48 251
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
@@ -156,7 +160,7 @@ mission.sections =
         {
             ['qm7'] = mission:messageSpecial(quicksandCavesID.text.YOU_FIND_NOTHING),
         },
-    },    
+    },
 
     -- Section: Mission Completed, Permanent Dialogue Change
     {

@@ -2,6 +2,9 @@
 -- The Hall of the Gods
 -- Zilart M11
 -----------------------------------
+-- !addmission 3 22
+-- _700 (Oaken Door) : !pos 97 -7 -12 252
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

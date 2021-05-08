@@ -2,6 +2,10 @@
 -- The Gate of the Gods
 -- Zilart M13
 -----------------------------------
+-- !addmission 3 24
+-- Shimmering_Circle : !pos 0 -20 147 251
+-- RuAun_Gardens     : !zone 130
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

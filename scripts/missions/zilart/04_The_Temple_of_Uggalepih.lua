@@ -3,11 +3,9 @@
 -- Zilart M4
 -----------------------------------
 -- !addmission 3 8
--- Additional Dialogue:
--- Gilgamesh: !pos 122.452 -9.009 -12.052 252
--- Jakoh Wahcondalo: !pos 101 -16 -115 250
--- Mahogany Door (BCNM): !pos 299 0.1 349 163
--- BCNM: The Temple of Uggalepih
+-- Gilgamesh            : !pos 122.452 -9.009 -12.052 252
+-- Jakoh Wahcondalo     : !pos 101 -16 -115 250
+-- Mahogany Door (BCNM) : !pos 299 0.1 349 163
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")

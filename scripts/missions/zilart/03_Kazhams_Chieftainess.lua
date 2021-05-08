@@ -3,8 +3,8 @@
 -- Zilart M3
 -----------------------------------
 -- !addmission 3 6
--- Gilgamesh: !pos 122.452 -9.009 -12.052 252
--- Jakoh Wahcondalo: !pos 101 -16 -115 250
+-- Gilgamesh        : !pos 122.452 -9.009 -12.052 252
+-- Jakoh Wahcondalo : !pos 101 -16 -115 250
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
