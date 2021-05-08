@@ -2,9 +2,9 @@
 -- Rycharde the Chef
 -- Variable Prefix: [4][0]
 -----------------------------------
--- ZONE,    NPC,         POS
--- Mhaura,  Rycharde,    !pos  17.451 -16.000 88.815 249
--- Mhaura,  Take,        !pos  20.616  -8.000 69.757 249
+-- ZONE,   NPC,          POS
+-- Mhaura, Rycharde,     !pos  17.451 -16.000 88.815 249
+-- Mhaura, Take,         !pos  20.616  -8.000 69.757 249
 -- Mhaura, Numi Adaligo, !pos -80.332 -24.050 34.794 249
 -----------------------------------
 require('scripts/globals/items')
@@ -71,7 +71,7 @@ quest.sections =
         [xi.zone.MHAURA] =
         {
             ['Rycharde'] = quest:progressEvent(70, xi.items.DHALMEL_MEAT),
-            ['Take'] = quest:event(68), -- Optional dialog.
+            ['Take'] = quest:progressEvent(68), -- Optional dialog.
 
             onEventFinish =
             {

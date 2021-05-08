@@ -41,7 +41,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() then
-                        return quest:event(86) -- His Name is Valgeir starting event.
+                        return quest:progressEvent(86) -- His Name is Valgeir starting event.
                     end
                 end,
             },
@@ -73,7 +73,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(87) -- Not given the pizza yet. Yes. Really.
+                    return quest:event(87) -- Not delivered the pizza yet.
                 end,
             },
         },
@@ -83,7 +83,7 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(100) -- Deliver Pizza.
+                    return quest:progressEvent(100) -- Deliver Pizza.
                 end,
             },
 

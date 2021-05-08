@@ -2,8 +2,8 @@
 -- Unending Chase
 -- Variable Prefix: [4][2]
 -----------------------------------
--- ZONE,    NPC,      POS
--- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
+-- ZONE,   NPC,      POS
+-- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -36,7 +36,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][1]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:event(82, xi.items.PUFFBALL) -- Unending Chase starting event.
+                        return quest:progressEvent(82, xi.items.PUFFBALL) -- Unending Chase starting event.
                     end
                 end,
             },
@@ -65,7 +65,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(84, xi.items.PUFFBALL) -- Unending Chase starting event.
+                    return quest:progressEvent(84, xi.items.PUFFBALL) -- Unending Chase starting event.
                 end,
             },
 
@@ -96,7 +96,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {xi.items.PUFFBALL}) then
-                        return quest:event(83) -- Quest completed.
+                        return quest:progressEvent(83) -- Quest completed.
                     end
                 end,
             },

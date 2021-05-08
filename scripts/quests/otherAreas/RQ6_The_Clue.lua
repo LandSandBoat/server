@@ -2,8 +2,8 @@
 -- The Clue
 -- Variable Prefix: [4][5]
 -----------------------------------
--- ZONE,    NPC,      POS
--- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
+-- ZONE,   NPC,      POS
+-- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -36,7 +36,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][4]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:event(90, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
+                        return quest:progressEvent(90, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
                     end
                 end,
             },
@@ -65,7 +65,7 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                        return quest:event(91, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
+                    return quest:progressEvent(91, xi.items.CRAWLER_EGG) -- Unending Chase starting event.
                 end,
             },
 
@@ -91,7 +91,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:message(65) -- Not goten the dish from Valgeir.
+                    return quest:event(65) -- Not goten the dish from Valgeir.
                 end,
             },
 
@@ -103,7 +103,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {{xi.items.CRAWLER_EGG, 4}}) then
-                        return quest:event(92) -- Quest completed.
+                        return quest:progressEvent(92) -- Quest completed.
                     else
                         local count       = trade:getItemCount()
                         local crawlerEgg  = trade:hasItemQty(xi.items.CRAWLER_EGG, trade:getItemCount())

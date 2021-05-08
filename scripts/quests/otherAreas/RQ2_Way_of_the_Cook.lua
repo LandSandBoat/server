@@ -2,8 +2,8 @@
 -- Way of the Cook
 -- Variable Prefix: [4][1]
 -----------------------------------
--- ZONE,    NPC,      POS
--- Mhaura,  Rycharde, !pos 17.451 -16.000 88.815 249
+-- ZONE,   NPC,      POS
+-- Mhaura, Rycharde, !pos 17.451 -16.000 88.815 249
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -38,7 +38,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:event(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
+                        return quest:progressEvent(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
                     end
                 end,
             },
@@ -84,9 +84,9 @@ quest.sections =
                         totalHoursLeft = 72 - (VanadielHour() + daysPassed * 24) + quest:getVar(player, "HourStarted")
 
                         if totalHoursLeft > 0 then
-                            return quest:event(80) -- Quest completed in time.
+                            return quest:progressEvent(80) -- Quest completed in time.
                         else
-                            return quest:event(81) -- Quest completed late.
+                            return quest:progressEvent(81) -- Quest completed late.
                         end
                     end
                 end,

@@ -41,7 +41,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][3]DayCompleted") + 8 < VanadielUniqueDay() then
-                        return quest:event(61) -- Quest starting event.
+                        return quest:progressEvent(61) -- Quest starting event.
                     end
                 end,
             },
@@ -67,7 +67,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(63) -- Not goten the dish from Valgeir.
+                    return quest:event(63) -- Not goten the dish from Valgeir.
                 end,
             },
         },
@@ -77,7 +77,7 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(102, xi.items.SCREAM_FUNGUS, xi.items.LAND_CRAB_MEAT) -- Ask for ingredients to cook.
+                    return quest:progressEvent(102, xi.items.SCREAM_FUNGUS, xi.items.LAND_CRAB_MEAT) -- Ask for ingredients to cook.
                 end,
             },
 
@@ -117,7 +117,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {xi.items.SCREAM_FUNGUS, xi.items.LAND_CRAB_MEAT}) then
-                        return quest:event(103) -- Give ingredients.
+                        return quest:progressEvent(103) -- Give ingredients.
                     end
                 end,
             },
@@ -145,7 +145,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(63) -- Not goten the dish from Valgeir.
+                    return quest:event(63) -- Not goten the dish from Valgeir.
                 end,
             },
         },
@@ -158,7 +158,7 @@ quest.sections =
                     daysPassed = VanadielDayOfTheYear() - quest:getVar(player, "DayStarted")
                     hoursLeft  = 24 - VanadielHour() - (daysPassed * 24) + quest:getVar(player, "HourStarted")
                     if hoursLeft < 0 then -- Done waiting
-                        return quest:event(105) -- Get food.
+                        return quest:progressEvent(105) -- Get food.
                     else
                         return quest:event(141)
                     end
@@ -186,7 +186,7 @@ quest.sections =
             ['Take'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(62, xi.items.TABLEWARE_SET) -- Give dish from Valgeir.
+                    return quest:progressEvent(62, xi.items.TABLEWARE_SET) -- Give dish from Valgeir.
                 end,
             },
 

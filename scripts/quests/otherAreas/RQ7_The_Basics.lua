@@ -40,7 +40,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCharVar("Quest[4][5]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:event(94) -- Quest starting event.
+                        return quest:progressEvent(94) -- Quest starting event.
                     end
                 end,
             },
@@ -82,7 +82,7 @@ quest.sections =
             ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(106) -- Deliver Key Item.
+                    return quest:progressEvent(106) -- Deliver Key Item.
                 end,
             },
 
@@ -110,12 +110,12 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(95) -- Commentary.
+                    return quest:event(95) -- Commentary.
                 end,
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, {xi.items.BAKED_POPOTO}) then
-                        return quest:event(96) -- Quest completed.
+                        return quest:progressEvent(96) -- Quest completed.
                     end
                 end,
 
@@ -145,7 +145,7 @@ quest.sections =
         },
     },
 
-    -- Section: Quest completed.
+    -- Section: Quest completed. Handle optional post quest dialogs and default interactions.
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED
