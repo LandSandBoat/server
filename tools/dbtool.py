@@ -1,16 +1,48 @@
+# Internal Deps
 import os
 import subprocess
 import sys
 import re
 import time
-import yaml
 import fileinput
 import distutils.spawn
-from git import Repo
-import mysql.connector
-import colorama
-from colorama import Fore, Style
-from mysql.connector import Error, errorcode
+
+# Pre-flight sanity checks
+def preflight_exit():
+    # If double clicked on Windows: pause with an input so the user can read the error...
+    if os.name == 'nt' and 'PROMPT' not in os.environ:
+        input('Press ENTER to continue...')
+    exit(-1)
+
+# - git should be on the user's PATH
+if not 'git' in os.environ['PATH'].lower():
+    print("ERROR: Make sure git.exe is available in your system's PATH environment variable.")
+    preflight_exit()
+
+# - dbtool.py is designed to be run from <root>/tools folder, not <root>
+if not os.path.isfile("./dbtool.py"):
+    print("ERROR: dbtool.py is designed to be run from <root>/tools folder, not <root>. Please run from the tools folder.")
+    preflight_exit()
+
+# - Repo should be checked out as a git repo, not as plain files
+if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT, stdout = open(os.devnull, 'w')) == 0:
+    print("ERROR: The project must be checked out as a git repo (using git clone, or similar).")
+    preflight_exit()
+
+# External Deps (requirements.txt)
+try:
+    import mysql.connector
+    from mysql.connector import Error, errorcode
+    from git import Repo
+    import yaml
+    import colorama
+    from colorama import Fore, Style
+except Exception as e:
+    print("ERROR: Exception occured while importing external dependencies:")
+    print(e)
+    preflight_exit()
+
+# Migrations
 from migrations import spell_blobs_to_spell_table
 from migrations import unnamed_flags
 from migrations import char_unlock_table_columns
@@ -61,6 +93,7 @@ migrations = [
     add_job_master_column_chars,
     currency2,
 ]
+
 # These are the default 'protected' files
 player_data = [
     'accounts.sql',
