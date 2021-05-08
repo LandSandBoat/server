@@ -4,7 +4,7 @@
 -----------------------------------
 -- !addmission 3 28
 -- Gilgamesh          : !pos 122.452 -9.009 -12.052 252
--- _515 (BCNM Entry)  : !pos -112.513 -27.768 -25.072 181
+-- _515 (BCNM Entry)  : !pos -665.2291 -5.8232 -32.4834 181
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
@@ -33,12 +33,14 @@ mission.sections =
             ['Gilgamesh'] = mission:event(173),
         },
 
-        [xi.zone.THE_CELESTIAL_NEXUS] = {
+        [xi.zone.THE_CELESTIAL_NEXUS] =
+        {
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar("battlefieldWin") == 320 then
-                        mission:complete()
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                        mission:complete(player)
                     end
                     player:setPos(0, -18, 137, 64, 251) -- Hall of the Gods
                 end,

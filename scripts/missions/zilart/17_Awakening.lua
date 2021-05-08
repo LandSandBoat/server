@@ -36,29 +36,25 @@ mission.sections =
 
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus < 2
+            return currentMission == mission.missionId and missionStatus < 3
         end,
 
         [xi.zone.LOWER_JEUNO] =
         {
             onRegionEnter =
             {
-                [1] = mission:progressEvent(20)
+                [1] = function(player, csid, option, npc)
+                    return mission:event(20)
+                end,
             },
 
             onEventFinish =
             {
                 [20] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, player:getMissionStatus(xi.mission.log_id.ZILART) + 2)
+                    player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 2)
                 end,
             },
-        }
-    },
-
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and (missionStatus == 0 or missionStatus == 2)
-        end,
+        },
 
         [xi.zone.NORG] =
         {
@@ -72,7 +68,7 @@ mission.sections =
             onEventFinish =
             {
                 [176] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, player:getMissionStatus(xi.mission.log_id.ZILART) + 1)
+                    player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
                 end,
             },
         }
