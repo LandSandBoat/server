@@ -77,7 +77,7 @@ mission.sections =
     -- Players not on mission should still receive BCNM title
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission ~= mission.missionId
+            return currentMission ~= mission.missionId and player:getLocalVar("battlefieldWin") == 128
         end,
 
         [xi.zone.SACRIFICIAL_CHAMBER] = {

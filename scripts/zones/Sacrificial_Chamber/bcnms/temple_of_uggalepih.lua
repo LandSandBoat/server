@@ -23,11 +23,7 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local name, clearTime, partySize = battlefield:getRecord()
-
-        if player:getCurrentMission(ZILART) == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH then
-            player:setLocalVar("battlefieldWin", battlefield:getID())
-        end
-
+        player:setLocalVar("battlefieldWin", battlefield:getID())
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
