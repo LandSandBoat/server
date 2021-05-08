@@ -2,6 +2,9 @@
 -- Through the Quicksand Caves
 -- Zilart M6
 -----------------------------------
+-- !addmission 3 12
+-- Shimmering Circle: !pos -220 0 12 168
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')

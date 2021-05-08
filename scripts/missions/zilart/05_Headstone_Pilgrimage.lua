@@ -2,6 +2,7 @@
 -- Headstone Pilgrimage
 -- Zilart M5
 -----------------------------------
+-- !addmission 3 10
 -- Cermet Headstones:
 -- Behemoth's Dominion   - Lightning - !pos -74 -4 -87 127
 -- Cape Teriggan         - Wind      - !pos -107 -8 450 113
@@ -155,7 +156,7 @@ mission.sections =
                         else
                             player:messageSpecial(capeTerigganID.text.KEYITEM_OBTAINED, xi.ki.WIND_FRAGMENT)
                         end
-                    end                    
+                    end
                 end,
             },
 
@@ -204,7 +205,7 @@ mission.sections =
         {
             ['Cermet_Headstone'] =
             {
-                onTrigger = function(player, npc)    
+                onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.WATER_FRAGMENT) then
                         player:startEvent(200, xi.ki.WATER_FRAGMENT)
                     elseif hasAllFragments(player) then
@@ -236,6 +237,7 @@ mission.sections =
             ['Gilgamesh'] =
             {
                 onTrigger = function(player, npc)
+                    -- Reminder text
                     return mission:event(9)
                 end,
             },

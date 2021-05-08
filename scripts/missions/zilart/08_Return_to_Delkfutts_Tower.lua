@@ -2,6 +2,13 @@
 -- Return to Delkfutt's Tower
 -- Zilart M8
 -----------------------------------
+-- !addmission 3 16
+-- Gilgamesh: !pos 122.452 -9.009 -12.052 252
+-- Aldo: !pos 20 3 -58 245
+-- Lower Delkfutt's Tower: !zone 184
+-- Stellar Fulcrum: !zone 179
+-- Qe'Lov Gate (BCNM): !pos -520 -4 17 179
+-----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")
 require('scripts/globals/missions')
@@ -26,6 +33,7 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
+            -- Reminder text
             ['Gilgamesh'] = mission:event(13)
         },
     },
@@ -84,7 +92,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 3)  
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 3)
                     return 0
                 end,
             },
@@ -103,7 +111,7 @@ mission.sections =
             {
                 [17] = function(player, csid, option, npc)
                     mission:complete(player)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)   
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)
                 end,
 
                 [32001] = function(player, csid, option, npc)
@@ -112,8 +120,8 @@ mission.sections =
                         if option == 1 then
                             return mission:event(17)
                         else
-                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)   
-                            mission:complete(player)                     
+                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                            mission:complete(player)
                         end
                     end
                 end,
