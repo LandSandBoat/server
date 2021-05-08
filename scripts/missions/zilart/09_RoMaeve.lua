@@ -32,8 +32,8 @@ mission.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if option == 0 then
-                        mission:complete(player)
                         player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                        mission:complete(player)
                     end
                 end,
             },

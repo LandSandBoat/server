@@ -28,36 +28,6 @@ mission.sections =
         {
             ['Gilgamesh'] = mission:event(13)
         },
-
-        [xi.zone.STELLAR_FULCRUM] =
-        {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 0
-                end,
-            },
-
-            onEventFinish =
-            {
-                [17] = function(player, csid, option, npc)
-                    mission:complete(player)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)   
-                end,
-
-                [32001] = function(player, csid, option, npc)
-                    -- Play last CS if not skipped.
-                    if player:getLocalVar("battlefieldWin") == 256 then
-                        if option == 1 then
-                            return mission:event(17)
-                        else
-                            mission:complete(player)
-                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)                        
-                        end
-                    end
-                end,
-            },
-        },
     },
 
     -- Section: Mission Active and missionStatus == 0
@@ -98,6 +68,54 @@ mission.sections =
             {
                 [15] = function(player, csid, option, npc)
                     player:setMissionStatus(xi.mission.log_id.ZILART, 2)
+                end,
+            },
+        },
+    },
+
+    -- Section: Mission Active and missionStatus == 2
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 2
+        end,
+
+        [xi.zone.STELLAR_FULCRUM] =
+        {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 3)  
+                    return 0
+                end,
+            },
+        },
+    },
+
+    -- Section: Mission Active and missionStatus == 3
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 3
+        end,
+
+        [xi.zone.STELLAR_FULCRUM] =
+        {
+            onEventFinish =
+            {
+                [17] = function(player, csid, option, npc)
+                    mission:complete(player)
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 0)   
+                end,
+
+                [32001] = function(player, csid, option, npc)
+                    -- Play last CS if not skipped.
+                    if player:getLocalVar("battlefieldWin") == 256 then
+                        if option == 1 then
+                            return mission:event(17)
+                        else
+                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)   
+                            mission:complete(player)                     
+                        end
+                    end
                 end,
             },
         },

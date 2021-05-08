@@ -1,6 +1,8 @@
 -----------------------------------
 -- The Mithra and the Crystal
 -- Zilart M12
+-- Maryoh_Comyujah : !pos 0 8 73 247
+-- qm7             : !pos -504 20 -419 208
 -----------------------------------
 require('scripts/globals/interaction/mission')
 require("scripts/globals/keyitems")

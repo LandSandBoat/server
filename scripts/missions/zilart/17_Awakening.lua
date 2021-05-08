@@ -9,7 +9,7 @@ require("scripts/globals/titles")
 require('scripts/globals/zone')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_CELESTIAL_NEXUS)
+local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
 
 mission.reward =
 {
