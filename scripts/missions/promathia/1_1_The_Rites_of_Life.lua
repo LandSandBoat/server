@@ -62,7 +62,7 @@ mission.sections =
 
                 [39] = function(player, csid, option, npc)
                     player:setMissionStatus(xi.mission.log_id.COP, 0)
-                    player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)
+                    mission:begin(player)
                 end,
             },
         },
