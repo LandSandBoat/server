@@ -1,6 +1,6 @@
-----------------------------
------ InteractionLookup class
-----------------------------
+-----------------------------------
+-- InteractionLookup class
+-----------------------------------
 require('scripts/globals/interaction/action_util')
 require('scripts/globals/interaction/interaction_util')
 
@@ -56,9 +56,9 @@ function InteractionLookup:new(original)
 end
 
 
-------------------------------------------------
---- Add/Remove helpers
-------------------------------------------------
+-----------------------------------
+-- Add/Remove helpers
+-----------------------------------
 
 local function addHandler(thirdLevel, thirdLevelKey, handler, metatable)
     thirdLevel[thirdLevelKey] = thirdLevel[thirdLevelKey] or {}
@@ -126,9 +126,9 @@ local function removeHandlersMatching(secondLevel, lookupSecondLevel, condition)
     end
 end
 
-------------------------------------------------
---- Setup
-------------------------------------------------
+-----------------------------------
+-- Setup
+-----------------------------------
 
 -- Add default handlers for a given zone
 function InteractionLookup:addDefaultHandlers(zoneId, handlerTable)
@@ -207,9 +207,9 @@ function InteractionLookup:removeContainer(container)
     self.containers[container.id] = nil
 end
 
-------------------------------------------------
---- Execution
-------------------------------------------------
+-----------------------------------
+-- Execution
+-----------------------------------
 
 -- Safely runs the handler with the given args
 local function runHandler(handler, args)
@@ -354,9 +354,9 @@ end
 
 
 
-------------------------------------------------
---- Handlers
-------------------------------------------------
+-----------------------------------
+-- Handlers
+-----------------------------------
 
 -- Main handler function that determines which action should be performed
 local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHandler, defaultReturn, targetId)

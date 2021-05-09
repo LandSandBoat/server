@@ -1,8 +1,8 @@
-----------------------------
------ HiddenQuest class
-----------------------------
+-----------------------------------
+-- HiddenQuest class
+-----------------------------------
 require('scripts/globals/interaction/container')
-
+-----------------------------------
 
 HiddenQuest = setmetatable({ area = {} }, { __index = Container })
 HiddenQuest.__index = HiddenQuest
@@ -20,8 +20,9 @@ function HiddenQuest:new(name)
     return obj
 end
 
------------------------------
+-----------------------------------
 -- HiddenQuest operations
+-----------------------------------
 
 function HiddenQuest:complete(player)
     local gaveReward = npcUtil.giveReward(player, self.reward)

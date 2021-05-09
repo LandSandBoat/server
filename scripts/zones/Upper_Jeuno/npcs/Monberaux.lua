@@ -47,11 +47,8 @@ end
 entity.onTrigger = function(player, npc)
     local TheLostCardien = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
     local CooksPride = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE)
-    -- COP mission 1-1
-    if (player:getCurrentMission(COP) == xi.mission.id.cop.THE_RITES_OF_LIFE and  player:getCharVar("PromathiaStatus") == 1) then
-        player:startEvent(10)--10
     -- COP mission 1-2
-    elseif (player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS  and  player:getCharVar("PromathiaStatus") == 0) then
+    if (player:getCurrentMission(COP) == xi.mission.id.cop.BELOW_THE_ARKS  and  player:getCharVar("PromathiaStatus") == 0) then
         player:startEvent(9)--9
     -- COP mission 3-5
     elseif (player:getCurrentMission(COP) == xi.mission.id.cop.DARKNESS_NAMED  and  player:getCharVar("PromathiaStatus") == 0) then
@@ -103,15 +100,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_Tenzen_s_Path", 3)
         player:addKeyItem(xi.ki.ENVELOPE_FROM_MONBERAUX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ENVELOPE_FROM_MONBERAUX)
-    elseif (csid == 10) then
-        player:setCharVar("PromathiaStatus", 0)
-        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS) -- start the mission 1-2
-        player:startEvent(206) -- 206
-    elseif (csid == 206) then
-        player:startEvent(207)  --207
     elseif (csid == 82) then
         player:setCharVar("PromathiaStatus", 1)
         player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_DRAINED)

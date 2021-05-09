@@ -1,10 +1,11 @@
-----------------------------
------ Container class
-----------------------------
+-----------------------------------
+-- Container class
+-----------------------------------
 require('scripts/globals/interaction/actions/event')
 require('scripts/globals/interaction/actions/message')
 require('scripts/globals/interaction/actions/sequence')
 require('scripts/globals/interaction/actions/keyitem')
+-----------------------------------
 
 Container = {}
 Container.__index = Container
@@ -28,8 +29,9 @@ function Container:cleanup(player)
     player:clearVarsWithPrefix(self.varPrefix)
 end
 
------------------------------
+-----------------------------------
 -- Action helper functions
+-----------------------------------
 
 function Container:event(eventid, ...)
     return Event:new(eventid, ...)
@@ -84,8 +86,9 @@ function Container:sequence(...)
 end
 
 
------------------------------
+-----------------------------------
 -- Variable helper functions
+-----------------------------------
 
 function Container:getVar(player, name)
     return player:getVar(self.varPrefix .. name)

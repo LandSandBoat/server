@@ -1,7 +1,8 @@
-----------------------------
------ Mission class
-----------------------------
+-----------------------------------
+-- Mission class
+-----------------------------------
 require('scripts/globals/interaction/container')
+-----------------------------------
 
 Mission = setmetatable({ areaId = -1 }, { __index = Container })
 Mission.__index = Mission
@@ -27,8 +28,9 @@ function Mission:getCheckArgs(player)
     return { player:getCurrentMission(self.areaId), player:getMissionStatus(self.areaId) }
 end
 
------------------------------
+-----------------------------------
 -- Mission operations
+-----------------------------------
 
 function Mission:begin(player)
     player:addMission(self.areaId, self.missionId)

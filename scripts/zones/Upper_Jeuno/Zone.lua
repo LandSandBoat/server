@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/conquest")
-require("scripts/globals/missions")
 require("scripts/globals/chocobo")
 -----------------------------------
 local zone_object = {}
@@ -23,11 +22,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:ChangeMusic(0, 239)
         player:ChangeMusic(1, 239)
         -- No need for an 'else' to change it back outside these dates as a re-zone will handle that.
-    end
-
-    -- COP mission 1-1
-    if player:getCurrentMission(COP) == xi.mission.id.cop.THE_RITES_OF_LIFE and player:getCharVar("PromathiaStatus") == 0 then
-        cs = 2
     end
 
     -- MOG HOUSE EXIT
@@ -49,9 +43,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 2 then
-        player:setCharVar("PromathiaStatus", 1)
-    end
 end
 
 return zone_object

@@ -90,4 +90,7 @@ return {
     "scripts/missions/zilart/15_The_Sealed_Shrine",
     "scripts/missions/zilart/16_The_Celestial_Nexus",
     "scripts/missions/zilart/17_Awakening",
+
+    -- Promathia Missions
+    "scripts/missions/promathia/1_1_The_Rites_of_Life",
 }
