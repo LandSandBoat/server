@@ -6,9 +6,11 @@
 5. [Pull Request Contributions](#pull-request-contributions)
 6. [Style Guide](#style-guide)
     - [Code Editor Configuration](#code-editor-configuration)
+    - [General code guidlines and styling (all languages)](#general-code-guidlines-all-languages)
     - [C++](#c)
     - [Lua](#lua)
     - [SQL](#sql)
+    - [Python](#python)
 
 # General Guidelines
 
@@ -433,6 +435,7 @@ auto isEntityAlive = [&](CBigEntity* entity) -> bool
 * Be as `const` as you reasonably can.
 * `UpperCamelCase` for namespaced functions and classes.
 * `UPPER_SNAKE_CASE` for enums (exception for enum classes: style as classes).
+* `lowerCamelCase` for everything else.
 
 ## Lua
 
@@ -592,7 +595,7 @@ xi.func(
 ```
 
 #### Lua Misc & Naming
-* Our lua functions are typically lowerCamelCased, with few exceptions.
+* Our lua functions and members are typically `lowerCamelCased`, with few exceptions.
 * Make sure you check out `scripts/globals/npc_util.lua` for useful tools and helpers.
 * If you're going to cache a long table entry into a var with a shorter name, make sure that name still conveys the original meaning.
 ```lua
@@ -665,3 +668,8 @@ The format of the comment isn't massively important, but it is preferred not to 
 ## SQL Migrations for Schema changes
 
 * Going forward schema changes should be accompanied by a migration script.
+
+## Python
+Python is primarily used for support scripts.
+#### Python Misc & Naming
+* Python uses `lower_snake_case`
