@@ -1018,8 +1018,8 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
     int32 quantity  = data.ref<uint8>(0x04);
     uint8 container = data.ref<uint8>(0x08);
     uint8 slotID    = data.ref<uint8>(0x09);
-    CItem* PItem     = PChar->getStorage(container)->GetItem(slotID);
-    uint16 ItemID = PItem->getID();
+    CItem* PItem    = PChar->getStorage(container)->GetItem(slotID);
+    uint16 ItemID   = PItem->getID();
 
     if (container >= MAX_CONTAINER_ID)
     {
