@@ -1728,7 +1728,7 @@ INSERT INTO `item_mods` VALUES (10658,231,5);
 INSERT INTO `item_mods` VALUES (10658,232,5);
 INSERT INTO `item_mods` VALUES (10658,233,5);
 INSERT INTO `item_mods` VALUES (10658,234,5);
-INSERT INTO `item_mods` VALUES (10658,391,6);
+INSERT INTO `item_mods` VALUES (10658,360,6);     -- Monster Helm +2: "Charm"+6
 INSERT INTO `item_mods` VALUES (10659,1,25);
 INSERT INTO `item_mods` VALUES (10659,2,18);
 INSERT INTO `item_mods` VALUES (10659,14,8);
@@ -1840,7 +1840,8 @@ INSERT INTO `item_mods` VALUES (10678,2,29);
 INSERT INTO `item_mods` VALUES (10678,8,8);
 INSERT INTO `item_mods` VALUES (10678,9,8);
 INSERT INTO `item_mods` VALUES (10678,12,8);
-INSERT INTO `item_mods` VALUES (10678,391,8);
+INSERT INTO `item_mods` VALUES (10678,360,8);     -- Monster Jackcoat +2: "Charm"+8
+-- INSERT INTO `item_mods` VALUES (10678,REWARD_ERASE,3);
 INSERT INTO `item_mods` VALUES (10679,1,59);
 INSERT INTO `item_mods` VALUES (10679,2,27);
 INSERT INTO `item_mods` VALUES (10679,23,25);
@@ -1956,7 +1957,7 @@ INSERT INTO `item_mods` VALUES (10698,1,20);
 INSERT INTO `item_mods` VALUES (10698,2,28);
 INSERT INTO `item_mods` VALUES (10698,9,7);
 INSERT INTO `item_mods` VALUES (10698,11,7);
-INSERT INTO `item_mods` VALUES (10698,391,5);
+INSERT INTO `item_mods` VALUES (10698,360,5);     -- Monster Gloves +2: "Charm"+5
 INSERT INTO `item_mods` VALUES (10698,564,2);
 INSERT INTO `item_mods` VALUES (10699,1,23);
 INSERT INTO `item_mods` VALUES (10699,2,22);
@@ -2073,7 +2074,8 @@ INSERT INTO `item_mods` VALUES (10718,1,44);
 INSERT INTO `item_mods` VALUES (10718,2,24);
 INSERT INTO `item_mods` VALUES (10718,8,7);
 INSERT INTO `item_mods` VALUES (10718,9,7);
-INSERT INTO `item_mods` VALUES (10718,391,3);
+INSERT INTO `item_mods` VALUES (10718,360,3);      -- Monster Trousers +2: "Charm"+3
+-- INSERT INTO `item_mods` VALUES (10718,REWARD_RECAST,10);
 INSERT INTO `item_mods` VALUES (10719,1,40);
 INSERT INTO `item_mods` VALUES (10719,2,50);
 INSERT INTO `item_mods` VALUES (10719,5,50);
@@ -2181,8 +2183,8 @@ INSERT INTO `item_mods` VALUES (10738,1,18);
 INSERT INTO `item_mods` VALUES (10738,2,18);
 INSERT INTO `item_mods` VALUES (10738,8,7);
 INSERT INTO `item_mods` VALUES (10738,10,7);
+INSERT INTO `item_mods` VALUES (10738,360,4);     -- Monster Gaiters +2: "Charm"+4
 INSERT INTO `item_mods` VALUES (10738,364,30);
-INSERT INTO `item_mods` VALUES (10738,391,4);
 INSERT INTO `item_mods` VALUES (10739,1,18);      -- Bard's Slippers +2: DEF 18
 INSERT INTO `item_mods` VALUES (10739,2,17);      -- HP +17
 INSERT INTO `item_mods` VALUES (10739,27,-5);     -- Enmity -5
