@@ -100,7 +100,7 @@ mission.sections =
 
         [xi.zone.UPPER_JEUNO] =
         {
-            ['Monberaux'] = mission:event(10),
+            ['Monberaux'] = mission:progressEvent(10),
 
             onEventFinish =
             {
