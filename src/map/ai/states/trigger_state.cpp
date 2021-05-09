@@ -26,8 +26,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../lua/luautils.h"
 #include "../ai_container.h"
 
-CTriggerState::CTriggerState(CBaseEntity* PEntity, uint16 targid)
+CTriggerState::CTriggerState(CBaseEntity* PEntity, uint16 targid, bool door)
 : CState(PEntity, targid)
+, door(door)
 {
 }
 
@@ -36,7 +37,7 @@ bool CTriggerState::Update(time_point tick)
     if (!IsCompleted())
     {
         auto* PChar = static_cast<CCharEntity*>(GetTarget());
-        if (PChar && luautils::OnTrigger(PChar, m_PEntity) == -1 && m_PEntity->animation == ANIMATION_CLOSE_DOOR)
+        if (PChar && door && m_PEntity->animation == ANIMATION_CLOSE_DOOR)
         {
             close                = true;
             m_PEntity->animation = ANIMATION_OPEN_DOOR;

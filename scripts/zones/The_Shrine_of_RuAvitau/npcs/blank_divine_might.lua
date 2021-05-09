@@ -38,9 +38,7 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if (CurrentZM == xi.mission.id.zilart.ARK_ANGELS and ZMProgress == 0 and DMEarrings <= NUMBER_OF_DM_EARRINGS) then -- First step in Ark Angels
-        player:startEvent(53, 917, 1408, 1550)
-    elseif (CurrentZM == xi.mission.id.zilart.ARK_ANGELS and ZMProgress == 1 and DivineStatus < 2) then -- Reminder CS/starts Divine Might (per Wiki)
+    if (CurrentZM == xi.mission.id.zilart.ARK_ANGELS and ZMProgress == 1 and DivineStatus < 2) then -- Reminder CS/starts Divine Might (per Wiki)
         player:startEvent(54, 917, 1408, 1550)
     elseif (CurrentZM >= xi.mission.id.zilart.ARK_ANGELS and DMStatus == QUEST_AVAILABLE and AAKeyitems > 0) then -- Alternative cutscene for those that have done one or more AA fight
         player:startEvent(56, 917, 1408, 1550)
@@ -70,10 +68,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 53) then -- Got the required cutscene for AA
-        player:setMissionStatus(xi.mission.log_id.ZILART, 1)
-
-    elseif ((csid == 54 or csid == 56) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
+    if ((csid == 54 or csid == 56) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
 
     elseif (csid == 57) then -- Divine Might Repeat

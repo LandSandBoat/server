@@ -175,7 +175,7 @@ xi.mission.id =
     {
         THE_NEW_FRONTIER              = 0,  -- ±
         WELCOME_TNORG                 = 4,  -- ±
-        KAZAMS_CHIEFTAINESS           = 6,  -- ±
+        KAZHAMS_CHIEFTAINESS          = 6,  -- ±
         THE_TEMPLE_OF_UGGALEPIH       = 8,  -- ±
         HEADSTONE_PILGRIMAGE          = 10, -- ±
         THROUGH_THE_QUICKSAND_CAVES   = 12, -- ±

@@ -1658,7 +1658,7 @@ function getRoeRecords(triggers)
 
       [1379] = { -- Zilart Mission 3 +
           trigger = triggers.missionComplete,
-          reqs = { missionComplete = {xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZAMS_CHIEFTAINESS} },
+          reqs = { missionComplete = {xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZHAMS_CHIEFTAINESS} },
           flags = set{"retro"},
           reward = { sparks = 300, xp = 500 },
       },

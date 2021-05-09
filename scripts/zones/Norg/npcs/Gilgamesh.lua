@@ -25,31 +25,13 @@ entity.onTrigger = function(player, npc)
     local ZilartMission = player:getCurrentMission(ZILART)
     local rovMission = player:getCurrentMission(ROV)
 
-    if (ZilartMission == xi.mission.id.zilart.KAZAMS_CHIEFTAINESS) then
-        player:startEvent(7)
-    elseif (ZilartMission == xi.mission.id.zilart.THE_TEMPLE_OF_UGGALEPIH) then
-        player:startEvent(8)
-    elseif (ZilartMission == xi.mission.id.zilart.HEADSTONE_PILGRIMAGE) then
-        player:startEvent(9)
-    elseif (ZilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER) then
-        player:startEvent(13)
-    elseif (ZilartMission == xi.mission.id.zilart.ROMAEVE) then
-        player:startEvent(11)
-    elseif (ZilartMission == xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL) then
-        player:startEvent(170)
-    elseif (ZilartMission == xi.mission.id.zilart.ARK_ANGELS) then
-        player:startEvent(171)
-    elseif (ZilartMission == xi.mission.id.zilart.THE_CELESTIAL_NEXUS) then
-        player:startEvent(173);
-    elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 6 and player:getCharVar('Apoc_Nigh_RewardCS1') == 0 then
         player:startEvent(232, 252)
     elseif player:getCharVar('Apoc_Nigh_RewardCS1') == 1 then
         player:startEvent(234, 252)
     elseif player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) then
         player:startEvent(233);
-    elseif (ZilartMission == xi.mission.id.zilart.AWAKENING) then
-        player:startEvent(177)
     elseif rovMission == xi.mission.id.rov.THE_PATH_UNTRAVELED then
         player:startEvent(263)
     end

@@ -672,6 +672,8 @@ namespace zoneutils
                 luautils::OnZoneInitialise(PZone.second->GetID());
             }
         }
+
+        luautils::InitInteractionGlobal();
     }
 
     /************************************************************************

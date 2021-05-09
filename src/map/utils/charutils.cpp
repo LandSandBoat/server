@@ -5702,6 +5702,24 @@ namespace charutils
         }
     }
 
+    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        // Validate that prefix is not too short, since we don't want it to
+        // accidentally clear a lot of variables it shouldn't.
+        if (prefix.size() < 5)
+        {
+            ShowError("Prefix too short to clear with: '%s'\n", prefix);
+            return;
+        }
+
+        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", PChar->id, prefix.c_str());
+    }
+
     uint16 getWideScanRange(JOBTYPE job, uint8 level)
     {
         // Set Widescan range

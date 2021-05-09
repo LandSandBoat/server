@@ -415,6 +415,80 @@ function npcUtil.completeQuest(player, area, quest, params)
 end
 
 --[[ *******************************************************************************
+    Complete a Mission.
+    If quest rewards items, and the player cannot carry them, return false.
+    Otherwise, return true.
+
+    Example of usage with params (all params are optional):
+        npcUtil.completeMission(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
+            item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
+            ki = xi.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
+            bayld = 500,
+            gil = 200,
+            xp = 1000,
+            title = xi.title.ENTRANCE_DENIED,
+        })
+******************************************************************************* --]]
+function npcUtil.completeMission(player, logId, missionId, params)
+    params = params or {}
+
+    -- load text ids
+    local ID = zones[player:getZoneID()]
+
+    -- item(s) plus message. return false if player lacks inventory space.
+    if params["item"] ~= nil then
+        if not npcUtil.giveItem(player, params["item"]) then
+            return false
+        end
+    end
+
+    -- key item(s), fame, gil, bayld, xp, and title
+    if params["ki"] ~= nil then
+        npcUtil.giveKeyItem(player, params["ki"])
+    elseif params["keyItem"] ~= nil then
+        npcUtil.giveKeyItem(player, params["keyItem"])
+    end
+
+    if params["gil"] ~= nil and type(params["gil"]) == "number" then
+        player:addGil(params["gil"] * GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, params["gil"] * GIL_RATE)
+    end
+
+    if params["bayld"] ~= nil and type(params["bayld"]) == "number" then
+        player:addCurrency('bayld', params["bayld"] * BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, params["bayld"] * BAYLD_RATE)
+    end
+
+    if params["xp"] ~= nil and type(params["xp"]) == "number" then
+        player:addExp(params["xp"] * EXP_RATE)
+    end
+
+    if params["title"] ~= nil then
+        player:addTitle(params["title"])
+    end
+
+    -- successfully complete the mission
+    if logId then
+        player:completeMission(logId, missionId)
+    else
+        print("ERROR: Invalid logId encountered in npcUtil.completeMission")
+    end
+
+    -- TODO: Do we need to support multiple missions being set?
+    if
+        params["nextMission"] ~= nil and
+        type(params["nextMission"][1]) == "number" and
+        type(params["nextMission"][2]) == "number"
+    then
+        player:addMission(params["nextMission"][1], params["nextMission"][2])
+    else
+        print("ERROR: Invalid format received for nextMission parameter!")
+    end
+
+    return true
+end
+
+--[[ *******************************************************************************
     check whether trade has all required items
         if yes, confirm all the items and return true
         if no, return false

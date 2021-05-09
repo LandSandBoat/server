@@ -17,9 +17,7 @@ entity.onTrigger = function(player, npc)
     local rozStat = player:getMissionStatus(xi.mission.log_id.ZILART)
 
     if player:getZPos() < 200 then
-        if roz == xi.mission.id.zilart.THE_GATE_OF_THE_GODS and rozStat == 0 then
-            player:startEvent(3) -- First time.
-        elseif
+        if
             roz ~= xi.mission.id.zilart.NONE and
             (
                 roz > xi.mission.id.zilart.THE_GATE_OF_THE_GODS or
@@ -42,9 +40,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 3 then
-        player:setMissionStatus(xi.mission.log_id.ZILART, 1)
-    end
 end
 
 return entity

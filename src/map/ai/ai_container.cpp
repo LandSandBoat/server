@@ -133,11 +133,13 @@ bool CAIContainer::RangedAttack(uint16 targid)
     return false;
 }
 
-bool CAIContainer::Trigger(uint16 targID)
+bool CAIContainer::Trigger(CCharEntity* player)
 {
+    // TODO: ensure idempotency of all onTrigger lua calls (i.e. chests can only be opened once)
+    bool isDoor = luautils::OnTrigger(player, PEntity) == -1;
     if (CanChangeState())
     {
-        auto ret = ChangeState<CTriggerState>(PEntity, targID);
+        auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
         if (PathFind)
         {
             PathFind->Clear(); //#TODO: pause/resume after?

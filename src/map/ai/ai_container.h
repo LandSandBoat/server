@@ -35,6 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "states/state.h"
 
 class CBaseEntity;
+class CCharEntity;
 class CState;
 class CPathFind;
 class CTargetFind;
@@ -57,7 +58,7 @@ public:
     bool MobSkill(uint16 targid, uint16 wsid);
     bool Ability(uint16 targid, uint16 abilityid);
     bool RangedAttack(uint16 targid);
-    bool Trigger(uint16 targid);
+    bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
     bool Inactive(duration _duration, bool canChangeState);
 

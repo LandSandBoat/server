@@ -219,6 +219,9 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
     bool         showName = true;
     uint8        mode     = 0;
 
+    bool  faceGiven = false;
+    uint8 face = 0;
+
     // TODO: Clean this up.  We could potentially accept two int vals for optional args, which could cause unexpected showName behavior.
     if (arg2 != sol::nil)
     {
@@ -230,6 +233,28 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
         {
             mode = arg2.as<uint8>();
         }
+        else if (arg2.get_type() == sol::type::table)
+        {
+            auto table = arg2.as<sol::table>();
+            auto faceArg = table.get<sol::object>("face");
+            faceGiven = true;
+
+            if (faceArg.get_type() == sol::type::number)
+            {
+                face = faceArg.as<uint8>();
+            }
+            else if (faceArg.get_type() == sol::type::number)
+            {
+                face = worldAngle(PTarget->loc.p, m_PBaseEntity->loc.p);
+            }
+            else
+            {
+                faceGiven = false;
+            }
+
+            showName = table.get_or("showName", true);
+            mode     = table.get_or("mode", mode);
+        }
     }
 
     if (arg3 != sol::nil)
@@ -237,9 +262,17 @@ void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageI
         mode = arg3.as<uint8>();
     }
 
-    if (m_PBaseEntity->objtype == TYPE_PC)
+    if (faceGiven)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CMessageTextPacket(PTarget, messageID, showName, mode));
+        PTarget->m_TargID = m_PBaseEntity->targid;
+        PTarget->loc.p.rotation = face;
+        PTarget->updatemask |= UPDATE_POS;
+    }
+
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        player->gotMessage = true;
+        player->pushPacket(new CMessageTextPacket(PTarget, messageID, showName, mode));
     }
     else
     { // broadcast in range
@@ -525,6 +558,26 @@ void CLuaBaseEntity::setLocalVar(std::string const& var, uint32 val)
 void CLuaBaseEntity::resetLocalVars()
 {
     m_PBaseEntity->ResetLocalVars();
+}
+
+/************************************************************************
+ *  Function: clearVarsWithPrefix()
+ *  Purpose : Deletes all variables from a player with the given prefix.
+ *  Example : player:clearVarsWithPrefix(quest)
+ *  Notes   : Prefix has to be a certain length, to avoid deleting unrelated variables.
+ ************************************************************************/
+
+void CLuaBaseEntity::clearVarsWithPrefix(std::string const& prefix)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (!player)
+    {
+        return;
+    }
+
+    charutils::ClearCharVarsWithPrefix(player, prefix);
 }
 
 /************************************************************************
@@ -921,6 +974,24 @@ std::optional<CLuaBaseEntity> CLuaBaseEntity::getEventTarget()
 }
 
 /************************************************************************
+ *  Function: isInEvent()
+ *  Purpose : Returns true if the player is in an event
+ *  Example : if player:isInEvent() then
+ *  Notes   : Primarily used by the interaction framework.
+ ************************************************************************/
+
+bool CLuaBaseEntity::isInEvent()
+{
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return player->isInEvent();
+    }
+
+    return false;
+}
+
+
+/************************************************************************
  *  Function: release()
  *  Purpose : Ends an event for a PC; releases from cutscene
  *  Example : player:release()
@@ -942,8 +1013,63 @@ void CLuaBaseEntity::release()
         PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
     }
 
+    PChar->inSequence = false;
     PChar->pushPacket(new CReleasePacket(PChar, releaseType));
     PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
+}
+
+/************************************************************************
+ *  Function: startSequence()
+ *  Purpose : Sets the player to be flagged as being in a sequence, which
+ *            means that it should not be released immediately from the NPC.
+ *            The player will have to be manually be released by a future call.
+ *  Example : player:startSequence()
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::startSequence()
+{
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        player->inSequence = true;
+        return true;
+    }
+
+    return false;
+}
+
+/************************************************************************
+ *  Function: didGetMessage()
+ *  Purpose : Returns the gotMessage variable for the player.
+ *  Example : player:didGetMessage()
+ *  Notes   : Used for backwards-compatibility with global lua handlers in NPC files,
+ *            to be able to check if an NPC reacted with a message or not.
+ ************************************************************************/
+
+bool CLuaBaseEntity::didGetMessage()
+{
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return player->gotMessage;
+    }
+
+    return false;
+}
+
+/************************************************************************
+ *  Function: resetGotMessage()
+ *  Purpose : Resets the gotMessage variable for players.
+ *  Example : player:resetGotMessage()
+ *  Notes   : Used for backwards-compatibility with global lua handlers in NPC files,
+ *            to be able to check if an NPC reacted with a message or not.
+ ************************************************************************/
+
+void CLuaBaseEntity::resetGotMessage()
+{
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        player->gotMessage = false;
+    }
 }
 
 /************************************************************************
@@ -2215,6 +2341,19 @@ float CLuaBaseEntity::getZPos()
 uint8 CLuaBaseEntity::getRotPos()
 {
     return m_PBaseEntity->GetRotPos();
+}
+
+/************************************************************************
+ *  Function: setRotation()
+ *  Purpose : Sets the rotation of the entity.
+ *  Example : npc:setRotation(82)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setRotation(uint8 rotation)
+{
+    m_PBaseEntity->loc.p.rotation = rotation;
+    m_PBaseEntity->updatemask |= UPDATE_POS;
 }
 
 /************************************************************************
@@ -12672,10 +12811,13 @@ void CLuaBaseEntity::Register()
     // Variables
     SOL_REGISTER("getCharVar", CLuaBaseEntity::getCharVar);
     SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
+    SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
+    SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("addCharVar", CLuaBaseEntity::addCharVar);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
+    SOL_REGISTER("clearVarsWithPrefix", CLuaBaseEntity::clearVarsWithPrefix);
     SOL_REGISTER("getLastOnline", CLuaBaseEntity::getLastOnline);
 
     // Packets, Events, and Flags
@@ -12685,11 +12827,17 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("entityAnimationPacket", CLuaBaseEntity::entityAnimationPacket);
 
     SOL_REGISTER("startEvent", CLuaBaseEntity::startEvent);
+    SOL_REGISTER("startCutscene", CLuaBaseEntity::startEvent); // Compatibility binding
+    SOL_REGISTER("startOptionalCutscene", CLuaBaseEntity::startEvent); // Compatibility binding
     SOL_REGISTER("startEventString", CLuaBaseEntity::startEventString);
     SOL_REGISTER("updateEvent", CLuaBaseEntity::updateEvent);
     SOL_REGISTER("updateEventString", CLuaBaseEntity::updateEventString);
     SOL_REGISTER("getEventTarget", CLuaBaseEntity::getEventTarget);
+    SOL_REGISTER("isInEvent", CLuaBaseEntity::isInEvent);
     SOL_REGISTER("release", CLuaBaseEntity::release);
+    SOL_REGISTER("startSequence", CLuaBaseEntity::startSequence);
+    SOL_REGISTER("didGetMessage", CLuaBaseEntity::didGetMessage);
+    SOL_REGISTER("resetGotMessage", CLuaBaseEntity::resetGotMessage);
 
     SOL_REGISTER("setFlag", CLuaBaseEntity::setFlag);
     SOL_REGISTER("getMoghouseFlag", CLuaBaseEntity::getMoghouseFlag);
@@ -12771,6 +12919,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getZPos", CLuaBaseEntity::getZPos);
     SOL_REGISTER("getRotPos", CLuaBaseEntity::getRotPos);
     SOL_REGISTER("setPos", CLuaBaseEntity::setPos);
+    SOL_REGISTER("setRotation", CLuaBaseEntity::setRotation);
 
     SOL_REGISTER("warp", CLuaBaseEntity::warp);
     SOL_REGISTER("teleport", CLuaBaseEntity::teleport);

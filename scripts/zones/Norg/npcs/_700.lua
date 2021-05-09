@@ -21,14 +21,6 @@ entity.onTrigger = function(player, npc)
     local PromathiaMission = player:getCurrentMission(COP)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
-    -- Checked here to be fair to new players
-    local DMEarrings = 0
-    for i = 14739, 14743 do
-        if (player:hasItem(i)) then
-            DMEarrings = DMEarrings + 1
-        end
-    end
-
     -- On retail, ROV missions always take precedence over other missions
     if RhapsodiesMission == xi.mission.id.rov.THE_BEGINNING then
         player:startEvent(276)
@@ -59,17 +51,8 @@ entity.onTrigger = function(player, npc)
             metTenzen = (PromathiaMission >= xi.mission.id.cop.DAWN) and 2 or 1
         end
         player:startEvent(284, metTenzen, metPrishe)
-    elseif (ZilartMission == xi.mission.id.zilart.WELCOME_TNORG) then
-        player:startEvent(2) -- Zilart Missions 2
-    elseif (ZilartMission == xi.mission.id.zilart.ROMAEVE and player:getMissionStatus(xi.mission.log_id.ZILART) <= 1) then
-        player:startEvent(3) -- Zilart Missions 9
-    elseif (ZilartMission == xi.mission.id.zilart.THE_HALL_OF_THE_GODS) then
-        player:startEvent(169) -- Zilart Missions 11
     elseif (currentMission == xi.mission.id.bastok.THE_PIRATE_S_COVE and player:getMissionStatus(player:getNation()) == 1) then
         player:startEvent(98) -- Bastok Mission 6-2
-    elseif (ZilartMission == xi.mission.id.zilart.THE_SEALED_SHRINE and ZilartStatus == 0 and DMEarrings <=
-        NUMBER_OF_DM_EARRINGS) then
-        player:startEvent(172)
     elseif player:getCharVar('ApocalypseNigh') == 6 and os.time() < player:getCharVar("Apoc_Nigh_Reward") then
         player:startEvent(235)
     elseif RhapsodiesMission == xi.mission.id.rov.RING_MY_BELL then
@@ -88,20 +71,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 2 and option == 0) then
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.WELCOME_TNORG)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.KAZAMS_CHIEFTAINESS)
-    elseif (csid == 3 and option == 0) then
-        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ROMAEVE)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_TEMPLE_OF_DESOLATION)
-    elseif (csid == 169 and option == 0) then
-        player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
-    elseif (csid == 98) then
+    if (csid == 98) then
         player:setMissionStatus(player:getNation(), 2)
-    elseif (csid == 172 and bit.band(option, 0x40000000) == 0) then
-        player:setMissionStatus(xi.mission.log_id.ZILART, 1);
     elseif csid == 276 then
         -- Clear 1-3 flag
         player:setCharVar("RhapsodiesStatus", 0)
