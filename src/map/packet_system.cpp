@@ -1042,7 +1042,6 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PItem != nullptr && !PItem->isSubType(ITEM_LOCKED))
     {
-
         // Break linkshell if the main shell was disposed of.
         CItemLinkshell* ItemLinkshell = dynamic_cast<CItemLinkshell*>(PItem);
         if (ItemLinkshell && ItemLinkshell->GetLSType() == LSTYPE_LINKSHELL)
