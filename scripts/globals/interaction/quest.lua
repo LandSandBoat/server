@@ -1,8 +1,8 @@
-----------------------------
------ Quest class
-----------------------------
+-----------------------------------
+-- Quest class
+-----------------------------------
 require('scripts/globals/interaction/container')
-
+-----------------------------------
 
 Quest = setmetatable({ areaId = -1 }, { __index = Container })
 Quest.__index = Quest
@@ -28,8 +28,9 @@ function Quest:getCheckArgs(player)
     return { player:getQuestStatus(self.areaId, self.questId) }
 end
 
------------------------------
+-----------------------------------
 -- Quest operations
+-----------------------------------
 
 function Quest:begin(player)
     player:addQuest(self.areaId, self.questId)
