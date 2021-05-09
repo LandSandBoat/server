@@ -185,6 +185,7 @@ namespace luautils
         set_function("vanadielDayOfTheYear", &luautils::VanadielDayOfTheYear);
         set_function("vanadielYear", &luautils::VanadielYear);
         set_function("vanadielMonth", &luautils::VanadielMonth);
+        set_function("vanadielUniqueDay", &luautils::VanadielUniqueDay);
         set_function("vanadielDayElement", &luautils::VanadielDayElement);
         set_function("vanadielMoonPhase", &luautils::VanadielMoonPhase);
         set_function("vanadielMoonDirection", &luautils::VanadielMoonDirection);
@@ -857,6 +858,27 @@ namespace luautils
     {
         TracyZoneScoped;
         return CVanaTime::getInstance()->getMonth();
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *   Return Vanadiel Unique Day                                          *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 VanadielUniqueDay()
+    {
+        TracyZoneScoped;
+
+        int32 day;
+        int32 month;
+        int32 year;
+
+        day   = CVanaTime::getInstance()->getDayOfTheMonth();
+        month = CVanaTime::getInstance()->getMonth();
+        year  = CVanaTime::getInstance()->getYear();
+
+        return (year * 360) + (month * 30 - 30) + day;
     }
 
     /************************************************************************

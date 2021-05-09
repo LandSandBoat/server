@@ -494,13 +494,13 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.OTHER_AREAS]] =
     {
-        RYCHARDE_THE_CHEF               = 0,  -- +
-        WAY_OF_THE_COOK                 = 1,  -- +
-        UNENDING_CHASE                  = 2,  -- +
-        HIS_NAME_IS_VALGEIR             = 3,  -- +
-        EXPERTISE                       = 4,  -- +
-        THE_CLUE                        = 5,  -- +
-        THE_BASICS                      = 6,  -- +
+        RYCHARDE_THE_CHEF               = 0,  -- + Converted
+        WAY_OF_THE_COOK                 = 1,  -- + Converted
+        UNENDING_CHASE                  = 2,  -- + Converted
+        HIS_NAME_IS_VALGEIR             = 3,  -- + Converted
+        EXPERTISE                       = 4,  -- + Converted
+        THE_CLUE                        = 5,  -- + Converted
+        THE_BASICS                      = 6,  -- + Converted
         ORLANDO_S_ANTIQUES              = 7,  -- +
         THE_SAND_CHARM                  = 8,  -- +
         A_POTTER_S_PREFERENCE           = 9,  -- +
