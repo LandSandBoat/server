@@ -27,9 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(460.022, -1.77, -103.442, 188)
     end
 
-    if ENABLE_COP == 1 and prevZone == xi.zone.QUFIM_ISLAND and player:getCurrentMission(COP) < xi.mission.id.cop.THE_RITES_OF_LIFE then
-        cs = 22
-    elseif player:getCurrentMission(ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and prevZone == xi.zone.QUFIM_ISLAND then
+    if player:getCurrentMission(ACP) == xi.mission.id.acp.BORN_OF_HER_NIGHTMARES and prevZone == xi.zone.QUFIM_ISLAND then
         cs = 34
     end
 
@@ -66,21 +64,9 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setCharVar("option", 0)
     elseif csid == 4 and (option == 0 or option >= 3) then
         player:setCharVar("option", 0)
-    elseif csid == 22 then
-        player:startEvent(36)
     elseif csid == 34 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.BORN_OF_HER_NIGHTMARES)
         player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.BANISHING_THE_ECHO)
-    elseif csid == 36 then
-        player:startEvent(37)
-    elseif csid == 37 then
-        player:startEvent(38)
-    elseif csid == 38 then
-        player:startEvent(39)
-    elseif csid == 39 then
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_FLAMES_BECKON)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_RITES_OF_LIFE)
-        player:setCharVar("COP1", 1)
     end
 end
 
