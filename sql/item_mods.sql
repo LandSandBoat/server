@@ -2074,8 +2074,8 @@ INSERT INTO `item_mods` VALUES (10718,1,44);
 INSERT INTO `item_mods` VALUES (10718,2,24);
 INSERT INTO `item_mods` VALUES (10718,8,7);
 INSERT INTO `item_mods` VALUES (10718,9,7);
--- Reward Recast?
 INSERT INTO `item_mods` VALUES (10718,360,3);      -- Monster Trousers +2: "Charm"+3
+-- INSERT INTO `item_mods` VALUES (10718,REWARD_RECAST,10);
 INSERT INTO `item_mods` VALUES (10719,1,40);
 INSERT INTO `item_mods` VALUES (10719,2,50);
 INSERT INTO `item_mods` VALUES (10719,5,50);
