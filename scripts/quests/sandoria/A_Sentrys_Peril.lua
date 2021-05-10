@@ -49,6 +49,10 @@ quest.sections = {
 
         [xi.zone.SOUTHERN_SAN_DORIA] = {
             ['Glenne'] = {
+                onTrade = function(player, npc, trade)
+                    return quest:event(514) -- "I cannot accept this. Take it back."
+                end,
+
                 onTrigger = function(player, npc)
                     if player:hasItem(xi.items.DOSE_OF_OINTMENT) then
                         return quest:event(520) -- reminder to deliver ointment
@@ -70,12 +74,12 @@ quest.sections = {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.DOSE_OF_OINTMENT) then
                         if player:getFreeSlotsCount() == 0 then
-                            return quest:event(118)
+                            return quest:event(118) -- "Ah...but it seems you're already carrying too much."
                         else
                             return quest:progressEvent(100)
                         end
                     else
-                        return quest:event(106)
+                        return quest:event(106) -- "What's this? I can't accept gifts from strangers."
                     end
                 end,
             },
@@ -126,6 +130,8 @@ quest.sections = {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.OINTMENT_CASE) then
                         return quest:progressEvent(513)
+                    else
+                        return quest:event(514) -- "I cannot accept this. Take it back."
                     end
                 end,
             },
