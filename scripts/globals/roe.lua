@@ -163,6 +163,8 @@ local defaults = {
                                 --        "timed"  - 4-hour record.
                                 --        "repeat" - Repeatable record.
                                 --        "daily"  - Daily record.
+                                --        "weekly" - Weekly record.
+                                --        "unity"  - Weekly reset, but doesn't reset progress, only completion.
                                 --        "retro"  - Can be claimed retroactively. Calls check on taking record.
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
     reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
@@ -189,7 +191,9 @@ RoeParseRecords(records)
         item = { {640,2}, 641 },          -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
-        xp = 1000
+        xp = 1000,
+        accolades = 300,
+        capacity = 400,
     })
 *************************************************************************** --]]
 local function completeRecord(player, record)
