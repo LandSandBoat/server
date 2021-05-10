@@ -40,7 +40,7 @@ quest.sections = {
 
             onEventFinish = {
                 [8] = function(player, csid, option, npc)
-                    if option == 1 and npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS) then
+                    if option == 1 and (player:hasItem(xi.items.SPEAR_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS)) then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -68,7 +68,7 @@ quest.sections = {
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(12) -- cont 2
                     else
-                        return quest:event(11) -- cont 1
+                        return quest:event(11, player:hasItem(xi.items.SPEAR_OF_TRIALS) and 1 or 0) -- cont 1
                     end
                 end,
 
@@ -87,7 +87,7 @@ quest.sections = {
 
             onEventFinish = {
                 [11] = function(player, csid, option, npc)
-                    if option == 1 then
+                    if option == 1 and not player:hasItem(xi.items.SPEAR_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.SPEAR_OF_TRIALS)
                     elseif option == 2 then
                         player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.METHODS_CREATE_MADNESS)
