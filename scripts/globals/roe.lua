@@ -166,6 +166,8 @@ local defaults = {
                                 --        "weekly" - Weekly record.
                                 --        "unity"  - Weekly reset, but doesn't reset progress, only completion.
                                 --        "retro"  - Can be claimed retroactively. Calls check on taking record.
+                                --        "hidden" - Special internal-use record used only as a client-flag to unlock others.
+                                --                   Does not count towards completed record count.
     reqs = {},                  -- Other requirements. List of function names from above, with required values.
     reward = {},                -- Reward parameters give on completion. (See completeRecord directly below.)
 }

@@ -108,6 +108,7 @@ namespace roeutils
         roeutils::RoeSystem.ImplementedRecords.reset();
         roeutils::RoeSystem.RepeatableRecords.reset();
         roeutils::RoeSystem.RetroactiveRecords.reset();
+        roeutils::RoeSystem.HiddenRecords.reset();
         roeutils::RoeSystem.DailyRecords.reset();
         roeutils::RoeSystem.DailyRecordIDs.clear();
         roeutils::RoeSystem.NotifyThresholds.fill(1);
@@ -147,6 +148,8 @@ namespace roeutils
             {
                 for (auto& flag_entry : flags)
                 {
+                    // TODO: This only runs once on load, so it's okay for now, but it is
+                    //       getting kind of ugly and could probably be improved later.
                     std::string flag = flag_entry.first.as<std::string>();
                     if (flag == "daily")
                     {
@@ -174,6 +177,10 @@ namespace roeutils
                     else if (flag == "retro")
                     {
                         roeutils::RoeSystem.RetroactiveRecords.set(recordID);
+                    }
+                    else if (flag == "hidden")
+                    {
+                        roeutils::RoeSystem.HiddenRecords.set(recordID);
                     }
                     else
                     {
