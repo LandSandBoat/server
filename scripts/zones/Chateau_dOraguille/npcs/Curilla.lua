@@ -9,14 +9,12 @@ local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/settings")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.savage_blade
 local sandyQuests = xi.quest.id.sandoria
 
 local TrustMemory = function(player)
@@ -45,16 +43,9 @@ local TrustMemory = function(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    end
-
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
     local theGeneralSecret = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
@@ -120,11 +111,6 @@ entity.onTrigger = function(player, npc)
         envelopedInDarkness == QUEST_AVAILABLE
     then
         player:startEvent(94) -- Start
-
-    -- "Old Wounds" (Savage Blade WS)
-    -- [Prioritize RDM Artifact; otherwise RDM AF will be blocked during the possibly extensive duration of this]
-    elseif wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
 
     -- San d'Oria Missions (optional dialogues)
     elseif
@@ -227,8 +213,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 573 and option == 2 then
         player:addSpell(902, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 902)
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SAVAGE_BLADE_LEARNED)
     end
 end
 

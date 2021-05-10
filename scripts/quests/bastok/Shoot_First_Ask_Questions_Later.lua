@@ -3,11 +3,16 @@
 -- Cid !pos -12 -12 1 237
 -- qm1 !pos -11 -19 -177 153
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require('scripts/globals/interaction/quest')
+require("scripts/globals/interaction/quest")
 require("scripts/globals/weaponskillids")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/items")
+-----------------------------------
+local metalworksID = require("scripts/zones/Metalworks/IDs")
+local boyahdaTreeID = require("scripts/zones/The_Boyahda_Tree/IDs")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
@@ -29,13 +34,13 @@ quest.sections = {
         [xi.zone.METALWORKS] = {
             ['Cid'] = {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(795) -- start
+                    return quest:event(795):oncePerZone() -- start
                 end,
             },
 
             onEventFinish = {
                 [795] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.GUN_OF_TRIALS) then
+                    if player:hasItem(xi.items.GUN_OF_TRIALS) or npcUtil.giveItem(player, xi.items.GUN_OF_TRIALS) then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -55,13 +60,15 @@ quest.sections = {
                     if player:hasKeyItem(xi.ki.ANNALS_OF_TRUTH) then
                         return quest:progressEvent(799) -- complete
                     else
-                        return quest:event(796) -- cont 1
+                        local hideReacquireMenuItem = (player:hasItem(xi.items.GUN_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
+                        return quest:event(796, hideReacquireMenuItem) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    local wsPoints = (trade:getItem(0):getWeaponskillPoints())
                     if npcUtil.tradeHasExactly(trade, xi.items.GUN_OF_TRIALS) then
+                        local wsPoints = trade:getItem(0):getWeaponskillPoints()
+
                         if wsPoints < 300 then
                             return quest:event(797) -- unfinished weapon
                         else
@@ -73,24 +80,26 @@ quest.sections = {
 
             onEventFinish = {
                 [796] = function(player, csid, option, npc)
-                    if option == 1 then
+                    if option == 1 and not player:hasItem(xi.items.GUN_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.GUN_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(BASTOK, SHOOT_FIRST_ASK_QUESTIONS_LATER)
+                        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHOOT_FIRST_ASK_QUESTIONS_LATER)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end
                 end,
+
                 [798] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
+
                 [799] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                     player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                     player:addLearnedWeaponskill(xi.ws_unlock.DETONATOR)
-                    player:messageSpecial(zones[player:getZoneID()].text.DETONATOR_LEARNED)
+                    player:messageSpecial(metalworksID.text.DETONATOR_LEARNED)
                     quest:complete(player)
                 end,
             },
@@ -102,12 +111,17 @@ quest.sections = {
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
                         player:addKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        return quest:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
-                    elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and npcUtil.popFromQM(player, npc, zones[player:getZoneID()].mob.BEET_LEAFHOPPER, {hide = 0}) then
-                        return quest:messageSpecial(zones[player:getZoneID()].text.SENSE_OMINOUS_PRESENCE)
+                        return quest:messageSpecial(boyahdaTreeID.text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
+                    elseif
+                        player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
+                        not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
+                        npcUtil.popFromQM(player, npc, boyahdaTreeID.mob.BEET_LEAFHOPPER, {hide = 0})
+                    then
+                        return quest:messageSpecial(boyahdaTreeID.text.SENSE_OMINOUS_PRESENCE)
                     end
                 end,
             },
+
             ['Beet_Leafhopper'] = {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
@@ -115,21 +129,6 @@ quest.sections = {
             },
         },
     },
-
-    {
-        check = function(player, status, vars)
-            return status >= QUEST_AVAILABLE
-        end,
-
-        [xi.zone.THE_BOYAHDA_TREE] = {
-            ['qm1'] = {
-                onTrigger = function(player, npc)
-                    return quest:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
-                end,
-            },
-        },
-    },
 }
-
 
 return quest

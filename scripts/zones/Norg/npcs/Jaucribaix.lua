@@ -11,18 +11,11 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
-require("scripts/globals/wsquest")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.tachi_kasha
-
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if (wsQuestEvent ~= nil) then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {1152, 1153})) then -- Bomb Steel, Sacred Branch
+    if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.FORGE_YOUR_DESTINY) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {1152, 1153})) then -- Bomb Steel, Sacred Branch
         player:startEvent(27)
     elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.HANDFUL_OF_CRYSTAL_SCALES) and npcUtil.tradeHas(trade, 17809)) then -- Mumeito
         player:startEvent(141)
@@ -42,14 +35,9 @@ entity.onTrigger = function(player, npc)
     local aThiefinNorgCS    = player:getCharVar("aThiefinNorgCS")
     local mLvl              = player:getMainLvl()
     local mJob              = player:getMainJob()
-    local wsQuestEvent      = xi.wsquest.getTriggerEvent(wsQuest, player)
-
-    -- THE POTENTIAL WITHIN
-    if (wsQuestEvent ~= nil) then
-        player:startEvent(wsQuestEvent)
 
     -- FORGE YOUR DESTINY
-    elseif (forgeYourDestiny == QUEST_AVAILABLE and mLvl >= ADVANCED_JOB_LEVEL) then
+    if (forgeYourDestiny == QUEST_AVAILABLE and mLvl >= ADVANCED_JOB_LEVEL) then
         player:startEvent(25, 1153, 1152) -- start quest
     elseif (forgeYourDestiny == QUEST_ACCEPTED) then
         if (swordTimer == 0) then
@@ -160,8 +148,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 164) then
         npcUtil.completeQuest(player, OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG, {item=13868, title=xi.title.PARAGON_OF_SAMURAI_EXCELLENCE, fame=60, fameArea=NORG, var={"aThiefinNorgCS"}})
 
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.TACHI_KASHA_LEARNED)
     end
 end
 

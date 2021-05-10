@@ -5,7 +5,6 @@
 -- Involved in Quest: Axe The Competition
 -- !pos 220 -8.11 205.38 159
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.decimation, player)
 end
 
 return entity

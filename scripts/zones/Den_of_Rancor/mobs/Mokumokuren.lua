@@ -5,7 +5,7 @@
 -- !pos 117 36 -280 160
 -- Involved in Quest: Souls in Shadow
 -----------------------------------
-require("scripts/globals/wsquest")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.spiral_hell, player)
 end
 
 return entity
