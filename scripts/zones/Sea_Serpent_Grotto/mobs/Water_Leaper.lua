@@ -5,7 +5,6 @@
 -- !pos 112.5 0.8 -126.2 176
 -- Involved in Quest: Methods Create Madness
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.impulse_drive, player)
 end
 
 return entity
