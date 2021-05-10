@@ -273,22 +273,24 @@ namespace roeutils
         return PChar->m_eminenceLog.complete[page] & (1 << bit);
     }
 
-    uint16 GetNumEminenceCompleted(CCharEntity* PChar)
-    {
-        uint16 completedCount = 0;
+    uint16 GetNumEminenceCompleted(CCharEntity* PChar){
+        uint16 completedCount {0};
 
-        for (int page = 0; page < 512; page++)
+        for (uint16 page = 0; page < 512; page++)
         {
-            int pageVal = PChar->m_eminenceLog.complete[page];
-
-            while (pageVal)
+            unsigned long bitIndex {0};
+            uint8 pageVal = PChar->m_eminenceLog.complete[page];
+            // Strip off and check only the set bits - Hidden records are not counted.
+            for ( ; pageVal; completedCount += !RoeSystem.HiddenRecords.test(page * 8 + bitIndex))
             {
-                completedCount += pageVal & 1;
-                pageVal >>= 1;
+                #ifdef _MSC_VER
+                    _BitScanForward(&bitIndex, pageVal);
+                #else
+                    bitIndex = __builtin_ctz(pageVal);
+                #endif
+                pageVal &= (pageVal - 1);
             }
         }
-
-        // TODO: Verify count is accurate.  We don't want to count hidden objectives
 
         return completedCount;
     }
