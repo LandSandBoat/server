@@ -285,7 +285,15 @@ function getRoeRecords(triggers)
             reward = { sparks = 100, xp = 300 },
         },
 
-        -- TODO: [505] Obtain a Support Job (Has two potential quest completes for objective)
+        [ 505] = { -- Obtain a Support Job
+            trigger = triggers.questComplete,
+            flags = set{"retro"},
+            check = function(self, player, params)
+                        return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ELDER_MEMORIES) == QUEST_COMPLETED or
+                                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY) == QUEST_COMPLETED
+                    end,
+            reward = { sparks = 100, xp = 500 },
+        },
 
         [ 506] = { -- Obtain an Alter Ego: San d'Oria
             trigger = triggers.questComplete,
