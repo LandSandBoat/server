@@ -52,15 +52,15 @@ zones[xi.zone.PALBOROUGH_MINES] =
     },
     npc =
     {
-        TREASURE_CHEST = 17363371,
+        TREASURE_CHEST = 17363372,
         MINING =
         {
-            17363365,
             17363366,
             17363367,
             17363368,
             17363369,
             17363370,
+            17363371,
         },
     },
 }
