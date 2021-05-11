@@ -523,7 +523,7 @@ appraisalUtil.appraisalItems =
         {
             items =
             {
-                {100, dsp.items.STORM_GAGES},
+                {100, xi.items.STORM_GAGES},
             },
         },
         [SEAGULL_GROUNDED] =
@@ -835,8 +835,8 @@ appraisalUtil.appraisalItems =
                 {30, 13600}, -- dhmamal mantle +1
                 {25, 13601}, -- cotton cape +1
                 {25, 13608}, -- lizard mantle +1
-                { 5, dsp.items.STORM_CAPE},
-                {15, dsp.items.ENHANCING_MANTLE},
+                { 5, xi.items.STORM_CAPE},
+                {15, xi.items.ENHANCING_MANTLE},
             },
         },
         [appraisalUtil.Origin.NYZUL_OLD_TWO_WINGS] =
@@ -925,20 +925,20 @@ appraisalUtil.appraisalItems =
         {
             items =
             {
-                {55, dsp.items.FEATHER_COLLAR},
-                {30, dsp.items.GORGET_1},
-                {10, dsp.items.JAGD_GORGET},
-                { 5, dsp.items.STORM_MUFFLER},
+                {55, xi.items.FEATHER_COLLAR},
+                {30, xi.items.GORGET_1},
+                {10, xi.items.JAGD_GORGET},
+                { 5, xi.items.STORM_MUFFLER},
             },
         },
         [PREEMPTIVE_STRIKE] =
         {
             items =
             {
-                {55, 13075}, -- Feather Collar
-                {30, 13065}, -- Gorget +1
-                {10, 13128}, -- Spectacles
-                { 5, 15520}, -- Storm Torqe
+                {55, xi.items.FEATHER_COLLAR},
+                {30, xi.items.GORGET_1},
+                {10, xi.items.SPECTACLES},
+                { 5, xi.items.STORM_TORQUE},
             },
         },
         [appraisalUtil.Origin.NYZUL_SHADOW_EYE] =
@@ -1031,7 +1031,7 @@ appraisalUtil.appraisalItems =
                 { 8, 1887}, -- Glass Sheet
                 {20, 2146}, -- Merrow Scale
                 {15, 2336}, -- Soulflayer Staff
-                {10, 4097}, -- Ice Crystal
+                {10, xi.items.ICE_CRYSTAL},
                 { 1, 5315}, -- Toolbag: Jusa
                 { 3, 5353}, -- Iron Bullet Pouch
                 { 6, 5450}, -- Lakerda
@@ -1041,17 +1041,17 @@ appraisalUtil.appraisalItems =
         {
             items =
             {
-                {10, dsp.items.EGGPLANT},
-                { 9, dsp.items.GARDENIA_SEED},
-                {10, dsp.items.ICE_CRYSTAL},
-                { 7, dsp.items.KABURA_QUIVER},
-                {13, dsp.items.LINEN_CLOTH},
-                { 8, dsp.items.MERROW_SCALE},
-                { 5, dsp.items.PHALAENOPSIS},
-                {10, dsp.items.POROGGO_HAT},
-                { 6, dsp.items.SOULFLAYER_HAT},
-                {15, dsp.items.TSURARA},
-                { 7, dsp.items.WHITE_ROCK},
+                {10, xi.items.EGGPLANT},
+                { 9, xi.items.GARDENIA_SEED},
+                {10, xi.items.ICE_CRYSTAL},
+                { 7, xi.items.KABURA_QUIVER},
+                {13, xi.items.LINEN_CLOTH},
+                { 8, xi.items.MERROW_SCALE},
+                { 5, xi.items.PHALAENOPSIS},
+                {10, xi.items.POROGGO_HAT},
+                { 6, xi.items.SOULFLAYER_STAFF},
+                {15, xi.items.TSURARA},
+                { 7, xi.items.WHITE_ROCK},
             },
         },
         [IMPERIAL_AGENT_RESCUE] =
@@ -1078,12 +1078,12 @@ appraisalUtil.appraisalItems =
         {
             items =
             {
-                {20, dsp.items.SULFUR},
-                {20, dsp.items.FLAN_MEAT},
-                { 5, dsp.items.BULLET_POUCH},
-                {20, dsp.items.TROLL_PAULDRON},
-                {10, dsp.items.SPARTAN_BULLET},
-                {25, dsp.items.HOLY_BASIL},
+                {20, xi.items.SULFUR},
+                {20, xi.items.FLAN_MEAT},
+                { 5, xi.items.BULLET_POUCH},
+                {20, xi.items.TROLL_PAULDRON},
+                {10, xi.items.SPARTAN_BULLET},
+                {25, xi.items.HOLY_BASIL},
             },
         },
         [PREEMPTIVE_STRIKE] =
@@ -1346,7 +1346,7 @@ function appraisalUtil.assaultChestTrigger(player, npc, qItemTable, regItemTable
             npc:entityAnimationPacket("open")
             npc:setLocalVar("open", 1)
             npc:timer(15000, function(npc) npc:entityAnimationPacket("kesu") end)
-            npc:timer(16000, function(npc) npc:setStatus(dsp.status.DISAPPEAR) end)
+            npc:timer(16000, function(npc) npc:setStatus(xi.status.DISAPPEAR) end)
             if appraisalUtil.canGetQuestionMarkItem(player, instance, area) then
                 for i = 1, #qItemTable, 1 do
                     local lootGroup = qItemTable[i]
