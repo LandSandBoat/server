@@ -3093,12 +3093,10 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
 
                 bool silent = table.get_or("silent", false);
 
-                uint8*      appraisalID;
                 sol::object appraisalObj = table["appraisal"];
-                if (appraisalObj.valid() && appraisalObj.is<uint8>())
+                if (appraisalObj.get_type() == sol::type::number)
                 {
-                    appraisalID = appraisalObj.as<uint8*>();
-                    PItem->setAppraisalID(appraisalID);
+                    PItem->setAppraisalID(appraisalObj.as<uint8>());
                 }
 
                 std::string signature;

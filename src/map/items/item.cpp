@@ -354,7 +354,12 @@ bool CItem::isSent() const
 *                                                                       *
 ************************************************************************/
 
-void CItem::setAppraisalID(uint8* appID)
+uint8 CItem::getAppraisalID()
 {
-    memcpy(m_extra + 0x16, &appID, sizeof(m_extra) - 0x16);
+    return m_extra[0x16];
+}
+
+void CItem::setAppraisalID(uint8 appID)
+{
+    m_extra[0x16] = appID;
 }

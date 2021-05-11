@@ -118,7 +118,8 @@ public:
     const int8* getReceiver();
     void        setReceiver(int8* receiver);
 
-    void setAppraisalID(uint8* appID);
+    uint8 getAppraisalID();
+    void setAppraisalID(uint8 appID);
 
     virtual const int8* getSignature();
     virtual void        setSignature(int8* signature);
