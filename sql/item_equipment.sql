@@ -10792,6 +10792,7 @@ INSERT INTO `item_equipment` VALUES (21880,'ajja_lance',99,119,10305,391,0,0,1,0
 INSERT INTO `item_equipment` VALUES (21881,'eletta_lance',99,119,10305,453,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21882,'kaja_lance',99,119,10305,841,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (21883,'shining_one',99,119,10305,841,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (21886,'iapetus',1,0,4194303,205,0,0,1,0); -- TODO: capture model from retail (using bronze spear model)
 INSERT INTO `item_equipment` VALUES (21904,'kanaria',99,119,4096,371,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21905,'taka',99,119,4096,605,0,0,3,0);
 INSERT INTO `item_equipment` VALUES (21906,'kikoku',99,119,4096,551,0,1,3,0);
@@ -10883,6 +10884,7 @@ INSERT INTO `item_equipment` VALUES (22084,'eletta_staff',99,119,1590047,305,0,0
 INSERT INTO `item_equipment` VALUES (22085,'kaja_staff',99,119,1590047,846,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (22086,'xoanon',99,119,1590047,846,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (22088,'voluspa_pole',99,119,1589262,298,0,0,1,0);
+INSERT INTO `item_equipment` VALUES (22089,'sophistry',1,0,4194303,291,0,0,1,0); -- TODO: capture model from retail (using Onion Staff model)
 INSERT INTO `item_equipment` VALUES (22091,'sorcerers_staff',99,119,8,326,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (22092,'archmages_staff',99,119,8,326,0,0,1,0);
 INSERT INTO `item_equipment` VALUES (22093,'kaumodaki',99,119,8,820,0,0,1,0);
@@ -12069,6 +12071,12 @@ INSERT INTO `item_equipment` VALUES (26210,'taliah_ring',99,0,147712,0,0,0,24576
 INSERT INTO `item_equipment` VALUES (26211,'flamma_ring',99,0,10433,0,0,0,24576,0);
 INSERT INTO `item_equipment` VALUES (26212,'mummu_ring',99,0,332834,0,0,0,24576,0);
 INSERT INTO `item_equipment` VALUES (26213,'mallquis_ring',99,0,1572872,0,0,0,24576,0);
+INSERT INTO `item_equipment` VALUES (26214,'epaminondass_ring',99,0,4194303,0,0,0,24576,0);
+INSERT INTO `item_equipment` VALUES (26215,'menelauss_ring',99,0,4194303,0,0,0,24576,0);
+INSERT INTO `item_equipment` VALUES (26216,'dreki_ring',99,0,8192,0,0,0,24576,0);
+INSERT INTO `item_equipment` VALUES (26217,'ligeia_ring',99,0,4194303,0,0,0,24576,0);
+INSERT INTO `item_equipment` VALUES (26218,'beithir_ring',99,0,441827,0,0,0,24576,0);
+INSERT INTO `item_equipment` VALUES (26219,'najis_loop',1,0,4194303,0,0,0,24576,0);
 INSERT INTO `item_equipment` VALUES (26240,'tantalic_cape',99,0,4194303,0,0,0,32768,0);
 INSERT INTO `item_equipment` VALUES (26241,'scintillating_cape',99,0,16384,0,0,0,32768,0);
 INSERT INTO `item_equipment` VALUES (26242,'phalangite_mantle',99,0,2473971,0,0,0,32768,0);
