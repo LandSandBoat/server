@@ -7963,6 +7963,8 @@ INSERT INTO `mob_groups` VALUES (60,0,111,'Orcish_Atlatl',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (61,0,111,'Orcish_Praetor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (62,0,111,'Orcish_Axeman',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (63,0,111,'Harnessed_Smilodon',0,128,0,0,0,0,0,0);
+
+-- Of Knights and Orcs
 INSERT INTO `mob_groups` VALUES (64,0,111,'Slackjawed_Mukdrom',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (65,0,111,'Excenmille',0,128,0,0,0,0,0,0);
 
@@ -8234,6 +8236,8 @@ INSERT INTO `mob_groups` VALUES (59,0,115,'Astral_Box',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (60,0,115,'Spriggan_Sifter',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (61,0,115,'Spriggan_Crier',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (62,0,115,'Spriggan_Graverobber',0,128,0,0,0,0,0,0);
+
+-- The Doll Whisperer
 INSERT INTO `mob_groups` VALUES (63,0,115,'Chepelle',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (64,0,115,'Chepelles_Tiger',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (65,0,115,'Chepelles_Sheep',0,128,0,0,0,0,0,0);
@@ -8296,9 +8300,12 @@ INSERT INTO `mob_groups` VALUES (48,0,116,'Slime',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (49,0,116,'She-Slime',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (50,0,116,'Metal_Slime',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (51,4851,116,'Prickly_Pitriv',0,128,0,0,0,80,80,0);
+
+-- The Cardian's Duty
 INSERT INTO `mob_groups` VALUES (52,0,116,'Yagudo_Vicar',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (53,0,116,'Yagudo_Centurion',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (54,0,116,'Yagudo_Underling',0,128,0,0,0,0,0,0);
+
 INSERT INTO `mob_groups` VALUES (55,0,116,'King_of_Spades',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (56,3222,116,'Pug_Pugil',330,0,463,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (57,6562,116,'Magicked_Bones_blm',330,1,769,0,0,3,8,0);
@@ -10114,6 +10121,9 @@ INSERT INTO `mob_groups` VALUES (24,2916,143,'NoMho_Crimsonarmor',86400,0,2839,0
 INSERT INTO `mob_groups` VALUES (25,2897,143,'NiGhu_Nestfender',0,128,2825,0,0,58,58,0);
 INSERT INTO `mob_groups` VALUES (26,6725,143,'Incensed_Pineapple',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
 
+-- Cornelia's Call to Action
+INSERT INTO `mob_groups` VALUES (27,0,143,'Mind-warped_Scorpion',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
+
 -- ------------------------------------------------------------
 -- Waughroon_Shrine (Zone 144)
 -- ------------------------------------------------------------
@@ -10219,6 +10229,8 @@ INSERT INTO `mob_groups` VALUES (24,4456,145,'Yagudo_Theologist',660,0,2772,0,0,
 INSERT INTO `mob_groups` VALUES (25,4444,145,'Yagudo_Priest',660,0,2751,0,0,21,23,0);
 INSERT INTO `mob_groups` VALUES (26,4267,145,'Vuu_Puqu_the_Beguiler',0,32,2596,0,0,21,22,0);
 INSERT INTO `mob_groups` VALUES (27,4113,145,'Vaa_Huja_the_Erudite',0,128,0,0,0,45,45,0);
+
+-- Zhuu Buxu's Gambit
 INSERT INTO `mob_groups` VALUES (28,0,145,'Yagudo_Lookout',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
@@ -10445,6 +10457,8 @@ INSERT INTO `mob_groups` VALUES (22,3618,150,'Siegebreaker_Wujroj',0,128,0,0,0,6
 INSERT INTO `mob_groups` VALUES (23,3588,150,'Shatterskull_Mippdapp',0,128,0,0,0,69,75,0);
 INSERT INTO `mob_groups` VALUES (24,1814,150,'Grimbolt_Onkzok',0,128,0,0,0,69,75,0);
 INSERT INTO `mob_groups` VALUES (25,3552,150,'Sevenskewer_Krugglug',0,128,0,0,0,69,75,0);
+
+-- Dancing Prince
 INSERT INTO `mob_groups` VALUES (26,0,150,'Orcish_Bewitcher',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
@@ -10558,6 +10572,8 @@ INSERT INTO `mob_groups` VALUES (37,5159,153,'Modron',0,128,0,0,9999,94,95,0);
 INSERT INTO `mob_groups` VALUES (38,5160,153,'Modrons_Druid',0,128,0,0,0,92,93,0);
 INSERT INTO `mob_groups` VALUES (39,6876,153,'Ayapec',0,128,0,0,0,125,125,0);
 INSERT INTO `mob_groups` VALUES (40,6877,153,'Hidhaegg',0,128,0,0,0,135,135,0);
+
+-- Star Onion Fortune
 INSERT INTO `mob_groups` VALUES (41,0,153,'Templar_Crawler',0,128,0,0,0,0,0,0);
 
 -- ------------------------------------------------------------
@@ -11579,7 +11595,15 @@ INSERT INTO `mob_groups` VALUES (3,6469,172,'Colliery_Bat',330,0,1748,0,0,75,80,
 INSERT INTO `mob_groups` VALUES (4,6365,172,'Soot_Crab',330,0,2103,0,0,75,78,0);
 INSERT INTO `mob_groups` VALUES (5,3371,172,'River_Crab',330,0,2103,0,0,2,4,0);
 INSERT INTO `mob_groups` VALUES (6,6399,172,'Veindigger_Leech',330,0,963,0,0,75,80,0);
+
+-- The Gloom Phantom's Approach
 INSERT INTO `mob_groups` VALUES (7,0,172,'Gloom_Phantom',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
+
+-- Best Served Cold
+INSERT INTO `mob_groups` VALUES (8,0,172,'DoBho_Venomtail',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (9,0,172,'Old_Quadav',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (10,0,172,'Copper_Quadav',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
+INSERT INTO `mob_groups` VALUES (11,0,172,'Brass_Quadav',0,128,0,0,0,0,0,0); -- TODO: capture level from retail
 
 -- ------------------------------------------------------------
 -- Korroloka_Tunnel (Zone 173)
@@ -11618,6 +11642,8 @@ INSERT INTO `mob_groups` VALUES (28,2283,173,'Korroloka_Leech',0,128,343,250,0,3
 INSERT INTO `mob_groups` VALUES (29,2748,173,'Morion_Worm',0,128,1739,2000,2000,30,30,0);
 INSERT INTO `mob_groups` VALUES (30,2633,173,'Metallic_Slime',0,128,1664,0,0,24,30,0);
 INSERT INTO `mob_groups` VALUES (31,1642,173,'Goblin_Bounty_Hunter',300,0,1031,0,0,10,10,0);
+
+-- The Destiny Destroyers
 INSERT INTO `mob_groups` VALUES (32,0,173,'Gloom_Phantom',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (33,0,173,'Magh_Bihu',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (34,0,173,'Dazbog',0,128,0,0,0,0,0,0);

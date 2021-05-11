@@ -775,8 +775,24 @@ xi.effect =
     NEGATE_CHARM             = 610,
     MAGIC_EVASION_BOOST_II   = 611,
     COLURE_ACTIVE            = 612,
-
+    MUMORS_RADIANCE          = 613,
+    ULLEGORES_GLOOM          = 614,
+    BOOST_II                 = 615,
+    ARTISANAL_KNOWLEDGE      = 616,
+    SACRIFICE                = 617,
+    EMPOROXS_GIFT            = 618,
+    SPIRIT_BOND              = 619,
+    AWAKEN                   = 620,
+    MAJESTY                  = 621,
+    GUARDING_RATE_BOOST      = 622,
     RAMPART                  = 623,
+    WINDS_BLESSING           = 624,
+    SIRENS_FAVOR             = 625,
+    NEGATE_SLEEP             = 626,
+    MOBILIZATION             = 627,
+    HOVER_SHOT               = 628,
+    MOOGLE_AMPLIFIER         = 629,
+
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
     -- Purchased from Cruor Prospector
