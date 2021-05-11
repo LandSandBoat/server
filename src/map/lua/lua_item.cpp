@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -290,6 +290,18 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
+uint8 CLuaItem::getAppraisalID()
+{
+    auto PItem = dynamic_cast<CItem*>(m_PLuaItem);
+
+    if (!PItem)
+    {
+        return 0;
+    }
+
+    return PItem->m_extra[0x16];
+}
+
 //==========================================================//
 
 void CLuaItem::Register()
@@ -322,6 +334,7 @@ void CLuaItem::Register()
     SOL_REGISTER("isShield", CLuaItem::isShield);
     SOL_REGISTER("getSignature", CLuaItem::getSignature);
     SOL_REGISTER("isInstalled", CLuaItem::isInstalled);
+    SOL_REGISTER("getAppraisalID", CLuaItem::getAppraisalID);
 }
 
 //======================================================//

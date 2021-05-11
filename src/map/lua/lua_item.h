@@ -78,6 +78,8 @@ public:
 
     bool isInstalled();
 
+    uint8 getAppraisalID();
+
     static void Register();
 };
 
