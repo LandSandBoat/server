@@ -46,12 +46,12 @@ zones[xi.zone.METALWORKS] =
         GLAROCIQUET_DIALOG          = 8211, -- I am , a Temple Knight. I am one of the guards charged with overseeing San d'Oria's conquest campaign.
         LEXUN_MARIXUN_DIALOG        = 8213, -- I am , a War Warlock. I am one of the guards charged with overseeing Windurst's conquest campaign.
         EXTENDED_MISSION_OFFSET     = 8599, -- Go to Ore Street and talk to Medicine Eagle. He says he was there when the commotion started.
-        STEEL_CYCLONE_LEARNED       = 9010, -- You have learned the weapon skill Steel Cyclone!
-        DETONATOR_LEARNED           = 9035, -- You have learned the weapon skill Detonator!
-        TAKIYAH_CLOSED_DIALOG       = 9976, -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
-        TAKIYAH_OPEN_DIALOG         = 9977, -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
-        CELEBRATORY_GOODS           = 10824, -- An assortment of celebratory goods is available for purchase.
-        HOMEPOINT_SET               = 11012, -- Home point set!
+        STEEL_CYCLONE_LEARNED       = 9017, -- You have learned the weapon skill Steel Cyclone!
+        DETONATOR_LEARNED           = 9042, -- You have learned the weapon skill Detonator!
+        TAKIYAH_CLOSED_DIALOG       = 9983, -- Maybe someday I'll be able to sell goods from Qufim Island... Someday...
+        TAKIYAH_OPEN_DIALOG         = 9984, -- Hey, it's your lucky day! I've got a fresh batch of goods straight from the island of Qufim!
+        CELEBRATORY_GOODS           = 10831, -- An assortment of celebratory goods is available for purchase.
+        HOMEPOINT_SET               = 11019, -- Home point set!
     },
     mob =
     {
