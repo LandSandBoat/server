@@ -8,7 +8,7 @@
 return {
 
     -- San d'Oria
-    "scripts/quests/sandoria/A_Sentry_S_Peril",
+    "scripts/quests/sandoria/A_Sentrys_Peril",
     "scripts/quests/sandoria/Methods_Create_Madness",
     "scripts/quests/sandoria/Old_Wounds",
     "scripts/quests/sandoria/Souls_In_Shadow",

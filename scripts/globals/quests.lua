@@ -55,7 +55,7 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.SANDORIA]] =
     {
-        A_SENTRY_S_PERIL                = 0,  -- ±
+        A_SENTRYS_PERIL                 = 0,  -- ±
         WATER_OF_THE_CHEVAL             = 1,  -- ±
         ROSEL_THE_ARMORER               = 2,  -- ±
         THE_PICKPOCKET                  = 3,  -- ±
