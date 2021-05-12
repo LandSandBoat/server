@@ -21,6 +21,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_
 quest.reward =
 {
     fame    = 120,
+    fameArea = MHAURA,
     item    = xi.items.TEA_SET,
     title   = xi.title.FIVESTAR_PURVEYOR,
 }
