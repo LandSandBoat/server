@@ -212,6 +212,7 @@ namespace luautils
         set_function("getAbility", &luautils::GetAbility);
         set_function("getSpell", &luautils::GetSpell);
         set_function("selectDailyItem", &luautils::SelectDailyItem);
+        set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -342,6 +343,32 @@ namespace luautils
             // Erase list
             filteredList.clear();
         });
+    }
+
+    std::vector<std::string> GetQuestAndMissionFilenamesList()
+    {
+        TracyZoneScoped;
+        std::vector<std::string> outVec;
+
+        // Missions
+        for (auto& path_itr : std::filesystem::recursive_directory_iterator("scripts/missions"))
+        {
+            if (!path_itr.is_directory() && path_itr.path().extension() == ".lua")
+            {
+                outVec.emplace_back(path_itr.path().relative_path().replace_extension("").generic_string());
+            }
+        }
+
+        // Quests
+        for (auto& path_itr : std::filesystem::recursive_directory_iterator("scripts/quests"))
+        {
+            if (!path_itr.is_directory() && path_itr.path().extension() == ".lua")
+            {
+                outVec.emplace_back(path_itr.path().relative_path().replace_extension("").generic_string());
+            }
+        }
+
+        return outVec;
     }
 
     /************************************************************************
