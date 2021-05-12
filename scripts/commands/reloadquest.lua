@@ -22,13 +22,14 @@ function fileExists(path)
 end
 
 local folders = {
-    "San_dOria",
-    "Bastok",
-    "Windurst",
-    "Jeuno",
-    "Other_Areas",
-    "Outlands",
-    "Aht_Urhgan",
+    "sandoria",
+    "bastok",
+    "windurst",
+    "jeuno",
+    "otherAreas",
+    "outlands",
+    "ahtUrhgan",
+    "hiddenQuests",
 }
 
 function onTrigger(player, questName)

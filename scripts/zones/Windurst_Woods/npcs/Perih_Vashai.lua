@@ -9,30 +9,20 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.empyreal_arrow
-
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    -- FROM SAPLINGS GROW
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-
     -- FIRE AND BRIMSTONE
-    elseif player:getCharVar("fireAndBrimstone") == 5 and npcUtil.tradeHas(trade, 1113) then -- old earring
+    if player:getCharVar("fireAndBrimstone") == 5 and npcUtil.tradeHas(trade, 1113) then -- old earring
         player:startEvent(537, 0, 13360)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local theFangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) -- RNG flag quest
     local theFangedOneCS = player:getCharVar("TheFangedOne_Event")
     local sinHunting = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SIN_HUNTING)-- RNG AF1
@@ -44,12 +34,8 @@ entity.onTrigger = function(player, npc)
     local lvl = player:getMainLvl()
     local job = player:getMainJob()
 
-    -- FROM SAPLINGS GROW
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-
     -- THREE PATHS
-    elseif player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 1 then
+    if player:getCurrentMission(COP) == xi.mission.id.cop.THREE_PATHS and player:getCharVar("COP_Louverance_s_Path") == 1 then
         player:startEvent(686)
 
     -- THE FANGED ONE
@@ -137,9 +123,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 546 and npcUtil.completeQuest(player, WINDURST, xi.quest.id.windurst.UNBRIDLED_PASSION, {item=14099, var="unbridledPassion"}) then -- complete quest RNG AF3
         player:delKeyItem(xi.ki.KOHS_LETTER)
 
-    -- FROM SAPLINGS GROW
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.EMPYREAL_ARROW_LEARNED)
     end
 end
 

@@ -4,13 +4,9 @@
 -- Quests: The Weight of Your Limits (Steel Cyclone WSNM "Greenman")
 -- !pos -324 1 474 121
 -----------------------------------
-local ID = require("scripts/zones/The_Sanctuary_of_ZiTah/IDs")
-require("scripts/globals/wsquest")
------------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.wsquest.handleQmTrigger(xi.wsquest.steel_cyclone, player, ID.mob.GREENMAN)
 end
 
 return entity

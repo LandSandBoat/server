@@ -9,7 +9,6 @@ local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/pathfind")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -25,8 +24,6 @@ local path =
     44.533886, -23.947662, 19.926519
 }
 
-local wsQuest = xi.wsquest.spiral_hell
-
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
@@ -37,29 +34,21 @@ entity.onPath = function(npc)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
     if player:getCharVar("troubleAtTheSluiceVar") == 2 and npcUtil.tradeHas(trade, 959) then -- Dahlia
         player:startEvent(17)
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 930) then -- Beastman Blood
         player:startEvent(12)
-    elseif wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
     local troubleAtTheSluiceStat = player:getCharVar("troubleAtTheSluiceVar")
     local theHolyCrestStat = player:getCharVar("TheHolyCrest_Event")
     local theRumor = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
 
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-
     -- THE HOLY CREST
-    elseif theHolyCrestStat == 1 then
+    if theHolyCrestStat == 1 then
         player:startEvent(6)
     elseif theHolyCrestStat == 2 and player:getCharVar("theHolyCrestCheck") == 0 then
         player:startEvent(7)
@@ -100,8 +89,6 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("troubleAtTheSluiceVar", 0)
         player:setCharVar("theHolyCrestCheck", 0)
         player:confirmTrade()
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.SPIRAL_HELL_LEARNED)
     end
 end
 

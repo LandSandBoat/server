@@ -11,7 +11,7 @@ return {
     "scripts/quests/sandoria/A_Sentrys_Peril",
     "scripts/quests/sandoria/Methods_Create_Madness",
     "scripts/quests/sandoria/Old_Wounds",
-    "scripts/quests/sandoria/Souls_In_Shadow",
+    "scripts/quests/sandoria/Souls_in_Shadow",
     "scripts/quests/sandoria/Tea_with_a_Tonberry",
     "scripts/quests/sandoria/The_Pickpocket",
     "scripts/quests/sandoria/Water_of_the_Cheval",
@@ -19,12 +19,12 @@ return {
     -- Bastok
     "scripts/quests/bastok/Inheritance",
     "scripts/quests/bastok/Shoot_First_Ask_Questions_Later",
-    "scripts/quests/bastok/The_Walls_Of_Your_Mind",
+    "scripts/quests/bastok/The_Walls_of_Your_Mind",
     "scripts/quests/bastok/The_Weight_of_Your_Limits",
 
     -- Windurst
-    "scripts/quests/windurst/A_Pose_By_Any_Other_Name",
-    "scripts/quests/windurst/Blood_And_Glory",
+    "scripts/quests/windurst/A_Pose_by_Any_Other_Name",
+    "scripts/quests/windurst/Blood_and_Glory",
     "scripts/quests/windurst/From_Saplings_Grow",
     "scripts/quests/windurst/Orastery_Woes",
 

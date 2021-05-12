@@ -20,6 +20,7 @@ local totalHoursLeft = 0
 quest.reward =
 {
     fame  = 120,
+    fameArea = MHAURA,
     title = xi.title.ONESTAR_PURVEYOR,
 }
 

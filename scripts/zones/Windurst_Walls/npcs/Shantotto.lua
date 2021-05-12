@@ -7,14 +7,11 @@
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
-
-local wsQuest = xi.wsquest.retribution
 
 local TrustMemory = function(player)
     local memories = 0
@@ -61,18 +58,10 @@ local TrustMemory = function(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
     local count = trade:getItemCount()
 
-    if wsQuestEvent ~= nil then
-        if wsQuestEvent == 448 then
-            player:startEvent(wsQuestEvent, nil, nil, xi.ki.ANNALS_OF_TRUTH)
-        else
-            player:startEvent(wsQuestEvent)
-        end
-
-        -- Curses Foiled Again!
-    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1) == QUEST_ACCEPTED) then
+    -- Curses Foiled Again!
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(928, 1) and trade:hasItemQty(880, 2) and count == 3) then
             player:startEvent(173, 0, 0, 0, 0, 0, 0, 928, 880) -- Correct items given, complete quest.
         else
@@ -90,7 +79,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local foiledAgain = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
     local CFA2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
     local CFAtimer = player:getCharVar("CursesFoiledAgain")
@@ -98,9 +86,7 @@ entity.onTrigger = function(player, npc)
     local golemdelivery = player:getCharVar("foiledagolemdeliverycomplete")
     local WildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
+    if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_JESTER_WHO_D_BE_KING and
         player:getMissionStatus(player:getNation()) == 7) then
         player:startEvent(397, 0, 0, 0, 282)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
@@ -258,8 +244,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addSpell(896, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 896)
 
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.RETRIBUTION_LEARNED)
     end
 end
 

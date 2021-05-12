@@ -5,7 +5,7 @@
 -- !pos 204.052 10.25 96.414 174
 -- Involved in Quest: The Potential Within
 -----------------------------------
-require("scripts/globals/wsquest")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.tachi_kasha, player)
 end
 
 return entity

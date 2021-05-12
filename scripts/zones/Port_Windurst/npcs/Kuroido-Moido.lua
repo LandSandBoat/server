@@ -10,23 +10,14 @@ require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.black_halo
-
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local makingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) --First quest in series
     local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
     local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
@@ -34,9 +25,7 @@ entity.onTrigger = function(player, npc)
     local needToZone = player:needToZone()
     local brokenWand = player:hasKeyItem(xi.ki.BROKEN_WAND)
 
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    elseif (makingAmends == QUEST_ACCEPTED) then -- MAKING AMENDS: During Quest
+    if (makingAmends == QUEST_ACCEPTED) then -- MAKING AMENDS: During Quest
         player:startEvent(276)
     elseif (makingAmends == QUEST_COMPLETED and makingAmens ~= QUEST_COMPLETED and wonderWands ~= QUEST_COMPLETED and needToZone) then -- MAKING AMENDS: After Quest
         player:startEvent(279)
@@ -92,8 +81,6 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.GIL_OBTAINED, GIL_RATE*6000)
         player:addFame(WINDURST, 150)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.BLACK_HALO_LEARNED)
     end
 end
 

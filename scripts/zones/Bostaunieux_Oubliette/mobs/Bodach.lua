@@ -5,7 +5,6 @@
 -- Involved in Quest: The Walls of Your Mind
 -- !pos 29 16 -140 167
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.asuran_fists, player)
 end
 
 return entity
