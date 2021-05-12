@@ -1,13 +1,18 @@
 -----------------------------------
--- Souls In Shadow
+-- Souls in Shadow
 -- Novalmauge !pos 70 -24 21 167
 -- qm2 !pos 118 36 -281 160
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/quests")
-require("scripts/globals/npc_util")
-require('scripts/globals/interaction/quest')
+require("scripts/globals/interaction/quest")
 require("scripts/globals/weaponskillids")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/status")
+require("scripts/globals/items")
+-----------------------------------
+local bostaunieuxID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+local denOfRancorID = require("scripts/zones/Den_of_Rancor/IDs")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
@@ -29,13 +34,13 @@ quest.sections = {
         [xi.zone.BOSTAUNIEUX_OUBLIETTE] = {
             ['Novalmauge'] = {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(0) -- start
+                    return quest:event(0):oncePerZone() -- start
                 end,
             },
 
             onEventFinish = {
                 [0] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.SCYTHE_OF_TRIALS) and option == 1 then
+                    if option == 1 and (player:hasItem(xi.items.SCYTHE_OF_TRIALS) or npcUtil.giveItem(player, xi.items.SCYTHE_OF_TRIALS)) then
                         npcUtil.giveKeyItem(player, xi.keyItem.WEAPON_TRAINING_GUIDE)
                         quest:begin(player)
                     end
@@ -57,13 +62,14 @@ quest.sections = {
                     elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) then
                         return quest:event(4) -- cont 2
                     else
-                        return quest:event(3) -- cont 1
+                        return quest:event(3, player:hasItem(xi.items.SCYTHE_OF_TRIALS) and 1 or 0) -- cont 1
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    local wsPoints = (trade:getItem(0):getWeaponskillPoints())
                     if npcUtil.tradeHasExactly(trade, xi.items.SCYTHE_OF_TRIALS) then
+                        local wsPoints = trade:getItem(0):getWeaponskillPoints()
+
                         if wsPoints < 300 then
                             return quest:event(2) -- unfinished weapon
                         else
@@ -75,24 +81,26 @@ quest.sections = {
 
             onEventFinish = {
                 [3] = function(player, csid, option, npc)
-                    if option == 1 then
+                    if option == 1 and not player:hasItem(xi.items.SCYTHE_OF_TRIALS) then
                         npcUtil.giveItem(player, xi.items.SCYTHE_OF_TRIALS)
                     elseif option == 2 then
-                        player:delQuest(SANDORIA, SOULS_IN_SHADOW)
+                        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
                         player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                         player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     end
                 end,
+
                 [1] = function(player, csid, option, npc)
                     player:confirmTrade()
                     npcUtil.giveKeyItem(player, xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                 end,
+
                 [5] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)
                     player:delKeyItem(xi.ki.ANNALS_OF_TRUTH)
                     player:delKeyItem(xi.ki.WEAPON_TRAINING_GUIDE)
                     player:addLearnedWeaponskill(xi.ws_unlock.SPIRAL_HELL)
-                    player:messageSpecial(zones[player:getZoneID()].text.SPIRAL_HELL_LEARNED)
+                    player:messageSpecial(bostaunieuxID.text.SPIRAL_HELL_LEARNED)
                     quest:complete(player)
                 end,
             },
@@ -104,12 +112,17 @@ quest.sections = {
                     if player:getLocalVar('killed_wsnm') == 1 then
                         player:setLocalVar('killed_wsnm', 0)
                         player:addKeyItem(xi.ki.ANNALS_OF_TRUTH)
-                        return quest:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
-                    elseif player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and npcUtil.popFromQM(player, npc, zones[player:getZoneID()].mob.MOKUMOKUREN, {hide = 0}) then
-                        return quest:messageSpecial(zones[player:getZoneID()].text.SENSE_OMINOUS_PRESENCE)
+                        return quest:messageSpecial(denOfRancorID.text.KEYITEM_OBTAINED, xi.ki.ANNALS_OF_TRUTH)
+                    elseif
+                        player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
+                        not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
+                        npcUtil.popFromQM(player, npc, denOfRancorID.mob.MOKUMOKUREN, {hide = 0})
+                    then
+                        return quest:messageSpecial(denOfRancorID.text.SENSE_OMINOUS_PRESENCE)
                     end
                 end,
             },
+
             ['Mokumokuren'] = {
                 onMobDeath = function(mob, player, isKiller, firstCall)
                     player:setLocalVar('killed_wsnm', 1)
@@ -117,21 +130,6 @@ quest.sections = {
             },
         },
     },
-
-    {
-        check = function(player, status, vars)
-            return status >= QUEST_AVAILABLE
-        end,
-
-        [xi.zone.DEN_OF_RANCOR] = {
-            ['qm2'] = {
-                onTrigger = function(player, npc)
-                    return quest:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
-                end,
-            },
-        },
-    },
 }
-
 
 return quest

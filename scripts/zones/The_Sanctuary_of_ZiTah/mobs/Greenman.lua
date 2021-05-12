@@ -5,7 +5,6 @@
 -- Involved in Quest: The Weight Of Your Limits
 -- !pos -325.406 -0.198 471.459 121
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.steel_cyclone, player)
 end
 
 return entity

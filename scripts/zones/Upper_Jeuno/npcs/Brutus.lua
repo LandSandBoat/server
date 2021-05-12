@@ -8,25 +8,16 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
-require("scripts/globals/wsquest")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local wsQuest = xi.wsquest.decimation
-
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local chocoboOnTheLoose = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_LOOSE)
     local chocoboOnTheLooseStat = player:getCharVar("ChocoboOnTheLoose")
     local chocobosWounds = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_S_WOUNDS)
@@ -40,12 +31,8 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    -- AXE THE COMPETITION
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-
     -- CHOCOBO ON THE LOOSE
-    elseif chocoboOnTheLoose == QUEST_AVAILABLE then
+    if chocoboOnTheLoose == QUEST_AVAILABLE then
         player:startEvent(10093)
     elseif chocoboOnTheLoose == QUEST_ACCEPTED and chocoboOnTheLooseStat == 0 then
         player:startEvent(10094)
@@ -167,9 +154,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 135 then
         npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW, {item = 14097, fame = 40, var = "scatIntoShadowCS"})
 
-    -- AXE THE COMPETITION
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.DECIMATION_LEARNED)
     end
 end
 

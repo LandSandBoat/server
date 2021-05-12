@@ -8,12 +8,9 @@
 require("scripts/globals/missions")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
-require("scripts/globals/wsquest")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
 local entity = {}
-
-local wsQuest = xi.wsquest.steel_cyclone
 
 local TrustMemory = function(player)
     local memories = 0
@@ -58,22 +55,14 @@ local TrustMemory = function(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local wsQuestEvent = xi.wsquest.getTradeEvent(wsQuest, player, trade)
-
-    if wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local wsQuestEvent = xi.wsquest.getTriggerEvent(wsQuest, player)
     local currentMission = player:getCurrentMission(BASTOK)
     local missionStatus = player:getMissionStatus(player:getNation())
 
     if player:hasSpell(897) and player:hasSpell(900) and player:hasSpell(903) and not player:hasSpell(917) then
         player:startEvent(988, 0, 0, 0, TrustMemory(player))
-    elseif wsQuestEvent ~= nil then
-        player:startEvent(wsQuestEvent)
     elseif (currentMission == xi.mission.id.bastok.THE_FOUR_MUSKETEERS and missionStatus == 0) then -- Four Musketeers
         player:startEvent(715)
     elseif (currentMission == xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE and player:getMissionStatus(player:getNation()) == 0) then
@@ -135,8 +124,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 988 then
         player:addSpell(917, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, 917)
-    else
-        xi.wsquest.handleEventFinish(wsQuest, player, csid, option, ID.text.STEEL_CYCLONE_LEARNED)
     end
 end
 

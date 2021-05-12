@@ -5,7 +5,6 @@
 -- Involved in Quest: Shoot First, Ask Questions Later
 -- !pos -18 -19.2 -176.4 153
 -----------------------------------
-require("scripts/globals/wsquest")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +15,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.wsquest.handleWsnmDeath(xi.wsquest.detonator, player)
 end
 
 return entity
