@@ -26,7 +26,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         VOIDWALKER_UPGRADE_KI_1 = 8660, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
         VOIDWALKER_UPGRADE_KI_2 = 8661, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI     = 8662, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI    = 8663, -- Obtained key item: <keyitem>!
+        VOIDWALKER_OBTAIN_KI    = 8663, -- Obtained key item: <keyitem>!
     },
     mob =
     {
