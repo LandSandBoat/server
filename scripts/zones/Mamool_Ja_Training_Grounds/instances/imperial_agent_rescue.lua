@@ -1,11 +1,13 @@
 -----------------------------------
--- Assault: Preemptive Strike
+-- Assault: Imperial Agent Rescue
+-- An agent sent to spy on the secret training grounds of the Mamool Ja has been captured.
+-- Rescue him before he is interrogated for Imperial secrets.
 -----------------------------------
+local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/instance")
 require("scripts/globals/missions")
 require("scripts/globals/assault")
 require("scripts/globals/zone")
-local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 -----------------------------------
 local instance_object = {}
 
@@ -14,12 +16,14 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-55.000, 1.323, -103.000, 128)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-58.000, 1.519, -103.000, 128)
+    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(220.000, 1.465, -504.999, 0)
+    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(220.000, 1.619, -502.999, 0)
+
+    instance:setProgress(math.random(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2))
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    xi.instance.updateInstanceTime(instance, elapsed, ID.text)
+    updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
@@ -27,13 +31,10 @@ instance_object.onInstanceFailure = function(instance)
 end
 
 instance_object.onInstanceProgressUpdate = function(instance, progress)
-    if progress >= 13 then
-        instance:complete()
-    end
 end
 
 instance_object.onInstanceComplete = function(instance)
-    assaultUtil.onInstanceComplete(player, instance, 8, 8, ID.text, ID.npc)
+    assaultUtil.onInstanceComplete(player, instance, 9, 8, ID.text, ID.npc)
 end
 
 instance_object.onEventUpdate = function(player, csid, option)
