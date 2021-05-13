@@ -80,7 +80,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setPos(0, 0, 0, 0, 57)
     elseif csid == 34 and player:getCharVar("AhtUrganStatus") == 1 then
         player:startEvent(35)
-    elseif csid == 108 then -- enter instance: illrusi atoll
+    elseif csid == 108 then -- enter instance: ilrusi atoll
         player:setPos(0, 0, 0, 0, 55)
     elseif csid == 222 then -- Enter instance: Black coffin
         player:setPos(0, 0, 0, 0, 60)
