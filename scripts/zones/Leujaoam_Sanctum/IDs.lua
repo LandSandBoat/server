@@ -30,6 +30,9 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         ASSAULT_08_START           = 7455, -- Commencing <assault>! Objective: Retrieve the OGMA
         ASSAULT_09_START           = 7456, -- Commencing <assault>! Objective: Defeat Raubahn
         ASSAULT_10_START           = 7457, -- Commencing <assault>! Objective: Defeat the count
+        OBTAINED_TEMP_ITEM         = 7311, -- Obtained temporary item: <item>!
+        PLAYER_OBTAINS_ITEM        = 7312, -- <name> obtains <item>!    
+        ASSAULT_START_OFFSET       = 7447, -- Max MP Down removed for <player>
         TIME_TO_COMPLETE           = 7508, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
         MISSION_FAILED             = 7509, -- The mission has failed. Leaving area.
         RUNE_UNLOCKED_POS          = 7510, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
@@ -38,91 +41,46 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         TIME_REMAINING_MINUTES     = 7513, -- ime remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS     = 7514, -- ime remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN               = 7516, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        MINE_FAIL                  = 7525, -- You find nothing.
+        MINE_SUCCESS               = 7526, -- <name> finds <item>!
+        OBTAINS_TEMP_ITEM          = 7527, -- <name> obtains the temporary item: <item>!
+        BREAK_PICKAXE              = 7528, -- Your <item> (temporary item) breaks!
+        MINE_NO_PICK               = 7529, -- Mining is possible here if you have <item> (temporary item).
+        MINE_TOO_FAR               = 7530, -- You must move closer to the target.
+        CANT_MINE                  = 7531, -- You can't mine here right now...
+        MULWAHAH_FINISH            = 7533, -- You found some? Let's take a look then...
+        MULWAHAH_TAKE_THIS         = 7537, -- Take this. If you come across <item>, bring it directly back to me.
     },
 
     mob =
     {
-        -- Leujaoam Cleansing
-        [1] =
+        [LEUJAOAM_CLEANSING] =
         {
-            LEUJAOAM_WORM1  = 17059841,
-            LEUJAOAM_WORM2  = 17059842,
-            LEUJAOAM_WORM3  = 17059843,
-            LEUJAOAM_WORM4  = 17059844,
-            LEUJAOAM_WORM5  = 17059845,
-            LEUJAOAM_WORM6  = 17059846,
-            LEUJAOAM_WORM7  = 17059847,
-            LEUJAOAM_WORM8  = 17059848,
-            LEUJAOAM_WORM9  = 17059849,
-            LEUJAOAM_WORM10 = 17059850,
-            LEUJAOAM_WORM11 = 17059851,
-            LEUJAOAM_WORM12 = 17059852,
-            LEUJAOAM_WORM13 = 17059853,
-            LEUJAOAM_WORM14 = 17059854,
-            LEUJAOAM_WORM15 = 17059855,
-        }
+            MOBS_START =
+            {
+                17059841, 17059842, 17059843, 17059844, 17059845, 17059846, 17059847, 17059848,
+                17059849, 17059850, 17059851, 17059852, 17059853, 17059854, 17059855,
+            },
+        },
+
+        [ORICHALCUM_SURVEY] =
+        {
+            MOBS_START =
+            {
+                17059856, 17059857, 17059858, 17059859, 17059860, 17059861, 17059862, 17059863,
+            },
+            MINING_POINTS =
+            {
+                17060016, 17060017, 17060018, 17060019, 17060020, 17060021, 17060022, 17060023, 17060024, 17060025,
+            },
+        },
     },
 
     npc =
     {
         ANCIENT_LOCKBOX = 17060014,
         RUNE_OF_RELEASE = 17060015,
-        _1X1            = 17060120,
-        _1X2            = 17060121,
-        _1X3            = 17060122,
-        _1X4            = 17060123,
-        _1X5            = 17060124,
-        _1X6            = 17060125,
-        _1X7            = 17060126,
-        _1X8            = 17060127,
-        _1X9            = 17060128,
-        _1XA            = 17060129,
-        _1XB            = 17060130,
-        _1XC            = 17060131,
-        _1XD            = 17060132,
-        _1XE            = 17060133,
-        _1XF            = 17060134,
-        _1XG            = 17060135,
-        _1XH            = 17060136,
-        _1XI            = 17060137,
-        _1XJ            = 17060138,
-        _1XK            = 17060139,
-        _1XL            = 17060140,
-        _1XM            = 17060141,
-        _1XN            = 17060142,
-        _1XO            = 17060143,
-        _1XP            = 17060144,
-        _1XQ            = 17060145,
-        _1XR            = 17060146,
-        _1XS            = 17060147,
-        _1XT            = 17060148,
-        _1XU            = 17060149,
-        _1XV            = 17060150,
-        _1XW            = 17060151,
-        _1XX            = 17060152,
-        _1XY            = 17060153,
-        _1XZ            = 17060154,
-        _JX0            = 17060155,
-        _JX1            = 17060156,
-        _JX2            = 17060157,
-        _JX3            = 17060158,
-        _JX4            = 17060159,
-        _JX5            = 17060160,
-        _JX6            = 17060161,
-        _JX7            = 17060162,
-        _JX8            = 17060163,
-        _JX9            = 17060164,
-        _JXA            = 17060165,
-        _JXB            = 17060166,
-        _JXC            = 17060167,
-        _JXD            = 17060168,
-        _JXE            = 17060169,
-        _JXF            = 17060170,
-        _JXG            = 17060171,
-        _JXH            = 17060172,
-        _JXI            = 17060173,
-        _JXJ            = 17060174,
-        _JXK            = 17060175,
+        MULWAHAH        = 17060026,        
     }
 }
 
