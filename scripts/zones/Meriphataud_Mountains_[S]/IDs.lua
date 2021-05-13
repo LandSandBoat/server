@@ -28,7 +28,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
         VOIDWALKER_UPGRADE_KI_1 = 7913, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
         VOIDWALKER_UPGRADE_KI_2 = 7914, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI     = 7915, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI    = 7916, -- Obtained key item: <keyitem>!
+        VOIDWALKER_OBTAIN_KI    = 7916, -- Obtained key item: <keyitem>!
     },
     mob =
     {

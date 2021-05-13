@@ -47,7 +47,7 @@ zones[xi.zone.XARCABARD] =
         VOIDWALKER_UPGRADE_KI_1        = 11489, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
         VOIDWALKER_UPGRADE_KI_2        = 11490, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI            = 11491, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI           = 11492, -- Obtained key item: <keyitem>!
+        VOIDWALKER_OBTAIN_KI           = 11492, -- Obtained key item: <keyitem>!
     },
     mob =
     {
