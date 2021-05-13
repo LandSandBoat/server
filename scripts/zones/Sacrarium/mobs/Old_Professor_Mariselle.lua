@@ -2,6 +2,7 @@
 -- Area: Sacrarium
 --  Mob: Old Professor Mariselle
 -----------------------------------
+local ID = require("scripts/zones/Sacrarium/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
@@ -48,10 +49,6 @@ entity.onMobDeath = function(mob, player, isKiller)
         player:setCharVar("PromathiaStatus", 4)
     end
 
-    -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2), (7))
-    SetServerVariable("Old_Prof_Spawn_Location", rand)
-
 end
 
 entity.onMobDespawn = function( mob )
@@ -65,9 +62,11 @@ entity.onMobDespawn = function( mob )
         end
     end
 
-    -- Set random variable for determining Old Prof. Mariselle's next spawn location
-    local rand = math.random((2), (7))
-    SetServerVariable("Old_Prof_Spawn_Location", rand)
+    -- randomize Old Prof. Mariselle's spawn location
+    local nextSpawn = math.random(0,5)
+    for i = 0, 5 do
+        GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + i):setLocalVar("hasProfessorMariselle", (i == nextSpawn) and 1 or 0)
+    end
 
 end
 
