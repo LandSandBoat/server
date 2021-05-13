@@ -66,14 +66,20 @@ entity.onTrigger = function(player, npc)
     then
         local currentTime = os.time()
         local refreshTime = player:getVar("lastTagTime")
-        local diffday =  math.floor((currentTime - refreshTime) / 86400)
+        local idTagPeriod = 86400
+
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+            idTagPeriod = 600
+        end
+
+        local diffPeriod =  math.floor((currentTime - refreshTime) / idTagPeriod)
         local tagStock = player:getCurrency("id_tags")
-        local allTagsTimeCS = (refreshTime - 1009897200) + (diffday * 86400)
+        local allTagsTimeCS = (refreshTime - 1009897200) + (diffPeriod * idTagPeriod)
         local haveimperialIDtag = 0
         local tagsAvail = 0
 
         while currentTime >= refreshTime and tagStock < 3 do
-            refreshTime = refreshTime + 86400
+            refreshTime = refreshTime + idTagPeriod
             tagStock = tagStock + 1
         end
         
