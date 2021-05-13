@@ -1,34 +1,51 @@
 -----------------------------------
 -- Assault: Golden Salvage
--- TODO: random the chest locations
+-- Rumor has it that the golden figurehead from the Black Coffin,
+-- the ship of Luzaf the pirate, can be found somewhere within Ilrusi Atoll.
 -----------------------------------
 require("scripts/globals/instance")
+require("scripts/globals/missions")
+require("scripts/globals/assault")
+require("scripts/globals/zone")
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
 local instance_object = {}
 
 instance_object.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-
-    player:messageSpecial(ID.text.ASSAULT_41_START, 41)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    assaultUtil.afterInstanceRegister(player, 5347, ID.text, ID.mob)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    local figureheadChest = math.random(ID.npc.ILRUSI_CURSED_CHEST_OFFSET, ID.npc.ILRUSI_CURSED_CHEST_OFFSET + 11)
+    instance:setProgress(math.random(ID.mob[GOLDEN_SALVAGE].ILRUSI_CURSED_CHEST_OFFSET, ID.mob[GOLDEN_SALVAGE].ILRUSI_CURSED_CHEST_OFFSET + 11))
+    local spawnPoints =
+        {
+            [1]  = {590,-15, 109,127},
+            [2]  = {346, -2, 113, 49},
+            [3]  = {351,-15, -14,134},
+            [4]  = {288,-15,-105,248},
+            [5]  = {331,-15,-181,202},
+            [6]  = {330, -3, -34,163},
+            [7]  = {221, -1, -32,226},
+            [8]  = {546, -7, 161,156},
+            [9]  = {334,-15,-145,132},
+            [10] = {370,-16,-131, 75},
+            [11] = {305, -2,  73, 54},
+            [12] = {273, -2,  30, 99},
+            [13] = {380, -2, 149, 78},
+            [14] = {473, -2, 133,131},
+            [15] = {462, -2, 181,130},
+            [16] = {546, -8, 258, 81},
+        }
 
-    for i, v in pairs(ID.mob[1]) do
-        SpawnMob(v, instance)
+    for i = ID.mob[GOLDEN_SALVAGE].ILRUSI_CURSED_CHEST_OFFSET, ID.mob[GOLDEN_SALVAGE].ILRUSI_CURSED_CHEST_OFFSET + 7 do
+        local sPoint = math.random(1,#spawnPoints) -- Randoms the 1st 7 points for chests, last 4 are static on boats
+        instance:getEntity(bit.band(i, 0xFFF), xi.objType.MOB):setSpawn(spawnPoints[sPoint])
+        SpawnMob(i, instance)
+        table.remove(spawnPoints,sPoint)
     end
 
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(420, -15, 72, 148)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(415, -15, 75, 148)
-    GetNPCByID(ID.npc._1jp, instance):setAnimation(8)
-    GetNPCByID(ID.npc._jja, instance):setAnimation(8)
-    GetNPCByID(ID.npc._jjb, instance):setAnimation(8)
-
-    instance:setProgress(instance:getProgress() + (figureheadChest))
-
+    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(380.000,-7.894,64.999,0)
+    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(380.000,-7.756,61.999,0)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -36,35 +53,24 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instance_object.onInstanceFailure = function(instance)
-
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
-    end
+    assaultUtil.onInstanceFailure(instance, 102, ID.text)
 end
 
 instance_object.onInstanceProgressUpdate = function(instance, progress)
+    if progress == 1 then
+        instance:complete()
+    end
 end
 
 instance_object.onInstanceComplete = function(instance)
-
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
-    end
-
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(NORMAL)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(NORMAL)
-
+    assaultUtil.onInstanceComplete(player, instance, 8, 7, ID.text, ID.npc)
 end
 
 instance_object.onEventUpdate = function(player, csid, option)
 end
 
 instance_object.onEventFinish = function(player, csid, option)
+    assaultUtil.instanceOnEventFinish(player, 102, xi.zone.ARRAPAGO_REEF)
 end
 
 return instance_object

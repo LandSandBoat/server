@@ -3,21 +3,17 @@
 --  Mob: Carrion Toad
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
+local zoneUtil = require("scripts/zones/Ilrusi_Atoll/globals/zoneUtil")
+require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-end
-
-entity.onMobDespawn = function(mob)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     local instance = mob:getInstance()
-    local TOAD = GetMobByID(ID.mob.UNDEAD_TOAD, instance)
-    local RAND = math.random(1, 5)
+    local firstCall = isKiller or noKiller
 
-    if RAND == 1 and TOAD:getLocalVar("ToadSpawned") == 0 then
-        SpawnMob(ID.mob.UNDEAD_TOAD, instance)
-        TOAD:setLocalVar("ToadSpawned", 1)
-    else
+    if firstCall then
+        zoneUtil.exterminationRandomSpawn(mob, ID.mob[EXTERMINATION].NMS.TOAD)
         instance:setProgress(instance:getProgress() + 1)
     end
 end

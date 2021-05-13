@@ -1,23 +1,20 @@
+
 -----------------------------------
 -- Area: Ilrusi Atoll (Extermination)
 --  Mob: Carrion Leech
 -----------------------------------
 local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
+local zoneUtil = require("scripts/zones/Ilrusi_Atoll/globals/zoneUtil")
+require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-end
-
-entity.onMobDespawn = function(mob)
+entity.onMobDeath = function(mob, player, isKiller, noKiller)
     local instance = mob:getInstance()
-    local LEECH = GetMobByID(ID.mob.UNDEAD_LEECH, instance)
-    local RAND = math.random(1, 5)
+    local firstCall = isKiller or noKiller
 
-    if RAND == 1 and LEECH:getLocalVar("LeechSpawned") == 0 then
-        SpawnMob(ID.mob.UNDEAD_LEECH, instance)
-        LEECH:setLocalVar("LeechSpawned", 1)
-    else
+    if firstCall then
+        zoneUtil.exterminationRandomSpawn(mob, ID.mob[EXTERMINATION].NMS.LEECH)
         instance:setProgress(instance:getProgress() + 1)
     end
 end
