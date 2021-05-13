@@ -1,137 +1,62 @@
 -----------------------------------
 -- Assault: Seagull Grounded
+-- The Immortals have captured a member of the Seagull Phratrie, a rebel organization.
+-- You are to escort the prisoner safely to a holding area.
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
+require("scripts/globals/instance")
+require("scripts/globals/missions")
+require("scripts/globals/assault")
+require("scripts/globals/zone")
+require("scripts/zones/Periqia/mobs/Excaliace")
 -----------------------------------
 local instance_object = {}
 
 instance_object.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-    player:messageSpecial(ID.text.ASSAULT_31_START, 1)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    assaultUtil.afterInstanceRegister(player, 5346, ID.text, ID.mob)
 end
 
 instance_object.onInstanceCreated = function(instance)
+    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-495.000,-9.695,-72.000,0)
+    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-490.000,-9.900,-72.000,0)
 
-    for i, v in pairs(ID.mob[31]) do
-        SpawnMob(v, instance)
-    end
-
-    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
-    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setPos(-495, -9.899, -72, 0)
-    box:setPos(-495, -9.695, -75, 0)
-
-    GetNPCByID(ID.npc.EXCALIACE, instance):setStatus(1)
-    GetNPCByID(ID.npc._1K6, instance):setAnimation(8)
-    GetNPCByID(ID.npc._1KX, instance):setAnimation(8)
-    GetNPCByID(ID.npc._1KZ, instance):setAnimation(8)
-    GetNPCByID(ID.npc._JK1, instance):setAnimation(8)
-    GetNPCByID(ID.npc._JK3, instance):setAnimation(8)
+    instance:getEntity(bit.band(ID.npc._1K6, 0xFFF), xi.objType.NPC):setAnimation(8)
+    instance:getEntity(bit.band(ID.npc._1KX, 0xFFF), xi.objType.NPC):setAnimation(8)
+    instance:getEntity(bit.band(ID.npc._1KZ, 0xFFF), xi.objType.NPC):setAnimation(8)
+    instance:getEntity(bit.band(ID.npc._JK1, 0xFFF), xi.objType.NPC):setAnimation(8)
+    instance:getEntity(bit.band(ID.npc._JK3, 0xFFF), xi.objType.NPC):setAnimation(8)
 
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    local players = instance:getChars()
-    local lastTimeUpdate = instance:getLastTimeUpdate()
-    local remainingTimeLimit = (instance:getTimeLimit()) * 60 - (elapsed / 1000)
-    local wipeTime = instance:getWipeTime()
-    local message = 0
-
-    if (remainingTimeLimit < 0) then
-        instance:fail()
-        return
+    local mob = instance:getEntity(bit.band(ID.mob[SEAGULL_GROUNDED].MOBS_START.EXCALIAC, 0xFFF), xi.objType.MOB)
+    if mob ~= nil then
+        onTrack(mob)
     end
-
-    if (wipeTime == 0) then
-        local wipe = true
-        for i, v in pairs(players) do
-            if v:getHP() ~= 0 then
-                wipe = false
-                break
-            end
-        end
-        if (wipe) then
-            for i, v in pairs(players) do
-                v:messageSpecial(ID.text.PARTY_FALLEN, 3)
-            end
-            instance:setWipeTime(elapsed)
-        end
-    else
-        if (elapsed - wipeTime) / 1000 > 180 then
-            instance:fail()
-            return
-        else
-            for i, v in pairs(players) do
-                if v:getHP() ~= 0 then
-                    instance:setWipeTime(0)
-                    break
-                end
-            end
-        end
-    end
-
-    if (lastTimeUpdate == 0 and elapsed > 20 * 60000) then
-        message = 600
-    elseif (lastTimeUpdate == 600 and remainingTimeLimit < 300) then
-        message = 300
-    elseif (lastTimeUpdate == 300 and remainingTimeLimit < 60) then
-        message = 60
-    elseif (lastTimeUpdate == 60 and remainingTimeLimit < 30) then
-        message = 30
-    elseif (lastTimeUpdate == 30 and remainingTimeLimit < 10) then
-        message = 10
-    end
-
-    if (message ~= 0) then
-        for i, v in pairs(players) do
-            if (remainingTimeLimit >= 60) then
-                v:messageSpecial(ID.text.TIME_REMAINING_MINUTES, remainingTimeLimit / 60)
-            else
-                v:messageSpecial(ID.text.TIME_REMAINING_SECONDS, remainingTimeLimit)
-            end
-        end
-        instance:setLastTimeUpdate(message)
-    end
+    updateInstanceTime(instance, elapsed, ID.text)
 end
 
 instance_object.onInstanceFailure = function(instance)
-
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
-    end
+    assaultUtil.onInstanceFailure(instance, 102, ID.text)
 end
 
 instance_object.onInstanceProgressUpdate = function(instance, progress)
 
-    if (progress > 0) then
+    if progress > 0 then
         instance:complete()
     end
 
 end
 
 instance_object.onInstanceComplete = function(instance)
-
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
-    end
-
-    local rune = GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance)
-    local box = GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance)
-    rune:setStatus(xi.status.NORMAL)
-    box:setStatus(xi.status.NORMAL)
-
+    assaultUtil.onInstanceComplete(player, instance, 8, 8, ID.text, ID.npc)
 end
 
 instance_object.onEventUpdate = function(player, csid, option)
 end
 
 instance_object.onEventFinish = function(player, csid, option)
+    assaultUtil.instanceOnEventFinish(player, 102, xi.zone.CAEDARVA_MIRE)
 end
 
 return instance_object

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Periqia
 -----------------------------------
+require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
 
@@ -30,6 +31,8 @@ zones[xi.zone.PERIQIA] =
         ASSAULT_38_START           = 7485, -- Commencing <assault>! Objective: Locate the generals
         ASSAULT_39_START           = 7486, -- Commencing <assault>! Objective: Retrieve the Mark-IIs
         ASSAULT_40_START           = 7487, -- Commencing <assault>! Objective: Assassinate King Goldemar
+        PLAYER_OBTAINS_ITEM        = 7312, -- <name> obtains <item>!
+        ASSAULT_START_OFFSET       = 7447, -- Max MP Down removed for <name>.
         TIME_TO_COMPLETE           = 7508, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
         MISSION_FAILED             = 7509, -- The mission has failed. Leaving area.
         RUNE_UNLOCKED_POS          = 7510, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
@@ -60,63 +63,29 @@ zones[xi.zone.PERIQIA] =
 
     mob =
     {
-        -- Seagull Grounded
-        [31] =
+        [SEAGULL_GROUNDED] =
         {
-            CRAB1      = 17006594,
-            CRAB2      = 17006595,
-            CRAB3      = 17006596,
-            CRAB4      = 17006597,
-            CRAB5      = 17006598,
-            CRAB6      = 17006599,
-            CRAB7      = 17006600,
-            CRAB8      = 17006601,
-            CRAB9      = 17006602,
-            DEBAUCHER1 = 17006603,
-            PUGIL1     = 17006604,
-            PUGIL2     = 17006605,
-            PUGIL3     = 17006606,
-            PUGIL4     = 17006607,
-            PUGIL5     = 17006608,
-            DEBAUCHER2 = 17006610,
-            DEBAUCHER3 = 17006611,
+            MOBS_START =
+            {
+                EXCALIAC = 17006593, 17006594, 17006595, 17006596, 17006597, 17006598, 17006599, 17006600, 17006601,
+                17006602, 17006603, 17006604, 17006605, 17006606, 17006607, 17006608, 17006610, 17006611,
+            },
         },
-        -- Requiem
-        [32] =
+        [REQUIEM] =
         {
-            PUTRID_IMMORTAL_GUARD1 = 17006612,
-            PUTRID_IMMORTAL_GUARD2 = 17006613,
-            BATTEILANT_BHOOT1      = 17006614,
-            BATTEILANT_BHOOT2      = 17006615,
-            DARKLING_DRAUGAR1      = 17006616,
-            DRACONIC_DRAUGAR1      = 17006617,
-            DARKLING_DRAUGAR2      = 17006619,
-            DARKLING_DRAUGAR3      = 17006620,
-            DRACONIC_DRAUGAR2      = 17006621,
-            DRACONIC_DRAUGAR3      = 17006623,
-            BATTEILANT_BHOOT3      = 17006625,
-            BATTEILANT_BHOOT4      = 17006626,
-            DARKLING_DRAUGAR4      = 17006627,
-            DRACONIC_DRAUGAR4      = 17006628,
-            DARKLING_DRAUGAR5      = 17006630,
-            DRACONIC_DRAUGAR5      = 17006631,
-            DARKLING_DRAUGAR6      = 17006633,
-            DARKLING_DRAUGAR7      = 17006634,
+            MOBS_START =
+            {
+                17006612, 17006613, 17006614, 17006615, 17006616, 17006617, 17006619, 17006620, 17006621,
+                17006623, 17006625, 17006626, 17006627, 17006628, 17006630, 17006631, 17006633, 17006634,
+            },
         },
-        -- Shades of Vengeance
-        [79] =
+        [xi.mission.id.toau.SHADES_OF_VENGEANCE] = -- SHADES_OF_VENGEANCE
         {
-            K23H1LAMIA1  = 17006754,
-            K23H1LAMIA2  = 17006755,
-            K23H1LAMIA3  = 17006756,
-            K23H1LAMIA4  = 17006757,
-            K23H1LAMIA5  = 17006758,
-            K23H1LAMIA6  = 17006759,
-            K23H1LAMIA7  = 17006760,
-            K23H1LAMIA8  = 17006761,
-            K23H1LAMIA9  = 17006762,
-            K23H1LAMIA10 = 17006763,
-        }
+            MOBS_START =
+            {
+                17006754, 17006755, 17006756, 17006757, 17006758, 17006759, 17006760, 17006761, 17006762, 17006763,
+            },
+        },
     },
 
     npc =

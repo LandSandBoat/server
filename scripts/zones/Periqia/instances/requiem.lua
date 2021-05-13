@@ -1,26 +1,23 @@
 -----------------------------------
 -- Assault: Requiem
--- TODO: random the chest locations
+-- An Immortal has reported the existence of a large force of undead soldiers.
+-- Destroy these undead minions before they can organize an attack on the Empire.
 -----------------------------------
 require("scripts/globals/instance")
+require("scripts/globals/missions")
+require("scripts/globals/assault")
+require("scripts/globals/zone")
 local ID = require("scripts/zones/Periqia/IDs")
 -----------------------------------
 local instance_object = {}
 
 instance_object.afterInstanceRegister = function(player)
-    local instance = player:getInstance()
-
-    player:messageSpecial(ID.text.ASSAULT_32_START, 32)
-    player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
+    assaultUtil.afterInstanceRegister(player, 5346, ID.text, ID.mob)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[32]) do
-        SpawnMob(v, instance)
-    end
-
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-489.346, -9.78, -326.579, 90)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-491.96, -9.668, -322.733, 90)
+    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-489.999,-9.695,-328.999,0)
+    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-490.000,-9.985,-326.000,0)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
@@ -28,12 +25,7 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
 end
 
 instance_object.onInstanceFailure = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.MISSION_FAILED, 10, 10)
-        v:startEvent(102)
-    end
+    assaultUtil.onInstanceFailure(instance, 102, ID.text)
 end
 
 instance_object.onInstanceProgressUpdate = function(instance, progress)
@@ -43,20 +35,14 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instance_object.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 5, 9)
-    end
-
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(NORMAL)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(NORMAL)
+    assaultUtil.onInstanceComplete(player, instance, 5, 9, ID.text, ID.npc)
 end
 
 instance_object.onEventUpdate = function(player, csid, option)
 end
 
 instance_object.onEventFinish = function(player, csid, option)
+    assaultUtil.instanceOnEventFinish(player, 102, xi.zone.CAEDARVA_MIRE)
 end
 
 return instance_object

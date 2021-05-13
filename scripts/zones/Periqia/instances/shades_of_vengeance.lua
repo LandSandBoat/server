@@ -14,7 +14,8 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    for i, v in pairs(ID.mob[79]) do
+    --
+    for i, v in pairs(ID.mob[xi.mission.id.toau.SHADES_OF_VENGEANCE].MOBS_START) do
         SpawnMob(v, instance)
     end
 end
