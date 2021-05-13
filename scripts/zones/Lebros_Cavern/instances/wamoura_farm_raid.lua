@@ -12,11 +12,9 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
-
     for i, v in pairs(ID.mob[27]) do
         SpawnMob(v, instance)
     end
-
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
