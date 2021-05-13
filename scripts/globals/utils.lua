@@ -20,6 +20,11 @@ function utils.shuffle(tab)
     return res
 end
 
+-- Percent chance out of 100, nothing special, just shorthand
+function utils.chance(num)
+    return math.random(100) < num
+end
+
 -- Generates a random permutation of integers >= min_val and <= max_val
 -- If a min_val isn't given, 1 is used (assumes permutation of lua indices)
 function utils.permgen(max_val, min_val)

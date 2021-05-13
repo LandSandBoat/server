@@ -94,6 +94,21 @@ xi.status =
 }
 
 -----------------------------------
+-- Treasure Hunter 0 drop frequency
+-- https://ffxiclopedia.fandom.com/wiki/Treasure_Hunter
+-----------------------------------
+xi.frequency =
+{
+    SUPER_COMMON = 240,
+    COMMON       = 150,
+    UNCOMMON     = 100,
+    RARE         = 50,
+    VERY_RARE    = 10,
+    SUPER_RARE   = 5,
+    ULTRA_RARE   = 1,
+}
+
+-----------------------------------
 -- These codes represent the subeffects for
 -- additional effects animations from battleentity.h
 -----------------------------------

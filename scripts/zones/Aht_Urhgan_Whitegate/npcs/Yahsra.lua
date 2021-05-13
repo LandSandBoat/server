@@ -4,8 +4,8 @@
 -- Type: Assault Mission Giver
 -- !pos 120.967 0.161 -44.002 50
 -----------------------------------
-require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+require("scripts/globals/keyitems")
 require("scripts/globals/besieged")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -26,11 +26,11 @@ entity.onTrigger = function(player, npc)
         haveimperialIDtag = 0
     end
 
-    --[[if (rank > 0) then
+    if rank > 0 then
         player:startEvent(273, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
-    else]]
+    else
         player:startEvent(279) -- no rank
-    --end
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option)
 
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint("LEUJAOAM_ASSAULT_POINT", choice.price)
+                player:delAssaultPoint(LEUJAOAM_ASSAULT_POINT, choice.price)
             end
         end
     end
