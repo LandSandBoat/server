@@ -18,7 +18,6 @@ local assaultFood =
 
 entity.onTrigger = function(player, npc)
     local instance = npc:getInstance()
-    local entity = instance:getEntity(bit.band(npc:getID(), 0xFFF), xi.objType.NPC)
     local message_offset = ID.text.RATIONS
     local progress = instance:getProgress()
 
@@ -39,10 +38,10 @@ entity.onTrigger = function(player, npc)
         elseif progress == 11 then
             message_offset = message_offset + 3
         end
-        player:timer(6000, function(player) player:showText(entity, message_offset) end)
+        player:timer(6000, function(player) player:showText(npc, message_offset) end)
     else
         player:messageText(npc, ID.text.HAVE_RATIONS)
-        player:timer(3000, function(player) player:showText(entity, message_offset) end)
+        player:timer(3000, function(player) player:showText(npc, message_offset) end)
     end
 end
 

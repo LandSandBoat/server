@@ -16,8 +16,8 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(220.000, 1.465, -504.999, 0)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(220.000, 1.619, -502.999, 0)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(220.000, 1.465, -504.999, 0)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(220.000, 1.619, -502.999, 0)
 
     instance:setProgress(math.random(ID.npc.POT_HATCH, ID.npc.POT_HATCH + 2))
 end

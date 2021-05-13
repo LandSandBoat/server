@@ -19,9 +19,10 @@ local handleMiningPoint = function(npc)
         local miningPoints = utils.shuffle(ID.mob[ORICHALCUM_SURVEY].MINING_POINTS)
 
         for _, point in pairs(miningPoints) do
-            if instance:getEntity(bit.band(point, 0xFFF), xi.objType.NPC):getStatus() == xi.status.DISAPPEAR then
-                instance:getEntity(bit.band(point, 0xFFF), xi.objType.NPC):setStatus(xi.status.NORMAL)
-                instance:getEntity(bit.band(point, 0xFFF), xi.objType.NPC):setLocalVar("Mined", math.random(5,10))
+            local npcObj = GetNPCByID(point, instance)
+            if npcObj:getStatus() == xi.status.DISAPPEAR then
+                npcObj:setStatus(xi.status.NORMAL)
+                npcObj:setLocalVar("Mined", math.random(5,10))
                 break
             end
         end
@@ -42,7 +43,7 @@ entity.onTrigger = function(player, npc)
     elseif not player:hasItem(605, xi.inventoryLocation.TEMPITEMS) then -- Pickaxe
         player:messageSpecial(ID.text.MINE_NO_PICK, 605)
         return
-    elseif instance:getEntity(bit.band(mineralEater, 0xFFF), xi.objType.MOB):isSpawned() or npc:getLocalVar("Wait") >= currentTime then
+    elseif GetMobByID(mineralEater, instance):isSpawned() or npc:getLocalVar("Wait") >= currentTime then
         player:messageSpecial(ID.text.CANT_MINE)
         return
     end
@@ -58,7 +59,7 @@ entity.onTrigger = function(player, npc)
                 instance:setStage(1) end)
             else
                 player:timer(3000, function(player)
-                player:addTreasure(17296, instance:getEntity(bit.band(17060016, 0xFFF), xi.objType.NPC)) end) -- Pebble
+                player:addTreasure(17296, GetNPCByID(17060016, instance)) end) -- Pebble
             end
         elseif chance < 100 then
             player:timer(3000, function(player)

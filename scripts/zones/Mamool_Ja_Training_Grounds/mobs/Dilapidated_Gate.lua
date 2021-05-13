@@ -27,11 +27,11 @@ end
 function onMobDeath(mob, player, isKiller)
     local instance = mob:getInstance()
     if mob:getID() == ID.mob[IMPERIAL_AGENT_RESCUE].MOBS_START.GATE_1 then
-        instance:getEntity(bit.band(ID.npc.DOOR_1, 0xFFF), xi.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc.DOOR_1, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[IMPERIAL_AGENT_RESCUE].MOBS_START.GATE_2 then
-        instance:getEntity(bit.band(ID.npc.DOOR_2, 0xFFF), xi.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc.DOOR_2, instance):setAnimation(8)
     elseif mob:getID() == ID.mob[IMPERIAL_AGENT_RESCUE].MOBS_START.GATE_3 then
-        instance:getEntity(bit.band(ID.npc.DOOR_3, 0xFFF), xi.objType.NPC):setAnimation(8)
+        GetNPCByID(ID.npc.DOOR_3, instance):setAnimation(8)
     end
 end
 

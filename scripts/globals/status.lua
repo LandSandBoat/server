@@ -99,7 +99,7 @@ xi.status =
 -----------------------------------
 xi.frequency =
 {
-    SUPER_COMMON = 240,
+    VERY_COMMON  = 240,
     COMMON       = 150,
     UNCOMMON     = 100,
     RARE         = 50,

@@ -38,14 +38,14 @@ instance_object.onInstanceCreated = function(instance)
         }
 
     for i = ID.mob[GOLDEN_SALVAGE].ILRUSI_CURSED_CHEST_OFFSET, ID.mob[GOLDEN_SALVAGE].ILRUSI_CURSED_CHEST_OFFSET + 7 do
-        local sPoint = math.random(1,#spawnPoints) -- Randoms the 1st 7 points for chests, last 4 are static on boats
-        instance:getEntity(bit.band(i, 0xFFF), xi.objType.MOB):setSpawn(spawnPoints[sPoint])
+        local sPoint = math.random(1, #spawnPoints) -- Randoms the 1st 7 points for chests, last 4 are static on boats
+        GetMobByID(i, instance):setSpawn(unpack(spawnPoints[sPoint]))
         SpawnMob(i, instance)
-        table.remove(spawnPoints,sPoint)
+        table.remove(spawnPoints, sPoint)
     end
 
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(380.000,-7.894,64.999,0)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(380.000,-7.756,61.999,0)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(380.000,-7.894,64.999,0)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(380.000,-7.756,61.999,0)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)

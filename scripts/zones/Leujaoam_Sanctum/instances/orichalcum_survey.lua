@@ -21,16 +21,17 @@ instance_object.onInstanceCreated = function(instance)
     local points = 5
     while points > 0 do
         for _, point in pairs(miningPoints) do
-            if instance:getEntity(bit.band(point, 0xFFF), xi.objType.NPC):getStatus() == xi.status.DISAPPEAR then
-                instance:getEntity(bit.band(point, 0xFFF), xi.objType.NPC):setStatus(xi.status.NORMAL)
-                instance:getEntity(bit.band(point, 0xFFF), xi.objType.NPC):setLocalVar("Mined", math.random(5, 10))
+            local npcObj = GetNPCByID(point, instance)
+            if npcObj:getStatus() == xi.status.DISAPPEAR then
+                npcObj:setStatus(xi.status.NORMAL)
+                npcObj:setLocalVar("Mined", math.random(5, 10))
             end
             points = points - 1
         end
     end
 
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-432.000, -27.627, 169.000, 129)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-432.000, -27.588, 167.000, 129)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-432.000, -27.627, 169.000, 129)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-432.000, -27.588, 167.000, 129)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)

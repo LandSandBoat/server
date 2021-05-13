@@ -36,8 +36,6 @@ end
 entity.onTrigger = function(player, mob)
 	local instance = mob:getInstance()
 	local points = foodPoints(player, mob)
-	local MOB = instance:getEntity(bit.band(mob:getID(), 0xFFF), xi.objType.MOB)
-
 
 	if points > 0 then
 		if mob:getLocalVar("foodEaten") >= 7 and mob:getLocalVar("complete") == 0 then

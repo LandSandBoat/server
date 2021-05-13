@@ -18,16 +18,16 @@ end
 
 instance_object.onInstanceCreated = function(instance)
     if math.random(1,100) >= 50 then
-        instance:getEntity(bit.band(17035306, 0xFFF), xi.objType.MOB):setSpawn(-304.151, -8.470, -180.556, 250)
+        GetMobByID(17035306, instance):setSpawn(-304.151, -8.470, -180.556, 250)
     end
     if math.random(1,100) >= 50 then
-        instance:getEntity(bit.band(17035307, 0xFFF), xi.objType.MOB):setSpawn(-555.575, -10.872, -149.561, 201)
+        GetMobByID(17035307, instance):setSpawn(-555.575, -10.872, -149.561, 201)
     end
     if math.random(1,100) >= 50 then
-        instance:getEntity(bit.band(17035308, 0xFFF), xi.objType.MOB):setSpawn(-291.425, -8.264, -137.649, 142)
+        GetMobByID(17035308, instance):setSpawn(-291.425, -8.264, -137.649, 142)
     end
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-330, -10, -262, 128)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-330, -10, -265, 128)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-330, -10, -262, 128)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-330, -10, -265, 128)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)

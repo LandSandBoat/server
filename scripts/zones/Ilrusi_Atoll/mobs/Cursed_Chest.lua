@@ -54,12 +54,12 @@ entity.onMobEngaged = function(mob, target)
     mob:setStatus(1)
     mob:hideName(false)
     mob:setModelId(258)
-    mob:AnimationSub(0)
+    mob:setAnimationSub(0)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:AnimationSub() ~= 1 then
-        mob:AnimationSub(1)
+    if mob:getAnimationSub() ~= 1 then
+        mob:setAnimationSub(1)
     end
 
     if mob:checkDistance(target) < 21.6 then
@@ -76,7 +76,7 @@ entity.onMobFight = function(mob, target)
         if mob:getLocalVar("despawn") < os.time() then
             mob:setStatus(xi.status.NORMAL)
             mob:disengage()
-            mob:AnimationSub(0)
+            mob:setAnimationSub(0)
             mob:setHP(mob:getMaxHP())
             mob:setModelId(960)
             mob:hideName(true)

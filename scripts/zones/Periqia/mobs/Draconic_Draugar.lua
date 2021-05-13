@@ -4,7 +4,7 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/master_instanced"),
+    -- require("scripts/mixins/master_instanced"),
     require("scripts/mixins/job_special"),
 }
 require("scripts/globals/status")

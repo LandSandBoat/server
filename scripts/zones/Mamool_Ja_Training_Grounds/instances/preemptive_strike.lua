@@ -14,8 +14,8 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-55.000, 1.323, -103.000, 128)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-58.000, 1.519, -103.000, 128)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-55.000, 1.323, -103.000, 128)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-58.000, 1.519, -103.000, 128)
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)

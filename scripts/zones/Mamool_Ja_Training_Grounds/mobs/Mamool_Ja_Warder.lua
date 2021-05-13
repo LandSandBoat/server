@@ -26,7 +26,7 @@ entity.onMobSkillTarget = function(target, mob, skill)
         if utils.chance(50) then
             local instance = mob:getInstance()
             for i, gateid in ipairs(ID.mob[IMPERIAL_AGENT_RESCUE].GATES) do
-                local gate = instance:getEntity(bit.band(gateid, 0xFFF), xi.objType.MOB)
+                local gate = GetMobByID(gateid, instance)
                 if gate and gate:isAlive() and mob:checkDistance(gate) <= 10 and mob:isFacing(gate) then
                     return gate
                 end

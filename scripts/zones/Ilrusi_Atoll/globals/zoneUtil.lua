@@ -16,7 +16,7 @@ zoneUtil.exterminationRandomSpawn = function(mob, ID)
 
     local sPoint = math.random(1, #spawnPoints)
     local instance = mob:getInstance()
-    local NM = instance:getEntity(bit.band(ID, 0xFFF), xi.objType.MOB)
+    local NM = GetMobByID(ID, instance)
     local spawnNM = math.random(100)
 
     if spawnNM <= 20 and NM:getLocalVar("NMSpawned") == 0 then

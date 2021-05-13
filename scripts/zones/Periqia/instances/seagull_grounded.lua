@@ -17,19 +17,19 @@ instance_object.afterInstanceRegister = function(player)
 end
 
 instance_object.onInstanceCreated = function(instance)
-    instance:getEntity(bit.band(ID.npc.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setPos(-495.000,-9.695,-72.000,0)
-    instance:getEntity(bit.band(ID.npc.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setPos(-490.000,-9.900,-72.000,0)
+    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setPos(-495.000,-9.695,-72.000,0)
+    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-490.000,-9.900,-72.000,0)
 
-    instance:getEntity(bit.band(ID.npc._1K6, 0xFFF), xi.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._1KX, 0xFFF), xi.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._1KZ, 0xFFF), xi.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._JK1, 0xFFF), xi.objType.NPC):setAnimation(8)
-    instance:getEntity(bit.band(ID.npc._JK3, 0xFFF), xi.objType.NPC):setAnimation(8)
+    GetNPCByID(ID.npc._1K6, instance):setAnimation(8)
+    GetNPCByID(ID.npc._1KX, instance):setAnimation(8)
+    GetNPCByID(ID.npc._1KZ, instance):setAnimation(8)
+    GetNPCByID(ID.npc._JK1, instance):setAnimation(8)
+    GetNPCByID(ID.npc._JK3, instance):setAnimation(8)
 
 end
 
 instance_object.onInstanceTimeUpdate = function(instance, elapsed)
-    local mob = instance:getEntity(bit.band(ID.mob[SEAGULL_GROUNDED].MOBS_START.EXCALIAC, 0xFFF), xi.objType.MOB)
+    local mob = GetMobByID(ID.mob[SEAGULL_GROUNDED].MOBS_START.EXCALIAC, instance)
     if mob ~= nil then
         onTrack(mob)
     end

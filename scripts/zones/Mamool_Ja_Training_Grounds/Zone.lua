@@ -9,6 +9,10 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
 end
 
+zone_object.onZoneIn = function(player, prevZone)
+    return -1
+end
+
 zone_object.onInstanceZoneIn = function(player, instance)
     local cs = -1
     local pos = player:getPos()

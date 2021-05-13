@@ -6,7 +6,7 @@ mixins =
 {
     require("scripts/mixins/weapon_break"),
     -- TODO: What does this do?
-    require("scripts/mixins/master_instanced"),
+    -- require("scripts/mixins/master_instanced"),
 }
 local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/status")
@@ -15,7 +15,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("petID", mob:getID() +1)
+    mob:setLocalVar("petID", mob:getID() + 1)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
@@ -27,7 +27,7 @@ entity.onMobSkillTarget = function(target, mob, skill)
         if utils.chance(50) then
             local instance = mob:getInstance()
             for i, gateid in ipairs(ID.mob[IMPERIAL_AGENT_RESCUE].GATES) do
-                local gate = instance:getEntity(bit.band(gateid, 0xFFF), xi.objType.MOB)
+                local gate = GetMobByID(gateid, instance)
                 if gate and gate:isAlive() and mob:checkDistance(gate) <= 10 and mob:isFacing(gate) then
                     return gate
                 end

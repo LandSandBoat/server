@@ -187,7 +187,8 @@ function assaultUtil.afterInstanceRegister(player, fireFlies, textTable, mobTabl
                 elseif cap == 50 then
                     cap = 25
                 end
-                instance:getEntity(bit.band(v, 0xFFF), xi.objType.MOB):setMobLevel(instance:getEntity(bit.band(v, 0xFFF), xi.objType.MOB):getMainLvl() - cap)
+                local mobObj = GetMobByID(v, instance)
+                mobObj:setMobLevel(mobObj:getMainLvl() - cap)
             end
         end
     end
@@ -215,8 +216,8 @@ function assaultUtil.onInstanceComplete(player, instance, X, Z, textTable, npcTa
         v:messageSpecial(textTable.RUNE_UNLOCKED_POS, X, Z)
     end
 
-    instance:getEntity(bit.band(npcTable.RUNE_OF_RELEASE, 0xFFF), xi.objType.NPC):setStatus(xi.status.NORMAL)
-    instance:getEntity(bit.band(npcTable.ANCIENT_LOCKBOX, 0xFFF), xi.objType.NPC):setStatus(xi.status.NORMAL)
+    GetNPCByID(npcTable.RUNE_OF_RELEASE, instance):setStatus(xi.status.NORMAL)
+    GetNPCByID(npcTable.ANCIENT_LOCKBOX, instance):setStatus(xi.status.NORMAL)
 end
 
 function assaultUtil.instanceOnEventFinish(player, csid, endCS, ZONE)
@@ -279,7 +280,8 @@ function assaultUtil.adjustMobLevel(mob, mobID)
     elseif cap == 50 then
         cap = 25
     end
-    instance:getEntity(bit.band(mobID, 0xFFF), xi.objType.MOB):setMobLevel(instance:getEntity(bit.band(mobID, 0xFFF), xi.objType.MOB):getMainLvl() - cap)
+    local mobObj = GetMobByID(v, instance)
+    mobObj:setMobLevel(mobObj:getMainLvl() - cap)
 end
 
 assaultUtil.missionInfo =

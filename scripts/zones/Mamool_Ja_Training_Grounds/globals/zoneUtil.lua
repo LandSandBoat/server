@@ -13,7 +13,7 @@ function zoneUtil.ImperialAgent_PotHatch(player, npc, posX, posZ, posR)
     npc:setAnimation(8)
 
     if npc:getID() == instance:getProgress() then
-        local BRUJEEL = instance:getEntity(bit.band(ID.npc.BRUJEEL, 0xFFF), xi.objType.NPC)
+        local BRUJEEL = GetNPCByID(ID.npc.BRUJEEL, instance)
         local chars = instance:getChars()
 
         instance:setProgress(0)
