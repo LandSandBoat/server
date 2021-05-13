@@ -346,14 +346,9 @@ xi.abyssea.qmOnTrigger = function(player, npc)
     end
 
     -- validate trade-to-pop
-    local t = pop[2]
-    if #t > 0 then
-        for i = 1, 8, 1 do
-            if not t[i] then
-                t[i] = 0
-            end
-        end
-        player:startEvent(events[1], t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8]) -- report required trades
+    local reqTrade = pop[2]
+    if #reqTrade > 0 then
+        player:startEvent(events[1], unpack(reqTrade)) -- report required trades
         return true
     end
 
@@ -372,20 +367,13 @@ xi.abyssea.qmOnTrigger = function(player, npc)
         end
     end
 
-    -- infill kis
-    for i = 1, 8, 1 do
-        if not kis[i] then
-            kis[i] = 0
-        end
-    end
-
     -- start event
     if validKis then
         player:setLocalVar("abysseaQM", npc:getID())
-        player:startEvent(events[2], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player has all key items
+        player:startEvent(events[2], unpack(kis)) -- player has all key items
         return true
     else
-        player:startEvent(events[3], kis[1], kis[2], kis[3], kis[4], kis[5], kis[6], kis[7], kis[8]) -- player is missing key items
+        player:startEvent(events[3], unpack(kis)) -- player is missing key items
         return false
     end
 end
