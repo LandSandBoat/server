@@ -29,7 +29,7 @@ zones[xi.zone.NORTH_GUSTABERG_S] =
         VOIDWALKER_UPGRADE_KI_1 = 8182, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
         VOIDWALKER_UPGRADE_KI_2 = 8183, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI     = 8184, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI    = 8185, -- Obtained key item: <keyitem>!
+        VOIDWALKER_OBTAIN_KI    = 8185, -- Obtained key item: <keyitem>!
     },
     mob =
     {

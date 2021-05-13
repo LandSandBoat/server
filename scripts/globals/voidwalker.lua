@@ -37,7 +37,7 @@ local abyssiteMessage = {
 local function getCurrentKIsBitsFromPlayer(player)
     local results = 0
     local count = 8
-    for i, keyitem in ipairs(abyssiteKeyitems) do 
+    for i, keyitem in ipairs(abyssiteKeyitems) do
         local currentBit = 0
         if player:hasKeyItem(keyitem) then
             currentBit = 1
@@ -49,7 +49,7 @@ end
 
 local function getCurrentKIsFromPlayer(player)
     local results = {}
-    for i, keyitem in ipairs(abyssiteKeyitems) do 
+    for i, keyitem in ipairs(abyssiteKeyitems) do
         if player:hasKeyItem(keyitem) then
             table.insert(results, keyitem)
         end
@@ -97,7 +97,7 @@ local function setRandomPos(zoneId, mobId)
         return
     end
     local pos = searchEmptyPos(zoneId)
-    
+
     xi.voidwalker.pos[zoneId][pos].mobId = mobId
     local vPos = xi.voidwalker.pos[zoneId][pos].pos
     mob:setSpawn(vPos[1], vPos[2], vPos[3])
@@ -129,7 +129,7 @@ local getDirection = function(player, mob, distance)
 
     local tan = math.atan(diffz / diffx)
     local degree = math.deg(tan)
-    if degree < 0 then 
+    if degree < 0 then
         degree = degree * -1
     end
     local minDegree = 20
@@ -150,12 +150,12 @@ local getDirection = function(player, mob, distance)
         return 3
     elseif diffz <= 0 and diffx >= 0 and degree <= maxDegree and degree >= minDegree then
         return 1
-    end    
+    end
 end
 
---
+-----------------------------------
 -- check keyitem upgrade
---
+-----------------------------------
 local function checkUpgrade(player, mob, nextKeyItem)
     if player and mob:getZoneID() == player:getZoneID() then
         local TEXT = zones[mob:getZoneID()].text
@@ -172,16 +172,16 @@ local function checkUpgrade(player, mob, nextKeyItem)
                 elseif currentKeyItem == xi.keyItem.COLORFUL_ABYSSITE then
                     player:messageSpecial(TEXT.VOIDWALKER_UPGRADE_KI_2, currentKeyItem, nextKeyItem)
                 elseif nextKeyItem == xi.keyItem.BLACK_ABYSSITE then
-                    player:messageSpecial(TEXT.VOIDWALKER_OPTAIN_KI, nextKeyItem)
+                    player:messageSpecial(TEXT.VOIDWALKER_OBTAIN_KI, nextKeyItem)
                 end
             end
         end
     end
 end
 
--- 
+-----------------------------------
 -- NPC Assai Nybaem
--- 
+-----------------------------------
 xi.voidwalker.npcOnTrigger = function(player, npc)
     if ENABLE_VOIDWALKER ~= 1 then
         return
@@ -220,9 +220,9 @@ xi.voidwalker.npcOnEventFinish = function(player, csid, option)
     end
 end
 
---
+-----------------------------------
 -- Zone On Init
---
+-----------------------------------
 xi.voidwalker.zoneOnInit = function(zone)
     local zoneId = zone:getID()
     local VWMobs = zones[zoneId].mob.VOIDWALKER
@@ -235,8 +235,8 @@ end
 
 local mobIsBusy = function(mob)
     local act = mob:getCurrentAction()
-    return  act == xi.act.MOBABILITY_START or 
-            act == xi.act.MOBABILITY_USING or 
+    return  act == xi.act.MOBABILITY_START or
+            act == xi.act.MOBABILITY_USING or
             act == xi.act.MOBABILITY_FINISH or
             act == xi.act.MAGIC_START or
             act == xi.act.MAGIC_CASTING or
@@ -251,7 +251,7 @@ local function doMobSkillEveryHPP(mob, every, start, mobskill, condition)
         local isSame = startHppModulo == mobHppModulo
         if isSame and mob:getLocalVar('MOB_SKILL_' .. mobhpp) == 0 then
             mob:useMobAbility(mobskill)
-            mob:setLocalVar('MOB_SKILL_' .. mobhpp, 1)    
+            mob:setLocalVar('MOB_SKILL_' .. mobhpp, 1)
         end
     end
 end
@@ -333,9 +333,9 @@ local mixinByMobName = {
     end
 }
 
---
+-----------------------------------
 -- Mob On Init
---
+-----------------------------------
 xi.voidwalker.onMobInitialize = function(mob)
 end
 
@@ -410,15 +410,15 @@ xi.voidwalker.onMobDeath = function(mob, player, isKiller, keyItem)
                 checkUpgrade(playerpoped, mob, keyItem)
             end
         end
-        if player:hasKeyItem(popkeyitem) and not player:hasKeyItem(keyItem) then 
+        if player:hasKeyItem(popkeyitem) and not player:hasKeyItem(keyItem) then
             checkUpgrade(player, mob, keyItem)
         end
     end
 end
 
---
+-----------------------------------
 -- onHealing : trigg when player /heal
---
+-----------------------------------
 xi.voidwalker.onHealing = function(player)
     if ENABLE_VOIDWALKER ~= 1 then
         return
