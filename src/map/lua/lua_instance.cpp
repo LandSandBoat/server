@@ -127,6 +127,11 @@ sol::table CLuaInstance::getEntryPos()
     return table;
 }
 
+uint8 CLuaInstance::getLevelCap()
+{
+    return m_PLuaInstance->GetLevelCap();
+}
+
 uint32 CLuaInstance::getLastTimeUpdate()
 {
     auto time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_PLuaInstance->GetLastTimeUpdate()).count();
@@ -251,6 +256,7 @@ void CLuaInstance::Register()
     SOL_REGISTER("getPets", CLuaInstance::getPets);
     SOL_REGISTER("getTimeLimit", CLuaInstance::getTimeLimit);
     SOL_REGISTER("getEntryPos", CLuaInstance::getEntryPos);
+    SOL_REGISTER("getLevelCap", CLuaInstance::getLevelCap);
     SOL_REGISTER("getLastTimeUpdate", CLuaInstance::getLastTimeUpdate);
     SOL_REGISTER("setLastTimeUpdate", CLuaInstance::setLastTimeUpdate);
     SOL_REGISTER("getProgress", CLuaInstance::getProgress);

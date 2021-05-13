@@ -51,6 +51,7 @@ public:
     auto   getPets() -> sol::table;
     uint32 getTimeLimit();
     auto   getEntryPos() -> sol::table;
+    uint8  getLevelCap();
     uint32 getLastTimeUpdate();
     uint32 getProgress();
     uint32 getWipeTime();
