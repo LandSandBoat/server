@@ -2,6 +2,7 @@
 -- Rumors from the West
 -- Seekers of Adoulin M1-1
 -----------------------------------
+-- NOTE: xi.mission.id.soa.RUMORS_FROM_THE_WEST is set on character creation
 -- !addmission 12 0
 -- Darcia : !pos 25 -38.617 -1.000 245
 -----------------------------------

@@ -505,12 +505,13 @@ namespace luautils
         // Now that the list is verified, overwrite it with the same list; without "scripts"
         parts = std::vector<std::string>(it + 1, parts.end());
 
+        // Handle Globals then return
         // Globals need to be nil'd before they're reloaded
         if (parts.size() == 2 && parts[0] == "globals")
         {
             std::string requireName = fmt::format("scripts/globals/{}", parts[1]);
 
-            auto result = lua.safe_script(fmt::format("package.loaded[\"{}\"] = nil; require(\"{}\");", requireName, requireName));
+            auto result = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", requireName, requireName));
             if (!result.valid())
             {
                 sol::error err = result;
@@ -519,6 +520,40 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"\n", filename, requireName);
+            return;
+        }
+
+        // Handle Quests and Missions then return
+        if (parts.size() == 3 && (parts[0] == "quests" || parts[0] == "missions"))
+        {
+            std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
+
+            auto result = lua.safe_script(fmt::format(R"(
+                require("scripts/globals/utils")
+                require("scripts/globals/interaction/interaction_global")
+
+                if package.loaded["{0}"] then
+                    local old = package.loaded["{0}"]
+                    package.loaded["{0}"] = nil
+                    if InteractionGlobal and old then
+                        InteractionGlobal.lookup:removeContainer(old)
+                    end
+                end
+
+                local res = utils.prequire("{0}")
+                if InteractionGlobal and res then
+                    InteractionGlobal.lookup:addContainer(res)
+                end
+            )", requireName));
+
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
             return;
         }
 

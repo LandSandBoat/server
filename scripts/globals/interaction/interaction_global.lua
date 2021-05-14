@@ -6,7 +6,13 @@ InteractionGlobal = InteractionGlobal or {}
 InteractionGlobal.lookup = InteractionGlobal.lookup or InteractionLookup:new()
 InteractionGlobal.zones = InteractionGlobal.zones or {}
 
-
+-----------------------------------
+-- Called during server init:
+-- [C++] do_init()
+-- [C++] zoneutils::LoadZoneList()
+-- [C++] luautils::InitInteractionGlobal()
+-- [Lua] InteractionGlobal.initZones(zoneIds)
+-----------------------------------
 function InteractionGlobal.initZones(zoneIds)
     -- Add the given zones to the zones table
     for i=1, #zoneIds do
@@ -22,6 +28,8 @@ end
 
 -- Add container handlers found for the added zones
 function InteractionGlobal.loadContainers(shouldReloadRequires)
+
+    -- Convert from zero-index to one-index
     local zoneIds = {}
     for zoneId, _ in pairs(InteractionGlobal.zones) do
        zoneIds[#zoneIds+1] = zoneId

@@ -28,8 +28,6 @@ entity.onTrigger = function(player, npc)
 
     if ENABLE_SOA == 0 then
         player:startEvent(10124)
-    elseif rumorsFromTheWest then
-        player:startEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
     elseif theGeomagnetron and player:getCharVar("SOA") == 1 then
         player:startEvent(10118)
     elseif theGeomagnetron then

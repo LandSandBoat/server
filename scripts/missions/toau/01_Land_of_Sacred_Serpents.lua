@@ -2,7 +2,7 @@
 -- Land of Sacred Serpents
 -- Aht Uhrgan Mission 1
 -----------------------------------
--- NOTE: xi.mission.id.zilart.THE_NEW_FRONTIER is set on character creation
+-- NOTE: xi.mission.id.toau.LAND_OF_SACRED_SERPENTS is set on character creation
 -- !addmission 4 0
 -----------------------------------
 require("scripts/globals/keyitems")

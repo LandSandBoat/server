@@ -32,7 +32,7 @@ mission.sections =
             {
                 function(player, prevZone)
                     if prevZone == xi.zone.WINDURST_WATERS or prevZone == xi.zone.WINDURST_WOODS then
-                        return return mission:event(510)
+                        return mission:event(510)
                     end
                 end,
             },
