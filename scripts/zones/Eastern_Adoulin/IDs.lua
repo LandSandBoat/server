@@ -17,6 +17,7 @@ zones[xi.zone.EASTERN_ADOULIN] =
         CARRIED_OVER_POINTS     = 7000, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        BAYLD_OBTAINED          = 7006, -- You have obtained <number> bayld!
         YOU_CAN_NOW_BECOME      = 7010, -- You can now become a [geomancer/rune fencer]!
         MOG_LOCKER_OFFSET       = 7575, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         HOMEPOINT_SET           = 8291, -- Home point set!
