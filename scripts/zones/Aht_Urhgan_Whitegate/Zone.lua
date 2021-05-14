@@ -15,11 +15,11 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    zone:registerRegion(1, 57, -1, -70, 62, 1, -65) -- Sets Mark for "Got It All" Quest cutscene.
-    zone:registerRegion(2, -96, -7, 121, -64, -5, 137) -- Sets Mark for "Vanishing Act" Quest cutscene.
-    zone:registerRegion(3, 14, -7, -65, 37, -2, -41) -- TOAU Mission 1 CS area
-    zone:registerRegion(4, 75, -3, 25, 90, 1, 59)
-    zone:registerRegion(5, 73, -7, -137, 95, -3, -115) -- entering Shaharat Teahouse
+    zone:registerRegion(1,  57, -1,  -70,  62,  1,  -65) -- Sets Mark for "Got It All" Quest cutscene.
+    zone:registerRegion(2, -96, -7,  121, -64, -5,  137) -- Sets Mark for "Vanishing Act" Quest cutscene.
+    zone:registerRegion(3,  14, -7,  -65,  37, -2,  -41) -- TOAU Mission 1 CS area
+    zone:registerRegion(4,  75, -3,   25,  90,  1,   59)
+    zone:registerRegion(5,  73, -7, -137,  95, -3, -115) -- entering Shaharat Teahouse
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -161,11 +161,6 @@ zone_object.onEventFinish = function(player, csid, option)
     elseif (csid == 526) then
         player:setCharVar("gotitallCS", 6)
         player:setPos(60, 0, -71, 38)
-    elseif (csid == 3000) then
-        player:addKeyItem(xi.ki.SUPPLIES_PACKAGE)
-        player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.LAND_OF_SACRED_SERPENTS)
-        player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SUPPLIES_PACKAGE)
     elseif (csid == 3024) then
         player:setCharVar("AhtUrganStatus", 3)
     elseif (csid == 3026) then
