@@ -33,7 +33,6 @@ from migrations import char_profile_unity_leader
 from migrations import convert_mission_status
 from migrations import convert_zilart_status
 from migrations import add_job_master_column_chars
-from migrations import currency2
 
 # Append new migrations to this list and import above
 migrations = [
@@ -59,7 +58,6 @@ migrations = [
     convert_mission_status,
     convert_zilart_status,
     add_job_master_column_chars,
-    currency2,
 ]
 # These are the default 'protected' files
 player_data = [

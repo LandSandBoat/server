@@ -751,12 +751,6 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         case 0x09: // jobability
         {
             uint16 JobAbilityID = data.ref<uint16>(0x0C);
-            uint8 currentAnimation = PChar->animation;
-            if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
-            {
-                ShowExploit(CL_YELLOW "SmallPacket0x009: Player %s trying to use a Job Ability from invalid state\n" CL_RESET, PChar->GetName());
-                return;
-            }
             PChar->PAI->Ability(TargID, JobAbilityID);
         }
         break;
@@ -1187,14 +1181,14 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         ShowDebug(CL_CYAN "%s initiated trade request with %s\n" CL_RESET, PChar->GetName(), PTarget->GetName());
 
         // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
-        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
+        if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE)) 
         {
             // 155 = "You cannot perform that action on the specified target."
             // TODO: Correct message is "You cannot use that command while invisible."
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 155));
             return;
         }
-
+        
         // If either player is in prison don't allow the trade.
         if (jailutils::InPrison(PChar) || jailutils::InPrison(PTarget))
         {

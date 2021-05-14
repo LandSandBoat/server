@@ -56,8 +56,7 @@ entity.onTrigger = function(player, npc)
     local threePathArg = 0
 
     -- SHOOT FIRST, ASK QUESTIONS LATER
-    if wsQuestEvent ~= nil and player:getLocalVar("wsQuestCheck") == 0 then
-        player:setLocalVar("wsQuestCheck", 1)
+    if wsQuestEvent ~= nil then
         player:startEvent(wsQuestEvent)
 
     -- DAWN
