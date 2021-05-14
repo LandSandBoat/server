@@ -115,9 +115,6 @@ function quest.unlockingMyth.onEventFinish(player, csid, option)
     end
 end
 
-return quest
-
-
 --[[
 Floor     Point
 100     250
