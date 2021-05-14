@@ -33,8 +33,6 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getCurrentMission(COP) == xi.mission.id.cop.TENDING_AGED_WOUNDS and player:getCharVar("PromathiaStatus") == 0 then
         player:setCharVar("PromathiaStatus", 1)
         cs = 70
-    elseif ENABLE_ACP == 1 and player:getCurrentMission(ACP) == xi.mission.id.acp.A_CRYSTALLINE_PROPHECY and player:getMainLvl() >=10 then
-        cs = 10094
     end
 
     -- MOG HOUSE EXIT
@@ -103,10 +101,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 10094 then
-        player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.A_CRYSTALLINE_PROPHECY)
-        player:addMission(xi.mission.log_id.ACP, xi.mission.id.acp.THE_ECHO_AWAKENS)
-    end
 end
 
 return zone_object

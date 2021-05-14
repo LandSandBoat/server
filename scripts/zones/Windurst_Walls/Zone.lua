@@ -28,11 +28,6 @@ zone_object.onZoneIn = function(player, prevZone)
         (player:getCurrentMission(player:getNation()) == xi.mission.id.nation.SHADOW_LORD and player:getMissionStatus(player:getNation()) >= 4))
     then
         cs = 30036
-    elseif
-        ENABLE_ASA == 1 and player:getCurrentMission(ASA) == xi.mission.id.asa.A_SHANTOTTO_ASCENSION
-        and (prevZone == xi.zone.WINDURST_WATERS or prevZone == xi.zone.WINDURST_WOODS) and player:getMainLvl()>=10
-    then
-        cs = 510
     elseif player:getCurrentMission(WINDURST) == xi.mission.id.windurst.MOON_READING and player:getMissionStatus(player:getNation()) == 4 then
         cs = 443
     end
@@ -68,12 +63,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 86 then
         player:setPos(0, 0, -22.40, 192, 242)
-    elseif csid == 510 then
-        player:startEvent(514)
-    elseif csid == 514 then
-        player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.A_SHANTOTTO_ASCENSION)
-        player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
-        player:setCharVar("ASA_Status", 0)
     elseif csid == 443 then
         player:completeMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.MOON_READING)
         player:setMissionStatus(player:getNation(), 0)

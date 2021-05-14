@@ -212,6 +212,7 @@ namespace luautils
         set_function("getAbility", &luautils::GetAbility);
         set_function("getSpell", &luautils::GetSpell);
         set_function("selectDailyItem", &luautils::SelectDailyItem);
+        set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
 
         // Register Sol Bindings
         CLuaAbility::Register();
@@ -344,9 +345,46 @@ namespace luautils
         });
     }
 
+    std::vector<std::string> GetQuestAndMissionFilenamesList()
+    {
+        TracyZoneScoped;
+        std::vector<std::string> outVec;
+
+        // Scrape for files of the form: "scripts/(quests|missions)/(area|expansion)/(filename).lua"
+        auto scrapeSubdir = [&](std::string subFolder) -> void
+        {
+            for (auto const& entry : std::filesystem::recursive_directory_iterator(subFolder))
+            {
+                auto path = entry.path();
+
+                // TODO(compiler updates):
+                // entry.depth() is not yet available in all of our compilers, so we'll use a hack: counting slashes!
+                // std::filesystem defines '/' as an acceptable path separator
+                auto relPathString = entry.path().relative_path().string();
+                std::size_t numSlashes = std::count_if(relPathString.begin(), relPathString.end(), [](char c){ return c == '/'; });
+                bool isCorrectDepth = numSlashes == 3;
+
+                bool isHelperFile = path.filename() == "helper.lua" || path.filename() == "helpers.lua";
+
+                if (!entry.is_directory() &&
+                    path.extension() == ".lua" &&
+                    isCorrectDepth &&
+                    !isHelperFile)
+                {
+                    outVec.emplace_back(path.relative_path().replace_extension("").generic_string());
+                }
+            }
+        };
+
+        scrapeSubdir("scripts/missions");
+        scrapeSubdir("scripts/quests");
+
+        return outVec;
+    }
+
     /************************************************************************
      *                                                                       *
-     *  Переопределение официальной lua функции print                        *
+     * Overriding the official lua print function                            *
      *                                                                       *
      ************************************************************************/
 
@@ -467,12 +505,13 @@ namespace luautils
         // Now that the list is verified, overwrite it with the same list; without "scripts"
         parts = std::vector<std::string>(it + 1, parts.end());
 
+        // Handle Globals then return
         // Globals need to be nil'd before they're reloaded
         if (parts.size() == 2 && parts[0] == "globals")
         {
             std::string requireName = fmt::format("scripts/globals/{}", parts[1]);
 
-            auto result = lua.safe_script(fmt::format("package.loaded[\"{}\"] = nil; require(\"{}\");", requireName, requireName));
+            auto result = lua.safe_script(fmt::format(R"(package.loaded["{}"] = nil; require("{}");)", requireName, requireName));
             if (!result.valid())
             {
                 sol::error err = result;
@@ -481,6 +520,40 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"\n", filename, requireName);
+            return;
+        }
+
+        // Handle Quests and Missions then return
+        if (parts.size() == 3 && (parts[0] == "quests" || parts[0] == "missions"))
+        {
+            std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
+
+            auto result = lua.safe_script(fmt::format(R"(
+                require("scripts/globals/utils")
+                require("scripts/globals/interaction/interaction_global")
+
+                if package.loaded["{0}"] then
+                    local old = package.loaded["{0}"]
+                    package.loaded["{0}"] = nil
+                    if InteractionGlobal and old then
+                        InteractionGlobal.lookup:removeContainer(old)
+                    end
+                end
+
+                local res = utils.prequire("{0}")
+                if InteractionGlobal and res then
+                    InteractionGlobal.lookup:addContainer(res)
+                end
+            )", requireName));
+
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load interaction error: %s: %s\n", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] INTERACTION %s -> %s\n", requireName, parts[2]);
             return;
         }
 
