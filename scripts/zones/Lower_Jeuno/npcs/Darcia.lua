@@ -28,8 +28,6 @@ entity.onTrigger = function(player, npc)
 
     if ENABLE_SOA == 0 then
         player:startEvent(10124)
-    elseif rumorsFromTheWest then
-        player:startEvent(10117, 0, turnOffDungeonInfo + turnOffAskingForWork)
     elseif theGeomagnetron and player:getCharVar("SOA") == 1 then
         player:startEvent(10118)
     elseif theGeomagnetron then
@@ -40,10 +38,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    if csid == 10117 then
-        local hasEnoughGil = player:getGil() >= 1000000 and 1 or 0
-        player:updateEvent(hasEnoughGil)
-    end
 end
 
 entity.onEventFinish = function(player, csid, option)

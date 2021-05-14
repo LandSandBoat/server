@@ -180,6 +180,11 @@ function InteractionLookup:addContainer(container, validZoneTable)
         return
     end
 
+    if container.id == nil then
+        printf("The following container doesn't have an id, there is something wrong with the file: " .. container.filename)
+        return
+    end
+
     self.containers[container.id] = true
 
     -- Add to lookup

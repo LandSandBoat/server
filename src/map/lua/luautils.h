@@ -119,6 +119,8 @@ namespace luautils
     void EnableFilewatcher();
     void ReloadFilewatchList();
 
+    std::vector<std::string> GetQuestAndMissionFilenamesList();
+
     template <typename T>
     void print(T const& item);
 
@@ -294,7 +296,7 @@ namespace luautils
     bool OnChocoboDig(CCharEntity* PChar, bool pre);                    // chocobo digging, pre = check
 
     // Utility method: checks for and loads a lua function for events
-    auto LoadEventScript(CCharEntity* PChar, const char* functionName) -> sol::function; 
+    auto LoadEventScript(CCharEntity* PChar, const char* functionName) -> sol::function;
 
     uint16 GetDespoilDebuff(uint16 itemId); // Ask the database for an effectId based on Item despoiled (returns 0 if not in db)
 
