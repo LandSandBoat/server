@@ -350,30 +350,41 @@ namespace luautils
         TracyZoneScoped;
         std::vector<std::string> outVec;
 
-        // Missions
-        for (auto& path_itr : std::filesystem::recursive_directory_iterator("scripts/missions"))
+        // Scrape for files of the form: "scripts/(quests|missions)/(area|expansion)/(filename).lua"
+        auto scrapeSubdir = [&](std::string subFolder) -> void
         {
-            if (!path_itr.is_directory() && path_itr.path().extension() == ".lua")
+            for (auto const& entry : std::filesystem::recursive_directory_iterator(subFolder))
             {
-                outVec.emplace_back(path_itr.path().relative_path().replace_extension("").generic_string());
-            }
-        }
+                auto path = entry.path();
 
-        // Quests
-        for (auto& path_itr : std::filesystem::recursive_directory_iterator("scripts/quests"))
-        {
-            if (!path_itr.is_directory() && path_itr.path().extension() == ".lua")
-            {
-                outVec.emplace_back(path_itr.path().relative_path().replace_extension("").generic_string());
+                // TODO(compiler updates):
+                // entry.depth() is not yet available in all of our compilers, so we'll use a hack: counting slashes!
+                // std::filesystem defines '/' as an acceptable path separator
+                auto relPathString = entry.path().relative_path().string();
+                std::size_t numSlashes = std::count_if(relPathString.begin(), relPathString.end(), [](char c){ return c == '/'; });
+                bool isCorrectDepth = numSlashes == 3;
+
+                bool isHelperFile = path.filename() == "helper.lua" || path.filename() == "helpers.lua";
+
+                if (!entry.is_directory() &&
+                    path.extension() == ".lua" &&
+                    isCorrectDepth &&
+                    !isHelperFile)
+                {
+                    outVec.emplace_back(path.relative_path().replace_extension("").generic_string());
+                }
             }
-        }
+        };
+
+        scrapeSubdir("scripts/missions");
+        scrapeSubdir("scripts/quests");
 
         return outVec;
     }
 
     /************************************************************************
      *                                                                       *
-     *  Переопределение официальной lua функции print                        *
+     * Overriding the official lua print function                            *
      *                                                                       *
      ************************************************************************/
 
