@@ -52,10 +52,11 @@ zones[xi.zone.SACRARIUM] =
     },
     npc =
     {
-        STALE_DRAFT_OFFSET = 16892097,
-        LABYRINTH_OFFSET   = 16892110,
-        SMALL_KEYHOLE      = 16892142,
-        TREASURE_CHEST     = 16892183,
+        STALE_DRAFT_OFFSET  = 16892097,
+        LABYRINTH_OFFSET    = 16892110,
+        SMALL_KEYHOLE       = 16892142,
+        QM_MARISELLE_OFFSET = 16892155, -- qm_professor_mariselle in npc_list.sql
+        TREASURE_CHEST      = 16892183,
     },
 }
 

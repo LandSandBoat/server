@@ -12,8 +12,8 @@ require("scripts/globals/status")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    -- Set random variable for determining Old Prof. Mariselle's spawn location
-    SetServerVariable("Old_Prof_Spawn_Location", math.random(2, 7))
+    -- randomize Old Prof. Mariselle's spawn location
+    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0,5)):setLocalVar("hasProfessorMariselle", 1)
 
     xi.treasure.initZone(zone)
 end
