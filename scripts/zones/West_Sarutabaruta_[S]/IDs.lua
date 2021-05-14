@@ -29,7 +29,7 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         VOIDWALKER_UPGRADE_KI_1     = 8364, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
         VOIDWALKER_UPGRADE_KI_2     = 8365, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI         = 8366, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OPTAIN_KI        = 8367, -- Obtained key item: <keyitem>!
+        VOIDWALKER_OBTAIN_KI        = 8367, -- Obtained key item: <keyitem>!
     },
     mob =
     {
