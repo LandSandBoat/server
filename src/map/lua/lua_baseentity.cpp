@@ -3078,7 +3078,7 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
         }
 
         uint16 id       = table.get<uint16>("id");
-        int32  quantity = table.get<int32>("quantity");
+        int32  quantity = table.get_or("quantity", 0);
         if (quantity == 0)
         {
             quantity = 1;
