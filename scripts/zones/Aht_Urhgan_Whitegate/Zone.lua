@@ -72,10 +72,8 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(44)
             end
         end,
-        [3] = function (x) -- TOAU Mission 1
-            if (toauMission == xi.mission.id.toau.LAND_OF_SACRED_SERPENTS) then
-                player:startEvent(3000, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            elseif (toauMission == xi.mission.id.toau.A_MERCENARY_LIFE and not needToZone) then
+        [3] = function (x) -- TOAU Missions
+            if (toauMission == xi.mission.id.toau.A_MERCENARY_LIFE and not needToZone) then
                 if (prevZone ~= xi.zone.AHT_URHGAN_WHITEGATE) then
                     player:startEvent(3050, 3, 3, 3, 3, 3, 3, 3, 3, 0)
                 end
