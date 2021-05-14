@@ -22,23 +22,23 @@ zones[xi.zone.LEBROS_CAVERN] =
         LOGIN_CAMPAIGN_UNDERWAY    = 7001, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER               = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         TEMP_ITEM                  = 7211, -- Obtained temporary item: <item>!
-        ASSAULT_21_START           = 7368, -- Commencing <assault>! Objective: Remove the obstructions
-        ASSAULT_22_START           = 7369, -- Commencing <assault>! Objective: Deliver the provisions
-        ASSAULT_23_START           = 7370, -- Commencing <assault>! Objective: Destroy the Troll fugitives
-        ASSAULT_24_START           = 7371, -- Commencing <assault>! Objective: Discover alternate route
-        ASSAULT_25_START           = 7372, -- Commencing <assault>! Objective: Assassinate Borgerlur
-        ASSAULT_26_START           = 7373, -- Commencing <assault>! Objective: Match the Apkallu
-        ASSAULT_27_START           = 7374, -- Commencing <assault>! Objective: Remove the threat
-        ASSAULT_28_START           = 7375, -- Commencing <assault>! Objective: Drive out the hunters
-        ASSAULT_29_START           = 7376, -- Commencing <assault>! Objective: Rescue Princess Kadjaya
-        ASSAULT_30_START           = 7377, -- Commencing <assault>! Objective: Defeat Black Shuck
+        PLAYER_OBTAINS_ITEM        = 7212, -- <name> obtains <item>!
+        ASSAULT_START_OFFSET       = 7347, -- Max MP Down removed for <name>.
         TIME_TO_COMPLETE           = 7408, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
         MISSION_FAILED             = 7409, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED              = 7410, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        RUNE_UNLOCKED_POS          = 7410, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
         ASSAULT_POINTS_OBTAINED    = 7412, -- You gain <number> [Assault point/Assault points]!
         TIME_REMAINING_MINUTES     = 7413, -- ime remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS     = 7414, -- ime remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN               = 7416, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        STILL_HUNGRY_FED           = 7425, -- Thank Zahak you're here. I was about to start eating my boots!
+        FULL_FED                   = 7426, -- You brought more supplies? Well, you can never have too much...
+        STILL_HUNGRY_TRIGGER       = 7427, -- The provisions... Have you brought the provisions?
+        FULL_HUNGRY                = 7428, -- There's nothing like a full belly to put the power back in your sword swing. I pity the next monster that crosses my path!
+        HAVE_RATIONS               = 7429, -- Why don't you deliver the rations I already gave you?
+        DEPENDING_ON               = 7430, -- The advance unit is depending on these provisions. Don't let them down!
+        STEWPOT_TALK               = 7431, -- This should keep a whole unit filled up for a while.
+        RATIONS                    = 7432, -- There are still brave soldiers starving out there! Quickly, those rations must be delivered!
     },
 
     mob = {
@@ -84,22 +84,11 @@ zones[xi.zone.LEBROS_CAVERN] =
     {
         ANCIENT_LOCKBOX = 17035478,
         RUNE_OF_RELEASE = 17035479,
-        _1r8            = 17035512,
-        _1rd            = 17035517,
-        _1rg            = 17035520,
-        _1rm            = 17035526,
-        _1rn            = 17035527,
         _1rx            = 17035537,
         _1ry            = 17035538,
         _1rz            = 17035539,
-        _ir0            = 17035540,
-        _ir1            = 17035541,
-        _irc            = 17035552,
-        _ire            = 17035554,
-        QIQIRN_MINE1    = 17037312,
-        QIQIRN_MINE2    = 17037313,
-        QIQIRN_MINE3    = 17037314,
-        QIQIRN_MINE4    = 17037315,
+        _jr0            = 17035540,
+        _jr1            = 17035541,
     }
 }
 

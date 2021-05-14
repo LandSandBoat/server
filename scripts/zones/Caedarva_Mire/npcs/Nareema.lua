@@ -40,10 +40,6 @@ entity.onTrigger = function(player, npc)
     elseif toauMission >= xi.mission.id.toau.PRESIDENT_SALAHEEM then
         local IPpoint = player:getCurrency("imperial_standing")
 
-        if player:getGMLevel() > 0 then
-            IPpoint = 1000
-        end
-
         if player:hasKeyItem(xi.ki.LEUJAOAM_ASSAULT_ORDERS) and not player:hasKeyItem(xi.ki.ASSAULT_ARMBAND) then
             player:startEvent(149, 50, IPpoint)
         else

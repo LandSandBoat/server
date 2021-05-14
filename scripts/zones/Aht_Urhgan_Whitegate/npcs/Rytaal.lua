@@ -124,8 +124,14 @@ entity.onEventFinish = function(player, csid, option)
         end
         npcUtil.giveKeyItem(player, xi.ki.IMPERIAL_ARMY_ID_TAG)
 
+        local idTagPeriod = 86400
+
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+            idTagPeriod = 600
+        end
+
         if tagStock >= 3 then
-            player:setVar("lastTagTime", os.time() + 86400)
+            player:setVar("lastTagTime", os.time() + idTagPeriod)
         end
         player:setCurrency("id_tags", tagStock - 1)
     elseif

@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     assaultUtil.adjustMobLevel(mob, mob:getID())
-    mob:addImmunity(xi.immunity.SLEEP)
+    -- mob:addImmunity(xi.immunity.SLEEP) TODO: Handle This
 end
 
 entity.onMobDeath = function(mob, player, isKiller, firstCall)

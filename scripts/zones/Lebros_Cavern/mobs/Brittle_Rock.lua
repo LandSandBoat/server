@@ -9,29 +9,24 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    --[[ TODO: Handle these
-    mob:addStatusEffect(xi.effect.NO_REST, 1, 0, 0)
-    mob:addImmunity(xi.immunity.POISON)
-    mob:addImmunity(xi.immunity.LIGHTSLEEP)
-    mob:addImmunity(xi.immunity.DARKSLEEP)
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
+--  mob:addImmunity(xi.immunity.POISON) TODO: Handle these
+--  mob:addImmunity(xi.immunity.LIGHTSLEEP)
+--  mob:addImmunity(xi.immunity.DARKSLEEP)
     mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:SetAutoAttackEnabled(false)
-    mob:setMod(xi.mod.UDMGPHYS,-75)
-    mob:setMod(xi.mod.UDMGBREATH,-95)
-    mob:setMod(xi.mod.UDMGRANGE,-95)
+    mob:setMod(xi.mod.UDMGPHYS, -75)
+    mob:setMod(xi.mod.UDMGBREATH, -95)
+    mob:setMod(xi.mod.UDMGRANGE, -95)
     mob:setMod(xi.mod.UDMGMAGIC, -90)
     mob:setMod(xi.mod.EVA, 0)
-    mob:setMod(xi.mod.CURSEEVA, 9999)
-    ]]
+    --mob:setMod(xi.mod.CURSEEVA, 9999)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.NO_DROPS, 1)
+    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:addListener("WEAPONSKILL_TAKE", "BRITTLE_ROCK_WEAPONSKILL_TAKE", function(mob, user, wsid)
-        if wsid == 1838 then
-            mob:setHP(0)
-        end
     end)
 end
 

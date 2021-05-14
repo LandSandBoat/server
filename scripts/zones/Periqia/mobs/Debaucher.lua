@@ -7,7 +7,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addImmunity(xi.immunity.DARKSLEEP)
+    --mob:addImmunity(xi.immunity.DARKSLEEP) TODO: Handle This
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
