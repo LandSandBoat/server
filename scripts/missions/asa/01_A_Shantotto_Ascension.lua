@@ -17,13 +17,6 @@ mission.reward =
     nextMission = { xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD },
 }
 
-elseif csid == 510 then
-    player:startEvent(514)
-elseif csid == 514 then
-    player:completeMission(xi.mission.log_id.ASA, xi.mission.id.asa.A_SHANTOTTO_ASCENSION)
-    player:addMission(xi.mission.log_id.ASA, xi.mission.id.asa.BURGEONING_DREAD)
-
-
 mission.sections =
 {
     {

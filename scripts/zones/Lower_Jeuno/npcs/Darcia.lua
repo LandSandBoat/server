@@ -40,10 +40,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    if csid == 10117 then
-        local hasEnoughGil = player:getGil() >= 1000000 and 1 or 0
-        player:updateEvent(hasEnoughGil)
-    end
 end
 
 entity.onEventFinish = function(player, csid, option)
