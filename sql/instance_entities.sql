@@ -47,11 +47,11 @@ INSERT INTO `instance_entities` VALUES (1,17059853);
 INSERT INTO `instance_entities` VALUES (1,17059854);
 INSERT INTO `instance_entities` VALUES (1,17059855);
 -- Npcs
-INSERT INTO `instance_entities` VALUES (1,17060014);
-INSERT INTO `instance_entities` VALUES (1,17060015);
-INSERT INTO `instance_entities` VALUES (1,17060142);
-INSERT INTO `instance_entities` VALUES (1,17060150);
-INSERT INTO `instance_entities` VALUES (1,17060151);
+INSERT INTO `instance_entities` VALUES (1,17060014); -- Ancient Lockbox
+INSERT INTO `instance_entities` VALUES (1,17060015); -- Rune of Release
+INSERT INTO `instance_entities` VALUES (1,17060142); -- _1xn
+INSERT INTO `instance_entities` VALUES (1,17060150); -- _1xv
+INSERT INTO `instance_entities` VALUES (1,17060151); -- _1xw
 
 -- Orichalcum Survey
 -- Mobs
@@ -193,13 +193,13 @@ INSERT INTO `instance_entities` VALUES (21,17035289);
 INSERT INTO `instance_entities` VALUES (21,17035290);
 INSERT INTO `instance_entities` VALUES (21,17035291);
 -- Npcs
-INSERT INTO `instance_entities` VALUES (21,17035478);
-INSERT INTO `instance_entities` VALUES (21,17035479);
-INSERT INTO `instance_entities` VALUES (21,17035537);
-INSERT INTO `instance_entities` VALUES (21,17035538);
-INSERT INTO `instance_entities` VALUES (21,17035539);
-INSERT INTO `instance_entities` VALUES (21,17035540);
-INSERT INTO `instance_entities` VALUES (21,17035541);
+INSERT INTO `instance_entities` VALUES (21,17035478); -- Ancient Lockbox
+INSERT INTO `instance_entities` VALUES (21,17035479); -- Rune of Release
+INSERT INTO `instance_entities` VALUES (21,17035537); -- _1rx
+INSERT INTO `instance_entities` VALUES (21,17035538); -- _1ry
+INSERT INTO `instance_entities` VALUES (21,17035539); -- _1rz
+INSERT INTO `instance_entities` VALUES (21,17035540); -- _ir0
+INSERT INTO `instance_entities` VALUES (21,17035541); -- _ir1
 
 -- Lebros Supplies
 INSERT INTO `instance_entities` VALUES (22,17035292);
