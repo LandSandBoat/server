@@ -1,6 +1,8 @@
 -----------------------------------
 -- Area: Riverne Site #B01
 --  NPC: Unstable Displacement
+-- Note: entrance for "The Wyrmking Descends"
+-- !pos -612.800 1.750 693.190 29
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/settings")
@@ -11,21 +13,15 @@ require("scripts/globals/bcnm")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
-    if (offset == 5 and TradeBCNM(player, npc, trade)) then -- The Wyrmking Descends
-        return
-    end
+    TradeBCNM(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local offset = npc:getID() - ID.npc.DISPLACEMENT_OFFSET
-
-    -- STORMS OF FATE
-    if offset == 5 and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 1 then
+    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 1 then
         player:startEvent(1)
-    elseif offset == 5 and EventTriggerBCNM(player, npc) then
+    elseif EventTriggerBCNM(player, npc) then
         return
-    elseif offset == 5 then
+    else
         player:messageSpecial(ID.text.SPACE_SEEMS_DISTORTED)
     end
 end

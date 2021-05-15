@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Riverne Site #B01
---  NPC: qm1 (???)
+--  NPC: qm_unstable_cluster (???)
 -- Note: Spawns Unstable Cluster
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
