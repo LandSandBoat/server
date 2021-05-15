@@ -204,7 +204,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
     end
 
-    if hitdmg > 0 then
+    if calcParams.skillType and hitdmg > 0 then
         attacker:trySkillUp(calcParams.skillType, targetLvl)
     end
 
