@@ -19,17 +19,12 @@ end
 entity.onTrigger = function(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
-    local lotdCS = player:getCharVar("LuckOfTheDraw")
     local efao   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
     local efaoCS = player:getCharVar("EquippedforAllOccasions")
     local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
-    -- LUCK OF THE DRAW
-    if lotdCS == 2 then
-        player:startEvent(211)
-
     -- EQUIPPED FOR ALL OCCASIONS
-    elseif efao == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF1_QUEST_LEVEL then
+    if efao == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF1_QUEST_LEVEL then
         player:startEvent(228)
     elseif efao == QUEST_ACCEPTED and efaoCS == 3 then
         player:startEvent(231)
@@ -50,12 +45,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- LUCK OF THE DRAW
-    if csid == 211 then
-        player:setCharVar("LuckOfTheDraw", 3)
-
     -- EQUIPPED FOR ALL OCCASIONS
-    elseif csid == 228 then
+    if csid == 228 then
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
         player:setCharVar("EquippedforAllOccasions", 1)
     elseif csid == 231 then

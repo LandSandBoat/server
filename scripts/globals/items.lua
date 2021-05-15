@@ -60,6 +60,7 @@ xi.items =
     MERCANBALIGI                    = 5454,
     AHTAPOT                         = 5455,
     ISTIRIDYE                       = 5456,
+    CORSAIR_DIE                     = 5493,
     POT_OF_WHITE_HONEY              = 5562,
     IRMIK_HELVASI                   = 5572,
     BOWL_OF_SUTLAC                  = 5577,
