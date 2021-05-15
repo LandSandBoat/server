@@ -23,14 +23,8 @@ entity.onTrigger = function(player, npc)
     local efaoCS = player:getCharVar("EquippedforAllOccasions")
     local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
-    -- EQUIPPED FOR ALL OCCASIONS
-    if efao == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF1_QUEST_LEVEL then
-        player:startEvent(228)
-    elseif efao == QUEST_ACCEPTED and efaoCS == 3 then
-        player:startEvent(231)
-
     -- NAVIGATING THE UNFRIENDLY SEAS
-    elseif efao == QUEST_COMPLETED and ntus == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF2_QUEST_LEVEL then
+    if efao == QUEST_COMPLETED and ntus == QUEST_AVAILABLE and mJob == xi.job.COR and mLvl >= AF2_QUEST_LEVEL then
         player:startEvent(232)
     elseif player:getCharVar("NavigatingtheUnfriendlySeas") == 4 then
         player:startEvent(233)
@@ -45,16 +39,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- EQUIPPED FOR ALL OCCASIONS
-    if csid == 228 then
-        player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
-        player:setCharVar("EquippedforAllOccasions", 1)
-    elseif csid == 231 then
-        player:delKeyItem(xi.ki.WHEEL_LOCK_TRIGGER)
-        player:setCharVar("EquippedforAllOccasions", 4)
-
     -- NAVIGATING THE UNFRIENDLY SEAS
-    elseif csid == 232 then
+    if csid == 232 then
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
         player:setCharVar("NavigatingtheUnfriendlySeas", 1)
     elseif csid == 233 then

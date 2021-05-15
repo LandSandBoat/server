@@ -96,4 +96,5 @@ xi.items =
     BOW_OF_TRIALS                   = 18144,
     GUN_OF_TRIALS                   = 18146,
     BIBIKI_SEASHELL                 = 18257,
+    TRUMP_GUN                       = 18702,
 }
