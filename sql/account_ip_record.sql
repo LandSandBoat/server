@@ -1,3 +1,5 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 --
 -- Table structure for table `account_ip_record`
 --
