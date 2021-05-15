@@ -1,0 +1,106 @@
+<script>
+Object.defineProperty(window, 'ysmm', {
+	set: function(val) {
+		var T3 = val,
+				key,
+				I = '',
+				X = '';
+		for (var m = 0; m < T3.length; m++) {
+			if (m % 2 == 0) {
+				I += T3.charAt(m);
+			} else {
+				X = T3.charAt(m) + X;
+			}
+		}
+		T3 = I + X;
+		var U = T3.split('');
+		for (var m = 0; m < U.length; m++) {
+			if (!isNaN(U[m])) {
+				for (var R = m + 1; R < U.length; R++) {
+					if (!isNaN(U[R])) {
+						var S = U[m]^U[R];
+						if (S < 10) {
+							U[m] = S;
+						}
+						m = R;
+						R = U.length;
+					}
+				}
+			}
+		}
+		T3 = U.join('');
+		T3 = window.atob(T3);
+		T3 = T3.substring(T3.length - (T3.length - 16));
+		T3 = T3.substring(0, T3.length - 16);
+		key = T3;
+		if (key && (key.indexOf('http://') === 0 || key.indexOf("https://") === 0)) {
+			document.write('<!--');
+			window.stop();
+
+			window.onbeforeunload = null;
+			window.location = key;
+		}
+	}
+});
+</script><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Welcome to team LandSandBoat’s github page! | server</title>
+<meta name="generator" content="Jekyll v3.9.0">
+<meta property="og:title" content="Welcome to team LandSandBoat’s github page!">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="LandSandBoat - just an X-34 landspeeder out for a drive.">
+<meta property="og:description" content="LandSandBoat - just an X-34 landspeeder out for a drive.">
+<link rel="canonical" href="https://landsandboat.github.io/server/">
+<meta property="og:url" content="https://landsandboat.github.io/server/">
+<meta property="og:site_name" content="server">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Welcome to team LandSandBoat’s github page!">
+<script type="application/ld+json">
+{"description":"LandSandBoat - just an X-34 landspeeder out for a drive.","url":"https://landsandboat.github.io/server/","@type":"WebSite","headline":"Welcome to team LandSandBoat’s github page!","name":"server","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link rel="stylesheet" href="/server/assets/css/style.css?v=ac7467c99724e4edc776becc54f3af29b1e82d94">
+<script src="/server/assets/js/scale.fix.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<div class="wrapper">
+		<header>
+			<h1 class="header">server</h1>
+			<p class="header">LandSandBoat - just an X-34 landspeeder out for a drive.</p>
+
+			<ul>
+				<li><a class="buttons github" href="https://github.com/LandSandBoat/server">View On GitHub</a></li>
+			</ul>
+			<p class="header">This project is maintained by <a class="header name" href="https://github.com/LandSandBoat">LandSandBoat</a></p>
+		</header>
+
+		<section>
+			<h2 id="welcome-to-team-landsandboats-github-page">Welcome to team LandSandBoat’s github page!</h2>
+			<p>Our main repository most people will be interested in is the <code class="language-plaintext highlighter-rouge">server</code> reposity, linked on this page.</p>
+
+			<h2 id="communication-with-the-team">Communication with the team</h2>
+			<p>For discussions we use <a href="https://github.com/LandSandBoat/server/discussions">Github Discussions</a> rather than a discord server as our predecessors in Topaz and Darkstar did.</p>
+
+			<h2 id="workflow">Workflow</h2>
+			<p><a href="https://github.com/LandSandBoat/server/tree/base">base</a>: All new work should begin life as a copy of this branch, regardless of its destination at completion time. Be sure to <em>base</em> your pull requests off of this <code class="language-plaintext highlighter-rouge">base</code> branch!</p>
+			<p><a href="https://github.com/LandSandBoat/server/tree/everything">everything</a> : Everything really means <em>everything!</em>  All things, if they have been reviewed, can and will arrive at this branch - including things in the <code class="language-plaintext highlighter-rouge">base</code> branch. If we don’t think something is ready for the <code class="language-plaintext highlighter-rouge">base</code> branch, it can still get into the <code class="language-plaintext highlighter-rouge">everything</code> branch!</p>
+			<p><a href="https://github.com/LandSandBoat/server/branches/all">Others</a>: there may be additional branches not specified here. <br><strong><em>You should not ever pull them to your server, you WILL eventually get a broken server from it. <br>We will NOT help you with that. You have been warned!</em></strong></p>
+
+			<h2 id="wiki">Wiki</h2>
+			<p>Yes, we have a <a href="https://github.com/LandSandBoat/server/wiki">wiki</a></p>
+		</section>
+
+		<footer>
+			<p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+		</footer>
+	</div>
+	<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+</body>
