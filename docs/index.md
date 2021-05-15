@@ -1,37 +1,16 @@
-## Welcome to GitHub Pages
+## Welcome to team LandSandBoat's github page!
 
-You can use the [editor on GitHub](https://github.com/LandSandBoat/server/edit/website/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Our main repository most people will be interested in is the `server` reposity, linked on this page.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Communication with the team
+For discussions we use [Github Discussions](https://github.com/LandSandBoat/server/discussions) rather than a discord server as our predecessors in Topaz and Darkstar did.
 
-### Markdown
+## Workflow
+ * [base](https://github.com/LandSandBoat/server/tree/base): All new work should begin life as a copy of this branch, regardless of its destination at completion time. Be sure to _base_ your pull requests off of this `base` branch!  
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+ * [everything](https://github.com/LandSandBoat/server/tree/everything) : Everything really means _everything!_  All things, if they have been reviewed, can and will arrive at this branch - including things in the `base` branch. If we don't think something is ready for the `base` branch, it can still get into the `everything` branch!
 
-```markdown
-Syntax highlighted code block
+ * [Others](https://github.com/LandSandBoat/server/branches/all): there may be additional branches not specified here. <br>***You should not ever pull them to your server, you WILL eventually get a broken server from it. <br>We will NOT help you with that. You have been warned!***
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/LandSandBoat/server/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Wiki
+ * Yes, we have a [wiki](https://github.com/LandSandBoat/server/wiki)
