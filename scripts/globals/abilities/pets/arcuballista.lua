@@ -8,7 +8,7 @@ require("scripts/globals/automatonweaponskills")
 -----------------------------------
 local ability_object = {}
 
-function onMobSkillCheck(target, automaton, skill)
+ability_object.onMobSkillCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.FIRE_MANEUVER)
 end
