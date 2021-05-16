@@ -10,6 +10,7 @@ require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------
 
+xi = xi or {}
 xi.maws = xi.maws or {}
 
 local ZN = xi.zone
@@ -36,8 +37,9 @@ local pastMaws =
     [ZN.NORTH_GUSTABERG_S]       = {bit = 7, cs = {add = 100, msn = nil, warp = 101}, dest = { 469.697,  -0.050,  478.949,   0, 106}},
     [ZN.WEST_SARUTABARUTA_S]     = {bit = 8, cs = {add = 100, msn = nil, warp = 101}, dest = {   2.628,  -0.150, -166.562,  32, 115}},
 }
+xi.pastMaws = pastMaws
 
-local function meetsMission2Reqs(player)
+xi.maws.meetsMission2Reqs = function(player)
 
     if not player:getCurrentMission(WOTG) == xi.mission.id.wotg.BACK_TO_THE_BEGINNING then
         return false
@@ -52,6 +54,29 @@ local function meetsMission2Reqs(player)
 
 end
 
+xi.maws.goToMaw = function(player, maw)
+    player:setPos(unpack(maw.dest))
+end
+
+xi.maws.addMaw = function(player, maw)
+    if not player:hasTeleport(xi.teleport.type.PAST_MAW, maw.bit) then
+        player:addTeleport(xi.teleport.type.PAST_MAW, maw.bit)
+    end
+    xi.maws.goToMaw(player, maw)
+end
+
+xi.maws.gotoRandomMaw = function(player)
+    local x = math.random(1, 3)
+    if x == 1 then
+        maw = xi.maws.pastMaws[xi.zone.BATALLIA_DOWNS]
+    elseif x == 2 then
+        maw = xi.maws.pastMaws[xi.zone.ROLANBERRY_FIELDS]
+    else
+        maw = xi.maws.pastMaws[xi.zone.SAUROMUGUE_CHAMPAIGN]
+    end
+    xi.maws.addMaw(player, maw)
+end
+
 xi.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 
@@ -60,12 +85,12 @@ xi.maws.onTrigger = function(player, npc)
         return
     end
 
-    local maw = pastMaws[player:getZoneID()]
+    local maw = xi.maws.pastMaws[player:getZoneID()]
     local hasMaw = player:hasTeleport(MAW, maw.bit)
     local event = nil
     local event_params = nil
 
-    if maw.cs.msn and meetsMission2Reqs(player) then
+    if maw.cs.msn and xi.maws.meetsMission2Reqs(player) then
         event = maw.cs.msn
     elseif hasMaw then
         event = maw.cs.warp
@@ -95,41 +120,22 @@ xi.maws.onEventFinish = function(player, csid, option)
 
     local maw = pastMaws[player:getZoneID()]
 
-    local goToMaw = function()
-        player:setPos(unpack(maw.dest))
-    end
-
-    local addMaw = function()
-        if not player:hasTeleport(MAW, maw.bit) then
-            player:addTeleport(MAW, maw.bit)
-        end
-        goToMaw()
-    end
-
     if csid == maw.cs.warp and option == 1 then
-        goToMaw() -- Known to have maw, no need to check
+        xi.maws.goToMaw(player, maw) -- Known to have maw, no need to check
     elseif maw.cs.add and csid == maw.cs.add and option == 1 then
-        addMaw()
+        xi.maws.addMaw(player, maw)
     elseif maw.cs.msn and csid == maw.cs.msn then
         player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
         player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)
         player:addTitle(xi.title.CAIT_SITHS_ASSISTANT)
-        addMaw() -- May not have yet, check
+        xi.maws.addMaw(player, maw) -- May not have yet, check
     elseif maw.cs.new and csid == maw.cs.new then
         local ID = zones[player:getZoneID()]
         player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS_MAWS)
         player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
         player:addKeyItem(xi.ki.PURE_WHITE_FEATHER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PURE_WHITE_FEATHER)
-        local x = math.random(1, 3)
-        if x == 1 then
-            maw = pastMaws[ZN.BATALLIA_DOWNS]
-        elseif x == 2 then
-            maw = pastMaws[ZN.ROLANBERRY_FIELDS]
-        else
-            maw = pastMaws[ZN.SAUROMUGUE_CHAMPAIGN]
-        end
-        addMaw()
+        xi.maws.gotoRandomMaw(player)
     end
 
 end
