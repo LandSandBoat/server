@@ -2,12 +2,12 @@
 -- Cait Sith
 -- Wings of the Goddess Mission 3
 -----------------------------------
--- TODO:
--- !addmission 4 0
--- Cavernous Maws:
--- Batallia Downs       : !pos -48 0.1 435 105
--- Rolanberry Fields    : !pos -198 8 361 110
--- Sauromugue Champaign : !pos 369 8 -227 120
+-- !addmission 5 2
+-- BURDEN_OF_SUSPICION  : !completequest 7 20
+-- WRATH_OF_THE_GRIFFON : !completequest 7 25
+-- A_MANIFEST_PROBLEM   : !completequest 7 28
+-- EAST_RONFAURE_S      : !zone 81
+-- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
 require("scripts/globals/keyitems")
 require('scripts/globals/maws')
@@ -52,17 +52,15 @@ mission.sections =
             {
                 function(player, prevZone)
                     if prevZone == xi.zone.EAST_RONFAURE_S then
-                        return mission:event(510)
+                        return 67
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [510] = function(player, csid, option, npc)
-                    if mission:complete() then
-                        return mission:event(514)
-                    end
+                [67] = function(player, csid, option, npc)
+                    mission:complete(player)
                 end,
             },
         },

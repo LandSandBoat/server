@@ -2,8 +2,7 @@
 -- A Timeswept Butterfly
 -- Wings of the Goddess Mission 6
 -----------------------------------
--- TODO:
--- !addmission 4 0
+-- !addmission 5 5
 -- Cavernous Maws:
 -- Batallia Downs       : !pos -48 0.1 435 105
 -- Rolanberry Fields    : !pos -198 8 361 110
@@ -47,7 +46,7 @@ mission.sections =
             onEventFinish =
             {
                 [510] = function(player, csid, option, npc)
-                    if mission:complete() then
+                    if mission:complete(player) then
                         return mission:event(514)
                     end
                 end,

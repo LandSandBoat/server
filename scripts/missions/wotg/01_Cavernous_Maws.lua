@@ -2,8 +2,7 @@
 -- Cavernous Maws
 -- Wings of the Goddess Mission 1
 -----------------------------------
--- TODO:
--- !addmission 4 0
+-- !addmission 5 0
 -- Cavernous Maws:
 -- Batallia Downs       : !pos -48 0.1 435 105
 -- Rolanberry Fields    : !pos -198 8 361 110
@@ -57,7 +56,7 @@ mission.sections =
             ['Cavernous_Maw'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(500, 0)
+                    return mission:progressEvent(500, 1)
                 end,
             },
 
@@ -76,7 +75,7 @@ mission.sections =
             ['Cavernous_Maw'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(500, 0)
+                    return mission:progressEvent(500, 2)
                 end,
             },
 

@@ -37,28 +37,17 @@ local pastMaws =
     [ZN.NORTH_GUSTABERG_S]       = {bit = 7, cs = {add = 100, msn = nil, warp = 101}, dest = { 469.697,  -0.050,  478.949,   0, 106}},
     [ZN.WEST_SARUTABARUTA_S]     = {bit = 8, cs = {add = 100, msn = nil, warp = 101}, dest = {   2.628,  -0.150, -166.562,  32, 115}},
 }
-xi.pastMaws = pastMaws
-
-xi.maws.meetsMission2Reqs = function(player)
-
-    if not player:getCurrentMission(WOTG) == xi.mission.id.wotg.BACK_TO_THE_BEGINNING then
-        return false
-    end
-
-    local Q  = xi.quest.id.crystalWar
-    local Q1 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.CLAWS_OF_THE_GRIFFON) == QUEST_COMPLETED
-    local Q2 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.THE_TIGRESS_STRIKES)  == QUEST_COMPLETED
-    local Q3 = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, Q.FIRES_OF_DISCONTENT)  == QUEST_COMPLETED
-
-    return Q1 or Q2 or Q3
-
-end
+xi.maws.pastMaws = pastMaws
 
 xi.maws.goToMaw = function(player, maw)
     player:setPos(unpack(maw.dest))
 end
 
 xi.maws.addMaw = function(player, maw)
+    if not maw then
+        maw = xi.maws.pastMaws[player:getZoneID()]
+    end
+
     if not player:hasTeleport(xi.teleport.type.PAST_MAW, maw.bit) then
         player:addTeleport(xi.teleport.type.PAST_MAW, maw.bit)
     end
@@ -118,7 +107,7 @@ end
 
 xi.maws.onEventFinish = function(player, csid, option)
 
-    local maw = pastMaws[player:getZoneID()]
+    local maw = xi.maws.pastMaws[player:getZoneID()]
 
     if csid == maw.cs.warp and option == 1 then
         xi.maws.goToMaw(player, maw) -- Known to have maw, no need to check
@@ -129,13 +118,6 @@ xi.maws.onEventFinish = function(player, csid, option)
         player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH)
         player:addTitle(xi.title.CAIT_SITHS_ASSISTANT)
         xi.maws.addMaw(player, maw) -- May not have yet, check
-    elseif maw.cs.new and csid == maw.cs.new then
-        local ID = zones[player:getZoneID()]
-        player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAVERNOUS_MAWS)
-        player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING)
-        player:addKeyItem(xi.ki.PURE_WHITE_FEATHER)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PURE_WHITE_FEATHER)
-        xi.maws.gotoRandomMaw(player)
     end
 
 end
