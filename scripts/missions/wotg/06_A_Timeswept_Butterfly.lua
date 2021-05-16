@@ -3,10 +3,8 @@
 -- Wings of the Goddess Mission 6
 -----------------------------------
 -- !addmission 5 5
--- Cavernous Maws:
--- Batallia Downs       : !pos -48 0.1 435 105
--- Rolanberry Fields    : !pos -198 8 361 110
--- Sauromugue Champaign : !pos 369 8 -227 120
+-- JUGNER_FOREST_S : !zone 82
+-- LA_VAULE_S       : !zone 85
 -----------------------------------
 require("scripts/globals/keyitems")
 require('scripts/globals/maws')
@@ -38,17 +36,15 @@ mission.sections =
             {
                 function(player, prevZone)
                     if prevZone == xi.zone.JUGNER_FOREST_S then
-                        return mission:event(510)
+                        return 1
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [510] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        return mission:event(514)
-                    end
+                [1] = function(player, csid, option, npc)
+                    mission:complete(player)
                 end,
             },
         },
