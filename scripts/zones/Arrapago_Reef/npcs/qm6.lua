@@ -20,7 +20,6 @@ entity.onTrigger = function(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
     local efao   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
-    local efaoCS = player:getCharVar("EquippedforAllOccasions")
     local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
     -- NAVIGATING THE UNFRIENDLY SEAS

@@ -73,7 +73,7 @@ quest.sections =
 
             ['Lost_Soul'] =
             {
-                onMobDeath = function()
+                onMobDeath = function(mob, player, isKiller, noKiller)
                     if quest:getVar(player, 'Prog') == 1 then
                         quest:setVar(player, 'Prog', 2)
                     end
@@ -114,7 +114,7 @@ quest.sections =
             ['Ratihb'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 and quest:getVar(player, 'HasSeenDialog') then
+                    if quest:getVar(player, 'Prog') == 4 and quest:getVar(player, 'Stage') == 1 then
                         return quest:progressEvent(772)
                     end
                 end,
