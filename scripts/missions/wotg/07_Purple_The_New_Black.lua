@@ -54,15 +54,6 @@ mission.sections =
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
-                    -- Play last CS if not skipped.
-                    if player:getLocalVar("battlefieldWin") == 256 then
-                        if option == 1 then
-                            return mission:event(17)
-                        else
-                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                            mission:complete(player)
-                        end
-                    end
                 end,
             },
         },
