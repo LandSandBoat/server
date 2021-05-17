@@ -32,7 +32,8 @@ quest.sections = {
             return
                 status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_COMPLETED and
-                player:getFameLevel(SANDORIA) >= 4
+                player:getFameLevel(SANDORIA) >= 4 and
+                not player:needToZone()
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] = {

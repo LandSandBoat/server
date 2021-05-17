@@ -164,7 +164,7 @@ quest.sections = {
                 [736] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.TORN_OUT_PAGES)
-                        player:setLocalVar("signedInBloodNeedToZone", 1)
+                        player:needToZone(true)
                     end
                 end,
             },
@@ -172,9 +172,10 @@ quest.sections = {
     },
 
     -- If you just completed Signed in Blood, you must zone out and back into Southern San d'Oria to flag Tea with a Tonberry
+    -- Otherwise you get this event.
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and player:getLocalVar("signedInBloodNeedToZone") == 1
+            return status == QUEST_COMPLETED and player:needToZone()
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] = {
