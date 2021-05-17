@@ -733,6 +733,8 @@ public:
 
     uint16 getBehaviour();
     void   setBehaviour(uint16 behavior);
+    uint16 getRoamFlags();
+    void   setRoamFlags(uint16 newRoamFlags);
 
     auto getTarget() -> std::optional<CLuaBaseEntity>;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
