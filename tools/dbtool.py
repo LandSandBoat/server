@@ -14,9 +14,11 @@ def preflight_exit():
         input('Press ENTER to continue...')
     exit(-1)
 
-# - git should be on the user's PATH
-if not 'git' in os.environ['PATH'].lower():
-    print("ERROR: Make sure git.exe is available in your system's PATH environment variable.")
+# - git should available
+try:
+    subprocess.call(["git"], stdout=subprocess.PIPE)
+except:
+    print("ERROR: Make sure a git executable is available in your system's PATH environment variable.")
     preflight_exit()
 
 # - dbtool.py is designed to be run from <root>/tools folder, not <root>
