@@ -10,6 +10,22 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+local path =
+{
+-5.057, -5.250, -136.979,   -- TODO: wait at location for 6 seconds
+-9.271, -5.250, -139.831,   -- TODO: wait at location for 10 seconds
+-4.695, -5.250, -141.494    -- TODO: wait at location for 10 seconds
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
+
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
+
 entity.onTrade = function(player, npc, trade)
 end
 
