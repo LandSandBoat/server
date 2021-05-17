@@ -5,18 +5,17 @@
 -- Riche !pos 5.945 -3.75 13.612 1
 -- Davoi qm2 !pos 189.201 1.2553 -383.921 149
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/items')
 -----------------------------------
 local CarpentersLandingID = require("scripts/zones/Carpenters_Landing/IDs")
 local DavoiID = require("scripts/zones/Davoi/IDs")
-
+-----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
-quest.repeatable = false
 quest.reward = {
     item = xi.items.WILLPOWER_TORQUE,
 }
@@ -25,9 +24,10 @@ quest.sections = {
     -- Section: Begin quest
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
-                and player:getQuestStatus(SANDORIA, SIGNED_IN_BLOOD) == QUEST_COMPLETED
-                and player:getFameLevel(SANDORIA) >= 4
+            return
+                status == QUEST_AVAILABLE and
+                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_COMPLETED and
+                player:getFameLevel(SANDORIA) >= 4
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] = {

@@ -31,6 +31,7 @@ zones[xi.zone.SELBINA] =
         CHUTARMIRE_SHOP_DIALOG  = 7038, -- I have items for those who delve in the black arts!
         FALGIMA_SHOP_DIALOG     = 7039, -- In the market for spells, hexes, and incantations? Well, you've come to the right place!
         CONQUEST_BASE           = 7103, -- Tallying conquest results...
+        ABELARD_DIALOG          = 7363, -- I'm Abelard, mayor of this village.
         WENZEL_DELIVERY_DIALOG  = 7586, -- My independent survey confirms the town entrance as the preferred location from which adventurers send parcels.
         BORIS_DELIVERY_DIALOG   = 7587, -- My independent survey confirms the inn as the preferred location from which adventurers send parcels.
         RETRIEVE_DIALOG_ID      = 7747, -- You retrieve <item> from the porter moogle's care.

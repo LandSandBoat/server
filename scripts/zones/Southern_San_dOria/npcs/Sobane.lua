@@ -14,12 +14,8 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    -- SIGNED IN BLOOD
-    if npcUtil.tradeHas(trade, 1662) and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and player:getCharVar("SIGNED_IN_BLOOD_Prog") < 1 then
-        player:startEvent(734, 0, 1662)
-
     -- RIDING ON THE CLOUDS
-    elseif npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
+    if npcUtil.tradeHas(trade, 1127) and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RIDING_ON_THE_CLOUDS) == QUEST_ACCEPTED and player:getCharVar("ridingOnTheClouds_1") == 2 then
         player:setCharVar("ridingOnTheClouds_1", 0)
         npcUtil.giveKeyItem(player, xi.ki.SCOWLING_STONE)
         player:confirmTrade()
@@ -28,26 +24,13 @@ end
 
 entity.onTrigger = function(player, npc)
     local signedInBlood = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
-    local bloodProg = player:getCharVar("SIGNED_IN_BLOOD_Prog")
     local teaWithATonberry = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
 
     -- SHARPENING THE SWORD
     if player:getCharVar("sharpeningTheSwordCS") >= 2 then
         player:startEvent(52)
 
-    -- SIGNED IN BLOOD
-    elseif signedInBlood == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3 then
-        player:startEvent(732, 0, 1662)
-    elseif signedInBlood == QUEST_ACCEPTED then
-        if bloodProg < 1 then
-            player:startEvent(733, 0, 1662)
-        elseif bloodProg == 3 then
-            player:startEvent(736)
-        elseif bloodProg >= 1 then
-            player:startEvent(735)
-        end
-    elseif signedInBlood == QUEST_COMPLETED and player:needToZone() then
-        player:startEvent(737)
+    -- TEA WITH A TONBERRY
     elseif signedInBlood == QUEST_COMPLETED and teaWithATonberry == QUEST_AVAILABLE then
         player:startEvent(738)
     elseif teaWithATonberry == QUEST_ACCEPTED then
@@ -67,16 +50,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 52 then
         player:setCharVar("sharpeningTheSwordCS", 3)
 
-    -- SIGNED IN BLOOD
-    elseif csid == 732 and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
-    elseif csid == 734 then
-        player:setCharVar("SIGNED_IN_BLOOD_Prog", 1)
-    elseif csid == 736 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD, {item = 14760, gil = 3500, var = "SIGNED_IN_BLOOD_Prog"}) then
-        player:delKeyItem(xi.ki.TORN_OUT_PAGES)
-        player:confirmTrade()
-    elseif csid == 735 then
-        player:needToZone(true)
+    -- TEA WITH A TONBERRY
     elseif csid == 738 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
     elseif csid == 740 and npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY, {item = 13174}) then
