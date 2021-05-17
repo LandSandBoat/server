@@ -14,16 +14,16 @@ def preflight_exit():
         input('Press ENTER to continue...')
     exit(-1)
 
-# - git should available
+# - git should installed and available
 try:
     subprocess.call(["git"], stdout=subprocess.PIPE)
 except:
-    print("ERROR: Make sure a git executable is available in your system's PATH environment variable.")
+    print("ERROR: Make sure git is installed and available on your system's PATH environment variable.")
     preflight_exit()
 
 # - dbtool.py is designed to be run from <root>/tools folder, not <root>
 if not os.path.isfile("./dbtool.py"):
-    print("ERROR: dbtool.py is designed to be run from <root>/tools folder, not <root>. Please run from the tools folder.")
+    print("ERROR: dbtool.py is designed to be run from the <root>/tools folder, not <root>. Please run from the tools folder.")
     preflight_exit()
 
 # - Repo should be checked out as a git repo, not as plain files
