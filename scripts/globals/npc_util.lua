@@ -3,13 +3,16 @@
 
     npcUtil.popFromQM(player, qm, mobId, params)
     npcUtil.pickNewPosition(npc, positionTable, allowCurrentPosition)
-    npcUtil.giveItem(player, items)
+    npcUtil.giveCurrency(player, currency, amount)
+    npcUtil.giveItem(player, items, params)
     npcUtil.giveKeyItem(player, keyitems)
+    npcUtil.completeMission(player, logId, missionId, params)
     npcUtil.completeQuest(player, area, quest, params)
-    npcUtil.completeRecord(player, record, params)
     npcUtil.tradeHas(trade, items)
+    npcUtil.tradeHasExactly(trade, items)
     npcUtil.queueMove(npc, point, delay)
     npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
+    npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     npcUtil.fishingAnimation(npc, phaseDuration, func)
 --]]
 require("scripts/globals/settings")
@@ -193,8 +196,22 @@ end
         { 640, 641 }        -- copper ore x1, tin ore x1
         { {640, 2} }         -- copper ore x2
         { {640, 2}, 641 }    -- copper ore x2, tin ore x1
+
+    params (table) can contain the following parameters:
+
+    silent (boolean, default false)
+        if set, displays no messages
+    fromTrade (boolean, default false)
+        if set, when player has no room for items, display
+        "Try trading again after sorting your inventory"
+        instead of
+        "Come back again after sorting your inventory"
 ******************************************************************************* --]]
-function npcUtil.giveItem(player, items)
+function npcUtil.giveItem(player, items, params)
+    params = params or {}
+    if params.silent == nil or type(params.silent) ~= "boolean" then silent = false end
+    if params.fromTrade == nil or type(params.fromTrade) ~= "boolean" then fromTrade = false end
+
     local ID = zones[player:getZoneID()]
 
     -- create table of items, with key/val of itemId/itemQty
@@ -218,7 +235,10 @@ function npcUtil.giveItem(player, items)
 
     -- does player have enough inventory space?
     if player:getFreeSlotsCount() < #givenItems then
-        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
+        if not params.silent then
+            local messageId = params.fromTrade and (ID.text.ITEM_CANNOT_BE_OBTAINED + 4) or ID.text.ITEM_CANNOT_BE_OBTAINED
+            player:messageSpecial(messageId, givenItems[1][1])
+        end
         return false
     end
 
@@ -226,12 +246,18 @@ function npcUtil.giveItem(player, items)
     local messagedItems = {}
     for _, v in pairs(givenItems) do
         if player:addItem(v[1], v[2], true) then
-            if not messagedItems[v[1]] then
-                player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+            if not params.silent and not messagedItems[v[1]] then
+                if v[2] > 1 then
+                    player:messageSpecial(ID.text.ITEM_OBTAINED + 9, v[1], v[2])
+                else
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, v[1])
+                end
             end
             messagedItems[v[1]] = true
         elseif #givenItems == 1 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
+            if not params.silent then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, givenItems[1][1])
+            end
             return false
         end
     end
@@ -328,7 +354,10 @@ end
     Example of usage with params (all params are optional):
         npcUtil.completeQuest(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
-            ki = xi.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
+            itemParams = {              -- see npcUtil.giveItem for formats
+                fromTrade = true,
+            },
+            ki = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
             fameArea = NORG,            -- only needed if the logId table passed as 2nd param doesn't have the fame_area you want
             fame = 120,                 -- fame defaults to 30 if not set
             bayld = 500,
@@ -346,7 +375,7 @@ function npcUtil.completeQuest(player, area, quest, params)
 
     -- item(s) plus message. return false if player lacks inventory space.
     if params["item"] ~= nil then
-        if not npcUtil.giveItem(player, params["item"]) then
+        if not npcUtil.giveItem(player, params["item"], params["itemParams"]) then
             return false
         end
     end
@@ -422,7 +451,10 @@ end
     Example of usage with params (all params are optional):
         npcUtil.completeMission(player, SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
             item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
-            ki = xi.ki.ZERUHN_REPORT,  -- see npcUtil.giveKeyItem for formats
+            itemParams = {              -- see npcUtil.giveItem for formats
+                fromTrade = true,
+            },
+            ki = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
             bayld = 500,
             gil = 200,
             xp = 1000,
@@ -437,7 +469,7 @@ function npcUtil.completeMission(player, logId, missionId, params)
 
     -- item(s) plus message. return false if player lacks inventory space.
     if params["item"] ~= nil then
-        if not npcUtil.giveItem(player, params["item"]) then
+        if not npcUtil.giveItem(player, params["item"], params["itemParams"]) then
             return false
         end
     end
