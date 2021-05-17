@@ -104,7 +104,7 @@ quest.sections = {
 
     -- Travel to Ordelle's Caves and hunt for an Ordelle Chest Key. Once you find a key, look for a Treasure Chest and open it.
     -- Only people who have this quest flagged will receive some Torn-Out Pages (key item).
-    -- NOTE: this step is not included in this quest LUA. The key item can be obtained via code in scripts/globals/treasure.lua
+    -- NOTE: this step is not included in this quest LUA. The key item is obtained via code in scripts/globals/treasure.lua
 
     -- Return to Selbina and talk to the mayor. He'll reveal some information to you which will prove interesting to Sobane.
     {
