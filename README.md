@@ -1,5 +1,5 @@
 # LandSandBoat
-[![stable build status](https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg)](https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base)
+[![base build status](https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg)](https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Summary
