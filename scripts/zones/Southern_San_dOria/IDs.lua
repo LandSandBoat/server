@@ -64,6 +64,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         FERDOULEMIONT_SHOP_DIALOG      = 8154, -- Hello!
         CLETAE_DIALOG                  = 8206, -- Why, hello. All our skins are guild-approved.
         KUEH_IGUNAHMORI_DIALOG         = 8207, -- Good day! We have lots in stock today.
+        SOBANE_DIALOG                  = 8225, -- My name is Sobane, and I'm sharpening my knives.
         PAUNELIE_DIALOG                = 8315, -- I'm sorry, can I help you?
         PAUNELIE_SHOP_DIALOG           = 8320, -- These magic shells are full of mysteries...
         ITEM_DELIVERY_DIALOG           = 8415, -- Parcels delivered to rooms anywhere in Vana'diel!

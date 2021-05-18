@@ -19,6 +19,7 @@ zones[xi.zone.PHANAUET_CHANNEL] =
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE           = 7050, -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET  = 7219, -- You can't fish here.
+        RICHE_DAVOI_WATERFALL   = 7407, -- <item>...Davoi...waterfall...
     },
     mob =
     {

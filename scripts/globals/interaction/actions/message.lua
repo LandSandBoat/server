@@ -8,6 +8,7 @@ Message = Action:new(Action.Type.Message)
 Message.Type = {
     Text = 1,
     Special = 2,
+    Name = 3,
 }
 
 function Message:new(messageId, messageType, ...)
@@ -24,6 +25,8 @@ end
 function Message:perform(player, targetEntity)
     if self.messageType == Message.Type.Special then
         player:messageSpecial(self.id, unpack(self.options))
+    elseif self.messageType == Message.Type.Name then
+        player:showText(self.npcId and GetNPCByID(self.npcId) or targetEntity, self.id, unpack(self.options))
     else
         player:messageText(self.npcId and GetNPCByID(self.npcId) or targetEntity, self.id, { face = self.face })
     end

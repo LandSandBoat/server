@@ -31,6 +31,12 @@ local function parseActionShorthand(actionDef)
         return Message:new(info, Message.Type.Special, actionDef.options and unpack(actionDef.options))
     end
 
+    -- Message with name prefix
+    info = actionDef.messageName
+    if info then
+        return Message:new(info, Message.Type.Name, actionDef.options and unpack(actionDef.options))
+    end
+
     -- Sequence
     if #actionDef > 0 and type(actionDef[1]) == "table" then
         local sequence = Sequence:new(actionDef)

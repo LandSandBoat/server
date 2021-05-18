@@ -74,21 +74,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local anExplorersFootsteps = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
-    local signedInBlood = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD)
-    local signedInBloodStat = player:getCharVar("SIGNED_IN_BLOOD_Prog")
-
-    -- SIGNED IN BLOOD (will only activate if An Explorer's Footsteps is not active, or if it is completed)
-    if signedInBlood == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TORN_OUT_PAGES) and anExplorersFootsteps ~= QUEST_ACCEPTED and signedInBloodStat == 2 then
-        player:startEvent(1106)
-    elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 1 and anExplorersFootsteps ~= QUEST_ACCEPTED then
-        player:startEvent(1104)
-    elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 2 and anExplorersFootsteps ~= QUEST_ACCEPTED then
-        player:startEvent(1105)
-    elseif signedInBlood == QUEST_ACCEPTED and signedInBloodStat == 3 then
-        player:startEvent(48)
 
     -- AN EXPLORER'S FOOTSTEPS
-    elseif anExplorersFootsteps == QUEST_AVAILABLE and math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) >= 1 then
+    if anExplorersFootsteps == QUEST_AVAILABLE and math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) >= 1 then
         player:startEvent(40)
     elseif anExplorersFootsteps == QUEST_ACCEPTED then
         if not player:hasItem(570) and not player:hasItem(571) then
@@ -122,14 +110,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- SIGNED IN BLOOD
-    if csid == 1104 then
-        player:setCharVar("SIGNED_IN_BLOOD_Prog", 2)
-    elseif csid == 1106 then
-        player:setCharVar("SIGNED_IN_BLOOD_Prog", 3)
-
     -- AN EXPLORER'S FOOTSTEPS
-    elseif csid == 40 and option ~= 0 and npcUtil.giveItem(player, 571) then
+    if csid == 40 and option ~= 0 and npcUtil.giveItem(player, 571) then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar("anExplorer-ClayTablets", 0)
     elseif csid == 42 and option == 100 and npcUtil.giveItem(player, 571) then
