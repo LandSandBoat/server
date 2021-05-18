@@ -4,10 +4,7 @@
 -- Involved in Quest "The Pickpocket"
 -- !pos -624.231 -51.499 278.369 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 

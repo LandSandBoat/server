@@ -5,8 +5,6 @@
 -- !pos 0.750 -4.000 -81.438 232
 -----------------------------------
 require("scripts/quests/flyers_for_regine")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -15,7 +13,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(553)
 end
 
 entity.onEventUpdate = function(player, csid, option)
