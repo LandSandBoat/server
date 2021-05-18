@@ -81,6 +81,7 @@ xi.items =
     WING_PENDANT                    = 13183,
     CUNNING_EARRING                 = 14760,
     OLDUUM_RING                     = 15769,
+    CHANOIXS_GORGET                 = 16270,
     MINSTRELS_DAGGER                = 16487,
     MYTHRIL_PICK                    = 16651,
     LIGHT_AXE                       = 16667,
