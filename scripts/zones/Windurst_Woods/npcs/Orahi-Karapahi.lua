@@ -1,14 +1,13 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Orahi-Karapahi
--- Working 100%
 -----------------------------------
 local entity = {}
 
 local path =
 {
-63.612, -4.250, 102.695,    -- TODO: wait at location for 1 seconds
-58.772, -4.250, 103.357     -- TODO: wait at location for 1 seconds
+    63.612, -4.250, 102.695,    -- TODO: wait at location for 1 seconds
+    58.772, -4.250, 103.357     -- TODO: wait at location for 1 seconds
 }
 
 entity.onSpawn = function(npc)

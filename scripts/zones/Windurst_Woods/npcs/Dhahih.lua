@@ -6,8 +6,8 @@ local entity = {}
 
 local path =
 {
-6.110, 0.000, 122.311,  -- TODO: wait at location for 6 seconds
-20.867, 0.000, 106.642  -- TODO: wait at location for 6 seconds
+    6.110, 0.000, 122.311,  -- TODO: wait at location for 6 seconds
+    20.867, 0.000, 106.642  -- TODO: wait at location for 6 seconds
 }
 
 entity.onSpawn = function(npc)
