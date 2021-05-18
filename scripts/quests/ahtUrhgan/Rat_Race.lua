@@ -10,12 +10,23 @@
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/quests")
+require("scripts/globals/zone")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local nashmauID = require("scripts/zones/Nashmau/IDs")
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
+
+quest.reward =
+{
+    item =
+    {
+        { xi.items.IMPERIAL_GOLD_PIECE,    2 },
+        { xi.items.IMPERIAL_MYTHRIL_PIECE, 2 },
+        { xi.items.IMPERIAL_SILVER_PIECE,  3 },
+    },
+}
 
 quest.sections =
 {
@@ -113,8 +124,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 5 and
-                        trade:hasItemQty(xi.items.BOWL_OF_NASHMAU_STEW, 1) and
-                        trade:getItemCount() == 1
+                        npcUtil.tradeHasExactly(trade, xi.items.BOWL_OF_NASHMAU_STEW)
                     then
                         return quest:progressEvent(311)
                     end
@@ -134,12 +144,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 4 and
-                        trade:hasItemQty(xi.items.AHTAPOT, 1) and
-                        trade:hasItemQty(xi.items.ISTAKOZ, 1) and
-                        trade:hasItemQty(xi.items.ISTAVRIT, 1) and
-                        trade:hasItemQty(xi.items.ISTIRIDYE, 1) and
-                        trade:hasItemQty(xi.items.MERCANBALIGI, 1) and
-                        trade:getItemCount() == 5
+                        npcUtil.tradeHasExactly(trade, {xi.items.AHTAPOT, xi.items.ISTAKOZ, xi.items.ISTAVRIT, xi.items.ISTIRIDYE, xi.items.MERCANBALIGI})
                     then
                         return quest:progressEvent(310)
                     end
@@ -166,31 +171,18 @@ quest.sections =
 
                 [310] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, xi.items.BOWL_OF_NASHMAU_STEW) then
-                        player:tradeComplete()
+                        player:confirmTrade()
                         quest:setVar(player, 'Prog', 5)
                     end
                 end,
 
                 [311] = function(player, csid, option, npc)
-                    player:tradeComplete()
+                    player:confirmTrade()
                     quest:setVar(player, 'Prog', 6)
                 end,
 
                 [312] = function(player, csid, option, npc)
-                    -- TODO: Modify npcUtil.giveItem to support multiple reward/unable to obtain messages.
-                    if player:getFreeSlotsCount() <= 2 then
-                        player:messageSpecial(nashmauID.text.ITEM_CANNOT_BE_OBTAINEDX, xi.items.IMPERIAL_GOLD_PIECE, 2)
-                        player:messageSpecial(nashmauID.text.ITEM_CANNOT_BE_OBTAINEDX, xi.items.IMPERIAL_MYTHRIL_PIECE, 2)
-                        player:messageSpecial(nashmauID.text.ITEM_CANNOT_BE_OBTAINEDX, xi.items.IMPERIAL_SILVER_PIECE, 3)
-                    else
-                        player:addItem(xi.items.IMPERIAL_GOLD_PIECE, 2)
-                        player:addItem(xi.items.IMPERIAL_MYTHRIL_PIECE, 2)
-                        player:addItem(xi.items.IMPERIAL_SILVER_PIECE, 3)
-                        player:messageSpecial(nashmauID.text.ITEM_OBTAINEDX, xi.items.IMPERIAL_GOLD_PIECE, 2)
-                        player:messageSpecial(nashmauID.text.ITEM_OBTAINEDX, xi.items.IMPERIAL_MYTHRIL_PIECE, 2)
-                        player:messageSpecial(nashmauID.text.ITEM_OBTAINEDX, xi.items.IMPERIAL_SILVER_PIECE, 3)
                         quest:complete(player)
-                    end
                 end,
             },
         },
