@@ -1,13 +1,11 @@
 -----------------------------------
 -- Area: Riverne Site #B01
 --  NPC: Unstable Displacement
--- Note: entrance for "The Wyrmking Descends"
+-- Note: entrance for "Storms of Fate" and "The Wyrmking Descends"
 -- !pos -612.800 1.750 693.190 29
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
-require("scripts/globals/settings")
 require("scripts/globals/quests")
-require("scripts/globals/status")
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}
