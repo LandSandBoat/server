@@ -12,7 +12,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:showText(npc, ID.text.MAURINE_DIALOG)
 end
 
 entity.onEventUpdate = function(player, csid, option)

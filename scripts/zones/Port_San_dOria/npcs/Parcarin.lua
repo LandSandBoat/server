@@ -4,7 +4,6 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -9 -13 -151 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -16,10 +15,6 @@ end
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("WildcatSandy"), 13) then
         player:startEvent(747)
-    elseif player:getCharVar("thePickpocket") == 1 then
-        player:showText(npc, ID.text.PICKPOCKET_PARCARIN)
-    else
-        player:startEvent(566)
     end
 end
 
