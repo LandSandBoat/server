@@ -60,6 +60,7 @@ xi.items =
     MERCANBALIGI                    = 5454,
     AHTAPOT                         = 5455,
     ISTIRIDYE                       = 5456,
+    CORSAIR_DIE                     = 5493,
     POT_OF_WHITE_HONEY              = 5562,
     IRMIK_HELVASI                   = 5572,
     BOWL_OF_SUTLAC                  = 5577,
@@ -95,4 +96,5 @@ xi.items =
     BOW_OF_TRIALS                   = 18144,
     GUN_OF_TRIALS                   = 18146,
     BIBIKI_SEASHELL                 = 18257,
+    TRUMP_GUN                       = 18702,
 }
