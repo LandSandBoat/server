@@ -639,8 +639,8 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.AHT_URHGAN]] =
     {
-        KEEPING_NOTES                   = 0,
-        ARTS_AND_CRAFTS                 = 1,
+        KEEPING_NOTES                   = 0, -- +
+        ARTS_AND_CRAFTS                 = 1, -- +
         OLDUUM                          = 2, -- +
         GOT_IT_ALL                      = 3, -- +
         GET_THE_PICTURE                 = 4,
@@ -654,7 +654,7 @@ xi.quest.id =
         A_TASTE_OF_HONEY                = 12,
         SUCH_SWEET_SORROW               = 13,
         FEAR_OF_THE_DARK_II             = 14, -- +
-        COOK_A_ROON                     = 15,
+        COOK_A_ROON                     = 15, -- +
         THE_DIE_IS_CAST                 = 16,
         TWO_HORN_THE_SAVAGE             = 17,
         TOTOROONS_TREASURE_HUNT         = 18,
