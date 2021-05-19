@@ -1,25 +1,29 @@
 -----------------------------------
 -- Area: Al'Taieu
---  NPC: ??? (Jailer of Hope Spawn)
--- Allows players to spawn the Jailer of Hope by trading the First Virtue, Deed of Placidity and HQ Phuabo Organ to a ???.
--- !pos -693 -1 -62 33
+--  NPC: qm_jailer_of_love (???)
+-- Allows players to spawn the Jailer of Love by trading the Fourth Virtue, Fifth Virtue and Sixth Virtue to a ???.
+-- Allows players to spawn Absolute Virtue by killing Jailer of Love.
+-- !pos , 431 -0 -603
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    -- JAILER OF HOPE
+    --[[
+    -- JAILER OF LOVE
     if (
-        not GetMobByID(ID.mob.JAILER_OF_HOPE):isSpawned() and
-        trade:hasItemQty(1850, 1) and -- first_virtue
-        trade:hasItemQty(1851, 1) and -- deed_of_placidity
-        trade:hasItemQty(1852, 1) and -- high-quality_phuabo_organ
+        not GetMobByID(ID.mob.JAILER_OF_LOVE):isSpawned() and
+        not GetMobByID(ID.mob.ABSOLUTE_VIRTUE):isSpawned() and
+        trade:hasItemQty(1848, 1) and -- fourth_virtue
+        trade:hasItemQty(1847, 1) and -- fifth_virtue
+        trade:hasItemQty(1849, 1) and -- sixth_virtue
         trade:getItemCount() == 3
     ) then
         player:tradeComplete()
-        SpawnMob(ID.mob.JAILER_OF_HOPE):updateClaim(player)
+        SpawnMob(ID.mob.JAILER_OF_LOVE):updateClaim(player)
     end
+    --]]
 end
 
 entity.onTrigger = function(player, npc)
