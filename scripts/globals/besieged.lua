@@ -98,6 +98,11 @@ xi.besieged.getAstralCandescence = function()
     return 1 -- Hardcoded to 1 for now
 end
 
+-- TODO: Captains
+xi.besieged.isRughadjeenInAlZahbi = function()
+    return true -- Hardcoded for now
+end
+
 xi.besieged.badges = { 780, 783, 784, 794, 795, 825, 826, 827, 894, 900, 909 }
 
 xi.besieged.getMercenaryRank = function(player)
