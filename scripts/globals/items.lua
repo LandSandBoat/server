@@ -51,6 +51,7 @@ xi.items =
     PUFFBALL                        = 4448,
     CRESCENT_FISH                   = 4473,
     THREE_EYED_FISH                 = 4478,
+    SCROLL_OF_HOJO_ICHI             = 4952,
     ISTAVRIT                        = 5136,
     PITCHER_OF_HOMEMADE_HERBAL_TEA  = 5221,
     BOWL_OF_HOMEMADE_STEW           = 5222,
