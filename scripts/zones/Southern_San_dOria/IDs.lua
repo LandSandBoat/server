@@ -49,6 +49,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         DYNA_NPC_DEFAULT_MESSAGE       = 7432, -- There is an unusual arrangement of branches here.
         VARCHET_BET_LOST               = 7763, -- You lose your bet of 5 gil.
         VARCHET_KEEP_PROMISE           = 7772, -- As promised, I shall go and see about those woodchippers. Maybe we can play another game later.
+        ROSEL_GREETINGS                = 7773, -- Greetings!
         FFR_ROSEL                      = 7792, -- Hrmm... Now, this is interesting! It pays to keep an eye on the competition. Thanks for letting me know!
         LUSIANE_SHOP_DIALOG            = 7966, -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7967, -- Welcome, customer. Please have a look.
