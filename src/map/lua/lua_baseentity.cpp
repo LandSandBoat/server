@@ -12277,6 +12277,33 @@ void CLuaBaseEntity::setBehaviour(uint16 behavior)
     static_cast<CMobEntity*>(m_PBaseEntity)->m_Behaviour = behavior;
 }
 
+
+/************************************************************************
+ *  Function: getRoamFlags()
+ *  Purpose : Returns the current mob roam flags
+ *  Example : mob:getRoamFlags()
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getRoamFlags()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    return static_cast<CMobEntity*>(m_PBaseEntity)->m_roamFlags;
+}
+
+/************************************************************************
+ *  Function: setRoamFlags()
+ *  Purpose : Sets roam flags for a mob
+ *  Example : mob:setRoamFlags(bit.bor(mob:getRoamFlags(), xi.roamFlag.STEALTH))
+ ************************************************************************/
+
+void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    static_cast<CMobEntity*>(m_PBaseEntity)->m_roamFlags = newRoamFlags;
+}
+
 /************************************************************************
  *  Function: getTarget()
  *  Purpose : Return available targets as a Lua table to the Mob
@@ -13475,6 +13502,8 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getBehaviour", CLuaBaseEntity::getBehaviour);
     SOL_REGISTER("setBehaviour", CLuaBaseEntity::setBehaviour);
+    SOL_REGISTER("getRoamFlags", CLuaBaseEntity::getRoamFlags);
+    SOL_REGISTER("setRoamFlags", CLuaBaseEntity::setRoamFlags);
 
     SOL_REGISTER("getTarget", CLuaBaseEntity::getTarget);
     SOL_REGISTER("updateTarget", CLuaBaseEntity::updateTarget);

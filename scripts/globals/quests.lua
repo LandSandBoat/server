@@ -56,7 +56,7 @@ xi.quest.id =
     [xi.quest.area[xi.quest.log_id.SANDORIA]] =
     {
         A_SENTRYS_PERIL                 = 0,  -- ±
-        WATER_OF_THE_CHEVAL             = 1,  -- ±
+        WATERS_OF_THE_CHEVAL            = 1,  -- ±
         ROSEL_THE_ARMORER               = 2,  -- ±
         THE_PICKPOCKET                  = 3,  -- ±
         FATHER_AND_SON                  = 4,  -- +
@@ -524,7 +524,7 @@ xi.quest.id =
         PICTURE_PERFECT                 = 31,
         WAKING_THE_BEAST                = 32,
         SURVIVAL_OF_THE_WISEST          = 33,
-        A_HARD_DAY_S_KNIGHT             = 64,
+        A_HARD_DAYS_KNIGHT              = 64,
         X_MARKS_THE_SPOT                = 65,
         A_BITTER_PAST                   = 66,
         THE_CALL_OF_THE_SEA             = 67,
@@ -639,8 +639,8 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.AHT_URHGAN]] =
     {
-        KEEPING_NOTES                   = 0,
-        ARTS_AND_CRAFTS                 = 1,
+        KEEPING_NOTES                   = 0, -- +
+        ARTS_AND_CRAFTS                 = 1, -- +
         OLDUUM                          = 2, -- +
         GOT_IT_ALL                      = 3, -- +
         GET_THE_PICTURE                 = 4,
@@ -654,7 +654,7 @@ xi.quest.id =
         A_TASTE_OF_HONEY                = 12,
         SUCH_SWEET_SORROW               = 13,
         FEAR_OF_THE_DARK_II             = 14, -- +
-        COOK_A_ROON                     = 15,
+        COOK_A_ROON                     = 15, -- +
         THE_DIE_IS_CAST                 = 16,
         TWO_HORN_THE_SAVAGE             = 17,
         TOTOROONS_TREASURE_HUNT         = 18,

@@ -16,15 +16,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local LuckOfTheDraw = player:getCharVar("LuckOfTheDraw")
-
-    if (LuckOfTheDraw ==4) then
-        player:startEvent(3)
-    elseif (EventTriggerBCNM(player, npc)) then
+    if EventTriggerBCNM(player, npc) then
         return
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)
@@ -32,19 +26,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 3) then -- complete corsair job flag quest
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 5493)
-        else
-            player:setCharVar("LuckOfTheDraw", 5) -- var will remain for af quests
-            player:addItem(5493)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 5493)
-            player:delKeyItem(xi.ki.FORGOTTEN_HEXAGUN)
-            player:unlockJob(xi.job.COR)
-            player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_CORSAIR)
-            player:completeQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW)
-        end
-    elseif (EventFinishBCNM(player, csid, option)) then
+    if EventFinishBCNM(player, csid, option) then
         return
     end
 

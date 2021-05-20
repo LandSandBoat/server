@@ -35,8 +35,6 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     elseif player:getCharVar("threemenandaclosetCS") == 2 and prevZone == xi.zone.AHT_URHGAN_WHITEGATE then
         cs = 510
-    elseif player:getCharVar("princeandhopper") == 1 then
-        cs = 513
     end
     return cs
 end
@@ -63,8 +61,6 @@ zone_object.onEventFinish = function(player, csid, option)
         player:setTitle(xi.title.ENDYMION_PARATROOPER)
         player:setCharVar("TOAUM40_STARTDAY", 0)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.LIGHT_OF_JUDGMENT)
-    elseif csid == 513 then
-        player:setCharVar("princeandhopper", 2)
     end
 end
 

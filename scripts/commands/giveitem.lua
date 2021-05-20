@@ -30,7 +30,11 @@ function onTrigger(player, target, itemId, amount, aug0, aug0val, aug1, aug1val,
         player:PrintToPlayer( string.format( "Player '%s' does not have free space for that item!", target ) )
     else
         targ:addItem( itemId, amount, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val )
-        targ:messageSpecial( ID.text.ITEM_OBTAINED, itemId )
+        if amount and amount > 1 then
+            targ:messageSpecial( ID.text.ITEM_OBTAINED + 9, itemId, amount )
+        else
+            targ:messageSpecial( ID.text.ITEM_OBTAINED, itemId )
+        end
         player:PrintToPlayer( string.format( "Gave player '%s' Item with ID of '%u' ", target, itemId ) )
     end
 end

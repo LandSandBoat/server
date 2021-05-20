@@ -1,3 +1,7 @@
+--[[
+https://ffxiclopedia.fandom.com/wiki/Category:Hpemde
+https://www.bg-wiki.com/ffxi/Category:Hpemde
+--]]
 require("scripts/globals/mixins")
 require("scripts/globals/status")
 -----------------------------------
@@ -6,11 +10,15 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function dive(mob)
-    mob:hideName(true)
-    mob:untargetable(true)
     mob:SetAutoAttackEnabled(false)
     mob:SetMobAbilityEnabled(false)
-    mob:setAnimationSub(5)
+
+    -- Om'hpedme in north half of Al'Taieu do not dive or become untargetable
+    if mob:getPool() ~= 7033 then
+        mob:hideName(true)
+        mob:untargetable(true)
+        mob:setAnimationSub(5)
+    end
 end
 
 local function surface(mob)

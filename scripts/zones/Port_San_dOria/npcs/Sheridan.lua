@@ -4,7 +4,6 @@
 -- Involved in Quests: Riding on the Clouds
 -- !pos -19 -8 -129 232
 -----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -20,11 +19,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("thePickpocket") == 1 then
-        player:showText(npc, ID.text.PICKPOCKET_SHERIDAN)
-    else
-        player:startEvent(572)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

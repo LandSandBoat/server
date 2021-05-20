@@ -73,6 +73,10 @@ function Container:messageSpecial(messageId, ...)
     return Message:new(messageId, Message.Type.Special, ...)
 end
 
+function Container:messageName(messageId, ...)
+    return Message:new(messageId, Message.Type.Name, ...)
+end
+
 function Container:replaceMessage(messageId, messageType, ...)
     return Message:new(messageId, messageType, ...):replaceDefault()
 end
