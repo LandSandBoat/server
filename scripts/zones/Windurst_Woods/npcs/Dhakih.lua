@@ -1,13 +1,13 @@
 -----------------------------------
 -- Area: Windurst Woods
---  NPC: Patsaa Maehoc
+--  NPC: Dhakih
 -----------------------------------
 local entity = {}
 
 local path =
 {
-    -12.900, -4.250, 54.047,    -- TODO: wait at location for 1 seconds
-    0.655, -4.250, 53.641       -- TODO: wait at location for 1 seconds
+    3.596, 0.000, 78.553,   -- TODO: wait at location for 10 seconds
+    -4.010, 0.000, 79.261   -- TODO: wait at location for 18 seconds
 }
 
 entity.onSpawn = function(npc)
@@ -23,7 +23,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(427)
 end
 
 entity.onEventUpdate = function(player, csid, option)
