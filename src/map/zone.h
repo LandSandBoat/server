@@ -28,6 +28,7 @@
 
 #include <list>
 #include <map>
+#include <unordered_map>
 
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
@@ -545,10 +546,14 @@ public:
     uint8          GetPartyBattleMusic() const;
     uint8          GetBackgroundMusicDay() const;
     uint8          GetBackgroundMusicNight() const;
+
     void SetSoloBattleMusic(uint8 music);
     void SetPartyBattleMusic(uint8 music);
     void SetBackgroundMusicDay(uint8 music);
     void SetBackgroundMusicNight(uint8 music);
+
+    uint32 GetLocalVar(const char* var);
+    void SetLocalVar(const char* var, uint32 val);
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
@@ -631,6 +636,8 @@ private:
     uint16 m_miscMask; // битовое поле, описывающее возможности использования в зоне определенных умений
 
     zoneMusic_t m_zoneMusic; // информация о мелодиях, используемых в зоне
+
+    std::unordered_map<std::string, uint32> m_LocalVars;
 
     regionList_t   m_regionList;   // список активных областей зоны
     zoneLineList_t m_zoneLineList; // список всех доступных zonelines для зоны
