@@ -33,7 +33,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 102 then
-        v:setPos(0, 0, 0, 0, 79)
+        player:setPos(0, 0, 0, 0, 79)
     end
 end
 
