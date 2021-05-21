@@ -85,9 +85,12 @@
 #include "../vana_time.h"
 #include "../weapon_skill.h"
 
+// TODO: Implement FileWatch backend for OSX
+#ifndef __APPLE__
 // TODO: Fix path
 #include "../../ext/filewatch/filewatch/FileWatch.hpp"
 std::unique_ptr<filewatch::FileWatch<std::string>> watch = nullptr;
+#endif // __APPLE__
 
 namespace luautils
 {
@@ -297,6 +300,8 @@ namespace luautils
         return 0;
     }
 
+// TODO: Implement FileWatch backend for OSX
+#ifndef __APPLE__
     void EnableFilewatcher()
     {
         // Prepare script file watcher
@@ -344,6 +349,17 @@ namespace luautils
             filteredList.clear();
         });
     }
+#else
+    void EnableFilewatcher()
+    {
+        // Intentionally blank
+    }
+
+    void ReloadFilewatchList()
+    {
+        // Intentionally blank
+    }
+#endif // __APPLE__
 
     std::vector<std::string> GetQuestAndMissionFilenamesList()
     {
@@ -441,7 +457,7 @@ namespace luautils
         }
 
         // Didn't find it
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     sol::function getSpellCachedFunction(CSpell* PSpell, std::string funcName)
@@ -475,7 +491,7 @@ namespace luautils
         }
 
         // Didn't find it
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     // Assumes filename in the form "./scripts/folder0/folder1/folder2/mob_name.lua
@@ -1355,7 +1371,7 @@ namespace luautils
             else
             {
                 ShowError("Error: No columns in `magian` table?");
-                return sol::nil;
+                return sol::lua_nil;
             }
 
             const char* Query = "SELECT * FROM `magian` WHERE trialId = %u;";
@@ -1393,13 +1409,13 @@ namespace luautils
             }
             else
             {
-                return sol::nil;
+                return sol::lua_nil;
             }
 
             return table;
         }
 
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     /*******************************************************************************
@@ -1427,7 +1443,7 @@ namespace luautils
             return table;
         }
 
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     /************************************************************************
@@ -2430,8 +2446,8 @@ namespace luautils
         }
 
         // Clear out globals
-        lua.set("mixins", sol::nil);
-        lua.set("mixinOptions", sol::nil);
+        lua.set("mixins", sol::lua_nil);
+        lua.set("mixinOptions", sol::lua_nil);
 
         auto zone_name = (const char*)PMob->loc.zone->GetName();
         auto name      = (const char*)PMob->GetName();
@@ -2482,8 +2498,8 @@ namespace luautils
         }
 
         // Clear out any previous global definitions
-        lua.set("mixins", sol::nil);
-        lua.set("mixinOptions", sol::nil);
+        lua.set("mixins", sol::lua_nil);
+        lua.set("mixinOptions", sol::lua_nil);
 
         auto filename = fmt::format("./scripts/mixins/zones/{}.lua", PMob->loc.zone->GetName());
 
@@ -2937,7 +2953,7 @@ namespace luautils
             sol::function onMobDeath = getEntityCachedFunction(PMob, "onMobDeath");
 
             // onMobDeath(mob, player, isKiller, noKiller)
-            auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::nil, sol::nil, true, onMobDeath);
+            auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, sol::lua_nil, true, onMobDeath);
             if (!result.valid())
             {
                 sol::error err = result;
@@ -3595,7 +3611,7 @@ namespace luautils
         {
             // If you can't load from PChar->m_event.Script, try from the zone
             auto filename     = fmt::format("./scripts/zones/{}/Zone.lua", PChar->loc.zone->GetName());
-            onInstanceCreated = GetCacheEntryFromFilename(filename)["onInstanceCreated"];
+            onInstanceCreated.set(GetCacheEntryFromFilename(filename)["onInstanceCreated"]);
             if (!onInstanceCreated.valid())
             {
                 ShowError("luautils::onInstanceCreated: undefined procedure onInstanceCreated\n");
@@ -4290,7 +4306,7 @@ namespace luautils
             return funcFromZone;
         }
 
-        return sol::nil;
+        return sol::lua_nil;
     }
 
     uint16 GetDespoilDebuff(uint16 itemId)
