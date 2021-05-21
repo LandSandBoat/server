@@ -21,10 +21,10 @@
 
 #include "common/logging.h"
 
-#include "../region.h"
-
+#include "../campaign_system.h"
 #include "../entities/charentity.h"
 #include "../entities/npcentity.h"
+#include "../region.h"
 #include "../zone.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
@@ -411,19 +411,6 @@ void CLuaZone::Register()
     SOL_REGISTER("getCampaignProsperity", CLuaZone::getCampaignProsperity);
     SOL_REGISTER("getCampaignHeroism", CLuaZone::getCampaignHeroism);
     SOL_REGISTER("getCampaignUnionCount", CLuaZone::getCampaignUnionCount);
-
-    SOL_REGISTER("setCampaignBattleStatus", CLuaZone::setCampaignBattleStatus);
-    SOL_REGISTER("setCampaignZoneControl", CLuaZone::setCampaignZoneControl);
-    SOL_REGISTER("setCampaignFortification", CLuaZone::setCampaignFortification);
-    SOL_REGISTER("setCampaignResource", CLuaZone::setCampaignResource);
-    SOL_REGISTER("setCampaignMaxFortification", CLuaZone::setCampaignMaxFortification);
-    SOL_REGISTER("setCampaignMaxResource", CLuaZone::setCampaignMaxResource);
-    SOL_REGISTER("setCampaignInfluence", CLuaZone::setCampaignInfluence);
-    SOL_REGISTER("setCampaignReconnaissance", CLuaZone::setCampaignReconnaissance);
-    SOL_REGISTER("setCampaignMorale", CLuaZone::setCampaignMorale);
-    SOL_REGISTER("setCampaignProsperity", CLuaZone::setCampaignProsperity);
-    SOL_REGISTER("setCampaignHeroism", CLuaZone::setCampaignHeroism);
-    SOL_REGISTER("setCampaignUnionCount", CLuaZone::setCampaignUnionCount);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

@@ -28,15 +28,15 @@ namespace campaign
     void LoadNations()
     {
         std::string query = "SELECT id, reconnaissance, morale, prosperity FROM campaign_nation ORDER BY id ASC;";
-        int ret = Sql_Query(SqlHandle, query.c_str());
+        int         ret   = Sql_Query(SqlHandle, query.c_str());
         if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0)
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
                 CampaignNation nation;
                 nation.reconnaissance = (uint8)Sql_GetUIntData(SqlHandle, 1);
-                nation.morale = (uint8)Sql_GetUIntData(SqlHandle, 2);
-                nation.prosperity = (uint8)Sql_GetUIntData(SqlHandle, 3);
+                nation.morale         = (uint8)Sql_GetUIntData(SqlHandle, 2);
+                nation.prosperity     = (uint8)Sql_GetUIntData(SqlHandle, 3);
                 CState.nations.push_back(nation);
             }
         }
@@ -50,56 +50,58 @@ namespace campaign
         {
             CState.regions.clear();
             CState.controlSandoria = 0;
-            CState.controlBastok = 0;
+            CState.controlBastok   = 0;
             CState.controlBeastman = 0;
             CState.controlWindurst = 0;
-            state = CState;
+            state                  = CState;
         }
 
-        zoneutils::ForEachZone([&state](CZone* PZone) {
-          if (PZone->m_CampaignHandler != nullptr)
-          {
-              uint8 nation = (uint8)(PZone->m_CampaignHandler->GetZoneControl() + 1) * 2;
-              switch (nation)
-              {
-                  case CampaignControl::SandoriaMask:
-                      state.controlSandoria += 1;
-                      break;
-                  case CampaignControl::BastokMask:
-                      state.controlBastok += 1;
-                      break;
-                  case CampaignControl::WindurstMask:
-                      state.controlWindurst += 1;
-                      break;
-                  case CampaignControl::BeastmanMask:
-                  default:
-                      state.controlBeastman += 1;
-                      break;
-              }
+        zoneutils::ForEachZone([&state](CZone* PZone)
+                               {
+                                   if (PZone->m_CampaignHandler != nullptr)
+                                   {
+                                       uint8 nation = (uint8)(PZone->m_CampaignHandler->GetZoneControl() + 1) * 2;
+                                       switch (nation)
+                                       {
+                                           case CampaignControl::SandoriaMask:
+                                               state.controlSandoria += 1;
+                                               break;
+                                           case CampaignControl::BastokMask:
+                                               state.controlBastok += 1;
+                                               break;
+                                           case CampaignControl::WindurstMask:
+                                               state.controlWindurst += 1;
+                                               break;
+                                           case CampaignControl::BeastmanMask:
+                                           default:
+                                               state.controlBeastman += 1;
+                                               break;
+                                       }
 
-              CampaignRegion region;
-              region.campaignId            = PZone->m_CampaignHandler->GetCampaignId();
-              region.status                = PZone->m_CampaignHandler->GetBattleStatus();
-              region.heroism               = PZone->m_CampaignHandler->GetHeroism();
-              region.influenceSandoria     = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Sandoria);
-              region.influenceBastok       = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Bastok);
-              region.influenceWindurst     = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Windurst);
-              region.influenceBeastman     = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Orcish);
-              region.currentFortifications = PZone->m_CampaignHandler->GetFortification();
-              region.currentResources      = PZone->m_CampaignHandler->GetResource();
-              region.maxFortifications     = PZone->m_CampaignHandler->GetMaxFortification();
-              region.maxResources          = PZone->m_CampaignHandler->GetMaxResource();
-              region.nationControl         = nation;
-              state.regions.push_back(region);
-          }
-        });
-        std::sort(state.regions.begin(), state.regions.end(), [](const CampaignRegion& a, const CampaignRegion& b) -> bool {
-          if (a.campaignId < b.campaignId)
-              return true;
-          if (a.campaignId > b.campaignId)
-              return false;
-          return false;
-        });
+                                       CampaignRegion region;
+                                       region.campaignId            = PZone->m_CampaignHandler->GetCampaignId();
+                                       region.status                = PZone->m_CampaignHandler->GetBattleStatus();
+                                       region.heroism               = PZone->m_CampaignHandler->GetHeroism();
+                                       region.influenceSandoria     = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Sandoria);
+                                       region.influenceBastok       = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Bastok);
+                                       region.influenceWindurst     = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Windurst);
+                                       region.influenceBeastman     = PZone->m_CampaignHandler->GetInfluence(CampaignArmy::Orcish);
+                                       region.currentFortifications = PZone->m_CampaignHandler->GetFortification();
+                                       region.currentResources      = PZone->m_CampaignHandler->GetResource();
+                                       region.maxFortifications     = PZone->m_CampaignHandler->GetMaxFortification();
+                                       region.maxResources          = PZone->m_CampaignHandler->GetMaxResource();
+                                       region.nationControl         = nation;
+                                       state.regions.push_back(region);
+                                   }
+                               });
+        std::sort(state.regions.begin(), state.regions.end(), [](const CampaignRegion& a, const CampaignRegion& b) -> bool
+                  {
+                      if (a.campaignId < b.campaignId)
+                          return true;
+                      if (a.campaignId > b.campaignId)
+                          return false;
+                      return false;
+                  });
         CState = state;
     }
 

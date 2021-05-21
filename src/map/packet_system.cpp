@@ -3299,18 +3299,10 @@ void SmallPacket0x059(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x05A(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+    CampaignState state = campaign::GetCampaignState();
     PChar->pushPacket(new CConquestPacket(PChar));
-    PChar->pushPacket(new CCampaignPacket(PChar, 0));
-    PChar->pushPacket(new CCampaignPacket(PChar, 1));
-    CampaignState state = campaign::LoadState(PChar->id);
-    PChar->pushPacket(new CConquestPacket(PChar));
-    PChar->pushPacket(new CCampaignPacket(state, 0));
-    PChar->pushPacket(new CCampaignPacket(state, 1));
-
-    // May Require Sending of 0x0F
-    //    PChar->pushPacket(new CStopDownloadingPacket(PChar));
-    //    luautils::CheckForGearSet(PChar); // also check for gear set
-    return;
+    PChar->pushPacket(new CCampaignPacket(PChar, state, 0));
+    PChar->pushPacket(new CCampaignPacket(PChar, state, 1));
 }
 
 /************************************************************************

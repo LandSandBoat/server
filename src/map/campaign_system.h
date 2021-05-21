@@ -35,11 +35,11 @@ namespace campaign
     void SetAlliedNotes(CCharEntity* chr, int32 amount);    // Each week, certain aspects of the campaign are set back to defaults.
 
     CampaignState GetCampaignState();
-    uint8 GetReconnaissance(CampaignArmy army); // Change the reconnaissance level for the army by the amount.
-    uint8 GetMorale(CampaignArmy army);         // Change the morale level for the army by the amount.
-    uint8 GetProsperity(CampaignArmy army);     // Change the prosperity level for the army by the amount.
-    int32 GetAlliedNotes(CCharEntity* chr);     // Change the prosperity level for the army by the amount.
+    uint8         GetReconnaissance(CampaignArmy army); // Change the reconnaissance level for the army by the amount.
+    uint8         GetMorale(CampaignArmy army);         // Change the morale level for the army by the amount.
+    uint8         GetProsperity(CampaignArmy army);     // Change the prosperity level for the army by the amount.
+    int32         GetAlliedNotes(CCharEntity* chr);     // Change the prosperity level for the army by the amount.
 
     //CampaignState state;
-};                                          // namespace campaign
+}; // namespace campaign
 #endif

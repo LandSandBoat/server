@@ -83,7 +83,6 @@ struct CampaignState
     std::vector<CampaignNation> nations;
 };
 
-
 class CCampaignHandler
 {
 public:
