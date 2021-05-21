@@ -93,7 +93,7 @@ quest.sections =
             onEventFinish =
             {
                 [530] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.LEATHER_GLOVES) then
+                    if npcUtil.giveItem(player, xi.items.LEATHER_GLOVES, {fromTrade = true}) then
                         player:confirmTrade()
                         player:addTitle(xi.title.SILENCER_OF_THE_LAMBS)
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then

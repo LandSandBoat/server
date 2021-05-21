@@ -17,8 +17,8 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACK_TIG
 quest.reward =
 {
     fame = 30,
-    fameArea = SANDORIA,
     item = xi.items.TIGER_STOLE,
+    itemParams = { fromTrade = true },
     title = xi.title.CAT_SKINNER,
 }
 
@@ -84,8 +84,9 @@ quest.sections =
             onEventFinish =
             {
                 [577] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                    end 
                 end,
             },
         },
