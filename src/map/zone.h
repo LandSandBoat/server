@@ -30,6 +30,7 @@
 #include <map>
 
 #include "battlefield_handler.h"
+#include "campaign_handler.h"
 #include "region.h"
 #include "vana_time.h"
 
@@ -538,14 +539,20 @@ public:
     WEATHER        GetWeather();
     uint32         GetWeatherChangeTime() const;
     const int8*    GetName();
+    zoneLine_t*    GetZoneLine(uint32 zoneLineID);
+
     uint8          GetSoloBattleMusic() const;
     uint8          GetPartyBattleMusic() const;
     uint8          GetBackgroundMusicDay() const;
     uint8          GetBackgroundMusicNight() const;
-    zoneLine_t*    GetZoneLine(uint32 zoneLineID);
+    void SetSoloBattleMusic(uint8 music);
+    void SetPartyBattleMusic(uint8 music);
+    void SetBackgroundMusicDay(uint8 music);
+    void SetBackgroundMusicNight(uint8 music);
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
+
     // Gets an entity - ignores instances (use CBaseEntity->GetEntity if possible)
     virtual CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
 
@@ -602,6 +609,7 @@ public:
     virtual ~CZone();
 
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
+    CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
     CNavMesh* m_navMesh; // zones navmesh for finding paths
 

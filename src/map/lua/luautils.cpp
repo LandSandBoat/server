@@ -212,6 +212,7 @@ namespace luautils
         CLuaItem::Register();
 
         // Load globals
+
         // Truly global files first
         lua.script_file("./scripts/settings/main.lua");
         lua.script_file("./scripts/globals/common.lua");
@@ -4710,10 +4711,9 @@ namespace luautils
 
     void OnCampaignStart(CZone* Zone)
     {
-        auto filename = fmt::format("scripts/zones/{}/campaigns/campaign.lua", Zone->GetName());
+        TracyZoneScoped;
 
-        auto onCampaignStart = loadFunctionFromFile("onCampaignStart", filename);
-
+        auto onCampaignStart = lua["xi"]["campaign"]["onCampaignStart"];
         if (!onCampaignStart.valid())
         {
             ShowWarning("luautils::onCampaignStart\n");
@@ -4731,10 +4731,9 @@ namespace luautils
 
     void OnCampaignEnd(CZone* Zone)
     {
-        auto filename = fmt::format("scripts/zones/{}/campaigns/campaign.lua", Zone->GetName());
+        TracyZoneScoped;
 
-        auto onCampaignEnd = loadFunctionFromFile("onCampaignEnd", filename);
-
+        auto onCampaignEnd = lua["xi"]["campaign"]["onCampaignEnd"];
         if (!onCampaignEnd.valid())
         {
             ShowWarning("luautils::onCampaignEnd\n");
