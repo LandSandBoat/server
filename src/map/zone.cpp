@@ -258,6 +258,16 @@ void CZone::SetBackgroundMusicNight(uint8 music)
     m_zoneMusic.m_songNight = music;
 }
 
+uint32 CZone::GetLocalVar(const char* var)
+{
+    return m_LocalVars[var];
+}
+
+void CZone::SetLocalVar(const char* var, uint32 val)
+{
+    m_LocalVars[var] = val;
+}
+
 bool CZone::CanUseMisc(uint16 misc) const
 {
     return (m_miscMask & misc) == misc;
