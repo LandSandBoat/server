@@ -71,7 +71,7 @@ void CLuaZone::registerRegion(uint32 RegionID, float x1, float y1, float z1, flo
 
 sol::object CLuaZone::levelRestriction()
 {
-    return sol::nil;
+    return sol::lua_nil;
 }
 
 sol::table CLuaZone::getPlayers()
