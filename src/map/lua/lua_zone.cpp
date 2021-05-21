@@ -133,6 +133,245 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
+/************************************************************************
+ *  Function: SetSoloBattleMusic(253)
+ *  Purpose : Set Solo Battle music for zone
+ ************************************************************************/
+
+void CLuaZone::setSoloBattleMusic(uint8 musicId)
+{
+    m_pLuaZone->SetSoloBattleMusic(musicId);
+}
+
+auto CLuaZone::getSoloBattleMusic()
+{
+    return m_pLuaZone->GetSoloBattleMusic();
+}
+
+/************************************************************************
+ *  Function: SetPartyBattleMusic(253)
+ *  Purpose : Set Party Battle music for zone
+ ************************************************************************/
+
+void CLuaZone::setPartyBattleMusic(uint8 musicId)
+{
+    m_pLuaZone->SetPartyBattleMusic(musicId);
+}
+
+auto CLuaZone::getPartyBattleMusic()
+{
+    return m_pLuaZone->GetPartyBattleMusic();
+}
+
+/************************************************************************
+ *  Function: SetBackgroundMusicDay(253)
+ *  Purpose : Set Background Day music for zone
+ ************************************************************************/
+
+void CLuaZone::setBackgroundMusicDay(uint8 musicId)
+{
+    m_pLuaZone->SetBackgroundMusicDay(musicId);
+}
+
+auto CLuaZone::getBackgroundMusicDay()
+{
+    return m_pLuaZone->GetBackgroundMusicDay();
+}
+
+/************************************************************************
+ *  Function: SetBackgroundMusicNight(253)
+ *  Purpose : Set Background Night music for zone
+ ************************************************************************/
+
+void CLuaZone::setBackgroundMusicNight(uint8 musicId)
+{
+    m_pLuaZone->SetBackgroundMusicNight(musicId);
+}
+
+auto CLuaZone::getBackgroundMusicNight()
+{
+    return m_pLuaZone->GetBackgroundMusicNight();
+}
+
+/************************************************************************
+ *  Function: setCampaignBattleStatus(true)
+ *  Purpose : Start and Stop a Campaign battle for this zone
+ ************************************************************************/
+void CLuaZone::setCampaignBattleStatus(uint8 flag)
+{
+    m_pLuaZone->m_CampaignHandler->SetBattleStatus(flag);
+}
+
+auto CLuaZone::getCampaignBattleStatus()
+{
+    return m_pLuaZone->m_CampaignHandler->GetBattleStatus();
+}
+
+/************************************************************************
+ *  Function: setCampaignRegionControl(1)
+ *  Purpose : Set which nation controls the zone
+ *  Values  : Sandy = 0, Bastok = 1, Windurst = 2, Beastmen = 3
+ ************************************************************************/
+
+void CLuaZone::setCampaignZoneControl(uint8 nation)
+{
+    m_pLuaZone->m_CampaignHandler->SetZoneControl(nation);
+}
+
+auto CLuaZone::getCampaignZoneControl()
+{
+    return m_pLuaZone->m_CampaignHandler->GetZoneControl();
+}
+
+/************************************************************************
+ *  Function: setCampaignFortification(250)
+ *  Purpose : Set the current Fortification value for the zone (max 1023)
+ ************************************************************************/
+
+void CLuaZone::setCampaignFortification(uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetFortification(amount);
+}
+
+void CLuaZone::setCampaignMaxFortification(uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetMaxFortification(amount);
+}
+
+auto CLuaZone::getCampaignFortification()
+{
+    return m_pLuaZone->m_CampaignHandler->GetFortification();
+}
+
+auto CLuaZone::getCampaignMaxFortification()
+{
+    return m_pLuaZone->m_CampaignHandler->GetMaxFortification();
+}
+
+/************************************************************************
+ *  Function: setCampaignResource(250)
+ *  Purpose : Set the current Resource value for the zone (max 1023)
+ ************************************************************************/
+
+void CLuaZone::setCampaignResource(uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetResource(amount);
+}
+
+void CLuaZone::setCampaignMaxResource(uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetMaxResource(amount);
+}
+
+auto CLuaZone::getCampaignResource()
+{
+    return m_pLuaZone->m_CampaignHandler->GetResource();
+}
+
+auto CLuaZone::getCampaignMaxResource()
+{
+    return m_pLuaZone->m_CampaignHandler->GetMaxResource();
+}
+
+/************************************************************************
+ *  Function: setCampaignHeroism(200)
+ *  Purpose : Set the current Heroism value for the zone (max 200)
+ ************************************************************************/
+
+void CLuaZone::setCampaignHeroism(uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetHeroism(amount);
+}
+
+auto CLuaZone::getCampaignHeroism()
+{
+    return m_pLuaZone->m_CampaignHandler->GetHeroism();
+}
+
+/************************************************************************
+ *  Function: setCampaignInfluence(1)
+ *  Purpose : Set influence for a specific army (max 250)
+ *  Values  : Sandoria = 0, Bastok = 1, Windurst = 2, Orcish = 3,
+              Beastmen(Quadav = 4, Yagudo = 5, Kindred = 6)
+ ************************************************************************/
+
+void CLuaZone::setCampaignInfluence(uint8 army, uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetInfluence((CampaignArmy)army, amount);
+}
+
+auto CLuaZone::getCampaignInfluence(uint8 army)
+{
+    return m_pLuaZone->m_CampaignHandler->GetInfluence((CampaignArmy)army);
+}
+
+/************************************************************************
+ *  Function: setCampaignReconnaissance(1,100)
+ *  Purpose : Set reconnaissance for a specific army (max 250)
+ *  Values  : Sandoria = 0, Bastok = 1, Windurst = 2, Orcish = 3,
+              Quadav = 4, Yagudo = 5, Kindred = 6
+ ************************************************************************/
+
+void CLuaZone::setCampaignReconnaissance(uint8 army, uint16 amount)
+{
+    campaign::SetReconnaissance((CampaignArmy)army, amount);
+}
+
+auto CLuaZone::getCampaignReconnaissance(uint8 army)
+{
+    return campaign::GetReconnaissance((CampaignArmy)army);
+}
+
+/************************************************************************
+ *  Function: setCampaignMorale(1,100)
+ *  Purpose : Set morale for a specific army (max 250)
+ *  Values  : Sandoria = 0, Bastok = 1, Windurst = 2, Orcish = 3,
+              Quadav = 4, Yagudo = 5, Kindred = 6
+ ************************************************************************/
+
+void CLuaZone::setCampaignMorale(uint8 army, uint16 amount)
+{
+    campaign::SetMorale((CampaignArmy)army, amount);
+}
+
+auto CLuaZone::getCampaignMorale(uint8 army)
+{
+    return campaign::GetMorale((CampaignArmy)army);
+}
+
+/************************************************************************
+ *  Function: setCampaignProsperity(1,100)
+ *  Purpose : Set prosperity for a specific army (max 250)
+ *  Values  : Sandoria = 0, Bastok = 1, Windurst = 2, Orcish = 3,
+              Quadav = 4, Yagudo = 5, Kindred = 6
+ ************************************************************************/
+
+void CLuaZone::setCampaignProsperity(uint8 army, uint16 amount)
+{
+    campaign::SetProsperity((CampaignArmy)army, amount);
+}
+
+auto CLuaZone::getCampaignProsperity(uint8 army)
+{
+    return campaign::GetProsperity((CampaignArmy)army);
+}
+
+/************************************************************************
+ *  Function: setCampaignUnionCount(1,20)
+ *  Purpose : Set a specific union to the number of current players in that union
+ *  Values  : Adder = 1, Bison = 2, Coyote = 3, Dhole = 4, Eland = 5
+ ************************************************************************/
+
+void CLuaZone::setCampaignUnionCount(uint8 unionid, uint16 amount)
+{
+    m_pLuaZone->m_CampaignHandler->SetUnionCount((CampaignUnion)unionid, amount);
+}
+
+auto CLuaZone::getCampaignUnionCount(uint8 unionId)
+{
+    return m_pLuaZone->m_CampaignHandler->GetUnionCount((CampaignUnion)unionId);
+}
+
 //======================================================//
 
 void CLuaZone::Register()
@@ -150,6 +389,41 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+
+    SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);
+    SOL_REGISTER("getPartyBattleMusic", CLuaZone::getPartyBattleMusic);
+    SOL_REGISTER("getBackgroundMusicDay", CLuaZone::getBackgroundMusicDay);
+    SOL_REGISTER("getBackgroundMusicNight", CLuaZone::getBackgroundMusicNight);
+    SOL_REGISTER("setSoloBattleMusic", CLuaZone::setSoloBattleMusic);
+    SOL_REGISTER("setPartyBattleMusic", CLuaZone::setPartyBattleMusic);
+    SOL_REGISTER("setBackgroundMusicDay", CLuaZone::setBackgroundMusicDay);
+    SOL_REGISTER("setBackgroundMusicNight", CLuaZone::setBackgroundMusicNight);
+
+    SOL_REGISTER("getCampaignBattleStatus", CLuaZone::getCampaignBattleStatus);
+    SOL_REGISTER("getCampaignZoneControl", CLuaZone::getCampaignZoneControl);
+    SOL_REGISTER("getCampaignFortification", CLuaZone::getCampaignFortification);
+    SOL_REGISTER("getCampaignResource", CLuaZone::getCampaignResource);
+    SOL_REGISTER("getCampaignMaxFortification", CLuaZone::getCampaignMaxFortification);
+    SOL_REGISTER("getCampaignMaxResource", CLuaZone::getCampaignMaxResource);
+    SOL_REGISTER("getCampaignInfluence", CLuaZone::getCampaignInfluence);
+    SOL_REGISTER("getCampaignReconnaissance", CLuaZone::getCampaignReconnaissance);
+    SOL_REGISTER("getCampaignMorale", CLuaZone::getCampaignMorale);
+    SOL_REGISTER("getCampaignProsperity", CLuaZone::getCampaignProsperity);
+    SOL_REGISTER("getCampaignHeroism", CLuaZone::getCampaignHeroism);
+    SOL_REGISTER("getCampaignUnionCount", CLuaZone::getCampaignUnionCount);
+
+    SOL_REGISTER("setCampaignBattleStatus", CLuaZone::setCampaignBattleStatus);
+    SOL_REGISTER("setCampaignZoneControl", CLuaZone::setCampaignZoneControl);
+    SOL_REGISTER("setCampaignFortification", CLuaZone::setCampaignFortification);
+    SOL_REGISTER("setCampaignResource", CLuaZone::setCampaignResource);
+    SOL_REGISTER("setCampaignMaxFortification", CLuaZone::setCampaignMaxFortification);
+    SOL_REGISTER("setCampaignMaxResource", CLuaZone::setCampaignMaxResource);
+    SOL_REGISTER("setCampaignInfluence", CLuaZone::setCampaignInfluence);
+    SOL_REGISTER("setCampaignReconnaissance", CLuaZone::setCampaignReconnaissance);
+    SOL_REGISTER("setCampaignMorale", CLuaZone::setCampaignMorale);
+    SOL_REGISTER("setCampaignProsperity", CLuaZone::setCampaignProsperity);
+    SOL_REGISTER("setCampaignHeroism", CLuaZone::setCampaignHeroism);
+    SOL_REGISTER("setCampaignUnionCount", CLuaZone::setCampaignUnionCount);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

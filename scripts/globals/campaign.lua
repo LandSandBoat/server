@@ -1,21 +1,31 @@
------------------------------------
+----------------------------------------
 -- Campaign global
------------------------------------
+----------------------------------------
 require("scripts/globals/teleports")
------------------------------------
+require("scripts/globals/zone")
+require("scripts/globals/status")
+----------------------------------------
+tpz = tpz or {};
+tpz.campaign = {};
 
-xi = xi or {}
-xi.campaign = {}
-
-xi.campaign.control =
+tpz.campaign.control =
 {
     Sandoria = 2,
     Bastok = 4,
     Windurst = 6,
     Beastman = 8,
-}
+};
 
-xi.campaign.army =
+tpz.campaign.union =
+{
+    Adder = 1,
+    Bison = 2,
+    Coyote = 3,
+    Dhole = 4,
+	Eland = 5,
+};
+
+tpz.campaign.army =
 {
     Sandoria = 0,
     Bastok = 1,
@@ -24,156 +34,291 @@ xi.campaign.army =
     Quadav = 4,
     Yagudo = 5,
     Kindred = 6,
-}
+};
 
-xi.campaign.zone =
+tpz.campaign.zone =
 {
-    SouthernSandOria = 0,
-    EastRonfaure = 1,
-    JugnerForest = 2,
-    VunkerlInlet = 3,
-    BatalliaDowns = 4,
-    LaVaule = 5,
-    TheEldiemeNecropolis = 6,
-    BastokMarkets = 7,
-    NorthGustaberg = 8,
-    Grauberg = 9,
-    PashhowMarshlands = 10,
-    RolanberryFields = 11,
-    Beadeaux = 12,
-    CrawlersNest = 13,
-    WindurstWaters = 14,
-    WestSarutabaruta = 15,
-    FortKarugoNarugo = 16,
-    MeriphataudMountains = 17,
-    SauromugueChampaign = 18,
-    CastleOztroja = 19,
-    GarlaigeCitadel = 20,
-    BeaucedineGlacier = 21,
-    Xarcabard = 22,
-    CastleZvahlBaileys = 23,
-    CastleZvahlKeep = 24,
-    ThroneRoom = 25,
-}
+    SouthernSandOria = 80,
+    EastRonfaure = 81,
+    JugnerForest = 82,
+    VunkerlInlet = 83,
+    BatalliaDowns = 84,
+    LaVaule = 85,
+    TheEldiemeNecropolis = 175,
+    BastokMarkets = 87,
+    NorthGustaberg = 88,
+    Grauberg = 89,
+    PashhowMarshlands = 90,
+    RolanberryFields = 91,
+    Beadeaux = 92,
+    CrawlersNest = 171,
+    WindurstWaters = 94,
+    WestSarutabaruta = 95,
+    FortKarugoNarugo = 96,
+    MeriphataudMountains = 97,
+    SauromugueChampaign = 98,
+    CastleOztroja = 99,
+    GarlaigeCitadel = 164,
+    BeaucedineGlacier = 136,
+    Xarcabard = 137,
+    CastleZvahlBaileys = 138,
+    CastleZvahlKeep = 155,
+    ThroneRoom = 156,
+};
 
------------------------------------------------------------------
--- Checks to see if a battle is occurring in the xi.campaign.zone
--- zone: xi.campaign.zone
--- Return: true / false
------------------------------------------------------------------
-xi.campaign.hasBattle = function(zone)
-    return CampaignHasBattle(zone)
+tpz.campaign.initZone = function(zone)
+	zone:setLocalVar("DayMusic", zone:getBackgroundMusicDay());
+	zone:setLocalVar("NightMusic", zone:getBackgroundMusicNight());
+	zone:setLocalVar("SoloMusic", zone:getSoloBattleMusic());
+	zone:setLocalVar("PartyMusic", zone:getPartyBattleMusic());
+	if(zone:getCampaignBattleStatus()) then
+		zone:setBackgroundMusicDay(247);
+		zone:setBackgroundMusicNight(247);
+		zone:setSoloBattleMusic(247);
+		zone:setPartyBattleMusic(247);
+	end
 end
 
 -----------------------------------------------------------------
--- Sets the battle flag for the campaign zone
--- zone: xi.campaign.zone
--- status: true / false
+-- Returns the battle flag for the zone
+-- zone: tpz.campaign.zone
+-- Return: 1 or 0
 -----------------------------------------------------------------
-xi.campaign.setBattle = function(zone, status)
-    CampaignSetBattle(zone, amount)
+tpz.campaign.getBattleStatus = function(zone)
+    return zone:getCampaignBattleStatus()
 end
 
 -----------------------------------------------------------------
--- Returns the xi.campaign.control value for the zone
--- zone: xi.campaign.zone
--- Return: xi.campaign.control
+-- Sets the battle flag for the zone
+-- zone: tpz.campaign.zone
+-- status: 1 or 0
 -----------------------------------------------------------------
-xi.campaign.getRegionControl = function(zone)
-    return CampaignGetRegionControl(zone)
+tpz.campaign.setBattleStatus = function(zone, status)
+    zone:setCampaignBattleStatus(status)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the heroism value for the zone
+-- zone: tpz.campaign.zone
+-- amount: 0 to 200 [retail max is unknown]
+-----------------------------------------------------------------
+tpz.campaign.getHeroism = function(zone)
+    return zone:getCampaignHeroism()
+end
+
+-----------------------------------------------------------------
+-- Modifies the heroism value by the amount for the zone
+-- zone: tpz.campaign.zone
+-- amount: 0 to 200 [retail max is unknown]
+-----------------------------------------------------------------
+tpz.campaign.setHeroism = function(zone, amount)
+    zone:setCampaignHeroism(amount)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the tpz.campaign.control value for the zone
+-- zone: tpz.campaign.zone
+-- Return: tpz.campaign.control
+-----------------------------------------------------------------
+tpz.campaign.getZoneControl = function(zone)
+    return zone:getCampaignZoneControl()
 end
 
 -----------------------------------------------------------------
 -- Modifies the fortification value by the amount for the zone
--- zone: xi.campaign.zone
--- control: xi.campaign.control
+-- zone: tpz.campaign.zone
+-- control: tpz.campaign.control
 -----------------------------------------------------------------
-xi.campaign.setRegionControl = function(zone, control)
-    CampaignSetRegionControl(zone, amount)
+tpz.campaign.setZoneControl = function(zone, control)
+    zone:setCampaignZoneControl(control)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the fortification value for the zone
+-- zone: tpz.campaign.zone
+-- amount: 0 to 1023 [retail max is unknown]
+-----------------------------------------------------------------
+tpz.campaign.getFortification = function(zone)
+    zone:getCampaignFortification()
 end
 
 -----------------------------------------------------------------
 -- Modifies the fortification value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: -1000 to 1000 [retail max is unknown]
+-- zone: tpz.campaign.zone
+-- amount: 0 to 1023 [retail max is unknown]
 -----------------------------------------------------------------
-xi.campaign.modifyFortification = function(zone, amount)
-    CampaignModifyFortification(zone, amount)
+tpz.campaign.setFortification = function(zone, amount)
+    zone:setCampaignFortification(amount)
 end
 
+
 -----------------------------------------------------------------
--- Modifies the resource value by the amount for the zone
--- zone: xi.campaign.zone
--- amount: -1000 to 1000 [retail max is unknown]
+-- Returns the max fortification value for the zone
+-- zone: tpz.campaign.zone
+-- amount: 0 to 1023 [retail max is unknown]
 -----------------------------------------------------------------
-xi.campaign.modifyResource = function(zone, amount)
-    CampaignModifyResource(zone, amount)
+tpz.campaign.getMaxFortification = function(zone)
+    zone:getCampaignMaxFortification()
 end
 
 -----------------------------------------------------------------
 -- Modifies the max fortification value by the amount for the zone
--- zone: xi.campaign.zone
+-- zone: tpz.campaign.zone
 -- amount: -1000 to 1000 [retail max is unknown]
 -----------------------------------------------------------------
-xi.campaign.modifyMaxFortification = function(zone, amount)
-    CampaignModifyMaxFortification(zone, amount)
+tpz.campaign.setMaxFortification = function(zone, amount)
+    zone:setCampaignMaxFortification(amount)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the resource value for the zone
+-- zone: tpz.campaign.zone
+-- amount: 0 to 1023 [retail max is unknown]
+-----------------------------------------------------------------
+tpz.campaign.getResource = function(zone)
+    zone:getCampaignResource()
+end
+
+-----------------------------------------------------------------
+-- Modifies the resource value by the amount for the zone
+-- zone: tpz.campaign.zone
+-- amount: -1000 to 1000 [retail max is unknown]
+-----------------------------------------------------------------
+tpz.campaign.setResource = function(zone, amount)
+    zone:setCampaignResource(amount)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the resource value for the zone
+-- zone: tpz.campaign.zone
+-- amount: 0 to 1023 [retail max is unknown]
+-----------------------------------------------------------------
+tpz.campaign.getMaxResource = function(zone)
+    zone:getCampaignMaxResource()
 end
 
 -----------------------------------------------------------------
 -- Modifies the max resource value by the amount for the zone
--- zone: xi.campaign.zone
+-- zone: tpz.campaign.zone
 -- amount: -1000 to 1000 [retail max is unknown]
 -----------------------------------------------------------------
-xi.campaign.modifyMaxResource = function(zone, amount)
-    CampaignModifyMaxResource(zone, amount)
+tpz.campaign.setMaxResource = function(zone, amount)
+    zone:setCampaignMaxResource(amount)
+end
+
+
+
+-----------------------------------------------------------------
+-- Returns the army's influence value for the zone
+-- army: tpz.campaign.army
+-- zone: tpz.campaign.zone
+-- amount: 0 to 250
+-----------------------------------------------------------------
+tpz.campaign.getInfluence = function(zone, army)
+    zone:getCampaignInfluence(army)
 end
 
 -----------------------------------------------------------------
 -- Modifies the army's influence value by the amount for the zone
--- army: xi.campaign.army
--- zone: xi.campaign.zone
+-- army: tpz.campaign.army
+-- zone: tpz.campaign.zone
 -- amount: -250 to 250
 -----------------------------------------------------------------
-xi.campaign.modifyInfluence = function(army, zone, amount)
-    CampaignModifyInfluence(army, zone, amount)
+tpz.campaign.setInfluence = function(zone, army, amount)
+    zone:setCampaignInfluence(army, amount)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the army's reconnaissance value
+-- army: tpz.campaign.army
+-- amount: 0 to 10
+-----------------------------------------------------------------
+tpz.campaign.getReconnaissance = function(zone, army)
+    zone:getCampaignReconnaissance(army)
 end
 
 -----------------------------------------------------------------
 -- Modifies the army's reconnaissance value by the amount
--- army: xi.campaign.army
--- amount: -10 to 10
+-- army: tpz.campaign.army
+-- amount: 0 to 10
 -----------------------------------------------------------------
-xi.campaign.modifyReconnaissance = function(army, amount)
-    CampaignModifyReconnaissance(army, amount)
+tpz.campaign.setReconnaissance = function(zone, army, amount)
+    zone:setCampaignReconnaissance(army, amount)
+end
+
+
+-----------------------------------------------------------------
+-- Return the army's morale value
+-- army: tpz.campaign.army
+-- amount: 0 to 100
+-----------------------------------------------------------------
+tpz.campaign.getMorale = function(zone, army)
+    zone:getCampaignMorale(army)
 end
 
 -----------------------------------------------------------------
 -- Modifies the army's morale value by the amount
--- army: xi.campaign.army
--- amount: -100 to 100
+-- army: tpz.campaign.army
+-- amount: 0 to 100
 -----------------------------------------------------------------
-xi.campaign.modifyMorale = function(army, amount)
-    CampaignModifyMorale(army, amount)
+tpz.campaign.setMorale = function(zone, army, amount)
+    zone:setCampaignMorale(army, amount)
+end
+
+
+-----------------------------------------------------------------
+-- Returns the army's prosperity value
+-- army: tpz.campaign.army
+-- amount: 0 to 100
+-----------------------------------------------------------------
+tpz.campaign.getProsperity = function(zone, army)
+    zone:getCampaignProsperity(army)
 end
 
 -----------------------------------------------------------------
 -- Modifies the army's prosperity value by the amount
--- army: xi.campaign.army
--- amount: -100 to 100
+-- army: tpz.campaign.army
+-- amount: 0 to 100
 -----------------------------------------------------------------
-xi.campaign.modifyProsperity = function(army, amount)
-    CampaignModifyProsperity(army, amount)
+tpz.campaign.setProsperity = function(zone, army, amount)
+    zone:setCampaignProsperity(army, amount)
 end
+
+
+-----------------------------------------------------------------
+-- Returns the zone's union count
+-- army: tpz.campaign.union
+-- amount: 0 to 50
+-----------------------------------------------------------------
+tpz.campaign.getUnionCount = function(zone, union)
+    return zone:getCampaignUnionCount(union);
+end
+
+-----------------------------------------------------------------
+-- Modifies the zone's union count by the amount
+-- army: tpz.campaign.union
+-- amount: 0 to 50
+-----------------------------------------------------------------
+tpz.campaign.setUnionCount = function(zone, union, amount)
+    zone:setCampaignUnionCount(union, amount);
+end
+
 
 -----------------------------------------------------------------
 -- Variable for getNationTeleport and getPoint
 -----------------------------------------------------------------
 
-ALLIED_NOTES = 11
-MAW = 4
-PAST_SANDORIA = 5
-PAST_BASTOK = 6
-PAST_WINDURST = 7
+ALLIED_NOTES = 11;
+MAW = 4;
+PAST_SANDORIA = 5;
+PAST_BASTOK = 6;
+PAST_WINDURST = 7;
 
 -- -------------------------------------------------------------------
 -- getMedalRank()
@@ -348,5 +493,150 @@ function getSigilTimeStamp(player)
     return timeStamp
 end
 
+-----------------------------------
+-- hasMawActivated Action
+-----------------------------------
+
+-- 1st number for hasMawActivated()
+-- 2nd number for player:addNationTeleport();
+
+-- 0    1   Batallia Downs (S) (H-5)
+-- 1    2   Rolanberry Fields (S) (H-6)
+-- 2    4   Sauromugue Champaign (S) (K-9)
+-- 3    8   Jugner Forest (S) (H-11)
+-- 4    16  Pashhow Marshlands (S) (K-8)
+-- 5    32  Meriphataud Mountains (S) (K-6)
+-- 6    64  East Ronfaure (S) (H-5)
+-- 7    128 North Gustaberg (S) (K-7)
+-- 8    256 West Sarutabaruta (S) (H-9)
+
+function hasMawActivated(player,portal)
+    local mawActivated = player:getNationTeleport(MAW);
+    local bit = {};
+
+    for i = 8,0,-1 do
+        twop = 2^i
+
+        if (mawActivated >= twop) then
+            bit[i]=true; mawActivated = mawActivated - twop;
+        else
+            bit[i]=false;
+        end
+    end;
+
+    return bit[portal];
+end;
+
 -- TODO:
 -- Past nation teleport
+
+
+
+-- -------------------------------------------------------------------
+-- Campaign Battle Functions
+-- This is for the time-stamp telling player what day/time the
+-- effect will last until, NOT the actual status effect duration.
+-- -------------------------------------------------------------------
+function startCampaign(zone)
+	local chars = zone:getPlayers();
+
+	tpz.campaign.setBattleStatus(zone, 1);
+	zone:setBackgroundMusicDay(247);
+	zone:setBackgroundMusicNight(247);
+	zone:setSoloBattleMusic(247);
+	zone:setPartyBattleMusic(247);
+
+    for i, entity in pairs(chars) do
+		entity:ChangeMusic(0, 247);
+		entity:ChangeMusic(1, 247);
+		entity:ChangeMusic(2, 247);
+		entity:ChangeMusic(3, 247);
+    end
+
+	-- add spawning of npcs and enemies functions
+end
+
+function endCampaign(zone)
+	local chars = zone:getPlayers();
+	local DayMusic = zone:getLocalVar("DayMusic");
+	local NightMusic = zone:getLocalVar("NightMusic");
+	local SoloMusic = zone:getLocalVar("SoloMusic");
+	local PartyMusic = zone:getLocalVar("PartyMusic");
+
+	tpz.campaign.setBattleStatus(zone, 0);
+	zone:setBackgroundMusicDay(DayMusic);
+	zone:setBackgroundMusicNight(NightMusic);
+	zone:setSoloBattleMusic(SoloMusic);
+	zone:setPartyBattleMusic(PartyMusic);
+
+    for i, entity in pairs(chars) do
+		entity:ChangeMusic(0, DayMusic);
+		entity:ChangeMusic(1, NightMusic);
+		entity:ChangeMusic(2, SoloMusic);
+		entity:ChangeMusic(3, PartyMusic);
+
+		if(entity:hasStatusEffect(tpz.effect.ALLIED_TAGS)) then
+			entity:delStatusEffect(tpz.effect.ALLIED_TAGS);
+			--perform assessment
+			--reward exp and allied_notes
+		end
+    end
+
+	for i=1,5 do
+		tpz.campaign.setUnionCount(zone, i, 0);
+	end
+
+	-- add despawning of npcs and enemies functions
+end
+
+function SpawnBattleEntities(zone, entityList, entityName)
+	if(entityList ~= nil) then
+		local num = math.random(1, #entityList);
+		local selectedList = entityList[num];
+		zone:setLocalVar(entityName, num);
+		for i, id in pairs(selectedList) do
+			SpawnMob(id):updateCampaignToEntireZone(1);
+		end
+	end
+end
+
+function DespawnBattleEntities(zone, entityList, entityName)
+	if(entityList ~= nil) then
+		for i, id in pairs(entityList) do
+			local entity = GetMobByID(id)
+			if(entity ~= nil and entity:isAlive())then
+				entity:resetAI();
+				if entity:isEngaged() == true then
+					entity:disengage();
+				end
+				entity:injectActionPacket(4, 261,0,0,0);
+				DespawnMob(id,1);
+			end
+		end
+	end
+	zone:setLocalVar(entityName, 0);
+end
+
+function EngageOpposingEntities(entity, opposingEntities)
+	local opposingEntity = nil
+	local distance = 0
+	local closestDistance = 0
+	local entityId = 0
+
+	if(opposingEntities ~= nil) then
+
+		for i, id in pairs(opposingEntities) do
+			opposingEntity = GetMobByID(id)
+			distance = entity:checkDistance(opposingEntity)
+			if distance < 20 and entity:isEngaged() == false and entity:getStatus() ~= 2 then
+				if closestDistance == 0 or distance < closestDistance then
+					closestDistance = distance
+					entityId = opposingEntity:getShortID()
+				end
+			end
+		end
+		if entityId ~= 0 then
+			entity:engage(entityId)
+		end
+	end
+end

@@ -16,15 +16,12 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
-  This file is part of DarkStar-server source code.
-
 ===========================================================================
 */
 
 #include "../../common/socket.h"
 
-#include <string.h>
-
+#include "../campaign_system.h"
 #include "campaign_map.h"
 
 /*
@@ -32,7 +29,6 @@ Both Packets:
 0x0C - 0x0F: Allied Notes
 0x10 - 0x12: Controlled Areas [20 bits]: Sand, Bast, Wind, Beast
 0x12 - 0x13: Unknown [12 bits]
-
 0x14 - 0x17: San d'Oria Nation Structure
 0x18 - 0x1B: Bastok Nation Structure
 0x1C - 0x1F: Windurst Nation Structure
@@ -40,15 +36,12 @@ Both Packets:
 0x24 - 0x27: Quadav Nation Structure
 0x28 - 0x2B: Yagudo Nation Structure
 0x2C - 0x2F: Kindred Nation Structure
-
 0x30 - 0xCB: 13 Region Structure blocks
-
 Nation Structure:
  4 bits - Reconnaissance [10 cap]
 14 bits - Unknown
  7 bits - Morale [~100 is max bar, larger overflows it]
  7 bits - Prosperity [~100 is max bar, larger overflows it]
-
 Region Structure:
  4 bits - Status/Control [1=battleFlag, 2=Sandy, 3=Bastok, 2+3=Windy, 4=Beastman]
 10 bits - Current Fortifications [max of 1023]
@@ -62,7 +55,6 @@ Region Structure:
 10 bits - Max Fortifications [max of 1023]
 10 bits - Max Resources [max of 1023]
 12 bits - Unknown
-
 Region Order:
 0 - Southern San d'Oria [S]
 1 - East Ronfaure [S]
@@ -91,7 +83,7 @@ Region Order:
 24 - Castle Zvahl Keep [S]
 25 - Throne Room [S]
 */
-CCampaignPacket::CCampaignPacket(CampaignState state, uint8 number) 
+CCampaignPacket::CCampaignPacket(CCharEntity* PChar, CampaignState state, uint8 number)
 {
     this->setType(0x71);
     this->setSize(0xCC);
@@ -99,9 +91,10 @@ CCampaignPacket::CCampaignPacket(CampaignState state, uint8 number)
     ref<uint8>(0x04) = 0x02;
     ref<uint8>(0x06) = 0xC4;
     ref<uint8>(0x08) = 0x01;
-    ref<uint32>(0x0C) = state.alliedNotes;
+    ref<uint32>(0x0C) = campaign::GetAlliedNotes(PChar);
     ref<uint32>(0x10) = state.controlBeastman << 15 | state.controlWindurst << 10
         | state.controlBastok << 5 | state.controlSandoria;
+
     SetNations(state.nations);
 
     switch (number)
@@ -121,15 +114,14 @@ void CCampaignPacket::SetRegions(std::vector<CampaignRegion> regions, int start)
 {
     for (int i = start; i < start + 13; i++)
     {
-        CampaignRegion a = regions[i];
-        int offset = (i - start) * 0xC;
+        CampaignRegion a      = regions[i];
+        int            offset = (i - start) * 0xC;
 
-        ref<uint32>(0x30 + offset) = a.heroism << 24 | a.currentResources << 14
-            | a.currentFortifications << 4 | a.status;
-        ref<uint8>(0x34 + offset) = a.influenceSandoria;
-        ref<uint8>(0x35 + offset) = a.influenceBastok;
-        ref<uint8>(0x36 + offset) = a.influenceWindurst;
-        ref<uint8>(0x37 + offset) = a.influenceBeastman;
+        ref<uint32>(0x30 + offset) = a.heroism << 24 | a.currentResources << 14 | a.currentFortifications << 4 | (a.status | a.nationControl);
+        ref<uint8>(0x34 + offset)  = a.influenceSandoria;
+        ref<uint8>(0x35 + offset)  = a.influenceBastok;
+        ref<uint8>(0x36 + offset)  = a.influenceWindurst;
+        ref<uint8>(0x37 + offset)  = a.influenceBeastman;
         ref<uint32>(0x38 + offset) = a.maxResources << 10 | a.maxFortifications;
     }
 }
@@ -138,10 +130,10 @@ void CCampaignPacket::SetNations(std::vector<CampaignNation> nations)
 {
     for (int i = 0; i < 7; i++)
     {
-        CampaignNation n = nations[i];
-        int offset = i * 0x4;
+        CampaignNation n      = nations[i];
+        int            offset = i * 0x4;
 
-        ref<uint8>(0x14 + offset) = n.reconnaissance;
+        ref<uint8>(0x14 + offset)  = n.reconnaissance;
         ref<uint16>(0x16 + offset) = n.prosperity << 9 | n.morale << 2;
     }
 }

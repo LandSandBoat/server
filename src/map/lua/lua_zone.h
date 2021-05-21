@@ -53,6 +53,40 @@ public:
     WEATHER     getWeather();
     void        reloadNavmesh();
 
+    auto        getSoloBattleMusic();
+    auto        getPartyBattleMusic();
+    auto        getBackgroundMusicDay();
+    auto        getBackgroundMusicNight();
+    auto        getCampaignBattleStatus();
+    auto        getCampaignZoneControl();
+    auto        getCampaignFortification();
+    auto        getCampaignResource();
+    auto        getCampaignMaxFortification();
+    auto        getCampaignMaxResource();
+    auto        getCampaignInfluence(uint8 army);
+    auto        getCampaignReconnaissance(uint8 army);
+    auto        getCampaignMorale(uint8 army);
+    auto        getCampaignProsperity(uint8 army);
+    auto        getCampaignHeroism();
+    auto        getCampaignUnionCount(uint8 unionId);
+
+    void        setSoloBattleMusic(uint8 musicId);
+    void        setPartyBattleMusic(uint8 musicId);
+    void        setBackgroundMusicDay(uint8 musicId);
+    void        setBackgroundMusicNight(uint8 musicId);
+    void        setCampaignBattleStatus(uint8 flag);
+    void        setCampaignZoneControl(uint8 nation);
+    void        setCampaignFortification(uint16 amount);
+    void        setCampaignResource(uint16 amount);
+    void        setCampaignMaxFortification(uint16 amount);
+    void        setCampaignMaxResource(uint16 amount);
+    void        setCampaignInfluence(uint8 army, uint16 amount);
+    void        setCampaignReconnaissance(uint8 army, uint16 amount);
+    void        setCampaignMorale(uint8 army, uint16 amount);
+    void        setCampaignProsperity(uint8 army, uint16 amount);
+    void        setCampaignHeroism(uint16 amount);
+    void        setCampaignUnionCount(uint8 unionid, uint16 amount);
+
     static void Register();
 };
 

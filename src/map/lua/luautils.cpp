@@ -1552,6 +1552,38 @@ namespace luautils
     }
 
     /************************************************************************
+    *                                                                       *
+    *  Start a campaign battle in the zone                                  *
+    *                                                                       *
+    ************************************************************************/
+
+    void CampaignStart(uint32 zoneid)
+    {
+        TracyZoneScoped;
+        auto* zone = zoneutils::GetZone(zoneid);
+        if (zone != nullptr)
+        {
+            luautils::OnCampaignStart(zone);
+        }
+    }
+
+    /************************************************************************
+    *                                                                       *
+    *  End a campaign battle in the zone                                    *
+    *                                                                       *
+    ************************************************************************/
+
+    void CampaignEnd(uint32 zoneid)
+    {
+        TracyZoneScoped;
+        auto* zone = zoneutils::GetZone(zoneid);
+        if (zone != nullptr)
+        {
+            luautils::OnCampaignEnd(zone);
+        }
+    }
+
+    /************************************************************************
      *                                                                       *
      *  Load the value of the TextID variable of the specified zone          *
      *                                                                       *
@@ -4674,214 +4706,47 @@ namespace luautils
             ShowError("luautils::onPlayerVolunteer: %s", err.what());
             return;
         }
-    int32 CampaignHasBattle(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        lua_pushboolean(L, campaign::HasBattle(zone));
-        return 1;
     }
 
-    int32 CampaignSetBattle(lua_State* L)
+    void OnCampaignStart(CZone* Zone)
     {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        auto filename = fmt::format("scripts/zones/{}/campaigns/campaign.lua", Zone->GetName());
+
+        auto onCampaignStart = loadFunctionFromFile("onCampaignStart", filename);
+
+        if (!onCampaignStart.valid())
         {
-            return 0;
+            ShowWarning("luautils::onCampaignStart\n");
+            return;
         }
 
-        if (lua_isnil(L, 2) || !lua_isboolean(L, 2))
+        auto result = onCampaignStart(CLuaZone(Zone));
+        if (!result.valid())
         {
-            return 0;
+            sol::error err = result;
+            ShowError("luautils::onCampaignStart: %s\n", err.what());
+            return;
         }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        auto amount = lua_toboolean(L, 2);
-        campaign::SetBattle(zone, amount);
-        return 1;
     }
 
-    int32 CampaignGetRegionControl(lua_State* L)
+    void OnCampaignEnd(CZone* Zone)
     {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
+        auto filename = fmt::format("scripts/zones/{}/campaigns/campaign.lua", Zone->GetName());
+
+        auto onCampaignEnd = loadFunctionFromFile("onCampaignEnd", filename);
+
+        if (!onCampaignEnd.valid())
         {
-            return 0;
+            ShowWarning("luautils::onCampaignEnd\n");
+            return;
         }
 
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        lua_pushinteger(L, campaign::GetRegionControl(zone));
-        return 1;
+        auto result = onCampaignEnd(CLuaZone(Zone));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onCampaignEnd: %s\n", err.what());
+            return;
+        }
     }
-
-    int32 CampaignSetRegionControl(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        auto nation = (uint8)lua_tointeger(L, 2);
-        campaign::SetRegionControl(zone, nation);
-        return 1;
-    }
-
-    int32 CampaignModifyFortification(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        auto amount = (int16)lua_tointeger(L, 2);
-        campaign::ModifyFortification(zone, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyResource(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        auto amount = (int16)lua_tointeger(L, 2);
-        campaign::ModifyResource(zone, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyMaxFortification(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        auto amount = (int16)lua_tointeger(L, 2);
-        campaign::ModifyMaxFortification(zone, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyMaxResource(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto zone = (CampaignZone)lua_tointeger(L, 1);
-        auto amount = (int16)lua_tointeger(L, 2);
-        campaign::ModifyMaxResource(zone, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyInfluence(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 3) || !lua_isnumber(L, 3))
-        {
-            return 0;
-        }
-
-        auto army = (CampaignArmy)lua_tointeger(L, 1);
-        auto zone = (CampaignZone)lua_tointeger(L, 2);
-        auto amount = (int16)lua_tointeger(L, 3);
-        campaign::ModifyInfluence(army, zone, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyReconnaissance(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto army = (CampaignArmy)lua_tointeger(L, 1);
-        auto amount = (int8)lua_tointeger(L, 2);
-        campaign::ModifyReconnaissance(army, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyMorale(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto army = (CampaignArmy)lua_tointeger(L, 1);
-        auto amount = (int8)lua_tointeger(L, 2);
-        campaign::ModifyMorale(army, amount);
-        return 1;
-    }
-
-    int32 CampaignModifyProsperity(lua_State* L)
-    {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1))
-        {
-            return 0;
-        }
-
-        if (lua_isnil(L, 2) || !lua_isnumber(L, 2))
-        {
-            return 0;
-        }
-
-        auto army = (CampaignArmy)lua_tointeger(L, 1);
-        auto amount = (int8)lua_tointeger(L, 2);
-        campaign::ModifyProsperity(army, amount);
-        return 1;
-    }
-
 }; // namespace luautils
