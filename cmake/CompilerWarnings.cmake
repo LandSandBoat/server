@@ -89,7 +89,7 @@ function(set_project_warnings project_name)
       
       # Silence GCC note/warning:
       # note: variable tracking size limit exceeded with ‘-fvar-tracking-assignments’
-      --param=max-vartrack-size=60000000
+      -fno-var-tracking-assignments
   )
 
   if(MSVC)
