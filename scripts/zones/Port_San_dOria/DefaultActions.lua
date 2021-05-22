@@ -9,6 +9,7 @@ return {
     ['Coribalgeant'] = { event = 599 },
     ['Crilde']       = { event = 569 },
     ['Eaugouint']    = { event = 579 },
+    ['Gulemont']     = { event = 593 },
     ['Laucimercen']  = { event = 563 },
     ['Marquie']      = { event = 565 },
     ['Maunadolace']  = { event = 713 },
