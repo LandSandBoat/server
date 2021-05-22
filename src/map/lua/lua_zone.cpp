@@ -38,6 +38,31 @@ CLuaZone::CLuaZone(CZone* PZone)
     }
 }
 
+
+/************************************************************************
+ *  Function: getLocalVar()
+ *  Purpose : Returns a variable assigned locally to an entity
+ *  Example : if (KingArthro:getLocalVar("[POP]King_Arthro") > 0) then
+ *  Notes   :
+ ************************************************************************/
+
+auto CLuaZone::getLocalVar(const char* key)
+{
+    return m_pLuaZone->GetLocalVar(key);
+}
+
+/************************************************************************
+ *  Function: setLocalVar()
+ *  Purpose : Assigns a local variable to an entity
+ *  Example : mob:setLocalVar("pop", os.time() + math.random(1200,7200));
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaZone::setLocalVar(const char* key, uint32 val)
+{
+    m_pLuaZone->SetLocalVar(key, val);
+}
+
 /************************************************************************
  *                                                                       *
  * Registering the active area in the zone                               *
@@ -377,6 +402,10 @@ auto CLuaZone::getCampaignUnionCount(uint8 unionId)
 void CLuaZone::Register()
 {
     SOL_USERTYPE("CZone", CLuaZone);
+
+    SOL_REGISTER("getLocalVar", CLuaZone::getLocalVar);
+    SOL_REGISTER("setLocalVar", CLuaZone::setLocalVar);
+
     SOL_REGISTER("registerRegion", CLuaZone::registerRegion);
     SOL_REGISTER("levelRestriction", CLuaZone::levelRestriction);
     SOL_REGISTER("getPlayers", CLuaZone::getPlayers);
