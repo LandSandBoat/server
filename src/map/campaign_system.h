@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 Copyright (c) 2010-2015 Darkstar Dev Teams
 This program is free software: you can redistribute it and/or modify
@@ -39,6 +39,8 @@ namespace campaign
     uint8         GetMorale(CampaignArmy army);         // Change the morale level for the army by the amount.
     uint8         GetProsperity(CampaignArmy army);     // Change the prosperity level for the army by the amount.
     int32         GetAlliedNotes(CCharEntity* chr);     // Change the prosperity level for the army by the amount.
+
+    void SendUpdate(CCharEntity* PChar);
 
     //CampaignState state;
 }; // namespace campaign

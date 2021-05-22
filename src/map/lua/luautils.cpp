@@ -197,6 +197,8 @@ namespace luautils
         // This binding specifically exists to forcefully crash the server.
         lua.set_function("ForceCrash", [](){ crash(); });
 
+        lua.set_function("SendCampaignUpdate", [](CLuaBaseEntity* entity) { campaign::SendUpdate((CCharEntity*)entity->GetBaseEntity()); });
+
         // Register Sol Bindings
         CLuaAbility::Register();
         CLuaAction::Register();

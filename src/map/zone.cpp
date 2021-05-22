@@ -148,6 +148,7 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
     m_WeatherChangeTime  = 0;
     m_navMesh            = nullptr;
     m_zoneEntities       = new CZoneEntities(this);
+    m_CampaignHandler    = new CCampaignHandler(this);
 
     // settings should load first
     LoadZoneSettings();
@@ -412,6 +413,10 @@ void CZone::LoadZoneSettings()
         if (m_miscMask & MISC_TREASURE)
         {
             m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
+        }
+        if (m_CampaignHandler->m_PZone == nullptr)
+        {
+            m_CampaignHandler = nullptr;
         }
     }
     else

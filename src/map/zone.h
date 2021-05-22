@@ -453,6 +453,7 @@ enum ZONEMISC
     MISC_AH       = 0x0200, // Ability to use the auction house
     MISC_YELL     = 0x0400, // Send and receive /yell commands
     MISC_TRUST    = 0x0800, // Ability to summon Trust NPC
+    MISC_CAMPAIGN = 0x1000, // Campaign zones
 };
 
 /************************************************************************

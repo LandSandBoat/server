@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 Copyright (c) 2010-2015 Darkstar Dev Teams
 This program is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ enum CampaignArmy : uint8
     Orcish   = 3,
     Quadav   = 4,
     Yagudo   = 5,
-    Kindred  = 6
+    Kindred  = 6,
 };
 
 enum CampaignControl : uint8
@@ -38,7 +38,7 @@ enum CampaignControl : uint8
     SandoriaMask = 2,
     BastokMask   = 4,
     WindurstMask = 6,
-    BeastmanMask = 8
+    BeastmanMask = 8,
 };
 
 enum CampaignUnion : uint8
@@ -47,7 +47,7 @@ enum CampaignUnion : uint8
     Bison  = 2,
     Coyote = 3,
     Dhole  = 4,
-    Eland  = 5
+    Eland  = 5,
 };
 
 struct CampaignNation
@@ -75,10 +75,11 @@ struct CampaignRegion
 
 struct CampaignState
 {
-    uint8                       controlSandoria = 0;
-    uint8                       controlBastok   = 0;
-    uint8                       controlWindurst = 0;
-    uint8                       controlBeastman = 0;
+    uint8 controlSandoria = 0;
+    uint8 controlBastok   = 0;
+    uint8 controlWindurst = 0;
+    uint8 controlBeastman = 0;
+
     std::vector<CampaignRegion> regions;
     std::vector<CampaignNation> nations;
 };
@@ -115,6 +116,7 @@ public:
 
 private:
     uint8 m_zoneCampaignId    = 0;
+    uint8 m_zoneId            = 0;
     uint8 m_controllingNation = 0;
 
     uint8  m_status                = 0; // if in battle

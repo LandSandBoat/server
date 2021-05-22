@@ -135,7 +135,6 @@ xi.campaign.setZoneControl = function(zone, control)
     zone:setCampaignZoneControl(control)
 end
 
-
 -----------------------------------------------------------------
 -- Returns the fortification value for the zone
 -- zone: xi.campaign.zone
@@ -153,7 +152,6 @@ end
 xi.campaign.setFortification = function(zone, amount)
     zone:setCampaignFortification(amount)
 end
-
 
 -----------------------------------------------------------------
 -- Returns the max fortification value for the zone
@@ -173,7 +171,6 @@ xi.campaign.setMaxFortification = function(zone, amount)
     zone:setCampaignMaxFortification(amount)
 end
 
-
 -----------------------------------------------------------------
 -- Returns the resource value for the zone
 -- zone: xi.campaign.zone
@@ -192,7 +189,6 @@ xi.campaign.setResource = function(zone, amount)
     zone:setCampaignResource(amount)
 end
 
-
 -----------------------------------------------------------------
 -- Returns the resource value for the zone
 -- zone: xi.campaign.zone
@@ -210,8 +206,6 @@ end
 xi.campaign.setMaxResource = function(zone, amount)
     zone:setCampaignMaxResource(amount)
 end
-
-
 
 -----------------------------------------------------------------
 -- Returns the army's influence value for the zone
@@ -232,7 +226,6 @@ end
 xi.campaign.setInfluence = function(zone, army, amount)
     zone:setCampaignInfluence(army, amount)
 end
-
 
 -----------------------------------------------------------------
 -- Returns the army's reconnaissance value
@@ -538,6 +531,7 @@ xi.campaign.startCampaign = function(zone)
 	local chars = zone:getPlayers()
 
 	xi.campaign.setBattleStatus(zone, 1)
+
 	zone:setBackgroundMusicDay(247)
 	zone:setBackgroundMusicNight(247)
 	zone:setSoloBattleMusic(247)
@@ -555,13 +549,15 @@ end
 
 xi.campaign.endCampaign = function(zone)
 	local chars = zone:getPlayers()
+
 	local DayMusic = zone:getLocalVar("DayMusic")
 	local NightMusic = zone:getLocalVar("NightMusic")
 	local SoloMusic = zone:getLocalVar("SoloMusic")
 	local PartyMusic = zone:getLocalVar("PartyMusic")
 
 	xi.campaign.setBattleStatus(zone, 0)
-	zone:setBackgroundMusicDay(DayMusic)
+
+    zone:setBackgroundMusicDay(DayMusic)
 	zone:setBackgroundMusicNight(NightMusic)
 	zone:setSoloBattleMusic(SoloMusic)
 	zone:setPartyBattleMusic(PartyMusic)

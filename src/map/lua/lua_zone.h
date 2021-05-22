@@ -40,6 +40,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaZone& zone);
 
+    auto getLocalVar(const char* key);
+    void setLocalVar(const char* key, uint32 value);
+
     void        registerRegion(uint32 RegionID, float x1, float y1, float z1, float x2, float y2, float z2);
     sol::object levelRestriction();
     auto        getPlayers() -> sol::table;

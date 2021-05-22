@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 Copyright (c) 2010-2015 Darkstar Dev Teams
 This program is free software: you can redistribute it and/or modify
@@ -27,23 +27,24 @@ CCampaignHandler::CCampaignHandler(CZone* PZone)
 
 void CCampaignHandler::LoadCampaignZone(CZone* PZone)
 {
-    static const char* query = "SELECT id, isbattle, nation, heroism, influence_sandoria, influence_bastok, influence_windurst, influence_beastman, "
+    static const char* query = "SELECT id, zoneid, isbattle, nation, heroism, influence_sandoria, influence_bastok, influence_windurst, influence_beastman, "
                                "current_fortifications, current_resources, max_fortifications, max_resources FROM campaign_map WHERE zoneid = %u";
 
     if (Sql_Query(SqlHandle, query, PZone->GetID()) != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
         m_zoneCampaignId        = (uint8)Sql_GetUIntData(SqlHandle, 0);
-        m_controllingNation     = (uint8)Sql_GetUIntData(SqlHandle, 2);
-        m_status                = (uint8)Sql_GetUIntData(SqlHandle, 1);
-        m_heroism               = (uint8)Sql_GetUIntData(SqlHandle, 3);
-        m_influenceSandoria     = (uint8)Sql_GetUIntData(SqlHandle, 4);
-        m_influenceBastok       = (uint8)Sql_GetUIntData(SqlHandle, 5);
-        m_influenceWindurst     = (uint8)Sql_GetUIntData(SqlHandle, 6);
-        m_influenceBeastman     = (uint8)Sql_GetUIntData(SqlHandle, 7);
-        m_currentFortifications = (uint16)Sql_GetUIntData(SqlHandle, 8);
-        m_currentResources      = (uint16)Sql_GetUIntData(SqlHandle, 9);
-        m_maxFortifications     = (uint16)Sql_GetUIntData(SqlHandle, 10);
-        m_maxResources          = (uint16)Sql_GetUIntData(SqlHandle, 11);
+        m_zoneId                = (uint8)Sql_GetUIntData(SqlHandle, 1);
+        m_status                = (uint8)Sql_GetUIntData(SqlHandle, 2);
+        m_controllingNation     = (uint8)Sql_GetUIntData(SqlHandle, 3);
+        m_heroism               = (uint8)Sql_GetUIntData(SqlHandle, 4);
+        m_influenceSandoria     = (uint8)Sql_GetUIntData(SqlHandle, 5);
+        m_influenceBastok       = (uint8)Sql_GetUIntData(SqlHandle, 6);
+        m_influenceWindurst     = (uint8)Sql_GetUIntData(SqlHandle, 7);
+        m_influenceBeastman     = (uint8)Sql_GetUIntData(SqlHandle, 8);
+        m_currentFortifications = (uint16)Sql_GetUIntData(SqlHandle, 9);
+        m_currentResources      = (uint16)Sql_GetUIntData(SqlHandle, 10);
+        m_maxFortifications     = (uint16)Sql_GetUIntData(SqlHandle, 11);
+        m_maxResources          = (uint16)Sql_GetUIntData(SqlHandle, 12);
         m_PZone                 = PZone;
     }
 }
