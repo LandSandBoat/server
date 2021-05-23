@@ -2,6 +2,7 @@
 -- ID: 19469
 -- Item: Armageddon
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------

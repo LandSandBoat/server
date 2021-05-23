@@ -5,6 +5,7 @@
 -- !pos -195 -11 -120 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -19,9 +20,9 @@ entity.onTrade = function(player, npc, trade)
     -- and optionally talked to Nanaa Mihgo (CryingOverOnions == 2)
     if
         (player:getCharVar("CryingOverOnions") == 1 or player:getCharVar("CryingOverOnions") == 2) and
-        npcUtil.tradeHas(trade, 1149)
+        npcUtil.tradeHas(trade, xi.items.STAR_SPINEL)
     then
-        player:startEvent(775, 0, 1149)
+        player:startEvent(775, 0, xi.items.STAR_SPINEL)
     end
 end
 
@@ -53,7 +54,7 @@ entity.onTrigger = function(player, npc)
         elseif cryingOverOnionsVar >= 1 then
             player:startEvent(777)
         else
-            player:startEvent(774, 0, 1149)
+            player:startEvent(774, 0, xi.items.STAR_SPINEL)
         end
     elseif wildCard == QUEST_COMPLETED then
         player:startEvent(783)
@@ -76,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
     -- "Crying over Onions"
     if csid == 774 then
         player:setCharVar("CryingOverOnions", 1)
-    elseif csid == 775 and npcUtil.giveItem(player, 13136) then
+    elseif csid == 775 and npcUtil.giveItem(player, xi.items.STAR_NECKLACE) then
         player:confirmTrade()
         player:setCharVar("CryingOverOnions", 3)
     elseif

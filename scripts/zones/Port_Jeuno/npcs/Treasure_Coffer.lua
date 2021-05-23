@@ -10,8 +10,6 @@ require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
-local PRISHE_STATUE = 277
-
 entity.onTrigger = function(player, npc)
     if ENABLE_ABYSSEA == 1 and not player:hasItem(xi.items.PRISHE_STATUE) then
         player:startEvent(350, 0xFFFFFFFC)
