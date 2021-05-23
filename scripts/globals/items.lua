@@ -93,6 +93,7 @@ xi.items =
     SCYTHE_OF_TRIALS                = 16793,
     SPEAR_OF_TRIALS                 = 16892,
     SWORD_OF_TRIALS                 = 16952,
+    WILLOW_FISHING_ROD              = 17391,
     CLUB_OF_TRIALS                  = 17456,
     KNUCKLES_OF_TRIALS              = 17507,
     POLE_OF_TRIALS                  = 17527,
