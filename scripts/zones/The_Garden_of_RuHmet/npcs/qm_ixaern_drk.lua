@@ -1,11 +1,12 @@
 -----------------------------------
 -- Area: The_Garden_of_RuHmet
---  NPC: ??? (Ix'aern (Dark Knight) Spawn)
--- Allows players to spawn the Ix'aern (Dark Knight) by checking ??? only after killing the required mobs in the same room as the ???.
--- !pos -240 5.00 440 35
--- !pos -280 5.00 240 35
+--  NPC: qm_ixaern_drk (???)
+-- Note: Spawn Ix'aern (DRK) by checking ??? after getting animosity message
+--       from killing required mobs in the same room
 -- !pos -560 5.00 239 35
 -- !pos -600 5.00 440 35
+-- !pos -240 5.00 440 35
+-- !pos -280 5.00 240 35
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/status")
@@ -41,7 +42,7 @@ entity.onTrigger = function(player, npc)
 
         -- move QM to random location, and reset animosity
         local pos = math.random(1, 4)
-        npcUtil.queueMove(npc, ID.npc.IXAERN_DRK_QM_POS[pos])
+        npcUtil.queueMove(npc, ID.npc.QM_IXAERN_DRK_POS[pos])
         npc:setLocalVar("position", pos)
         npc:setLocalVar("hatedPlayer", 0)
         npc:setLocalVar("hateTimer", 0)
