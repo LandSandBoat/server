@@ -36,13 +36,8 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    local instance = player:getInstance()
-    local chars = instance:getChars()
-
     if csid == 102 then
-        for _, v in pairs(chars) do
-            v:setPos(0, 0, 0, 0, 54)
-        end
+        player:setPos(0, 0, 0, 0, 54)
     end
 end
 
