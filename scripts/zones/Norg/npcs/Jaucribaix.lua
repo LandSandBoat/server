@@ -5,6 +5,7 @@
 -- !pos 91 -7 -8 252
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
@@ -136,7 +137,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 158 and option == 1) then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.A_THIEF_IN_NORG)
         player:setCharVar("aThiefinNorgCS", 1)
-    elseif ((csid == 166 or csid == 168) and npcUtil.giveItem(player, 1166)) then -- Banishing Charm
+    elseif ((csid == 166 or csid == 168) and npcUtil.giveItem(player, xi.items.BANISHING_CHARM)) then -- Banishing Charm
         player:setCharVar("aThiefinNorgCS", 6)
     elseif (csid == 160) then
         player:setCharVar("aThiefinNorgCS", 8)
