@@ -53,21 +53,19 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(33,  97, -4, -427, 102, 4, -421)--mithra niv 3 182 vers niv 2
 
     -- Give the Fortitude ??? a random spawn
-    local qm1 = GetNPCByID(ID.npc.JAILER_OF_FORTITUDE_QM)
-    local qm1position = math.random(1, 5)
-    qm1:setPos(ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][1], ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][2], ID.npc.JAILER_OF_FORTITUDE_QM_POS[qm1position][3])
+    local qmFort = GetNPCByID(ID.npc.QM_JAILER_OF_FORTITUDE)
+    qmFort:setPos(unpack(ID.npc.QM_JAILER_OF_FORTITUDE_POS[math.random(1, 5)]))
 
     -- Give the Ix'Aern DRK ??? a random spawn
-    local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM)
-    local qm2position = math.random(1, 4)
-    qm2:setLocalVar("position", qm2position)
-    qm2:setPos(ID.npc.IXAERN_DRK_QM_POS[qm2position][1], ID.npc.IXAERN_DRK_QM_POS[qm2position][2], ID.npc.IXAERN_DRK_QM_POS[qm2position][3])
-    qm2:setLocalVar("hatedPlayer", 0)
+    local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
+    local qmDrkPos = math.random(1, 4)
+    qmDrk:setLocalVar("position", qmDrkPos)
+    qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
+    qmDrk:setLocalVar("hatedPlayer", 0)
 
     -- Give the Faith ??? a random spawn
-    local qm3 = GetNPCByID(ID.npc.JAILER_OF_FAITH_QM)
-    local qm3position = math.random(1, 5)
-    qm3:setPos(ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][1], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][2], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][3])
+    local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH)
+    qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)]))
 
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
@@ -91,27 +89,22 @@ end
 
 zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
-    local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM) -- Ix'aern drk
-    local qm3 = GetNPCByID(ID.npc.JAILER_OF_FAITH_QM) -- Jailer of Faith
+    local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK) -- Ix'aern drk
     local s = math.random(6, 12) -- wait time till change to next spawn pos, random 15~30 mins.
 
     -- Jailer of Faith spawn randomiser
     if (VanadielHour % s == 0) then
-        -- Hide it for 60 seconds
-        qm3:hideNPC(60)
-
-        -- Get a new random position from the possible places
-        local qm3position = math.random(1, 5)
-        -- Set the new ??? place
-        qm3:setPos(ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][1], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][2], ID.npc.JAILER_OF_FAITH_QM_POS[qm3position][3])
+        local qmFaith = GetNPCByID(ID.npc.QM_JAILER_OF_FAITH) -- Jailer of Faith
+        qmFaith:hideNPC(60) -- Hide it for 60 seconds
+        qmFaith:setPos(unpack(ID.npc.QM_JAILER_OF_FAITH_POS[math.random(1, 5)])) -- Set the new position
     end
 
     -- Ix'DRK spawn randomiser
-    if (VanadielHour % 12 == 0 and qm2:getStatus() ~= xi.status.DISAPPEAR) then -- Change ??? position every 12 hours Vana'diel time (30 mins)
-        qm2:hideNPC(30)
-        local qm2position = math.random(1, 4)
-        qm2:setLocalVar("position", qm2position)
-        qm2:setPos(ID.npc.IXAERN_DRK_QM_POS[qm2position][1], ID.npc.IXAERN_DRK_QM_POS[qm2position][2], ID.npc.IXAERN_DRK_QM_POS[qm2position][3])
+    if (VanadielHour % 12 == 0 and qmDrk:getStatus() ~= xi.status.DISAPPEAR) then -- Change ??? position every 12 hours Vana'diel time (30 mins)
+        qmDrk:hideNPC(30)
+        local qmDrkPos = math.random(1, 4)
+        qmDrk:setLocalVar("position", qmDrkPos)
+        qmDrk:setPos(unpack(ID.npc.QM_IXAERN_DRK_POS[qmDrkPos]))
     end
 end
 
