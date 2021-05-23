@@ -2,6 +2,7 @@
 -- ID: 19468
 -- Item: Gandiva
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -16,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    npcUtil.giveItem(target, { { 21298, 99 } }) -- Artemis' Arrow x99
+    npcUtil.giveItem(target, { { xi.items.ARTEMIS_ARROW, 99 } }) -- Artemis' Arrow x99
 end
 
 return item_object
