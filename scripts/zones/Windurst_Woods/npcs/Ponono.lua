@@ -9,6 +9,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/items")
 require("scripts/globals/roe")
 require("scripts/globals/status")
 -----------------------------------
@@ -99,7 +100,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 700 then
         player:setCharVar("moral", 2)
     elseif csid == 705 then
-        if npcUtil.giveItem(player, 1867) then
+        if npcUtil.giveItem(player, xi.items.YAGUDO_HEADDRESS_CUTTING) then
             player:setCharVar("moral", 4)
         end
     elseif csid == 10011 and option == 2 then
@@ -108,10 +109,10 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif csid == 10011 and option == 1 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4099)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.EARTH_CRYSTAL)
         else
             player:addItem(4099) -- earth crystal
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4099)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
             signupGuild(player, guild.clothcraft)
         end
     else

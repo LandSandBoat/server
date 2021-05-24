@@ -5,6 +5,7 @@
 -- !pos 4 0 -4 252
 -----------------------------------
 local ID = require("scripts/zones/Norg/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -12,8 +13,8 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 645) and utils.mask.getBit(player:getCharVar("ForgeYourDestiny_Event"), 0) then
-        player:startEvent(47, 0, 1151, 645) -- Oriental Steel, Darksteel Ore
+    if npcUtil.tradeHas(trade, xi.items.CHUNK_OF_DARKSTEEL_ORE) and utils.mask.getBit(player:getCharVar("ForgeYourDestiny_Event"), 0) then
+        player:startEvent(47, 0, xi.items.LUMP_OF_ORIENTAL_STEEL, xi.items.CHUNK_OF_DARKSTEEL_ORE) -- Oriental Steel, Darksteel Ore
     end
 end
 
@@ -22,16 +23,16 @@ entity.onTrigger = function(player, npc)
     local swordTimer = player:getCharVar("ForgeYourDestiny_timer")
 
     if forgeYourDestiny == QUEST_ACCEPTED and swordTimer == 0 then
-        if player:hasItem(1152) then
-            player:startEvent(48, 1152) -- Bomb Steel
-        elseif not player:hasItem(1151) then
+        if player:hasItem(xi.items.LUMP_OF_BOMB_STEEL) then
+            player:startEvent(48, xi.items.LUMP_OF_BOMB_STEEL) -- Bomb Steel
+        elseif not player:hasItem(xi.items.LUMP_OF_ORIENTAL_STEEL) then
             if not utils.mask.getBit(player:getCharVar("ForgeYourDestiny_Event"), 0) then
-                player:startEvent(44, 1152, 1151) -- Bomb Steel, Oriental Steel
+                player:startEvent(44, xi.items.LUMP_OF_BOMB_STEEL, xi.items.LUMP_OF_ORIENTAL_STEEL) -- Bomb Steel, Oriental Steel
             else
-                player:startEvent(46, 0, 1151, 645) -- Oriental Steel, Darksteel Ore
+                player:startEvent(46, 0, xi.items.LUMP_OF_ORIENTAL_STEEL, xi.items.CHUNK_OF_DARKSTEEL_ORE) -- Oriental Steel, Darksteel Ore
             end
         else
-            player:startEvent(45, 1152, 1151) -- Bomb Steel, Oriental Steel
+            player:startEvent(45, xi.items.LUMP_OF_BOMB_STEEL, xi.items.LUMP_OF_ORIENTAL_STEEL) -- Bomb Steel, Oriental Steel
         end
     elseif swordTimer > 0 then
         player:startEvent(50)
@@ -48,9 +49,9 @@ entity.onEventFinish = function(player, csid, option)
 
     local questItem = player:getCharVar("ForgeYourDestiny_Event")
 
-    if csid == 44 and npcUtil.giveItem(player, 1151) then
+    if csid == 44 and npcUtil.giveItem(player, xi.items.LUMP_OF_ORIENTAL_STEEL) then
         player:setCharVar("ForgeYourDestiny_Event", utils.mask.setBit(player:getCharVar("ForgeYourDestiny_Event"), 0, true))
-    elseif csid == 47 and npcUtil.giveItem(player, 1151) then
+    elseif csid == 47 and npcUtil.giveItem(player, xi.items.LUMP_OF_ORIENTAL_STEEL) then
         player:confirmTrade()
     end
 

@@ -2,6 +2,7 @@
 -- ID: 18348, 18349, 18650, 18664, 18678, 19759, 19852, 21210, 21211, 22115
 -- Item: Yoichinoyumi
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -16,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    npcUtil.giveItem(target, { { 21299, 99 } })
+    npcUtil.giveItem(target, { { xi.items.YOICHIS_ARROW, 99 } })
 end
 
 return item_object

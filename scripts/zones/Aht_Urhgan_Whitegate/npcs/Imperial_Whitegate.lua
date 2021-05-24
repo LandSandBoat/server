@@ -3,6 +3,7 @@
 --  NPC: Imperial Whitegate
 -- pos: 152, -2, 0, 50
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -57,25 +58,25 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     if csid == 3140 or csid == 3155 then
-        if option == 1 and npcUtil.giveItem(player, 15807) then
+        if option == 1 and npcUtil.giveItem(player, xi.items.BALRAHNS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
             player:setCharVar("TOAU_RINGRECV", 1)
-        elseif option == 2 and npcUtil.giveItem(player, 15808) then
+        elseif option == 2 and npcUtil.giveItem(player, xi.items.ULTHALAMS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
             player:setCharVar("TOAU_RINGRECV", 1)
-        elseif option == 3 and npcUtil.giveItem(player, 15809) then
+        elseif option == 3 and npcUtil.giveItem(player, xi.items.JALZAHNS_RING) then
             player:setCharVar("TOAU_RINGTIME", os.time())
             player:setCharVar("TOAU_RINGRECV", 1)
         elseif option == 4 then
-            npcUtil.giveItem(player, 129)
+            npcUtil.giveItem(player, xi.items.IMPERIAL_STANDARD)
         elseif option == 99 then
-            player:updateEvent(15807, 15808, 15809)
+            player:updateEvent(xi.items.BALRAHNS_RING, xi.items.ULTHALAMS_RING, xi.items.JALZAHNS_RING)
         end
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 3078 and npcUtil.giveItem(player, 2186) then
+    if csid == 3078 and npcUtil.giveItem(player, xi.items.IMPERIAL_MYTHRIL_PIECE) then
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.GUESTS_OF_THE_EMPIRE)
         player:setCharVar("AhtUrganStatus", 0)
         player:addTitle(xi.title.OVJANGS_ERRAND_RUNNER)
@@ -90,7 +91,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addMission(xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED)
         player:setCharVar("TOAU_RINGRECV", 0)
     elseif csid == 3155 and option == 6 then
-        npcUtil.giveItem(player, 129)
+        npcUtil.giveItem(player, xi.items.IMPERIAL_STANDARD)
     elseif csid == 722 then
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS)
         player:setCharVar("TransformationsProgress", 2)

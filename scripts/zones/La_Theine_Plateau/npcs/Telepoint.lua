@@ -4,6 +4,7 @@
 -- !pos 420.000 19.104 20.000 102
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -12,7 +13,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     -- trade any normal crystal for a faded crystal
     local item = trade:getItemId()
-    if trade:getItemCount() == 1 and item >= 4096 and item <= 4103 and npcUtil.giveItem(player, 613) then
+    if trade:getItemCount() == 1 and item >= xi.items.FIRE_CRYSTAL and item <= xi.items.DARK_CRYSTAL and npcUtil.giveItem(player, xi.items.FADED_CRYSTAL) then
         player:tradeComplete()
     end
 end
