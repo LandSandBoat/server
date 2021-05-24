@@ -4,6 +4,7 @@
 -- Involved In Quest: Making Headlines, Curses, Foiled...Again!?
 -- Working 100%
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
@@ -20,7 +21,7 @@ entity.onTrigger = function(player, npc)
     local cursesFoiledAgain2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
     -- Curses, Foiled ... Again!?
-    if cursesFoiledAgain2 == QUEST_ACCEPTED and not player:hasItem(552) then
+    if cursesFoiledAgain2 == QUEST_ACCEPTED and not player:hasItem(xi.items.LOCK_OF_HIWONS_HAIR) then
         player:startEvent(182) -- get Hiwon's hair
 
     -- Making Headlines
@@ -76,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
 
     -- Curses, Foiled...Again!?
     elseif csid == 182 then
-        npcUtil.giveItem(player, 552)
+        npcUtil.giveItem(player, xi.items.LOCK_OF_HIWONS_HAIR)
     end
 end
 

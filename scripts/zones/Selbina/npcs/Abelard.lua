@@ -8,6 +8,7 @@
 -- complete this quest even with no fame.
 -----------------------------------
 local ID = require("scripts/zones/Selbina/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -65,7 +66,7 @@ entity.onTrade = function(player, npc, trade)
 
     if
         player:getCurrentMission(ROV) == xi.mission.id.rov.SET_FREE and
-        npcUtil.tradeHas(trade,{{9082, 3}}) and
+        npcUtil.tradeHas(trade,{{xi.items.CLUMP_OF_BEE_POLLEN, 3}}) and
         player:getCharVar("RhapsodiesStatus") == 1
     then
         player:startEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
@@ -79,7 +80,7 @@ entity.onTrigger = function(player, npc)
     if anExplorersFootsteps == QUEST_AVAILABLE and math.floor((player:getFameLevel(SANDORIA) + player:getFameLevel(BASTOK)) / 2) >= 1 then
         player:startEvent(40)
     elseif anExplorersFootsteps == QUEST_ACCEPTED then
-        if not player:hasItem(570) and not player:hasItem(571) then
+        if not player:hasItem(xi.items.CLAY_TABLET) and not player:hasItem(xi.items.LUMP_OF_SELBINA_CLAY) then
             if player:getCharVar("anExplorer-CurrentTablet") == -1 then
                 player:startEvent(42)
             else
@@ -111,13 +112,13 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     -- AN EXPLORER'S FOOTSTEPS
-    if csid == 40 and option ~= 0 and npcUtil.giveItem(player, 571) then
+    if csid == 40 and option ~= 0 and npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY) then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.AN_EXPLORER_S_FOOTSTEPS)
         player:setCharVar("anExplorer-ClayTablets", 0)
-    elseif csid == 42 and option == 100 and npcUtil.giveItem(player, 571) then
+    elseif csid == 42 and option == 100 and npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY) then
         player:setCharVar("anExplorer-CurrentTablet", 0)
     elseif csid == 44 then
-        npcUtil.giveItem(player, 571)
+        npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
     elseif csid == 41 or csid == 46 or csid == 47 then
         local currtab = player:getCharVar("anExplorer-CurrentTablet")
         local tablets = player:getCharVar("anExplorer-ClayTablets")
@@ -138,7 +139,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if option == 100 then
-            npcUtil.giveItem(player, 571)
+            npcUtil.giveItem(player, xi.items.LUMP_OF_SELBINA_CLAY)
         elseif option == 110 then
             player:setCharVar("anExplorer-CurrentTablet", -1)
         end
@@ -153,7 +154,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:hasJob(0) == false then -- Is Subjob Unlocked
             npcUtil.giveKeyItem(player, xi.ki.GILGAMESHS_INTRODUCTORY_LETTER)
         else
-            if not npcUtil.giveItem(player, 8711) then return end
+            if not npcUtil.giveItem(player, xi.items.COPPER_AMAN_VOUCHER) then return end
         end
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.SET_FREE)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_BEGINNING)
