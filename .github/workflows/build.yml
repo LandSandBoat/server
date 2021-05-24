@@ -161,30 +161,73 @@ jobs:
     - name: Copy confs
       run: |
         cp conf/default/* conf/
-    - name: Run services (2 mins)
-      env:
-        MYSQL_HOST: mysql
+    - name: Startup and character login checks
       run: |
-        ls -l
+        printf "\nStart server processes\n"
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server.log
-        sleep 2m
+        
+        printf "\nWaiting 15s for servers to fully start up\n"
+        sleep 15s
+        
+        printf "\nInstalling HeadlessXI\n"
+        pip3 install git+https://github.com/zach2good/HeadlessXI.git
+        printf "\nPopulating database\n"
+        mysql xidb -h 127.0.0.1 -uroot -proot << EOF
+        -- Clean out anything already there (just in case)
+        DELETE FROM accounts;
+        DELETE FROM chars;
+        -- Create an account
+        INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
+        VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
+        SELECT id, login FROM accounts;
+        -- Create a character
+        INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
+        VALUES(1, 1000, 'Test', 0, 0, 5);
+        SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+        -- Update character information
+        -- Place near some Robber Crabs in Kuftal Tunnel
+        UPDATE chars
+        SET
+            pos_zone = 174,
+            pos_prevzone = 174,
+            pos_x = 55,
+            pos_y = -9,
+            pos_z = -140
+        WHERE charid = 1;
+        SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+        -- Set GodMode CharVar = 1
+        INSERT INTO char_vars(charid, varname, value)
+        VALUES(1, 'GodMode', 1);
+        SELECT * FROM char_vars;
+        EOF
+        printf "\nRunning HXIClient for 60 seconds\n"
+        python3 << EOF
+        import time
+        from headlessxi import HXIClient
+        hxi_client = HXIClient('admin', 'admin', 'localhost')
+        print('login')
+        hxi_client.login()
+        print('sleeping 30s')
+        time.sleep(30)
+        print('logout')
+        hxi_client.logout()
+        EOF
+        
         killall screen
     - name: Check for errors
+      if: ${{ success() || failure() }}
       run: |
         cat login-server.log
         cat map-server.log
         cat search-server.log
-
         if grep -qi "Error" login-server.log; then
             exit -1
         fi
-
         if grep -qi "Error" map-server.log; then
             exit -1
         fi
-
         if grep -qi "Error" search-server.log; then
             exit -1
         fi
@@ -232,11 +275,10 @@ jobs:
     - name: Copy confs
       run: |
         cp conf/default/* conf/
-    - name: Run services (2 mins)
+    - name: Startup checks
       env:
         MYSQL_HOST: mysql
       run: |
-        ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230
@@ -244,6 +286,7 @@ jobs:
         sleep 2m
         killall screen
     - name: Check for errors
+      if: ${{ success() || failure() }}
       run: |
         cat login-server.log
         cat search-server.log
