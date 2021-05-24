@@ -185,7 +185,10 @@ jobs:
         -- Create a character
         INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
         VALUES(1, 1000, 'Test', 0, 0, 5);
-        SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+        -- Set race (default is 0 and trips up scripting)
+        UPDATE char_look
+        SET race = 1
+        WHERE charid = 1;
         -- Update character information
         -- Place near some Robber Crabs in Kuftal Tunnel
         UPDATE chars
@@ -202,16 +205,14 @@ jobs:
         VALUES(1, 'GodMode', 1);
         SELECT * FROM char_vars;
         EOF
-        printf "\nRunning HXIClient for 60 seconds\n"
+        printf "\nRunning HeadlessXI for 60 seconds\n"
         python3 << EOF
         import time
         from headlessxi import HXIClient
         hxi_client = HXIClient('admin', 'admin', 'localhost')
-        print('login')
         hxi_client.login()
-        print('sleeping 30s')
+        print('Sleeping 30s')
         time.sleep(30)
-        print('logout')
         hxi_client.logout()
         EOF
         
