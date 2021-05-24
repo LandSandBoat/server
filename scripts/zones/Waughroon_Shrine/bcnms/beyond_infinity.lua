@@ -3,6 +3,7 @@
 -- Wauhroon Shrine Level Break
 -----------------------------------
 require("scripts/globals/battlefield")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -38,7 +39,7 @@ end
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) == QUEST_ACCEPTED then
-            npcUtil.giveItem(player, 4181) -- scroll_of_instant_warp
+            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
             player:setCharVar("BeyondInfinityCS", 2)
         end
     end

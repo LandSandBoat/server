@@ -2,6 +2,7 @@
 -- ID: 22143
 -- Item: Fomalhaut
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -16,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    npcUtil.giveItem(target, { { 21296, 99 } }) -- Chrono Bullet x99
+    npcUtil.giveItem(target, { { xi.items.CHRONO_BULLET, 99 } }) -- Chrono Bullet x99
 end
 
 return item_object

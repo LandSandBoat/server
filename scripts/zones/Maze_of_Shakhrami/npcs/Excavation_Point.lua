@@ -4,14 +4,15 @@
 -- Used in Quest: The Holy Crest
 -- !pos 234 0.1 -110 198
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/helm")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getCharVar("TheHolyCrest_Event") == 3 and not player:hasItem(1159) and npcUtil.tradeHas(trade, 605) then
-        if npcUtil.giveItem(player, 1159) then -- Wyvern Egg
+    if player:getCharVar("TheHolyCrest_Event") == 3 and not player:hasItem(xi.items.WYVERN_EGG) and npcUtil.tradeHas(trade, xi.items.PICKAXE) then
+        if npcUtil.giveItem(player, xi.items.WYVERN_EGG) then
             player:confirmTrade()
         end
     else

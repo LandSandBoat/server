@@ -2,6 +2,7 @@
 -- ID: 22117, 22131
 -- Item: Fail-Not
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -16,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    npcUtil.giveItem(target, { { 21297, 99 } }) -- Chrono Arrows x99
+    npcUtil.giveItem(target, { { xi.items.CHRONO_ARROW, 99 } }) -- Chrono Arrows x99
 end
 
 return item_object

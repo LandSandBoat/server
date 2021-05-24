@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 require("scripts/globals/conquest")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -64,7 +65,7 @@ zone_object.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KI_STOLEN, 0, xi.ki.MYSTERIOUS_AMULET)
         player:delKeyItem(xi.ki.MYSTERIOUS_AMULET)
         player:setCharVar("PromathiaStatus", 1)
-    elseif (csid == 111 and npcUtil.giveItem(player, 14657)) then
+    elseif (csid == 111 and npcUtil.giveItem(player, xi.items.DUCAL_GUARDS_RING)) then
         player:setCharVar("PromathiaStatus", 1)
     elseif (csid == 116) then
         player:setCharVar("PromathiaStatus", 7)
