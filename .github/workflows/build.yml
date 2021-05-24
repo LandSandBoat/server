@@ -172,7 +172,7 @@ jobs:
         sleep 90s
         
         printf "\nInstalling HeadlessXI\n"
-        pip3 install git+https://github.com/zach2good/HeadlessXI.git
+        pip3 install --upgrade git+https://github.com/zach2good/HeadlessXI.git
         printf "\nPopulating database\n"
         mysql xidb -h 127.0.0.1 -uroot -proot << EOF
         -- Clean out anything already there (just in case)
