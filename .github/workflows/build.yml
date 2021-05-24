@@ -185,10 +185,9 @@ jobs:
         -- Create a character
         INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
         VALUES(1, 1000, 'Test', 0, 0, 5);
-        -- Set race (default is 0 and trips up scripting)
-        UPDATE char_look
-        SET race = 1
-        WHERE charid = 1;
+        -- Set char_look (default is 0 and trips up scripting)
+        INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
+        VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
         -- Update character information
         -- Place near some Robber Crabs in Kuftal Tunnel
         UPDATE chars
