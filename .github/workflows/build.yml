@@ -168,8 +168,8 @@ jobs:
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server.log
         
-        printf "\nWaiting 15s for servers to fully start up\n"
-        sleep 15s
+        printf "\nWaiting 90s for servers to fully start up\n"
+        sleep 90s
         
         printf "\nInstalling HeadlessXI\n"
         pip3 install git+https://github.com/zach2good/HeadlessXI.git
