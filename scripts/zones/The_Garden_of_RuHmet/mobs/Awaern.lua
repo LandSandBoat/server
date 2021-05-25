@@ -21,24 +21,25 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     -- Ix'Aern DRK animosity mechanic
     if (isKiller) then
-        local qm2 = GetNPCByID(ID.npc.IXAERN_DRK_QM)
-        local hatedPlayer = qm2:getLocalVar("hatedPlayer")
-        local isInTime = qm2:getLocalVar("hateTimer") > os.time()
+        local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
+        local hatedPlayer = qmDrk:getLocalVar("hatedPlayer")
+        local isInTime = qmDrk:getLocalVar("hateTimer") > os.time()
 
-        if (qm2:getStatus() ~= xi.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime)) then
+        if (qmDrk:getStatus() ~= xi.status.DISAPPEAR and (hatedPlayer == 0 or not isInTime)) then
+
             -- if hated player took too long, reset
             if (hatedPlayer ~= 0) then
-                qm2:setLocalVar("hatedPlayer", 0)
-                qm2:setLocalVar("hateTimer", 0)
+                qmDrk:setLocalVar("hatedPlayer", 0)
+                qmDrk:setLocalVar("hateTimer", 0)
             end
 
             -- if aern belongs to QM group, chance for sheer animosity
-            local position = GetNPCByID(ID.npc.IXAERN_DRK_QM):getLocalVar("position")
-            local currentMobID = mob:getID()
-            if (currentMobID >= ID.mob.AWAERN_DRK_GROUPS[position] and currentMobID <= ID.mob.AWAERN_DRK_GROUPS[position] + 2) then
+            local position = GetNPCByID(ID.npc.QM_IXAERN_DRK):getLocalVar("position")
+            local offset = mob:getID() - ID.mob.AWAERN_DRK_GROUPS[position]
+            if offset >= 0 and offset <= 2 then
                 if (math.random(1, 8) == 1) then
-                    qm2:setLocalVar("hatedPlayer", player:getID())
-                    qm2:setLocalVar("hateTimer", os.time() + 600) -- player with animosity has 10 minutes to touch QM
+                    qmDrk:setLocalVar("hatedPlayer", player:getID())
+                    qmDrk:setLocalVar("hateTimer", os.time() + 600) -- player with animosity has 10 minutes to touch QM
                     player:messageSpecial(ID.text.SHEER_ANIMOSITY)
                 end
             end

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -1593,7 +1593,7 @@ namespace luautils
             return -1;
         }
 
-        return result;
+        return result.get_type() == sol::type::number ? result : -1;
     }
 
     void AfterZoneIn(CBaseEntity* PChar)
@@ -3366,8 +3366,8 @@ namespace luautils
             return 87;
         }
 
-        auto result0 = result.get<int32>(0); // Message (0 = None)
-        auto result1 = result.get<int32>(1);
+        auto result0 = result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0; // Message (0 = None)
+        auto result1 = result.get_type(1) == sol::type::number ? result.get<int32>(1) : 0;
         if (result1 != 0)
         {
             *PMsgTarget = (CBaseEntity*)PTarget;

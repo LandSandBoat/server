@@ -3,6 +3,7 @@
 -- http://ffxiclopedia.wikia.com/wiki/Picking_your_Coffers_and_Chests
 -- http://ffxiclopedia.wikia.com/wiki/Treasure_Chest_and_Coffer_Guide
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
@@ -235,7 +236,7 @@ local treasureInfo =
                 {
                     {
                         test = function(player) return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED and player:getCharVar("scatIntoShadowCS") == 1 and not player:hasItem(13121) end,
-                        code = function(player) npcUtil.giveItem(player, 13121) end,
+                        code = function(player) npcUtil.giveItem(player, xi.items.BEAST_COLLAR) end,
                     },
                 },
                 points =
