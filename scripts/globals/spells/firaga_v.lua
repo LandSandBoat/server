@@ -1,20 +1,20 @@
 -----------------------------------
--- Spell: Flare II
+-- Spell: Firaga V
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/msg")
 -----------------------------------
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    if caster:isPC() then -- Mob Only Spell.
+        return xi.msg.basic.STATUS_PREVENTS
+    else
+        return 0
+    end
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.WATERRES)
-
     return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
 end
 
