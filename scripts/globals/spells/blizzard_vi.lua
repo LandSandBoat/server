@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Blizzard II
+-- Spell: Blizzard VI
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
