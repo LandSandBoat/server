@@ -1,30 +1,21 @@
 -----------------------------------
--- Spell: Stonaga IV
--- Deals earth damage to enemies within area of effect.
+-- Spell: Stonega IV
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/magic_utils/spell_damage")
+require("scripts/globals/msg")
 -----------------------------------
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    if caster:isPC() then -- Mob Only Spell.
+        return xi.msg.basic.STATUS_PREVENTS
+    else
+        return 0
+    end
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local spellParams = {}
-    spellParams.hasMultipleTargetReduction = true
-    spellParams.resistBonus = 1.0
-    spellParams.V0 = 800
-    spellParams.V50 = 1100
-    spellParams.V100 = 1350
-    spellParams.V200 = 1750
-    spellParams.M0 = 6
-    spellParams.M50 = 5
-    spellParams.M100 = 4
-    spellParams.M200 = 3
-
-    return doElementalNuke(caster, spell, target, spellParams)
+    return xi.magic_utils.spell_damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object

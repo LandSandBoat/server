@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Stonega III
+-- Spell: Stonera III
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
