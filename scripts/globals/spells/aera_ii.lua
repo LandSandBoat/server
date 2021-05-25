@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Aero II
+-- Spell: Aera II
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
