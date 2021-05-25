@@ -208,7 +208,7 @@ enum JOBPOINT_TYPE : uint16
     JP_ZANSHIN_EFFECT        = JPCATEGORY_SAM + 0x09, //zanshin follow-ups p.atk +2
 
     //NIN
-    JP_MIJIN_GAUKURE_EFFECT     = JPCATEGORY_NIN + 0x00, //dmg +3%
+    JP_MIJIN_GAKURE_EFFECT     = JPCATEGORY_NIN + 0x00, //dmg +3%
     JP_MIKAGE_EFFECT            = JPCATEGORY_NIN + 0x02, //p.atk +3
     JP_YONIN_EFFECT             = JPCATEGORY_NIN + 0x01, //p.eva +2
     JP_INNIN_EFFECT             = JPCATEGORY_NIN + 0x03, //p.acc +1
