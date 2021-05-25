@@ -72,7 +72,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         end
     end
 
-    local del = player:delItem(2178, 1) or player:delItem(2974, 1)
+    local del = player:delItem(2178, 1, 0) or player:delItem(2974, 1, 0)
     target:updateClaim(player)
     return dmg
 end

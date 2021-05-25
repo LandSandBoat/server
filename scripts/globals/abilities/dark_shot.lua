@@ -72,7 +72,7 @@ ability_object.onUseAbility = function(player, target, ability)
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
     end
 
-    local del = player:delItem(2183, 1) or player:delItem(2974, 1)
+    local del = player:delItem(2183, 1, 0) or player:delItem(2974, 1, 0)
     target:updateClaim(player)
     return dispelledEffect
 end
