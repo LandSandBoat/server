@@ -1977,8 +1977,7 @@ INSERT INTO `mob_skills` VALUES (2162,1571,'emetic_discharge',0,7.0,2000,1000,4,
 -- INSERT INTO `mob_skills` VALUES (2164,1550,'viscid_emission',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2165,1909,'rotten_stench',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2166,1910,'floral_bouquet',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2167,1553,'bloody_caress',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2168,1912,'bloody_caress',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2167,1553,'bloody_caress',0,10.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2169,1913,'soothing_aroma',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2170,1589,'fevered_pitch',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2171,1590,'call_of_the_moon_up',1,25.0,2000,1500,4,0,0,0,0,0,0); -- standing up
