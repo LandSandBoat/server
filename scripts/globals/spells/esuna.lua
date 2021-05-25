@@ -84,8 +84,10 @@ spell_object.onSpellCast = function(caster, target, spell)
             end
         end
 
+        local delEff
+
         if (statusNum >= 0) then -- make sure this happens once instead of for every target
-            local delEff = math.random(0, statusNum) -- pick a random status to delete
+            delEff = math.random(0, statusNum) -- pick a random status to delete
             caster:setLocalVar("esunaDelEff", has[delEff]) -- this can't be a local because it would only delete from the caster if it were.
         else -- clear it if the caster has no eligible statuses, otherwise it will remove the status from others if it was previously removed.
             caster:setLocalVar("esunaDelEff", 0)
