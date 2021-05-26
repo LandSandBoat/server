@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Water
+-- Spell: Watera II
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------

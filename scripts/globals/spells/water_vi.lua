@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Water
+-- Spell: Water VI
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
