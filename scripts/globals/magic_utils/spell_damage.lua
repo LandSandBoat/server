@@ -246,7 +246,7 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
     then
         local spellMultiplier = damageSpellParams[spellId][3] -- M
-        local inflexionPoint  = damageSpellParams[spellId][] -- I
+        local inflexionPoint  = damageSpellParams[spellId][5] -- I
         if statDiff <= 0 then
             statDiffBonus = statDiff
         elseif statDiff > 0 and statDiff <= inflexionPoint then
@@ -809,7 +809,7 @@ end
 
 function calculateUndeadDivinePenalty(caster, target, spell, skillType)
     local undeadDivinePenalty = 1
-    if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC
+    if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC then
         undeadDivinePenalty = 1.5
     end
 end
