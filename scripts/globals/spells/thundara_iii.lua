@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Thundaja
+-- Spell: Thundara III
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------

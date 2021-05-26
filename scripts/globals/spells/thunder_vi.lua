@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Thundaja
+-- Spell: Thunder VI
 -----------------------------------
 require("scripts/globals/magic_utils/spell_damage")
 -----------------------------------
