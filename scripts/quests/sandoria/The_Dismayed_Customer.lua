@@ -14,8 +14,6 @@ require("scripts/globals/titles")
 require("scripts/globals/zone")
 require("scripts/globals/interaction/quest")
 -----------------------------------
-local westRonfaureID = require("scripts/zones/West_Ronfaure/IDs")
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_DISMAYED_CUSTOMER)
 
@@ -30,8 +28,6 @@ local function handleQm(player, qmNumber)
     if quest:getVar(player, 'Stage') == qmNumber then
         quest:setVar(player, 'Stage', 0)
         return quest:keyItem(xi.ki.GULEMONTS_DOCUMENT)
-    else
-        return quest:messageSpecial(westRonfaureID.text.DISMAYED_CUSTOMER)
     end
 end
 
