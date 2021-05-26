@@ -53,134 +53,138 @@ local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGI
 local damageSpellParams =
 {
 -- Single target black magic spells:
--- Structure:           [spellId] = {  Stat used,                    Skill,                    Element, vNPC, mNPC,  vPC,   M0,  M50,  M100, M200, M300, M400, M500 },
-    [xi.magic.spell.AERO        ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,   25,    1,   40,  1.6,    1,     0,    0,    0,    0,    0 },
-    [xi.magic.spell.AERO_II     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  113,    1,  140,  2.6,  1.8,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.AERO_III    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  265,  1.5,  260,  3.4,  2.8,   1.9,    1,    0,    0,    0 },
-    [xi.magic.spell.AERO_IV     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  440,    2,  480,  4.4,  3.8,   2.9, 1.98,    1,    0,    0 },
-    [xi.magic.spell.AERO_V      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  738,  2.3,  750,  5.2,  4.5,   3.9, 2.98, 1.98,    1,    0 },
-    [xi.magic.spell.AERO_VI     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND, 1070,  2,5, 1070,    6,  5.8,   4.8,  3.8,  2.9, 1.98,    1 },
-    [xi.magic.spell.TORNADO     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  552,    2,  700,    2,    2,     2,    2,    2,    2,    2 },
-    [xi.magic.spell.TORNADO_II  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  710,    2,  800,    2,    2,     2,    2,    2,    2,    2 },
-    [xi.magic.spell.BLIZZARD    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,   46,    1,   70,  1.2,    1,    0,     0,    0,    0,    0 },
-    [xi.magic.spell.BLIZZARD_II ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  155,    1,  180,  2.2,  1.6,    1,     0,    0,    0,    0 },
-    [xi.magic.spell.BLIZZARD_III] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  320,  1.5,  320,  2.8,  2.6,  1.8,     1,    0,    0,    0 },
-    [xi.magic.spell.BLIZZARD_IV ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  506,    2,  560,  3.9,  3.6,  2.8,  1.96,    1,    0,    0 },
-    [xi.magic.spell.BLIZZARD_V  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  829,  2.3,  850,  4.4,    4,  3.8,  2.96, 1.96,    1,    0 },
-    [xi.magic.spell.BLIZZARD_VI ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE, 1190,  2.5, 1190,    5,  5.6,  4.6,   3.6,  2.8, 1.96,    1 },
-    [xi.magic.spell.FREEZE      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  552,    2,  700,    2,    2,     2,    2,    2,    2,    2 },
-    [xi.magic.spell.FREEZE_II   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  710,    2,  800,    2,    2,     2,    2,    2,    2,    2 },
-    [xi.magic.spell.FIRE        ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,   35,    1,   55,  1.4,    1,    0,     0,    0,    0,    0 },
-    [xi.magic.spell.FIRE_II     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  133,    1,  160,  2.4,  1.7,    1,     0,    0,    0,    0 },
-    [xi.magic.spell.FIRE_III    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  295,  1.5,  290,  3.1,  2.7, 1.85,     1,    0,    0,    0 },
-    [xi.magic.spell.FIRE_IV     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  472,    2,  520,  4.2,  3.7, 2.85,  1.97,    1,    0,    0 },
-    [xi.magic.spell.FIRE_V      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  785,  2.3,  800,  4.8, 4.24, 3.85,  2.97, 1.97,    1,    0 },
-    [xi.magic.spell.FIRE_VI     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE, 1130,  2.5, 1130,  5.5,  5.7,  4.7,   3.7, 2.85, 1.97,    1 },
-    [xi.magic.spell.FLARE       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  552,    2,  700,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.FLARE_II    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  710,    2,  800,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.STONE       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,   10,    1,   10,    2,    1,    0,     0,    0,    0,    0 },
-    [xi.magic.spell.STONE_II    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,   78,    1,  100,    3,    2,    1,     0,    0,    0,    0 },
-    [xi.magic.spell.STONE_III   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  210,  1.5,  200,    4,    3,    2,     1,    0,    0,    0 },
-    [xi.magic.spell.STONE_IV    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  381,    2,  400,    5,    4,    3,     2,    1,    0,    0 },
-    [xi.magic.spell.STONE_V     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  626,  2.3,  650,    6,    5,    4,     3,    2,    1,    0 },
-    [xi.magic.spell.STONE_VI    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  950,  2.5,  950,    7,    6,    5,     4,    3,    2,    1 },
-    [xi.magic.spell.QUAKE       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  552,    2,  700,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.QUAKE_II    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  710,    2,  800,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.THUNDER     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,   60,    1,   85,    1,    1,    0,     0,    0,    0,    0 },
-    [xi.magic.spell.THUNDER_II  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  178,    1,  200,    2,  1.5,    1,     0,    0,    0,    0 },
-    [xi.magic.spell.THUNDER_III ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  345,  1.5,  350,  2.5,  2.5, 1.75,     1,    0,    0,    0 },
-    [xi.magic.spell.THUNDER_IV  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  541,    2,  600,  3.6,  3.5, 2.75,  1.95,    1,    0,    0 },
-    [xi.magic.spell.THUNDER_V   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  874,  2.3,  900,    4, 3.74, 3.75,  2.95, 1.95,    1,    0 },
-    [xi.magic.spell.THUNDER_VI  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING, 1250,  2.5, 1250,  4.5,  5.5,  4.5,   3.5, 2.75, 1.95,    1 },
-    [xi.magic.spell.BURST       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  552,    2,  700,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.BURST_II    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  710,    2,  800,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.WATER       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,   16,    1,   25,  1.8,    1,    0,     0,    0,    0,    0 },
-    [xi.magic.spell.WATER_II    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,   95,    1,  120,  2.8,  1.9,    1,     0,    0,    0,    0 },
-    [xi.magic.spell.WATER_III   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  236,  1.5,  230,  3.7,  2.9, 1.95,     1,    0,    0,    0 },
-    [xi.magic.spell.WATER_IV    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  410,    2,  440,  4.7,  3.9, 2.95,  1.99,    1,    0,    0 },
-    [xi.magic.spell.WATER_V     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  680,  2.3,  700,  5.6, 4.74, 3.95,  2.99, 1.99,    1,    0 },
-    [xi.magic.spell.WATER_VI    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER, 1010,  1.5, 1010,  6.5,  5.9,  4.9,   3.9, 2.95, 1.99,    1 },
-    [xi.magic.spell.FLOOD       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  552,    2,  700,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.FLOOD_II    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  710,    2,  800,    2,    2,    2,     2,    2,    2,    2 },
-    [xi.magic.spell.COMET       ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.DARK,  964,  2.3, 1000,    4, 3.75,  3.5,     3,    2,    1,    1 },
+-- Structure:           [spellId] = {  Stat used, vNPC, mNPC,  vPC,   I,   M0,  M50,  M100, M200, M300, M400, M500 },
+    [xi.magic.spell.AERO        ] = { xi.mod.INT,   25,    1,   40,  35,  1.6,    1,     0,    0,    0,    0,    0 },
+    [xi.magic.spell.AERO_II     ] = { xi.mod.INT,  113,    1,  140, 133,  2.6,  1.8,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.AERO_III    ] = { xi.mod.INT,  265,  1.5,  260, 295,  3.4,  2.8,   1.9,    1,    0,    0,    0 },
+    [xi.magic.spell.AERO_IV     ] = { xi.mod.INT,  440,    2,  480, 472,  4.4,  3.8,   2.9, 1.98,    1,    0,    0 },
+    [xi.magic.spell.AERO_V      ] = { xi.mod.INT,  738,  2.3,  750, 550,  5.2,  4.5,   3.9, 2.98, 1.98,    1,    0 }, -- I value unknown. Guesstimate used.
+    [xi.magic.spell.AERO_VI     ] = { xi.mod.INT, 1070,  2,5, 1070, 600,    6,  5.8,   4.8,  3.8,  2.9, 1.98,    1 }, -- I value unknown. Guesstimate used.
+    [xi.magic.spell.TORNADO     ] = { xi.mod.INT,  552,    2,  700, 577,    2,    2,     2,    2,    2,    2,    2 },
+    [xi.magic.spell.TORNADO_II  ] = { xi.mod.INT,  710,    2,  800, 780,    2,    2,     2,    2,    2,    2,    2 },
+    [xi.magic.spell.BLIZZARD    ] = { xi.mod.INT,   46,    1,   70,  60,  1.2,    1,    0,     0,    0,    0,    0 },
+    [xi.magic.spell.BLIZZARD_II ] = { xi.mod.INT,  155,    1,  180, 178,  2.2,  1.6,    1,     0,    0,    0,    0 },
+    [xi.magic.spell.BLIZZARD_III] = { xi.mod.INT,  320,  1.5,  320, 345,  2.8,  2.6,  1.8,     1,    0,    0,    0 },
+    [xi.magic.spell.BLIZZARD_IV ] = { xi.mod.INT,  506,    2,  560, 541,  3.9,  3.6,  2.8,  1.96,    1,    0,    0 },
+    [xi.magic.spell.BLIZZARD_V  ] = { xi.mod.INT,  829,  2.3,  850, 600,  4.4,    4,  3.8,  2.96, 1.96,    1,    0 }, -- I value unknown. Guesstimate used.
+    [xi.magic.spell.BLIZZARD_VI ] = { xi.mod.INT, 1190,  2.5, 1190, 650,    5,  5.6,  4.6,   3.6,  2.8, 1.96,    1 }, -- I value unknown. Guesstimate used.
+    [xi.magic.spell.FREEZE      ] = { xi.mod.INT,  552,    2,  700, 552,    2,    2,     2,    2,    2,    2,    2 },
+    [xi.magic.spell.FREEZE_II   ] = { xi.mod.INT,  710,    2,  800, 780,    2,    2,     2,    2,    2,    2,    2 },
+    [xi.magic.spell.FIRE        ] = { xi.mod.INT,   35,    1,   55,  46,  1.4,    1,    0,     0,    0,    0,    0 },
+    [xi.magic.spell.FIRE_II     ] = { xi.mod.INT,  133,    1,  160, 155,  2.4,  1.7,    1,     0,    0,    0,    0 },
+    [xi.magic.spell.FIRE_III    ] = { xi.mod.INT,  295,  1.5,  290, 320,  3.1,  2.7, 1.85,     1,    0,    0,    0 },
+    [xi.magic.spell.FIRE_IV     ] = { xi.mod.INT,  472,    2,  520, 506,  4.2,  3.7, 2.85,  1.97,    1,    0,    0 },
+    [xi.magic.spell.FIRE_V      ] = { xi.mod.INT,  785,  2.3,  800, 550,  4.8, 4.24, 3.85,  2.97, 1.97,    1,    0 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.FIRE_VI     ] = { xi.mod.INT, 1130,  2.5, 1130, 600,  5.5,  5.7,  4.7,   3.7, 2.85, 1.97,    1 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.FLARE       ] = { xi.mod.INT,  552,    2,  700, 684,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.FLARE_II    ] = { xi.mod.INT,  710,    2,  800, 780,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.STONE       ] = { xi.mod.INT,   10,    1,   10,  16,    2,    1,    0,     0,    0,    0,    0 },
+    [xi.magic.spell.STONE_II    ] = { xi.mod.INT,   78,    1,  100,  95,    3,    2,    1,     0,    0,    0,    0 },
+    [xi.magic.spell.STONE_III   ] = { xi.mod.INT,  210,  1.5,  200, 236,    4,    3,    2,     1,    0,    0,    0 },
+    [xi.magic.spell.STONE_IV    ] = { xi.mod.INT,  381,    2,  400, 410,    5,    4,    3,     2,    1,    0,    0 },
+    [xi.magic.spell.STONE_V     ] = { xi.mod.INT,  626,  2.3,  650, 500,    6,    5,    4,     3,    2,    1,    0 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.STONE_VI    ] = { xi.mod.INT,  950,  2.5,  950, 550,    7,    6,    5,     4,    3,    2,    1 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.QUAKE       ] = { xi.mod.INT,  552,    2,  700, 603,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.QUAKE_II    ] = { xi.mod.INT,  710,    2,  800, 780,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.THUNDER     ] = { xi.mod.INT,   60,    1,   85,  78,    1,    1,    0,     0,    0,    0,    0 },
+    [xi.magic.spell.THUNDER_II  ] = { xi.mod.INT,  178,    1,  200, 210,    2,  1.5,    1,     0,    0,    0,    0 },
+    [xi.magic.spell.THUNDER_III ] = { xi.mod.INT,  345,  1.5,  350, 381,  2.5,  2.5, 1.75,     1,    0,    0,    0 },
+    [xi.magic.spell.THUNDER_IV  ] = { xi.mod.INT,  541,    2,  600, 626,  3.6,  3.5, 2.75,  1.95,    1,    0,    0 },
+    [xi.magic.spell.THUNDER_V   ] = { xi.mod.INT,  874,  2.3,  900, 700,    4, 3.74, 3.75,  2.95, 1.95,    1,    0 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.THUNDER_VI  ] = { xi.mod.INT, 1250,  2.5, 1250, 750,  4.5,  5.5,  4.5,   3.5, 2.75, 1.95,    1 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.BURST       ] = { xi.mod.INT,  552,    2,  700, 630,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.BURST_II    ] = { xi.mod.INT,  710,    2,  800, 780,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.WATER       ] = { xi.mod.INT,   16,    1,   25,  25,  1.8,    1,    0,     0,    0,    0,    0 },
+    [xi.magic.spell.WATER_II    ] = { xi.mod.INT,   95,    1,  120, 113,  2.8,  1.9,    1,     0,    0,    0,    0 },
+    [xi.magic.spell.WATER_III   ] = { xi.mod.INT,  236,  1.5,  230, 265,  3.7,  2.9, 1.95,     1,    0,    0,    0 },
+    [xi.magic.spell.WATER_IV    ] = { xi.mod.INT,  410,    2,  440, 440,  4.7,  3.9, 2.95,  1.99,    1,    0,    0 },
+    [xi.magic.spell.WATER_V     ] = { xi.mod.INT,  680,  2.3,  700, 500,  5.6, 4.74, 3.95,  2.99, 1.99,    1,    0 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.WATER_VI    ] = { xi.mod.INT, 1010,  1.5, 1010, 550,  6.5,  5.9,  4.9,   3.9, 2.95, 1.99,    1 }, -- I value Unknown. Guesstimate used.
+    [xi.magic.spell.FLOOD       ] = { xi.mod.INT,  552,    2,  700, 657,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.FLOOD_II    ] = { xi.mod.INT,  710,    2,  800, 780,    2,    2,    2,     2,    2,    2,    2 },
+    [xi.magic.spell.COMET       ] = { xi.mod.INT,  964,  2.3, 1000, 850,    4, 3.75,  3.5,     3,    2,    1,    1 }, -- I value unknown. Guesstimate used.
 
 -- Multiple target spells:
--- Structure:           [spellId] = {  Stat used,                    Skill,                    Element, vNPC, mNPC,  vPC,   M0,  M50,  M100, M200, M300, M400, M500 },
-    [xi.magic.spell.AEROGA      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,   93,    1,  100,  2.6,  1.8,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.AEROGA_II   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  266,    1,  310,  3.4,  2.8,   1.9,    1,    0,    0,    0 },
-    [xi.magic.spell.AEROGA_III  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  527,  1.5,  580,  4.4,  3.8,   2.9, 1.98,    1,    0,    0 },
-    [xi.magic.spell.AEROGA_IV   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  738,    2,    0,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Aero V.
-    [xi.magic.spell.AEROGA_V    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND, 1070,  2.3,    0,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Aero VI.
-    [xi.magic.spell.AERA        ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  210,    1,  210,  2.6,  1.8,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.AERA_II     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  430,    1,  430,  3.4,  2.8,   1.9,    1,    0,    0,    0 },
-    [xi.magic.spell.AERA_III    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  710,  1.5,  710,  4.4,  3.8,   2.9, 1.98,    1,    0,    0 }, -- No info found. Since Aera I and II N Values coincided with Aeroga 1 and II, used Values of Aeroga III.
-    [xi.magic.spell.AEROJA      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.WIND,  844,  2.3,  850,  5.2,  4.5,   3.9,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
-    [xi.magic.spell.BLIZZAGA    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  145,    1,  160,  2.2,  1.6,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.BLIZZAGA_II ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  350,    1,  370,  2.8,  2.6,   1.8,    1,    0,    0,    0 },
-    [xi.magic.spell.BLIZZAGA_III] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  642,  1.5,  660,  3.9,  3.6,   2.8, 1.96,    1,    0,    0 },
-    [xi.magic.spell.BLIZZAGA_IV ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  829,    2,    0,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Blizzard V.
-    [xi.magic.spell.BLIZZAGA_V  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE, 1190,  2.3,    0,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Blizzard VI.
-    [xi.magic.spell.BLIZZARA    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  270,    1,  270,  2.2,  1.6,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.BLIZZARA_II ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  510,    1,  510,  2.8,  2.6,   1.8,    1,    0,    0,    0 },
-    [xi.magic.spell.BLIZZARA_III] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  830,  1.5,  830,  3.9,  3.6,   2.8, 1.96,    1,    0,    0 }, -- No info found. Since Blizzara I and II N Values coincided with Blizzaga 1 and II, used Values of Blizzaga III.
-    [xi.magic.spell.BLIZZAJA    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,       xi.magic.element.ICE,  953,  2.3,  950,  4.4,    4,   3.8,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
-    [xi.magic.spell.FIRAGA      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  120,    1,  120,  2.4,  1.7,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.FIRAGA_II   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  312,    1,  340,  3.1,  2.7,  1.85,    1,    0,    0,    0 },
-    [xi.magic.spell.FIRAGA_III  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  589,  1.5,  620,  4.2,  3.7,  2.85, 1.97,    1,    0,    0 },
-    [xi.magic.spell.FIRAGA_IV   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  785,    2,    0,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Fire V.
-    [xi.magic.spell.FIRAGA_V    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE, 1130,  2.3,    0,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Fire VI.
-    [xi.magic.spell.FIRA        ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  240,    1,  240,  2.4,  1.7,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.FIRA_II     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  470,    1,  470,  3.1,  2.7,  1.85,    1,    0,    0,    0 },
-    [xi.magic.spell.FIRA_III    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  760,  1.5,  760,  4.2,  3.7,  2.85, 1.97,    1,    0,    0 }, -- No info found. Since Fira I and II N Values coincided with Firaga 1 and II, used Values of Firaga III.
-    [xi.magic.spell.FIRAJA      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,      xi.magic.element.FIRE,  902,  2.3,  900,  4.8, 4.25,  3.85,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
-    [xi.magic.spell.STONEGA     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,   56,    1,   60,    3,    2,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.STONEGA_II  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  201,    1,  250,    4,    3,     2,    1,    0,    0,    0 },
-    [xi.magic.spell.STONEGA_III ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  434,  1.5,  500,    5,    4,     3,    2,    1,    0,    0 },
-    [xi.magic.spell.STONEGA_IV  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  626,    2,    0,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Stone V.
-    [xi.magic.spell.STONEGA_V   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  950,  2.3,    0,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Stone VI.
-    [xi.magic.spell.STONERA     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  150,    1,  150,    3,    2,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.STONERA_II  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  350,    1,  350,    4,    3,     2,    1,    0,    0,    0 },
-    [xi.magic.spell.STONERA_III ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  650,  1.5,  650,    5,    4,     3,    2,    1,    0,    0 }, -- No info found. Since Stonera I and II N Values coincided with Stonega 1 and II, used Values of Stonega III.
-    [xi.magic.spell.STONEJA     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.EARTH,  719,  2.3,  750,    6,    5,     4,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
-    [xi.magic.spell.THUNDAGA    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  172,    1,  200,    2,  1.5,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.THUNDAGA_II ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  392,    1,  400,  2.5,  2.5,  1.75,    1,    0,    0,    0 },
-    [xi.magic.spell.THUNDAGA_III] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  697,  1.5,  700,  3.6,  3.5,  2.75, 1.95,    1,    0,    0 },
-    [xi.magic.spell.THUNDAGA_IV ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  874,    2,    0,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Thunder V.
-    [xi.magic.spell.THUNDAGA_V  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING, 1250,  2.3,    0,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Thunder VI.
-    [xi.magic.spell.THUNDARA    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  300,    1,  300,    2,  1.5,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.THUNDARA_II ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  550,    1,  550,  2.5,  2.5,  1.75,    1,    0,    0,    0 },
-    [xi.magic.spell.THUNDARA_III] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING,  900,  1.5,  900,  3.6,  3.5,  2.75, 1.95,    1,    0,    0 }, -- No info found. Since Thundara I and II N Values coincided with Thundaga 1 and II, used Values of Thundaga III.
-    [xi.magic.spell.THUNDAJA    ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC, xi.magic.element.LIGHTNING, 1005,  2.3, 1000,    4, 3.75,  3.75,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
-    [xi.magic.spell.WATERGA     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,   74,    1,   80,  2.8,  1.9,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.WATERGA_II  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  232,    1,  280,  3.7,  2.9,  1.95,    1,    0,    0,    0 },
-    [xi.magic.spell.WATERGA_III ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  480,  1.5,  540,  4.7,  3.9,  2.95, 1.99,    1,    0,    0 },
-    [xi.magic.spell.WATERGA_IV  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  680,    2,    0,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Water V.
-    [xi.magic.spell.WATERGA_V   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER, 1010,  2.3,    0,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Water VI.
-    [xi.magic.spell.WATERA      ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  180,    1,  180,  2.8,  1.9,     1,    0,    0,    0,    0 },
-    [xi.magic.spell.WATERA_II   ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  390,    1,  390,  3.7,  2.9,  1.95,    1,    0,    0,    0 },
-    [xi.magic.spell.WATERA_III  ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  660,  1.5,  660,  4.7,  3.9,  2.95, 1.99,    1,    0,    0 }, -- No info found. Since Watera I and II N Values coincided with Waterga 1 and II, used Values of Waterga III.
-    [xi.magic.spell.WATERJA     ] = { xi.mod.INT, xi.skill.ELEMENTAL_MAGIC,     xi.magic.element.WATER,  782,  2.3,  800,  5.6, 4.75,  3.95,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
+-- Structure:           [spellId] = {  Stat used, vNPC, mNPC,  vPC,   I,   M0,  M50,  M100, M200, M300, M400, M500 },
+    [xi.magic.spell.AEROGA      ] = { xi.mod.INT,   93,    1,  100, 120,  2.6,  1.8,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.AEROGA_II   ] = { xi.mod.INT,  266,    1,  310, 312,  3.4,  2.8,   1.9,    1,    0,    0,    0 },
+    [xi.magic.spell.AEROGA_III  ] = { xi.mod.INT,  527,  1.5,  580, 642,  4.4,  3.8,   2.9, 1.98,    1,    0,    0 },
+    [xi.magic.spell.AEROGA_IV   ] = { xi.mod.INT,  738,    2,    0, 700,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Aero V.
+    [xi.magic.spell.AEROGA_V    ] = { xi.mod.INT, 1070,  2.3,    0, 750,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Aero VI.
+    [xi.magic.spell.AERA        ] = { xi.mod.INT,  210,    1,  210, 250,  2.6,  1.8,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.AERA_II     ] = { xi.mod.INT,  430,    1,  430, 600,  3.4,  2.8,   1.9,    1,    0,    0,    0 },
+    [xi.magic.spell.AERA_III    ] = { xi.mod.INT,  710,  1.5,  710, 700,  4.4,  3.8,   2.9, 1.98,    1,    0,    0 }, -- No info found. Since Aera I and II N Values coincided with Aeroga 1 and II, used Values of Aeroga III.
+    [xi.magic.spell.AEROJA      ] = { xi.mod.INT,  844,  2.3,  850, 800,  5.2,  4.5,   3.9,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
+    [xi.magic.spell.BLIZZAGA    ] = { xi.mod.INT,  145,    1,  160, 172,  2.2,  1.6,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.BLIZZAGA_II ] = { xi.mod.INT,  350,    1,  370, 392,  2.8,  2.6,   1.8,    1,    0,    0,    0 },
+    [xi.magic.spell.BLIZZAGA_III] = { xi.mod.INT,  642,  1.5,  660, 697,  3.9,  3.6,   2.8, 1.96,    1,    0,    0 },
+    [xi.magic.spell.BLIZZAGA_IV ] = { xi.mod.INT,  829,    2,    0, 800,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Blizzard V.
+    [xi.magic.spell.BLIZZAGA_V  ] = { xi.mod.INT, 1190,  2.3,    0, 950,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Blizzard VI.
+    [xi.magic.spell.BLIZZARA    ] = { xi.mod.INT,  270,    1,  270, 300,  2.2,  1.6,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.BLIZZARA_II ] = { xi.mod.INT,  510,    1,  510, 550,  2.8,  2.6,   1.8,    1,    0,    0,    0 },
+    [xi.magic.spell.BLIZZARA_III] = { xi.mod.INT,  830,  1.5,  830, 850,  3.9,  3.6,   2.8, 1.96,    1,    0,    0 }, -- No info found. Since Blizzara I and II N Values coincided with Blizzaga 1 and II, used Values of Blizzaga III.
+    [xi.magic.spell.BLIZZAJA    ] = { xi.mod.INT,  953,  2.3,  950, 950,  4.4,    4,   3.8,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
+    [xi.magic.spell.FIRAGA      ] = { xi.mod.INT,  120,    1,  120, 145,  2.4,  1.7,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.FIRAGA_II   ] = { xi.mod.INT,  312,    1,  340, 350,  3.1,  2.7,  1.85,    1,    0,    0,    0 },
+    [xi.magic.spell.FIRAGA_III  ] = { xi.mod.INT,  589,  1.5,  620, 642,  4.2,  3.7,  2.85, 1.97,    1,    0,    0 },
+    [xi.magic.spell.FIRAGA_IV   ] = { xi.mod.INT,  785,    2,    0, 700,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Fire V.
+    [xi.magic.spell.FIRAGA_V    ] = { xi.mod.INT, 1130,  2.3,    0, 800,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Fire VI.
+    [xi.magic.spell.FIRA        ] = { xi.mod.INT,  240,    1,  240, 250,  2.4,  1.7,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.FIRA_II     ] = { xi.mod.INT,  470,    1,  470, 500,  3.1,  2.7,  1.85,    1,    0,    0,    0 },
+    [xi.magic.spell.FIRA_III    ] = { xi.mod.INT,  760,  1.5,  760, 800,  4.2,  3.7,  2.85, 1.97,    1,    0,    0 }, -- No info found. Since Fira I and II N Values coincided with Firaga 1 and II, used Values of Firaga III.
+    [xi.magic.spell.FIRAJA      ] = { xi.mod.INT,  902,  2.3,  900, 950,  4.8, 4.25,  3.85,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
+    [xi.magic.spell.STONEGA     ] = { xi.mod.INT,   56,    1,   60,  74,    3,    2,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.STONEGA_II  ] = { xi.mod.INT,  201,    1,  250, 232,    4,    3,     2,    1,    0,    0,    0 },
+    [xi.magic.spell.STONEGA_III ] = { xi.mod.INT,  434,  1.5,  500, 480,    5,    4,     3,    2,    1,    0,    0 },
+    [xi.magic.spell.STONEGA_IV  ] = { xi.mod.INT,  626,    2,    0, 650,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Stone V.
+    [xi.magic.spell.STONEGA_V   ] = { xi.mod.INT,  950,  2.3,    0, 950,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Stone VI.
+    [xi.magic.spell.STONERA     ] = { xi.mod.INT,  150,    1,  150, 150,    3,    2,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.STONERA_II  ] = { xi.mod.INT,  350,    1,  350, 350,    4,    3,     2,    1,    0,    0,    0 },
+    [xi.magic.spell.STONERA_III ] = { xi.mod.INT,  650,  1.5,  650, 650,    5,    4,     3,    2,    1,    0,    0 }, -- No info found. Since Stonera I and II N Values coincided with Stonega 1 and II, used Values of Stonega III.
+    [xi.magic.spell.STONEJA     ] = { xi.mod.INT,  719,  2.3,  750, 750,    6,    5,     4,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
+    [xi.magic.spell.THUNDAGA    ] = { xi.mod.INT,  172,    1,  200, 201,    2,  1.5,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.THUNDAGA_II ] = { xi.mod.INT,  392,    1,  400, 434,  2.5,  2.5,  1.75,    1,    0,    0,    0 },
+    [xi.magic.spell.THUNDAGA_III] = { xi.mod.INT,  697,  1.5,  700, 719,  3.6,  3.5,  2.75, 1.95,    1,    0,    0 },
+    [xi.magic.spell.THUNDAGA_IV ] = { xi.mod.INT,  874,    2,    0, 900,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Thunder V.
+    [xi.magic.spell.THUNDAGA_V  ] = { xi.mod.INT, 1250,  2.3,    0, 999,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Thunder VI.
+    [xi.magic.spell.THUNDARA    ] = { xi.mod.INT,  300,    1,  300, 300,    2,  1.5,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.THUNDARA_II ] = { xi.mod.INT,  550,    1,  550, 550,  2.5,  2.5,  1.75,    1,    0,    0,    0 },
+    [xi.magic.spell.THUNDARA_III] = { xi.mod.INT,  900,  1.5,  900, 900,  3.6,  3.5,  2.75, 1.95,    1,    0,    0 }, -- No info found. Since Thundara I and II N Values coincided with Thundaga 1 and II, used Values of Thundaga III.
+    [xi.magic.spell.THUNDAJA    ] = { xi.mod.INT, 1005,  2.3, 1000, 999,    4, 3.75,  3.75,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
+    [xi.magic.spell.WATERGA     ] = { xi.mod.INT,   74,    1,   80,  96,  2.8,  1.9,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.WATERGA_II  ] = { xi.mod.INT,  232,    1,  280, 266,  3.7,  2.9,  1.95,    1,    0,    0,    0 },
+    [xi.magic.spell.WATERGA_III ] = { xi.mod.INT,  480,  1.5,  540, 527,  4.7,  3.9,  2.95, 1.99,    1,    0,    0 },
+    [xi.magic.spell.WATERGA_IV  ] = { xi.mod.INT,  680,    2,    0, 700,    1,    1,     1,    1,    1,    1,    0 }, -- Enemy only. No data found. Values taken from Water V.
+    [xi.magic.spell.WATERGA_V   ] = { xi.mod.INT, 1010,  2.3,    0, 900,    1,    1,     1,    1,    1,    1,    1 }, -- Enemy only. No data found. Values taken from Water VI.
+    [xi.magic.spell.WATERA      ] = { xi.mod.INT,  180,    1,  180, 200,  2.8,  1.9,     1,    0,    0,    0,    0 },
+    [xi.magic.spell.WATERA_II   ] = { xi.mod.INT,  390,    1,  390, 400,  3.7,  2.9,  1.95,    1,    0,    0,    0 },
+    [xi.magic.spell.WATERA_III  ] = { xi.mod.INT,  660,  1.5,  660, 700,  4.7,  3.9,  2.95, 1.99,    1,    0,    0 }, -- No info found. Since Watera I and II N Values coincided with Waterga 1 and II, used Values of Waterga III.
+    [xi.magic.spell.WATERJA     ] = { xi.mod.INT,  782,  2.3,  800, 900,  5.6, 4.75,  3.95,    3,    2,    1,    0 }, -- Some values not found. Used guesstimates for M200 and M300.
 
 -- Ninjutsu spells:
--- Structure:          [spellId] = {  Stat used,             Skill,                    Element, vNPC,  M, vPC },
-    [xi.magic.spell.DOTON_ICHI ] = { xi.mod.INT, xi.skill.NINJUTSU,     xi.magic.element.EARTH,  28, 0.5,  28 },
-    [xi.magic.spell.DOTON_NI   ] = { xi.mod.INT, xi.skill.NINJUTSU,     xi.magic.element.EARTH,  68,   1,  68 },
-    [xi.magic.spell.DOTON_SAN  ] = { xi.mod.INT, xi.skill.NINJUTSU,     xi.magic.element.EARTH, 134, 1.5, 134 },
-    [xi.magic.spell.HUTON_ICHI ] = { xi.mod.INT, xi.skill.NINJUTSU,      xi.magic.element.WIND,  28, 0.5,  28 },
-    [xi.magic.spell.HUTON_NI   ] = { xi.mod.INT, xi.skill.NINJUTSU,      xi.magic.element.WIND,  68,   1,  68 },
-    [xi.magic.spell.HUTON_SAN  ] = { xi.mod.INT, xi.skill.NINJUTSU,      xi.magic.element.WIND, 134, 1.5, 134 },
-    [xi.magic.spell.HYOTON_ICHI] = { xi.mod.INT, xi.skill.NINJUTSU,       xi.magic.element.ICE,  28, 0.5,  28 },
-    [xi.magic.spell.HYOTON_NI  ] = { xi.mod.INT, xi.skill.NINJUTSU,       xi.magic.element.ICE,  68,   1,  68 },
-    [xi.magic.spell.HYOTON_SAN ] = { xi.mod.INT, xi.skill.NINJUTSU,       xi.magic.element.ICE, 134, 1.5, 134 },
-    [xi.magic.spell.KATON_ICHI ] = { xi.mod.INT, xi.skill.NINJUTSU,      xi.magic.element.FIRE,  28, 0.5,  28 },
-    [xi.magic.spell.KATON_NI   ] = { xi.mod.INT, xi.skill.NINJUTSU,      xi.magic.element.FIRE,  68,   1,  68 },
-    [xi.magic.spell.KATON_SAN  ] = { xi.mod.INT, xi.skill.NINJUTSU,      xi.magic.element.FIRE, 134, 1.5, 134 },
-    [xi.magic.spell.RAITON_ICHI] = { xi.mod.INT, xi.skill.NINJUTSU, xi.magic.element.LIGHTNING,  28, 0.5,  28 },
-    [xi.magic.spell.RAITON_NI  ] = { xi.mod.INT, xi.skill.NINJUTSU, xi.magic.element.LIGHTNING,  68,   1,  68 },
-    [xi.magic.spell.RAITON_SAN ] = { xi.mod.INT, xi.skill.NINJUTSU, xi.magic.element.LIGHTNING, 134, 1.5, 134 },
-    [xi.magic.spell.SUITON_ICHI] = { xi.mod.INT, xi.skill.NINJUTSU,     xi.magic.element.WATER,  28, 0.5,  28 },
-    [xi.magic.spell.SUITON_NI  ] = { xi.mod.INT, xi.skill.NINJUTSU,     xi.magic.element.WATER,  68,   1,  68 },
-    [xi.magic.spell.SUITON_SAN ] = { xi.mod.INT, xi.skill.NINJUTSU,     xi.magic.element.WATER, 134, 1.5, 134 },
+-- Structure:           [spellId] = {  Stat used, vNPC,    M,  vPC,   I }, -- Inflexion point unknown and not used ATM. Set to 100, 250 and 400, for now.
+    [xi.magic.spell.DOTON_ICHI  ] = { xi.mod.INT,   28,  0.5,   28, 100 },
+    [xi.magic.spell.DOTON_NI    ] = { xi.mod.INT,   68,    1,   68, 250 },
+    [xi.magic.spell.DOTON_SAN   ] = { xi.mod.INT,  134,  1.5,  134, 400 },
+    [xi.magic.spell.HUTON_ICHI  ] = { xi.mod.INT,   28,  0.5,   28, 100 },
+    [xi.magic.spell.HUTON_NI    ] = { xi.mod.INT,   68,    1,   68, 250 },
+    [xi.magic.spell.HUTON_SAN   ] = { xi.mod.INT,  134,  1.5,  134, 400 },
+    [xi.magic.spell.HYOTON_ICHI ] = { xi.mod.INT,   28,  0.5,   28, 100 },
+    [xi.magic.spell.HYOTON_NI   ] = { xi.mod.INT,   68,    1,   68, 250 },
+    [xi.magic.spell.HYOTON_SAN  ] = { xi.mod.INT,  134,  1.5,  134, 400 },
+    [xi.magic.spell.KATON_ICHI  ] = { xi.mod.INT,   28,  0.5,   28, 100 },
+    [xi.magic.spell.KATON_NI    ] = { xi.mod.INT,   68,    1,   68, 250 },
+    [xi.magic.spell.KATON_SAN   ] = { xi.mod.INT,  134,  1.5,  134, 400 },
+    [xi.magic.spell.RAITON_ICHI ] = { xi.mod.INT,   28,  0.5,   28, 100 },
+    [xi.magic.spell.RAITON_NI   ] = { xi.mod.INT,   68,    1,   68, 250 },
+    [xi.magic.spell.RAITON_SAN  ] = { xi.mod.INT,  134,  1.5,  134, 400 },
+    [xi.magic.spell.SUITON_ICHI ] = { xi.mod.INT,   28,  0.5,   28, 100 },
+    [xi.magic.spell.SUITON_NI   ] = { xi.mod.INT,   68,    1,   68, 250 },
+    [xi.magic.spell.SUITON_SAN  ] = { xi.mod.INT,  134,  1.5,  134, 400 },
+
+-- Divine spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/1963.html
+-- Structure:           [spellId] = {  Stat used, vNPC,    M,  vPC,   I },
+    [xi.magic.spell.BANISH      ] = { xi.mod.MND,  14,     1,   14,  25 },
 }
 
 -----------------------------------
@@ -192,54 +196,73 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     local baseSpellDamageBonus = 0 -- (mDMG) In Wiki. Get from equipment, status, etc...
     local statDiffBonus        = 0 -- statDiff x apropiate multipliers.
 
-    -- Get base damage (V in English wiki, D in JP wiki) depending on caster.
+    -- Spell Damage = baseSpellDamage + statDiffBonus + baseSpellDamageBonus
+
+    -----------------------------------
+    -- STEP 1: baseSpellDamage (V)
+    -----------------------------------
     if caster:isPC() then
-        baseSpellDamage = damageSpellParams[spellId][6]
+        baseSpellDamage = damageSpellParams[spellId][4] -- vPC
     else
-        baseSpellDamage = damageSpellParams[spellId][4]
+        baseSpellDamage = damageSpellParams[spellId][2] -- vNPC
     end
 
-    -- Get bonus from stat difference. (statDiffBonus)
-    -- Player black spell.
-    if caster:isPC() and skillType == xi.skill.ELEMENTAL_MAGIC then
-        local spellMultiplier0   = damageSpellParams[spellId][7] -- (M) In wiki.
-        local spellMultiplier50  = damageSpellParams[spellId][8] -- (M) In wiki.
-        local spellMultiplier100 = damageSpellParams[spellId][9] -- (M) In wiki.
-        local spellMultiplier200 = damageSpellParams[spellId][10] -- (M) In wiki.
-        local spellMultiplier300 = damageSpellParams[spellId][11] -- (M) In wiki.
-        local spellMultiplier400 = damageSpellParams[spellId][12] -- (M) In wiki.
-        local spellMultiplier500 = damageSpellParams[spellId][13] -- (M) In wiki.
+    -----------------------------------
+    -- STEP 2: statDiffBonus (statDiff * M)
+    -----------------------------------
+    -- Black spell.
+    if skillType == xi.skill.ELEMENTAL_MAGIC then
+        if caster:isPC() then
+            local spellMultiplier0   = damageSpellParams[spellId][5] -- (M) In wiki.
+            local spellMultiplier50  = damageSpellParams[spellId][6] -- (M) In wiki.
+            local spellMultiplier100 = damageSpellParams[spellId][7] -- (M) In wiki.
+            local spellMultiplier200 = damageSpellParams[spellId][8] -- (M) In wiki.
+            local spellMultiplier300 = damageSpellParams[spellId][9] -- (M) In wiki.
+            local spellMultiplier400 = damageSpellParams[spellId][10] -- (M) In wiki.
+            local spellMultiplier500 = damageSpellParams[spellId][11] -- (M) In wiki.
 
-        -- Ugly, but better than 7 more values in spells table.
-        if statDiff < 50 then
-            statDiffBonus = math.floor(statDiff * spellMultiplier0)
-        elseif statDiff < 100 and statDiff >= 50 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor((statDiff - 50) * spellMultiplier50)
-        elseif statDiff < 200 and statDiff >= 100 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor((statDiff - 100) * spellMultiplier100)
-        elseif statDiff < 300 and statDiff >= 200 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor((statDiff - 200) * spellMultiplier200)
-        elseif statDiff < 400 and statDiff >= 300 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
-            statDiffBonus = statDiffBonus + math.floor((statDiff - 300) * spellMultiplier300)
-        elseif statDiff < 500 and statDiff >= 400 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
-            statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
-        else -- It's over 500!
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100)  + math.floor(200 * spellMultiplier200)
-            statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor(400 * spellMultiplier400) +  math.floor((statDiff - 500) * spellMultiplier500)
+            -- Ugly, but better than 7 more values in spells table.
+            if statDiff < 50 then
+                statDiffBonus = math.floor(statDiff * spellMultiplier0)
+            elseif statDiff < 100 and statDiff >= 50 then
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor((statDiff - 50) * spellMultiplier50)
+            elseif statDiff < 200 and statDiff >= 100 then
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor((statDiff - 100) * spellMultiplier100)
+            elseif statDiff < 300 and statDiff >= 200 then
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor((statDiff - 200) * spellMultiplier200)
+            elseif statDiff < 400 and statDiff >= 300 then
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
+                statDiffBonus = statDiffBonus + math.floor((statDiff - 300) * spellMultiplier300)
+            elseif statDiff < 500 and statDiff >= 400 then
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
+                statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
+            else -- It's over 500!
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
+                statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor(400 * spellMultiplier400) + math.floor((statDiff - 500) * spellMultiplier500)
+            end
         end
-    -- Player Ninjutsu.
-    elseif caster:isPC() and skillType == xi.skill.NINJUTSU then
-        local ninSpellMultiplier = damageSpellParams[spellId][5] -- (M) In wiki. Nin's multiplier isn't variable according to wiki.
-        statDiffBonus = math.floor(statDiff * ninSpellMultiplier)
-    -- For non players.
-    else
-        local mobSpellMultiplier = damageSpellParams[spellId][5] -- (M) In wiki. Mob value in BG wiki.
-        statDiffBonus = statDiff * mobSpellMultiplier
+    -- Divine magic and Non-Player Elemental magic. TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
+    elseif skillType == xi.skill.DIVINE_MAGIC or
+        (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
+    then
+        local spellMultiplier = damageSpellParams[spellId][3] -- M
+        local inflexionPoint  = damageSpellParams[spellId][] -- I
+        if statDiff <= 0 then
+            statDiffBonus = statDiff
+        elseif statDiff > 0 and statDiff <= inflexionPoint then
+            statDiffBonus = math.floor(statDiff * spellMultiplier)
+        else
+            statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
+        end
+
+    -- Ninjutsu.
+    elseif skillType == xi.skill.NINJUTSU then
+        statDiffBonus = math.floor(statDiff * damageSpellParams[spellId][3])
     end
 
-    -- Calculate baseSpellDamageBonus. Player only.
+    -----------------------------------
+    -- STEP 3: baseSpellDamageBonus (mDMG)
+    -----------------------------------
     if caster:isPC() then
         -- BLM Job Point: Manafont Elemental Magic Damage +3
         if caster:hasStatusEffect(xi.effect.MANAFONT) then
@@ -262,9 +285,10 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
 
     -- TODO: Add baseSpellDamageBonus from equipment and other possible sources.
     -- TODO: Find out if that modifier exists and wich one is it.
-    -- Calculation should be made in this spot, before statDiff comes into play.
 
-    -- Regular Black magic follows different rules from Ninjitsu spells in this step.
+    -----------------------------------
+    -- STEP 4: Spell Damage
+    -----------------------------------
     spellDamage = baseSpellDamage + baseSpellDamageBonus + statDiffBonus
 
     -- No negative base damage value allowed.
@@ -416,11 +440,9 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
         -- WHM Job Points
         if casterJob == xi.job.WHM then
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-
         -- BLM Job Points
         elseif casterJob == xi.job.BLM then
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-
         -- RDM Job Points
         elseif casterJob == xi.job.RDM then
             -- RDM Job Point: During saboteur, Enfeebling MACC +2
@@ -429,14 +451,12 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
             end
             -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-
         -- NIN Job Points
         elseif casterJob == xi.job.NIN then
             -- NIN Job Point: Ninjitsu Accuracy Bonus
             if skillType == xi.skill.NINJUTSU then
                 magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
             end        
-
         -- SCH Job Points
         elseif casterJob == xi.job.SCH then
             if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
@@ -452,15 +472,12 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
         -- BLM Merits
         if casterJob == xi.job.BLM and skillType == xi.skill.ELEMENTAL_MAGIC then
             magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-
         -- RDM Merits
         elseif casterJob == xi.job.RDM and spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
             magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
-
         -- NIN Merits
         elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
             magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
-
         -- BLU Merits
         elseif casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
             magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
@@ -546,7 +563,7 @@ function calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement
     local ancientMagicBurstBonus          = 0
     local skillchainTier, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
-    if spellId > 203 and spellId < 216 then -- If spell is Ancient Magic
+    if spellId >= 204 and spellId <= 215 then -- If spell is Ancient Magic
         ancientMagicBurstBonus = caster:getMerit(xi.merit.ANCIENT_MAGIC_BURST_DMG) / 100
     end
 
@@ -667,17 +684,17 @@ function calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spel
         -- Ninja Category 2 merits.
         mab = mab + caster:getMerit(xi.merit.NIN_MAGIC_BONUS)
         -- Ninja Category 1 merits
-        if spellId > 319 and spellId < 323 then     -- Katon series.
+        if spellId >= 320 and spellId <= 322 then     -- Katon series.
             mab = mab + caster:getMerit(xi.merit.KATON_EFFECT)
-        elseif spellId > 322 and spellId < 326 then -- Hyoton series.
+        elseif spellId >= 323 and spellId <= 325 then -- Hyoton series.
             mab = mab + caster:getMerit(xi.merit.HYOTON_EFFECT)
-        elseif spellId > 325 and spellId < 329 then -- Huton series.
+        elseif spellId >= 326 and spellId <= 328 then -- Huton series.
             mab = mab + caster:getMerit(xi.merit.HUTON_EFFECT)
-        elseif spellId > 328 and spellId < 332 then -- Doton series.
+        elseif spellId >= 329 and spellId <= 331 then -- Doton series.
             mab = mab + caster:getMerit(xi.merit.DOTON_EFFECT)
-        elseif spellId > 331 and spellId < 335 then -- Raiton series.
+        elseif spellId >= 332 and spellId <= 334 then -- Raiton series.
             mab = mab + caster:getMerit(xi.merit.RAITON_EFFECT)
-        elseif spellId > 334 and spellId < 338 then -- Suiton series.
+        elseif spellId >= 335 and spellId <= 337 then -- Suiton series.
             mab = mab + caster:getMerit(xi.merit.SUITON_EFFECT)
         end
     end
@@ -790,6 +807,12 @@ function calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
     return nukeAbsorbOrNullify
 end
 
+function calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local undeadDivinePenalty = 1
+    if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC
+        undeadDivinePenalty = 1.5
+    end
+end
 -----------------------------------
 -- Spell Helper Function
 -----------------------------------
@@ -798,9 +821,9 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
 
     -- Get Tabled Variables.
     local spellId      = spell:getID()
+    local skillType    = spell:getSkillType()
+    local spellElement = spell:getElement()
     local statDiff     = caster:getStat(damageSpellParams[spellId][1]) - target:getStat(damageSpellParams[spellId][1])
-    local skillType    = damageSpellParams[spellId][2]
-    local spellElement = damageSpellParams[spellId][3]
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage          = calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff)
@@ -818,6 +841,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     local skillTypeMultiplier  = calculateSkillTypeMultiplier(caster, target, spell, skillType)
     local ninSkillBonus        = calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus        = calculateNinFutaeBonus(caster, target, spell, skillType)
+    local undeadDivinePenalty  = calculateUndeadDivinePenalty(caster, target, spell, skillType) 
     local nukeAbsorbOrNullify  = calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
@@ -835,6 +859,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * skillTypeMultiplier)
     finalDamage = math.floor(finalDamage * ninSkillBonus)
     finalDamage = math.floor(finalDamage * ninFutaeBonus)
+    finalDamage = math.floor(finalDamage * undeadDivinePenalty)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
     -- Handled in core (battleutils.cpp) Seems to do something relating to nullify and absorb damage...
