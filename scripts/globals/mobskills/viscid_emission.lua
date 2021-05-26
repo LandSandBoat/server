@@ -18,11 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.AMNESIA
-    local duration = 60
-
-    skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 1, 0, duration))
-
+    skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 60))
     return typeEffect
 end
 
