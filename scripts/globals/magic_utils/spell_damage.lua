@@ -220,11 +220,14 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
         elseif statDiff < 300 and statDiff >= 200 then
             statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor((statDiff - 200) * spellMultiplier200)
         elseif statDiff < 400 and statDiff >= 300 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200) + math.floor((statDiff - 300) * spellMultiplier300)
+            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
+            statDiffBonus = statDiffBonus + math.floor((statDiff - 300) * spellMultiplier300)
         elseif statDiff < 500 and statDiff >= 400 then
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200) + math.floor(300 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
+            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
+            statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
         else -- It's over 500!
-            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200) + math.floor(300 * spellMultiplier300) + math.floor(400 * spellMultiplier400) +  math.floor((statDiff - 500) * spellMultiplier500)
+            statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100)  + math.floor(200 * spellMultiplier200)
+            statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor(400 * spellMultiplier400) +  math.floor((statDiff - 500) * spellMultiplier500)
         end
     -- Player Ninjutsu.
     elseif caster:isPC() and skillType == xi.skill.NINJUTSU then
@@ -240,7 +243,7 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     if caster:isPC() then
         -- BLM Job Point: Manafont Elemental Magic Damage +3
         if caster:hasStatusEffect(xi.effect.MANAFONT) then
-            baseSpellDamageBonus = baseSpellDamageBonus + (caster:getJobPointLevel(xi.jp.MANAFONT_EFFECT) * 3)
+            baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MANAFONT_EFFECT) * 3
         end
         -- BLM Job Point: With Manawell mDMG +1
         if caster:hasStatusEffect(xi.effect.MANAWELL) then
@@ -272,6 +275,7 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     return spellDamage
 end
 
+-- Calculate: Multiple Target Damage Reduction (MTDR)
 function calculateMTDR(caster, target, spell)
     local MTDR    = 0 -- The variable we want to calculate.
     local targets = spell:getTotalTargets()
@@ -293,7 +297,7 @@ function calculateEleStaffBonus(caster, spell, spellElement)
     local eleStaffBonus = caster:getMod(strongAffinityDmg[spellElement])
 
     if eleStaffBonus > 0 then
-        eleStaffBonus = 1 + (eleStaffBonus * 0.05)
+        eleStaffBonus = 1 + eleStaffBonus * 0.05
     else
         eleStaffBonus = 1
     end
@@ -412,29 +416,29 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
         -- WHM Job Points
         if casterJob == xi.job.WHM then
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-        end
+
         -- BLM Job Points
-        if casterJob == xi.job.BLM then
+        elseif casterJob == xi.job.BLM then
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-        end
+
         -- RDM Job Points
-        if casterJob == xi.job.RDM then
+        elseif casterJob == xi.job.RDM then
             -- RDM Job Point: During saboteur, Enfeebling MACC +2
             if skillType == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
                 magicAcc = magicAcc + (caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)) * 2
             end
             -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
             magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-        end
+
         -- NIN Job Points
-        if casterJob == xi.job.NIN then
+        elseif casterJob == xi.job.NIN then
             -- NIN Job Point: Ninjitsu Accuracy Bonus
             if skillType == xi.skill.NINJUTSU then
                 magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
             end        
-        end
+
         -- SCH Job Points
-        if casterJob == xi.job.SCH then
+        elseif casterJob == xi.job.SCH then
             if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
                 (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
             then
@@ -448,17 +452,17 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
         -- BLM Merits
         if casterJob == xi.job.BLM and skillType == xi.skill.ELEMENTAL_MAGIC then
             magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-        end
+
         -- RDM Merits
-        if casterJob == xi.job.RDM and spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
+        elseif casterJob == xi.job.RDM and spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
             magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
-        end
+
         -- NIN Merits
-        if casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
+        elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
             magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
-        end
+
         -- BLU Merits
-        if casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
+        elseif casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
             magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
         end
         -- OTHER merits. ???? which are...? Modifiers need a rework/reorganization
@@ -658,9 +662,24 @@ function calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spel
     --     return magicBonusDiff
     -- end
 
-    -- Ninjitsu bonuses
+    -- Ninja spell bonuses
     if skillType == xi.skill.NINJUTSU then
+        -- Ninja Category 2 merits.
         mab = mab + caster:getMerit(xi.merit.NIN_MAGIC_BONUS)
+        -- Ninja Category 1 merits
+        if spellId > 319 and spellId < 323 then     -- Katon series.
+            mab = mab + caster:getMerit(xi.merit.KATON_EFFECT)
+        elseif spellId > 322 and spellId < 326 then -- Hyoton series.
+            mab = mab + caster:getMerit(xi.merit.HYOTON_EFFECT)
+        elseif spellId > 325 and spellId < 329 then -- Huton series.
+            mab = mab + caster:getMerit(xi.merit.HUTON_EFFECT)
+        elseif spellId > 328 and spellId < 332 then -- Doton series.
+            mab = mab + caster:getMerit(xi.merit.DOTON_EFFECT)
+        elseif spellId > 331 and spellId < 335 then -- Raiton series.
+            mab = mab + caster:getMerit(xi.merit.RAITON_EFFECT)
+        elseif spellId > 334 and spellId < 338 then -- Suiton series.
+            mab = mab + caster:getMerit(xi.merit.SUITON_EFFECT)
+        end
     end
 
     if math.random(1, 100) < mabCrit then
@@ -696,6 +715,7 @@ function calculateMagicBonusDiff(caster, target, spell, spellId, skillType, spel
     return magicBonusDiff
 end
 
+-- Calculate: Target Magic Damage Adjustment (TMDA) Refered normaly in gear as "Magic Damage Taken -%"
 function calculateTMDA(caster, target, spell, spellElement)
     local TMDA = 1 -- The variable we want to calculate
     if spellElement > 0 then
