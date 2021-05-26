@@ -28,8 +28,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local info = MobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, TP_NO_EFFECT)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, MOBPARAM_WIPE_SHADOWS)
 
-    local typeEffect = xi.effect.DEFENSE_DOWN
-    MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 30, 0, 60)
+    MobPhysicalStatusEffectMove(mob, target, skill, xi.effect.DEFENSE_DOWN, 30, 0, 60)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     return dmg
