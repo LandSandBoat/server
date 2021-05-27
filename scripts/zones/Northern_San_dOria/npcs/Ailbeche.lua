@@ -14,12 +14,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and player:getCharVar("returnedAilbecheRod") ~= 1) then
-        if (trade:hasItemQty(17391, 1) == true and trade:getItemCount() == 1) then
-            player:startEvent(61) -- Finish Quest "Father and Son" (part2) (trading fishing rod)
-        end
-    end
-
     if (player:getCharVar("aBoysDreamCS") >= 3) then
         if (trade:hasItemQty(17001, 1) == true and trade:getItemCount() == 1 and player:hasItem(4562) == false) then
             player:startEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
@@ -42,16 +36,11 @@ entity.onTrigger = function(player, npc)
     local sharpeningTheSwordCS = player:getCharVar("sharpeningTheSwordCS")
     local aBoysDreamCS = player:getCharVar("aBoysDreamCS")
 
-    -- "Father and Son" Event Dialogs
-    if (fatherAndSon == QUEST_AVAILABLE) then
-        player:startEvent(508) -- Start Quest "Father and Son"
-    elseif (fatherAndSon == QUEST_ACCEPTED and player:getCharVar("QuestfatherAndSonVar") == 1) then
-        player:startEvent(509) -- Finish Quest "Father and Son" (part1)
-    elseif (sharpeningTheSword == QUEST_AVAILABLE and player:getCharVar("returnedAilbecheRod") == 1) then
-        if (mJob == xi.job.PLD and mLvl < 40 or mJob ~= xi.job.PLD) then
-            player:startEvent(12) -- Dialog after "Father and Son" (part2)
+    -- Additional Dialog after completing "Father and Son", but is not displayed from prior conditions:
+    -- CSID: 12
+    if sharpeningTheSword == QUEST_AVAILABLE and fatherAndSon == QUEST_COMPLETED and player:getCharVar("Quest[0][4]Prog") == 0 then
     -- "Sharpening the Sword" Quest Dialogs
-        elseif (mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 0) then
+        if (mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 0) then
             player:startEvent(45) -- Start Quest "Sharpening the Sword" with thank you for the rod
         elseif (mJob == xi.job.PLD and mLvl >= 40 and sharpeningTheSwordCS == 1) then
             player:startEvent(43) -- Start Quest "Sharpening the Sword"
@@ -90,27 +79,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    -- "Father and Son"
-    if (csid == 508) then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
-    elseif (csid == 509) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17391)
-        else
-            player:addItem(17391)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17391) -- Willow Fishing Rod
-            player:addTitle(xi.title.LOST_CHILD_OFFICER)
-            player:setCharVar("QuestfatherAndSonVar", 0)
-            player:addFame(SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
-        end
-    elseif (csid == 61) then
-        player:setCharVar("returnedAilbecheRod", 1)
-        player:addTitle(xi.title.FAMILY_COUNSELOR)
-        player:tradeComplete()
     -- "Sharpening the Sword"
-    elseif ((csid == 45 or csid == 43) and option == 1) then
+    if ((csid == 45 or csid == 43) and option == 1) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
         player:setCharVar("sharpeningTheSwordCS", 2)
         player:setCharVar("returnedAilbecheRod", 0)

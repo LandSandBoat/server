@@ -3,7 +3,6 @@
 --  NPC: Exoroche
 -- Involved in Quests: Father and Son, A Boy's Dream
 -- !pos 72 -1 60 230
-
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -19,10 +18,7 @@ entity.onTrigger = function(player, npc)
 --    player:startEvent(51)  -- it says what i dont beleive you -- under oath
 --    player:startEvent(19)  -- thanks for your help i have to tell trion -- under oath
 --     player:startEvent(77)    -- a boys dream
--- "Father and Son" Event Dialogs
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON) == QUEST_ACCEPTED) then
-        player:startEvent(542)
-    elseif (player:getCharVar("aBoysDreamCS") == 2) then
+    if (player:getCharVar("aBoysDreamCS") == 2) then
         player:startEvent(50)
     elseif (player:getCharVar("aBoysDreamCS") >= 7) then
         player:startEvent(32)
@@ -44,9 +40,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 542) then
-        player:setCharVar("QuestfatherAndSonVar", 1)
-    elseif (csid == 50) then
+    if (csid == 50) then
         player:setCharVar("aBoysDreamCS", 3)
     elseif (csid == 32 and player:getCharVar("aBoysDreamCS") == 7) then
         player:setCharVar("aBoysDreamCS", 8)
