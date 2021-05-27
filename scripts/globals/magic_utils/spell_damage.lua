@@ -474,8 +474,13 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
         if casterJob == xi.job.BLM and skillType == xi.skill.ELEMENTAL_MAGIC then
             magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
         -- RDM Merits
-        elseif casterJob == xi.job.RDM and spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
-            magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
+        elseif casterJob == xi.job.RDM then
+            -- Category 1
+            if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
+                magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
+            end
+            -- Category 2
+            magicAcc = magicAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
         -- NIN Merits
         elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
             magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
@@ -483,8 +488,6 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
         elseif casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
             magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
         end
-        -- OTHER merits. ???? which are...? Modifiers need a rework/reorganization
-        magicAcc = magicAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
 
         -----------------------------------
         -- magicAcc from Food.
@@ -616,28 +619,28 @@ function calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     -- Calculate Weather bonus
     if weather == xi.magic.singleWeatherStrong[spellElement] then
         if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-            if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+            if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
                 dayAndWeather = dayAndWeather + 0.10
             end
         end
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather + 0.10
         end
     elseif weather == xi.magic.singleWeatherWeak[spellElement] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather - 0.10
         end
     elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
         if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
-            if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+            if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
                 dayAndWeather = dayAndWeather + 0.10
             end
         end
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather + 0.25
         end
     elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather - 0.25
         end
     end
@@ -645,11 +648,11 @@ function calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     -- Calculate day bonus
     if dayElement == spellElement then
         dayAndWeather = dayAndWeather + caster:getMod(xi.mod.DAY_NUKE_BONUS) / 100 -- sorc. tonban(+1)/zodiac ring
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather + 0.10
         end
     elseif dayElement == xi.magic.elementDescendant[spellElement] then
-        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell == true then
+        if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather - 0.10
         end
     end
@@ -736,29 +739,28 @@ end
 -- Calculate: Target Magic Damage Adjustment (TMDA) Refered normaly in gear as "Magic Damage Taken -%"
 function calculateTMDA(caster, target, spell, spellElement)
     local TMDA = 1 -- The variable we want to calculate
+
     if spellElement > 0 then
-        TMDA = 1 - (target:getMod(xi.magic.defenseMod[spellElement]) / 256)
-        -- Clamp
-        if TMDA < 0 then
-            TMDA = 0
-        elseif TMDA > 2 then
-            TMDA = 2
-        end
+        TMDA = utils.clamp(1 - (target:getMod(xi.magic.defenseMod[spellElement]) / 256), 0, 2)
     end
+
     return TMDA
 end
 
 function calculateEbullienceMultiplier(caster, target, spell)
     local ebullienceMultiplier = 1
+
     if caster:hasStatusEffect(xi.effect.EBULLIENCE) then
         ebullienceMultiplier = 1.2 + caster:getMod(xi.mod.EBULLIENCE_AMOUNT) / 100
         caster:delStatusEffectSilent(xi.effect.EBULLIENCE)
     end
+
     return ebullienceMultiplier
 end
 
 function calculateSkillTypeMultiplier(caster, target, spell, skillType)
     local skillTypeMultiplier = 1
+
     if skillType == xi.skill.ELEMENTAL_MAGIC then
         skillTypeMultiplier = ELEMENTAL_POWER 
     elseif skillType == xi.skill.DARK_MAGIC then
@@ -768,11 +770,13 @@ function calculateSkillTypeMultiplier(caster, target, spell, skillType)
     elseif skillType == xi.skill.DIVINE_MAGIC then
         skillTypeMultiplier = DIVINE_POWER
     end
+
     return skillTypeMultiplier
 end
 
 function calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninSkillBonus = 1
+
     if skillType == xi.skill.NINJUTSU and caster:getMainJob() == xi.job.NIN then
         if spellId % 3 == 2 then     -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50) / 2)
@@ -783,20 +787,24 @@ function calculateNinSkillBonus(caster, target, spell, spellId, skillType)
         end
         ninSkillBonus = utils.clamp(ninSkillBonus / 100, 1, 2) -- bonus caps at +100%, and does not go negative
     end
+
     return ninSkillBonus
 end
 
 function calculateNinFutaeBonus(caster, target, spell, skillType)
     local ninFutaeBonus = 1
+
     if skillType == xi.skill.NINJUTSU and caster:hasStatusEffect(xi.effect.FUTAE) then
         ninFutaeBonus = (150  + caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5) / 100
         caster:delStatusEffect(xi.effect.FUTAE)
     end
+
     return ninFutaeBonus
 end
 
 function calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
+
     -- Calculate chance for spell absortion.
     if math.random(1, 100) < (target:getMod(xi.magic.absorbMod[spellElement]) + 1) then
         nukeAbsorbOrNullify = -1
@@ -805,14 +813,17 @@ function calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
     if math.random(1, 100) < (target:getMod(nullMod[spellElement]) + 1) then
         nukeAbsorbOrNullify = 0
     end
+
     return nukeAbsorbOrNullify
 end
 
 function calculateUndeadDivinePenalty(caster, target, spell, skillType)
     local undeadDivinePenalty = 1
+
     if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC then
         undeadDivinePenalty = 1.5
     end
+
     return undeadDivinePenalty
 end
 -----------------------------------
