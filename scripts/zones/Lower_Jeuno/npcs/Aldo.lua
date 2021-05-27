@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
         player:getMissionStatus(player:getNation()) == 3) then
         player:startEvent(183)
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-        player:getCharVar('ApocalypseNigh') == 5 and player:getRank() >= 5 then
+        player:getCharVar('ApocalypseNigh') == 5 and player:getRank(player:getNation()) >= 5 then
         player:startEvent(10057)
     elseif player:getCharVar('ApocalypseNigh') == 6 then
         player:startEvent(10058)

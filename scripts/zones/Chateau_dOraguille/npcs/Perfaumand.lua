@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(560)
 
     -- San d'Oria Missions
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())

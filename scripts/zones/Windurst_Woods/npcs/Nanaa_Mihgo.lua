@@ -96,7 +96,7 @@ entity.onTrigger = function(player, npc)
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar("TrustDialogue") == 0
     then
-        local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+        local trustFlag = (player:getRank(player:getNation()) >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
 
         player:setLocalVar("TrustDialogue", 1)
 
