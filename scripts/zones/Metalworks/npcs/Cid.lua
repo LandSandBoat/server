@@ -168,9 +168,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(505)
         end
-    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
+    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(763) -- Bastok Mission 7-1
-    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
+    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
     --Begin Cid's Secret
     elseif (player:getFameLevel(BASTOK) >= 4 and CidsSecret == QUEST_AVAILABLE) then

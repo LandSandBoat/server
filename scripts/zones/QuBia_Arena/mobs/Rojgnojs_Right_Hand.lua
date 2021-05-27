@@ -16,7 +16,7 @@ end
 
 entity.onMobSpawn = function(mob)
     local battlefield = mob:getBattlefield()
-    if battlefield and global.phaseChangeReady(battlefield) then
+    if battlefield then
         battlefield:setLocalVar("phaseChange", 0)
     end
 end

@@ -2,6 +2,7 @@
 -- ID: 19001
 -- Item: Gastraphetes
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 -----------------------------------
@@ -16,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    npcUtil.giveItem(target, { { 21311, 99 } }) -- Quelling Bolt x99
+    npcUtil.giveItem(target, { { xi.items.QUELLING_BOLT, 99 } }) -- Quelling Bolt x99
 end
 
 return item_object

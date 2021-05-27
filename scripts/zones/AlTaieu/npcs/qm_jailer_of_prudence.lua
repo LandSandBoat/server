@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Al'Taieu
---  NPC: ??? (Jailer of Prudence Spawn)
+--  NPC: qm_jailer_of_prudence (???)
 -- Allows players to spawn the Jailer of Prudence by trading the Third Virtue, Deed of Sensibility, and High-Quality Hpemde Organ to a ???.
 -- !pos , 706 -1 22
 -----------------------------------

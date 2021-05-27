@@ -1,9 +1,8 @@
 -----------------------------------
 -- Area: Al'Taieu
---  NPC: ??? (Jailer of Love and Absolute Virtue Spawn)
--- Allows players to spawn the Jailer of Love by trading the Fourth Virtue, Fifth Virtue and Sixth Virtue to a ???.
--- Allows players to spawn Absolute Virtue by killing Jailer of Love.
--- !pos , 431 -0 -603
+--  NPC: qm_jailer_of_justice (???)
+-- Allows players to spawn the Jailer of Justice by trading the Second Virtue, Deed of Moderation, and HQ Xzomit Organ to a ???.
+-- !pos , -278 0 -463
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
 -----------------------------------
@@ -11,17 +10,16 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     --[[
-    -- JAILER OF LOVE
+    -- JAILER OF JUSTICE
     if (
-        not GetMobByID(ID.mob.JAILER_OF_LOVE):isSpawned() and
-        not GetMobByID(ID.mob.ABSOLUTE_VIRTUE):isSpawned() and
-        trade:hasItemQty(1848, 1) and -- fourth_virtue
-        trade:hasItemQty(1847, 1) and -- fifth_virtue
-        trade:hasItemQty(1849, 1) and -- sixth_virtue
+        not GetMobByID(ID.mob.JAILER_OF_JUSTICE):isSpawned() and
+        trade:hasItemQty(1853, 1) and -- second_virtue
+        trade:hasItemQty(1854, 1) and -- deed_of_moderation
+        trade:hasItemQty(1855, 1) and -- hq_xzomit_organ
         trade:getItemCount() == 3
     ) then
         player:tradeComplete()
-        SpawnMob(ID.mob.JAILER_OF_LOVE):updateClaim(player)
+        SpawnMob(ID.mob.JAILER_OF_JUSTICE):updateClaim(player)
     end
     --]]
 end

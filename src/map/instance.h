@@ -25,6 +25,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "zone_entities.h"
 
 #include <set>
+#include <unordered_map>
 
 enum INSTANCE_STATUS
 {

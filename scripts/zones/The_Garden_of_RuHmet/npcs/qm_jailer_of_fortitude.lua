@@ -1,8 +1,12 @@
 -----------------------------------
 -- Area: The_Garden_of_RuHmet
---  NPC: ??? (Jailer of Fortitude Spawn)
--- Allows players to spawn the Jailer of Fortitude by trading 12 Ghrah M Chips to a ???.
--- !zone 35
+--  NPC: qm_jailer_of_fortitude (???)
+-- Note: Spawn Jailer of Fortitude by trading 12 Ghrah M Chips
+-- North / Hume tower  !pos -420 0 755 35
+-- NE / Elvaan tower   !pos -43 0 460 35
+-- SE / Galka tower    !pos -260 0 44 35
+-- SW / Tarutaru tower !pos -580 0 43 35
+-- NW / Mithra tower   !pos -796 0 460 35
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/npc_util")

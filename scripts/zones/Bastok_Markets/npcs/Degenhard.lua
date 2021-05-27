@@ -5,7 +5,7 @@
 -- Involved in Quests: Beat Around the Bushin
 -- !pos -175 2 -135 235
 -----------------------------------
-require("scripts/globals/keyitems")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 -----------------------------------
@@ -13,11 +13,8 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
-        npcUtil.tradeHasExactly(trade, {3541, 3542, 3543}) then
+        npcUtil.tradeHasExactly(trade, {xi.items.SEASONING_STONE, xi.items.FOSSILIZED_BONE, xi.items.FOSSILIZED_FANG}) then
         player:startEvent(15)
-    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES) == QUEST_ACCEPTED and
-        npcUtil.tradeHas(trade, 880) then
-        player:startEvent(258)
     end
 end
 
@@ -26,10 +23,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(14)
     elseif player:getCharVar("BeatAroundTheBushin") == 3 then
         player:startEvent(342)
-    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES) == QUEST_AVAILABLE then
-        player:startEvent(256)
-    else
-        player:startEvent(255)
     end
 end
 
@@ -38,16 +31,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 15 then
-        npcUtil.giveItem(player, 5911)
+        npcUtil.giveItem(player, xi.items.OLDE_RARAB_TAIL)
         player:confirmTrade()
     elseif csid == 342 then
         player:setCharVar("BeatAroundTheBushin", 4)
-    elseif csid == 256 then
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_BARE_BONES)
-    elseif csid == 258 then
-        if (npcUtil.completeQuest(player, BASTOK, xi.quest.id.bastok.THE_BARE_BONES, {ki = xi.ki.MAP_OF_THE_DANGRUF_WADI, fame = 60})) then
-            player:confirmTrade()
-        end
     end
 end
 

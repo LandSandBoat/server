@@ -5,6 +5,7 @@
 -- !pos 41.169 3.899 -51.005 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
@@ -525,10 +526,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 10099 then
-        if option == 16777216 and player:getCharVar("receivedNexusCape") == 0 and npcUtil.giveItem(player, 11538) then
+        if option == 16777216 and player:getCharVar("receivedNexusCape") == 0 and npcUtil.giveItem(player, xi.items.NEXUS_CAPE) then
             player:setCharVar("receivedNexusCape", 1)
         elseif option == 33554432 or (option == 16777216 and player:getCharVar("receivedNexusCape") == 0) then
-            player:addUsedItem(11538)
+            player:addUsedItem(xi.items.NEXUS_CAPE)
         elseif option >= 1 and option <= 20 then
             local ki = optionToKI[option]
             if ki ~= nil then

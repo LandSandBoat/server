@@ -198,7 +198,7 @@ public:
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
-    bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
+    bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
     bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))

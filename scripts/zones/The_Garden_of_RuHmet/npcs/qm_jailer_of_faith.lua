@@ -1,8 +1,12 @@
 -----------------------------------
 -- Area: The_Garden_of_RuHmet
---  NPC: ??? (Jailer of Faith Spawn)
--- Allows players to spawn the Jailer of Faith by trading 1 High-Quality Euvhi Organ to a ???.
--- !zone 35
+--  NPC: qm_jailer_of_faith (???)
+-- Note: Spawn Jailer of Faith by trading High-Quality Euvhi Organ
+-- North / Hume tower  !pos -420 0 -157 35
+-- NE / Elvaan tower   !pos -157 0 -340 35
+-- SE / Galka tower    !pos -260 0 -643 35
+-- SW / Tarutaru tower !pos -580 0 -644 35
+-- NW / Mithra tower   !pos -683 0 -340 35
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/npc_util")

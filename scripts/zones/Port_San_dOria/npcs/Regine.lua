@@ -5,6 +5,7 @@
 -- !pos 68 -9 -74 232
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
+require("scripts/globals/items")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -18,12 +19,12 @@ entity.onTrade = function(player, npc, trade)
 
     -- FLYERS FOR REGINE
     if (flyersForRegine == QUEST_ACCEPTED and npcUtil.tradeHas( trade, {{"gil", 10}} )) then
-        if (npcUtil.giveItem(player, 532)) then
+        if (npcUtil.giveItem(player, xi.items.MAGICMART_FLYER)) then
             player:confirmTrade()
         end
 
     -- THE BRUGAIRE CONSORTIUM
-    elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 593)) then
+    elseif (theBrugaireConsortium == QUEST_ACCEPTED and npcUtil.tradeHas(trade, xi.items.PARCEL_FOR_THE_MAGIC_SHOP)) then
         player:startEvent(535)
     end
 end
@@ -36,7 +37,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(510, 2)
     elseif ffr == QUEST_ACCEPTED and utils.mask.isFull(player:getCharVar('[ffr]deliveryMask'), 15) then -- all 15 flyers delivered
         player:startEvent(603)
-    elseif ffr == QUEST_ACCEPTED and not player:hasItem(532) then -- on quest but out of flyers
+    elseif ffr == QUEST_ACCEPTED and not player:hasItem(xi.items.MAGICMART_FLYER) then -- on quest but out of flyers
         player:startEvent(510, 3)
 
     -- DEFAULT MENU
@@ -51,7 +52,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- FLYERS FOR REGINE
     if csid == 510 and option == 2 then
-        if npcUtil.giveItem(player, {{532, 12}, {532, 3}}) then
+        if npcUtil.giveItem(player, {{xi.items.MAGICMART_FLYER, 12}, {xi.items.MAGICMART_FLYER, 3}}) then
             player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE)
         end
     elseif csid == 603 then

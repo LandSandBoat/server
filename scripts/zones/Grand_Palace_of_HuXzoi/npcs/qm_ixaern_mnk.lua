@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Grand Palace of Hu'Xzoi
---  NPC: ???
--- Note: Spawns Ix'Aern (MNK)
--- !pos 460 0 540
+--  NPC: qm_ixaern_mnk (???)
+-- !pos 460 0 540 34
+-- !pos 380 0 540 34
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
 require("scripts/globals/npc_util")

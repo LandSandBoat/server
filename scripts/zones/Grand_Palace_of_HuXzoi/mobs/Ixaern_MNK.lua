@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- adjust drops based on number of HQ Aern Organs traded to QM
-    local qm = GetNPCByID(ID.npc.IXAERN_MNK_QM)
+    local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
     local chance = qm:getLocalVar("[SEA]IxAern_DropRate")
     if (math.random(0, 1) > 0) then
         SetDropRate(4398, 1851, chance * 10) -- Deed Of Placidity
@@ -56,7 +56,7 @@ entity.onMobDespawn = function(mob)
     DespawnMob(mob:getID()+1)
     DespawnMob(mob:getID()+2)
 
-    local qm = GetNPCByID(ID.npc.IXAERN_MNK_QM)
+    local qm = GetNPCByID(ID.npc.QM_IXAERN_MNK)
     if (math.random(0, 1) == 1) then
         qm:setPos(380, 0, 540, 0) -- G-7
     else

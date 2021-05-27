@@ -1,3 +1,4 @@
 return {
-    ['Nadee_Periyaha'] = { event = 90 },
+    ['Nadee_Periyaha'] = { event = 90  },
+    ['Maudaal']        = { event = 240 },
 }

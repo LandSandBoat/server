@@ -86,7 +86,7 @@ quest.sections = {
             onEventFinish = {
                 [18] = function(player, csid, option, npc)
                     player:confirmTrade()
-                    npcUtil.giveGil(player, 200)
+                    npcUtil.giveCurrency(player, "gil", 200)
                 end,
             },
         },
