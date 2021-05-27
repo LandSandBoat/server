@@ -213,13 +213,13 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     -- Black spell.
     if skillType == xi.skill.ELEMENTAL_MAGIC then
         if caster:isPC() then
-            local spellMultiplier0   = damageSpellParams[spellId][5] -- (M) In wiki.
-            local spellMultiplier50  = damageSpellParams[spellId][6] -- (M) In wiki.
-            local spellMultiplier100 = damageSpellParams[spellId][7] -- (M) In wiki.
-            local spellMultiplier200 = damageSpellParams[spellId][8] -- (M) In wiki.
-            local spellMultiplier300 = damageSpellParams[spellId][9] -- (M) In wiki.
-            local spellMultiplier400 = damageSpellParams[spellId][10] -- (M) In wiki.
-            local spellMultiplier500 = damageSpellParams[spellId][11] -- (M) In wiki.
+            local spellMultiplier0   = damageSpellParams[spellId][6] -- (M) In wiki.
+            local spellMultiplier50  = damageSpellParams[spellId][7] -- (M) In wiki.
+            local spellMultiplier100 = damageSpellParams[spellId][8] -- (M) In wiki.
+            local spellMultiplier200 = damageSpellParams[spellId][9] -- (M) In wiki.
+            local spellMultiplier300 = damageSpellParams[spellId][10] -- (M) In wiki.
+            local spellMultiplier400 = damageSpellParams[spellId][11] -- (M) In wiki.
+            local spellMultiplier500 = damageSpellParams[spellId][12] -- (M) In wiki.
 
             -- Ugly, but better than 7 more values in spells table.
             if statDiff < 50 then
@@ -231,16 +231,17 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
             elseif statDiff < 300 and statDiff >= 200 then
                 statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor((statDiff - 200) * spellMultiplier200)
             elseif statDiff < 400 and statDiff >= 300 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(100 * spellMultiplier200)
                 statDiffBonus = statDiffBonus + math.floor((statDiff - 300) * spellMultiplier300)
             elseif statDiff < 500 and statDiff >= 400 then
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
-                statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(100 * spellMultiplier200)
+                statDiffBonus = statDiffBonus + math.floor(100 * spellMultiplier300) + math.floor((statDiff - 400) * spellMultiplier400)
             else -- It's over 500!
-                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(200 * spellMultiplier200)
-                statDiffBonus = statDiffBonus + math.floor(300 * spellMultiplier300) + math.floor(400 * spellMultiplier400) + math.floor((statDiff - 500) * spellMultiplier500)
+                statDiffBonus = math.floor(50 * spellMultiplier0) + math.floor(50 * spellMultiplier50) + math.floor(100 * spellMultiplier100) + math.floor(100 * spellMultiplier200)
+                statDiffBonus = statDiffBonus + math.floor(100 * spellMultiplier300) + math.floor(100 * spellMultiplier400) + math.floor((statDiff - 500) * spellMultiplier500)
             end
         end
+
     -- Divine magic and Non-Player Elemental magic. TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
     elseif skillType == xi.skill.DIVINE_MAGIC or
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
@@ -812,6 +813,7 @@ function calculateUndeadDivinePenalty(caster, target, spell, skillType)
     if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC then
         undeadDivinePenalty = 1.5
     end
+    return undeadDivinePenalty
 end
 -----------------------------------
 -- Spell Helper Function
