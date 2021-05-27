@@ -316,8 +316,7 @@ public:
     void   setFame(sol::object const& areaObj, uint16 fame); // Sets Fame
     uint8  getFameLevel(sol::object const& areaObj);         // Gets Fame Level for specified nation
 
-    uint8  getRank();                        // Get Rank for current active nation
-    uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
+    uint8  getRank(uint8 nation);            // Get Rank for current active nation
     void   setRank(uint8 rank);              // Set Rank
     uint32 getRankPoints();                  // Get Current Rank points
     void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total

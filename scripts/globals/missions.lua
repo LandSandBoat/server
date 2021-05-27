@@ -760,7 +760,7 @@ function getMissionRankPoints(player, missionID)
     elseif (missionID == 23) then crystals = 228                    -- Additional 8 stacks needed, plus mission reward of 36 (87% rank bar)
     end
 
-    points_needed = 1024 * (crystals-.25) / (3*rankPointMath(player:getRank()))
+    points_needed = 1024 * (crystals-.25) / (3*rankPointMath(player:getRank(player:getNation())))
 
     if (player:getRankPoints() >= points_needed) then
         return 1
@@ -770,8 +770,8 @@ function getMissionRankPoints(player, missionID)
 end
 
 function getMissionMask(player)
-    rank = player:getRank()
     nation = player:getNation()  -- 0 = San d'Oria  1 = Bastok  2 = Windurst
+    rank = player:getRank(nation)
     mission_status =  player:getCurrentMission(nation)
 
     first_mission = 0

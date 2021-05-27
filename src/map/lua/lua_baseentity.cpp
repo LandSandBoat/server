@@ -5501,25 +5501,10 @@ uint8 CLuaBaseEntity::getFameLevel(sol::object const& areaObj)
 /************************************************************************
  *  Function: getRank()
  *  Purpose : Returns the rank of a player's current nation
- *  Example : player:getRank()
+ *  Example : player:getRank(xi.nation.WINDURST)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getRank()
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    return PChar->profile.rank[PChar->profile.nation];
-}
-
-/************************************************************************
- *  Function: getOtherRank()
- *  Purpose : Returns the rank of <nation> for the player
- *  Example : player:getOtherRank(xi.nation.WINDURST)
- ************************************************************************/
-
-uint8 CLuaBaseEntity::getOtherRank(uint8 nation)
+uint8 CLuaBaseEntity::getRank(uint8 nation)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 

@@ -61,7 +61,7 @@ entity.onTrigger = function(player, npc)
     local kindCardianCS = player:getCharVar("theKindCardianVar")
     local allNewC3000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
     local canCardiansCry = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CAN_CARDIANS_CRY)
-    local Rank6 = player:getRank() >= 6 and 1 or 0
+    local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
     -- WINDURST 1-2: THE HEART OF THE MATTER
     if player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HEART_OF_THE_MATTER then
