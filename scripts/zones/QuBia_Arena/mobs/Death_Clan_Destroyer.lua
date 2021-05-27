@@ -8,6 +8,10 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.onEventFinish = function(player, csid, option)
+    global.phaseEventFinish(player, csid)
+end
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, 60)
 end
@@ -36,11 +40,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local battlefield = player:getBattlefield()
-    if battlefield and global.phaseChangeReady(battlefield) then
-        player:release() -- prevents event collision if player kills multiple remaining mobs with an AOE move/spell
-        player:startEvent(32004, 0, 0, 4)
-    end
+    global.tryPhaseChange(player)
 end
 
 return entity
