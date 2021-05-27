@@ -25,7 +25,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and player:getRank() >= 6
+            return currentMission == mission.missionId and player:getRank(player:getNation()) >= 6
         end,
 
         [xi.zone.NORG] =
