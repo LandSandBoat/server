@@ -4,7 +4,9 @@
 --  Delivers a threefold attack. Additional effect: Drain
 --  Type: Physical
 --  100% TP: ??? / 250% TP: ??? / 300% TP: ???
---
+--  Note: There is not a whole lot of info about this spell available online,
+--        so the initial implemention is just a basic version similar to
+--        Goblin Rush, which is also a physical 3-hit spell.
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
