@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions
-    if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+    if player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())

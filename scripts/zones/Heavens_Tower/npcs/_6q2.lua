@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
     elseif player:hasKeyItem(xi.ki.MESSAGE_TO_JEUNO_WINDURST) then
         player:startEvent(166)
     elseif
-        player:getRank() == 5 and
+        player:getRank(player:getNation()) == 5 and
         currentMission == xi.mission.id.windurst.NONE and
         not player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_FINAL_SEAL)
     then

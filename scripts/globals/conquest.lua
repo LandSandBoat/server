@@ -98,7 +98,7 @@ local function setHomepointFee(player, guardNation)
     local fee = 0
 
     if pNation ~= guardNation and not xi.conquest.areAllies(pNation, guardNation) then
-        local rank = player:getRank()
+        local rank = player:getRank(player:getNation())
         if rank <= 5 then
             fee = 100 * math.pow(2, rank - 1)
         else
@@ -611,7 +611,7 @@ end
 -- bits 5-6 seem to encode the citizenship as below. This part needs more testing and verification.
 
 local function getArg6(player)
-    return player:getRank() + (player:getNation() * 32)
+    return player:getRank(player:getNation()) + (player:getNation() * 32)
 end
 
 -----------------------------------
@@ -937,7 +937,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
 
         -- DONATE CRYSTALS FOR RANK OR CONQUEST POINTS
         if guardType <= xi.conquest.guard.FOREIGN and crystals[item] then
-            local pRank = player:getRank()
+            local pRank = player:getRank(player:getNation())
             local pRankPoints = player:getRankPoints()
             local addPoints = 0
 
@@ -953,7 +953,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                         break
                     else
                         trade:confirmItem(crystalId, count)
-                        addPoints = addPoints + count * math.floor(4000 / (player:getRank() * 12 - crystalWorth))
+                        addPoints = addPoints + count * math.floor(4000 / (player:getRank(player:getNation()) * 12 - crystalWorth))
                     end
                 end
             end
@@ -1030,7 +1030,7 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
     elseif guardType >= xi.conquest.guard.OUTPOST then
         local a1 = getArg1(player, guardNation, guardType)
         if a1 == 1808 then -- non-allied nation
-            player:startEvent(guardEvent, a1, 0, 0, 0, 0, player:getRank(), 0, 0)
+            player:startEvent(guardEvent, a1, 0, 0, 0, 0, player:getRank(player:getNation()), 0, 0)
         else
             player:startEvent(guardEvent, a1, 0, 0x3F0000, 0, 0, getArg6(player), 0, 0)
         end
@@ -1076,7 +1076,7 @@ end
 
 xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
     local pNation  = player:getNation()
-    local pRank    = player:getRank()
+    local pRank    = player:getRank(pNation)
     local sRegion  = player:getCharVar("supplyQuest_region")
     local sOutpost = outposts[sRegion]
     local mOffset  = zones[player:getZoneID()].text.CONQUEST

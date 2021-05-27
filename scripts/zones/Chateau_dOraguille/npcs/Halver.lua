@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(565)
     elseif (pNation == xi.nation.SANDORIA) then
         -- Rank 10 default dialogue
-        if player:getRank() == 10 then
+        if player:getRank(player:getNation()) == 10 then
             player:startEvent(31)
         -- Mission San D'Oria 9-2 The Heir to the Light
         elseif (currentMission == xi.mission.id.sandoria.THE_HEIR_TO_THE_LIGHT and missionStatus == 7) then

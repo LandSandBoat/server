@@ -198,7 +198,7 @@ public:
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>; // Returns the item object from specified slot
     bool   hasItem(uint16 itemID, sol::object const& location);    // Check to see if Entity has item in inventory (hasItem(itemNumber))
     bool   addItem(sol::variadic_args va);                         // Add item to Entity inventory (additem(itemNumber,quantity))
-    bool   delItem(uint16 itemID, uint32 quantity, sol::object const& containerID);
+    bool   delItem(uint16 itemID, int32 quantity, sol::object const& containerID);
     bool   addUsedItem(uint16 itemID);                                                      // Add charged item with timer already on full cooldown
     bool   addTempItem(uint16 itemID, sol::object const& arg1);                             // Add temp item to Entity Temp inventory
     bool   hasWornItem(uint16 itemID);                                                      // Check if the item is already worn (player:hasWornItem(itemid))
@@ -316,8 +316,7 @@ public:
     void   setFame(sol::object const& areaObj, uint16 fame); // Sets Fame
     uint8  getFameLevel(sol::object const& areaObj);         // Gets Fame Level for specified nation
 
-    uint8  getRank();                        // Get Rank for current active nation
-    uint8  getOtherRank(uint8 nation);       // Get Rank for a specific nation, getNationRank is used in utils, and this may be unneeded
+    uint8  getRank(uint8 nation);            // Get Rank for current active nation
     void   setRank(uint8 rank);              // Set Rank
     uint32 getRankPoints();                  // Get Current Rank points
     void   addRankPoints(uint32 rankpoints); // Add rank points to existing rank point total

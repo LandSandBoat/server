@@ -3233,13 +3233,13 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
  *  Notes   : Can specify contianer using third variable
  ************************************************************************/
 
-bool CLuaBaseEntity::delItem(uint16 itemID, uint32 quantity, sol::object const& containerID)
+bool CLuaBaseEntity::delItem(uint16 itemID, int32 quantity, sol::object const& containerID)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    uint32 location = containerID.is<double>() ? containerID.as<uint32>() : 0;
+    uint8 location = containerID.get_type() == sol::type::number ? containerID.as<uint8>() : 0;
 
-    if (containerID.as<uint32>() >= MAX_CONTAINER_ID)
+    if (location >= MAX_CONTAINER_ID)
     {
         ShowWarning(CL_YELLOW "Lua::delItem: Attempting to delete an item from an invalid slot. Defaulting to main inventory.\n" CL_RESET);
     }
@@ -5501,25 +5501,10 @@ uint8 CLuaBaseEntity::getFameLevel(sol::object const& areaObj)
 /************************************************************************
  *  Function: getRank()
  *  Purpose : Returns the rank of a player's current nation
- *  Example : player:getRank()
+ *  Example : player:getRank(xi.nation.WINDURST)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getRank()
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    return PChar->profile.rank[PChar->profile.nation];
-}
-
-/************************************************************************
- *  Function: getOtherRank()
- *  Purpose : Returns the rank of <nation> for the player
- *  Example : player:getOtherRank(xi.nation.WINDURST)
- ************************************************************************/
-
-uint8 CLuaBaseEntity::getOtherRank(uint8 nation)
+uint8 CLuaBaseEntity::getRank(uint8 nation)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
