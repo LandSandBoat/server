@@ -1,4 +1,5 @@
 require("scripts/globals/status")
+require("scripts/globals/interaction/quest")
 
 utils = {}
 
@@ -484,4 +485,19 @@ function utils.prequire(...)
         local vars = {...}
         printf("Error while trying to load '%s': %s", vars[1], result)
     end
+end
+
+-- Helper functions for Interaction Framework Quests
+-- These should only be used when working between quests, or outside
+-- of the quest script itself.  Quest vars will be deleted automatically
+-- when that quest:complete(player) is called!
+
+function utils.getQuestVar(player, logId, questId, varName)
+    local charVarName = Quest.getVarPrefix(logId, questId) .. varName
+    return player:getCharVar(charVarName)
+end
+
+function utils.setQuestVar(player, logId, questId, varName, value)
+    local charVarName = Quest.getVarPrefix(logId, questId) .. varName
+    player:setCharVar(charVarName, value)
 end
