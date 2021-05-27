@@ -51,6 +51,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         VARCHET_KEEP_PROMISE           = 7772, -- As promised, I shall go and see about those woodchippers. Maybe we can play another game later.
         ROSEL_GREETINGS                = 7773, -- Greetings!
         FFR_ROSEL                      = 7792, -- Hrmm... Now, this is interesting! It pays to keep an eye on the competition. Thanks for letting me know!
+        EXOROCHE_PLEASE_TELL           = 7811, -- Please tell my son that I'll join him as soon as I'm done, so he's to stay right there.
         LUSIANE_SHOP_DIALOG            = 7966, -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7967, -- Welcome, customer. Please have a look.
         ASH_THADI_ENE_SHOP_DIALOG      = 7988, -- Welcome to Helbort's Blades!
