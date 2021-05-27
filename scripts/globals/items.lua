@@ -202,6 +202,7 @@ xi.items =
     LEATHER_GLOVES                  = 12696,
     LIZARD_GLOVES                   = 12697,
     BRONZE_SUBLIGAR                 = 12832,
+    LEATHER_GORGET                  = 13081,
     CHAIN_CHOKER                    = 13083,
     TIGER_STOLE                     = 13119,
     BEAST_COLLAR                    = 13121,
