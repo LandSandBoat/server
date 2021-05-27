@@ -30,7 +30,7 @@ local titleInfo =
             xi.title.THE_PURE_ONE,
             xi.title.LOST_CHILD_OFFICER,
             xi.title.SILENCER_OF_THE_LAMBS,
-            xi.title.LOST_AMP_FOUND_OFFICER,
+            xi.title.LOST_AND_FOUND_OFFICER,
             xi.title.GREEN_GROCER,
             xi.title.THE_BENEVOLENT_ONE,
             xi.title.KNIGHT_IN_TRAINING,
