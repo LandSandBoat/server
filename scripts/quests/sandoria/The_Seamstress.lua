@@ -58,7 +58,7 @@ quest.sections =
                     if option == 0 then
                         quest:begin(player)
                     end
-                end,                
+                end,
             },
         },
     },

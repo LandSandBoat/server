@@ -61,12 +61,12 @@ local unityOptions =
         [37] = {  100.000,  -12.000, -163.000,  63,  51 }, -- Wajaom Woodlands
         [38] = {  408.000,   -0.375,  -73.520,  99,  24 }, -- Lufaise Meadows
         [39] = {   68.230,   -6.185,  148.040,   0, 113 }, -- Cape Teriggan
-        [40] = nil,                                        -- ???                
+        [40] = nil,                                        -- ???
         [41] = { -418.320,  -16.758, -103.470, 176,   5 }, -- Uleguerand Range
         [42] = {   23.750,   26.593, -259.740, 212, 160 }, -- Den of Rancor
         [43] = { -177.000,  -23.979, -171.000, 232, 204 }, -- Fei'Yin
-        [44] = nil,                                        -- ???                  
-        [45] = nil,                                        -- ???                   
+        [44] = nil,                                        -- ???
+        [45] = nil,                                        -- ???
         [46] = { -245.460,  -32.247,  245.440,  31,  25 }, -- Misareaux Coast
         [47] = { -613.000,  -21.301,  230.000, 224,  61 }, -- Mount Zhayolm
         [48] = {  -60.000,  -10.000, -119.000, 192, 212 }, -- Gustav Tunnel
@@ -123,7 +123,8 @@ function xi.unity.onTrigger(player, npc)
     local allForOneCompleted = player:getEminenceCompleted(5)
     local accolades = player:getCurrency("unity_accolades")
     local remainingLimit = WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_accolades_spent")
-
+    utils.unused(remainingLimit)
+    
     -- Check player total records completed
     if player:getNumEminenceCompleted() < 10 then
         player:startEvent(zoneEventIds[zoneId][1])
@@ -174,7 +175,7 @@ function xi.unity.onEventUpdate(player, csid, option)
         else
             player:updateEvent(utils.MAX_UINT32)
         end
-        
+
     -- Change Unity
     elseif category == 5 then
         if player:getCharVar("unity_changed") == 1 then

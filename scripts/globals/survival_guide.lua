@@ -1,6 +1,8 @@
 require("scripts/globals/settings")
 require("scripts/globals/teleports")
-require("scripts/globals/survival_guide_map")
+require("scripts/globals/utils")
+
+local survivalGuides, zoneIdToGuideIdMap = require("scripts/globals/survival_guide_map")
 
 xi = xi or {}
 xi.survivalGuide = xi.survivalGuide or {}
@@ -31,6 +33,7 @@ local optionMap =
 
 local function checkForRegisteredSurvivalGuide(player, guide)
     local group = guide.group
+    utils.unused(group)
     local hasRegisteredGuide = player:hasTeleport(travelType, guide.groupIndex - 1, guide.group - 1)
 
     if not hasRegisteredGuide then
@@ -62,8 +65,8 @@ local function teleportMenuUpdate(player, option)
             elseif choice == optionMap.REMOVE_FAVORITE then
                 for x = 1, 9 do
                     if favorites[x] == index then
-                        for x = x, 8 do
-                            favorites[x] = favorites[x+1]
+                        for y = x, 8 do
+                            favorites[y] = favorites[y + 1]
                         end
 
                         favorites[9] = -1

@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     if (wonderingstatus == 1 and trade:hasItemQty(718, 1) == true and trade:getItemCount() == 1 and player:getCharVar("QuestWonderingMin_var") == 1) then
         player:startEvent(638)                 -- WONDERING_MINSTREL: Quest Finish
     end
@@ -24,10 +24,10 @@ entity.onTrigger = function(player, npc)
             --        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
 
 
-    wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-    fame = player:getFameLevel(WINDURST)
+    local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
+    local fame = player:getFameLevel(WINDURST)
     if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(633)          -- WONDERING_MINSTREL: Before Quest
         else
@@ -38,11 +38,11 @@ entity.onTrigger = function(player, npc)
     elseif (wonderingstatus == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(639)                 -- WONDERING_MINSTREL: After Quest
     else
-        hour = VanadielHour()
+        local hour = VanadielHour()
         if (hour >= 18 or hour <= 6) then
             player:startEvent(611)             -- Singing 1 (daytime < 6 or daytime >= 18)
         else
-            rand = math.random(1, 2)
+            local rand = math.random(1, 2)
             if (rand == 1) then
                 player:startEvent(610)          -- Standard Conversation 1 (daytime)
             else
@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option)
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17349)
         else
-            player:tradeComplete(trade)
+            player:tradeComplete()
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
             player:addItem(17349)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17349)

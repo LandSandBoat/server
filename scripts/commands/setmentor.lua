@@ -34,6 +34,6 @@ function onTrigger(player, mentorMode, target)
         end
     end
 
-    -- set mentor mode
-    targ:setMentor(tobool(mentorMode))
+    -- set mentor mode (bool)
+    targ:setMentor(mentorMode > 0)
 end

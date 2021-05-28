@@ -10,10 +10,12 @@
 -----------------------------------
 require("scripts/globals/items")
 require("scripts/globals/quests")
+require("scripts/globals/utils")
 require("scripts/globals/zone")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local nashmauID = require("scripts/zones/Nashmau/IDs")
+utils.unused(nashmauID)
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.RAT_RACE)
