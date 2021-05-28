@@ -1,6 +1,6 @@
 require("scripts/globals/settings")
 require("scripts/globals/teleports")
-require("scripts/globals/survival_guide_map")
+local survivalGuides, zoneIdToGuideIdMap = require("scripts/globals/survival_guide_map")
 
 xi = xi or {}
 xi.survivalGuide = xi.survivalGuide or {}

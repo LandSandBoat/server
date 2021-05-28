@@ -103,7 +103,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000)
         player:addFame(WINDURST, 80)
         player:addTitle(xi.title.CARDIAN_TUTOR)
-        player:addGil(GIL_RATE * 200)        
+        player:addGil(GIL_RATE * 200)
         player:confirmTrade()
 
     -- LEGENDARY PLAN B

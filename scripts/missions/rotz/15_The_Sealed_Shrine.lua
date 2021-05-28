@@ -66,7 +66,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     -- Reminder text
-                    setMissionStatus(xi.mission.log_id.ZILART, 2)
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 2)
                     return mission:progressEvent(111)
                 end,
             },

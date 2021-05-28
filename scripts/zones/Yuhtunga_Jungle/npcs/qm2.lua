@@ -8,6 +8,33 @@ require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
+local function isFightInProgress()
+    return GetMobByID(ID.mob.NASUS_OFFSET):isAlive()
+        or GetMobByID(ID.mob.NASUS_OFFSET + 1):isAlive()
+        or GetMobByID(ID.mob.NASUS_OFFSET + 2):isAlive()
+        or GetMobByID(ID.mob.NASUS_OFFSET + 3):isAlive()
+        or GetMobByID(ID.mob.NASUS_OFFSET + 4):isAlive()
+end
+
+local function spawnNMs(player)
+    local qm = GetNPCByID(ID.npc.TUNING_OUT_QM)
+    if not isFightInProgress() then
+        qm:setLocalVar("cooldown", os.time() + 900) -- 15 minutes between repops
+        qm:setLocalVar("NasusKilled", 0)
+        qm:setLocalVar("QuestPlayer", player:getID()) -- only the person who pops will complete quest
+
+        npcUtil.popFromQM(player, qm, {
+            ID.mob.NASUS_OFFSET,
+            ID.mob.NASUS_OFFSET + 1,
+            ID.mob.NASUS_OFFSET + 2,
+            ID.mob.NASUS_OFFSET + 3,
+            ID.mob.NASUS_OFFSET + 4
+        }, {claim = true, hide = 0})
+
+        player:messageText(qm, ID.text.SWARM_APPEARED, false)
+    end
+end
+
 entity.onTrigger = function(player, npc)
     local tuningOutProgress= player:getCharVar("TuningOut_Progress")
 
@@ -41,33 +68,6 @@ entity.onEventFinish = function(player, csid)
     elseif csid == 29 then -- after fight
         player:setCharVar("TuningOut_Progress", 5)
     end
-end
-
-local function spawnNMs(player)
-    local qm = GetNPCByID(ID.npc.TUNING_OUT_QM)
-    if not isFightInProgress() then
-        qm:setLocalVar("cooldown", os.time() + 900) -- 15 minutes between repops
-        qm:setLocalVar("NasusKilled", 0)
-        qm:setLocalVar("QuestPlayer", player:getID()) -- only the person who pops will complete quest
-
-        npcUtil.popFromQM(player, qm, {
-            ID.mob.NASUS_OFFSET,
-            ID.mob.NASUS_OFFSET + 1,
-            ID.mob.NASUS_OFFSET + 2,
-            ID.mob.NASUS_OFFSET + 3,
-            ID.mob.NASUS_OFFSET + 4
-        }, {claim = true, hide = 0})
-
-        player:messageText(qm, ID.text.SWARM_APPEARED, false)
-    end
-end
-
-local function isFightInProgress()
-    return GetMobByID(ID.mob.NASUS_OFFSET):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 1):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 2):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 3):isAlive()
-        or GetMobByID(ID.mob.NASUS_OFFSET + 4):isAlive()
 end
 
 return entity

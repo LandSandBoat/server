@@ -74,8 +74,8 @@ xi.symphonic_curator.onTrigger = function(player, npc)
 
     local orchestrion    = player:findItem(426)
     local spinet         = player:findItem(3677)
-    local nanaa_status_1 = player:findItem(286)
-    local nanaa_status_2 = player:findItem(287)
+    local nanaa_statue_1 = player:findItem(286)
+    local nanaa_statue_2 = player:findItem(287)
 
     local has_orchestrion    = orchestrion and orchestrion:isInstalled()
     local has_spinet         = spinet and spinet:isInstalled()

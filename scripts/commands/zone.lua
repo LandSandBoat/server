@@ -281,9 +281,7 @@ function error(player, msg)
     player:PrintToPlayer("!zone <zone ID or autotranslate phrase>")
 end
 
-function getBytePos(s, needle)
-    local i
-    local b
+local function getBytePos(s, needle)
     for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
             return i

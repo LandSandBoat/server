@@ -58,7 +58,7 @@ xi.battlefield.leaveCode =
     LOST = 4
 }
 
-function xi.battlefield.onBattlefieldTick(battlefield, timeinside, players)
+function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local mobs = battlefield:getMobs(true, false)
     local status = battlefield:getStatus()
@@ -109,8 +109,8 @@ end
 
 -- returns false if out of time
 function xi.battlefield.SendTimePrompts(battlefield, players)
-    local tick = battlefield:getTimeInside()
-    local status = battlefield:getStatus()
+    -- local tick = battlefield:getTimeInside()
+    -- local status = battlefield:getStatus()
     local remainingTime = battlefield:getRemainingTime()
     local message = 0
     local lastTimeUpdate = battlefield:getLastTimeUpdate()
@@ -204,9 +204,9 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
                         if entry.itemid ~= 0 then
                             if entry.itemid == 65535 then
                                 local gil = entry.amount/#players
-                                for i = 1, #players, 1 do
-                                    players[i]:addGil(gil)
-                                    players[i]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                for j = 1, #players, 1 do
+                                    players[j]:addGil(gil)
+                                    players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
                                 end
                                 break
                             end

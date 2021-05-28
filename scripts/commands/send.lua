@@ -283,9 +283,7 @@ function error(player, msg)
     player:PrintToPlayer("!send <player to send> <destination player or zone>")
 end
 
-function getBytePos(s, needle)
-    local i
-    local b
+local function getBytePos(s, needle)
     for i=1, string.len(s), 1 do
         if (string.byte(s, i) == needle) then
             return i
@@ -368,7 +366,7 @@ function onTrigger(player, bytes)
             end
         else
             -- destination is a player name.
-            local target = dest
+            target = dest
             dest = GetPlayerByName(dest)
             if (dest == nil) then
                 error(player, string.format( "Player named '%s' not found!", target ))

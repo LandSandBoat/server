@@ -29,6 +29,7 @@ function onTrigger(player, arg1, arg2, arg3, arg4)
         return
     end
 
+    local targ
     if arg3 == nil then
         targ = player:getCursorTarget()
     elseif arg4 ~= nil then

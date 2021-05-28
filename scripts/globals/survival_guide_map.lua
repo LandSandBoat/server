@@ -1,6 +1,6 @@
 require("scripts/globals/zone")
 
-survivalGuides =
+local survivalGuides =
 {
     [6] =
     {
@@ -1082,7 +1082,7 @@ survivalGuides =
     }
 }
 
-zoneIdToGuideIdMap =
+local zoneIdToGuideIdMap =
 {
     [xi.zone.NORTHERN_SAN_DORIA] = 0,
     [xi.zone.BASTOK_MINES] = 1,
@@ -1183,3 +1183,5 @@ zoneIdToGuideIdMap =
     [xi.zone.CASTLE_ZVAHL_BAILEYS_S] = 96,
     [xi.zone.EASTERN_ADOULIN] = 97
 }
+
+return survivalGuides, zoneIdToGuideIdMap
