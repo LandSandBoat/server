@@ -98,35 +98,37 @@ jobs:
         sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
         luarocks install luacheck --local
         luarocks install lanes --local
-    - id: changed-cpp-files
-      name: Get Changed CPP Files
+    - id: changed-files
+      name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
-      with:
-        format: 'cpp'
-    - id: changed-lua-files
-      name: Get Changed Lua Files
-      uses: jitterbit/get-changed-files@v1
-      with:
-        format: 'lua'
-    - id: changed-sql-files
-      name: Get Changed SQL Files
-      uses: jitterbit/get-changed-files@v1
-      with:
-        format: 'sql'
+    - name: List Changed Files
+      run: |
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          echo "${changed_file}"
+        done
     - name: CPP Checks
       run: |
-        for changed_file in ${{ steps.changed-cpp-files.outputs.all }}; do
-          sh tools/ci/cpp.sh ${changed_file}
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.cpp ]]
+          then
+            sh tools/ci/cpp.sh ${changed_file}
+          fi
         done
     - name: Lua Checks
       run: |
-        for changed_file in ${{ steps.changed-lua-files.outputs.all }}; do
-          sh tools/ci/lua.sh ${changed_file}
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.lua ]]
+          then
+            sh tools/ci/lua.sh ${changed_file}
+          fi
         done
     - name: SQL Checks
       run: |
-        for changed_file in ${{ steps.changed-sql-files.outputs.all }}; do
-          sh tools/ci/sql.sh ${changed_file}
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.sql ]]
+          then
+            sh tools/ci/sql.sh ${changed_file}
+          fi
         done
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
