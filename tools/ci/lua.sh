@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Requires the following packages:
 # Package manager: luarocks
 # luarocks install luacheck --local

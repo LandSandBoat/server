@@ -111,7 +111,7 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.cpp ]]
           then
-            sh tools/ci/cpp.sh ${changed_file}
+            bash tools/ci/cpp.sh ${changed_file}
           fi
         done
     - name: Lua Checks
@@ -119,7 +119,7 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.lua ]]
           then
-            sh tools/ci/lua.sh ${changed_file}
+            bash tools/ci/lua.sh ${changed_file}
           fi
         done
     - name: SQL Checks
@@ -127,7 +127,7 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.sql ]]
           then
-            sh tools/ci/sql.sh ${changed_file}
+            bash tools/ci/sql.sh ${changed_file}
           fi
         done
     - name: Clang Format (C++ files)
