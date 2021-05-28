@@ -102,34 +102,59 @@ jobs:
       name: Get Changed Files
       uses: jitterbit/get-changed-files@v1
     - name: List Changed Files
+      if: always()
       run: |
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           echo "${changed_file}"
         done
     - name: CPP Checks
+      if: always()
       run: |
+        touch cpp_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.cpp ]]
           then
-            bash tools/ci/cpp.sh ${changed_file}
+            bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
           fi
         done
+        cat cpp_checks.txt
+        if [ -s cpp_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: Lua Checks
+      if: always()
       run: |
+        touch lua_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.lua ]]
           then
-            bash tools/ci/lua.sh ${changed_file}
+            bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
           fi
         done
+        cat lua_checks.txt
+        if [ -s lua_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: SQL Checks
+      if: always()
       run: |
+        touch sql_checks.txt
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.sql ]]
           then
-            bash tools/ci/sql.sh ${changed_file}
+            bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
           fi
         done
+        cat sql_checks.txt
+        if [ -s sql_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
       run: |

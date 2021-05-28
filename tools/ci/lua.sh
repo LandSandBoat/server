@@ -193,4 +193,4 @@ ignore_rules=(
 --no-max-line-length \
 --max-cyclomatic-complexity 30 \
 --globals ${global_funcs[@]} ${global_objects[@]} ${settings_names[@]} \
---ignore ${ignores[@]} ${ignore_rules[@]} \
+--ignore ${ignores[@]} ${ignore_rules[@]}

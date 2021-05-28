@@ -1,7 +1,6 @@
 #!/bin/bash
 
 target=${1:-sql}
-printf "Target: %s\n" ${target}
 
 file_list=()
 

@@ -4,8 +4,6 @@
 # cppcheck
 
 target=${1:-src}
-printf "Target: %s\n" ${target}
-printf "Running cppcheck\n"
 
 # --enable=performance
 # Enable additional checks. The available ids are:
