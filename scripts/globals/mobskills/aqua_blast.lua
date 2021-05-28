@@ -6,8 +6,7 @@
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Fan (cone)
 --  Note: There was not a lot of information about this spell available online, so
---        the initial implementation is relatively basic. It was implemented based
---        heavily off of `aqua_breath.lua`.
+--        the initial implementation is relatively basic.
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/monstertpmoves")
@@ -24,9 +23,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = MobBreathMove(mob, target, 0.25, 1.5, xi.magic.ele.WATER, 400)
-    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, MOBPARAM_WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
+    local dmgmod = 1
+    local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.WATER, dmgmod, TP_NO_EFFECT)
+    local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, MOBPARAM_WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
     return dmg
 end
 
