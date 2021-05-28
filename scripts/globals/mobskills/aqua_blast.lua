@@ -14,12 +14,12 @@ require("scripts/globals/monstertpmoves")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-  -- Do not use this weapon skill on targets behind. Sub-Zero Smash
-  -- should trigger in this case.
-  if target:isBehind(mob) then
-    return 1
-  end
-  return 0
+    -- Do not use this weapon skill on targets behind. Sub-Zero Smash
+    -- should trigger in this case.
+    if target:isBehind(mob) then
+        return 1
+    end
+    return 0
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
