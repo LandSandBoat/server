@@ -65,6 +65,7 @@ xi.full_speed_ahead.tick = function(player, effect)
     local pep = player:getLocalVar("FSA_Pep")
     local food_byte = player:getLocalVar("FSA_Food")
     local food_count = player:getLocalVar("FSA_FoodCount")
+    utils.unused(food_count)
 
     local food_data = {}
     for i = 0, 7 do

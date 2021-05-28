@@ -52,7 +52,7 @@ end
 function utils.stoneskin(target, dmg)
     --handling stoneskin
     if (dmg > 0) then
-        skin = target:getMod(xi.mod.STONESKIN)
+        local skin = target:getMod(xi.mod.STONESKIN)
         if (skin > 0) then
             if (skin > dmg) then --absorb all damage
                 target:delMod(xi.mod.STONESKIN, dmg)
@@ -91,7 +91,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
             target:setMod(shadowType, shadowsLeft)
 
             if (shadowsLeft > 0 and shadowType == xi.mod.UTSUSEMI) then --update icon
-                effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                 if (effect ~= nil) then
                     if (shadowsLeft == 1) then
                         effect:setIcon(xi.effect.COPY_IMAGE)
@@ -484,4 +484,9 @@ function utils.prequire(...)
         local vars = {...}
         printf("Error while trying to load '%s': %s", vars[1], result)
     end
+end
+
+-- Used to keep the linter quiet
+function utils.unused(...)
+    return
 end

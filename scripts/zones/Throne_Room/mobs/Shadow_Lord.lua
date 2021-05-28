@@ -113,9 +113,9 @@ entity.onEventFinish = function(player, csid, option)
         DespawnMob(mobid)
         player:setCharVar("mobid", 0)
 
-        --first phase dies, spawn second phase ID, make him engage, and disable
-        --  magic, auto attack, and abilities (all he does is case Implode by script)
-        mob = SpawnMob(mobid+3)
+        -- first phase dies, spawn second phase ID, make him engage, and disable
+        -- magic, auto attack, and abilities (all he does is case Implode by script)
+        local mob = SpawnMob(mobid+3)
         mob:updateEnmity(player)
         mob:SetMagicCastingEnabled(false)
         mob:SetAutoAttackEnabled(false)

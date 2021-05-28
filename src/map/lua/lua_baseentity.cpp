@@ -621,6 +621,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         if (fread(&size, 1, 1, File) != 1)
         {
             ShowError(CL_RED "CLuaBaseEntity::injectPacket : Did not read size\n" CL_RESET);
+            fclose(File);
             return;
         }
 
@@ -628,6 +629,7 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
         if (fread(*PPacket, 1, size * 2, File) != size * 2)
         {
             ShowError(CL_RED "CLuaBaseEntity::injectPacket : Did not read entire packet\n" CL_RESET);
+            fclose(File);
             return;
         }
 
