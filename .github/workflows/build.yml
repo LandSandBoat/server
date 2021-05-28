@@ -130,7 +130,7 @@ jobs:
         for changed_file in ${{ steps.changed-files.outputs.all }}; do
           if [[ $changed_file == *.lua ]]
           then
-            bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
+            bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
           fi
         done
         cat lua_checks.txt
