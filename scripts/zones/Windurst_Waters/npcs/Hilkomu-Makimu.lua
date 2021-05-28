@@ -15,7 +15,7 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.HIKOMUMAKIMU_SHOP_DIALOG)
 
-    stock = {
+    local stock = {
         4829, 23184, 1,     --Scroll of Poison II
         4839, 12880, 1,     --Scroll of Bio II
         4833,  4747, 1,     --Scroll of Poisonga

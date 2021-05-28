@@ -1370,6 +1370,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
         end
 
         -- determine chance of success
+        local success = 0
         if mJob ~= xi.job.THF or mLvl < (info.treasureLvl - 10) then
             success = 0
         elseif keyTraded == keyType.SKELETON_KEY then

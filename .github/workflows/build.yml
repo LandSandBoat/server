@@ -95,10 +95,66 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format luajit-5.1-dev luarocks
-    - name: Lua Checks
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
+        luarocks install luacheck --local
+        luarocks install lanes --local
+    - id: changed-files
+      name: Get Changed Files
+      uses: jitterbit/get-changed-files@v1
+    - name: List Changed Files
+      if: always()
       run: |
-        sh tools/ci/lua.sh
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          echo "${changed_file}"
+        done
+    - name: CPP Checks
+      if: always()
+      run: |
+        touch cpp_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.cpp ]]
+          then
+            bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+          fi
+        done
+        cat cpp_checks.txt
+        if [ -s cpp_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Lua Checks
+      if: always()
+      run: |
+        touch lua_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.lua ]]
+          then
+            bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+          fi
+        done
+        cat lua_checks.txt
+        if [ -s lua_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: SQL Checks
+      if: always()
+      run: |
+        touch sql_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.sql ]]
+          then
+            bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+          fi
+        done
+        cat sql_checks.txt
+        if [ -s sql_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
       run: |
@@ -115,8 +171,8 @@ jobs:
         else
             echo "Problem with formatting!"
             echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo "" 
-            echo "$diff" 
+            echo ""
+            echo "$diff"
 
             exit -1
         fi

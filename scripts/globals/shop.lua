@@ -13,7 +13,7 @@ require("scripts/globals/keyitems")
 -- IDs for Curio Vendor Moogle
 -----------------------------------
 
-curio =
+local curio =
 {
     ["medicine"]        = 1,
     ["ammunition"]      = 2,

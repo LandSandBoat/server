@@ -30,18 +30,18 @@ function onTrigger(player, str)
     local define_target = "local target = player:getCursorTarget(); "
 
     -- Ensure the command compiles / is valid..
-    local scriptObj, err = loadstring(define_player .. define_target .. str)
+    local scriptObj, err0 = loadstring(define_player .. define_target .. str)
     if (scriptObj == nil) then
         player:PrintToPlayer("Failed to load the given string.")
-        player:PrintToPlayer(err)
+        player:PrintToPlayer(err0)
         os = old_os
         return
     end
 
     -- Execute the string..
-    local status, err = pcall(scriptObj)
+    local status, err1 = pcall(scriptObj)
     if (status == false) then
-        player:PrintToPlayer("Error calling: " .. str .. "\n" .. err)
+        player:PrintToPlayer("Error calling: " .. str .. "\n" .. err1)
     end
 
     -- Restore the os table..

@@ -46,12 +46,14 @@ public:
     auto   getName() -> const char*;
     uint16 getAnimation();
 
-    void setMsg(uint16 messageID);
-    void setAnimation(uint16 animationID);
-    void setRecast(uint16 recastTime);
-    void setCE(uint16 ce);
-    void setVE(uint16 ve);
-    void setRange(float range);
+    void   setMsg(uint16 messageID);
+    void   setAnimation(uint16 animationID);
+    void   setRecast(uint16 recastTime);
+    uint16 getCE();
+    void   setCE(uint16 ce);
+    uint16 getVE();
+    void   setVE(uint16 ve);
+    void   setRange(float range);
 
     static void Register();
 };

@@ -11,9 +11,11 @@ require("scripts/globals/keyitems")
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require("scripts/globals/titles")
+require("scripts/globals/utils")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mhauraID  = require("scripts/zones/Mhaura/IDs")
+utils.unused(mhauraID)
 local selbinaID = require("scripts/zones/Selbina/IDs")
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)

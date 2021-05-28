@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.NESSRUGETOMALL_SHOP_DIALOG)
 
-    stock = {
+    local stock = {
         4394,    10, 1,     --Ginger Cookie
         4407,   727, 1,     --Carp Sushi
         4425,   323, 1,     --Tomato Juice

@@ -100,7 +100,7 @@ quest.sections = {
                     quest:complete(player)
                 end,
                 [102] = function(player, csid, option, npc)
-                    player:delQuest(WINDURST, A_POSE_BY_ANY_OTHER_NAME)
+                    player:delQuest(WINDURST, xi.quest.id.windurst.A_POSE_BY_ANY_OTHER_NAME)
                     quest:setVar(player, 'Prog', 0)
                     quest:setVar(player, 'Stage', 0)
                     player:addTitle(xi.title.LOWER_THAN_THE_LOWEST_TUNNEL_WORM)
