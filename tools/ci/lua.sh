@@ -6,9 +6,7 @@
 # luarocks install lanes --local
 
 target=${1:-scripts}
-printf "Target: %s\n" ${target}
 
-printf "Gathering information on settings\n"
 settings_names=`python3 << EOF
 import re
 file = open('scripts/globals/settings.lua', 'r')
@@ -22,7 +20,6 @@ matches = map(lambda s: s.strip(), matches)
 print(*matches)
 EOF`
 
-printf "Gathering information on globals\n"
 global_funcs=`python3 << EOF
 import re
 file = open('src/map/lua/luautils.cpp', 'r')
@@ -190,7 +187,6 @@ ignore_rules=(
     542 # empty if branch
 )
 
-printf "Running luacheck\n"
 ~/.luarocks/bin/luacheck ${target} \
 --quiet --jobs 4 --no-config --codes \
 --no-unused-args \
@@ -198,4 +194,3 @@ printf "Running luacheck\n"
 --max-cyclomatic-complexity 30 \
 --globals ${global_funcs[@]} ${global_objects[@]} ${settings_names[@]} \
 --ignore ${ignores[@]} ${ignore_rules[@]} \
-exit $?
