@@ -95,10 +95,39 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format luajit-5.1-dev luarocks
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
+        luarocks install luacheck --local
+        luarocks install lanes --local
+    - id: changed-cpp-files
+      name: Get Changed CPP Files
+      uses: jitterbit/get-changed-files@v1
+      with:
+        format: 'cpp'
+    - id: changed-lua-files
+      name: Get Changed Lua Files
+      uses: jitterbit/get-changed-files@v1
+      with:
+        format: 'lua'
+    - id: changed-sql-files
+      name: Get Changed SQL Files
+      uses: jitterbit/get-changed-files@v1
+      with:
+        format: 'sql'
+    - name: CPP Checks
+      run: |
+        for changed_file in ${{ steps.changed-cpp-files.outputs.all }}; do
+          sh tools/ci/cpp.sh ${changed_file}
+        done
     - name: Lua Checks
       run: |
-        sh tools/ci/lua.sh
+        for changed_file in ${{ steps.changed-lua-files.outputs.all }}; do
+          sh tools/ci/lua.sh ${changed_file}
+        done
+    - name: SQL Checks
+      run: |
+        for changed_file in ${{ steps.changed-sql-files.outputs.all }}; do
+          sh tools/ci/sql.sh ${changed_file}
+        done
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
       run: |
@@ -115,8 +144,8 @@ jobs:
         else
             echo "Problem with formatting!"
             echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo "" 
-            echo "$diff" 
+            echo ""
+            echo "$diff"
 
             exit -1
         fi
