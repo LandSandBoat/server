@@ -16,9 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    TrialByFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
-    WhisperOfFlames = player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
+    local TrialByFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
+    local WhisperOfFlames = player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)
 
     if ((TrialByFire == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 6) or (TrialByFire == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByFire_date"))) then
         player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
@@ -27,7 +26,7 @@ entity.onTrigger = function(player, npc)
     elseif (TrialByFire == QUEST_ACCEPTED and WhisperOfFlames == false) then
         player:startEvent(271, 0, xi.ki.TUNING_FORK_OF_FIRE, 0)
     elseif (TrialByFire == QUEST_ACCEPTED and WhisperOfFlames) then
-        numitem = 0
+        local numitem = 0
 
         if (player:hasItem(17665)) then numitem = numitem + 1; end  -- Ifrits Blade
         if (player:hasItem(13241)) then numitem = numitem + 2; end  -- Fire Belt
@@ -39,14 +38,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(274) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 270 and option == 1) then
         if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) == QUEST_COMPLETED) then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
@@ -59,7 +56,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_FIRE)
     elseif (csid == 273) then
-        item = 0
+        local item = 0
         if (option == 1) then item = 17665         -- Ifrits Blade
         elseif (option == 2) then item = 13241  -- Fire Belt
         elseif (option == 3) then item = 13560  -- Fire Ring
@@ -86,7 +83,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE)
         end
     end
-
 end
 
 return entity

@@ -23,9 +23,8 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(275, 0, 937)
         end
     elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED then
-        local SecondReward = player:getCharVar("SecondRewardVar")
         if trade:hasItemQty(17091, 1) and trade:hasItemQty(17061, 1) and trade:hasItemQty(17053, 1) and trade:getItemCount() == 3 then --Check that all 3 items have been traded, one each
-            SecondReward = player:setCharVar("SecondRewardVar", 1)
+            player:setCharVar("SecondRewardVar", 1)
             player:startEvent(265, 0, 17091, 17061, 17053) --Completion of quest cutscene for Wondering Wands
         else
             player:startEvent(260, 0, 17091, 17061, 17053) --Remind player which items are needed ifquest is accepted and items are not traded

@@ -7,12 +7,9 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local hittingTheMarquisateYatnielCS = player:getCharVar("hittingTheMarquisateYatnielCS")
-
     if trade:hasItemQty(17314, 4) and trade:getItemCount() == 4 then -- Trade quake grenades X4
         player:startEvent(10031)
     end
-
 end
 
 entity.onTrigger = function(player, npc)
@@ -33,16 +30,12 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if csid == 10029 then
         player:setCharVar("hittingTheMarquisateYatnielCS", 2)
     elseif csid == 10031 then
         player:setCharVar("hittingTheMarquisateYatnielCS", 3)
         player:tradeComplete()
     end
-
-
-
 end
 
 return entity

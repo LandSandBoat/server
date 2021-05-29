@@ -14,10 +14,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    Guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
-    Pamamas = player:getCharVar("PamamaVar")
-    pfame = player:getFameLevel(KAZHAM)
-    needToZone = player:needToZone()
+    local Guardian = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
+    local Pamamas = player:getCharVar("PamamaVar")
+    local pfame = player:getFameLevel(KAZHAM)
+    local needToZone = player:needToZone()
 
     if (Guardian == QUEST_ACCEPTED) then
         if (Pamamas == 1) then

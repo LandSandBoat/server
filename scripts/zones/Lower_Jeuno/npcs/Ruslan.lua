@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     if wonderingstatus == QUEST_ACCEPTED then
-        prog = player:getCharVar("QuestWonderingMin_var")
+        local prog = player:getCharVar("QuestWonderingMin_var")
         if prog == 0 then                 -- WONDERING_MINSTREL + Rosewood Lumber: During Quest / Progression
             player:startEvent(10009, 0, 718)
             player:setCharVar("QuestWonderingMin_var", 1)
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(10010, 0, 718)
         end
     elseif wonderingstatus == QUEST_COMPLETED then
-        rand = math.random(3)
+        local rand = math.random(3)
         if rand == 1 then
             player:startEvent(10011)         -- WONDERING_MINSTREL: After Quest
         else

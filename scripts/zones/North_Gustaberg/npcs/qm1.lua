@@ -44,7 +44,7 @@ local function moveSirenTear(npc)
     if currentPos == 4 then
         resetSirenTear(npc)
     else
-        nextPos = (currentPos == 0) and 2 or (currentPos + 1)
+        local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
         npc:setLocalVar("pos", nextPos)
         npc:setPos(unpack(positions[nextPos]))
     end
