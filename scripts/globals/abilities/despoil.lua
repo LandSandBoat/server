@@ -23,6 +23,39 @@ local despoilDebuffs =
     xi.effect.SLOW
 }
 
+local function processDebuff(player, target, ability, debuff)
+    local power = 10
+    if debuff == xi.effect.ATTACK_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_ATT_DOWN)
+        power = 20
+    elseif debuff == xi.effect.DEFENSE_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_DEF_DOWN)
+        power = 30
+    elseif debuff == xi.effect.MAGIC_ATK_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_MATT_DOWN)
+    elseif debuff == xi.effect.MAGIC_DEF_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_MDEF_DOWN)
+        power = 20
+    elseif debuff == xi.effect.EVASION_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_EVA_DOWN)
+        power = 30
+    elseif debuff == xi.effect.ACCURACY_DOWN then
+        ability:setMsg(xi.msg.basic.DESPOIL_ACC_DOWN)
+        power = 20
+    elseif debuff == xi.effect.SLOW then
+        ability:setMsg(xi.msg.basic.DESPOIL_SLOW)
+        local dMND = player:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
+        if dMND >= 0 then
+            power = 2 * dMND + 1500
+        else
+            power = dMND + 1500
+        end
+        power = utils.clamp(power, 750, 3000)
+    end
+
+    return power
+end
+
 ability_object.onAbilityCheck = function(player, target, ability)
     if player:getFreeSlotsCount() == 0 then
         return xi.msg.basic.FULL_INVENTORY, 0
@@ -79,39 +112,6 @@ ability_object.onUseAbility = function(player, target, ability, action)
     end
 
     return stolen
-end
-
-function processDebuff(player, target, ability, debuff)
-    local power = 10
-    if debuff == xi.effect.ATTACK_DOWN then
-        ability:setMsg(xi.msg.basic.DESPOIL_ATT_DOWN)
-        power = 20
-    elseif debuff == xi.effect.DEFENSE_DOWN then
-        ability:setMsg(xi.msg.basic.DESPOIL_DEF_DOWN)
-        power = 30
-    elseif debuff == xi.effect.MAGIC_ATK_DOWN then
-        ability:setMsg(xi.msg.basic.DESPOIL_MATT_DOWN)
-    elseif debuff == xi.effect.MAGIC_DEF_DOWN then
-        ability:setMsg(xi.msg.basic.DESPOIL_MDEF_DOWN)
-        power = 20
-    elseif debuff == xi.effect.EVASION_DOWN then
-        ability:setMsg(xi.msg.basic.DESPOIL_EVA_DOWN)
-        power = 30
-    elseif debuff == xi.effect.ACCURACY_DOWN then
-        ability:setMsg(xi.msg.basic.DESPOIL_ACC_DOWN)
-        power = 20
-    elseif debuff == xi.effect.SLOW then
-        ability:setMsg(xi.msg.basic.DESPOIL_SLOW)
-        local dMND = player:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
-        if dMND >= 0 then
-            power = 2 * dMND + 1500
-        else
-            power = dMND + 1500
-        end
-        power = utils.clamp(power, 750, 3000)
-    end
-
-    return power
 end
 
 return ability_object

@@ -5,8 +5,8 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    pet:addListener("ENGAGE", "AUTO_TARGETMARKER_ENGAGE", function(pet, target)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("ENGAGE", "AUTO_TARGETMARKER_ENGAGE", function(pet, target)
         local ignored = pet:getLocalVar("targetmarker")
         if ignored > 0 then
             pet:delMod(xi.mod.ACC, ignored)
@@ -30,7 +30,7 @@ attachment_object.onEquip = function(pet)
             pet:setLocalVar("targetmarker", accbonus)
         end
     end)
-    pet:addListener("DISENGAGE", "AUTO_TARGETMARKER_DISENGAGE", function(pet)
+    automaton:addListener("DISENGAGE", "AUTO_TARGETMARKER_DISENGAGE", function(pet)
         local ignored = pet:getLocalVar("targetmarker")
         if ignored > 0 then
             pet:delMod(xi.mod.ACC, ignored)
