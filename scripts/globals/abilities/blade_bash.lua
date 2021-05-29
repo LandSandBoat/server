@@ -26,7 +26,6 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 
     -- Yes, even Blade Bash deals damage dependant of Dark Knight level
-    local darkKnightLvl = 0
     local damage = 0
     if (player:getMainJob() == xi.job.DRK) then
         damage = math.floor(((player:getMainLvl() + 11) / 4) + player:getMod(xi.mod.WEAPON_BASH))
