@@ -17,14 +17,14 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
-    NeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
+    local troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
+    local NeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
 
-    if (troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3) then
+    if troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(SANDORIA) >= 3 then
         player:startEvent(57)
-    elseif (troubleAtTheSluice == QUEST_ACCEPTED and NeutralizerKI == false) then
+    elseif troubleAtTheSluice == QUEST_ACCEPTED and NeutralizerKI == false then
         player:startEvent(55)
-    elseif (NeutralizerKI) then
+    elseif NeutralizerKI then
         player:startEvent(56)
     else
         player:startEvent(585)

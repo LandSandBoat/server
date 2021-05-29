@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    NorgFame = player:getFameLevel(NORG)
+    local NorgFame = player:getFameLevel(NORG)
 
     player:startEvent(100 + (NorgFame - 1))
 end

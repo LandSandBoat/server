@@ -11,8 +11,6 @@ local ID = require("scripts/zones/Northern_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local count = trade:getItemCount()
-    local gil = trade:getGil()
     local itemQuality = 0
 
     if trade:getItemCount() == 1 and trade:getGil() == 0 then

@@ -14,15 +14,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
-    Legging = trade:getItemQty(14117)
+    local ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    local Legging = trade:getItemQty(14117)
 
     if (Legging > 0 and Legging == trade:getItemCount()) then
-        TurnedInVar = player:getCharVar("shiningLeggings_nb")
+        local TurnedInVar = player:getCharVar("shiningLeggings_nb")
         if (ShiningLeggings == QUEST_ACCEPTED and TurnedInVar + Legging >= 10) then -- complete quest
             player:startEvent(129)
         elseif (ShiningLeggings == QUEST_ACCEPTED and TurnedInVar <= 9) then -- turning in less than the amount needed to finish the quest
-            TotalLeggings = Legging + TurnedInVar
+            local TotalLeggings = Legging + TurnedInVar
             player:tradeComplete()
             player:setCharVar("shiningLeggings_nb", TotalLeggings)
             player:startEvent(128, TotalLeggings) -- Update player on number of leggings turned in
@@ -38,7 +38,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
+    local ShiningLeggings = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_LEGGINGS)
 
     if (ShiningLeggings == QUEST_AVAILABLE and  player:getFameLevel(NORG) >= 3) then
         player:startEvent(127) -- Start Like Shining Leggings

@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
     elseif (TrialByWater == QUEST_ACCEPTED and WhisperOfTides == false) then
         player:startEvent(110, 0, xi.ki.TUNING_FORK_OF_WATER, 2)
     elseif (TrialByWater == QUEST_ACCEPTED and WhisperOfTides) then
-        numitem = 0
+        local numitem = 0
 
         if (player:hasItem(17439)) then numitem = numitem + 1; end  -- Leviathan's Rod
         if (player:hasItem(13246)) then numitem = numitem + 2; end  -- Water Belt

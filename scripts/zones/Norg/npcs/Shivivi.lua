@@ -67,8 +67,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    DampScroll = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
-    mLvl = player:getMainLvl()
+    local DampScroll = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.SECRET_OF_THE_DAMP_SCROLL)
+    local mLvl = player:getMainLvl()
 
     if DampScroll == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3 and mLvl >= 10 and player:hasItem(1210) == true then
         player:startEvent(31, 1210) -- Start the quest
