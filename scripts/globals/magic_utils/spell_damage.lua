@@ -50,6 +50,14 @@ local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGI
 -- Tier 5 spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/3663.html
 -- Tier 6 spells: https://nw6yx36onohv5j6wmzoba3nllq-ac4c6men2g7xr2a-wiki-ffo-jp.translate.goog/html/32808.html
 
+-- Table column numbers
+local stat = 1
+local vNPC = 2
+local mNPC = 3
+local vPC  = 4
+local I    = 5
+local M0   = 6
+
 local damageSpellParams =
 {
 -- Single target black magic spells:
@@ -202,9 +210,9 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
     if caster:isPC() then
-        baseSpellDamage = damageSpellParams[spellId][4] -- vPC
+        baseSpellDamage = damageSpellParams[spellId][vPC] -- vPC
     else
-        baseSpellDamage = damageSpellParams[spellId][2] -- vNPC
+        baseSpellDamage = damageSpellParams[spellId][vNPC] -- vNPC
     end
 
     -----------------------------------
@@ -213,13 +221,13 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     -- Black spell.
     if skillType == xi.skill.ELEMENTAL_MAGIC then
         if caster:isPC() then
-            local spellMultiplier0   = damageSpellParams[spellId][6] -- (M) In wiki.
-            local spellMultiplier50  = damageSpellParams[spellId][7] -- (M) In wiki.
-            local spellMultiplier100 = damageSpellParams[spellId][8] -- (M) In wiki.
-            local spellMultiplier200 = damageSpellParams[spellId][9] -- (M) In wiki.
-            local spellMultiplier300 = damageSpellParams[spellId][10] -- (M) In wiki.
-            local spellMultiplier400 = damageSpellParams[spellId][11] -- (M) In wiki.
-            local spellMultiplier500 = damageSpellParams[spellId][12] -- (M) In wiki.
+            local spellMultiplier0   = damageSpellParams[spellId][M0] -- (M) In wiki.
+            local spellMultiplier50  = damageSpellParams[spellId][M0 + 1] -- (M) In wiki.
+            local spellMultiplier100 = damageSpellParams[spellId][M0 + 2] -- (M) In wiki.
+            local spellMultiplier200 = damageSpellParams[spellId][M0 + 3] -- (M) In wiki.
+            local spellMultiplier300 = damageSpellParams[spellId][M0 + 4] -- (M) In wiki.
+            local spellMultiplier400 = damageSpellParams[spellId][M0 + 5] -- (M) In wiki.
+            local spellMultiplier500 = damageSpellParams[spellId][M0 + 6] -- (M) In wiki.
 
             -- Ugly, but better than 7 more values in spells table.
             if statDiff < 50 then
@@ -246,8 +254,8 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
     elseif skillType == xi.skill.DIVINE_MAGIC or
         (skillType == xi.skill.ELEMENTAL_MAGIC and not caster:isPC())
     then
-        local spellMultiplier = damageSpellParams[spellId][3] -- M
-        local inflexionPoint  = damageSpellParams[spellId][5] -- I
+        local spellMultiplier = damageSpellParams[spellId][mNPC] -- M
+        local inflexionPoint  = damageSpellParams[spellId][I] -- I
         if statDiff <= 0 then
             statDiffBonus = statDiff
         elseif statDiff > 0 and statDiff <= inflexionPoint then
@@ -258,7 +266,7 @@ function calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff
 
     -- Ninjutsu.
     elseif skillType == xi.skill.NINJUTSU then
-        statDiffBonus = math.floor(statDiff * damageSpellParams[spellId][3])
+        statDiffBonus = math.floor(statDiff * damageSpellParams[spellId][mNPC])
     end
 
     -----------------------------------
@@ -623,22 +631,27 @@ function calculateDayAndWeather(caster, target, spell, spellId, spellElement)
                 dayAndWeather = dayAndWeather + 0.10
             end
         end
+
         if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather + 0.10
         end
+
     elseif weather == xi.magic.singleWeatherWeak[spellElement] then
         if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather - 0.10
         end
+
     elseif weather == xi.magic.doubleWeatherStrong[spellElement] then
         if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
             if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
                 dayAndWeather = dayAndWeather + 0.10
             end
         end
+
         if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather + 0.25
         end
+
     elseif weather == xi.magic.doubleWeatherWeak[spellElement] then
         if math.random() < 0.33 or caster:getMod(elementalObi[spellElement]) >= 1 or isHelixSpell then
             dayAndWeather = dayAndWeather - 0.25
@@ -836,7 +849,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     local spellId      = spell:getID()
     local skillType    = spell:getSkillType()
     local spellElement = spell:getElement()
-    local statDiff     = caster:getStat(damageSpellParams[spellId][1]) - target:getStat(damageSpellParams[spellId][1])
+    local statDiff     = caster:getStat(damageSpellParams[spellId][stat]) - target:getStat(damageSpellParams[spellId][stat])
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage          = calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff)
