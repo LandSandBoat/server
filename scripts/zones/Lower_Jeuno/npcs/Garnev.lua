@@ -42,7 +42,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.CLOCK_TOWER_OIL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CLOCK_TOWER_OIL)
         player:addFame(JEUNO, 30)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DEAL_WITH_TENSHODO)
     end
 end
