@@ -12,10 +12,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local ForemansBestFriend = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
 
-ForemansBestFriend = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
-
-    if (ForemansBestFriend == QUEST_ACCEPTED) then
+    if ForemansBestFriend == QUEST_ACCEPTED then
         player:startEvent(111)
     else
         player:startEvent(46)
