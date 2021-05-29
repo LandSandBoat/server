@@ -310,7 +310,7 @@ end
 
 -- Calculate: Multiple Target Damage Reduction (MTDR)
 xi.magic_utils.spell_damage.calculateMTDR = function(caster, target, spell)
-    local MTDR    = 0 -- The variable we want to calculate.
+    local MTDR    = 1 -- The variable we want to calculate.
     local targets = spell:getTotalTargets()
 
     if targets > 1 then
@@ -319,8 +319,6 @@ xi.magic_utils.spell_damage.calculateMTDR = function(caster, target, spell)
         else
             MTDR = 0.4
         end
-    else
-        MTDR = 1
     end
 
     return MTDR
