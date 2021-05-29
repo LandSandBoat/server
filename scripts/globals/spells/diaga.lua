@@ -46,14 +46,18 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
 
-    -- Do it!
-    target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
-    spell:setMsg(xi.msg.basic.MAGIC_DMG)
-
     -- Try to kill same tier Bio (non-default behavior)
     if BIO_OVERWRITE == 1 and bio ~= nil then
         if bio:getPower() == 1 then
             target:delStatusEffect(xi.effect.BIO)
+        end
+    else
+        -- Do it!
+        if bio ~= nil then -- if mob has bio effect
+            spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage, but no dot effects
+        else -- otherwise hit for initial damage and add dot
+            target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
+            spell:setMsg(xi.msg.basic.MAGIC_DMG)
         end
     end
 
