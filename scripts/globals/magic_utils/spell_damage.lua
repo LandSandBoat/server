@@ -366,11 +366,9 @@ end
 function calculateResist(caster, target, spell, skillType, spellElement, statDiff)
     local resist        = 1 -- The variable we want to calculate
     local casterJob     = caster:getMainJob()
-    local casterWeather = caster:getWeather()
     local spellGroup    = spell:getSpellGroup()
 
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
-    local magicAccBonus = 0
     local magicEva      = 0
     local magicHitRate  = 0
 
@@ -465,7 +463,7 @@ function calculateResist(caster, target, spell, skillType, spellElement, statDif
             -- NIN Job Point: Ninjitsu Accuracy Bonus
             if skillType == xi.skill.NINJUTSU then
                 magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-            end        
+            end
         -- SCH Job Points
         elseif casterJob == xi.job.SCH then
             if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
@@ -620,7 +618,7 @@ function calculateDayAndWeather(caster, target, spell, spellId, spellElement)
     local isHelixSpell   = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
 
     -- See if its a Helix type spell
-    if spellId >= 278 and id <= 285 then
+    if spellId >= 278 and spellId <= 285 then
         isHelixSpell = true
     end
 
@@ -775,7 +773,7 @@ function calculateSkillTypeMultiplier(caster, target, spell, skillType)
     local skillTypeMultiplier = 1
 
     if skillType == xi.skill.ELEMENTAL_MAGIC then
-        skillTypeMultiplier = ELEMENTAL_POWER 
+        skillTypeMultiplier = ELEMENTAL_POWER
     elseif skillType == xi.skill.DARK_MAGIC then
         skillTypeMultiplier = DARK_POWER
     elseif skillType == xi.skill.NINJUTSU then
@@ -815,7 +813,17 @@ function calculateNinFutaeBonus(caster, target, spell, skillType)
     return ninFutaeBonus
 end
 
-function calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
+xi.magic_utils.spell_damage.calculateUndeadDivinePenalty = function(caster, target, spell, skillType)
+    local undeadDivinePenalty = 1
+
+    if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC then
+        undeadDivinePenalty = 1.5
+    end
+
+    return undeadDivinePenalty
+end
+
+xi.magic_utils.spell_damage.calculateNukeAbsorbOrNullify = function(caster, target, spell, spellElement)
     local nukeAbsorbOrNullify = 1
 
     -- Calculate chance for spell absortion.
@@ -830,15 +838,6 @@ function calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
     return nukeAbsorbOrNullify
 end
 
-function calculateUndeadDivinePenalty(caster, target, spell, skillType)
-    local undeadDivinePenalty = 1
-
-    if target:isUndead() and skillType == xi.skill.DIVINE_MAGIC then
-        undeadDivinePenalty = 1.5
-    end
-
-    return undeadDivinePenalty
-end
 -----------------------------------
 -- Spell Helper Function
 -----------------------------------
@@ -867,8 +866,8 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
     local skillTypeMultiplier  = calculateSkillTypeMultiplier(caster, target, spell, skillType)
     local ninSkillBonus        = calculateNinSkillBonus(caster, target, spell, spellId, skillType)
     local ninFutaeBonus        = calculateNinFutaeBonus(caster, target, spell, skillType)
-    local undeadDivinePenalty  = calculateUndeadDivinePenalty(caster, target, spell, skillType) 
-    local nukeAbsorbOrNullify  = calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
+    local undeadDivinePenalty  = xi.magic_utils.spell_damage.calculateUndeadDivinePenalty(caster, target, spell, skillType)
+    local nukeAbsorbOrNullify  = xi.magic_utils.spell_damage.calculateNukeAbsorbOrNullify(caster, target, spell, spellElement)
 
     -- Calculate finalDamage. It MUST be floored after EACH multiplication.
     finalDamage = math.floor(spellDamage * MTDR)
