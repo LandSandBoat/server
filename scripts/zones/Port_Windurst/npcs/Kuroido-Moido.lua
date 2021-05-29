@@ -61,7 +61,7 @@ entity.onTrigger = function(player, npc)
         -- The Parameters are Item IDs for the Recipe
         player:startEvent(858, item, 1134, 2778, 2778, 4099, 2778)
     else
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(225)   -- Standard Conversation
         else

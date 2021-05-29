@@ -6,25 +6,6 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:SetMagicCastingEnabled(false)
-end
-
-entity.onMobFight = function(mob, target)
-    local form = mob:getAnimationSub()
-
-    -- Mammets seem to be able to change to any given form, per YouTube videos
-    -- Added a random chance to change forms every 3 seconds if 60 seconds have passed, just to make things less formulaic.
-        -- May be able to change forms more often.  Witnessed one at ~50 seconds, most were 60-80.
-        -- Believe it or not, these changes may be too slow @ 50% chance.  Probability is a pain.
-    -- L40 means their "weapons" are 40 DMG by default.
-    if ((mob:getBattleTime() > mob:getLocalVar('changeTime') + 60 or mob:getLocalVar('changeTime') == 0) and math.random(0, 1) == 1
-        and not mob:hasStatusEffect(xi.effect.FOOD)) then
-        changeForm(mob)
-    end
-
-end
-
 local function changeForm(mob)
     local newform = math.random(0, 2)
     if (mob:getAnimationSub() == newform) then
@@ -51,6 +32,23 @@ local function changeForm(mob)
     end
     mob:setAnimationSub(newform)
     mob:setLocalVar('changeTime', mob:getBattleTime())
+end
+
+entity.onMobSpawn = function(mob)
+    mob:SetMagicCastingEnabled(false)
+end
+
+entity.onMobFight = function(mob, target)
+    -- Mammets seem to be able to change to any given form, per YouTube videos
+    -- Added a random chance to change forms every 3 seconds if 60 seconds have passed, just to make things less formulaic.
+        -- May be able to change forms more often.  Witnessed one at ~50 seconds, most were 60-80.
+        -- Believe it or not, these changes may be too slow @ 50% chance.  Probability is a pain.
+    -- L40 means their "weapons" are 40 DMG by default.
+    if ((mob:getBattleTime() > mob:getLocalVar('changeTime') + 60 or mob:getLocalVar('changeTime') == 0) and math.random(0, 1) == 1
+        and not mob:hasStatusEffect(xi.effect.FOOD)) then
+        changeForm(mob)
+    end
+
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

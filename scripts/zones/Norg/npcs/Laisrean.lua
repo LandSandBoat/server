@@ -16,14 +16,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    Stash = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
-    mLvl = player:getMainLvl()
-    SeaStatue = player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE)
+    local Stash = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
+    local mLvl = player:getMainLvl()
+    local SeaStatue = player:hasKeyItem(xi.ki.SEA_SERPENT_STATUE)
 
-    if (Stash == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 and mLvl >= 5) then
+    if Stash == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 4 and mLvl >= 5 then
         player:startEvent(33) -- Start quest
-    elseif (Stash == QUEST_ACCEPTED) then
-        if (SeaStatue == true) then
+    elseif Stash == QUEST_ACCEPTED then
+        if SeaStatue == true then
             player:startEvent(35, xi.ki.SEA_SERPENT_STATUE) -- Finish quest
         else
             player:startEvent(34) -- Reminder Dialogue
@@ -37,10 +37,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 33 and option == 1) then
+    if csid == 33 and option == 1 then
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SAHAGINS_STASH)
-    elseif (csid == 35) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 35 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4946)
         else
             player:delKeyItem(xi.ki.SEA_SERPENT_STATUE)

@@ -13,11 +13,10 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     local Vengeful = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
 
     if (Vengeful ~= QUEST_AVAILABLE) then
-        QuadavHelm = trade:hasItemQty(501, 1)
+        local QuadavHelm = trade:hasItemQty(501, 1)
         if (QuadavHelm == true and trade:getItemCount() == 1) then
             player:startEvent(107)
         end
@@ -25,7 +24,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local Vengeful = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
     local Fame = player:getFameLevel(BASTOK)
 
@@ -41,16 +39,13 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 106) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
     elseif (csid == 107) then
-        Vengeful = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
+        local Vengeful = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
         if (Vengeful == QUEST_ACCEPTED) then
             player:addTitle(xi.title.AVENGER)
             player:addFame(BASTOK, 120)

@@ -26,7 +26,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- MOG HOUSE EXIT
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        position = math.random(1, 5) + 45
+        local position = math.random(1, 5) + 45
         player:setPos(position, 10, -73, 192)
     end
 
@@ -40,7 +40,6 @@ end
 zone_object.onRegionEnter = function(player, region)
 
     local regionID = region:GetRegionID()
-    -- printf("regionID: %u", regionID)
 
     if regionID == 1 then
         if player:getCurrentMission(COP) == xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN and player:getCharVar("PromathiaStatus") == 1 then

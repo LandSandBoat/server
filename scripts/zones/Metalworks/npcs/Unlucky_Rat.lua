@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 
     local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
 
-    if (MeanMachine == QUEST_ACCEPTED) then
+    if MeanMachine == QUEST_ACCEPTED then
         local FreeSlots = player:getFreeSlotsCount()
 
-        if (FreeSlots >= 1) then
-            count = trade:getItemCount()
-            SlimeOil = trade:hasItemQty(637, 1)
+        if FreeSlots >= 1 then
+            local count = trade:getItemCount()
+            local slimeOil = trade:hasItemQty(637, 1)
 
-            if (SlimeOil == true and count == 1) then
+            if slimeOil == true and count == 1 then
                 player:startEvent(557)
             end
         else
@@ -35,9 +35,9 @@ entity.onTrigger = function(player, npc)
     local MeanMachine = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
     local Fame = player:getFameLevel(BASTOK)
 
-    if (MeanMachine == QUEST_AVAILABLE and Fame >= 2) then
+    if MeanMachine == QUEST_AVAILABLE and Fame >= 2 then
         player:startEvent(556)
-    elseif (MeanMachine == QUEST_ACCEPTED) then
+    elseif MeanMachine == QUEST_ACCEPTED then
         player:startEvent(559)
     else
         player:startEvent(550)
@@ -46,16 +46,13 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
-
 end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 556) then
+    if csid == 556 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
-    elseif (csid == 557) then
+    elseif csid == 557 then
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MEAN_MACHINE)
         player:addFame(BASTOK, 120)
         player:tradeComplete()

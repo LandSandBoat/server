@@ -15,15 +15,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rumorsFromTheWest = player:getCurrentMission(SOA) == xi.mission.id.soa.RUMORS_FROM_THE_WEST
+    -- local rumorsFromTheWest = player:getCurrentMission(SOA) == xi.mission.id.soa.RUMORS_FROM_THE_WEST
     local theGeomagnetron = player:getCurrentMission(SOA) == xi.mission.id.soa.THE_GEOMAGNETRON
 
     -- Dialog options bits
-    local turnOffNevermind      = 1
-    local turnOffApply          = 2
-    local turnOffSystemInfo     = 4
-    local turnOffDungeonInfo    = 8
-    local turnOffOptionToPay    = 16
+    -- local turnOffNevermind      = 1
+    -- local turnOffApply          = 2
+    -- local turnOffSystemInfo     = 4
+    -- local turnOffDungeonInfo    = 8
+    -- local turnOffOptionToPay    = 16
     local turnOffAskingForWork  = 32
 
     if ENABLE_SOA == 0 then

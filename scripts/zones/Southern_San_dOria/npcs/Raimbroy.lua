@@ -24,12 +24,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local theSweetestThings = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
 
     -- "The Sweetest Things" Quest Dialogs
     if (player:getFameLevel(SANDORIA) >= 2 and theSweetestThings == QUEST_AVAILABLE) then
-        theSweetestThingsVar = player:getCharVar("theSweetestThings")
+        local theSweetestThingsVar = player:getCharVar("theSweetestThings")
         if (theSweetestThingsVar == 1) then
             player:startEvent(533)
         elseif (theSweetestThingsVar == 2) then
@@ -42,14 +41,12 @@ entity.onTrigger = function(player, npc)
     elseif (theSweetestThings == QUEST_COMPLETED) then
         player:startEvent(537)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     -- "The Sweetest Things" ACCEPTED
     if (csid == 532) then
         player:setCharVar("theSweetestThings", 1)
@@ -74,7 +71,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(SANDORIA, 5)
         end
     end
-
 end
 
 return entity

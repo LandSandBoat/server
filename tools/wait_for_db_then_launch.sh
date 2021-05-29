@@ -4,6 +4,7 @@ while ! mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --passwor
     sleep 5
 done
 sleep 5
+
 # Docker specific table to track DB_VER
 if [[ $(mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "SHOW TABLES LIKE 'DB_VER'") ]]
 then
@@ -13,11 +14,12 @@ else
     XI_DB_VER=`git rev-parse --short=4 HEAD`
 fi
 echo -e "\n#DB_VER: ${XI_DB_VER}" >> ../conf/version.conf
+
 # Update database if needed
-python3 dbtool.py update
+python3 tools/dbtool.py update
 XI_DB_VER=`git rev-parse --short=4 HEAD`
 mysql --host=$XI_DB_HOST --port=$XI_DB_PORT --user=$XI_DB_USER --password=$XI_DB_USER_PASSWD $XI_DB_NAME -e "UPDATE DB_VER SET ver = '${XI_DB_VER}'"
-cd ..
+
 # Start servers
 echo "starting topaz_connect"
 nohup ./topaz_connect > topaz_connect.log &

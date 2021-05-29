@@ -13,18 +13,15 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(4527, 1) and trade:getItemCount() == 1) then
             player:startEvent(84)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
-    sleeplessNights = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
+    local sleeplessNights = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
 
     if (player:getFameLevel(SANDORIA) >= 2 and sleeplessNights == QUEST_AVAILABLE) then
         player:startEvent(85)
@@ -41,7 +38,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 85 and option == 1) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     elseif (csid == 84) then
@@ -52,7 +48,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addFame(SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end
-
 end
 
 return entity

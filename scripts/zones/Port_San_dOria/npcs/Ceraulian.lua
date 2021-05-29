@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
     elseif (Quotas_No == 1) then
         player:startEvent(14) -- Short version for those that said no.
     elseif (Quotas_Status == QUEST_ACCEPTED and Quotas_Progress == 0) then
-        players:startEvent(13) -- Reminder to bring Gold Hairpin
+        player:startEvent(13) -- Reminder to bring Gold Hairpin
     elseif (Quotas_Progress == 1) then
         if (player:getCharVar("ChasingQuotas_date") > os.time()) then
             player:startEvent(3) -- Fluff cutscene because you haven't waited a day

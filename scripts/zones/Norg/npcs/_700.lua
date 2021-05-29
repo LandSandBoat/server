@@ -16,9 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ZilartMission = player:getCurrentMission(ZILART)
     local currentMission = player:getCurrentMission(BASTOK)
-    local ZilartStatus = player:getMissionStatus(xi.mission.log_id.ZILART)
     local PromathiaMission = player:getCurrentMission(COP)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 

@@ -14,17 +14,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+
     local RegionOwner = GetRegionOwner(xi.region.ZULKHEIM)
     if RegionOwner ~= xi.nation.WINDURST then
         player:showText(npc, ID.text.BIN_STEJIHNA_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.BIN_STEJIHNA_OPEN_DIALOG)
-
-        local rank = GetNationRank(xi.nation.WINDURST)
-        if rank ~= 3 then
-            table.insert(stock, 1840) --Semolina
-            table.insert(stock, 1840)
-        end
 
         local stock =
         {
@@ -36,6 +31,12 @@ entity.onTrigger = function(player, npc)
             4366,    22,  -- La Theine Cabbage
             4378,    55   -- Selbina Milk
         }
+
+        local rank = GetNationRank(xi.nation.WINDURST)
+        if rank ~= 3 then
+            table.insert(stock, 1840) --Semolina
+            table.insert(stock, 1840)
+        end
 
         xi.shop.general(player, stock, WINDURST)
     end

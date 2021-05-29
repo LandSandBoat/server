@@ -16,7 +16,6 @@ end
 entity.onTrigger = function(player, npc)
     -- ENTER THE TALEKEEPER
     if player:getCurrentMission(BASTOK) == xi.mission.id.bastok.ENTER_THE_TALEKEEPER then
-        local missionStatus = player:getMissionStatus(player:getNation())
         local anyGhostsAlive = false
         for i = 0, 2 do
             if GetMobByID(ID.mob.TALEKEEPER_OFFSET + i):isAlive() then

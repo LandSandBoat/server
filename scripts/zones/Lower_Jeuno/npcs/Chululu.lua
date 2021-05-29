@@ -141,7 +141,7 @@ entity.onEventFinish = function(player, csid, option)
             title = xi.title.CARD_COLLECTOR,
             var = {"AllInTheCards_date"}
         }) then
-            trade:confirm()
+            player:confirmTrade()
         end
     elseif csid == 197 then
         npcUtil.completeQuest(player, JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {

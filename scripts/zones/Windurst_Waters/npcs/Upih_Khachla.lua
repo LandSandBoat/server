@@ -18,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.UPIHKHACHLA_SHOP_DIALOG)
 
-    stock = {
+    local stock = {
         17313,  1107, 1,     --Grenade
         4112,   837, 1,     --Potion
         951,   108, 1,     --Wijnruit
@@ -37,7 +37,7 @@ entity.onTrigger = function(player, npc)
         1241,   354, 3      --Twinkle Powder
     }
 
-    rank = GetNationRank(xi.nation.WINDURST)
+    local rank = GetNationRank(xi.nation.WINDURST)
     if (rank ~= 1) then
         table.insert(stock, 1022) --Thief's Tools
         table.insert(stock, 3643)

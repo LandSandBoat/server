@@ -26,7 +26,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    donateToRecycling = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
+    local donateToRecycling = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
 
     if donateToRecycling == QUEST_AVAILABLE then
         player:startEvent(20) -- Start quest "Donate to Recycling"

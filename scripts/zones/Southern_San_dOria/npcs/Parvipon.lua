@@ -19,22 +19,19 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-TheMerchantsBidding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
+    local TheMerchantsBidding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
 
     if (TheMerchantsBidding == QUEST_AVAILABLE) then
         player:startEvent(90)
     else
         player:startEvent(88)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 90 and option == 1) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
     elseif (csid == 89) then
@@ -48,7 +45,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(SANDORIA, 5)
         end
     end
-
 end
 
 return entity

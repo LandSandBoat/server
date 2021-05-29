@@ -13,10 +13,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    Rivals = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
+    local Rivals = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
 
     if (Rivals == QUEST_ACCEPTED) then
-        FreeSlots = player:getFreeSlotsCount()
+        local FreeSlots = player:getFreeSlotsCount()
 
         if (FreeSlots >= 1) then
             count = trade:getItemCount()
@@ -35,7 +35,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    Rivals = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
+    local Rivals = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
 
     if (player:getCharVar("theTalekeeperGiftCS") == 1) then
         player:startEvent(171)
@@ -49,10 +49,8 @@ entity.onTrigger = function(player, npc)
     end
 
 end
--- 1  30  93  94  171  1010  176  180  184
+
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)

@@ -20,7 +20,7 @@ end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then -- play end CS. Need time and battle id for record keeping + storage
-        local name, clearTime, partySize = battlefield:getRecord()
+        local _, clearTime, partySize = battlefield:getRecord()
 
         if player:getCurrentMission(ZILART) == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER then
             player:setLocalVar("battlefieldWin", battlefield:getID())
