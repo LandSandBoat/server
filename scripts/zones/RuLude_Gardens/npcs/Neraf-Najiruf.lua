@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    saveMySister = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
+    local saveMySister = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SISTER)
 
     if (saveMySister == QUEST_AVAILABLE and player:getCharVar("saveMySisterVar") == 3) then
         player:startEvent(98) -- Real start of this quest (with addquest)

@@ -66,8 +66,10 @@ entity.onTrigger = function(player, npc)
             player:startEvent(86) -- During Quest "Whence Blows the Wind"
         end
     elseif (ridingOnTheClouds == QUEST_AVAILABLE and LvL >= 61 and player:getLevelCap() == 65 and MAX_LEVEL >= 70) then
-        rand1 = math.random(0, 7); rand2 = math.random(0, 7)
-        rand3 = math.random(0, 7); rand4 = math.random(0, 7)
+        local rand1 = math.random(0, 7)
+        local rand2 = math.random(0, 7)
+        local rand3 = math.random(0, 7)
+        local rand4 = math.random(0, 7)
         player:setCharVar("ridingOnTheClouds_1", rand1 + 1); player:setCharVar("ridingOnTheClouds_2", rand2 + 1)
         player:setCharVar("ridingOnTheClouds_3", rand3 + 1); player:setCharVar("ridingOnTheClouds_4", rand4 + 1)
 
