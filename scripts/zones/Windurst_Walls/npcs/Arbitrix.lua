@@ -37,6 +37,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.mystery.onEventFinish(player, csid, options, events)
+    xi.mystery.onEventFinish(player, csid, option, events)
 end
 return entity
