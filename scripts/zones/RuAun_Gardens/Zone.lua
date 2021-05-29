@@ -43,7 +43,7 @@ zone_object.onRegionEnter = function(player, region)
         if (player:getCharVar("skyShortcut") == 1) then
             player:startEvent(42)
         else
-            title = player:getTitle()
+            local title = player:getTitle()
             if (title == xi.title.WARRIOR_OF_THE_CRYSTAL) then
                 player:startEvent(41, title)
             else

@@ -43,6 +43,7 @@ global_objects=(
     quests
     utils
     npcUtil
+    item_utils
 
     mixins
     g_mixins
@@ -51,6 +52,7 @@ global_objects=(
     set
     printf
     switch
+    clearVarFromAll
     getVanaMidnight
     getMidnight
     getConquestTally
@@ -63,8 +65,16 @@ global_objects=(
     HiddenQuest
     fileExists
     InteractionGlobal
+    InteractionLookup
     Action
+    actionUtil
     interactionUtil
+    KeyItemAction
+    LambdaAction
+    Message
+    Sequence
+    Container
+    Event
 
     SANDORIA
     BASTOK
@@ -87,6 +97,11 @@ global_objects=(
 
     GetMissionLogInfo
     GetQuestLogInfo
+    finishMissionTimeline
+    getMissionOffset
+    ORIGINAL_MISSION_OFFSET
+    getMissionRankPoints
+    getMissionMask
 
     SANDORIA
     BASTOK
@@ -158,10 +173,14 @@ global_objects=(
 
     dynamis
 
+    doAutoPhysicalWeaponskill
+    doAutoRangedWeaponskill
     doPhysicalWeaponskill
     doRangedWeaponskill
     doMagicWeaponskill
+    doesElementMatchWeaponskill
     applyResistanceAddEffect
+    takeWeaponskillDamage
 
     updateModPerformance
 
@@ -176,6 +195,174 @@ global_objects=(
     cmdprops
     error
     onTrigger
+
+    unionRepresentativeTrade
+    unionRepresentativeTrigger
+    unionRepresentativeTriggerFinish
+
+    tradeTestItem
+    getTestItem
+    isGuildMember
+    getAdvImageSupportCost
+    getCraftSkillCap
+    signupGuild
+    guild
+
+    CheckMaps
+    CheckMapsUpdate
+
+    getDynamisMapList
+
+    SetExplorerMoogles
+
+    applyHalloweenNpcCostumes
+    isHalloweenEnabled
+    onHalloweenTrade
+
+    salvageUtil
+
+    addMogLockerExpiryTime
+    getMogLockerExpiryTimestamp
+    unlockMogLocker
+    getMogLockerAccessType
+    setMogLockerAccessType
+
+    addBonuses
+    addBonusesAbility
+    applyBarspell
+    applyBarstatus
+    applyPlayerResistance
+    applyResistance
+    applyResistanceAbility
+    applyResistanceEffect
+    adjustForTarget
+    calculateDuration
+    calculateDurationForLvl
+    calculateMagicDamage
+    calculatePotency
+    canOverwrite
+    dayWeatherBonus
+    doBoostGain
+    doDivineBanishNuke
+    doDivineNuke
+    doElementalNuke
+    doEnspell
+    doNinjutsuNuke
+    finalMagicAdjustments
+    finalMagicNonSpellAdjustments
+    getBaseCure
+    getCurePower
+    getCurePowerOld
+    getCureFinal
+    getBaseCureOld
+    getElementalDebuffDOT
+    getFlourishAnimation
+    getHelixDuration
+    getHitRate
+    getStepAnimation
+    getElementalDebuffStatDownFromDOT
+    handleNinjutsuDebuff
+    handleThrenody
+    hasSleepEffects
+    isValidHealTarget
+    takeAbilityDamage
+    mobAddBonuses
+    MobBreathMove
+    MobBuffMove
+    MobDrainMove
+    MobGazeMove
+    MobHealMove
+    MobMagicalMove
+    MobPhysicalDrainMove
+    MobPhysicalHit
+    MobPhysicalMove
+    MobRangedMove
+    MobFinalAdjustments
+    MobPhysicalStatusEffectMove
+    MobStatusEffectMove
+
+    AbilityFinalAdjustments
+
+    getSummoningSkillOverCap
+    AvatarFinalAdjustments
+    AvatarPhysicalHit
+    AvatarPhysicalMove
+    avatarMiniFightCheck
+
+    TP_ACC_VARIES
+    TP_ATK_VARIES
+    TP_CRIT_VARIES
+    TP_DMG_BONUS
+    TP_DMG_VARIES
+    TP_MAB_BONUS
+    TP_NO_EFFECT
+
+    MOBPARAM_1_SHADOW
+    MOBPARAM_2_SHADOW
+    MOBPARAM_3_SHADOW
+    MOBPARAM_BLUNT
+    MOBPARAM_WIPE_SHADOWS
+    MOBPARAM_IGNORE_SHADOWS
+    MOBPARAM_DARK
+    MOBPARAM_LIGHT
+    MOBDRAIN_HP
+    MOBDRAIN_MP
+    MOBDRAIN_TP
+    MOBTYPE_NOTORIOUS
+
+    MOBSKILL_MAGICAL
+    MOBSKILL_PHYSICAL
+
+    getMedalRank
+    getBastokNotesItem
+    getSandOriaNotesItem
+    getWindurstNotesItem
+    getSigilTimeStamp
+
+    TPMOD_NONE
+    TPMOD_CRITICAL
+    TPMOD_DAMAGE
+    TPMOD_ACC
+    TPMOD_ATTACK
+    TPMOD_DURATION
+    SC_IMPACTION
+    SC_TRANSFIXION
+    SC_DETONATION
+    SC_REVERBERATION
+    SC_SCISSION
+    SC_INDURATION
+    SC_LIQUEFACTION
+    SC_COMPRESSION
+    SC_FUSION
+    SC_FRAGMENTATION
+    SC_DISTORTION
+    SC_GRAVITATION
+    SC_DARK
+    SC_LIGHT
+    INT_BASED
+    CHR_BASED
+    MND_BASED
+    BluePhysicalSpell
+    BlueMagicalSpell
+    BlueFinalAdjustments
+    getBlueEffectDuration
+
+    LEUJAOAM_ASSAULT_POINT
+    MAMOOL_ASSAULT_POINT
+    LEBROS_ASSAULT_POINT
+    PERIQIA_ASSAULT_POINT
+    ILRUSI_ASSAULT_POINT
+    NYZUL_ISLE_ASSAULT_POINT
+
+    doRoyalPalaceArmorCheck
+
+    MOGLOCKER_START_TS
+    MOGLOCKER_ALZAHBI_VALID_DAYS
+    MOGLOCKER_ALLAREAS_VALID_DAYS
+    MOGLOCKER_ACCESS_TYPE_ALZAHBI
+    MOGLOCKER_ACCESS_TYPE_ALLAREAS
+    MOGLOCKER_PLAYERVAR_ACCESS_TYPE
+    MOGLOCKER_PLAYERVAR_EXPIRY_TIMESTAMP
 )
 
 ignores=(

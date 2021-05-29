@@ -42,7 +42,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
     local troubleAtTheSluiceStat = player:getCharVar("troubleAtTheSluiceVar")
     local theHolyCrestStat = player:getCharVar("TheHolyCrest_Event")
     local theRumor = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)

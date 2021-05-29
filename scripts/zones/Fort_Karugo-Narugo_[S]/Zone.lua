@@ -25,7 +25,7 @@ zone_object.onRegionEnter = function(player, region)
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
+    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
     if (npc ~= nil) then
         if (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM) then
             npc:setStatus(xi.status.DISAPPEAR)

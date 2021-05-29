@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.WONDER_MAGIC_SET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WONDER_MAGIC_SET)
         player:addFame(JEUNO, 30)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHILD_S_PLAY)
     elseif (csid == 316) then
         player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 16, true))

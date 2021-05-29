@@ -23,6 +23,8 @@ local positions =
 -- if it's already at one, send it to the other one
 local function resetSirenTear(npc)
     local currentPos = npc:getLocalVar("pos")
+    local nextPos
+
     if currentPos == 0 then
         nextPos = 1
     elseif currentPos == 1 then
@@ -30,6 +32,7 @@ local function resetSirenTear(npc)
     else
         nextPos = math.random(2) - 1
     end
+
     npc:setLocalVar("pos", nextPos)
     npc:setPos(unpack(positions[nextPos]))
 end
@@ -41,7 +44,7 @@ local function moveSirenTear(npc)
     if currentPos == 4 then
         resetSirenTear(npc)
     else
-        nextPos = (currentPos == 0) and 2 or (currentPos + 1)
+        local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
         npc:setLocalVar("pos", nextPos)
         npc:setPos(unpack(positions[nextPos]))
     end

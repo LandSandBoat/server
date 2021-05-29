@@ -10,11 +10,11 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+    local sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
 
     if (sermonQuest == QUEST_ACCEPTED) then
-        count = trade:getItemCount()
-        BluePeas = trade:getItemQty(618)
+        local count = trade:getItemCount()
+        local BluePeas = trade:getItemQty(618)
         if (BluePeas == 1 and count == 1 and player:getCharVar("sermonQuestVar") == 0) then
             player:tradeComplete()
             player:showText(npc, 7349)

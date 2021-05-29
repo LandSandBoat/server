@@ -15,19 +15,16 @@ local ID = require("scripts/zones/Rabao/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED and player:getCharVar("illTakeTheBigBoxCS") == 2) then
         if (trade:hasItemQty(17098, 1) and trade:getItemCount() == 1) then -- Trade Oak Pole
             player:startEvent(92)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
     if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX) == QUEST_ACCEPTED) then
-        illTakeTheBigBoxCS = player:getCharVar("illTakeTheBigBoxCS")
+        local illTakeTheBigBoxCS = player:getCharVar("illTakeTheBigBoxCS")
 
         if (illTakeTheBigBoxCS == 1) then
             player:startEvent(90)
@@ -41,7 +38,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(95)
         end
     elseif (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED) then
-        trueWillCS = player:getCharVar("trueWillCS")
+        local trueWillCS = player:getCharVar("trueWillCS")
 
         if (trueWillCS == 1) then
             player:startEvent(97)
@@ -53,14 +50,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(89)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 90) then
         player:setCharVar("illTakeTheBigBoxCS", 2)
     elseif (csid == 92) then
@@ -86,7 +81,6 @@ entity.onEventFinish = function(player, csid, option)
             player:delKeyItem(xi.ki.LARGE_TRICK_BOX)
         end
     end
-
 end
 
 return entity

@@ -16,16 +16,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(937, 1) and trade:getItemCount() == 1) then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS) == QUEST_ACCEPTED then
+        if trade:hasItemQty(937, 1) and trade:getItemCount() == 1 then
             player:startEvent(277, 1500)
         else
             player:startEvent(275, 0, 937)
         end
-    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED) then
-        SecondReward = player:getCharVar("SecondRewardVar")
-        if (trade:hasItemQty(17091, 1) and trade:hasItemQty(17061, 1) and trade:hasItemQty(17053, 1) and trade:getItemCount() == 3) then --Check that all 3 items have been traded, one each
-            SecondReward = player:setCharVar("SecondRewardVar", 1)
+    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) == QUEST_ACCEPTED then
+        if trade:hasItemQty(17091, 1) and trade:hasItemQty(17061, 1) and trade:hasItemQty(17053, 1) and trade:getItemCount() == 3 then --Check that all 3 items have been traded, one each
+            player:setCharVar("SecondRewardVar", 1)
             player:startEvent(265, 0, 17091, 17061, 17053) --Completion of quest cutscene for Wondering Wands
         else
             player:startEvent(260, 0, 17091, 17061, 17053) --Remind player which items are needed ifquest is accepted and items are not traded
@@ -38,11 +37,11 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    MakingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
-    MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
-    WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
-    needToZone = player:needToZone()
-    pFame = player:getFameLevel(WINDURST)
+    local MakingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
+    local MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    local needToZone = player:needToZone()
+    local pFame = player:getFameLevel(WINDURST)
 
         -- ~[ Windurst Mission 6-1 Full Moon Fountain ]~
     if (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.FULL_MOON_FOUNTAIN and player:getMissionStatus(player:getNation()) == 0) then
@@ -51,7 +50,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(457)
     -- Check if we are on Windurst Mission 1-1
     elseif (player:getCurrentMission(WINDURST) == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT) then
-        missionStatus = player:getMissionStatus(player:getNation())
+        local missionStatus = player:getMissionStatus(player:getNation())
         if (missionStatus == 0) then
             player:startEvent(90)
         elseif (missionStatus == 1) then

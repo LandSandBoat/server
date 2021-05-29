@@ -23,8 +23,8 @@ entity.onTrigger = function(player, npc)
     local SR = player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM)
     local SC = player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM)
     local SV = player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
-    local amberKey = player:hasKeyItem(xi.ki.AMBER_KEY)
-    local lastAmber = player:getCharVar("LastAmberKey") -- When last Amber key was obtained
+    -- local amberKey = player:hasKeyItem(xi.ki.AMBER_KEY)
+    -- local lastAmber = player:getCharVar("LastAmberKey") -- When last Amber key was obtained
     local lastViridian = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
 
     if ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then

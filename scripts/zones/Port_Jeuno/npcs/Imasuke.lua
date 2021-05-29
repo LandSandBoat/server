@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addExp(2000 * EXP_RATE)
         end
         player:addFame(JEUNO, 30)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ANTIQUE_COLLECTOR)
 
     -- CIRCLE OF TIME

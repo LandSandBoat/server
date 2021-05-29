@@ -13,15 +13,15 @@ end
 
 entity.onTrigger = function(player, npc)
 
-TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
-KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
-InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
-OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
-CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
-ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+    local TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
+    local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
     if (ThePromise == QUEST_COMPLETED) then
-        Message = math.random(0, 1)
+        local Message = math.random(0, 1)
 
         if (Message == 1) then
             player:startEvent(538)
@@ -45,7 +45,7 @@ ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurs
     elseif (KnowOnesOnions == QUEST_COMPLETED) then
         player:startEvent(407)
     elseif (KnowOnesOnions == QUEST_ACCEPTED) then
-        KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
+        local KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
 
         if (KnowOnesOnionsVar == 2) then
             player:startEvent(406)

@@ -41,28 +41,27 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(687) -- Repeat at buburimu
             end
         elseif (missionStatus == 1) then
-            start_time = player:getCharVar("testingTime_start_time")
-            seconds_passed = os.time() - start_time
+            local start_time = player:getCharVar("testingTime_start_time")
+            local seconds_passed = os.time() - start_time
 
             -- one Vana'diel Day is 3456 seconds (2 day for repeat)
             if ((alreadyCompleted == false and seconds_passed > 3456) or (alreadyCompleted and seconds_passed > 6912)) then
                 player:startEvent(202)
             -- are we in the last game hour of the Vana'diel Day?
             elseif (alreadyCompleted == false and seconds_passed >= 3312) then
-                killcount = player:getCharVar("testingTime_crea_count")
+                local killcount = player:getCharVar("testingTime_crea_count")
+                local event = 198
                 if (killcount >= 35) then
                     event = 201
                 elseif (killcount >= 30) then
                     event = 200
                 elseif (killcount >= 19) then
                     event = 199
-                else
-                    event = 198
                 end
                 player:startEvent(event, 0, VanadielHour(), 1, killcount)
             -- are we in the last game hour of the Vana'diel Day? REPEAT
             elseif (alreadyCompleted and seconds_passed >= 6768) then
-                killcount = player:getCharVar("testingTime_crea_count")
+                local killcount = player:getCharVar("testingTime_crea_count")
                 if (killcount >= 35) then
                     event = 206
                 elseif (killcount >= 30) then
@@ -72,8 +71,9 @@ entity.onTrigger = function(player, npc)
                 end
                 player:startEvent(event, 0, VanadielHour(), 1, killcount)
             else
-                start_day = player:getCharVar("testingTime_start_day")
-                start_hour = player:getCharVar("testingTime_start_hour")
+                local start_day = player:getCharVar("testingTime_start_day")
+                local start_hour = player:getCharVar("testingTime_start_hour")
+                local hours_passed = 0
                 if (VanadielDayOfTheYear() == start_day) then
                     hours_passed = VanadielHour() - start_hour
                 elseif (VanadielDayOfTheYear() == start_day + 1) then
@@ -91,7 +91,7 @@ entity.onTrigger = function(player, npc)
             end
         end
     elseif (teacherstatus == QUEST_AVAILABLE) then
-        prog = player:getCharVar("QuestTeachersPet_prog")
+        local prog = player:getCharVar("QuestTeachersPet_prog")
         if (prog == 0) then
             player:startEvent(437) -- Before Quest
             player:setCharVar("QuestTeachersPet_prog", 1)
@@ -103,7 +103,7 @@ entity.onTrigger = function(player, npc)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         player:startEvent(444) -- During Making the GRADE
     else   --  Will run through these iffame is not high enough for other quests
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(441) -- Standard Conversation 1
         else
@@ -125,7 +125,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 440) then
         player:addGil(GIL_RATE*250)
         player:setCharVar("QuestTeachersPet_prog", 0)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET)
             player:addFame(WINDURST, 75)

@@ -31,8 +31,6 @@ entity.onTrigger = function(player, npc)
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
     local TheFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local SnakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local SteamedRams = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
     local BlueLetter = player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
     local BattleRations = player:hasKeyItem(xi.ki.BATTLE_RATIONS)
 

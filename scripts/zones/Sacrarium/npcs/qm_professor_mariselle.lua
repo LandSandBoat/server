@@ -22,7 +22,6 @@ end
 entity.onTrigger = function(player, npc)
     local cop = player:getCurrentMission(COP)
     local copStat = player:getCharVar("PromathiaStatus")
-    local prof = GetMobByID(ID.mob.OLD_PROFESSOR_MARISELLE)
     local hasProf = npc:getLocalVar("hasProfessorMariselle") == 1
 
     if

@@ -14,15 +14,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    ShiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
-    Subligar = trade:getItemQty(14242)
+    local ShiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+    local Subligar = trade:getItemQty(14242)
 
     if (Subligar > 0 and Subligar == trade:getItemCount()) then
-        TurnedInVar = player:getCharVar("shiningSubligar_nb")
+        local TurnedInVar = player:getCharVar("shiningSubligar_nb")
         if (ShiningSubligar == QUEST_ACCEPTED and TurnedInVar + Subligar >= 10) then -- complete quest
             player:startEvent(125)
         elseif (ShiningSubligar == QUEST_ACCEPTED and TurnedInVar <= 9) then -- turning in less than the amount needed to finish the quest
-            TotalSubligar = Subligar + TurnedInVar
+            local TotalSubligar = Subligar + TurnedInVar
             player:tradeComplete()
             player:setCharVar("shiningSubligar_nb", TotalSubligar)
             player:startEvent(124, TotalSubligar) -- Update player on number of subligar turned in
@@ -39,7 +39,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    ShiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
+    local ShiningSubligar = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.LIKE_A_SHINING_SUBLIGAR)
 
     if (ShiningSubligar == QUEST_AVAILABLE and player:getFameLevel(NORG) >= 3) then
         player:startEvent(123) -- Start Like a Shining Subligar

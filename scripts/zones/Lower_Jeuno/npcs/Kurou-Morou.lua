@@ -38,11 +38,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(194) -- Start "Your Crystal Ball" quest
 
     elseif (JFame >= 5 and YourCrystalBall == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_AVAILABLE and player:getCharVar("QuestNeverToReturn_day") ~= VanadielDayOfTheYear()) then
-        prog = player:getCharVar("QuestNeverToReturn_prog")
-        if (prog <= 2) then
-            fortune = math.random(1, 99)
+        local prog = player:getCharVar("QuestNeverToReturn_prog")
+        if prog <= 2 then
+            local fortune = math.random(1, 99)
             player:startEvent(204, fortune) -- Required to get fortune read 3x on 3 diff game days before quest is kicked off
-        elseif (prog == 3) then
+        elseif prog == 3 then
             player:startEvent(202) -- Start "Never to return" quest
         end
 
@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 196) then
         player:addTitle(xi.title.FORTUNETELLER_IN_TRAINING)
         player:addFame(JEUNO, 30)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
     elseif (csid == 204 and option == 0) then
         player:addCharVar("QuestNeverToReturn_prog", 1)  -- Keep track of how many times the players fortune has been read
@@ -99,7 +99,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addItem(13477)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13477)
             player:addFame(JEUNO, 30)
-            player:tradeComplete(trade)
+            player:tradeComplete()
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
         end
     elseif (csid == 17) then

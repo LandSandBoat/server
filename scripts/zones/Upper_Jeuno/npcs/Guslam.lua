@@ -30,8 +30,6 @@ local prerequisites =
 }
 
 local function isFirstHandsQuest(player)
-    local count = 0
-
     for i = 0, 14 do
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BORGHERTZ_S_WARRING_HANDS + i) == QUEST_COMPLETED then
             return false

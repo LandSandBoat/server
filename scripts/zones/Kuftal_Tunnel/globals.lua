@@ -5,7 +5,7 @@ local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
 require("scripts/globals/status")
 -----------------------------------
 
-KUFTAL_TUNNEL = {
+local kuftalGlobal = {
     --[[..............................................................................................
         move Phantom Worm QM
         ..............................................................................................]]
@@ -31,8 +31,8 @@ KUFTAL_TUNNEL = {
             [15] = function (x) npc:setPos(76.929, 30.050, 127.630) end,
             [16] = function (x) npc:setPos(68.810, 30.175, 123.516) end,
         }
-        npc:timer(5000, function(npc) KUFTAL_TUNNEL.movePhantomWormQM() end)
+        npc:timer(5000, function(npc) movePhantomWormQM() end)
     end
 }
 
-return KUFTAL_TUNNEL
+return kuftalGlobal

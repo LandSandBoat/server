@@ -46,9 +46,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    local questItem = player:getCharVar("ForgeYourDestiny_Event")
-
     if csid == 44 and npcUtil.giveItem(player, xi.items.LUMP_OF_ORIENTAL_STEEL) then
         player:setCharVar("ForgeYourDestiny_Event", utils.mask.setBit(player:getCharVar("ForgeYourDestiny_Event"), 0, true))
     elseif csid == 47 and npcUtil.giveItem(player, xi.items.LUMP_OF_ORIENTAL_STEEL) then
