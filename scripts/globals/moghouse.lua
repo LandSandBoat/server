@@ -30,7 +30,7 @@ xi.moghouse.moghouseZones =
     xi.zone.SOUTHERN_SAN_DORIA_S, -- 80
     xi.zone.BASTOK_MARKETS_S,     -- 87
     xi.zone.WINDURST_WATERS_S,    -- 94
-    xi.zone.RESIDENTIAL_AREA,     -- 189
+    xi.zone.RESIDENTIAL_AREA,     -- 219
     xi.zone.SOUTHERN_SAN_DORIA,   -- 230
     xi.zone.NORTHERN_SAN_DORIA,   -- 231
     xi.zone.PORT_SAN_DORIA,       -- 232
