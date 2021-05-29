@@ -18,10 +18,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    TheWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
-    WonderMagicSetKI = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
-    TheLostCardianCS = player:getCharVar("theLostCardianVar")
-    TheKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local TheWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    local WonderMagicSetKI = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
+    local TheLostCardianCS = player:getCharVar("theLostCardianVar")
+    local TheKindCardian = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if (player:getFameLevel(JEUNO) >= 4 and TheWonderMagicSet == QUEST_AVAILABLE) then
         player:startEvent(77) -- Start quest "The wonder magic set"
