@@ -366,6 +366,7 @@ end
 xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff)
     local resist        = 1 -- The variable we want to calculate
     local casterJob     = caster:getMainJob()
+    local casterWeather = caster:getWeather()
     local spellGroup    = spell:getSpellGroup()
 
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
@@ -427,7 +428,7 @@ xi.magic_utils.spell_damage.calculateResist = function(caster, target, spell, sk
         --Add acc for klimaform
         if spellElement > 0 and
            caster:hasStatusEffect(xi.effect.KLIMAFORM) and
-           (castersWeather == xi.magic.singleWeatherStrong[spellElement] or castersWeather == xi.magic.doubleWeatherStrong[spellElement])
+           (casterWeather == xi.magic.singleWeatherStrong[spellElement] or casterWeather == xi.magic.doubleWeatherStrong[spellElement])
         then
             magicAcc = magicAcc + 15
         end
@@ -852,7 +853,7 @@ xi.magic_utils.spell_damage.useDamageSpell = function(caster, target, spell)
 
     -- Variables/steps to calculate finalDamage.
     local spellDamage          = xi.magic_utils.spell_damage.calculateBaseDamage(caster, target, spell, spellId, skillType, statDiff)
-    local MTDR                 = xi.magic_utils.spell_damage.calculateMTDR(caster, target, spell, hasMTR)
+    local MTDR                 = xi.magic_utils.spell_damage.calculateMTDR(caster, target, spell)
     local eleStaffBonus        = xi.magic_utils.spell_damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity       = xi.magic_utils.spell_damage.calculateMagianAffinity(caster, spell)
     local SDT                  = xi.magic_utils.spell_damage.calculateSDT(caster, target, spell)
