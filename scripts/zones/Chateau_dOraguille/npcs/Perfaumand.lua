@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
         -- San d'Oria 9-2 "The Heir to the Light" (optional dialogue)
         if currentMission == sandyMissions.THE_HEIR_TO_THE_LIGHT and (missionStatus == 2 or missionStatus == 5) then
             if missionStatus == 5 then
-                playerStartEvent(7)
+                player:startEvent(7)
             else
                 player:startEvent(2)
             end

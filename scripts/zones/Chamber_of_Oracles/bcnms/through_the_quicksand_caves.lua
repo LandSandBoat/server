@@ -20,7 +20,7 @@ end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
-        local name, clearTime, partySize = battlefield:getRecord()
+        local _, clearTime, partySize = battlefield:getRecord()
 
         if player:getCurrentMission(ZILART) == xi.mission.id.zilart.THROUGH_THE_QUICKSAND_CAVES then
             player:setLocalVar("battlefieldWin", battlefield:getID())

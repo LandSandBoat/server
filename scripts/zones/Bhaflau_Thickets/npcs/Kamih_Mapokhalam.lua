@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 
-    count = trade:getItemCount()
+    local count = trade:getItemCount()
 
     if (count == 1 and trade:hasItemQty(2185, 1)) then -- Silver
         player:tradeComplete()
