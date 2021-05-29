@@ -2,7 +2,7 @@
 -- Zone: Lower_Jeuno (245)
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/zones/Lower_Jeuno/globals")
+local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -53,7 +53,6 @@ end
 zone_object.onGameHour = function(zone)
     local VanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
-    local playerOnQuest = GetPlayerByID(playerOnQuestId)
 
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
@@ -90,8 +89,8 @@ zone_object.onGameHour = function(zone)
             npc:clearPath()
             npc:setStatus(0)
             npc:initNpcAi()
-            npc:setPos(xi.path.first(LOWER_JEUNO.lampPath))
-            npc:pathThrough(xi.path.fromStart(LOWER_JEUNO.lampPath), bit.bor(xi.path.flag.WALLHACK))
+            npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
+            npc:pathThrough(xi.path.fromStart(lowerJeunoGlobal.lampPath), bit.bor(xi.path.flag.WALLHACK))
         end
 
     end
