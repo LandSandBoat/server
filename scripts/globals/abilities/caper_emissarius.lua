@@ -22,7 +22,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    party:transferEnmity(player, 99, 20.6)
+    target:transferEnmity(player, 99, 20.6)
 end
 
 return ability_object

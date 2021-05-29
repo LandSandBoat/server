@@ -29,7 +29,6 @@ ability_object.onUseAbility = function(player, target, ability)
     player:delStatusEffect(xi.effect.EQUANIMITY)
     player:delStatusEffect(xi.effect.IMMANENCE)
 
-    local skillbonus = player:getMod(xi.mod.LIGHT_ARTS_SKILL)
     local effectbonus = player:getMod(xi.mod.LIGHT_ARTS_EFFECT)
     local regenbonus = 0
     if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then

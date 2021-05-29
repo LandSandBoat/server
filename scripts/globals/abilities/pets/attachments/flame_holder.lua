@@ -21,8 +21,8 @@ local validskills = set{
     2744,
 }
 
-attachment_object.onEquip = function(pet)
-    pet:addListener("WEAPONSKILL_STATE_ENTER", "AUTO_FLAME_HOLDER_START", function(pet, skill)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("WEAPONSKILL_STATE_ENTER", "AUTO_FLAME_HOLDER_START", function(pet, skill)
         if not validskills[skill] then return end
         local master = pet:getMaster()
         local maneuvers = master:countEffect(xi.effect.FIRE_MANEUVER)
@@ -42,7 +42,7 @@ attachment_object.onEquip = function(pet)
         pet:addMod(xi.mod.WEAPONSKILL_DAMAGE_BASE, amount)
         pet:setLocalVar("flameholder", amount)
     end)
-    pet:addListener("WEAPONSKILL_STATE_EXIT", "AUTO_FLAME_HOLDER_END", function(pet, skill)
+    automaton:addListener("WEAPONSKILL_STATE_EXIT", "AUTO_FLAME_HOLDER_END", function(pet, skill)
         local master = pet:getMaster()
         local toremove = pet:getLocalVar("flameholdermaneuvers")
         if toremove == 0 then return end

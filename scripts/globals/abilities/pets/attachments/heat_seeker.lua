@@ -5,11 +5,11 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    pet:addListener("ENGAGE", "AUTO_HEAT_SEEKER_ENGAGE", function(pet, target)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("ENGAGE", "AUTO_HEAT_SEEKER_ENGAGE", function(pet, target)
         pet:setLocalVar("heatseekertick", VanadielTime())
     end)
-    pet:addListener("AUTOMATON_AI_TICK", "AUTO_HEAT_SEEKER_TICK", function(pet, target)
+    automaton:addListener("AUTOMATON_AI_TICK", "AUTO_HEAT_SEEKER_TICK", function(pet, target)
         if pet:getLocalVar("heatseekertick") > 0 then
             local master = pet:getMaster()
             local maneuvers = master:countEffect(xi.effect.THUNDER_MANEUVER)
@@ -41,7 +41,7 @@ attachment_object.onEquip = function(pet)
             pet:setLocalVar("heatseekertick", tick)
         end
     end)
-    pet:addListener("DISENGAGE", "AUTO_HEAT_SEEKER_DISENGAGE", function(pet)
+    automaton:addListener("DISENGAGE", "AUTO_HEAT_SEEKER_DISENGAGE", function(pet)
         if pet:getLocalVar("heatseeker") > 0 then
             pet:delMod(xi.mod.ACC, pet:getLocalVar("heatseeker"))
             pet:setLocalVar("heatseeker", 0)
