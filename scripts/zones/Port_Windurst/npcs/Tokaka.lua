@@ -9,24 +9,21 @@ require("scripts/globals/settings")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-TokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
-NeedToZone     = player:needToZone()
+    local TokakaSpokenTo = player:getCharVar("TokakaSpokenTo")
+    local NeedToZone     = player:needToZone()
 
     if (TokakaSpokenTo == 1 and NeedToZone == false) then
-        count = trade:getItemCount()
-        BastoreSardine = trade:hasItemQty(4360, 1)
+        local count = trade:getItemCount()
+        local BastoreSardine = trade:hasItemQty(4360, 1)
 
         if (BastoreSardine == true and count == 1) then
             player:startEvent(210, GIL_RATE*70, 4360)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-
-SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+    local SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
     if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED and player:getCharVar("BlastFromThePast_Prog") == 0) then
         player:startEvent(318)
         player:setCharVar("BlastFromThePast_Prog", 1)
@@ -44,22 +41,17 @@ SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.win
     else
         player:startEvent(207)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
-
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 208) then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
         player:setCharVar("TokakaSpokenTo", 1)
     elseif (csid == 210) then
-        SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
+        local SomethingFishy = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
 
         if (SomethingFishy == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SOMETHING_FISHY)
@@ -76,5 +68,4 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("TokakaSpokenTo", 1)
     end
 end
-
 return entity

@@ -15,13 +15,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    pNation = player:getNation()
+    local pNation = player:getNation()
 
     if (player:getCurrentMission(BASTOK) ~= xi.mission.id.bastok.NONE) then
-        currentMission = player:getCurrentMission(pNation)
+        local currentMission = player:getCurrentMission(pNation)
 
         if (pNation == xi.nation.BASTOK) then
-            missionStatus = player:getMissionStatus(player:getNation())
+            local missionStatus = player:getMissionStatus(player:getNation())
             if (currentMission == xi.mission.id.bastok.THE_EMISSARY) then
                 -- Bastok Mission 2-3 Part I - Windurst > San d'Oria
                 if (missionStatus == 1) then

@@ -42,7 +42,6 @@ entity.onTrigger = function(player, npc)
     local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
     local WildCard             = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
     local ThePromise           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
-    local NeedToZone           = player:needToZone()
     local Level                = player:getMainLvl()
     local Fame                 = player:getFameLevel(WINDURST)
 
