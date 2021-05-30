@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -44,7 +44,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -65,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Configure CMake
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Configure CMake
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
@@ -99,7 +99,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -200,14 +200,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - uses: actions/download-artifact@v2
       with:
         name: linux_executables
         path: .
     - name: Install Dependencies
       run: |
-        ls
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
     - name: Verify MySQL connection from container
@@ -227,7 +226,6 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
-        ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server.log
@@ -266,14 +264,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - uses: actions/download-artifact@v2
       with:
         name: linux_executables
         path: .
     - name: Install Dependencies
-      run: |
-        ls
+      run: |        
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
     - name: Verify MySQL connection from container
@@ -296,7 +293,6 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
-        ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230
