@@ -19,13 +19,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local message = xi.msg.basic.SKILL_MISS
     local typeEffect = xi.effect.PARALYSIS
-
     skill:setMsg(MobGazeMove(mob, target, typeEffect, 25, 0, 120))
 
     return typeEffect
-
 end
 
 return mobskill_object

@@ -75,6 +75,7 @@ global_objects=(
     Sequence
     Container
     Event
+    onMobDeathEx
 
     removeSleepEffects
 
@@ -290,7 +291,9 @@ global_objects=(
     mobAddBonuses
     MobBreathMove
     MobBuffMove
+    MobDrainAttribute
     MobDrainMove
+    MobDrainStatusEffectMove
     MobGazeMove
     MobHealMove
     MobMagicalMove
@@ -303,6 +306,8 @@ global_objects=(
     MobStatusEffectMove
 
     FormMagicBurst
+
+    BOMB_TOSS_HPP
 
     AbilityFinalAdjustments
 

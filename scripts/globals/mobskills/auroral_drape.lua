@@ -19,11 +19,10 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local silenced = false
     local blinded = false
+    local typeEffect = nil
 
     silenced = MobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
-
     blinded = MobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 60, 0, 60)
-
     skill:setMsg(xi.msg.basic.SKILL_ENFEEB_IS)
 
     -- display silenced first, else blind

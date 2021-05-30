@@ -18,11 +18,9 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local duration = 180
-
+    -- local duration = 180
     MobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl() / 3, 3, 60)
     MobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 3, 120)
-
     MobStatusEffectMove(mob, target, xi.effect.POISON, mob:getMainLvl()/3, 3, 60)
     MobStatusEffectMove(mob, target, xi.effect.SLOW, 128, 3, 120)
     MobStatusEffectMove(mob, target, xi.effect.PLAGUE, 5, 3, 60)

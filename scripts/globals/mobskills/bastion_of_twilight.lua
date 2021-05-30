@@ -18,8 +18,6 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.MAGIC_SHIELD
-
     mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 0, 0, 0)
     mob:setAnimationSub(2)
 

@@ -17,7 +17,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     MobStatusEffectMove(mob, target, typeEffect, 30, 0, 60)
 
     local dmgmod = 1
-    local accmod = 1
     local info = MobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.LIGHTNING, dmgmod, TP_NO_EFFECT)
     local dmg = MobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, MOBPARAM_IGNORE_SHADOWS)
 
