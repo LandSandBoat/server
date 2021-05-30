@@ -36,7 +36,7 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower() -- Tracks which bonus effects are in use.
-    local subPower = effect:getSubPower() -- subPower sets % required to trigger regen/refresh.
+    -- local subPower = effect:getSubPower() -- subPower sets % required to trigger regen/refresh.
 
     if (power == 1 or power == 3 or power == 5 or power == 7 or power == 9 or power == 11 or power == 13 or power == 15) then
         local percentage = 70 -- TODO: This should be based off of controlled areas in Campaign

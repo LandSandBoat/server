@@ -25,7 +25,7 @@ function isHalloweenEnabled()
 end
 
 
-function halloweenItemsCheck(player)
+local function halloweenItemsCheck(player)
     local headSlot = player:getEquipID(xi.slot.HEAD)
     local mainHand = player:getEquipID(xi.slot.MAIN)
     local reward = 0
@@ -36,7 +36,7 @@ function halloweenItemsCheck(player)
     local trickStaff = 17565
     local trickStaff2 = 17587
 
-    reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
+    local reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
 
     -- Checks for HQ Upgrade
     for ri = 1, #reward_list do
@@ -153,7 +153,7 @@ function onHalloweenTrade(player, trade, npc)
                     player:addItem(itemReward)
                     player:messageSpecial(ID.text.ITEM_OBTAINED, itemReward)
 
-                elseif target:canUseMisc(xi.zoneMisc.COSTUME) and not AlreadyTradedChk then
+                elseif player:canUseMisc(xi.zoneMisc.COSTUME) and not AlreadyTradedChk then
                 -- Other neat looking halloween type costumes
                 -- two dragon skins: @420/421
                 -- @422 dancing weapon

@@ -36,7 +36,7 @@ effect_object.onEffectLose = function(target, effect)
         local accuracyBonus = target:getStatusEffect(xi.effect.AFFLATUS_MISERY):getSubPower()
         --printf("AUSPICE: Removing Accuracy Bonus +%d!", accuracyBonus)
         target:delMod(xi.mod.ACC, accuracyBonus)
-        local accuracyBonus = target:getStatusEffect(xi.effect.AFFLATUS_MISERY):setSubPower(0)
+        target:getStatusEffect(xi.effect.AFFLATUS_MISERY):setSubPower(0)
 
         target:setMod(xi.mod.ENSPELL_DMG, 0)
         target:setMod(xi.mod.ENSPELL, 0)
