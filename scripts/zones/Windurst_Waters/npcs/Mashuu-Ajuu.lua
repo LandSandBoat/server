@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 131)
     elseif (csid == 475) then                                -- REAP WHAT YOU SOW + 500 GIL: Quest Turn In: Sobbing Fungus turned in
         player:addGil(GIL_RATE*500)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:needToZone(true)
         if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
@@ -90,7 +90,7 @@ entity.onEventFinish = function(player, csid, option)
         end
     elseif (csid == 477) then                                -- REAP WHAT YOU SOW + GIL + Stationary Set: Quest Turn In: Deathball turned in
         player:addGil(GIL_RATE*700)
-        player:tradeComplete(trade)
+        player:tradeComplete()
         player:needToZone(true)
         if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)

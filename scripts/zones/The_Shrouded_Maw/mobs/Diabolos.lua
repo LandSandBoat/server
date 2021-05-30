@@ -41,8 +41,8 @@ entity.onMobFight = function(mob, target)
                 if (tile:getAnimation() == xi.anim.CLOSE_DOOR) then
                     SendEntityVisualPacket(tileId, v[inst+2])  -- Animation for floor dropping
                     SendEntityVisualPacket(tileId, "s123")     -- Tile dropping sound
-                    tile:timer(5000, function(tile)
-                        tile:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens
+                    tile:timer(5000, function(tileArg)
+                        tileArg:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens
                     end)
                 end
                 break

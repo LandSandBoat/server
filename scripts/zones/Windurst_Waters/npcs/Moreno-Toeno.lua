@@ -62,12 +62,11 @@ entity.onTrigger = function(player, npc)
             -- are we in the last game hour of the Vana'diel Day? REPEAT
             elseif (alreadyCompleted and seconds_passed >= 6768) then
                 local killcount = player:getCharVar("testingTime_crea_count")
-                if (killcount >= 35) then
+                local event = 208
+                if killcount >= 35 then
                     event = 206
-                elseif (killcount >= 30) then
+                elseif killcount >= 30 then
                     event = 209
-                else
-                    event = 208
                 end
                 player:startEvent(event, 0, VanadielHour(), 1, killcount)
             else
@@ -116,6 +115,13 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
+local function clearTestingTimeVars(player)
+    player:setCharVar("testingTime_crea_count", 0)
+    player:setCharVar("testingTime_start_day", 0)
+    player:setCharVar("testingTime_start_hour", 0)
+    player:setCharVar("testingTime_start_time", 0)
+end
+
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 438 and option == 0) then
@@ -143,25 +149,14 @@ entity.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED + 1, xi.ki.CREATURE_COUNTER_MAGIC_DOLL)
         player:setMissionStatus(player:getNation(), 0)
-        player:setCharVar("testingTime_crea_count", 0)
-        player:setCharVar("testingTime_start_day", 0)
-        player:setCharVar("testingTime_start_hour", 0)
-        player:setCharVar("testingTime_start_time", 0)
+        clearTestingTimeVars(player)
         player:delMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.A_TESTING_TIME)
     elseif (csid == 200 or csid == 201) then -- first time win
         finishMissionTimeline(player, 1, csid, option)
-
-        player:setCharVar("testingTime_crea_count", 0)
-        player:setCharVar("testingTime_start_day", 0)
-        player:setCharVar("testingTime_start_hour", 0)
-        player:setCharVar("testingTime_start_time", 0)
+        clearTestingTimeVars(player)
     elseif (csid == 209 or csid == 206) then -- succesfull repeat attempt (Buburimu).
         finishMissionTimeline(player, 1, csid, option)
-
-        player:setCharVar("testingTime_crea_count", 0)
-        player:setCharVar("testingTime_start_day", 0)
-        player:setCharVar("testingTime_start_hour", 0)
-        player:setCharVar("testingTime_start_time", 0)
+        clearTestingTimeVars(player)
     elseif (csid == 752) then
         player:setMissionStatus(player:getNation(), 1)
         player:addKeyItem(xi.ki.STAR_SEEKER)
