@@ -15,8 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(pet, target, ability)
-    pet:queue(0, function(pet)
-        pet:stun(5000)
+    pet:queue(0, function(petArg)
+        petArg:stun(5000)
     end)
 end
 

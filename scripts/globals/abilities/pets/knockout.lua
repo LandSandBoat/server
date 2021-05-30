@@ -41,7 +41,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         params.ftp300 = 11.0
     end
 
-    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill, action)
+    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     if damage > 0 then
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
