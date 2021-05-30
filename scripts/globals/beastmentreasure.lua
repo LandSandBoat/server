@@ -127,8 +127,8 @@ end
 local function addLoot(t1, t2)
     -- Used for non-destructively combining a table containing a single weighted item (`t2`)
     -- and an existing loot table containing one or more weighted items (`t1`).
-    newTable = {}
-    newItem = table.maxn(t2)
+    local newTable = {}
+    local newItem = table.maxn(t2)
 
     -- Copy the contents of the first table so that we don't modify the global version
     for item, weight in pairs(t1) do
@@ -232,12 +232,12 @@ xi.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     end
 end
 
-xi.beastmentreasure.updatePeddlestox = function(zone, peddlestox)
+xi.beastmentreasure.updatePeddlestox = function(zone, peddlestoxID)
     --[[ Allows Peddlestox to appear on the appropriate day and disappear when the day is over.
     This function is called by each of the three zones where Peddlestox can appear: once on init,
     and once at the start of each new game day. Since Peddlestox is disabled in the db by default, we
     only need to enable her on the appropriate day and disable her on the following day. ]]--
-    local peddlestox = GetNPCByID(peddlestox)
+    local peddlestox = GetNPCByID(peddlestoxID)
 
     if zoneData[zone].day == VanadielDayOfTheWeek() then
         peddlestox:setStatus(xi.status.NORMAL)

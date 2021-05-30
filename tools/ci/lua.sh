@@ -185,6 +185,14 @@ global_objects=(
     updateModPerformance
 
     fTP
+    fSTR
+    calculateRawWSDmg
+    calculatedIgnoredDef
+    cMeleeRatio
+    generatePdif
+    getMeleeDmg
+
+    getRecommendedAssaultLevel
 
     PATHFLAG_WALLHACK
 

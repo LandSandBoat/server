@@ -39,7 +39,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
        automaton:addTP(80)
     end
 
-    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    target:takeDamage(damage, automaton, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     return damage
 end
 

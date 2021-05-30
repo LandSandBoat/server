@@ -64,8 +64,8 @@ function onTrigger(player, target)
         end
 
         -- half a second later, go.  this delay gives time for previous message to appear
-        player:timer(500, function(player)
-            player:setPos(targ:getXPos(), targ:getYPos(), targ:getZPos(), targ:getRotPos(), gotoZone)
+        player:timer(500, function(playerArg)
+            playerArg:setPos(targ:getXPos(), targ:getYPos(), targ:getZPos(), targ:getRotPos(), gotoZone)
         end)
     end
 end
