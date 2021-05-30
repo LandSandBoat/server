@@ -34,11 +34,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.magian.magianEventUpdate(player, itemId, csid, option, EVENT_IDS)
+    xi.magian.magianEventUpdate(player, csid, option, EVENT_IDS)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.magian.magianOnEventFinish(player, itemId, csid, option, EVENT_IDS)
+    xi.magian.magianOnEventFinish(player, csid, option, EVENT_IDS)
 end
 
 return entity

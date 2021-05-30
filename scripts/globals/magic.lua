@@ -48,6 +48,235 @@ xi.magic.doubleWeatherWeak   = {xi.weather.SQUALL,            xi.weather.HEAT_WA
 local SOFT_CAP = 60 --guesstimated
 local HARD_CAP = 120 --guesstimated
 
+-----------------------------------
+-- Returns the staff bonus for the caster and spell.
+-----------------------------------
+-- affinities that strengthen/weaken the index element
+local function AffinityBonusDmg(caster, ele)
+
+    local affinity = caster:getMod(strongAffinityDmg[ele])
+    local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
+    return bonus
+end
+
+local function AffinityBonusAcc(caster, ele)
+
+    local affinity = caster:getMod(strongAffinityAcc[ele])
+    local bonus = 0 + affinity * 10 -- 10 acc per level of affinity
+    return bonus
+end
+
+-- Returns the bonus magic accuracy for any spell
+local function getSpellBonusAcc(caster, target, spell, params)
+    local magicAccBonus = 0
+    local castersWeather = caster:getWeather()
+    local skill = spell:getSkillType()
+    local spellGroup = spell:getSpellGroup()
+    local element = spell:getElement()
+    local casterJob = caster:getMainJob()
+
+    if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
+        magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
+    end
+
+    if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
+        magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
+    end
+
+    local skillchainTier, _ = FormMagicBurst(element, target)
+
+    --add acc for skillchains
+    if skillchainTier > 0 then
+        magicAccBonus = magicAccBonus + 25
+    end
+
+    --Add acc for klimaform
+    if element > 0 then
+        if caster:hasStatusEffect(xi.effect.KLIMAFORM) and (castersWeather == xi.magic.singleWeatherStrong[element] or castersWeather == xi.magic.doubleWeatherStrong[element]) then
+            magicAccBonus = magicAccBonus + 15
+        end
+    end
+
+    if casterJob == xi.job.WHM then
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+    end
+
+    if casterJob == xi.job.BLM then
+        -- Add MACC for BLM Elemental Magic Merits
+        if skill == xi.skill.ELEMENTAL_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+        end
+
+        -- BLM Job Point: MACC Bonus +1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+
+    end
+
+    if casterJob == xi.job.DRK then
+        -- Add MACC for Dark Seal
+        if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+            magicAccBonus = magicAccBonus + 256
+        end
+    end
+
+    if casterJob == xi.job.RDM then
+        -- Add MACC for RDM group 1 merits
+        if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+        end
+
+        -- RDM Job Point: During saboteur, Enfeebling MACC +2
+        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+
+            magicAccBonus = magicAccBonus + (jpValue * 2)
+        end
+
+        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+    end
+
+    if casterJob == xi.job.NIN then
+        -- NIN Job Point: Ninjitsu Accuracy Bonus
+        if skill == xi.skill.NINJUTSU then
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+        end
+    end
+
+    if casterJob == xi.job.BLU then
+        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+        if skill == xi.skill.BLUE_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+        end
+    end
+
+    if casterJob == xi.job.SCH then
+        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+        then
+            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
+
+            magicAccBonus = magicAccBonus + jpValue
+        end
+    end
+
+    return magicAccBonus
+end
+
+local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
+    local p = 0
+    --add a scaling bonus or penalty based on difference of targets level from caster
+    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
+
+    p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
+
+    return utils.clamp(p, 5, 95)
+end
+
+local function isHelixSpell(spell)
+    --Dark Arts will further increase Helix duration, but testing is ongoing.
+
+    local id = spell:getID()
+    if id >= 278 and id <= 285 then
+        return true
+    end
+    return false
+end
+
+local function calculateMagicBurst(caster, spell, target, params)
+
+    local burst = 1.0
+    local skillchainburst = 1.0
+    local modburst = 1.0
+
+    if spell:getSpellGroup() == 3 and not caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
+        return burst
+    end
+
+    -- Obtain first multiplier from gear, atma and job traits
+    modburst = modburst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + params.AMIIburstBonus
+
+    if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
+        modburst = modburst + (caster:getMerit(xi.merit.INNIN_EFFECT)/100)
+    end
+
+    -- BLM Job Point: Magic Burst Damage
+    modburst = modburst + (caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100)
+
+    -- Cap bonuses from first multiplier at 40% or 1.4
+    if modburst > 1.4 then
+        modburst = 1.4
+    end
+
+    -- Obtain second multiplier from skillchain
+    -- Starts at 35% damage bonus, increases by 10% for every additional weaponskill in the chain
+    local skillchainTier, skillchainCount = FormMagicBurst(spell:getElement(), target)
+
+    if skillchainTier > 0 then
+        if skillchainCount == 1 then -- two weaponskills
+            skillchainburst = 1.35
+        elseif skillchainCount == 2 then -- three weaponskills
+            skillchainburst = 1.45
+        elseif skillchainCount == 3 then -- four weaponskills
+             skillchainburst = 1.55
+        elseif skillchainCount == 4 then -- five weaponskills
+            skillchainburst = 1.65
+        elseif skillchainCount == 5 then -- six weaponskills
+            skillchainburst = 1.75
+        else
+            -- Something strange is going on if this occurs.
+            skillchainburst = 1.0
+        end
+    end
+
+    -- Multiply
+    if skillchainburst > 1 then
+        burst = burst * modburst * skillchainburst
+    end
+
+    return burst
+end
+
+local function doNuke(caster, target, spell, params)
+    local skill = spell:getSpellGroup()
+    --calculate raw damage
+    local dmg = calculateMagicDamage(caster, target, spell, params)
+    --get resist multiplier (1x if no resist)
+    local resist = applyResistance(caster, target, spell, params)
+    --get the resisted damage
+    dmg = dmg*resist
+    if skill == xi.skill.NINJUTSU then
+        if caster:getMainJob() == xi.job.NIN then -- NIN main gets a bonus to their ninjutsu nukes
+            local ninSkillBonus = 100
+            if spell:getID() % 3 == 2 then -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
+                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50)/2) -- getSkillLevel includes bonuses from merits and modifiers (ie. gear)
+            elseif spell:getID() % 3 == 0 then -- ni nuke spell ids are 1 more than their corresponding ichi spell
+                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125)/2)
+            else -- san nuke spell, also has ids 1 more than their corresponding ni spell
+                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275)/2)
+            end
+
+            ninSkillBonus = utils.clamp(ninSkillBonus, 100, 200) -- bonus caps at +100%, and does not go negative
+            dmg = dmg + (caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
+            dmg = dmg * ninSkillBonus/100
+        end
+        -- boost with Futae
+        if caster:hasStatusEffect(xi.effect.FUTAE) then
+            dmg = dmg + (caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5)
+            dmg = math.floor(dmg * 1.50)
+            caster:delStatusEffect(xi.effect.FUTAE)
+        end
+    end
+
+    --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
+    dmg = addBonuses(caster, spell, target, dmg, params)
+    --add in target adjustment
+    dmg = adjustForTarget(target, dmg, spell:getElement())
+    --add in final adjustments
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
+    return dmg
+end
+
 function calculateMagicDamage(caster, target, spell, params)
 
     local dINT = caster:getStat(params.attribute) - target:getStat(params.attribute)
@@ -106,11 +335,11 @@ function doBoostGain(caster, target, spell, effect)
         xi.effect.CHR_BOOST
     }
 
-    for i, effect in ipairs(effectOverwrite) do
+    for i, effectValue in ipairs(effectOverwrite) do
             --printf("BOOST-GAIN: CHECKING FOR EFFECT %d...", effect)
-            if caster:hasStatusEffect(effect) then
+            if caster:hasStatusEffect(effectValue) then
                 --printf("BOOST-GAIN: HAS EFFECT %d, DELETING...", effect)
-                caster:delStatusEffect(effect)
+                caster:delStatusEffect(effectValue)
             end
     end
 
@@ -242,39 +471,12 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
     return final
 end
 
-function getCureAsNukeFinal(caster, spell, power, divisor, constant, basepower)
-    return getCureFinal(caster, spell, power, divisor, constant, basepower)
-end
-
 function isValidHealTarget(caster, target)
     return target:getAllegiance() == caster:getAllegiance() and
             (target:getObjType() == xi.objType.PC or
             target:getObjType() == xi.objType.MOB or
             target:getObjType() == xi.objType.TRUST or
             target:getObjType() == xi.objType.FELLOW)
-end
-
------------------------------------
--- Returns the staff bonus for the caster and spell.
------------------------------------
-
--- affinities that strengthen/weaken the index element
-
-
-function AffinityBonusDmg(caster, ele)
-
-    local affinity = caster:getMod(strongAffinityDmg[ele])
-    local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
-    -- print(bonus)
-    return bonus
-end
-
-function AffinityBonusAcc(caster, ele)
-
-    local affinity = caster:getMod(strongAffinityAcc[ele])
-    local bonus = 0 + affinity * 10 -- 10 acc per level of affinity
-    -- print(bonus)
-    return bonus
 end
 
 -- USED FOR DAMAGING MAGICAL SPELLS. Stage 3 of Calculating Magic Damage on wiki
@@ -361,8 +563,6 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
         return 0
     end
 
-    local magiceva = 0
-
     if bonusAcc == nil then
         bonusAcc = 0
     end
@@ -402,16 +602,6 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
-end
-
-function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
-    local p = 0
-    --add a scaling bonus or penalty based on difference of targets level from caster
-    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
-
-    p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
-
-    return utils.clamp(p, 5, 95)
 end
 
 -- Returns resistance value from given magic hit rate (p)
@@ -495,103 +685,6 @@ function getEffectResistance(target, effect)
     end
 
     return statusres
-end
-
--- Returns the bonus magic accuracy for any spell
-function getSpellBonusAcc(caster, target, spell, params)
-    local magicAccBonus = 0
-    local castersWeather = caster:getWeather()
-    local skill = spell:getSkillType()
-    local spellGroup = spell:getSpellGroup()
-    local element = spell:getElement()
-    local casterJob = caster:getMainJob()
-
-    if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
-        magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
-    end
-
-    if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
-        magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
-    end
-
-    local skillchainTier, skillchainCount = FormMagicBurst(element, target)
-
-    --add acc for skillchains
-    if skillchainTier > 0 then
-        magicAccBonus = magicAccBonus + 25
-    end
-
-    --Add acc for klimaform
-    if element > 0 then
-        if caster:hasStatusEffect(xi.effect.KLIMAFORM) and (castersWeather == xi.magic.singleWeatherStrong[element] or castersWeather == xi.magic.doubleWeatherStrong[element]) then
-            magicAccBonus = magicAccBonus + 15
-        end
-    end
-
-    if casterJob == xi.job.WHM then
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-    end
-
-    if casterJob == xi.job.BLM then
-        -- Add MACC for BLM Elemental Magic Merits
-        if skill == xi.skill.ELEMENTAL_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-        end
-
-        -- BLM Job Point: MACC Bonus +1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-
-    end
-
-    if casterJob == xi.job.DRK then
-        -- Add MACC for Dark Seal
-        if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-            magicAccBonus = magicAccBonus + 256
-        end
-    end
-
-    if casterJob == xi.job.RDM then
-        -- Add MACC for RDM group 1 merits
-        if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
-            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
-        end
-
-        -- RDM Job Point: During saboteur, Enfeebling MACC +2
-        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
-            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
-
-            magicAccBonus = magicAccBonus + (jpValue * 2)
-        end
-
-        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    end
-
-    if casterJob == xi.job.NIN then
-        -- NIN Job Point: Ninjitsu Accuracy Bonus
-        if skill == xi.skill.NINJUTSU then
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end
-    end
-
-    if casterJob == xi.job.BLU then
-        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
-        if skill == xi.skill.BLUE_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-        end
-    end
-
-    if casterJob == xi.job.SCH then
-        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-        then
-            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-
-            magicAccBonus = magicAccBonus + jpValue
-        end
-    end
-
-    return magicAccBonus
 end
 
 function handleAfflatusMisery(caster, spell, dmg)
@@ -723,60 +816,6 @@ function adjustForTarget(target, dmg, ele)
     --Moved non element specific absorb and null mod checks to core
     --TODO: update all lua calls to magicDmgTaken with appropriate element and remove this function
     return dmg
-end
-
-function calculateMagicBurst(caster, spell, target, params)
-
-    local burst = 1.0
-    local skillchainburst = 1.0
-    local modburst = 1.0
-
-    if spell:getSpellGroup() == 3 and not caster:hasStatusEffect(xi.effect.BURST_AFFINITY) then
-        return burst
-    end
-
-    -- Obtain first multiplier from gear, atma and job traits
-    modburst = modburst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + params.AMIIburstBonus
-
-    if caster:isBehind(target) and caster:hasStatusEffect(xi.effect.INNIN) then
-        modburst = modburst + (caster:getMerit(xi.merit.INNIN_EFFECT)/100)
-    end
-
-    -- BLM Job Point: Magic Burst Damage
-    modburst = modburst + (caster:getJobPointLevel(xi.jp.MAGIC_BURST_DMG_BONUS) / 100)
-
-    -- Cap bonuses from first multiplier at 40% or 1.4
-    if modburst > 1.4 then
-        modburst = 1.4
-    end
-
-    -- Obtain second multiplier from skillchain
-    -- Starts at 35% damage bonus, increases by 10% for every additional weaponskill in the chain
-    local skillchainTier, skillchainCount = FormMagicBurst(spell:getElement(), target)
-
-    if skillchainTier > 0 then
-        if skillchainCount == 1 then -- two weaponskills
-            skillchainburst = 1.35
-        elseif skillchainCount == 2 then -- three weaponskills
-            skillchainburst = 1.45
-        elseif skillchainCount == 3 then -- four weaponskills
-             skillchainburst = 1.55
-        elseif skillchainCount == 4 then -- five weaponskills
-            skillchainburst = 1.65
-        elseif skillchainCount == 5 then -- six weaponskills
-            skillchainburst = 1.75
-        else
-            -- Something strange is going on if this occurs.
-            skillchainburst = 1.0
-        end
-    end
-
-    -- Multiply
-    if skillchainburst > 1 then
-        burst = burst * modburst * skillchainburst
-    end
-
-    return burst
 end
 
 function addBonuses(caster, spell, target, dmg, params)
@@ -1052,22 +1091,10 @@ function getHelixDuration(caster)
     return duration
 end
 
-function isHelixSpell(spell)
-    --Dark Arts will further increase Helix duration, but testing is ongoing.
-
-    local id = spell:getID()
-    if id >= 278 and id <= 285 then
-        return true
-    end
-    return false
-end
-
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
     -- Process resitances
     local staff = AffinityBonusAcc(caster, spell:getElement())
     -- print("staff=" .. staff)
-    local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
-    -- print("dCHR=" .. dCHR)
     local params = {}
     params.attribute = xi.mod.CHR
     params.skillType = xi.skill.SINGING
@@ -1167,8 +1194,6 @@ function doElementalNuke(caster, spell, target, spellParams)
         end
 
     else
-        local hasMultipleTargetReduction = spellParams.hasMultipleTargetReduction --still unused!!!
-        local resistBonus = spellParams.resistBonus
         local mDMG = caster:getMod(xi.mod.MAGIC_DAMAGE)
 
         -- BLM Job Point: Manafont Elemental Magic Damage +3
@@ -1222,7 +1247,7 @@ function doElementalNuke(caster, spell, target, spellParams)
     local params = {}
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.ELEMENTAL_MAGIC
-    params.resistBonus = resistBonus
+    -- params.resistBonus = resistBonus
 
     local resist = applyResistance(caster, target, spell, params)
 
@@ -1263,45 +1288,6 @@ function doNinjutsuNuke(caster, target, spell, params)
     params.bonusmab = mabBonus
 
     return doNuke(caster, target, spell, params)
-end
-
-function doNuke(caster, target, spell, params)
-    --calculate raw damage
-    local dmg = calculateMagicDamage(caster, target, spell, params)
-    --get resist multiplier (1x if no resist)
-    local resist = applyResistance(caster, target, spell, params)
-    --get the resisted damage
-    dmg = dmg*resist
-    if skill == xi.skill.NINJUTSU then
-        if caster:getMainJob() == xi.job.NIN then -- NIN main gets a bonus to their ninjutsu nukes
-            local ninSkillBonus = 100
-            if spell:getID() % 3 == 2 then -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
-                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50)/2) -- getSkillLevel includes bonuses from merits and modifiers (ie. gear)
-            elseif spell:getID() % 3 == 0 then -- ni nuke spell ids are 1 more than their corresponding ichi spell
-                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 125)/2)
-            else -- san nuke spell, also has ids 1 more than their corresponding ni spell
-                ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 275)/2)
-            end
-
-            ninSkillBonus = utils.clamp(ninSkillBonus, 100, 200) -- bonus caps at +100%, and does not go negative
-            dmg = dmg + (caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2)
-            dmg = dmg * ninSkillBonus/100
-        end
-        -- boost with Futae
-        if caster:hasStatusEffect(xi.effect.FUTAE) then
-            dmg = dmg + (caster:getJobPointLevel(xi.jp.FUTAE_EFFECT) * 5)
-            dmg = math.floor(dmg * 1.50)
-            caster:delStatusEffect(xi.effect.FUTAE)
-        end
-    end
-
-    --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
-    dmg = addBonuses(caster, spell, target, dmg, params)
-    --add in target adjustment
-    dmg = adjustForTarget(target, dmg, spell:getElement())
-    --add in final adjustments
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
-    return dmg
 end
 
 function doDivineBanishNuke(caster, target, spell, params)
@@ -1347,7 +1333,7 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
         end
 
         -- Default is true
-        useComposure = useComposure or (useComposure == nill and true)
+        useComposure = useComposure or (useComposure == nil and true)
 
         -- Composure
         if useComposure and caster:hasStatusEffect(xi.effect.COMPOSURE) and caster:getID() == target:getID() then
@@ -1376,7 +1362,7 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
             duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
 
             -- RDM Job Point: Stymie effect
-            if caster:hasStatusEffect(xi.effect.STYMIE) and target:canGainStatusEffect(effect) then
+            if caster:hasStatusEffect(xi.effect.STYMIE) then
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
@@ -1399,43 +1385,6 @@ function calculatePotency(basePotency, magicSkill, caster, target)
     end
 
     return math.floor(basePotency * (1 + caster:getMod(xi.mod.ENF_MAG_POTENCY) / 100))
-end
-
--- Output magic hit rate for all levels
-function outputMagicHitRateInfo()
-    for casterLvl = 1, 75 do
-
-        printf("")
-        printf("-------- CasterLvl: %d", casterLvl)
-
-        for lvlMod = -5, 20 do
-
-            local targetLvl = casterLvl + lvlMod
-
-            if targetLvl >= 0 then
-                -- assume BLM spell, A+
-                local magicAcc = utils.getSkillLvl(6, casterLvl)
-                -- assume default monster magic eva, D
-                local magicEvaRank = 3
-                local rate = 0
-
-                local magicEva = utils.getMobSkillLvl(magicEvaRank, targetLvl)
-
-                local dINT = (lvlMod + 1) * -1
-
-                if dINT > 10 then
-                    magicAcc = magicAcc + 10 + (dINT - 10)/2
-                else
-                    magicAcc = magicAcc + dINT
-                end
-
-                local magicHitRate = calculateMagicHitRate(magicAcc, magicEva, 0, casterLvl, targetLvl)
-
-                printf("Lvl: %d vs %d, %d%%, MA: %d, ME: %d", casterLvl, targetLvl, magicHitRate, magicAcc, magicEva)
-            end
-
-        end
-    end
 end
 
 xi.ma = xi.magic

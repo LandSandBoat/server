@@ -76,6 +76,8 @@ global_objects=(
     Container
     Event
 
+    removeSleepEffects
+
     SANDORIA
     BASTOK
     WINDURST
@@ -266,16 +268,22 @@ global_objects=(
     getCurePowerOld
     getCureFinal
     getBaseCureOld
+    getEffectResistance
+    getElementalDamageReduction
     getElementalDebuffDOT
     getFlourishAnimation
     getHelixDuration
     getHitRate
+    getMagicHitRate
+    getMagicResist
     getStepAnimation
     getElementalDebuffStatDownFromDOT
+    handleAfflatusMisery
     handleNinjutsuDebuff
     handleThrenody
     hasSleepEffects
     isValidHealTarget
+    skillchainCount
     takeAbilityDamage
     mobAddBonuses
     MobBreathMove
@@ -291,6 +299,8 @@ global_objects=(
     MobFinalAdjustments
     MobPhysicalStatusEffectMove
     MobStatusEffectMove
+
+    FormMagicBurst
 
     AbilityFinalAdjustments
 
