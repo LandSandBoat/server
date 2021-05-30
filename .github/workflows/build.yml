@@ -226,6 +226,10 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
+        ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server.log
@@ -293,6 +297,10 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
+        ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230
