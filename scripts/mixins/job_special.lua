@@ -259,11 +259,11 @@ end
     mob listeners
 ---------------------------------------------------------------- --]]
 
-g_mixins.job_special = function(mob)
+g_mixins.job_special = function(jobSpecialMob)
 
     -- at spawn, give mob its default main job 2hr, which it'll use at 40-60% HP.
     -- these defaults can be overwritten by using xi.mix.jobSpecial.config() in onMobSpawn.
-    mob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
+    jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         local ability = nil
         local mJob = mob:getMainJob()
 
@@ -286,13 +286,13 @@ g_mixins.job_special = function(mob)
         mob:setLocalVar("[jobSpecial]delayInitial", 2) -- default wait until mob can use its first special (prevents insta-flow)
     end)
 
-    mob:addListener("ENGAGE", "JOB_SPECIAL_ENGAGE", function(mob)
+    jobSpecialMob:addListener("ENGAGE", "JOB_SPECIAL_ENGAGE", function(mob)
         if math.random(100) <= mob:getLocalVar("[jobSpecial]chance") then
             mob:setLocalVar("[jobSpecial]readyInitial", os.time() + mob:getLocalVar("[jobSpecial]delayInitial"))
         end
     end)
 
-    mob:addListener("COMBAT_TICK", "JOB_SPECIAL_CTICK", function(mob)
+    jobSpecialMob:addListener("COMBAT_TICK", "JOB_SPECIAL_CTICK", function(mob)
         local abilities = abilitiesReady(mob)
 
         if #abilities > 0 then

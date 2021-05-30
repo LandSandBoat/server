@@ -16,7 +16,7 @@ item_object.onAdditionalEffect = function(player, target, damage)
         chance = chance+6
     end
 
-    if (player:getWeather() == WEATHER_ICE) then
+    if (player:getWeather() == xi.weather.SNOW) then
         chance = chance+4
     elseif (player:getWeather() == xi.weather.BLIZZARDS) then
         chance = chance+6

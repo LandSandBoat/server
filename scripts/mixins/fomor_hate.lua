@@ -3,8 +3,8 @@ require("scripts/globals/utils")
 
 g_mixins = g_mixins or {}
 
-g_mixins.fomor_hate = function(mob)
-    mob:addListener("DEATH", "FOMOR_HATE_DEATH", function(mob, player)
+g_mixins.fomor_hate = function(fomorMob)
+    fomorMob:addListener("DEATH", "FOMOR_HATE_DEATH", function(mob, player)
         if player then
             local alliance = player:getAlliance()
             for _, member in pairs(alliance) do

@@ -35,7 +35,7 @@ local TI_Goldsmithing = {12496, 12497, 12495, 13082, 13446, 13084, 12545, 13125,
 local TI_Leathercraft = {13594, 16386, 13588, 13195, 12571, 12572, 12980, 12702, 12447, 10577}
 local TI_Smithing =     {16530, 12299, 16512, 16650, 16651, 16559, 12427, 16577, 12428, 19788}
 local TI_Woodworking =  {   22,    23, 17354, 17348, 17053, 17156, 17054,    56, 17101, 18884}
-local TI_Synergy =      {}
+-- local TI_Synergy =      {}
 
 local HQCrystals = {
     [1] = {
@@ -82,7 +82,7 @@ function isGuildMember(player, guild)
     local bit = {}
 
     for i = 12, 1, -1 do
-        twop = 2^i
+        local twop = 2^i
 
         if (guildOK >= twop) then
             bit[i]=1 guildOK = guildOK - twop
@@ -133,8 +133,7 @@ end
 -- canGetNewRank Action
 -----------------------------------
 
-function canGetNewRank(player, skillLvL, craftID)
-
+local function canGetNewRank(player, skillLvL, craftID)
     local Rank = player:getSkillRank(craftID) + 1
     local canGet = 0
 
@@ -152,7 +151,6 @@ function canGetNewRank(player, skillLvL, craftID)
     end
 
     return canGet
-
 end
 
 
@@ -166,7 +164,7 @@ function tradeTestItem(player, npc, trade, craftID)
     local skillLvL = player:getSkillLevel(craftID)
     local myTI = getTestItem(player, npc, craftID)
     local newRank = 0
-    local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
+    -- local signed = trade:getItem():getSignature() == player:getName() and 1 or 0
 
     if (canGetNewRank(player, skillLvL, craftID) == 1 and
         trade:hasItemQty(myTI, 1) and
@@ -292,7 +290,7 @@ function unionRepresentativeTriggerFinish(player, option, target, guildID, curre
 end
 
 function unionRepresentativeTrade(player, npc, trade, csid, guildID)
-    local gpItem, remainingPoints = player:getCurrentGPItem(guildID)
+    local _, remainingPoints = player:getCurrentGPItem(guildID)
     local text = zones[player:getZoneID()].text
 
     if (player:getCharVar('[GUILD]currentGuild') - 1 == guildID) then

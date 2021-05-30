@@ -18,18 +18,18 @@ xi.mix.clear_doom.config = function(mob, params)
     end
 end
 
-g_mixins.clear_doom = function(mob)
-    mob:addListener("SPAWN", "REMOVE_DOOM_SPAWN", function(mob)
+g_mixins.clear_doom = function(doomMob)
+    doomMob:addListener("SPAWN", "REMOVE_DOOM_SPAWN", function(mob)
         mob:setLocalVar("[remove_doom]removalChance", 100)
     end)
 
-    mob:addListener("DEATH", "REMOVE_DOOM", function(mob, player)
+    doomMob:addListener("DEATH", "REMOVE_DOOM", function(mob, player)
         if math.random(100) <= mob:getLocalVar("[remove_doom]removalChance") then
             local players = mob:getZone():getPlayers()
-            for name, player in pairs(players) do
+            for name, playerVal in pairs(players) do
                 if mob:checkDistance(player) < 30 then
-                    if player:delStatusEffectSilent(xi.effect.DOOM) then
-                        player:messagePublic(xi.msg.basic.NARROWLY_ESCAPE, player)
+                    if playerVal:delStatusEffectSilent(xi.effect.DOOM) then
+                        playerVal:messagePublic(xi.msg.basic.NARROWLY_ESCAPE, playerVal)
                     end
                 end
             end

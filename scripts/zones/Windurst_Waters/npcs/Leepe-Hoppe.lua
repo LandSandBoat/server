@@ -129,8 +129,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local reward = 0
-
     if (csid == 140) then
         player:setMissionStatus(player:getNation(), 1)
         player:setCharVar("ohbiru_dohbiru_talk", 0)

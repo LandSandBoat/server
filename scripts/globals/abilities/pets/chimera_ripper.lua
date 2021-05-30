@@ -40,7 +40,7 @@ ability_object.onPetAbility = function(target, automaton, skill, master, action)
         params.ftp300 = 11.0
     end
 
-    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill, action)
+    local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     return damage
 end

@@ -1330,7 +1330,7 @@ local function doesToolBreak(player, info)
     return false
 end
 
-function pickItem(player, info)
+local function pickItem(player, info)
     local zoneId = player:getZoneID()
 
     -- found nothing

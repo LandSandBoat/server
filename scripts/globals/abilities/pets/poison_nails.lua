@@ -25,7 +25,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
     target:updateEnmityFromDamage(pet, totaldamage)
 
-    if (AvatarPhysicalHit(skill, totalDamage) and target:hasStatusEffect(xi.effect.POISON) == false) then
+    if (AvatarPhysicalHit(skill, totaldamage) and target:hasStatusEffect(xi.effect.POISON) == false) then
         target:addStatusEffect(xi.effect.POISON, 1, 3, 60)
     end
 

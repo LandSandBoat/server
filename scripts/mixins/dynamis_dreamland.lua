@@ -13,7 +13,7 @@ g_mixins = g_mixins or {}
 --  1 byne bill: 1455
 --  random: 0
 
-g_mixins.dynamis_dreamland = function(mob)
+g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
     local proctimes =
     {
         WS =
@@ -47,7 +47,7 @@ g_mixins.dynamis_dreamland = function(mob)
         [4] = {single = 250, hundo = 50},
     }
 
-    mob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
+    dynamisDreamlandMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
         local currency = target:getLocalVar("dynamis_currency")
         local vana_hour = VanadielHour()
 
@@ -66,7 +66,7 @@ g_mixins.dynamis_dreamland = function(mob)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
+    dynamisDreamlandMob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
         local currency = target:getLocalVar("dynamis_currency")
         local vana_hour = VanadielHour()
 
@@ -85,7 +85,7 @@ g_mixins.dynamis_dreamland = function(mob)
         end
     end)
 
-    mob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(target, user, ability, action)
+    dynamisDreamlandMob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(target, user, ability, action)
         local currency = target:getLocalVar("dynamis_currency")
         local vana_hour = VanadielHour()
 
@@ -104,7 +104,7 @@ g_mixins.dynamis_dreamland = function(mob)
         end
     end)
 
-    mob:addListener("DEATH", "DYNAMIS_ITEM_DISTRIBUTION", function(mob, killer)
+    dynamisDreamlandMob:addListener("DEATH", "DYNAMIS_ITEM_DISTRIBUTION", function(mob, killer)
         if killer then
             local th = thCurrency[math.min(mob:getTHlevel(), 4)]
             local currency = mob:getLocalVar("dynamis_currency")

@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
             else
                 param3 = 0
             end
-            player:startEvent(111, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS, repeatMission)
+            player:startEvent(111, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS_1, repeatMission)
         end
     end
 
@@ -64,8 +64,8 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 118 and option == 1) then
         player:addTitle(xi.title.FRESH_NORTH_WINDS_RECRUIT)
     elseif (csid == 111 and (option == 12 or option == 15)) then
-        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS)
+        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
     end
     if (csid == 837) then
         player:setCharVar("WWatersRTenText", 1)

@@ -16,7 +16,7 @@ item_object.onItemUse = function(target)
     if (target:hasStatusEffect(xi.effect.SILENCE) or target:hasStatusEffect(xi.effect.BLINDNESS) or target:hasStatusEffect(xi.effect.POISON) or target:hasStatusEffect(xi.effect.PARALYSIS) or target:hasStatusEffect(xi.effect.PLAGUE)) then
         local effectRemoved = 0
         while effectRemoved == 0 do
-            num = math.random(1, 5)
+            local num = math.random(1, 5)
             if (num == 1 and target:hasStatusEffect(xi.effect.SILENCE)) then
                 effectRemoved = effectRemoved + 1
                 target:delStatusEffect(xi.effect.SILENCE)

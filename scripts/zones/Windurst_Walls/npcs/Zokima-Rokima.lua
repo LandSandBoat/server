@@ -46,7 +46,7 @@ entity.onTrigger = function(player, npc)
             else
                 param3 = 0
             end
-            player:startEvent(93, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS, repeatMission)
+            player:startEvent(93, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS_1, repeatMission)
         end
     end
 
@@ -62,8 +62,8 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 96 and option == 1) then
         player:addTitle(xi.title.HEAVENS_TOWER_GATEHOUSE_RECRUIT)
     elseif (csid == 93 and (option == 12 or option == 15)) then
-        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS)
+        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
     end
 
 end

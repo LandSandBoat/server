@@ -10,7 +10,7 @@ function getSummoningSkillOverCap(avatar)
     return math.max(summoningSkill - maxSkill, 0)
 end
 
-function getDexCritRate(source, target)
+local function getDexCritRate(source, target)
     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
     local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
     local dDexAbs = math.abs(dDex)
@@ -44,7 +44,7 @@ function getDexCritRate(source, target)
     return math.min(critRate, 15) * sign
 end
 
-function getRandRatio(wRatio)
+local function getRandRatio(wRatio)
     local qRatio = wRatio
     local upperLimit = 0
     local lowerLimit = 0
@@ -80,7 +80,20 @@ function getRandRatio(wRatio)
     return qRatio
 end
 
-function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
+local function avatarFTP(tp, ftp1, ftp2, ftp3)
+    if tp < 1000 then
+        tp = 1000
+    end
+    if tp >= 1000 and tp < 2000 then
+        return ftp1 + (ftp2 - ftp1) / 100 * (tp - 1000)
+    elseif tp >= 2000 and tp <= 3000 then
+        -- generate a straight line between ftp2 and ftp3 and find point @ tp
+        return ftp2 + (ftp3 - ftp2) / 100 * (tp - 2000)
+    end
+    return 1 -- no ftp mod
+end
+
+local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- fSTR for avatars has no cap and a lower bound of floor(weaponDmg/9)
     local dSTR = avatarStr - targetVit
@@ -107,7 +120,7 @@ function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
     return math.max(-min, fSTR)
 end
 
-function avatarHitDmg(weaponDmg, fSTR, pDif)
+local function avatarHitDmg(weaponDmg, fSTR, pDif)
     -- https://www.bg-wiki.com/bg/Physical_Damage
     -- Physical Damage = Base Damage * pDIF
     -- where Base Damange is defined as Weapon Damage + fSTR
@@ -306,7 +319,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
                 skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
                 target:setMod(shadowType, targShadows - shadowbehav)
                 if shadowType == xi.mod.UTSUSEMI then -- update icon
-                    effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                     if effect ~= nil then
                         if targShadows - shadowbehav == 0 then
                             target:delStatusEffect(xi.effect.COPY_IMAGE)
@@ -344,7 +357,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, 
         elseif shadowbehav ~= MOBPARAM_IGNORE_SHADOWS then -- it can be absorbed by shadows
             -- third eye doesnt care how many shadows, so attempt to anticipate, but reduce
             -- chance of anticipate based on previous successful anticipates.
-            prevAnt = teye:getPower()
+            local prevAnt = teye:getPower()
             if prevAnt == 0 then
                 -- 100% proc
                 teye:setPower(1)
@@ -405,19 +418,6 @@ end
 function AvatarPhysicalHit(skill, dmg)
     -- if message is not the default. Then there was a miss, shadow taken etc
     return skill:getMsg() == xi.msg.basic.DAMAGE
-end
-
-function avatarFTP(tp, ftp1, ftp2, ftp3)
-    if tp < 1000 then
-        tp = 1000
-    end
-    if tp >= 1000 and tp < 2000 then
-        return ftp1 + (ftp2 - ftp1) / 100 * (tp - 1000)
-    elseif tp >= 2000 and tp <= 3000 then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + (ftp3 - ftp2) / 100 * (tp - 2000)
-    end
-    return 1 -- no ftp mod
 end
 
 -- Checks if the summoner is in a Trial Size Avatar Mini Fight (used to restrict summoning while in bcnm)

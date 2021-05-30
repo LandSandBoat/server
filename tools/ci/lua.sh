@@ -76,6 +76,8 @@ global_objects=(
     Container
     Event
 
+    removeSleepEffects
+
     SANDORIA
     BASTOK
     WINDURST
@@ -185,6 +187,14 @@ global_objects=(
     updateModPerformance
 
     fTP
+    fSTR
+    calculateRawWSDmg
+    calculatedIgnoredDef
+    cMeleeRatio
+    generatePdif
+    getMeleeDmg
+
+    getRecommendedAssaultLevel
 
     PATHFLAG_WALLHACK
 
@@ -218,6 +228,9 @@ global_objects=(
     applyHalloweenNpcCostumes
     isHalloweenEnabled
     onHalloweenTrade
+    HALLOWEEN_2008
+    HALLOWEEN_2009
+    HALLOWEEN_2010
 
     salvageUtil
 
@@ -255,16 +268,22 @@ global_objects=(
     getCurePowerOld
     getCureFinal
     getBaseCureOld
+    getEffectResistance
+    getElementalDamageReduction
     getElementalDebuffDOT
     getFlourishAnimation
     getHelixDuration
     getHitRate
+    getMagicHitRate
+    getMagicResist
     getStepAnimation
     getElementalDebuffStatDownFromDOT
+    handleAfflatusMisery
     handleNinjutsuDebuff
     handleThrenody
     hasSleepEffects
     isValidHealTarget
+    skillchainCount
     takeAbilityDamage
     mobAddBonuses
     MobBreathMove
@@ -280,6 +299,8 @@ global_objects=(
     MobFinalAdjustments
     MobPhysicalStatusEffectMove
     MobStatusEffectMove
+
+    FormMagicBurst
 
     AbilityFinalAdjustments
 

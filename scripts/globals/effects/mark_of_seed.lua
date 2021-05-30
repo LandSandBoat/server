@@ -28,7 +28,7 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    if (target:hasKeyItem(xi.ki.MARK_OF_SEED) == false and player:hasKeyItem(xi.ki.AZURE_KEY) == false) then
+    if (target:hasKeyItem(xi.ki.MARK_OF_SEED) == false and target:hasKeyItem(xi.ki.AZURE_KEY) == false) then
         target:messageSpecial(ID.text.MARK_OF_SEED_HAS_VANISHED)
     end
     target:setCharVar("SEED_AFTERGLOW_TIMER", 0)

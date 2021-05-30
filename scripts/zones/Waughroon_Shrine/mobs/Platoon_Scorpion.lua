@@ -15,10 +15,8 @@ local SELF_STUN_CHANCE = 0.25  -- 25%
 
 -- Mobs sync/mimic TP moves.
 
-entity.onMobInitialize = function(mob)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "SCORP_MIMIC_START", function(mob, skillID)
-        local hpp = mob:getHPP()
-
+entity.onMobInitialize = function(scorpion)
+    scorpion:addListener("WEAPONSKILL_STATE_ENTER", "SCORP_MIMIC_START", function(mob, skillID)
         -- check flag to make sure we aren't infinitely looping through scorps
         if mob:getLocalVar('[ODS]mimic') ~= 1 then
             local bf = mob:getBattlefield():getArea()
@@ -44,7 +42,7 @@ entity.onMobInitialize = function(mob)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "SCORP_MIMIC_STOP", function(mob, skillID)
+    scorpion:addListener("WEAPONSKILL_STATE_EXIT", "SCORP_MIMIC_STOP", function(mob, skillID)
         -- reset infinite loop flag
         mob:setLocalVar('[ODS]mimic', 0)
 

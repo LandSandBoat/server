@@ -33,10 +33,9 @@ checks.checkTrials = function(self, player, params)
         else
             return checks.checkWsOnMobsystem(self.reqs, params)
         end
-    else
-        return ismobkill
     end
-    return 0
+
+    return ismobkill
 end
 
 checks.checkTradeTrials = function(self, player, params)
