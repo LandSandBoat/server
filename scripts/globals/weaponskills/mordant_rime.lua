@@ -40,7 +40,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and chance and not target:hasStatusEffect(xi.effect.WEIGHT) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
         if not target:hasStatusEffect(xi.effect.WEIGHT) then
             if tp - 1000 > math.random() * 150 then
                 target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
