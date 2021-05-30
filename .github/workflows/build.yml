@@ -197,6 +197,7 @@ jobs:
 
   Full_Startup_Checks_2004:
     runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -212,6 +213,15 @@ jobs:
         fetch-depth: 0
     - uses: actions/download-artifact@v2
       with:
+        name: topaz_connect
+        path: .
+    - uses: actions/download-artifact@v2
+      with:
+        name: topaz_game
+        path: .
+    - uses: actions/download-artifact@v2
+      with:
+        name: topaz_search
         path: .
     - name: Install Dependencies
       run: |
@@ -261,6 +271,7 @@ jobs:
 
   MultiInstance_Startup_Checks_2004:
     runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -276,6 +287,15 @@ jobs:
         fetch-depth: 0
     - uses: actions/download-artifact@v2
       with:
+        name: topaz_connect
+        path: .
+    - uses: actions/download-artifact@v2
+      with:
+        name: topaz_game
+        path: .
+    - uses: actions/download-artifact@v2
+      with:
+        name: topaz_search
         path: .
     - name: Install Dependencies
       run: |
