@@ -36,7 +36,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.5
     params.chr_wsc = 0.2
-    damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
+    local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     return damage

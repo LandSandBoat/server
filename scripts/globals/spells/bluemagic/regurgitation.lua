@@ -36,7 +36,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.30
     params.chr_wsc = 0.0
-    damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
+    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    params.attribute = xi.mod.INT
+    params.skillType = xi.skill.BLUE_MAGIC
+    params.bonus = 1.0
+    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     if (caster:isBehind(target, 15)) then -- guesstimating the angle at 15 degrees here
         damage = math.floor(damage * 1.25)
         -- printf("is behind mob")
@@ -44,13 +48,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     --TODO: Knockback? Where does that get handled? How much knockback does it have?
-    local params = {}
-    params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.BLUE_MAGIC
-    params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
 
+    local resist = applyResistance(caster, target, spell, params)
     if (damage > 0 and resist > 0.125) then
         local typeEffect = xi.effect.BIND
         target:delStatusEffect(typeEffect)

@@ -25,17 +25,10 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
 
     local params = {}
-
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-
     params.attribute = xi.mod.INT
-
     params.skillType = xi.skill.BLUE_MAGIC
-
     params.bonus = 1.0
-
-    local resist = applyResistance(caster, target, spell, params)
-    local params = {}
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.ICE
@@ -49,7 +42,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.3
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
+    local resist = applyResistance(caster, target, spell, params)
+    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (damage > 0 and resist > 0.0625) then

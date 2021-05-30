@@ -29,8 +29,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.bonus = 1.0
-    local resist = applyResistance(caster, target, spell, params)
-    local params = {}
+    -- local resist = applyResistance(caster, target, spell, params)
     -- This data should match information on http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.FIRE
@@ -44,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.0
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
-    damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
+    local damage = BlueMagicalSpell(caster, target, spell, params, MND_BASED)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then

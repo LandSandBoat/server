@@ -42,7 +42,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.20
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    damage = BluePhysicalSpell(caster, target, spell, params)
+    local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     local chance = math.random()
@@ -50,7 +50,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (damage > 0 and chance > 1) then
         local typeEffect = xi.effect.DEFENSE_DOWN
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, 0, typeEffect))
     end
 
     return damage

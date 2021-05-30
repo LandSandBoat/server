@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
     params.offcratiomod = caster:getStat(xi.mod.DEF)
-    damage = BluePhysicalSpell(caster, target, spell, params)
+    local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     return damage

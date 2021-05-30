@@ -25,9 +25,9 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local pINT = caster:getStat(xi.mod.INT)
-    local mINT = target:getStat(xi.mod.INT)
-    local dINT = pINT - mINT
+    -- local pINT = caster:getStat(xi.mod.INT)
+    -- local mINT = target:getStat(xi.mod.INT)
+    -- local dINT = pINT - mINT
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT
