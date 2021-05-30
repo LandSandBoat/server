@@ -250,7 +250,7 @@ MISSION_LOGS = {
     [13] = "ROV",
 }
 
-function GetQMLogInfo(cmdParamText, logNameTable)
+local function GetQMLogInfo(cmdParamText, logNameTable)
     -- Returns the table from this file after validating
     if (cmdParamText == nil) then return nil end
     if (type(logNameTable) ~= "table") then return nil end
