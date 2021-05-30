@@ -24,7 +24,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local params = {}
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC

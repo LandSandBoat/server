@@ -25,7 +25,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.FROST
-    local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
+    -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT
@@ -55,9 +55,9 @@ spell_object.onSpellCast = function(caster, target, spell)
             if (effect ~= nil) then
                 target:delStatusEffect(typeEffect)
             end
-                spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
+            spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
             local duration = math.floor(ELEMENTAL_DEBUFF_DURATION * resist)
-            target:addStatusEffect(typeEffect, DOT, 3, ELEMENTAL_DEBUFF_DURATION)
+            target:addStatusEffect(typeEffect, DOT, 3, duration)
         end
     else
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)

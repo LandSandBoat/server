@@ -26,7 +26,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.SLEEP_II
-    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT

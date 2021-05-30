@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
     end
 
-    return tp
+    return 0
 end
 
 return spell_object

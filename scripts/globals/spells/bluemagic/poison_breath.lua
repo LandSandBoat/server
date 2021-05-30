@@ -27,6 +27,11 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local params = {}
+    local multi = 1.08
+    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
+        multi = multi + 0.50
+    end
+
     params.attackType = xi.attackType.BREATH
     params.damageType = xi.damageType.WATER
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
@@ -45,15 +50,10 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.mnd_wsc = 0.3
     params.chr_wsc = 0.0
     local resist = applyResistance(caster, target, spell, params)
-    local multi = 1.08
     local HP = caster:getHP()
     local LVL = caster:getMainLvl()
     local damage = (HP / 10) + (LVL / 1.25)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-
-    if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
-        multi = multi + 0.50
-    end
 
     if (damage > 0 and resist > 0.3) then
         local typeEffect = xi.effect.POISON
