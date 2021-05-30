@@ -9,13 +9,13 @@ require("scripts/globals/mixins")
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-g_mixins.families.antlion_ambush_noaggro = function(mob)
-    mob:addListener("SPAWN", "ANTLION_AMBUSH_NOAGGRO_SPAWN", function(mob)
+g_mixins.families.antlion_ambush_noaggro = function(antlionAmbushNoaggroMob)
+    antlionAmbushNoaggroMob:addListener("SPAWN", "ANTLION_AMBUSH_NOAGGRO_SPAWN", function(mob)
         mob:hideName(true)
         mob:untargetable(true)
         mob:setAnimationSub(0)
     end)
-    mob:addListener("ENGAGE", "ANTLION_AMBUSH_NOAGGRO_ENGAGE", function(mob, target)
+    antlionAmbushNoaggroMob:addListener("ENGAGE", "ANTLION_AMBUSH_NOAGGRO_ENGAGE", function(mob, target)
         mob:useMobAbility(278) -- Pit Ambush
     end)
 end

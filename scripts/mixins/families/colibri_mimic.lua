@@ -16,9 +16,9 @@ require("scripts/globals/magic")
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-g_mixins.families.colibri_mimic = function(mob)
+g_mixins.families.colibri_mimic = function(colibriMob)
 
-    mob:addListener("MAGIC_TAKE", "COLIBRI_MIMIC_MAGIC_TAKE", function(target, caster, spell)
+    colibriMob:addListener("MAGIC_TAKE", "COLIBRI_MIMIC_MAGIC_TAKE", function(target, caster, spell)
         if
             target:getAnimationSub() == 0 and
             spell:tookEffect() and
@@ -32,7 +32,7 @@ g_mixins.families.colibri_mimic = function(mob)
         end
     end)
 
-    mob:addListener("COMBAT_TICK", "COLIBRI_MIMIC_CTICK", function(mob)
+    colibriMob:addListener("COMBAT_TICK", "COLIBRI_MIMIC_CTICK", function(mob)
         local spellToMimic = mob:getLocalVar("[colibri]spellToMimic")
         local castWindow = mob:getLocalVar("[colibri]castWindow")
         local castTime = mob:getLocalVar("[colibri]castTime")
@@ -54,7 +54,7 @@ g_mixins.families.colibri_mimic = function(mob)
         end
     end)
 
-    mob:addListener("DISENGAGE", "COLIBRI_MIMIC_DISENGAGE", function(mob)
+    colibriMob:addListener("DISENGAGE", "COLIBRI_MIMIC_DISENGAGE", function(mob)
         mob:setLocalVar("[colibri]spellToMimic", 0)
         mob:setLocalVar("[colibri]castWindow", 0)
         mob:setLocalVar("[colibri]castTime", 0)

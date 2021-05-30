@@ -77,11 +77,11 @@ xi.mix.uragnite.config = function(mob, params)
     end
 end
 
-g_mixins.families.uragnite = function(mob)
+g_mixins.families.uragnite = function(uragniteMob)
 
     -- at spawn, give mob default skill lists for in-shell and out-of-shell states
     -- these defaults can be overwritten by using xi.mix.uragnite.config() in onMobSpawn.
-    mob:addListener("SPAWN", "URAGNITE_SPAWN", function(mob)
+    uragniteMob:addListener("SPAWN", "URAGNITE_SPAWN", function(mob)
         mob:setLocalVar("[uragnite]noShellSkillList", 251)
         mob:setLocalVar("[uragnite]inShellSkillList", 250)
         mob:setLocalVar("[uragnite]chanceToShell", 20)
@@ -90,13 +90,13 @@ g_mixins.families.uragnite = function(mob)
         mob:setLocalVar("[uragnite]inShellRegen", 50)
     end)
 
-    mob:addListener("TAKE_DAMAGE", "URAGNITE_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
+    uragniteMob:addListener("TAKE_DAMAGE", "URAGNITE_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.PHYSICAL then
             if math.random(100) <= mob:getLocalVar("[uragnite]chanceToShell") and bit.band(mob:getAnimationSub(), 1) == 0 then
                 enterShell(mob)
                 local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))
-                mob:timer(timeInShell * 1000, function(mob)
-                    exitShell(mob)
+                mob:timer(timeInShell * 1000, function(mobArg)
+                    exitShell(mobArg)
                 end)
             end
         end

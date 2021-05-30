@@ -31,16 +31,16 @@ local function sleepDuringNight(mob)
     end
 end
 
-g_mixins.families.ziz = function(mob)
-    mob:addListener("SPAWN", "ZIZ_SPAWN", function(mob)
+g_mixins.families.ziz = function(zizMob)
+    zizMob:addListener("SPAWN", "ZIZ_SPAWN", function(mob)
         sleepDuringNight(mob)
     end)
 
-    mob:addListener("ROAM_TICK", "ZIZ_ROAM", function(mob)
+    zizMob:addListener("ROAM_TICK", "ZIZ_ROAM", function(mob)
         sleepDuringNight(mob)
     end)
 
-    mob:addListener("ENGAGE", "ZIZ_ENGAGE", function(mob, target)
+    zizMob:addListener("ENGAGE", "ZIZ_ENGAGE", function(mob, target)
         mob:setAnimationSub(1)
         mob:setAggressive(true)
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)

@@ -4,9 +4,9 @@ require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
-g_mixins.gears = function(mob)
+g_mixins.gears = function(gearsMob)
 
-    mob:addListener("COMBAT_TICK", "GEARS_CTICK", function(mob)
+    gearsMob:addListener("COMBAT_TICK", "GEARS_CTICK", function(mob)
         local mobHPP = mob:getHPP()
         if (mobHPP >= 26 and mobHPP <= 49) then
             if mob:getAnimationSub() ~= 1 then
