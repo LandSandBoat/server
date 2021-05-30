@@ -10,7 +10,7 @@ require("scripts/globals/msg")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    pet = target:getPet()
+    local pet = target:getPet()
     if (pet == nil) then
         return xi.msg.basic.REQUIRES_A_PET
     elseif (pet:hasStatusEffect(xi.effect.MEDICINE)) then
@@ -21,7 +21,9 @@ end
 
 item_object.onItemUse = function(target)
     if (target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 180, 5320)) then
-        target:messageBasic(GAINS_EFFECT_OF_STATUS, xi.effect.MEDICINE)
+        local pet = target:getPet()
+        -- TODO: Verify targeting and messages are correct
+        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.MEDICINE)
         pet:delStatusEffect(xi.effect.SLEEP_I)
         pet:delStatusEffect(xi.effect.SLEEP_II)
         pet:delStatusEffect(xi.effect.LULLABY)

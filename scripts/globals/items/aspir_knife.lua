@@ -16,9 +16,9 @@ item_object.onAdditionalEffect = function(player, target, damage)
         return 0, 0, 0
     else
         local drain = math.random(1, 3)
-        local params = {}
-        params.bonusmab = 0
-        params.includemab = false
+        -- local params = {}
+        -- params.bonusmab = 0
+        -- params.includemab = false
         -- drain = addBonusesAbility(player, xi.magic.ele.DARK, target, drain, params)
         drain = drain * applyResistanceAddEffect(player, target, xi.magic.ele.DARK, 0)
         drain = adjustForTarget(target, drain, xi.magic.ele.DARK)

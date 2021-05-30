@@ -22,14 +22,13 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    chocoboShirt = target:getEquipID(xi.slot.BODY) == 10293
+    local chocoboShirt = target:getEquipID(xi.slot.BODY) == 10293
     target:addStatusEffect(xi.effect.FOOD, chocoboShirt, 0, 300, 4545)
 end
 
 item_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
     if (power == 1) then
-        chocoboShirt = 1
         target:addMod(xi.mod.AGI, 13)
         target:addMod(xi.mod.VIT, -5)
     else
