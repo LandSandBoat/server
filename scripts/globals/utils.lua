@@ -487,6 +487,16 @@ function utils.prequire(...)
     end
 end
 
+function utils.contains(value, collection)
+    for _, v in collection do
+        if value == v then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- Helper functions for Interaction Framework Quests
 -- These should only be used when working between quests, or outside
 -- of the quest script itself.  Quest vars will be deleted automatically

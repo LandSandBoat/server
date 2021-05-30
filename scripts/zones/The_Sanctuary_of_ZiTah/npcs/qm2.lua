@@ -23,7 +23,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.STURDY_BRANCH, trade, xi.items.HATCHET)
+    -- TODO: Verify Second Param; was: trade, now: 0
+    player:messageSpecial(ID.text.STURDY_BRANCH, 0, xi.items.HATCHET)
 end
 
 entity.onEventUpdate = function(player, csid, option)
