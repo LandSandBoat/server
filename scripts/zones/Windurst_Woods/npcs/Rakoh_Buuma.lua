@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
             else
                 param3 = 0
             end
-            player:startEvent(114, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS, repeatMission)
+            player:startEvent(114, flagMission, 0, param3, 0, xi.ki.STAR_CRESTED_SUMMONS_1, repeatMission)
         end
     end
 end
@@ -61,8 +61,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 121 and option == 1 then
         player:addTitle(xi.title.NEW_BUUMAS_BOOMERS_RECRUIT)
     elseif csid == 114 and (option == 12 or option == 15) then
-        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS)
+        player:addKeyItem(xi.ki.STAR_CRESTED_SUMMONS_1)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.STAR_CRESTED_SUMMONS_1)
     elseif csid == 632 then
         player:setCharVar("WWoodsRTenText", 1)
     end
