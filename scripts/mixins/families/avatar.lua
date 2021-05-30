@@ -3,8 +3,8 @@ require("scripts/globals/mixins")
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-g_mixins.families.avatar = function(mob)
-    mob:addListener("SPAWN", "AVATAR_SPAWN", function(mob)
+g_mixins.families.avatar = function(avatarMob)
+    avatarMob:addListener("SPAWN", "AVATAR_SPAWN", function(mob)
         mob:setModelId(math.random(791, 798))
         mob:hideName(false)
         mob:untargetable(true)
@@ -13,7 +13,7 @@ g_mixins.families.avatar = function(mob)
         mob:SetMagicCastingEnabled(false)
     end)
 
-    mob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
+    avatarMob:addListener("ENGAGE", "AVATAR_ENGAGE", function(mob, target)
         local abilityID = nil
         local modelID = mob:getModelId()
 
@@ -34,7 +34,7 @@ g_mixins.families.avatar = function(mob)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "AVATAR_MOBSKILL_FINISHED", function(mob)
+    avatarMob:addListener("WEAPONSKILL_STATE_EXIT", "AVATAR_MOBSKILL_FINISHED", function(mob)
         mob:setUnkillable(false)
         mob:setHP(0)
     end)

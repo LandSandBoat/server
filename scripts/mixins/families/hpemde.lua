@@ -49,13 +49,13 @@ local function closeMouth(mob)
     mob:wait(2000)
 end
 
-g_mixins.families.hpemde = function(mob)
-    mob:addListener("SPAWN", "HPEMDE_SPAWN", function(mob)
+g_mixins.families.hpemde = function(hpemdeMob)
+    hpemdeMob:addListener("SPAWN", "HPEMDE_SPAWN", function(mob)
         mob:setMod(xi.mod.REGEN, 10)
         dive(mob)
     end)
 
-    mob:addListener("ROAM_TICK", "HPEMDE_RTICK", function(mob)
+    hpemdeMob:addListener("ROAM_TICK", "HPEMDE_RTICK", function(mob)
         if mob:getHPP() == 100 then
             mob:setLocalVar("[hpemde]damaged", 0)
         end
@@ -64,16 +64,16 @@ g_mixins.families.hpemde = function(mob)
         end
     end)
 
-    mob:addListener("ENGAGE", "HPEMDE_ENGAGE", function(mob, target)
+    hpemdeMob:addListener("ENGAGE", "HPEMDE_ENGAGE", function(mob, target)
         mob:setLocalVar("[hpemde]disengageTime",  mob:getBattleTime() + 45)
         surface(mob)
     end)
 
-    mob:addListener("MAGIC_TAKE", "HPEMDE_MAGIC_TAKE", function(target, caster, spell)
+    hpemdeMob:addListener("MAGIC_TAKE", "HPEMDE_MAGIC_TAKE", function(target, caster, spell)
         target:setLocalVar("[hpemde]disengageTime",  target:getBattleTime() + 45)
     end)
 
-    mob:addListener("COMBAT_TICK", "HPEMDE_CTICK", function(mob)
+    hpemdeMob:addListener("COMBAT_TICK", "HPEMDE_CTICK", function(mob)
         if mob:getLocalVar("[hpemde]damaged") == 0 then
             local disengageTime = mob:getLocalVar("[hpemde]disengageTime")
 
@@ -95,7 +95,7 @@ g_mixins.families.hpemde = function(mob)
         end
     end)
 
-    mob:addListener("CRITICAL_TAKE", "HPEMDE_CRITICAL_TAKE", function(mob)
+    hpemdeMob:addListener("CRITICAL_TAKE", "HPEMDE_CRITICAL_TAKE", function(mob)
         if mob:getAnimationSub() == 3 then
            closeMouth(mob)
         end

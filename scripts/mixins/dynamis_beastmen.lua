@@ -6,7 +6,7 @@ require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
-g_mixins.dynamis_beastmen = function(mob)
+g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     local procjobs = {
         [xi.job.WAR] = "ws",
         [xi.job.MNK] = "ja",
@@ -44,25 +44,25 @@ g_mixins.dynamis_beastmen = function(mob)
         [4] = {single = 250, hundo = 50},
     }
 
-    mob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
+    dynamisBeastmenMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)
         if procjobs[target:getMainJob()] == "ma" and math.random(0, 99) < 8 and target:getLocalVar("dynamis_proc") == 0 then
             dynamis.procMonster(target, caster)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
+    dynamisBeastmenMob:addListener("WEAPONSKILL_TAKE", "DYNAMIS_WS_PROC_CHECK", function(target, user, wsid)
         if procjobs[target:getMainJob()] == "ws" and math.random(0, 99) < 25 and target:getLocalVar("dynamis_proc") == 0 then
             dynamis.procMonster(target, user)
         end
     end)
 
-    mob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(mob, user, ability, action)
+    dynamisBeastmenMob:addListener("ABILITY_TAKE", "DYNAMIS_ABILITY_PROC_CHECK", function(mob, user, ability, action)
         if procjobs[mob:getMainJob()] == "ja" and math.random(0, 99) < 20 and mob:getLocalVar("dynamis_proc") == 0 then
             dynamis.procMonster(mob, user)
         end
     end)
 
-    mob:addListener("DEATH", "DYNAMIS_ITEM_DISTRIBUTION", function(mob, killer)
+    dynamisBeastmenMob:addListener("DEATH", "DYNAMIS_ITEM_DISTRIBUTION", function(mob, killer)
         if killer then
             local th = thCurrency[math.min(mob:getTHlevel(), 4)]
             local family = mob:getFamily()

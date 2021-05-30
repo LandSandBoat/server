@@ -52,17 +52,16 @@ xi.mix.eruca.config = function(mob, params)
     end
 end
 
-g_mixins.families.eruca = function(mob)
+g_mixins.families.eruca = function(erucaMob)
     -- these defaults can be overwritten by using xi.mix.eruca.config() in onMobSpawn.  sleepHour must be > wakeHour to function properly.
-    mob:addListener("SPAWN", "ERUCA_SPAWN", function(mob)
+    erucaMob:addListener("SPAWN", "ERUCA_SPAWN", function(mob)
         mob:setLocalVar("[eruca]sleepHour", 18)
         mob:setLocalVar("[eruca]wakeHour", 6)
     end)
 
-    mob:addListener("ROAM_TICK", "ERUCA_ROAM_TICK", function(mob)
+    erucaMob:addListener("ROAM_TICK", "ERUCA_ROAM_TICK", function(mob)
         local currentHour = VanadielHour()
         local sleepHour = mob:getLocalVar("[eruca]sleepHour")
-        local wakeHour = mob:getLocalVar("[eruca]wakeHour")
         local subAnimation = mob:getAnimationSub()
 
         if subAnimation == 0 and (currentHour >= sleepHour or currentHour < mob:getLocalVar("[eruca]wakeHour")) and not mob:isEngaged() then
@@ -83,13 +82,13 @@ g_mixins.families.eruca = function(mob)
         end
     end)
 
-    mob:addListener("ENGAGE", "ERUCA_ENGAGE", function(mob, target)
+    erucaMob:addListener("ENGAGE", "ERUCA_ENGAGE", function(mob, target)
         if mob:getAnimationSub() == 1 then
             wakeUp(mob)
         end
     end)
 
-    mob:addListener("DISENGAGE", "ERUCA_DISENGAGE", function(mob)
+    erucaMob:addListener("DISENGAGE", "ERUCA_DISENGAGE", function(mob)
         mob:setLocalVar("ResleepTime", os.time() + 120) -- Eruca crawlers go back to sleep exactly 2 minutes after they were engaged.
     end)
 end
