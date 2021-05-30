@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
 
-    spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage 
+    spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
 
