@@ -188,11 +188,13 @@ global_objects=(
 
     fTP
     fSTR
+    fSTR2
     calculateRawWSDmg
     calculatedIgnoredDef
     cMeleeRatio
     generatePdif
     getMeleeDmg
+    handleWSGorgetBelt
 
     getRecommendedAssaultLevel
 
