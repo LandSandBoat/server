@@ -30,7 +30,25 @@ jobs:
     - name: Build
       run: |
         make -j $(nproc)
-
+    - name: Archive topaz_connect
+      uses: actions/upload-artifact@v2
+      with:
+        name: topaz_connect
+        path: |
+          topaz_connect
+    - name: Archive topaz_game
+      uses: actions/upload-artifact@v2
+      with:
+        name: topaz_game
+        path: |
+          topaz_game
+    - name: Archive topaz_search
+      uses: actions/upload-artifact@v2
+      with:
+        name: topaz_search
+        path: |
+          topaz_search
+  
   Linux_2004_GCC11_64bit:
     runs-on: ubuntu-20.04
     steps:
@@ -192,18 +210,14 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 0
+    - uses: actions/download-artifact@v2
+      with:
+        path: .
     - name: Install Dependencies
       run: |
+        ls
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
-    - name: Configure CMake
-      run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
-        cmake .
-    - name: Build Binaies
-      run: |
-        make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -260,18 +274,14 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 0
+    - uses: actions/download-artifact@v2
+      with:
+        path: .
     - name: Install Dependencies
       run: |
+        ls
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
-    - name: Configure CMake
-      run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
-        cmake .
-    - name: Build Binaies
-      run: |
-        make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
