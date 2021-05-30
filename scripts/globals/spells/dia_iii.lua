@@ -43,22 +43,19 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
 
+    spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage
+    
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
-    -- Try to kill same tier Bio (non-default behavior)
-    if BIO_OVERWRITE == 1 and bio ~= nil then
-        if bio:getPower() <= 3 then
-            target:delStatusEffect(xi.effect.BIO)
-        else
-            -- Do it!
-            if bio ~= nil and bio:getPower() <= 3 then -- if mob has bio up through level 3
-                spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage, but no dot effects
-            else -- otherwise hit for initial damage and add dia dot, remove bio dot
-                target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
-                spell:setMsg(xi.msg.basic.MAGIC_DMG)
-                target:delStatusEffect(xi.effect.BIO)
-            end
-        end
+
+    if  bio == nil then -- if no bio, just add dia dot
+        target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+    elseif  
+        bio:getSubPower() <= 15 or 
+        (BIO_OVERWRITE == 1 and bio:getSubPower() <= 20) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
+    then -- erase lower tier bio and add dia dot
+        target:delStatusEffect(xi.effect.BIO)
+        target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
     end
 
     return final
