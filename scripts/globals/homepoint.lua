@@ -225,8 +225,8 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
             elseif choice == selection.REM_FAVORITE then
                 for x = 1, 9 do
                     if favs[x] == index then
-                        for x = x, 8 do
-                            favs[x] = favs[x+1]
+                        for y = x, 8 do
+                            favs[y] = favs[y+1]
                         end
                         favs[9] = -1
                         break
@@ -258,7 +258,7 @@ end
 xi.homepoint.onEventFinish = function(player, csid, option, event)
 
     if csid == event then
-        choice = bit.band(option, 0xFF)
+        local choice = bit.band(option, 0xFF)
         if choice == selection.SET_HOMEPOINT then
             player:setHomePoint()
             if zones[player:getZoneID()].text.HOMEPOINT_SET then

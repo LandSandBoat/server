@@ -14,7 +14,7 @@ require("scripts/globals/msg")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    result = 0
+    local result = 0
     if target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) then
         result = xi.msg.basic.IS_FULL
     end
