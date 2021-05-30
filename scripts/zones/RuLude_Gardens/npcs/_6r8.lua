@@ -22,7 +22,7 @@ entity.onTrigger = function(player, npc)
 
         if currentMission == xi.mission.id.windurst.A_NEW_JOURNEY and missionStatus == 4 then
             player:startEvent(40)
-        elseif player:getRank() == 4 and
+        elseif player:getRank(player:getNation()) == 4 and
             currentMission == xi.mission.id.windurst.NONE and
             getMissionRankPoints(player, 13) == 1
         then
@@ -31,7 +31,7 @@ entity.onTrigger = function(player, npc)
             else
                 player:startEvent(131)
             end
-        elseif player:getRank() >= 4 then
+        elseif player:getRank(player:getNation()) >= 4 then
             player:messageSpecial(ID.text.RESTRICTED)
         else
             player:messageSpecial(ID.text.RESTRICTED+1) -- you have no letter of introduction

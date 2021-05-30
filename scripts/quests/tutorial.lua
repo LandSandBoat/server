@@ -2,6 +2,7 @@
 -- Tutorial Mini-Quest
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
 require("scripts/globals/npc_util")
@@ -83,22 +84,22 @@ xi.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, nat
     if csid == npc_event_offset then
         player:setCharVar("TutorialProgress", 2)
     elseif csid == (npc_event_offset + 2) then
-        if npcUtil.giveItem(player, {{4376, 6}}) then
+        if npcUtil.giveItem(player, {{xi.items.STRIP_OF_MEAT_JERKY, 6}}) then
             player:setCharVar("TutorialProgress", 3)
         end
     elseif csid == (npc_event_offset + 4) then
         player:setCharVar("TutorialProgress", 4)
     elseif csid == (npc_event_offset + 6) then
         if player:getZoneID() == xi.zone.WINDURST_WOODS then
-            if npcUtil.giveItem(player, {{4101, 1}, {4570, 1}, {4370, 1}}) then
+            if npcUtil.giveItem(player, {{xi.items.WATER_CRYSTAL, 1}, {xi.items.BIRD_EGG, 1}, {xi.items.POT_OF_HONEY, 1}}) then
                 player:setCharVar("TutorialProgress", 5)
             end
         elseif player:getZoneID() == xi.zone.BASTOK_MARKETS then
-            if npcUtil.giveItem(player, {{4096, 1}, {926, 1}, {4370, 1}}) then
+            if npcUtil.giveItem(player, {{xi.items.FIRE_CRYSTAL, 1}, {xi.items.LIZARD_TAIL, 1}, {xi.items.POT_OF_HONEY, 1}}) then
                 player:setCharVar("TutorialProgress", 5)
             end
         elseif player:getZoneID() == xi.zone.SOUTHERN_SAN_DORIA then
-            if npcUtil.giveItem(player, {{4096, 1}, {936, 1}, {4358, 1}}) then
+            if npcUtil.giveItem(player, {{xi.items.FIRE_CRYSTAL, 1}, {xi.items.CHUNK_OF_ROCK_SALT, 1}, {xi.items.SLICE_OF_HARE_MEAT, 1}}) then
                 player:setCharVar("TutorialProgress", 5)
             end
         end
@@ -106,7 +107,7 @@ xi.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, nat
         npcUtil.giveKeyItem(player, xi.ki.CONQUEST_PROMOTION_VOUCHER)
         player:setCharVar("TutorialProgress", 7)
     elseif csid == (npc_event_offset + 10) then
-        if npcUtil.giveItem(player, 16003) then
+        if npcUtil.giveItem(player, xi.items.RAISING_EARRING) then
             player:setCharVar("TutorialProgress", 8)
         end
     elseif csid == (npc_event_offset + 12) then
@@ -116,7 +117,7 @@ xi.tutorial.onEventFinish = function(player, csid, option, npc_event_offset, nat
         npcUtil.giveCurrency(player, 'gil', 1000 * GIL_RATE)
         player:setCharVar("TutorialProgress", 11)
     elseif csid == (npc_event_offset + 16) then
-        if npcUtil.giveItem(player, {{1789, 3}}) then
+        if npcUtil.giveItem(player, {{xi.items.FREE_CHOCOPASS, 3}}) then
             player:addExp(1000*EXP_RATE)
             player:setCharVar("TutorialProgress", 0)
         end

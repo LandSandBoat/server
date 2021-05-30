@@ -5,11 +5,11 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    pet:addListener("ENGAGE", "AUTO_PATTERN_READER_ENGAGE", function(pet, target)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("ENGAGE", "AUTO_PATTERN_READER_ENGAGE", function(pet, target)
         pet:setLocalVar("patternreadertick", VanadielTime())
     end)
-    pet:addListener("AUTOMATON_AI_TICK", "AUTO_PATTERN_READER_TICK", function(pet, target)
+    automaton:addListener("AUTOMATON_AI_TICK", "AUTO_PATTERN_READER_TICK", function(pet, target)
         if pet:getLocalVar("patternreadertick") > 0 then
             local master = pet:getMaster()
             local maneuvers = master:countEffect(xi.effect.WIND_MANEUVER)
@@ -41,7 +41,7 @@ attachment_object.onEquip = function(pet)
             pet:setLocalVar("patternreadertick", tick)
         end
     end)
-    pet:addListener("DISENGAGE", "AUTO_PATTERN_READER_DISENGAGE", function(pet)
+    automaton:addListener("DISENGAGE", "AUTO_PATTERN_READER_DISENGAGE", function(pet)
         if pet:getLocalVar("patternreader") > 0 then
             pet:delMod(xi.mod.EVA, pet:getLocalVar("patternreader"))
             pet:setLocalVar("patternreader", 0)

@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     elseif (TrialByLightning == QUEST_ACCEPTED and WhisperOfStorms == false) then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
     elseif (TrialByLightning == QUEST_ACCEPTED and WhisperOfStorms) then
-        numitem = 0
+        local numitem = 0
 
         if (player:hasItem(17531)) then numitem = numitem + 1; end  -- Ramuh's Staff
         if (player:hasItem(13245)) then numitem = numitem + 2; end  -- Lightning Belt
@@ -70,7 +70,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_LIGHTNING)
     elseif (csid == 10019) then
-        item = 0
+        local item = 0
         if (option == 1) then item = 17531         -- Ramuh's Staff
         elseif (option == 2) then item = 13245  -- Lightning Belt
         elseif (option == 3) then item = 13564  -- Lightning Ring

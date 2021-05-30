@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     elseif (TrialByWind == QUEST_ACCEPTED and WhisperOfGales == false) then
         player:startEvent(67, 0, 331, 3)
     elseif (TrialByWind == QUEST_ACCEPTED and WhisperOfGales) then
-        numitem = 0
+        local numitem = 0
 
         if (player:hasItem(17627)) then numitem = numitem + 1; end  -- Garuda's Dagger
         if (player:hasItem(13243)) then numitem = numitem + 2; end  -- Wind Belt
@@ -71,7 +71,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.TUNING_FORK_OF_WIND)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_WIND)
     elseif (csid == 69) then
-        item = 0
+        local item = 0
         if (option == 1) then item = 17627         -- Garuda's Dagger
         elseif (option == 2) then item = 13243  -- Wind Belt
         elseif (option == 3) then item = 13562  -- Wind Ring

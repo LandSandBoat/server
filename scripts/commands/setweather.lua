@@ -22,7 +22,7 @@ function onTrigger(player, weather)
         error(player, "You must supply a weather ID.")
         return
     end
-    weather = tonumber(weather) or xi.weather[string.upper(weather)] or weatherList[string.lower(weather)]
+    weather = tonumber(weather) or xi.weather[string.upper(weather)]
     if (weather == nil or weather < 0 or weather > 19) then
         error(player, "Invalid weather ID.")
         return

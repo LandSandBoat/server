@@ -13,9 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local myDecrepitDomicile = player:getCurrentMission(AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE
-    local theProfessorsPrice = player:getCurrentMission(AMK) == xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE
 
     local hasMetalStrip = player:hasKeyItem(xi.ki.STURDY_METAL_STRIP)
     local hasTreeBark = player:hasKeyItem(xi.ki.PIECE_OF_RUGGED_TREE_BARK)

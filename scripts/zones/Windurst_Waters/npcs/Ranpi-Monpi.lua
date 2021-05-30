@@ -15,12 +15,11 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
-    IASvar = player:getCharVar("IASvar")
+    local IASvar = player:getCharVar("IASvar")
 
     -- In a Stew
     if (IASvar == 3) then
-        count = trade:getItemCount()
+        local count = trade:getItemCount()
         if (trade:hasItemQty(4373, 3) and count == 3) then
             player:startEvent(556) -- Correct items given, advance quest
         else
@@ -28,13 +27,12 @@ entity.onTrade = function(player, npc, trade)
         end
 
     end
-
 end
 
 entity.onTrigger = function(player, npc)
-    crisisstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
-    IAS = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
-    IASvar = player:getCharVar("IASvar")
+    local crisisstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
+    local IAS = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
+    local IASvar = player:getCharVar("IASvar")
 
     -- In a Stew
     if (IAS == QUEST_ACCEPTED and IASvar == 2) then
@@ -48,7 +46,7 @@ entity.onTrigger = function(player, npc)
     elseif (crisisstatus == QUEST_AVAILABLE and player:getFameLevel(WINDURST) >= 2 and player:needToZone() == false) then -- A Crisis in the Making + ITEM: Quest Offer
         player:startEvent(258, 0, 625)
     elseif (crisisstatus == QUEST_ACCEPTED) then
-        prog = player:getCharVar("QuestCrisisMaking_var")
+        local prog = player:getCharVar("QuestCrisisMaking_var")
         if (prog == 1) then -- A Crisis in the Making: Quest Objective Reminder
             player:startEvent(262, 0, 625)
         elseif (prog == 2) then -- A Crisis in the Making: Quest Finish
@@ -62,7 +60,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(268)
     else
     --Standard dialogs
-        rand = math.random(1, 3)
+        local rand = math.random(1, 3)
         if (rand == 1) then  -- STANDARD CONVO: sings song about ingredients
             player:startEvent(249)
         elseif (rand == 2) then   -- STANDARD CONVO 2: sings song about ingredients
@@ -77,7 +75,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     -- A Crisis in the Making
     if (csid == 258 and option == 1) then  -- A Crisis in the Making + ITEM: Quest Offer - ACCEPTED
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_CRISIS_IN_THE_MAKING)
@@ -114,7 +111,6 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("IASvar", 4)
         player:addKeyItem(xi.ki.RANPIMONPIS_SPECIAL_STEW)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RANPIMONPIS_SPECIAL_STEW)
-
     end
 end
 

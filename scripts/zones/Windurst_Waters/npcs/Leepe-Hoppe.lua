@@ -25,7 +25,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
-    local realday = tonumber(os.date("%j")) -- %M for next minute, %j for next day
     local missionStatus = player:getMissionStatus(player:getNation())
     local tuningIn = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
@@ -191,7 +190,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
         end
 
-        if (player:getNation() == xi.nation.WINDURST and player:getRank() == 10 and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
+        if (player:getNation() == xi.nation.WINDURST and player:getRank(player:getNation()) == 10 and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
             player:addKeyItem(xi.ki.DARK_MANA_ORB)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DARK_MANA_ORB)
         end
@@ -227,7 +226,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, reward)
         end
 
-        if (player:getNation() == xi.nation.WINDURST and player:getRank() == 10 and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
+        if (player:getNation() == xi.nation.WINDURST and player:getRank(player:getNation()) == 10 and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE) == QUEST_COMPLETED) then
             player:addKeyItem(xi.ki.DARK_MANA_ORB)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.DARK_MANA_ORB)
         end

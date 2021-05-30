@@ -5,7 +5,7 @@ local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 require("scripts/globals/npc_util")
 -----------------------------------
 
-LA_THEINE_PLATEAU = {
+local laTheineGlobal = {
     --[[..............................................................................................
         move the FallenEgg NPC. optionally hide for secondsHidden seconds.
         ..............................................................................................]]
@@ -77,11 +77,11 @@ LA_THEINE_PLATEAU = {
         }
         local fallenEgg = GetNPCByID(ID.npc.FALLEN_EGG)
         local newPosition = npcUtil.pickNewPosition(ID.npc.FALLEN_EGG, fallenEggPositions)
-        if (secondsHidden ~= nil and secondsHidden > 0) then
+        if secondsHidden ~= nil and secondsHidden > 0 then
             fallenEgg:hideNPC(secondsHidden)
         end
         fallenEgg:setPos(newPosition.x, newPosition.y, newPosition.z)
     end
 }
 
-return LA_THEINE_PLATEAU
+return laTheineGlobal

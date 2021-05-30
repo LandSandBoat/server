@@ -29,14 +29,14 @@ entity.onTrigger = function(player, npc)
     if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED) then
         player:startEvent(448) -- During Making the GRADE
     elseif (reapstatus == QUEST_AVAILABLE) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(463, 0, 4565, 572)                 -- REAP WHAT YOU SOW + HERB SEEDS: QUEST START
         else
             player:startEvent(429)                          -- Standard Conversation
         end
     elseif (reapstatus == QUEST_ACCEPTED) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(464, 0, 4565, 572)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
         else
@@ -45,14 +45,14 @@ entity.onTrigger = function(player, npc)
     elseif (reapstatus == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(478)                              -- REAP WHAT YOU SOW: After Quest
     elseif (reapstatus == QUEST_COMPLETED and player:needToZone() == false and player:getCharVar("QuestReapSow_var") == 0) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(479, 0, 4565, 572)                -- REAP WHAT YOU SOW + HERB SEEDS: REPEATABLE QUEST START
         else
             player:startEvent(429)                          -- Standard Conversation
         end
     elseif (reapstatus == QUEST_COMPLETED and player:getCharVar("QuestReapSow_var") == 1) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(464, 0, 4565, 572)                  -- REAP WHAT YOU SOW + HERB SEEDS: OBJECTIVE REMINDER
         else

@@ -20,11 +20,11 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    theCrimsonTrial = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
-    envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
-    peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
-    peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
-    OrcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+    local theCrimsonTrial = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
+    local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
+    local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
+    local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
+    local OrcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
 
     if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_rdmaf1_quest_already") == 0) then

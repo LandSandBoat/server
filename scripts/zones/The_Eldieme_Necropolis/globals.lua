@@ -3,6 +3,7 @@
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
@@ -17,11 +18,10 @@ local THE_ELDIEME_NECROPOLIS =
         ..............................................................................................]]
     papyrusQmOnTrigger = function(player, ki)
         if not OLDSCHOOL_G1 then
-            local ANCIENT_PAPYRUS = 1088 -- Human readability
 
             if
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE) == QUEST_ACCEPTED and
-                not player:hasItem(ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
+                not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and not player:hasKeyItem(ki)
             then
                 npcUtil.giveKeyItem(player, ki)
             end
@@ -31,10 +31,10 @@ local THE_ELDIEME_NECROPOLIS =
                 player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
                 player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
             then
-                npcUtil.giveItem(player, ANCIENT_PAPYRUS)
+                npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
             end
 
-            if player:hasItem(ANCIENT_PAPYRUS) then
+            if player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) then
                 player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
                 player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
                 player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)

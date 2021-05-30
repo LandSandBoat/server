@@ -24,7 +24,7 @@ entity.onMobRoam = function(mob)
         DisallowRespawn(ID.mob.ROSE_GARDEN_PH, true)
         DespawnMob(ID.mob.ROSE_GARDEN_PH)
         DisallowRespawn(ID.mob.ROSE_GARDEN, false)
-        pos = mob:getPos()
+        local pos = mob:getPos()
         SpawnMob(ID.mob.ROSE_GARDEN):setPos(pos.x, pos.y, pos.z, pos.rot)
     end
 end

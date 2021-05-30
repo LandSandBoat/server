@@ -25,8 +25,6 @@ local limbusArmor =
 }
 
 entity.onTrade = function(player, npc, trade)
-    local armor = nil
-
     for k, v in pairs(limbusArmor) do
         if npcUtil.tradeHasExactly(trade, k) then
             player:setLocalVar("wilhelmTrade", k)

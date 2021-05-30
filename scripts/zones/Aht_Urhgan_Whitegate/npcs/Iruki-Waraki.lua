@@ -7,6 +7,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/settings")
+require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
 require("scripts/globals/titles")
@@ -17,10 +18,10 @@ local entity = {}
 
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{"gil", 10000}}) and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) == QUEST_COMPLETED and not player:hasItem(17859) then
+    if npcUtil.tradeHas(trade, {{"gil", 10000}}) and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED) == QUEST_COMPLETED and not player:hasItem(xi.items.ANIMATOR) then
         player:confirmTrade()
-        npcUtil.giveItem(player, 17859)
-    elseif npcUtil.tradeHas(trade, {4161, 5570}) and player:getCharVar("OperationTeatimeProgress") == 1 then -- Chai, Sleeping Potion
+        npcUtil.giveItem(player, xi.items.ANIMATOR)
+    elseif npcUtil.tradeHas(trade, {xi.items.FLASK_OF_SLEEPING_POTION, xi.items.CUP_OF_CHAI}) and player:getCharVar("OperationTeatimeProgress") == 1 then -- Chai, Sleeping Potion
         player:startEvent(780)
     end
 end
@@ -46,8 +47,8 @@ entity.onTrigger = function(player, npc)
     elseif Job == xi.job.PUP and LvL < AF1_QUEST_LEVEL and NoStringsAttached == QUEST_COMPLETED then
         player:startEvent(267) -- asking you how are you doing with your automaton
     -- In case a player completed the quest before unlocking attachments was implemented (no harm in doing this repeatedly)
-        player:unlockAttachment(8224) --Harlequin Frame
-        player:unlockAttachment(8193) --Harlequin Head
+        player:unlockAttachment(xi.items.HARLEQUIN_FRAME) --Harlequin Frame
+        player:unlockAttachment(xi.items.HARLEQUIN_HEAD) --Harlequin Head
     elseif NoStringsAttached == QUEST_AVAILABLE then
         player:startEvent(259) -- Leave him alone
 
@@ -85,17 +86,17 @@ entity.onEventFinish = function(player, csid, option)
 
     if csid == 260 then
         player:setCharVar("NoStringsAttachedProgress", 2)
-    elseif csid == 266 and npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED, {item=17859, title=xi.title.PROUD_AUTOMATON_OWNER, var="NoStringsAttachedProgress"}) then
+    elseif csid == 266 and npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.NO_STRINGS_ATTACHED, {item=xi.items.ANIMATOR, title=xi.title.PROUD_AUTOMATON_OWNER, var="NoStringsAttachedProgress"}) then
         player:unlockJob(xi.job.PUP)
         player:messageSpecial(ID.text.YOU_CAN_BECOME_PUP) -- "You can now become a puppetmaster."
         player:setPetName(xi.pet.type.AUTOMATON, option+118)
-        player:unlockAttachment(8224) --Harlequin Frame
-        player:unlockAttachment(8193) --Harlequin Head
+        player:unlockAttachment(xi.items.HARLEQUIN_FRAME) --Harlequin Frame
+        player:unlockAttachment(xi.items.HARLEQUIN_HEAD) --Harlequin Head
     elseif csid == 774 then
         player:setCharVar("TheWaywardAutomationProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
     elseif csid == 776 then
-        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=17858, var="TheWaywardAutomationProgress"})
+        npcUtil.completeQuest(player, AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION, {item=xi.items.TURBO_ANIMATOR, var="TheWaywardAutomationProgress"})
     elseif csid == 778 then
         player:setCharVar("OperationTeatimeProgress", 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)

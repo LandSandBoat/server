@@ -31,7 +31,6 @@ ability_object.onUseAbility = function(player, target, ability)
     player:delStatusEffectSilent(xi.effect.ADDENDUM_WHITE)
     player:delStatusEffectSilent(xi.effect.DARK_ARTS)
 
-    local skillbonus = player:getMod(xi.mod.DARK_ARTS_SKILL)
     local effectbonus = player:getMod(xi.mod.DARK_ARTS_EFFECT)
     local helixbonus = 0
     if (player:getMainJob() == xi.job.SCH and player:getMainLvl() >= 20) then

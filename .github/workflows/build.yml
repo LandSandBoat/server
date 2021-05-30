@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -30,13 +30,21 @@ jobs:
     - name: Build
       run: |
         make -j $(nproc)
-
+    - name: Archive Executables
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux_executables
+        path: |
+          topaz_connect
+          topaz_game
+          topaz_search
+  
   Linux_2004_GCC11_64bit:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -57,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Configure CMake
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
@@ -75,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Configure CMake
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
@@ -91,14 +99,70 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format luajit-5.1-dev luarocks
-    - name: Lua Checks
+        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat
+        luarocks install luacheck --local
+        luarocks install lanes --local
+    - id: changed-files
+      name: Get Changed Files
+      uses: jitterbit/get-changed-files@v1
+    - name: List Changed Files
+      if: always()
       run: |
-        sh tools/ci/lua.sh
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          echo "${changed_file}"
+        done
+    - name: CPP Checks
+      if: always()
+      run: |
+        touch cpp_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.cpp ]]
+          then
+            bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+          fi
+        done
+        cat cpp_checks.txt
+        if [ -s cpp_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Lua Checks
+      if: always()
+      run: |
+        touch lua_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.lua ]]
+          then
+            bash tools/ci/lua.sh ${changed_file} | grep -v "Total:" >> lua_checks.txt || true
+          fi
+        done
+        cat lua_checks.txt
+        if [ -s lua_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: SQL Checks
+      if: always()
+      run: |
+        touch sql_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ $changed_file == *.sql ]]
+          then
+            bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+          fi
+        done
+        cat sql_checks.txt
+        if [ -s sql_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: Clang Format (C++ files)
       if: 'false' # Don't run until fixed
       run: |
@@ -115,14 +179,15 @@ jobs:
         else
             echo "Problem with formatting!"
             echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo "" 
-            echo "$diff" 
+            echo ""
+            echo "$diff"
 
             exit -1
         fi
 
   Full_Startup_Checks_2004:
     runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -135,19 +200,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: linux_executables
+        path: .
     - name: Install Dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
-    - name: Configure CMake
-      run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
-        cmake .
-    - name: Build Binaies
-      run: |
-        make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -163,6 +224,11 @@ jobs:
         cp conf/default/* conf/
     - name: Startup and character login checks
       run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
+        ls -l
+
         printf "\nStart server processes\n"
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
@@ -188,6 +254,7 @@ jobs:
         -- Set char_look (default is 0 and trips up scripting)
         INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
         VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        SELECT charid, face, race FROM char_look;
         -- Update character information
         -- Place near some Robber Crabs in Kuftal Tunnel
         UPDATE chars
@@ -234,6 +301,7 @@ jobs:
 
   MultiInstance_Startup_Checks_2004:
     runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -246,19 +314,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: linux_executables
+        path: .
     - name: Install Dependencies
-      run: |
+      run: |        
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
-    - name: Configure CMake
-      run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
-        cmake .
-    - name: Build Binaies
-      run: |
-        make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -279,6 +343,12 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
+        ls -l
+
+        printf "\nStart server processes\n"
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
         screen -d -m -S topaz_game ./topaz_game --log map-server-0.log --port 54230

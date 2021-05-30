@@ -32,12 +32,12 @@ entity.onTrigger = function(player, npc)
 --    end
 -- ======== FOR TESTING ONLY ==========-----
 
-    Catch = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
-    WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
+    local Catch = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+    local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
     if (WonderWands == QUEST_ACCEPTED) then
         player:startEvent(258, 0, 17053)
     elseif (Catch == 0) then
-        prog = player:getCharVar("QuestCatchItIfYouCan_var")
+        local prog = player:getCharVar("QuestCatchItIfYouCan_var")
         if (prog == 0) then
             player:startEvent(230) -- CATCH IT IF YOU CAN: Before Quest 1
             player:setCharVar("QuestCatchItIfYouCan_var", 1)
@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
     elseif (Catch >= 1 and player:needToZone()) then
         player:startEvent(255) -- CATCH IT IF YOU CAN: After Quest
     elseif (Catch == 1 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false) then
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(248) -- CATCH IT IF YOU CAN: During Quest 1
         else

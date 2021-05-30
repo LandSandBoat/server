@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
             else
                 player:startEvent(cs, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
             end
-        elseif (player:getRank() == 1 and player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
+        elseif (player:getRank(player:getNation()) == 1 and player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_ZERUHN_REPORT) == false) then
             player:startEvent(1000) -- Start First Mission "The Zeruhn Report"
         elseif (currentMission ~= xi.mission.id.bastok.NONE) then
             player:startEvent(1002) -- Have mission already activated

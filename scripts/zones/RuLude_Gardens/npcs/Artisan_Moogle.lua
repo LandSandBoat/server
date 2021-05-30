@@ -11,10 +11,10 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.artisan.moogleOnUpdate(player, npc, option)
+    xi.artisan.moogleOnUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.artisan.moogleOnFinish(player, npc, option)
+    xi.artisan.moogleOnFinish(player, csid, option)
 end
 return entity

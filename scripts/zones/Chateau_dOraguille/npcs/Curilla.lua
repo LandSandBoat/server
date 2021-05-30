@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
     local theGeneralSecret = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_GENERAL_S_SECRET)
     local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
     local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
-    local Rank3 = player:getRank() >= 3 and 1 or 0
+    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     -- Trust: San d'Oria (Curilla)
     if
@@ -115,14 +115,14 @@ entity.onTrigger = function(player, npc)
     -- San d'Oria Missions (optional dialogues)
     elseif
         player:getNation() == xi.nation.SANDORIA and
-        (player:getCharVar("SandoEpilogue") == 1 or player:getRank() ~= 10)
+        (player:getCharVar("SandoEpilogue") == 1 or player:getRank(player:getNation()) ~= 10)
     then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())
 
         -- San d'Oria Epilogue
-        if player:getRank() == 10 then
+        if player:getRank(player:getNation()) == 10 then
             player:startEvent(20)
 
         -- San d'Oria 9-2 "The Heir to the Light"
@@ -152,14 +152,14 @@ entity.onTrigger = function(player, npc)
         elseif
             -- Directly after winning BCNM and up until next mission
             currentMission == sandyMissions.THE_SHADOW_LORD and missionStatus == 4 or
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank() == 6 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_SHADOW_LORD) and player:getRank(player:getNation()) == 6 and
             (currentMission ~= sandyMissions.LEAUTE_S_LAST_WISHES or currentMission ~= sandyMissions.RANPERRE_S_FINAL_REST)
         then
             player:startEvent(56)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank(player:getNation()) == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(545)

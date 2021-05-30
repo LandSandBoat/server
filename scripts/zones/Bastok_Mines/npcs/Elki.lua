@@ -16,12 +16,12 @@ end
 
 entity.onTrigger = function(player, npc)
 
-Fame = player:getFameLevel(BASTOK)
-Hearts = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
-HeartsVar = player:getCharVar("HeartsOfMythril")
-Elevenths = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
-EleventhsVar = player:getCharVar("EleventhsHour")
-HasToolbox = player:hasKeyItem(xi.ki.OLD_TOOLBOX)
+    local Fame = player:getFameLevel(BASTOK)
+    local Hearts = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.HEARTS_OF_MYTHRIL)
+    local HeartsVar = player:getCharVar("HeartsOfMythril")
+    local Elevenths = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR)
+    local EleventhsVar = player:getCharVar("EleventhsHour")
+    local HasToolbox = player:hasKeyItem(xi.ki.OLD_TOOLBOX)
 
     if (Hearts == QUEST_AVAILABLE) then
         player:startEvent(41)
@@ -38,8 +38,6 @@ HasToolbox = player:hasKeyItem(xi.ki.OLD_TOOLBOX)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)

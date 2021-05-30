@@ -13,48 +13,48 @@ end
 
 entity.onTrigger = function(player, npc)
 
-TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
-KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
-InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
-OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
-CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
-ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
+    local TruthJusticeOnionWay = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUTH_JUSTICE_AND_THE_ONION_WAY)
+    local KnowOnesOnions       = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONE_S_ONIONS)
+    local InspectorsGadget     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTOR_S_GADGET)
+    local OnionRings           = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+    local CryingOverOnions     = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+    local ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PROMISE)
 
-    if (ThePromise == QUEST_COMPLETED) then
-        Message = math.random(0, 1)
+    if ThePromise == QUEST_COMPLETED then
+        local Message = math.random(0, 1)
 
-        if (Message == 1) then
+        if Message == 1 then
             player:startEvent(528)
         else
             player:startEvent(540)
         end
-    elseif (ThePromise == QUEST_ACCEPTED) then
+    elseif ThePromise == QUEST_ACCEPTED then
         player:startEvent(518)
-    elseif (CryingOverOnions == QUEST_COMPLETED) then
+    elseif CryingOverOnions == QUEST_COMPLETED then
         player:startEvent(507)
-    elseif (CryingOverOnions == QUEST_ACCEPTED) then
+    elseif CryingOverOnions == QUEST_ACCEPTED then
         player:startEvent(500)
-    elseif (OnionRings == QUEST_COMPLETED) then
+    elseif OnionRings == QUEST_COMPLETED then
         player:startEvent(442)
-    elseif (OnionRings == QUEST_ACCEPTED ) then
+    elseif OnionRings == QUEST_ACCEPTED then
         player:startEvent(435)
-    elseif (InspectorsGadget == QUEST_COMPLETED) then
+    elseif InspectorsGadget == QUEST_COMPLETED then
         player:startEvent(425)
-    elseif (InspectorsGadget == QUEST_ACCEPTED) then
+    elseif InspectorsGadget == QUEST_ACCEPTED then
         player:startEvent(417)
-    elseif (KnowOnesOnions == QUEST_COMPLETED) then
+    elseif KnowOnesOnions == QUEST_COMPLETED then
         player:startEvent(405)
-    elseif (KnowOnesOnions == QUEST_ACCEPTED) then
+    elseif KnowOnesOnions == QUEST_ACCEPTED then
         KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
 
-        if (KnowOnesOnionsVar == 2) then
+        if KnowOnesOnionsVar == 2 then
             player:startEvent(404)
         else
             player:startEvent(394)
         end
-    elseif (TruthJusticeOnionWay == QUEST_COMPLETED) then
+    elseif TruthJusticeOnionWay == QUEST_COMPLETED then
         player:startEvent(381)
-    elseif (TruthJusticeOnionWay == QUEST_ACCEPTED) then
+    elseif TruthJusticeOnionWay == QUEST_ACCEPTED then
         player:startEvent(373)
     else
         player:startEvent(363)
@@ -63,13 +63,9 @@ ThePromise = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurs
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
-
 end
 
 entity.onEventFinish = function(player, csid, option)
-
 end
 
 return entity

@@ -8,7 +8,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-
     local battletime = mob:getBattleTime()
     local headgrow = mob:getLocalVar("headgrow")
     local broken = mob:getAnimationSub()
@@ -17,14 +16,11 @@ entity.onMobFight = function(mob, target)
         mob:setAnimationSub(broken - 1)
         mob:setLocalVar("headgrow", battletime + 300)
     end
-
 end
 
 entity.onCriticalHit = function(mob)
-
     local rand = math.random()
     local battletime = mob:getBattleTime()
-    local headgrow = mob:getLocalVar("headgrow")
     local headbreak = mob:getLocalVar("headbreak")
     local broken = mob:getAnimationSub()
 
@@ -33,13 +29,10 @@ entity.onCriticalHit = function(mob)
         mob:setLocalVar("headgrow", battletime + math.random(120, 240))
         mob:setLocalVar("headbreak", battletime + 300)
     end
-
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-
     player:addTitle(xi.title.HYDRA_HEADHUNTER)
-
 end
 
 entity.onMobDespawn = function(mob)

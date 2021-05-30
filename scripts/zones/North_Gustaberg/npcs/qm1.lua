@@ -4,6 +4,7 @@
 -- Involved in Quest "The Siren's Tear"
 -----------------------------------
 local ID = require("scripts/zones/North_Gustaberg/IDs")
+require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
@@ -22,6 +23,8 @@ local positions =
 -- if it's already at one, send it to the other one
 local function resetSirenTear(npc)
     local currentPos = npc:getLocalVar("pos")
+    local nextPos
+
     if currentPos == 0 then
         nextPos = 1
     elseif currentPos == 1 then
@@ -29,6 +32,7 @@ local function resetSirenTear(npc)
     else
         nextPos = math.random(2) - 1
     end
+
     npc:setLocalVar("pos", nextPos)
     npc:setPos(unpack(positions[nextPos]))
 end
@@ -40,7 +44,7 @@ local function moveSirenTear(npc)
     if currentPos == 4 then
         resetSirenTear(npc)
     else
-        nextPos = (currentPos == 0) and 2 or (currentPos + 1)
+        local nextPos = (currentPos == 0) and 2 or (currentPos + 1)
         npc:setLocalVar("pos", nextPos)
         npc:setPos(unpack(positions[nextPos]))
     end
@@ -61,9 +65,9 @@ entity.onEventFinish = function(player, csid, option)
         local npc = player:getEventTarget()
 
         if player:getEquipID(xi.slot.MAIN) == 0 and player:getEquipID(xi.slot.SUB) == 0 then
-            if player:hasItem(576) then
-                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, 576)
-            elseif npcUtil.giveItem(player, 576) then
+            if player:hasItem(xi.items.SIRENS_TEAR) then
+                player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED_TWICE, xi.items.SIRENS_TEAR)
+            elseif npcUtil.giveItem(player, xi.items.SIRENS_TEAR) then
                 resetSirenTear(npc)
             end
         else

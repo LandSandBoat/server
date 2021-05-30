@@ -49,7 +49,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Rank6 = player:getRank() >= 6 and 1 or 0
+    local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
     if (player:getCurrentMission(BASTOK) == xi.mission.id.bastok.JEUNO and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(322);

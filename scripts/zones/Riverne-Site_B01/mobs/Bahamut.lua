@@ -22,7 +22,7 @@ end
 entity.onMobFight = function(mob, target)
     local MegaFlareQueue = mob:getLocalVar("MegaFlareQueue")
     local MegaFlareTrigger = mob:getLocalVar("MegaFlareTrigger")
-    local MegaFlareUses = mob:getLocalVar("MegaFlareUses")
+    -- local MegaFlareUses = mob:getLocalVar("MegaFlareUses")
     local FlareWait = mob:getLocalVar("FlareWait")
     local GigaFlare = mob:getLocalVar("GigaFlare")
     local tauntShown = mob:getLocalVar("tauntShown")

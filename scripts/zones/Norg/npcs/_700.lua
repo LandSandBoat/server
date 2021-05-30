@@ -3,6 +3,7 @@
 --  NPC: Oaken door (Gilgamesh's room)
 -- !pos 97 -7 -12 252
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -15,9 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ZilartMission = player:getCurrentMission(ZILART)
     local currentMission = player:getCurrentMission(BASTOK)
-    local ZilartStatus = player:getMissionStatus(xi.mission.log_id.ZILART)
     local PromathiaMission = player:getCurrentMission(COP)
     local RhapsodiesMission = player:getCurrentMission(ROV)
 
@@ -33,7 +32,7 @@ entity.onTrigger = function(player, npc)
     elseif RhapsodiesMission == xi.mission.id.rov.WHAT_LIES_BEYOND then
         player:startEvent(278)
     elseif player:getCharVar("ZeidIICipher") == 1 then
-        if npcUtil.giveItem(player, 10160) then -- Cipher: Zeid II
+        if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II
             player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
             player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
             player:setCharVar("ZeidIICipher", 0)
@@ -87,7 +86,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.WHAT_LIES_BEYOND)
         player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.THE_TIES_THAT_BIND)
     elseif csid == 279 then
-        if npcUtil.giveItem(player, 10160) then -- Cipher: Zeid II
+        if npcUtil.giveItem(player, xi.items.CIPHER_OF_ZEIDS_ALTER_EGO_II) then -- Cipher: Zeid II
             player:completeMission(xi.mission.log_id.ROV, xi.mission.id.rov.VOLTO_OSCURO)
             player:addMission(xi.mission.log_id.ROV, xi.mission.id.rov.RING_MY_BELL)
         else

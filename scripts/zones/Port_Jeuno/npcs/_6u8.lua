@@ -12,35 +12,31 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local KazhPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
+    local Gil = player:getGil()
 
-    KazhPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
-    Gil = player:getGil()
-
-    if (KazhPass == false) then
+    if not KazhPass then
         player:startEvent(35) -- without pass
-    elseif (KazhPass == true and Gil < 200) then
+    elseif KazhPass and Gil < 200 then
         player:startEvent(45) -- Pass without money
-    elseif (KazhPass == true) then
+    elseif KazhPass then
         player:startEvent(37) -- Pass with money
     end
 
     return 1
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    if csid == 37 then
+        local Z = player:getZPos()
 
-    if (csid == 37) then
-        Z = player:getZPos()
-
-        if (Z >= 58 and Z <= 61) then
+        if Z >= 58 and Z <= 61 then
             player:delGil(200)
         end
     end
-
 end
 
 return entity

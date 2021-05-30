@@ -12,6 +12,7 @@
 require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/settings")
+require("scripts/globals/titles")
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local talaccaCoveID = require("scripts/zones/Talacca_Cove/IDs")
@@ -22,7 +23,7 @@ local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_O
 quest.reward =
 {
     item  = xi.items.CORSAIR_DIE,
-    title = SEAGULL_PHRATRIE_CREW_MEMBER,
+    title = xi.title.SEAGULL_PHRATRIE_CREW_MEMBER,
 }
 
 quest.sections =

@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
     local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
     local BastokFirstTrust = player:getCharVar("BastokFirstTrust")
     local NajiTrustChatFlag = player:getLocalVar("NajiTrustChatFlag")
-    local Rank3 = player:getRank() >= 3 and 1 or 0
+    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
     if TrustBastok == QUEST_ACCEPTED and (TrustSandoria == QUEST_COMPLETED or TrustWindurst == QUEST_COMPLETED) then
         player:startEvent(984, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)

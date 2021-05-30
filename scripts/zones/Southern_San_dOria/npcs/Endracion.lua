@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
     else
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())
-        local pRank = player:getRank()
+        local pRank = player:getRank(player:getNation())
         local cs, p, offset = getMissionOffset(player, 1, currentMission, missionStatus)
 
         if currentMission <= xi.mission.id.sandoria.THE_SHADOW_LORD and (cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.sandoria.SMASH_THE_ORCISH_SCOUTS and offset == 0)) then

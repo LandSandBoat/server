@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-require("scripts/zones/La_Theine_Plateau/globals")
+local laTheineGlobal = require("scripts/zones/La_Theine_Plateau/globals")
 require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
@@ -23,7 +23,7 @@ zone_object.onChocoboDig = function(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    LA_THEINE_PLATEAU.moveFallenEgg()
+    laTheineGlobal.moveFallenEgg()
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end

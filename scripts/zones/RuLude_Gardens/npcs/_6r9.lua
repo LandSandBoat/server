@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    currentMission = player:getCurrentMission(player:getNation())
+    local currentMission = player:getCurrentMission(player:getNation())
     if ( player:getCurrentMission(COP) == xi.mission.id.cop.MORE_QUESTIONS_THAN_ANSWERS and player:getCharVar("PromathiaStatus")==1) then
         player:startEvent(10050)
     elseif (player:hasKeyItem(xi.ki.ARCHDUCAL_AUDIENCE_PERMIT) and currentMission == xi.mission.id.nation.NONE and player:getMissionStatus(player:getNation()) == 1) then

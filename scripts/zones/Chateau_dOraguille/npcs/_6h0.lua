@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(90) -- Start
 
     -- Trust: San d'Oria (Trion)
-    elseif player:getRank() >= 6 and player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
+    elseif player:getRank(player:getNation()) >= 6 and player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) and not player:hasSpell(905) then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
     -- "A Boy's Dream" (PLD AF Feet)
@@ -67,11 +67,11 @@ entity.onTrigger = function(player, npc)
         player:startEvent(88)
 
     -- San d'Oria Rank 10 (different default)
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() == 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) == 10 then
         player:startEvent(62)
 
     -- San d'Oria Missions
-    elseif player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+    elseif player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())
@@ -82,7 +82,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 8-2 "Lightbringer" (optional)
         elseif
-            player:getRank() == 9 and player:getRankPoints() == 0 and
+            player:getRank(player:getNation()) == 9 and player:getRankPoints() == 0 and
             player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.LIGHTBRINGER) and
             (player:getCharVar("Cutscenes_8-2") == 0 or player:getCharVar("Cutscenes_8-2") == 2)
         then
@@ -104,7 +104,7 @@ entity.onTrigger = function(player, npc)
 
         -- San d'Oria 5-1 "The Ruins of Fei'Yin" (optional)
         elseif
-            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank() == 5 and
+            player:hasCompletedMission(xi.mission.log_id.SANDORIA, sandyMissions.THE_RUINS_OF_FEI_YIN) and player:getRank(player:getNation()) == 5 and
             currentMission ~= sandyMissions.THE_SHADOW_LORD
         then
             player:startEvent(115)

@@ -5,8 +5,8 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    pet:addListener("ENGAGE", "AUTO_ATTUNER_ENGAGE", function(pet, target)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("ENGAGE", "AUTO_ATTUNER_ENGAGE", function(pet, target)
         local master = pet:getMaster()
         if pet:getLocalVar("attuner") > 0 then
             pet:delMod(xi.mod.ATTP, 5) -- Ignore 5% def
@@ -44,7 +44,7 @@ attachment_object.onEquip = function(pet)
             end
         end
     end)
-    pet:addListener("DISENGAGE", "AUTO_ATTUNER_DISENGAGE", function(pet)
+    automaton:addListener("DISENGAGE", "AUTO_ATTUNER_DISENGAGE", function(pet)
         if pet:getLocalVar("attuner") > 0 then
             local master = pet:getMaster()
             pet:delMod(xi.mod.ATTP, 5) -- Ignore 5% def

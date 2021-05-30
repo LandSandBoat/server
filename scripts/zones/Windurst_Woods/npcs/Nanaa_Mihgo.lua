@@ -7,6 +7,7 @@
 -- !pos 62 -4 240 241
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/missions")
@@ -38,7 +39,7 @@ local TrustMemory = function(player)
         memories = memories + 16
     end
     -- 32 - hasItem(286) Nanaa Mihgo statue
-    if player:hasItem(286) then
+    if player:hasItem(xi.items.NANAA_MIHGO_STATUE) then
         memories = memories + 32
     end
     -- 64 - ROAR_A_CAT_BURGLAR_BARES_HER_FANGS
@@ -95,7 +96,7 @@ entity.onTrigger = function(player, npc)
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar("TrustDialogue") == 0
     then
-        local trustFlag = (player:getRank() >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+        local trustFlag = (player:getRank(player:getNation()) >=3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
 
         player:setLocalVar("TrustDialogue", 1)
 

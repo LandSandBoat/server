@@ -61,7 +61,7 @@ quest.sections = {
                         return quest:progressEvent(194) -- complete
                     else
                         local hideReacquireMenuItem = (player:hasItem(xi.items.SWORD_OF_TRIALS) or player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH)) and 1 or 0
-                        return quest:event(191, showReacquireMenuItem) -- cont 1
+                        return quest:event(191, hideReacquireMenuItem) -- cont 1
                     end
                 end,
 

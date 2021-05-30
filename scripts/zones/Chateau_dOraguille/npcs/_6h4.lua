@@ -16,7 +16,7 @@ end
 entity.onTrigger = function(player, npc)
 
     -- This NPC is relevant only to San d'Orians on missions
-    if player:getNation() == xi.nation.SANDORIA and player:getRank() ~= 10 then
+    if player:getNation() == xi.nation.SANDORIA and player:getRank(player:getNation()) ~= 10 then
         local sandyMissions = xi.mission.id.sandoria
         local currentMission = player:getCurrentMission(SANDORIA)
         local missionStatus = player:getMissionStatus(player:getNation())
@@ -83,7 +83,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 61 then
         finishMissionTimeline(player, 3, csid, option)
     elseif csid == 87 then
-        player:setCharVar('missionStatus', 2)
+        player:setMissionStatus(player:getNation(), 2)
     elseif csid == 100 then
         player:setCharVar("Mission8-1Completed", 0) -- dont need this var anymore. JP midnight is done and prev mission completed.
         player:setMissionStatus(player:getNation(), 1)

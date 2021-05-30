@@ -19,8 +19,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    MissionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
-    MissionaryManVar = player:getCharVar("MissionaryManVar")
+    local MissionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
+    local MissionaryManVar = player:getCharVar("MissionaryManVar")
 
     if (MissionaryMan == QUEST_AVAILABLE and player:getFameLevel(KAZHAM) >= 3) then
         player:startEvent(137, 0, 1146) -- Start quest "Missionary Man"

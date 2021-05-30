@@ -5,8 +5,8 @@ require("scripts/globals/status")
 -----------------------------------
 local attachment_object = {}
 
-attachment_object.onEquip = function(pet)
-    pet:addListener("MAGIC_START", "AUTO_ICE_MAKER_START", function(pet, spell, action)
+attachment_object.onEquip = function(automaton)
+    automaton:addListener("MAGIC_START", "AUTO_ICE_MAKER_START", function(pet, spell, action)
         if spell:getSkillType() ~= xi.skill.ELEMENTAL_MAGIC then return end
         local master = pet:getMaster()
         local maneuvers = master:countEffect(xi.effect.ICE_MANEUVER)
@@ -27,7 +27,7 @@ attachment_object.onEquip = function(pet)
         pet:addMod(xi.mod.MATT, amount)
         pet:setLocalVar("icemaker", amount)
     end)
-    pet:addListener("MAGIC_STATE_EXIT", "AUTO_ICE_MAKER_END", function(pet, spell)
+    automaton:addListener("MAGIC_STATE_EXIT", "AUTO_ICE_MAKER_END", function(pet, spell)
         local master = pet:getMaster()
         local toremove = pet:getLocalVar("icemakermaneuvers")
         if toremove == 0 then return end

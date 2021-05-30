@@ -38,7 +38,6 @@ end
 entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
     local bastokMission = player:getCurrentMission(BASTOK)
-    local bastokStatus = player:getMissionStatus(player:getNation())
     local copMission = player:getCurrentMission(COP)
     local copStatus = player:getCharVar("PromathiaStatus")
     local ulmiasPath = player:getCharVar("COP_Ulmia_s_Path")
@@ -168,12 +167,12 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(505)
         end
-    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
+    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 0) then
         player:startEvent(763) -- Bastok Mission 7-1
-    elseif (currentMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
+    elseif (bastokMission == xi.mission.id.bastok.THE_FINAL_IMAGE and player:getMissionStatus(player:getNation()) == 2) then
         player:startEvent(764) -- Bastok Mission 7-1 (with Ki)
     --Begin Cid's Secret
-    elseif (player:getFameLevel(BASTOK) >= 4 and CidsSecret == QUEST_AVAILABLE) then
+    elseif (player:getFameLevel(BASTOK) >= 4 and cidsSecret == QUEST_AVAILABLE) then
         player:startEvent(507)
     elseif cidsSecret == QUEST_ACCEPTED and not hasLetter and player:getCharVar("CidsSecret_Event") == 1 then
         player:startEvent(508) -- After talking to Hilda, Cid gives information on the item she needs
@@ -249,7 +248,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 505 and option == 0) then
         if (player:getMissionStatus(player:getNation()) == 0) then
             if (player:getFreeSlotsCount(0) >= 1) then
-                crystal = math.random(4096, 4103)
+                local crystal = math.random(4096, 4103)
                 player:addItem(crystal)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, crystal)
                 player:setMissionStatus(player:getNation(), 1)

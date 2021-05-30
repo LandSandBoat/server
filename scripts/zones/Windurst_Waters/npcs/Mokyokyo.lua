@@ -19,7 +19,6 @@ entity.onTrigger = function(player, npc)
     else
         local currentMission = player:getCurrentMission(WINDURST)
         local missionStatus = player:getMissionStatus(player:getNation())
-        local pRank = player:getRank()
         local cs, p, offset = getMissionOffset(player, 2, currentMission, missionStatus)
 
         if (currentMission <= xi.mission.id.windurst.THE_SHADOW_AWAITS and (cs ~= 0 or offset ~= 0 or (currentMission == xi.mission.id.windurst.THE_HORUTOTO_RUINS_EXPERIMENT and offset == 0))) then

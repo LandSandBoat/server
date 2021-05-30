@@ -31,13 +31,13 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    messengerFromBeyond = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
+    local messengerFromBeyond = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
 
     -- Checking levels and jobs for af quest
-    mLvl = player:getMainLvl()
-    mJob = player:getMainJob()
+    local mLvl = player:getMainLvl()
+    local mJob = player:getMainJob()
 
-    if (messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= AF1_QUEST_LEVEL) then
+    if messengerFromBeyond == QUEST_AVAILABLE and mJob == xi.job.WHM and mLvl >= AF1_QUEST_LEVEL then
         player:startEvent(689) -- Start quest "Messenger from Beyond"
     else
         player:startEvent(688) -- Standard dialog
@@ -50,10 +50,10 @@ end
 
 entity.onEventFinish = function(player, csid, option)
 
-    if (csid == 689) then
+    if csid == 689 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
-    elseif (csid == 690) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 690 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17422)
         else
             player:addItem(17422)
@@ -62,8 +62,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(SANDORIA, 20)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.MESSENGER_FROM_BEYOND)
         end
-    elseif (csid == 691) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 691 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14091) -- Healer's Duckbills
         else
             player:addItem(14091)
@@ -72,8 +72,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(SANDORIA, 40)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
         end
-    elseif (csid == 692) then
-        if (player:getFreeSlotsCount() == 0) then
+    elseif csid == 692 then
+        if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12640) -- Healer's Briault
         else
             player:addTitle(xi.title.PARAGON_OF_WHITE_MAGE_EXCELLENCE)
