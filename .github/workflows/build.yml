@@ -223,66 +223,72 @@ jobs:
       run: |
         cp conf/default/* conf/
     - name: Startup and character login checks
-      run: |
-        chmod +x topaz_connect
-        chmod +x topaz_game
-        chmod +x topaz_search
-        ls -l
+      uses: nick-invision/retry@v2
+      with:
+        timeout_minutes: 5
+        max_attempts: 3
+        retry_on: timeout
+        shell: bash
+        command: |
+          chmod +x topaz_connect
+          chmod +x topaz_game
+          chmod +x topaz_search
+          ls -l
 
-        printf "\nStart server processes\n"
-        screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
-        screen -d -m -S topaz_search ./topaz_search --log search-server.log
-        screen -d -m -S topaz_game ./topaz_game --log map-server.log
-        
-        printf "\nWaiting 90s for servers to fully start up\n"
-        sleep 90s
-        
-        printf "\nInstalling HeadlessXI\n"
-        pip3 install --upgrade git+https://github.com/zach2good/HeadlessXI.git
-        printf "\nPopulating database\n"
-        mysql xidb -h 127.0.0.1 -uroot -proot << EOF
-        -- Clean out anything already there (just in case)
-        DELETE FROM accounts;
-        DELETE FROM chars;
-        -- Create an account
-        INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
-        VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
-        SELECT id, login FROM accounts;
-        -- Create a character
-        INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
-        VALUES(1, 1000, 'Test', 0, 0, 5);
-        -- Set char_look (default is 0 and trips up scripting)
-        INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
-        VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-        SELECT charid, face, race FROM char_look;
-        -- Update character information
-        -- Place near some Robber Crabs in Kuftal Tunnel
-        UPDATE chars
-        SET
-            pos_zone = 174,
-            pos_prevzone = 174,
-            pos_x = 55,
-            pos_y = -9,
-            pos_z = -140
-        WHERE charid = 1;
-        SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
-        -- Set GodMode CharVar = 1
-        INSERT INTO char_vars(charid, varname, value)
-        VALUES(1, 'GodMode', 1);
-        SELECT * FROM char_vars;
-        EOF
-        printf "\nRunning HeadlessXI for 60 seconds\n"
-        python3 << EOF
-        import time
-        from headlessxi import HXIClient
-        hxi_client = HXIClient('admin', 'admin', 'localhost')
-        hxi_client.login()
-        print('Sleeping 30s')
-        time.sleep(30)
-        hxi_client.logout()
-        EOF
-        
-        killall screen
+          printf "\nStart server processes\n"
+          screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
+          screen -d -m -S topaz_search ./topaz_search --log search-server.log
+          screen -d -m -S topaz_game ./topaz_game --log map-server.log
+          
+          printf "\nWaiting 90s for servers to fully start up\n"
+          sleep 90s
+          
+          printf "\nInstalling HeadlessXI\n"
+          pip3 install --upgrade git+https://github.com/zach2good/HeadlessXI.git
+          printf "\nPopulating database\n"
+          mysql xidb -h 127.0.0.1 -uroot -proot << EOF
+          -- Clean out anything already there (just in case)
+          DELETE FROM accounts;
+          DELETE FROM chars;
+          -- Create an account
+          INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
+          VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
+          SELECT id, login FROM accounts;
+          -- Create a character
+          INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
+          VALUES(1, 1000, 'Test', 0, 0, 5);
+          -- Set char_look (default is 0 and trips up scripting)
+          INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
+          VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+          SELECT charid, face, race FROM char_look;
+          -- Update character information
+          -- Place near some Robber Crabs in Kuftal Tunnel
+          UPDATE chars
+          SET
+              pos_zone = 174,
+              pos_prevzone = 174,
+              pos_x = 55,
+              pos_y = -9,
+              pos_z = -140
+          WHERE charid = 1;
+          SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+          -- Set GodMode CharVar = 1
+          INSERT INTO char_vars(charid, varname, value)
+          VALUES(1, 'GodMode', 1);
+          SELECT * FROM char_vars;
+          EOF
+          printf "\nRunning HeadlessXI for 60 seconds\n"
+          python3 << EOF
+          import time
+          from headlessxi import HXIClient
+          hxi_client = HXIClient('admin', 'admin', 'localhost')
+          hxi_client.login()
+          print('Sleeping 30s')
+          time.sleep(30)
+          hxi_client.logout()
+          EOF
+          
+          killall screen
     - name: Check for errors
       if: ${{ success() || failure() }}
       run: |
