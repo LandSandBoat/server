@@ -28,7 +28,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (target:hasStatusEffect(xi.effect.STR_DOWN)) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     elseif (target:isFacing(caster)) then
-        local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
         params.attribute = xi.mod.INT

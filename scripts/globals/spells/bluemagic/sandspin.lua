@@ -37,18 +37,12 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.int_wsc = 0.2
     params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
-    damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
-    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
-
-    local params = {}
-
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-
     params.attribute = xi.mod.INT
-
     params.skillType = xi.skill.BLUE_MAGIC
-
     params.bonus = 1.0
+    local damage = BlueMagicalSpell(caster, target, spell, params, INT_BASED)
+    damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     local resist = applyResistance(caster, target, spell, params)
 

@@ -341,6 +341,7 @@ global_objects=(
     getSigilTimeStamp
 
     TPMOD_NONE
+    TPMOD_CHANCE
     TPMOD_CRITICAL
     TPMOD_DAMAGE
     TPMOD_ACC
