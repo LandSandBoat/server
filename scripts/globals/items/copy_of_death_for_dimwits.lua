@@ -2,7 +2,7 @@
 -- ID: 6152
 -- Item: Death for Dimwits
 -- A guide to the finer points of hacking everything in one's way to pieces with a two-handed axe,
--- written by an anonymous individual. 
+-- written by an anonymous individual.
 -- Adventurers note that reading it increases one's great axe skill.
 -----------------------------------------
 require("scripts/globals/item_utils")

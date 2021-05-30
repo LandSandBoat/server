@@ -3,7 +3,7 @@
 -- Item: Beaming Score
 -- A musical score composed by Lewenhart.
 -- Its notes symbolize the gently glowing beams of light that filter through the leaves of a deciduous tree in the late afternoon.
--- Adventurers note that reading it increases one's wind instrument skill. 
+-- Adventurers note that reading it increases one's wind instrument skill.
 -----------------------------------------
 require("scripts/globals/item_utils")
 -----------------------------------------
