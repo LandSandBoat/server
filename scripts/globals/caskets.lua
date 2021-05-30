@@ -219,7 +219,6 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     -- NOTE: Super Kupowers Myriad Mystery Boxes add an additional 20% chance the chest will be locked.
     -----------------------------------
     local typeChance       = math.random()
-    local chestId          = npc:getID()
     local chestStyle       = 965
     local correctNum       = math.random(10, 99)
     local attempts         = math.random(4, 6)
@@ -268,8 +267,8 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
         -----------------------------------
         -- Despawn chest after 3 Mins
         -----------------------------------
-        npc:timer(180000, function(npc)
-            removeChest(npc)
+        npc:timer(180000, function(npcArg)
+            removeChest(npcArg)
         end)
     end
 end
@@ -401,7 +400,7 @@ end
 -----------------------------------
 -- Grab random drops from zone item or temp tables depending on type of chest
 -----------------------------------
-function getDrops(npc, dropType, zoneId)
+local function getDrops(npc, dropType, zoneId)
     local chestType = casketInfo.dropTypes[dropType]
 
     if npc:getLocalVar("[caskets]ITEMS_SET") == 1 then
@@ -415,6 +414,7 @@ function getDrops(npc, dropType, zoneId)
         local temps        = {0, 0, 0}
         local tempCount    = 1
         local randomTable  = {1, 3, 1, 2, 1, 2, 1, 1, 3, 1, 2, 1}
+        local tempDrops = xi.casket_loot.casketItems[zoneId].temps
 
         if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
@@ -423,8 +423,6 @@ function getDrops(npc, dropType, zoneId)
             else
                 tempDrops = xi.casket_loot.casketItems[zoneId].tempsLow
             end
-        else
-            tempDrops = xi.casket_loot.casketItems[zoneId].temps
         end
 
         tempCount = randomTable[math.random(1, #randomTable)]
@@ -460,6 +458,7 @@ function getDrops(npc, dropType, zoneId)
         local items        = {0, 0, 0, 0}
         local itemCount    = 1
         local randomTable  = {1, 4, 1, 3, 1, 1, 2, 1, 3, 1, 2, 1}
+        local drops = xi.casket_loot.casketItems[zoneId].items
 
         if casketInfo.splitZones[zoneId] then
             local mobLvl = npc:getLocalVar("[caskets]MOBLVL")
@@ -468,8 +467,6 @@ function getDrops(npc, dropType, zoneId)
             else
                 drops = xi.casket_loot.casketItems[zoneId].itemsLow
             end
-        else
-            drops = xi.casket_loot.casketItems[zoneId].items
         end
 
         itemCount = randomTable[math.random(1, #randomTable)]
@@ -507,7 +504,7 @@ function getDrops(npc, dropType, zoneId)
     -- Evolith drops
     -----------------------------------
     elseif chestType == "evolith" then
-        local evolith = 2783
+        -- local evolith = 2783
         -- NOTE: Not implimented yet and will be incorperated into items once implimented.
         -- this is mainly here as a means of testing before implimentation.
     end
@@ -670,7 +667,7 @@ xi.caskets.onTrigger = function(player, npc)
     -----------------------------------
     -- Locked chest var's
     -----------------------------------
-    local attemptsAllowed   = npc:getLocalVar("[caskets]ATTEMPTS", attempts)
+    local attemptsAllowed   = npc:getLocalVar("[caskets]ATTEMPTS")
     local failedAtempts     = npc:getLocalVar("[caskets]FAILED_ATEMPTS")
     local remainingAttempts = attemptsAllowed - failedAtempts
 
@@ -723,7 +720,6 @@ xi.caskets.onTrade = function(player, npc, trade)
     local ID                = zones[zoneId]
     local baseMessage       = ID.text.PLAYER_OBTAINS_TEMP_ITEM
     local locked            = npc:getLocalVar("[caskets]LOCKED")
-    local eventBase         = zones[zoneId].npc.CASKET_BASE               -- base id of the current chest.
     local correctNumber     = npc:getLocalVar("[caskets]CORRECT_NUM")
     local chestOwner        = npc:getLocalVar("[caskets]PARTYID")         -- the id of the player, party or alliance that has rights to the chest.
     local leaderId          = player:getLeaderID()
@@ -788,23 +784,19 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
     -----------------------------------
     -- Basic chest var's
     -----------------------------------
-    local npc               = player:getEventTarget()
-    local chestId           = npc:getID()
-    local spawnStatus       = npc:getLocalVar("[caskets]SPAWNSTATUS")
-    local locked            = npc:getLocalVar("[caskets]LOCKED")
-    local lootType          = npc:getLocalVar("[caskets]LOOT_TYPE")
-    local eventBase         = zones[zoneId].npc.CASKET_BASE
-    local lockedEvent       = casketInfo.cs[chestId - eventBase] + 2
-    local unlockedEvent     = casketInfo.cs[chestId - eventBase]
+    local chestObj          = player:getEventTarget()
+    local spawnStatus       = chestObj:getLocalVar("[caskets]SPAWNSTATUS")
+    local locked            = chestObj:getLocalVar("[caskets]LOCKED")
+    local lootType          = chestObj:getLocalVar("[caskets]LOOT_TYPE")
     local lockedChoice      = bit.lshift(1, option -1)
     local inputNumber       = bit.rshift(option, 16)
 
     -----------------------------------
     -- Chest Locked var's
     -----------------------------------
-    local correctNumber     = npc:getLocalVar("[caskets]CORRECT_NUM")
-    local attemptsAllowed   = npc:getLocalVar("[caskets]ATTEMPTS")
-    local failedAtempts     = npc:getLocalVar("[caskets]FAILED_ATEMPTS")
+    local correctNumber     = chestObj:getLocalVar("[caskets]CORRECT_NUM")
+    local attemptsAllowed   = chestObj:getLocalVar("[caskets]ATTEMPTS")
+    local failedAtempts     = chestObj:getLocalVar("[caskets]FAILED_ATEMPTS")
     local remainingAttempts = attemptsAllowed - failedAtempts
 
     -- printf("option = %u ", option)
@@ -813,7 +805,7 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
     -----------------------------------
 
     local splitNumbers   = {}
-    local hintsVar       = npc:getLocalVar("[caskets]HINTS_TABLE")
+    local hintsVar       = chestObj:getLocalVar("[caskets]HINTS_TABLE")
     local availableHints = {}
 
     if hintsVar ~= 0 then
@@ -845,18 +837,18 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                 if randText == 1 then
                     if isEven(splitNumbers[1]) then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_FIRST_EVEN_ODD, 0, 0, 0, 0)
-                        npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                        chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                     else
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_FIRST_EVEN_ODD, 1, 0, 0, 0)
-                        npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                        chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                     end
                 elseif randText == 2 then
                     if isEven(splitNumbers[2]) then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_SECOND_EVEN_ODD, 0, 0, 0, 0)
-                        npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                        chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                     else
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_SECOND_EVEN_ODD, 1, 0, 0, 0)
-                        npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                        chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                     end
                 elseif randText == 3 then
                     if splitNumbers[1] <= 6 then
@@ -875,7 +867,7 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                             splitNumbers[1],
                             splitNumbers[1] +1, 0)
                     end
-                    npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                 elseif randText == 4 then
                     if splitNumbers[2] <= 6 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.SECOND_DIGIT_IS,
@@ -893,15 +885,15 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                             splitNumbers[2],
                             splitNumbers[2] +1, 0)
                     end
-                    npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                 elseif randText == 5 then
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.ONE_OF_TWO_DIGITS_IS,
                         splitNumbers[1], 0, 0, 0)
-                    npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                 elseif randText == 6 then
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.ONE_OF_TWO_DIGITS_IS,
                         splitNumbers[2], 0, 0, 0)
-                    npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                 elseif randText == 7 then
                     local highNum = 0
                     local lowNum  = 0
@@ -918,12 +910,12 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                     end
 
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.COMBINATION_GREATER_LESS, lowNum, highNum, 0, 0)
-                    npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                    chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
                 else
                     player:messageSpecial(baseMessage + casketInfo.messageOffset.UNABLE_TO_GET_HINT, 0, 0, 0, 0)
                 end
-                checkRemainingAttempts(player, npc, remainingAttempts, correctNumber)
-                removeHint(npc, randText)
+                checkRemainingAttempts(player, chestObj, remainingAttempts, correctNumber)
+                removeHint(chestObj, randText)
             end
         -----------------------------------
         -- Inputs
@@ -934,12 +926,12 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                     if locked == 0 then
                         player:messageSpecial(baseMessage + casketInfo.messageOffset.NO_COMBINATION, 0, 0, 0, 0)
                     else
-                        messageChest(player, "OPENED_LOCK", 0 , 0, 0, 0, npc)
-                        npc:setLocalVar("[caskets]LOCKED", 0)
+                        messageChest(player, "OPENED_LOCK", 0 , 0, 0, 0, chestObj)
+                        chestObj:setLocalVar("[caskets]LOCKED", 0)
 
-                        if npc:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then  -- is the chest shut?, then open it.
-                           npc:setAnimationSub(1)
-                           npc:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
+                        if chestObj:getLocalVar("[caskets]SPAWNSTATUS") == casketInfo.spawnStatus.SPAWNED_CLOSED then  -- is the chest shut?, then open it.
+                           chestObj:setAnimationSub(1)
+                           chestObj:setLocalVar("[caskets]SPAWNSTATUS", casketInfo.spawnStatus.SPAWNED_OPEN)
                            -- RoE Timed Record #4019 - Crack Tresure Caskets
                            if player:getEminenceProgress(4019) then
                                xi.roe.onRecordTrigger(player, 4019)
@@ -952,16 +944,16 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
                             player:messageSpecial(baseMessage + casketInfo.messageOffset.NO_COMBINATION, 0, 0, 0, 0)
                         else
                             player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_GREATER_LESS, inputNumber, 0, 0, 0, 0)
-                            npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
-                            checkRemainingAttempts(player, npc, remainingAttempts, correctNumber)
+                            chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                            checkRemainingAttempts(player, chestObj, remainingAttempts, correctNumber)
                         end
                     elseif inputNumber > correctNumber then
                         if locked == 0 then
                             player:messageSpecial(baseMessage + casketInfo.messageOffset.NO_COMBINATION, 0, 0, 0, 0)
                         else
                             player:messageSpecial(baseMessage + casketInfo.messageOffset.HUNCH_GREATER_LESS, inputNumber, 1, 0, 0, 0)
-                            npc:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
-                            checkRemainingAttempts(player, npc, remainingAttempts, correctNumber)
+                            chestObj:setLocalVar("[caskets]FAILED_ATEMPTS", failedAtempts +1)
+                            checkRemainingAttempts(player, chestObj, remainingAttempts, correctNumber)
                         end
                     end
                 end
@@ -970,21 +962,21 @@ xi.caskets.onEventFinish = function(player, csid, option, npc)
     elseif locked == 0 then
         if lootType == 1 then
             if option == 65537 then
-                giveTempItem(player, npc, 1)
+                giveTempItem(player, chestObj, 1)
             elseif option == 65538 then
-                giveTempItem(player, npc, 2)
+                giveTempItem(player, chestObj, 2)
             elseif option == 65539 then
-                giveTempItem(player, npc, 3)
+                giveTempItem(player, chestObj, 3)
             end
         elseif lootType == 2 then
             if option == 65537 then
-                giveItem(player, npc, 1)
+                giveItem(player, chestObj, 1)
             elseif option == 65538 then
-                giveItem(player, npc, 2)
+                giveItem(player, chestObj, 2)
             elseif option == 65539 then
-                giveItem(player, npc, 3)
+                giveItem(player, chestObj, 3)
             elseif option == 65540 then
-                giveItem(player, npc, 4)
+                giveItem(player, chestObj, 4)
             end
         end
     end

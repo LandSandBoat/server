@@ -28,7 +28,7 @@ local CONQUEST_UPDATE      = 2
 -- (LOCAL) expeditionary forces
 -- TODO: implement this menu
 -----------------------------------
-
+--[[
 local exForceMenuData =
 {
     0x20006, ZULK_EF, 103, 0x000040, 20, xi.ki.ZULKHEIM_EF_INSIGNIA,
@@ -45,7 +45,7 @@ local exForceMenuData =
     0x20013, ELLO_EF, 123, 0x080000, 35, xi.ki.ELSHIMO_LOWLANDS_EF_INSIGNIA,
     0x20014, ELUP_EF, 124, 0x100000, 45, xi.ki.ELSHIMO_UPLANDS_EF_INSIGNIA
 }
-
+]]--
 local function getExForceAvailable(player, guardNation)
     return 0
 end
@@ -1047,11 +1047,13 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
         local u2 = 0 -- default: player has enough CP for item
         local u3 = stock.item -- default: the item ID we're purchasing
 
+        --[[
         if false then -- TODO: if player is a job that cannot equip selected item, set u1 to 0 here
             u1 = 0
         elseif stock.lvl > player:getMainLvl() then
             u1 = 1
         end
+        ]]--
 
         if stock.cp > player:getCP() then
             u2 = 1
@@ -1214,11 +1216,11 @@ xi.conquest.vendorOnEventFinish = function(player, option, vendorRegion)
         xi.shop.outpost(player)
     elseif option == 2 then
         if player:delGil(fee) then
-            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, region)
+            player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, vendorRegion)
         end
     elseif option == 6 then
         player:delCP(fee)
-        player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, region)
+        player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.HOME_NATION, 0, 1, 0, vendorRegion)
     end
 end
 

@@ -64,7 +64,7 @@ local function getPrice(zoneId, info)
     return price
 end
 
-function updatePrice(zoneId, info, price)
+local function updatePrice(zoneId, info, price)
     SetServerVariable("[CHOCOBO][" .. zoneId .. "]price", price + info.addedPrice)
     SetServerVariable("[CHOCOBO][" .. zoneId .. "]time", os.time())
 end

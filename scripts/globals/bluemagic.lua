@@ -31,6 +31,182 @@ INT_BASED = 1
 CHR_BASED = 2
 MND_BASED = 3
 
+-----------------------------------
+-- Utility functions below
+-----------------------------------
+
+-- obtains alpha, used for working out WSC
+local function BlueGetAlpha(level)
+    local alpha = 1.00
+    if level <= 5 then
+        alpha = 1.00
+    elseif level <= 11 then
+        alpha = 0.99
+    elseif level <= 17 then
+        alpha = 0.98
+    elseif level <= 23 then
+        alpha = 0.97
+    elseif level <= 29 then
+        alpha = 0.96
+    elseif level <= 35 then
+        alpha = 0.95
+    elseif level <= 41 then
+        alpha = 0.94
+    elseif level <= 47 then
+        alpha = 0.93
+    elseif level <= 53 then
+        alpha = 0.92
+    elseif level <= 59 then
+        alpha = 0.91
+    elseif level <= 61 then
+        alpha = 0.90
+    elseif level <= 63 then
+        alpha = 0.89
+    elseif level <= 65 then
+        alpha = 0.88
+    elseif level <= 67 then
+        alpha = 0.87
+    elseif level <= 69 then
+        alpha = 0.86
+    elseif level <= 71 then
+        alpha = 0.85
+    elseif level <= 73 then
+        alpha = 0.84
+    elseif level <= 75 then
+        alpha = 0.83
+    elseif level <= 99 then
+        alpha = 0.85
+    end
+    return alpha
+end
+
+local function BlueGetWsc(attacker, params)
+    local wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
+         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
+         attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
+         attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
+    return wsc
+end
+
+-- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
+local function BluecRatio(ratio, atk_lvl, def_lvl)
+    -- Level penalty...
+    local levelcor = 0
+    if atk_lvl < def_lvl then
+        levelcor = 0.05 * (def_lvl - atk_lvl)
+    end
+    ratio = ratio - levelcor
+
+    -- apply caps
+    if ratio < 0 then
+        ratio = 0
+    elseif ratio > 2 then
+        ratio = 2
+    end
+
+    -- Obtaining cRatio_MIN
+    local cratiomin = 0
+    if ratio < 1.25 then
+        cratiomin = 1.2 * ratio - 0.5
+    elseif ratio >= 1.25 and ratio <= 1.5 then
+        cratiomin = 1
+    elseif ratio > 1.5 and ratio <= 2 then
+        cratiomin = 1.2 * ratio - 0.8
+    end
+
+    -- Obtaining cRatio_MAX
+    local cratiomax = 0
+    if ratio < 0.5 then
+        cratiomax = 0.4 + 1.2 * ratio
+    elseif ratio <= 0.833 and ratio >= 0.5 then
+        cratiomax = 1
+    elseif ratio <= 2 and ratio > 0.833 then
+        cratiomax = 1.2 * ratio
+    end
+    local cratio = {}
+    if cratiomin < 0 then
+        cratiomin = 0
+    end
+    cratio[1] = cratiomin
+    cratio[2] = cratiomax
+    return cratio
+end
+
+-- Gets the fTP multiplier by applying 2 straight lines between ftp1-ftp2 and ftp2-ftp3
+-- tp - The current TP
+-- ftp1 - The TP 0% value
+-- ftp2 - The TP 150% value
+-- ftp3 - The TP 300% value
+local function BluefTP(tp, ftp1, ftp2, ftp3)
+    if tp >= 0 and tp < 1500 then
+        return ftp1 + ( ((ftp2 - ftp1) / 100) * (tp / 10))
+    elseif tp >= 1500 and tp <= 3000 then
+        -- generate a straight line between ftp2 and ftp3 and find point @ tp
+        return ftp2 + ( ((ftp3 - ftp2) / 100) * ((tp - 1500) / 10))
+    else
+        print("blue fTP error: TP value is not between 0-3000!")
+    end
+    return 1 -- no ftp mod
+end
+
+local function BluefSTR(dSTR)
+    local fSTR2 = nil
+    if dSTR >= 12 then
+        fSTR2 = (dSTR + 4) / 2
+    elseif dSTR >= 6 then
+        fSTR2 = (dSTR + 6) / 2
+    elseif dSTR >= 1 then
+        fSTR2 = (dSTR + 7) / 2
+    elseif dSTR >= -2 then
+        fSTR2 = (dSTR + 8) / 2
+    elseif dSTR >= -7 then
+        fSTR2 = (dSTR + 9) / 2
+    elseif dSTR >= -15 then
+        fSTR2 = (dSTR + 10) / 2
+    elseif dSTR >= -21 then
+        fSTR2 = (dSTR + 12) / 2
+    else
+        fSTR2 = (dSTR + 13) / 2
+    end
+
+    return fSTR2
+end
+
+local function BlueGetHitRate(attacker, target, capHitRate)
+    local acc = attacker:getACC()
+    local eva = target:getEVA()
+
+    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
+        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
+    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
+        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
+    end
+
+    local hitdiff = 0
+    local hitrate = 75
+    if acc > eva then
+        hitdiff = (acc - eva) / 2
+    end
+    if eva > acc then
+        hitdiff = (-1 * (eva - acc)) / 2
+    end
+
+    hitrate = hitrate + hitdiff
+    hitrate = hitrate / 100
+
+
+    -- Applying hitrate caps
+    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
+        if hitrate > 0.95 then
+            hitrate = 0.95
+        end
+        if hitrate < 0.2 then
+            hitrate = 0.2
+        end
+    end
+    return hitrate
+end
+
 -- Get the damage for a blue magic physical spell.
 -- caster - The entity casting the spell.
 -- target - The target of the spell.
@@ -174,7 +350,7 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
 
     local convergenceBonus = 1.0
     if caster:hasStatusEffect(xi.effect.CONVERGENCE) then
-        convergenceEffect = getStatusEffect(xi.effect.CONVERGENCE)
+        local convergenceEffect = caster:getStatusEffect(xi.effect.CONVERGENCE)
         local convLvl = convergenceEffect:getPower()
         if convLvl == 1 then
             convergenceBonus = 1.05
@@ -211,7 +387,7 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
     rparams.skillType = xi.skill.BLUE_MAGIC
     magicAttack = math.floor(magicAttack * applyResistance(caster, target, spell, rparams))
 
-    dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
+    local dmg = math.floor(addBonuses(caster, spell, target, magicAttack))
 
     caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
 
@@ -240,137 +416,6 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     target:handleAfflatusMiseryDamage(dmg)
     -- TP has already been dealt with.
     return dmg
-end
-
------------------------------------
--- Utility functions below
------------------------------------
-
-function BlueGetWsc(attacker, params)
-    wsc = (attacker:getStat(xi.mod.STR) * params.str_wsc + attacker:getStat(xi.mod.DEX) * params.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * params.vit_wsc + attacker:getStat(xi.mod.AGI) * params.agi_wsc +
-         attacker:getStat(xi.mod.INT) * params.int_wsc + attacker:getStat(xi.mod.MND) * params.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * params.chr_wsc) * BlueGetAlpha(attacker:getMainLvl())
-    return wsc
-end
-
--- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-function BluecRatio(ratio, atk_lvl, def_lvl)
-    -- Level penalty...
-    local levelcor = 0
-    if atk_lvl < def_lvl then
-        levelcor = 0.05 * (def_lvl - atk_lvl)
-    end
-    ratio = ratio - levelcor
-
-    -- apply caps
-    if ratio < 0 then
-        ratio = 0
-    elseif ratio > 2 then
-        ratio = 2
-    end
-
-    -- Obtaining cRatio_MIN
-    local cratiomin = 0
-    if ratio < 1.25 then
-        cratiomin = 1.2 * ratio - 0.5
-    elseif ratio >= 1.25 and ratio <= 1.5 then
-        cratiomin = 1
-    elseif ratio > 1.5 and ratio <= 2 then
-        cratiomin = 1.2 * ratio - 0.8
-    end
-
-    -- Obtaining cRatio_MAX
-    local cratiomax = 0
-    if ratio < 0.5 then
-        cratiomax = 0.4 + 1.2 * ratio
-    elseif ratio <= 0.833 and ratio >= 0.5 then
-        cratiomax = 1
-    elseif ratio <= 2 and ratio > 0.833 then
-        cratiomax = 1.2 * ratio
-    end
-    cratio = {}
-    if cratiomin < 0 then
-        cratiomin = 0
-    end
-    cratio[1] = cratiomin
-    cratio[2] = cratiomax
-    return cratio
-end
-
--- Gets the fTP multiplier by applying 2 straight lines between ftp1-ftp2 and ftp2-ftp3
--- tp - The current TP
--- ftp1 - The TP 0% value
--- ftp2 - The TP 150% value
--- ftp3 - The TP 300% value
-function BluefTP(tp, ftp1, ftp2, ftp3)
-    if tp >= 0 and tp < 1500 then
-        return ftp1 + ( ((ftp2 - ftp1) / 100) * (tp / 10))
-    elseif tp >= 1500 and tp <= 3000 then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3 - ftp2) / 100) * ((tp - 1500) / 10))
-    else
-        print("blue fTP error: TP value is not between 0-3000!")
-    end
-    return 1 -- no ftp mod
-end
-
-function BluefSTR(dSTR)
-    local fSTR2 = nil
-    if dSTR >= 12 then
-        fSTR2 = (dSTR + 4) / 2
-    elseif dSTR >= 6 then
-        fSTR2 = (dSTR + 6) / 2
-    elseif dSTR >= 1 then
-        fSTR2 = (dSTR + 7) / 2
-    elseif dSTR >= -2 then
-        fSTR2 = (dSTR + 8) / 2
-    elseif dSTR >= -7 then
-        fSTR2 = (dSTR + 9) / 2
-    elseif dSTR >= -15 then
-        fSTR2 = (dSTR + 10) / 2
-    elseif dSTR >= -21 then
-        fSTR2 = (dSTR + 12) / 2
-    else
-        fSTR2 = (dSTR + 13) / 2
-    end
-
-    return fSTR2
-end
-
-function BlueGetHitRate(attacker, target, capHitRate)
-    local acc = attacker:getACC()
-    local eva = target:getEVA()
-
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
-    end
-
-    local hitdiff = 0
-    local hitrate = 75
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-    if eva > acc then
-        hitdiff = (-1 * (eva - acc)) / 2
-    end
-
-    hitrate = hitrate + hitdiff
-    hitrate = hitrate / 100
-
-
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
-    end
-    return hitrate
 end
 
 -- Function to stagger duration of effects by using the resistance to change the value
@@ -406,49 +451,3 @@ function getBlueEffectDuration(caster, resist, effect)
 
     return duration
 end
-
--- obtains alpha, used for working out WSC
-function BlueGetAlpha(level)
-    local alpha = 1.00
-    if level <= 5 then
-        alpha = 1.00
-    elseif level <= 11 then
-        alpha = 0.99
-    elseif level <= 17 then
-        alpha = 0.98
-    elseif level <= 23 then
-        alpha = 0.97
-    elseif level <= 29 then
-        alpha = 0.96
-    elseif level <= 35 then
-        alpha = 0.95
-    elseif level <= 41 then
-        alpha = 0.94
-    elseif level <= 47 then
-        alpha = 0.93
-    elseif level <= 53 then
-        alpha = 0.92
-    elseif level <= 59 then
-        alpha = 0.91
-    elseif level <= 61 then
-        alpha = 0.90
-    elseif level <= 63 then
-        alpha = 0.89
-    elseif level <= 65 then
-        alpha = 0.88
-    elseif level <= 67 then
-        alpha = 0.87
-    elseif level <= 69 then
-        alpha = 0.86
-    elseif level <= 71 then
-        alpha = 0.85
-    elseif level <= 73 then
-        alpha = 0.84
-    elseif level <= 75 then
-        alpha = 0.83
-    elseif level <= 99 then
-        alpha = 0.85
-    end
-    return alpha
-end
-
