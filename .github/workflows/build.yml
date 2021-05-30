@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -30,13 +30,21 @@ jobs:
     - name: Build
       run: |
         make -j $(nproc)
-
+    - name: Archive Executables
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux_executables
+        path: |
+          topaz_connect
+          topaz_game
+          topaz_search
+  
   Linux_2004_GCC11_64bit:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -57,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Configure CMake
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
@@ -75,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: Configure CMake
         shell: cmd
         # windows-2019 CI machine has MySQL installed, need to specific our location by hand
@@ -91,7 +99,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
     - name: Install Dependencies
       run: |
         sudo apt-get update
@@ -179,6 +187,7 @@ jobs:
 
   Full_Startup_Checks_2004:
     runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -191,19 +200,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: linux_executables
+        path: .
     - name: Install Dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
-    - name: Configure CMake
-      run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
-        cmake .
-    - name: Build Binaies
-      run: |
-        make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -221,6 +226,9 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
         ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
@@ -247,6 +255,7 @@ jobs:
 
   MultiInstance_Startup_Checks_2004:
     runs-on: ubuntu-20.04
+    needs: Linux_2004_Clang11_64bit
     services:
       mysql:
         image: mariadb
@@ -259,19 +268,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       with:
-        fetch-depth: 0
+        fetch-depth: 1
+    - uses: actions/download-artifact@v2
+      with:
+        name: linux_executables
+        path: .
     - name: Install Dependencies
-      run: |
+      run: |        
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks python3.7
-    - name: Configure CMake
-      run: |
-        export CC=/usr/bin/gcc-11
-        export CXX=/usr/bin/g++-11
-        cmake .
-    - name: Build Binaies
-      run: |
-        make -j $(nproc)
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -292,6 +297,9 @@ jobs:
       env:
         MYSQL_HOST: mysql
       run: |
+        chmod +x topaz_connect
+        chmod +x topaz_game
+        chmod +x topaz_search
         ls -l
         screen -d -m -S topaz_connect ./topaz_connect --log login-server.log
         screen -d -m -S topaz_search ./topaz_search --log search-server.log
