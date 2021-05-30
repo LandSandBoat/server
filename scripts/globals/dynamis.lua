@@ -413,11 +413,11 @@ dynamis.zoneOnZoneIn = function(player, prevZone)
 
     if player:getCharVar("Dynamis_Entry") == 1 or player:getGMLevel() > 0 then
         if player:getCharVar("Dynamis_subjob") == 1 then
-            player:timer(5000, function(player) player:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ) end)
+            player:timer(5000, function(playerArg) playerArg:messageBasic(xi.msg.basic.UNABLE_TO_ACCESS_SJ) end)
             player:addStatusEffect(xi.effect.SJ_RESTRICTION, 0, 0, 0, 7200)
         end
         player:addStatusEffectEx(xi.effect.DYNAMIS, 0, 0, 3, 3600)
-        player:timer(5500, function(player) player:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS) end)
+        player:timer(5500, function(playerArg) playerArg:messageSpecial(ID.text.DYNAMIS_TIME_BEGIN, 60, xi.ki.PRISMATIC_HOURGLASS) end)
         player:setCharVar("Dynamis_Entry", 0)
         player:setCharVar("Dynamis_subjob", 0)
     end
@@ -541,7 +541,6 @@ dynamis.refillStatueOnSpawn = function(mob)
 
     if RF then
         local found = false
-        local eye = nil
 
         -- set this statue's eye color
         for _, g in pairs(RF) do
@@ -597,16 +596,16 @@ dynamis.refillStatueOnDeath = function(mob, player, isKiller)
                 if eye == dynamis.eye.BLUE or eye == dynamis.eye.GREEN then
                     local zone = mob:getZone()
                     local players = zone:getPlayers()
-                    for name, player in pairs(players) do
-                        if mob:checkDistance(player) < 30 then
+                    for name, playerObj in pairs(players) do
+                        if mob:checkDistance(playerObj) < 30 then
                             if eye == dynamis.eye.BLUE then
-                                local amt = player:getMaxMP() - player:getMP()
-                                player:restoreMP(amt)
-                                player:messageBasic(xi.msg.basic.RECOVERS_MP, 0, amt)
+                                local amt = playerObj:getMaxMP() - playerObj:getMP()
+                                playerObj:restoreMP(amt)
+                                playerObj:messageBasic(xi.msg.basic.RECOVERS_MP, 0, amt)
                             else
-                                local amt = player:getMaxHP() - player:getHP()
-                                player:restoreHP(amt)
-                                player:messageBasic(xi.msg.basic.RECOVERS_HP, 0, amt)
+                                local amt = playerObj:getMaxHP() - playerObj:getHP()
+                                playerObj:restoreHP(amt)
+                                playerObj:messageBasic(xi.msg.basic.RECOVERS_HP, 0, amt)
                             end
                         end
                     end

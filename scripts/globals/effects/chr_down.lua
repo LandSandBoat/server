@@ -22,8 +22,8 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    downCHR_effect_size = effect:getPower()
-    if (downCHR_effect_size > 0) then
+    local downCHR_effect_size = effect:getPower()
+    if downCHR_effect_size > 0 then
         target:delMod(xi.mod.CHR, -downCHR_effect_size)
     end
 end

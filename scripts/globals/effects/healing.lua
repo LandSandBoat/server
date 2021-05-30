@@ -25,17 +25,17 @@ effect_object.onEffectGain = function(target, effect)
         local minWaitTime = math.min(3 * secondsPerTick, maxWaitTime)
         local waitTimeInSeconds = math.random(minWaitTime, maxWaitTime)
         target:setLocalVar("GEO_DWL_Resting", os.time() + waitTimeInSeconds)
-        target:timer(waitTimeInSeconds * 1000, function(target)
-            local finishTime = target:getLocalVar("GEO_DWL_Resting")
+        target:timer(waitTimeInSeconds * 1000, function(targetArg)
+            local finishTime = targetArg:getLocalVar("GEO_DWL_Resting")
             if finishTime > 0 and os.time() >= finishTime then
-                local ID = zones[target:getZoneID()]
-                target:messageSpecial(ID.text.MYSTICAL_WARMTH)  -- You feel a mystical warmth welling up inside you!
-                target:setLocalVar("GEO_DWL_Resting", 0)
-                target:setCharVar("GEO_DWL_Luopan", 1)
+                local ID = zones[targetArg:getZoneID()]
+                targetArg:messageSpecial(ID.text.MYSTICAL_WARMTH)  -- You feel a mystical warmth welling up inside you!
+                targetArg:setLocalVar("GEO_DWL_Resting", 0)
+                targetArg:setCharVar("GEO_DWL_Luopan", 1)
             end
         end)
     end
-    
+
     xi.voidwalker.onHealing(target)
 end
 
