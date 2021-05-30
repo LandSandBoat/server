@@ -30,23 +30,13 @@ jobs:
     - name: Build
       run: |
         make -j $(nproc)
-    - name: Archive topaz_connect
+    - name: Archive Executables
       uses: actions/upload-artifact@v2
       with:
-        name: topaz_connect
+        name: linux_executables
         path: |
           topaz_connect
-    - name: Archive topaz_game
-      uses: actions/upload-artifact@v2
-      with:
-        name: topaz_game
-        path: |
           topaz_game
-    - name: Archive topaz_search
-      uses: actions/upload-artifact@v2
-      with:
-        name: topaz_search
-        path: |
           topaz_search
   
   Linux_2004_GCC11_64bit:
@@ -213,15 +203,7 @@ jobs:
         fetch-depth: 0
     - uses: actions/download-artifact@v2
       with:
-        name: topaz_connect
-        path: .
-    - uses: actions/download-artifact@v2
-      with:
-        name: topaz_game
-        path: .
-    - uses: actions/download-artifact@v2
-      with:
-        name: topaz_search
+        name: linux_executables
         path: .
     - name: Install Dependencies
       run: |
@@ -287,15 +269,7 @@ jobs:
         fetch-depth: 0
     - uses: actions/download-artifact@v2
       with:
-        name: topaz_connect
-        path: .
-    - uses: actions/download-artifact@v2
-      with:
-        name: topaz_game
-        path: .
-    - uses: actions/download-artifact@v2
-      with:
-        name: topaz_search
+        name: linux_executables
         path: .
     - name: Install Dependencies
       run: |
