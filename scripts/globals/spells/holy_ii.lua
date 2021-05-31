@@ -18,7 +18,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.multiplier = 2
     params.hasMultipleTargetReduction = false
     params.resistBonus = 0
-    dmg = doDivineNuke(caster, target, spell, params)
+    local dmg = doDivineNuke(caster, target, spell, params)
     return dmg
 end
 

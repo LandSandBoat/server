@@ -14,16 +14,16 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local duration = 30
-    local pCHR = caster:getStat(xi.mod.CHR)
-    local mCHR = target:getStat(xi.mod.CHR)
-    local dCHR = pCHR - mCHR
+    -- local pCHR = caster:getStat(xi.mod.CHR)
+    -- local mCHR = target:getStat(xi.mod.CHR)
+    -- local dCHR = pCHR - mCHR
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.CHR
     params.skillType = xi.skill.SINGING
     params.bonus = 0
     params.effect = xi.effect.LULLABY
-    resm = applyResistanceEffect(caster, target, spell, params)
+    local resm = applyResistanceEffect(caster, target, spell, params)
 
     if resm < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) -- resist message
