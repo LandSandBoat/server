@@ -108,7 +108,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
 
                 if shadowsLeft > 0 then
                     --update icon
-                    effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                     if (effect ~= nil) then
                         if (shadowsLeft == 1) then
                             effect:setIcon(xi.effect.COPY_IMAGE)
