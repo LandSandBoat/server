@@ -85,8 +85,8 @@ function getRoeRecords(triggers)
                 return player:getMainLvl() >= self.reqs.mJobLvl and true or false
             end,
             flags = set{"retro"},
-            reqs = { mJobLvl = 99 }, 
-            reward =  { 
+            reqs = { mJobLvl = 99 },
+            reward =  {
                 sparks = 200,
                 xp = 300,
                 item = { { 8733, 5 } },
@@ -100,9 +100,9 @@ function getRoeRecords(triggers)
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 2000 },
             reward =  {
-                sparks = 200, 
-                xp = 200, 
-                item = { 9188 } 
+                sparks = 200,
+                xp = 200,
+                item = { 9188 }
             }
         },
 
@@ -136,9 +136,9 @@ function getRoeRecords(triggers)
             check = function(self, player, params)
                 local count = 0
                 for _, slot in pairs( {
-                    xi.slot.MAIN, 
-                    xi.slot.SUB, 
-                    xi.slot.RANGED, 
+                    xi.slot.MAIN,
+                    xi.slot.SUB,
+                    xi.slot.RANGED,
                     xi.slot.HEAD,
                     xi.slot.BODY,
                     xi.slot.HANDS,
@@ -160,7 +160,7 @@ function getRoeRecords(triggers)
                 item = { 10140 }
             }
         },
-        
+
 
       -----------------------------------
       -- Tutorial -> Synthesis
@@ -4560,7 +4560,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Content (Other)                 
+      -- Content (Other)
       -----------------------------------
 
         [  63] = { -- Total Suc. Chocobo Digs
@@ -4606,7 +4606,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Achievements - Job Levels 1             
+      -- Achievements - Job Levels 1
       -----------------------------------
 
         [1200] = { -- Level 30 Warrior +
@@ -4778,7 +4778,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Achievements - Job Levels 2             
+      -- Achievements - Job Levels 2
       -----------------------------------
 
         [1224] = { -- Level 30 Paladin
@@ -4950,7 +4950,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Achievements - Job Levels 3             
+      -- Achievements - Job Levels 3
       -----------------------------------
 
         [1248] = { -- Level 30 Ninja
@@ -5122,7 +5122,7 @@ function getRoeRecords(triggers)
         },
 
       -----------------------------------
-      -- Achievements - Job Levels 4             
+      -- Achievements - Job Levels 4
       -----------------------------------
 
         [1272] = { -- Level 30 Dancer
