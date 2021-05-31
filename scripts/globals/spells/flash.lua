@@ -14,18 +14,13 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
-    local dINT = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
+    -- local dINT = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
 
     local params = {}
-
     params.diff = nil
-
     params.attribute = xi.mod.INT
-
     params.skillType = xi.skill.DIVINE_MAGIC
-
     params.bonus =  150
-
     params.effect = nil
 
     local resist = applyResistance(caster, target, spell, params)
