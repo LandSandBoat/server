@@ -71,16 +71,16 @@ end
 
 function utils.takeShadows(target, dmg, shadowbehav)
     if (shadowbehav == nil) then
-        shadowbehav = 1;
+        shadowbehav = 1
     end
 
-    local targShadows = target:getMod(xi.mod.UTSUSEMI);
-    local shadowType = xi.mod.UTSUSEMI;
+    local targShadows = target:getMod(xi.mod.UTSUSEMI)
+    local shadowType = xi.mod.UTSUSEMI
 
     if (targShadows == 0) then
         --try blink, as utsusemi always overwrites blink this is okay
-        targShadows = target:getMod(xi.mod.BLINK);
-        shadowType = xi.mod.BLINK;
+        targShadows = target:getMod(xi.mod.BLINK)
+        shadowType = xi.mod.BLINK
     end
 
     local shadowsLeft = targShadows
