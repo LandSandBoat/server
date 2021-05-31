@@ -14,7 +14,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     --Power for Hojo is a flat 14.6% reduction
     local power = 1500
     --Duration and Resistance calculation

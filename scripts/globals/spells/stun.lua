@@ -14,7 +14,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local duration = 5
 
-    local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+    -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT
