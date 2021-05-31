@@ -18,7 +18,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (caster:hasStatusEffect(xi.effect.ACCURACY_BOOST)) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
         local params = {}
         params.diff = nil
         params.attribute = xi.mod.INT
