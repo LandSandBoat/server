@@ -16,11 +16,319 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 
+-- Obtains alpha, used for working out WSC on legacy servers
+local function getAlpha(level)
+    -- Retail has no alpha anymore as of 2014. Weaponskill functions
+    -- should be checking for USE_ADOULIN_WEAPON_SKILL_CHANGES and
+    -- overwriting the results of this function if the server has it set
+    local alpha = 1.00
+
+    if level <= 5 then
+        alpha = 1.00
+    elseif level <= 11 then
+        alpha = 0.99
+    elseif level <= 17 then
+        alpha = 0.98
+    elseif level <= 23 then
+        alpha = 0.97
+    elseif level <= 29 then
+        alpha = 0.96
+    elseif level <= 35 then
+        alpha = 0.95
+    elseif level <= 41 then
+        alpha = 0.94
+    elseif level <= 47 then
+        alpha = 0.93
+    elseif level <= 53 then
+        alpha = 0.92
+    elseif level <= 59 then
+        alpha = 0.91
+    elseif level <= 61 then
+        alpha = 0.90
+    elseif level <= 63 then
+        alpha = 0.89
+    elseif level <= 65 then
+        alpha = 0.88
+    elseif level <= 67 then
+        alpha = 0.87
+    elseif level <= 69 then
+        alpha = 0.86
+    elseif level <= 71 then
+        alpha = 0.85
+    elseif level <= 73 then
+        alpha = 0.84
+    elseif level <= 75 then
+        alpha = 0.83
+    elseif level < 99 then
+        alpha = 0.85
+    else
+        alpha = 1
+    end
+
+    return alpha
+end
+
+local function souleaterBonus(attacker, wsParams)
+    local bonus = 0
+
+    if attacker:hasStatusEffect(xi.effect.SOULEATER) then
+        local percent = 0.1
+
+        if attacker:getMainJob() ~= xi.job.DRK then
+            percent = percent / 2
+        end
+
+        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
+        local health = attacker:getHP()
+
+        if health > 10 then
+            bonus = bonus + health * percent
+        end
+
+        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
+    end
+
+    return bonus
+end
+
+local function fencerBonus(attacker)
+    local bonus = 0
+
+    if attacker:getObjType() ~= xi.objType.PC then
+        return 0
+    end
+
+    local mainEquip = attacker:getStorageItem(0, 0, xi.slot.MAIN)
+    if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
+        local subEquip = attacker:getStorageItem(0, 0, xi.slot.SUB)
+
+        if subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield() then
+            bonus = attacker:getMod(xi.mod.FENCER_CRITHITRATE) / 100
+        end
+    end
+
+    return bonus
+end
+
+local function shadowAbsorb(target)
+    local targShadows = target:getMod(xi.mod.UTSUSEMI)
+    local shadowType = xi.mod.UTSUSEMI
+
+    if targShadows == 0 then
+        if math.random() < 0.8 then
+            targShadows = target:getMod(xi.mod.BLINK)
+            shadowType = xi.mod.BLINK
+        end
+    end
+
+    if targShadows > 0 then
+        if shadowType == xi.mod.UTSUSEMI then
+            local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+            if effect then
+                if targShadows - 1 == 1 then
+                    effect:setIcon(xi.effect.COPY_IMAGE)
+                elseif targShadows - 1 == 2 then
+                    effect:setIcon(xi.effect.COPY_IMAGE_2)
+                elseif targShadows - 1 == 3 then
+                    effect:setIcon(xi.effect.COPY_IMAGE_3)
+                end
+            end
+        end
+
+        target:setMod(shadowType, targShadows - 1)
+        if targShadows - 1 == 0 then
+            target:delStatusEffect(xi.effect.COPY_IMAGE)
+            target:delStatusEffect(xi.effect.BLINK)
+        end
+
+        return true
+    end
+
+    return false
+end
+
+local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
+    -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
+    local accpct = fTP(tp, a1, a2, a3)
+    local acclost = acc - (acc * accpct)
+    local hrate = hitrate - (0.005 * acclost)
+
+    -- cap it
+    if hrate > 0.95 then
+        hrate = 0.95
+    end
+
+    if hrate < 0.2 then
+        hrate = 0.2
+    end
+
+    return hrate
+end
+
+local function getMultiAttacks(attacker, target, numHits)
+    local bonusHits = 0
+    local multiChances = 1
+    local doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
+    local tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
+    local quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
+    local oaThriceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_THRICE) / 100
+    local oaTwiceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_TWICE) / 100
+
+    -- Add Ambush Augments to Triple Attack
+    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then -- TRAIT_AMBUSH
+        tripleRate = tripleRate + attacker:getMerit(xi.merit.AMBUSH) / 3 -- Value of Ambush is 3 per mert, augment gives +1 Triple Attack per merit
+    end
+
+    -- QA/TA/DA can only proc on the first hit of each weapon or each fist
+    if attacker:getOffhandDmg() > 0 or attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
+        multiChances = 2
+    end
+
+    for i = 1, multiChances, 1 do
+        if math.random() < quadRate then
+            bonusHits = bonusHits + 3
+        elseif math.random() < tripleRate then
+            bonusHits = bonusHits + 2
+        elseif math.random() < doubleRate then
+            bonusHits = bonusHits + 1
+        elseif i == 1 and math.random() < oaThriceRate then -- Can only proc on first hit
+            bonusHits = bonusHits + 2
+        elseif i == 1 and math.random() < oaTwiceRate then -- Can only proc on first hit
+            bonusHits = bonusHits + 1
+        end
+
+        if i == 1 then
+            attacker:delStatusEffect(xi.effect.ASSASSINS_CHARGE)
+            attacker:delStatusEffect(xi.effect.WARRIORS_CHARGE)
+
+            -- recalculate DA/TA/QA rate
+            doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
+            tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
+            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK)/100
+        end
+    end
+
+    if (numHits + bonusHits ) > 8 then
+        return 8
+    end
+
+    return numHits + bonusHits
+end
+
+local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
+    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
+    local cratio = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
+
+    local levelCorrection = 0
+    if attacker:getMainLvl() < defender:getMainLvl() then
+        levelCorrection = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
+    end
+
+    cratio = cratio - levelCorrection
+    cratio = cratio * atkmulti
+
+    if cratio > 3 - levelCorrection then
+        cratio = 3 - levelCorrection
+    end
+
+    if cratio < 0 then
+        cratio = 0
+    end
+
+    -- max
+    local pdifmax = 0
+
+    if cratio < 0.9 then
+        pdifmax = cratio * (10 / 9)
+    elseif cratio < 1.1 then
+        pdifmax = 1
+    else
+        pdifmax = cratio
+    end
+
+    -- min
+    local pdifmin = 0
+
+    if cratio < 0.9 then
+        pdifmin = cratio
+    elseif cratio < 1.1 then
+        pdifmin = 1
+    else
+        pdifmin = (cratio * (20 / 19)) - (3 / 19)
+    end
+
+    local pdif = {}
+    pdif[1] = pdifmin
+    pdif[2] = pdifmax
+    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
+    local pdifcrit = {}
+
+    pdifmin = pdifmin * 1.25
+    pdifmax = pdifmax * 1.25
+
+    pdifcrit[1] = pdifmin
+    pdifcrit[2] = pdifmax
+
+    return pdif, pdifcrit
+end
+
+local function getRangedHitRate(attacker, target, capHitRate, bonus)
+    local acc = attacker:getRACC()
+    local eva = target:getEVA()
+
+    if bonus == nil then
+        bonus = 0
+    end
+
+    if (target:hasStatusEffect(xi.effect.YONIN) and target:isFacing(attacker, 23)) then -- Yonin evasion boost if defender is facing attacker
+        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
+    end
+
+    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then --TRAIT_AMBUSH
+        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
+    end
+
+    acc = acc + bonus
+
+    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
+        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
+    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
+        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
+    end
+
+    local hitdiff = 0
+    local hitrate = 75
+
+    if acc > eva then
+        hitdiff = (acc - eva) / 2
+    end
+
+    if eva > acc then
+        hitdiff = ((-1) * (eva - acc)) / 2
+    end
+
+    hitrate = hitrate + hitdiff
+    hitrate = hitrate / 100
+
+    -- Applying hitrate caps
+    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
+        if hitrate > 0.95 then
+            hitrate = 0.95
+        end
+
+        if hitrate < 0.2 then
+            hitrate = 0.2
+        end
+    end
+
+    return hitrate
+end
+
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
-function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
     local criticalHit = false
-    local pdif = 0
     local finaldmg = 0
+    -- local pdif = 0 Reminder for Future Implementation!
 
     local missChance = math.random()
 
@@ -30,7 +338,7 @@ function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
         not calcParams.mustMiss
     then
         if not shadowAbsorb(target) then
-            critChance = math.random() -- See if we land a critical hit
+            local critChance = math.random() -- See if we land a critical hit
             criticalHit = (wsParams.canCrit and critChance <= calcParams.critRate) or
                           calcParams.forcedFirstCrit or
                           calcParams.mightyStrikesApplicable
@@ -49,7 +357,7 @@ function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 -- Calculate magical bonuses and reductions
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
-                magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
+                magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
                 magicdmg = target:magicDmgTaken(magicdmg)
                 magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
 
@@ -156,7 +464,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
 
     -- Calculate critrates
-    local critRate = 0
+    local critrate = 0
 
     if wsParams.canCrit then -- Work out critical hit ratios
         local nativecrit = 0
@@ -176,9 +484,9 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
             nativecrit = 0.05
         end
 
-        local fencerBonus = calcParams.fencerBonus or 0
+        local fencerBonusVal = calcParams.fencerBonus or 0
         nativecrit = nativecrit + attacker:getMod(xi.mod.CRITHITRATE) / 100 + attacker:getMerit(xi.merit.CRIT_HIT_RATE) / 100
-                                + fencerBonus - target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+                                + fencerBonusVal - target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
 
         -- Innin critical boost when attacker is behind target
         if attacker:hasStatusEffect(xi.effect.INNIN) and attacker:isBehind(target, 23) then
@@ -589,66 +897,6 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
     return finaldmg
 end
 
-function fencerBonus(attacker)
-    local bonus = 0
-
-    if attacker:getObjType() ~= xi.objType.PC then
-        return 0
-    end
-
-    local mainEquip = attacker:getStorageItem(0, 0, xi.slot.MAIN)
-    if mainEquip and not mainEquip:isTwoHanded() and not mainEquip:isHandToHand() then
-        local subEquip = attacker:getStorageItem(0, 0, xi.slot.SUB)
-
-        if subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield() then
-            bonus = attacker:getMod(xi.mod.FENCER_CRITHITRATE) / 100
-        end
-    end
-
-    return bonus
-end
-
-function souleaterBonus(attacker, wsParams)
-    local bonus = 0
-
-    if attacker:hasStatusEffect(xi.effect.SOULEATER) then
-        local percent = 0.1
-
-        if attacker:getMainJob() ~= xi.job.DRK then
-            percent = percent / 2
-        end
-
-        percent = percent + math.min(0.02, 0.01 * attacker:getMod(xi.mod.SOULEATER_EFFECT))
-        local health = attacker:getHP()
-
-        if health > 10 then
-            bonus = bonus + health * percent
-        end
-
-        attacker:delHP(wsParams.numHits * 0.10 * attacker:getHP())
-    end
-
-    return bonus
-end
-
-function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
-    -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    accpct = fTP(tp, a1, a2, a3)
-    acclost = acc - (acc * accpct)
-    hrate = hitrate - (0.005 * acclost)
-
-    -- cap it
-    if hrate > 0.95 then
-        hrate = 0.95
-    end
-
-    if hrate < 0.2 then
-        hrate = 0.2
-    end
-
-    return hrate
-end
-
 -- Helper function to get Main damage depending on weapon type
 function getMeleeDmg(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
@@ -720,58 +968,6 @@ function getHitRate(attacker, target, capHitRate, bonus)
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
 
-
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
-
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
-    end
-
-    return hitrate
-end
-
-function getRangedHitRate(attacker, target, capHitRate, bonus)
-    local acc = attacker:getRACC()
-    local eva = target:getEVA()
-
-    if bonus == nil then
-        bonus = 0
-    end
-
-    if (target:hasStatusEffect(xi.effect.YONIN) and target:isFacing(attacker, 23)) then -- Yonin evasion boost if defender is facing attacker
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then --TRAIT_AMBUSH
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    acc = acc + bonus
-
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
-    end
-
-    local hitdiff = 0
-    local hitrate = 75
-
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = ((-1) * (eva - acc)) / 2
-    end
-
-    hitrate = hitrate + hitdiff
-    hitrate = hitrate / 100
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
@@ -915,65 +1111,6 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
     return pdif, pdifcrit
 end
 
-function cRangedRatio(attacker, defender, params, ignoredDef, tp)
-
-    local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
-    local cratio = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
-
-    local levelCorrection = 0
-    if attacker:getMainLvl() < defender:getMainLvl() then
-        levelCorrection = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
-    end
-
-    cratio = cratio - levelCorrection
-    cratio = cratio * atkmulti
-
-    if cratio > 3 - levelCorrection then
-        cratio = 3 - levelCorrection
-    end
-
-    if cratio < 0 then
-        cratio = 0
-    end
-
-    -- max
-    local pdifmax = 0
-
-    if cratio < 0.9 then
-        pdifmax = cratio * (10 / 9)
-    elseif cratio < 1.1 then
-        pdifmax = 1
-    else
-        pdifmax = cratio
-    end
-
-    -- min
-    local pdifmin = 0
-
-    if cratio < 0.9 then
-        pdifmin = cratio
-    elseif cratio < 1.1 then
-        pdifmin = 1
-    else
-        pdifmin = (cratio * (20 / 19)) - (3 / 19)
-    end
-
-    pdif = {}
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
-    pdifcrit = {}
-
-    pdifmin = pdifmin * 1.25
-    pdifmax = pdifmax * 1.25
-
-    pdifcrit[1] = pdifmin
-    pdifcrit[2] = pdifmax
-
-    return pdif, pdifcrit
-
-end
-
 -- Returns fSTR based on range and divisor
 local function calculateRawFstr(dSTR, divisor)
     local fSTR = 0
@@ -1031,108 +1168,6 @@ function fSTR2(atk_str, def_vit, weapon_rank)
     fSTR2 = utils.clamp(fSTR2, lower_cap, (weapon_rank + 8) * 2)
 
     return fSTR2
-end
-
--- Obtains alpha, used for working out WSC on legacy servers
-function getAlpha(level)
-    -- Retail has no alpha anymore as of 2014. Weaponskill functions
-    -- should be checking for USE_ADOULIN_WEAPON_SKILL_CHANGES and
-    -- overwriting the results of this function if the server has it set
-    local alpha = 1.00
-
-    if level <= 5 then
-        alpha = 1.00
-    elseif level <= 11 then
-        alpha = 0.99
-    elseif level <= 17 then
-        alpha = 0.98
-    elseif level <= 23 then
-        alpha = 0.97
-    elseif level <= 29 then
-        alpha = 0.96
-    elseif level <= 35 then
-        alpha = 0.95
-    elseif level <= 41 then
-        alpha = 0.94
-    elseif level <= 47 then
-        alpha = 0.93
-    elseif level <= 53 then
-        alpha = 0.92
-    elseif level <= 59 then
-        alpha = 0.91
-    elseif level <= 61 then
-        alpha = 0.90
-    elseif level <= 63 then
-        alpha = 0.89
-    elseif level <= 65 then
-        alpha = 0.88
-    elseif level <= 67 then
-        alpha = 0.87
-    elseif level <= 69 then
-        alpha = 0.86
-    elseif level <= 71 then
-        alpha = 0.85
-    elseif level <= 73 then
-        alpha = 0.84
-    elseif level <= 75 then
-        alpha = 0.83
-    elseif level < 99 then
-        alpha = 0.85
-    else
-        alpha = 1
-    end
-
-    return alpha
-end
-
-function getMultiAttacks(attacker, target, numHits)
-    local bonusHits = 0
-    local multiChances = 1
-    local doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
-    local tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
-    local quadRate = attacker:getMod(xi.mod.QUAD_ATTACK) / 100
-    local oaThriceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_THRICE) / 100
-    local oaTwiceRate = attacker:getMod(xi.mod.MYTHIC_OCC_ATT_TWICE) / 100
-
-    -- Add Ambush Augments to Triple Attack
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then -- TRAIT_AMBUSH
-        tripleRate = tripleRate + attacker:getMerit(xi.merit.AMBUSH) / 3 -- Value of Ambush is 3 per mert, augment gives +1 Triple Attack per merit
-    end
-
-    -- QA/TA/DA can only proc on the first hit of each weapon or each fist
-    if attacker:getOffhandDmg() > 0 or attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
-        multiChances = 2
-    end
-
-    for i = 1, multiChances, 1 do
-        if math.random() < quadRate then
-            bonusHits = bonusHits + 3
-        elseif math.random() < tripleRate then
-            bonusHits = bonusHits + 2
-        elseif math.random() < doubleRate then
-            bonusHits = bonusHits + 1
-        elseif i == 1 and math.random() < oaThriceRate then -- Can only proc on first hit
-            bonusHits = bonusHits + 2
-        elseif i == 1 and math.random() < oaTwiceRate then -- Can only proc on first hit
-            bonusHits = bonusHits + 1
-        end
-
-        if i == 1 then
-            attacker:delStatusEffect(xi.effect.ASSASSINS_CHARGE)
-            attacker:delStatusEffect(xi.effect.WARRIORS_CHARGE)
-
-            -- recalculate DA/TA/QA rate
-            doubleRate = (attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)) / 100
-            tripleRate = (attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)) / 100
-            quadRate = attacker:getMod(xi.mod.QUAD_ATTACK)/100
-        end
-    end
-
-    if (numHits + bonusHits ) > 8 then
-        return 8
-    end
-
-    return numHits + bonusHits
 end
 
 function generatePdif (cratiomin, cratiomax, melee)
@@ -1251,41 +1286,4 @@ function handleWSGorgetBelt(attacker)
     end
 
     return ftpBonus, accBonus
-end
-
-function shadowAbsorb(target)
-    local targShadows = target:getMod(xi.mod.UTSUSEMI)
-    local shadowType = xi.mod.UTSUSEMI
-
-    if targShadows == 0 then
-        if math.random() < 0.8 then
-            targShadows = target:getMod(xi.mod.BLINK)
-            shadowType = xi.mod.BLINK
-        end
-    end
-
-    if targShadows > 0 then
-        if shadowType == xi.mod.UTSUSEMI then
-            local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-            if effect then
-                if targShadows - 1 == 1 then
-                    effect:setIcon(xi.effect.COPY_IMAGE)
-                elseif targShadows - 1 == 2 then
-                    effect:setIcon(xi.effect.COPY_IMAGE_2)
-                elseif targShadows - 1 == 3 then
-                    effect:setIcon(xi.effect.COPY_IMAGE_3)
-                end
-            end
-        end
-
-        target:setMod(shadowType, targShadows - 1)
-        if targShadows - 1 == 0 then
-            target:delStatusEffect(xi.effect.COPY_IMAGE)
-            target:delStatusEffect(xi.effect.BLINK)
-        end
-
-        return true
-    end
-
-    return false
 end

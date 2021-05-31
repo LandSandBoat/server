@@ -75,6 +75,7 @@ global_objects=(
     Sequence
     Container
     Event
+    onMobDeathEx
 
     removeSleepEffects
 
@@ -188,11 +189,13 @@ global_objects=(
 
     fTP
     fSTR
+    fSTR2
     calculateRawWSDmg
     calculatedIgnoredDef
     cMeleeRatio
     generatePdif
     getMeleeDmg
+    handleWSGorgetBelt
 
     getRecommendedAssaultLevel
 
@@ -288,7 +291,9 @@ global_objects=(
     mobAddBonuses
     MobBreathMove
     MobBuffMove
+    MobDrainAttribute
     MobDrainMove
+    MobDrainStatusEffectMove
     MobGazeMove
     MobHealMove
     MobMagicalMove
@@ -301,6 +306,8 @@ global_objects=(
     MobStatusEffectMove
 
     FormMagicBurst
+
+    BOMB_TOSS_HPP
 
     AbilityFinalAdjustments
 

@@ -23,7 +23,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     -- remove all by 5%
-    local damage = 0
+    local baseDamage = 0
 
     -- estimation based on "Throat Stab-like damage"
     if (currentHP / target:getMaxHP() > 0.2) then
@@ -37,9 +37,9 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- we still need final adjustments to handle stoneskin etc though
     damage = MobFinalAdjustments(damage, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, MOBPARAM_WIPE_SHADOWS)
 
-    target:takeDamage(finalDamage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    target:takeDamage(damage, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
     mob:resetEnmity(target)
-    return finalDamage
+    return damage
 end
 
 return mobskill_object

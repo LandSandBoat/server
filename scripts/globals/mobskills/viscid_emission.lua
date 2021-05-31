@@ -19,7 +19,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(MobStatusEffectMove(mob, target, xi.effect.AMNESIA, 1, 0, 60))
-    return typeEffect
+    return nil
 end
 
 return mobskill_object

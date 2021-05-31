@@ -18,8 +18,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local power = 10
-    local duration = 60
+    -- local power = 10
+    -- local duration = 60
     local typeEffect = xi.effect.COUNTERSTANCE
 
     -- if ( Conquerer Bakgodek ) then

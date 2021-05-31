@@ -13,7 +13,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.TERROR
-    local duration = 10
+    -- local duration = 10
     local dmgmod = 2.0
 
     MobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 30)

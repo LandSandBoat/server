@@ -14,9 +14,9 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
     -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-    local mobhp = mob:getHPP()
-    local phase = mob:getLocalVar("battlePhase")
+    -- local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
+    -- local mobhp = mob:getHPP()
+    -- local phase = mob:getLocalVar("battlePhase")
 
     if mob:getLocalVar("nuclearWaste") == 1 then
         return 0
