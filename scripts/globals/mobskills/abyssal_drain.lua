@@ -16,10 +16,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
-
-
-    return dmg
+    -- TODO: Implement this
+    return 0
 end
 
 return mobskill_object

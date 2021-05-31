@@ -19,11 +19,10 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local shadows = MOBPARAM_1_SHADOW
-    local dmg = MobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
-
+    -- local dmg = MobFinalAdjustments(10, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, shadows)
     local typeEffect = xi.effect.PARALYSIS
 
-        mob:resetEnmity(target)
+    mob:resetEnmity(target)
 
     if (MobPhysicalHit(skill)) then
         skill:setMsg(MobStatusEffectMove(mob, target, typeEffect, 40, 0, 60))

@@ -19,7 +19,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local power = math.random(20, 30)
-    local duration = 180
+    -- local duration = 180
     local typeEffect = xi.effect.SHOCK_SPIKES
     skill:setMsg(MobBuffMove(mob, typeEffect, power, 0, 180))
     return typeEffect

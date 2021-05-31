@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.PHYSICAL_SHIELD
+    -- local typeEffect = xi.effect.PHYSICAL_SHIELD
 
     mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 0, 0)
     mob:setAnimationSub(1)
