@@ -405,7 +405,7 @@ end
 -- See doPhysicalWeaponskill or doRangedWeaponskill for how calcParams are determined.
 function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local targetLvl = target:getMainLvl()
-    local targetHp = target:getHP()
+    local targetHp = target:getHP() + target:getMod(xi.mod.STONESKIN)
 
     -- Recalculate accuracy if it varies with TP, applied to all hits
     if wsParams.acc100 ~= 0 then

@@ -14,7 +14,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.ATTACK_DOWN
     -- Base Stats
-    local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     --Duration Calculation
     local params = {}
     params.diff = nil

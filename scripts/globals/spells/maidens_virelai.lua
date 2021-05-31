@@ -24,7 +24,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
+    -- local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
     local bonus = 0 -- No idea what value, but seems likely to need this edited later to get retail resist rates.
     local params = {}
     params.diff = nil
