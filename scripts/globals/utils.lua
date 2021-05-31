@@ -71,49 +71,67 @@ end
 
 function utils.takeShadows(target, dmg, shadowbehav)
     if (shadowbehav == nil) then
-        shadowbehav = 1
+        shadowbehav = 1;
     end
 
-    local targShadows = target:getMod(xi.mod.UTSUSEMI)
-    local shadowType = xi.mod.UTSUSEMI
+    local targShadows = target:getMod(xi.mod.UTSUSEMI);
+    local shadowType = xi.mod.UTSUSEMI;
 
-    if (targShadows == 0) then --try blink, as utsusemi always overwrites blink this is okay
-        targShadows = target:getMod(xi.mod.BLINK)
-        shadowType = xi.mod.BLINK
+    if (targShadows == 0) then
+        --try blink, as utsusemi always overwrites blink this is okay
+        targShadows = target:getMod(xi.mod.BLINK);
+        shadowType = xi.mod.BLINK;
     end
+
+    local shadowsLeft = targShadows
+    local shadowsUsed = 0
 
     if (targShadows > 0) then
-    --Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
-
-        if (targShadows >= shadowbehav) then --no damage, just suck the shadows
-
-            local shadowsLeft = targShadows - shadowbehav
-
-            target:setMod(shadowType, shadowsLeft)
-
-            if (shadowsLeft > 0 and shadowType == xi.mod.UTSUSEMI) then --update icon
-                local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-                if (effect ~= nil) then
-                    if (shadowsLeft == 1) then
-                        effect:setIcon(xi.effect.COPY_IMAGE)
-                    elseif (shadowsLeft == 2) then
-                        effect:setIcon(xi.effect.COPY_IMAGE_2)
-                    elseif (shadowsLeft == 3) then
-                        effect:setIcon(xi.effect.COPY_IMAGE_3)
+        if shadowType == xi.mod.BLINK then
+            for i = 1, shadowbehav, 1 do
+                if shadowsLeft > 0 then
+                    if math.random() <= 0.8 then
+                        shadowsUsed = shadowsUsed + 1
+                        shadowsLeft = shadowsLeft - 1
                     end
                 end
             end
-            -- remove icon
-            if (shadowsLeft <= 0) then
-                target:delStatusEffect(xi.effect.COPY_IMAGE)
-                target:delStatusEffect(xi.effect.BLINK)
-            end
 
-            return 0
-        else --less shadows than this move will take, remove all and factor damage down
+            if shadowsUsed >= shadowbehav then
+                dmg = 0
+            else
+                dmg = ((dmg / shadowbehav) * (shadowbehav - shadowsUsed))
+            end
+        else
+            if (targShadows >= shadowbehav) then
+                shadowsLeft = targShadows - shadowbehav
+
+                if shadowsLeft > 0 then
+                    --update icon
+                    effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
+                    if (effect ~= nil) then
+                        if (shadowsLeft == 1) then
+                            effect:setIcon(xi.effect.COPY_IMAGE)
+                        elseif (shadowsLeft == 2) then
+                            effect:setIcon(xi.effect.COPY_IMAGE_2)
+                        elseif (shadowsLeft == 3) then
+                            effect:setIcon(xi.effect.COPY_IMAGE_3)
+                        end
+                    end
+                end
+
+                dmg = 0
+            else
+                shadowsLeft = 0
+                dmg = dmg * ((shadowbehav - targShadows) / shadowbehav)
+            end
+        end
+
+        target:setMod(shadowType, shadowsLeft);
+
+        if (shadowsLeft <= 0) then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
             target:delStatusEffect(xi.effect.BLINK)
-            return dmg * ((shadowbehav-targShadows)/shadowbehav)
         end
     end
 
