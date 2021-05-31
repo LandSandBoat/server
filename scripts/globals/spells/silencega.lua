@@ -20,7 +20,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     end
 
     --Pull base stats.
-    local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
+    -- local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
 
     --Duration, including resistance.  May need more research.
     local duration = 120

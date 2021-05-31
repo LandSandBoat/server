@@ -13,13 +13,10 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.PLAGUE
-
     local duration = 60
-
-    local pINT = caster:getStat(xi.mod.INT)
-    local mINT = target:getStat(xi.mod.INT)
-
-    local dINT = (pINT - mINT)
+    -- local pINT = caster:getStat(xi.mod.INT)
+    -- local mINT = target:getStat(xi.mod.INT)
+    -- local dINT = (pINT - mINT)
 
     local params = {}
     params.diff = nil

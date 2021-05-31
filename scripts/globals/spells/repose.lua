@@ -12,7 +12,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
+    -- local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.MND

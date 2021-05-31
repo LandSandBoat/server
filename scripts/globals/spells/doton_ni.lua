@@ -18,18 +18,13 @@ spell_object.onSpellCast = function(caster, target, spell)
     local bonusMab = caster:getMerit(xi.merit.DOTON_EFFECT) -- T1 mag atk
 
     local params = {}
-
     params.dmg = 69
-
     params.multiplier = 1
-
     params.hasMultipleTargetReduction = false
-
     params.resistBonus = bonusAcc
-
     params.bonusmab = bonusMab
 
-    dmg = doNinjutsuNuke(caster, target, spell, params)
+    local dmg = doNinjutsuNuke(caster, target, spell, params)
     handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.WINDRES)
 
     return dmg

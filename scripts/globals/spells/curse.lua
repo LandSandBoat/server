@@ -14,12 +14,12 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
 
     -- Pull base stats.
-    dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    -- local dINT = (caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
-    power = 50
+    local power = 50
 
     -- Duration, including resistance.  Unconfirmed.
-    duration = 300
+    local duration = 300
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.INT

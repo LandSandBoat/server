@@ -16,10 +16,10 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     local duration = 180
 
-    local pINT = caster:getStat(xi.mod.INT)
-    local mINT = target:getStat(xi.mod.INT)
+    -- local pINT = caster:getStat(xi.mod.INT)
+    -- local mINT = target:getStat(xi.mod.INT)
 
-    local dINT = (pINT - mINT)
+    -- local dINT = (pINT - mINT)
     local power = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 10 + 1
     if power > 25 then
         power = 25

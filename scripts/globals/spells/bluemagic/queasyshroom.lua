@@ -15,6 +15,7 @@
 require("scripts/globals/bluemagic")
 require("scripts/globals/status")
 require("scripts/globals/magic")
+require("scripts/globals/magicburst")
 -----------------------------------
 local spell_object = {}
 
@@ -28,7 +29,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     params.tpmod = TPMOD_CRITICAL
     params.attackType = xi.attackType.RANGED
     params.damageType = xi.damageType.PIERCING
-    params.scattr = SC_DARK
+    params.scattr = SC_DARKNESS
     params.numhits = 1
     params.multiplier = 1.25
     params.tp150 = 1.25
