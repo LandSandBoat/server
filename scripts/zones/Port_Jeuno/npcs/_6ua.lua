@@ -26,7 +26,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 36) then
-        Z = player:getZPos()
+        local Z = player:getZPos()
 
         if (Z >= -61 and Z <= -58) then
             player:delGil(200)

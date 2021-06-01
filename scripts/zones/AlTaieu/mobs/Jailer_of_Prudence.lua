@@ -21,8 +21,8 @@ entity.onMobSpawn = function(mob)
                 id = xi.jsa.PERFECT_DODGE,
                 cooldown = 120, -- "Both can use Perfect Dodge multiple times, and will do so almost incessantly." (guessing a 2 minute cooldown)
                 hpp = 95,
-                endCode = function(mob)
-                    mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
+                endCode = function(mobArg)
+                    mobArg:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
                 end,
             },
         },

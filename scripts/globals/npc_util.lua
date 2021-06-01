@@ -155,8 +155,8 @@ end
 -- Picks a new position for an NPC and excluding the current position.
 -- INPUT: npc = npcID, position = 2D table with coords: index, {x, y, z}
 -- RETURN: table index
-function npcUtil.pickNewPosition(npc, positionTable, allowCurrentPosition)
-    local npc = GetNPCByID(npc)
+function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
+    local npc = GetNPCByID(npcID)
     local positionIndex = 1 -- Default to position one in the table if it can't be found.
     local tableSize = 0
     local newPosition = 0
@@ -209,15 +209,10 @@ end
 ******************************************************************************* --]]
 function npcUtil.giveItem(player, items, params)
     params = params or {}
-    if params.silent == nil or type(params.silent) ~= "boolean" then silent = false end
-    if params.fromTrade == nil or type(params.fromTrade) ~= "boolean" then fromTrade = false end
-
     local ID = zones[player:getZoneID()]
 
     -- create table of items, with key/val of itemId/itemQty
     local givenItems = {}
-    local itemId
-    local itemQty
     if type(items) == "number" then
         table.insert(givenItems, {items, 1})
     elseif type(items) == "table" then
@@ -551,24 +546,24 @@ function npcUtil.tradeHas(trade, items, exact)
     if type(items) == "number" then
         neededItems[items] = 1
     elseif type(items) == "table" then
-        local itemId
-        local itemQty
+        local itemIdNeeded
+        local itemQtyNeeded
         for _, v in pairs(items) do
             if type(v) == "number" then
-                itemId = v
-                itemQty = 1
+                itemIdNeeded = v
+                itemQtyNeeded = 1
             elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
-                itemId = v[1]
-                itemQty = v[2]
+                itemIdNeeded = v[1]
+                itemQtyNeeded = v[2]
             elseif type(v) == "table" and #v == 2 and type(v[1]) == "string" and type(v[2]) == "number" and string.lower(v[1]) == "gil" then
-                itemId = 65535
-                itemQty = v[2]
+                itemIdNeeded = 65535
+                itemQtyNeeded = v[2]
             else
                 print("ERROR: invalid value contained within items parameter given to npcUtil.tradeHas.")
-                itemId = nil
+                itemIdNeeded = nil
             end
-            if itemId ~= nil then
-                neededItems[itemId] = (neededItems[itemId] == nil) and itemQty or neededItems[itemId] + itemQty
+            if itemIdNeeded ~= nil then
+                neededItems[itemIdNeeded] = (neededItems[itemIdNeeded] == nil) and itemQtyNeeded or neededItems[itemIdNeeded] + itemQtyNeeded
             end
         end
     else
@@ -630,19 +625,19 @@ function npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     serverVar = serverVar or nil -- serverVar is optional
 
     if serverVar then
-        if GetServerVariable(serverVar) <= os.time(t) then
+        if GetServerVariable(serverVar) <= os.time() then
             npc:hideNPC(1) -- hide so the NPC is not "moving" through the zone
             npc:setPos(newPosition.x, newPosition.y, newPosition.z)
         end
     end
 
-    npc:timer(respawnTime * 1000, function(npc)
+    npc:timer(respawnTime * 1000, function(npcArg)
         npcUtil.UpdateNPCSpawnPoint(id, minTime, maxTime, posTable, serverVar)
     end)
 end
 
 function npcUtil.fishingAnimation(npc, phaseDuration, func)
-    func = func or function(npc)
+    func = func or function(npcArg)
         -- return true to not loop again
         return false
     end
@@ -650,7 +645,7 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
     if func(npc) then
         return
     end
-    npc:timer(phaseDuration * 1000, function(npc)
+    npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
             [xi.anim.FISHING_NPC] = { duration = 5, nextAnim = { xi.anim.FISHING_START } },
@@ -669,7 +664,7 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
             [xi.anim.FISHING_STOP] = { duration = 3, nextAnim = { xi.anim.FISHING_NPC } },
         }
 
-        local anim = anims[npc:getAnimation()]
+        local anim = anims[npcArg:getAnimation()]
         local nextAnimationId = xi.anim.FISHING_NPC
         local nextAnimationDuration = 10
         local nextAnim = nil
@@ -683,13 +678,13 @@ function npcUtil.fishingAnimation(npc, phaseDuration, func)
                 nextAnimationDuration = anims[nextAnimationId].duration
             end
         end
-        npc:setAnimation(nextAnimationId)
-        npcUtil.fishingAnimation(npc, nextAnimationDuration, func)
+        npcArg:setAnimation(nextAnimationId)
+        npcUtil.fishingAnimation(npcArg, nextAnimationDuration, func)
     end)
 end
 
 function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
-    func = func or function(npc)
+    func = func or function(npcArg)
         -- return true to not loop again
         return false
     end
@@ -697,16 +692,16 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     if func(npc) then
         return
     end
-    npc:timer(phaseDuration * 1000, function(npc)
+    npc:timer(phaseDuration * 1000, function(npcArg)
         local anims =
         {
             [xi.magic.spellGroup.BLACK] = { start = "cabk", duration = 2000, stop = "shbk" },
             [xi.magic.spellGroup.WHITE] = { start = "cawh", duration = 1800, stop = "shwh" },
         }
-        npc:entityAnimationPacket(anims[magicType].start)
-        npc:timer(anims[magicType].duration, function(npc)
-            npc:entityAnimationPacket(anims[magicType].stop)
+        npcArg:entityAnimationPacket(anims[magicType].start)
+        npcArg:timer(anims[magicType].duration, function(npcTimerArg)
+            npcTimerArg:entityAnimationPacket(anims[magicType].stop)
         end)
-        npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
+        npcUtil.castingAnimation(npcArg, magicType, phaseDuration, func)
     end)
 end

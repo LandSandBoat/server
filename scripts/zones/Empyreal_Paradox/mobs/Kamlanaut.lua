@@ -38,7 +38,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         -- ----------------------------------------------------------------------
         -- when using en-spell weapon skill, absorb damage of that element type
         -- ----------------------------------------------------------------------
-local entity = {}
 
         -- remove previous absorb mod, if set
         local previousAbsorb = mob:getLocalVar("currentAbsorb")
@@ -58,7 +57,6 @@ local entity = {}
         -- ----------------------------------------------------------------------
         -- when using Light Blade or Great Wheel, can do up to three WS in a row
         -- ----------------------------------------------------------------------
-local entity = {}
 
         local wsCount = mob:getLocalVar("wsCount")
         local wsMax = mob:getLocalVar("wsMax")

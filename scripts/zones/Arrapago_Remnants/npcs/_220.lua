@@ -3,15 +3,15 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onTrigger = function(entity, npc)
-    entity:startEvent(300)
+entity.onTrigger = function(player, npc)
+    player:startEvent(300)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(entity, eventid, result, door)
-    if (eventid == 300 and result == 1) then
+entity.onEventFinish = function(player, csid, option, door)
+    if (csid == 300 and option == 1) then
         door:setAnimation(8)
         local instance = door:getInstance()
         -- spawn mobs, etc

@@ -16,17 +16,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rank = xi.besieged.getMercenaryRank(player)
-    local haveimperialIDtag
-    local assaultPoints = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
-
+    -- local rank = xi.besieged.getMercenaryRank(player)
+    -- local haveimperialIDtag
+    -- local assaultPoints = player:getAssaultPoint(LEBROS_ASSAULT_POINT)
+--[[
     if (player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)) then
         haveimperialIDtag = 1
     else
         haveimperialIDtag = 0
     end
 
---[[    if (rank > 0) then
+    if (rank > 0) then
         player:startEvent(275, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else]]
         player:startEvent(281) -- no rank

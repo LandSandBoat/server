@@ -173,7 +173,6 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     local beginnings = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.BEGINNINGS)
-    local omens = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OMENS)
     local omensProgress = player:getCharVar("OmensProgress")
     local transformationsProgress = player:getCharVar("TransformationsProgress")
 
@@ -234,7 +233,7 @@ entity.onEventFinish = function(player, csid, option)
         end
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
-    elseif csid == 723 and option == 1 and TransformationsProgress == 2 and player:getGil() >= 1000 then
+    elseif csid == 723 and option == 1 and transformationsProgress == 2 and player:getGil() >= 1000 then
         player:delGil(1000)
         player:messageSpecial(ID.text.PAY_DIVINATION) -- You pay 1000 gil for the divination.
     end

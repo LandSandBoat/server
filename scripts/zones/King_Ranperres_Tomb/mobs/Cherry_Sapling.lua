@@ -10,8 +10,8 @@ local entity = {}
 entity.onMobDeath = function(mob, player, isKiller)
     local allSaplingsDead = true
     for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 12 do
-        local mob = GetMobByID(i)
-        if mob ~= nil and mob:getName() == 'Cherry_Sapling' and mob:isAlive() then
+        local mobObj = GetMobByID(i)
+        if mobObj ~= nil and mobObj:getName() == 'Cherry_Sapling' and mobObj:isAlive() then
             allSaplingsDead = false
             break
         end

@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 259 and option == 1) then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
     elseif (csid == 267) then
-        rand = math.random(3) --Setup random variable to determine which 2 items are returned upon quest completion
+        local rand = math.random(3) --Setup random variable to determine which 2 items are returned upon quest completion
         if (rand == 1) then
             if (player:getFreeSlotsCount() == 1) then
                 player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17061)
