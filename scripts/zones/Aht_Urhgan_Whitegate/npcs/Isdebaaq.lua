@@ -16,17 +16,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local rank = xi.besieged.getMercenaryRank(player)
-    local haveimperialIDtag
-    local assaultPoints = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
-
+    -- local rank = xi.besieged.getMercenaryRank(player)
+    -- local haveimperialIDtag
+    -- local assaultPoints = player:getAssaultPoint(MAMOOL_ASSAULT_POINT)
+    --[[
     if (player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG)) then
         haveimperialIDtag = 1
     else
         haveimperialIDtag = 0
     end
 
---[[    if (rank > 0) then
+    if (rank > 0) then
         player:startEvent(274, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
     else]]
         player:startEvent(280) -- no rank
@@ -48,8 +48,6 @@ entity.onEventFinish = function(player, csid, option)
         elseif (selectiontype == 2) then
             -- purchased an item
             local item = bit.rshift(option, 14)
-            local itemID = 0
-            local price = 0
             local items =
             {
                 [1]  = {itemid = 15971, price = 3000},
