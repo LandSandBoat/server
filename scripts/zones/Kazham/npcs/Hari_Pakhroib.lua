@@ -48,6 +48,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
         player:setCharVar("PamamaVar", 0)
     elseif (csid == 71) then
+        local Pamamas = player:getCharVar("PamamaVar")
         if (Pamamas == 1) then --First completion of quest; set title, complete quest, and give higher fame
             player:addGil(GIL_RATE*5000)
             player:messageSpecial(ID.text.GIL_OBTAINED, 5000)

@@ -34,7 +34,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 104 and option == 1 then
-        target:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
+        player:delStatusEffectsByFlag(xi.effectFlag.SYNTH_SUPPORT, true)
         player:addStatusEffect(xi.effect.SMITHING_IMAGERY, 1, 0, 120)
         player:messageSpecial(ID.text.SMITHING_SUPPORT, 0, 2, 1)
     end

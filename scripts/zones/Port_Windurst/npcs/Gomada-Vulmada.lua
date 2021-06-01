@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
     elseif KnowOnesOnions == QUEST_COMPLETED then
         player:startEvent(405)
     elseif KnowOnesOnions == QUEST_ACCEPTED then
-        KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
+        local KnowOnesOnionsVar  = player:getCharVar("KnowOnesOnions")
 
         if KnowOnesOnionsVar == 2 then
             player:startEvent(404)

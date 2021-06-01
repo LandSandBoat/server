@@ -34,7 +34,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMagicHit = function(caster, target, spell)
-    local REGEN = target:getMod(xi.mod.REGEN)
+    -- local REGEN = target:getMod(xi.mod.REGEN)
     local DAY = VanadielDayOfTheWeek()
     local ELEM = spell:getElement()
     if (GetServerVariable("AV_Regen_Reduction") < 60) then

@@ -74,6 +74,7 @@ zone_object.onRegionEnter = function(player, region)
         end,
         [3] = function (x) -- TOAU Missions
             if (toauMission == xi.mission.id.toau.A_MERCENARY_LIFE and not needToZone) then
+                local prevZone = player:getPreviousZone()
                 if (prevZone ~= xi.zone.AHT_URHGAN_WHITEGATE) then
                     player:startEvent(3050, 3, 3, 3, 3, 3, 3, 3, 3, 0)
                 end
