@@ -134,7 +134,7 @@ entity.onMobFight = function(mob, target)
             local newPet = pets[(astral - 1) % 2][i]
             if i == 1 then
                 newPet:updateEnmity(target)
-                astralRand = math.random(1, 8)
+                local astralRand = math.random(1, 8)
                 handlePet(mob, newPet, oldPet, target, avatarSkins[astralRand])
                 newPet:useMobAbility(avatarAbilities[astralRand])
             else
@@ -147,6 +147,7 @@ entity.onMobFight = function(mob, target)
 
     -- Or, at least make sure pets weren't drug off...
     else
+        --[[ Unused
         for i = 1, 8 do
             local pet = nil
             if phase == 21 then
@@ -155,6 +156,7 @@ entity.onMobFight = function(mob, target)
                 pet = pets[phase % 2][i]
             end
         end
+        ]]--
     end
 
     -- Check for time limit, too

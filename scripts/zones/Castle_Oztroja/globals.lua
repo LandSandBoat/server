@@ -56,7 +56,7 @@ local CASTLE_OZTROJA = {
             npc:setAnimation(xi.anim.CLOSE_DOOR)
         end
 
-        npc:timer(1500, function(npc)
+        npc:timer(1500, function(npcArg)
             local comboFound = true
             for i = 0, 3 do
                 local realLever = GetNPCByID(ID.npc.HANDLE_DOOR_FLOOR_2 + 2 + i)

@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
     if (MineSweep == 0) then
         player:startEvent(108)
     else
-        rand = math.random(1, 2)
+        local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(22)
         else
