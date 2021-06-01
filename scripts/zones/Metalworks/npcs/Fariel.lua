@@ -12,7 +12,7 @@ local path =
     54.220, -14.000, -8.204,    -- TODO: wait at location for 10 seconds
     53.541, -14.000, 6.536,     -- TODO: wait at location for 10 seconds
     41.340, -14.000, 7.727,     -- TODO: wait at location for 10 seconds
-    41.338, -14.000, -9662      -- TODO: wait at location for 10 seconds
+    41.338, -14.000, -9.662      -- TODO: wait at location for 10 seconds
 }
 
 entity.onSpawn = function(npc)
