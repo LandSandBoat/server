@@ -32,7 +32,7 @@ entity.onEventFinish = function(player,csid,option)
     if csid == 4 then
         npcUtil.popFromQM(player, GetNPCByID(ID.npc.NEPIONIC_QM), ID.mob.NEPIONIC_SOULFLAYER, {hide = 1})
     elseif csid == 5 then
-        npcUtil.completeQuest(player, AHT_URHGAN, TRANSFORMATIONS, {
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, {
             item = 15265,
             title = xi.title.PARAGON_OF_BLUE_MAGE_EXCELLENCE,
             var = {"TransformationsProgress"}

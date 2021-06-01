@@ -171,8 +171,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    local transformationsProgress = player:getCharVar("TransformationsProgress")
-
     if csid == 1 then
         player:addKeyItem(xi.ki.ASTRAL_COMPASS)
         player:completeMission(xi.mission.log_id.TOAU, xi.mission.id.toau.UNDERSEA_SCOUTING)
