@@ -13,9 +13,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local chasingStatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHASING_TALES)
-
     if (player:getCharVar("CHASING_TALES_TRACK_BOOK") == 1 and player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) == false) then
         player:startEvent(611) -- Neeed CS here
     elseif (player:hasKeyItem(xi.ki.A_SONG_OF_LOVE) == true) then
