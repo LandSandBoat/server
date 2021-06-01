@@ -43,18 +43,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
 
+    spell:setMsg(xi.msg.basic.MAGIC_DMG) -- hit for initial damage
+
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
 
-    -- Do it!
-    target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
-    spell:setMsg(xi.msg.basic.MAGIC_DMG)
-
-    -- Try to kill same tier Bio (non-default behavior)
-    if BIO_OVERWRITE == 1 and bio ~= nil then
-        if bio:getPower() == 1 then
+    if  bio == nil then -- if no bio, add dia dot
+        target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
+    elseif  bio:getSubPower() == 10 and BIO_OVERWRITE == 1 then -- Try to kill same tier Bio (non-default behavior)
             target:delStatusEffect(xi.effect.BIO)
-        end
+            target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
     end
 
     return final
