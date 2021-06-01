@@ -26,7 +26,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(entity, eventid, result, door)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity
