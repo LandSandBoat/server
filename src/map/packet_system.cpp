@@ -1174,6 +1174,9 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
  *                                                                       *
  ************************************************************************/
 
+// NOTE: Items related to synthesis in this function were added to prevent duping shenanigans.
+// It should be replaced by something more robust or more stateful as soon as is reasonable.
+
 void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
@@ -1200,6 +1203,14 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             // 316 = "That action cannot be used in this area."
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
+            return;
+        }
+
+        // If either player is crafting, don't allow the trade request
+        if (PChar->animation == ANIMATION_SYNTH || PTarget->animation == ANIMATION_SYNTH)
+        {
+            ShowDebug(CL_CYAN "%s trade request with %s was blocked.\n" CL_RESET, PChar->GetName(), PTarget->GetName());
+            PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
         }
 
@@ -1241,6 +1252,9 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
  *                                                                       *
  ************************************************************************/
 
+// NOTE: Items related to synthesis in this function were added to prevent duping shenanigans.
+// It should be replaced by something more robust or more stateful as soon as is reasonable.
+
 void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
@@ -1263,9 +1277,11 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             PChar->UContainer->SetType(UCONTAINER_TRADE);
                             PChar->pushPacket(new CTradeActionPacket(PTarget, action));
+                            PChar->SetLocalVar("ActiveTrade", 1);
 
                             PTarget->UContainer->SetType(UCONTAINER_TRADE);
                             PTarget->pushPacket(new CTradeActionPacket(PChar, action));
+                            PTarget->SetLocalVar("ActiveTrade", 1);
                             return;
                         }
                     }
@@ -1279,6 +1295,9 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
             case 0x01: // trade cancelled
             {
                 ShowDebug(CL_CYAN "%s cancelled trade with %s\n" CL_RESET, PTarget->GetName(), PChar->GetName());
+                // removing localvar to allow synthesis
+                PChar->SetLocalVar("ActiveTrade", 0);
+                PTarget->SetLocalVar("ActiveTrade", 0);
                 if (PChar->TradePending.id == PTarget->id && PTarget->TradePending.id == PChar->id)
                 {
                     if (PTarget->UContainer->GetType() == UCONTAINER_TRADE)
@@ -1300,6 +1319,9 @@ void SmallPacket0x033(map_session_data_t* const PSession, CCharEntity* const PCh
             case 0x02: // trade accepted
             {
                 ShowDebug(CL_CYAN "%s accepted trade with %s\n" CL_RESET, PTarget->GetName(), PChar->GetName());
+                // removing localvar to allow synthesis
+                PChar->SetLocalVar("ActiveTrade", 0);
+                PTarget->SetLocalVar("ActiveTrade", 0);
                 if (PChar->TradePending.id == PTarget->id && PTarget->TradePending.id == PChar->id)
                 {
                     PChar->UContainer->SetLock();
@@ -4120,6 +4142,38 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
     }
+
+    // NOTE: This section is intended to be temporary to ensure that duping shenanigans aren't possible.
+    // It should be replaced by something more robust or more stateful as soon as is reasonable
+    CCharEntity* PTarget = (CCharEntity*)PChar->GetEntity(PChar->TradePending.targid, TYPE_PC);
+
+    if (PTarget != nullptr && PChar->TradePending.id == PTarget->id)
+    {
+        // Clear pending trades on synthesis start
+        PChar->TradePending.clean();
+        PTarget->TradePending.clean();
+    }
+
+    if (PChar->GetLocalVar("ActiveTrade") > 0)
+    {
+        // if player has active trade, deny synthesis, clear trade windows and localvar
+        ShowDebug(CL_CYAN "%s trade request with %s was canceled because %s tried to craft.\n" CL_RESET,
+                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+        if (PTarget != nullptr && PTarget->GetLocalVar("ActiveTrade") > 0)
+        {
+            PTarget->TradePending.clean();
+            PTarget->UContainer->Clean();
+            PTarget->pushPacket(new CTradeActionPacket(PChar, 0x01));
+            PTarget->SetLocalVar("ActiveTrade", 0);
+        }
+        PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
+        PChar->TradePending.clean();
+        PChar->UContainer->Clean();
+        PChar->pushPacket(new CTradeActionPacket(PTarget, 0x01));
+        PChar->SetLocalVar("ActiveTrade", 0);
+        return;
+    }
+    // End temporary additions
 
     if (PChar->m_LastSynthTime + 10s > server_clock::now())
     {
