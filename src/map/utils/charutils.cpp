@@ -5811,4 +5811,92 @@ namespace charutils
         auto* timerPacket = new CTimerBarUtilPacket();
         PChar->pushPacket(timerPacket);
     }
+
+    void ReadHistory(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        auto fmtQuery = "SELECT "
+                        "enemies_defeated, "  // 0
+                        "times_knocked_out, " // 1
+                        "mh_entrances, "      // 2
+                        "joined_parties, "    // 3
+                        "joined_alliances, "  // 4
+                        "spells_cast, "       // 5
+                        "abilities_used, "    // 6
+                        "ws_used, "           // 7
+                        "items_used, "        // 8
+                        "chats_sent, "        // 9
+                        "npc_interactions, "  // 10
+                        "battles_fought, "    // 11
+                        "gm_calls "           // 12
+                        "FROM char_history "
+                        "WHERE charid = %u;";
+
+        auto ret = Sql_Query(SqlHandle, fmtQuery, PChar->id);
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            PChar->m_charHistory.enemiesDefeated = Sql_GetUIntData(SqlHandle, 0);
+            PChar->m_charHistory.timesKnockedOut = Sql_GetUIntData(SqlHandle, 1);
+            PChar->m_charHistory.mhEntrances     = Sql_GetUIntData(SqlHandle, 2);
+            PChar->m_charHistory.joinedParties   = Sql_GetUIntData(SqlHandle, 3);
+            PChar->m_charHistory.joinedAlliances = Sql_GetUIntData(SqlHandle, 4);
+            PChar->m_charHistory.spellsCast      = Sql_GetUIntData(SqlHandle, 5);
+            PChar->m_charHistory.abilitiesUsed   = Sql_GetUIntData(SqlHandle, 6);
+            PChar->m_charHistory.wsUsed          = Sql_GetUIntData(SqlHandle, 7);
+            PChar->m_charHistory.itemsUsed       = Sql_GetUIntData(SqlHandle, 8);
+            PChar->m_charHistory.chatsSent       = Sql_GetUIntData(SqlHandle, 9);
+            PChar->m_charHistory.npcInteractions = Sql_GetUIntData(SqlHandle, 10);
+            PChar->m_charHistory.battlesFought   = Sql_GetUIntData(SqlHandle, 11);
+            PChar->m_charHistory.gmCalls         = Sql_GetUIntData(SqlHandle, 12);
+        }
+    }
+
+    void WriteHistory(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        auto fmtQuery = "UPDATE char_history SET "
+                        "enemies_defeated = %u, "  // 0
+                        "times_knocked_out = %u, " // 1
+                        "mh_entrances = %u, "      // 2
+                        "joined_parties = %u, "    // 3
+                        "joined_alliances = %u, "  // 4
+                        "spells_cast = %u, "       // 5
+                        "abilities_used = %u, "    // 6
+                        "ws_used = %u, "           // 7
+                        "items_used = %u, "        // 8
+                        "chats_sent = %u, "        // 9
+                        "npc_interactions = %u, "  // 10
+                        "battles_fought = %u, "    // 11
+                        "gm_calls = %u "           // 12
+                        "WHERE charid = %u;";
+
+        auto ret = Sql_Query(SqlHandle, fmtQuery,
+                        PChar->m_charHistory.enemiesDefeated,
+                        PChar->m_charHistory.timesKnockedOut,
+                        PChar->m_charHistory.mhEntrances,
+                        PChar->m_charHistory.joinedParties,
+                        PChar->m_charHistory.joinedAlliances,
+                        PChar->m_charHistory.spellsCast,
+                        PChar->m_charHistory.abilitiesUsed,
+                        PChar->m_charHistory.wsUsed,
+                        PChar->m_charHistory.itemsUsed,
+                        PChar->m_charHistory.chatsSent,
+                        PChar->m_charHistory.npcInteractions,
+                        PChar->m_charHistory.battlesFought,
+                        PChar->m_charHistory.gmCalls,
+                        PChar->id);
+
+        if (ret == SQL_ERROR)
+        {
+            ShowError("Error writing char history for: '%s'\n", PChar->name.c_str());
+        }
+    }
 }; // namespace charutils

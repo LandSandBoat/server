@@ -320,6 +320,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->m_moghouseID != 0)
     {
+        PChar->m_charHistory.mhEntrances++;
         gardenutils::UpdateGardening(PChar, false);
     }
 
@@ -685,6 +686,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
                 PNpc->PAI->Trigger(PChar);
+                PChar->m_charHistory.npcInteractions++;
             }
 
             // Releasing a trust
@@ -4558,6 +4560,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 break;
             }
+            PChar->m_charHistory.chatsSent++;
         }
     }
 }
@@ -4941,6 +4944,7 @@ void SmallPacket0x0D2(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0D3(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
+    PChar->m_charHistory.gmCalls++;
 }
 
 /************************************************************************

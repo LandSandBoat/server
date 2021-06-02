@@ -158,6 +158,11 @@ bool CItemState::Update(time_point tick)
     }
     else if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_animationTime)
     {
+        if (m_PEntity->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            PChar->m_charHistory.itemsUsed++;
+        }
         m_PEntity->PAI->EventHandler.triggerListener("ITEM_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaItem(m_PItem));
         return true;
     }

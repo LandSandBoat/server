@@ -146,6 +146,40 @@ struct GearSetMod_t
     uint16 modValue;
 };
 
+enum CHAR_HISTORY
+{
+    ENEMIES_DEFEATED = 0,
+    TIMES_KNOCKED_OUT,
+    MH_ENTRANCES,
+    JOINED_PARTIES,
+    JOINED_ALLIANCES,
+    SPELLS_CAST,
+    ABILITIES_USED,
+    WS_USED,
+    ITEMS_USED,
+    CHATS_SENT,
+    NPC_INTERACTIONS,
+    BATTLES_FOUGHT,
+    GM_CALLS,
+};
+
+struct CharHistory_t
+{
+    uint32 enemiesDefeated;
+    uint32 timesKnockedOut;
+    uint32 mhEntrances;
+    uint32 joinedParties;
+    uint32 joinedAlliances;
+    uint32 spellsCast;
+    uint32 abilitiesUsed;
+    uint32 wsUsed;
+    uint32 itemsUsed;
+    uint32 chatsSent;
+    uint32 npcInteractions;
+    uint32 battlesFought;
+    uint32 gmCalls;
+};
+
 enum CHAR_SUBSTATE
 {
     SUBSTATE_NONE = 0,
@@ -342,6 +376,8 @@ public:
     bool   m_jobMasterDisplay; // Job Master Stars display
     uint32 m_moghouseID;
     uint16 m_moghancementID;
+
+    CharHistory_t m_charHistory;
 
     int8 getShieldSize();
 

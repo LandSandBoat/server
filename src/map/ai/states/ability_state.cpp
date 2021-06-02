@@ -116,6 +116,11 @@ bool CAbilityState::Update(time_point tick)
 
     if (IsCompleted() && tick > GetEntryTime() + m_castTime + m_PAbility->getAnimationTime())
     {
+        if (m_PEntity->objtype == TYPE_PC)
+        {
+            CCharEntity* PChar = static_cast<CCharEntity*>(m_PEntity);
+            PChar->m_charHistory.abilitiesUsed++;
+        }
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_STATE_EXIT", CLuaBaseEntity(m_PEntity), CLuaAbility(m_PAbility.get()));
         return true;
     }
