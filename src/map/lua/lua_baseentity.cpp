@@ -12858,6 +12858,9 @@ uint32 CLuaBaseEntity::getHistory(uint8 index)
         case GM_CALLS:
             outStat = PChar->m_charHistory.gmCalls;
             break;
+        case STEPS_TAKEN:
+            outStat = PChar->m_charHistory.stepsTaken;
+            break;
         default:
             break;
         }

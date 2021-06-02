@@ -161,6 +161,7 @@ enum CHAR_HISTORY
     NPC_INTERACTIONS,
     BATTLES_FOUGHT,
     GM_CALLS,
+    STEPS_TAKEN,
 };
 
 struct CharHistory_t
@@ -178,6 +179,7 @@ struct CharHistory_t
     uint32 npcInteractions = 0;
     uint32 battlesFought   = 0;
     uint32 gmCalls         = 0;
+    uint32 stepsTaken      = 0;
 };
 
 enum CHAR_SUBSTATE
@@ -363,6 +365,8 @@ public:
     uint8      m_hasRaise;       // checks if player has raise already
     uint8      m_hasAutoTarget;  // возможность использования AutoTarget функции
     position_t m_StartActionPos; // позиция начала действия (использование предмета, начало стрельбы, позиция tractor)
+
+    location_t m_previousLocation;
 
     uint32 m_PlayTime;
     uint32 m_SaveTime;

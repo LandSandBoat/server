@@ -2894,4 +2894,5 @@ xi.history =
     NPC_INTERACTIONS  = 10,
     BATTLES_FOUGHT    = 11,
     GM_CALLS          = 12,
+    STEPS_TAKEN       = 13,
 }

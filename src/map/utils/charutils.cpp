@@ -5832,7 +5832,8 @@ namespace charutils
                         "chats_sent, "        // 9
                         "npc_interactions, "  // 10
                         "battles_fought, "    // 11
-                        "gm_calls "           // 12
+                        "gm_calls, "          // 12
+                        "steps_taken "        // 13
                         "FROM char_history "
                         "WHERE charid = %u;";
 
@@ -5852,6 +5853,7 @@ namespace charutils
             PChar->m_charHistory.npcInteractions = Sql_GetUIntData(SqlHandle, 10);
             PChar->m_charHistory.battlesFought   = Sql_GetUIntData(SqlHandle, 11);
             PChar->m_charHistory.gmCalls         = Sql_GetUIntData(SqlHandle, 12);
+            PChar->m_charHistory.stepsTaken      = Sql_GetUIntData(SqlHandle, 13);
         }
     }
 
@@ -5865,7 +5867,7 @@ namespace charutils
         // Replace will also handle insert if it doesn't exist
         auto fmtQuery = "REPLACE INTO char_history "
                         "(charid, enemies_defeated, times_knocked_out, mh_entrances, joined_parties, joined_alliances, spells_cast, "
-                        "abilities_used, ws_used, items_used, chats_sent, npc_interactions, battles_fought, gm_calls) "
+                        "abilities_used, ws_used, items_used, chats_sent, npc_interactions, battles_fought, gm_calls, steps_taken) "
                         "VALUES("
                         "%u, " // charid
                         "%u, " // 0 enemies_defeated
@@ -5880,7 +5882,8 @@ namespace charutils
                         "%u, " // 9 chats_sent
                         "%u, " // 10 npc_interactions
                         "%u, " // 11 battles_fought
-                        "%u"   // 12 gm_calls
+                        "%u, " // 12 gm_calls
+                        "%u"   // 13 steps_taken
                         ");";
 
         auto ret = Sql_Query(SqlHandle, fmtQuery,
@@ -5897,7 +5900,8 @@ namespace charutils
                         PChar->m_charHistory.chatsSent,
                         PChar->m_charHistory.npcInteractions,
                         PChar->m_charHistory.battlesFought,
-                        PChar->m_charHistory.gmCalls);
+                        PChar->m_charHistory.gmCalls,
+                        PChar->m_charHistory.stepsTaken);
 
         if (ret == SQL_ERROR)
         {

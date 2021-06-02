@@ -560,6 +560,9 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
 
         bool isUpdate = moved || PChar->updatemask & UPDATE_POS;
 
+        // Cache previous location
+        PChar->m_previousLocation = PChar->loc;
+
         if (!PChar->isCharmed)
         {
             PChar->loc.p.x = data.ref<float>(0x04);
@@ -575,6 +578,19 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         if (moved)
         {
             PChar->updatemask |= UPDATE_POS;
+
+            // Calculate rough amount of steps taken
+            if (PChar->m_previousLocation.zone->GetID() == PChar->loc.zone->GetID())
+            {
+                auto dist = distance(PChar->m_previousLocation.p, PChar->loc.p);
+
+                // TODO: Make global constant
+                auto STEPS_PER_YALM = 1.2f;
+                auto stepsTaken = static_cast<uint32>(dist / STEPS_PER_YALM);
+                ShowInfo("%d\n", stepsTaken);
+
+                PChar->m_charHistory.stepsTaken += stepsTaken;
+            }
         }
 
         if (isUpdate)
