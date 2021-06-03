@@ -161,25 +161,25 @@ enum CHAR_HISTORY
     NPC_INTERACTIONS,
     BATTLES_FOUGHT,
     GM_CALLS,
-    STEPS_TAKEN,
+    DISTANCE_TRAVELLED,
 };
 
 struct CharHistory_t
 {
-    uint32 enemiesDefeated = 0;
-    uint32 timesKnockedOut = 0;
-    uint32 mhEntrances     = 0;
-    uint32 joinedParties   = 0;
-    uint32 joinedAlliances = 0;
-    uint32 spellsCast      = 0;
-    uint32 abilitiesUsed   = 0;
-    uint32 wsUsed          = 0;
-    uint32 itemsUsed       = 0;
-    uint32 chatsSent       = 0;
-    uint32 npcInteractions = 0;
-    uint32 battlesFought   = 0;
-    uint32 gmCalls         = 0;
-    uint32 stepsTaken      = 0;
+    uint32 enemiesDefeated   = 0;
+    uint32 timesKnockedOut   = 0;
+    uint32 mhEntrances       = 0;
+    uint32 joinedParties     = 0;
+    uint32 joinedAlliances   = 0;
+    uint32 spellsCast        = 0;
+    uint32 abilitiesUsed     = 0;
+    uint32 wsUsed            = 0;
+    uint32 itemsUsed         = 0;
+    uint32 chatsSent         = 0;
+    uint32 npcInteractions   = 0;
+    uint32 battlesFought     = 0;
+    uint32 gmCalls           = 0;
+    uint32 distanceTravelled = 0;
 };
 
 enum CHAR_SUBSTATE

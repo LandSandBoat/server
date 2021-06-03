@@ -582,14 +582,8 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
             // Calculate rough amount of steps taken
             if (PChar->m_previousLocation.zone->GetID() == PChar->loc.zone->GetID())
             {
-                auto dist = distance(PChar->m_previousLocation.p, PChar->loc.p);
-
-                // TODO: Make global constant
-                auto STEPS_PER_YALM = 1.2f;
-                auto stepsTaken = static_cast<uint32>(dist / STEPS_PER_YALM);
-                ShowInfo("%d\n", stepsTaken);
-
-                PChar->m_charHistory.stepsTaken += stepsTaken;
+                float distanceTravelled = distance(PChar->m_previousLocation.p, PChar->loc.p);
+                PChar->m_charHistory.distanceTravelled += static_cast<uint32>(distanceTravelled);
             }
         }
 

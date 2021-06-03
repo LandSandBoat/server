@@ -18,6 +18,6 @@ CREATE TABLE `char_history` (
   `npc_interactions` int(10) unsigned NOT NULL DEFAULT '0',
   `battles_fought` int(10) unsigned NOT NULL DEFAULT '0',
   `gm_calls` int(10) unsigned NOT NULL DEFAULT '0',
-  `steps_taken` int(10) unsigned NOT NULL DEFAULT '0',
+  `distance_travelled` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
