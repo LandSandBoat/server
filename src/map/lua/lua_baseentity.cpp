@@ -2819,8 +2819,10 @@ void CLuaBaseEntity::resetPlayer(const char* charName)
     uint32 id = 0;
 
     // char will not be logged in so get the id manually
+    char escapedCharName[16 * 2 + 1];
+    Sql_EscapeString(SqlHandle, escapedCharName, charName);
     const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
-    int32       ret   = Sql_Query(SqlHandle, Query, charName);
+    int32 ret = Sql_Query(SqlHandle, Query, escapedCharName);
 
     if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
     {
