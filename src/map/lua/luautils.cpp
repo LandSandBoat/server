@@ -537,7 +537,9 @@ namespace luautils
         }
 
         // Handle Quests and Missions then return
-        if (parts.size() == 3 && (parts[0] == "quests" || parts[0] == "missions"))
+        if (parts.size() == 3 &&
+            (parts[0] == "quests" || parts[0] == "missions") &&
+            parts[2] != "helper" && parts[2] != "helpers")
         {
             std::string requireName = fmt::format("scripts/{}/{}/{}", parts[0], parts[1], parts[2]);
 

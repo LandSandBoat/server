@@ -7,6 +7,7 @@
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
+local amkHelper = require("scripts/missions/amk/helpers")
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.AMK, xi.mission.id.amk.AN_ERRAND_THE_PROFESSORS_PRICE)
@@ -28,24 +29,7 @@ mission.sections =
             ['Inconspicuous_Door'] =
             {
                 onTrigger = function(player, npc)
-                    -- Randomly select zone for digging
-                    -- 1 = Valkurm Dunes
-                    -- 2 = Jugner Forest
-                    -- 3 = Knoschtat Highlands
-                    -- 4 = Pashhow Marshlands
-                    -- 5 = Tahrongi Canyon
-                    -- 6 = Buburimu Peninsula
-                    -- 7 = Meriphataud Mountains
-                    -- 8 = The Sanctuary of Zi'tah
-                    -- 9 = Yuhtunga Jungle
-                    -- 10 = Yhoator_Jungle
-                    -- 11 = Western Altepa Desert
-                    -- 12 = Eastern Altepa Desert
-                    local diggingZone = player:getCharVar("AMK6_DIGGING_ZONE")
-                    if diggingZone == 0 then
-                        diggingZone = math.random(1, 12)
-                        player:setCharVar("AMK6_DIGGING_ZONE", diggingZone)
-                    end
+                    local diggingZone = amkHelper.getDiggingZone(player)
                     return mission:progressEvent(10182, diggingZone)
                 end,
             },

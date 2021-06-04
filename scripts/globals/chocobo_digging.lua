@@ -8,6 +8,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
+require("scripts/missions/amk/helpers")
 -----------------------------------
 
 xi = xi or {}
@@ -961,6 +962,11 @@ xi.chocoboDig.start = function(player, precheck)
         -- 45-60% moon phase results in a much lower dig chance than the rest of the phases
         if moon >= 45 and moon <= 60 then
             roll = roll * .5
+        end
+
+        -- AMK07
+        if ENABLE_AMK == 1 and xi.amk.chocoboDig(zoneId, text) then
+            return
         end
 
         -- dig chance failure
