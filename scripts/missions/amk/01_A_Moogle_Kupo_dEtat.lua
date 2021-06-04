@@ -1,7 +1,6 @@
 -----------------------------------
 -- A Moogle Kupo d'Etat
 -- A Moogle Kupo d'Etat M1
------------------------------------
 -- !addmission 10 0
 -----------------------------------
 require('scripts/globals/missions')

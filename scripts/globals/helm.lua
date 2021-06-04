@@ -1438,8 +1438,9 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid)
             npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
         end
 
-        local amkChance = 20
+        local amkChance = 5
         if
+            ENABLE_AMK == 1 and
             player:getCurrentMission(AMK) == xi.mission.id.amk.WELCOME_TO_MY_DECREPIT_DOMICILE and
             broke ~= 1
         then

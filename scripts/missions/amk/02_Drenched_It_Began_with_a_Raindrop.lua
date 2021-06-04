@@ -1,7 +1,6 @@
 -----------------------------------
 -- Drenched! It Began with a Raindrop
 -- A Moogle Kupo d'Etat M2
------------------------------------
 -- !addmission 10 1
 -----------------------------------
 require("scripts/globals/items")
