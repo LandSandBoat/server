@@ -14,8 +14,8 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if (target:hasStatusEffect(xi.effect.FISHING_IMAGERY) == true) then
-        result = 242
+    if target:hasStatusEffect(xi.effect.FISHING_IMAGERY) == true then
+        result = 235
     end
     return result
 end
