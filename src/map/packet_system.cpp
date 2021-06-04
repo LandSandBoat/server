@@ -3037,23 +3037,10 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    const auto TargetID    = data.ref<uint32>(0x04);
-    const auto TargetIndex = data.ref<uint16>(0x08);
-    const auto EmoteID     = data.ref<Emote>(0x0A);
-    const auto emoteMode   = data.ref<EmoteMode>(0x0B);
-
-    // Rate limit emotes
-    auto lastEmoteTime  = PChar->GetLocalVar("LastEmoteTime");
-    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
-    {
-        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
-    }
-    else
-    {
-        ShowWarning(CL_YELLOW "SmallPacket0x05D: Rate limiting emote packet for %s\n" CL_RESET, PChar->GetName());
-        return;
-    }
+    auto const& TargetID    = data.ref<uint32>(0x04);
+    auto const& TargetIndex = data.ref<uint16>(0x08);
+    auto const& EmoteID     = data.ref<Emote>(0x0A);
+    auto const& emoteMode   = data.ref<EmoteMode>(0x0B);
 
     // Invalid Emote ID.
     if (EmoteID < Emote::POINT || EmoteID > Emote::AIM)
@@ -6859,19 +6846,6 @@ void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PCh
 ************************************************************************/
 void SmallPacket0x11B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    // Rate limit Job Master Display
-    auto lastJobMasterDisplayChange  = PChar->GetLocalVar("LastJobMasterDisplayTime");
-    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastJobMasterDisplayChange == 0 || (timeNowSeconds.time_since_epoch().count() - lastJobMasterDisplayChange) > 2)
-    {
-        PChar->SetLocalVar("LastJobMasterDisplayTime", (uint32)timeNowSeconds.time_since_epoch().count());
-    }
-    else
-    {
-        ShowWarning(CL_YELLOW "SmallPacket0x11B: Rate limiting Job Master Display Change packet for %s\n" CL_RESET, PChar->GetName());
-        return;
-    }
-
     PChar->m_jobMasterDisplay = data.ref<uint8>(0x04) > 0;
 
     charutils::SaveJobMasterDisplay(PChar);
@@ -6893,22 +6867,9 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    // Rate limit emotes
-    auto lastEmoteTime  = PChar->GetLocalVar("LastEmoteTime");
-    auto timeNowSeconds = std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now());
-    if (lastEmoteTime == 0 || (timeNowSeconds.time_since_epoch().count() - lastEmoteTime) > 2)
-    {
-        PChar->SetLocalVar("LastEmoteTime", (uint32)timeNowSeconds.time_since_epoch().count());
-    }
-    else
-    {
-        ShowWarning(CL_YELLOW "SmallPacket0x11D: Rate limiting jump packet for %s\n" CL_RESET, PChar->GetName());
-        return;
-    }
-
-    const auto targetID    = data.ref<uint32>(0x04);
-    const auto targetIndex = data.ref<uint16>(0x08);
-    const auto extra       = data.ref<uint16>(0x0A);
+    auto const& targetID    = data.ref<uint32>(0x04);
+    auto const& targetIndex = data.ref<uint16>(0x08);
+    auto const& extra       = data.ref<uint16>(0x0A);
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionJumpPacket(PChar, targetIndex, extra));
 
