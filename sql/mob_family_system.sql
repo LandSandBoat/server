@@ -61,7 +61,7 @@ CREATE TABLE `mob_family_system` (
 
 LOCK TABLES `mob_family_system` WRITE;
 /*!40000 ALTER TABLE `mob_family_system` DISABLE KEYS */;
-INSERT INTO `mob_family_system` VALUES INSERT INTO `mob_family_system` VALUES (1, 'Acrolith', 3, 'Arcana', 1, 40, 90, 90, 1, 3, 4, 3, 6, 6, 5, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 34, 0);
+INSERT INTO `mob_family_system` VALUES (1, 'Acrolith', 3, 'Arcana', 1, 40, 90, 90, 1, 3, 4, 3, 6, 6, 5, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 34, 0);
 INSERT INTO `mob_family_system` VALUES (2, 'Adamantoise', 14, 'Lizard', 3, 30, 120, 90, 2, 4, 1, 4, 1, 1, 1, 3, 2, 3, 3, 1, 1, 1, 1, 0.5, 0.8, 0.5, 0.25, 0.25, 0.5, 1, 1, 4, 2, 0);
 INSERT INTO `mob_family_system` VALUES (3, 'Aern', 15, 'Luminian', 0, 40, 120, 140, 2, 2, 3, 3, 1, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 0, 3, 0);
 INSERT INTO `mob_family_system` VALUES (4, 'Ahriman', 9, 'Demon', 0, 40, 87, 140, 2, 3, 4, 4, 1, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 8, 3, 0);
