@@ -415,7 +415,7 @@ namespace mobutils
         uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
         uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
 
-        if (PMob->GetSLevel() > 15)
+        if (mLvl > 30)
         {
             sSTR /= 2;
             sDEX /= 2;
@@ -427,22 +427,22 @@ namespace mobutils
         }
         else
         {
-            sSTR = 0;
-            sDEX = 0;
-            sAGI = 0;
-            sINT = 0;
-            sMND = 0;
-            sCHR = 0;
-            sVIT = 0;
+            sSTR /= 4;
+            sDEX /= 4;
+            sAGI /= 4;
+            sINT /= 4;
+            sMND /= 4;
+            sCHR /= 4;
+            sVIT /= 4;
         }
 
-        PMob->stats.STR = fSTR + mSTR + sSTR;
-        PMob->stats.DEX = fDEX + mDEX + sDEX;
-        PMob->stats.VIT = fVIT + mVIT + sVIT;
-        PMob->stats.AGI = fAGI + mAGI + sAGI;
-        PMob->stats.INT = fINT + mINT + sINT;
-        PMob->stats.MND = fMND + mMND + sMND;
-        PMob->stats.CHR = fCHR + mCHR + sCHR;
+        PMob->stats.STR = floor(fSTR) + floor(mSTR) + floor(sSTR);
+        PMob->stats.DEX = floor(fDEX) + floor(mDEX) + floor(sDEX);
+        PMob->stats.VIT = floor(fVIT) + floor(mVIT) + floor(sVIT);
+        PMob->stats.AGI = floor(fAGI) + floor(mAGI) + floor(sAGI);
+        PMob->stats.INT = floor(fINT) + floor(mINT) + floor(sINT);
+        PMob->stats.MND = floor(fMND) + floor(mMND) + floor(sMND);
+        PMob->stats.CHR = floor(fCHR) + floor(mCHR) + floor(sCHR);
 
         if (isNM)
         {
